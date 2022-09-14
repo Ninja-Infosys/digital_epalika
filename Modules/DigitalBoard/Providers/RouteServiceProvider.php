@@ -21,7 +21,9 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
+        Route::middleware(['web', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+            ->prefix('admin/digitalBoard')
+            ->as('admin.digitalBoard.')
             ->group(module_path('DigitalBoard', '/Routes/web.php'));
     }
 

@@ -41,6 +41,8 @@
 {{--    <script src="{{asset('assets/backend/js/head.js')}}"></script>--}}
 
     <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
+
+    @livewireStyles
 </head>
 
 <!-- body start -->
@@ -141,5 +143,7 @@
 </script>
 
 @include('sweetalert::alert')
+
+@livewireScripts
 </body>
 </html>

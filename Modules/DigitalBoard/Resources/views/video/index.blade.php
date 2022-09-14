@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.userManagement.user.index')}}">User Management</a>
+                            <a href="{{route('admin.digitalBoard.video.index')}}">Digital Board</a>
                         </li>
-                        <li class="breadcrumb-item active">User</li>
+                        <li class="breadcrumb-item active">Video</li>
                     </ol>
                 </div>
-                <h4 class="page-title">User</h4>
+                <h4 class="page-title">Video</h4>
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">User List</h4>
+                        <h4 class="header-title">Video List</h4>
                         @can('user_create')
-                            <a href="{{route('admin.userManagement.user.create')}}"
+                            <a href="{{route('admin.digitalBoard.video.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> Add New
                             </a>
@@ -42,38 +42,22 @@
                             <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>User Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Role</th>
-                                <th>Status</th>
+                                <th>Title</th>
+                                <th>Video</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($users as $user)
+                            @forelse($videos as $video)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td class="table-user">
-                                        <img src="{{$user->profile_photo_url}}" class="me-2 rounded-circle" alt="">
-                                        {{$user->name}}
-                                    </td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->phone}}</td>
+                                    <td>{{$video->title}}</td>
                                     <td>
-                                        <span class="badge bg-info">{{$user->role->title??''}}</span>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.userManagement.user.updateStatus',$user)}}">
-                                            <i class="fa fa-2x {{$user->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.userManagement.user.edit',$user)}}"
+                                        <a href="{{route('admin.digitalBoard.video.edit',$video)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> EDIT
                                         </a>
-                                        <form action="{{route('admin.userManagement.user.destroy',$user)}}"
+                                        <form action="{{route('admin.digitalBoard.video.destroy',$video)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
@@ -85,7 +69,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="7">No Result Found</td>
+                                    <td class="text-center" colspan="4">No Result Found</td>
                                 </tr>
                             @endforelse
                             </tbody>
