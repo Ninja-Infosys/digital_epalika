@@ -4,6 +4,7 @@ namespace Modules\Circular\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -44,5 +45,10 @@ class Registration extends Model
         if (!empty($value) && !is_string($value)) {
             $this->attributes['signature_image'] = $value->store('registration/' . Str::slug($this->attributes['receiver_name'], '_' . '/signature'), 'public');
         }
+    }
+
+    public function circularDocuments(): MorphMany
+    {
+        return $this->morphMany(CircularDocument::class, 'model');
     }
 }

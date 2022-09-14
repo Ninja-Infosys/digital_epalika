@@ -11,6 +11,8 @@
 
                 @includeIf('digitalboard::layouts.sidebar')
 
+                @includeIf('circular::layouts.sidebar')
+
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
