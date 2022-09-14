@@ -8,16 +8,16 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> Home
+                                <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.userManagement.user.index')}}">User Management</a>
+                            <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
-                        <li class="breadcrumb-item active">Update User Details</li>
+                        <li class="breadcrumb-item active">प्रयोगकर्ता विवरण अपडेट गर्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">User</h4>
+                <h4 class="page-title">प्रयोगकर्ता</h4>
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">Update User Details</h4>
+                        <h4 class="header-title">प्रयोगकर्ता विवरण अपडेट गर्नुहोस्</h4>
                         <a href="{{route('admin.userManagement.user.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> List
+                            <i class="fa fa-list"></i> प्रयोगकर्ता सूची
                         </a>
                     </div>
                 </div>
@@ -39,57 +39,57 @@
                         @method('put')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong>Personal Information</strong>
+                                <strong>व्यक्तिगत विवरण</strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="name" class="form-label">User Name *</label>
+                                    <label for="name" class="form-label">नाम *</label>
                                     <input
                                         type="text"
                                         name="name"
                                         value="{{old('name',$user->name)}}"
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="name"
-                                        placeholder="User Name"
+                                        placeholder="नाम"
                                     />
                                     @error('name')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="email" class="form-label">Email *</label>
+                                    <label for="email" class="form-label">इमेल *</label>
                                     <input
                                         type="text"
                                         name="email"
                                         value="{{old('email',$user->email)}}"
                                         class="form-control @error('email') is-invalid @enderror"
                                         id="email"
-                                        placeholder="Email"
+                                        placeholder="इमेल"
                                     />
                                     @error('email')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="phone" class="form-label">Phone *</label>
+                                    <label for="phone" class="form-label">फोन नम्बर *</label>
                                     <input
                                         type="text"
                                         name="phone"
                                         value="{{old('phone',$user->phone)}}"
                                         class="form-control @error('phone') is-invalid @enderror"
                                         id="phone"
-                                        placeholder="Phone"
+                                        placeholder="फोन नम्बर"
                                     />
                                     @error('phone')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="role_id" class="form-label">Role *</label>
+                                    <label for="role_id" class="form-label">भूमिका *</label>
                                     <select name="role_id"
                                             class="form-select @error('role_id') is-invalid @enderror"
                                             id="role_id">
-                                        <option value="">Select Role</option>
+                                        <option value="">भूमिका छान्नुहोस्</option>
                                         @foreach($roles as $role)
                                             <option value="{{$role->id}}" {{$role->id==old('role_id',$user->role_id) ? 'selected' : ''}}>
                                                 {{$role->title}}
@@ -104,7 +104,7 @@
                         </fieldset>
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong>Address Information</strong>
+                                <strong>ठेगाना</strong>
                             </legend>
                             @livewire('address',['address'=>$user->address])
                         </fieldset>
