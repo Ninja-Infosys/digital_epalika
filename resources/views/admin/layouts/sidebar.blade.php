@@ -9,6 +9,8 @@
                     </a>
                 </li>
 
+                @includeIf('digitalboard::layouts.sidebar')
+
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
