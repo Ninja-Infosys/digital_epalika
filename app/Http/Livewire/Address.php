@@ -19,9 +19,16 @@ class Address extends Component
     public $localBodies = [];
     public $wards = '';
 
-    public function mount()
+    public function mount($address = null)
     {
         $this->provinces = Province::all();
+
+        if (!empty($address)) {
+            $this->province_id = $address['province_id'];
+            $this->district_id = $address['district_id'];
+            $this->local_body_id = $address['local_body_id'];
+            $this->ward_no = $address['ward_no'];
+        }
     }
 
     public function render()

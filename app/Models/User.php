@@ -82,6 +82,16 @@ class User extends Authenticatable
         }
     }
 
+    public function getAddressAttribute(): array
+    {
+        return [
+            'province_id' => $this->attributes['province_id'],
+            'district_id' => $this->attributes['district_id'],
+            'local_body_id' => $this->attributes['local_body_id'],
+            'ward_no' => $this->attributes['ward_no'],
+        ];
+    }
+
     public function scopeFilter($query, $param = [])
     {
         $this->filterByUserRole($query, $param);

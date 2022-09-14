@@ -66,7 +66,7 @@ class UserController extends Controller
         );
         $roles = Role::all();
         $user->load('role');
-        return view('admin.userManagement.user.edit', compact('user','roles'));
+        return view('admin.userManagement.user.edit', compact('user', 'roles'));
     }
 
     public function update(UpdateUserRequest $request, User $user)

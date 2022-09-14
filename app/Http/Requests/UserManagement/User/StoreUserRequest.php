@@ -16,11 +16,15 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','max:255'],
-            'email' => ['required','email',Rule::unique('users','email')->withoutTrashed()],
-            'phone' => ['nullable','numeric',Rule::unique('users','phone')->withoutTrashed()],
-            'role_id' => ['required',Rule::exists('roles','id')->withoutTrashed()],
-            'password' => ['required','confirmed','min:7'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->withoutTrashed()],
+            'phone' => ['nullable', 'numeric', Rule::unique('users', 'phone')->withoutTrashed()],
+            'role_id' => ['required', Rule::exists('roles', 'id')->withoutTrashed()],
+            'password' => ['required', 'confirmed', 'min:7'],
+            'province_id' => ['nullable', Rule::exists('provinces', 'id')],
+            'district_id' => ['nullable', Rule::exists('districts', 'id')],
+            'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')],
+            'ward_no' => ['nullable', 'integer']
         ];
     }
 }
