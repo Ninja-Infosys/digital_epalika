@@ -8,16 +8,16 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> Home
+                                <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.userManagement.user.index')}}">User Management</a>
+                            <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
-                        <li class="breadcrumb-item active">User</li>
+                        <li class="breadcrumb-item active">प्रयोगकर्ता</li>
                     </ol>
                 </div>
-                <h4 class="page-title">User</h4>
+                <h4 class="page-title">प्रयोगकर्ता</h4>
             </div>
         </div>
     </div>
@@ -27,11 +27,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">User List</h4>
+                        <h4 class="header-title">प्रयोगकर्ता सूची</h4>
                         @can('user_create')
                             <a href="{{route('admin.userManagement.user.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> Add New
+                                <i class="fa fa-plus-circle"></i> नयाँ प्रयोगकर्ता थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -41,12 +41,12 @@
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>SN</th>
-                                <th>User Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Role</th>
-                                <th>Status</th>
+                                <th>क्र.स</th>
+                                <th>नाम</th>
+                                <th>इमेल</th>
+                                <th>फोन नम्बर</th>
+                                <th>भूमिका</th>
+                                <th>स्थिति</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -71,14 +71,14 @@
                                     <td>
                                         <a href="{{route('admin.userManagement.user.edit',$user)}}"
                                            class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> EDIT
+                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <form action="{{route('admin.userManagement.user.destroy',$user)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> DELETE
+                                                <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
                                     </td>

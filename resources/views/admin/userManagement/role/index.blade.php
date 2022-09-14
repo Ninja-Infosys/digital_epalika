@@ -8,16 +8,16 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> Home
+                                <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">User Management</a>
+                            <a href="">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
-                        <li class="breadcrumb-item active">Role</li>
+                        <li class="breadcrumb-item active">भूमिका</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Role</h4>
+                <h4 class="page-title">भूमिका</h4>
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">Role List</h4>
+                        <h4 class="header-title">भूमिका सूची</h4>
                         <a href="{{route('admin.userManagement.role.create')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-plus-circle"></i> Add New
+                            <i class="fa fa-plus-circle"></i> नयाँ भूमिका थप्नुहोस्
                         </a>
                     </div>
                 </div>
@@ -38,8 +38,8 @@
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>SN</th>
-                                <th>Title</th>
+                                <th>क्र.स</th>
+                                <th>शीर्षक</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -51,13 +51,13 @@
                                     <td>
                                         <a href="{{route('admin.userManagement.role.edit',$role)}}"
                                            class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> EDIT
+                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <form action="{{route('admin.userManagement.role.destroy',$role)}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> DELETE
+                                                <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
                                     </td>

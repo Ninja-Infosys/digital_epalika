@@ -8,16 +8,16 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> Home
+                                <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">User Management</a>
+                            <a href="">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
-                        <li class="breadcrumb-item active">Update Role Details</li>
+                        <li class="breadcrumb-item active">भूमिका विवरणहरू अपडेट गर्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Role</h4>
+                <h4 class="page-title">भूमिका</h4>
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">Update Role Details</h4>
+                        <h4 class="header-title">भूमिका विवरणहरू अपडेट गर्नुहोस्</h4>
                         <a href="{{route('admin.userManagement.role.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> List
+                            <i class="fa fa-list"></i> भूमिका सूची
                         </a>
                     </div>
                 </div>
@@ -39,14 +39,14 @@
                         @method('put')
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="title" class="form-label">Role Title *</label>
+                                <label for="title" class="form-label">भूमिका शीर्षक *</label>
                                 <input
                                     type="text"
                                     name="title"
                                     value="{{old('title',$role->title)}}"
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
-                                    placeholder="Role Title"
+                                    placeholder="भूमिका शीर्षक"
                                 />
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -56,7 +56,7 @@
                         <div class="col-md-12">
                             <div class="mb-2">
                                 <label for="permissions" class="form-label">
-                                    Permissions *
+                                    अनुमतिहरू *
                                 </label>
                                 <div class="row">
                                     @foreach($permissionGroups as $key=>$permissionGroup)

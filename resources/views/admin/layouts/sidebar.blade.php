@@ -14,7 +14,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span> User & Role </span>
+                        <span>प्रयोगकर्ता र भूमिका</span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
@@ -23,12 +23,12 @@
                         <ul class="nav-second-level">
                             @can('user_access')
                                 <li>
-                                    <a href="{{route('admin.userManagement.user.index')}}">User</a>
+                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
                                 </li>
                             @endcan
                             @can('role_access')
                                 <li>
-                                    <a href="{{route('admin.userManagement.role.index')}}">Role</a>
+                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
                                 </li>
                             @endcan
                         </ul>
