@@ -47,7 +47,7 @@
                                 <th>फोन नम्बर</th>
                                 <th>भूमिका</th>
                                 <th>स्थिति</th>
-                                <th>Action</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>

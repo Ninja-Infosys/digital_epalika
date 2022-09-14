@@ -1,13 +1,13 @@
-<li class="menu-title">Circular</li>
+<li class="menu-title">दर्ता चलानी सिस्टम</li>
 <li>
     <a href="{{route('admin.digitalBoard.video.index')}}">
         <i class="fa fa-file"></i>
-        <span> Registration </span>
+        <span> दर्ता प्रणाली   </span>
     </a>
 </li>
 <li>
     <a href="{{route('admin.digitalBoard.video.index')}}">
         <i class="fa fa-file"></i>
-        <span> Chalani </span>
+        <span> चलानी प्रणाली </span>
     </a>
 </li>

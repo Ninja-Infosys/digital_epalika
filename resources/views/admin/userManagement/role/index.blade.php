@@ -40,7 +40,7 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शीर्षक</th>
-                                <th>Action</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>

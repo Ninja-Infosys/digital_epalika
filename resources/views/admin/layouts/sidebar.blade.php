@@ -5,7 +5,7 @@
                 <li>
                     <a href="{{route('admin.dashboard')}}">
                         <i class="fa fa-home"></i>
-                        <span> Dashboard </span>
+                        <span> गृहपृष्ठ </span>
                     </a>
                 </li>
 
@@ -21,15 +21,15 @@
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="collapse" id="sidebarUserManagement">
+                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
                         <ul class="nav-second-level">
                             @can('user_access')
-                                <li>
+                                <li class="{{\Illuminate\Support\Facades\Route::is('admin.userManagement.user.index') ? 'active':''}}" >
                                     <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
                                 </li>
                             @endcan
                             @can('role_access')
-                                <li>
+                                <li class="{{\Illuminate\Support\Facades\Route::is('admin.userManagement.role.index') ? 'active':''}}">
                                     <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
                                 </li>
                             @endcan

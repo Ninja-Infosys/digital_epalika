@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">ड्यासबोर्ड</h4>
+                <h4 class="page-title">गृहपृष्ठ</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
                                     1
                                 </h3>
                                 <p class="text-muted mb-1 text-truncate">
-                                    Users
+                                    प्रयोगकर्ताहरु
                                 </p>
                             </div>
                         </div>
