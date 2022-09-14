@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.userManagement.role.store')}}" method="post">
+                    <form action="{{route('admin.userManagement.user.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-2">

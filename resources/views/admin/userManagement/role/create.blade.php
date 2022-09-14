@@ -72,7 +72,7 @@
                                                                        class="form-check-input"
                                                                        name="permissions[]"
                                                                        value="{{$permission['id']}}"
-                                                                       id="permission{{$permission['id']}}">
+                                                                       id="permission{{$permission['id']}}" >
                                                                 <label class="form-check-label"
                                                                        for="permission{{$permission['id']}}">{{$permission['title']}}</label>
                                                             </div>

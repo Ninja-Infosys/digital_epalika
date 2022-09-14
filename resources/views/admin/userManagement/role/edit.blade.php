@@ -74,7 +74,7 @@
                                                                        name="permissions[]"
                                                                        value="{{$permission['id']}}"
                                                                        {{in_array($permission['id'],$role->permissions->pluck('id')->toArray()) ? 'checked' : ''}}
-                                                                       id="permission{{$permission['id']}}">
+                                                                       id="permission{{$permission['id']}}" >
                                                                 <label class="form-check-label"
                                                                        for="permission{{$permission['id']}}">{{$permission['title']}}</label>
                                                             </div>
