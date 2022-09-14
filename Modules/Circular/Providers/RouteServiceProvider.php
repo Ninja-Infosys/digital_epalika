@@ -1,11 +1,11 @@
 <?php
 
-namespace $NAMESPACE$;
+namespace Modules\Circular\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
-class $CLASS$ extends ServiceProvider
+class RouteServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -21,14 +21,16 @@ class $CLASS$ extends ServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-            ->group(module_path('$MODULE$', '$WEB_ROUTES_PATH$'));
+        Route::middleware(['web', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+            ->prefix('admin/circular')
+            ->as('admin.circular.')
+            ->group(module_path('Circular', '/Routes/web.php'));
     }
 
     protected function mapApiRoutes()
     {
         Route::prefix('api')
             ->middleware('api')
-            ->group(module_path('$MODULE$', '$API_ROUTES_PATH$'));
+            ->group(module_path('Circular', '/Routes/api.php'));
     }
 }
