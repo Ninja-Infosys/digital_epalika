@@ -34,93 +34,111 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.userManagement.role.store')}}" method="post">
+                    <form action="{{route('admin.userManagement.user.store')}}" method="post">
                         @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label for="name" class="form-label">User Name *</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value="{{old('name')}}"
-                                    class="form-control @error('name') is-invalid @enderror"
-                                    id="name"
-                                    placeholder="User Name"
-                                />
-                                @error('name')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                        <fieldset class="border p-2 mb-2">
+                            <legend class="font-16 text-info">
+                                <strong>Personal Information</strong>
+                            </legend>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label for="name" class="form-label">User Name *</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value="{{old('name')}}"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        id="name"
+                                        placeholder="User Name"
+                                    />
+                                    @error('name')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        value="{{old('email')}}"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        id="email"
+                                        placeholder="Email"
+                                    />
+                                    @error('email')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="phone" class="form-label">Phone *</label>
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        value="{{old('phone')}}"
+                                        class="form-control @error('phone') is-invalid @enderror"
+                                        id="phone"
+                                        placeholder="Phone"
+                                    />
+                                    @error('phone')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="role_id" class="form-label">Role *</label>
+                                    <select name="role_id"
+                                            class="form-select @error('role_id') is-invalid @enderror"
+                                            id="role_id">
+                                        <option value="">Select Role</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{$role->id}}" {{$role->id==old('role_id') ? 'selected' : ''}}>
+                                                {{$role->title}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('role_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="email" class="form-label">Email *</label>
-                                <input
-                                    type="text"
-                                    name="email"
-                                    value="{{old('email')}}"
-                                    class="form-control @error('email') is-invalid @enderror"
-                                    id="email"
-                                    placeholder="Email"
-                                />
-                                @error('email')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                        </fieldset>
+                        <fieldset class="border p-2 mb-2">
+                            <legend class="font-16 text-info">
+                                <strong>Address Information</strong>
+                            </legend>
+                            @livewire('address')
+                        </fieldset>
+                        <fieldset class="border p-2 mb-2">
+                            <legend class="font-16 text-info">
+                                <strong>Account Password</strong>
+                            </legend>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <label for="password" class="form-label">Password *</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        value="{{old('password')}}"
+                                        class="form-control @error('password') is-invalid @enderror"
+                                        id="password"
+                                        placeholder="Password"
+                                    />
+                                    @error('password')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="password_confirmation" class="form-label">Confirm Password *</label>
+                                    <input
+                                        type="password"
+                                        name="password_confirmation"
+                                        value="{{old('password_confirmation')}}"
+                                        class="form-control"
+                                        id="password_confirmation"
+                                        placeholder="Password"
+                                    />
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="phone" class="form-label">Phone *</label>
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    value="{{old('phone')}}"
-                                    class="form-control @error('phone') is-invalid @enderror"
-                                    id="phone"
-                                    placeholder="Phone"
-                                />
-                                @error('phone')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="role_id" class="form-label">Role *</label>
-                                <select name="role_id"
-                                        class="form-select @error('role_id') is-invalid @enderror"
-                                        id="role_id">
-                                    <option value="">Select Role</option>
-                                    @foreach($roles as $role)
-                                        <option value="{{$role->id}}" {{$role->id==old('role_id') ? 'selected' : ''}}>
-                                            {{$role->title}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('role_id')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="password" class="form-label">Password *</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value="{{old('password')}}"
-                                    class="form-control @error('password') is-invalid @enderror"
-                                    id="password"
-                                    placeholder="Password"
-                                />
-                                @error('password')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="password_confirmation" class="form-label">Confirm Password *</label>
-                                <input
-                                    type="password"
-                                    name="password_confirmation"
-                                    value="{{old('password_confirmation')}}"
-                                    class="form-control"
-                                    id="password_confirmation"
-                                    placeholder="Password"
-                                />
-                            </div>
-                        </div>
+                        </fieldset>
 
                         <button type="submit" class="btn btn-primary">
                             Save
