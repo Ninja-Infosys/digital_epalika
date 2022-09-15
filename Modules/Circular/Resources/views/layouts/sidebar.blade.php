@@ -16,11 +16,13 @@
                     </a>
                 </li>
             @endcan
-            <li>
-                <a href="{{route('admin.digitalBoard.video.index')}}">
-                    <span> चलानी प्रणाली </span>
-                </a>
-            </li>
+            @can('dispatch_access')
+                <li>
+                    <a href="{{route('admin.circular.dispatch.index')}}">
+                        <span> चलानी प्रणाली </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>
