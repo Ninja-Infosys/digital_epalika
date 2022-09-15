@@ -19,4 +19,11 @@ class UpdateVideoRequest extends FormRequest
             'video' => ['nullable', 'mimes:mp4']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'video.mimes'=>'भिडियो mp4 मा छ '
+        ];
+    }
 }

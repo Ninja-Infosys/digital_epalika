@@ -56,7 +56,7 @@
                                     <td>{{$registration->registration_no}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
-                                    <td>{{$registration->registration_date}}</td>
+                                    <td>{{$registration->registration_date->toDateString()}}</td>
 
                                     <td>
                                         <a href="{{route('admin.circular.registration.show',$registration)}}"   class="btn btn-xs btn-outline-primary">

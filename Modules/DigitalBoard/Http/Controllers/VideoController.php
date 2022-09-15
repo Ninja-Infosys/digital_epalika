@@ -43,7 +43,7 @@ class VideoController extends Controller
 
         Video::create($request->validated());
 
-        toast('Video Added Successfully', 'success');
+        toast('भिडियो सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -77,7 +77,7 @@ class VideoController extends Controller
 
         $video->update($request->validated());
 
-        toast('Video Updated Successfully', 'success');
+        toast('भिडियो सफलतापूर्वक अपडेट गरियो', 'success');
 
         return redirect(route('admin.digitalBoard.video.index'));
     }
@@ -94,7 +94,7 @@ class VideoController extends Controller
         }
         $video->delete();
 
-        toast('Video Deleted Successfully', 'success');
+        toast('भिडियो सफलतापूर्वक मेटियो', 'success');
 
         return back();
     }
