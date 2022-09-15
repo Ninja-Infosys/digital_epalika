@@ -43,7 +43,7 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शिर्षक </th>
-                                <th>भिडियो </th>
+                                <th class="width: 150px; height:120px;">भिडियो </th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -52,6 +52,11 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$video->title}}</td>
+                                    <td>
+                                        <video width="300" height="200" controls>
+                                            <source src="{{$video->video}}">
+                                        </video>
+                                    </td>
                                     <td>
                                         <a href="{{route('admin.digitalBoard.video.edit',$video)}}"
                                            class="btn btn-xs btn-outline-primary">
