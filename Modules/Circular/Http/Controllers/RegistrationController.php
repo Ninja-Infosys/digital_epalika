@@ -50,7 +50,7 @@ class RegistrationController extends Controller
             $this->uploadDocuments($request, $registration);
         });
 
-        toast('Registration Added Successfully', 'success');
+        toast('दर्ता सफलतापूर्वक थपियो', 'success');
 
         return back();
     }
@@ -96,7 +96,7 @@ class RegistrationController extends Controller
             }
         });
 
-        toast('Registration Updated Successfully', 'success');
+        toast('दर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return redirect(route('admin.circular.registration.index'));
     }
@@ -116,7 +116,7 @@ class RegistrationController extends Controller
         }
         $registration->delete();
 
-        toast('Registration Deleted Successfully', 'success');
+        toast('दर्ता सफलतापूर्वक मेटियो', 'success');
 
         return back();
 
