@@ -1,7 +1,21 @@
-<li class="menu-title">डिजिटल बोर्ड</li>
+
 <li>
-    <a href="{{route('admin.digitalBoard.video.index')}}">
+    <a href="#sidebarDigitalBoard" data-bs-toggle="collapse">
         <i class="fa fa-photo-video"></i>
-        <span> Video </span>
+        <span>डिजिटल बोर्ड</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
+    <div class="{{request()->is('admin/digitalBoard/*') ?'':'collapse'}}" id="sidebarDigitalBoard">
+        <ul class="nav-second-level">
+            @can('registration_access')
+                <li class="{{request()->routeIs('admin.digitalBoard.video.index') ? 'active' : ''}}">
+                    <a href="{{route('admin.digitalBoard.video.index')}}">
+                        <span> भिडियो</span>
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </div>
 </li>
