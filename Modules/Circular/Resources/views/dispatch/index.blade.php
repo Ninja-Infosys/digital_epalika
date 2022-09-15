@@ -49,7 +49,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($dispatches as $dispatch)
+                            @forelse($dispatches as $dispatch)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$dispatch->dispatch_no}}</td>
@@ -57,7 +57,7 @@
 
                                     <td>{{$dispact->dispach_date}}</td>
                                     <td>
-                                        <a href=""   class="btn btn-xs btn-outline-primary">
+                                        <a href="" class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i>थप हेर्नुहोस्
                                         </a>
                                     </td>
@@ -76,7 +76,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

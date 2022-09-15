@@ -50,13 +50,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($registrations as $registration)
+                            @forelse($registrations as $registration)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$registration->registration_no}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>{{$registration->registration_date}}</td>
+                                    <td>
+                                        <a href="{{route('admin.circular.registration.show',$registration)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-eye"></i>थप हेर्नुहोस्
+                                        </a>
+                                    </td>
                                    <td>
                                        <a href="{{route('admin.circular.registration.show',$registration)}}"   class="btn btn-xs btn-outline-primary">
                                            <i class="fa fa-eye"></i> थप हेर्नुहोस्
@@ -77,7 +83,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

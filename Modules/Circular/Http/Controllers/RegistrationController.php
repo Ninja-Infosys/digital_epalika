@@ -89,6 +89,7 @@ class RegistrationController extends Controller
             }
 
             $registration->update($request->validated());
+
             if ($request->hasFile('circularDocuments')) {
                 $this->uploadDocuments($request, $registration);
             }
@@ -122,7 +123,6 @@ class RegistrationController extends Controller
 
     private function uploadDocuments($request, $registration)
     {
-
         foreach ($request->validated()['circularDocuments'] as $circularDocument) {
             $registration->circularDocuments()->create([
                 'file_name' => pathinfo($circularDocument, PATHINFO_FILENAME),
@@ -130,7 +130,5 @@ class RegistrationController extends Controller
                 'file' => $circularDocument->store('registration/' . Str::slug($registration->receiver_name, '_') . '/documents', 'public')
             ]);
         }
-
-
     }
 }

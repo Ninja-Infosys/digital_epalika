@@ -128,7 +128,9 @@
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="remarks" class="form-label">कैफ़ियत *</label>
-                                    <textarea name="remarks" id="remarks" cols="30" rows="5" class="form-control"
+                                    <textarea name="remarks"
+                                              id="remarks" cols="30" rows="5"
+                                              class="form-control @error('remarks') is-invalid @enderror"
                                               placeholder="कैफ़ियत">{{old('remarks')}}</textarea>
                                     @error('remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -162,7 +164,7 @@
                                         type="text"
                                         name="phone"
                                         value="{{old('phone')}}"
-                                        class="form-control"
+                                        class="form-control @error('phone') is-invalid @enderror"
                                         id="phone"
                                         placeholder="सम्पर्क नम्बर"
                                     />
@@ -175,10 +177,8 @@
                                     <input
                                         type="file"
                                         name="signature_image"
-
-                                        class="form-control"
+                                        class="form-control @error('signature_image') is-invalid @enderror"
                                         id="signature_image"
-
                                     />
                                     @error('signature_image')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -190,7 +190,7 @@
                                         type="text"
                                         name="date"
                                         value="{{old('date')}}"
-                                        class="form-control"
+                                        class="form-control @error('date') is-invalid @enderror"
                                         id="date"
                                         placeholder="मिति"
                                     />
@@ -211,10 +211,8 @@
                                     <input
                                         type="file"
                                         name="circularDocuments[]"
-
                                         class="form-control @error('circularDocuments') is-invalid @enderror"
                                         id="circularDocuments"
-
                                         multiple/>
                                     @error('circularDocuments')
                                     <div class="invalid-feedback">{{$message}}</div>

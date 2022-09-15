@@ -34,7 +34,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.circular.dispatch.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.circular.dispatch.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
@@ -42,7 +43,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="dispatch_no" class="form-label">चलानी न.  *</label>
+                                    <label for="dispatch_no" class="form-label">चलानी न. *</label>
                                     <input
                                         type="text"
                                         name="dispatch_no"
@@ -56,12 +57,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="dispatch_date" class="form-label">चलानी मिति  *</label>
+                                    <label for="dispatch_date" class="form-label">चलानी मिति *</label>
                                     <input
                                         type="text"
                                         name="dispatch_date"
                                         value="{{old('dispatch_date')}}"
-                                        class="form-control @error('dispatch_date') is-invalid @enderror"
+                                        class="form-control nepali_date @error('dispatch_date') is-invalid @enderror"
                                         id="dispatch_date"
                                         placeholder="चलानी मिति"
                                     />
@@ -84,12 +85,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="letter_date" class="form-label">पत्रको मिति  *</label>
+                                    <label for="letter_date" class="form-label">पत्रको मिति *</label>
                                     <input
                                         type="text"
                                         name="letter_date"
                                         value="{{old('letter_date')}}"
-                                        class="form-control @error('letter_date') is-invalid @enderror"
+                                        class="nepali_date form-control @error('letter_date') is-invalid @enderror"
                                         id="letter_date"
                                         placeholder="पत्रको मिति "
                                     />
@@ -98,7 +99,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="receiver_name" class="form-label">पाउने कार्यालयको नाम  *</label>
+                                    <label for="receiver_name" class="form-label">पाउने कार्यालयको नाम *</label>
                                     <input
                                         type="text"
                                         name="receiver_name"
@@ -126,7 +127,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="subject" class="form-label">बिषय  *</label>
+                                    <label for="subject" class="form-label">बिषय *</label>
                                     <input
                                         type="text"
                                         name="subject"
@@ -158,7 +159,7 @@
                                     <input
                                         type="file"
                                         name="receiver_signature"
-                                        class="form-control"
+                                        class="form-control @error('receiver_signature') is-invalid @enderror"
                                         id="receiver_signature"
                                     />
                                     @error('receiver_signature')
@@ -168,7 +169,10 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label for="remarks" class="form-label">कैफ़ियत</label>
-                                    <textarea name="remarks" id="remarks" cols="30" rows="5" class="form-control" placeholder="कैफ़ियत">{{old('remarks')}}</textarea>
+                                    <textarea name="remarks"
+                                              id="remarks" cols="30" rows="5"
+                                              class="form-control @error('remarks') is-invalid @enderror"
+                                              placeholder="कैफ़ियत">{{old('remarks')}}</textarea>
                                     @error('remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -185,11 +189,9 @@
                                     <input
                                         type="file"
                                         name="documents[]"
-
                                         class="form-control @error('documents') is-invalid @enderror"
                                         id="Documents"
-
-                                        multiple />
+                                        multiple/>
                                     @error('documents')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -207,4 +209,12 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script type="text/javascript">
+            $(document).ready(function () {
+                let todayDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
+                $('#dispatch_date').val(todayDate)
+            });
+        </script>
+    @endpush
 @endsection
