@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.circular.registration.index')}}">दर्ता प्रणाली </a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ दर्ता प्रणाली थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">नयाँ दर्ता पत्र थप्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">दर्ता प्रणाली</h4>
@@ -27,9 +27,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ दर्ता प्रणाली थप्नुहोस्</h4>
+                        <h4 class="header-title">नयाँ दर्ता पत्र थप्नुहोस्</h4>
                         <a href="{{route('admin.circular.registration.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> दर्ता प्रणाली सूची
+                            <i class="fa fa-list"></i> दर्ता पत्र सूची
                         </a>
                     </div>
                 </div>

@@ -27,10 +27,10 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">दर्ता प्रणाली सूची</h4>
-                        @can('user_create')
+                        @can('registration_create')
                             <a href="{{route('admin.circular.registration.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ दर्ता प्रणाली थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ दर्ता पत्र थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -56,10 +56,9 @@
                                     <td>{{$registration->registration_no}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
-
                                     <td>{{$registration->registration_date}}</td>
                                    <td>
-                                       <a href=""   class="btn btn-xs btn-outline-primary">
+                                       <a href="{{route('admin.circular.registration.show',$registration)}}"   class="btn btn-xs btn-outline-primary">
                                            <i class="fa fa-eye"></i>थप हेर्नुहोस्
                                        </a>
                                    </td>
