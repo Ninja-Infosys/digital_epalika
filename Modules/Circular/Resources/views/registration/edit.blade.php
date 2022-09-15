@@ -230,12 +230,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script type="text/javascript">
-            $(document).ready(function () {
-                let todayDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-                $('#registration_date').val(todayDate)
-            });
-        </script>
-    @endpush
 @endsection

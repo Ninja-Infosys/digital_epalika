@@ -125,7 +125,7 @@ class RegistrationController extends Controller
     {
         foreach ($request->validated()['circularDocuments'] as $circularDocument) {
             $registration->circularDocuments()->create([
-                'file_name' => pathinfo($circularDocument, PATHINFO_FILENAME),
+                'file_name' => pathinfo($circularDocument->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $circularDocument->getClientOriginalExtension(),
                 'file' => $circularDocument->store('registration/' . Str::slug($registration->receiver_name, '_') . '/documents', 'public')
             ]);

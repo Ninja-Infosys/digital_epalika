@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.circular.dispatch.store')}}" method="post"
+                    <form action="{{route('admin.circular.dispatch.update',$dispatch)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -63,7 +63,7 @@
                                         type="text"
                                         name="dispatch_date"
                                         value="{{old('dispatch_date', $dispatch->dispatch_date)}}"
-                                        class="form-control @error('dispatch_date') is-invalid @enderror"
+                                        class="form-control nepali_date @error('dispatch_date') is-invalid @enderror"
                                         id="dispatch_date"
                                         placeholder="चलानी मिति"
                                     />
@@ -90,8 +90,8 @@
                                     <input
                                         type="text"
                                         name="letter_date"
-                                        value="{{old('letter_date', $dispatch->letter_date)}}"
-                                        class="form-control @error('letter_date') is-invalid @enderror"
+                                        value="{{old('letter_date', $dispatch->letter_date->toDateString())}}"
+                                        class="form-control nepali_date @error('letter_date') is-invalid @enderror"
                                         id="letter_date"
                                         placeholder="पत्रको मिति "
                                     />
@@ -186,7 +186,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="documents" class="form-label">डकुमेन्ट *</label>
+                                    <label for="documents" class="form-label">डकुमेन्ट</label>
                                     <input
                                         type="file"
                                         name="documents[]"
@@ -210,12 +210,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script type="text/javascript">
-            $(document).ready(function () {
-                let todayDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-                $('#dispatch_date').val(todayDate)
-            });
-        </script>
-    @endpush
 @endsection
