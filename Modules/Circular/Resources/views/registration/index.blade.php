@@ -59,7 +59,7 @@
                                     <td>{{$registration->registration_date}}</td>
                                    <td>
                                        <a href="{{route('admin.circular.registration.show',$registration)}}"   class="btn btn-xs btn-outline-primary">
-                                           <i class="fa fa-eye"></i>थप हेर्नुहोस्
+                                           <i class="fa fa-eye"></i> थप हेर्नुहोस्
                                        </a>
                                    </td>
                                     <td>
