@@ -34,7 +34,6 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @can('registration_create')
                     <form action="{{route('admin.circular.registration.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
