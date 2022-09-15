@@ -55,7 +55,7 @@
                                     <td>{{$dispatch->dispatch_no}}</td>
                                     <td>{{$dispatch->receiver_name}}</td>
 
-                                    <td>{{$dispact->dispach_date}}</td>
+                                    <td>{{$dispatch->dispach_date}}</td>
                                     <td>
                                         <a href="" class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i>थप हेर्नुहोस्

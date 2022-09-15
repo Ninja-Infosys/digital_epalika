@@ -19,6 +19,7 @@ class Registration extends Model
 
     protected $dates = [
         'registration_date',
+        'letter_date',
         'date',
         'created_at',
         'updated_at',

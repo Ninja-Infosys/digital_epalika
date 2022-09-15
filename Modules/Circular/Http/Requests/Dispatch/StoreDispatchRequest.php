@@ -25,7 +25,6 @@ class StoreDispatchRequest extends FormRequest
             'receiver_address' => ['required', 'max:255'],
             'receiver_contact' => ['required'],
             'receiver_signature' => ['nullable', 'image'],
-            'date' => ['required'],
             'remarks' => ['nullable'],
             'documents' => ['required', 'array'],
             'documents.*' => ['mimes:jpg,jpeg,png,pdf']

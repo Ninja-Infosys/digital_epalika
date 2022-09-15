@@ -122,7 +122,7 @@ class DispatchController extends Controller
     {
         foreach ($request->validated()['documents'] as $document) {
             $dispatch->circularDocuments()->create([
-                'file_name' => pathinfo($document, PATHINFO_FILENAME),
+                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
                 'file' => $document->store('registration/' . Str::slug($dispatch->receiver_name, '_') . '/documents', 'public')
             ]);
