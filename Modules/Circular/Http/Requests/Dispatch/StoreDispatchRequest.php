@@ -31,4 +31,20 @@ class StoreDispatchRequest extends FormRequest
             'documents.*' => ['mimes:jpg,jpeg,png,pdf']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'dispatch_no.required' => 'चलानी न अनिबार्य छ',
+            'dispatch_date.required' => 'चलानी मिति अनिबार्य छ ',
+            'letter_number.required' => 'पत्र संख्या अनिबार्य छ ',
+            'letter_date.required' => 'पत्रको मिति अनिबार्य छ',
+            'subject.required' => 'बिषय अनिबार्य छ ',
+            'receiver_name.required' => 'पाउने कार्यालयको नाम अनिबार्य छ ',
+            'receiver_address.required' => 'पाउने कार्यालयको ठेगाना अनिबार्य छ ',
+            'receiver_contact.required' => 'पाउने सम्पर्क अनिबार्य छ ',
+            'date.required' => 'मिति अनिबार्य छ ',
+            'documents.required' => 'डकुमेन्ट अनिबार्य छन् ',
+        ];
+    }
 }
