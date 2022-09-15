@@ -17,7 +17,7 @@ class FileDeleteController extends Controller
            $this->deleteFile($file->file);
        }
        $file->delete();
-       toast('File deleted successfully','success');
+       toast('फाइल सफलतापूर्वक मेटाइयो','success');
        return back();
    }
 }

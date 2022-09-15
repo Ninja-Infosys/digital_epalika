@@ -62,11 +62,15 @@
                                             </tr>
                                             <tr>
                                                 <th>पत्रको मिति.</th>
-                                                <td>{{$dispatch->letter_date->toDeteString()}}</td>
+                                                <td>{{$dispatch->letter_date}}</td>
                                             </tr>
                                             <tr>
                                                 <th>पाउने कार्यालयको नाम</th>
                                                 <td>{{$dispatch->receiver_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>पाउने कार्यालयको ठेगाना </th>
+                                                <td>{{$dispatch->receiver_address}}</td>
                                             </tr>
                                             <tr>
                                                 <th>बिषय.</th>
