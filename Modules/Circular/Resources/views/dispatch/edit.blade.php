@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.dispatch.index')}}">चलानी प्रणाली </a>
+                            <a href="{{route('admin.circular.dispatch.index')}}">चलानी पत्र </a>
                         </li>
                         <li class="breadcrumb-item active">चलानी पत्र अपडेट थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">चलानी प्रणाली</h4>
+                <h4 class="page-title">चलानी पत्र</h4>
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">चलानी प्रणाली थप्नुहोस्</h4>
+                        <h4 class="header-title">चलानी पत्र थप्नुहोस्</h4>
                         <a href="{{route('admin.circular.dispatch.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> चलानी प्रणाली सूची
+                            <i class="fa fa-list"></i> चलानी पत्र सूची
                         </a>
                     </div>
                 </div>

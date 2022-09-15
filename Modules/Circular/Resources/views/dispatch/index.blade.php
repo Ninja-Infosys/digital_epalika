@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.dispatch.index')}}">चलानी प्रणाली </a>
+                            <a href="{{route('admin.circular.dispatch.index')}}">चलानी पत्र </a>
                         </li>
                         <li class="breadcrumb-item active">चलानी</li>
                     </ol>
                 </div>
-                <h4 class="page-title">चलानी प्रणाली</h4>
+                <h4 class="page-title">चलानी पत्र</h4>
             </div>
         </div>
     </div>
@@ -26,11 +26,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">चलानी प्रणाली सूची</h4>
+                        <h4 class="header-title">चलानी पत्र सूची</h4>
                         @can('user_create')
                             <a href="{{route('admin.circular.dispatch.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ चलानी प्रणाली थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ चलानी पत्र थप्नुहोस्
                             </a>
                         @endcan
                     </div>
