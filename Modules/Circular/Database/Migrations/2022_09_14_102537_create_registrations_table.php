@@ -16,10 +16,6 @@ return new class extends Migration {
             $table->string('sender_name')->nullable();
             $table->string('subject')->nullable();
             $table->string('receiver_name')->nullable();
-            $table->foreignId('province_id')->nullable()->constrained();
-            $table->foreignId('district_id')->nullable()->constrained();
-            $table->foreignId('local_body_id')->nullable()->constrained();
-            $table->integer('ward_no')->nullable();
             $table->string('phone')->nullable();
             $table->string('signature_image')->nullable();
             $table->string('date')->nullable();
