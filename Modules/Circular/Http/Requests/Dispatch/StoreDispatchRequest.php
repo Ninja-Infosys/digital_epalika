@@ -44,7 +44,6 @@ class StoreDispatchRequest extends FormRequest
             'receiver_address.required' => 'पाउने कार्यालयको ठेगाना अनिबार्य छ ',
             'receiver_contact.required' => 'पाउने सम्पर्क अनिबार्य छ ',
             'receiver_signature.image' => 'हस्तक्षर् फोटो फाइलमा छ ',
-            'date.required' => 'मिति अनिबार्य छ ',
             'documents.required' => 'डकुमेन्ट अनिबार्य छन् ',
             'documents.mimes' => 'डकुमेन्ट अनिबार्य jpg, png, jpeg, pfd मा छन् ',
         ];
