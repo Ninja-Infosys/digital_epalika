@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->string('receiver_address')->nullable();
             $table->string('receiver_contact')->nullable();
             $table->string('receiver_signature')->nullable();
-            $table->string('date')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
