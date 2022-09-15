@@ -9,5 +9,5 @@ use Modules\Circular\Http\Controllers\RegistrationController;
 Route::resource('registration', RegistrationController::class);
 
 Route::resource('dispatch', DispatchController::class);
-
+//deleteFile
 Route::delete('file/{file}',[FileDeleteController::class,'fileDelete'])->name('file.deleteFile');
