@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.circular.registration.index')}}">दर्ता प्रणाली </a>
                         </li>
-                        <li class="breadcrumb-item active"> दर्ता प्रणाली अपडेट गर्नुहोस्</li>
+                        <li class="breadcrumb-item active"> दर्ता पत्र अपडेट गर्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">दर्ता प्रणाली</h4>
@@ -26,9 +26,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> दर्ता प्रणाली अपडेट गर्नुहोस्</h4>
+                        <h4 class="header-title"> दर्ता पत्र अपडेट गर्नुहोस्</h4>
                         <a href="{{route('admin.circular.registration.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> दर्ता प्रणाली सूची
+                            <i class="fa fa-list"></i> दर्ता पत्र सूची
                         </a>
                     </div>
                 </div>
@@ -205,19 +205,19 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="files" class="form-label">डकुमेन्ट *</label>
+                                    <label for="circularDocuments" class="form-label">डकुमेन्ट *</label>
                                     <input
                                         type="file"
-                                        name="files[]"
+                                        name="circularDocuments[]"
 
-                                        class="form-control @error('files') is-invalid @enderror"
-                                        id="files"
+                                        class="form-control @error('circularDocuments') is-invalid @enderror"
+                                        id="circularDocuments"
 
                                         multiple />
-                                    @error('files')
+                                    @error('circularDocuments')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
-                                    @error('files.*')
+                                    @error('circularDocuments.*')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
