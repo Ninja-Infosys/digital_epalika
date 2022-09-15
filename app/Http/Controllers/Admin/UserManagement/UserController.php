@@ -46,7 +46,7 @@ class UserController extends Controller
         User::create($request->validated() + [
                 'user_id' => auth()->id(),
             ]);
-        toast('User added successfully', 'success');
+        toast('प्रयोगकर्ता सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.userManagement.user.index'));
     }
 
@@ -77,7 +77,7 @@ class UserController extends Controller
         );
 
         $user->update($request->validated());
-        toast('User updated successfully', 'success');
+        toast('प्रयोगकर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.userManagement.user.index'));
 
     }
@@ -90,7 +90,7 @@ class UserController extends Controller
         );
 
         $user->delete();
-        toast('User deleted successfully', 'success');
+        toast('प्रयोगकर्ता सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
 
@@ -105,7 +105,7 @@ class UserController extends Controller
             'is_active' => !$user->is_active
         ]);
 
-        toast('User Status Updated Successfully', 'success');
+        toast('प्रयोगकर्ता स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 }

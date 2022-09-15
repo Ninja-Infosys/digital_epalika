@@ -31,4 +31,20 @@ class StoreDispatchRequest extends FormRequest
             'documents.*' => ['mimes:jpg,jpeg,png,pdf']
         ];
     }
+
+    public function messages()
+    {
+        return [
+          'dispatch_no.required'=>'',
+          'dispatch_date.required'=>'',
+          'letter_number.required'=>'',
+          'letter_date.required'=>'',
+          'subject.required'=>'',
+          'receiver_name.required'=>'',
+          'receiver_address.required'=>'',
+          'receiver_contact.required'=>'',
+          'dispatch_no.required'=>'',
+          'dispatch_no.required'=>'',
+        ];
+    }
 }

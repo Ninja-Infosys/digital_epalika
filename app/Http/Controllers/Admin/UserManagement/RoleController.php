@@ -51,7 +51,7 @@ class RoleController extends Controller
             $role->permissions()->attach($request->validated()['permissions']);
         });
 
-        toast('Role Created Successfully', 'success');
+        toast('भूमिका सफलतापूर्वक सिर्जना गरियो', 'success');
         return back();
     }
 
@@ -89,7 +89,7 @@ class RoleController extends Controller
             $role->permissions()->sync($request->validated()['permissions']);
         });
 
-        toast('Role Updated Successfully', 'success');
+        toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.userManagement.role.index'));
     }
 
@@ -101,13 +101,13 @@ class RoleController extends Controller
         );
 
         if ($role->type == 'Super') {
-            toast('Super role can not be deleted', 'error');
+            toast('super role मेटाउन सकिँदैन', 'error');
             return back();
         }
         $role->permissions()->detach();
         $role->delete();
 
-        toast('Role Deleted Successfully', 'success');
+        toast('भूमिका सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 
