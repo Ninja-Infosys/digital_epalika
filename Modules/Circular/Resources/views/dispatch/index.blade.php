@@ -44,7 +44,6 @@
                                 <th>चलानी न.</th>
                                 <th>पाउने कार्यालयको नाम</th>
                                 <th>चलानी मिति</th>
-                                <th>थप हेर्नुहोस्</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -55,24 +54,19 @@
                                     <td>{{$dispatch->dispatch_no}}</td>
                                     <td>{{$dispatch->receiver_name}}</td>
 
-                                    <td>{{$dispatch->dispach_date}}</td>
-
+                                    <td>{{$dispatch->dispatch_date}}</td>
                                     <td>
                                         @can('dispatch_access')
-                                        <a href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i>थप हेर्नुहोस्
-                                        </a>
+                                            <a href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i> थप हेर्नुहोस्
+                                            </a>
                                         @endcan
-                                    </td>
-                                    <td>
                                         @can('dispatch_edit')
-                                        <a href="{{route('admin.circular.dispatch.edit',$dispatch)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
+                                            <a href="{{route('admin.circular.dispatch.edit',$dispatch)}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
                                         @endcan
-                                    </td>
-                                    <td>
                                         @can('dispatch_delete')
                                         <form action="{{route('admin.circular.dispatch.destroy',$dispatch)}}"
                                               method="post">
