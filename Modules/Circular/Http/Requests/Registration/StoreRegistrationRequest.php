@@ -7,6 +7,11 @@ use Illuminate\Validation\Rule;
 
 class StoreRegistrationRequest extends FormRequest
 {
+    public function authorize(): bool
+    {
+        return true;
+    }
+
     public function rules(): array
     {
         return [
@@ -24,10 +29,5 @@ class StoreRegistrationRequest extends FormRequest
             'circularDocuments' => ['required', 'array'],
             'circularDocuments.*' => ['mimes:jpg,png,jpeg,pdf']
         ];
-    }
-
-    public function authorize(): bool
-    {
-        return true;
     }
 }
