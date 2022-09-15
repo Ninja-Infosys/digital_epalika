@@ -10,27 +10,50 @@
 
                 </div>
             </div>
-            <style>
-                table, th, td {
-                    border: 1px solid black;
-                    border-collapse: collapse;
-                    text-align: center;
-                }
-            </style>
+
             <div class="printData">
+
+                <style>
+                    @media print{
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                            text-align: center;
+                        }
+                        .logo{
+                            margin: 20px;
+                        }
+                        .row{
+                            display: flex;
+                            align-content: center;
+                        }
+                        .col-md-8{
+                            width: 66.66666667%;
+                        }
+                        .col-md-2{
+                            width: 16.66666667%;
+                        }
+                        .text-center{
+                            text-align: center;
+                        }
+                    }
+
+                </style>
+
+
                 <div class="card-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-5">
-                                <img src="{{asset('assets/backend/images/np.png')}}" alt="" height="100px;">
+                            <div class="col-md-2">
+                                <img class="logo" src="{{asset('assets/backend/images/np.png')}}" alt="" height="100">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8 text-center">
                                 <h4>.........पालिका</h4>
                                 <h5>वार्ड न.....को कार्यालय (वडाबाट चलेको अवस्थामा)</h5>
                                 <h5>......(कार्यालय रहेको स्थान.......(जिल्ला)</h5>
                                 <h5>..........प्रदेश,नेपाल</h5>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
 
                             </div>
                         </div>
@@ -68,7 +91,7 @@
                                     <td>{{$registration->subject}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>
-                                        <img src="{{$registration->signature_image_url}}" alt="">
+                                        <img height="50" width="85" src="{{$registration->signature_image_url}}" alt="">
                                     </td>
                                     <td>{{$registration->date->toDateString()}}</td>
                                     <td>{{$registration->remarks}}</td>
