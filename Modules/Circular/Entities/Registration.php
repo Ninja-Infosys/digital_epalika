@@ -33,10 +33,6 @@ class Registration extends Model
         'sender_name',
         'subject',
         'receiver_name',
-        'province_id',
-        'district_id',
-        'local_body_id',
-        'ward_no',
         'phone',
         'signature_image',
         'date',
@@ -51,37 +47,12 @@ class Registration extends Model
     public function setSignatureImageAttribute($value)
     {
         if (!empty($value) && !is_string($value)) {
-            $this->attributes['signature_image'] = $value->store('registration/' . Str::slug($this->attributes['receiver_name'], '_' . '/signature'), 'public');
+            $this->attributes['signature_image'] = $value->store('registration/' . Str::slug($this->attributes['receiver_name'], '_') . '/signature', 'public');
         }
     }
 
     public function circularDocuments(): MorphMany
     {
         return $this->morphMany(CircularDocument::class, 'model');
-    }
-
-    public function province(): BelongsTo
-    {
-        return $this->belongsTo(Province::class);
-    }
-
-    public function district(): BelongsTo
-    {
-        return $this->belongsTo(District::class);
-    }
-
-    public function localBody(): BelongsTo
-    {
-        return $this->belongsTo(LocalBody::class);
-    }
-
-    public function getAddressAttribute(): array
-    {
-        return [
-            'province_id' => $this->attributes['province_id'],
-            'district_id' => $this->attributes['district_id'],
-            'local_body_id' => $this->attributes['local_body_id'],
-            'ward_no' => $this->attributes['ward_no'],
-        ];
     }
 }
