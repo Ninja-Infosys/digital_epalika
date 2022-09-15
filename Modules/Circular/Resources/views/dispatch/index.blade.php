@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">चलानी पत्र सूची</h4>
-                        @can('user_create')
+                        @can('dispatch_create')
                             <a href="{{route('admin.circular.dispatch.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ चलानी पत्र थप्नुहोस्
@@ -56,16 +56,24 @@
                                     <td>{{$dispatch->receiver_name}}</td>
 
                                     <td>{{$dispatch->dispach_date}}</td>
+
                                     <td>
-                                        <a href="" class="btn btn-xs btn-outline-primary">
+                                        @can('dispatch_access')
+                                        <a href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i>थप हेर्नुहोस्
                                         </a>
+                                        @endcan
                                     </td>
                                     <td>
+                                        @can('dispatch_edit')
                                         <a href="{{route('admin.circular.dispatch.edit',$dispatch)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
+                                        @endcan
+                                    </td>
+                                    <td>
+                                        @can('dispatch_delete')
                                         <form action="{{route('admin.circular.dispatch.destroy',$dispatch)}}"
                                               method="post">
                                             @csrf
@@ -74,6 +82,7 @@
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
