@@ -3,13 +3,14 @@
 namespace Modules\Circular\Http\Requests\Registration;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StoreRegistrationRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('registration_create');
     }
 
     public function rules(): array
