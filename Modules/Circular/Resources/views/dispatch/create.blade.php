@@ -113,20 +113,6 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="receiver_address" class="form-label">पाउने कार्यालयको ठेगाना *</label>
-                                    <input
-                                        type="text"
-                                        name="receiver_address"
-                                        value="{{old('receiver_address')}}"
-                                        class="form-control @error('receiver_address') is-invalid @enderror"
-                                        id="receiver_address"
-                                        placeholder="पाउने कार्यालयको ठेगाना"
-                                    />
-                                    @error('receiver_address')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
                                     <label for="subject" class="form-label">बिषय *</label>
                                     <input
                                         type="text"
