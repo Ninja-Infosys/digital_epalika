@@ -45,7 +45,7 @@
                                 <th>पठाउने कार्यालयको नाम</th>
                                 <th>बुझिलिनेको नाम</th>
                                 <th>दर्ता मिति</th>
-                                <th>थप हेर्नुहोस्</th>
+
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -57,18 +57,11 @@
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>{{$registration->registration_date}}</td>
+
                                     <td>
-                                        <a href="{{route('admin.circular.registration.show',$registration)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i>थप हेर्नुहोस्
+                                        <a href="{{route('admin.circular.registration.show',$registration)}}"   class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-eye"></i> थप हेर्नुहोस्
                                         </a>
-                                    </td>
-                                   <td>
-                                       <a href="{{route('admin.circular.registration.show',$registration)}}"   class="btn btn-xs btn-outline-primary">
-                                           <i class="fa fa-eye"></i> थप हेर्नुहोस्
-                                       </a>
-                                   </td>
-                                    <td>
                                         <a href="{{route('admin.circular.registration.edit',$registration)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्

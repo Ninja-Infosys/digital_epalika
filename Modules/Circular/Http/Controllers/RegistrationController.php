@@ -122,6 +122,12 @@ class RegistrationController extends Controller
 
     }
 
+    public function registrationReport()
+    {
+        $registrations = Registration::latest()->get();
+        return view('circular::registration.report',compact('registrations'));
+    }
+
     private function uploadDocuments($request, $registration)
     {
         foreach ($request->validated()['circularDocuments'] as $circularDocument) {
