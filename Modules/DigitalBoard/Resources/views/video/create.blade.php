@@ -51,6 +51,19 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="video" class="form-label">Video *</label>
+                                <input
+                                    type="file"
+                                    name="video"
+                                    class="form-control @error('video') is-invalid @enderror"
+                                    accept="video/*"
+                                    id="video"
+                                />
+                                @error('video')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">

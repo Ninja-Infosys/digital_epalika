@@ -3,18 +3,20 @@
 namespace Modules\DigitalBoard\Http\Requests\Video;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateVideoRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
-        return true;
+        return Gate::allows('digitalBoardVideo_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            //
+            'title' => ['nullable', 'string', 'max:255'],
+            'video' => ['nullable', 'mimes:mp4']
         ];
     }
 }
