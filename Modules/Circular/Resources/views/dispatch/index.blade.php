@@ -57,7 +57,7 @@
 
                                     <td>{{$dispatch->dispach_date}}</td>
                                     <td>
-                                        <a href="" class="btn btn-xs btn-outline-primary">
+                                        <a href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i>थप हेर्नुहोस्
                                         </a>
                                     </td>

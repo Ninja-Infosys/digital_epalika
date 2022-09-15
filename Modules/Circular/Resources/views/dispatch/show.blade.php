@@ -69,6 +69,10 @@
                                                 <td>{{$dispatch->receiver_name}}</td>
                                             </tr>
                                             <tr>
+                                                <th>पाउने कार्यालयको ठेगाना </th>
+                                                <td>{{$dispatch->receiver_address}}</td>
+                                            </tr>
+                                            <tr>
                                                 <th>बिषय.</th>
                                                 <td>{{$dispatch->subject}}</td>
                                             </tr>
