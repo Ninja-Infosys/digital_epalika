@@ -32,8 +32,9 @@ class RegistrationController extends Controller
             403,
             'You are not allowed to registration create'
         );
+        $registration_no = 'R-' . Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
 
-        return view('circular::registration.create');
+        return view('circular::registration.create', compact('registration_no'));
     }
 
     public function store(StoreRegistrationRequest $request)

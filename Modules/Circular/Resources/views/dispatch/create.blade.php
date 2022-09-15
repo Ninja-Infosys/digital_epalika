@@ -47,7 +47,7 @@
                                     <input
                                         type="text"
                                         name="dispatch_no"
-                                        value="{{old('dispatch_no')}}"
+                                        value="{{old('dispatch_no',$dispatch_no)}}"
                                         class="form-control @error('dispatch_no') is-invalid @enderror"
                                         id="dispatch_no"
                                         placeholder="चलानी न."

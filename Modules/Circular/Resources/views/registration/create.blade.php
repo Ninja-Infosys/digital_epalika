@@ -47,7 +47,7 @@
                                     <input
                                         type="text"
                                         name="registration_no"
-                                        value="{{old('registration_no')}}"
+                                        value="{{old('registration_no',$registration_no)}}"
                                         class="form-control @error('registration_no') is-invalid @enderror"
                                         id="registration_no"
                                         placeholder="दर्ता न."

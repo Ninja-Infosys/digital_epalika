@@ -32,8 +32,9 @@ class DispatchController extends Controller
             403,
             'You are not allowed to dispatch create'
         );
+        $dispatch_no = 'D-' . Str::padLeft(DB::table('dispatches')->max('id') + 1, 2, 0);
 
-        return view('circular::dispatch.create');
+        return view('circular::dispatch.create', compact('dispatch_no'));
     }
 
     public function store(StoreDispatchRequest $request)
