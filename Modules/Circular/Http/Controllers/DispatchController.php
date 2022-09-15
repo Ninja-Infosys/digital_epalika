@@ -49,7 +49,7 @@ class DispatchController extends Controller
             $this->uploadDocuments($request, $dispatch);
         });
 
-        toast('Dispatch Added Successfully', 'success');
+        toast('चलानी सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -93,7 +93,7 @@ class DispatchController extends Controller
             }
         });
 
-        toast('Dispatch Updated Successfully', 'success');
+        toast('चलानी सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.circular.dispatch.index'));
     }
 
@@ -113,7 +113,7 @@ class DispatchController extends Controller
         }
         $dispatch->delete();
 
-        toast('Dispatch Deleted Successfully', 'success');
+        toast('चलानी सफलतापूर्वक मेटियो', 'success');
 
         return back();
     }
