@@ -34,7 +34,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.circular.registration.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.circular.registration.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
@@ -42,7 +43,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="registration_no" class="form-label">दर्ता न.  *</label>
+                                    <label for="registration_no" class="form-label">दर्ता न. *</label>
                                     <input
                                         type="text"
                                         name="registration_no"
@@ -56,12 +57,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="registration_date" class="form-label">दर्ता मिति  *</label>
+                                    <label for="registration_date" class="form-label">दर्ता मिति *</label>
                                     <input
                                         type="text"
                                         name="registration_date"
                                         value="{{old('registration_date')}}"
-                                        class="form-control @error('registration_date') is-invalid @enderror"
+                                        class="form-control nepali_date @error('registration_date') is-invalid @enderror"
                                         id="registration_date"
                                         placeholder="दर्ता मिति"
                                     />
@@ -70,7 +71,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="letter_number" class="form-label">पत्र संख्या  *</label>
+                                    <label for="letter_number" class="form-label">पत्र संख्या *</label>
                                     <input
                                         type="text"
                                         name="letter_number"
@@ -84,12 +85,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="letter_date" class="form-label">पत्रको मिति  *</label>
+                                    <label for="letter_date" class="form-label">पत्रको मिति *</label>
                                     <input
                                         type="text"
                                         name="letter_date"
                                         value="{{old('letter_date')}}"
-                                        class="form-control @error('letter_date') is-invalid @enderror"
+                                        class="form-control nepali_date @error('letter_date') is-invalid @enderror"
                                         id="letter_date"
                                         placeholder="पत्रको मिति "
                                     />
@@ -98,7 +99,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="sender_name" class="form-label">पठाउने कार्यालयको नाम  *</label>
+                                    <label for="sender_name" class="form-label">पठाउने कार्यालयको नाम *</label>
                                     <input
                                         type="text"
                                         name="sender_name"
@@ -112,7 +113,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="subject" class="form-label">बिषय  *</label>
+                                    <label for="subject" class="form-label">बिषय *</label>
                                     <input
                                         type="text"
                                         name="subject"
@@ -127,7 +128,8 @@
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="remarks" class="form-label">कैफ़ियत *</label>
-                                    <textarea name="remarks" id="remarks" cols="30" rows="5" class="form-control" placeholder="कैफ़ियत">{{old('remarks')}}</textarea>
+                                    <textarea name="remarks" id="remarks" cols="30" rows="5" class="form-control"
+                                              placeholder="कैफ़ियत">{{old('remarks')}}</textarea>
                                     @error('remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -213,7 +215,7 @@
                                         class="form-control @error('circularDocuments') is-invalid @enderror"
                                         id="circularDocuments"
 
-                                   multiple />
+                                        multiple/>
                                     @error('circularDocuments')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -231,4 +233,12 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script type="text/javascript">
+            $(document).ready(function () {
+                let todayDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
+                $('#registration_date').val(todayDate)
+            });
+        </script>
+    @endpush
 @endsection

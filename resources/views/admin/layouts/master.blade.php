@@ -42,6 +42,8 @@
 
     <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
 
+    <link rel="stylesheet" href="{{asset('assets/backend/css/nepali.datepicker.v3.7.min.css')}}">
+
     @livewireStyles
 </head>
 
@@ -142,7 +144,20 @@
     });
 </script>
 
+<script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".nepali_date").nepaliDatePicker({
+            ndpYear:true,
+            ndpMonth:true,
+            ndpYear:true
+        });
+    });
+</script>
+
 @include('sweetalert::alert')
+
+@stack('scripts')
 
 @livewireScripts
 </body>

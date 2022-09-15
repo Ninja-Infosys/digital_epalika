@@ -61,7 +61,7 @@
                                         type="text"
                                         name="registration_date"
                                         value="{{old('registration_date',$registration->registration_date)}}"
-                                        class="form-control @error('registration_date') is-invalid @enderror"
+                                        class="form-control nepali_date @error('registration_date') is-invalid @enderror"
                                         id="registration_date"
                                         placeholder="दर्ता मिति"
                                     />
@@ -89,7 +89,7 @@
                                         type="text"
                                         name="letter_date"
                                         value="{{old('letter_date',$registration->letter_date)}}"
-                                        class="form-control @error('letter_date') is-invalid @enderror"
+                                        class="form-control nepali_date @error('letter_date') is-invalid @enderror"
                                         id="letter_date"
                                         placeholder="पत्रको मिति "
                                     />
@@ -231,4 +231,12 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script type="text/javascript">
+            $(document).ready(function () {
+                let todayDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
+                $('#registration_date').val(todayDate)
+            });
+        </script>
+    @endpush
 @endsection
