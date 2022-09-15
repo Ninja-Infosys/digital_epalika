@@ -28,9 +28,12 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">भूमिका सूची</h4>
-                        <a href="{{route('admin.userManagement.role.create')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-plus-circle"></i> नयाँ भूमिका थप्नुहोस्
-                        </a>
+                        @can('role_create')
+                            <a href="{{route('admin.userManagement.role.create')}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-plus-circle"></i> नयाँ भूमिका थप्नुहोस्
+                            </a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
@@ -49,22 +52,27 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$role->title}}</td>
                                     <td>
-                                        <a href="{{route('admin.userManagement.role.edit',$role)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
-                                        <form action="{{route('admin.userManagement.role.destroy',$role)}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
-                                        </form>
+                                        @can('role_edit')
+                                            <a href="{{route('admin.userManagement.role.edit',$role)}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+                                        @can('role_delete')
+                                            <form action="{{route('admin.userManagement.role.destroy',$role)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="3">No Result Found</td>
+                                    <td class="text-center" colspan="3">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

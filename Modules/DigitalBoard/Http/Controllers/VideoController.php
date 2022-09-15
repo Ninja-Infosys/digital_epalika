@@ -5,7 +5,9 @@ namespace Modules\DigitalBoard\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Modules\DigitalBoard\Entities\Video;
+use Modules\DigitalBoard\Http\Requests\Video\StoreVideoRequest;
 
 class VideoController extends Controller
 {
@@ -21,9 +23,12 @@ class VideoController extends Controller
         return view('digitalboard::video.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreVideoRequest $request)
     {
-        //
+        abort_if(Gate::denies('role_access'),
+            403,
+            'You are not allowed to role access'
+        );
     }
 
     public function show(Video $video)

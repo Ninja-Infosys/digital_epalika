@@ -69,23 +69,27 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.userManagement.user.edit',$user)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
-                                        <form action="{{route('admin.userManagement.user.destroy',$user)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
-                                        </form>
+                                        @can('user_edit')
+                                            <a href="{{route('admin.userManagement.user.edit',$user)}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+                                        @can('user_delete')
+                                            <form action="{{route('admin.userManagement.user.destroy',$user)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="7">No Result Found</td>
+                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
