@@ -29,7 +29,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ भूमिका सूची</h4>
                         <a href="{{route('admin.userManagement.role.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i>भूमिका सूची
+                            <i class="fa fa-list"></i> भूमिका सूची
                         </a>
                     </div>
                 </div>
