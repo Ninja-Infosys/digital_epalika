@@ -14,6 +14,10 @@ class CircularPermissionTableSeeder extends Seeder
             ['title' => 'registration_create'],
             ['title' => 'registration_edit'],
             ['title' => 'registration_delete'],
+            ['title' => 'dispatch_access'],
+            ['title' => 'dispatch_create'],
+            ['title' => 'dispatch_edit'],
+            ['title' => 'dispatch_delete'],
         ];
 
         foreach ($permissions as $permission) {
