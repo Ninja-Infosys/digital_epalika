@@ -18,7 +18,7 @@
             @can('digitalBoardNotice_access')
                 <li class="{{request()->routeIs('admin.digitalBoard.notice.index') ? 'active' : ''}}">
                     <a href="{{route('admin.digitalBoard.notice.index')}}">
-                        <span> Notice</span>
+                        <span> सूचना </span>
                     </a>
                 </li>
             @endcan

@@ -16,7 +16,7 @@ class NoticeController extends Controller
     {
         abort_if(Gate::denies('digitalBoardNotice_access'),
             403,
-            'You are not allowed to digital board notice access'
+            'तपाईंलाई डिजिटल बोर्ड सूचना पहुँच गर्न अनुमति छैन'
         );
 
         $notices = Notice::with('user')->orderByDesc('date')->get();
@@ -28,7 +28,7 @@ class NoticeController extends Controller
     {
         abort_if(Gate::denies('digitalBoardNotice_create'),
             403,
-            'You are not allowed to digital board notice create'
+            'तपाईंलाई डिजिटल बोर्ड सूचना सिर्जना गर्न अनुमति छैन'
         );
 
         return view('digitalboard::notice.create');
@@ -38,7 +38,7 @@ class NoticeController extends Controller
     {
         abort_if(Gate::denies('digitalBoardNotice_create'),
             403,
-            'You are not allowed to digital board notice create'
+            'तपाईंलाई डिजिटल बोर्ड सूचना सिर्जना गर्न अनुमति छैन'
         );
 
 
@@ -54,7 +54,7 @@ class NoticeController extends Controller
     {
         abort_if(Gate::denies('digitalBoardNotice_access'),
             403,
-            'You are not allowed to digital board notice access'
+            'तपाईंलाई डिजिटल बोर्ड सूचना पहुँच गर्न अनुमति छैन'
         );
 
         return view('digitalboard::notice.show', compact('notice'));
@@ -64,7 +64,7 @@ class NoticeController extends Controller
     {
         abort_if(Gate::denies('digitalBoardNotice_edit'),
             403,
-            'You are not allowed to digital board notice edit'
+            'तपाईंलाई डिजिटल बोर्ड सूचना अद्यावधिक गर्न अनुमति छैन'
         );
 
         return view('digitalboard::notice.edit', compact('notice'));
@@ -74,7 +74,7 @@ class NoticeController extends Controller
     {
         abort_if(Gate::denies('digitalBoardNotice_edit'),
             403,
-            'You are not allowed to digital board notice edit'
+            'तपाईंलाई डिजिटल बोर्ड सूचना अद्यावधिक गर्न अनुमति छैन'
         );
 
         $notice->update($request->validated());
@@ -87,11 +87,11 @@ class NoticeController extends Controller
     {
         abort_if(Gate::denies('digitalBoardNotice_delete'),
             403,
-            'You are not allowed to digital board notice delete'
+            'तपाइलाई डिजिटल बोर्ड सूचना मेटाउन अनुमति छैन '
         );
 
         $notice->delete();
 
-        toast('Notice Deleted Successfully', 'success');
+        toast('सूचना सफलतापूर्वक मेटियो', 'success');
     }
 }

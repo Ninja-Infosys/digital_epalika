@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_access'),
             403,
-            'You are not allowed to user access'
+            'तपाईंलाई प्रयोगकर्ता पहुँच गर्न अनुमति छैन'
         );
 
         $users = User::with('role')->whereNot('id', auth()->id())->filter()->get();
@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_create'),
             403,
-            'You are not allowed to user create'
+            'तपाईंलाई प्रयोगकर्ता सिर्जना गर्न अनुमति छैन'
         );
 
         $roles = Role::all();
@@ -40,7 +40,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_create'),
             403,
-            'You are not allowed to user create'
+            'तपाईंलाई प्रयोगकर्ता सिर्जना गर्न अनुमति छैन'
         );
 
         User::create($request->validated() + [
@@ -54,7 +54,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_access'),
             403,
-            'You are not allowed to user access'
+            'तपाईंलाई प्रयोगकर्ता पहुँच गर्न अनुमति छैन'
         );
     }
 
@@ -62,7 +62,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_edit'),
             403,
-            'You are not allowed to user edit'
+            'तपाईंलाई प्रयोगकर्ता सम्पादन गर्न अनुमति छैन'
         );
         $roles = Role::all();
         $user->load('role');
@@ -73,7 +73,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_edit'),
             403,
-            'You are not allowed to user edit'
+            'तपाईंलाई प्रयोगकर्ता सम्पादन गर्न अनुमति छैन'
         );
 
         $user->update($request->validated());
@@ -86,7 +86,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_delete'),
             403,
-            'You are not allowed to user delete'
+            'तपाईंलाई प्रयोगकर्ता मेटाउन अनुमति छैन'
         );
 
         $user->delete();
@@ -98,7 +98,7 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_edit'),
             403,
-            'You are not allowed to user edit'
+            'तपाईंलाई प्रयोगकर्ता सम्पादन गर्न अनुमति छैन'
         );
 
         $user->update([
