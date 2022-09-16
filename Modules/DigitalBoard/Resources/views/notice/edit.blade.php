@@ -72,15 +72,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="description" class="form-label">बिबरण </label>
-                                    <input
-                                        type="text"
-                                        name="description"
-                                        value="{{old('description',$notice->description)}}"
-                                        class="form-control @error('description') is-invalid @enderror"
-                                        id="description"
-                                        placeholder="बिबरण  "
-                                    />
+                                    <label for="description" class="form-label">बिवरण </label>
+                                    <textarea name="description" id="description" placeholder="बिवरण"  class="form-control" cols="30" rows="5">{{old('description',$notice->description)}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
