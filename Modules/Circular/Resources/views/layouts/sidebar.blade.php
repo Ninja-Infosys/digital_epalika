@@ -39,9 +39,9 @@
                             </li>
                         @endcan
                         @can('dispatch_access')
-                            <li>
-                                <a href="{{route('admin.circular.dispatch.index')}}">
-                                    <span> चलानी प्रणाली </span>
+                            <li class="{{request()->routeIs('admin.circular.dispatch.report') ? 'active' : ''}}">
+                                <a href="{{route('admin.circular.dispatch.report')}}">
+                                    <span> चलानी प्रणाली रिपोर्ट</span>
                                 </a>
                             </li>
                         @endcan

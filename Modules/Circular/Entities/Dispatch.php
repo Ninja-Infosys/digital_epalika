@@ -42,7 +42,7 @@ class Dispatch extends Model
     public function setReceiverSignatureAttribute($value)
     {
         if (!empty($value) && !is_string($value)) {
-            $this->attributes['receiver_signature'] = $value->store('dispatch/signature/' . Str::slug($this->attributes['receiver_signature'], '_'), 'public');
+            $this->attributes['receiver_signature'] = $value->store('dispatch/signature/' . Str::slug($this->attributes['receiver_name'], '_'), 'public');
         }
     }
 
