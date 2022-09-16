@@ -22,6 +22,10 @@ class DigitalBoardPermissionTableSeeder extends Seeder
             ['title' => 'digitalBoardNews_create'],
             ['title' => 'digitalBoardNews_edit'],
             ['title' => 'digitalBoardNews_delete'],
+            ['title' => 'employee_access'],
+            ['title' => 'employee_create'],
+            ['title' => 'employee_edit'],
+            ['title' => 'employee_delete'],
         ];
 
         foreach ($permissions as $permission) {
