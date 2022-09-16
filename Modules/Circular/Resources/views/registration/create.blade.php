@@ -145,7 +145,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="receiver_name" class="form-label">नाम </label>
+                                    <label for="receiver_name" class="form-label">नाम * </label>
                                     <input
                                         type="text"
                                         name="receiver_name"
@@ -185,7 +185,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label">मिति </label>
+                                    <label for="date" class="form-label">मिति  </label>
                                     <input
                                         type="text"
                                         name="date"
@@ -207,7 +207,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="circularDocuments" class="form-label">डकुमेन्ट </label>
+                                    <label for="circularDocuments" class="form-label">डकुमेन्ट * </label>
                                     <input
                                         type="file"
                                         name="circularDocuments[]"

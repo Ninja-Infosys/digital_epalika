@@ -144,7 +144,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="receiver_name" class="form-label">नाम </label>
+                                    <label for="receiver_name" class="form-label">नाम *</label>
                                     <input
                                         type="text"
                                         name="receiver_name"
