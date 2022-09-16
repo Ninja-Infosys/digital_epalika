@@ -14,8 +14,8 @@ class RegistrationReport extends Component
     {
         $this->registrations = Registration::where(function ($query) {
             if (!empty($this->search)) {
-                $query->orWhere('registration_no', $this->search);
-                $query->orWhere('registration_date', $this->search);
+                $query->where('registration_no','LIKE', '%'.$this->search.'%');
+                $query->orWhere('registration_date','LIKE', '%'.$this->search.'%');
             }
         })
             ->latest()

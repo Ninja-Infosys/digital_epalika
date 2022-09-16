@@ -71,10 +71,24 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                                <div class="col-md-12 mb-2">
+                                    <label for="description" class="form-label">बिबरण </label>
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        value="{{old('description',$notice->description)}}"
+                                        class="form-control @error('description') is-invalid @enderror"
+                                        id="description"
+                                        placeholder="बिबरण  "
+                                    />
+                                    @error('description')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            Update
                         </button>
                     </form>
                 </div>

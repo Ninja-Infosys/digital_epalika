@@ -72,6 +72,7 @@
                             <tr>
                                 <th rowspan="2">क्र.स</th>
                                 <th rowspan="2">दर्ता न.</th>
+                                <th rowspan="2">दर्ता मिति.</th>
                                 <th colspan="2">प्राप्त भएको</th>
                                 <th rowspan="2">पठाउने कार्यालयको नाम</th>
                                 <th rowspan="2">बिषय</th>
@@ -91,6 +92,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$registration->registration_no}}</td>
+                                    <td>{{$registration->registration_date}}</td>
                                     <td>{{$registration->letter_number}}</td>
                                     <td>{{$registration->letter_date->toDateString()}}</td>
                                     <td>{{$registration->sender_name}}</td>

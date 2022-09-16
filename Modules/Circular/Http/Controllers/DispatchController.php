@@ -121,8 +121,7 @@ class DispatchController extends Controller
 
     public function dispatchReport()
     {
-        $dispatchs = Dispatch::latest()->get();
-        return view('circular::dispatch.report', compact('dispatchs'));
+        return view('circular::dispatch.report');
     }
     private function uploadDocuments($request, $dispatch)
     {

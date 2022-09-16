@@ -18,7 +18,7 @@ class RoleController extends Controller
     {
         abort_if(Gate::denies('role_access'),
             403,
-            'You are not allowed to role access'
+            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
         );
 
         $roles = Role::all();
@@ -30,7 +30,7 @@ class RoleController extends Controller
     {
         abort_if(Gate::denies('role_create'),
             403,
-            'You are not allowed to role access'
+            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
         );
 
         $permissionGroups = $this->permissionGroups();
@@ -42,7 +42,7 @@ class RoleController extends Controller
     {
         abort_if(Gate::denies('role_create'),
             403,
-            'You are not allowed to role create'
+            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
         );
 
         DB::transaction(function () use ($request) {
@@ -51,7 +51,7 @@ class RoleController extends Controller
             $role->permissions()->attach($request->validated()['permissions']);
         });
 
-        toast('भूमिका सफलतापूर्वक सिर्जना गरियो', 'success');
+        toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 
@@ -59,7 +59,7 @@ class RoleController extends Controller
     {
         abort_if(Gate::denies('role_access'),
             403,
-            'You are not allowed to role access'
+            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
         );
     }
 
@@ -67,7 +67,7 @@ class RoleController extends Controller
     {
         abort_if(Gate::denies('role_edit'),
             403,
-            'You are not allowed to role edit'
+            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
         );
 
         $role->load('permissions');
@@ -80,7 +80,7 @@ class RoleController extends Controller
     {
         abort_if(Gate::denies('role_edit'),
             403,
-            'You are not allowed to role edit'
+            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
         );
 
         DB::transaction(function () use ($request, $role) {
@@ -97,7 +97,7 @@ class RoleController extends Controller
     {
         abort_if(Gate::denies('role_delete'),
             403,
-            'You are not allowed to role delete'
+            'तपाईंलाई भूमिका मेटाउन अनुमति छैन'
         );
 
         if ($role->type == 'Super') {

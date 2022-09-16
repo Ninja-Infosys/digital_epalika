@@ -124,8 +124,7 @@ class RegistrationController extends Controller
 
     public function registrationReport()
     {
-        $registrations = Registration::latest()->get();
-        return view('circular::registration.report',compact('registrations'));
+        return view('circular::registration.report');
     }
 
     private function uploadDocuments($request, $registration)

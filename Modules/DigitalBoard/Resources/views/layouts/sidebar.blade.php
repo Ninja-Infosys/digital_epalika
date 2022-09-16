@@ -1,7 +1,7 @@
 <li>
     <a href="#sidebarDigitalBoard" data-bs-toggle="collapse">
         <i class="fa fa-photo-video"></i>
-        <span>डिजिटल बोर्ड</span>
+        <span>नागरिक वडापत्र</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -11,17 +11,26 @@
             @can('registration_access')
                 <li class="{{request()->routeIs('admin.digitalBoard.video.index') ? 'active' : ''}}">
                     <a href="{{route('admin.digitalBoard.video.index')}}">
-                        <span> भिडियो</span>
+                        <span> भिडियोहरु</span>
                     </a>
                 </li>
             @endcan
             @can('digitalBoardNotice_access')
                 <li class="{{request()->routeIs('admin.digitalBoard.notice.index') ? 'active' : ''}}">
                     <a href="{{route('admin.digitalBoard.notice.index')}}">
-                        <span> Notice</span>
+                        <span> सूचनाहरु</span>
                     </a>
                 </li>
             @endcan
+                @can('digitalBoardNotice_access')
+                    <li class="{{request()->routeIs('admin.digitalBoard.news.index') ? 'active' : ''}}">
+                        <a href="{{route('admin.digitalBoard.news.index')}}">
+                            <span> समाचारहरु</span>
+                        </a>
+                    </li>
+                @endcan
         </ul>
     </div>
 </li>
+
+
