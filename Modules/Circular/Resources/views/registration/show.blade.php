@@ -54,7 +54,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>दर्ता मिति</th>
-                                                    <td>{{$registration->registration_date->toDateString()}}</td>
+                                                    <td>{{$registration->registration_date ? $registration->registration_date->toDateString() : ''}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>पत्र संख्या.</th>
@@ -62,7 +62,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>पत्रको मिति.</th>
-                                                    <td>{{$registration->letter_date}}</td>
+                                                    <td>{{$registration->letter_date ? $registration->letter_date->toDateString() : ''}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>पठाउने कार्यालयको नाम.</th>
@@ -90,8 +90,6 @@
                                                     <td>{{$registration->date->toDateString()}}</td>
                                                 </tr>
                                                 <tr>
-
-
                                             </tbody>
                                         </table>
                                     </div>
