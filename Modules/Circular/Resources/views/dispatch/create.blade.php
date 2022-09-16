@@ -154,7 +154,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="receiver_signature" class="form-label">बुझिलिनेको हस्तक्षर्</label>
                                     <input
                                         type="file"

@@ -16,301 +16,119 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Nagarik sahayog Bebasthapan pranali</span>
+                        <span>नागरिक सहयोग ब्यबस्थापन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Gunaso Bebasthapan pranali</span>
+                        <span>गुनासो ब्यबस्थापन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Karyapalika bebasthapan pranali</span>
+                        <span> कार्यपालिका ब्यबस्थापन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Sifaris bebasthapan pranali</span>
+                        <span>सिफारिस ब्यबस्थापन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Bebasayik nabikaran darta pranali</span>
+                        <span>ब्यबसायिक नबिकरण दर्ता प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Karmachari Bebasthapan pranali</span>
+                        <span> कर्मचारी ब्यबस्थापन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Naksa Pass pranali</span>
+                        <span>नक्सा पास प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Talim Bebasthapan pranali</span>
+                        <span>तालिम ब्यबस्थापन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Rajaswa sankalan pranali</span>
+                        <span> राजस्व संकलन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Yojan Bebasthapan pranali</span>
+                        <span>योजना ब्यबस्थापन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Apangata/Jestha nagarik bebsthapan pranali</span>
+                        <span>अपाङ्गता/जेष्ठ  नागरिक प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Nyayik samiti bebsthapan pranali</span>
+                        <span> न्यायिक समिति ब्यबस्थापन प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>Digital LG Profile</span>
+                        <span>डिजिटल LG प्रोफाइल</span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
-                        <ul class="nav-second-level">
-                            @can('user_access')
-                                <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="{{request()->routeIs('admin.userManagement.role.index') ? 'active':''}}">
-                                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
                 </li>
 
                 <li>
