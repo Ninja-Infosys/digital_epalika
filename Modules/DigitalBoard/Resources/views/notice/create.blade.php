@@ -60,7 +60,7 @@
                                     <label for="date" class="form-label">मिति *</label>
                                     <input
                                         type="text"
-                                        name="dispatch_date"
+                                        name="date"
                                         value="{{old('date')}}"
                                         class="form-control nepali_date @error('date') is-invalid @enderror"
                                         id="date"
@@ -70,6 +70,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">

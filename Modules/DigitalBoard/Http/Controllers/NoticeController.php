@@ -41,6 +41,7 @@ class NoticeController extends Controller
             'You are not allowed to digital board notice create'
         );
 
+
         Notice::create($request->validated() + [
                 'user_id' => auth()->id()
             ]);

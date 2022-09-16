@@ -17,7 +17,7 @@ class StoreNoticeRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'date' => ['required'],
-            'description' => ['required'],
+            'description' => ['nullable'],
             'closed_at' => ['nullable'],
             'is_notice' => ['nullable'],
         ];
