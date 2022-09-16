@@ -145,11 +145,13 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fa fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button type="submit" class="dropdown-item notify-item">
+                            <i class="fa fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
                 </div>
             </li>
         </ul>

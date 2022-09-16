@@ -50,14 +50,18 @@
                             <tbody>
                             @forelse($videos as $video)
                                 <tr>
-                                    <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$video->title}}</td>
-                                    <td>
+                                    <th scope="row" class="align-middle">
+                                        {{$loop->iteration}}
+                                    </th>
+                                    <td class="align-middle">
+                                        {{$video->title}}
+                                    </td>
+                                    <td class="align-middle">
                                         <video width="130" height="120" controls>
                                             <source src="{{$video->video_url}}">
                                         </video>
                                     </td>
-                                    <td>
+                                    <td class="align-middle">
                                         <a href="{{route('admin.digitalBoard.video.edit',$video)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
