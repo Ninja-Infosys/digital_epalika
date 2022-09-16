@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('date');
+            $table->string('date')->nullable();
             $table->text('description')->nullable();
             $table->dateTime('closed_at')->nullable();
             $table->foreignId('user_id')->constrained();
