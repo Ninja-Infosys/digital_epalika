@@ -71,7 +71,7 @@ class VideoController extends Controller
             403,
             'You are not allowed to digital board video edit'
         );
-        if ($request->hasFile('video') && $video->video) {
+        if ($video->video !== $request->input('video')) {
             $this->deleteFile($video->video);
         }
 

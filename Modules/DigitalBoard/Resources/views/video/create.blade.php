@@ -54,18 +54,21 @@
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="video" class="form-label">भिडियो *</label>
-                                <input
-                                    type="file"
-                                    name="video"
-                                    class="form-control @error('video') is-invalid @enderror"
-                                    accept="video/*"
-                                    id="video"
-                                />
+                                <input type="hidden" name="video" id="video">
                                 @error('video')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
+                                <button type="button" class="btn btn-outline-primary form-control" id="browseFile">
+                                    <i class="fa fa-cloud-upload-alt"></i> Upload File
+                                </button>
                                 <div class="progress mt-3" style="display: none;height: 25px">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%; height: 100%">75%</div>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 75%; height: 100%">75%
+                                    </div>
+                                </div>
+                                <div id="video-preview-card" class="mt-2" style="display: none">
+                                    <video id="videoPreview" src="" controls style="width: 100%;height: auto;"></video>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +85,8 @@
         <script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script>
 
         <script type="text/javascript">
-            let browseFile = $('#video');
+            $('#video').val('')
+            let browseFile = $('#browseFile');
             let resumable = new Resumable({
                 target: '{{ route('admin.fileUpload.chunkStore') }}',
                 query: {_token: '{{ csrf_token() }}'},// CSRF token
@@ -108,9 +112,10 @@
 
             resumable.on('fileSuccess', function (file, response) { // trigger when file upload complete
                 response = JSON.parse(response)
-                console.log(response)
                 $('#videoPreview').attr('src', response.url);
-                $('.card-footer').show();
+                $('#video-preview-card').show();
+                $('#video').val(response.path)
+                hideProgress()
             });
 
             resumable.on('fileError', function (file, response) { // trigger when there is any error
