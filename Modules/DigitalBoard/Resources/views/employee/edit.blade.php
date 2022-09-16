@@ -17,7 +17,7 @@
                         <li class="breadcrumb-item active">नयाँ सम्पादन थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कर्मचारी </h4>
+                <h4 class="page-title">कर्मचारीहरु </h4>
             </div>
         </div>
     </div>
