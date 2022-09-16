@@ -62,7 +62,7 @@
                                     <input
                                         type="text"
                                         name="dispatch_date"
-                                        value="{{old('dispatch_date', $dispatch->dispatch_date)}}"
+                                        value="{{old('dispatch_date', $dispatch->dispatch_date ? $dispatch->dispatch_date->toDateString() : '')}}"
                                         class="form-control nepali_date @error('dispatch_date') is-invalid @enderror"
                                         id="dispatch_date"
                                         placeholder="चलानी मिति"
@@ -90,7 +90,7 @@
                                     <input
                                         type="text"
                                         name="letter_date"
-                                        value="{{old('letter_date', $dispatch->letter_date->toDateString())}}"
+                                        value="{{old('letter_date', $dispatch->letter_date ? $dispatch->letter_date->toDateString() : '')}}"
                                         class="form-control nepali_date @error('letter_date') is-invalid @enderror"
                                         id="letter_date"
                                         placeholder="पत्रको मिति "

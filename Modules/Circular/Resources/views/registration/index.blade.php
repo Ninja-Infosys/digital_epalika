@@ -56,10 +56,12 @@
                                     <td>{{$registration->registration_no}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
-                                    <td>{{$registration->registration_date->toDateString()}}</td>
-
                                     <td>
-                                        <a href="{{route('admin.circular.registration.show',$registration)}}"   class="btn btn-xs btn-outline-primary">
+                                        {{$registration->registration_date ? $registration->registration_date->toDateString() : ''}}
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.circular.registration.show',$registration)}}"
+                                           class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i> थप हेर्नुहोस्
                                         </a>
                                         <a href="{{route('admin.circular.registration.edit',$registration)}}"
