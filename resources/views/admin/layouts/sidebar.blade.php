@@ -16,7 +16,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>नागरिक सहयोग ब्यबस्थापन प्रणाली </span>
+                        <span>हेल्प डेस्क </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
@@ -25,7 +25,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>गुनासो ब्यबस्थापन प्रणाली </span>
+                        <span>ई-गुनासो </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
@@ -34,7 +34,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span> कार्यपालिका ब्यबस्थापन प्रणाली </span>
+                        <span> ई-कार्यपालिका  </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
@@ -43,7 +43,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>सिफारिस ब्यबस्थापन प्रणाली </span>
+                        <span>ई-सिफारिस </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
@@ -52,7 +52,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>ब्यबसायिक नबिकरण दर्ता प्रणाली </span>
+                        <span>ई-ब्यबसायिक दर्ता </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
@@ -61,7 +61,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span> कर्मचारी ब्यबस्थापन प्रणाली </span>
+                        <span> कर्मचारी </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
@@ -106,7 +106,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span>अपाङ्गता/जेष्ठ  नागरिक प्रणाली </span>
+                        <span>अपाङ्गता/जेष्ठ नागरिक प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
@@ -115,7 +115,7 @@
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
-                        <span> न्यायिक समिति ब्यबस्थापन प्रणाली </span>
+                        <span> ई-न्यायिक प्रणाली </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
