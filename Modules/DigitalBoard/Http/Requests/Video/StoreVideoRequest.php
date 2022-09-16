@@ -23,8 +23,7 @@ class StoreVideoRequest extends FormRequest
     public function messages()
     {
         return [
-          'video.required'=>'भिडियो अनिबार्य छ ',
-          'video.mimes'=>'भिडियो mp4 मा छ '
+          'video.required'=>'भिडियो अनिबार्य छ '
         ];
     }
 }
