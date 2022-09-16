@@ -46,7 +46,7 @@ class NoticeController extends Controller
                 'user_id' => auth()->id()
             ]);
 
-        toast('Notice Added Successfully', 'success');
+        toast('सूचना सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -79,7 +79,7 @@ class NoticeController extends Controller
 
         $notice->update($request->validated());
 
-        toast('Notice Updated Successfully', 'success');
+        toast('सूचना सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 

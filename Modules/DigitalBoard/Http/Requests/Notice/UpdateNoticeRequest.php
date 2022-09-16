@@ -17,9 +17,17 @@ class UpdateNoticeRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'date' => ['required'],
-            'description' => ['required'],
+            'description' => ['nullable'],
             'closed_at' => ['nullable'],
             'is_notice' => ['nullable'],
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            'title.required'=>'शिर्षक अनिबार्य छ।',
+            'date.required'=>'मिति अनिबार्य छ।'
         ];
     }
 }

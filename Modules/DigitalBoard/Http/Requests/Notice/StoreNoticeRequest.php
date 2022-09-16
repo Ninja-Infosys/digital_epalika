@@ -22,4 +22,12 @@ class StoreNoticeRequest extends FormRequest
             'is_notice' => ['nullable'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+          'title.required'=>'शिर्षक अनिबार्य छ।',
+            'date.required'=>'मिति अनिबार्य छ।'
+        ];
+    }
 }
