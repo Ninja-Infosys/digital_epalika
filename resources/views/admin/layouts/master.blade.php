@@ -11,7 +11,7 @@
     <meta content="Coderthemes" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/backend/images/np.png')}}"/>
+    <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
 
 {{--    <link--}}
 {{--        href="{{asset('assets/backend/libs/flatpickr/flatpickr.min.css')}}"--}}
@@ -49,16 +49,7 @@
 </head>
 
 <!-- body start -->
-<body
-    data-layout-mode="default"
-    data-theme="light"
-    data-layout-width="fluid"
-    data-topbar-color="dark"
-    data-menu-position="fixed"
-    data-leftbar-color="light"
-    data-leftbar-size="default"
-    data-sidebar-user="false"
->
+<body>
 <!-- Begin page -->
 <div id="wrapper">
 

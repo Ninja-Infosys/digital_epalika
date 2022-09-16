@@ -1,5 +1,44 @@
 <div class="left-side-menu">
     <div class="h-100" data-simplebar>
+        <!-- User box -->
+        <div class="user-box text-center">
+            <img
+                src="{{auth()->user()->profile_photo_url}}"
+                alt="user-img"
+                title="{{auth()->user()->name}}"
+                class="rounded-circle avatar-md"
+            />
+            <div class="dropdown">
+                <a
+                    href="javascript: void(0);"
+                    class="text-light dropdown-toggle h5 mt-2 mb-1 d-block"
+                    data-bs-toggle="dropdown"
+                >
+                    {{auth()->user()->name}}
+                </a
+                >
+                <div class="dropdown-menu user-pro-dropdown">
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fe-user me-1"></i>
+                        <span>My Profile</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fa fa-lock"></i>
+                        <span>Lock Screen</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <i class="fa fa-sign-out-alt me-1"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+            <p class="text-muted">{{auth()->user()->role->title??''}}</p>
+        </div>
         <div id="sidebar-menu">
             <ul id="side-menu">
                 <li>
