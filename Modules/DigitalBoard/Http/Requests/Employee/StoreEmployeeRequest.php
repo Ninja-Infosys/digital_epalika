@@ -31,6 +31,10 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'name.required'=>'नाम अनिबार्य छ।',
+            'photo.mimes'=>'फोटो अनिबार्य jpg, jpeg, png मा छ। ',
+            'email.unique'=>'इमेल पहिले नै अवस्थित छ।',
+            'phone.unique'=>'फोन पहिले नै अवस्थित छ।',
+            'position.integer'=>'position पूर्णांक हुनुपर्छ'
 
         ];
     }
