@@ -9,6 +9,6 @@ class FileUploadController extends Controller
 {
     public function chunkFileStore()
     {
-        
+
     }
 }
