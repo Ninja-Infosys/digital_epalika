@@ -20,26 +20,31 @@
                         text-align: center;
                     }
 
-                    @media print{
+                    @media print {
                         table, th, td {
                             border: 1px solid black;
                             border-collapse: collapse;
                             text-align: center;
                         }
-                        .logo{
+
+                        .logo {
                             margin: 20px;
                         }
-                        .row{
+
+                        .row {
                             display: flex;
                             align-content: center;
                         }
-                        .col-md-8{
+
+                        .col-md-8 {
                             width: 66.66666667%;
                         }
-                        .col-md-2{
+
+                        .col-md-2 {
                             width: 16.66666667%;
                         }
-                        .text-center{
+
+                        .text-center {
                             text-align: center;
                         }
                     }
@@ -92,9 +97,11 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$registration->registration_no}}</td>
-                                    <td>{{$registration->registration_date}}</td>
+                                    <td>
+                                        {{$registration->registration_date ? $registration->registration_date->toDateString() : ''}}
+                                    </td>
                                     <td>{{$registration->letter_number}}</td>
-                                    <td>{{$registration->letter_date->toDateString()}}</td>
+                                    <td>{{$registration->letter_date ? $registration->letter_date->toDateString() : ''}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->subject}}</td>
                                     <td>{{$registration->receiver_name}}</td>
