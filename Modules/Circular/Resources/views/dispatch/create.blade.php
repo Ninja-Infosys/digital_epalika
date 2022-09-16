@@ -71,7 +71,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="letter_number" class="form-label">पत्र संख्या *</label>
+                                    <label for="letter_number" class="form-label">पत्र संख्या </label>
                                     <input
                                         type="text"
                                         name="letter_number"
@@ -113,7 +113,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="receiver_address" class="form-label">पाउने कार्यालयको नाम *</label>
+                                    <label for="receiver_address" class="form-label">पाउने कार्यालयको ठेगाना *</label>
                                     <input
                                         type="text"
                                         name="receiver_address"
@@ -185,7 +185,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="documents" class="form-label">डकुमेन्ट *</label>
+                                    <label for="documents" class="form-label">डकुमेन्ट </label>
                                     <input
                                         type="file"
                                         name="documents[]"

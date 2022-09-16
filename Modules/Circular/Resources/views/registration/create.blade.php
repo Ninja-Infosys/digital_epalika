@@ -71,7 +71,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="letter_number" class="form-label">पत्र संख्या *</label>
+                                    <label for="letter_number" class="form-label">पत्र संख्या</label>
                                     <input
                                         type="text"
                                         name="letter_number"
@@ -127,7 +127,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="remarks" class="form-label">कैफ़ियत *</label>
+                                    <label for="remarks" class="form-label">कैफ़ियत </label>
                                     <textarea name="remarks"
                                               id="remarks" cols="30" rows="5"
                                               class="form-control @error('remarks') is-invalid @enderror"
@@ -145,7 +145,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="receiver_name" class="form-label">नाम *</label>
+                                    <label for="receiver_name" class="form-label">नाम </label>
                                     <input
                                         type="text"
                                         name="receiver_name"
@@ -159,7 +159,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="phone" class="form-label">सम्पर्क नम्बर *</label>
+                                    <label for="phone" class="form-label">सम्पर्क नम्बर </label>
                                     <input
                                         type="text"
                                         name="phone"
@@ -173,7 +173,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="signature_image" class="form-label">सहि *</label>
+                                    <label for="signature_image" class="form-label">सहि </label>
                                     <input
                                         type="file"
                                         name="signature_image"
@@ -185,7 +185,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label">मिति *</label>
+                                    <label for="date" class="form-label">मिति </label>
                                     <input
                                         type="text"
                                         name="date"
@@ -207,7 +207,7 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="circularDocuments" class="form-label">डकुमेन्ट *</label>
+                                    <label for="circularDocuments" class="form-label">डकुमेन्ट </label>
                                     <input
                                         type="file"
                                         name="circularDocuments[]"
