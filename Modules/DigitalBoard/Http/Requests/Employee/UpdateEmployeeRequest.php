@@ -20,10 +20,17 @@ class UpdateEmployeeRequest extends FormRequest
             'department' => ['nullable', 'string'],
             'designation' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:png,jpeg,jpg'],
-            'email' => ['nullable', Rule::unique('employees', 'email')->withoutTrashed()->ignore($this->employee)],
+            'email' => ['nullable','email', Rule::unique('employees', 'email')->withoutTrashed()->ignore($this->employee)],
             'phone' => ['nullable', Rule::unique('employees', 'phone')->withoutTrashed()->ignore($this->employee)],
             'position' => ['nullable', 'integer'],
             'status' => ['nullable', 'boolean'],
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required'=>'नाम अनिबार्य छ।',
+
         ];
     }
 }
