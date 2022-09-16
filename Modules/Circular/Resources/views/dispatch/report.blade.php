@@ -11,16 +11,16 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.registration.index')}}">दर्ता प्रणाली </a>
+                            <a href="{{route('admin.circular.dispatch.index')}}">चलानी प्रणाली </a>
                         </li>
-                        <li class="breadcrumb-item active">दर्ता</li>
+                        <li class="breadcrumb-item active">चलानी</li>
                     </ol>
                 </div>
-                <h4 class="page-title">दर्ता प्रणाली</h4>
+                <h4 class="page-title">चलानी प्रणाली</h4>
             </div>
         </div>
     </div>
-    <livewire:circular::registration-report />
+    <livewire:circular::dispatch-report />
     <button class="btn btn-primary float-right" id="printBtn" >
         <i class="fa fa-print"></i> Print
     </button>

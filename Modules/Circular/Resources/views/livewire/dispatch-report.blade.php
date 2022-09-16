@@ -3,9 +3,9 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h4 class="header-title">दर्ता प्रणाली सूची</h4>
+                    <h4 class="header-title">चलानी प्रणाली सूची</h4>
                     <div>
-                        <input type="text" class="form-control" wire:model="search" placeholder="दर्ता न./ दर्ता मिती">
+                        <input type="text" class="form-control" wire:model="search" placeholder="चलानी न./ चलानी मिती">
                     </div>
 
                 </div>
@@ -20,26 +20,31 @@
                         text-align: center;
                     }
 
-                    @media print{
+                    @media print {
                         table, th, td {
                             border: 1px solid black;
                             border-collapse: collapse;
                             text-align: center;
                         }
-                        .logo{
+
+                        .logo {
                             margin: 20px;
                         }
-                        .row{
+
+                        .row {
                             display: flex;
                             align-content: center;
                         }
-                        .col-md-8{
+
+                        .col-md-8 {
                             width: 66.66666667%;
                         }
-                        .col-md-2{
+
+                        .col-md-2 {
                             width: 16.66666667%;
                         }
-                        .text-center{
+
+                        .text-center {
                             text-align: center;
                         }
                     }
@@ -71,36 +76,36 @@
                             <thead>
                             <tr>
                                 <th rowspan="2">क्र.स</th>
-                                <th rowspan="2">दर्ता न.</th>
-                                <th colspan="2">प्राप्त भएको</th>
+                                <th rowspan="2">चलानी न.</th>
+                                <th rowspan="2">चलानी मिति.</th>
+                                <th colspan="2">पत्रको</th>
                                 <th rowspan="2">पठाउने कार्यालयको नाम</th>
                                 <th rowspan="2">बिषय</th>
-                                <th colspan="3">बुझिलिनेको बिवरण</th>
+                                <th rowspan="2">हुलाक/इमेल ठेगाना</th>
+                                <th rowspan="2">हस्ताक्षर</th>
                                 <th rowspan="2">कैफियत</th>
                             </tr>
                             <tr>
                                 <th>पत्र संख्या</th>
                                 <th>पत्रको मिति</th>
-                                <th>नाम</th>
-                                <th>हस्ताक्षर</th>
-                                <th>मिति</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($registrations as $registration)
+                            @foreach($dispatches as $dispatch)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$registration->registration_no}}</td>
-                                    <td>{{$registration->letter_number}}</td>
-                                    <td>{{$registration->letter_date->toDateString()}}</td>
-                                    <td>{{$registration->sender_name}}</td>
-                                    <td>{{$registration->subject}}</td>
-                                    <td>{{$registration->receiver_name}}</td>
+                                    <td>{{$dispatch->dispatch_no}}</td>
+                                    <td>{{$dispatch->dispatch_date}}</td>
+                                    <td>{{$dispatch->letter_number}}</td>
+                                    <td>{{$dispatch->letter_date}}</td>
+                                    <td>{{$dispatch->receiver_name}}</td>
+                                    <td>{{$dispatch->subject}}</td>
+                                    <td>{{$dispatch->receiver_address}}</td>
                                     <td>
-                                        <img height="50" width="85" src="{{$registration->signature_image_url}}" alt="">
+                                        <img height="50" width="85" src="{{$dispatch->receiver_signature_url}}" alt="">
                                     </td>
-                                    <td>{{$registration->date->toDateString()}}</td>
-                                    <td>{{$registration->remarks}}</td>
+
+                                    <td>{{$dispatch->remarks}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
