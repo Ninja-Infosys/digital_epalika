@@ -21,15 +21,15 @@
         </div>
     </div>
     <livewire:circular::dispatch-report />
-    <button class="btn btn-primary float-right" id="printBtn" >
+    <button class="btn btn-primary float-right" id="printBtnDispatch" >
         <i class="fa fa-print"></i> Print
     </button>
 
     @push('scripts')
         <script>
-            $("#printBtn").click(function(e){
+            $("#printBtnDispatch").click(function(e){
                 var print_area = window.open();
-                print_area.document.write(document.getElementsByClassName('printData')[0].innerHTML);
+                print_area.document.write(document.getElementsByClassName('printDataDipatch')[0].innerHTML);
                 print_area.document.close();
                 print_area.focus();
                 print_area.print();
