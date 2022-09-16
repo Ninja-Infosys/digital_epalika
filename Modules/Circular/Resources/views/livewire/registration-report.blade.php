@@ -108,7 +108,7 @@
                                     <td>
                                         <img height="50" width="85" src="{{$registration->signature_image_url}}" alt="">
                                     </td>
-                                    <td>{{$registration->date->toDateString()}}</td>
+                                    <td>{{$registration->date ? $registration->date->toDateString() : ''}}</td>
                                     <td>{{$registration->remarks}}</td>
                                 </tr>
                             @endforeach
