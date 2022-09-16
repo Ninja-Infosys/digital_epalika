@@ -4,6 +4,8 @@ namespace Modules\DigitalBoard\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\DigitalBoard\Entities\Employee;
+use Modules\DigitalBoard\Observers\EmployeeObserver;
 
 class DigitalBoardServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,8 @@ class DigitalBoardServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Employee::observe(EmployeeObserver::class);
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
