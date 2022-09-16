@@ -155,26 +155,14 @@
                 </div>
             </li>
         </ul>
-
         <!-- LOGO -->
         <div class="logo-box">
-            <a href="{{route('admin.dashboard')}}" class="logo logo-dark text-center">
-              <span class="logo-sm">
-                <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="22"/>
-                  <!-- <span class="logo-lg-text-light">UBold</span> -->
-              </span>
-                <span class="logo-lg">
-                <img src="{{asset('assets/backend/images/logo-dark.png')}}" alt="" height="20"/>
-                    <!-- <span class="logo-lg-text-light">U</span> -->
-              </span>
-            </a>
-
             <a href="{{route('admin.dashboard')}}" class="logo logo-light text-center">
               <span class="logo-sm">
-                <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="22"/>
+                <img src="{{asset('images/np.png')}}" alt="" height="40"/>
               </span>
                 <span class="logo-lg">
-                <img src="{{asset('assets/backend/images/logo-light.png')}}" alt="" height="20"/>
+                <img src="{{asset('images/np.png')}}" alt="" height="60"/>
               </span>
             </a>
         </div>

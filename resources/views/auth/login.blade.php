@@ -28,11 +28,9 @@
     />
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
-    <!-- Head js -->
-    {{--    <script src="assets/js/head.js"></script>--}}
 </head>
 
-<body class="authentication-bg">
+<body class="authentication-bg" style="background-image: url({{asset('images/mountain_photo.jpeg')}})">
 <div class="account-pages mt-5 mb-5">
     <div class="container">
         <div class="row justify-content-center">
