@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\DigitalBoard\Entities\Notice;
+use Modules\DigitalBoard\Http\Requests\Notice\StoreNoticeRequest;
+use Modules\DigitalBoard\Http\Requests\Notice\UpdateNoticeRequest;
 
 class NoticeController extends Controller
 {
@@ -32,12 +34,19 @@ class NoticeController extends Controller
         return view('digitalboard::notice.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreNoticeRequest $request)
     {
         abort_if(Gate::denies('digitalBoardNotice_create'),
             403,
             'You are not allowed to digital board notice create'
         );
+
+        Notice::create($request->validated() + [
+                'user_id' => auth()->id()
+            ]);
+
+        toast('Notice Added Successfully', 'success');
+        return back();
     }
 
     public function show(Notice $notice)
@@ -60,12 +69,17 @@ class NoticeController extends Controller
         return view('digitalboard::notice.edit', compact('notice'));
     }
 
-    public function update(Request $request, Notice $notice)
+    public function update(UpdateNoticeRequest $request, Notice $notice)
     {
         abort_if(Gate::denies('digitalBoardNotice_edit'),
             403,
             'You are not allowed to digital board notice edit'
         );
+
+        $notice->update($request->validated());
+
+        toast('Notice Updated Successfully', 'success');
+        return back();
     }
 
     public function destroy(Notice $notice)
@@ -74,5 +88,9 @@ class NoticeController extends Controller
             403,
             'You are not allowed to digital board notice delete'
         );
+
+        $notice->delete();
+
+        toast('Notice Deleted Successfully', 'success');
     }
 }
