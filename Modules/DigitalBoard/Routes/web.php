@@ -11,4 +11,5 @@ Route::resource('notice', NoticeController::class);
 Route::get('news/{news}/newsUpdate',[NewsController::class,'updateClosedDate'])->name('news.updateClosedDate');
 Route::resource('news', NewsController::class);
 
+Route::get('employee/{employee}/updateEmployeeStatus',[EmployeeController::class,'updateEmployeeStatus'])->name('employee.updateEmployeeStatus');
 Route::resource('employee', EmployeeController::class);

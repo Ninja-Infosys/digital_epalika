@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.digitalBoard.news.index')}}">समाचार </a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ सम्पादन थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">समाचार सम्पादन गर्नुहोस </li>
                     </ol>
                 </div>
                 <h4 class="page-title">समाचार </h4>
@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">समाचार सम्पादन थप्नुहोस्</h4>
+                        <h4 class="header-title">समाचार सम्पादन गर्नुहोस </h4>
                         <a href="{{route('admin.digitalBoard.news.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> समाचार सूची
                         </a>

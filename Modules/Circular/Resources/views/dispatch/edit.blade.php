@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.circular.dispatch.index')}}">चलानी पत्र </a>
                         </li>
-                        <li class="breadcrumb-item active">चलानी पत्र अपडेट थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">चलानी पत्र सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">चलानी पत्र</h4>
