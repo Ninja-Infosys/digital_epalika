@@ -87,7 +87,7 @@
                                                     <td><img src="{{$registration->signature_image_url}}" alt="" height="60px;"></td>
                                                 </tr>  <tr>
                                                     <th>बुझिलिनेको मिति.</th>
-                                                    <td>{{$registration->date->toDateString()}}</td>
+                                                    <td>{{$registration->date ? $registration->date->toDateString() : ''}}</td>
                                                 </tr>
                                                 <tr>
                                             </tbody>
