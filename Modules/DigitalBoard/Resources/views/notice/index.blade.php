@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.video.index')}}">डिजिटल बोर्ड</a>
+                            <a href="{{route('admin.digitalBoard.notice.index')}}">डिजिटल बोर्ड</a>
                         </li>
-                        <li class="breadcrumb-item active">भिडियो </li>
+                        <li class="breadcrumb-item active">सूचना </li>
                     </ol>
                 </div>
-                <h4 class="page-title">भिडियो </h4>
+                <h4 class="page-title">सूचना </h4>
             </div>
         </div>
     </div>
@@ -27,11 +27,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">भिडियो सूची</h4>
+                        <h4 class="header-title">सूचना सूची</h4>
                         @can('user_create')
-                            <a href="{{route('admin.digitalBoard.video.create')}}"
+                            <a href="{{route('admin.digitalBoard.notice.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ भिडियो थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ सूचना थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -43,26 +43,22 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शिर्षक </th>
-                                <th>भिडियो </th>
+                                <th>मिति </th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($videos as $video)
+                            @forelse($notices as $notice)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$video->title}}</td>
+                                    <td>{{$notice->title}}</td>
+                                    <td>{{$notice->date->toDateString()}}</td>
                                     <td>
-                                        <video width="130" height="120" controls>
-                                            <source src="{{$video->video_url}}">
-                                        </video>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.digitalBoard.video.edit',$video)}}"
+                                        <a href="{{route('admin.digitalBoard.notice.edit',$notice)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.digitalBoard.video.destroy',$video)}}"
+                                        <form action="{{route('admin.digitalBoard.notice.destroy',$notice)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

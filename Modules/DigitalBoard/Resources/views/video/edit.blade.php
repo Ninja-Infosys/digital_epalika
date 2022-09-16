@@ -53,7 +53,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="video" class="form-label">भिडियो  *</label>
+                                <label for="video" class="form-label">भिडियो </label>
                                 <input
                                     type="file"
                                     name="video"
