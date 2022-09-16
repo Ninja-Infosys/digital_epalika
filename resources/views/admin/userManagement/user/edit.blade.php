@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
-                        <li class="breadcrumb-item active">प्रयोगकर्ता विवरण अपडेट गर्नुहोस्</li>
+                        <li class="breadcrumb-item active">प्रयोगकर्ता विवरण सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">प्रयोगकर्ता</h4>

@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
-                        <li class="breadcrumb-item active">भूमिका विवरणहरू अपडेट गर्नुहोस्</li>
+                        <li class="breadcrumb-item active">भूमिका विवरणहरू सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">भूमिका</h4>
