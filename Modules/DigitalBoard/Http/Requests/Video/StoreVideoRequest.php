@@ -16,7 +16,7 @@ class StoreVideoRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string', 'max:255'],
-            'video' => ['required', 'mimes:mp4']
+            'video' => ['required']
         ];
     }
 

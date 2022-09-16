@@ -17,7 +17,7 @@
                         <li class="breadcrumb-item active">कर्मचारी </li>
                     </ol>
                 </div>
-                <h4 class="page-title">कर्मचारी </h4>
+                <h4 class="page-title">कर्मचारीहरु </h4>
             </div>
         </div>
     </div>
@@ -45,6 +45,7 @@
                                 <th>नाम </th>
                                 <th>समुह </th>
                                 <th>पद </th>
+                                <th>स्थान</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -55,6 +56,7 @@
                                     <td>{{$employee->name}}</td>
                                     <td>{{$employee->department}}</td>
                                     <td>{{$employee->designation}}</td>
+                                    <td>{{$employee->position}}</td>
                                     <td>
                                         <a href="{{route('admin.digitalBoard.employee.updateEmployeeStatus',$employee)}}"
                                            class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}}">

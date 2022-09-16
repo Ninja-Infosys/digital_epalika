@@ -28,11 +28,4 @@ class Video extends Model
             ? Storage::disk('public')->url($this->attributes['video'])
             : asset('default/noVideo.webp');
     }
-
-    public function setVideoAttribute($value)
-    {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['video'] = $value->store('digital_board/video', 'public');
-        }
-    }
 }

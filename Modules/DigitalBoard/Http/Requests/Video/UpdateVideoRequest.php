@@ -16,14 +16,14 @@ class UpdateVideoRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string', 'max:255'],
-            'video' => ['nullable', 'mimes:mp4']
+            'video' => ['required']
         ];
     }
 
     public function messages()
     {
         return [
-            'video.mimes'=>'भिडियो mp4 मा छ '
+            'video.mimes' => 'भिडियो mp4 मा छ '
         ];
     }
 }
