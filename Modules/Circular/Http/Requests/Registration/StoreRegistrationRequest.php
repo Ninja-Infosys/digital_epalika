@@ -18,7 +18,7 @@ class StoreRegistrationRequest extends FormRequest
         return [
             'registration_no' => ['required', Rule::unique('registrations', 'registration_no')->withoutTrashed()],
             'registration_date' => ['required'],
-            'letter_number' => ['required'],
+            'letter_number' => ['nullable'],
             'letter_date' => ['required'],
             'sender_name' => ['required'],
             'subject' => ['required'],
@@ -47,6 +47,7 @@ class StoreRegistrationRequest extends FormRequest
             'circularDocuments.required'=>'कागजात अनिबार्य छ।',
             'signature_image.image'=>'हस्ताक्षर फोटो फर्ममा छ।',
             'circularDocuments.mimes'=>'फाइल अनिबार्य jpg, png, jpeg, pdf मा हुनुपर्छ।',
+            'letter_date.required'=>'पत्रको मिति अनिबार्य छ|'
         ];
     }
 }

@@ -19,6 +19,10 @@ class PermissionSeeder extends Seeder
             ['title' => 'user_create'],
             ['title' => 'user_edit'],
             ['title' => 'user_delete'],
+            ['title' => 'fiscalYear_access'],
+            ['title' => 'fiscalYear_create'],
+            ['title' => 'fiscalYear_edit'],
+            ['title' => 'fiscalYear_delete'],
         ];
 
         foreach ($permissions as $permission) {

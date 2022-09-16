@@ -132,14 +132,14 @@
                 </li>
 
                 <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                    <a href="#registration" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
                         <span>प्रयोगकर्ता र भूमिका</span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="sidebarUserManagement">
+                    <div class="{{request()->is('admin/userManagement/*') ?'':'collapse'}}" id="registration">
                         <ul class="nav-second-level">
                             @can('user_access')
                                 <li class="{{request()->routeIs('admin.userManagement.user.index') ? 'active':''}}">
@@ -151,6 +151,25 @@
                                     <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
                                 </li>
                             @endcan
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#setting" data-bs-toggle="collapse">
+                        <i class="fa fa-users-cog"></i>
+                        <span>सेटिङ</span>
+                        <span class="menu-arrow">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+                    </a>
+                    <div class="{{request()->is('admin/setting/*') ?'':'collapse'}}" id="setting">
+                        <ul class="nav-second-level">
+                            @can('fiscalYear_access')
+                                <li class="{{request()->routeIs('admin.fiscalYear.index') ? 'active':''}}">
+                                    <a href="{{route('admin.fiscalYear.index')}}">आर्थिक बर्ष</a>
+                                </li>
+                            @endcan
+
                         </ul>
                     </div>
                 </li>

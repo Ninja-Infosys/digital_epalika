@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FileUploadController;
+use App\Http\Controllers\Admin\FiscalYearController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,3 +18,9 @@ Route::prefix('userManagement')->as('userManagement.')->group(function () {
 
 //chunk file upload
 Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileStore'])->name('fileUpload.chunkStore');
+
+//Fiscal Year
+Route::prefix('setting')->group(function (){
+    Route::resource('fiscalYear', FiscalYearController::class);
+});
+
