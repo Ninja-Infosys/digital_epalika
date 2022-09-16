@@ -22,10 +22,17 @@
                     </a>
                 </li>
             @endcan
-                @can('digitalBoardNotice_access')
+                @can('digitalBoardNews_access')
                     <li class="{{request()->routeIs('admin.digitalBoard.news.index') ? 'active' : ''}}">
                         <a href="{{route('admin.digitalBoard.news.index')}}">
                             <span> समाचारहरु</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('employee_access')
+                    <li class="{{request()->routeIs('admin.digitalBoard.employee.index') ? 'active' : ''}}">
+                        <a href="{{route('admin.digitalBoard.employee.index')}}">
+                            <span> कर्मचारीहरु</span>
                         </a>
                     </li>
                 @endcan
