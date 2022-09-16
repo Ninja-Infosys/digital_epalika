@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.circular.registration.index')}}">दर्ता प्रणाली </a>
                         </li>
-                        <li class="breadcrumb-item active"> दर्ता पत्र अपडेट गर्नुहोस्</li>
+                        <li class="breadcrumb-item active"> दर्ता पत्र सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">दर्ता प्रणाली</h4>
