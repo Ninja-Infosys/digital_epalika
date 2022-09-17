@@ -76,28 +76,26 @@
                         <i class="fa fa-photo-video"></i>
                         <span>ई-कार्यपालिका </span>
                         <span class="menu-arrow">
-            <i class="fas fa-angle-right"></i>
-        </span>
+                            <i class="fas fa-angle-right"></i>
+                        </span>
                     </a>
                     <div class="{{request()->is('admin/executiveMeeting/*') ?'':'collapse'}}" id="executiveMeeting">
                         <ul class="nav-second-level">
                             @can('executiveCommittee_access')
+                                <li class="{{request()->routeIs('admin.executiveMeeting.municipalCommittee.index') ? 'active' : ''}}">
+                                    <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">
+                                        <span> पालिका समिति बिवरण</span>
+                                    </a>
+                                </li>
                                 <li class="{{request()->routeIs('admin.executiveMeeting.wardCommittee.index') ? 'active' : ''}}">
                                     <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">
                                         <span> वडा समिति बिवरण</span>
                                     </a>
                                 </li>
                             @endcan
-
                         </ul>
                     </div>
                 </li>
-
-
-
-
-
-
 
 
                 <li>
@@ -230,10 +228,9 @@
                                 </li>
                             @endcan
 
-                                <li class="{{request()->routeIs('admin.officeSetting.index') ? 'active':''}}">
-                                    <a href="{{route('admin.officeSetting.index')}}"> कार्यालय सेटिङ</a>
-                                </li>
-
+                            <li class="{{request()->routeIs('admin.officeSetting.index') ? 'active':''}}">
+                                <a href="{{route('admin.officeSetting.index')}}"> कार्यालय सेटिङ</a>
+                            </li>
 
 
                         </ul>

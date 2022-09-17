@@ -41,7 +41,6 @@ class StoreMunicipalCommitteeRequest extends FormRequest
             'email.email' => 'इमेल फर्म हुनुपर्छ',
             'word_no.integer' => 'वार्ड न. अंकमा हुनुपर्छ ',
             'position.integer' => 'स्थिति अंकमा हुनुपर्छ '
-
         ];
     }
 }

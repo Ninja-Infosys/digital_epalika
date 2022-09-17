@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\WardCommittee\StoreWardCommitteeRequest;
 use App\Http\Requests\ExecutiveMeeting\WardCommittee\UpdateWardCommitteeRequest;
 use App\Models\ExecutiveMeeting\WardCommittee;
+use App\Models\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -19,6 +20,7 @@ class WardCommitteeController extends Controller
         );
 
         $wardCommittees = WardCommittee::orderBy('position')->get();
+
         return view('admin.executive_meeting.ward_committee.index', compact('wardCommittees'));
     }
 
@@ -28,8 +30,9 @@ class WardCommitteeController extends Controller
             403,
             'You are not allowed to executive committee create'
         );
+        $officeSetting = OfficeSetting::first();
 
-        return view('admin.executive_meeting.ward_committee.create');
+        return view('admin.executive_meeting.ward_committee.create', compact('officeSetting'));
     }
 
     public function store(StoreWardCommitteeRequest $request)
@@ -40,6 +43,7 @@ class WardCommitteeController extends Controller
         );
 
         WardCommittee::create($request->validated());
+
         toast('वडा समिति  सफलतापूर्वक थपियो', 'success');
         return back();
     }
@@ -69,12 +73,8 @@ class WardCommitteeController extends Controller
             'You are not allowed to executive committee edit'
         );
 
-        if($request->hasFile('photo'))
-        {
-            if($wardCommittee->photo)
-            {
-                $this->deleteFile($wardCommittee->photo);
-            }
+        if ($request->hasFile('photo') && $wardCommittee->photo) {
+            $this->deleteFile($wardCommittee->photo);
         }
         $wardCommittee->update($request->validated());
 
@@ -89,8 +89,7 @@ class WardCommitteeController extends Controller
             'You are not allowed to executive committee delete'
         );
 
-        if($wardCommittee->photo)
-        {
+        if ($wardCommittee->photo) {
             $this->deleteFile($wardCommittee->photo);
         }
         $wardCommittee->delete();

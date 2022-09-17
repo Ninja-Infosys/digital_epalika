@@ -45,7 +45,8 @@
                                 <th>नाम</th>
                                 <th>फोटो</th>
                                 <th>पद</th>
-                                <th>स्थान</th>
+                                <th>फोन नम्बर </th>
+                                <th>इमेल </th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -58,7 +59,8 @@
                                         <img src="{{$wardCommittee->photo_url}}" class="me-2 rounded-circle" alt="">
                                     </td>
                                     <td>{{$wardCommittee->designation}}</td>
-                                    <td>{{$wardCommittee->position}}</td>
+                                    <td>{{$wardCommittee->phone}}</td>
+                                    <td>{{$wardCommittee->email}}</td>
 
                                     <td>
                                         @can('executiveCommittee_edit')

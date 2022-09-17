@@ -133,7 +133,7 @@
                             <legend class="font-16 text-info">
                                 <strong>ठेगाना</strong>
                             </legend>
-                            @livewire('address')
+                            @livewire('address',['address'=>$officeSetting->address])
                             <div class="row">
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label"> गाउ </label>
