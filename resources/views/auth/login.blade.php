@@ -11,7 +11,7 @@
     <meta content="Coderthemes" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/backend/images/favicon.ico')}}"/>
+    <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
 
     <!-- Bootstrap css -->
     <link
@@ -30,93 +30,87 @@
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
 </head>
 
-<body class="authentication-bg" style="background-image: url({{asset('images/mountain_photo.jpeg')}})">
-<div class="account-pages mt-5 mb-5">
-    <div class="container">
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpeg')}})">
+<div class="mt-5 mb-5">
+    <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6 col-xl-4">
+            <div class="col-md-8">
                 <div class="card">
-                    <div class="card-body p-4">
-                        <div class="text-center w-75 m-auto">
-                            <div class="auth-logo">
-                                <a href="index.html" class="logo logo-dark text-center">
-                      <span class="logo-lg">
-                        <img
-                            src="{{asset('assets/backend/images/logo-dark.png')}}"
-                            alt=""
-                            height="22"
-                        />
-                      </span>
-
-                                </a>
-
-                                <a href="index.html" class="logo logo-light text-center">
-                      <span class="logo-lg">
-                        <img
-                            src="{{asset('assets/backend/images/logo-light.png')}}"
-                            alt=""
-                            height="22"
-                        />
-                      </span>
-                                </a>
+                    <div class="row">
+                        <div class="col-md-5 system_info">
+                            <div class="logo">
+                                <img src="{{asset('images/np.png')}}" height="80" alt="Logo">
                             </div>
-                            <p class="text-muted mb-4 mt-3">
-                                Admin Login
-                            </p>
+                            <div class="title">
+                                <h4>
+                                    <b>{{$officeSetting->localBody->local_body??''}}</b> <br>
+                                    <span class="text-light">
+                                        {{$officeSetting->district->district??''}} <br>
+                                        {{$officeSetting->province->province??''}}, नेपाल
+                                    </span>
+                                </h4>
+                                <p>
+                                    डिजिटल पालिका ब्यबस्थापन प्रणालि
+                                    <br>
+                                    (Digital Palika Management System)
+                                </p>
+                            </div>
                         </div>
-
-                        <form action="{{route('login')}}" method="post">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
-                                <input
-                                    name="email"
-                                    class="form-control @error('email') is-invalid @enderror"
-                                    type="email"
-                                    value="{{old('email')}}"
-                                    id="email"
-                                    placeholder="Email Address"
-                                />
-                                @error('email')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input
-                                    name="password"
-                                    class="form-control @error('password') is-invalid @enderror"
-                                    type="password"
-                                    id="password"
-                                    placeholder="Password"
-                                />
-                                @error('password')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input
-                                        type="checkbox"
-                                        class="form-check-input"
-                                        id="checkbox-signin"
-                                        checked
-                                    />
-                                    <label class="form-check-label" for="checkbox-signin">Remember me</label>
+                        <div class="col-md-7">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="text-center">Log In</h2>
+                                    <form action="{{route('login')}}" method="post">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email address</label>
+                                            <input
+                                                name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                type="email"
+                                                value="{{old('email')}}"
+                                                id="email"
+                                                placeholder="Email Address"
+                                            />
+                                            @error('email')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input
+                                                name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                type="password"
+                                                id="password"
+                                                placeholder="Password"
+                                            />
+                                            @error('password')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="text-center">
+                                                <button class="btn login-btn" type="submit">
+                                                    साइन इन
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="row technical-support">
+                                        <p>
+                                            <b>प्राविधिक सहायता कक्ष:</b>
+                                            <br>
+                                            सम्पर्क नम्बर: 081-520361/9858042433
+                                            <br>
+                                            इमेल: ninjainfosys@gmail.com
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="text-center d-grid">
-                                <button class="btn btn-primary" type="submit">
-                                    Log In
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                    <!-- end card-body -->
                 </div>
-                <!-- end card -->
 
                 <div class="row mt-3">
                     <div class="col-12 text-center">

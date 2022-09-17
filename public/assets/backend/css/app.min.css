@@ -4486,24 +4486,51 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
     }
 }
 
-.authentication-bg.enlarged {
-    min-height: 100px
-}
-
-.bg-pattern {
-    background-image: url(../images/bg-pattern-2.png);
-    background-size: cover
-}
-
-body.authentication-bg {
-    background-color: var(--ct-auth-bg-alt);
+.auth-page{
     background-size: cover;
-    background-position: center
+    background-position: center;
+}
+.auth-page .login-btn{
+    width: 70%;
+    background-color: #3c8dbc;
+    font-weight: 600;
+    color: #fff;
 }
 
-body.authentication-bg-pattern {
-    background-image: url(../images/bg-pattern.png)
+.auth-page .system_info{
+    background: #3c8dbc;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+.auth-page .system_info{
+    background: #3c8dbc;
+}
+.auth-page .system_info .title h4{
+    font-family: "Kalimati";
+    line-height: 1.8;
+}
+.auth-page .system_info .title p{
+    font-family: "Kalimati";
+    line-height: 1.8;
+    color: #fff;
+}
+.auth-page .technical-support p{
+    text-align: center;
+    color: green;
+    font-size: 15px;
+}
+
+/*.authentication-bg.enlarged {*/
+/*    min-height: 100px*/
+/*}*/
+
+/*body.authentication-bg {*/
+/*    background-color: var(--ct-auth-bg-alt);*/
+/*    background-size: cover;*/
+/*    background-position: center*/
+/*}*/
 
 .logout-icon {
     width: 140px
