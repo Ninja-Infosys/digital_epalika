@@ -3,13 +3,14 @@
 namespace App\Http\Requests\ExecutiveMeeting\MunicipalCommittee;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class UpdateMunicipalCommitteeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('executiveCommittee_edit');
     }
 
     public function rules(): array

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class MunicipalCommittee extends Model
 {
@@ -34,6 +36,20 @@ class MunicipalCommittee extends Model
         'tole',
         'position'
     ];
+
+    public function getPhotoUrlAttribute(): string
+    {
+        return $this->attributes['photo']
+            ? Storage::disk('public')->url($this->attributes['photo'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setPhotoAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['photo'] = $value->store('municipal_committee/' . Str::slug($this->attributes['name'], '_'), 'public');
+        }
+    }
 
     public function province(): BelongsTo
     {

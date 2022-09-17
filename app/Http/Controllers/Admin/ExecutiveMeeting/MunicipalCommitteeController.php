@@ -17,7 +17,9 @@ class MunicipalCommitteeController extends Controller
             'You are not allowed to executive committee access'
         );
 
-        return view('admin.executive_meeting.municipal_committee.index');
+        $municipalCommittees = MunicipalCommittee::with('province', 'district', 'localBody')->orderBy('position')->get();
+
+        return view('admin.executive_meeting.municipal_committee.index', compact('municipalCommittees'));
     }
 
     public function create()
