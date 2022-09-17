@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExecutiveMeeting\WardCommittee\StoreWardCommitteeRequest;
+use App\Http\Requests\ExecutiveMeeting\WardCommittee\UpdateWardCommitteeRequest;
 use App\Models\ExecutiveMeeting\WardCommittee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -15,6 +17,9 @@ class WardCommitteeController extends Controller
             403,
             'You are not allowed to executive committee access'
         );
+
+        $wardCommittees = WardCommittee::orderBy('position')->get();
+        return view('executive_meeting.ward_committee.index', compact('wardCommittees'));
     }
 
     public function create()
@@ -23,14 +28,19 @@ class WardCommitteeController extends Controller
             403,
             'You are not allowed to executive committee create'
         );
+
+        return view('executive_meeting.ward_committee.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreWardCommitteeRequest $request)
     {
         abort_if(Gate::denies('executiveCommittee_create'),
             403,
             'You are not allowed to executive committee create'
         );
+
+        WardCommittee::create($request->validated());
+        return back();
     }
 
     public function show(WardCommittee $wardCommittee)
@@ -47,14 +57,20 @@ class WardCommitteeController extends Controller
             403,
             'You are not allowed to executive committee edit'
         );
+
+        return view('executive_meeting.ward_committee.edit', compact('wardCommittee'));
     }
 
-    public function update(Request $request, WardCommittee $wardCommittee)
+    public function update(UpdateWardCommitteeRequest $request, WardCommittee $wardCommittee)
     {
         abort_if(Gate::denies('executiveCommittee_edit'),
             403,
             'You are not allowed to executive committee edit'
         );
+
+        $wardCommittee->update($request->validated());
+
+        return redirect(route('admin.executiveMeeting.wardCommittee.index'));
     }
 
     public function destroy(WardCommittee $wardCommittee)
@@ -63,5 +79,9 @@ class WardCommitteeController extends Controller
             403,
             'You are not allowed to executive committee delete'
         );
+
+        $wardCommittee->delete();
+
+        return back();
     }
 }

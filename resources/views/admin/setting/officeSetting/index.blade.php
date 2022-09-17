@@ -64,7 +64,7 @@
                                         id="logo"
 
                                     />
-                                    @error('name')
+                                    @error('logo')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
