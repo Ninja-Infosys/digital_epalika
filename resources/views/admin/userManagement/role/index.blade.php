@@ -52,13 +52,10 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$role->title}}</td>
                                     <td>
-                                        @can('role_edit')
                                             <a href="{{route('admin.userManagement.role.edit',$role)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
-                                        @endcan
-                                        @can('role_delete')
                                             <form action="{{route('admin.userManagement.role.destroy',$role)}}"
                                                   method="post">
                                                 @csrf
@@ -67,7 +64,6 @@
                                                     <i class="fa fa-trash"></i> मेटाउनु होस्
                                                 </button>
                                             </form>
-                                        @endcan
                                     </td>
                                 </tr>
                             @empty

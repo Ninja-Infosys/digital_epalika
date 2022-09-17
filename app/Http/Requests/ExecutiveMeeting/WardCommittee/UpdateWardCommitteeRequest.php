@@ -30,4 +30,17 @@ class UpdateWardCommitteeRequest extends FormRequest
             'position' => ['nullable', 'integer']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'नाम आवश्यक छ',
+            'designation.required' => 'पद आवश्यक छ',
+            'phone.required' => 'फोन आवश्यक छ',
+            'photo.mimes' => 'फोटो अनिबार्य jpg, png, jpeg मा हुनुपर्छ ',
+            'email.email' => 'इमेल फर्ममा हुनुपर्छ ',
+            'ward_no' => 'वार्ड न. अंकमा हुनुपर्छ ',
+            'position.integer' => 'स्थिति अंकमा हुनुपर्छ '
+        ];
+    }
 }

@@ -30,4 +30,18 @@ class StoreMunicipalCommitteeRequest extends FormRequest
             'position' => ['nullable', 'integer']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'नाम आवश्यक छ।',
+            'designation.required' => 'पद आवश्यक छ।',
+            'phone.required' => 'फोन आवश्यक छ।',
+            'phone.image' => 'फोटोमा  हुनुपर्छ',
+            'email.email' => 'इमेल फर्म हुनुपर्छ',
+            'word_no.integer' => 'वार्ड न. अंकमा हुनुपर्छ ',
+            'position.integer' => 'स्थिति अंकमा हुनुपर्छ '
+
+        ];
+    }
 }
