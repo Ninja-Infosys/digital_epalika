@@ -70,15 +70,36 @@
                         </span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span> ई-कार्यपालिका  </span>
+                    <a href="#executiveMeeting" data-bs-toggle="collapse">
+                        <i class="fa fa-photo-video"></i>
+                        <span>ई-कार्यपालिका </span>
                         <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
+            <i class="fas fa-angle-right"></i>
+        </span>
                     </a>
+                    <div class="{{request()->is('admin/executiveMeeting/*') ?'':'collapse'}}" id="executiveMeeting">
+                        <ul class="nav-second-level">
+                            @can('executiveCommittee_access')
+                                <li class="{{request()->routeIs('admin.executiveMeeting.wardCommittee.index') ? 'active' : ''}}">
+                                    <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">
+                                        <span> वडा समिति बिवरण</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                        </ul>
+                    </div>
                 </li>
+
+
+
+
+
+
+
+
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>

@@ -50,6 +50,15 @@ class WardCommittee extends Model
             $this->attributes['photo'] = $value->store('ward_committee/' . Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
+    public function getAddressAttribute(): array
+    {
+        return [
+            'province_id' => $this->attributes['province_id'],
+            'district_id' => $this->attributes['district_id'],
+            'local_body_id' => $this->attributes['local_body_id'],
+            'ward_no' => $this->attributes['ward_no'],
+        ];
+    }
 
     public function province(): BelongsTo
     {
