@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\StoreMunicipalCommitteeRequest;
 use App\Models\ExecutiveMeeting\MunicipalCommittee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -15,6 +16,8 @@ class MunicipalCommitteeController extends Controller
             403,
             'You are not allowed to executive committee access'
         );
+
+        return view('admin.executive_meeting.municipal_committee.index');
     }
 
     public function create()
@@ -25,7 +28,7 @@ class MunicipalCommitteeController extends Controller
         );
     }
 
-    public function store(Request $request)
+    public function store(StoreMunicipalCommitteeRequest $request)
     {
         abort_if(Gate::denies('executiveCommittee_create'),
             403,
