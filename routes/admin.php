@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\WardCommitteeController;
 use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\FiscalYearController;
+use App\Http\Controllers\Admin\OfficeSettingController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileSt
 //Fiscal Year
 Route::prefix('setting')->group(function () {
     Route::resource('fiscalYear', FiscalYearController::class);
+    Route::resource('officeSetting', OfficeSettingController::class);
 });
 
 

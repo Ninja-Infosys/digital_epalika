@@ -41,7 +41,7 @@
                                 <strong>आर्थिक बर्ष </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-12-off mb-2">
                                     <label for="title" class="form-label">आर्थिक बर्ष  *</label>
                                     <input
                                         type="text"

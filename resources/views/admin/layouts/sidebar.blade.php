@@ -209,6 +209,12 @@
                                 </li>
                             @endcan
 
+                                <li class="{{request()->routeIs('admin.officeSetting.index') ? 'active':''}}">
+                                    <a href="{{route('admin.officeSetting.index')}}"> कार्यालय सेटिङ</a>
+                                </li>
+
+
+
                         </ul>
                     </div>
                 </li>
