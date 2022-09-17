@@ -29,6 +29,8 @@ class MunicipalCommitteeController extends Controller
             403,
             'You are not allowed to executive committee create'
         );
+
+        return view('admin.executive_meeting.municipal_committee.create');
     }
 
     public function store(StoreMunicipalCommitteeRequest $request)
