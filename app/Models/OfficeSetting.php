@@ -38,24 +38,21 @@ class OfficeSetting extends Model
     public function setLogoAttribute($value)
     {
         if (!empty($value) && !is_string($value)) {
-            $this->attributes['logo'] = $value->store('officeSetting', 'public');
+            $this->attributes['logo'] = $value->store('office_setting/logo', 'public');
         }
     }
 
-    public function getLogoUrlAttribute()
+    public function getLogoUrlAttribute(): string
     {
         return $this->attributes['logo'] ? Storage::disk('public')->url($this->attributes['logo']) : '';
     }
-
-
 
     public function getAddressAttribute(): array
     {
         return [
             'province_id' => $this->attributes['province_id'],
             'district_id' => $this->attributes['district_id'],
-            'local_body_id' => $this->attributes['local_body_id'],
-            'ward_no' => $this->attributes['ward_no'],
+            'local_body_id' => $this->attributes['local_body_id']
         ];
     }
 

@@ -50,6 +50,7 @@ class WardCommittee extends Model
             $this->attributes['photo'] = $value->store('ward_committee/' . Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
+
     public function getAddressAttribute(): array
     {
         return [

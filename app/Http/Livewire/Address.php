@@ -24,10 +24,10 @@ class Address extends Component
         $this->provinces = Province::all();
 
         if (!empty($address)) {
-            $this->province_id = $address['province_id'];
-            $this->district_id = $address['district_id'];
-            $this->local_body_id = $address['local_body_id'];
-            $this->ward_no = $address['ward_no'];
+            $this->province_id = $address['province_id'] ?? '';
+            $this->district_id = $address['district_id'] ?? '';
+            $this->local_body_id = $address['local_body_id'] ?? '';
+            $this->ward_no = $address['ward_no'] ?? '';
         }
     }
 
