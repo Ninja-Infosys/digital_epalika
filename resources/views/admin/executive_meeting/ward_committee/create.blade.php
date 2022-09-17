@@ -90,7 +90,7 @@
                                     <input
                                         type="text"
                                         name="email"
-                                        value="{{old('email',$officeSetting->email)}}"
+                                        value="{{old('email')}}"
                                         class="form-control @error('email') is-invalid @enderror"
                                         id="email"
                                         placeholder="इमेल"
@@ -100,16 +100,30 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="phone" class="form-label">फोन नम्बर  </label>
+                                    <label for="phone" class="form-label">फोन नम्बर *  </label>
                                     <input
                                         type="text"
                                         name="phone"
-                                        value="{{old('phone',$officeSetting->phone)}}"
+                                        value="{{old('phone')}}"
                                         class="form-control @error('phone') is-invalid @enderror"
                                         id="phone"
                                         placeholder="फोन नम्बर"
                                     />
                                     @error('phone')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="position" class="form-label">स्थान  </label>
+                                    <input
+                                        type="text"
+                                        name="position"
+                                        value="{{old('position')}}"
+                                        class="form-control @error('position') is-invalid @enderror"
+                                        id="position"
+                                        placeholder="स्थान"
+                                    />
+                                    @error('position')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -140,7 +154,7 @@
                                     <input
                                         type="text"
                                         name="tole"
-                                        value="{{old('tole',$officeSetting->phone)}}"
+                                        value="{{old('tole')}}"
                                         class="form-control @error('tole') is-invalid @enderror"
                                         id="tole"
                                         placeholder="टोल"

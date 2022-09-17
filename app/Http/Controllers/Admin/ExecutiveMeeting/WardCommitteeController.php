@@ -19,7 +19,7 @@ class WardCommitteeController extends Controller
         );
 
         $wardCommittees = WardCommittee::orderBy('position')->get();
-        return view('executive_meeting.ward_committee.index', compact('wardCommittees'));
+        return view('admin.executive_meeting.ward_committee.index', compact('wardCommittees'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class WardCommitteeController extends Controller
             'You are not allowed to executive committee create'
         );
 
-        return view('executive_meeting.ward_committee.create');
+        return view('admin.executive_meeting.ward_committee.create');
     }
 
     public function store(StoreWardCommitteeRequest $request)
@@ -40,6 +40,7 @@ class WardCommitteeController extends Controller
         );
 
         WardCommittee::create($request->validated());
+        toast('वडा समिति  सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -58,7 +59,7 @@ class WardCommitteeController extends Controller
             'You are not allowed to executive committee edit'
         );
 
-        return view('executive_meeting.ward_committee.edit', compact('wardCommittee'));
+        return view('admin.executive_meeting.ward_committee.edit', compact('wardCommittee'));
     }
 
     public function update(UpdateWardCommitteeRequest $request, WardCommittee $wardCommittee)
@@ -68,8 +69,16 @@ class WardCommitteeController extends Controller
             'You are not allowed to executive committee edit'
         );
 
+        if($request->hasFile('photo'))
+        {
+            if($wardCommittee->photo)
+            {
+                $this->deleteFile($wardCommittee->photo);
+            }
+        }
         $wardCommittee->update($request->validated());
 
+        toast('वडा समिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.executiveMeeting.wardCommittee.index'));
     }
 
@@ -80,7 +89,12 @@ class WardCommitteeController extends Controller
             'You are not allowed to executive committee delete'
         );
 
+        if($wardCommittee->photo)
+        {
+            $this->deleteFile($wardCommittee->photo);
+        }
         $wardCommittee->delete();
+        toast('वडा समिति सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
     }
