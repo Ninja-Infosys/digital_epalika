@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\StoreMunicipalCommitteeRequest;
+use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\UpdateMunicipalCommitteeRequest;
 use App\Models\ExecutiveMeeting\MunicipalCommittee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -54,7 +55,7 @@ class MunicipalCommitteeController extends Controller
         );
     }
 
-    public function update(Request $request, MunicipalCommittee $municipalCommittee)
+    public function update(UpdateMunicipalCommitteeRequest $request, MunicipalCommittee $municipalCommittee)
     {
         abort_if(Gate::denies('executiveCommittee_edit'),
             403,
