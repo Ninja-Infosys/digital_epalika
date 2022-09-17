@@ -23,6 +23,11 @@ class PermissionSeeder extends Seeder
             ['title' => 'fiscalYear_create'],
             ['title' => 'fiscalYear_edit'],
             ['title' => 'fiscalYear_delete'],
+
+            ['title' => 'executiveCommittee_access'],
+            ['title' => 'executiveCommittee_create'],
+            ['title' => 'executiveCommittee_edit'],
+            ['title' => 'executiveCommittee_delete'],
         ];
 
         foreach ($permissions as $permission) {

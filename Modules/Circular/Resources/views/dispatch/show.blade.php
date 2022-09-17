@@ -54,7 +54,7 @@
                                             </tr>
                                             <tr>
                                                 <th>चलानी मिति</th>
-                                                <td>{{$dispatch->dispatch_date->toDateString()}}</td>
+                                                <td>{{$dispatch->dispatch_date ? $dispatch->dispatch_date->toDateString() : ''}}</td>
                                             </tr>
                                             <tr>
                                                 <th>पत्र संख्या.</th>
@@ -62,7 +62,7 @@
                                             </tr>
                                             <tr>
                                                 <th>पत्रको मिति.</th>
-                                                <td>{{$dispatch->letter_date}}</td>
+                                                <td>{{$dispatch->letter_date ? $dispatch->letter_date->toDateString() : ''}}</td>
                                             </tr>
                                             <tr>
                                                 <th>पाउने कार्यालयको नाम</th>

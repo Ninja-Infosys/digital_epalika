@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
+use App\Http\Controllers\Admin\ExecutiveMeeting\WardCommitteeController;
 use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\FiscalYearController;
 use App\Http\Controllers\Admin\OfficeSettingController;
@@ -21,8 +23,15 @@ Route::prefix('userManagement')->as('userManagement.')->group(function () {
 Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileStore'])->name('fileUpload.chunkStore');
 
 //Fiscal Year
-Route::prefix('setting')->group(function (){
+Route::prefix('setting')->group(function () {
     Route::resource('fiscalYear', FiscalYearController::class);
     Route::resource('officeSetting', OfficeSettingController::class);
+});
+
+
+//executive meeting
+Route::prefix('executiveMeeting')->as('executiveMeeting.')->group(function () {
+    Route::resource('municipalCommittee', MunicipalCommitteeController::class);
+    Route::resource('wardCommittee', WardCommitteeController::class);
 });
 
