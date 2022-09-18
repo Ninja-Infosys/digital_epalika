@@ -17,6 +17,11 @@ return new class extends Migration {
             $table->string('main_person')->nullable();
             $table->string('telephone')->nullable();
             $table->string('mobile_no')->nullable();
+            $table->string('application_photo')->nullable();
+            $table->string('registration_certificate')->nullable();
+            $table->string('pan_photo')->nullable();
+            $table->string('tax_payment_certificate')->nullable();
+            $table->string('license_photo')->nullable();
             $table->string('date')->nullable();
             $table->timestamps();
             $table->softDeletes();

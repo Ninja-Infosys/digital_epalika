@@ -28,6 +28,11 @@ class PermissionSeeder extends Seeder
             ['title' => 'executiveCommittee_create'],
             ['title' => 'executiveCommittee_edit'],
             ['title' => 'executiveCommittee_delete'],
+
+            ['title' => 'listRegistration_access'],
+            ['title' => 'listRegistration_create'],
+            ['title' => 'listRegistration_edit'],
+            ['title' => 'listRegistration_delete'],
         ];
 
         foreach ($permissions as $permission) {

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Setting;
 
-use App\Models\FiscalYear;
 use App\Http\Controllers\Controller;
+use App\Models\FiscalYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,7 +16,7 @@ class FiscalYearController extends Controller
             'You are not allowed to digital board news access'
         );
         $fiscalYears = FiscalYear::get();
-        return view('admin.fiscalYear.index', compact('fiscalYears'));
+        return view('admin.setting.fiscalYear.index', compact('fiscalYears'));
     }
 
     public function create()
@@ -25,7 +25,7 @@ class FiscalYearController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        return view('admin.fiscalYear.create');
+        return view('admin.setting.fiscalYear.create');
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class FiscalYearController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        return view('admin.fiscalYear.edit', compact('fiscalYear'));
+        return view('admin.setting.fiscalYear.edit', compact('fiscalYear'));
     }
 
     public function update(Request $request, FiscalYear $fiscalYear)

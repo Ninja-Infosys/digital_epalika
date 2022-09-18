@@ -93,11 +93,41 @@
                                     </a>
                                 </li>
                             @endcan
+                            <li class="{{request()->routeIs('admin.executiveMeeting.wardCommittee.index') ? 'active' : ''}}">
+                                <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">
+                                    <span>पालिका समिति बैठक सेटिंग</span>
+                                </a>
+                            </li>
+                            <li class="{{request()->routeIs('admin.executiveMeeting.wardCommittee.index') ? 'active' : ''}}">
+                                <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">
+                                    <span>वडा समिति बैठक सेटिंग</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
 
 
+                <li>
+                    <a href="#sidebarListRegistration" data-bs-toggle="collapse">
+                        <i class="fa fa-file-contract"></i>
+                        <span>सुची दर्ता प्रणालि </span>
+                        <span class="menu-arrow">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+                    </a>
+                    <div class="{{request()->is('admin/listRegistrations/*') ?'':'collapse'}}" id="sidebarListRegistration">
+                        <ul class="nav-second-level">
+                            @can('listRegistration_access')
+                                <li class="{{request()->routeIs('admin.listRegistrations.listRegistration.index') ? 'active' : ''}}">
+                                    <a href="{{route('admin.listRegistrations.listRegistration.index')}}">
+                                        <span>मौजुदा सुची दर्ता</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
@@ -214,7 +244,7 @@
                 </li>
                 <li>
                     <a href="#setting" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
+                        <i class="fa fa-cogs"></i>
                         <span>सेटिङ</span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>

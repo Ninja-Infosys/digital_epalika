@@ -4,8 +4,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\WardCommitteeController;
 use App\Http\Controllers\Admin\FileUploadController;
-use App\Http\Controllers\Admin\FiscalYearController;
-use App\Http\Controllers\Admin\OfficeSettingController;
+use App\Http\Controllers\Admin\ListRegistrationController;
+use App\Http\Controllers\Admin\Setting\FiscalYearController;
+use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,6 @@ Route::prefix('executiveMeeting')->as('executiveMeeting.')->group(function () {
     Route::resource('wardCommittee', WardCommitteeController::class);
 });
 
+Route::prefix('listRegistrations')->as('listRegistrations.')->group(function (){
+    Route::resource('listRegistration', ListRegistrationController::class);
+});

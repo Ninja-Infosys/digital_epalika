@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Setting;
 
-use App\Models\OfficeSetting;
 use App\Http\Controllers\Controller;
+use App\Models\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
