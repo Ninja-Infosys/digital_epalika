@@ -29,7 +29,7 @@ class MunicipalMeetingNoticeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        return view('admin.executive_meeting.municipalMeeting_notice.index');
+        return view('admin.executive_meeting.municipalMeeting_notice.create');
     }
 
     public function store(StoreNoticeRequest $request)

@@ -57,6 +57,22 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
+                                    <label for="type" class="form-label">type *</label>
+                                    <select name="type"
+                                            class="form-select @error('type') is-invalid @enderror"
+                                            id="type">
+                                        <option value=""> छान्नुहोस्</option>
+                                        @foreach(config('meetingType') as $metting)
+                                            <option value="{{$metting}}">
+                                                {{$metting}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('role_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="designation" class="form-label">पद  *</label>
                                     <input
                                         type="text"
@@ -86,54 +102,15 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">description  </label>
-                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control">{{old('description')}}</textarea>
+                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>ठेगाना</strong>
-                            </legend>
-                            @livewire('address',['address'=>$officeSetting->address])
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label for="village" class="form-label"> गाउ </label>
-                                    <input
-                                        type="text"
-                                        name="village"
-                                        value="{{old('village')}}"
-                                        class="form-control @error('village') is-invalid @enderror"
-                                        id="village"
-                                        placeholder="गाउ"
-                                    />
-                                    @error('village')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="tole" class="form-label">टोल </label>
-                                    <input
-                                        type="text"
-                                        name="tole"
-                                        value="{{old('tole')}}"
-                                        class="form-control @error('tole') is-invalid @enderror"
-                                        id="tole"
-                                        placeholder="टोल"
-                                    />
-                                    @error('tole')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
