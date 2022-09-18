@@ -42,11 +42,9 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>नाम</th>
-                                <th>फोटो</th>
-                                <th>पद</th>
+                                <th>मुख्य व्यक्तिको  नाम</th>
                                 <th>फोन नम्बर </th>
-                                <th>इमेल </th>
+                                <th>निबेदन मिति </th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -54,13 +52,9 @@
                             @forelse($listRegistrations as $listRegistration)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$listRegistration->name}}</td>
-                                    <td class="table-user">
-                                        <img src="{{$listRegistration->photo_url}}" class="me-2 rounded-circle" alt="">
-                                    </td>
-                                    <td>{{$listRegistration->designation}}</td>
-                                    <td>{{$listRegistration->phone}}</td>
-                                    <td>{{$listRegistration->email}}</td>
+                                    <td>{{$listRegistration->main_person}}</td>
+                                    <td>{{$listRegistration->mobile_no}}</td>
+                                    <td>{{$listRegistration->date ? $listRegistration->date->toDateString() : ''}}</td>
 
                                     <td>
                                         @can('executiveCommittee_edit')

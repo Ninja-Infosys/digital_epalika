@@ -27,10 +27,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ पालिका समिति थप्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}"
+                        <h4 class="header-title">नयाँ सुची दर्ता थप्नुहोस्</h4>
+                        <a href="{{route('admin.listRegistrations.listRegistration.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> पालिका समिति बिवरण
+                            <i class="fa fa-list"></i> मौजुदा सुची दर्ता बिवरण
                         </a>
                     </div>
                 </div>
