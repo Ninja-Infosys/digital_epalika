@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use Illuminate\Support\Facades\Route;
-use Modules\Circular\Http\Controllers\FileDeleteController;
+
 
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -46,5 +46,4 @@ Route::prefix('listRegistrations')->as('listRegistrations.')->group(function () 
 
 
 //deleteFile
-
 Route::resource('file', FileController::class)->only('destroy');
