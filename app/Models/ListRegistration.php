@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -99,5 +100,10 @@ class ListRegistration extends Model
         if (!empty($value) && !is_string($value)) {
             $this->attributes['license_photo'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/license_photo', 'public');
         }
+    }
+
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class, 'model');
     }
 }

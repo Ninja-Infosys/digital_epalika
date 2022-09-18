@@ -182,7 +182,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="registration_certificate" class="form-label">संस्था वा फार्म दर्ताको  प्रमाण पत्र</label>
+                                    <label for="registration_certificate" class="form-label">संस्था वा फार्म दर्ताको
+                                        प्रमाण पत्र</label>
                                     <input type="file"
                                            name="registration_certificate"
                                            class="form-control @error('registration_certificate') is-invalid @enderror"
@@ -202,7 +203,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="tax_payment_certificate" class="form-label">कर चुक्ता प्रमाण पत्र</label>
+                                    <label for="tax_payment_certificate" class="form-label">कर चुक्ता प्रमाण
+                                        पत्र</label>
                                     <input type="file"
                                            name="tax_payment_certificate"
                                            class="form-control @error('tax_payment_certificate') is-invalid @enderror"
@@ -212,7 +214,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-8 mb-2">
-                                    <label for="license_photo" class="form-label">कुन खरिद को लागि सूची दर्ता हुन निबेदन दिने हो, सो को लागि इजाजत पत्र </label>
+                                    <label for="license_photo" class="form-label">कुन खरिद को लागि सूची दर्ता हुन निबेदन
+                                        दिने हो, सो को लागि इजाजत पत्र </label>
                                     <input type="file"
                                            name="license_photo"
                                            class="form-control @error('license_photo') is-invalid @enderror"
@@ -220,6 +223,12 @@
                                     @error('license_photo')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="license_photo">अन्य फाइलहरु </label>
+                                    @livewire('multiple-file')
                                 </div>
                             </div>
                         </fieldset>
@@ -283,11 +292,11 @@
     @push('scripts')
         <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(document).ready(function () {
                 $(".nepali_date").nepaliDatePicker({
-                    ndpYear:true,
-                    ndpMonth:true,
-                    ndpYear:true
+                    ndpYear: true,
+                    ndpMonth: true,
+                    ndpYear: true
                 });
             });
         </script>

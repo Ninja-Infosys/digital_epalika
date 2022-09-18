@@ -30,6 +30,9 @@ class StoreListRegistrationRequest extends FormRequest
             'tax_payment_certificate' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'license_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'date' => ['required'],
+            'files' => ['nullable', 'array'],
+            'files.*.file_name' => ['nullable'],
+            'files.*.file' => ['required', 'mimes:jpg,jpeg,png,pdf']
         ];
     }
 

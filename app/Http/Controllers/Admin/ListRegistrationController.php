@@ -43,7 +43,13 @@ class ListRegistrationController extends Controller
             'You are not allowed to list registration create'
         );
 
-        ListRegistration::create($request->validated());
+        DB::transaction(function () use ($request) {
+            $listRegistration = ListRegistration::create($request->validated());
+
+            if (!empty($request->validated()['files'])) {
+                $this->uploadDocuments($request, $listRegistration);
+            }
+        });
 
         toast('मौजुदा सुची दर्ता सफलतापूर्वक थपियो', 'success');
         return back();
@@ -86,5 +92,16 @@ class ListRegistrationController extends Controller
             403,
             'You are not allowed to list registration delete'
         );
+    }
+
+    private function uploadDocuments($request, $listRegistration)
+    {
+        foreach ($request->validated()['files'] as $file) {
+            $listRegistration->files()->create([
+                'file_name' => $file['file_name'] ?? pathinfo($file['file']->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $file['file']->getClientOriginalExtension(),
+                'file' => $file['file']->store('list_registration/' . Str::slug($listRegistration->main_person, '_') . '/files', 'public')
+            ]);
+        }
     }
 }
