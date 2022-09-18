@@ -104,10 +104,10 @@ class DispatchController extends Controller
             403,
             'You are not allowed to dispatch delete'
         );
-        foreach ($dispatch->circularDocuments as $document) {
-            $this->deleteFile($document->file);
+        foreach ($dispatch->files as $file) {
+            $this->deleteFile($file->file);
         }
-        $dispatch->circularDocuments()->delete();
+        $dispatch->files()->delete();
 
         if ($dispatch->receiver_signature) {
             $this->deleteFile($dispatch->receiver_signature);
@@ -126,7 +126,7 @@ class DispatchController extends Controller
     private function uploadDocuments($request, $dispatch)
     {
         foreach ($request->validated()['documents'] as $document) {
-            $dispatch->circularDocuments()->create([
+            $dispatch->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
                 'file' => $document->store('registration/' . Str::slug($dispatch->receiver_name, '_') . '/documents', 'public')

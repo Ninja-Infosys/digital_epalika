@@ -27,23 +27,23 @@ class UpdateRegistrationRequest extends FormRequest
             'signature_image' => ['nullable', 'image'],
             'date' => ['nullable'],
             'remarks' => ['nullable'],
-            'circularDocuments' => ['nullable', 'array'],
-            'circularDocuments.*' => ['mimes:jpg,png,jpeg,pdf']
+            'documents' => ['nullable', 'array'],
+            'documents.*' => ['mimes:jpg,png,jpeg,pdf']
         ];
     }
 
     public function messages()
     {
-        return[
-            'registration_no.required'=>'दर्ता नं अनिबार्य छ।',
-            'registration_no.unique'=>'दर्ता नं पहिले नै लिइएको छ।',
-            'registration_date.required'=>'दर्ता मिति अनिबार्य छ।',
-            'letter_date.required'=>'पत्र मिति अनिबार्य छ।',
-            'sender_name.required'=>'पठाउने कार्यालयको नाम अनिबार्य छ।',
-            'subject.required'=>'बिषय अनिबार्य छ।',
-            'receiver_name.required'=>'बुझिलिनेको नाम अनिबार्य छ।',
-            'signature_image.image'=>'हस्ताक्षर फोटो फर्ममा छ।',
-            'circularDocuments.mimes'=>'फाइल अनिबार्य jpg, png, jpeg, pdf मा हुनुपर्छ।',
-            ];
+        return [
+            'registration_no.required' => 'दर्ता नं अनिबार्य छ।',
+            'registration_no.unique' => 'दर्ता नं पहिले नै लिइएको छ।',
+            'registration_date.required' => 'दर्ता मिति अनिबार्य छ।',
+            'letter_date.required' => 'पत्र मिति अनिबार्य छ।',
+            'sender_name.required' => 'पठाउने कार्यालयको नाम अनिबार्य छ।',
+            'subject.required' => 'बिषय अनिबार्य छ।',
+            'receiver_name.required' => 'बुझिलिनेको नाम अनिबार्य छ।',
+            'signature_image.image' => 'हस्ताक्षर फोटो फर्ममा छ।',
+            'documents.mimes' => 'फाइल अनिबार्य jpg, png, jpeg, pdf मा हुनुपर्छ।',
+        ];
     }
 }

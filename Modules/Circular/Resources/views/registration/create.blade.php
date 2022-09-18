@@ -207,17 +207,17 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="circularDocuments" class="form-label">डकुमेन्ट * </label>
+                                    <label for="documents" class="form-label">डकुमेन्ट * </label>
                                     <input
                                         type="file"
-                                        name="circularDocuments[]"
-                                        class="form-control @error('circularDocuments') is-invalid @enderror"
-                                        id="circularDocuments"
+                                        name="documents[]"
+                                        class="form-control @error('documents') is-invalid @enderror"
+                                        id="documents"
                                         multiple/>
-                                    @error('circularDocuments')
+                                    @error('documents')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
-                                    @error('circularDocuments.*')
+                                    @error('documents.*')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

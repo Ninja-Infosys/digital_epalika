@@ -1,18 +1,17 @@
 <?php
 
-namespace Modules\Circular\Entities;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
-class CircularDocument extends Model
+class File extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory,SoftDeletes;
 
-    protected $dates = [
+    protected $dates=[
         'created_at',
         'updated_at',
         'deleted_at'
@@ -28,10 +27,5 @@ class CircularDocument extends Model
     public function getFileUrlAttribute(): string
     {
         return Storage::disk('public')->url($this->attributes['file']);
-    }
-
-    public function model(): MorphTo
-    {
-        return $this->morphTo();
     }
 }

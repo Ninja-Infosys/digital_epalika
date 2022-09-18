@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up()
     {
-        Schema::create('circular_documents', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->nullableMorphs('model');
             $table->string('file_name')->nullable();
@@ -20,6 +21,6 @@ return new class extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists('circular_documents');
+        Schema::dropIfExists('files');
     }
 };

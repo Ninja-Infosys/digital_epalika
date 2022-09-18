@@ -2,6 +2,7 @@
 
 namespace Modules\Circular\Entities;
 
+use App\Models\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -46,8 +47,8 @@ class Dispatch extends Model
         }
     }
 
-    public function circularDocuments(): MorphMany
+    public function files(): MorphMany
     {
-        return $this->morphMany(CircularDocument::class, 'model');
+        return $this->morphMany(File::class, 'model');
     }
 }

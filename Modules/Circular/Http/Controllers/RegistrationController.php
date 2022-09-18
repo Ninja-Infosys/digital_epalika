@@ -91,7 +91,7 @@ class RegistrationController extends Controller
 
             $registration->update($request->validated());
 
-            if ($request->hasFile('circularDocuments')) {
+            if ($request->hasFile('documents')) {
                 $this->uploadDocuments($request, $registration);
             }
         });
@@ -107,10 +107,10 @@ class RegistrationController extends Controller
             403,
             'You are not allowed to registration delete'
         );
-        foreach ($registration->circularDocuments as $circularDocument) {
-            $this->deleteFile($circularDocument->file);
+        foreach ($registration->files as $file) {
+            $this->deleteFile($file->file);
         }
-        $registration->circularDocuments()->delete();
+        $registration->files()->delete();
         if ($registration->signature_image) {
             $this->deleteFile($registration->signature_image);
         }
@@ -129,11 +129,11 @@ class RegistrationController extends Controller
 
     private function uploadDocuments($request, $registration)
     {
-        foreach ($request->validated()['circularDocuments'] as $circularDocument) {
-            $registration->circularDocuments()->create([
-                'file_name' => pathinfo($circularDocument->getClientOriginalName(), PATHINFO_FILENAME),
-                'extension' => $circularDocument->getClientOriginalExtension(),
-                'file' => $circularDocument->store('registration/' . Str::slug($registration->receiver_name, '_') . '/documents', 'public')
+        foreach ($request->validated()['documents'] as $document) {
+            $registration->files()->create([
+                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $document->getClientOriginalExtension(),
+                'file' => $document->store('registration/' . Str::slug($registration->receiver_name, '_') . '/documents', 'public')
             ]);
         }
     }
