@@ -10,7 +10,7 @@ class UpdateListRegistrationRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('listRegistrations_edit');
+        return Gate::allows('listRegistration_edit');
     }
 
     public function rules(): array
@@ -30,14 +30,17 @@ class UpdateListRegistrationRequest extends FormRequest
             'tax_payment_certificate' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'license_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'date' => ['required'],
+            'files' => ['nullable', 'array'],
+            'files.*.file_name' => ['required'],
+            'files.*.file' => ['required', 'mimes:jpg,jpeg,png,pdf']
         ];
     }
 
     public function messages()
     {
-        return[
+        return [
             'registration_no.required' => 'दर्ता नम्बर आवश्यक छ',
-            'registration_type.unique' => 'दर्ता नम्बर अद्वितीय छ',
+            'registration_no.unique' => 'दर्ता नम्बर अद्वितीय छ',
             'application_type.required' => 'दर्ता प्रकार आवश्यक छ',
             'address.required' => 'ठेगाना आवश्यक छ',
             'mailing_address.required' => 'मेलिङ ठेगाना आवश्यक छ',

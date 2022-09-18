@@ -40,7 +40,7 @@ class StoreListRegistrationRequest extends FormRequest
     {
         return [
             'registration_no.required' => 'दर्ता नम्बर आवश्यक छ',
-            'registration_type.unique' => 'दर्ता नम्बर अद्वितीय छ',
+            'registration_no.unique' => 'दर्ता नम्बर अद्वितीय छ',
             'application_type.required' => 'दर्ता प्रकार आवश्यक छ',
             'address.required' => 'ठेगाना आवश्यक छ',
             'mailing_address.required' => 'मेलिङ ठेगाना आवश्यक छ',

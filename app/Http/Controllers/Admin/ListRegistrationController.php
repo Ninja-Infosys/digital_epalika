@@ -81,8 +81,29 @@ class ListRegistrationController extends Controller
             403,
             'You are not allowed to list registration edit'
         );
+        DB::transaction(function () use ($request, $listRegistration) {
+            if ($request->hasFile('application_photo') && $listRegistration->application_photo) {
+                $this->deleteFile($listRegistration->application_photo);
+            }
+            if ($request->hasFile('registration_certificate') && $listRegistration->registration_certificate) {
+                $this->deleteFile($listRegistration->registration_certificate);
+            }
+            if ($request->hasFile('pan_photo') && $listRegistration->pan_photo) {
+                $this->deleteFile($listRegistration->pan_photo);
+            }
+            if ($request->hasFile('tax_payment_certificate') && $listRegistration->tax_payment_certificate) {
+                $this->deleteFile($listRegistration->tax_payment_certificate);
+            }
+            if ($request->hasFile('license_photo') && $listRegistration->license_photo) {
+                $this->deleteFile($listRegistration->license_photo);
+            }
 
-        $listRegistration->update($request->validated());
+            $listRegistration->update($request->validated());
+
+            if (!empty($request->validated()['files'])) {
+                $this->uploadDocuments($request, $listRegistration);
+            }
+        });
 
         toast('मौजुदा सुची दर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.listRegistrations.listRegistration.index'));
@@ -98,6 +119,21 @@ class ListRegistrationController extends Controller
             $this->deleteFile($file->file);
         }
         $listRegistration->files()->delete();
+        if ($listRegistration->application_photo) {
+            $this->deleteFile($listRegistration->application_photo);
+        }
+        if ($listRegistration->registration_certificate) {
+            $this->deleteFile($listRegistration->registration_certificate);
+        }
+        if ($listRegistration->pan_photo) {
+            $this->deleteFile($listRegistration->pan_photo);
+        }
+        if ($listRegistration->tax_payment_certificate) {
+            $this->deleteFile($listRegistration->tax_payment_certificate);
+        }
+        if ($listRegistration->license_photo) {
+            $this->deleteFile($listRegistration->license_photo);
+        }
         $listRegistration->delete();
 
         toast('मौजुदा सुची दर्ता सफलतापूर्वक मेटाइयो', 'success');
