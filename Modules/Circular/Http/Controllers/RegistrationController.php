@@ -2,6 +2,7 @@
 
 namespace Modules\Circular\Http\Controllers;
 
+use App\Models\OfficeSetting;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -124,6 +125,7 @@ class RegistrationController extends Controller
 
     public function registrationReport()
     {
+
         return view('circular::registration.report');
     }
 

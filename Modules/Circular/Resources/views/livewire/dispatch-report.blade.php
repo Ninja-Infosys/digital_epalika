@@ -59,10 +59,10 @@
                                 <img class="logo" src="{{asset('assets/backend/images/np.png')}}" alt="" height="100">
                             </div>
                             <div class="col-md-8 text-center">
-                                <h4>.........पालिका</h4>
-                                <h5>वार्ड न.....को कार्यालय (वडाबाट चलेको अवस्थामा)</h5>
-                                <h5>......(कार्यालय रहेको स्थान.......(जिल्ला)</h5>
-                                <h5>..........प्रदेश,नेपाल</h5>
+                                <h4>{{$setting->localBody->local_body??''}}</h4>
+                                <h5>वार्ड न  {{$setting->ward_no}} को कार्यालय (वडाबाट चलेको अवस्थामा)</h5>
+                                <h5> {{$setting->name}} (कार्यालय रहेको स्थान {{$setting->district->district??''}} (जिल्ला)</h5>
+                                <h5>{{$setting->province->province??''}},नेपाल</h5>
                             </div>
                             <div class="col-md-2">
                                 <img src="{{asset('assets/backend/images/nepal_flag.gif')}}" alt="" height="100">
