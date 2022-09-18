@@ -185,7 +185,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label">मिति  </label>
+                                    <label for="date" class="form-label">मिति </label>
                                     <input
                                         type="text"
                                         name="date"
@@ -232,6 +232,16 @@
         </div>
     </div>
     @push('scripts')
+        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".nepali_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    ndpYear: true
+                });
+            });
+        </script>
         <script type="text/javascript">
             $(document).ready(function () {
                 let todayDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
