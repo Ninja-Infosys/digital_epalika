@@ -103,7 +103,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                     <span style="float: right">
-                                        <form action="{{route('admin.circular.file.deleteFile',$document)}}" method="post">
+                                        <form action="{{route('admin.file.destroy',$document)}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">

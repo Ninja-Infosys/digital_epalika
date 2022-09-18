@@ -57,6 +57,11 @@
                                     <td>{{$listRegistration->date ? $listRegistration->date->toDateString() : ''}}</td>
 
                                     <td>
+                                        @can('executiveCommittee_access')
+                                            <a href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}" class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i> थप हेर्नुहोस्
+                                            </a>
+                                        @endcan
                                         @can('executiveCommittee_edit')
                                             <a href="{{route('admin.listRegistrations.listRegistration.edit',$listRegistration)}}"
                                                class="btn btn-xs btn-outline-primary">
