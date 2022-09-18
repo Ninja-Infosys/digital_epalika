@@ -48,7 +48,7 @@
                                     <input
                                         type="text"
                                         name="broadcast_date"
-                                        value="{{old('broadcast_date')}}"
+                                        value="{{old('broadcast_date',$municipalMeetingNotice->broadcast_date)}}"
                                         class="form-control @error('broadcast_date') is-invalid @enderror"
                                         id="broadcast_date"
                                         placeholder="सूचना प्रसारण"
@@ -64,12 +64,12 @@
                                             id="type">
                                         <option value=""> छान्नुहोस्</option>
                                         @foreach(config('meetingType') as $key=>$metting)
-                                            <option value="{{$key}}">
+                                            <option value="{{$key}}" {{old('type',$key) ==$municipalMeetingNotice->type ? 'selected':''}}>
                                                 {{$metting}}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('role_id')
+                                    @error('type')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -78,7 +78,7 @@
                                     <input
                                         type="text"
                                         name="meeting_subject"
-                                        value="{{old('meeting_subject')}}"
+                                        value="{{old('meeting_subject',$municipalMeetingNotice->meeting_subject)}}"
                                         class="form-control @error('meeting_subject') is-invalid @enderror"
                                         id="meeting_subject"
                                         placeholder="बैठकको विषय"
@@ -90,7 +90,7 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण * </label>
-                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5" class="form-control @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
+                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5" class="form-control @error('description') is-invalid @enderror">{{old('description',$municipalMeetingNotice->description)}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

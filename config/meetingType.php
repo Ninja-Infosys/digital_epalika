@@ -2,7 +2,6 @@
 
 
 return [
-    'Random'=>'पटक पटक',
-    'Monthly'=>'मासिक'
-
-    ];
+    'पटक पटक'=>'Random',
+    'मासिक' => 'Monthly'
+];
