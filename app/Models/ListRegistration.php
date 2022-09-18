@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -105,6 +104,6 @@ class ListRegistration extends Model
 
     public function files(): MorphMany
     {
-        return $this->morphMany(File::class,'model');
+        return $this->morphMany(File::class, 'model');
     }
 }
