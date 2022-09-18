@@ -2,9 +2,7 @@
 
 
 return [
-
-    'onew'=>'o',
-    'te'=>'teo'
-
+    'Random'=>'पटक पटक',
+    'Monthly'=>'मासिक'
 
     ];
