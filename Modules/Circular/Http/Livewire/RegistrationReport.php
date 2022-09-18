@@ -2,6 +2,7 @@
 
 namespace Modules\Circular\Http\Livewire;
 
+use App\Models\OfficeSetting;
 use Livewire\Component;
 use Modules\Circular\Entities\Registration;
 
@@ -20,6 +21,9 @@ class RegistrationReport extends Component
         })
             ->latest()
             ->get();
-        return view('circular::livewire.registration-report');
+
+        $setting = OfficeSetting::with('province','district','localBody')->first();
+
+        return view('circular::livewire.registration-report',compact('setting'));
     }
 }

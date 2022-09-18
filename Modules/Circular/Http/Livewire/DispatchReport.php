@@ -2,6 +2,7 @@
 
 namespace Modules\Circular\Http\Livewire;
 
+use App\Models\OfficeSetting;
 use Livewire\Component;
 use Modules\Circular\Entities\Dispatch;
 
@@ -19,6 +20,7 @@ class DispatchReport extends Component
                 $query->orWhere('dispatch_date','LIKE', '%'.$this->search.'%');
             }
         })->latest()->get();
-        return view('circular::livewire.dispatch-report');
+        $setting = OfficeSetting::with('province','district','localBody')->first();
+        return view('circular::livewire.dispatch-report',compact('setting'));
     }
 }
