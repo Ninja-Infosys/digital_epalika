@@ -31,7 +31,7 @@ class StoreListRegistrationRequest extends FormRequest
             'license_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'date' => ['required'],
             'files' => ['nullable', 'array'],
-            'files.*.file_name' => ['nullable'],
+            'files.*.file_name' => ['required'],
             'files.*.file' => ['required', 'mimes:jpg,jpeg,png,pdf']
         ];
     }

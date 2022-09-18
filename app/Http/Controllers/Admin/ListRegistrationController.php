@@ -92,6 +92,15 @@ class ListRegistrationController extends Controller
             403,
             'You are not allowed to list registration delete'
         );
+        foreach ($listRegistration->files as $file) {
+            $this->deleteFile($file->file);
+        }
+        $listRegistration->files()->delete();
+        $listRegistration->delete();
+
+        toast('मौजुदा सुची दर्ता सफलतापूर्वक मेटाइयो', 'success');
+
+        return back();
     }
 
     private function uploadDocuments($request, $listRegistration)
