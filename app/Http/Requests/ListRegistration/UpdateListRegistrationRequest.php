@@ -41,7 +41,7 @@ class UpdateListRegistrationRequest extends FormRequest
             'application_type.required' => 'दर्ता प्रकार आवश्यक छ',
             'address.required' => 'ठेगाना आवश्यक छ',
             'mailing_address.required' => 'मेलिङ ठेगाना आवश्यक छ',
-            'main_person.required' => 'मुख्य व्यक्ति आवश्यक छ',
+            'main_person.required' => 'मुख्य व्यक्तिको नाम आवश्यक छ',
             'mobile_no.required' => 'मोबाइल न. अनिबार्य छ ',
             'application_photo.mimes' => 'फोटो अनिबार्य jpeg, png, jpeg, pdf मा हुनुपर्छ ',
             'registration_certificate.mimes' => 'प्रमाण पत्र अनिबार्य jpg, jpeg, png, pdf मा हुनुपर्छ ',
