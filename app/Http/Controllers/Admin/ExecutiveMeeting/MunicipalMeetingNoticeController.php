@@ -41,6 +41,8 @@ class MunicipalMeetingNoticeController extends Controller
 
         MunicipalMeetingNotice::create($request->validated());
 
+        toast('सूचना सफलतापूर्वक थपियो','success');
+
         return back();
     }
 
@@ -70,6 +72,8 @@ class MunicipalMeetingNoticeController extends Controller
 
         $municipalMeetingNotice->update($request->validated());
 
+        toast('सूचना सफलतापूर्वक सम्पादन गरियो','success');
+
         return redirect(route('admin.executiveMeeting.municipalMeetingNotice.index'));
     }
 
@@ -81,6 +85,9 @@ class MunicipalMeetingNoticeController extends Controller
         );
 
         $municipalMeetingNotice->delete();
+
+        toast('सूचना सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }
