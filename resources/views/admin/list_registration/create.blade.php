@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.municipalCommittee.store')}}" method="post"
+                    <form action="{{route('admin.listRegistrations.listRegistration.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
 
@@ -47,7 +47,21 @@
                                 </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-6 mb-2">
+                                    <label for="registration_no" class="form-label">दर्ता नम्बर * </label>
+                                    <input
+                                        type="text"
+                                        name="registration_no"
+                                        value="{{old('registration_no')}}"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        id="registration_no"
+                                        placeholder="नाम"
+                                    />
+                                    @error('registration_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="applicant_type" class="form-label">प्रकार *</label>
                                     <select name="applicant_type"
                                             class="form-select @error('applicant_type') is-invalid @enderror"
@@ -64,7 +78,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="name" class="form-label">नाम </label>
                                     <input
                                         type="text"
@@ -78,7 +92,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="address" class="form-label">ठेगाना *</label>
                                     <input
                                         type="text"

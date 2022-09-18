@@ -8,15 +8,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ListRegistration extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
-    protected $fillable=[
-
+    protected $fillable = [
+        'registration_no',
+        'applicant_type',
+        'name',
+        'address',
+        'mailing_address',
+        'main_person',
+        'telephone',
+        'mobile_no',
+        'application_photo',
+        'registration_certificate',
+        'pan_photo',
+        'tax_payment_certificate',
+        'license_photo',
+        'date',
     ];
 }
