@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExecutiveMeeting\WardMeetingNotice\StoreNoticeRequest;
+use App\Http\Requests\ExecutiveMeeting\WardMeetingNotice\UpdateNoticeRequest;
 use App\Models\ExecutiveMeeting\WardMeetingNotice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -27,9 +29,11 @@ class WardMeetingNoticeController extends Controller
             403,
             'You are not allowed to ward meeting create'
         );
+
+        return view('admin.executive_meeting.wardMeeting_notice.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreNoticeRequest $request)
     {
         abort_if(Gate::denies('wardMeeting_create'),
             403,
@@ -51,9 +55,11 @@ class WardMeetingNoticeController extends Controller
             403,
             'You are not allowed to ward meeting edit'
         );
+
+        return view('admin.executive_meeting.wardMeeting_notice.edit', compact('wardMeetingNotice'));
     }
 
-    public function update(Request $request, WardMeetingNotice $wardMeetingNotice)
+    public function update(UpdateNoticeRequest $request, WardMeetingNotice $wardMeetingNotice)
     {
         abort_if(Gate::denies('wardMeeting_edit'),
             403,
