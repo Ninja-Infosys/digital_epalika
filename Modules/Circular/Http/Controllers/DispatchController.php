@@ -60,7 +60,7 @@ class DispatchController extends Controller
             403,
             'You are not allowed to dispatch access'
         );
-        $dispatch->load('circularDocuments');
+        $dispatch->load('files');
 
         return view('circular::dispatch.show', compact('dispatch'));
     }

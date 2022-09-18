@@ -16,5 +16,4 @@ Route::get('dispatch/report',[DispatchController::class,'dispatchReport'])->name
 Route::resource('dispatch', DispatchController::class);
 
 
-//deleteFile
-Route::delete('file/{file}',[FileDeleteController::class,'fileDelete'])->name('file.deleteFile');
+

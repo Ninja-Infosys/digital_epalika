@@ -82,7 +82,8 @@
                                             </tr>
                                             <tr>
                                                 <th>बुझिलिनेको हस्तक्षर्</th>
-                                                <td>{{$dispatch->receiver_signature_url}}}</td>
+                                                <td>
+                                                    <img src="{{$dispatch->receiver_signature_url}}" alt="" height="60"></td>
                                             </tr>
                                             <tr>
                                                 <th>कैफ़ियत.</th>
@@ -102,7 +103,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                     <span style="float: right">
-                                        <form action="{{route('admin.circular.file.deleteFile',$document)}}"
+                                        <form action="{{route('admin.file.destroy',$document)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

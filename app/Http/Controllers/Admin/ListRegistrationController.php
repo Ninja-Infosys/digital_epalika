@@ -55,6 +55,8 @@ class ListRegistrationController extends Controller
             403,
             'You are not allowed to list registration access'
         );
+        $listRegistration->load('files');
+        return view('admin.list_registration.show', compact('listRegistration'));
     }
 
     public function edit(ListRegistration $listRegistration)
