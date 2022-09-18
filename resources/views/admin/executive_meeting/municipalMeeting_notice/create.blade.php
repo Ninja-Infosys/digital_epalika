@@ -43,16 +43,16 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="name" class="form-label">नाम  *</label>
+                                    <label for="broadcast_date" class="form-label">broadcast_date  *</label>
                                     <input
                                         type="text"
-                                        name="name"
-                                        value="{{old('name')}}"
-                                        class="form-control @error('name') is-invalid @enderror"
-                                        id="name"
-                                        placeholder="नाम"
+                                        name="broadcast_date"
+                                        value="{{old('broadcast_date')}}"
+                                        class="form-control @error('broadcast_date') is-invalid @enderror"
+                                        id="broadcast_date"
+                                        placeholder="broadcast_date"
                                     />
-                                    @error('name')
+                                    @error('broadcast_date')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -70,58 +70,26 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
 
-                                    <label for="photo" class="form-label">फोटो </label>
+                                <div class="col-md-6 mb-2">
+                                    <label for="meeting_subject" class="form-label">meeting_subject  </label>
                                     <input
-                                        type="file"
-                                        name="photo"
-                                        class="form-control @error('photo') is-invalid @enderror"
-                                        id="photo"
+                                        type="text"
+                                        name="meeting_subject"
+                                        value="{{old('meeting_subject')}}"
+                                        class="form-control @error('meeting_subject') is-invalid @enderror"
+                                        id="meeting_subject"
+                                        placeholder="meeting_subject"
                                     />
-                                    @error('photo')
+                                    @error('meeting_subject')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-6 mb-2">
-                                    <label for="email" class="form-label">इमेल  </label>
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        value="{{old('email')}}"
-                                        class="form-control @error('email') is-invalid @enderror"
-                                        id="email"
-                                        placeholder="इमेल"
-                                    />
-                                    @error('email')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="phone" class="form-label">फोन नम्बर *  </label>
-                                    <input
-                                        type="text"
-                                        name="phone"
-                                        value="{{old('phone')}}"
-                                        class="form-control @error('phone') is-invalid @enderror"
-                                        id="phone"
-                                        placeholder="फोन नम्बर"
-                                    />
-                                    @error('phone')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="position" class="form-label">स्थान  </label>
-                                    <input
-                                        type="text"
-                                        name="position"
-                                        value="{{old('position')}}"
-                                        class="form-control @error('position') is-invalid @enderror"
-                                        id="position"
-                                        placeholder="स्थान"
-                                    />
-                                    @error('position')
+                                    <label for="description" class="form-label">description  </label>
+                                    <textarea name="description" id="description" cols="30" rows="5" class="form-control">{{old('description')}}</textarea>
+                                    @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
