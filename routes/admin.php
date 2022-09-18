@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingDecisionController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingNoticeController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\WardCommitteeController;
+use App\Http\Controllers\Admin\ExecutiveMeeting\WardMeetingDecisionController;
+use App\Http\Controllers\Admin\ExecutiveMeeting\WardMeetingNoticeController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\ListRegistrationController;
@@ -40,6 +42,8 @@ Route::prefix('executiveMeeting')->as('executiveMeeting.')->group(function () {
     Route::resource('wardCommittee', WardCommitteeController::class);
     Route::resource('municipalMeetingNotice', MunicipalMeetingNoticeController::class);
     Route::resource('municipalMeetingDecision', MunicipalMeetingDecisionController::class);
+    Route::resource('wardMeetingNotice', WardMeetingNoticeController::class);
+    Route::resource('wardMeetingDecision', WardMeetingDecisionController::class);
 });
 
 Route::prefix('listRegistrations')->as('listRegistrations.')->group(function () {
