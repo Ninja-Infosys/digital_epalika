@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.listRegistrations.listRegistration.index')}}">सुची दर्ता प्रणालि</a>
                         </li>
-                        <li class="breadcrumb-item active">मौजुदा सुची दर्ता थप्नुहोस</li>
+                        <li class="breadcrumb-item active">मौजुदा सुची सम्पादन थप्नुहोस</li>
                     </ol>
                 </div>
                 <h4 class="page-title">मौजुदा सुची दर्ता</h4>
@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ सुची दर्ता थप्नुहोस्</h4>
+                        <h4 class="header-title">सुची दर्ता सम्पादन गर्नुहोस्</h4>
                         <a href="{{route('admin.listRegistrations.listRegistration.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> मौजुदा सुची दर्ता बिवरण

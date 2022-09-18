@@ -72,14 +72,15 @@
                 </li>
 
                 <li>
-                    <a href="#executiveMeeting" data-bs-toggle="collapse">
+                    <a href="#sidebarExecutiveMeeting" data-bs-toggle="collapse">
                         <i class="fa fa-photo-video"></i>
                         <span>ई-कार्यपालिका </span>
                         <span class="menu-arrow">
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/executiveMeeting/*') ?'':'collapse'}}" id="executiveMeeting">
+                    <div class="{{request()->is('admin/executiveMeeting/*') ?'':'collapse'}}"
+                         id="sidebarExecutiveMeeting">
                         <ul class="nav-second-level">
                             @can('executiveCommittee_access')
                                 <li class="{{request()->routeIs('admin.executiveMeeting.municipalCommittee.index') ? 'active' : ''}}">
@@ -93,15 +94,58 @@
                                     </a>
                                 </li>
                             @endcan
-                            <li class="{{request()->routeIs('admin.executiveMeeting.wardCommittee.index') ? 'active' : ''}}">
-                                <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">
-                                    <span>पालिका समिति बैठक सेटिंग</span>
+                            <li>
+                                <a href="#sidebarExecutiveMeetingMunicipal" data-bs-toggle="collapse">
+                                    <span>पालिका समिति बैठक</span>
+                                    <span class="menu-arrow">
+                                        <i class="fa fa-angle-right"></i>
+                                    </span>
                                 </a>
+                                <div class="collapse" id="sidebarExecutiveMeetingMunicipal">
+                                    <ul class="nav-second-level">
+                                        @can('registration_access')
+                                            <li class="{{request()->routeIs('admin.circular.registration.report') ? 'active' : ''}}">
+                                                <a href="{{route('admin.circular.registration.report')}}">
+                                                    <span> सूचना प्रशारण </span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('dispatch_access')
+                                            <li class="{{request()->routeIs('admin.circular.dispatch.report') ? 'active' : ''}}">
+                                                <a href="{{route('admin.circular.dispatch.report')}}">
+                                                    <span> निर्णयहरु</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </div>
                             </li>
-                            <li class="{{request()->routeIs('admin.executiveMeeting.wardCommittee.index') ? 'active' : ''}}">
-                                <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">
-                                    <span>वडा समिति बैठक सेटिंग</span>
+
+                            <li>
+                                <a href="#sidebarExecutiveMeetingWard" data-bs-toggle="collapse">
+                                    <span>वडा समिति बैठक</span>
+                                    <span class="menu-arrow">
+                                        <i class="fa fa-angle-right"></i>
+                                    </span>
                                 </a>
+                                <div class="collapse" id="sidebarExecutiveMeetingWard">
+                                    <ul class="nav-second-level">
+                                        @can('registration_access')
+                                            <li class="{{request()->routeIs('admin.circular.registration.report') ? 'active' : ''}}">
+                                                <a href="{{route('admin.circular.registration.report')}}">
+                                                    <span> सूचना प्रशारण </span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('dispatch_access')
+                                            <li class="{{request()->routeIs('admin.circular.dispatch.report') ? 'active' : ''}}">
+                                                <a href="{{route('admin.circular.dispatch.report')}}">
+                                                    <span> निर्णयहरु</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -116,7 +160,8 @@
                             <i class="fas fa-angle-right"></i>
                         </span>
                     </a>
-                    <div class="{{request()->is('admin/listRegistrations/*') ?'':'collapse'}}" id="sidebarListRegistration">
+                    <div class="{{request()->is('admin/listRegistrations/*') ?'':'collapse'}}"
+                         id="sidebarListRegistration">
                         <ul class="nav-second-level">
                             @can('listRegistration_access')
                                 <li class="{{request()->routeIs('admin.listRegistrations.listRegistration.index') ? 'active' : ''}}">
