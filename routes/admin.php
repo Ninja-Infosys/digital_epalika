@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
+use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingNoticeController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\WardCommitteeController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
@@ -36,9 +37,10 @@ Route::prefix('setting')->group(function () {
 Route::prefix('executiveMeeting')->as('executiveMeeting.')->group(function () {
     Route::resource('municipalCommittee', MunicipalCommitteeController::class);
     Route::resource('wardCommittee', WardCommitteeController::class);
+    Route::resource('municipalMeetingNotice', MunicipalMeetingNoticeController::class);
 });
 
-Route::prefix('listRegistrations')->as('listRegistrations.')->group(function (){
+Route::prefix('listRegistrations')->as('listRegistrations.')->group(function () {
     Route::resource('listRegistration', ListRegistrationController::class);
 });
 
