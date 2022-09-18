@@ -104,8 +104,8 @@
                                 <div class="collapse" id="sidebarExecutiveMeetingMunicipal">
                                     <ul class="nav-second-level">
                                         @can('registration_access')
-                                            <li class="{{request()->routeIs('admin.circular.registration.report') ? 'active' : ''}}">
-                                                <a href="{{route('admin.circular.registration.report')}}">
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingNotice.index') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.municipalMeetingNotice.index')}}">
                                                     <span> सूचना प्रशारण </span>
                                                 </a>
                                             </li>
