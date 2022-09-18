@@ -38,6 +38,10 @@ class MunicipalMeetingNoticeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
+        MunicipalMeetingNotice::create($request->validated());
+
+        return back();
     }
 
     public function show(MunicipalMeetingNotice $municipalMeetingNotice)
@@ -54,6 +58,7 @@ class MunicipalMeetingNoticeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+        return view('admin.executive_meeting.municipalMeeting_notice.edit',compact('municipalMeetingNotice'));
     }
 
     public function update(UpdateNoticeRequest $request, MunicipalMeetingNotice $municipalMeetingNotice)
@@ -62,6 +67,10 @@ class MunicipalMeetingNoticeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
+        $municipalMeetingNotice->update($request->validated());
+
+        return redirect(route('admin.executiveMeeting.municipalMeetingNotice.index'));
     }
 
     public function destroy(MunicipalMeetingNotice $municipalMeetingNotice)
@@ -70,5 +79,8 @@ class MunicipalMeetingNoticeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
+        $municipalMeetingNotice->delete();
+        return back();
     }
 }
