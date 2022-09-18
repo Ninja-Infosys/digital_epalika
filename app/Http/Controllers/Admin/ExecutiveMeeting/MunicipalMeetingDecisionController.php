@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingDecision\StoreDecisionRequest;
+use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingDecision\UpdateDecisionRequest;
 use App\Models\ExecutiveMeeting\MunicipalMeetingDecision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -15,35 +17,76 @@ class MunicipalMeetingDecisionController extends Controller
             403,
             'You are not allowed to municipal meeting access'
         );
+
+        $municipalMeetingDecisions = MunicipalMeetingDecision::with('municipalMeetingNotice')->latest()->get();
+
+        return view('admin.executive_meeting.municipalMeeting_decision.index',compact('municipalMeetingDecisions'));
     }
 
     public function create()
     {
-        //
+        abort_if(Gate::denies('municipalMeeting_create'),
+            403,
+            'You are not allowed to municipal meeting access'
+        );
     }
 
-    public function store(Request $request)
+    public function store(StoreDecisionRequest $request)
     {
-        //
+        abort_if(Gate::denies('municipalMeeting_create'),
+            403,
+            'You are not allowed to municipal meeting access'
+        );
+
+        MunicipalMeetingDecision::create($request->validated());
+
+        return back();
     }
 
     public function show(MunicipalMeetingDecision $municipalMeetingDecision)
     {
-        //
+        abort_if(Gate::denies('municipalMeeting_access'),
+            403,
+            'You are not allowed to municipal meeting access'
+        );
     }
 
     public function edit(MunicipalMeetingDecision $municipalMeetingDecision)
     {
-        //
+        abort_if(Gate::denies('municipalMeeting_edit'),
+            403,
+            'You are not allowed to municipal meeting access'
+        );
     }
 
-    public function update(Request $request, MunicipalMeetingDecision $municipalMeetingDecision)
+    public function update(UpdateDecisionRequest $request, MunicipalMeetingDecision $municipalMeetingDecision)
     {
-        //
+        abort_if(Gate::denies('municipalMeeting_edit'),
+            403,
+            'You are not allowed to municipal meeting access'
+        );
+
+        if($request->hasFile('decision_file'))
+        {
+            if($municipalMeetingDecision->decision_file)
+            {
+                $this->deleteFile($municipalMeetingDecision->decision_file);
+            }
+        }
+
+        $municipalMeetingDecision->update($request->validated());
+        return back();
     }
 
     public function destroy(MunicipalMeetingDecision $municipalMeetingDecision)
     {
-        //
+        abort_if(Gate::denies('municipalMeeting_delete'),
+            403,
+            'You are not allowed to municipal meeting access'
+        );
+
+        $municipalMeetingDecision->delete();
+
+        return back();
     }
 }

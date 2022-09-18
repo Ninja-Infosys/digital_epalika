@@ -63,9 +63,9 @@
                                             class="form-select @error('type') is-invalid @enderror"
                                             id="type">
                                         <option value=""> छान्नुहोस्</option>
-                                        @foreach(config('meetingType') as $key=>$metting)
-                                            <option value="{{$key}}" {{old('type',$key) ==$municipalMeetingNotice->type ? 'selected':''}}>
-                                                {{$metting}}
+                                        @foreach(config('meetingType') as $key=>$type)
+                                            <option value="{{$type}}" {{old('type',$type)==$municipalMeetingNotice->type?'selected':''}}>
+                                                {{$key}}
                                             </option>
                                         @endforeach
                                     </select>

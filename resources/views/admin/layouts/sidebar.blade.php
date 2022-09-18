@@ -111,8 +111,8 @@
                                             </li>
                                         @endcan
                                         @can('dispatch_access')
-                                            <li class="{{request()->routeIs('admin.circular.dispatch.report') ? 'active' : ''}}">
-                                                <a href="{{route('admin.circular.dispatch.report')}}">
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDecision.index') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}">
                                                     <span> निर्णयहरु</span>
                                                 </a>
                                             </li>

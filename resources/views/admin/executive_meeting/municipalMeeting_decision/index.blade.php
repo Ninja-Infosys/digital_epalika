@@ -48,12 +48,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($municipalMeetingNotices as $municipalMeetingNotice)
+                            @forelse($municipalMeetingDecisions as $municipalMeetingDecision)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$municipalMeetingNotice->broadcast_date ? $municipalMeetingNotice->broadcast_date->toDateString() :''}}</td>
-                                    <td>{{$municipalMeetingNotice->type}}</td>
-                                    <td>{{$municipalMeetingNotice->meeting_subject}}</td>
+                                    <td>{{$municipalMeetingDecision->municipalMeetingNotice->meeting_subject??''}}</td>
 
                                     <td>
                                         @can('municipalMeeting_edit')
