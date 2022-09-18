@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\WardMeetingNotice\StoreNoticeRequest;
 use App\Http\Requests\ExecutiveMeeting\WardMeetingNotice\UpdateNoticeRequest;
-use App\Models\ExecutiveMeeting\MunicipalMeetingNotice;
 use App\Models\ExecutiveMeeting\WardMeetingNotice;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class WardMeetingNoticeController extends Controller
