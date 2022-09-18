@@ -24,4 +24,14 @@ class UpdateNoticeRequest extends FormRequest
         ];
 
     }
+
+    public function messages()
+    {
+        return [
+            'broadcast_date.required' => 'प्रसारण मिति आवश्यक छ',
+            'type.required' => 'प्रकार आवश्यक छ',
+            'meeting_subject.required' => 'बैठक विषय आवश्यक छ',
+            'description.required' => 'विवरण आवश्यक छ'
+        ];
+    }
 }
