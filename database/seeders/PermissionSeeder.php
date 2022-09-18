@@ -32,6 +32,10 @@ class PermissionSeeder extends Seeder
             ['title' => 'municipalMeeting_create'],
             ['title' => 'municipalMeeting_edit'],
             ['title' => 'municipalMeeting_delete'],
+            ['title' => 'wardMeeting_access'],
+            ['title' => 'wardMeeting_create'],
+            ['title' => 'wardMeeting_edit'],
+            ['title' => 'wardMeeting_delete'],
 
             ['title' => 'listRegistration_access'],
             ['title' => 'listRegistration_create'],
