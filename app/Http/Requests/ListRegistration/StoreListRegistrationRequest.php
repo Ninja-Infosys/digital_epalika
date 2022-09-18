@@ -29,7 +29,26 @@ class StoreListRegistrationRequest extends FormRequest
             'pan_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'tax_payment_certificate' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'license_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
-            'date'=>['required'],
+            'date' => ['required'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'registration_no.required' => 'दर्ता नम्बर आवश्यक छ',
+            'registration_type.unique' => 'दर्ता नम्बर अद्वितीय छ',
+            'application_type.required' => 'दर्ता प्रकार आवश्यक छ',
+            'address.required' => 'ठेगाना आवश्यक छ',
+            'mailing_address.required' => 'मेलिङ ठेगाना आवश्यक छ',
+            'mobile_no.required' => 'मोबाइल न. अनिबार्य छ ',
+            'main_person.required' => 'मुख्य व्यक्ति आवश्यक छ',
+            'application_photo.mimes' => 'फोटो अनिबार्य jpeg, png, jpeg, pdf मा हुनुपर्छ ',
+            'registration_certificate.mimes' => 'प्रमाण पत्र अनिबार्य jpg, jpeg, png, pdf मा हुनुपर्छ ',
+            'pan_photo' => 'पाना फोटो अनिबार्य jpeg, jpg, png, pdf मा हुनुपर्छ ',
+            'tax_payment_certificate.mimes' => 'कर तिरेको प्रमाण पत्र अनिबार्य jpg, jpeg, png, pdf मा हुनुपर्छ ',
+            'license_photo.mimes' => 'लाइसेन्सको फोटो अनिबार्य jpeg, jpg, png, pdf मा हुनुपर्छ ',
+            'date.required' => 'मिति अनिबार्य छ '
         ];
     }
 }

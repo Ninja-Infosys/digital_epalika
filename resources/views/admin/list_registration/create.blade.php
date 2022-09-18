@@ -52,10 +52,10 @@
                                     <input
                                         type="text"
                                         name="registration_no"
-                                        value="{{old('registration_no')}}"
+                                        value="{{old('registration_no',$registration_no)}}"
                                         class="form-control @error('name') is-invalid @enderror"
                                         id="registration_no"
-                                        placeholder="नाम"
+                                        placeholder="दर्ता नम्बर"
                                     />
                                     @error('registration_no')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -69,7 +69,7 @@
                                         <option value="">छान्नुहोस्</option>
                                         @foreach(config('defaults.applicant_types') as $applicant_type)
                                             <option
-                                                value="$applicant_type" {{$applicant_type==old('applicant_type') ? 'selected' : ''}}>
+                                                value="{{$applicant_type}}" {{$applicant_type==old('applicant_type') ? 'selected' : ''}}>
                                                 {{$applicant_type}}
                                             </option>
                                         @endforeach
@@ -235,13 +235,13 @@
                                     <label for="mobile_no" class="form-label">मोबाइल नम्बर *</label>
                                     <input
                                         type="text"
-                                        name="mobile_no"
+                                        name=""
                                         value="{{old('mobile_no')}}"
-                                        class="form-control @error('mobile_no') is-invalid @enderror"
+                                        class="form-control @error('') is-invalid @enderror"
                                         id="mobile_no"
                                         placeholder="मोबाइल नम्बर"
                                     />
-                                    @error('mobile_no')
+                                    @error('')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

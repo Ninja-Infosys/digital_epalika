@@ -7,7 +7,9 @@ use App\Http\Requests\ListRegistration\StoreListRegistrationRequest;
 use App\Http\Requests\ListRegistration\UpdateListRegistrationRequest;
 use App\Models\ListRegistration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class ListRegistrationController extends Controller
 {
@@ -29,8 +31,9 @@ class ListRegistrationController extends Controller
             403,
             'You are not allowed to list registration create'
         );
+        $registration_no = 'R-' . Str::padLeft(DB::table('list_registrations')->max('id') + 1, 2, 0);
 
-        return view('admin.list_registration.create');
+        return view('admin.list_registration.create', compact('registration_no'));
     }
 
     public function store(StoreListRegistrationRequest $request)
