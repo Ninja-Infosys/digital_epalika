@@ -15,6 +15,10 @@ class WardMeetingNoticeController extends Controller
             403,
             'You are not allowed to ward meeting access'
         );
+
+        $wardMeetingNotices = WardMeetingNotice::orderByDesc('broadcast_date')->get();
+
+        return view('admin.executive_meeting.wardMeeting_notice.index', compact('wardMeetingNotices'));
     }
 
     public function create()
