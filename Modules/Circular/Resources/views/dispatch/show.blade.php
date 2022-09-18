@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        @foreach($dispatch->circularDocuments as $document)
+                        @foreach($dispatch->files as $document)
                             <div class="col-md-4 mb-3">
                                 <div class="card">
                                     <div class="card-header">

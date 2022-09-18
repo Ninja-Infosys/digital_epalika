@@ -62,7 +62,7 @@ class RegistrationController extends Controller
             403,
             'You are not allowed to registration access'
         );
-        $registration->load('circularDocuments');
+        $registration->load('files');
 
         return view('circular::registration.show', compact('registration'));
     }
