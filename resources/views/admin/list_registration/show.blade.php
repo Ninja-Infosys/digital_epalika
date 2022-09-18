@@ -124,7 +124,8 @@
                             <div class="col-md-4 mb-3">
                                 <div class="card">
                                     <div class="card-header">
-                                    <span style="float: right">
+                                    <span style="display: flex;justify-content: space-between;">
+                                        <p>{{$document->file_name}}</p>
                                         <form action="{{route('admin.file.destroy',$document)}}" method="post">
                                             @csrf
                                             @method('delete')
