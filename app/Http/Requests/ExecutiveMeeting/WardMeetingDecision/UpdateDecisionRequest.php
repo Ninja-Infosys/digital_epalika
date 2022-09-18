@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\ExecutiveMeeting\MunicipalMeetingDecision;
+namespace App\Http\Requests\ExecutiveMeeting\WardMeetingDecision;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
@@ -10,13 +10,13 @@ class UpdateDecisionRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('municipalMeeting_edit');
+        return Gate::allows('wardMeeting_edit');
     }
 
     public function rules(): array
     {
         return [
-            'municipal_meeting_notice_id' => ['required', Rule::exists('municipal_meeting_notices', 'id')->withoutTrashed()],
+            'ward_meeting_notice_id' => ['required', Rule::exists('ward_meeting_notices', 'id')->withoutTrashed()],
             'subject' => ['nullable', 'string'],
             'date' => ['nullable'],
             'description' => ['nullable'],

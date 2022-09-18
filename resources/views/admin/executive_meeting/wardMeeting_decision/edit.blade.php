@@ -1,0 +1,121 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="">निर्णयहरु</a>
+                        </li>
+                        <li class="breadcrumb-item active">निर्णयहरु सम्पादन गर्नुहोस</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">निर्णयहरु </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">निर्णयहरु सम्पादन गर्नुहोस</h4>
+                        <a href="{{route('admin.executiveMeeting.wardMeetingDecision.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> निर्णयहरु बिवरण
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="{{route('admin.executiveMeeting.wardMeetingDecision.update',$wardMeetingDecision)}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('put')
+                        <fieldset class="border p-2 mb-2">
+                            <legend class="font-16 text-info">
+                                <strong> विवरण </strong>
+                            </legend>
+                            <div class="row">
+
+                                <div class="col-md-6 mb-2">
+                                    <label for="ward_meeting_notice_id" class="form-label">विषय *</label>
+                                    <select name="ward_meeting_notice_id"
+                                            class="form-select @error('ward_meeting_notice_id') is-invalid @enderror"
+                                            id="ward_meeting_notice_id">
+                                        <option value=""> छान्नुहोस्</option>
+                                        @foreach($wardMeetingNotices as $wardMeetingNotice)
+                                            <option value="{{$wardMeetingNotice->id}}" {{old('ward_meeting_notice_id',$wardMeetingNotice->id)== $wardMeetingDecision->ward_meeting_notice_id ? 'selected':''}}>
+                                                {{$wardMeetingNotice->meeting_subject}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('municipal_meeting_notice_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="date" class="form-label"> मिति *  </label>
+                                    <input
+                                        type="text"
+                                        name="date"
+                                        value="{{old('date',$wardMeetingDecision->date)}}"
+                                        class="form-control @error('date') is-invalid @enderror"
+                                        id="date"
+                                        placeholder="मिति"
+                                    />
+                                    @error('date')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <label for="subject" class="form-label"> विषय *  </label>
+                                    <input
+                                        type="text"
+                                        name="subject"
+                                        value="{{old('subject',$wardMeetingDecision->subject)}}"
+                                        class="form-control @error('subject') is-invalid @enderror"
+                                        id="subject"
+                                        placeholder="विषय"
+                                    />
+                                    @error('subject')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <label for="description" class="form-label">बिवरण * </label>
+                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5" class="form-control @error('description') is-invalid @enderror">{{old('description',$wardMeetingDecision->description)}}</textarea>
+                                    @error('description')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <label for="decision_file" class="form-label"> फाईल *  </label>
+                                    <input
+                                        type="file"
+                                        name="decision_file"
+                                        class="form-control @error('decision_file') is-invalid @enderror"
+                                        id="decision_file"
+
+                                    />
+                                    @error('decision_file')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

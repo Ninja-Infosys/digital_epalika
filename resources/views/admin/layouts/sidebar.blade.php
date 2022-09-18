@@ -131,15 +131,15 @@
                                 <div class="collapse" id="sidebarExecutiveMeetingWard">
                                     <ul class="nav-second-level">
                                         @can('registration_access')
-                                            <li class="{{request()->routeIs('admin.circular.registration.report') ? 'active' : ''}}">
-                                                <a href="{{route('admin.circular.registration.report')}}">
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingNotice.index') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.wardMeetingNotice.index')}}">
                                                     <span> सूचना प्रशारण </span>
                                                 </a>
                                             </li>
                                         @endcan
                                         @can('dispatch_access')
-                                            <li class="{{request()->routeIs('admin.circular.dispatch.report') ? 'active' : ''}}">
-                                                <a href="{{route('admin.circular.dispatch.report')}}">
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDecision.index') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.wardMeetingDecision.index')}}">
                                                     <span> निर्णयहरु</span>
                                                 </a>
                                             </li>

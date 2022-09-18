@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">सूचना प्रशारण </a>
+                            <a href="">निर्णयहरु </a>
                         </li>
-                        <li class="breadcrumb-item active">सूचना प्रशारण </li>
+                        <li class="breadcrumb-item active">नयाँ निर्णयहरु थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सूचना प्रशारण</h4>
+                <h4 class="page-title">निर्णयहरु</h4>
             </div>
         </div>
     </div>
@@ -26,11 +26,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> पालिका सूचना प्रशारण सूची</h4>
+                        <h4 class="header-title">नयाँ निर्णयहरु थप्नुहोस्</h4>
                         @can('municipalMeeting_access')
-                            <a href="{{route('admin.executiveMeeting.municipalMeetingNotice.create')}}"
+                            <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ सूचना प्रशारण थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ निर्णयहरु थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -41,8 +41,8 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>सूचना प्रसारण मिति</th>
-                                <th>प्रकार</th>
+                                <th>विषय</th>
+                                <th>मिति</th>
                                 <th>बैठकको बिषय </th>
                                 <th>#</th>
                             </tr>
@@ -52,16 +52,18 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$municipalMeetingDecision->municipalMeetingNotice->meeting_subject??''}}</td>
+                                    <td>{{$municipalMeetingDecision->date ? $municipalMeetingDecision->date->toDateString():'' }}</td>
+                                    <td>{{$municipalMeetingDecision->subject}}</td>
 
                                     <td>
                                         @can('municipalMeeting_edit')
-                                            <a href="{{route('admin.executiveMeeting.municipalMeetingNotice.edit',$municipalMeetingNotice)}}"
+                                            <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.edit',$municipalMeetingDecision)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
                                         @can('municipalMeeting_delete')
-                                            <form action="{{route('admin.executiveMeeting.municipalMeetingNotice.destroy',$municipalMeetingNotice)}}"
+                                            <form action="{{route('admin.executiveMeeting.municipalMeetingDecision.destroy',$municipalMeetingDecision)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

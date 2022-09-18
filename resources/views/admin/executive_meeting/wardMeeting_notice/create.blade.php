@@ -62,13 +62,13 @@
                                             class="form-select @error('type') is-invalid @enderror"
                                             id="type">
                                         <option value=""> छान्नुहोस्</option>
-                                        @foreach(config('meetingType') as $key=>$metting)
-                                            <option value="{{$key}}">
-                                                {{$metting}}
+                                        @foreach(config('meetingType') as $key=>$type)
+                                            <option value="{{$type}}">
+                                                {{$key}}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('role_id')
+                                    @error('type')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

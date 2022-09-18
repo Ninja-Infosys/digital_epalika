@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -14,7 +13,7 @@
                         <li class="breadcrumb-item">
                             <a href="">सूचना प्रशारण</a>
                         </li>
-                        <li class="breadcrumb-item active"> नयाँ सूचना प्रशारण थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">सूचना प्रशारण सम्पादन गर्नुहोस</li>
                     </ol>
                 </div>
                 <h4 class="page-title">सूचना प्रशारण</h4>
@@ -27,7 +26,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ सूचना प्रशारण थप्नुहोस्</h4>
+                        <h4 class="header-title">सूचना प्रशारण सम्पादन गर्नुहोस</h4>
                         <a href="{{route('admin.executiveMeeting.municipalMeetingNotice.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> सूचना प्रशारण बिवरण
                         </a>

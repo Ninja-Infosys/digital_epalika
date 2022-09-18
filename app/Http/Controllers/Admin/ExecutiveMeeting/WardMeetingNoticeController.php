@@ -38,7 +38,7 @@ class WardMeetingNoticeController extends Controller
             403,
             'You are not allowed to ward meeting create'
         );
-
+//        dd($request->validated());
         WardMeetingNotice::create($request->validated());
 
         toast('सूचना सफलतापूर्वक थपियो','success');
