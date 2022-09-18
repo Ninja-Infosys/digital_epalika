@@ -34,6 +34,8 @@ class ListRegistration extends Model
         'pan_photo',
         'tax_payment_certificate',
         'license_photo',
+        'business_nature',
+        'business_nature_description',
         'date',
     ];
 

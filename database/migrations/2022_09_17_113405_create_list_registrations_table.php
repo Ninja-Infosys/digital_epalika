@@ -22,6 +22,8 @@ return new class extends Migration {
             $table->string('pan_photo')->nullable();
             $table->string('tax_payment_certificate')->nullable();
             $table->string('license_photo')->nullable();
+            $table->string('business_nature')->nullable();
+            $table->longText('business_nature_description')->nullable();
             $table->string('date')->nullable();
             $table->timestamps();
             $table->softDeletes();

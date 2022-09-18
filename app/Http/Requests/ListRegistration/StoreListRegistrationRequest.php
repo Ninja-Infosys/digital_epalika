@@ -29,6 +29,8 @@ class StoreListRegistrationRequest extends FormRequest
             'pan_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'tax_payment_certificate' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'license_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
+            'business_nature' => ['required', Rule::in(config('defaults.business_natures'))],
+            'business_nature_description' => ['required'],
             'date' => ['required'],
             'files' => ['nullable', 'array'],
             'files.*.file_name' => ['required'],
@@ -51,7 +53,7 @@ class StoreListRegistrationRequest extends FormRequest
             'pan_photo' => 'पाना फोटो अनिबार्य jpeg, jpg, png, pdf मा हुनुपर्छ ',
             'tax_payment_certificate.mimes' => 'कर तिरेको प्रमाण पत्र अनिबार्य jpg, jpeg, png, pdf मा हुनुपर्छ ',
             'license_photo.mimes' => 'लाइसेन्सको फोटो अनिबार्य jpeg, jpg, png, pdf मा हुनुपर्छ ',
-            'date.required' => 'मिति अनिबार्य छ '
+            'date.required' => 'मिति अनिबार्य छ'
         ];
     }
 }

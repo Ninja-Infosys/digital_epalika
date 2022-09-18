@@ -29,6 +29,8 @@ class UpdateListRegistrationRequest extends FormRequest
             'pan_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'tax_payment_certificate' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'license_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
+            'business_nature' => ['required', Rule::in(config('defaults.business_natures'))],
+            'business_nature_description' => ['required'],
             'date' => ['required'],
             'files' => ['nullable', 'array'],
             'files.*.file_name' => ['required'],
