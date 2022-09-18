@@ -15,6 +15,10 @@ class WardMeetingDecisionController extends Controller
             403,
             'You are not allowed to ward meeting access'
         );
+
+        $wardMeetingDecisions = WardMeetingDecision::orderByDesc('date')->get();
+
+        return view('admin.executive_meeting.wardMeeting_decision.index', compact('wardMeetingDecisions'));
     }
 
     public function create()
@@ -23,6 +27,8 @@ class WardMeetingDecisionController extends Controller
             403,
             'You are not allowed to ward meeting create'
         );
+
+        return view('admin.executive_meeting.wardMeeting_decision.create');
     }
 
     public function store(Request $request)
