@@ -73,7 +73,9 @@
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण </label>
-                                    <textarea name="description" id="description" placeholder="बिवरण"  class="form-control" cols="30" rows="5">{{old('description',$notice->description)}}</textarea>
+                                    <textarea name="description" id="description" placeholder="बिवरण"
+                                              class="form-control" cols="30"
+                                              rows="5">{{old('description',$notice->description)}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -88,4 +90,16 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".nepali_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    ndpYear: true
+                });
+            });
+        </script>
+    @endpush
 @endsection

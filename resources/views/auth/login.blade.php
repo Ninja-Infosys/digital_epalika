@@ -34,7 +34,7 @@
 <div class="mt-5 mb-5">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="card">
                     <div class="row">
                         <div class="col-md-5 system_info">

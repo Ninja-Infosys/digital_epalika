@@ -136,17 +136,6 @@
     });
 </script>
 
-<script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".nepali_date").nepaliDatePicker({
-            ndpYear:true,
-            ndpMonth:true,
-            ndpYear:true
-        });
-    });
-</script>
-
 @include('sweetalert::alert')
 
 @stack('scripts')
