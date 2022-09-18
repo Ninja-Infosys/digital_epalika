@@ -52,7 +52,8 @@ class OfficeSetting extends Model
         return [
             'province_id' => $this->attributes['province_id'],
             'district_id' => $this->attributes['district_id'],
-            'local_body_id' => $this->attributes['local_body_id']
+            'local_body_id' => $this->attributes['local_body_id'],
+            'ward_no' => $this->attributes['ward_no'],
         ];
     }
 
