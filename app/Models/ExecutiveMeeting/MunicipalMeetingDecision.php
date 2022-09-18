@@ -4,29 +4,30 @@ namespace App\Models\ExecutiveMeeting;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MunicipalMeetingNotice extends Model
+class MunicipalMeetingDecision extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $dates = [
-        'broadcast_date',
+        'date',
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
     protected $fillable = [
-        'broadcast_date',
-        'type',
-        'meeting_subject',
+        'municipal_meeting_notice_id',
+        'subject',
+        'date',
         'description',
+        'decision_file',
     ];
 
-    public function municipalMeetingDecisions(): HasMany
+    public function municipalMeetingNotice(): BelongsTo
     {
-        return $this->hasMany(MunicipalMeetingDecision::class);
+        return $this->belongsTo(MunicipalMeetingNotice::class);
     }
 }
