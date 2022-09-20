@@ -103,6 +103,6 @@ class WardMeetingNoticeController extends Controller
     {
         $model_type = WardMeetingNotice::class;
 
-        return view('admin.executive_meeting.municipalMeeting_notice.meeting_report', compact('model_type'));
+        return view('admin.executive_meeting.wardMeeting_notice.meeting_report', compact('model_type'));
     }
 }

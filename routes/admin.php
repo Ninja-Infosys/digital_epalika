@@ -50,6 +50,7 @@ Route::prefix('executiveMeeting')->as('executiveMeeting.')->group(function () {
     Route::resource('municipalCommittee', MunicipalCommitteeController::class);
     Route::resource('wardCommittee', WardCommitteeController::class);
     Route::get('municipalMeetingDetails', [MunicipalMeetingNoticeController::class, 'municipalMeetingDetails'])->name('municipalMeetingDetails');
+    Route::get('municipalMeetingDetails/report', [MunicipalMeetingNoticeController::class, 'municipalMeetingDetailsReport'])->name('municipalMeetingDetailsReport');
     Route::resource('municipalMeetingNotice', MunicipalMeetingNoticeController::class);
     Route::resource('municipalMeetingDecision', MunicipalMeetingDecisionController::class);
     Route::get('wardMeetingDetails', [WardMeetingNoticeController::class, 'wardMeetingDetails'])->name('wardMeetingDetails');

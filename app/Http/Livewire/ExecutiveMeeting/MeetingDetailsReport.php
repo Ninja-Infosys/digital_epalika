@@ -28,10 +28,10 @@ class MeetingDetailsReport extends Component
         $this->meetingDetails = MeetingDetail::where('model_type', $this->model_type)->latest()
             ->where(function ($query) {
                 if (!empty($this->from_date)) {
-                    $query->whereDate('from_date', '<=', $this->from_date);
+                    $query->whereDate('meeting_date', '>=', $this->from_date);
                 }
                 if (!empty($this->to_date)) {
-                    $query->whereDate('to_date', '>=', $this->to_date);
+                    $query->whereDate('meeting_date', '<=', $this->to_date);
                 }
             })
             ->latest()

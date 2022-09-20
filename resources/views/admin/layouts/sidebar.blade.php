@@ -110,18 +110,19 @@
                                                     <span> सूचना प्रशारण </span>
                                                 </a>
                                             </li>
-                                        @endcan
-                                        @can('municipalMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDetails') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.municipalMeetingDetails')}}">
                                                     <span> बैठक बिबरण </span>
                                                 </a>
                                             </li>
-                                        @endcan
-                                        @can('municipalMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDecision.index') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}">
                                                     <span> निर्णयहरु</span>
+                                                </a>
+                                            </li>
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDetailsReport') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.municipalMeetingDetailsReport')}}">
+                                                    <span> बैठक बिबरण रिपोर्ट </span>
                                                 </a>
                                             </li>
                                         @endcan
@@ -144,26 +145,22 @@
                                                     <span> सूचना प्रशारण </span>
                                                 </a>
                                             </li>
-                                        @endcan
-                                        @can('wardMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDetails') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.wardMeetingDetails')}}">
                                                     <span> बैठक बिबरण </span>
                                                 </a>
                                             </li>
-                                        @endcan
-                                        @can('wardMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDecision.index') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.wardMeetingDecision.index')}}">
                                                     <span> निर्णयहरु</span>
                                                 </a>
                                             </li>
-                                        @endcan
                                             <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDetailsReport') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.wardMeetingDetailsReport')}}">
                                                     <span> बैठक बिबरण रिपोर्ट </span>
                                                 </a>
                                             </li>
+                                        @endcan
                                     </ul>
                                 </div>
                             </li>
