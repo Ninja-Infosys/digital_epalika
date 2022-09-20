@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\EMap\Http\Controllers;
 
-use App\Models\Organization;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Modules\EMap\Entities\Organization;
 
 class OrganizationAuthController extends Controller
 {
 
     public function showOrganizationLoginForm()
     {
-        return view('organization.auth.login', ['url' => 'admin']);
+        return view('emap::organization.auth.login');
     }
 
     public function organizationLogin(Request $request)
@@ -40,7 +39,7 @@ class OrganizationAuthController extends Controller
 
     public function showOrganizationRegisterForm()
     {
-        return view('organization.auth.register', ['url' => 'admin']);
+        return view('emap::organization.auth.register');
     }
 
     protected function registerOrganization(Request $request)

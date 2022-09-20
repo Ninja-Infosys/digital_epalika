@@ -23,6 +23,10 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->group(module_path('EMap', '/Routes/web.php'));
+
+        Route::middleware(['web', 'auth:organization', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+            ->prefix('organization/admin')
+            ->as('organization.admin.')->group(base_path('/Modules/EMap/Routes/organization/admin.php'));
     }
 
     protected function mapApiRoutes()
