@@ -8,7 +8,6 @@ class MeetingNotice extends Component
 {
     public $type;
     public $meeting_at;
-    public $meeetingNorice;
 
     public function mount($meetingNotice = null)
     {

@@ -5,10 +5,9 @@ namespace App\Models\Settings\Units;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MeasurementUnit extends Model
+class Unit extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -19,17 +18,14 @@ class MeasurementUnit extends Model
     ];
 
     protected $fillable = [
-        'type_id',
+        'measurement_unit_id',
         'title',
+        'position',
+        'is_smallest',
     ];
 
-    public function type(): BelongsTo
+    public function measurementUnit(): BelongsTo
     {
-        return $this->belongsTo(Type::class);
-    }
-
-    public function unit(): HasMany
-    {
-        return $this->hasMany(Unit::class);
+        return $this->belongsTo(MeasurementUnit::class);
     }
 }

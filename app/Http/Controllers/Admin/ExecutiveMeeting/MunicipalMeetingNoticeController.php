@@ -98,4 +98,11 @@ class MunicipalMeetingNoticeController extends Controller
 
         return view('admin.executive_meeting.municipalMeeting_notice.meetingDetails', compact('meetingDetails'));
     }
+
+    public function municipalMeetingDetailsReport()
+    {
+        $model_type = MunicipalMeetingNotice::class;
+
+        return view('admin.executive_meeting.municipalMeeting_notice.meeting_report', compact('model_type'));
+    }
 }

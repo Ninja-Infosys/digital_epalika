@@ -110,18 +110,19 @@
                                                     <span> सूचना प्रशारण </span>
                                                 </a>
                                             </li>
-                                        @endcan
-                                        @can('municipalMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDetails') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.municipalMeetingDetails')}}">
                                                     <span> बैठक बिबरण </span>
                                                 </a>
                                             </li>
-                                        @endcan
-                                        @can('municipalMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDecision.index') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}">
                                                     <span> निर्णयहरु</span>
+                                                </a>
+                                            </li>
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDetailsReport') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.municipalMeetingDetailsReport')}}">
+                                                    <span> बैठक बिबरण रिपोर्ट </span>
                                                 </a>
                                             </li>
                                         @endcan
@@ -144,18 +145,19 @@
                                                     <span> सूचना प्रशारण </span>
                                                 </a>
                                             </li>
-                                        @endcan
-                                        @can('wardMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDetails') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.wardMeetingDetails')}}">
                                                     <span> बैठक बिबरण </span>
                                                 </a>
                                             </li>
-                                        @endcan
-                                        @can('wardMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDecision.index') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.wardMeetingDecision.index')}}">
                                                     <span> निर्णयहरु</span>
+                                                </a>
+                                            </li>
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDetailsReport') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.wardMeetingDetailsReport')}}">
+                                                    <span> बैठक बिबरण रिपोर्ट </span>
                                                 </a>
                                             </li>
                                         @endcan
@@ -318,39 +320,44 @@
                                 </li>
                             @endcan
 
-                                <li>
-                                    <a href="#sidebarUnits" data-bs-toggle="collapse">
-                                        <span>मापन एकाइ</span>
-                                        <span class="menu-arrow">
+                            <li>
+                                <a href="#sidebarUnits" data-bs-toggle="collapse">
+                                    <span>मापन एकाइ</span>
+                                    <span class="menu-arrow">
                                         <i class="fa fa-angle-right"></i>
                                     </span>
-                                    </a>
-                                    <div class="collapse" id="sidebarUnits">
-                                        <ul class="nav-second-level">
-                                            @can('unitType_access')
-                                                <li class="{{request()->routeIs('admin.units.type.*') ? 'active' : ''}}">
-                                                    <a href="{{route('admin.units.type.index')}}">
-                                                        <span> प्रकार </span>
-                                                    </a>
-                                                </li>
-                                            @endcan
-                                            @can('MeasurementUnit_access')
-                                                <li class="{{request()->routeIs('admin.units.measurementUnit.*') ? 'active' : ''}}">
-                                                    <a href="{{route('admin.units.measurementUnit.index')}}">
-                                                        <span> विविधता </span>
-                                                    </a>
-                                                </li>
-                                            @endcan
+                                </a>
+                                <div class="collapse" id="sidebarUnits">
+                                    <ul class="nav-second-level">
+                                        @can('unitType_access')
+                                            <li class="{{request()->routeIs('admin.units.type.*') ? 'active' : ''}}">
+                                                <a href="{{route('admin.units.type.index')}}">
+                                                    <span> प्रकार </span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('MeasurementUnit_access')
+                                            <li class="{{request()->routeIs('admin.units.measurementUnit.*') ? 'active' : ''}}">
+                                                <a href="{{route('admin.units.measurementUnit.index')}}">
+                                                    <span> विविधता </span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('unit_access')
+                                            <li class="{{request()->routeIs('admin.units.unit.*') ? 'active' : ''}}">
+                                                <a href="{{route('admin.units.unit.index')}}">
+                                                    <span> एकाई </span>
+                                                </a>
+                                            </li>
+                                        @endcan
 
-                                        </ul>
-                                    </div>
-                                </li>
+                                    </ul>
+                                </div>
+                            </li>
 
                             <li class="{{request()->routeIs('admin.officeSetting.index') ? 'active':''}}">
                                 <a href="{{route('admin.officeSetting.index')}}"> कार्यालय सेटिङ</a>
                             </li>
-
-
                         </ul>
                     </div>
                 </li>

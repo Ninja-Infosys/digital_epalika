@@ -27,13 +27,15 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ निर्णयहरु थप्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.wardMeetingDecision.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.executiveMeeting.wardMeetingDecision.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> निर्णयहरु बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.wardMeetingDecision.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.executiveMeeting.wardMeetingDecision.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
 
                         <fieldset class="border p-2 mb-2">
@@ -43,23 +45,24 @@
                             <div class="row">
 
                                 <div class="col-md-6 mb-2">
-                                    <label for="ward_meeting_notice_id" class="form-label"> 	बैठक *</label>
-                                    <select name="ward_meeting_notice_id"
-                                            class="form-select @error('ward_meeting_notice_id') is-invalid @enderror"
-                                            id="ward_meeting_notice_id">
+                                    <label for="meeting_detail_id" class="form-label"> बैठक *</label>
+                                    <select name="meeting_detail_id"
+                                            class="form-select @error('meeting_detail_id') is-invalid @enderror"
+                                            id="meeting_detail_id">
                                         <option value=""> छान्नुहोस्</option>
-                                        @foreach($wardMeetingNotices as $wardMeetingNotice)
-                                            <option value="{{$wardMeetingNotice->id}}" {{old('ward_meeting_notice_id')==$wardMeetingNotice->id ? 'selected':''}}>
-                                                {{$wardMeetingNotice->meeting_subject}}
+                                        @foreach($meetingdetails as $meetingDetail)
+                                            <option
+                                                value="{{$meetingDetail->id}}" {{old('ward_meeting_notice_id')==$meetingDetail->id ? 'selected':''}}>
+                                                {{$meetingDetail->meeting_subject}}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('ward_meeting_notice_id')
+                                    @error('meeting_detail_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label"> मिति *  </label>
+                                    <label for="date" class="form-label"> मिति * </label>
                                     <input
                                         type="text"
                                         name="date"
@@ -74,7 +77,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-2">
-                                    <label for="subject" class="form-label"> विषय *  </label>
+                                    <label for="subject" class="form-label"> विषय * </label>
                                     <input
                                         type="text"
                                         name="subject"
@@ -90,13 +93,14 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण * </label>
-                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5" class="form-control @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
+                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5"
+                                              class="form-control @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="decision_file" class="form-label"> फाईल *  </label>
+                                    <label for="decision_file" class="form-label"> फाईल * </label>
                                     <input
                                         type="file"
                                         name="decision_file"
