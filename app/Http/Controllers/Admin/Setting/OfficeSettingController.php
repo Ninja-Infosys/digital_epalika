@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
-use App\Models\OfficeSetting;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 

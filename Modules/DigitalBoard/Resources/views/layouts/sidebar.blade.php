@@ -18,24 +18,17 @@
             @can('digitalBoardNotice_access')
                 <li class="{{request()->routeIs('admin.digitalBoard.notice.index') ? 'active' : ''}}">
                     <a href="{{route('admin.digitalBoard.notice.index')}}">
-                        <span> सूचनाहरु</span>
+                        <span> सूचना / समाचार</span>
                     </a>
                 </li>
             @endcan
-                @can('digitalBoardNews_access')
-                    <li class="{{request()->routeIs('admin.digitalBoard.news.index') ? 'active' : ''}}">
-                        <a href="{{route('admin.digitalBoard.news.index')}}">
-                            <span> समाचारहरु</span>
-                        </a>
-                    </li>
-                @endcan
-                @can('employee_access')
-                    <li class="{{request()->routeIs('admin.digitalBoard.employee.index') ? 'active' : ''}}">
-                        <a href="{{route('admin.digitalBoard.employee.index')}}">
-                            <span> कर्मचारीहरु</span>
-                        </a>
-                    </li>
-                @endcan
+            @can('employee_access')
+                <li class="{{request()->routeIs('admin.digitalBoard.employee.index') ? 'active' : ''}}">
+                    <a href="{{route('admin.digitalBoard.employee.index')}}">
+                        <span> कर्मचारीहरु</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

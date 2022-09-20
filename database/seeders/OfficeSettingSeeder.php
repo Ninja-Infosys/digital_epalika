@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\OfficeSetting;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Seeder;
 
 class OfficeSettingSeeder extends Seeder

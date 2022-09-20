@@ -41,6 +41,21 @@ class PermissionSeeder extends Seeder
             ['title' => 'listRegistration_create'],
             ['title' => 'listRegistration_edit'],
             ['title' => 'listRegistration_delete'],
+
+            ['title' => 'unitType_access'],
+            ['title' => 'unitType_create'],
+            ['title' => 'unitType_edit'],
+            ['title' => 'unitType_delete'],
+
+            ['title' => 'MeasurementUnit_access'],
+            ['title' => 'MeasurementUnit_create'],
+            ['title' => 'MeasurementUnit_edit'],
+            ['title' => 'MeasurementUnit_delete'],
+
+            ['title' => 'unit_access'],
+            ['title' => 'unit_create'],
+            ['title' => 'unit_edit'],
+            ['title' => 'unit_delete'],
         ];
 
         foreach ($permissions as $permission) {
