@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.notice.index')}}">डिजिटल बोर्ड</a>
+                            <a href="{{route('admin.digitalBoard.notice.index')}}">सूचना / समाचार</a>
                         </li>
-                        <li class="breadcrumb-item active">सूचना </li>
+                        <li class="breadcrumb-item active">सूचना / समाचार </li>
                     </ol>
                 </div>
-                <h4 class="page-title">सूचना </h4>
+                <h4 class="page-title">सूचना / समाचार </h4>
             </div>
         </div>
     </div>
@@ -27,11 +27,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सूचना सूची</h4>
+                        <h4 class="header-title">सूचना / समाचार सूची</h4>
                         @can('user_create')
                             <a href="{{route('admin.digitalBoard.notice.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ सूचना थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ सूचना / समाचार थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -44,6 +44,8 @@
                                 <th>क्र.स</th>
                                 <th>शिर्षक </th>
                                 <th>मिति </th>
+                                <th>होम पेजमा  देखाउनु होस् </th>
+                                <th>स्थिति </th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -54,6 +56,27 @@
                                     <td>{{$notice->title}}</td>
                                     <td>{{$notice->date->toDateString()}}</td>
                                     <td>
+                                        <a href="{{route('admin.digitalBoard.notice.updateShowOnIndex',$notice)}}"
+                                           class="btn btn-xs btn-outline-{{$notice->show_on_index==1 ?'primary':'danger'}}">
+                                            <i class="fa  {{$notice->show_on_index==1 ?' fa-check':'fa-window-close'}}"></i>
+
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.digitalBoard.notice.updateClosedDate',$notice)}}"
+                                           class="btn btn-xs btn-outline-{{$notice->closed_at==null ?'primary':'danger'}}">
+                                            <i class="fa  {{$notice->closed_at==null ?' fa-check':'fa-window-close'}}"></i>
+
+
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.digitalBoard.notice.show',$notice)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-eye"></i>
+
+
+                                        </a>
                                         <a href="{{route('admin.digitalBoard.notice.edit',$notice)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
@@ -70,7 +93,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="4">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

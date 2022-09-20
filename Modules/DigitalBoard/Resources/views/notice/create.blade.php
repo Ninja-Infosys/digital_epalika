@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.notice.index')}}">सूचना </a>
+                            <a href="{{route('admin.digitalBoard.notice.index')}}">सूचना / समाचार </a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ सूचना थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">नयाँ सूचना /समाचार थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सूचना </h4>
+                <h4 class="page-title">सूचना / समाचार </h4>
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सूचना थप्नुहोस्</h4>
+                        <h4 class="header-title">सूचना / समाचार थप्नुहोस्</h4>
                         <a href="{{route('admin.digitalBoard.notice.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> सूचना सूची
+                            <i class="fa fa-list"></i> सूचना / समाचार सूची
                         </a>
                     </div>
                 </div>
