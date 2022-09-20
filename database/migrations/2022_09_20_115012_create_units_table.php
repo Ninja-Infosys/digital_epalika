@@ -11,6 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('measurement_unit_id')->constrained();
             $table->string('title');
+            $table->integer('position')->nullable();
+            $table->integer('is_smallest')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
