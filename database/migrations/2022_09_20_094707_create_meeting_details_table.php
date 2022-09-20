@@ -7,12 +7,10 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('ward_meeting_notices', function (Blueprint $table) {
+        Schema::create('meeting_details', function (Blueprint $table) {
             $table->id();
-            $table->string('broadcast_date');
-            $table->string('broadcast_time');
-            $table->string('type');
-            $table->string('meeting_at');
+            $table->morphs('model');
+            $table->string('meeting_date');
             $table->string('meeting_subject')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
@@ -22,6 +20,6 @@ return new class extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists('ward_meeting_notices');
+        Schema::dropIfExists('meeting_details');
     }
 };

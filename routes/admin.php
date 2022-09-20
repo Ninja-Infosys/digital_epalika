@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ExecutiveMeeting\MeetingDetailController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingDecisionController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingNoticeController;
@@ -15,7 +16,6 @@ use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use Illuminate\Support\Facades\Route;
-
 
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -40,8 +40,10 @@ Route::prefix('setting')->group(function () {
 Route::prefix('executiveMeeting')->as('executiveMeeting.')->group(function () {
     Route::resource('municipalCommittee', MunicipalCommitteeController::class);
     Route::resource('wardCommittee', WardCommitteeController::class);
+    Route::get('municipalMeetingDetails', [MunicipalMeetingNoticeController::class, 'municipalMeetingDetails'])->name('municipalMeetingDetails');
     Route::resource('municipalMeetingNotice', MunicipalMeetingNoticeController::class);
     Route::resource('municipalMeetingDecision', MunicipalMeetingDecisionController::class);
+    Route::get('wardMeetingDetails', [WardMeetingNoticeController::class, 'wardMeetingDetails'])->name('wardMeetingDetails');
     Route::resource('wardMeetingNotice', WardMeetingNoticeController::class);
     Route::resource('wardMeetingDecision', WardMeetingDecisionController::class);
 });

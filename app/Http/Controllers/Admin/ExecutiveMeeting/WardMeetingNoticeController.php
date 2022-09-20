@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\WardMeetingNotice\StoreNoticeRequest;
 use App\Http\Requests\ExecutiveMeeting\WardMeetingNotice\UpdateNoticeRequest;
+use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\ExecutiveMeeting\WardMeetingNotice;
 use Illuminate\Support\Facades\Gate;
 
@@ -89,5 +90,12 @@ class WardMeetingNoticeController extends Controller
         toast('सूचना सफलतापूर्वक मेटाइयो','success');
 
         return back();
+    }
+
+    public function wardMeetingDetails()
+    {
+        $meetingDetails = MeetingDetail::where('model_type', WardMeetingNotice::class)->latest()->get();
+
+        return view('admin.executive_meeting.wardMeeting_notice.meetingDetails', compact('meetingDetails'));
     }
 }

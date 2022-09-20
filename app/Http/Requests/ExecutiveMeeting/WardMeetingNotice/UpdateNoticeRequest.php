@@ -18,7 +18,9 @@ class UpdateNoticeRequest extends FormRequest
 
         return [
             'broadcast_date' => ['required'],
-            'type' => ['required', Rule::in(config('meetingType'))],
+            'broadcast_time' => ['required'],
+            'type' => ['required', Rule::in(config('defaults.meeting_types'))],
+            'meeting_at' => ['required'],
             'meeting_subject' => ['required', 'string'],
             'description' => ['required']
         ];

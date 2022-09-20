@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\StoreMunicipalCommitteeRequest;
 use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingNotice\StoreNoticeRequest;
 use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingNotice\UpdateNoticeRequest;
+use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\ExecutiveMeeting\MunicipalMeetingNotice;
 use Illuminate\Support\Facades\Gate;
 
@@ -19,7 +20,7 @@ class MunicipalMeetingNoticeController extends Controller
         );
 
         $municipalMeetingNotices = MunicipalMeetingNotice::latest()->get();
-        return view('admin.executive_meeting.municipalMeeting_notice.index',compact('municipalMeetingNotices'));
+        return view('admin.executive_meeting.municipalMeeting_notice.index', compact('municipalMeetingNotices'));
     }
 
     public function create()
@@ -40,7 +41,7 @@ class MunicipalMeetingNoticeController extends Controller
 
         MunicipalMeetingNotice::create($request->validated());
 
-        toast('सूचना सफलतापूर्वक थपियो','success');
+        toast('सूचना सफलतापूर्वक थपियो', 'success');
 
         return back();
     }
@@ -59,7 +60,7 @@ class MunicipalMeetingNoticeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        return view('admin.executive_meeting.municipalMeeting_notice.edit',compact('municipalMeetingNotice'));
+        return view('admin.executive_meeting.municipalMeeting_notice.edit', compact('municipalMeetingNotice'));
     }
 
     public function update(UpdateNoticeRequest $request, MunicipalMeetingNotice $municipalMeetingNotice)
@@ -71,7 +72,7 @@ class MunicipalMeetingNoticeController extends Controller
 
         $municipalMeetingNotice->update($request->validated());
 
-        toast('सूचना सफलतापूर्वक सम्पादन गरियो','success');
+        toast('सूचना सफलतापूर्वक सम्पादन गरियो', 'success');
 
         return redirect(route('admin.executiveMeeting.municipalMeetingNotice.index'));
     }
@@ -83,10 +84,18 @@ class MunicipalMeetingNoticeController extends Controller
             'You are not allowed to digital board news access'
         );
 
+        $municipalMeetingNotice->meetingDetails()->delete();
         $municipalMeetingNotice->delete();
 
         toast('सूचना सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
+    }
+
+    public function municipalMeetingDetails()
+    {
+        $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();
+
+        return view('admin.executive_meeting.municipalMeeting_notice.meetingDetails', compact('meetingDetails'));
     }
 }

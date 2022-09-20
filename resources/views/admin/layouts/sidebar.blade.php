@@ -103,14 +103,21 @@
                                 </a>
                                 <div class="collapse" id="sidebarExecutiveMeetingMunicipal">
                                     <ul class="nav-second-level">
-                                        @can('registration_access')
+                                        @can('municipalMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingNotice.index') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.municipalMeetingNotice.index')}}">
                                                     <span> सूचना प्रशारण </span>
                                                 </a>
                                             </li>
                                         @endcan
-                                        @can('dispatch_access')
+                                        @can('municipalMeeting_access')
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDetails') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.municipalMeetingDetails')}}">
+                                                    <span> बैठक बिबरण </span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('municipalMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingDecision.index') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}">
                                                     <span> निर्णयहरु</span>
@@ -130,14 +137,21 @@
                                 </a>
                                 <div class="collapse" id="sidebarExecutiveMeetingWard">
                                     <ul class="nav-second-level">
-                                        @can('registration_access')
+                                        @can('wardMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingNotice.index') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.wardMeetingNotice.index')}}">
                                                     <span> सूचना प्रशारण </span>
                                                 </a>
                                             </li>
                                         @endcan
-                                        @can('dispatch_access')
+                                        @can('wardMeeting_access')
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDetails') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.wardMeetingDetails')}}">
+                                                    <span> बैठक बिबरण </span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('wardMeeting_access')
                                             <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDecision.index') ? 'active' : ''}}">
                                                 <a href="{{route('admin.executiveMeeting.wardMeetingDecision.index')}}">
                                                     <span> निर्णयहरु</span>
