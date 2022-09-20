@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ExecutiveMeeting\MeetingDetailController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingDecisionController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingNoticeController;
@@ -15,6 +14,7 @@ use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\Units\MeasurementUnitController;
 use App\Http\Controllers\Admin\Setting\Units\TypeController;
+use App\Http\Controllers\Admin\Setting\Units\UnitController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +38,7 @@ Route::prefix('setting')->group(function () {
     Route::prefix('units')->as('units.')->group(function () {
         Route::resource('type', TypeController::class);
         Route::resource('measurementUnit', MeasurementUnitController::class);
+        Route::resource('unit', UnitController::class);
     });
 
     Route::resource('officeSetting', OfficeSettingController::class);
