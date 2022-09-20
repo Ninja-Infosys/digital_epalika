@@ -16,7 +16,7 @@ class StoreDecisionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ward_meeting_notice_id' => ['required', Rule::exists('ward_meeting_notices', 'id')->withoutTrashed()],
+            'meeting_detail_id' => ['required', Rule::exists('meeting_details', 'id')->withoutTrashed()],
             'subject' => ['nullable', 'string'],
             'date' => ['nullable'],
             'description' => ['nullable'],
