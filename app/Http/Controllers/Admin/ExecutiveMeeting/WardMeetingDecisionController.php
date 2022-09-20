@@ -43,9 +43,8 @@ class WardMeetingDecisionController extends Controller
             'You are not allowed to ward meeting create'
         );
 
-//        dd($request->all());
-
         WardMeetingDecision::create($request->validated());
+
         return back();
     }
 
