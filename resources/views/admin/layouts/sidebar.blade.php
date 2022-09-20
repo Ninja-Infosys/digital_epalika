@@ -52,6 +52,7 @@
 
                 @includeIf('circular::layouts.sidebar')
 
+
                 <li>
                     <a href="#sidebarUserManagement" data-bs-toggle="collapse">
                         <i class="fa fa-users-cog"></i>
@@ -302,6 +303,34 @@
                                     <a href="{{route('admin.fiscalYear.index')}}">आर्थिक बर्ष</a>
                                 </li>
                             @endcan
+
+                                <li>
+                                    <a href="#sidebarUnits" data-bs-toggle="collapse">
+                                        <span>मापन एकाइ</span>
+                                        <span class="menu-arrow">
+                                        <i class="fa fa-angle-right"></i>
+                                    </span>
+                                    </a>
+                                    <div class="collapse" id="sidebarUnits">
+                                        <ul class="nav-second-level">
+                                            @can('unitType_access')
+                                                <li class="{{request()->routeIs('admin.units.type.*') ? 'active' : ''}}">
+                                                    <a href="{{route('admin.units.type.index')}}">
+                                                        <span> प्रकार </span>
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                            @can('MeasurementUnit_access')
+                                                <li class="{{request()->routeIs('admin.units.measurementUnit.*') ? 'active' : ''}}">
+                                                    <a href="{{route('admin.units.measurementUnit.index')}}">
+                                                        <span> विविधता </span>
+                                                    </a>
+                                                </li>
+                                            @endcan
+
+                                        </ul>
+                                    </div>
+                                </li>
 
                             <li class="{{request()->routeIs('admin.officeSetting.index') ? 'active':''}}">
                                 <a href="{{route('admin.officeSetting.index')}}"> कार्यालय सेटिङ</a>
