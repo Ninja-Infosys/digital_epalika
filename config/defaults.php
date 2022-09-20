@@ -29,5 +29,9 @@ return [
         'बिहिबार' => 'Thursday',
         'शुक्रबार' => 'Friday',
         'शनिबार' => 'Saturday',
+    ],
+    'notice_type' => [
+        'सूचना' => 'Notice',
+        'समाचार' => 'News'
     ]
 ];

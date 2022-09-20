@@ -13,8 +13,9 @@ return new class extends Migration {
             $table->string('date');
             $table->text('description')->nullable();
             $table->dateTime('closed_at')->nullable();
+            $table->boolean('show_on_index')->default(1);
             $table->foreignId('user_id')->constrained();
-            $table->boolean('is_notice')->default(true);
+            $table->string('type')->default('Notice');
             $table->timestamps();
             $table->softDeletes();
         });

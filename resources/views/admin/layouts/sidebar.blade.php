@@ -159,6 +159,11 @@
                                                 </a>
                                             </li>
                                         @endcan
+                                            <li class="{{request()->routeIs('admin.executiveMeeting.wardMeetingDetailsReport') ? 'active' : ''}}">
+                                                <a href="{{route('admin.executiveMeeting.wardMeetingDetailsReport')}}">
+                                                    <span> बैठक बिबरण रिपोर्ट </span>
+                                                </a>
+                                            </li>
                                     </ul>
                                 </div>
                             </li>

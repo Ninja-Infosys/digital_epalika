@@ -71,9 +71,38 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
+                                    <label for="type" class="form-label">प्रकार *</label>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="">छान्नुहोस्</option>
+                                        @foreach(config('defaults.notice_type') as $key=>$type)
+                                        <option value="{{$type}}" {{old('type')==$type ? 'selected':''}}>{{$key}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('type')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण </label>
                                     <textarea name="description" id="description" placeholder="बिवरण"  class="form-control" cols="30" rows="5">{{old('description')}}</textarea>
                                     @error('description')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <label for="files" class="form-label">फाईल </label>
+                                    <input
+                                        type="file"
+                                        name="files[]"
+                                        class="form-control @error('files') is-invalid @enderror"
+                                        id="files"
+
+                                   multiple />
+                                    @error('files')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                    @error('files.*')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

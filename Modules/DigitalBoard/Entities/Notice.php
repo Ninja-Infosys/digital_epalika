@@ -2,10 +2,12 @@
 
 namespace Modules\DigitalBoard\Entities;
 
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Notice extends Model
@@ -24,12 +26,18 @@ class Notice extends Model
         'date',
         'description',
         'closed_at',
+        'show_on_index',
         'user_id',
-        'is_notice',
+        'type'
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class, 'model');
     }
 }
