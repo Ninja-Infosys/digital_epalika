@@ -46,7 +46,9 @@ class WardMeetingDecisionController extends Controller
 //        dd($request->all());
 
         WardMeetingDecision::create($request->validated());
-        return back();
+
+        toast('वार्ड बैठक निर्णय सफलतापूर्वक थपियो','success');
+        return redirect(route('admin.executiveMeeting.wardMeetingDecision.index'));
     }
 
     public function show(WardMeetingDecision $wardMeetingDecision)
@@ -80,7 +82,9 @@ class WardMeetingDecisionController extends Controller
         }
 
         $wardMeetingDecision->update($request->validated());
-        return back();
+
+        toast('वार्ड बैठक सूचना सफलतापूर्वक अद्यावधिक गरियो','success');
+        return redirect(route('admin.executiveMeeting.wardMeetingDecision.index'));
     }
 
     public function destroy(WardMeetingDecision $wardMeetingDecision)
@@ -95,6 +99,8 @@ class WardMeetingDecisionController extends Controller
             $this->deleteFile($wardMeetingDecision->decision_file);
         }
         $wardMeetingDecision->delete();
+
+        toast('वडा बैठक निर्णय सफलतापूर्वक हटाइयो','success');
 
         return back();
     }

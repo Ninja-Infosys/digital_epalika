@@ -23,4 +23,14 @@ class StoreDecisionRequest extends FormRequest
             'decision_file' => ['required', 'mimes:png,jpeg,jpg']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'ward_meeting_notice_id.required' => 'वार्ड बैठक सूचना आईडी आवश्यक छ',
+            'subject.string' => 'विषय स्ट्रिङमा हुनुपर्छ',
+            'decision_file.required' => 'निर्णय फाइल आवश्यक छ',
+            'decision_file.mimes' => 'निर्णय फाइल jpeg, png, jpeg मा हुनुपर्छ'
+        ];
+    }
 }

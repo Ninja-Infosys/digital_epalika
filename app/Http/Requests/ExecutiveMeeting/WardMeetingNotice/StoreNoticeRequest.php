@@ -29,6 +29,7 @@ class StoreNoticeRequest extends FormRequest
             'broadcast_date.required' => 'प्रसारण मिति आवश्यक छ',
             'type.required' => 'प्रकार आवश्यक छ',
             'meeting_subject.required' => 'बैठक विषय आवश्यक छ',
+            'meeting_subject.string' => 'बैठकको विषय स्ट्रिङमा हुनुपर्छ',
             'description.required' => 'विवरण आवश्यक छ'
         ];
     }

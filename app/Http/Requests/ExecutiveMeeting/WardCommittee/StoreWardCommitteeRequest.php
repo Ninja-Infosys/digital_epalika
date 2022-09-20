@@ -36,11 +36,15 @@ class StoreWardCommitteeRequest extends FormRequest
     {
         return [
             'name.required' => 'नाम आवश्यक छ',
+            'name.string' => 'नाम स्ट्रिङमा हुनुपर्छ',
             'designation.required' => 'पद आवश्यक छ',
+            'designation.string' => 'पदनाम स्ट्रिङमा हुनुपर्छ',
             'phone.required' => 'फोन आवश्यक छ',
             'photo.mimes' => 'फोटो अनिबार्य jpg, png, jpeg मा हुनुपर्छ ',
             'email.email' => 'इमेल फर्ममा हुनुपर्छ ',
-            'ward_no' => 'वार्ड न. अंकमा हुनुपर्छ ',
+            'ward_no.integer' => 'वार्ड न. अंकमा हुनुपर्छ ',
+            'village.string' => 'गाउँ स्ट्रिङमा हुनुपर्छ',
+            'tole.string' => 'टोल स्ट्रिङमा हुनुपर्छ',
             'position.integer' => 'स्थिति अंकमा हुनुपर्छ '
         ];
     }

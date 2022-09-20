@@ -23,4 +23,13 @@ class UpdateDecisionRequest extends FormRequest
             'decision_file' => ['nullable', 'mimes:png,jpeg,jpg']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'ward_meeting_notice_id.required' => 'वार्ड बैठक सूचना आवश्यक छ',
+            'subject.string' => 'विषय स्ट्रिङमा हुनुपर्छ',
+            'decision_file.mimes' => 'निर्णय फाइल jpeg, jpg, png मा हुनुपर्छ'
+        ];
+    }
 }
