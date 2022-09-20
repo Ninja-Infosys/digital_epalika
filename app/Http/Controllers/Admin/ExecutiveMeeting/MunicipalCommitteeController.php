@@ -45,7 +45,7 @@ class MunicipalCommitteeController extends Controller
         MunicipalCommittee::create($request->validated());
 
         toast('पालिका समिति  सफलतापूर्वक थपियो', 'success');
-        return redirect(route('admin.executiveMeeting.municipalCommittee.index'));
+        return back();
     }
 
     public function show(MunicipalCommittee $municipalCommittee)

@@ -42,7 +42,7 @@ class MunicipalMeetingNoticeController extends Controller
 
         toast('सूचना सफलतापूर्वक थपियो','success');
 
-        return redirect(route('admin.executiveMeeting.municipalMeetingNotice.index'));
+        return back();
     }
 
     public function show(MunicipalMeetingNotice $municipalMeetingNotice)

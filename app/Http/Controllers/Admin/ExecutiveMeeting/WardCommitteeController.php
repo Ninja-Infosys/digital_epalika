@@ -45,7 +45,7 @@ class WardCommitteeController extends Controller
         WardCommittee::create($request->validated());
 
         toast('वडा समिति  सफलतापूर्वक थपियो', 'success');
-        return redirect(route('admin.executiveMeeting.wardCommittee.index'));
+        return back();
     }
 
     public function show(WardCommittee $wardCommittee)

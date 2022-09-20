@@ -48,7 +48,7 @@ class MunicipalMeetingDecisionController extends Controller
 
         toast('नगरपालिका बैठक निर्णय सफलतापूर्वक थपियो','success');
 
-        return redirect(route('admin.executiveMeeting.municipalMeetingDecision.index'));
+        return back();
     }
 
     public function show(MunicipalMeetingDecision $municipalMeetingDecision)

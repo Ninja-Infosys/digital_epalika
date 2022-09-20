@@ -42,7 +42,7 @@ class WardMeetingNoticeController extends Controller
 
         toast('सूचना सफलतापूर्वक थपियो','success');
 
-        return redirect(route('admin.executiveMeeting.wardMeetingNotice.index'));
+        return back();
     }
 
     public function show(WardMeetingNotice $wardMeetingNotice)
