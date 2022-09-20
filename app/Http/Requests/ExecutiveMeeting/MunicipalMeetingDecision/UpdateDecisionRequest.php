@@ -23,4 +23,13 @@ class UpdateDecisionRequest extends FormRequest
             'decision_file' => ['nullable', 'mimes:png,jpeg,jpg']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'municipal_meeting_notice_id.required' => 'नगरपालिका बैठक आईडी आवश्यक छ',
+            'subject.string' => 'विषय स्ट्रिङ फर्ममा हुनुपर्छ',
+            'decision_file.mimes' => 'निर्णय फाइल अनिबार्य png, jpeg, jpg मा हुनुपर्छ '
+        ];
+    }
 }

@@ -46,6 +46,8 @@ class MunicipalMeetingDecisionController extends Controller
 
         MunicipalMeetingDecision::create($request->validated());
 
+        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक थपियो','success');
+
         return back();
     }
 
@@ -82,6 +84,8 @@ class MunicipalMeetingDecisionController extends Controller
         }
 
         $municipalMeetingDecision->update($request->validated());
+
+        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक अद्यावधिक गरियो','success');
         return redirect(route('admin.executiveMeeting.municipalMeetingDecision.index'));
     }
 
@@ -96,6 +100,8 @@ class MunicipalMeetingDecisionController extends Controller
             $this->deleteFile($municipalMeetingDecision->decision_file);
         }
         $municipalMeetingDecision->delete();
+
+        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक हटाइयो','success');
 
         return back();
     }
