@@ -2,7 +2,7 @@
 
 namespace Modules\Circular\Http\Livewire;
 
-use App\Models\OfficeSetting;
+use App\Models\Settings\OfficeSetting;
 use Livewire\Component;
 use Modules\Circular\Entities\Dispatch;
 

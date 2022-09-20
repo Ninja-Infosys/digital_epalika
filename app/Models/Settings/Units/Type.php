@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Settings\Units;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class FiscalYear extends Model
+class Type extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -19,4 +20,9 @@ class FiscalYear extends Model
     protected $fillable = [
         'title'
     ];
+
+    public function measurementUnit(): HasMany
+    {
+        return $this->hasMany(MeasurementUnit::class);
+    }
 }

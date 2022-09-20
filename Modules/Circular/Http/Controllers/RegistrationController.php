@@ -2,9 +2,6 @@
 
 namespace Modules\Circular\Http\Controllers;
 
-use App\Models\OfficeSetting;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
