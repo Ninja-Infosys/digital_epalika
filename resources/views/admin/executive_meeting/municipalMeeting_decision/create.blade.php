@@ -43,7 +43,7 @@
                             <div class="row">
 
                                 <div class="col-md-6 mb-2">
-                                    <label for="municipal_meeting_notice_id" class="form-label">विषय *</label>
+                                    <label for="municipal_meeting_notice_id" class="form-label"> 	बैठक *</label>
                                     <select name="municipal_meeting_notice_id"
                                             class="form-select @error('municipal_meeting_notice_id') is-invalid @enderror"
                                             id="municipal_meeting_notice_id">
@@ -64,7 +64,7 @@
                                         type="text"
                                         name="date"
                                         value="{{old('date')}}"
-                                        class="form-control @error('date') is-invalid @enderror"
+                                        class="form-control nepali_date @error('date') is-invalid @enderror"
                                         id="date"
                                         placeholder="मिति"
                                     />
@@ -118,4 +118,17 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".nepali_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    ndpYear: true
+                });
+            });
+        </script>
+    @endpush
 @endsection
