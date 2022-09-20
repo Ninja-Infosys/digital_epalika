@@ -10,11 +10,13 @@ class CheckRoleMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        collect($request->user()->role->permissions->pluck('title'))->each(function ($title) {
-            Gate::define($title, function () {
-                return true;
+        if (!empty($request->user()->role)) {
+            collect($request->user()->role->permissions->pluck('title'))->each(function ($title) {
+                Gate::define($title, function () {
+                    return true;
+                });
             });
-        });
+        }
 
         return $next($request);
     }

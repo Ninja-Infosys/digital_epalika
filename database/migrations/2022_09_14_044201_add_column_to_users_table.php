@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('province_id')->nullable()->after('password')->constrained()->nullOnDelete();
             $table->foreignId('district_id')->nullable()->after('province_id')->constrained()->nullOnDelete();
             $table->foreignId('local_body_id')->nullable()->after('district_id')->constrained()->nullOnDelete();
-            $table->integer('ward_no')->default(0)->after('local_body_id');
+            $table->integer('ward_no')->nullable()->after('local_body_id');
             $table->softDeletes();
         });
     }
