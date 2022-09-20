@@ -23,4 +23,13 @@ class StoreDecisionRequest extends FormRequest
             'decision_file' => ['required', 'mimes:png,jpeg,jpg']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'municipal_meeting_notice_id.required' => 'नगरपालिका बैठक सूचना आईडी आवश्यक छ',
+            'decision_file.required' => 'निर्णय फाइल आवश्यक छ',
+            'decision_file.mimes' => 'निर्णय फाइल अनिबार्य png, jpeg, jpg मा हुनुपर्छ '
+        ];
+    }
 }
