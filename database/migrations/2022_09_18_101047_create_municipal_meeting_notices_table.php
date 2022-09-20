@@ -10,7 +10,9 @@ return new class extends Migration {
         Schema::create('municipal_meeting_notices', function (Blueprint $table) {
             $table->id();
             $table->string('broadcast_date');
+            $table->string('broadcast_time');
             $table->string('type');
+            $table->string('meeting_at');
             $table->string('meeting_subject')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();

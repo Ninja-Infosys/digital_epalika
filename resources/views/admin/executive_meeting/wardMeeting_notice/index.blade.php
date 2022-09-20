@@ -51,7 +51,7 @@
                             @forelse($wardMeetingNotices as $wardMeetingNotice)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$wardMeetingNotice->broadcast_date}}</td>
+                                    <td>{{$wardMeetingNotice->broadcast_date ? $wardMeetingNotice->broadcast_date->toDateString() : ''}}</td>
                                     <td>{{$wardMeetingNotice->type}}</td>
                                     <td>{{$wardMeetingNotice->meeting_subject}}</td>
 
