@@ -20,6 +20,8 @@ class Unit extends Model
     protected $fillable = [
         'measurement_unit_id',
         'title',
+        'position',
+        'is_smallest',
     ];
 
     public function measurementUnit(): BelongsTo
