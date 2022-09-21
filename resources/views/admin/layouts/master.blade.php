@@ -26,8 +26,7 @@
     <link
         href="{{asset('assets/backend/css/bootstrap.min.css')}}"
         rel="stylesheet"
-        type="text/css"
-    />
+        type="text/css"/>
     <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
     <!-- App css -->
     <link

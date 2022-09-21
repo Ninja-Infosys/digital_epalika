@@ -14,7 +14,10 @@ use Modules\EMap\Http\Controllers\OrganizationAuthController;
 |
 */
 
+//Route::get('/', function () {
+//    return redirect(route('admin.dashboard'));
+//});
 Route::get('/', function () {
-    return redirect(route('admin.dashboard'));
+    return view('frontend.home');
 });
 
