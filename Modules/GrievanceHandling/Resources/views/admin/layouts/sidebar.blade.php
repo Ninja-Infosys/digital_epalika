@@ -11,7 +11,7 @@
         <ul class="nav-second-level">
             <li class="{{request()->routeIs('admin.executiveMeeting.municipalCommittee.index') ? 'active' : ''}}">
                 <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">
-                    <span> पालिका समिति बिवरण</span>
+                    <span> गुनासो बिबरण </span>
                 </a>
             </li>
             <li>
