@@ -64,7 +64,3 @@
         </div>
     </div>
 </nav>
-
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/header.css')}}">
-@endpush

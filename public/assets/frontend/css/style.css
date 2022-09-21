@@ -19,7 +19,7 @@ body {
 }
 .carousel-item>img{
     object-fit: cover;
-    height: 360px;
+    height: 400px;
 }
 .card-01 {
     box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
@@ -104,6 +104,7 @@ a {
 .list-item-head-top {
     margin-bottom: .6rem;
 }
+
 .list-item {
     width: auto;
     background: #fffffe;
@@ -135,19 +136,48 @@ a {
 
 .small,
 small {
-    font-size: 70%;
-    font-weight: 400;
+    display: block;
+    font-size: 14px;
+    line-height: 22px;
+    color: #9b9b9b;
+    margin-top: 5px;
+}
+
+.note {
+    padding: 3px;
+    display: grid;
+    font-size: 1.7rem;
+    font-weight: normal;
+    grid-gap: 0px;
+    border-bottom: 1px solid #dadada;
+    cursor: pointer;
+}
+
+.note span {
+    display: block;
+    font-size: 14px;
+    line-height: 22px;
+    color: #9b9b9b;
+    margin-top: 5px;
 }
 
 .text-redish {
     color: red;
 }
+
 .float-right {
     float: right !important;
 }
+
 .bg-main-blue {
     color: white;
-    background-color: blue;
+    background-color: #3a3ae6;
+    width: 100%;
+}
+
+.bg-main-blue:hover {
+    background-color: var(--redColor);
+    color: white;
 }
 
 .list-item-head-top p {
@@ -168,32 +198,67 @@ small {
 .text-withlink {
     color: #1a1a1a;
 }
+
 .intro-title {
     display: inline-block;
     color: #2460b9;
     font-size: 14px;
 }
-.introduction h6{
+
+.introduction h6 {
     text-align: justify;
     text-justify: inter-word;
 }
- /*main cheif person card*/
+/*main cheif person card*/
    .card-02 .card:hover {
        transition: .7s;
        transform: translateY(-10px);
    }
-.card-02 .card:hover .card-description{
+
+.card-02 .card:hover .card-description {
     transition: .5s;
     background-color: var(--redColor);
     color: var(--whiteColor);
 }
-.card-description{
+
+.card-description {
     padding-bottom: 10px;
     border-radius: 6px;
 }
+
 /*gallery slider*/
-  .card img{
+  .card img {
       object-fit: contain;
       height: 16rem;
       width: 100%;
   }
+
+.nav-tabs {
+    background: #bd2821;
+}
+
+.nav-tabs .nav-link {
+    color: var(--whiteColor)
+}
+
+.nav-tabs .nav-link.active {
+    color: black;
+}
+
+.mobile-app .card-01 h6 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 38px;
+    color: #4A596B;
+    border-bottom: 3px solid rgba(145, 6, 6, 0.771);
+    margin-bottom: 20px;
+}
+
+.mobile-app p {
+    margin-top: 10px;
+    display: flex;
+}
+
+.mobile-app a {
+    width: 50%;
+}

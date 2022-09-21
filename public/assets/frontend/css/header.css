@@ -1,3 +1,13 @@
+/*topbar css*/
+.top-bar {
+    background-color: #fff;
+    border-bottom: 1px solid #f1f1f1;
+    height: 40px;
+}
+select{
+    font-size: 12px;
+}
+/*middle hedaer*/
 .background {
     padding: 8px;
     background-color: #fff;
@@ -11,7 +21,3 @@
     height: 90px;
     width: 70px;
 }
-
-
-
-
