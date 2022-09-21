@@ -43,13 +43,7 @@
                                 <img src="{{asset('images/np.png')}}" height="100" alt="Logo">
                             </div>
                             <div class="title">
-                                <h4>
-                                    <b>{{$officeSetting->localBody->local_body??''}}</b> <br>
-                                    <span class="text-light">
-                                        {{$officeSetting->district->district??''}} <br>
-                                        {{$officeSetting->province->province??''}}, नेपाल
-                                    </span>
-                                </h4>
+                                <x-header-component/>
                                 <p>
                                     डिजिटल पालिका ब्यबस्थापन प्रणालि
                                     <br>
