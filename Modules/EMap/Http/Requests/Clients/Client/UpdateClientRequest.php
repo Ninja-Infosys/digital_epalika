@@ -23,6 +23,7 @@ class UpdateCLientRequest extends FormRequest
             'tole' => ['nullable'],
             'phone' => ['required'],
             'email' => ['nullable'],
+
         ];
     }
 }

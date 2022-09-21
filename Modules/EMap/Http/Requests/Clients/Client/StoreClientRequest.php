@@ -23,6 +23,7 @@ class StoreCLientRequest extends FormRequest
             'tole' => ['nullable'],
             'phone' => ['required'],
             'email' => ['nullable'],
+
         ];
     }
 }
