@@ -44,13 +44,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink="/grievance" routerLinkActive="active">
+                    <a class="nav-link" aria-current="page" href="{{url('grievance')}}">
                         <mat-icon class="icon-size-4" [svgIcon]="'icon_solid:annotation'"></mat-icon>
                         गुनासो
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink="/notice-board" routerLinkActive="active">
+                    <a class="nav-link" aria-current="page" href="{{url('digitalBoard/digitalboard')}}" >
                         नागरिक सहयोग
                     </a>
                 </li>

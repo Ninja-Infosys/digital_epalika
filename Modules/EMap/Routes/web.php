@@ -17,7 +17,6 @@ use Modules\EMap\Http\Controllers\OrganizationAuthController;
 Route::prefix('organization')->as('organization.')->group(function () {
     Route::get('login', [OrganizationAuthController::class, 'showOrganizationLoginForm'])->name('login.form');
     Route::post('login', [OrganizationAuthController::class, 'organizationLogin'])->name('login');
-
     Route::get('register', [OrganizationAuthController::class, 'showOrganizationRegisterForm'])->name('register.form');
     Route::post('register', [OrganizationAuthController::class, 'registerOrganization'])->name('register');
 

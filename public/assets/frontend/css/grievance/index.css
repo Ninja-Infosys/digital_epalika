@@ -1,0 +1,8 @@
+.card img{
+    object-fit: contain;
+    height: 4rem;
+    width: 100%;
+}
+.mat-icon {
+    overflow: visible !important;
+}
