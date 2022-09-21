@@ -43,18 +43,21 @@
                             <div class="row">
 
                                 <div class="col-md-6 mb-2">
-                                    <label for="municipal_meeting_notice_id" class="form-label"> 	बैठक *</label>
-                                    <select name="municipal_meeting_notice_id"
-                                            class="form-select @error('municipal_meeting_notice_id') is-invalid @enderror"
-                                            id="municipal_meeting_notice_id">
+                                    <label for="meeting_detail_id" class="form-label"> बैठक *</label>
+                                    <select name="meeting_detail_id"
+                                            class="form-select @error('meeting_detail_id') is-invalid @enderror"
+                                            id="meeting_detail_id">
                                         <option value=""> छान्नुहोस्</option>
-                                        @foreach($municipalMeetingNotices as $municipalMeetingNotice)
-                                            <option value="{{$municipalMeetingNotice->id}}" {{old('municipal_meeting_notice_id')==$municipalMeetingNotice->id ? 'selected':''}}>
-                                                {{$municipalMeetingNotice->meeting_subject}}
+                                        @foreach($meetingDetails as $meetingDetail)
+                                            <option
+                                                value="{{$meetingDetail->id}}" {{old('meeting_detail_id')==$meetingDetail->id ? 'selected':''}}>
+                                                {{$meetingDetail->meeting_subject}}
+                                                ({{$meetingDetail->meeting_date ? $meetingDetail->meeting_date->toDateString() : ''}}
+                                                )
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('municipal_meeting_notice_id')
+                                    @error('meeting_detail_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

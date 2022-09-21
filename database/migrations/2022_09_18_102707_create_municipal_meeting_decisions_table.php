@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('municipal_meeting_decisions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('municipal_meeting_notice_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('meeting_detail_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('subject')->nullable();
             $table->string('date')->nullable();
             $table->longText('description')->nullable();
