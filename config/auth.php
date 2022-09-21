@@ -70,7 +70,7 @@ return [
         ],
         'organizations' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Organization::class,
+            'model' => \Modules\EMap\Entities\Organization::class,
         ],
 
         // 'users' => [

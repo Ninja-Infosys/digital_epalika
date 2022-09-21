@@ -240,7 +240,7 @@
                                 </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-5 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="business_nature" class="form-label">खरिद प्रकृति *</label>
                                     <select
                                         name="business_nature"
@@ -258,14 +258,13 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-7 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="business_nature_description" class="form-label">बिबरण *</label>
-                                    <input type="text"
-                                           name="business_nature_description"
-                                           value="{{old('business_nature_description')}}"
-                                           class="form-control @error('business_nature_description') is-invalid @enderror"
-                                           placeholder="बिबरण"
-                                           id="business_nature_description">
+                                    <textarea name="business_nature_description"
+                                              id="business_nature_description"
+                                              placeholder="बिबरण"
+                                              class="form-control @error('business_nature_description') is-invalid @enderror"
+                                              cols="30" rows="3">{{old('business_nature_description')}}</textarea>
                                     @error('business_nature_description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

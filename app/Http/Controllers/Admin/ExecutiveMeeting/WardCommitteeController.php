@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\WardCommittee\StoreWardCommitteeRequest;
 use App\Http\Requests\ExecutiveMeeting\WardCommittee\UpdateWardCommitteeRequest;
 use App\Models\ExecutiveMeeting\WardCommittee;
-use App\Models\OfficeSetting;
-use Illuminate\Http\Request;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\Gate;
 
 class WardCommitteeController extends Controller

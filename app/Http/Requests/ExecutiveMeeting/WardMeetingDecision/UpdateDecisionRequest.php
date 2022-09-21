@@ -16,7 +16,7 @@ class UpdateDecisionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ward_meeting_notice_id' => ['required', Rule::exists('ward_meeting_notices', 'id')->withoutTrashed()],
+            'meeting_detail_id' => ['required', Rule::exists('meeting_details', 'id')->withoutTrashed()],
             'subject' => ['nullable', 'string'],
             'date' => ['nullable'],
             'description' => ['nullable'],
@@ -27,8 +27,7 @@ class UpdateDecisionRequest extends FormRequest
     public function messages()
     {
         return [
-            'ward_meeting_notice_id.required' => 'वार्ड बैठक सूचना आवश्यक छ',
-            'subject.string' => 'विषय स्ट्रिङमा हुनुपर्छ',
+            'meeting_detail_id.required' => 'वार्ड बैठक सूचना आवश्यक छ',
             'decision_file.mimes' => 'निर्णय फाइल jpeg, jpg, png मा हुनुपर्छ'
         ];
     }

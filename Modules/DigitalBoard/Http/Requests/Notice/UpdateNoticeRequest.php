@@ -4,6 +4,7 @@ namespace Modules\DigitalBoard\Http\Requests\Notice;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class UpdateNoticeRequest extends FormRequest
 {
@@ -19,8 +20,12 @@ class UpdateNoticeRequest extends FormRequest
             'date' => ['required'],
             'description' => ['nullable'],
             'closed_at' => ['nullable'],
-            'is_notice' => ['nullable'],
+            'show_on_index' => ['nullable', 'boolean'],
+            'files' => ['nullable', 'array'],
+            'files.*' => ['mimes:png,jpeg,jpg'],
         ];
+
+
     }
 
     public function messages()

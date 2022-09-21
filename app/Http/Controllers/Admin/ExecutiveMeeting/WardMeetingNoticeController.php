@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\WardMeetingNotice\StoreNoticeRequest;
 use App\Http\Requests\ExecutiveMeeting\WardMeetingNotice\UpdateNoticeRequest;
+use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\ExecutiveMeeting\WardMeetingNotice;
 use Illuminate\Support\Facades\Gate;
 
@@ -40,7 +41,7 @@ class WardMeetingNoticeController extends Controller
         );
         WardMeetingNotice::create($request->validated());
 
-        toast('सूचना सफलतापूर्वक थपियो','success');
+        toast('सूचना सफलतापूर्वक थपियो', 'success');
 
         return back();
     }
@@ -72,7 +73,7 @@ class WardMeetingNoticeController extends Controller
 
         $wardMeetingNotice->update($request->validated());
 
-        toast('सूचना सफलतापूर्वक सम्पादन गरियो','success');
+        toast('सूचना सफलतापूर्वक सम्पादन गरियो', 'success');
 
         return redirect(route('admin.executiveMeeting.wardMeetingNotice.index'));
     }
@@ -84,10 +85,25 @@ class WardMeetingNoticeController extends Controller
             'You are not allowed to ward meeting delete'
         );
 
+        $wardMeetingNotice->meetingDetails()->delete();
         $wardMeetingNotice->delete();
 
-        toast('सूचना सफलतापूर्वक मेटाइयो','success');
+        toast('सूचना सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
+    }
+
+    public function wardMeetingDetails()
+    {
+        $meetingDetails = MeetingDetail::where('model_type', WardMeetingNotice::class)->latest()->get();
+
+        return view('admin.executive_meeting.wardMeeting_notice.meetingDetails', compact('meetingDetails'));
+    }
+
+    public function wardMeetingDetailsReport()
+    {
+        $model_type = WardMeetingNotice::class;
+
+        return view('admin.executive_meeting.wardMeeting_notice.meeting_report', compact('model_type'));
     }
 }

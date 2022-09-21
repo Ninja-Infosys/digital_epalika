@@ -1,0 +1,199 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --mainColor: #0062cc;;
+    --purpleColor: #c679e3;
+    --navLinkColor: #4a6f8a;
+    --paragraphColor: #6084a4;
+    --redColor: #EE1D25;
+    --whiteColor: #ffffff;
+    --blackColor: #0e314c;
+    --fontSize: 14px;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: var(--whiteColor) !important;
+    font-family: 'Mukta', sans-serif !important;
+    font-size: var(--fontSize);
+}
+.carousel-item>img{
+    object-fit: cover;
+    height: 360px;
+}
+.card-01 {
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    border-radius: 4px;
+    background-color: var(--whiteColor);
+    padding: .5rem;
+    display: block;
+}
+
+.list {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+.list-01 li {
+    display: flex;
+    margin-top: 10px;
+}
+
+.list-01 li .avatar {
+    margin-right: .75rem;
+}
+
+.avatar-lg {
+    width: 5.5rem;
+    height: 5.5rem;
+    flex-shrink: 0;
+}
+
+.avatar img {
+    border-radius: 50%;
+}
+
+.avatar-lg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.textbox-01 h6 {
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: .833rem;
+    margin-bottom: .25rem;
+}
+
+.textbox-01 p {
+    margin-bottom: .25rem;
+}
+
+.list-01 li:not(:last-child) {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.heading-line::after,
+.heading-line_red::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin-top: .5rem;
+    background-color: #33333329;
+}
+
+.icon-size-4 {
+    width: 1rem !important;
+    height: 1rem !important;
+    min-width: 1rem !important;
+    min-height: 1rem !important;
+    font-size: 1rem !important;
+    line-height: 1rem !important;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none !important;
+    background-color: transparent;
+}
+
+.list-item-head-top {
+    margin-bottom: .6rem;
+}
+.list-item {
+    width: auto;
+    background: #fffffe;
+}
+
+.list-item-head p {
+    padding: 10px 20px;
+    margin-bottom: 0 !important;
+    color: white;
+    background: #bd2821;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.list-item-body-content {
+    padding: 3px;
+    display: grid;
+    grid-template-columns: 0.5fr 10fr;
+    font-size: 18px;
+    font-weight: normal;
+    grid-gap: 0px;
+    border-bottom: 1px solid #dadada;
+    cursor: pointer;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.small,
+small {
+    font-size: 70%;
+    font-weight: 400;
+}
+
+.text-redish {
+    color: red;
+}
+.float-right {
+    float: right !important;
+}
+.bg-main-blue {
+    color: white;
+    background-color: blue;
+}
+
+.list-item-head-top p {
+    padding: 10px 20px;
+    margin: 10px;
+    margin-bottom: 0 !important;
+    color: white;
+    background: #bd2821;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/*intro-section*/
+  .heading {
+      font-weight: 700;
+  }
+
+.text-withlink {
+    color: #1a1a1a;
+}
+.intro-title {
+    display: inline-block;
+    color: #2460b9;
+    font-size: 14px;
+}
+.introduction h6{
+    text-align: justify;
+    text-justify: inter-word;
+}
+ /*main cheif person card*/
+   .card-02 .card:hover {
+       transition: .7s;
+       transform: translateY(-10px);
+   }
+.card-02 .card:hover .card-description{
+    transition: .5s;
+    background-color: var(--redColor);
+    color: var(--whiteColor);
+}
+.card-description{
+    padding-bottom: 10px;
+    border-radius: 6px;
+}
+/*gallery slider*/
+  .card img{
+      object-fit: contain;
+      height: 16rem;
+      width: 100%;
+  }

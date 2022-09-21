@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.notice.index')}}">सूचना </a>
+                            <a href="{{route('admin.digitalBoard.notice.index',$type)}}">{{$type==='Notice' ?'सूचना':'समाचार'}}  </a>
                         </li>
-                        <li class="breadcrumb-item active">सूचना सम्पादन गर्नुहोस्</li>
+                        <li class="breadcrumb-item active">{{$type==='Notice' ?'सूचना':'समाचार'}} सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सूचना </h4>
+                <h4 class="page-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  </h4>
             </div>
         </div>
     </div>
@@ -27,14 +27,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सूचना सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.digitalBoard.notice.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> सूचना सूची
+                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  सम्पादन गर्नुहोस्</h4>
+                        <a href="{{route('admin.digitalBoard.notice.index',$type)}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> {{$type==='Notice' ?'सूचना':'समाचार'}}  सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.digitalBoard.notice.update', $notice)}}" method="post"
+                    <form action="{{route('admin.digitalBoard.notice.update',[$type,$notice])}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -48,7 +48,7 @@
                                     <input
                                         type="text"
                                         name="title"
-                                        value="{{old('title', $notice->title)}}"
+                                        value="{{old('title',$notice->title)}}"
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
                                         placeholder="शिर्षक "
@@ -62,7 +62,7 @@
                                     <input
                                         type="text"
                                         name="date"
-                                        value="{{old('date', $notice->date)}}"
+                                        value="{{old('date',$notice->date)}}"
                                         class="form-control nepali_date @error('date') is-invalid @enderror"
                                         id="date"
                                         placeholder=" मिति"
@@ -71,19 +71,35 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण </label>
-                                    <textarea name="description" id="description" placeholder="बिवरण"
-                                              class="form-control" cols="30"
-                                              rows="5">{{old('description',$notice->description)}}</textarea>
+                                    <textarea name="description" id="description" placeholder="बिवरण"  class="form-control" cols="30" rows="5">{{old('description',$notice->description)}}</textarea>
                                     @error('description')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <label for="files" class="form-label">फाईल </label>
+                                    <input
+                                        type="file"
+                                        name="files[]"
+                                        class="form-control @error('files') is-invalid @enderror"
+                                        id="files"
+
+                                        multiple />
+                                    @error('files')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                    @error('files.*')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">
-                            Update
+                            Save
                         </button>
                     </form>
                 </div>

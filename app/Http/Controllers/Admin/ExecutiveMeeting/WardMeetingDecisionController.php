@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\ExecutiveMeeting\WardMeetingDecision\UpdateDecisionRequest;
 use App\Http\Requests\ExecutiveMeeting\WardMeetingDecision\StoreDecisionRequest;
+use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\ExecutiveMeeting\WardMeetingDecision;
 use App\Models\ExecutiveMeeting\WardMeetingNotice;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class WardMeetingDecisionController extends Controller
             'You are not allowed to ward meeting access'
         );
 
-        $wardMeetingDecisions = WardMeetingDecision::with('wardMeetingNotice')->orderByDesc('date')->get();
+        $wardMeetingDecisions = WardMeetingDecision::with('meetingDetail')->orderByDesc('date')->get();
 
         return view('admin.executive_meeting.wardMeeting_decision.index', compact('wardMeetingDecisions'));
     }
@@ -32,8 +33,9 @@ class WardMeetingDecisionController extends Controller
             'You are not allowed to ward meeting create'
         );
 
-        $wardMeetingNotices = WardMeetingNotice::get();
-        return view('admin.executive_meeting.wardMeeting_decision.create',compact('wardMeetingNotices'));
+        $meetingDetails = MeetingDetail::where('model_type', WardMeetingNotice::class)->latest()->get();
+
+        return view('admin.executive_meeting.wardMeeting_decision.create', compact('meetingDetails'));
     }
 
     public function store(StoreDecisionRequest $request)
@@ -43,11 +45,9 @@ class WardMeetingDecisionController extends Controller
             'You are not allowed to ward meeting create'
         );
 
-//        dd($request->all());
-
         WardMeetingDecision::create($request->validated());
 
-        toast('वार्ड बैठक निर्णय सफलतापूर्वक थपियो','success');
+        toast('वार्ड बैठक निर्णय सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.executiveMeeting.wardMeetingDecision.index'));
     }
 
@@ -66,8 +66,9 @@ class WardMeetingDecisionController extends Controller
             'You are not allowed to ward meeting edit'
         );
 
-        $wardMeetingNotices = WardMeetingNotice::get();
-        return view('admin.executive_meeting.wardMeeting_decision.edit',compact('wardMeetingNotices','wardMeetingDecision'));
+        $meetingDetails = MeetingDetail::where('model_type', WardMeetingNotice::class)->latest()->get();
+
+        return view('admin.executive_meeting.wardMeeting_decision.edit', compact('meetingDetails', 'wardMeetingDecision'));
     }
 
     public function update(UpdateDecisionRequest $request, WardMeetingDecision $wardMeetingDecision)
@@ -76,14 +77,13 @@ class WardMeetingDecisionController extends Controller
             403,
             'You are not allowed to ward meeting edit'
         );
-        if($request->hasFile('decision_file') && $wardMeetingDecision->decision_file)
-        {
+        if ($request->hasFile('decision_file') && $wardMeetingDecision->decision_file) {
             $this->deleteFile($wardMeetingDecision->decision_file);
         }
 
         $wardMeetingDecision->update($request->validated());
 
-        toast('वार्ड बैठक सूचना सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('वार्ड बैठक सूचना सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.executiveMeeting.wardMeetingDecision.index'));
     }
 
@@ -94,13 +94,12 @@ class WardMeetingDecisionController extends Controller
             'You are not allowed to ward meeting delete'
         );
 
-        if($wardMeetingDecision->decision_file)
-        {
+        if ($wardMeetingDecision->decision_file) {
             $this->deleteFile($wardMeetingDecision->decision_file);
         }
         $wardMeetingDecision->delete();
 
-        toast('वडा बैठक निर्णय सफलतापूर्वक हटाइयो','success');
+        toast('वडा बैठक निर्णय सफलतापूर्वक हटाइयो', 'success');
 
         return back();
     }

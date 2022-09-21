@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\StoreMunicipalCommitteeRequest;
 use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\UpdateMunicipalCommitteeRequest;
 use App\Models\ExecutiveMeeting\MunicipalCommittee;
-use App\Models\OfficeSetting;
-use Illuminate\Http\Request;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\Gate;
 
 class MunicipalCommitteeController extends Controller

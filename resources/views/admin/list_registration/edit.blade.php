@@ -35,7 +35,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.listRegistrations.listRegistration.update',$listRegistration)}}" method="post"
+                    <form action="{{route('admin.listRegistrations.listRegistration.update',$listRegistration)}}"
+                          method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -241,17 +242,33 @@
                                 </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label for="mobile_no" class="form-label">मोबाइल नम्बर *</label>
-                                    <input
-                                        type="text"
-                                        name=""
-                                        value="{{old('mobile_no')}}"
-                                        class="form-control @error('') is-invalid @enderror"
-                                        id="mobile_no"
-                                        placeholder="मोबाइल नम्बर"
-                                    />
-                                    @error('')
+                                <div class="col-md-12 mb-2">
+                                    <label for="business_nature" class="form-label">खरिद प्रकृति *</label>
+                                    <select
+                                        name="business_nature"
+                                        class="form-select @error('business_nature') is-invalid @enderror"
+                                        id="business_nature">
+                                        <option value="">छान्नुहोस्</option>
+                                        @foreach(config('defaults.business_natures') as $business_nature)
+                                            <option
+                                                value="{{$business_nature}}" {{$business_nature==old('business_nature',$listRegistration->business_nature) ? 'selected' : ''}}>
+                                                {{$business_nature}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('business_nature')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-2">
+                                    <label for="business_nature_description" class="form-label">बिबरण *</label>
+                                    <textarea name="business_nature_description"
+                                              id="business_nature_description"
+                                              placeholder="बिबरण"
+                                              class="form-control @error('business_nature_description') is-invalid @enderror"
+                                              cols="30"
+                                              rows="3">{{old('business_nature_description',$listRegistration->business_nature_description)}}</textarea>
+                                    @error('business_nature_description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

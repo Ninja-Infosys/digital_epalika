@@ -20,16 +20,16 @@ class WardMeetingDecision extends Model
     ];
 
     protected $fillable = [
-        'ward_meeting_notice_id',
+        'meeting_detail_id',
         'subject',
         'date',
         'description',
         'decision_file',
     ];
 
-    public function wardMeetingNotice(): BelongsTo
+    public function meetingDetail(): BelongsTo
     {
-        return $this->belongsTo(WardMeetingNotice::class);
+        return $this->belongsTo(MeetingDetail::class);
     }
 
 

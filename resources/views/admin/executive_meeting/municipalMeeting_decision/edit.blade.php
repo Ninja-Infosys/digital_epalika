@@ -27,13 +27,16 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">निर्णयहरु सम्पादन गर्नुहोस</h4>
-                        <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> निर्णयहरु बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.municipalMeetingDecision.update',$municipalMeetingDecision)}}" method="post" enctype="multipart/form-data">
+                    <form
+                        action="{{route('admin.executiveMeeting.municipalMeetingDecision.update',$municipalMeetingDecision)}}"
+                        method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <fieldset class="border p-2 mb-2">
@@ -43,28 +46,31 @@
                             <div class="row">
 
                                 <div class="col-md-6 mb-2">
-                                    <label for="municipal_meeting_notice_id" class="form-label">विषय *</label>
-                                    <select name="municipal_meeting_notice_id"
-                                            class="form-select @error('municipal_meeting_notice_id') is-invalid @enderror"
-                                            id="municipal_meeting_notice_id">
+                                    <label for="meeting_detail_id" class="form-label"> बैठक *</label>
+                                    <select name="meeting_detail_id"
+                                            class="form-select @error('meeting_detail_id') is-invalid @enderror"
+                                            id="meeting_detail_id">
                                         <option value=""> छान्नुहोस्</option>
-                                        @foreach($municipalMeetingNotices as $municipalMeetingNotice)
-                                            <option value="{{$municipalMeetingNotice->id}}" {{old('municipal_meeting_notice_id',$municipalMeetingNotice->id)== $municipalMeetingDecision->municipal_meeting_notice_id ? 'selected':''}}>
-                                                {{$municipalMeetingNotice->meeting_subject}}
+                                        @foreach($meetingDetails as $meetingDetail)
+                                            <option
+                                                value="{{$meetingDetail->id}}" {{old('meeting_detail_id',$municipalMeetingDecision->meeting_detail_id)==$meetingDetail->id ? 'selected':''}}>
+                                                {{$meetingDetail->meeting_subject}}
+                                                ({{$meetingDetail->meeting_date ? $meetingDetail->meeting_date->toDateString() : ''}}
+                                                )
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('municipal_meeting_notice_id')
+                                    @error('meeting_detail_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label"> मिति *  </label>
+                                    <label for="date" class="form-label"> मिति * </label>
                                     <input
                                         type="text"
                                         name="date"
-                                        value="{{old('date',$municipalMeetingDecision->date)}}"
-                                        class="form-control @error('date') is-invalid @enderror"
+                                        value="{{old('date',$municipalMeetingDecision->date ? $municipalMeetingDecision->date->toDateString() : '')}}"
+                                        class="form-control nepali_date @error('date') is-invalid @enderror"
                                         id="date"
                                         placeholder="मिति"
                                     />
@@ -74,7 +80,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-2">
-                                    <label for="subject" class="form-label"> विषय *  </label>
+                                    <label for="subject" class="form-label"> विषय * </label>
                                     <input
                                         type="text"
                                         name="subject"
@@ -90,13 +96,14 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण * </label>
-                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5" class="form-control @error('description') is-invalid @enderror">{{old('description',$municipalMeetingDecision->description)}}</textarea>
+                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5"
+                                              class="form-control @error('description') is-invalid @enderror">{{old('description',$municipalMeetingDecision->description)}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="decision_file" class="form-label"> फाईल *  </label>
+                                    <label for="decision_file" class="form-label"> फाईल</label>
                                     <input
                                         type="file"
                                         name="decision_file"
@@ -118,4 +125,18 @@
             </div>
         </div>
     </div>
+
+
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".nepali_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    ndpYear: true
+                });
+            });
+        </script>
+    @endpush
 @endsection

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
-use App\Models\OfficeSetting;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -21,6 +21,9 @@ class OfficeSettingController extends Controller
         $validationData = $request->validate([
             'name' => ['required', 'string'],
             'logo' => ['nullable', 'mimes:png,jpg,jpeg'],
+            'logo1' => ['nullable', 'mimes:png,jpg,jpeg'],
+            'logo2' => ['nullable', 'mimes:png,jpg,jpeg'],
+            'background_image' => ['nullable', 'mimes:png,jpg,jpeg'],
             'google_map' => ['nullable'],
             'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
             'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],

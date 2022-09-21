@@ -16,19 +16,18 @@ class StoreDecisionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'municipal_meeting_notice_id' => ['required', Rule::exists('municipal_meeting_notices', 'id')->withoutTrashed()],
-            'subject' => ['nullable', 'string'],
-            'date' => ['nullable'],
+            'meeting_detail_id' => ['required', Rule::exists('meeting_details', 'id')->withoutTrashed()],
+            'subject' => ['required', 'string'],
+            'date' => ['required'],
             'description' => ['nullable'],
             'decision_file' => ['required', 'mimes:png,jpeg,jpg']
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'municipal_meeting_notice_id.required' => 'नगरपालिका बैठक सूचना आईडी आवश्यक छ',
-            'subject.string' => 'विषय स्ट्रिङमा हुनुपर्छ',
+            'meeting_detail_id.required' => 'बैठक सूचना आईडी आवश्यक छ',
             'decision_file.required' => 'निर्णय फाइल आवश्यक छ',
             'decision_file.mimes' => 'निर्णय फाइल अनिबार्य png, jpeg, jpg मा हुनुपर्छ '
         ];

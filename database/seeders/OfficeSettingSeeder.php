@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\OfficeSetting;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Seeder;
 
 class OfficeSettingSeeder extends Seeder
@@ -13,6 +12,9 @@ class OfficeSettingSeeder extends Seeder
         OfficeSetting::create([
             'name' => 'text',
             'logo' => null,
+            'logo1' => null,
+            'logo2' => null,
+            'background_image' => null,
             'google_map' => null,
             'province_id' => null,
             'district_id' => null,
