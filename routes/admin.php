@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ExecutiveMeeting\WardMeetingNoticeController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\ListRegistrationController;
+use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\Units\MeasurementUnitController;
@@ -40,8 +41,8 @@ Route::prefix('setting')->group(function () {
         Route::resource('measurementUnit', MeasurementUnitController::class);
         Route::resource('unit', UnitController::class);
     });
-
     Route::resource('officeSetting', OfficeSettingController::class);
+    Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit','update','destroy']);
 });
 
 

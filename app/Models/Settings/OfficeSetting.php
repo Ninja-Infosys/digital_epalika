@@ -93,6 +93,13 @@ class OfficeSetting extends Model
         ];
     }
 
+    public function getWardAttribute(): array
+    {
+        return [
+            'ward_no' => $this->attributes['ward_no'],
+        ];
+    }
+
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);

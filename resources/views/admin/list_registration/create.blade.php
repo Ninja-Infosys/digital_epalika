@@ -263,7 +263,7 @@
                                     <textarea name="business_nature_description"
                                               id="business_nature_description"
                                               placeholder="बिबरण"
-                                              class="form-control @error('business_nature_description') is-invalid @enderror"
+                                              class="form-control summernote @error('business_nature_description')  is-invalid @enderror"
                                               cols="30" rows="3">{{old('business_nature_description')}}</textarea>
                                     @error('business_nature_description')
                                     <div class="invalid-feedback">{{$message}}</div>
