@@ -30,7 +30,7 @@
         <script>
             $("#printBtn").click(function (e) {
                 var print_area = window.open();
-                print_area.document.write(document.getElementsByClassName('printBtn')[0].innerHTML);
+                print_area.document.write(document.getElementsByClassName('printData')[0].innerHTML);
                 print_area.document.close();
                 print_area.focus();
                 print_area.print();

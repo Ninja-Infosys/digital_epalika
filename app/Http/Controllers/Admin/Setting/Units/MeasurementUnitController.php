@@ -15,9 +15,10 @@ class MeasurementUnitController extends Controller
     {
         abort_if(Gate::denies('MeasurementUnit_access'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $types = Type::whereHas('measurementUnit')->withCount('measurementUnit')->latest()->get();
+
         return view('admin.setting.units.measurementUnit.index', compact('types'));
     }
 
@@ -25,7 +26,7 @@ class MeasurementUnitController extends Controller
     {
         abort_if(Gate::denies('MeasurementUnit_create'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to this resource'
         );
 
         $types = Type::latest()->get();
@@ -36,7 +37,7 @@ class MeasurementUnitController extends Controller
     {
         abort_if(Gate::denies('MeasurementUnit_create'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
 
         MeasurementUnit::create($request->validated());
@@ -53,7 +54,7 @@ class MeasurementUnitController extends Controller
     {
         abort_if(Gate::denies('MeasurementUnit_edit'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
 
         $types = Type::latest()->get();
@@ -64,7 +65,7 @@ class MeasurementUnitController extends Controller
     {
         abort_if(Gate::denies('MeasurementUnit_edit'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $measurementUnit->update($request->validated());
 
@@ -76,7 +77,7 @@ class MeasurementUnitController extends Controller
     {
         abort_if(Gate::denies('MeasurementUnit_delete'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $measurementUnit->delete();
         toast('मापन एकाइ विविधता सफलतापूर्वक मेटाइयो', 'success');

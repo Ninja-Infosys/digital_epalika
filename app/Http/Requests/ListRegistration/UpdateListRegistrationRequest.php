@@ -43,7 +43,7 @@ class UpdateListRegistrationRequest extends FormRequest
         return [
             'registration_no.required' => 'दर्ता नम्बर आवश्यक छ',
             'registration_no.unique' => 'दर्ता नम्बर अद्वितीय छ',
-            'application_type.required' => 'दर्ता प्रकार आवश्यक छ',
+            'applicant_type.required' => 'दर्ता प्रकार आवश्यक छ',
             'address.required' => 'ठेगाना आवश्यक छ',
             'mailing_address.required' => 'मेलिङ ठेगाना आवश्यक छ',
             'main_person.required' => 'मुख्य व्यक्तिको नाम आवश्यक छ',
@@ -53,7 +53,9 @@ class UpdateListRegistrationRequest extends FormRequest
             'pan_photo' => 'पाना फोटो अनिबार्य jpeg, jpg, png, pdf मा हुनुपर्छ ',
             'tax_payment_certificate.mimes' => 'कर तिरेको प्रमाण पत्र अनिबार्य jpg, jpeg, png, pdf मा हुनुपर्छ ',
             'license_photo.mimes' => 'लाइसेन्सको फोटो अनिबार्य jpeg, jpg, png, pdf मा हुनुपर्छ ',
-            'date.required' => 'मिति अनिबार्य छ '
+            'date.required' => 'मिति अनिबार्य छ ',
+            'business_nature.required' => 'खरिद प्रकृति अनिबार्य छ',
+            'business_nature_description.required' => 'बिबरण अनिबार्य छ',
         ];
     }
 }

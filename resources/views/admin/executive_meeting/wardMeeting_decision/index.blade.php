@@ -41,7 +41,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>विषय</th>
+                                <th>बैठक नाम</th>
                                 <th>मिति</th>
                                 <th>बैठकको बिषय </th>
                                 <th>#</th>
@@ -51,7 +51,7 @@
                             @forelse($wardMeetingDecisions as $wardMeetingDecision)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$wardMeetingDecision->wardMeetingNotice->meeting_subject??''}}</td>
+                                    <td>{{$wardMeetingDecision->meetingDetail->meeting_subject??''}}</td>
                                     <td>{{$wardMeetingDecision->date ? $wardMeetingDecision->date->toDateString():'' }}</td>
                                     <td>{{$wardMeetingDecision->subject}}</td>
 

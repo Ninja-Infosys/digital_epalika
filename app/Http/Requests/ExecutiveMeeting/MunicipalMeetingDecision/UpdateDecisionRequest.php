@@ -16,7 +16,7 @@ class UpdateDecisionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'municipal_meeting_notice_id' => ['required', Rule::exists('municipal_meeting_notices', 'id')->withoutTrashed()],
+            'meeting_detail_id' => ['required', Rule::exists('meeting_details', 'id')->withoutTrashed()],
             'subject' => ['nullable', 'string'],
             'date' => ['nullable'],
             'description' => ['nullable'],
@@ -24,11 +24,10 @@ class UpdateDecisionRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'municipal_meeting_notice_id.required' => 'नगरपालिका बैठक आईडी आवश्यक छ',
-            'subject.string' => 'विषय स्ट्रिङ फर्ममा हुनुपर्छ',
+            'meeting_detail_id.required' => 'नगरपालिका बैठक आईडी आवश्यक छ',
             'decision_file.mimes' => 'निर्णय फाइल अनिबार्य png, jpeg, jpg मा हुनुपर्छ '
         ];
     }

@@ -27,8 +27,7 @@ class UpdateDecisionRequest extends FormRequest
     public function messages()
     {
         return [
-            'ward_meeting_notice_id.required' => 'वार्ड बैठक सूचना आवश्यक छ',
-            'subject.string' => 'विषय स्ट्रिङमा हुनुपर्छ',
+            'meeting_detail_id.required' => 'वार्ड बैठक सूचना आवश्यक छ',
             'decision_file.mimes' => 'निर्णय फाइल jpeg, jpg, png मा हुनुपर्छ'
         ];
     }

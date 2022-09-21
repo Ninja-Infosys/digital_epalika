@@ -20,7 +20,7 @@ class WardMeetingDecision extends Model
     ];
 
     protected $fillable = [
-        'meeting_details_id',
+        'meeting_detail_id',
         'subject',
         'date',
         'description',

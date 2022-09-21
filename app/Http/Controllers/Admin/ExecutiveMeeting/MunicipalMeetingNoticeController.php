@@ -20,6 +20,7 @@ class MunicipalMeetingNoticeController extends Controller
         );
 
         $municipalMeetingNotices = MunicipalMeetingNotice::latest()->get();
+
         return view('admin.executive_meeting.municipalMeeting_notice.index', compact('municipalMeetingNotices'));
     }
 

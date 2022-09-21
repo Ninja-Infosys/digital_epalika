@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="card">
-        <div class="printDataDipatch">
+        <div class="printData">
 
             <style>
                 table, th, td {
@@ -82,14 +82,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($meetingDetails as $meetingDetail)
+                        @forelse($meetingDetails as $meetingDetail)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$meetingDetail->meeting_date ? $meetingDetail->meeting_date->toDateString() : ''}}</td>
                                 <td>{{$meetingDetail->meeting_subject}}</td>
                                 <td>{{$meetingDetail->description}}</td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
 

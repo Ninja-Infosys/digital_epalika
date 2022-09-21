@@ -50,10 +50,12 @@
                                             class="form-select @error('meeting_detail_id') is-invalid @enderror"
                                             id="meeting_detail_id">
                                         <option value=""> छान्नुहोस्</option>
-                                        @foreach($meetingdetails as $meetingDetail)
+                                        @foreach($meetingDetails as $meetingDetail)
                                             <option
-                                                value="{{$meetingDetail->id}}" {{old('ward_meeting_notice_id')==$meetingDetail->id ? 'selected':''}}>
+                                                value="{{$meetingDetail->id}}" {{old('meeting_detail_id')==$meetingDetail->id ? 'selected':''}}>
                                                 {{$meetingDetail->meeting_subject}}
+                                                ({{$meetingDetail->meeting_date ? $meetingDetail->meeting_date->toDateString() : ''}}
+                                                )
                                             </option>
                                         @endforeach
                                     </select>

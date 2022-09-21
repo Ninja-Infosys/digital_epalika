@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingDecision\StoreDecisionRequest;
 use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingDecision\UpdateDecisionRequest;
+use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\ExecutiveMeeting\MunicipalMeetingDecision;
 use App\Models\ExecutiveMeeting\MunicipalMeetingNotice;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class MunicipalMeetingDecisionController extends Controller
             'You are not allowed to municipal meeting access'
         );
 
-        $municipalMeetingDecisions = MunicipalMeetingDecision::with('municipalMeetingNotice')->latest()->get();
+        $municipalMeetingDecisions = MunicipalMeetingDecision::with('meetingDetail')->latest()->get();
 
         return view('admin.executive_meeting.municipalMeeting_decision.index', compact('municipalMeetingDecisions'));
     }
@@ -31,10 +32,9 @@ class MunicipalMeetingDecisionController extends Controller
             'You are not allowed to municipal meeting access'
         );
 
-        $municipalMeetingNotices = MunicipalMeetingNotice::latest()->get();
+        $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();
 
-
-        return view('admin.executive_meeting.municipalMeeting_decision.create', compact('municipalMeetingNotices'));
+        return view('admin.executive_meeting.municipalMeeting_decision.create', compact('meetingDetails'));
     }
 
     public function store(StoreDecisionRequest $request)
@@ -46,7 +46,7 @@ class MunicipalMeetingDecisionController extends Controller
 
         MunicipalMeetingDecision::create($request->validated());
 
-        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक थपियो','success');
+        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक थपियो', 'success');
 
         return back();
     }
@@ -66,8 +66,9 @@ class MunicipalMeetingDecisionController extends Controller
             'You are not allowed to municipal meeting access'
         );
 
-        $municipalMeetingNotices = MunicipalMeetingNotice::latest()->get();
-        return view('admin.executive_meeting.municipalMeeting_decision.edit',compact('municipalMeetingDecision','municipalMeetingNotices'));
+        $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();
+
+        return view('admin.executive_meeting.municipalMeeting_decision.edit', compact('municipalMeetingDecision', 'meetingDetails'));
     }
 
     public function update(UpdateDecisionRequest $request, MunicipalMeetingDecision $municipalMeetingDecision)
@@ -85,7 +86,7 @@ class MunicipalMeetingDecisionController extends Controller
 
         $municipalMeetingDecision->update($request->validated());
 
-        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.executiveMeeting.municipalMeetingDecision.index'));
     }
 
@@ -101,7 +102,7 @@ class MunicipalMeetingDecisionController extends Controller
         }
         $municipalMeetingDecision->delete();
 
-        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक हटाइयो','success');
+        toast('नगरपालिका बैठक निर्णय सफलतापूर्वक हटाइयो', 'success');
 
         return back();
     }

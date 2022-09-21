@@ -15,7 +15,7 @@ class TypeController extends Controller
     {
         abort_if(Gate::denies('unitType_access'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $types = Type::get();
         return view('admin.setting.units.type.index', compact('types'));
@@ -25,7 +25,7 @@ class TypeController extends Controller
     {
         abort_if(Gate::denies('unitType_create'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         return view('admin.setting.units.type.create');
     }
@@ -34,7 +34,7 @@ class TypeController extends Controller
     {
         abort_if(Gate::denies('unitType_create'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $validationData = $request->validate(
             ['title' => 'required', Rule::unique('types', 'title')->withoutTrashed()],
@@ -55,7 +55,7 @@ class TypeController extends Controller
     {
         abort_if(Gate::denies('unitType_edit'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         return view('admin.setting.units.type.edit', compact('type'));
     }
@@ -64,7 +64,7 @@ class TypeController extends Controller
     {
         abort_if(Gate::denies('unitType_edit'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $validationData = $request->validate(
             ['title' => 'required', Rule::unique('types', 'title')->withoutTrashed()->ignore($type)],
@@ -80,10 +80,10 @@ class TypeController extends Controller
     {
         abort_if(Gate::denies('unitType_delete'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $type->delete();
         toast('मापन एकाइ प्रकार सफलतापूर्वक मेटाइयो', 'success');
-        return redirect(route('admin.units.type.index'));
+        return back();
     }
 }

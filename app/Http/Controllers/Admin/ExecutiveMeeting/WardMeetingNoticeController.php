@@ -85,6 +85,7 @@ class WardMeetingNoticeController extends Controller
             'You are not allowed to ward meeting delete'
         );
 
+        $wardMeetingNotice->meetingDetails()->delete();
         $wardMeetingNotice->delete();
 
         toast('सूचना सफलतापूर्वक मेटाइयो', 'success');
