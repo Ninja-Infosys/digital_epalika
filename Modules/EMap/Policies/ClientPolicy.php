@@ -21,7 +21,7 @@ class ClientPolicy
     public function view(User $user, Client $client)
     {
         return $user->id === $client->user_id ? Response::allow()
-            : Response::denyWithStatus(404, 'You do not own this post.');
+            : Response::denyAsNotFound();
     }
 
     public function create(User $user)
