@@ -66,7 +66,7 @@ class BranchController extends Controller
         );
         $mainBranches = Branch::whereNull('branch_id')->get();
 
-        return view('helpdesk::admin.branch.edit', compact('branch','mainBranches'));
+        return view('helpdesk::admin.branch.edit', compact('branch', 'mainBranches'));
     }
 
     public function update(UpdateBranchRequest $request, Branch $branch)
@@ -89,6 +89,7 @@ class BranchController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+        $branch->branches()->delete();
         $branch->delete();
 
         toast('शाखा सफलतापूर्वक हटाइयो', 'success');
