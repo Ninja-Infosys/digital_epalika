@@ -1,64 +1,64 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="home-section mt-3">
-            <div class="row">
-                <div class="col-md-7">
-                    <div id="carouselExampleIndicators" class="card-01 carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="https://placeimg.com/1080/500/animals"
-                                     alt="First slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>My Caption Title (1st Image)</h5>
-                                    <p>The whole caption will only show up if the screen is at least medium size.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://placeimg.com/1080/500/arch" alt="Second slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>My Caption Title (1st Image)</h5>
-                                    <p>The whole caption will only show up if the screen is at least medium size.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://placeimg.com/1080/500/nature" alt="Third slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>My Caption Title (1st Image)</h5>
-                                    <p>The whole caption will only show up if the screen is at least medium size.</p>
-                                </div>
+        <div class="row">
+            <div class="col-md-7">
+                <div id="carouselExampleIndicators" class="card-01 carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="https://placeimg.com/1080/500/animals"
+                                 alt="First slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>My Caption Title (1st Image)</h5>
+                                <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                           data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                           data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="https://placeimg.com/1080/500/arch" alt="Second slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>My Caption Title (1st Image)</h5>
+                                <p>The whole caption will only show up if the screen is at least medium size.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="https://placeimg.com/1080/500/nature" alt="Third slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>My Caption Title (1st Image)</h5>
+                                <p>The whole caption will only show up if the screen is at least medium size.</p>
+                            </div>
+                        </div>
                     </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                       data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                       data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <div class="col-md-5 mt-1">
-                    <div class="card-01 introduction  bg-card shadow rounded">
-                        <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
-                        <h6 class="fw-normal lh-lg"><strong>पृष्ठभूमि </strong> वि.स. २०६२/६३ को जन आन्दोलनले संबैधानिक
-                            राजतन्त्रलाई विस्थापित गरी मुलुक लोकतान्त्रिक&nbsp;गणतन्त्रात्मक शासन व्यवस्थामा रूपान्तरण
-                            भएको संविधान सभाबाट निर्मित संविधानले कानुनी रूपमा मुलुकलाई सङ्घीय संरचनामा
-                            लगेकोले सात वटा प्रदेशहरू कायम रहन गएको सन्दर्भमा प्रत्येक प्रदेशमा सातै वटा मन्त्रालयहरू
-                            कायम रहने व्यवस्था अनुसार यो मन्त्रालयको स्थापना मिति २०७४/१०/२२ गते भएको हो।</h6>
-                        <div class="d-flex justify-content-end">
-                            <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
-                        </div>
+            </div>
+            <div class="col-md-5 mt-1">
+                <div class="card-01 introduction  bg-card shadow rounded">
+                    <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
+                    <h6 class="fw-normal lh-lg"><strong>पृष्ठभूमि </strong> वि.स. २०६२/६३ को जन आन्दोलनले संबैधानिक
+                        राजतन्त्रलाई विस्थापित गरी मुलुक लोकतान्त्रिक&nbsp;गणतन्त्रात्मक शासन व्यवस्थामा रूपान्तरण
+                        भएको संविधान सभाबाट निर्मित संविधानले कानुनी रूपमा मुलुकलाई सङ्घीय संरचनामा
+                        लगेकोले सात वटा प्रदेशहरू कायम रहन गएको सन्दर्भमा प्रत्येक प्रदेशमा सातै वटा मन्त्रालयहरू
+                        कायम रहने व्यवस्था अनुसार यो मन्त्रालयको स्थापना मिति २०७४/१०/२२ गते भएको हो।</h6>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
     <section class="avatar-section mt-5">
