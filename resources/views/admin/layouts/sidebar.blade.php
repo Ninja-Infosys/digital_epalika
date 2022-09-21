@@ -53,15 +53,7 @@
                 @includeIf('circular::layouts.sidebar')
 
 
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>हेल्प डेस्क </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
+                @includeIf('helpdesk::admin.layouts.sidebar')
 
 
                 @includeIf('grievancehandling::admin.layouts.sidebar')

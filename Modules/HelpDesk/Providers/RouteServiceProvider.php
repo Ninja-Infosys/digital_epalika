@@ -23,6 +23,11 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->group(module_path('HelpDesk', '/Routes/web.php'));
+
+        Route::middleware(['web', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+            ->prefix('admin/helpDesk')
+            ->as('admin.helpDesk.')
+            ->group(module_path('HelpDesk', '/Routes/admin.php'));
     }
 
     protected function mapApiRoutes()
