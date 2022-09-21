@@ -20,7 +20,6 @@ class UpdateNoticeRequest extends FormRequest
             'date' => ['required'],
             'description' => ['nullable'],
             'closed_at' => ['nullable'],
-            'type' => ['required', Rule::in(config('defaults.notice_type'))],
             'show_on_index' => ['nullable', 'boolean'],
             'files' => ['nullable', 'array'],
             'files.*' => ['mimes:png,jpeg,jpg'],

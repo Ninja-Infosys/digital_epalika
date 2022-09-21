@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.notice.index')}}">सूचना / समाचार </a>
+                            <a href="{{route('admin.digitalBoard.notice.index',$type)}}">{{$type==='Notice' ?'सूचना':'समाचार'}}  </a>
                         </li>
-                        <li class="breadcrumb-item active">सूचना / समाचार सम्पादन गर्नुहोस्</li>
+                        <li class="breadcrumb-item active">{{$type==='Notice' ?'सूचना':'समाचार'}} सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सूचना / समाचार </h4>
+                <h4 class="page-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  </h4>
             </div>
         </div>
     </div>
@@ -27,14 +27,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सूचना / समाचार सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.digitalBoard.notice.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> सूचना / समाचार सूची
+                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  सम्पादन गर्नुहोस्</h4>
+                        <a href="{{route('admin.digitalBoard.notice.index',$type)}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> {{$type==='Notice' ?'सूचना':'समाचार'}}  सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.digitalBoard.notice.update',$notice)}}" method="post"
+                    <form action="{{route('admin.digitalBoard.notice.update',[$type,$notice])}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -71,18 +71,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="type" class="form-label">प्रकार *</label>
-                                    <select name="type" id="type" class="form-control">
-                                        <option value="">छान्नुहोस्</option>
-                                        @foreach(config('defaults.notice_type') as $key=>$type)
-                                            <option value="{{$type}}" {{old('type',$type)== $notice->type ? 'selected':''}}>{{$key}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('type')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण </label>
                                     <textarea name="description" id="description" placeholder="बिवरण"  class="form-control" cols="30" rows="5">{{old('description',$notice->description)}}</textarea>

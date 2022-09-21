@@ -12,12 +12,13 @@ use Modules\DigitalBoard\Entities\News;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index($type)
     {
         abort_if(Gate::denies('digitalBoardNews_access'),
             403,
             'You are not allowed to digital board news access'
         );
+        dd($type);
 
         $newses = News::latest()->get();
         return view('digitalboard::news.index', compact('newses'));

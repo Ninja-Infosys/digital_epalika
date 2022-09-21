@@ -24,6 +24,9 @@ class OfficeSetting extends Model
     protected $fillable = [
         'name',
         'logo',
+        'logo1',
+        'logo2',
+        'background_image',
         'google_map',
         'province_id',
         'district_id',
@@ -42,9 +45,43 @@ class OfficeSetting extends Model
         }
     }
 
+    public function setLogo1Attribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['logo1'] = $value->store('office_setting/logo', 'public');
+        }
+    }
+
+    public function setLogo2Attribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['logo2'] = $value->store('office_setting/logo', 'public');
+        }
+    }
+    public function setBackgroundImageAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['background_image'] = $value->store('office_setting/logo', 'public');
+        }
+    }
+
     public function getLogoUrlAttribute(): string
     {
         return $this->attributes['logo'] ? Storage::disk('public')->url($this->attributes['logo']) : '';
+    }
+
+    public function getLogo1UrlAttribute(): string
+    {
+        return $this->attributes['logo1'] ? Storage::disk('public')->url($this->attributes['logo1']) : '';
+    }
+
+    public function getLogo2UrlAttribute(): string
+    {
+        return $this->attributes['logo2'] ? Storage::disk('public')->url($this->attributes['logo2']) : '';
+    }
+    public function getBackgroundImageUrlAttribute(): string
+    {
+        return $this->attributes['background_image'] ? Storage::disk('public')->url($this->attributes['background_image']) : '';
     }
 
     public function getAddressAttribute(): array
