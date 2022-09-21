@@ -21,3 +21,7 @@ Route::get('/', function () {
     return view('frontend.home');
 });
 
+Route::get('/static/category', function(){
+    return view('frontend.static.category.category');
+});
+

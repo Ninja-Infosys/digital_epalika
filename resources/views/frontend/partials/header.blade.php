@@ -1,3 +1,17 @@
+{{--topbar--}}
+<div class="top-bar">
+    <div class="container">
+        <select class="langChanger">
+            <option  value="ne">नेपाली</option>
+            <option value="en">English</option>
+        </select>
+        <select class="modeChanger m-2">
+            <option value="white"> Dark Mode(OFF)</option>
+            <option value="dark"> Dark Mode(ON) </option>
+        </select>
+    </div>
+</div>
+{{--middle header--}}
 <div class="background">
     <div class="container d-flex justify-content-around">
         <div class="col-md-2 col-sm-2 col-xs-2">

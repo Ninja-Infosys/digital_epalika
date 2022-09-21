@@ -4,10 +4,13 @@ namespace Modules\DigitalBoard\Database\Seeders;
 
 use App\Models\UserManagement\Permission;
 use App\Models\UserManagement\Role;
+use App\Traits\StorePermissionTrait;
 use Illuminate\Database\Seeder;
 
 class DigitalBoardPermissionTableSeeder extends Seeder
 {
+    use StorePermissionTrait;
+
     public function run()
     {
         $permissions = [
@@ -29,17 +32,6 @@ class DigitalBoardPermissionTableSeeder extends Seeder
             'employee_delete',
         ];
 
-        Permission::whereIn('title', $permissions)->delete();
-
-        $permissionId = collect();
-
-        foreach ($permissions as $permission) {
-            $permission = Permission::create(['title' => $permission]);
-
-            $permissionId->push($permission->id);
-        }
-
-        $role = Role::first();
-        $role->permissions()->sync($permissionId);
+        $this->storePermission($permissions);
     }
 }

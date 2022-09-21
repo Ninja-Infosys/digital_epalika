@@ -1,56 +1,62 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="home-section mt-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                    <div id="carouselExampleIndicators" class="card-01 carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="https://placeimg.com/1080/500/animals" alt="First slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>My Caption Title (1st Image)</h5>
-                                    <p>The whole caption will only show up if the screen is at least medium size.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://placeimg.com/1080/500/arch" alt="Second slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://placeimg.com/1080/500/nature" alt="Third slide">
+        <div class="row">
+            <div class="col-md-7">
+                <div id="carouselExampleIndicators" class="card-01 carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="https://placeimg.com/1080/500/animals"
+                                 alt="First slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>My Caption Title (1st Image)</h5>
+                                <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="https://placeimg.com/1080/500/arch" alt="Second slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>My Caption Title (1st Image)</h5>
+                                <p>The whole caption will only show up if the screen is at least medium size.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="https://placeimg.com/1080/500/nature" alt="Third slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>My Caption Title (1st Image)</h5>
+                                <p>The whole caption will only show up if the screen is at least medium size.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                       data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                       data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-5 mt-1">
+                <div class="card-01 introduction  bg-card shadow rounded">
+                    <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
+                    <h6 class="fw-normal lh-lg"><strong>पृष्ठभूमि </strong> वि.स. २०६२/६३ को जन आन्दोलनले संबैधानिक
+                        राजतन्त्रलाई विस्थापित गरी मुलुक लोकतान्त्रिक&nbsp;गणतन्त्रात्मक शासन व्यवस्थामा रूपान्तरण
+                        भएको संविधान सभाबाट निर्मित संविधानले कानुनी रूपमा मुलुकलाई सङ्घीय संरचनामा
+                        लगेकोले सात वटा प्रदेशहरू कायम रहन गएको सन्दर्भमा प्रत्येक प्रदेशमा सातै वटा मन्त्रालयहरू
+                        कायम रहने व्यवस्था अनुसार यो मन्त्रालयको स्थापना मिति २०७४/१०/२२ गते भएको हो।</h6>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
                     </div>
                 </div>
-                <div class="col-md-5 mt-1">
-                        <div class="card-01 introduction  bg-card shadow rounded ">
-                            <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
-                            <h6 class="fw-normal lh-lg"><strong>पृष्ठभूमि </strong> वि.स. २०६२/६३ को जन आन्दोलनले
-                                संबैधानिक राजतन्त्रलाई
-                                विस्थापित गरी मुलुक लोकतान्त्रिक&nbsp;गणतन्त्रात्मक शासन व्यवस्थामा रूपान्तरण भएको
-                                संविधान सभाबाट निर्मित
-                                संविधानले कानुनी रूपमा मुलुकलाई सङ्घीय संरचनामा
-                                लगेकोले सात वटा प्रदेशहरू कायम रहन गएको सन्दर्भमा प्रत्येक प्रदेशमा सातै वटा
-                                मन्त्रालयहरू कायम रहने
-                                व्यवस्था अनुसार यो मन्त्रालयको स्थापना मिति २०७४/१०/२२ गते भएको हो।</h6>
-                            <div class="d-flex justify-content-end">
-                                <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
-                            </div>
-                        </div>
-                    </div>
             </div>
         </div>
     </section>
@@ -139,8 +145,6 @@
                                 </small>
                             </span>
                             </a>
-
-
                             <a routerLink='#' class="btn btn-sm bg-main-blue btn-hover-main float-right rounded-0">अरु
                                 थपपद्नुहोस</a>
                         </div>
@@ -277,6 +281,105 @@
                 </div>
             </div>
         </div>
+    </section>
+
+
+    <section class="tab-section mt-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 ps-lg-7 text-lg-start mt-3">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                    type="button" role="tab" aria-controls="home" aria-selected="true">सूचना
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                    type="button" role="tab" aria-controls="profile" aria-selected="false">समाचार
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                                    type="button" role="tab" aria-controls="contact" aria-selected="false">प्रेस
+                                विज्ञप्ति
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="tab-content notice" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="सूचना-tab">
+                            <div class="list-item-body">
+                                <a href="#" target="_blank" class="note">
+                                    इ-नक्सा<span> Posted Date:- 2079-03-05</span>
+                                </a>
+                                <a href="#" target="_blank" class="note">
+                                    इ-नक्सा<span>Posted Date:- 2079-03-05 </span>
+                                </a>
+                                <a href="#">
+                                    <button type="button" class="btn btn-primary">अरु थपपद्नुहोस</button>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="समाचार-tab">
+                            <div class="list-item-body">
+                                <a href="#" target="_blank" class="note">
+                                    इ-नक्सा
+                                    <span> Posted Date:- 2079-03-05 </span>
+                                </a>
+                                <a href="#" target="_blank" class="note">
+                                    इ-नक्सा<span>Posted Date:- 2079-03-05 </span>
+                                </a>
+                                <a href="#">
+                                    <button type="button" class="btn btn-primary">अरु थपपद्नुहोस</button>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="प्रेस विज्ञप्ति-tab">
+                            <div class="list-item-body">
+                                <a href="#" target="_blank" class="note">
+                                    इ-नक्सा<span>Posted Date:- 2079-03-05 </span>
+                                </a>
+                                <a href="#" target="_blank" class="note">
+                                    इ-नक्सा<span>Posted Date:- 2079-03-05 </span>
+                                </a>
+                                <a href="#">
+                                    <button type="button" class="btn btn-primary">अरु थपपद्नुहोस</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 ps-lg-7 text-lg-start mt-3">
+                    <div class="container">
+                        <div class="video">
+                            <iframe width="525" height="300" src="https://www.youtube.com/embed/13UQAEKF2HM"
+                                    title="OMG बालेनले टुकुचा खोला खोज्दा भेटियो सयौं वर्ष पुरानो राजा चढ्ने गाडि।एक्कासी भयो भागाभाग,हंगामा🚎"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-lg-12 mt-3">
+                        <div class="mobile-app">
+                            <div class="card-01 h-100">
+                                <h6 class="heading mb-2">NMC Mobile Application</h6>
+                                <p>
+                                    <a target="_blank" href="#"><img src="assets/img/logo.png"
+                                                                     class="img-fluid animation"></a>
+                                    <a target="_blank" href="#"><img src="assets/img/logo.png"
+                                                                     class="img-fluid animation"></a>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
     <section class="social-section mt-5">
         <div class="container">
@@ -305,8 +408,8 @@
                             <div class="facebook-page">
                                 <iframe
                                     src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Finfosysninja&tabs=timeline&width=340&height=400&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId"
-                                    width="340" height="400" style="border:none;overflow:hidden" scrolling="no"
-                                    frameborder="0"
+                                    width="340" height="400"
+                                    style="border:none;overflow:hidden" scrolling="no" frameborder="0"
                                     allowfullscreen="true"
                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                             </div>
@@ -333,43 +436,7 @@
     <section class="gallery-slider mt-5 ">
         <h3 class="text-center">फोटो ग्यालरी</h3>
         <div class="container p-2">
-            <swiper [spaceBetween]="50" [slidesPerView]="3" [slidesPerGroup]="1"
-                    [loop]="true" [centeredSlides]="true" [autoplay]="{
-                delay: 2500,
-                disableOnInteraction: false }" [pagination]="{
-                clickable: true }" [navigation]="false" class="mySwiper">
-                <ng-template swiperSlide>
-                    <div class="card bg-white">
-                        <img class="mb-2 card-img-top" src="assets/img/logo.png" alt="Card image cap">
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush ">
-                                <li class="list-group-item text-center fs-5 bg-transparent">यो फोटो सालाइडर १ हो</li>
-                            </ul>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template swiperSlide>
-                    <div class="card bg-white">
-                        <img class="mb-2 card-img-top" src="assets/img/logo.png" alt="Card image cap">
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush ">
-                                <li class="list-group-item text-center fs-5 bg-transparent">यो फोटो सालाइडर १ हो</li>
-                            </ul>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template swiperSlide>
-                    <div class="card bg-white">
-                        <img class="mb-2 card-img-top" src="assets/img/logo.png" alt="Card image cap">
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush ">
-                                <li class="list-group-item text-center fs-5 bg-transparent">यो फोटो सालाइडर १ हो</li>
-                            </ul>
-                        </div>
-                    </div>
-                </ng-template>
-            </swiper>
+            images
         </div>
     </section>
-
 @endsection

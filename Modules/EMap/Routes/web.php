@@ -22,3 +22,9 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::post('register', [OrganizationAuthController::class, 'registerOrganization'])->name('register');
 
 });
+Route::view('/e-map','emap::frontend.e-map.index');
+Route::view('/downloads','emap::frontend.e-map.downloads.downloads');
+Route::view('/e-help','emap::frontend.e-map.e-help.e-help');
+Route::view('/notice','emap::frontend.e-map.notice.notice');
+Route::view('/register','emap::frontend.e-map.register.register-form');
+Route::view('/track','emap::frontend.e-map.track.track');

@@ -3,25 +3,26 @@
 namespace Modules\HelpDesk\Database\Seeders;
 
 use App\Models\UserManagement\Permission;
+use App\Traits\StorePermissionTrait;
 use Illuminate\Database\Seeder;
 
 class HelpDeskPermissionTableSeeder extends Seeder
 {
+    use StorePermissionTrait;
+
     public function run()
     {
         $permissions = [
-            ['title' => 'branch_access'],
-            ['title' => 'branch_create'],
-            ['title' => 'branch_edit'],
-            ['title' => 'branch_delete'],
-            ['title' => 'service_access'],
-            ['title' => 'service_create'],
-            ['title' => 'service_edit'],
-            ['title' => 'service_delete'],
+            'branch_access',
+            'branch_create',
+            'branch_edit',
+            'branch_delete',
+            'service_access',
+            'service_create',
+            'service_edit',
+            'service_delete',
         ];
 
-        foreach ($permissions as $permission) {
-            Permission::create($permission);
-        }
+        $this->storePermission($permissions);
     }
 }

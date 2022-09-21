@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" [class.show]="classApplied">
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink="/home" routerLinkActive="active">
+                    <a class="nav-link" aria-current="page" href="{{url('/')}}">
                         <mat-icon class="icon-size-4" [svgIcon]="'icon_solid:home'"></mat-icon>
                         गृहपृष्ठ
                     </a>
@@ -39,8 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink="/e-map" routerLinkActive="active">
-                        <mat-icon class="icon-size-4" [svgIcon]="'icon_solid:map'"></mat-icon>
+                    <a class="nav-link" href="{{url('e-map')}}">
                         इ-नक्सा
                     </a>
                 </li>
@@ -64,7 +63,3 @@
         </div>
     </div>
 </nav>
-
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/header.css')}}">
-@endpush

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\HelpDesk\Entities\Branch;
+use Modules\HelpDesk\Http\Requests\Branch\StoreBranchRequest;
+use Modules\HelpDesk\Http\Requests\Branch\UpdateBranchRequest;
 
 class BranchController extends Controller
 {
@@ -17,7 +19,7 @@ class BranchController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $branches = Branch::with('branch')->get();
+        $branches = Branch::with('branches.branch')->whereNull('branch_id')->orderBy('branch_id')->get();
 
         return view('helpdesk::admin.branch.index', compact('branches'));
     }
@@ -34,12 +36,16 @@ class BranchController extends Controller
         return view('helpdesk::admin.branch.create', compact('mainBranches'));
     }
 
-    public function store(Request $request)
+    public function store(StoreBranchRequest $request)
     {
         abort_if(Gate::denies('branch_create'),
             403,
             'You are not allowed to access this resource'
         );
+        Branch::create($request->validated());
+
+        toast('शाखा सफलतापूर्वक थपियो', 'success');
+        return back();
     }
 
     public function show(Branch $branch)
@@ -58,16 +64,23 @@ class BranchController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+        $mainBranches = Branch::whereNull('branch_id')->get();
 
-        return view('helpdesk::edit');
+        return view('helpdesk::admin.branch.edit', compact('branch','mainBranches'));
     }
 
-    public function update(Request $request, Branch $branch)
+    public function update(UpdateBranchRequest $request, Branch $branch)
     {
         abort_if(Gate::denies('branch_edit'),
             403,
             'You are not allowed to access this resource'
         );
+
+        $branch->update($request->validated());
+
+        toast('शाखा सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
+        return redirect(route('admin.helpDesk.branch.index'));
     }
 
     public function destroy(Branch $branch)
@@ -76,5 +89,9 @@ class BranchController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+        $branch->delete();
+
+        toast('शाखा सफलतापूर्वक हटाइयो', 'success');
+        return back();
     }
 }

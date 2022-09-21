@@ -47,10 +47,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($branches as $branch)
+                            @forelse($branches as $key=>$branch)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$branch->branch_name}}</td>
+                                    <th>{{$branch->branch_name}}</th>
+                                    <td>{{$branch->branch->branch_name??''}}</td>
                                     <td>
                                         <a href="{{route('admin.helpDesk.branch.edit',$branch)}}"
                                            class="btn btn-xs btn-outline-primary">
@@ -66,6 +67,30 @@
                                         </form>
                                     </td>
                                 </tr>
+                                @foreach($branch->branches as $subBranch)
+                                    <tr>
+                                        <td>
+                                            {{$key+1}}.
+                                            {{$loop->iteration}}
+                                        </td>
+                                        <td>{{$subBranch->branch_name}}</td>
+                                        <td>{{$subBranch->branch->branch_name??''}}</td>
+                                        <td>
+                                            <a href="{{route('admin.helpDesk.branch.edit',$subBranch)}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                            <form action="{{route('admin.helpDesk.branch.destroy',$subBranch)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @empty
                                 <tr>
                                     <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
