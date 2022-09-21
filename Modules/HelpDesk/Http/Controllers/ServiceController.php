@@ -5,9 +5,11 @@ namespace Modules\HelpDesk\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Modules\HelpDesk\Entities\Branch;
 use Modules\HelpDesk\Entities\Service;
+use Modules\HelpDesk\Http\Requests\Service\StoreServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -34,12 +36,32 @@ class ServiceController extends Controller
         return view('helpdesk::admin.service.create', compact('mainBranches'));
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         abort_if(Gate::denies('service_create'),
             403,
             'You are not allowed to access this resource'
         );
+
+        DB::transaction(function () use ($request) {
+            $service = Service::create($request->validated());
+
+            foreach ($request->validated()['serviceDocuments'] as $serviceDocument) {
+                $service->serviceDocuments()->create($serviceDocument);
+            }
+
+            foreach ($request->validated()['serviceProcesses'] as $serviceProcess) {
+                $service->serviceProcesses()->create($serviceProcess);
+            }
+
+            foreach ($request->validated()['serviceEmployees'] as $serviceEmployee) {
+                $service->serviceEmployees()->create($serviceEmployee);
+            }
+        });
+
+        toast('Service Created Successfully', 'success');
+
+        return back();
     }
 
     public function show(Service $service)
