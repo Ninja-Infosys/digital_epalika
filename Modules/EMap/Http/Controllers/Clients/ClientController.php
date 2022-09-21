@@ -14,7 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::where('user_id', auth('organization')->user()->id)->get();
-        return view('emap::clients.client.index');
+        return view('emap::clients.client.index', compact('clients'));
     }
 
     public function create()
