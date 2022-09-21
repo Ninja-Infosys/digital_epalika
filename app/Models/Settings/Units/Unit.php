@@ -5,6 +5,7 @@ namespace App\Models\Settings\Units;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
@@ -27,5 +28,15 @@ class Unit extends Model
     public function measurementUnit(): BelongsTo
     {
         return $this->belongsTo(MeasurementUnit::class);
+    }
+
+    public function conversionUnitFrom(): HasMany
+    {
+        return $this->hasMany(UnitConversion::class, 'conversion_from');
+    }
+
+    public function conversionUnitTo(): HasMany
+    {
+        return $this->hasMany(UnitConversion::class, 'conversion_to');
     }
 }
