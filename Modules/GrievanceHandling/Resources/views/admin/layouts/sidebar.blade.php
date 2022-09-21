@@ -23,7 +23,7 @@
                 </a>
                 <div class="collapse" id="sidebarGrievanceHandlingSetting">
                     <ul class="nav-second-level">
-                        @can('municipalMeeting_access')
+                        @can('grievanceType_access')
                             <li class="{{request()->routeIs('admin.executiveMeeting.municipalMeetingNotice.index') ? 'active' : ''}}">
                                 <a href="{{route('admin.executiveMeeting.municipalMeetingNotice.index')}}">
                                     <span> गुनासो प्रकार </span>

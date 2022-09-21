@@ -64,7 +64,7 @@
                 </li>
 
 
-                @includeIf('grievancehandling::layouts.sidebar')
+                @includeIf('grievancehandling::admin.layouts.sidebar')
 
                 <li>
                     <a href="#sidebarExecutiveMeeting" data-bs-toggle="collapse">
