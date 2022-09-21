@@ -27,7 +27,7 @@ class DigitalBoardApiController extends Controller
         $videos = Video::latest()->get();
 
         return [
-            'notices' => NoticeResource::collection($notices->where('type', 'Notice')),
+            'notices' => NoticeResource::collection($notices->where('type','Notice')),
             'newses' => NewsResource::collection($notices->where('type', 'News')),
             'videos' => VideoResource::collection($videos),
             'employees' => EmployeeResource::collection($employees)
