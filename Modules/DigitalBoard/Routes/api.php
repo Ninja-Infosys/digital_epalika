@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\DigitalBoard\Http\Controllers\Api\DigitalBoardApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/digitalboard', function (Request $request) {
     return $request->user();
 });
+
+Route::get('home',[DigitalBoardApiController::class,'home'])->name('home');
+Route::get('officeSetting',[DigitalBoardApiController::class,'officeSetting'])->name('officeSetting');

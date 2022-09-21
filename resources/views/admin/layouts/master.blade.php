@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/nepali.datepicker.v3.7.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/summernote/summernote-bs4.css')}}">
 
+
     @livewireStyles
 </head>
 
@@ -136,13 +137,15 @@
     });
 </script>
 
+
+
 <script src="{{asset('assets/backend/summernote/summernote-bs4.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('.summernote').summernote({
             placeholder: 'Description',
             tabsize: 2,
-            height: 300
+            height: 200
         });
     });
 </script>

@@ -19,23 +19,24 @@ class PublicApiController extends Controller
 {
     public function home()
     {
-        $notices = Notice::where(['type' => 'Notice', 'show_on_index' => 1, 'closed_at' === null])->orderBy('date', 'desc')->get();
-        $news = Notice::where(['type' => 'News', 'show_on_index' => 1, 'closed_at' === null])->latest()->get();
+        $notices = Notice::where([ 'show_on_index' => 1, 'closed_at' === null])->orderBy('date', 'desc')->get();
         $employees = Employee::where('status', 1)->orderBy('position')->get();
         $videos = Video::latest()->get();
         return [
-            'notices' => NoticeResource::collection($notices),
+            'notices' => NoticeResource::collection($notices->where('type', '=', 'Notice')),
+            'news' => NoticeResource::collection($notices->where('type', '=', 'News')),
             'employees' => EmployeeResource::collection($employees),
             'videos' => VideoResource::collection($videos)
         ];
     }
+
     public function officeSetting()
     {
         $officeSetting = OfficeSetting::first();
         $officeHeaders = OfficeHeader::orderBy('position')->get();
         return [
             'office_setting' => new OfficeSettingResource($officeSetting),
-            'office_headers' =>  OfficeHeaderResource::collection($officeHeaders)
+            'office_headers' => OfficeHeaderResource::collection($officeHeaders)
         ];
     }
 }
