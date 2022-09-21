@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Models\OfficeHeader;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,7 +13,8 @@ class OfficeSettingController extends Controller
     public function index()
     {
         $officeSetting = OfficeSetting::first();
-        return view('admin.setting.officeSetting.index', compact('officeSetting'));
+        $officeHeaders = OfficeHeader::orderBy('position')->get();
+        return view('admin.setting.officeSetting.index', compact('officeSetting','officeHeaders'));
     }
 
 
@@ -38,6 +40,19 @@ class OfficeSettingController extends Controller
             ]
 
         );
+
+        if ($request->hasFile('logo') && $officeSetting->logo) {
+            $this->deleteFile($officeSetting->logo);
+        }
+        if ($request->hasFile('logo1') && $officeSetting->logo1) {
+            $this->deleteFile($officeSetting->logo1);
+        }
+        if ($request->hasFile('logo2') && $officeSetting->logo2) {
+            $this->deleteFile($officeSetting->logo2);
+        }
+        if ($request->hasFile('background_image') && $officeSetting->background_image) {
+            $this->deleteFile($officeSetting->background_image);
+        }
         $officeSetting->update($validationData);
 
         toast('कार्यालय सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
