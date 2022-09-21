@@ -40,7 +40,7 @@
                                 <label for="branch_id" class="form-label">मुख्य शाखा</label>
                                 <select
                                     name="branch_id"
-                                    class="form-label @error('branch_id') is-invalid @enderror"
+                                    class="form-select @error('branch_id') is-invalid @enderror"
                                     id="branch_id">
                                     <option value="">छान्नुहोस्</option>
                                     @foreach($mainBranches as $mainBranch)
