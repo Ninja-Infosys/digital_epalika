@@ -1,5 +1,7 @@
 {
     "DigitalBoard": true,
     "Circular": true,
-    "EMap": true
+    "EMap": true,
+    "HelpDesk": true,
+    "GrievanceHandling": true
 }

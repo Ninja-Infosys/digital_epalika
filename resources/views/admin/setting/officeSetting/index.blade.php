@@ -69,6 +69,51 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
+                                    <img src="{{$officeSetting->logo1_url}}" height="60">
+                                    <label for="logo1" class="form-label">लोगो 1 </label>
+                                    <input
+                                        type="file"
+                                        name="logo1"
+
+                                        class="form-control @error('logo1') is-invalid @enderror"
+                                        id="logo1"
+
+                                    />
+                                    @error('logo1')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <img src="{{$officeSetting->logo2_url}}" height="60">
+                                    <label for="logo2" class="form-label">लोगो 2 </label>
+                                    <input
+                                        type="file"
+                                        name="logo2"
+
+                                        class="form-control @error('logo2') is-invalid @enderror"
+                                        id="logo1"
+
+                                    />
+                                    @error('logo2')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <img src="{{$officeSetting->background_image_url}}" height="60">
+                                    <label for="background_image" class="form-label">Background Image</label>
+                                    <input
+                                        type="file"
+                                        name="background_image"
+
+                                        class="form-control @error('background_image') is-invalid @enderror"
+                                        id="background_image"
+
+                                    />
+                                    @error('background_image')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="email" class="form-label">इमेल  </label>
                                     <input
                                         type="text"

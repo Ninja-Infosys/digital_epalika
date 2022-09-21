@@ -20,10 +20,10 @@ class StoreNoticeRequest extends FormRequest
             'date' => ['required'],
             'description' => ['nullable'],
             'closed_at' => ['nullable'],
-            'type' => ['required', Rule::in(config('defaults.notice_type'))],
             'show_on_index' => ['nullable', 'boolean'],
-            'files' => ['required_if:type,Notice','nullable', 'array'],
-            'files.*' => ['mimes:png,jpeg,jpg'],
+//            'type'=>'Notice',
+//            'files' => ['required_if:type,Notice','nullable', 'array'],
+//            'files.*' => ['mimes:png,jpeg,jpg'],
         ];
     }
 

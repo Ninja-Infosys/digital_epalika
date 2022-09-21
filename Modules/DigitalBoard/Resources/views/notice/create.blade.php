@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.notice.index')}}">सूचना / समाचार </a>
+                            <a href="{{route('admin.digitalBoard.notice.index',$type)}}">{{$type==='Notice' ?'सूचना':'समाचार'}} </a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ सूचना /समाचार थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">नयाँ {{$type==='Notice' ?'सूचना':'समाचार'}}  थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सूचना / समाचार </h4>
+                <h4 class="page-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  </h4>
             </div>
         </div>
     </div>
@@ -27,14 +27,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सूचना / समाचार थप्नुहोस्</h4>
-                        <a href="{{route('admin.digitalBoard.notice.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> सूचना / समाचार सूची
+                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}}  थप्नुहोस्</h4>
+                        <a href="{{route('admin.digitalBoard.notice.index',$type)}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> {{$type==='Notice' ?'सूचना':'समाचार'}} सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.digitalBoard.notice.store')}}" method="post"
+                    <form action="{{route('admin.digitalBoard.notice.store',$type)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
@@ -67,18 +67,6 @@
                                         placeholder=" मिति"
                                     />
                                     @error('date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="type" class="form-label">प्रकार *</label>
-                                    <select name="type" id="type" class="form-control">
-                                        <option value="">छान्नुहोस्</option>
-                                        @foreach(config('defaults.notice_type') as $key=>$type)
-                                        <option value="{{$type}}" {{old('type')==$type ? 'selected':''}}>{{$key}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('type')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

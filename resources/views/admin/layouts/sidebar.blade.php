@@ -62,15 +62,9 @@
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>ई-गुनासो </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
+
+
+                @includeIf('grievancehandling::admin.layouts.sidebar')
 
                 <li>
                     <a href="#sidebarExecutiveMeeting" data-bs-toggle="collapse">
@@ -167,7 +161,6 @@
                         </ul>
                     </div>
                 </li>
-
 
                 <li>
                     <a href="#sidebarListRegistration" data-bs-toggle="collapse">

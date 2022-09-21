@@ -14,7 +14,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_access'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
 
         $units = Unit::with('measurementUnit', 'measurementUnit.type')->latest()->get();
@@ -25,7 +25,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_create'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
 
         return view('admin.setting.units.unit.create');
@@ -35,7 +35,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_create'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to this resource'
         );
 
         Unit::create($request->validated());
@@ -52,7 +52,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_edit'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
 
 
@@ -63,7 +63,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_edit'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $unit->update($request->validated());
 
@@ -75,7 +75,7 @@ class UnitController extends Controller
     {
         abort_if(Gate::denies('unit_delete'),
             403,
-            'You are not allowed to digital board news access'
+            'You are not allowed to access this resource'
         );
         $unit->delete();
         toast('मापन एकाइ सफलतापूर्वक मेटाइयो', 'success');

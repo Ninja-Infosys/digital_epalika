@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.digitalBoard.notice.index')}}">सूचना / समाचार</a>
+                            <a href="{{route('admin.digitalBoard.notice.index',$type)}}">{{$type}}</a>
                         </li>
-                        <li class="breadcrumb-item active">सूचना / समाचार </li>
+                        <li class="breadcrumb-item active">{{$type==='Notice' ?'सूचना':'समाचार'}} </li>
                     </ol>
                 </div>
-                <h4 class="page-title">सूचना / समाचार </h4>
+                <h4 class="page-title">{{$type==='Notice' ?'सूचना':'समाचार'}}</h4>
             </div>
         </div>
     </div>
@@ -27,11 +27,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">सूचना / समाचार सूची</h4>
+                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}} सूची</h4>
                         @can('user_create')
-                            <a href="{{route('admin.digitalBoard.notice.create')}}"
+                            <a href="{{route('admin.digitalBoard.notice.create',$type)}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ सूचना / समाचार थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ {{$type==='Notice' ?'सूचना':'समाचार'}} थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -56,14 +56,14 @@
                                     <td>{{$notice->title}}</td>
                                     <td>{{$notice->date->toDateString()}}</td>
                                     <td>
-                                        <a href="{{route('admin.digitalBoard.notice.updateShowOnIndex',$notice)}}"
+                                        <a href="{{route('admin.digitalBoard.notice.updateShowOnIndex',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-{{$notice->show_on_index==1 ?'primary':'danger'}}">
                                             <i class="fa  {{$notice->show_on_index==1 ?' fa-check':'fa-window-close'}}"></i>
 
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.digitalBoard.notice.updateClosedDate',$notice)}}"
+                                        <a href="{{route('admin.digitalBoard.notice.updateClosedDate',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-{{$notice->closed_at==null ?'primary':'danger'}}">
                                             <i class="fa  {{$notice->closed_at==null ?' fa-check':'fa-window-close'}}"></i>
 
@@ -71,17 +71,17 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.digitalBoard.notice.show',$notice)}}"
+                                        <a href="{{route('admin.digitalBoard.notice.show',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i>
 
 
                                         </a>
-                                        <a href="{{route('admin.digitalBoard.notice.edit',$notice)}}"
+                                        <a href="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.digitalBoard.notice.destroy',$notice)}}"
+                                        <form action="{{route('admin.digitalBoard.notice.destroy',[$type,$notice])}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
