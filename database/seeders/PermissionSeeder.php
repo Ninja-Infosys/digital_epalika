@@ -3,63 +3,60 @@
 namespace Database\Seeders;
 
 use App\Models\UserManagement\Permission;
+use App\Models\UserManagement\Role;
+use App\Traits\StorePermissionTrait;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
 {
+    use StorePermissionTrait;
+
     public function run()
     {
         $permissions = [
-            ['title' => 'role_access'],
-            ['title' => 'role_create'],
-            ['title' => 'role_edit'],
-            ['title' => 'role_delete'],
-            ['title' => 'user_access'],
-            ['title' => 'user_create'],
-            ['title' => 'user_edit'],
-            ['title' => 'user_delete'],
-            ['title' => 'fiscalYear_access'],
-            ['title' => 'fiscalYear_create'],
-            ['title' => 'fiscalYear_edit'],
-            ['title' => 'fiscalYear_delete'],
-
-            ['title' => 'executiveCommittee_access'],
-            ['title' => 'executiveCommittee_create'],
-            ['title' => 'executiveCommittee_edit'],
-            ['title' => 'executiveCommittee_delete'],
-            ['title' => 'municipalMeeting_access'],
-            ['title' => 'municipalMeeting_create'],
-            ['title' => 'municipalMeeting_edit'],
-            ['title' => 'municipalMeeting_delete'],
-            ['title' => 'wardMeeting_access'],
-            ['title' => 'wardMeeting_create'],
-            ['title' => 'wardMeeting_edit'],
-            ['title' => 'wardMeeting_delete'],
-
-            ['title' => 'listRegistration_access'],
-            ['title' => 'listRegistration_create'],
-            ['title' => 'listRegistration_edit'],
-            ['title' => 'listRegistration_delete'],
-
-            ['title' => 'unitType_access'],
-            ['title' => 'unitType_create'],
-            ['title' => 'unitType_edit'],
-            ['title' => 'unitType_delete'],
-
-            ['title' => 'MeasurementUnit_access'],
-            ['title' => 'MeasurementUnit_create'],
-            ['title' => 'MeasurementUnit_edit'],
-            ['title' => 'MeasurementUnit_delete'],
-
-            ['title' => 'unit_access'],
-            ['title' => 'unit_create'],
-            ['title' => 'unit_edit'],
-            ['title' => 'unit_delete'],
+            'role_access',
+            'role_create',
+            'role_edit',
+            'role_delete',
+            'user_access',
+            'user_create',
+            'user_edit',
+            'user_delete',
+            'fiscalYear_access',
+            'fiscalYear_create',
+            'fiscalYear_edit',
+            'fiscalYear_delete',
+            'executiveCommittee_access',
+            'executiveCommittee_create',
+            'executiveCommittee_edit',
+            'executiveCommittee_delete',
+            'municipalMeeting_access',
+            'municipalMeeting_create',
+            'municipalMeeting_edit',
+            'municipalMeeting_delete',
+            'wardMeeting_access',
+            'wardMeeting_create',
+            'wardMeeting_edit',
+            'wardMeeting_delete',
+            'listRegistration_access',
+            'listRegistration_create',
+            'listRegistration_edit',
+            'listRegistration_delete',
+            'unitType_access',
+            'unitType_create',
+            'unitType_edit',
+            'unitType_delete',
+            'MeasurementUnit_access',
+            'MeasurementUnit_create',
+            'MeasurementUnit_edit',
+            'MeasurementUnit_delete',
+            'unit_access',
+            'unit_create',
+            'unit_edit',
+            'unit_delete',
         ];
 
-        foreach ($permissions as $permission) {
-            Permission::create($permission);
-        }
+        $this->storePermission($permissions);
     }
 }

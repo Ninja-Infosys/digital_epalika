@@ -3,25 +3,27 @@
 namespace Modules\Circular\Database\Seeders;
 
 use App\Models\UserManagement\Permission;
+use App\Models\UserManagement\Role;
+use App\Traits\StorePermissionTrait;
 use Illuminate\Database\Seeder;
 
 class CircularPermissionTableSeeder extends Seeder
 {
+    use StorePermissionTrait;
+
     public function run()
     {
         $permissions = [
-            ['title' => 'registration_access'],
-            ['title' => 'registration_create'],
-            ['title' => 'registration_edit'],
-            ['title' => 'registration_delete'],
-            ['title' => 'dispatch_access'],
-            ['title' => 'dispatch_create'],
-            ['title' => 'dispatch_edit'],
-            ['title' => 'dispatch_delete'],
+            'registration_access',
+            'registration_create',
+            'registration_edit',
+            'registration_delete',
+            'dispatch_access',
+            'dispatch_create',
+            'dispatch_edit',
+            'dispatch_delete',
         ];
 
-        foreach ($permissions as $permission) {
-            Permission::create($permission);
-        }
+        $this->storePermission($permissions);
     }
 }

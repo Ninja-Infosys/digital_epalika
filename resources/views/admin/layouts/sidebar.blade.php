@@ -53,15 +53,7 @@
                 @includeIf('circular::layouts.sidebar')
 
 
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>हेल्प डेस्क </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
+                @includeIf('helpdesk::admin.layouts.sidebar')
 
 
                 @includeIf('grievancehandling::admin.layouts.sidebar')
@@ -308,7 +300,7 @@
                     <div class="{{request()->is('admin/setting/*') ?'':'collapse'}}" id="setting">
                         <ul class="nav-second-level">
                             @can('fiscalYear_access')
-                                <li class="{{request()->routeIs('admin.fiscalYear.index') ? 'active':''}}">
+                                <li class="{{request()->routeIs('admin.fiscalYear.*') ? 'active':''}}">
                                     <a href="{{route('admin.fiscalYear.index')}}">आर्थिक बर्ष</a>
                                 </li>
                             @endcan
@@ -320,7 +312,7 @@
                                         <i class="fa fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <div class="collapse" id="sidebarUnits">
+                                <div class="{{request()->is('admin/setting/units/*') ?'':'collapse'}}" id="sidebarUnits">
                                     <ul class="nav-second-level">
                                         @can('unitType_access')
                                             <li class="{{request()->routeIs('admin.units.type.*') ? 'active' : ''}}">
