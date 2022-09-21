@@ -8,7 +8,8 @@ use Modules\DigitalBoard\Http\Controllers\VideoController;
 
 Route::resource('video', VideoController::class);
 Route::resource('notice', NoticeController::class);
-Route::get('news/{news}/newsUpdate',[NewsController::class,'updateClosedDate'])->name('news.updateClosedDate');
+Route::get('notice/{notice}/noticeUpdate',[NoticeController::class,'updateClosedDate'])->name('notice.updateClosedDate');
+Route::get('notice/{notice}/updateShowOnIndex',[NoticeController::class,'updateShowOnIndex'])->name('notice.updateShowOnIndex');
 Route::resource('news', NewsController::class);
 
 Route::get('employee/{employee}/updateEmployeeStatus',[EmployeeController::class,'updateEmployeeStatus'])->name('employee.updateEmployeeStatus');

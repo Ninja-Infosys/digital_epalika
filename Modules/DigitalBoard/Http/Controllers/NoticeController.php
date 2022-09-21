@@ -65,6 +65,7 @@ class NoticeController extends Controller
             'तपाईंलाई डिजिटल बोर्ड सूचना पहुँच गर्न अनुमति छैन'
         );
 
+        $notice->load('files');
         return view('digitalboard::notice.show', compact('notice'));
     }
 
@@ -95,7 +96,7 @@ class NoticeController extends Controller
 
 
         toast('सूचना सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return back();
+        return redirect(route('admin.digitalBoard.notice.index'));
     }
 
     public function destroy(Notice $notice)
@@ -105,20 +106,36 @@ class NoticeController extends Controller
             'तपाइलाई डिजिटल बोर्ड सूचना मेटाउन अनुमति छैन '
         );
 
+        foreach ($notice->files as $file)
+        {
+            $this->deleteFile($file->file);
+        }
+        $notice->files()->delete();
         $notice->delete();
 
         toast('सूचना सफलतापूर्वक मेटियो', 'success');
+        return back();
     }
 
-//    public function updateClosedDate(News $news)
-//    {
-//        $news->update([
-//            'closed_at'=> !empty($news->closed_at) ? null :now()
-//        ]);
-//        toast('समाचार स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
-//        return back();
-//
-//    }
+    public function updateClosedDate(Notice $notice)
+    {
+        $notice->update([
+            'closed_at'=> !empty($notice->closed_at) ? null :now()
+        ]);
+        toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+
+    }
+
+    public function updateShowOnIndex(Notice $notice)
+    {
+        $notice->update([
+            'show_on_index'=>!$notice->show_on_index
+        ]);
+        toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+
+    }
 
     public function fileUpload($notice,$request)
     {
