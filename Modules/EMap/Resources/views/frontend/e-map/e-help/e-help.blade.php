@@ -1,4 +1,4 @@
-@extends('resources.views.frontend.layouts.master')
+@extends('frontend.layouts.master')
 @section('content')
     <section class="help-section">
         <div class="container">

@@ -1,4 +1,4 @@
-@extends('resources.views.frontend.layouts.master')
+@extends('frontend.layouts.master')
 @section('content')
     <section class="inner-section mt-lg-5 ">
         <div class="container-fluid">
