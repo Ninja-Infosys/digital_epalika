@@ -28,7 +28,6 @@ class UpdateDecisionRequest extends FormRequest
     {
         return [
             'meeting_detail_id.required' => 'नगरपालिका बैठक आईडी आवश्यक छ',
-            'subject.string' => 'विषय स्ट्रिङ फर्ममा हुनुपर्छ',
             'decision_file.mimes' => 'निर्णय फाइल अनिबार्य png, jpeg, jpg मा हुनुपर्छ '
         ];
     }

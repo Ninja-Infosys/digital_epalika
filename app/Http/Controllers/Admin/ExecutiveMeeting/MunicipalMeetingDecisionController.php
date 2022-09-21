@@ -32,7 +32,7 @@ class MunicipalMeetingDecisionController extends Controller
             'You are not allowed to municipal meeting access'
         );
 
-        $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();;
+        $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();
 
         return view('admin.executive_meeting.municipalMeeting_decision.create', compact('meetingDetails'));
     }
@@ -66,8 +66,9 @@ class MunicipalMeetingDecisionController extends Controller
             'You are not allowed to municipal meeting access'
         );
 
-        $municipalMeetingNotices = MunicipalMeetingNotice::latest()->get();
-        return view('admin.executive_meeting.municipalMeeting_decision.edit', compact('municipalMeetingDecision', 'municipalMeetingNotices'));
+        $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();
+
+        return view('admin.executive_meeting.municipalMeeting_decision.edit', compact('municipalMeetingDecision', 'meetingDetails'));
     }
 
     public function update(UpdateDecisionRequest $request, MunicipalMeetingDecision $municipalMeetingDecision)
