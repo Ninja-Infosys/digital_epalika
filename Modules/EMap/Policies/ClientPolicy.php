@@ -21,7 +21,7 @@ class ClientPolicy
     public function view(User $user, Client $client)
     {
         return $user->id === $client->user_id ? Response::allow()
-            : Response::deny('You do not own this post.');
+            : Response::denyWithStatus(404, 'You do not own this post.');
     }
 
     public function create(User $user)
@@ -31,21 +31,25 @@ class ClientPolicy
 
     public function update(User $user, Client $client)
     {
-        return $user->id === $client->user_id;
+        return $user->id === $client->user_id ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     public function delete(User $user, Client $client)
     {
-        return $user->id === $client->user_id;
+        return $user->id === $client->user_id ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     public function restore(User $user, Client $client)
     {
-        return $user->id === $client->user_id;
+        return $user->id === $client->user_id ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
     public function forceDelete(User $user, Client $client)
     {
-        return $user->id === $client->user_id;
+        return $user->id === $client->user_id ? Response::allow()
+            : Response::denyAsNotFound();
     }
 }
