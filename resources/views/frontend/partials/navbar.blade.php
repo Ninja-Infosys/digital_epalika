@@ -18,8 +18,8 @@
                         परिचय
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="/static/employees">कर्मचारीहरु</a></li>
-                        <li><a class="dropdown-item" routerLink="/static/elected-official">जनप्रतिनिधिहरु</a></li>
+                        <li><a class="dropdown-item" href="{{ url('static/employee') }}">कर्मचारीहरु</a></li>
+                        <li><a class="dropdown-item" href="{{ url('static/representive') }}">जनप्रतिनिधिहरु</a></li>
                     </ul>
                 </li>
 
@@ -28,13 +28,13 @@
                         ग्यालेरि
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="/static/photo">फोटोहरु</a></li>
-                        <li><a class="dropdown-item" routerLink="/static/audio">अडियोहरु</a></li>
-                        <li><a class="dropdown-item" routerLink="/static/video">भिडियोहरु</a></li>
+                        <li><a class="dropdown-item" href="{{ url('static/photo') }}">फोटोहरु</a></li>
+                        <li><a class="dropdown-item" href="{{ url('static/audio') }}">अडियोहरु</a></li>
+                        <li><a class="dropdown-item" href="{{ url('static/video') }}">भिडियोहरु</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink="/static/category" routerLinkActive="active">
+                    <a class="nav-link" aria-current="page" href="{{ url('/static/category') }}" routerLinkActive="active">
                         श्रेणीहरु
                     </a>
                 </li>
