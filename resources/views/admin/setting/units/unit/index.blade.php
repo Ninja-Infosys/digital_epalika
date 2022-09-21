@@ -41,6 +41,7 @@
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
+                                <th>क्र.स</th>
                                 <th>प्रकार</th>
                                 <th>मापन एकाइ विविधता</th>
                                 <th>मापन एकाइ</th>
@@ -50,6 +51,7 @@
                             <tbody>
                             @forelse($units as $unit)
                                 <tr>
+                                    <td>{{$loop->iteration}}</td>
                                     <td>
                                         {{$unit->measurementUnit->type->title ?? ''}}
                                     </td>
@@ -60,15 +62,15 @@
                                         {{$unit->title ?? ''}}
                                     </td>
                                     <td>
-                                        @can('MeasurementUnit_edit')
-                                            <a href="{{route('admin.units.measurementUnit.edit',$unit)}}"
+                                        @can('unit_edit')
+                                            <a href="{{route('admin.units.unit.edit',$unit)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('MeasurementUnit_delete')
+                                        @can('unit_delete')
                                             <form
-                                                action="{{route('admin.units.measurementUnit.destroy',$unit)}}"
+                                                action="{{route('admin.units.unit.destroy',$unit)}}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
@@ -79,11 +81,9 @@
                                         @endcan
                                     </td>
                                 </tr>
-
-
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td class="text-center" colspan="4">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

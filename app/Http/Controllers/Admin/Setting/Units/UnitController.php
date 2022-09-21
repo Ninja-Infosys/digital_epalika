@@ -18,6 +18,7 @@ class UnitController extends Controller
         );
 
         $units = Unit::with('measurementUnit', 'measurementUnit.type')->latest()->get();
+
         return view('admin.setting.units.unit.index', compact('units'));
     }
 
@@ -55,6 +56,7 @@ class UnitController extends Controller
             'You are not allowed to access this resource'
         );
 
+        $unit->load('measurementUnit');
 
         return view('admin.setting.units.unit.edit', compact('unit'));
     }
