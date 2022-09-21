@@ -20,11 +20,6 @@ use Modules\EMap\Http\Controllers\OrganizationAuthController;
 Route::get('/', function () {
     return view('frontend.home');
 });
-Route::get('/e-map', function () {
-    return view('frontend.e-map.index');
-});
-Route::get('/downloads', function () {
-    return view('frontend.e-map.downloads');
-});
+
 
 

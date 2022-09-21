@@ -22,3 +22,4 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::post('register', [OrganizationAuthController::class, 'registerOrganization'])->name('register');
 
 });
+Route::view('/e-map','emap::frontend.e-map.index');
