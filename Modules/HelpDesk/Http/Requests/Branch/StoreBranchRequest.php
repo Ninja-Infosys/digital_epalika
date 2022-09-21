@@ -3,6 +3,7 @@
 namespace Modules\HelpDesk\Http\Requests\Branch;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreBranchRequest extends FormRequest
 {
@@ -14,7 +15,15 @@ class StoreBranchRequest extends FormRequest
     public function rules():array
     {
         return [
-            //
+            'branch_name'=>['required', 'string','max:255'],
+            'branch_id'=>['nullable',Rule::exists('branches', 'id')]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'branch_name.required' => 'शाखाको  नाम आवश्यक छ',
         ];
     }
 }
