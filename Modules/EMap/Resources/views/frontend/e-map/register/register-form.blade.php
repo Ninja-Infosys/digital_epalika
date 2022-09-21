@@ -1,10 +1,12 @@
+@extends('frontend.layouts.master')
+@section('content')
 <section class="inner-section mt-lg-5 ">
     <div class="container-fluid">
         <div class="row d-flex mt-5 ">
             <div class="col-md-10  mx-auto">
                 <div class="breadcrumb d-flex">
                     <div>
-                        <a class="whitespace-nowrap text-primary-500" [routerLink]="'/e-map'">ई-नक्सा</a>
+                        <a class="whitespace-nowrap text-primary-500" href="{{url('e-map')}}">ई-नक्सा</a>
                     </div>
                     <div class="d-flex items-center ml-1 whitespace-nowrap">
                         <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'icon_solid:chevron-right'"></mat-icon>
@@ -370,3 +372,4 @@
 @push('styles')
     <link rel="stylesheet" href="{{asset('assets/frontend/css/e-map/register.css')}}">
 @endpush
+@endsection

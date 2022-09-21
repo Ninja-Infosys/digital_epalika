@@ -1,9 +1,11 @@
+@extends('frontend.layouts.master')
+@section('content')
 <section class="help-section">
     <div class="container">
         <div class="d-flex mt-5">
             <div class="breadcrumb d-flex">
                 <div>
-                    <a class="whitespace-nowrap text-primary-500" [routerLink]="'/e-map'">ई-नक्सा</a>
+                    <a class="whitespace-nowrap text-primary-500" href="{{url('e-map')}}">ई-नक्सा</a>
                 </div>
                 <div class="d-flex ml-1 whitespace-nowrap">
                     <mat-icon
@@ -30,7 +32,7 @@
         </div>
     </div>
 </section>
-
 @push('styles')
     <link rel="stylesheet" href="{{asset('assets/frontend/css/e-map/e-help.css')}}">
 @endpush
+@endsection

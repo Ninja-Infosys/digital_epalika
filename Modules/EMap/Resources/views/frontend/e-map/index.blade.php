@@ -89,11 +89,11 @@
                                 <mat-icon [svgIcon]="'icon_solid:document-text'"></mat-icon>
                                 <h5 class="fw-semibold mt-2">सूचना</h5>
                                 <p>नयाँ सूचनाहरु हेर्नुहोस ।</p>
-                                <a href=""></a><button class="btn btn-light" ><span>
+                                <a href="{{url('notice')}}"class="btn btn-light" ><span>
                  सूचनाहरु
                 </span>
                                     <mat-icon [svgIcon]="'mat_outline:double_arrow'"></mat-icon>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -103,11 +103,11 @@
                                 <mat-icon [svgIcon]="'icon_solid:map'"></mat-icon>
                                 <h5 class="fw-semibold mt-2">इ-नक्सा</h5>
                                 <p>नयाँ इ-नक्साको लागि दर्ता गर्नुहोस् ।</p>
-                                <button class="btn btn-light" [routerLink]="['register-form']"><span>
+                                <a href="{{url('register')}}" class="btn btn-light" [routerLink]="['register-form']"><span>
                   नयाँ दर्ता गर्नुहोस्
                 </span>
                                     <mat-icon [svgIcon]="'mat_outline:double_arrow'"></mat-icon>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -131,11 +131,11 @@
                                 <mat-icon [svgIcon]="'icon_solid:information-circle'"></mat-icon>
                                 <h5 class="fw-semibold mt-2">सहयोग</h5>
                                 <p>सहयोगको लागि ।</p>
-                                <button class="btn btn-light" [routerLink]="['help']"><span>
+                                <a href="{{url('e-help')}}" class="btn btn-light" [routerLink]="['help']"><span>
                   सहयोग
                 </span>
                                     <mat-icon [svgIcon]="'mat_outline:double_arrow'"></mat-icon>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -145,11 +145,11 @@
                                 <mat-icon [svgIcon]="'icon_solid:presentation-chart-line'"></mat-icon>
                                 <h5 class="fw-semibold mt-2">आवेदन ट्रयाक</h5>
                                 <p>तपाइँको आवेदन कुन चरणमा छ?</p>
-                                <button class="btn btn-light" [routerLink]="['application-track']"><span>
+                                <a href="{{url('track')}}" class="btn btn-light" [routerLink]="['application-track']"><span>
                   आवेदन ट्रयाक
                 </span>
                                     <mat-icon [svgIcon]="'mat_outline:double_arrow'"></mat-icon>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
