@@ -15,7 +15,7 @@ class UpdateBranchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_name' => ['required', 'string', 'max:255'],
+            'branch_name' => ['required', 'string', 'max:255', Rule::unique('branches', 'branch_name')->withoutTrashed()],
             'branch_id' => ['nullable', Rule::exists('branches', 'id')]
         ];
     }
@@ -24,6 +24,7 @@ class UpdateBranchRequest extends FormRequest
     {
         return [
             'branch_name.required' => 'शाखाको  नाम आवश्यक छ',
+            'branch_name.unique' => 'शाखाको नाम अद्वितीय हुनुपर्छ'
         ];
     }
 }
