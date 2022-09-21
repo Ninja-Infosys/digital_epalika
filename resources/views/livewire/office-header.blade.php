@@ -21,9 +21,9 @@
                 </div>
             </legend>
             @if($officeHeaders)
-                @foreach($officeHeaders as $index=>$officeHeader)
-                    <div class="row">
 
+                @foreach($officeHeaders as $index=>$officeHeader)
+                    <div class="row mt-2">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="title.{{$index}}">शिर्षक *</label>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="position.{{$index}}">स्थान </label>
                                 <input type="number" id="position.{{$index}}"
@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <button class="btn btn-danger btn-sm"
                                         wire:click.prevent="removeOfficeHeader({{$index}})">
@@ -95,14 +95,15 @@
                                 </button>
                             </div>
                         </div>
-                        @endforeach
-                        <div class="col-md-12 mt-5">
-                            <button type="submit" class="btn btn-sm btn-primary">
-                                Submit
-                            </button>
-                        </div>
-                        @endif
                     </div>
+                @endforeach
+                <div class="col-md-12 mt-5">
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        Submit
+                    </button>
+                </div>
+            @endif
+
         </fieldset>
 
 
