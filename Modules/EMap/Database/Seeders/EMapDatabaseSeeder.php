@@ -8,6 +8,8 @@ class EMapDatabaseSeeder extends Seeder
 {
     public function run()
     {
-
+        $this->call([
+            EMapPermissionTableSeeder::class
+        ]);
     }
 }

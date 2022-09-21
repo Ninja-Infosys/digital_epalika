@@ -85,6 +85,38 @@
                                     @enderror
                                 </div>
 
+                                <div class="col-md-4 mb-2">
+                                    <label for="position" class="form-label">Position *</label>
+                                    <input
+                                        type="text"
+                                        name="position"
+                                        value="{{old('position')}}"
+                                        class="form-control @error('position') is-invalid @enderror"
+                                        id="position"
+                                        placeholder="मापन एकाइ "
+                                    />
+                                    @error('position')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-4 mb-2">
+
+                                    <input
+                                        type="checkbox"
+                                        name="is_smallest"
+                                        value="{{old('is_smallest')}}"
+                                        class=" @error('is_smallest') is-invalid @enderror"
+                                        id="is_smallest"
+                                        placeholder="मापन एकाइ "
+                                    />
+                                    <label for="is_smallest" class="form-label">is smallest *</label>
+
+                                    @error('is_smallest')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+
                             </div>
                         </fieldset>
 

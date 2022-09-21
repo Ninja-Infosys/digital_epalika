@@ -3,6 +3,7 @@
 namespace Modules\DigitalBoard\Database\Seeders;
 
 use App\Models\UserManagement\Permission;
+use App\Models\UserManagement\Role;
 use Illuminate\Database\Seeder;
 
 class DigitalBoardPermissionTableSeeder extends Seeder
@@ -10,26 +11,35 @@ class DigitalBoardPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            ['title' => 'digitalBoardVideo_access'],
-            ['title' => 'digitalBoardVideo_create'],
-            ['title' => 'digitalBoardVideo_edit'],
-            ['title' => 'digitalBoardVideo_delete'],
-            ['title' => 'digitalBoardNotice_access'],
-            ['title' => 'digitalBoardNotice_create'],
-            ['title' => 'digitalBoardNotice_edit'],
-            ['title' => 'digitalBoardNotice_delete'],
-            ['title' => 'digitalBoardNews_access'],
-            ['title' => 'digitalBoardNews_create'],
-            ['title' => 'digitalBoardNews_edit'],
-            ['title' => 'digitalBoardNews_delete'],
-            ['title' => 'employee_access'],
-            ['title' => 'employee_create'],
-            ['title' => 'employee_edit'],
-            ['title' => 'employee_delete'],
+            'digitalBoardVideo_access',
+            'digitalBoardVideo_create',
+            'digitalBoardVideo_edit',
+            'digitalBoardVideo_delete',
+            'digitalBoardNotice_access',
+            'digitalBoardNotice_create',
+            'digitalBoardNotice_edit',
+            'digitalBoardNotice_delete',
+            'digitalBoardNews_access',
+            'digitalBoardNews_create',
+            'digitalBoardNews_edit',
+            'digitalBoardNews_delete',
+            'employee_access',
+            'employee_create',
+            'employee_edit',
+            'employee_delete',
         ];
 
+        Permission::whereIn('title', $permissions)->delete();
+
+        $permissionId = collect();
+
         foreach ($permissions as $permission) {
-            Permission::create($permission);
+            $permission = Permission::create(['title' => $permission]);
+
+            $permissionId->push($permission->id);
         }
+
+        $role = Role::first();
+        $role->permissions()->sync($permissionId);
     }
 }
