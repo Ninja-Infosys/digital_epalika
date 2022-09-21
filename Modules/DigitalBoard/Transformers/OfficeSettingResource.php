@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Resources;
+namespace Modules\DigitalBoard\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OfficeSettingResource extends JsonResource
 {
-    public function toArray($request): array
+
+    public function toArray($request)
     {
         return [
             'id' => $this->id ?? '',

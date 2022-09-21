@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Resources;
+namespace Modules\DigitalBoard\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class EmployeeResource extends JsonResource
 {
-    public function toArray($request): array
+
+    public function toArray($request)
     {
         return [
             'id' => $this->id ?? '',
@@ -15,7 +16,6 @@ class EmployeeResource extends JsonResource
             'photo' => $this->photo_url ?? '',
             'email' => $this->email ?? '',
             'phone' => $this->phone ?? '',
-            'position' => $this->position ?? '',
         ];
     }
 }
