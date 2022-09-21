@@ -10,7 +10,22 @@
                 <div class="text-center text-decoration-underline">
                     <h6 class="fw-bold">शाखाहरु</h6>
                 </div>
-                <mat-accordion>
+                <p>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        प्रशासन शाखा
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">प्रशासन शाखा 1</li>
+                            <li class="list-group-item">प्रशासन शाखा 2</li>
+                            <li class="list-group-item">प्रशासन शाखा 3</li>
+                            <li class="list-group-item">प्रशासन शाखा 4</li>
+                            <li class="list-group-item">प्रशासन शाखा 5</li>
+                        </ul>
+                    </div>
+                </div>
                     <mat-expansion-panel class="mt-1">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
