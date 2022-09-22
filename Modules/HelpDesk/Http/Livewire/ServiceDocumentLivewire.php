@@ -3,8 +3,9 @@
 namespace Modules\HelpDesk\Http\Livewire;
 
 use Livewire\Component;
+use Modules\HelpDesk\Entities\ServiceDocument;
 
-class ServiceDocument extends Component
+class ServiceDocumentLivewire extends Component
 {
     public $serviceDocuments = [];
 
@@ -29,8 +30,7 @@ class ServiceDocument extends Component
 
     public function removeRow($index)
     {
-        if (array_key_exists('id', $this->serviceDocuments)) {
-            dd('yeas');
+        if (!empty($this->serviceDocuments[$index]['id'])) {
             ServiceDocument::find($this->serviceDocuments[$index]['id'])->delete();
         }
         unset($this->serviceDocuments[$index]);
@@ -39,6 +39,6 @@ class ServiceDocument extends Component
 
     public function render()
     {
-        return view('helpdesk::livewire.service-document');
+        return view('helpdesk::livewire.service-document-livewire');
     }
 }

@@ -14,27 +14,26 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="javascript:void(0)">
+                    <a class="nav-link dropdown-toggle" >
                         परिचय
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ url('static/employee') }}">कर्मचारीहरु</a></li>
-                        <li><a class="dropdown-item" href="{{ url('static/representive') }}">जनप्रतिनिधिहरु</a></li>
+                        <li><a class="dropdown-item" href="{{url('/static/employee')}}">कर्मचारीहरु</a></li>
+                        <li><a class="dropdown-item" href="{{url('/static/representative')}}">जनप्रतिनिधिहरु</a></li>
                     </ul>
                 </li>
-
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="javascript:void(0)">
+                    <a class="nav-link dropdown-toggle">
                         ग्यालेरि
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ url('static/photo') }}">फोटोहरु</a></li>
-                        <li><a class="dropdown-item" href="{{ url('static/audio') }}">अडियोहरु</a></li>
-                        <li><a class="dropdown-item" href="{{ url('static/video') }}">भिडियोहरु</a></li>
+                        <li><a class="dropdown-item" href="{{url('/static/gallery/photo')}}">फोटोहरु</a></li>
+                        <li><a class="dropdown-item" href="{{url('/static/gallery/audio')}}">अडियोहरु</a></li>
+                        <li><a class="dropdown-item" href="{{url('/static/gallery/video')}}">भिडियोहरु</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ url('/static/category') }}" routerLinkActive="active">
+                    <a class="nav-link" aria-current="page" href="{{url('/static/category')}}">
                         श्रेणीहरु
                     </a>
                 </li>
@@ -55,7 +54,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink="/static/contact" routerLinkActive="active">
+                    <a class="nav-link" aria-current="page" href="{{url('/static/contact')}}">
                         सम्पर्क
                     </a>
                 </li>

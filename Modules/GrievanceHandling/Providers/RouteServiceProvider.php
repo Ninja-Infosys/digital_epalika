@@ -22,6 +22,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
+            ->prefix('grievanceHandling')
+            ->as('grievanceHandling.')
             ->group(module_path('GrievanceHandling', '/Routes/web.php'));
 
         Route::middleware(['web', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])

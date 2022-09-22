@@ -11,24 +11,31 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="https://placeimg.com/1080/500/animals"
+                            <img class="d-block w-100" src="https://myrepublica.nagariknetwork.com/uploads/media/2019/August/Bageshwori%20temple.jpg"
                                  alt="First slide">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>My Caption Title (1st Image)</h5>
+                                <h5>वगेस्वोरी मन्दिर</h5>
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="https://placeimg.com/1080/500/arch" alt="Second slide">
+                            <img class="d-block w-100" src="{{asset('assets/frontend/image/submetro.jpg')}}" alt="Second slide">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>My Caption Title (1st Image)</h5>
+                                <h5>नेपालगन्ज उप-महानगरपालिका</h5>
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="https://placeimg.com/1080/500/nature" alt="Third slide">
+                            <img class="d-block w-100" src="{{asset('assets/frontend/image/border.jpg')}}" alt="Third slide">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>My Caption Title (1st Image)</h5>
+                                <h5>बिरेन्द्र चोक</h5>
+                                <p>The whole caption will only show up if the screen is at least medium size.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="{{asset('assets/frontend/image/ranitalau.jpg')}}" alt="Third slide">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>महादेव मुर्ति </h5>
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
@@ -46,7 +53,7 @@
                 </div>
             </div>
             <div class="col-md-5 mt-1">
-                <div class="card-01 introduction  bg-card shadow rounded">
+                <div class="w-100 card-01 introduction  bg-card shadow rounded">
                     <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
                     <h6 class="fw-normal lh-lg"><strong>पृष्ठभूमि </strong> वि.स. २०६२/६३ को जन आन्दोलनले संबैधानिक
                         राजतन्त्रलाई विस्थापित गरी मुलुक लोकतान्त्रिक&nbsp;गणतन्त्रात्मक शासन व्यवस्थामा रूपान्तरण
@@ -106,7 +113,6 @@
             </div>
         </div>
     </section>
-
     <section class="news-section mt-3">
         <div class="container">
             <div class="row">
