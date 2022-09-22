@@ -41,9 +41,9 @@
                     @enderror
                 </div>      
             </div>
-            <div class="row">
-                <h4 class="title">नागरिकता बिबरण</h4>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+            <fieldset>
+                <legend class="title">नागरिकता बिबरण</legend> 
+            <div class="row">                              
                 <div class="col-md-4 mb-3">
                     <label for="userDetail.citizenship_no" class="form-label">नागरिता न:</label>
                     <input
@@ -136,6 +136,7 @@
                     </div>
                 </div>
             </div>
+        </fieldset>
             <div class="d-flex justify-content-around mt-2">
                 <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
                 <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel">Next</button>
@@ -145,8 +146,8 @@
         @case(3)
             {{--    next step--}}
             <div class="address">
-                <h4 class="title">स्थाहि ठेगाना</h4>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <fieldset>
+                <legend class="title">स्थाहि ठेगाना</legend>               
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="userDetail.permanent_province_id" class="form-label">प्रदेश</label>
@@ -215,11 +216,12 @@
                         @enderror
                     </div>
                 </div>
+            </fieldset>
             </div>
 
             <div class="address">
-                <h4 class="title">अस्थाहि ठेगाना</h4>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <fieldset>
+                <legend class="title">अस्थाहि ठेगाना</legend>               
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="userDetail.temporary_province_id" class="form-label">प्रदेश</label>
@@ -288,6 +290,7 @@
                         @enderror
                     </div>
                 </div>
+            </fieldset>
             </div>
             <div class="d-flex justify-content-around mt-2">
                 <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
@@ -299,169 +302,179 @@
             {{-- organiztion detail --}}
 
             <div class="org">
-                <h5 class="title">संगठन विवरण</h5>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <fieldset>
+                    <legend class="title">संगठन विवरण</legend>            
+                    <div class="row mt-2">
+                        <div class="col-md-4 mb-3">
+                            <label for="organizationDetail.org_name_ne" class="form-label">संगठनको नाम *</label>
+                            <input
+                                name="organizationDetail.org_name_ne"
+                                class="form-control @error('organizationDetail.org_name_ne') is-invalid @enderror"
+                                type="text"
+                                id="organizationDetail.org_name_ne"
+                                placeholder="संगठनको नाम नेपालीमा"
+                                wire:model="organizationDetail.org_name_ne"
+                            />
+                            @error('organizationDetail.org_name_ne')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="organizationDetail.org_name_en" class="form-label">Organization Name *</label>
+                            <input
+                                name="organizationDetail.org_name_en"
+                                class="form-control @error('organizationDetail.org_name_en') is-invalid @enderror"
+                                type="text"
+                                id="organizationDetail.org_name_en"
+                                placeholder="In English"
+                                wire:model="organizationDetail.org_name_en"
+                            />
+                            @error('organizationDetail.org_name_en')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="organizationDetail.org_email" class="form-label">इमेल</label>
+                            <input
+                                name="organizationDetail.org_email"
+                                class="form-control @error('organizationDetail.org_email') is-invalid @enderror"
+                                type="text"
+                                id="organizationDetail.org_email"
+                                placeholder="इमेल"
+                                wire:model="organizationDetail.org_email"
+                            />
+                            @error('organizationDetail.org_email')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="organizationDetail.org_contact" class="form-label">सम्पर्क नम्बर</label>
+                            <input
+                                name="organizationDetail.org_contact"
+                                class="form-control @error('organizationDetail.org_contact') is-invalid @enderror"
+                                type="text"
+                                id="organizationDetail.org_contact"
+                                placeholder="सम्पर्क नम्बर"
+                                wire:model="organizationDetail.org_contact"
+                            />
+                            @error('organizationDetail.org_contact')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="organizationDetail.org_pan_no" class="form-label">प्यान न:</label>
+                            <input
+                                name="organizationDetail.org_pan_no"
+                                class="form-control @error('organizationDetail.org_pan_no') is-invalid @enderror"
+                                type="text"
+                                id="organizationDetail.org_pan_no"
+                                placeholder="प्यान न:"
+                                wire:model="organizationDetail.org_pan_no"
+                            />
+                            @error('organizationDetail.org_pan_no')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="organizationDetail.org_registration_no" class="form-label">कम्पनी दर्ता न:</label>
+                            <input
+                                name="org_registration_no"
+                                class="form-control @error('organizationDetail.org_registration_no') is-invalid @enderror"
+                                type="text"
+                                id="organizationDetail.org_registration_no"
+                                placeholder="कम्पनी दर्ता न:"
+                                wire:model="organizationDetail.org_registration_no"
+                            />
+                            @error('organizationDetail.org_registration_no')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </fieldset>
             </div>
-            <div class="row mt-3">
-                <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.org_name_ne" class="form-label">संगठनको नाम *</label>
-                    <input
-                        name="organizationDetail.org_name_ne"
-                        class="form-control @error('organizationDetail.org_name_ne') is-invalid @enderror"
-                        type="text"
-                        id="organizationDetail.org_name_ne"
-                        placeholder="संगठनको नाम नेपालीमा"
-                        wire:model="organizationDetail.org_name_ne"
-                    />
-                    @error('organizationDetail.org_name_ne')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
+             
+            
+        
+
+                <div class="address">
+                    <fieldset>
+                        <legend class="title">स्थाहि ठेगाना</legend> 
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="organizationDetail.province_id" class="form-label">प्रदेश</label>
+                                <select class="form-select @error('organizationDetail.province_id') is-invalid @enderror"
+                                        id="organizationDetail.province_id" wire:model="organizationDetail.province_id">
+                                    <option selected>---प्रदेश छान्नुहोस् ----</option>
+                                    @foreach($provinces as $province)
+                                        <option value="{{$province['id']??''}}">{{$province['province'] ??''}}</option>
+                                    @endforeach
+                                </select>
+                                @error('organizationDetail.province_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="organizationDetail.district_id" class="form-label">जिल्ला</label>
+                                <select class="form-select @error('organizationDetail.district_id') is-invalid @enderror"
+                                        id="organizationDetail.district_id" wire:model="organizationDetail.district_id">
+                                    <option value="">---जिल्ला छान्नुहोस् ----</option>
+                                    @foreach($organizationDistricts as $organizationDistrict)
+                                        <option
+                                            value="{{$organizationDistrict->id}}">{{$organizationDistrict->district}}</option>
+                                    @endforeach
+                                </select>
+                                @error('organizationDetail.district_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="organizationDetail.local_body_id" class="form-label">पालिका</label>
+                                <select class="form-select @error('organizationDetail.local_body_id') is-invalid @enderror"
+                                        id="organizationDetail.local_body_id" wire:model="organizationDetail.local_body_id">
+                                    <option value="">---पालिका छान्नुहोस् ----</option>
+                                    @foreach($organizationLocalBodies as $organizationLocalBody)
+                                        <option
+                                            value="{{$organizationLocalBody->id}}">{{$organizationLocalBody->local_body}}</option>
+                                    @endforeach
+                                </select>
+                                @error('organizationDetail.local_body_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="organizationDetail.ward" class="form-label">वार्ड न:</label>
+                                <select class="form-select @error('organizationDetail.ward') is-invalid @enderror"
+                                        id="organizationDetail.ward" wire:model="organizationDetail.ward">
+                                    <option value="">---वडा छान्नुहोस् ----</option>
+                                    @foreach($organizationWards as $organizationWard)
+                                        <option value="{{$organizationWard}}">{{$organizationWard}}</option>
+                                    @endforeach
+                                </select>
+                                @error('organizationDetail.ward')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="organizationDetail.tole" class="form-label">गाउ/टोल</label>
+                                <input
+                                    name="organizationDetail.tole"
+                                    class="form-control @error('organizationDetail.tole') is-invalid @enderror"
+                                    type="text"
+                                    id="organizationDetail.tole"
+                                    placeholder="गाउ/टोल"
+                                    wire:model="organizationDetail.tole"
+                                />
+                                @error('organizationDetail.tole')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </fieldset>                 
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.org_name_en" class="form-label">Organization Name *</label>
-                    <input
-                        name="organizationDetail.org_name_en"
-                        class="form-control @error('organizationDetail.org_name_en') is-invalid @enderror"
-                        type="text"
-                        id="organizationDetail.org_name_en"
-                        placeholder="In English"
-                        wire:model="organizationDetail.org_name_en"
-                    />
-                    @error('organizationDetail.org_name_en')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.org_email" class="form-label">इमेल</label>
-                    <input
-                        name="organizationDetail.org_email"
-                        class="form-control @error('organizationDetail.org_email') is-invalid @enderror"
-                        type="text"
-                        id="organizationDetail.org_email"
-                        placeholder="इमेल"
-                        wire:model="organizationDetail.org_email"
-                    />
-                    @error('organizationDetail.org_email')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.org_contact" class="form-label">सम्पर्क नम्बर</label>
-                    <input
-                        name="organizationDetail.org_contact"
-                        class="form-control @error('organizationDetail.org_contact') is-invalid @enderror"
-                        type="text"
-                        id="organizationDetail.org_contact"
-                        placeholder="सम्पर्क नम्बर"
-                        wire:model="organizationDetail.org_contact"
-                    />
-                    @error('organizationDetail.org_contact')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.org_pan_no" class="form-label">प्यान न:</label>
-                    <input
-                        name="organizationDetail.org_pan_no"
-                        class="form-control @error('organizationDetail.org_pan_no') is-invalid @enderror"
-                        type="text"
-                        id="organizationDetail.org_pan_no"
-                        placeholder="प्यान न:"
-                        wire:model="organizationDetail.org_pan_no"
-                    />
-                    @error('organizationDetail.org_pan_no')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.org_registration_no" class="form-label">कम्पनी दर्ता न:</label>
-                    <input
-                        name="org_registration_no"
-                        class="form-control @error('organizationDetail.org_registration_no') is-invalid @enderror"
-                        type="text"
-                        id="organizationDetail.org_registration_no"
-                        placeholder="कम्पनी दर्ता न:"
-                        wire:model="organizationDetail.org_registration_no"
-                    />
-                    @error('organizationDetail.org_registration_no')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="address">
-                <h4 class="title">स्थाहि ठेगाना</h4>
-                <hr style="height:2px;color:gray;background-color:gray"> 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="organizationDetail.province_id" class="form-label">प्रदेश</label>
-                        <select class="form-select @error('organizationDetail.province_id') is-invalid @enderror"
-                                id="organizationDetail.province_id" wire:model="organizationDetail.province_id">
-                            <option selected>---प्रदेश छान्नुहोस् ----</option>
-                            @foreach($provinces as $province)
-                                <option value="{{$province['id']??''}}">{{$province['province'] ??''}}</option>
-                            @endforeach
-                        </select>
-                        @error('organizationDetail.province_id')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="organizationDetail.district_id" class="form-label">जिल्ला</label>
-                        <select class="form-select @error('organizationDetail.district_id') is-invalid @enderror"
-                                id="organizationDetail.district_id" wire:model="organizationDetail.district_id">
-                            <option value="">---जिल्ला छान्नुहोस् ----</option>
-                            @foreach($organizationDistricts as $organizationDistrict)
-                                <option
-                                    value="{{$organizationDistrict->id}}">{{$organizationDistrict->district}}</option>
-                            @endforeach
-                        </select>
-                        @error('organizationDetail.district_id')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="organizationDetail.local_body_id" class="form-label">पालिका</label>
-                        <select class="form-select @error('organizationDetail.local_body_id') is-invalid @enderror"
-                                id="organizationDetail.local_body_id" wire:model="organizationDetail.local_body_id">
-                            <option value="">---पालिका छान्नुहोस् ----</option>
-                            @foreach($organizationLocalBodies as $organizationLocalBody)
-                                <option
-                                    value="{{$organizationLocalBody->id}}">{{$organizationLocalBody->local_body}}</option>
-                            @endforeach
-                        </select>
-                        @error('organizationDetail.local_body_id')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="organizationDetail.ward" class="form-label">वार्ड न:</label>
-                        <select class="form-select @error('organizationDetail.ward') is-invalid @enderror"
-                                id="organizationDetail.ward" wire:model="organizationDetail.ward">
-                            <option value="">---वडा छान्नुहोस् ----</option>
-                            @foreach($organizationWards as $organizationWard)
-                                <option value="{{$organizationWard}}">{{$organizationWard}}</option>
-                            @endforeach
-                        </select>
-                        @error('organizationDetail.ward')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="organizationDetail.tole" class="form-label">गाउ/टोल</label>
-                        <input
-                            name="organizationDetail.tole"
-                            class="form-control @error('organizationDetail.tole') is-invalid @enderror"
-                            type="text"
-                            id="organizationDetail.tole"
-                            placeholder="गाउ/टोल"
-                            wire:model="organizationDetail.tole"
-                        />
-                        @error('organizationDetail.tole')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
+    
+            
+      
+        
             <div class="d-flex justify-content-around mt-2">
                 <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
                 <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel">Next</button>
@@ -620,10 +633,10 @@
       <option value="1">संगठन</option>
       <option value="2">व्यक्ति</option>
     </select>
-                </div>             
-            <div class="row">
-                <h6 class="title">ब्यतिगत बिबरण</h6>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                </div> 
+                <fieldset>   
+                    <legend class="title">ब्यतिगत बिबरण</legend>         
+            <div class="row">            
                 <div class="col-md-6 mb-3">
                     <label for="userDetail.name_ne" class="form-label">नेपालीमा नाम</label>
                     <input
@@ -742,6 +755,7 @@
                 </div>
               
             </div>
+        </fieldset>
             <div class="d-flex pull-right justify-content-around mt-2">
                 <button type="button" class="btn btn-primary" wire:click="incrementLevel">Next</button>
             </div>
