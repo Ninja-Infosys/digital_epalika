@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grievanceHandling.setting.grievanceType.index')}}">गुनासो प्रकार </a>
+                            <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">गुनासो पठाउने कार्यालय </a>
                         </li>
-                        <li class="breadcrumb-item active">गुनासो प्रकार  </li>
+                        <li class="breadcrumb-item active">गुनासो पठाउने कार्यालय </li>
                     </ol>
                 </div>
-                <h4 class="page-title">गुनासो प्रकार  </h4>
+                <h4 class="page-title">गुनासो पठाउने कार्यालय  </h4>
             </div>
         </div>
     </div>
@@ -26,11 +26,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">गुनासो प्रकार सूची</h4>
+                        <h4 class="header-title">गुनासो पठाउने कार्यालय सूची</h4>
                         @can('grievanceType_create')
-                            <a href="{{route('admin.grievanceHandling.setting.grievanceType.create')}}"
+                            <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ गुनासो प्रकार थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ गुनासो पठाउने कार्यालय थप्नुहोस्
                             </a>
                         @endcan
                     </div>

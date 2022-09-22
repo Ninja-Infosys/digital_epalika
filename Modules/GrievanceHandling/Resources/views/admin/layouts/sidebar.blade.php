@@ -30,6 +30,13 @@
                                 </a>
                             </li>
                         @endcan
+                            @can('grievanceOffice_access')
+                                <li class="{{request()->routeIs('admin.grievanceHandling.setting.grievanceOffice.index') ? 'active' : ''}}">
+                                    <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">
+                                        <span> गुनासो पठाउने कार्यालय </span>
+                                    </a>
+                                </li>
+                            @endcan
                     </ul>
                 </div>
             </li>
