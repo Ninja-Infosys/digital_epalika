@@ -11,7 +11,8 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="https://myrepublica.nagariknetwork.com/uploads/media/2019/August/Bageshwori%20temple.jpg"
+                            <img class="d-block w-100"
+                                 src="https://myrepublica.nagariknetwork.com/uploads/media/2019/August/Bageshwori%20temple.jpg"
                                  alt="First slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>वगेस्वोरी मन्दिर</h5>
@@ -19,21 +20,24 @@
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('assets/frontend/image/submetro.jpg')}}" alt="Second slide">
+                            <img class="d-block w-100" src="{{asset('assets/frontend/image/submetro.jpg')}}"
+                                 alt="Second slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>नेपालगन्ज उप-महानगरपालिका</h5>
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('assets/frontend/image/border.jpg')}}" alt="Third slide">
+                            <img class="d-block w-100" src="{{asset('assets/frontend/image/border.jpg')}}"
+                                 alt="Third slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>बिरेन्द्र चोक</h5>
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('assets/frontend/image/ranitalau.jpg')}}" alt="Third slide">
+                            <img class="d-block w-100" src="{{asset('assets/frontend/image/ranitalau.jpg')}}"
+                                 alt="Third slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>महादेव मुर्ति </h5>
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
@@ -52,14 +56,18 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-5 mt-1">
-                <div class="w-100 card-01 introduction  bg-card shadow rounded">
+            <div class="col-md-5 intro-col mt-1">
+                <div class="card-01 introduction  bg-card shadow rounded">
                     <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
-                    <h6 class="fw-normal lh-lg"><strong>पृष्ठभूमि </strong> वि.स. २०६२/६३ को जन आन्दोलनले संबैधानिक
-                        राजतन्त्रलाई विस्थापित गरी मुलुक लोकतान्त्रिक&nbsp;गणतन्त्रात्मक शासन व्यवस्थामा रूपान्तरण
-                        भएको संविधान सभाबाट निर्मित संविधानले कानुनी रूपमा मुलुकलाई सङ्घीय संरचनामा
-                        लगेकोले सात वटा प्रदेशहरू कायम रहन गएको सन्दर्भमा प्रत्येक प्रदेशमा सातै वटा मन्त्रालयहरू
-                        कायम रहने व्यवस्था अनुसार यो मन्त्रालयको स्थापना मिति २०७४/१०/२२ गते भएको हो।</h6>
+                    <h6 class="fw-normal lh-lg"><strong>पृष्ठभूमि </strong> लुम्बिनी प्रदेशको पश्चिम तर्फ र साविक
+                        मध्यपश्चिमाञ्चल बिकास क्षेत्रको केन्द्र बिन्दुको रुपमा रहेको प्रमुख ब्यापारिक केन्द्र
+                        तथा लुम्बिनी प्रदेश अन्तर्गत्का १२ जिल्लाहरु मध्ये सवैभन्दा महत्वपूर्ण जिल्ला मध्ये बाँके
+                        जिल्लाको सदरमुकामको रुपमा रहेको उप–महानगरपालिका हो ।
+                        शहर बाँके जिल्लामा अवस्थित पश्चिम नेपालको द्धार, नेपालगञ्ज नगरी, नेपालकै नामबाट स्थापना भएको
+                        प्रमुख शहरको रुपमा परिचित स्थान हो ।
+                        यो शहर बिक्रम सम्बत २०१७ सालमा नेपालगञ्ज नगर पञ्चायतका नामबाट स्थापना भई २०१९ सालमा नगरपालिकाको
+                        रुपमा स्थापित भएको हो ।
+                        </h6>
                     <div class="d-flex justify-content-end">
                         <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
                     </div>
@@ -69,11 +77,11 @@
     </section>
 
     <section class="avatar-section mt-5">
-        <div class="container bg-card swiper-cube-shadow rounded">
+        <div class="container bg-card card  rounded">
             <div class="row ">
-                <div class="card-02 col-md-4 mb-2">
+                <div class="card-02 col-md-4 mb-2 px-3">
                     <div class="card shadow text-center">
-                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="assets/img/logo.png" alt="">
+                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{asset('assets/frontend/image/avatar.png')}}" alt="">
                         <div class="card-body p-0 m-0">
                             <div class="card-description ">
                                 <h5 class="card-title mt-5">नगर प्रमुखको नाम</h5>
@@ -84,9 +92,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-02 col-md-4 mb-2">
+                <div class="card-02 px-3 col-md-4 mb-2">
                     <div class="card shadow text-center">
-                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="assets/img/logo.png" alt="">
+                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{asset('assets/frontend/image/avatar.png')}}" alt="">
                         <div class="card-body p-0 m-0">
                             <div class="card-description ">
                                 <h5 class="card-title mt-5">नगर उप-प्रमुखको नाम</h5>
@@ -97,9 +105,9 @@
                         </div>
                     </div>
                 </div>
-                <div class=" card-02 col-md-4">
+                <div class=" card-02 px-3 col-md-4">
                     <div class="card shadow text-center">
-                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="assets/img/logo.png" alt="">
+                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{asset('assets/frontend/image/avatar.png')}}" alt="">
                         <div class="card-body p-0 m-0">
                             <div class="card-description ">
                                 <h5 class="card-title mt-5">प्रमुख प्रशासकिय अधिकृत नाम</h5>
@@ -113,177 +121,112 @@
             </div>
         </div>
     </section>
-    <section class="news-section mt-3">
+    <section class="news-section  mt-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="list-item">
-                        <div class="list-item-head">
-                            <p>सुचनाहरु</p>
-                        </div>
-
-                        <div class="list-item-body">
-                            <a href="#" target="_blank" class="list-item-body-content">
-                                <i class="fa fa-angle-right"></i>
-                                <span>
-                                <span class="text-bluish" title="इ-नक्सा">
-                                    इ-नक्सा
-                                </span>
-                            <small class="d-block w-100">
-                                    - 2079-03-05
-                                    <span class="text-redish float-right">
-                                        नेपालगन्ज उप-महानगरपालिका
-                                    </span>
-                                </small>
-                            </span>
-                            </a>
-                            <a href="#" target="_blank" class="list-item-body-content">
-                                <i class="fa fa-angle-right"></i>
-                                <span>
-                                <span class="text-bluish" title="इ-नक्सा">
-                                    इ-नक्सा
-                                </span>
-                            <small class="d-block w-100">
-                                    - 2079-03-04
-                                    <span class="text-redish float-right">
-                                        इ-नक्सा
-                                    </span>
-                                </small>
-                            </span>
-                            </a>
-                            <a routerLink='#' class="btn btn-sm bg-main-blue btn-hover-main float-right rounded-0">अरु
-                                थपपद्नुहोस</a>
-                        </div>
+                    <div class="list-item-head bg-danger rounded p-2">
+                        <p class="mb-0 text-white fs-5">सुचनाहरु</p>
                     </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                    </ul>
                 </div>
-
                 <div class="col-md-3">
-                    <div class="list-item">
-                        <div class="list-item-head">
-                            <p>सुचनाहरु</p>
-                        </div>
-
-                        <div class="list-item-body">
-                            <a href="#" target="_blank" class="list-item-body-content">
-                                <i class="fa fa-angle-right"></i>
-                                <span>
-                                <span class="text-bluish" title="इ-नक्सा">
-                                    इ-नक्सा
-                                </span>
-                            <small class="d-block w-100">
-                                    - 2079-03-05
-                                    <span class="text-redish float-right">
-                                        नेपालगन्ज उप-महानगरपालिका
-                                    </span>
-                                </small>
-                            </span>
-                            </a>
-                            <a href="#" target="_blank" class="list-item-body-content">
-                                <i class="fa fa-angle-right"></i>
-                                <span>
-                                <span class="text-bluish" title="इ-नक्सा">
-                                    इ-नक्सा
-                                </span>
-                            <small class="d-block w-100">
-                                    - 2079-03-04
-                                    <span class="text-redish float-right">
-                                        इ-नक्सा
-                                    </span>
-                                </small>
-                            </span>
-                            </a>
-
-
-                            <a routerLink='#' class="btn btn-sm bg-main-blue btn-hover-main float-right rounded-0">अरु
-                                थपपद्नुहोस</a>
-                        </div>
+                    <div class="list-item-head bg-danger rounded p-2">
+                        <p class="mb-0 text-white fs-5">कार्यपालिका बोर्ड निर्णय </p>
                     </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                    </ul>
                 </div>
-
                 <div class="col-md-3">
-                    <div class="list-item">
-                        <div class="list-item-head">
-                            <p>सुचनाहरु</p>
-                        </div>
-
-                        <div class="list-item-body">
-                            <a href="#" target="_blank" class="list-item-body-content">
-                                <i class="fa fa-angle-right"></i>
-                                <span>
-                                <span class="text-bluish" title="इ-नक्सा">
-                                    इ-नक्सा
-                                </span>
-                            <small class="d-block w-100">
-                                    - 2079-03-05
-                                    <span class="text-redish float-right">
-                                        नेपालगन्ज उप-महानगरपालिका
-                                    </span>
-                                </small>
-                            </span>
-                            </a>
-                            <a href="#" target="_blank" class="list-item-body-content">
-                                <i class="fa fa-angle-right"></i>
-                                <span>
-                                <span class="text-bluish" title="इ-नक्सा">
-                                    इ-नक्सा
-                                </span>
-                            <small class="d-block w-100">
-                                    - 2079-03-04
-                                    <span class="text-redish float-right">
-                                        इ-नक्सा
-                                    </span>
-                                </small>
-                            </span>
-                            </a>
-
-
-                            <a routerLink='#' class="btn btn-sm bg-main-blue btn-hover-main float-right rounded-0">अरु
-                                थपपद्नुहोस</a>
-                        </div>
+                    <div class="list-item-head bg-danger rounded p-2">
+                        <p class="mb-0 text-white fs-5">बजेट तथा कार्यक्रम </p>
                     </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                    </ul>
                 </div>
-
                 <div class="col-md-3">
-                    <div class="list-item">
-                        <div class="list-item-head">
-                            <p>सुचनाहरु</p>
-                        </div>
-
-                        <div class="list-item-body">
-                            <a href="#" target="_blank" class="list-item-body-content">
-                                <i class="fa fa-angle-right"></i>
-                                <span>
-                                <span class="text-bluish" title="इ-नक्सा">
-                                    इ-नक्सा
-                                </span>
-                            <small class="d-block w-100">
-                                    - 2079-03-05
-                                    <span class="text-redish float-right">
-                                        नेपालगन्ज उप-महानगरपालिका
-                                    </span>
-                                </small>
-                            </span>
-                            </a>
-                            <a href="#" target="_blank" class="list-item-body-content">
-                                <i class="fa fa-angle-right"></i>
-                                <span>
-                                <span class="text-bluish" title="इ-नक्सा">
-                                    इ-नक्सा
-                                </span>
-                            <small class="d-block w-100">
-                                    - 2079-03-04
-                                    <span class="text-redish float-right">
-                                        इ-नक्सा
-                                    </span>
-                                </small>
-                            </span>
-                            </a>
-
-
-                            <a routerLink='#' class="btn btn-sm bg-main-blue btn-hover-main float-right rounded-0">अरु
-                                थपपद्नुहोस</a>
-                        </div>
+                    <div class="list-item-head bg-danger rounded p-2">
+                        <p class="mb-0 text-white fs-5">सार्वजनिक खरीद बोलपत्र</p>
                     </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa fa-angle-right"></i>
+                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
+                            <span><small>-2079-03-05</small></span>
+                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
+                        </li>
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                    </ul>
                 </div>
             </div>
         </div>
