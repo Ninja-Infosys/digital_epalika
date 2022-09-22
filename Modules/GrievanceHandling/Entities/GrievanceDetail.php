@@ -23,7 +23,8 @@ class GrievanceDetail extends Model
         'grievance_office_id',
         'subject',
         'description',
-        'complaint_severity'
+        'complaint_severity',
+        'is_open'
     ];
 
 

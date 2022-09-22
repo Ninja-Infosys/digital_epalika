@@ -17,6 +17,7 @@ class GrievanceType extends Model
     ];
 
     protected $fillable = [
-        'title'
+        'title',
+        'grievance_status'
     ];
 }

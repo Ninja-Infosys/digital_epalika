@@ -8,15 +8,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GrievanceUser extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
+    protected $fillable = [
+        'name',
+        'address',
+        'phone',
+        'email',
+        'password'
+    ];
 
-   ];
+
+    public function setPasswordAttribute($value)
+    {
+        if (!empty($value)) {
+            $this->attributes['password'] = bcrypt($value);
+        }
+    }
 }

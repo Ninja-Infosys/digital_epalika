@@ -9,8 +9,8 @@
     <div class="{{request()->is('admin/grievanceHandling/*') ?'':'collapse'}}"
          id="sidebarGrievanceHandling">
         <ul class="nav-second-level">
-            <li class="{{request()->routeIs('admin.executiveMeeting.municipalCommittee.index') ? 'active' : ''}}">
-                <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">
+            <li class="">
+                <a href="">
                     <span> गुनासो बिबरण </span>
                 </a>
             </li>
@@ -30,13 +30,13 @@
                                 </a>
                             </li>
                         @endcan
-                            @can('grievanceOffice_access')
-                                <li class="{{request()->routeIs('admin.grievanceHandling.setting.grievanceOffice.index') ? 'active' : ''}}">
-                                    <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">
-                                        <span> शाखा/कार्यालय </span>
-                                    </a>
-                                </li>
-                            @endcan
+                        @can('grievanceOffice_access')
+                            <li class="{{request()->routeIs('admin.grievanceHandling.setting.grievanceOffice.index') ? 'active' : ''}}">
+                                <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">
+                                    <span> शाखा/कार्यालय </span>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </li>

@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('subject')->nullable();
             $table->longText('description')->nullable();
             $table->string('complaint_severity');
+            $table->boolean('is_open')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
