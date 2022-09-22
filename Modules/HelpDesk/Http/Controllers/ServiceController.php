@@ -70,8 +70,9 @@ class ServiceController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+        $service->load('branch', 'serviceDocuments', 'serviceProcesses', 'serviceEmployees');
 
-        return view('helpdesk::admin.service.show');
+        return view('helpdesk::admin.service.show', compact('service'));
     }
 
     public function edit(Service $service)
@@ -80,8 +81,9 @@ class ServiceController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+        $mainBranches = Branch::with('branches')->whereNull('branch_id')->get();
 
-        return view('helpdesk::admin.service.edit');
+        return view('helpdesk::admin.service.edit', compact('service', 'mainBranches'));
     }
 
     public function update(Request $request, Service $service)

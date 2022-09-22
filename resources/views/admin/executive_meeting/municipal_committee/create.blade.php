@@ -114,7 +114,7 @@
                                 <div class="col-md-6 mb-2">
                                     <label for="position" class="form-label">स्थान  </label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="position"
                                         value="{{old('position')}}"
                                         class="form-control @error('position') is-invalid @enderror"

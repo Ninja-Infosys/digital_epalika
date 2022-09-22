@@ -25,3 +25,18 @@ Route::get('/static/category', function(){
     return view('frontend.static.category.category');
 });
 
+Route::get('/static/photo', function(){
+    return view('frontend.static.gallery.photo.photo');
+});
+Route::get('/static/audio', function(){
+    return view('frontend.static.gallery.audio.audio');
+});
+Route::get('/static/video', function(){
+    return view('frontend.static.gallery.video.video');
+});
+Route::get('/static/employee', function(){
+    return view('frontend.static.employee.employee');
+});
+Route::get('/static/representive', function(){
+    return view('frontend.static.representive.representive');
+});
