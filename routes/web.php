@@ -20,9 +20,32 @@ use Modules\EMap\Http\Controllers\OrganizationAuthController;
 Route::get('/', function () {
     return view('frontend.home');
 });
-
 Route::get('/static/category', function(){
     return view('frontend.static.category.category');
+});
+Route::get('/static/category', function(){
+    return view('frontend.static.category.index');
+});
+Route::get('/static/contact', function(){
+    return view('frontend.static.contact.index');
+});
+Route::get('/static/gallery/audio', function(){
+    return view('frontend.static.gallery.audio.index');
+});
+Route::get('/static/gallery/photo', function(){
+    return view('frontend.static.gallery.photo.index');
+});
+Route::get('/static/gallery/photo', function(){
+    return view('frontend.static.gallery.photo.single-photo');
+});
+Route::get('/static/gallery/video', function(){
+    return view('frontend.static.gallery.video.index');
+});
+Route::get('/static/representative', function(){
+    return view('frontend.static.representative.index');
+});
+Route::get('/static/employee', function(){
+    return view('frontend.static.employee.index');
 });
 
 Route::get('/static/photo', function(){
