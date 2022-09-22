@@ -76,9 +76,6 @@ class OrganizationRegisterLivewire extends Component
         'org_name_en' => null,
         'org_email' => null,
         'org_contact' => null,
-        'company_logo' => null,
-        'company_certificate' => null,
-        'pan_certificate' => null,
         'org_registration_no' => null,
         'org_registration_document' => null,
         'org_pan_no' => null,
@@ -105,7 +102,7 @@ class OrganizationRegisterLivewire extends Component
 
     }
 
-    protected $rules = [
+    protected $baseRule = [
         'userDetail.name_ne' => ['required'],
         'userDetail.name_en' => ['required'],
         'userDetail.email' => ['required', 'email'],
@@ -132,21 +129,34 @@ class OrganizationRegisterLivewire extends Component
         'userDetail.temporary_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
         'userDetail.temporary_ward' => ['nullable'],
         'userDetail.temporary_tole' => ['nullable'],
-        'organizationDetail.org_name_ne' => null,
-        'organizationDetail.org_name_en' => null,
-        'organizationDetail.org_email' => null,
-        'organizationDetail.org_contact' => null,
-        'organizationDetail.org_registration_no' => null,
-        'organizationDetail.org_registration_document' => null,
-        'organizationDetail.org_pan_no' => null,
-        'organizationDetail.org_pan_document' => null,
-        'organizationDetail.logo' => null,
-        'organizationDetail.province_id' => null,
-        'organizationDetail.district_id' => null,
-        'organizationDetail.local_body_id' => null,
-        'organizationDetail.ward' => null,
-        'organizationDetail.tole' => null,
     ];
+
+    protected function rules(): array
+    {
+        if ($this->isOrganization) {
+            return array_merge($this->baseRule, [
+                'organizationDetail.org_name_ne' => ['required'],
+                'organizationDetail.org_name_en' => ['required'],
+                'organizationDetail.org_email' => ['required'],
+                'organizationDetail.org_contact' => ['required'],
+                'organizationDetail.org_registration_no' => ['required'],
+                'organizationDetail.org_registration_document' => ['required', 'image'],
+                'organizationDetail.org_pan_no' => ['required'],
+                'organizationDetail.org_pan_document' => ['required', 'image'],
+                'organizationDetail.logo' => ['nullable', 'image'],
+                'organizationDetail.province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
+                'organizationDetail.district_id' => ['required', 'exists:districts,id,deleted_at,null'],
+                'organizationDetail.local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+                'organizationDetail.ward' => ['required'],
+                'organizationDetail.tole' => ['nullable'],
+                'taxClearance.document' => ['required'],
+                'taxClearance.year' => ['required'],
+            ]);
+        } else {
+            return $this->baseRule;
+        }
+
+    }
 
     public function updated($propertyName)
     {

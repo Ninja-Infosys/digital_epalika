@@ -108,22 +108,28 @@
                         <div class="col-md-4">
                             @if ($userDetail['nec_certificate'])
                                 NEC Certificate
-                                <img src="{{ $userDetail['nec_certificate']->temporaryUrl() }}" style="width: 30%" height="20%"
+                                <div class="card" style="width: 8rem">
+                                    <img src="{{ $userDetail['nec_certificate']->temporaryUrl() }}" height="150"
                                      alt="">
+                                </div>
                             @endif
                         </div>
                         <div class="col-md-4">
                             @if ($userDetail['citizenship_front'])
                                 नागरिकता अपलोड गर्नुहोस् (आगाडी)
-                                <img src="{{ $userDetail['citizenship_front']->temporaryUrl() }}" style="width: 30%" height="20%"
+                                <div class="card" style="width: 8rem">
+                                    <img src="{{ $userDetail['citizenship_front']->temporaryUrl() }}" height="150"
                                      alt="">
+                                </div>
                             @endif
                         </div>
                         <div class="col-md-4">
                             @if ($userDetail['citizenship_back'])
                                 नागरिकता अपलोड गर्नुहोस् (आगाडी)
-                                <img src="{{ $userDetail['citizenship_back']->temporaryUrl() }}" style="width: 30%" height="20%"
+                                <div class="card" style="width: 8rem">
+                                    <img src="{{ $userDetail['citizenship_back']->temporaryUrl() }}" height="150"
                                      alt="">
+                                </div>
                             @endif
                         </div>
                     </div>
@@ -509,29 +515,37 @@
                             <div class="col-md-3">
                                 @if ($organizationDetail['company_logo'])
                                 कम्पनी लोगो
-                                    <img src="{{ $organizationDetail['company_logo']->temporaryUrl() }}" style="width: 30%" height="20%"
+                                <div class="card" style="width: 8rem">
+                                    <img src="{{ $organizationDetail['company_logo']->temporaryUrl() }}"  height="150"
                                          alt="">
+                                </div>
                                 @endif
                             </div>
                             <div class="col-md-3">
                                 @if ($organizationDetail['company_certificate'])
                                 कम्पनी प्रमाणपत्र
-                                    <img src="{{ $organizationDetail['company_certificate']->temporaryUrl() }}" style="width: 30%" height="20%"
-                                         alt="">
+                                <div class="card" style="width: 8rem">
+                                    <img src="{{ $organizationDetail['company_certificate']->temporaryUrl() }}" height="150"
+                                    alt="">
+                                </div>                                 
                                 @endif
                             </div>
                             <div class="col-md-3">
                                 @if ($organizationDetail['pan_certificate'])
                                 प्यान प्रमाणपत्र
-                                    <img src="{{ $organizationDetail['pan_certificate']->temporaryUrl() }}" style="width: 30%" height="20%"
+                                <div class="card" style="width: 8rem">
+                                    <img src="{{ $organizationDetail['pan_certificate']->temporaryUrl() }}" height="150"
                                          alt="">
+                                </div>
                                 @endif
                             </div>
                             <div class="col-md-3">
                                 @if ($taxClearance['document'])
                                 कर चुक्ता
-                                    <img src="{{ $taxClearance['document']->temporaryUrl() }}" style="width: 30%" height="20%"
+                                <div class="card" style="width: 8rem">
+                                    <img src="{{ $taxClearance['document']->temporaryUrl() }}" height="150"
                                          alt="">
+                                </div>         
                                 @endif
                             </div>
                         </div>

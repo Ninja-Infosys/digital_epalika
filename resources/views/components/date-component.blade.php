@@ -38,8 +38,6 @@
                 let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
                 $('#{{$name_ne}}').val(todayBsDate)
                 $('#{{$name_en}}').val(todayAdDate)
-
-
             });
         </script>
     @endpush

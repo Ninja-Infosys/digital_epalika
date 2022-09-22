@@ -18,7 +18,7 @@
         href="{{asset('assets/backend/css/bootstrap.min.css')}}"
         rel="stylesheet"
         type="text/css"
-        
+
     />
     <link rel="stylesheet" href="{{asset('assets/frontend/css/register/reg.css')}}">
 
@@ -53,7 +53,7 @@
                                     (Digital Palika Management System)
                                 </p>
                             </div>
-                            <div class="row technical-support">
+                            <div class="row technical-support" >
                                 <p>
                                     <b>प्राविधिक सहायता कक्ष:</b>
                                     <br>
@@ -79,7 +79,7 @@
 </div>
 
 <footer class="footer footer-alt">
-    2015 -
+    {{date('Y')}} -
     <script>
         document.write(new Date().getFullYear());
     </script>
