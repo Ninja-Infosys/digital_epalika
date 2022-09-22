@@ -53,7 +53,7 @@
                                     (Digital Palika Management System)
                                 </p>
                             </div>
-                            <div class="row technical-support">
+                            <div class="row technical-support" >
                                 <p>
                                     <b>प्राविधिक सहायता कक्ष:</b>
                                     <br>
