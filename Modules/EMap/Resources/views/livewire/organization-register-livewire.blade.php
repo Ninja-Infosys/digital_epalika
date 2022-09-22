@@ -43,6 +43,7 @@
             </div>
             <div class="row">
                 <h4 class="title">नागरिकता बिबरण</h4>
+                <hr style="height:2px;color:gray;background-color:gray"> 
                 <div class="col-md-4 mb-3">
                     <label for="userDetail.citizenship_no" class="form-label">नागरिता न:</label>
                     <input
@@ -145,6 +146,7 @@
             {{--    next step--}}
             <div class="address">
                 <h4 class="title">स्थाहि ठेगाना</h4>
+                <hr style="height:2px;color:gray;background-color:gray"> 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="userDetail.permanent_province_id" class="form-label">प्रदेश</label>
@@ -217,6 +219,7 @@
 
             <div class="address">
                 <h4 class="title">अस्थाहि ठेगाना</h4>
+                <hr style="height:2px;color:gray;background-color:gray"> 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="userDetail.temporary_province_id" class="form-label">प्रदेश</label>
@@ -297,6 +300,7 @@
 
             <div class="org">
                 <h5 class="title">संगठन विवरण</h5>
+                <hr style="height:2px;color:gray;background-color:gray"> 
             </div>
             <div class="row mt-3">
                 <div class="col-md-4 mb-3">
@@ -342,50 +346,51 @@
                     @enderror
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.org_phone" class="form-label">सम्पर्क नम्बर</label>
+                    <label for="organizationDetail.org_contact" class="form-label">सम्पर्क नम्बर</label>
                     <input
-                        name="organizationDetail.org_phone"
-                        class="form-control @error('organizationDetail.org_phone') is-invalid @enderror"
+                        name="organizationDetail.org_contact"
+                        class="form-control @error('organizationDetail.org_contact') is-invalid @enderror"
                         type="text"
-                        id="organizationDetail.org_phone"
+                        id="organizationDetail.org_contact"
                         placeholder="सम्पर्क नम्बर"
-                        wire:model="organizationDetail.org_phone"
+                        wire:model="organizationDetail.org_contact"
                     />
-                    @error('organizationDetail.org_phone')
+                    @error('organizationDetail.org_contact')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.org_pan" class="form-label">प्यान न:</label>
+                    <label for="organizationDetail.org_pan_no" class="form-label">प्यान न:</label>
                     <input
-                        name="organizationDetail.org_pan"
-                        class="form-control @error('organizationDetail.org_pan') is-invalid @enderror"
+                        name="organizationDetail.org_pan_no"
+                        class="form-control @error('organizationDetail.org_pan_no') is-invalid @enderror"
                         type="text"
-                        id="organizationDetail.org_pan"
+                        id="organizationDetail.org_pan_no"
                         placeholder="प्यान न:"
-                        wire:model="organizationDetail.org_pan"
+                        wire:model="organizationDetail.org_pan_no"
                     />
-                    @error('organizationDetail.org_pan')
+                    @error('organizationDetail.org_pan_no')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="organizationDetail.company_reg_no" class="form-label">कम्पनी दर्ता न:</label>
+                    <label for="organizationDetail.org_registration_no" class="form-label">कम्पनी दर्ता न:</label>
                     <input
-                        name="company_reg_no"
-                        class="form-control @error('organizationDetail.company_reg_no') is-invalid @enderror"
+                        name="org_registration_no"
+                        class="form-control @error('organizationDetail.org_registration_no') is-invalid @enderror"
                         type="text"
-                        id="organizationDetail.company_reg_no"
+                        id="organizationDetail.org_registration_no"
                         placeholder="कम्पनी दर्ता न:"
-                        wire:model="organizationDetail.company_reg_no"
+                        wire:model="organizationDetail.org_registration_no"
                     />
-                    @error('organizationDetail.company_reg_no')
+                    @error('organizationDetail.org_registration_no')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
             </div>
             <div class="address">
                 <h4 class="title">स्थाहि ठेगाना</h4>
+                <hr style="height:2px;color:gray;background-color:gray"> 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="organizationDetail.province_id" class="form-label">प्रदेश</label>
@@ -466,26 +471,26 @@
             <div class="company-document">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="organizationDetail.company_logo" class="form-label">कम्पनी लोगो</label>
-                        <input type="file" class="form-control" id="organizationDetail.company_logo"
-                               wire:model="organizationDetail.company_logo"/>
-                        @error('organizationDetail.company_logo')
+                        <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो</label>
+                        <input type="file" class="form-control" id="organizationDetail.logo"
+                               wire:model="organizationDetail.logo"/>
+                        @error('organizationDetail.logo')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="च organizationDetail.company_certificate" class="form-label">कम्पनी प्रमाणपत्र</label>
-                        <input type="file" class="form-control" id="organizationDetail.company_certificate"
-                            wire:model="organizationDetail.company_certificate"/>
-                        @error('organizationDetail.company_certificate')
+                        <label for="च organizationDetail.org_registration_document" class="form-label">कम्पनी प्रमाणपत्र</label>
+                        <input type="file" class="form-control" id="organizationDetail.org_registration_document"
+                            wire:model="organizationDetail.org_registration_document"/>
+                        @error('organizationDetail.org_registration_document')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="organizationDetail.pan_certificate" class="form-label">प्यान प्रमाणपत्र:</label>
-                        <input type="file" class="form-control" id="organizationDetail.pan_certificate"
-                        wire:model="organizationDetail.pan_certificate"/>
-                        @error('organizationDetail.pan_certificate')
+                        <label for="organizationDetail.org_pan_document" class="form-label">प्यान प्रमाणपत्र:</label>
+                        <input type="file" class="form-control" id="organizationDetail.org_pan_document"
+                        wire:model="organizationDetail.org_pan_document"/>
+                        @error('organizationDetail.org_pan_document')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -513,28 +518,28 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-3">
-                                @if ($organizationDetail['company_logo'])
+                                @if ($organizationDetail['logo'])
                                 कम्पनी लोगो
                                 <div class="card" style="width: 8rem">
-                                    <img src="{{ $organizationDetail['company_logo']->temporaryUrl() }}"  height="150"
+                                    <img src="{{ $organizationDetail['logo']->temporaryUrl() }}"  height="150"
                                          alt="">
                                 </div>
                                 @endif
                             </div>
                             <div class="col-md-3">
-                                @if ($organizationDetail['company_certificate'])
+                                @if ($organizationDetail['org_registration_document'])
                                 कम्पनी प्रमाणपत्र
                                 <div class="card" style="width: 8rem">
-                                    <img src="{{ $organizationDetail['company_certificate']->temporaryUrl() }}" height="150"
+                                    <img src="{{ $organizationDetail['org_registration_document']->temporaryUrl() }}" height="150"
                                     alt="">
                                 </div>                                 
                                 @endif
                             </div>
                             <div class="col-md-3">
-                                @if ($organizationDetail['pan_certificate'])
+                                @if ($organizationDetail['org_pan_document'])
                                 प्यान प्रमाणपत्र
                                 <div class="card" style="width: 8rem">
-                                    <img src="{{ $organizationDetail['pan_certificate']->temporaryUrl() }}" height="150"
+                                    <img src="{{ $organizationDetail['org_pan_document']->temporaryUrl() }}" height="150"
                                          alt="">
                                 </div>
                                 @endif
@@ -550,58 +555,75 @@
                             </div>
                         </div>
                     </div>
-    
-                    <div class="col-md-4 mb-3">
-                        <label for="user_name" class="form-label">प्रयोगकार्तको नाम</label>
-                           <input
-                                name="user_name"
-                                 class="form-control @error('user_name') is-invalid @enderror"
-                                 type="text"
-                                id="user_name"
-                                 placeholder="प्रयोगकार्तको नाम"
-                              />
-                           @error('user_name')
-                            <div class="invalid-feedback">{{$message}}</div>
-                           @enderror
-                         </div>
-                         <div class="col-md-4 mb-3">
-                            <label for="user_email" class="form-label">इमेल</label>
-                               <input
-                                    name="user_email"
-                                     class="form-control @error('user_email') is-invalid @enderror"
-                                     type="text"
-                                    id="user_email"
-                                     placeholder="इमेल"
-                                  />
-                               @error('user_email')
-                                <div class="invalid-feedback">{{$message}}</div>
-                               @enderror
-                             </div>
-                             <div class="col-md-4 mb-3">
-                                <label for="user_phone" class="form-label">सम्पर्क न:</label>
-                                   <input
-                                        name="user_phone"
-                                         class="form-control @error('user_phone') is-invalid @enderror"
-                                         type="text"
-                                        id="user_phone"
-                                         placeholder="सम्पर्क न:"
-                                      />
-                                   @error('user_phone')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                   @enderror
-                                 </div>
                 </div>
             </div>
-          
-       
+            <div class="d-flex justify-content-around mt-2">
+                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
+                <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel">Next</button>
+            </div>
+            @break
+
+            @case(6)
+          <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="user_name" class="form-label">प्रयोगकार्तको नाम</label>
+                <input
+                     name="user_name"
+                      class="form-control @error('user_name') is-invalid @enderror"
+                      type="text"
+                     id="user_name"
+                      placeholder="प्रयोगकार्तको नाम"
+                   />
+                @error('user_name')
+                 <div class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>                          
+                <div class="col-md-4 mb-3">
+                    <label for="user_email" class="form-label">इमेल</label>
+                    <input
+                         name="user_email"
+                          class="form-control @error('user_email') is-invalid @enderror"
+                          type="text"
+                         id="user_email"
+                          placeholder="इमेल"
+                       />
+                    @error('user_email')
+                     <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <label for="user_phone" class="form-label">सम्पर्क न:</label>
+                    <input
+                         name="user_phone"
+                         class="form-control @error('user_phone') is-invalid @enderror"
+                         type="text"
+                         id="user_phone"
+                         placeholder="सम्पर्क न:"
+                        />
+                    @error('user_phone')
+                     <div class="invalid-feedback">{{$message}}</div>
+                    @enderror  
+                </div>
+            </div>     
             <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
             <button type="submit" class="btn btn-success">Submit</button>
             <button type="reset" class="btn btn-danger" wire:click.prevent="resetForm">Cancel</button>
             @break
            
 
-        @default
+        @default  
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">परामर्शदाता प्रकार:</label>
+                    <select class="form-select" aria-label="Default select example">
+      <option selected>--- परामर्शदाता छान्नुहोस् ---</option>
+      <option value="1">संगठन</option>
+      <option value="2">व्यक्ति</option>
+    </select>
+                </div>             
             <div class="row">
+                <h6 class="title">ब्यतिगत बिबरण</h6>
+                <hr style="height:2px;color:gray;background-color:gray"> 
                 <div class="col-md-6 mb-3">
                     <label for="userDetail.name_ne" class="form-label">नेपालीमा नाम</label>
                     <input
