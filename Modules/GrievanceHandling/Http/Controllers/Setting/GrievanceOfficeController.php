@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\StoreGrievanceOfficeRequest;
-use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\StoreGrievanceRequest;
 use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\UpdateGrievanceOfficeRequest;
 
 class GrievanceOfficeController extends Controller

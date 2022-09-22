@@ -14,7 +14,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/grievance','grievancehandling::frontend.index');
+Route::view('/grievance','grievancehandling::frontend.index')->name('grievance');
 Route::view('/policy','grievancehandling::frontend.policy.policy');
 Route::view('/register','grievancehandling::frontend.register.register-form');
 Route::view('/track','grievancehandling::frontend.track.track');
