@@ -28,6 +28,8 @@
                             </div>
                         </div>
                     </div>
+                    <x-date-component :data="[ 'name_ne'=>'xyz','label_ne'=>'xyz', 'name_en'=>'abc', 'label_en'=>'abc']" />
+                    <x-date-component :data="[ 'name_ne'=>'sad','label_ne'=>'asdsa', 'name_en'=>'asfew', 'label_en'=>'ascassa']" />
                 </div>
             </div>
         </div>

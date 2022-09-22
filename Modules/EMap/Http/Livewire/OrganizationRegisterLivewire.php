@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -102,6 +103,54 @@ class OrganizationRegisterLivewire extends Component
             $this->level++;
         }
 
+    }
+
+    protected $rules = [
+        'userDetail.name_ne' => ['required'],
+        'userDetail.name_en' => ['required'],
+        'userDetail.email' => ['required', 'email'],
+        'userDetail.phone' => ['required'],
+        'userDetail.gender' => ['required'],
+        'userDetail.marital_status' => ['nullable'],
+        'userDetail.father_name' => ['required'],
+        'userDetail.grandfather_name' => ['required'],
+        'userDetail.pan_no' => ['nullable'],
+        'userDetail.nec_no' => ['nullable'],
+        'userDetail.nec_certificate' => ['nullable', 'image'],
+        'userDetail.citizenship_no' => ['required'],
+        'userDetail.citizenship_issued_district' => ['required', 'exists:districts,id,deleted_at,null'],
+        'userDetail.citizenship_issued_date' => ['required'],
+        'userDetail.citizenship_front' => ['required', 'image'],
+        'userDetail.citizenship_back' => ['nullable', 'image'],
+        'userDetail.permanent_province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
+        'userDetail.permanent_district_id' => ['required', 'exists:districts,id,deleted_at,null'],
+        'userDetail.permanent_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+        'userDetail.permanent_ward' => ['required'],
+        'userDetail.permanent_tole' => ['nullable'],
+        'userDetail.temporary_province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
+        'userDetail.temporary_district_id' => ['required', 'exists:districts,id,deleted_at,null'],
+        'userDetail.temporary_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+        'userDetail.temporary_ward' => ['nullable'],
+        'userDetail.temporary_tole' => ['nullable'],
+        'organizationDetail.org_name_ne' => null,
+        'organizationDetail.org_name_en' => null,
+        'organizationDetail.org_email' => null,
+        'organizationDetail.org_contact' => null,
+        'organizationDetail.org_registration_no' => null,
+        'organizationDetail.org_registration_document' => null,
+        'organizationDetail.org_pan_no' => null,
+        'organizationDetail.org_pan_document' => null,
+        'organizationDetail.logo' => null,
+        'organizationDetail.province_id' => null,
+        'organizationDetail.district_id' => null,
+        'organizationDetail.local_body_id' => null,
+        'organizationDetail.ward' => null,
+        'organizationDetail.tole' => null,
+    ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
     }
 
     public function save()
