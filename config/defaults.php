@@ -30,13 +30,9 @@ return [
         'शुक्रबार' => 'Friday',
         'शनिबार' => 'Saturday',
     ],
-    'notice_type' => [
-        'सूचना' => 'Notice',
-        'समाचार' => 'News'
-    ],
-    'complaint_severity'=>[
-        'साधारण'=>'Simple',
-        'प्राथमिकता'=>'Priority',
-        'उच्च प्राथमिकता'=>'High priority'
+    'complaint_severity' => [
+        'साधारण' => 'Simple',
+        'प्राथमिकता' => 'Priority',
+        'उच्च प्राथमिकता' => 'High priority'
     ]
 ];
