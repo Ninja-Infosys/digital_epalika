@@ -35,6 +35,8 @@ return [
         'समाचार' => 'News'
     ],
     'complaint_severity'=>[
-
+        'साधारण'=>'Simple',
+        'प्राथमिकता'=>'Priority',
+        'उच्च प्राथमिकता'=>'High priority'
     ]
 ];
