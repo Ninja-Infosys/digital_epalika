@@ -29,7 +29,7 @@ class Client extends Model
         'tole',
         'phone',
         'email',
-        'user_id',
+        'organization_id',
     ];
 
     public function province(): BelongsTo
@@ -47,4 +47,8 @@ class Client extends Model
         return $this->belongsTo(LocalBody::class);
     }
 
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }

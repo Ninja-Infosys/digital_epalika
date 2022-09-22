@@ -93,7 +93,7 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण * </label>
-                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5" class="form-control @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
+                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5" class="form-control summernote @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

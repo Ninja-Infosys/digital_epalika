@@ -101,7 +101,7 @@
                                     <textarea name="description"
                                               id="description"
                                               cols="30" placeholder="बिवरण" rows="5"
-                                              class="form-control @error('meeting_subject') is-invalid @enderror">{{old('description',$municipalMeetingNotice->description)}}</textarea>
+                                              class="form-control summernote @error('meeting_subject') is-invalid @enderror">{{old('description',$municipalMeetingNotice->description)}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

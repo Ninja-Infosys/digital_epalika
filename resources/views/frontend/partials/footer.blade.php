@@ -1,6 +1,6 @@
 <section class="footer-section">
     <footer class="footer">
-        <div class="footer-main" style="background-image: url('assets/frontend/image/footer.jpg');">
+        <div class="footer-main" style="background-image: url({{url('assets/frontend/image/footer.jpg')}});">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-xs-6 col-md-6 col-lg-3 order-2 mt-lg-0 mt-4">

@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('logo1')->nullable();
             $table->string('logo2')->nullable();
             $table->string('background_image')->nullable();
-            $table->text('google_map')->nullable();
+            $table->longText('google_map')->nullable();
             $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');

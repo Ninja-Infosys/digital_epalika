@@ -31,16 +31,17 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.officeSetting.update',$officeSetting)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.officeSetting.update',$officeSetting)}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong>कार्यालय विवरण </strong>
+                                <strong>कार्यालय बिवरण </strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="name" class="form-label">नाम  *</label>
+                                    <label for="name" class="form-label">नाम *</label>
                                     <input
                                         type="text"
                                         name="name"
@@ -114,7 +115,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="email" class="form-label">इमेल  </label>
+                                    <label for="email" class="form-label">इमेल </label>
                                     <input
                                         type="text"
                                         name="email"
@@ -128,7 +129,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="phone" class="form-label">फोन नम्बर  </label>
+                                    <label for="phone" class="form-label">फोन नम्बर </label>
                                     <input
                                         type="text"
                                         name="phone"
@@ -155,7 +156,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="facebook_link" class="form-label">फेसबुक लिङ्क </label>
                                     <input
                                         type="text"
@@ -172,7 +173,9 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label for="google_map" class="form-label">गुगल नक्शा </label>
-                                    <textarea name="google_map" id="google_map" cols="30" placeholder="गुगल नक्शा" class="form-control @error('google_map') is-invalid @enderror" rows="5">{{old('google_map',$officeSetting->google_map)}}</textarea>
+                                    <textarea name="google_map" id="google_map" cols="30" placeholder="गुगल नक्शा"
+                                              class="form-control summernote @error('google_map') is-invalid @enderror"
+                                              rows="5">{{old('google_map',$officeSetting->google_map)}}</textarea>
                                     @error('google_map')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -183,14 +186,75 @@
                             <legend class="font-16 text-info">
                                 <strong>ठेगाना</strong>
                             </legend>
-                            @livewire('address',['address'=>$officeSetting->address])
+                            @livewire('address',['address'=>array_merge($officeSetting->address,$officeSetting->ward)])
                         </fieldset>
-
 
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
                     </form>
+                    @livewire('office-header')
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <fieldset class="border p-2 mb-2">
+                        <legend class="font-16 text-info">
+                            <strong>कार्यालय विवरण </strong>
+                        </legend>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-sm mb-0 table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>क्र.स</th>
+                                        <th>शिर्षक</th>
+                                        <th>फन्ट</th>
+                                        <th>फन्ट साइज</th>
+                                        <th>स्थान</th>
+                                        <th>#</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse($officeHeaders as $officeheader)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$officeheader->title}}</td>
+                                        <td>{{$officeheader->font}}</td>
+                                        <td>{{$officeheader->font_size}}</td>
+                                        <td>{{$officeheader->position}}</td>
+                                        <td>
+
+                                                <a href="{{route('admin.officeHeader.edit',$officeheader)}}"
+                                                   class="btn btn-xs btn-outline-primary">
+                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                </a>
+
+
+                                                <form action="{{route('admin.officeHeader.destroy',$officeheader)}}"
+                                                      method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    </button>
+                                                </form>
+
+                                        </td>
+                                    </tr>
+                                    @empty
+
+                                    @endforelse
+                                    </tbody>
+
+                                </table>
+                            </div>
+                    </fieldset>
                 </div>
             </div>
         </div>

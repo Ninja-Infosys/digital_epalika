@@ -45,8 +45,9 @@
                                     id="branch_id">
                                     <option value="">छान्नुहोस्</option>
                                     @foreach($mainBranches as $mainBranch)
-                                        <option {{$mainBranch->id===old('branch_id') ? 'selected' : ''}}
-                                                value="{{$mainBranch->id}}">
+                                        <option
+                                            {{$mainBranch->id===old('branch_id',$branch->branch_id) ? 'selected' : ''}}
+                                            value="{{$mainBranch->id}}">
                                             {{$mainBranch->branch_name}}
                                         </option>
                                     @endforeach

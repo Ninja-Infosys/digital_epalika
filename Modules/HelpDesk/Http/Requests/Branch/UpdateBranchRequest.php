@@ -15,7 +15,7 @@ class UpdateBranchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_name' => ['required', 'string', 'max:255', Rule::unique('branches', 'branch_name')->withoutTrashed()],
+            'branch_name' => ['required', Rule::unique('branches', 'branch_name')->withoutTrashed()->ignore($this->branch)],
             'branch_id' => ['nullable', Rule::exists('branches', 'id')]
         ];
     }
