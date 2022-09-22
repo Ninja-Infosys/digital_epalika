@@ -4,6 +4,8 @@ namespace Modules\EMap\Http\Controllers\Clients;
 
 use Illuminate\Auth\Access\AuthorizationException;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Http\Requests\Clients\Client\StoreClientRequest;
 use Modules\EMap\Http\Requests\Clients\Client\UpdateClientRequest;
@@ -22,9 +24,19 @@ class ClientController extends Controller
         return view('emap::clients.client.create');
     }
 
-    public function store(StoreClientRequest $request)
+    public function store(Request $request)
     {
-        Client::create($request->validated());
+        $data = $request->validate([
+            'name' => ['required',],
+            'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
+            'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
+            'local_body_id' => ['required', Rule::exists('local_bodies', 'id')->withoutTrashed()],
+            'ward_no' => ['required',],
+            'tole' => ['nullable'],
+            'phone' => ['required'],
+            'email' => ['nullable'],
+        ]);
+        Client::create($data + ['user_id' => auth('organization')->id()]);
 
         toast(' ग्राहक सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.units.measurementUnit.index'));
@@ -53,11 +65,22 @@ class ClientController extends Controller
     /**
      * @throws AuthorizationException
      */
-    public function update(UpdateClientRequest $request, Client $client)
+    public function update(Request $request, Client $client)
     {
         $this->authorize('update', $client);
 
-        $client->update($request->validated());
+        $data = $request->validate([
+            'name' => ['required',],
+            'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
+            'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
+            'local_body_id' => ['required', Rule::exists('local_bodies', 'id')->withoutTrashed()],
+            'ward_no' => ['required',],
+            'tole' => ['nullable'],
+            'phone' => ['required'],
+            'email' => ['nullable'],
+        ]);
+
+        $client->update($data);
 
         toast('ग्राहक सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.units.measurementUnit.index'));
