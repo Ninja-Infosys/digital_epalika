@@ -128,4 +128,6 @@ class Organization extends Authenticatable
     {
         return $this->belongsTo(LocalBody::class);
     }
+
+
 }

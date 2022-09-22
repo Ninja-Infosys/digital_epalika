@@ -5,12 +5,14 @@ namespace Modules\EMap\Entities;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Client extends Model
+class OrganizationDetail extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -21,34 +23,45 @@ class Client extends Model
     ];
 
     protected $fillable = [
-        'name',
+        'org_name_ne',
+        'org_name_en',
+        'org_email',
+        'org_contact',
+        'org_registration_no',
+        'org_registration_document',
+        'org_pan_no',
+        'org_pan_document',
+        'logo',
         'province_id',
         'district_id',
         'local_body_id',
-        'ward_no',
+        'ward',
         'tole',
-        'phone',
-        'email',
         'organization_id',
     ];
 
     public function province(): BelongsTo
     {
-        return $this->belongsTo(Province::class);
+        return $this->belongsTo(Province::class, 'province_id');
     }
 
     public function district(): BelongsTo
     {
-        return $this->belongsTo(District::class);
+        return $this->belongsTo(District::class, 'district_id');
     }
 
     public function localBody(): BelongsTo
     {
-        return $this->belongsTo(LocalBody::class);
+        return $this->belongsTo(LocalBody::class, 'local_body_id');
     }
 
     public function organization(): BelongsTo
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function taxClearance(): HasMany
+    {
+        return $this->hasMany(TaxClearance::class);
     }
 }
