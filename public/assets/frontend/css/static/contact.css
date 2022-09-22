@@ -1,0 +1,21 @@
+.address {
+    margin-top: 3rem;
+}
+
+.contact-item {
+    display: flex;
+}
+
+.contact-item .icon-size {
+    color: #003893;
+    width: 3rem !important;
+    height: 3rem !important;
+    min-width: 3rem !important;
+    min-height: 3rem !important;
+    font-size: 3rem !important;
+    line-height: 3rem !important;
+}
+
+.contact-item .textbox {
+    margin-left: 1rem;
+}

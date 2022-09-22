@@ -32,4 +32,21 @@ class StoreServiceRequest extends FormRequest
             'serviceEmployees.*.employee' => ['required']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'branch_id.required' => 'शाखा आवश्यक छ',
+            'service_name.required' => 'सेवाको नाम आवश्यक छ',
+            'time_taken.required' => 'लाग्ने समय आवश्यक छ',
+            'responsible_officer.required' => 'जिम्मेवार अधिकारी आवश्यक छ',
+            'office.required' => 'कार्यालय आवश्यक छ',
+            'photo.image' => 'फोटोमा हुनुपर्छ',
+            'email.email' => 'इमेल फर्ममा हुनुपर्छ',
+            'phone.required' => 'फोन आवश्यक छ',
+            'serviceDocuments.required' => 'कागजात आवश्यक छ',
+            'serviceProcess.required' => 'सेवा उपलब्ध प्रक्रिया आवश्यक छ',
+            'serviceEmployees.required' => 'सेवा दिने कर्मचारी आवश्यक छ'
+        ];
+    }
 }

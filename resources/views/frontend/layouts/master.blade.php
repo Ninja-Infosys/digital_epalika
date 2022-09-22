@@ -8,6 +8,7 @@
     <title>Digital-Palika</title>
 {{--css link--}}
     <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/navbar.css')}}">
 {{--Bootstrap 5 --}}
     <link rel="stylesheet" href="{{asset('assets/frontend/css/bootstrap.min.css')}}">
 {{--font-awesome--}}

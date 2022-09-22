@@ -61,7 +61,7 @@ class ServiceController extends Controller
             }
         });
 
-        toast('Service Created Successfully', 'success');
+        toast('सेवा सफलतापूर्वक सिर्जना गरियो', 'success');
 
         return back();
     }
