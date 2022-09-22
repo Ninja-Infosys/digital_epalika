@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Service extends Model
 {
@@ -29,6 +31,18 @@ class Service extends Model
         'phone',
         'remarks',
     ];
+
+    public function getPhotoUrlAttribute(): string
+    {
+        return $this->photo ? Storage::disk('public')->url($this->attributes['photo']) : '';
+    }
+
+    public function setPhotoAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['photo'] = $value->store('service/' . Str::slug($this->attributes['service_name'], '_'), 'public');
+        }
+    }
 
     public function branch(): BelongsTo
     {
