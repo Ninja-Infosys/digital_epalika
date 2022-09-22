@@ -10,6 +10,12 @@ return new class extends Migration
     {
         Schema::create('grievance_users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('grievance_detail_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->string('name');
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email');
+            $table->string('password');
             $table->timestamps();
             $table->softDeletes();
         });
