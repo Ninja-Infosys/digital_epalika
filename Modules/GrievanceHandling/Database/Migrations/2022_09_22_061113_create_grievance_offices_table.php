@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('grievance_types', function (Blueprint $table) {
+        Schema::create('grievance_offices', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->timestamps();
@@ -18,6 +18,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('grievance_types');
+        Schema::dropIfExists('grievance_offices');
     }
 };

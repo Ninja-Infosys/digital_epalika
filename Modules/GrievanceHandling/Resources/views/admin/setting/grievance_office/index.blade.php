@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grievanceHandling.setting.grievanceType.index')}}">गुनासो प्रकार </a>
+                            <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">शाखा/कार्यालय </a>
                         </li>
-                        <li class="breadcrumb-item active">गुनासो प्रकार  </li>
+                        <li class="breadcrumb-item active">शाखा/कार्यालय </li>
                     </ol>
                 </div>
-                <h4 class="page-title">गुनासो प्रकार  </h4>
+                <h4 class="page-title">शाखा/कार्यालय  </h4>
             </div>
         </div>
     </div>
@@ -26,11 +26,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">गुनासो प्रकार सूची</h4>
+                        <h4 class="header-title">शाखा/कार्यालय सूची</h4>
                         @can('grievanceType_create')
-                            <a href="{{route('admin.grievanceHandling.setting.grievanceType.create')}}"
+                            <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ गुनासो प्रकार थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ शाखा/कार्यालय थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -46,16 +46,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($grievance_types as $grievance_type)
+                            @forelse($grievanceOffices as $grievanceOffice)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$grievance_type->title}}</td>
+                                    <td>{{$grievanceOffice->title}}</td>
                                     <td>
-                                        <a href="{{route('admin.grievanceHandling.setting.grievanceType.edit',$grievance_type)}}"
+                                        <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.edit',$grievanceOffice)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.grievanceHandling.setting.grievanceType.destroy',$grievance_type)}}"
+                                        <form action="{{route('admin.grievanceHandling.setting.grievanceOffice.destroy',$grievanceOffice)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

@@ -42,11 +42,15 @@ class StoreServiceRequest extends FormRequest
             'responsible_officer.required' => 'जिम्मेवार अधिकारी आवश्यक छ',
             'office.required' => 'कार्यालय आवश्यक छ',
             'photo.image' => 'फोटोमा हुनुपर्छ',
+            'email.required' => 'इमेल अनिबार्य छ ',
             'email.email' => 'इमेल फर्ममा हुनुपर्छ',
             'phone.required' => 'फोन आवश्यक छ',
             'serviceDocuments.required' => 'कागजात आवश्यक छ',
-            'serviceProcess.required' => 'सेवा उपलब्ध प्रक्रिया आवश्यक छ',
-            'serviceEmployees.required' => 'सेवा दिने कर्मचारी आवश्यक छ'
+            'serviceDocuments.*.description.required' => 'कागजात आबश्यक छ ',
+            'serviceProcesses.required' => 'सेवा उपलब्ध प्रक्रिया आवश्यक छ',
+            'serviceProcesses.*.description.required' => 'उपलब्ध प्रक्रिया आबश्यक छ ',
+            'serviceEmployees.required' => 'सेवा दिने कर्मचारी आवश्यक छ',
+            'serviceEmployees.*.employee.required' => 'कर्मचारीको नाम आबश्यक छ '
         ];
     }
 }

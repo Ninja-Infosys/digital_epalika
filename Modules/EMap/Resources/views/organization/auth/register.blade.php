@@ -18,7 +18,10 @@
         href="{{asset('assets/backend/css/bootstrap.min.css')}}"
         rel="stylesheet"
         type="text/css"
+        
     />
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/register/reg.css')}}">
+
     <!-- App css -->
     <link
         href="{{asset('assets/backend/css/app.min.css')}}"
@@ -50,21 +53,21 @@
                                     (Digital Palika Management System)
                                 </p>
                             </div>
+                            <div class="row technical-support">
+                                <p>
+                                    <b>प्राविधिक सहायता कक्ष:</b>
+                                    <br>
+                                    सम्पर्क नम्बर: 081-520361/9858042433
+                                    <br>
+                                    इमेल: ninjainfosys@gmail.com
+                                </p>
+                            </div>
                         </div>
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-body">
                                     <h2 class="text-center">Register</h2>
                                     <livewire:emap::organization-register-livewire/>
-                                </div>
-                                <div class="row technical-support">
-                                    <p>
-                                        <b>प्राविधिक सहायता कक्ष:</b>
-                                        <br>
-                                        सम्पर्क नम्बर: 081-520361/9858042433
-                                        <br>
-                                        इमेल: ninjainfosys@gmail.com
-                                    </p>
                                 </div>
                             </div>
                         </div>

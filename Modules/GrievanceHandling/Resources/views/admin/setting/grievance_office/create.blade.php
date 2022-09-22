@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -12,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grievanceHandling.setting.grievanceType.index')}}">गुनासो प्रकार </a>
+                            <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">शाखा/कार्यालय</a>
                         </li>
-                        <li class="breadcrumb-item active"> गुनासो प्रकार सम्पादन गर्नुहोस</li>
+                        <li class="breadcrumb-item active">नयाँ शाखा/कार्यालय थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">गुनासो प्रकार </h4>
+                <h4 class="page-title">शाखा/कार्यालय </h4>
             </div>
         </div>
     </div>
@@ -27,20 +26,19 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">गुनासो प्रकार सम्पादन गर्नुहोस</h4>
-                        <a href="{{route('admin.grievanceHandling.setting.grievanceType.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> गुनासो प्रकार सूची
+                        <h4 class="header-title">शाखा/कार्यालय थप्नुहोस्</h4>
+                        <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> शाखा/कार्यालय सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.grievanceHandling.setting.grievanceType.update',$grievanceType)}}" method="post"
+                    <form action="{{route('admin.grievanceHandling.setting.grievanceOffice.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
-                        @method('put')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong>गुनासो प्रकार  </strong>
+                                <strong>शाखा/कार्यालय </strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
@@ -48,7 +46,7 @@
                                     <input
                                         type="text"
                                         name="title"
-                                        value="{{old('title',$grievanceType->title)}}"
+                                        value="{{old('title')}}"
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
                                         placeholder="शिर्षक "

@@ -1,8 +1,8 @@
 <div>
-    <table class="table mb-0">
+    <table class="table">
         <thead>
         <tr>
-            <th>आबश्यक कागजात *</th>
+            <th>सेवा दिने कर्मचारीहरुको नाम  *</th>
             <th>
                 <button type="button" wire:click="addRow" class="btn btn-xs btn-primary">
                     <i class="fa fa-plus"></i>
@@ -11,11 +11,14 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($serviceDocuments as $key=>$document)
+        @foreach($serviceEmployees as $key=>$serviceEmployee)
             <tr>
                 <td>
-                    <input type="text" name="serviceDocuments[{{$key}}][description]"
-                           wire:model="serviceDocuments.{{$key}}.description" class="form-control"
+                    @if(!empty($serviceEmployee['id']))
+                        <input type="hidden" name="serviceEmployees[{{$key}}][id]"
+                               wire:model="serviceEmployees.{{$key}}.id">
+                    @endif
+                    <input type="text" name="serviceEmployees[{{$key}}][employee]" wire:model="serviceEmployees.{{$key}}.employee" class="form-control"
                            placeholder="">
                 </td>
                 <td>
@@ -27,10 +30,10 @@
         @endforeach
         </tbody>
     </table>
-    @error('serviceDocuments')
+    @error('serviceEmployees')
     <div class="invalid-feedback">{{$message}}</div>
     @enderror
-    @error('serviceDocuments.*')
+    @error('serviceEmployees.*')
     <div class="invalid-feedback">{{$message}}</div>
     @enderror
 </div>
