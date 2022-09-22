@@ -14,7 +14,11 @@
         @foreach($serviceEmployees as $key=>$serviceEmployee)
             <tr>
                 <td>
-                    <input type="text" name="serviceEmployees[{{$key}}][employee]" class="form-control"
+                    @if(!empty($serviceEmployee['id']))
+                        <input type="hidden" name="serviceEmployees[{{$key}}][id]"
+                               wire:model="serviceEmployees.{{$key}}.id">
+                    @endif
+                    <input type="text" name="serviceEmployees[{{$key}}][employee]" wire:model="serviceEmployees.{{$key}}.employee" class="form-control"
                            placeholder="">
                 </td>
                 <td>

@@ -15,7 +15,8 @@
             <tr>
                 <td>
                     @if(!empty($document['id']))
-                        <input type="hidden" value="{{$document['id']}}">
+                        <input type="hidden" name="serviceDocuments[{{$key}}][id]"
+                               wire:model="serviceDocuments.{{$key}}.id">
                     @endif
 
                     <input type="text" name="serviceDocuments[{{$key}}][description]"

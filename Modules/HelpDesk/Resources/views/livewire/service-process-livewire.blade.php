@@ -2,7 +2,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th>उपलब्ध गराउने प्रक्रिया  *</th>
+            <th>उपलब्ध गराउने प्रक्रिया *</th>
             <th>
                 <button type="button" wire:click="addRow" class="btn btn-xs btn-primary">
                     <i class="fa fa-plus"></i>
@@ -14,7 +14,12 @@
         @foreach($serviceProcesses as $key=>$serviceProcess)
             <tr>
                 <td>
-                    <input type="text" name="serviceProcesses[{{$key}}][description]" class="form-control"
+                    @if(!empty($serviceProcess['id']))
+                        <input type="hidden" name="serviceProcesses[{{$key}}][id]"
+                               wire:model="serviceProcesses.{{$key}}.id">
+                    @endif
+                    <input type="text" name="serviceProcesses[{{$key}}][description]"
+                           wire:model="serviceProcesses.{{$key}}.description" class="form-control"
                            placeholder="">
                 </td>
                 <td>

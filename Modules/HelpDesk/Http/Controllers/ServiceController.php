@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Gate;
 use Modules\HelpDesk\Entities\Branch;
 use Modules\HelpDesk\Entities\Service;
 use Modules\HelpDesk\Entities\ServiceDocument;
+use Modules\HelpDesk\Entities\ServiceEmployee;
+use Modules\HelpDesk\Entities\ServiceProcess;
 use Modules\HelpDesk\Http\Requests\Service\StoreServiceRequest;
 use Modules\HelpDesk\Http\Requests\Service\UpdateServiceRequest;
 
@@ -108,6 +110,25 @@ class ServiceController extends Controller
                     ]);
                 } else {
                     $service->serviceDocuments()->create($serviceDocument);
+                }
+            }
+            foreach ($request->input('serviceProcesses') as $serviceProcess) {
+                if (!empty($serviceProcess['id'])) {
+                    ServiceProcess::find($serviceProcess['id'])->update([
+                        'description' => $serviceProcess['description']
+                    ]);
+                } else {
+                    $service->serviceProcesses()->create($serviceProcess);
+                }
+            }
+
+            foreach ($request->input('serviceEmployees') as $serviceEmployee) {
+                if (!empty($serviceEmployee['id'])) {
+                    ServiceEmployee::find($serviceEmployee['id'])->update([
+                        'employee' => $serviceEmployee['employee']
+                    ]);
+                } else {
+                    $service->serviceEmployees()->create($serviceEmployee);
                 }
             }
         });
