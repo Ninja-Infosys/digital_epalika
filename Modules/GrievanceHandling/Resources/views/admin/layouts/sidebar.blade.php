@@ -6,7 +6,7 @@
                 <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="{{request()->is('admin/executiveMeeting/*') ?'':'collapse'}}"
+    <div class="{{request()->is('admin/grievanceHandling/*') ?'':'collapse'}}"
          id="sidebarGrievanceHandling">
         <ul class="nav-second-level">
             <li class="{{request()->routeIs('admin.executiveMeeting.municipalCommittee.index') ? 'active' : ''}}">
@@ -33,7 +33,7 @@
                             @can('grievanceOffice_access')
                                 <li class="{{request()->routeIs('admin.grievanceHandling.setting.grievanceOffice.index') ? 'active' : ''}}">
                                     <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">
-                                        <span> गुनासो पठाउने कार्यालय </span>
+                                        <span> शाखा/कार्यालय </span>
                                     </a>
                                 </li>
                             @endcan
