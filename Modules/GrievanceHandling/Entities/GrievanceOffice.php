@@ -17,6 +17,6 @@ class GrievanceOffice extends Model
    ];
 
    protected $fillable = [
-
+        'title'
    ];
 }

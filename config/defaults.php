@@ -33,5 +33,8 @@ return [
     'notice_type' => [
         'सूचना' => 'Notice',
         'समाचार' => 'News'
+    ],
+    'complaint_severity'=>[
+
     ]
 ];

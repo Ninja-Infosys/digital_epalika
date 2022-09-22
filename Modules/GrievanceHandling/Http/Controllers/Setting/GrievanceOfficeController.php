@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
+use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\StoreGrievanceOfficeRequest;
+use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\StoreGrievanceRequest;
+use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\UpdateGrievanceOfficeRequest;
 
 class GrievanceOfficeController extends Controller
 {
@@ -28,14 +31,14 @@ class GrievanceOfficeController extends Controller
         return view('grievancehandling::admin.setting.grievance_office.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreGrievanceOfficeRequest $request)
     {
         abort_if(Gate::denies('grievanceOffice_create'),
             403,
             'You are not allowed to access this resource'
         );
         GrievanceOffice::create($request->validated());
-        toast(' गुनासो पठाउने कार्यालय सफलतापूर्वक थपियो', 'success');
+        toast('शाखा/कार्यालय सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -57,14 +60,14 @@ class GrievanceOfficeController extends Controller
         return view('grievancehandling::admin.setting.grievance_office.edit',compact('grievanceOffice'));
     }
 
-    public function update(Request $request, GrievanceOffice $grievanceOffice)
+    public function update(UpdateGrievanceOfficeRequest $request, GrievanceOffice $grievanceOffice)
     {
         abort_if(Gate::denies('grievanceOffice_edit'),
             403,
             'You are not allowed to access this resource'
         );
         $grievanceOffice->update($request->validated());
-        toast(' गुनासो पठाउने कार्यालय सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast(' शाखा/कार्यालय सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.grievanceHandling.setting.grievanceOffice.index'));
     }
 
@@ -75,7 +78,7 @@ class GrievanceOfficeController extends Controller
             'You are not allowed to access this resource'
         );
         $grievanceOffice->delete();
-        toast(' गुनासो पठाउने कार्यालय सफलतापूर्वक मेटाइयो', 'success');
+        toast(' शाखा/कार्यालय सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
 }
