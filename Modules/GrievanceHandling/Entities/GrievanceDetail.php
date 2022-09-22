@@ -23,11 +23,12 @@ class GrievanceDetail extends Model
         'grievance_office_id',
         'subject',
         'description',
+        'complaint_severity'
     ];
 
 
     public function files(): MorphMany
     {
-        return $this->morphMany(File::class,'model');
+        return $this->morphMany(File::class, 'model');
     }
 }
