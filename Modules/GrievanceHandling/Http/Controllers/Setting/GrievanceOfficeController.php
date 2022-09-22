@@ -1,10 +1,9 @@
 <?php
 
-namespace Modules\GrievanceHandling\Http\Controllers;
+namespace Modules\GrievanceHandling\Http\Controllers\Setting;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\StoreGrievanceOfficeRequest;
