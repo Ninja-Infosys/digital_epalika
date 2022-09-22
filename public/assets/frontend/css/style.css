@@ -109,31 +109,6 @@ a {
     width: auto;
     background: #fffffe;
 }
-
-.list-item-head p {
-    padding: 10px 20px;
-    margin-bottom: 0 !important;
-    color: white;
-    background: #bd2821;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.list-item-body-content {
-    padding: 3px;
-    display: grid;
-    grid-template-columns: 0.5fr 10fr;
-    font-size: 18px;
-    font-weight: normal;
-    grid-gap: 0px;
-    border-bottom: 1px solid #dadada;
-    cursor: pointer;
-}
-
-.d-block {
-    display: block !important;
-}
-
 .small,
 small {
     display: block;
@@ -153,58 +128,22 @@ small {
     cursor: pointer;
 }
 
-.note span {
-    display: block;
-    font-size: 14px;
-    line-height: 22px;
-    color: #9b9b9b;
-    margin-top: 5px;
-}
-
-.text-redish {
-    color: red;
-}
-
-.float-right {
-    float: right !important;
-}
-
-.bg-main-blue {
-    color: white;
-    background-color: #3a3ae6;
-    width: 100%;
-}
-
-.bg-main-blue:hover {
-    background-color: var(--redColor);
-    color: white;
-}
-
-.list-item-head-top p {
-    padding: 10px 20px;
-    margin: 10px;
-    margin-bottom: 0 !important;
-    color: white;
-    background: #bd2821;
-    font-weight: 600;
-    font-size: 14px;
-}
-
 /*intro-section*/
   .heading {
       font-weight: 700;
   }
-
 .text-withlink {
     color: #1a1a1a;
 }
-
+.intro-col{
+    padding: 0;
+    margin: 0;
+}
 .intro-title {
     display: inline-block;
     color: #2460b9;
     font-size: 14px;
 }
-
 .introduction h6 {
     text-align: justify;
     text-justify: inter-word;
@@ -214,13 +153,11 @@ small {
        transition: .7s;
        transform: translateY(-10px);
    }
-
 .card-02 .card:hover .card-description {
     transition: .5s;
     background-color: var(--redColor);
     color: var(--whiteColor);
 }
-
 .card-description {
     padding-bottom: 10px;
     border-radius: 6px;
@@ -229,7 +166,7 @@ small {
 /*gallery slider*/
   .card img {
       object-fit: contain;
-      height: 16rem;
+      height: 12rem;
       width: 100%;
   }
 
