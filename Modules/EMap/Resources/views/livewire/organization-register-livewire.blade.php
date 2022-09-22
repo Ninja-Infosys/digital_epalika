@@ -127,7 +127,7 @@
                             @if ($userDetail['citizenship_back'])
                                 नागरिकता अपलोड गर्नुहोस् (आगाडी)
                                 <div class="card" style="width: 8rem">
-                                    <img src="{{ $userDetail['citizenship_back']->temporaryUrl() }}" height="100"
+                                    <img src="{{ $userDetail['citizenship_back']->temporaryUrl() }}" height="150"
                                      alt="">
                                 </div>
                             @endif
