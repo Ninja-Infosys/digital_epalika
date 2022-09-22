@@ -133,7 +133,7 @@ class ServiceController extends Controller
             }
         });
 
-        toast('Service Detail Updated Successfully', 'success');
+        toast('सेवा विवरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return redirect(route('admin.helpDesk.service.index'));
     }
@@ -153,7 +153,7 @@ class ServiceController extends Controller
         }
         $service->delete();
 
-        toast('Service Deleted Successfully', 'success');
+        toast('सेवा सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 }
