@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 class LocalBody extends Model
 {
@@ -27,5 +28,14 @@ class LocalBody extends Model
     public function district(): BelongsTo
     {
         return $this->belongsTo(District::class);
+    }
+
+    public function getWardNoAttribute(): Collection
+    {
+        $ward_no = collect();
+        for ($i = 1; $i <= $this->wards; $i++) {
+            $ward_no->push($i);
+        }
+        return $ward_no;
     }
 }
