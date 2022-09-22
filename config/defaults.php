@@ -34,5 +34,11 @@ return [
         'साधारण' => 'Simple',
         'प्राथमिकता' => 'Priority',
         'उच्च प्राथमिकता' => 'High priority'
-    ]
+    ],
+    'grievance_status' => [
+        'नहेरिएको' => 'Unseen',
+        'अनुसन्धान गरिदै' => 'Investigated',
+        'जवाफ दिनुभयो' => 'Replied',
+        'बन्द' => 'Closed'
+    ],
 ];

@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -75,9 +76,6 @@ class OrganizationRegisterLivewire extends Component
         'org_name_en' => null,
         'org_email' => null,
         'org_contact' => null,
-        'company_logo' => null,
-        'company_certificate' => null,
-        'pan_certificate' => null,
         'org_registration_no' => null,
         'org_registration_document' => null,
         'org_pan_no' => null,
@@ -102,6 +100,67 @@ class OrganizationRegisterLivewire extends Component
             $this->level++;
         }
 
+    }
+
+    protected $baseRule = [
+        'userDetail.name_ne' => ['required'],
+        'userDetail.name_en' => ['required'],
+        'userDetail.email' => ['required', 'email'],
+        'userDetail.phone' => ['required'],
+        'userDetail.gender' => ['required'],
+        'userDetail.marital_status' => ['nullable'],
+        'userDetail.father_name' => ['required'],
+        'userDetail.grandfather_name' => ['required'],
+        'userDetail.pan_no' => ['nullable'],
+        'userDetail.nec_no' => ['nullable'],
+        'userDetail.nec_certificate' => ['nullable', 'image'],
+        'userDetail.citizenship_no' => ['required'],
+        'userDetail.citizenship_issued_district' => ['required', 'exists:districts,id,deleted_at,null'],
+        'userDetail.citizenship_issued_date' => ['required'],
+        'userDetail.citizenship_front' => ['required', 'image'],
+        'userDetail.citizenship_back' => ['nullable', 'image'],
+        'userDetail.permanent_province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
+        'userDetail.permanent_district_id' => ['required', 'exists:districts,id,deleted_at,null'],
+        'userDetail.permanent_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+        'userDetail.permanent_ward' => ['required'],
+        'userDetail.permanent_tole' => ['nullable'],
+        'userDetail.temporary_province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
+        'userDetail.temporary_district_id' => ['required', 'exists:districts,id,deleted_at,null'],
+        'userDetail.temporary_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+        'userDetail.temporary_ward' => ['nullable'],
+        'userDetail.temporary_tole' => ['nullable'],
+    ];
+
+    protected function rules(): array
+    {
+        if ($this->isOrganization) {
+            return array_merge($this->baseRule, [
+                'organizationDetail.org_name_ne' => ['required'],
+                'organizationDetail.org_name_en' => ['required'],
+                'organizationDetail.org_email' => ['required'],
+                'organizationDetail.org_contact' => ['required'],
+                'organizationDetail.org_registration_no' => ['required'],
+                'organizationDetail.org_registration_document' => ['required', 'image'],
+                'organizationDetail.org_pan_no' => ['required'],
+                'organizationDetail.org_pan_document' => ['required', 'image'],
+                'organizationDetail.logo' => ['nullable', 'image'],
+                'organizationDetail.province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
+                'organizationDetail.district_id' => ['required', 'exists:districts,id,deleted_at,null'],
+                'organizationDetail.local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+                'organizationDetail.ward' => ['required'],
+                'organizationDetail.tole' => ['nullable'],
+                'taxClearance.document' => ['required'],
+                'taxClearance.year' => ['required'],
+            ]);
+        } else {
+            return $this->baseRule;
+        }
+
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
     }
 
     public function save()
