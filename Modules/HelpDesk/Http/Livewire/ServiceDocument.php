@@ -8,9 +8,18 @@ class ServiceDocument extends Component
 {
     public $serviceDocuments = [];
 
-    public function mount()
+    public function mount($service = null)
     {
-        $this->serviceDocuments[] = [];
+        if (!empty($service)) {
+            foreach ($service->serviceDocuments as $serviceDocument) {
+                $this->serviceDocuments[] = [
+                    'id' => $serviceDocument->id,
+                    'description' => $serviceDocument->description
+                ];
+            }
+        } else {
+            $this->serviceDocuments[] = [];
+        }
     }
 
     public function addRow()
@@ -20,6 +29,10 @@ class ServiceDocument extends Component
 
     public function removeRow($index)
     {
+        if (array_key_exists('id', $this->serviceDocuments)) {
+            dd('yeas');
+            ServiceDocument::find($this->serviceDocuments[$index]['id'])->delete();
+        }
         unset($this->serviceDocuments[$index]);
         $this->serviceDocuments = array_values($this->serviceDocuments);
     }

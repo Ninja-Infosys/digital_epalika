@@ -14,7 +14,8 @@
         @foreach($serviceDocuments as $key=>$document)
             <tr>
                 <td>
-                    <input type="text" name="serviceDocuments[{{$key}}][description]" class="form-control"
+                    <input type="text" name="serviceDocuments[{{$key}}][description]"
+                           wire:model="serviceDocuments.{{$key}}.description" class="form-control"
                            placeholder="">
                 </td>
                 <td>
