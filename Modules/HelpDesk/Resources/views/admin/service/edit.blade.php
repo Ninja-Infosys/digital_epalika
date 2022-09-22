@@ -168,7 +168,7 @@
                             </div>
 
                             <div class="col-md-12 mb-2">
-                                @livewire('helpdesk::service-document',['service'=>$service])
+                                @livewire('helpdesk::service-document-livewire',['service'=>$service])
                             </div>
 
                             <div class="col-md-12 mb-2">

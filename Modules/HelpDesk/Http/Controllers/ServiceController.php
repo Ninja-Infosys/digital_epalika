@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Modules\HelpDesk\Entities\Branch;
 use Modules\HelpDesk\Entities\Service;
+use Modules\HelpDesk\Entities\ServiceDocument;
 use Modules\HelpDesk\Http\Requests\Service\StoreServiceRequest;
+use Modules\HelpDesk\Http\Requests\Service\UpdateServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -86,12 +88,33 @@ class ServiceController extends Controller
         return view('helpdesk::admin.service.edit', compact('service', 'mainBranches'));
     }
 
-    public function update(Request $request, Service $service)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
         abort_if(Gate::denies('service_edit'),
             403,
             'You are not allowed to access this resource'
         );
+
+        DB::transaction(function () use ($request, $service) {
+            if ($request->hasFile('photo') && $service->photo) {
+                $this->deleteFile($service->photo);
+            }
+            $service->update($request->validated());
+
+            foreach ($request->input('serviceDocuments') as $serviceDocument) {
+                if (!empty($serviceDocument['id'])) {
+                    ServiceDocument::find($serviceDocument['id'])->update([
+                        'description' => $serviceDocument['description']
+                    ]);
+                } else {
+                    $service->serviceDocuments()->create($serviceDocument);
+                }
+            }
+        });
+
+        toast('Service Detail Updated Successfully', 'success');
+
+        return redirect(route('admin.helpDesk.service.index'));
     }
 
     public function destroy(Service $service)
@@ -100,5 +123,16 @@ class ServiceController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+        $service->serviceDocuments()->delete();
+        $service->serviceProcesses()->delete();
+        $service->serviceEmployees()->delete();
+
+        if ($service->photo) {
+            $this->deleteFile($service->photo);
+        }
+        $service->delete();
+
+        toast('Service Deleted Successfully', 'success');
+        return back();
     }
 }

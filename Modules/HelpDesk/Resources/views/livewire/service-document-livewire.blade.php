@@ -14,6 +14,10 @@
         @foreach($serviceDocuments as $key=>$document)
             <tr>
                 <td>
+                    @if(!empty($document['id']))
+                        <input type="hidden" value="{{$document['id']}}">
+                    @endif
+
                     <input type="text" name="serviceDocuments[{{$key}}][description]"
                            wire:model="serviceDocuments.{{$key}}.description" class="form-control"
                            placeholder="">
