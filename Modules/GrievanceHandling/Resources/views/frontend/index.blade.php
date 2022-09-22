@@ -13,7 +13,7 @@
                                 <p class="card-text mt-2"><small>
                                         नयाँ गुनासोको दर्ता गर्नुहोस् ।
                                     </small></p>
-                                <a href="{{url('register')}}" class="btn btn-primary" >गुनासो थप
+                                <a href="{{route('grievanceHandling.grievance-register')}}" class="btn btn-primary" >गुनासो थप
                                     <mat-icon [svgIcon]="'icon_solid:plus'"></mat-icon>
                                 </a>
                             </div>
