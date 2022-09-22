@@ -42,8 +42,9 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>सेवा नाम</th>
-                                <th>शाखा नाम</th>
-                                <th>मुख्य सेवा</th>
+                                <th>शाखा</th>
+                                <th>जिम्मेवार अधिकारी</th>
+                                <th>कोठा नम्बर/कार्यालय </th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -53,9 +54,15 @@
                                     <td>{{$loop->iteration}}</td>
                                     <th>{{$service->service_name}}</th>
                                     <td>{{$service->branch->branch_name??''}}</td>
+                                    <td>{{$service->responsible_officer}}</td>
+                                    <td>{{$service->office}}</td>
                                     <td>
-                                        <a href="{{route('admin.helpDesk.service.edit',$service)}}"
+                                        <a href="{{route('admin.helpDesk.service.show',$service)}}"
                                            class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-eye"></i> थप हेर्नुहोस्
+                                        </a>
+                                        <a href="{{route('admin.helpDesk.service.edit',$service)}}"
+                                           class="btn btn-xs btn-outline-warning">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <form action="{{route('admin.helpDesk.service.destroy',$service)}}"
@@ -70,7 +77,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

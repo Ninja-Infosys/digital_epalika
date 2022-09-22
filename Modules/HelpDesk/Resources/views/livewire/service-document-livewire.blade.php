@@ -1,8 +1,8 @@
 <div>
-    <table class="table">
+    <table class="table mb-0">
         <thead>
         <tr>
-            <th>उपलब्ध गराउने प्रक्रिया  *</th>
+            <th>आबश्यक कागजात *</th>
             <th>
                 <button type="button" wire:click="addRow" class="btn btn-xs btn-primary">
                     <i class="fa fa-plus"></i>
@@ -11,10 +11,16 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($serviceProcesses as $key=>$serviceProcess)
+        @foreach($serviceDocuments as $key=>$document)
             <tr>
                 <td>
-                    <input type="text" name="serviceProcesses[{{$key}}][description]" class="form-control"
+                    @if(!empty($document['id']))
+                        <input type="hidden" name="serviceDocuments[{{$key}}][id]"
+                               wire:model="serviceDocuments.{{$key}}.id">
+                    @endif
+
+                    <input type="text" name="serviceDocuments[{{$key}}][description]"
+                           wire:model="serviceDocuments.{{$key}}.description" class="form-control"
                            placeholder="">
                 </td>
                 <td>
@@ -26,10 +32,10 @@
         @endforeach
         </tbody>
     </table>
-    @error('serviceProcesses')
+    @error('serviceDocuments')
     <div class="invalid-feedback">{{$message}}</div>
     @enderror
-    @error('serviceProcesses.*')
+    @error('serviceDocuments.*')
     <div class="invalid-feedback">{{$message}}</div>
     @enderror
 </div>

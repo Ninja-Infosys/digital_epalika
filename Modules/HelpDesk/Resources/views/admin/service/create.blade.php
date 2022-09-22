@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.helpDesk.service.store')}}" method="post">
+                    <form action="{{route('admin.helpDesk.service.store')}}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-2">
@@ -166,15 +166,15 @@
                             </div>
 
                             <div class="col-md-12 mb-2">
-                                @livewire('helpdesk::service-document')
+                                @livewire('helpdesk::service-document-livewire')
                             </div>
 
                             <div class="col-md-12 mb-2">
-                                @livewire('helpdesk::service-process')
+                                @livewire('helpdesk::service-process-livewire')
                             </div>
 
                             <div class="col-md-12 mb-2">
-                                @livewire('helpdesk::service-employee')
+                                @livewire('helpdesk::service-employee-livewire')
                             </div>
 
                         </div>
