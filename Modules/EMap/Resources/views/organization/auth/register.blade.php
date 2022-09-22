@@ -18,7 +18,7 @@
         href="{{asset('assets/backend/css/bootstrap.min.css')}}"
         rel="stylesheet"
         type="text/css"
-        
+
     />
     <link rel="stylesheet" href="{{asset('assets/frontend/css/register/reg.css')}}">
 
@@ -79,7 +79,7 @@
 </div>
 
 <footer class="footer footer-alt">
-    2015 -
+    {{date('Y')}} -
     <script>
         document.write(new Date().getFullYear());
     </script>
