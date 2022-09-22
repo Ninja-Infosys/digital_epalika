@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">गुनासो पठाउने कार्यालय </a>
+                            <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">शाखा/कार्यालय</a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ गुनासो पठाउने कार्यालय थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">नयाँ शाखा/कार्यालय थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">गुनासो पठाउने कार्यालय </h4>
+                <h4 class="page-title">शाखा/कार्यालय </h4>
             </div>
         </div>
     </div>
@@ -26,9 +26,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">गुनासो पठाउने कार्यालय थप्नुहोस्</h4>
+                        <h4 class="header-title">शाखा/कार्यालय थप्नुहोस्</h4>
                         <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> गुनासो पठाउने कार्यालय सूची
+                            <i class="fa fa-list"></i> शाखा/कार्यालय सूची
                         </a>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong>गुनासो पठाउने कार्यालय </strong>
+                                <strong>शाखा/कार्यालय </strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">

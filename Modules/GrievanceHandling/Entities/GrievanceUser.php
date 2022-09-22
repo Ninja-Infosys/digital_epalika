@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class GrievanceOffice extends Model
+class GrievanceUser extends Model
 {
     use HasFactory,SoftDeletes;
 
@@ -17,6 +17,6 @@ class GrievanceOffice extends Model
    ];
 
    protected $fillable = [
-        'title'
+
    ];
 }
