@@ -8,6 +8,30 @@
             </div>
         </div>
     </div>
+    <div class="row mb-3">
+        <div class="col-md-2">
+            <a href="{{route('admin.circular.registration.create')}}" class="btn btn-info w-100">दर्ता गर्नुहोस</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.circular.dispatch.create')}}" class="btn btn-primary w-100">चलानी गर्नुहोस</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.listRegistrations.listRegistration.create')}}" class="btn btn-secondary w-100">मौजुदा
+                सुची दर्ता</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.executiveMeeting.wardMeetingNotice.create')}}" class="btn btn-success  w-100">कार्यपालिका
+                बैठक पेश गर्नुहोस</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.grievanceHandling.grievanceDetail.index')}}"
+               class="btn btn-warning text-white w-100">गुनासो विवरण</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.digitalBoard.notice.create','Notice')}}" class="btn btn-info w-100">सूचना
+                थप्नुहोस</a>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-6 col-xl-3">
@@ -242,8 +266,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$municipal_meetings_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा पालिका बैठकहरु">
-                                    जम्मा पालिका बैठकहरु
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा कार्यपालिका बैठकहरु">
+                                    जम्मा कार्यपालिका बैठकहरु
                                 </p>
                             </div>
                         </div>
@@ -264,11 +288,45 @@
                                 <h3 class="text-dark mt-1">
                                     {{$ward_meetings_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate" title=" जम्मा वडा बैठकहरु">
-                                    जम्मा वडा बैठकहरु
+                                <p class="text-muted mb-1 text-truncate" title=" जम्मा वडा समितिका बैठकहरु">
+                                    जम्मा वडा समितिका बैठकहरु
                                 </p>
                             </div>
                         </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-xl-4">
+            <div class="widget-rounded-circle card">
+                <div class="card-header">
+                    प्रकार अनुसार गुनासोको विवरण
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>क्र.सं</th>
+                                <th>प्रकार</th>
+                                <th>संख्या</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($grievanceTypes as $grievanceType)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$grievanceType->title}}</td>
+                                    <td>{{$grievanceType->grievance_detail_count}}</td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
