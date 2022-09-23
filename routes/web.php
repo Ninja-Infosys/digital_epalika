@@ -29,18 +29,6 @@ Route::get('/static/category', function(){
 Route::get('/static/contact', function(){
     return view('frontend.static.contact.index');
 });
-Route::get('/static/gallery/audio', function(){
-    return view('frontend.static.gallery.audio.index');
-});
-Route::get('/static/gallery/photo', function(){
-    return view('frontend.static.gallery.photo.index');
-});
-Route::get('/static/gallery/photo', function(){
-    return view('frontend.static.gallery.photo.single-photo');
-});
-Route::get('/static/gallery/video', function(){
-    return view('frontend.static.gallery.video.index');
-});
 Route::get('/static/representative', function(){
     return view('frontend.static.representative.index');
 });
@@ -48,13 +36,13 @@ Route::get('/static/employee', function(){
     return view('frontend.static.employee.index');
 });
 
-Route::get('/static/photo', function(){
+Route::get('/static/gallery/photo', function(){
     return view('frontend.static.gallery.photo.photo');
 });
-Route::get('/static/audio', function(){
+Route::get('/static/gallery/audio', function(){
     return view('frontend.static.gallery.audio.audio');
 });
-Route::get('/static/video', function(){
+Route::get('/static/gallery/video', function(){
     return view('frontend.static.gallery.video.video');
 });
 Route::get('/static/employee', function(){
@@ -62,6 +50,9 @@ Route::get('/static/employee', function(){
 });
 Route::get('/static/representive', function(){
     return view('frontend.static.representive.representive');
+});
+Route::get('/static/gallery/photo/single-photo', function (){
+    return view('frontend.static.gallery.photo.single-photo.single-photo');
 });
 
 
