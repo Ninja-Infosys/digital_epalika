@@ -1,22 +1,8 @@
 <div class="navbar-custom">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
-            <li class="d-none d-lg-block">
-                <form class="app-search">
-                    <div class="app-search-box dropdown">
-                        <div class="input-group">
-                            <input
-                                type="search"
-                                class="form-control"
-                                placeholder="Search..."
-                                id="top-search"
-                            />
-                            <button class="btn input-group-text" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+            <li class="nav-link">
+                <h3>Fiscal Year</h3>
             </li>
 
             <li class="dropdown d-inline-block d-lg-none">
