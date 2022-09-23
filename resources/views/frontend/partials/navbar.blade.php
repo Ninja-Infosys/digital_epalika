@@ -13,7 +13,7 @@
                         गृहपृष्ठ
                     </a>
                 </li>
-                <li class="nav-item dropdown">
+                {{--<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" >
                         परिचय
                     </a>
@@ -21,7 +21,7 @@
                         <li><a class="dropdown-item" href="{{url('/static/representative')}}">हाम्रो बारेमा</a></li>
                         <li><a class="dropdown-item" href="{{url('/static/employee')}}">कर्मचारीहरु</a></li>
                     </ul>
-                </li>
+                </li>--}}
 {{--                    <a class="nav-link dropdown-toggle">--}}
 {{--                        ग्यालेरि--}}
 {{--                    </a>--}}
@@ -36,11 +36,11 @@
                         सूचना
                     </a>
                 </li>
-                <li class="nav-item">
+              {{--  <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{url('/static/executive')}}">
                         कार्यपालिका न्युज
                     </a>
-                </li>
+                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('e-map')}}">
                         इ-नक्सा

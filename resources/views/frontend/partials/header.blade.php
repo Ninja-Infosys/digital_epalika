@@ -25,11 +25,15 @@
                 <x-header-component/>
             </div>
         </div>
+
         <div class="col-md-2 col-sm-2 col-xs-2 d-flex justify-content-around">
-            <a href="{{route('welcome')}}" class="main-logo">
-                <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
-                     src="{{$officeSetting->logo1_url}}"/>
-            </a>
+           {{-- @if(empty($officeSetting->logo1_url))
+                <a href="{{route('welcome')}}" class="main-logo">
+                    <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
+                         src="{{$officeSetting->logo1_url}}"/>
+                </a>
+            @endif--}}
+
             <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
                      src="{{$officeSetting->logo2_url}}"/>
