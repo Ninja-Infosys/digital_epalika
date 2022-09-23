@@ -1,0 +1,25 @@
+.title-head-main {
+    background-color: rgb(220, 61, 61);
+    font-size: 1.5rem;
+    color: white;
+}
+
+.title-head-main span {
+    font-size: 2rem;
+    margin-right: .5rem;
+    background-color: white;
+    color: black;
+    padding: .3rem;
+}
+
+.detail {
+    color: white;
+    border-radius: 1.3rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border: .06rem solid #f8f9fa;
+}
+
+.text-center {
+    text-align: center !important;
+}

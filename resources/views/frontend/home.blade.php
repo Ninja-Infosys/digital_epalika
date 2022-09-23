@@ -3,25 +3,17 @@
     <section class="home-section mt-3">
         <div class="row">
             <div class="col-md-7">
-                <div id="carouselExampleIndicators" class="card-01 carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100"
-                                 src="https://myrepublica.nagariknetwork.com/uploads/media/2019/August/Bageshwori%20temple.jpg"
-                                 alt="First slide">
+                            <img src="https://myrepublica.nagariknetwork.com/uploads/media/2019/August/Bageshwori%20temple.jpg" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>वगेस्वोरी मन्दिर</h5>
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('assets/frontend/image/submetro.jpg')}}"
-                                 alt="Second slide">
+                            <img src="{{asset('assets/frontend/image/submetro.jpg')}}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>नेपालगन्ज उप-महानगरपालिका</h5>
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
@@ -35,26 +27,16 @@
                                 <p>The whole caption will only show up if the screen is at least medium size.</p>
                             </div>
                         </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('assets/frontend/image/ranitalau.jpg')}}"
-                                 alt="Third slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>महादेव मुर्ति </h5>
-                                <p>The whole caption will only show up if the screen is at least medium size.</p>
-                            </div>
-                        </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                       data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                       data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
             </div>
             <div class="col-md-5 intro-col mt-1">
                 <div class="card-01 introduction  bg-card shadow rounded">
@@ -124,7 +106,7 @@
     <section class="news-section  mt-3">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="list-item-head bg-danger rounded p-2">
                         <p class="mb-0 text-white fs-5">सुचनाहरु</p>
                     </div>
@@ -133,24 +115,21 @@
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <li class="list-group-item">
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <li class="list-group-item">
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="list-item-head bg-danger rounded p-2">
                         <p class="mb-0 text-white fs-5">कार्यपालिका बोर्ड निर्णय </p>
                     </div>
@@ -159,71 +138,39 @@
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <li class="list-group-item">
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <li class="list-group-item">
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">बजेट तथा कार्यक्रम </p>
+                        <p class="mb-0 text-white fs-5">समचारहरु</p>
                     </div>
                     <ul class="list-group">
                         <li class="list-group-item">
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <li class="list-group-item">
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <li class="list-group-item">
                             <i class="fa fa-angle-right"></i>
                             <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
                             <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
-                        </li>
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">सार्वजनिक खरीद बोलपत्र</p>
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                            <span><small>नेपालगन्ज उप-महानगरपालिका</small></span>
                         </li>
                         <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
                     </ul>
@@ -233,102 +180,80 @@
     </section>
 
 
-    <section class="tab-section mt-3">
+    <section class="map-section pt-4 bg-light">
+        <div class="mb-3">
+            <div class="title-head-main px-3 py-2 d-flex justify-content-between">
+                <div>
+                    <span class="fa fa-globe">प्रदेश ६</span>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 ps-lg-7 text-lg-start mt-3">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-                                    type="button" role="tab" aria-controls="home" aria-selected="true">सूचना
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                    type="button" role="tab" aria-controls="profile" aria-selected="false">समाचार
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                                    type="button" role="tab" aria-controls="contact" aria-selected="false">प्रेस
-                                विज्ञप्ति
-                            </button>
-                        </li>
-                    </ul>
-                    <div class="tab-content notice" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="सूचना-tab">
-                            <div class="list-item-body">
-                                <a href="#" target="_blank" class="note">
-                                    इ-नक्सा<span> Posted Date:- 2079-03-05</span>
-                                </a>
-                                <a href="#" target="_blank" class="note">
-                                    इ-नक्सा<span>Posted Date:- 2079-03-05 </span>
-                                </a>
-                                <a href="#">
-                                    <button type="button" class="btn btn-primary">अरु थपपद्नुहोस</button>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="समाचार-tab">
-                            <div class="list-item-body">
-                                <a href="#" target="_blank" class="note">
-                                    इ-नक्सा
-                                    <span> Posted Date:- 2079-03-05 </span>
-                                </a>
-                                <a href="#" target="_blank" class="note">
-                                    इ-नक्सा<span>Posted Date:- 2079-03-05 </span>
-                                </a>
-                                <a href="#">
-                                    <button type="button" class="btn btn-primary">अरु थपपद्नुहोस</button>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="प्रेस विज्ञप्ति-tab">
-                            <div class="list-item-body">
-                                <a href="#" target="_blank" class="note">
-                                    इ-नक्सा<span>Posted Date:- 2079-03-05 </span>
-                                </a>
-                                <a href="#" target="_blank" class="note">
-                                    इ-नक्सा<span>Posted Date:- 2079-03-05 </span>
-                                </a>
-                                <a href="#">
-                                    <button type="button" class="btn btn-primary">अरु थपपद्नुहोस</button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-6">
+                    GIS Map
                 </div>
-                <div class="col-lg-6 ps-lg-7 text-lg-start mt-3">
-                    <div class="container">
-                        <div class="video">
-                            <iframe width="525" height="300" src="https://www.youtube.com/embed/13UQAEKF2HM"
-                                    title="OMG बालेनले टुकुचा खोला खोज्दा भेटियो सयौं वर्ष पुरानो राजा चढ्ने गाडि।एक्कासी भयो भागाभाग,हंगामा🚎"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+                <div class="col-md-6">
+                    <div class="row align-content-stretch">
+                        <div class="col-md-3 p-1 detail bg-primary">
+                            <div class="text-center py-1">
+                                <i class="fa fa-building"></i>
+                                <h4 class="text-white m-0">१</h4>
+                                <p>जम्मा वडा</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-12 mt-3">
-                        <div class="mobile-app">
-                            <div class="card-01 h-100">
-                                <h6 class="heading mb-2">NMC Mobile Application</h6>
-                                <p>
-                                    <a target="_blank" href="#"><img src="assets/img/logo.png"
-                                                                     class="img-fluid animation"></a>
-                                    <a target="_blank" href="#"><img src="assets/img/logo.png"
-                                                                     class="img-fluid animation"></a>
-                                </p>
-
+                        <div class="col-md-3 p-1 detail bg-success">
+                            <div class="text-center py-1">
+                                <i class="fa fa-building"></i>
+                                <h4 class="text-white m-0">२</h4>
+                                <p>सैक्षिक संस्था</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 p-1 detail bg-danger">
+                            <div class="text-center py-1">
+                                <i class="fa fa-building"></i>
+                                <h4 class="text-white m-0">४६</h4>
+                                <p>स्वास्थ्य संस्था</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 p-1 detail bg-warning">
+                            <div class="text-center py-1">
+                                <h4 class="text-white m-0">४०%</h4>
+                                <p>पर्यटकिय क्षेत्र</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 p-1 detail bg-success">
+                            <div class="text-center py-1">
+                                <i class="fa fa-users"></i>
+                                <h4 class="text-white m-0">२८७७२६१७९१</h4>
+                                <p>जनसंख्या</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 p-1 detail bg-primary">
+                            <div class="text-center py-1">
+                                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                                <h4 class="text-white m-0">१२१</h4>
+                                <p style="font-size:12px;">घर धुरी</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 p-1 detail bg-warning">
+                            <div class="text-center py-1">
+                                <i class="fa fa-pagelines"></i>
+                                <h4 class="text-white m-0">७८३५९५</h4>
+                                <p>साना मभौला उधोग</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 p-1 detail bg-danger">
+                            <div class="text-center py-1">
+                                <i class="fa fa-camera"></i>
+                                <h4 class="text-white m-0">१३</h4>
+                                <p>कृषि योग्य जमिन</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
     <section class="social-section mt-5">
         <div class="container">
@@ -382,10 +307,8 @@
             </div>
         </div>
     </section>
-    <section class="gallery-slider mt-5 ">
-        <h3 class="text-center">फोटो ग्यालरी</h3>
-        <div class="container p-2">
-            images
-        </div>
-    </section>
+ @push('styles')
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/home/home.css')}}">
+@endpush
+
 @endsection
