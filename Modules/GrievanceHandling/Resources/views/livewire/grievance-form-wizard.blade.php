@@ -3,10 +3,10 @@
         <div class="text-center">
             <!-- progressbar -->
             <ul class="progressbar">
-                <li class="{{ $currentStep != 1 ? '' : 'active' }}"><a href="#step-1" type="button">Step 1</a></li>
-                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">Step 2</a></li>
-                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-3" type="button" disabled="disabled">Step
-                        3</a></li>
+                <li class="{{ $currentStep != 1 ? '' : 'active' }}"><a href="#step-1" type="button">पहिलो चरण </a></li>
+                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">दोस्रो चरण </a></li>
+                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-3" type="button" disabled="disabled">अन्तिम
+                        चरण </a></li>
             </ul>
         </div>
         <form wire:submit.prevent="submitForm" enctype="multipart/form-data">
@@ -153,6 +153,33 @@
                             <td>{{$form['subject']}}</td>
                         </tr>
                         <tr>
+                            <th>गुनासो पठाउन चाहाने कार्यालय</th>
+                            <td>{{$grievanceOffice->title}}</td>
+                        </tr>
+                        <tr>
+                            <th>गुनासो गम्भीरता</th>
+                            <td>
+                                @switch($form['complaint_severity'])
+                                    @case('Simple')
+                                        साधारण
+                                        @break
+                                    @case('Priority')
+                                        प्राथमिकता
+                                        @break
+                                    @default
+                                        उच्च प्राथमिकता
+                                @endswitch
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>के तपाईं आफ्नो विवरण खुलाउन चाहनुहुन्छ</th>
+                            <td>{{$form['is_open'] ? 'हुन्छ ' : 'हुदैन '}}</td>
+                        </tr>
+                        <tr>
+                            <th>के तपाईले पासवोर्ड राख्नु भएको छ ?</th>
+                            <td>{{$form['is_password'] ? 'छ ': 'छैन '}}</td>
+                        </tr>
+                        <tr>
                             <th> गुनासोको विवरण</th>
                             <td>{{$form['description']}}</td>
                         </tr>
@@ -253,7 +280,7 @@
                         <div class="col-md-12 mb-4">
                             <h5>
                                 <label for="files" class="form-label">
-                                    ४. गुनासो सम्बन्धी कागजपत्र अथवा अन्य फाइल छ भने अपलोड गर्नुहोस् *
+                                    ४. गुनासो सम्बन्धी कागजपत्र अथवा अन्य फाइल छ भने अपलोड गर्नुहोस्
                                 </label>
                             </h5>
                             <p>(तपाईले कुनै पनि कागजात, फोटो, भिडियो 10 MB सम्मको साइजको अपलोड गर्न
@@ -318,7 +345,7 @@
                     </div>
                     <div class="text-end">
                         <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary text-end">
-                            Next
+                            अर्को
                         </button>
                     </div>
             @endswitch

@@ -19,4 +19,11 @@ class UpdateSliderRequest extends FormRequest
             'description' => ['nullable']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'image.image' => 'फोटो फर्ममा हुनुपर्छ '
+        ];
+    }
 }
