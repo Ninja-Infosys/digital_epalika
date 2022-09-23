@@ -1,4 +1,4 @@
-@extends('digitalboard::layouts.master')
+@extends('helpdesk::layouts.master')
 @section('content')
     <div class="content-section">
         <div class="text-center mt-5 text-decoration-underline m-4">

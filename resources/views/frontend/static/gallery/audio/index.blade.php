@@ -8,7 +8,7 @@
                 <div class="sidebar">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-12 mt-2 mt-sm-0 mt-lg-2">
-                            <a routerlink="/static/audio" routerlinkactive="active" href="#static/audio">
+                            <a href="{{route('')}}">
                                 <div class="card-06">
                                     <h6 class="title">अडियो ग्यालेरी</h6>
                                 </div>

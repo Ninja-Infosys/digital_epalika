@@ -1,4 +1,4 @@
-@extends('digitalboard::layouts.master')
+@extends('helpdesk::layouts.master')
 @section('content')
 <div class="container">
   <div class="row justify-content-center">

@@ -3,6 +3,13 @@
     height: 4rem;
     width: 100%;
 }
-.mat-icon {
-    overflow: visible !important;
+.card a:hover{
+    background-color: var(--redColor);
+    color: var(--whiteColor);
+    transition: .9s;
+    transform: translateY(-10px);
+}
+.grievance-answer p .btn{
+    border: 1px solid  #0b0b0b;
+    text-align: left !important;
 }
