@@ -1,6 +1,7 @@
-.breadcrumb a{
+.breadcrumb a {
     text-decoration: none;
 }
+
 .breadcrumb a:hover {
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
@@ -10,26 +11,45 @@
     font-weight: 700;
     font-size: 15px;
 }
-.btn{
+
+.btn {
     padding: 0;
     margin: 0;
 }
-.btn-download{
+
+.btn-download {
     background-color: #FA9F10;
     color: white;
 }
-mat-icon{
+
+mat-icon {
     height: 1.2rem;
 }
-.btn-download:hover{
+
+.btn-download:hover {
     background-color: #FA9F10;
     color: white;
 }
-.btn-view{
+
+.btn-view {
     background-color: #28A745;
     color: white;
 }
-.btn-view:hover{
+
+.btn-view:hover {
     background-color: #28A745;
     color: white;
 }
+
+/*---single-grievance-details--*/
+.single-grievance-details img {
+    object-fit: contain;
+    height: 6rem;
+    margin-right: .85rem;
+    border: double 5px var(--mainColor);
+
+}
+/*.single-grievance-details{*/
+/*    width: 70%;*/
+
+/*}*/

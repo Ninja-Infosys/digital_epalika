@@ -299,8 +299,11 @@
                     </a>
                     <div class="{{request()->is('admin/website/*') ?'':'collapse'}}" id="websiteAdmin">
                         <ul class="nav-second-level">
-                            <li class="{{request()->is('admin/website/*') ? 'active':''}}">
+                            <li class="{{request()->is('admin/website/slider/*') ? 'active':''}}">
                                 <a href="{{route('admin.website.slider.index')}}">Slider</a>
+                            </li>
+                            <li class="{{request()->is('admin/website/municipalDetail/*') ? 'active':''}}">
+                                <a href="{{route('admin.website.municipalDetail.index')}}">पालिका बिबरण </a>
                             </li>
                         </ul>
                     </div>
@@ -328,7 +331,8 @@
                                         <i class="fa fa-angle-right"></i>
                                     </span>
                                 </a>
-                                <div class="{{request()->is('admin/setting/units/*') ?'':'collapse'}}" id="sidebarUnits">
+                                <div class="{{request()->is('admin/setting/units/*') ?'':'collapse'}}"
+                                     id="sidebarUnits">
                                     <ul class="nav-second-level">
                                         @can('unitType_access')
                                             <li class="{{request()->routeIs('admin.units.type.*') ? 'active' : ''}}">
