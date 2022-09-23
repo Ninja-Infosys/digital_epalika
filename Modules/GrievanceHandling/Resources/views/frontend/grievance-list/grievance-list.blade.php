@@ -21,17 +21,17 @@
               <td>२५४५२</td>
               <td>लागुपदार्थ को दुरुपयोग</td>
                 <td class="d-flex">
-                    <button class="btn btn-view btn-light">
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Reply">
                         <i class="fa-solid fa-reply"></i>
-                    </button>
-                    <button class="btn btn-download btn-light">
+                      </button>
+                      <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="View">
                         <i class="fa-solid fa-eye"></i>
                     </button>
-                    <button class="btn btn-download btn-light">
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Investigation">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Cancel">
                         <i class="fa-solid fa-xmark"></i>
-                    </button>
-                    <button class="btn btn-download btn-light">
-                        <i class="fa-solid fa-eye"></i>
                     </button>
                 </td>
                 <td>२०७९-०६-०६</td>
@@ -47,18 +47,18 @@
                 <td>२५४५२</td>
                 <td>लागुपदार्थ को दुरुपयोग</td>
                   <td class="d-flex">
-                      <button class="btn btn-view btn-light">
-                          <i class="fa-solid fa-reply"></i>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Reply">
+                        <i class="fa-solid fa-reply"></i>
                       </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-xmark"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
+                      <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="View">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Investigation">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Cancel">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                   </td>
                   <td>२०७९-०६-०६</td>
                   <td>
@@ -72,18 +72,18 @@
                 <td>२५४५२</td>
                 <td>लागुपदार्थ को दुरुपयोग</td>
                   <td class="d-flex">
-                      <button class="btn btn-view btn-light">
-                          <i class="fa-solid fa-reply"></i>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Reply">
+                        <i class="fa-solid fa-reply"></i>
                       </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-xmark"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
+                      <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="View">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Investigation">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Cancel">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                   </td>
                   <td>२०७९-०६-०६</td>
                   <td>
@@ -97,18 +97,18 @@
                 <td>२५४५२</td>
                 <td>लागुपदार्थ को दुरुपयोग</td>
                   <td class="d-flex">
-                      <button class="btn btn-view btn-light">
-                          <i class="fa-solid fa-reply"></i>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Reply">
+                        <i class="fa-solid fa-reply"></i>
                       </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-xmark"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
+                      <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="View">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Investigation">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Cancel">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                   </td>
                   <td>२०७९-०६-०६</td>
                   <td>
@@ -122,18 +122,18 @@
                 <td>२५४५२</td>
                 <td>लागुपदार्थ को दुरुपयोग</td>
                   <td class="d-flex">
-                      <button class="btn btn-view btn-light">
-                          <i class="fa-solid fa-reply"></i>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Reply">
+                        <i class="fa-solid fa-reply"></i>
                       </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-xmark"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
+                      <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="View">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Investigation">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Cancel">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                   </td>
                   <td>२०७९-०६-०६</td>
                   <td>
@@ -147,18 +147,18 @@
                 <td>२५४५२</td>
                 <td>लागुपदार्थ को दुरुपयोग</td>
                   <td class="d-flex">
-                      <button class="btn btn-view btn-light">
-                          <i class="fa-solid fa-reply"></i>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Reply">
+                        <i class="fa-solid fa-reply"></i>
                       </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-xmark"></i>
-                      </button>
-                      <button class="btn btn-download btn-light">
-                          <i class="fa-solid fa-eye"></i>
-                      </button>
+                      <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="View">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Investigation">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Cancel">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                   </td>
                   <td>२०७९-०६-०६</td>
                   <td>

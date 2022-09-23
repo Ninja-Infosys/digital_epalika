@@ -388,4 +388,10 @@
             images
         </div>
     </section>
+
+    @push('styles')
+    @endpush
+    @push('scripts')
+    @endpush
+
 @endsection

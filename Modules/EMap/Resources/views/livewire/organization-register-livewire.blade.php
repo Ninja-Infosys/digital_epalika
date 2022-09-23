@@ -232,7 +232,7 @@
             </fieldset>
             </div>
 
-            <div class="address">
+            <div class="address mt-3">
                 <fieldset>
                 <legend class="title">अस्थाहि ठेगाना</legend>
                 <div class="row">
