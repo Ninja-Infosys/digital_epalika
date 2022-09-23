@@ -40,7 +40,7 @@ class GrievanceFormWizard extends Component
     protected array $firstStepValidations = [
         'form.grievance_type_id' => ['required', 'exists:grievance_types,id'],
         'form.description' => ['required'],
-        'form.files' => ['required', 'array'],
+        'form.files' => ['nullable', 'array'],
         'form.files.*' => ['image', 'max:10240'],
         'form.grievance_office_id' => ['required', 'exists:grievance_offices,id'],
         'form.complaint_severity' => ['required'],
@@ -121,12 +121,14 @@ class GrievanceFormWizard extends Component
                 'subject' => $this->form['subject'],
                 'is_open' => $this->form['is_open'],
             ]);
-            foreach ($this->form['files'] as $file) {
-                $grievanceDetail->files()->create([
-                    'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-                    'extension' => $file->getClientOriginalExtension(),
-                    'file' => $file->store('grievance/files/' . Str::slug($grievanceUser->name, '_'), 'public'),
-                ]);
+            if (!empty($this->form['files'])) {
+                foreach ($this->form['files'] as $file) {
+                    $grievanceDetail->files()->create([
+                        'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                        'extension' => $file->getClientOriginalExtension(),
+                        'file' => $file->store('grievance/files/' . Str::slug($grievanceUser->name, '_'), 'public'),
+                    ]);
+                }
             }
         });
 
@@ -144,7 +146,6 @@ class GrievanceFormWizard extends Component
         return [
             'form.grievance_type_id.required' => ['गुनासो प्रकार आवश्यक छ'],
             'form.description.required' => ['गुनासो विवरण आवश्यक छ'],
-            'form.files.required' => ['गुनासो फाइल आवश्यक छ'],
             'form.grievance_office_id.required' => ['गुनासो कार्यालय आवश्यक छ'],
             'form.complaint_severity.required' => ['गुनासो गम्भीरता आवश्यक छ'],
             'form.subject.required' => ['गुनासो बिषय आवश्यक छ'],

@@ -149,7 +149,7 @@
                             <td>{{$grievanceType->title}}</td>
                         </tr>
                         <tr>
-                            <th>बिषय </th>
+                            <th>बिषय</th>
                             <td>{{$form['subject']}}</td>
                         </tr>
                         <tr>
@@ -174,6 +174,25 @@
                         </tr>
                         </tbody>
                     </table>
+                    <h5>गुनासो सम्बन्धी कागजपत्र</h5>
+                    @if(!empty($form['files']))
+                        <div class="row mb-4">
+                            @foreach($form['files'] as $file)
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <img src="{{$file->temporaryUrl()}}"
+                                                 style="width: 100%;height: auto;object-fit: contain"
+                                                 alt="File">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        @foreach($form['files'] as $file)
+
+                        @endforeach
+                    @endif
                     <div class="text-end">
                         <div class="text-end">
                             <button type="button" wire:click.prevent="backStep(2)" class="btn btn-primary">
