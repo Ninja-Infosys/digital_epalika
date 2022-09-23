@@ -29,22 +29,14 @@
                     <div class="col-md-4">
                         <h6 class="footer-title mb-3">महतोपूर्ण लिंकहरु</h6>
                         <ul class="list mt-2">
-                            <li class="text-white">
-                                <i class="fa fa-angle-right"></i>
-                                <a href="#">सूचना</a>
-                            </li>
-                            <li class="text-white">
-                                <i class="fa fa-angle-right"></i>
-                                <a href="#">गुनासो</a>
-                            </li>
-                            <li class="text-white">
-                                <i class="fa fa-angle-right"></i>
-                                <a href="#">इ-नक्सा</a>
-                            </li>
-                            <li class="text-white">
-                                <i class="fa fa-angle-right"></i>
-                                <a href="#">नगरिक सहयोग</a>
-                            </li>
+                            @foreach($important_links->take(5) as $link)
+                                <li class="text-white">
+                                    <i class="fa fa-angle-right"></i>
+                                    <a href="{{$link->link_url}}" target="_blank">
+                                        {{$link->link_title}}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-md-4">
@@ -53,7 +45,9 @@
                 </div>
             </div>
         </div>
-        <div class="footer-copyright"><span>Copyright © नेपालगन्ज उप-महानगरपालिका, नगरकार्यपालिकाको कार्यालय, बाँके</span><span>Updated on : 2079/01/12</span></div>
+        <div class="footer-copyright">
+            <span>Copyright © नेपालगन्ज उप-महानगरपालिका, नगरकार्यपालिकाको कार्यालय, बाँके</span><span>Updated on : 2079/01/12</span>
+        </div>
     </footer>
 </section>
 {{--@push('styles')--}}
