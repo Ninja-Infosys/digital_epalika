@@ -12,7 +12,7 @@
     </div>
 </div>
 {{--middle header--}}
-<div class="background">
+<div class="background" style="background-image: url('{{$officeSetting->background_image_url}}')">
     <div class="container d-flex justify-content-around">
         <div class="col-md-2 col-sm-2 col-xs-2">
             <a href="{{route('welcome')}}" class="main-logo">
@@ -25,7 +25,11 @@
                 <x-header-component/>
             </div>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-2">
+        <div class="col-md-2 col-sm-2 col-xs-2 d-flex justify-content-around">
+            <a href="{{route('welcome')}}" class="main-logo">
+                <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
+                     src="{{$officeSetting->logo1_url}}"/>
+            </a>
             <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
                      src="{{$officeSetting->logo2_url}}"/>
