@@ -98,12 +98,12 @@
     @push('scripts')
         {{--listener for toastr--}}
         <script>
-            window.addEventListener('alert_message', event => {
-                toastr[event.detail.type](event.detail.message,
-                    event.detail.title ?? ''), toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                }
+            window.addEventListener('alert_message',event=>{
+                swal.fire({
+                    title:event.detail.title,
+                    text:event.detail.text,
+                    icon:event.detail.type,
+                });
             });
         </script>
     @endpush
