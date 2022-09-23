@@ -22,8 +22,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$user_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    प्रयोगकर्ताहरु
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा प्रयोगकर्ताहरु">
+                                    जम्मा प्रयोगकर्ताहरु
                                 </p>
                             </div>
                         </div>
@@ -44,8 +44,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$grievance_user_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    गुनासो गर्ने प्रयोगकर्ताहरु
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा गुनासो गर्ने प्रयोगकर्ताहरु">
+                                    जम्मा गुनासो गर्ने प्रयोगकर्ताहरु
                                 </p>
                             </div>
                         </div>
@@ -66,8 +66,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$notice_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    सूचना
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा सूचना">
+                                    जम्मा सूचना
                                 </p>
                             </div>
                         </div>
@@ -88,8 +88,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$news_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    समाचार
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा समाचार">
+                                    जम्मा समाचार
                                 </p>
                             </div>
                         </div>
@@ -110,8 +110,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$registration_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    प्रयोगकर्ताहरु
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा दर्ता">
+                                    जम्मा दर्ता
                                 </p>
                             </div>
                         </div>
@@ -132,8 +132,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$dispatch_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    गुनासो गर्ने प्रयोगकर्ताहरु
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा चलानी">
+                                    जम्मा चलानी
                                 </p>
                             </div>
                         </div>
@@ -154,8 +154,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$unseen_grievance_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    सूचना
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा नहेरिएको गुनासो">
+                                    जम्मा नहेरिएको गुनासो
                                 </p>
                             </div>
                         </div>
@@ -176,8 +176,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$replied_grievance_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    समाचार
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा रेपाई गुनासो">
+                                    जम्मा रेपाई गुनासो
                                 </p>
                             </div>
                         </div>
@@ -198,8 +198,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$investigated_grievance_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    सूचना
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा अनुसन्धानमा रहेको गुनासो">
+                                    जम्मा अनुसन्धानमा रहेको गुनासो
                                 </p>
                             </div>
                         </div>
@@ -220,8 +220,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$closed_grievance_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">
-                                    समाचार
+                                <p class="text-muted mb-1 text-truncate" title=" जम्मा बन्द गरिएको गुनासो">
+                                    जम्मा बन्द गरिएको गुनासो
                                 </p>
                             </div>
                         </div>
