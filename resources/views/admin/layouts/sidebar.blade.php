@@ -4,7 +4,7 @@
         <div class="user-box text-center">
             <img
                 src="{{auth()->user()->profile_photo_url}}"
-                alt="user-img"
+                alt="{{auth()->user()->name}}"
                 title="{{auth()->user()->name}}"
                 class="rounded-circle avatar-md"
             />
@@ -175,96 +175,97 @@
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>ई-सिफारिस </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>ई-ब्यबसायिक दर्ता </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span> कर्मचारी </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>नक्सा पास प्रणाली </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>तालिम ब्यबस्थापन प्रणाली </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span> राजस्व संकलन प्रणाली </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>योजना ब्यबस्थापन प्रणाली </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>अपाङ्गता/जेष्ठ नागरिक प्रणाली </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span> ई-न्यायिक प्रणाली </span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#sidebarUserManagement" data-bs-toggle="collapse">
-                        <i class="fa fa-users-cog"></i>
-                        <span>डिजिटल LG प्रोफाइल</span>
-                        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-                    </a>
-                </li>
+                {{--
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span>ई-सिफारिस </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span>ई-ब्यबसायिक दर्ता </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span> कर्मचारी </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span>नक्सा पास प्रणाली </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span>तालिम ब्यबस्थापन प्रणाली </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span> राजस्व संकलन प्रणाली </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span>योजना ब्यबस्थापन प्रणाली </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span>अपाङ्गता/जेष्ठ नागरिक प्रणाली </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span> ई-न्यायिक प्रणाली </span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sidebarUserManagement" data-bs-toggle="collapse">
+                            <i class="fa fa-users-cog"></i>
+                            <span>डिजिटल LG प्रोफाइल</span>
+                            <span class="menu-arrow">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        </a>
+                    </li>--}}
 
                 <li>
                     <a href="#registration" data-bs-toggle="collapse">
@@ -304,6 +305,9 @@
                             </li>
                             <li class="{{request()->is('admin/website/municipalDetail/*') ? 'active':''}}">
                                 <a href="{{route('admin.website.municipalDetail.index')}}">पालिका बिबरण </a>
+                            </li>
+                            <li class="{{request()->is('admin/website/importantLink/*') ? 'active':''}}">
+                                <a href="{{route('admin.website.importantLink.index')}}">Important Links </a>
                             </li>
                         </ul>
                     </div>

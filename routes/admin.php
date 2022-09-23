@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Setting\Units\TypeController;
 use App\Http\Controllers\Admin\Setting\Units\UnitController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
+use App\Http\Controllers\Admin\Website\ImportantLinkController;
 use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -74,4 +75,5 @@ Route::resource('file', FileController::class)->only('destroy');
 Route::prefix('website')->as('website.')->middleware('can:websiteAdmin_access')->group(function () {
     Route::resource('slider', SliderController::class);
     Route::resource('municipalDetail', MunicipalDetailController::class);
+    Route::resource('importantLink', ImportantLinkController::class);
 });
