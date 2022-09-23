@@ -44,7 +44,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{route('grievanceHandling.grievance')}}">
-                        <mat-icon class="icon-size-4" [svgIcon]="'icon_solid:annotation'"></mat-icon>
                         गुनासो
                     </a>
                 </li>

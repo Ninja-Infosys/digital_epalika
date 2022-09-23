@@ -9,7 +9,7 @@
                         3</a></li>
             </ul>
         </div>
-        <form action="" enctype="multipart/form-data">
+        <form wire:submit.prevent="submitForm" enctype="multipart/form-data">
             @switch($currentStep)
                 @case(2)
                     <div class="row">
@@ -47,13 +47,15 @@
                         @if($is_password)
                             <div class="col-md-6 mb-4">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" id="password" wire:model="form.password" class="form-control" placeholder="Password">
+                                <input type="password" id="password" wire:model="form.password" class="form-control"
+                                       placeholder="Password">
                                 @error('form.password')
                                 <div class="text-danger">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6">
-                                <label for="password_confirmation" wire:model="form.password_confirmation" class="form-label">Confirm Password</label>
+                                <label for="password_confirmation" wire:model="form.password_confirmation"
+                                       class="form-label">Confirm Password</label>
                                 <input type="password" id="password_confirmation" class="form-control"
                                        placeholder="Confirm Password">
                             </div>
@@ -96,28 +98,32 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="name" class="form-label">पुरा नाम *</label>
-                            <input type="text" wire:model="form.name" class="form-control" id="name" placeholder="पुरा नाम">
+                            <input type="text" wire:model="form.name" class="form-control" id="name"
+                                   placeholder="पुरा नाम">
                             @error('form.name')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">इमेल *</label>
-                            <input type="text" wire:model="form.email" class="form-control" id="email" placeholder="इमेल">
+                            <input type="text" wire:model="form.email" class="form-control" id="email"
+                                   placeholder="इमेल">
                             @error('form.email')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="phone" class="form-label">सम्पर्क नम्बर *</label>
-                            <input type="text" wire:model="form.phone" class="form-control" id="phone" placeholder="सम्पर्क नम्बर ">
+                            <input type="text" wire:model="form.phone" class="form-control" id="phone"
+                                   placeholder="सम्पर्क नम्बर ">
                             @error('form.phone')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="address" class="form-label">ठेगाना *</label>
-                            <input type="text" wire:model="form.address" class="form-control" id="address" placeholder="ठेगाना">
+                            <input type="text" wire:model="form.address" class="form-control" id="address"
+                                   placeholder="ठेगाना">
                             @error('form.address')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
@@ -157,8 +163,8 @@
                             <button type="button" wire:click.prevent="backStep(2)" class="btn btn-primary">
                                 Previous
                             </button>
-                            <button type="button" wire:click.prevent="submitForm" class="btn btn-primary">
-                                Next
+                            <button type="submit" class="btn btn-primary">
+                                Save
                             </button>
                         </div>
                     </div>

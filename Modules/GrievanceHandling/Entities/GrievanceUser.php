@@ -4,6 +4,7 @@ namespace Modules\GrievanceHandling\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GrievanceUser extends Model
@@ -30,5 +31,10 @@ class GrievanceUser extends Model
         if (!empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
+    }
+
+    public function grievanceDetails(): HasMany
+    {
+        return $this->hasMany(GrievanceDetail::class);
     }
 }
