@@ -13,6 +13,7 @@
 
 
 use Illuminate\Support\Facades\Route;
+use Modules\GrievanceHandling\Http\Controllers\Frontend\FrontendController;
 
 Route::view('/grievance','grievancehandling::frontend.index')->name('grievance');
 Route::view('/policy','grievancehandling::frontend.policy.policy')->name('policy');
@@ -20,4 +21,4 @@ Route::view('grievance-register','grievancehandling::frontend.register.register-
 Route::view('/track','grievancehandling::frontend.track.track')->name('track');
 Route::view('/public-grievance','grievancehandling::frontend.grievance-public.public-grievance')->name('public-grievance');
 Route::view('/grievance-list','grievancehandling::frontend.grievance.grievance-list')->name('grievance-list');
-Route::view('/single-grievance','grievancehandling::frontend.grievance.single-grievance')->name('single-grievance');
+Route::get('single-grievance',[FrontendController::class,'singleGrievance'])->name('single-grievance');
