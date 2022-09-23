@@ -17,6 +17,7 @@ class UpdateMunicipalDetailRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'icon' => ['required'],
             'count' => ['required'],
+            'bg_color' => ['required'],
             'position' => ['nullable', 'integer']
         ];
     }
