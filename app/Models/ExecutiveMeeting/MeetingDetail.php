@@ -30,4 +30,5 @@ class MeetingDetail extends Model
     {
         return $this->morphTo();
     }
+
 }

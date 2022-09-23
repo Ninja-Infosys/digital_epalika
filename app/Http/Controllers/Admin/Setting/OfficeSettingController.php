@@ -24,7 +24,7 @@ class OfficeSettingController extends Controller
             'name' => ['required', 'string'],
             'logo' => ['nullable', 'mimes:png,jpg,jpeg'],
             'logo1' => ['nullable', 'mimes:png,jpg,jpeg'],
-            'logo2' => ['nullable', 'mimes:png,jpg,jpeg'],
+            'logo2' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
             'background_image' => ['nullable', 'mimes:png,jpg,jpeg'],
             'google_map' => ['nullable'],
             'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
@@ -32,6 +32,7 @@ class OfficeSettingController extends Controller
             'local_body_id' => ['required', Rule::exists('local_bodies', 'id')->withoutTrashed()],
             'ward_no' => ['required'],
             'phone' => ['nullable'],
+            'introduction' => ['nullable'],
             'email' => ['nullable', 'email'],
             'website' => ['nullable', 'url'],
             'facebook_link' => ['nullable', 'url']

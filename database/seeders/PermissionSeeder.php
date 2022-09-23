@@ -23,6 +23,7 @@ class PermissionSeeder extends Seeder
             'user_create',
             'user_edit',
             'user_delete',
+            'websiteAdmin_access',
             'fiscalYear_access',
             'fiscalYear_create',
             'fiscalYear_edit',

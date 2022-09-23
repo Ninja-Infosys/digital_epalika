@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Setting\Units;
 
-use App\Models\Settings\Units\MeasurementUnit;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreMeasurementUnitRequest;
-use App\Http\Requests\UpdateMeasurementUnitRequest;
+use App\Http\Requests\Setting\MeasurementUnits\StoreMeasurementUnitRequest;
+use App\Http\Requests\Setting\MeasurementUnits\UpdateMeasurementUnitRequest;
+use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Type;
 use Illuminate\Support\Facades\Gate;
 
