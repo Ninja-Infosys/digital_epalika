@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Frontend\BaseController;
 use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\ExecutiveMeeting\MunicipalMeetingDecision;
 use Illuminate\Http\Request;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 
-class FrontController extends BaseController
+class FrontController extends Controller
 {
     public function index()
     {

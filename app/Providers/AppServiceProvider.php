@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\ExecutiveMeeting\MunicipalCommittee;
 use App\Models\ExecutiveMeeting\WardCommittee;
 use App\Models\OfficeHeader;
+use App\Models\Settings\OfficeSetting;
+use App\Models\Website\MunicipalDetail;
 use App\Observers\ExecutiveMeeting\MunicipalCommitteeObserver;
 use App\Observers\ExecutiveMeeting\WardCommitteeObserver;
 use App\Observers\MunicipalDetailObserver;
