@@ -1,5 +1,17 @@
-
-<form wire:submit="save">
+<form wire:submit.prevent="save">
+    <div class="progress mb-5 mt-4" style="height: 15px;">
+        <div @class([
+        "bg-info"=>$progress<100,
+        "bg-success"=>$progress==100,
+        "progress-bar",
+        "progress-bar-striped",
+        "progress-bar-animated"=>$progress<100
+])  role="progressbar"
+             style="width: {{$progress}}%;" aria-valuenow="{{$progress}}"
+             aria-valuemin="0" aria-valuemax="100">
+            {{$progress}}%
+        </div>
+    </div>
     @csrf
     @switch($level)
         @case(2)
@@ -39,11 +51,11 @@
                     @error('userDetail.nec_certificate')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
-                </div>      
+                </div>
             </div>
             <div class="row">
                 <h4 class="title">नागरिकता बिबरण</h4>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <hr style="height:2px;color:gray;background-color:gray">
                 <div class="col-md-4 mb-3">
                     <label for="userDetail.citizenship_no" class="form-label">नागरिता न:</label>
                     <input
@@ -111,7 +123,7 @@
                                 NEC Certificate
                                 <div class="card" style="width: 8rem">
                                     <img src="{{ $userDetail['nec_certificate']->temporaryUrl() }}" height="150"
-                                     alt="">
+                                         alt="">
                                 </div>
                             @endif
                         </div>
@@ -120,7 +132,7 @@
                                 नागरिकता अपलोड गर्नुहोस् (आगाडी)
                                 <div class="card" style="width: 8rem">
                                     <img src="{{ $userDetail['citizenship_front']->temporaryUrl() }}" height="150"
-                                     alt="">
+                                         alt="">
                                 </div>
                             @endif
                         </div>
@@ -129,7 +141,7 @@
                                 नागरिकता अपलोड गर्नुहोस् (आगाडी)
                                 <div class="card" style="width: 8rem">
                                     <img src="{{ $userDetail['citizenship_back']->temporaryUrl() }}" height="150"
-                                     alt="">
+                                         alt="">
                                 </div>
                             @endif
                         </div>
@@ -137,8 +149,9 @@
                 </div>
             </div>
             <div class="d-flex justify-content-around mt-2">
-                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel">Next</button>
+                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel(1)">Back
+                </button>
+                <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel(3)">Next</button>
             </div>
             @break
 
@@ -146,7 +159,7 @@
             {{--    next step--}}
             <div class="address">
                 <h4 class="title">स्थाहि ठेगाना</h4>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <hr style="height:2px;color:gray;background-color:gray">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="userDetail.permanent_province_id" class="form-label">प्रदेश</label>
@@ -219,7 +232,7 @@
 
             <div class="address">
                 <h4 class="title">अस्थाहि ठेगाना</h4>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <hr style="height:2px;color:gray;background-color:gray">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="userDetail.temporary_province_id" class="form-label">प्रदेश</label>
@@ -290,17 +303,19 @@
                 </div>
             </div>
             <div class="d-flex justify-content-around mt-2">
-                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel">Next</button>
+                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel(2)">Back
+                </button>
+                <button type="button" class="btn btn-primary"
+                        wire:click.prevent="incrementLevel({{$isOrganization?4:6}})">Next
+                </button>
             </div>
             @break
 
         @case(4)
             {{-- organiztion detail --}}
-
             <div class="org">
                 <h5 class="title">संगठन विवरण</h5>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <hr style="height:2px;color:gray;background-color:gray">
             </div>
             <div class="row mt-3">
                 <div class="col-md-4 mb-3">
@@ -390,7 +405,7 @@
             </div>
             <div class="address">
                 <h4 class="title">स्थाहि ठेगाना</h4>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <hr style="height:2px;color:gray;background-color:gray">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="organizationDetail.province_id" class="form-label">प्रदेश</label>
@@ -463,11 +478,13 @@
                 </div>
             </div>
             <div class="d-flex justify-content-around mt-2">
-                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel">Next</button>
+                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel(3)">Back
+                </button>
+                <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel(5)">Next</button>
             </div>
             @break
-            @case(5)
+
+        @case(5)
             <div class="company-document">
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -479,9 +496,10 @@
                         @enderror
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="च organizationDetail.org_registration_document" class="form-label">कम्पनी प्रमाणपत्र</label>
+                        <label for="च organizationDetail.org_registration_document" class="form-label">कम्पनी
+                            प्रमाणपत्र</label>
                         <input type="file" class="form-control" id="organizationDetail.org_registration_document"
-                            wire:model="organizationDetail.org_registration_document"/>
+                               wire:model="organizationDetail.org_registration_document"/>
                         @error('organizationDetail.org_registration_document')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -489,7 +507,7 @@
                     <div class="col-md-4 mb-3">
                         <label for="organizationDetail.org_pan_document" class="form-label">प्यान प्रमाणपत्र:</label>
                         <input type="file" class="form-control" id="organizationDetail.org_pan_document"
-                        wire:model="organizationDetail.org_pan_document"/>
+                               wire:model="organizationDetail.org_pan_document"/>
                         @error('organizationDetail.org_pan_document')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -497,60 +515,64 @@
                     <div class="col-md-4 mb-3">
                         <label for="taxClearance.document" class="form-label">कर चुक्ता:</label>
                         <input type="file" class="form-control" id="taxClearance.document"
-                        wire:model="taxClearance.document"/>
+                               wire:model="taxClearance.document"/>
                         @error('taxClearance.document')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
-                    </div> 
+                    </div>
                     <div class="col-md-4 mb-3">
                         <label for="taxClearance.year" class="form-label">आ.व</label>
                         <input
-                                name="taxClearance.year"
-                                 class="form-control @error('taxClearance.year') is-invalid @enderror"
-                                 type="text"
-                                id="taxClearance.year"
-                                 placeholder="आ.व"
-                              />
-                           @error('taxClearance.year')
-                            <div class="invalid-feedback">{{$message}}</div>
-                           @enderror
+                            name="taxClearance.year"
+                            class="form-control @error('taxClearance.year') is-invalid @enderror"
+                            type="text"
+                            id="taxClearance.year"
+                            placeholder="आ.व"
+                            wire:model="taxClearance.year"
+                        />
+                        @error('taxClearance.year')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                     </div>
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-3">
                                 @if ($organizationDetail['logo'])
-                                कम्पनी लोगो
-                                <div class="card" style="width: 8rem">
-                                    <img src="{{ $organizationDetail['logo']->temporaryUrl() }}"  height="150"
-                                         alt="">
-                                </div>
+                                    कम्पनी लोगो
+                                    <div class="card" style="width: 8rem">
+                                        <img src="{{ $organizationDetail['logo']->temporaryUrl() }}" height="150"
+                                             alt="">
+                                    </div>
                                 @endif
                             </div>
                             <div class="col-md-3">
                                 @if ($organizationDetail['org_registration_document'])
-                                कम्पनी प्रमाणपत्र
-                                <div class="card" style="width: 8rem">
-                                    <img src="{{ $organizationDetail['org_registration_document']->temporaryUrl() }}" height="150"
-                                    alt="">
-                                </div>                                 
+                                    कम्पनी प्रमाणपत्र
+                                    <div class="card" style="width: 8rem">
+                                        <img
+                                            src="{{ $organizationDetail['org_registration_document']->temporaryUrl() }}"
+                                            height="150"
+                                            alt="">
+                                    </div>
                                 @endif
                             </div>
                             <div class="col-md-3">
                                 @if ($organizationDetail['org_pan_document'])
-                                प्यान प्रमाणपत्र
-                                <div class="card" style="width: 8rem">
-                                    <img src="{{ $organizationDetail['org_pan_document']->temporaryUrl() }}" height="150"
-                                         alt="">
-                                </div>
+                                    प्यान प्रमाणपत्र
+                                    <div class="card" style="width: 8rem">
+                                        <img src="{{ $organizationDetail['org_pan_document']->temporaryUrl() }}"
+                                             height="150"
+                                             alt="">
+                                    </div>
                                 @endif
                             </div>
                             <div class="col-md-3">
                                 @if ($taxClearance['document'])
-                                कर चुक्ता
-                                <div class="card" style="width: 8rem">
-                                    <img src="{{ $taxClearance['document']->temporaryUrl() }}" height="150"
-                                         alt="">
-                                </div>         
+                                    कर चुक्ता
+                                    <div class="card" style="width: 8rem">
+                                        <img src="{{ $taxClearance['document']->temporaryUrl() }}" height="150"
+                                             alt="">
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -558,72 +580,77 @@
                 </div>
             </div>
             <div class="d-flex justify-content-around mt-2">
-                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel">Next</button>
+                <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel(4)">Back
+                </button>
+                <button type="button" class="btn btn-primary" wire:click.prevent="incrementLevel(6)">Next</button>
             </div>
             @break
 
-            @case(6)
-          <div class="row">
-            <div class="col-md-4 mb-3">
-                <label for="user_name" class="form-label">प्रयोगकार्तको नाम</label>
-                <input
-                     name="user_name"
-                      class="form-control @error('user_name') is-invalid @enderror"
-                      type="text"
-                     id="user_name"
-                      placeholder="प्रयोगकार्तको नाम"
-                   />
-                @error('user_name')
-                 <div class="invalid-feedback">{{$message}}</div>
-                @enderror
-            </div>                          
+        @case(6)
+            <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="user_email" class="form-label">इमेल</label>
+                    <label for="user.name" class="form-label">प्रयोगकार्तको नाम</label>
                     <input
-                         name="user_email"
-                          class="form-control @error('user_email') is-invalid @enderror"
-                          type="text"
-                         id="user_email"
-                          placeholder="इमेल"
-                       />
-                    @error('user_email')
-                     <div class="invalid-feedback">{{$message}}</div>
+                        name="user.name"
+                        class="form-control @error('user.name') is-invalid @enderror"
+                        type="text"
+                        id="user.name"
+                        placeholder="प्रयोगकार्तको नाम"
+                        wire:model="user.name"
+                    />
+                    @error('user.name')
+                    <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                
                 <div class="col-md-4 mb-3">
-                    <label for="user_phone" class="form-label">सम्पर्क न:</label>
+                    <label for="user.email" class="form-label">इमेल</label>
                     <input
-                         name="user_phone"
-                         class="form-control @error('user_phone') is-invalid @enderror"
-                         type="text"
-                         id="user_phone"
-                         placeholder="सम्पर्क न:"
-                        />
-                    @error('user_phone')
-                     <div class="invalid-feedback">{{$message}}</div>
-                    @enderror  
+                        name="user.email"
+                        class="form-control @error('user.email') is-invalid @enderror"
+                        type="text"
+                        id="user.email"
+                        placeholder="इमेल"
+                        wire:model="user.email"
+                    />
+                    @error('user.email')
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
                 </div>
-            </div>     
-            <button type="button" class="btn btn-warning text-white" wire:click.prevent="decrementLevel">Back</button>
+
+                <div class="col-md-4 mb-3">
+                    <label for="user.phone" class="form-label">सम्पर्क न:</label>
+                    <input
+                        name="user.phone"
+                        class="form-control @error('user.phone') is-invalid @enderror"
+                        type="text"
+                        id="user.phone"
+                        placeholder="सम्पर्क न:"
+                        wire:model="user.phone"
+                    />
+                    @error('user.phone')
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+            </div>
+            <button type="button" class="btn btn-warning text-white"
+                    wire:click.prevent="decrementLevel({{$isOrganization?5:3}})">Back
+            </button>
             <button type="submit" class="btn btn-success">Submit</button>
             <button type="reset" class="btn btn-danger" wire:click.prevent="resetForm">Cancel</button>
             @break
-           
 
-        @default  
-                <div class="col-md-4 mb-3">
-                    <label class="form-label">परामर्शदाता प्रकार:</label>
-                    <select class="form-select" aria-label="Default select example">
-      <option selected>--- परामर्शदाता छान्नुहोस् ---</option>
-      <option value="1">संगठन</option>
-      <option value="2">व्यक्ति</option>
-    </select>
-                </div>             
+        @default
+            <div class="col-md-4 mb-3">
+                <label class="form-label">परामर्शदाता प्रकार:</label>
+                <select class="form-select" aria-label="Default select example" wire:model="isOrganization">
+                    <option selected>--- परामर्शदाता छान्नुहोस् ---</option>
+                    <option value="1">संगठन</option>
+                    <option value="0">व्यक्ति</option>
+                </select>
+            </div>
             <div class="row">
                 <h6 class="title">ब्यतिगत बिबरण</h6>
-                <hr style="height:2px;color:gray;background-color:gray"> 
+                <hr style="height:2px;color:gray;background-color:gray">
                 <div class="col-md-6 mb-3">
                     <label for="userDetail.name_ne" class="form-label">नेपालीमा नाम</label>
                     <input
@@ -712,7 +739,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-3 disabled">
                     <label for="userDetail.father_name" class="form-label">बुवाको नाम</label>
                     <input
                         name="userDetail.father_name"
@@ -730,7 +757,7 @@
                     <label for="userDetail.grandfather_name" class="form-label">हजुर बुवाको नाम</label>
                     <input
                         name="userDetail.grandfather_name"
-                        class="form-control @error('userDetail.grandfather_name') is-invalid @enderror"
+                        class="form-control @error('userDetail.grandfather_name') is-invalid @enderror disabled"
                         wire:model="userDetail.grandfather_name"
                         type="text"
                         id="userDetail.grandfather_name"
@@ -740,10 +767,10 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-              
+
             </div>
             <div class="d-flex pull-right justify-content-around mt-2">
-                <button type="button" class="btn btn-primary" wire:click="incrementLevel">Next</button>
+                <button type="button" class="btn btn-primary" wire:click="incrementLevel(2)">Next</button>
             </div>
     @endswitch
 </form>
