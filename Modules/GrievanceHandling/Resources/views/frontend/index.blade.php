@@ -43,6 +43,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 p-2">
+                        <div class="card shadow text-center">
+                            <div class="card-body">
+                                <h5 class="mt-2 mb-3 card-title">गुनासो लग इन</h5>
+                                <img class="icon" src="{{asset('assets/frontend/image/track.png')}}" alt="">
+                                <p class="card-text mt-2"><small>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन ।</small></p>
+                                <a href="{{route('grievanceHandling.track')}}" class="btn btn-primary" ><span>गुनासो ट्र्याक</span>
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 mt-3">
