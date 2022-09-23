@@ -11,16 +11,12 @@ class DateLivewire extends Component
     public $label_ne = 'मिति';
     public $label_en = 'date';
 
-//    public $nepali_date = '';
+    public $nepali_date = '';
     public $english_date = '';
-
-    public $form = [
-        'nepali' => '',
-    ];
 
     public function mount()
     {
-        $GLOBALS["var"];
+
     }
 
     protected function getListeners()

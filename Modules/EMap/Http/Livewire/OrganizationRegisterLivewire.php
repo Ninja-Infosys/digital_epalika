@@ -194,6 +194,7 @@ class OrganizationRegisterLivewire extends Component
 
     public function save()
     {
+        $this->validate();
         DB::transaction(function () {
             $DbUser = Organization::create($this->user);
             $DbUser->userDetail()->create($this->userDetail);
