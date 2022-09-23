@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Setting\Units;
 
-use App\Models\Settings\Units\Unit;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUnitRequest;
-use App\Http\Requests\UpdateUnitRequest;
+use App\Http\Requests\Setting\MeasurementUnits\StoreUnitRequest;
+use App\Http\Requests\Setting\MeasurementUnits\UpdateUnitRequest;
+use App\Models\Settings\Units\Unit;
 use Illuminate\Support\Facades\Gate;
 
 class UnitController extends Controller
