@@ -145,61 +145,17 @@
                 </div>
                 <div class="col-md-6">
                     <div class="row align-content-stretch">
-                        <div class="col-md-3 p-1 detail bg-primary">
-                            <div class="text-center py-1">
-                                <i class="fa fa-building"></i>
-                                <h4 class="text-white m-0">१</h4>
-                                <p>जम्मा वडा</p>
+                        @foreach($municipalDetails as $municipalDetail)
+                            <div class="col-md-3 p-1 detail bg-primary">
+                                <div class="text-center py-1">
+                                    {{$municipalDetail->icon}}
+                                    <h4 class="text-white m-0">
+                                        {{$municipalDetail->count}}
+                                    </h4>
+                                    <p>{{$municipalDetail->title}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 p-1 detail bg-success">
-                            <div class="text-center py-1">
-                                <i class="fa fa-building"></i>
-                                <h4 class="text-white m-0">२</h4>
-                                <p>सैक्षिक संस्था</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 p-1 detail bg-danger">
-                            <div class="text-center py-1">
-                                <i class="fa fa-building"></i>
-                                <h4 class="text-white m-0">४६</h4>
-                                <p>स्वास्थ्य संस्था</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 p-1 detail bg-warning">
-                            <div class="text-center py-1">
-                                <h4 class="text-white m-0">४०%</h4>
-                                <p>पर्यटकिय क्षेत्र</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 p-1 detail bg-success">
-                            <div class="text-center py-1">
-                                <i class="fa fa-users"></i>
-                                <h4 class="text-white m-0">२८७७२६१७९१</h4>
-                                <p>जनसंख्या</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 p-1 detail bg-primary">
-                            <div class="text-center py-1">
-                                <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-                                <h4 class="text-white m-0">१२१</h4>
-                                <p style="font-size:12px;">घर धुरी</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 p-1 detail bg-warning">
-                            <div class="text-center py-1">
-                                <i class="fa fa-pagelines"></i>
-                                <h4 class="text-white m-0">७८३५९५</h4>
-                                <p>साना मभौला उधोग</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 p-1 detail bg-danger">
-                            <div class="text-center py-1">
-                                <i class="fa fa-camera"></i>
-                                <h4 class="text-white m-0">१३</h4>
-                                <p>कृषि योग्य जमिन</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

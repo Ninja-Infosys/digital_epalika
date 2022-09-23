@@ -1883,7 +1883,7 @@ body {
     overflow: hidden;
     padding: 0 15px 65px 15px;
     min-height: 80vh;
-    margin-top: 70px
+    margin-top: 80px
 }
 
 .left-side-menu {
@@ -1894,7 +1894,7 @@ body {
     position: fixed;
     -webkit-transition: all .1s ease-out;
     transition: all .1s ease-out;
-    top: 70px;
+    top: 80px;
     -webkit-box-shadow: var(--ct-box-shadow);
     box-shadow: var(--ct-box-shadow)
 }
@@ -2590,7 +2590,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
     position: fixed;
     left: 0;
     right: 0;
-    height: 70px;
+    height: 80px;
     z-index: 1001
 }
 
