@@ -3,12 +3,12 @@
     <section class="inner-section mt-lg-5 ">
         <div class="container-fluid">
             <div class="row d-flex mt-5 ">
-                <div class="col-md-10  mx-auto">
+                <div class="mx-auto">
                     <div class="breadcrumb d-flex">
                         <div>
-                            <a class="whitespace-nowrap text-primary-500" href="">गुनासो</a>
-                        </div>
-                        <div class="d-flex items-center ml-1 whitespace-nowrap">
+                            <a class="whitespace-nowrap text-primary-500"
+                               href="{{route('grievanceHandling.grievance')}}">गुनासो</a>
+                            <i class="fa fa-angle-right ml-lg-1"></i>
                             <a class="ml-1 text-primary-500">गुनासो दर्ता</a>
                         </div>
                     </div>
@@ -98,11 +98,11 @@
     @push('scripts')
         {{--listener for toastr--}}
         <script>
-            window.addEventListener('alert_message',event=>{
+            window.addEventListener('alert_message', event => {
                 swal.fire({
-                    title:event.detail.title,
-                    text:event.detail.text,
-                    icon:event.detail.type,
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
                 });
             });
         </script>

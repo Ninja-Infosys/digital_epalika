@@ -1,26 +1,20 @@
 @extends('frontend.layouts.master')
 @section('content')
-<section class="inner-section mt-lg-5 ">
-    <div class="container-fluid">
-        <div class="row d-flex mt-5 ">
-            <div class="col-md-10  mx-auto">
+    <section class="inner-section mt-lg-5 ">
+        <div class="container-fluid">
+            <div class="row d-flex mt-5 ">
                 <div class="breadcrumb d-flex">
                     <div>
-                        <a class="whitespace-nowrap text-primary-500" [routerLink]="'/grievance'">गुनासो</a>
-                    </div>
-                    <div class="d-flex ml-1 whitespace-nowrap">
-                        <mat-icon
-                            class="icon-size-5 text-secondary"
-                            [svgIcon]="'icon_solid:chevron-right'"></mat-icon>
-                        <a class="ml-1 text-primary-500">नीति सुची</a>
+                        <a class="whitespace-nowrap text-primary-500" href="{{route('grievanceHandling.grievance')}}">गुनासो</a>
+                        <i class="fa fa-angle-right ml-lg-1"></i><a class="ml-1 text-primary-500">नीति सुची</a>
                     </div>
                 </div>
                 <h4 class="text-center">नीतिहरु</h4>
                 <p class="text-center">तल दिएको नीति फर्म पुरा पढनुहोस् र आफुले चाहेको नीति डाउनलोड गर्नुहोस्। </p>
                 <div class="bg-card shadow rounded overflow-hidden">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
-                        <tr>
+                        <tr class="fs-5">
                             <th scope="col">क्र.स.</th>
                             <th scope="col">नीतिको शीर्षक</th>
                             <th scope="col">प्रकाशित मिति</th>
@@ -32,52 +26,7 @@
                             <th scope="row">१</th>
                             <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
                             <td>२०७९/०२/११</td>
-                            <td class="d-flex justify-content-around">
-                                <button class="btn btn-view btn-light">
-                                    <mat-icon [svgIcon]="'icon_solid:eye'"></mat-icon>
-                                </button>
-                                <button class="btn btn-download btn-light">
-                                    <mat-icon [svgIcon]="'icon_solid:download'"></mat-icon>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">२</th>
-                            <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
-                            <td>२०७९/०२/११</td>
-                            <td class="d-flex justify-content-around">
-                                <button class="btn btn-view btn-light">
-                                    <mat-icon [svgIcon]="'icon_solid:eye'"></mat-icon>
-                                </button>
-                                <button class="btn btn-download btn-light">
-                                    <mat-icon [svgIcon]="'icon_solid:download'"></mat-icon>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">३</th>
-                            <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
-                            <td>२०७९/०२/११</td>
-                            <td class="d-flex justify-content-around">
-                                <button class="btn btn-view btn-light">
-                                    <mat-icon [svgIcon]="'icon_solid:eye'"></mat-icon>
-                                </button>
-                                <button class="btn btn-download btn-light">
-                                    <mat-icon [svgIcon]="'icon_solid:download'"></mat-icon>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">४</th>
-                            <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
-                            <td>२०७९/०२/११</td>
-                            <td class="d-flex justify-content-around">
-                                <button class="btn btn-view btn-light">
-                                    <mat-icon [svgIcon]="'icon_solid:eye'"></mat-icon>
-                                </button>
-                                <button class="btn btn-download btn-light">
-                                    <mat-icon [svgIcon]="'icon_solid:download'"></mat-icon>
-                                </button>
+                            <td>
                             </td>
                         </tr>
                         </tbody>
@@ -85,9 +34,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/policy.css')}}">
-@endpush
+    </section>
+    @push('styles')
+        <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/policy.css')}}">
+    @endpush
 @endsection
