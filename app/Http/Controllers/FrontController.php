@@ -16,9 +16,8 @@ class FrontController extends BaseController
     {
         $employees = Employee::orderBy('position')->get();
 
-        $mixedNotices = Notice::orderBy('date')->get();
-        $notices = $mixedNotices->where('type', 'Notice')->take(3)->get();
-        $news = $mixedNotices->where('type', 'News')->take(3)->get();
+        $notices = Notice::where('type', 'Notice')->orderBy('date')->limit(3)->get();
+        $news = Notice::where('type', 'News')->orderBy('date')->limit(3)->get();
 
         $meetingDetails = MunicipalMeetingDecision::with('meetingDetail')->whereHas('meetingDetail', function ($query) {
             $query->orderByDesc('meeting_date');
