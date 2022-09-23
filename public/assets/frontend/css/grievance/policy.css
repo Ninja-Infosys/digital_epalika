@@ -53,3 +53,9 @@ mat-icon {
 /*    width: 70%;*/
 
 /*}*/
+.grievance-doc-img img{
+    object-fit: contain;
+    height: 8rem;
+    border: solid 2px #0e314c;
+
+}
