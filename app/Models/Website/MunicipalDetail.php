@@ -20,6 +20,7 @@ class MunicipalDetail extends Model
         'title',
         'icon',
         'count',
+        'bg_color',
         'position'
     ];
 }

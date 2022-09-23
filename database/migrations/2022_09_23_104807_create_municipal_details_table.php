@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('title');
             $table->string('icon')->nullable();
             $table->string('count');
+            $table->string('bg_color')->nullable();
             $table->integer('position');
             $table->timestamps();
             $table->softDeletes();
