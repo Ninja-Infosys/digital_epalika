@@ -16,7 +16,7 @@ class FrontController extends BaseController
     {
         $employees = Employee::orderBy('position')->get();
 
-        $mixedNotices = Notice::query()->orderBy('date');
+        $mixedNotices = Notice::orderBy('date')->query();
         $notices = $mixedNotices->where('type', 'Notice')->limit(3)->get();
         $news = $mixedNotices->where('type', 'News')->limit(3)->get();
 

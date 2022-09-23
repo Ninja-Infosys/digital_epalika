@@ -13,6 +13,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function __construct()
+    {
+        view()->share('officeSetting', OfficeSetting::first());
+    }
+
     public function deleteFile($file_url)
     {
         if (Storage::disk('public')->exists($file_url)) {
