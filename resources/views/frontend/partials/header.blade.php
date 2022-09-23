@@ -17,7 +17,7 @@
         <div class="col-md-2 col-sm-2 col-xs-2">
             <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-government-logo" class="logo"
-                     src="{{$officeSetting->logo_url}}"/>
+                     src="{{$shared_setting->logo_url}}"/>
             </a>
         </div>
         <div class="col-md-8 col-sm-8 col-xs-8">
@@ -28,7 +28,7 @@
         <div class="col-md-2 col-sm-2 col-xs-2">
             <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
-                     src="{{$officeSetting->logo2_url}}"/>
+                     src="{{$shared_setting->logo2_url}}"/>
             </a>
         </div>
     </div>
