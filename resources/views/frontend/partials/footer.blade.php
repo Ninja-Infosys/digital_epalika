@@ -8,7 +8,7 @@
                         <h6 class="text-white">नेपालगन्ज उप-महानगरपालिका, नगरकार्यपालिकाको कार्यालय</h6>
                         <ul class="list mt-2">
                             <li class="text-white">
-                                <mat-icon class="icon-size-4" [svgIcon]="'icon_solid:location-marker'"></mat-icon>
+                                <i class="fa-solid fa-location-dot"></i>
                                 नेपालगन्ज,बाँके, नेपाल
                             </li>
                             <li class="text-white">
