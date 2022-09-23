@@ -54,8 +54,11 @@
                                 @enderror
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="icon" class="form-label">आइकनको लागि यँहा <a
-                                        href="https://fontawesome.com/icons/">यँहा क्लिक</a> गर्नुहोस्</label>
+                                <label for="icon" Aclass="form-label">आइकन *</label>
+                                <a target="_blank"
+                                   href="https://fontawesome.com/icons/">
+                                    आइकनको लागि यँहा क्लिक गर्नुहोस्
+                                </a>
                                 <input
                                     type="text"
                                     name="icon"
