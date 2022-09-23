@@ -9,9 +9,14 @@
     <div class="{{request()->is('admin/grievanceHandling/*') ?'':'collapse'}}"
          id="sidebarGrievanceHandling">
         <ul class="nav-second-level">
-            <li class="{{request()->routeIs('admin.grievanceHandling.grievanceDetail.index') ? 'active' : ''}}">
+            <li class="{{request()->routeIs('admin.grievanceHandling.grievanceDetail.*') ? 'active' : ''}}">
                 <a href=" {{route('admin.grievanceHandling.grievanceDetail.index')}}">
                     <span> गुनासो बिबरण </span>
+                </a>
+            </li>
+            <li class="{{request()->routeIs('admin.grievanceHandling.grievanceUser.*') ? 'active' : ''}}">
+                <a href=" {{route('admin.grievanceHandling.grievanceUser.index')}}">
+                    <span> गुनासो प्रयोगकर्ता </span>
                 </a>
             </li>
             <li>
@@ -24,14 +29,14 @@
                 <div class="collapse" id="sidebarGrievanceHandlingSetting">
                     <ul class="nav-second-level">
                         @can('grievanceType_access')
-                            <li class="{{request()->routeIs('admin.grievanceHandling.setting.grievanceType.index') ? 'active' : ''}}">
+                            <li class="{{request()->routeIs('admin.grievanceHandling.setting.grievanceType.*') ? 'active' : ''}}">
                                 <a href="{{route('admin.grievanceHandling.setting.grievanceType.index')}}">
                                     <span> गुनासो प्रकार </span>
                                 </a>
                             </li>
                         @endcan
                         @can('grievanceOffice_access')
-                            <li class="{{request()->routeIs('admin.grievanceHandling.setting.grievanceOffice.index') ? 'active' : ''}}">
+                            <li class="{{request()->routeIs('admin.grievanceHandling.setting.grievanceOffice.*') ? 'active' : ''}}">
                                 <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.index')}}">
                                     <span> शाखा/कार्यालय </span>
                                 </a>

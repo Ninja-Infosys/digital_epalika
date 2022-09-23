@@ -20,6 +20,8 @@ class GrievanceFormWizard extends Component
     public int $currentStep = 1;
     public bool $is_password = false;
 
+    public $grievanceType;
+
     public array $form = [
         'grievance_type_id' => null,
         'description' => null,
@@ -38,12 +40,13 @@ class GrievanceFormWizard extends Component
     protected array $firstStepValidations = [
         'form.grievance_type_id' => ['required', 'exists:grievance_types,id'],
         'form.description' => ['required'],
-        'form.files' => ['required', 'array'],
+        'form.files' => ['nullable', 'array'],
         'form.files.*' => ['image', 'max:10240'],
         'form.grievance_office_id' => ['required', 'exists:grievance_offices,id'],
         'form.complaint_severity' => ['required'],
         'form.subject' => ['required']
     ];
+
     protected array $secondStepValidations = [
         'form.password' => ['required_if:is_password,1'],
         'form.password_confirmation' => ['nullable', 'confirmed'],
@@ -58,6 +61,12 @@ class GrievanceFormWizard extends Component
     {
         $this->grievanceTypes = GrievanceType::all();
         $this->grievanceOffices = GrievanceOffice::all();
+    }
+
+    public function nextStep($step)
+    {
+        $this->validate();
+        $this->currentStep = $step;
     }
 
     public function backStep($step)
@@ -88,12 +97,6 @@ class GrievanceFormWizard extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function nextStep($step)
-    {
-        $this->validate();
-        $this->currentStep = $step;
-    }
-
     public function submitForm()
     {
         $this->validate();
@@ -118,29 +121,49 @@ class GrievanceFormWizard extends Component
                 'subject' => $this->form['subject'],
                 'is_open' => $this->form['is_open'],
             ]);
-            foreach ($this->form['files'] as $file) {
-                $grievanceDetail->files()->create([
-                    'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-                    'extension' => $file->getClientOriginalExtension(),
-                    'file' => $file->store('grievance/files/' . Str::slug($grievanceUser->name, '_'), 'public'),
-                ]);
+            if (!empty($this->form['files'])) {
+                foreach ($this->form['files'] as $file) {
+                    $grievanceDetail->files()->create([
+                        'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                        'extension' => $file->getClientOriginalExtension(),
+                        'file' => $file->store('grievance/files/' . Str::slug($grievanceUser->name, '_'), 'public'),
+                    ]);
+                }
             }
         });
 
         $this->reset('form', 'currentStep', 'is_password');
-        dd('success');
 
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => "success",
+            'title' => "Thank You",
+            'text' => "Your Form Submitted Successfully",
+        ]);
     }
 
     public function messages(): array
     {
         return [
-            'form.grievance_type_id.required' => ['grievance type is required']
+            'form.grievance_type_id.required' => ['गुनासो प्रकार आवश्यक छ'],
+            'form.description.required' => ['गुनासो विवरण आवश्यक छ'],
+            'form.grievance_office_id.required' => ['गुनासो कार्यालय आवश्यक छ'],
+            'form.complaint_severity.required' => ['गुनासो गम्भीरता आवश्यक छ'],
+            'form.subject.required' => ['गुनासो बिषय आवश्यक छ'],
+            'form.password_confirmation.confirmed' => ['पासवोर्ड संग मेल खाएन '],
+            'form.name.required' => ['नाम अनिबार्य छ '],
+            'form.email.required' => ['इमेल अनिबार्य छ '],
+            'form.email.email' => ['इमेल फर्ममा  छ '],
+            'form.phone.required' => ['फोन अनिबार्य छ '],
+            'form.address.required' => ['ठेगाना अनिबार्य छ '],
         ];
     }
 
     public function render()
     {
+        if (!empty($this->form['grievance_type_id'])) {
+            $this->grievanceType = GrievanceType::find($this->form['grievance_type_id']);
+        }
+
         return view('grievancehandling::livewire.grievance-form-wizard');
     }
 }
