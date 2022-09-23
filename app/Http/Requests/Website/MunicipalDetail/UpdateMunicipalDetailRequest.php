@@ -21,4 +21,15 @@ class UpdateMunicipalDetailRequest extends FormRequest
             'position' => ['nullable', 'integer']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'शिर्षक अनिबार्य छ ',
+            'icon.required' => 'आइकन अनिबार्य छ ',
+            'count.required' => 'गणना अनिबार्य छ ',
+            'bg_color.required' => 'कलर अनिबार्य छ ',
+            'position.integer' => 'स्थिति अङ्कमा हुनुपर्छ '
+        ];
+    }
 }
