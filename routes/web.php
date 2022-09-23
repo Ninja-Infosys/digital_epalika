@@ -68,6 +68,18 @@ Route::get('/static/representive', function () {
 Route::get('/static/gallery/photo/single-photo', function () {
     return view('frontend.static.gallery.photo.single-photo.single-photo');
 });
+Route::get('/static/notice', function () {
+    return view('frontend.static.notice.index');
+});
+Route::get('/static/single-notice', function () {
+    return view('frontend.static.notice.single-notice');
+});
+Route::get('/static/executive', function () {
+    return view('frontend.static.executive-board.index');
+});
+Route::get('/static/single-executive', function () {
+    return view('frontend.static.executive-board.single-executive-board');
+});
 
 
 
