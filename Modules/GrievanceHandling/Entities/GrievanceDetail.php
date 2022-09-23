@@ -33,6 +33,7 @@ class GrievanceDetail extends Model
     {
         return $this->belongsTo(GrievanceType::class);
     }
+
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');

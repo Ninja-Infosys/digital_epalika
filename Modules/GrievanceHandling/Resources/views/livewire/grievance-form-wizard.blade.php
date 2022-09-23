@@ -9,13 +9,58 @@
                         3</a></li>
             </ul>
         </div>
-        <form action="">
+        <form action="" enctype="multipart/form-data">
             @switch($currentStep)
                 @case(2)
                     <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <h5>
+                                <label for="complaint_severity" class="form-label">
+                                    के तपाईंलाई यो गुनासोको पासवर्ड चाहिन्छ ? *
+                                </label>
+                            </h5>
+                            <p>
+                                (यदि तपाईको गुनासोको नतिजा/स्थिती अझ सुरक्षित राख्नुछ भने मात्र)
+                            </p>
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <input type="radio"
+                                           class="form-check-input"
+                                           wire:model="is_password"
+                                           value="1"
+                                           name="is_password"
+                                           id="is_password1">
+                                    <label class="form-check-label"
+                                           for="is_password1">चाहिन्छ &nbsp;</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio"
+                                           class="form-check-input"
+                                           wire:model="is_password"
+                                           value="0"
+                                           id="is_password2">
+                                    <label class="form-check-label"
+                                           for="is_password2">चाहिदैन &nbsp;</label>
+                                </div>
+                            </div>
+                        </div>
+                        @if($is_password)
+                            <div class="col-md-6 mb-4">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" wire:model="form.password" class="form-control" placeholder="Password">
+                                @error('form.password')
+                                <div class="text-danger">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password_confirmation" wire:model="form.password_confirmation" class="form-label">Confirm Password</label>
+                                <input type="password" id="password_confirmation" class="form-control"
+                                       placeholder="Confirm Password">
+                            </div>
+                        @endif
                         <div class="col-md-12 mb-4">
                             <h5>
-                                <label for="grievance_type_id" class="form-label">
+                                <label for="is_open" class="form-label">
                                     के तपाईं आफ्नो विवरण खुलाउन चाहनुहुन्छ ?
                                 </label>
                             </h5>
@@ -28,6 +73,7 @@
                                     <input type="radio"
                                            class="form-check-input"
                                            name="is_open"
+                                           wire:model="form.is_open"
                                            value="1"
                                            id="is_open1">
                                     <label class="form-check-label"
@@ -37,38 +83,42 @@
                                     <input type="radio"
                                            class="form-check-input"
                                            name="is_open"
-                                           value="1"
+                                           wire:model="form.is_open"
+                                           value="0"
                                            id="is_open">
                                     <label class="form-check-label"
                                            for="is_open">हुदैन | &nbsp;</label>
                                 </div>
                             </div>
+                            @error('form.is_open')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="name" class="form-label">पुरा नाम *</label>
-                            <input type="text" class="form-control" id="name" placeholder="पुरा नाम">
-                            @error('name')
+                            <input type="text" wire:model="form.name" class="form-control" id="name" placeholder="पुरा नाम">
+                            @error('form.name')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">इमेल *</label>
-                            <input type="text" class="form-control" id="email" placeholder="इमेल">
-                            @error('email')
+                            <input type="text" wire:model="form.email" class="form-control" id="email" placeholder="इमेल">
+                            @error('form.email')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="phone" class="form-label">सम्पर्क नम्बर *</label>
-                            <input type="text" class="form-control" id="phone" placeholder="सम्पर्क नम्बर ">
-                            @error('phone')
+                            <input type="text" wire:model="form.phone" class="form-control" id="phone" placeholder="सम्पर्क नम्बर ">
+                            @error('form.phone')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="address" class="form-label">ठेगाना *</label>
-                            <input type="text" class="form-control" id="address" placeholder="ठेगाना">
-                            @error('address')
+                            <input type="text" wire:model="form.address" class="form-control" id="address" placeholder="ठेगाना">
+                            @error('form.address')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
@@ -78,7 +128,7 @@
                             <button type="button" wire:click.prevent="backStep(1)" class="btn btn-primary">
                                 Previous
                             </button>
-                            <button type="button" wire:click.prevent="secondStepSubmit" class="btn btn-primary">
+                            <button type="button" wire:click.prevent="nextStep(3)" class="btn btn-primary">
                                 Next
                             </button>
                         </div>
@@ -94,11 +144,11 @@
                         </tr>
                         <tr>
                             <th> गुनासोको विवरण</th>
-                            <td>{{$firstStepForm['description']}}</td>
+                            <td>{{$form['description']}}</td>
                         </tr>
                         <tr>
                             <th> पुरा नाम</th>
-                            <td>{{$firstStepForm['description']}}</td>
+                            <td>{{$form['description']}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -121,7 +171,7 @@
                                     १. गुनासोको प्रकार *
                                 </label>
                             </h5>
-                            <select name="grievance_type_id" wire:model="firstStepForm.grievance_type_id"
+                            <select name="grievance_type_id" wire:model="form.grievance_type_id"
                                     id="grievance_type_id"
                                     class="form-select">
                                 <option value="">गुनासो प्रकार छान्नुहोस्</option>
@@ -129,58 +179,80 @@
                                     <option value="{{$grievanceType->id}}">{{$grievanceType->title}}</option>
                                 @endforeach
                             </select>
-                            @error('firstStepForm.grievance_type_id')
+                            @error('form.grievance_type_id')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-12 mb-4">
+                            <h5>
+                                <label for="subject" class="form-label">
+                                    २. बिषय *
+                                </label>
+                            </h5>
+                            <input type="text" class="form-control" id="subject" wire:model="form.subject"
+                                   placeholder="बिषय">
+                            @error('form.subject')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
                             <h5>
                                 <label for="description" class="form-label">
-                                    २. गुनासोको विवरण *
+                                    ३. गुनासोको विवरण *
                                 </label>
                             </h5>
-                            <textarea name="description" wire:model="firstStepForm.description" id="description"
+                            <textarea name="description" wire:model="form.description" id="description"
                                       class="form-control"
                                       cols="30"
                                       rows="5" placeholder="गुनासोको विवरण"></textarea>
-                            @error('firstStepForm.description')
+                            @error('form.description')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
                             <h5>
                                 <label for="files" class="form-label">
-                                    ३. गुनासो सम्बन्धी कागजपत्र अथवा अन्य फाइल छ भने अपलोड गर्नुहोस् *
+                                    ४. गुनासो सम्बन्धी कागजपत्र अथवा अन्य फाइल छ भने अपलोड गर्नुहोस् *
                                 </label>
                             </h5>
                             <p>(तपाईले कुनै पनि कागजात, फोटो, भिडियो 10 MB सम्मको साइजको अपलोड गर्न
                                 सक्नुहुन्छ | )</p>
-                            <input type="file" name="files[]" id="files" class="form-control">
-                            @error('description')
+                            <input type="file" name="files[]" multiple wire:model="form.files" id="files"
+                                   class="form-control">
+                            @error('form.files')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                            @error('form.files.*')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
                             <h5>
                                 <label for="grievance_office_id" class="form-label">
-                                    ४. गुनासो पठाउन चाहाने कार्यालय *
+                                    ५. गुनासो पठाउन चाहाने कार्यालय *
                                 </label>
                             </h5>
                             <p>
                                 (यदि तपाँइ लाई गुनासो सँग सम्बन्धित कार्यालय थाहा छ भने छनोट गर्नुहोस्,
                                 अन्यथा हामी गुनासोको प्रकृति हेरेर सम्बन्धित कार्यालय मा पाठाउने छौं)
                             </p>
-                            <select name="grievance_office_id" id="grievance_office_id" class="form-select">
+                            <select name="grievance_office_id" wire:model="form.grievance_office_id"
+                                    id="grievance_office_id" class="form-select">
                                 <option value=""> छान्नुहोस्</option>
+                                @foreach($grievanceOffices as $grievanceOffice)
+                                    <option value="{{$grievanceOffice->id}}">
+                                        {{$grievanceOffice->title}}
+                                    </option>
+                                @endforeach
                             </select>
-                            @error('grievance_office_id')
+                            @error('form.grievance_office_id')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
                             <h5>
                                 <label for="complaint_severity" class="form-label">
-                                    ५. गुनासो गम्भीरता *
+                                    ६ . गुनासो गम्भीरता *
                                 </label>
                             </h5>
                             <div class="d-flex">
@@ -189,6 +261,7 @@
                                         <input type="radio"
                                                class="form-check-input"
                                                name="complaint_severity"
+                                               wire:model="form.complaint_severity"
                                                value="{{$severity}}"
                                                id="complaint_severity{{$severity}}">
                                         <label class="form-check-label"
@@ -197,47 +270,13 @@
                                 @endforeach
                             </div>
 
-                            @error('complaint_severity')
-                            <div class="text-danger">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-12 mb-4">
-                            <h5>
-                                <label for="complaint_severity" class="form-label">
-                                    ६. के तपाईंलाई यो गुनासोको पासवर्ड चाहिन्छ ? *
-                                </label>
-                            </h5>
-                            <p>
-                                (यदि तपाईको गुनासोको नतिजा/स्थिती अझ सुरक्षित राख्नुछ भने मात्र)
-                            </p>
-                            <div class="d-flex">
-                                <div class="form-check">
-                                    <input type="radio"
-                                           class="form-check-input"
-                                           name="is_password"
-                                           value="1"
-                                           id="is_password1">
-                                    <label class="form-check-label"
-                                           for="is_password1">चाहिन्छ &nbsp;</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio"
-                                           class="form-check-input"
-                                           name="is_password"
-                                           value="1"
-                                           id="is_password2">
-                                    <label class="form-check-label"
-                                           for="is_password2">चाहिदैन &nbsp;</label>
-                                </div>
-                            </div>
-
-                            @error('is_password')
+                            @error('form.complaint_severity')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="text-end">
-                        <button type="button" wire:click.prevent="firstStepSubmit" class="btn btn-primary text-end">
+                        <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary text-end">
                             Next
                         </button>
                     </div>
