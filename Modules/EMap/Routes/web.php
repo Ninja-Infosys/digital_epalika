@@ -19,6 +19,7 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::post('login', [OrganizationAuthController::class, 'organizationLogin'])->name('login');
     Route::get('register', [OrganizationAuthController::class, 'showOrganizationRegisterForm'])->name('register.form');
     Route::post('register', [OrganizationAuthController::class, 'registerOrganization'])->name('register');
+    Route::get('logout',[OrganizationAuthController::class,'logout'])->name('logout');
 
 });
 Route::view('/e-map','emap::frontend.e-map.index');
@@ -27,3 +28,4 @@ Route::view('/e-help','emap::frontend.e-map.e-help.e-help');
 Route::view('/notice','emap::frontend.e-map.notice.notice');
 Route::view('/register','emap::frontend.e-map.register.register-form');
 Route::view('/track','emap::frontend.e-map.track.track');
+
