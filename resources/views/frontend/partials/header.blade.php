@@ -15,9 +15,9 @@
 <div class="background">
     <div class="container d-flex justify-content-around">
         <div class="col-md-2 col-sm-2 col-xs-2">
-            <a routerlink="/home" class="main-logo">
+            <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-government-logo" class="logo"
-                     src="https://molmac.ninjademos.com/storage/office_setting/xP5tV0JD1a3OJBs40rmxWE0u3JR7oUUojJPW1be6.png"/>
+                     src="{{$officeSetting->logo_url}}"/>
             </a>
         </div>
         <div class="col-md-8 col-sm-8 col-xs-8">
@@ -26,9 +26,9 @@
             </div>
         </div>
         <div class="col-md-2 col-sm-2 col-xs-2">
-            <a routerlink="/home" class="main-logo" href="#/home">
+            <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
-                     src="https://molmac.ninjademos.com/storage/office_setting/wABUNfkNL6Cc7N6g3DD6gltsh4zRs1F38MwE4vTv.gif"/>
+                     src="{{$officeSetting->logo2_url}}"/>
             </a>
         </div>
     </div>

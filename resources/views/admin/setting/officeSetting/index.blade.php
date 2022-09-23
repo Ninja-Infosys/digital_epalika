@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <img src="{{$officeSetting->logo_url}}" height="60">
-                                    <label for="logo" class="form-label">लोगो </label>
+                                    <label for="logo" class="form-label">नेपालको निशान छाप </label>
                                     <input
                                         type="file"
                                         name="logo"
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <img src="{{$officeSetting->logo1_url}}" height="60">
-                                    <label for="logo1" class="form-label">लोगो 1 </label>
+                                    <label for="logo1" class="form-label">लोगो </label>
                                     <input
                                         type="file"
                                         name="logo1"
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <img src="{{$officeSetting->logo2_url}}" height="60">
-                                    <label for="logo2" class="form-label">लोगो 2 </label>
+                                    <label for="logo2" class="form-label">झण्डा </label>
                                     <input
                                         type="file"
                                         name="logo2"
@@ -156,7 +156,21 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
+                                    <label for="google_map" class="form-label">गुगल नक्शा </label>
+                                    <input
+                                        type="text"
+                                        name="google_map"
+                                        value="{{old('google_map',$officeSetting->google_map)}}"
+                                        class="form-control @error('google_map') is-invalid @enderror"
+                                        id="google_map"
+                                        placeholder="गुगल नक्शा"
+                                    />
+                                    @error('google_map')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="facebook_link" class="form-label">फेसबुक लिङ्क </label>
                                     <input
                                         type="text"
@@ -172,11 +186,11 @@
                                 </div>
 
                                 <div class="col-md-12 mb-2">
-                                    <label for="google_map" class="form-label">गुगल नक्शा </label>
-                                    <textarea name="google_map" id="google_map" cols="30" placeholder="गुगल नक्शा"
-                                              class="form-control summernote @error('google_map') is-invalid @enderror"
-                                              rows="5">{{old('google_map',$officeSetting->google_map)}}</textarea>
-                                    @error('google_map')
+                                    <label for="introduction" class="form-label">परिचय </label>
+                                    <textarea name="introduction" id="introduction" cols="30" placeholder="परिचय"
+                                              class="form-control summernote @error('introduction') is-invalid @enderror"
+                                              rows="5">{{old('introduction',$officeSetting->introduction)}}</textarea>
+                                    @error('introduction')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

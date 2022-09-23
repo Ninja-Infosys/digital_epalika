@@ -35,7 +35,8 @@ class OfficeSetting extends Model
         'phone',
         'email',
         'website',
-        'facebook_link'
+        'facebook_link',
+        'introduction'
     ];
 
     public function setLogoAttribute($value)
@@ -58,6 +59,7 @@ class OfficeSetting extends Model
             $this->attributes['logo2'] = $value->store('office_setting/logo', 'public');
         }
     }
+
     public function setBackgroundImageAttribute($value)
     {
         if (!empty($value) && !is_string($value)) {
@@ -79,6 +81,7 @@ class OfficeSetting extends Model
     {
         return $this->attributes['logo2'] ? Storage::disk('public')->url($this->attributes['logo2']) : '';
     }
+
     public function getBackgroundImageUrlAttribute(): string
     {
         return $this->attributes['background_image'] ? Storage::disk('public')->url($this->attributes['background_image']) : '';
