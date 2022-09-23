@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\EMap\Entities\Organization;
 
 class OrganizationRegisterLivewire extends Component
 {
     use WithFileUploads;
 
     public $level = 1;
+    public $maxLevel = 6;
+    public $progress = 0;
 
-    public $isOrganization = true;
+    public $isOrganization = 1;
 
     public $districts = [];
     public $provinces = [];
@@ -41,6 +44,12 @@ class OrganizationRegisterLivewire extends Component
         $this->districts = DB::table('districts')->selectRaw('id,district,province_id')->orderBy('province_id')->get();
         $this->provinces = DB::table('provinces')->selectRaw('id,province')->get();
     }
+
+    public $user = [
+        'name' => null,
+        'email' => null,
+        'phone' => null
+    ];
 
     public $userDetail = [
         'name_ne' => null,
@@ -93,13 +102,22 @@ class OrganizationRegisterLivewire extends Component
         'year' => null,
     ];
 
-    public function incrementLevel()
+    public function incrementLevel(int $step)
     {
+        if ($this->level <= $this->maxLevel) {
+            $this->level = $step;
 
-        if ($this->level <= 4) {
-            $this->level++;
+            $this->setProgressBar();
         }
 
+    }
+
+    public function decrementLevel(int $step)
+    {
+        if ($this->level >= 1) {
+            $this->level = $step;
+            $this->setProgressBar();
+        }
     }
 
     protected $baseRule = [
@@ -115,21 +133,32 @@ class OrganizationRegisterLivewire extends Component
         'userDetail.nec_no' => ['nullable'],
         'userDetail.nec_certificate' => ['nullable', 'image'],
         'userDetail.citizenship_no' => ['required'],
-        'userDetail.citizenship_issued_district' => ['required', 'exists:districts,id,deleted_at,null'],
+        'userDetail.citizenship_issued_district' => ['required', 'exists:districts,id,deleted_at,NULL'],
         'userDetail.citizenship_issued_date' => ['required'],
         'userDetail.citizenship_front' => ['required', 'image'],
         'userDetail.citizenship_back' => ['nullable', 'image'],
-        'userDetail.permanent_province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
-        'userDetail.permanent_district_id' => ['required', 'exists:districts,id,deleted_at,null'],
-        'userDetail.permanent_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+        'userDetail.permanent_province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
+        'userDetail.permanent_district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
+        'userDetail.permanent_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
         'userDetail.permanent_ward' => ['required'],
         'userDetail.permanent_tole' => ['nullable'],
-        'userDetail.temporary_province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
-        'userDetail.temporary_district_id' => ['required', 'exists:districts,id,deleted_at,null'],
-        'userDetail.temporary_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+        'userDetail.temporary_province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
+        'userDetail.temporary_district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
+        'userDetail.temporary_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
         'userDetail.temporary_ward' => ['nullable'],
         'userDetail.temporary_tole' => ['nullable'],
+        'user.name' => ['required'],
+        'user.email' => ['required', 'email', 'unique:organizations,email'],
+        'user.phone' => ['required', 'unique:organizations,phone'],
     ];
+
+    /**
+     * @return void
+     */
+    public function setProgressBar(): void
+    {
+        $this->progress = number_format(($this->level / $this->maxLevel) * 100);
+    }
 
     protected function rules(): array
     {
@@ -144,9 +173,9 @@ class OrganizationRegisterLivewire extends Component
                 'organizationDetail.org_pan_no' => ['required'],
                 'organizationDetail.org_pan_document' => ['required', 'image'],
                 'organizationDetail.logo' => ['nullable', 'image'],
-                'organizationDetail.province_id' => ['required', 'exists:provinces,id,deleted_at,null'],
-                'organizationDetail.district_id' => ['required', 'exists:districts,id,deleted_at,null'],
-                'organizationDetail.local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,null'],
+                'organizationDetail.province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
+                'organizationDetail.district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
+                'organizationDetail.local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
                 'organizationDetail.ward' => ['required'],
                 'organizationDetail.tole' => ['nullable'],
                 'taxClearance.document' => ['required'],
@@ -165,20 +194,21 @@ class OrganizationRegisterLivewire extends Component
 
     public function save()
     {
+        DB::transaction(function () {
+            $DbUser = Organization::create($this->user);
+            $DbUser->userDetail()->create($this->userDetail);
+            if ($this->isOrganization) {
+                $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
+                $DbOrgDetail->taxClearances()->create($this->taxClearance);
+            }
 
+            $this->resetForm();
+        });
     }
 
     public function resetForm()
     {
-        $this->reset('userDetail', 'level', 'organizationDetail', 'taxClearance');
-
-    }
-
-    public function decrementLevel()
-    {
-        if ($this->level >= 1) {
-            $this->level--;
-        }
+        $this->reset('userDetail', 'level', 'organizationDetail', 'taxClearance', 'isOrganization', 'maxLevel', 'level', 'progress');
 
     }
 
@@ -189,7 +219,6 @@ class OrganizationRegisterLivewire extends Component
         }
         if (!empty($this->userDetail['permanent_district_id'])) {
             $this->permanentLocalBodies = District::with('localBodies')->findOrFail($this->userDetail['permanent_district_id'])->localBodies;
-
         }
         if (!empty($this->userDetail['permanent_local_body_id'])) {
             $this->permanentWards = LocalBody::findOrFail($this->userDetail['permanent_local_body_id'])->ward_no;
@@ -224,6 +253,9 @@ class OrganizationRegisterLivewire extends Component
 
     public function render()
     {
+        if (!$this->isOrganization) {
+            $this->maxLevel = 4;
+        }
         $this->checkPermanentAddress();
         $this->checkOrganizationAddress();
         $this->checkTemporaryAddress();

@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class OrganizationDetail extends Model
 {
@@ -60,8 +62,50 @@ class OrganizationDetail extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function taxClearance(): HasMany
+    public function taxClearances(): HasMany
     {
         return $this->hasMany(TaxClearance::class);
+    }
+
+    public function getOrgRegistrationDocumentUrlAttribute(): string
+    {
+        return $this->attributes['org_registration_document']
+            ? Storage::disk('public')->url($this->attributes['org_registration_document'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setOrgRegistrationDocumentAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['org_registration_document'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        }
+    }
+
+    public function getOrgPanDocumentUrlAttribute(): string
+    {
+        return $this->attributes['org_pan_document']
+            ? Storage::disk('public')->url($this->attributes['org_pan_document'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setOrgPanDocumentAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['org_pan_document'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        }
+    }
+
+    public function getLogoUrlAttribute(): string
+    {
+        return $this->attributes['logo']
+            ? Storage::disk('public')->url($this->attributes['logo'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setLogoAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['logo'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        }
     }
 }
