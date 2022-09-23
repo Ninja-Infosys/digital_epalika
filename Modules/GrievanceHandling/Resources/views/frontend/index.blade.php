@@ -52,7 +52,7 @@
                                     <img class="icon" src="{{asset('assets/frontend/image/login.png')}}" alt="">
                                     <p class="card-text mt-2"><small>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन ।</small>
                                     </p>
-                                    <a href="{{route('grievanceHandling.grievance-list')}}"
+                                    <a href="{{route('grievanceHandling.login')}}"
                                        class="btn btn-primary"><span>लग इन</span>
                                         <i class="fa fa-plus"></i>
                                     </a>
@@ -171,7 +171,7 @@
                         </div>
                     </div>
                     <a class="btn mb-1 mt-1 btn-primary mx-auto" href="{{route('grievanceHandling.public-grievance')}}">थप
-                        गुनासोहरु<i class="fa fa-plus"></i>
+                        गुनासोहरु
                     </a>
                 </div>
             </div>
