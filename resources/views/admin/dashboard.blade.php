@@ -230,5 +230,49 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <i class="fa fa-newspaper fa-4x"></i>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end">
+                                <h3 class="text-dark mt-1">
+                                    {{$municipal_meetings_count}}
+                                </h3>
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा पालिका बैठकहरु">
+                                    जम्मा पालिका बैठकहरु
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <i class="fa fa-newspaper fa-4x"></i>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end">
+                                <h3 class="text-dark mt-1">
+                                    {{$ward_meetings_count}}
+                                </h3>
+                                <p class="text-muted mb-1 text-truncate" title=" जम्मा वडा बैठकहरु">
+                                    जम्मा वडा बैठकहरु
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

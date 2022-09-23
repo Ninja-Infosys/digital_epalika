@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ExecutiveMeeting\MeetingDetail;
+use App\Models\ExecutiveMeeting\MunicipalMeetingNotice;
+use App\Models\ExecutiveMeeting\WardMeetingNotice;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Modules\Circular\Entities\Dispatch;
@@ -26,7 +29,8 @@ class DashboardController extends Controller
         $replied_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Replied')->count();
         $investigated_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Investigated')->count();
         $closed_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Closed')->count();
-
+        $ward_meetings_count = MeetingDetail::where('model_type', WardMeetingNotice::class)->count();
+        $municipal_meetings_count = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->count();
 
 
         return view('admin.dashboard', compact(['user_count',
@@ -39,6 +43,8 @@ class DashboardController extends Controller
             'replied_grievance_count',
             'investigated_grievance_count',
             'closed_grievance_count',
+            'municipal_meetings_count',
+            'ward_meetings_count'
         ]));
     }
 }
