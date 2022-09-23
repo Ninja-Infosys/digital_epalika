@@ -19,7 +19,7 @@ class FrontController extends Controller
         $news = Notice::where('type', 'News')->orderBy('date')->limit(3)->get();
 
         $meetingDetails = MunicipalMeetingDecision::with('meetingDetail')->whereHas('meetingDetail', function ($query) {
-            $query->orderBy('meeting_date');
+            $query->orderByDesc('meeting_date');
         })->get();
 
         return view('frontend.home', compact('employees', 'notices', 'news', 'meetingDetails'));
