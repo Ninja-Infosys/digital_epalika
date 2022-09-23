@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Setting\Units\TypeController;
 use App\Http\Controllers\Admin\Setting\Units\UnitController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
+use App\Http\Controllers\Admin\Website\SliderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,7 +43,7 @@ Route::prefix('setting')->group(function () {
         Route::resource('unit', UnitController::class);
     });
     Route::resource('officeSetting', OfficeSettingController::class);
-    Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit','update','destroy']);
+    Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
 });
 
 
@@ -67,3 +68,8 @@ Route::prefix('listRegistrations')->as('listRegistrations.')->group(function () 
 
 //deleteFile
 Route::resource('file', FileController::class)->only('destroy');
+
+// website admin routes
+Route::prefix('website')->as('website.')->middleware('can:websiteAdmin_access')->group(function () {
+    Route::resource('slider', SliderController::class);
+});

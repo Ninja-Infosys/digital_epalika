@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Setting\Units;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Setting\MeasurementUnits\StoreUnitConversionRequest;
+use App\Http\Requests\Setting\MeasurementUnits\UpdateUnitConversionRequest;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUnitConversionRequest;
-use App\Http\Requests\UpdateUnitConversionRequest;
 use Illuminate\Support\Facades\Gate;
 
 class UnitConversionController extends Controller
