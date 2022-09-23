@@ -31,7 +31,8 @@ class GrievanceDetail extends Model
         'subject',
         'description',
         'complaint_severity',
-        'is_open'
+        'is_open',
+        'status',
     ];
 
     public function grievanceDetails(): HasMany
