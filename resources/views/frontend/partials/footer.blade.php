@@ -91,6 +91,6 @@
         <div class="footer-copyright"><span>Copyright © नेपालगन्ज उप-महानगरपालिका, नगरकार्यपालिकाको कार्यालय, बाँके</span><span>Updated on : 2079/01/12</span></div>
     </footer>
 </section>
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/footer.css')}}">
-@endpush
+{{--@push('styles')--}}
+{{--    <link rel="stylesheet" href="{{asset('assets/frontend/css/footer.css')}}">--}}
+{{--@endpush--}}
