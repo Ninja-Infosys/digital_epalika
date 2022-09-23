@@ -22,12 +22,15 @@ class GrievanceFormWizard extends Component
 
     public $grievanceType;
 
+    public $grievanceOffice;
+
     public array $form = [
         'grievance_type_id' => null,
         'description' => null,
         'grievance_office_id' => null,
         'complaint_severity' => null,
         'subject' => null,
+        'is_password' => 0,
         'password' => null,
         'password_confirmation' => null,
         'is_open' => 0,
@@ -78,13 +81,15 @@ class GrievanceFormWizard extends Component
     {
         switch ($this->currentStep) {
             case 1:
-            {
-                return $this->firstStepValidations;
-            }
+                {
+                    return $this->firstStepValidations;
+                }
+                break;
             case 2:
-            {
-                return $this->secondStepValidations;
-            }
+                {
+                    return $this->secondStepValidations;
+                }
+                break;
             default:
             {
                 return array_merge($this->firstStepValidations, $this->secondStepValidations);
@@ -136,8 +141,8 @@ class GrievanceFormWizard extends Component
 
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",
-            'title' => "Thank You",
-            'text' => "Your Form Submitted Successfully",
+            'title' => "धन्यबाद",
+            'text' => "तपाईंको गुनासो फारम सफलतापूर्वक पेश गरियो",
         ]);
     }
 
@@ -163,6 +168,11 @@ class GrievanceFormWizard extends Component
         if (!empty($this->form['grievance_type_id'])) {
             $this->grievanceType = GrievanceType::find($this->form['grievance_type_id']);
         }
+
+        if (!empty($this->form['grievance_office_id'])) {
+            $this->grievanceOffice = GrievanceOffice::find($this->form['grievance_office_id']);
+        }
+
 
         return view('grievancehandling::livewire.grievance-form-wizard');
     }
