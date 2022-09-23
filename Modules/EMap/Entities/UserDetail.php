@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserDetail extends Model
 {
@@ -50,6 +52,49 @@ class UserDetail extends Model
         'temporary_tole',
         'organization_id',
     ];
+
+
+    public function getNecCertificateUrlAttribute(): string
+    {
+        return $this->attributes['nec_certificate']
+            ? Storage::disk('public')->url($this->attributes['nec_certificate'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setNecCertificateAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['nec_certificate'] = $value->store('user/detail/' . Str::slug($this->attributes['name_ne'], '_'), 'public');
+        }
+    }
+
+    public function getCitizenshipFrontUrlAttribute(): string
+    {
+        return $this->attributes['citizenship_front']
+            ? Storage::disk('public')->url($this->attributes['citizenship_front'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setCitizenshipFrontAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['citizenship_front'] = $value->store('user/detail/' . Str::slug($this->attributes['name_ne'], '_'), 'public');
+        }
+    }
+
+    public function getCitizenshipBackUrlAttribute(): string
+    {
+        return $this->attributes['citizenship_back']
+            ? Storage::disk('public')->url($this->attributes['citizenship_back'])
+            : asset('images/user_icon.jpg');
+    }
+
+    public function setCitizenshipBackAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['citizenship_back'] = $value->store('user/detail/' . Str::slug($this->attributes['name_ne'], '_'), 'public');
+        }
+    }
 
     public function citizenshipIssuedDistrict(): BelongsTo
     {

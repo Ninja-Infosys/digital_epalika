@@ -2,15 +2,8 @@
 
 namespace Modules\EMap\Entities;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
-use App\Models\User;
-use App\Models\UserManagement\Role;
-use App\Traits\QueryFilterTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -28,7 +21,6 @@ class Organization extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use SoftDeletes;
-    use QueryFilterTrait;
 
     protected $dates = [
         'created_at',
@@ -41,13 +33,8 @@ class Organization extends Authenticatable
         'name',
         'email',
         'phone',
-        'role_id',
         'is_active',
         'password',
-        'province_id',
-        'district_id',
-        'local_body_id',
-        'ward_no',
     ];
 
     protected $hidden = [
@@ -82,52 +69,13 @@ class Organization extends Authenticatable
         }
     }
 
-    public function getAddressAttribute(): array
+    public function userDetail(): HasOne
     {
-        return [
-            'province_id' => $this->attributes['province_id'],
-            'district_id' => $this->attributes['district_id'],
-            'local_body_id' => $this->attributes['local_body_id'],
-            'ward_no' => $this->attributes['ward_no'],
-        ];
+        return $this->hasOne(UserDetail::class);
     }
 
-    public function scopeFilter($query, $param = [])
+    public function organizationDetail(): HasOne
     {
-        $this->filterByUserRole($query, $param);
-
-        return $query;
+        return $this->hasOne(OrganizationDetail::class);
     }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function users(): HasMany
-    {
-        return $this->hasMany(User::class);
-    }
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-
-    public function province(): BelongsTo
-    {
-        return $this->belongsTo(Province::class);
-    }
-
-    public function district(): BelongsTo
-    {
-        return $this->belongsTo(District::class);
-    }
-
-    public function localBody(): BelongsTo
-    {
-        return $this->belongsTo(LocalBody::class);
-    }
-
-
 }

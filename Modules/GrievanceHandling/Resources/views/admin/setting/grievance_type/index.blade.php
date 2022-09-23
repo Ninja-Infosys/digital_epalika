@@ -52,7 +52,7 @@
                                     <td>{{$grievance_type->title}}</td>
                                     <td>
                                         <a href="{{route('admin.grievanceHandling.setting.grievanceType.edit',$grievance_type)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                           class="btn btn-xs btn-outline-warning">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <form action="{{route('admin.grievanceHandling.setting.grievanceType.destroy',$grievance_type)}}"

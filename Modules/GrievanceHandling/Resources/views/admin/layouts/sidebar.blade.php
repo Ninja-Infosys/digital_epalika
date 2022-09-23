@@ -9,8 +9,8 @@
     <div class="{{request()->is('admin/grievanceHandling/*') ?'':'collapse'}}"
          id="sidebarGrievanceHandling">
         <ul class="nav-second-level">
-            <li class="">
-                <a href="">
+            <li class="{{request()->routeIs('admin.grievanceHandling.grievanceDetail.index') ? 'active' : ''}}">
+                <a href=" {{route('admin.grievanceHandling.grievanceDetail.index')}}">
                     <span> गुनासो बिबरण </span>
                 </a>
             </li>
