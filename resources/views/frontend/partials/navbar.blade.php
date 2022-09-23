@@ -9,7 +9,7 @@
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{url('/')}}">
-                        <mat-icon class="icon-size-4" [svgIcon]="'icon_solid:home'"></mat-icon>
+                        <i class="fa fa-home"></i>
                         गृहपृष्ठ
                     </a>
                 </li>
@@ -18,23 +18,27 @@
                         परिचय
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{url('/static/representative')}}">हाम्रो बारेमा</a></li>
                         <li><a class="dropdown-item" href="{{url('/static/employee')}}">कर्मचारीहरु</a></li>
-                        <li><a class="dropdown-item" href="{{url('/static/representative')}}">जनप्रतिनिधिहरु</a></li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle">
-                        ग्यालेरि
+{{--                    <a class="nav-link dropdown-toggle">--}}
+{{--                        ग्यालेरि--}}
+{{--                    </a>--}}
+{{--                    <ul class="dropdown-menu">--}}
+{{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/photo')}}">फोटोहरु</a></li>--}}
+{{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/audio')}}">अडियोहरु</a></li>--}}
+{{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/video')}}">भिडियोहरु</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url('/static/notice')}}">
+                        सूचना
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{url('/static/gallery/photo')}}">फोटोहरु</a></li>
-                        <li><a class="dropdown-item" href="{{url('/static/gallery/audio')}}">अडियोहरु</a></li>
-                        <li><a class="dropdown-item" href="{{url('/static/gallery/video')}}">भिडियोहरु</a></li>
-                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('/static/category')}}">
-                        श्रेणीहरु
+                    <a class="nav-link" aria-current="page" href="{{url('/static/executive')}}">
+                        कार्यपालिका न्युज
                     </a>
                 </li>
                 <li class="nav-item">
