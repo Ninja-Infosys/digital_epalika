@@ -1228,7 +1228,7 @@ body[data-theme=dark] .btn-soft-dark {
     font-weight: bold;
 }
 
-td form{
+td form {
     display: inline;
 }
 
@@ -2598,14 +2598,24 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
     float: left
 }
 
+.navbar-custom .topnav-menu > li .nav-title {
+    color: #fff;
+    font-size: 18px;
+    font-family: Kalimati;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
 .navbar-custom .topnav-menu .nav-link {
     padding: 0 15px;
     color: #fff;
     min-width: 32px;
     display: block;
-    line-height: 70px;
+    line-height: 80px;
     text-align: center;
-    max-height: 70px
+    max-height: 80px
 }
 
 .navbar-custom .dropdown .nav-link.show {
@@ -4486,37 +4496,42 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
     }
 }
 
-.auth-page{
+.auth-page {
     background-size: cover;
     background-position: center;
 }
-.auth-page .login-btn{
+
+.auth-page .login-btn {
     width: 70%;
     background-color: #3c8dbc;
     font-weight: 600;
     color: #fff;
 }
 
-.auth-page .system_info{
+.auth-page .system_info {
     background: #3c8dbc;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.auth-page .system_info{
+
+.auth-page .system_info {
     background: #3c8dbc;
 }
-.auth-page .system_info .title h4{
+
+.auth-page .system_info .title h4 {
     font-family: "Kalimati";
     line-height: 1.8;
 }
-.auth-page .system_info .title p{
+
+.auth-page .system_info .title p {
     font-family: "Kalimati";
     line-height: 1.8;
     color: #fff;
 }
-.auth-page .technical-support p{
+
+.auth-page .technical-support p {
     text-align: center;
     color: green;
     font-size: 15px;

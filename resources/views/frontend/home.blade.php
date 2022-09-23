@@ -141,14 +141,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    GIS Map
+                    <iframe src="https://sthaniya.gov.np/gis" style="height:200px;width:100%;" title="Iframe Example"></iframe>
                 </div>
                 <div class="col-md-6">
                     <div class="row align-content-stretch">
                         @foreach($municipalDetails as $municipalDetail)
                             <div class="col-md-3 p-1 detail bg-primary">
                                 <div class="text-center py-1">
-                                    {{$municipalDetail->icon}}
+                                    {!! $municipalDetail->icon !!}
                                     <h4 class="text-white m-0">
                                         {{$municipalDetail->count}}
                                     </h4>

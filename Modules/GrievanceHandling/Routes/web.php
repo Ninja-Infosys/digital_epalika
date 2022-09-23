@@ -13,7 +13,6 @@
 
 
 use Illuminate\Support\Facades\Route;
-use Modules\GrievanceHandling\Http\Controllers\Frontend\FrontendController;
 
 Route::view('/grievance','grievancehandling::frontend.index')->name('grievance');
 Route::view('/policy','grievancehandling::frontend.policy.policy')->name('policy');

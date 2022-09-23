@@ -9,6 +9,22 @@
             </li>
             <li class="nav-link">
                 <h4 class="text-white pt-3">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title}}</h4>
+            <li class="d-none d-lg-block">
+                <form class="app-search">
+                    <div class="app-search-box dropdown">
+                        <div class="input-group">
+                            <input
+                                type="search"
+                                class="form-control"
+                                placeholder="Search..."
+                                id="top-search"
+                            />
+                            <button class="btn input-group-text" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </li>
 
             <li class="dropdown d-inline-block d-lg-none">
