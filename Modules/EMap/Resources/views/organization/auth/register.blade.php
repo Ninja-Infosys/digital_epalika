@@ -39,7 +39,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card">
+                <div class="card" >
                     <div class="row">
                         <div class="col-md-4 system_info">
                             <div class="logo">

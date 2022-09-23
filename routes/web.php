@@ -63,3 +63,6 @@ Route::get('/static/employee', function(){
 Route::get('/static/representive', function(){
     return view('frontend.static.representive.representive');
 });
+
+
+
