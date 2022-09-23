@@ -34,7 +34,7 @@ class CheckMenu extends Command
 
         $this->newLine(3);
 
-        $myfile = fopen("config/menus.php", "w") or die("Unable to open file!");
+        $myfile = fopen("config/menus.php", 'wb') or die("Unable to open file!");
         fwrite($myfile, '<?php return [');
 
         $modules = Module::toCollection();

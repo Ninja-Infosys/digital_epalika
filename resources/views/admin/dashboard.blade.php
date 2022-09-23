@@ -8,9 +8,33 @@
             </div>
         </div>
     </div>
+    <div class="row mb-3">
+        <div class="col-md-2">
+            <a href="{{route('admin.circular.registration.create')}}" class="btn btn-info w-100">दर्ता गर्नुहोस</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.circular.dispatch.create')}}" class="btn btn-primary w-100">चलानी गर्नुहोस</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.listRegistrations.listRegistration.create')}}" class="btn btn-secondary w-100">मौजुदा
+                सुची दर्ता</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.executiveMeeting.wardMeetingNotice.create')}}" class="btn btn-success  w-100">कार्यपालिका
+                बैठक पेश गर्नुहोस</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.grievanceHandling.grievanceDetail.index')}}"
+               class="btn btn-warning text-white w-100">गुनासो विवरण</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{{route('admin.digitalBoard.notice.create','Notice')}}" class="btn btn-info w-100">सूचना
+                थप्नुहोस</a>
+        </div>
+    </div>
 
     <div class="row">
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -32,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -54,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -76,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -98,7 +122,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -120,7 +144,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -142,7 +166,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -164,7 +188,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -186,7 +210,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -208,7 +232,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -230,7 +254,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -242,8 +266,8 @@
                                 <h3 class="text-dark mt-1">
                                     {{$municipal_meetings_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा पालिका बैठकहरु">
-                                    जम्मा पालिका बैठकहरु
+                                <p class="text-muted mb-1 text-truncate" title="जम्मा कार्यपालिका बैठकहरु">
+                                    जम्मा कार्यपालिका बैठकहरु
                                 </p>
                             </div>
                         </div>
@@ -252,7 +276,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
                 <div class="card-body">
                     <div class="row">
@@ -264,11 +288,104 @@
                                 <h3 class="text-dark mt-1">
                                     {{$ward_meetings_count}}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate" title=" जम्मा वडा बैठकहरु">
-                                    जम्मा वडा बैठकहरु
+                                <p class="text-muted mb-1 text-truncate" title=" जम्मा वडा समितिका बैठकहरु">
+                                    जम्मा वडा समितिका बैठकहरु
                                 </p>
                             </div>
                         </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+            <div class="widget-rounded-circle card">
+                <div class="card-header">
+                    प्रकार अनुसार गुनासोको विवरण
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>क्र.सं</th>
+                                <th>प्रकार</th>
+                                <th>संख्या</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($grievanceTypes as $grievanceType)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$grievanceType->title}}</td>
+                                    <td>{{$grievanceType->grievance_details_count}}</td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-8">
+            <div class="widget-rounded-circle card">
+                <div class="card-header">
+                   गुनासोको विवरण
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-sm mb-0 table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>टोकन</th>
+                                <th>गुनासोको प्रकार</th>
+                                <th> गुनासोको शिर्षक</th>
+                                <th> गुनासो प्रकाशन मिति</th>
+                                <th> गुनासो गम्भीरता</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($unseen_grievances as $grievanceDetail)
+                                <tr>
+                                    <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$grievanceDetail->token}}</td>
+                                    <td>{{$grievanceDetail->grievanceType->title??''}}</td>
+                                    <td>{{$grievanceDetail->subject}}</td>
+                                    <td>{{$grievanceDetail->created_at->toDateString()}}</td>
+                                    <td>
+                                        @switch($grievanceDetail->complaint_severity)
+                                            @case('High priority')
+                                                उच्च प्राथमिकता
+                                                @break
+                                            @case('Priority')
+                                                प्राथमिकता
+                                                @break
+                                            @default
+                                                साधारण
+                                        @endswitch
+                                    </td>
+
+                                    <td>
+                                        <a href="{{route('admin.grievanceHandling.grievanceDetail.show',$grievanceDetail)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>

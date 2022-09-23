@@ -18,4 +18,13 @@ class UpdateImportantLinkRequest extends FormRequest
             'link_url' => ['required', 'url']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'link_title.required' => 'शीर्षक आवश्यक छ',
+            'link_url.required' => 'url आवश्यक छ',
+            'link_url.url' => 'url फर्ममा हुनुपर्छ '
+        ];
+    }
 }

@@ -28,7 +28,7 @@
             /*width: 70%;*/
             padding: 10px;
             margin: 10px 0;
-            height: 150px;
+            height: 200px;
         }
 
         .darker {
@@ -74,51 +74,83 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">
-                            <h4 class="header-title">बिषय : {{$grievanceDetail->subject}}</h4>
-                            <h4 class="header-title">शाखा : {{$grievanceDetail->grievanceOffice->title??''}}</h4>
-                            <h4>
-                                स्थिति:
-                                <form class="form-inline"
-                                      action="{{route('admin.grievanceHandling.grievanceDetail.updateStatus',$grievanceDetail->id)}}"
-                                      method="post">
-                                    @method('put')
-                                    @csrf
-                                    <div class="form-group mb-2">
-                                        <select name="status" id="grievanceDetailStatus" class="form-control"
-                                                style="width: 150px;">
-                                            @foreach(config('defaults.status') as $key=> $status)
-                                                <option
-                                                    value="{{$status}}" {{$status==$grievanceDetail->status ? 'selected':''}}>{{$key}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mb-2">Save</button>
-                                </form>
-                            </h4>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="header-title">बिषय : {{$grievanceDetail->subject}}</h4>
+                                    <h4 class="header-title">शाखा : {{$grievanceDetail->grievanceOffice->title??''}}</h4>
+                                    <h4>
+                                        स्थिति:
+                                        <form class="form-inline"
+                                              action="{{route('admin.grievanceHandling.grievanceDetail.updateStatus',$grievanceDetail->id)}}"
+                                              method="post">
+                                            @method('put')
+                                            @csrf
+                                            <div class="form-group mb-2">
+                                                <select name="status" id="grievanceDetailStatus" class="form-control"
+                                                        style="width: 150px;">
+                                                    @foreach(config('defaults.status') as $key=> $status)
+                                                        <option
+                                                            value="{{$status}}" {{$status==$grievanceDetail->status ? 'selected':''}}>{{$key}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary mb-2">Save</button>
+                                        </form>
+                                    </h4>
 
+                                </div>
+                                <div class="col-md-6">
+                                    <h4>
+                                        प्रयोग कर्ता
+                                    </h4>
+                                    {{$grievanceDetail->grievanceUser->name??''}}<br>
+                                    {{$grievanceDetail->grievanceUser->email??''}}<br>
+                                    {{$grievanceDetail->grievanceUser->phone??''}}<br>
+                                    {{$grievanceDetail->grievanceUser->address??''}}
+                                    <h4>गुनासो गम्भीरता :
+                                        @switch($grievanceDetail->complaint_severity)
+                                            @case('High priority')
+                                                उच्च प्राथमिकता
+                                                @break
+                                            @case('Priority')
+                                                प्राथमिकता
+                                                @break
+                                            @default
+                                                साधारण
+                                        @endswitch
+                                    </h4>
+                                </div>
+                                <div class="col-md-12">
+                                    <form enctype="multipart/form-data"
+                                          action="{{route('admin.grievanceHandling.grievanceDetail.replyGrievance',$grievanceDetail->id)}}"
+                                          method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="description">बिवरण</label>
+                                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"
+                                                      placeholder="बिवरण">{{old('description')}}</textarea>
+                                            @error('description')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="files">डकुमेन्ट</label>
+                                            <input type="file" name="files[]" class="form-control" multiple>
+                                            @error('files.*')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                            @error('files')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary mb-2 mt-4">Save</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-3">
-                            <h4>
-                                प्रयोग कर्ता
-                            </h4>
-                            {{$grievanceDetail->grievanceUser->name??''}}<br>
-                            {{$grievanceDetail->grievanceUser->email??''}}<br>
-                            {{$grievanceDetail->grievanceUser->phone??''}}<br>
-                            {{$grievanceDetail->grievanceUser->address??''}}
-                            <h4>गुनासो गम्भीरता :
-                                @switch($grievanceDetail->complaint_severity)
-                                    @case('High priority')
-                                        उच्च प्राथमिकता
-                                        @break
-                                    @case('Priority')
-                                        प्राथमिकता
-                                        @break
-                                    @default
-                                        साधारण
-                                @endswitch
-                            </h4>
-                        </div>
+
                         <div class="col-md-6">
                             <div class="message">
                                 <img src="{{asset('assets/backend/images/user_icon.jpg')}}" alt="Avatar" style="width:100%;">
@@ -142,31 +174,7 @@
 
                         </div>
                     </div>
-                    <form enctype="multipart/form-data"
-                          action="{{route('admin.grievanceHandling.grievanceDetail.replyGrievance',$grievanceDetail->id)}}"
-                          method="post">
-                        @csrf
-                        <div class="form-group">
-                            <label for="description">बिवरण</label>
-                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"
-                                      placeholder="बिवरण">{{old('description')}}</textarea>
-                            @error('description')
-                            <p class="text-danger">{{$message}}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="files">डकुमेन्ट</label>
-                            <input type="file" name="files[]" class="form-control" multiple>
-                            @error('files.*')
-                            <p class="text-danger">{{$message}}</p>
-                            @enderror
-                            @error('files')
-                            <p class="text-danger">{{$message}}</p>
-                            @enderror
-                        </div>
 
-                        <button type="submit" class="btn btn-primary mb-2 mt-4">Save</button>
-                    </form>
 
 
                 </div>

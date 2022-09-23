@@ -11,40 +11,50 @@
                 </div>
                 <div class="row bg-card shadow rounded overflow-hidden">
                     <div class="d-flex justify-content-start">
-                        <h4 class="text-center mt-5">गुनासो विषय: something</h4>
+                        <h4 class="text-center mt-5">गुनासो विषय: {{$grievanceDetail->subject}}</h4>
                     </div>
-                    <div class="col-md-7"><p>गुनासो प्रकार: something</p></div>
-                    <div class="col-md-5"><p>सम्वन्धित शाखा: something</p></div>
-                    <div>आवेदक नम्बर: 02012310255</div>
+                    <div class="col-md-7"><p>गुनासो प्रकार: {{$grievanceDetail->grievanceType->title??''}}</p></div>
+                    <div class="col-md-5"><p>सम्वन्धित शाखा: {{$grievanceDetail->grievanceOffice->title??''}}</p></div>
+                    <div>आवेदक नम्बर: {{$grievanceDetail->grievanceUser->phone??''}}</div>
                     <div class=" row mt-4 border rounded mx-auto">
                         <div class=" single-grievance-details  d-flex px-3 py-2">
                             <img src="{{asset('assets/frontend/image/avatar.png')}}"
                                  class="img-fluid rounded-circle mt-1" alt="">
-                            <p>सीमा पर्खाल नियमित गर्ने तथा अनधिकृत सीमा पर्खाल हटाउने सम्बन्धी काठमाडौं महानगरपालिकाको
-                                सूचना !</p>
+                            <p>{{$grievanceDetail->description}}</p>
                         </div>
                         <hr>
                         <div class="row">
+                            @foreach($grievanceDetail->files as $file)
                             <div class="col-md-3 grievance-doc-img">
-                                <img src="{{asset('assets/frontend/image/agri4.jpg')}}" class="img-fluid rounded mb-2"
+
+                                <img src="{{$file->file_url}}" class="img-fluid rounded mb-2"
                                      alt="">
+
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row mt-4 mb-2 border rounded mx-auto">
+                        @foreach($grievanceDetail->grievanceDetails as $details)
                         <div class=" single-grievance-details px-3 pt-2 d-flex justify-content-end">
-                            <p>सीमा पर्खाल नियमित गर्ने तथा अनधिकृत सीमा पर्खाल हटाउने सम्बन्धी काठमाडौं महानगरपालिकाको
+                            <p>{{$details->description}}
                             </p>
                             <img src="{{asset('assets/frontend/image/avatar.png')}}"
                                  class="img-fluid rounded-circle mt-1 rounded" alt="">
                         </div>
                         <hr>
                         <div class=" row container-fluid">
+                            @foreach($details->files as $detailFile)
                             <div class="col-md-3 grievance-doc-img">
-                                <img src="{{asset('assets/frontend/image/agri4.jpg')}}" class="img-fluid rounded mb-2"
+
+                                <img src="{{$detailFile->file_url}}" class="img-fluid rounded mb-2"
                                      alt="">
+
                             </div>
+                            @endforeach
+                                <hr>
                         </div>
+                        @endforeach
                     </div>
 {{--                    <div class="reply mx-auto mt-5">--}}
 {{--                        <form action="" class="mb-3">--}}
