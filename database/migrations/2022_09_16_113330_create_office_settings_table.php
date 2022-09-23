@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('fiscal_year_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('ward_no')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();

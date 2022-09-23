@@ -36,7 +36,8 @@ class OfficeSetting extends Model
         'email',
         'website',
         'facebook_link',
-        'introduction'
+        'introduction',
+        'fiscal_year_id'
     ];
 
     public function setLogoAttribute($value)
@@ -116,5 +117,10 @@ class OfficeSetting extends Model
     public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 }
