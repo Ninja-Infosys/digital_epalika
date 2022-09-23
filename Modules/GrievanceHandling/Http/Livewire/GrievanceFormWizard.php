@@ -2,10 +2,13 @@
 
 namespace Modules\GrievanceHandling\Http\Livewire;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
+use Modules\GrievanceHandling\Entities\GrievanceUser;
 
 class GrievanceFormWizard extends Component
 {
@@ -42,7 +45,7 @@ class GrievanceFormWizard extends Component
         'form.subject' => ['required']
     ];
     protected array $secondStepValidations = [
-        'form.password' => ['nullable'],
+        'form.password' => ['required_if:is_password,1'],
         'form.password_confirmation' => ['nullable', 'confirmed'],
         'form.is_open' => ['nullable', 'boolean'],
         'form.name' => ['required'],
@@ -75,7 +78,7 @@ class GrievanceFormWizard extends Component
             }
             default:
             {
-                return $this->firstStepValidations;
+                return array_merge($this->firstStepValidations, $this->secondStepValidations);
             }
         }
     }
@@ -91,7 +94,45 @@ class GrievanceFormWizard extends Component
         $this->currentStep = $step;
     }
 
-    public function messages()
+    public function submitForm()
+    {
+        $this->validate();
+        DB::transaction(function () {
+            $grievanceUser = GrievanceUser::where('email', $this->form['email'])->first();
+            if (empty($grievanceUser)) {
+                $grievanceUser = GrievanceUser::create([
+                    'name' => $this->form['name'],
+                    'email' => $this->form['email'],
+                    'phone' => $this->form['phone'],
+                    'address' => $this->form['address'],
+                    'password' => $this->form['password'] ?? ""
+                ]);
+            }
+
+            $grievanceDetail = $grievanceUser->grievanceDetails()->create([
+                'token' => time(),
+                'grievance_type_id' => $this->form['grievance_type_id'],
+                'description' => $this->form['description'],
+                'grievance_office_id' => $this->form['grievance_office_id'],
+                'complaint_severity' => $this->form['complaint_severity'],
+                'subject' => $this->form['subject'],
+                'is_open' => $this->form['is_open'],
+            ]);
+            foreach ($this->form['files'] as $file) {
+                $grievanceDetail->files()->create([
+                    'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                    'extension' => $file->getClientOriginalExtension(),
+                    'file' => $file->store('grievance/files/' . Str::slug($grievanceUser->name, '_'), 'public'),
+                ]);
+            }
+        });
+
+        $this->reset('form', 'currentStep', 'is_password');
+        dd('success');
+
+    }
+
+    public function messages(): array
     {
         return [
             'form.grievance_type_id.required' => ['grievance type is required']
