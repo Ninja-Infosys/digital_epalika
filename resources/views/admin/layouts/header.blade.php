@@ -8,7 +8,7 @@
                 <iframe class="text-white" scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=ffffff&aj_time=yes&font_size=14&line_brake=1&api=392199m324" width="195" height="45"></iframe>
             </li>
             <li class="nav-link">
-                <h4 class="text-white pt-3">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title}}</h4>
+                <h4 class="text-white pt-3">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             <li class="d-none d-lg-block">
                 <form class="app-search">
                     <div class="app-search-box dropdown">
