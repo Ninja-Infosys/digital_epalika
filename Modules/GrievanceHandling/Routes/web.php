@@ -19,3 +19,4 @@ Route::view('/policy','grievancehandling::frontend.policy.policy')->name('policy
 Route::view('grievance-register','grievancehandling::frontend.register.register-form')->name('grievance-register');
 Route::view('/track','grievancehandling::frontend.track.track')->name('track');
 Route::view('/public-grievance','grievancehandling::frontend.grievance-public.public-grievance')->name('public-grievance');
+Route::view('/grievance-list','grievancehandling::frontend.grievance-list.grievance-list')->name('grievance-list');
