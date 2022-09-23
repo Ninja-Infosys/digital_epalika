@@ -28,4 +28,16 @@ class FrontController extends Controller
 
         return view('frontend.home', compact('employees', 'notices', 'newses', 'meetingDetails', 'sliders', 'municipalDetails'));
     }
+
+    public function notice()
+    {
+        $notices = Notice::where('type', 'Notice')->orderBy('date')->get();
+        return view('frontend.static.notice.index', compact('notices'));
+    }
+
+    public function singleNotice(Notice $notice)
+    {
+        $notice->load('files');
+        return view('frontend.static.notice.single-notice', compact('notice'));
+    }
 }
