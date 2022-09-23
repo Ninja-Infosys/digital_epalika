@@ -5,45 +5,36 @@
             <div class="col-md-7">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://myrepublica.nagariknetwork.com/uploads/media/2019/August/Bageshwori%20temple.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>वगेस्वोरी मन्दिर</h5>
-                                <p>The whole caption will only show up if the screen is at least medium size.</p>
+                        @foreach($sliders as $slider)
+                            <div class="carousel-item {{$loop->first ? 'active' : ''}}">
+                                <img
+                                    src="{{$slider->image_url}}"
+                                    class="d-block w-100" alt="{{$slider->title}}">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{$slider->title}}</h5>
+                                    <p>{{$slider->description}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('assets/frontend/image/submetro.jpg')}}" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>नेपालगन्ज उप-महानगरपालिका</h5>
-                                <p>The whole caption will only show up if the screen is at least medium size.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('assets/frontend/image/border.jpg')}}"
-                                 alt="Third slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>बिरेन्द्र चोक</h5>
-                                <p>The whole caption will only show up if the screen is at least medium size.</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
                     </button>
-                  </div>
+                </div>
             </div>
             <div class="col-md-5 intro-col mt-1">
                 <div class="card-01 introduction  bg-card shadow rounded">
                     <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
                     <h6 class="fw-normal lh-lg">
                         {!! Str::words(strip_tags($officeSetting->introduction),100) !!}
-                        </h6>
+                    </h6>
                     <div class="d-flex justify-content-end">
                         <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
                     </div>
@@ -58,7 +49,8 @@
                 @foreach($employees as $employee)
                     <div class="card-02 col-md-4 mb-2 px-3">
                         <div class="card shadow text-center">
-                            <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{$employee->photo_url}}" alt="{{$employee->name}}">
+                            <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{$employee->photo_url}}"
+                                 alt="{{$employee->name}}">
                             <div class="card-body p-0 m-0">
                                 <div class="card-description ">
                                     <h5 class="card-title mt-5">{{$employee->name}}</h5>
@@ -91,7 +83,8 @@
                             </li>
                         @endforeach
 
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        </button>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -107,7 +100,8 @@
 
                             </li>
                         @endforeach
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        </button>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -123,7 +117,8 @@
 
                             </li>
                         @endforeach
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        </button>
                     </ul>
                 </div>
             </div>
@@ -267,8 +262,8 @@
     @endpush
     @push('scripts')
     @endpush
- @push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/home/home.css')}}">
-@endpush
+    @push('styles')
+        <link rel="stylesheet" href="{{asset('assets/frontend/css/home/home.css')}}">
+    @endpush
 
 @endsection

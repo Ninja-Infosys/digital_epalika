@@ -6,21 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MunicipalDetail extends Model
+class ImportantLink extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory,SoftDeletes;
 
-    protected $dates = [
+    protected $dates=[
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
-    protected $fillable = [
-        'title',
-        'icon',
-        'count',
-        'bg_color',
-        'position'
+    protected $fillable=[
+
     ];
 }
