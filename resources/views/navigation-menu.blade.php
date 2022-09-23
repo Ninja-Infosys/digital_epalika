@@ -173,10 +173,7 @@
                 <form method="POST" action="{{ route('logout') }}" x-data>
                     @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
-                    </x-jet-responsive-nav-link>
+                    <a href="#">Log Out <i class="ti-shift-left"></i></a>
                 </form>
 
                 <!-- Team Management -->
