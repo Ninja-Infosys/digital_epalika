@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\GrievanceHandling\Http\Controllers\Setting\{GrievanceTypeController};
 use Modules\GrievanceHandling\Http\Controllers\GrievanceDetailController;
+use Modules\GrievanceHandling\Http\Controllers\GrievanceUserController;
 use Modules\GrievanceHandling\Http\Controllers\Setting\GrievanceOfficeController;
 
 Route::prefix('setting')->as('setting.')->group(function () {
@@ -12,3 +13,4 @@ Route::prefix('setting')->as('setting.')->group(function () {
 });
 
 Route::resource('grievanceDetail', GrievanceDetailController::class);
+Route::resource('grievanceUser', GrievanceUserController::class)->only('index');
