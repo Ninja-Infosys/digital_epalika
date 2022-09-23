@@ -5,6 +5,7 @@ namespace Modules\GrievanceHandling\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 
@@ -17,8 +18,8 @@ class GrievanceDetailController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        $grievanceDetails = GrievanceDetail::with('grievanceType')->paginate(10);
-        return view('grievancehandling::admin.grievanceDetail.index',compact('grievanceDetails'));
+        $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->paginate(10);
+        return view('grievancehandling::admin.grievanceDetail.index', compact('grievanceDetails'));
     }
 
     public function create()
@@ -38,13 +39,16 @@ class GrievanceDetailController extends Controller
         );
     }
 
-    public function show($id)
+    public function show(GrievanceDetail $grievanceDetail)
     {
         abort_if(Gate::denies('grievanceDetail_access'),
             403,
             'You are not allowed to access this resource'
         );
-        return view('grievancehandling::show');
+        $grievanceDetail->load('grievanceDetails', 'grievanceType',
+            'grievanceOffice',
+            'files');
+        return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail',));
     }
 
     public function edit($id)
@@ -70,5 +74,43 @@ class GrievanceDetailController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+    }
+
+    public function updateStatus(Request $request, GrievanceDetail $grievanceDetail)
+    {
+        $grievanceDetail->update([
+            'status' => $request->input('status')
+        ]);
+        toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function replayGrievance(Request $request, GrievanceDetail $grievanceDetail)
+    {
+
+        $validated = $request->validate([
+            'description' => ['required'],
+            'files.*' => ['mimes:png,jpeg,jpg'],
+            'files' => ['array', 'nullable']
+        ]);
+
+        DB::transaction(function () use ($request, $validated, $grievanceDetail) {
+            $data = $grievanceDetail->grievanceDetails()->create($validated + [
+                    'user_id' => auth()->id()
+                ]);
+
+            foreach ($request->file('files') as $file) {
+                $data->files()->create([
+                    'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                    'extension' => $file->getClientOriginalExtension(),
+                    'file' => $file->store('grievanceDocument/documents', 'public')
+                ]);
+            }
+        });
+
+        toast('सफलतापूर्वक थपियो', 'success');
+        return back();
+
+
     }
 }

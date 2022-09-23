@@ -13,4 +13,6 @@ Route::prefix('setting')->as('setting.')->group(function () {
 });
 
 Route::resource('grievanceDetail', GrievanceDetailController::class);
+Route::post('grievanceDetail/{grievanceDetail}/replayGrievance',[GrievanceDetailController::class,'replayGrievance'])->name('grievanceDetail.replyGrievance');
+Route::put('grievanceDetail/{grievanceDetail}/UpdateStatus', [GrievanceDetailController::class,'updateStatus'])->name('grievanceDetail.updateStatus');
 Route::resource('grievanceUser', GrievanceUserController::class)->only('index');

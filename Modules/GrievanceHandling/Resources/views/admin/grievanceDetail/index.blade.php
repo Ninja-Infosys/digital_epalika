@@ -13,10 +13,10 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.grievanceHandling.grievanceDetail.index')}}">गुनासो बिबरण </a>
                         </li>
-                        <li class="breadcrumb-item active">गुनासो बिबरण   </li>
+                        <li class="breadcrumb-item active">गुनासो बिबरण</li>
                     </ol>
                 </div>
-                <h4 class="page-title">गुनासो बिबरण   </h4>
+                <h4 class="page-title">गुनासो बिबरण </h4>
             </div>
         </div>
     </div>
@@ -35,11 +35,12 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>गुनासोको प्रकार </th>
+                                <th>टोकन</th>
+                                <th>गुनासोको प्रकार</th>
+                                <th> गुनासोको शिर्षक</th>
+                                <th> गुनासो प्रकाशन मिति</th>
+                                <th> गुनासो गम्भीरता</th>
                                 <th> गुनासोको अवस्था</th>
-                                <th> जम्मा</th>
-                                <th> पुरा बिवरण</th>
-                                <th> कैफियत</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -47,29 +48,42 @@
                             @forelse($grievanceDetails as $grievanceDetail)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$grievanceDetail->token}}</td>
                                     <td>{{$grievanceDetail->grievanceType->title??''}}</td>
-                                    <td>{{$grievanceDetail->complaint_severity}}</td>
-                                    <td></td>
+                                    <td>{{$grievanceDetail->subject}}</td>
+                                    <td>{{$grievanceDetail->created_at->toDateString()}}</td>
                                     <td>
-                                        <a href="{{route('admin.grievanceHandling.grievanceDetail.edit',$grievanceDetail)}}"
+                                        @switch($grievanceDetail->complaint_severity)
+                                            @case('High priority')
+                                                उच्च प्राथमिकता
+                                                @break
+                                            @case('Priority')
+                                                प्राथमिकता
+                                                @break
+                                            @default
+                                                साधारण
+                                        @endswitch
+                                        </td>
+                                    <td>
+                                        @switch($grievanceDetail->status)
+                                            @case('Replied')
+                                                जवाफ दिएको
+                                                @break
+                                            @case('Investigated')
+                                                अनुसन्धान
+                                                @break
+                                            @case('Closed')
+                                                बन्द गरिएको
+                                                @break
+                                            @default
+                                                नहेरेको
+                                        @endswitch
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.grievanceHandling.grievanceDetail.show',$grievanceDetail)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                    </td>
-                                    <td></td>
-                                    <td>
-{{--                                        <a href="{{route('admin.grievanceHandling.setting.grievanceType.edit',$grievance_type)}}"--}}
-{{--                                           class="btn btn-xs btn-outline-primary">--}}
-{{--                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्--}}
-{{--                                        </a>--}}
-{{--                                        <form action="{{route('admin.grievanceHandling.setting.grievanceType.destroy',$grievance_type)}}"--}}
-{{--                                              method="post">--}}
-{{--                                            @csrf--}}
-{{--                                            @method('delete')--}}
-{{--                                            <button class="btn btn-xs btn-outline-danger show_confirm">--}}
-{{--                                                <i class="fa fa-trash"></i> मेटाउनु होस्--}}
-{{--                                            </button>--}}
-{{--                                        </form>--}}
                                     </td>
                                 </tr>
                             @empty
