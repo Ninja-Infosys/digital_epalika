@@ -141,12 +141,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <iframe src="https://sthaniya.gov.np/gis" style="height:200px;width:100%;" title="Iframe Example"></iframe>
+                    <iframe src="https://sthaniya.gov.np/gis" style="height:250px;width:100%;" title="Iframe Example"></iframe>
                 </div>
                 <div class="col-md-6">
                     <div class="row align-content-stretch">
                         @foreach($municipalDetails as $municipalDetail)
-                            <div class="col-md-3 p-1 detail bg-primary">
+                            <div class="col-md-3 p-1 detail " style="background-color: {{$municipalDetail->bg_color}}">
                                 <div class="text-center py-1">
                                     {!! $municipalDetail->icon !!}
                                     <h4 class="text-white m-0">
