@@ -3,6 +3,7 @@
 namespace Modules\GrievanceHandling\Http\Livewire;
 
 use Livewire\Component;
+use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 
 class GrievanceFormWizard extends Component
