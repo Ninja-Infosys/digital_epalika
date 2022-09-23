@@ -5,51 +5,36 @@
             <div class="col-md-7">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://myrepublica.nagariknetwork.com/uploads/media/2019/August/Bageshwori%20temple.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>वगेस्वोरी मन्दिर</h5>
-                                <p>The whole caption will only show up if the screen is at least medium size.</p>
+                        @foreach($sliders as $slider)
+                            <div class="carousel-item {{$loop->first ? 'active' : ''}}">
+                                <img
+                                    src="{{$slider->image_url}}"
+                                    class="d-block w-100" alt="{{$slider->title}}">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{$slider->title}}</h5>
+                                    <p>{{$slider->description}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{asset('assets/frontend/image/submetro.jpg')}}" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>नेपालगन्ज उप-महानगरपालिका</h5>
-                                <p>The whole caption will only show up if the screen is at least medium size.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('assets/frontend/image/border.jpg')}}"
-                                 alt="Third slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>बिरेन्द्र चोक</h5>
-                                <p>The whole caption will only show up if the screen is at least medium size.</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
                     </button>
-                  </div>
+                </div>
             </div>
             <div class="col-md-5 intro-col mt-1">
                 <div class="card-01 introduction  bg-card shadow rounded">
                     <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
-                    <h6 class="fw-normal lh-lg"><strong>पृष्ठभूमि </strong> लुम्बिनी प्रदेशको पश्चिम तर्फ र साविक
-                        मध्यपश्चिमाञ्चल बिकास क्षेत्रको केन्द्र बिन्दुको रुपमा रहेको प्रमुख ब्यापारिक केन्द्र
-                        तथा लुम्बिनी प्रदेश अन्तर्गत्का १२ जिल्लाहरु मध्ये सवैभन्दा महत्वपूर्ण जिल्ला मध्ये बाँके
-                        जिल्लाको सदरमुकामको रुपमा रहेको उप–महानगरपालिका हो ।
-                        शहर बाँके जिल्लामा अवस्थित पश्चिम नेपालको द्धार, नेपालगञ्ज नगरी, नेपालकै नामबाट स्थापना भएको
-                        प्रमुख शहरको रुपमा परिचित स्थान हो ।
-                        यो शहर बिक्रम सम्बत २०१७ सालमा नेपालगञ्ज नगर पञ्चायतका नामबाट स्थापना भई २०१९ सालमा नगरपालिकाको
-                        रुपमा स्थापित भएको हो ।
-                        </h6>
+                    <h6 class="fw-normal lh-lg">
+                        {!! Str::words(strip_tags($officeSetting->introduction),100) !!}
+                    </h6>
                     <div class="d-flex justify-content-end">
                         <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
                     </div>
@@ -61,45 +46,23 @@
     <section class="avatar-section mt-5">
         <div class="container bg-card card  rounded">
             <div class="row ">
-                <div class="card-02 col-md-4 mb-2 px-3">
-                    <div class="card shadow text-center">
-                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{asset('assets/frontend/image/avatar.png')}}" alt="">
-                        <div class="card-body p-0 m-0">
-                            <div class="card-description ">
-                                <h5 class="card-title mt-5">नगर प्रमुखको नाम</h5>
-                                <h6 class="card-title ">नगर प्रमुख</h6>
-                                <p>example@gmail.com</p>
-                                <p>९८१२३४५६७८</p>
+                @foreach($employees as $employee)
+                    <div class="card-02 col-md-4 mb-2 px-3">
+                        <div class="card shadow text-center">
+                            <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{$employee->photo_url}}"
+                                 alt="{{$employee->name}}">
+                            <div class="card-body p-0 m-0">
+                                <div class="card-description ">
+                                    <h5 class="card-title mt-5">{{$employee->name}}</h5>
+                                    <h6 class="card-title ">{{$employee->designation}}</h6>
+                                    <p>{{$employee->email}}</p>
+                                    <p>{{$employee->phone}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-02 px-3 col-md-4 mb-2">
-                    <div class="card shadow text-center">
-                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{asset('assets/frontend/image/avatar.png')}}" alt="">
-                        <div class="card-body p-0 m-0">
-                            <div class="card-description ">
-                                <h5 class="card-title mt-5">नगर उप-प्रमुखको नाम</h5>
-                                <h6 class="card-title">उप-प्रमुख</h6>
-                                <p>example@gmail.com</p>
-                                <p>९८१२३४५६७८</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class=" card-02 px-3 col-md-4">
-                    <div class="card shadow text-center">
-                        <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{asset('assets/frontend/image/avatar.png')}}" alt="">
-                        <div class="card-body p-0 m-0">
-                            <div class="card-description ">
-                                <h5 class="card-title mt-5">प्रमुख प्रशासकिय अधिकृत नाम</h5>
-                                <h6 class="card-title">प्रमुख प्रशासकिय अधिकृत</h6>
-                                <p>example@gmail.com</p>
-                                <p>९८१२३४५६७८</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
     </section>
@@ -111,22 +74,17 @@
                         <p class="mb-0 text-white fs-5">सुचनाहरु</p>
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                        @foreach($notices as $notice)
+                            <li class="list-group-item">
+                                <i class="fa fa-angle-right"></i>
+                                <a href="">{{Str::words($notice->title,12)}}</a>
+                                <span><small>{{$notice->date->toDateString()}}</small></span>
+
+                            </li>
+                        @endforeach
+
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        </button>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -134,22 +92,16 @@
                         <p class="mb-0 text-white fs-5">कार्यपालिका बोर्ड निर्णय </p>
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                        @foreach($newses as $news)
+                            <li class="list-group-item">
+                                <i class="fa fa-angle-right"></i>
+                                <a href="">{{Str::words($news->title,12)}}</a>
+                                <span><small>{{$news->date->toDateString()}}</small></span>
+
+                            </li>
+                        @endforeach
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        </button>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -157,22 +109,16 @@
                         <p class="mb-0 text-white fs-5">समचारहरु</p>
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa fa-angle-right"></i>
-                            <a href="">नेपालगञ्जमा समुदायमा डेंगी भेटिएपछि लामखुट्टेका लार्भा नष्ट गरिदैं !!</a>
-                            <span><small>-2079-03-05</small></span>
-                        </li>
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i></button>
+                        @foreach($meetingDetails as $meetingDetail)
+                            <li class="list-group-item">
+                                <i class="fa fa-angle-right"></i>
+                                <a href="">{{Str::words($news->subject,12)}}</a>
+                                <span><small>{{$news->date->toDateString()}}</small></span>
+
+                            </li>
+                        @endforeach
+                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        </button>
                     </ul>
                 </div>
             </div>
@@ -188,6 +134,10 @@
                 </div>
             </div>
         </div>
+    </section>
+
+
+    <section class="tab-section mt-3">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -265,7 +215,7 @@
                             <h6 class="card-subtitle mb-2 text-muted"></h6>
                             <div class="map">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3521.2489937123523!2d81.61191651452778!3d28.04742101707261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399867a9e458155b%3A0xb3a9de606a21f9a0!2sNinja%20Infosys%20Pvt.%20Ltd.!5e0!3m2!1sen!2snp!4v1663319352634!5m2!1sen!2snp"
+                                    src="{{$officeSetting->google_map}}"
                                     width="100%" height="400px" style="border:0;" allowfullscreen="" loading="lazy"
                                     referrerpolicy="no-referrer-when-downgrade">
 
@@ -281,7 +231,7 @@
                             <h6 class="card-subtitle mb-2 text-muted"></h6>
                             <div class="facebook-page">
                                 <iframe
-                                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Finfosysninja&tabs=timeline&width=340&height=400&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId"
+                                    src="{{$officeSetting->facebook_link}}"
                                     width="340" height="400"
                                     style="border:none;overflow:hidden" scrolling="no" frameborder="0"
                                     allowfullscreen="true"
@@ -297,7 +247,7 @@
                             <h6 class="card-subtitle mb-2 text-muted"></h6>
                             <div class="twitter">
                                 <a class="twitter-timeline" data-height="400"
-                                   href="https://twitter.com/NinjaPvt?ref_src=twsrc%5Etfw">Tweets
+                                   href="{{$officeSetting->website}}">Tweets
                                     by NinjaPvt</a>
                                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                             </div>
@@ -307,8 +257,13 @@
             </div>
         </div>
     </section>
- @push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/home/home.css')}}">
-@endpush
+
+    @push('styles')
+    @endpush
+    @push('scripts')
+    @endpush
+    @push('styles')
+        <link rel="stylesheet" href="{{asset('assets/frontend/css/home/home.css')}}">
+    @endpush
 
 @endsection
