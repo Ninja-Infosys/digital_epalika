@@ -55,6 +55,24 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
+                                    <label for="fiscal_year_id" class="form-label">चालु आ.व. </label>
+                                    <select
+                                        name="fiscal_year_id"
+                                        class="form-select @error('fiscal_year_id') is-invalid @enderror"
+                                        id="fiscal_year_id">
+                                        <option value="">आ.व. छान्नुहोस्</option>
+                                        @foreach($fiscalYears as $fiscalYear)
+                                            <option
+                                                value="{{$fiscalYear->id}}" {{$officeSetting->fiscal_year_id == $fiscalYear->id ? 'selected':''}}>
+                                                {{$fiscalYear->title}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('fiscal_year_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
                                     <img src="{{$officeSetting->logo_url}}" height="60" alt="">
                                     <label for="logo" class="form-label">लोगो १ </label>
                                     <input
@@ -69,7 +87,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <img src="{{$officeSetting->logo1_url}}" height="60" alt="">
                                     <label for="logo1" class="form-label">लोगो २</label>
                                     <input
@@ -84,7 +102,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <img src="{{$officeSetting->logo2_url}}" height="60" alt="">
                                     <label for="logo2" class="form-label">लोगो ३ </label>
                                     <input

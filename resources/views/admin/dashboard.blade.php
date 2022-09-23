@@ -301,7 +301,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12 col-xl-12">
+        <div class="col-md-12 col-xl-4">
             <div class="widget-rounded-circle card">
                 <div class="card-header">
                     प्रकार अनुसार गुनासोको विवरण
