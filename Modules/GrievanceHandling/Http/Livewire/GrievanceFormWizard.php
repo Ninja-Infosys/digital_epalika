@@ -63,6 +63,12 @@ class GrievanceFormWizard extends Component
         $this->grievanceOffices = GrievanceOffice::all();
     }
 
+    public function nextStep($step)
+    {
+        $this->validate();
+        $this->currentStep = $step;
+    }
+
     public function backStep($step)
     {
         $this->currentStep = $step;
@@ -89,12 +95,6 @@ class GrievanceFormWizard extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-    }
-
-    public function nextStep($step)
-    {
-        $this->validate();
-        $this->currentStep = $step;
     }
 
     public function submitForm()
@@ -131,8 +131,12 @@ class GrievanceFormWizard extends Component
         });
 
         $this->reset('form', 'currentStep', 'is_password');
-        dd('success');
 
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => "success",
+            'title' => "Thank You",
+            'text' => "Your Form Submitted Successfully",
+        ]);
     }
 
     public function messages(): array
@@ -155,8 +159,8 @@ class GrievanceFormWizard extends Component
 
     public function render()
     {
-        if (!empty($this->form['grievance_type_id'])){
-            $this->grievanceType=GrievanceType::find($this->form['grievance_type_id']);
+        if (!empty($this->form['grievance_type_id'])) {
+            $this->grievanceType = GrievanceType::find($this->form['grievance_type_id']);
         }
 
         return view('grievancehandling::livewire.grievance-form-wizard');

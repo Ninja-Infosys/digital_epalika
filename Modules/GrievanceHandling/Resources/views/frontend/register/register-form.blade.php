@@ -24,9 +24,6 @@
     </section>
     @push('styles')
         <style>
-            body {
-                margin-top: 40px;
-            }
 
             /*progressbar*/
             .progressbar {
@@ -97,5 +94,17 @@
             }
         </style>
         <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/register.css')}}">
+    @endpush
+    @push('scripts')
+        {{--listener for toastr--}}
+        <script>
+            window.addEventListener('alert_message', event => {
+                toastr[event.detail.type](event.detail.message,
+                    event.detail.title ?? ''), toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                }
+            });
+        </script>
     @endpush
 @endsection
