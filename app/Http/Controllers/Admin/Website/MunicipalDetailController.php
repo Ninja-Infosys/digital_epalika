@@ -24,7 +24,10 @@ class MunicipalDetailController extends Controller
 
     public function store(StoreMunicipalDetailRequest $request)
     {
-        //
+        MunicipalDetail::create($request->validated());
+
+        toast('नगरपालिका विवरण सफलतापूर्वक थपियो','success');
+        return back();
     }
 
     public function show(MunicipalDetail $municipalDetail)
@@ -34,16 +37,22 @@ class MunicipalDetailController extends Controller
 
     public function edit(MunicipalDetail $municipalDetail)
     {
-        //
+        return view('admin.website.municipal_detail.edit',compact('municipalDetail'));
     }
 
     public function update(UpdateMunicipalDetailRequest $request, MunicipalDetail $municipalDetail)
     {
-        //
+        $municipalDetail->update($request->validated());
+
+        toast('नगरपालिका विवरण सफलतापूर्वक अपडेट गरियो','success');
+        return redirect(route('admin.website.municipalDetail.index'));
     }
 
     public function destroy(MunicipalDetail $municipalDetail)
     {
-        //
+        $municipalDetail->delete();
+
+        toast('नगरपालिका विवरण सफलतापूर्वक मेटाइयो', 'success');
+        return back();
     }
 }

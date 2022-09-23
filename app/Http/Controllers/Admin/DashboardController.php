@@ -12,6 +12,7 @@ use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
+use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
 use Nwidart\Modules\Facades\Module;
 
@@ -25,13 +26,15 @@ class DashboardController extends Controller
         $news_count = Notice::where('type', 'News')->count();
         $registration_count = Registration::count();
         $dispatch_count = Dispatch::count();
-        $unseen_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Unseen')->count();
+        $unseen_grievance = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Unseen');
+        $unseen_grievances = $unseen_grievance->limit(5)->get();
+        $unseen_grievance_count = $unseen_grievance->count();
         $replied_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Replied')->count();
         $investigated_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Investigated')->count();
         $closed_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Closed')->count();
         $ward_meetings_count = MeetingDetail::where('model_type', WardMeetingNotice::class)->count();
         $municipal_meetings_count = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->count();
-
+        $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
 
         return view('admin.dashboard', compact(['user_count',
             'grievance_user_count',
@@ -44,7 +47,9 @@ class DashboardController extends Controller
             'investigated_grievance_count',
             'closed_grievance_count',
             'municipal_meetings_count',
-            'ward_meetings_count'
+            'ward_meetings_count',
+            'grievanceTypes',
+            'unseen_grievances'
         ]));
     }
 }

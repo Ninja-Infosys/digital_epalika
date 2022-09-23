@@ -133,43 +133,33 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($grievanceTypes as $type)
                         <tr>
-                            <td>लागुपदार्थ को दुरुपयोग</td>
-                            <td>१</td>
+                            <td>{{$type->title}}</td>
+                            <td>{{$type->grievance_details_count}}</td>
                         </tr>
-                        <tr>
-                            <td>प्राकृतिक स्रोत को दोहन</td>
-                            <td>२</td>
-                        </tr>
-                        <tr>
-                            <td>राजस्व छली</td>
-                            <td>३</td>
-                        </tr>
-                        <tr>
-                            <td>खानेपनि सम्बन्धि गुनासो</td>
-                            <td>४</td>
-                        </tr>
-                        <tr>
-                            <td>प्रयोगशालामा आवश्यक उपकरण को अभाव</td>
-                            <td>५</td>
-                        </tr>
+                        @endforeach
+
                         </tbody>
                     </table>
                 </div>
                 <div class="card col-md-7 grievance-answer">
                     <h4 class="fw-bold heading-line">सार्वजनिक गरिएका गुनासोहरु</h4>
                     <p>
-                        <button class="btn w-100" data-bs-toggle="collapse" data-bs-target="#collapse"
+                        @foreach($grievanceDetails as $grievanceDetail)
+                        <button class="btn w-100" data-bs-toggle="collapse" data-bs-target="#collapse{{$loop->iteration}}"
                                 aria-expanded="false">
-                            सार्वजनिक भएका गुनासो हरु को शीर्षक हरु क्रमश: यहा देखिनेछ्न
+                            {{$grievanceDetail->subject}}
                         </button>
+                        @endforeach
                     </p>
-                    <div class="collapse" id="collapse">
+                    @foreach($grievanceDetails as $grievanceDetail)
+                    <div class="collapse" id="collapse{{$loop->iteration}}">
                         <div class="card card-body">
-                            <p><i class="fa fa-angle-double-right m-lg-1"></i>सार्वजनिक भएका गुनासो हरु को उतरहरु क्रमश:
-                                यहा देखिनेछ्न |</p>
+                            <p><i class="fa fa-angle-double-right m-lg-1"></i>{{$grievanceDetail->description}}</p>
                         </div>
                     </div>
+                    @endforeach
                     <a class="btn mb-1 mt-1 btn-primary mx-auto" href="{{route('grievanceHandling.public-grievance')}}">थप
                         गुनासोहरु
                     </a>
