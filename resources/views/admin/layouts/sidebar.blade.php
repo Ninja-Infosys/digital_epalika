@@ -307,7 +307,7 @@
                                 <a href="{{route('admin.website.municipalDetail.index')}}">पालिका बिबरण </a>
                             </li>
                             <li class="{{request()->is('admin/website/importantLink/*') ? 'active':''}}">
-                                <a href="{{route('admin.website.importantLink.index')}}">Important Links </a>
+                                <a href="{{route('admin.website.importantLink.index')}}">महत्त्वपूर्ण लिङ्क </a>
                             </li>
                         </ul>
                     </div>
