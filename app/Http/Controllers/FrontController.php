@@ -16,11 +16,11 @@ class FrontController extends Controller
         $employees = Employee::orderBy('position')->get();
 
         $mixedNotices = Notice::orderBy('date')->get();
-        $notices = $mixedNotices->where('type', 'Notice')->limit(3)->get();
-        $news = $mixedNotices->where('type', 'News')->limit(3)->get();
+        $notices = $mixedNotices->where('type', 'Notice')->take(3)->get();
+        $news = $mixedNotices->where('type', 'News')->take(3)->get();
 
         $meetingDetails = MunicipalMeetingDecision::with('meetingDetail')->whereHas('meetingDetail', function ($query) {
-            $query->orderBy('meeting_date');
+            $query->orderByDesc('meeting_date');
         })->get();
 
         return view('frontend.home', compact('employees', 'notices', 'news', 'meetingDetails'));
