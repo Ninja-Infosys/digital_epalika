@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ImportantLink extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
-    protected $fillable=[
-
+    protected $fillable = [
+        'link_title',
+        'link_url'
     ];
 }

@@ -26,7 +26,7 @@ class ImportantLinkController extends Controller
     {
         ImportantLink::create($request->validated());
 
-        toast('Import Link Added Successfully', 'success');
+        toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -44,7 +44,7 @@ class ImportantLinkController extends Controller
     {
         $importantLink->update($request->validated());
 
-        toast('Important Link Updated Successfully', 'success');
+        toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return redirect(route('admin.website.importantLink.index'));
     }
@@ -53,7 +53,7 @@ class ImportantLinkController extends Controller
     {
         $importantLink->delete();
 
-        toast('Important Link Deleted Successfully', 'success');
+        toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 }
