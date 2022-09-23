@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Setting\MeasurementUnits;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreMeasurementUnitRequest extends FormRequest
+class UpdateMeasurementUnitRequest extends FormRequest
 {
-    public function authorize(): bool
+    public function authorize():bool
     {
         return true;
     }
+
 
     public function rules(): array
     {
         return [
             'type_id' => ['required', Rule::exists('types', 'id')->withoutTrashed()],
-            'title' => ['required', Rule::unique('measurement_units', 'title')->withoutTrashed()]
+            'title' => ['required', Rule::unique('measurement_units', 'title')->withoutTrashed()->ignore($this->measurementUnit)]
         ];
     }
 

@@ -290,6 +290,22 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#websiteAdmin" data-bs-toggle="collapse">
+                        <i class="fa fa-globe"></i>
+                        <span>Website सेटिङ</span>
+                        <span class="menu-arrow">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+                    </a>
+                    <div class="{{request()->is('admin/website/*') ?'':'collapse'}}" id="websiteAdmin">
+                        <ul class="nav-second-level">
+                            <li class="{{request()->is('admin/website/*') ? 'active':''}}">
+                                <a href="{{route('admin.website.slider.index')}}">Slider</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#setting" data-bs-toggle="collapse">
                         <i class="fa fa-cogs"></i>
                         <span>सेटिङ</span>
