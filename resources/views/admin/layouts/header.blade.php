@@ -1,6 +1,14 @@
 <div class="navbar-custom">
     <div class="container-fluid">
+
+
         <ul class="list-unstyled topnav-menu float-end mb-0">
+
+            <li class="nav-link">
+                <iframe class="text-white" scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=ffffff&aj_time=yes&font_size=14&line_brake=1&api=392199m324" width="195" height="45"></iframe>
+            </li>
+            <li class="nav-link">
+                <h4 class="text-white pt-3">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title}}</h4>
             <li class="d-none d-lg-block">
                 <form class="app-search">
                     <div class="app-search-box dropdown">
@@ -172,6 +180,10 @@
                 <button class="button-menu-mobile waves-effect waves-light">
                     <i class="fa fa-bars"></i>
                 </button>
+            </li>
+            <li >
+                <h3 class=" px-3" style="color: #d91212"><b>{{$officeSetting->localBody->local_body ?? ''}}</b></h3>
+                <h4 class=" px-3 text-white"><b>e-पालिका व्यवस्थापन प्रणाली</b></h4>
             </li>
 
             <li>

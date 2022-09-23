@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Models\OfficeHeader;
+use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -13,8 +14,9 @@ class OfficeSettingController extends Controller
     public function index()
     {
         $officeSetting = OfficeSetting::first();
+        $fiscalYears = FiscalYear::get();
         $officeHeaders = OfficeHeader::orderBy('position')->get();
-        return view('admin.setting.officeSetting.index', compact('officeSetting','officeHeaders'));
+        return view('admin.setting.officeSetting.index', compact('officeSetting','officeHeaders','fiscalYears'));
     }
 
 
@@ -27,10 +29,11 @@ class OfficeSettingController extends Controller
             'logo2' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
             'background_image' => ['nullable', 'mimes:png,jpg,jpeg'],
             'google_map' => ['nullable'],
-            'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
-            'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
-            'local_body_id' => ['required', Rule::exists('local_bodies', 'id')->withoutTrashed()],
-            'ward_no' => ['required'],
+            'province_id' => ['nullable', Rule::exists('provinces', 'id')->withoutTrashed()],
+            'district_id' => ['nullable', Rule::exists('districts', 'id')->withoutTrashed()],
+            'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')->withoutTrashed()],
+            'fiscal_year_id' => ['nullable', Rule::exists('fiscal_years', 'id')->withoutTrashed()],
+            'ward_no' => ['nullable'],
             'phone' => ['nullable'],
             'introduction' => ['nullable'],
             'email' => ['nullable', 'email'],
