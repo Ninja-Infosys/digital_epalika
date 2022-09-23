@@ -16,8 +16,8 @@
                     <div class="col-md-7"><p>गुनासो प्रकार: something</p></div>
                     <div class="col-md-5"><p>सम्वन्धित शाखा: something</p></div>
                     <div>आवेदक नम्बर: 02012310255</div>
-                    <div class=" row mt-4 mb-2 ">
-                        <div class=" single-grievance-details border d-flex rounded  mb-5 px-3 py-2">
+                    <div class=" row mt-4 mb-2 border rounded">
+                        <div class=" single-grievance-details  d-flex   mb-5 px-3 py-2">
                             <img src="{{asset('assets/frontend/image/avatar.png')}}"
                                  class="img-fluid rounded-circle mt-1" alt="">
                             <p>सीमा पर्खाल नियमित गर्ने तथा अनधिकृत सीमा पर्खाल हटाउने सम्बन्धी काठमाडौं महानगरपालिकाको
@@ -34,6 +34,11 @@
                                 सूचना !
                                 सीमा पर्खाल नियमित गर्ने तथा अनधिकृत सीमा पर्खाल हटाउने सम्बन्धी काठमाडौं महानगरपालिकाको
                                 सूचना !</p>
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-3 grievance-doc-img">
+                                <img src="{{asset('assets/frontend/image/agri4.jpg')}}" alt="">
+                            </div>
                         </div>
                         <div class=" single-grievance-details border rounded px-3 py-2 d-flex justify-content-end">
                             <p>सीमा पर्खाल नियमित गर्ने तथा अनधिकृत सीमा पर्खाल हटाउने सम्बन्धी काठमाडौं महानगरपालिकाको
