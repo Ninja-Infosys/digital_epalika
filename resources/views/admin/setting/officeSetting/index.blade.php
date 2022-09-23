@@ -55,8 +55,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <img src="{{$officeSetting->logo_url}}" height="60">
-                                    <label for="logo" class="form-label">नेपालको निशान छाप </label>
+                                    <img src="{{$officeSetting->logo_url}}" height="60" alt="">
+                                    <label for="logo" class="form-label">लोगो १ </label>
                                     <input
                                         type="file"
                                         name="logo"
@@ -70,8 +70,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <img src="{{$officeSetting->logo1_url}}" height="60">
-                                    <label for="logo1" class="form-label">लोगो </label>
+                                    <img src="{{$officeSetting->logo1_url}}" height="60" alt="">
+                                    <label for="logo1" class="form-label">लोगो २</label>
                                     <input
                                         type="file"
                                         name="logo1"
@@ -85,8 +85,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <img src="{{$officeSetting->logo2_url}}" height="60">
-                                    <label for="logo2" class="form-label">झण्डा </label>
+                                    <img src="{{$officeSetting->logo2_url}}" height="60" alt="">
+                                    <label for="logo2" class="form-label">लोगो ३ </label>
                                     <input
                                         type="file"
                                         name="logo2"
@@ -100,7 +100,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <img src="{{$officeSetting->background_image_url}}" height="60">
+                                    <img src="{{$officeSetting->background_image_url}}" height="60" alt="">
                                     <label for="background_image" class="form-label">Background Image</label>
                                     <input
                                         type="file"
@@ -143,7 +143,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="website" class="form-label">वेबसाइट </label>
+                                    <label for="website" class="form-label">ट्वीट्स </label>
                                     <input
                                         type="text"
                                         name="website"
@@ -236,13 +236,13 @@
                                     </thead>
                                     <tbody>
                                     @forelse($officeHeaders as $officeheader)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{$officeheader->title}}</td>
-                                        <td>{{$officeheader->font}}</td>
-                                        <td>{{$officeheader->font_size}}</td>
-                                        <td>{{$officeheader->position}}</td>
-                                        <td>
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$officeheader->title}}</td>
+                                            <td>{{$officeheader->font}}</td>
+                                            <td>{{$officeheader->font_size}}</td>
+                                            <td>{{$officeheader->position}}</td>
+                                            <td>
 
                                                 <a href="{{route('admin.officeHeader.edit',$officeheader)}}"
                                                    class="btn btn-xs btn-outline-primary">
@@ -259,8 +259,8 @@
                                                     </button>
                                                 </form>
 
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     @empty
 
                                     @endforelse

@@ -22,8 +22,8 @@ class OfficeSettingController extends Controller
     {
         $validationData = $request->validate([
             'name' => ['required', 'string'],
-            'logo' => ['nullable', 'mimes:png,jpg,jpeg'],
-            'logo1' => ['nullable', 'mimes:png,jpg,jpeg'],
+            'logo' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
+            'logo1' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
             'logo2' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
             'background_image' => ['nullable', 'mimes:png,jpg,jpeg'],
             'google_map' => ['nullable'],

@@ -15,15 +15,15 @@ return new class extends Migration {
             $table->string('logo2')->nullable();
             $table->string('background_image')->nullable();
             $table->longText('introduction')->nullable();
-            $table->string('google_map')->nullable();
+            $table->text('google_map')->nullable();
             $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('ward_no')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('website')->nullable();
-            $table->string('facebook_link')->nullable();
+            $table->text('website')->nullable();
+            $table->text('facebook_link')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
