@@ -14,16 +14,23 @@
                 <h4 class="fw-bold">गुनासो ट्रयाक</h4>
                 <p>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन तल उल्लेखित विवरण भरेर पठाउनुहोस् ।</p>
                 <div class="mt-3">
-                    <form class="m-2">
+                    <form class="m-2" method="get" action="{{route('grievanceHandling.single-grievance')}}">
+                        @csrf
                         <div class="mb-3">
                             <label for="phone" class="form-label">सम्पर्क नम्बर *</label>
                             <input type="text" name="phone" class="" id="phone" placeholder="सम्पर्क नम्बर">
+                            @error('phone')
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="applicant_no" class="form-label">गुनासो नम्बर *</label>
-                            <input type="text" name="token" class="" id="applicant_no" placeholder="आवेदक नम्बर">
+                            <label for="token" class="form-label">गुनासो नम्बर *</label>
+                            <input type="text" name="token" class="" id="token" placeholder="आवेदक नम्बर">
+                            @error('token')
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
                         </div>
-                        <a type="button" class="btn btn-primary" href="{{route('grievanceHandling.single-grievance')}}">खोज्नुहोस्</a>
+                        <button type="submit"  class="btn btn-primary" >खोज्नुहोस्</button>
                     </form>
                     <hr>
                 </div>
