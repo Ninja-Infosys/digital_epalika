@@ -1,4 +1,4 @@
-@extends('digitalboard::layouts.master')
+@extends('helpdesk::layouts.master')
 @section('content')
     <div class="container-fluid">
         <div class="row mt-5 justify-content-center">
@@ -36,12 +36,30 @@
                                     </ol>
                                 </td>
                                 <td>{{$service->time_taken}}</td>
-                                <td width="250">@foreach($service->serviceEmployees as $responsibleEmployee)
+                                <td class="responsive-person" width="250">
+                                    @foreach($service->serviceEmployees as $responsibleEmployee)
                                         {{$responsibleEmployee->employee}}{{!$loop->last ? ' ,': ''}}
                                     @endforeach</td>
                             </tr>
                             </tbody>
                         </table>
+                        <div class="row">
+                            @foreach($service->serviceEmployees as $responsibleEmployee)
+                            <div class="card-02 col-md-4 mb-2 px-5">
+                                <div class="card responsible-person shadow text-center">
+                                    <img class="mt-1 rounded-circle mx-auto" src="{{asset('assets/frontend/image/agri4.jpg')}}" alt="">
+                                    <div class="card-body p-0 mt-1 m-0">
+                                        <div class="card-description ">
+                                            <h5 class="card-title pt-1">{{$responsibleEmployee->employee}}</h5>
+                                            <h6 class="card-title ">पद</h6>
+                                            <p>email</p>
+                                            <p>phone</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                         <div class="card-body fs-5 d-flex justify-content-sm-between">
                             <p>आवश्यक कागजातहरु सबै छन् ?</p>
                             <div class="">
@@ -75,7 +93,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a class="btn btn-danger mt-1 ms-2" href="{{url('digitalBoard/digitalboard')}}">
+                                <a class="btn btn-danger mt-1 ms-2" href="{{route('helpdesk.helpdesk')}}">
                                     छैनन्
                                 </a>
                             </div>

@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('digitalBoard/digitalboard')}}" >
+                    <a class="nav-link" aria-current="page" href="{{route('helpdesk.helpdesk')}}" >
                         नागरिक सहयोग
                     </a>
                 </li>

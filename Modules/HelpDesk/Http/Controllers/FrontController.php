@@ -11,6 +11,6 @@ class FrontController extends Controller
 {
     public function showServiceDetail(Service $service)
     {
-        return view('digitalboard::frontend.services.details', compact('service'));
+        return view('helpdesk::frontend.services.details', compact('service'));
     }
 }

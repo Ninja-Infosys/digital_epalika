@@ -45,7 +45,7 @@
                         </li>
                     </a>
                 @empty
-                    select branch
+                    <p class="text-center element fs-5 mt-3"><i class="fa-solid fa-angles-left fs-5"></i>सेवा लिने शाखा वायाँ मा रहेको तालिका बाट छान्नुहोस् </p>
                 @endforelse
             </ul>
         </div>
