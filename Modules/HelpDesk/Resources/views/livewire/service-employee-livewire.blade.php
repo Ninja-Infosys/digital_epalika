@@ -2,7 +2,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th>सेवा दिने कर्मचारीहरुको नाम  *</th>
+            <th>सेवा दिने कर्मचारीहरुको नाम *</th>
             <th>
                 <button type="button" wire:click="addRow" class="btn btn-xs btn-primary">
                     <i class="fa fa-plus"></i>
@@ -18,7 +18,8 @@
                         <input type="hidden" name="serviceEmployees[{{$key}}][id]"
                                wire:model="serviceEmployees.{{$key}}.id">
                     @endif
-                    <input type="text" name="serviceEmployees[{{$key}}][employee]" wire:model="serviceEmployees.{{$key}}.employee" class="form-control"
+                    <input type="text" name="serviceEmployees[{{$key}}][employee]"
+                           wire:model="serviceEmployees.{{$key}}.employee" class="form-control"
                            placeholder="">
                 </td>
                 <td>

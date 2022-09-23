@@ -20,6 +20,8 @@ class GrievanceFormWizard extends Component
     public int $currentStep = 1;
     public bool $is_password = false;
 
+    public $grievanceType;
+
     public array $form = [
         'grievance_type_id' => null,
         'description' => null,
@@ -44,6 +46,7 @@ class GrievanceFormWizard extends Component
         'form.complaint_severity' => ['required'],
         'form.subject' => ['required']
     ];
+
     protected array $secondStepValidations = [
         'form.password' => ['required_if:is_password,1'],
         'form.password_confirmation' => ['nullable', 'confirmed'],
@@ -135,12 +138,27 @@ class GrievanceFormWizard extends Component
     public function messages(): array
     {
         return [
-            'form.grievance_type_id.required' => ['grievance type is required']
+            'form.grievance_type_id.required' => ['गुनासो प्रकार आवश्यक छ'],
+            'form.description.required' => ['गुनासो विवरण आवश्यक छ'],
+            'form.files.required' => ['गुनासो फाइल आवश्यक छ'],
+            'form.grievance_office_id.required' => ['गुनासो कार्यालय आवश्यक छ'],
+            'form.complaint_severity.required' => ['गुनासो गम्भीरता आवश्यक छ'],
+            'form.subject.required' => ['गुनासो बिषय आवश्यक छ'],
+            'form.password_confirmation.confirmed' => ['पासवोर्ड संग मेल खाएन '],
+            'form.name.required' => ['नाम अनिबार्य छ '],
+            'form.email.required' => ['इमेल अनिबार्य छ '],
+            'form.email.email' => ['इमेल फर्ममा  छ '],
+            'form.phone.required' => ['फोन अनिबार्य छ '],
+            'form.address.required' => ['ठेगाना अनिबार्य छ '],
         ];
     }
 
     public function render()
     {
+        if (!empty($this->form['grievance_type_id'])){
+            $this->grievanceType=GrievanceType::find($this->form['grievance_type_id']);
+        }
+
         return view('grievancehandling::livewire.grievance-form-wizard');
     }
 }

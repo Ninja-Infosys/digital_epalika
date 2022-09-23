@@ -50,7 +50,7 @@
                                 <input type="password" id="password" wire:model="form.password" class="form-control"
                                        placeholder="Password">
                                 @error('form.password')
-                                <div class="text-danger">{{$message}}</div>
+                                <div class="text-danger p-1">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-6">
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             @error('form.is_open')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
@@ -101,7 +101,7 @@
                             <input type="text" wire:model="form.name" class="form-control" id="name"
                                    placeholder="पुरा नाम">
                             @error('form.name')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
@@ -109,7 +109,7 @@
                             <input type="text" wire:model="form.email" class="form-control" id="email"
                                    placeholder="इमेल">
                             @error('form.email')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
@@ -117,7 +117,7 @@
                             <input type="text" wire:model="form.phone" class="form-control" id="phone"
                                    placeholder="सम्पर्क नम्बर ">
                             @error('form.phone')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
@@ -125,28 +125,32 @@
                             <input type="text" wire:model="form.address" class="form-control" id="address"
                                    placeholder="ठेगाना">
                             @error('form.address')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="text-end">
                         <div class="text-end">
                             <button type="button" wire:click.prevent="backStep(1)" class="btn btn-primary">
-                                Previous
+                                पहिले
                             </button>
                             <button type="button" wire:click.prevent="nextStep(3)" class="btn btn-primary">
-                                Next
+                                अर्को
                             </button>
                         </div>
                     </div>
                     @break
                 @case(3)
                     <h5>तल दिएको विवरण ठीक छ छैन विचार गरी पठाउनुहोस् । </h5>
-                    <table class="table table-bordered table-sm">
+                    <table class="table table-bordered">
                         <tbody>
                         <tr>
                             <th>गुनासोको प्रकार:</th>
-                            <td></td>
+                            <td>{{$grievanceType->title}}</td>
+                        </tr>
+                        <tr>
+                            <th>बिषय </th>
+                            <td>{{$form['subject']}}</td>
                         </tr>
                         <tr>
                             <th> गुनासोको विवरण</th>
@@ -154,17 +158,29 @@
                         </tr>
                         <tr>
                             <th> पुरा नाम</th>
-                            <td>{{$form['description']}}</td>
+                            <td>{{$form['name']}}</td>
+                        </tr>
+                        <tr>
+                            <th>इमेल</th>
+                            <td>{{$form['email']}}</td>
+                        </tr>
+                        <tr>
+                            <th>सम्पर्क नम्बर</th>
+                            <td>{{$form['phone']}}</td>
+                        </tr>
+                        <tr>
+                            <th>ठेगाना</th>
+                            <td>{{$form['address']}}</td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="text-end">
                         <div class="text-end">
                             <button type="button" wire:click.prevent="backStep(2)" class="btn btn-primary">
-                                Previous
+                                पहिले
                             </button>
                             <button type="submit" class="btn btn-primary">
-                                Save
+                                पेश गर्नुहोस्
                             </button>
                         </div>
                     </div>
@@ -186,7 +202,7 @@
                                 @endforeach
                             </select>
                             @error('form.grievance_type_id')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
@@ -198,7 +214,7 @@
                             <input type="text" class="form-control" id="subject" wire:model="form.subject"
                                    placeholder="बिषय">
                             @error('form.subject')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
@@ -212,7 +228,7 @@
                                       cols="30"
                                       rows="5" placeholder="गुनासोको विवरण"></textarea>
                             @error('form.description')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
@@ -226,10 +242,10 @@
                             <input type="file" name="files[]" multiple wire:model="form.files" id="files"
                                    class="form-control">
                             @error('form.files')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                             @error('form.files.*')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
@@ -252,7 +268,7 @@
                                 @endforeach
                             </select>
                             @error('form.grievance_office_id')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="col-md-12 mb-4">
@@ -277,7 +293,7 @@
                             </div>
 
                             @error('form.complaint_severity')
-                            <div class="text-danger">{{$message}}</div>
+                            <div class="text-danger p-1">{{$message}}</div>
                             @enderror
                         </div>
                     </div>
