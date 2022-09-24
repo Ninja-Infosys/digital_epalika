@@ -105,7 +105,7 @@ class GrievanceFormWizard extends Component
     public function submitForm()
     {
         $this->validate();
-        DB::transaction(function () {
+        $grievanceDetail = DB::transaction(function () {
             $grievanceUser = GrievanceUser::where('email', $this->form['email'])->first();
             if (empty($grievanceUser)) {
                 $grievanceUser = GrievanceUser::create([
@@ -135,6 +135,8 @@ class GrievanceFormWizard extends Component
                     ]);
                 }
             }
+
+            return $grievanceDetail;
         });
 
         $this->reset('form', 'currentStep', 'is_password');
@@ -142,7 +144,7 @@ class GrievanceFormWizard extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",
             'title' => "धन्यबाद",
-            'text' => "तपाईंको गुनासो फारम सफलतापूर्वक पेश गरियो",
+            'text' => "तपाईंको गुनासो फारम सफलतापूर्वक पेश गरियो, तपाईको गुनासो गुनासो नम्बर ".$grievanceDetail->token." पछी हेर्नको लागि सुरक्षित राख्नुहोला",
         ]);
     }
 
