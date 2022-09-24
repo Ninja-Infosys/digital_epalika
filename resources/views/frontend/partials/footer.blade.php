@@ -5,24 +5,25 @@
                 <div class="row">
                     <div class="col-md-4">
                         <h6 class="footer-title mb-3">सम्पर्क विवरण</h6>
-                        <h6 class="text-white">नेपालगन्ज उप-महानगरपालिका, नगरकार्यपालिकाको कार्यालय</h6>
+                        <h6 class="text-white">{{$officeSetting->name}}</h6>
                         <ul class="list mt-2">
                             <li class="text-white">
                                 <i class="fa-solid fa-location-dot"></i>
-                                नेपालगन्ज,बाँके, नेपाल
+                                {{$officeSetting->site_address}}
                             </li>
-                            <li class="text-white">
-                                <i class="fa-solid fa-phone"></i>
-                                <a href="#"> 083-520082</a>
-                            </li>
-                            <li class="text-white">
-                                <i class="fa-solid fa-envelope"></i>
-                                <a href="#"> ninjainfosys@gmail.com</a>
-                            </li>
-                            <li class="text-white">
-                                <i class="fa-solid fa-envelope"></i>
-                                <a href="#"> ninjainfosys@gmail.com</a>
-                            </li>
+                            @foreach(explode(',',$officeSetting->phone) as $phone)
+                                <li class="text-white">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <a href="#">{{$phone}}</a>
+                                </li>
+                            @endforeach
+                            @foreach(explode(',',$officeSetting->email) as $email)
+                                <li class="text-white">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <a href="#">{{$email}}</a>
+                                </li>
+                            @endforeach
+
 
                         </ul>
                     </div>
@@ -40,13 +41,13 @@
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <img src=".....">
+                        <img src="{{asset('images/get-on-playstore.png')}}">
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
-            <span>Copyright © नेपालगन्ज उप-महानगरपालिका, नगरकार्यपालिकाको कार्यालय, बाँके</span><span>Updated on : 2079/01/12</span>
+            <span>Copyright © {{$officeSetting->name}}</span><span>Updated on : 2079/01/12</span>
         </div>
     </footer>
 </section>

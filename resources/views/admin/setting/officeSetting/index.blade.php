@@ -40,7 +40,7 @@
                                 <strong>कार्यालय बिवरण </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="name" class="form-label">नाम *</label>
                                     <input
                                         type="text"
@@ -54,7 +54,21 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
+                                    <label for="site_address" class="form-label">ठेगाना *</label>
+                                    <input
+                                        type="text"
+                                        name="site_address"
+                                        value="{{old('site_address',$officeSetting->site_address)}}"
+                                        class="form-control @error('site_address') is-invalid @enderror"
+                                        id="site_address"
+                                        placeholder="ठेगाना"
+                                    />
+                                    @error('site_address')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
                                     <label for="fiscal_year_id" class="form-label">चालु आ.व. </label>
                                     <select
                                         name="fiscal_year_id"

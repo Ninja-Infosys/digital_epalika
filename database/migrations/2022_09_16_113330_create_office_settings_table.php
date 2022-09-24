@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('office_settings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('address')->nullable();
             $table->string('logo')->nullable();
             $table->string('logo1')->nullable();
             $table->string('logo2')->nullable();
