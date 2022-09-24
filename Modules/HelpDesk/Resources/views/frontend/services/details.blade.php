@@ -43,7 +43,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="row">
+             {{--           <div class="row">
                             @foreach($service->serviceEmployees as $responsibleEmployee)
                             <div class="card-02 col-md-4 mb-2 px-5">
                                 <div class="card responsible-person shadow text-center">
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             @endforeach
-                        </div>
+                        </div>--}}
                         <div class="card-body fs-5 d-flex justify-content-sm-between">
                             <p>आवश्यक कागजातहरु सबै छन् ?</p>
                             <div class="">
