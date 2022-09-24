@@ -52,11 +52,15 @@
                             @forelse($services as $key=>$service)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <th>{{$service->service_name}}</th>
+                                    <td>{{$service->service_name}}</td>
                                     <td>{{$service->branch->branch_name??''}}</td>
                                     <td>{{$service->responsible_officer}}</td>
                                     <td>{{$service->office}}</td>
                                     <td>
+                                        <a href="{{route('admin.helpDesk.service.serviceEmployee.index',$service)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-plus-circle"></i> कर्मचारी
+                                        </a>
                                         <a href="{{route('admin.helpDesk.service.show',$service)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i> थप हेर्नुहोस्

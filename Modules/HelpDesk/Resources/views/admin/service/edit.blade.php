@@ -124,59 +124,12 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6 mb-2">
-                                <label for="photo" class="form-label">फोटो </label>
-                                <input
-                                    type="file"
-                                    name="photo"
-                                    class="form-control @error('photo') is-invalid @enderror"
-                                    id="photo"
-                                />
-                                @error('photo')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-2">
-                                <label for="email" class="form-label">इमेल *</label>
-                                <input
-                                    type="text"
-                                    name="email"
-                                    value="{{old('email',$service->email)}}"
-                                    class="form-control @error('email') is-invalid @enderror"
-                                    id="email"
-                                    placeholder="इमेल"
-                                />
-                                @error('email')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-2">
-                                <label for="phone" class="form-label">फोन नम्बर *</label>
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    value="{{old('phone',$service->phone)}}"
-                                    class="form-control @error('phone') is-invalid @enderror"
-                                    id="phone"
-                                    placeholder="फोन नम्बर"
-                                />
-                                @error('phone')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
                             <div class="col-md-12 mb-2">
                                 @livewire('helpdesk::service-document-livewire',['service'=>$service])
                             </div>
 
                             <div class="col-md-12 mb-2">
                                 @livewire('helpdesk::service-process-livewire',['service'=>$service])
-                            </div>
-
-                            <div class="col-md-12 mb-2">
-                                @livewire('helpdesk::service-employee-livewire',['service'=>$service])
                             </div>
 
                         </div>

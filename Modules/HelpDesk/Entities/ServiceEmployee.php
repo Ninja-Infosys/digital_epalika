@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ServiceEmployee extends Model
 {
@@ -19,9 +21,25 @@ class ServiceEmployee extends Model
 
     protected $fillable = [
         'service_id',
-        'employee',
-        'position',
+        'employee_name',
+        'photo',
+        'email',
+        'phone',
+        'designation',
+        'position'
     ];
+
+    public function getPhotoUrlAttribute(): string
+    {
+        return $this->photo ? Storage::disk('public')->url($this->attributes['photo']) : asset('images/user_icon.jpg');
+    }
+
+    public function setPhotoAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['photo'] = $value->store('service/' . Str::slug($this->attributes['employee_name'], '_'), 'public');
+        }
+    }
 
     public function service(): BelongsTo
     {

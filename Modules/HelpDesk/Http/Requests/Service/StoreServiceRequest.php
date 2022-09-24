@@ -20,20 +20,15 @@ class StoreServiceRequest extends FormRequest
             'time_taken' => ['required'],
             'responsible_officer' => ['required'],
             'office' => ['required'],
-            'photo' => ['nullable', 'image'],
-            'email' => ['required', 'email'],
-            'phone' => ['required'],
             'remarks' => ['nullable'],
             'serviceDocuments' => ['required', 'array'],
             'serviceDocuments.*.description' => ['required'],
             'serviceProcesses' => ['required', 'array'],
-            'serviceProcesses.*.description' => ['required'],
-            'serviceEmployees' => ['required', 'array'],
-            'serviceEmployees.*.employee' => ['required']
+            'serviceProcesses.*.description' => ['required']
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'branch_id.required' => 'शाखा आवश्यक छ',
@@ -48,9 +43,7 @@ class StoreServiceRequest extends FormRequest
             'serviceDocuments.required' => 'कागजात आवश्यक छ',
             'serviceDocuments.*.description.required' => 'कागजात आबश्यक छ ',
             'serviceProcesses.required' => 'सेवा उपलब्ध प्रक्रिया आवश्यक छ',
-            'serviceProcesses.*.description.required' => 'उपलब्ध प्रक्रिया आबश्यक छ ',
-            'serviceEmployees.required' => 'सेवा दिने कर्मचारी आवश्यक छ',
-            'serviceEmployees.*.employee.required' => 'कर्मचारीको नाम आबश्यक छ '
+            'serviceProcesses.*.description.required' => 'उपलब्ध प्रक्रिया आबश्यक छ '
         ];
     }
 }
