@@ -28,7 +28,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <h6 class="footer-title mb-3">महतोपूर्ण लिंकहरु</h6>
+                        <h6 class="footer-title mb-3">महत्त्वपूर्ण लिंकहरु</h6>
                         <ul class="list mt-2">
                             @foreach($important_links->take(5) as $link)
                                 <li class="text-white">

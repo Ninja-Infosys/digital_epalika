@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-5 intro-col mt-1">
                 <div class="card-01 introduction  bg-card shadow rounded">
-                    <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
+                    <h4 class="heading mt-2 mb-3 px-3">{{$officeSetting->name}}को संक्षिप्त परिचय</h4>
                     <h6 class="fw-normal lh-lg">
                         {!! Str::words(strip_tags($officeSetting->introduction),100) !!}
                     </h6>
@@ -77,7 +77,7 @@
                         @foreach($notices as $notice)
                             <li class="list-group-item">
                                 <i class="fa fa-angle-right"></i>
-                                <a href="">{{Str::words($notice->title,12)}}</a>
+                                <a href="{{route('single-notice',$notice)}}">{{Str::words($notice->title,12)}}</a>
                                 <span><small>{{$notice->date->toDateString()}}</small></span>
 
                             </li>
@@ -89,24 +89,25 @@
                 </div>
                 <div class="col-md-4">
                     <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">कार्यपालिका बोर्ड निर्णय </p>
+                        <p class="mb-0 text-white fs-5">समाचारहरु </p>
                     </div>
                     <ul class="list-group">
                         @foreach($newses as $news)
                             <li class="list-group-item">
                                 <i class="fa fa-angle-right"></i>
-                                <a href="">{{Str::words($news->title,12)}}</a>
+                                <a href="{{route('single-notice',$notice)}}">{{Str::words($news->title,12)}}</a>
                                 <span><small>{{$news->date->toDateString()}}</small></span>
 
                             </li>
                         @endforeach
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        <button class="btn bg-primary btn-outline-light ">थप समाचारहरु <i
+                                class="fa fa-angles-right"></i>
                         </button>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">समचारहरु</p>
+                        <p class="mb-0 text-white fs-5">कार्यपालिका बोर्ड निर्णय</p>
                     </div>
                     <ul class="list-group">
                         @foreach($meetingDetails as $meetingDetail)
@@ -117,7 +118,8 @@
 
                             </li>
                         @endforeach
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        <button class="btn bg-primary btn-outline-light ">थप कार्यपालिका बोर्ड निर्णय <i
+                                class="fa fa-angles-right"></i>
                         </button>
                     </ul>
                 </div>
@@ -141,7 +143,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <iframe src="https://sthaniya.gov.np/gis" style="height:250px;width:100%;" title="Iframe Example"></iframe>
+                    <iframe src="https://sthaniya.gov.np/gis" style="height:250px;width:100%;"
+                            title="Iframe Example"></iframe>
                 </div>
                 <div class="col-md-6">
                     <div class="row align-content-stretch">
