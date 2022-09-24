@@ -93,13 +93,41 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>सेवा दिने कर्मचारीको नाम</th>
-                                <td>
-                                    <ul>
-                                        @foreach($service->serviceEmployees as $serviceEmployee)
-                                            <li>{{$serviceEmployee->employee}}</li>
-                                        @endforeach
-                                    </ul>
+                                <th colspan="2">सेवा दिने कर्मचारी</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm mb-0 table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>क्र.स</th>
+                                                <th> नाम</th>
+                                                <th> पद</th>
+                                                <th>फोन</th>
+                                                <th>इमेल</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @forelse($service->serviceEmployees as $key=>$serviceEmployee)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td class="table-user">
+                                                        <img src="{{$serviceEmployee->photo_url}}" class="me-2 rounded-circle" alt="">
+                                                        {{$serviceEmployee->employee_name}}
+                                                    </td>
+                                                    <td>{{$serviceEmployee->designation}}</td>
+                                                    <td>{{$serviceEmployee->phone}}</td>
+                                                    <td>{{$serviceEmployee->email}}</td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                                </tr>
+                                            @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
