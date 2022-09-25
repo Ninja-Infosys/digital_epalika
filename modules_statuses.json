@@ -3,5 +3,6 @@
     "Circular": true,
     "EMap": true,
     "HelpDesk": true,
-    "GrievanceHandling": true
+    "GrievanceHandling": true,
+    "BusinessRegistration": true
 }

@@ -49,7 +49,7 @@ class ServiceEmployeeController extends Controller
 
         toast('कर्मचारी सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.helpDesk.service.serviceEmployee.index', [$service, $serviceEmployee]));
+        return redirect(route('admin.helpDesk.service.serviceEmployee.index', $service));
     }
 
     public function destroy(Service $service, ServiceEmployee $serviceEmployee)
