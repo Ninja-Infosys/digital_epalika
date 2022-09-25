@@ -131,3 +131,7 @@ a {
      bottom: 3.4rem;
      z-index: 100;
  }
+.round-btn-div img{
+    object-fit: contain;
+    height: 8rem;
+}

@@ -13,7 +13,13 @@
     padding-bottom: 0;
     font-size: 1.08rem;
 }
-
+.navbar-nav .nav-item {
+    border-right: 1px solid var(--whiteColor);
+    padding-right: 20px;
+}
+.navbar-nav .nav-item:last-child {
+    border-right: none;
+}
 .navbar .navbar-nav .nav-item .active{
     color: var(--whiteColor);
     border-bottom: 3px solid var(--whiteColor);
