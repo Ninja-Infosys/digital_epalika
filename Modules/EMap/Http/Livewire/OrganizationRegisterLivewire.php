@@ -179,7 +179,7 @@ class OrganizationRegisterLivewire extends Component
                 'organizationDetail.ward' => ['required'],
                 'organizationDetail.tole' => ['nullable'],
                 'taxClearance.document' => ['required'],
-                'taxClearance.year' => ['required'],
+                'taxClearance.year' => ['nullable'],
             ]);
         } else {
             return $this->baseRule;
