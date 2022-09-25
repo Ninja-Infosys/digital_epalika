@@ -44,7 +44,7 @@
                                 <th>क्र.स</th>
                                 <th>शीर्षक</th>
                                 <th>आइकन</th>
-                                <th>कलर </th>
+                                <th>कलर</th>
                                 <th>गणना</th>
                                 <th>स्थिति</th>
                                 <th>#</th>
@@ -56,7 +56,9 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$municipalDetail->title}}</td>
                                     <td>{!! $municipalDetail->icon !!}</td>
-                                    <td>{{$municipalDetail->bg_color}}</td>
+                                    <td><div
+                                            style="background-color: {{$municipalDetail->bg_color}};color: white;padding: 5px">{{$municipalDetail->bg_color}}</div>
+                                    </td>
                                     <td>{{$municipalDetail->count}}</td>
                                     <td>{{$municipalDetail->position}}</td>
                                     <td>
@@ -64,8 +66,9 @@
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.website.municipalDetail.destroy',$municipalDetail)}}"
-                                              method="post">
+                                        <form
+                                            action="{{route('admin.website.municipalDetail.destroy',$municipalDetail)}}"
+                                            method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">

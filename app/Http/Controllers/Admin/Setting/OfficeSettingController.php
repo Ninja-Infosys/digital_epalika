@@ -24,6 +24,7 @@ class OfficeSettingController extends Controller
     {
         $validationData = $request->validate([
             'name' => ['required', 'string'],
+            'site_address' => ['nullable', 'string'],
             'logo' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
             'logo1' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
             'logo2' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
@@ -36,7 +37,7 @@ class OfficeSettingController extends Controller
             'ward_no' => ['nullable'],
             'phone' => ['nullable'],
             'introduction' => ['nullable'],
-            'email' => ['nullable', 'email'],
+            'email' => ['nullable'],
             'website' => ['nullable', 'url'],
             'facebook_link' => ['nullable', 'url']
         ],[

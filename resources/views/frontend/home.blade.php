@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-5 intro-col mt-1">
                 <div class="card-01 introduction  bg-card shadow rounded">
-                    <h4 class="heading mt-2 mb-3 px-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय</h4>
+                    <h4 class="heading mt-2 mb-3 px-3">{{$officeSetting->name}}को संक्षिप्त परिचय</h4>
                     <h6 class="fw-normal lh-lg">
                         {!! Str::words(strip_tags($officeSetting->introduction),90) !!}
                     </h6>
@@ -77,7 +77,7 @@
                         @foreach($notices as $notice)
                             <li class="list-group-item">
                                 <i class="fa fa-angle-right"></i>
-                                <a href="">{{Str::words($notice->title,12)}}</a>
+                                <a href="{{route('single-notice',$notice)}}">{{Str::words($notice->title,12)}}</a>
                                 <span><small>{{$notice->date->toDateString()}}</small></span>
 
                             </li>
@@ -89,24 +89,26 @@
                 </div>
                 <div class="col-md-4">
                     <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">कार्यपालिका बोर्ड निर्णय </p>
+                        <p class="mb-0 text-white fs-5">समाचारहरु </p>
                     </div>
                     <ul class="list-group">
                         @foreach($newses as $news)
                             <li class="list-group-item">
                                 <i class="fa fa-angle-right"></i>
-                                <a href="">{{Str::words($news->title,12)}}</a>
+                                <a href="{{route('single-notice',$notice)}}">{{Str::words($news->title,12)}}</a>
                                 <span><small>{{$news->date->toDateString()}}</small></span>
 
                             </li>
                         @endforeach
                         <button class="btn bg-primary btn-outline-light ">थप बोर्ड निर्णयहरु<i class="fa fa-angles-right"></i>
+                        <button class="btn bg-primary btn-outline-light ">थप समाचारहरु <i
+                                class="fa fa-angles-right"></i>
                         </button>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">समचारहरु</p>
+                        <p class="mb-0 text-white fs-5">कार्यपालिका बोर्ड निर्णय</p>
                     </div>
                     <ul class="list-group">
                         @foreach($meetingDetails as $meetingDetail)
@@ -117,6 +119,8 @@
 
                             </li>
                         @endforeach
+                        <button class="btn bg-primary btn-outline-light ">थप कार्यपालिका बोर्ड निर्णय <i
+                                class="fa fa-angles-right"></i>
                         <button class="btn bg-primary btn-outline-light ">थप समाचरहरु <i class="fa fa-angles-right"></i>
                         </button>
                     </ul>
@@ -130,11 +134,13 @@
         <div class="mb-3">
             <div class="title-head-main px-3 py-2 d-flex justify-content-between">
                 <div>
-                    <span class="fa fa-globe"></span>प्रदेश ६
+                    <span class="fa fa-globe">प्रदेश ६</span>
                 </div>
             </div>
         </div>
     </section>
+
+
     <section class="tab-section mt-3">
         <div class="container">
             <div class="row">

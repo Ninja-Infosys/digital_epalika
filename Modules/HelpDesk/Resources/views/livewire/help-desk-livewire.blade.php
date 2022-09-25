@@ -7,7 +7,8 @@
             @foreach($branches as $branch)
                 <p>
                     <button class="btn fs-5 w-100 d-flex justify-items-start btn-primary" type="button"
-                            data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="false">
+                            data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="false"
+                            wire:click.prevent="setBranchId({{$branch}})">
                         {{$branch->branch_name}}
                     </button>
                 </p>
@@ -45,7 +46,8 @@
                         </li>
                     </a>
                 @empty
-                    <p class="text-center element fs-5 mt-3"><i class="fa-solid fa-angles-left fs-5"></i>सेवा लिने शाखा वायाँ मा रहेको तालिका बाट छान्नुहोस् </p>
+                    <p class="text-center element fs-5 mt-3"><i class="fa-solid fa-angles-left fs-5"></i>सेवा लिने शाखा
+                        वायाँ मा रहेको तालिका बाट छान्नुहोस् </p>
                 @endforelse
             </ul>
         </div>

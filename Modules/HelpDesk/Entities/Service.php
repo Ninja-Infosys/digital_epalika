@@ -26,23 +26,8 @@ class Service extends Model
         'time_taken',
         'responsible_officer',
         'office',
-        'photo',
-        'email',
-        'phone',
         'remarks',
     ];
-
-    public function getPhotoUrlAttribute(): string
-    {
-        return $this->photo ? Storage::disk('public')->url($this->attributes['photo']) : '';
-    }
-
-    public function setPhotoAttribute($value)
-    {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('service/' . Str::slug($this->attributes['service_name'], '_'), 'public');
-        }
-    }
 
     public function branch(): BelongsTo
     {

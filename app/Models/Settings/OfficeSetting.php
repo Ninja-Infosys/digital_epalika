@@ -23,6 +23,7 @@ class OfficeSetting extends Model
 
     protected $fillable = [
         'name',
+        'site_address',
         'logo',
         'logo1',
         'logo2',

@@ -14,9 +14,6 @@ return new class extends Migration {
             $table->string('time_taken')->nullable();
             $table->string('responsible_officer')->nullable();
             $table->string('office')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();

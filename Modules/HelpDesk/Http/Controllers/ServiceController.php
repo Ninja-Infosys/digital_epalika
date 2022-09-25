@@ -57,10 +57,6 @@ class ServiceController extends Controller
             foreach ($request->validated()['serviceProcesses'] as $serviceProcess) {
                 $service->serviceProcesses()->create($serviceProcess);
             }
-
-            foreach ($request->validated()['serviceEmployees'] as $serviceEmployee) {
-                $service->serviceEmployees()->create($serviceEmployee);
-            }
         });
 
         toast('सेवा सफलतापूर्वक सिर्जना गरियो', 'success');
@@ -119,16 +115,6 @@ class ServiceController extends Controller
                     ]);
                 } else {
                     $service->serviceProcesses()->create($serviceProcess);
-                }
-            }
-
-            foreach ($request->input('serviceEmployees') as $serviceEmployee) {
-                if (!empty($serviceEmployee['id'])) {
-                    ServiceEmployee::find($serviceEmployee['id'])->update([
-                        'employee' => $serviceEmployee['employee']
-                    ]);
-                } else {
-                    $service->serviceEmployees()->create($serviceEmployee);
                 }
             }
         });
