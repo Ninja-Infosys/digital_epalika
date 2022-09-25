@@ -9,15 +9,19 @@ use App\Traits\EventObserveTrait;
 
 class PartnerDetail extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-
-   ];
+    protected $fillable = [
+        'business_detail_id',
+        'relation',
+        'name',
+        'citizenship_no',
+        'mobile_no',
+    ];
 }

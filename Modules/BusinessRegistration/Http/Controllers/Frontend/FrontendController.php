@@ -14,11 +14,6 @@ class FrontendController extends Controller
         return view('businessregistration::frontend.index');
     }
 
-    public function registrationForm()
-    {
-
-        return view('businessregistration::frontend.register.register');
-    }
 
 
 }
