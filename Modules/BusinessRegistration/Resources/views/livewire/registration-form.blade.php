@@ -2,13 +2,13 @@
     <div class="card-body">
         <div class="text-center">
             <!-- progressbar -->
-{{--            <ul class="progressbar">--}}
-{{--                <li class="{{ $currentStep != 1 ? '' : 'active' }}"><a href="#step-1" type="button">पहिलो चरण </a></li>--}}
-{{--                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">दोस्रो चरण </a></li>--}}
-{{--                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-3" type="button">तेस्रो चरण </a></li>--}}
-{{--                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-4" type="button" disabled="disabled">अन्तिम--}}
-{{--                        चरण </a></li>--}}
-{{--            </ul>--}}
+            {{--            <ul class="progressbar">--}}
+            {{--                <li class="{{ $currentStep != 1 ? '' : 'active' }}"><a href="#step-1" type="button">पहिलो चरण </a></li>--}}
+            {{--                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">दोस्रो चरण </a></li>--}}
+            {{--                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-3" type="button">तेस्रो चरण </a></li>--}}
+            {{--                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-4" type="button" disabled="disabled">अन्तिम--}}
+            {{--                        चरण </a></li>--}}
+            {{--            </ul>--}}
         </div>
 
         <form wire:submit.prevent="save">
@@ -166,6 +166,9 @@
                                         id="province_id"
                                         wire:model="province_id">
                                     <option value="">--- प्रदेश छान्नुहोस्---</option>
+                                    @foreach($provinces as $province)
+                                        <option value="{{$province->id}}">{{$province->province}}</option>
+                                    @endforeach
                                 </select>
                                 @error('province_id')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -177,6 +180,11 @@
                                         id="district_id"
                                         wire:model="district_id">
                                     <option value="">--- जिल्ला छान्नुहोस्----</option>
+                                    @foreach($districts as $district)
+                                        <option value="{{$district->id}}">
+                                            {{$district->district}}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('district_id')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -188,6 +196,11 @@
                                         id="local_body_id"
                                         wire:model="local_body_id">
                                     <option value="">--- पालिका छान्नुहोस्----</option>
+                                    @foreach($localBodies as $localBody)
+                                        <option value="{{$localBody->id}}">
+                                            {{$localBody->local_body}}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('local_body_id')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -199,6 +212,11 @@
                                         id="ward_no"
                                         wire:model="ward_no">
                                     <option value="">--- वार्ड छान्नुहोस्----</option>
+                                    @for($i=1;$i<=$wards;$i++)
+                                        <option value="{{$i}}">
+                                            {{$i}}
+                                        </option>
+                                    @endfor
                                 </select>
                                 @error('ward_no')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -213,7 +231,7 @@
                                     id="way"
                                     placeholder="मार्ग"
                                     wire:model="way"
-                                />                                    @error('way')
+                                /> @error('way')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
