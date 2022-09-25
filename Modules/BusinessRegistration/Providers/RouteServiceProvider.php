@@ -26,7 +26,10 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('businessRegistration/admin')
             ->as('admin.businessRegistration.')
             ->group(module_path('BusinessRegistration', '/Routes/admin.php'));
+
         Route::middleware('web')
+            ->prefix('businessRegistration')
+            ->as('businessRegistration.')
             ->group(module_path('BusinessRegistration', '/Routes/web.php'));
     }
 

@@ -17,8 +17,9 @@
                         तल दिएको फर्म लाई ३ तह मा पुरा गर्नुहोस् र आफुले भरेको फर्म ठीक छ छैन विचार
                         गरी पठाउनुहोस् ।
                     </p>
-                    @livewire('BusinessRegistration::business-form-wizard')
+                    <livewire:businessregistration::registration-form />
                 </div>
             </div>
         </div>
     </section>
+@endsection

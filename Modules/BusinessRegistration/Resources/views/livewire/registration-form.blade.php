@@ -2,13 +2,13 @@
     <div class="card-body">
         <div class="text-center">
             <!-- progressbar -->
-            <ul class="progressbar">
-                <li class="{{ $currentStep != 1 ? '' : 'active' }}"><a href="#step-1" type="button">पहिलो चरण </a></li>
-                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">दोस्रो चरण </a></li>
-                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-3" type="button">तेस्रो चरण </a></li>
-                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-4" type="button" disabled="disabled">अन्तिम
-                        चरण </a></li>
-            </ul>
+{{--            <ul class="progressbar">--}}
+{{--                <li class="{{ $currentStep != 1 ? '' : 'active' }}"><a href="#step-1" type="button">पहिलो चरण </a></li>--}}
+{{--                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">दोस्रो चरण </a></li>--}}
+{{--                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-3" type="button">तेस्रो चरण </a></li>--}}
+{{--                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-4" type="button" disabled="disabled">अन्तिम--}}
+{{--                        चरण </a></li>--}}
+{{--            </ul>--}}
         </div>
 
         <form wire:submit.prevent="save">
@@ -121,93 +121,93 @@
                                 id="issue_district"
                                 wire:model="issue_district">
                             <option value="">---जारि जिल्ला ----</option>
-                            </select> 
+                        </select>
                         @error('issue_district')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
                 </div>
-                
+
                 <div class="address">
                     <fieldset>
-                        <legend class="title">ठेगाना</legend> 
-                        <div class="row mt-3">                            
-                                <div class="col-md-4 mb-3">
-                                    <label for="province_id" class="form-label"> प्रदेश </label>
-                                    <select class="form-select @error('province_id') is-invalid @enderror"
-                                            id="province_id"
-                                            wire:model="province_id">
-                                        <option value="">--- प्रदेश छान्नुहोस्---</option>
-                                        </select> 
-                                    @error('province_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div> 
-                                <div class="col-md-4 mb-3">
-                                    <label for="district_id" class="form-label">जिल्ला</label>
-                                    <select class="form-select @error('district_id') is-invalid @enderror"
-                                            id="district_id"
-                                            wire:model="district_id">
-                                        <option value="">--- जिल्ला छान्नुहोस्----</option>
-                                        </select> 
-                                    @error('district_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="local_body_id" class="form-label">पालिका</label>
-                                    <select class="form-select @error('local_body_id') is-invalid @enderror"
-                                            id="local_body_id"
-                                            wire:model="local_body_id">
-                                        <option value="">--- पालिका छान्नुहोस्----</option>
-                                        </select> 
-                                    @error('local_body_id')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="ward_no" class="form-label">वार्ड</label>
-                                    <select class="form-select @error('ward_no') is-invalid @enderror"
-                                            id="ward_no"
-                                            wire:model="ward_no">
-                                        <option value="">--- वार्ड छान्नुहोस्----</option>
-                                        </select> 
-                                    @error('ward_no')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="way" class="form-label">मार्ग</label>
-                                    <input
-                                        name="way"
-                                        class="form-control @error('way') is-invalid @enderror"
-                                        type="text"
-                                        id="way"
-                                        placeholder="मार्ग"
-                                        wire:model="way"
-                                    />                                    @error('way')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="tole" class="form-label">गाउ/टोल</label>
-                                    <input
-                                        name="tole"
-                                        class="form-control @error('tole') is-invalid @enderror"
-                                        type="text"
-                                        id="tole"
-                                        placeholder="गाउ/टोल"
-                                        wire:model="tole"
-                                    />
-                                    @error('tole')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            
+                        <legend class="title">ठेगाना</legend>
+                        <div class="row mt-3">
+                            <div class="col-md-4 mb-3">
+                                <label for="province_id" class="form-label"> प्रदेश </label>
+                                <select class="form-select @error('province_id') is-invalid @enderror"
+                                        id="province_id"
+                                        wire:model="province_id">
+                                    <option value="">--- प्रदेश छान्नुहोस्---</option>
+                                </select>
+                                @error('province_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="district_id" class="form-label">जिल्ला</label>
+                                <select class="form-select @error('district_id') is-invalid @enderror"
+                                        id="district_id"
+                                        wire:model="district_id">
+                                    <option value="">--- जिल्ला छान्नुहोस्----</option>
+                                </select>
+                                @error('district_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="local_body_id" class="form-label">पालिका</label>
+                                <select class="form-select @error('local_body_id') is-invalid @enderror"
+                                        id="local_body_id"
+                                        wire:model="local_body_id">
+                                    <option value="">--- पालिका छान्नुहोस्----</option>
+                                </select>
+                                @error('local_body_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="ward_no" class="form-label">वार्ड</label>
+                                <select class="form-select @error('ward_no') is-invalid @enderror"
+                                        id="ward_no"
+                                        wire:model="ward_no">
+                                    <option value="">--- वार्ड छान्नुहोस्----</option>
+                                </select>
+                                @error('ward_no')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="way" class="form-label">मार्ग</label>
+                                <input
+                                    name="way"
+                                    class="form-control @error('way') is-invalid @enderror"
+                                    type="text"
+                                    id="way"
+                                    placeholder="मार्ग"
+                                    wire:model="way"
+                                />                                    @error('way')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="tole" class="form-label">गाउ/टोल</label>
+                                <input
+                                    name="tole"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    type="text"
+                                    id="tole"
+                                    placeholder="गाउ/टोल"
+                                    wire:model="tole"
+                                />
+                                @error('tole')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+
                         </div>
                     </fieldset>
                 </div>
-           </fieldset>
+            </fieldset>
         </form>
     </div>
 </div>
