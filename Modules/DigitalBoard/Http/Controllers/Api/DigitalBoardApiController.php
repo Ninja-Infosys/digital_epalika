@@ -25,7 +25,6 @@ class DigitalBoardApiController extends Controller
         $notices = Notice::where(['show_on_index' => 1, 'closed_at' === null])->orderBy('date', 'desc')->get();
         $employees = Employee::where('status', 1)->orderBy('position')->get();
         $videos = Video::latest()->get();
-
         return [
             'notices' => NoticeResource::collection($notices->where('type','Notice')),
             'newses' => NewsResource::collection($notices->where('type', 'News')),

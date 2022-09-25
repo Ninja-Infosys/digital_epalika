@@ -26,7 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->share('important_links', ImportantLink::all());
-
         view()->share('officeSetting', OfficeSetting::with('fiscalYear', 'district', 'localBody')->first());
         OfficeHeader::observe(OfficeHeaderObserver::class);
         MunicipalCommittee::observe(MunicipalCommitteeObserver::class);
