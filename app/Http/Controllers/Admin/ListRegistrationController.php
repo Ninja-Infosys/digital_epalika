@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\ActivityLogEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ListRegistration\StoreListRegistrationRequest;
 use App\Http\Requests\ListRegistration\UpdateListRegistrationRequest;

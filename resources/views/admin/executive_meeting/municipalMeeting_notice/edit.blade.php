@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">सूचना प्रशारण</a>
+                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">इ-कार्यपालिका</a>
                         </li>
                         <li class="breadcrumb-item active">सूचना प्रशारण सम्पादन गर्नुहोस</li>
                     </ol>

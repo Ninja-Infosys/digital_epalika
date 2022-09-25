@@ -2,6 +2,7 @@
 
 namespace App\Models\ExecutiveMeeting;
 
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class MunicipalMeetingDecision extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
         'date',
@@ -34,9 +35,8 @@ class MunicipalMeetingDecision extends Model
 
     public function setDecisionFileAttribute($value)
     {
-        if(!empty($value) && !is_string($value))
-        {
-            $this->attributes['decision_file'] = $value->store('municipalMeeting','public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['decision_file'] = $value->store('municipalMeeting', 'public');
         }
     }
 

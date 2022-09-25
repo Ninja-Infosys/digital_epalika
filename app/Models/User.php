@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\UserManagement\Role;
+use App\Traits\EventObserveTrait;
 use App\Traits\QueryFilterTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,6 +30,7 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use SoftDeletes;
     use QueryFilterTrait;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
