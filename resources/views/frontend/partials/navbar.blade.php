@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('business')}}">
+                    <a class="nav-link" href="{{route('businessRegistration')}}">
                          ब्यबसाय
                     </a>
                 </li>

@@ -11,4 +11,7 @@
 |
 */
 
-Route::get('businessRegistration',[\Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController::class,'businessRegistration'])->name('businessRegistration');
+use Illuminate\Support\Facades\Route;
+use Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController;
+
+Route::get('businessRegistration',[FrontendController::class,'businessRegistration'])->name('businessRegistration');
