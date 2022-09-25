@@ -58,7 +58,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('businessRegistration.business')}}">
-                        ब्यबसाय
+                        ब्यवसाय
                     </a>
                 </li>
                 <li class="nav-item">
