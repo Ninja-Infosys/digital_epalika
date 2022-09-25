@@ -10,7 +10,6 @@
     --blackColor: #0e314c;
     --fontSize: 14px;
 }
-
 body {
     overflow-x: hidden;
     background-color: var(--whiteColor) !important;
@@ -162,7 +161,9 @@ small {
     padding-bottom: 10px;
     border-radius: 6px;
 }
-
+.card-description p{
+    line-height: 1rem;
+}
 /*gallery slider*/
   .card img {
       object-fit: contain;

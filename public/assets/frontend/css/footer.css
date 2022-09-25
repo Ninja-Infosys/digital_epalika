@@ -83,3 +83,51 @@ a {
     text-decoration: none;
     background-color: transparent;
 }
+
+ #round-btn .popup-banner {
+     position: fixed;
+     bottom: 1rem;
+     right: 7px;
+     border-left: none;
+     border-top: 1px solid #1e4984;
+     border-right: 1px solid #32598e;
+     z-index: 100;
+     background: #1e4984 no-repeat center;
+     width: 13em;
+     font-family: "Roboto", sans-serif;
+     cursor: pointer;
+     height: 80px;
+     border-radius: 10px 10px 0 0;
+ }
+ .popup-banner h3 {
+     font-size: 15px;
+     margin: 0px;
+     padding: 10px 0px 9px 12px;
+     color: #ffffff;
+     width: 100%;
+     display: block;
+     text-align: left;
+     font-weight: 800;
+     border-radius: 10px 10px 0px 0px;
+ }
+ #round-btn .popup-banner .btnsection {
+     display: flex;
+     height: 45px;
+     position: relative;
+     background: #f8f8f8;
+     border: 1px solid #9a9c9e;
+ }
+ #round-btn .popup-banner .btnsection p {
+     padding: 12px 0px 10px 5px;
+     margin: 0;
+     color: #717171;
+     float: left;
+     font-weight: 700;
+     font-size: 11px;
+ }
+ #round-btn .round-btn-div {
+     position: fixed;
+     right: 0;
+     bottom: 3.4rem;
+     z-index: 100;
+ }
