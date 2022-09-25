@@ -57,7 +57,7 @@
                                     <td>{{$municipalDetail->title}}</td>
                                     <td>{!! $municipalDetail->icon !!}</td>
                                     <td><div
-                                            style="height: 20px;width: 100px; background-color: {{$municipalDetail->bg_color}};color: white;padding: 5px">{{$municipalDetail->bg_color}}</div>
+                                            style="background-color: {{$municipalDetail->bg_color}};color: white;padding: 5px">{{$municipalDetail->bg_color}}</div>
                                     </td>
                                     <td>{{$municipalDetail->count}}</td>
                                     <td>{{$municipalDetail->position}}</td>
