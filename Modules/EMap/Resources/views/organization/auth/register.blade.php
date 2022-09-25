@@ -31,6 +31,7 @@
     />
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/sweetalert2.min.css')}}">
     @livewireStyles
 </head>
 
@@ -39,7 +40,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <div class="card" >
+                <div class="card">
                     <div class="row">
                         <div class="col-md-4 system_info">
                             <div class="logo">
@@ -53,7 +54,7 @@
                                     (Digital Palika Management System)
                                 </p>
                             </div>
-                            <div class="row technical-support" >
+                            <div class="row technical-support">
                                 <p>
                                     <b>प्राविधिक सहायता कक्ष:</b>
                                     <br>
@@ -91,6 +92,20 @@
 
 <!-- App js -->
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
+
+<script src="{{asset('assets/frontend/js/sweetalert2.min.js')}}"></script>
+
 @livewireScripts
+
+{{--listener for toastr--}}
+<script>
+    window.addEventListener('alert_message', event => {
+        swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+        });
+    });
+</script>
 </body>
 </html>
