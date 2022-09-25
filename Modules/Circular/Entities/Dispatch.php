@@ -3,6 +3,7 @@
 namespace Modules\Circular\Entities;
 
 use App\Models\File;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -12,7 +13,7 @@ use Illuminate\Support\Str;
 
 class Dispatch extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
         'dispatch_date',

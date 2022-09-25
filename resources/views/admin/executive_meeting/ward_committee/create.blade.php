@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">वडा समिति</a>
+                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">इ-कार्यपालिका</a>
                         </li>
                         <li class="breadcrumb-item active"> नयाँ वडा समिति थप्नुहोस्</li>
                     </ol>
@@ -116,7 +116,7 @@
                                 <div class="col-md-6 mb-2">
                                     <label for="position" class="form-label">स्थान  </label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="position"
                                         value="{{old('position')}}"
                                         class="form-control @error('position') is-invalid @enderror"

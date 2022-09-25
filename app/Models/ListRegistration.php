@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -11,7 +12,7 @@ use Illuminate\Support\Str;
 
 class ListRegistration extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
         'date',

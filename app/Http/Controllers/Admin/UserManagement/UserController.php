@@ -44,10 +44,9 @@ class UserController extends Controller
             'तपाईंलाई प्रयोगकर्ता सिर्जना गर्न अनुमति छैन'
         );
 
-        $user = User::create($request->validated() + [
+        User::create($request->validated() + [
                 'user_id' => auth()->id(),
             ]);
-        event(new ActivityLogEvent('Create', User::class, $user->id));
 
         toast('प्रयोगकर्ता सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.userManagement.user.index'));
@@ -80,7 +79,6 @@ class UserController extends Controller
         );
 
         $user->update($request->validated());
-        event(new ActivityLogEvent('Edit', User::class, $user->id));
 
         toast('प्रयोगकर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.userManagement.user.index'));
@@ -95,7 +93,6 @@ class UserController extends Controller
         );
 
         $user->delete();
-        event(new ActivityLogEvent('Delete', User::class, $user->id));
 
         toast('प्रयोगकर्ता सफलतापूर्वक मेटाइयो', 'success');
         return back();

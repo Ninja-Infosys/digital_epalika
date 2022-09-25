@@ -11,7 +11,10 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">निर्णयहरु</a>
+                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">इ-कार्यपालिका</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}">निर्णयहरु</a>
                         </li>
                         <li class="breadcrumb-item active"> नयाँ निर्णयहरु थप्नुहोस्</li>
                     </ol>
@@ -27,13 +30,15 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ निर्णयहरु थप्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> निर्णयहरु बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.municipalMeetingDecision.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.executiveMeeting.municipalMeetingDecision.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
 
                         <fieldset class="border p-2 mb-2">
@@ -62,7 +67,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label"> मिति *  </label>
+                                    <label for="date" class="form-label"> मिति * </label>
                                     <input
                                         type="text"
                                         name="date"
@@ -77,7 +82,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-2">
-                                    <label for="subject" class="form-label"> विषय *  </label>
+                                    <label for="subject" class="form-label"> विषय * </label>
                                     <input
                                         type="text"
                                         name="subject"
@@ -93,13 +98,14 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label for="description" class="form-label">बिवरण * </label>
-                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5" class="form-control summernote @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
+                                    <textarea name="description" id="description" cols="30" placeholder="बिवरण" rows="5"
+                                              class="form-control summernote @error('meeting_subject') is-invalid @enderror">{{old('description')}}</textarea>
                                     @error('description')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="decision_file" class="form-label"> फाईल *  </label>
+                                    <label for="decision_file" class="form-label"> फाईल * </label>
                                     <input
                                         type="file"
                                         name="decision_file"

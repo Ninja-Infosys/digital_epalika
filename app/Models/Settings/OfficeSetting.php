@@ -5,6 +5,7 @@ namespace App\Models\Settings;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 
 class OfficeSetting extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
         'created_at',

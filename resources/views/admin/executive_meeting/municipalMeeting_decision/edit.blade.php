@@ -11,7 +11,10 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">निर्णयहरु</a>
+                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">इ-कार्यपालिका</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}">निर्णयहरु</a>
                         </li>
                         <li class="breadcrumb-item active">निर्णयहरु सम्पादन गर्नुहोस</li>
                     </ol>
