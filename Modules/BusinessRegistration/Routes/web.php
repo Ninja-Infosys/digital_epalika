@@ -11,6 +11,4 @@
 |
 */
 
-Route::prefix('businessregistration')->group(function() {
-    Route::get('/', 'BusinessRegistrationController@index');
-});
+Route::get('businessRegistration',[\Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController::class,'businessRegistration'])->name('businessRegistration');

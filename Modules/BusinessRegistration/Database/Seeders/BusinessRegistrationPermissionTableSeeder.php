@@ -1,0 +1,23 @@
+<?php
+
+namespace Modules\BusinessRegistration\Database\Seeders;
+
+use App\Traits\StorePermissionTrait;
+use Illuminate\Database\Seeder;
+
+class BusinessRegistrationPermissionTableSeeder extends Seeder
+{
+    use StorePermissionTrait;
+
+    public function run()
+    {
+        $permissions = [
+            'businessNature_access',
+            'businessNature_create',
+            'businessNature_edit',
+            'businessNature_delete',
+        ];
+
+        $this->storePermission($permissions);
+    }
+}
