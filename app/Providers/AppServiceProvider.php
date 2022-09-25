@@ -12,6 +12,7 @@ use App\Observers\ExecutiveMeeting\MunicipalCommitteeObserver;
 use App\Observers\ExecutiveMeeting\WardCommitteeObserver;
 use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,15 +20,15 @@ class AppServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
+        Paginator::useBootstrapFive();
     }
 
 
     public function boot()
     {
         view()->share('important_links', ImportantLink::all());
-
         view()->share('officeSetting', OfficeSetting::with('fiscalYear','province', 'district', 'localBody')->first());
+
         OfficeHeader::observe(OfficeHeaderObserver::class);
         MunicipalCommittee::observe(MunicipalCommitteeObserver::class);
         WardCommittee::observe(WardCommitteeObserver::class);

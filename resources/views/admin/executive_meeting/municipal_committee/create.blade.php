@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">पालिका समिति</a>
+                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">इ-कार्यपालिका</a>
                         </li>
                         <li class="breadcrumb-item active"> नयाँ पालिका समिति थप्नुहोस्</li>
                     </ol>

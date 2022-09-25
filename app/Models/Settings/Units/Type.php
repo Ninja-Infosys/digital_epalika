@@ -2,6 +2,7 @@
 
 namespace App\Models\Settings\Units;
 
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Type extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
         'created_at',

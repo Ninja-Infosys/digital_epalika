@@ -11,9 +11,9 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="">निर्णयहरु </a>
+                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">इ-कार्यपालिका</a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ निर्णयहरु थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">पालिका बैठक निर्णयहरु </li>
                     </ol>
                 </div>
                 <h4 class="page-title">निर्णयहरु</h4>
@@ -26,7 +26,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ निर्णयहरु थप्नुहोस्</h4>
+                        <h4 class="header-title">पालिका बैठक निर्णयहरु </h4>
                         @can('municipalMeeting_access')
                             <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.create')}}"
                                class="btn btn-sm btn-outline-primary">

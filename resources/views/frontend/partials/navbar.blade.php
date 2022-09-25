@@ -55,6 +55,12 @@
                         नागरिक सहयोग
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('businessRegistration.business')}}">
+                        ब्यबसाय
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('contact') ? 'active' : ''}}" href="{{route('contact')}}">
                         सम्पर्क

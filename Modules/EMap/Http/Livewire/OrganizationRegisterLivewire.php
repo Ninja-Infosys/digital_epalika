@@ -179,7 +179,7 @@ class OrganizationRegisterLivewire extends Component
                 'organizationDetail.ward' => ['required'],
                 'organizationDetail.tole' => ['nullable'],
                 'taxClearance.document' => ['required'],
-                'taxClearance.year' => ['required'],
+                'taxClearance.year' => ['nullable'],
             ]);
         } else {
             return $this->baseRule;
@@ -205,6 +205,11 @@ class OrganizationRegisterLivewire extends Component
 
             $this->resetForm();
         });
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => "success",
+            'title' => "धन्यबाद",
+            'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+        ]);
     }
 
     public function resetForm()

@@ -1,4 +1,3 @@
-
 @extends('frontend.layouts.master')
 @section('content')
 <section class="view-notice">
@@ -18,9 +17,7 @@
                                     </a>
                                 </div>
                             @endforeach
-
-
-                        </div>
+                       </div>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 
+use App\Events\ActivityLogEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\StoreMunicipalCommitteeRequest;
 use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\UpdateMunicipalCommitteeRequest;
@@ -40,7 +41,6 @@ class MunicipalCommitteeController extends Controller
             403,
             'You are not allowed to executive committee create'
         );
-
         MunicipalCommittee::create($request->validated());
 
         toast('पालिका समिति  सफलतापूर्वक थपियो', 'success');
@@ -92,8 +92,8 @@ class MunicipalCommitteeController extends Controller
             $this->deleteFile($municipalCommittee->photo);
         }
         $municipalCommittee->delete();
-        toast('पालिका समिति सफलतापूर्वक मेटाइयो', 'success');
 
+        toast('पालिका समिति सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
 }
