@@ -15,7 +15,7 @@ class UpdateServiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
+            'branch_id' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
             'service_name' => ['required'],
             'time_taken' => ['required'],
             'responsible_officer' => ['required'],

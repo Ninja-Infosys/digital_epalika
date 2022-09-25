@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('branch_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('service_name');
             $table->string('time_taken')->nullable();
             $table->string('responsible_officer')->nullable();
