@@ -44,16 +44,16 @@
     </section>
 
     <section class="avatar-section mt-5">
-        <div class="container bg-card card  rounded">
+        <div class="container bg-card card  rounded pt-3">
             <div class="row ">
                 @foreach($employees as $employee)
                     <div class="card-02 col-md-4 mb-2 px-3">
                         <div class="card shadow text-center">
-                            <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{$employee->photo_url}}"
+                            <img class="mt-3 mb-2 rounded mx-auto d-block img-fluid" src="{{$employee->photo_url}}"
                                  alt="{{$employee->name}}">
                             <div class="card-body p-0 m-0">
                                 <div class="card-description ">
-                                    <h5 class="card-title mt-5 pt-1">{{$employee->name}}</h5>
+                                    <h5 class="card-title mt-2 pt-1">{{$employee->name}}</h5>
                                     <h6 class="card-title ">{{$employee->designation}}</h6>
                                     <p>{{$employee->email}}</p>
                                     <p>{{$employee->phone}}</p>
@@ -100,9 +100,8 @@
 
                             </li>
                         @endforeach
-                        <button class="btn bg-primary btn-outline-light ">थप बोर्ड निर्णयहरु<i class="fa fa-angles-right"></i>
-                        <button class="btn bg-primary btn-outline-light ">थप समाचारहरु <i
-                                class="fa fa-angles-right"></i>
+                        <button class="btn bg-primary btn-outline-light ">थप बोर्ड निर्णयहरु
+                            <i class="fa fa-angles-right"></i>
                         </button>
                     </ul>
                 </div>
@@ -121,7 +120,6 @@
                         @endforeach
                         <button class="btn bg-primary btn-outline-light ">थप कार्यपालिका बोर्ड निर्णय <i
                                 class="fa fa-angles-right"></i>
-                        <button class="btn bg-primary btn-outline-light ">थप समाचरहरु <i class="fa fa-angles-right"></i>
                         </button>
                     </ul>
                 </div>
@@ -134,7 +132,7 @@
         <div class="mb-3">
             <div class="title-head-main px-3 py-2 d-flex justify-content-between">
                 <div>
-                    <span class="fa fa-globe">प्रदेश ६</span>
+                    <span class="fa fa-globe"></span>{{$officeSetting->province_id}}
                 </div>
             </div>
         </div>
