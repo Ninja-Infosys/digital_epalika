@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Modules\EMap\Entities\Client;
-use Modules\EMap\Http\Requests\Clients\Client\StoreClientRequest;
-use Modules\EMap\Http\Requests\Clients\Client\UpdateClientRequest;
 
 class ClientController extends Controller
 {
