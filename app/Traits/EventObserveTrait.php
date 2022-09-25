@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use App\Events\ActivityLogEvent;
-use App\Observers\EventObserver;
 
 trait EventObserveTrait
 {
