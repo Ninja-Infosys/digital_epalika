@@ -17,30 +17,16 @@
                 <legend class="title">प्रोपाईटरको विवरण</legend>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="first_name" class="form-label">व्यवसायी नाम:</label>
+                        <label for="name" class="form-label">व्यवसायी नाम:</label>
                         <input
-                            name="first_name"
-                            class="form-control @error('first_name') is-invalid @enderror"
+                            name="name"
+                            class="form-control @error('name') is-invalid @enderror"
                             type="text"
-                            id="first_name"
+                            id="name"
                             placeholder="व्यवसायी नाम"
-                            wire:model="first_name"
+                            wire:model="name"
                         />
-                        @error('first_name')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="last_name" class="form-label">व्यवसायी थर:</label>
-                        <input
-                            name="last_name"
-                            class="form-control @error('last_name') is-invalid @enderror"
-                            type="text"
-                            id="last_name"
-                            placeholder="व्यवसायी थर"
-                            wire:model="last_name"
-                        />
-                        @error('last_name')
+                        @error('name')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -51,9 +37,9 @@
                             wire:model="gender"
                             id="gender">
                             <option value="">--- लिङ्ग छान्नुहोस् ---</option>
-                            <option value="Male">पूरुष</option>
-                            <option value="Female">महिला</option>
-                            <option value="Other">अन्य</option>
+                            @foreach(config('defaults.gender') as $key=>$gender)
+                            <option value="{{$gender}}">{{$key}}</option>
+                            @endforeach
                         </select>
                         @error('.gender')
                         <div class="invalid-feedback">{{$message}}</div>

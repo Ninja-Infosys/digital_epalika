@@ -6,10 +6,11 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class RegistrationForm extends Component
 {
-
+    use WithFileUploads;
     public $province_id = '';
     public $district_id = '';
     public $local_body_id = '';
@@ -20,11 +21,24 @@ class RegistrationForm extends Component
     public $localBodies = [];
     public $wards = '';
 
+    public array $form = [
+            'name'=>null,
+
+
+
+        ];
+
 
     public function mount()
     {
         $this->provinces = Province::all();
     }
+
+    public function save()
+    {
+
+    }
+
     public function render()
     {
         if (!empty($this->province_id)) {
