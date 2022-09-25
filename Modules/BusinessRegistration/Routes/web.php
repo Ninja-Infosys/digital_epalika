@@ -11,6 +11,8 @@
 |
 */
 
-Route::prefix('businessregistration')->group(function() {
-    Route::get('/', 'BusinessRegistrationController@index');
-});
+
+use Modules\BusinessRegistration\Http\Controllers\BusinessRegistration;
+
+
+Route::view('/businessregistration','businessregistration::frontend.index')->name('businessregistration');

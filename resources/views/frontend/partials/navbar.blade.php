@@ -56,6 +56,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('business')}}">
+                         ब्यबसाय
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('contact') ? 'active' : ''}}" href="{{route('contact')}}">
                         सम्पर्क
                     </a>
