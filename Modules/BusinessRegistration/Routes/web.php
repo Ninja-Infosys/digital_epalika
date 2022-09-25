@@ -18,4 +18,3 @@ use Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController;
 //frontendController
 
 Route::get('/business',[FrontendController::class,'business'])->name('business');
-Route::get('/registrationForm',[FrontendController::class,'registrationForm'])->name('registrationForm');

@@ -8,6 +8,7 @@ use App\Models\Address\Province;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProprietorDetail extends Model
@@ -55,5 +56,10 @@ class ProprietorDetail extends Model
     public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);
+    }
+
+    public function threeGenerationDetails(): HasMany
+    {
+        return $this->hasMany(ThreeGenerationDetail::class);
     }
 }
