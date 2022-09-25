@@ -1,14 +1,13 @@
-<nav class="navbar navbar-expand-lg shadow">
+<nav class="navbar navbar-expand-lg ">
     <div class="container">
-        <button class="navbar-toggler" type="button" [class.collapsed]="classApplied" (click)="toggleClass()">
-            <div class="hamburger-toggle">
-                <mat-icon [svgIcon]="'icon_outline:menu'"></mat-icon>
-            </div>
-        </button>
-        <div class="collapse navbar-collapse" [class.show]="classApplied">
-            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+        <a class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('/')}}">
+                    <a class="nav-link {{request()->routeIs('welcome') ? 'active' : ''}}" aria-current="page" href="{{url('/')}}">
                         <i class="fa fa-home"></i>
                         गृहपृष्ठ
                     </a>
@@ -22,45 +21,60 @@
                         <li><a class="dropdown-item" href="{{url('/static/employee')}}">कर्मचारीहरु</a></li>
                     </ul>
                 </li>--}}
-{{--                    <a class="nav-link dropdown-toggle">--}}
-{{--                        ग्यालेरि--}}
-{{--                    </a>--}}
-{{--                    <ul class="dropdown-menu">--}}
-{{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/photo')}}">फोटोहरु</a></li>--}}
-{{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/audio')}}">अडियोहरु</a></li>--}}
-{{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/video')}}">भिडियोहरु</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
+                {{--                    <a class="nav-link dropdown-toggle">--}}
+                {{--                        ग्यालेरि--}}
+                {{--                    </a>--}}
+                {{--                    <ul class="dropdown-menu">--}}
+                {{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/photo')}}">फोटोहरु</a></li>--}}
+                {{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/audio')}}">अडियोहरु</a></li>--}}
+                {{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/video')}}">भिडियोहरु</a></li>--}}
+                {{--                    </ul>--}}
+                {{--                </li>--}}
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('/static/notice')}}">
+                    <a class="nav-link {{request()->routeIs('notice') ? 'active' : ''}}" href="{{route('notice')}}">
                         सूचना
                     </a>
                 </li>
-              {{--  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('/static/executive')}}">
-                        कार्यपालिका न्युज
-                    </a>
-                </li>--}}
+                {{--  <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="{{url('/static/executive')}}">
+                          कार्यपालिका न्युज
+                      </a>
+                  </li>--}}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('e-map')}}">
+                    <a class="nav-link {{request()->routeIs('e-map') ? 'active' : ''}}" href="{{route('e-map')}}">
                         इ-नक्सा
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('grievanceHandling.grievance')}}">
+                    <a class="nav-link {{request()->routeIs('grievanceHandling.grievance') ? 'active' : ''}}" href="{{route('grievanceHandling.grievance')}}">
                         गुनासो
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('helpdesk.helpdesk')}}" >
+                    <a class="nav-link " href="{{route('helpdesk.helpdesk')}}">
                         नागरिक सहयोग
                     </a>
                 </li>
+            
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('/static/contact')}}">
+                    <a class="nav-link" href="{{route('businessRegistration')}}">
+                        ब्यबसाय
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{request()->routeIs('contact') ? 'active' : ''}}" href="{{route('contact')}}">
                         सम्पर्क
                     </a>
                 </li>
+{{--                <li class="nav-item dropdown">--}}
+{{--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"--}}
+{{--                       data-bs-toggle="dropdown" aria-expanded="false">--}}
+{{--                        Dropdown--}}
+{{--                    </a>--}}
+{{--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
+{{--                        <li><a class="dropdown-item" href="#">Action</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
             </ul>
         </div>
     </div>

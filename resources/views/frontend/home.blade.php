@@ -33,7 +33,7 @@
                 <div class="card-01 introduction  bg-card shadow rounded">
                     <h4 class="heading mt-2 mb-3 px-3">{{$officeSetting->name}}को संक्षिप्त परिचय</h4>
                     <h6 class="fw-normal lh-lg">
-                        {!! Str::words(strip_tags($officeSetting->introduction),100) !!}
+                        {!! Str::words(strip_tags($officeSetting->introduction),90) !!}
                     </h6>
                     <div class="d-flex justify-content-end">
                         <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
@@ -44,16 +44,16 @@
     </section>
 
     <section class="avatar-section mt-5">
-        <div class="container bg-card card  rounded">
+        <div class="container bg-card card  rounded pt-3">
             <div class="row ">
                 @foreach($employees as $employee)
                     <div class="card-02 col-md-4 mb-2 px-3">
                         <div class="card shadow text-center">
-                            <img class="mt-3 mb-3 rounded mx-auto d-block img-fluid" src="{{$employee->photo_url}}"
+                            <img class="mt-3 mb-2 rounded mx-auto d-block img-fluid" src="{{$employee->photo_url}}"
                                  alt="{{$employee->name}}">
                             <div class="card-body p-0 m-0">
                                 <div class="card-description ">
-                                    <h5 class="card-title mt-5">{{$employee->name}}</h5>
+                                    <h5 class="card-title mt-2 pt-1">{{$employee->name}}</h5>
                                     <h6 class="card-title ">{{$employee->designation}}</h6>
                                     <p>{{$employee->email}}</p>
                                     <p>{{$employee->phone}}</p>
@@ -100,8 +100,8 @@
 
                             </li>
                         @endforeach
-                        <button class="btn bg-primary btn-outline-light ">थप समाचारहरु <i
-                                class="fa fa-angles-right"></i>
+                        <button class="btn bg-primary btn-outline-light ">थप बोर्ड निर्णयहरु
+                            <i class="fa fa-angles-right"></i>
                         </button>
                     </ul>
                 </div>
@@ -132,7 +132,7 @@
         <div class="mb-3">
             <div class="title-head-main px-3 py-2 d-flex justify-content-between">
                 <div>
-                    <span class="fa fa-globe">प्रदेश ६</span>
+                    <span class="fa fa-globe"></span>&nbsp;{{$officeSetting->province->province??''}}
                 </div>
             </div>
         </div>
@@ -143,7 +143,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <iframe src="https://sthaniya.gov.np/gis" style="height:250px;width:100%;"
+                    <iframe src="https://sthaniya.gov.np/gis" style="height:300px;width:100%;"
                             title="Iframe Example"></iframe>
                 </div>
                 <div class="col-md-6">
@@ -191,7 +191,7 @@
                             <div class="facebook-page">
                                 <iframe
                                     src="{{$officeSetting->facebook_link}}"
-                                    width="340" height="400"
+                                    width="300" height="400"
                                     style="border:none;overflow:hidden" scrolling="no" frameborder="0"
                                     allowfullscreen="true"
                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
@@ -224,5 +224,4 @@
     @push('styles')
         <link rel="stylesheet" href="{{asset('assets/frontend/css/home/home.css')}}">
     @endpush
-
 @endsection

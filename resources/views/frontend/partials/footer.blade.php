@@ -2,6 +2,17 @@
     <footer class="footer">
         <div class="footer-main" style="background-image: url({{url('assets/frontend/image/footer.jpg')}});">
             <div class="container">
+                <div id="round-btn">
+                    <div class="popup-banner">
+                        <h3>Smart Palika</h3>
+                        <div class="btnsection">
+                            <p>म तपाईंलाई कसरी सहयोग गर्न सक्छु?</p>
+                        </div>
+                    </div>
+                    <div class="round-btn-div">
+                        <img class="round-btn-img" src="https://kmc.palmchatbot.com/images/moscot.png">
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-4">
                         <h6 class="footer-title mb-3">सम्पर्क विवरण</h6>
@@ -51,6 +62,7 @@
         </div>
     </footer>
 </section>
-{{--@push('styles')--}}
-{{--    <link rel="stylesheet" href="{{asset('assets/frontend/css/footer.css')}}">--}}
-{{--@endpush--}}
+@push('styles')
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/footer.css')}}">
+@endpush
+

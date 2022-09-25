@@ -15,14 +15,17 @@
             </a>
 
         </li>
-        
-        <li class="mm-active">
-            <a href="#">
 
-                <img src="..." alt="">
-                <span>Client</span>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <img src="{{asset('assets/backend/emap/admin/img/menu-icon/2.svg')}}" alt="">
+                <span>ग्राहक</span>
             </a>
-
+            <ul>
+                <li><a href="#">ग्राहकहरु</a></li>
+                <li><a href="#">Register</a></li>
+                <li><a href="forgot_pass.html">Forgot Password</a></li>
+            </ul>
         </li>
 
         <li class="">

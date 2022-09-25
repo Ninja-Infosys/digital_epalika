@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('businessregistration')->group(function() {
-    Route::get('/', 'BusinessRegistrationController@index');
-});
+use Illuminate\Support\Facades\Route;
+use Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController;
+
+
+//frontendController
+Route::get('businessRegistration',[FrontendController::class,'businessRegistration'])->name('businessRegistration');
