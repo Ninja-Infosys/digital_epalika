@@ -94,9 +94,6 @@ class ServiceController extends Controller
         );
 
         DB::transaction(function () use ($request, $service) {
-            if ($request->hasFile('photo') && $service->photo) {
-                $this->deleteFile($service->photo);
-            }
             $service->update($request->validated());
 
             foreach ($request->input('serviceDocuments') as $serviceDocument) {
