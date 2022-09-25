@@ -22,8 +22,7 @@ class ProprietorDetail extends Model
     ];
 
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'citizenship_no',
         'issue_date',
         'issue_district',
