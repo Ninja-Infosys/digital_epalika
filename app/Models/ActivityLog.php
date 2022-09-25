@@ -46,18 +46,4 @@ class ActivityLog extends Model
     {
         return $this->morphTo();
     }
-
-    public function getBrowserNameAttribute()
-    {
-        $t = strtolower($this->attributes['agent']);
-        $t = " " . $t;
-        if (strpos($t, 'opera') || strpos($t, 'opr/')) return 'Opera';
-        elseif (strpos($t, 'edge')) return 'Edge';
-        elseif (strpos($t, 'chrome')) return 'Chrome';
-        elseif (strpos($t, 'safari')) return 'Safari';
-        elseif (strpos($t, 'firefox')) return 'Firefox';
-        elseif (strpos($t, 'msie') || strpos($t, 'trident/7')) return 'Internet Explorer';
-        return 'Unkown';
-
-    }
 }
