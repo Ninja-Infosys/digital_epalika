@@ -12,6 +12,7 @@ use App\Observers\ExecutiveMeeting\MunicipalCommitteeObserver;
 use App\Observers\ExecutiveMeeting\WardCommitteeObserver;
 use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
+        Paginator::useBootstrapFive();
     }
 
 
