@@ -12,7 +12,7 @@
                 let englishDate = NepaliFunctions.AD2BS(parsedDate.parsedDate)
                 let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
                 console.log(formattedDate)
-                $("#ad-to-bs{{$id}}").html(formattedDate)
+                $("#ad-to-bs{{$id}}").html(NepaliFunctions.ConvertToUnicode(formattedDate))
             });
         </script>
     @endpush
