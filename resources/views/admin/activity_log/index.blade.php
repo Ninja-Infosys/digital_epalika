@@ -35,7 +35,9 @@
                                 <th>क्र.स</th>
                                 <th>मिति</th>
                                 <th>प्रयोगकर्ता</th>
+                                <th>मोडुल</th>
                                 <th>कार्य</th>
+                                <th>डिभाइस </th>
                                 <th>आईपी</th>
                             </tr>
                             </thead>
@@ -43,9 +45,14 @@
                             @forelse($activityLogs as $activityLog)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$activityLog->created_at->toDateString()}}</td>
+                                    <td>
+                                        <x-ad-to-bs id="-activity{{$loop->iteration}}"
+                                                    :ad-date="$activityLog->created_at->toDateString()"/>
+                                    </td>
                                     <td>{{$activityLog->user->name??''}}</td>
+                                    <td>{{class_basename($activityLog->model_type)}}</td>
                                     <td>{{$activityLog->activity_type}}</td>
+                                    <td>{{$activityLog->browser_name}}</td>
                                     <td>{{$activityLog->ip}}</td>
                                 </tr>
                             @empty

@@ -13,9 +13,11 @@ class AdToBs extends Component
      */
     public $adDate;
     public $id;
-    public function __construct($id,$adDate)
+
+    public function __construct($id, $adDate)
     {
-        $this->adDate = $adDate ?? '';
+        $this->adDate = $adDate ?? today();
+
         $this->id = $id ?? '';
     }
 
