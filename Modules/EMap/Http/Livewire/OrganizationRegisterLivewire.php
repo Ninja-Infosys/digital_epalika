@@ -205,6 +205,11 @@ class OrganizationRegisterLivewire extends Component
 
             $this->resetForm();
         });
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => "success",
+            'title' => "धन्यबाद",
+            'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+        ]);
     }
 
     public function resetForm()
