@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
 use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingDecisionController;
@@ -77,3 +78,6 @@ Route::prefix('website')->as('website.')->middleware('can:websiteAdmin_access')-
     Route::resource('municipalDetail', MunicipalDetailController::class);
     Route::resource('importantLink', ImportantLinkController::class);
 });
+
+//activity logs
+Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activityLog.index');

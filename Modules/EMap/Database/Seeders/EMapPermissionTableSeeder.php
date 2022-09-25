@@ -15,6 +15,9 @@ class EMapPermissionTableSeeder extends Seeder
     {
 
         $permissions = [
+            'organization_access',
+            'organization_edit',
+            'organization_delete',
         ];
 
         $this->storePermission($permissions);

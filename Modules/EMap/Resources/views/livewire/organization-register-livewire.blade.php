@@ -541,6 +541,7 @@
                                  type="text"
                                 id="taxClearance.year"
                                  placeholder="आ.व"
+                                wire:model="taxClearance.year"
                               />
                            @error('taxClearance.year')
                             <div class="invalid-feedback">{{$message}}</div>
