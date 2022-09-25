@@ -1,6 +1,7 @@
 <?php
 
 use Modules\HelpDesk\Http\Controllers\{BranchController, ServiceController, ServiceEmployeeController};
+use Illuminate\Support\Facades\Route;
 
 Route::resource('branch', BranchController::class);
 Route::resource('service', ServiceController::class);
