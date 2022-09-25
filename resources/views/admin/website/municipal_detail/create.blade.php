@@ -86,7 +86,7 @@
                             <div class="col-md-12 mb-2">
                                 <label for="count" class="form-label">गणना *</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     name="count"
                                     value="{{old('count')}}"
                                     class="form-control @error('count') is-invalid @enderror"
