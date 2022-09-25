@@ -16,13 +16,16 @@ class ActivityEventListener
 
     public function handle($event)
     {
-        ActivityLog::create([
-            'model_type' => $event->model ?? null,
-            'model_id' => $event->model_id ?? null,
-            'activity_type' => $event->activity_type,
-            'user_id' => auth()->id(),
-            'ip' => request()->ip(),
-            'agent' => request()->userAgent()
-        ]);
+        if (!app()->runningInConsole()) {
+            ActivityLog::create([
+                'model_type' => $event->model ?? null,
+                'model_id' => $event->model_id ?? null,
+                'activity_type' => $event->activity_type,
+                'user_id' => auth()->id(),
+                'ip' => request()->ip(),
+                'agent' => request()->userAgent()
+            ]);
+        }
+
     }
 }
