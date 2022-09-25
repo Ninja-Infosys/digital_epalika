@@ -120,7 +120,6 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
-                    <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fa fa-user"></i>
                         <span>My Profile</span>
@@ -130,6 +129,11 @@
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fa fa-cog"></i>
                         <span>Settings</span>
+                    </a>
+
+                    <a href="{{route('admin.activityLog.index')}}" class="dropdown-item notify-item">
+                        <i class="fa fa-tasks"></i>
+                        <span>गतिविधिहरू</span>
                     </a>
 
                     <!-- item-->
