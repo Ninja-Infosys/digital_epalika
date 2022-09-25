@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\UserManagement;
 
+use App\Events\ActivityLogEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserManagement\Role\StoreRoleRequest;
 use App\Http\Requests\UserManagement\Role\UpdateRoleRequest;
@@ -49,6 +50,8 @@ class RoleController extends Controller
             $role = Role::create($request->validated());
 
             $role->permissions()->attach($request->validated()['permissions']);
+
+            event(new ActivityLogEvent('Create', Role::class, $role->id));
         });
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -85,8 +88,9 @@ class RoleController extends Controller
 
         DB::transaction(function () use ($request, $role) {
             $role->update($request->validated());
-
             $role->permissions()->sync($request->validated()['permissions']);
+
+            event(new ActivityLogEvent('Edit', Role::class, $role->id));
         });
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -106,6 +110,8 @@ class RoleController extends Controller
         }
         $role->permissions()->detach();
         $role->delete();
+
+        event(new ActivityLogEvent('Delete', Role::class, $role->id));
 
         toast('भूमिका सफलतापूर्वक मेटियो', 'success');
         return back();

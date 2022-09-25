@@ -15,7 +15,7 @@ class UpdateServiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_id' => ['required', Rule::exists('branches', 'id')->withoutTrashed()],
+            'branch_id' => ['nullable', Rule::exists('branches', 'id')->withoutTrashed()],
             'service_name' => ['required'],
             'time_taken' => ['required'],
             'responsible_officer' => ['required'],
@@ -34,7 +34,6 @@ class UpdateServiceRequest extends FormRequest
     public function messages()
     {
         return [
-            'branch_id' => 'शाखा आवश्यक छ',
             'service_name.required' => 'सेवाको नाम आवश्यक छ',
             'time_taken.required' => 'लाग्ने समय आबश्यक छ ',
             'responsible_officer.required' => 'जिम्मेवार कर्मचारी आबश्यक छ ',
