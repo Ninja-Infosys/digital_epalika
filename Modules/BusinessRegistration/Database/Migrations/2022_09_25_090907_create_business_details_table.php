@@ -32,7 +32,6 @@ return new class extends Migration {
             $table->string('tole')->nullable();
             $table->string('length')->nullable();
             $table->string('width')->nullable();
-            $table->string('width')->nullable();
             $table->string('square_feet')->nullable();
             $table->timestamps();
             $table->softDeletes();
