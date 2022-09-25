@@ -37,29 +37,28 @@
                                 </td>
                                 <td>{{$service->time_taken}}</td>
                                 <td class="responsive-person" width="250">
-                                    @foreach($service->serviceEmployees as $responsibleEmployee)
-                                        {{$responsibleEmployee->employee}}{{!$loop->last ? ' ,': ''}}
-                                    @endforeach</td>
+                                    {{$service->responsible_officer}}
+                                </td>
                             </tr>
                             </tbody>
                         </table>
-             {{--           <div class="row">
+                        <div class="row">
                             @foreach($service->serviceEmployees as $responsibleEmployee)
                             <div class="card-02 col-md-4 mb-2 px-5">
                                 <div class="card responsible-person shadow text-center">
-                                    <img class="mt-1 rounded-circle mx-auto" src="{{asset('assets/frontend/image/agri4.jpg')}}" alt="">
+                                    <img class="mt-1 rounded-circle mx-auto" src="{{$responsibleEmployee->photo_url}}" alt="">
                                     <div class="card-body p-0 mt-1 m-0">
                                         <div class="card-description ">
-                                            <h5 class="card-title pt-1">{{$responsibleEmployee->employee}}</h5>
-                                            <h6 class="card-title ">पद</h6>
-                                            <p>email</p>
-                                            <p>phone</p>
+                                            <h5 class="card-title pt-1">{{$responsibleEmployee->employee_name}}</h5>
+                                            <h6 class="card-title ">पद: {{$responsibleEmployee->designation}}</h6>
+                                            <p>{{$responsibleEmployee->email}}</p>
+                                            <p>{{$responsibleEmployee->phone}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
-                        </div>--}}
+                        </div>
                         <div class="card-body fs-5 d-flex justify-content-sm-between">
                             <p>आवश्यक कागजातहरु सबै छन् ?</p>
                             <div class="">
