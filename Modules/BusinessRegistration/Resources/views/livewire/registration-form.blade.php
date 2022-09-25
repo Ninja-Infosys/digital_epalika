@@ -88,6 +88,34 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
+                        <label for="house_no" class="form-label">घर स्थाई लेखा नम्बर</label>
+                        <input
+                            name="house_no"
+                            class="form-control @error('house_no') is-invalid @enderror"
+                            type="text"
+                            id="house_no"
+                            placeholder="घर स्थाई लेखा नम्बर"
+                            wire:model="house_no"
+                        />
+                        @error('house_no')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="house_no" class="form-label">राष्ट्रियता परिचयपत्र नम्बर</label>
+                        <input
+                            name="house_no"
+                            class="form-control @error('house_no') is-invalid @enderror"
+                            type="text"
+                            id="house_no"
+                            placeholder="घर स्थाई लेखा नम्बर"
+                            wire:model="house_no"
+                        />
+                        @error('house_no')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <label for="citizenship_no" class="form-label">नागरिकता नम्बर: </label>
                         <input
                             name="citizenship_no"
@@ -116,7 +144,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="issue_district" class="form-label"> जारी जिल्ला</label>
+                        <label for="issue_district" class="form-label">जारी जिल्ला</label>
                         <select class="form-select @error('issue_district') is-invalid @enderror"
                                 id="issue_district"
                                 wire:model="issue_district">
