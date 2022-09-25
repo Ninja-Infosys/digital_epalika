@@ -16,7 +16,7 @@
             <fieldset>
                 <legend class="title">प्रोपाईटरको विवरण</legend>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label for="first_name" class="form-label">व्यवसायी नाम:</label>
                         <input
                             name="first_name"
@@ -30,20 +30,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="last_name" class="form-label">व्यवसायी थर:</label>
-                        <input
-                            name="last_name"
-                            class="form-control @error('last_name') is-invalid @enderror"
-                            type="text"
-                            id="last_name"
-                            placeholder="व्यवसायी थर"
-                            wire:model="last_name"
-                        />
-                        @error('last_name')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
+             
                     <div class="col-md-4 mb-3">
                         <label for="gender" class="form-label">लिङ्ग</label>
                         <select
@@ -102,16 +89,44 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="house_no" class="form-label">राष्ट्रियता परिचयपत्र नम्बर</label>
+                        <label for="national_card_no" class="form-label">राष्ट्रियता परिचयपत्र नम्बर</label>
                         <input
-                            name="house_no"
-                            class="form-control @error('house_no') is-invalid @enderror"
+                            name="national_card_no"
+                            class="form-control @error('national_card_no') is-invalid @enderror"
                             type="text"
-                            id="house_no"
-                            placeholder="घर स्थाई लेखा नम्बर"
-                            wire:model="house_no"
+                            id="national_card_no"
+                            placeholder="राष्ट्रियता परिचयपत्र नम्बर"
+                            wire:model="national_card_no"
                         />
-                        @error('house_no')
+                        @error('national_card_no')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="education_qualification" class="form-label">शैक्षिक योग्यता</label>
+                        <input
+                            name="education_qualification"
+                            class="form-control @error('education_qualification') is-invalid @enderror"
+                            type="text"
+                            id="education_qualification"
+                            placeholder="शैक्षिक योग्यता"
+                            wire:model="education_qualification"
+                        />
+                        @error('education_qualification')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="occupation" class="form-label">मुखय पेशा</label>
+                        <input
+                            name="occupation"
+                            class="form-control @error('occupation') is-invalid @enderror"
+                            type="text"
+                            id="occupation"
+                            placeholder="मुखय पेशा"
+                            wire:model="occupation"
+                        />
+                        @error('occupation')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -155,6 +170,7 @@
                         @enderror
                     </div>
                 </div>
+            </fieldset>
 
                 <div class="address">
                     <fieldset>
@@ -253,7 +269,43 @@
                         </div>
                     </fieldset>
                 </div>
-            </fieldset>
+
+                <div class="row mt-3">
+                    <h2>सुचनाहरु</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>नाम</th>
+                            <th>नाम, थर</th>
+                            <th>नागरिकता न</th>
+                            <th>सम्पर्क न</th>
+                            <th>Add</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($notices as $notice)
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                                                <td>
+                                    <button class="btn btn-download btn-light">
+                                        <a href="#"><i class="fa-solid fa-plus"></i></a>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-around mt-2">
+                    <button type="button" class="btn btn-warning text-white">Back
+                    </button>
+                    <button type="button" class="btn btn-primary">Next</button>
+                </div>
+
+            
         </form>
     </div>
 </div>
