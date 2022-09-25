@@ -134,4 +134,6 @@ a {
 .round-btn-div img{
     object-fit: contain;
     height: 8rem;
+    width: 80%;
+    float: right;
 }

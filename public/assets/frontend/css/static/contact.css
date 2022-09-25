@@ -2,8 +2,8 @@
     margin-top: 3rem;
 }
 
-.contact-item {
-    display: flex;
+.contact-item i {
+    font-size: 20px;
 }
 
 .contact-item .icon-size {
@@ -18,4 +18,21 @@
 
 .contact-item .textbox {
     margin-left: 1rem;
+}
+.contact-item .textbox a{
+    color: var(--whiteColor);
+}
+.card{
+    height: 8rem;
+    background-color: var(--mainColor);
+    color: var(--whiteColor);
+}
+.card:hover{
+    background-color: var(--redColor);
+    color: var(--whiteColor);
+    transition: .7s;
+    transform: translateY(-10px);
+}
+.contact-item i {
+    height: 20rem;
 }

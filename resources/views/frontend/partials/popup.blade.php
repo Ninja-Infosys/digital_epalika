@@ -17,7 +17,7 @@
                     समितिले मिति २०७३/११/२० मा पेश गरेको प्रतिवेदनको आधारमा</p>
             </div>
             <div class="welcome-img my-auto">
-                <img src="{{asset('assets/frontend/image/avatar1.png')}}" alt="">
+                <img src="{{asset('assets/frontend/image/icon/support.png')}}" alt="">
             </div>
 
         </div>

@@ -16,6 +16,7 @@ body {
     font-family: 'Mukta', sans-serif !important;
     font-size: var(--fontSize);
 }
+
 .carousel-item>img{
     object-fit: cover;
     height: 400px;

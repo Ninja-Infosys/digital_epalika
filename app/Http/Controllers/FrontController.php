@@ -40,4 +40,9 @@ class FrontController extends Controller
         $notice->load('files');
         return view('frontend.static.notice.single-notice', compact('notice'));
     }
+
+    public function contact()
+    {
+        return view('frontend.static.contact.index');
+    }
 }
