@@ -55,9 +55,10 @@
                         नागरिक सहयोग
                     </a>
                 </li>
+            
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('businessRegistration')}}">
-                         ब्यबसाय
+                        ब्यबसाय
                     </a>
                 </li>
                 <li class="nav-item">
