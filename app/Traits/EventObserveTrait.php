@@ -9,8 +9,6 @@ trait EventObserveTrait
 {
     public static function booted()
     {
-        $class = get_called_class();
-        info($class);
         static::created(function ($model) {
             event(new ActivityLogEvent('Create', get_called_class(), $model->id));
         });
