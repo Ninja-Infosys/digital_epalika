@@ -17,3 +17,5 @@ use Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController;
 
 //frontendController
 Route::get('businessRegistration',[FrontendController::class,'businessRegistration'])->name('businessRegistration');
+
+Route::view('business-register','businessRegistration::frontend.register.register')->name('business-register');

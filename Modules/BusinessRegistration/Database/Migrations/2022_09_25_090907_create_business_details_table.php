@@ -30,6 +30,10 @@ return new class extends Migration {
             $table->string('ward_no')->nullable();
             $table->string('way')->nullable();
             $table->string('tole')->nullable();
+            $table->string('length')->nullable();
+            $table->string('width')->nullable();
+            $table->string('width')->nullable();
+            $table->string('square_feet')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
