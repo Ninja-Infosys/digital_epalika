@@ -132,7 +132,7 @@
         <div class="mb-3">
             <div class="title-head-main px-3 py-2 d-flex justify-content-between">
                 <div>
-                    <span class="fa fa-globe"></span>{{$officeSetting->province_id}}
+                    <span class="fa fa-globe"></span>&nbsp;{{$officeSetting->province->province??''}}
                 </div>
             </div>
         </div>

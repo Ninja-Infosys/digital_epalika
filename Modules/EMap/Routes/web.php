@@ -22,7 +22,7 @@ Route::prefix('organization')->as('organization.')->group(function () {
     Route::get('logout',[OrganizationAuthController::class,'logout'])->name('logout');
 
 });
-Route::view('/e-map','emap::frontend.e-map.index');
+Route::view('/e-map','emap::frontend.e-map.index')->name('e-map');
 Route::view('/downloads','emap::frontend.e-map.downloads.downloads');
 Route::view('/e-help','emap::frontend.e-map.e-help.e-help');
 Route::view('/notice','emap::frontend.e-map.notice.notice');

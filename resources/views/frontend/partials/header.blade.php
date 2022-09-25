@@ -5,10 +5,6 @@
             <option value="ne">नेपाली</option>
             <option value="en">English</option>
         </select>
-        <select class="modeChanger m-2">
-            <option value="white"> Dark Mode(OFF)</option>
-            <option value="dark"> Dark Mode(ON)</option>
-        </select>
     </div>
 </div>
 {{--middle header--}}
