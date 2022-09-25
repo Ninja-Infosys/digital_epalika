@@ -56,7 +56,7 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$municipalDetail->title}}</td>
                                     <td>{!! $municipalDetail->icon !!}</td>
-                                    <td>{{$municipalDetail->bg_color}}</td>
+                                    <td><span style="height: 20px;width: 100%; background: {{$municipalDetail->bg_color}};"></span></td>
                                     <td>{{$municipalDetail->count}}</td>
                                     <td>{{$municipalDetail->position}}</td>
                                     <td>
