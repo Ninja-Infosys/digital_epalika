@@ -77,6 +77,9 @@ Route::get('/static/single-executive', function () {
 Route::get('/popup', function () {
     return view('frontend.partials.popup');
 });
+Route::get('/chat', function () {
+    return view('frontend.static.chat.chat');
+});
 
 
 

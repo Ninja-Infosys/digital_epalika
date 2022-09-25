@@ -10,7 +10,7 @@
                         </div>
                     </div>
                     <div class="round-btn-div">
-                        <img class="round-btn-img" src="https://kmc.palmchatbot.com/images/moscot.png">
+                        <img class="round-btn-img" src="{{asset('assets/frontend/image/icon/support.png')}}">
                     </div>
                 </div>
                 <div class="row">
