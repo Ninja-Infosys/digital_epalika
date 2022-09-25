@@ -10,6 +10,25 @@ return new class extends Migration
     {
         Schema::create('proprietor_details', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('citizenship_no');
+            $table->string('issue_date');
+            $table->string('issue_district');
+            $table->string('phone');
+            $table->string('email')->nullable();
+            $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('local_body_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->string('ward_no');
+            $table->string('way')->nullable();
+            $table->string('tole')->nullable();
+            $table->string('house_no')->nullable();
+            $table->string('account_no')->nullable();
+            $table->string('national_card_no')->nullable();
+            $table->string('gender');
+            $table->string('education_qualification')->nullable();
+            $table->string('occupation')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
