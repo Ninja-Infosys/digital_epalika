@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('citizenship_no');
             $table->string('issue_date');
-            $table->string('issue_district');
+            $table->foreignId('issue_district_id')->nullable()->constrained('districts')->nullOnDelete()->onUpdate('no action');
             $table->string('phone');
             $table->string('email')->nullable();
             $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');

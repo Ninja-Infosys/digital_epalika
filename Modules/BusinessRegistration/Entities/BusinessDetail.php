@@ -19,8 +19,9 @@ class BusinessDetail extends Model
     ];
 
     protected $fillable = [
-        'name',
-        'name_en',
+        'proprietor_detail_id',
+        'business_detail_name',
+        'business_detail_en',
         'business_nature_id',
         'establish_year',
         'registration_date',
