@@ -6,7 +6,6 @@
             <h4 class="mx-2 ">सेवाको विवरण</h4>
         </div>
         <div class=" mt-5">
-
             <h6 class="mx-5">नागरिकलाई प्रदान गरिने अन्य सेवाहरु</h6>
             <ul class="list-group list-group-flush mx-auto">
                 <a href="">
