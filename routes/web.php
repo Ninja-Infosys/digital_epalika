@@ -80,6 +80,9 @@ Route::get('/popup', function () {
 Route::get('/chat', function () {
     return view('frontend.static.chat.chat');
 });
+Route::get('/service-details', function () {
+    return view('frontend.static.chat.service');
+});
 
 
 

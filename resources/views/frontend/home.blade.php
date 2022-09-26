@@ -79,12 +79,10 @@
                                 <i class="fa fa-angle-right"></i>
                                 <a href="{{route('single-notice',$notice)}}">{{Str::words($notice->title,12)}}</a>
                                 <span><small>{{$notice->date->toDateString()}}</small></span>
-
                             </li>
                         @endforeach
-
-                        <button class="btn bg-primary btn-outline-light ">थप सुचनाहरु <i class="fa fa-angles-right"></i>
-                        </button>
+                        <a class="btn bg-primary btn-outline-light " href="{{route('notice')}}">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        </a>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -97,7 +95,6 @@
                                 <i class="fa fa-angle-right"></i>
                                 <a href="{{route('single-notice',$notice)}}">{{Str::words($news->title,12)}}</a>
                                 <span><small>{{$news->date->toDateString()}}</small></span>
-
                             </li>
                         @endforeach
                         <button class="btn bg-primary btn-outline-light ">थप बोर्ड निर्णयहरु
