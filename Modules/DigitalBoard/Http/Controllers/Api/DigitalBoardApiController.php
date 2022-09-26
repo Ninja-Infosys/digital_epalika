@@ -2,7 +2,8 @@
 
 namespace Modules\DigitalBoard\Http\Controllers\Api;
 
-use App\Http\Livewire\OfficeHeader;
+
+use App\Models\OfficeHeader;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
