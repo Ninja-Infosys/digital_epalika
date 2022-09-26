@@ -15,56 +15,6 @@
 
         <form>
             @switch($currentStep)
-                @case(4)
-                    <fieldset>
-                        <legend class="title">परिचय पार्टीको साइज</legend>
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label for="tole" class="form-label">लम्बाई</label>
-                                <input
-                                    name="tole"
-                                    class="form-control @error('tole') is-invalid @enderror"
-                                    type="text"
-                                    id="tole"
-                                    placeholder="लम्बाई"
-                                    wire:model="tole"
-                                />
-                                {{--                                @error('tole')--}}
-                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
-                                {{--                                @enderror--}}
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="tole" class="form-label">चौदाई</label>
-                                <input
-                                    name="tole"
-                                    class="form-control @error('tole') is-invalid @enderror"
-                                    type="text"
-                                    id="tole"
-                                    placeholder="चौदाई"
-                                    wire:model="tole"
-                                />
-                                {{--                                @error('tole')--}}
-                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
-                                {{--                                @enderror--}}
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="tole" class="form-label">वर्गफिट</label>
-                                <input
-                                    name="tole"
-                                    class="form-control @error('tole') is-invalid @enderror"
-                                    type="text"
-                                    id="tole"
-                                    placeholder="वर्गफिट"
-                                    wire:model="tole"
-                                />
-                                {{--                                @error('tole')--}}
-                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
-                                {{--                                @enderror--}}
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    @break
                 @case(3)
 
                     <fieldset>
@@ -129,6 +79,7 @@
                     </div>
 
                     @break
+
                 @case(2)
                     <fieldset>
                         <legend class="title">ब्यावसाहिक बिवरण</legend>
@@ -552,6 +503,57 @@
                         <button type="button" wire:click.prevent="nextStep(3)" class="btn btn-primary">Next</button>
                     </div>
                     @break
+                @case(4)
+                    <fieldset>
+                        <legend class="title">परिचय पार्टीको साइज</legend>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="tole" class="form-label">लम्बाई</label>
+                                <input
+                                    name="tole"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    type="text"
+                                    id="tole"
+                                    placeholder="लम्बाई"
+                                    wire:model="tole"
+                                />
+                                {{--                                @error('tole')--}}
+                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="tole" class="form-label">चौदाई</label>
+                                <input
+                                    name="tole"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    type="text"
+                                    id="tole"
+                                    placeholder="चौदाई"
+                                    wire:model="tole"
+                                />
+                                {{--                                @error('tole')--}}
+                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="tole" class="form-label">वर्गफिट</label>
+                                <input
+                                    name="tole"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    type="text"
+                                    id="tole"
+                                    placeholder="वर्गफिट"
+                                    wire:model="tole"
+                                />
+                                {{--                                @error('tole')--}}
+                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    @break
+
                 @default
                     <fieldset>
                         <legend class="title">प्रोपाईटरको विवरण</legend>
