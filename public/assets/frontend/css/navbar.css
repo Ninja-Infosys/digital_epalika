@@ -12,6 +12,7 @@
 .navbar .navbar-nav .nav-item a{
     color: var(--whiteColor);
     padding-bottom: 0;
+    font-weight: bold;
     font-size: 1.08rem;
 }
 .navbar-nav .nav-item {

@@ -3,22 +3,18 @@
     <section class="inner-section mt-lg-5 ">
         <div class="container-fluid">
             <div class="row d-flex mt-5 ">
-                <div class="col-md-10  mx-auto">
                     <div class="breadcrumb d-flex">
                         <div>
                             <a class="whitespace-nowrap text-primary-500" href="{{url('e-map')}}">ई-नक्सा</a>
-                        </div>
-                        <div class="d-flex items-center ml-1 whitespace-nowrap">
-                            <mat-icon class="icon-size-5 text-secondary"
-                                      [svgIcon]="'icon_solid:chevron-right'"></mat-icon>
-                            <a class="ml-1 text-primary-500">नक्सा दर्ता</a>
+                            <i class="fa fa-angle-double-right"></i>
+                            <a class=" text-primary-500">नक्सा दर्ता</a>
                         </div>
                     </div>
                     <h4 class="fw-semibold heading-line">नक्सा दर्ता फर्म</h4>
                     <p>तल दिएको फर्म लाई ३ तह मा पुरा गर्नुहोस् र आफुले भरेको फर्म ठीक छ छैन प्रमाणित गरी पठाउनुहोस्
                         ।</p>
                     <div class="card-01">
-                        <form class="p-2" [formGroup]="horizontalStepperForm">
+                        <form class="p-2">
                             <div class="col-md-4 ms-4">
                                 <label class="form-label">परामर्शदाता प्रकार:</label>
                                 <select class="form-select" aria-label="Default select example">
@@ -27,10 +23,7 @@
                                     <option value="2">व्यक्ति</option>
                                 </select>
                             </div>
-                            <mat-stepper [linear]="true" [orientation]="(stepperOrientation | async)!"
-                                         #horizontalStepper>
-                                <mat-step [formGroupName]="'step1'" [stepControl]="horizontalStepperForm.get('step1')">
-                                    <ng-template matStepLabel>व्यक्तिगत विवरण</ng-template>
+                            <h5>व्यक्तिगत विवरण</h5>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">पुरा नाम</label>
@@ -393,7 +386,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     @push('styles')

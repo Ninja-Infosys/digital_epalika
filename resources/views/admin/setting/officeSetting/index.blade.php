@@ -300,6 +300,7 @@
 
                                 </table>
                             </div>
+                        </div>
                     </fieldset>
                 </div>
             </div>

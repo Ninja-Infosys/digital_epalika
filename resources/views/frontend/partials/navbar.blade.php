@@ -55,7 +55,6 @@
                         नागरिक सहयोग
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('businessRegistration.business') ? 'active' : ''}}" href="{{route('businessRegistration.business')}}">
                         व्यवसाय

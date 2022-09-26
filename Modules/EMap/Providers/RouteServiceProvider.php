@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->group(module_path('EMap', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth:organization', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth:organization', config('jetstream.auth_session'), 'verified', 'password.check'])
             ->prefix('organization/admin')
             ->as('organization.admin.')->group(base_path('/Modules/EMap/Routes/organization/admin.php'));
 

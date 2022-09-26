@@ -13,13 +13,13 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = Client::where('user_id', auth('organization')->user()->id)->get();
-        return view('emap::clients.client.index', compact('clients'));
+        $clients = Client::with('province', 'district', 'localBody')->where('organization_id', auth('organization')->user()->id)->get();
+        return view('emap::organization.clients.client.index', compact('clients'));
     }
 
     public function create()
     {
-        return view('emap::clients.client.create');
+        return view('emap::organization.clients.client.create');
     }
 
     public function store(Request $request)
@@ -34,10 +34,10 @@ class ClientController extends Controller
             'phone' => ['required'],
             'email' => ['nullable'],
         ]);
-        Client::create($data + ['user_id' => auth('organization')->id()]);
+        Client::create($data + ['organization_id' => auth('organization')->id()]);
 
-        toast(' ग्राहक सफलतापूर्वक थपियो', 'success');
-        return redirect(route('admin.units.measurementUnit.index'));
+        toast(' सेवाग्राही सफलतापूर्वक थपियो', 'success');
+        return redirect(route('organization.admin.clients.client.index'));
     }
 
     /**
@@ -47,7 +47,7 @@ class ClientController extends Controller
     {
         $this->authorize('view', $client);
 
-        return view('emap::clients.client.show', compact('client'));
+        return view('emap::organization.clients.client.show', compact('client'));
     }
 
     /**
@@ -57,7 +57,7 @@ class ClientController extends Controller
     {
         $this->authorize('view', $client);
 
-        return view('emap::clients.client.edit', compact('client'));
+        return view('emap::organization.clients.client.edit', compact('client'));
     }
 
     /**
@@ -80,8 +80,8 @@ class ClientController extends Controller
 
         $client->update($data);
 
-        toast('ग्राहक सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.units.measurementUnit.index'));
+        toast('सेवाग्राही सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return redirect(route('organization.admin.clients.client.index'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ClientController extends Controller
 
         $client->delete();
 
-        toast('ग्राहक सफलतापूर्वक मेटाइयो', 'success');
-        return redirect(route('admin.units.measurementUnit.index'));
+        toast('सेवाग्राही सफलतापूर्वक मेटाइयो', 'success');
+        return redirect(route('organization.admin.clients.client.index'));
     }
 }

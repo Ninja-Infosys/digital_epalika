@@ -3,7 +3,6 @@
 namespace Modules\EMap\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
 
 class EMapServiceProvider extends ServiceProvider
 {
@@ -38,6 +37,7 @@ class EMapServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(EmapAuthServiceProvider::class);
     }
 
     /**

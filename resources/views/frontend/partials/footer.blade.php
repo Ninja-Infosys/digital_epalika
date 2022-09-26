@@ -4,7 +4,7 @@
             <div class="container">
                 <div id="round-btn">
                     <div class="popup-banner">
-                        <h3>Smart Palika</h3>
+                        <h3>e-Palika</h3>
                         <div class="btnsection">
                             <p>म तपाईंलाई कसरी सहयोग गर्न सक्छु?</p>
                         </div>
