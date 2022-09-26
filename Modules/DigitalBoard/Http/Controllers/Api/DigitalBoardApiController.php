@@ -36,7 +36,7 @@ class DigitalBoardApiController extends Controller
 
     public function officeSetting()
     {
-        $officeSetting = OfficeSetting::with('provinces','districts','localBody')->first();
+        $officeSetting = OfficeSetting::with('province','district','localBody')->first();
         $officeHeaders = OfficeHeader::orderBy('position')->get();
         return [
             'office_headers' => OfficeHeaderResource::collection($officeHeaders),
