@@ -25,7 +25,7 @@ class ProprietorDetail extends Model
         'name',
         'citizenship_no',
         'issue_date',
-        'issue_district',
+        'issue_district_id',
         'phone',
         'email',
         'province_id',
