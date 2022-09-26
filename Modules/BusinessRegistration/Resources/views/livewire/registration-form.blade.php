@@ -6,13 +6,129 @@
                         बिवरण </a></li>
                 <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">ब्यावसाहिक
                         बिवरण </a></li>
-                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-4" type="button" disabled="disabled">अन्तिम
+                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-4" type="button" >अन्तिम
                         सम्बन्धित कागज पत्र </a></li>
+                <li class="{{ $currentStep != 4 ? '' : 'active' }}"><a href="#step-4" type="button" >अन्तिम
+                        परिचय पार्टीको साइज</a></li>
             </ul>
         </div>
 
         <form>
             @switch($currentStep)
+                @case(4)
+                    <fieldset>
+                        <legend class="title">परिचय पार्टीको साइज</legend>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="tole" class="form-label">लम्बाई</label>
+                                <input
+                                    name="tole"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    type="text"
+                                    id="tole"
+                                    placeholder="लम्बाई"
+                                    wire:model="tole"
+                                />
+                                {{--                                @error('tole')--}}
+                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="tole" class="form-label">चौदाई</label>
+                                <input
+                                    name="tole"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    type="text"
+                                    id="tole"
+                                    placeholder="चौदाई"
+                                    wire:model="tole"
+                                />
+                                {{--                                @error('tole')--}}
+                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="tole" class="form-label">वर्गफिट</label>
+                                <input
+                                    name="tole"
+                                    class="form-control @error('tole') is-invalid @enderror"
+                                    type="text"
+                                    id="tole"
+                                    placeholder="वर्गफिट"
+                                    wire:model="tole"
+                                />
+                                {{--                                @error('tole')--}}
+                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    @break
+                @case(3)
+
+                    <fieldset>
+                        <legend class="title">सम्बन्धित कागजपत्र</legend>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="organizationDetail.org_registration_document" class="form-label">व्यवसायीको पासपोर्ट साइजको फोटो*</label>
+                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
+                                       wire:model="organizationDetail.org_registration_document"/>
+                                @error('organizationDetail.org_registration_document')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="organizationDetail.org_registration_document" class="form-label">नागरिकता प्रमाणपत्रको प्रतिलिपि-१</label>
+                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
+                                       wire:model="organizationDetail.org_registration_document"/>
+                                @error('organizationDetail.org_registration_document')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="organizationDetail.org_registration_document" class="form-label">फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</label>
+                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
+                                       wire:model="organizationDetail.org_registration_document"/>
+                                @error('organizationDetail.org_registration_document')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="organizationDetail.org_registration_document" class="form-label">आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि</label>
+                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
+                                       wire:model="organizationDetail.org_registration_document"/>
+                                @error('organizationDetail.org_registration_document')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="organizationDetail.org_registration_document" class="form-label">हस्ताक्षर</label>
+                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
+                                       wire:model="organizationDetail.org_registration_document"/>
+                                @error('organizationDetail.org_registration_document')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="organizationDetail.org_registration_document" class="form-label">औठाको छाप</label>
+                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
+                                       wire:model="organizationDetail.org_registration_document"/>
+                                @error('organizationDetail.org_registration_document')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="mt-2">
+                        <button type="button" wire:click.prevent="backStep(2)" class="btn btn-primary">Pri</button>
+                    </div>
+                    <div class="mt-2">
+                        <button type="button" wire:click.prevent="nextStep(4)" class="btn btn-primary">Next</button>
+                    </div>
+
+                    @break
                 @case(2)
                     <fieldset>
                         <legend class="title">ब्यावसाहिक बिवरण</legend>
@@ -271,62 +387,62 @@
                                 </div>
                             </div>
                             @if($is_show)
-                            <div class="col-md-6 mb-3">
-                                <label for="house_owner_name" class="form-label">घर धनिको नाम थर </label>
-                                <input
-                                    name="house_owner_name"
-                                    class="form-control @error('form.house_owner_name') is-invalid @enderror"
-                                    type="text"
-                                    id="house_owner_name"
-                                    placeholder="घर धनिको नाम थर"
-                                    wire:model="form.house_owner_name"
-                                />
-                                @error('form.house_owner_name')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="house_owner_phone" class="form-label">घर धनिको मोबाइल न </label>
-                                <input
-                                    name="house_owner_phone"
-                                    class="form-control @error('form.house_owner_phone') is-invalid @enderror"
-                                    type="text"
-                                    id="house_owner_phone"
-                                    placeholder="घर धनिको मोबाइल न"
-                                    wire:model="form.house_owner_phone"
-                                />
-                                @error('form.house_owner_phone')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="house_owner_address" class="form-label">ठेगाना</label>
-                                <input
-                                    name="house_owner_address"
-                                    class="form-control @error('form.house_owner_address') is-invalid @enderror"
-                                    type="text"
-                                    id="house_owner_address"
-                                    placeholder="ठेगाना"
-                                    wire:model="form.house_owner_address"
-                                />
-                                @error('form.house_owner_address')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="house_owner_monthly_rent" class="form-label">मासिक भाडा रु</label>
-                                <input
-                                    name="house_owner_address"
-                                    class="form-control @error('form.house_owner_monthly_rent') is-invalid @enderror"
-                                    type="text"
-                                    id="house_owner_monthly_rent"
-                                    placeholder="मासिक भाडा रु"
-                                    wire:model="form.house_owner_monthly_rent"
-                                />
-                                @error('form.house_owner_monthly_rent')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="house_owner_name" class="form-label">घर धनिको नाम थर </label>
+                                    <input
+                                        name="house_owner_name"
+                                        class="form-control @error('form.house_owner_name') is-invalid @enderror"
+                                        type="text"
+                                        id="house_owner_name"
+                                        placeholder="घर धनिको नाम थर"
+                                        wire:model="form.house_owner_name"
+                                    />
+                                    @error('form.house_owner_name')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="house_owner_phone" class="form-label">घर धनिको मोबाइल न </label>
+                                    <input
+                                        name="house_owner_phone"
+                                        class="form-control @error('form.house_owner_phone') is-invalid @enderror"
+                                        type="text"
+                                        id="house_owner_phone"
+                                        placeholder="घर धनिको मोबाइल न"
+                                        wire:model="form.house_owner_phone"
+                                    />
+                                    @error('form.house_owner_phone')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="house_owner_address" class="form-label">ठेगाना</label>
+                                    <input
+                                        name="house_owner_address"
+                                        class="form-control @error('form.house_owner_address') is-invalid @enderror"
+                                        type="text"
+                                        id="house_owner_address"
+                                        placeholder="ठेगाना"
+                                        wire:model="form.house_owner_address"
+                                    />
+                                    @error('form.house_owner_address')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="house_owner_monthly_rent" class="form-label">मासिक भाडा रु</label>
+                                    <input
+                                        name="house_owner_address"
+                                        class="form-control @error('form.house_owner_monthly_rent') is-invalid @enderror"
+                                        type="text"
+                                        id="house_owner_monthly_rent"
+                                        placeholder="मासिक भाडा रु"
+                                        wire:model="form.house_owner_monthly_rent"
+                                    />
+                                    @error('form.house_owner_monthly_rent')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             @endif
 
                         </div>
@@ -791,5 +907,6 @@
         </form>
     </div>
 </div>
+
 
 

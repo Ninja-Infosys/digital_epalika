@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::create('business_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('proprietor_detail_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('business_detail_name')->nullable();
             $table->string('business_detail_en')->nullable();
             $table->foreignId('business_nature_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');

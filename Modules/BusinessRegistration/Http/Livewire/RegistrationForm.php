@@ -117,31 +117,31 @@ class RegistrationForm extends Component
     ];
 
     protected array $secondStepValidations = [
-        'business_detail_name' => ['required'],
-        'business_detail_name_en' => ['required'],
-        'business_nature_id' => ['required'],
-        'establish_year' => ['required'],
-        'registration_date' => ['required'],
-        'pan_no' => ['required'],
-        'transaction_object' => ['required'],
-        'amount_cost' => ['required'],
-        'source_of_capital' => ['required'],
-        'purpose' => ['required'],
-        'employment' => ['required'],
-        'house_owner_name' => ['required'],
-        'house_owner_phone' => ['required'],
-        'house_owner_address' => ['required'],
-        'house_owner_monthly_rent' => ['required'],
+        'form.business_detail_name' => ['required'],
+        'form.business_detail_name_en' => ['required'],
+        'form.business_nature_id' => ['nullable'],
+        'form.establish_year' => ['required'],
+        'form.registration_date' => ['required'],
+        'form.pan_no' => ['required'],
+        'form.transaction_object' => ['nullable'],
+        'form.amount_cost' => ['required'],
+        'form.source_of_capital' => ['required'],
+        'form.purpose' => ['required'],
+        'form.employment' => ['required'],
+        'form.house_owner_name' => ['nullable'],
+        'form.house_owner_phone' => ['nullable'],
+        'form.house_owner_address' => ['nullable'],
+        'form.house_owner_monthly_rent' => ['nullable'],
         'form.province_id' => ['required'],
         'form.district_id' => ['required'],
         'form.local_body_id' => ['required'],
         'form.way' => ['nullable'],
         'form.tole' => ['nullable'],
-        'form.partnerDetails.*.relation' => ['required', 'string'],
-        'form.partnerDetails.*.name' => ['required', 'string'],
-        'form.partnerDetails.*.name_en' => ['required', 'string'],
-        'form.partnerDetails.*.citizenship_no' => ['required', 'string'],
-        'form.partnerDetails.*.mobile_no' => ['required', 'string'],
+        'form.partnerDetails.*.relation' => ['nullable', 'string'],
+        'form.partnerDetails.*.name' => ['nullable', 'string'],
+        'form.partnerDetails.*.name_en' => ['nullable', 'string'],
+        'form.partnerDetails.*.citizenship_no' => ['nullable', 'string'],
+        'form.partnerDetails.*.mobile_no' => ['nullable', 'string'],
     ];
 
     protected array $thirdStepValidations = [
@@ -220,3 +220,4 @@ class RegistrationForm extends Component
         return view('businessregistration::livewire.registration-form');
     }
 }
+
