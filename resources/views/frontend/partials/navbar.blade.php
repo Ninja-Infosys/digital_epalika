@@ -57,8 +57,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('businessRegistration.business')}}">
-                        ब्यवसाय
+                    <a class="nav-link {{request()->routeIs('businessRegistration.business') ? 'active' : ''}}" href="{{route('businessRegistration.business')}}">
+                        व्यवसाय
                     </a>
                 </li>
                 <li class="nav-item">

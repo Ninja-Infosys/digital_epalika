@@ -25,7 +25,7 @@ Route::get('/static/category', function () {
 Route::get('/static/category', function () {
     return view('frontend.static.category.index');
 });
-Route::view('/static/contact', 'frontend.static.contact.index')->name('contact');
+Route::get('contact', [FrontController::class, 'contact'])->name('contact');
 Route::get('/static/representative', function () {
     return view('frontend.static.representive.representive');
 });
@@ -66,8 +66,8 @@ Route::get('/static/representive', function () {
 Route::get('/static/gallery/photo/single-photo', function () {
     return view('frontend.static.gallery.photo.single-photo.single-photo');
 });
-Route::get('/static/notice', [FrontController::class,'notice'])->name('notice');
-Route::get('/static/single-notice/{notice}', [FrontController::class,'singleNotice'])->name('single-notice');
+Route::get('/static/notice', [FrontController::class, 'notice'])->name('notice');
+Route::get('/static/single-notice/{notice}', [FrontController::class, 'singleNotice'])->name('single-notice');
 Route::get('/static/executive', function () {
     return view('frontend.static.executive-board.index');
 });

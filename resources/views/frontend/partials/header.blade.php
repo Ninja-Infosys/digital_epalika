@@ -1,7 +1,7 @@
 {{--topbar--}}
-<div class="top-bar">
+<div class="top-bar ">
     <div class="container">
-        <select class="langChanger">
+        <select class="">
             <option value="ne">नेपाली</option>
             <option value="en">English</option>
         </select>
