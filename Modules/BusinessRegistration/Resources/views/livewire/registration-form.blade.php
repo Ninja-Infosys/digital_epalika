@@ -32,16 +32,16 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="form.business_detail_en" class="form-label">फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</label>
+                                <label for="form.business_detail_name_en" class="form-label">फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</label>
                                 <input
-                                    name="form.business_detail_en"
-                                    class="form-control @error('form.business_detail_en') is-invalid @enderror"
+                                    name="form.business_detail_name_en"
+                                    class="form-control @error('form.business_detail_name_en') is-invalid @enderror"
                                     type="text"
-                                    id="form.business_detail_en"
+                                    id="form.business_detail_name_en"
                                     placeholder="फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा"
-                                    wire:model="form.business_detail_en"
+                                    wire:model="form.business_detail_name_en"
                                 />
-                                @error('form.business_detail_en')
+                                @error('form.business_detail_name_en')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

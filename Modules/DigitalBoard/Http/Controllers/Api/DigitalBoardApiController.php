@@ -23,7 +23,7 @@ class DigitalBoardApiController extends Controller
 {
     public function home()
     {
-        $notices = Notice::where(['show_on_index' => 1, 'closed_at' => null])->orderBy('date', 'desc')->get();
+        $notices = Notice::with('files')->where(['show_on_index' => 1, 'closed_at' => null])->orderBy('date', 'desc')->get();
         $employees = Employee::where('status', 1)->orderBy('position')->get();
         $videos = Video::latest()->get();
         return [
