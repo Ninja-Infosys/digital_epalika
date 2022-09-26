@@ -17,10 +17,7 @@ class OfficeSettingResource extends JsonResource
             'logo2' => $this->logo2_url ?? '',
             'email' => $this->email ?? '',
             'phone' => $this->phone ?? '',
-            'province' => $this->province->province ?? '',
-            'district' => $this->district->district ?? '',
-            'local_body' => $this->localBody->local_body ?? '',
-            'ward_no' => $this->ward_no ?? '',
+            'address'=>$this->site_address??'',
             'background_image' => $this->background_image_url ?? ''
         ];
     }
