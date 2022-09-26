@@ -7,8 +7,8 @@
 
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>Hospital</title>
-    <link rel="icon" href="img/logo.png" type="image/png">
+    <title>{{config('app.name')}}</title>
+    <link rel="icon" href="{{asset('assets/backend/emap/admin/img/logo.png')}}" type="image/png">
 
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/bootstrap1.min.css')}}"/>
 
@@ -20,12 +20,16 @@
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/metisMenu.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/style1.css')}}"/>
+    <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
+
+    @stack('style')
+    @livewireStyles
 </head>
 
 <body class="crm_body_bg">
 
 
-    @include('emap::organization.layouts.sidebar')
+@include('emap::organization.layouts.sidebar')
 
 
 <section class="main_content dashboard_part">
@@ -52,8 +56,37 @@
 <script src="{{asset('assets/backend/emap/admin/vendors/tagsinput/tagsinput.js')}}"></script>
 <script src="{{asset('assets/backend/emap/admin/vendors/text_editor/summernote-bs4.js')}}"></script>
 <script src="{{asset('assets/backend/emap/admin/js/custom.js')}}"></script>
-</body>
 
-<!-- Mirrored from demo.dashboardpack.com/hospital-html/index_2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Sep 2022 09:06:21 GMT -->
+<script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
+
+<script>
+    $('.show_confirm').click(function (event) {
+        var form = $(this).closest("form");
+        event.preventDefault();
+
+        swal.fire({
+
+            title: "Are You Sure to Delete ? ",
+            text: "If you delete this, it will be gone forever.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: 'red',
+            confirmButtonText: "Delete",
+            dangerMode: true,
+
+        })
+            .then((willDelete) => {
+                if (willDelete.isConfirmed) {
+                    form.submit();
+                }
+            });
+    });
+</script>
+
+@include('sweetalert::alert')
+
+@stack('scripts')
+@livewireScripts
+</body>
 
 </html>s

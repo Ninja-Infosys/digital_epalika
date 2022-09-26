@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckRoleMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Modules\EMap\Http\Middleware\CheckOrganizationPassword;
 
 class Kernel extends HttpKernel
 {
@@ -64,6 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'checkRoleMiddleware' => CheckRoleMiddleware::class
+        'checkRoleMiddleware' => CheckRoleMiddleware::class,
+        'password.check'    =>  CheckOrganizationPassword::class,
     ];
 }

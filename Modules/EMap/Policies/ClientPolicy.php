@@ -6,50 +6,39 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 use Modules\EMap\Entities\Client;
+use Modules\EMap\Entities\Organization;
 
 class ClientPolicy
 {
     use HandlesAuthorization;
 
-
-    public function viewAny(User $user)
+    public function view(Organization $organization, Client $client): Response
     {
-        //
-    }
-
-
-    public function view(User $user, Client $client)
-    {
-        return $user->id === $client->user_id ? Response::allow()
+        return $organization->id === $client->organization_id ? Response::allow()
             : Response::denyAsNotFound();
     }
 
-    public function create(User $user)
+    public function update(Organization $organization, Client $client): Response
     {
-        //
-    }
-
-    public function update(User $user, Client $client)
-    {
-        return $user->id === $client->user_id ? Response::allow()
+        return $organization->id === $client->organization_id ? Response::allow()
             : Response::denyAsNotFound();
     }
 
-    public function delete(User $user, Client $client)
+    public function delete(Organization $organization, Client $client): Response
     {
-        return $user->id === $client->user_id ? Response::allow()
+        return $organization->id === $client->organization_id ? Response::allow()
             : Response::denyAsNotFound();
     }
 
-    public function restore(User $user, Client $client)
+    public function restore(Organization $organization, Client $client): Response
     {
-        return $user->id === $client->user_id ? Response::allow()
+        return $organization->id === $client->organization_id ? Response::allow()
             : Response::denyAsNotFound();
     }
 
-    public function forceDelete(User $user, Client $client)
+    public function forceDelete(Organization $organization, Client $client): Response
     {
-        return $user->id === $client->user_id ? Response::allow()
+        return $organization->id === $client->organization_id ? Response::allow()
             : Response::denyAsNotFound();
     }
 }

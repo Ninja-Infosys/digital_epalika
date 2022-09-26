@@ -1,11 +1,12 @@
 <?php
 
-namespace Modules\EMap\Emails;
+namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Modules\EMap\Entities\Organization;
 
 class OrganizationRegistered extends Mailable
 {
@@ -16,9 +17,9 @@ class OrganizationRegistered extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public Organization $organization, public $url)
     {
-        //
+        info($this->organization);
     }
 
     /**
@@ -28,6 +29,6 @@ class OrganizationRegistered extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->markdown('emails.organization.registered');
     }
 }

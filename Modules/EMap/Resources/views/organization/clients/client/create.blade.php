@@ -1,0 +1,66 @@
+@extends('emap::organization.layouts.master')
+@section('content')
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card mb_30">
+                <div class="card-header p-3">
+                    <div class="main-title d-flex justify-content-between">
+                        <h3 class="mb-0">सेवाग्राही थप्नुहोस</h3>
+                        <a href="{{route('organization.admin.clients.client.index')}}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-list"></i> सेवाग्राही सुची
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="{{route('organization.admin.clients.client.store')}}" method="post">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label" for="name">नाम *</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                   name="name" value="{{old('name')}}"
+                                   placeholder="नाम हल्नुहोस">
+                            @error('name')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">इमेल</label>
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
+                                   name="email" value="{{old('email')}}"
+                                   placeholder="इमेल हल्नुहोस">
+                            @error('email')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="phone">फोन *</label>
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone"
+                                   name="phone" value="{{old('phone')}}"
+                                   placeholder="फोन नं हल्नुहोस">
+                            @error('phone')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        @livewire('address', ['address'=>$officeSetting->address])
+                        <div class="mb-3">
+                            <label class="form-label" for="tole">गाउँ/टोल</label>
+                            <input type="text" class="form-control @error('tole') is-invalid @enderror" id="phone"
+                                   name="tole" value="{{old('tole')}}"
+                                   placeholder="गाउँ/टोल">
+                            @error('tole')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="mt-4 d-flex justify-content-end">
+
+                            <button type="submit" class="btn btn-primary    ">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+@endsection
