@@ -7,3 +7,8 @@
         <livewire:helpdesk::help-desk-livewire/>
     </div>
 @endsection
+@push('styles')
+    <link rel="stylesheet" href="{{asset('assets/frontend/helpdesk/css/index.css')}}">
+
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}">
+@endpush
