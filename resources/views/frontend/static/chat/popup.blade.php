@@ -418,7 +418,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @push('styles')
     <link rel="stylesheet" href="{{asset('assets/frontend/css/popup.css')}}">

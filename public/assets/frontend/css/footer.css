@@ -69,20 +69,18 @@ svg {
     height: 8rem;
 }
 .footer-copyright {
-    background-color: var(--secondaryColor);
-    font-size: .833rem;
+    color: var(--whiteColor);
+    background-color: #0062CC;
+    font-size: 1rem;
     display: flex;
     justify-content: space-evenly;
     padding: 1rem;
-    color: var(--blackColor);
 }
-
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-
  #round-btn .popup-banner {
      position: fixed;
      bottom: 1rem;
@@ -136,6 +134,51 @@ a {
     width: 80%;
     float: right;
 }
-.footer-title .list li a{
+.list li a{
     text-decoration: none;
 }
+.list li a:hover{
+    text-decoration: none;
+    color: var(--whiteColor);
+}
+/*---------------popopopopopoop*/
+ .popup {
+     display: inline-block;
+     cursor: pointer;
+     -webkit-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+ }
+
+ /* The actual popup */
+ .popup .popuptext {
+     visibility: hidden;
+     z-index: 99999;
+ }
+ /* Toggle this class - hide and show the popup */
+ .popup .show {
+     visibility: visible;
+     -webkit-animation: fadeIn 1s;
+     animation: fadeIn 1s;
+ }
+ /* Add animation (fade in the popup) */
+ @-webkit-keyframes fadeIn {
+     from {opacity: 0;}
+     to {opacity: 1;}
+ }
+ @keyframes fadeIn {
+     from {opacity: 0;}
+     to {opacity:1 ;}
+ }
+ .welcome{
+     padding-bottom: 100px;
+     color: var(--whiteColor);
+     background: linear-gradient(90deg, rgba(56,102,161,1) 0%, rgba(56,102,161,1) 35%, rgb(80 168 232) 100%) !important;
+ }
+ .welcome-img img{
+     object-fit: cover;
+     height: 7rem;
+     border-radius: 50%;
+     border: double 5px var(--whiteColor);
+ }

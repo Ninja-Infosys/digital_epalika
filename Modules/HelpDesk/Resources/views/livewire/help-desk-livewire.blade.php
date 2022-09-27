@@ -20,9 +20,7 @@
                                     <li class="list-group-item d-flex justify-content-between fs-5"
                                         wire:click.prevent="setBranchId({{$subBranch}})">
                                         {{$subBranch->branch_name}}
-
                                         <i class="fs-5 pt-1 fa-solid fa-angles-right"></i>
-
                                     </li>
                                 @endforeach
                             </ul>
