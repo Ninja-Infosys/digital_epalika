@@ -136,3 +136,6 @@ a {
     width: 80%;
     float: right;
 }
+.footer-title .list li a{
+    text-decoration: none;
+}
