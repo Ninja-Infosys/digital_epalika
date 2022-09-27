@@ -13,7 +13,7 @@
                     </button>
                 </p>
                 @if(count($branch->branches)!=0)
-                    <div class="collapse show" id="collapse{{$loop->iteration}}">
+                    <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
                         <div class="card-body">
                             <ul class="list-group">
                                 @foreach($branch->branches as $subBranch)

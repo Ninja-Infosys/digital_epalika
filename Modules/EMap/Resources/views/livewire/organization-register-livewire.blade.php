@@ -1,5 +1,5 @@
 <form wire:submit.prevent="save">
-    <div class="progress mb-5 mt-4" style="height: 15px;">
+    <div class="progress mb-1 mt-2" style="height: 15px;">
         <div @class([
         "bg-info"=>$progress<100,
         "bg-success"=>$progress==100,
@@ -16,7 +16,7 @@
     @switch($level)
         @case(2)
             <div class="row">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="userDetail.pan_no" class="form-label">प्यान न:</label>
                     <input
                         name="userDetail.pan_no"
@@ -30,7 +30,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="userDetail.nec_no" class="form-label">NEC</label>
                     <input
                         name="userDetail.nec_no"
@@ -44,7 +44,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="userDetail.nec_certificate" class="form-label">Upload NEC Certificate</label>
                     <input type="file" class="form-control" id="userDetail.nec_certificate"
                            wire:model="userDetail.nec_certificate"/>
@@ -56,7 +56,7 @@
             <fieldset>
                 <legend class="title">नागरिकता बिबरण</legend>
             <div class="row">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="userDetail.citizenship_no" class="form-label">नागरिता न:</label>
                     <input
                         name="userDetail.citizenship_no"
@@ -70,7 +70,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="userDetail.citizenship_issued_district" class="form-label"> जारी जिल्ला</label>
                     <select class="form-select @error('userDetail.citizenship_issued_district') is-invalid @enderror"
                             id="userDetail.citizenship_issued_district"
@@ -85,7 +85,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="userDetail.citizenship_issued_date" class="form-label">जारी मिति</label>
                     <input
                         name="userDetail.citizenship_issued_date"
@@ -99,7 +99,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.citizenship_front" class="form-label">नागरिकता अपलोड गर्नुहोस्
                         (आगाडी)</label>
                     <input type="file" class="form-control" id="userDetail.citizenship_front"
@@ -108,7 +108,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.citizenship_back" class="form-label">नागरिकता अपलोड गर्नुहोस् (पछाडि)</label>
                     <input type="file" class="form-control" id="userDetail.citizenship_back"
                            wire:model="userDetail.citizenship_back"/>
@@ -162,7 +162,7 @@
                 <fieldset>
                 <legend class="title">स्थाहि ठेगाना</legend>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-1">
                         <label for="userDetail.permanent_province_id" class="form-label">प्रदेश</label>
                         <select class="form-select @error('userDetail.permanent_province_id') is-invalid @enderror"
                                 id="userDetail.permanent_province_id" wire:model="userDetail.permanent_province_id">
@@ -175,7 +175,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-1">
                         <label for="userDetail.permanent_district_id" class="form-label">जिल्ला</label>
                         <select class="form-select @error('userDetail.permanent_district_id') is-invalid @enderror"
                                 id="userDetail.permanent_district_id" wire:model="userDetail.permanent_district_id">
@@ -188,7 +188,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="userDetail.permanent_local_body_id" class="form-label">पालिका</label>
                         <select class="form-select @error('userDetail.permanent_local_body_id') is-invalid @enderror"
                                 id="userDetail.permanent_local_body_id" wire:model="userDetail.permanent_local_body_id">
@@ -201,7 +201,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="userDetail.permanent_ward" class="form-label">वार्ड न:</label>
                         <select class="form-select @error('userDetail.permanent_ward') is-invalid @enderror"
                                 id="userDetail.permanent_ward" wire:model="userDetail.permanent_ward">
@@ -214,7 +214,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="userDetail.permanent_tole" class="form-label">गाउ/टोल</label>
                         <input
                             name="userDetail.permanent_tole"
@@ -232,11 +232,11 @@
             </fieldset>
             </div>
 
-            <div class="address mt-3">
+            <div class="address mt-2">
                 <fieldset>
                 <legend class="title">अस्थाहि ठेगाना</legend>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-1">
                         <label for="userDetail.temporary_province_id" class="form-label">प्रदेश</label>
                         <select class="form-select @error('userDetail.temporary_province_id') is-invalid @enderror"
                                 id="userDetail.temporary_province_id" wire:model="userDetail.temporary_province_id">
@@ -249,7 +249,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-1">
                         <label for="userDetail.temporary_district_id" class="form-label">जिल्ला</label>
                         <select class="form-select @error('userDetail.temporary_district_id') is-invalid @enderror"
                                 id="userDetail.temporary_district_id" wire:model="userDetail.temporary_district_id">
@@ -262,7 +262,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="userDetail.temporary_local_body_id" class="form-label">पालिका</label>
                         <select class="form-select @error('userDetail.temporary_local_body_id') is-invalid @enderror"
                                 id="userDetail.temporary_local_body_id" wire:model="userDetail.temporary_local_body_id">
@@ -275,7 +275,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="userDetail.temporary_ward" class="form-label">वार्ड न:</label>
                         <select class="form-select @error('userDetail.temporary_ward') is-invalid @enderror"
                                 id="userDetail.temporary_ward" wire:model="userDetail.temporary_ward">
@@ -288,7 +288,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="userDetail.temporary_tole" class="form-label">गाउ/टोल</label>
                         <input
                             name="userDetail.temporary_tole"
@@ -321,7 +321,7 @@
                 <fieldset>
                     <legend class="title">संगठन विवरण</legend>
                     <div class="row mt-2">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 mb-1">
                             <label for="organizationDetail.org_name_ne" class="form-label">संगठनको नाम *</label>
                             <input
                                 name="organizationDetail.org_name_ne"
@@ -335,7 +335,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 mb-1">
                             <label for="organizationDetail.org_name_en" class="form-label">Organization Name *</label>
                             <input
                                 name="organizationDetail.org_name_en"
@@ -349,7 +349,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 mb-1">
                             <label for="organizationDetail.org_email" class="form-label">इमेल</label>
                             <input
                                 name="organizationDetail.org_email"
@@ -363,7 +363,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 mb-1">
                             <label for="organizationDetail.org_contact" class="form-label">सम्पर्क नम्बर</label>
                             <input
                                 name="organizationDetail.org_contact"
@@ -377,7 +377,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 mb-1">
                             <label for="organizationDetail.org_pan_no" class="form-label">प्यान न:</label>
                             <input
                                 name="organizationDetail.org_pan_no"
@@ -391,7 +391,7 @@
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-4 mb-1">
                             <label for="organizationDetail.org_registration_no" class="form-label">कम्पनी दर्ता न:</label>
                             <input
                                 name="org_registration_no"
@@ -416,7 +416,7 @@
                     <fieldset>
                         <legend class="title">स्थाहि ठेगाना</legend>
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-1">
                                 <label for="organizationDetail.province_id" class="form-label">प्रदेश</label>
                                 <select class="form-select @error('organizationDetail.province_id') is-invalid @enderror"
                                         id="organizationDetail.province_id" wire:model="organizationDetail.province_id">
@@ -429,7 +429,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-1">
                                 <label for="organizationDetail.district_id" class="form-label">जिल्ला</label>
                                 <select class="form-select @error('organizationDetail.district_id') is-invalid @enderror"
                                         id="organizationDetail.district_id" wire:model="organizationDetail.district_id">
@@ -443,7 +443,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-4 mb-1">
                                 <label for="organizationDetail.local_body_id" class="form-label">पालिका</label>
                                 <select class="form-select @error('organizationDetail.local_body_id') is-invalid @enderror"
                                         id="organizationDetail.local_body_id" wire:model="organizationDetail.local_body_id">
@@ -457,7 +457,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-4 mb-1">
                                 <label for="organizationDetail.ward" class="form-label">वार्ड न:</label>
                                 <select class="form-select @error('organizationDetail.ward') is-invalid @enderror"
                                         id="organizationDetail.ward" wire:model="organizationDetail.ward">
@@ -470,7 +470,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-4 mb-1">
                                 <label for="organizationDetail.tole" class="form-label">गाउ/टोल</label>
                                 <input
                                     name="organizationDetail.tole"
@@ -501,7 +501,7 @@
         @case(5)
             <div class="company-document">
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-1">
                         <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो</label>
                         <input type="file" class="form-control" id="organizationDetail.logo"
                                wire:model="organizationDetail.logo"/>
@@ -509,7 +509,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-1">
                         <label for="च organizationDetail.org_registration_document" class="form-label">कम्पनी प्रमाणपत्र</label>
                         <input type="file" class="form-control" id="organizationDetail.org_registration_document"
                             wire:model="organizationDetail.org_registration_document"/>
@@ -517,7 +517,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="organizationDetail.org_pan_document" class="form-label">प्यान प्रमाणपत्र:</label>
                         <input type="file" class="form-control" id="organizationDetail.org_pan_document"
                         wire:model="organizationDetail.org_pan_document"/>
@@ -525,7 +525,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="taxClearance.document" class="form-label">कर चुक्ता:</label>
                         <input type="file" class="form-control" id="taxClearance.document"
                         wire:model="taxClearance.document"/>
@@ -533,7 +533,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-1">
                         <label for="taxClearance.year" class="form-label">आ.व</label>
                         <input
                                 name="taxClearance.year"
@@ -598,7 +598,7 @@
 
         @case(6)
             <div class="row">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="user.name" class="form-label">प्रयोगकार्तको नाम</label>
                     <input
                         name="user.name"
@@ -612,7 +612,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="user.email" class="form-label">इमेल</label>
                     <input
                         name="user.email"
@@ -627,7 +627,7 @@
                     @enderror
                 </div>
 
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label for="user.phone" class="form-label">सम्पर्क न:</label>
                     <input
                         name="user.phone"
@@ -651,7 +651,7 @@
 
 
         @default
-                <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-1">
                     <label class="form-label">परामर्शदाता प्रकार:</label>
                     <select class="form-select" aria-label="Default select example">
       <option selected>--- परामर्शदाता छान्नुहोस् ---</option>
@@ -662,7 +662,7 @@
                 <fieldset>
                     <legend class="title">ब्यतिगत बिबरण</legend>
             <div class="row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.name_ne" class="form-label">नेपालीमा नाम</label>
                     <input
                         name="userDetail.name_ne"
@@ -677,7 +677,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.name_en" class="form-label">Name in English</label>
                     <input
                         name="userDetail.name_en"
@@ -692,7 +692,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.email" class="form-label">इमेल</label>
                     <input
                         name="userDetail.email"
@@ -707,7 +707,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.phone" class="form-label">सम्पर्क नम्बर</label>
                     <input
                         name="userDetail.phone"
@@ -721,7 +721,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.gender" class="form-label">लिङ्ग</label>
                     <select
                         class="form-select @error('userDetail.gender') is-invalid @enderror"
@@ -736,7 +736,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.marital_status" class="form-label">वैवाहिक स्थिति </label>
                     <select
                         class="form-select @error('userDetail.marital_status') is-invalid @enderror"
@@ -750,7 +750,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.father_name" class="form-label">बुवाको नाम</label>
                     <input
                         name="userDetail.father_name"
@@ -764,7 +764,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-1">
                     <label for="userDetail.grandfather_name" class="form-label">हजुर बुवाको नाम</label>
                     <input
                         name="userDetail.grandfather_name"
