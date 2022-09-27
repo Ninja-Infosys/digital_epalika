@@ -8,13 +8,16 @@
     </a>
     <div class="{{request()->is('admin/map/*') ?'':'collapse'}}" id="sidebarEMap">
         <ul class="nav-second-level">
-
-                <li class="{{request()->routeIs('emap.admin.organization.index') ? 'active' : ''}}">
-                    <a href="{{route('emap.admin.organization.index')}}">
-                        <span>दर्ता भएका संगठन</span>
-                    </a>
-                </li>
-
+            <li class="{{request()->routeIs('emap.admin.organization.index') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.organization.index')}}">
+                    <span>दर्ता भएका संगठन</span>
+                </a>
+            </li>
+            <li class="{{request()->routeIs('emap.admin.setting.index') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.setting.index')}}">
+                    <span>सेटिंग</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

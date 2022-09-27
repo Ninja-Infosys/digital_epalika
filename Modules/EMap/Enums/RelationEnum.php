@@ -1,0 +1,26 @@
+<?php
+
+namespace Modules\EMap\Enums;
+
+enum RelationEnum: string
+{
+    case SON_DAUGHTER = 'son daughter';
+    case MOTHER_FATHER = 'mother father';
+    case RELATIVE = 'relative';
+    case WORK_ONLY = 'work only';
+
+    public function label(): string
+    {
+        return self::getLabel($this);
+    }
+
+    public static function getLabel(self $value): string
+    {
+        return match ($value) {
+            self::SON_DAUGHTER => 'छोरा/छोरी',
+            self::MOTHER_FATHER => 'आमा/बुवा',
+            self::RELATIVE => 'नातेदार',
+            self::WORK_ONLY => 'कामको मात्र',
+        };
+    }
+}

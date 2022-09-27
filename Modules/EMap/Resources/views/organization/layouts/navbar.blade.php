@@ -6,37 +6,32 @@
                     <i class="ti-menu"></i>
                 </div>
                 <div class="serach_field-area">
-                    <div class="search_inner">
-                        <form action="#">
-                            <div class="search_field">
-                                <input type="text" placeholder="Search here...">
-                            </div>
-                            <button type="submit"><img src="{{asset('assets/backend/emap/admin/img/icon/icon_search.svg')}}"
-                                                       alt=""></button>
-                        </form>
-                    </div>
+
                 </div>
                 <div class="header_right d-flex justify-content-between align-items-center">
                     <div class="header_notification_warp d-flex align-items-center">
                         <li>
-                            <a href="#"> <img src="{{asset('assets/backend/emap/admin/img/icon/bell.svg')}}" alt=""> </a>
+                            <a href="#"> <img src="{{asset('assets/backend/emap/admin/img/icon/bell.svg')}}" alt="">
+                            </a>
                         </li>
                         <li>
                             <a href="#"> <img src="{{asset('assets/backend/emap/admin/img/icon/msg.svg')}}" alt=""> </a>
                         </li>
                     </div>
                     <div class="profile_info">
-                        <img src="{{asset('assets/backend/emap/admin/img/client_img.png')}}" alt="#">
+                        <img src="{{auth('organization')->user()->profile_photo_url}}" alt="#">
                         <div class="profile_info_iner">
-                            <p>Neurologist </p>
-                            <h5>Dr. Robar Smith</h5>
+                            <p>{{auth('organization')->user()->email}}</p>
+                            <h5>{{auth('organization')->user()->name}}</h5>
                             <div class="profile_info_details">
-                                <a href="#">My Profile <i class="ti-user"></i></a>
+                                <a href="{{route('organization.admin.auth-organization.profile')}}">My Profile <i
+                                        class="ti-user"></i></a>
                                 <a href="#">Settings <i class="ti-settings"></i></a>
-                                <form method="get" action="{{ route('organization.logout') }}" >
+                                <form method="get" action="{{ route('organization.logout') }}">
                                     @csrf
-            
-                                <a href="{{ route('organization.logout') }}">Log Out <i class="ti-shift-left"></i></a>
+
+                                    <a href="{{ route('organization.logout') }}">Log Out <i
+                                            class="ti-shift-left"></i></a>
 
                                 </form>
                             </div>

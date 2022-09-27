@@ -15,71 +15,6 @@
 
         <form>
             @switch($currentStep)
-                @case(3)
-
-                    <fieldset>
-                        <legend class="title">सम्बन्धित कागजपत्र</legend>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="organizationDetail.org_registration_document" class="form-label">व्यवसायीको पासपोर्ट साइजको फोटो*</label>
-                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
-                                       wire:model="organizationDetail.org_registration_document"/>
-                                @error('organizationDetail.org_registration_document')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="organizationDetail.org_registration_document" class="form-label">नागरिकता प्रमाणपत्रको प्रतिलिपि-१</label>
-                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
-                                       wire:model="organizationDetail.org_registration_document"/>
-                                @error('organizationDetail.org_registration_document')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="organizationDetail.org_registration_document" class="form-label">फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</label>
-                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
-                                       wire:model="organizationDetail.org_registration_document"/>
-                                @error('organizationDetail.org_registration_document')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="organizationDetail.org_registration_document" class="form-label">आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि</label>
-                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
-                                       wire:model="organizationDetail.org_registration_document"/>
-                                @error('organizationDetail.org_registration_document')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="organizationDetail.org_registration_document" class="form-label">हस्ताक्षर</label>
-                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
-                                       wire:model="organizationDetail.org_registration_document"/>
-                                @error('organizationDetail.org_registration_document')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="organizationDetail.org_registration_document" class="form-label">औठाको छाप</label>
-                                <input type="file" class="form-control" id="organizationDetail.org_registration_document"
-                                       wire:model="organizationDetail.org_registration_document"/>
-                                @error('organizationDetail.org_registration_document')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <div class="mt-2">
-                        <button type="button" wire:click.prevent="backStep(2)" class="btn btn-primary">Pri</button>
-                    </div>
-                    <div class="mt-2">
-                        <button type="button" wire:click.prevent="nextStep(4)" class="btn btn-primary">Next</button>
-                    </div>
-
-                    @break
-
                 @case(2)
                     <fieldset>
                         <legend class="title">ब्यावसाहिक बिवरण</legend>
@@ -113,7 +48,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="form.gender" class="form-label">व्यवसायको प्रकृति</label>
+                                <label for="form.business_nature_id" class="form-label">व्यवसायको प्रकृति</label>
                                 <select
                                     class="form-select @error('form.business_nature_id') is-invalid @enderror"
                                     wire:model="form.business_nature_id"
@@ -127,6 +62,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            @if(!empty($form['business_nature_id']))
                             <div class="row mt-3">
                                 <h2>साझेदार हरुको बिवरण</h2>
                                 <table class="table">
@@ -192,6 +128,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            @endif
 
                             <div class="col-md-4 mb-3">
                                 <label for="form.establish_year" class="form-label">व्यवसाय स्थापना गरेको साल</label>
@@ -208,12 +145,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="registration_date" class="form-label">व्यवसाय दर्ता मिति</label>
+                                <label for="form.registration_date" class="form-label">व्यवसाय दर्ता मिति</label>
                                 <input
-                                    name="registration_date"
+                                    name="form.registration_date"
                                     class="form-control @error('form.registration_date') is-invalid @enderror"
                                     type="text"
-                                    id="registration_date"
+                                    id="form.registration_date"
                                     placeholder="व्यवसाय दर्ता मिति"
                                     wire:model="form.registration_date"
                                 />
@@ -222,12 +159,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="pan_no" class="form-label">पान नम्बर</label>
+                                <label for="form.pan_no" class="form-label">पान नम्बर</label>
                                 <input
-                                    name="pan_no"
+                                    name="form.pan_no"
                                     class="form-control @error('form.pan_no') is-invalid @enderror"
                                     type="text"
-                                    id="pan_no"
+                                    id="form.pan_no"
                                     placeholder="पान नम्बर"
                                     wire:model="form.pan_no"
                                 />
@@ -241,7 +178,7 @@
                                 <select
                                     class="form-select @error('form.transaction_object') is-invalid @enderror"
                                     wire:model="form.transaction_object"
-                                    id="form.transaction_object" multiple>
+                                    id="form.transaction_object" multiple >
                                     <option value="">--- कारोबार गर्ने वस्तु छान्नुहोस् ---</option>
                                     @foreach($businessNatures as $businessNature)
                                         <option value="{{$businessNature->id}}">{{$businessNature->title}}</option>
@@ -251,17 +188,13 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
-
-
-
                             <div class="col-md-4 mb-3">
-                                <label for="amount_cost" class="form-label">लागत रकम रु</label>
+                                <label for="form.amount_cost" class="form-label">लागत रकम रु</label>
                                 <input
-                                    name="amount_cost"
+                                    name="form.amount_cost"
                                     class="form-control @error('form.amount_cost') is-invalid @enderror"
                                     type="text"
-                                    id="amount_cost"
+                                    id="form.amount_cost"
                                     placeholder="लागत रकम रु"
                                     wire:model="form.amount_cost"
                                 />
@@ -275,7 +208,7 @@
                                 <select
                                     class="form-select @error('form.source_of_capital') is-invalid @enderror"
                                     wire:model="form.source_of_capital"
-                                    id="form.source_of_capital" multiple>
+                                    id="form.source_of_capital" >
                                     <option value="">--- पूजीको स्रोत छान्नुहोस् ---</option>
                                     @foreach($businessNatures as $businessNature)
                                         <option value="{{$businessNature->id}}">{{$businessNature->title}}</option>
@@ -285,29 +218,27 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
                             <div class="col-md-6 mb-3">
-                                <label for="purpose" class="form-label">उदेश्य</label>
-                                <input
-                                    name="purpose"
-                                    class="form-control @error('form.purpose') is-invalid @enderror"
-                                    type="text"
-                                    id="purpose"
-                                    placeholder="उदेश्य"
+                                <label for="form.purpose" class="form-label">उदेश्य</label>
+                                <select
+                                    class="form-select @error('form.purpose') is-invalid @enderror"
                                     wire:model="form.purpose"
-                                />
+                                    id="form.purpose" multiple>
+                                    <option value="">--- उदेश्य छान्नुहोस् ---</option>
+
+                                </select>
                                 @error('form.purpose')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="employment" class="form-label">रोजगार</label>
+                                <label for="form.employment" class="form-label">रोजगार</label>
                                 <input
-                                    name="employment"
+                                    name="form.employment"
                                     class="form-control @error('form.employment') is-invalid @enderror"
                                     type="text"
-                                    id="employment"
+                                    id="form.employment"
                                     placeholder="रोजगार"
                                     wire:model="form.employment"
                                 />
@@ -319,7 +250,7 @@
                                 <div class="form-check">
                                     <input type="radio"
                                            class="form-check-input"
-                                           wire:model="is_show"
+                                           wire:model="form.is_show"
                                            value="1"
                                            name="is_show"
                                            id="is_show1">
@@ -329,7 +260,7 @@
                                 <div class="form-check">
                                     <input type="radio"
                                            class="form-check-input"
-                                           wire:model="is_show"
+                                           wire:model="form.is_show"
                                            value="0"
                                            name="is_show"
                                            id="is_show2">
@@ -337,14 +268,14 @@
                                            for="is_show2">बहालमा नरहेको &nbsp;</label>
                                 </div>
                             </div>
-                            @if($is_show)
+                            @if($form['is_show'])
                                 <div class="col-md-6 mb-3">
-                                    <label for="house_owner_name" class="form-label">घर धनिको नाम थर </label>
+                                    <label for="form.house_owner_name" class="form-label">घर धनिको नाम थर </label>
                                     <input
-                                        name="house_owner_name"
+                                        name="form.house_owner_name"
                                         class="form-control @error('form.house_owner_name') is-invalid @enderror"
                                         type="text"
-                                        id="house_owner_name"
+                                        id="form.house_owner_name"
                                         placeholder="घर धनिको नाम थर"
                                         wire:model="form.house_owner_name"
                                     />
@@ -353,12 +284,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="house_owner_phone" class="form-label">घर धनिको मोबाइल न </label>
+                                    <label for="form.house_owner_phone" class="form-label">घर धनिको मोबाइल न </label>
                                     <input
-                                        name="house_owner_phone"
+                                        name="form.house_owner_phone"
                                         class="form-control @error('form.house_owner_phone') is-invalid @enderror"
                                         type="text"
-                                        id="house_owner_phone"
+                                        id="form.house_owner_phone"
                                         placeholder="घर धनिको मोबाइल न"
                                         wire:model="form.house_owner_phone"
                                     />
@@ -367,12 +298,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="house_owner_address" class="form-label">ठेगाना</label>
+                                    <label for="form.house_owner_address" class="form-label">ठेगाना</label>
                                     <input
-                                        name="house_owner_address"
+                                        name="form.house_owner_address"
                                         class="form-control @error('form.house_owner_address') is-invalid @enderror"
                                         type="text"
-                                        id="house_owner_address"
+                                        id="form.house_owner_address"
                                         placeholder="ठेगाना"
                                         wire:model="form.house_owner_address"
                                     />
@@ -381,12 +312,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="house_owner_monthly_rent" class="form-label">मासिक भाडा रु</label>
+                                    <label for="form.house_owner_monthly_rent" class="form-label">मासिक भाडा रु</label>
                                     <input
-                                        name="house_owner_address"
+                                        name="form.house_owner_monthly_rent"
                                         class="form-control @error('form.house_owner_monthly_rent') is-invalid @enderror"
                                         type="text"
-                                        id="house_owner_monthly_rent"
+                                        id="form.house_owner_monthly_rent"
                                         placeholder="मासिक भाडा रु"
                                         wire:model="form.house_owner_monthly_rent"
                                     />
@@ -403,10 +334,10 @@
                             <legend class="title">फर्म / कम्पनी/ब्यबसाय को ठेगाना</legend>
                             <div class="row mt-3">
                                 <div class="col-md-4 mb-3">
-                                    <label for="province_id" class="form-label"> प्रदेश </label>
+                                    <label for="form.province_id" class="form-label"> प्रदेश </label>
                                     <select class="form-select @error('form.province_id') is-invalid @enderror"
-                                            id="province_id"
-                                            wire:model="form.province_id">
+                                            id="form.province_id"
+                                            wire:model="form.province_id" disabled>
                                         <option value="">--- प्रदेश छान्नुहोस्---</option>
                                         @foreach($provinces as $province)
                                             <option value="{{$province->id}}">{{$province->province}}</option>
@@ -417,10 +348,10 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="district_id" class="form-label">जिल्ला</label>
+                                    <label for="form.district_id" class="form-label">जिल्ला</label>
                                     <select class="form-select @error('form.district_id') is-invalid @enderror"
-                                            id="district_id"
-                                            wire:model="form.district_id">
+                                            id="form.district_id"
+                                            wire:model="form.district_id" disabled>
                                         <option value="">--- जिल्ला छान्नुहोस्----</option>
                                         @foreach($districts as $district)
                                             <option value="{{$district->id}}">
@@ -433,10 +364,10 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="local_body_id" class="form-label">पालिका</label>
+                                    <label for="form.local_body_id" class="form-label">पालिका</label>
                                     <select class="form-select @error('form.local_body_id') is-invalid @enderror"
-                                            id="local_body_id"
-                                            wire:model="form.local_body_id">
+                                            id="form.local_body_id"
+                                            wire:model="form.local_body_id" disabled>
                                         <option value="">--- पालिका छान्नुहोस्----</option>
                                         @foreach($localBodies as $localBody)
                                             <option value="{{$localBody->id}}">
@@ -449,9 +380,9 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="ward_no" class="form-label">वार्ड</label>
+                                    <label for="form.ward_no" class="form-label">वार्ड</label>
                                     <select class="form-select @error('form.ward_no') is-invalid @enderror"
-                                            id="ward_no"
+                                            id="form.ward_no"
                                             wire:model="form.ward_no">
                                         <option value="">--- वार्ड छान्नुहोस्----</option>
                                         @for($i=1;$i<=$wards;$i++)
@@ -465,12 +396,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="way" class="form-label">मार्ग</label>
+                                    <label for="form.way" class="form-label">मार्ग</label>
                                     <input
-                                        name="way"
+                                        name="form.way"
                                         class="form-control @error('form.way') is-invalid @enderror"
                                         type="text"
-                                        id="way"
+                                        id="form.way"
                                         placeholder="मार्ग"
                                         wire:model="form.way"
                                     />
@@ -479,12 +410,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="tole" class="form-label">गाउ/टोल</label>
+                                    <label for="form.tole" class="form-label">गाउ/टोल</label>
                                     <input
-                                        name="tole"
+                                        name="form.tole"
                                         class="form-control @error('form.tole') is-invalid @enderror"
                                         type="text"
-                                        id="tole"
+                                        id="form.tole"
                                         placeholder="गाउ/टोल"
                                         wire:model="form.tole"
                                     />
@@ -496,64 +427,142 @@
                             </div>
                         </fieldset>
                     </div>
+                <div style="display: flex;justify-content: space-between;">
                     <div class="mt-2">
-                        <button type="button" wire:click.prevent="backStep(1)" class="btn btn-primary">Pri</button>
+                        <button type="button" wire:click.prevent="backStep(1)" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Previous</button>
                     </div>
                     <div class="mt-2">
-                        <button type="button" wire:click.prevent="nextStep(3)" class="btn btn-primary">Next</button>
+                        <button type="button" wire:click.prevent="nextStep(3)" class="btn btn-primary">   Next <i class="fa fa-arrow-right"></i></button>
                     </div>
+                </div>
+
+                    @break
+                @case(3)
+
+                    <fieldset>
+                        <legend class="title">सम्बन्धित कागजपत्र</legend>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="form.photo" class="form-label">व्यवसायीको पासपोर्ट साइजको फोटो*</label>
+                                <input type="file" class="form-control" id="form.photo"
+                                       wire:model="form.photo"/>
+                                @error('form.photo')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="form.citizen_ship" class="form-label">नागरिकता प्रमाणपत्रको प्रतिलिपि-१</label>
+                                <input type="file" class="form-control" id="form.citizen_ship"
+                                       wire:model="form.citizen_ship"/>
+                                @error('form.citizen_ship')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="form.company_registration" class="form-label">फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</label>
+                                <input type="file" class="form-control" id="form.company_registration"
+                                       wire:model="form.company_registration"/>
+                                @error('form.company_registration')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="form.tax_pay_file" class="form-label">आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि</label>
+                                <input type="file" class="form-control" id="form.tax_pay_file"
+                                       wire:model="form.tax_pay_file"/>
+                                @error('form.tax_pay_file')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="form.signature" class="form-label">हस्ताक्षर</label>
+                                <input type="file" class="form-control" id="form.signature"
+                                       wire:model="form.signature"/>
+                                @error('form.signature')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="form.thumb" class="form-label">औठाको छाप</label>
+                                <input type="file" class="form-control" id="form.thumb"
+                                       wire:model="form.thumb"/>
+                                @error('form.thumb')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div style="display: flex;justify-content: space-between;">
+                    <div class="mt-2">
+                        <button type="button" wire:click.prevent="backStep(2)" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Previous</button>
+                    </div>
+                    <div class="mt-2">
+                        <button type="button" wire:click.prevent="nextStep(4)" class="btn btn-primary"> Next <i class="fa fa-arrow-right"></i></button>
+                    </div>
+                    </div>
+
                     @break
                 @case(4)
                     <fieldset>
                         <legend class="title">परिचय पार्टीको साइज</legend>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label for="tole" class="form-label">लम्बाई</label>
+                                <label for="form.length" class="form-label">लम्बाई</label>
                                 <input
-                                    name="tole"
-                                    class="form-control @error('tole') is-invalid @enderror"
+                                    name="form.length"
+                                    class="form-control @error('form.length') is-invalid @enderror"
                                     type="text"
-                                    id="tole"
+                                    id="form.length"
                                     placeholder="लम्बाई"
-                                    wire:model="tole"
+                                    wire:model="form.length"
                                 />
-                                {{--                                @error('tole')--}}
-                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
-                                {{--                                @enderror--}}
+                                @error('form.length')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+
+
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="tole" class="form-label">चौदाई</label>
+                                <label for="form.width" class="form-label">चौदाई</label>
                                 <input
-                                    name="tole"
-                                    class="form-control @error('tole') is-invalid @enderror"
+                                    name="form.width"
+                                    class="form-control @error('form.width') is-invalid @enderror"
                                     type="text"
-                                    id="tole"
+                                    id="form.width"
                                     placeholder="चौदाई"
-                                    wire:model="tole"
+                                    wire:model="form.width"
                                 />
-                                {{--                                @error('tole')--}}
-                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
-                                {{--                                @enderror--}}
+                                @error('form.width')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="tole" class="form-label">वर्गफिट</label>
+                                <label for="form.square" class="form-label">वर्गफिट</label>
                                 <input
-                                    name="tole"
-                                    class="form-control @error('tole') is-invalid @enderror"
+                                    name="form.square"
+                                    class="form-control @error('form.square') is-invalid @enderror"
                                     type="text"
-                                    id="tole"
+                                    id="form.square"
                                     placeholder="वर्गफिट"
-                                    wire:model="tole"
+                                    wire:model="form.square"
                                 />
-                                {{--                                @error('tole')--}}
-                                {{--                                <div class="invalid-feedback">{{$message}}</div>--}}
-                                {{--                                @enderror--}}
+                                @error('form.square')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
                             </div>
                         </div>
                     </fieldset>
-
+                    <div style="display: flex;justify-content: space-between;">
+                    <div class="mt-2">
+                        <button type="button" wire:click.prevent="backStep(3)" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Previous</button>
+                    </div>
+                    <div class="mt-2">
+                        <button type="button" wire:click.prevent="nextStep(5)" class="btn btn-primary">Next <i class="fa fa-arrow-right"></i> </button>
+                    </div>
+                    </div>
                     @break
-
                 @default
                     <fieldset>
                         <legend class="title">प्रोपाईटरको विवरण</legend>
@@ -617,12 +626,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="house_no" class="form-label">घर  नम्बर</label>
+                                <label for="form.house_no" class="form-label">घर  नम्बर</label>
                                 <input
-                                    name="house_no"
+                                    name="form.house_no"
                                     class="form-control @error('form.house_no') is-invalid @enderror"
                                     type="text"
-                                    id="house_no"
+                                    id="form.house_no"
                                     placeholder="घर  नम्बर"
                                     wire:model="form.house_no"
                                 />
@@ -631,12 +640,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="account_no" class="form-label"> व्यक्तिगत स्थाई लेखा नम्बर</label>
+                                <label for="form.account_no" class="form-label"> व्यक्तिगत स्थाई लेखा नम्बर</label>
                                 <input
-                                    name="house_no"
+                                    name="form.account_no"
                                     class="form-control @error('form.account_no') is-invalid @enderror"
                                     type="text"
-                                    id="account_no"
+                                    id="form.account_no"
                                     placeholder="व्यक्तिगत स्थाई लेखा नम्बर"
                                     wire:model="form.account_no"
                                 />
@@ -646,12 +655,12 @@
                             </div>
 
                             <div class="col-md-4 mb-3">
-                                <label for="national_card_no" class="form-label">राष्ट्रियता परिचयपत्र नम्बर</label>
+                                <label for="form.national_card_no" class="form-label">राष्ट्रियता परिचयपत्र नम्बर</label>
                                 <input
-                                    name="national_card_no"
+                                    name="form.national_card_no"
                                     class="form-control @error('form.national_card_no') is-invalid @enderror"
                                     type="text"
-                                    id="national_card_no"
+                                    id="form.national_card_no"
                                     placeholder="राष्ट्रियता परिचयपत्र नम्बर"
                                     wire:model="form.national_card_no"
                                 />
@@ -660,12 +669,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="education_qualification" class="form-label">शैक्षिक योग्यता</label>
+                                <label for="form.education_qualification" class="form-label">शैक्षिक योग्यता</label>
                                 <input
-                                    name="education_qualification"
+                                    name="form.education_qualification"
                                     class="form-control @error('form.education_qualification') is-invalid @enderror"
                                     type="text"
-                                    id="education_qualification"
+                                    id="form.education_qualification"
                                     placeholder="शैक्षिक योग्यता"
                                     wire:model="form.education_qualification"
                                 />
@@ -676,10 +685,10 @@
                             <div class="col-md-4 mb-3">
                                 <label for="occupation" class="form-label">मुखय पेशा</label>
                                 <input
-                                    name="occupation"
+                                    name="form.occupation"
                                     class="form-control @error('form.occupation') is-invalid @enderror"
                                     type="text"
-                                    id="occupation"
+                                    id="form.occupation"
                                     placeholder="मुखय पेशा"
                                     wire:model="form.occupation"
                                 />
@@ -688,12 +697,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="citizenship_no" class="form-label">नागरिकता नम्बर: </label>
+                                <label for="form.citizenship_no" class="form-label">नागरिकता नम्बर: </label>
                                 <input
-                                    name="citizenship_no"
+                                    name="form.citizenship_no"
                                     class="form-control @error('form.citizenship_no') is-invalid @enderror"
                                     type="text"
-                                    id="citizenship_no"
+                                    id="form.citizenship_no"
                                     placeholder="नागरिकता नम्बर"
                                     wire:model="form.citizenship_no"
                                 />
@@ -702,12 +711,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="issue_date" class="form-label">जारी मिति:</label>
+                                <label for="form.issue_date" class="form-label">जारी मिति:</label>
                                 <input
-                                    name="issue_date"
+                                    name="form.issue_date"
                                     class="form-control @error('form.issue_date') is-invalid @enderror"
                                     type="text"
-                                    id="issue_date"
+                                    id="form.issue_date"
                                     placeholder="जारी मिति"
                                     wire:model="form.issue_date"
                                 />
@@ -736,92 +745,92 @@
                             <legend class="title">ठेगाना</legend>
                             <div class="row mt-3">
                                 <div class="col-md-4 mb-3">
-                                    <label for="province_id" class="form-label"> प्रदेश </label>
-                                    <select class="form-select @error('form.province_id') is-invalid @enderror"
-                                            id="province_id"
-                                            wire:model="form.province_id">
+                                    <label for="form.permanent_province_id" class="form-label"> प्रदेश </label>
+                                    <select class="form-select @error('form.permanent_province_id') is-invalid @enderror"
+                                            id="form.permanent_province_id"
+                                            wire:model="form.permanent_province_id">
                                         <option value="">--- प्रदेश छान्नुहोस्---</option>
-                                        @foreach($provinces as $province)
-                                            <option value="{{$province->id}}">{{$province->province}}</option>
+                                        @foreach($permanent_provinces as $permanent_province)
+                                            <option value="{{$permanent_province->id}}">{{$permanent_province->province}}</option>
                                         @endforeach
                                     </select>
-                                    @error('form.province_id')
+                                    @error('form.permanent_province_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="district_id" class="form-label">जिल्ला</label>
-                                    <select class="form-select @error('form.district_id') is-invalid @enderror"
-                                            id="district_id"
-                                            wire:model="form.district_id">
+                                    <label for="form.permanent_district_id" class="form-label">जिल्ला</label>
+                                    <select class="form-select @error('form.permanent_district_id') is-invalid @enderror"
+                                            id="form.permanent_district_id"
+                                            wire:model="form.permanent_district_id">
                                         <option value="">--- जिल्ला छान्नुहोस्----</option>
-                                        @foreach($districts as $district)
-                                            <option value="{{$district->id}}">
-                                                {{$district->district}}
+                                        @foreach($permanent_districts as $permanent_district)
+                                            <option value="{{$permanent_district->id}}">
+                                                {{$permanent_district->district}}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('form.district_id')
+                                    @error('form.permanent_district_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="local_body_id" class="form-label">पालिका</label>
-                                    <select class="form-select @error('form.local_body_id') is-invalid @enderror"
-                                            id="local_body_id"
-                                            wire:model="form.local_body_id">
+                                    <label for="form.permanent_local_body_id" class="form-label">पालिका</label>
+                                    <select class="form-select @error('form.permanent_local_body_id') is-invalid @enderror"
+                                            id="form.permanent_local_body_id"
+                                            wire:model="form.permanent_local_body_id">
                                         <option value="">--- पालिका छान्नुहोस्----</option>
-                                        @foreach($localBodies as $localBody)
-                                            <option value="{{$localBody->id}}">
-                                                {{$localBody->local_body}}
+                                        @foreach($permanent_localBodies as $permanent_localBody)
+                                            <option value="{{$permanent_localBody->id}}">
+                                                {{$permanent_localBody->local_body}}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('form.local_body_id')
+                                    @error('form.permanent_local_body_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="ward_no" class="form-label">वार्ड</label>
-                                    <select class="form-select @error('form.ward_no') is-invalid @enderror"
-                                            id="ward_no"
-                                            wire:model="form.ward_no">
+                                    <label for="form.permanent_ward_no" class="form-label">वार्ड</label>
+                                    <select class="form-select @error('form.permanent_ward_no') is-invalid @enderror"
+                                            id="form.permanent_ward_no"
+                                            wire:model="form.permanent_ward_no">
                                         <option value="">--- वार्ड छान्नुहोस्----</option>
-                                        @for($i=1;$i<=$wards;$i++)
+                                        @for($i=1;$i<=$permanent_wards;$i++)
                                             <option value="{{$i}}">
                                                 {{$i}}
                                             </option>
                                         @endfor
                                     </select>
-                                    @error('form.ward_no')
+                                    @error('form.permanent_ward_no')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="way" class="form-label">मार्ग</label>
+                                    <label for="form.permanent_way" class="form-label">मार्ग</label>
                                     <input
-                                        name="way"
-                                        class="form-control @error('form.way') is-invalid @enderror"
+                                        name="form.permanent_way"
+                                        class="form-control @error('form.permanent_way') is-invalid @enderror"
                                         type="text"
-                                        id="way"
+                                        id="form.permanent_way"
                                         placeholder="मार्ग"
-                                        wire:model="form.way"
+                                        wire:model="form.permanent_way"
                                     />
-                                    @error('form.way')
+                                    @error('form.permanent_way')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="tole" class="form-label">गाउ/टोल</label>
+                                    <label for="form.permanent_tole" class="form-label">गाउ/टोल</label>
                                     <input
-                                        name="tole"
-                                        class="form-control @error('form.tole') is-invalid @enderror"
+                                        name="form.permanent_tole"
+                                        class="form-control @error('form.permanent_tole') is-invalid @enderror"
                                         type="text"
-                                        id="tole"
+                                        id="form.permanent_tole"
                                         placeholder="गाउ/टोल"
-                                        wire:model="form.tole"
+                                        wire:model="form.permanent_tole"
                                     />
-                                    @error('form.tole')
+                                    @error('form.permanent_tole')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -902,8 +911,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-around mt-2">
-                        <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary">Next</button>
+                    <div class="d-flex justify-content-end mt-2">
+                        <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary">  Next <i class="fa fa-arrow-right"></i></button>
                     </div>
             @endswitch
         </form>

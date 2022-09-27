@@ -2,10 +2,10 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\OrganizationRegistered;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
 
 class OrganizationController extends Controller
@@ -29,6 +29,14 @@ class OrganizationController extends Controller
         $organization->update([
             'is_active' => !$organization->is_active
         ]);
+
+        if (empty($organization->password) && $organization->is_active == 1) {
+
+            $url = URL::signedRoute('organization.invitation', $organization);
+
+            \Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
+        }
+
         toast('संगठन स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }

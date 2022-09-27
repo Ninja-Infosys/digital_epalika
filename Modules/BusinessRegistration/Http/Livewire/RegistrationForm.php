@@ -5,6 +5,7 @@ namespace Modules\BusinessRegistration\Http\Livewire;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\Settings\OfficeSetting;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\BusinessNature;
@@ -13,22 +14,22 @@ class RegistrationForm extends Component
 {
     use WithFileUploads;
 
-    public $province_id = '';
-    public $district_id = '';
-    public $local_body_id = '';
-    public $ward_no = '';
 
     public int $currentStep = 1;
 
-    public bool $is_show = false;
+    public $provices = [];
+    public $districts = [];
+    public $localBodies = [];
+    public $wards = 0;
+
 
     public $threeGenerationDetails = [];
     public $partnerDetails = [];
-    public $provinces = [];
-    public $districts = [];
+    public $permanent_provinces = [];
+    public $permanent_districts = [];
     public $all_districts = [];
-    public $localBodies = [];
-    public $wards = '';
+    public $permanent_localBodies = [];
+    public $permanent_wards = '';
 
     public $businessNatures = [];
 
@@ -36,45 +37,61 @@ class RegistrationForm extends Component
         'name' => null,
         'gender' => null,
         'house_no' => null,
-        'phone' =>null,
+        'phone' => null,
         'account_no' => null,
-        'national_card_no' =>null,
+        'national_card_no' => null,
         'education_qualification' => null,
-        'occupation' =>null,
+        'occupation' => null,
         'email' => null,
         'citizenship_no' => null,
         'issue_date' => null,
         'issue_district_id' => null,
-        'province_id' =>null,
+        'permanent_province_id' => null,
+        'permanent_district_id' => null,
+        'permanent_local_body_id' => null,
+        'permanent_way' => null,
+        'permanent_tole' => null,
+        'province_id' => null,
         'district_id' => null,
-        'local_body_id' =>null,
+        'local_body_id' => null,
         'way' => null,
         'tole' => null,
         'business_detail_name' => null,
-        'business_detail_name_en' =>null,
+        'business_detail_name_en' => null,
         'business_nature_id' => null,
         'establish_year' => null,
         'registration_date' => null,
         'pan_no' => ['required'],
-        'transaction_object' =>null,
+        'transaction_object' => null,
         'amount_cost' => null,
         'source_of_capital' => null,
         'purpose' => null,
         'employment' => null,
         'house_owner_name' => null,
         'house_owner_phone' => null,
-        'house_owner_address' =>null,
+        'house_owner_address' => null,
         'house_owner_monthly_rent' => null,
+        'photo' => null,
+        'citizen_ship' => null,
+        'company_registration' => null,
+        'tax_pay_file' => null,
+        'signature' => null,
+        'thumb' => null,
         'threeGenerationDetails' => [],
         'partnerDetails' => [],
-        'is_show'=>0
+        'is_show' => 0
 
     ];
 
 
     public function mount()
     {
+        $officeSetting = OfficeSetting::first();
+        $this->permanent_provinces = Province::all();
         $this->provinces = Province::all();
+        $this->form['province_id'] = $officeSetting->province_id;
+        $this->form['district_id'] = $officeSetting->district_id;
+        $this->form['local_body_id'] = $officeSetting->local_body_id;
         $this->all_districts = District::all();
         $this->businessNatures = BusinessNature::all();
     }
@@ -104,11 +121,11 @@ class RegistrationForm extends Component
         'form.citizenship_no' => ['required'],
         'form.issue_date' => ['required'],
         'form.issue_district_id' => ['required'],
-        'form.province_id' => ['required'],
-        'form.district_id' => ['required'],
-        'form.local_body_id' => ['required'],
-        'form.way' => ['nullable'],
-        'form.tole' => ['nullable'],
+        'form.permanent_province_id' => ['required'],
+        'form.permanent_district_id' => ['required'],
+        'form.permanent_local_body_id' => ['required'],
+        'form.permanent_way' => ['nullable'],
+        'form.permanent_tole' => ['nullable'],
         'form.threeGenerationDetails.*.relation' => ['required', 'string'],
         'form.threeGenerationDetails.*.name' => ['required', 'string'],
         'form.threeGenerationDetails.*.name_en' => ['required', 'string'],
@@ -125,13 +142,13 @@ class RegistrationForm extends Component
         'form.pan_no' => ['required'],
         'form.transaction_object' => ['nullable'],
         'form.amount_cost' => ['required'],
-        'form.source_of_capital' => ['required'],
+        'form.source_of_capital' => ['nullable'],
         'form.purpose' => ['required'],
         'form.employment' => ['required'],
-        'form.house_owner_name' => ['nullable'],
-        'form.house_owner_phone' => ['nullable'],
-        'form.house_owner_address' => ['nullable'],
-        'form.house_owner_monthly_rent' => ['nullable'],
+        'form.house_owner_name' => ['required_if:form.is_show,1'],
+        'form.house_owner_phone' => ['required_if:form.is_show,1'],
+        'form.house_owner_address' => ['required_if:form.is_show,1'],
+        'form.house_owner_monthly_rent' => ['required_if:form.is_show,1'],
         'form.province_id' => ['required'],
         'form.district_id' => ['required'],
         'form.local_body_id' => ['required'],
@@ -145,8 +162,20 @@ class RegistrationForm extends Component
     ];
 
     protected array $thirdStepValidations = [
-
+        'form.photo' => ['required'],
+        'form.citizen_ship' => ['required'],
+        'form.company_registration' => ['required'],
+        'form.tax_pay_file' => ['required'],
+        'form.signature' => ['required'],
+        'form.thumb' => ['required'],
     ];
+
+    protected array $fourthStepValidations = [
+
+        'form.length' => ['required'],
+        'form.width' => ['required'],
+        'form.square' => ['required'],
+        ];
 
     public function rules()
     {
@@ -164,6 +193,11 @@ class RegistrationForm extends Component
             case 3:
                 {
                     return $this->thirdStepValidations;
+                }
+                break;
+            case 4:
+                {
+                    return $this->fourthStepValidations;
                 }
                 break;
             default:
@@ -208,6 +242,16 @@ class RegistrationForm extends Component
 
     public function render()
     {
+        if (!empty($this->form['permanent_province_id'])) {
+            $this->permanent_districts = Province::with('districts')->findOrFail($this->form['permanent_province_id'])->districts;
+        }
+        if (!empty($this->form['permanent_district_id'])) {
+            $this->permanent_localBodies = District::with('localBodies')->findOrFail($this->form['permanent_district_id'])->localBodies;
+        }
+        if (!empty($this->form['permanent_local_body_id'])) {
+            $this->permanent_wards = LocalBody::findOrFail($this->form['permanent_local_body_id'])->wards;
+        }
+
         if (!empty($this->form['province_id'])) {
             $this->districts = Province::with('districts')->findOrFail($this->form['province_id'])->districts;
         }
