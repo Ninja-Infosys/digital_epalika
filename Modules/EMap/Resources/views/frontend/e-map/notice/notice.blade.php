@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row d-flex mt-5 ">
                     <div class="breadcrumb d-flex">
-                        <div>
+                        <div class="breadcrumb-item">
                             <a class="whitespace-nowrap text-primary-500" href="{{url('e-map')}}">ई-नक्सा</a>
                             <i class="fa fa-angle-double-right"></i>
                             <a class=" text-primary-500 text-center">सूचना</a>
@@ -51,5 +51,6 @@
     </section>
     @push('styles')
         <link rel="stylesheet" href="{{asset('assets/frontend/css/e-map/notice.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
     @endpush
 @endsection

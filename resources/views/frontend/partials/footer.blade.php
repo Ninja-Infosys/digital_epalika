@@ -1,8 +1,8 @@
 <section class="footer-section">
     <footer class="footer">
-        <div class="footer-main" style="background-image: url({{url('assets/frontend/image/footer.jpg')}});">
+        <div class="footer-main">
             <div class="container">
-                <div id="round-btn">
+                <a href="{{url('/popup')}}"><div id="round-btn">
                     <div class="popup-banner">
                         <h3>e-Palika</h3>
                         <div class="btnsection">
@@ -12,7 +12,7 @@
                     <div class="round-btn-div">
                         <img class="round-btn-img" src="{{asset('assets/frontend/image/icon/support.png')}}">
                     </div>
-                </div>
+                </div></a>
                 <div class="row">
                     <div class="col-md-4">
                         <h6 class="footer-title mb-3">सम्पर्क विवरण</h6>
@@ -51,8 +51,8 @@
                             @endforeach
                         </ul>
                     </div>
-                    <div class="col-md-4">
-                        <img src="{{asset('images/get-on-playstore.png')}}">
+                    <div class="footer-img col-md-4">
+                        <img src="{{asset('assets/frontend/image/pp.png')}}" alt="Get in Play Store">
                     </div>
                 </div>
             </div>

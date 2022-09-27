@@ -75,7 +75,7 @@ Route::get('/static/single-executive', function () {
     return view('frontend.static.executive-board.single-executive-board');
 });
 Route::get('/popup', function () {
-    return view('frontend.partials.popup');
+    return view('frontend.static.chat.popup');
 });
 Route::get('/chat', function () {
     return view('frontend.static.chat.chat');

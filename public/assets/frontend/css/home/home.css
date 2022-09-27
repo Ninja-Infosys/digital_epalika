@@ -1,17 +1,35 @@
+.list-item-head {
+    background-color: var(--mainColor);
+}
+.list-item-head p{
+    font-size: 1.155rem;
+}
+.list-group .list-group-item a{
+    text-decoration: none;
+    color: var(--mainColor);
+}
+.list-group .btn-notice{
+    text-align: center;
+    padding: 2px;
+    text-decoration: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var(--secondaryColor);
+}
+.list-group .btn-notice:hover{
+    transition: .5s;
+    background-color: var(--mainColor);
+    color: var(--whiteColor);
+}
 .title-head-main {
-    background-color: rgb(220, 61, 61);
-    font-size: 1.5rem;
+    padding: 0;
+    background-color: var(--mainColor);
     color: white;
 }
-
-.title-head-main span {
-    font-size: 2rem;
-    margin-right: .5rem;
-    background-color: white;
-    color: black;
-    padding: .3rem;
+.title-head-main p{
+    padding: 0;
+    font-size: 1.155rem;
 }
-
 .detail {
     color: white;
     border-radius: 1.3rem;
@@ -22,4 +40,8 @@
 
 .text-center {
     text-align: center !important;
+}
+.org-location .card-body p{
+    font-size: 1.255rem;
+    color: var(--mainColor);
 }

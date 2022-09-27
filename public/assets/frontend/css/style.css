@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400&display=swap');
+
 :root {
-    --mainColor: #0062cc;;
+    --mainColor: #3C8DBC;
+    --secondaryColor: #8AC5EF;
     --purpleColor: #c679e3;
     --navLinkColor: #4a6f8a;
     --paragraphColor: #6084a4;
@@ -10,6 +12,7 @@
     --blackColor: #0e314c;
     --fontSize: 14px;
 }
+
 body {
     overflow-x: hidden;
     background-color: var(--whiteColor) !important;
@@ -17,10 +20,11 @@ body {
     font-size: var(--fontSize);
 }
 
-.carousel-item>img{
+.carousel-item > img {
     object-fit: cover;
     height: 400px;
 }
+
 .card-01 {
     box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
     border-radius: 4px;
@@ -66,16 +70,13 @@ body {
     font-size: .833rem;
     margin-bottom: .25rem;
 }
-
 .textbox-01 p {
     margin-bottom: .25rem;
 }
-
 .list-01 li:not(:last-child) {
     padding-bottom: 1rem;
     border-bottom: 1px solid #e0e0e0;
 }
-
 .heading-line::after,
 .heading-line_red::after {
     content: "";
@@ -95,109 +96,77 @@ body {
     line-height: 1rem !important;
 }
 
-a {
-    color: #007bff;
-    text-decoration: none !important;
-    background-color: transparent;
-}
 
-.list-item-head-top {
-    margin-bottom: .6rem;
-}
 
 .list-item {
     width: auto;
     background: #fffffe;
 }
-.small,
-small {
-    display: block;
-    font-size: 14px;
-    line-height: 22px;
-    color: #9b9b9b;
-    margin-top: 5px;
-}
-
-.note {
-    padding: 3px;
-    display: grid;
-    font-size: 1.7rem;
-    font-weight: normal;
-    grid-gap: 0px;
-    border-bottom: 1px solid #dadada;
-    cursor: pointer;
-}
-
 /*intro-section*/
-  .heading {
-      font-weight: 700;
-  }
+.heading {
+    font-weight: 700;
+}
+
 .text-withlink {
     color: #1a1a1a;
 }
-.intro-col{
+
+.intro-col {
     padding: 0;
     margin: 0;
 }
+
 .intro-title {
     display: inline-block;
     color: #2460b9;
     font-size: 14px;
 }
+
 .introduction h6 {
+    color: var(--mainColor);
+    font-size: 1.155rem;
+}
+
+.introduction p {
     text-align: justify;
     text-justify: inter-word;
 }
+
 /*main cheif person card*/
-   .card-02 .card:hover {
-       transition: .7s;
-       transform: translateY(-10px);
-   }
+.card-02 .card:hover {
+    transition: .7s;
+    transform: translateY(-10px);
+}
+
 .card-02 .card:hover .card-description {
     transition: .5s;
-    background-color: var(--redColor);
+    background-color: var(--mainColor);
     color: var(--whiteColor);
 }
+
 .card-description {
     padding-bottom: 10px;
     border-radius: 6px;
 }
-.card-description p{
+
+.card-description p {
     line-height: 1rem;
 }
+.card-description h6{
+    font-size: 1.155rem;
+}
 /*gallery slider*/
-  .card img {
-      object-fit: contain;
-      height: 12rem;
-      width: 100%;
-  }
-
-.nav-tabs {
-    background: #bd2821;
+.card img {
+    object-fit: contain;
+    height: 12rem;
+    width: 100%;
+}
+.button .btn {
+    background-color: var(--secondaryColor);
 }
 
-.nav-tabs .nav-link {
-    color: var(--whiteColor)
-}
-
-.nav-tabs .nav-link.active {
-    color: black;
-}
-
-.mobile-app .card-01 h6 {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 38px;
-    color: #4A596B;
-    border-bottom: 3px solid rgba(145, 6, 6, 0.771);
-    margin-bottom: 20px;
-}
-
-.mobile-app p {
-    margin-top: 10px;
-    display: flex;
-}
-
-.mobile-app a {
-    width: 50%;
+.button .btn:hover {
+    background-color: var(--mainColor);
+    transition: .7s;
+    transform: translateY(-5px);
 }

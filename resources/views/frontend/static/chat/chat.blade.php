@@ -1,4 +1,4 @@
-@extends('frontend.static.chat.index')
+@extends('frontend.static.chat.master')
 @section('chat')
     <div id="frame" class="rounded border mt-5">
         <div class="chat rounded">

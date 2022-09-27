@@ -5,21 +5,17 @@
 }
 .footer-main {
     padding: 3rem 0;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: var(--mainColor);
 }
 
 .footer-title {
-    font-weight: 700;
     color: #fff;
     text-decoration: underline;
     text-underline-position: under;
+    font-size: 1.155rem;
 }
 
-h6,
-.h6 {
-    font-size: 1rem;
-}
+
 
 .list {
     padding-left: 0;
@@ -68,14 +64,17 @@ svg {
     font-size: .7rem;
     color: #ffff;
 }
-
+.footer-img img{
+    object-fit: contain;
+    height: 8rem;
+}
 .footer-copyright {
-    background-color: #1b4789;
+    background-color: var(--secondaryColor);
     font-size: .833rem;
     display: flex;
     justify-content: space-evenly;
     padding: 1rem;
-    color: #e6ecf5;
+    color: var(--blackColor);
 }
 
 a {

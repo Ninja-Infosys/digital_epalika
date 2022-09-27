@@ -5,8 +5,8 @@
                 <h5 class="fw-bold">शाखाहरु</h5>
             </div>
             @foreach($branches as $branch)
-                <p>
-                    <button class="btn fs-5 w-100 d-flex justify-items-start btn-primary" type="button"
+                <p class="branch-title">
+                    <button class="btn fs-5 w-100 d-flex justify-items-start" type="button"
                             data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="false"
                             wire:click.prevent="setBranchId({{$branch}})">
                         {{$branch->branch_name}}
@@ -41,7 +41,7 @@
             <ul class="list-group">
                 @forelse($services as $service)
                     <a href="{{route('service.view',$service)}}">
-                        <li class="list-group-item bg-danger text-white rounded mb-2 fs-5 d-flex d-flex">
+                        <li class="list-group-item text-white rounded mb-2 fs-5 d-flex d-flex">
                             <i class="fa fa-check-double m-lg-1"></i>{{$service->service_name}}
                         </li>
                     </a>
