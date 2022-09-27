@@ -13,16 +13,14 @@
                     </button>
                 </p>
                 @if(count($branch->branches)!=0)
-                    <div class="collapse" id="collapse{{$loop->iteration}}">
+                    <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
                         <div class="card-body">
                             <ul class="list-group">
                                 @foreach($branch->branches as $subBranch)
                                     <li class="list-group-item d-flex justify-content-between fs-5"
                                         wire:click.prevent="setBranchId({{$subBranch}})">
                                         {{$subBranch->branch_name}}
-
                                         <i class="fs-5 pt-1 fa-solid fa-angles-right"></i>
-
                                     </li>
                                 @endforeach
                             </ul>

@@ -2,7 +2,7 @@
     <footer class="footer">
         <div class="footer-main">
             <div class="container">
-                <a href="{{url('/popup')}}"><div id="round-btn">
+                <div id="round-btn" class="popup" onclick="myFunction()">
                     <div class="popup-banner">
                         <h3>e-Palika</h3>
                         <div class="btnsection">
@@ -12,7 +12,21 @@
                     <div class="round-btn-div">
                         <img class="round-btn-img" src="{{asset('assets/frontend/image/icon/support.png')}}">
                     </div>
-                </div></a>
+                    <span class="popuptext" id="myPopup">
+                        <div class="welcome px-5 d-flex">
+        <div class="welcome-msg mt-5">
+            <h5>खजुरा गाउँपालिकाको संक्षिप्त परिचय</h5>
+            <p>तत्कालीन सङ्घीय मामिला तथा स्थानीय विकास मन्त्रालयले तयार गरेको नमुना बमोजिम गठित गाउँपालिका,
+                नगरपालिका तथा विशेष, संरक्षित वा स्वायत्त क्षेत्रको संख्या तथा सिमाना निर्धारण आयोगले मिति २०७३ पुस
+                २२ मा पेश गरेको प्रतिवेदन अनुसार तत्कालिन संघीय मामिला तथा स्थानीय विकास मन्त्रीको संयोजकत्वमा गठित
+                समितिले मिति २०७३/११/२० मा पेश गरेको प्रतिवेदनको आधारमा</p>
+        </div>
+        <div class="welcome-img my-auto">
+            <img src="{{asset('assets/frontend/image/icon/support.png')}}" alt="">
+        </div>
+    </div>
+                    </span>
+                </div>
                 <div class="row">
                     <div class="col-md-4">
                         <h6 class="footer-title mb-3">सम्पर्क विवरण</h6>
@@ -34,7 +48,6 @@
                                     <a href="#">{{$email}}</a>
                                 </li>
                             @endforeach
-
 
                         </ul>
                     </div>
@@ -62,6 +75,14 @@
         </div>
     </footer>
 </section>
+<script>
+    // When the user clicks on div, open the popup
+    function myFunction() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+    }
+</script>
+
 @push('styles')
     <link rel="stylesheet" href="{{asset('assets/frontend/css/footer.css')}}">
 @endpush
