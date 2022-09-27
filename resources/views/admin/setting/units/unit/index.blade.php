@@ -62,6 +62,10 @@
                                         {{$unit->title ?? ''}}
                                     </td>
                                     <td>
+                                        <a href="{{route('admin.units.unit.internal-unit-conversion.index',$unit)}}"
+                                           class="btn btn-xs btn-outline-info">
+                                            <i class="fa fa-exchange-alt"></i> आन्तरिक रूपान्तरण
+                                        </a>
                                         @can('unit_edit')
                                             <a href="{{route('admin.units.unit.edit',$unit)}}"
                                                class="btn btn-xs btn-outline-primary">
