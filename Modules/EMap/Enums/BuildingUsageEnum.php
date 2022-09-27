@@ -2,7 +2,7 @@
 
 namespace Modules\EMap\Enums;
 
-enum BuildingUsage: string
+enum BuildingUsageEnum: string
 {
     case RESIDENTIAL = 'residential';
     case PROFESSIONAL = 'Professional';

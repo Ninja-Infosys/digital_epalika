@@ -26,7 +26,7 @@ class MapApplyController extends Controller
 
     public function store(Request $request, Client $client)
     {
-        //
+        dd($request->all());
     }
 
     public function show(MapApply $mapApply)

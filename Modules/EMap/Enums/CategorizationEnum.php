@@ -2,7 +2,7 @@
 
 namespace Modules\EMap\Enums;
 
-enum Categorization: string
+enum CategorizationEnum: string
 {
     case A = 'a';
     case B = 'b';
