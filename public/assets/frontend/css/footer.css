@@ -1,22 +1,21 @@
  /*footer*/
 .footer {
-    background-color: #dadada;
-    margin-top: 30px;
-}
+    background-color: var(--mainColor);}
 .footer-main {
-    padding: 3rem 0;
     background-color: var(--mainColor);
 }
-
+.footer-content{
+    padding-left: 3rem ;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    background-color: var(--mainColor);
+}
 .footer-title {
     color: #fff;
     text-decoration: underline;
     text-underline-position: under;
     font-size: 1.155rem;
 }
-
-
-
 .list {
     padding-left: 0;
     list-style: none;
@@ -141,44 +140,4 @@ a {
     text-decoration: none;
     color: var(--whiteColor);
 }
-/*---------------popopopopopoop*/
- .popup {
-     display: inline-block;
-     cursor: pointer;
-     -webkit-user-select: none;
-     -moz-user-select: none;
-     -ms-user-select: none;
-     user-select: none;
- }
 
- /* The actual popup */
- .popup .popuptext {
-     visibility: hidden;
-     z-index: 99999;
- }
- /* Toggle this class - hide and show the popup */
- .popup .show {
-     visibility: visible;
-     -webkit-animation: fadeIn 1s;
-     animation: fadeIn 1s;
- }
- /* Add animation (fade in the popup) */
- @-webkit-keyframes fadeIn {
-     from {opacity: 0;}
-     to {opacity: 1;}
- }
- @keyframes fadeIn {
-     from {opacity: 0;}
-     to {opacity:1 ;}
- }
- .welcome{
-     padding-bottom: 100px;
-     color: var(--whiteColor);
-     background: linear-gradient(90deg, rgba(56,102,161,1) 0%, rgba(56,102,161,1) 35%, rgb(80 168 232) 100%) !important;
- }
- .welcome-img img{
-     object-fit: cover;
-     height: 7rem;
-     border-radius: 50%;
-     border: double 5px var(--whiteColor);
- }
