@@ -951,15 +951,27 @@
                         <tbody>
                         <tr>
                             <th>लम्बाई</th>
-                            <td>{{$form['length']}}</td>
+
+                            <td>
+                                @if(!empty($form['length']))
+                                {{$form['length']}}
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <th>चौदाई</th>
-                            <td>{{$form['width']}}</td>
+                            <td>
+                                @if(!empty($form['width']))
+                                {{$form['width']}}</td>
+                            @endif
                         </tr>
                         <tr>
                             <th>वर्गफिट</th>
-                            <td>{{$form['square']}}</td>
+                            <td>
+                                @if(!empty($form['square']))
+                                {{$form['square']}}
+                                @endif
+                            </td>
                         </tr>
 
 

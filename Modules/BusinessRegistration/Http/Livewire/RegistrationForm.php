@@ -326,6 +326,8 @@ class RegistrationForm extends Component
             'title' => "धन्यबाद",
             'text' => "तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो",
         ]);
+
+        $this->currentStep = 1;
     }
 
     public function documentsArrayIncrement()
