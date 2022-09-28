@@ -9,7 +9,8 @@ return new class extends Migration {
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('measurement_unit_id')->constrained();
+            $table->foreignId('type_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('measurement_unit_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->integer('position')->nullable();
             $table->integer('is_smallest')->default(0);

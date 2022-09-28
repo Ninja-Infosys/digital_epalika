@@ -26,4 +26,9 @@ class Type extends Model
     {
         return $this->hasMany(MeasurementUnit::class);
     }
+
+    public function units(): HasMany
+    {
+        return $this->hasMany(Unit::class);
+    }
 }

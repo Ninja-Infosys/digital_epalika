@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin\Setting\Units;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\MeasurementUnits\StoreUnitConversionRequest;
-use App\Http\Requests\Setting\MeasurementUnits\UpdateUnitConversionRequest;
+use App\Http\Requests\StoreExternalUnitConversionRequest;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class InternalUnitConversionController extends Controller
+class ExternalUnitConversionController extends Controller
 {
     public function index(Unit $unit)
     {
@@ -18,12 +19,14 @@ class InternalUnitConversionController extends Controller
             'You are not allowed to digital board news access'
         );
 
-        $conversionUnits = Unit::where('measurement_unit_id', $unit->measurement_unit_id)->get();
+        $conversionUnits = Unit::where('type_id', $unit->type_id)
+            ->where('is_smallest', 1)
+            ->get();
         $conversions = UnitConversion::where('conversion_from', $unit->id)->get();
-        return view('admin.setting.units.unit.conversion.internal.index', compact('unit', 'conversionUnits', 'conversions'));
+        return view('admin.setting.units.unit.conversion.external.index', compact('unit', 'conversionUnits', 'conversions'));
     }
 
-    public function store(StoreUnitConversionRequest $request, Unit $unit)
+    public function store(StoreExternalUnitConversionRequest $request, Unit $unit)
     {
         foreach ($request->input('conversion') as $conversion) {
             if ($conversionData = UnitConversion::where('conversion_to', $conversion['conversion_to'])->where('conversion_from', $unit->id)->first()) {
