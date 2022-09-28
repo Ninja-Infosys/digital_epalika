@@ -191,6 +191,13 @@ class RegistrationForm extends Component
         'form.square' => ['nullable'],
     ];
 
+    public function messages(): array
+    {
+        return [
+            'form.name.required' => ['नाम आवश्यक छ'],
+        ];
+    }
+
     public function rules()
     {
         switch ($this->currentStep) {
