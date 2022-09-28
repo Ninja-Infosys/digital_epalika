@@ -52,6 +52,15 @@ class MapApplyLivewire extends Component
         'citizenship_issue_date' => null
     ];
 
+    public array $houseOwner = [
+        'name' => null,
+        'phone' => null,
+        'father_name' => null,
+        'citizenship_issue_district' => null,
+        'citizenship_no' => null,
+        'citizenship_issue_date' => null
+    ];
+
     public function addStoreyDetail()
     {
         $this->applyMap['storeyDetails'][] = [];
@@ -83,15 +92,15 @@ class MapApplyLivewire extends Component
         'applyMap.current_storey' => ['required'],
         'applyMap.area_of_plinth' => ['required'],
         'applyMap.future_storey' => ['required'],
-        'applyMap.length' => ['required'],
-        'applyMap.breadth' => ['required'],
-        'applyMap.height' => ['required'],
+        'applyMap.length' => ['required', 'numeric'],
+        'applyMap.breadth' => ['required', 'numeric'],
+        'applyMap.height' => ['required', 'numeric'],
         'applyMap.storeyDetails' => ['nullable', 'array'],
-        'applyMap.storeyDetails.*.storey' => ['required'],
-        'applyMap.storeyDetails.*.area_of_proposed_construction' => ['required'],
-        'applyMap.storeyDetails.*.area_of_former_construction' => ['required'],
-        'applyMap.storeyDetails.*.total_area' => ['required'],
-        'applyMap.storeyDetails.*.height' => ['required'],
+        'applyMap.storeyDetails.*.storey' => ['required', 'integer'],
+        'applyMap.storeyDetails.*.area_of_proposed_construction' => ['required', 'numeric'],
+        'applyMap.storeyDetails.*.area_of_former_construction' => ['required', 'numeric'],
+        'applyMap.storeyDetails.*.total_area' => ['required', 'numeric'],
+        'applyMap.storeyDetails.*.height' => ['required', 'numeric'],
     ];
 
     protected array $landDescriptionValidations = [
@@ -108,12 +117,31 @@ class MapApplyLivewire extends Component
         'landDescription.percentage_of_area_covered_by_building' => ['required'],
     ];
 
+    protected array $landOwnerValidations = [
+        'landOwner.land_owner_type' => ['required'],
+        'landOwner.name' => ['required'],
+        'landOwner.phone' => ['nullable'],
+        'landOwner.father_name' => ['required'],
+        'landOwner.citizenship_issue_district_id' => ['required', 'exists:districts,id'],
+        'landOwner.citizenship_no' => ['required'],
+        'landOwner.citizenship_issue_date' => ['required']
+    ];
+
+    protected array $houseOwnerValidations = [
+        'houseOwner.name' => ['required'],
+        'houseOwner.phone' => ['nullable'],
+        'houseOwner.father_name' => ['required'],
+        'houseOwner.citizenship_issue_district_id' => ['required'],
+        'houseOwner.citizenship_no' => ['required'],
+        'houseOwner.citizenship_issue_date' => ['required']
+    ];
+
     public function rules()
     {
         switch ($this->currentStep) {
             case 1:
                 {
-                    return array_merge($this->applyMapValidations, $this->landDescriptionValidations);
+                    return array_merge($this->applyMapValidations, $this->landDescriptionValidations, $this->landOwnerValidations, $this->houseOwnerValidations);
                 }
                 break;
             case 2:

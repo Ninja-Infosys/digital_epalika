@@ -23,8 +23,8 @@ return new class extends Migration {
             $table->double('breadth', 12, 2);
             $table->double('height', 12, 2);
             $table->string('land_use_area')->nullable();
-            $table->string('ward_no')->nullable();
-            $table->string('former_ward_no')->nullable();
+            $table->integer('ward_no')->nullable();
+            $table->integer('former_ward_no')->nullable();
             $table->string('tole')->nullable();
             $table->string('street_code_no')->nullable();
             $table->string('plot_no')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->string('kattha')->nullable();
             $table->string('dhur')->nullable();
             $table->string('square_meter')->nullable();
-            $table->string('percentage_of_area_covered_by_building')->nullable();
+            $table->double('percentage_of_area_covered_by_building', 10, 2)->default(0);
             $table->foreignId('unit_id')->nullable()->constrained();
             $table->timestamps();
             $table->softDeletes();

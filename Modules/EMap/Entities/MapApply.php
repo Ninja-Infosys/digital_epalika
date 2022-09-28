@@ -75,4 +75,14 @@ class MapApply extends Model
     {
         return $this->hasMany(LandOwner::class);
     }
+
+    public function houseOwners(): HasMany
+    {
+        return $this->hasMany(HouseOwner::class);
+    }
+
+    public function storyDetails(): HasMany
+    {
+        return $this->hasMany(StoreyDetail::class);
+    }
 }

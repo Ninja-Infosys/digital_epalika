@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class LandOwner extends Model
+class HouseOwner extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -21,13 +21,12 @@ class LandOwner extends Model
 
     protected $fillable = [
         'map_apply_id',
-        'land_owner_type',
         'name',
         'phone',
         'father_name',
         'citizenship_issue_district_id',
         'citizenship_no',
-        'citizenship_issue_date'
+        'citizenship_issue_date',
     ];
 
     public function mapApply(): BelongsTo

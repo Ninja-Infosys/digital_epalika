@@ -491,28 +491,24 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <label for="father_name">१.४ नागरिकता लिएको जिल्ला :</label>
+                                    <label for="citizenship_issue_district">१.४ नागरिकता लिएको जिल्ला :</label>
                                     <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
-                                           id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
+                                           id="citizenship_issue_district"
+                                           wire:model="landOwner.citizenship_issue_district"
                                     >
-                                    @error('father_name')
+                                    @error('landOwner.citizenship_issue_district')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="citizenship_number">१.५ नागरिकत नम्बर :</label>
+                                    <label for="citizenship_no">१.५ नागरिकत नम्बर :</label>
                                     <input type="text"
-                                           class="@error('citizenship_number') is-invalid @enderror "
-                                           id="citizenship_number"
-                                           name="citizenship_number"
-                                           value="{{old('citizenship_number')}}"
+                                           id="citizenship_no"
+                                           wire:model="landOwner.citizenship_no"
                                     >
-                                    @error('citizenship_number')
+                                    @error('landOwner.citizenship_no')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
@@ -523,12 +519,10 @@
                                     <label for="citizenship_issued_date">१.६ नागरिकता लिएको मिति :
                                         :</label>
                                     <input type="text"
-                                           class="@error('citizenship_issued_date') is-invalid @enderror "
                                            id="citizenship_issued_date"
-                                           name="citizenship_issued_date"
-                                           value="{{old('citizenship_issued_date')}}"
+                                           wire:model="landOwner.citizenship_issue_date"
                                     >
-                                    @error('citizenship_issued_date')
+                                    @error('landOwner.citizenship_issued_date')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
@@ -556,66 +550,61 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <label for="name">१.१ नाम :</label>
+                                    <label for="houseOwner.name">१.१ नाम :</label>
                                     <input type="text"
-                                           class="@error('name') is-invalid @enderror "
-                                           id="name"
-                                           name="name"
-                                           value="{{old('name')}}"
+                                           id="houseOwner.name"
+                                           wire:model="houseOwner.name"
                                     >
-                                    @error('name')
+                                    @error('houseOwner.name')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                                 <td>
-                                    <label for="phone">१.२ फोन नं. :</label>
+                                    <label for="houseOwner.phone">१.२ फोन नं. :</label>
                                     <input type="text"
-                                           class="@error('phone') is-invalid @enderror "
-                                           id="phone"
-                                           name="phone"
-                                           value="{{old('phone')}}"
+                                           id="houseOwner.phone"
+                                           wire:model="houseOwner.phone"
                                     >
-                                    @error('phone')
+                                    @error('houseOwner.phone')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="father_name">१.३ बुवाको नाम :</label>
+                                    <label for="houseOwner.father_name">१.३ बुवाको नाम :</label>
                                     <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
-                                           id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
+                                           id="houseOwner.father_name"
+                                           wire:model="houseOwner.father_name"
                                     >
-                                    @error('father_name')
+                                    @error('houseOwner.father_name')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                                 <td>
-                                    <label for="father_name">१.४ नागरिकता लिएको जिल्ला :</label>
+                                    <label for="houseOwner.citizenship_issue_district">
+                                        १.४ नागरिकता लिएको जिल्ला
+                                        :
+                                    </label>
                                     <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
-                                           id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
+                                           id="houseOwner.citizenship_issue_district"
+                                           wire:model="houseOwner.citizenship_issue_district"
                                     >
-                                    @error('father_name')
+                                    @error('houseOwner.citizenship_issue_district')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="citizenship_number">१.५ नागरिकत नम्बर :</label>
+                                    <label for="houseOwner.citizenship_no">
+                                        १.५ नागरिकत नम्बर :
+                                    </label>
                                     <input type="text"
-                                           class="@error('citizenship_number') is-invalid @enderror "
-                                           id="citizenship_number"
-                                           name="citizenship_number"
-                                           value="{{old('citizenship_number')}}"
+                                           id="houseOwner.citizenship_no"
+                                           wire:model="houseOwner.citizenship_no"
                                     >
-                                    @error('citizenship_number')
+                                    @error('houseOwner.citizenship_no')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
@@ -623,15 +612,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="citizenship_issued_date">१.६ नागरिकता लिएको मिति :
-                                        :</label>
+                                    <label for="citizenship_issued_date">
+                                        १.६ नागरिकता लिएको मिति :
+                                    </label>
                                     <input type="text"
-                                           class="@error('citizenship_issued_date') is-invalid @enderror "
-                                           id="citizenship_issued_date"
-                                           name="citizenship_issued_date"
-                                           value="{{old('citizenship_issued_date')}}"
+                                           id="houseOwner.citizenship_issue_date"
+                                           wire:model="houseOwner.citizenship_issue_date"
                                     >
-                                    @error('citizenship_issued_date')
+                                    @error('houseOwner.citizenship_issue_date')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
@@ -653,83 +641,85 @@
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-12">
-                        <table
-                            class="table table-hover table-responsive table-bordered">
-                            <thead>
-                            <tr>
-                                <th>विवरण</th>
-                                <th>पूर्व</th>
-                                <th>दक्षिण</th>
-                                <th>पश्चिम</th>
-                                <th>उत्तर</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach(\Modules\EMap\Enums\FourSideParticularEnum::cases() as $fourSide)
+                        <div class="table-responsive">
+                            <table
+                                class="table table-hover table-responsive table-bordered">
+                                <thead>
                                 <tr>
-                                    <td>
-                                        <label
-                                            for="name">१.{{$loop->iteration}} {{$fourSide->label()}}</label>
-                                        <input type="hidden"
-                                               class="@error('detail') is-invalid @enderror "
-                                               id="detail"
-                                               name="detail"
-                                               value="{{old('detail', $fourSide->value)}}"
-                                        >
-                                        @error('detail')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('east') is-invalid @enderror "
-                                               id="east"
-                                               name="east"
-                                               value="{{old('east')}}"
-                                        >
-                                        @error('east')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('south') is-invalid @enderror "
-                                               id="south"
-                                               name="south"
-                                               value="{{old('south')}}"
-                                        >
-                                        @error('south')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('west') is-invalid @enderror "
-                                               id="west"
-                                               name="west"
-                                               value="{{old('west')}}"
-                                        >
-                                        @error('west')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('north') is-invalid @enderror "
-                                               id="north"
-                                               name="north"
-                                               value="{{old('north')}}"
-                                        >
-                                        @error('north')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
+                                    <th>विवरण</th>
+                                    <th>पूर्व</th>
+                                    <th>दक्षिण</th>
+                                    <th>पश्चिम</th>
+                                    <th>उत्तर</th>
                                 </tr>
-                            @endforeach
+                                </thead>
+                                <tbody>
+                                @foreach(\Modules\EMap\Enums\FourSideParticularEnum::cases() as $fourSide)
+                                    <tr>
+                                        <td>
+                                            <label
+                                                for="name">१.{{$loop->iteration}} {{$fourSide->label()}}</label>
+                                            <input type="hidden"
+                                                   class="@error('detail') is-invalid @enderror "
+                                                   id="detail"
+                                                   name="detail"
+                                                   value="{{old('detail', $fourSide->value)}}"
+                                            >
+                                            @error('detail')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   class="@error('east') is-invalid @enderror "
+                                                   id="east"
+                                                   name="east"
+                                                   value="{{old('east')}}"
+                                            >
+                                            @error('east')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   class="@error('south') is-invalid @enderror "
+                                                   id="south"
+                                                   name="south"
+                                                   value="{{old('south')}}"
+                                            >
+                                            @error('south')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   class="@error('west') is-invalid @enderror "
+                                                   id="west"
+                                                   name="west"
+                                                   value="{{old('west')}}"
+                                            >
+                                            @error('west')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   class="@error('north') is-invalid @enderror "
+                                                   id="north"
+                                                   name="north"
+                                                   value="{{old('north')}}"
+                                            >
+                                            @error('north')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                    </tr>
+                                @endforeach
 
-                            </tbody>
+                                </tbody>
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

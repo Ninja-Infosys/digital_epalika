@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+return new class extends Migration {
+    public function up()
+    {
+        Schema::create('storey_details', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
+            $table->integer('storey')->default(0);
+            $table->double('area_of_proposed_construction', 12, 2)->default(0);
+            $table->double('area_of_former_construction', 12, 2)->default(0);
+            $table->double('total_area', 12, 2)->default(0);
+            $table->double('height', 12, 2)->default(0);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('storey_details');
+    }
+};
