@@ -2,9 +2,11 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
@@ -34,6 +36,18 @@ class MapApply extends Model
         'length',
         'breadth',
         'height',
+        'land_use_area',
+        'ward_no',
+        'former_ward_no',
+        'tole',
+        'street_code_no',
+        'plot_no',
+        'bigha',
+        'kattha',
+        'dhur',
+        'square_meter',
+        'percentage_of_area_covered_by_building',
+        'unit_id',
     ];
 
     protected $casts = [
@@ -50,5 +64,15 @@ class MapApply extends Model
     public function structureType(): BelongsTo
     {
         return $this->belongsTo(StructureType::class);
+    }
+
+    public function unit(): BelongsTo
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
+    public function landOwners(): HasMany
+    {
+        return $this->hasMany(LandOwner::class);
     }
 }
