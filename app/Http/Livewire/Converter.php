@@ -38,22 +38,14 @@ class Converter extends Component
     public function convert()
     {
         if ($this->si_unit_value > 0 && !empty($this->conversion_id)) {
-//            $this->setting->standardLandMeasurement->id;
 
-
-//            if ($this->setting->standardLandMeasurement->is_smallest != 1) {
-//                $id = Unit::where('measurement_unit_id', $this->setting->standardLandMeasurement->measurement_unit_id)
-//                    ->whereIsSmallest(1)
-//                    ->first()
-//                    ->id;
-//            }
             $rate = $this->conversionToSmallest();
 
 
             $this->convertedData = $rate * $this->si_unit_value;
             $data = [];
             foreach ($this->units as $index => $unit) {
-                $data['data' . $index] = number_format($this->conversionLogic($unit), 2);
+                $data['data' . $index] = $this->conversionLogic($unit);
             }
             $this->conversion = $data;
         }
@@ -72,7 +64,6 @@ class Converter extends Component
 
             foreach ($getSmallerUnits as $smallerUnit) {
                 $rate = $rate * $this->getRate($smallerUnit);
-
             }
             $id = $getSmallerUnits->last()->id;
         } else {
@@ -83,7 +74,7 @@ class Converter extends Component
         $conversionData = UnitConversion::where('conversion_to', $minUnit->id)
             ->where('conversion_from', $id)
             ->first();
-        return $conversionData->rate * $rate;
+        return  $rate/$conversionData->rate ;
     }
 
     public function getRate(Unit $biggerUnit): float|int
@@ -99,7 +90,6 @@ class Converter extends Component
 
             return $conversionRate->rate ?? 1;
         } else {
-
             return 1;
         }
     }
