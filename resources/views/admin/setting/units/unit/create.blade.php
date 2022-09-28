@@ -74,10 +74,10 @@
                                 <input
                                     type="checkbox"
                                     name="is_smallest"
-                                    value="{{old('is_smallest')}}"
-                                    class=" @error('is_smallest') is-invalid @enderror"
+                                    value="1"
+                                    class="@error('is_smallest') is-invalid @enderror"
                                     id="is_smallest"
-                                    placeholder="मापन एकाइ "
+                                    {{old('is_smallest')==1?'checked':''}}
                                 />
                                 <label for="is_smallest" class="form-label">is smallest *</label>
 

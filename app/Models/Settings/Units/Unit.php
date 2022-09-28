@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
@@ -36,8 +37,8 @@ class Unit extends Model
         return $this->hasMany(UnitConversion::class, 'conversion_from');
     }
 
-    public function conversionUnitTo(): HasMany
+    public function conversionUnitTo(): HasOne
     {
-        return $this->hasMany(UnitConversion::class, 'conversion_to');
+        return $this->hasOne(UnitConversion::class, 'conversion_to');
     }
 }

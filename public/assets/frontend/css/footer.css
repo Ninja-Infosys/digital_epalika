@@ -1,26 +1,21 @@
  /*footer*/
 .footer {
-    background-color: #dadada;
-    margin-top: 30px;
-}
+    background-color: var(--mainColor);}
 .footer-main {
-    padding: 3rem 0;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: var(--mainColor);
 }
-
+.footer-content{
+    padding-left: 3rem ;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    background-color: var(--mainColor);
+}
 .footer-title {
-    font-weight: 700;
     color: #fff;
     text-decoration: underline;
     text-underline-position: under;
+    font-size: 1.155rem;
 }
-
-h6,
-.h6 {
-    font-size: 1rem;
-}
-
 .list {
     padding-left: 0;
     list-style: none;
@@ -68,22 +63,23 @@ svg {
     font-size: .7rem;
     color: #ffff;
 }
-
+.footer-img img{
+    object-fit: contain;
+    height: 8rem;
+}
 .footer-copyright {
-    background-color: #1b4789;
-    font-size: .833rem;
+    color: var(--whiteColor);
+    background-color: #0062CC;
+    font-size: 1rem;
     display: flex;
     justify-content: space-evenly;
     padding: 1rem;
-    color: #e6ecf5;
 }
-
 a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
 }
-
  #round-btn .popup-banner {
      position: fixed;
      bottom: 1rem;
@@ -137,3 +133,11 @@ a {
     width: 80%;
     float: right;
 }
+.list li a{
+    text-decoration: none;
+}
+.list li a:hover{
+    text-decoration: none;
+    color: var(--whiteColor);
+}
+

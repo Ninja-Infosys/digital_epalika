@@ -31,12 +31,12 @@
             </div>
             <div class="col-md-5 intro-col mt-1">
                 <div class="card-01 introduction  bg-card shadow rounded">
-                    <h4 class="heading mt-2 mb-3 px-3">{{$officeSetting->name}}को संक्षिप्त परिचय</h4>
-                    <h6 class="fw-normal lh-lg">
+                    <h6 class="heading mt-2 mb-3 px-3">{{$officeSetting->name}}को संक्षिप्त परिचय</h6>
+                    <p class="fw-normal lh-lg">
                         {!! Str::words(strip_tags($officeSetting->introduction),90) !!}
-                    </h6>
-                    <div class="d-flex justify-content-end">
-                        <button class="btn  bg-info text-white">थप पढ्नुहोस्</button>
+                    </p>
+                    <div class="button d-flex justify-content-end">
+                        <button class="btn text-white">थप पढ्नुहोस्</button>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                                  alt="{{$employee->name}}">
                             <div class="card-body p-0 m-0">
                                 <div class="card-description ">
-                                    <h5 class="card-title mt-2 pt-1">{{$employee->name}}</h5>
+                                    <h6 class="card-title mt-2 pt-1">{{$employee->name}}</h6>
                                     <h6 class="card-title ">{{$employee->designation}}</h6>
                                     <p>{{$employee->email}}</p>
                                     <p>{{$employee->phone}}</p>
@@ -70,8 +70,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">सुचनाहरु</p>
+                    <div class="list-item-head rounded p-2">
+                        <p class="mb-0 text-white">सुचनाहरु</p>
                     </div>
                     <ul class="list-group">
                         @foreach($notices as $notice)
@@ -81,13 +81,14 @@
                                 <span><small>{{$notice->date->toDateString()}}</small></span>
                             </li>
                         @endforeach
-                        <a class="btn bg-primary btn-outline-light " href="{{route('notice')}}">थप सुचनाहरु <i class="fa fa-angles-right"></i>
+                        <a class="btn-notice btn-outline-light " href="{{route('notice')}}">थप सुचनाहरु <i
+                                class="fa fa-angles-right"></i>
                         </a>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">समाचारहरु </p>
+                    <div class="list-item-head rounded p-2">
+                        <p class="mb-0 text-white ">समाचारहरु </p>
                     </div>
                     <ul class="list-group">
                         @foreach($newses as $news)
@@ -97,14 +98,14 @@
                                 <span><small>{{$news->date->toDateString()}}</small></span>
                             </li>
                         @endforeach
-                        <button class="btn bg-primary btn-outline-light ">थप बोर्ड निर्णयहरु
+                        <a class="btn-notice btn-outline-light ">थप बोर्ड निर्णयहरु
                             <i class="fa fa-angles-right"></i>
-                        </button>
+                        </a>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <div class="list-item-head bg-danger rounded p-2">
-                        <p class="mb-0 text-white fs-5">कार्यपालिका बोर्ड निर्णय</p>
+                    <div class="list-item-head rounded p-2">
+                        <p class="mb-0 text-white">कार्यपालिका बोर्ड निर्णय</p>
                     </div>
                     <ul class="list-group">
                         @foreach($meetingDetails as $meetingDetail)
@@ -115,9 +116,9 @@
 
                             </li>
                         @endforeach
-                        <button class="btn bg-primary btn-outline-light ">थप कार्यपालिका बोर्ड निर्णय <i
+                        <a class="btn-notice btn-outline-light ">थप कार्यपालिका बोर्ड निर्णय <i
                                 class="fa fa-angles-right"></i>
-                        </button>
+                        </a>
                     </ul>
                 </div>
             </div>
@@ -125,12 +126,11 @@
     </section>
 
 
-    <section class="map-section pt-4 bg-light">
+    <section class="map-section pt-4">
         <div class="mb-3">
-            <div class="title-head-main px-3 py-2 d-flex justify-content-between">
-                <div>
-                    <span class="fa fa-globe"></span>&nbsp;{{$officeSetting->province->province??''}}
-                </div>
+            <div class="title-head-main py-auto pt-2 px-4 d-flex">
+                <i class="fa fa-globe"></i>
+                <p class="px-3">{{$officeSetting->province->province??''}}</p>
             </div>
         </div>
     </section>
@@ -165,9 +165,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 ">
-                    <div class="card">
+                    <div class="card org-location">
                         <div class="card-body text-center">
-                            <h5 class="card-title ">वडा कार्यालय स्थान</h5>
+                            <p class="card-title ">वडा कार्यालय स्थान</p>
                             <h6 class="card-subtitle mb-2 text-muted"></h6>
                             <div class="map">
                                 <iframe
@@ -181,9 +181,9 @@
                     </div>
                 </div>
                 <div class="col-md-4 ">
-                    <div class="card">
+                    <div class="card org-location">
                         <div class="card-body">
-                            <h5 class="card-title text-center">फेसबुक अपडेट</h5>
+                            <p class="card-title text-center">फेसबुक अपडेट</p>
                             <h6 class="card-subtitle mb-2 text-muted"></h6>
                             <div class="facebook-page">
                                 <iframe
@@ -197,9 +197,9 @@
                     </div>
                 </div>
                 <div class="col-md-4 ">
-                    <div class="card">
+                    <div class="card org-location">
                         <div class="card-body">
-                            <h5 class="card-title text-center">ट्वीट्स</h5>
+                            <p class="card-title text-center">ट्वीट्स</p>
                             <h6 class="card-subtitle mb-2 text-muted"></h6>
                             <div class="twitter">
                                 <a class="twitter-timeline" data-height="400"

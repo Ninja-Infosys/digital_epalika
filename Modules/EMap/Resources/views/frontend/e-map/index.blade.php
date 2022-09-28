@@ -60,11 +60,11 @@
                         <div class="col-md-6 p-2">
                             <div class="card bg-success text-light text-center">
                                 <div class="card-body">
-                                    <h5 class="fw-semibold mt-2">इ-नक्सा लग इन</h5>
+                                    <h5 class="fw-semibold mt-2">लग इन</h5>
                                     <i class="fa fa-gears fs-5"></i>
-                                    <p>नयाँ इ-नक्साको लागि दर्ता गर्नुहोस् ।</p>
+                                    <p>इ-नक्सा लग इन </p>
                                     <a href="{{route('organization.login.form')}}" class="btn btn-light"
-                                       ><span>नयाँ दर्ता गर्नुहोस्</span>
+                                       ><span>लग इन गर्नुहोस्</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>
@@ -87,7 +87,7 @@
                                 <div class="card-body">
                                     <h5 class="fw-semibold mt-2">संस्था दर्ता</h5>
                                     <i class="fa fa-address-card fs-5"></i>
-                                    <p>तपाइँको आवेदन कुन चरणमा छ?</p>
+                                    <p>नयाँ इ-नक्साको लागि दर्ता गर्नुहोस् ।</p>
                                     <a href="{{route('organization.register.form')}}" class="btn btn-light"><span>नयाँ दर्ता गर्नुहोस्</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>

@@ -2,20 +2,20 @@
 
 namespace Modules\EMap\Enums;
 
-enum BuildingUsage: string
+enum BuildingUsageEnum: string
 {
-    case RESIDENTIAL = 'residential';
+    case RESIDENTIAL = 'Residential';
     case PROFESSIONAL = 'Professional';
     case HEALTH = 'Health';
     case EDUCATION = 'Education';
     case GOVERNMENT_AND_SEMI_GOVERNMENT = 'Govt and Semi Govt';
     case BUILDING_WHERE_PEOPLE_GATHER = 'building where people gather';
-    case INDUSTRY = 'industry';
+    case INDUSTRY = 'Industry';
     case COMMERCIAL_BUILDING = 'Commercial building';
     case HOTEL = 'Hotel';
     case SERVICE_DELIVERY_DISTRIBUTION_FACILITIES = 'Service delivery and distribution facilities';
     case HAZARDOUS_MATERIAL_PREVENTION_BUILDING = 'Hazardous Materials Prevention Building';
-    case APARTMENT = 'apartment';
+    case APARTMENT = 'Apartment';
     case ASSOCIATION = 'Association';
 
     public function label(): string

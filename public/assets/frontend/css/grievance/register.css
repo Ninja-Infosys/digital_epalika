@@ -1,17 +1,3 @@
-.breadcrumb a {
-    text-decoration: none;
-}
-
-.breadcrumb a:hover {
-    -webkit-transition-duration: 500ms;
-    transition-duration: 500ms;
-    text-decoration: none;
-    outline: 0 solid transparent;
-    color: red;
-    font-weight: 700;
-    font-size: 15px;
-}
-
 label h6 {
     font-weight: 600;
 }

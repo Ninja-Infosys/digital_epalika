@@ -4,9 +4,9 @@
         <div class="container-fluid">
             <div class="row d-flex mt-5 ">
                 <div class="breadcrumb d-flex">
-                    <div>
+                    <div class="breadcrumb-item">
                         <a class="whitespace-nowrap text-primary-500" href="{{route('grievanceHandling.grievance')}}">गुनासो</a>
-                        <i class="fa fa-angle-right ml-lg-1"></i><a class="ml-1 text-primary-500">नीति सुची</a>
+                        <i class="fa fa-double-right ml-lg-1"></i><a class="ml-1 text-primary-500">नीति सुची</a>
                     </div>
                 </div>
                 <div class="row bg-card shadow rounded overflow-hidden">
@@ -69,5 +69,6 @@
     </section>
     @push('styles')
         <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/policy.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
     @endpush
 @endsection

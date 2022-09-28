@@ -52,7 +52,7 @@
                                     <img class="icon" src="{{asset('assets/frontend/image/login.png')}}" alt="">
                                     <p class="card-text mt-2"><small>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन ।</small>
                                     </p>
-                                    <a href="#"
+                                    <a href=""
                                        class="btn btn-primary"><span>लग इन</span>
                                         <i class="fa fa-plus"></i>
                                     </a>

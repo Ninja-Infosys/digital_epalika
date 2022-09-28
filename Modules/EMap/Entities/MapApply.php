@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\EMap\Enums\BuildingUsage;
-use Modules\EMap\Enums\Categorization;
-use Modules\EMap\Enums\TypeOfConstructionWork;
+use Modules\EMap\Enums\BuildingUsageEnum;
+use Modules\EMap\Enums\CategorizationEnum;
+use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
 
 class MapApply extends Model
 {
@@ -37,9 +37,9 @@ class MapApply extends Model
     ];
 
     protected $casts = [
-        'construction_type' => TypeOfConstructionWork::class,
-        'usage' => BuildingUsage::class,
-        'building_category' => Categorization::class,
+        'construction_type' => TypeOfConstructionWorkEnum::class,
+        'usage' => BuildingUsageEnum::class,
+        'building_category' => CategorizationEnum::class,
     ];
 
     public function client(): BelongsTo

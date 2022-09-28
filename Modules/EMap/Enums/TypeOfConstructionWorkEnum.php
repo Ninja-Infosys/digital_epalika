@@ -2,7 +2,7 @@
 
 namespace Modules\EMap\Enums;
 
-enum TypeOfConstructionWork: string
+enum TypeOfConstructionWorkEnum: string
 {
     case NEW_HOME_CONSTRUCTION = 'new home construction';
     case ADD_FLOOR = 'add floor';

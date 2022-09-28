@@ -6,12 +6,14 @@ use App\Models\ExecutiveMeeting\MunicipalCommittee;
 use App\Models\ExecutiveMeeting\WardCommittee;
 use App\Models\OfficeHeader;
 use App\Models\Settings\OfficeSetting;
+use App\Models\Settings\Units\Unit;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Observers\ExecutiveMeeting\MunicipalCommitteeObserver;
 use App\Observers\ExecutiveMeeting\WardCommitteeObserver;
 use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
+use App\Observers\UnitObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('officeSetting', OfficeSetting::with('fiscalYear','province', 'district', 'localBody')->first());
 
         OfficeHeader::observe(OfficeHeaderObserver::class);
+        Unit::observe(UnitObserver::class);
         MunicipalCommittee::observe(MunicipalCommitteeObserver::class);
         WardCommittee::observe(WardCommitteeObserver::class);
         MunicipalDetail::observe(MunicipalDetailObserver::class);

@@ -22,7 +22,7 @@
       </div>
     </div>
 @push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/digitalBoard/css/index.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/frontend/helpdesk/css/index.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}">
 @endpush
