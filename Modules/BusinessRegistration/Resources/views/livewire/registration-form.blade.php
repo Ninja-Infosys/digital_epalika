@@ -672,22 +672,302 @@
                     @break
 
                 @case(5)
-                    <div class="row mt-3">
-                        <h2></h2>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>नाता</th>
-                                <th>{{$form['name']}}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+                    <h5>तल दिएको विवरण ठीक छ छैन विचार गरी पठाउनुहोस् । </h5>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>व्यवसायी नाम</th>
+                            <td>{{$form['name']}}</td>
+                        </tr>
+                        <tr>
+                            <th>फोन न</th>
+                            <td>{{$form['phone']}}</td>
+                        </tr>
+                        <tr>
+                            <th>लिङ्ग</th>
+                            <td>
+
+                                @switch($form['gender'])
+                                    @case('Male')
+                                        पुरुष
+                                        @break
+                                    @case('Female')
+                                        महिला
+                                        @break
+                                    @default
+                                       अन्य
+                                @endswitch
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th> इमेल</th>
+                            <td>{{$form['email']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> घर नम्बर</th>
+                            <td>{{$form['house_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                व्यक्तिगत स्थाई लेखा नम्बर</th>
+                            <td>{{$form['account_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th> राष्ट्रियता परिचयपत्र नम्बर</th>
+                            <td>{{$form['national_card_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th> शैक्षिक योग्यता</th>
+                            <td>{{$form['education_qualification']}}</td>
+                        </tr>
+                        <tr>
+                            <th>  मुखय पेशा</th>
+                            <td>{{$form['occupation']}}</td>
+                        </tr>
+                        <tr>
+                            <th> नागरिकता नम्बर </th>
+                            <td>{{$form['citizenship_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                जारी मिति</th>
+                            <td>{{$form['issue_date']}}</td>
+                        </tr>
+                        <tr>
+                            <th> जारी जिल्ला</th>
+                            <td>{{$form['issue_district_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th> प्रदेश</th>
+                            <td>{{$form['permanent_province_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th> जिल्ला</th>
+                            <td>{{$form['permanent_district_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th>  पालिका</th>
+                            <td>{{$form['permanent_local_body_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th>  वार्ड</th>
+                            <td>{{$form['permanent_ward_no']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>   मार्ग</th>
+                            <td>{{$form['permanent_way']}}</td>
+                        </tr>
+                        <tr>
+                            <th>   गाउ/टोल</th>
+                            <td>{{$form['permanent_tole']}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                   <h5> तिन पुस्ते बिवरण</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>नाता</th>
+                            <th> 	नाम, थर</th>
+                            <th>नाम, थर(English)</th>
+                            <th>नागरिकता न</th>
+                            <th>सम्पर्क न</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($form['threeGenerationDetails'] as $threeGenerationDetail)
+                        <tr>
+                            <td>   {{$threeGenerationDetail['relation']}}</td>
+                            <td>   {{$threeGenerationDetail['name']}}</td>
+                            <td>   {{$threeGenerationDetail['name_en']}}</td>
+                            <td>   {{$threeGenerationDetail['citizenship_no']}}</td>
+                            <td>   {{$threeGenerationDetail['mobile_no']}}</td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                <h5>ब्यावसाहिक बिवरण
+                </h5>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा</th>
+                            <td>{{$form['business_detail_name']}}</td>
+                        </tr>
+                        <tr>
+                            <th>फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</th>
+                            <td>{{$form['business_detail_name_en']}}</td>
+                        </tr>
+                        <tr>
+                            <th>व्यवसायको प्रकृति</th>
+                            <td>{{$form['business_nature_id']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> व्यवसाय स्थापना गरेको साल</th>
+                            <td>{{$form['establish_year']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> व्यवसाय दर्ता मिति</th>
+                            <td>{{$form['registration_date']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+
+                                पान नम्बर</th>
+                            <td>{{$form['pan_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th> कारोबार गर्ने वस्तु</th>
+                            <td>{{$form['transaction_object']}}</td>
+                        </tr>
+                        <tr>
+                            <th> लागत रकम रु</th>
+                            <td>{{$form['amount_cost']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                पूजीको स्रोत</th>
+                            <td>{{$form['source_of_capital']}}</td>
+                        </tr>
+                        <tr>
+                            <th> उदेश्य</th>
+                            <td>{{$form['purpose']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                रोजगार</th>
+                            <td>{{$form['employment']}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>फर्म / कम्पनी/ब्यबसाय को ठेगाना
+
+                    </h5>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>प्रदेश</th>
+                            <td>{{$form['province_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th>जिल्ला</th>
+                            <td>{{$form['district_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th>पालिका</th>
+                            <td>{{$form['local_body_id']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> वार्ड</th>
+                            <td>{{$form['ward_no']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> मार्ग</th>
+                            <td>{{$form['way']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+
+                                गाउ/टोल</th>
+                            <td>{{$form['tole']}}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    <h5>सम्बन्धित कागजपत्र
+
+                    </h5>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>व्यवसायीको पासपोर्ट साइजको फोटो*</th>
+                            <td>
+                                @if(!empty($form['photo']))
+                                <img src="{{$form['photo']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>नागरिकता प्रमाणपत्रको प्रतिलिपि-१</th>
+                            <td>
+                                @if(!empty($form['citizen_ship']))
+                                <img src="{{$form['citizen_ship']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</th>
+                            <td>
+                                @if(!empty($form['company_registration']))
+                                <img src="{{$form['company_registration']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th> आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि</th>
+                            <td>
+                                @if(!empty($form['tax_pay_file']))
+                                <img src="{{$form['tax_pay_file']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th> हस्ताक्षर</th>
+                            <td>
+                                @if(!empty($form['signature']))
+                                <img src="{{$form['signature']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+
+                                औठाको छाप</th>
+                            <td>
+                                @if(!empty($form['thumb']))
+                                <img src="{{$form['thumb']->temporaryUrl()}}" alt="" height="60">
+                                    @endif
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                <h5>परिचय पार्टीको साइज</h5>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>लम्बाई</th>
+                            <td>{{$form['length']}}</td>
+                        </tr>
+                        <tr>
+                            <th>चौदाई</th>
+                            <td>{{$form['width']}}</td>
+                        </tr>
+                        <tr>
+                            <th>वर्गफिट</th>
+                            <td>{{$form['square']}}</td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
                     <div style="display: flex;justify-content: space-between;">
                     <div class="mt-2">
-                        <button type="button" wire:click.prevent="backStep(3)" class="btn btn-primary"><i
+                        <button type="button" wire:click.prevent="backStep(4)" class="btn btn-primary"><i
                                 class="fa fa-arrow-left"></i> पहिलो
                         </button>
                     </div>
