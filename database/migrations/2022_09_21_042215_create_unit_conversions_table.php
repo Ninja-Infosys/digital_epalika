@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('conversion_from')->constrained('units');
             $table->foreignId('conversion_to')->constrained('units');
-            $table->double('rate', 12, 2)->default(1);
+            $table->string('rate')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

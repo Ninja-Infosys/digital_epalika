@@ -23,6 +23,10 @@ class UnitConversion extends Model
         'rate',
     ];
 
+    protected $casts = [
+        'rate' => 'double'
+    ];
+
     public function conversionFrom(): BelongsTo
     {
         return $this->belongsTo(Unit::class, 'conversion_from');

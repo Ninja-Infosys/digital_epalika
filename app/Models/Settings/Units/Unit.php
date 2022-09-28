@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
 {
-    use HasFactory, SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -21,6 +21,7 @@ class Unit extends Model
     ];
 
     protected $fillable = [
+        'type_id',
         'measurement_unit_id',
         'title',
         'position',
@@ -30,6 +31,11 @@ class Unit extends Model
     public function measurementUnit(): BelongsTo
     {
         return $this->belongsTo(MeasurementUnit::class);
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(Type::class);
     }
 
     public function conversionUnitFrom(): HasMany
