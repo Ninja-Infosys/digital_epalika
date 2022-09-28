@@ -6,21 +6,25 @@
                         बिवरण </a></li>
                 <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">ब्यावसाहिक
                         बिवरण </a></li>
-                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-4" type="button" >अन्तिम
+                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-3" type="button">
                         सम्बन्धित कागज पत्र </a></li>
-                <li class="{{ $currentStep != 4 ? '' : 'active' }}"><a href="#step-4" type="button" >अन्तिम
+                <li class="{{ $currentStep != 4 ? '' : 'active' }}"><a href="#step-4" type="button">
                         परिचय पार्टीको साइज</a></li>
+                <li class="{{ $currentStep != 5 ? '' : 'active' }}"><a href="#step-5" type="button">
+                        अन्तिम चरण</a></li>
+
             </ul>
         </div>
 
-        <form>
+        <form wire:submit.prevent="submitForm">
             @switch($currentStep)
                 @case(2)
                     <fieldset>
                         <legend class="title">ब्यावसाहिक बिवरण</legend>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label for="form.business_detail_name" class="form-label">फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा</label>
+                                <label for="form.business_detail_name" class="form-label">फर्म/कम्पनी/ब्यवसाय को नाम
+                                    नेपलीमा</label>
                                 <input
                                     name="form.business_detail_name"
                                     class="form-control @error('form.business_detail_name') is-invalid @enderror"
@@ -34,7 +38,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="form.business_detail_name_en" class="form-label">फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</label>
+                                <label for="form.business_detail_name_en" class="form-label">फर्म/कम्पनी/ब्यवसाय को नाम
+                                    अंग्रेजीमा</label>
                                 <input
                                     name="form.business_detail_name_en"
                                     class="form-control @error('form.business_detail_name_en') is-invalid @enderror"
@@ -63,71 +68,71 @@
                                 @enderror
                             </div>
                             @if(!empty($form['business_nature_id']))
-                            <div class="row mt-3">
-                                <h2>साझेदार हरुको बिवरण</h2>
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>साझेदार सँगको नाता</th>
-                                        <th>साझेदार को नाम थर</th>
-                                        <th>नागरिकता न</th>
-                                        <th>सम्पर्क न</th>
-                                        <th>
-                                            <button type="button" wire:click.prevent="partnerDetailIncrement"
-                                                    class="btn btn-primary">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($form['partnerDetails'] as $index=>$partnerDetail)
+                                <div class="row mt-3">
+                                    <h2>साझेदार हरुको बिवरण</h2>
+                                    <table class="table">
+                                        <thead>
                                         <tr>
-
-                                            <td>
-                                                <input type="text" placeholder="साझेदार सँगको नाता"
-                                                       wire:model="form.partnerDetails.{{$index}}.relation"
-                                                       class="form-control @error('form.partnerDetails.'.$index.'.relation') is-invalid @enderror">
-                                                @error('form.partnerDetails.'.$index.'.relation')
-                                                <p class="text-danger">{{$message}}</p>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <input type="text" placeholder="साझेदार को नाम थर"
-                                                       wire:model="form.partnerDetails.{{$index}}.name"
-                                                       class="form-control @error('form.partnerDetails.'.$index.'.name') is-invalid @enderror">
-                                                @error('form.partnerDetails.'.$index.'.name')
-                                                <p class="text-danger">{{$message}}</p>
-                                                @enderror
-                                            </td>
-
-                                            <td>
-                                                <input type="text" placeholder="नागरिकता न"
-                                                       wire:model="form.partnerDetails.{{$index}}.citizenship_no"
-                                                       class="form-control @error('form.partnerDetails.'.$index.'.citizenship_no') is-invalid @enderror">
-                                                @error('form.partnerDetails.'.$index.'.citizenship_no')
-                                                <p class="text-danger">{{$message}}</p>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <input type="text" placeholder="सम्पर्क न"
-                                                       wire:model="form.partnerDetails.{{$index}}.mobile_no"
-                                                       class="form-control @error('form.partnerDetails.'.$index.'.mobile_no') is-invalid @enderror">
-                                                @error('form.partnerDetails.'.$index.'.mobile_no')
-                                                <p class="text-danger">{{$message}}</p>
-                                                @enderror
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-danger"
-                                                        wire:click.prevent="partnerDetailDecrement({{$index}})">
-                                                    <i class="fa-solid fa-minus"></i>
+                                            <th>साझेदार सँगको नाता</th>
+                                            <th>साझेदार को नाम थर</th>
+                                            <th>नागरिकता न</th>
+                                            <th>सम्पर्क न</th>
+                                            <th>
+                                                <button type="button" wire:click.prevent="partnerDetailIncrement"
+                                                        class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i>
                                                 </button>
-                                            </td>
+                                            </th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($form['partnerDetails'] as $index=>$partnerDetail)
+                                            <tr>
+
+                                                <td>
+                                                    <input type="text" placeholder="साझेदार सँगको नाता"
+                                                           wire:model="form.partnerDetails.{{$index}}.relation"
+                                                           class="form-control @error('form.partnerDetails.'.$index.'.relation') is-invalid @enderror">
+                                                    @error('form.partnerDetails.'.$index.'.relation')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder="साझेदार को नाम थर"
+                                                           wire:model="form.partnerDetails.{{$index}}.name"
+                                                           class="form-control @error('form.partnerDetails.'.$index.'.name') is-invalid @enderror">
+                                                    @error('form.partnerDetails.'.$index.'.name')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" placeholder="नागरिकता न"
+                                                           wire:model="form.partnerDetails.{{$index}}.citizenship_no"
+                                                           class="form-control @error('form.partnerDetails.'.$index.'.citizenship_no') is-invalid @enderror">
+                                                    @error('form.partnerDetails.'.$index.'.citizenship_no')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder="सम्पर्क न"
+                                                           wire:model="form.partnerDetails.{{$index}}.mobile_no"
+                                                           class="form-control @error('form.partnerDetails.'.$index.'.mobile_no') is-invalid @enderror">
+                                                    @error('form.partnerDetails.'.$index.'.mobile_no')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-danger"
+                                                            wire:click.prevent="partnerDetailDecrement({{$index}})">
+                                                        <i class="fa-solid fa-minus"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             @endif
 
                             <div class="col-md-4 mb-3">
@@ -178,11 +183,11 @@
                                 <select
                                     class="form-select @error('form.transaction_object') is-invalid @enderror"
                                     wire:model="form.transaction_object"
-                                    id="form.transaction_object" multiple >
+                                    id="form.transaction_object">
                                     <option value="">--- कारोबार गर्ने वस्तु छान्नुहोस् ---</option>
-                                    @foreach($businessNatures as $businessNature)
-                                        <option value="{{$businessNature->id}}">{{$businessNature->title}}</option>
-                                    @endforeach
+                                    {{--                                    @foreach($businessNatures as $businessNature)--}}
+                                    {{--                                        <option value="{{$businessNature->id}}">{{$businessNature->title}}</option>--}}
+                                    {{--                                    @endforeach--}}
                                 </select>
                                 @error('form.transaction_object')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -208,7 +213,7 @@
                                 <select
                                     class="form-select @error('form.source_of_capital') is-invalid @enderror"
                                     wire:model="form.source_of_capital"
-                                    id="form.source_of_capital" >
+                                    id="form.source_of_capital">
                                     <option value="">--- पूजीको स्रोत छान्नुहोस् ---</option>
                                     @foreach($businessNatures as $businessNature)
                                         <option value="{{$businessNature->id}}">{{$businessNature->title}}</option>
@@ -223,7 +228,7 @@
                                 <select
                                     class="form-select @error('form.purpose') is-invalid @enderror"
                                     wire:model="form.purpose"
-                                    id="form.purpose" multiple>
+                                    id="form.purpose">
                                     <option value="">--- उदेश्य छान्नुहोस् ---</option>
 
                                 </select>
@@ -425,16 +430,110 @@
                                 </div>
 
                             </div>
+                            <legend class="title">यो भन्दा अगाडी कुनै व्यवसाय दर्ता गरेको छ ?</legend>
+                            <div class="d-flex">
+                                <div class="form-check">
+                                    <input type="radio"
+                                           class="form-check-input"
+                                           wire:model="form.is_registered"
+                                           value="1"
+                                           name="is_registerd"
+                                           id="is_registerd1">
+                                    <label class="form-check-label"
+                                           for="is_registerd1"> छ&nbsp;</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio"
+                                           class="form-check-input"
+                                           wire:model="form.is_registered"
+                                           value="0"
+                                           name="is_registerd"
+                                           id="is_registerd2">
+                                    <label class="form-check-label"
+                                           for="is_registerd2">छैन &nbsp;</label>
+                                </div>
+                            </div>
+
+                            @if($form['is_registered'])
+                                <div class="row mt-3">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>दर्ता नम्बर</th>
+                                            <th>व्यवसायको नाम</th>
+                                            <th>दर्ता मिति</th>
+                                            <th>सक्रिय</th>
+                                            <th>
+                                                <button type="button"
+                                                        wire:click.prevent="registeredBusinessArrayIncrement"
+                                                        class="btn btn-primary">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($form['registeredBusinesses'] as $index=>$threeGenerationDetail)
+                                            <tr>
+
+                                                <td>
+                                                    <input type="text" placeholder="दर्ता नम्बर"
+                                                           wire:model="form.registeredBusinesses.{{$index}}.registration_no"
+                                                           class="form-control @error('form.registeredBusinesses.'.$index.'.registration_no') is-invalid @enderror">
+                                                    @error('form.registeredBusinesses.'.$index.'.registration_no')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder="व्यवसायको नाम"
+                                                           wire:model="form.registeredBusinesses.{{$index}}.business_name"
+                                                           class="form-control @error('form.registeredBusinesses.'.$index.'.business_name') is-invalid @enderror">
+                                                    @error('form.registeredBusinesses.'.$index.'.business_name')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder="दर्ता मिति"
+                                                           wire:model="form.registeredBusinesses.{{$index}}.registration_date"
+                                                           class="form-control @error('form.registeredBusinesses.'.$index.'.registration_date') is-invalid @enderror">
+                                                    @error('form.registeredBusinesses.'.$index.'.registration_date')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    <input type="text" placeholder="सक्रिय"
+                                                           wire:model="form.registeredBusinesses.{{$index}}.active"
+                                                           class="form-control @error('form.registeredBusinesses.'.$index.'.active') is-invalid @enderror">
+                                                    @error('form.registeredBusinesses.'.$index.'.active')
+                                                    <p class="text-danger">{{$message}}</p>
+                                                    @enderror
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-danger"
+                                                            wire:click.prevent="registeredBusinessArrayDecrement({{$index}})">
+                                                        <i class="fa-solid fa-minus"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
                         </fieldset>
                     </div>
-                <div style="display: flex;justify-content: space-between;">
-                    <div class="mt-2">
-                        <button type="button" wire:click.prevent="backStep(1)" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Previous</button>
+                    <div style="display: flex;justify-content: space-between;">
+                        <div class="mt-2">
+                            <button type="button" wire:click.prevent="backStep(1)" class="btn btn-primary"><i
+                                    class="fa fa-arrow-left"></i> पहिलो
+                            </button>
+                        </div>
+                        <div class="mt-2">
+                            <button type="button" wire:click.prevent="nextStep(3)" class="btn btn-primary"> अर्को <i
+                                    class="fa fa-arrow-right"></i></button>
+                        </div>
                     </div>
-                    <div class="mt-2">
-                        <button type="button" wire:click.prevent="nextStep(3)" class="btn btn-primary">   Next <i class="fa fa-arrow-right"></i></button>
-                    </div>
-                </div>
 
                     @break
                 @case(3)
@@ -452,7 +551,8 @@
 
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="form.citizen_ship" class="form-label">नागरिकता प्रमाणपत्रको प्रतिलिपि-१</label>
+                                <label for="form.citizen_ship" class="form-label">नागरिकता प्रमाणपत्रको
+                                    प्रतिलिपि-१</label>
                                 <input type="file" class="form-control" id="form.citizen_ship"
                                        wire:model="form.citizen_ship"/>
                                 @error('form.citizen_ship')
@@ -460,7 +560,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="form.company_registration" class="form-label">फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</label>
+                                <label for="form.company_registration" class="form-label">फार्म कम्पनी भयमा दर्ता, इजाजत
+                                    प्रमाणपत्र</label>
                                 <input type="file" class="form-control" id="form.company_registration"
                                        wire:model="form.company_registration"/>
                                 @error('form.company_registration')
@@ -468,7 +569,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="form.tax_pay_file" class="form-label">आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि</label>
+                                <label for="form.tax_pay_file" class="form-label">आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व
+                                    सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि</label>
                                 <input type="file" class="form-control" id="form.tax_pay_file"
                                        wire:model="form.tax_pay_file"/>
                                 @error('form.tax_pay_file')
@@ -495,12 +597,15 @@
                         </div>
                     </fieldset>
                     <div style="display: flex;justify-content: space-between;">
-                    <div class="mt-2">
-                        <button type="button" wire:click.prevent="backStep(2)" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Previous</button>
-                    </div>
-                    <div class="mt-2">
-                        <button type="button" wire:click.prevent="nextStep(4)" class="btn btn-primary"> Next <i class="fa fa-arrow-right"></i></button>
-                    </div>
+                        <div class="mt-2">
+                            <button type="button" wire:click.prevent="backStep(2)" class="btn btn-primary"><i
+                                    class="fa fa-arrow-left"></i> पहिलो
+                            </button>
+                        </div>
+                        <div class="mt-2">
+                            <button type="button" wire:click.prevent="nextStep(4)" class="btn btn-primary"> अर्को <i
+                                    class="fa fa-arrow-right"></i></button>
+                        </div>
                     </div>
 
                     @break
@@ -555,12 +660,332 @@
                         </div>
                     </fieldset>
                     <div style="display: flex;justify-content: space-between;">
-                    <div class="mt-2">
-                        <button type="button" wire:click.prevent="backStep(3)" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Previous</button>
+                        <div class="mt-2">
+                            <button type="button" wire:click.prevent="backStep(3)" class="btn btn-primary"><i
+                                    class="fa fa-arrow-left"></i> पहिलो
+                            </button>
+                        </div>
+                        <button type="button" wire:click.prevent="backStep(5)" class="btn btn-primary"><i
+                                class="fa fa-arrow-left"></i> अर्को
+                        </button>
                     </div>
+                    @break
+
+                @case(5)
+                    <h5>तल दिएको विवरण ठीक छ छैन विचार गरी पठाउनुहोस् । </h5>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>व्यवसायी नाम</th>
+                            <td>{{$form['name']}}</td>
+                        </tr>
+                        <tr>
+                            <th>फोन न</th>
+                            <td>{{$form['phone']}}</td>
+                        </tr>
+                        <tr>
+                            <th>लिङ्ग</th>
+                            <td>
+
+                                @switch($form['gender'])
+                                    @case('Male')
+                                        पुरुष
+                                        @break
+                                    @case('Female')
+                                        महिला
+                                        @break
+                                    @default
+                                       अन्य
+                                @endswitch
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th> इमेल</th>
+                            <td>{{$form['email']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> घर नम्बर</th>
+                            <td>{{$form['house_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                व्यक्तिगत स्थाई लेखा नम्बर</th>
+                            <td>{{$form['account_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th> राष्ट्रियता परिचयपत्र नम्बर</th>
+                            <td>{{$form['national_card_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th> शैक्षिक योग्यता</th>
+                            <td>{{$form['education_qualification']}}</td>
+                        </tr>
+                        <tr>
+                            <th>  मुखय पेशा</th>
+                            <td>{{$form['occupation']}}</td>
+                        </tr>
+                        <tr>
+                            <th> नागरिकता नम्बर </th>
+                            <td>{{$form['citizenship_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                जारी मिति</th>
+                            <td>{{$form['issue_date']}}</td>
+                        </tr>
+                        <tr>
+                            <th> जारी जिल्ला</th>
+                            <td>{{$form['issue_district_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th> प्रदेश</th>
+                            <td>{{$form['permanent_province_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th> जिल्ला</th>
+                            <td>{{$form['permanent_district_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th>  पालिका</th>
+                            <td>{{$form['permanent_local_body_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th>  वार्ड</th>
+                            <td>{{$form['permanent_ward_no']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>   मार्ग</th>
+                            <td>{{$form['permanent_way']}}</td>
+                        </tr>
+                        <tr>
+                            <th>   गाउ/टोल</th>
+                            <td>{{$form['permanent_tole']}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                   <h5> तिन पुस्ते बिवरण</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>नाता</th>
+                            <th> 	नाम, थर</th>
+                            <th>नाम, थर(English)</th>
+                            <th>नागरिकता न</th>
+                            <th>सम्पर्क न</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($form['threeGenerationDetails'] as $threeGenerationDetail)
+                        <tr>
+                            <td>   {{$threeGenerationDetail['relation']}}</td>
+                            <td>   {{$threeGenerationDetail['name']}}</td>
+                            <td>   {{$threeGenerationDetail['name_en']}}</td>
+                            <td>   {{$threeGenerationDetail['citizenship_no']}}</td>
+                            <td>   {{$threeGenerationDetail['mobile_no']}}</td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                <h5>ब्यावसाहिक बिवरण
+                </h5>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा</th>
+                            <td>{{$form['business_detail_name']}}</td>
+                        </tr>
+                        <tr>
+                            <th>फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</th>
+                            <td>{{$form['business_detail_name_en']}}</td>
+                        </tr>
+                        <tr>
+                            <th>व्यवसायको प्रकृति</th>
+                            <td>{{$form['business_nature_id']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> व्यवसाय स्थापना गरेको साल</th>
+                            <td>{{$form['establish_year']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> व्यवसाय दर्ता मिति</th>
+                            <td>{{$form['registration_date']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+
+                                पान नम्बर</th>
+                            <td>{{$form['pan_no']}}</td>
+                        </tr>
+                        <tr>
+                            <th> कारोबार गर्ने वस्तु</th>
+                            <td>{{$form['transaction_object']}}</td>
+                        </tr>
+                        <tr>
+                            <th> लागत रकम रु</th>
+                            <td>{{$form['amount_cost']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                पूजीको स्रोत</th>
+                            <td>{{$form['source_of_capital']}}</td>
+                        </tr>
+                        <tr>
+                            <th> उदेश्य</th>
+                            <td>{{$form['purpose']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                रोजगार</th>
+                            <td>{{$form['employment']}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>फर्म / कम्पनी/ब्यबसाय को ठेगाना
+
+                    </h5>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>प्रदेश</th>
+                            <td>{{$form['province_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th>जिल्ला</th>
+                            <td>{{$form['district_id']}}</td>
+                        </tr>
+                        <tr>
+                            <th>पालिका</th>
+                            <td>{{$form['local_body_id']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> वार्ड</th>
+                            <td>{{$form['ward_no']}}</td>
+                        </tr>
+
+                        <tr>
+                            <th> मार्ग</th>
+                            <td>{{$form['way']}}</td>
+                        </tr>
+                        <tr>
+                            <th>
+
+                                गाउ/टोल</th>
+                            <td>{{$form['tole']}}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    <h5>सम्बन्धित कागजपत्र
+
+                    </h5>
+
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>व्यवसायीको पासपोर्ट साइजको फोटो*</th>
+                            <td>
+                                @if(!empty($form['photo']))
+                                <img src="{{$form['photo']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>नागरिकता प्रमाणपत्रको प्रतिलिपि-१</th>
+                            <td>
+                                @if(!empty($form['citizen_ship']))
+                                <img src="{{$form['citizen_ship']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</th>
+                            <td>
+                                @if(!empty($form['company_registration']))
+                                <img src="{{$form['company_registration']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th> आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि</th>
+                            <td>
+                                @if(!empty($form['tax_pay_file']))
+                                <img src="{{$form['tax_pay_file']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th> हस्ताक्षर</th>
+                            <td>
+                                @if(!empty($form['signature']))
+                                <img src="{{$form['signature']->temporaryUrl()}}" alt="" height="60">
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+
+                                औठाको छाप</th>
+                            <td>
+                                @if(!empty($form['thumb']))
+                                <img src="{{$form['thumb']->temporaryUrl()}}" alt="" height="60">
+                                    @endif
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                <h5>परिचय पार्टीको साइज</h5>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>लम्बाई</th>
+
+                            <td>
+                                @if(!empty($form['length']))
+                                {{$form['length']}}
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>चौदाई</th>
+                            <td>
+                                @if(!empty($form['width']))
+                                {{$form['width']}}</td>
+                            @endif
+                        </tr>
+                        <tr>
+                            <th>वर्गफिट</th>
+                            <td>
+                                @if(!empty($form['square']))
+                                {{$form['square']}}
+                                @endif
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                    <div style="display: flex;justify-content: space-between;">
                     <div class="mt-2">
-                        <button type="button" wire:click.prevent="nextStep(5)" class="btn btn-primary">Next <i class="fa fa-arrow-right"></i> </button>
+                        <button type="button" wire:click.prevent="backStep(4)" class="btn btn-primary"><i
+                                class="fa fa-arrow-left"></i> पहिलो
+                        </button>
                     </div>
+                    <button type="submit" class="btn btn-primary">
+                        पेश गर्नुहोस्
+                    </button>
                     </div>
                     @break
                 @default
@@ -626,7 +1051,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="form.house_no" class="form-label">घर  नम्बर</label>
+                                <label for="form.house_no" class="form-label">घर नम्बर</label>
                                 <input
                                     name="form.house_no"
                                     class="form-control @error('form.house_no') is-invalid @enderror"
@@ -655,7 +1080,8 @@
                             </div>
 
                             <div class="col-md-4 mb-3">
-                                <label for="form.national_card_no" class="form-label">राष्ट्रियता परिचयपत्र नम्बर</label>
+                                <label for="form.national_card_no" class="form-label">राष्ट्रियता परिचयपत्र
+                                    नम्बर</label>
                                 <input
                                     name="form.national_card_no"
                                     class="form-control @error('form.national_card_no') is-invalid @enderror"
@@ -670,14 +1096,15 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="form.education_qualification" class="form-label">शैक्षिक योग्यता</label>
-                                <input
-                                    name="form.education_qualification"
-                                    class="form-control @error('form.education_qualification') is-invalid @enderror"
-                                    type="text"
-                                    id="form.education_qualification"
-                                    placeholder="शैक्षिक योग्यता"
-                                    wire:model="form.education_qualification"
-                                />
+                                <select class="form-select @error('form.education_qualification') is-invalid @enderror"
+                                        id="form.education_qualification"
+                                        wire:model="form.education_qualification">
+                                    <option value="">---शैक्षिक योग्यता ----</option>
+
+                                    <option value="Graduation">Graduation</option>
+                                    <option value="Undergraduate">Undergraduate</option>
+
+                                </select>
                                 @error('form.education_qualification')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -746,12 +1173,14 @@
                             <div class="row mt-3">
                                 <div class="col-md-4 mb-3">
                                     <label for="form.permanent_province_id" class="form-label"> प्रदेश </label>
-                                    <select class="form-select @error('form.permanent_province_id') is-invalid @enderror"
-                                            id="form.permanent_province_id"
-                                            wire:model="form.permanent_province_id">
+                                    <select
+                                        class="form-select @error('form.permanent_province_id') is-invalid @enderror"
+                                        id="form.permanent_province_id"
+                                        wire:model="form.permanent_province_id">
                                         <option value="">--- प्रदेश छान्नुहोस्---</option>
                                         @foreach($permanent_provinces as $permanent_province)
-                                            <option value="{{$permanent_province->id}}">{{$permanent_province->province}}</option>
+                                            <option
+                                                value="{{$permanent_province->id}}">{{$permanent_province->province}}</option>
                                         @endforeach
                                     </select>
                                     @error('form.permanent_province_id')
@@ -760,9 +1189,10 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="form.permanent_district_id" class="form-label">जिल्ला</label>
-                                    <select class="form-select @error('form.permanent_district_id') is-invalid @enderror"
-                                            id="form.permanent_district_id"
-                                            wire:model="form.permanent_district_id">
+                                    <select
+                                        class="form-select @error('form.permanent_district_id') is-invalid @enderror"
+                                        id="form.permanent_district_id"
+                                        wire:model="form.permanent_district_id">
                                         <option value="">--- जिल्ला छान्नुहोस्----</option>
                                         @foreach($permanent_districts as $permanent_district)
                                             <option value="{{$permanent_district->id}}">
@@ -776,9 +1206,10 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="form.permanent_local_body_id" class="form-label">पालिका</label>
-                                    <select class="form-select @error('form.permanent_local_body_id') is-invalid @enderror"
-                                            id="form.permanent_local_body_id"
-                                            wire:model="form.permanent_local_body_id">
+                                    <select
+                                        class="form-select @error('form.permanent_local_body_id') is-invalid @enderror"
+                                        id="form.permanent_local_body_id"
+                                        wire:model="form.permanent_local_body_id">
                                         <option value="">--- पालिका छान्नुहोस्----</option>
                                         @foreach($permanent_localBodies as $permanent_localBody)
                                             <option value="{{$permanent_localBody->id}}">
@@ -907,12 +1338,18 @@
                                         </button>
                                     </td>
                                 </tr>
+
                             @endforeach
+
                             </tbody>
                         </table>
+                        @error('form.threeGenerationDetails')
+                        <p class="text-danger">{{$message}}</p>
+                        @enderror
                     </div>
                     <div class="d-flex justify-content-end mt-2">
-                        <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary">  Next <i class="fa fa-arrow-right"></i></button>
+                        <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-primary"> अर्को <i
+                                class="fa fa-arrow-right"></i></button>
                     </div>
             @endswitch
         </form>
