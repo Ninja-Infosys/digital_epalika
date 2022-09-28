@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProprietorDetail extends Model
@@ -60,5 +61,21 @@ class ProprietorDetail extends Model
     public function threeGenerationDetails(): HasMany
     {
         return $this->hasMany(ThreeGenerationDetail::class);
+    }
+
+
+    public function businessDetail(): HasOne
+    {
+        return $this->hasOne(BusinessDetail::class);
+    }
+
+    public function businessRegisteredFile(): HasOne
+    {
+        return $this->hasOne(BusinessRegistrationFile::class);
+    }
+
+    public function introboard(): HasOne
+    {
+        return $this->hasOne(Introboard::class);
     }
 }

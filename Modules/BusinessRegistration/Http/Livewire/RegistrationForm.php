@@ -6,9 +6,11 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\BusinessNature;
+use Modules\BusinessRegistration\Entities\ProprietorDetail;
 
 class RegistrationForm extends Component
 {
@@ -51,9 +53,11 @@ class RegistrationForm extends Component
         'permanent_local_body_id' => null,
         'permanent_way' => null,
         'permanent_tole' => null,
+        'permanent_ward_no' => null,
         'province_id' => null,
         'district_id' => null,
         'local_body_id' => null,
+        'ward_no' => null,
         'way' => null,
         'tole' => null,
         'business_detail_name' => null,
@@ -61,7 +65,7 @@ class RegistrationForm extends Component
         'business_nature_id' => null,
         'establish_year' => null,
         'registration_date' => null,
-        'pan_no' => ['required'],
+        'pan_no' => null,
         'transaction_object' => null,
         'amount_cost' => null,
         'source_of_capital' => null,
@@ -79,7 +83,9 @@ class RegistrationForm extends Component
         'thumb' => null,
         'threeGenerationDetails' => [],
         'partnerDetails' => [],
-        'is_show' => 0
+        'registeredBusinesses' => [],
+        'is_show' => 0,
+        'is_registered' => 0
 
     ];
 
@@ -111,12 +117,12 @@ class RegistrationForm extends Component
     protected array $firstStepValidations = [
         'form.name' => ['required', 'string', 'max:255'],
         'form.gender' => ['required'],
-        'form.house_no' => ['required'],
+        'form.house_no' => ['nullable'],
         'form.phone' => ['required'],
-        'form.account_no' => ['required'],
-        'form.national_card_no' => ['required'],
-        'form.education_qualification' => ['required'],
-        'form.occupation' => ['required'],
+        'form.account_no' => ['nullable'],
+        'form.national_card_no' => ['nullable'],
+        'form.education_qualification' => ['nullable'],
+        'form.occupation' => ['nullable'],
         'form.email' => ['nullable', 'email'],
         'form.citizenship_no' => ['required'],
         'form.issue_date' => ['required'],
@@ -124,8 +130,10 @@ class RegistrationForm extends Component
         'form.permanent_province_id' => ['required'],
         'form.permanent_district_id' => ['required'],
         'form.permanent_local_body_id' => ['required'],
+        'form.permanent_ward_no' => ['required'],
         'form.permanent_way' => ['nullable'],
         'form.permanent_tole' => ['nullable'],
+        'form.threeGenerationDetails' => ['required', 'array'],
         'form.threeGenerationDetails.*.relation' => ['required', 'string'],
         'form.threeGenerationDetails.*.name' => ['required', 'string'],
         'form.threeGenerationDetails.*.name_en' => ['required', 'string'],
@@ -143,7 +151,7 @@ class RegistrationForm extends Component
         'form.transaction_object' => ['nullable'],
         'form.amount_cost' => ['required'],
         'form.source_of_capital' => ['nullable'],
-        'form.purpose' => ['required'],
+        'form.purpose' => ['nullable'],
         'form.employment' => ['required'],
         'form.house_owner_name' => ['required_if:form.is_show,1'],
         'form.house_owner_phone' => ['required_if:form.is_show,1'],
@@ -152,6 +160,7 @@ class RegistrationForm extends Component
         'form.province_id' => ['required'],
         'form.district_id' => ['required'],
         'form.local_body_id' => ['required'],
+        'form.ward_no' => ['required'],
         'form.way' => ['nullable'],
         'form.tole' => ['nullable'],
         'form.partnerDetails.*.relation' => ['nullable', 'string'],
@@ -159,6 +168,11 @@ class RegistrationForm extends Component
         'form.partnerDetails.*.name_en' => ['nullable', 'string'],
         'form.partnerDetails.*.citizenship_no' => ['nullable', 'string'],
         'form.partnerDetails.*.mobile_no' => ['nullable', 'string'],
+        'form.registeredBusinesses.*.registration_no' => ['required_if:form.is_registered,1'],
+        'form.registeredBusinesses.*.business_name' => ['required_if:form.is_registered,1'],
+        'form.registeredBusinesses.*.registration_date' => ['required_if:form.is_registered,1'],
+        'form.registeredBusinesses.*.active' => ['required_if:form.is_registered,1'],
+
     ];
 
     protected array $thirdStepValidations = [
@@ -175,7 +189,7 @@ class RegistrationForm extends Component
         'form.length' => ['required'],
         'form.width' => ['required'],
         'form.square' => ['required'],
-        ];
+    ];
 
     public function rules()
     {
@@ -202,7 +216,7 @@ class RegistrationForm extends Component
                 break;
             default:
             {
-                return array_merge($this->firstStepValidations, $this->secondStepValidations);
+                return array_merge($this->firstStepValidations, $this->secondStepValidations, $this->thirdStepValidations, $this->fourthStepValidations);
             }
         }
     }
@@ -212,9 +226,106 @@ class RegistrationForm extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function save()
+    public function submitForm()
     {
+        $this->validate();
+//        dd($this->form);
+        DB::transaction(function () {
+            $proprietorDetails = ProprietorDetail::create([
+                'name' => $this->form['name'],
+                'citizenship_no' => $this->form['citizenship_no'],
+                'issue_date' => $this->form['issue_date'],
+                'issue_district_id' => $this->form['issue_district_id'],
+                'phone' => $this->form['phone'],
+                'email' => $this->form['email'],
+                'province_id' => $this->form['permanent_province_id'],
+                'district_id' => $this->form['permanent_district_id'],
+                'local_body_id' => $this->form['permanent_local_body_id'],
+                'ward_no' => $this->form['permanent_ward_no'],
+                'way' => $this->form['permanent_way'],
+                'tole' => $this->form['permanent_tole'],
+                'house_no' => $this->form['house_no'],
+                'account_no' => $this->form['account_no'],
+                'national_card_no' => $this->form['national_card_no'],
+                'gender' => $this->form['gender'],
+                'education_qualification' => $this->form['education_qualification'],
+                'occupation' => $this->form['occupation'],
+            ]);
 
+            $businessDetail = $proprietorDetails->businessDetail()->create([
+                'business_detail_name' => $this->form['business_detail_name'],
+                'business_detail_name_en' => $this->form['business_detail_name_en'],
+                'business_nature_id' => $this->form['business_nature_id'],
+                'establish_year' => $this->form['establish_year'],
+                'registration_date' => $this->form['registration_date'],
+                'pan_no' => $this->form['pan_no'],
+                'transaction_object' => $this->form['transaction_object'],
+                'amount_cost' => $this->form['amount_cost'],
+                'source_of_capital' => $this->form['source_of_capital'],
+                'purpose' => $this->form['purpose'],
+                'employment' => $this->form['employment'],
+                'house_owner_name' => $this->form['house_owner_name'],
+                'house_owner_phone' => $this->form['house_owner_phone'],
+                'house_owner_address' => $this->form['house_owner_address'],
+                'house_owner_monthly_rent' => $this->form['house_owner_monthly_rent'],
+                'province_id' => $this->form['province_id'],
+                'district_id' => $this->form['district_id'],
+                'local_body_id' => $this->form['local_body_id'],
+                'ward_no' => $this->form['ward_no'],
+                'way' => $this->form['way'],
+                'tole' => $this->form['tole'],
+            ]);
+
+            foreach ($this->form['threeGenerationDetails'] as $threeGenerationDetail) {
+                $proprietorDetails->threeGenerationDetails()->create([
+                    'relation' => $threeGenerationDetail['relation'],
+                    'name' => $threeGenerationDetail['name'],
+                    'name_en' => $threeGenerationDetail['name_en'],
+                    'citizenship_no' => $threeGenerationDetail['citizenship_no'],
+                    'mobile_no' => $threeGenerationDetail['mobile_no']
+                ]);
+            }
+
+            foreach ($this->form['partnerDetails'] as $partnerDetail) {
+                $businessDetail->partnerDetails()->create([
+                    'relation' => $partnerDetail['relation'],
+                    'name' => $partnerDetail['name'],
+                    'citizenship_no' => $partnerDetail['citizenship_no'],
+                    'mobile_no' => $partnerDetail['mobile_no']
+                ]);
+            }
+
+            foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
+                $businessDetail->registeredBusinesses()->create([
+                    'registration_no' => $registeredBusiness['registration_no'],
+                    'business_name' => $registeredBusiness['business_name'],
+                    'registration_date' => $registeredBusiness['registration_date'],
+                    'active' => $registeredBusiness['active']
+                ]);
+            }
+            $proprietorDetails->businessRegisteredFile()->create([
+                'photo' => $this->form['photo'],
+                'citizen_ship' => $this->form['citizen_ship'],
+                'company_registration' => $this->form['company_registration'],
+                'tax_pay_file' => $this->form['tax_pay_file'],
+                'signature' => $this->form['signature'],
+                'thumb' => $this->form['thumb'],
+            ]);
+
+            $proprietorDetails->introboard()->create([
+                'length' => $this->form['length'],
+                'width' => $this->form['width'],
+                'square' => $this->form['square'],
+            ]);
+
+        });
+
+        $this->reset('form');
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => "success",
+            'title' => "धन्यबाद",
+            'text' => "तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो",
+        ]);
     }
 
     public function documentsArrayIncrement()
@@ -239,6 +350,16 @@ class RegistrationForm extends Component
         $this->form['partnerDetails'] = array_values($this->form['partnerDetails']);
     }
 
+    public function registeredBusinessArrayIncrement()
+    {
+        $this->form['registeredBusinesses'][] = [];
+    }
+
+    public function registeredBusinessArrayDecrement($index)
+    {
+        unset($this->form['registeredBusinesses'][$index]);
+        $this->form['registeredBusinesses'] = array_values($this->form['registeredBusinesses']);
+    }
 
     public function render()
     {

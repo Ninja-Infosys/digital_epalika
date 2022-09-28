@@ -10,7 +10,7 @@ use App\Traits\EventObserveTrait;
 
 class BusinessDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',
@@ -21,7 +21,7 @@ class BusinessDetail extends Model
     protected $fillable = [
         'proprietor_detail_id',
         'business_detail_name',
-        'business_detail_en',
+        'business_detail_name_en',
         'business_nature_id',
         'establish_year',
         'registration_date',
@@ -41,9 +41,6 @@ class BusinessDetail extends Model
         'ward_no',
         'way',
         'tole',
-        'length',
-        'width',
-        'square_feet',
     ];
 
 

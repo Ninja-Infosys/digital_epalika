@@ -95,4 +95,16 @@
         </style>
         <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/register.css')}}">
     @endpush
+    @push('scripts')
+        {{--listener for toastr--}}
+        <script>
+            window.addEventListener('alert_message', event => {
+                swal.fire({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                });
+            });
+        </script>
+    @endpush
 @endsection
