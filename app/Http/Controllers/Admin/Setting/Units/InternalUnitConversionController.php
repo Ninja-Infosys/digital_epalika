@@ -9,7 +9,7 @@ use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
 use Illuminate\Support\Facades\Gate;
 
-class UnitConversionController extends Controller
+class InternalUnitConversionController extends Controller
 {
     public function index(Unit $unit)
     {
@@ -18,8 +18,9 @@ class UnitConversionController extends Controller
             'You are not allowed to digital board news access'
         );
 
-        $units = Unit::with('conversion_to')->latest()->get();
-        return view('admin.setting.units.unit.index', compact('units'));
+        $conversionUnits = Unit::where('id', '!=', $unit->id)->where('measurement_unit_id', $unit->measurement_unit_id)->get();
+        $conversions = UnitConversion::where('conversion_from', $unit->id)->get();
+        return view('admin.setting.units.unit.conversion.internal.index', compact('unit', 'conversionUnits', 'conversions'));
     }
 
     public function create(Unit $unit)
@@ -29,7 +30,18 @@ class UnitConversionController extends Controller
 
     public function store(StoreUnitConversionRequest $request, Unit $unit)
     {
-        //
+        foreach ($request->input('conversion') as $conversion) {
+            if ($conversionData = UnitConversion::where('conversion_to', $conversion['conversion_to'])->where('conversion_from', $unit->id)->first()) {
+                $conversionData->update(['rate' => $conversion['rate'] ?? '']);
+            } else {
+                UnitConversion::create($conversion + [
+                        'conversion_from' => $unit->id,
+                    ]);
+            }
+        }
+
+        toast('मापन एकाइ रुपान्तरण सफलतापूर्वक थपियो', 'success');
+        return redirect(route('admin.units.unit.index'));
     }
 
     public function show(Unit $unit, UnitConversion $unitConversion)

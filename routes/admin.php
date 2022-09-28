@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ListRegistrationController;
 use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
+use App\Http\Controllers\Admin\Setting\Units\InternalUnitConversionController;
 use App\Http\Controllers\Admin\Setting\Units\MeasurementUnitController;
 use App\Http\Controllers\Admin\Setting\Units\TypeController;
 use App\Http\Controllers\Admin\Setting\Units\UnitController;
@@ -44,6 +45,7 @@ Route::prefix('setting')->group(function () {
         Route::resource('type', TypeController::class);
         Route::resource('measurementUnit', MeasurementUnitController::class);
         Route::resource('unit', UnitController::class);
+        Route::resource('unit/{unit}/internalUnitConversion', InternalUnitConversionController::class)->names('unit.internal-unit-conversion');
     });
     Route::resource('officeSetting', OfficeSettingController::class);
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
