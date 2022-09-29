@@ -465,7 +465,7 @@
                                            wire:model="landOwner.name"
                                     >
                                     @error('landOwner.name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -475,7 +475,7 @@
                                            wire:model="landOwner.phone"
                                     >
                                     @error('landOwner.phone')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -487,17 +487,23 @@
                                            wire:model="landOwner.father_name"
                                     >
                                     @error('landOwner.father_name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
-                                    <label for="citizenship_issue_district">१.४ नागरिकता लिएको जिल्ला :</label>
-                                    <input type="text"
-                                           id="citizenship_issue_district"
-                                           wire:model="landOwner.citizenship_issue_district"
-                                    >
-                                    @error('landOwner.citizenship_issue_district')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <label for="landOwner.citizenship_issue_district_id">१.४ नागरिकता लिएको जिल्ला
+                                        :</label>
+                                    <select wire:model="landOwner.citizenship_issue_district_id"
+                                            id="landOwner.citizenship_issue_district_id">
+                                        <option value=""></option>
+                                        @foreach($allDistricts as $district)
+                                            <option value="{{$district->id}}">
+                                                {{$district->district}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('landOwner.citizenship_issue_district_id')
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -586,11 +592,15 @@
                                         १.४ नागरिकता लिएको जिल्ला
                                         :
                                     </label>
-                                    <input type="text"
-                                           id="houseOwner.citizenship_issue_district"
-                                           wire:model="houseOwner.citizenship_issue_district"
-                                    >
-                                    @error('houseOwner.citizenship_issue_district')
+                                    <select wire:model="houseOwner.citizenship_issue_district_id">
+                                        <option value=""></option>
+                                        @foreach($allDistricts as $district)
+                                            <option value="{{$district->id}}">
+                                                {{$district->district}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('houseOwner.citizenship_issue_district_id')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
@@ -605,7 +615,7 @@
                                            wire:model="houseOwner.citizenship_no"
                                     >
                                     @error('houseOwner.citizenship_no')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td></td>
@@ -620,7 +630,7 @@
                                            wire:model="houseOwner.citizenship_issue_date"
                                     >
                                     @error('houseOwner.citizenship_issue_date')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td></td>
@@ -666,7 +676,7 @@
                                                    value="{{old('detail', $fourSide->value)}}"
                                             >
                                             @error('detail')
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -677,7 +687,7 @@
                                                    value="{{old('east')}}"
                                             >
                                             @error('east')
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -688,7 +698,7 @@
                                                    value="{{old('south')}}"
                                             >
                                             @error('south')
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -699,7 +709,7 @@
                                                    value="{{old('west')}}"
                                             >
                                             @error('west')
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -710,7 +720,7 @@
                                                    value="{{old('north')}}"
                                             >
                                             @error('north')
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                     </tr>
@@ -757,7 +767,7 @@
                                                value="{{old('post', $posts->value)}}"
                                         >
                                         @error('post')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -768,7 +778,7 @@
                                                value="{{old('name')}}"
                                         >
                                         @error('name')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -779,7 +789,7 @@
                                                value="{{old('nec_council_no')}}"
                                         >
                                         @error('nec_council_no')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -790,7 +800,7 @@
                                                value="{{old('local_body_registration_no')}}"
                                         >
                                         @error('local_body_registration_no')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -801,7 +811,7 @@
                                                value="{{old('consulting_firm_name')}}"
                                         >
                                         @error('consulting_firm_name')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                 </tr>
@@ -835,7 +845,7 @@
                         </div>
                     @endforeach
                     @error('applicant_type')
-                    <span class="text-danger">{{$message}}</span>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
 
@@ -859,7 +869,7 @@
                         </div>
                     @endforeach
                     @error('relation')
-                    <span class="text-danger">{{$message}}</span>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
 
@@ -885,7 +895,7 @@
                                            value="{{old('name')}}"
                                     >
                                     @error('name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -897,7 +907,7 @@
                                            value="{{old('phone')}}"
                                     >
                                     @error('phone')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -911,7 +921,7 @@
                                            value="{{old('father_name')}}"
                                     >
                                     @error('father_name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -923,7 +933,7 @@
                                            value="{{old('father_name')}}"
                                     >
                                     @error('father_name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -937,7 +947,7 @@
                                            value="{{old('citizenship_number')}}"
                                     >
                                     @error('citizenship_number')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -950,7 +960,7 @@
                                            value="{{old('citizenship_issued_date')}}"
                                     >
                                     @error('citizenship_issued_date')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -981,7 +991,7 @@
             </div>
 
             @error('application_date')
-            <span class="text-danger">{{$message}}</span>
+            <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
         <div>
@@ -999,7 +1009,7 @@
                     for="applicant_signature"><b>निवेदकको सहि: </b></label>
             </div>
             @error('applicant_signature')
-            <span class="text-danger">{{$message}}</span>
+            <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
     </div>
@@ -1038,7 +1048,7 @@
                                                value="{{old('criteria', $criteria->value)}}"
                                         >
                                         @error('criteria')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -1049,7 +1059,7 @@
                                                value="{{old('according_to_criteria')}}"
                                         >
                                         @error('according_to_criteria')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -1060,7 +1070,7 @@
                                                value="{{old('according_to_map')}}"
                                         >
                                         @error('according_to_map')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -1071,7 +1081,7 @@
                                                value="{{old('non-compliance')}}"
                                         >
                                         @error('non-compliance')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
 
@@ -1083,7 +1093,7 @@
                                                value="{{old('remarks', $criteria->remarks())}}"
                                         >
                                         @error('remarks')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                 </tr>
@@ -1121,7 +1131,7 @@
                                            value="building category"
                                     >
                                     @error('detail')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -1132,7 +1142,7 @@
                                            value="{{old('value')}}"
                                     >
                                     @error('value')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -1143,7 +1153,7 @@
                                            value="{{old('remarks')}}"
                                     >
                                     @error('remarks')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -1159,7 +1169,7 @@
                                            value="plinth area"
                                     >
                                     @error('detail')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>

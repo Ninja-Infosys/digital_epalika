@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Http\Livewire;
 
+use App\Models\Address\District;
 use Livewire\Component;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\StructureType;
@@ -12,6 +13,7 @@ class MapApplyLivewire extends Component
     public $structureTypes = [];
     public int $currentStep = 1;
     public bool $open_structure_type = false;
+    public $allDistricts = [];
 
     public array $applyMap = [
         'construction_type' => null,
@@ -47,7 +49,7 @@ class MapApplyLivewire extends Component
         'name' => null,
         'phone' => null,
         'father_name' => null,
-        'citizenship_issue_district' => null,
+        'citizenship_issue_district_id' => null,
         'citizenship_no' => null,
         'citizenship_issue_date' => null
     ];
@@ -56,10 +58,17 @@ class MapApplyLivewire extends Component
         'name' => null,
         'phone' => null,
         'father_name' => null,
-        'citizenship_issue_district' => null,
+        'citizenship_issue_district_id' => null,
         'citizenship_no' => null,
         'citizenship_issue_date' => null
     ];
+
+    public function mount(Client $client)
+    {
+        $this->client = $client;
+        $this->structureTypes = StructureType::latest()->get();
+        $this->allDistricts = District::all();
+    }
 
     public function addStoreyDetail()
     {
@@ -75,12 +84,6 @@ class MapApplyLivewire extends Component
     public function setStructureType()
     {
         $this->open_structure_type = !$this->open_structure_type;
-    }
-
-    public function mount(Client $client)
-    {
-        $this->client = $client;
-        $this->structureTypes = StructureType::latest()->get();
     }
 
     protected array $applyMapValidations = [
@@ -131,7 +134,7 @@ class MapApplyLivewire extends Component
         'houseOwner.name' => ['required'],
         'houseOwner.phone' => ['nullable'],
         'houseOwner.father_name' => ['required'],
-        'houseOwner.citizenship_issue_district_id' => ['required'],
+        'houseOwner.citizenship_issue_district_id' => ['required','exists:districts,id'],
         'houseOwner.citizenship_no' => ['required'],
         'houseOwner.citizenship_issue_date' => ['required']
     ];
@@ -164,7 +167,7 @@ class MapApplyLivewire extends Component
     public function saveFormData()
     {
         $this->validate();
-        dd($this->applyMap);
+        dd($this->validate());
     }
 
     public function render()
