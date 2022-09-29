@@ -44,6 +44,13 @@
                 /*width: 60%;*/
             }
 
+            td>input[type="text"],
+            td>input[type="file"],
+            td>select,
+            td>input[type="date"] {
+                width: 100%;
+            }
+
 
         </style>
     @endpush

@@ -2,17 +2,19 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Address\District;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class FourFort extends Model
+class ApplicantDetail extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
+        'citizenship_issue_date',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -20,15 +22,23 @@ class FourFort extends Model
 
     protected $fillable = [
         'map_apply_id',
-        'detail',
-        'east',
-        'south',
-        'west',
-        'north'
+        'applicant_type',
+        'relation_with_owner',
+        'name',
+        'phone',
+        'father_name',
+        'citizenship_issue_district_id',
+        'citizenship_no',
+        'citizenship_issue_date',
     ];
 
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);
+    }
+
+    public function citizenshipIssueDistrict(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
     }
 }

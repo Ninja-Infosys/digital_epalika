@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class FourFort extends Model
+class DesignerDetail extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -20,11 +20,11 @@ class FourFort extends Model
 
     protected $fillable = [
         'map_apply_id',
-        'detail',
-        'east',
-        'south',
-        'west',
-        'north'
+        'name',
+        'post',
+        'nec_council_no',
+        'local_body_registration_no',
+        'consulting_firm_name',
     ];
 
     public function mapApply(): BelongsTo
