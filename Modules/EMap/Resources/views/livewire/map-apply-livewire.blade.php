@@ -282,7 +282,7 @@
         <div class="row">
             <div class="mb-3">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label
                             for="landDescription.land_use_area"><b>२.१ भू-उपयोग्य क्षेत्र: </b></label>
                         <input type="text"
@@ -292,6 +292,15 @@
                         @error('landDescription.land_use_area')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="convert_to">Convert To</label>
+                        <select name="convert_to" id="convert_to" wire:model="conversion_id" wire:change="conversionLogic">
+                            <option value="">Select conversion Unit</option>
+                            @foreach($conversion_units as $conversion_unit)
+                                <option value="{{$conversion_unit->id}}">{{$conversion_unit->title}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -370,37 +379,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <b>२.७ क्षेत्रफल </b>
-                        <label for="landDescription.bigha">बिघा</label>
-                        <input type="text"
-                               id="landDescription.bigha"
-                               wire:model="landDescription.bigha"
-                        >
-                        @error('landDescription.bigha')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                        <label for="landDescription.kattha">कठ्ठा</label>
-                        <input type="text"
-                               id="landDescription.kattha"
-                               wire:model="landDescription.kattha"
-                        >
-                        @error('landDescription.kattha')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                        <label for="landDescription.dhur">धुर</label>
-                        <input type="text"
-                               id="landDescription.dhur"
-                               wire:model="landDescription.dhur"
-                        >
-                        @error('landDescription.dhur')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
+                        @foreach($units as $index=>$unit)
+                            <label for="{{$unit->id}}">{{$unit->title}}</label>
+                            <input type="text" id="{{$unit->id}}" wire:model="conversion.data{{$index}}" readonly>
+                        @endforeach
+
                         {{'('}}
                         <input type="text"
-                               id="landDescription.square_meter"
-                               wire:model="landDescription.square_meter"
+                               id="landDescription.unit_value"
+                               wire:model="landDescription.unit_value"
                         >
-                        <label for="landDescription.square_meter">ब.मी.</label>
-                        @error('landDescription.square_meter')
+                        <label for="landDescription.unit_value">{{$setting->standardLandMeasurement->title ?? ''}}</label>
+                        @error('landDescription.unit_value')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
                         {{')'}}
