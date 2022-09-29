@@ -14,19 +14,16 @@
                                 class="fa fa-angle-right"></i>
                     </li>
                 </a>
-                <a href="">
                     <li class="list-group-item d-flex mb-1 pb-0">
                         <p class="mx-5">नागरिकलाई प्रदान गरिने अन्य सेवाहरु 1प्रदान </p> <i
                                 class="fa fa-angle-right"></i>
                     </li>
                 </a>
-                <a href="">
                     <li class="list-group-item d-flex mb-1 pb-0">
                         <p class="mx-5">नागरिकलाई प्रदान गरिने अन्य सेवाहरु 1प्रदान </p> <i
                                 class="fa fa-angle-right"></i>
                     </li>
                 </a>
-
             </ul>
         </div>
     </div>
