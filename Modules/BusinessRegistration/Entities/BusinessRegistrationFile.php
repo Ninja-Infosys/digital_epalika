@@ -9,7 +9,7 @@ use App\Traits\EventObserveTrait;
 
 class BusinessRegistrationFile extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',
@@ -27,4 +27,62 @@ class BusinessRegistrationFile extends Model
         'signature',
         'thumb'
     ];
+
+
+    public function setPhotoAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['photo'] = $value->store('business_registered/','public');
+        }
+    }
+
+    public function setCitizenShipAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['citizen_ship'] = $value->store('business_registered/','public');
+        }
+    }
+
+    public function setCompanyRegistrationAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['company_registration'] = $value->store('business_registered/','public');
+        }
+    }
+
+    public function setTaxPayFileAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['tax_pay_file'] = $value->store('business_registered/','public');
+        }
+    }
+
+    public function setPropertyAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['property'] = $value->store('business_registered/','public');
+        }
+    }
+
+    public function setSignatureAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['signature'] = $value->store('business_registered/','public');
+        }
+    }
+    public function setThumbAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['thumb'] = $value->store('business_registered/','public');
+        }
+    }
+
+
 }

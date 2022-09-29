@@ -2,15 +2,13 @@
 
 namespace Modules\EMap\Entities;
 
-use App\Models\Settings\Units\Type;
-use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class MapSetting extends Model
+class DesignerDetail extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -21,18 +19,16 @@ class MapSetting extends Model
     ];
 
     protected $fillable = [
-        'map_request_form_format',
-        'land_measurement_id',
-        'land_measurement_standard_id',
+        'map_apply_id',
+        'name',
+        'post',
+        'nec_council_no',
+        'local_body_registration_no',
+        'consulting_firm_name',
     ];
 
-    public function landMeasurement(): BelongsTo
+    public function mapApply(): BelongsTo
     {
-        return $this->belongsTo(Type::class,'land_measurement_id');
-    }
-
-    public function standardLandMeasurement(): BelongsTo
-    {
-        return $this->belongsTo(Unit::class,'land_measurement_standard_id');
+        return $this->belongsTo(MapApply::class);
     }
 }

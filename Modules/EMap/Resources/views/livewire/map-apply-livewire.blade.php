@@ -1,21 +1,18 @@
-<form action="{{route('organization.admin.clients.mapApply.store', $client)}}" method="post"
+<form wire:submit.prevent="saveFormData" method="post"
       class="building-construction-application">
     @csrf
     <fieldset>
         <legend>१. प्रस्तावित भवनको विवरण</legend>
         <div class="row">
             <div class="mb-3">
-                {{print_r($applyMap)}}
                 <b class="form-label">१.१ निर्माण कार्यको किसिम *</b> <br>
                 <div class="row">
                     @foreach(\Modules\EMap\Enums\TypeOfConstructionWorkEnum::cases() as $constructionType)
                         <div class="col-md-3">
                             <input type="radio"
-                                   class="@error('applyMap.construction_type') is-invalid @enderror "
                                    id="{{$constructionType->name}}"
-                                   name="applyMap.construction_type"
                                    wire:model="applyMap.construction_type"
-                                   {{old('applyMap.construction_type')== $constructionType->value?'checked':''}} value="{{$constructionType->value}}">
+                                   value="{{$constructionType->value}}">
                             <label
                                 for="{{$constructionType->name}}">{{$constructionType->label()}}</label>
                         </div>
@@ -24,10 +21,6 @@
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
-
-                @error('name')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
             </div>
 
             <div class="mb-3">
@@ -36,11 +29,9 @@
                     @foreach(\Modules\EMap\Enums\BuildingUsageEnum::cases() as $usages)
                         <div class="col-md-3">
                             <input type="radio"
-                                   class="@error('applyMap.usage') is-invalid @enderror "
                                    id="{{$usages->name}}"
-                                   name="applyMap.usage"
                                    wire:model="applyMap.usage"
-                                   {{old('applyMap.usage')== $usages->value?'checked':''}} value="{{$usages->value}}">
+                                   value="{{$usages->value}}">
                             <label
                                 for="{{$usages->name}}">{{$usages->label()}}</label>
                         </div>
@@ -57,11 +48,9 @@
                     @foreach(\Modules\EMap\Enums\CategorizationEnum::cases() as $categorization)
                         <div class="col-md-3">
                             <input type="radio"
-                                   class="@error('applyMap.building_category') is-invalid @enderror "
                                    id="{{$categorization->name}}"
-                                   name="applyMap.building_category"
                                    wire:model="applyMap.building_category"
-                                   {{old('applyMap.building_category')== $categorization->value?'checked':''}} value="{{$categorization->value}}">
+                                   value="{{$categorization->value}}">
                             <label
                                 for="{{$categorization->name}}">{{$categorization->label()}}</label>
                         </div>
@@ -70,10 +59,6 @@
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
-
-                @error('name')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
             </div>
 
             <div class="mb-3">
@@ -82,11 +67,9 @@
                     @foreach($structureTypes as $structureType)
                         <div class="col-md-3">
                             <input type="radio"
-                                   class="@error('applyMap.structure_type_id') is-invalid @enderror "
                                    id="structure-type-{{$loop->index}}"
-                                   name="applyMap.structure_type_id"
                                    wire:model="applyMap.structure_type_id"
-                                   {{old('applyMap.structure_type_id')== $structureType->id?'checked':''}} value="{{$structureType->id}}">
+                                   value="{{$structureType->id}}">
                             <label
                                 for="structure-type-{{$loop->index}}">{{$structureType->title}}</label>
                         </div>
@@ -95,35 +78,25 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <input type="radio"
-                                       class="@error('open_structure_type') is-invalid @enderror "
                                        id="open_structure_type"
-                                       name="open_structure_type"
                                        wire:model="open_structure_type"
-                                       {{old('open_structure_type')== '1'?'checked':''}} value="1">
+                                       value="1">
                                 <label
                                     for="open_structure_type" wire:click.prevent="setStructureType">अन्य</label>
                             </div>
                             @if($open_structure_type)
                                 <div class="col-md-8">
                                     <input type="text"
-                                           class=" @error('structure_type') is-invalid @enderror "
-                                           id="structure-type"
-                                           name="structure_type"
-                                           value="{{old('structure_type')}}">
+                                           wire:model="applyMap.structure_type"
+                                           id="structure-type">
                                 </div>
                             @endif
                         </div>
-
-
                     </div>
                     @error('structure_type_id')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
-
-                @error('name')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
             </div>
 
             <div class="mb-3">
@@ -132,12 +105,8 @@
                         <label
                             for="applyMap.current_storey"><b>१.५ हाल निर्माण गर्ने तल्ला संख्या: </b></label>
                         <input type="text"
-                               class="@error('applyMap.current_storey') is-invalid @enderror "
                                id="applyMap.current_storey"
-                               name="applyMap.current_storey"
-                               wire:model="applyMap.current_storey"
-                               value="{{old('applyMap.current_storey')}}"
-                        >
+                               wire:model="applyMap.current_storey">
 
                         @error('applyMap.current_storey')
                         <span class="text-danger">{{$message}}</span>
@@ -147,11 +116,8 @@
                         <label
                             for="applyMap.area_of_plinth"><b>१.६ प्लिन्थको क्षेत्रफल: </b></label>
                         <input type="text"
-                               class="@error('applyMap.area_of_plinth') is-invalid @enderror "
                                id="applyMap.area_of_plinth"
-                               name="applyMap.area_of_plinth"
                                wire:model="applyMap.area_of_plinth"
-                               value="{{old('applyMap.area_of_plinth')}}"
                         >
 
                         @error('applyMap.area_of_plinth')
@@ -166,12 +132,10 @@
                     <div class="col-md-12">
                         <label
                             for="applyMap.future_storey"><b>१.७ भविष्यमा निर्माण गर्ने तल्ला
-                                संख्या: </b></label>
+                                संख्या: </b>
+                        </label>
                         <input type="text"
-                               class="@error('applyMap.future_storey') is-invalid @enderror "
                                id="applyMap.future_storey"
-                               name="applyMap.future_storey"
-                               value="{{old('applyMap.future_storey')}}"
                                wire:model="applyMap.future_storey"
                         >
                         @error('applyMap.future_storey')
@@ -187,10 +151,7 @@
                         <label
                             for="applyMap.length"><b>१.८ कुल भवनको लम्बाई: </b></label>
                         <input type="text"
-                               class="@error('applyMap.length') is-invalid @enderror "
                                id="applyMap.length"
-                               name="applyMap.length"
-                               value="{{old('applyMap.length')}}"
                                wire:model="applyMap.length"
                         >
                         @error('applyMap.length')
@@ -201,10 +162,7 @@
                         <label
                             for="applyMap.breadth"><b>१.९ कुल भवनको चौडाई: </b></label>
                         <input type="text"
-                               class="@error('applyMap.breadth') is-invalid @enderror "
                                id="applyMap.breadth"
-                               name="applyMap.breadth"
-                               value="{{old('applyMap.breadth')}}"
                                wire:model="applyMap.breadth"
                         >
                         @error('applyMap.breadth')
@@ -220,10 +178,7 @@
                         <label
                             for="applyMap.height"><b>१.१० भवनको कुल उचाई जमिनको सतहबाट: </b></label>
                         <input type="text"
-                               class="@error('applyMap.height') is-invalid @enderror "
                                id="applyMap.height"
-                               name="applyMap.height"
-                               value="{{old('applyMap.height')}}"
                                wire:model="applyMap.height"
                         >
                         @error('applyMap.height')
@@ -237,95 +192,85 @@
                 <div class="row">
                     <div class="col-md-12">
                         <b>१.११ तल्लाको क्षेत्रफल र उचाईको विवरण: </b>
-                        {{print_r($storeyDetails)}}
-                        <table
-                            class="table table-striped table-hover table-responsive table-bordered">
-                            <thead>
-                            <tr class="text-center">
-                                <th>तल्ला</th>
-                                <th>प्रस्तावित निर्माणको क्षेत्रफल</th>
-                                <th>साविक निर्माणको क्षेत्रफल</th>
-                                <th>जम्मा क्षेत्रफल</th>
-                                <th>उचाई</th>
-                                <th>
-                                    <button class="btn btn-primary" wire:click.prevent="addStoreyDetail">थप्नुहोस
-                                    </button>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($storeyDetails as $index=>$storeyDetail)
-                                <tr>
-                                    <td>
-                                        <input type="text"
-                                               class="@error("storeyDetails.".$index.".storey") is-invalid @enderror "
-                                               id="storeyDetails.{{$index}}.storey"
-                                               name="storeyDetails.{{$index}}.storey"
-                                               wire:model="storeyDetails.{{$index}}.storey"
-                                               value="{{old("storeyDetails.".$index.".storey")}}"
-                                        >
-                                        @error("storeyDetails.".$index.".storey")
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error("storeyDetails.".$index.".area_of_proposed_construction") is-invalid @enderror "
-                                               id="storeyDetails.{{$index}}.area_of_proposed_construction"
-                                               name="storeyDetails.{{$index}}.area_of_proposed_construction"
-                                               wire:model="storeyDetails.{{$index}}.area_of_proposed_construction"
-                                               value="{{old("storeyDetails.".$index.".area_of_proposed_construction")}}"
-                                        >
-                                        @error("storeyDetails.".$index.".area_of_proposed_construction")
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error("storeyDetails.".$index.".area_of_former_construction") is-invalid @enderror "
-                                               id="storeyDetails.{{$index}}.area_of_former_construction"
-                                               name="storeyDetails.{{$index}}.area_of_former_construction"
-                                               wire:model="storeyDetails.{{$index}}.area_of_former_construction"
-                                               value="{{old("storeyDetails.".$index.".area_of_former_construction")}}"
-                                        >
-                                        @error("storeyDetails.".$index.".area_of_former_construction")
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error("storeyDetails.".$index.".total_area") is-invalid @enderror "
-                                               id="storeyDetails.{{$index}}.total_area"
-                                               name="storeyDetails.{{$index}}.total_area"
-                                               wire:model="storeyDetails.{{$index}}.total_area"
-                                               value="{{old("storeyDetails.".$index.".total_area")}}"
-                                        >
-                                        @error("storeyDetails.".$index.".total_area")
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error("storeyDetails.".$index.".height") is-invalid @enderror "
-                                               id="storeyDetails.{{$index}}.height"
-                                               name="storeyDetails.{{$index}}.height"
-                                               wire:model="storeyDetails.{{$index}}.height"
-                                               value="{{old("storeyDetails.".$index.".height")}}"
-                                        >
-                                        @error("storeyDetails.".$index.".height")
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger"
-                                                wire:click.prevent="removeStoreyDetail({{$index}})">हटाउनुहोस्
+                        <div class="table-responsive">
+                            <table
+                                class="table table-striped table-hover table-responsive table-bordered">
+                                <thead>
+                                <tr class="text-center">
+                                    <th>तल्ला</th>
+                                    <th>प्रस्तावित निर्माणको क्षेत्रफल</th>
+                                    <th>साविक निर्माणको क्षेत्रफल</th>
+                                    <th>जम्मा क्षेत्रफल</th>
+                                    <th>उचाई</th>
+                                    <th>
+                                        <button type="button" class="btn btn-primary"
+                                                wire:click.prevent="addStoreyDetail">थप्नुहोस
                                         </button>
-                                    </td>
+                                    </th>
                                 </tr>
-                            @endforeach
+                                </thead>
+                                <tbody>
+                                @foreach($applyMap['storeyDetails'] as $index=>$storeyDetail)
+                                    <tr>
+                                        <td>
+                                            <input type="text"
+                                                   id="storeyDetails.{{$index}}.storey"
+                                                   wire:model="applyMap.storeyDetails.{{$index}}.storey"
+                                            >
+                                            @error("applyMap.storeyDetails.".$index.".storey")
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="storeyDetails.{{$index}}.area_of_proposed_construction"
+                                                   wire:model="applyMap.storeyDetails.{{$index}}.area_of_proposed_construction"
+                                            >
+                                            @error("applyMap.storeyDetails.".$index.".area_of_proposed_construction")
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="storeyDetails.{{$index}}.area_of_former_construction"
+                                                   wire:model="applyMap.storeyDetails.{{$index}}.area_of_former_construction"
+                                            >
+                                            @error("applyMap.storeyDetails.".$index.".area_of_former_construction")
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="storeyDetails.{{$index}}.total_area"
+                                                   wire:model="applyMap.storeyDetails.{{$index}}.total_area"
+                                            >
+                                            @error("applyMap.storeyDetails.".$index.".total_area")
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="storeyDetails.{{$index}}.height"
+                                                   wire:model="applyMap.storeyDetails.{{$index}}.height"
+                                            >
+                                            @error("applyMap.storeyDetails.".$index.".height")
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger"
+                                                    wire:click.prevent="removeStoreyDetail({{$index}})">हटाउनुहोस्
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                        @error("applyMap.storeyDetails")
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -334,23 +279,29 @@
 
     <fieldset>
         <legend>२. जग्गाको विवरण</legend>
-        {{print_r($landDescription)}}
         <div class="row">
             <div class="mb-3">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label
                             for="landDescription.land_use_area"><b>२.१ भू-उपयोग्य क्षेत्र: </b></label>
                         <input type="text"
-                               class="@error('landDescription.land_use_area') is-invalid @enderror "
                                id="landDescription.land_use_area"
-                               name="landDescription.land_use_area"
-                               value="{{old('landDescription.land_use_area')}}"
                                wire:model="landDescription.land_use_area"
                         >
                         @error('landDescription.land_use_area')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="convert_to">Convert To</label>
+                        <select name="convert_to" id="convert_to" wire:model="conversion_id"
+                                wire:change="conversionLogic">
+                            <option value="">Select conversion Unit</option>
+                            @foreach($conversion_units as $conversion_unit)
+                                <option value="{{$conversion_unit->id}}">{{$conversion_unit->title}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -361,10 +312,7 @@
                         <label
                             for="landDescription.ward_no"><b>२.२ वडा नं: </b></label>
                         <input type="text"
-                               class="@error('landDescription.ward_no') is-invalid @enderror "
                                id="landDescription.ward_no"
-                               name="landDescription.ward_no"
-                               value="{{old('landDescription.ward_no')}}"
                                wire:model="landDescription.ward_no"
                         >
                         @error('landDescription.ward_no')
@@ -375,10 +323,7 @@
                         <label
                             for="landDescription.former_ward_no"><b>२.३ साविक वडा नं: </b></label>
                         <input type="text"
-                               class="@error('landDescription.former_ward_no') is-invalid @enderror "
                                id="landDescription.former_ward_no"
-                               name="landDescription.former_ward_no"
-                               value="{{old('landDescription.former_ward_no')}}"
                                wire:model="landDescription.former_ward_no"
                         >
                         @error('landDescription.former_ward_no')
@@ -394,10 +339,7 @@
                         <label
                             for="landDescription.tole"><b>२.४ टोलको नाम: </b></label>
                         <input type="text"
-                               class="@error('landDescription.tole') is-invalid @enderror "
                                id="landDescription.tole"
-                               name="landDescription.tole"
-                               value="{{old('landDescription.tole')}}"
                                wire:model="landDescription.tole"
                         >
                         @error('landDescription.tole')
@@ -408,10 +350,7 @@
                         <label
                             for="landDescription.street_code_no"><b>२.५ सडक कोड नं: </b></label>
                         <input type="text"
-                               class="@error('landDescription.street_code_no') is-invalid @enderror "
                                id="landDescription.street_code_no"
-                               name="landDescription.street_code_no"
-                               value="{{old('landDescription.street_code_no')}}"
                                wire:model="landDescription.street_code_no"
                         >
                         @error('landDescription.street_code_no')
@@ -427,10 +366,7 @@
                         <label
                             for="landDescription.plot_no"><b>२.६ जग्गा कित्ता नं: </b></label>
                         <input type="text"
-                               class="@error('landDescription.plot_no') is-invalid @enderror "
                                id="landDescription.plot_no"
-                               name="landDescription.plot_no"
-                               value="{{old('landDescription.plot_no')}}"
                                wire:model="landDescription.plot_no"
                         >
                         @error('landDescription.plot_no')
@@ -444,49 +380,19 @@
                 <div class="row">
                     <div class="col-md-12">
                         <b>२.७ क्षेत्रफल </b>
-                        <label for="landDescription.bigha">बिघा</label>
-                        <input type="text"
-                               class="@error('landDescription.bigha') is-invalid @enderror "
-                               id="landDescription.bigha"
-                               name="landDescription.bigha"
-                               value="{{old('landDescription.bigha')}}"
-                               wire:model="landDescription.bigha"
-                        >
-                        @error('landDescription.bigha')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                        <label for="landDescription.kattha">कठ्ठा</label>
-                        <input type="text"
-                               class="@error('landDescription.kattha') is-invalid @enderror "
-                               id="landDescription.kattha"
-                               name="landDescription.kattha"
-                               value="{{old('landDescription.kattha')}}"
-                               wire:model="landDescription.kattha"
-                        >
-                        @error('landDescription.kattha')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                        <label for="landDescription.dhur">धुर</label>
-                        <input type="text"
-                               class="@error('landDescription.dhur') is-invalid @enderror "
-                               id="landDescription.dhur"
-                               name="landDescription.dhur"
-                               value="{{old('landDescription.dhur')}}"
-                               wire:model="landDescription.dhur"
-                        >
-                        @error('landDescription.dhur')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
+                        @foreach($units as $index=>$unit)
+                            <label for="{{$unit->id}}">{{$unit->title}}</label>
+                            <input type="text" id="{{$unit->id}}" wire:model="conversion.data{{$index}}" readonly>
+                        @endforeach
+
                         {{'('}}
                         <input type="text"
-                               class="@error('landDescription.square_meter') is-invalid @enderror "
-                               id="landDescription.square_meter"
-                               name="landDescription.square_meter"
-                               value="{{old('landDescription.square_meter')}}"
-                               wire:model="landDescription.square_meter"
+                               id="landDescription.unit_value"
+                               wire:model="landDescription.unit_value"
                         >
-                        <label for="landDescription.square_meter">ब.मी.</label>
-                        @error('landDescription.square_meter')
+                        <label
+                            for="landDescription.unit_value">{{$setting->standardLandMeasurement->title ?? ''}}</label>
+                        @error('landDescription.unit_value')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
                         {{')'}}
@@ -498,13 +404,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label
-                            for="landDescription.percentage_of_area_covered_by_building"><b>२.८ भवनले ढाक्ने
-                                क्षेत्रफलको प्रतिशत (GCR): </b></label>
+                            for="landDescription.percentage_of_area_covered_by_building">
+                            <b>२.८ भवनले ढाक्ने
+                                क्षेत्रफलको प्रतिशत (GCR): </b>
+                        </label>
                         <input type="text"
-                               class="@error('landDescription.percentage_of_area_covered_by_building') is-invalid @enderror "
                                id="landDescription.percentage_of_area_covered_by_building"
-                               name="landDescription.percentage_of_area_covered_by_building"
-                               value="{{old('landDescription.percentage_of_area_covered_by_building')}}"
                                wire:model="landDescription.percentage_of_area_covered_by_building"
                         >
                         @error('landDescription.percentage_of_area_covered_by_building')
@@ -525,15 +430,14 @@
                     @foreach(\Modules\EMap\Enums\LandOwnerTypeEnum::cases() as $landOwnerType)
                         <div class="col-md-3">
                             <input type="radio"
-                                   class="@error('land_owner_type') is-invalid @enderror "
                                    id="{{$landOwnerType->name}}"
-                                   name="land_owner_type"
-                                   {{old('land_owner_type')== $landOwnerType->value?'checked':''}} value="{{$landOwnerType->value}}">
+                                   wire:model="landOwner.land_owner_type"
+                                   value="{{$landOwnerType->value}}">
                             <label
                                 for="{{$landOwnerType->name}}">{{$landOwnerType->label()}}</label>
                         </div>
                     @endforeach
-                    @error('land_owner_type')
+                    @error('landOwner.land_owner_type')
                     <span class="text-danger">{{$message}}</span>
                     @enderror
                 </div>
@@ -549,25 +453,21 @@
                                 <td>
                                     <label for="name">१.१ नाम :</label>
                                     <input type="text"
-                                           class="@error('name') is-invalid @enderror "
                                            id="name"
-                                           name="name"
-                                           value="{{old('name')}}"
+                                           wire:model="landOwner.name"
                                     >
-                                    @error('name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    @error('landOwner.name')
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
                                     <label for="phone">१.२ फोन नं. :</label>
                                     <input type="text"
-                                           class="@error('phone') is-invalid @enderror "
                                            id="phone"
-                                           name="phone"
-                                           value="{{old('phone')}}"
+                                           wire:model="landOwner.phone"
                                     >
-                                    @error('phone')
-                                    <span class="text-danger">{{$message}}</span>
+                                    @error('landOwner.phone')
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -575,38 +475,38 @@
                                 <td>
                                     <label for="father_name">१.३ बुवाको नाम :</label>
                                     <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
                                            id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
+                                           wire:model="landOwner.father_name"
                                     >
-                                    @error('father_name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    @error('landOwner.father_name')
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
-                                    <label for="father_name">१.४ नागरिकता लिएको जिल्ला :</label>
-                                    <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
-                                           id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
-                                    >
-                                    @error('father_name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <label for="landOwner.citizenship_issue_district_id">१.४ नागरिकता लिएको जिल्ला
+                                        :</label>
+                                    <select wire:model="landOwner.citizenship_issue_district_id"
+                                            id="landOwner.citizenship_issue_district_id">
+                                        <option value=""></option>
+                                        @foreach($allDistricts as $district)
+                                            <option value="{{$district->id}}">
+                                                {{$district->district}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('landOwner.citizenship_issue_district_id')
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="citizenship_number">१.५ नागरिकत नम्बर :</label>
+                                    <label for="citizenship_no">१.५ नागरिकत नम्बर :</label>
                                     <input type="text"
-                                           class="@error('citizenship_number') is-invalid @enderror "
-                                           id="citizenship_number"
-                                           name="citizenship_number"
-                                           value="{{old('citizenship_number')}}"
+                                           id="citizenship_no"
+                                           wire:model="landOwner.citizenship_no"
                                     >
-                                    @error('citizenship_number')
+                                    @error('landOwner.citizenship_no')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
@@ -617,12 +517,10 @@
                                     <label for="citizenship_issued_date">१.६ नागरिकता लिएको मिति :
                                         :</label>
                                     <input type="text"
-                                           class="@error('citizenship_issued_date') is-invalid @enderror "
                                            id="citizenship_issued_date"
-                                           name="citizenship_issued_date"
-                                           value="{{old('citizenship_issued_date')}}"
+                                           wire:model="landOwner.citizenship_issue_date"
                                     >
-                                    @error('citizenship_issued_date')
+                                    @error('landOwner.citizenship_issued_date')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
@@ -650,83 +548,81 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <label for="name">१.१ नाम :</label>
+                                    <label for="houseOwner.name">१.१ नाम :</label>
                                     <input type="text"
-                                           class="@error('name') is-invalid @enderror "
-                                           id="name"
-                                           name="name"
-                                           value="{{old('name')}}"
+                                           id="houseOwner.name"
+                                           wire:model="houseOwner.name"
                                     >
-                                    @error('name')
+                                    @error('houseOwner.name')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                                 <td>
-                                    <label for="phone">१.२ फोन नं. :</label>
+                                    <label for="houseOwner.phone">१.२ फोन नं. :</label>
                                     <input type="text"
-                                           class="@error('phone') is-invalid @enderror "
-                                           id="phone"
-                                           name="phone"
-                                           value="{{old('phone')}}"
+                                           id="houseOwner.phone"
+                                           wire:model="houseOwner.phone"
                                     >
-                                    @error('phone')
+                                    @error('houseOwner.phone')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="father_name">१.३ बुवाको नाम :</label>
+                                    <label for="houseOwner.father_name">१.३ बुवाको नाम :</label>
                                     <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
-                                           id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
+                                           id="houseOwner.father_name"
+                                           wire:model="houseOwner.father_name"
                                     >
-                                    @error('father_name')
+                                    @error('houseOwner.father_name')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                                 <td>
-                                    <label for="father_name">१.४ नागरिकता लिएको जिल्ला :</label>
-                                    <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
-                                           id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
-                                    >
-                                    @error('father_name')
+                                    <label for="houseOwner.citizenship_issue_district">
+                                        १.४ नागरिकता लिएको जिल्ला
+                                        :
+                                    </label>
+                                    <select wire:model="houseOwner.citizenship_issue_district_id">
+                                        <option value=""></option>
+                                        @foreach($allDistricts as $district)
+                                            <option value="{{$district->id}}">
+                                                {{$district->district}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('houseOwner.citizenship_issue_district_id')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="citizenship_number">१.५ नागरिकत नम्बर :</label>
+                                    <label for="houseOwner.citizenship_no">
+                                        १.५ नागरिकत नम्बर :
+                                    </label>
                                     <input type="text"
-                                           class="@error('citizenship_number') is-invalid @enderror "
-                                           id="citizenship_number"
-                                           name="citizenship_number"
-                                           value="{{old('citizenship_number')}}"
+                                           id="houseOwner.citizenship_no"
+                                           wire:model="houseOwner.citizenship_no"
                                     >
-                                    @error('citizenship_number')
-                                    <span class="text-danger">{{$message}}</span>
+                                    @error('houseOwner.citizenship_no')
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="citizenship_issued_date">१.६ नागरिकता लिएको मिति :
-                                        :</label>
+                                    <label for="citizenship_issued_date">
+                                        १.६ नागरिकता लिएको मिति :
+                                    </label>
                                     <input type="text"
-                                           class="@error('citizenship_issued_date') is-invalid @enderror "
-                                           id="citizenship_issued_date"
-                                           name="citizenship_issued_date"
-                                           value="{{old('citizenship_issued_date')}}"
+                                           id="houseOwner.citizenship_issue_date"
+                                           wire:model="houseOwner.citizenship_issue_date"
                                     >
-                                    @error('citizenship_issued_date')
-                                    <span class="text-danger">{{$message}}</span>
+                                    @error('houseOwner.citizenship_issue_date')
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td></td>
@@ -747,83 +643,75 @@
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-12">
-                        <table
-                            class="table table-hover table-responsive table-bordered">
-                            <thead>
-                            <tr>
-                                <th>विवरण</th>
-                                <th>पूर्व</th>
-                                <th>दक्षिण</th>
-                                <th>पश्चिम</th>
-                                <th>उत्तर</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach(\Modules\EMap\Enums\FourSideParticularEnum::cases() as $fourSide)
+                        <div class="table-responsive">
+                            <table
+                                class="table table-hover table-responsive table-bordered">
+                                <thead>
                                 <tr>
-                                    <td>
-                                        <label
-                                            for="name">१.{{$loop->iteration}} {{$fourSide->label()}}</label>
-                                        <input type="hidden"
-                                               class="@error('detail') is-invalid @enderror "
-                                               id="detail"
-                                               name="detail"
-                                               value="{{old('detail', $fourSide->value)}}"
-                                        >
-                                        @error('detail')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('east') is-invalid @enderror "
-                                               id="east"
-                                               name="east"
-                                               value="{{old('east')}}"
-                                        >
-                                        @error('east')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('south') is-invalid @enderror "
-                                               id="south"
-                                               name="south"
-                                               value="{{old('south')}}"
-                                        >
-                                        @error('south')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('west') is-invalid @enderror "
-                                               id="west"
-                                               name="west"
-                                               value="{{old('west')}}"
-                                        >
-                                        @error('west')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('north') is-invalid @enderror "
-                                               id="north"
-                                               name="north"
-                                               value="{{old('north')}}"
-                                        >
-                                        @error('north')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
+                                    <th>विवरण</th>
+                                    <th>पूर्व</th>
+                                    <th>दक्षिण</th>
+                                    <th>पश्चिम</th>
+                                    <th>उत्तर</th>
                                 </tr>
-                            @endforeach
+                                </thead>
+                                <tbody>
+                                @foreach($fourFortDetails as $key=>$fourFort)
+                                    <tr>
+                                        <td>
+                                            <label
+                                                for="fourFortDetail.detail">१.{{$loop->iteration}} {{\Modules\EMap\Enums\FourSideParticularEnum::tryFrom($fourFort['detail'])->label()}}</label>
+                                            <input type="hidden"
+                                                   id="fourFortDetails.{{$key}}.detail"
+                                                   wire:model="fourFortDetails.{{$key}}.detail"
+                                            >
+                                            @error("fourFortDetails.$key.detail")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="fourFortDetails.{{$key}}.east"
+                                                   wire:model="fourFortDetails.{{$key}}.east"
+                                            >
+                                            @error("fourFortDetails.$key.east")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="fourFortDetails.{{$key}}.south"
+                                                   wire:model="fourFortDetails.{{$key}}.south"
+                                            >
+                                            @error("fourFortDetails.$key.south")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="fourFortDetails.{{$key}}.west"
+                                                   wire:model="fourFortDetails.{{$key}}.west"
+                                            >
+                                            @error("fourFortDetails.$key.west")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="fourFortDetails.{{$key}}.north"
+                                                   wire:model="fourFortDetails.{{$key}}.north"
+                                            >
+                                            @error("fourFortDetails.$key.north")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                    </tr>
+                                @endforeach
 
-                            </tbody>
+                                </tbody>
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -837,83 +725,76 @@
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-12">
-                        <table
-                            class="table table-hover table-responsive table-bordered">
-                            <thead>
-                            <tr>
-                                <th>पद</th>
-                                <th>नाम</th>
-                                <th>NEC Council No.</th>
-                                <th>पालिकाको दर्ता नं</th>
-                                <th>कन्सल्टिंग फर्मबाट भए सो को नाम</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach(\Modules\EMap\Enums\PostsEnum::cases() as $posts)
+                        <div class="table-responsive">
+                            <table
+                                class="table table-hover table-bordered">
+                                <thead>
                                 <tr>
-                                    <td>
-                                        <label
-                                            for="name">१.{{$loop->iteration}} {{$posts->label()}}</label>
-                                        <input type="hidden"
-                                               class="@error('post') is-invalid @enderror "
-                                               id="post"
-                                               name="post"
-                                               value="{{old('post', $posts->value)}}"
-                                        >
-                                        @error('post')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('name') is-invalid @enderror "
-                                               id="name"
-                                               name="name"
-                                               value="{{old('name')}}"
-                                        >
-                                        @error('name')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('nec_council_no') is-invalid @enderror "
-                                               id="nec_council_no"
-                                               name="nec_council_no"
-                                               value="{{old('nec_council_no')}}"
-                                        >
-                                        @error('nec_council_no')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('local_body_registration_no') is-invalid @enderror "
-                                               id="local_body_registration_no"
-                                               name="local_body_registration_no"
-                                               value="{{old('local_body_registration_no')}}"
-                                        >
-                                        @error('local_body_registration_no')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               class="@error('consulting_firm_name') is-invalid @enderror "
-                                               id="consulting_firm_name"
-                                               name="consulting_firm_name"
-                                               value="{{old('consulting_firm_name')}}"
-                                        >
-                                        @error('consulting_firm_name')
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
-                                    </td>
+                                    <th>पद</th>
+                                    <th>नाम</th>
+                                    <th>NEC Council No.</th>
+                                    <th>पालिकाको दर्ता नं</th>
+                                    <th>कन्सल्टिंग फर्मबाट भए सो को नाम</th>
                                 </tr>
-                            @endforeach
+                                </thead>
+                                <tbody>
+                                @foreach($designerDetails as $key=>$designerDetail)
+                                    <tr>
+                                        <td>
+                                            <label
+                                                for="designerDetails.{{$key}}.post">
+                                                १.{{$loop->iteration}} {{\Modules\EMap\Enums\PostsEnum::tryFrom($designerDetail['post'])->label()}}
+                                            </label>
+                                            <input type="hidden"
+                                                   id="designerDetails.{{$key}}.post"
+                                                   wire:model="designerDetails.{{$key}}.post"
+                                            >
+                                            @error("designerDetails.$key.post")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   wire:model="designerDetails.{{$key}}.name"
+                                            >
+                                            @error("designerDetails.$key.name")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="designerDetails.{{$key}}.nec_council_no"
+                                                   wire:model="designerDetails.{{$key}}.nec_council_no"
+                                            >
+                                            @error("designerDetails.$key.nec_council_no")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="designerDetails.{{$key}}.local_body_registration_no"
+                                                   wire:model="designerDetails.{{$key}}.local_body_registration_no"
+                                            >
+                                            @error("designerDetails.$key.local_body_registration_no")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   id="designerDetails.{{$key}}.consulting_firm_name"
+                                                   wire:model="designerDetails.{{$key}}.consulting_firm_name"
+                                            >
+                                            @error("designerDetails.$key.consulting_firm_name")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                    </tr>
+                                @endforeach
 
-                            </tbody>
+                                </tbody>
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -930,22 +811,17 @@
                     @foreach(\Modules\EMap\Enums\ApplicantTypeEnum::cases() as $applicantType)
                         <div class="col-md-3">
                             <input type="radio"
-                                   class="@error('usage') is-invalid @enderror "
                                    id="{{$applicantType->name}}"
-                                   name="applicant_type"
-                                   {{old('applicant_type')== $applicantType->value?'checked':''}} value="{{$applicantType->value}}">
+                                   wire:model="applicantDetail.applicant_type"
+                                   value="{{$applicantType->value}}">
                             <label
                                 for="{{$applicantType->name}}">{{$applicantType->label()}}</label>
                         </div>
                     @endforeach
-                    @error('applicant_type')
-                    <span class="text-danger">{{$message}}</span>
+                    @error('applicantDetail.applicant_type')
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
-
-                @error('name')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
             </div>
 
             <div class="mb-3">
@@ -954,117 +830,110 @@
                     @foreach(\Modules\EMap\Enums\RelationEnum::cases() as $relation)
                         <div class="col-md-3">
                             <input type="radio"
-                                   class="@error('relation') is-invalid @enderror "
                                    id="{{$relation->name}}"
-                                   name="relation"
-                                   {{old('usage')== $relation->value?'checked':''}} value="{{$relation->value}}">
+                                   wire:model="applicantDetail.relation_with_owner"
+                                   value="{{$relation->value}}">
                             <label
                                 for="{{$relation->name}}">{{$relation->label()}}</label>
                         </div>
                     @endforeach
-                    @error('relation')
-                    <span class="text-danger">{{$message}}</span>
+                    @error('applicantDetail.relation_with_owner')
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
-
-                @error('name')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
             </div>
+            @if($applicantDetail['applicant_type']==='inheritance')
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <b>जग्गाधनी वा घरधनी भन्दा फरक भएमा</b>
+                            <table
+                                class="table table-hover table-responsive table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="applicantDetail.name">१.१ नाम :</label>
+                                        <input type="text"
+                                               id="applicantDetail.name"
+                                               wire:model="applicantDetail.name"
+                                        >
+                                        @error('applicantDetail.name')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        <label for="applicantDetail.phone">१.२ फोन नं. :</label>
+                                        <input type="text"
+                                               id="applicantDetail.phone"
+                                               wire:model="applicantDetail.phone"
+                                        >
+                                        @error('applicantDetail.phone')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="applicantDetail.father_name">१.३ बुवाको नाम :</label>
+                                        <input type="text"
+                                               id="applicantDetail.father_name"
+                                               wire:model="applicantDetail.father_name"
+                                        >
+                                        @error('applicantDetail.father_name')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        <label for="applicantDetail.citizenship_issue_district_id">
+                                            १.४ नागरिकता लिएको
+                                            जिल्ला :
+                                        </label>
+                                        <select wire:model="applicantDetail.citizenship_issue_district_id">
+                                            <option value=""></option>
+                                            @foreach($allDistricts as $district)
+                                                <option value="{{$district->id}}">
+                                                    {{$district->district}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('applicantDetail.citizenship_issue_district_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label for="applicantDetail.citizenship_no">१.५ नागरिकत नम्बर :</label>
+                                        <input type="text"
+                                               id="applicantDetail.citizenship_no"
+                                               wire:model="applicantDetail.citizenship_no"
+                                        >
+                                        @error('applicantDetail.citizenship_no')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        <label for="applicantDetail.citizenship_issued_date">
+                                            १.६ नागरिकता लिएको मिति :
+                                            :
+                                        </label>
+                                        <input type="text"
+                                               id="applicantDetail.citizenship_issue_date"
+                                               wire:model="applicantDetail.citizenship_issue_date"
+                                        >
+                                        @error('applicantDetail.citizenship_issue_date')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </td>
+                                </tr>
 
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <b>जग्गाधनी वा घरधनी भन्दा फरक भएमा</b>
-                        <table
-                            class="table table-hover table-responsive table-bordered">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <label for="name">१.१ नाम :</label>
-                                    <input type="text"
-                                           class="@error('name') is-invalid @enderror "
-                                           id="name"
-                                           name="name"
-                                           value="{{old('name')}}"
-                                    >
-                                    @error('name')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <label for="phone">१.२ फोन नं. :</label>
-                                    <input type="text"
-                                           class="@error('phone') is-invalid @enderror "
-                                           id="phone"
-                                           name="phone"
-                                           value="{{old('phone')}}"
-                                    >
-                                    @error('phone')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="father_name">१.३ बुवाको नाम :</label>
-                                    <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
-                                           id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
-                                    >
-                                    @error('father_name')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <label for="father_name">१.४ नागरिकता लिएको जिल्ला :</label>
-                                    <input type="text"
-                                           class="@error('father_name') is-invalid @enderror "
-                                           id="father_name"
-                                           name="father_name"
-                                           value="{{old('father_name')}}"
-                                    >
-                                    @error('father_name')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="citizenship_number">१.५ नागरिकत नम्बर :</label>
-                                    <input type="text"
-                                           class="@error('citizenship_number') is-invalid @enderror "
-                                           id="citizenship_number"
-                                           name="citizenship_number"
-                                           value="{{old('citizenship_number')}}"
-                                    >
-                                    @error('citizenship_number')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <label for="citizenship_issued_date">१.६ नागरिकता लिएको मिति :
-                                        :</label>
-                                    <input type="text"
-                                           class="@error('citizenship_issued_date') is-invalid @enderror "
-                                           id="citizenship_issued_date"
-                                           name="citizenship_issued_date"
-                                           value="{{old('citizenship_issued_date')}}"
-                                    >
-                                    @error('citizenship_issued_date')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                            </tr>
+                                </tbody>
 
-                            </tbody>
-
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
 
     </fieldset>
@@ -1085,7 +954,7 @@
             </div>
 
             @error('application_date')
-            <span class="text-danger">{{$message}}</span>
+            <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
         <div>
@@ -1103,7 +972,7 @@
                     for="applicant_signature"><b>निवेदकको सहि: </b></label>
             </div>
             @error('applicant_signature')
-            <span class="text-danger">{{$message}}</span>
+            <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
     </div>
@@ -1142,7 +1011,7 @@
                                                value="{{old('criteria', $criteria->value)}}"
                                         >
                                         @error('criteria')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -1153,7 +1022,7 @@
                                                value="{{old('according_to_criteria')}}"
                                         >
                                         @error('according_to_criteria')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -1164,7 +1033,7 @@
                                                value="{{old('according_to_map')}}"
                                         >
                                         @error('according_to_map')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
@@ -1175,7 +1044,7 @@
                                                value="{{old('non-compliance')}}"
                                         >
                                         @error('non-compliance')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
 
@@ -1187,7 +1056,7 @@
                                                value="{{old('remarks', $criteria->remarks())}}"
                                         >
                                         @error('remarks')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                 </tr>
@@ -1225,7 +1094,7 @@
                                            value="building category"
                                     >
                                     @error('detail')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -1236,7 +1105,7 @@
                                            value="{{old('value')}}"
                                     >
                                     @error('value')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -1247,7 +1116,7 @@
                                            value="{{old('remarks')}}"
                                     >
                                     @error('remarks')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -1263,7 +1132,7 @@
                                            value="plinth area"
                                     >
                                     @error('detail')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>

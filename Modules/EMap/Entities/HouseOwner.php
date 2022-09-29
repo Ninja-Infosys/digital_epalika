@@ -2,15 +2,14 @@
 
 namespace Modules\EMap\Entities;
 
-use App\Models\Settings\Units\Type;
-use App\Models\Settings\Units\Unit;
+use App\Models\Address\District;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class MapSetting extends Model
+class HouseOwner extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -21,18 +20,22 @@ class MapSetting extends Model
     ];
 
     protected $fillable = [
-        'map_request_form_format',
-        'land_measurement_id',
-        'land_measurement_standard_id',
+        'map_apply_id',
+        'name',
+        'phone',
+        'father_name',
+        'citizenship_issue_district_id',
+        'citizenship_no',
+        'citizenship_issue_date',
     ];
 
-    public function landMeasurement(): BelongsTo
+    public function mapApply(): BelongsTo
     {
-        return $this->belongsTo(Type::class,'land_measurement_id');
+        return $this->belongsTo(MapApply::class);
     }
 
-    public function standardLandMeasurement(): BelongsTo
+    public function citizenshipIssueDistrict(): BelongsTo
     {
-        return $this->belongsTo(Unit::class,'land_measurement_standard_id');
+        return $this->belongsTo(District::class, 'citizenship_issue_district_id');
     }
 }

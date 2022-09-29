@@ -4,6 +4,7 @@ namespace Modules\EMap\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OrganizationRegistered;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
@@ -26,16 +27,19 @@ class OrganizationController extends Controller
             403,
             'You are not allowed to employee access'
         );
-        $organization->update([
-            'is_active' => !$organization->is_active
-        ]);
 
-        if (empty($organization->password) && $organization->is_active == 1) {
+        DB::transaction(function () use ($organization) {
+            $organization->update([
+                'is_active' => !$organization->is_active
+            ]);
 
-            $url = URL::signedRoute('organization.invitation', $organization);
+            if (empty($organization->password) && $organization->is_active == 1) {
 
-            \Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
-        }
+                $url = URL::signedRoute('organization.invitation', $organization);
+
+                \Mail::to($organization->email)->send(new OrganizationRegistered($organization, $url));
+            }
+        });
 
         toast('संगठन स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();

@@ -15,6 +15,7 @@ class StoreUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'type_id' => ['required', Rule::exists('types', 'id')->withoutTrashed()],
             'measurement_unit_id' => ['required', Rule::exists('measurement_units', 'id')->withoutTrashed()],
             'title' => ['required'],
             'position' => ['nullable', 'integer'],

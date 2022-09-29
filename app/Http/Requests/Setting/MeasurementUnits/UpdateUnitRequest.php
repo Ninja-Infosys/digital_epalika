@@ -7,14 +7,15 @@ use Illuminate\Validation\Rule;
 
 class UpdateUnitRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
+            'type_id' => ['required', Rule::exists('types', 'id')->withoutTrashed()],
             'measurement_unit_id' => ['required', Rule::exists('measurement_units', 'id')->withoutTrashed()],
             'title' => ['required'],
             'position' => ['nullable', 'integer'],
@@ -24,9 +25,9 @@ class UpdateUnitRequest extends FormRequest
 
     public function messages()
     {
-        return[
-          'measurement_unit_id.required'=>'एकाइ मापन आवश्यक छ',
-            'title.required'=>'शिर्षक अनिबार्य छ '
+        return [
+            'measurement_unit_id.required' => 'एकाइ मापन आवश्यक छ',
+            'title.required' => 'शिर्षक अनिबार्य छ '
         ];
     }
 }

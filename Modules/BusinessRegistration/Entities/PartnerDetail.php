@@ -9,7 +9,7 @@ use App\Traits\EventObserveTrait;
 
 class PartnerDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',

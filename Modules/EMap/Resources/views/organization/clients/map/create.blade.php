@@ -14,7 +14,11 @@
                 </div>
                 <div class="card-body">
                     <div class="font-black">
-                        {!! $mapSetting->map_request_form_format ?? '' !!}
+                        <p>{{config('applicationDetail.to_office.to')}}</p>
+                        <p>{{config('applicationDetail.to_office.address')}}</p>
+                        <p>{{config('applicationDetail.to_office.office')}}</p>
+                        <p>{{config('applicationDetail.to_office.office_address')}}</p>
+                        <p class="text-center"><b>बिषय: भवन निर्माणको लागि नक्सापास सम्बन्धमा</b></p>
                     </div>
                     <livewire:emap::map-apply-livewire :client="$client"/>
                 </div>
@@ -30,6 +34,7 @@
 
             .building-construction-application input[type="text"],
             .building-construction-application input[type="file"],
+            .building-construction-application select,
             .building-construction-application input[type="date"] {
                 border-bottom: dotted 3px black;
                 border-top: none;
@@ -37,6 +42,13 @@
                 border-left: none;
                 margin: 0 5px;
                 /*width: 60%;*/
+            }
+
+            td>input[type="text"],
+            td>input[type="file"],
+            td>select,
+            td>input[type="date"] {
+                width: 100%;
             }
 
 

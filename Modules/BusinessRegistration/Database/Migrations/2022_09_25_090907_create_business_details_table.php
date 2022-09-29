@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('proprietor_detail_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('business_detail_name')->nullable();
-            $table->string('business_detail_en')->nullable();
+            $table->string('business_detail_name_en')->nullable();
             $table->foreignId('business_nature_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('establish_year')->nullable();
             $table->string('registration_date')->nullable();
