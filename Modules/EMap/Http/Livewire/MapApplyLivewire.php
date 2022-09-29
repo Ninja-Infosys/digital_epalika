@@ -179,6 +179,7 @@ class MapApplyLivewire extends Component
         return $this->convertedData;
     }
 
+
     public function addStoreyDetail()
     {
         $this->applyMap['storeyDetails'][] = [];
