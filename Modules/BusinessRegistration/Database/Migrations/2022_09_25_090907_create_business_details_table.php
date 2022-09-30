@@ -11,14 +11,17 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('proprietor_detail_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('business_detail_name')->nullable();
+            $table->string('submission_no')->nullable();
             $table->string('business_detail_name_en')->nullable();
-            $table->foreignId('business_nature_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('establish_year')->nullable();
+            $table->string('business_nature')->nullable();
             $table->string('registration_date')->nullable();
             $table->string('pan_no')->nullable();
-            $table->string('transaction_object')->nullable();
+            $table->string('price')->nullable();
+            $table->boolean('is_registered')->default(0);
+            $table->boolean('is_rent')->default(0);
             $table->string('amount_cost')->nullable();
-            $table->boolean('source_of_capital')->default(0);
+            $table->string('source_of_capital')->nullable();
             $table->string('purpose')->nullable();
             $table->string('employment')->nullable();
             $table->string('house_owner_name')->nullable();
@@ -28,6 +31,7 @@ return new class extends Migration {
             $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('object_transaction_sub_category_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('ward_no')->nullable();
             $table->string('way')->nullable();
             $table->string('tole')->nullable();

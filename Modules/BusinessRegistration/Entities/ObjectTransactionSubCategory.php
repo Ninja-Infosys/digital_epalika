@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EMap\Entities;
+namespace Modules\BusinessRegistration\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class CriteriaDetail extends Model
+class ObjectTransactionSubCategory extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -19,16 +19,15 @@ class CriteriaDetail extends Model
     ];
 
     protected $fillable = [
-        'map_apply_id',
-        'detail',
-        'according_to_criteria',
-        'according_to_map',
-        'compliance',
-        'remarks'
+        'title',
+        'category_a',
+        'category_b',
+        'category_c',
+        'object_transaction_id',
     ];
 
-    public function mapApply(): BelongsTo
+    public function objectTransaction(): BelongsTo
     {
-        return $this->belongsTo(MapApply::class);
+        return $this->belongsTo(ObjectTransaction::class);
     }
 }

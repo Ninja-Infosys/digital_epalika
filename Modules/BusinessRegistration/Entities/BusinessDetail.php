@@ -2,11 +2,16 @@
 
 namespace Modules\BusinessRegistration\Entities;
 
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use \Modules\BusinessRegistration\Enums\BusinessNature;
+use Modules\BusinessRegistration\Enums\SourceOfCapital;
 
 class BusinessDetail extends Model
 {
@@ -19,14 +24,16 @@ class BusinessDetail extends Model
     ];
 
     protected $fillable = [
+        'price',
+        'business_nature',
         'proprietor_detail_id',
         'business_detail_name',
         'business_detail_name_en',
+        'object_transaction_sub_category_id',
         'business_nature_id',
         'establish_year',
         'registration_date',
         'pan_no',
-        'transaction_object',
         'amount_cost',
         'source_of_capital',
         'purpose',
@@ -41,8 +48,30 @@ class BusinessDetail extends Model
         'ward_no',
         'way',
         'tole',
+        'submission_no',
+        'is_registered',
+        'is_rent'
+    ];
+    protected $casts = [
+        'business_nature' => BusinessNature::class,
+        'source_of_capital' => SourceOfCapital::class
+
     ];
 
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function localBody()
+    {
+        return $this->belongsTo(LocalBody::class);
+    }
 
     public function partnerDetails(): HasMany
     {
@@ -52,5 +81,10 @@ class BusinessDetail extends Model
     public function registeredBusinesses(): HasMany
     {
         return $this->hasMany(RegisteredBusiness::class);
+    }
+
+    public function objectTransactions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(ObjectTransaction::class);
     }
 }

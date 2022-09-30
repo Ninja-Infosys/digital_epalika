@@ -39,11 +39,17 @@
                             </li>
 
 
-                            <li class="{{request()->routeIs('admin.circular.dispatch.report') ? 'active' : ''}}">
-                                <a href="{{route('admin.circular.dispatch.report')}}">
-                                    <span> चलानी प्रणाली रिपोर्ट</span>
+                            <li class="{{request()->routeIs('admin.businessRegistration.setting.objectTransaction.index') ? 'active' : ''}}">
+                                <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">
+                                    <span>कारोबार गर्ने वस्तु</span>
                                 </a>
                             </li>
+
+                        <li class="{{request()->routeIs('admin.businessRegistration.setting.objectTransactionSubCategory.index') ? 'active' : ''}}">
+                            <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}">
+                                <span>कारोबार गर्ने वस्तु Sub Category</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
