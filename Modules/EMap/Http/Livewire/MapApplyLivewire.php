@@ -2,19 +2,24 @@
 
 namespace Modules\EMap\Http\Livewire;
 
+use App\Models\Address\District;
 use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
-use App\Models\Address\District;
-use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\StructureType;
+use Modules\EMap\Enums\BuildingDetailEnum;
+use Modules\EMap\Enums\DetailsRegardingCriteriaEnum;
 use Modules\EMap\Enums\FourSideParticularEnum;
+use Modules\EMap\Enums\PostsEnum;
 
 class MapApplyLivewire extends Component
 {
+    use WithFileUploads;
+
     public Client $client;
     public $structureTypes = [];
     public int $currentStep = 1;
@@ -91,8 +96,14 @@ class MapApplyLivewire extends Component
         'father_name' => null,
         'citizenship_issue_district_id' => null,
         'citizenship_no' => null,
-        'citizenship_issue_date' => null
+        'citizenship_issue_date' => null,
+        'application_date' => null,
+        'signature' => null
     ];
+
+    public array $criteriaDetails = [];
+
+    public array $buildingDetails = [];
 
     public function mount(Client $client)
     {
@@ -109,7 +120,7 @@ class MapApplyLivewire extends Component
         $this->structureTypes = StructureType::latest()->get();
         $this->allDistricts = District::all();
 
-        foreach (\Modules\EMap\Enums\FourSideParticularEnum::cases() as $fourSide) {
+        foreach (FourSideParticularEnum::cases() as $fourSide) {
             $this->fourFortDetails[] = [
                 'detail' => $fourSide->value,
                 'east' => null,
@@ -118,13 +129,30 @@ class MapApplyLivewire extends Component
                 'north' => null,
             ];
         }
-        foreach (\Modules\EMap\Enums\PostsEnum::cases() as $designerDetail) {
+        foreach (PostsEnum::cases() as $designerDetail) {
             $this->designerDetails[] = [
                 'post' => $designerDetail->value,
                 'name' => null,
                 'nec_council_no' => null,
                 'local_body_registration_no' => null,
                 'consulting_firm_name' => null,
+            ];
+        }
+        foreach (DetailsRegardingCriteriaEnum::cases() as $criteriaDetail) {
+            $this->criteriaDetails[] = [
+                'detail' => $criteriaDetail->value,
+                'according_to_criteria' => null,
+                'according_to_map' => null,
+                'compliance' => null,
+                'remarks' => $criteriaDetail->remarks()
+            ];
+        }
+
+        foreach (BuildingDetailEnum::cases() as $buildingDetail) {
+            $this->buildingDetails[] = [
+                'detail' => $buildingDetail->value,
+                'description' => null,
+                'remarks' => null,
             ];
         }
     }
@@ -306,7 +334,25 @@ class MapApplyLivewire extends Component
         'applicantDetail.father_name' => ['required_if:applicantDetail.applicant_type,inheritance'],
         'applicantDetail.citizenship_issue_district_id' => ['required_if:applicantDetail.applicant_type,inheritance'],
         'applicantDetail.citizenship_no' => ['required_if:applicantDetail.applicant_type,inheritance'],
-        'applicantDetail.citizenship_issue_date' => ['required_if:applicantDetail.applicant_type,inheritance']
+        'applicantDetail.citizenship_issue_date' => ['required_if:applicantDetail.applicant_type,inheritance'],
+        'applicantDetail.application_date' => ['nullable'],
+        'applicantDetail.signature' => ['required', 'image']
+    ];
+
+    protected array $criteriaDetailValidations = [
+        'criteriaDetails' => ['required', 'array'],
+        'criteriaDetails.*.detail' => ['required'],
+        'criteriaDetails.*.according_to_criteria' => ['required'],
+        'criteriaDetails.*.according_to_map' => ['required'],
+        'criteriaDetails.*.compliance' => ['required'],
+        'criteriaDetails.*.remarks' => ['nullable'],
+    ];
+
+    protected array $buildingDetailValidations = [
+        'buildingDetails' => ['required', 'array'],
+        'buildingDetails.*.detail' => ['required'],
+        'buildingDetails.*.description' => ['required'],
+        'buildingDetails.*.remarks' => ['required'],
     ];
 
     public function rules()
@@ -320,7 +366,9 @@ class MapApplyLivewire extends Component
                         $this->fourFortValidations,
                         $this->houseOwnerValidations,
                         $this->designerDetailValidations,
-                        $this->applicantDetailValidations
+                        $this->applicantDetailValidations,
+                        $this->criteriaDetailValidations,
+                        $this->buildingDetailValidations
                     );
                 }
                 break;

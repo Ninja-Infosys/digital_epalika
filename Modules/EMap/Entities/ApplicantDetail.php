@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ApplicantDetail extends Model
 {
@@ -30,6 +32,7 @@ class ApplicantDetail extends Model
         'citizenship_issue_district_id',
         'citizenship_no',
         'citizenship_issue_date',
+        'signature'
     ];
 
     public function mapApply(): BelongsTo
@@ -40,5 +43,17 @@ class ApplicantDetail extends Model
     public function citizenshipIssueDistrict(): BelongsTo
     {
         return $this->belongsTo(District::class);
+    }
+
+    public function getSignatureUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->attributes['signature']);
+    }
+
+    public function setSignatureAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['signature'] = $value->store('e_map/applicant/' . Str::slug($this->attributes['name'], '_') . '/signature', 'public');
+        }
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class CriteriaDetail extends Model
+class BuildingDetail extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -21,10 +21,8 @@ class CriteriaDetail extends Model
     protected $fillable = [
         'map_apply_id',
         'detail',
-        'according_to_criteria',
-        'according_to_map',
-        'compliance',
-        'remarks'
+        'description',
+        'remarks',
     ];
 
     public function mapApply(): BelongsTo

@@ -939,13 +939,10 @@
     </fieldset>
     <div class="d-flex justify-content-between ">
         <div>
-
             <div>
                 <input type="text"
-                       class="@error('application_date') is-invalid @enderror "
                        id="application_date"
-                       name="application_date"
-                       value="{{old('application_date')}}"
+                       wire:model="applicantDetail.application_date"
                 >
             </div>
             <div class="px-5">
@@ -953,7 +950,7 @@
                     for="application_date"><b>निबेदनको मिति : </b></label>
             </div>
 
-            @error('application_date')
+            @error('applicantDetail.application_date')
             <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
@@ -961,17 +958,15 @@
 
             <div>
                 <input type="file"
-                       class="@error('applicant_signature') is-invalid @enderror "
                        id="applicant_signature"
-                       name="applicant_signature"
-                       value="{{old('applicant_signature')}}"
+                       wire:model="applicantDetail.signature"
                 >
             </div>
             <div class="px-5">
                 <label
                     for="applicant_signature"><b>निवेदकको सहि: </b></label>
             </div>
-            @error('applicant_signature')
+            @error('applicantDetail.signature')
             <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
@@ -998,69 +993,60 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach(\Modules\EMap\Enums\DetailsRegardingCriteriaEnum::cases() as $criteria)
+                            @foreach($criteriaDetails as $key=>$criteriaDetail)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>
                                         <label
-                                            for="name">{{$criteria->label()}}</label>
+                                            for="name">
+                                            {{\Modules\EMap\Enums\DetailsRegardingCriteriaEnum::tryFrom($criteriaDetail['detail'])->label()}}
+                                        </label>
                                         <input type="hidden"
-                                               class="@error('criteria') is-invalid @enderror "
-                                               id="criteria"
-                                               name="criteria"
-                                               value="{{old('criteria', $criteria->value)}}"
+                                               id="criteriaDetails.{{$key}}.detail"
+                                               wire:model="criteriaDetails.{{$key}}.detail"
                                         >
-                                        @error('criteria')
+                                        @error("criteriaDetails.$key.detail")
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
                                         <input type="text"
-                                               class="@error('according_to_criteria') is-invalid @enderror "
-                                               id="according_to_criteria"
-                                               name="according_to_criteria"
-                                               value="{{old('according_to_criteria')}}"
+                                               wire:model="criteriaDetails.{{$key}}.according_to_criteria"
                                         >
-                                        @error('according_to_criteria')
+                                        @error("criteriaDetails.$key.according_to_criteria")
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
                                         <input type="text"
-                                               class="@error('according_to_map') is-invalid @enderror "
-                                               id="according_to_map"
-                                               name="according_to_map"
-                                               value="{{old('according_to_map')}}"
+                                               wire:model="criteriaDetails.{{$key}}.according_to_map"
                                         >
-                                        @error('according_to_map')
+                                        @error("criteriaDetails.$key.according_to_map")
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
                                         <input type="text"
-                                               class="@error('non-compliance') is-invalid @enderror "
-                                               id="non-compliance"
-                                               name="non-compliance"
-                                               value="{{old('non-compliance')}}"
+                                               wire:model="criteriaDetails.{{$key}}.compliance"
                                         >
-                                        @error('non-compliance')
+                                        @error("criteriaDetails.$key.compliance")
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
 
                                     <td>
                                         <input type="text"
-                                               class="@error('remarks') is-invalid @enderror "
-                                               id="remarks"
-                                               name="remarks"
-                                               value="{{old('remarks', $criteria->remarks())}}"
+                                               wire:model="criteriaDetails.{{$key}}.remarks"
                                         >
-                                        @error('remarks')
+                                        @error("criteriaDetails.$key.remarks")
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                 </tr>
                             @endforeach
+                            @error("criteriaDetails")
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
 
                             </tbody>
 
@@ -1082,234 +1068,43 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <label
-                                        for="name">भवनको वर्ग</label>
-                                    <input type="hidden"
-                                           class="@error('detail') is-invalid @enderror "
-                                           id="detail"
-                                           name="detail"
-                                           value="building category"
-                                    >
-                                    @error('detail')
-                                    <p class="text-danger">{{$message}}</p>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('value') is-invalid @enderror "
-                                           id="value"
-                                           name="value"
-                                           value="{{old('value')}}"
-                                    >
-                                    @error('value')
-                                    <p class="text-danger">{{$message}}</p>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('remarks') is-invalid @enderror "
-                                           id="remarks"
-                                           name="remarks"
-                                           value="{{old('remarks')}}"
-                                    >
-                                    @error('remarks')
-                                    <p class="text-danger">{{$message}}</p>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>२</td>
-                                <td>
-                                    <label
-                                        for="name">प्लिन्थको क्षेत्रफल, (जमिन तलाको)</label>
-                                    <input type="hidden"
-                                           class="@error('detail') is-invalid @enderror "
-                                           id="detail"
-                                           name="detail"
-                                           value="plinth area"
-                                    >
-                                    @error('detail')
-                                    <p class="text-danger">{{$message}}</p>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('value') is-invalid @enderror "
-                                           id="value"
-                                           name="value"
-                                           value="{{old('value')}}"
-                                    >
-                                    @error('value')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('remarks') is-invalid @enderror "
-                                           id="remarks"
-                                           name="remarks"
-                                           value="{{old('remarks')}}"
-                                    >
-                                    @error('remarks')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>३</td>
-                                <td>
-                                    <label
-                                        for="name">भवनको लम्बाई</label>
-                                    <input type="hidden"
-                                           class="@error('detail') is-invalid @enderror "
-                                           id="detail"
-                                           name="detail"
-                                           value="length"
-                                    >
-                                    @error('detail')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('value') is-invalid @enderror "
-                                           id="value"
-                                           name="value"
-                                           value="{{old('value')}}"
-                                    >
-                                    @error('value')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('remarks') is-invalid @enderror "
-                                           id="remarks"
-                                           name="remarks"
-                                           value="{{old('remarks')}}"
-                                    >
-                                    @error('remarks')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>४</td>
-                                <td>
-                                    <label
-                                        for="name">भवनको चौडाई</label>
-                                    <input type="hidden"
-                                           class="@error('detail') is-invalid @enderror "
-                                           id="detail"
-                                           name="detail"
-                                           value="breadth"
-                                    >
-                                    @error('detail')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('value') is-invalid @enderror "
-                                           id="value"
-                                           name="value"
-                                           value="{{old('value')}}"
-                                    >
-                                    @error('value')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('remarks') is-invalid @enderror "
-                                           id="remarks"
-                                           name="remarks"
-                                           value="{{old('remarks')}}"
-                                    >
-                                    @error('remarks')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>५</td>
-                                <td>
-                                    <label
-                                        for="name">भवनको तला संख्या</label>
-                                    <input type="hidden"
-                                           class="@error('detail') is-invalid @enderror "
-                                           id="detail"
-                                           name="detail"
-                                           value="storey count"
-                                    >
-                                    @error('detail')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('value') is-invalid @enderror "
-                                           id="value"
-                                           name="value"
-                                           value="{{old('value')}}"
-                                    >
-                                    @error('value')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('remarks') is-invalid @enderror "
-                                           id="remarks"
-                                           name="remarks"
-                                           value="{{old('remarks')}}"
-                                    >
-                                    @error('remarks')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>६</td>
-                                <td>
-                                    <label
-                                        for="name">भवनको कूल उचाई</label>
-                                    <input type="hidden"
-                                           class="@error('detail') is-invalid @enderror "
-                                           id="detail"
-                                           name="detail"
-                                           value="height"
-                                    >
-                                    @error('detail')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('value') is-invalid @enderror "
-                                           id="value"
-                                           name="value"
-                                           value="{{old('value')}}"
-                                    >
-                                    @error('value')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <input type="text"
-                                           class="@error('remarks') is-invalid @enderror "
-                                           id="remarks"
-                                           name="remarks"
-                                           value="{{old('remarks')}}"
-                                    >
-                                    @error('remarks')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </td>
-                            </tr>
+                            @foreach($buildingDetails as $key=>$buildingDetail)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>
+                                        <label
+                                            for="name">
+                                            {{\Modules\EMap\Enums\BuildingDetailEnum::tryFrom($buildingDetail['detail'])->label()}}
+                                        </label>
+                                        <input type="hidden"
+                                               id="detail"
+                                               wire:model="buildingDetails.{{$key}}.detail"
+                                        >
+                                        @error("buildingDetails.$key.detail")
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        <input type="text"
+                                               wire:model="buildingDetails.{{$key}}.description"
+                                        >
+                                        @error("buildingDetails.$key.description")
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        <input type="text"
+                                               wire:model="buildingDetails.{{$key}}.remarks"
+                                        >
+                                        @error("buildingDetails.$key.remarks")
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </td>
+                                </tr>
+                            @endforeach
+                            @error("buildingDetails")
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
 
                             </tbody>
 

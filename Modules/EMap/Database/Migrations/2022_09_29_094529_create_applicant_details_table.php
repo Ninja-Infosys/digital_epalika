@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->foreignId('citizenship_issue_district_id')->nullable()->constrained('districts');
             $table->string('citizenship_no')->nullable();
             $table->string('citizenship_issue_date')->nullable();
+            $table->string('application_date')->nullable();
+            $table->string('signature')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
