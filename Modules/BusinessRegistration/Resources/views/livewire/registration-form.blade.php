@@ -1,16 +1,31 @@
 <div class="card">
     <div class="card-body">
         <div class="text-center">
-            <ul class="progressbar">
-                <li class="{{ $currentStep != 1 ? '' : 'active' }}"><a href="#step-1" type="button">प्रोपाईटरको
+            <ul class="progressbar d-flex justify-content-between">
+                <li @class([
+        'active'=>!($currentStep != 1),
+        'success'=>$currentStep>1
+])><a href="#step-1" type="button">प्रोपाईटरको
                         बिवरण </a></li>
-                <li class="{{ $currentStep != 2 ? '' : 'active' }}"><a href="#step-2" type="button">ब्यावसाहिक
+                <li @class([
+        'active'=>!($currentStep != 2),
+        'success'=>$currentStep>2
+])><a href="#step-2" type="button">ब्यावसाहिक
                         बिवरण </a></li>
-                <li class="{{ $currentStep != 3 ? '' : 'active' }}"><a href="#step-3" type="button">
+                <li @class([
+        'active'=>!($currentStep != 3),
+        'success'=>$currentStep>3
+])><a href="#step-3" type="button">
                         सम्बन्धित कागज पत्र </a></li>
-                <li class="{{ $currentStep != 4 ? '' : 'active' }}"><a href="#step-4" type="button">
+                <li @class([
+        'active'=>!($currentStep != 4),
+        'success'=>$currentStep>4
+])><a href="#step-4" type="button">
                         परिचय पार्टीको साइज</a></li>
-                <li class="{{ $currentStep != 5 ? '' : 'active' }}"><a href="#step-5" type="button">
+                <li @class([
+        'active'=>!($currentStep != 5),
+        'success'=>$currentStep>5
+])><a href="#step-5" type="button">
                         अन्तिम चरण</a></li>
 
             </ul>
@@ -279,8 +294,12 @@
                                         <select
                                             class="form-select @error('form.purpose') is-invalid @enderror"
                                             wire:model="form.purpose"
-                                            id="form.purpose">
+                                            id="form.purpose" multiple>
                                             <option value="">--- उदेश्य छान्नुहोस् ---</option>
+                                            @foreach($businessPurposes as $businessPurpose)
+                                                <option
+                                                    value="{{$businessPurpose->id}}">{{$businessPurpose->title}}</option>
+                                            @endforeach
 
                                         </select>
                                         @error('form.purpose')
@@ -748,13 +767,13 @@
 
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.width" class="form-label">चौदाई</label>
+                                        <label for="form.width" class="form-label">चौडाई</label>
                                         <input
                                             name="form.width"
                                             class="form-control @error('form.width') is-invalid @enderror"
                                             type="text"
                                             id="form.width"
-                                            placeholder="चौदाई"
+                                            placeholder="चौडाई"
                                             wire:model="form.width"
                                         />
                                         @error('form.width')
@@ -989,13 +1008,20 @@
                                         </th>
                                         <td>
 
-                                                {{\Modules\BusinessRegistration\Enums\SourceOfCapital::tryFrom($form['source_of_capital'])->label()}}
+
+                                            {{!empty($form['source_of_capital']) ? \Modules\BusinessRegistration\Enums\SourceOfCapital::tryFrom($form['source_of_capital'])->label() :''}}
 
                                         </td>
                                     </tr>
                                     <tr>
                                         <th> उदेश्य</th>
-                                        <td>{{$form['purpose']}}</td>
+                                        <td>
+
+
+                                                @foreach($dbBusinessPurposes as $dbBusinessPurpose)
+                                                    {{$dbBusinessPurpose->title}}{{!$loop->last ? ", ":''}}
+                                                @endforeach
+
                                     </tr>
                                     <tr>
                                         <th>
@@ -1301,7 +1327,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>चौदाई</th>
+                                        <th>चौडाई</th>
                                         <td>
                                             @if(!empty($form['width']))
                                                 {{$form['width']}}</td>
@@ -1386,8 +1412,8 @@
                                             wire:model="form.gender"
                                             id="form.gender">
                                             <option value="">--- लिङ्ग छान्नुहोस् ---</option>
-                                            @foreach(config('defaults.gender') as $key=>$gender)
-                                                <option value="{{$gender}}">{{$key}}</option>
+                                            @foreach(\App\Enums\Gender::cases() as $key=>$gender)
+                                                <option value="{{$gender->value}}">{{$gender->label()}}</option>
                                             @endforeach
                                         </select>
                                         @error('form.gender')
@@ -1465,8 +1491,9 @@
                                             wire:model="form.education_qualification">
                                             <option value="">---शैक्षिक योग्यता ----</option>
 
-                                            <option value="Graduation">Graduation</option>
-                                            <option value="Undergraduate">Undergraduate</option>
+                                          @foreach(\Modules\BusinessRegistration\Enums\Qualification::cases() as $qualification)
+                                            <option value="{{$qualification->value}}">{{$qualification->label()}}</option>
+                                            @endforeach
 
                                         </select>
                                         @error('form.education_qualification')

@@ -36,7 +36,7 @@
                         {!! Str::words(strip_tags($officeSetting->introduction),90) !!}
                     </p>
                     <div class="button d-flex justify-content-end">
-                        <button class="btn text-white">थप पढ्नुहोस्</button>
+                        <a href="{{route('introduction')}}" class="btn text-white">थप पढ्नुहोस्</a>
                     </div>
                 </div>
             </div>

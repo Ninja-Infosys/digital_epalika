@@ -2,6 +2,7 @@
 
 namespace Modules\BusinessRegistration\Entities;
 
+use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -42,6 +43,10 @@ class ProprietorDetail extends Model
         'education_qualification',
         'occupation',
     ];
+
+    protected $casts =[
+        'gender'=>Gender::class
+        ];
 
     public function province(): BelongsTo
     {

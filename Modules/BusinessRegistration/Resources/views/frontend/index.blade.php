@@ -60,10 +60,9 @@
                 text-decoration: none;
             }
 
-            .progressbar li a:hover {
+            .progressbar li a {
                 text-decoration: none;
             }
-
             .progressbar li:before {
                 content: counter(step);
                 counter-increment: step;
@@ -78,6 +77,10 @@
                 margin: 0 auto 5px auto;
             }
 
+            .progressbar .success:before {
+                background: #5ed00f;
+                color: white;
+            }
             /*progressbar connectors*/
             .progressbar li:after {
                 content: '';

@@ -20,4 +20,6 @@ class BusinessPurpose extends Model
    protected $fillable = [
         'title'
    ];
+
+
 }
