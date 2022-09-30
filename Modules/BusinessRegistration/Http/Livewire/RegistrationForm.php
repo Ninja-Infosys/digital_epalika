@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\BusinessNature;
+use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\ObjectTransactionSubCategory;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
@@ -38,6 +39,7 @@ class RegistrationForm extends Component
     public $localBodies = [];
     public $wards = 0;
     public $objectTransactions = [];
+    public $businessPurposes =[];
 
 
     public $prices = 0;
@@ -50,6 +52,7 @@ class RegistrationForm extends Component
     public $permanent_wards = '';
 
     public $businessNatures = [];
+    public $dbBusinessPurposes =[];
 
     public array $form = [
         'name' => null,
@@ -86,7 +89,7 @@ class RegistrationForm extends Component
         'pan_no' => null,
         'amount_cost' => null,
         'source_of_capital' => null,
-        'purpose' => null,
+        'purpose' => [],
         'employment' => null,
         'house_owner_name' => null,
         'house_owner_phone' => null,
@@ -108,6 +111,7 @@ class RegistrationForm extends Component
     ];
 
 
+
     public function mount()
     {
         $officeSetting = OfficeSetting::first();
@@ -118,6 +122,7 @@ class RegistrationForm extends Component
         $this->form['local_body_id'] = $officeSetting->local_body_id;
         $this->all_districts = District::all();
         $this->businessNatures = BusinessNature::all();
+        $this->businessPurposes = BusinessPurpose::all();
         $this->objectTransactions = ObjectTransaction::with('objectTransactionSubCategories')->get();
     }
 
@@ -173,7 +178,6 @@ class RegistrationForm extends Component
         'form.price' => ['nullable'],
         'form.amount_cost' => ['nullable'],
         'form.source_of_capital' => ['nullable'],
-        'form.purpose' => ['nullable'],
         'form.employment' => ['nullable'],
         'form.house_owner_name' => ['required_if:form.is_rent,1'],
         'form.house_owner_phone' => ['required_if:form.is_rent,1'],
@@ -364,7 +368,6 @@ class RegistrationForm extends Component
                 'pan_no' => $this->form['pan_no'],
                 'amount_cost' => $this->form['amount_cost'],
                 'source_of_capital' => $this->form['source_of_capital'],
-                'purpose' => $this->form['purpose'],
                 'employment' => $this->form['employment'],
                 'house_owner_name' => $this->form['house_owner_name'],
                 'house_owner_phone' => $this->form['house_owner_phone'],
@@ -378,6 +381,7 @@ class RegistrationForm extends Component
                 'tole' => $this->form['tole'],
             ]);
 
+            $businessDetail->businessPurposes()->attach($this->form['purpose']);
 
             foreach ($this->form['threeGenerationDetails'] as $threeGenerationDetail) {
                 $proprietorDetails->threeGenerationDetails()->create([
@@ -523,6 +527,11 @@ class RegistrationForm extends Component
 
         if (!empty($this->form['issue_district_id'])) {
             $this->issue_district_preview = District::find($this->form['issue_district_id']);
+        }
+        if(!empty($this->form['purpose']))
+        {
+//            dd($this->form['purpose']);
+            $this->dbBusinessPurposes = BusinessPurpose::whereIn('id',$this->form['purpose'])->get();
         }
 
 

@@ -37,6 +37,11 @@
                                     <span>  व्यवसाय को प्रकृति </span>
                                 </a>
                             </li>
+                        <li class="{{request()->routeIs('admin.businessRegistration.setting.businessPurpose.index') ? 'active' : ''}}">
+                            <a href="{{route('admin.businessRegistration.setting.businessPurpose.index')}}">
+                                <span>  उदेश्य </span>
+                            </a>
+                        </li>
 
 
                             <li class="{{request()->routeIs('admin.businessRegistration.setting.objectTransaction.index') ? 'active' : ''}}">
