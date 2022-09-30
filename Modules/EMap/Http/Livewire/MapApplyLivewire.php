@@ -425,7 +425,14 @@ class MapApplyLivewire extends Component
                 $mapApply->buildingDetails()->create($buildingDetail);
             }
         });
-        dd('success');
+
+        $this->reset('mapApply', 'landDescription', 'landOwner', 'houseOwner', 'fourFortDetails', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
+
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => "success",
+            'title' => "धन्यबाद",
+            'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+        ]);
     }
 
     public function render()
