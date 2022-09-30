@@ -101,4 +101,14 @@ class MapApply extends Model
     {
         return $this->hasOne(ApplicantDetail::class);
     }
+
+    public function criteriaDetails(): HasMany
+    {
+        return $this->hasMany(CriteriaDetail::class);
+    }
+
+    public function buildingDetails(): HasMany
+    {
+        return $this->hasMany(BuildingDetail::class);
+    }
 }
