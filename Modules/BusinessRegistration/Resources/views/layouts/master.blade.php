@@ -16,4 +16,6 @@
         {{-- Laravel Mix - JS File --}}
         {{-- <script src="{{ mix('js/emap.js') }}"></script> --}}
     </body>
+
+
 </html>

@@ -18,3 +18,4 @@ use Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController;
 //frontendController
 
 Route::get('/business',[FrontendController::class,'business'])->name('business');
+Route::get('/proprietorDetail/{proprietorDetail}/print',[FrontendController::class,'printPdf'])->name('print');

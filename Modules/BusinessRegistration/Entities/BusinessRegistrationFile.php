@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
 
 class BusinessRegistrationFile extends Model
 {
@@ -51,6 +52,11 @@ class BusinessRegistrationFile extends Model
         {
             $this->attributes['company_registration'] = $value->store('business_registered/','public');
         }
+    }
+
+    public function getCompanyRegistrationUrlAttribute()
+    {
+        return $this->attributes['company_registration'] ? Storage::disk('public')->url($this->attributes['company_registration']):'';
     }
 
     public function setTaxPayFileAttribute($value)

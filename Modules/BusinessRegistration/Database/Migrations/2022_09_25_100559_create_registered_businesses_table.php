@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('registration_no')->nullable();
             $table->string('business_name')->nullable();
             $table->string('registration_date')->nullable();
-            $table->string('active')->nullable();
+            $table->boolean('active')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

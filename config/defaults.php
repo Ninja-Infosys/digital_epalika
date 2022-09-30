@@ -42,9 +42,9 @@ return [
         'बन्द' => 'Closed'
     ],
 
-    'gender' =>[
-        'पूरुष'=>'Male',
-        'महिला'=>'Female',
-        'अन्य'=>'Other',
-    ]
+    'gender' => [
+        'पूरुष' => 'Male',
+        'महिला' => 'Female',
+        'अन्य' => 'Other',
+    ],
 ];
