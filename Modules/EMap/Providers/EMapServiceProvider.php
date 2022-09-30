@@ -3,6 +3,8 @@
 namespace Modules\EMap\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Observers\MapApplyObserver;
 
 class EMapServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,8 @@ class EMapServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        MapApply::observe(MapApplyObserver::class);
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();

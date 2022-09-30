@@ -37,18 +37,7 @@ class MapApply extends Model
         'length',
         'breadth',
         'height',
-        'land_use_area',
-        'ward_no',
-        'former_ward_no',
-        'tole',
-        'street_code_no',
-        'plot_no',
-        'bigha',
-        'kattha',
-        'dhur',
-        'square_meter',
-        'percentage_of_area_covered_by_building',
-        'unit_id',
+        'organization_id'
     ];
 
     protected $casts = [
@@ -72,17 +61,22 @@ class MapApply extends Model
         return $this->belongsTo(Unit::class);
     }
 
-    public function landOwners(): HasMany
+    public function landDetail(): HasOne
     {
-        return $this->hasMany(LandOwner::class);
+        return $this->hasOne(LandDetail::class);
     }
 
-    public function houseOwners(): HasMany
+    public function landOwner(): HasOne
     {
-        return $this->hasMany(HouseOwner::class);
+        return $this->hasOne(LandOwner::class);
     }
 
-    public function storyDetails(): HasMany
+    public function houseOwner(): HasOne
+    {
+        return $this->hasOne(HouseOwner::class);
+    }
+
+    public function storeyDetails(): HasMany
     {
         return $this->hasMany(StoreyDetail::class);
     }

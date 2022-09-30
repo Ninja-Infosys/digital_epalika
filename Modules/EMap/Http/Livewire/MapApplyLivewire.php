@@ -6,9 +6,11 @@ use App\Models\Address\District;
 use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\Client;
+use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\StructureType;
 use Modules\EMap\Enums\BuildingDetailEnum;
@@ -279,14 +281,14 @@ class MapApplyLivewire extends Component
     ];
 
     protected array $landDescriptionValidations = [
-        'landDescription.land_use_area' => ['required'],
-        'landDescription.ward_no' => ['required'],
-        'landDescription.former_ward_no' => ['required'],
+        'landDescription.land_use_area' => ['required', 'numeric'],
+        'landDescription.ward_no' => ['required', 'integer'],
+        'landDescription.former_ward_no' => ['required', 'integer'],
         'landDescription.tole' => ['nullable'],
         'landDescription.street_code_no' => ['nullable'],
         'landDescription.plot_no' => ['required'],
         'landDescription.unit_value' => ['nullable'],
-        'landDescription.percentage_of_area_covered_by_building' => ['required'],
+        'landDescription.percentage_of_area_covered_by_building' => ['required', 'numeric'],
     ];
 
     protected array $landOwnerValidations = [
@@ -392,7 +394,38 @@ class MapApplyLivewire extends Component
     public function saveFormData()
     {
         $this->validate();
-        dd($this->validate());
+
+        DB::transaction(function () {
+            $mapApply = $this->client->mapApplies()->create($this->applyMap);
+
+            foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
+                $mapApply->storeyDetails()->create($storeyDetail);
+            }
+
+            $mapApply->landDetail()->create($this->landDescription);
+
+            $mapApply->landOwner()->create($this->landOwner);
+
+            $mapApply->houseOwner()->create($this->houseOwner);
+
+            foreach ($this->fourFortDetails as $fourFortDetail) {
+                $mapApply->fourForts()->create($fourFortDetail);
+            }
+
+            foreach ($this->designerDetails as $designerDetail) {
+                $mapApply->designerDetails()->create($designerDetail);
+            }
+            $mapApply->applicantDetail()->create($this->applicantDetail);
+
+            foreach ($this->criteriaDetails as $criteriaDetail) {
+                $mapApply->criteriaDetails()->create($criteriaDetail);
+            }
+
+            foreach ($this->buildingDetails as $buildingDetail) {
+                $mapApply->buildingDetails()->create($buildingDetail);
+            }
+        });
+        dd('success');
     }
 
     public function render()
