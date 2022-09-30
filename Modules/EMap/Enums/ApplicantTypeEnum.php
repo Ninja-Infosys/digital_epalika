@@ -6,7 +6,7 @@ enum ApplicantTypeEnum: string
 {
     case HOUSE_OWNER = 'house owner';
     case LAND_OWNER = 'land owner';
-    case IN_CASE_OF_INHERITANCE = 'In case of inheritance';
+    case IN_CASE_OF_INHERITANCE = 'inheritance';
 
     public function label(): string
     {

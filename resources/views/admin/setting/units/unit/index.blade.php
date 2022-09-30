@@ -104,5 +104,4 @@
             </div>
         </div>
     </div>
-    @livewire('converter')
 @endsection

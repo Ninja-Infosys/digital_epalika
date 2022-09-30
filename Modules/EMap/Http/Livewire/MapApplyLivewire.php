@@ -6,6 +6,7 @@ use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
 use App\Models\Address\District;
+use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapSetting;
@@ -19,6 +20,18 @@ class MapApplyLivewire extends Component
     public int $currentStep = 1;
     public bool $open_structure_type = false;
     public $allDistricts = [];
+
+    //    conversion
+    public $conversion_units = [];
+
+    public $conversion = [];
+    public MapSetting $setting;
+
+    public $conversion_id;
+
+    public $units = [];
+
+    public $convertedData = 0;
 
     public array $applyMap = [
         'construction_type' => null,
@@ -43,7 +56,7 @@ class MapApplyLivewire extends Component
         'street_code_no' => null,
         'plot_no' => null,
         'unit_value' => 0,
-        'unit_id'=>null,
+        'unit_id' => null,
         'percentage_of_area_covered_by_building' => null,
     ];
 
@@ -66,19 +79,20 @@ class MapApplyLivewire extends Component
         'citizenship_issue_date' => null
     ];
 
+    public array $fourFortDetails = [];
 
-//    conversion
-    public $conversion_units = [];
+    public array $designerDetails = [];
 
-    public $conversion = [];
-    public MapSetting $setting;
-
-    public $conversion_id;
-
-    public $units = [];
-
-    public $convertedData = 0;
-
+    public array $applicantDetail = [
+        'applicant_type' => null,
+        'relation_with_owner' => null,
+        'name' => null,
+        'phone' => null,
+        'father_name' => null,
+        'citizenship_issue_district_id' => null,
+        'citizenship_no' => null,
+        'citizenship_issue_date' => null
+    ];
 
     public function mount(Client $client)
     {
@@ -94,6 +108,25 @@ class MapApplyLivewire extends Component
         $this->client = $client;
         $this->structureTypes = StructureType::latest()->get();
         $this->allDistricts = District::all();
+
+        foreach (\Modules\EMap\Enums\FourSideParticularEnum::cases() as $fourSide) {
+            $this->fourFortDetails[] = [
+                'detail' => $fourSide->value,
+                'east' => null,
+                'west' => null,
+                'south' => null,
+                'north' => null,
+            ];
+        }
+        foreach (\Modules\EMap\Enums\PostsEnum::cases() as $designerDetail) {
+            $this->designerDetails[] = [
+                'post' => $designerDetail->value,
+                'name' => null,
+                'nec_council_no' => null,
+                'local_body_registration_no' => null,
+                'consulting_firm_name' => null,
+            ];
+        }
     }
 
 //    convert Functions
@@ -247,12 +280,48 @@ class MapApplyLivewire extends Component
         'houseOwner.citizenship_issue_date' => ['required']
     ];
 
+    protected array $fourFortValidations = [
+        'fourFortDetails' => ['required', 'array'],
+        'fourFortDetails.*.detail' => ['required'],
+        'fourFortDetails.*.east' => ['required'],
+        'fourFortDetails.*.south' => ['required'],
+        'fourFortDetails.*.west' => ['required'],
+        'fourFortDetails.*.north' => ['required'],
+    ];
+
+    protected array $designerDetailValidations = [
+        'designerDetails' => ['required', 'array'],
+        'designerDetails.*.name' => ['required'],
+        'designerDetails.*.post' => ['required'],
+        'designerDetails.*.nec_council_no' => ['required'],
+        'designerDetails.*.local_body_registration_no' => ['required'],
+        'designerDetails.*.consulting_firm_name' => ['required'],
+    ];
+
+    protected array $applicantDetailValidations = [
+        'applicantDetail.applicant_type' => ['required'],
+        'applicantDetail.relation_with_owner' => ['required'],
+        'applicantDetail.name' => ['required_if:applicantDetail.applicant_type,inheritance'],
+        'applicantDetail.phone' => ['required_if:applicantDetail.applicant_type,inheritance'],
+        'applicantDetail.father_name' => ['required_if:applicantDetail.applicant_type,inheritance'],
+        'applicantDetail.citizenship_issue_district_id' => ['required_if:applicantDetail.applicant_type,inheritance'],
+        'applicantDetail.citizenship_no' => ['required_if:applicantDetail.applicant_type,inheritance'],
+        'applicantDetail.citizenship_issue_date' => ['required_if:applicantDetail.applicant_type,inheritance']
+    ];
+
     public function rules()
     {
         switch ($this->currentStep) {
             case 1:
                 {
-                    return array_merge($this->applyMapValidations, $this->landDescriptionValidations, $this->landOwnerValidations, $this->houseOwnerValidations);
+                    return array_merge($this->applyMapValidations,
+                        $this->landDescriptionValidations,
+                        $this->landOwnerValidations,
+                        $this->fourFortValidations,
+                        $this->houseOwnerValidations,
+                        $this->designerDetailValidations,
+                        $this->applicantDetailValidations
+                    );
                 }
                 break;
             case 2:
@@ -283,6 +352,15 @@ class MapApplyLivewire extends Component
         $this->convert();
         if (!empty($this->conversion_id)) {
             $this->units = Unit::where('measurement_unit_id', $this->conversion_id)->orderByDesc('position')->get();
+        }
+
+        if ($this->applicantDetail['applicant_type'] != 'inheritance') {
+            $this->applicantDetail['name'] = null;
+            $this->applicantDetail['phone'] = null;
+            $this->applicantDetail['father_name'] = null;
+            $this->applicantDetail['citizenship_issue_district_id'] = null;
+            $this->applicantDetail['citizenship_no'] = null;
+            $this->applicantDetail['citizenship_issue_date'] = null;
         }
 
         return view('emap::livewire.map-apply-livewire');

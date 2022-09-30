@@ -28,12 +28,9 @@ return new class extends Migration {
             $table->string('tole')->nullable();
             $table->string('street_code_no')->nullable();
             $table->string('plot_no')->nullable();
-            $table->string('bigha')->nullable();
-            $table->string('kattha')->nullable();
-            $table->string('dhur')->nullable();
-            $table->string('square_meter')->nullable();
             $table->double('percentage_of_area_covered_by_building', 10, 2)->default(0);
-            $table->foreignId('unit_id')->nullable()->constrained();
+            $table->foreignId('unit_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('unit_value')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

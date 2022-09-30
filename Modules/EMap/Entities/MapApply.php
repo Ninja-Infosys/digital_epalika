@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
@@ -84,5 +85,20 @@ class MapApply extends Model
     public function storyDetails(): HasMany
     {
         return $this->hasMany(StoreyDetail::class);
+    }
+
+    public function fourForts(): HasMany
+    {
+        return $this->hasMany(FourFort::class);
+    }
+
+    public function designerDetails(): HasMany
+    {
+        return $this->hasMany(DesignerDetail::class);
+    }
+
+    public function applicantDetail(): HasOne
+    {
+        return $this->hasOne(ApplicantDetail::class);
     }
 }
