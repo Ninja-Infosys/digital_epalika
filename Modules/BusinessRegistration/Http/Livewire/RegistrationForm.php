@@ -189,6 +189,7 @@ class RegistrationForm extends Component
         'form.ward_no' => ['nullable'],
         'form.way' => ['nullable'],
         'form.tole' => ['nullable'],
+        'form.purpose'=>['nullable','array'],
         'form.partnerDetails' => ['required_if:form.business_nature,partnership', 'array'],
         'form.partnerDetails.*.relation' => ['nullable'],
         'form.partnerDetails.*.name' => ['nullable'],
@@ -353,7 +354,7 @@ class RegistrationForm extends Component
                 $time = time(),
                 $fiscalYear = OfficeSetting::with('fiscalYear')->first(),
                 $number = random_int(100000, 999999),
-                $random_number = $number.'_'.$time.'_'.$fiscalYear->fiscalYear->title,
+                $random_number = $fiscalYear->fiscalYear->title.'_'.$number.'_'.$time,
 
                 'business_detail_name' => $this->form['business_detail_name'],
                 'object_transaction_sub_category_id' => $this->form['object_transaction_sub_category_id'],
