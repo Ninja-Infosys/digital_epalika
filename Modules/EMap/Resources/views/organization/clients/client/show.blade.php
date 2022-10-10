@@ -63,26 +63,43 @@
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">
+                        <thead>
                         <tr>
-                            <th scope="col">नाम</th>
-                            <td scope="col">{{$client->name}}</td>
+                            <th scope="col">क्र.सं.</th>
+                            <th scope="col">दर्ता नं</th>
+                            <th scope="col">#</th>
                         </tr>
-                        <tr>
-                            <th scope="col">ठेगाना</th>
-                            <td scope="col">{{$client->localBody->local_body ?? ''}}
-                                -{{$client->ward_no ?? ''}}
-                                , {{$client->tole ?? ''}}
-                                , {{$client->district->district ?? ''}}
-                                , {{$client->province->province ?? ''}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">इमेल</th>
-                            <td scope="col">{{$client->email}}</td>
-                        </tr>
-                        <tr>
-                            <th scope="col">फोन</th>
-                            <td scope="col">{{$client->phone}}</td>
-                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($client->mapApplies as $mapApply)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$mapApply->registration_no ?? ''}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{{route('organization.admin.clients.mapApply.show', [$client, $mapApply])}}"
+                                           type="button" class="btn btn-info">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split"
+                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            <span class="visually-hidden">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu"
+                                             style="position: absolute; inset: 0 auto auto 0; margin: 0; transform: translate(76px, 40px);"
+                                             data-popper-placement="bottom-start">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                        @endforelse
+                        </tbody>
                     </table>
                 </div>
             </div>

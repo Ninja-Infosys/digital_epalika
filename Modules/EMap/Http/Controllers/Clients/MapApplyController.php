@@ -29,12 +29,12 @@ class MapApplyController extends Controller
         dd($request->all());
     }
 
-    public function show(MapApply $mapApply)
+    public function show(Client $client, MapApply $mapApply)
     {
         return view('emap::show');
     }
 
-    public function edit(MapApply $mapApply)
+    public function edit(Client $client, MapApply $mapApply)
     {
         return view('emap::edit');
     }
@@ -44,7 +44,7 @@ class MapApplyController extends Controller
         //
     }
 
-    public function destroy(MapApply $mapApply)
+    public function destroy(Client $client, MapApply $mapApply)
     {
         //
     }

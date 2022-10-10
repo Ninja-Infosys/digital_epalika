@@ -47,6 +47,8 @@ class ClientController extends Controller
     {
         $this->authorize('view', $client);
 
+        $client->load('mapApplies');
+
         return view('emap::organization.clients.client.show', compact('client'));
     }
 
