@@ -402,7 +402,9 @@ class MapApplyLivewire extends Component
                 $mapApply->storeyDetails()->create($storeyDetail);
             }
 
-            $mapApply->landDetail()->create($this->landDescription);
+            $mapApply->landDetail()->create($this->landDescription + [
+                    'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null
+                ]);
 
             $mapApply->landOwner()->create($this->landOwner);
 
