@@ -162,7 +162,7 @@ class MapApplyLivewire extends Component
 //    convert Functions
     public function convert()
     {
-        if (!empty($this->landDescription['unit_value']) > 0 && !empty($this->conversion_id)) {
+        if ((!empty($this->landDescription['unit_value'])) > 0 && !empty($this->conversion_id)) {
             $si_unit_value = $this->landDescription['unit_value'];
 
             $rate = $this->conversionToSmallest();
@@ -354,7 +354,7 @@ class MapApplyLivewire extends Component
         'buildingDetails' => ['required', 'array'],
         'buildingDetails.*.detail' => ['required'],
         'buildingDetails.*.description' => ['required'],
-        'buildingDetails.*.remarks' => ['required'],
+        'buildingDetails.*.remarks' => ['nullable'],
     ];
 
     public function rules()
@@ -428,7 +428,7 @@ class MapApplyLivewire extends Component
             }
         });
 
-        $this->reset('mapApply', 'landDescription', 'landOwner', 'houseOwner', 'fourFortDetails', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
+        $this->reset('applyMap', 'landDescription', 'landOwner', 'houseOwner', 'fourFortDetails', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
 
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",
