@@ -1348,7 +1348,21 @@
                             </fieldset>
                         </div>
                     </div>
+                    <div class="d-flex mt-2">
+                        <div class="form-check">
+                            <input type="checkbox"
+                                   class="form-check-input"
+                                   wire:model="form.is_check"
+                                   name="form.is_check"
+                                   id="form.is_check">
+                            <label class="form-check-label"
+                                   for="form.is_check">माथिको बिवरण पुष्टि गर्नुहोस् &nbsp;</label>
+                        </div>
 
+                    </div>
+                    @error('form.is_check')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
 
                     <div style="display: flex;justify-content: space-between;">
                         <div class="mt-2">

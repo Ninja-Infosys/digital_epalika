@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Print Admit Card</title>
+    <title>व्यवसाय दर्ता फारम</title>
     <link rel="icon" href="images/favicon.ico" sizes="16x16">
     <link rel="stylesheet" href="http://localhost/palika/assets/css/bootstrap.min.css" id="bscss">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -35,139 +35,74 @@
                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
                           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
                           crossorigin="anonymous">
-                    <style>
+
+                    <div class="container" id="section-to-print" style="margin-top: 35px;">
+                        <style>
 
 
-                        @media print {
-                            * {
-                                font-family: Kalimati !important;
+                            @media print {
+                                .button * {
+                                    visibility: hidden;
+                                }
+
+                                #section-to-print,
+                                #section-to-print * {
+                                    visibility: visible;
+                                }
+
+                                #section-to-print {
+                                    position: absolute;
+                                    left: 0;
+                                    top: 0;
+                                    margin-top: -30px;
+                                }
                             }
 
-                            .button * {
-                                visibility: hidden;
+                            .tavle {
+                                width: 550px !important;
                             }
 
-                            #section-to-print,
-                            #section-to-print * {
-                                visibility: visible;
+                            .center-container {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
                             }
 
-                            #section-to-print {
-                                position: absolute;
-                                left: 0;
-                                top: 0;
-                                margin-top: -30px;
-                            }
-                        }
-
-                        .tavle {
-                            width: 550px !important;
-                        }
-
-                        .center-container {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                        }
-
-                        .my-table {
-                            table-layout: fixed;
-                            margin-bottom: 5px;
-                            margin-top: -8px;
-                        }
-
-                        .my-table th {
-                            font-size: 9px;
-                            text-align: center;
-                        }
-
-                        .symbol-no {
-                            width: 140px;
-                            height: 20px;
-                            border: black solid 1px;
-                        }
-
-                        .pp-photo {
-                            height: 90px;
-                            width: 75px;
-                        }
-
-                        .page-break {
-                            page-break-after: always;
-                        }
-
-                        hr {
-                            border: 1px dashed black;
-                            margin-bottom: 15px;
-                            margin-top: 5px;
-                        }
-
-                        /*table {*/
-                        /*border: 1px solid black !important;*/
-                        /*}*/
-                        .table > tbody > tr > td,
-                        .table > tbody > tr > th,
-                        .table > tfoot > tr > td,
-                        .table > tfoot > tr > th,
-                        .table > thead > tr > td,
-                        .table > thead > tr > th {
-                            padding: 3px;
-                            border: 1px solid black !important;
-                        }
-
-                        .sign-p {
-                            font-size: 8px !important;
-                        }
-
-                        .note-p {
-                            font-size: 7px !important;
-                            font-style: italic;
-                        }
-
-                        .sign-box {
-                            border: black solid 1px;
-                            height: 62px;
-                            width: 80%;
-                            justify-content: center;
-                            text-align: center;
-                            margin-left: 10%;
-                            margin-right: 10%;
-                        }
-
-                        .sign-box-container {
-                            width: 33.33%;
-                            float: left;
-                            text-align: center;
-                        }
-
-                        .sign-box-container .dot-p {
-                            margin-top: 30px;
-                        }
-
-                        .admit-card-item {
-                            zoom: 0.9;
-                            margin-top: 5px;
-                        }
-
-                        @media print {
-
-                            p {
-                                line-height: 1.1 !important;
+                            .my-table {
+                                table-layout: fixed;
+                                margin-bottom: 5px;
+                                margin-top: -8px;
                             }
 
-                            /* .small-p {
-                            font-size: 10px;
-                            } */
-                            h1,
-                            h2,
-                            h3,
-                            h4,
-                            h5,
-                            h6 {
-                                margin: 3px;
-                                color: red;
+                            .my-table th {
+                                font-size: 9px;
+                                text-align: center;
                             }
 
+                            .symbol-no {
+                                width: 140px;
+                                height: 20px;
+                                border: black solid 1px;
+                            }
+
+                            .pp-photo {
+                                height: 90px;
+                                width: 75px;
+                            }
+
+                            .page-break {
+                                page-break-after: always;
+                            }
+
+                            hr {
+                                border: 1px dashed black;
+                                margin-bottom: 15px;
+                                margin-top: 5px;
+                            }
+
+                            /*table {*/
+                            /*border: 1px solid black !important;*/
+                            /*}*/
                             .table > tbody > tr > td,
                             .table > tbody > tr > th,
                             .table > tfoot > tr > td,
@@ -178,80 +113,142 @@
                                 border: 1px solid black !important;
                             }
 
-                            th,
-                            td {
+                            .sign-p {
+                                font-size: 8px !important;
+                            }
+
+                            .note-p {
+                                font-size: 7px !important;
+                                font-style: italic;
+                            }
+
+                            .sign-box {
+                                border: black solid 1px;
+                                height: 62px;
+                                width: 80%;
+                                justify-content: center;
+                                text-align: center;
+                                margin-left: 10%;
+                                margin-right: 10%;
+                            }
+
+                            .sign-box-container {
+                                width: 33.33%;
+                                float: left;
+                                text-align: center;
+                            }
+
+                            .sign-box-container .dot-p {
+                                margin-top: 30px;
+                            }
+
+                            .admit-card-item {
+                                zoom: 0.9;
+                                margin-top: 5px;
+                            }
+
+                            @media print {
+
+                                p {
+                                    line-height: 1.1 !important;
+                                }
+
+                                /* .small-p {
                                 font-size: 10px;
+                                } */
+                                h1,
+                                h2,
+                                h3,
+                                h4,
+                                h5,
+                                h6 {
+                                    margin: 3px;
+                                    color: red;
+                                }
+
+                                .table > tbody > tr > td,
+                                .table > tbody > tr > th,
+                                .table > tfoot > tr > td,
+                                .table > tfoot > tr > th,
+                                .table > thead > tr > td,
+                                .table > thead > tr > th {
+                                    padding: 3px;
+                                    border: 1px solid black !important;
+                                }
+
+                                th,
+                                td {
+                                    font-size: 10px;
+                                }
+
+                                .sign-box p {
+                                    margin-top: 20%;
+                                }
+
                             }
 
-                            .sign-box p {
-                                margin-top: 20%;
+
+                            .admission-form {
+                                min-height: 500px;
+                                margin: 0px 5px;
+                                padding: 7px;
+                                color: #000;
                             }
 
-                        }
+                            .admission-address {
+                                text-align: center;
+                            }
 
+                            .student-picture {
+                                border: 1px solid lightgray;
+                                height: 120px;
+                                width: 120px;
+                                float: right;
+                                text-align: center;
+                                line-height: 30px;
+                            }
 
-                        .admission-form {
-                            min-height: 500px;
-                            margin: 0px 5px;
-                            padding: 7px;
-                            color: #000;
-                        }
+                            .form-field {
+                                margin-bottom: 10px;
+                            }
 
-                        .admission-address {
-                            text-align: center;
-                        }
+                            .field-title {
+                                float: left;
+                                margin-right: 8px;
+                                font-size: 15px;
+                            }
 
-                        .student-picture {
-                            border: 1px solid lightgray;
-                            height: 120px;
-                            width: 120px;
-                            float: right;
-                            text-align: center;
-                            line-height: 30px;
-                        }
+                            .field-value {
+                                overflow: hidden;
+                                border-bottom: 1px dotted #708596;
+                                min-height: 25px;
+                                font-size: 15px;
 
-                        .form-field {
-                            margin-bottom: 10px;
-                        }
+                            }
 
-                        .field-title {
-                            float: left;
-                            margin-right: 8px;
-                            font-size: 15px;
-                        }
+                            .margin-top {
+                                margin-top: 20px;
+                            }
 
-                        .field-value {
-                            overflow: hidden;
-                            border-bottom: 1px dotted #708596;
-                            min-height: 25px;
-                            font-size: 15px;
+                            .admission-form-title {
+                                margin-bottom: 5px;
+                                margin-top: 10px;
+                                background-color: #e4e4e4;
+                                padding-left: 10px;
+                                font-size: 15px;
+                            }
 
-                        }
+                            .form-control {
+                                max-width: 100% !important;
+                                border: .5px solid #2A3F54;
+                                border-radius: 5px;
+                            }
 
-                        .margin-top {
-                            margin-top: 20px;
-                        }
+                            table, thead, th {
+                                font-size: 14px;
 
-                        .admission-form-title {
-                            margin-bottom: 5px;
-                            margin-top: 10px;
-                            background-color: #e4e4e4;
-                            padding-left: 10px;
-                            font-size: 15px;
-                        }
-
-                        .form-control {
-                            max-width: 100% !important;
-                            border: .5px solid #2A3F54;
-                            border-radius: 5px;
-                        }
-
-                        table, thead, th {
-                            font-size: 14px;
-
-                        }
-                    </style>
-                    <div class="container" id="section-to-print" style="margin-top: 35px;">
+                            }
+                        </style>
                         <div class="admit-card-item">
                             <div class="registration-form">
                                 <div class="row">
@@ -281,7 +278,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8 small-p" style="width: 60%; float: left;">
-                                        <p style="text-align: justify-all;">
+                                        <p style="text-align: justify-all;font-family:Kalimati">
                                             {{config('applicationDetail.to_office.to')}}
                                             <br>
                                             {{config('applicationDetail.to_office.office_name')}}
@@ -294,7 +291,7 @@
                                         <table class="table my-table">
                                             <thead>
                                             <tr>
-                                                <th>सम्बिसन नम्बर</th>
+                                                <th style="font-family:Kalimati">सम्बिसन नम्बर</th>
                                                 <th colspan="2">
                                                     {{$proprietorDetail->businessDetail->submission_no??''}}
                                                 </th>
@@ -305,7 +302,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12" style="width: 100%">
-                                        <p style="text-align: center;font-weight: bold;">
+                                        <p style="text-align: center;font-weight: bold;font-family:Kalimati">
                                             विषय:- व्यवसाय दर्ता/सम्बन्धमा ।
                                             <br>
                                         </p>
@@ -313,10 +310,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 small-p">
-                                        <p style="text-align: justify-all;justify-content: center;">
+                                        <p style="text-align: justify-all;justify-content: center;font-family:Kalimati">
                                             मैले/हामीले निम्न स्थानमा सञ्चालन गर्न लागेको व्यवसाय दर्ता गर्न/सञ्चालन
                                             गरेको व्यबसाय नवीकरण गर्न आवश्यक कागजात सहित दरखास्त गर्न आएका छु/छौं ।
-                                            नियमानुसार लाग्ने कर बु ́ाउनुको
+                                            नियमानुसार लाग्ने कर बुझाउनुको
                                             साथै {{config('applicationDetail.office_type')}}बाट समय–समयमा दिइने
                                             आदेश/निर्देशन समेत पालन गर्न मञ्जुर छु/छौं । साथै मैले/हामीले पेश गरेको
                                             कागजात तथा विवरणहरु ठीक साँचो रहेको र फरक परे कानून बमोजिम कार्वाही भएमा
@@ -329,20 +326,20 @@
                                     <div class="col-md-12 small-p">
                                         <p>व्यवसायीको नाम, थर:-<b> {{$proprietorDetail->name}}</b></p>
                                     </div>
-                                    <div class="col-md-3 small-p" style="width: 45%; float: left;">
+                                    <div class="col-md-6 small-p" style="width: 45%; float: left;">
                                         <p>व्यबसायीको स्थायी
                                             ठेगाना:-<b> {{$proprietorDetail->district->district??''}}</b> जिल्ला</p>
                                     </div>
-                                    <div class="col-md-3 small-p" style="width: 25%; float: left;">
+                                    <div class="col-md-6 small-p" style="width: 25%; float: left;">
                                         <p><b>{{$proprietorDetail->localBody->local_body??''}}</b></p>
                                     </div>
-                                    <div class="col-md-2 small-p" style="width: 15%; float: left;">
+                                    <div class="col-md-6 small-p" style="width: 15%; float: left;">
                                         <p> वडा नं.<b>{{$proprietorDetail->ward_no}}</b></p>
                                     </div>
-                                    <div class="col-md-2 small-p" style="width: 15%; float: left;">
+                                    <div class="col-md-6 small-p" style="width: 35%; float: left;">
                                         <p>मार्ग <b>{{$proprietorDetail->way}}</b></p>
                                     </div>
-                                    <div class="col-md-2 small-p" style="width: 10%; float: left;">
+                                    <div class="col-md-12 small-p" style="width: 30%; float: left;">
                                         <p>टोल <b> {{$proprietorDetail->tole}}</b></p>
                                     </div>
 
@@ -468,8 +465,8 @@
                                     <div class="col-md-12 small-p" style="width: 100%; float: left;">
                                         <p>फर्म-कम्पनीको नाम
                                             :<b>{{$proprietorDetail->businessDetail->business_detail_name ??''}}
-                                                [{{$proprietorDetail->businessDetail->business_detail_name_en ??''}}
-                                                ]</b></p>
+                                                {{$proprietorDetail->businessDetail->business_detail_name_en ??''}}
+                                                </b></p>
                                     </div>
                                     <div class="col-md-12 small-p" style="width: 100%; float: left;">
                                         <p>परिचय पाटीको साइज: (लम्बाई ...{{$proprietorDetail->introboard->length??''}}

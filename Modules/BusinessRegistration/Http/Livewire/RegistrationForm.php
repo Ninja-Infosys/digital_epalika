@@ -106,6 +106,7 @@ class RegistrationForm extends Component
         'registeredBusinesses' => [],
         'is_rent' => 0,
         'is_registered' => 0,
+        'is_check'
 
 
     ];
@@ -220,10 +221,15 @@ class RegistrationForm extends Component
         'form.square' => ['nullable'],
     ];
 
+    protected array $fifthStepValidations = [
+        'form.is_check'=>['required']
+    ];
+
     public function messages(): array
     {
         return [
             'form.name.required' => ['नाम आवश्यक छ'],
+            'form.is_check.required'=>['आवश्यक छ'],
             'form.gender.required' => ['लिंग आबश्यक छ '],
             'form.house_no.required' => ['घर न. आबश्यक छ '],
             'form.phone.required' => ['फोन आबश्यक छ '],
@@ -250,7 +256,7 @@ class RegistrationForm extends Component
             'form.threeGenerationDetails.*.mobile_no.required' => ['मोबाइल न. आबश्यक छ '],
             'form.business_detail_name.required' => ['ब्यबसायको नाम आबश्यक छ '],
             'form.business_detail_name_en.required' => ['ब्यबसायको नाम आबश्यक छ '],
-            'form.business_nature_id.required' => ['ब्यबसायको प्रकृति आबश्यक छ '],
+            'form.business_nature.required' => ['ब्यबसायको प्रकृति आबश्यक छ '],
             'form.establish_year.required' => ['स्थापना मिति आबश्यक छ '],
             'form.registration_date.required' => ['दर्ता मिति आबश्यक छ '],
             'form.pan_no.required' => ['पाना न. आबश्यक छ '],
@@ -311,9 +317,14 @@ class RegistrationForm extends Component
                     return $this->fourthStepValidations;
                 }
                 break;
+            case 5:
+                {
+                    return $this->fifthStepValidations;
+                }
+                break;
             default:
             {
-                return array_merge($this->firstStepValidations, $this->secondStepValidations, $this->thirdStepValidations, $this->fourthStepValidations);
+                return array_merge($this->firstStepValidations, $this->secondStepValidations, $this->thirdStepValidations, $this->fourthStepValidations,$this->fifthStepValidations);
             }
         }
     }
@@ -326,7 +337,6 @@ class RegistrationForm extends Component
     public function submitForm()
     {
         $this->validate();
-//        dd($this->form);
         $proprietorDetails = DB::transaction(function () {
             $proprietorDetails = ProprietorDetail::create([
                 'name' => $this->form['name'],
@@ -530,7 +540,6 @@ class RegistrationForm extends Component
         }
         if(!empty($this->form['purpose']))
         {
-//            dd($this->form['purpose']);
             $this->dbBusinessPurposes = BusinessPurpose::whereIn('id',$this->form['purpose'])->get();
         }
 

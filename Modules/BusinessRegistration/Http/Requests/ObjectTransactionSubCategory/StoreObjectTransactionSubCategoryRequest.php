@@ -3,13 +3,14 @@
 namespace Modules\BusinessRegistration\Http\Requests\ObjectTransactionSubCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class StoreObjectTransactionSubCategoryRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('objectTransactionSubCategory_create');
     }
 
     public function rules(): array
