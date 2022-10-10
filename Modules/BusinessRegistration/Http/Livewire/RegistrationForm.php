@@ -351,10 +351,9 @@ class RegistrationForm extends Component
 
             $businessDetail = $proprietorDetails->businessDetail()->create([
 
-                $time = time(),
                 $fiscalYear = OfficeSetting::with('fiscalYear')->first(),
                 $number = random_int(100000, 999999),
-                $random_number = $fiscalYear->fiscalYear->title.'_'.$number.'_'.$time,
+                $random_number = $fiscalYear->fiscalYear->title.'_'.$number,
 
                 'business_detail_name' => $this->form['business_detail_name'],
                 'object_transaction_sub_category_id' => $this->form['object_transaction_sub_category_id'],
