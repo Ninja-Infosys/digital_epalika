@@ -9,14 +9,14 @@ enum  Gender: string
     case OTHER = 'other';
 
     public function label(): string {
-        return Gender::getLabel($this);
+        return self::getLabel($this);
     }
 
     public static function getLabel(self $value): string {
         return match ($value) {
-            Gender::MALE => 'पुरुष',
-            Gender::FEMALE => 'महिला',
-            Gender::OTHER => 'अन्य',
+            self::MALE => 'पुरुष',
+            self::FEMALE => 'महिला',
+            self::OTHER => 'अन्य',
         };
     }
 }

@@ -13,15 +13,30 @@
                         </div>
                     </div>
                     <h4 class="text-center">व्यवसाय दर्ता फारम</h4>
-                    <p class="text-center">
-                        तल दिएको फर्म लाई ३ तह मा पुरा गर्नुहोस् र आफुले भरेको फर्म ठीक छ छैन विचार
-                        गरी पठाउनुहोस् ।
-                    </p>
                     <livewire:businessregistration::registration-form />
+{{--                    <button class="btn btn-primary float-right" id="printBtn1" >--}}
+{{--                        <i class="fa fa-print"></i> Print--}}
+{{--                    </button>--}}
+
+{{--                    @push('scripts')--}}
+{{--                        <script>--}}
+{{--                            $("#printBtn1").click(function(e){--}}
+{{--                                var print_area = window.open();--}}
+{{--                                print_area.document.write(document.getElementsByClassName('printSection')[0].innerHTML);--}}
+{{--                                print_area.document.close();--}}
+{{--                                print_area.focus();--}}
+{{--                                print_area.print();--}}
+{{--                                print_area.close();--}}
+
+{{--                            });--}}
+{{--                        </script>--}}
+
+{{--                    @endpush--}}
                 </div>
             </div>
         </div>
     </section>
+
     @push('styles')
         <style>
 
@@ -45,10 +60,9 @@
                 text-decoration: none;
             }
 
-            .progressbar li a:hover {
+            .progressbar li a {
                 text-decoration: none;
             }
-
             .progressbar li:before {
                 content: counter(step);
                 counter-increment: step;
@@ -63,6 +77,10 @@
                 margin: 0 auto 5px auto;
             }
 
+            .progressbar .success:before {
+                background: #5ed00f;
+                color: white;
+            }
             /*progressbar connectors*/
             .progressbar li:after {
                 content: '';

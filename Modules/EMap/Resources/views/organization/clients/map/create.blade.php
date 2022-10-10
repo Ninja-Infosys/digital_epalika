@@ -44,14 +44,27 @@
                 /*width: 60%;*/
             }
 
-            td>input[type="text"],
-            td>input[type="file"],
-            td>select,
-            td>input[type="date"] {
+            td > input[type="text"],
+            td > input[type="file"],
+            td > select,
+            td > input[type="date"] {
                 width: 100%;
             }
 
 
         </style>
+    @endpush
+
+    @push('scripts')
+        {{--listener for toastr--}}
+        <script>
+            window.addEventListener('alert_message', event => {
+                swal.fire({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                });
+            });
+        </script>
     @endpush
 @endsection

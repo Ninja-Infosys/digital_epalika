@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('detail')->nullable();
             $table->string('according_to_criteria')->nullable();
             $table->string('according_to_map')->nullable();
-            $table->string('non_compliance')->nullable();
+            $table->string('compliance')->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();

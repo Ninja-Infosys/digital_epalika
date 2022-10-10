@@ -255,9 +255,27 @@
                     <img src="{{asset('assets/frontend/image/avatar.png')}}" alt="">
                 </li>
             </ul>
+            <ul class="chat-card">
+                <li class="d-flex py-1 mx-auto">
+                    <div class="card shadow">
+                        <div class="card-body px-5 mb-0 pb-0 ">
+                            <h5 class="card-title">सेवाको शिर्षक</h5>
+                        </div>
+                        <div class="card-body px-5 pt-0 mt-0 mb-0 pb-0">
+                            <h6 class="card-subtitle mb-2 text-muted">गुनासो सुन्ने अधिकारी:</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">जिम्मेवार अधिकारी:</h6>
+                        </div>
+                        <div class="card-body px-5 pt-0 mt-0 mb-0  d-flex">
+                            <a href="" class="card-link px-3">आवश्यक कागजात</a>
+                            <p>रू.<span>200</span></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="message-write d-flex mt-1">
-            <input type="text" id="fname" class="form-control mx-2" placeholder="यहा संदेश लेखानुहोस" name="fname">
+            <input type="text" id="fname" class="form-control mx-2" placeholder="यहा संदेश लेखी पठाउनुहोस----"
+                   name="fname">
             <i class="fa fa-paper-plane send"></i>
         </div>
     </div>

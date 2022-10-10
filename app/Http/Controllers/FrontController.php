@@ -45,4 +45,49 @@ class FrontController extends Controller
     {
         return view('frontend.static.contact.index');
     }
+
+    public function introduction()
+    {
+        return view('frontend.static.introduction');
+    }
+    public function category()
+    {
+        return view('frontend.static.category.category');
+    }
+    public function representative()
+    {
+        return view('frontend.static.representive.representive');
+    }
+    public function audio()
+    {
+        return view('frontend.static.gallery.audio.index');
+    }
+    public function photo()
+    {
+        return view('frontend.static.gallery.photo.index');
+    }
+    public function single_photo()
+    {
+        return view('frontend.static.gallery.photo.single-photo');
+    }
+    public function video()
+    {
+        return view('frontend.static.gallery.video.index');
+    }
+    public function employee()
+    {
+        return view('frontend.static.employee.index');
+    }
+    public function executive()
+    {
+        return view('frontend.static.executive-board.index');
+    }
+    public function single_executive()
+    {
+        return view('frontend.static.executive-board.single-executive-board');
+    }
+    public function service_details()
+    {
+        return view('frontend.static.chat.service');
+    }
 }

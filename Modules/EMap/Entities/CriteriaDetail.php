@@ -23,7 +23,7 @@ class CriteriaDetail extends Model
         'detail',
         'according_to_criteria',
         'according_to_map',
-        'non_compliance',
+        'compliance',
         'remarks'
     ];
 
