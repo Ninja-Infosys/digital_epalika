@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('map_settings', function (Blueprint $table) {
             $table->id();
-            $table->longText('map_request_form_format');
+            $table->longText('map_request_form_format')->nullable();
             $table->foreignId('land_measurement_id')->nullable()->constrained('types')->nullOnDelete();
             $table->foreignId('land_measurement_standard_id')->nullable()->constrained('units')->nullOnDelete();
             $table->timestamps();
