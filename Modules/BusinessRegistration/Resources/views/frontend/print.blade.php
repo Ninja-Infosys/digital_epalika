@@ -39,8 +39,8 @@
 
 
                         @media print {
-                            body {
-                                font-family:Kalimati;
+                            * {
+                                font-family: Kalimati !important;
                             }
 
                             .button * {
@@ -265,7 +265,8 @@
                                          style="text-align: center; width: 50%; float: left; font-family: 'Karma', serif;">
 
                                         <x-header-component/>
-                                        <h4 style="font-size: 20px;font-family:Kalimati; ">व्यवसाय दर्ता/नवीकरण निवेदन फाराम</h4>
+                                        <h4 style="font-size: 20px;font-family:Kalimati; ">व्यवसाय दर्ता/नवीकरण निवेदन
+                                            फाराम</h4>
                                     </div>
                                     <div class="col-sm-1-1" style="width: 25%; float: right;">
                                         <!-- <img src="" class="pull-left" width="83px" height="70px" alt="qrcode" /> -->
@@ -346,34 +347,34 @@
                                     </div>
 
                                     @if($proprietorDetail->threeGenerationDetails->count() >0)
-                                    <div class="col-md-12 small-p" style="width: 100%; float: left;">
-                                        <p>तिन पुस्ते बिवरण
-                                            :<b></b></p>
-                                    </div>
-                                    <div class="col-md-12 small-p">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>नाता</th>
-                                                <th> नाम, थर</th>
-                                                <th>नाम, थर( अंग्रेजीमा)</th>
-                                                <th>नागरिकता न</th>
-                                                <th>सम्पर्क न</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($proprietorDetail->threeGenerationDetails as $detail)
+                                        <div class="col-md-12 small-p" style="width: 100%; float: left;">
+                                            <p>तिन पुस्ते बिवरण
+                                                :<b></b></p>
+                                        </div>
+                                        <div class="col-md-12 small-p">
+                                            <table class="table table-bordered">
+                                                <thead>
                                                 <tr>
-                                                    <td>{{$detail->relation}}</td>
-                                                    <td>{{$detail->name}}</td>
-                                                    <td>{{$detail->name_en}}</td>
-                                                    <td>{{$detail->citizenship_no}}</td>
-                                                    <td>{{$detail->mobile_no}}</td>
+                                                    <th>नाता</th>
+                                                    <th> नाम, थर</th>
+                                                    <th>नाम, थर( अंग्रेजीमा)</th>
+                                                    <th>नागरिकता न</th>
+                                                    <th>सम्पर्क न</th>
                                                 </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($proprietorDetail->threeGenerationDetails as $detail)
+                                                    <tr>
+                                                        <td>{{$detail->relation}}</td>
+                                                        <td>{{$detail->name}}</td>
+                                                        <td>{{$detail->name_en}}</td>
+                                                        <td>{{$detail->citizenship_no}}</td>
+                                                        <td>{{$detail->mobile_no}}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     @endif
                                 </div>
                                 <div class="row">
@@ -404,29 +405,29 @@
                                     </div>
 
                                     @if($proprietorDetail->businessDetail->is_rent==1)
-                                    <div class="col-md-6 small-p" style="width: 100%; float: left;">
-                                        <p>भाडामा भएको भए व्यवसाय रहने:
+                                        <div class="col-md-6 small-p" style="width: 100%; float: left;">
+                                            <p>भाडामा भएको भए व्यवसाय रहने:
                                             </p>
-                                    </div>
-                                    <div class="col-md-4 small-p" style="width: 100%;float: left">
-                                     <p> घर  जग्गा धनीको नाम, थर:
-                                        <b>{{$proprietorDetail->businessDetail->house_owner_name??''}}</b></p>
-                                    </div>
-                                    <div class="col-md-4 small-p" style="width: 33%; float: left;">
-                                        <p>घर जग्गा धनीको
-                                            ठेगाना:<b>{{$proprietorDetail->businessDetail->house_owner_address??''}}</b>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-2 small-p" style="width: 33%; float: left;">
-                                        <p>घर जग्गा धनीको
-                                            मोबाइल.:<b>{{$proprietorDetail->businessDetail->house_owner_phone??''}}</b>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-2 small-p" style="width: 33%; float: left;">
-                                        <p> घर जग्गा धनीको मासिक भाडा
-                                            रु.:<b>{{$proprietorDetail->businessDetail->house_owner_monthly_rent??''}}</b>
-                                        </p>
-                                    </div>
+                                        </div>
+                                        <div class="col-md-4 small-p" style="width: 100%;float: left">
+                                            <p> घर जग्गा धनीको नाम, थर:
+                                                <b>{{$proprietorDetail->businessDetail->house_owner_name??''}}</b></p>
+                                        </div>
+                                        <div class="col-md-4 small-p" style="width: 33%; float: left;">
+                                            <p>घर जग्गा धनीको
+                                                ठेगाना:<b>{{$proprietorDetail->businessDetail->house_owner_address??''}}</b>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-2 small-p" style="width: 33%; float: left;">
+                                            <p>घर जग्गा धनीको
+                                                मोबाइल.:<b>{{$proprietorDetail->businessDetail->house_owner_phone??''}}</b>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-2 small-p" style="width: 33%; float: left;">
+                                            <p> घर जग्गा धनीको मासिक भाडा
+                                                रु.:<b>{{$proprietorDetail->businessDetail->house_owner_monthly_rent??''}}</b>
+                                            </p>
+                                        </div>
                                     @endif
 
                                 </div>
@@ -437,28 +438,28 @@
                                         </p>
                                     </div>
                                     @if($proprietorDetail->businessDetail->business_nature==='partnership')
-                                    <div class="col-md-12 small-p">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>साझेदार सँगको नाता</th>
-                                                <th> साझेदार को नाम थर</th>
-                                                <th>नागरिकता न</th>
-                                                <th>सम्पर्क न</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($proprietorDetail->businessDetail->partnerDetails as $partner)
+                                        <div class="col-md-12 small-p">
+                                            <table class="table table-bordered">
+                                                <thead>
                                                 <tr>
-                                                    <td>{{$partner->relation}}</td>
-                                                    <td>{{$partner->name}}</td>
-                                                    <td>{{$partner->citizenship_no}}</td>
-                                                    <td>{{$partner->mobile_no}}</td>
+                                                    <th>साझेदार सँगको नाता</th>
+                                                    <th> साझेदार को नाम थर</th>
+                                                    <th>नागरिकता न</th>
+                                                    <th>सम्पर्क न</th>
                                                 </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($proprietorDetail->businessDetail->partnerDetails as $partner)
+                                                    <tr>
+                                                        <td>{{$partner->relation}}</td>
+                                                        <td>{{$partner->name}}</td>
+                                                        <td>{{$partner->citizenship_no}}</td>
+                                                        <td>{{$partner->mobile_no}}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     @endif
                                     <div class="col-md-12 small-p" style="width: 100%; float: left;">
                                         <p>पूँजी लगानी रु. :
@@ -476,31 +477,31 @@
                                             ..{{$proprietorDetail->introboard->square??''}}...)</p>
                                     </div>
                                     @if($proprietorDetail->businessDetail->is_registered==1)
-                                    <div class="col-md-2 small-p" style="width: 50%; float: left;">
-                                        <p>अन्यत्र दर्ता भएको भए, दर्ता नं.:<b></b></p>
-                                    </div>
-                                    <div class="col-md-12 small-p">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                            <tr>
-                                                <th>दर्ता नम्बर</th>
-                                                <th>व्यवसायको नाम</th>
-                                                <th> दर्ता मिति</th>
-                                                <th>सक्रिय</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($proprietorDetail->businessDetail->registeredBusinesses as $register)
+                                        <div class="col-md-2 small-p" style="width: 50%; float: left;">
+                                            <p>अन्यत्र दर्ता भएको भए, दर्ता नं.:<b></b></p>
+                                        </div>
+                                        <div class="col-md-12 small-p">
+                                            <table class="table table-bordered">
+                                                <thead>
                                                 <tr>
-                                                    <td>{{$register->registration_no}}</td>
-                                                    <td>{{$register->business_name}}</td>
-                                                    <td>{{$register->registration_date}}</td>
-                                                    <td>{{$register->active}}</td>
+                                                    <th>दर्ता नम्बर</th>
+                                                    <th>व्यवसायको नाम</th>
+                                                    <th> दर्ता मिति</th>
+                                                    <th>सक्रिय</th>
                                                 </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($proprietorDetail->businessDetail->registeredBusinesses as $register)
+                                                    <tr>
+                                                        <td>{{$register->registration_no}}</td>
+                                                        <td>{{$register->business_name}}</td>
+                                                        <td>{{$register->registration_date}}</td>
+                                                        <td>{{$register->active}}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     @endif
 
                                     <div class="col-md-2 small-p" style="width: 100%; float: left;">

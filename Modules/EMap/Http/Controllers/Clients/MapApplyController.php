@@ -20,13 +20,12 @@ class MapApplyController extends Controller
     public function create(Client $client)
     {
         $mapSetting = MapSetting::first();
-        $structureTypes = StructureType::latest()->get();
-        return view('emap::organization.clients.map.create', compact('client', 'mapSetting', 'structureTypes'));
+        return view('emap::organization.clients.map.create', compact('client', 'mapSetting'));
     }
 
     public function store(Request $request, Client $client)
     {
-        dd($request->all());
+
     }
 
     public function show(Client $client, MapApply $mapApply)

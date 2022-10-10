@@ -66,7 +66,9 @@
                         <thead>
                         <tr>
                             <th scope="col">क्र.सं.</th>
+                            <th scope="col">आर्थिक वर्ष</th>
                             <th scope="col">दर्ता नं</th>
+                            <th scope="col">निर्माण कार्यको किसिम</th>
                             <th scope="col">#</th>
                         </tr>
                         </thead>
@@ -74,23 +76,25 @@
                         @forelse($client->mapApplies as $mapApply)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
+                                <td>{{$mapApply->fiscalYear->title ?? ''}}</td>
                                 <td>{{$mapApply->registration_no ?? ''}}</td>
+                                <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{route('organization.admin.clients.mapApply.show', [$client, $mapApply])}}"
-                                           type="button" class="btn btn-info">
+                                           type="button" class="btn btn-info btn-sm text-white">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split"
+                                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split text-white"
                                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu"
                                              style="position: absolute; inset: 0 auto auto 0; margin: 0; transform: translate(76px, 40px);"
                                              data-popper-placement="bottom-start">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <a class="dropdown-item" href="#">भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम</a>
+                                            <a class="dropdown-item" href="#">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र</a>
+                                            <a class="dropdown-item" href="#">भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Separated link</a>
                                         </div>
