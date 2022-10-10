@@ -451,6 +451,7 @@ class MapApplyLivewire extends Component
             $this->applicantDetail['citizenship_issue_date'] = null;
         }
 
+
         return view('emap::livewire.map-apply-livewire');
     }
 }
