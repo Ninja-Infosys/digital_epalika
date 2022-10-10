@@ -36,14 +36,14 @@
                         @can('objectTransaction_access')
                             <li class="{{request()->routeIs('admin.businessRegistration.setting.objectTransaction.index') ? 'active' : ''}}">
                                 <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">
-                                    <span>कारोबार गर्ने वस्तु</span>
+                                    <span>कारोबार गर्ने वस्तु श्रेणी</span>
                                 </a>
                             </li>
                                 @endcan
                                 @can('objectTransactionSubCategory_access')
                         <li class="{{request()->routeIs('admin.businessRegistration.setting.objectTransactionSubCategory.index') ? 'active' : ''}}">
                             <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}">
-                                <span>कारोबार गर्ने वस्तु Sub Category</span>
+                                <span>कारोबार गर्ने वस्तु उप श्रेणी</span>
                             </a>
                         </li>
                                 @endcan

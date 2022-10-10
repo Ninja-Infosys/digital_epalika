@@ -378,10 +378,11 @@
 
                                     <div class="col-md-12 small-p" style="width: 35%; float: left;">
                                         <p>व्यवसाय रहने स्थानको
-                                            ठेगाना:- {{$proprietorDetail->businessDetail->province->province??''}},
+                                            ठेगाना:- <b>{{$proprietorDetail->businessDetail->province->province??''}},
 
-                                            {{$proprietorDetail->businessDetail->district->district??''}}
-                                            {{$proprietorDetail->businessDetail->locaBody->local_body??''}}
+                                            {{$proprietorDetail->businessDetail->district->district??''}} जिल्ला,
+                                            {{$proprietorDetail->businessDetail->localBody->local_body??''}}
+                                            </b>
 
                                         </p>
                                     </div>

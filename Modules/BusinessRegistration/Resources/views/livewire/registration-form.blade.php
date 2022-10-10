@@ -1352,15 +1352,15 @@
                         <div class="form-check">
                             <input type="checkbox"
                                    class="form-check-input"
-                                   wire:model="form.is_check"
-                                   name="form.is_check"
-                                   id="form.is_check">
+                                   wire:model="form.is_confirmed"
+                                   name="form.is_confirmed"
+                                   id="form.is_confirmed">
                             <label class="form-check-label"
-                                   for="form.is_check">माथिको बिवरण पुष्टि गर्नुहोस् &nbsp;</label>
+                                   for="form.is_confirmed">माथिको बिवरण पुष्टि गर्नुहोस् &nbsp;</label>
                         </div>
 
                     </div>
-                    @error('form.is_check')
+                    @error('form.is_confirmed')
                     <p class="text-danger">{{$message}}</p>
                     @enderror
 

@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}">कारोबार गर्ने वस्तु </a>
+                            <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}">कारोबार गर्ने वस्तु उप श्रेणी </a>
                         </li>
-                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु</li>
+                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु उप श्रेणी</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कारोबार गर्ने वस्तु</h4>
+                <h4 class="page-title">कारोबार गर्ने वस्तु उप श्रेणी</h4>
             </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कारोबार गर्ने वस्तु थप्नुहोस्</h4>
+                        <h4 class="header-title">कारोबार गर्ने वस्तु उप श्रेणी थप्नुहोस्</h4>
                         <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i>कारोबार गर्ने वस्तु सूची
+                            <i class="fa fa-list"></i> कारोबार गर्ने वस्तु उप श्रेणी सूची
                         </a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong> कारोबार गर्ने वस्तु</strong>
+                                <strong> कारोबार गर्ने वस्तु उप श्रेणी</strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
