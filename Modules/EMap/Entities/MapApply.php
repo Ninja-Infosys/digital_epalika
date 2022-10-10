@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,6 +26,7 @@ class MapApply extends Model
 
     protected $fillable = [
         'client_id',
+        'fiscal_year_id',
         'registration_no',
         'registration_date',
         'construction_type',
@@ -54,6 +56,11 @@ class MapApply extends Model
     public function structureType(): BelongsTo
     {
         return $this->belongsTo(StructureType::class);
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 
     public function unit(): BelongsTo
