@@ -396,6 +396,13 @@ class MapApplyLivewire extends Component
         $this->validate();
 
         DB::transaction(function () {
+
+            if ($this->applyMap['structure_type']) {
+                $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
+
+                $this->applyMap['structure_type_id'] = $structure_type->id ?? '';
+            }
+
             $mapApply = $this->client->mapApplies()->create($this->applyMap);
 
             foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {

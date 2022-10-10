@@ -67,6 +67,7 @@
                         <tr>
                             <th scope="col">क्र.सं.</th>
                             <th scope="col">दर्ता नं</th>
+                            <th scope="col">निर्माण कार्यको किसिम</th>
                             <th scope="col">#</th>
                         </tr>
                         </thead>
@@ -75,13 +76,14 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$mapApply->registration_no ?? ''}}</td>
+                                <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                                 <td>
-                                    <div class="btn-group">
+                                    <div class="btn-group ">
                                         <a href="{{route('organization.admin.clients.mapApply.show', [$client, $mapApply])}}"
-                                           type="button" class="btn btn-info">
+                                           type="button" class="btn btn-info text-white">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split"
+                                        <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split text-white"
                                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
