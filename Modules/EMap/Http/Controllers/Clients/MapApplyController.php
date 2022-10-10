@@ -20,21 +20,20 @@ class MapApplyController extends Controller
     public function create(Client $client)
     {
         $mapSetting = MapSetting::first();
-        $structureTypes = StructureType::latest()->get();
-        return view('emap::organization.clients.map.create', compact('client', 'mapSetting', 'structureTypes'));
+        return view('emap::organization.clients.map.create', compact('client', 'mapSetting'));
     }
 
     public function store(Request $request, Client $client)
     {
-        dd($request->all());
+
     }
 
-    public function show(MapApply $mapApply)
+    public function show(Client $client, MapApply $mapApply)
     {
         return view('emap::show');
     }
 
-    public function edit(MapApply $mapApply)
+    public function edit(Client $client, MapApply $mapApply)
     {
         return view('emap::edit');
     }
@@ -44,7 +43,7 @@ class MapApplyController extends Controller
         //
     }
 
-    public function destroy(MapApply $mapApply)
+    public function destroy(Client $client, MapApply $mapApply)
     {
         //
     }

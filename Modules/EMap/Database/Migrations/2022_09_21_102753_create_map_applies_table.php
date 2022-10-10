@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('usage');
             $table->string('building_category');
             $table->foreignId('structure_type_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('fiscal_year_id')->nullable()->constrained()->cascadeOnDelete();
             $table->double('current_storey', 8, 2);
             $table->double('future_storey', 8, 2);
             $table->double('area_of_plinth', 12, 2);

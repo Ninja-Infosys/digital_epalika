@@ -162,7 +162,7 @@ class MapApplyLivewire extends Component
 //    convert Functions
     public function convert()
     {
-        if (!empty($this->landDescription['unit_value']) > 0 && !empty($this->conversion_id)) {
+        if ((!empty($this->landDescription['unit_value'])) > 0 && !empty($this->conversion_id)) {
             $si_unit_value = $this->landDescription['unit_value'];
 
             $rate = $this->conversionToSmallest();
@@ -354,7 +354,7 @@ class MapApplyLivewire extends Component
         'buildingDetails' => ['required', 'array'],
         'buildingDetails.*.detail' => ['required'],
         'buildingDetails.*.description' => ['required'],
-        'buildingDetails.*.remarks' => ['required'],
+        'buildingDetails.*.remarks' => ['nullable'],
     ];
 
     public function rules()
@@ -396,6 +396,13 @@ class MapApplyLivewire extends Component
         $this->validate();
 
         DB::transaction(function () {
+
+            if ($this->applyMap['structure_type']) {
+                $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
+
+                $this->applyMap['structure_type_id'] = $structure_type->id ?? '';
+            }
+
             $mapApply = $this->client->mapApplies()->create($this->applyMap);
 
             foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
@@ -426,7 +433,7 @@ class MapApplyLivewire extends Component
             }
         });
 
-        $this->reset('mapApply', 'landDescription', 'landOwner', 'houseOwner', 'fourFortDetails', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
+        $this->reset('applyMap', 'landDescription', 'landOwner', 'houseOwner', 'fourFortDetails', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
 
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",
@@ -450,6 +457,7 @@ class MapApplyLivewire extends Component
             $this->applicantDetail['citizenship_no'] = null;
             $this->applicantDetail['citizenship_issue_date'] = null;
         }
+
 
         return view('emap::livewire.map-apply-livewire');
     }
