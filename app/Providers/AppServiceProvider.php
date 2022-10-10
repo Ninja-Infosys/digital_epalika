@@ -25,7 +25,6 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
     }
 
-
     public function boot()
     {
         view()->share('important_links', ImportantLink::all());
