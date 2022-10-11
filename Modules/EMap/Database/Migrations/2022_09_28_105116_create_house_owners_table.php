@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('house_owners', function (Blueprint $table) {
@@ -17,6 +16,7 @@ return new class extends Migration
             $table->string('citizenship_issue_district_id')->nullable();
             $table->string('citizenship_no')->nullable();
             $table->string('citizenship_issue_date')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
