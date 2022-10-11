@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Settings\OfficeSetting;
+use App\Models\Website\ImportantLink;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,7 +16,9 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        view()->share('officeSetting', OfficeSetting::first());
+        view()->share('important_links', ImportantLink::all());
+        view()->share('officeSetting', OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first());
+
     }
 
     public function deleteFile($file_url)
