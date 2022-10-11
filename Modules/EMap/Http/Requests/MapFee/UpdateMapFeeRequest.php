@@ -17,7 +17,6 @@ class UpdateMapFeeRequest extends FormRequest
     {
         return [
             'storey' => ['required', 'string', 'max:255'],
-            'unit_id' => ['required', Rule::exists('units', 'id')->withoutTrashed()],
             'rate' => ['required', 'numeric']
         ];
     }
@@ -26,7 +25,6 @@ class UpdateMapFeeRequest extends FormRequest
     {
         return [
             'storey.required' => 'तल्ला आवश्यक छ',
-            'unit_id.required' => 'एकाइ आवश्यक छ',
             'rate.required' => 'दर आवश्यक छ',
             'rate.numeric' => 'दर संख्यात्मक हुनुपर्छ',
         ];

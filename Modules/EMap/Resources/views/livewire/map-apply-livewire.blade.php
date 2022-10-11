@@ -214,13 +214,13 @@
                                     <tr>
                                         <td>
                                             <select
-                                                wire:model="applyMap.storeyDetails.{{$index}}.storey">
+                                                wire:model="applyMap.storeyDetails.{{$index}}.map_fee_id">
                                                 <option value="">छान्नुहोस्</option>
                                                 @foreach($mapFees as $mapFee)
                                                     <option value="{{$mapFee->id}}">{{$mapFee->storey}}</option>
                                                 @endforeach
                                             </select>
-                                            @error("applyMap.storeyDetails.".$index.".storey")
+                                            @error("applyMap.storeyDetails.".$index.".map_fee_id")
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </td>
@@ -759,6 +759,8 @@
                                 <tr>
                                     <th>पद</th>
                                     <th>नाम</th>
+                                    <th>फोन</th>
+                                    <th>ठेगाना</th>
                                     <th>NEC Council No.</th>
                                     <th>पालिकाको दर्ता नं</th>
                                     <th>कन्सल्टिंग फर्मबाट भए सो को नाम</th>
@@ -785,6 +787,22 @@
                                                    wire:model="designerDetails.{{$key}}.name"
                                             >
                                             @error("designerDetails.$key.name")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   wire:model="designerDetails.{{$key}}.phone"
+                                            >
+                                            @error("designerDetails.$key.phone")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   wire:model="designerDetails.{{$key}}.address"
+                                            >
+                                            @error("designerDetails.$key.address")
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>

@@ -2,12 +2,14 @@
 
 namespace Modules\EMap\Http\Controllers;
 
+use App\Models\Settings\OfficeSetting;
 use App\Models\Settings\Units\Unit;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\EMap\Entities\MapFee;
+use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Http\Requests\MapFee\StoreMapFeeRequest;
 use Modules\EMap\Http\Requests\MapFee\UpdateMapFeeRequest;
 
@@ -32,9 +34,7 @@ class MapFeeController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $units = Unit::orderBy('position')->get();
-
-        return view('emap::admin.map_fee.create', compact('units'));
+        return view('emap::admin.map_fee.create');
     }
 
     public function store(StoreMapFeeRequest $request)
@@ -44,7 +44,9 @@ class MapFeeController extends Controller
             'You are not allowed to access this resource'
         );
 
-        MapFee::create($request->validated());
+        MapFee::create($request->validated() + [
+                'unit_id' => MapSetting::first()->land_measurement_standard_id
+            ]);
 
         toast('नक्सा शुल्क सफलतापूर्वक थपियो', 'success');
         return back();
@@ -67,9 +69,7 @@ class MapFeeController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $units = Unit::orderBy('position')->get();
-
-        return view('emap::admin.map_fee.edit', compact('mapFee', 'units'));
+        return view('emap::admin.map_fee.edit', compact('mapFee'));
     }
 
     public function update(UpdateMapFeeRequest $request, MapFee $mapFee)
@@ -79,7 +79,9 @@ class MapFeeController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $mapFee->update($request->validated());
+        $mapFee->update($request->validated() + [
+                'unit_id' => MapSetting::first()->land_measurement_standard_id
+            ]);
 
         toast('नक्सा शुल्क सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('emap.admin.mapFee.index'));
