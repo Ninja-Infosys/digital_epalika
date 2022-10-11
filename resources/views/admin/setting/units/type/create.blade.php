@@ -49,7 +49,7 @@
                                         value="{{old('title')}}"
                                         class="form-control @error('title') is-invalid @enderror"
                                         id="title"
-                                        placeholder="आर्थिक बर्ष "
+                                        placeholder="मापन एकाइ प्रकार"
                                     />
                                     @error('title')
                                     <div class="invalid-feedback">{{$message}}</div>

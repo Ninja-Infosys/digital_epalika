@@ -12,15 +12,28 @@ class ApplicationController extends Controller
 {
     public function mapAcceptance(Client $client, MapApply $mapApply)
     {
-        return view('emap::organization.clients.map.application.map_acceptance', compact('client','mapApply'));
+        return view('emap::organization.clients.map.application.map_acceptance', compact('client', 'mapApply'));
     }
+
     public function mapAcceptancePrint(Client $client, MapApply $mapApply)
     {
         return view('emap::organization.clients.map.application.map_acceptance_print', compact('client'));
     }
 
-    public function approvalApplicationFromTechnician(Client $client, MapApply $mapApply)
+    public function technicianApproval(Client $client, MapApply $mapApply)
     {
+        $client->load('province',
+            'district',
+            'localBody');
+        return view('emap::organization.clients.map.application.technician_approval', compact('client', 'mapApply'));
+    }
+
+    public function technicianApprovalPrint(Client $client, MapApply $mapApply)
+    {
+        $client->load('province',
+            'district',
+            'localBody');
+        return view('emap::organization.clients.map.application.technician_approval_print', compact('client', 'mapApply'));
 
     }
 

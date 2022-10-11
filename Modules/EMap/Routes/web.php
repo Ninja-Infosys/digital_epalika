@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\OrganizationAuthController;
 
 Route::prefix('organization')->as('organization.')->group(function () {

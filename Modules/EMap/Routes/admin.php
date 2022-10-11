@@ -1,6 +1,7 @@
 <?php
 
 use Modules\EMap\Http\Controllers\MapFeeController;
+use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\MapSettingController;
 use Modules\EMap\Http\Controllers\OrganizationController;
 
@@ -12,3 +13,4 @@ Route::prefix('setting')->group(function () {
     Route::resource('mapFee', MapFeeController::class);
 });
 
+Route::resource('setting', MapSettingController::class)->only('index', 'store');
