@@ -16,8 +16,8 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        view()->share('important_links', ImportantLink::all());
-        view()->share('officeSetting', OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first());
+//        view()->share('important_links', ImportantLink::all());
+//        view()->share('officeSetting', OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first());
 
     }
 
