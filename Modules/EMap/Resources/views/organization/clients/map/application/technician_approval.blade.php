@@ -21,7 +21,7 @@
                 <div class="card-body p-3">
                     <div class="font-black">
                         <p>{{config('applicationDetail.to_office.to')}}</p>
-                        <p>{{config('applicationDetail.to_office.address')}}</p>
+                        <p>{{config('applicationDetail.to_office.office_name')}}</p>
                         <p>{{config('applicationDetail.to_office.office')}}</p>
                         <p>{{config('applicationDetail.to_office.office_address')}}</p>
                         <p class="text-center"><b>बिषय: मापदण्ड अनुसार भवन डिजाईन गरिएको सम्बन्धमा मन्जुरी पत्र ।</b></p>

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{app()->getLocale()}}">
+
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+
 <head>
+
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>{{config('app.name')}}</title>
@@ -21,6 +24,7 @@
         }
     </style>
 </head>
+
 <body>
 
 
@@ -42,6 +46,8 @@
         </div>
     </div>
     <hr>
+    <div class=" ">
+
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="font-black">
@@ -73,6 +79,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
 </section>
 <script>
