@@ -12,5 +12,3 @@ Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
 });
-
-Route::resource('setting', MapSettingController::class)->only('index', 'store');
