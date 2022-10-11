@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Observers;
 
+use App\Models\Settings\OfficeSetting;
 use Modules\EMap\Entities\MapApply;
 
 class MapApplyObserver
@@ -9,7 +10,7 @@ class MapApplyObserver
 
     public function creating(MapApply $mapApply)
     {
-        $fiscal_year = $officeSetting->fiscal_year_id ?? '';
+        $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;
         $mapApply->organization_id = auth('organization')->user()->id;
         $mapApply->registration_date = now();
         $mapApply->fiscal_year_id = $fiscal_year;

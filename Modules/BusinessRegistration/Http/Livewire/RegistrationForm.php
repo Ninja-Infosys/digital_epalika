@@ -39,7 +39,7 @@ class RegistrationForm extends Component
     public $localBodies = [];
     public $wards = 0;
     public $objectTransactions = [];
-    public $businessPurposes =[];
+    public $businessPurposes = [];
 
 
     public $prices = 0;
@@ -52,7 +52,7 @@ class RegistrationForm extends Component
     public $permanent_wards = '';
 
     public $businessNatures = [];
-    public $dbBusinessPurposes =[];
+    public $dbBusinessPurposes = [];
 
     public array $form = [
         'name' => null,
@@ -106,10 +106,9 @@ class RegistrationForm extends Component
         'registeredBusinesses' => [],
         'is_rent' => 0,
         'is_registered' => 0,
-
+        'is_confirmed' => null
 
     ];
-
 
 
     public function mount()
@@ -166,8 +165,8 @@ class RegistrationForm extends Component
     ];
 
     protected array $secondStepValidations = [
-        'form.is_rent'=>['nullable'],
-        'form.is_registered'=>['nullable'],
+        'form.is_rent' => ['nullable'],
+        'form.is_registered' => ['nullable'],
         'form.business_detail_name' => ['nullable'],
         'form.business_detail_name_en' => ['nullable'],
         'form.business_nature' => ['required'],
@@ -189,7 +188,7 @@ class RegistrationForm extends Component
         'form.ward_no' => ['nullable'],
         'form.way' => ['nullable'],
         'form.tole' => ['nullable'],
-        'form.purpose'=>['nullable','array'],
+        'form.purpose' => ['nullable', 'array'],
         'form.partnerDetails' => ['required_if:form.business_nature,partnership', 'array'],
         'form.partnerDetails.*.relation' => ['nullable'],
         'form.partnerDetails.*.name' => ['nullable'],
@@ -220,10 +219,15 @@ class RegistrationForm extends Component
         'form.square' => ['nullable'],
     ];
 
+    protected array $fifthStepValidations = [
+        'form.is_confirmed' => ['required']
+    ];
+
     public function messages(): array
     {
         return [
             'form.name.required' => ['नाम आवश्यक छ'],
+            'form.is_confirmed.required' => ['बिवरण पुष्टि गर्नुहोस्'],
             'form.gender.required' => ['लिंग आबश्यक छ '],
             'form.house_no.required' => ['घर न. आबश्यक छ '],
             'form.phone.required' => ['फोन आबश्यक छ '],
@@ -250,7 +254,7 @@ class RegistrationForm extends Component
             'form.threeGenerationDetails.*.mobile_no.required' => ['मोबाइल न. आबश्यक छ '],
             'form.business_detail_name.required' => ['ब्यबसायको नाम आबश्यक छ '],
             'form.business_detail_name_en.required' => ['ब्यबसायको नाम आबश्यक छ '],
-            'form.business_nature_id.required' => ['ब्यबसायको प्रकृति आबश्यक छ '],
+            'form.business_nature.required' => ['ब्यबसायको प्रकृति आबश्यक छ '],
             'form.establish_year.required' => ['स्थापना मिति आबश्यक छ '],
             'form.registration_date.required' => ['दर्ता मिति आबश्यक छ '],
             'form.pan_no.required' => ['पाना न. आबश्यक छ '],
@@ -313,7 +317,7 @@ class RegistrationForm extends Component
                 break;
             default:
             {
-                return array_merge($this->firstStepValidations, $this->secondStepValidations, $this->thirdStepValidations, $this->fourthStepValidations);
+                return array_merge($this->firstStepValidations, $this->secondStepValidations, $this->thirdStepValidations, $this->fourthStepValidations, $this->fifthStepValidations);
             }
         }
     }
@@ -326,7 +330,6 @@ class RegistrationForm extends Component
     public function submitForm()
     {
         $this->validate();
-//        dd($this->form);
         $proprietorDetails = DB::transaction(function () {
             $proprietorDetails = ProprietorDetail::create([
                 'name' => $this->form['name'],
@@ -353,14 +356,14 @@ class RegistrationForm extends Component
 
                 $fiscalYear = OfficeSetting::with('fiscalYear')->first(),
                 $number = random_int(100000, 999999),
-                $random_number = $fiscalYear->fiscalYear->title.'_'.$number,
+                $random_number = $fiscalYear->fiscalYear->title . '_' . $number,
 
                 'business_detail_name' => $this->form['business_detail_name'],
                 'object_transaction_sub_category_id' => $this->form['object_transaction_sub_category_id'],
                 'price' => $this->form['price'],
                 'is_rent' => $this->form['is_rent'],
                 'is_registered' => $this->form['is_registered'],
-                'submission_no'=>$random_number,
+                'submission_no' => $random_number,
                 'business_detail_name_en' => $this->form['business_detail_name_en'],
                 'business_nature' => $this->form['business_nature'],
                 'establish_year' => $this->form['establish_year'],
@@ -428,8 +431,6 @@ class RegistrationForm extends Component
             return $proprietorDetails;
 
         });
-
-
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",
             'title' => "धन्यबाद",
@@ -438,7 +439,7 @@ class RegistrationForm extends Component
 
         $this->reset('form');
 
-        return redirect()->route('businessRegistration.print',$proprietorDetails->id);
+        return redirect()->route('businessRegistration.print', $proprietorDetails->id);
     }
 
     public function documentsArrayIncrement()
@@ -528,10 +529,8 @@ class RegistrationForm extends Component
         if (!empty($this->form['issue_district_id'])) {
             $this->issue_district_preview = District::find($this->form['issue_district_id']);
         }
-        if(!empty($this->form['purpose']))
-        {
-//            dd($this->form['purpose']);
-            $this->dbBusinessPurposes = BusinessPurpose::whereIn('id',$this->form['purpose'])->get();
+        if (!empty($this->form['purpose'])) {
+            $this->dbBusinessPurposes = BusinessPurpose::whereIn('id', $this->form['purpose'])->get();
         }
 
 
