@@ -28,10 +28,12 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">कारोबार गर्ने वस्तु  सूची</h4>
 
+                        @can('objectTransaction_create')
                             <a href="{{route('admin.businessRegistration.setting.objectTransaction.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ वकारोबार गर्ने वस्तु  थप्नुहोस्
                             </a>
+                        @endcan
 
                     </div>
                 </div>
@@ -51,17 +53,21 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$objectTransaction->title}}</td>
                                     <td>
+                                        @can('objectTransaction_edit')
                                         <a href="{{route('admin.businessRegistration.setting.objectTransaction.edit',$objectTransaction)}}"
                                            class="btn btn-xs btn-outline-warning">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
+                                        @endcan
                                         <form action="{{route('admin.businessRegistration.setting.objectTransaction.destroy',$objectTransaction)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
+                                            @can('objectTransaction_delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

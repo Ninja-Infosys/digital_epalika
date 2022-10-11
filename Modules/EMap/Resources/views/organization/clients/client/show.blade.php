@@ -6,7 +6,8 @@
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">सेवाग्राही: {{$client->name}}</h3>
-                        <a href="{{route('organization.admin.clients.client.index')}}" class="btn btn-primary btn-sm">
+                        <a href="{{route('organization.admin.clients.client.index')}}"
+                           class="btn btn-primary btn-sm">
                             <i class="fa fa-list"></i> सेवाग्राही सुची
                         </a>
                     </div>
@@ -85,16 +86,22 @@
                                            type="button" class="btn btn-info btn-sm text-white">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split text-white"
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split text-white"
                                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu"
                                              style="position: absolute; inset: 0 auto auto 0; margin: 0; transform: translate(76px, 40px);"
                                              data-popper-placement="bottom-start">
-                                            <a class="dropdown-item" href="#">भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम</a>
-                                            <a class="dropdown-item" href="#">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र</a>
-                                            <a class="dropdown-item" href="#">भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र</a>
+                                            <a class="dropdown-item" href="#">भवन निर्माण सहिता अनुसार नक्शा /
+                                                डिजाईनको
+                                                लागि दरखास्त फाराम</a>
+                                            <a class="dropdown-item" href="#">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी
+                                                पत्र</a>
+                                            <a class="dropdown-item" href="#">भवन डिजाईन गर्ने प्राविधिकद्वारा
+                                                मन्जुरी
+                                                पत्र</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Separated link</a>
                                         </div>
@@ -109,5 +116,4 @@
             </div>
         </div>
     </div>
-
 @endsection
