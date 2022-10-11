@@ -89,4 +89,4 @@
 @livewireScripts
 </body>
 
-</html>s
+</html>
