@@ -22,8 +22,11 @@ Route::prefix('clients')->as('clients.')->group(function () {
                 ->name('map-acceptance');
             Route::get('technicianApproval', 'technicianApproval')
                 ->name('technician-approval');
+            Route::get('engineerApproval', 'engineerApproval')
+                ->name('engineer-approval');
             Route::get('mapAcceptance/print', 'mapAcceptancePrint')->name('map-acceptance-print');
             Route::get('technicianApproval/print', 'technicianApprovalPrint')->name('technician-approval-print');
+            Route::get('engineerApproval/print', 'engineerApprovalPrint')->name('engineer-approval-print');
         });
 
     Route::resource('client/{client}/mapApply', MapApplyController::class)->names('mapApply');

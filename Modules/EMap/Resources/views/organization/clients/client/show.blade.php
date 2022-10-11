@@ -101,9 +101,7 @@
                                                 लागि दरखास्त फाराम</a>
                                             <a class="dropdown-item" href="{{route('organization.admin.clients.application.technician-approval',[$client,$mapApply])}}">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी
                                                 पत्र</a>
-                                            <a class="dropdown-item" href="#">भवन डिजाईन गर्ने प्राविधिकद्वारा
-                                                मन्जुरी
-                                                पत्र</a>
+                                            <a class="dropdown-item" href="{{route('organization.admin.clients.application.engineer-approval',[$client,$mapApply])}}">भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र</a>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Separated link</a>
                                         </div>
