@@ -67,7 +67,7 @@
                         <p>नेपाल इञ्जिनियरिङ परिसद दर्ता नं : <span
                                 class="underline-dotted">{{$designer->nec_council_no ?? ''}}</span></p>
                         <p>ठेगाना : <span class="underline-dotted">{{$designer->address ?? ''}}</span></p>
-                        <p>फोन नं. : <span class="underline-dotted">{{$designer->phone ?? ''}}</span></p>
+                        <p>सम्पर्क नं. : <span class="underline-dotted">{{$designer->phone ?? ''}}</span></p>
                         <p>सहि : <span class="underline-dotted custom-width"></span></p>
                         <p>मिति : <span class="underline-dotted custom-width"></span></p>
                     </div>
