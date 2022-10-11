@@ -2,9 +2,8 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapApply;
 
@@ -12,12 +11,8 @@ class ApplicationController extends Controller
 {
     public function mapAcceptance(Client $client, MapApply $mapApply)
     {
+        $mapApply->load('houseOwner', 'landDetail', 'landDetail.unit');
         return view('emap::organization.clients.map.application.map_acceptance', compact('client', 'mapApply'));
-    }
-
-    public function mapAcceptancePrint(Client $client, MapApply $mapApply)
-    {
-        return view('emap::organization.clients.map.application.map_acceptance_print', compact('client'));
     }
 
     public function technicianApproval(Client $client, MapApply $mapApply)
@@ -28,14 +23,6 @@ class ApplicationController extends Controller
         return view('emap::organization.clients.map.application.technician_approval', compact('client', 'mapApply'));
     }
 
-    public function technicianApprovalPrint(Client $client, MapApply $mapApply)
-    {
-        $client->load('province',
-            'district',
-            'localBody');
-        return view('emap::organization.clients.map.application.technician_approval_print', compact('client', 'mapApply'));
-
-    }
     public function engineerApproval(Client $client, MapApply $mapApply)
     {
         $client->load('province',
@@ -50,12 +37,6 @@ class ApplicationController extends Controller
             'district',
             'localBody');
         return view('emap::organization.clients.map.application.engineer_approval_print', compact('client', 'mapApply'));
-
-    }
-
-
-    public function approvalApplicationFromDesigner(Client $client, MapApply $mapApply)
-    {
 
     }
 }
