@@ -99,7 +99,7 @@
                                                 निर्माण सहिता अनुसार नक्शा /
                                                 डिजाईनको
                                                 लागि दरखास्त फाराम</a>
-                                            <a class="dropdown-item" href="#">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी
+                                            <a class="dropdown-item" href="{{route('organization.admin.clients.application.technician-approval',[$client,$mapApply])}}">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी
                                                 पत्र</a>
                                             <a class="dropdown-item" href="#">भवन डिजाईन गर्ने प्राविधिकद्वारा
                                                 मन्जुरी
