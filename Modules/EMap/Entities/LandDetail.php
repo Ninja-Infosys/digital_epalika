@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,6 +32,10 @@ class LandDetail extends Model
         'unit_value'
     ];
 
+    public function unit(): BelongsTo
+    {
+        return $this->belongsTo(Unit::class);
+    }
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);

@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\PrintController;
 use Illuminate\Support\Facades\Route;
-use Modules\EMap\Http\Controllers\OrganizationAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +36,9 @@ Route::get('service-details', [FrontController::class, 'service_details'])->name
 Route::get('/static/notice', [FrontController::class, 'notice'])->name('notice');
 Route::get('/static/single-notice/{notice}', [FrontController::class, 'singleNotice'])->name('single-notice');
 
-
+Route::prefix('print')->as('print.')->controller(PrintController::class)->group(function () {
+    Route::post('applicationPrint', 'applicationPrint')->name('application-print');
+});
 
 
 

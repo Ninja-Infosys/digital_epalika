@@ -8,6 +8,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>{{config('app.name')}}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="icon" href="{{asset('assets/backend/emap/admin/img/logo.png')}}" type="image/png">
 
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/bootstrap1.min.css')}}"/>
