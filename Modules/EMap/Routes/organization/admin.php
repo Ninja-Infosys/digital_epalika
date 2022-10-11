@@ -15,7 +15,15 @@ Route::prefix('profile')->group(function () {
 });
 
 Route::prefix('clients')->as('clients.')->group(function () {
-    Route::get('client/{client}/application/approvalApplication', [ApplicationController::class,'approvalApplication'])->name('application.application-approval');
+    Route::controller(ApplicationController::class)
+        ->prefix('client/{client}/mapApply/{mapApply}/application')
+        ->as('application.')->group(function () {
+
+            Route::get('mapAcceptance/print', 'mapAcceptancePrint')->name('map-acceptance-print');
+            Route::get('mapAcceptance', 'mapAcceptance')->name('map-acceptance');
+
+        });
+
     Route::resource('client/{client}/mapApply', MapApplyController::class)->names('mapApply');
     Route::resource('client', ClientController::class);
 });

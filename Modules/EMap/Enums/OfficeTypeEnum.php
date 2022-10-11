@@ -19,7 +19,7 @@ enum OfficeTypeEnum: string
         return match ($value) {
             self::RURAL_MUNICIPALITY => 'गाउपलिका',
             self::MUNICIPALITY => 'नगरपालिका',
-            self::SUB_METROPOLITAN => 'उप महानगरपालिका',
+            self::SUB_METROPOLITAN => 'उप-महानगरपालिका',
             self::METROPOLITAN => 'महानगरपालिका',
         };
     }

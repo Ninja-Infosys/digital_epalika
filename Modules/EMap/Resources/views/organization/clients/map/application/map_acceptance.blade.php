@@ -5,13 +5,79 @@
             <div class="card mb_30">
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
-                        <h3 class="mb-0">सेवाग्राही:fghfg</h3>
-                        <a href="" class="btn btn-primary btn-sm">
-                            <i class="fa fa-list"></i> सेवाग्राही सुची
+                        <h3 class="mb-0">भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम</h3>
+                        <a href="{{route('organization.admin.clients.client.show', $client)}}"
+                           class="btn btn-primary btn-sm">
+                            <i class="fa fa-eye"></i> {{$client->name ?? ''}}को विवरण हेर्नुहोस
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card mb_30">
+                <div class="card-body p-3">
+                    <div class="font-black">
+                        <p>
+                            {{config('applicationDetail.to_office.to')}}<br>
+                            {{config('applicationDetail.to_office.address')}}<br>
+                            {{config('applicationDetail.to_office.office')}}<br>
+                            {{config('applicationDetail.to_office.office_address')}}
+                        </p>
+                        <p class="text-center"><b>बिषय: भवन निर्माण संहिता अनुसार नक्शा/डिजाइन पेश गरेको बारे ।</b></p>
+
+                        <p>महोदय,</p>
+                        <p>
+                            यस {{config('applicationDetail.office_type')}} वडा नं ... टोल .... मा अवस्थित
+                            कित्ता नं ... क्षेत्रफल ... मा भवन निर्माण गर्न प्रस्ताव गरिएको
+                            संरचना भुकम्प सुरक्षात्मक मनाउन आवश्यक नक्शा, डिजाईन प्राविधिक चेक लिष्ट र अन्य आवश्यक
+                            कागजात सहित यो निवेदन पेश गरेको छु । प्राविधिकले तथा निर्माणबाट भूकम्पीय वा साधारण सुरक्षाको
+                            कमीले हुन सक्ने सम्पूर्ण जोखिम प्रति म/हामी जिम्मेवार छु/छौं । संलग्न डिजाईन, सुपरिवेक्षक
+                            तथा
+                            ठेकेदारबाट डिजाईन, सुपरिवेक्षण तथा निर्माण गराउने छु ।
+                            यस {{config('applicationDetail.office_type')}}बाट समय-समयमा
+                            दिईने निर्देशन पालना गर्नेछु तथा आवश्यक परेको बेला त्यस कार्यालयमा उपस्थित हुनेछ ।
+                        </p>
+
+                        <p>घरधनीको नाम :</p>
+                        <p>ठेगाना :</p>
+                        <p>फोन नं. :</p>
+                        <p>सहि :</p>
+                        <p>मिति :</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{route('organization.admin.clients.application.map-acceptance-print',[$client,$mapApply])}}" target="_blank">Print</a>
+    @push('style')
+        <style>
+            .font-black p {
+                color: black;
+            }
+
+            .building-construction-application input[type="text"],
+            .building-construction-application input[type="file"],
+            .building-construction-application select,
+            .building-construction-application input[type="date"] {
+                border-bottom: dotted 3px black;
+                border-top: none;
+                border-right: none;
+                border-left: none;
+                margin: 0 5px;
+                /*width: 60%;*/
+            }
+
+            td > input[type="text"],
+            td > input[type="file"],
+            td > select,
+            td > input[type="date"] {
+                width: 100%;
+            }
+
+
+        </style>
+    @endpush
 @endsection
