@@ -35,7 +35,7 @@
                         <p>महोदय,</p>
                         <p>
                             यस {{config('applicationDetail.office_type')}} वडा नं <span
-                                class="underline-dotted">{{$mapApply->landDetail->ward_no}}</span> टोल <span class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span>  मा अवस्थित
+                                class="underline-dotted">{{$mapApply->landDetail->ward_no ?? ''}}</span> टोल <span class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span>  मा अवस्थित
                             कित्ता नं <span
                                 class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span> क्षेत्रफल <span class="underline-dotted">{{$mapApply->landDetail->unit_value ?? ''}}</span>मा भवन निर्माण गर्ने घर धनी श्री <span
                                 class="underline-dotted">{{$mapApply->houseOwner->name ?? ''}}</span>
