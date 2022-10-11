@@ -37,11 +37,11 @@
                             ठहरे नियमानुसार सहुँला बुझाउँला ।
                         </p>
 
-                        <p>डिजाइन गर्ने डिजाईनरको नाम  :</p>
-                        <p>योग्यता एवं पद  :</p>
-                        <p>कन्सल्टीङ्ग फर्म भए सो को नाम र छाप   :</p>
-                        <p>उ.म.न.पा. मा दर्ता भएको व्यवसाय प्रमाण पत्रको नं. :</p>
-                        <p>नेपाल ईन्जिनियरीङ्ग परिषद दर्ता नं.:</p>
+                        <p>डिजाइन गर्ने डिजाईनरको नाम  :..................................</p>
+                        <p>योग्यता एवं पद  :....................................</p>
+                        <p>कन्सल्टीङ्ग फर्म भए सो को नाम र छाप   :.............................</p>
+                        <p>उ.म.न.पा. मा दर्ता भएको व्यवसाय प्रमाण पत्रको नं. :....................</p>
+                        <p>नेपाल ईन्जिनियरीङ्ग परिषद दर्ता नं.:.......................</p>
                         <p>ठेगाना :</p>
                         <p>सम्पर्क नं. :</p>
                         <p>सही  :</p>
@@ -51,7 +51,9 @@
             </div>
         </div>
     </div>
-    <a href="{{route('organization.admin.clients.application.technician-approval-print',[$client,$mapApply])}}" target="_blank">Print</a>
+    <a href="{{route('organization.admin.clients.application.technician-approval-print',[$client,$mapApply])}}" target="_blank" class="btn btn-primary btn-sm">
+        <i class="fa fa-print"></i>
+        Print</a>
     @push('style')
         <style>
             .font-black p {
