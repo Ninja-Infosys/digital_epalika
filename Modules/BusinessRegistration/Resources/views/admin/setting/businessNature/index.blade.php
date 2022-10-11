@@ -41,7 +41,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक </th>
+                                <th>शिर्षक. </th>
                                 <th>#</th>
                             </tr>
                             </thead>
