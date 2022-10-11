@@ -30,7 +30,7 @@ class MapApplyController extends Controller
 
     public function show(Client $client, MapApply $mapApply)
     {
-        return view('emap::show');
+        return view('emap::organization.clients.map.show', compact('client', 'mapApply'));
     }
 
     public function edit(Client $client, MapApply $mapApply)

@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.setting.index')}}">कार्यालय सेटिङ</a>
+                            <a href="{{route('emap.admin.mapSetting.index')}}">कार्यालय सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">नक्सा सेटिङ सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('emap.admin.setting.store')}}" method="post"
+                    <form action="{{route('emap.admin.mapSetting.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
