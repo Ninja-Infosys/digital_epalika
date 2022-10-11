@@ -140,6 +140,8 @@ class MapApplyLivewire extends Component
             $this->designerDetails[] = [
                 'post' => $designerDetail->value,
                 'name' => null,
+                'phone' => null,
+                'address' => null,
                 'nec_council_no' => null,
                 'local_body_registration_no' => null,
                 'consulting_firm_name' => null,
@@ -329,6 +331,8 @@ class MapApplyLivewire extends Component
     protected array $designerDetailValidations = [
         'designerDetails' => ['required', 'array'],
         'designerDetails.*.name' => ['required'],
+        'designerDetails.*.phone' => ['required'],
+        'designerDetails.*.address' => ['required'],
         'designerDetails.*.post' => ['required'],
         'designerDetails.*.nec_council_no' => ['required'],
         'designerDetails.*.local_body_registration_no' => ['required'],
