@@ -94,7 +94,9 @@
                                         <div class="dropdown-menu"
                                              style="position: absolute; inset: 0 auto auto 0; margin: 0; transform: translate(76px, 40px);"
                                              data-popper-placement="bottom-start">
-                                            <a class="dropdown-item" href="#">भवन निर्माण सहिता अनुसार नक्शा /
+                                            <a class="dropdown-item"
+                                               href="{{route('organization.admin.clients.application.map-acceptance',[$client,$mapApply])}}">भवन
+                                                निर्माण सहिता अनुसार नक्शा /
                                                 डिजाईनको
                                                 लागि दरखास्त फाराम</a>
                                             <a class="dropdown-item" href="#">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी

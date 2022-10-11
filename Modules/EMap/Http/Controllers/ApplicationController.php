@@ -6,20 +6,21 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\Client;
+use Modules\EMap\Entities\MapApply;
 
 class ApplicationController extends Controller
 {
-    public function approvalApplication(Client $client)
+    public function mapAcceptance(Client $client, MapApply $mapApply)
     {
-        return view('emap::organization.applications.approvalApplication', compact('client'));
+        return view('emap::organization.clients.map.application.map_acceptance', compact('client'));
     }
 
-    public function approvalApplicationFromTechnician()
+    public function approvalApplicationFromTechnician(Client $client, MapApply $mapApply)
     {
 
     }
 
-    public function approvalApplicationFromDesigner()
+    public function approvalApplicationFromDesigner(Client $client, MapApply $mapApply)
     {
 
     }
