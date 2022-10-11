@@ -11,6 +11,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\StructureType;
 use Modules\EMap\Enums\BuildingDetailEnum;
@@ -37,6 +38,7 @@ class MapApplyLivewire extends Component
     public $conversion_id;
 
     public $units = [];
+    public $mapFees = [];
 
     public $convertedData = 0;
 
@@ -74,7 +76,8 @@ class MapApplyLivewire extends Component
         'father_name' => null,
         'citizenship_issue_district_id' => null,
         'citizenship_no' => null,
-        'citizenship_issue_date' => null
+        'citizenship_issue_date' => null,
+        'address' => null,
     ];
 
     public array $houseOwner = [
@@ -83,7 +86,8 @@ class MapApplyLivewire extends Component
         'father_name' => null,
         'citizenship_issue_district_id' => null,
         'citizenship_no' => null,
-        'citizenship_issue_date' => null
+        'citizenship_issue_date' => null,
+        'address' => null,
     ];
 
     public array $fourFortDetails = [];
@@ -110,6 +114,7 @@ class MapApplyLivewire extends Component
     public function mount(Client $client)
     {
         $this->setting = MapSetting::with('landMeasurement')->first();
+        $this->mapFees = MapFee::with('unit')->get();
 
 
         if (empty($this->setting->land_measurement_id)) {
@@ -298,7 +303,8 @@ class MapApplyLivewire extends Component
         'landOwner.father_name' => ['required'],
         'landOwner.citizenship_issue_district_id' => ['required', 'exists:districts,id'],
         'landOwner.citizenship_no' => ['required'],
-        'landOwner.citizenship_issue_date' => ['required']
+        'landOwner.citizenship_issue_date' => ['required'],
+        'landOwner.address' => ['required']
     ];
 
     protected array $houseOwnerValidations = [
@@ -307,7 +313,8 @@ class MapApplyLivewire extends Component
         'houseOwner.father_name' => ['required'],
         'houseOwner.citizenship_issue_district_id' => ['required', 'exists:districts,id'],
         'houseOwner.citizenship_no' => ['required'],
-        'houseOwner.citizenship_issue_date' => ['required']
+        'houseOwner.citizenship_issue_date' => ['required'],
+        'houseOwner.address' => ['required']
     ];
 
     protected array $fourFortValidations = [
