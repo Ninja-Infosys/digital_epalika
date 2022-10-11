@@ -214,13 +214,13 @@
                                     <tr>
                                         <td>
                                             <select
-                                                wire:model="applyMap.storeyDetails.{{$index}}.storey">
+                                                wire:model="applyMap.storeyDetails.{{$index}}.map_fee_id">
                                                 <option value="">छान्नुहोस्</option>
                                                 @foreach($mapFees as $mapFee)
                                                     <option value="{{$mapFee->id}}">{{$mapFee->storey}}</option>
                                                 @endforeach
                                             </select>
-                                            @error("applyMap.storeyDetails.".$index.".storey")
+                                            @error("applyMap.storeyDetails.".$index.".map_fee_id")
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </td>

@@ -280,7 +280,7 @@ class MapApplyLivewire extends Component
         'applyMap.breadth' => ['required', 'numeric'],
         'applyMap.height' => ['required', 'numeric'],
         'applyMap.storeyDetails' => ['nullable', 'array'],
-        'applyMap.storeyDetails.*.storey' => ['required', 'integer'],
+        'applyMap.storeyDetails.*.map_fee_id' => ['required', 'exists:map_fees,id'],
         'applyMap.storeyDetails.*.area_of_proposed_construction' => ['required', 'numeric'],
         'applyMap.storeyDetails.*.area_of_former_construction' => ['required', 'numeric'],
         'applyMap.storeyDetails.*.total_area' => ['required', 'numeric'],
