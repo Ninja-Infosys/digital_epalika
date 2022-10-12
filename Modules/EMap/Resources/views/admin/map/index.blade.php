@@ -35,6 +35,7 @@
                                 <th scope="col">क्र.सं.</th>
                                 <th scope="col">आर्थिक वर्ष</th>
                                 <th scope="col">दर्ता नं</th>
+                                <th scope="col">युनिक आइडी</th>
                                 <th scope="col">निर्माण कार्यको किसिम</th>
                                 <th scope="col">#</th>
                             </tr>
@@ -45,6 +46,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$mapApply->fiscalYear->title ?? ''}}</td>
                                     <td>{{$mapApply->registration_no ?? ''}}</td>
+                                    <td>{{$mapApply->unique_id ?? ''}}</td>
                                     <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                                     <td>
                                         <div class="btn-group">

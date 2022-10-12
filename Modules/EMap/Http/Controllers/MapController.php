@@ -9,7 +9,7 @@ class MapController extends Controller
 {
     public function index()
     {
-        $maps = MapApply::get();
+        $maps = MapApply::with('fiscalYear')->get();
         return view('emap::admin.map.index', compact('maps'));
     }
 

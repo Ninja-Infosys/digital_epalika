@@ -18,7 +18,7 @@
                         </div>
                     @endforeach
                     @error('applyMap.construction_type')
-                    <span class="text-danger">{{$message}}</span>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -37,7 +37,7 @@
                         </div>
                     @endforeach
                     @error('applyMap.usage')
-                    <span class="text-danger">{{$message}}</span>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -56,7 +56,7 @@
                         </div>
                     @endforeach
                     @error('applyMap.building_category')
-                    <span class="text-danger">{{$message}}</span>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     @error('structure_type_id')
-                    <span class="text-danger">{{$message}}</span>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -109,7 +109,7 @@
                                wire:model="applyMap.current_storey">
 
                         @error('applyMap.current_storey')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -121,7 +121,7 @@
                         >
 
                         @error('applyMap.area_of_plinth')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                                wire:model="applyMap.future_storey"
                         >
                         @error('applyMap.future_storey')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -155,7 +155,7 @@
                                wire:model="applyMap.length"
                         >
                         @error('applyMap.length')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -166,7 +166,7 @@
                                wire:model="applyMap.breadth"
                         >
                         @error('applyMap.breadth')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                                wire:model="applyMap.height"
                         >
                         @error('applyMap.height')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                                                 @endforeach
                                             </select>
                                             @error("applyMap.storeyDetails.".$index.".map_fee_id")
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -230,7 +230,7 @@
                                                    wire:model="applyMap.storeyDetails.{{$index}}.area_of_proposed_construction"
                                             >
                                             @error("applyMap.storeyDetails.".$index.".area_of_proposed_construction")
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -239,7 +239,7 @@
                                                    wire:model="applyMap.storeyDetails.{{$index}}.area_of_former_construction"
                                             >
                                             @error("applyMap.storeyDetails.".$index.".area_of_former_construction")
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -248,7 +248,7 @@
                                                    wire:model="applyMap.storeyDetails.{{$index}}.total_area"
                                             >
                                             @error("applyMap.storeyDetails.".$index.".total_area")
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -257,7 +257,7 @@
                                                    wire:model="applyMap.storeyDetails.{{$index}}.height"
                                             >
                                             @error("applyMap.storeyDetails.".$index.".height")
-                                            <span class="text-danger">{{$message}}</span>
+                                            <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
                                         <td>
@@ -272,7 +272,7 @@
                             </table>
                         </div>
                         @error("applyMap.storeyDetails")
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -293,7 +293,7 @@
                                wire:model="landDescription.land_use_area"
                         >
                         @error('landDescription.land_use_area')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -319,7 +319,7 @@
                                wire:model="landDescription.ward_no"
                         >
                         @error('landDescription.ward_no')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -330,7 +330,7 @@
                                wire:model="landDescription.former_ward_no"
                         >
                         @error('landDescription.former_ward_no')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -346,7 +346,7 @@
                                wire:model="landDescription.tole"
                         >
                         @error('landDescription.tole')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -357,7 +357,7 @@
                                wire:model="landDescription.street_code_no"
                         >
                         @error('landDescription.street_code_no')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -373,7 +373,7 @@
                                wire:model="landDescription.plot_no"
                         >
                         @error('landDescription.plot_no')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -396,7 +396,7 @@
                         <label
                             for="landDescription.unit_value">{{$setting->standardLandMeasurement->title ?? ''}}</label>
                         @error('landDescription.unit_value')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                         {{')'}}
                     </div>
@@ -416,7 +416,7 @@
                                wire:model="landDescription.percentage_of_area_covered_by_building"
                         >
                         @error('landDescription.percentage_of_area_covered_by_building')
-                        <span class="text-danger">{{$message}}</span>
+                        <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
                 </div>
@@ -441,7 +441,7 @@
                         </div>
                     @endforeach
                     @error('landOwner.land_owner_type')
-                    <span class="text-danger">{{$message}}</span>
+                    <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
             </div>
@@ -510,7 +510,7 @@
                                            wire:model="landOwner.citizenship_no"
                                     >
                                     @error('landOwner.citizenship_no')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -521,7 +521,7 @@
                                            wire:model="landOwner.citizenship_issue_date"
                                     >
                                     @error('landOwner.citizenship_issue_date')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -533,7 +533,7 @@
                                            wire:model="landOwner.address"
                                     >
                                     @error('landOwner.address')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -568,7 +568,7 @@
                                            wire:model="houseOwner.name"
                                     >
                                     @error('houseOwner.name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -578,7 +578,7 @@
                                            wire:model="houseOwner.phone"
                                     >
                                     @error('houseOwner.phone')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -590,7 +590,7 @@
                                            wire:model="houseOwner.father_name"
                                     >
                                     @error('houseOwner.father_name')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                                 <td>
@@ -607,7 +607,7 @@
                                         @endforeach
                                     </select>
                                     @error('houseOwner.citizenship_issue_district_id')
-                                    <span class="text-danger">{{$message}}</span>
+                                    <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
                             </tr>
@@ -942,7 +942,7 @@
                                             @endforeach
                                         </select>
                                         @error('applicantDetail.citizenship_issue_district_id')
-                                        <span class="text-danger">{{$message}}</span>
+                                        <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                 </tr>
@@ -1177,7 +1177,7 @@
                     for="applicant_signature"><b>(कन्सल्टेन्ट इंन्जिनियरको सहि): </b></label>
             </div>
             @error('consultant_engineer_signature')
-            <span class="text-danger">{{$message}}</span>
+            <p class="text-danger">{{$message}}</p>
             @enderror
             <div>
                 <label
@@ -1190,7 +1190,7 @@
                 >
             </div>
             @error('name')
-            <span class="text-danger">{{$message}}</span>
+            <p class="text-danger">{{$message}}</p>
             @enderror
             <div>
                 <label
@@ -1203,7 +1203,7 @@
                 >
             </div>
             @error('name')
-            <span class="text-danger">{{$message}}</span>
+            <p class="text-danger">{{$message}}</p>
             @enderror
             <div>
                 <label
@@ -1216,7 +1216,7 @@
                 >
             </div>
             @error('nec_no')
-            <span class="text-danger">{{$message}}</span>
+            <p class="text-danger">{{$message}}</p>
             @enderror
 
         </div>
