@@ -57,9 +57,11 @@
                     aria-expanded="false"
                 >
                     <i class="fa fa-bell noti-icon"></i>
+                    @if(count(auth()->user()->unreadNotifications)>0)
                     <span class="badge bg-danger rounded-circle noti-icon-badge"
-                    >9</span
+                    >{{count(auth()->user()->unreadNotifications)}}</span
                     >
+                        @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
                     <!-- item-->
@@ -74,19 +76,22 @@
                     </div>
 
                     <div class="noti-scroll" data-simplebar>
+                        @forelse (auth()->user()->unreadNotifications as $notification)
                         <a
-                            href="javascript:void(0);"
+                            href="#"
                             class="dropdown-item notify-item"
                         >
                             <div class="notify-icon bg-secondary">
-                                <i class="mdi mdi-heart"></i>
+                                <i class="fa fa-heart"></i>
                             </div>
                             <p class="notify-details">
-                                Carlos Crouch liked
-                                <b>Admin</b>
-                                <small class="text-muted">13 days ago</small>
+                                {{class_basename($notification->type)}}
+
+                                <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
                             </p>
                         </a>
+                            @empty
+                        @endforelse
                     </div>
 
                     <!-- All-->
