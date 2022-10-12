@@ -13,4 +13,15 @@ class FrontController extends Controller
     {
         return view('helpdesk::frontend.services.details', compact('service'));
     }
+
+
+    public function helpDesk()
+    {
+        return view('helpdesk::frontend.index');
+    }
+    public function service()
+    {
+        return view('helpdesk::frontend.services.service');
+    }
+
 }

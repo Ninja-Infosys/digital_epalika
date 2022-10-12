@@ -28,11 +28,30 @@ class FrontendController extends Controller
 
         return view('grievancehandling::frontend.grievance.single-grievance',compact('grievanceDetail'));
     }
-
-    public function grievance()
+    public function grievanceHandling()
     {
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
         $grievanceDetails = GrievanceDetail::whereNull('grievance_detail_id')->get();
         return view('grievancehandling::frontend.index',compact('grievanceTypes','grievanceDetails'));
+    }
+    public function policy()
+    {
+        return view('grievancehandling::frontend.policy.policy');
+    }
+    public function register()
+    {
+        return view('grievancehandling::frontend.register.register-form');
+    }
+    public function track()
+    {
+        return view('grievancehandling::frontend.track.track');
+    }
+    public function publicGrievance()
+    {
+        return view('grievancehandling::frontend.grievance.public-grievance');
+    }
+    public function grievanceList()
+    {
+        return view('grievancehandling::frontend.grievance.grievance-list');
     }
 }
