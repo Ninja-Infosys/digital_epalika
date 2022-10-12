@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Enums\ApplicationTypeEnum;
 use Illuminate\View\Component;
 
 class ApplicationComponent extends Component
@@ -11,7 +12,7 @@ class ApplicationComponent extends Component
      *
      * @return void
      */
-    public function __construct(public $applicationType)
+    public function __construct(public ApplicationTypeEnum $applicationType, public $url)
     {
     }
 

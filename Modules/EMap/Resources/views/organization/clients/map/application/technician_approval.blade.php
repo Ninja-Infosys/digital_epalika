@@ -2,11 +2,20 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-lg-12">
+            <div>
+                @error('file')
+                <div class="alert alert-danger">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
             <div class="card mb_30">
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र</h3>
-                        <div>
+                        <div class="d-flex justify-content-between">
+                            <x-application-component :application-type="App\Enums\ApplicationTypeEnum::TECHNICIAN_APPROVAL" url="{{route('organization.admin.clients.application.apply-map-application',[$client,$mapApply])}}"></x-application-component>
+
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData' requestRoute="{{route('print.application-print')}}">
                                 <i class="fa fa-print"></i> Print
                             </button>

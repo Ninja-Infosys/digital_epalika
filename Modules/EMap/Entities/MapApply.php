@@ -112,4 +112,9 @@ class MapApply extends Model
     {
         return $this->hasMany(BuildingDetail::class);
     }
+
+    public function mapApplyApplications(): HasMany
+    {
+        return $this->hasMany(ApplyMapApplication::class);
+    }
 }

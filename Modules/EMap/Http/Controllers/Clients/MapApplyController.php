@@ -30,6 +30,8 @@ class MapApplyController extends Controller
 
     public function show(Client $client, MapApply $mapApply)
     {
+        $mapApply->load('fiscalYear','storeyDetails.mapFee');
+
         return view('emap::organization.clients.map.show', compact('client', 'mapApply'));
     }
 
