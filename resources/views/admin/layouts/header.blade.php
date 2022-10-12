@@ -1,28 +1,24 @@
 <div class="navbar-custom">
     <div class="container-fluid">
-
-
         <ul class="list-unstyled topnav-menu float-end mb-0">
-
-            <li class="nav-link">
-                <iframe class="text-white" scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0"
+            <li class="dropdown d-none d-lg-inline-block">
+                <h5 class="mt-2">
+                <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0"
                         allowtransparency="true"
-                        src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=ffffff&aj_time=yes&font_size=14&line_brake=1&api=392199m324"
-                        width="195" height="45"></iframe>
+                        src="https://www.ashesh.com.np/linknepali-time.php?dwn=only&font_color=fff&font_size=18&bikram_sambat=0&api=2511x6m072"
+                        width="220" height="50"></iframe>
+                </h5>
             </li>
-            <li class="nav-link">
-                <h4 class="text-white pt-3">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
+            <li class="dropdown d-none d-lg-inline-block">
+                <h4 class="nav-link dropdown-toggle arrow-none waves-effect waves-light">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
-
             <li class="dropdown d-inline-block d-lg-none">
-                <a
-                    class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
                     data-bs-toggle="dropdown"
                     href="#"
                     role="button"
                     aria-haspopup="false"
-                    aria-expanded="false"
-                >
+                    aria-expanded="false">
                     <i class="fa fa-search noti-icon"></i>
                 </a>
                 <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
@@ -38,11 +34,9 @@
             </li>
 
             <li class="dropdown d-none d-lg-inline-block">
-                <a
-                    class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
                     data-toggle="fullscreen"
-                    href="#"
-                >
+                    href="#">
                     <i class="fa fa-expand-arrows-alt noti-icon"></i>
                 </a>
             </li>
@@ -65,12 +59,10 @@
                     <!-- item-->
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
-                    <span class="float-end">
+                            <span class="float-end">
                       <a href="#" class="text-dark">
                         <small>Clear All</small>
-                      </a> </span
-                    >Notification
-                        </h5>
+                      </a> </span>Notification</h5>
                     </div>
 
                     <div class="noti-scroll" data-simplebar>
@@ -101,21 +93,17 @@
             </li>
 
             <li class="dropdown notification-list topbar-dropdown">
-                <a
-                    class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
+                <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
                     data-bs-toggle="dropdown"
                     href="#"
                     role="button"
                     aria-haspopup="false"
-                    aria-expanded="false"
-                >
-                    <img
-                        src="{{auth()->user()->profile_photo_url}}"
+                    aria-expanded="false">
+                    <img src="{{auth()->user()->profile_photo_url ?? ''}}"
                         alt="user-image"
-                        class="rounded-circle"
-                    />
+                        class="rounded-circle"/>
                     <span class="pro-user-name ms-1">
-                  {{auth()->user()->name}} <i class="fa fa-angle-down"></i>
+                  {{auth()->user()->name ?? ''}} <i class="fa fa-angle-down"></i>
                 </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
@@ -155,15 +143,134 @@
             </li>
         </ul>
         <!-- LOGO -->
-        <div class="logo-box">
-            <a href="{{route('admin.dashboard')}}" class="logo logo-light text-center">
+        <div class="logo-box dropdown notification-list topbar-dropdown">
+            <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
+               data-bs-toggle="dropdown"
+               href="#"
+               role="button"
+               aria-haspopup="false"
+               aria-expanded="false"
+            >
               <span class="logo-sm">
-                <img src="{{asset('images/np.png')}}" alt="" height="40"/>
+                <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="40"/>
               </span>
                 <span class="logo-lg">
-                <img src="{{asset('images/np.png')}}" alt="" height="60"/>
+                <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="40"/>
               </span>
             </a>
+            <div class="dropdown-menu dropdown-xl d-arrow m-2 border-primary">
+                <div class="row m-2">
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                      <img src="{{asset('assets/backend/images/modules/darta-chalani-parnali.png')}}"
+                                      height="50" width="50">
+                                <h4 class="p-1">दर्ता चलानी</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                <img src="{{asset('assets/backend/images/modules/nagarik-wodapatra.png')}}"
+                                     height="50" width="50">
+                                <h4 class="p-1">नागरिक वडापत्र</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                      <img src="{{asset('assets/backend/images/modules/help-desk.png')}}"
+                                      height="50" width="50">
+                                <h4 class="p-1">हेल्प डेस्क</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                <img src="{{asset('assets/backend/images/modules/e-naksa.png')}}"
+                                     height="50" width="50">
+                                <h4 class="p-1">इ-नक्सा</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                <img src="{{asset('assets/backend/images/modules/bewasaya-darta.png')}}"
+                                     height="50" width="50">
+                                <h4 class="p-1">व्यवसाय दर्ता</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                      <img src="{{asset('assets/backend/images/modules/e-gunaso.png')}}"
+                                      height="50" width="50">
+                                <h4 class="p-1">ई-गुनासो</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                      <img src="{{asset('assets/backend/images/modules/e-karypalika.png')}}"
+                                      height="50" width="50">
+                                <h4 class="p-1">ई-कार्यपालिका</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                      <img src="{{asset('assets/backend/images/modules/sifarish-parnali.png')}}"
+                                      height="50" width="50">
+                                <h4 class="p-1">शिफारिस</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                      <img src="{{asset('assets/backend/images/modules/suchi-darta-parnali.png')}}"
+                                      height="50" width="50">
+                                <h4 class="p-1">सुची दर्ता</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                <img src="{{asset('assets/backend/images/modules/paryogkarta-bhumika.png')}}"
+                                     height="50" width="50">
+                                <h4 class="p-1">प्रयोगकर्ता र भूमिका</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                <img src="{{asset('assets/backend/images/modules/setting.png')}}"
+                                     height="50" width="50">
+                                <h4 class="p-1">सेटिङ</h4>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4 border">
+                        <a href="#">
+                            <div class="p-2 text-center">
+                                      <img src="{{asset('assets/backend/images/modules/website-setting.png')}}"
+                                      height="50" width="50">
+                                <h4 class="p-1">वेबसाइट सेटिङ</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
@@ -172,18 +279,15 @@
                     <i class="fa fa-bars"></i>
                 </button>
             </li>
-            <li>
-                <h3 class=" px-3" style="color: #d91212"><b>{{$officeSetting->localBody->local_body ?? ''}}</b></h3>
-                <h4 class=" px-3 text-white"><b>e-पालिका व्यवस्थापन प्रणाली</b></h4>
+            <li class="dropdown d-none d-lg-inline-block">
+                <h3 class="text-light fw-bold mt-3">
+                    {{$officeSetting->localBody->local_body ?? ''}}
+                </h3>
             </li>
-
             <li>
-                <!-- Mobile menu toggle (Horizontal Layout)-->
-                <a
-                    class="navbar-toggle nav-link"
+                <a class="navbar-toggle nav-link"
                     data-bs-toggle="collapse"
-                    data-bs-target="#topnav-menu-content"
-                >
+                    data-bs-target="#topnav-menu-content">
                     <div class="lines">
                         <span></span>
                         <span></span>

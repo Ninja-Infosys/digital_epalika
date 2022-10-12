@@ -20,7 +20,7 @@ class StoreyDetail extends Model
 
     protected $fillable = [
         'map_apply_id',
-        'storey',
+        'map_fee_id',
         'area_of_proposed_construction',
         'area_of_former_construction',
         'total_area',
@@ -30,5 +30,10 @@ class StoreyDetail extends Model
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);
+    }
+
+    public function mapFee(): BelongsTo
+    {
+        return $this->belongsTo(MapFee::class);
     }
 }

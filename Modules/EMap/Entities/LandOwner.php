@@ -27,7 +27,8 @@ class LandOwner extends Model
         'father_name',
         'citizenship_issue_district_id',
         'citizenship_no',
-        'citizenship_issue_date'
+        'citizenship_issue_date',
+        'address'
     ];
 
     public function mapApply(): BelongsTo

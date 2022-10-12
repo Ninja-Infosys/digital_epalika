@@ -14,6 +14,7 @@ use App\Observers\ExecutiveMeeting\WardCommitteeObserver;
 use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
 use App\Observers\UnitObserver;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,12 +26,9 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrapFive();
     }
 
-
     public function boot()
     {
-        view()->share('important_links', ImportantLink::all());
-        view()->share('officeSetting', OfficeSetting::with('fiscalYear','province', 'district', 'localBody')->first());
-
+        Model::preventLazyLoading(!$this->app->isProduction());
         OfficeHeader::observe(OfficeHeaderObserver::class);
         Unit::observe(UnitObserver::class);
         MunicipalCommittee::observe(MunicipalCommitteeObserver::class);

@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}">व्यवसाय को प्रकृति </a>
+                            <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}">कारोबार गर्ने वस्तु उप श्रेणी </a>
                         </li>
-                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु  </li>
+                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु उप श्रेणी</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कारोबार गर्ने वस्तु  </h4>
+                <h4 class="page-title">कारोबार गर्ने वस्तु उप श्रेणी</h4>
             </div>
         </div>
     </div>
@@ -26,12 +26,13 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कारोबार गर्ने वस्तु  सूची</h4>
-
+                        <h4 class="header-title">कारोबार गर्ने वस्तु उप श्रेणी सूची</h4>
+                        @can('objectTransactionSubCategory_create')
                         <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.create')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-plus-circle"></i> नयाँ वकारोबार गर्ने वस्तु  थप्नुहोस्
+                            <i class="fa fa-plus-circle"></i> नयाँ कारोबार गर्ने वस्तु उप श्रेणी  थप्नुहोस्
                         </a>
+                        @endcan
 
                     </div>
                 </div>
@@ -53,17 +54,21 @@
                                     <td>{{$objectTransactionSubCategory->title}}</td>
                                     <td>{{$objectTransactionSubCategory->objectTransaction->title??''}}</td>
                                     <td>
+                                        @can('objectTransactionSubCategory_edit')
                                         <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.edit',$objectTransactionSubCategory)}}"
                                            class="btn btn-xs btn-outline-warning">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
+                                        @endcan
                                         <form action="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.destroy',$objectTransactionSubCategory)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
+                                            @can('objectTransactionSubCategory_delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

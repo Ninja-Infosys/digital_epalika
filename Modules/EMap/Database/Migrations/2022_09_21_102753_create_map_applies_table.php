@@ -10,12 +10,13 @@ return new class extends Migration {
         Schema::create('map_applies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('registration_no')->unique();
+            $table->string('registration_no');
             $table->string('registration_date');
             $table->string('construction_type');
             $table->string('usage');
             $table->string('building_category');
             $table->foreignId('structure_type_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('fiscal_year_id')->nullable()->constrained()->cascadeOnDelete();
             $table->double('current_storey', 8, 2);
             $table->double('future_storey', 8, 2);
             $table->double('area_of_plinth', 12, 2);

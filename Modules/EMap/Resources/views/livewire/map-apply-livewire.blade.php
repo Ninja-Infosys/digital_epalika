@@ -213,11 +213,14 @@
                                 @foreach($applyMap['storeyDetails'] as $index=>$storeyDetail)
                                     <tr>
                                         <td>
-                                            <input type="text"
-                                                   id="storeyDetails.{{$index}}.storey"
-                                                   wire:model="applyMap.storeyDetails.{{$index}}.storey"
-                                            >
-                                            @error("applyMap.storeyDetails.".$index.".storey")
+                                            <select
+                                                wire:model="applyMap.storeyDetails.{{$index}}.map_fee_id">
+                                                <option value="">छान्नुहोस्</option>
+                                                @foreach($mapFees as $mapFee)
+                                                    <option value="{{$mapFee->id}}">{{$mapFee->storey}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error("applyMap.storeyDetails.".$index.".map_fee_id")
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
                                         </td>
@@ -510,21 +513,32 @@
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
-                                <td></td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <label for="citizenship_issued_date">१.६ नागरिकता लिएको मिति :
+                                    <label for="citizenship_issue_date">१.६ नागरिकता लिएको मिति :
                                         :</label>
                                     <input type="text"
-                                           id="citizenship_issued_date"
+                                           id="citizenship_issue_date"
                                            wire:model="landOwner.citizenship_issue_date"
                                     >
-                                    @error('landOwner.citizenship_issued_date')
+                                    @error('landOwner.citizenship_issue_date')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </td>
-                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="landOwner.address">१.७ ठेगाना :</label>
+                                    <input type="text"
+                                           id="landOwner.address"
+                                           wire:model="landOwner.address"
+                                    >
+                                    @error('landOwner.address')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </td>
+                                <td>
+
+                                </td>
                             </tr>
                             </tbody>
 
@@ -610,11 +624,8 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                                <td></td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <label for="citizenship_issued_date">
+                                    <label for="citizenship_issue_date">
                                         १.६ नागरिकता लिएको मिति :
                                     </label>
                                     <input type="text"
@@ -625,7 +636,23 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="houseOwner.address">
+                                        १.७ ठेगाना :
+                                    </label>
+                                    <input type="text"
+                                           id="houseOwner.address"
+                                           wire:model="houseOwner.address"
+                                    >
+                                    @error('houseOwner.address')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </td>
+                                <td>
+
+                                </td>
                             </tr>
                             </tbody>
 
@@ -732,6 +759,8 @@
                                 <tr>
                                     <th>पद</th>
                                     <th>नाम</th>
+                                    <th>फोन</th>
+                                    <th>ठेगाना</th>
                                     <th>NEC Council No.</th>
                                     <th>पालिकाको दर्ता नं</th>
                                     <th>कन्सल्टिंग फर्मबाट भए सो को नाम</th>
@@ -758,6 +787,22 @@
                                                    wire:model="designerDetails.{{$key}}.name"
                                             >
                                             @error("designerDetails.$key.name")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   wire:model="designerDetails.{{$key}}.phone"
+                                            >
+                                            @error("designerDetails.$key.phone")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input type="text"
+                                                   wire:model="designerDetails.{{$key}}.address"
+                                            >
+                                            @error("designerDetails.$key.address")
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
@@ -913,7 +958,7 @@
                                         @enderror
                                     </td>
                                     <td>
-                                        <label for="applicantDetail.citizenship_issued_date">
+                                        <label for="applicantDetail.citizenship_issue_date">
                                             १.६ नागरिकता लिएको मिति :
                                             :
                                         </label>

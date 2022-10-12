@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\EMap\Http\Controllers\ApplicationController;
 use Modules\EMap\Http\Controllers\Clients\ClientController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
 use Modules\EMap\Http\Controllers\OrganizationAuthController;
@@ -14,6 +15,13 @@ Route::prefix('profile')->group(function () {
 });
 
 Route::prefix('clients')->as('clients.')->group(function () {
-    Route::resource('client', ClientController::class);
+    Route::controller(ApplicationController::class)
+        ->prefix('client/{client}/mapApply/{mapApply}/application')
+        ->as('application.')->group(function () {
+            Route::get('mapAcceptance', 'mapAcceptance')->name('map-acceptance');
+            Route::get('technicianApproval', 'technicianApproval')->name('technician-approval');
+            Route::get('engineerApproval', 'engineerApproval')->name('engineer-approval');
+        });
     Route::resource('client/{client}/mapApply', MapApplyController::class)->names('mapApply');
+    Route::resource('client', ClientController::class);
 });

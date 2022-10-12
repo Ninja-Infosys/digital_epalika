@@ -12,6 +12,14 @@ class BusinessRegistrationPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'objectTransaction_access',
+            'objectTransaction_create',
+            'objectTransaction_edit',
+            'objectTransaction_delete',
+            'objectTransactionSubCategory_access',
+            'objectTransactionSubCategory_create',
+            'objectTransactionSubCategory_edit',
+            'objectTransactionSubCategory_delete',
             'businessNature_access',
             'businessNature_create',
             'businessNature_edit',

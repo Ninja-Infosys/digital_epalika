@@ -27,6 +27,7 @@ class HouseOwner extends Model
         'citizenship_issue_district_id',
         'citizenship_no',
         'citizenship_issue_date',
+        'address'
     ];
 
     public function mapApply(): BelongsTo

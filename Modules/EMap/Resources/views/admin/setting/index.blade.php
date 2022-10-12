@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.setting.index')}}">कार्यालय सेटिङ</a>
+                            <a href="{{route('emap.admin.mapSetting.index')}}">कार्यालय सेटिङ</a>
                         </li>
                         <li class="breadcrumb-item active">नक्सा सेटिङ सम्पादन गर्नुहोस्</li>
                     </ol>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('emap.admin.setting.store')}}" method="post"
+                    <form action="{{route('emap.admin.mapSetting.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
@@ -55,7 +55,8 @@
                                             class="form-control @error('land_measurement_id') is-invalid @enderror">
                                         <option value="">भूमि मापन एकाइ छान्नुहोस्</option>
                                         @foreach($unitTypes as $unitType)
-                                            <option value="{{$unitType->id}}" {{$unitType->id == old('land_measurement_id',$mapSetting->land_measurement_id ?? '') ? 'selected' : ''}}>{{$unitType->title}}</option>
+                                            <option
+                                                value="{{$unitType->id}}" {{$unitType->id == old('land_measurement_id',$mapSetting->land_measurement_id ?? '') ? 'selected' : ''}}>{{$unitType->title}}</option>
                                         @endforeach
 
                                     </select>
@@ -64,12 +65,14 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="land_measurement_standard_id" class="form-label">भूमि मापन मानक एकाइ</label>
+                                    <label for="land_measurement_standard_id" class="form-label">भूमि मापन मानक
+                                        एकाइ</label>
                                     <select name="land_measurement_standard_id" id="land_measurement_standard_id"
                                             class="form-control @error('land_measurement_standard_id') is-invalid @enderror">
                                         <option value="">भूमि मापन मानक एकाइ छान्नुहोस्</option>
                                         @foreach($units as $unit)
-                                            <option value="{{$unit->id}}" {{$unit->id == old('land_measurement_standard_id',$mapSetting->land_measurement_standard_id ?? '') ? 'selected' : ''}}>{{$unit->title}}</option>
+                                            <option
+                                                value="{{$unit->id}}" {{$unit->id == old('land_measurement_standard_id',$mapSetting->land_measurement_standard_id ?? '') ? 'selected' : ''}}>{{$unit->title}}</option>
                                         @endforeach
                                     </select>
                                     @error('land_measurement_standard_id')

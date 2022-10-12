@@ -47,6 +47,10 @@ class ClientController extends Controller
     {
         $this->authorize('view', $client);
 
+        $client->load(['mapApplies'=>function($query){
+            $query->orderByDesc('fiscal_year_id');
+        },'mapApplies.fiscalYear']);
+
         return view('emap::organization.clients.client.show', compact('client'));
     }
 

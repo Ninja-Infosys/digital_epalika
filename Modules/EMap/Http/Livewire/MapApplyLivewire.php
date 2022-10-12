@@ -11,6 +11,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Entities\StructureType;
 use Modules\EMap\Enums\BuildingDetailEnum;
@@ -37,6 +38,7 @@ class MapApplyLivewire extends Component
     public $conversion_id;
 
     public $units = [];
+    public $mapFees = [];
 
     public $convertedData = 0;
 
@@ -74,7 +76,8 @@ class MapApplyLivewire extends Component
         'father_name' => null,
         'citizenship_issue_district_id' => null,
         'citizenship_no' => null,
-        'citizenship_issue_date' => null
+        'citizenship_issue_date' => null,
+        'address' => null,
     ];
 
     public array $houseOwner = [
@@ -83,7 +86,8 @@ class MapApplyLivewire extends Component
         'father_name' => null,
         'citizenship_issue_district_id' => null,
         'citizenship_no' => null,
-        'citizenship_issue_date' => null
+        'citizenship_issue_date' => null,
+        'address' => null,
     ];
 
     public array $fourFortDetails = [];
@@ -110,6 +114,7 @@ class MapApplyLivewire extends Component
     public function mount(Client $client)
     {
         $this->setting = MapSetting::with('landMeasurement')->first();
+        $this->mapFees = MapFee::with('unit')->get();
 
 
         if (empty($this->setting->land_measurement_id)) {
@@ -135,6 +140,8 @@ class MapApplyLivewire extends Component
             $this->designerDetails[] = [
                 'post' => $designerDetail->value,
                 'name' => null,
+                'phone' => null,
+                'address' => null,
                 'nec_council_no' => null,
                 'local_body_registration_no' => null,
                 'consulting_firm_name' => null,
@@ -162,7 +169,7 @@ class MapApplyLivewire extends Component
 //    convert Functions
     public function convert()
     {
-        if (!empty($this->landDescription['unit_value']) > 0 && !empty($this->conversion_id)) {
+        if ((!empty($this->landDescription['unit_value'])) > 0 && !empty($this->conversion_id)) {
             $si_unit_value = $this->landDescription['unit_value'];
 
             $rate = $this->conversionToSmallest();
@@ -273,7 +280,7 @@ class MapApplyLivewire extends Component
         'applyMap.breadth' => ['required', 'numeric'],
         'applyMap.height' => ['required', 'numeric'],
         'applyMap.storeyDetails' => ['nullable', 'array'],
-        'applyMap.storeyDetails.*.storey' => ['required', 'integer'],
+        'applyMap.storeyDetails.*.map_fee_id' => ['required', 'exists:map_fees,id'],
         'applyMap.storeyDetails.*.area_of_proposed_construction' => ['required', 'numeric'],
         'applyMap.storeyDetails.*.area_of_former_construction' => ['required', 'numeric'],
         'applyMap.storeyDetails.*.total_area' => ['required', 'numeric'],
@@ -298,7 +305,8 @@ class MapApplyLivewire extends Component
         'landOwner.father_name' => ['required'],
         'landOwner.citizenship_issue_district_id' => ['required', 'exists:districts,id'],
         'landOwner.citizenship_no' => ['required'],
-        'landOwner.citizenship_issue_date' => ['required']
+        'landOwner.citizenship_issue_date' => ['required'],
+        'landOwner.address' => ['required']
     ];
 
     protected array $houseOwnerValidations = [
@@ -307,7 +315,8 @@ class MapApplyLivewire extends Component
         'houseOwner.father_name' => ['required'],
         'houseOwner.citizenship_issue_district_id' => ['required', 'exists:districts,id'],
         'houseOwner.citizenship_no' => ['required'],
-        'houseOwner.citizenship_issue_date' => ['required']
+        'houseOwner.citizenship_issue_date' => ['required'],
+        'houseOwner.address' => ['required']
     ];
 
     protected array $fourFortValidations = [
@@ -322,6 +331,8 @@ class MapApplyLivewire extends Component
     protected array $designerDetailValidations = [
         'designerDetails' => ['required', 'array'],
         'designerDetails.*.name' => ['required'],
+        'designerDetails.*.phone' => ['required'],
+        'designerDetails.*.address' => ['required'],
         'designerDetails.*.post' => ['required'],
         'designerDetails.*.nec_council_no' => ['required'],
         'designerDetails.*.local_body_registration_no' => ['required'],
@@ -354,7 +365,7 @@ class MapApplyLivewire extends Component
         'buildingDetails' => ['required', 'array'],
         'buildingDetails.*.detail' => ['required'],
         'buildingDetails.*.description' => ['required'],
-        'buildingDetails.*.remarks' => ['required'],
+        'buildingDetails.*.remarks' => ['nullable'],
     ];
 
     public function rules()
@@ -396,13 +407,22 @@ class MapApplyLivewire extends Component
         $this->validate();
 
         DB::transaction(function () {
+
+            if ($this->applyMap['structure_type']) {
+                $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
+
+                $this->applyMap['structure_type_id'] = $structure_type->id ?? '';
+            }
+
             $mapApply = $this->client->mapApplies()->create($this->applyMap);
 
             foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
                 $mapApply->storeyDetails()->create($storeyDetail);
             }
 
-            $mapApply->landDetail()->create($this->landDescription);
+            $mapApply->landDetail()->create($this->landDescription + [
+                    'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null
+                ]);
 
             $mapApply->landOwner()->create($this->landOwner);
 
@@ -426,7 +446,7 @@ class MapApplyLivewire extends Component
             }
         });
 
-        $this->reset('mapApply', 'landDescription', 'landOwner', 'houseOwner', 'fourFortDetails', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
+        $this->reset('applyMap', 'landDescription', 'landOwner', 'houseOwner', 'fourFortDetails', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
 
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",
@@ -450,6 +470,7 @@ class MapApplyLivewire extends Component
             $this->applicantDetail['citizenship_no'] = null;
             $this->applicantDetail['citizenship_issue_date'] = null;
         }
+
 
         return view('emap::livewire.map-apply-livewire');
     }
