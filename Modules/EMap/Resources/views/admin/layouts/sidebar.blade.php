@@ -13,6 +13,11 @@
                     <span>दर्ता भएका संगठन</span>
                 </a>
             </li>
+            <li class="{{request()->routeIs('emap.admin.map.index') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.map.index')}}">
+                    <span>नक्सा</span>
+                </a>
+            </li>
             <li>
                 <a href="#sidebarEMapSetting" data-bs-toggle="collapse">
                     <span>सेटिङ</span>
