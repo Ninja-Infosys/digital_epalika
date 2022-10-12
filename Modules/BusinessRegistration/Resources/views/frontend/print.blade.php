@@ -268,7 +268,7 @@
                                     <div class="col-sm-1-1" style="width: 25%; float: right;">
                                         <div class="pull-left" style="width: 100px;">
 {{--                                            <img src="{!!QrCode::format('png')->size(70)->generate($proprietorDetail->businessDetail->submission_no??'')!!}">--}}
-                                            <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->generate($proprietorDetail->businessDetail->submission_no??''))!!} ">
+                                            <img src="data:image/png;base64, {!! base64_encode(QrCode::encoding('UTF-8')->format('png')->generate($proprietorDetail->businessDetail->submission_no??''))!!} ">
                                         </div>
                                         <div class="pp-photo pull-right">
 
