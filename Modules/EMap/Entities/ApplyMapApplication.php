@@ -17,13 +17,15 @@ class ApplyMapApplication extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'rejected_at'
     ];
 
     protected $fillable = [
         'map_apply_id',
         'file',
         'file_type',
+        'rejected_at'
     ];
 
     protected $casts = [
