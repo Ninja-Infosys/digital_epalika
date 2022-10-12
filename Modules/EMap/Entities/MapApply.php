@@ -26,6 +26,7 @@ class MapApply extends Model
 
     protected $fillable = [
         'client_id',
+        'unique_id',
         'fiscal_year_id',
         'registration_no',
         'registration_date',

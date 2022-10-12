@@ -122,7 +122,7 @@
                                 {{$mapApply->height}}
                             </span>
                         </p>
-                        <div class="break-page"></div>
+                        <p class="break-page"></p>
                         <p>
                             १.११ तल्लाको क्षेत्रफल र उचाईको विवरण :
                         </p>

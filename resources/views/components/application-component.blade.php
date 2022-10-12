@@ -1,7 +1,7 @@
 <div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadApplicationModal"  data-bs-file_type="{{$applicationType->value}}"
-            data-bs-file_type_label="{{$applicationType->label()}}">
-        Upload Application
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadApplicationModal"  data-bs-file_type="{{$applicationType->value}}"
+            data-bs-file_type_label="{{$applicationType->label()}}" title="Upload Application">
+        <i class="fa fa-upload"></i>
     </button>
     <div class="modal fade" id="uploadApplicationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
