@@ -19,4 +19,4 @@ Route::prefix('setting')->group(function () {
 });
 
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
-Route::view('sandhiyar', 'emap::admin.sandhiyar.sandhiyar');
+Route::view('officeletter', 'emap::admin.offical_letter.officeletter');
