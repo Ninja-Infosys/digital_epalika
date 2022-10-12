@@ -1,7 +1,7 @@
 $("#printButton").on('click', function (event) {
     event.preventDefault();
     const elementId = $(this).attr('printElementId')
-    let data = document.getElementById(elementId).outerHTML;
+    let data = document.getElementById(elementId).innerHTML;
     let _token = $('meta[name="csrf-token"]').attr('content');
     if (data) {
         $.ajax({

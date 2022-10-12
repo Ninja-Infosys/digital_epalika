@@ -10,8 +10,9 @@ return new class extends Migration {
         Schema::create('map_applies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('registration_no');
-            $table->string('registration_date');
+            $table->string('unique_id')->nullable();
+            $table->string('registration_no')->nullable();
+            $table->string('registration_date')->nullable();
             $table->string('construction_type');
             $table->string('usage');
             $table->string('building_category');
