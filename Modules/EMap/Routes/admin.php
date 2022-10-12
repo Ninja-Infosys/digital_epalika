@@ -12,3 +12,5 @@ Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
 });
+
+Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');

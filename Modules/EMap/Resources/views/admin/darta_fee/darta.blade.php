@@ -1,0 +1,156 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">दस्तुर तथा दर्ता सम्बन्धी</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="card mb_30">
+                                <div class="card-body p-3">
+                                    <div class="font-black" id="printData">
+                                        <p>घरधनीको नाम, थर: ........................... </p>
+                                        <p>भू-उपयोग क्षेत्र : .............................. </p>
+                                        <p>निर्माणको विवरण : ............................</p>
+                                        <p>निर्माणको प्रयोजन : ............................</p>
+                                        <p>भवनको वर्गीकरण :
+
+                                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                            <label class="form-check-label" for="inlineRadio1">क</label>
+                                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <label class="form-check-label" for="inlineRadio2">ख</label>
+                                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <label class="form-check-label" for="inlineRadio2">ग</label>
+                                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                            <label class="form-check-label" for="inlineRadio2">घ</label>
+                                       </p>
+                                        <p>निर्माणको स्ट्रक्चरल सिस्टम : ......................</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col" rowspan="2">तल्लाको विवरण</th>
+                                <th scope="col" rowspan="2">प्रस्तावित निर्माणको क्षेत्रफल</th>
+                                <th colspan="2">नक्सा दस्तुर</th>
+                                <th scope="col" rowspan="2">कैफियत</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td></td>
+                                <td>(वर्ग फिट/मिटर)</td>
+                                <td>दर</td>
+                                <td>रकम</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">सेमि/बेसमेन्ट १</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">सेमि/बेसमेन्ट २</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">सेमि/बेसमेन्ट ३</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">भुइँ</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">पहिलो</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">दोस्रो</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">तेस्रो</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">चौथो</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <th colspan="2">जम्मा</th>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">फारम दस्तुर</th>
+                                <td colspan="3"></td>
+                                <td rowspan="4">राजस्व उपशाखामा बुझाउने</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">निवेदक दर्ता दस्तुर</th>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">अन्य</th>
+                                <td colspan="3"> </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">कुल जम्मा</th>
+                                <td colspan="3"> </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <div class="font-black" id="printData">
+                                        <p>अक्षरेपी............................................................... </p>
+                                        <p>फाटवालाको सही: .............................. </p>
+                                        <p>मिति: ....................................... रसिद नं: .................................. रकम बुझने: ...............................</p>
+                                        <strong>राजस्व शाखाको प्रयोजनको लागि</strong>
+                                        <p>निवेदकको नक्सा पास दस्तुर वापत रु: ........................................................................................... बाट प्राप्त भयो |</p>
+                                        <p>मिति: ....................................... रसिद नं: .................................. रकम बुझने: ...............................</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+@endsection
