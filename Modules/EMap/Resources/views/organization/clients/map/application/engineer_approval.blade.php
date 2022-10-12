@@ -7,6 +7,10 @@
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र</h3>
                         <div>
+                            <a href=""
+                               class="btn btn-primary btn-sm">
+                                <i class="fa fa-file"></i> Upload File
+                            </a>
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                                     requestRoute="{{route('print.application-print')}}">
                                 <i class="fa fa-print"></i> Print
