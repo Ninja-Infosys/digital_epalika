@@ -10,14 +10,5 @@ use Modules\EMap\Entities\MapApply;
 
 class ApplyMapApplicationController extends Controller
 {
-    public function applyMapApplicationForm(Client $client ,MapApply $mapApply)
-    {
-        return view('emap::organization.clients.map.applyMapApplication.index', compact('client', 'mapApply'));
-    }
 
-
-    public function applyMapApplication(Request $request ,Client $client ,MapApply $mapApply)
-    {
-
-    }
 }

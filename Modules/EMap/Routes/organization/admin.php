@@ -22,13 +22,9 @@ Route::prefix('clients')->as('clients.')->group(function () {
             Route::get('mapAcceptance', 'mapAcceptance')->name('map-acceptance');
             Route::get('technicianApproval', 'technicianApproval')->name('technician-approval');
             Route::get('engineerApproval', 'engineerApproval')->name('engineer-approval');
+            Route::post('applyMapApplication','applyMapApplication')->name('apply-map-application');
         });
-    Route::controller(ApplyMapApplicationController::class)
-        ->prefix('client/{client}/mapApply/{mapApply}/applyMapApplication')
-        ->as('applyMapApplication.')->group(function (){
-            Route::get('applyMapApplication','applyMapApplicationForm')->name('apply-mapApplication');
-            Route::post('applyMapApplication','applyMapApplication')->name('apply-mapApplication');
-        });
+
     Route::resource('client/{client}/mapApply', MapApplyController::class)->names('mapApply');
     Route::resource('client', ClientController::class);
 });
