@@ -29,8 +29,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Model::preventLazyLoading(!$this->app->isProduction());
-        view()->share('important_links', ImportantLink::all());
-        view()->share('officeSetting', OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first());
         OfficeHeader::observe(OfficeHeaderObserver::class);
         Unit::observe(UnitObserver::class);
         MunicipalCommittee::observe(MunicipalCommitteeObserver::class);
