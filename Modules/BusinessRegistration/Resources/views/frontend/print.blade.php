@@ -263,7 +263,7 @@
 
                                         <x-header-component/>
                                         <h4 style="font-size: 20px;font-family:Kalimati; ">व्यवसाय दर्ता/नवीकरण निवेदन
-                                            फाराम</h4>
+                                            फाराम </h4>
                                     </div>
                                     <div class="col-sm-1-1" style="width: 25%; float: right;">
                                         <!-- <img src="" class="pull-left" width="83px" height="70px" alt="qrcode" /> -->
