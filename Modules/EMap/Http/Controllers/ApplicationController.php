@@ -13,6 +13,7 @@ class ApplicationController extends Controller
     public function mapAcceptance(Client $client, MapApply $mapApply)
     {
         $mapApply->load('houseOwner', 'landDetail', 'landDetail.unit');
+
         return view('emap::organization.clients.map.application.map_acceptance', compact('client', 'mapApply'));
     }
 

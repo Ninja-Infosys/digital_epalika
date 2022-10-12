@@ -22,13 +22,20 @@
             font-family: Kalimati;
             font-weight: 600;
         }
+
         .underline-dotted {
-            border-bottom:  dotted 3px !important;
+            border-bottom: dotted 3px !important;
             padding: 0 15px;
         }
 
-        .custom-width{
+        .custom-width {
             padding: 0 50px !important;
+        }
+
+        @media print {
+            .break-page {
+                page-break-after: always !important;
+            }
         }
     </style>
 </head>
