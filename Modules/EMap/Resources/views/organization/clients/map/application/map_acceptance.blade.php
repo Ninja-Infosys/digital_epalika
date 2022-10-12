@@ -16,12 +16,12 @@
                         <div class="d-flex justify-content-between">
                             <x-application-component :application-type="App\Enums\ApplicationTypeEnum::MAP_ACCEPTANCE" url="{{route('organization.admin.clients.application.apply-map-application',[$client,$mapApply])}}"></x-application-component>
 
-                            <button id="printButton" class="btn btn-sm btn-success" printElementId='printData' requestRoute="{{route('print.application-print')}}">
-                                <i class="fa fa-print"></i> Print
+                            <button id="printButton" class="btn btn-sm btn-success mx-2" title="Print Application" printElementId='printData' requestRoute="{{route('print.application-print')}}">
+                                <i class="fa fa-print"></i>
                             </button>
                             <a href="{{route('organization.admin.clients.client.show', $client)}}"
-                               class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> {{$client->name ?? ''}}को विवरण हेर्नुहोस
+                               class="btn btn-primary btn-sm" title="{{$client->name ?? ''}}को विवरण हेर्नुहोस">
+                                <i class="fa fa-eye"></i>
                             </a>
                         </div>
 
