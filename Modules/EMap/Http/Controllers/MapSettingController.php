@@ -33,7 +33,7 @@ class MapSettingController extends Controller
             MapSetting::create($data);
         }
         toast('नक्सा सेटिंग अद्यावधिक गरियो', 'success');
-        return redirect(route('emap.admin.setting.index'));
+        return redirect(route('emap.admin.mapSetting.index'));
     }
 
 }
