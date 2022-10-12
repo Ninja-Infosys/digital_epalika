@@ -5,41 +5,19 @@ namespace Modules\EMap\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\EMap\Entities\Client;
+use Modules\EMap\Entities\MapApply;
 
 class ApplyMapApplicationController extends Controller
 {
-    public function index()
+    public function applyMapApplicationForm(Client $client ,MapApply $mapApply)
     {
-        return view('emap::index');
+        return view('emap::organization.clients.map.applyMapApplication.index', compact('client', 'mapApply'));
     }
 
-    public function create()
-    {
-        return view('emap::create');
-    }
 
-    public function store(Request $request)
+    public function applyMapApplication(Request $request ,Client $client ,MapApply $mapApply)
     {
-        //
-    }
 
-    public function show($id)
-    {
-        return view('emap::show');
-    }
-
-    public function edit($id)
-    {
-        return view('emap::edit');
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
     }
 }

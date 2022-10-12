@@ -7,7 +7,7 @@
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र</h3>
                         <div>
-                            <a href=""
+                            <a href="{{route('organization.admin.clients.applyMapApplication.apply-mapApplication',[$client,$mapApply])}}"
                                class="btn btn-primary btn-sm">
                                 <i class="fa fa-file"></i> Upload File
                             </a>
