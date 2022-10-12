@@ -269,7 +269,7 @@
                                         <!-- <img src="" class="pull-left" width="83px" height="70px" alt="qrcode" /> -->
 
                                         <div class="pull-left" style="width: 100px;">
-                                            {!! QrCode::size(70)->generate($proprietorDetail->businessDetail->submission_no??''); !!}
+                                            <img src="{!!QrCode::format('png')->size(70)->generate($proprietorDetail->businessDetail->submission_no??'')!!}">
                                         </div>
                                         <div class="pp-photo pull-right">
 
