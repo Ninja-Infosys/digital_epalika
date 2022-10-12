@@ -2,15 +2,20 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-lg-12">
+            <div>
+                @error('file')
+                <div class="alert alert-danger">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
             <div class="card mb_30">
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र</h3>
-                        <div>
-                            <a href="{{route('organization.admin.clients.applyMapApplication.apply-mapApplication',[$client,$mapApply])}}"
-                               class="btn btn-primary btn-sm">
-                                <i class="fa fa-file"></i> Upload File
-                            </a>
+                        <div class="d-flex justify-content-between">
+                            <x-application-component :application-type="App\Enums\ApplicationTypeEnum::ENGINEER_APPROVAL" url="{{route('organization.admin.clients.application.apply-map-application',[$client,$mapApply])}}"></x-application-component>
+
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                                     requestRoute="{{route('print.application-print')}}">
                                 <i class="fa fa-print"></i> Print
@@ -25,6 +30,7 @@
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card mb_30">
