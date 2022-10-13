@@ -46,7 +46,7 @@
 
     @include('admin.layouts.header')
 
-    @include('admin.layouts.sidebar')
+    @include('admin.layouts.side_nav')
 
     <div class="content-page">
         <div class="content">

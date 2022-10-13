@@ -55,6 +55,12 @@
                                 खारेज भएका आवेदन
                             </a>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <a href="#organization_tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
+                               aria-selected="false" role="tab" tabindex="-1">
+                                आवेदन भर्ने संस्था
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="application_tab" role="tabpanel">
@@ -142,6 +148,52 @@
                                         </div>
                                     </div>
                                 @endforeach
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="organization_tab" role="tabpanel">
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                <table class="table table-sm mb-0 table-striped table-hover">
+                                    <tr>
+                                        <th>नाम</th>
+                                        <td>{{$mapApply->organization->organizationDetail->org_name_ne ?? ''}}
+                                            ({{$mapApply->organization->organizationDetail->org_name_en ?? ''}})
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>इमेल</th>
+                                        <td>{{$mapApply->organization->organizationDetail->org_email ?? ''}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>फोन</th>
+                                        <td>{{$mapApply->organization->organizationDetail->org_contact ?? ''}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>लिङ्ग</th>
+                                        <td>{{$mapApply->organization->organizationDetail->org_registration_no ?? ''}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>इमेल</th>
+                                        <td>{{$mapApply->organization->organizationDetail->org_pan_no ?? ''}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>ठेगाना</th>
+                                        <td>{{$mapApply->organization->organizationDetail->localBody->local_body ?? ''}}
+                                            -{{$mapApply->organization->organizationDetail->ward ?? ''}}
+                                            , {{$mapApply->organization->organizationDetail->tole ?? ''}}
+                                            , {{$mapApply->organization->organizationDetail->district->district ?? ''}}
+                                            , {{$mapApply->organization->organizationDetail->province->province ?? ''}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a href="{{route('emap.admin.organization.show',$mapApply->organization_id)}}" class="btn btn-sm btn-primary">
+                                                <i class="fa fa-eye"> पुरा विवरण हेर्नुहोस</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                </table>
                             </div>
                         </div>
                     </div>

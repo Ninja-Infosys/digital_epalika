@@ -67,6 +67,11 @@ class MapApply extends Model
         return Storage::disk('public')->url($this->attributes['consultant_signature']);
     }
 
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);

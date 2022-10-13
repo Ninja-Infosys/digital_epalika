@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\EMap\Http\Controllers\MapController;
+use Modules\EMap\Http\Controllers\Admin\DashboardController;
+use Modules\EMap\Http\Controllers\Admin\MapController;
+use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\MapFeeController;
 use Modules\EMap\Http\Controllers\MapSettingController;
-use Modules\EMap\Http\Controllers\OrganizationController;
+
+Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);

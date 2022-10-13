@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EMap\Http\Controllers;
+namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
@@ -17,7 +17,7 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'mapApplyApplications'])->whereHas('mapApplyApplications', function ($query) {
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'mapApplyApplications'])->whereHas('mapApplyApplications', function ($query) {
             $query->selectRaw('id,map_apply_id,file_type,created_at')->whereNull('rejected_at')->latest();
         })->get();
 
@@ -27,7 +27,7 @@ class MapController extends Controller
 
     public function show(MapApply $mapApply)
     {
-        $mapApply->load(['fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications' => function ($query) {
+        $mapApply->load(['fiscalYear', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications' => function ($query) {
             $query->latest();
         }]);
         return view('emap::admin.map.show', compact('mapApply'));

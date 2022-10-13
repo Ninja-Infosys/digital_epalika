@@ -16,6 +16,7 @@ use App\Observers\OfficeHeaderObserver;
 use App\Observers\UnitObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,5 +35,7 @@ class AppServiceProvider extends ServiceProvider
         MunicipalCommittee::observe(MunicipalCommitteeObserver::class);
         WardCommittee::observe(WardCommitteeObserver::class);
         MunicipalDetail::observe(MunicipalDetailObserver::class);
+
+        Blade::componentNamespace('App\\View\\Components\\Navigation', 'admin');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EMap\Http\Controllers;
+namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OrganizationRegistered;
