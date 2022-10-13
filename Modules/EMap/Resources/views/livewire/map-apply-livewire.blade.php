@@ -1168,56 +1168,51 @@
 
             <div>
                 <input type="file"
-                       class="@error('consultant_engineer_signature') is-invalid @enderror "
-                       id="consultant_engineer_signature"
-                       name="consultant_engineer_signature"
-                       value="{{old('consultant_engineer_signature')}}"
+                       wire:model="applyMap.consultant_signature"
+                       id="applyMap.consultant_signature"
                 >
             </div>
             <div class="px-5">
                 <label
-                    for="applicant_signature"><b>(कन्सल्टेन्ट इंन्जिनियरको सहि): </b></label>
+                    for="applyMap.consultant_signature">
+                    <b>(कन्सल्टेन्ट इंन्जिनियरको सहि): </b>
+                </label>
             </div>
-            @error('consultant_engineer_signature')
+            @error('applyMap.consultant_signature')
             <p class="text-danger">{{$message}}</p>
             @enderror
             <div>
                 <label
-                    for="name"><b>नाम: </b></label>
+                    for="applyMap.consultant_name">
+                    <b>नाम: </b>
+                </label>
                 <input type="text"
-                       class="@error('name') is-invalid @enderror "
-                       id="name"
-                       name="name"
-                       value="{{old('name')}}"
-                >
+                       wire:model="applyMap.consultant_name"
+                       id="applyMap.consultant_name">
             </div>
-            @error('name')
+            @error('applyMap.consultant_name')
             <p class="text-danger">{{$message}}</p>
             @enderror
             <div>
                 <label
-                    for="name"><b>मोबाइल नं.: </b></label>
+                    for="applyMap.consultant_mobile_no"><b>मोबाइल नं.: </b></label>
                 <input type="text"
-                       class="@error('mobile_no') is-invalid @enderror "
-                       id="mobile_no"
-                       name="mobile_no"
-                       value="{{old('mobile_no')}}"
+                       wire:model="applyMap.consultant_mobile_no"
+                       id="applyMap.consultant_mobile_no"
                 >
             </div>
-            @error('name')
+            @error('applyMap.consultant_mobile_no')
             <p class="text-danger">{{$message}}</p>
             @enderror
             <div>
                 <label
-                    for="nec_no"><b>एन. ई. सी. नं: </b></label>
+                    for="applyMap.consultant_nec_no"><b>एन. ई. सी. नं: </b></label>
                 <input type="text"
-                       class="@error('nec_no') is-invalid @enderror "
-                       id="nec_no"
-                       name="nec_no"
-                       value="{{old('nec_no')}}"
+                       wire:model="applyMap.consultant_nec_no"
+                       id="applyMap.consultant_nec_no"
                 >
             </div>
-            @error('nec_no')
+            @error('applyMap.consultant_nec_no')
             <p class="text-danger">{{$message}}</p>
             @enderror
 

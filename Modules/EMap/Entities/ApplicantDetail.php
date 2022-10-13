@@ -18,7 +18,6 @@ class ApplicantDetail extends Model
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
-        'citizenship_issue_date',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -34,6 +33,7 @@ class ApplicantDetail extends Model
         'citizenship_issue_district_id',
         'citizenship_no',
         'citizenship_issue_date',
+        'application_date',
         'signature'
     ];
 

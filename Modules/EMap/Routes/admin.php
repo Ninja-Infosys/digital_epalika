@@ -10,7 +10,9 @@ Route::get('organization/{organization}/updateLoginStatus', [OrganizationControl
 Route::resource('organization', OrganizationController::class);
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
-    Route::get('/', 'index')->name('index');
+    Route::get('mapApply', 'index')->name('mapApply.index');
+    Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
+    Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
 });
 Route::prefix('setting')->group(function () {
 

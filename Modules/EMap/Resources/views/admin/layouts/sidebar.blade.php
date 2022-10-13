@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="{{request()->routeIs('emap.admin.map.index') ? 'active' : ''}}">
-                <a href="{{route('emap.admin.map.index')}}">
+                <a href="{{route('emap.admin.map.mapApply.index')}}">
                     <span>नक्सा</span>
                 </a>
             </li>

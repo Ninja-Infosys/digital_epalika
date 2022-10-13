@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ExecutiveMeeting\WardMeetingNoticeController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\ListRegistrationController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
@@ -28,6 +29,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+//notification
+Route::get('notification', [NotificationController::class, 'notification'])->name('notification');
+Route::get('notification/{databaseNotification}', [NotificationController::class, 'readNotification'])->name('notification.read');
+Route::get('readAllNotification',[NotificationController::class,'readAllNotification'])->name('notification.readAllNotification');
+
 
 Route::prefix('userManagement')->as('userManagement.')->group(function () {
     Route::resource('role', RoleController::class);

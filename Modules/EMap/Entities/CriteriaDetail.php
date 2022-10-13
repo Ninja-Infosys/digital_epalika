@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\DetailsRegardingCriteriaEnum;
 
 class CriteriaDetail extends Model
 {
@@ -25,6 +26,10 @@ class CriteriaDetail extends Model
         'according_to_map',
         'compliance',
         'remarks'
+    ];
+
+    protected $casts = [
+        'detail' => DetailsRegardingCriteriaEnum::class
     ];
 
     public function mapApply(): BelongsTo

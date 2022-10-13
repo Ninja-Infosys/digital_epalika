@@ -9,7 +9,7 @@ class ApplyMapApplicationObserver
 
     public function creating(ApplyMapApplication $applyMapApplication): void
     {
-        $appliedApplications = ApplyMapApplication::where('file_type', $applyMapApplication->file_type)->get();
+        $appliedApplications = ApplyMapApplication::whereNull('rejected_at')->where('file_type', $applyMapApplication->file_type)->get();
         foreach ($appliedApplications as $appliedApplication){
             $appliedApplication->rejected_at = now();
             $appliedApplication->saveQuietly();
@@ -18,7 +18,7 @@ class ApplyMapApplicationObserver
 
     public function updating(ApplyMapApplication $applyMapApplication): void
     {
-        $appliedApplications = ApplyMapApplication::where('id','!=',$applyMapApplication->id)->where('file_type', $applyMapApplication->file_type)->get();
+        $appliedApplications = ApplyMapApplication::whereNull('rejected_at')->where('id','!=',$applyMapApplication->id)->where('file_type', $applyMapApplication->file_type)->get();
         foreach ($appliedApplications as $appliedApplication){
             $appliedApplication->rejected_at = now();
             $appliedApplication->saveQuietly();
