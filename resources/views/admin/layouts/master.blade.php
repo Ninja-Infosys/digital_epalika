@@ -94,7 +94,7 @@
 
 {{--<script src="{{asset('assets/backend/libs/selectize/js/standalone/selectize.min.js')}}"></script>--}}
 
-<!-- Dashboar 1 init js-->
+<!-- Dashboard 1 init js-->
 {{--<script src="{{asset('assets/backend/js/pages/dashboard-1.init.js')}}"></script>--}}
 
 <!-- App js-->
@@ -104,7 +104,7 @@
 
 <script>
     $('.show_confirm').click(function (event) {
-        var form = $(this).closest("form");
+        const form = $(this).closest("form");
         event.preventDefault();
 
         swal.fire({
