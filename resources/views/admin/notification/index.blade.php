@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm mb-0">
                             <thead>
                             <tr>
                                 <th>SN</th>
@@ -44,7 +44,7 @@
                             </thead>
                             <tbody>
                             @foreach ($notifications as $key=>$notification )
-                                <tr style="{{ $notification->read_at ? '' : 'background:#fff' }}">
+                                <tr style="{{ $notification->read_at ? '' : 'background-color:#edeff1;' }}">
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $notification->type }}</td>
                                     <td>
