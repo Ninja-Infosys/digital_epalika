@@ -31,6 +31,11 @@
         .custom-width {
             padding: 0 50px !important;
         }
+        @media print {
+            .break-page {
+                page-break-after: always !important;
+            }
+        }
     </style>
 </head>
 
@@ -42,14 +47,13 @@
         <div class="col-md-2 col-sm-2 col-xs-2">
             <a href="https://digital-palika.ninjainfosys.com.np" class="main-logo">
                 <img alt="nepal-government-logo" class="m-2" height="120" width="140"
-                     src="https://digital-palika.ninjainfosys.com.np/storage/office_setting/logo/ikdPdTCOt3UIrx1ZuFq91a7HBcplBNBlislMFnRj.png">
+                     src="{{asset('images/np.png')}}">
             </a>
         </div>
         <div class="col-md-8 col-sm-8 col-xs-8">
             <div class="row mt-3">
                 <div class="text-center">
-                    <span style="color: #b90000; font-size: 1.6rem; font-weight: bold;">खजुरा गाउँपालिका</span> <br>
-                    <span style="color: #bb0000; font-size: 1.2rem; font-weight: normal;">गाउँकार्यपालिकाको कार्यालय, खजुरा, बाँके</span>
+                   <x-header-component/>
                 </div>
             </div>
         </div>
