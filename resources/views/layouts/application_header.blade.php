@@ -32,6 +32,10 @@
             padding: 0 50px !important;
         }
 
+        input[type=checkbox]:disabled {
+            background: #dddddd;
+        }
+
         @media print {
             .break-page {
                 page-break-after: always !important;
