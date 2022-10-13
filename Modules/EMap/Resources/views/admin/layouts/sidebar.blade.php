@@ -4,18 +4,22 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+@can('organization_access')
 <li class="{{request()->routeIs('emap.admin.organization.index') ? 'active' : ''}}">
     <a href="{{route('emap.admin.organization.index')}}">
         <i class="fa fa-stamp"></i>
         <span>दर्ता भएका संगठन</span>
     </a>
 </li>
+@endcan
+@can('mapFee_access')
 <li class="{{request()->routeIs('emap.admin.map.index') ? 'active' : ''}}">
     <a href="{{route('emap.admin.map.mapApply.index')}}">
         <i class="fa fa-map"></i>
         <span>नक्सा</span>
     </a>
 </li>
+@endcan
 <li>
     <a href="#sidebarEMapSetting" data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
