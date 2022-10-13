@@ -33,6 +33,7 @@ class ApplicantDetail extends Model
         'citizenship_issue_district_id',
         'citizenship_no',
         'citizenship_issue_date',
+        'application_date',
         'signature'
     ];
 

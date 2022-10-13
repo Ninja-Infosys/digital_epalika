@@ -52,7 +52,7 @@
                         <li class="nav-item" role="presentation">
                             <a href="#rejected_application_tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
                                aria-selected="false" role="tab" tabindex="-1">
-                                खारेज भएका सूचना
+                                खारेज भएका आवेदन
                             </a>
                         </li>
                     </ul>
@@ -94,15 +94,7 @@
                         </div>
 
                         <div class="tab-pane show" id="detail-tab" role="tabpanel">
-                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
-                                rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis
-                                pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
-                                eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
-                                enim.</p>
-                            <p class="mb-0">Vakal text here dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-                                montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-                                pretium quis, sem. Nulla consequat massa quis enim.</p>
+                            @includeIf('emap::inc.map_show')
                         </div>
 
                         <div class="tab-pane" id="notice-tab" role="tabpanel">

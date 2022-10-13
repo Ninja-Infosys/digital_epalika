@@ -27,7 +27,7 @@ class MapController extends Controller
 
     public function show(MapApply $mapApply)
     {
-        $mapApply->load(['fiscalYear', 'mapApplyApplications' => function ($query) {
+        $mapApply->load(['fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications' => function ($query) {
             $query->latest();
         }]);
         return view('emap::admin.map.show', compact('mapApply'));
@@ -38,11 +38,11 @@ class MapController extends Controller
     {
         if ($applyMapApplication->rejected_at == null) {
             $applyMapApplication->update(['rejected_at' => now()]);
-        }else{
+        } else {
             $applyMapApplication->update(['rejected_at' => null]);
         }
 
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');
-        return redirect(route('emap.admin.map.mapApply.show',$mapApply));
+        return redirect(route('emap.admin.map.mapApply.show', $mapApply));
     }
 }

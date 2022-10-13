@@ -353,7 +353,7 @@ class MapApplyLivewire extends Component
         'applicantDetail.citizenship_no' => ['required_if:applicantDetail.applicant_type,inheritance'],
         'applicantDetail.citizenship_issue_date' => ['required_if:applicantDetail.applicant_type,inheritance'],
         'applicantDetail.application_date' => ['nullable'],
-        'applicantDetail.signature' => ['required', 'image']
+        'applicantDetail.signature' => ['nullable', 'image']
     ];
 
     protected array $criteriaDetailValidations = [
@@ -373,7 +373,7 @@ class MapApplyLivewire extends Component
     ];
 
     protected array $consultantDetailValidations = [
-        'applyMap.consultant_signature' => ['required', 'image'],
+        'applyMap.consultant_signature' => ['nullable', 'image'],
         'applyMap.consultant_name' => ['required'],
         'applyMap.consultant_mobile_no' => ['required'],
         'applyMap.consultant_nec_no' => ['required'],
