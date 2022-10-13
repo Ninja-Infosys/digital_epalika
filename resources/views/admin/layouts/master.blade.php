@@ -8,6 +8,7 @@
         content="A complete solution for a digital palika."
         name="description"
     />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta content="Ninja Infosys" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
@@ -35,6 +36,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
 
+    @stack('style')
     @livewireStyles
     @stack('style')
 </head>

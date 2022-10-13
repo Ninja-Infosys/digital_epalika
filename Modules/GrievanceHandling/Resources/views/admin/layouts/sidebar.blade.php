@@ -4,12 +4,14 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+@can('grievanceDetail_access')
 <li class="{{request()->routeIs('admin.grievanceHandling.grievanceDetail.*') ? 'active' : ''}}">
     <a href=" {{route('admin.grievanceHandling.grievanceDetail.index')}}">
-        <i class="fa fa-list-ul"></i>
+        <i class="fa fa-clipboard-list"></i>
         <span> गुनासो बिबरण </span>
     </a>
 </li>
+@endcan
 <li class="{{request()->routeIs('admin.grievanceHandling.grievanceUser.*') ? 'active' : ''}}">
     <a href=" {{route('admin.grievanceHandling.grievanceUser.index')}}">
         <i class="fa fa-user"></i>
@@ -18,7 +20,7 @@
 </li>
 <li>
     <a href="#sidebarGrievanceHandlingSetting" data-bs-toggle="collapse">
-        <i class="fa fa-cog"></i>
+        <i class="fa fa-cogs"></i>
         <span>सेटिंग </span>
         <span class="menu-arrow">
                                         <i class="fa fa-angle-right"></i>
