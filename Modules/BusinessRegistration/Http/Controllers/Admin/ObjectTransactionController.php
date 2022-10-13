@@ -1,15 +1,12 @@
 <?php
 
-namespace Modules\BusinessRegistration\Http\Controllers;
+namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransaction\StoreObjectTransactionRequest;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransaction\UpdateObjectTransactionRequest;
-use function Termwind\renderUsing;
 
 class ObjectTransactionController extends Controller
 {

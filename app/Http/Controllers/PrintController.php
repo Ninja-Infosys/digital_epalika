@@ -25,4 +25,14 @@ class PrintController extends Controller
         $data = $request->input('data');
         return View::make('print.office_letter_print', compact('data'));
     }
+
+    public function businessRegistrationPrint(Request $request)
+    {
+        $request->validate([
+            'data'=>'required'
+        ]);
+
+        $data = $request->input('data');
+        return View::make('print.business_registration_print', compact('data'));
+    }
 }

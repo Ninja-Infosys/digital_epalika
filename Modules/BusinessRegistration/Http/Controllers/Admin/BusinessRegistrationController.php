@@ -1,10 +1,9 @@
 <?php
 
-namespace Modules\BusinessRegistration\Http\Controllers;
+namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class BusinessRegistrationController extends Controller
 {
