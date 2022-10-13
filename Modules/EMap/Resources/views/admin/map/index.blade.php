@@ -49,7 +49,7 @@
                                     <td>{{$mapApply->registration_no ?? ''}}</td>
                                     <td>{{$mapApply->unique_id ?? ''}}</td>
                                     <td>{{$mapApply->construction_type->label() ?? ''}}</td>
-                                    <td>{{$mapApply->mapApplyApplications ?? ''}}</td>
+                                    <td>{{$mapApply->mapApplyApplications->pluck('file_type') ?? ''}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a href="#"
