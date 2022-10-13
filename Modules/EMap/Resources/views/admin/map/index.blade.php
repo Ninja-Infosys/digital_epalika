@@ -49,12 +49,21 @@
                                     <td>{{$mapApply->registration_no ?? ''}}</td>
                                     <td>{{$mapApply->unique_id ?? ''}}</td>
                                     <td>{{$mapApply->construction_type->label() ?? ''}}</td>
-                                    <td>{{$mapApply->mapApplyApplications ?? ''}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a href="#"
-                                               type="button" class="btn btn-info btn-sm text-white">
-                                                <i class="fa fa-eye"></i>
+                                               type="button" @class([
+                                                        "btn",
+                                                        "btn-danger"=>$application_types->diff($mapApply->mapApplyApplications->pluck('application_type'))->count() >0,
+                                                        "btn-success"=>$application_types->diff($mapApply->mapApplyApplications->pluck('application_type'))->count() <=0,
+                                                        "btn-sm",
+                                                        "text-white"
+                                                ])>
+                                                <i @class([
+                                                "fa",
+                                                "fa-window-close"=>$application_types->diff($mapApply->mapApplyApplications->pluck('application_type'))->count() >0,
+                                                "fa-check"=>$application_types->diff($mapApply->mapApplyApplications->pluck('application_type'))->count() <=0
+                                                ])></i>
                                             </a>
                                             <button type="button"
                                                     class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split text-white"
@@ -64,9 +73,21 @@
                                             <div class="dropdown-menu"
                                                  style="position: absolute; inset: 0 auto auto 0; margin: 0; transform: translate(76px, 40px);"
                                                  data-popper-placement="bottom-start">
-                                                <a class="dropdown-item" href="#">Separated link</a>
+                                                @foreach(\App\Enums\ApplicationTypeEnum::cases() as $type)
+                                                    <a class="dropdown-item" href="#">{{$type->label()}} <i @class([
+                                                        'fa',
+                                                        'fa-check text-success'=>$mapApply->mapApplyApplications->pluck('application_type')->contains($type->value),
+                                                        'fa-window-close text-danger'=>!$mapApply->mapApplyApplications->pluck('application_type')->contains($type->value),
+                                                    ])></i></a>
+                                                @endforeach
                                             </div>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <a href="#"
+                                           type="button" class="btn btn-info btn-sm text-white">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @empty

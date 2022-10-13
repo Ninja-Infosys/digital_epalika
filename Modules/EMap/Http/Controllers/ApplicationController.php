@@ -23,16 +23,18 @@ class ApplicationController extends Controller
 
     public function technicianApproval(Client $client, MapApply $mapApply)
     {
-        $mapApply->load('houseOwner', 'landDetail', 'landDetail.unit', 'designerDetails');
-        $designer = $mapApply->designerDetails->where('post', PostsEnum::DESIGNER->value)->first();
-        return view('emap::organization.clients.map.application.technician_approval', compact('client', 'designer', 'mapApply'));
+        $mapApply->load(['houseOwner', 'landDetail', 'landDetail.unit', 'designerDetails'=>function($query){
+            $query->where('post', PostsEnum::DESIGNER->value)->first();
+        }]);
+        return view('emap::organization.clients.map.application.technician_approval', compact('client', 'mapApply'));
     }
 
     public function engineerApproval(Client $client, MapApply $mapApply)
     {
-        $mapApply->load('houseOwner', 'landDetail', 'landDetail.unit', 'designerDetails');
-        $designer = $mapApply->designerDetails->where('post', PostsEnum::DESIGNER->value)->first();
-        return view('emap::organization.clients.map.application.engineer_approval', compact('client', 'mapApply', 'designer'));
+        $mapApply->load(['houseOwner', 'landDetail', 'landDetail.unit', 'designerDetails'=>function($query){
+            $query->where('post', PostsEnum::DESIGNER->value)->first();
+        }]);
+        return view('emap::organization.clients.map.application.engineer_approval', compact('client', 'mapApply'));
     }
 
     public function applyMapApplication(Request $request, Client $client, MapApply $mapApply)
