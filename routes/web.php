@@ -38,6 +38,7 @@ Route::get('/static/single-notice/{notice}', [FrontController::class, 'singleNot
 
 Route::prefix('print')->as('print.')->controller(PrintController::class)->group(function () {
     Route::post('applicationPrint', 'applicationPrint')->name('application-print');
+    Route::post('officeLetterPrint', 'officeLetterPrint')->name('office-letter-print');
 });
 
 
