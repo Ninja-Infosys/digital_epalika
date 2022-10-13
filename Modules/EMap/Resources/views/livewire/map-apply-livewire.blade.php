@@ -687,7 +687,9 @@
                                     <tr>
                                         <td>
                                             <label
-                                                for="fourFortDetail.detail">१.{{$loop->iteration}} {{\Modules\EMap\Enums\FourSideParticularEnum::tryFrom($fourFort['detail'])->label()}}</label>
+                                                for="fourFortDetail.detail">
+                                                १.{{$loop->iteration}} {{\Modules\EMap\Enums\FourSideParticularEnum::tryFrom($fourFort['detail'])->label()}}
+                                            </label>
                                             <input type="hidden"
                                                    id="fourFortDetails.{{$key}}.detail"
                                                    wire:model="fourFortDetails.{{$key}}.detail"

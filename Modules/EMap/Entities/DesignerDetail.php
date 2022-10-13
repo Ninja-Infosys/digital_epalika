@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\PostsEnum;
 
 class DesignerDetail extends Model
 {
@@ -27,6 +28,10 @@ class DesignerDetail extends Model
         'nec_council_no',
         'local_body_registration_no',
         'consulting_firm_name',
+    ];
+
+    protected $casts = [
+        'post' => PostsEnum::class
     ];
 
     public function mapApply(): BelongsTo
