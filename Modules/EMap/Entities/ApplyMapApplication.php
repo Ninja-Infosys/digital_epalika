@@ -32,6 +32,11 @@ class ApplyMapApplication extends Model
         'file_type' => ApplicationTypeEnum::class
     ];
 
+    public function getApplicationTypeAttribute()
+    {
+        return $this->attributes['file_type'];
+    }
+
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);
@@ -43,6 +48,7 @@ class ApplyMapApplication extends Model
             $this->attributes['file'] = $value->store('applyMapApplication', 'public');
         }
     }
+
     public function getFileUrlAttribute()
     {
         return $this->attributes['file'] ? Storage::disk('public')->url($this->attributes['file']) : '';
