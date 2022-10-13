@@ -64,15 +64,15 @@
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
                             <span class="float-end">
-                      <a href="#" class="text-dark">
-                        <small>Clear All</small>
-                      </a> </span>Notification</h5>
+                      <a href="{{route('admin.notification.readAllNotification')}}" class="text-dark">
+                        <small>सबै खाली गर्नुहोस्</small>
+                      </a> </span>नोटिफिकेसन</h5>
                     </div>
 
                     <div class="noti-scroll" data-simplebar>
                         @forelse (auth()->user()->unreadNotifications as $notification)
                             <a
-                                href="#"
+                                href="{{ route('admin.notification.read',$notification) }}"
                                 class="dropdown-item notify-item"
                             >
                                 <div class="notify-icon bg-secondary">
@@ -85,13 +85,14 @@
                                 </p>
                             </a>
                         @empty
+                          <h4 class="text-center">कुनै डाटा उपलब्ध छैन !</h4>
                         @endforelse
                     </div>
 
                     <!-- All-->
-                    <a href="javascript:void(0);"
+                    <a href="{{route('admin.notification')}}"
                        class="dropdown-item text-center text-primary notify-item notify-all">
-                        View all
+                        सबै हेर्नुहोस्
                         <i class="fe-arrow-right"></i>
                     </a>
                 </div>
