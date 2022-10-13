@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
@@ -40,7 +42,11 @@ class MapApply extends Model
         'length',
         'breadth',
         'height',
-        'organization_id'
+        'organization_id',
+        'consultant_signature',
+        'consultant_name',
+        'consultant_mobile_no',
+        'consultant_nec_no'
     ];
 
     protected $casts = [
@@ -48,6 +54,23 @@ class MapApply extends Model
         'usage' => BuildingUsageEnum::class,
         'building_category' => CategorizationEnum::class,
     ];
+
+    public function setConsultantSignatureAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
+        }
+    }
+
+    public function getConsultantSignatureUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->attributes['consultant_signature']);
+    }
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 
     public function client(): BelongsTo
     {

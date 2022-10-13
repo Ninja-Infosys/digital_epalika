@@ -1,16 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\EMap\Http\Controllers\MapController;
+use Modules\EMap\Http\Controllers\Admin\DashboardController;
+use Modules\EMap\Http\Controllers\Admin\MapController;
+use Modules\EMap\Http\Controllers\Admin\OrganizationController;
 use Modules\EMap\Http\Controllers\MapFeeController;
 use Modules\EMap\Http\Controllers\MapSettingController;
-use Modules\EMap\Http\Controllers\OrganizationController;
+
+Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::get('organization/{organization}/updateLoginStatus', [OrganizationController::class, 'updateLoginStatus'])->name('organization.update-login-status');
 Route::resource('organization', OrganizationController::class);
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
-    Route::get('/', 'index')->name('index');
+    Route::get('mapApply', 'index')->name('mapApply.index');
+    Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
+    Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
 });
 Route::prefix('setting')->group(function () {
 

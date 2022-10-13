@@ -22,12 +22,12 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-            ->prefix('digitalBoard')
+            ->prefix('digitalboard')
             ->as('digitalBoard.')
             ->group(module_path('DigitalBoard', '/Routes/web.php'));
 
         Route::middleware(['web', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
-            ->prefix('digitalBoard/admin')
+            ->prefix('admin/digitalBoard')
             ->as('admin.digitalBoard.')
             ->group(module_path('DigitalBoard', '/Routes/admin.php'));
     }
