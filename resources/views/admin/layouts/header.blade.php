@@ -155,8 +155,7 @@
                href="#"
                role="button"
                aria-haspopup="false"
-               aria-expanded="false"
-            >
+               aria-expanded="false">
               <span class="logo-sm">
                 <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="40"/>
               </span>
