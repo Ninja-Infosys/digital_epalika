@@ -1,16 +1,13 @@
 <?php
 
-namespace Modules\HelpDesk\Http\Controllers;
+namespace Modules\HelpDesk\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Modules\HelpDesk\Entities\Branch;
 use Modules\HelpDesk\Entities\Service;
 use Modules\HelpDesk\Entities\ServiceDocument;
-use Modules\HelpDesk\Entities\ServiceEmployee;
 use Modules\HelpDesk\Entities\ServiceProcess;
 use Modules\HelpDesk\Http\Requests\Service\StoreServiceRequest;
 use Modules\HelpDesk\Http\Requests\Service\UpdateServiceRequest;

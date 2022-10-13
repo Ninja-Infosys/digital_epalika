@@ -1,9 +1,7 @@
 <?php
 
-namespace Modules\HelpDesk\Http\Controllers;
+namespace Modules\HelpDesk\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\HelpDesk\Entities\Branch;
