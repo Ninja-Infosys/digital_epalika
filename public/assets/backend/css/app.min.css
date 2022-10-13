@@ -870,9 +870,9 @@ button:focus {
 }
 
 .btn-xs {
-    padding: .2rem .6rem;
-    font-size: .75rem;
-    border-radius: .15rem
+    padding: .2rem .6rem !important;
+    font-size: .75rem !important;
+    border-radius: .15rem !important;
 }
 
 .btn-primary {
