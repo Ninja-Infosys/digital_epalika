@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\LandOwnerTypeEnum;
 
 class LandOwner extends Model
 {
@@ -29,6 +30,10 @@ class LandOwner extends Model
         'citizenship_no',
         'citizenship_issue_date',
         'address'
+    ];
+
+    protected $casts = [
+        'land_owner_type' => LandOwnerTypeEnum::class
     ];
 
     public function mapApply(): BelongsTo

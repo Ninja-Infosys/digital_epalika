@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\EMap\Enums\ApplicantTypeEnum;
+use Modules\EMap\Enums\RelationEnum;
 
 class ApplicantDetail extends Model
 {
@@ -33,6 +35,11 @@ class ApplicantDetail extends Model
         'citizenship_no',
         'citizenship_issue_date',
         'signature'
+    ];
+
+    protected $casts = [
+        'applicant_type' => ApplicantTypeEnum::class,
+        'relation_with_owner'=>RelationEnum::class
     ];
 
     public function mapApply(): BelongsTo
