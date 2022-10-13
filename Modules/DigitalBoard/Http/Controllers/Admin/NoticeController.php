@@ -1,19 +1,15 @@
 <?php
 
-namespace Modules\DigitalBoard\Http\Controllers;
+namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
-use Modules\DigitalBoard\Entities\News;
 use Modules\DigitalBoard\Entities\Notice;
-use Modules\DigitalBoard\Http\Requests\Notice\StoreNoticeRequest;
 use Modules\DigitalBoard\Http\Requests\Notice\UpdateNoticeRequest;
-use Modules\DigitalBoard\Rules\CheckNoticeType;
 
 class NoticeController extends Controller
 {

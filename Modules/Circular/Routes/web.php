@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use Modules\Circular\Http\Controllers\DispatchController;
 use Modules\Circular\Http\Controllers\FileDeleteController;
 use Modules\Circular\Http\Controllers\RegistrationController;
-use Modules\DigitalBoard\Http\Controllers\NewsController;
 
 //registration
 Route::get('registration/report',[RegistrationController::class,'registrationReport'])->name('registration.report');

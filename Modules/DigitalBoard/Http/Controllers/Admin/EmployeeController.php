@@ -1,9 +1,7 @@
 <?php
 
-namespace Modules\DigitalBoard\Http\Controllers;
+namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\DigitalBoard\Entities\Employee;
