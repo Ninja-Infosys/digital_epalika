@@ -36,6 +36,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
 
     @livewireStyles
+    @stack('style')
 </head>
 
 <!-- body start -->
@@ -45,7 +46,7 @@
 
     @include('admin.layouts.header')
 
-    @include('admin.layouts.sidebar')
+    @include('admin.layouts.side_nav')
 
     <div class="content-page">
         <div class="content">
@@ -87,16 +88,8 @@
 
 <!-- Vendor js -->
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
-
-<!-- Plugins js-->
-{{--<script src="{{asset('assets/backend/libs/flatpickr/flatpickr.min.js')}}"></script>--}}
-{{--<script src="{{asset('assets/backend/libs/apexcharts/apexcharts.min.js')}}"></script>--}}
-
-{{--<script src="{{asset('assets/backend/libs/selectize/js/standalone/selectize.min.js')}}"></script>--}}
-
-<!-- Dashboar 1 init js-->
-{{--<script src="{{asset('assets/backend/js/pages/dashboard-1.init.js')}}"></script>--}}
-
+<script src="{{asset('assets/backend/libs/chart.js/Chart.bundle.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/pages/chartjs.init.js')}}"></script>
 <!-- App js-->
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 
@@ -104,7 +97,7 @@
 
 <script>
     $('.show_confirm').click(function (event) {
-        var form = $(this).closest("form");
+        const form = $(this).closest("form");
         event.preventDefault();
 
         swal.fire({

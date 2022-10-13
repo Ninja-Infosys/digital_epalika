@@ -21,7 +21,7 @@ class RegistrationController extends Controller
 
         $registrations = Registration::latest()->get();
 
-        return view('circular::registration.index', compact('registrations'));
+        return view('circular::admin/registration.index', compact('registrations'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class RegistrationController extends Controller
         );
         $registration_no = 'R-' . Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
 
-        return view('circular::registration.create', compact('registration_no'));
+        return view('circular::admin/registration.create', compact('registration_no'));
     }
 
     public function store(StoreRegistrationRequest $request)
@@ -61,7 +61,7 @@ class RegistrationController extends Controller
         );
         $registration->load('files');
 
-        return view('circular::registration.show', compact('registration'));
+        return view('circular::admin/registration.show', compact('registration'));
     }
 
     public function edit(Registration $registration)
@@ -71,7 +71,7 @@ class RegistrationController extends Controller
             'You are not allowed to registration edit'
         );
 
-        return view('circular::registration.edit', compact('registration'));
+        return view('circular::admin/registration.edit', compact('registration'));
     }
 
     public function update(UpdateRegistrationRequest $request, Registration $registration)
@@ -123,7 +123,7 @@ class RegistrationController extends Controller
     public function registrationReport()
     {
 
-        return view('circular::registration.report');
+        return view('circular::admin/registration.report');
     }
 
     private function uploadDocuments($request, $registration)

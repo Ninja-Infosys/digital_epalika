@@ -58,13 +58,18 @@ class MapApply extends Model
     public function setConsultantSignatureAttribute($value)
     {
         if (!empty($value) && !is_string($value)) {
-            $this->attributes['consultant_signature'] = $value->store('e_map/consultant/' . Str::slug($this->attributes['consultant_name'], '_') . '/signature', 'public');
+            $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
         }
     }
 
     public function getConsultantSignatureUrlAttribute(): string
     {
         return Storage::disk('public')->url($this->attributes['consultant_signature']);
+    }
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
     }
 
     public function client(): BelongsTo

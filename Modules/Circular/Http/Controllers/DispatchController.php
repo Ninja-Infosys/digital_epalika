@@ -23,7 +23,7 @@ class DispatchController extends Controller
 
         $dispatches = Dispatch::latest()->get();
 
-        return view('circular::dispatch.index', compact('dispatches'));
+        return view('circular::admin/dispatch.index', compact('dispatches'));
     }
 
     public function create()
@@ -34,7 +34,7 @@ class DispatchController extends Controller
         );
         $dispatch_no = 'D-' . Str::padLeft(DB::table('dispatches')->max('id') + 1, 2, 0);
 
-        return view('circular::dispatch.create', compact('dispatch_no'));
+        return view('circular::admin/dispatch.create', compact('dispatch_no'));
     }
 
     public function store(StoreDispatchRequest $request)
@@ -62,7 +62,7 @@ class DispatchController extends Controller
         );
         $dispatch->load('files');
 
-        return view('circular::dispatch.show', compact('dispatch'));
+        return view('circular::admin/dispatch.show', compact('dispatch'));
     }
 
     public function edit(Dispatch $dispatch)
@@ -72,7 +72,7 @@ class DispatchController extends Controller
             'You are not allowed to dispatch edit'
         );
 
-        return view('circular::dispatch.edit', compact('dispatch'));
+        return view('circular::admin/dispatch.edit', compact('dispatch'));
     }
 
     public function update(UpdateDispatchRequest $request, Dispatch $dispatch)
@@ -121,7 +121,7 @@ class DispatchController extends Controller
 
     public function dispatchReport()
     {
-        return view('circular::dispatch.report');
+        return view('circular::admin/dispatch.report');
     }
     private function uploadDocuments($request, $dispatch)
     {

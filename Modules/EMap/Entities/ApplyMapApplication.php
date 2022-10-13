@@ -42,14 +42,14 @@ class ApplyMapApplication extends Model
         return $this->belongsTo(MapApply::class);
     }
 
-    public function setFileAttribute($value)
+    public function setFileAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['file'] = $value->store('applyMapApplication', 'public');
         }
     }
 
-    public function getFileUrlAttribute()
+    public function getFileUrlAttribute(): string
     {
         return $this->attributes['file'] ? Storage::disk('public')->url($this->attributes['file']) : '';
     }

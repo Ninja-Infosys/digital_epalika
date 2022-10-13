@@ -11,7 +11,8 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">संगठन</li>
+                        <li class="breadcrumb-item">संगठन</li>
+                        <li class="breadcrumb-item active">नक्सा</li>
                     </ol>
                 </div>
                 <h4 class="page-title">नक्सा </h4>
@@ -37,6 +38,7 @@
                                 <th scope="col">दर्ता नं</th>
                                 <th scope="col">युनिक आइडी</th>
                                 <th scope="col">निर्माण कार्यको किसिम</th>
+                                <th scope="col">आवेदन भर्ने संस्था </th>
                                 <th scope="col">आवेदन विवरण</th>
                                 <th scope="col">#</th>
                             </tr>
@@ -49,6 +51,7 @@
                                     <td>{{$mapApply->registration_no ?? ''}}</td>
                                     <td>{{$mapApply->unique_id ?? ''}}</td>
                                     <td>{{$mapApply->construction_type->label() ?? ''}}</td>
+                                    <td>{{$mapApply->organization->name ?? ''}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a href="#"
@@ -84,7 +87,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="#"
+                                        <a href="{{route('emap.admin.map.mapApply.show', $mapApply)}}"
                                            type="button" class="btn btn-info btn-sm text-white">
                                             <i class="fa fa-eye"></i>
                                         </a>

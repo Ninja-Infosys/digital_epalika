@@ -12,7 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Route;
-use Modules\EMap\Http\Controllers\DashboardController;
+use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\FrontendController;
 use Modules\EMap\Http\Controllers\OrganizationAuthController;
 
