@@ -11,7 +11,8 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">संगठन</li>
+                        <li class="breadcrumb-item">संगठन</li>
+                        <li class="breadcrumb-item active">नक्सा</li>
                     </ol>
                 </div>
                 <h4 class="page-title">नक्सा </h4>
@@ -84,7 +85,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="#"
+                                        <a href="{{route('emap.admin.map.mapApply.show', $mapApply)}}"
                                            type="button" class="btn btn-info btn-sm text-white">
                                             <i class="fa fa-eye"></i>
                                         </a>
