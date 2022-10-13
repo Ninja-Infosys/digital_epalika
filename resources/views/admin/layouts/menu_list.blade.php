@@ -1,6 +1,6 @@
 <div class="row m-2">
     <div class="col-md-4 border">
-        <a href="#">
+        <a href="{{route('admin.circular.dashboard')}}">
             <div class="p-2 text-center">
                 <img src="{{asset('assets/backend/images/modules/darta-chalani-parnali.png')}}"
                      height="50" width="50">
