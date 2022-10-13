@@ -20,3 +20,9 @@ Route::prefix('setting')->group(function () {
 
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
 Route::view('officeletter', 'emap::admin.offical_letter.officeletter');
+Route::view('noticeletter', 'emap::admin.noticeletter.noticeletter');
+Route::view('maparreras', 'emap::admin.noticeletter.maparreras');
+Route::view('landarreras', 'emap::admin.noticeletter.landarreras');
+Route::view('techniciannotice', 'emap::admin.noticeletter.techniciannotice');
+Route::view('chaggrement', 'emap::admin.noticeletter.chaggrement');
+Route::view('agentaggrement', 'emap::admin.noticeletter.agentaggrement');

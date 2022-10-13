@@ -31,10 +31,10 @@
                                             <label class="form-check-label" for="inlineRadio1">क</label>
                                             <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                                             <label class="form-check-label" for="inlineRadio2">ख</label>
-                                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                            <label class="form-check-label" for="inlineRadio2">ग</label>
-                                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                            <label class="form-check-label" for="inlineRadio2">घ</label>
+                                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                            <label class="form-check-label" for="inlineRadio3">ग</label>
+                                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                                            <label class="form-check-label" for="inlineRadio4">घ</label>
                                        </p>
                                         <p>निर्माणको स्ट्रक्चरल सिस्टम : <span class="underline-dotted custom-width"></span></p>
                                         <table class="table table-bordered">
