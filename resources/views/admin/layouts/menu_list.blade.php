@@ -1,5 +1,15 @@
 <div class="row m-2">
     <div class="col-md-4 border">
+        <a href="{{route('admin.dashboard')}}">
+            <div class="p-2 text-center">
+                <img src="{{asset('assets/backend/images/modules/epalika-logo.png')}}"
+                     height="50" width="50">
+                <h4 class="p-1">डिजिटल ई-पालिका</h4>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 border">
+        <a href="#">
         <a href="{{route('admin.circular.dashboard')}}">
             <div class="p-2 text-center">
                 <img src="{{asset('assets/backend/images/modules/darta-chalani-parnali.png')}}"
@@ -36,7 +46,7 @@
         </a>
     </div>
     <div class="col-md-4 border">
-        <a href="{{route('admin.businessRegistration.dashboard')}}">
+        <a href="#">
             <div class="p-2 text-center">
                 <img src="{{asset('assets/backend/images/modules/bewasaya-darta.png')}}"
                      height="50" width="50">
@@ -77,15 +87,6 @@
                 <img src="{{asset('assets/backend/images/modules/suchi-darta-parnali.png')}}"
                      height="50" width="50">
                 <h4 class="p-1">सुची दर्ता</h4>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4 border">
-        <a href="#">
-            <div class="p-2 text-center">
-                <img src="{{asset('assets/backend/images/modules/paryogkarta-bhumika.png')}}"
-                     height="50" width="50">
-                <h4 class="p-1">प्रयोगकर्ता र भूमिका</h4>
             </div>
         </a>
     </div>
