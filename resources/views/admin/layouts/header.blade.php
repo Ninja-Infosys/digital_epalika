@@ -48,14 +48,13 @@
                     href="#"
                     role="button"
                     aria-haspopup="false"
-                    aria-expanded="false"
-                >
-                    <i class="fa fa-bell noti-icon"></i>
+                    aria-expanded="false">
+                    <i class="fa fa-bell noti-icon" @class([
+            'ring-bell'=>count(auth()->user()->unreadNotifications)>0])></i>
                     @if(count(auth()->user()->unreadNotifications)>0)
-                    <span class="badge bg-danger rounded-circle noti-icon-badge"
-                    >{{count(auth()->user()->unreadNotifications)}}</span
-                    >
-                        @endif
+                    <span class="badge bg-danger rounded-circle noti-icon-badge">
+                        {{count(auth()->user()->unreadNotifications)}}</span>
+                    @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
                     <!-- item-->
@@ -87,10 +86,8 @@
                     </div>
 
                     <!-- All-->
-                    <a
-                        href="javascript:void(0);"
-                        class="dropdown-item text-center text-primary notify-item notify-all"
-                    >
+                    <a href="javascript:void(0);"
+                        class="dropdown-item text-center text-primary notify-item notify-all">
                         View all
                         <i class="fe-arrow-right"></i>
                     </a>
