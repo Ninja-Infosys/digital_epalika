@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\FourSideParticularEnum;
 
 class FourFort extends Model
 {
@@ -25,6 +26,10 @@ class FourFort extends Model
         'south',
         'west',
         'north'
+    ];
+
+    protected $casts = [
+        'detail'=>FourSideParticularEnum::class,
     ];
 
     public function mapApply(): BelongsTo

@@ -127,7 +127,7 @@
                             १.११ तल्लाको क्षेत्रफल र उचाईको विवरण :
                         </p>
                         <table
-                            class="table table-bordered">
+                            class="table table-sm table-bordered">
                             <thead>
                             <tr class="text-center">
                                 <th>तल्ला</th>
@@ -153,80 +153,250 @@
                         <p>
                             <b>२. जग्गाको विवरण</b>
                         </p>
-                        <p>१.१ निर्माण कार्यको किसिम</p>
+                        <p>
+                            २.१ भू-उपयोग्य क्षेत्र :
+                            <span class="underline-dotted custom-width">
+                                {{$mapApply->landDetail->land_use_area??''}}
+                            </span>
+                        </p>
                         <div class="d-flex flex-wrap">
-                            @foreach(\Modules\EMap\Enums\TypeOfConstructionWorkEnum::cases() as $constructionType)
-                                <div class="m-1">
-                                    <input type="checkbox"
-                                           {{$constructionType->value==$mapApply->construction_type->value ? 'checked' : ''}}
-                                           disabled>
-                                    {{$constructionType->label()}}
-                                </div>
-                            @endforeach
+                            <p>
+                                २.२ वडा नं : <span
+                                    class="underline-dotted custom-width"> {{$mapApply->landDetail->ward_no ?? ''}} </span>
+                            </p>
+                            <p class="mx-3">
+                                २.३ साविक वडा नं : <span
+                                    class="underline-dotted custom-width"> {{$mapApply->landDetail->former_ward_no??''}} </span>
+                            </p>
                         </div>
 
-                        <p>१.२ प्रयोजन</p>
                         <div class="d-flex flex-wrap">
-                            @foreach(\Modules\EMap\Enums\BuildingUsageEnum::cases() as $usages)
-                                <div class="m-1">
-                                    <input type="checkbox"
-                                           {{$usages->value==$mapApply->usage->value ? 'checked' : ''}}
-                                           disabled>
-                                    {{$usages->label()}}
-                                </div>
-                            @endforeach
+                            <p>
+                                २.४ टोलको नाम :
+                                <span class="underline-dotted custom-width">
+                                    {{$mapApply->landDetail->tole ?? ''}}
+                                </span>
+                            </p>
+                            <p class="mx-3">
+                                २.५ सडक कोड नं :
+                                <span class="underline-dotted custom-width">
+                                    {{$mapApply->landDetail->street_code_no??''}}
+                                </span>
+                            </p>
                         </div>
+                        <p>
+                            २.६ जग्गा कित्ता नं :
+                            <span class="underline-dotted custom-width">
+                                {{$mapApply->landDetail->plot_no??''}}
+                            </span>
+                        </p>
+
+                        <p>
+                            २.७ क्षेत्रफल
+                            <span class="underline-dotted custom-width">
+                                {{$mapApply->landDetail->unit_value??''}} {{$mapApply->landDetail->unit->title??''}}
+                            </span>
+                        </p>
+
+                        <p>
+                            २.८ भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR):
+                            <span class="underline-dotted custom-width">
+                                {{$mapApply->landDetail->percentage_of_area_covered_by_building??''}}
+                            </span>
+                        </p>
+
+                        <p>
+                            <b>३. जग्गा धनीको विवरण</b>
+                        </p>
+                        <p>३.१ जग्गा धनीको किसिम : </p>
                         <div class="d-flex flex-wrap">
-                            <p>१.३ भवन ऐन अनुसार वर्गीकरण : </p>
-                            @foreach(\Modules\EMap\Enums\CategorizationEnum::cases() as $categorization)
+                            @foreach(\Modules\EMap\Enums\LandOwnerTypeEnum::cases() as $landOwnerType)
                                 <div class="mx-2">
                                     <input type="checkbox"
-                                           {{$categorization->value==$mapApply->building_category->value ? 'checked' : ''}}
+                                           {{$landOwnerType->value==$mapApply->landOwner->land_owner_type->value ? 'checked' : ''}}
                                            disabled>
-                                    {{$categorization->label()}}
+                                    {{$landOwnerType->label()}}
                                 </div>
                             @endforeach
                         </div>
-                        <p>
-                            १.४ स्ट्रकचर टाईप : {{$mapApply->structureType->title??''}}
-                        </p>
-                        <div class="d-flex flex-wrap">
-                            <p>
-                                १.५ हाल निर्माण गर्ने तल्ला संख्या : <span
-                                    class="underline-dotted custom-width"> {{$mapApply->current_storey}} </span>
-                            </p>
-                            <p class="mx-3">
-                                १.६ प्लिन्थको क्षेत्रफल : <span
-                                    class="underline-dotted custom-width"> {{$mapApply->area_of_plinth}} </span>
-                            </p>
-                        </div>
-                        <p>
-                            १.७ भविष्यमा निर्माण गर्ने तल्ला संख्या :
-                            <span class="underline-dotted custom-width">
-                                {{$mapApply->future_storey}}
-                            </span>
-                        </p>
-                        <div class="d-flex flex-wrap">
-                            <p>
-                                १.८ कुल भवनको लम्बाई :
-                                <span class="underline-dotted custom-width">
-                                    {{$mapApply->length}}
-                                </span>
-                            </p>
-                            <p class="mx-3">
-                                १.९ कुल भवनको चौडाई :
-                                <span class="underline-dotted custom-width">
-                                    {{$mapApply->breadth}}
-                                </span>
-                            </p>
-                        </div>
+                        <table
+                            class="table table-sm table-bordered">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    १.१ नाम : {{$mapApply->landOwner->name??''}}
+                                </td>
+                                <td>
+                                    १.२ फोन नं. : {{$mapApply->landOwner->phone??''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    १.३ बुवाको नाम : {{$mapApply->landOwner->father_name??''}}
+                                </td>
+                                <td>
+                                    १.४ नागरिकता लिएको जिल्ला
+                                    : {{$mapApply->landOwner->citizenshipIssueDistrict->district??''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    १.५ नागरिकत नम्बर : {{$mapApply->landOwner->citizenship_no??''}}
+                                </td>
+                                <td>
+                                    १.६ नागरिकता लिएको मिति : {{$mapApply->landOwner->citizenship_issue_date??''}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                         <p>
-                            १.१० भवनको कुल उचाई जमिनको सतहबाट :
-                            <span class="underline-dotted custom-width">
-                                {{$mapApply->height}}
-                            </span>
+                            <b>४. घर धनीको विवरण (जग्गाधनी भन्दा फरक भएमा)</b>
                         </p>
+                        <table
+                            class="table table-sm table-bordered">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    १.१ नाम : {{$mapApply->houseOwner->name??''}}
+                                </td>
+                                <td>
+                                    १.२ फोन नं. : {{$mapApply->houseOwner->phone??''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    १.३ बुवाको नाम : {{$mapApply->houseOwner->father_name??''}}
+                                </td>
+                                <td>
+                                    १.४ नागरिकता लिएको जिल्ला
+                                    : {{$mapApply->houseOwner->citizenshipIssueDistrict->district??''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    १.५ नागरिकत नम्बर : {{$mapApply->houseOwner->citizenship_no??''}}
+                                </td>
+                                <td>
+                                    १.६ नागरिकता लिएको मिति : {{$mapApply->houseOwner->citizenship_issue_date??''}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            <b>५. चार किल्लाको विवरण</b>
+                        </p>
+                        <table
+                            class="table table-sm table-bordered">
+                            <thead>
+                            <tr class="text-center">
+                                <th>विवरण</th>
+                                <th>पूर्व</th>
+                                <th>दक्षिण</th>
+                                <th>पश्चिम</th>
+                                <th>उत्तर</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($mapApply->fourForts as $fourFort)
+                                <tr>
+                                    <td>
+                                        {{$fourFort->detail->label()}}
+                                    </td>
+                                    <td>{{$fourFort->east}}</td>
+                                    <td>{{$fourFort->south}}</td>
+                                    <td>{{$fourFort->west}}</td>
+                                    <td>{{$fourFort->north}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
+                        <p>
+                            <b>६. डिजाइनरको विवरण</b>
+                        </p>
+                        <table
+                            class="table table-sm table-bordered">
+                            <thead>
+                            <tr class="text-center">
+                                <th>पद</th>
+                                <th>नाम</th>
+                                <th>NEC Council No.</th>
+                                <th>पालिकाको दर्ता नं</th>
+                                <th>कन्सल्टिंग फर्मबाट भए सो को नाम</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($mapApply->designerDetails as $designerDetail)
+                                <tr>
+                                    <td>
+                                        {{$designerDetail->post->label()}}
+                                    </td>
+                                    <td>{{$designerDetail->name}}</td>
+                                    <td>{{$designerDetail->nec_council_no}}</td>
+                                    <td>{{$designerDetail->local_body_registration_no}}</td>
+                                    <td>{{$designerDetail->consulting_firm_name}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
+                        <p>
+                            <b>७. निवेदकको विवरण</b>
+                        </p>
+                        <div class="d-flex flex-wrap">
+                            <p>७.१ निवेदकको प्रकार : </p>
+                            @foreach(\Modules\EMap\Enums\ApplicantTypeEnum::cases() as $applicantType)
+                                <div class="mx-2">
+                                    <input type="checkbox"
+                                           {{$applicantType->value==$mapApply->applicantDetail->applicant_type->value ? 'checked' : ''}}
+                                           disabled>
+                                    {{$applicantType->label()}}
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="d-flex flex-wrap">
+                            <p>७.२ घरधनी सँगको सम्बन्ध </p>
+                            @foreach(\Modules\EMap\Enums\RelationEnum::cases() as $relation)
+                                <div class="mx-2">
+                                    <input type="checkbox"
+                                           {{$relation->value==$mapApply->applicantDetail->relation_with_owner->value ? 'checked' : ''}}
+                                           disabled>
+                                    {{$relation->label()}}
+                                </div>
+                            @endforeach
+                        </div>
+                        <table
+                            class="table table-sm table-bordered">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    १.१ नाम : {{$mapApply->landOwner->name??''}}
+                                </td>
+                                <td>
+                                    १.२ फोन नं. : {{$mapApply->landOwner->phone??''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    १.३ बुवाको नाम : {{$mapApply->landOwner->father_name??''}}
+                                </td>
+                                <td>
+                                    १.४ नागरिकता लिएको जिल्ला
+                                    : {{$mapApply->landOwner->citizenshipIssueDistrict->district??''}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    १.५ नागरिकत नम्बर : {{$mapApply->landOwner->citizenship_no??''}}
+                                </td>
+                                <td>
+                                    १.६ नागरिकता लिएको मिति : {{$mapApply->landOwner->citizenship_issue_date??''}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                         <p>घरधनीको नाम : <span class="underline-dotted">{{$mapApply->houseOwner->name ?? ''}}</span></p>
                         <p>ठेगाना : <span class="underline-dotted">{{$mapApply->houseOwner->address ?? ''}}</span></p>

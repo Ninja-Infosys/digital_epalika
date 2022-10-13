@@ -1,38 +1,87 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title">गृहपृष्ठ</h4>
-            </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-2">
-            <a href="{{route('admin.circular.registration.create')}}" class="btn btn-info w-100">दर्ता गर्नुहोस</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.circular.dispatch.create')}}" class="btn btn-primary w-100">चलानी गर्नुहोस</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.listRegistrations.listRegistration.create')}}" class="btn btn-secondary w-100">मौजुदा
-                सुची दर्ता</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.executiveMeeting.wardMeetingNotice.create')}}" class="btn btn-success  w-100">कार्यपालिका
-                बैठक पेश गर्नुहोस</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.grievanceHandling.grievanceDetail.index')}}"
-               class="btn btn-warning text-white w-100">गुनासो विवरण</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.digitalBoard.notice.create','Notice')}}" class="btn btn-info w-100">सूचना
-                थप्नुहोस</a>
-        </div>
-    </div>
+    <div class="row mt-2">
+        <div class="col-md-6 col-xl-3">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="avatar-lg rounded-circle bg-soft-danger border-danger border">
+                                <i class="fe-shopping-bag font-22 avatar-title text-danger"></i>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end">
+                                <h3 class="mt-1"><span data-plugin="counterup">178</span></h3>
+                                <p class="text-muted mb-1 text-truncate">Available Stores</p>
+                            </div>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
 
+        <div class="col-md-6 col-xl-3">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="avatar-lg rounded-circle bg-soft-secondary border-secondary border">
+                                <i class="fe-gitlab font-22 avatar-title text-secondary"></i>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end">
+                                <h3 class="mt-1"><span data-plugin="counterup">289</span></h3>
+                                <p class="text-muted mb-1 text-truncate">Gitlab Commits</p>
+                            </div>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-3">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="avatar-lg rounded-circle bg-soft-blue border-blue border">
+                                <i class="fe-gift font-22 avatar-title text-blue"></i>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end">
+                                <h3 class="mt-1"><span data-plugin="counterup">1021</span></h3>
+                                <p class="text-muted mb-1 text-truncate">Free Gifts</p>
+                            </div>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-3">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="avatar-lg rounded-circle bg-soft-pink border-pink border">
+                                <i class="fa fa-users font-22 avatar-title text-pink"></i>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end">
+                                <h3 class="mt-1"><span data-plugin="counterup">154</span>k</h3>
+                                <p class="text-muted mb-1 text-truncate">Paid Users</p>
+                            </div>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+    </div>
     <div class="row">
         <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">

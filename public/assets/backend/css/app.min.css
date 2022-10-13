@@ -1,41 +1,4 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Nunito:400,600,700,900);
-
-@font-face {
-    font-family: "Cerebri Sans,sans-serif";
-    src: url(../fonts/cerebrisans-light.eot);
-    src: local("Cerebri-sans Light"), url(../fonts/cerebrisans-light.woff) format("woff");
-    font-weight: 300
-}
-
-@font-face {
-    font-family: "Cerebri Sans,sans-serif";
-    src: url(../fonts/cerebrisans-regular.eot);
-    src: local("Cerebri-sans Regular"), url(../fonts/cerebrisans-regular.woff) format("woff");
-    font-weight: 400
-}
-
-@font-face {
-    font-family: "Cerebri Sans,sans-serif";
-    src: url(../fonts/cerebrisans-medium.eot);
-    src: local("Cerebri-sans Medium"), url(../fonts/cerebrisans-medium.woff) format("woff");
-    font-weight: 500
-}
-
-@font-face {
-    font-family: "Cerebri Sans,sans-serif";
-    src: url(../fonts/cerebrisans-semibold.eot);
-    src: local("Cerebri-sans Semibold"), url(../fonts/cerebrisans-semibold.woff) format("woff");
-    font-weight: 600
-}
-
-@font-face {
-    font-family: "Cerebri Sans,sans-serif";
-    src: url(../fonts/cerebrisans-bold.eot);
-    src: local("Cerebri-sans Bold"), url(../fonts/cerebrisans-bold.woff) format("woff");
-    font-weight: 700
-}
-
 :root {
     --ct-gray-100-rgb: 243, 247, 249;
     --ct-gray-200-rgb: 247, 247, 247;
@@ -137,7 +100,8 @@
     --ct-card-overlay-color: #3e4852;
     --ct-card-overlay-bg: rgba(255, 255, 255, 0.8);
     --ct-input-light-bg: #f3f7f9;
-    --ct-lighten-300: #edeff1
+    --ct-lighten-300: #edeff1;
+    --primary: #0047ab;
 }
 
 :root .jsgrid-table, :root .table, :root .table-bordered, :root .table-striped {
@@ -597,7 +561,9 @@ body[data-theme=dark] .list-group {
     --ct-list-group-action-active-color: var(--ct-body-color);
     --ct-list-group-action-active-bg: #36404a
 }
-
+body{
+    font-family: 'Mukta', sans-serif !important;
+}
 .custom-accordion .accordion-arrow {
     font-size: 1.2rem;
     position: absolute;
@@ -1225,7 +1191,6 @@ body[data-theme=dark] .btn-soft-dark {
 .header-title {
     font-size: 1rem;
     margin: 0 0 7px 0;
-    font-weight: bold;
 }
 
 td form {
@@ -1377,11 +1342,11 @@ html[dir=ltr] .megamenu-list li:before {
 }
 
 label {
-    font-weight: 600;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none
+    user-select: none;
+    font-size: 1.06rem;
 }
 
 label.form-check-label {
@@ -1729,8 +1694,7 @@ body[data-theme=dark] .table-dark tbody, body[data-theme=dark] .table-dark tr {
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-    margin: 10px 0;
-    font-family: "Cerebri Sans,sans-serif"
+    margin-bottom: 0 !important;
 }
 
 .font-10 {
@@ -1888,7 +1852,7 @@ body {
 
 .left-side-menu {
     width: 240px;
-    background: var(--ct-bg-leftbar);
+    background: var(--ct-white);
     bottom: 0;
     padding: 20px 0;
     position: fixed;
@@ -1905,23 +1869,24 @@ body {
 }
 
 #sidebar-menu > ul > li > a {
-    color: var(--ct-menu-item);
+    color: var(--ct-dark);
     display: block;
     padding: 12px 20px;
     position: relative;
     -webkit-transition: all .4s;
     transition: all .4s;
-    font-family: "Cerebri Sans,sans-serif";
     font-size: .95rem
 }
 
 #sidebar-menu > ul > li > a:active, #sidebar-menu > ul > li > a:focus, #sidebar-menu > ul > li > a:hover {
-    color: var(--ct-menu-item-hover);
+    color: var(--primary);
     text-decoration: none
 }
 
 #sidebar-menu > ul > li > a > span {
-    vertical-align: middle
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 #sidebar-menu > ul > li > a i {
@@ -1978,25 +1943,25 @@ body {
 }
 
 #sidebar-menu .menuitem-active > a {
-    color: var(--ct-menu-item-active)
+    color: var(--primary)
 }
 
 #sidebar-menu .menuitem-active .active {
-    color: var(--ct-menu-item-active)
+    color: var(--primary)
 }
 
 .nav-second-level li a {
     padding: 8px 20px;
-    color: var(--ct-menu-item);
+    color: var(--ct-dark);
     display: block;
     position: relative;
     -webkit-transition: all .4s;
     transition: all .4s;
-    font-size: .875rem
+    font-size: 1rem
 }
 
 .nav-second-level li a:focus, .nav-second-level li a:hover {
-    color: var(--ct-menu-item-hover)
+    color: var(--primary)
 }
 
 .nav-second-level li.active > a {
@@ -2089,7 +2054,7 @@ body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul > li > a {
 }
 
 body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul > li > a:active, body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul > li > a:focus, body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul > li > a:hover {
-    color: var(--ct-menu-item-hover)
+    color: var(--primary)
 }
 
 body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul > li > a i {
@@ -2112,10 +2077,8 @@ body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul > li > a sp
 body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul > li:hover > a {
     position: relative;
     width: calc(190px + 70px);
-    color: var(--ct-menu-item-active);
-    background-color: var(--ct-gray-100);
-    -webkit-box-shadow: inset var(--ct-box-shadow-condensed);
-    box-shadow: inset var(--ct-box-shadow-condensed)
+    color: var(--primary);
+    background-color: var(--ct-gray-400);
 }
 
 body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul > li:hover > a span {
@@ -2164,7 +2127,7 @@ body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul ul {
     padding: 5px 0;
     z-index: 9999;
     display: none;
-    background-color: var(--ct-bg-leftbar)
+    background-color: var(--ct-white)
 }
 
 body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul ul li:hover > .collapse, body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul ul li:hover > .collapsing {
@@ -2191,7 +2154,7 @@ body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul ul li > a s
 }
 
 body[data-leftbar-size=condensed] .left-side-menu #sidebar-menu > ul ul li.active a {
-    color: var(--ct-menu-item-active)
+    color: var(--primary)
 }
 
 body[data-leftbar-size=condensed] .content-page {
@@ -2322,7 +2285,7 @@ body[data-leftbar-color=dark] .left-side-menu #sidebar-menu .menu-title {
 }
 
 body[data-leftbar-color=dark] .left-side-menu #sidebar-menu .menuitem-active > a {
-    color: var(--ct-menu-item-active)
+    color: var(--primary)
 }
 
 body[data-leftbar-color=dark] .left-side-menu #sidebar-menu .menuitem-active .active {
@@ -2583,7 +2546,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
 }
 
 .navbar-custom {
-    background-color: var(--ct-bg-topbar-dark);
+    background-color: var(--primary);
     -webkit-box-shadow: var(--ct-box-shadow);
     box-shadow: var(--ct-box-shadow);
     padding: 0 10px 0 0;
@@ -2601,7 +2564,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
 .navbar-custom .topnav-menu > li .nav-title {
     color: #fff;
     font-size: 18px;
-    font-family: Kalimati;
+    font-family: 'Mukta', sans-serif;
     margin-top: 20px;
     margin-bottom: 10px;
     font-weight: 500;
@@ -3295,7 +3258,7 @@ body[data-layout-mode=horizontal] .content-page {
     line-height: 22px;
     padding: calc(33px / 2) 1.1rem;
     color: var(--ct-hori-menu-item-color);
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .topnav .navbar-nav .nav-link i {
@@ -3561,7 +3524,7 @@ body[data-layout-mode=two-column] .sidebar-main-menu .menu-title {
 body[data-layout-mode=two-column] .sidebar-main-menu .nav > .nav-item > .nav-link {
     color: var(--ct-menu-item);
     font-size: .95rem;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 body[data-layout-mode=two-column] .sidebar-main-menu .nav > .nav-item .menu-arrow {
@@ -3768,11 +3731,11 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
 }
 
 .font-family-primary {
-    font-family: Nunito, sans-serif
+    font-family: "Mukta, sans-serif"
 }
 
 .font-family-secondary {
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .sp-line-1, .sp-line-2, .sp-line-3, .sp-line-4 {
@@ -4521,12 +4484,12 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
 }
 
 .auth-page .system_info .title h4 {
-    font-family: "Kalimati";
+    font-family: 'Mukta', sans-serif;
     line-height: 1.8;
 }
 
 .auth-page .system_info .title p {
-    font-family: "Kalimati";
+    font-family: 'Mukta', sans-serif;
     line-height: 1.8;
     color: #fff;
 }
@@ -4727,12 +4690,12 @@ body[data-theme=dark] .auth-logo .logo-dark {
     text-shadow: rgba(102, 88, 221, .3) 5px 1px, rgba(102, 88, 221, .2) 10px 3px;
     font-size: 84px;
     line-height: 90px;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .error-text-box {
     font-size: 10rem;
-    font-family: "Cerebri Sans,sans-serif";
+    font-family: "Mukta, sans-serif";
     min-height: 200px
 }
 
@@ -5518,7 +5481,7 @@ body[data-theme=dark] .auth-logo .logo-dark {
     display: inline-block;
     margin-bottom: 5px;
     font-weight: 500;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .filter-menu a:hover {
@@ -5940,7 +5903,7 @@ body[data-theme=dark] .auth-logo .logo-dark {
 }
 
 .apex-charts text {
-    font-family: Nunito, sans-serif !important;
+    font-family: 'Mukta', sans-serif !important;
     fill: var(--ct-text-muted);
     font-weight: 600
 }
@@ -5950,7 +5913,7 @@ body[data-theme=dark] .auth-logo .logo-dark {
 }
 
 .apexcharts-legend-text, .apexcharts-tooltip-text, .apexcharts-tooltip-title {
-    font-family: Nunito, sans-serif !important
+    font-family: 'Mukta', sans-serif !important
 }
 
 .apexcharts-legend-series {
@@ -5967,7 +5930,7 @@ body[data-theme=dark] .auth-logo .logo-dark {
 }
 
 .apexcharts-xaxis text, .apexcharts-yaxis text {
-    font-family: Nunito, sans-serif !important;
+    font-family: 'Mukta', sans-serif !important;
     fill: var(--ct-text-muted);
     font-weight: 600
 }
@@ -5995,7 +5958,7 @@ body[data-theme=dark] .auth-logo .logo-dark {
 
 .apexcharts-datalabels-group text {
     fill: var(--ct-text-muted) !important;
-    font-family: Nunito, sans-serif !important
+    font-family: 'Mukta', sans-serif !important
 }
 
 .scatter-images-chart .apexcharts-legend {
@@ -6560,7 +6523,7 @@ th.fc-col-header-cell {
     color: #000 !important;
     font-size: 12px !important;
     line-height: 18px !important;
-    font-family: Nunito, sans-serif !important;
+    font-family: 'Mukta', sans-serif !important;
     font-weight: 600 !important
 }
 
@@ -6696,7 +6659,7 @@ table.dataTable > thead .sorting:after, table.dataTable > thead .sorting:before,
 }
 
 .daterangepicker {
-    font-family: Nunito, sans-serif
+    font-family: 'Mukta', sans-serif;
 }
 
 .daterangepicker .ranges li.active, .daterangepicker td.active, .daterangepicker td.active:hover {
@@ -7082,14 +7045,14 @@ table.dataTable > thead .sorting:after, table.dataTable > thead .sorting:before,
 
 .jq-toast-single {
     padding: 15px;
-    font-family: Nunito, sans-serif;
+    font-family: 'Mukta', sans-serif;
     background-color: #6658dd;
     font-size: 13px;
     line-height: 22px
 }
 
 .jq-toast-single h2 {
-    font-family: Nunito, sans-serif
+    font-family: 'Mukta', sans-serif;
 }
 
 .jq-toast-single a {
@@ -7200,7 +7163,7 @@ table.dataTable > thead .sorting:after, table.dataTable > thead .sorting:before,
 }
 
 .swal2-modal {
-    font-family: Nunito, sans-serif;
+    font-family: 'Mukta', sans-serif;
     -webkit-box-shadow: 0 10px 33px rgba(0, 0, 0, .1);
     box-shadow: 0 10px 33px rgba(0, 0, 0, .1)
 }
@@ -7594,7 +7557,7 @@ div.hopscotch-bubble .hopscotch-next, div.hopscotch-bubble .hopscotch-prev {
     border-color: #6658dd !important;
     text-shadow: none !important;
     margin: 0 0 0 5px !important;
-    font-family: Nunito, sans-serif;
+    font-family: 'Mukta', sans-serif;
     color: #fff !important
 }
 
@@ -7640,12 +7603,12 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
 }
 
 div.hopscotch-bubble h3 {
-    font-family: "Cerebri Sans,sans-serif";
+    font-family: "Mukta, sans-serif";
     margin-bottom: 10px
 }
 
 div.hopscotch-bubble .hopscotch-content {
-    font-family: Nunito, sans-serif
+    font-family: 'Mukta', sans-serif;
 }
 
 .flotTip {
@@ -7663,7 +7626,7 @@ div.hopscotch-bubble .hopscotch-content {
 
 .legend tr {
     height: 30px;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .legend > div {
@@ -7704,7 +7667,7 @@ div.hopscotch-bubble .hopscotch-content {
 }
 
 .morris-chart text {
-    font-family: "Cerebri Sans,sans-serif" !important;
+    font-family: "Mukta, sans-serif" !important;
     fill: var(--ct-body-color)
 }
 
@@ -7720,13 +7683,13 @@ div.hopscotch-bubble .hopscotch-content {
     padding: 10px 12px;
     background: var(--ct-gray-900);
     color: var(--ct-gray-100);
-    font-family: Nunito, sans-serif
+    font-family: 'Mukta', sans-serif;
 }
 
 .morris-hover.morris-default-style .morris-hover-row-label {
     font-weight: 700;
     margin: .25em 0;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .morris-hover.morris-default-style .morris-hover-point {
@@ -7842,7 +7805,7 @@ div.hopscotch-bubble .hopscotch-content {
 
 .c3-tooltip td {
     border-left: none;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .c3-tooltip td > span {
@@ -7869,7 +7832,7 @@ div.hopscotch-bubble .hopscotch-content {
 }
 
 .c3-legend-item {
-    font-family: "Cerebri Sans,sans-serif";
+    font-family: "Mukta, sans-serif";
     font-size: 14px
 }
 
@@ -7903,11 +7866,11 @@ div.hopscotch-bubble .hopscotch-content {
 }
 
 .rickshaw_graph .detail .item, .rickshaw_graph .detail .x_label, .rickshaw_graph .x_tick .title {
-    font-family: Nunito, sans-serif
+    font-family: 'Mukta', sans-serif;
 }
 
 .gauge-chart text {
-    font-family: Nunito, sans-serif !important
+    font-family:'Mukta', sans-serif !important
 }
 
 .responsive-table-plugin .dropdown-menu li.checkbox-row {
@@ -8050,23 +8013,6 @@ div.hopscotch-bubble .hopscotch-content {
     background-color: var(--ct-dropdown-link-active-bg)
 }
 
-@font-face {
-    font-family: footable;
-    src: url(../fonts/footable.eot);
-    src: url(../fonts/footable.eot?#iefix) format("embedded-opentype"), url(../fonts/footable.woff) format("woff"), url(../fonts/footable.ttf) format("truetype"), url(../fonts/footable.svg#footable) format("svg");
-    font-weight: 400;
-    font-style: normal
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-    @font-face {
-        font-family: footable;
-        src: url(../fonts/footable.svg#footable) format("svg");
-        font-weight: 400;
-        font-style: normal
-    }
-}
-
 .footable-odd {
     background-color: var(--ct-table-bg)
 }
@@ -8131,7 +8077,7 @@ div.hopscotch-bubble .hopscotch-content {
 
 .footable.breakpoint > tbody > tr > td > span.footable-toggle {
     display: inline-block;
-    font-family: footable;
+    font-family: 'Mukta', sans-serif;
     padding-right: 5px;
     font-size: 14px
 }
@@ -8250,7 +8196,7 @@ div.hopscotch-bubble .hopscotch-content {
 
 .footable > thead > tr > th > span.footable-sort-indicator {
     display: inline-block;
-    font-family: footable;
+    font-family: 'Mukta', sans-serif;
     padding-left: 5px;
     opacity: .3
 }
@@ -8384,7 +8330,7 @@ table[data-toggle=table] {
 .tablesaw thead tr:first-child th {
     border: none;
     font-weight: 500;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .tablesaw td {
@@ -8614,7 +8560,7 @@ table[data-toggle=table] {
 
 .ms-optgroup-label {
     font-weight: 500;
-    font-family: "Cerebri Sans,sans-serif";
+    font-family: "Mukta, sans-serif";
     color: var(--ct-gray-900) !important;
     font-size: 13px
 }
@@ -8656,7 +8602,7 @@ table[data-toggle=table] {
 .autocomplete-group {
     padding: 5px;
     font-weight: 500;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .autocomplete-group strong {
@@ -8899,7 +8845,7 @@ table[data-toggle=table] {
 }
 
 .ql-container {
-    font-family: Nunito, sans-serif;
+    font-family: 'Mukta', sans-serif;
     border-bottom-left-radius: .2rem;
     border-bottom-right-radius: .2rem
 }
@@ -8914,7 +8860,7 @@ table[data-toggle=table] {
 }
 
 .ql-toolbar {
-    font-family: Nunito, sans-serif !important;
+    font-family: 'Mukta', sans-serif !important;
     border-top-left-radius: .2rem;
     border-top-right-radius: .2rem
 }
@@ -9001,14 +8947,6 @@ table[data-toggle=table] {
 
 .dropzone.dz-started .dz-message {
     display: none
-}
-
-@font-face {
-    font-family: dropify;
-    src: url(../fonts/dropify.eot);
-    src: url(../fonts/dropify.eot#iefix) format("embedded-opentype"), url(../fonts/dropify.woff) format("woff"), url(../fonts/dropify.ttf) format("truetype"), url(../fonts/dropify.svg#dropify) format("svg");
-    font-weight: 400;
-    font-style: normal
 }
 
 .dropify-wrapper {
@@ -9150,7 +9088,7 @@ table[data-toggle=table] {
     border: none;
     background: var(--ct-gray-900);
     color: var(--ct-gray-100);
-    font-family: "Cerebri Sans,sans-serif";
+    font-family: "Mukta, sans-serif";
     font-size: .875rem;
     padding: 5px 8px
 }
@@ -9177,7 +9115,7 @@ table[data-toggle=table] {
     max-width: 200px;
     display: none;
     color: #fff;
-    font-family: "Cerebri Sans,sans-serif"
+    font-family: "Mukta, sans-serif"
 }
 
 .mapael .zoomIn, .mapael .zoomOut, .mapael .zoomReset {
@@ -9200,7 +9138,7 @@ table[data-toggle=table] {
 }
 
 .mapael .plotLegend text {
-    font-family: Nunito, sans-serif !important;
+    font-family: 'Mukta', sans-serif !important;
     fill: var(--ct-text-muted)
 }
 
@@ -9291,5 +9229,16 @@ table[data-toggle=table] {
     font-family: "Material Design Icons";
     position: absolute
 }
-
+.d-arrow::before{
+    content: "";
+    position: absolute;
+    left: 20%;
+    border-width: 15px;
+    border-style: solid;
+    top: -30px;
+    border-color: transparent transparent var(--ct-white) transparent;
+}
+.dropdown-xl{
+    width: 400px;
+}
 /*# sourceMappingURL=app.min.css.map */

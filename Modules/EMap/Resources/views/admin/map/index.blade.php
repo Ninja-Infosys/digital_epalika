@@ -37,6 +37,7 @@
                                 <th scope="col">दर्ता नं</th>
                                 <th scope="col">युनिक आइडी</th>
                                 <th scope="col">निर्माण कार्यको किसिम</th>
+                                <th scope="col">आवेदन विवरण</th>
                                 <th scope="col">#</th>
                             </tr>
                             </thead>
@@ -48,6 +49,7 @@
                                     <td>{{$mapApply->registration_no ?? ''}}</td>
                                     <td>{{$mapApply->unique_id ?? ''}}</td>
                                     <td>{{$mapApply->construction_type->label() ?? ''}}</td>
+                                    <td>{{$mapApply->mapApplyApplications ?? ''}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <a href="#"
