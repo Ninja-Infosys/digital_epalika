@@ -54,7 +54,11 @@ class MapApplyLivewire extends Component
         'length' => null,
         'breadth' => null,
         'height' => null,
-        'storeyDetails' => []
+        'storeyDetails' => [],
+        'consultant_signature' => null,
+        'consultant_name' => null,
+        'consultant_mobile_no' => null,
+        'consultant_nec_no' => null
     ];
 
     public array $landDescription = [
@@ -368,6 +372,13 @@ class MapApplyLivewire extends Component
         'buildingDetails.*.remarks' => ['nullable'],
     ];
 
+    protected array $consultantDetailValidations = [
+        'applyMap.consultant_signature' => ['required', 'image'],
+        'applyMap.consultant_name' => ['required'],
+        'applyMap.consultant_mobile_no' => ['required'],
+        'applyMap.consultant_nec_no' => ['required'],
+    ];
+
     public function rules()
     {
         switch ($this->currentStep) {
@@ -381,7 +392,8 @@ class MapApplyLivewire extends Component
                         $this->designerDetailValidations,
                         $this->applicantDetailValidations,
                         $this->criteriaDetailValidations,
-                        $this->buildingDetailValidations
+                        $this->buildingDetailValidations,
+                        $this->consultantDetailValidations
                     );
                 }
                 break;

@@ -25,6 +25,10 @@ return new class extends Migration {
             $table->double('breadth', 12, 2);
             $table->double('height', 12, 2);
             $table->foreignId('organization_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('consultant_signature')->nullable();
+            $table->string('consultant_name')->nullable();
+            $table->string('consultant_mobile_no')->nullable();
+            $table->string('consultant_nec_no')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -13,7 +13,6 @@
 
                 @includeIf('circular::layouts.sidebar')
 
-
                 @includeIf('helpdesk::admin.layouts.sidebar')
 
                 @includeIf('grievancehandling::admin.layouts.sidebar')

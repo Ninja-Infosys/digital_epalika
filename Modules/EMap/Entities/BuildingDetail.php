@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\BuildingDetailEnum;
 
 class BuildingDetail extends Model
 {
@@ -23,6 +24,10 @@ class BuildingDetail extends Model
         'detail',
         'description',
         'remarks',
+    ];
+
+    protected $casts = [
+        'detail' => BuildingDetailEnum::class
     ];
 
     public function mapApply(): BelongsTo

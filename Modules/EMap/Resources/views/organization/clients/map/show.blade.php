@@ -367,42 +367,122 @@
                                 </div>
                             @endforeach
                         </div>
+
+                        <p>
+                            <b>जग्गाधनी वा घरधनी भन्दा फरक भएमा</b>
+                        </p>
                         <table
                             class="table table-sm table-bordered">
                             <tbody>
                             <tr>
                                 <td>
-                                    १.१ नाम : {{$mapApply->landOwner->name??''}}
+                                    १.१ नाम : {{$mapApply->applicantDetail->name??''}}
                                 </td>
                                 <td>
-                                    १.२ फोन नं. : {{$mapApply->landOwner->phone??''}}
+                                    १.२ फोन नं. : {{$mapApply->applicantDetail->phone??''}}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    १.३ बुवाको नाम : {{$mapApply->landOwner->father_name??''}}
+                                    १.३ बुवाको नाम : {{$mapApply->applicantDetail->father_name??''}}
                                 </td>
                                 <td>
                                     १.४ नागरिकता लिएको जिल्ला
-                                    : {{$mapApply->landOwner->citizenshipIssueDistrict->district??''}}
+                                    : {{$mapApply->applicantDetail->citizenshipIssueDistrict->district??''}}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    १.५ नागरिकत नम्बर : {{$mapApply->landOwner->citizenship_no??''}}
+                                    १.५ नागरिकत नम्बर : {{$mapApply->applicantDetail->citizenship_no??''}}
                                 </td>
                                 <td>
-                                    १.६ नागरिकता लिएको मिति : {{$mapApply->landOwner->citizenship_issue_date??''}}
+                                    १.६ नागरिकता लिएको मिति : {{$mapApply->applicantDetail->citizenship_issue_date??''}}
                                 </td>
                             </tr>
                             </tbody>
                         </table>
+                        <div class="d-flex justify-content-between">
+                            <p>
+                                <span class="underline-dotted custom-width">
+                                    {{$mapApply->applicantDetail->application_date??''}}
+                                </span>
+                                <br>
+                                <span class="custom-width">निबेदनको मिति</span>
+                            </p>
+                            <p>
+                                <span class="underline-dotted custom-width">
+                                    <img src="{{$mapApply->applicantDetail->signature_url??''}}" height="30"
+                                         alt="Signature">
+                                </span>
+                                <br>
+                                निवेदकको सहि
+                            </p>
+                        </div>
 
-                        <p>घरधनीको नाम : <span class="underline-dotted">{{$mapApply->houseOwner->name ?? ''}}</span></p>
-                        <p>ठेगाना : <span class="underline-dotted">{{$mapApply->houseOwner->address ?? ''}}</span></p>
-                        <p>फोन नं. : <span class="underline-dotted">{{$mapApply->houseOwner->phone ?? ''}}</span></p>
-                        <p>सहि : <span class="underline-dotted custom-width"></span></p>
-                        <p>मिति : <span class="underline-dotted custom-width"></span></p>
+                        <h4 class="text-center">
+                            निर्माण हुने भवन तथा मापदण्ड सम्बन्धि संक्षिप्त विवरण
+                        </h4>
+
+                        <h6>
+                            मापदण्ड सम्बन्धि विवरण
+                        </h6>
+                        <table
+                            class="table table-sm table-bordered">
+                            <thead>
+                            <tr class="text-center">
+                                <th>क्र.सं</th>
+                                <th>विवरण</th>
+                                <th>मापदण्ड अनुसार</th>
+                                <th>नक्सा अनुसार</th>
+                                <th>अनुपालन</th>
+                                <th>कैफियत</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($mapApply->criteriaDetails as $criteriaDetail)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        {{$criteriaDetail->detail->label()}}
+                                    </td>
+                                    <td>{{$criteriaDetail->according_to_criteria}}</td>
+                                    <td>{{$criteriaDetail->according_to_map}}</td>
+                                    <td>{{$criteriaDetail->compliance}}</td>
+                                    <td>{{$criteriaDetail->remarks }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
+                        <h6>
+                            भवन सम्बन्धि विवरण :
+                        </h6>
+                        <table
+                            class="table table-sm table-bordered">
+                            <thead>
+                            <tr class="text-center">
+                                <th>क्र.सं</th>
+                                <th colspan="2" class="text-center">विवरण</th>
+                                <th>कैफियत</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($mapApply->buildingDetails as $buildingDetail)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        {{$buildingDetail->detail->label()}}
+                                    </td>
+                                    <td>{{$buildingDetail->description}} </td>
+                                    <td>{{$buildingDetail->remarks}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
+                        <p> नाम : </p>
+                        <p> मोबाइल नं. : </p>
+                        <p> एन. ई. सी. नं. : : </p>
                     </div>
                 </div>
             </div>
