@@ -1,10 +1,9 @@
 <?php
 
-namespace Modules\GrievanceHandling\Http\Controllers;
+namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
@@ -13,7 +12,6 @@ class GrievanceDetailController extends Controller
 {
     public function index()
     {
-
         abort_if(Gate::denies('grievanceDetail_access'),
             403,
             'You are not allowed to access this resource'

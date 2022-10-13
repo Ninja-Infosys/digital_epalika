@@ -1,9 +1,8 @@
 <?php
 
-namespace Modules\GrievanceHandling\Http\Controllers;
+namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
 
 class GrievanceUserController extends Controller

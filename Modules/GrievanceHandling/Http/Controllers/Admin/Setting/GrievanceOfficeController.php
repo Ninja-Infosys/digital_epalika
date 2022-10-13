@@ -1,9 +1,8 @@
 <?php
 
-namespace Modules\GrievanceHandling\Http\Controllers\Setting;
+namespace Modules\GrievanceHandling\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\StoreGrievanceOfficeRequest;
