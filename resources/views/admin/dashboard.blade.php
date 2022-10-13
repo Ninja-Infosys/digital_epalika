@@ -191,98 +191,77 @@
         </div> <!-- end col-->
     </div>
     <div class="row">
-        <div class="col-md-12 col-xl-4">
-            <div class="widget-rounded-circle card">
-                <div class="card-header bg-success">
-                   <h5 class="fw-bold text-white">प्रकार अनुसार गुनासोको विवरण</h5>
-                </div>
+        <div class="col-lg-6">
+            <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>क्र.सं</th>
-                                <th>प्रकार</th>
-                                <th>संख्या</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($grievanceTypes as $grievanceType)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$grievanceType->title}}</td>
-                                    <td>{{$grievanceType->grievance_details_count}}</td>
-                                </tr>
-                            @endforeach
-
-                            </tbody>
-                        </table>
+                    <h4 class="header-title">Line Chart</h4>
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="line-chart-example" height="350" data-colors="#1abc9c,#f1556c"></canvas>
                     </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-xl-8">
-            <div class="widget-rounded-circle card">
-                <div class="card-header">
-                   गुनासोको विवरण
-                </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+        <div class="col-lg-6">
+            <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <table class="table table-sm mb-0 table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>टोकन</th>
-                                <th>गुनासोको प्रकार</th>
-                                <th> गुनासोको शिर्षक</th>
-                                <th> गुनासो प्रकाशन मिति</th>
-                                <th> गुनासो गम्भीरता</th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($unseen_grievances as $grievanceDetail)
-                                <tr>
-                                    <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$grievanceDetail->token}}</td>
-                                    <td>{{$grievanceDetail->grievanceType->title??''}}</td>
-                                    <td>{{$grievanceDetail->subject}}</td>
-                                    <td>{{$grievanceDetail->created_at->toDateString()}}</td>
-                                    <td>
-                                        @switch($grievanceDetail->complaint_severity)
-                                            @case('High priority')
-                                                उच्च प्राथमिकता
-                                                @break
-                                            @case('Priority')
-                                                प्राथमिकता
-                                                @break
-                                            @default
-                                                साधारण
-                                        @endswitch
-                                    </td>
+                    <h4 class="header-title">Bar Chart</h4>
 
-                                    <td>
-                                        <a href="{{route('admin.grievanceHandling.grievanceDetail.show',$grievanceDetail)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="bar-chart-example" height="350" data-colors="#4a81d4,#e3eaef"></canvas>
                     </div>
-
-                </div>
-            </div>
-        </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
     </div>
     <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Pie Chart</h4>
 
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="pie-chart-example" height="350" class="mt-4" data-colors="#6658dd,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
+                    </div>
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Donut Chart</h4>
+
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="donut-chart-example" height="350" data-colors="#6c757d,#1abc9c,#ebeff2"></canvas>
+                    </div>
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Polar area Chart</h4>
+
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="polar-chart-example" height="350" data-colors="#4a81d4,#fa5c7c,#4fc6e1,#ebeff2"> </canvas>
+                    </div>
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Radar Chart</h4>
+
+                    <div class="mt-4 chartjs-chart">
+                        <canvas id="radar-chart-example" height="350" data-colors="#39afd1,#a17fe0"></canvas>
+                    </div>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
     </div>
 @endsection

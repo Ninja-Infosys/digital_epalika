@@ -88,16 +88,8 @@
 
 <!-- Vendor js -->
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
-
-<!-- Plugins js-->
-{{--<script src="{{asset('assets/backend/libs/flatpickr/flatpickr.min.js')}}"></script>--}}
-{{--<script src="{{asset('assets/backend/libs/apexcharts/apexcharts.min.js')}}"></script>--}}
-
-{{--<script src="{{asset('assets/backend/libs/selectize/js/standalone/selectize.min.js')}}"></script>--}}
-
-<!-- Dashboard 1 init js-->
-{{--<script src="{{asset('assets/backend/js/pages/dashboard-1.init.js')}}"></script>--}}
-
+<script src="{{asset('assets/backend/libs/chart.js/Chart.bundle.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/pages/chartjs.init.js')}}"></script>
 <!-- App js-->
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 
