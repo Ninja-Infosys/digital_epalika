@@ -55,18 +55,18 @@
                             ठहरे नियमानुसार सहुँला बुझाउँला ।
                         </p>
 
-                        <p>डिजाइन गर्ने डिजाईनरको नाम  :<span class="underline-dotted">{{$designer->name ?? ''}}</span></p>
+                        <p>डिजाइन गर्ने डिजाईनरको नाम  :<span class="underline-dotted">{{$mapApply->designerDetails->first()->name ?? ''}}</span></p>
                         <p>योग्यता एवं पद : <span
-                                class="underline-dotted">{{\Modules\EMap\Enums\PostsEnum::tryFrom($designer->post)->label() ?? ''}}</span>
+                                class="underline-dotted">{{$mapApply->designerDetails->first()->post->label() ?? ''}}</span>
                         </p>
                         <p>कन्सल्टेन्सी फर्म भए सो को नाम र छाप : <span
-                                class="underline-dotted">{{$designer->consulting_firm_name ?? ''}}</span></p>
+                                class="underline-dotted">{{$mapApply->designerDetails->first()->consulting_firm_name ?? ''}}</span></p>
                         <p>उ.म.न.पा. मा दर्ता भएको व्यवसाय प्रमाण पत्रको नं : <span
-                                class="underline-dotted">{{$designer->local_body_registration_no ?? ''}}</span></p>
+                                class="underline-dotted">{{$mapApply->designerDetails->first()->local_body_registration_no ?? ''}}</span></p>
                         <p>नेपाल इञ्जिनियरिङ परिसद दर्ता नं : <span
-                                class="underline-dotted">{{$designer->nec_council_no ?? ''}}</span></p>
-                        <p>ठेगाना : <span class="underline-dotted">{{$designer->address ?? ''}}</span></p>
-                        <p>सम्पर्क नं. : <span class="underline-dotted">{{$designer->phone ?? ''}}</span></p>
+                                class="underline-dotted">{{$mapApply->designerDetails->first()->nec_council_no ?? ''}}</span></p>
+                        <p>ठेगाना : <span class="underline-dotted">{{$mapApply->designerDetails->first()->address ?? ''}}</span></p>
+                        <p>सम्पर्क नं. : <span class="underline-dotted">{{$mapApply->designerDetails->first()->phone ?? ''}}</span></p>
                         <p>सहि : <span class="underline-dotted custom-width"></span></p>
                         <p>मिति : <span class="underline-dotted custom-width"></span></p>
                     </div>
