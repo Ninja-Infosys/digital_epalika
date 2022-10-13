@@ -4,18 +4,23 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-<li class="{{request()->routeIs('admin.circular.registration.index') ? 'active' : ''}}">
-    <a href="{{route('admin.circular.registration.index')}}">
-        <i class="fa fa-file-alt"></i>
-        <span> दर्ता प्रणाली   </span>
-    </a>
-</li>
-<li>
-    <a href="{{route('admin.circular.dispatch.index')}}">
-        <i class="fa fa-file-alt"></i>
-        <span> चलानी प्रणाली </span>
-    </a>
-</li>
+
+@can('registration_access')
+    <li class="{{request()->routeIs('admin.circular.registration.index') ? 'active' : ''}}">
+        <a href="{{route('admin.circular.registration.index')}}">
+            <i class="fa fa-file-alt"></i>
+            <span> दर्ता प्रणाली   </span>
+        </a>
+    </li>
+@endcan
+@can('dispatch_access')
+    <li>
+        <a href="{{route('admin.circular.dispatch.index')}}">
+            <i class="fa fa-file-alt"></i>
+            <span> चलानी प्रणाली </span>
+        </a>
+    </li>
+@endcan
 <li>
     <a href="#sidebarCircularReport" data-bs-toggle="collapse">
         <i class="fa fa-clipboard-list"></i>
