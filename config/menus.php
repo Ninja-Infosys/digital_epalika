@@ -6,7 +6,8 @@
         'grievancehandling',
         'emap',
         'businessregistration',
-        'executivemeeting'
+        'executivemeeting',
+        'listregistration'
     ],
     'sidebars' => [
         'website'
