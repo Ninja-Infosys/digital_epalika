@@ -78,8 +78,8 @@
 
                 <div class="row mt-3">
                     <div class="col-12 text-center">
-                        <p class="text-white-50">तपाई हैन ? फर्किनु
-                            <a href="auth-login.html" class="text-white ms-1"><b>लग - इन</b></a>
+                        <p class="text-white">तपाई हैन ? फर्किनु
+                            <a href="{{route('login')}}" class="text-white ms-1"><b>लग - इन</b></a>
                         </p>
                     </div> <!-- end col -->
                 </div>

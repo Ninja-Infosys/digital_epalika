@@ -4,9 +4,9 @@ use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
-use App\Http\Controllers\Admin\ListRegistrationController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OfficeHeaderController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\Units\ExternalUnitConversionController;
@@ -21,7 +21,9 @@ use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
 use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
 use Illuminate\Support\Facades\Route;
+use Modules\ListRegistration\Http\Controllers\Admin\ListRegistrationController;
 
+Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -55,10 +57,6 @@ Route::prefix('setting')->group(function () {
     });
     Route::resource('officeSetting', OfficeSettingController::class);
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
-});
-
-Route::prefix('listRegistrations')->as('listRegistrations.')->group(function () {
-    Route::resource('listRegistration', ListRegistrationController::class);
 });
 
 
