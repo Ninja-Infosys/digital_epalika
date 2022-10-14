@@ -21,7 +21,7 @@ class ListRegistrationController extends Controller
 
         $listRegistrations = ListRegistration::latest()->get();
 
-        return view('admin.list_registration.index', compact('listRegistrations'));
+        return view('listregistration::admin.list_registration.index', compact('listRegistrations'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class ListRegistrationController extends Controller
         );
         $registration_no = 'R-' . Str::padLeft(DB::table('list_registrations')->max('id') + 1, 2, 0);
 
-        return view('admin.list_registration.create', compact('registration_no'));
+        return view('listregistration::admin.list_registration.create', compact('registration_no'));
     }
 
     public function store(StoreListRegistrationRequest $request)
@@ -61,7 +61,7 @@ class ListRegistrationController extends Controller
             'You are not allowed to list registration access'
         );
         $listRegistration->load('files');
-        return view('admin.list_registration.show', compact('listRegistration'));
+        return view('listregistration::admin.list_registration.show', compact('listRegistration'));
     }
 
     public function edit(ListRegistration $listRegistration)
@@ -71,7 +71,7 @@ class ListRegistrationController extends Controller
             'You are not allowed to list registration edit'
         );
 
-        return view('admin.list_registration.edit', compact('listRegistration'));
+        return view('listregistration::admin.list_registration.edit', compact('listRegistration'));
     }
 
     public function update(UpdateListRegistrationRequest $request, ListRegistration $listRegistration)
@@ -105,7 +105,7 @@ class ListRegistrationController extends Controller
         });
 
         toast('मौजुदा सुची दर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.listRegistrations.listRegistration.index'));
+        return redirect(route('admin.list_registration.listRegistrations.listRegistration.index'));
     }
 
     public function destroy(ListRegistration $listRegistration)
