@@ -25,8 +25,8 @@
         <i class="fa fa-layer-group"></i>
         <span>पालिका समिति बैठक</span>
         <span class="menu-arrow">
-                                        <i class="fa fa-angle-right"></i>
-                                    </span>
+            <i class="fa fa-angle-right"></i>
+        </span>
     </a>
     <div class="collapse {{request()->is('admin/executivemeeting/municipal/*') ? 'show' : ''}}"
          id="sidebarExecutiveMeetingMunicipal">
