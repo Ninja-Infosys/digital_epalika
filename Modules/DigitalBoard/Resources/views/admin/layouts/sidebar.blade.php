@@ -1,11 +1,11 @@
-<li>
+<li class="{{request()->is('admin/digitalBoard/dashboard') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.dashboard')}}">
         <i class="fa fa-home"></i>
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
 @can('digitalBoardVideo_access')
-<li class="{{request()->routeIs('admin.digitalBoard.video.index') ? 'active' : ''}}">
+<li class="{{request()->is('admin/digitalBoard/video*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.video.index')}}">
         <i class="fa fa-video"></i>
         <span> भिडियोहरु</span>
@@ -13,7 +13,7 @@
 </li>
 @endcan
 @can('digitalBoardNotice_access')
-<li class="{{request()->routeIs('admin.digitalBoard.notice.index','Notice') ? 'active' : ''}}">
+<li class="{{request()->is('admin/digitalBoard/Notice/notice*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.notice.index','Notice')}}">
         <i class="fa fa-paperclip"></i>
         <span> सूचना </span>
@@ -21,7 +21,7 @@
 </li>
 @endcan
 @can('digitalBoardNews_access')
-<li class="{{request()->routeIs('admin.digitalBoard.notice.index','News') ? 'active' : ''}}">
+<li class="{{request()->is('admin/digitalBoard/News/notice*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.notice.index','News')}}">
         <i class="fa fa-newspaper"></i>
         <span> समाचार</span>
@@ -29,7 +29,7 @@
 </li>
 @endcan
 @can('employee_access')
-<li class="{{request()->routeIs('admin.digitalBoard.employee.index') ? 'active' : ''}}">
+<li class="{{request()->is('admin/digitalBoard/employee*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.employee.index')}}">
         <i class="fa fa-user"></i>
         <span> कर्मचारीहरु</span>

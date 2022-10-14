@@ -20,7 +20,7 @@ class WardMeetingNoticeController extends Controller
 
         $wardMeetingNotices = WardMeetingNotice::orderByDesc('broadcast_date')->get();
 
-        return view('admin.executive_meeting.wardMeeting_notice.index', compact('wardMeetingNotices'));
+        return view('executivemeeting::admin.wardMeeting_notice.index', compact('wardMeetingNotices'));
     }
 
     public function create()
@@ -30,7 +30,7 @@ class WardMeetingNoticeController extends Controller
             'You are not allowed to ward meeting create'
         );
 
-        return view('admin.executive_meeting.wardMeeting_notice.create');
+        return view('executivemeeting::admin.wardMeeting_notice.create');
     }
 
     public function store(StoreNoticeRequest $request)
@@ -61,7 +61,7 @@ class WardMeetingNoticeController extends Controller
             'You are not allowed to ward meeting edit'
         );
 
-        return view('admin.executive_meeting.wardMeeting_notice.edit', compact('wardMeetingNotice'));
+        return view('executivemeeting::admin.wardMeeting_notice.edit', compact('wardMeetingNotice'));
     }
 
     public function update(UpdateNoticeRequest $request, WardMeetingNotice $wardMeetingNotice)
@@ -97,13 +97,13 @@ class WardMeetingNoticeController extends Controller
     {
         $meetingDetails = MeetingDetail::where('model_type', WardMeetingNotice::class)->latest()->get();
 
-        return view('admin.executive_meeting.wardMeeting_notice.meetingDetails', compact('meetingDetails'));
+        return view('executivemeeting::admin.wardMeeting_notice.meetingDetails', compact('meetingDetails'));
     }
 
     public function wardMeetingDetailsReport()
     {
         $model_type = WardMeetingNotice::class;
 
-        return view('admin.executive_meeting.wardMeeting_notice.meeting_report', compact('model_type'));
+        return view('executivemeeting::admin.wardMeeting_notice.meeting_report', compact('model_type'));
     }
 }

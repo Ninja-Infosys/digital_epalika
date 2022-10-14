@@ -21,7 +21,7 @@ class WardMeetingDecisionController extends Controller
 
         $wardMeetingDecisions = WardMeetingDecision::with('meetingDetail')->orderByDesc('date')->get();
 
-        return view('admin.executive_meeting.wardMeeting_decision.index', compact('wardMeetingDecisions'));
+        return view('executivemeeting::admin.wardMeeting_decision.index', compact('wardMeetingDecisions'));
     }
 
     public function create()
@@ -33,7 +33,7 @@ class WardMeetingDecisionController extends Controller
 
         $meetingDetails = MeetingDetail::where('model_type', WardMeetingNotice::class)->latest()->get();
 
-        return view('admin.executive_meeting.wardMeeting_decision.create', compact('meetingDetails'));
+        return view('executivemeeting::admin.wardMeeting_decision.create', compact('meetingDetails'));
     }
 
     public function store(StoreDecisionRequest $request)
@@ -66,7 +66,7 @@ class WardMeetingDecisionController extends Controller
 
         $meetingDetails = MeetingDetail::where('model_type', WardMeetingNotice::class)->latest()->get();
 
-        return view('admin.executive_meeting.wardMeeting_decision.edit', compact('meetingDetails', 'wardMeetingDecision'));
+        return view('executivemeeting::admin.wardMeeting_decision.edit', compact('meetingDetails', 'wardMeetingDecision'));
     }
 
     public function update(UpdateDecisionRequest $request, WardMeetingDecision $wardMeetingDecision)

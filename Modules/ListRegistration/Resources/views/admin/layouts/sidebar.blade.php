@@ -1,0 +1,13 @@
+<li class="{{request()->is('admin/listregistration/dashboard') ? 'active' : ''}}">
+    <a href="{{route('admin.listRegistrations.dashboard')}}">
+        <i class="fa fa-home"></i>
+        <span> ड्यासबोर्ड</span>
+    </a>
+</li>
+
+<li class="{{request()->is('admin/listregistration/listRegistration*') ? 'active' : ''}}">
+    <a href="{{route('admin.listRegistrations.listRegistration.index')}}">
+        <i class="fa fa-file-contract"></i>
+        <span>मौजुदा सुची दर्ता</span>
+    </a>
+</li>

@@ -20,7 +20,7 @@ class MunicipalMeetingNoticeController extends Controller
 
         $municipalMeetingNotices = MunicipalMeetingNotice::latest()->get();
 
-        return view('admin.executive_meeting.municipalMeeting_notice.index', compact('municipalMeetingNotices'));
+        return view('executivemeeting::admin.municipalMeeting_notice.index', compact('municipalMeetingNotices'));
     }
 
     public function create()
@@ -29,7 +29,7 @@ class MunicipalMeetingNoticeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        return view('admin.executive_meeting.municipalMeeting_notice.create');
+        return view('executivemeeting::admin.municipalMeeting_notice.create');
     }
 
     public function store(StoreNoticeRequest $request)
@@ -60,7 +60,7 @@ class MunicipalMeetingNoticeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        return view('admin.executive_meeting.municipalMeeting_notice.edit', compact('municipalMeetingNotice'));
+        return view('executivemeeting::admin.municipalMeeting_notice.edit', compact('municipalMeetingNotice'));
     }
 
     public function update(UpdateNoticeRequest $request, MunicipalMeetingNotice $municipalMeetingNotice)
@@ -96,13 +96,13 @@ class MunicipalMeetingNoticeController extends Controller
     {
         $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();
 
-        return view('admin.executive_meeting.municipalMeeting_notice.meetingDetails', compact('meetingDetails'));
+        return view('executivemeeting::admin.municipalMeeting_notice.meetingDetails', compact('meetingDetails'));
     }
 
     public function municipalMeetingDetailsReport()
     {
         $model_type = MunicipalMeetingNotice::class;
 
-        return view('admin.executive_meeting.municipalMeeting_notice.meeting_report', compact('model_type'));
+        return view('executivemeeting::admin.municipalMeeting_notice.meeting_report', compact('model_type'));
     }
 }

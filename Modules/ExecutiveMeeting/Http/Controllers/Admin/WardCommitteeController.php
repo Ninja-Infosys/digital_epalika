@@ -20,7 +20,7 @@ class WardCommitteeController extends Controller
 
         $wardCommittees = WardCommittee::orderBy('position')->get();
 
-        return view('admin.executive_meeting.ward_committee.index', compact('wardCommittees'));
+        return view('executivemeeting::admin.ward_committee.index', compact('wardCommittees'));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class WardCommitteeController extends Controller
         );
         $officeSetting = OfficeSetting::first();
 
-        return view('admin.executive_meeting.ward_committee.create', compact('officeSetting'));
+        return view('executivemeeting::admin.ward_committee.create', compact('officeSetting'));
     }
 
     public function store(StoreWardCommitteeRequest $request)
@@ -62,7 +62,7 @@ class WardCommitteeController extends Controller
             'You are not allowed to executive committee edit'
         );
 
-        return view('admin.executive_meeting.ward_committee.edit', compact('wardCommittee'));
+        return view('executivemeeting::admin.ward_committee.edit', compact('wardCommittee'));
     }
 
     public function update(UpdateWardCommitteeRequest $request, WardCommittee $wardCommittee)

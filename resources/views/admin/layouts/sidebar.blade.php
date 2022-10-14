@@ -6,28 +6,6 @@
 </li>
 
 <li>
-    <a href="#sidebarListRegistration" data-bs-toggle="collapse">
-        <i class="fa fa-file-contract"></i>
-        <span>सुची दर्ता प्रणालि </span>
-        <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
-    </a>
-    <div class="{{request()->is('admin/listRegistrations/*') ?'':'collapse'}}"
-         id="sidebarListRegistration">
-        <ul class="nav-second-level">
-            @can('listRegistration_access')
-                <li class="{{request()->routeIs('admin.listRegistrations.listRegistration.index') ? 'active' : ''}}">
-                    <a href="{{route('admin.listRegistrations.listRegistration.index')}}">
-                        <span>मौजुदा सुची दर्ता</span>
-                    </a>
-                </li>
-            @endcan
-        </ul>
-    </div>
-</li>
-
-<li>
     <a href="#registration" data-bs-toggle="collapse">
         <i class="fa fa-users-cog"></i>
         <span>प्रयोगकर्ता र भूमिका</span>
