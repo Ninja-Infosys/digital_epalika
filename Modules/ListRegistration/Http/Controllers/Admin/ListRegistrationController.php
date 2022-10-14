@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Modules\ListRegistration\Http\Controllers\Admin;
 
-use App\Events\ActivityLogEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ListRegistration\StoreListRegistrationRequest;
 use App\Http\Requests\ListRegistration\UpdateListRegistrationRequest;
 use App\Models\ListRegistration;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;

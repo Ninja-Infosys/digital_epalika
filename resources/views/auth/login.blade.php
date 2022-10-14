@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Log In | {{config('app.name')}}</title>
+    <title>Digital E-Palika | {{config('app.name')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta
-        content="B-Palika System"
+        content="A complete solution for digital palika."
         name="description"
     />
-    <meta content="Coderthemes" name="author"/>
+    <meta content="NINJA INFOSYS" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
@@ -30,7 +30,7 @@
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
 </head>
 
-<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpeg')}})">
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}})">
 <div class="mt-5 mb-5">
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -88,7 +88,7 @@
                                         <div class="button-list">
                                                 <button type="submit" class="btn btn-success waves-effect waves-light">
                                                     <i class="fa fa-lock"></i>
-                                                    साइन इन
+                                                    लग - इन
                                                 </button>
                                                 <button type="reset" class="btn btn-danger waves-effect">
                                                     <i class="fa fa-times-circle"></i>
@@ -117,17 +117,11 @@
 </div>
 
 <footer class="footer footer-alt bg-soft-main">
-    2015 -
+    2022 -
     <script>
         document.write(new Date().getFullYear());
     </script>
     &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">NINJA INFOSYS</a>
 </footer>
-
-<!-- Vendor js -->
-<script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
-
-<!-- App js -->
-<script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 </body>
 </html>
