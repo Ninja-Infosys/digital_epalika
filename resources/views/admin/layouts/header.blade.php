@@ -116,7 +116,7 @@
 
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fa fa-user"></i>
-                        <span>My Profile</span>
+                        <span>मेरो प्रोफाइल</span>
                     </a>
                     <a href="{{route('admin.activityLog.index')}}" class="dropdown-item notify-item">
                         <i class="fa fa-tasks"></i>
@@ -131,7 +131,7 @@
                         @csrf
                         <button type="submit" class="dropdown-item notify-item">
                             <i class="fa fa-sign-out-alt"></i>
-                            <span>Logout</span>
+                            <span>बाहिर निस्कनु</span>
                         </button>
                     </form>
                 </div>

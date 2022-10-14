@@ -25,8 +25,6 @@
         type="text/css"
         id="app-style"
     />
-    <!-- icons -->
-    <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
 </head>
 
 <body class="authentication-bg authentication-bg-pattern" style="background-image: url({{asset('images/mountain_photo.jpg')}})">
@@ -101,7 +99,5 @@
     </script>
     &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">NINJA INFOSYS</a>
 </footer>
-<script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
-<script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 </body>
 </html>

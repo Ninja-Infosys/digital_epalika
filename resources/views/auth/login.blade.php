@@ -123,11 +123,5 @@
     </script>
     &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">NINJA INFOSYS</a>
 </footer>
-
-<!-- Vendor js -->
-<script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
-
-<!-- App js -->
-<script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 </body>
 </html>
