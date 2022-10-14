@@ -28,11 +28,21 @@
                                 <p class="text-center my-3"><b>बिषय: सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे
                                         ।</b></p>
                                 <p class="mb-3">
-                                    यस नेपालगञ्ज उप-महानगरपालिका वडा नं. <span class="underline-dotted custom-width"></span> बस्ने श्री <span class="underline-dotted custom-width"></span> ले ऐ. वडा नं.<span class="underline-dotted custom-width"></span> साविक <span class="underline-dotted custom-width"></span>
-                                    कि.नं.<span class="underline-dotted custom-width"></span> मा भवन बनाउन नक्सा पास स्वीकृतिका लागि दरखास्त पर्न आएकोले सो सम्बन्धी प्रकाशित १५ दिने सूचना यसै साथ संलग्न सूचना त्यस वडा समितिको कार्यालय र घर निर्माण स्थल<span class="underline-dotted custom-width"></span> मा टास गरी सो को टास मुचुल्का पठाईदिनुहुन अनुरोध छ |
+                                    यस उप-महानगरपालिका मिति<span class="underline-dotted custom-width"></span> को प्लिन्थ लेभलसम्मको निर्माण ईजाजत अनुसार मैले/हामीले साविक वडा नं. <span class="underline-dotted custom-width"></span> हाल उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span> किता नं. <span class="underline-dotted custom-width"></span>
+                                   क्षेत्रफल<span class="underline-dotted custom-width"></span> भित्र स्वीकृत नक्सा अनुसार नै प्लिन्थ लेभलसम्मको निर्माण कार्य सम्पन्न गरी प्रविधिक सुपरिवेक्षकको प्रतिवेदन सहित सुपरस्ट्रक्चरको निर्माण कार्यको नक्सा पास तथा निर्माण ईजाजत पाउँ भनी यो निवेदन पेश गरेको/गरेका छु/छौ |
                                 </p>
 
-                                <div class="d-flex justify-content-end mt-5"><span class="underline-dotted custom-width"></span></div>
+
+                                    <h4 class=" text-decoration-underline d-flex justify-content-end px-5 my-3"><b>निवेदन</b></h4>
+
+                                <div class="d-flex justify-content-end">
+                                  <p> सही:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span><br>
+                                    नाम:<br>
+                                    स्थायी ठेगाना:<br>
+                                    मोबिइल नं. :</p>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
