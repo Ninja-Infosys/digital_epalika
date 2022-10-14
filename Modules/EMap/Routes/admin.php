@@ -31,3 +31,7 @@ Route::view('landarreras', 'emap::admin.noticeletter.landarreras');
 Route::view('techniciannotice', 'emap::admin.noticeletter.techniciannotice');
 Route::view('chaggrement', 'emap::admin.noticeletter.chaggrement');
 Route::view('agentaggrement', 'emap::admin.noticeletter.agentaggrement');
+Route::view('permissionletter', 'emap::admin.noticeletter.permissionletter');
+Route::view('level', 'emap::admin.noticeletter.level');
+Route::view('firstphase', 'emap::admin.noticeletter.firstphase');
+Route::view('super', 'emap::admin.noticeletter.super');

@@ -28,8 +28,8 @@
                         <p>चलानी नं: <span class="underline-dotted custom-width">
 
                             </span></p>
-                        <p class="text-center my-3"><b>बिषय: भवन संहिता अनुसार भवन डिजाईन गरिएको सम्बन्धमा मन्जुरी पत्र
-                                ।</b></p>
+                        <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना |
+                                </b></h3>
                         <p class="mb-3">
                             यस उप-महा नगरपालिका वडा नं.  <span class="underline-dotted custom-width">
                             </span>टोल  <span class="underline-dotted custom-width">
@@ -39,7 +39,7 @@
 
                             </span> क्षेत्रफल  <span class="underline-dotted custom-width">
 
-                            </span> मा भवन निर्माण गर्ने     घरधनी श्री  <span class="underline-dotted custom-width">
+                            </span> मा भवन निर्माण गर्ने घरधनी श्री  <span class="underline-dotted custom-width">
 
                             </span>ले यस नक्सा बमोजिमको भवन निर्माण गर्न निवेदन पेश गरेकोमा संधियारको नाममा यो सुचना प्रकाशित गरिएको छ | निवेदन साथ पेश हुन आएको प्रमाण र नक्साको आधारमा निर्माण स्वीकृति दिंदा तपाइको जग्गा लगायत सार्वजनिक स्थलको हानी निक्सानी हुन्छ, हुदैन, सन्धी सर्पन हानी नोक्सानी हुने भए यो सुचना प्रकाशित भएको १५ दिनभित्र सबुत प्रमाण सहित उप-महानगरपालिकामा उजुर गर्न सुचित गरिन्छ |
                             म्याद नाघी आएको उजुरी उपर कुनै किसिमको कारवाही नहुने व्यहोरा जानकारी गराईन्छ |
@@ -63,6 +63,24 @@
                             </tr>
                             <tr>
                                 <th scope="row">उतर</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">द्क्षिण</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">पुर्व</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">पश्चिम</th>
                                 <td></td>
                                 <td></td>
                                 <td></td>

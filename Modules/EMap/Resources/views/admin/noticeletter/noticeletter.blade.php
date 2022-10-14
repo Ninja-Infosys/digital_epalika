@@ -9,7 +9,6 @@
                                     requestRoute="{{route('print.office-letter-print')}}">
                                 <i class="fa fa-print"></i> Print
                             </button>
-
                         </div>
                     </div>
                 </div>
@@ -19,15 +18,10 @@
                             <div class="card-body p-3">
                                 <div class="font-black" id="printData">
                                     <div class="top-line d-flex justify-content-between">
-                                        <p>पत्र सं: <span class="underline-dotted"></span></p>
-                                        <p class="">मिति: <span class="underline-dotted custom-width">
-                            </span></p>
+                                        <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
+                                        <p class="">मिति: <span class="underline-dotted custom-width"></span></p>
                                     </div>
-
-
-                                    <p>चलानी नं: <span class="underline-dotted custom-width">
-
-                            </span></p>
+                                    <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
                                     <div class="res mt-3">
                                         <p>श्री वडा समितिको कार्यालय</p>
                                         <p>नेपालगञ्ज उप-महानगरपालिका</p>
@@ -41,7 +35,6 @@
                                     </p>
 
                                     <div class="d-flex justify-content-end mt-5"><span class="underline-dotted custom-width"></span></div>
-                                </div>
                             </div>
                         </div>
                     </div>
