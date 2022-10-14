@@ -10,13 +10,13 @@
     </div>
     <div class="col-md-4 border">
         <a href="#">
-        <a href="{{route('admin.circular.dashboard')}}">
-            <div class="p-2 text-center">
-                <img src="{{asset('assets/backend/images/modules/darta-chalani-parnali.png')}}"
-                     height="50" width="50">
-                <h4 class="p-1">दर्ता चलानी</h4>
-            </div>
-        </a>
+            <a href="{{route('admin.circular.dashboard')}}">
+                <div class="p-2 text-center">
+                    <img src="{{asset('assets/backend/images/modules/darta-chalani-parnali.png')}}"
+                         height="50" width="50">
+                    <h4 class="p-1">दर्ता चलानी</h4>
+                </div>
+            </a>
     </div>
     <div class="col-md-4 border">
         <a href="{{route('admin.digitalBoard.dashboard')}}">
@@ -64,7 +64,7 @@
         </a>
     </div>
     <div class="col-md-4 border">
-        <a href="#">
+        <a href="{{route('admin.executiveMeeting.dashboard')}}">
             <div class="p-2 text-center">
                 <img src="{{asset('assets/backend/images/modules/e-karypalika.png')}}"
                      height="50" width="50">
@@ -100,7 +100,7 @@
         </a>
     </div>
     <div class="col-md-4 border">
-        <a href="#">
+        <a href="{{route('admin.website.dashboard')}}">
             <div class="p-2 text-center">
                 <img src="{{asset('assets/backend/images/modules/website-setting.png')}}"
                      height="50" width="50">

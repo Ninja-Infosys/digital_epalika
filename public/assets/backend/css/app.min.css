@@ -1949,11 +1949,11 @@ body {
     font-weight: 600
 }
 
-#sidebar-menu .menuitem-active > a {
+#sidebar-menu .active > a {
     color: var(--primary)
 }
 
-#sidebar-menu .menuitem-active .active {
+#sidebar-menu .active {
     color: var(--primary)
 }
 

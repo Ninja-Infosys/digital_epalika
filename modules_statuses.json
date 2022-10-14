@@ -4,5 +4,6 @@
     "EMap": true,
     "HelpDesk": true,
     "GrievanceHandling": true,
-    "BusinessRegistration": true
+    "BusinessRegistration": true,
+    "ExecutiveMeeting": true
 }
