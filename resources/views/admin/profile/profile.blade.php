@@ -20,10 +20,10 @@
             <div class="col-lg-4 col-xl-4">
                 <div class="card text-center">
                     <div class="card-body">
-                        <img src="{{auth()->user()->profile_photo_url}}" class="rounded-circle mb-1 avatar-lg img-thumbnail"
+                        <img src="{{auth()->user()->profile_photo_url}}"
+                             class="rounded-circle mb-1 avatar-lg img-thumbnail"
                              alt="profile-image">
                         <h4 class="mb-1">{{auth()->user()->name}}</h4>
-                        <button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light">फोटो परिवर्तन गर्नुहोस्</button>
                         <div class="text-start mt-3">
                             <p class="text-muted mb-2 font-13"><strong>नाम :</strong>
                                 <span class="ms-2">{{auth()->user()->name}}</span>
@@ -63,19 +63,20 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane show active" id="timeline">
-                                <form>
+                                <form action="{{route('admin.updatePassword')}}" method="post">
+                                    @csrf
+                                    @method('patch')
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
-                                            <label for="password" class="form-label">पुरानो पासवर्ड *</label>
+                                            <label for="current_password" class="form-label">पुरानो पासवर्ड *</label>
                                             <input
                                                 type="password"
-                                                name="password"
-                                                value="{{old('password')}}"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                id="password"
+                                                name="current_password"
+                                                class="form-control @error('current_password') is-invalid @enderror"
+                                                id="current_password"
                                                 placeholder="पुरानो पासवर्ड"
                                             />
-                                            @error('password')
+                                            @error('current_password')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
@@ -84,7 +85,6 @@
                                             <input
                                                 type="password"
                                                 name="password"
-                                                value="{{old('password')}}"
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 id="password"
                                                 placeholder="पासवर्ड"
@@ -94,7 +94,8 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6 mb-2">
-                                            <label for="password_confirmation" class="form-label">पासवर्ड सुनिश्चित गर्नुहोस *</label>
+                                            <label for="password_confirmation" class="form-label">पासवर्ड सुनिश्चित
+                                                गर्नुहोस *</label>
                                             <input
                                                 type="password"
                                                 name="password_confirmation"
@@ -111,15 +112,16 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="settings">
-                                <form action="#" method="post">
+                                <form action="{{route('admin.updateProfile')}}" method="post" enctype="multipart/form-data">
                                     @csrf
+                                    @method('patch')
                                     <fieldset class="border p-2 mb-2">
                                         <legend class="font-16 text-info">
                                             <strong>व्यक्तिगत विवरण </strong>
                                         </legend>
                                         <div class="row">
                                             <div class="col-md-6 mb-2">
-                                                <label for="name" class="form-label">नाम  *</label>
+                                                <label for="name" class="form-label">नाम *</label>
                                                 <input
                                                     type="text"
                                                     name="name"
@@ -133,7 +135,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 mb-2">
-                                                <label for="email" class="form-label">इमेल  *</label>
+                                                <label for="email" class="form-label">इमेल *</label>
                                                 <input
                                                     type="text"
                                                     name="email"
@@ -147,7 +149,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-6 mb-2">
-                                                <label for="phone" class="form-label">फोन नम्बर  *</label>
+                                                <label for="phone" class="form-label">फोन नम्बर *</label>
                                                 <input
                                                     type="text"
                                                     name="phone"
@@ -157,6 +159,18 @@
                                                     placeholder="फोन नम्बर"
                                                 />
                                                 @error('phone')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label for="profile_photo_path" class="form-label">फोटो </label>
+                                                <input
+                                                    type="file"
+                                                    name="profile_photo_path"
+                                                    class="form-control @error('profile_photo_path') is-invalid @enderror"
+                                                    id="profile_photo_path"
+                                                />
+                                                @error('profile_photo_path')
                                                 <div class="invalid-feedback">{{$message}}</div>
                                                 @enderror
                                             </div>

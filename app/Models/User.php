@@ -50,6 +50,7 @@ class User extends Authenticatable
         'district_id',
         'local_body_id',
         'ward_no',
+        'profile_photo_path'
     ];
 
     protected $hidden = [

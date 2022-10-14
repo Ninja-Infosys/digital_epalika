@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 use Modules\ListRegistration\Http\Controllers\Admin\ListRegistrationController;
 
 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
