@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\UserManagement\UserController;
 use App\Http\Controllers\Admin\Website\ImportantLinkController;
 use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
+use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,7 +34,7 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 //notification
 Route::get('notification', [NotificationController::class, 'notification'])->name('notification');
 Route::get('notification/{databaseNotification}', [NotificationController::class, 'readNotification'])->name('notification.read');
-Route::get('readAllNotification',[NotificationController::class,'readAllNotification'])->name('notification.readAllNotification');
+Route::get('readAllNotification', [NotificationController::class, 'readAllNotification'])->name('notification.readAllNotification');
 
 
 Route::prefix('userManagement')->as('userManagement.')->group(function () {
@@ -85,6 +86,7 @@ Route::resource('file', FileController::class)->only('destroy');
 
 // website admin routes
 Route::prefix('website')->as('website.')->middleware('can:websiteAdmin_access')->group(function () {
+    Route::get('dashboard', WebsiteDashboardController::class)->name('dashboard');
     Route::resource('slider', SliderController::class);
     Route::resource('municipalDetail', MunicipalDetailController::class);
     Route::resource('importantLink', ImportantLinkController::class);

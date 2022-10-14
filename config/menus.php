@@ -7,4 +7,7 @@
         'emap',
         'businessregistration',
     ],
+    'sidebars' => [
+        'website'
+    ]
 ];
