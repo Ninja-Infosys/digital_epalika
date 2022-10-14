@@ -148,8 +148,18 @@
               <span class="logo-sm">
                 <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="40"/>
               </span>
+
                 <span class="logo-lg">
-                <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="40"/>
+                    @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
+                        <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                             height="40"/>
+                    @elseif(in_array(Str::lower(Request::segment(2)),config('menus.sidebars')))
+                        <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                             height="40"/>
+                    @else
+                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                             height="40"/>
+                    @endif
               </span>
             </a>
             <div class="dropdown-menu dropdown-xl d-arrow m-2 border-primary">
