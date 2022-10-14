@@ -45,6 +45,7 @@
                             <li>कुनै डाटा उपलब्ध छैन !!!</li>
                         @endforelse
                     </ul>
+                    {{$activityLogs->links()}}
                 </div>
             </div>
         </div>
