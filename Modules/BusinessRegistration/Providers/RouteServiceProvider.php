@@ -2,8 +2,8 @@
 
 namespace Modules\BusinessRegistration\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
 
-        Route::middleware(['web', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
             ->prefix('admin/businessRegistration')
             ->as('admin.businessRegistration.')
             ->group(module_path('BusinessRegistration', '/Routes/admin.php'));
