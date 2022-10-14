@@ -2,7 +2,7 @@
     <div class="col-md-4 border">
         <a href="{{route('admin.dashboard')}}">
             <div class="p-2 text-center">
-                <img src="{{asset('assets/backend/images/logo-sm.png')}}"
+                <img src="{{asset('assets/backend/images/logo_sm.png')}}"
                      height="50" width="50">
                 <h4 class="p-1">डिजिटल ई-पालिका</h4>
             </div>
