@@ -119,7 +119,7 @@
                         <div class="col-6">
                             <div class="text-end">
                                 <h3 class="mt-1"><span data-plugin="counterup">
-                                        1
+                                        {{$organizations_count}}
                                     </span></h3>
                                 <p class="text-muted mb-1">जम्मा दर्ता भएका व्यवसायहरु </p>
                             </div>

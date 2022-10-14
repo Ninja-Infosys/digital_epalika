@@ -35,7 +35,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
-
     @stack('style')
     @livewireStyles
     @stack('style')
@@ -96,7 +95,6 @@
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
-
 <script>
     $('.show_confirm').click(function (event) {
         const form = $(this).closest("form");

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrintController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,8 +40,9 @@ Route::get('/static/single-notice/{notice}', [FrontController::class, 'singleNot
 Route::prefix('print')->as('print.')->controller(PrintController::class)->group(function () {
     Route::post('applicationPrint', 'applicationPrint')->name('application-print');
     Route::post('officeLetterPrint', 'officeLetterPrint')->name('office-letter-print');
-    Route::post('businessRegistrationPrint','businessRegistrationPrint')->name('business-registration-print');
+    Route::post('businessRegistrationPrint', 'businessRegistrationPrint')->name('business-registration-print');
 });
 
-
+Route::get('login/locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
+Route::post('login/locked', [LoginController::class, 'unlock'])->name('login.unlock');
 

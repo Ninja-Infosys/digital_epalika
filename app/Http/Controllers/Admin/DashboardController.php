@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 use Modules\DigitalBoard\Entities\Notice;
+use Modules\EMap\Entities\Organization;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
@@ -35,6 +36,7 @@ class DashboardController extends Controller
         $ward_meetings_count = MeetingDetail::where('model_type', WardMeetingNotice::class)->count();
         $municipal_meetings_count = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->count();
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
+        $organizations_count=Organization::where('is_active',1)->count();
 
         return view('admin.dashboard', compact(['user_count',
             'grievance_user_count',
@@ -49,7 +51,8 @@ class DashboardController extends Controller
             'municipal_meetings_count',
             'ward_meetings_count',
             'grievanceTypes',
-            'unseen_grievances'
+            'unseen_grievances',
+            'organizations_count'
         ]));
     }
 }

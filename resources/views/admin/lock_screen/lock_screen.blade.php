@@ -38,31 +38,31 @@
 
                         <div class="text-center mb-4">
                             <div class="auth-logo">
-                                <a href="index.html" class="logo logo-dark text-center">
+                                <a href="#" class="logo logo-dark text-center">
                                             <span class="logo-lg">
-                                                <img src="assets/images/logo-dark.png" alt="" height="22">
+                                                <img src="{{asset('assets/images/logo-dark.png')}}" alt="" height="22">
                                             </span>
                                 </a>
 
-                                <a href="index.html" class="logo logo-light text-center">
+                                <a href="#" class="logo logo-light text-center">
                                             <span class="logo-lg">
-                                                <img src="assets/images/logo-light.png" alt="" height="22">
+                                                <img src="{{asset('assets/images/logo-light.png')}}" alt="" height="22">
                                             </span>
                                 </a>
                             </div>
                         </div>
 
                         <div class="text-center w-75 m-auto">
-                            <img src="assets/images/users/user-1.jpg" height="88" alt="user-image" class="rounded-circle shadow">
-                            <h4 class="text-dark-50 text-center mt-3">Hi ! Geneva </h4>
+                            <img src="{{auth()->user()->profile_photo_url ?? ''}}" height="88" alt="user-image" class="rounded-circle shadow">
+                            <h4 class="text-dark-50 text-center mt-3">Hi ! {{auth()->user()->name ?? ''}} </h4>
                         </div>
 
 
-                        <form action="#">
-
+                        <form action="{{ route('login.unlock') }}" method="post">
+@csrf
                             <div class="mb-3 mt-3">
                                 <label for="password" class="form-label">प्रयोगकर्ता पासवर्ड <span class="text-danger">*</span></label>
-                                <input class="form-control" type="password" required="" id="password"
+                                <input class="form-control" type="password" required="" id="password" name="password"
                                        placeholder="प्रयोगकर्ता पासवर्ड">
                             </div>
 

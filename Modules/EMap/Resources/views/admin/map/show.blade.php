@@ -44,6 +44,12 @@
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
+                            <a href="#map-registration-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
+                               aria-selected="false" role="tab" tabindex="-1">
+                                दस्तुर तथा दर्ता
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
                             <a href="#notice-tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
                                aria-selected="false" role="tab" tabindex="-1">
                                 सूचना
@@ -101,6 +107,10 @@
 
                         <div class="tab-pane show" id="detail-tab" role="tabpanel">
                             @includeIf('emap::inc.map_show')
+                        </div>
+
+                        <div class="tab-pane" id="map-registration-tab" role="tabpanel">
+                            <a href="{{route('emap.admin.map.map-apply.map-registration.create',$mapApply)}}">नक्सा दर्ता गर्नुहोस</a>
                         </div>
 
                         <div class="tab-pane" id="notice-tab" role="tabpanel">
