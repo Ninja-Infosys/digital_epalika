@@ -30,7 +30,7 @@
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
 </head>
 
-<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpeg')}})">
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}})">
 <div class="mt-5 mb-5">
     <div class="container-fluid">
         <div class="row justify-content-center">
