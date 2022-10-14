@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
+Route::view('lock-screen', 'admin.lock_screen.lock_screen')->name('lock-screen');
+
 //notification
 Route::get('notification', [NotificationController::class, 'notification'])->name('notification');
 Route::get('notification/{databaseNotification}', [NotificationController::class, 'readNotification'])->name('notification.read');

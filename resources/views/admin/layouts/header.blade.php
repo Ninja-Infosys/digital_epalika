@@ -131,7 +131,7 @@
                     </a>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="{{route('admin.lock-screen')}}" class="dropdown-item notify-item">
                         <i class="fa fa-lock"></i>
                         <span>Lock Screen</span>
                     </a>
