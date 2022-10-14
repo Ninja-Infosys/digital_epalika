@@ -118,26 +118,15 @@
                         <i class="fa fa-user"></i>
                         <span>My Profile</span>
                     </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fa fa-cog"></i>
-                        <span>Settings</span>
-                    </a>
-
                     <a href="{{route('admin.activityLog.index')}}" class="dropdown-item notify-item">
                         <i class="fa fa-tasks"></i>
                         <span>गतिविधिहरू</span>
                     </a>
-
-                    <!-- item-->
                     <a href="{{route('admin.lock-screen')}}" class="dropdown-item notify-item">
                         <i class="fa fa-lock"></i>
-                        <span>Lock Screen</span>
+                        <span>लक स्क्रिन</span>
                     </a>
-
                     <div class="dropdown-divider"></div>
-
                     <form action="{{route('logout')}}" method="post">
                         @csrf
                         <button type="submit" class="dropdown-item notify-item">
