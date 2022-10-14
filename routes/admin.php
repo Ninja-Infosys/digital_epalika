@@ -2,12 +2,6 @@
 
 use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalCommitteeController;
-use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingDecisionController;
-use App\Http\Controllers\Admin\ExecutiveMeeting\MunicipalMeetingNoticeController;
-use App\Http\Controllers\Admin\ExecutiveMeeting\WardCommitteeController;
-use App\Http\Controllers\Admin\ExecutiveMeeting\WardMeetingDecisionController;
-use App\Http\Controllers\Admin\ExecutiveMeeting\WardMeetingNoticeController;
 use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\ListRegistrationController;
@@ -59,21 +53,6 @@ Route::prefix('setting')->group(function () {
     });
     Route::resource('officeSetting', OfficeSettingController::class);
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
-});
-
-
-//executive meeting
-Route::prefix('executiveMeeting')->as('executiveMeeting.')->group(function () {
-    Route::resource('municipalCommittee', MunicipalCommitteeController::class);
-    Route::resource('wardCommittee', WardCommitteeController::class);
-    Route::get('municipalMeetingDetails', [MunicipalMeetingNoticeController::class, 'municipalMeetingDetails'])->name('municipalMeetingDetails');
-    Route::get('municipalMeetingDetails/report', [MunicipalMeetingNoticeController::class, 'municipalMeetingDetailsReport'])->name('municipalMeetingDetailsReport');
-    Route::resource('municipalMeetingNotice', MunicipalMeetingNoticeController::class);
-    Route::resource('municipalMeetingDecision', MunicipalMeetingDecisionController::class);
-    Route::get('wardMeetingDetails', [WardMeetingNoticeController::class, 'wardMeetingDetails'])->name('wardMeetingDetails');
-    Route::get('wardMeetingDetails/report', [WardMeetingNoticeController::class, 'wardMeetingDetailsReport'])->name('wardMeetingDetailsReport');
-    Route::resource('wardMeetingNotice', WardMeetingNoticeController::class);
-    Route::resource('wardMeetingDecision', WardMeetingDecisionController::class);
 });
 
 Route::prefix('listRegistrations')->as('listRegistrations.')->group(function () {

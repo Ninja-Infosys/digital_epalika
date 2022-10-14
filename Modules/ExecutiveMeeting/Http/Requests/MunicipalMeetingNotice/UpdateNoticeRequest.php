@@ -1,0 +1,40 @@
+<?php
+
+namespace Modules\ExecutiveMeeting\Http\Requests\MunicipalMeetingNotice;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
+
+class UpdateNoticeRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return Gate::allows('municipalMeeting_edit');
+    }
+
+    public function rules(): array
+    {
+
+        return [
+            'broadcast_date' => ['required'],
+            'broadcast_time' => ['required'],
+            'type' => ['required', Rule::in(config('defaults.meeting_types'))],
+            'meeting_at',
+            'meeting_subject' => ['required', 'string'],
+            'description' => ['required']
+        ];
+
+    }
+
+    public function messages()
+    {
+        return [
+            'broadcast_date.required' => 'प्रसारण मिति आवश्यक छ',
+            'type.required' => 'प्रकार आवश्यक छ',
+            'meeting_subject.required' => 'बैठक विषय आवश्यक छ',
+            'meeting_subject.string' => 'बैठक स्ट्रिङमा हुनुपर्छ',
+            'description.required' => 'विवरण आवश्यक छ'
+        ];
+    }
+}
