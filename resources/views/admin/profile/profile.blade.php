@@ -20,16 +20,28 @@
             <div class="col-lg-4 col-xl-4">
                 <div class="card text-center">
                     <div class="card-body">
-                        <img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-lg img-thumbnail"
+                        <img src="{{auth()->user()->profile_photo_url}}" class="rounded-circle mb-1 avatar-lg img-thumbnail"
                              alt="profile-image">
-                        <h4 class="mb-1">Geneva McKnight</h4>
+                        <h4 class="mb-1">{{auth()->user()->name}}</h4>
                         <button type="button" class="btn btn-success btn-xs waves-effect mb-2 waves-light">फोटो परिवर्तन गर्नुहोस्</button>
                         <div class="text-start mt-3">
-                            <p class="text-muted mb-2 font-13"><strong>नाम :</strong> <span class="ms-2">Geneva D. McKnight</span></p>
-                            <p class="text-muted mb-2 font-13"><strong>भूमिका :</strong> <span class="ms-2">Super Admin</span></p>
-                            <p class="text-muted mb-2 font-13"><strong>इमेल :</strong><span class="ms-2">(123) 123 1234</span></p>
-                            <p class="text-muted mb-2 font-13"><strong>सम्पर्क नं. :</strong> <span class="ms-2">user@email.domain</span></p>
-                            <p class="text-muted mb-1 font-13"><strong>ठेगाना :</strong> <span class="ms-2">USA</span></p>
+                            <p class="text-muted mb-2 font-13"><strong>नाम :</strong>
+                                <span class="ms-2">{{auth()->user()->name}}</span>
+                            </p>
+                            <p class="text-muted mb-2 font-13"><strong>भूमिका :</strong>
+                                <span class="ms-2">{{auth()->user()->role->title ?? ''}}</span>
+                            </p>
+                            <p class="text-muted mb-2 font-13"><strong>इमेल :</strong>
+                                <span class="ms-2">{{auth()->user()->email}}</span>
+                            </p>
+                            <p class="text-muted mb-2 font-13"><strong>सम्पर्क नं. :</strong>
+                                <span class="ms-2">{{auth()->user()->phone}}</span>
+                            </p>
+                            <p class="text-muted mb-1 font-13"><strong>ठेगाना :</strong>
+                                <span class="ms-2">
+                                    {{auth()->user()->localBody->local_body ?? ''}}-{{auth()->user()->ward_no ?? ''}}
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div> <!-- end card -->
@@ -93,6 +105,9 @@
                                             />
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn btn-primary">
+                                        पेश गर्नुहोस्
+                                    </button>
                                 </form>
                             </div>
                             <div class="tab-pane" id="settings">
@@ -108,7 +123,7 @@
                                                 <input
                                                     type="text"
                                                     name="name"
-                                                    value="{{old('name')}}"
+                                                    value="{{old('name', auth()->user()->name)}}"
                                                     class="form-control @error('name') is-invalid @enderror"
                                                     id="name"
                                                     placeholder="नाम"
@@ -122,7 +137,7 @@
                                                 <input
                                                     type="text"
                                                     name="email"
-                                                    value="{{old('email')}}"
+                                                    value="{{old('email', auth()->user()->email)}}"
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     id="email"
                                                     placeholder="इमेल"
@@ -136,7 +151,7 @@
                                                 <input
                                                     type="text"
                                                     name="phone"
-                                                    value="{{old('phone')}}"
+                                                    value="{{old('phone', auth()->user()->phone)}}"
                                                     class="form-control @error('phone') is-invalid @enderror"
                                                     id="phone"
                                                     placeholder="फोन नम्बर"
@@ -145,32 +160,10 @@
                                                 <div class="invalid-feedback">{{$message}}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-6 mb-2">
-                                                <label for="role_id" class="form-label">भूमिका *</label>
-                                                <select name="role_id"
-                                                        class="form-select @error('role_id') is-invalid @enderror"
-                                                        id="role_id">
-                                                    <option value="">भूमिका छान्नुहोस्</option>
-{{--                                                    @foreach($roles as $role)--}}
-{{--                                                        <option value="{{$role->id}}" {{$role->id==old('role_id') ? 'selected' : ''}}>--}}
-{{--                                                            {{$role->title}}--}}
-{{--                                                        </option>--}}
-{{--                                                    @endforeach--}}
-                                                </select>
-                                                @error('role_id')
-                                                <div class="invalid-feedback">{{$message}}</div>
-                                                @enderror
-                                            </div>
                                         </div>
                                     </fieldset>
-                                    <fieldset class="border p-2 mb-2">
-                                        <legend class="font-16 text-info">
-                                            <strong>ठेगाना</strong>
-                                        </legend>
-                                        @livewire('address')
-                                    </fieldset>
                                     <button type="submit" class="btn btn-primary">
-                                        Save
+                                        पेश गर्नुहोस्
                                     </button>
                                 </form>
                             </div>
