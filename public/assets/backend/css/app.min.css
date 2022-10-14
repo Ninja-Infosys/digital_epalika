@@ -564,6 +564,9 @@ body[data-theme=dark] .list-group {
 body{
     font-family: 'Mukta', sans-serif !important;
 }
+p{
+    margin-bottom: 0 !important;
+}
 .custom-accordion .accordion-arrow {
     font-size: 1.2rem;
     position: absolute;
@@ -1788,6 +1791,10 @@ body[data-theme=dark] .table-dark tbody, body[data-theme=dark] .table-dark tr {
     --ct-bg-opacity: 0.25;
     background-color: rgba(var(--ct-success-rgb), var(--ct-bg-opacity)) !important
 }
+.bg-soft-main{
+    --ct-bg-opacity: 0.25;
+    background-color: rgba(var(--ct-main-rgb), var(--ct-bg-opacity)) !important
+}
 
 .bg-soft-info {
     --ct-bg-opacity: 0.25;
@@ -1887,7 +1894,6 @@ body {
 #sidebar-menu > ul > li > a > span {
     vertical-align: middle;
     font-size: 16px;
-    font-weight: 600;
 }
 
 #sidebar-menu > ul > li > a i {
@@ -3001,16 +3007,7 @@ body[data-layout-mode=two-column][data-topbar-color=dark][data-leftbar-color=bra
     padding: 19px 15px 20px;
     position: absolute;
     right: 0;
-    color: var(--ct-text-muted);
     left: 240px;
-    background-color: var(--ct-footer-bg)
-}
-
-.footer .footer-links a {
-    color: var(--ct-text-muted);
-    margin-left: 1.5rem;
-    -webkit-transition: all .4s;
-    transition: all .4s
 }
 
 .footer .footer-links a:hover {
@@ -3024,7 +3021,7 @@ body[data-layout-mode=two-column][data-topbar-color=dark][data-leftbar-color=bra
 .footer-alt {
     left: 0 !important;
     text-align: center;
-    background-color: transparent
+    color: var(--ct-white);
 }
 
 @media (max-width: 767.98px) {
@@ -4473,43 +4470,15 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
 }
 
 .auth-page .system_info {
-    background: #3c8dbc;
+    background: var(--primary);
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
-.auth-page .system_info {
-    background: #3c8dbc;
+.form-label{
+    margin-bottom: 0 !important;
 }
-
-.auth-page .system_info .title h4 {
-    font-family: 'Mukta', sans-serif;
-    line-height: 1.8;
-}
-
-.auth-page .system_info .title p {
-    font-family: 'Mukta', sans-serif;
-    line-height: 1.8;
-    color: #fff;
-}
-
-.auth-page .technical-support p {
-    text-align: center;
-    color: green;
-    font-size: 15px;
-}
-
-/*.authentication-bg.enlarged {*/
-/*    min-height: 100px*/
-/*}*/
-
-/*body.authentication-bg {*/
-/*    background-color: var(--ct-auth-bg-alt);*/
-/*    background-size: cover;*/
-/*    background-position: center*/
-/*}*/
 
 .logout-icon {
     width: 140px
