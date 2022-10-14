@@ -20,7 +20,7 @@ class MunicipalCommitteeController extends Controller
 
         $municipalCommittees = MunicipalCommittee::with('province', 'district', 'localBody')->orderBy('position')->get();
 
-        return view('admin.executive_meeting.municipal_committee.index', compact('municipalCommittees'));
+        return view('executivemeeting::admin.municipal_committee.index', compact('municipalCommittees'));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class MunicipalCommitteeController extends Controller
         );
         $officeSetting = OfficeSetting::first();
 
-        return view('admin.executive_meeting.municipal_committee.create', compact('officeSetting'));
+        return view('executivemeeting::admin.municipal_committee.create', compact('officeSetting'));
     }
 
     public function store(StoreMunicipalCommitteeRequest $request)
@@ -61,7 +61,7 @@ class MunicipalCommitteeController extends Controller
             'You are not allowed to executive committee edit'
         );
 
-        return view('admin.executive_meeting.municipal_committee.edit', compact('municipalCommittee'));
+        return view('executivemeeting::admin.municipal_committee.edit', compact('municipalCommittee'));
     }
 
     public function update(UpdateMunicipalCommitteeRequest $request, MunicipalCommittee $municipalCommittee)

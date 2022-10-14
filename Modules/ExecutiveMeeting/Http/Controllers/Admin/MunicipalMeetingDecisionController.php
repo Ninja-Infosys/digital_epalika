@@ -21,7 +21,7 @@ class MunicipalMeetingDecisionController extends Controller
 
         $municipalMeetingDecisions = MunicipalMeetingDecision::with('meetingDetail')->latest()->get();
 
-        return view('admin.executive_meeting.municipalMeeting_decision.index', compact('municipalMeetingDecisions'));
+        return view('executivemeeting::admin.municipalMeeting_decision.index', compact('municipalMeetingDecisions'));
     }
 
     public function create()
@@ -33,7 +33,7 @@ class MunicipalMeetingDecisionController extends Controller
 
         $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();
 
-        return view('admin.executive_meeting.municipalMeeting_decision.create', compact('meetingDetails'));
+        return view('executivemeeting::admin.municipalMeeting_decision.create', compact('meetingDetails'));
     }
 
     public function store(StoreDecisionRequest $request)
@@ -67,7 +67,7 @@ class MunicipalMeetingDecisionController extends Controller
 
         $meetingDetails = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->latest()->get();
 
-        return view('admin.executive_meeting.municipalMeeting_decision.edit', compact('municipalMeetingDecision', 'meetingDetails'));
+        return view('executivemeeting::admin.municipalMeeting_decision.edit', compact('municipalMeetingDecision', 'meetingDetails'));
     }
 
     public function update(UpdateDecisionRequest $request, MunicipalMeetingDecision $municipalMeetingDecision)
