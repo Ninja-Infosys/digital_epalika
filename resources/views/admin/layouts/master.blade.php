@@ -96,26 +96,6 @@
 
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
 <script>
-    (function() {
-        let t,
-            timeout = 5000;
-        function resetTimer() {
-            if (t) {
-                window.clearTimeout(t);
-            }
-            t = window.setTimeout(logout, timeout);
-        }
-
-        function logout() {
-           alert('logout')
-        }
-        resetTimer();
-        ["click", "mousemove", "keypress"].forEach(function(name) {
-            document.addEventListener(name, resetTimer);
-        });
-    }());
-</script>
-<script>
     $('.show_confirm').click(function (event) {
         const form = $(this).closest("form");
         event.preventDefault();
