@@ -2,29 +2,32 @@
 
 namespace Modules\EMap\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
-class StoreyDetail extends Model
+class MapRegistration extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'english_date',
     ];
 
     protected $fillable = [
         'map_apply_id',
-        'map_fee_id',
-        'area_of_proposed_construction',
-        'area_of_former_construction',
-        'total_area',
-        'height',
+        'form_receipt',
+        'application_registration_fee',
+        'other',
+        'nepali_date',
+        'english_date',
+        'receipt_no',
+        'recipient',
     ];
 
     public function mapApply(): BelongsTo
@@ -32,13 +35,8 @@ class StoreyDetail extends Model
         return $this->belongsTo(MapApply::class);
     }
 
-    public function mapFee(): BelongsTo
+    public function mapRegistrationParticulars(): BelongsTo
     {
-        return $this->belongsTo(MapFee::class);
-    }
-
-    public function getAmountAttribute(): float|int
-    {
-        return $this->area_of_proposed_construction * $this->mapFee->rate;
+        return $this->belongsTo(MapRegistrationParticular::class);
     }
 }
