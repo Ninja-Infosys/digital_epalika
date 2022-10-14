@@ -2,7 +2,7 @@
     <div class="col-md-4 border">
         <a href="{{route('admin.dashboard')}}">
             <div class="p-2 text-center">
-                <img src="{{asset('assets/backend/images/modules/epalika-logo.png')}}"
+                <img src="{{asset('assets/backend/images/logo-sm.png')}}"
                      height="50" width="50">
                 <h4 class="p-1">डिजिटल ई-पालिका</h4>
             </div>
@@ -102,7 +102,7 @@
     <div class="col-md-4 border">
         <a href="{{route('admin.website.dashboard')}}">
             <div class="p-2 text-center">
-                <img src="{{asset('assets/backend/images/modules/website-setting.png')}}"
+                <img src="{{asset('assets/backend/images/modules/website.png')}}"
                      height="50" width="50">
                 <h4 class="p-1">वेबसाइट सेटिङ</h4>
             </div>
