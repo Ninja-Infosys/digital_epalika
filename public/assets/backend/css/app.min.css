@@ -5059,11 +5059,6 @@ body[data-theme=dark] .auth-logo .logo-dark {
     border: 2px solid #6658dd
 }
 
-.timeline-sm .timeline-sm-item .timeline-sm-date {
-    position: absolute;
-    left: -104px
-}
-
 @media (max-width: 420px) {
     .timeline-sm {
         padding-left: 0

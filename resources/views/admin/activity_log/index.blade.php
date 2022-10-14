@@ -19,8 +19,8 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -28,42 +28,23 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>मिति</th>
-                                <th>प्रयोगकर्ता</th>
-                                <th>मोडुल</th>
-                                <th>कार्य</th>
-                                <th>डिभाइस</th>
-                                <th>आईपी</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($activityLogs as $activityLog)
-                                <tr>
-                                    <th scope="row">{{$loop->iteration}}</th>
-                                    <td>
-                                        <x-ad-to-bs id="-activity{{$loop->iteration}}"
-                                                    :ad-date="$activityLog->created_at->toDateString()"/>
-                                    </td>
-                                    <td>{{$activityLog->user->name??''}}</td>
-                                    <td>{{class_basename($activityLog->model_type)}}</td>
-                                    <td>{{$activityLog->activity_type}}</td>
-                                    <td width="300">{{$activityLog->agent}}</td>
-                                    <td>{{$activityLog->ip}}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
-                        {{$activityLogs->links()}}
-                    </div>
+                    <ul class="list-unstyled timeline-sm">
+                        @forelse($activityLogs as $activityLog)
+                        <li class="timeline-sm-item">
+                            <span class="timeline-sm-date">
+                                <x-ad-to-bs id="-activity{{$loop->iteration}}"
+                                            :ad-date="$activityLog->created_at->toDateString()"/>
+                            </span>
+                            <h5 class="mt-0 mb-1">{{$activityLog->user->name??''}}</h5>
+                            <p>{{class_basename($activityLog->model_type)}} ({{$activityLog->activity_type}})</p>
+                            <p class="text-muted mt-2">
+                                डिभाइस : {{$activityLog->agent}} <br>
+                                आईपी : {{$activityLog->ip}}</p>
+                        </li>
+                        @empty
+                            <li>कुनै डाटा उपलब्ध छैन !!!</li>
+                        @endforelse
+                    </ul>
                 </div>
             </div>
         </div>
