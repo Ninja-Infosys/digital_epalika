@@ -18,7 +18,6 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
 });
 Route::prefix('setting')->group(function () {
-
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
 });
