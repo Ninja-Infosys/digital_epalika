@@ -44,9 +44,13 @@
                                 <h4 class="text-decoration-underline">रोहवरमा</h4>
                                 <p>सहिछाप</p>
                                 <p>१. नेपालगञ्ज उ.म.न.पा.वडा नं.<span class="underline-dotted custom-width"></span> बस्ने वर्ष <span class="underline-dotted custom-width"></span> को जग्गा धनी श्रीमान/श्रीमती/सुश्री <span class="underline-dotted custom-width"></span></p>
-                                <p>२. वडा नं.<span class="underline-dotted custom-width"></span>को वडा अध्यक्ष श्री <span class="underline-dotted custom-width"></span></p>
-                                <p class="text-decoration-underline">काम तामेल गर्ने </p>
-                                <p>प्रविधिक श्री <span class="underline-dotted custom-width"></span>पद <span class="underline-dotted custom-width"></span>प्रशासनिक कर्मचारी श्री <span class="underline-dotted custom-width"></span>पद <span class="underline-dotted custom-width"></span>ईति सम्वत् <span class="underline-dotted custom-width"></span>साल <span class="underline-dotted custom-width"></span>महिना <span class="underline-dotted custom-width"></span>गते <span class="underline-dotted custom-width"></span>रोज शुभम् | </p>
+                                <p class="mt-2">२. वडा नं.<span class="underline-dotted custom-width"></span>को वडा अध्यक्ष श्री <span class="underline-dotted custom-width"></span></p>
+                                <p class="text-decoration-underline mt-2">काम तामेल गर्ने </p>
+                                <p>प्रविधिक श्री <span class="underline-dotted custom-width"></span>पद <span class="underline-dotted custom-width"></span>प्रशासनिक कर्मचारी श्री <span class="underline-dotted custom-width"></span>पद <span class="underline-dotted custom-width"></span>
+                                    ईति सम्वत् <span class="underline-dotted custom-width"></span>
+                                    साल <span class="underline-dotted custom-width"></span>
+                                    महिना <span class="underline-dotted custom-width"></span>
+                                    गते <span class="underline-dotted custom-width"></span>रोज शुभम् | </p>
                             </div>
                         </div>
                     </div>

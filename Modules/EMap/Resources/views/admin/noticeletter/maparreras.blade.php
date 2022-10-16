@@ -26,16 +26,16 @@
                                 </p>
                                 <h5>साक्षीहरु :-</h5>
                                 <p>१. श्री<span class="underline-dotted"></span>   दरखास्त <span class="underline-dotted"></span></p>
-                                <p>२. श्री<span class="underline-dotted"></span>   दरखास्त <span class="underline-dotted"></span></p>
-                                <p>३. श्री<span class="underline-dotted"></span>   दरखास्त <span class="underline-dotted"></span></p>
-                                <p>घरधनी:-</p>
-                                <p>श्री<span class="underline-dotted"></span>   दरखास्त <span class="underline-dotted"></span></p>
-                                <p>उपर्युक्त सूचना संधियारहरुलाई बुभाई निर्माण स्थलमा टास गरी वडा समिति मार्फत नेपालगञ्ज उप-महानगरपालिका नगर कार्यपालिकाको कार्यालयमा चढायौ |</p>
-                                <p>काम तामेल गर्ने:-</p>
-                                <p>दरखास्त :- <span class="underline-dotted"></span>  </p>
-                                <p>नाम :- <span class="underline-dotted"></span>  </p>
-                                <p>पद :- <span class="underline-dotted"></span>  </p>
-                                <p><span class="underline-dotted"></span>नं. वडा समितिको कार्यालय</p>
+                                <p class="mt-2">२. श्री<span class="underline-dotted"></span>   दरखास्त <span class="underline-dotted"></span></p>
+                                <p class="mt-2">३. श्री<span class="underline-dotted"></span>   दरखास्त <span class="underline-dotted"></span></p>
+                                <p class="mt-2">घरधनी:-</p>
+                                <p class="mt-2">श्री<span class="underline-dotted"></span>   दरखास्त <span class="underline-dotted"></span></p>
+                                <p class="mt-2">उपर्युक्त सूचना संधियारहरुलाई बुभाई निर्माण स्थलमा टास गरी वडा समिति मार्फत नेपालगञ्ज उप-महानगरपालिका नगर कार्यपालिकाको कार्यालयमा चढायौ |</p>
+                                <p class="mt-2">काम तामेल गर्ने:-</p>
+                                <p class="mt-2">दरखास्त :- <span class="underline-dotted"></span>  </p>
+                                <p class="mt-2">नाम :- <span class="underline-dotted"></span>  </p>
+                                <p class="mt-2">पद :- <span class="underline-dotted"></span>  </p>
+                                <p class="mt-2"><span class="underline-dotted"></span>नं. वडा समितिको कार्यालय</p>
                                 <p class="text-center my-3"><b><span class="underline-dotted"></span>मिति <span class="underline-dotted"></span>साल <span class="underline-dotted"></span>महिना <span class="underline-dotted"></span>गते</b></p>
                             </div>
                         </div>

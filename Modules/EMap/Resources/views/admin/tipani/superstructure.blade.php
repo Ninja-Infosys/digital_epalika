@@ -18,11 +18,11 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <div class="top-line d-flex justify-content-between">
+                                <div class="top-line d-flex justify-content-between mt-2">
                                     <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
                                     <p class="">मिति: <span class="underline-dotted custom-width"> </span></p>
                                 </div>
-                                <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
+                                <p class="mt-3">चलानी नं: <span class="underline-dotted custom-width"></span></p>
                                 <h3 class="text-center my-4"><b>भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)</b></h3>
 
                                 <p class="mb-3">
@@ -56,6 +56,7 @@
                                         <td></td>
                                         <td>ग)</td>
                                         <td>प्रथम तला </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>२.</td>
@@ -63,6 +64,7 @@
                                         <td></td>
                                         <td>घ)</td>
                                         <td>दोस्रो तला</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>३.</td>
@@ -70,6 +72,7 @@
                                         <td></td>
                                         <td>ङ)</td>
                                         <td>तेस्रो तला</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>४.</td>
@@ -77,6 +80,7 @@
                                         <td></td>
                                         <td>च)</td>
                                         <td>चौथो तला</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>५.</td>
@@ -84,6 +88,7 @@
                                         <td></td>
                                         <td>छ)</td>
                                         <td>पाँचौ तला</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>६.</td>
@@ -91,6 +96,7 @@
                                         <td></td>
                                         <td>ज)</td>
                                         <td>छैठौ तला</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>७.</td>
@@ -98,6 +104,7 @@
                                         <td></td>
                                         <td>झ)</td>
                                         <td>सातौ तला</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>८.</td>
@@ -105,6 +112,7 @@
                                         <td></td>
                                         <td>ञ)</td>
                                         <td>आठौ तला</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>क.</td>
@@ -112,6 +120,7 @@
                                         <td></td>
                                         <td>ट)</td>
                                         <td>नठौ तला</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>ख.</td>
@@ -119,6 +128,7 @@
                                         <td></td>
                                         <td>ठ)</td>
                                         <td>दशौ तला</td>
+                                        <td></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -138,17 +148,19 @@
                                     <tr>
                                         <td>१.</td>
                                         <td>भवनको वर्गिकरण</td>
-                                        <td>क ख ग घ </td>
+                                        <td>क&emsp; ख&emsp; ग&emsp; घ </td>
                                         <td>४.</td>
                                         <td>पिलरको साईज (इन्च)</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>२.</td>
                                         <td>ताल संख्या </td>
                                         <td></td>
                                         <td>५.</td>
-                                        <td>पिल्र्मा प्रयोग गर्ने डण्डीको<br>
+                                        <td>पिल्र्मा प्रयोग गर्ने डण्डीको
                                             साईज र संख्या</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>३.</td>
@@ -157,8 +169,8 @@
                                         <td>६.</td>
                                         <td>कंक्रिट ब्याण्डहरु</td>
                                         <td>लिन्टल/सिल</td>
-                                    </tr>
 
+                                    </tr>
                                     </tbody>
                                 </table>
                                 <p>नक्सा स्वीकृत अगावै निर्माण कार्य भएको भए सो को विवरण :</p>
@@ -175,68 +187,66 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card mb_30">
-                            <div class="card-body p-3">
-                                <h5>दोस्रो चरणका इजाजत नविकरण </h5>
-                                <table class="table table-bordered mt-2">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">नविकरण गरेको मिति</th>
-                                        <th scope="col">म्याद पुग्ने मिति</th>
-                                        <th scope="col">सिफारिस गर्ने </th>
-                                        <th scope="col">स्वीकृत गर्ने</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <h5>दोस्रो चरणका इजाजत नामसारी </h5>
-                                <table class="table table-bordered mt-2">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">नामसारी गरी दिने नामथर</th>
-                                        <th scope="col">नामसारी गरी लिनेको नामथर</th>
-                                        <th scope="col">सिफारिस गर्ने </th>
-                                        <th scope="col">स्वीकृत गर्ने</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb_30">
+                        <div class="card-body p-3">
+                            <h5>दोस्रो चरणका इजाजत नविकरण </h5>
+                            <table class="table table-bordered mt-2">
+                                <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">नविकरण गरेको मिति</th>
+                                    <th scope="col">म्याद पुग्ने मिति</th>
+                                    <th scope="col">सिफारिस गर्ने </th>
+                                    <th scope="col">स्वीकृत गर्ने</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <h5>दोस्रो चरणका इजाजत नामसारी </h5>
+                            <table class="table table-bordered mt-2">
+                                <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">नामसारी गरी दिने नामथर</th>
+                                    <th scope="col">नामसारी गरी लिनेको नामथर</th>
+                                    <th scope="col">सिफारिस गर्ने </th>
+                                    <th scope="col">स्वीकृत गर्ने</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

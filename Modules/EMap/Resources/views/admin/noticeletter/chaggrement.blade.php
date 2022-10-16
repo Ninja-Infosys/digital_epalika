@@ -18,9 +18,9 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <h3 class="text-center my-3"><b>सम्झौत पत्र</b></h3>
-                                <p class="text-center"><b>(सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</b></p>
-                                <p class="mb-3">
+                                <h3 class="text-center mt-3"><b>सम्झौत पत्र</b></h3>
+                                <p class="text-center mt-2"><b>(सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</b></p>
+                                <p class="my-3">
                                     लिखितम् नेपालगञ्ज उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span>बस्ने श्री<span class="underline-dotted custom-width"></span>को नाती/नातिनी श्री <span class="underline-dotted custom-width"></span> को छोरा/छोरी/श्रीमती/बुहारी घरधनी वर्ष <span class="underline-dotted custom-width"></span>को श्री <span class="underline-dotted custom-width"></span> यसपछि पहिलो पक्ष भनिएको र <span class="underline-dotted custom-width"></span> उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span>बस्ने सुपरिवेक्षण (इन्जिनियर, सव इन्जिनियर)
                                     श्री<span class="underline-dotted custom-width"></span>को नाति/नातिनी श्री <span class="underline-dotted custom-width"></span>को छोरा/छोरी वर्ष <span class="underline-dotted custom-width"></span>को श्री <span class="underline-dotted custom-width"></span>यस पछि दोस्रो पक्ष भनिएको बीच आज मिति <span class="underline-dotted custom-width"></span>साल <span class="underline-dotted custom-width"></span>महिना<span class="underline-dotted custom-width"></span>गतेका दिन तपसिल बमोजिमका सर्तका अधिनमा रही कार्य गराउन मन्जुर भएको हुँदा यो समझदारी-पत्रमा सही छाप गरी किनाराका साक्षीको रोहवरमा एक-एक प्रति बुझि लियौँ दियौँ |
                                 </p>
@@ -30,7 +30,7 @@
                                 <p>३. निर्माणकर्मीहरुलाई आवश्यक पर्ने कुनैपनि अस्पष्ट कुराहरुलाई तोकिए बमोजिम स्पष्ट गराईनेछ |</p>
                                 <p>४. कार्य प्रगतिको बारेमा घरधनी र उप-महानगरपालिकालाई समय-समयमा जानकारी उपलब्ध गराईनेछ ।</p>
                                 <p>५. उप-महानगरपालिकाले तोके बमोजिम डि.पि.सि. सम्मको प्रतिवेदन उप-महानगरपालिकाले उपलब्ध गराएको फरम्याटमा तयार गरी उप-महानगरपालिकामा पेश गरिनेछ । भवन निर्माण सम्पन्न भैसकेपछि निर्माण सम्पन्नको प्रतिवेदन उप-महानगरपालिकाले उपलब्ध गराएको फरम्याटमा तयार गरी उप-महानगरपालिकामा पेश गरिनेछ ।</p>
-                                <table class="table table-bordered">
+                                <table class="table table-bordered mt-2">
                                     <thead>
                                     <tr>
                                         <th scope="col">प्रथम पक्षको तर्फबाट</th>

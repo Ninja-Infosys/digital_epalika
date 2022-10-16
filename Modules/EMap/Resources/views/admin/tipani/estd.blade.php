@@ -18,6 +18,7 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
+                                <h3 class="text-center my-4"><b>निर्माण कार्य सम्पन्न प्रमाण-पत्रको लागि निवेदन</b></h3>
                                 <div class="top-line d-flex justify-content-between">
                                    <p>श्रीमान प्रमुख प्रशासकीय अधिकृत ज्यू<br>
                                    नेपालगन्ज उप-महानगरपालिका <br>

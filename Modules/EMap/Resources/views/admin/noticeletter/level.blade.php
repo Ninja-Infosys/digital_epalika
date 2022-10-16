@@ -21,8 +21,8 @@
                                     <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
                                     <p class="">मिति: <span class="underline-dotted custom-width"> </span></p>
                                 </div>
-                                <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
-                                <p class="text-center my-3"><b>बिषय: प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></p>
+                                <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width"></span></p>
+                                <h3 class="text-center my-3"><b> प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></h3>
 
                                 <p class="mb-3">
                                   तपाई श्री/श्रीमती<span class="underline-dotted custom-width"></span> ले जग्गा धनी<span class="underline-dotted custom-width"></span> को नाममा दर्ता रहेको ने.उ.म.न.पा.वडा नं.<span class="underline-dotted custom-width"></span>किता नं.<span class="underline-dotted custom-width"></span> ज.वि.जम्मा<span class="underline-dotted custom-width"></span> को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति<span class="underline-dotted custom-width"></span> मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति<span class="underline-dotted custom-width"></span>
@@ -49,6 +49,7 @@
                                         <td>४.</td>
                                         <td>दायाँ/बायाँ छोड्ने दुरी<br>
                                             (रनिङ फिट) </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>२.</td>
@@ -57,6 +58,7 @@
                                         <td>५.</td>
                                         <td>कम्पाउन्ड वाल<br>
                                             (रनिङ फिट) </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>३.</td>
@@ -64,6 +66,7 @@
                                         <td></td>
                                         <td>६.</td>
                                         <td>लिन्थ लेभलको उचाई</td>
+                                        <td></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -83,9 +86,10 @@
                                     <tr>
                                         <td>१.</td>
                                         <td>भवनको वर्गिकरण</td>
-                                        <td>क ख ग घ </td>
+                                        <td>क&emsp;ख&emsp; ग&emsp; घ </td>
                                         <td>४.</td>
                                         <td>पिलरको साईज (इन्च)</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>२.</td>
@@ -94,6 +98,7 @@
                                         <td>५.</td>
                                         <td>पिल्र्मा प्रयोग गर्ने डण्डीको<br>
                                         साईज र संख्या</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>३.</td>
@@ -101,6 +106,7 @@
                                         <td></td>
                                         <td>६.</td>
                                         <td>पिलरको छुरीको साईज</td>
+                                        <td></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -116,68 +122,66 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card mb_30">
-                            <div class="card-body p-3">
-                                <h5>प्रथम चरणका इजाजत नविकरण </h5>
-                                <table class="table table-bordered mt-2">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">नविकरण गरेको मिति</th>
-                                        <th scope="col">म्याद पुग्ने मिति</th>
-                                        <th scope="col">सिफारिस गर्ने </th>
-                                        <th scope="col">स्वीकृत गर्ने</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                   </tbody>
-                                </table>
-                                <h5>प्रथम चरणका इजाजत नामसारी </h5>
-                                <table class="table table-bordered mt-2">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">नामसारी गरी दिने नामथर</th>
-                                        <th scope="col">नामसारी गरी लिनेको नामथर</th>
-                                        <th scope="col">सिफारिस गर्ने </th>
-                                        <th scope="col">स्वीकृत गर्ने</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb_30">
+                        <div class="card-body p-3">
+                            <h5>प्रथम चरणका इजाजत नविकरण </h5>
+                            <table class="table table-bordered mt-2">
+                                <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">नविकरण गरेको मिति</th>
+                                    <th scope="col">म्याद पुग्ने मिति</th>
+                                    <th scope="col">सिफारिस गर्ने </th>
+                                    <th scope="col">स्वीकृत गर्ने</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <h5>प्रथम चरणका इजाजत नामसारी </h5>
+                            <table class="table table-bordered mt-2">
+                                <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">नामसारी गरी दिने नामथर</th>
+                                    <th scope="col">नामसारी गरी लिनेको नामथर</th>
+                                    <th scope="col">सिफारिस गर्ने </th>
+                                    <th scope="col">स्वीकृत गर्ने</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
