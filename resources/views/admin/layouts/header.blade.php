@@ -2,16 +2,9 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
             <li class="dropdown d-none d-lg-inline-block">
-                <h5 class="mt-2">
-                    <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0"
-                            allowtransparency="true"
-                            src="https://www.ashesh.com.np/linknepali-time.php?dwn=only&font_color=fff&font_size=18&bikram_sambat=0&api=2511x6m072"
-                            width="220" height="50"></iframe>
+                <h5 class="text-light fw-bold mt-4">
+                    आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}
                 </h5>
-            </li>
-            <li class="dropdown d-none d-lg-inline-block">
-                <h4 class="nav-link dropdown-toggle arrow-none waves-effect waves-light">आर्थिक
-                    वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-inline-block d-lg-none">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
@@ -121,10 +114,6 @@
                     <a href="{{route('admin.activityLog.index')}}" class="dropdown-item notify-item">
                         <i class="fa fa-tasks"></i>
                         <span>गतिविधिहरू</span>
-                    </a>
-                    <a href="{{route('admin.lock-screen')}}" class="dropdown-item notify-item">
-                        <i class="fa fa-lock"></i>
-                        <span>लक स्क्रिन</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <form action="{{route('logout')}}" method="post">
