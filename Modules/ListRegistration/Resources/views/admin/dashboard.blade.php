@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.dashboard')}}">इ-नक्सा</a>
+                            <a href="{{route('admin.listRegistrations.dashboard')}}">सुची दर्ता</a>
                         </li>
                     </ol>
                 </div>

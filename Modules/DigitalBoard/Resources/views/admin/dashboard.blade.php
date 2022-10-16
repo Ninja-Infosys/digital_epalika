@@ -12,13 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.dashboard')}}">इ-नक्सा</a>
+                            <a href="{{route('admin.digitalBoard.dashboard')}}">नागरिक वडापत्र</a>
                         </li>
                     </ol>
                 </div>
                 <h4 class="page-title">गृहपृष्ठ </h4>
             </div>
-
             <div class="row">
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
