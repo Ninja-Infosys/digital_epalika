@@ -4,12 +4,11 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-
 @can('registration_access')
     <li class="{{request()->is('admin/circular/registration*') ? 'active' : ''}}">
         <a href="{{route('admin.circular.registration.index')}}">
             <i class="fa fa-file-alt"></i>
-            <span> दर्ता प्रणाली   </span>
+            <span> दर्ता प्रणाली </span>
         </a>
     </li>
 @endcan

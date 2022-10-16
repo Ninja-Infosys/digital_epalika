@@ -1,0 +1,88 @@
+<li class="{{request()->is('admin/setting/dashboard') ? 'active' : ''}}">
+    <a href="{{route('admin.setting.dashboard')}}">
+        <i class="fa fa-home"></i>
+        <span> गृहपृष्ठ </span>
+    </a>
+</li>
+
+<li class="{{request()->is('admin/setting/userManagement/*') ? 'active' : ''}}">
+    <a href="#userManagement"
+       {{request()->is('admin/setting/userManagement/*') ? 'aria-expanded=true  ' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-users-cog"></i>
+        <span>प्रयोगकर्ता र भूमिका</span>
+        <span class="menu-arrow">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/setting/userManagement/*') ? 'show' : ''}}"
+         id="userManagement">
+        <ul class="nav-second-level">
+            @can('user_access')
+                <li class="{{request()->is('admin/setting/userManagement/user*') ? 'active' : ''}}">
+                    <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता</a>
+                </li>
+            @endcan
+            @can('role_access')
+                <li class="{{request()->is('admin/setting/userManagement/role*') ? 'active' : ''}}">
+                    <a href="{{route('admin.userManagement.role.index')}}">भूमिका</a>
+                </li>
+            @endcan
+        </ul>
+    </div>
+</li>
+
+@can('fiscalYear_access')
+    <li class="{{request()->is('admin/setting/fiscalYear*') ? 'active' : ''}}">
+        <a href="{{route('admin.fiscalYear.index')}}">
+            <i class="fa fa-calendar"></i>
+            <span> आर्थिक बर्ष </span>
+        </a>
+    </li>
+@endcan
+
+<li class="{{request()->is('admin/setting/units/*') ? 'active' : ''}}">
+    <a href="#measurementUnits"
+       {{request()->is('admin/setting/units/*') ? 'aria-expanded=true  ' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-users-cog"></i>
+        <span>मापन एकाइ</span>
+        <span class="menu-arrow">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/setting/units/*') ? 'show' : ''}}"
+         id="measurementUnits">
+        <ul class="nav-second-level">
+            @can('unitType_access')
+                <li class="{{request()->is('admin/setting/units/type*') ? 'active' : ''}}">
+                    <a href="{{route('admin.units.type.index')}}">
+                        <span> प्रकार </span>
+                    </a>
+                </li>
+            @endcan
+            @can('MeasurementUnit_access')
+                <li class="{{request()->is('admin/setting/units/measurementUnit*') ? 'active' : ''}}">
+                    <a href="{{route('admin.units.measurementUnit.index')}}">
+                        <span> विविधता </span>
+                    </a>
+                </li>
+            @endcan
+            @can('unit_access')
+                <li class="{{request()->is('admin/setting/units/unit*') ? 'active' : ''}}">
+                    <a href="{{route('admin.units.unit.index')}}">
+                        <span> एकाई </span>
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </div>
+</li>
+
+<li class="{{request()->is('admin/setting/officeSetting*') ? 'active' : ''}}">
+    <a href="{{route('admin.officeSetting.index')}}">
+        <i class="fa fa-cogs"></i>
+        <span> कार्यालय सेटिङ </span>
+    </a>
+</li>
+

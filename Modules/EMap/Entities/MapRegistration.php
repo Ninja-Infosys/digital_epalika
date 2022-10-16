@@ -6,6 +6,7 @@ use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MapRegistration extends Model
@@ -16,7 +17,6 @@ class MapRegistration extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'english_date',
     ];
 
     protected $fillable = [
@@ -35,8 +35,28 @@ class MapRegistration extends Model
         return $this->belongsTo(MapApply::class);
     }
 
-    public function mapRegistrationParticulars(): BelongsTo
+    public function getParticularTotalRateAttribute()
     {
-        return $this->belongsTo(MapRegistrationParticular::class);
+        return $this->mapRegistrationParticulars->sum('rate') ?? 0;
+    }
+
+    public function getParticularTotalAreaAttribute()
+    {
+        return $this->mapRegistrationParticulars->sum('area') ?? 0;
+    }
+
+    public function getParticularTotalAmountAttribute()
+    {
+        return $this->mapRegistrationParticulars->sum('amount') ?? 0;
+    }
+
+    public function getTotalAmountAttribute()
+    {
+        return $this->attributes['form_receipt'] + $this->attributes['application_registration_fee'] + $this->attributes['other'] + $this->getParticularTotalAmountAttribute();
+    }
+
+    public function mapRegistrationParticulars(): HasMany
+    {
+        return $this->hasMany(MapRegistrationParticular::class);
     }
 }

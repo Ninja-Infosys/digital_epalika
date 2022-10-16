@@ -20,8 +20,8 @@ class MapRegistrationParticular extends Model
 
     protected $fillable = [
         'map_registration_id',
-        'map_fee',
-        'area_of_proposed_construction',
+        'storey',
+        'area',
         'rate',
         'remarks',
     ];
@@ -29,5 +29,10 @@ class MapRegistrationParticular extends Model
     public function mapRegistration(): BelongsTo
     {
         return $this->belongsTo(MapRegistration::class);
+    }
+
+    public function getAmountAttribute(): float|int
+    {
+        return $this->attributes['area'] * $this->attributes['rate'];
     }
 }

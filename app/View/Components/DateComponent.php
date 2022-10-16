@@ -2,7 +2,9 @@
 
 namespace App\View\Components;
 
-use Illuminate\Support\Str;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class DateComponent extends Component
@@ -13,25 +15,30 @@ class DateComponent extends Component
      * @return void
      */
 
-    public $name_ne;
-    public $label_ne;
-    public $name_en;
-    public $label_en;
+    public mixed $name_ne;
+    public mixed $label_ne;
+    public mixed $name_en;
+    public mixed $label_en;
+    public mixed $edit_date_ne = null;
+    public mixed $edit_date_en = null;
 
     public function __construct($data)
     {
-        $this->name_ne = array_key_exists('name_ne', $data) ? $data['name_ne'] : '';
-        $this->label_ne = array_key_exists('label_ne', $data) ? $data['label_ne'] : '';
-        $this->name_en = array_key_exists('name_en', $data) ? $data['name_en'] : '';
-        $this->label_en = array_key_exists('label_en', $data) ? $data['label_en'] : '';
+        info($data);
+        $this->name_ne = $data['name_ne'] ?? null;
+        $this->label_ne = $data['label_ne'] ?? null;
+        $this->name_en = $data['name_en'] ?? null;
+        $this->label_en = $data['label_en'] ?? null;
+        $this->edit_date_ne = $data['edit_date_ne'] ?? null;
+        $this->edit_date_en = $data['edit_date_en'] ?? null;
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return Application|Factory|View
      */
-    public function render()
+    public function render(): View|Factory|Application
     {
         return view('components.date-component');
     }

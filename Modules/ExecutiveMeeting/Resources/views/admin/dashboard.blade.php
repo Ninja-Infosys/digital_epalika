@@ -12,11 +12,122 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.dashboard')}}">इ-नक्सा</a>
+                            <a href="{{route('admin.executiveMeeting.dashboard')}}">ई-कार्यपालिका</a>
                         </li>
                     </ol>
                 </div>
                 <h4 class="page-title">गृहपृष्ठ </h4>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-danger border-danger border">
+                                        <i class="fa fa-handshake font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                        2
+                                    </span>
+                                        </h3>
+                                        <p class="text-muted mb-1">जम्मा वैठक</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-secondary border-secondary border">
+                                        <i class="fa fa-clipboard-list font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                         3
+                                    </span>
+                                        </h3>
+                                        <p class="text-muted mb-1">जम्मा वडा वैठक</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-blue border-blue border">
+                                        <i class="fa fa-clipboard-list font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">4</span></h3>
+                                        <p class="text-muted mb-1">जम्मा पालिका वैठक</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-pink border-pink border">
+                                        <i class="fa fa-user font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                       6
+                                    </span></h3>
+                                        <p class="text-muted mb-1">पालिका समिति सदस्य</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-primary border-primary border">
+                                        <i class="fa fa-user font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                        7
+                                    </span></h3>
+                                        <p class="text-muted mb-1">वडा समिति सदस्य</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
             </div>
         </div>
     </div>

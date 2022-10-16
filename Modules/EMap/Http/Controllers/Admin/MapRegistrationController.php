@@ -3,41 +3,58 @@
 namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapRegistration;
+use Modules\EMap\Entities\MapRegistrationParticular;
+use Modules\EMap\Http\Requests\MapRegistration\StoreMapRegistrationRequest;
+use Modules\EMap\Http\Requests\MapRegistration\UpdateMapRegistrationRequest;
 
 class MapRegistrationController extends Controller
 {
 
     public function create(MapApply $mapApply)
     {
-        $mapApply->load('storeyDetails', 'storeyDetails.mapFee');
+        $mapApply->load(['storeyDetails', 'storeyDetails.mapFee']);
         return view('emap::admin.map.map-registration.create', compact('mapApply'));
     }
 
-    public function store(Request $request, MapApply $mapApply)
+    public function store(StoreMapRegistrationRequest $request, MapApply $mapApply)
     {
-        //
+        DB::transaction(function () use ($request, $mapApply) {
+            $mapRegistration = MapRegistration::create($request->validated() + ['map_apply_id' => $mapApply->id]);
+
+            foreach ($request->input('particulars') as $particular) {
+                $mapRegistration->mapRegistrationParticulars()->create($particular);
+            }
+        });
+
+        toast('दस्तुर तथा दर्ता सफलतापूर्वक थपियो', 'success');
+        return back();
     }
 
-    public function show(MapApply $mapApply, MapRegistration $mapRegistration)
-    {
-        return view('emap::show');
-    }
 
     public function edit(MapApply $mapApply, MapRegistration $mapRegistration)
     {
-        return view('emap::edit');
+        return view('emap::admin.map.map-registration.edit', compact('mapApply', 'mapRegistration'));
     }
 
-    public function update(Request $request, MapApply $mapApply, MapRegistration $mapRegistration)
+    public function update(UpdateMapRegistrationRequest $request, MapApply $mapApply, MapRegistration $mapRegistration)
     {
-        //
+        DB::transaction(function () use ($request, $mapApply, $mapRegistration) {
+            $mapRegistration->update($request->validated());
+
+            foreach ($request->input('particulars') as $particular) {
+                if ($particular['id']) {
+                    MapRegistrationParticular::find($particular['id'])?->update($particular);
+                } else {
+                    $mapRegistration->mapRegistrationParticulars()->create($particular);
+                }
+            }
+        });
+
+        toast('दस्तुर तथा दर्ता सफलतापूर्वक अपडेट भयो', 'success');
+        return back();
     }
 
-    public function destroy(MapApply $mapApply, MapRegistration $mapRegistration)
-    {
-        //
-    }
 }

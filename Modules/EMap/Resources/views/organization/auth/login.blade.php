@@ -28,6 +28,8 @@
     />
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
+
+    {!! ReCaptcha::htmlScriptTagJsApi() !!}
 </head>
 
 <body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpeg')}})">
@@ -89,6 +91,14 @@
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
+
+                                        <div class="mb-3">
+                                            {!! htmlFormSnippet() !!}
+                                            @error('g-recaptcha-response')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+
                                         <div class="mb-3">
                                             <div class="text-center">
                                                 <button class="btn login-btn" type="submit">

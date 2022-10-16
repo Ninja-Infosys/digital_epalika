@@ -29,7 +29,7 @@ class OfficeHeader extends Component
 
 
         'officeHeaders.*.title' => ['required','string','max:255'],
-        'officeHeaders.*.font_color' => ['required'],
+        'officeHeaders.*.font_color' => ['nullable'],
         'officeHeaders.*.font_size' => ['required','max:255'],
         'officeHeaders.*.position' => ['nullable','integer'],
         'officeHeaders.*.font' => ['required'],

@@ -4,14 +4,13 @@ namespace Modules\EMap\Entities;
 
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
@@ -55,7 +54,7 @@ class MapApply extends Model
         'building_category' => CategorizationEnum::class,
     ];
 
-    public function setConsultantSignatureAttribute($value)
+    public function setConsultantSignatureAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
@@ -140,5 +139,10 @@ class MapApply extends Model
     public function mapApplyApplications(): HasMany
     {
         return $this->hasMany(ApplyMapApplication::class);
+    }
+
+    public function mapRegistration(): HasOne
+    {
+        return $this->hasOne(MapRegistration::class);
     }
 }
