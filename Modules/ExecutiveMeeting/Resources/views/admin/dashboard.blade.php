@@ -26,7 +26,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                        <i class="fa fa-users font-22 avatar-title text-white"></i>
+                                        <i class="fa fa-handshake font-22 avatar-title text-white"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -35,7 +35,7 @@
                                         2
                                     </span>
                                         </h3>
-                                        <p class="text-muted mb-1">जम्मा प्रयोगकर्ताहरु</p>
+                                        <p class="text-muted mb-1">जम्मा वैठक</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -58,7 +58,7 @@
                                          3
                                     </span>
                                         </h3>
-                                        <p class="text-muted mb-1">जम्मा व्यवसायहरु</p>
+                                        <p class="text-muted mb-1">जम्मा वडा वैठक</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -72,13 +72,13 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="avatar-lg rounded-circle bg-blue border-blue border">
-                                        <i class="fa fa-building font-22 avatar-title text-white"></i>
+                                        <i class="fa fa-clipboard-list font-22 avatar-title text-white"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">4</span></h3>
-                                        <p class="text-muted mb-1">जम्मा दर्ता भएका व्यवसायहरु</p>
+                                        <p class="text-muted mb-1">जम्मा पालिका वैठक</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -92,7 +92,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="avatar-lg rounded-circle bg-pink border-pink border">
-                                        <i class="fa fa-comment font-22 avatar-title text-white"></i>
+                                        <i class="fa fa-user font-22 avatar-title text-white"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -100,7 +100,7 @@
                                         <h3 class="mt-1"><span data-plugin="counterup">
                                        6
                                     </span></h3>
-                                        <p class="text-muted mb-1">जम्मा चलिरहेको गुनासोहरु</p>
+                                        <p class="text-muted mb-1">पालिका समिति सदस्य</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -113,7 +113,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="avatar-lg rounded-circle bg-primary border-primary border">
-                                        <i class="fa fa-building font-22 avatar-title text-white"></i>
+                                        <i class="fa fa-user font-22 avatar-title text-white"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -121,67 +121,7 @@
                                         <h3 class="mt-1"><span data-plugin="counterup">
                                         7
                                     </span></h3>
-                                        <p class="text-muted mb-1">जम्मा दर्ता भएका व्यवसायहरु </p>
-                                    </div>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-info border-info border">
-                                        <i class="fa fa-file-alt font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        7</span></h3>
-                                        <p class="text-muted mb-1">जम्मा चलानी पत्रहरु</p>
-                                    </div>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-success border-success border">
-                                        <i class="fa fa-file-alt font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        9</span></h3>
-                                        <p class="text-muted mb-1">जम्मा दर्ता पत्रहरु</p>
-                                    </div>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                        <i class="fa fa-handshake font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        3</span></h3>
-                                        <p class="text-muted mb-1">जम्मा कार्यपालिका बैठकहरु</p>
+                                        <p class="text-muted mb-1">वडा समिति सदस्य</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
