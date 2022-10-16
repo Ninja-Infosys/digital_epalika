@@ -33,7 +33,7 @@
 </head>
 
 <body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}})">
-<div class="mt-5 mb-5">
+<div class="pt-3">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-7">
@@ -108,15 +108,6 @@
                                 <div class="col-12 text-lg-end">
                                         <a href="auth-recoverpw.html" class="ms-1">Forgot password?</a>
                                 </div>
-{{--                                <div class="alert alert-info mt-3">--}}
-{{--                                    <h4 class="mb-1 text-decoration-underline">प्राविधिक सहायता कक्ष</h4>--}}
-{{--                                    <p>--}}
-{{--                                     <i class="fa fa-phone-alt"></i> : 081-520361/9858042433--}}
-{{--                                    </p>--}}
-{{--                                      <p>--}}
-{{--                                      <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com--}}
-{{--                                    </p>--}}
-{{--                                </div>--}}
                             </div>
                         </div>
                     </div>
