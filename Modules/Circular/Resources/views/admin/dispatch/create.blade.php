@@ -57,18 +57,11 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="dispatch_date" class="form-label">चलानी मिति *</label>
-                                    <input
-                                        type="text"
-                                        name="dispatch_date"
-                                        value="{{old('dispatch_date')}}"
-                                        class="form-control nepali_date @error('dispatch_date') is-invalid @enderror"
-                                        id="dispatch_date"
-                                        placeholder="चलानी मिति"
+                                    <x-date-input-component
+                                        name_ne="dispatch_date"
+                                        label_ne="चलानी मिति *"
+                                        name_ne="en_dispatch_date"
                                     />
-                                    @error('dispatch_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="letter_number" class="form-label">पत्र संख्या </label>
@@ -209,22 +202,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $(".nepali_date").nepaliDatePicker({
-                    ndpYear:true,
-                    ndpMonth:true,
-                    ndpYear:true
-                });
-            });
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                let todayDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-                $('#dispatch_date').val(todayDate)
-            });
-        </script>
-    @endpush
 @endsection
