@@ -28,7 +28,7 @@
                                 <p>श्रीमान,</p>
                                 <p class="mb-3">
                                     यस उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span> टोल<span class="underline-dotted custom-width"></span> मा अवस्थित साविक<span class="underline-dotted custom-width"></span>
-                                    कित्ता नं.<span class="underline-dotted custom-width"></span> क्षेत्रफल<span class="underline-dotted custom-width"></span> मा भवन निर्माण गर्ने घर्धई श्री<span class="underline-dotted custom-width"></span> ले भवन निर्माण गर्न मिति<span class="underline-dotted custom-width"></span> मा
+                                    कित्ता नं.<span class="underline-dotted custom-width"></span> क्षेत्रफल<span class="underline-dotted custom-width"></span> मा भवन निर्माण गर्ने  घरधनी श्री<span class="underline-dotted custom-width"></span> ले भवन निर्माण गर्न मिति<span class="underline-dotted custom-width"></span> मा
                                     प्लिन्थ/सुपरस्ट्रक्चर ईजाजत लिनुभएकोमा सो घरमा थपकोठा/निर्माण परिवर्तन गरेकोमा संशोधित नक्सा बनाई संशोधित प्लिन्थ/सुपरस्ट्रक्चर 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा ३५ बमोजिम माग गर्दै निवेदन दिनु भएकोले संशोधित ईजाजत दिने सम्बन्धमा यस कार्यालयका प्रबिधिकबाट स्थलगत निरिक्षण गरी दिनुभएको प्रतिवेदन र नीजको संलग्न नक्सा अनुसार थप दस्तुर
                                     <span class="underline-dotted custom-width"></span> अक्षरेपी <span class="underline-dotted custom-width"></span> मात्र लिई माग अनुसार संशोधित ईजाजत दिन मनासिब देखि पेश गरेको छु |
 

@@ -9284,6 +9284,7 @@ table[data-toggle=table] {
     animation-name: FadeIn;
     animation-duration: 3s;
     transition-timing-function: linear;
+    z-index: 100;
 }
 .thought:before,
 .thought:after {
