@@ -18,15 +18,20 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <div class="top-line d-flex justify-content-end">
-                                    <p class="">मिति: <span class="underline-dotted custom-width"></span></p>
+                                <div class="top-line d-flex justify-content-end mt-3">
+                                    <p>मिति: <span class="underline-dotted custom-width"></span></p>
                                 </div>
                                 <p class="text-center text-decoration-underline my-3"><b>बिषय: निर्माण कार्य सम्पन्न प्रमाण-पत्र पाउँ
                                         ।</b></p>
-                                <p>महोदय,</p>
+                                <p>श्रीमान</p>
                                 <p class="my-3">
-                                    उपर्युक्त सम्बन्धमा नेपालगन्ज उप-महानगरपालिकाको च.नं.<span class="underline-dotted custom-width"></span> मिति <span class="underline-dotted custom-width"></span> गते घरको सुपरस्ट्रक्चर निर्माण गर्न मैले/हामीले <span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span>
-                                    को क्षेत्रफल <span class="underline-dotted custom-width"></span> भित्र उ.न.पा.बाट स्वीकृत नक्सा तथा मापदण्ड र नेपाल राष्ट्रिय भवन निर्माण संहिता २०६० अनुसार निर्माण कार्य सम्पन्न गरेको छु/छौ | अत : निर्माण कार्यमा संलग्न प्रबिधिकको प्रतिवेदन संलग्न राखी उ.न.पा. बाट जे बुझ्नु पर्ने बुझि निर्माण कार्य सम्पन्नको प्रमाण-पत्र पाउँ भनी यो निवेदन पेश गरेको छु/छौ |
+                                   यस उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span> बस्ने श्री/श्रीमती/सुश्री <span class="underline-dotted custom-width"></span> को
+                                    नाममा दर्ता रहेय्को यस उ.न.पा. वडा नं.<span class="underline-dotted custom-width"></span> का साविक <span class="underline-dotted custom-width"></span>
+                                    कि.नं.<span class="underline-dotted custom-width"></span> को क्षेत्रफल <span class="underline-dotted custom-width"></span>
+                                    मा<span class="underline-dotted custom-width"></span> को लागि मिति<span class="underline-dotted custom-width"></span>
+                                    मा भवन निर्माण गर्न स्वीकृति पत्र लिई हाल निर्माण कार्य समाप्त गरी निर्माण कार्य सम्पन्नको प्रमाण-पत्रको लागि निर्माण कार्यको सुपरिवेक्षणमा संलग्न प्रबिधिक/कन्सलटेन्टले प्रविधिक प्रतिवेदन सहित निवेदन
+                                    दिनु भएको हुँदा यस कार्यालयका प्रबिधिकलेस्थलगत निरिक्ष, सुपरिवेक्षण गरी दिएको प्रतिवेदन अनुसार नक्सा पास हुँदाको मापदण्ड अनुसार भवन निर्माण
+                                    भएको देखिएकोले निजलाई निर्माण सम्पन्न प्रमाण-पत्र दिन मनासिब देखि पेश गरेको छु |
                                 </p>
                                 <div class="d-flex justify-content-end mt-4 px-5">
                                     <p>निवेदकको नाम :-<span class="underline-dotted custom-width"></span><br>

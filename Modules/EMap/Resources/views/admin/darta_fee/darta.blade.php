@@ -21,23 +21,24 @@
                             <div class="card mb_30">
                                 <div class="card-body p-3">
                                     <div class="font-black" id="printData">
-                                        <p>घरधनीको नाम, थर: <span class="underline-dotted custom-width"></span> </p>
-                                        <p>भू-उपयोग क्षेत्र : <span class="underline-dotted custom-width"></span></p>
-                                        <p>निर्माणको विवरण : <span class="underline-dotted custom-width"></span></p>
-                                        <p>निर्माणको प्रयोजन : <span class="underline-dotted custom-width"></span></p>
-                                        <p>भवनको वर्गीकरण :
+                                        <p class="mt-2">घरधनीको नाम, थर: <span class="underline-dotted custom-width"></span> </p>
+                                        <p class="mt-2">भू-उपयोग क्षेत्र : <span class="underline-dotted custom-width"></span></p>
+                                        <p class="mt-2">भू-उपयोग क्षेत्र : <span class="underline-dotted custom-width"></span></p>
+                                        <p class="mt-2">निर्माणको विवरण : <span class="underline-dotted custom-width"></span></p>
+                                        <p class="mt-2">निर्माणको प्रयोजन : <span class="underline-dotted custom-width"></span></p>
+                                        <p class="mt-2">भवनको वर्गीकरण :
 
                                             <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                            <label class="form-check-label" for="inlineRadio1">क</label>
+                                            <label class="form-check-label" for="inlineRadio1">क&emsp;</label>
                                             <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                            <label class="form-check-label" for="inlineRadio2">ख</label>
+                                            <label class="form-check-label" for="inlineRadio2">ख&emsp;</label>
                                             <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                                            <label class="form-check-label" for="inlineRadio3">ग</label>
+                                            <label class="form-check-label" for="inlineRadio3">ग&emsp;</label>
                                             <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio4" value="option4">
                                             <label class="form-check-label" for="inlineRadio4">घ</label>
                                        </p>
-                                        <p>निर्माणको स्ट्रक्चरल सिस्टम : <span class="underline-dotted custom-width"></span></p>
-                                        <table class="table table-bordered">
+                                        <p class="mt-2">निर्माणको स्ट्रक्चरल सिस्टम : <span class="underline-dotted custom-width"></span></p>
+                                        <table class="table table-bordered my-3">
                                             <thead>
                                             <tr>
                                                 <th scope="col" rowspan="2">तल्लाको विवरण</th>
@@ -126,12 +127,12 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p>अक्षरेपी<span class="underline-dotted custom-width"></span> </p>
-                                        <p>फाटवालाको सही: <span class="underline-dotted custom-width"></span> </p>
-                                        <p>मिति:<span class="underline-dotted custom-width"></span> रसिद नं: <span class="underline-dotted custom-width"></span> रकम बुझने: <span class="underline-dotted custom-width"></span></p>
-                                        <strong>राजस्व शाखाको प्रयोजनको लागि</strong>
-                                        <p>निवेदकको नक्सा पास दस्तुर वापत रु: <span class="underline-dotted custom-width"></span> बाट प्राप्त भयो |</p>
-                                        <p>मिति: <span class="underline-dotted custom-width"></span> रसिद नं: <span class="underline-dotted custom-width"></span>. रकम बुझने: <span class="underline-dotted custom-width"></span></p>
+                                        <p class="mt-2">अक्षरेपी<span class="underline-dotted custom-width"></span> </p>
+                                        <p class="mt-2">फाटवालाको सही: <span class="underline-dotted custom-width"></span> </p>
+                                        <p class="mt-2">मिति:<span class="underline-dotted custom-width"></span> रसिद नं: <span class="underline-dotted custom-width"></span> रकम बुझने: <span class="underline-dotted custom-width"></span></p>
+                                        <h4 class="mt-3"><b>राजस्व शाखाको प्रयोजनको लागि</b></h4>
+                                        <p class="mt-2">निवेदकको नक्सा पास दस्तुर वापत रु: <span class="underline-dotted custom-width"></span> बाट प्राप्त भयो |</p>
+                                        <p class="mt-2">मिति: <span class="underline-dotted custom-width"></span> रसिद नं: <span class="underline-dotted custom-width"></span>. रकम बुझने: <span class="underline-dotted custom-width"></span></p>
                                     </div>
 
                                 </div>

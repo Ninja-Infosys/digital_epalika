@@ -18,7 +18,7 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <div class="top-line d-flex justify-content-between">
+                                <div class="top-line d-flex justify-content-between mt-4">
                                     <p>श्रीमान प्रमुख प्रशासकिय अधिकृत ज्यु<br>
                                         नेपालगन्ज उप-महानगरपालिका कार्यालय<br>
                                         नेपालगन्ज, बाँके

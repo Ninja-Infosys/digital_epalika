@@ -18,7 +18,7 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <div class="top-line d-flex justify-content-between">
+                                <div class="top-line d-flex justify-content-between mt-3">
                                     <p>पत्र सं.<span class="underline-dotted custom-width">
                             </span></p>
                                     <p class="">मिति: <span class="underline-dotted custom-width">

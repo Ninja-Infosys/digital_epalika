@@ -20,12 +20,12 @@
                     <div class="font-black" id="printData">
                         <div class="top-line d-flex justify-content-between">
                             <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
-                            <p class="">मिति: <span class="underline-dotted custom-width">
+                            <p>मिति: <span class="underline-dotted custom-width">
                             </span></p>
                         </div>
 
 
-                        <p>चलानी नं: <span class="underline-dotted custom-width">
+                        <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width">
 
                             </span></p>
                         <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना |
@@ -87,13 +87,13 @@
                             </tr>
                             </tbody>
                         </table>
-                        <p class="house_measurment">
+                        <p class="house_measurment mt-2">
                             घरको नाप: लम्बाई:  <span class="underline-dotted custom-width"></span> चौडाई:  <span class="underline-dotted custom-width">  </span> उचाई:  <span class="underline-dotted custom-width">
 
                             </span>  तल्ला संख्या:  <span class="underline-dotted custom-width">
 
                             </span></p>
-                        <p> बोधार्थ: १.  <span class="underline-dotted custom-width"></span>नं. वडा वडाध्यक्ष/वडा प्रतिनिधि : कुनै प्रतिक्रिया भए जनाईदिनुहुन अनुरोध छ |</p>
+                        <p class="mt-3"> बोधार्थ: १.  <span class="underline-dotted custom-width"></span>नं. वडा वडाध्यक्ष/वडा प्रतिनिधि : कुनै प्रतिक्रिया भए जनाईदिनुहुन अनुरोध छ |</p>
                         <div class="d-flex justify-content-end mt-5"><span class="underline-dotted custom-width"></span></div>
                     </div>
                 </div>

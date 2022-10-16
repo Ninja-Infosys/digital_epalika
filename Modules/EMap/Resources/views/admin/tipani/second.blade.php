@@ -18,7 +18,7 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <h3 class="text-center my-3"><b>प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको  प्रतिवेदन</b></h3>
+                                <h3 class="text-center my-3"><b>दोस्रो चरणको कार्य सम्पन्नको परामर्शदाताको  प्रतिवेदन</b></h3>
                                 <p class="mb-3">
                                     यस उप-महानगरपालिकाको स्थान<span class="underline-dotted custom-width"></span>
                                     वडा नं.<span class="underline-dotted custom-width"></span>मा अवस्थित साविक
@@ -32,9 +32,9 @@
                                 </p>
                                 <p>१. सडक अधिकार क्षेत्र सम्बन्धि मापदण्ड पालना भएको
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">छ कि </label>
+                                    <label class="form-check-label" for="inlineRadio1">छ &emsp;कि&emsp; </label>
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">छैन</label> (छैन भने विवरण खुलाउने)<br>
+                                    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
@@ -44,9 +44,9 @@
                                 </p>
                                 <p class="mt-2">२. साइट प्लानमा देखाइए बमोजिम सेटब्याक पालना भएको
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">छ कि </label>
+                                    <label class="form-check-label" for="inlineRadio1">छ&emsp; कि&emsp; </label>
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">छैन</label> (छैन भने विवरण खुलाउने)<br>
+                                    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
@@ -56,9 +56,9 @@
                                 </p>
                                 <p class="mt-2">३. ग्राउण्ड कभरेजमा फरक परेको
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">छ कि</label>
+                                    <label class="form-check-label" for="inlineRadio1">छ &emsp;कि&emsp;</label>
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">छैन</label> (छैन भने विवरण खुलाउने)<br>
+                                    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
@@ -68,9 +68,9 @@
                                 </p>
                                 <p class="mt-2">४. छज्जा (क्यान्टीलिभर), बार्दली, बाहिरको सिँढी आदि निकालेको हकमा मापदण्डको पालना भएको
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">छ कि</label>
+                                    <label class="form-check-label" for="inlineRadio1">छ&emsp; कि&emsp;</label>
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">छैन</label> (छैन भने विवरण खुलाउने)<br>
+                                    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
@@ -80,9 +80,9 @@
                                 </p>
                                 <p class="mt-2">५. नेपाल राष्ट्रिय भवन निर्माण संहिता २०६० अनुसार निर्माण भएको
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">छ कि</label>
+                                    <label class="form-check-label" for="inlineRadio1">छ&emsp; कि&emsp;</label>
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">छैन</label> (छैन भने विवरण खुलाउने)<br>
+                                    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>
                                     <span class="underline-dotted custom-width"></span>

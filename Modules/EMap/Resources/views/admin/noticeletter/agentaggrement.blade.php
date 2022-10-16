@@ -18,9 +18,9 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <h3 class="text-center my-3"><b>सम्झौत पत्र</b></h3>
-                                <p class="text-center"><b>(घरधनी र निर्माणकर्मी/ठेकेदार)</b></p>
-                                <p class="mb-3">
+                                <h3 class="text-center mt-3"><b>सम्झौत पत्र</b></h3>
+                                <p class="text-center mt-2"><b>(घरधनी र निर्माणकर्मी/ठेकेदार)</b></p>
+                                <p class="my-2">
                                     लिखितम् नेपालगञ्ज उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span>बस्ने वर्ष<span class="underline-dotted custom-width"></span>को
                                     श्री <span class="underline-dotted custom-width"></span> को छोरा/छोरी/बुहारी वर्ष <span class="underline-dotted custom-width"></span>
                                     को घरधनी श्री <span class="underline-dotted custom-width"></span>(पहिलो पक्ष) र <span class="underline-dotted custom-width"></span>
@@ -40,7 +40,7 @@
                                 <p>६. नक्सापास बमोजिम 'राष्ट्रिय भवन संहिता-२०६०' र यस उप-महानगरपालिकाको मापदण्ड विपरित निर्माण गर्न
                                     घरधनी र प्राविधिक सुपरिवेक्षकले (ठेकेदार/निर्माणकर्मी) लाई दबाब दिएमा निर्माण कार्य रोकेर तुरुन्त यस उप-महानगरपालिकामा लिखित जानकारी गराउनुपर्नेछ। उक्त अवस्थाको जानकारी नगराई मापदण्ड विपरीत निर्माण कार्य जारी राखेमा आइपर्ने जोखिमको जिम्मेवार सम्बन्धित निर्माणकर्मी/ठेकेदार नै हुनेछ ।</p>
                                 <p>७. नक्सापास बमोजिम 'राष्ट्रिय भवन संहिता-२०६०' र यस उप-महानगरपालिकाको मापदण्ड बमोजिम भवन निर्माण गर्न दुबै पक्ष राजीखुशी छौ | यदि दुबै पक्षबाट ऐन, नियम र मापदण्ड बमोजिम निर्माण नभएमा यस उप-महानगरपालिकाबाट जारी हुने निर्देशन मान्न हामी तयार छौ र उक्त सम्झौतामा सही छाप गरी एक-एक प्रति लियौँ दियौँ |</p>
-                                <table class="table table-bordered">
+                                <table class="table table-bordered mt-2">
                                     <thead>
                                     <tr>
                                         <th scope="col">प्रथम पक्ष</th>
