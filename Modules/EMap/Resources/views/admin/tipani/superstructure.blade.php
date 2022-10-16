@@ -90,7 +90,35 @@
                                         <td>कम्पाउण्ड वाल (रनिङ फिट)</td>
                                         <td></td>
                                         <td>ज)</td>
-                                        <td>छै तला</td>
+                                        <td>छैठौ तला</td>
+                                    </tr>
+                                    <tr>
+                                        <td>७.</td>
+                                        <td>भवनको प्रयोग</td>
+                                        <td></td>
+                                        <td>झ)</td>
+                                        <td>सातौ तला</td>
+                                    </tr>
+                                    <tr>
+                                        <td>८.</td>
+                                        <td>प्लिन्य एरिया (वर्ग फिट)</td>
+                                        <td></td>
+                                        <td>ञ)</td>
+                                        <td>आठौ तला</td>
+                                    </tr>
+                                    <tr>
+                                        <td>क.</td>
+                                        <td>बेस्मेन्ट</td>
+                                        <td></td>
+                                        <td>ट)</td>
+                                        <td>नठौ तला</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ख.</td>
+                                        <td>प्लिन्थ एरिया (वर्ग फिट)</td>
+                                        <td></td>
+                                        <td>ठ)</td>
+                                        <td>दशौ तला</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -116,22 +144,26 @@
                                     </tr>
                                     <tr>
                                         <td>२.</td>
-                                        <td>भवन स्ट्रक्चरल सिस्टम</td>
-                                        <td>फ्रेम/वाल</td>
+                                        <td>ताल संख्या </td>
+                                        <td></td>
                                         <td>५.</td>
                                         <td>पिल्र्मा प्रयोग गर्ने डण्डीको<br>
                                             साईज र संख्या</td>
                                     </tr>
                                     <tr>
                                         <td>३.</td>
-                                        <td>जगको साईज (फिट)</td>
-                                        <td></td>
+                                        <td>भवन स्ट्रक्चरल सिस्टम</td>
+                                        <td>फ्रेम/वाल</td>
                                         <td>६.</td>
-                                        <td>पिलरको छुरीको साईज</td>
+                                        <td>कंक्रिट ब्याण्डहरु</td>
+                                        <td>लिन्टल/सिल</td>
                                     </tr>
+
                                     </tbody>
                                 </table>
-                                <div  class="d-flex justify-content-around">
+                                <p>नक्सा स्वीकृत अगावै निर्माण कार्य भएको भए सो को विवरण :</p>
+                                <p>(स्वीकृत नक्सा अनुसार हाल<span class="underline-dotted custom-width"></span>तल्ला निर्माण गरिनेछ | </p>
+                                <div  class="d-flex justify-content-around mt-4">
                                     <p class="text-center"><span class="underline-dotted custom-width"></span><br>
                                         तयार गर्ने </p>
                                     <p class="text-center"><span class="underline-dotted custom-width"></span><br>चेक गर्ने<br>(इन्जिनियर)</p>
@@ -148,7 +180,7 @@
                     <div class="col-lg-12">
                         <div class="card mb_30">
                             <div class="card-body p-3">
-                                <h5>प्रथम चरणका इजाजत नविकरण </h5>
+                                <h5>दोस्रो चरणका इजाजत नविकरण </h5>
                                 <table class="table table-bordered mt-2">
                                     <thead>
                                     <tr>
@@ -169,7 +201,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <h5>प्रथम चरणका इजाजत नामसारी </h5>
+                                <h5>दोस्रो चरणका इजाजत नामसारी </h5>
                                 <table class="table table-bordered mt-2">
                                     <thead>
                                     <tr>
