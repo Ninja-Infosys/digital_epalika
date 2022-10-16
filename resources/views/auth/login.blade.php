@@ -33,7 +33,7 @@
 </head>
 
 <body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}})">
-<div class="pt-3">
+<div class="pt-4">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-7">
@@ -55,7 +55,7 @@
                                 </h2>
                                 <form class="mt-1" action="{{route('login')}}" method="post">
                                     @csrf
-                                    <div class="mb-2">
+                                    <div class="mb-1">
                                         <label for="email" class="form-label">
                                             प्रयोगकर्ता इमेल
                                             <span class="text-danger">*</span>
@@ -72,7 +72,7 @@
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="mb-1">
                                         <label for="password" class="form-label">पासवर्ड
                                             <span class="text-danger">*</span>
                                         </label>
@@ -88,24 +88,24 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-3">
+                                    <div class="mb-1">
                                         {!! htmlFormSnippet() !!}
                                         @error('g-recaptcha-response')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
-                                    <div class="button-list">
+                                    <div class="d-flex justify-content-center">
                                         <button type="submit" class="btn btn-success waves-effect waves-light">
                                             <i class="fa fa-lock"></i>
                                             लग - इन
                                         </button>
-                                        <button type="reset" class="btn btn-danger waves-effect">
+                                        <button type="reset" class="btn btn-danger waves-effect ms-3">
                                             <i class="fa fa-times-circle"></i>
                                             रिसेट
                                         </button>
                                     </div>
                                 </form>
-                                <div class="col-12 text-lg-end">
+                                <div class="col-12 text-lg-end mt-2">
                                         <a href="auth-recoverpw.html" class="ms-1">Forgot password?</a>
                                 </div>
                             </div>
