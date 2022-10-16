@@ -9273,6 +9273,7 @@ table[data-toggle=table] {
 .thought {
     position: fixed;
     left: 80%;
+    top: 75%;
     background-color: var(--ct-white);
     padding:20px;
     border-radius:30px;
