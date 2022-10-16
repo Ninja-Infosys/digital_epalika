@@ -20,7 +20,7 @@
         type="text/css"
 
     />
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/register/reg.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('assets/frontend/css/register/reg.css')}}">--}}
 
     <!-- App css -->
     <link
@@ -35,8 +35,10 @@
     @livewireStyles
 </head>
 
-<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpeg')}})">
-<div class="mt-5 mb-5">
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
+height: 100vh;
+overflow: hidden">
+<div class="pt-5">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-10">

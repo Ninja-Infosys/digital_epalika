@@ -4430,7 +4430,7 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
 }
 .auth-page {
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center;
 }
 
 .auth-page .login-btn {
