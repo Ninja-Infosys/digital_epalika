@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
+use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
-use Modules\EMap\Http\Controllers\MapFeeController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');

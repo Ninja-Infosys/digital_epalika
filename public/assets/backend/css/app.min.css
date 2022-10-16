@@ -1793,7 +1793,7 @@ body[data-theme=dark] .table-dark tbody, body[data-theme=dark] .table-dark tr {
 }
 .bg-soft-main{
     --ct-bg-opacity: 0.25;
-    background-color: rgba(var(--ct-main-rgb), var(--ct-bg-opacity)) !important
+    background-color: var(--primary) !important
 }
 
 .bg-soft-info {
@@ -2007,18 +2007,6 @@ li > a[aria-expanded=true] > span.menu-arrow {
 li.menuitem-active > a:not(.collapsed) > span.menu-arrow {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg)
-}
-
-body[data-leftbar-size=condensed] .logo-box {
-    width: 70px !important
-}
-
-body[data-leftbar-size=condensed] .logo span.logo-lg {
-    display: none
-}
-
-body[data-leftbar-size=condensed] .logo span.logo-sm {
-    display: block
 }
 
 body[data-leftbar-size=condensed] .left-side-menu {
@@ -2514,10 +2502,6 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
     display: block
 }
 
-.logo span.logo-sm {
-    display: none
-}
-
 .logo .logo-lg-text-dark {
     color: var(--ct-gray-900);
     font-weight: 700;
@@ -2778,14 +2762,6 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
     .logo-box {
         width: 70px !important;
         padding-right: 0 !important
-    }
-
-    .logo-box .logo-lg {
-        display: none !important
-    }
-
-    .logo-box .logo-sm {
-        display: block !important
     }
 }
 
@@ -3567,10 +3543,6 @@ body[data-layout-mode=two-column] .sidebar-main-menu .nav-second-level {
 
     body[data-layout-mode=two-column] .navbar-custom .logo-box {
         width: 220px
-    }
-
-    body[data-layout-mode=two-column] .navbar-custom .logo-box .logo-sm {
-        display: none
     }
 
     body[data-layout-mode=two-column][data-leftbar-size=condensed] .logo-box {
@@ -4456,10 +4428,9 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
         transform: rotate(360deg)
     }
 }
-
 .auth-page {
-    background-size: cover;
-    background-position: center;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .auth-page .login-btn {
@@ -9299,4 +9270,89 @@ table[data-toggle=table] {
     43% { transform: rotate(0); }
     100% { transform: rotate(0); }
 }
-/*# sourceMappingURL=app.min.css.map */
+.thought {
+    position: fixed;
+    left: 80%;
+    background-color: var(--ct-white);
+    padding:20px;
+    border-radius:30px;
+    min-width:40px;
+    max-width:220px;
+    min-height:40px;
+    margin:20px;
+    text-align:center;
+    animation-name: FadeIn;
+    animation-duration: 3s;
+    transition-timing-function: linear;
+}
+.thought:before,
+.thought:after {
+    content:"";
+    background-color:#fff;
+    border-radius:50%;
+    display:block;
+    position:absolute;
+    z-index:-1;
+}
+.thought:before {
+    width:44px;
+    height:44px;
+    top:-12px;
+    left:28px;
+    box-shadow:-50px 30px 0 -12px #fff;
+}
+.thought:after {
+    bottom:-10px;
+    right:26px;
+    width:30px;
+    height:30px;
+    box-shadow:40px -34px 0 0 #fff,
+    -28px -6px 0 -2px #fff,
+    -24px 17px 0 -6px #fff,
+    -5px 25px 0 -10px #fff;
+
+}
+@keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes FadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
