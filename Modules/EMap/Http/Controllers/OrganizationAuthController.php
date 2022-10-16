@@ -19,10 +19,13 @@ class OrganizationAuthController extends Controller
 
     public function organizationLogin(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ]);
+        $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+                'g-recaptcha-response' => ['recaptcha'],
+            ],
+            ['g-recaptcha-response.recaptcha' =>'Please verify captcha']
+        );
 
         if (Auth::guard('organization')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
