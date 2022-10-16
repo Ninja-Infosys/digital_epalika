@@ -10,8 +10,8 @@ return new class extends Migration {
         Schema::create('map_registration_particulars', function (Blueprint $table) {
             $table->id();
             $table->foreignId('map_registration_id')->constrained()->cascadeOnDelete();
-            $table->string('map_fee')->nullable();
-            $table->double('area_of_proposed_construction', 12, 2)->default(0);
+            $table->string('storey')->nullable();
+            $table->double('area', 12, 2)->default(0);
             $table->string('rate')->default(0);
             $table->text('remarks')->nullable();
             $table->timestamps();

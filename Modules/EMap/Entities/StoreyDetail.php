@@ -2,11 +2,11 @@
 
 namespace Modules\EMap\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class StoreyDetail extends Model
 {
@@ -39,6 +39,11 @@ class StoreyDetail extends Model
 
     public function getAmountAttribute(): float|int
     {
-        return $this->area_of_proposed_construction * $this->mapFee->rate;
+        return ($this->total_area ?? 1) * ($this->mapFee->rate ?? 1);
+    }
+
+    public function getTotalRateAttribute(): float|int
+    {
+        return ($this->mapFee->sum('rate') ?? 0);
     }
 }

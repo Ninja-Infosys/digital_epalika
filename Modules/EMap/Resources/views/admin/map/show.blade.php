@@ -110,7 +110,10 @@
                         </div>
 
                         <div class="tab-pane" id="map-registration-tab" role="tabpanel">
-                            <a href="{{route('emap.admin.map.map-apply.map-registration.create',$mapApply)}}">नक्सा दर्ता गर्नुहोस</a>
+
+                                @includeIf('emap::admin.map.map-registration.print')
+
+
                         </div>
 
                         <div class="tab-pane" id="notice-tab" role="tabpanel">
