@@ -35,7 +35,10 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
         Fortify::authenticateUsing(function (Request $request) {
-
+            $request->validate(
+                ['g-recaptcha-response' => ['recaptcha']],
+                ['g-recaptcha-response.recaptcha' =>'Please verify captcha'],
+            );
             if (auth()->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1])) {
                 event(new ActivityLogEvent('Login'));
             }
