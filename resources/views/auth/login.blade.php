@@ -98,21 +98,30 @@
                                 <div class="col-12 text-lg-end">
                                         <a href="auth-recoverpw.html" class="ms-1">Forgot password?</a>
                                 </div>
-                                <div class="alert alert-info mt-3">
-                                    <h4 class="mb-1 text-decoration-underline">प्राविधिक सहायता कक्ष</h4>
-                                    <p>
-                                     <i class="fa fa-phone-alt"></i> : 081-520361/9858042433
-                                    </p>
-                                      <p>
-                                      <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com
-                                    </p>
-                                </div>
+{{--                                <div class="alert alert-info mt-3">--}}
+{{--                                    <h4 class="mb-1 text-decoration-underline">प्राविधिक सहायता कक्ष</h4>--}}
+{{--                                    <p>--}}
+{{--                                     <i class="fa fa-phone-alt"></i> : 081-520361/9858042433--}}
+{{--                                    </p>--}}
+{{--                                      <p>--}}
+{{--                                      <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="alert mt-3 ">
+        <h4 class="mb-1 text-dark fw-bold">प्राविधिक सहायता कक्ष</h4>
+        <p>
+            <i class="fa fa-phone-alt"></i> : 081-520361/9858042433
+        </p>
+        <p class="text-center">
+            <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com
+        </p>
     </div>
 </div>
 

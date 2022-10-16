@@ -9272,3 +9272,30 @@ table[data-toggle=table] {
     100% { transform: rotate(0); }
 }
 /*# sourceMappingURL=app.min.css.map */
+.alert{
+    border-radius: 10px;
+    position: fixed;
+    left: 80%;
+    top:69%;
+    background-color: #6EA4BE;
+    color: #FFFFFF;
+    animation: fadeInAnimation ease 3s;
+}
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+.alert:after{
+    content: "";
+    /*position: absolute;*/
+    left: 82%;
+    top: 74px;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 40px solid #6EA4BE;
+    border-bottom: 30px solid transparent;
+}
