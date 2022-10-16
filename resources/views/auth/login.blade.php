@@ -32,7 +32,9 @@
     {!! ReCaptcha::htmlScriptTagJsApi() !!}
 </head>
 
-<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}})">
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
+height: 100vh;
+overflow: hidden">
 <div class="pt-4">
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -72,7 +74,7 @@
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
-                                    <div class="mb-1">
+                                    <div class="mb-2">
                                         <label for="password" class="form-label">पासवर्ड
                                             <span class="text-danger">*</span>
                                         </label>
