@@ -23,13 +23,20 @@
                                     <p class="">मिति: <span class="underline-dotted custom-width"> </span></p>
                                 </div>
                                 <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
-                                <p class="text-center my-3"><b>बिषय: प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></p>
+                                <h3 class="text-center my-4"><b>भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)</b></h3>
 
                                 <p class="mb-3">
-                                  तपाई श्री/श्रीमती<span class="underline-dotted custom-width"></span> ले जग्गा धनी<span class="underline-dotted custom-width"></span> को नाममा दर्ता रहेको ने.उ.म.न.पा.वडा नं.<span class="underline-dotted custom-width"></span>किता नं.<span class="underline-dotted custom-width"></span> ज.वि.जम्मा<span class="underline-dotted custom-width"></span> को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति<span class="underline-dotted custom-width"></span> मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति<span class="underline-dotted custom-width"></span>
-                                    को निर्माण बमोजिम प्रथम चरणमा 'आधारभूत निर्माण मापदण्ड-२०७२' तथा 'राष्ट्रिय भवन निर्माण संहिता-२०६०' बमोजिम निम्नाअनुसार डि.पि.सि.लेभलसम्म मात्र निर्माण कार्य गर्नुहोला | डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ |
+                                    श्री/श्रीमती<span class="underline-dotted custom-width"></span> ले जग्गा धनी श्री<span class="underline-dotted custom-width"></span>
+                                    को नाममा दर्ता रहेको यस ने.उ.म.न.पा.वडा नं.<span class="underline-dotted custom-width"></span>
+                                    टोल<span class="underline-dotted custom-width"></span> मा रहेको साविक<span class="underline-dotted custom-width"></span>
+                                    गा.वि.स.वडा नं.<span class="underline-dotted custom-width"></span> कित्ता नं.<span class="underline-dotted custom-width"></span>
+                                    ज.वि.जम्मा<span class="underline-dotted custom-width"></span>
+                                    को जग्गामा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार
+                                    नक्सा पास  प्रक्रिया पुरा भैसकेको हुँदा यसको पछिल्लो पानामा उल्लेखित शर्तहरु र यसै साथ दिईएको स्वीकृत नक्सा बमोजिम
+                                    <span class="underline-dotted custom-width"></span> निर्माण गर्न नक्सा पास भएकोले यो प्रमाण-पत्र दिईएको छ |
+                                    'आधारभूत निर्माण मापदण्ड-२०७२' तथा 'राष्ट्रिय भवन निर्माण संहिता-२०६०' बमोजिम निर्माण कार्य गर्नुहोला | स्वीकृत भएको नक्सा
+                                    बमोजिम निर्माण कार्य गरिसकेपछि "निर्माण सम्पन्न प्रमाणपत्र" अनिवार्य लिनुपर्नेछ |
                                 </p>
-                                <h4 class="text-center"><b>निर्माण स्वीकृति भएको विवरण </b></h4>
                                 <h5>जग्गा बिकास तथा भवन मापदण्ड २०६४</h5>
                                 <table class="table table-bordered mt-2">
                                     <thead>
@@ -47,24 +54,43 @@
                                         <td>१.</td>
                                         <td>लम्बाई(रनिङ फिट)</td>
                                         <td></td>
-                                        <td>४.</td>
-                                        <td>दायाँ/बायाँ छोड्ने दुरी<br>
-                                            (रनिङ फिट) </td>
+                                        <td>ग)</td>
+                                        <td>प्रथम तला </td>
                                     </tr>
                                     <tr>
                                         <td>२.</td>
                                         <td>चौडाई(रनिङ फिट)</td>
                                         <td></td>
-                                        <td>५.</td>
-                                        <td>कम्पाउन्ड वाल<br>
-                                            (रनिङ फिट) </td>
+                                        <td>घ)</td>
+                                        <td>दोस्रो तला</td>
                                     </tr>
                                     <tr>
                                         <td>३.</td>
-                                        <td>सेट ब्याक<br>(छडको चौडाई सहित)</td>
+                                        <td>प्लिन्थ लेभलको उचाई </td>
                                         <td></td>
+                                        <td>ङ)</td>
+                                        <td>तेस्रो तला</td>
+                                    </tr>
+                                    <tr>
+                                        <td>४.</td>
+                                        <td>सेट ब्याक</td>
+                                        <td></td>
+                                        <td>च)</td>
+                                        <td>चौथो तला</td>
+                                    </tr>
+                                    <tr>
+                                        <td>५.</td>
+                                        <td>सडकको चौडाई</td>
+                                        <td></td>
+                                        <td>छ)</td>
+                                        <td>पाँचौ तला</td>
+                                    </tr>
+                                    <tr>
                                         <td>६.</td>
-                                        <td>लिन्थ लेभलको उचाई</td>
+                                        <td>कम्पाउण्ड वाल (रनिङ फिट)</td>
+                                        <td></td>
+                                        <td>ज)</td>
+                                        <td>छै तला</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -94,7 +120,7 @@
                                         <td>फ्रेम/वाल</td>
                                         <td>५.</td>
                                         <td>पिल्र्मा प्रयोग गर्ने डण्डीको<br>
-                                        साईज र संख्या</td>
+                                            साईज र संख्या</td>
                                     </tr>
                                     <tr>
                                         <td>३.</td>
@@ -141,7 +167,7 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                   </tbody>
+                                    </tbody>
                                 </table>
                                 <h5>प्रथम चरणका इजाजत नामसारी </h5>
                                 <table class="table table-bordered mt-2">

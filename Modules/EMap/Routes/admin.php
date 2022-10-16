@@ -37,3 +37,6 @@ Route::view('permissionletter', 'emap::admin.noticeletter.permissionletter');
 Route::view('level', 'emap::admin.noticeletter.level');
 Route::view('firstphase', 'emap::admin.noticeletter.firstphase');
 Route::view('super', 'emap::admin.noticeletter.super');
+Route::view('structure', 'emap::admin.tipani.structure');
+Route::view('sanso', 'emap::admin.tipani.sanso');
+Route::view('superstructure', 'emap::admin.tipani.superstructure');
