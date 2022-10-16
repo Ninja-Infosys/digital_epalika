@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
+use App\Http\Controllers\Admin\Setting\SettingDashboardController;
 use App\Http\Controllers\Admin\Setting\Units\ExternalUnitConversionController;
 use App\Http\Controllers\Admin\Setting\Units\InternalUnitConversionController;
 use App\Http\Controllers\Admin\Setting\Units\MeasurementUnitController;
@@ -36,19 +37,20 @@ Route::get('notification', [NotificationController::class, 'notification'])->nam
 Route::get('notification/{databaseNotification}', [NotificationController::class, 'readNotification'])->name('notification.read');
 Route::get('readAllNotification', [NotificationController::class, 'readAllNotification'])->name('notification.readAllNotification');
 
-
-Route::prefix('userManagement')->as('userManagement.')->group(function () {
-    Route::resource('role', RoleController::class);
-    Route::get('user/{user}/updateStatus', [UserController::class, 'updateStatus'])->name('user.updateStatus');
-    Route::resource('user', UserController::class);
-});
-
 //chunk file upload
 Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileStore'])->name('fileUpload.chunkStore');
 
 //Fiscal Year
 Route::prefix('setting')->group(function () {
+    Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
+
     Route::resource('fiscalYear', FiscalYearController::class);
+
+    Route::prefix('userManagement')->as('userManagement.')->group(function () {
+        Route::resource('role', RoleController::class);
+        Route::get('user/{user}/updateStatus', [UserController::class, 'updateStatus'])->name('user.updateStatus');
+        Route::resource('user', UserController::class);
+    });
 
     Route::prefix('units')->as('units.')->group(function () {
         Route::resource('type', TypeController::class);

@@ -10,6 +10,7 @@
         'listregistration'
     ],
     'sidebars' => [
-        'website'
+        'website',
+        'setting'
     ]
 ];
