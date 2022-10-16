@@ -18,17 +18,16 @@
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
                                 <div class="top-line d-flex justify-content-between">
-                                    <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
+                                    <p class="p-1">पत्र सं: <span class="underline-dotted custom-width"></span></p>
                                     <p class="">मिति: <span class="underline-dotted custom-width"> </span></p>
                                 </div>
                                 <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
                                 <p class="text-center my-3"><b>बिषय: प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></p>
 
                                 <p class="mb-3">
-                                  तपाई श्री/श्रीमती<span class="underline-dotted custom-width"></span> ले जग्गा धनी<span class="underline-dotted custom-width"></span> को नाममा दर्ता रहेको ने.उ.म.न.पा.वडा नं.<span class="underline-dotted custom-width"></span>किता नं.<span class="underline-dotted custom-width"></span> ज.वि.जम्मा<span class="underline-dotted custom-width"></span> को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति<span class="underline-dotted custom-width"></span> मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति<span class="underline-dotted custom-width"></span>
+                                    तपाई श्री/श्रीमान<span class="underline-dotted custom-width"></span> ले जग्गा धनी<span class="underline-dotted custom-width"></span> को नाममा दर्ता रहेको ने.उ.म.न.पा.वडा नं.<span class="underline-dotted custom-width"></span>किता नं.<span class="underline-dotted custom-width"></span> ज.वि.जम्मा<span class="underline-dotted custom-width"></span> को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति<span class="underline-dotted custom-width"></span> मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति<span class="underline-dotted custom-width"></span>
                                     को निर्माण बमोजिम प्रथम चरणमा 'आधारभूत निर्माण मापदण्ड-२०७२' तथा 'राष्ट्रिय भवन निर्माण संहिता-२०६०' बमोजिम निम्नाअनुसार डि.पि.सि.लेभलसम्म मात्र निर्माण कार्य गर्नुहोला | डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ |
                                 </p>
-                                <h4 class="text-center"><b>निर्माण स्वीकृति भएको विवरण </b></h4>
                                 <h5>जग्गा बिकास तथा भवन मापदण्ड २०६४</h5>
                                 <table class="table table-bordered mt-2">
                                     <thead>
@@ -93,7 +92,7 @@
                                         <td>फ्रेम/वाल</td>
                                         <td>५.</td>
                                         <td>पिल्र्मा प्रयोग गर्ने डण्डीको<br>
-                                        साईज र संख्या</td>
+                                            साईज र संख्या</td>
                                     </tr>
                                     <tr>
                                         <td>३.</td>
@@ -104,6 +103,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <p></p>
                                 <div  class="d-flex justify-content-around">
                                     <p class="text-center"><span class="underline-dotted custom-width"></span><br>
                                         तयार गर्ने </p>
@@ -140,7 +140,7 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                   </tbody>
+                                    </tbody>
                                 </table>
                                 <h5>प्रथम चरणका इजाजत नामसारी </h5>
                                 <table class="table table-bordered mt-2">
