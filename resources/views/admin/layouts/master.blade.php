@@ -41,7 +41,7 @@
 </head>
 
 <!-- body start -->
-<body>
+<body data-leftbar-size="condensed">
 <!-- Begin page -->
 <div id="wrapper">
 
