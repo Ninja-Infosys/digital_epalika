@@ -45,3 +45,4 @@ Route::view('sanpermission', 'emap::admin.tipani.sanpermission');
 Route::view('estd', 'emap::admin.tipani.estd');
 Route::view('second', 'emap::admin.tipani.second');
 Route::view('secondphase', 'emap::admin.tipani.secondphase');
+Route::view('certificate', 'emap::admin.tipani.certificate');
