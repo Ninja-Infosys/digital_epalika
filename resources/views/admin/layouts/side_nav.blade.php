@@ -9,17 +9,6 @@
                 @else
                     @includeIf('admin.layouts.sidebar')
                 @endif
-
-
-                {{--                    @includeIf('digitalboard::layouts.sidebar')--}}
-
-                {{--                    @includeIf('circular::layouts.sidebar')--}}
-
-
-
-                {{--                    @includeIf('grievancehandling::admin.layouts.sidebar')--}}
-                {{--                    @includeIf('emap::admin.layouts.sidebar')--}}
-                {{--                    @includeIf('businessregistration::layouts.sidebar')--}}
             </ul>
         </div>
 
