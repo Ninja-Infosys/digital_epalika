@@ -114,10 +114,10 @@
             </div>
         </div>
     </div>
-    <div class="alert mt-3 ">
+    <div class="thought">
         <h4 class="mb-1 text-dark fw-bold">प्राविधिक सहायता कक्ष</h4>
         <p>
-            <i class="fa fa-phone-alt"></i> : 081-520361/9858042433
+            <i class="fa fa-phone-alt"></i> : 081-520361
         </p>
         <p class="text-center">
             <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com
