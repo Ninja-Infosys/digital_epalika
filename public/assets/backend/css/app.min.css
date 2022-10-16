@@ -1793,7 +1793,7 @@ body[data-theme=dark] .table-dark tbody, body[data-theme=dark] .table-dark tr {
 }
 .bg-soft-main{
     --ct-bg-opacity: 0.25;
-    background-color: rgba(var(--ct-main-rgb), var(--ct-bg-opacity)) !important
+    background-color: var(--primary) !important
 }
 
 .bg-soft-info {
