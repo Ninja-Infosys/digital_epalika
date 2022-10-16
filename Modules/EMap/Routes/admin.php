@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
+use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
 use Modules\EMap\Http\Controllers\Admin\OrganizationController;
-use Modules\EMap\Http\Controllers\MapFeeController;
 use Modules\EMap\Http\Controllers\MapSettingController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -36,7 +36,12 @@ Route::view('agentaggrement', 'emap::admin.noticeletter.agentaggrement');
 Route::view('permissionletter', 'emap::admin.noticeletter.permissionletter');
 Route::view('level', 'emap::admin.noticeletter.level');
 Route::view('firstphase', 'emap::admin.noticeletter.firstphase');
+Route::view('firstphases', 'emap::admin.noticeletter.firstphases');
 Route::view('super', 'emap::admin.noticeletter.super');
 Route::view('structure', 'emap::admin.tipani.structure');
 Route::view('sanso', 'emap::admin.tipani.sanso');
 Route::view('superstructure', 'emap::admin.tipani.superstructure');
+Route::view('sanpermission', 'emap::admin.tipani.sanpermission');
+Route::view('estd', 'emap::admin.tipani.estd');
+Route::view('second', 'emap::admin.tipani.second');
+Route::view('secondphase', 'emap::admin.tipani.secondphase');

@@ -1,11 +1,7 @@
 <?php
 
-namespace Modules\EMap\Http\Controllers;
+namespace Modules\EMap\Http\Controllers\Admin;
 
-use App\Models\Settings\OfficeSetting;
-use App\Models\Settings\Units\Unit;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\EMap\Entities\MapFee;

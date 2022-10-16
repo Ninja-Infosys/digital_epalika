@@ -18,10 +18,17 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <h3 class="text-center my-3"><b>प्रथम चरणको कार्य सम्पन्नको नेपालगञ्ज उ.न.पा. प्रविधिकको प्रतिवेदन</b></h3>
+                                <h3 class="text-center my-3"><b>प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको  प्रतिवेदन</b></h3>
                                 <p class="mb-3">
-                                   यस उप-महानगरपालिकाको वडा नं.<span class="underline-dotted custom-width"></span>टोल<span class="underline-dotted custom-width"></span>मा अवस्थित साविक<span class="underline-dotted custom-width"></span>कित्ता नं.<span class="underline-dotted custom-width"></span> क्षेत्रफल<span class="underline-dotted custom-width"></span>
-                                    मा भवन निर्माण गर्ने घरधनी श्री<span class="underline-dotted custom-width"></span> ले भवन निर्माण गर्ने क्रममा प्लिन्थ लेभलसम्मको निर्माण कार्य सम्पन्न भएको हुँदा मिति<span class="underline-dotted custom-width"></span> मा स्थलगत निरीक्षण गरी देहाय बमोजिमको प्रतिवेदन पेश गरेको छु |
+                                    यस उप-महानगरपालिकाको वडा नं.<span class="underline-dotted custom-width"></span>
+                                    टोल<span class="underline-dotted custom-width"></span>मा अवस्थित साविक
+                                    <span class="underline-dotted custom-width"></span>
+                                    कित्ता नं.<span class="underline-dotted custom-width"></span>
+                                    क्षेत्रफल<span class="underline-dotted custom-width"></span>
+                                    मा भवन निर्माण गर्ने घरधनी श्री<span class="underline-dotted custom-width"></span>
+                                    ले भवन निर्माण गर्ने क्रममा प्लिन्थ लेभलसम्मको निर्माण कार्य सम्पन्न भएको हुँदा
+                                    मिति<span class="underline-dotted custom-width"></span> मा स्थलगत निरीक्षण गरी देहाय
+                                    बमोजिमको प्रतिवेदन पेश गरेको छु |
                                 </p>
                                 <p>१. सडक अधिकार क्षेत्र सम्बन्धि मापदण्ड (सडक सेटब्याक) पालना
                                     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
@@ -109,7 +116,7 @@
                                         <td>बिम र पिलरको जोर्नी पर्याप्त मात्रामा बाँधिएको</td>
                                         <td><input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1"></td>
                                         <td><input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1"></td>
-                                        <td rowspan="2">भ्याल र भेन्टिलेशनहरु<br>
+                                        <td rowspan="2">भ्याल र भेन्टिलेशनहरु <br>
                                             गारोको २ फिट टाढा
                                         </td>
                                     </tr>
@@ -130,11 +137,11 @@
                                     <span class="underline-dotted custom-width"></span>
                                 </p>
                                 <p class="mt-2">माथि उल्लेखित भवन स्थलगत निरीक्षण गर्दा प्रचलित भवन मापदण्ड एवं राष्ट्रिय भवन संहिता अनुसार ठिक छ |<br>
-                                फरक ठहरे कानुन बमोजिम सहुँला बुझउँला | <br>
-                                    हस्ताक्षर:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
+                                    फरक ठहरे कानुन बमोजिम सहुँला बुझउँला | <br>
+                                    हस्ताक्षर:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span>  प्रतिवेदन पेश गर्ने प्रविधिकको नाम, थर :<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
 
-                                <p class="mt-2">प्रतिवेदन पेश गर्ने प्रविधिकको नाम, थर :<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
-                                  <p class="mt-2">पद:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span> पेश गरेको मिति:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span>
+                                <p class="mt-2">कन्सल्टेन्सीको नाम:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span> कन्सल्टेन्सीको दर्ता नं.<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
+                                <p class="mt-2">पेश गरेको मिति:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span>
                                 </p>
                             </div>
                         </div>

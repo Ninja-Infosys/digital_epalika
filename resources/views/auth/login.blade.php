@@ -28,10 +28,14 @@
     />
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
+
+    {!! ReCaptcha::htmlScriptTagJsApi() !!}
 </head>
 
-<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}})">
-<div class="mt-5 mb-5">
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
+height: 100vh;
+overflow: hidden">
+<div class="pt-4">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-7">
@@ -48,64 +52,63 @@
                         </div>
                         <div class="col-md-6">
                             <div class="card card-body">
-                                    <h2 class="text-center">
-                                        <i class="fa fa-user-lock"></i>
-                                    </h2>
-                                    <form class="mt-1" action="{{route('login')}}" method="post">
-                                        @csrf
-                                        <div class="mb-2">
-                                            <label for="email" class="form-label">
-                                                प्रयोगकर्ता इमेल
+                                <h2 class="text-center">
+                                    <i class="fa fa-user-lock"></i>
+                                </h2>
+                                <form class="mt-1" action="{{route('login')}}" method="post">
+                                    @csrf
+                                    <div class="mb-1">
+                                        <label for="email" class="form-label">
+                                            प्रयोगकर्ता इमेल
                                             <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                name="email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                type="email"
-                                                value="{{old('email')}}"
-                                                id="email"
-                                                placeholder="प्रयोगकर्ता इमेल"
-                                            />
-                                            @error('email')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label">पासवर्ड
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input
-                                                name="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                type="password"
-                                                id="password"
-                                                placeholder="पासवर्ड"
-                                            />
-                                            @error('password')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="button-list">
-                                                <button type="submit" class="btn btn-success waves-effect waves-light">
-                                                    <i class="fa fa-lock"></i>
-                                                    लग - इन
-                                                </button>
-                                                <button type="reset" class="btn btn-danger waves-effect">
-                                                    <i class="fa fa-times-circle"></i>
-                                                    रिसेट</button>
-                                        </div>
-                                    </form>
-                                <div class="col-12 text-lg-end">
+                                        </label>
+                                        <input
+                                            name="email"
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            type="email"
+                                            value="{{old('email')}}"
+                                            id="email"
+                                            placeholder="प्रयोगकर्ता इमेल"
+                                        />
+                                        @error('email')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="password" class="form-label">पासवर्ड
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input
+                                            name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            type="password"
+                                            id="password"
+                                            placeholder="पासवर्ड"
+                                        />
+                                        @error('password')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-1">
+                                        {!! htmlFormSnippet() !!}
+                                        @error('g-recaptcha-response')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-success waves-effect waves-light">
+                                            <i class="fa fa-lock"></i>
+                                            लग - इन
+                                        </button>
+                                        <button type="reset" class="btn btn-danger waves-effect ms-3">
+                                            <i class="fa fa-times-circle"></i>
+                                            रिसेट
+                                        </button>
+                                    </div>
+                                </form>
+                                <div class="col-12 text-lg-end mt-2">
                                         <a href="auth-recoverpw.html" class="ms-1">Forgot password?</a>
-                                </div>
-                                <div class="alert alert-info mt-3">
-                                    <h4 class="mb-1 text-decoration-underline">प्राविधिक सहायता कक्ष</h4>
-                                    <p>
-                                     <i class="fa fa-phone-alt"></i> : 081-520361/9858042433
-                                    </p>
-                                      <p>
-                                      <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -113,6 +116,15 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="thought">
+        <h4 class="mb-1 text-dark fw-bold">प्राविधिक सहायता कक्ष</h4>
+        <p>
+            <i class="fa fa-phone-alt"></i> : 081-520361
+        </p>
+        <p class="text-center">
+            <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com
+        </p>
     </div>
 </div>
 
