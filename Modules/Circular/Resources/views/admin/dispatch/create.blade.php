@@ -57,8 +57,10 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <x-date-input-component nameNe="dispatch_date" labelNe="चलानी मिति *"
-                                                            nameEn="en_dispatch_date" labelEn="Dispatch Date"/>
+                                    <x-date-input-component
+                                        nameNe="dispatch_date" labelNe="चलानी मिति *"
+                                        nameEn="en_dispatch_date" labelEn="Dispatch Date"
+                                    />
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="letter_number" class="form-label">पत्र संख्या </label>

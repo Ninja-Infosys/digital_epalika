@@ -45,7 +45,6 @@
                                 <th>पठाउने कार्यालयको नाम</th>
                                 <th>बुझिलिनेको नाम</th>
                                 <th>दर्ता मिति</th>
-
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -57,7 +56,7 @@
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>
-                                        {{$registration->registration_date ? $registration->registration_date->toDateString() : ''}}
+                                        {{$registration->registration_date}}
                                     </td>
                                     <td>
                                         <a href="{{route('admin.circular.registration.show',$registration)}}"

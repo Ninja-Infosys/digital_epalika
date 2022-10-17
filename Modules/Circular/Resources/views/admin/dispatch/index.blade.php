@@ -54,7 +54,7 @@
                                     <td>{{$dispatch->dispatch_no}}</td>
                                     <td>{{$dispatch->receiver_name}}</td>
 
-                                    <td>{{$dispatch->dispatch_date->toDateString()}}</td>
+                                    <td>{{$dispatch->dispatch_date}}</td>
                                     <td>
                                         @can('dispatch_access')
                                             <a href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary">
