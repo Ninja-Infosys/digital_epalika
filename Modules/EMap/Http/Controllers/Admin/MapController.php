@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\ApplyMapNoticeNotification;
 use App\Notifications\MapApplicationNotification;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapApplication;
@@ -51,49 +54,49 @@ class MapController extends Controller
         return redirect(route('emap.admin.map.mapApply.show', $mapApply));
     }
 
-    public function officeLetter(MapApply $mapApply)
+    public function officeLetter(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.offical_letter.officeletter',compact('mapApply'));
+        return view('emap::admin.notice.office-letter',compact('mapApply'));
     }
 
-    public function noticeLetter(MapApply $mapApply)
+    public function noticeLetter(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.noticeletter.noticeletter',compact('mapApply'));
+        return view('emap::admin.notice.notice-letter',compact('mapApply'));
     }
 
-    public function mapArreras(MapApply $mapApply)
+    public function mapArrears(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.noticeletter.maparreras',compact('mapApply'));
+        return view('emap::admin.notice.map-arrears',compact('mapApply'));
     }
 
-    public function landArreras(MapApply $mapApply)
+    public function landArrears(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.noticeletter.landarreras',compact('mapApply'));
+        return view('emap::admin.notice.land-arrears',compact('mapApply'));
     }
 
-    public function technicianNotice(MapApply $mapApply)
+    public function technicianNotice(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.noticeletter.techniciannotice',compact('mapApply'));
+        return view('emap::admin.notice.technician-notice',compact('mapApply'));
     }
 
-    public function chAgreement(MapApply $mapApply)
+    public function chAgreement(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.noticeletter.chaggrement',compact('mapApply'));
+        return view('emap::admin.notice.ch-agreement',compact('mapApply'));
     }
 
-    public function agentAgreement(MapApply $mapApply)
+    public function agentAgreement(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.noticeletter.agentaggrement',compact('mapApply'));
+        return view('emap::admin.notice.agent-agreement',compact('mapApply'));
     }
 
-    public function permissionLetter(MapApply $mapApply)
+    public function permissionLetter(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.noticeletter.permissionletter',compact('mapApply'));
+        return view('emap::admin.notice.permission-letter',compact('mapApply'));
     }
 
     public function level(MapApply $mapApply)
     {
-        return view('emap::admin.noticeletter.level',compact('mapApply'));
+        return view('emap::admin.notice.level',compact('mapApply'));
     }
 
 

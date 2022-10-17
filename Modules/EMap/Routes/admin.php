@@ -19,8 +19,8 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
         Route::get('officeLetter', 'officeLetter')->name('office-letter');
         Route::get('noticeLetter', 'noticeLetter')->name('notice-letter');
-        Route::get('mapArreras', 'mapArreras')->name('map-arreras');
-        Route::get('landArreras', 'landArreras')->name('land-arreras');
+        Route::get('mapArrears', 'mapArrears')->name('map-arrears');
+        Route::get('landArrears', 'landArrears')->name('land-arrears');
         Route::get('technicianNotice', 'technicianNotice')->name('technician-notice');
         Route::get('chAgreement', 'chAgreement')->name('ch-agreement');
         Route::get('agentAgreement', 'agentAgreement')->name('agent-agreement');

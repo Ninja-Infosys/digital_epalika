@@ -226,8 +226,8 @@
                 <div class="card-body">
                     <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">संघियारको नाममा जारी भएको सूचना</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">१५ दिने सूचना टाँस सम्बन्धमा</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.map-arreras',$mapApply)}}" class="btn btn-sm btn-outline-primary">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.land-arreras',$mapApply)}}" class="btn btn-sm btn-outline-primary">सरजमिन मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary">सरजमिन मुचुल्का</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्राविधिक प्रतिवेदन</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
