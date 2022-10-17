@@ -1,9 +1,14 @@
 <div class="row">
     <div class="col-md-{{$showEnglishDate?'6':'12'}}">
         <label for="{{$nameNe}}">{{$labelNe}}</label>
-        <input type="text" name="{{$nameNe}}" class="form-control @error($nameNe) is-invalid @enderror"
-               id="{{$nameNe}}" value="{{old($nameNe, ($edit_date_ne ?? ''))}}">
+        <input type="text" name="{{$nameNe}}"
+               class="form-control @error($nameNe) is-invalid @enderror"
+               placeholder="{{$labelNe}}"
+               id="{{$nameNe}}" value="{{old($nameNe, ($editDateNe))}}">
         @error($nameNe)
+        <span class="text-danger">{{$message}}</span>
+        @enderror
+        @error($nameEn)
         <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
@@ -12,12 +17,13 @@
         'd-none'=>!$showEnglishDate,
 ])>
 
-        <label for="{{$labelEn}}">{{$nameEn}}</label>
+        <label for="{{$nameEn}}">{{$labelEn}}</label>
 
-        <input type="date" name="{{$labelEn}}"
-               class="form-control @error($labelEn) is-invalid @enderror"
-               id="{{$labelEn}}" value="{{old($labelEn, ($edit_date_en ?? ''))}}">
-        @error($labelEn)
+        <input type="date" name="{{$nameEn}}"
+               class="form-control @error($nameEn) is-invalid @enderror"
+               placeholder="{{$labelEn}}"
+               id="{{$nameEn}}" value="{{old($nameEn, ($editDateEn ?? ''))}}">
+        @error($nameEn)
         <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
@@ -36,7 +42,7 @@
                         let parsedDate = NepaliFunctions.ParseDate($("#{{$nameNe}}").val());
                         let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
                         let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
-                        $("#{{$labelEn}}").val(formattedDate)
+                        $("#{{$nameEn}}").val(formattedDate)
                     }
                 });
 
@@ -51,7 +57,7 @@
                 let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
                 $('#{{$nameNe}}').val(todayBsDate)
                 let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
-                $('#{{$labelEn}}').val(todayAdDate)
+                $('#{{$nameEn}}').val(todayAdDate)
                 @endif
             });
         </script>
