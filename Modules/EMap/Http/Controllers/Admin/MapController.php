@@ -4,6 +4,7 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\EMap\Entities\ApplyMapApplication;
 use Modules\EMap\Entities\MapApply;
 
@@ -71,7 +72,7 @@ class MapController extends Controller
         return view('emap::admin.noticeletter.techniciannotice',compact('mapApply'));
     }
 
-    public function chAggrement(MapApply $mapApply)
+    public function chAgreement(MapApply $mapApply)
     {
         return view('emap::admin.noticeletter.chaggrement',compact('mapApply'));
     }
@@ -89,5 +90,11 @@ class MapController extends Controller
     public function level(MapApply $mapApply)
     {
         return view('emap::admin.noticeletter.level',compact('mapApply'));
+    }
+
+
+    public function applyMapNotice(Request $request,MapApply $mapApply)
+    {
+
     }
 }

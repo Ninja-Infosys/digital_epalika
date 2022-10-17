@@ -16,19 +16,23 @@ Route::resource('organization', OrganizationController::class);
 Route::resource('map/mapApply/{mapApply}/map-registration', MapRegistrationController::class)->names('map.map-apply.map-registration');
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
-    Route::get('mapApply', 'index')->name('mapApply.index');
+    Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
+        Route::get('officeLetter', 'officeLetter')->name('office-letter');
+        Route::get('noticeLetter', 'noticeLetter')->name('notice-letter');
+        Route::get('mapArreras', 'mapArreras')->name('map-arreras');
+        Route::get('landArreras', 'landArreras')->name('land-arreras');
+        Route::get('technicianNotice', 'technicianNotice')->name('technician-notice');
+        Route::get('chAgreement', 'chAgreement')->name('ch-agreement');
+        Route::get('agentAgreement', 'agentAgreement')->name('agent-agreement');
+        Route::get('permissionLetter', 'permissionLetter')->name('permission-letter');
+        Route::get('level', 'level')->name('level');
+        Route::post('applyMapNotice','applyMapNotice')->name('apply-map-notice');
+    });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
-    Route::get('mapApply/{mapApply}/officeLetter', 'officeLetter')->name('mapApply.office-letter');
-    Route::get('mapApply/{mapApply}/noticeLetter', 'noticeLetter')->name('mapApply.notice-letter');
-    Route::get('mapApply/{mapApply}/mapArreras', 'mapArreras')->name('mapApply.map-arreras');
-    Route::get('mapApply/{mapApply}/landArreras', 'landArreras')->name('mapApply.land-arreras');
-    Route::get('mapApply/{mapApply}/technicianNotice', 'technicianNotice')->name('mapApply.technician-notice');
-    Route::get('mapApply/{mapApply}/chAggrement', 'chAggrement')->name('mapApply.ch-aggrement');
-    Route::get('mapApply/{mapApply}/agentAgreement', 'agentAgreement')->name('mapApply.agent-agreement');
-    Route::get('mapApply/{mapApply}/permissionLetter', 'permissionLetter')->name('mapApply.permission-letter');
-    Route::get('mapApply/{mapApply}/level', 'level')->name('mapApply.level');
+    Route::get('mapApply', 'index')->name('mapApply.index');
 });
+
 
 Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
@@ -60,3 +64,4 @@ Route::view('parmana', 'emap::admin.certificate.parmana');
 Route::view('namsari', 'emap::admin.certificate.namsari');
 Route::view('detail', 'emap::admin.certificate.detail');
 Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
+Route::view('manjuri', 'emap::admin.certificate.manjuri');
