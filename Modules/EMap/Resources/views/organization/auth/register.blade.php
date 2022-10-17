@@ -43,7 +43,6 @@ overflow: hidden">
                                             <img src="{{asset('images/np.png')}}" height="60" alt="Logo">
                                         </div>
                                         <div class="title">
-                                            <x-header-component/>
                                             <div class="m-2">
                                                 <h4 class="text-white">डिजिटल ई-पालिका</h4>
                                                 <h5 class="text-white pt-1">ई-नक्सा पास</h5>

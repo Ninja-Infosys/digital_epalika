@@ -30,8 +30,14 @@
                 <span class="d-none d-sm-inline">कागजातहरू</span>
             </a>
         </li>
-        <li class="nav-item" data-bs-target="#detail">
+        <li class="nav-item" data-bs-target="#auth">
             <a href="#sixth" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+                <i class="fa fa-lock me-1"></i>
+                <span class="d-none d-sm-inline">प्रयोगकर्ता</span>
+            </a>
+        </li>
+        <li class="nav-item" data-bs-target="#detail">
+            <a href="#seventh" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
                 <i class="fa fa-clipboard-list me-1"></i>
                 <span class="d-none d-sm-inline">पूर्ण विवरण</span>
             </a>
@@ -786,8 +792,68 @@
                     </div>
                 </div>
             </div>
-
             <div class="tab-pane fade" id="sixth">
+                <div id="auth" class="form-horizontal">
+                    <div class="alert alert-info" role="alert">
+                        निम्न प्रयोगकर्ताको इमेल, सम्पर्क नम्बर, र प्रयोगकर्ताको नाम, प्रणालीमा लग-इन गर्न प्रयोग हुनेछ !!!
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-1">
+                            <label for="user.name" class="form-label">प्रयोगकर्ताको नाम <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                            <span class="input-group-text" id="user.name">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                <input name="user.name"
+                                       class="form-control @error('user.name') is-invalid @enderror"
+                                       type="text"
+                                       id="user.name"
+                                       placeholder="प्रयोगकर्ताको नाम"
+                                       wire:model="user.name">
+                            </div>
+                            @error('user.name')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-3 mb-1">
+                            <label for="user.email" class="form-label">इमेल <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                            <span class="input-group-text" id="user.email">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                <input name="user.email"
+                                       class="form-control @error('user.email') is-invalid @enderror"
+                                       type="email"
+                                       id="user.email"
+                                       placeholder="इमेल"
+                                       wire:model="user.email">
+                            </div>
+                            @error('user.email')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-3 mb-1">
+                            <label for="user.phone" class="form-label">सम्पर्क नं. <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                            <span class="input-group-text" id="user.email">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                <input name="user.phone"
+                                       class="form-control @error('user.phone') is-invalid @enderror"
+                                       type="text"
+                                       id="user.phone"
+                                       placeholder="सम्पर्क नं"
+                                       wire:model="user.phone">
+                            </div>
+                            @error('user.phone')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                </div>
+            </div>
+            </div>
+            <div class="tab-pane fade" id="seventh">
                 <div id="detail" class="form-horizontal">
                     fsadgf gasdjf gasdh
                 </div>
