@@ -48,3 +48,5 @@ Route::view('secondphase', 'emap::admin.tipani.secondphase');
 Route::view('certificate', 'emap::admin.tipani.certificate');
 Route::view('parmana', 'emap::admin.certificate.parmana');
 Route::view('namsari', 'emap::admin.certificate.namsari');
+Route::view('detail', 'emap::admin.certificate.detail');
+Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
