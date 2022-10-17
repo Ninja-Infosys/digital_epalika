@@ -8,7 +8,7 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            const amount_in_words = NepaliFunctions.NumberToWordsUnicode({{$number}}, {{$is_currency}})
+            const amount_in_words = NepaliFunctions.NumberToWordsUnicode({{$number}}, {{$isCurrency}})
 
             $('#{{$id}}').html(amount_in_words)
         });
