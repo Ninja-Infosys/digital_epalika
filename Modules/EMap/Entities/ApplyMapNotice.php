@@ -41,7 +41,7 @@ class ApplyMapNotice extends Model
     public function setFileAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
-            $this->attributes['file'] = $value->store('applyMapApplication', 'public');
+            $this->attributes['file'] = $value->store('applyMapNotice', 'public');
         }
     }
 
