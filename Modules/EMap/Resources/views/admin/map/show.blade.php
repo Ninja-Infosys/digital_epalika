@@ -215,6 +215,29 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">सूचनाहरु</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="#">संघियारको नाममा जारी भएको सूचना</a>
+                    <a href="#">१५ दिने सूचना टाँस सम्बन्धमा</a>
+                    <a href="#">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
+                    <a href="#">सरजमिन मुचुल्का</a>
+                    <a href="#">प्राविधिक प्रतिवेदन</a>
+                    <a href="#">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
+                    <a href="#">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
+                    <a href="#">टिप्पणी र आदेश</a>
+                    <a href="#">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
         <script>
             $('.show_reject_confirm').click(function (event) {
