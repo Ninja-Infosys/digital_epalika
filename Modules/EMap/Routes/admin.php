@@ -64,3 +64,4 @@ Route::view('parmana', 'emap::admin.certificate.parmana');
 Route::view('namsari', 'emap::admin.certificate.namsari');
 Route::view('detail', 'emap::admin.certificate.detail');
 Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
+Route::view('manjuri', 'emap::admin.certificate.manjuri');
