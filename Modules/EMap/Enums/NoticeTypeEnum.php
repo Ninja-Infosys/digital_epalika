@@ -13,6 +13,7 @@ enum NoticeTypeEnum: string
     case AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR = 'agreement letter (homeowner and builder/contractor)';
     case COMMENTS_AND_ORDERS = 'comments and orders';
     case PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL = 'permission letter for construction work up to plinth level';
+    case REGARDING_FEES_AND_REGISTRATION = 'regarding fees and registration';
 
     public function label(): string
     {
@@ -31,6 +32,7 @@ enum NoticeTypeEnum: string
             self::AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR => 'सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)',
             self::COMMENTS_AND_ORDERS => 'टिप्पणी र आदेश',
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
+            self::REGARDING_FEES_AND_REGISTRATION => 'दस्तुर तथा दर्ता सम्बन्धि',
         };
     }
 }

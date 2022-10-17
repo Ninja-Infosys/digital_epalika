@@ -17,7 +17,7 @@ Route::resource('map/mapApply/{mapApply}/map-registration', MapRegistrationContr
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
-        Route::get('/officeLetter', 'officeLetter')->name('office-letter');
+        Route::get('officeLetter', 'officeLetter')->name('office-letter');
         Route::get('noticeLetter', 'noticeLetter')->name('notice-letter');
         Route::get('mapArreras', 'mapArreras')->name('map-arreras');
         Route::get('landArreras', 'landArreras')->name('land-arreras');

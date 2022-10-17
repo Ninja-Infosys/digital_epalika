@@ -14,10 +14,14 @@
                             class="fa fa-plus"></i> नक्सा दर्ता
                         गर्नुहोस</a>
                 @endif
+                    <x-application-component
+                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_FEES_AND_REGISTRATION"
+                        url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
                 <button class="btn btn-sm btn-success mx-2 printButton" printElementId='printData1'
                         requestRoute="{{route('print.application-print')}}" title="Print Application">
                     <i class="fa fa-print"></i>
                 </button>
+
             </div>
         </div>
     </div>
@@ -99,7 +103,8 @@
                 </table>
                 <p>अक्षरेपी
                     <x-number-into-unicode :is_currency="true" :number="$mapApply->mapRegistration->total_amount ?? ''"
-                                           id="in_amount" class="underline-dotted"/> मात्र
+                                           id="in_amount" class="underline-dotted"/>
+                    मात्र
                 </p>
                 <p>फाटवालाको सही: <span class="underline-dotted custom-width"></span></p>
                 <p>मिति:<span class="underline-dotted">{{$mapApply->mapRegistration->nepali_date ?? ''}}</span>
