@@ -1,55 +1,53 @@
-<div id="progressbarwizard" class="overflow-hidden p-2">
+<div class="overflow-hidden p-2">
     <ul class="nav nav-pills nav-justified form-wizard-header mb-1">
-        <li class="nav-item" data-bs-target="#accountForm">
-            <a href="#first" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+        <li class="nav-item">
+            <a class="nav-link active rounded-0 pt-2 pb-2">
                 <i class="fa fa-user-circle me-1"></i>
                 <span class="d-none d-sm-inline">व्यक्तिगत विवरण</span>
             </a>
         </li>
-        <li class="nav-item" data-bs-target="#profileForm">
-            <a href="#second" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+        <li class="nav-item">
+            <a class="nav-link rounded-0 pt-2 pb-2">
                 <i class="fa fa-check-circle me-1"></i>
                 <span class="d-none d-sm-inline">प्रमाणीकरण</span>
             </a>
         </li>
-        <li class="nav-item" data-bs-target="#otherForm">
-            <a href="#third" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+        <li class="nav-item">
+            <a class="nav-link rounded-0 pt-2 pb-2">
                 <i class="fa fa-map-marker me-1"></i>
                 <span class="d-none d-sm-inline">ठेगाना</span>
             </a>
         </li>
-        <li class="nav-item" data-bs-target="#orgDetail">
-            <a href="#fourth" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+        <li class="nav-item">
+            <a class="nav-link rounded-0 pt-2 pb-2">
                 <i class="fa fa-building me-1"></i>
                 <span class="d-none d-sm-inline">संगठन विवरण</span>
             </a>
         </li>
-        <li class="nav-item" data-bs-target="#docs">
-            <a href="#fifth" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+        <li class="nav-item">
+            <a class="nav-link rounded-0 pt-2 pb-2">
                 <i class="fa fa-file-alt me-1"></i>
                 <span class="d-none d-sm-inline">कागजातहरू</span>
             </a>
         </li>
-        <li class="nav-item" data-bs-target="#auth">
-            <a href="#sixth" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+        <li class="nav-item">
+            <a class="nav-link rounded-0 pt-2 pb-2">
                 <i class="fa fa-lock me-1"></i>
                 <span class="d-none d-sm-inline">प्रयोगकर्ता</span>
             </a>
         </li>
-        <li class="nav-item" data-bs-target="#detail">
-            <a href="#seventh" data-bs-toggle="tab" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
+        <li class="nav-item">
+            <a class="nav-link rounded-0 pt-2 pb-2">
                 <i class="fa fa-clipboard-list me-1"></i>
                 <span class="d-none d-sm-inline">पूर्ण विवरण</span>
             </a>
         </li>
     </ul>
     <form>
-        <div class="tab-content mb-0 b-0 pt-0">
             <div id="bar" class="progress mb-3" style="height: 7px;">
                 <div class="bar progress-bar progress-bar-striped progress-bar-animated bg-success"></div>
             </div>
-            <div class="tab-pane" id="first">
-                <div id="accountForm" class="form-horizontal">
+                <div class="form-horizontal">
                     <div class="col-md-3 mb-2">
                         <label class="form-label">परामर्शदाता प्रकार <span class="text-danger">*</span></label>
                         <select class="form-select" aria-label="Default select example">
@@ -191,9 +189,7 @@
                         </div>
                     </fieldset>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="second">
-                <div id="profileForm" class="form-horizontal">
+                <div class="form-horizontal">
                     <div class="row">
                         <div class="col-md-4 mb-1">
                             <label for="userDetail.pan_no" class="form-label">पाना नं. <span
@@ -340,9 +336,7 @@
                         </div>
                     </fieldset>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="third">
-                <div id="otherForm" class="form-horizontal">
+                <div class="form-horizontal">
                     <div class="address">
                         <fieldset>
                             <legend class="title">स्थाहि ठेगाना</legend>
@@ -514,9 +508,7 @@
                         </fieldset>
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="fourth">
-                <div id="orgDetail" class="form-horizontal">
+                <div class="form-horizontal">
                         <fieldset>
                             <legend class="title">संगठन विवरण</legend>
                             <div class="row">
@@ -690,9 +682,7 @@
                             </div>
                         </fieldset>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="fifth">
-                <div id="docs" class="form-horizontal">
+                <div class="form-horizontal">
                     <div class="company-document">
                         <div class="row">
                             <div class="col-md-3 mb-1">
@@ -791,9 +781,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="sixth">
-                <div id="auth" class="form-horizontal">
+                <div class="form-horizontal">
                     <div class="alert alert-info" role="alert">
                         निम्न प्रयोगकर्ताको इमेल, सम्पर्क नम्बर, र प्रयोगकर्ताको नाम, प्रणालीमा लग-इन गर्न प्रयोग हुनेछ !!!
                     </div>
@@ -852,12 +840,9 @@
                         </div>
                 </div>
             </div>
-            </div>
-            <div class="tab-pane fade" id="seventh">
-                <div id="detail" class="form-horizontal">
+                <div class="form-horizontal">
                     fsadgf gasdjf gasdh
                 </div>
-            </div>
                 <ul class="list-inline wizard mb-0">
                     <li class="previous list-inline-item">
                         <a href="javascript: void(0);" class="btn btn-info">
@@ -868,6 +853,5 @@
                             <i class="fa fa-arrow-circle-right"></i> अर्को</a>
                     </li>
                 </ul>
-            </div>
     </form>
 </div>
