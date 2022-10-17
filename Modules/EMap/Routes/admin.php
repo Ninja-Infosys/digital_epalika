@@ -26,11 +26,13 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('agentAgreement', 'agentAgreement')->name('agent-agreement');
         Route::get('permissionLetter', 'permissionLetter')->name('permission-letter');
         Route::get('level', 'level')->name('level');
+        Route::post('applyMapNotice','applyMapNotice')->name('apply-map-notice');
     });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
     Route::get('mapApply', 'index')->name('mapApply.index');
 });
+
 
 Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');

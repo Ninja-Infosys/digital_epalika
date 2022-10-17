@@ -4,6 +4,8 @@
         <div class="card-header p-3">
             <div class="main-title d-flex justify-content-between">
                 <div class="d-flex justify-content-between">
+                    <x-application-component :application-type="App\Enums\ApplicationTypeEnum::ENGINEER_APPROVAL" url="{{route('',$mapApply)}}"></x-application-component>
+
                     <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                             requestRoute="{{route('print.office-letter-print')}}">
                         <i class="fa fa-print"></i> Print
