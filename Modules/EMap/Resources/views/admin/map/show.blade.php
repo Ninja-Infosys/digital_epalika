@@ -215,6 +215,29 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">सूचनाहरु</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">संघियारको नाममा जारी भएको सूचना</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">१५ दिने सूचना टाँस सम्बन्धमा</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.map-arreras',$mapApply)}}" class="btn btn-sm btn-outline-primary">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.land-arreras',$mapApply)}}" class="btn btn-sm btn-outline-primary">सरजमिन मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्राविधिक प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">टिप्पणी र आदेश</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
         <script>
             $('.show_reject_confirm').click(function (event) {

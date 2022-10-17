@@ -96,10 +96,10 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$dispatch->dispatch_no}}</td>
                                     <td>
-                                        {{$dispatch->dispatch_date ? $dispatch->dispatch_date->toDateString() : ''}}
+                                        {{$dispatch->dispatch_date}}
                                     </td>
                                     <td>{{$dispatch->letter_number}}</td>
-                                    <td>{{$dispatch->letter_date ? $dispatch->letter_date->toDateString() : ''}}</td>
+                                    <td>{{$dispatch->letter_date}}</td>
                                     <td>{{$dispatch->receiver_name}}</td>
                                     <td>{{$dispatch->subject}}</td>
                                     <td>{{$dispatch->receiver_contact}}</td>

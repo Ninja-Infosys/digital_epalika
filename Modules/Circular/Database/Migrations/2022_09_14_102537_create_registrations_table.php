@@ -9,8 +9,10 @@ return new class extends Migration {
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
             $table->string('registration_no');
             $table->string('registration_date')->nullable();
+            $table->date('en_registration_date')->nullable();
             $table->string('letter_number')->nullable();
             $table->string('letter_date')->nullable();
             $table->string('sender_name')->nullable();

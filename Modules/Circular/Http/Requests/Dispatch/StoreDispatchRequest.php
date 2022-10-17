@@ -18,7 +18,7 @@ class StoreDispatchRequest extends FormRequest
         return [
             'dispatch_no' => ['required', Rule::unique('dispatches', 'dispatch_no')->withoutTrashed()],
             'dispatch_date' => ['required'],
-            'en_dispatch_date' => ['required', 'date'],
+            'en_dispatch_date' => ['nullable', 'date'],
             'letter_number' => ['required'],
             'letter_date' => ['required'],
             'subject' => ['required', 'max:255'],

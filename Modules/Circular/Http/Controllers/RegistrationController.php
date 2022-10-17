@@ -3,6 +3,7 @@
 namespace Modules\Circular\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -43,7 +44,9 @@ class RegistrationController extends Controller
         );
 
         DB::transaction(function () use ($request) {
-            $registration = Registration::create($request->validated());
+            $registration = Registration::create($request->validated() + [
+                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
+                ]);
 
             $this->uploadDocuments($request, $registration);
         });
@@ -59,7 +62,7 @@ class RegistrationController extends Controller
             403,
             'You are not allowed to registration access'
         );
-        $registration->load('files');
+        $registration->load('fiscalYear', 'files');
 
         return view('circular::admin/registration.show', compact('registration'));
     }

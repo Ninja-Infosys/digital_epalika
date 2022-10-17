@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\File;
+use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,17 +21,17 @@ class Registration extends Model
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
-        'registration_date',
-        'letter_date',
-        'date',
+        'en_registration_date',
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
     protected $fillable = [
+        'fiscal_year_id',
         'registration_no',
         'registration_date',
+        'en_registration_date',
         'letter_number',
         'letter_date',
         'sender_name',
@@ -52,6 +53,11 @@ class Registration extends Model
         if (!empty($value) && !is_string($value)) {
             $this->attributes['signature_image'] = $value->store('registration/' . Str::slug($this->attributes['receiver_name'], '_') . '/signature', 'public');
         }
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 
     public function files(): MorphMany

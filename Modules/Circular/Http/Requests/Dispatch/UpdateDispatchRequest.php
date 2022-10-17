@@ -18,6 +18,7 @@ class UpdateDispatchRequest extends FormRequest
         return [
             'dispatch_no' => ['required', Rule::unique('dispatches', 'dispatch_no')->withoutTrashed()->ignore($this->dispatch)],
             'dispatch_date' => ['required'],
+            'en_dispatch_date' => ['nullable', 'date'],
             'letter_number' => ['required'],
             'letter_date' => ['required'],
             'subject' => ['required', 'max:255'],
@@ -33,7 +34,7 @@ class UpdateDispatchRequest extends FormRequest
 
     public function messages()
     {
-        return[
+        return [
             'dispatch_no.required' => 'चलानी न. अनिबार्य छ',
             'dispatch_no.unique' => 'चलानी न. पहिले नै लिइएको छ।',
             'dispatch_date.required' => 'चलानी मिति अनिबार्य छ ',

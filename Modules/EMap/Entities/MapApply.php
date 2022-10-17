@@ -141,6 +141,11 @@ class MapApply extends Model
         return $this->hasMany(ApplyMapApplication::class);
     }
 
+    public function applyMapNotices(): HasMany
+    {
+        return $this->hasMany(ApplyMapNotice::class);
+    }
+
     public function mapRegistration(): HasOne
     {
         return $this->hasOne(MapRegistration::class);

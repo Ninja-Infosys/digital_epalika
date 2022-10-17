@@ -16,25 +16,39 @@ Route::resource('organization', OrganizationController::class);
 Route::resource('map/mapApply/{mapApply}/map-registration', MapRegistrationController::class)->names('map.map-apply.map-registration');
 
 Route::controller(MapController::class)->prefix('map')->as('map.')->group(function () {
-    Route::get('mapApply', 'index')->name('mapApply.index');
+    Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
+        Route::get('officeLetter', 'officeLetter')->name('office-letter');
+        Route::get('noticeLetter', 'noticeLetter')->name('notice-letter');
+        Route::get('mapArreras', 'mapArreras')->name('map-arreras');
+        Route::get('landArreras', 'landArreras')->name('land-arreras');
+        Route::get('technicianNotice', 'technicianNotice')->name('technician-notice');
+        Route::get('chAgreement', 'chAgreement')->name('ch-agreement');
+        Route::get('agentAgreement', 'agentAgreement')->name('agent-agreement');
+        Route::get('permissionLetter', 'permissionLetter')->name('permission-letter');
+        Route::get('level', 'level')->name('level');
+        Route::post('applyMapNotice','applyMapNotice')->name('apply-map-notice');
+    });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
+    Route::get('mapApply', 'index')->name('mapApply.index');
 });
+
+
 Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
 });
 
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
-Route::view('officeletter', 'emap::admin.offical_letter.officeletter');
-Route::view('noticeletter', 'emap::admin.noticeletter.noticeletter');
-Route::view('maparreras', 'emap::admin.noticeletter.maparreras');
-Route::view('landarreras', 'emap::admin.noticeletter.landarreras');
-Route::view('techniciannotice', 'emap::admin.noticeletter.techniciannotice');
-Route::view('chaggrement', 'emap::admin.noticeletter.chaggrement');
-Route::view('agentaggrement', 'emap::admin.noticeletter.agentaggrement');
-Route::view('permissionletter', 'emap::admin.noticeletter.permissionletter');
-Route::view('level', 'emap::admin.noticeletter.level');
+//Route::view('officeletter', 'emap::admin.offical_letter.officeletter');
+//Route::view('noticeletter', 'emap::admin.noticeletter.noticeletter');
+//Route::view('maparreras', 'emap::admin.noticeletter.maparreras');
+//Route::view('landarreras', 'emap::admin.noticeletter.landarreras');
+//Route::view('techniciannotice', 'emap::admin.noticeletter.techniciannotice');
+//Route::view('chaggrement', 'emap::admin.noticeletter.chaggrement');
+//Route::view('agentaggrement', 'emap::admin.noticeletter.agentaggrement');
+//Route::view('permissionletter', 'emap::admin.noticeletter.permissionletter');
+//Route::view('level', 'emap::admin.noticeletter.level');
 Route::view('firstphase', 'emap::admin.noticeletter.firstphase');
 Route::view('firstphases', 'emap::admin.noticeletter.firstphases');
 Route::view('super', 'emap::admin.noticeletter.super');
@@ -47,3 +61,7 @@ Route::view('second', 'emap::admin.tipani.second');
 Route::view('secondphase', 'emap::admin.tipani.secondphase');
 Route::view('certificate', 'emap::admin.tipani.certificate');
 Route::view('parmana', 'emap::admin.certificate.parmana');
+Route::view('namsari', 'emap::admin.certificate.namsari');
+Route::view('detail', 'emap::admin.certificate.detail');
+Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
+Route::view('manjuri', 'emap::admin.certificate.manjuri');
