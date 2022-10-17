@@ -71,7 +71,7 @@ class MapController extends Controller
         return view('emap::admin.noticeletter.techniciannotice',compact('mapApply'));
     }
 
-    public function chAggrement(MapApply $mapApply)
+    public function chAgreement(MapApply $mapApply)
     {
         return view('emap::admin.noticeletter.chaggrement',compact('mapApply'));
     }
