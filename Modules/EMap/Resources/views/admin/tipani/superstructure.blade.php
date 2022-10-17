@@ -18,6 +18,17 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
+                                <div class="d-flex justify-content-end mb-4">
+                                    <div class="row ">
+                                        <div class="col-sm-6">
+                                            <div class="card" style="width: 7rem; height: 8rem;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-center my-4">फोटो</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="top-line d-flex justify-content-between mt-2">
                                     <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
                                     <p class="">मिति: <span class="underline-dotted custom-width"> </span></p>
