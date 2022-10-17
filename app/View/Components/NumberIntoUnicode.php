@@ -15,7 +15,7 @@ class NumberIntoUnicode extends Component
      *
      * @return void
      */
-    public function __construct(public string $id, public string $number,public string $class="", public bool $is_currency = true)
+    public function __construct(public string $id, public string $number,public string $class="", public bool $isCurrency = true)
     {
         //
     }
