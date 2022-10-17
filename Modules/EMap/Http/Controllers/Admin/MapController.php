@@ -4,7 +4,11 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\ApplyMapNoticeNotification;
+use App\Notifications\MapApplicationNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapApplication;
 use Modules\EMap\Entities\MapApply;
 
@@ -95,6 +99,14 @@ class MapController extends Controller
 
     public function applyMapNotice(Request $request,MapApply $mapApply)
     {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data);
 
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
     }
 }
