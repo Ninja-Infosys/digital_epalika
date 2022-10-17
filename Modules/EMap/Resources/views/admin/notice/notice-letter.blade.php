@@ -2,16 +2,31 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
+            <div>
+                @error('file')
+                <div class="alert alert-danger">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+            <div class="card mb_30">
+                <div class="card-header p-3">
+                    <div class="main-title d-flex justify-content-between">
+                        <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::FIFTEEN_DAYS_NOTICE_ADJOURNED->label()}}</h3>
                         <div class="d-flex justify-content-between">
+                            <x-application-component
+                                :application-type="\Modules\EMap\Enums\NoticeTypeEnum::FIFTEEN_DAYS_NOTICE_ADJOURNED"
+                                url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
+
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                                     requestRoute="{{route('print.office-letter-print')}}">
                                 <i class="fa fa-print"></i> Print
                             </button>
+
                         </div>
                     </div>
                 </div>
+            </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
                         <div class="card mb_30">

@@ -60,8 +60,9 @@
                             </div>
                             <div class="col-md-8 text-center">
                                 <h4>{{$setting->localBody->local_body??''}}</h4>
-                                <h5>वार्ड न  {{$setting->ward_no}} को कार्यालय (वडाबाट चलेको अवस्थामा)</h5>
-                                <h5> {{$setting->name}} (कार्यालय रहेको स्थान {{$setting->district->district??''}} (जिल्ला)</h5>
+                                <h5>वार्ड न {{$setting->ward_no}} को कार्यालय (वडाबाट चलेको अवस्थामा)</h5>
+                                <h5> {{$setting->name}} (कार्यालय रहेको स्थान {{$setting->district->district??''}}
+                                    (जिल्ला)</h5>
                                 <h5>{{$setting->province->province??''}},नेपाल</h5>
                             </div>
                             <div class="col-md-2">
@@ -98,17 +99,17 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$registration->registration_no}}</td>
                                     <td>
-                                        {{$registration->registration_date ? $registration->registration_date->toDateString() : ''}}
+                                        {{$registration->registration_date}}
                                     </td>
                                     <td>{{$registration->letter_number}}</td>
-                                    <td>{{$registration->letter_date ? $registration->letter_date->toDateString() : ''}}</td>
+                                    <td>{{$registration->letter_date}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->subject}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>
                                         <img height="50" width="85" src="{{$registration->signature_image_url}}" alt="">
                                     </td>
-                                    <td>{{$registration->date ? $registration->date->toDateString() : ''}}</td>
+                                    <td>{{$registration->date}}</td>
                                     <td>{{$registration->remarks}}</td>
                                 </tr>
                             @endforeach

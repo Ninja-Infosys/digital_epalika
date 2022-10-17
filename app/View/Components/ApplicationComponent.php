@@ -12,7 +12,7 @@ class ApplicationComponent extends Component
      *
      * @return void
      */
-    public function __construct(public ApplicationTypeEnum $applicationType, public $url)
+    public function __construct(public $applicationType, public $url)
     {
     }
 

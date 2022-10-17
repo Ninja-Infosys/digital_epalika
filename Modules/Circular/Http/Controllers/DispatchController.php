@@ -2,6 +2,7 @@
 
 namespace Modules\Circular\Http\Controllers;
 
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,7 +46,9 @@ class DispatchController extends Controller
         );
 
         DB::transaction(function () use ($request) {
-            $dispatch = Dispatch::create($request->validated());
+            $dispatch = Dispatch::create($request->validated() + [
+                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
+                ]);
 
             $this->uploadDocuments($request, $dispatch);
         });
@@ -60,7 +63,7 @@ class DispatchController extends Controller
             403,
             'You are not allowed to dispatch access'
         );
-        $dispatch->load('files');
+        $dispatch->load('fiscalYear', 'files');
 
         return view('circular::admin/dispatch.show', compact('dispatch'));
     }
@@ -123,13 +126,14 @@ class DispatchController extends Controller
     {
         return view('circular::admin/dispatch.report');
     }
+
     private function uploadDocuments($request, $dispatch)
     {
         foreach ($request->validated()['documents'] as $document) {
             $dispatch->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('registration/' . Str::slug($dispatch->receiver_name, '_') . '/documents', 'public')
+                'file' => $document->store('dispatch/' . Str::slug($dispatch->receiver_name, '_') . '/documents', 'public')
             ]);
         }
     }

@@ -17,16 +17,17 @@ class DateInputComponent extends Component
 
 
     public function __construct(
-        public string $name_ne = 'date_ne',
-        public string  $label_ne = "मिति",
-        public string  $name_en = "date_en",
-        public string  $label_en = "Date",
-        public mixed  $edit_date_ne = null,
-        public mixed  $edit_date_en = null,
-        public bool   $show_english_date = false,
-        public bool   $get_today_date = true,
+        public string  $nameNe = 'date_ne',
+        public string  $labelNe = "मिति",
+        public string  $nameEn = "date_en",
+        public string  $labelEn = "Date",
+        public bool    $showEnglishDate = false,
+        public bool    $getTodayDate = true,
+        public string  $editDateNe = '',
+        public ?string $editDateEn = null,
     )
     {
+
     }
 
     /**

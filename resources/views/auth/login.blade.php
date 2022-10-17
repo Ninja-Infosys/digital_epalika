@@ -45,7 +45,7 @@ overflow: hidden">
                             <div class="logo">
                                 <img src="{{asset('images/np.png')}}" height="80" alt="Logo">
                             </div>
-                            <div class="m-2 ">
+                            <div class="m-2">
                                 <h3 class="text-white">{{$officeSetting->localBody->local_body??''}}</h3>
                                 <h4 class="text-white pt-2">डिजिटल ई-पालिका</h4>
                             </div>

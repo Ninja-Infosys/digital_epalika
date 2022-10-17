@@ -18,6 +18,7 @@ class StoreRegistrationRequest extends FormRequest
         return [
             'registration_no' => ['required', Rule::unique('registrations', 'registration_no')->withoutTrashed()],
             'registration_date' => ['required'],
+            'en_registration_date' => ['nullable', 'date'],
             'letter_number' => ['nullable'],
             'letter_date' => ['required'],
             'sender_name' => ['required'],
@@ -35,16 +36,16 @@ class StoreRegistrationRequest extends FormRequest
     public function messages()
     {
         return [
-            'registration_no.required'=>'दर्ता नं अनिबार्य छ।',
-            'registration_no.unique'=>'दर्ता नं पहिले नै लिइएको छ।',
-            'registration_date.required'=>'दर्ता मिति अनिबार्य छ।',
-            'letter_date.required'=>'पत्र मिति अनिबार्य छ।',
-            'sender_name.required'=>'पठाउने कार्यालयको नाम अनिबार्य छ।',
-            'subject.required'=>'बिषय अनिबार्य छ।',
-            'receiver_name.required'=>'बुझिलिनेको नाम अनिबार्य छ।',
-            'circularDocuments.required'=>'कागजात अनिबार्य छ।',
-            'signature_image.image'=>'हस्ताक्षर फोटो फर्ममा छ।',
-            'documents.mimes'=>'फाइल अनिबार्य jpg, png, jpeg, pdf मा हुनुपर्छ।'
+            'registration_no.required' => 'दर्ता नं अनिबार्य छ।',
+            'registration_no.unique' => 'दर्ता नं पहिले नै लिइएको छ।',
+            'registration_date.required' => 'दर्ता मिति अनिबार्य छ।',
+            'letter_date.required' => 'पत्र मिति अनिबार्य छ।',
+            'sender_name.required' => 'पठाउने कार्यालयको नाम अनिबार्य छ।',
+            'subject.required' => 'बिषय अनिबार्य छ।',
+            'receiver_name.required' => 'बुझिलिनेको नाम अनिबार्य छ।',
+            'circularDocuments.required' => 'कागजात अनिबार्य छ।',
+            'signature_image.image' => 'हस्ताक्षर फोटो फर्ममा छ।',
+            'documents.mimes' => 'फाइल अनिबार्य jpg, png, jpeg, pdf मा हुनुपर्छ।'
         ];
     }
 }

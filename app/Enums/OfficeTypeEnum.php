@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\EMap\Enums;
+namespace App\Enums;
 
 enum OfficeTypeEnum: string
 {

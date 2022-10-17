@@ -1350,7 +1350,6 @@ label {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-size: 1.06rem;
 }
 
 label.form-check-label {
@@ -4431,6 +4430,7 @@ body[data-layout-mode=two-column][data-layout-width=boxed]:not([data-leftbar-siz
 .auth-page {
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
 }
 
 .auth-page .login-btn {
@@ -9357,4 +9357,7 @@ table[data-toggle=table] {
     100% {
         opacity: 1;
     }
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: var(--primary) !important;
 }

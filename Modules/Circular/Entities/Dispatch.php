@@ -18,6 +18,7 @@ class Dispatch extends Model
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
+        'en_dispatch_date',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -27,6 +28,7 @@ class Dispatch extends Model
         'fiscal_year_id',
         'dispatch_no',
         'dispatch_date',
+        'en_dispatch_date',
         'letter_number',
         'letter_date',
         'subject',

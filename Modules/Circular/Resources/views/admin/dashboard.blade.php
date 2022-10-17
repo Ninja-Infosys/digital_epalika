@@ -32,16 +32,16 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                        2
+                                        {{$total_registrations}}
                                     </span>
                                         </h3>
                                         <p class="text-muted mb-1">जम्मा दर्ता पत्रहरु</p>
                                     </div>
                                 </div>
-                            </div> <!-- end row-->
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                    </div>
+                </div>
 
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
@@ -55,7 +55,7 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                         3
+                                         {{$total_dispatches}}
                                     </span>
                                         </h3>
                                         <p class="text-muted mb-1">जम्मा चलानी पत्रहरु</p>
@@ -77,7 +77,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">4</span></h3>
+                                        <h3 class="mt-1"><span data-plugin="counterup">{{$yearly_registrations}}</span>
+                                        </h3>
                                         <p class="text-muted mb-1">वार्षिक दर्ता पत्रहरु</p>
                                     </div>
                                 </div>
@@ -98,7 +99,7 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                       6
+                                       {{$yearly_dispatches}}
                                     </span></h3>
                                         <p class="text-muted mb-1">वार्षिक चलानी पत्रहरु</p>
                                     </div>
@@ -119,8 +120,9 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                        7
-                                    </span></h3>
+                                        {{$monthly_registrations}}
+                                    </span>
+                                        </h3>
                                         <p class="text-muted mb-1">मासिक दर्ता पत्रहरु</p>
                                     </div>
                                 </div>
@@ -139,8 +141,9 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        9</span></h3>
+                                        <h3 class="mt-1">
+                                            <span data-plugin="counterup">{{$monthly_dispatches}}</span>
+                                        </h3>
                                         <p class="text-muted mb-1">मासिक चलानी पत्रहरु</p>
                                     </div>
                                 </div>
@@ -178,7 +181,8 @@
                         <div class="card-body">
                             <h4 class="header-title">Pie Chart</h4>
                             <div class="mt-4 chartjs-chart">
-                                <canvas id="pie-chart-example" height="350" class="mt-4" data-colors="#6658dd,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
+                                <canvas id="pie-chart-example" height="350" class="mt-4"
+                                        data-colors="#6658dd,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
                             </div>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
@@ -188,7 +192,8 @@
                         <div class="card-body">
                             <h4 class="header-title">Donut Chart</h4>
                             <div class="mt-4 chartjs-chart">
-                                <canvas id="donut-chart-example" height="350" data-colors="#6c757d,#1abc9c,#ebeff2"></canvas>
+                                <canvas id="donut-chart-example" height="350"
+                                        data-colors="#6c757d,#1abc9c,#ebeff2"></canvas>
                             </div>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
@@ -201,7 +206,8 @@
                             <h4 class="header-title">Polar area Chart</h4>
 
                             <div class="mt-4 chartjs-chart">
-                                <canvas id="polar-chart-example" height="350" data-colors="#4a81d4,#fa5c7c,#4fc6e1,#ebeff2"> </canvas>
+                                <canvas id="polar-chart-example" height="350"
+                                        data-colors="#4a81d4,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
                             </div>
 
                         </div> <!-- end card-body-->

@@ -58,9 +58,8 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <x-date-input-component
-                                        name_ne="dispatch_date"
-                                        label_ne="चलानी मिति *"
-                                        name_ne="en_dispatch_date"
+                                        nameNe="dispatch_date" labelNe="चलानी मिति *"
+                                        nameEn="en_dispatch_date" labelEn="Dispatch Date"
                                     />
                                 </div>
                                 <div class="col-md-6 mb-2">

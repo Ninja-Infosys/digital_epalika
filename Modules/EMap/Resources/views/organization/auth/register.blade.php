@@ -20,8 +20,6 @@
         type="text/css"
 
     />
-{{--    <link rel="stylesheet" href="{{asset('assets/frontend/css/register/reg.css')}}">--}}
-
     <!-- App css -->
     <link
         href="{{asset('assets/backend/css/app.min.css')}}"
@@ -38,63 +36,33 @@
 <body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
 height: 100vh;
 overflow: hidden">
-<div class="pt-5">
     <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-4 system_info">
-                            <div class="logo">
-                                <img src="{{asset('images/np.png')}}" height="100" alt="Logo">
-                            </div>
-                            <div class="title">
-                                <x-header-component/>
-                                <p>
-                                    डिजिटल पालिका ब्यबस्थापन प्रणालि
-                                    <br>
-                                    (Digital Palika Management System)
-                                </p>
-                            </div>
-                            <div class="row technical-support">
-                                <p>
-                                    <b>प्राविधिक सहायता कक्ष:</b>
-                                    <br>
-                                    सम्पर्क नम्बर: 081-520361/9858042433
-                                    <br>
-                                    इमेल: ninjainfosys@gmail.com
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h2 class="text-center">Register</h2>
+                <div class="card rounded mt-2">
+                                    <div class="col-md-12 system_info p-1">
+                                        <div class="logo">
+                                            <img src="{{asset('images/np.png')}}" height="60" alt="Logo">
+                                        </div>
+                                        <div class="title">
+                                            <div class="m-2">
+                                                <h4 class="text-white">डिजिटल ई-पालिका</h4>
+                                                <h5 class="text-white pt-1">ई-नक्सा पास</h5>
+                                                <h5 class="text-center text-decoration-underline
+                                                mt-1 text-white">ई-नक्सा पास सेवा प्रदान गर्नको लागि तलको फारम भरि सुचिकृतको लागि पठाउनुहोस् ।</h5>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <livewire:emap::organization-register-livewire/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
     </div>
-</div>
-
-<footer class="footer footer-alt">
-    {{date('Y')}} -
-    <script>
-        document.write(new Date().getFullYear());
-    </script>
-    &copy; Design & Developed By <a href="#" class="text-white-50">Ninja Infosys</a>
-</footer>
-
 <!-- Vendor js -->
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
 
 <!-- App js -->
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
+<script src="{{asset('assets/backend/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
 
+<!-- Init js-->
+<script src="{{asset('assets/backend/js/pages/form-wizard.init.js')}}"></script>
 <script src="{{asset('assets/frontend/js/sweetalert2.min.js')}}"></script>
 
 @livewireScripts

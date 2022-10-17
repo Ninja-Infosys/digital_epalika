@@ -41,7 +41,7 @@ class OrganizationRegisterLivewire extends Component
 
     public function mount()
     {
-        $this->districts = DB::table('districts')->selectRaw('id,district,province_id')->orderBy('province_id')->get();
+        $this->districts = DB::table('districts')->select('id','district','province_id')->orderBy('province_id')->get();
         $this->provinces = DB::table('provinces')->selectRaw('id,province')->get();
     }
 
