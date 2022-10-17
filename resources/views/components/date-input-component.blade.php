@@ -1,23 +1,23 @@
 <div class="row">
-    <div class="col-md-{{$show_english_date?'6':'12'}}">
-        <label for="{{$name_ne}}">{{$label_ne}}</label>
-        <input type="text" name="{{$name_ne}}" class="form-control @error($name_ne) is-invalid @enderror"
-               id="{{$name_ne}}" value="{{old($name_ne, ($edit_date_ne ?? ''))}}">
-        @error($name_ne)
+    <div class="col-md-{{$showEnglishDate?'6':'12'}}">
+        <label for="{{$nameNe}}">{{$labelNe}}</label>
+        <input type="text" name="{{$nameNe}}" class="form-control @error($nameNe) is-invalid @enderror"
+               id="{{$nameNe}}" value="{{old($nameNe, ($edit_date_ne ?? ''))}}">
+        @error($nameNe)
         <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
     <div @class([
-        'col-md-6'=>$show_english_date,
-        'd-none'=>!$show_english_date,
+        'col-md-6'=>$showEnglishDate,
+        'd-none'=>!$showEnglishDate,
 ])>
 
-        <label for="{{$name_en}}">{{$label_en}}</label>
+        <label for="{{$labelEn}}">{{$nameEn}}</label>
 
-        <input type="date" name="{{$name_en}}"
-               class="form-control @error($name_en) is-invalid @enderror"
-               id="{{$name_en}}" value="{{old($name_en, ($edit_date_en ?? ''))}}">
-        @error($name_en)
+        <input type="date" name="{{$labelEn}}"
+               class="form-control @error($labelEn) is-invalid @enderror"
+               id="{{$labelEn}}" value="{{old($labelEn, ($edit_date_en ?? ''))}}">
+        @error($labelEn)
         <span class="text-danger">{{$message}}</span>
         @enderror
     </div>
@@ -29,29 +29,29 @@
     @push('scripts')
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#{{$name_ne}}").nepaliDatePicker({
+                $("#{{$nameNe}}").nepaliDatePicker({
                     ndpYear: true,
                     ndpMonth: true,
                     onChange: function () {
-                        let parsedDate = NepaliFunctions.ParseDate($("#{{$name_ne}}").val());
+                        let parsedDate = NepaliFunctions.ParseDate($("#{{$nameNe}}").val());
                         let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
                         let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
-                        $("#{{$name_en}}").val(formattedDate)
+                        $("#{{$labelEn}}").val(formattedDate)
                     }
                 });
 
-                $("#{{$name_en}}").change(function () {
-                    let parsedDate = NepaliFunctions.ParseDate($("#{{$name_en}}").val());
+                $("#{{$labelEn}}").change(function () {
+                    let parsedDate = NepaliFunctions.ParseDate($("#{{$labelEn}}").val());
                     let nepaliDate = NepaliFunctions.AD2BS(parsedDate.parsedDate)
                     let formattedDate = NepaliFunctions.ConvertDateFormat(nepaliDate, "YYYY-MM-DD")
-                    $("#{{$name_ne}}").val(formattedDate)
+                    $("#{{$nameNe}}").val(formattedDate)
                 })
 
-                @if($get_today_date)
+                @if($getTodayDate)
                 let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-                $('#{{$name_ne}}').val(todayBsDate)
+                $('#{{$nameNe}}').val(todayBsDate)
                 let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
-                $('#{{$name_en}}').val(todayAdDate)
+                $('#{{$labelEn}}').val(todayAdDate)
                 @endif
             });
         </script>
