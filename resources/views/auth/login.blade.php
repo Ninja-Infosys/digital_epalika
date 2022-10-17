@@ -89,7 +89,6 @@ overflow: hidden">
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
-
                                     <div class="mb-1">
                                         {!! htmlFormSnippet() !!}
                                         @error('g-recaptcha-response')

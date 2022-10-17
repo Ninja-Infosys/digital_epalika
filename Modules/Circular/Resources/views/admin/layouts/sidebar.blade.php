@@ -50,4 +50,30 @@
         </ul>
     </div>
 </li>
+<li class="{{request()->is('admin/circular/files/*') ? 'active' : ''}}">
+    <a href="#sidebarCircularFile"
+       {{request()->is('admin/circular/files/*') ? 'aria-expanded=true  ' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-file-archive"></i>
+        <span>फाईल व्यवस्थापन</span>
+        <span class="menu-arrow">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+    </a>
+    <div class="collapse {{request()->is('admin/circular/files/*') ? 'show' : ''}}"
+         id="sidebarCircularFile">
+        <ul class="nav-second-level">
+                <li class="{{request()->is('admin/circular/files/registration-file') ? 'active' : ''}}">
+                    <a href="{{route('admin.circular.files.registration-file')}}">
+                        <span> दर्ता फाईल</span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/circular/files/dispatch-file') ? 'active' : ''}}">
+                    <a href="{{route('admin.circular.files.dispatch-file')}}">
+                        <span> चलानी फाईल</span>
+                    </a>
+                </li>
+        </ul>
+    </div>
+</li>
 

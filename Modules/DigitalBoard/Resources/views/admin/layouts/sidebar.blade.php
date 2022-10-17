@@ -36,5 +36,31 @@
     </a>
 </li>
 @endcan
+<li class="{{request()->is('admin/digitalBoard/files/*') ? 'active' : ''}}">
+    <a href="#sidebarDigitalBoardFile"
+       {{request()->is('admin/digitalBoard/files/*') ? 'aria-expanded=true  ' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-file-archive"></i>
+        <span>फाईल व्यवस्थापन</span>
+        <span class="menu-arrow">
+            <i class="fa fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/digitalBoard/files/*') ? 'show' : ''}}"
+         id="sidebarDigitalBoardFile">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/digitalBoard/files/notice-file') ? 'active' : ''}}">
+                <a href="{{route('admin.digitalBoard.files.notice-file')}}">
+                    <span>सूचना फाईल</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/digitalBoard/files/news-file') ? 'active' : ''}}">
+                <a href="{{route('admin.digitalBoard.files.news-file')}}">
+                    <span> समाचार फाईल</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
 
 
