@@ -2,13 +2,13 @@
 
 namespace Modules\EMap\Entities;
 
-use App\Enums\ApplicationTypeEnum;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
+use Modules\EMap\Enums\NoticeTypeEnum;
 
 class ApplyMapNotice extends Model
 {
@@ -26,6 +26,10 @@ class ApplyMapNotice extends Model
         'file',
         'file_type',
         'rejected_at'
+    ];
+
+    protected $casts = [
+        'file_type' => NoticeTypeEnum::class,
     ];
 
     public function getApplicationTypeAttribute()
