@@ -56,51 +56,57 @@ class MapController extends Controller
 
     public function officeLetter(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.notice.office-letter',compact('mapApply'));
+        $mapApply->load('landDetail',
+            'houseOwner'
+        );
+        return view('emap::admin.notice.office-letter', compact('mapApply'));
     }
 
     public function noticeLetter(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.notice.notice-letter',compact('mapApply'));
+        $mapApply->load('landDetail',
+            'houseOwner'
+        );
+        return view('emap::admin.notice.notice-letter', compact('mapApply'));
     }
 
     public function mapArrears(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.notice.map-arrears',compact('mapApply'));
+        return view('emap::admin.notice.map-arrears', compact('mapApply'));
     }
 
     public function landArrears(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.notice.land-arrears',compact('mapApply'));
+        return view('emap::admin.notice.land-arrears', compact('mapApply'));
     }
 
     public function technicianNotice(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.notice.technician-notice',compact('mapApply'));
+        return view('emap::admin.notice.technician-notice', compact('mapApply'));
     }
 
     public function chAgreement(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.notice.ch-agreement',compact('mapApply'));
+        return view('emap::admin.notice.ch-agreement', compact('mapApply'));
     }
 
     public function agentAgreement(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.notice.agent-agreement',compact('mapApply'));
+        return view('emap::admin.notice.agent-agreement', compact('mapApply'));
     }
 
     public function permissionLetter(MapApply $mapApply): Factory|View|Application
     {
-        return view('emap::admin.notice.permission-letter',compact('mapApply'));
+        return view('emap::admin.notice.permission-letter', compact('mapApply'));
     }
 
     public function level(MapApply $mapApply)
     {
-        return view('emap::admin.notice.level',compact('mapApply'));
+        return view('emap::admin.notice.level', compact('mapApply'));
     }
 
 
-    public function applyMapNotice(Request $request,MapApply $mapApply)
+    public function applyMapNotice(Request $request, MapApply $mapApply)
     {
         $data = $request->validate([
             'file' => ['required', 'mimes:pdf'],

@@ -40,7 +40,7 @@
                         <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width">
 
                             </span></p>
-                        <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना |
+                        <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
                             </b></h3>
                         <p class="mb-3">
                             यस उप-महा नगरपालिका वडा नं. <span class="underline-dotted custom-width">
