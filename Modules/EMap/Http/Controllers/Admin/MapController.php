@@ -45,4 +45,49 @@ class MapController extends Controller
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');
         return redirect(route('emap.admin.map.mapApply.show', $mapApply));
     }
+
+    public function officeLetter(MapApply $mapApply)
+    {
+        return view('emap::admin.offical_letter.officeletter',compact('mapApply'));
+    }
+
+    public function noticeLetter(MapApply $mapApply)
+    {
+        return view('emap::admin.noticeletter.noticeletter',compact('mapApply'));
+    }
+
+    public function mapArreras(MapApply $mapApply)
+    {
+        return view('emap::admin.noticeletter.maparreras',compact('mapApply'));
+    }
+
+    public function landArreras(MapApply $mapApply)
+    {
+        return view('emap::admin.noticeletter.landarreras',compact('mapApply'));
+    }
+
+    public function technicianNotice(MapApply $mapApply)
+    {
+        return view('emap::admin.noticeletter.techniciannotice',compact('mapApply'));
+    }
+
+    public function chAggrement(MapApply $mapApply)
+    {
+        return view('emap::admin.noticeletter.chaggrement',compact('mapApply'));
+    }
+
+    public function agentAgreement(MapApply $mapApply)
+    {
+        return view('emap::admin.noticeletter.agentaggrement',compact('mapApply'));
+    }
+
+    public function permissionLetter(MapApply $mapApply)
+    {
+        return view('emap::admin.noticeletter.permissionletter',compact('mapApply'));
+    }
+
+    public function level(MapApply $mapApply)
+    {
+        return view('emap::admin.noticeletter.level',compact('mapApply'));
+    }
 }
