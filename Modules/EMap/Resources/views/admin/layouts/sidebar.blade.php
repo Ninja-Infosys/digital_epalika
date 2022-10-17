@@ -47,3 +47,30 @@
     </div>
 </li>
 
+<li class="{{request()->is('admin/emap/files*') ? 'active' : ''}}">
+    <a href="#sidebarEmapFile"
+       {{request()->is('admin/emap/files*') ? 'aria-expanded=true  ' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-file-archive"></i>
+        <span>फाईल व्यवस्थापन</span>
+        <span class="menu-arrow">
+            <i class="fa fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/emap/files*') ? 'show' : ''}}"
+         id="sidebarEmapFile">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/emap/files/application-file') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.files.application-file')}}">
+                    <span> आवेदन फाईल</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/emap/files/notice-file') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.files.notice-file')}}">
+                    <span>सूचना फाईल</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li>
+

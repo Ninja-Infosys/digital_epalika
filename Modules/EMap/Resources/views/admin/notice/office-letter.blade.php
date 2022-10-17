@@ -1,8 +1,16 @@
 @extends('admin.layouts.master')
 @section('content')
+    <div>
+        @error('file')
+        <div class="alert alert-danger">
+            {{$message}}
+        </div>
+        @enderror
+    </div>
     <div class="card mb_30">
         <div class="card-header p-3">
             <div class="main-title d-flex justify-content-between">
+             <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR->label()}}</h3>
                 <div class="d-flex justify-content-between">
                     <x-application-component
                         :application-type="\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR"
@@ -32,7 +40,7 @@
                         <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width">
 
                             </span></p>
-                        <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना |
+                        <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
                             </b></h3>
                         <p class="mb-3">
                             यस उप-महा नगरपालिका वडा नं. <span class="underline-dotted custom-width">

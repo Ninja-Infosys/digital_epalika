@@ -1948,9 +1948,9 @@ body {
     font-weight: 600
 }
 
-#sidebar-menu .active > a {
-    color: var(--primary)
-}
+/*#sidebar-menu .active > a {*/
+/*    color: var(--primary)*/
+/*}*/
 
 #sidebar-menu .active {
     color: var(--primary)
@@ -1970,9 +1970,9 @@ body {
     color: var(--primary)
 }
 
-.nav-second-level li.active > a {
-    color: var(--ct-menu-item-active)
-}
+/*.nav-second-level li.active > a {*/
+/*    color: var(--ct-menu-item-active)*/
+/*}*/
 
 .menu-arrow {
     -webkit-transition: -webkit-transform .15s;

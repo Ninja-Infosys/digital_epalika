@@ -19,8 +19,8 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
         Route::get('officeLetter', 'officeLetter')->name('office-letter');
         Route::get('noticeLetter', 'noticeLetter')->name('notice-letter');
-        Route::get('mapArreras', 'mapArreras')->name('map-arreras');
-        Route::get('landArreras', 'landArreras')->name('land-arreras');
+        Route::get('mapArrears', 'mapArrears')->name('map-arrears');
+        Route::get('landArrears', 'landArrears')->name('land-arrears');
         Route::get('technicianNotice', 'technicianNotice')->name('technician-notice');
         Route::get('chAgreement', 'chAgreement')->name('ch-agreement');
         Route::get('agentAgreement', 'agentAgreement')->name('agent-agreement');
@@ -37,6 +37,11 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
 Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
+});
+
+Route::prefix('files')->as('files.')->group(function (){
+    Route::view('notice-file', 'emap::admin.file.notice_file')->name('notice-file');
+    Route::view('application-file', 'emap::admin.file.application_file')->name('application-file');
 });
 
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
