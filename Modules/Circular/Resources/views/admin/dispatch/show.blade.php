@@ -35,67 +35,59 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="d-flex justify-content-between">
-                                        <h4 class="header-title"></h4>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-sm mb-0 table-striped table-hover">
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0 table-striped table-hover">
 
-                                            <tbody>
-                                            <tr>
-                                                <th>चलानी न.</th>
-                                                <td>{{$dispatch->dispatch_no}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>चलानी मिति</th>
-                                                <td>{{$dispatch->dispatch_date ? $dispatch->dispatch_date->toDateString() : ''}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>पत्र संख्या.</th>
-                                                <td>{{$dispatch->letter_number}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>पत्रको मिति.</th>
-                                                <td>{{$dispatch->letter_date ? $dispatch->letter_date->toDateString() : ''}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>पाउने कार्यालयको नाम</th>
-                                                <td>{{$dispatch->receiver_name}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>पाउने कार्यालयको ठेगाना </th>
-                                                <td>{{$dispatch->receiver_address}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>बिषय.</th>
-                                                <td>{{$dispatch->subject}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>हुलाक/ र.न./इमेल.</th>
-                                                <td>{{$dispatch->receiver_contact}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>बुझिलिनेको हस्तक्षर्</th>
-                                                <td>
-                                                    <img src="{{$dispatch->receiver_signature_url}}" alt="" height="60"></td>
-                                            </tr>
-                                            <tr>
-                                                <th>कैफ़ियत.</th>
-                                                <td>{{$dispatch->remarks}}</td>
-                                            </tr>
-                                            <tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <tbody>
+                            <tr>
+                                <th>चलानी न.</th>
+                                <td>{{$dispatch->dispatch_no}}</td>
+                            </tr>
+                            <tr>
+                                <th>आर्थिक वर्ष</th>
+                                <td>{{$dispatch->fiscalYear->title??''}}</td>
+                            </tr>
+                            <tr>
+                                <th>चलानी मिति</th>
+                                <td>{{$dispatch->dispatch_date}}</td>
+                            </tr>
+                            <tr>
+                                <th>पत्र संख्या.</th>
+                                <td>{{$dispatch->letter_number}}</td>
+                            </tr>
+                            <tr>
+                                <th>पत्रको मिति.</th>
+                                <td>{{$dispatch->letter_date}}</td>
+                            </tr>
+                            <tr>
+                                <th>पाउने कार्यालयको नाम</th>
+                                <td>{{$dispatch->receiver_name}}</td>
+                            </tr>
+                            <tr>
+                                <th>पाउने कार्यालयको ठेगाना</th>
+                                <td>{{$dispatch->receiver_address}}</td>
+                            </tr>
+                            <tr>
+                                <th>बिषय.</th>
+                                <td>{{$dispatch->subject}}</td>
+                            </tr>
+                            <tr>
+                                <th>हुलाक/ र.न./इमेल.</th>
+                                <td>{{$dispatch->receiver_contact}}</td>
+                            </tr>
+                            <tr>
+                                <th>बुझिलिनेको हस्तक्षर्</th>
+                                <td>
+                                    <img src="{{$dispatch->receiver_signature_url}}" alt="" height="60">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>कैफ़ियत.</th>
+                                <td>{{$dispatch->remarks}}</td>
+                            </tr>
+                            <tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="row">
                         @foreach($dispatch->files as $document)

@@ -58,18 +58,13 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="dispatch_date" class="form-label">चलानी मिति </label>
-                                    <input
-                                        type="text"
-                                        name="dispatch_date"
-                                        value="{{old('dispatch_date', $dispatch->dispatch_date ? $dispatch->dispatch_date->toDateString() : '')}}"
-                                        class="form-control nepali_date @error('dispatch_date') is-invalid @enderror"
-                                        id="dispatch_date"
-                                        placeholder="चलानी मिति"
+                                    <x-date-input-component
+                                        nameNe="dispatch_date" labelNe="चलानी मिति *"
+                                        nameEn="en_dispatch_date" labelEn="Dispatch Date"
+                                        :getTodayDate="false"
+                                        :editDateNe="$dispatch->dispatch_date"
+                                        :editDateEn="$dispatch->en_dispatch_date"
                                     />
-                                    @error('dispatch_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="letter_number" class="form-label">पत्र संख्या</label>
@@ -90,7 +85,7 @@
                                     <input
                                         type="text"
                                         name="letter_date"
-                                        value="{{old('letter_date', $dispatch->letter_date ? $dispatch->letter_date->toDateString() : '')}}"
+                                        value="{{old('letter_date', $dispatch->letter_date)}}"
                                         class="form-control nepali_date @error('letter_date') is-invalid @enderror"
                                         id="letter_date"
                                         placeholder="पत्रको मिति "
@@ -210,16 +205,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".nepali_date").nepaliDatePicker({
-                    ndpYear: true,
-                    ndpMonth: true,
-                    ndpYear: true
-                });
-            });
-        </script>
-    @endpush
 @endsection

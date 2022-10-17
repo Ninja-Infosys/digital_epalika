@@ -57,18 +57,10 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="registration_date" class="form-label">दर्ता मिति *</label>
-                                    <input
-                                        type="text"
-                                        name="registration_date"
-                                        value="{{old('registration_date')}}"
-                                        class="form-control nepali_date @error('registration_date') is-invalid @enderror"
-                                        id="registration_date"
-                                        placeholder="दर्ता मिति"
+                                    <x-date-input-component
+                                        nameNe="registration_date" labelNe="दर्ता  मिति *"
+                                        nameEn="en_registration_date" labelEn="Registration Date"
                                     />
-                                    @error('registration_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="letter_number" class="form-label">पत्र संख्या</label>
@@ -85,18 +77,11 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="letter_date" class="form-label">पत्रको मिति *</label>
-                                    <input
-                                        type="text"
-                                        name="letter_date"
-                                        value="{{old('letter_date')}}"
-                                        class="form-control nepali_date @error('letter_date') is-invalid @enderror"
-                                        id="letter_date"
-                                        placeholder="पत्रको मिति "
+                                    <x-date-input-component
+                                        nameNe="letter_date" labelNe="पत्रको मिति *"
+                                        nameEn="en_letter_date" labelEn="Letter Date"
+                                        :getTodayDate="false"
                                     />
-                                    @error('letter_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="sender_name" class="form-label">पठाउने कार्यालयको नाम *</label>
@@ -231,22 +216,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".nepali_date").nepaliDatePicker({
-                    ndpYear: true,
-                    ndpMonth: true,
-                    ndpYear: true
-                });
-            });
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                let todayDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-                $('#registration_date').val(todayDate)
-            });
-        </script>
-    @endpush
 @endsection

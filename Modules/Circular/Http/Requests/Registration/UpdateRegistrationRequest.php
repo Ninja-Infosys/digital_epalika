@@ -18,6 +18,7 @@ class UpdateRegistrationRequest extends FormRequest
         return [
             'registration_no' => ['required', Rule::unique('registrations', 'registration_no')->withoutTrashed()->ignore($this->registration)],
             'registration_date' => ['required'],
+            'en_registration_date' => ['nullable', 'date'],
             'letter_number' => ['nullable'],
             'letter_date' => ['required'],
             'sender_name' => ['required'],
