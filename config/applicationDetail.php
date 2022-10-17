@@ -1,6 +1,6 @@
 <?php
 
-use Modules\EMap\Enums\OfficeTypeEnum;
+use App\Enums\OfficeTypeEnum;
 
 return [
     'to_office' => [

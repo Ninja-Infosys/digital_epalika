@@ -224,15 +224,15 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="#">संघियारको नाममा जारी भएको सूचना</a>
-                    <a href="#">१५ दिने सूचना टाँस सम्बन्धमा</a>
-                    <a href="#">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
-                    <a href="#">सरजमिन मुचुल्का</a>
-                    <a href="#">प्राविधिक प्रतिवेदन</a>
-                    <a href="#">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
-                    <a href="#">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
-                    <a href="#">टिप्पणी र आदेश</a>
-                    <a href="#">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
+                    <a href="{{route('emap.admin.map.mapApply.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">संघियारको नाममा जारी भएको सूचना</a>
+                    <a href="{{route('emap.admin.map.mapApply.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">१५ दिने सूचना टाँस सम्बन्धमा</a>
+                    <a href="{{route('emap.admin.map.mapApply.map-arreras',$mapApply)}}" class="btn btn-sm btn-outline-primary">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.mapApply.land-arreras',$mapApply)}}" class="btn btn-sm btn-outline-primary">सरजमिन मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.mapApply.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्राविधिक प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.mapApply.ch-aggrement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
+                    <a href="{{route('emap.admin.map.mapApply.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
+                    <a href="{{route('emap.admin.map.mapApply.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">टिप्पणी र आदेश</a>
+                    <a href="{{route('emap.admin.map.mapApply.level',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
                 </div>
             </div>
         </div>
