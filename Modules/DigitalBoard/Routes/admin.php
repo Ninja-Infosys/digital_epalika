@@ -15,8 +15,3 @@ Route::get('{type}/notice/{notice}/updateShowOnIndex', [NoticeController::class,
 
 Route::get('employee/{employee}/updateEmployeeStatus', [EmployeeController::class, 'updateEmployeeStatus'])->name('employee.updateEmployeeStatus');
 Route::resource('employee', EmployeeController::class);
-
-Route::prefix('files')->as('files.')->group(function (){
-    Route::view('notice-file', 'digitalboard::admin.file.news_file')->name('news-file');
-    Route::view('news-file', 'digitalboard::admin.file.notice_file')->name('notice-file');
-});

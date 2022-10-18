@@ -6,17 +6,17 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.listRegistrations.dashboard')}}">
+                            <a href="{{route('admin.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.listRegistrations.files.permission')}}">इजाजत पत्र</a>
+                            <a href="{{route('admin.businessRegistration.files.tax-file')}}"> करदाता प्रमाण पत्र</a>
                         </li>
                         <li class="breadcrumb-item active">फाईल</li>
                     </ol>
                 </div>
-                <h4 class="page-title">इजाजत पत्र</h4>
+                <h4 class="page-title"> करदाता प्रमाण पत्र</h4>
             </div>
         </div>
         <div class="card">
@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                     <div class="col text-muted fw-bold text-truncate">
-                                        <p class="text-muted fw-bold">दर्ता न:२३०७६५४६</p>
+                                        <p class="text-muted fw-bold">प्रकृति: व्यवसाय को प्रकृति</p>
                                         फाईल को शिर्षक फाईल को शिर्षक फाईल
                                     </div>
                                     <div class="col d-flex justify-content-between">
@@ -65,6 +65,7 @@
                     </div> <!-- end col-->
                 </div> <!-- end row-->
             </div> <!-- end .mt-3-->
+
         </div>
     </div>
 @endsection

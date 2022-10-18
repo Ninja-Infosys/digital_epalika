@@ -45,7 +45,33 @@
                     </a>
                 </li>
             @endcan
+        </ul>
+    </div>
+</li>
 
+<li class="{{request()->is('admin/businessRegistration/files/*') ? 'active' : ''}}">
+    <a href="#sidebarBusinessRegistrationFile"
+       {{request()->is('admin/businessRegistration/files/*') ? 'aria-expanded=true  ' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-file-archive"></i>
+        <span>फाईल व्यवस्थापन</span>
+        <span class="menu-arrow">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+    </a>
+    <div class="collapse {{request()->is('admin/businessRegistration/files/*') ? 'show' : ''}}"
+         id="sidebarBusinessRegistrationFile">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/businessRegistration/files/registration-file') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.files.registration-file')}}">
+                    <span> फार्म दर्ता इजाजत प्रमाण पत्र</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/businessRegistration/files/tax-file') ? 'active' : ''}}">
+                <a href="{{route('admin.businessRegistration.files.tax-file')}}">
+                    <span> करदाता प्रमाण पत्र</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
