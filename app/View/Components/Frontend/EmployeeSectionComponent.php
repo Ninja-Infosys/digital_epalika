@@ -3,24 +3,17 @@
 namespace App\View\Components\Frontend;
 
 use Illuminate\View\Component;
+use Modules\DigitalBoard\Entities\Employee;
 
 class EmployeeSectionComponent extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
+    public $employees;
+
     public function __construct()
     {
-        //
+        $this->employees = Employee::orderBy('position')->get();
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
         return view('components.frontend.employee-section-component');
