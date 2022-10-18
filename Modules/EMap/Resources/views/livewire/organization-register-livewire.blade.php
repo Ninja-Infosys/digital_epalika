@@ -270,8 +270,8 @@
                     </fieldset>
                     <div class="my-2">
                         <div class="form-check mb-2 form-check-primary">
-                            <input class="form-check-input" type="checkbox" wire:model="is_same_as_permanent"
-                                   value="1"
+                            <input class="form-check-input" type="checkbox"
+                                   wire:model="is_same_as_permanent"
                                    id="address_check">
                             <label class="form-check-label fw-bold" for="address_check">
                                 के स्थायी र अस्थायी ठेगाना एउटै हो?
