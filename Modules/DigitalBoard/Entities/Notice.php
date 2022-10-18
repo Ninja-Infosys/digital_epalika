@@ -16,7 +16,6 @@ class Notice extends Model
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
-        'date',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -25,6 +24,7 @@ class Notice extends Model
     protected $fillable = [
         'title',
         'date',
+        'en_date',
         'description',
         'closed_at',
         'show_on_index',

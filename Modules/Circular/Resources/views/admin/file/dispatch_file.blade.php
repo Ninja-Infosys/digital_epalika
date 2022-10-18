@@ -69,7 +69,6 @@
                     </div> <!-- end col-->
                 </div> <!-- end row-->
             </div> <!-- end .mt-3-->
-
         </div>
     </div>
 @endsection

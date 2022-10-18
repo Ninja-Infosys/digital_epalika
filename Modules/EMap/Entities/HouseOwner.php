@@ -24,10 +24,13 @@ class HouseOwner extends Model
         'name',
         'phone',
         'father_name',
+        'grandfather_name',
         'citizenship_issue_district_id',
         'citizenship_no',
         'citizenship_issue_date',
-        'address'
+        'address',
+        'local_body',
+        'ward_no',
     ];
 
     public function mapApply(): BelongsTo

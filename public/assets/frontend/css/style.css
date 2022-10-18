@@ -170,3 +170,129 @@ body {
     transition: .7s;
     transform: translateY(-5px);
 }
+/*marquee css*/
+.newsbar-container {
+    display:flex;
+    align-items:center;
+    background-color: var(--mainColor)
+}
+.newsbar-title {
+    color: var(--whiteColor);
+    background-color:#ce1126;
+    font-size:.833rem;
+    font-weight:600;
+    padding:.75rem 1rem .75rem .5rem;
+    -webkit-clip-path:polygon(0 0,88% 0,100% 50%,88% 100%,0 100%);
+    clip-path:polygon(0 0,88% 0,100% 50%,88% 100%,0 100%);
+    margin-top:-1px
+}
+.marquee-list span.type {
+    background-color:#fff;
+    color:#ce1126;
+    font-size:.75rem;
+    text-transform:uppercase;
+    display:inline-block;
+    padding:.125rem .25rem;
+    border-radius:2px;
+    font-weight:600;
+    vertical-align:middle
+}
+.marquee-list a {
+    color:#fff!important
+}
+.marquee-list a:hover {
+    color:#4d4d4d!important
+}
+.jctkr-wrapper {
+    display:inline-block;
+    position:relative;
+    width:100%;
+    height:18px;
+    vertical-align:middle;
+    overflow:hidden
+}
+.jctkr-wrapper ul {
+    position:absolute;
+    left:0;
+    top:50%;
+    transform:translate(0,-50%);
+    height:100%;
+    margin:0;
+    padding:0;
+    list-style:none;
+    white-space:nowrap;
+    font-size:0;
+    opacity:0;
+    -webkit-transition:opacity 20s;
+    transition:opacity 20s
+}
+.jctkr-wrapper.jctkr-initialized ul {
+    opacity:1;
+}
+.jctkr-wrapper ul li {
+    display:inline-block;
+    font-size:13.33px;
+    position:relative;
+    padding-left:1rem;
+    margin-right:.75rem
+}
+.jctkr-wrapper ul li a {
+    color:#666
+}
+.jctkr-wrapper ul li:before {
+    content:'';
+    width:2px;
+    height:2px;
+    background-color:#fff;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:.5rem;
+    position:absolute;
+    top:50%;
+    left:0;
+    transform:translateY(-50%)
+}
+.jctkr-label {
+    display:inline-block
+}
+.vertical-scroll {
+    width: 100%;
+    height: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.move {
+    top: 480px;
+    position: relative;
+    box-sizing: border-box;
+    animation: marquee 50s linear infinite;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--mainColor);
+}
+.move img{
+    width: 100%;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-150%);
+    }
+}
+.footer-alt {
+    left: 0 !important;
+    text-align: center;
+    color: var(--whiteColor);
+}
+.footer {
+    bottom: 0;
+    padding: 19px 15px 20px;
+    right: 0;
+    left: 240px;
+}
