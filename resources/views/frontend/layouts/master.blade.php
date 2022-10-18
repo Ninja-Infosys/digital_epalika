@@ -46,7 +46,37 @@
 @livewireScripts
 
 @stack('scripts')
+<script>
+    const videoSource = new Array();
+    videoSource[0] = 'https://www.w3schools.com/html/mov_bbb.mp4';
+    videoSource[1] = 'https://www.w3schools.com/html/movie.mp4';
+    let i = 0; // define i
+    const videoCount = videoSource.length;
 
+    function videoPlay(videoNum) {
+        document.getElementById("myVideo").setAttribute("src", videoSource[videoNum]);
+        document.getElementById("myVideo").load();
+        document.getElementById("myVideo").play();
+    }
+    videoPlay(i);
+    document.getElementById('myVideo').addEventListener('ended', (event) => {
+        myHandler();
+    });
+    // document.getElementById('myVideo').addEventListener('ended', myHandler, false) {
+    //     videoPlay(0); // play the video
+    // }
+
+    function myHandler() {
+        i++;
+        console.log(i);
+        if (i === (videoCount - 1)) {
+            i = 0;
+            videoPlay(i);
+        } else {
+            videoPlay(i);
+        }
+    }
+</script>
 
 </body>
 </html>

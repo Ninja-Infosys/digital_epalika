@@ -12,8 +12,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
             $table->string('file');
+            $table->string('type');
             $table->timestamp('rejected_at')->nullable();
-            $table->string('file_type');
+            $table->text('file_type');
             $table->timestamps();
             $table->softDeletes();
         });

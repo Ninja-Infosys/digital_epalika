@@ -22,8 +22,12 @@ class DesignerDetail extends Model
     protected $fillable = [
         'map_apply_id',
         'name',
+        'father_name',
+        'grandfather_name',
         'phone',
         'address',
+        'local_body',
+        'ward_no',
         'post',
         'nec_council_no',
         'local_body_registration_no',

@@ -27,7 +27,20 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('permissionLetter', 'permissionLetter')->name('permission-letter');
         Route::get('level', 'level')->name('level');
         Route::get('supervisor', 'superVisor')->name('supervisor');
-        Route::post('applyMapNotice','applyMapNotice')->name('apply-map-notice');
+        Route::get('first-phase-consultant-report','firstPhaseConsultantReport')->name('first-phase-consultant-report');
+        Route::get('first-phase-technician-report','firstPhaseTechnicianReport')->name('first-phase-technician-report');
+        Route::prefix('upload')->as('upload.')->group(function (){
+            Route::post('notice','notice')->name('notice');
+            Route::post('application','application')->name('application');
+            Route::post('bond','bond')->name('bond');
+            Route::post('report','report')->name('report');
+            Route::post('agreement','agreement')->name('agreement');
+            Route::post('order','order')->name('order');
+            Route::post('certificate','certificate')->name('certificate');
+            Route::post('heir','heir')->name('heir');
+            Route::post('permission','permission')->name('permission');
+        });
+
     });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
@@ -46,15 +59,6 @@ Route::prefix('files')->as('files.')->group(function (){
 });
 
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
-//Route::view('officeletter', 'emap::admin.offical_letter.officeletter');
-//Route::view('noticeletter', 'emap::admin.noticeletter.noticeletter');
-//Route::view('maparreras', 'emap::admin.noticeletter.maparreras');
-//Route::view('landarreras', 'emap::admin.noticeletter.landarreras');
-//Route::view('techniciannotice', 'emap::admin.noticeletter.techniciannotice');
-//Route::view('chaggrement', 'emap::admin.noticeletter.chaggrement');
-//Route::view('agentaggrement', 'emap::admin.noticeletter.agentaggrement');
-//Route::view('permissionletter', 'emap::admin.noticeletter.permissionletter');
-//Route::view('level', 'emap::admin.noticeletter.level');
 Route::view('firstphase', 'emap::admin.noticeletter.firstphase');
 Route::view('firstphases', 'emap::admin.noticeletter.firstphases');
 Route::view('super', 'emap::admin.noticeletter.super');
@@ -72,3 +76,4 @@ Route::view('detail', 'emap::admin.certificate.detail');
 Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
 Route::view('manjuri', 'emap::admin.certificate.manjuri');
 Route::view('supervisor', 'emap::admin.notice.supervisor');
+Route::view('PlinthLevelSupervisorReport', 'emap::admin.notice.PlinthLevelSupervisorReport');
