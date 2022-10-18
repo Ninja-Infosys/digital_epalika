@@ -21,10 +21,15 @@ select{
     width: 70px;
 }
 .card-employee{
-    width: 10rem;
-    height: 10rem;
+    width: 12rem;
+    height: 7rem;
     /*border: 1px solid #2C3E50;*/
 }
-.card-employee>img{
-   border: 1px solid var(--primary);
+.textbox-01>h6{
+    font-size: .7rem;
 }
+.textbox-01 {
+    padding-left: 10%;
+    padding-top: 20%;
+}
+
