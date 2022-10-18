@@ -43,16 +43,17 @@
                         <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
                             </b></h3>
                         <p class="mb-3">
-                            यस उप-महा नगरपालिका वडा नं. <span class="underline-dotted custom-width">
-                            </span>टोल <span class="underline-dotted custom-width">
+                            यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
+                                {{$mapApply->landDetail->ward_no??''}}
+                            </span> टोल <span class="underline-dotted custom-width"> {{$mapApply->landDetail->tole??''}}
                             </span> मा अवस्थित साविक <span class="underline-dotted custom-width">
-                                  rewghgheihg
+                                   {{$mapApply->landDetail->former_ward_no??''}}
                             </span>किता नं. <span class="underline-dotted custom-width">
-
+ {{$mapApply->landDetail->plot_no??''}}
                             </span> क्षेत्रफल <span class="underline-dotted custom-width">
-
+ {{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}
                             </span> मा भवन निर्माण गर्ने घरधनी श्री <span class="underline-dotted custom-width">
-
+ {{$mapApply->houseOwner->name??''}}
                             </span>ले यस नक्सा बमोजिमको भवन निर्माण गर्न निवेदन पेश गरेकोमा संधियारको नाममा यो सुचना
                             प्रकाशित गरिएको छ | निवेदन साथ पेश हुन आएको प्रमाण र नक्साको आधारमा निर्माण स्वीकृति दिंदा
                             तपाइको जग्गा लगायत सार्वजनिक स्थलको हानी निक्सानी हुन्छ, हुदैन, सन्धी सर्पन हानी नोक्सानी
@@ -104,12 +105,12 @@
                             </tbody>
                         </table>
                         <p class="house_measurment mt-2">
-                            घरको नाप: लम्बाई: <span class="underline-dotted custom-width"></span> चौडाई: <span
-                                class="underline-dotted custom-width">  </span> उचाई: <span
+                            घरको नाप: लम्बाई: <span class="underline-dotted custom-width"> {{$mapApply->length??''}}</span> चौडाई: <span
+                                class="underline-dotted custom-width"> {{$mapApply->breadth??''}} </span> उचाई: <span
                                 class="underline-dotted custom-width">
-
+{{$mapApply->height??''}}
                             </span> तल्ला संख्या: <span class="underline-dotted custom-width">
-
+{{$mapApply->current_storey??''}}
                             </span></p>
                         <p class="mt-3"> बोधार्थ: १. <span class="underline-dotted custom-width"></span>नं. वडा
                             वडाध्यक्ष/वडा प्रतिनिधि : कुनै प्रतिक्रिया भए जनाईदिनुहुन अनुरोध छ |</p>

@@ -33,27 +33,26 @@
     @livewireStyles
 </head>
 
-<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
-height: 100vh;
-overflow: hidden">
-    <div class="container-fluid">
-                <div class="card rounded mt-2">
-                                    <div class="col-md-12 system_info p-1">
-                                        <div class="logo">
-                                            <img src="{{asset('images/np.png')}}" height="60" alt="Logo">
-                                        </div>
-                                        <div class="title">
-                                            <div class="m-2">
-                                                <h4 class="text-white">डिजिटल ई-पालिका</h4>
-                                                <h5 class="text-white pt-1">ई-नक्सा पास</h5>
-                                                <h5 class="text-center text-decoration-underline
-                                                mt-1 text-white">ई-नक्सा पास सेवा प्रदान गर्नको लागि तलको फारम भरि सुचिकृतको लागि पठाउनुहोस् ।</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <livewire:emap::organization-register-livewire/>
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});">
+<div class="container-fluid">
+    <div class="card rounded mt-2">
+        <div class="col-md-12 system_info p-1">
+            <div class="logo">
+                <img src="{{asset('images/np.png')}}" height="60" alt="Logo">
             </div>
+            <div class="title">
+                <div class="m-2">
+                    <h4 class="text-white">डिजिटल ई-पालिका</h4>
+                    <h5 class="text-white pt-1">ई-नक्सा पास</h5>
+                    <h5 class="text-center text-decoration-underline
+                                                mt-1 text-white">ई-नक्सा पास सेवा प्रदान गर्नको लागि तलको फारम भरि
+                        सुचिकृतको लागि पठाउनुहोस् ।</h5>
+                </div>
+            </div>
+        </div>
+        <livewire:emap::organization-register-livewire/>
     </div>
+</div>
 <!-- Vendor js -->
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
 

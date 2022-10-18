@@ -6,10 +6,10 @@ use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\ApplyMapNoticeNotification;
-use App\Notifications\MapApplicationNotification;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapApplication;
@@ -105,8 +105,7 @@ class MapController extends Controller
         return view('emap::admin.notice.level', compact('mapApply'));
     }
 
-
-    public function applyMapNotice(Request $request, MapApply $mapApply)
+    public function applyMapNotice(Request $request,MapApply $mapApply): RedirectResponse
     {
         $data = $request->validate([
             'file' => ['required', 'mimes:pdf'],
