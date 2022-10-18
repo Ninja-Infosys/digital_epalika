@@ -5,10 +5,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                            <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
-                                    requestRoute="{{route('print.office-letter-print')}}">
-                                <i class="fa fa-print"></i> Print
-                            </button>
+                        <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
+                                requestRoute="{{route('print.office-letter-print')}}">
+                            <i class="fa fa-print"></i> Print
+                        </button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -17,7 +17,7 @@
                             <div class="card mb_30">
                                 <div class="card-body p-3">
                                     <div class="font-black" id="printData">
-                                        <h5 class="text-center">सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन</h5>
+                                        <h5 class="text-center">प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण प्रतिवेदन</h5>
                                         <table class="table table-bordered">
                                             <thead>
                                             <tr>
@@ -52,17 +52,112 @@
                                             <tr>
                                                 <td></td>
                                                 <td><ul>
-                                                        <li>पिलरको डण्डीको संख्या र मोटाई</li>
-                                                        <li>पिलरको डण्डी खप्टिदा</li>
-                                                        <li>रिङको साइज, हुक, दूरी </li>
-                                                        <li>जगमा पिलरको डण्डीको<br>
-                                                        anchorage</li>
+                                                        <li>घरको नक्सा तथा घर निर्माण गर्दा ध्यान दिनुपर्ने कुरा</li>
+                                                        <li>नक्सा पास प्रक्रियाको बारेमा </li>
+                                                        <li>निर्माण सामग्रीको गुणस्तरको बारेमा </li>
+                                                        <li>घरधनी, निर्माणकर्मी, सुपरिवेक्षकको दायित्व</li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                     </ul></td>
                                             </tr>
+
+
                                             <tr>
-                                                <th scope="col">टाइबिम वा बिममाथिको पिलरको डण्डी बाँध्दा </th>
+                                                <th scope="col">घरधनीलाई परामर्श तथा घरनिर्माण सम्बन्धी अभिमुखीकरण </th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><ul>
+                                                        <li>लेभल तथा कुना मिलाउने </li>
+                                                        <li>घर बनाउने क्षेत्रको सिमाक्ङन </li>
+                                                        <li>पिलरको centering</li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                    </ul></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th scope="col">लेआउट गर्ने समयमा</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><ul>
+                                                        <li>जग्गाको लम्बाई, चौडाई,र गहिराई </li>
+                                                        <li>सोलिङ</li>
+                                                        <li>पि सि सि को अनुपात</li>
+                                                        <li>डण्डीको संख्या तथा राखेको तरिका </li>
+                                                        <li>जग बिममा डण्डीको संख्या तथा राखेको तरिका </li>
+                                                    </ul></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">जग खन्दा तथा जग र जग बन्धनको डण्डी बाँध्दा</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">फोटो र फोटोको विवरण</th>
+                                                <th scope="col">कैफियत</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td><ul>
+                                                        <li>पिलरको डण्डीको संख्या र मोटाई</li>
+                                                        <li>पिलरको डण्डी खप्टिदा</li>
+                                                        <li>रिङको साइज, हुक, दूरी </li>
+                                                        <li>जगमा पिलरको डण्डीको<br>
+                                                            anchorage</li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                    </ul></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th scope="col">पिलरको डण्डी बाँध्दा तथा पिलर खडा गर्दा</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><ul>
+                                                        <li>कंक्रिटको अनुपात</li>
+                                                        <li>ढलानको साइज र आकार</li>
+                                                        <li>ढलान खँदिको तरिका र भाइब्रेटरको प्रयोग</li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                    </ul></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th scope="col">जग तथा जगबन्धन र प्लिन्थ लेभलसम्म पिलर ढलान गर्दा</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><ul>
+                                                        <li>डण्डी संख्या र साइज </li>
+                                                        <li>डण्डीको anchorage</li>
+                                                        <li>डण्डी खाप्टिदाको स्थान र दूरी</li>
+                                                        <li>रिङको साइज, हुक, दूरी</li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                    </ul></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th scope="col">टाइबिमको डण्डी बाँध्दा</th>
                                                 <th scope="col"></th>
                                             </tr>
                                             <tr>
@@ -76,25 +171,14 @@
                                                     </ul></td>
                                             </tr>
                                             <tr>
-                                                <th scope="col">पिलर ढलान गर्दा</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>गारो लगाउने तरिका - दाँती वा स्टेप</li>
-                                                        <li>मसलाको अनुपात</li>
-                                                        <li>बन्धनको मोटाई, डण्डीको साइज, पिलरमा कनेक्सन</li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                    </ul></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="col">गारो तथा बन्धन राख्दा</th>
+                                                <th scope="col">टाइबिमको ढलान गर्दा</th>
                                                 <th scope="col"></th>
                                             </tr>
                                             </tbody>
                                         </table>
+
+
+                                        <h4><b>पिलरवाला घर</b></h4>
                                         <table class="table table-bordered">
                                             <thead>
                                             <tr>
@@ -106,65 +190,23 @@
                                             <tr>
                                                 <td></td>
                                                 <td><ul>
-                                                        <li>फर्माको साइज, मोटाई, लेभल, सपोर्ट </li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                    </ul></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="col">स्ल्याब र बिमको फर्मा राख्दा</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>डण्डी संख्या र साइज </li>
-                                                        <li>डण्डीको anchorage</li>
-                                                        <li>डण्डी खाप्टिदाको स्थान र दूरी</li>
-                                                        <li>रिङको साइज, हुक, दूरी</li>
-                                                        <li>बिमा पिलर जोर्नीमा रिङ</li>
-                                                        <li>बिम पिलर जोर्नीमा बिमको डण्डी राखेको तरिका</li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                    </ul></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="col">स्ल्याब र बिमको डण्डी राख्दा</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>कंक्रिटको अनुपात </li>
-                                                        <li>ढलानको साइज र आकार </li>
-                                                        <li>ढलान खँदिको तरिका र भाइब्रेटरको प्रयोग</li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                    </ul></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="col">स्ल्याब र बिमको ढलान</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>गारोलाई ७ दिन सम्म सुक्न नदिने </li>
-                                                        <li>ढलानलाई २१ दिन सम्म सुक्न नदिने </li>
+                                                        <li>घरको नक्सा तथा घर निर्माण गर्दा ध्यान दिनुपर्ने कुरा</li>
+                                                        <li>नक्सा पास प्रक्रियाको बारेमा </li>
+                                                        <li>निर्माण सामग्रीको गुणस्तरको बारेमा </li>
+                                                        <li>घरधनी, निर्माणकर्मी, सुपरिवेक्षकको दायित्व</li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                     </ul></td>
                                             </tr>
                                             <tr>
-                                                <th scope="col">क्युरिङ गर्दा</th>
+                                                <th scope="col">घरधनीलाई परामर्श तथा घरनिर्माण सम्बन्धी अभिमुखीकारण</th>
                                                 <th scope="col"></th>
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <h4><b>गारोवाला घर</b></h4>
+
+
                                         <table class="table table-bordered">
                                             <thead>
                                             <tr>
@@ -176,79 +218,36 @@
                                             <tr>
                                                 <td></td>
                                                 <td><ul>
-                                                        <li>गारो लगाउने तरिका - दाँती वा स्टेप</li>
-                                                        <li>मसलाको अनुपात</li>
-                                                        <li>गारोको bond</li>
-                                                        <li>झ्याल ढोकाको स्थान र साइज </li>
-                                                        <li>झ्याल ढोकाको साइडमा ठाडो डण्डी </li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                        <li>लेभल तथा कुना मिलाउने </li>
+                                                        <li>घर बनाउने क्षेत्रको सिमाक्ङन </li>
+                                                        <li>पिलरको centering</li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                     </ul></td>
                                             </tr>
+
+
                                             <tr>
-                                                <th scope="col">प्लिन्थ लेभलमाथि गारो लगाउँदा </th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="table table-bordered mt-2">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">फोटो र फोटोको विवरण</th>
-                                                <th scope="col">कैफियत</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>डण्डीको साइज, संख्या </li>
-                                                        <li>बन्धनको मोटाई  </li>
-                                                        <li>कंक्रिट अनुपात</li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                    </ul></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="col">कर्नर स्टिज, सिल र लिन्टेल बन्धन</th>
+                                                <th scope="col">लेआउट गर्ने समयमा</th>
                                                 <th scope="col"></th>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td><ul>
-                                                        <li>फर्माको साइज, मोटाई, लेभल, सपोर्ट </li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
+                                                        <li>लगको लम्बाई, चौडाई,र गहिराई </li>
+                                                        <li>सोलिङ</li>
+                                                        <li>पि सि सि को अनुपात</li>
+                                                        <li>जगबन्धनमा डण्डीको संख्या तथा राखेको तरिका </li>
+                                                        <li>ठाडो डण्डीको साइज राखेको तरिका </li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                     </ul></td>
                                             </tr>
                                             <tr>
-                                                <th scope="col">स्ल्याब र स्ल्याब बन्धनको फर्मा</th>
+                                                <th scope="col">प्लिन्थ लेभलसम्म गारो लगाउँदा </th>
                                                 <th scope="col"></th>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>कंक्रिटको अनुपात</li>
-                                                        <li>ढलानको साइज र आकार </li>
-                                                        <li>डण्डीको संख्या, राख्ने तरिका</li>
-                                                        <li>रिङको साइज, हुक, दूरी</li>
-                                                        <li>ढलान खँदिको तरिका र भाइब्रेटरको प्रयोग </li>
-                                                        <li><span class="underline-dotted custom-width"></span></li>
-                                                    </ul></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <table class="table table-bordered mt-2">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">स्ल्याब र स्ल्याब बन्धनको ढलान</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
                                             <tr>
                                                 <td></td>
                                                 <td><ul>
@@ -261,8 +260,7 @@
                                                     </ul></td>
                                             </tr>
                                             <tr>
-                                                <th scope="col">डि.पि.सि. बन्धन</th>
-                                                <th scope="col"></th>
+                                                <th scope="col">डि.पि.सि. बन्धन </th>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -283,6 +281,8 @@
                                             </tr>
                                             </tbody>
                                         </table>
+                                        <p><b>नोट : </b>हात्तीपाइले, टाइ बिम डिटेल, चुरी, पिलरको डन्डी, लिन्टेल, सिल, स्टिच वेण्ड र छतको रड आउनेगरी फोटो अनिवार्य छ
+                                            ।</p>
                                     </div>
                                 </div>
                             </div>

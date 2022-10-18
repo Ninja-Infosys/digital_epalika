@@ -72,3 +72,4 @@ Route::view('detail', 'emap::admin.certificate.detail');
 Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
 Route::view('manjuri', 'emap::admin.certificate.manjuri');
 Route::view('supervisor', 'emap::admin.notice.supervisor');
+Route::view('PlinthLevelSupervisorReport', 'emap::admin.notice.PlinthLevelSupervisorReport');
