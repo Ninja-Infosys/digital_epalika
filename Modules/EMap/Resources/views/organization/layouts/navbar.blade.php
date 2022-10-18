@@ -19,10 +19,10 @@
                         </li>
                     </div>
                     <div class="profile_info">
-                        <img src="{{auth('organization')->user()->profile_photo_url}}" alt="#">
+                        <img src="{{auth('organization')->user()->profile_photo_url ??''}}" alt="#">
                         <div class="profile_info_iner">
-                            <p>{{auth('organization')->user()->email}}</p>
-                            <h5>{{auth('organization')->user()->name}}</h5>
+                            <p>{{auth('organization')->user()->email ??''}}</p>
+                            <h5>{{auth('organization')->user()->name ??''}}</h5>
                             <div class="profile_info_details">
                                 <a href="{{route('organization.admin.auth-organization.profile')}}">My Profile <i
                                         class="ti-user"></i></a>
