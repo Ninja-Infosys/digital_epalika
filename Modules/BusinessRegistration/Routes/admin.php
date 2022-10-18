@@ -16,5 +16,10 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('businessPurpose', BusinessPurposeController::class);
 });
 
+Route::prefix('files')->as('files.')->group(function (){
+    Route::view('file', 'businessregistration::admin.file.file')->name('file');
+});
+
+
 
 

@@ -41,8 +41,7 @@ Route::prefix('setting')->group(function () {
 });
 
 Route::prefix('files')->as('files.')->group(function (){
-    Route::view('notice-file', 'emap::admin.file.notice_file')->name('notice-file');
-    Route::view('application-file', 'emap::admin.file.application_file')->name('application-file');
+    Route::view('file', 'emap::admin.file.file')->name('file');
 });
 
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');

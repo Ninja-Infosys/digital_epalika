@@ -17,27 +17,34 @@ class OrganizationRegisterLivewire extends Component
 
     public int $currentStep = 1;
 
-    public $is_same_as_permanent = null;
+    public bool $is_same_as_permanent = false;
 
     public $is_organization = "1";
 
     public $districts = [];
     public $provinces = [];
 
-//    permanent address
-    public $permanentLocalBodies = [];
-    public $permanentWards = [];
-    public $permanentDistricts = [];
-
-//    temporary address
-    public $temporaryLocalBodies = [];
-    public $temporaryWards = [];
-    public $temporaryDistricts = [];
-
-//    organization address
-    public $organizationLocalBodies = [];
-    public $organizationWards = [];
-    public $organizationDistricts = [];
+    public array $address = [
+        'permanentProvince' => null,
+        'permanentDistrict' => null,
+        'permanentLocalBody' => null,
+        'temporaryProvince' => null,
+        'temporaryDistrict' => null,
+        'temporaryLocalBody' => null,
+        'organizationProvince' => null,
+        'organizationDistrict' => null,
+        'organizationLocalBody' => null,
+        'citizenshipIssuedDistrict' => null,
+        'permanentLocalBodies' => [],
+        'permanentWards' => [],
+        'permanentDistricts' => [],
+        'temporaryLocalBodies' => [],
+        'temporaryWards' => [],
+        'temporaryDistricts' => [],
+        'organizationLocalBodies' => [],
+        'organizationWards' => [],
+        'organizationDistricts' => [],
+    ];
 
     public function mount()
     {
@@ -45,13 +52,13 @@ class OrganizationRegisterLivewire extends Component
         $this->provinces = Province::all();
     }
 
-    public $user = [
+    public array $user = [
         'name' => null,
         'email' => null,
         'phone' => null
     ];
 
-    public $userDetail = [
+    public array $userDetail = [
         'name_ne' => null,
         'name_en' => null,
         'email' => null,
@@ -80,7 +87,7 @@ class OrganizationRegisterLivewire extends Component
         'temporary_tole' => null,
     ];
 
-    public $organizationDetail = [
+    public array $organizationDetail = [
         'org_name_ne' => null,
         'org_name_en' => null,
         'org_email' => null,
@@ -97,7 +104,7 @@ class OrganizationRegisterLivewire extends Component
         'tole' => null,
     ];
 
-    public $taxClearance = [
+    public array $taxClearance = [
         'document' => null,
         'year' => null,
     ];
@@ -112,12 +119,6 @@ class OrganizationRegisterLivewire extends Component
     {
         $this->currentStep = $step;
     }
-
-    protected $baseRule = [
-        'user.name' => ['required'],
-        'user.email' => ['required', 'email', 'unique:organizations,email'],
-        'user.phone' => ['required', 'unique:organizations,phone'],
-    ];
 
     protected array $firstStepValidations = [
         'is_organization' => ['required'],
@@ -174,18 +175,24 @@ class OrganizationRegisterLivewire extends Component
         'organizationDetail.org_pan_document' => ['required', 'image'],
         'organizationDetail.logo' => ['nullable', 'image'],
         'taxClearance.document' => ['required'],
-        'taxClearance.year' => ['nullable'],
+        'taxClearance.year' => ['required'],
+    ];
+
+    protected array $sixthStepValidations = [
+        'user.name' => ['required', 'unique:organizations,name'],
+        'user.email' => ['required', 'email', 'unique:organizations,email'],
+        'user.phone' => ['required', 'unique:organizations,phone'],
     ];
 
     protected function rules(): array
     {
         return match ($this->currentStep) {
-            1 => $this->firstStepValidations,
             2 => $this->secondStepValidations,
             3 => $this->thirdStepValidations,
             4 => $this->fourthStepValidations,
             5 => $this->fifthStepValidations,
-            default => array_merge($this->firstStepValidations),
+            6 => $this->sixthStepValidations,
+            default => $this->firstStepValidations,
         };
 
     }
@@ -195,7 +202,7 @@ class OrganizationRegisterLivewire extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function submitForm()
+    public function submitFormData()
     {
         $this->validate();
         DB::transaction(function () {
@@ -217,55 +224,48 @@ class OrganizationRegisterLivewire extends Component
 
     public function resetForm()
     {
-        $this->reset('userDetail', 'level', 'organizationDetail', 'taxClearance', 'is_organization', 'maxLevel', 'level', 'progress');
+        $this->reset('is_organization', 'is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user', 'organizationDetail', 'taxClearance');
 
     }
 
     public function checkPermanentAddress()
     {
         if (!empty($this->userDetail['permanent_province_id'])) {
-            $this->permanentDistricts = Province::with('districts')->findOrFail($this->userDetail['permanent_province_id'])->districts;
+            $this->address['permanentDistricts'] = Province::with('districts')->findOrFail($this->userDetail['permanent_province_id'])->districts;
+            $this->address['permanentProvince'] = $this->provinces->firstWhere('id', $this->userDetail['permanent_province_id']);
         }
         if (!empty($this->userDetail['permanent_district_id'])) {
-            $this->permanentLocalBodies = District::with('localBodies')->findOrFail($this->userDetail['permanent_district_id'])->localBodies;
+            $this->address['permanentLocalBodies'] = District::with('localBodies')->findOrFail($this->userDetail['permanent_district_id'])->localBodies;
+            $this->address['permanentDistrict'] = $this->address['permanentDistricts']->firstWhere('id', $this->userDetail['permanent_district_id']);
         }
         if (!empty($this->userDetail['permanent_local_body_id'])) {
-            $this->permanentWards = LocalBody::findOrFail($this->userDetail['permanent_local_body_id'])->ward_no;
+            $this->address['permanentWards'] = LocalBody::findOrFail($this->userDetail['permanent_local_body_id'])->ward_no;
+            $this->address['permanentLocalBody'] = $this->address['permanentLocalBodies']->firstWhere('id', $this->userDetail['permanent_local_body_id']);
         }
     }
 
     public function checkTemporaryAddress()
     {
         if (!empty($this->userDetail['temporary_province_id'])) {
-            $this->temporaryDistricts = Province::with('districts')->findOrFail($this->userDetail['temporary_province_id'])->districts;
+            $this->address['temporaryDistricts'] = Province::with('districts')->findOrFail($this->userDetail['temporary_province_id'])->districts;
+            $this->address['temporaryProvince'] = $this->provinces->firstWhere('id', $this->userDetail['temporary_province_id']);
         }
         if (!empty($this->userDetail['temporary_district_id'])) {
-            $this->temporaryLocalBodies = District::with('localBodies')->findOrFail($this->userDetail['temporary_district_id'])->localBodies;
+            $this->address['temporaryLocalBodies'] = District::with('localBodies')->findOrFail($this->userDetail['temporary_district_id'])->localBodies;
+            $this->address['temporaryDistrict'] = $this->address['temporaryDistricts']->firstWhere('id', $this->userDetail['temporary_district_id']);
         }
         if (!empty($this->userDetail['temporary_local_body_id'])) {
-            $this->temporaryWards = LocalBody::findOrFail($this->userDetail['temporary_local_body_id'])->ward_no;
-        }
-    }
-
-    public function checkOrganizationAddress()
-    {
-        if (!empty($this->organizationDetail['province_id'])) {
-            $this->organizationDistricts = Province::with('districts')->findOrFail($this->organizationDetail['province_id'])->districts;
-        }
-        if (!empty($this->organizationDetail['district_id'])) {
-            $this->organizationLocalBodies = District::with('localBodies')->findOrFail($this->organizationDetail['district_id'])->localBodies;
-        }
-        if (!empty($this->organizationDetail['local_body_id'])) {
-            $this->organizationWards = LocalBody::findOrFail($this->organizationDetail['local_body_id'])->ward_no;
+            $this->address['temporaryWards'] = LocalBody::findOrFail($this->userDetail['temporary_local_body_id'])->ward_no;
+            $this->address['temporaryLocalBody'] = $this->address['temporaryLocalBodies']->firstWhere('id', $this->userDetail['temporary_local_body_id']);
         }
     }
 
     public function checkSameAsPermanentAddress()
     {
-        if ($this->is_same_as_permanent === "1") {
-            $this->temporaryDistricts = $this->permanentDistricts;
-            $this->temporaryLocalBodies = $this->permanentLocalBodies;
-            $this->temporaryWards = $this->permanentWards;
+        if ($this->is_same_as_permanent) {
+            $this->address['temporaryDistricts'] = $this->address['permanentDistricts'];
+            $this->address['temporaryLocalBodies'] = $this->address['permanentLocalBodies'];
+            $this->address['temporaryWards'] = $this->address['permanentWards'];
             $this->userDetail['temporary_province_id'] = $this->userDetail['permanent_province_id'];
             $this->userDetail['temporary_district_id'] = $this->userDetail['permanent_district_id'];
             $this->userDetail['temporary_local_body_id'] = $this->userDetail['permanent_local_body_id'];
@@ -280,12 +280,32 @@ class OrganizationRegisterLivewire extends Component
         }
     }
 
+    public function checkOrganizationAddress()
+    {
+        if (!empty($this->organizationDetail['province_id'])) {
+            $this->address['organizationDistricts'] = Province::with('districts')->findOrFail($this->organizationDetail['province_id'])->districts;
+            $this->address['organizationProvince'] = $this->provinces->firstWhere('id', $this->organizationDetail['province_id']);
+        }
+        if (!empty($this->organizationDetail['district_id'])) {
+            $this->address['organizationLocalBodies'] = District::with('localBodies')->findOrFail($this->organizationDetail['district_id'])->localBodies;
+            $this->address['organizationDistrict'] = $this->address['organizationDistricts']->firstWhere('id', $this->organizationDetail['district_id']);
+        }
+        if (!empty($this->organizationDetail['local_body_id'])) {
+            $this->address['organizationWards'] = LocalBody::findOrFail($this->organizationDetail['local_body_id'])->ward_no;
+            $this->address['organizationLocalBody'] = $this->address['organizationLocalBodies']->firstWhere('id', $this->organizationDetail['local_body_id']);
+        }
+    }
+
     public function render()
     {
         $this->checkPermanentAddress();
         $this->checkOrganizationAddress();
         $this->checkTemporaryAddress();
         $this->checkSameAsPermanentAddress();
+
+        if (!empty($this->userDetail['citizenship_issued_district'])) {
+            $this->address['citizenshipIssuedDistrict'] = $this->districts->firstWhere('id', $this->userDetail['citizenship_issued_district']);
+        }
 
         return view('emap::livewire.organization-register-livewire');
     }

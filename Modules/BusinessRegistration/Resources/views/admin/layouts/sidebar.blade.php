@@ -45,8 +45,13 @@
                     </a>
                 </li>
             @endcan
-
         </ul>
     </div>
+</li>
+<li class="{{request()->is('admin/businessRegistration/files/file/*') ? 'active' : ''}}">
+    <a href="{{route('admin.businessRegistration.files.file')}}">
+        <i class="fa fa-file-archive"></i>
+        <span>फाईल व्यवस्थापन</span>
+    </a>
 </li>
 
