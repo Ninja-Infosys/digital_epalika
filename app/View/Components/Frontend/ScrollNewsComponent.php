@@ -11,7 +11,7 @@ class ScrollNewsComponent extends Component
 
     public function __construct()
     {
-        $this->scrollNews = Notice::where('type', 'Notice')->whereNull('closed_at')->orderByDesc('date')->limit(5)->get();
+        $this->scrollNews = Notice::where('type', 'News')->whereNull('closed_at')->orderByDesc('date')->limit(5)->get();
     }
 
     public function render()
