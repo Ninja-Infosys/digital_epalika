@@ -5,7 +5,7 @@ namespace App\View\Components\Frontend;
 use Illuminate\View\Component;
 use Modules\DigitalBoard\Entities\Notice;
 
-class NoticeVerticalSlider extends Component
+class NoticeVerticalSliderComponent extends Component
 {
     public $notices;
 
@@ -16,6 +16,6 @@ class NoticeVerticalSlider extends Component
 
     public function render()
     {
-        return view('components.frontend.notice-vertical-slider');
+        return view('components.frontend.notice-vertical-slider-component');
     }
 }
