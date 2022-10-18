@@ -11,16 +11,15 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.listRegistrations.files.permission')}}">इजाजत पत्र</a>
+                            <a href="{{route('admin.listRegistrations.files.file')}}">फाईल</a>
                         </li>
-                        <li class="breadcrumb-item active">फाईल</li>
                     </ol>
                 </div>
-                <h4 class="page-title">इजाजत पत्र</h4>
+                <h4 class="page-title">फाईल</h4>
             </div>
         </div>
         <div class="card">
-            <div class="d-md-flex justify-content-between ">
+            <div class="d-md-flex justify-content-between">
                 <form class="search-bar pt-2">
                     <div class="position-relative">
                         <input type="text" class="form-control form-control-light" placeholder="फाईल खोज्नुहोस्...">
@@ -37,7 +36,11 @@
                 </div>
             </div>
             <div class="my-3">
-                <div class="row mx-n1 g-0">
+                <div class="row mx-n1 g-0 pb-3">
+                    <div class="border-bottom d-flex justify-content-between">
+                        <p class="text-primary fw-semibold fs-5">दर्ता न: २०७९/०६</p>
+                        <button class="btn-primary btn-sm btn"><i class="fa fa-download"></i></button>
+                    </div>
                     <div class="col-xl-4 col-lg-6">
                         <div class="card m-1 shadow border rounded" data-bs-toggle="tooltip" data-bs-placement="top"
                              title="फाईल को शिर्षक फाईल को शिर्षक फाईल फाईल को शिर्षक फाईल को शिर्षक फाईल">
@@ -51,13 +54,13 @@
                                         </div>
                                     </div>
                                     <div class="col text-muted fw-bold text-truncate">
-                                        <p class="text-muted fw-bold">दर्ता न:२३०७६५४६</p>
                                         फाईल को शिर्षक फाईल को शिर्षक फाईल
                                     </div>
                                     <div class="col d-flex justify-content-between">
                                         <p class="mb-0 font-13">2.3 MB</p>
-                                        <a href="" class="rounded">
-                                            <i class="fa fa-download p-1 text-primary"></i></a>
+                                        <button class="btn-primary btn-sm btn">
+                                            <i class="fa fa-download text-white"></i>
+                                        </button>
                                     </div>
                                 </div> <!-- end row -->
                             </div> <!-- end .p-2-->

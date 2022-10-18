@@ -9,5 +9,8 @@ return [
         'office' => 'नगर कार्यपालिकाको कार्यालय',
         'office_address' => 'नेपालगंज, बाँके',
     ],
-    'office_type' => OfficeTypeEnum::SUB_METROPOLITAN->label()
+    'place' => 'नेपालगंज',
+    'place_short_name' => 'ने.',
+    'office_type' => OfficeTypeEnum::SUB_METROPOLITAN->label(),
+    'office_short_name' => OfficeTypeEnum::SUB_METROPOLITAN->shortName()
 ];

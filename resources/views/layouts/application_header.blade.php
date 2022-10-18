@@ -48,7 +48,7 @@
 
 
 <section>
-    <div class="mt-5">
+    <div>
 
         <div class="row justify-content-center">
             <div class="col-lg-12">

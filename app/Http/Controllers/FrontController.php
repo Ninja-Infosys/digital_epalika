@@ -15,18 +15,22 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $employees = Employee::orderBy('position')->get();
+        if (config('app.website_type') === 'website') {
+            $employees = Employee::orderBy('position')->get();
 
-        $notices = Notice::where('type', 'Notice')->orderBy('date')->limit(3)->get();
-        $newses = Notice::where('type', 'News')->orderBy('date')->limit(3)->get();
+            $notices = Notice::where('type', 'Notice')->orderBy('date')->limit(3)->get();
+            $newses = Notice::where('type', 'News')->orderBy('date')->limit(3)->get();
 
-        $meetingDetails = MunicipalMeetingDecision::with('meetingDetail')->whereHas('meetingDetail', function ($query) {
-            $query->orderByDesc('meeting_date');
-        })->get();
-        $sliders = Slider::latest()->get();
-        $municipalDetails = MunicipalDetail::all();
+            $meetingDetails = MunicipalMeetingDecision::with('meetingDetail')->whereHas('meetingDetail', function ($query) {
+                $query->orderByDesc('meeting_date');
+            })->get();
+            $sliders = Slider::latest()->get();
+            $municipalDetails = MunicipalDetail::all();
 
-        return view('frontend.home', compact('employees', 'notices', 'newses', 'meetingDetails', 'sliders', 'municipalDetails'));
+            return view('frontend.website', compact('employees', 'notices', 'newses', 'meetingDetails', 'sliders', 'municipalDetails'));
+        } else {
+            return view('frontend.digital_board');
+        }
     }
 
     public function notice()
@@ -50,42 +54,52 @@ class FrontController extends Controller
     {
         return view('frontend.static.introduction');
     }
+
     public function category()
     {
         return view('frontend.static.category.category');
     }
+
     public function representative()
     {
         return view('frontend.static.representive.representive');
     }
+
     public function audio()
     {
         return view('frontend.static.gallery.audio.index');
     }
+
     public function photo()
     {
         return view('frontend.static.gallery.photo.index');
     }
+
     public function single_photo()
     {
         return view('frontend.static.gallery.photo.single-photo');
     }
+
     public function video()
     {
         return view('frontend.static.gallery.video.index');
     }
+
     public function employee()
     {
         return view('frontend.static.employee.index');
     }
+
     public function executive()
     {
         return view('frontend.static.executive-board.index');
     }
+
     public function single_executive()
     {
         return view('frontend.static.executive-board.single-executive-board');
     }
+
     public function service_details()
     {
         return view('frontend.static.chat.service');
