@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('date');
+            $table->date('en_date')->nullable();
             $table->longText('description')->nullable();
             $table->dateTime('closed_at')->nullable();
             $table->boolean('show_on_index')->default(1);

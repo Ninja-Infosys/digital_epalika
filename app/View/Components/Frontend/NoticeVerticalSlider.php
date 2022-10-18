@@ -11,7 +11,7 @@ class NoticeVerticalSlider extends Component
 
     public function __construct()
     {
-        $this->notices = Notice::with('user')->where('type', 'Notice')->orderByDesc('date')->get();
+        $this->notices = Notice::where('type', 'Notice')->whereNull('closed_at')->orderByDesc('date')->get();
     }
 
     public function render()
