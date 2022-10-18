@@ -20,7 +20,7 @@
                     info desk
                 </div>
                 <div class="col-md-6">
-                    video desk
+                    <x-frontend.digital-board-video-component/>
                 </div>
             </div>
         </section>
