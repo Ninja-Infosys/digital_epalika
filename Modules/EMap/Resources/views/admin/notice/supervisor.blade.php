@@ -89,6 +89,10 @@
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                     </ul></td>
                                             </tr>
+                                            <tr>
+                                                <th scope="col">गारो तथा बन्धन राख्दा</th>
+                                                <th scope="col"></th>
+                                            </tr>
                                             </tbody>
                                         </table>
                                         <table class="table table-bordered">
@@ -255,6 +259,10 @@
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                         <li><span class="underline-dotted custom-width"></span></li>
                                                     </ul></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">डि.पि.सि. बन्धन</th>
+                                                <th scope="col"></th>
                                             </tr>
                                             </tbody>
                                         </table>
