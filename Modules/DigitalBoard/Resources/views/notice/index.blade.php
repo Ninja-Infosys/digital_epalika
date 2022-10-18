@@ -54,7 +54,7 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$notice->title}}</td>
-                                    <td>{{$notice->date->toDateString()}}</td>
+                                    <td>{{$notice->date}}</td>
                                     <td>
                                         <a href="{{route('admin.digitalBoard.notice.updateShowOnIndex',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-{{$notice->show_on_index==1 ?'primary':'danger'}}">

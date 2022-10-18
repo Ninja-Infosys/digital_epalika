@@ -35,15 +35,40 @@
                                 <h3 class="text-center mt-3"><b>सम्झौत पत्र</b></h3>
                                 <p class="text-center mt-2"><b>(सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</b></p>
                                 <p class="my-3">
-                                    लिखितम् नेपालगञ्ज उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span>बस्ने श्री<span class="underline-dotted custom-width"></span>को नाती/नातिनी श्री <span class="underline-dotted custom-width"></span> को छोरा/छोरी/श्रीमती/बुहारी घरधनी वर्ष <span class="underline-dotted custom-width"></span>को श्री <span class="underline-dotted custom-width"></span> यसपछि पहिलो पक्ष भनिएको र <span class="underline-dotted custom-width"></span> उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span>बस्ने सुपरिवेक्षण (इन्जिनियर, सव इन्जिनियर)
-                                    श्री<span class="underline-dotted custom-width"></span>को नाति/नातिनी श्री <span class="underline-dotted custom-width"></span>को छोरा/छोरी वर्ष <span class="underline-dotted custom-width"></span>को श्री <span class="underline-dotted custom-width"></span>यस पछि दोस्रो पक्ष भनिएको बीच आज मिति <span class="underline-dotted custom-width"></span>साल <span class="underline-dotted custom-width"></span>महिना<span class="underline-dotted custom-width"></span>गतेका दिन तपसिल बमोजिमका सर्तका अधिनमा रही कार्य गराउन मन्जुर भएको हुँदा यो समझदारी-पत्रमा सही छाप गरी किनाराका साक्षीको रोहवरमा एक-एक प्रति बुझि लियौँ दियौँ |
+                                    लिखितम् {{$mapApply->houseOwner->local_body??''}} वडा नं.<span
+                                        class="underline-dotted custom-width">{{$mapApply->houseOwner->ward_no??''}}</span>बस्ने श्री<span
+                                        class="underline-dotted custom-width">{{$mapApply->houseOwner->grand_father_name??''}}</span>को नाती/नातिनी श्री <span
+                                        class="underline-dotted custom-width">{{$mapApply->houseOwner->father_name??''}}</span> को छोरा/छोरी/श्रीमती/बुहारी घरधनी
+                                    वर्ष <span class="underline-dotted custom-width"></span>को श्री <span
+                                        class="underline-dotted custom-width">{{$mapApply->houseOwner->name??''}}</span> यसपछि पहिलो पक्ष भनिएको र <span
+                                        class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->local_body??''}}</span> वडा नं.<span
+                                        class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->ward_no??''}}</span>बस्ने सुपरिवेक्षण (इन्जिनियर, सव
+                                    इन्जिनियर)
+                                    श्री<span class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->grand_father_name??''}}</span>को नाति/नातिनी श्री <span
+                                        class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->father_name??''}}</span>को छोरा/छोरी वर्ष <span
+                                        class="underline-dotted custom-width"></span>को श्री <span
+                                        class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->name??''}}</span>यस पछि दोस्रो पक्ष भनिएको बीच आज
+                                    मिति <span class="underline-dotted custom-width"></span>साल <span
+                                        class="underline-dotted custom-width"></span>महिना<span
+                                        class="underline-dotted custom-width"></span>गतेका दिन तपसिल बमोजिमका सर्तका
+                                    अधिनमा रही कार्य गराउन मन्जुर भएको हुँदा यो समझदारी-पत्रमा सही छाप गरी किनाराका
+                                    साक्षीको रोहवरमा एक-एक प्रति बुझि लियौँ दियौँ ।
                                 </p>
                                 <h4>शर्तहरु:</h4>
-                                <p>१. घरधनीलाई आवश्यक पर्ने प्रविधिक सरसल्लाह एवं सुझाव उपलव्ध गराईनेछ |</p>
-                                <p>२. उप-महानगरपालिकाबाट 'राष्ट्रिय भवन संहिता-२०६०' 'जग्गा विकास तथा भवन मापदण्ड-२०६४तथा 'वस्ती विकास शहरी योजना तथा भवन मापदण्ड-२०७२' बमोजिम प्रथम चरणको नक्शा स्वीकृत भए पश्चात सो स्वीकृत नक्शामा तोकिए बमोजिमको Drawing, Design र Specification बमोजिम निर्माण कार्य गर्न गराउनको लागि आवश्यक पर्ने प्राविधिक सेवा उपलब्ध गराइनेछ ।</p>
-                                <p>३. निर्माणकर्मीहरुलाई आवश्यक पर्ने कुनैपनि अस्पष्ट कुराहरुलाई तोकिए बमोजिम स्पष्ट गराईनेछ |</p>
-                                <p>४. कार्य प्रगतिको बारेमा घरधनी र उप-महानगरपालिकालाई समय-समयमा जानकारी उपलब्ध गराईनेछ ।</p>
-                                <p>५. उप-महानगरपालिकाले तोके बमोजिम डि.पि.सि. सम्मको प्रतिवेदन उप-महानगरपालिकाले उपलब्ध गराएको फरम्याटमा तयार गरी उप-महानगरपालिकामा पेश गरिनेछ । भवन निर्माण सम्पन्न भैसकेपछि निर्माण सम्पन्नको प्रतिवेदन उप-महानगरपालिकाले उपलब्ध गराएको फरम्याटमा तयार गरी उप-महानगरपालिकामा पेश गरिनेछ ।</p>
+                                <p>१. घरधनीलाई आवश्यक पर्ने प्रविधिक सरसल्लाह एवं सुझाव उपलव्ध गराईनेछ ।</p>
+                                <p>२. {{config('applicationDetail.office_type')}}बाट 'राष्ट्रिय भवन संहिता-२०६०' 'जग्गा विकास तथा भवन
+                                    मापदण्ड-२०६४तथा 'वस्ती विकास शहरी योजना तथा भवन मापदण्ड-२०७२' बमोजिम प्रथम चरणको
+                                    नक्शा स्वीकृत भए पश्चात सो स्वीकृत नक्शामा तोकिए बमोजिमको Drawing, Design र
+                                    Specification बमोजिम निर्माण कार्य गर्न गराउनको लागि आवश्यक पर्ने प्राविधिक सेवा
+                                    उपलब्ध गराइनेछ ।</p>
+                                <p>३. निर्माणकर्मीहरुलाई आवश्यक पर्ने कुनैपनि अस्पष्ट कुराहरुलाई तोकिए बमोजिम स्पष्ट
+                                    गराईनेछ ।</p>
+                                <p>४. कार्य प्रगतिको बारेमा घरधनी र {{config('applicationDetail.office_type')}}लाई समय-समयमा जानकारी उपलब्ध गराईनेछ
+                                    ।</p>
+                                <p>५. {{config('applicationDetail.office_type')}}ले तोके बमोजिम डि.पि.सि. सम्मको प्रतिवेदन {{config('applicationDetail.office_type')}}ले उपलब्ध
+                                    गराएको फरम्याटमा तयार गरी {{config('applicationDetail.office_type')}}मा पेश गरिनेछ । भवन निर्माण सम्पन्न
+                                    भैसकेपछि निर्माण सम्पन्नको प्रतिवेदन {{config('applicationDetail.office_type')}}ले उपलब्ध गराएको फरम्याटमा तयार
+                                    गरी {{config('applicationDetail.office_type')}}मा पेश गरिनेछ ।</p>
                                 <table class="table table-bordered mt-2">
                                     <thead>
                                     <tr>
@@ -55,33 +80,36 @@
                                     <tbody>
                                     <tr>
 
-                                        <td>घरधनीको नाम:<span class="underline-dotted custom-width"></span></td>
-                                        <td>घरधनीको नाम:<span class="underline-dotted custom-width"></span></td>
-                                        <td>उप-महानगरपालिका<span class="underline-dotted custom-width"></span></td>
+                                        <td>घरधनीको नाम:<span class="underline-dotted custom-width">{{$mapApply->houseOwner->name??''}}</span></td>
+                                        <td>घरधनीको नाम:<span class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->name??''}}</span></td>
+                                        <td>{{config('applicationDetail.office_type')}}<span class="underline-dotted custom-width"></span></td>
                                     </tr>
                                     <tr>
                                         <td>हस्ताक्षर:<span class="underline-dotted custom-width"></span></td>
-                                        <td>ने.ई.का.नं. :<span class="underline-dotted custom-width"></span></td>
+                                        <td>ने.ई.का.नं. :<span class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->nec_council_no??''}}</span></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>ठेगाना:<span class="underline-dotted custom-width">{{$mapApply->houseOwner->address??''}}</span></td>
+                                        <td>कन्सल्टेन्सी:<span class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->consulting_firm_name??''}}</span></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td>कन्सल्टेन्सी:<span class="underline-dotted custom-width"></span></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                       <td></td>
                                         <td>हस्ताक्षर:<span class="underline-dotted custom-width"></span></td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td>ठेगाना:<span class="underline-dotted custom-width"></span></td>
+                                        <td>ठेगाना:<span class="underline-dotted custom-width">{{$mapApply->designerDetails->first()->address??''}}</span></td>
                                         <td></td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <p>मिति: २०७<span class="underline-dotted custom-width"></span>महिना<span class="underline-dotted custom-width"></span>गते<span class="underline-dotted custom-width"></span>|</p>
+                                <p>मिति: २०७<span class="underline-dotted custom-width"></span>महिना<span
+                                        class="underline-dotted custom-width"></span>गते<span
+                                        class="underline-dotted custom-width"></span> । </p>
 
                             </div>
                         </div>

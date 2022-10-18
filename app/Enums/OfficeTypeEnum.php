@@ -23,4 +23,19 @@ enum OfficeTypeEnum: string
             self::METROPOLITAN => 'महानगरपालिका',
         };
     }
+
+    public function shortName(): string
+    {
+        return self::getShortName($this);
+    }
+
+    public static function getShortName(self $value): string
+    {
+        return match ($value) {
+            self::RURAL_MUNICIPALITY => 'गा.पा.',
+            self::MUNICIPALITY => 'न.पा.',
+            self::SUB_METROPOLITAN => 'उ.म.न.पा.',
+            self::METROPOLITAN => 'म.न.पा.',
+        };
+    }
 }

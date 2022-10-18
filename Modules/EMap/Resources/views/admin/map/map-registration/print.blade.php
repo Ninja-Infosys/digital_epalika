@@ -8,19 +8,20 @@
                        href="{{route('emap.admin.map.map-apply.map-registration.edit',[$mapApply,$mapApply->mapRegistration])}}">
                         <i class="fa fa-edit"></i> दर्ता
                         गरिएको नक्सा अपडेट गर्नुहोस्</a>
+                    <x-application-component
+                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_FEES_AND_REGISTRATION"
+                        url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
+                    <button class="btn btn-sm btn-success mx-2 printButton" printElementId='printData1'
+                            requestRoute="{{route('print.application-print')}}" title="Print Application">
+                        <i class="fa fa-print"></i>
+                    </button>
                 @else
                     <a class="btn btn-primary btn-sm"
                        href="{{route('emap.admin.map.map-apply.map-registration.create',$mapApply)}}"> <i
                             class="fa fa-plus"></i> नक्सा दर्ता
                         गर्नुहोस</a>
                 @endif
-                    <x-application-component
-                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_FEES_AND_REGISTRATION"
-                        url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
-                <button class="btn btn-sm btn-success mx-2 printButton" printElementId='printData1'
-                        requestRoute="{{route('print.application-print')}}" title="Print Application">
-                    <i class="fa fa-print"></i>
-                </button>
+
 
             </div>
         </div>

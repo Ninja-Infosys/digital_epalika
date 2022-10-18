@@ -13,7 +13,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapApplication;
+use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Enums\PostsEnum;
 
 class MapController extends Controller
 {
@@ -35,7 +37,7 @@ class MapController extends Controller
 
     public function show(MapApply $mapApply)
     {
-        $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications' => function ($query) {
+        $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications','applyMapNotices' => function ($query) {
             $query->latest();
         }]);
         return view('emap::admin.map.show', compact('mapApply'));
@@ -51,6 +53,18 @@ class MapController extends Controller
         }
 
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');
+        return redirect(route('emap.admin.map.mapApply.show', $mapApply));
+    }
+
+    public function rejectApplyMapNotice(MapApply $mapApply, ApplyMapNotice $applyMapNotice)
+    {
+        if ($applyMapNotice->rejected_at == null) {
+            $applyMapNotice->update(['rejected_at' => now()]);
+        } else {
+            $applyMapNotice->update(['rejected_at' => null]);
+        }
+
+        toast('सूचना  सफलतापूर्वक अस्वीकार गरियो', 'success');
         return redirect(route('emap.admin.map.mapApply.show', $mapApply));
     }
 
@@ -72,40 +86,58 @@ class MapController extends Controller
 
     public function mapArrears(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load('landDetail', 'houseOwner');
         return view('emap::admin.notice.map-arrears', compact('mapApply'));
     }
 
     public function landArrears(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load('landDetail', 'houseOwner', 'landOwner');
         return view('emap::admin.notice.land-arrears', compact('mapApply'));
     }
 
     public function technicianNotice(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load('landDetail', 'houseOwner', 'fourForts',
+            'criteriaDetails');
         return view('emap::admin.notice.technician-notice', compact('mapApply'));
     }
 
     public function chAgreement(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load(['houseOwner', 'designerDetails' => function ($query) {
+            $query->where('post', PostsEnum::SUPERVISOR->value)->first();
+        }]);
         return view('emap::admin.notice.ch-agreement', compact('mapApply'));
     }
 
     public function agentAgreement(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load(['houseOwner', 'designerDetails' => function ($query) {
+            $query->where('post', PostsEnum::CONTRACTOR->value)->first();
+        }]);
         return view('emap::admin.notice.agent-agreement', compact('mapApply'));
     }
 
     public function permissionLetter(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load('landDetail', 'landOwner', 'houseOwner');
         return view('emap::admin.notice.permission-letter', compact('mapApply'));
     }
 
-    public function level(MapApply $mapApply)
+    public function level(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load(['landDetail.unit', 'landOwner', 'houseOwner', 'structureType',
+            'criteriaDetails',
+            'buildingDetails']);
         return view('emap::admin.notice.level', compact('mapApply'));
     }
+    public function superVisor(MapApply $mapApply)
+    {
+        return view('emap::admin.notice.supervisor', compact('mapApply'));
+    }
 
-    public function applyMapNotice(Request $request,MapApply $mapApply): RedirectResponse
+    public function applyMapNotice(Request $request, MapApply $mapApply): RedirectResponse
     {
         $data = $request->validate([
             'file' => ['required', 'mimes:pdf'],

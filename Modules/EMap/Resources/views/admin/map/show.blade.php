@@ -116,17 +116,29 @@
 
                         </div>
 
-                        <div class="tab-pane" id="notice-tab" role="tabpanel">
-                            <p>Vakal text here dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-                                sem. Nulla consequat massa quis enim.</p>
-                            <p class="mb-0">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim
-                                justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-                                mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean
-                                vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend
-                                ac, enim.</p>
-                        </div>
+
+                            <div class="tab-pane" id="notice-tab" role="tabpanel">
+                                <div class="row row-cols-1 row-cols-md-3 g-3">
+                                    @foreach($mapApply->applyMapNotices->whereNull('rejected_at') as $applyMapNotice)
+                                        <div class="col">
+                                            <div class="card">
+                                                <iframe class="card-img-top img-fluid" height="500" frameborder="0"
+                                                        src="{{$applyMapNotice->file_url}}"></iframe>
+                                                <div class="card-body">
+                                                    <h4 class="card-title">{{$applyMapNotice->file_type->label() ?? ''}}</h4>
+                                                    <p class="card-text mt-2">
+                                                    </p>
+                                                    <p class="card-text">
+                                                        <small
+                                                            class="text-muted">{{$applyMapNotice->created_at->diffForHumans() ?? ''}}</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                            </div>
 
                         <div class="tab-pane" id="rejected_application_tab" role="tabpanel">
                             <div class="row row-cols-1 row-cols-md-3 g-3">
