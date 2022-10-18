@@ -2,7 +2,7 @@
 @section('content')
     <main class="container-fluid">
         <section class="news-section">
-            news
+            <x-frontend.scroll-news-component/>
         </section>
         <section class="mid">
             <div class="row">

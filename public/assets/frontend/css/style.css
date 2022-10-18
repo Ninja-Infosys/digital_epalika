@@ -174,11 +174,11 @@ body {
 .newsbar-container {
     display:flex;
     align-items:center;
-    background-color:#2460B9
+    background-color: var(--mainColor)
 }
 .newsbar-title {
-    color:#ce1126;
-    background-color:#fff;
+    color: var(--whiteColor);
+    background-color:#ce1126;
     font-size:.833rem;
     font-weight:600;
     padding:.75rem 1rem .75rem .5rem;
@@ -254,4 +254,34 @@ body {
 }
 .jctkr-label {
     display:inline-block
+}
+.vertical-scroll {
+    width: 100%;
+    height: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.move {
+    top: 480px;
+    position: relative;
+    box-sizing: border-box;
+    animation: marquee 50s linear infinite;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--mainColor);
+}
+.move img{
+    width: 100%;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-150%);
+    }
 }
