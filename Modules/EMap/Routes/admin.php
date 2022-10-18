@@ -30,6 +30,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
+    Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplyMapNotice')->name('mapApply.rejectApplyMapNotice');
     Route::get('mapApply', 'index')->name('mapApply.index');
 });
 
