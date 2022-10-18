@@ -285,3 +285,14 @@ body {
         transform: translateY(-150%);
     }
 }
+.footer-alt {
+    left: 0 !important;
+    text-align: center;
+    color: var(--whiteColor);
+}
+.footer {
+    bottom: 0;
+    padding: 19px 15px 20px;
+    right: 0;
+    left: 240px;
+}
