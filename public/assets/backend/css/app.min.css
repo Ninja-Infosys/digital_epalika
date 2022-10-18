@@ -211,8 +211,9 @@
 }
 
 :root .tooltip {
-    --ct-tooltip-color: #fff;
-    --ct-tooltip-bg: #000
+    --ct-tooltip-color: #6658DD;
+    --ct-tooltip-bg: #A8B4C0;
+
 }
 
 :root .popover {
