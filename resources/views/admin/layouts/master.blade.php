@@ -78,10 +78,9 @@
 
 <!-- Vendor js -->
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
-<script src="{{asset('assets/backend/libs/chart.js/Chart.bundle.min.js')}}"></script>
-<script src="{{asset('assets/backend/js/pages/chartjs.init.js')}}"></script>
 <!-- App js-->
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
+<script src="{{asset('assets/backend/libs/chart.js/Chart.bundle.min.js')}}"></script>
 
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
 <script>
