@@ -104,6 +104,10 @@ class MapController extends Controller
     {
         return view('emap::admin.notice.level', compact('mapApply'));
     }
+    public function superVisor(MapApply $mapApply)
+    {
+        return view('emap::admin.notice.supervisor', compact('mapApply'));
+    }
 
     public function applyMapNotice(Request $request,MapApply $mapApply): RedirectResponse
     {

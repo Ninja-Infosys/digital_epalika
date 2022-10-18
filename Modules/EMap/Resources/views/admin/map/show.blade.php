@@ -233,6 +233,7 @@
                     <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">टिप्पणी र आदेश</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.supervisor',$mapApply)}}" class="btn btn-sm btn-outline-primary">सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन</a>
                 </div>
             </div>
         </div>
