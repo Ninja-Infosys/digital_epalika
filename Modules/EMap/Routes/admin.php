@@ -30,6 +30,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
+    Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplyMapNotice')->name('mapApply.rejectApplyMapNotice');
     Route::get('mapApply', 'index')->name('mapApply.index');
 });
 
@@ -40,8 +41,7 @@ Route::prefix('setting')->group(function () {
 });
 
 Route::prefix('files')->as('files.')->group(function (){
-    Route::view('notice-file', 'emap::admin.file.notice_file')->name('notice-file');
-    Route::view('application-file', 'emap::admin.file.application_file')->name('application-file');
+    Route::view('file', 'emap::admin.file.file')->name('file');
 });
 
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
