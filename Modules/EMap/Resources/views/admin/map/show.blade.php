@@ -119,7 +119,7 @@
 
                             <div class="tab-pane" id="notice-tab" role="tabpanel">
                                 <div class="row row-cols-1 row-cols-md-3 g-3">
-                                    @foreach($mapApply->applyMapNotices->whereNull('rejected_at') as $applyMapNotice)
+                                    @foreach($mapApply->applyMapNotices->where('type',\Modules\EMap\Enums\FileTypeEnum::NOTICE)->whereNull('rejected_at') as $applyMapNotice)
                                         <div class="col">
                                             <div class="card">
                                                 <iframe class="card-img-top img-fluid" height="500" frameborder="0"
@@ -228,7 +228,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -236,15 +236,51 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">संघियारको नाममा जारी भएको सूचना</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">१५ दिने सूचना टाँस सम्बन्धमा</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary">सरजमिन मुचुल्का</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्राविधिक प्रतिवेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary">टिप्पणी र आदेश</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">संघियारको नाममा जारी भएको सूचना</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">१५ दिने सूचना टाँस सम्बन्धमा</a>
+
+                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्राविधिक प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">प्रमाणपत्रहरु</h4>
+                    </div>
+                </div>
+                <div class="card-body">
                     <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">प्रतिबेदन</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-consultant-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-technician-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}} प्राबिधिकको प्रतिबेदन</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">मुचुल्का</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सरजमिन मुचुल्का</a>
                 </div>
             </div>
         </div>

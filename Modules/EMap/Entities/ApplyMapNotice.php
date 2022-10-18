@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\EMap\Enums\FileTypeEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
 
 class ApplyMapNotice extends Model
@@ -24,13 +25,25 @@ class ApplyMapNotice extends Model
     protected $fillable = [
         'map_apply_id',
         'file',
+        'type',
         'file_type',
         'rejected_at'
     ];
 
     protected $casts = [
         'file_type' => NoticeTypeEnum::class,
+        'type' => FileTypeEnum::class
     ];
+
+    public function scopeNotice($query)
+    {
+        return $query->where('type', FileTypeEnum::NOTICE->value);
+    }
+
+    public function scopeRejected($query)
+    {
+        return $query->whereNull('rejected_at');
+    }
 
     public function getApplicationTypeAttribute()
     {

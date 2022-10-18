@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapApplication;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Enums\FileTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class MapController extends Controller
@@ -37,7 +38,7 @@ class MapController extends Controller
 
     public function show(MapApply $mapApply)
     {
-        $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications','applyMapNotices' => function ($query) {
+        $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
             $query->latest();
         }]);
         return view('emap::admin.map.show', compact('mapApply'));
@@ -132,18 +133,49 @@ class MapController extends Controller
             'buildingDetails']);
         return view('emap::admin.notice.level', compact('mapApply'));
     }
-    public function superVisor(MapApply $mapApply)
+
+    public function superVisor(MapApply $mapApply): Factory|View|Application
     {
         return view('emap::admin.notice.supervisor', compact('mapApply'));
     }
 
-    public function applyMapNotice(Request $request, MapApply $mapApply): RedirectResponse
+    public function firstPhaseConsultantReport(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail', 'houseOwner');
+        return view('emap::admin.map.report.first_phase_consultant_report', compact('mapApply'));
+    }
+
+    public function firstPhaseTechnicianReport(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail', 'houseOwner');
+        return view('emap::admin.map.report.first_phase_technician_report', compact('mapApply'));
+
+    }
+
+    public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {
         $data = $request->validate([
             'file' => ['required', 'mimes:pdf'],
             'file_type' => ['required']
         ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::NOTICE->value
+            ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+
+    public function bond(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::BOND->value
+            ]);
 
         Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
