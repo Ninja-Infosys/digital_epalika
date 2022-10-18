@@ -2,12 +2,12 @@
 @section('content')
     <main class="container-fluid">
         <section class="news-section">
-            news
+            <x-frontend.scroll-news-component/>
         </section>
         <section class="mid">
             <div class="row">
                 <div class="col-md-6">
-                        <x-frontend.notice-vertical-slider-component/>
+                <x-frontend.notice-vertical-slider-component/>
                 </div>
                 <div class="col-md-6">
                    <x-frontend.employee-section-component/>
