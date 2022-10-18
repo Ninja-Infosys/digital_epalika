@@ -5,8 +5,10 @@ namespace Modules\EMap\Http\Livewire;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\Organization;
@@ -17,7 +19,7 @@ class OrganizationRegisterLivewire extends Component
 
     public int $currentStep = 1;
 
-    public bool $is_same_as_permanent = false;
+    public $is_same_as_permanent = false;
 
     public $is_organization = "1";
 
@@ -45,12 +47,6 @@ class OrganizationRegisterLivewire extends Component
         'organizationWards' => [],
         'organizationDistricts' => [],
     ];
-
-    public function mount()
-    {
-        $this->districts = District::orderBy('province_id')->get();
-        $this->provinces = Province::all();
-    }
 
     public array $user = [
         'name' => null,
@@ -108,17 +104,6 @@ class OrganizationRegisterLivewire extends Component
         'document' => null,
         'year' => null,
     ];
-
-    public function nextStep($step)
-    {
-        $this->validate();
-        $this->currentStep = $step;
-    }
-
-    public function backStep($step)
-    {
-        $this->currentStep = $step;
-    }
 
     protected array $firstStepValidations = [
         'is_organization' => ['required'],
@@ -184,6 +169,23 @@ class OrganizationRegisterLivewire extends Component
         'user.phone' => ['required', 'unique:organizations,phone'],
     ];
 
+    public function mount(): void
+    {
+        $this->districts = District::orderBy('province_id')->get();
+        $this->provinces = Province::get();
+    }
+
+    public function nextStep($step): void
+    {
+        $this->validate();
+        $this->currentStep = $step;
+    }
+
+    public function backStep($step): void
+    {
+        $this->currentStep = $step;
+    }
+
     protected function rules(): array
     {
         return match ($this->currentStep) {
@@ -197,17 +199,18 @@ class OrganizationRegisterLivewire extends Component
 
     }
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
 
-    public function submitFormData()
+    public function submitFormData(): void
     {
         $this->validate();
         DB::transaction(function () {
             $DbUser = Organization::create($this->user);
             $DbUser->userDetail()->create($this->userDetail);
+
             if ($this->is_organization) {
                 $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
                 $DbOrgDetail->taxClearances()->create($this->taxClearance);
@@ -222,13 +225,13 @@ class OrganizationRegisterLivewire extends Component
         ]);
     }
 
-    public function resetForm()
+    public function resetForm(): void
     {
         $this->reset('is_organization', 'is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user', 'organizationDetail', 'taxClearance');
 
     }
 
-    public function checkPermanentAddress()
+    public function checkPermanentAddress(): void
     {
         if (!empty($this->userDetail['permanent_province_id'])) {
             $this->address['permanentDistricts'] = Province::with('districts')->findOrFail($this->userDetail['permanent_province_id'])->districts;
@@ -244,7 +247,7 @@ class OrganizationRegisterLivewire extends Component
         }
     }
 
-    public function checkTemporaryAddress()
+    public function checkTemporaryAddress(): void
     {
         if (!empty($this->userDetail['temporary_province_id'])) {
             $this->address['temporaryDistricts'] = Province::with('districts')->findOrFail($this->userDetail['temporary_province_id'])->districts;
@@ -260,18 +263,23 @@ class OrganizationRegisterLivewire extends Component
         }
     }
 
-    public function checkSameAsPermanentAddress()
+    public function checkSameAsPermanentAddress(): void
     {
+        $this->is_same_as_permanent = !$this->is_same_as_permanent;
+
         if ($this->is_same_as_permanent) {
-            $this->address['temporaryDistricts'] = $this->address['permanentDistricts'];
-            $this->address['temporaryLocalBodies'] = $this->address['permanentLocalBodies'];
-            $this->address['temporaryWards'] = $this->address['permanentWards'];
-            $this->userDetail['temporary_province_id'] = $this->userDetail['permanent_province_id'];
-            $this->userDetail['temporary_district_id'] = $this->userDetail['permanent_district_id'];
-            $this->userDetail['temporary_local_body_id'] = $this->userDetail['permanent_local_body_id'];
-            $this->userDetail['temporary_ward'] = $this->userDetail['permanent_ward'];
-            $this->userDetail['temporary_tole'] = $this->userDetail['permanent_tole'];
+            $this->address['temporaryDistricts'] = $this->address['permanentDistricts'] ?? [];
+            $this->address['temporaryLocalBodies'] = $this->address['permanentLocalBodies'] ?? [];
+            $this->address['temporaryWards'] = $this->address['permanentWards'] ?? [];
+            $this->userDetail['temporary_province_id'] = $this->userDetail['permanent_province_id'] ?? null;
+            $this->userDetail['temporary_district_id'] = $this->userDetail['permanent_district_id'] ?? null;
+            $this->userDetail['temporary_local_body_id'] = $this->userDetail['permanent_local_body_id'] ?? null;
+            $this->userDetail['temporary_ward'] = $this->userDetail['permanent_ward'] ?? null;
+            $this->userDetail['temporary_tole'] = $this->userDetail['permanent_tole'] ?? null;
         } else {
+            $this->address['temporaryDistricts'] = [];
+            $this->address['temporaryLocalBodies'] = [];
+            $this->address['temporaryWards'] = [];
             $this->userDetail['temporary_province_id'] = null;
             $this->userDetail['temporary_district_id'] = null;
             $this->userDetail['temporary_local_body_id'] = null;
@@ -280,7 +288,7 @@ class OrganizationRegisterLivewire extends Component
         }
     }
 
-    public function checkOrganizationAddress()
+    public function checkOrganizationAddress(): void
     {
         if (!empty($this->organizationDetail['province_id'])) {
             $this->address['organizationDistricts'] = Province::with('districts')->findOrFail($this->organizationDetail['province_id'])->districts;
@@ -296,12 +304,11 @@ class OrganizationRegisterLivewire extends Component
         }
     }
 
-    public function render()
+    public function render(): Factory|View|Application
     {
         $this->checkPermanentAddress();
         $this->checkOrganizationAddress();
         $this->checkTemporaryAddress();
-        $this->checkSameAsPermanentAddress();
 
         if (!empty($this->userDetail['citizenship_issued_district'])) {
             $this->address['citizenshipIssuedDistrict'] = $this->districts->firstWhere('id', $this->userDetail['citizenship_issued_district']);

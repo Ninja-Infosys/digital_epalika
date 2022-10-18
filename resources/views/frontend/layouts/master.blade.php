@@ -6,14 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Digital e-Palika</title>
-    {{--css link--}}
     <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/navbar.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/header.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/footer.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    {{--font-awesome--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
           integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -24,11 +22,19 @@
 </head>
 <body>
 @include('frontend.partials.header')
+@if(config('app.website_type') === 'website')
 @include('frontend.partials.navbar')
+@endif
 <div class="container">
     @yield('content')
 </div>
-@include('frontend.partials.footer')
+
+@if(config('app.website_type') === 'website')
+@include('frontend.partials.website_footer')
+@else
+@include('frontend.partials.digital_board_footer')
+@endif
+
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
