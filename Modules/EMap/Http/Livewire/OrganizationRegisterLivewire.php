@@ -25,6 +25,20 @@ class OrganizationRegisterLivewire extends Component
     public $provinces = [];
 
 //    permanent address
+    public object $permanentProvince;
+    public object $permanentDistrict;
+    public object $permanentLocalBody;
+
+    public object $temporaryProvince;
+    public object $temporaryDistrict;
+    public object $temporaryLocalBody;
+
+    public object $organizationProvince;
+    public object $organizationDistrict;
+    public object $organizationLocalBody;
+
+    public object $citizenshipIssuedDistrict;
+
     public $permanentLocalBodies = [];
     public $permanentWards = [];
     public $permanentDistricts = [];
@@ -45,13 +59,13 @@ class OrganizationRegisterLivewire extends Component
         $this->provinces = Province::all();
     }
 
-    public $user = [
+    public array $user = [
         'name' => null,
         'email' => null,
         'phone' => null
     ];
 
-    public $userDetail = [
+    public array $userDetail = [
         'name_ne' => null,
         'name_en' => null,
         'email' => null,
@@ -80,7 +94,7 @@ class OrganizationRegisterLivewire extends Component
         'temporary_tole' => null,
     ];
 
-    public $organizationDetail = [
+    public array $organizationDetail = [
         'org_name_ne' => null,
         'org_name_en' => null,
         'org_email' => null,
@@ -97,7 +111,7 @@ class OrganizationRegisterLivewire extends Component
         'tole' => null,
     ];
 
-    public $taxClearance = [
+    public array $taxClearance = [
         'document' => null,
         'year' => null,
     ];
@@ -225,12 +239,15 @@ class OrganizationRegisterLivewire extends Component
     {
         if (!empty($this->userDetail['permanent_province_id'])) {
             $this->permanentDistricts = Province::with('districts')->findOrFail($this->userDetail['permanent_province_id'])->districts;
+            $this->permanentProvince = $this->provinces->firstWhere('id', $this->userDetail['permanent_province_id']);
         }
         if (!empty($this->userDetail['permanent_district_id'])) {
             $this->permanentLocalBodies = District::with('localBodies')->findOrFail($this->userDetail['permanent_district_id'])->localBodies;
+            $this->permanentDistrict = $this->permanentDistricts->firstWhere('id', $this->userDetail['permanent_district_id']);
         }
         if (!empty($this->userDetail['permanent_local_body_id'])) {
             $this->permanentWards = LocalBody::findOrFail($this->userDetail['permanent_local_body_id'])->ward_no;
+            $this->permanentLocalBody = $this->permanentLocalBodies->firstWhere('id', $this->userDetail['permanent_local_body_id']);
         }
     }
 
@@ -238,12 +255,15 @@ class OrganizationRegisterLivewire extends Component
     {
         if (!empty($this->userDetail['temporary_province_id'])) {
             $this->temporaryDistricts = Province::with('districts')->findOrFail($this->userDetail['temporary_province_id'])->districts;
+            $this->temporaryProvince = $this->provinces->firstWhere('id', $this->userDetail['temporary_province_id']);
         }
         if (!empty($this->userDetail['temporary_district_id'])) {
             $this->temporaryLocalBodies = District::with('localBodies')->findOrFail($this->userDetail['temporary_district_id'])->localBodies;
+            $this->temporaryDistrict = $this->temporaryDistricts->firstWhere('id', $this->userDetail['temporary_district_id']);
         }
         if (!empty($this->userDetail['temporary_local_body_id'])) {
             $this->temporaryWards = LocalBody::findOrFail($this->userDetail['temporary_local_body_id'])->ward_no;
+            $this->temporaryLocalBody = $this->temporaryLocalBodies->firstWhere('id', $this->userDetail['temporary_local_body_id']);
         }
     }
 
@@ -251,12 +271,15 @@ class OrganizationRegisterLivewire extends Component
     {
         if (!empty($this->organizationDetail['province_id'])) {
             $this->organizationDistricts = Province::with('districts')->findOrFail($this->organizationDetail['province_id'])->districts;
+            $this->organizationProvince = $this->provinces->firstWhere('id', $this->organizationDetail['province_id']);
         }
         if (!empty($this->organizationDetail['district_id'])) {
             $this->organizationLocalBodies = District::with('localBodies')->findOrFail($this->organizationDetail['district_id'])->localBodies;
+            $this->organizationDistrict = $this->organizationDistricts->firstWhere('id', $this->organizationDetail['district_id']);
         }
         if (!empty($this->organizationDetail['local_body_id'])) {
             $this->organizationWards = LocalBody::findOrFail($this->organizationDetail['local_body_id'])->ward_no;
+            $this->organizationLocalBody = $this->organizationLocalBodies->firstWhere('id', $this->organizationDetail['local_body_id']);
         }
     }
 
@@ -286,6 +309,10 @@ class OrganizationRegisterLivewire extends Component
         $this->checkOrganizationAddress();
         $this->checkTemporaryAddress();
         $this->checkSameAsPermanentAddress();
+
+        if (!empty($this->userDetail['citizenship_issued_district'])) {
+            $this->citizenshipIssuedDistrict = $this->districts->firstWhere('id', $this->userDetail['citizenship_issued_district']);
+        }
 
         return view('emap::livewire.organization-register-livewire');
     }

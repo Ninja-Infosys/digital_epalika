@@ -89,7 +89,9 @@
                             <label for="userDetail.nec_certificate" class="form-label">
                                 Upload NEC Certificate
                             </label>
-                            <input type="file" class="form-control" id="userDetail.nec_certificate"
+                            <input type="file"
+                                   class="form-control {{$userDetail['nec_certificate'] ? 'is-valid' : ''}}"
+                                   id="userDetail.nec_certificate"
                                    wire:model="userDetail.nec_certificate"/>
                             @error('userDetail.nec_certificate')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -139,7 +141,7 @@
                                     name="userDetail.citizenship_issued_date"
                                     class="form-control @error('userDetail.citizenship_issued_date') is-invalid @enderror"
                                     type="text"
-                                    id="userDetail.citizenship_issued_district"
+                                    id="userDetail.citizenship_issued_date"
                                     placeholder="जारी मिति"
                                     wire:model="userDetail.citizenship_issued_date"
                                 />
@@ -151,7 +153,9 @@
                                 <label for="userDetail.citizenship_front" class="form-label">नागरिकता अपलोड
                                     गर्नुहोस्
                                     (आगाडी) <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" id="userDetail.citizenship_front"
+                                <input type="file"
+                                       class="form-control {{$userDetail['citizenship_front'] ? 'is-valid' : ''}}"
+                                       id="userDetail.citizenship_front"
                                        wire:model="userDetail.citizenship_front"/>
                                 @error('userDetail.citizenship_front')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -160,51 +164,19 @@
                             <div class="col-md-6 mb-1">
                                 <label for="userDetail.citizenship_back" class="form-label">नागरिकता अपलोड गर्नुहोस्
                                     (पछाडि) <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" id="userDetail.citizenship_back"
+                                <input type="file"
+                                       class="form-control {{$userDetail['citizenship_back'] ? 'is-valid' : ''}}"
+                                       id="userDetail.citizenship_back"
                                        wire:model="userDetail.citizenship_back"/>
                                 @error('userDetail.citizenship_back')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        @if ($userDetail['nec_certificate'])
-                                            NEC Certificate
-                                            <div class="card" style="width: 8rem">
-                                                <img src="{{ $userDetail['nec_certificate']->temporaryUrl() }}"
-                                                     height="150"
-                                                     alt="">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4">
-                                        @if ($userDetail['citizenship_front'])
-                                            नागरिकता अपलोड गर्नुहोस् (आगाडी)
-                                            <div class="card" style="width: 8rem">
-                                                <img src="{{ $userDetail['citizenship_front']->temporaryUrl() }}"
-                                                     height="150"
-                                                     alt="">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4">
-                                        @if ($userDetail['citizenship_back'])
-                                            नागरिकता अपलोड गर्नुहोस् (आगाडी)
-                                            <div class="card" style="width: 8rem">
-                                                <img src="{{ $userDetail['citizenship_back']->temporaryUrl() }}"
-                                                     height="150"
-                                                     alt="">
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </fieldset>
-                    <ul class="list-inline wizard mb-0">
-                        <li class="next list-inline-item float-end">
-                            <button type="button" wire:click.prevent="backStep(1)" class="btn btn-success">
+                    <ul class="list-inline wizard mt-3">
+                        <li class="next d-flex justify-content-around">
+                            <button type="button" wire:click.prevent="backStep(1)" class="btn btn-info">
                                 <i class="fa fa-arrow-circle-left"></i> पछाडि
                             </button>
                             <button type="button"
@@ -386,9 +358,9 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <ul class="list-inline wizard mb-0">
-                            <li class="next list-inline-item float-end">
-                                <button type="button" wire:click.prevent="backStep(2)" class="btn btn-success">
+                        <ul class="list-inline wizard mt-3">
+                            <li class="next d-flex justify-content-around">
+                                <button type="button" wire:click.prevent="backStep(2)" class="btn btn-info">
                                     <i class="fa fa-arrow-circle-left"></i> पछाडि
                                 </button>
                                 <button type="button"
@@ -433,7 +405,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
-                                            <span class="input-group-text" id="userDetail.email">
+                                            <span class="input-group-text" id="organizationDetail.org_email">
                                                 <i class="fa fa-envelope"></i>
                                             </span>
                                     <input name="organizationDetail.org_email"
@@ -452,7 +424,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
-                                            <span class="input-group-text" id="userDetail.email">
+                                            <span class="input-group-text" id="organizationDetail.org_contact">
                                                 <i class="fa fa-phone"></i>
                                             </span>
                                     <input name="organizationDetail.org_contact"
@@ -574,9 +546,9 @@
                             </div>
                         </div>
                     </fieldset>
-                    <ul class="list-inline wizard mb-0">
-                        <li class="next list-inline-item float-end">
-                            <button type="button" wire:click.prevent="backStep(3)" class="btn btn-success">
+                    <ul class="list-inline wizard mt-3">
+                        <li class="next d-flex justify-content-around">
+                            <button type="button" wire:click.prevent="backStep(3)" class="btn btn-info">
                                 <i class="fa fa-arrow-circle-left"></i> पछाडि
                             </button>
                             <button type="button"
@@ -591,8 +563,11 @@
                     <div class="company-document">
                         <div class="row">
                             <div class="col-md-3 mb-1">
-                                <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो</label>
-                                <input type="file" class="form-control" id="organizationDetail.logo"
+                                <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो
+                                    <span class="text-danger">*</span></label>
+                                <input type="file"
+                                       class="form-control {{$organizationDetail['logo'] ? 'is-valid' : ''}}"
+                                       id="organizationDetail.logo"
                                        wire:model="organizationDetail.logo"/>
                                 @error('organizationDetail.logo')
                                 <div class="invalid-feedback">{{$message}}</div>
@@ -600,8 +575,9 @@
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label for="organizationDetail.org_registration_document" class="form-label">कम्पनी
-                                    प्रमाणपत्र</label>
-                                <input type="file" class="form-control"
+                                    प्रमाणपत्र <span class="text-danger">*</span></label>
+                                <input type="file"
+                                       class="form-control {{$organizationDetail['org_registration_document'] ? 'is-valid' : ''}}"
                                        id="organizationDetail.org_registration_document"
                                        wire:model="organizationDetail.org_registration_document"/>
                                 @error('organizationDetail.org_registration_document')
@@ -609,84 +585,47 @@
                                 @enderror
                             </div>
                             <div class="col-md-3 mb-1">
-                                <label for="organizationDetail.org_pan_document" class="form-label">प्यान
-                                    प्रमाणपत्र:</label>
-                                <input type="file" class="form-control" id="organizationDetail.org_pan_document"
+                                <label for="organizationDetail.org_pan_document" class="form-label">पाना
+                                    प्रमाणपत्र <span class="text-danger">*</span></label>
+                                <input type="file"
+                                       class="form-control {{$organizationDetail['org_pan_document'] ? 'is-valid' : ''}}"
+                                       id="organizationDetail.org_pan_document"
                                        wire:model="organizationDetail.org_pan_document"/>
                                 @error('organizationDetail.org_pan_document')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-3 mb-1">
-                                <label for="taxClearance.document" class="form-label">कर चुक्ता:</label>
-                                <input type="file" class="form-control" id="taxClearance.document"
+                                <label for="taxClearance.document" class="form-label">कर चुक्ता
+                                    <span class="text-danger">*</span></label>
+                                <input type="file"
+                                       class="form-control {{$taxClearance['document'] ? 'is-valid' : ''}}"
+                                       id="taxClearance.document"
                                        wire:model="taxClearance.document"/>
                                 @error('taxClearance.document')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-3 mb-1">
-                                <label for="taxClearance.year" class="form-label">आ.व</label>
+                                <label for="taxClearance.year" class="form-label">कर चुक्ता गरेको आर्थिक वर्ष
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <input
                                     name="taxClearance.year"
                                     class="form-control @error('taxClearance.year') is-invalid @enderror"
                                     type="text"
                                     id="taxClearance.year"
-                                    placeholder="आ.व"
+                                    placeholder="कर चुक्ता गरेको आर्थिक वर्ष"
                                     wire:model="taxClearance.year"
                                 />
                                 @error('taxClearance.year')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        @if ($organizationDetail['logo'])
-                                            कम्पनी लोगो
-                                            <div class="card" style="width: 8rem">
-                                                <img src="{{ $organizationDetail['logo']->temporaryUrl() }}"
-                                                     height="150"
-                                                     alt="">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-3">
-                                        @if ($organizationDetail['org_registration_document'])
-                                            कम्पनी प्रमाणपत्र
-                                            <div class="card" style="width: 8rem">
-                                                <img
-                                                    src="{{ $organizationDetail['org_registration_document']->temporaryUrl() }}"
-                                                    height="150"
-                                                    alt="">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-3">
-                                        @if ($organizationDetail['org_pan_document'])
-                                            प्यान प्रमाणपत्र
-                                            <div class="card" style="width: 8rem">
-                                                <img src="{{ $organizationDetail['org_pan_document']->temporaryUrl() }}"
-                                                     height="150"
-                                                     alt="">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-3">
-                                        @if ($taxClearance['document'])
-                                            कर चुक्ता
-                                            <div class="card" style="width: 8rem">
-                                                <img src="{{ $taxClearance['document']->temporaryUrl() }}" height="150"
-                                                     alt="">
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <ul class="list-inline wizard mb-0">
-                            <li class="next list-inline-item float-end">
-                                <button type="button" wire:click.prevent="backStep(4)" class="btn btn-success">
+                        <ul class="list-inline wizard mt-3">
+                            <li class="next d-flex justify-content-around">
+                                <button type="button" wire:click.prevent="backStep(4)" class="btn btn-info">
                                     <i class="fa fa-arrow-circle-left"></i> पछाडि
                                 </button>
                                 <button type="button"
@@ -759,10 +698,10 @@
                             @enderror
                         </div>
                     </div>
-                    <ul class="list-inline wizard mb-0">
-                        <li class="next list-inline-item float-end">
+                    <ul class="list-inline wizard mt-3">
+                        <li class="next d-flex justify-content-around">
                             <button type="button" wire:click.prevent="backStep({{$is_organization==="0" ? 3 :5}})"
-                                    class="btn btn-success">
+                                    class="btn btn-info">
                                 <i class="fa fa-arrow-circle-left"></i> पछाडि
                             </button>
                             <button type="button"
@@ -775,51 +714,28 @@
                     @break
                 @case(7)
                     <div class="row">
-                        <div class="col-lg-4 col-xl-4">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <img src="" class="rounded-circle avatar-lg img-thumbnail"
-                                         alt="profile-image">
-
-                                    <h4 class="mb-0"></h4>
-                                    {{--                    <p class="text-muted">@webdesigner</p>--}}
-
-                                    <div class="text-start mt-3">
-
-                                        <p class="text-muted mb-2 font-13"><strong>नाम :</strong> <span
-                                                class="ms-2"></span>
-                                        </p>
-                                        <p class="text-muted mb-2 font-13"><strong>इमेल :</strong><span
-                                                class="ms-2"></span></p>
-
-                                        <p class="text-muted mb-2 font-13"><strong>फोन :</strong> <span
-                                                class="ms-2"></span></p>
-
-                                    </div>
-
-                                </div>
-                            </div> <!-- end card -->
-
-
-                        </div> <!-- end col-->
-
-                        <div class="col-lg-8 col-xl-8">
+                        <div class="col-lg-12 col-xl-12">
                             <div class="card">
                                 <div class="card-body">
                                     <ul class="nav nav-pills nav-fill navtab-bg">
                                         <li class="nav-item">
-                                            <a href="#aboutme" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
+                                            <a href="#aboutme" data-bs-toggle="tab" aria-expanded="false"
+                                               class="nav-link active">
                                                 व्यक्तिगत विवरण
                                             </a>
                                         </li>
+                                        @if($is_organization==="1")
+                                            <li class="nav-item">
+                                                <a href="#timeline" data-bs-toggle="tab" aria-expanded="true"
+                                                   class="nav-link ">
+                                                    संगठनको विवरण
+                                                </a>
+                                            </li>
+                                        @endif
                                         <li class="nav-item">
-                                            <a href="#timeline" data-bs-toggle="tab" aria-expanded="true" class="nav-link ">
-                                                संगठनको विवरण
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#settings" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
-                                                आवश्यक कागजात
+                                            <a href="#settings" data-bs-toggle="tab" aria-expanded="false"
+                                               class="nav-link">
+                                                आवश्यक कागजातहरु
                                             </a>
                                         </li>
                                     </ul>
@@ -828,162 +744,221 @@
 
                                             <table class="table table-sm mb-0 table-striped table-hover">
                                                 <tr>
-                                                    <th>नाम :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>इमेल :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>फोन :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>लिङ्ग :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>इमेल :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>बुवाको नाम :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>हजुरबुवाको नाम :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>PAN नं :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>NEC नं :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>नागरिकता नं :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>नागरिकता जारि भएको जिल्ला :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>नागरिकता जारि भएको मिति :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>स्थाई ठेगाना :</th>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>अस्थाई ठेगाना :</th>
-                                                    <td></td>
-
-                                                </tr>
-                                            </table>
-
-                                        </div>
-
-                                        <div class="tab-pane" id="timeline">
-                                            <table class="table table-sm mb-0 table-striped table-hover">
-                                                <tr>
                                                     <th>नाम:</th>
                                                     <td>
+                                                        {{$userDetail['name_ne']}} ({{$userDetail['name_en']}})
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th>इमेल :</th>
-                                                    <td></td>
+                                                    <td>
+                                                        {{$userDetail['email']}}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>फोन :</th>
-                                                    <td></td>
+                                                    <td>{{$userDetail['phone']}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>लिङ्ग :</th>
-                                                    <td></td>
+                                                    <td>{{$userDetail['gender']}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>ठेगान :</th>
-                                                    <td></td>
+                                                    <th>वैवाहिक स्थिति :</th>
+                                                    <td>{{$userDetail['marital_status']}}</td>
                                                 </tr>
-
+                                                <tr>
+                                                    <th>बुवाको नाम :</th>
+                                                    <td>{{$userDetail['father_name']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>हजुरबुवाको नाम :</th>
+                                                    <td>{{$userDetail['grandfather_name']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>PAN नं :</th>
+                                                    <td>{{$userDetail['pan_no']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>NEC नं :</th>
+                                                    <td>{{$userDetail['nec_no']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>नागरिकता नं :</th>
+                                                    <td>{{$userDetail['citizenship_no']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>नागरिकता जारि भएको जिल्ला :</th>
+                                                    <td>{{$citizenshipIssuedDistrict->district}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>नागरिकता जारि भएको मिति :</th>
+                                                    <td>{{$userDetail['citizenship_issued_date']}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>स्थाई ठेगाना :</th>
+                                                    <td>
+                                                        {{$permanentLocalBody->local_body}}
+                                                        - {{$userDetail['permanent_ward']}}
+                                                        {{$permanentDistrict->district}}
+                                                        {{$permanentProvince->province}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>अस्थायी ठेगाना :</th>
+                                                    <td>
+                                                        {{$temporaryLocalBody->local_body}}
+                                                        - {{$userDetail['temporary_ward']}}
+                                                        {{$temporaryDistrict->district}}
+                                                        {{$temporaryProvince->province}}
+                                                    </td>
+                                                </tr>
                                             </table>
+
                                         </div>
+                                        @if($is_organization==="1")
+                                            <div class="tab-pane" id="timeline">
+                                                <table class="table table-sm mb-0 table-striped table-hover">
+                                                    <tr>
+                                                        <td>संगठनको नाम</td>
+                                                        <td>{{$organizationDetail['org_name_ne']}}
+                                                            ({{$organizationDetail['org_name_en']}})
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>सम्पर्क नम्बर</td>
+                                                        <td>{{$organizationDetail['org_contact']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>इमेल</td>
+                                                        <td>{{$organizationDetail['org_email']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>पाना नं.</td>
+                                                        <td>{{$organizationDetail['org_pan_no']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>कम्पानी दर्ता नं.</td>
+                                                        <td>{{$organizationDetail['org_registration_no']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ठेगाना</td>
+                                                        <td>
+                                                            {{$organizationLocalBody->local_body}}
+                                                            - {{$organizationDetail['ward']}}
+                                                            {{$organizationDistrict->district}}
+                                                            {{$organizationProvince->province}}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        @endif
 
                                         <div class="tab-pane" id="settings">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <div class="card">
-                                                        <div class="card-header">नागरिकता (आगाडी)</div>
+                                                    @if ($organizationDetail['logo'])
+                                                        <div class="card">
+                                                            <div class="card-header">कम्पनी लोगो</div>
                                                         <div class="card-body">
-                                                            <img src="...." alt=""
-                                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                            <img src="{{ $organizationDetail['logo']->temporaryUrl() }}"
+                                                                 height="150"
+                                                                 alt="">
                                                         </div>
-                                                    </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="card">
-                                                        <div class="card-header">नागरिकता (पछाडी)</div>
-                                                        <div class="card-body">
-                                                            <img src="...." alt=""
-                                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                    @if ($organizationDetail['org_registration_document'])
+                                                        <div class="card">
+                                                            <div class="card-header">कम्पनी प्रमाणपत्र</div>
+                                                            <div class="card-body">
+                                                                <img
+                                                                    src="{{ $organizationDetail['org_registration_document']->temporaryUrl() }}"
+                                                                    height="250"
+                                                                    alt="">
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4">
+                                                    @if ($organizationDetail['org_pan_document'])
                                                     <div class="card">
-                                                        <div class="card-header">NECको प्रमाणपत्र</div>
-                                                        <div class="card-body">
-                                                            <img src="...." alt=""
-                                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="card">
-                                                        <div class="card-header">कम्पनी दर्ताको प्रमाणपत्र</div>
+                                                        <div class="card-header">पाना</div>
                                                         <div class="card-body">
                                                             <img
-                                                                src="...."
-                                                                alt="" style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                                src="{{ $organizationDetail['org_pan_document']->temporaryUrl() }}"
+                                                                height="250"
+                                                                alt="">
                                                         </div>
                                                     </div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="card">
-                                                        <div class="card-header">कम्पनी PANको प्रमाणपत्र</div>
-                                                        <div class="card-body">
-                                                            <img src="...."
-                                                                 alt="" style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                    @if ($taxClearance['document'])
+                                                        <div class="card">
+                                                            <div class="card-header">कर चुक्ता</div>
+                                                            <div class="card-body">
+                                                                <img src="{{ $taxClearance['document']->temporaryUrl() }}"
+                                                                     height="250"
+                                                                     alt="">
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    @if ($userDetail['nec_certificate'])
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                NEC Certificate
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <img
+                                                                    src="{{ $userDetail['nec_certificate']->temporaryUrl() }}"
+                                                                    height="250"
+                                                                    alt="">
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <div class="card">
-                                                        <div class="card-header">लोगो</div>
-                                                        <div class="card-body">
-                                                            <img src="...." alt=""
-                                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                                    @if ($userDetail['citizenship_front'])
+                                                        <div class="card">
+                                                            <div class="card-header">नागरिकता अपलोड गर्नुहोस् (आगाडी)</div>
+                                                            <div class="card-body">
+                                                                <img
+                                                                    src="{{ $userDetail['citizenship_front']->temporaryUrl() }}"
+                                                                    height="200"
+                                                                    alt="">
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-4">
+                                                    @if ($userDetail['citizenship_back'])
+                                                        <div class="card">
+                                                            <div class="card-header">नागरिकता अपलोड गर्नुहोस् (आगाडी)</div>
+                                                            <div class="card-body">
+                                                                <img
+                                                                    src="{{ $userDetail['citizenship_back']->temporaryUrl() }}"
+                                                                    height="200"
+                                                                    alt="">
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                    <ul class="list-inline wizard mb-0">
-                        <li class="next list-inline-item float-end">
-                            <button type="button" wire:click.prevent="backStep(6)" class="btn btn-success">
+                    <ul class="list-inline wizard mt-3">
+                        <li class="next d-flex justify-content-around">
+                            <button type="button" wire:click.prevent="backStep(6)" class="btn btn-info">
                                 <i class="fa fa-arrow-circle-left"></i> पछाडि
                             </button>
                             <button type="submit"
@@ -1016,7 +991,7 @@
                                 <div class="input-group">
                                     <input type="text"
                                            class="form-control @error('userDetail.name_ne') is-invalid @enderror"
-                                           value="{{old('userDetail.name_ne')}}" placeholder="नेपालीमा नाम"
+                                           placeholder="नेपालीमा नाम"
                                            id="userDetail.name_ne"
                                            wire:model="userDetail.name_ne">
                                     @error('userDetail.name_ne')
@@ -1025,7 +1000,6 @@
                                     <input type="text"
                                            class="form-control @error('userDetail.name_en') is-invalid @enderror"
                                            placeholder="In English"
-                                           value="{{old('userDetail.name_en')}}"
                                            id="userDetail.name_en"
                                            wire:model="userDetail.name_en">
                                     @error('userDetail.name_en')
@@ -1043,8 +1017,6 @@
                                             </span>
                                     <input type="email"
                                            class="form-control @error('userDetail.email') is-invalid @enderror"
-                                           name="userDetail.email"
-                                           value="{{old('userDetail.email')}}"
                                            id="userDetail.email"
                                            wire:model="userDetail.email"
                                            placeholder="इमेल">
@@ -1064,7 +1036,6 @@
                                             </span>
                                     <input type="text" class="form-control
                                             @error('userDetail.phone') is-invalid @enderror"
-                                           name="userDetail.phone"
                                            id="userDetail.phone"
                                            wire:model="userDetail.phone"
                                            placeholder="सम्पर्क नम्बर">
@@ -1110,7 +1081,6 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input
-                                    name="userDetail.father_name"
                                     class="form-control @error('userDetail.father_name') is-invalid @enderror"
                                     wire:model="userDetail.father_name"
                                     type="text"
@@ -1139,8 +1109,8 @@
                             </div>
                         </div>
                     </fieldset>
-                    <ul class="list-inline wizard mb-0">
-                        <li class="next list-inline-item float-end">
+                    <ul class="list-inline wizard mt-3">
+                        <li class="next d-flex justify-content-around">
                             <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-success">
                                 <i class="fa fa-arrow-circle-right"></i> अर्को
                             </button>

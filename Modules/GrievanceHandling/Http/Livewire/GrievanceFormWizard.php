@@ -79,22 +79,11 @@ class GrievanceFormWizard extends Component
 
     public function rules()
     {
-        switch ($this->currentStep) {
-            case 1:
-                {
-                    return $this->firstStepValidations;
-                }
-                break;
-            case 2:
-                {
-                    return $this->secondStepValidations;
-                }
-                break;
-            default:
-            {
-                return array_merge($this->firstStepValidations, $this->secondStepValidations);
-            }
-        }
+        return match ($this->currentStep) {
+            1 => $this->firstStepValidations,
+            2 => $this->secondStepValidations,
+            default => array_merge($this->firstStepValidations, $this->secondStepValidations),
+        };
     }
 
     public function updated($propertyName)
@@ -144,7 +133,7 @@ class GrievanceFormWizard extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",
             'title' => "धन्यबाद",
-            'text' => "तपाईंको गुनासो फारम सफलतापूर्वक पेश गरियो, तपाईको गुनासो गुनासो नम्बर ".$grievanceDetail->token." पछी हेर्नको लागि सुरक्षित राख्नुहोला",
+            'text' => "तपाईंको गुनासो फारम सफलतापूर्वक पेश गरियो, तपाईको गुनासो गुनासो नम्बर " . $grievanceDetail->token . " पछी हेर्नको लागि सुरक्षित राख्नुहोला",
         ]);
     }
 
