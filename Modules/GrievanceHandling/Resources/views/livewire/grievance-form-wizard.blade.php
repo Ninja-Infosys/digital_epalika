@@ -9,7 +9,7 @@
                         चरण </a></li>
             </ul>
         </div>
-        <form wire:submit.prevent="submitForm" enctype="multipart/form-data">
+        <form wire:submit.prevent="submitForm">
             @switch($currentStep)
                 @case(2)
                     <div class="row">
