@@ -26,6 +26,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('agentAgreement', 'agentAgreement')->name('agent-agreement');
         Route::get('permissionLetter', 'permissionLetter')->name('permission-letter');
         Route::get('level', 'level')->name('level');
+        Route::get('supervisor', 'superVisor')->name('supervisor');
         Route::post('applyMapNotice','applyMapNotice')->name('apply-map-notice');
     });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
@@ -70,4 +71,4 @@ Route::view('namsari', 'emap::admin.certificate.namsari');
 Route::view('detail', 'emap::admin.certificate.detail');
 Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
 Route::view('manjuri', 'emap::admin.certificate.manjuri');
-Route::view('view', 'emap::admin.formview.view');
+Route::view('supervisor', 'emap::admin.notice.supervisor');
