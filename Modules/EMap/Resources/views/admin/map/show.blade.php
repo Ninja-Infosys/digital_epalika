@@ -219,7 +219,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between">c
                         <h4 class="header-title">सूचनाहरु</h4>
                     </div>
                 </div>

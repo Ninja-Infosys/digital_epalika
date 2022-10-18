@@ -270,9 +270,7 @@
                     </fieldset>
                     <div class="my-2">
                         <div class="form-check mb-2 form-check-primary">
-                            <input class="form-check-input" type="checkbox"
-                                   wire:model="is_same_as_permanent"
-                                   id="address_check">
+                            <button wire:click.prevent="checkSameAsPermanentAddress"><i @class(["fa", "fa-check"=>!$is_same_as_permanent, "fa-window-close"=>$is_same_as_permanent])></i></button>
                             <label class="form-check-label fw-bold" for="address_check">
                                 के स्थायी र अस्थायी ठेगाना एउटै हो?
                             </label>
