@@ -7,7 +7,7 @@
         <section class="mid">
             <div class="row">
                 <div class="col-md-6">
-                        <x-frontend.notice-vertical-slider-component/>
+                <x-frontend.notice-vertical-slider-component/>
                 </div>
                 <div class="col-md-6">
                    <x-frontend.employee-section-component/>
