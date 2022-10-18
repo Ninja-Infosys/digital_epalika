@@ -78,7 +78,7 @@
                             <li class="list-group-item">
                                 <i class="fa fa-angle-right"></i>
                                 <a href="{{route('single-notice',$notice)}}">{{Str::words($notice->title,12)}}</a>
-                                <span><small>{{$notice->date->toDateString()}}</small></span>
+                                <span><small>{{$notice->date}}</small></span>
                             </li>
                         @endforeach
                         <a class="btn-notice btn-outline-light " href="{{route('notice')}}">थप सुचनाहरु <i

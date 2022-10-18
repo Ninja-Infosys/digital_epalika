@@ -1,3 +1,3 @@
 <div>
-    <x-frontend.notice-vertical-slider/>
+    <x-frontend.notice-vertical-slider-component/>
 </div>
