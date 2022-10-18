@@ -105,8 +105,8 @@
                                 <label for="userDetail.citizenship_no" class="form-label">नागरिता नं. <span
                                         class="text-danger">*</span></label>
                                 <input
-                                    name="userDetail.citizenship_no"
-                                    class="form-control @error('userDetail.citizenship_no') is-invalid @enderror"
+                                    class="form-control
+                                    @error('userDetail.citizenship_no') is-invalid @enderror"
                                     type="text"
                                     id="userDetail.citizenship_no"
                                     placeholder="नागरिता नं."
@@ -120,7 +120,8 @@
                                 <label for="userDetail.citizenship_issued_district" class="form-label"> जारी जिल्ला
                                     <span class="text-danger">*</span></label>
                                 <select
-                                    class="form-select @error('userDetail.citizenship_issued_district') is-invalid @enderror"
+                                    class="form-select
+                                    @error('userDetail.citizenship_issued_district') is-invalid @enderror"
                                     id="userDetail.citizenship_issued_district"
                                     wire:model="userDetail.citizenship_issued_district">
                                     <option value="">---जारि जिल्ला ----</option>
@@ -154,7 +155,8 @@
                                     गर्नुहोस्
                                     (आगाडी) <span class="text-danger">*</span></label>
                                 <input type="file"
-                                       class="form-control {{$userDetail['citizenship_front'] ? 'is-valid' : ''}}"
+                                       class="form-control
+                                       {{$userDetail['citizenship_front'] ? 'is-valid' : ''}}"
                                        id="userDetail.citizenship_front"
                                        wire:model="userDetail.citizenship_front"/>
                                 @error('userDetail.citizenship_front')
@@ -227,7 +229,8 @@
                                 <div class="col-md-2 mb-1">
                                     <label for="userDetail.permanent_local_body_id" class="form-label">पालिका</label>
                                     <select
-                                        class="form-select @error('userDetail.permanent_local_body_id') is-invalid @enderror"
+                                        class="form-select
+                                        @error('userDetail.permanent_local_body_id') is-invalid @enderror"
                                         id="userDetail.permanent_local_body_id"
                                         wire:model="userDetail.permanent_local_body_id">
                                         <option value="">---पालिका छान्नुहोस् ----</option>
@@ -242,8 +245,11 @@
                                 </div>
                                 <div class="col-md-2 mb-1">
                                     <label for="userDetail.permanent_ward" class="form-label">वार्ड न:</label>
-                                    <select class="form-select @error('userDetail.permanent_ward') is-invalid @enderror"
-                                            id="userDetail.permanent_ward" wire:model="userDetail.permanent_ward">
+                                    <select
+                                        class="form-select
+                                        @error('userDetail.permanent_ward') is-invalid @enderror"
+                                        id="userDetail.permanent_ward"
+                                        wire:model="userDetail.permanent_ward">
                                         <option value="">---वडा छान्नुहोस् ----</option>
                                         @foreach($permanentWards as $permanentWard)
                                             <option value="{{$permanentWard}}">{{$permanentWard}}</option>
@@ -256,8 +262,8 @@
                                 <div class="col-md-4 mb-1">
                                     <label for="userDetail.permanent_tole" class="form-label">गाउ/टोल</label>
                                     <input
-                                        name="userDetail.permanent_tole"
-                                        class="form-control @error('userDetail.permanent_tole') is-invalid @enderror"
+                                        class="form-control
+                                        @error('userDetail.permanent_tole') is-invalid @enderror"
                                         type="text"
                                         id="userDetail.permanent_tole"
                                         placeholder="गाउ/टोल"
@@ -271,7 +277,9 @@
                         </fieldset>
                         <div class="my-2">
                             <div class="form-check mb-2 form-check-primary">
-                                <input class="form-check-input" type="checkbox" wire:model="is_same_as_permanent"
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       wire:model="is_same_as_permanent"
                                        value="1"
                                        id="address_check">
                                 <label class="form-check-label fw-bold" for="address_check">
@@ -285,7 +293,8 @@
                                 <div class="col-md-2 mb-1">
                                     <label for="userDetail.temporary_province_id" class="form-label">प्रदेश</label>
                                     <select
-                                        class="form-select @error('userDetail.temporary_province_id') is-invalid @enderror"
+                                        class="form-select
+                                        @error('userDetail.temporary_province_id') is-invalid @enderror"
                                         id="userDetail.temporary_province_id"
                                         wire:model="userDetail.temporary_province_id">
                                         <option value="">---प्रदेश छान्नुहोस् ----</option>
@@ -300,7 +309,8 @@
                                 <div class="col-md-2 mb-1">
                                     <label for="userDetail.temporary_district_id" class="form-label">जिल्ला</label>
                                     <select
-                                        class="form-select @error('userDetail.temporary_district_id') is-invalid @enderror"
+                                        class="form-select
+                                        @error('userDetail.temporary_district_id') is-invalid @enderror"
                                         id="userDetail.temporary_district_id"
                                         wire:model="userDetail.temporary_district_id">
                                         <option value="">---जिल्ला छान्नुहोस् ----</option>
@@ -316,7 +326,8 @@
                                 <div class="col-md-2 mb-1">
                                     <label for="userDetail.temporary_local_body_id" class="form-label">पालिका</label>
                                     <select
-                                        class="form-select @error('userDetail.temporary_local_body_id') is-invalid @enderror"
+                                        class="form-select
+                                        @error('userDetail.temporary_local_body_id') is-invalid @enderror"
                                         id="userDetail.temporary_local_body_id"
                                         wire:model="userDetail.temporary_local_body_id">
                                         <option value="">---पालिका छान्नुहोस् ----</option>
@@ -331,8 +342,10 @@
                                 </div>
                                 <div class="col-md-2 mb-1">
                                     <label for="userDetail.temporary_ward" class="form-label">वार्ड न:</label>
-                                    <select class="form-select @error('userDetail.temporary_ward') is-invalid @enderror"
-                                            id="userDetail.temporary_ward" wire:model="userDetail.temporary_ward">
+                                    <select class="form-select
+                                    @error('userDetail.temporary_ward') is-invalid @enderror"
+                                            id="userDetail.temporary_ward"
+                                            wire:model="userDetail.temporary_ward">
                                         <option value="">---वडा छान्नुहोस् ----</option>
                                         @foreach($temporaryWards as $temporaryWard)
                                             <option value="{{$temporaryWard}}">{{$temporaryWard}}</option>
@@ -345,8 +358,8 @@
                                 <div class="col-md-4 mb-1">
                                     <label for="userDetail.temporary_tole" class="form-label">गाउ/टोल</label>
                                     <input
-                                        name="userDetail.temporary_tole"
-                                        class="form-control @error('userDetail.temporary_tole') is-invalid @enderror"
+                                        class="form-control
+                                         @error('userDetail.temporary_tole') is-invalid @enderror"
                                         type="text"
                                         id="userDetail.temporary_tole"
                                         placeholder="गाउ/टोल"
@@ -380,8 +393,7 @@
                                 <label for="organizationDetail.org_name_ne" class="form-label">संगठनको नाम <span
                                         class="text-danger">*</span></label>
                                 <div class="input-group">
-                                    <input name="organizationDetail.org_name_ne"
-                                           class="form-control @error('organizationDetail.org_name_ne') is-invalid @enderror"
+                                    <input class="form-control @error('organizationDetail.org_name_ne') is-invalid @enderror"
                                            type="text"
                                            id="organizationDetail.org_name_ne"
                                            placeholder="नेपालीमा"
@@ -389,8 +401,7 @@
                                     @error('organizationDetail.org_name_ne')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
-                                    <input name="organizationDetail.org_name_en"
-                                           class="form-control @error('organizationDetail.org_name_en') is-invalid @enderror"
+                                    <input class="form-control @error('organizationDetail.org_name_en') is-invalid @enderror"
                                            type="text"
                                            id="organizationDetail.org_name_en"
                                            placeholder="In English"
@@ -408,8 +419,7 @@
                                             <span class="input-group-text" id="organizationDetail.org_email">
                                                 <i class="fa fa-envelope"></i>
                                             </span>
-                                    <input name="organizationDetail.org_email"
-                                           class="form-control @error('organizationDetail.org_email') is-invalid @enderror"
+                                    <input class="form-control @error('organizationDetail.org_email') is-invalid @enderror"
                                            type="text"
                                            id="organizationDetail.org_email"
                                            placeholder="इमेल"
@@ -427,8 +437,8 @@
                                             <span class="input-group-text" id="organizationDetail.org_contact">
                                                 <i class="fa fa-phone"></i>
                                             </span>
-                                    <input name="organizationDetail.org_contact"
-                                           class="form-control @error('organizationDetail.org_contact') is-invalid @enderror"
+                                    <input class="form-control
+                                    @error('organizationDetail.org_contact') is-invalid @enderror"
                                            type="text"
                                            id="organizationDetail.org_contact"
                                            placeholder="सम्पर्क नम्बर"
@@ -440,9 +450,7 @@
                             </div>
                             <div class="col-md-2 mb-1">
                                 <label for="organizationDetail.org_pan_no" class="form-label">पाना नं.</label>
-                                <input
-                                    name="organizationDetail.org_pan_no"
-                                    class="form-control @error('organizationDetail.org_pan_no') is-invalid @enderror"
+                                <input class="form-control @error('organizationDetail.org_pan_no') is-invalid @enderror"
                                     type="text"
                                     id="organizationDetail.org_pan_no"
                                     placeholder="पाना नं."
@@ -455,9 +463,7 @@
                             <div class="col-md-3 mb-1">
                                 <label for="organizationDetail.org_registration_no" class="form-label">कम्पनी दर्ता
                                     न:</label>
-                                <input
-                                    name="org_registration_no"
-                                    class="form-control @error('organizationDetail.org_registration_no') is-invalid @enderror"
+                                <input class="form-control @error('organizationDetail.org_registration_no') is-invalid @enderror"
                                     type="text"
                                     id="organizationDetail.org_registration_no"
                                     placeholder="कम्पनी दर्ता न:"
@@ -475,8 +481,10 @@
                             <div class="col-md-2 mb-1">
                                 <label for="organizationDetail.province_id" class="form-label">प्रदेश</label>
                                 <select
-                                    class="form-select @error('organizationDetail.province_id') is-invalid @enderror"
-                                    id="organizationDetail.province_id" wire:model="organizationDetail.province_id">
+                                    class="form-select
+                                    @error('organizationDetail.province_id') is-invalid @enderror"
+                                    id="organizationDetail.province_id"
+                                    wire:model="organizationDetail.province_id">
                                     <option selected>---प्रदेश छान्नुहोस् ----</option>
                                     @foreach($provinces as $province)
                                         <option value="{{$province->id??''}}">{{$province->province ??''}}</option>
@@ -489,8 +497,10 @@
                             <div class="col-md-2 mb-1">
                                 <label for="organizationDetail.district_id" class="form-label">जिल्ला</label>
                                 <select
-                                    class="form-select @error('organizationDetail.district_id') is-invalid @enderror"
-                                    id="organizationDetail.district_id" wire:model="organizationDetail.district_id">
+                                    class="form-select
+                                    @error('organizationDetail.district_id') is-invalid @enderror"
+                                    id="organizationDetail.district_id"
+                                    wire:model="organizationDetail.district_id">
                                     <option value="">---जिल्ला छान्नुहोस् ----</option>
                                     @foreach($organizationDistricts as $organizationDistrict)
                                         <option
@@ -504,7 +514,8 @@
                             <div class="col-md-2 mb-1">
                                 <label for="organizationDetail.local_body_id" class="form-label">पालिका</label>
                                 <select
-                                    class="form-select @error('organizationDetail.local_body_id') is-invalid @enderror"
+                                    class="form-select
+                                    @error('organizationDetail.local_body_id') is-invalid @enderror"
                                     id="organizationDetail.local_body_id"
                                     wire:model="organizationDetail.local_body_id">
                                     <option value="">---पालिका छान्नुहोस् ----</option>
@@ -519,8 +530,11 @@
                             </div>
                             <div class="col-md-2 mb-1">
                                 <label for="organizationDetail.ward" class="form-label">वार्ड न:</label>
-                                <select class="form-select @error('organizationDetail.ward') is-invalid @enderror"
-                                        id="organizationDetail.ward" wire:model="organizationDetail.ward">
+                                <select
+                                    class="form-select
+                                @error('organizationDetail.ward') is-invalid @enderror"
+                                        id="organizationDetail.ward"
+                                    wire:model="organizationDetail.ward">
                                     <option value="">---वडा छान्नुहोस् ----</option>
                                     @foreach($organizationWards as $organizationWard)
                                         <option value="{{$organizationWard}}">{{$organizationWard}}</option>
@@ -532,9 +546,8 @@
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label for="organizationDetail.tole" class="form-label">गाउ/टोल</label>
-                                <input
-                                    name="organizationDetail.tole"
-                                    class="form-control @error('organizationDetail.tole') is-invalid @enderror"
+                                <input class="form-control
+                                    @error('organizationDetail.tole') is-invalid @enderror"
                                     type="text"
                                     id="organizationDetail.tole"
                                     placeholder="गाउ/टोल"
@@ -566,7 +579,8 @@
                                 <label for="organizationDetail.logo" class="form-label">कम्पनी लोगो
                                     <span class="text-danger">*</span></label>
                                 <input type="file"
-                                       class="form-control {{$organizationDetail['logo'] ? 'is-valid' : ''}}"
+                                       class="form-control
+                                       {{$organizationDetail['logo'] ? 'is-valid' : ''}}"
                                        id="organizationDetail.logo"
                                        wire:model="organizationDetail.logo"/>
                                 @error('organizationDetail.logo')
@@ -577,7 +591,8 @@
                                 <label for="organizationDetail.org_registration_document" class="form-label">कम्पनी
                                     प्रमाणपत्र <span class="text-danger">*</span></label>
                                 <input type="file"
-                                       class="form-control {{$organizationDetail['org_registration_document'] ? 'is-valid' : ''}}"
+                                       class="form-control
+                                       {{$organizationDetail['org_registration_document'] ? 'is-valid' : ''}}"
                                        id="organizationDetail.org_registration_document"
                                        wire:model="organizationDetail.org_registration_document"/>
                                 @error('organizationDetail.org_registration_document')
@@ -588,7 +603,8 @@
                                 <label for="organizationDetail.org_pan_document" class="form-label">पाना
                                     प्रमाणपत्र <span class="text-danger">*</span></label>
                                 <input type="file"
-                                       class="form-control {{$organizationDetail['org_pan_document'] ? 'is-valid' : ''}}"
+                                       class="form-control
+                                       {{$organizationDetail['org_pan_document'] ? 'is-valid' : ''}}"
                                        id="organizationDetail.org_pan_document"
                                        wire:model="organizationDetail.org_pan_document"/>
                                 @error('organizationDetail.org_pan_document')
@@ -599,7 +615,8 @@
                                 <label for="taxClearance.document" class="form-label">कर चुक्ता
                                     <span class="text-danger">*</span></label>
                                 <input type="file"
-                                       class="form-control {{$taxClearance['document'] ? 'is-valid' : ''}}"
+                                       class="form-control
+                                       {{$taxClearance['document'] ? 'is-valid' : ''}}"
                                        id="taxClearance.document"
                                        wire:model="taxClearance.document"/>
                                 @error('taxClearance.document')
@@ -610,9 +627,8 @@
                                 <label for="taxClearance.year" class="form-label">कर चुक्ता गरेको आर्थिक वर्ष
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input
-                                    name="taxClearance.year"
-                                    class="form-control @error('taxClearance.year') is-invalid @enderror"
+                                <input class="form-control
+                                    @error('taxClearance.year') is-invalid @enderror"
                                     type="text"
                                     id="taxClearance.year"
                                     placeholder="कर चुक्ता गरेको आर्थिक वर्ष"
@@ -650,8 +666,8 @@
                                             <span class="input-group-text" id="user.name">
                                                 <i class="fa fa-user"></i>
                                             </span>
-                                <input name="user.name"
-                                       class="form-control @error('user.name') is-invalid @enderror"
+                                <input class="form-control
+                                @error('user.name') is-invalid @enderror"
                                        type="text"
                                        id="user.name"
                                        placeholder="प्रयोगकर्ताको नाम"
@@ -667,8 +683,7 @@
                                             <span class="input-group-text" id="user.email">
                                                 <i class="fa fa-envelope"></i>
                                             </span>
-                                <input name="user.email"
-                                       class="form-control @error('user.email') is-invalid @enderror"
+                                <input class="form-control @error('user.email') is-invalid @enderror"
                                        type="email"
                                        id="user.email"
                                        placeholder="इमेल"
@@ -686,8 +701,7 @@
                                             <span class="input-group-text" id="user.email">
                                                 <i class="fa fa-envelope"></i>
                                             </span>
-                                <input name="user.phone"
-                                       class="form-control @error('user.phone') is-invalid @enderror"
+                                <input class="form-control @error('user.phone') is-invalid @enderror"
                                        type="text"
                                        id="user.phone"
                                        placeholder="सम्पर्क नं"
