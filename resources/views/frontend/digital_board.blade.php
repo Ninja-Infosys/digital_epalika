@@ -14,7 +14,7 @@
                 </div>
             </div>
         </section>
-        <section class="last">
+        <section class="last mt-1">
             <div class="row">
                 <div class="col-md-6">
                     <x-frontend.module-info-component/>
