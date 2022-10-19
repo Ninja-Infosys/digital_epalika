@@ -154,23 +154,34 @@
 
             </div>
             <div class="row">
-                <div class="col-lg-6">
+
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Line Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="line-chart-example" height="350" data-colors="#1abc9c,#f1556c"></canvas>
-                            </div>
+                            <x-charts.bar-chart-component id="bar-chart" chartTitle="आर्थिक वर्ष अनुसार दर्ता र चलानी"
+                                                          :labels="$registrationChartData['labels']"
+                                                          :dataSets="$registrationChartData['dataSets']"/>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div> <!-- end col -->
+
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Bar Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="bar-chart-example" height="350" data-colors="#4a81d4,#e3eaef"></canvas>
-                            </div>
+                            <x-charts.bar-chart-component id="register-chart" chartTitle="चालु आर्थिक वर्षका दर्ताहरु"
+                                                          chartType="line"
+                                                          :labels="$registrationChartData['labels']"
+                                                          :dataSets="$registrationChartData['dataSets']"/>
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-charts.bar-chart-component id="dispatch-chart" chartTitle="चालु आर्थिक वर्षका चलानीहरु"
+                                                          :labels="$registrationChartData['labels']"
+                                                          :dataSets="$registrationChartData['dataSets']"/>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div> <!-- end col -->

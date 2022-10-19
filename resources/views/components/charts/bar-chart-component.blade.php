@@ -1,49 +1,51 @@
-<h4 class="header-title">Bar Chart</h4>
+<h4 class="header-title">{{$chartTitle}}</h4>
 <div class="mt-4 chartjs-chart">
-    <canvas id="myChart" height="350"></canvas>
+    <canvas id="{{$id}}"></canvas>
+
 </div>
 
 @once
     @push('scripts')
-
         <script>
-            const ctx = document.getElementById('myChart');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
+            function random_bg_color() {
+                const x = Math.floor(Math.random() * 256);
+                const y = Math.floor(Math.random() * 256);
+                const z = Math.floor(Math.random() * 256);
+                return "rgb(" + x + "," + y + "," + z + ")";
+
+            }
         </script>
-
-
     @endpush
 @endonce
+@push('scripts')
+    <script>
+        const ctx{{Str::slug($id,"_")}} = document.getElementById('{{$id}}').getContext('2d');
+        const {{Str::slug($id,"_")}} = new Chart(ctx{{Str::slug($id,"_")}}, {
+            type: '{{$chartType}}',
+            data: {
+                labels: [@foreach($labels as $label)"{{$label}}" {{!$loop->last ? "," : ""}} @endforeach],
+                datasets: [
+                        @foreach($dataSets as $dataSet){
+                        data: [@foreach($dataSet["data"] as $data) {{$data}} {{!$loop->last ? "," : ""}} @endforeach],
+                        label: "{{$dataSet['label'] ?? ''}}",
+                        borderColor: random_bg_color(),
+                        backgroundColor: random_bg_color(),
+                        fill: {{$dataSet['fill'] ?? false}},
+                    }{{!$loop->last ? "," : ""}}
+                        @endforeach
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+@endpush

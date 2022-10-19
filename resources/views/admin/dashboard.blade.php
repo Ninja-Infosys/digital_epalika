@@ -203,7 +203,6 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                   <x-charts.bar-chart-component/>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
