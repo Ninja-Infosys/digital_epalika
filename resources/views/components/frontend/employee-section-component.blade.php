@@ -6,7 +6,7 @@
                     src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto">
+            <div class="textbox-01 mx-auto my-auto ">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -18,7 +18,7 @@
                 <img src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 my-auto mx-auto">
+            <div class="textbox-01 my-auto mx-auto px-3">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -31,7 +31,7 @@
                     src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto">
+            <div class="textbox-01 mx-auto my-auto px-3">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -43,7 +43,7 @@
                 <img src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto px-auto">
+            <div class="textbox-01 mx-auto my-auto px-2">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -54,7 +54,7 @@
                     src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto">
+            <div class="textbox-01 mx-auto my-auto px-2">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -65,7 +65,7 @@
                     src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto">
+            <div class="textbox-01 mx-auto my-auto px-2">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
