@@ -22,6 +22,12 @@ select{
 }
 
 .textbox-01>h6{
-    font-size: .7rem;
+    font-weight: 800;
+    font-size: .9rem;
 }
-
+.textbox-01>p{
+    text-align: center;
+}
+.chiefPerson .card-employee{
+    width: 40%;
+}
