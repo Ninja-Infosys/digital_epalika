@@ -15,17 +15,18 @@ select{
     height: 80px;
     width: 100px;
 }
-
 .logo-nep {
     height: 90px;
     width: 70px;
 }
-
 .textbox-01>h6{
     font-size: 1rem;
 }
 .textbox-01>p{
     font-size: .9rem}
 .chiefPerson .card-employee{
+    width: 40%;
+}
+.thirdLevelEmployee .card-employee{
     width: 40%;
 }
