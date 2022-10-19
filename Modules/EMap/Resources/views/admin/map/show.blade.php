@@ -122,7 +122,7 @@
 
                         <div class="tab-pane" id="notice-tab" role="tabpanel">
                             <div class="row row-cols-1 row-cols-md-3 g-3">
-                                @foreach($mapApply->applyMapNotices->where('type','!==',\Modules\EMap\Enums\FileTypeEnum::APPLICATION)->whereNull('rejected_at') as $applyMapNotice)
+                                @foreach($mapApply->applyMapNotices->where('type','!=',\Modules\EMap\Enums\FileTypeEnum::APPLICATION)->whereNull('rejected_at') as $applyMapNotice)
                                     <div class="col">
                                         <div class="card">
                                             <iframe class="card-img-top img-fluid" height="500" frameborder="0"
