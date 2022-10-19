@@ -20,16 +20,8 @@ select{
     height: 90px;
     width: 70px;
 }
-.card-employee{
-    width: 12rem;
-    height: 7rem;
-    /*border: 1px solid #2C3E50;*/
-}
+
 .textbox-01>h6{
     font-size: .7rem;
-}
-.textbox-01 {
-    padding-left: 10%;
-    padding-top: 20%;
 }
 
