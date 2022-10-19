@@ -15,7 +15,6 @@ class ListRegistration extends Model
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
-        'date',
         'created_at',
         'updated_at',
         'deleted_at'

@@ -287,7 +287,7 @@
                                     <input
                                         type="text"
                                         name="date"
-                                        value="{{old('date',$listRegistration->date ? $listRegistration->date->toDateString() : '')}}"
+                                        value="{{old('date',$listRegistration->date)}}"
                                         class="form-control nepali_date @error('date') is-invalid @enderror"
                                         id="date"
                                         placeholder="मिति"

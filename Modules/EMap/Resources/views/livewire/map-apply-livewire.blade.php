@@ -473,8 +473,6 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <label for="father_name">१.३ बुवाको नाम :</label>
                                     <input type="text"
@@ -485,8 +483,20 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
-                                    <label for="landOwner.citizenship_issue_district_id">१.४ नागरिकता लिएको जिल्ला
+                                    <label for="landOwner.grandfather_name">१.४ हजुरबुबाको नाम :</label>
+                                    <input type="text"
+                                           id="landOwner.grandfather_name"
+                                           wire:model="landOwner.grandfather_name"
+                                    >
+                                    @error('landOwner.grandfather_name')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <label for="landOwner.citizenship_issue_district_id">१.५ नागरिकता लिएको जिल्ला
                                         :</label>
                                     <select wire:model="landOwner.citizenship_issue_district_id"
                                             id="landOwner.citizenship_issue_district_id">
@@ -501,10 +511,8 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <label for="citizenship_no">१.५ नागरिकत नम्बर :</label>
+                                    <label for="citizenship_no">१.६ नागरिकत नम्बर :</label>
                                     <input type="text"
                                            id="citizenship_no"
                                            wire:model="landOwner.citizenship_no"
@@ -513,8 +521,10 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
-                                    <label for="citizenship_issue_date">१.६ नागरिकता लिएको मिति :
+                                    <label for="citizenship_issue_date">१.७ नागरिकता लिएको मिति :
                                         :</label>
                                     <input type="text"
                                            id="citizenship_issue_date"
@@ -527,7 +537,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="landOwner.address">१.७ ठेगाना :</label>
+                                    <label for="landOwner.address">१.८ ठेगाना :</label>
                                     <input type="text"
                                            id="landOwner.address"
                                            wire:model="landOwner.address"
@@ -537,7 +547,24 @@
                                     @enderror
                                 </td>
                                 <td>
-
+                                    <label for="landOwner.local_body">१.९ पालिका :</label>
+                                    <input type="text"
+                                           id="landOwner.local_body"
+                                           wire:model="landOwner.local_body"
+                                    >
+                                    @error('landOwner.local_body')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <label for="landOwner.ward_no">१.१० वडा नं. :</label>
+                                    <input type="number"
+                                           id="landOwner.ward_no"
+                                           wire:model="landOwner.ward_no"
+                                    >
+                                    @error('landOwner.ward_no')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                 </td>
                             </tr>
                             </tbody>
@@ -581,8 +608,6 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <label for="houseOwner.father_name">१.३ बुवाको नाम :</label>
                                     <input type="text"
@@ -593,12 +618,26 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
-                                    <label for="houseOwner.citizenship_issue_district">
-                                        १.४ नागरिकता लिएको जिल्ला
+                                    <label for="houseOwner.grandfather_name">१.४ हजुरबुबाको नाम :</label>
+                                    <input type="text"
+                                           id="houseOwner.grandfather_name"
+                                           wire:model="houseOwner.grandfather_name"
+                                    >
+                                    @error('houseOwner.grandfather_name')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <label for="houseOwner.citizenship_issue_district_id">
+                                        १.५ नागरिकता लिएको जिल्ला
                                         :
                                     </label>
-                                    <select wire:model="houseOwner.citizenship_issue_district_id">
+                                    <select
+                                        id="houseOwner.citizenship_issue_district_id"
+                                        wire:model="houseOwner.citizenship_issue_district_id">
                                         <option value=""></option>
                                         @foreach($allDistricts as $district)
                                             <option value="{{$district->id}}">
@@ -610,11 +649,9 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <label for="houseOwner.citizenship_no">
-                                        १.५ नागरिकत नम्बर :
+                                        १.६ नागरिकत नम्बर :
                                     </label>
                                     <input type="text"
                                            id="houseOwner.citizenship_no"
@@ -624,9 +661,11 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
-                                    <label for="citizenship_issue_date">
-                                        १.६ नागरिकता लिएको मिति :
+                                    <label for="houseOwner.citizenship_issue_date">
+                                        १.७ नागरिकता लिएको मिति :
                                     </label>
                                     <input type="text"
                                            id="houseOwner.citizenship_issue_date"
@@ -640,7 +679,7 @@
                             <tr>
                                 <td>
                                     <label for="houseOwner.address">
-                                        १.७ ठेगाना :
+                                        १.८ ठेगाना :
                                     </label>
                                     <input type="text"
                                            id="houseOwner.address"
@@ -651,8 +690,26 @@
                                     @enderror
                                 </td>
                                 <td>
-
+                                    <label for="houseOwner.local_body">१.९ पालिका :</label>
+                                    <input type="text"
+                                           id="houseOwner.local_body"
+                                           wire:model="houseOwner.local_body"
+                                    >
+                                    @error('houseOwner.local_body')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
                                 </td>
+                                <td>
+                                    <label for="houseOwner.ward_no">१.१० वडा नं. :</label>
+                                    <input type="number"
+                                           id="houseOwner.ward_no"
+                                           wire:model="houseOwner.ward_no"
+                                    >
+                                    @error('houseOwner.ward_no')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </td>
+
                             </tr>
                             </tbody>
 
@@ -761,6 +818,8 @@
                                 <tr>
                                     <th>पद</th>
                                     <th>नाम</th>
+                                    <th>बुवाको नाम </th>
+                                    <th>हजुरबुबाको नाम</th>
                                     <th>फोन</th>
                                     <th>ठेगाना</th>
                                     <th>NEC Council No.</th>
@@ -784,7 +843,7 @@
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
-                                        <td>
+                                        <td width="180">
                                             <input type="text"
                                                    wire:model="designerDetails.{{$key}}.name"
                                             >
@@ -792,7 +851,23 @@
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
-                                        <td>
+                                        <td width="180">
+                                            <input type="text"
+                                                   wire:model="designerDetails.{{$key}}.father_name"
+                                            >
+                                            @error("designerDetails.$key.father_name")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td width="180">
+                                            <input type="text"
+                                                   wire:model="designerDetails.{{$key}}.grandfather_name"
+                                            >
+                                            @error("designerDetails.$key.grandfather_name")
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </td>
+                                        <td width="180">
                                             <input type="text"
                                                    wire:model="designerDetails.{{$key}}.phone"
                                             >
@@ -800,7 +875,7 @@
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
-                                        <td>
+                                        <td width="180">
                                             <input type="text"
                                                    wire:model="designerDetails.{{$key}}.address"
                                             >
@@ -808,7 +883,7 @@
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
-                                        <td>
+                                        <td width="180">
                                             <input type="text"
                                                    id="designerDetails.{{$key}}.nec_council_no"
                                                    wire:model="designerDetails.{{$key}}.nec_council_no"
@@ -817,7 +892,7 @@
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
-                                        <td>
+                                        <td width="180">
                                             <input type="text"
                                                    id="designerDetails.{{$key}}.local_body_registration_no"
                                                    wire:model="designerDetails.{{$key}}.local_body_registration_no"
@@ -826,7 +901,7 @@
                                             <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </td>
-                                        <td>
+                                        <td width="180">
                                             <input type="text"
                                                    id="designerDetails.{{$key}}.consulting_firm_name"
                                                    wire:model="designerDetails.{{$key}}.consulting_firm_name"
