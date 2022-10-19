@@ -263,7 +263,9 @@ body {
     position: relative;
     box-sizing: border-box;
 }
-
+.height{
+    height: 45vh;
+}
 .move {
     top: 45vh;
     position: relative;
@@ -303,8 +305,9 @@ video{
     background-color: var(--mainColor);
     color: var(--whiteColor);
     text-align: center;
-    padding: 1.5vh;
+    padding: 1.8vh;
     margin-top: 5vh;
+    border-radius: 10px;
 }
 .info-card a{
     text-decoration: none;
