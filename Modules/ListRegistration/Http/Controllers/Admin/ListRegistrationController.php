@@ -3,12 +3,12 @@
 namespace Modules\ListRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ListRegistration\StoreListRegistrationRequest;
-use App\Http\Requests\ListRegistration\UpdateListRegistrationRequest;
 use App\Models\ListRegistration;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+use Modules\ListRegistration\Http\Requests\ListRegistration\StoreListRegistrationRequest;
+use Modules\ListRegistration\Http\Requests\ListRegistration\UpdateListRegistrationRequest;
 
 class ListRegistrationController extends Controller
 {
@@ -105,7 +105,7 @@ class ListRegistrationController extends Controller
         });
 
         toast('मौजुदा सुची दर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.list_registration.listRegistrations.listRegistration.index'));
+        return redirect(route('admin.listRegistrations.listRegistration.index'));
     }
 
     public function destroy(ListRegistration $listRegistration)

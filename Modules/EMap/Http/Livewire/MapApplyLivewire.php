@@ -3,6 +3,7 @@
 namespace Modules\EMap\Http\Livewire;
 
 use App\Models\Address\District;
+use App\Models\Settings\OfficeSetting;
 use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
@@ -34,6 +35,7 @@ class MapApplyLivewire extends Component
 
     public $conversion = [];
     public MapSetting $setting;
+    public object $officeSetting;
 
     public $conversion_id;
 
@@ -125,7 +127,7 @@ class MapApplyLivewire extends Component
     {
         $this->setting = MapSetting::with('landMeasurement')->first();
         $this->mapFees = MapFee::with('unit')->get();
-
+        $this->officeSetting = OfficeSetting::with('localBody')->first();
 
         if (empty($this->setting->land_measurement_id)) {
             $this->redirect(route('emap.admin.setting.index'));
@@ -335,8 +337,8 @@ class MapApplyLivewire extends Component
         'houseOwner.citizenship_no' => ['required'],
         'houseOwner.citizenship_issue_date' => ['required'],
         'houseOwner.address' => ['required'],
-        'landOwner.local_body' => ['required'],
-        'landOwner.ward_no' => ['required', 'integer'],
+        'houseOwner.local_body' => ['required'],
+        'houseOwner.ward_no' => ['required', 'integer'],
     ];
 
     protected array $fourFortValidations = [
@@ -355,8 +357,8 @@ class MapApplyLivewire extends Component
         'designerDetails.*.grandfather_name' => ['required'],
         'designerDetails.*.phone' => ['required'],
         'designerDetails.*.address' => ['required'],
-        'designerDetails.*.local_body' => ['required'],
-        'designerDetails.*.ward_no' => ['required', 'integer'],
+        'designerDetails.*.local_body' => ['nullable'],
+        'designerDetails.*.ward_no' => ['nullable', 'integer'],
         'designerDetails.*.post' => ['required'],
         'designerDetails.*.nec_council_no' => ['required'],
         'designerDetails.*.local_body_registration_no' => ['required'],

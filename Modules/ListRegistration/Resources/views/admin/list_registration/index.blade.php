@@ -54,7 +54,7 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$listRegistration->main_person}}</td>
                                     <td>{{$listRegistration->mobile_no}}</td>
-                                    <td>{{$listRegistration->date ? $listRegistration->date->toDateString() : ''}}</td>
+                                    <td>{{$listRegistration->date}}</td>
 
                                     <td>
                                         @can('executiveCommittee_access')
