@@ -25,7 +25,7 @@
 @if(config('app.website_type') === 'website')
 @include('frontend.partials.navbar')
 @endif
-<div class="container">
+<div class="container-fluid">
     @yield('content')
 </div>
 
@@ -62,19 +62,13 @@
     document.getElementById('myVideo').addEventListener('ended', (event) => {
         myHandler();
     });
-    // document.getElementById('myVideo').addEventListener('ended', myHandler, false) {
-    //     videoPlay(0); // play the video
-    // }
 
     function myHandler() {
         i++;
-        console.log(i);
-        if (i === (videoCount - 1)) {
+        if(i > (videoCount - 1)){
             i = 0;
-            videoPlay(i);
-        } else {
-            videoPlay(i);
         }
+        videoPlay(i);
     }
 </script>
 

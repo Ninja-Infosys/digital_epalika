@@ -17,7 +17,7 @@
         <section class="last">
             <div class="row">
                 <div class="col-md-6">
-                    info desk
+                    <x-frontend.module-info-component/>
                 </div>
                 <div class="col-md-6">
                     <x-frontend.digital-board-video-component/>
