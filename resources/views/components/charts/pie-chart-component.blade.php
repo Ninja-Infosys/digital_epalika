@@ -1,6 +1,6 @@
 <h4 class="header-title">6rf45t</h4>
 <div class="mt-4 chartjs-chart">
-    <canvas id="myPieChart" height="350"></canvas>
+    <canvas id="myPieChart" height="250"></canvas>
 </div>
 
 @once
