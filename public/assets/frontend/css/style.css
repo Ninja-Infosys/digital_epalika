@@ -295,7 +295,8 @@ body {
     font-size:0;
     opacity:0;
     -webkit-transition:opacity 20s;
-    transition:opacity 20s
+    transition:opacity 20s;
+    width: 85%;
 }
 .jctkr-wrapper.jctkr-initialized ul {
     opacity:1;
@@ -429,12 +430,6 @@ select{
 }
 .textbox-01>p{
     font-size: .9rem
-}
-.chiefPerson .card-employee{
-    width: 40%;
-}
-.thirdLevelEmployee .card-employee{
-    width: 40%;
 }
 .card-employee{
     border: 1px solid #0047AB;
