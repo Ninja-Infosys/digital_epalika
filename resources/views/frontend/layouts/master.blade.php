@@ -25,7 +25,7 @@
 @if(config('app.website_type') === 'website')
 @include('frontend.partials.navbar')
 @endif
-<div class="container">
+<div class="container-fluid">
     @yield('content')
 </div>
 
