@@ -23,7 +23,12 @@ select{
     font-size: 1rem;
 }
 .textbox-01>p{
-    font-size: .9rem}
+    font-size: .9rem
+}
+.card-employee{
+    border: 1px solid var(--mainColor);
+    padding: 10px;
+}
 .chiefPerson .card-employee{
     width: 40%;
 }
