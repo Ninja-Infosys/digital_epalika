@@ -12,10 +12,10 @@
             <div class="card mb_30">
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
-                        <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::COMMENTS_AND_ORDERS->label()}}</h3>
+                        <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</h3>
                         <div class="d-flex justify-content-between">
                             <x-application-component
-                                :application-type="\Modules\EMap\Enums\NoticeTypeEnum::COMMENTS_AND_ORDERS"
+                                :application-type="\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE"
                                 url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
 
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
