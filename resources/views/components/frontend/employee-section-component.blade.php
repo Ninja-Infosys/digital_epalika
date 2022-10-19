@@ -6,7 +6,7 @@
                     src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto ">
+            <div class="textbox-01 px-2">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -18,20 +18,18 @@
                 <img src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 my-auto mx-auto px-3">
+            <div class="textbox-01 px-3">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
         </div>
-
-
         <div class="card-employee rounded shadow d-flex">
             <div class="avatar avatar-lg">
                 <img
                     src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto px-3">
+            <div class="textbox-01 px-3">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -43,7 +41,7 @@
                 <img src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto px-2">
+            <div class="textbox-01 px-2">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -54,7 +52,7 @@
                     src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto px-2">
+            <div class="textbox-01 px-2">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
@@ -65,7 +63,7 @@
                     src="{{asset('assets/frontend/image/submetro.jpg')}}"
                     alt="माननीय चन्द्र बहादुर शाही">
             </div>
-            <div class="textbox-01 mx-auto my-auto px-2">
+            <div class="textbox-01 px-2">
                 <h6>माननीय चन्द्र बहादुर शाही</h6>
                 <p>मन्त्री</p>
             </div>
