@@ -14,7 +14,7 @@
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम</h3>
                         <div class="d-flex justify-content-between">
-                            <x-application-component :application-type="App\Enums\ApplicationTypeEnum::MAP_ACCEPTANCE" url="{{route('organization.admin.clients.application.apply-map-application',[$client,$mapApply])}}"></x-application-component>
+                            <x-application-component :application-type="Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE" url="{{route('organization.admin.clients.application.apply-map-application',[$client,$mapApply])}}"></x-application-component>
 
                             <button id="printButton" class="btn btn-sm btn-success mx-2" title="Print Application" printElementId='printData' requestRoute="{{route('print.application-print')}}">
                                 <i class="fa fa-print"></i>

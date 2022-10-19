@@ -16,6 +16,7 @@ use Modules\EMap\Entities\ApplyMapApplication;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\FileTypeEnum;
+use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class MapController extends Controller
@@ -28,8 +29,8 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'mapApplyApplications'])->whereHas('mapApplyApplications', function ($query) {
-            $query->selectRaw('id,map_apply_id,file_type,created_at')->whereNull('rejected_at')->latest();
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->whereHas('applyMapNotices', function ($query) {
+            $query->selectRaw('id,map_apply_id,type,file_type,created_at')->where('type',FileTypeEnum::APPLICATION->value)->whereNull('rejected_at')->latest();
         })->get();
 
 
@@ -45,15 +46,15 @@ class MapController extends Controller
 
     }
 
-    public function rejectApplication(Request $request, MapApply $mapApply, ApplyMapApplication $applyMapApplication)
+    public function rejectApplication(Request $request, MapApply $mapApply, ApplyMapNotice $applyMapNotice): \Illuminate\Routing\Redirector|Application|RedirectResponse
     {
-        if ($applyMapApplication->rejected_at == null) {
-            $applyMapApplication->update([
+        if ($applyMapNotice->rejected_at === null) {
+            $applyMapNotice->update([
                 'rejected_at' => now(),
                 'remarks' => $request->input('remarks')
             ]);
         } else {
-            $applyMapApplication->update([
+            $applyMapNotice->update([
                 'rejected_at' => null,
                 'remarks' => null
             ]);
@@ -63,17 +64,7 @@ class MapController extends Controller
         return redirect(route('emap.admin.map.mapApply.show', $mapApply));
     }
 
-    public function rejectApplyMapNotice(MapApply $mapApply, ApplyMapNotice $applyMapNotice)
-    {
-        if ($applyMapNotice->rejected_at == null) {
-            $applyMapNotice->update(['rejected_at' => now()]);
-        } else {
-            $applyMapNotice->update(['rejected_at' => null]);
-        }
 
-        toast('सूचना  सफलतापूर्वक अस्वीकार गरियो', 'success');
-        return redirect(route('emap.admin.map.mapApply.show', $mapApply));
-    }
 
     public function officeLetter(MapApply $mapApply): Factory|View|Application
     {
@@ -157,6 +148,14 @@ class MapController extends Controller
         return view('emap::admin.map.report.first_phase_technician_report', compact('mapApply'));
 
     }
+    public function plinthLevelSupervisorReport(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load(['landDetail', 'houseOwner','designerDetails' => function ($query) {
+        $query->where('post', PostsEnum::CONTRACTOR->value)->first();
+    }]);
+        return view('emap::admin.map.report.plinth_level_supervisor_report', compact('mapApply'));
+
+    }
 
     public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {
@@ -166,6 +165,34 @@ class MapController extends Controller
         ]);
         $mapApplyData = $mapApply->applyMapNotices()->create($data + [
                 'type' => FileTypeEnum::NOTICE->value
+            ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+    public function report(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::REPORT->value
+            ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+    public function certificate(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::CERTIFICATE->value
             ]);
 
         Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
@@ -187,4 +214,20 @@ class MapController extends Controller
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
+
+    public function agreement(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::AGREEMENT->value
+            ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+
 }

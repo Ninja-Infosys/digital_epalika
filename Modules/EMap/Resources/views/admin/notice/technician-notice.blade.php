@@ -16,7 +16,7 @@
                         <div class="d-flex justify-content-between">
                             <x-application-component
                                 :application-type="\Modules\EMap\Enums\NoticeTypeEnum::TECHNICAL_REPORT"
-                                url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
+                                url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
 
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                                     requestRoute="{{route('print.office-letter-print')}}">

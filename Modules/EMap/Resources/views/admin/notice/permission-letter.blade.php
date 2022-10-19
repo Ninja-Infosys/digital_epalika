@@ -16,7 +16,7 @@
                         <div class="d-flex justify-content-between">
                             <x-application-component
                                 :application-type="\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE"
-                                url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
+                                url="{{route('emap.admin.map.map-apply.notice.upload.order',$mapApply)}}"/>
 
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                                     requestRoute="{{route('print.office-letter-print')}}">

@@ -16,7 +16,7 @@
                         <div class="d-flex justify-content-between">
                             <x-application-component
                                 :application-type="\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL"
-                                url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
+                                url="{{route('emap.admin.map.map-apply.notice.upload.certificate',$mapApply)}}"/>
 
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                                     requestRoute="{{route('print.application-print')}}">

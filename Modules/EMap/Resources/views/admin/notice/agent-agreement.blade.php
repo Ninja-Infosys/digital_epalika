@@ -16,7 +16,7 @@
                         <div class="d-flex justify-content-between">
                             <x-application-component
                                 :application-type="\Modules\EMap\Enums\NoticeTypeEnum::AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR"
-                                url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
+                                url="{{route('emap.admin.map.map-apply.notice.upload.agreement',$mapApply)}}"/>
 
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                                     requestRoute="{{route('print.office-letter-print')}}">

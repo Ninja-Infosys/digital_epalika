@@ -57,15 +57,15 @@
                                             <a href="#"
                                                type="button" @class([
                                                         "btn",
-                                                        "btn-danger"=>$application_types->diff($mapApply->mapApplyApplications->whereNull('rejected_at')->pluck('application_type'))->count() >0,
-                                                        "btn-success"=>$application_types->diff($mapApply->mapApplyApplications->whereNull('rejected_at')->pluck('application_type'))->count() <=0,
+                                                        "btn-danger"=>$application_types->diff($mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type'))->count() >0,
+                                                        "btn-success"=>$application_types->diff($mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type'))->count() <=0,
                                                         "btn-sm",
                                                         "text-white"
                                                 ])>
                                                 <i @class([
                                                 "fa",
-                                                "fa-window-close"=>$application_types->diff($mapApply->mapApplyApplications->whereNull('rejected_at')->pluck('application_type'))->count() >0,
-                                                "fa-check"=>$application_types->diff($mapApply->mapApplyApplications->whereNull('rejected_at')->pluck('application_type'))->count() <=0
+                                                "fa-window-close"=>$application_types->diff($mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type'))->count() > 0,
+                                                "fa-check"=>$application_types->diff($mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type'))->count() <= 0
                                                 ])></i>
                                             </a>
                                             <button type="button"
@@ -79,8 +79,8 @@
                                                 @foreach(\App\Enums\ApplicationTypeEnum::cases() as $type)
                                                     <a class="dropdown-item" href="#">{{$type->label()}} <i @class([
                                                         'fa',
-                                                        'fa-check text-success'=>$mapApply->mapApplyApplications->whereNull('rejected_at')->pluck('application_type')->contains($type->value),
-                                                        'fa-window-close text-danger'=>!$mapApply->mapApplyApplications->whereNull('rejected_at')->pluck('application_type')->contains($type->value),
+                                                        'fa-check text-success'=>$mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type')->contains($type->value),
+                                                        'fa-window-close text-danger'=>!$mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type')->contains($type->value),
                                                     ])></i></a>
                                                 @endforeach
                                             </div>
