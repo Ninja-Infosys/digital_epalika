@@ -212,10 +212,7 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Pie Chart</h4>
-                    <div class="mt-4 chartjs-chart">
-                        <canvas id="pie-chart-example" height="350" class="mt-4" data-colors="#6658dd,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
-                    </div>
+                      <x-charts.pie-chart-component/>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->
