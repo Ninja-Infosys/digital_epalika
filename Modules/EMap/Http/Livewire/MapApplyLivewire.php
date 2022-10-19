@@ -357,8 +357,8 @@ class MapApplyLivewire extends Component
         'designerDetails.*.grandfather_name' => ['required'],
         'designerDetails.*.phone' => ['required'],
         'designerDetails.*.address' => ['required'],
-        'designerDetails.*.local_body' => ['nullable'],
-        'designerDetails.*.ward_no' => ['nullable', 'integer'],
+        'designerDetails.*.local_body' => ['required'],
+        'designerDetails.*.ward_no' => ['required', 'integer'],
         'designerDetails.*.post' => ['required'],
         'designerDetails.*.nec_council_no' => ['required'],
         'designerDetails.*.local_body_registration_no' => ['required'],
@@ -403,32 +403,17 @@ class MapApplyLivewire extends Component
 
     public function rules()
     {
-        switch ($this->currentStep) {
-            case 1:
-                {
-                    return array_merge($this->applyMapValidations,
-                        $this->landDescriptionValidations,
-                        $this->landOwnerValidations,
-                        $this->fourFortValidations,
-                        $this->houseOwnerValidations,
-                        $this->designerDetailValidations,
-                        $this->applicantDetailValidations,
-                        $this->criteriaDetailValidations,
-                        $this->buildingDetailValidations,
-                        $this->consultantDetailValidations
-                    );
-                }
-                break;
-            case 2:
-                {
-                    return $this->landDescriptionValidations;
-                }
-                break;
-            default:
-            {
-                return $this->applyMapValidations;
-            }
-        }
+        return array_merge($this->applyMapValidations,
+            $this->landDescriptionValidations,
+            $this->landOwnerValidations,
+            $this->fourFortValidations,
+            $this->houseOwnerValidations,
+            $this->designerDetailValidations,
+            $this->applicantDetailValidations,
+            $this->criteriaDetailValidations,
+            $this->buildingDetailValidations,
+            $this->consultantDetailValidations
+        );
     }
 
     public function updated($propertyName)
@@ -565,8 +550,12 @@ class MapApplyLivewire extends Component
             'fourFortDetails.*.north.required' => 'उत्तर दिशा अनिवार्य छ|',
             'designerDetails.required' => 'डिजाइनरको विवरण अनिवार्य छ|',
             'designerDetails.*.name.required' => ' नाम अनिवार्य छ|',
+            'designerDetails.*.father_name.required' => 'बुबाको नाम अनिवार्य छ|',
+            'designerDetails.*.grand_father_name.required' => 'हजुरबुबाको नाम अनिवार्य छ|',
             'designerDetails.*.phone.required' => ' फोन अनिवार्य छ|',
             'designerDetails.*.address.required' => ' ठेगाना अनिवार्य छ|',
+            'designerDetails.*.local_body.required' => ' पालिका  अनिवार्य छ|',
+            'designerDetails.*.ward_no.required' => ' वडा नं.   अनिवार्य छ|',
             'designerDetails.*.post.required' => 'पद अनिवार्य छ|',
             'designerDetails.*.nec_council_no.required' => 'NEC Council No. अनिवार्य छ|',
             'designerDetails.*.local_body_registration_no.required' => 'पालिकाको दर्ता नं अनिवार्य छ|',

@@ -11,7 +11,7 @@
                 <div class="col-md-12">
                     <div class="card-01 justify-content px-5 pt-5 pb-5">
                         <h3>{{$notice->title}}</h3>
-                        <small>- {{$notice->date->toDateString()??''}}</small>
+                        <small>- {{$notice->date}}</small>
                         <p>{!! $notice->description !!}</p>
                         <div class="col-lg-10">
                             <div class="row">

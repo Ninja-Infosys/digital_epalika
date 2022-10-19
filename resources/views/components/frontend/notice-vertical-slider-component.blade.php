@@ -2,8 +2,12 @@
     <div class="vertical-scroll">
         <div class="move">
             @foreach($notices as $notice)
-            <h6 class="bg-info p-2 text-white mt-2">{{$notice->title}} [{{$notice->date}}]</h6>
-            <img src="https://dummyimage.com/320x240/000/fff.gif&text=image 1" id="image1">
+                <h6 class="bg-info p-2 text-white mt-2">{{$notice->title}} [{{$notice->date}}]</h6>
+                @foreach($notice->files as $file)
+                    @if(in_array($file->extension,['jpg','jpeg','png']))
+                        <img src="{{$file->file_url}}" alt="">
+                    @endif
+                @endforeach
             @endforeach
         </div>
     </div>

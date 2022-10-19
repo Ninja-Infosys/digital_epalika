@@ -807,120 +807,149 @@
 
     <fieldset>
         <legend>६. डिजाइनरको विवरण</legend>
-        <div class="row">
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table
-                                class="table table-hover table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>पद</th>
-                                    <th>नाम</th>
-                                    <th>बुवाको नाम </th>
-                                    <th>हजुरबुबाको नाम</th>
-                                    <th>फोन</th>
-                                    <th>ठेगाना</th>
-                                    <th>NEC Council No.</th>
-                                    <th>पालिकाको दर्ता नं</th>
-                                    <th>कन्सल्टिंग फर्मबाट भए सो को नाम</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($designerDetails as $key=>$designerDetail)
-                                    <tr>
-                                        <td>
-                                            <label
-                                                for="designerDetails.{{$key}}.post">
-                                                १.{{$loop->iteration}} {{\Modules\EMap\Enums\PostsEnum::tryFrom($designerDetail['post'])->label()}}
-                                            </label>
-                                            <input type="hidden"
-                                                   id="designerDetails.{{$key}}.post"
-                                                   wire:model="designerDetails.{{$key}}.post"
-                                            >
-                                            @error("designerDetails.$key.post")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                        <td width="180">
-                                            <input type="text"
-                                                   wire:model="designerDetails.{{$key}}.name"
-                                            >
-                                            @error("designerDetails.$key.name")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                        <td width="180">
-                                            <input type="text"
-                                                   wire:model="designerDetails.{{$key}}.father_name"
-                                            >
-                                            @error("designerDetails.$key.father_name")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                        <td width="180">
-                                            <input type="text"
-                                                   wire:model="designerDetails.{{$key}}.grandfather_name"
-                                            >
-                                            @error("designerDetails.$key.grandfather_name")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                        <td width="180">
-                                            <input type="text"
-                                                   wire:model="designerDetails.{{$key}}.phone"
-                                            >
-                                            @error("designerDetails.$key.phone")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                        <td width="180">
-                                            <input type="text"
-                                                   wire:model="designerDetails.{{$key}}.address"
-                                            >
-                                            @error("designerDetails.$key.address")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                        <td width="180">
-                                            <input type="text"
-                                                   id="designerDetails.{{$key}}.nec_council_no"
-                                                   wire:model="designerDetails.{{$key}}.nec_council_no"
-                                            >
-                                            @error("designerDetails.$key.nec_council_no")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                        <td width="180">
-                                            <input type="text"
-                                                   id="designerDetails.{{$key}}.local_body_registration_no"
-                                                   wire:model="designerDetails.{{$key}}.local_body_registration_no"
-                                            >
-                                            @error("designerDetails.$key.local_body_registration_no")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                        <td width="180">
-                                            <input type="text"
-                                                   id="designerDetails.{{$key}}.consulting_firm_name"
-                                                   wire:model="designerDetails.{{$key}}.consulting_firm_name"
-                                            >
-                                            @error("designerDetails.$key.consulting_firm_name")
-                                            <p class="text-danger">{{$message}}</p>
-                                            @enderror
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                </tbody>
-
-                            </table>
-                        </div>
-                    </div>
+        @foreach($designerDetails as $key=>$designerDetail)
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label
+                        for="designerDetails.{{$key}}.post">
+                        १.{{$loop->iteration}} {{\Modules\EMap\Enums\PostsEnum::tryFrom($designerDetail['post'])->label()}}
+                    </label>
+                    <input type="hidden"
+                           id="designerDetails.{{$key}}.post"
+                           wire:model="designerDetails.{{$key}}.post"
+                    >
+                    @error("designerDetails.$key.post")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.name">नाम</label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.name"
+                           wire:model="designerDetails.{{$key}}.name"
+                    >
+                    @error("designerDetails.$key.name")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.father_name"> बुवाको नाम</label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.father_name"
+                           wire:model="designerDetails.{{$key}}.father_name"
+                    >
+                    @error("designerDetails.$key.father_name")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.grandfather_name">
+                        हजुरबुबाको नाम
+                    </label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.grandfather_name"
+                           wire:model="designerDetails.{{$key}}.grandfather_name"
+                    >
+                    @error("designerDetails.$key.grandfather_name")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.phone">
+                        फोन
+                    </label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.phone"
+                           wire:model="designerDetails.{{$key}}.phone"
+                    >
+                    @error("designerDetails.$key.phone")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.address">
+                        ठेगाना
+                    </label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.address"
+                           wire:model="designerDetails.{{$key}}.address"
+                    >
+                    @error("designerDetails.$key.address")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.local_body">
+                        पालिका
+                    </label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.local_body"
+                           wire:model="designerDetails.{{$key}}.local_body"
+                    >
+                    @error("designerDetails.$key.local_body")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.ward_no">
+                        वडा नं.
+                    </label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.ward_no"
+                           wire:model="designerDetails.{{$key}}.ward_no"
+                    >
+                    @error("designerDetails.$key.ward_no")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.nec_council_no">
+                        NEC Council No.
+                    </label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.nec_council_no"
+                           wire:model="designerDetails.{{$key}}.nec_council_no"
+                    >
+                    @error("designerDetails.$key.nec_council_no")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.local_body_registration_no">
+                        पालिकाको दर्ता नं
+                    </label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.local_body_registration_no"
+                           wire:model="designerDetails.{{$key}}.local_body_registration_no"
+                    >
+                    @error("designerDetails.$key.local_body_registration_no")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="designerDetails.{{$key}}.consulting_firm_name">
+                        कन्सल्टिंग फर्मबाट भए सो को नाम
+                    </label>
+                    <input type="text"
+                           class="form-control form-control-sm"
+                           id="designerDetails.{{$key}}.consulting_firm_name"
+                           wire:model="designerDetails.{{$key}}.consulting_firm_name"
+                    >
+                    @error("designerDetails.$key.consulting_firm_name")
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
                 </div>
             </div>
-        </div>
+        @endforeach
 
     </fieldset>
 
