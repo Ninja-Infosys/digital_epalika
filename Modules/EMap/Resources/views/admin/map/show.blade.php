@@ -56,7 +56,8 @@
                             </a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a href="#rejected_application_tab" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
+                            <a href="#rejected_application_tab" data-bs-toggle="tab" aria-expanded="false"
+                               class="nav-link"
                                aria-selected="false" role="tab" tabindex="-1">
                                 खारेज भएका आवेदन
                             </a>
@@ -84,12 +85,13 @@
                                                     method="POST" class="show_reject_confirm">
                                                     @csrf
                                                     @method('PUT')
+                                                    <input type="hidden" id="reject_remarks" name="remarks">
                                                     <button type="submit"
-                                                            @class([
-                                                                "btn",
-                                                                "btn-danger"=>empty($application->rejected_at),
-                                                                "btn-primary"=>!empty($application->rejected_at),
-                                                                "btn-sm"])>
+                                                        @class([
+                                                            "btn",
+                                                            "btn-danger"=>empty($application->rejected_at),
+                                                            "btn-primary"=>!empty($application->rejected_at),
+                                                            "btn-sm"])>
                                                         {{empty($application->rejected_at)? 'Reject Application' : 'Accept Application'}}
                                                     </button>
                                                 </form>
@@ -111,34 +113,34 @@
 
                         <div class="tab-pane" id="map-registration-tab" role="tabpanel">
 
-                                @includeIf('emap::admin.map.map-registration.print')
+                            @includeIf('emap::admin.map.map-registration.print')
 
 
                         </div>
 
 
-                            <div class="tab-pane" id="notice-tab" role="tabpanel">
-                                <div class="row row-cols-1 row-cols-md-3 g-3">
-                                    @foreach($mapApply->applyMapNotices->where('type',\Modules\EMap\Enums\FileTypeEnum::NOTICE)->whereNull('rejected_at') as $applyMapNotice)
-                                        <div class="col">
-                                            <div class="card">
-                                                <iframe class="card-img-top img-fluid" height="500" frameborder="0"
-                                                        src="{{$applyMapNotice->file_url}}"></iframe>
-                                                <div class="card-body">
-                                                    <h4 class="card-title">{{$applyMapNotice->file_type->label() ?? ''}}</h4>
-                                                    <p class="card-text mt-2">
-                                                    </p>
-                                                    <p class="card-text">
-                                                        <small
-                                                            class="text-muted">{{$applyMapNotice->created_at->diffForHumans() ?? ''}}</small>
-                                                    </p>
-                                                </div>
+                        <div class="tab-pane" id="notice-tab" role="tabpanel">
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                @foreach($mapApply->applyMapNotices->where('type',\Modules\EMap\Enums\FileTypeEnum::NOTICE)->whereNull('rejected_at') as $applyMapNotice)
+                                    <div class="col">
+                                        <div class="card">
+                                            <iframe class="card-img-top img-fluid" height="500" frameborder="0"
+                                                    src="{{$applyMapNotice->file_url}}"></iframe>
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{$applyMapNotice->file_type->label() ?? ''}}</h4>
+                                                <p class="card-text mt-2">
+                                                </p>
+                                                <p class="card-text">
+                                                    <small
+                                                        class="text-muted">{{$applyMapNotice->created_at->diffForHumans() ?? ''}}</small>
+                                                </p>
                                             </div>
                                         </div>
-                                    @endforeach
-                                </div>
-
+                                    </div>
+                                @endforeach
                             </div>
+
+                        </div>
 
                         <div class="tab-pane" id="rejected_application_tab" role="tabpanel">
                             <div class="row row-cols-1 row-cols-md-3 g-3">
@@ -212,7 +214,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <a href="{{route('emap.admin.organization.show',$mapApply->organization_id)}}" class="btn btn-sm btn-primary">
+                                            <a href="{{route('emap.admin.organization.show',$mapApply->organization_id)}}"
+                                               class="btn btn-sm btn-primary">
                                                 <i class="fa fa-eye"> पुरा विवरण हेर्नुहोस</i>
                                             </a>
                                         </td>
@@ -236,13 +239,20 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">संघियारको नाममा जारी भएको सूचना</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">१५ दिने सूचना टाँस सम्बन्धमा</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">संघियारको नाममा जारी भएको सूचना</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">१५ दिने सूचना टाँस सम्बन्धमा</a>
 
-                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्राविधिक प्रतिवेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">प्राविधिक प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी
+                        बीच)</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
                 </div>
             </div>
         </div>
@@ -254,7 +264,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
                 </div>
             </div>
         </div>
@@ -266,8 +277,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-consultant-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-technician-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}} प्राबिधिकको प्रतिबेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-consultant-report',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-technician-report',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य
+                        सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        प्राबिधिकको प्रतिबेदन</a>
                 </div>
             </div>
         </div>
@@ -279,8 +294,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सरजमिन मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">सरजमिन मुचुल्का</a>
                 </div>
             </div>
         </div>
@@ -293,17 +310,25 @@
                 event.preventDefault();
 
                 swal.fire({
-
                     title: "Are You Sure to reject this application ? ",
+                    input: 'text',
+                    inputLabel: 'Reject Reason',
+                    inputPlaceholder: 'Reject Reason',
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: 'red',
                     confirmButtonText: "Reject",
                     dangerMode: true,
+                    inputValidator: (value) => {
+                        if (!value) {
+                            return 'Please enter reject reason !'
+                        }
+                    }
 
                 })
-                    .then((willDelete) => {
-                        if (willDelete.isConfirmed) {
+                    .then((data) => {
+                        if (data.value) {
+                            $("#reject_remarks").val(data.value)
                             form.submit();
                         }
                     });

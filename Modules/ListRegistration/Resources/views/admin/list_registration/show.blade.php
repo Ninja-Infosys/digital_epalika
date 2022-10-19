@@ -37,85 +37,76 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="d-flex justify-content-between">
-                                        <h4 class="header-title"></h4>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-sm mb-0 table-striped table-hover">
+                            <div class="table-responsive">
+                                <table class="table table-sm mb-0 table-striped table-hover">
 
-                                            <tbody>
-                                            <tr>
-                                                <th>दर्ता न.</th>
-                                                <td>{{$listRegistration->registration_no}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>प्रकार</th>
-                                                <td>{{$listRegistration->applicant_type}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>नाम.</th>
-                                                <td>{{$listRegistration->name}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>ठेगाना.</th>
-                                                <td>{{$listRegistration->address}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>पत्राचार गर्ने ठेगाना.</th>
-                                                <td>{{$listRegistration->mailing_address}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>मुख्य व्यक्तिको नाम.</th>
-                                                <td>{{$listRegistration->main_person}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>टेलिफोन नम्बर.</th>
-                                                <td>{{$listRegistration->telephone}}</td>
-                                            </tr>  <tr>
-                                                <th>मोबाइल नम्बर</th>
-                                                <td>{{$listRegistration->mobile_no}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>निवेदक /अनुसूची</th>
-                                                <td>
-                                                    <img src="{{$listRegistration->application_photo_url}}" alt="" height="60px;">
-                                                </td>
-                                            </tr>  <tr>
-                                                <th>संस्था वा फार्म दर्ताको प्रमाण पत्र.</th>
-                                                <td><img src="{{$listRegistration->registration_certificate_url}}" alt="" height="60px;"></td>
-                                            </tr>  <tr>
-                                                <th>स्थायी लेखा नम्बर(PAN)</th>
-                                                <td>
-                                                    <img src="{{$listRegistration->pan_photo_url}}" alt="" height="60px;">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>कर चुक्ता प्रमाण पत्र</th>
-                                                <td>
-                                                    <img src="{{$listRegistration->tax_payment_certificate_url}}" alt="" height="60px;">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>कुन खरिद को लागि सुची दर्ता हुन निबेदन दिने हो सो को लागि इजाजत पत्र</th>
-                                                <td>
-                                                    <img src="{{$listRegistration->license_photo_url}}" alt="" height="60px;">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>मिति</th>
-                                                <td>
-                                                    {{$listRegistration->date ? $listRegistration->date->toDateString():''}}
-                                                </td>
-                                            </tr>
+                                    <tbody>
+                                    <tr>
+                                        <th>दर्ता न.</th>
+                                        <td>{{$listRegistration->registration_no}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>प्रकार</th>
+                                        <td>{{$listRegistration->applicant_type}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>नाम.</th>
+                                        <td>{{$listRegistration->name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>ठेगाना.</th>
+                                        <td>{{$listRegistration->address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>पत्राचार गर्ने ठेगाना.</th>
+                                        <td>{{$listRegistration->mailing_address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>मुख्य व्यक्तिको नाम.</th>
+                                        <td>{{$listRegistration->main_person}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>टेलिफोन नम्बर.</th>
+                                        <td>{{$listRegistration->telephone}}</td>
+                                    </tr>  <tr>
+                                        <th>मोबाइल नम्बर</th>
+                                        <td>{{$listRegistration->mobile_no}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>निवेदक /अनुसूची</th>
+                                        <td>
+                                            <img src="{{$listRegistration->application_photo_url}}" alt="" height="60px;">
+                                        </td>
+                                    </tr>  <tr>
+                                        <th>संस्था वा फार्म दर्ताको प्रमाण पत्र.</th>
+                                        <td><img src="{{$listRegistration->registration_certificate_url}}" alt="" height="60px;"></td>
+                                    </tr>  <tr>
+                                        <th>स्थायी लेखा नम्बर(PAN)</th>
+                                        <td>
+                                            <img src="{{$listRegistration->pan_photo_url}}" alt="" height="60px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>कर चुक्ता प्रमाण पत्र</th>
+                                        <td>
+                                            <img src="{{$listRegistration->tax_payment_certificate_url}}" alt="" height="60px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>कुन खरिद को लागि सुची दर्ता हुन निबेदन दिने हो सो को लागि इजाजत पत्र</th>
+                                        <td>
+                                            <img src="{{$listRegistration->license_photo_url}}" alt="" height="60px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>मिति</th>
+                                        <td>
+                                            {{$listRegistration->date}}
+                                        </td>
+                                    </tr>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

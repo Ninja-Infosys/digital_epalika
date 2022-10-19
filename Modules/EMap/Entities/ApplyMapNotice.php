@@ -27,7 +27,8 @@ class ApplyMapNotice extends Model
         'file',
         'type',
         'file_type',
-        'rejected_at'
+        'rejected_at',
+        'remarks'
     ];
 
     protected $casts = [

@@ -45,12 +45,18 @@ class MapController extends Controller
 
     }
 
-    public function rejectApplication(MapApply $mapApply, ApplyMapApplication $applyMapApplication)
+    public function rejectApplication(Request $request, MapApply $mapApply, ApplyMapApplication $applyMapApplication)
     {
         if ($applyMapApplication->rejected_at == null) {
-            $applyMapApplication->update(['rejected_at' => now()]);
+            $applyMapApplication->update([
+                'rejected_at' => now(),
+                'remarks' => $request->input('remarks')
+            ]);
         } else {
-            $applyMapApplication->update(['rejected_at' => null]);
+            $applyMapApplication->update([
+                'rejected_at' => null,
+                'remarks' => null
+            ]);
         }
 
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');

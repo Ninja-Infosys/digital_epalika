@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('apply_map_applications', function (Blueprint $table) {
@@ -14,6 +13,7 @@ return new class extends Migration
             $table->string('file');
             $table->timestamp('rejected_at')->nullable();
             $table->string('file_type');
+            $table->string('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

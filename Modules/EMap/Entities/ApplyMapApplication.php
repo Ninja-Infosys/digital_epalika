@@ -25,7 +25,8 @@ class ApplyMapApplication extends Model
         'map_apply_id',
         'file',
         'file_type',
-        'rejected_at'
+        'rejected_at',
+        'remarks'
     ];
 
     protected $casts = [
