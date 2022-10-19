@@ -32,7 +32,9 @@ class Employee extends Model
 
     public function getPhotoUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->attributes['photo']);
+        return $this->attributes['photo']
+            ? Storage::disk('public')->url($this->attributes['photo'])
+            : asset('images/user_icon.jpg');
     }
 
     public function setPhotoAttribute($value)

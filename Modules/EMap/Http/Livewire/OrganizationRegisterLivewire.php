@@ -18,6 +18,7 @@ class OrganizationRegisterLivewire extends Component
     use WithFileUploads;
 
     public int $currentStep = 1;
+    public float $progressPercentage = 0;
 
     public $is_same_as_permanent = false;
 
@@ -179,11 +180,13 @@ class OrganizationRegisterLivewire extends Component
     {
         $this->validate();
         $this->currentStep = $step;
+        $this->calculateProgressPercentage();
     }
 
     public function backStep($step): void
     {
         $this->currentStep = $step;
+        $this->calculateProgressPercentage();
     }
 
     protected function rules(): array
@@ -315,5 +318,11 @@ class OrganizationRegisterLivewire extends Component
         }
 
         return view('emap::livewire.organization-register-livewire');
+    }
+
+    private function calculateProgressPercentage()
+    {
+        $this->reset('progressPercentage');
+        $this->progressPercentage = $this->currentStep / ($this->is_organization === "1" ? 7 : 5) * 100;
     }
 }

@@ -80,9 +80,8 @@ class GrievanceFormWizard extends Component
     public function rules()
     {
         return match ($this->currentStep) {
-            1 => $this->firstStepValidations,
             2 => $this->secondStepValidations,
-            default => array_merge($this->firstStepValidations, $this->secondStepValidations),
+            default => $this->firstStepValidations
         };
     }
 

@@ -45,10 +45,13 @@
             </a>
         </li>
     </ul>
-    <form wire:submit.prevent="submitFormData">
+    @if($progressPercentage>0)
         <div id="bar" class="progress mb-3" style="height: 7px;">
-            <div class="bar progress-bar progress-bar-striped progress-bar-animated bg-success"></div>
+            <div class="bar progress-bar progress-bar-striped progress-bar-animated bg-success"
+                 style="width: {{$progressPercentage}}%"></div>
         </div>
+    @endif
+    <form wire:submit.prevent="submitFormData">
         @switch($currentStep)
             @case(2)
                 <div class="row">
@@ -270,7 +273,9 @@
                     </fieldset>
                     <div class="my-2">
                         <div class="form-check mb-2 form-check-primary">
-                            <button wire:click.prevent="checkSameAsPermanentAddress"><i @class(["fa", "fa-check"=>!$is_same_as_permanent, "fa-window-close"=>$is_same_as_permanent])></i></button>
+                            <button wire:click.prevent="checkSameAsPermanentAddress">
+                                <i @class(["fa", "fa-check"=>!$is_same_as_permanent, "fa-window-close"=>$is_same_as_permanent])></i>
+                            </button>
                             <label class="form-check-label fw-bold" for="address_check">
                                 के स्थायी र अस्थायी ठेगाना एउटै हो?
                             </label>

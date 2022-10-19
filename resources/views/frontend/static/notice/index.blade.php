@@ -26,7 +26,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$notice->title}}</td>
-                            <td>{{$notice->date->toDateString()??''}}</td>
+                            <td>{{$notice->date}}</td>
                             <td>
                                 <button class="btn btn-download btn-light">
                                     <a href="{{route('single-notice',$notice)}}"><i class="fa-solid fa-eye"></i></a>
