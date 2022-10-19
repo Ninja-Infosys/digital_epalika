@@ -83,6 +83,8 @@
         <style>
             .font-black p {
                 color: black;
+                line-height: 2.2;
+                text-align: justify;
             }
 
             .underline-dotted {

@@ -272,13 +272,14 @@
                         </div>
                     </fieldset>
                     <div class="my-2">
-                        <div class="form-check mb-2 form-check-primary">
-                            <button wire:click.prevent="checkSameAsPermanentAddress">
-                                <i @class(["fa", "fa-check"=>!$is_same_as_permanent, "fa-window-close"=>$is_same_as_permanent])></i>
-                            </button>
-                            <label class="form-check-label fw-bold" for="address_check">
+                        <div class="form-check-primary0 d-flex">
+                            <h5 class="fw-bold mt-1" for="address_check" >
                                 के स्थायी र अस्थायी ठेगाना एउटै हो?
-                            </label>
+                            </h5>
+                            <div class="font px-2">
+                                <i wire:click.prevent="checkSameAsPermanentAddress"
+                                   class="fa fa-toggle-{{$is_same_as_permanent ? 'on' :'off' }} fa-2x"  ></i>
+                            </div>
                         </div>
                     </div>
                     <fieldset>
