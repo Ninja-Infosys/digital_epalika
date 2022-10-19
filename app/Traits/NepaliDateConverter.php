@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use Exception;
+use RuntimeException;
+
 trait NepaliDateConverter
 {
     private $nepali_length = array(
@@ -252,6 +255,34 @@ trait NepaliDateConverter
         $date['d'] = date_format($nep, "d");
         $date['l'] = date_format($nep, "l");
         return $date;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getNepaliMonthName($monthInNumber): string
+    {
+        $monthInNumber = (int)$monthInNumber;
+
+        if ($monthInNumber < 13) {
+            return $this->month_name[$monthInNumber];
+        }
+
+        throw new RuntimeException("Month Range Invalid");
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getNepaliWeekName($weekInNumber): string
+    {
+        $weekInNumber = (int)$weekInNumber;
+
+        if ($weekInNumber < 7) {
+            return $this->month_name[$weekInNumber - 1];
+        }
+
+        throw new RuntimeException("Week Range Invalid");
     }
 }
 

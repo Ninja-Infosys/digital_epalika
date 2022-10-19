@@ -55,6 +55,7 @@
                                 सूचना
                             </a>
                         </li>
+
                         <li class="nav-item" role="presentation">
                             <a href="#rejected_application_tab" data-bs-toggle="tab" aria-expanded="false"
                                class="nav-link"
@@ -72,7 +73,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="application_tab" role="tabpanel">
                             <div class="row row-cols-1 row-cols-md-3 g-3">
-                                @foreach($mapApply->mapApplyApplications->whereNull('rejected_at') as $application)
+                                @foreach($mapApply->applyMapNotices->whereNull('rejected_at') as $application)
                                     <div class="col">
                                         <div class="card">
                                             <iframe class="card-img-top img-fluid" height="500" frameborder="0"
@@ -113,7 +114,7 @@
 
                         <div class="tab-pane" id="map-registration-tab" role="tabpanel">
 
-                            @includeIf('emap::admin.map.map-registration.print')
+                                @includeIf('emap::admin.map.map-registration.print')
 
 
                         </div>
@@ -121,7 +122,7 @@
 
                         <div class="tab-pane" id="notice-tab" role="tabpanel">
                             <div class="row row-cols-1 row-cols-md-3 g-3">
-                                @foreach($mapApply->applyMapNotices->where('type',\Modules\EMap\Enums\FileTypeEnum::NOTICE)->whereNull('rejected_at') as $applyMapNotice)
+                                @foreach($mapApply->applyMapNotices->where('type','!=',\Modules\EMap\Enums\FileTypeEnum::APPLICATION)->whereNull('rejected_at') as $applyMapNotice)
                                     <div class="col">
                                         <div class="card">
                                             <iframe class="card-img-top img-fluid" height="500" frameborder="0"
@@ -144,7 +145,7 @@
 
                         <div class="tab-pane" id="rejected_application_tab" role="tabpanel">
                             <div class="row row-cols-1 row-cols-md-3 g-3">
-                                @foreach($mapApply->mapApplyApplications->whereNotNull('rejected_at') as $application)
+                                @foreach($mapApply->applyMapNotices->where('type',\Modules\EMap\Enums\FileTypeEnum::APPLICATION)->whereNotNull('rejected_at') as $application)
                                     <div class="col">
                                         <div class="card">
                                             <iframe class="card-img-top img-fluid" height="500" frameborder="0"
@@ -234,25 +235,13 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">c
+                    <div class="d-flex justify-content-between">
                         <h4 class="header-title">सूचनाहरु</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1">संघियारको नाममा जारी भएको सूचना</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1">१५ दिने सूचना टाँस सम्बन्धमा</a>
-
-                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1">प्राविधिक प्रतिवेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी
-                        बीच)</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">संघियारको नाममा जारी भएको सूचना</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">१५ दिने सूचना टाँस सम्बन्धमा</a>
                 </div>
             </div>
         </div>
@@ -277,12 +266,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-consultant-report',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-technician-report',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य
-                        सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
-                        प्राबिधिकको प्रतिबेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्राविधिक प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.plinth-level-supervisor-report',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण प्रतिवेदन</a>
+
+                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-consultant-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-technician-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}} प्राबिधिकको प्रतिबेदन</a>
                 </div>
             </div>
         </div>
@@ -294,10 +282,58 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1">सरजमिन मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सरजमिन मुचुल्का</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">सम्झौता</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
+                   </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">टिप्पणी र आदेश</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">वारेसनामा</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">मन्जुरीनामा</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+
                 </div>
             </div>
         </div>
@@ -310,6 +346,7 @@
                 event.preventDefault();
 
                 swal.fire({
+
                     title: "Are You Sure to reject this application ? ",
                     input: 'text',
                     inputLabel: 'Reject Reason',

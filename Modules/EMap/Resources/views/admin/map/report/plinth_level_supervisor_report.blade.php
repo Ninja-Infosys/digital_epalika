@@ -3,12 +3,29 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
-                                requestRoute="{{route('print.office-letter-print')}}">
-                            <i class="fa fa-print"></i> Print
-                        </button>
+                <div>
+                    @error('file')
+                    <div class="alert alert-danger">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+                <div class="card mb_30">
+                    <div class="card-header p-3">
+                        <div class="main-title d-flex justify-content-between">
+                            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL->label()}}</h3>
+                            <div class="d-flex justify-content-between">
+                                <x-application-component
+                                    :application-type="\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL"
+                                    url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
+
+                                <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
+                                        requestRoute="{{route('print.office-letter-print')}}">
+                                    <i class="fa fa-print"></i> Print
+                                </button>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -22,21 +39,21 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">घरधनीको नाम/ठेगाना </th>
-                                                <td></td>
+                                                <td>{{$mapApply->houseOwner->name??''}}</td>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <th scope="col">नक्सा दर्ता नं.</th>
-                                                <td></td>
+                                                <td>{{$mapApply->registration_no??''}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="col">कन्सल्टेन्सीको नाम</th>
-                                                <td></td>
+                                                <td>{{$mapApply->consultant_name}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="col">निर्माणकर्मी/ठेकेदार</th>
-                                                <td></td>
+                                                <td>{{$mapApply->designerDetails->first()->name??''}}</td>
                                             </tr>
                                             </tbody>
                                         </table>

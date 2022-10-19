@@ -17,15 +17,17 @@
             </div>
         </a>
     </div>
-    <div class="col-md-4 border">
-            <a href="{{route('admin.circular.dashboard')}}">
-                <div class="p-2 text-center">
-                    <img src="{{asset('assets/backend/images/modules/circular.png')}}"
-                         height="50" width="50">
-                    <h4 class="p-1">दर्ता चलानी</h4>
-                </div>
-            </a>
-    </div>
+    @if(Route::has('admin.circular.dashboard'))
+        <div class="col-md-4 border">
+        <a href="{{route('admin.circular.dashboard')}}">
+            <div class="p-2 text-center">
+                <img src="{{asset('assets/backend/images/modules/circular.png')}}"
+                     height="50" width="50">
+                <h4 class="p-1">दर्ता चलानी</h4>
+            </div>
+        </a>
+        </div>
+    @endif
     <div class="col-md-4 border">
         <a href="{{route('admin.listRegistrations.dashboard')}}">
             <div class="p-2 text-center">

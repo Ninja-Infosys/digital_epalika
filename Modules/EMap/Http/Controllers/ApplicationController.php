@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapApplication;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Enums\FileTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class ApplicationController extends Controller
@@ -44,7 +45,9 @@ class ApplicationController extends Controller
             'file' => ['required', 'mimes:pdf'],
             'file_type' => ['required']
         ]);
-        $mapApplyData = $mapApply->mapApplyApplications()->create($data);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data +[
+            'type' => FileTypeEnum::APPLICATION->value
+            ]);
 
         Notification::send(User::all(), new MapApplicationNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');

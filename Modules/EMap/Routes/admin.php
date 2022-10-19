@@ -27,6 +27,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('permissionLetter', 'permissionLetter')->name('permission-letter');
         Route::get('level', 'level')->name('level');
         Route::get('supervisor', 'superVisor')->name('supervisor');
+        Route::get('plinth-level-supervisor-report', 'plinthLevelSupervisorReport')->name('plinth-level-supervisor-report');
         Route::get('first-phase-consultant-report','firstPhaseConsultantReport')->name('first-phase-consultant-report');
         Route::get('first-phase-technician-report','firstPhaseTechnicianReport')->name('first-phase-technician-report');
         Route::prefix('upload')->as('upload.')->group(function (){
@@ -43,8 +44,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
 
     });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
-    Route::put('mapApply/{mapApply}/applyMapApplication/{applyMapApplication}/reject', 'rejectApplication')->name('mapApply.reject');
-    Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplyMapNotice')->name('mapApply.rejectApplyMapNotice');
+    Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
     Route::get('mapApply', 'index')->name('mapApply.index');
 });
 
