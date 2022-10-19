@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row thirdLevelEmployee d-flex justify-content-between">
+                <div class="row thirdLevelEmployee d-flex justify-content-between pb-2">
                     <div class="card-employee rounded shadow d-flex mx-auto">
                         <div class="avatar avatar-lg px-auto">
                             <img
