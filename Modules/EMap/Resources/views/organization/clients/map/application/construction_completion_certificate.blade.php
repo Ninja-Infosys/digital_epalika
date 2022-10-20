@@ -17,11 +17,11 @@
                         <div class="d-flex justify-content-between">
                             <x-application-component
                                 :application-type="Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION"
-                                url="{{route('organization.admin.clients.application.constructionCompletionCertificate',[$client,$mapApply])}}"></x-application-component>
+                                url="{{route('organization.admin.clients.application.apply-map-application',[$client,$mapApply])}}"></x-application-component>
 
                             <button id="printButton" title="Print Application" class="btn btn-sm btn-success mx-2"
                                     printElementId='printData'
-                                    requestRoute="{{route('print.office-letter-print')}}">
+                                    requestRoute="{{route('print.application-print')}}">
                                 <i class="fa fa-print"></i>
                             </button>
                             <a href="{{route('organization.admin.clients.client.show', $client)}}"
