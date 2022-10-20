@@ -33,6 +33,7 @@ enum NoticeTypeEnum: string
 
     case GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE = 'granting permission for construction up to the plinth level of the house';
     case REGARDING_SUPERSTRUCTURE_PERMIT = 'regarding superstructure permit';
+    case REVISED_SUPERSTRUCTURE_PERMIT = 'revised superstructure permit';
 
     case REGARDING_FEES_AND_REGISTRATION = 'regarding fees and registration';
 
@@ -71,6 +72,7 @@ enum NoticeTypeEnum: string
             //order
             self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE => 'घरको प्लिन्थ लेभल सम्मको निर्माणका निमित्त इजाजत प्रदान गर्ने',
             self::REGARDING_SUPERSTRUCTURE_PERMIT => 'सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
+            self::REVISED_SUPERSTRUCTURE_PERMIT => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             //    certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',

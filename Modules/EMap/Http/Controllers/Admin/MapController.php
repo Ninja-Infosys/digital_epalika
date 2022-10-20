@@ -164,7 +164,12 @@ class MapController extends Controller
 
     }
 
+    public function revisedSuperStructurePermit(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail.unit');
 
+        return view('emap::admin.notice.revised_superstructure_permit',compact('mapApply'));
+    }
 
     public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {
@@ -232,6 +237,21 @@ class MapController extends Controller
         ]);
         $mapApplyData = $mapApply->applyMapNotices()->create($data + [
                 'type' => FileTypeEnum::AGREEMENT->value
+            ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+
+    public function order(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::ORDER->value
             ]);
 
         Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
