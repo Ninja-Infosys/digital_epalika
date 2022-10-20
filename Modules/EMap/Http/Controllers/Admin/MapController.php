@@ -171,13 +171,6 @@ class MapController extends Controller
         return view('emap::admin.notice.superstructure', compact('mapApply'));
     }
 
-
-    public function superstructure(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(['landDetail', 'landOwner','houseOwner']);
-        return view('emap::admin.notice.superstructure', compact('mapApply'));
-    }
-
     public function revisedSuperStructurePermit(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail.unit');
@@ -189,15 +182,6 @@ class MapController extends Controller
     {
         return view('emap::admin.notice.construction_completion_certificate',compact('mapApply'));
     }
-
-
-
-
-
-
-
-
-
 
     public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {
