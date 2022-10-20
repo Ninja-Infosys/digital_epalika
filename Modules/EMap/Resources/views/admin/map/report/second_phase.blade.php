@@ -1,6 +1,6 @@
 <h5 class="text-center mb-2"><b>कार्यालय प्रयोजनको लागि</b></h5>
 <p class="mb-3">
-    यस उप-महानगरपालिकाको स्थान<span class="underline-dotted custom-width"></span>
+    यस {{config('applicationDetail.office_type')}}को स्थान<span class="underline-dotted custom-width"></span>
     वडा नं.<span class="underline-dotted custom-width"></span>मा अवस्थित साविक
     <span class="underline-dotted custom-width"></span>
     कित्ता नं.<span class="underline-dotted custom-width"></span>
