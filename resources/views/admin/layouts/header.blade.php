@@ -129,11 +129,7 @@
         <!-- LOGO -->
         <div class="logo-box dropdown notification-list topbar-dropdown">
             <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
-               data-bs-toggle="dropdown"
-               href="#"
-               role="button"
-               aria-haspopup="false"
-               aria-expanded="false">
+               data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
                 <span class="logo-lg">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
                         <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
@@ -147,9 +143,8 @@
                     @endif
               </span>
             </a>
-            <div class="dropdown-menu dropdown-xl d-arrow m-2 border-primary">
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 @includeIf('admin.layouts.menu_list')
-
             </div>
         </div>
 

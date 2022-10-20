@@ -65,7 +65,7 @@
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
-                        &copy; Design & Developed by <a href="#">Ninja Infosys</a>
+                        &copy; Design & Developed by <a href="#">NINJA INFOSYS</a>
             </div>
         </footer>
         <!-- end Footer -->
@@ -90,8 +90,8 @@
 
         swal.fire({
 
-            title: "Are You Sure to Delete ? ",
-            text: "If you delete this, it will be gone forever.",
+            title: "के तपाइँ मेटाउन निश्चित हुनुहुन्छ ?",
+            text: "यदि तपाईंले यसलाई मेटाउनुभयो भने, यो सदाको लागि हट्नेछ।",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: 'red',

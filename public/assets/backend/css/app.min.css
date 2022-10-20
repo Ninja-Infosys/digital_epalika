@@ -9362,3 +9362,9 @@ table[data-toggle=table] {
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     background-color: var(--primary) !important;
 }
+.module-height{
+    height: 75vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--ct-body-bg);
+}
