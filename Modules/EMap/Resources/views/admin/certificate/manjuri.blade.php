@@ -25,7 +25,7 @@
                                     </p>
                                 </div>
                                 <div class="row">
-                                    <p class="letter mt-2">
+                                    <p class="letter">
                                         लिखितम<span class="underline-dotted custom-width"></span>जिल्ला<span class="underline-dotted custom-width"></span>
                                         उ.न.पा./गा.वि.स. वडा नं.<span class="underline-dotted custom-width"></span> बस्ने वर्ष<span class="underline-dotted custom-width"></span>
                                         को आगे<span class="underline-dotted custom-width"></span> मेरो/हाम्रो नाउँमा दर्ता भएको साविक<span class="underline-dotted custom-width"></span>

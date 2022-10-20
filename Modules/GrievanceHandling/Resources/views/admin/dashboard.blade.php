@@ -32,7 +32,7 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                        2
+                                        {{$grievanceCount}}
                                     </span>
                                         </h3>
                                         <p class="text-muted mb-1">जम्मा गुनासो</p>
@@ -55,7 +55,7 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                         3
+                                         {{$registeredGrievanceCount}}
                                     </span>
                                         </h3>
                                         <p class="text-muted mb-1">जम्मा दर्ता गुनासो</p>
@@ -77,7 +77,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">4</span></h3>
+                                        <h3 class="mt-1"><span data-plugin="counterup">{{$closedGrievanceCount}}</span>
+                                        </h3>
                                         <p class="text-muted mb-1">फर्छ्यौट भएको</p>
                                     </div>
                                 </div>
@@ -98,7 +99,7 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                       6
+                                       {{$investigatedGrievanceCount}}
                                     </span></h3>
                                         <p class="text-muted mb-1">अनुसन्धान गरिदै</p>
                                     </div>
@@ -119,7 +120,7 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                        7
+                                        {{$seenGrievanceCount}}
                                     </span></h3>
                                         <p class="text-muted mb-1">जम्मा हेरिएको गुनासो </p>
                                     </div>
@@ -140,8 +141,30 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                        7</span></h3>
+                                                {{$unseenGrievanceCount}}
+                                        </span></h3>
                                         <p class="text-muted mb-1"> नहेरिएका गुनासो</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-info border-info border">
+                                        <i class="fa fa-user font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                                {{$publicGrievanceCount}}
+                                        </span></h3>
+                                        <p class="text-muted mb-1"> सार्वजनिक गुनासो</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -153,42 +176,20 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Line Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="line-chart-example" height="350" data-colors="#1abc9c,#f1556c"></canvas>
-                            </div>
+                            <x-charts.pie-chart-component :labels="$dataAccordingToGrievanceType['labels']"
+                                                          :dataSets="$dataAccordingToGrievanceType['dataSets']"
+                                                          id="grievanceType" chartName="गुनासोको प्रकार अनुसार"
+                                                          chartType="pie"/>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div> <!-- end col -->
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Bar Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="bar-chart-example" height="350" data-colors="#4a81d4,#e3eaef"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Pie Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="pie-chart-example" height="350" class="mt-4" data-colors="#6658dd,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Donut Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="donut-chart-example" height="350" data-colors="#6c757d,#1abc9c,#ebeff2"></canvas>
-                            </div>
+                            <x-charts.pie-chart-component :labels="$grievanceCountAccordingToSeverity['labels']"
+                                                          :dataSets="$grievanceCountAccordingToSeverity['dataSets']"
+                                                          id="grievanceSeverity" chartName="गुनासो गम्भीरता अनुसार"
+                                                          chartType="doughnut"/>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div> <!-- end col -->
@@ -197,22 +198,20 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Polar area Chart</h4>
-
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="polar-chart-example" height="350" data-colors="#4a81d4,#fa5c7c,#4fc6e1,#ebeff2"> </canvas>
-                            </div>
-
+                            <x-charts.pie-chart-component :labels="$dataAccordingToGrievanceOffice['labels']"
+                                                          :dataSets="$dataAccordingToGrievanceOffice['dataSets']"
+                                                          id="grievanceOffice" chartName="गुनासो शाखा अनुसार"
+                                                          chartType="doughnut"/>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div> <!-- end col -->
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Radar Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="radar-chart-example" height="350" data-colors="#39afd1,#a17fe0"></canvas>
-                            </div>
+                            <x-charts.pie-chart-component :labels="$grievanceCountAccordingToStatus['labels']"
+                                                          :dataSets="$grievanceCountAccordingToStatus['dataSets']"
+                                                          id="grievanceStatus" chartName="गुनासोको स्थिति अनुसार"
+                                                          chartType="pie"/>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div> <!-- end col -->

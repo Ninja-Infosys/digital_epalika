@@ -31,27 +31,27 @@
                                 </div>
                                 <div class="top-line d-flex justify-content-between">
                                     <p>पत्र सं.<span class="underline-dotted custom-width"></span></p>
-                                    <p class="">मिति: <span class="underline-dotted custom-width"></span></p>
+                                    <p>मिति: <span class="underline-dotted custom-width"></span></p>
                                 </div>
-                                <p class="mt-2">चलानी:<span class="underline-dotted custom-width"></span></p>
+                                <p>चलानी:<span class="underline-dotted custom-width"></span></p>
                                <h3 class="text-center"><b>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</b></h3>
 
-                                <p class="my-3">
+                                <p>
                                     श्री<span class="underline-dotted custom-width"></span> ले यस उप-महानगरपालिका
                                     वडा नं.<span class="underline-dotted custom-width"></span>
                                     मा निम्न बमोजिम  निर्माण कार्य पूरा गरेकोले यो निर्माण कार्य सम्पन्न प्रमाण-पत्र प्रदान गरिएको छ |</p>
                                 <p>१. जग्गाधनीको नाम, थर<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
-                                <p class="mt-2">२. घरधनीको नाम, थर, वतन <span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
-                                <p class="mt-2">३. जग्गाको विवरण साविक<span class="underline-dotted custom-width"></span>
+                                <p>२. घरधनीको नाम, थर, वतन <span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
+                                <p>३. जग्गाको विवरण साविक<span class="underline-dotted custom-width"></span>
                                     हालको वडा नं.<span class="underline-dotted custom-width"></span>
                                 घर नं.<span class="underline-dotted custom-width"></span> सडकको नाम<span class="underline-dotted custom-width"></span>
                                 साविक<span class="underline-dotted custom-width"></span> कि.नं.<span class="underline-dotted custom-width"></span>
                                 क्षेत्रफल<span class="underline-dotted custom-width"></span> भू-उपयोग क्षेत्र<span class="underline-dotted custom-width"></span>
                                 </p>
-                                <p class="mt-2">५. राष्ट्रिय भवन संहिता अनुसार भवनको वर्गिकरण :&nbsp;&nbsp;&nbsp; (क)&nbsp;&nbsp;&nbsp;  (ख)&nbsp;&nbsp;&nbsp;  (ग)&nbsp;&nbsp;&nbsp;  (घ)<br>
+                                <p>५. राष्ट्रिय भवन संहिता अनुसार भवनको वर्गिकरण :&nbsp;&nbsp;&nbsp; (क)&nbsp;&nbsp;&nbsp;  (ख)&nbsp;&nbsp;&nbsp;  (ग)&nbsp;&nbsp;&nbsp;  (घ)<br>
                                 निर्माणको स्ट्रक्चरल सिस्टम<span class="underline-dotted custom-width"></span></p>
-                                <p class="mt-2">६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति<span class="underline-dotted custom-width"></span></p>
-                                <p class="mt-2">७.</p>
+                                <p>६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति<span class="underline-dotted custom-width"></span></p>
+                                <p>७.</p>
                                 <table class="table table-bordered mt-2">
                                     <thead>
                                     <tr>

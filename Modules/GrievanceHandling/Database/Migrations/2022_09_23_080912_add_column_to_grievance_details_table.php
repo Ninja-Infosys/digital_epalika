@@ -9,7 +9,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('grievance_details', function (Blueprint $table) {
-            $table->string('status')->default('Unseen');
+            $table->string('status')->default('unseen');
         });
     }
 

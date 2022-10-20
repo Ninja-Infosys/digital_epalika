@@ -48,6 +48,13 @@ class ApplicationController extends Controller
 
     }
 
+    public function constructionCompletionCertificate(Client $client,MapApply $mapApply)
+    {
+        $mapApply->load('applicantDetail','landDetail.unit');
+
+        return view('emap::organization.clients.map.application.construction_completion_certificate',compact('client','mapApply'));
+    }
+
     public function applyMapApplication(Request $request, Client $client, MapApply $mapApply)
     {
 
