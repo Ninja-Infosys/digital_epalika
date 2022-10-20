@@ -9368,3 +9368,6 @@ table[data-toggle=table] {
     overflow-y: scroll;
     background-color: var(--ct-body-bg);
 }
+.bg-main{
+    background-color: var(--primary);
+}
