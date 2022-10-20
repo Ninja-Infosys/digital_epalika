@@ -168,7 +168,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <x-charts.bar-chart-component id="register-chart" chartTitle="चालु आर्थिक({{$officeSetting->fiscalYear->title}}) वर्षका दर्ता र चलानी"
+                            <x-charts.bar-chart-component id="register-chart" chartTitle="चालु आर्थिक({{$officeSetting->fiscalYear->title ?? ''}}) वर्षका दर्ता र चलानी"
                                                           chartType="line"
                                                           :labels="$registrationYearlyChartData['labels']"
                                                           :dataSets="$registrationYearlyChartData['dataSets']"/>
