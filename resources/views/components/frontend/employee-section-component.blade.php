@@ -10,7 +10,7 @@
                                     alt="{{$employees->first()->name ?? ''}}">
                             </div>
                             <div class="textbox-01 px-2">
-                                <h6>{{$employees->first()->name ?? ''}}</h6>
+                                <h5>{{$employees->first()->name ?? ''}}</h5>
                                 <p>{{$employees->first()->designation ?? ''}}</p>
                                 <p>{{$employees->first()->phone ?? ''}}</p>
                                 <p>{{$employees->first()->email ?? ''}}</p>
@@ -28,7 +28,7 @@
                                             alt="{{$otherEmployee->name}}">
                                     </div>
                                     <div class="textbox-01 px-2">
-                                        <h6>{{$otherEmployee->name}}</h6>
+                                        <h5>{{$otherEmployee->name}}</h5>
                                         <p>{{$otherEmployee->designation}}</p>
                                         <p>{{$otherEmployee->phone}}</p>
                                         <p>{{$otherEmployee->email}}</p>
@@ -50,7 +50,7 @@
                                             alt="{{$employee->name}}">
                                     </div>
                                     <div class="textbox-01 px-2">
-                                        <h6>{{$employee->name}}</h6>
+                                        <h5>{{$employee->name}}</h5>
                                         <p>{{$employee->designation}}</p>
                                         <p>{{$employee->phone}}</p>
                                         <p>{{$employee->email}}</p>
