@@ -20,7 +20,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
                             <div class="row">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
                             <div class="row">
@@ -66,7 +66,7 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
                             <div class="row">
@@ -87,7 +87,7 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
                             <div class="row">
@@ -108,7 +108,7 @@
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
                             <div class="row">
@@ -130,7 +130,7 @@
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
                             <div class="row">
@@ -155,7 +155,7 @@
             </div>
             <div class="row">
 
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <x-charts.bar-chart-component id="bar-chart" chartTitle="आर्थिक वर्ष अनुसार दर्ता र चलानी"
@@ -168,72 +168,14 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <x-charts.bar-chart-component id="register-chart" chartTitle="चालु आर्थिक वर्षका दर्ताहरु"
+                            <x-charts.bar-chart-component id="register-chart" chartTitle="चालु आर्थिक({{$officeSetting->fiscalYear->title}}) वर्षका दर्ता र चलानी"
                                                           chartType="line"
-                                                          :labels="$registrationChartData['labels']"
-                                                          :dataSets="$registrationChartData['dataSets']"/>
+                                                          :labels="$registrationYearlyChartData['labels']"
+                                                          :dataSets="$registrationYearlyChartData['dataSets']"/>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div> <!-- end col -->
 
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.bar-chart-component id="dispatch-chart" chartTitle="चालु आर्थिक वर्षका चलानीहरु"
-                                                          :labels="$registrationChartData['labels']"
-                                                          :dataSets="$registrationChartData['dataSets']"/>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Pie Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="pie-chart-example" height="350" class="mt-4"
-                                        data-colors="#6658dd,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Donut Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="donut-chart-example" height="350"
-                                        data-colors="#6c757d,#1abc9c,#ebeff2"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Polar area Chart</h4>
-
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="polar-chart-example" height="350"
-                                        data-colors="#4a81d4,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
-                            </div>
-
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Radar Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="radar-chart-example" height="350" data-colors="#39afd1,#a17fe0"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
             </div>
         </div>
     </div>

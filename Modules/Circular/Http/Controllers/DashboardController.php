@@ -16,6 +16,7 @@ class DashboardController extends Controller
     public function __invoke()
     {
         $nepali_date = $this->get_nepali_date(now()->format('Y'), now()->format('m'), now()->format('d'));
+//        dd($nepali_date);
 
         $officeSetting = OfficeSetting::first();
         $total_registrations = Registration::count();
@@ -44,24 +45,34 @@ class DashboardController extends Controller
                 ]
             ],
         ];
-        $registrationTotalData = Registration::where('fiscal_year_id', $officeSetting->fiscal_year_id)->query();
 
-        $regData = [];
+        $monthlyRegistrations = [];
 
-        foreach ($this->month_name as $key=>$month){
-            $regData[] = $registrationTotalData->whereMonth('registration_date',$key+1)->count();
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyRegistrations[] = Registration::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('registration_date', $i)->count();
         }
-        $registrationDataAccordingToMonth = [
+
+        $monthlyDispatches = [];
+
+        foreach ($this->month_name as $key => $month) {
+            $monthlyDispatches[] = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('dispatch_date', ($key + 1))->count();
+        }
+
+        $registrationYearlyChartData = [
             "labels" => $this->month_name,
-            "dataSets"=>[
+            "dataSets" => [
                 [
-                    'data' => $fiscalYears->pluck('registrations_count')->toArray(),
+                    'data' => $monthlyRegistrations,
                     "label" => "दर्ता",
                     "fill" => "false"
+                ],
+                [
+                    'data' => $monthlyDispatches,
+                    "label" => "चलानी",
+                    "fill" => "false"
                 ]
-            ]
+            ],
         ];
-
         return view('circular::admin.dashboard', compact(
                 'total_registrations',
                 'yearly_registrations',
@@ -69,7 +80,8 @@ class DashboardController extends Controller
                 'total_dispatches',
                 'yearly_dispatches',
                 'monthly_dispatches',
-                'registrationChartData'
+                'registrationChartData',
+                'registrationYearlyChartData'
             )
         );
     }
