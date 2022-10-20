@@ -149,6 +149,19 @@ class MapController extends Controller
 
     }
 
+    public function secondPhaseConsultantReport(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail', 'houseOwner');
+        return view('emap::admin.map.report.second_phase_consultant_report', compact('mapApply'));
+    }
+
+    public function secondPhaseTechnicianReport(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail', 'houseOwner');
+        return view('emap::admin.map.report.second_phase_technician_report', compact('mapApply'));
+
+    }
+
     public function plinthLevelSupervisorReport(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load(['landDetail', 'houseOwner','designerDetails' => function ($query) {
