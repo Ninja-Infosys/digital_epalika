@@ -171,6 +171,11 @@ class MapController extends Controller
         return view('emap::admin.notice.revised_superstructure_permit',compact('mapApply'));
     }
 
+    public function constructionCompletionCertificate(MapApply $mapApply): Factory|View|Application
+    {
+        return view('emap::admin.notice.construction_completion_certificate',compact('mapApply'));
+    }
+
     public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {
         $data = $request->validate([

@@ -21,7 +21,9 @@
                                 <div class="top-line d-flex justify-content-end">
                                     <p class="mt-2">मिति: <span class="underline-dotted custom-width"></span></p>
                                 </div>
-                                <h3 class="text-center"><b>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</b></h3>
+                                <h3 class="text-center">
+                                    <b>टिप्पणी र आदेश </b>
+                                </h3>
                                 <p class="text-center mt-2"><b>विषय :- घरनक्सा नामसारी सम्बन्धमा |</b></p>
                                 <p>श्रीमान,</p>
                                 <p class="my-3">

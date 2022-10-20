@@ -12,6 +12,7 @@ enum NoticeTypeEnum: string
     case MAP_PASS_FOR_BUILDING = 'map pass for building';
     case REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE = 'regarding permission for construction work of superstructure';
     case CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION = 'application for construction completion certificate';
+    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = 'regarding construction completion certificate';
 
     //notice enums
     case NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR = 'notice issued in the name of sanghiar';
@@ -54,6 +55,7 @@ enum NoticeTypeEnum: string
             self::MAP_PASS_FOR_BUILDING => 'भवन निर्माणको लागि नक्सापास सम्बन्धमा',
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE=> 'सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे',
             self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION=> 'निर्माण कार्य सम्पन्न प्रमाण पत्रको लागि निवेदन',
+            self::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE=> 'निर्माण कार्य सम्पन्न प्रमाण-पत्र सम्बन्धमा',
 
             //notice enums
             self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => 'संघियारको नाममा जारी भएको सूचना',
