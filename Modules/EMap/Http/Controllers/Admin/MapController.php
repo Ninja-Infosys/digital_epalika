@@ -164,7 +164,12 @@ class MapController extends Controller
 
     }
 
+    public function revisedSuperStructurePermit(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail.unit');
 
+        return view('emap::admin.notice.revised_superstructure_permit',compact('mapApply'));
+    }
 
     public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {

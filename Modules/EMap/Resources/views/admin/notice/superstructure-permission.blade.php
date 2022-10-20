@@ -42,10 +42,23 @@
                                         ।</b></p>
                                 <p>श्रीमान,</p>
                                 <p class="mb-3">
-                                    जग्गा धनी श्री<span class="underline-dotted custom-width">{{$mapApply->landOwner->name??''}}</span> को नाममा दर्ता रहेको यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted custom-width">{{$mapApply->landOwner->ward_no??''}}</span>
-                                    टोल<span class="underline-dotted custom-width">{{$mapApply->landOwner->tole??''}}</span> मा अवस्थित साविक <span class="underline-dotted custom-width"></span>कित्ता नं. <span class="underline-dotted custom-width"></span> क्षेत्रफल <span class="underline-dotted custom-width"></span> मा भवन निर्माण गर्ने घरधनी श्री <span class="underline-dotted custom-width"></span> दर्ता नं.
-                                    <span class="underline-dotted custom-width"></span> ले भवन निर्माण गर्न मिति<span class="underline-dotted custom-width"></span> मा प्लिन्थ ईजाजत लिनु भएको हुँदा सोहि सिलसिलामा यस उप-महानगरपालिका कार्यालयका प्रबिधिक श्री<span class="underline-dotted custom-width"></span> ले स्थलगत निरिक्षण गरी पेश गर्नु भएको प्रतिवेदन अनुसार स्वीकृत भवन योजना मापदण्ड र नेपाल राष्ट्रिय
-                                    भवन संहिता २०६० को पालना भएको प्रतिवेदन प्राप्त हुन आएकोले सुपरस्ट्रक्चर ईजाजत दिनको लागि मनासिब देखि पेश गरेको छु |
+                                    जग्गा धनी श्री<span
+                                        class="underline-dotted custom-width">{{$mapApply->landOwner->name??''}}</span>
+                                    को नाममा दर्ता रहेको यस {{config('applicationDetail.office_type')}} वडा नं. <span
+                                        class="underline-dotted custom-width">{{$mapApply->landOwner->ward_no??''}}</span>
+                                    टोल<span
+                                        class="underline-dotted custom-width">{{$mapApply->landOwner->tole??''}}</span>
+                                    मा अवस्थित साविक <span class="underline-dotted custom-width"></span>कित्ता नं. <span
+                                        class="underline-dotted custom-width"></span> क्षेत्रफल <span
+                                        class="underline-dotted custom-width"></span> मा भवन निर्माण गर्ने घरधनी श्री
+                                    <span class="underline-dotted custom-width"></span> दर्ता नं.
+                                    <span class="underline-dotted custom-width"></span> ले भवन निर्माण गर्न मिति<span
+                                        class="underline-dotted custom-width"></span> मा प्लिन्थ ईजाजत लिनु भएको हुँदा
+                                    सोहि सिलसिलामा यस उप-महानगरपालिका कार्यालयका प्रबिधिक श्री<span
+                                        class="underline-dotted custom-width"></span> ले स्थलगत निरिक्षण गरी पेश गर्नु
+                                    भएको प्रतिवेदन अनुसार स्वीकृत भवन योजना मापदण्ड र नेपाल राष्ट्रिय
+                                    भवन संहिता २०६० को पालना भएको प्रतिवेदन प्राप्त हुन आएकोले सुपरस्ट्रक्चर ईजाजत दिनको
+                                    लागि मनासिब देखि पेश गरेको छु |
                                 </p>
                             </div>
                         </div>
