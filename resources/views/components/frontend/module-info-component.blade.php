@@ -53,7 +53,7 @@
         <div class="info-card">
             <a href="#">
                 <div class="p-2 text-center">
-                    <img src="{{asset('assets/backend/images/modules/businessregistration.png')}}" width="50" height="50">
+                    <img src="{{asset('assets/backend/images/modules/anudan.png')}}" width="50" height="50">
                     <h4>अनुदान</h4>
                 </div>
             </a>
@@ -63,7 +63,7 @@
         <div class="info-card">
             <a href="#">
                 <div class="p-2 text-center">
-                    <img src="{{asset('assets/backend/images/modules/businessregistration.png')}}" width="50" height="50">
+                    <img src="{{asset('assets/backend/images/modules/rajashow.png')}}" width="50" height="50">
                     <h4>राजस्व</h4>
                 </div>
             </a>
@@ -73,7 +73,7 @@
         <div class="info-card">
             <a href="#">
                 <div class="p-2 text-center">
-                    <img src="{{asset('assets/backend/images/modules/businessregistration.png')}}" width="50" height="50">
+                    <img src="{{asset('assets/backend/images/modules/talim.png')}}" width="50" height="50">
                     <h4>तालिम</h4>
                 </div>
             </a>

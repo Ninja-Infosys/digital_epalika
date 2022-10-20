@@ -391,7 +391,7 @@ video{
     width: 100%;
 }
 .info-card{
-    border: 1px solid #0062CC;
+    background-color: rgba(255, 0, 0, 0.2);
     text-align: center;
     padding: 1vh;
     margin-top: 5vh;
@@ -399,6 +399,8 @@ video{
 
 }
 .info-card:hover{
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    background-color: transparent;
     transition: .9s;
     transform: translateY(-10px);
 }
@@ -432,13 +434,17 @@ select{
     font-size: 1rem;
 }
 .textbox-01>p{
-    font-size: .9rem
+    font-size: .8rem;
 }
 .card-employee{
-    border: 1px solid #0047AB;
+    border:  1px solid rgba(255, 0, 0, 0.4);
     padding: 10px;
 }
-
+.card-employee:hover{
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    background-color: transparent;
+    transition: .5s;
+}
 /*footer*/
 
 .list {
