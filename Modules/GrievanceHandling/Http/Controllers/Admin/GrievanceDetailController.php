@@ -3,6 +3,7 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -16,7 +17,7 @@ class GrievanceDetailController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->paginate(10);
+        $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->latest()->paginate(10);
         return view('grievancehandling::admin.grievanceDetail.index', compact('grievanceDetails'));
     }
 
@@ -74,7 +75,7 @@ class GrievanceDetailController extends Controller
         );
     }
 
-    public function updateStatus(Request $request, GrievanceDetail $grievanceDetail)
+    public function updateStatus(Request $request, GrievanceDetail $grievanceDetail): RedirectResponse
     {
         $grievanceDetail->update([
             'status' => $request->input('status')
@@ -83,7 +84,7 @@ class GrievanceDetailController extends Controller
         return back();
     }
 
-    public function replayGrievance(Request $request, GrievanceDetail $grievanceDetail)
+    public function replayGrievance(Request $request, GrievanceDetail $grievanceDetail): RedirectResponse
     {
 
         $validated = $request->validate([
@@ -108,7 +109,19 @@ class GrievanceDetailController extends Controller
 
         toast('सफलतापूर्वक थपियो', 'success');
         return back();
+    }
 
+    public function showToPublic(GrievanceDetail $grievanceDetail): RedirectResponse
+    {
+        $grievanceDetail->update(['is_public' => !$grievanceDetail->is_public]);
+        toast('सफलतापूर्वक सार्वजनिक गरियो', 'success');
+        return back();
+    }
 
+    public function approve(GrievanceDetail $grievanceDetail): RedirectResponse
+    {
+        $grievanceDetail->update(['is_approved' => !$grievanceDetail->is_approved]);
+        toast('सफलतापूर्वक दर्ता गरियो', 'success');
+        return back();
     }
 }

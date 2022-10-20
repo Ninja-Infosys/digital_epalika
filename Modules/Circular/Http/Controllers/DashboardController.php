@@ -27,10 +27,32 @@ class DashboardController extends Controller
         $monthly_dispatches = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('dispatch_date', $nepali_date['m'])->count();
 
 
+        $registrationChartData = $this->getTotalRegistrationAndDispatchData();
+
+        $registrationYearlyChartData = $this->getCurrentFyMonthlyRegistrationAndDispatch($officeSetting);
+
+        return view('circular::admin.dashboard', compact(
+                'total_registrations',
+                'yearly_registrations',
+                'monthly_registrations',
+                'total_dispatches',
+                'yearly_dispatches',
+                'monthly_dispatches',
+                'registrationChartData',
+                'registrationYearlyChartData'
+            )
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function getTotalRegistrationAndDispatchData(): array
+    {
         $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])->get();
 
 
-        $registrationChartData = [
+        return [
             "labels" => $fiscalYears->pluck('title')->toArray(),
             "dataSets" => [
                 [
@@ -45,7 +67,14 @@ class DashboardController extends Controller
                 ]
             ],
         ];
+    }
 
+    /**
+     * @param OfficeSetting $officeSetting
+     * @return array
+     */
+    public function getCurrentFyMonthlyRegistrationAndDispatch(OfficeSetting $officeSetting): array
+    {
         $monthlyRegistrations = [];
 
         for ($i = 1; $i <= 12; $i++) {
@@ -58,7 +87,7 @@ class DashboardController extends Controller
             $monthlyDispatches[] = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('dispatch_date', ($key + 1))->count();
         }
 
-        $registrationYearlyChartData = [
+        return [
             "labels" => $this->month_name,
             "dataSets" => [
                 [
@@ -73,16 +102,5 @@ class DashboardController extends Controller
                 ]
             ],
         ];
-        return view('circular::admin.dashboard', compact(
-                'total_registrations',
-                'yearly_registrations',
-                'monthly_registrations',
-                'total_dispatches',
-                'yearly_dispatches',
-                'monthly_dispatches',
-                'registrationChartData',
-                'registrationYearlyChartData'
-            )
-        );
     }
 }

@@ -110,7 +110,6 @@
             }
             .letter{
                 padding-left: 30px;
-
             }
         </style>
     @endpush
