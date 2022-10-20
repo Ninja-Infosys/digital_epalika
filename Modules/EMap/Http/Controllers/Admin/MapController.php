@@ -198,6 +198,13 @@ class MapController extends Controller
         return view('emap::admin.notice.construction_completion_certificate',compact('mapApply'));
     }
 
+    public function revisedSuperStructurePermitOrder(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landOwner','landDetail.unit');
+        return view('emap::admin.notice.revised_superstructure_permit_order',compact('mapApply'));
+    }
+
+
     public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {
         $data = $request->validate([

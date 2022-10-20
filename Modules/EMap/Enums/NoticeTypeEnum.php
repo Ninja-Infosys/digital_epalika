@@ -39,6 +39,7 @@ enum NoticeTypeEnum: string
     case GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE = 'granting permission for construction up to the plinth level of the house';
     case REGARDING_SUPERSTRUCTURE_PERMIT = 'regarding superstructure permit';
     case REVISED_SUPERSTRUCTURE_PERMIT = 'revised superstructure permit';
+    case REVISED_SUPERSTRUCTURE_PERMIT_ORDER = 'revised superstructure permit order';
 
     case REGARDING_FEES_AND_REGISTRATION = 'regarding fees and registration';
 
@@ -67,7 +68,6 @@ enum NoticeTypeEnum: string
             self::FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS => 'नक्सा पासको लागि १५ दिने टाँस मुचुल्का',
             self::SARZAMIN_MUCHULKA => 'सरजमिन मुचुल्का',
             //report enums
-
             self::TECHNICAL_REPORT => 'प्राविधिक प्रतिवेदन',
             self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण प्रतिवेदन',
             self::THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT => 'प्रथम चरणको कार्य सम्पन्नको प्राबिधिकको प्रतिबेदन',
@@ -84,6 +84,7 @@ enum NoticeTypeEnum: string
             self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE => 'घरको प्लिन्थ लेभल सम्मको निर्माणका निमित्त इजाजत प्रदान गर्ने',
             self::REGARDING_SUPERSTRUCTURE_PERMIT => 'सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             self::REVISED_SUPERSTRUCTURE_PERMIT => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
+            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             //    certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',
