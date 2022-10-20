@@ -159,9 +159,16 @@ class MapController extends Controller
     }
     public function superStructurePermission(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load(['landDetail', 'landOwner']);
+        $mapApply->load(['landDetail', 'landOwner','houseOwner']);
         return view('emap::admin.notice.superstructure-permission', compact('mapApply'));
 
+    }
+
+
+    public function superstructure(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load(['landDetail', 'landOwner','houseOwner']);
+        return view('emap::admin.notice.superstructure', compact('mapApply'));
     }
 
     public function revisedSuperStructurePermit(MapApply $mapApply): Factory|View|Application

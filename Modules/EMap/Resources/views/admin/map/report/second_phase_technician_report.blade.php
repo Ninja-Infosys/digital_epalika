@@ -1,4 +1,3 @@
-
 @extends('admin.layouts.master')
 @section('content')
     <div class="row">
@@ -13,10 +12,10 @@
             <div class="card mb_30">
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
-                        <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE->label()}}</h3>
+                        <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT->label()}}</h3>
                         <div class="d-flex justify-content-between">
                             <x-application-component
-                                :application-type="\Modules\EMap\Enums\NoticeTypeEnum::CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE"
+                                :application-type="\Modules\EMap\Enums\NoticeTypeEnum::THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT"
                                 url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
 
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
@@ -33,14 +32,12 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <h3 class="text-center my-3"><b>प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको  प्रतिवेदन</b></h3>
-                                @includeIf('emap::admin.map.report.first_phase')
-                                <p class="mt-2">माथि उल्लेखित भवन स्थलगत निरीक्षण गर्दा प्रचलित भवन मापदण्ड एवं राष्ट्रिय भवन संहिता अनुसार ठिक छ |<br>
-                                    फरक ठहरे कानुन बमोजिम सहुँला बुझउँला | <br>
-                                    हस्ताक्षर:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span>  प्रतिवेदन पेश गर्ने प्रविधिकको नाम, थर :<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
+                                <h3 class="text-center mb-2"><b>दोस्रो चरणको कार्य सम्पन्नको नेपालगन्ज उप-महानगरपालिकाको प्रबिधिकको प्रतिवेदन</b></h3>
+                                @includeIf('emap::admin.map.report.second_phase')
+                                    हस्ताक्षर:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
 
-                                <p class="mt-2">कन्सल्टेन्सीको नाम:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span> कन्सल्टेन्सीको दर्ता नं.<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
-                                <p class="mt-2">पेश गरेको मिति:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span>
+                                <p class="mt-2">प्रतिवेदन पेश गर्ने प्रविधिकको नाम, थर :<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></p>
+                                <p class="mt-2">पद:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span> पेश गरेको मिति:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span>
                                 </p>
                             </div>
                         </div>

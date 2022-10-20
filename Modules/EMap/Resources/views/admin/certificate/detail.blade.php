@@ -20,19 +20,19 @@
                             <div class="font-black" id="printData">
                                 <div class="top-line d-flex justify-content-between">
                                     <p>पत्र सं.<span class="underline-dotted custom-width"></span></p>
-                                    <p class="mt-2">मिति: <span class="underline-dotted custom-width"></span></p>
+                                    <p>मिति: <span class="underline-dotted custom-width"></span></p>
                                 </div>
-                                <p class="mt-2">चलानी:<span class="underline-dotted custom-width"></span></p>
-                                <p class="mt-3">श्री राजस्व शाखा<br>
+                                <p>चलानी:<span class="underline-dotted custom-width"></span></p>
+                                <p>श्री राजस्व शाखा<br>
                                 नेपालगन्ज उप-महारनागार्पलिका कार्यालय</p>
                                 <p class="text-center"><b>विषय :- विवरण पठाएको सम्बन्धमा |</b></p>
 
-                                <p class="my-3">
+                                <p>
                                     उपर्युक्त सम्बन्धमा नेपालगन्ज उ.न.पा. वडा नं.<span class="underline-dotted custom-width"></span> बस्ने श्री/श्रीमती<span class="underline-dotted custom-width"></span> लाई मिति<span class="underline-dotted custom-width"></span> मा स्वीकृत दिएको नयाँ
                                     घर/थपघर/थपतला निर्माण/नामसारी भएको हुँदा तपसिलमा उलेखित विवरण अनुसार रेकर्ड मिलान गर्नु हुन अनुरोध छ |
                                 </p>
                                 <p>वडा नं.<span class="underline-dotted custom-width"></span> घर नं.<span class="underline-dotted custom-width"></span> सडकको नाम<span class="underline-dotted custom-width"></span> टोलको नाम<span class="underline-dotted custom-width"></span> </p>
-                                <table class="table table-bordered mt-2">
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th scope="col">घर सि.नं.</th>
@@ -84,7 +84,7 @@
                                     </tbody>
                                 </table>
                                 <p><b>जग्गाको विवरण :</b></p>
-                                <table class="table table-bordered mt-2">
+                                <table class="table table-bordered ">
                                     <thead>
                                     <tr>
                                         <th scope="col">ठेली/मोठ नं.</th>
@@ -126,8 +126,8 @@
                                 <p><b>विषय : नाम सरि प्रयोजन</b></p>
                                 <p>मिति<span class="underline-dotted custom-width"></span> को निर्णय बमोजिम श्री/श्रीमती/सुश्री<span class="underline-dotted custom-width"></span>
                                     को नामबाट श्री/श्रीमती/सुश्री<span class="underline-dotted custom-width"></span> को नाममा नामसारी भएको जानकारी गराईन्छ |</p>
-                                <p class="mt-2"><b>जग्गाको विवरण :</b></p>
-                                <table class="table table-bordered mt-2">
+                                <p><b>जग्गाको विवरण :</b></p>
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th scope="col">ठेली/मोठ नं.</th>
@@ -167,7 +167,7 @@
                                     </tbody>
                                 </table>
                                 <p>कित्ता काट भई आएको भएमा :</p>
-                                <p class="mt-2">साविक कि.नं.<span class="underline-dotted custom-width"></span>
+                                <p>साविक कि.नं.<span class="underline-dotted custom-width"></span>
                                 क्षेत्रफल<span class="underline-dotted custom-width"></span> हाल कायम कि.नं.<span class="underline-dotted custom-width"></span>क्षेत्रफल<span class="underline-dotted custom-width"></span></p>
                                 <div class="d-flex justify-content-end mt-5">
                                     <span class="underline-dotted custom-width"></span>
