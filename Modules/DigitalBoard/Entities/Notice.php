@@ -3,10 +3,11 @@
 namespace Modules\DigitalBoard\Entities;
 
 use App\Models\File;
+use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,7 +30,8 @@ class Notice extends Model
         'closed_at',
         'show_on_index',
         'user_id',
-        'type'
+        'type',
+        'fiscal_year_id'
     ];
 
     public function user(): BelongsTo
@@ -40,5 +42,10 @@ class Notice extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 }

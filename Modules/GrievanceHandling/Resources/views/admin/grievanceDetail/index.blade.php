@@ -53,31 +53,10 @@
                                     <td>{{$grievanceDetail->subject}}</td>
                                     <td>{{$grievanceDetail->created_at->toDateString()}}</td>
                                     <td>
-                                        @switch($grievanceDetail->complaint_severity)
-                                            @case('High priority')
-                                                उच्च प्राथमिकता
-                                                @break
-                                            @case('Priority')
-                                                प्राथमिकता
-                                                @break
-                                            @default
-                                                साधारण
-                                        @endswitch
-                                        </td>
+                                        {{$grievanceDetail->complaint_severity->label()}}
+                                    </td>
                                     <td>
-                                        @switch($grievanceDetail->status)
-                                            @case('Replied')
-                                                जवाफ दिएको
-                                                @break
-                                            @case('Investigated')
-                                                अनुसन्धान
-                                                @break
-                                            @case('Closed')
-                                                बन्द गरिएको
-                                                @break
-                                            @default
-                                                नहेरेको
-                                        @endswitch
+                                        {{$grievanceDetail->status->label()}}
                                     </td>
                                     <td>
                                         <a href="{{route('admin.grievanceHandling.grievanceDetail.show',$grievanceDetail)}}"

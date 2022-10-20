@@ -324,16 +324,16 @@
                                 </label>
                             </h5>
                             <div class="d-flex">
-                                @foreach(config('defaults.complaint_severity') as $key=>$severity)
+                                @foreach(\Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity::cases() as $severity)
                                     <div class="form-check">
                                         <input type="radio"
                                                class="form-check-input"
                                                name="complaint_severity"
                                                wire:model="form.complaint_severity"
-                                               value="{{$severity}}"
-                                               id="complaint_severity{{$severity}}">
+                                               value="{{$severity->value}}"
+                                               id="complaint_severity{{$severity->name}}">
                                         <label class="form-check-label"
-                                               for="complaint_severity{{$severity}}">{{$key}} &nbsp;</label>
+                                               for="complaint_severity{{$severity->name}}">{{$severity->label()}} &nbsp;</label>
                                     </div>
                                 @endforeach
                             </div>
