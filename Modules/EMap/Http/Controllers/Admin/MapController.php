@@ -239,4 +239,19 @@ class MapController extends Controller
         return back();
     }
 
+    public function order(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::ORDER->value
+            ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+
 }
