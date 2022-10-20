@@ -199,6 +199,13 @@ $(document).ready(function () {
                     "&#8594; विदा विवरण अभिलेख गर्न सकिने छ । बदुवा तथा स्तरवृद्धि हुने सम्भाव्य मितीको (Notification) देखाउने छ ।  <br>",
                 placement: "bottom",
                 zindex: 999
+            },
+            {
+                target: "cautions",
+                title: "प्रणाली सञ्चालन गर्नु अघि विचार गर्नुपर्ने कुराहरू",
+                content: "",
+                placement: "bottom",
+                zindex: 999
             }
         ],
         showPrevButton: !0
