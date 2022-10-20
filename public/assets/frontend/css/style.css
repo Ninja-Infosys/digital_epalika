@@ -391,16 +391,19 @@ video{
     width: 100%;
 }
 .info-card{
-    background-color: var(--mainColor);
-    color: var(--whiteColor);
+    border: 1px solid #0062CC;
     text-align: center;
-    padding: 1.8vh;
+    padding: 1vh;
     margin-top: 5vh;
     border-radius: 10px;
+
+}
+.info-card:hover{
+    transition: .9s;
+    transform: translateY(-10px);
 }
 .info-card a{
     text-decoration: none;
-    color: var(--whiteColor);
     font-size: 1.5rem;
 }
 
@@ -744,3 +747,71 @@ mat-icon{
     font-size: 20px;
     font-weight: 800px;
 }
+/*--------------breadcrumb------------*/
+/*breadcrumb*/
+.breadcrumb .breadcrumb-item a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.breadcrumb .breadcrumb-item{
+    padding: 5px 5px 5px 20px;
+}
+.breadcrumb .breadcrumb-item {
+    position: relative;
+    background: var(--mainColor);
+}
+.breadcrumb .breadcrumb-item:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 10px solid white;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+}
+.breadcrumb .breadcrumb-item:before {
+    content: "";
+    position: absolute;
+    right: -15px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 16px solid var(--mainColor);
+    border-top: 20px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+/*---------------single grievance ------*/
+
+/*---single-grievance-details--*/
+.single-grievance-details img {
+    object-fit: contain;
+    height: 6rem;
+    margin-right: .85rem;
+    border: double 5px var(--mainColor);
+
+}
+.grievance-doc-img img{
+    object-fit: contain;
+    height: 8rem;
+    border: solid 2px #0e314c;
+
+}
+.grievance-answer p .btn{
+    border: 1px solid  #0b0b0b;
+    text-align: left !important;
+}
+.card .icon{
+    object-fit: contain;
+    height: 4rem;
+    width: 100%;
+}
+.card a:hover{
+    background-color: var(--redColor);
+    color: var(--whiteColor);
+    transition: .9s;
+    transform: translateY(-10px);
+}
+/*----------------------------------------------*/

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="inner-section mt-lg-5 ">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row d-flex mt-5">
                     <div class="breadcrumb d-flex">
                         <div class="breadcrumb-item">
@@ -48,9 +48,4 @@
             </div>
         </div>
     </section>
-
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/e-map/downloads.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
-    @endpush
 @endsection

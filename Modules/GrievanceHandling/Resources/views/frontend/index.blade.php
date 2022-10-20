@@ -3,6 +3,13 @@
     <section class="inner-section">
         <div class="container">
             <div class="row">
+                <div class="breadcrumb d-flex pt-2">
+                    <div class="breadcrumb-item">
+                        <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
+                        <i class="fa fa-angle-double-right"></i>
+                        <a class="ml-1 text-primary-500">गुनासो</a>
+                    </div>
+                </div>
                 <div class="col-md-6 mt-3">
                     <div class="row">
                         <div class="col-md-6 p-2">
@@ -167,9 +174,6 @@
             </div>
         </div>
     </section>
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/index.css')}}">
-    @endpush
 @endsection
 
 

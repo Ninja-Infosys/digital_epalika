@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="inner-section mt-lg-5 ">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row d-flex mt-5 ">
                     <div class="breadcrumb d-flex">
                         <div class="breadcrumb-item">
@@ -9,7 +9,6 @@
                             <i class="fa fa-angle-double-right"></i>
                             <a class=" text-primary-500 text-center">सूचना</a>
                         </div>
-
                     </div>
                     <h4 class="fw-semibold heading-line">सूचनाहरु</h4>
                     <p>तल दिएको सूचना पढनुहोस् र आफुले चाहेको सूचना डाउनलोड गर्नुहोस्। </p>
@@ -49,8 +48,4 @@
             </div>
         </div>
     </section>
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/e-map/notice.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
-    @endpush
 @endsection
