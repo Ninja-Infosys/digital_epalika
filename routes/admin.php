@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\Website\ImportantLinkController;
 use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
 use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
+use App\Http\Controllers\TechController;
 use Illuminate\Support\Facades\Route;
 use Modules\ListRegistration\Http\Controllers\Admin\ListRegistrationController;
 
@@ -29,7 +30,7 @@ Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->nam
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
-
+Route::get('tech-help', [TechController::class,'index'])->name('tech');
 Route::view('lock-screen', 'admin.lock_screen.lock_screen')->name('lock-screen');
 
 //notification
