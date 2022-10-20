@@ -29,6 +29,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('supervisor', 'superVisor')->name('supervisor');
         Route::get('superstructure-permission', 'superStructurePermission')->name('superstructure-permission');
         Route::get('revised-superstructure-permit','revisedSuperStructurePermit')->name('revisedSuperStructurePermit');
+        Route::get('construction-completion-certificate','constructionCompletionCertificate')->name('constructionCompletionCertificate');
 
         Route::get('plinth-level-supervisor-report', 'plinthLevelSupervisorReport')->name('plinth-level-supervisor-report');
         Route::get('first-phase-consultant-report','firstPhaseConsultantReport')->name('first-phase-consultant-report');
