@@ -32,6 +32,3 @@
         </div>
     </section>
 @endsection
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
-@endpush

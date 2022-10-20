@@ -18,6 +18,7 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
+
                                 <div class="top-line d-flex justify-content-end mt-2">
                                     <p class="">मिति: <span class="underline-dotted custom-width">
                             </span></p>

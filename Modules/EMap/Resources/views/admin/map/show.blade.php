@@ -73,7 +73,7 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="application_tab" role="tabpanel">
                             <div class="row row-cols-1 row-cols-md-3 g-3">
-                                @foreach($mapApply->applyMapNotices->whereNull('rejected_at') as $application)
+                                @foreach($mapApply->applyMapNotices->where('type',\Modules\EMap\Enums\FileTypeEnum::APPLICATION)->whereNull('rejected_at') as $application)
                                     <div class="col">
                                         <div class="card">
                                             <iframe class="card-img-top img-fluid" height="500" frameborder="0"
@@ -255,6 +255,8 @@
                 <div class="card-body">
                     <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}"
                        class="btn btn-sm btn-outline-primary">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary">{{\Modules\EMap\Enums\NoticeTypeEnum::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE->label()}}</a>
                 </div>
             </div>
         </div>
@@ -309,7 +311,8 @@
                 </div>
                 <div class="card-body">
                     <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
-
+                    <a href="{{route('emap.admin.map.map-apply.notice.superstructure-permission',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_SUPERSTRUCTURE_PERMIT->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.revisedSuperStructurePermit',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT->label()}}</a>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="help-section">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row d-flex mt-5">
                 <div class="breadcrumb d-flex">
                     <div class="breadcrumb-item">
@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row text-center justify-content-center">
+            <div class="row card-01 text-center justify-content-center">
                 <h4 class="fw-bold">गुनासो ट्रयाक</h4>
                 <p>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन तल उल्लेखित विवरण भरेर पठाउनुहोस् ।</p>
                 <div class="mt-3">
@@ -33,12 +33,8 @@
                         </div>
                         <button type="submit" class="btn btn-primary">खोज्नुहोस्</button>
                     </form>
-                    <hr>
                 </div>
             </div>
         </div>
     </section>
 @endsection
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
-@endpush

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('father_name')->nullable();
+            $table->string('address')->nullable();
             $table->foreignId('citizenship_issue_district_id')->nullable()->constrained('districts');
             $table->string('citizenship_no')->nullable();
             $table->string('citizenship_issue_date')->nullable();
