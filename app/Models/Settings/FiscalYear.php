@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
+use Modules\DigitalBoard\Entities\Notice;
 
 class FiscalYear extends Model
 {
@@ -32,5 +33,10 @@ class FiscalYear extends Model
     public function dispatch(): HasMany
     {
         return $this->hasMany(Dispatch::class);
+    }
+
+    public function notices(): HasMany
+    {
+        return $this->hasMany(Notice::class);
     }
 }
