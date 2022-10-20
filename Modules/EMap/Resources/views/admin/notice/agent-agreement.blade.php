@@ -19,7 +19,7 @@
                                 url="{{route('emap.admin.map.map-apply.notice.upload.agreement',$mapApply)}}"/>
 
                             <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
-                                    requestRoute="{{route('print.office-letter-print')}}">
+                                    requestRoute="{{route('print.application-print')}}">
                                 <i class="fa fa-print"></i> Print
                             </button>
 

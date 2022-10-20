@@ -20,6 +20,7 @@ Route::prefix('clients')->as('clients.')->group(function () {
         ->prefix('client/{client}/mapApply/{mapApply}/application')
         ->as('application.')->group(function () {
             Route::get('mapAcceptance', 'mapAcceptance')->name('map-acceptance');
+            Route::get('super-structure-construction-permission', 'superStructureConstructionPermission')->name('super-structure-construction-permission');
             Route::get('technicianApproval', 'technicianApproval')->name('technician-approval');
             Route::get('engineerApproval', 'engineerApproval')->name('engineer-approval');
             Route::post('applyMapApplication','applyMapApplication')->name('apply-map-application');

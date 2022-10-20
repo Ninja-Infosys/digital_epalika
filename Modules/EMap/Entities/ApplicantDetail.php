@@ -28,6 +28,7 @@ class ApplicantDetail extends Model
         'applicant_type',
         'relation_with_owner',
         'name',
+        'address',
         'phone',
         'father_name',
         'citizenship_issue_district_id',

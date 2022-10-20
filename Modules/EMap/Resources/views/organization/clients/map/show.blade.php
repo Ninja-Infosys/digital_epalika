@@ -14,9 +14,8 @@
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">फारम विवरण </h3>
                         <div class="d-flex justify-content-between">
-
                             <x-application-component
-                                :application-type="App\Enums\NoticeTypeEnum::MAP_PASS_FOR_BUILDING"
+                                :application-type="\Modules\EMap\Enums\NoticeTypeEnum::MAP_PASS_FOR_BUILDING"
                                 url="{{route('organization.admin.clients.application.apply-map-application',[$client,$mapApply])}}"></x-application-component>
 
                             <button id="printButton" class="btn btn-sm btn-success mx-2" printElementId='printData'
@@ -28,7 +27,6 @@
                                 <i class="fa fa-eye"></i>
                             </a>
                         </div>
-
                     </div>
                 </div>
             </div>
