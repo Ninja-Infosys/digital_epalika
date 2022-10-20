@@ -27,6 +27,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('permissionLetter', 'permissionLetter')->name('permission-letter');
         Route::get('level', 'level')->name('level');
         Route::get('supervisor', 'superVisor')->name('supervisor');
+        Route::get('superstructure-permission', 'superStructurePermission')->name('superstructure-permission');
         Route::get('plinth-level-supervisor-report', 'plinthLevelSupervisorReport')->name('plinth-level-supervisor-report');
         Route::get('first-phase-consultant-report','firstPhaseConsultantReport')->name('first-phase-consultant-report');
         Route::get('first-phase-technician-report','firstPhaseTechnicianReport')->name('first-phase-technician-report');
@@ -61,7 +62,6 @@ Route::prefix('files')->as('files.')->group(function (){
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
 Route::view('firstphase', 'emap::admin.noticeletter.firstphase');
 Route::view('firstphases', 'emap::admin.noticeletter.firstphases');
-Route::view('super', 'emap::admin.noticeletter.super');
 Route::view('structure', 'emap::admin.tipani.structure');
 Route::view('sanso', 'emap::admin.tipani.sanso');
 Route::view('superstructure', 'emap::admin.tipani.superstructure');

@@ -10,6 +10,8 @@ enum NoticeTypeEnum: string
     case TECHNICIAN_APPROVAL = 'technician approval';
     case ENGINEER_APPROVAL = 'engineer approval';
     case MAP_PASS_FOR_BUILDING = 'map pass for building';
+    case REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE = 'regarding permission for construction work of superstructure';
+
     //notice enums
     case NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR = 'notice issued in the name of sanghiar';
     case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15 days notice adjourned';
@@ -17,18 +19,20 @@ enum NoticeTypeEnum: string
     case FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS = '15 day grace period for map pass';
     case SARZAMIN_MUCHULKA = 'sarzamin muchulka';
     //report enums
-
     case TECHNICAL_REPORT = 'technical report';
     case CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL = 'construction supervision report up to plinth level';
     case THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT = 'the technician who completed the first phase of work report';
     case CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE= 'consultants Report on Completion of First Phase';
    //certificate enums
     case PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL = 'permission letter for construction work up to plinth level';
+    case PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE = 'Permanent Building Permit (for Superstructure)';
     //agreement enums
     case AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD = 'agreement letter (between supervisor/consultant and landlord)';
     case AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR = 'agreement letter (homeowner and builder/contractor)';
     //order
+
     case GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE = 'granting permission for construction up to the plinth level of the house';
+    case REGARDING_SUPERSTRUCTURE_PERMIT = 'regarding superstructure permit';
 
     case REGARDING_FEES_AND_REGISTRATION = 'regarding fees and registration';
 
@@ -46,6 +50,8 @@ enum NoticeTypeEnum: string
             self::TECHNICIAN_APPROVAL => 'नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र',
             self::ENGINEER_APPROVAL => 'भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र',
             self::MAP_PASS_FOR_BUILDING => 'भवन निर्माणको लागि नक्सापास सम्बन्धमा',
+            self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE=> 'सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे',
+
             //notice enums
             self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => 'संघियारको नाममा जारी भएको सूचना',
             self::FIFTEEN_DAYS_NOTICE_ADJOURNED => '१५ दिने सूचना टाँस सम्बन्धमा',
@@ -64,8 +70,10 @@ enum NoticeTypeEnum: string
 
             //order
             self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE => 'घरको प्लिन्थ लेभल सम्मको निर्माणका निमित्त इजाजत प्रदान गर्ने',
+            self::REGARDING_SUPERSTRUCTURE_PERMIT => 'सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             //    certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
+            self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',
             self::REGARDING_FEES_AND_REGISTRATION => 'दस्तुर तथा दर्ता सम्बन्धि',
         };
     }

@@ -104,6 +104,7 @@
                                             <a class="dropdown-item" href="{{route('organization.admin.clients.application.technician-approval',[$client,$mapApply])}}">नक्सा बनाउने प्राविधिकद्वारा मन्जुरी
                                                 पत्र</a>
                                             <a class="dropdown-item" href="{{route('organization.admin.clients.application.engineer-approval',[$client,$mapApply])}}">भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र</a>
+                                            <a class="dropdown-item" href="{{route('organization.admin.clients.application.super-structure-construction-permission',[$client,$mapApply])}}">सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे</a>
                                         </div>
                                     </div>
                                 </td>

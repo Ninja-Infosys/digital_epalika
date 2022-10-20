@@ -35,6 +35,7 @@
             <div class="card mb_30">
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
+
                         <p>{{config('applicationDetail.to_office.to')}}<br>
                             {{config('applicationDetail.to_office.office_name')}}<br>
                             {{config('applicationDetail.to_office.office')}}<br>
