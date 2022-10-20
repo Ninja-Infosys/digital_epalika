@@ -1,8 +1,12 @@
 <p class="mb-3">
-    यस {{config('applicationDetail.office_type')}}को वडा नं.<span class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>टोल<span
-        class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span>मा अवस्थित साविक<span class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>कित्ता
-    नं.<span class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span> क्षेत्रफल<span class="underline-dotted">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
-    मा भवन निर्माण गर्ने घरधनी श्री<span class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले भवन निर्माण गर्ने क्रममा
+    यस {{config('applicationDetail.office_type')}}को वडा नं.<span
+        class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>टोल<span
+        class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span>मा अवस्थित साविक<span
+        class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>कित्ता
+    नं.<span class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span> क्षेत्रफल<span
+        class="underline-dotted">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
+    मा भवन निर्माण गर्ने घरधनी श्री<span class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले भवन
+    निर्माण गर्ने क्रममा
     प्लिन्थ लेभलसम्मको निर्माण कार्य सम्पन्न भएको हुँदा मिति<span class="underline-dotted custom-width"></span> मा
     स्थलगत निरीक्षण गरी देहाय बमोजिमको प्रतिवेदन पेश गरेको छु |
 </p>
