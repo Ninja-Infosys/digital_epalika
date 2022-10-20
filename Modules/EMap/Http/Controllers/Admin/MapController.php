@@ -193,6 +193,8 @@ class MapController extends Controller
 
     public function constructionCompletionCertificate(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load('landOwner','landDetail.unit');
+
         return view('emap::admin.notice.construction_completion_certificate',compact('mapApply'));
     }
 
