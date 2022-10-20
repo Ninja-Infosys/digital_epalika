@@ -6,10 +6,10 @@
         </section>
         <section class="mid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                 <x-frontend.notice-vertical-slider-component/>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                    <x-frontend.employee-section-component/>
                 </div>
             </div>

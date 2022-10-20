@@ -4,6 +4,7 @@ namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -70,9 +71,11 @@ class NoticeController extends Controller
 
 
         DB::transaction(function () use ($request, $type, $data) {
+            $officeSetting = OfficeSetting::first();
             $notice = Notice::create($data + [
                     'user_id' => auth()->id(),
-                    'type' => $type
+                    'type' => $type,
+                    'fiscal_year_id' => $officeSetting->fiscal_year_id ?? null
                 ]);
 
             if ($request->hasFile('files')) {

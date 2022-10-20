@@ -12,6 +12,9 @@
                             <div class="textbox-01 px-2">
                                 <h6>{{$employees->first()->name ?? ''}}</h6>
                                 <p>{{$employees->first()->designation ?? ''}}</p>
+                                <p>{{$employees->first()->phone ?? ''}}</p>
+                                <p>{{$employees->first()->email ?? ''}}</p>
+
                             </div>
                         </div>
                     </div>
@@ -27,6 +30,8 @@
                                     <div class="textbox-01 px-2">
                                         <h6>{{$otherEmployee->name}}</h6>
                                         <p>{{$otherEmployee->designation}}</p>
+                                        <p>{{$otherEmployee->phone}}</p>
+                                        <p>{{$otherEmployee->email}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -47,6 +52,8 @@
                                     <div class="textbox-01 px-2">
                                         <h6>{{$employee->name}}</h6>
                                         <p>{{$employee->designation}}</p>
+                                        <p>{{$employee->phone}}</p>
+                                        <p>{{$employee->email}}</p>
                                     </div>
                                 </div>
                             </div>

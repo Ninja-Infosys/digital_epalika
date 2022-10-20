@@ -20,9 +20,8 @@
 
         * {
             font-family: Kalimati;
-            font-weight: 600;
+            font-weight: 500;
         }
-
         .underline-dotted {
             border-bottom: dotted 3px !important;
             padding: 0 15px;
@@ -30,6 +29,28 @@
 
         .custom-width {
             padding: 0 50px !important;
+        }
+        p {
+            color: #000;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        .vertical {
+            transform: rotate(90deg);
+            transform-origin: left top 0;
+            margin-left: 30px;
+            padding: 0 160px;
+            color: #000;
+        }
+        .letter{
+            padding-left: 50px;
+
+        }
+        .flex-wrap {
+            flex-wrap: wrap !important;
+        }
+        .d-flex {
+            display: flex !important;
         }
         @media print {
             .break-page {

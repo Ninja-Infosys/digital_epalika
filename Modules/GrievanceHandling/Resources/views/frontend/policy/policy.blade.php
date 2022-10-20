@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="inner-section mt-lg-5 ">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row d-flex mt-5 ">
                 <div class="breadcrumb d-flex">
                     <div class="breadcrumb-item">
@@ -27,6 +27,10 @@
                             <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
                             <td>२०७९/०२/११</td>
                             <td>
+                                <div class="d-flex justify-content-around">
+                                    <button class="btn btn-sm btn-primary bg-primary text-white" href=""><i class="fa fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-primary bg-primary text-white" href=""><i class="fa fa-download"></i></button>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -35,8 +39,4 @@
             </div>
         </div>
     </section>
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/policy.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
-    @endpush
 @endsection

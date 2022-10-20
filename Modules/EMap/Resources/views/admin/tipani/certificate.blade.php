@@ -21,8 +21,11 @@
                                 <div class="top-line d-flex justify-content-end mt-3">
                                     <p>मिति: <span class="underline-dotted custom-width"></span></p>
                                 </div>
-                                <p class="text-center text-decoration-underline my-3"><b>बिषय: निर्माण कार्य सम्पन्न प्रमाण-पत्र पाउँ
-                                        ।</b></p>
+                                <h3 class="text-center">
+                                    <b>टिप्पणी र आदेश </b>
+                                </h3>
+                                <p class="text-center my-3"><b>बिषय: निर्माण कार्य सम्पन्न प्रमाण-पत्र सम्बन्धमा ।
+                                        </b></p>
                                 <p>श्रीमान</p>
                                 <p class="my-3">
                                    यस उप-महानगरपालिका वडा नं.<span class="underline-dotted custom-width"></span> बस्ने श्री/श्रीमती/सुश्री <span class="underline-dotted custom-width"></span> को
@@ -31,15 +34,8 @@
                                     मा<span class="underline-dotted custom-width"></span> को लागि मिति<span class="underline-dotted custom-width"></span>
                                     मा भवन निर्माण गर्न स्वीकृति पत्र लिई हाल निर्माण कार्य समाप्त गरी निर्माण कार्य सम्पन्नको प्रमाण-पत्रको लागि निर्माण कार्यको सुपरिवेक्षणमा संलग्न प्रबिधिक/कन्सलटेन्टले प्रविधिक प्रतिवेदन सहित निवेदन
                                     दिनु भएको हुँदा यस कार्यालयका प्रबिधिकलेस्थलगत निरिक्ष, सुपरिवेक्षण गरी दिएको प्रतिवेदन अनुसार नक्सा पास हुँदाको मापदण्ड अनुसार भवन निर्माण
-                                    भएको देखिएकोले निजलाई निर्माण सम्पन्न प्रमाण-पत्र दिन मनासिब देखि पेश गरेको छु |
+                                    भएको देखिएकोले निजलाई निर्माण सम्पन्न प्रमाण-पत्र दिन मनासिब देखि पेश गरेको छु ।
                                 </p>
-                                <div class="d-flex justify-content-end mt-4 px-5">
-                                    <p>निवेदकको नाम :-<span class="underline-dotted custom-width"></span><br>
-                                        ठेगाना :-<span class="underline-dotted custom-width"></span><br>
-                                        दरखास्त :-<span class="underline-dotted custom-width"></span><br>
-                                        मोबाइल नं. :-<span class="underline-dotted custom-width"></span></p>
-
-                                </div>
                             </div>
                         </div>
                     </div>

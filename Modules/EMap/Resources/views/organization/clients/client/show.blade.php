@@ -105,6 +105,7 @@
                                                 पत्र</a>
                                             <a class="dropdown-item" href="{{route('organization.admin.clients.application.engineer-approval',[$client,$mapApply])}}">भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र</a>
                                             <a class="dropdown-item" href="{{route('organization.admin.clients.application.super-structure-construction-permission',[$client,$mapApply])}}">सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे</a>
+                                            <a class="dropdown-item" href="{{route('organization.admin.clients.application.constructionCompletionCertificate',[$client,$mapApply])}}">निर्माण कार्य सम्पन्न प्रमाण पत्रको लागि निवेदन</a>
                                         </div>
                                     </div>
                                 </td>

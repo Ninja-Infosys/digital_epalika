@@ -16,6 +16,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
 });
 
 Route::resource('grievanceDetail', GrievanceDetailController::class);
+Route::get('grievanceDetail/{grievanceDetail}/approve', [GrievanceDetailController::class, 'approve'])->name('grievanceDetail.approve');
+Route::get('grievanceDetail/{grievanceDetail}/public', [GrievanceDetailController::class, 'showToPublic'])->name('grievance-detail.show-to-public');
 Route::post('grievanceDetail/{grievanceDetail}/replayGrievance', [GrievanceDetailController::class, 'replayGrievance'])->name('grievanceDetail.replyGrievance');
 Route::put('grievanceDetail/{grievanceDetail}/UpdateStatus', [GrievanceDetailController::class, 'updateStatus'])->name('grievanceDetail.updateStatus');
 Route::resource('grievanceUser', GrievanceUserController::class)->only('index');

@@ -30,7 +30,7 @@ return [
         'शुक्रबार' => 'Friday',
         'शनिबार' => 'Saturday',
     ],
-    'complaint_severity' => [
+   /* 'complaint_severity' => [
         'साधारण' => 'Simple',
         'प्राथमिकता' => 'Priority',
         'उच्च प्राथमिकता' => 'High priority'
@@ -40,7 +40,7 @@ return [
         'अनुसन्धान गरिदै' => 'Investigated',
         'जवाफ दिनुभयो' => 'Replied',
         'बन्द' => 'Closed'
-    ],
+    ],*/
 
     'gender' => [
         'पूरुष' => 'Male',
