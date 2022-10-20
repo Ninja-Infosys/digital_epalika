@@ -40,7 +40,7 @@
                         <div class="modules mt-3">
                             <h4 id="our-system">हामीसंग भएका प्रणालीहरु</h4>
                             <div class="row mt-2">
-                                <div class="col-md-3 border" id="citizen">
+                                <div class="col-md-4 border" id="citizen">
                                     <a href="{{route('admin.digitalBoard.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/digitalboard.png')}}"
@@ -50,7 +50,7 @@
                                     </a>
                                 </div>
                                 @if(Route::has('admin.circular.dashboard'))
-                                    <div class="col-md-3 border" id="darta">
+                                    <div class="col-md-4 border" id="darta">
                                         <a href="{{route('admin.circular.dashboard')}}">
                                             <div class="p-2 text-center">
                                                 <img src="{{asset('assets/backend/images/modules/circular.png')}}"
@@ -60,7 +60,7 @@
                                         </a>
                                     </div>
                                 @endif
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="listregistration">
                                     <a href="{{route('admin.listRegistrations.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/listregistration.png')}}"
@@ -69,7 +69,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="helpdesk">
                                     <a href="{{route('admin.helpDesk.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/helpdesk.png')}}"
@@ -78,7 +78,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="grievancehandling">
                                     <a href="{{route('admin.grievanceHandling.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/grievancehandling.png')}}"
@@ -87,7 +87,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="executivemeeting">
                                     <a href="{{route('admin.executiveMeeting.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/executivemeeting.png')}}"
@@ -96,7 +96,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="businessregistration">
                                     <a href="{{route('admin.businessRegistration.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/businessregistration.png')}}"
@@ -105,7 +105,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="emap">
                                     <a href="{{route('emap.admin.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/emap.png')}}"
@@ -114,7 +114,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="recommendation">
                                     <a href="#">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/sifarish-parnali.png')}}"
@@ -123,7 +123,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="yojana">
                                     <a href="#">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/yojana.png')}}"
@@ -132,7 +132,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="talim">
                                     <a href="#">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/talim.png')}}"
@@ -141,7 +141,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="anudan">
                                     <a href="#">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/anudan.png')}}"
@@ -150,7 +150,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="nyayik">
                                     <a href="#">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/nyayik.png')}}"
@@ -159,7 +159,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border" id="kramachari">
                                     <a href="#">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/kramachari.png')}}"
@@ -168,7 +168,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border">
                                     <a href="{{route('admin.setting.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/setting.png')}}"
@@ -177,7 +177,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-3 border">
+                                <div class="col-md-4 border">
                                     <a href="{{route('admin.website.dashboard')}}">
                                         <div class="p-2 text-center">
                                             <img src="{{asset('assets/backend/images/modules/website.png')}}"
