@@ -14,7 +14,7 @@
                 </p>
                 @if(count($branch->branches)!=0)
                     <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
-                        <div class="card-body">
+                        <div class="card-body sub-branch">
                             <ul class="list-group">
                                 @foreach($branch->branches as $subBranch)
                                     <li class="list-group-item d-flex justify-content-between fs-5"
@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="card border-info p-2">
+        <div class="card branch-service border-info p-2">
             <div class="text-center">
                 <h6 class="fw-bold fs-5">सेवाहरु</h6>
             </div>

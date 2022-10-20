@@ -250,7 +250,7 @@ body {
 .newsbar-title {
     color: var(--whiteColor);
     background-color:#ce1126;
-    font-size:.833rem;
+    font-size: 1.5rem;
     font-weight:600;
     padding:.75rem 1rem .75rem .5rem;
     -webkit-clip-path:polygon(0 0,88% 0,100% 50%,88% 100%,0 100%);
@@ -269,7 +269,8 @@ body {
     vertical-align:middle
 }
 .marquee-list a {
-    color:#fff!important
+    color:#fff!important;
+    font-size: 1.5rem;
 }
 .marquee-list a:hover {
     color:#4d4d4d!important
@@ -280,12 +281,12 @@ body {
     width:100%;
     height:18px;
     vertical-align:middle;
-    overflow:hidden
+
 }
 .jctkr-wrapper ul {
     position:absolute;
     left:0;
-    top:50%;
+    top:0;
     transform:translate(0,-50%);
     height:100%;
     margin:0;
@@ -309,7 +310,7 @@ body {
     margin-right:.75rem
 }
 .jctkr-wrapper ul li a {
-    color:#666
+    color:#666;
 }
 .jctkr-wrapper ul li:before {
     content:'';
@@ -391,7 +392,7 @@ video{
     width: 100%;
 }
 .info-card{
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: #dbdbfb;
     text-align: center;
     padding: 1vh;
     margin-top: 5vh;
@@ -430,21 +431,22 @@ select{
     height: 90px;
     width: 70px;
 }
-.textbox-01>h6{
-    font-size: 1rem;
+.textbox-01>h5{
+    font-size: 1.3rem;
 }
 .textbox-01>p{
-    font-size: .8rem;
+    font-size: .9rem;
 }
 .card-employee{
-    border:  1px solid rgba(255, 0, 0, 0.4);
+    background:
+        linear-gradient(white, white) padding-box,
+        linear-gradient(90deg, #0062CC, red) border-box;
+    border-width: 3px;
+    border-style: solid;
+    border-color: transparent;
     padding: 10px;
 }
-.card-employee:hover{
-    border: 1px solid rgba(255, 0, 0, 0.4);
-    background-color: transparent;
-    transition: .5s;
-}
+
 /*footer*/
 
 .list {
@@ -820,4 +822,26 @@ mat-icon{
     transition: .9s;
     transform: translateY(-10px);
 }
-/*----------------------------------------------*/
+/*-----------------------helpdesk-----------------------*/
+.branch-title .btn{
+    color: var(--whiteColor);
+    background-color: var(--mainColor);
+}
+.branch-title .btn:hover{
+    transform: translateX(5px);
+    color: var(--whiteColor);
+}
+.sub-branch ul li{
+    cursor: pointer;
+    background-color: #1C60BD;
+    color: var(--whiteColor);
+}
+.sub-branch ul li:hover{
+    transform: translateX(5px);
+}
+.branch-service ul a li{
+    background-color: var(--secondaryColor);
+}
+.branch-service ul a{
+    text-decoration: none;
+}

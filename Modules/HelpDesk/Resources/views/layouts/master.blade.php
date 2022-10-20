@@ -8,7 +8,6 @@
     <title>Digital-Palika</title>
     {{--css link--}}
     <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/helpdesk/index.css')}}">
     {{--Bootstrap 5 --}}
     <link rel="stylesheet" href="{{asset('assets/frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/header.css')}}">
