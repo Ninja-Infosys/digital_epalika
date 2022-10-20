@@ -20,52 +20,7 @@
             </div>
         </div>
     </div>
-    <style>
-        .message {
-            border: 2px solid #dedede;
-            background-color: #f1f1f1;
-            border-radius: 5px;
-            /*width: 70%;*/
-            padding: 10px;
-            margin: 10px 0;
-            height: 200px;
-        }
 
-        .darker {
-            border-color: #ccc;
-            background-color: #ddd;
-        }
-
-        .message::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-        .message img {
-            float: left;
-            max-width: 60px;
-            width: 100%;
-            margin-right: 20px;
-            border-radius: 50%;
-        }
-
-        .message img.right {
-            float: right;
-            margin-left: 20px;
-            margin-right: 0;
-        }
-
-        .time-right {
-            float: right;
-            color: #aaa;
-        }
-
-        .time-left {
-            float: left;
-            color: #999;
-        }
-    </style>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -78,7 +33,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4 class="header-title">बिषय : {{$grievanceDetail->subject}}</h4>
-                                    <h4 class="header-title">शाखा : {{$grievanceDetail->grievanceOffice->title??''}}</h4>
+                                    <h4 class="header-title">शाखा
+                                        : {{$grievanceDetail->grievanceOffice->title??''}}</h4>
                                     <h4>
                                         स्थिति:
                                         <form class="form-inline"
@@ -89,9 +45,9 @@
                                             <div class="form-group mb-2">
                                                 <select name="status" id="grievanceDetailStatus" class="form-control"
                                                         style="width: 150px;">
-                                                    @foreach(config('defaults.status') as $key=> $status)
+                                                    @foreach(\Modules\GrievanceHandling\Enums\GrievanceStatus::cases() as $status)
                                                         <option
-                                                            value="{{$status}}" {{$status==$grievanceDetail->status ? 'selected':''}}>{{$key}}</option>
+                                                            value="{{$status->value}}" {{$status==$grievanceDetail->status ? 'selected':''}}>{{$status->label()}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -109,17 +65,14 @@
                                     {{$grievanceDetail->grievanceUser->phone??''}}<br>
                                     {{$grievanceDetail->grievanceUser->address??''}}
                                     <h4>गुनासो गम्भीरता :
-                                        @switch($grievanceDetail->complaint_severity)
-                                            @case('High priority')
-                                                उच्च प्राथमिकता
-                                                @break
-                                            @case('Priority')
-                                                प्राथमिकता
-                                                @break
-                                            @default
-                                                साधारण
-                                        @endswitch
+                                        {{$grievanceDetail->complaint_severity->label()}}
                                     </h4>
+                                    दर्ता स्थिति: <a
+                                        href="{{route('admin.grievanceHandling.grievanceDetail.approve', $grievanceDetail)}}" @class(["btn","btn-sm","btn-success"=>$grievanceDetail->is_approved ==1,"btn-danger"=>$grievanceDetail->is_approved ==0,])><i
+                                            @class(["fa","fa-check"=>$grievanceDetail->is_approved ==1,"fa-window-close"=>$grievanceDetail->is_approved ==0,])></i></a><br>
+                                    सार्वजनिक गरेको स्थिति: <a
+                                        href="{{route('admin.grievanceHandling.grievance-detail.show-to-public', $grievanceDetail)}}" @class(["btn","btn-sm","btn-success"=>$grievanceDetail->is_public ==1,"btn-danger"=>$grievanceDetail->is_public ==0,])><i
+                                            @class(["fa","fa-check"=>$grievanceDetail->is_public ==1,"fa-window-close"=>$grievanceDetail->is_public ==0,])></i></a><br>
                                 </div>
                                 <div class="col-md-12">
                                     <form enctype="multipart/form-data"
@@ -128,7 +81,8 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="description">बिवरण</label>
-                                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"
+                                            <textarea name="description" id="description" cols="30" rows="5"
+                                                      class="form-control"
                                                       placeholder="बिवरण">{{old('description')}}</textarea>
                                             @error('description')
                                             <p class="text-danger">{{$message}}</p>
@@ -153,7 +107,8 @@
 
                         <div class="col-md-6">
                             <div class="message">
-                                <img src="{{asset('assets/backend/images/user_icon.jpg')}}" alt="Avatar" style="width:100%;">
+                                <img src="{{asset('assets/backend/images/user_icon.jpg')}}" alt="Avatar"
+                                     style="width:100%;">
                                 <p>{{$grievanceDetail->description}}</p>
                                 @foreach($grievanceDetail->files as $file)
                                     <a href="{{$file->file_url}}" download="{{$file->file_url}}">&nbsp;
@@ -176,10 +131,58 @@
                     </div>
 
 
-
                 </div>
             </div>
 
         </div>
     </div>
+
+    @push('style')
+        <style>
+            .message {
+                border: 2px solid #dedede;
+                background-color: #f1f1f1;
+                border-radius: 5px;
+                /*width: 70%;*/
+                padding: 10px;
+                margin: 10px 0;
+                height: 200px;
+            }
+
+            .darker {
+                border-color: #ccc;
+                background-color: #ddd;
+            }
+
+            .message::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+            .message img {
+                float: left;
+                max-width: 60px;
+                width: 100%;
+                margin-right: 20px;
+                border-radius: 50%;
+            }
+
+            .message img.right {
+                float: right;
+                margin-left: 20px;
+                margin-right: 0;
+            }
+
+            .time-right {
+                float: right;
+                color: #aaa;
+            }
+
+            .time-left {
+                float: left;
+                color: #999;
+            }
+        </style>
+    @endpush
 @endsection
