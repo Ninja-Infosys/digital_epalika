@@ -50,7 +50,7 @@
                                         class="underline-dotted custom-width">{{$mapApply->landDetail->former_ward_no??''}}</span>
                                     कि.नं.<span class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span> को क्षेत्रफल <span
                                         class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
-                                    मा<span class="underline-dotted custom-width"></span> को लागि मिति<span
+                                    मा<span class="underline-dotted custom-width">{{$mapApply->construction_type->label()}}</span> को लागि मिति<span
                                         class="underline-dotted custom-width"></span>
                                     मा भवन निर्माण गर्न स्वीकृति पत्र लिई हाल निर्माण कार्य समाप्त गरी निर्माण कार्य
                                     सम्पन्नको प्रमाण-पत्रको लागि निर्माण कार्यको सुपरिवेक्षणमा संलग्न
