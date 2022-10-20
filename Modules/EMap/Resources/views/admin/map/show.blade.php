@@ -255,7 +255,7 @@
                 <div class="card-body">
                     <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}"
                        class="btn btn-sm btn-outline-primary">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}"
+                    <a href="{{route('emap.admin.map.map-apply.notice.superstructure',$mapApply)}}"
                        class="btn btn-sm btn-outline-primary">{{\Modules\EMap\Enums\NoticeTypeEnum::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE->label()}}</a>
                 </div>
             </div>
@@ -270,9 +270,11 @@
                 <div class="card-body">
                     <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्राविधिक प्रतिवेदन</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.plinth-level-supervisor-report',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण प्रतिवेदन</a>
-
                     <a href="{{route('emap.admin.map.map-apply.notice.first-phase-consultant-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.first-phase-technician-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">प्रथम चरणको कार्य सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}} प्राबिधिकको प्रतिबेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.second-phase-consultant-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">दोस्रो चरणको कार्य सम्पन्नको परामर्शको प्राविधिकको प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.second-phase-technician-report',$mapApply)}}" class="btn btn-sm btn-outline-primary">दोस्रो चरणको कार्य सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}} प्रबिधिकको प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.supervisor',$mapApply)}}" class="btn btn-sm btn-outline-primary">सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन</a>
                 </div>
             </div>
         </div>
