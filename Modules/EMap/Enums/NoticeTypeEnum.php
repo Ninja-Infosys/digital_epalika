@@ -25,6 +25,9 @@ enum NoticeTypeEnum: string
     case CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL = 'construction supervision report up to plinth level';
     case THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT = 'the technician who completed the first phase of work report';
     case CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE= 'consultants Report on Completion of First Phase';
+    case THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT= 'the technician who completed the second phase of work report';
+    case CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE= 'consultants Report on Completion of Second Phase';
+    case CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE= 'construction supervision report upto superstructure';
    //certificate enums
     case PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL = 'permission letter for construction work up to plinth level';
     case PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE = 'Permanent Building Permit (for Superstructure)';
@@ -69,6 +72,10 @@ enum NoticeTypeEnum: string
             self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण प्रतिवेदन',
             self::THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT => 'प्रथम चरणको कार्य सम्पन्नको प्राबिधिकको प्रतिबेदन',
             self::CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE => 'प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन',
+            self::THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT => 'दोस्रो चरणको कार्य सम्पन्नको प्राबिधिकको प्रतिबेदन',
+            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE => 'दोस्रो चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन',
+            self::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE => 'सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन',
+
             //agreement
             self::AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD => 'सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)',
             self::AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR => 'सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)',
