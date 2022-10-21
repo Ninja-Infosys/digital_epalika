@@ -241,6 +241,54 @@ body {
     transition: .7s;
     transform: translateY(-5px);
 }
+/*------home--------csss---------*/
+.list-item-head {
+    background-color: var(--mainColor);
+}
+.list-item-head p{
+    font-size: 1.155rem;
+}
+.list-group .list-group-item a{
+    text-decoration: none;
+    color: var(--mainColor);
+}
+.list-group .btn-notice{
+    text-align: center;
+    padding: 2px;
+    text-decoration: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var(--secondaryColor);
+}
+.list-group .btn-notice:hover{
+    transition: .5s;
+    background-color: var(--mainColor);
+    color: var(--whiteColor);
+}
+.title-head-main {
+    padding: 0;
+    background-color: var(--mainColor);
+    color: white;
+}
+.title-head-main p{
+    padding: 0;
+    font-size: 1.155rem;
+}
+.detail {
+    color: white;
+    border-radius: 1.3rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    border: .06rem solid #f8f9fa;
+}
+
+.text-center {
+    text-align: center !important;
+}
+.org-location .card-body p{
+    font-size: 1.255rem;
+    color: var(--mainColor);
+}
 /*marquee css*/
 .newsbar-container {
     display:flex;
@@ -400,7 +448,7 @@ video{
 
 }
 .info-card:hover{
-    border: 1px solid rgba(255, 0, 0, 0.4);
+    border: 1px solid #0062CC;
     background-color: transparent;
     transition: .9s;
     transform: translateY(-10px);
