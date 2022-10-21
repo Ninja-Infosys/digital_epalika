@@ -43,14 +43,14 @@
                                 <p>श्रीमान</p>
                                 <p class="my-3">
                                     यस {{config('applicationDetail.office_type')}} वडा नं.<span
-                                        class="underline-dotted custom-width"></span> बस्ने श्री/श्रीमती/सुश्री <span
-                                        class="underline-dotted custom-width"></span> को
-                                    नाममा दर्ता रहेय्को यस उ.न.पा. वडा नं.<span
-                                        class="underline-dotted custom-width"></span> का साविक <span
-                                        class="underline-dotted custom-width"></span>
-                                    कि.नं.<span class="underline-dotted custom-width"></span> को क्षेत्रफल <span
-                                        class="underline-dotted custom-width"></span>
-                                    मा<span class="underline-dotted custom-width"></span> को लागि मिति<span
+                                        class="underline-dotted custom-width">{{$mapApply->landOwner->ward_no??''}}</span> बस्ने श्री/श्रीमती/सुश्री <span
+                                        class="underline-dotted custom-width">{{$mapApply->landOwner->name??''}}</span> को
+                                    नाममा दर्ता रहेय्को यस {{config('applicationDetail.office_short_name')}} वडा नं.<span
+                                        class="underline-dotted custom-width">{{$mapApply->landDetail->ward_no??''}}</span> का साविक <span
+                                        class="underline-dotted custom-width">{{$mapApply->landDetail->former_ward_no??''}}</span>
+                                    कि.नं.<span class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span> को क्षेत्रफल <span
+                                        class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
+                                    मा<span class="underline-dotted custom-width">{{$mapApply->construction_type->label()}}</span> को लागि मिति<span
                                         class="underline-dotted custom-width"></span>
                                     मा भवन निर्माण गर्न स्वीकृति पत्र लिई हाल निर्माण कार्य समाप्त गरी निर्माण कार्य
                                     सम्पन्नको प्रमाण-पत्रको लागि निर्माण कार्यको सुपरिवेक्षणमा संलग्न

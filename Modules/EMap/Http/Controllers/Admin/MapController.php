@@ -149,6 +149,19 @@ class MapController extends Controller
 
     }
 
+    public function secondPhaseConsultantReport(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail', 'houseOwner');
+        return view('emap::admin.map.report.second_phase_consultant_report', compact('mapApply'));
+    }
+
+    public function secondPhaseTechnicianReport(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail', 'houseOwner');
+        return view('emap::admin.map.report.second_phase_technician_report', compact('mapApply'));
+
+    }
+
     public function plinthLevelSupervisorReport(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load(['landDetail', 'houseOwner','designerDetails' => function ($query) {
@@ -180,8 +193,17 @@ class MapController extends Controller
 
     public function constructionCompletionCertificate(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load('landOwner','landDetail.unit');
+
         return view('emap::admin.notice.construction_completion_certificate',compact('mapApply'));
     }
+
+    public function revisedSuperStructurePermitOrder(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landOwner','landDetail.unit');
+        return view('emap::admin.notice.revised_superstructure_permit_order',compact('mapApply'));
+    }
+
 
     public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {

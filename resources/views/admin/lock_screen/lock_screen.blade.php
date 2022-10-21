@@ -63,7 +63,7 @@
                             <div class="mb-3 mt-3">
                                 <label for="password" class="form-label">प्रयोगकर्ता पासवर्ड <span class="text-danger">*</span></label>
                                 <input class="form-control" type="password" required="" id="password" name="password"
-                                       placeholder="प्रयोगकर्ता पासवर्ड">
+                                       placeholder="प्रयोगकर्ता पासवर्ड" autocomplete="off">
                             </div>
 
                             <div class="text-center d-grid">
