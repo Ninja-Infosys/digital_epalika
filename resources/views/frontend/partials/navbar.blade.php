@@ -12,24 +12,27 @@
                         गृहपृष्ठ
                     </a>
                 </li>
-                {{--<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" >
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         परिचय
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{url('/static/representative')}}">हाम्रो बारेमा</a></li>
-                        <li><a class="dropdown-item" href="{{url('/static/employee')}}">कर्मचारीहरु</a></li>
+                    <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item " href="{{route('representative')}}">हाम्रो बारेमा</a></li>
+                        <li><a class="dropdown-item " href="{{route('employee')}}">कर्मचारीहरु</a></li>
+
                     </ul>
-                </li>--}}
-                {{--                    <a class="nav-link dropdown-toggle">--}}
-                {{--                        ग्यालेरि--}}
-                {{--                    </a>--}}
-                {{--                    <ul class="dropdown-menu">--}}
-                {{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/photo')}}">फोटोहरु</a></li>--}}
-                {{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/audio')}}">अडियोहरु</a></li>--}}
-                {{--                        <li><a class="dropdown-item" href="{{url('/static/gallery/video')}}">भिडियोहरु</a></li>--}}
-                {{--                    </ul>--}}
-                {{--                </li>--}}
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        ग्यालेरि
+                    </a>
+                    <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item " href="{{route('photo')}}">फोटोहरु</a></li>
+                        <li><a class="dropdown-item " href="{{route('audio')}}">अडियोहरु</a></li>
+                        <li><a class="dropdown-item " href="{{route('video')}}">भिडियोहरु</a></li>
+
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link {{request()->routeIs('notice') ? 'active' : ''}}" href="{{route('notice')}}">
                         सूचना
