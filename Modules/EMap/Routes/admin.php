@@ -19,6 +19,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
     Route::prefix('mapApply/{mapApply}/notice')->as('map-apply.notice.')->group(function () {
         Route::get('officeLetter', 'officeLetter')->name('office-letter');
         Route::get('noticeLetter', 'noticeLetter')->name('notice-letter');
+        Route::get('sending-details', 'sendingDetails')->name('sendingDetails');
         Route::get('mapArrears', 'mapArrears')->name('map-arrears');
         Route::get('landArrears', 'landArrears')->name('land-arrears');
         Route::get('technicianNotice', 'technicianNotice')->name('technician-notice');
@@ -67,18 +68,11 @@ Route::prefix('files')->as('files.')->group(function (){
 });
 
 Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
-Route::view('firstphase', 'emap::admin.noticeletter.firstphase');
-Route::view('firstphases', 'emap::admin.noticeletter.firstphases');
 Route::view('structure', 'emap::admin.tipani.structure');
-Route::view('sanso', 'emap::admin.tipani.sanso');
-Route::view('superstructure', 'emap::admin.tipani.superstructure');
-Route::view('sanpermission', 'emap::admin.tipani.sanpermission');
 Route::view('estd', 'emap::admin.tipani.estd');
 Route::view('second', 'emap::admin.tipani.second');
 Route::view('secondphase', 'emap::admin.tipani.secondphase');
-Route::view('certificate', 'emap::admin.tipani.certificate');
 Route::view('parmana', 'emap::admin.certificate.parmana');
-Route::view('namsari', 'emap::admin.certificate.namsari');
 Route::view('detail', 'emap::admin.certificate.detail');
 Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
 Route::view('manjuri', 'emap::admin.certificate.manjuri');

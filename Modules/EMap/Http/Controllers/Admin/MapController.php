@@ -82,6 +82,13 @@ class MapController extends Controller
         return view('emap::admin.notice.notice-letter', compact('mapApply'));
     }
 
+    public function sendingDetails(MapApply $mapApply): Factory|View|Application
+    {
+        $mapApply->load('landDetail.unit','landOwner','houseOwner','storeyDetails.mapFee');
+
+        return view('emap::admin.notice.sending_details',compact('mapApply'));
+    }
+
     public function mapArrears(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'houseOwner');
