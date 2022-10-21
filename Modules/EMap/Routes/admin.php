@@ -39,6 +39,9 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('first-phase-technician-report','firstPhaseTechnicianReport')->name('first-phase-technician-report');
         Route::get('second-phase-consultant-report','secondPhaseConsultantReport')->name('second-phase-consultant-report');
         Route::get('second-phase-technician-report','secondPhaseTechnicianReport')->name('second-phase-technician-report');
+        Route::get('permission','permissionView')->name('permission');
+        Route::get('heir','heirView')->name('heir');
+        Route::get('building-construction-completion-certificate','buildingConstructionCompletionCertificate')->name('building-construction-completion-certificate');
         Route::prefix('upload')->as('upload.')->group(function (){
             Route::post('notice','notice')->name('notice');
             Route::post('application','application')->name('application');
