@@ -1,11 +1,11 @@
 <h5 class="text-center mb-2"><b>कार्यालय प्रयोजनको लागि</b></h5>
 <p class="mb-3">
-    यस उप-महानगरपालिकाको स्थान<span class="underline-dotted custom-width"></span>
-    वडा नं.<span class="underline-dotted custom-width"></span>मा अवस्थित साविक
-    <span class="underline-dotted custom-width"></span>
-    कित्ता नं.<span class="underline-dotted custom-width"></span>
-    क्षेत्रफल<span class="underline-dotted custom-width"></span>
-    मा भवन निर्माण गर्ने घरधनी श्री<span class="underline-dotted custom-width"></span>
+    यस {{config('applicationDetail.office_type')}}को स्थान<span class="underline-dotted custom-width"></span>
+    वडा नं.<span class="underline-dotted custom-width">{{$mapApply->landDetail->ward_no??''}}</span>मा अवस्थित साविक
+    <span class="underline-dotted custom-width">{{$mapApply->landDetail->farmer_ward_no??''}}</span>
+    कित्ता नं.<span class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span>
+    क्षेत्रफल<span class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
+    मा भवन निर्माण गर्ने घरधनी श्री<span class="underline-dotted custom-width">{{$mapApply->houseOwner->name??''}}</span>
     ले भवन निर्माण गर्ने क्रममा दोस्रो चरणको निर्माण कार्य सम्पन्न भएको हुँदा
     मिति<span class="underline-dotted custom-width"></span> मा स्थलगत निरीक्षण गरी देहाय
     बमोजिमको प्रतिवेदन पेश गरेको छु |
