@@ -4,6 +4,12 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+<li class="{{request()->is('admin/executivemeeting/calender') ? 'active' : ''}}">
+    <a href="{{route('admin.executiveMeeting.calender.index')}}">
+        <i class="fa fa-home"></i>
+        <span> Calender</span>
+    </a>
+</li>
 @can('executiveCommittee_access')
     <li class="{{request()->is('admin/executivemeeting/municipalCommittee*') ? 'active' : ''}}">
         <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">
