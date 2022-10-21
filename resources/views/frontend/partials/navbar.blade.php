@@ -17,7 +17,8 @@
                         परिचय
                     </a>
                     <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item " href="{{route('representative')}}">हाम्रो बारेमा</a></li>
+                        <li><a class="dropdown-item " href="{{route('about-us')}}">हाम्रो बारेमा</a></li>
+                        <li><a class="dropdown-item " href="{{route('representative')}}">जनप्रतिनिधि</a></li>
                         <li><a class="dropdown-item " href="{{route('employee')}}">कर्मचारीहरु</a></li>
 
                     </ul>
