@@ -5,7 +5,7 @@
         <div class="d-flex mt-5">
             <div class="breadcrumb d-flex">
                 <div class="breadcrumb-item">
-                    <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">परिचय</a>
+                    <a class="whitespace-nowrap text-primary-500" href="{{route('about-us')}}">परिचय</a>
                     <i class="fa fa-angle-double-right"></i>
                     <a class="ml-1 text-primary-500">जनप्रतिनिधिहरु</a>
                 </div>

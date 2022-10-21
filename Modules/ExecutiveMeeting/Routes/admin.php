@@ -8,8 +8,14 @@ use Modules\ExecutiveMeeting\Http\Controllers\Admin\MunicipalMeetingNoticeContro
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\WardCommitteeController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\WardMeetingDecisionController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\WardMeetingNoticeController;
+use Modules\ExecutiveMeeting\Http\Controllers\CalenderController;
+use Modules\ExecutiveMeeting\Http\Controllers\NoticeEventController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
+Route::get('calender', [CalenderController::class, 'index'])->name('calender.index');
+
+Route::resource('event', NoticeEventController::class);
+
 Route::resource('municipalCommittee', MunicipalCommitteeController::class);
 Route::resource('wardCommittee', WardCommitteeController::class);
 Route::prefix('municipal')->group(function () {

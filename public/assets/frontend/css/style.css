@@ -474,12 +474,12 @@ select{
     background-color: #fff;
 }
 .logo {
-    height: 80px;
-    width: 100px;
+    height: 100px;
+    width: 120px;
 }
 .logo-nep {
-    height: 90px;
-    width: 70px;
+    height: 100px;
+    width: 90px;
 }
 .textbox-01{
     color:white;
@@ -487,6 +487,10 @@ select{
     padding-top: 2px;
     padding-bottom: 4px;
     background-color: #0D6EFD;
+}
+.textbox-01:hover{
+    transition: .5s;
+    background-color: #0D96F8;
 }
 .textbox-01>h5{
     padding-top: .2rem;
@@ -791,6 +795,17 @@ a {
     color: var(--whiteColor);
     border-bottom: 3px solid var(--whiteColor);
 }
+.dropdown .dropdown-menu{
+    border: 1px solid #0D6EFD;
+    color: #0D6EFD;
+}
+.dropdown .dropdown-menu>li>a{
+    color: #0D6EFD !important;
+}
+.dropdown .dropdown-menu>li>a:hover{
+    background-color: #0D6EFD;
+    color: #FFFFFF !important;
+}
 .btn{
     padding: 0;
     margin: 0;
@@ -798,9 +813,6 @@ a {
 .btn-download{
     background-color: #FA9F10;
     color: white;
-}
-mat-icon{
-    height: 1.2rem;
 }
 .btn-download:hover{
     background-color: #FA9F10;
@@ -1012,6 +1024,11 @@ h6,
 .font-weight-bold {
     font-weight: 700;
     font-size: 2rem;
+}
+
+.org-img{
+    width: 300%;
+    height: 100%;
 }
 
 

@@ -5,9 +5,7 @@ namespace App\Providers;
 use App\Models\ExecutiveMeeting\MunicipalCommittee;
 use App\Models\ExecutiveMeeting\WardCommittee;
 use App\Models\OfficeHeader;
-use App\Models\Settings\OfficeSetting;
 use App\Models\Settings\Units\Unit;
-use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Observers\ExecutiveMeeting\MunicipalCommitteeObserver;
 use App\Observers\ExecutiveMeeting\WardCommitteeObserver;
@@ -15,6 +13,7 @@ use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
 use App\Observers\UnitObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -37,5 +36,7 @@ class AppServiceProvider extends ServiceProvider
         MunicipalDetail::observe(MunicipalDetailObserver::class);
 
         Blade::componentNamespace('App\\View\\Components\\Navigation', 'admin');
+
+        JsonResource::withoutWrapping();
     }
 }

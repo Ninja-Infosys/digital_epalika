@@ -89,6 +89,15 @@ class FrontController extends Controller
     {
         return view('frontend.static.employee.index');
     }
+    public function aboutUs()
+    {
+        return view('frontend.static.about_us');
+    }
+    public function org()
+    {
+        return view('frontend.static.org.org');
+    }
+
 
     public function executive()
     {
