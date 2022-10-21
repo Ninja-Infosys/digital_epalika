@@ -791,6 +791,17 @@ a {
     color: var(--whiteColor);
     border-bottom: 3px solid var(--whiteColor);
 }
+.dropdown .dropdown-menu{
+    border: 1px solid #0D6EFD;
+    color: #0D6EFD;
+}
+.dropdown .dropdown-menu>li>a{
+    color: #0D6EFD !important;
+}
+.dropdown .dropdown-menu>li>a:hover{
+    background-color: #0D6EFD;
+    color: #FFFFFF !important;
+}
 .btn{
     padding: 0;
     margin: 0;
@@ -798,9 +809,6 @@ a {
 .btn-download{
     background-color: #FA9F10;
     color: white;
-}
-mat-icon{
-    height: 1.2rem;
 }
 .btn-download:hover{
     background-color: #FA9F10;
