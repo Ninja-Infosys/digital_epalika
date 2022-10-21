@@ -4,12 +4,10 @@
     <div class="container">
         <div class="d-flex mt-5">
             <div class="breadcrumb d-flex">
-                <div>
-                    <a class="whitespace-nowrap text-primary-500" [routerLink]="'/e-map'">परिचय</a>
-                </div>
-                <div class="d-flex ml-1 whitespace-nowrap">
-                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'icon_solid:chevron-right'"></mat-icon>
-                    <a class="ml-1 text-primary-500">जनप्रतिनिधिहरु</a>
+                <div class="breadcrumb-item">
+                    <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
+                    <i class="fa fa-angle-double-right"></i>
+                    <a class="ml-1 text-primary-500">घर नक्सा</a>
                 </div>
             </div>
         </div>
@@ -21,11 +19,17 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success me-2" type="submit">Search</button>
                         <div class="form-group col-md-2 me-2">
-                            <select id="inputState" class="form-control">
-                                <option selected>All</option>
-                                <option>test</option>
-                                <option>test</option>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
                             </select>
+{{--                            <select id="inputState" class="form-control">--}}
+{{--                                <option selected>All</option>--}}
+{{--                                <option>test</option>--}}
+{{--                                <option>test</option>--}}
+{{--                            </select>--}}
                         </div>
                         <div class="form-group col-md-2">
                             <select id="inputState" class="form-control">
