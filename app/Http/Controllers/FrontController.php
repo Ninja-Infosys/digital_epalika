@@ -62,17 +62,17 @@ class FrontController extends Controller
 
     public function representative()
     {
-        return view('frontend.static.representive.representive');
+        return view('frontend.static.representative.index');
     }
 
     public function audio()
     {
-        return view('frontend.static.gallery.audio.index');
+        return view('frontend.static.gallery.audio.audio');
     }
 
     public function photo()
     {
-        return view('frontend.static.gallery.photo.index');
+        return view('frontend.static.gallery.photo.photo');
     }
 
     public function single_photo()
@@ -82,7 +82,7 @@ class FrontController extends Controller
 
     public function video()
     {
-        return view('frontend.static.gallery.video.index');
+        return view('frontend.static.gallery.video.video');
     }
 
     public function employee()
