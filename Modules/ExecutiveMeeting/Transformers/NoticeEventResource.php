@@ -17,8 +17,9 @@ class NoticeEventResource extends JsonResource
         return [
             'id'=>$this->id ?? '',
             'title'=>$this->title ?? '',
-            'start'=>$this->start->toDateString() ?? '',
-            'end'=>$this->end->toDateString() ?? '',
+            'className'=>$this->className ?? '',
+            'start'=>$this->start?->toDateString() ?? '',
+            'end'=>$this->end?->toDateString() ?? '',
         ];
     }
 }

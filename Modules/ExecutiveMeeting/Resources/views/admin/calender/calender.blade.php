@@ -29,11 +29,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3">
-                            <button class="btn btn-lg font-16 btn-primary w-100" id="btn-new-event"><i class="mdi mdi-plus-circle-outline"></i> Create New Event</button>
+                            <button class="btn btn-lg font-16 btn-primary w-100" id="btn-new-event"><i
+                                    class="mdi mdi-plus-circle-outline"></i> Create New Event
+                            </button>
 
                             <div id="external-events">
                                 <br>
-                                <p class="text-muted">तपाईंको घटना तान्नुहोस् र छोड्नुहोस् वा पात्रोमा क्लिक गर्नुहोस्</p>
+                                <p class="text-muted">तपाईंको घटना तान्नुहोस् र छोड्नुहोस् वा पात्रोमा क्लिक
+                                    गर्नुहोस्</p>
                                 <div class="external-event bg-success" data-class="bg-success">
                                     <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>
                                     New Theme Release
@@ -57,7 +60,8 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header py-3 px-4 border-bottom-0 d-block">
-                                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     <h5 class="modal-title" id="modal-title">Event</h5>
                                 </div>
                                 <div class="modal-body px-4 pb-4 pt-0">
@@ -67,43 +71,55 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Event Name</label>
                                                     <input class="form-control" placeholder="Insert Event Name"
-                                                           type="text" name="title" id="event-title" required />
-                                                    <div class="invalid-feedback">Please provide a valid event name</div>
+                                                           type="text" name="title" id="event-title" required/>
+                                                    <div class="d-none" id="error-title">Please provide a valid event name</div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="mb-3">
                                                     <label class="form-label">Category</label>
-                                                    <select class="form-select" name="className" id="event-class" required>
+                                                    <select class="form-select" name="className" id="event-class"
+                                                            required>
                                                         @foreach(\App\Enums\BackgroundEnum::cases() as $backgroundEnum)
-                                                        <option value="{{$backgroundEnum->value}}">{{$backgroundEnum->label()}}</option>
+                                                            <option
+                                                                value="{{$backgroundEnum->value}}">{{$backgroundEnum->label()}}</option>
                                                         @endforeach
                                                     </select>
-                                                    <div class="invalid-feedback">Please select a valid event category</div>
+                                                    <div class="d-none" id="error-class">Please select a valid event category
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">सुरू मिति</label>
-                                                        <input class="form-control" type="date" name="title" id="event-start-date" required />
+                                                        <input class="form-control" type="date" name="title"
+                                                               id="event-start-date" required/>
+                                                        <div class="d-none" id="error-date">Please select a valid event category
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="mb-3">
                                                         <label class="form-label">अन्त्य मिति</label>
-                                                        <input class="form-control" type="date" name="title" id="event-end-date" required />
+                                                        <input class="form-control" type="date" name="title"
+                                                               id="event-end-date" required/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col-md-6 col-4">
-                                                <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button>
+                                                <button type="button" class="btn btn-danger" id="btn-delete-event">
+                                                    Delete
+                                                </button>
                                             </div>
                                             <div class="col-md-6 col-8 text-end">
-                                                <button type="button" class="btn btn-light me-1" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                                <button type="button" class="btn btn-light me-1"
+                                                        data-bs-dismiss="modal">Close
+                                                </button>
+                                                <button type="submit" class="btn btn-success" id="btn-save-event">Save
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -137,6 +153,7 @@
                     }
                 });
                 const modal = new bootstrap.Modal(document.getElementById('event-modal'));
+                const form = new bootstrap.Modal(document.getElementById('form-event'));
                 const calendarEl = document.getElementById('calendar');
                 const calendar = new FullCalendar.Calendar(calendarEl, {
                     headerToolbar: {
@@ -149,14 +166,20 @@
                     droppable: true,
                     editable: true,
                     dayMaxEvents: true,
+                    businessHours: {
+                        // days of week. an array of zero-based day of week integers (0=Sunday)
+                        daysOfWeek: [ 0, 1, 2, 3, 4, 5 ],
+                        startTime: '10:00', // a start time (10am in this example)
+                        endTime: '17:00', // an end time (6pm in this example)
+                    },
                     events: "{{route('admin.executiveMeeting.event.index')}}",
 
                     dateClick: function (event) {
 
                     },
                     select: function (event) {
-                        document.getElementById('event-start-date').value =  event.startStr;
-                        document.getElementById('event-end-date').value =  event.endStr;
+                        document.getElementById('event-start-date').value = event.startStr;
+                        document.getElementById('event-end-date').value = event.endStr;
                         modal.show();
                     },
                     drop: function (event) {
@@ -164,38 +187,60 @@
                     },
                 });
 
-                $('#form-event').submit(()=>{
-                        const title = document.getElementById('event-title').value;
-                        const eventClass = document.getElementById('event-class').value;
+                $('#btn-save-event').click((e) => {
+                    e.preventDefault();
+                    validateForm();
+                    const title = document.getElementById('event-title').value;
+                    const eventClass = document.getElementById('event-class').value;
 
-                        const start = document.getElementById('event-start-date').value;
-                        const end = document.getElementById('event-end-date').value;
-                        console.log(title + eventClass + start + end);
-                        if (title) {
-                            console.log('ok');
-                            $.ajax({
-                                url: "{{route('admin.executiveMeeting.event.store')}}",
-                                data: {
-                                    title: title,
-                                    className: eventClass,
-                                    start: start,
-                                    end: end
-                                },
-                                type: "POST",
-                                success: function (data) {
-                                    console.log(data);
-                                    calendar.addEvent({
-                                        id: data.id,
-                                        title: data.title,
-                                        start: data.start,
-                                        end: data.end,
-                                        allDay: true
-                                    })
-                                }
-                            });
-                        }
+                    const start = document.getElementById('event-start-date').value;
+                    const end = document.getElementById('event-end-date').value;
+
+                    if (title) {
+                        console.log('ok');
+                        $.ajax({
+                            url: "{{route('admin.executiveMeeting.event.store')}}",
+                            data: {
+                                title: title,
+                                className: eventClass,
+                                start: start,
+                                end: end
+                            },
+                            type: "POST",
+                            success: function (data) {
+                                calendar.addEvent({
+                                    id: data.id,
+                                    title: data.title,
+                                    start: data.start,
+                                    end: data.end,
+                                    allDay: true
+                                })
+                                $('#form-event').trigger("reset");
+                                modal.hide();
+                            }
+                        });
+                    }
                 })
 
+                function validateForm(){
+                    const title = document.getElementById('event-title').value;
+                    const eventClass = document.getElementById('event-class').value;
+
+                    const start = document.getElementById('event-start-date').value;
+
+                    if (title==null || title===""){
+                        $("#error-title").addClass("invalid-feedback").removeClass("d-none");
+                        return false;
+                    }
+                    else if (eventClass==null || eventClass===""){
+                        $("#error-class").addClass("invalid-feedback").removeClass("d-none");
+                        return false;
+                    }
+                    else if (start==null || start===""){
+                        $("#error-date").addClass("invalid-feedback").removeClass("d-none");
+                        return false;
+                    }
+                }
                 calendar.render();
             });
         </script>
