@@ -289,7 +289,4 @@
         document.getElementById("chat-messsage-panel").style.display = "none";
     }
 </script>
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/footer.css')}}">
-@endpush
 
