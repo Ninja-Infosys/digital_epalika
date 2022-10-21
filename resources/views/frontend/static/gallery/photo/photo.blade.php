@@ -8,23 +8,23 @@
                 <div class="sidebar">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-12 mt-2 mt-sm-0 mt-lg-2">
-                            <a href="{{ url('static/gallery/audio') }}" routerlinkactive="active" href="#static/audio">
+                            <a href="{{ route('audio') }}" class="text-decoration-none">
                                 <div class="card-06">
                                     <h6 class="title">अडियो ग्यालेरी</h6>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4 col-lg-12 mt-2 mt-sm-0 mt-lg-2">
-                            <a href="{{ url('static/gallery/video') }}" routerlinkactive="active" href="#static/video">
+                            <a href="{{ route('video') }}" class="text-decoration-none">
                                 <div class="card-06">
                                     <h6 class="title">भिडियो ग्यालेरी</h6>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4 col-lg-12 mt-2 mt-sm-0 mt-lg-2">
-                            <a href="{{ url('static/gallery/photo') }}" routerlinkactive="active" href="#static/photo" class="active">
+                            <a href="{{ route('photo') }}" class="text-decoration-none">
                                 <div class="card-06">
-                                    <h6 class="title">फोटो ग्यालेरी</h6>
+                                    <h6 class="title ">फोटो ग्यालेरी</h6>
                                 </div>
                             </a>
                         </div>
@@ -35,21 +35,21 @@
                 <h4 class="title-dark mb-3">फोटो ग्यालेरी</h4>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
-                        <a class="album" href="{{ url('static/gallery/photo/single-photo') }}">
+                        <a class="album text-decoration-none" href="{{ route('single-photo') }}">
                             <img class="album-img" src={{asset('assets/frontend/image/submetro.jpg')}}>
                             <h6 class="album-title">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय तस्बिरहरु</h6>
                             <div class="d-flex"><span class="count">2 Items</span></div>
                         </a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
-                        <a class="album" href="{{ url('static/gallery/photo/single-photo') }}">
+                        <a class="album text-decoration-none" href="{{ route('single-photo') }}">
                             <img class="album-img" src={{asset('assets/frontend/image/submetro.jpg')}}>
                             <h6 class="album-title">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय तस्बिरहरु</h6>
                             <div class="d-flex"><span class="count">4 Items</span></div>
                         </a>
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
-                        <a class="album" href="{{ url('static/gallery/photo/single-photo') }}">
+                        <a class="album text-decoration-none" href="{{ route('single-photo') }}">
                             <img class="album-img" src={{asset('assets/frontend/image/submetro.jpg')}}>
                             <h6 class="album-title">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय तस्बिरहरु</h6>
                             <div class="d-flex"><span class="count">4 Items</span></div>
@@ -60,8 +60,4 @@
         </div>
     </div>
 </section>
-
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/gallery/photo/photo.css')}}">
-@endpush
 @endsection
