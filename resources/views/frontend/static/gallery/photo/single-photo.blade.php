@@ -8,21 +8,21 @@
                 <div class="sidebar">
                     <div class="row">
                         <div class="col-sm-6 col-md-4 col-lg-12 mt-2 mt-sm-0 mt-lg-2">
-                            <a routerlink="/static/audio" routerlinkactive="active" href="#static/audio">
+                            <a href="{{route('audio')}}" class="text-decoration-none">
                                 <div class="card-06">
                                     <h6 class="f1">अडियो ग्यालेरी</h6>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4 col-lg-12 mt-2 mt-sm-0 mt-lg-2">
-                            <a routerlink="/static/video" routerlinkactive="active" href="#static/video">
+                            <a  href="{{route('video')}}" class="text-decoration-none">
                                 <div class="card-06">
                                     <h6 class="f1">भिडियो ग्यालेरी</h6>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4 col-lg-12 mt-2 mt-sm-0 mt-lg-2">
-                            <a routerlink="/static/photo" routerlinkactive="active" href="#static/photo" class="active">
+                            <a  href="{{route('photo')}}" class="text-decoration-none">
                                 <div class="card-06">
                                     <h6 class="f1">फोटो ग्यालेरी</h6>
                                 </div>
@@ -35,19 +35,16 @@
                 <h4 class="title-dark mb-3 mt-3">नेपालगंज उप-महानगरपालिकाको संक्षिप्त परिचय तस्बिरहरु</h4>
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
-                        <img lazy="loaded" class="album-img pointer" alt="" src="assets/img/mou.jpg"></div>
+                        <img lazy="loaded" class="album-img pointer" alt="" src={{asset('assets/frontend/image/submetro.jpg')}}></div>
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
-                        <img lazy="loaded" class="album-img pointer" alt="" src="assets/img/mou.jpg"></div>
+                        <img lazy="loaded" class="album-img pointer" alt="" src={{asset('assets/frontend/image/submetro.jpg')}}></div>
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
-                        <img lazy="loaded" class="album-img pointer" alt="" src="assets/img/mou.jpg"></div>
+                        <img lazy="loaded" class="album-img pointer" alt="" src={{asset('assets/frontend/image/submetro.jpg')}}></div>
                     <div class="col-12 col-sm-6 col-md-4 mb-4">
-                        <img lazy="loaded" class="album-img pointer" alt="" src="assets/img/mou.jpg"></div>
+                        <img lazy="loaded" class="album-img pointer" alt="" src={{asset('assets/frontend/image/submetro.jpg')}}></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-@push('style')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/gallery/single-photo.css')}}">
-@endpush
 @endsection

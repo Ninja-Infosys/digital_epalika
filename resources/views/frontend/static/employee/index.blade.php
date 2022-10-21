@@ -64,7 +64,7 @@
                             <td>ninjainfosys@gmail.com</td>
                         </tr>
                         <tr>
-                            <img src="assets/img/flag.gif">
+                            <td> <img src="{{asset('assets/frontend/image/submetro.jpg')}}"></td>
                             <td>Ninja</td>
                             <td>CEO</td>
                             <td>उप-महानगरपालिका</td>
@@ -78,7 +78,4 @@
     </div>
 
 </section>
-@push('styles')
-    <link rel="stylesheet" href="{{asset('assets/frontend/css/static/employee.css')}}">
-@endpush
 @endsection
