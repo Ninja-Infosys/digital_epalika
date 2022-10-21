@@ -17,7 +17,8 @@
                         परिचय
                     </a>
                     <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item {{request()->routeIs('representative') ? 'active' : ''}}" href="{{route('representative')}}">हाम्रो बारेमा</a></li>
+                        <li><a class="dropdown-item {{request()->routeIs('about-us') ? 'active' : ''}}" href="{{route('about-us')}}">हाम्रो बारेमा</a></li>
+                        <li><a class="dropdown-item {{request()->routeIs('representative') ? 'active' : ''}}" href="{{route('representative')}}">जनप्रतिनिधिहरु</a></li>
                         <li><a class="dropdown-item {{request()->routeIs('employee') ? 'active' : ''}}" href="{{route('employee')}}">कर्मचारीहरु</a></li>
 
                     </ul>
