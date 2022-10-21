@@ -9371,3 +9371,8 @@ table[data-toggle=table] {
 .bg-main{
     background-color: var(--primary);
 }
+.terms-and-conditions{
+    height: 45vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

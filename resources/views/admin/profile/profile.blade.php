@@ -23,7 +23,7 @@
                         <img src="{{auth()->user()->profile_photo_url}}"
                              class="rounded-circle mb-1 avatar-lg img-thumbnail"
                              alt="profile-image">
-                        <h4 class="mb-1">{{auth()->user()->name}}</h4>
+                        <h4 class="mb-1">{{auth()->user()->name}} <i class="fa fa-check-circle text-success"></i></h4>
                         <div class="text-start mt-3">
                             <p class="text-muted mb-2 font-13"><strong>नाम :</strong>
                                 <span class="ms-2">{{auth()->user()->name}}</span>

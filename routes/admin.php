@@ -32,6 +32,7 @@ Route::patch('password/update', [ProfileController::class, 'updatePassword'])->n
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('tech-help', [TechController::class,'index'])->name('tech');
 Route::view('lock-screen', 'admin.lock_screen.lock_screen')->name('lock-screen');
+Route::view('terms', 'admin.terms_and_conditions.index')->name('terms');
 
 //notification
 Route::get('notification', [NotificationController::class, 'notification'])->name('notification');
