@@ -1,4 +1,4 @@
-<section class="employee pt-2">
+<section class="employee pt-2 pb-2">
     <div id="carouselExampleSlidesOnly" class="carousel slide height" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
