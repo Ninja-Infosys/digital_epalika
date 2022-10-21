@@ -17,7 +17,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    'website_type' => env('WEBSITE_TYPE', 'website'),
+    'website_type' => env('WEBSITE_TYPE', 'digital_board'),
 
     /*
     |--------------------------------------------------------------------------
