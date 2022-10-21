@@ -29,7 +29,7 @@ class NoticeEventController extends Controller
             'title' => $request->title,
             'start' => $request->start,
             'end' => $request->end,
-            'className' => 'bg-success'
+            'className' => $request->className,
         ]);
 
 
