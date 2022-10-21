@@ -2,13 +2,30 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                            <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
-                                    requestRoute="{{route('print.office-letter-print')}}">
-                                <i class="fa fa-print"></i> Print
-                            </button>
+
+                <div>
+                    @error('file')
+                    <div class="alert alert-danger">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+                <div class="card mb_30">
+                    <div class="card-header p-3">
+                        <div class="main-title d-flex justify-content-between">
+                            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE->label()}}</h3>
+                            <div class="d-flex justify-content-between">
+                                <x-application-component
+                                    :application-type="\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE"
+                                    url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
+
+                                <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
+                                        requestRoute="{{route('print.application-print')}}">
+                                    <i class="fa fa-print"></i> Print
+                                </button>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -289,7 +306,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
     @push('style')

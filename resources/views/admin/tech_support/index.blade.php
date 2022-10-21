@@ -38,7 +38,7 @@
                             <h4 id="why-we">४. हामी किन?</h4>
                         </div>
                         <div class="modules mt-3">
-                            <h4 id="our-system">हामीसंग भएका प्रणालीहरु</h4>
+                            <h4 id="our-system">५. हामीसंग भएका प्रणालीहरु</h4>
                             <div class="row mt-2">
                                 <div class="col-md-4 border" id="citizen">
                                     <a href="{{route('admin.digitalBoard.dashboard')}}">
@@ -187,6 +187,9 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="cautions mt-3">
+                            <h4 id="cautions">६. प्रणाली सञ्चालन गर्नु अघि विचार गर्नुपर्ने कुराहरू</h4>
                         </div>
                     </div>
                 </div>
