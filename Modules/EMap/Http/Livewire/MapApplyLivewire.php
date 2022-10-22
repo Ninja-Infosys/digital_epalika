@@ -71,7 +71,6 @@ class MapApplyLivewire extends Component
         'street_code_no' => null,
         'plot_no' => null,
         'unit_value' => 0,
-        'unit_id' => null,
         'percentage_of_area_covered_by_building' => null,
     ];
 

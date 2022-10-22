@@ -22,6 +22,7 @@
             font-family: Kalimati;
             font-weight: 500;
         }
+
         .underline-dotted {
             border-bottom: dotted 3px !important;
             padding: 0 15px;
@@ -30,6 +31,7 @@
         .custom-width {
             padding: 0 50px !important;
         }
+
         p {
             color: #000;
             line-height: 1.8;
@@ -37,6 +39,7 @@
             font-size: 14px;
             font-weight: 600;
         }
+
         .vertical {
             transform: rotate(90deg);
             transform-origin: left top 0;
@@ -44,16 +47,20 @@
             padding: 0 160px;
             color: #000;
         }
-        .letter{
+
+        .letter {
             padding-left: 50px;
 
         }
+
         .flex-wrap {
             flex-wrap: wrap !important;
         }
+
         .d-flex {
             display: flex !important;
         }
+
         @media print {
             .break-page {
                 page-break-after: always !important;
@@ -69,14 +76,14 @@
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-2">
             <a href="https://digital-palika.ninjainfosys.com.np" class="main-logo">
-                <img alt="nepal-government-logo" class="m-2" height="120" width="140"
+                <img alt="nepal-government-logo" class="m-2" style="height:90px; object-fit: contain;"
                      src="{{asset('images/np.png')}}">
             </a>
         </div>
         <div class="col-md-8 col-sm-8 col-xs-8">
             <div class="row mt-3">
                 <div class="text-center">
-                   <x-header-component/>
+                    <x-header-component/>
                 </div>
             </div>
         </div>

@@ -1,7 +1,10 @@
-<div class="text-center">
+<div class="text-center main-heading">
     @foreach($headers as $header)
         <span
-            style="color: {{$header->font_color??'red'}}; font-size: {{$header->font_size??1}}rem; font-weight: {{$header->font??'normal'}};">{{$header->title??''}}</span> @if(!$loop->last)
+            style="color: {{$header->font_color??'red'}}; font-size: {{$header->font_size??1}}rem; font-weight: {{$header->font??'normal'}};">
+            {{$header->title??''}}
+        </span>
+        @if(!$loop->last)
             <br>
         @endif
     @endforeach

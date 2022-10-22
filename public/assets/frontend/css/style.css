@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@400&display=swap');
-
 :root {
     --mainColor: #0047ab;
     --secondaryColor: #8AC5EF;
@@ -19,7 +18,9 @@ body {
     font-family: 'Mukta', sans-serif !important;
     font-size: var(--fontSize);
 }
-
+.main-heading{
+    font-family: 'Noto Sans Devanagari', sans-serif;
+}
 .carousel-item > img {
     object-fit: cover;
     height: 400px;
@@ -298,7 +299,7 @@ body {
 .newsbar-title {
     color: var(--whiteColor);
     background-color:#ce1126;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight:600;
     padding:.75rem 1rem .75rem .5rem;
     -webkit-clip-path:polygon(0 0,88% 0,100% 50%,88% 100%,0 100%);
@@ -318,7 +319,9 @@ body {
 }
 .marquee-list a {
     color:#fff!important;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-decoration: none;
 }
 .marquee-list a:hover {
     color:#ffff!important
@@ -494,12 +497,14 @@ select{
 }
 .textbox-01>h5{
     padding-top: .2rem;
-    font-size: 1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
     text-align: center;
 }
 .textbox-01>p{
     line-height: .5rem;
-    font-size: .9rem;
+    font-size: 1rem;
+    font-weight: 500;
     text-align: center;
 }
 .card-employee{
@@ -512,9 +517,10 @@ select{
     border-color: transparent;
 }
 .card-employee .card-employee-image>h5{
-    font-size: 1rem;
+    font-size: 1.4rem;
     text-align: center;
     padding-top: .2rem;
+    font-weight: 500;
 }
 .card-employee-image>img{
     object-fit: contain;

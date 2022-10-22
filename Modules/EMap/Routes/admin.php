@@ -44,6 +44,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('building-construction-completion-certificate','buildingConstructionCompletionCertificate')->name('building-construction-completion-certificate');
         Route::prefix('upload')->as('upload.')->group(function (){
             Route::post('notice','notice')->name('notice');
+            Route::post('registration','registration')->name('registration');
             Route::post('application','application')->name('application');
             Route::post('bond','bond')->name('bond');
             Route::post('report','report')->name('report');

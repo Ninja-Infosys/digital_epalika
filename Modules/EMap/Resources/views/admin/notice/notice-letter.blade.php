@@ -36,16 +36,16 @@
                                     <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
                                     <p class="">मिति: <span class="underline-dotted custom-width"></span></p>
                                 </div>
-                                <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width"></span></p>
+                                <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
                                 <div class="res mt-3">
-                                    <p>श्री वडा समितिको कार्यालय</p>
-                                    <p>{{config('applicationDetail.to_office.office_name')}}</p>
-                                    <p>वडा नं:<span class="underline-dotted custom-width"></span></p>
+                                    <p>श्री वडा समितिको कार्यालय <br>
+                                        {{config('applicationDetail.to_office.office_name')}} <br>
+                                        वडा नं:<span class="underline-dotted custom-width"></span></p>
                                 </div>
                                 <p class="text-center my-3"><b>बिषय: १५ दिने सूचना टास सम्बन्धमा
                                         ।</b></p>
                                 <p class="mb-3">
-                                    यस {{config('applicationDetail.to_office.office_name')}} वडा नं. <span
+                                    &emsp;&emsp;&emsp;यस {{config('applicationDetail.to_office.office_name')}} वडा नं. <span
                                         class="underline-dotted">{{$mapApply->landDetail->ward_no ?? ''}}</span> बस्ने
                                     श्री <span class="underline-dotted">{{$mapApply->houseOwner->name ?? ''}}</span> ले ऐ. वडा नं.<span
                                         class="underline-dotted">{{$mapApply->landDetail->ward_no ?? ''}}</span> साविक <span

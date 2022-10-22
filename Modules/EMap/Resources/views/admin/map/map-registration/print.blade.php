@@ -10,7 +10,7 @@
                         गरिएको नक्सा अपडेट गर्नुहोस्</a>
                     <x-application-component
                         :application-type="\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_FEES_AND_REGISTRATION"
-                        url="{{route('emap.admin.map.map-apply.notice.apply-map-notice',$mapApply)}}"/>
+                        url="{{route('emap.admin.map.map-apply.notice.upload.registration',$mapApply)}}"/>
                     <button class="btn btn-sm btn-success mx-2 printButton" printElementId='printData1'
                             requestRoute="{{route('print.application-print')}}" title="Print Application">
                         <i class="fa fa-print"></i>
