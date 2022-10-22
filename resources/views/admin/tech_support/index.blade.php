@@ -190,6 +190,11 @@
                         </div>
                         <div class="cautions mt-3">
                             <h4 id="cautions">६. प्रणाली सञ्चालन गर्नु अघि विचार गर्नुपर्ने कुराहरू</h4>
+                            <ul class="list-group mt-2">
+                                <li class="list-group-item">
+                                    Step 1: Google Drive
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

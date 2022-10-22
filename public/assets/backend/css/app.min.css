@@ -1406,8 +1406,8 @@ input.form-control[type=color], input.form-control[type=range] {
 }
 
 .password-eye:before {
-    font-family: feather !important;
-    content: "\e86a";
+    font-family: "Font Awesome 5 Free" !important;
+    content: "\f06e";
     font-style: normal;
     font-weight: 400;
     font-variant: normal;
@@ -1417,7 +1417,7 @@ input.form-control[type=color], input.form-control[type=range] {
 }
 
 .show-password .password-eye:before {
-    content: "\e86e"
+    content: "\f070"
 }
 
 .modal-title {

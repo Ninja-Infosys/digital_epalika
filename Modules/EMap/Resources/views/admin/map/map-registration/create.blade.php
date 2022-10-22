@@ -110,8 +110,10 @@
                                             </table>
                                             <div class="row">
                                                 <div class="col-md-12 my-2">
-                                                    <x-date-component
-                                                        :data="['name_ne'=>'nepali_date','label_ne'=>'मिति','name_en'=>'english_date','label_en'=>'Date']"/>
+                                                    <x-date-input-component
+                                                        nameNe="nepali_date" labelNe="मिति"
+                                                        nameEn="english_date" labelEn="Date"
+                                                    />
                                                 </div>
                                                 <div class="col-md-6 ">
                                                     <div class="row">

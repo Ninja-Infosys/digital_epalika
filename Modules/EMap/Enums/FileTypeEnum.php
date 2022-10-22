@@ -13,6 +13,7 @@ enum FileTypeEnum: string
     case CERTIFICATE = 'certificate';
     case HEIR = 'heir';
     case PERMISSION = 'permission';
+    case REGISTRATION = 'registration';
 
     public function label(): string
     {
@@ -31,6 +32,7 @@ enum FileTypeEnum: string
             self::CERTIFICATE => 'प्रमाणपत्र',
             self::HEIR => 'वारेसनामा',
             self::PERMISSION => 'मन्जुरीनामा',
+            self::REGISTRATION => 'दर्ता तथा दस्तुर',
 
         };
     }

@@ -74,22 +74,27 @@ overflow: hidden">
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
-                                    <div class="mb-2">
-                                        <label for="password" class="form-label">पासवर्ड
-                                            <span class="text-danger">*</span>
+                                    <div class="mb-2"><label for="password" class="form-label">
+                                            पासवर्ड <span class="text-danger">*</span>
                                         </label>
-                                        <input
-                                            name="password"
-                                            class="form-control @error('password') is-invalid @enderror"
-                                            type="password"
-                                            id="password"
-                                            placeholder="पासवर्ड"
-                                        />
-                                        @error('password')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
+                                        <div class="input-group input-group-merge">
+                                            <input
+                                                type="password"
+                                                id="password"
+                                                name="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                placeholder="पासवर्ड"
+                                            />
+                                            <div class="input-group-text"
+                                                data-password="false">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                            @error('password')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    <div class="mb-1">
+                                    <div class="mb-2">
                                         {!! htmlFormSnippet() !!}
                                         @error('g-recaptcha-response')
                                         <div class="invalid-feedback">{{$message}}</div>
@@ -107,7 +112,7 @@ overflow: hidden">
                                     </div>
                                 </form>
                                 <div class="col-12 text-lg-end mt-2">
-                                        <a href="auth-recoverpw.html" class="ms-1">Forgot password?</a>
+                                        <a href="#" class="ms-1">Forgot password?</a>
                                 </div>
                             </div>
                         </div>
@@ -134,5 +139,7 @@ overflow: hidden">
     </script>
     &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">NINJA INFOSYS</a>
 </footer>
+<script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
+<script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 </body>
 </html>

@@ -1,10 +1,8 @@
 <div class="navbar-custom">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
-            <li class="dropdown d-none d-lg-inline-block">
-                <h5 class="text-light fw-bold mt-4">
-                    आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}
-                </h5>
+            <li class="border rounded p-1 mt-3">
+                <h4 class="text-white">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-inline-block d-lg-none">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
@@ -15,16 +13,6 @@
                    aria-expanded="false">
                     <i class="fa fa-search noti-icon"></i>
                 </a>
-                <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-                    <form class="p-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Search ..."
-                            aria-label="Recipient's username"
-                        />
-                    </form>
-                </div>
             </li>
 
             <li class="dropdown d-none d-lg-inline-block">
