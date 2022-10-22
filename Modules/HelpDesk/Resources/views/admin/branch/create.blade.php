@@ -41,7 +41,7 @@
                                 <select
                                     name="branch_id"
                                     class="form-select @error('branch_id') is-invalid @enderror"
-                                    id="branch_id">
+                                    id="branch_id" data-toggle="select2" data-width="100%">
                                     <option value="">छान्नुहोस्</option>
                                     @foreach($mainBranches as $mainBranch)
                                         <option {{$mainBranch->id===old('branch_id') ? 'selected' : ''}}

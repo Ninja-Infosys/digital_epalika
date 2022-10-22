@@ -206,6 +206,13 @@ $(document).ready(function () {
                 content: "",
                 placement: "bottom",
                 zindex: 999
+            },
+            {
+                target: "step-1",
+                title: "प्रणाली सञ्चालन गर्नु अघि विचार गर्नुपर्ने कुराहरू",
+                content: "",
+                placement: "bottom",
+                zindex: 999
             }
         ],
         showPrevButton: !0

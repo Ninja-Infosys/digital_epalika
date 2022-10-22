@@ -109,6 +109,7 @@
 </script>
 
 <script src="{{asset('assets/backend/summernote/summernote-bs4.js')}}"></script>
+<script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('.summernote').summernote({
