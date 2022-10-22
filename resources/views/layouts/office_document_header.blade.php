@@ -36,8 +36,11 @@
             color: #000;
             line-height: 1.8;
             text-align: justify;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
+        }
+        .table{
+            font-size: 12px;
         }
 
         .vertical {
@@ -60,9 +63,8 @@
         .d-flex {
             display: flex !important;
         }
-        .table thead tr{
-            font-weight: 600;
-        }
+
+
 
         @media print {
             .break-page {
@@ -100,7 +102,6 @@
 </section>
 <script>
     window.onload = (event) => {
-        window.title = 'hfdjkhgjkd'
         window.print()
         window.close()
     };

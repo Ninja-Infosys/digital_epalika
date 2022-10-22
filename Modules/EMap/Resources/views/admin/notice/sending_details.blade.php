@@ -33,15 +33,14 @@
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
                                 <div class="top-line d-flex justify-content-between">
-                                    <p>पत्र सं.<span class="underline-dotted custom-width"></span></p>
+                                    <p>पत्र सं.<span class="underline-dotted custom-width"></span><br>
+                                        चलानी:<span class="underline-dotted custom-width"></span></p>
                                     <p>मिति: <span class="underline-dotted custom-width"></span></p>
                                 </div>
-                                <p>चलानी:<span class="underline-dotted custom-width"></span></p>
                                 <p>श्री राजस्व शाखा<br>
                                     {{config('applicationDetail.to_office.office_name')}} कार्यालय
                                 </p>
-                                <p class="text-center"><b>विषय :- विवरण पठाएको सम्बन्धमा |</b></p>
-
+                                <h5 class="text-center my-1"><b>विषय :- विवरण पठाएको सम्बन्धमा |</b></h5>
                                 <p>
                                     उपर्युक्त सम्बन्धमा {{config('applicationDetail.to_office.office_name')}} वडा
                                     नं.<span class="underline-dotted">{{$mapApply->houseOwner->ward_no??''}}</span> बस्ने श्री/श्रीमती<span
@@ -54,7 +53,7 @@
                                         class="underline-dotted custom-width"></span> सडकको नाम<span
                                         class="underline-dotted">{{$mapApply->landDetail->street_code_no??''}}</span> टोलको नाम<span
                                         class="underline-dotted custom-width">{{$mapApply->landDetail->tole??''}}</span></p>
-                                <table class="table table-bordered">
+                                <table class="table table-bordered my-2">
                                     <thead>
                                     <tr>
                                         <th scope="col">घर सि.नं.</th>
@@ -96,8 +95,8 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <p><b>जग्गाको विवरण :</b></p>
-                                <table class="table table-bordered ">
+                                <h5><b>जग्गाको विवरण :</b></h5>
+                                <table class="table table-bordered mb-1">
                                     <thead>
                                     <tr>
                                         <th scope="col">ठेली/मोठ नं.</th>
@@ -136,8 +135,8 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <p><b>विषय : नाम सरि प्रयोजन</b></p>
-                                <p>मिति<span class="underline-dotted custom-width"></span> को निर्णय बमोजिम
+                                <p ><b>विषय : नाम सरि प्रयोजन</b></p>
+                                <p class="mb-1">मिति<span class="underline-dotted custom-width"></span> को निर्णय बमोजिम
                                     श्री/श्रीमती/सुश्री<span class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span>
                                     को नामबाट श्री/श्रीमती/सुश्री<span class="underline-dotted">{{$mapApply->landOwner->name??''}}</span> को
                                     नाममा नामसारी भएको जानकारी गराईन्छ |</p>
@@ -181,13 +180,14 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <p>कित्ता काट भई आएको भएमा :</p>
-                                <p>साविक कि.नं.<span class="underline-dotted custom-width"></span>
+                                <p>कित्ता काट भई आएको भएमा :<br>
+                                साविक कि.नं.<span class="underline-dotted custom-width"></span>
                                     क्षेत्रफल<span class="underline-dotted custom-width"></span> हाल कायम कि.नं.<span
                                         class="underline-dotted custom-width"></span>क्षेत्रफल<span
                                         class="underline-dotted custom-width"></span></p>
-                                <div class="d-flex justify-content-end mt-5">
-                                    <span class="underline-dotted custom-width"></span>
+                                <div class="d-flex justify-content-end my-5">
+                                    <p class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                        नक्सापास शाखा </p>
                                 </div>
                             </div>
                         </div>

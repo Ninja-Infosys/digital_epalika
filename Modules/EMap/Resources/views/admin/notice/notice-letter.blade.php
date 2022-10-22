@@ -32,11 +32,12 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <div class="top-line d-flex justify-content-between mt-5">
-                                    <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
-                                    <p class="">मिति: <span class="underline-dotted custom-width"></span></p>
+                                <div class="top-line d-flex justify-content-between mt-3">
+                                    <p>पत्र सं: <span class="underline-dotted custom-width"></span>
+                                    <br>चलानी नं: <span class="underline-dotted custom-width"></span></p>
+                                    <p>मिति: <span class="underline-dotted custom-width"></span></p>
                                 </div>
-                                <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
+
                                 <div class="res mt-3">
                                     <p>श्री वडा समितिको कार्यालय <br>
                                         {{config('applicationDetail.to_office.office_name')}} <br>

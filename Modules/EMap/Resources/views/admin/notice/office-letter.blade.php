@@ -30,13 +30,12 @@
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
                         <div class="top-line d-flex justify-content-between mt-4">
-                            <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
+                            <p>पत्र सं: <span class="underline-dotted custom-width"></span><br>
+                                चलानी नं: <span class="underline-dotted custom-width">
+                            </span></p>
                             <p>मिति: <span class="underline-dotted custom-width">
                             </span></p>
                         </div>
-                        <p>चलानी नं: <span class="underline-dotted custom-width">
-
-                            </span></p>
                         <h4 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
                             </b></h4>
                         <p class="my-2">
@@ -81,6 +80,8 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+
+
                             </tr>
                             <tr>
                                 <th scope="row">दक्षिण</th>
@@ -88,7 +89,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
+
                             </tr>
                             <tr>
                                 <th scope="row">पुर्व</th>
@@ -96,6 +97,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+
                             </tr>
                             <tr>
                                 <th scope="row">पश्चिम</th>
@@ -103,6 +105,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+
                             </tr>
                             </tbody>
                         </table>
