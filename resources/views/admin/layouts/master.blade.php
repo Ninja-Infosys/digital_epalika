@@ -14,6 +14,7 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
     <link href="{{asset('assets/backend/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
     <!-- App css -->
     <link
@@ -84,6 +85,7 @@
 <script src="{{asset('assets/backend/libs/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('assets/backend/libs/chart.js/Chart.bundle.min.js')}}"></script>
 
+<script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
 <script>
     $('.show_confirm').click(function (event) {

@@ -43,8 +43,8 @@
                                         class="underline-dotted">{{$mapApply->landDetail->plot_no ?? ''}}</span> क्षेत्रफल <span
                                         class="underline-dotted"> {{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span> मा भवन निर्माण गर्ने घरधनी श्री <span
                                         class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले भवन निर्माणको इजाजत प्रयोजनको सिलसिलामा यस
-                                    {{config('applicationDetail.office_type')}} कार्यालयको च नं.<span class="underline-dotted"></span> मिति <span
-                                        class="underline-dotted"></span> गते प्रकाशित १५ दिने सन्धी सर्पंन बारेको सूचना
+                                    {{config('applicationDetail.office_type')}} कार्यालयको च नं.<span class="underline-dotted custom-width"></span> मिति <span
+                                        class="underline-dotted custom-width"></span> गते प्रकाशित १५ दिने सन्धी सर्पंन बारेको सूचना
                                     घरधनीले हामीहरुको रोहवरमा निर्माण स्थलको सबैले देख्ने ठाउँमा टास गरेको ठिक हो |
                                 </p>
                                 <h5>साक्षीहरु :-</h5>
