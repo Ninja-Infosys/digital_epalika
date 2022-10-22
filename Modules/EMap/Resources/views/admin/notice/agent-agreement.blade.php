@@ -34,7 +34,7 @@
                             <div class="font-black" id="printData">
                                 <h3 class="text-center mt-3"><b>सम्झौत पत्र</b></h3>
                                 <p class="text-center mt-2"><b>(घरधनी र निर्माणकर्मी/ठेकेदार)</b></p>
-                                <p class="my-2">
+                                <p>
                                     लिखितम् {{$mapApply->houseOwner->local_body??''}} वडा नं.<span
                                         class="underline-dotted custom-width">{{$mapApply->houseOwner->ward_no??''}}</span>बस्ने वर्ष<span
                                         class="underline-dotted custom-width"></span>को

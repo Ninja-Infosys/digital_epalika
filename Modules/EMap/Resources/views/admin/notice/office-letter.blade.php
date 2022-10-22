@@ -15,7 +15,6 @@
                     <x-application-component
                         :application-type="\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR"
                         url="{{route('emap.admin.map.map-apply.notice.upload.notice',$mapApply)}}"/>
-
                     <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                             requestRoute="{{route('print.office-letter-print')}}">
                         <i class="fa fa-print"></i> Print
@@ -35,14 +34,12 @@
                             <p>मिति: <span class="underline-dotted custom-width">
                             </span></p>
                         </div>
-
-
-                        <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width">
+                        <p>चलानी नं: <span class="underline-dotted custom-width">
 
                             </span></p>
-                        <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
-                            </b></h3>
-                        <p class="mb-3">
+                        <h4 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
+                            </b></h4>
+                        <p class="my-2">
                             यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
                                 {{$mapApply->landDetail->ward_no??''}}
                             </span> टोल <span class="underline-dotted custom-width"> {{$mapApply->landDetail->tole??''}}
@@ -61,31 +58,33 @@
                             सुचित गरिन्छ |
                             म्याद नाघी आएको उजुरी उपर कुनै किसिमको कारवाही नहुने व्यहोरा जानकारी गराईन्छ |
                         </p>
-                        <h4>१. निर्माणका निमित्त प्रस्तावित जग्गा चारकिल्ला विवरण:</h4>
+                        <h6><b>१. निर्माणका निमित्त प्रस्तावित जग्गा चारकिल्ला विवरण:</b></h6>
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th scope="col" rowspan="2">दिशा</th>
-                                <th scope="col" rowspan="2">आफ्नो जग्गा लम्बाई</th>
+                                <th scope="col" width="80" rowspan="2">दिशा</th>
+                                <th scope="col" width="150" rowspan="2" >आफ्नो जग्गा लम्बाई</th>
                                 <th colspan="3" class="text-center">संधियार</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr >
                                 <td></td>
                                 <td>(फिट/मिटर)</td>
-                                <td>कि.नं.</td>
-                                <td>लेन्डस्केपको प्रकार</td>
-                                <td>नाम</td>
+                                <td class="text-center" width="100">कि.नं.</td>
+                                <td class="text-center" width="200">लेन्डस्केपको प्रकार</td>
+                                <td class="text-center">नाम</td>
                             </tr>
                             <tr>
                                 <th scope="row">उतर</th>
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr>
-                                <th scope="row">द्क्षिण</th>
+                                <th scope="row">दक्षिण</th>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -95,9 +94,11 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th scope="row">पश्चिम</th>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

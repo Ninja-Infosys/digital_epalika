@@ -34,6 +34,8 @@
             color: #000;
             line-height: 1.8;
             text-align: justify;
+            font-size: 14px;
+            font-weight: 600;
         }
         .vertical {
             transform: rotate(90deg);
@@ -88,6 +90,7 @@
 </section>
 <script>
     window.onload = (event) => {
+        window.title = 'hfdjkhgjkd'
         window.print()
         window.close()
     };
