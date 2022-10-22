@@ -21,10 +21,10 @@ class StoreMeetingEventRequest extends FormRequest
             'end_date'=>['required'],
             'en_end_date'=>['nullable','date'],
             'event_for'=>['nullable'],
-            'url',
-            'recurrence_end_date',
-            'en_recurrence_end_date',
-            'description'
+            'url'=>['nullable'],
+            'recurrence_end_date'=>['nullable'],
+            'en_recurrence_end_date'=>['nullable','date'],
+            'description'=>['required']
         ];
     }
 }
