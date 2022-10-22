@@ -1055,9 +1055,9 @@
                                 wire:model="userDetail.gender"
                                 id="userDetail.gender">
                                 <option value="">--- लिङ्ग छान्नुहोस् ---</option>
-                                <option value="Male">पूरुष</option>
-                                <option value="Female">महिला</option>
-                                <option value="Other">अन्य</option>
+                                @foreach(\App\Enums\Gender::cases() as $gender)
+                                <option value="{{$gender->value}}">{{$gender->label()}}</option>
+                                @endforeach
                             </select>
                             @error('userDetail.gender')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -1072,8 +1072,9 @@
                                 wire:model="userDetail.marital_status"
                                 id="userDetail.marital_status">
                                 <option value="">--- वैवाहिक स्थिति ---</option>
-                                <option value="Married">Married</option>
-                                <option value="UnMarried">UnMarried</option>
+                                @foreach(\App\Enums\MaritalStatusEnum::cases() as $maritalStatus)
+                                <option value="{{$maritalStatus->value}}">{{$maritalStatus->label()}}</option>
+                                @endforeach
                             </select>
                             @error('userDetail.marital_status')
                             <div class="invalid-feedback">{{$message}}</div>
