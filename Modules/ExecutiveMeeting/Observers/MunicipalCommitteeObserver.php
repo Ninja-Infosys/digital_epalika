@@ -2,7 +2,7 @@
 
 namespace Modules\ExecutiveMeeting\Observers;
 
-use App\Models\ExecutiveMeeting\MunicipalCommittee;
+use Modules\ExecutiveMeeting\Entities\MunicipalCommittee;
 
 class MunicipalCommitteeObserver
 {

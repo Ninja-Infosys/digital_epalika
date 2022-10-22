@@ -2,12 +2,10 @@
 
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
-use App\Models\ExecutiveMeeting\MeetingDetail;
-use App\Models\ExecutiveMeeting\MunicipalMeetingNotice;
-use App\Models\ExecutiveMeeting\WardMeetingNotice;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\ExecutiveMeeting\Entities\MeetingDetail;
+use Modules\ExecutiveMeeting\Entities\MunicipalMeetingNotice;
+use Modules\ExecutiveMeeting\Entities\WardMeetingNotice;
 
 class DashboardController extends Controller
 {

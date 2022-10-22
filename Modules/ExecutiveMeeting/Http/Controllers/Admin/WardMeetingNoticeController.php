@@ -3,9 +3,9 @@
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ExecutiveMeeting\MeetingDetail;
-use App\Models\ExecutiveMeeting\WardMeetingNotice;
 use Illuminate\Support\Facades\Gate;
+use Modules\ExecutiveMeeting\Entities\MeetingDetail;
+use Modules\ExecutiveMeeting\Entities\WardMeetingNotice;
 use Modules\ExecutiveMeeting\Http\Requests\WardMeetingNotice\StoreNoticeRequest;
 use Modules\ExecutiveMeeting\Http\Requests\WardMeetingNotice\UpdateNoticeRequest;
 

@@ -3,10 +3,10 @@
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ExecutiveMeeting\MeetingDetail;
-use App\Models\ExecutiveMeeting\WardMeetingDecision;
-use App\Models\ExecutiveMeeting\WardMeetingNotice;
 use Illuminate\Support\Facades\Gate;
+use Modules\ExecutiveMeeting\Entities\MeetingDetail;
+use Modules\ExecutiveMeeting\Entities\WardMeetingDecision;
+use Modules\ExecutiveMeeting\Entities\WardMeetingNotice;
 use Modules\ExecutiveMeeting\Http\Requests\WardMeetingDecision\StoreDecisionRequest;
 use Modules\ExecutiveMeeting\Http\Requests\WardMeetingDecision\UpdateDecisionRequest;
 
