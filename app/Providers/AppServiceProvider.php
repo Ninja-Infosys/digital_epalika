@@ -2,13 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\ExecutiveMeeting\MunicipalCommittee;
-use App\Models\ExecutiveMeeting\WardCommittee;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Units\Unit;
 use App\Models\Website\MunicipalDetail;
-use App\Observers\ExecutiveMeeting\MunicipalCommitteeObserver;
-use App\Observers\ExecutiveMeeting\WardCommitteeObserver;
 use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
 use App\Observers\UnitObserver;
@@ -31,8 +27,6 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading(!$this->app->isProduction());
         OfficeHeader::observe(OfficeHeaderObserver::class);
         Unit::observe(UnitObserver::class);
-        MunicipalCommittee::observe(MunicipalCommitteeObserver::class);
-        WardCommittee::observe(WardCommitteeObserver::class);
         MunicipalDetail::observe(MunicipalDetailObserver::class);
 
         Blade::componentNamespace('App\\View\\Components\\Navigation', 'admin');

@@ -494,7 +494,7 @@ class MapApplyLivewire extends Component
         return view('emap::livewire.map-apply-livewire');
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'applyMap.construction_type.required' => 'निर्माण कार्यको किसिम अनिवार्य छ |',

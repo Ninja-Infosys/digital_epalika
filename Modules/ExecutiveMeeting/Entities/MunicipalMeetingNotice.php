@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\ExecutiveMeeting;
+namespace Modules\ExecutiveMeeting\Entities;
 
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WardMeetingNotice extends Model
+class MunicipalMeetingNotice extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes,EventObserveTrait;
 
     protected $dates = [
         'broadcast_date',
@@ -29,9 +29,9 @@ class WardMeetingNotice extends Model
         'description',
     ];
 
-    public function wardMeetingDecisions(): HasMany
+    public function municipalMeetingDecisions(): HasMany
     {
-        return $this->hasMany(WardMeetingDecision::class);
+        return $this->hasMany(MunicipalMeetingDecision::class);
     }
 
     public function meetingDetails(): MorphMany

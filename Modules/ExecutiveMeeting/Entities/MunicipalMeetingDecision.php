@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\ExecutiveMeeting;
+namespace Modules\ExecutiveMeeting\Entities;
 
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

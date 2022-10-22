@@ -121,12 +121,12 @@ class OrganizationRegisterLivewire extends Component
     protected array $secondStepValidations = [
         'userDetail.pan_no' => ['nullable'],
         'userDetail.nec_no' => ['nullable'],
-        'userDetail.nec_certificate' => ['nullable', 'image'],
+        'userDetail.nec_certificate' => ['nullable', 'image','max:300'],
         'userDetail.citizenship_no' => ['required'],
         'userDetail.citizenship_issued_district' => ['required', 'exists:districts,id,deleted_at,NULL'],
         'userDetail.citizenship_issued_date' => ['required'],
-        'userDetail.citizenship_front' => ['required', 'image'],
-        'userDetail.citizenship_back' => ['nullable', 'image'],
+        'userDetail.citizenship_front' => ['required', 'image','max:300'],
+        'userDetail.citizenship_back' => ['nullable', 'image','max:300'],
     ];
 
     protected array $thirdStepValidations = [
@@ -138,7 +138,7 @@ class OrganizationRegisterLivewire extends Component
         'userDetail.temporary_province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
         'userDetail.temporary_district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
         'userDetail.temporary_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
-        'userDetail.temporary_ward' => ['nullable'],
+        'userDetail.temporary_ward' => ['required'],
         'userDetail.temporary_tole' => ['nullable'],
     ];
 
@@ -157,10 +157,10 @@ class OrganizationRegisterLivewire extends Component
     ];
 
     protected array $fifthStepValidations = [
-        'organizationDetail.org_registration_document' => ['required', 'image'],
-        'organizationDetail.org_pan_document' => ['required', 'image'],
-        'organizationDetail.logo' => ['nullable', 'image'],
-        'taxClearance.document' => ['required'],
+        'organizationDetail.org_registration_document' => ['required', 'image','max:300'],
+        'organizationDetail.org_pan_document' => ['required', 'image','max:300'],
+        'organizationDetail.logo' => ['required', 'image','max:200'],
+        'taxClearance.document' => ['required','max:300'],
         'taxClearance.year' => ['required'],
     ];
 
@@ -324,5 +324,63 @@ class OrganizationRegisterLivewire extends Component
     {
         $this->reset('progressPercentage');
         $this->progressPercentage = $this->currentStep / ($this->is_organization === "1" ? 7 : 5) * 100;
+    }
+
+    public function messages(): array
+    {
+        return [
+            'is_organization.required'=>  'संस्था/व्यक्ति छानुहोस् ।',
+            'userDetail.name_ne.required'=> 'नेपालीमा नाम आवश्यक छ ।',
+            'userDetail.name_en.required'=>  'अंग्रेजीमा नाम आवश्यक छ ।',
+            'userDetail.email.required'=> 'इमेल आवश्यक छ ।',
+            'userDetail.email.email'=> 'इमेल मान्य छैन ।',
+            'userDetail.phone.required'=>  'सम्पर्क नं आवश्यक छ ।',
+            'userDetail.gender.required'=> 'लिङ्ग आवश्यक छ ।',
+            'userDetail.father_name.required'=>  'बुबाको नाम आवश्यक छ ।',
+            'userDetail.grandfather_name.required'=>  'हजुरबुबाको नाम आवश्यक छ ।',
+            'userDetail.citizenship_no.required' => 'नागरिकता नम्बर आवश्यक छ ।',
+            'userDetail.citizenship_issued_district.required' => ' नागरिकता जारी गरिएको जिल्ला आवश्यक छ ।',
+            'userDetail.citizenship_issued_date.required' => 'नागरिकता जारी गरिएको मिति आवश्यक छ ।',
+            'userDetail.citizenship_front.required' => 'नागरिकताको फोटो आवश्यक छ।',
+            'userDetail.citizenship_front.max' => 'कागजात अधिकतम साइज २०० केबी ।',
+            'userDetail.citizenship_front.image' => 'फाइल फोटोमा हुनुपर्छ ।',
+            'userDetail.permanent_province_id.required' => 'स्थायी प्रदेश आवश्यक छ ।',
+            'userDetail.permanent_district_id.required' => 'स्थायी जिल्ला आवश्यक छ ।',
+            'userDetail.permanent_local_body_id.required' => 'स्थायी पालिका आवश्यक छ ।',
+            'userDetail.permanent_ward.required' => 'स्थायी वडा नं आवश्यक छ ।',
+            'userDetail.temporary_province_id.required' => 'अस्थायी प्रदेश आवश्यक छ ।',
+            'userDetail.temporary_district_id.required' => 'अस्थायी जिल्ला आवश्यक छ ।',
+            'userDetail.temporary_local_body_id.required' => 'अस्थायी पालिका आवश्यक छ ।',
+            'userDetail.temporary_ward.required' => 'अस्थायी वडा नं आवश्यक छ ।',
+            'organizationDetail.org_name_ne.required' => 'संस्थाको नाम नेपालीमा आवश्यक छ । ',
+            'organizationDetail.org_name_en.required' => 'संस्थाको नाम अंग्रेजीमा आवश्यक छ । ',
+            'organizationDetail.org_email.required' => 'संस्थाको इमेल आवश्यक छ । ',
+            'organizationDetail.org_contact.required' => 'संस्थाको सम्पर्क नं आवश्यक छ । ',
+            'organizationDetail.org_registration_no.required' => 'संस्था दर्ता भएको नं आवश्यक छ ।',
+            'organizationDetail.org_pan_no.required' => 'संस्थाको पाना नं आवश्यक छ । ',
+            'organizationDetail.province_id.required' => 'प्रदेश आवश्यक छ ।',
+            'organizationDetail.district_id.required' => 'जिल्ला आवश्यक छ ।',
+            'organizationDetail.local_body_id.required' => 'पालिका आवश्यक छ ।',
+            'organizationDetail.ward.required' => 'वडा नं आवश्यक छ ।',
+            'organizationDetail.org_registration_document.required' => 'संस्था दर्ता भएको कागजात आवश्यक छ ।',
+            'organizationDetail.org_registration_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
+            'organizationDetail.org_registration_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',
+            'organizationDetail.org_pan_document.required' => 'संस्थाको पाना नं को कागजात आवश्यक छ ।',
+            'organizationDetail.org_pan_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
+            'organizationDetail.org_pan_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',
+            'organizationDetail.logo.required' => 'संस्थाको लोगो आवश्यक छ ।',
+            'organizationDetail.logo.max' => 'कागजात अधिकतम साइज २०० केबी ।',
+            'organizationDetail.logo.image' => 'फाइल फोटोमा हुनुपर्छ ।',
+            'taxClearance.document.required' => 'संस्थाले कर तिरेको कागजात आवश्यक छ ।',
+            'taxClearance.document.max' => 'कागजात अधिकतम साइज २०० केबी ।',
+            'taxClearance.year.required' => 'संस्थाले कर तिरेको वर्ष आवश्यक छ ।',
+            'user.name.required' => 'प्रयोगकर्ताको नाम आवश्यक छ ।',
+            'user.name.unique' => 'यो संगठन पहिल्यै भई सकेको छ ।',
+            'user.email.required' => 'इमेल आवश्यक छ ।',
+            'user.email.unique' => 'यो इमेल पहिल्यै दर्ता भई सकेको छ ।',
+            'user.email.email' => 'इमेल मान्य छैन ।',
+            'user.phone.required' => 'सम्पर्क नं आवश्यक छ ।',
+            'user.phone.unique' => 'यो सम्पर्क नं पहिल्यै प्रयोग भई सकेको छ ।',
+        ];
     }
 }

@@ -3,9 +3,9 @@
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ExecutiveMeeting\WardCommittee;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\Gate;
+use Modules\ExecutiveMeeting\Entities\WardCommittee;
 use Modules\ExecutiveMeeting\Http\Requests\WardCommittee\StoreWardCommitteeRequest;
 use Modules\ExecutiveMeeting\Http\Requests\WardCommittee\UpdateWardCommitteeRequest;
 

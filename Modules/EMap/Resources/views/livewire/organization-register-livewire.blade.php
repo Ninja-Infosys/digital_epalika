@@ -165,7 +165,7 @@
                         </div>
                         <div class="col-md-6 mb-1">
                             <label for="userDetail.citizenship_back" class="form-label">नागरिकता अपलोड गर्नुहोस्
-                                (पछाडि) <span class="text-danger">*</span></label>
+                                (पछाडि)</label>
                             <input type="file"
                                    class="form-control {{$userDetail['citizenship_back'] ? 'is-valid' : ''}}"
                                    id="userDetail.citizenship_back"
@@ -457,7 +457,7 @@
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="organizationDetail.org_registration_no" class="form-label">कम्पनी दर्ता
-                                न:</label>
+                                नं:</label>
                             <input
                                 name="org_registration_no"
                                 class="form-control @error('organizationDetail.org_registration_no') is-invalid @enderror"
@@ -942,7 +942,7 @@
                                             <div class="col-md-4">
                                                 @if ($userDetail['citizenship_back'])
                                                     <div class="card">
-                                                        <div class="card-header">नागरिकता अपलोड गर्नुहोस् (आगाडी)</div>
+                                                        <div class="card-header">नागरिकता अपलोड गर्नुहोस् (पछाडि)</div>
                                                         <div class="card-body">
                                                             <img
                                                                 src="{{ $userDetail['citizenship_back']->temporaryUrl() }}"
@@ -1055,9 +1055,9 @@
                                 wire:model="userDetail.gender"
                                 id="userDetail.gender">
                                 <option value="">--- लिङ्ग छान्नुहोस् ---</option>
-                                <option value="Male">पूरुष</option>
-                                <option value="Female">महिला</option>
-                                <option value="Other">अन्य</option>
+                                @foreach(\App\Enums\Gender::cases() as $gender)
+                                <option value="{{$gender->value}}">{{$gender->label()}}</option>
+                                @endforeach
                             </select>
                             @error('userDetail.gender')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -1065,15 +1065,15 @@
                         </div>
                         <div class="col-md-3 mb-1">
                             <label for="userDetail.marital_status" class="form-label">वैवाहिक स्थिति
-                                <span class="text-danger">*</span>
                             </label>
                             <select
                                 class="form-select @error('userDetail.marital_status') is-invalid @enderror"
                                 wire:model="userDetail.marital_status"
                                 id="userDetail.marital_status">
                                 <option value="">--- वैवाहिक स्थिति ---</option>
-                                <option value="Married">Married</option>
-                                <option value="UnMarried">UnMarried</option>
+                                @foreach(\App\Enums\MaritalStatusEnum::cases() as $maritalStatus)
+                                <option value="{{$maritalStatus->value}}">{{$maritalStatus->label()}}</option>
+                                @endforeach
                             </select>
                             @error('userDetail.marital_status')
                             <div class="invalid-feedback">{{$message}}</div>
