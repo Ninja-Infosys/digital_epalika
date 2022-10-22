@@ -3,7 +3,7 @@
 <section class="public-grievance">
     <div class="container">
         <div class="row">
-            <div class="row">
+            <div class="row pt-2">
                 <div class="breadcrumb d-flex">
                     <div class="breadcrumb-item">
                         <a class="whitespace-nowrap text-primary-500" href="{{route('grievanceHandling.grievance')}}">गुनासो</a>

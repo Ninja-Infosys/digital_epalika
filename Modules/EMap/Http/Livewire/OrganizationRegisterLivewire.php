@@ -121,12 +121,12 @@ class OrganizationRegisterLivewire extends Component
     protected array $secondStepValidations = [
         'userDetail.pan_no' => ['nullable'],
         'userDetail.nec_no' => ['nullable'],
-        'userDetail.nec_certificate' => ['nullable', 'image'],
+        'userDetail.nec_certificate' => ['nullable', 'image','max:300'],
         'userDetail.citizenship_no' => ['required'],
         'userDetail.citizenship_issued_district' => ['required', 'exists:districts,id,deleted_at,NULL'],
         'userDetail.citizenship_issued_date' => ['required'],
-        'userDetail.citizenship_front' => ['required', 'image'],
-        'userDetail.citizenship_back' => ['nullable', 'image'],
+        'userDetail.citizenship_front' => ['required', 'image','max:300'],
+        'userDetail.citizenship_back' => ['nullable', 'image','max:300'],
     ];
 
     protected array $thirdStepValidations = [
@@ -157,10 +157,10 @@ class OrganizationRegisterLivewire extends Component
     ];
 
     protected array $fifthStepValidations = [
-        'organizationDetail.org_registration_document' => ['required', 'image'],
-        'organizationDetail.org_pan_document' => ['required', 'image'],
-        'organizationDetail.logo' => ['nullable', 'image'],
-        'taxClearance.document' => ['required'],
+        'organizationDetail.org_registration_document' => ['required', 'image','max:300'],
+        'organizationDetail.org_pan_document' => ['required', 'image','max:300'],
+        'organizationDetail.logo' => ['nullable', 'image','max:200'],
+        'taxClearance.document' => ['required','max:300'],
         'taxClearance.year' => ['required'],
     ];
 
@@ -324,5 +324,13 @@ class OrganizationRegisterLivewire extends Component
     {
         $this->reset('progressPercentage');
         $this->progressPercentage = $this->currentStep / ($this->is_organization === "1" ? 7 : 5) * 100;
+    }
+
+    public function messages(): array
+    {
+        return [
+            'is_organization.required'=>'Please Select Organzation/Individual',
+            'userDetail.name_ne.required'=>''
+        ];
     }
 }
