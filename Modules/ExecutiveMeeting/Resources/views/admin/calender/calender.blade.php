@@ -180,7 +180,7 @@
                         startTime: '10:00', // a start time (10am in this example)
                         endTime: '17:00', // an end time (6pm in this example)
                     },
-                    events: "{{route('admin.executiveMeeting.event.index')}}",
+                    events: "{{route('admin.executiveMeeting.meetingCalendar')}}",
 
                     dateClick: function (event) {
 

@@ -9,7 +9,7 @@
                             @foreach($scrollNews as $news)
                                 <li>
                                     <a href="#">
-                                        {{Str::words($news->title,12)}}
+                                        {{Str::words($news->title,12)}} <small>({{$news->date}})</small>
                                         <span class="type">नयाँ</span>
                                     </a>
                                 </li>

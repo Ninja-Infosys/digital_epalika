@@ -60,7 +60,7 @@
                                     <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
                                     <p class="">मिति: <span class="underline-dotted custom-width"> </span></p>
                                 </div>
-                                <p class="mt-3">चलानी नं: <span class="underline-dotted custom-width"></span></p>
+                                <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width"></span></p>
                                 <h3 class="text-center my-4"><b>भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को
                                         लागि)</b></h3>
 
@@ -72,26 +72,26 @@
                                     नं.<span
                                         class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
                                     टोल<span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->tole??''}}</span>
+                                        class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span>
                                     मा रहेको साविक<span
                                         class="underline-dotted custom-width"></span>
                                     गा.वि.स.वडा नं.<span
                                         class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
                                     कित्ता नं.<span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span>
+                                        class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span>
                                     ज.वि.जम्मा<span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
+                                        class="underline-dotted">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
                                     को जग्गामा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४
                                     अनुसार
                                     नक्सा पास प्रक्रिया पुरा भैसकेको हुँदा यसको पछिल्लो पानामा उल्लेखित शर्तहरु र यसै
                                     साथ दिईएको स्वीकृत नक्सा बमोजिम
                                     <span
-                                        class="underline-dotted custom-width">{{$mapApply->construction_type->label()??''}}</span>
+                                        class="underline-dotted">{{$mapApply->construction_type->label()??''}}</span>
                                     निर्माण गर्न नक्सा पास भएकोले यो
-                                    प्रमाण-पत्र दिईएको छ |
+                                    प्रमाण-पत्र दिईएको छ ।
                                     'आधारभूत निर्माण मापदण्ड-२०७२' तथा 'राष्ट्रिय भवन निर्माण संहिता-२०६०' बमोजिम
-                                    निर्माण कार्य गर्नुहोला | स्वीकृत भएको नक्सा
-                                    बमोजिम निर्माण कार्य गरिसकेपछि "निर्माण सम्पन्न प्रमाणपत्र" अनिवार्य लिनुपर्नेछ |
+                                    निर्माण कार्य गर्नुहोला । स्वीकृत भएको नक्सा
+                                    बमोजिम निर्माण कार्य गरिसकेपछि "निर्माण सम्पन्न प्रमाणपत्र" अनिवार्य लिनुपर्नेछ ।
                                 </p>
                                 <h5>जग्गा बिकास तथा भवन मापदण्ड २०६४</h5>
                                 <table class="table table-bordered mt-2">
@@ -243,7 +243,7 @@
                                         स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </p>
                                 </div>
 
-
+                                <div class="break-page"></div>
                                 <h5>दोस्रो चरणका इजाजत नविकरण </h5>
                                 <table class="table table-bordered mt-2">
                                     <thead>
@@ -257,7 +257,7 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td></td>
+                                        <td>1</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -289,7 +289,7 @@
 
                                     </tbody>
                                 </table>
-
+                                <p>निर्माण कार्य गर्दा पालना गर्नु पर्ने शर्तहरु</p>
                             </div>
                         </div>
                     </div>

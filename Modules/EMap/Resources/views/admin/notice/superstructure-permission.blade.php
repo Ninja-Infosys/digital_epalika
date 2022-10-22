@@ -43,17 +43,17 @@
                                 <p>श्रीमान,</p>
                                 <p class="mb-3">
                                     जग्गा धनी श्री<span
-                                        class="underline-dotted custom-width">{{$mapApply->landOwner->name??''}}</span>
+                                        class="underline-dotted">{{$mapApply->landOwner->name??''}}</span>
                                     को नाममा दर्ता रहेको यस {{config('applicationDetail.office_type')}} वडा नं. <span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->ward_no??''}}</span>
+                                        class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
                                     टोल<span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->tole??''}}</span>
-                                    मा अवस्थित साविक <span class="underline-dotted custom-width">{{$mapApply->landDetail->former_ward_no ??''}}</span>कित्ता नं. <span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span> क्षेत्रफल <span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
-                                    मा भवन निर्माण गर्ने घरधनी श्री <span class="underline-dotted custom-width">{{$mapApply->houseOwner->name??''}}</span>
+                                        class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span>
+                                    मा अवस्थित साविक <span class="underline-dotted">{{$mapApply->landDetail->former_ward_no ??''}}</span>कित्ता नं. <span
+                                        class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span> क्षेत्रफल <span
+                                        class="underline-dotted">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
+                                    मा भवन निर्माण गर्ने घरधनी श्री <span class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span>
                                     दर्ता नं.
-                                    <span class="underline-dotted custom-width">{{$mapApply->registration_no}}</span> ले भवन निर्माण गर्न मिति<span
+                                    <span class="underline-dotted">{{$mapApply->registration_no}}</span> ले भवन निर्माण गर्न मिति<span
                                         class="underline-dotted custom-width"></span> मा प्लिन्थ ईजाजत लिनु भएको हुँदा
                                     सोहि सिलसिलामा यस {{config('applicationDetail.office_type')}} कार्यालयका प्रबिधिक श्री<span
                                         class="underline-dotted custom-width"></span> ले स्थलगत निरिक्षण गरी पेश गर्नु

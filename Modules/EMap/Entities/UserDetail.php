@@ -2,6 +2,8 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Enums\Gender;
+use App\Enums\MaritalStatusEnum;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -53,6 +55,11 @@ class UserDetail extends Model
         'organization_id',
     ];
 
+
+    protected $casts = [
+        'gender' => Gender::class,
+        'marital_status' => MaritalStatusEnum::class
+    ];
 
     public function getNecCertificateUrlAttribute(): string
     {
