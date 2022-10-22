@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\ExecutiveMeeting\Enums\RecurrenceTypeEnum;
 
 class MeetingEvent extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
+        'en_start_date',
+        'en_end_date',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -32,6 +35,10 @@ class MeetingEvent extends Model
         'recurrence_end_date',
         'en_recurrence_end_date',
         'description'
+    ];
+
+    protected $casts=[
+        'recurrence'=>RecurrenceTypeEnum::class
     ];
 
     public function meetingEvent(): BelongsTo
