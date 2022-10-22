@@ -40,9 +40,9 @@
                                 <label for="branch_id" class="form-label">मुख्य शाखा</label>
                                 <select
                                     name="branch_id"
-                                    class="form-select @error('branch_id') is-invalid @enderror"
+                                    class="form-control @error('branch_id') is-invalid @enderror"
                                     id="branch_id" data-toggle="select2" data-width="100%">
-                                    <option value="">छान्नुहोस्</option>
+                                    <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($mainBranches as $mainBranch)
                                         <option {{$mainBranch->id===old('branch_id') ? 'selected' : ''}}
                                                 value="{{$mainBranch->id}}">
