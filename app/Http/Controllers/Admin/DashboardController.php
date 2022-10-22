@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ExecutiveMeeting\MeetingDetail;
-use App\Models\ExecutiveMeeting\MunicipalMeetingNotice;
-use App\Models\ExecutiveMeeting\WardMeetingNotice;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\EMap\Entities\Organization;
+use Modules\ExecutiveMeeting\Entities\MeetingDetail;
+use Modules\ExecutiveMeeting\Entities\MunicipalMeetingNotice;
+use Modules\ExecutiveMeeting\Entities\WardMeetingNotice;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
-use Nwidart\Modules\Facades\Module;
 
 class DashboardController extends Controller
 {

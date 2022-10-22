@@ -2,7 +2,7 @@
 
 namespace Modules\ExecutiveMeeting\Observers;
 
-use App\Models\ExecutiveMeeting\WardCommittee;
+use Modules\ExecutiveMeeting\Entities\WardCommittee;
 
 class WardCommitteeObserver
 {

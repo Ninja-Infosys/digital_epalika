@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\ExecutiveMeeting;
+namespace Modules\ExecutiveMeeting\Entities;
 
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class MunicipalCommittee extends Model
+class WardCommittee extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes,EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -48,7 +48,7 @@ class MunicipalCommittee extends Model
     public function setPhotoAttribute($value)
     {
         if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('municipal_committee/' . Str::slug($this->attributes['name'], '_'), 'public');
+            $this->attributes['photo'] = $value->store('ward_committee/' . Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 
