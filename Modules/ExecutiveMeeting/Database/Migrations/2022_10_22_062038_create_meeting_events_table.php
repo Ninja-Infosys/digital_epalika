@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('meeting_events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('meeting_event_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('meeting_event_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('event_name');
             $table->string('recurrence');
             $table->string('start_date');
