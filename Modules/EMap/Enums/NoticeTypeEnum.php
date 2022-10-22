@@ -43,6 +43,7 @@ enum NoticeTypeEnum: string
     case REVISED_SUPERSTRUCTURE_PERMIT_ORDER = 'revised superstructure permit order';
     case HOUSE_MAP_NAMSARI = 'house map namsari';
 
+//    registration
     case REGARDING_FEES_AND_REGISTRATION = 'regarding fees and registration';
 
     //heir
@@ -100,7 +101,9 @@ enum NoticeTypeEnum: string
             //    certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',
-            self::BUILDING_COMPLETION_CERTIFICATE=>'भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र',
+            self::BUILDING_COMPLETION_CERTIFICATE => 'भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र',
+
+//            registration
             self::REGARDING_FEES_AND_REGISTRATION => 'दस्तुर तथा दर्ता सम्बन्धि',
 
             //heir
