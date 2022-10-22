@@ -243,6 +243,8 @@
                     <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">संघियारको नाममा जारी भएको सूचना</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">१५ दिने सूचना टाँस सम्बन्धमा</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.sendingDetails',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">{{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_SENDING_DETAILS->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.revisedSuperStructurePermit',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT->label()}}</a>
+
                 </div>
             </div>
         </div>
@@ -256,10 +258,11 @@
                 <div class="card-body">
                     <a href="{{route('emap.admin.map.map-apply.notice.level',$mapApply)}}"
                        class="btn btn-sm btn-outline-primary mb-1">प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.building-construction-completion-certificate',$mapApply)}}"
-                       class="btn btn-sm btn-outline-primary mb-1">{{\Modules\EMap\Enums\NoticeTypeEnum::BUILDING_COMPLETION_CERTIFICATE->label()}}</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.superstructure',$mapApply)}}"
                        class="btn btn-sm btn-outline-primary mb-1">{{\Modules\EMap\Enums\NoticeTypeEnum::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.building-construction-completion-certificate',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">{{\Modules\EMap\Enums\NoticeTypeEnum::BUILDING_COMPLETION_CERTIFICATE->label()}}</a>
+
                 </div>
             </div>
         </div>
@@ -317,7 +320,6 @@
                 <div class="card-body">
                     <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.superstructure-permission',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_SUPERSTRUCTURE_PERMIT->label()}}</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.revisedSuperStructurePermit',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT->label()}}</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.constructionCompletionCertificate',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE->label()}}</a>
                     <a href="{{route('emap.admin.map.map-apply.notice.revisedSuperStructurePermitOrder',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT_ORDER->label()}}</a>
                      <a href="{{route('emap.admin.map.map-apply.notice.houseMapNamsari',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::HOUSE_MAP_NAMSARI->label()}}</a>

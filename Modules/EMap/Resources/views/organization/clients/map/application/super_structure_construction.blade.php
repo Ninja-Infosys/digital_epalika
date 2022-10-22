@@ -21,7 +21,7 @@
 
                             <button id="printButton" title="Print Application" class="btn btn-sm btn-success mx-2"
                                     printElementId='printData'
-                                    requestRoute="{{route('print.office-letter-print')}}">
+                                    requestRoute="{{route('print.application-print')}}">
                                 <i class="fa fa-print"></i>
                             </button>
                             <a href="{{route('organization.admin.clients.client.show', $client)}}"
@@ -49,19 +49,19 @@
                             </p>
                             <p class="">मिति: <span class="underline-dotted custom-width"></span></p>
                         </div>
-                        <p class="text-center my-3"><b>बिषय: सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे
+                        <p class="text-center my-3"><b>बिषय:- सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे
                                 ।</b></p>
                         <p class="mb-3">
                             यस {{config('applicationDetail.office_type')}} मिति<span
                                 class="underline-dotted custom-width"></span> को प्लिन्थ
                             लेभलसम्मको निर्माण ईजाजत अनुसार मैले/हामीले साविक वडा नं. <span
-                                class="underline-dotted custom-width">{{$mapApply->landDetail->former_ward_no??''}}</span>
+                                class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
                             हाल {{config('applicationDetail.office_type')}} वडा नं.<span
-                                class="underline-dotted custom-width">{{$mapApply->landDetail->ward_no??''}}</span> किता
+                                class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span> किता
                             नं. <span
-                                class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span>
+                                class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span>
                             क्षेत्रफल<span
-                                class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
+                                class="underline-dotted">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
                             भित्र स्वीकृत नक्सा अनुसार नै
                             प्लिन्थ लेभलसम्मको निर्माण कार्य सम्पन्न गरी प्रविधिक सुपरिवेक्षकको प्रतिवेदन सहित
                             सुपरस्ट्रक्चरको निर्माण कार्यको नक्सा पास तथा निर्माण ईजाजत पाउँ भनी यो निवेदन पेश

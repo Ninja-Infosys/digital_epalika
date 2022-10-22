@@ -166,11 +166,11 @@
                                 </tr>
                                 <tr>
                                     <th>लिङ्ग</th>
-                                    <td>{{$organization->userDetail->gender ?? ''}}</td>
+                                    <td>{{ $organization->userDetail->gender->label() }}</td>
                                 </tr>
                                 <tr>
-                                    <th>इमेल</th>
-                                    <td>{{$organization->userDetail->marital_status ?? ''}}</td>
+                                    <th>बैबाहिक स्थिति</th>
+                                    <td>{{ $organization->userDetail->marital_status->label() }}</td>
                                 </tr>
                                 <tr>
                                     <th>बुवाको नाम</th>

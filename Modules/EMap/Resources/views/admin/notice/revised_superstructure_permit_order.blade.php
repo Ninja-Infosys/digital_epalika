@@ -42,12 +42,12 @@
                                 <p>श्रीमान,</p>
                                 <p class="mb-3">
                                     यस {{config('applicationDetail.office_type')}} वडा नं.<span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->ward_no??''}}</span> टोल<span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->tole??''}}</span> मा अवस्थित साविक<span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->former_ward_no??''}}</span>
-                                    कित्ता नं.<span class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span> क्षेत्रफल<span
-                                        class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span> मा भवन निर्माण गर्ने घरधनी
-                                    श्री<span class="underline-dotted custom-width">{{$mapApply->houseOwner->name??''}}</span> ले भवन निर्माण गर्न
+                                        class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span> टोल<span
+                                        class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span> मा अवस्थित साविक<span
+                                        class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
+                                    कित्ता नं.<span class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span> क्षेत्रफल<span
+                                        class="underline-dotted">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span> मा भवन निर्माण गर्ने घरधनी
+                                    श्री<span class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले भवन निर्माण गर्न
                                     मिति<span class="underline-dotted custom-width"></span> मा
                                     प्लिन्थ/सुपरस्ट्रक्चर ईजाजत लिनुभएकोमा सो घरमा थपकोठा/निर्माण परिवर्तन गरेकोमा
                                     संशोधित नक्सा बनाई संशोधित प्लिन्थ/सुपरस्ट्रक्चर 'स्थानीय सरकार संचालन ऐन, २०७४' को

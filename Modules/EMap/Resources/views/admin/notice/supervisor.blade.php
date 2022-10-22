@@ -112,6 +112,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
+                                        <div class="break-page"></div>
                                         <table class="table table-bordered">
                                             <thead>
                                             <tr>
@@ -181,6 +182,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
+                                        <div class="break-page"></div>
                                         <h4><b>गारोवाला घर</b></h4>
                                         <table class="table table-bordered">
                                             <thead>
@@ -258,6 +260,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
+                                        <div class="break-page"></div>
                                         <table class="table table-bordered mt-2">
                                             <thead>
                                             <tr>

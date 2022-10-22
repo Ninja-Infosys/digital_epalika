@@ -764,11 +764,11 @@
                                             </tr>
                                             <tr>
                                                 <th>लिङ्ग :</th>
-                                                <td>{{$userDetail['gender']}}</td>
+                                                <td>{{\App\Enums\Gender::tryFrom($userDetail['gender'])->label()}}</td>
                                             </tr>
                                             <tr>
                                                 <th>वैवाहिक स्थिति :</th>
-                                                <td>{{$userDetail['marital_status']}}</td>
+                                                <td>{{ !empty($userDetail['marital_status']) ? \App\Enums\MaritalStatusEnum::tryFrom($userDetail['marital_status'])->label() :''  }}</td>
                                             </tr>
                                             <tr>
                                                 <th>बुवाको नाम :</th>
@@ -803,7 +803,8 @@
                                                 <td>
                                                     {{$address['permanentLocalBody']->local_body??''}}
                                                     - {{$userDetail['permanent_ward']}}
-                                                    {{$address['permanentDistrict']->district??''}}
+                                                    {{$userDetail['permanent_tole']}},
+                                                    {{$address['permanentDistrict']->district??''}},
                                                     {{$address['permanentProvince']->province??''}}
                                                 </td>
                                             </tr>
@@ -812,7 +813,8 @@
                                                 <td>
                                                     {{$address['temporaryLocalBody']->local_body??''}}
                                                     - {{$userDetail['temporary_ward']}}
-                                                    {{$address['temporaryDistrict']->district??''}}
+                                                     {{$userDetail['temporary_tole']}},
+                                                    {{$address['temporaryDistrict']->district??''}},
                                                     {{$address['temporaryProvince']->province??''}}
                                                 </td>
                                             </tr>
@@ -848,8 +850,9 @@
                                                     <td>ठेगाना</td>
                                                     <td>
                                                         {{$address['organizationLocalBody']->local_body??''}}
-                                                        - {{$organizationDetail['ward']}}
-                                                        {{$address['organizationDistrict']->district??''}}
+                                                          {{$organizationDetail['ward']}}
+                                                        - {{$organizationDetail['tole']}},
+                                                        {{$address['organizationDistrict']->district??''}},
                                                         {{$address['organizationProvince']->province??''}}
                                                     </td>
                                                 </tr>
@@ -899,8 +902,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 @if ($taxClearance['document'])
-                                                    <div class="card">
-                                                        <div class="card-header">कर चुक्ता</div>
+                                                    <div class="card d-flex justify-content-between">
+                                                        <div class="card-header">कर चुक्ता  ({{$taxClearance['year']}})</div>
                                                         <div class="card-body">
                                                             <img src="{{ $taxClearance['document']->temporaryUrl() }}"
                                                                  height="250"
