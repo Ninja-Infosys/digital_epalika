@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\ExecutiveMeeting\MeetingDetail;
-use App\Models\ExecutiveMeeting\MunicipalMeetingDecision;
 use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
-use Illuminate\Http\Request;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
+use Modules\ExecutiveMeeting\Entities\MunicipalMeetingDecision;
 
 class FrontController extends Controller
 {

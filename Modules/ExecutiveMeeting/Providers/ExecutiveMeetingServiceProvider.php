@@ -2,8 +2,12 @@
 
 namespace Modules\ExecutiveMeeting\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\ServiceProvider;
+use Modules\ExecutiveMeeting\Entities\MunicipalCommittee;
+use Modules\ExecutiveMeeting\Entities\WardCommittee;
+use Modules\ExecutiveMeeting\Observers\MunicipalCommitteeObserver;
+use Modules\ExecutiveMeeting\Observers\WardCommitteeObserver;
 
 class ExecutiveMeetingServiceProvider extends ServiceProvider
 {
@@ -28,6 +32,9 @@ class ExecutiveMeetingServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        MunicipalCommittee::observe(MunicipalCommitteeObserver::class);
+        WardCommittee::observe(WardCommitteeObserver::class);
     }
 
     /**
