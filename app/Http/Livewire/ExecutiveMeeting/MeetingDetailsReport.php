@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\ExecutiveMeeting;
 
-use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\Settings\OfficeSetting;
 use Livewire\Component;
+use Modules\ExecutiveMeeting\Entities\MeetingDetail;
 
 class MeetingDetailsReport extends Component
 {

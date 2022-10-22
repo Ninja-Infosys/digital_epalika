@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\ExecutiveMeeting;
+namespace Modules\ExecutiveMeeting\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

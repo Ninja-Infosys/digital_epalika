@@ -39,16 +39,6 @@
                                 <strong>नक्सा दरखास्त फारम </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label for="map_request_form_format" class="form-label">आवेदन ढाँचा</label>
-                                    <textarea name="map_request_form_format" id="map_request_form_format" cols="30"
-                                              placeholder="आवेदन ढाँचा"
-                                              class="form-control ckEditor @error('map_request_form_format') is-invalid @enderror"
-                                              rows="5">{{old('map_request_form_format',$mapSetting->map_request_form_format ?? '')}}</textarea>
-                                    @error('map_request_form_format')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="land_measurement_id" class="form-label">भूमि मापन एकाइ</label>
                                     <select name="land_measurement_id" id="land_measurement_id"

@@ -51,7 +51,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <th>{{$branch->branch_name}}</th>
-                                    <td>{{$branch->branch->branch_name??''}}</td>
+                                    <td></td>
                                     <td>
                                         <a href="{{route('admin.helpDesk.branch.edit',$branch)}}"
                                            class="btn btn-xs btn-outline-primary">
