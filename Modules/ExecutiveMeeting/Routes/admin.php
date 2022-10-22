@@ -14,6 +14,7 @@ use Modules\ExecutiveMeeting\Http\Controllers\NoticeEventController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('calender', [CalenderController::class, 'index'])->name('calender.index');
+Route::get('meeting-calendar', [CalenderController::class, 'getData'])->name('meetingCalendar');
 
 Route::resource('event', NoticeEventController::class);
 Route::resource('meetingEvent', MeetingEventController::class);

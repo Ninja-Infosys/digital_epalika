@@ -18,6 +18,7 @@ enum NoticeTypeEnum: string
     case NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR = 'notice issued in the name of sanghiar';
     case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15 days notice adjourned';
     case REGARDING_SENDING_DETAILS = 'regarding sending details';
+    case REVISED_SUPERSTRUCTURE_PERMIT = 'revised superstructure permit';
     //bond enums
     case FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS = '15 day grace period for map pass';
     case SARZAMIN_MUCHULKA = 'sarzamin muchulka';
@@ -39,7 +40,6 @@ enum NoticeTypeEnum: string
     //order enums
     case GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE = 'granting permission for construction up to the plinth level of the house';
     case REGARDING_SUPERSTRUCTURE_PERMIT = 'regarding superstructure permit';
-    case REVISED_SUPERSTRUCTURE_PERMIT = 'revised superstructure permit';
     case REVISED_SUPERSTRUCTURE_PERMIT_ORDER = 'revised superstructure permit order';
     case HOUSE_MAP_NAMSARI = 'house map namsari';
 
@@ -76,6 +76,7 @@ enum NoticeTypeEnum: string
             self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => 'संघियारको नाममा जारी भएको सूचना',
             self::FIFTEEN_DAYS_NOTICE_ADJOURNED => '१५ दिने सूचना टाँस सम्बन्धमा',
             self::REGARDING_SENDING_DETAILS => 'विवरण पठाएको सम्बन्धमा',
+            self::REVISED_SUPERSTRUCTURE_PERMIT => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             //bond enums
             self::FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS => 'नक्सा पासको लागि १५ दिने टाँस मुचुल्का',
             self::SARZAMIN_MUCHULKA => 'सरजमिन मुचुल्का',
@@ -95,8 +96,7 @@ enum NoticeTypeEnum: string
             //order
             self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE => 'घरको प्लिन्थ लेभल सम्मको निर्माणका निमित्त इजाजत प्रदान गर्ने',
             self::REGARDING_SUPERSTRUCTURE_PERMIT => 'सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
-            self::REVISED_SUPERSTRUCTURE_PERMIT => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
-            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा (1)',
+            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             self::HOUSE_MAP_NAMSARI => 'घरनक्सा नामसारी',
             //    certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',

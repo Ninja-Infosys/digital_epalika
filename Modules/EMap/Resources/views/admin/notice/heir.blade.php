@@ -36,7 +36,7 @@
                                 <div class="d-flex flex-wrap">
                                     <div>
                                         <p class="vertical">
-                                            दरखास्त : <span class="underline-dotted custom-width"></span>
+                                            दस्तखत : <span class="underline-dotted custom-width"></span>
                                         </p>
                                     </div>
                                     <div>
@@ -83,7 +83,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-between mt-4">
-                                    <p class="my-5">दरखास्त :<span class="underline-dotted custom-width"></span></p>
+                                    <p class="my-5">दस्तखत :<span class="underline-dotted custom-width"></span></p>
                                     <div class="d-flex justify-content-end">
                                         <div class="row p-4">
                                             <div class="col-sm-6">
@@ -106,9 +106,9 @@
                                     </div>
                                 </div>
                                 <h5 class="text-decoration-underline">सक्षीहरु</h5>
-                                <p>१. श्री<span class="underline-dotted custom-width"></span> दरखास्त<span
+                                <p>१. श्री<span class="underline-dotted custom-width"></span> दस्तखत:<span
                                         class="underline-dotted custom-width"></span></p>
-                                <p class="mt-2">२. श्री<span class="underline-dotted custom-width"></span> दरखास्त<span
+                                <p class="mt-2">२. श्री<span class="underline-dotted custom-width"></span> दस्तखत:<span
                                         class="underline-dotted custom-width"></span></p>
                             </div>
                         </div>
