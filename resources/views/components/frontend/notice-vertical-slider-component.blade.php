@@ -1,5 +1,5 @@
 <div class="mt-2">
-    <div class="vertical-scroll">
+    <div class="vertical-scroll shadow">
         <div class="move">
             @foreach($notices as $notice)
                 <h6 class="bg-info p-2 text-white mt-2">{{$notice->title}} [{{$notice->date}}]</h6>
