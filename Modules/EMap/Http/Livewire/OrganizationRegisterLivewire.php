@@ -325,4 +325,12 @@ class OrganizationRegisterLivewire extends Component
         $this->reset('progressPercentage');
         $this->progressPercentage = $this->currentStep / ($this->is_organization === "1" ? 7 : 5) * 100;
     }
+
+    public function messages(): array
+    {
+        return [
+            'is_organization.required'=>'Please Select Organzation/Individual',
+            'userDetail.name_ne.required'=>''
+        ];
+    }
 }

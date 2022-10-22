@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers\ExecutiveMeeting;
+namespace Modules\ExecutiveMeeting\Observers;
 
 use App\Models\ExecutiveMeeting\WardCommittee;
 
