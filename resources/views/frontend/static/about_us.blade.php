@@ -32,7 +32,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-md-4 col-lg-12 mt-2 mt-sm-0 mt-lg-2">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{route('organization')}}" class="text-decoration-none">
                                 <div class="card-06">
                                     <h6 class="title ">संगठन</h6>
                                 </div>

@@ -31,6 +31,10 @@
             </div>
         </div>
 
+        <div class="col-md-2 col-sm-2 col-xs-2">
+            {!! QrCode::generate($proprietorDetail->businessDetail->submission_no??''); !!}
+        </div>
+
         <div class="col-lg-12">
             <div class=" row font-black">
                 <div class="col-md-12 d-flex justify-content-between">

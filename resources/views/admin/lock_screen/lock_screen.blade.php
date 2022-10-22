@@ -32,21 +32,21 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6 col-xl-4">
-                <div class="card bg-pattern">
+                <div class="card">
 
                     <div class="card-body p-4">
 
-                        <div class="text-center mb-4">
+                        <div class="text-center mb-4 bg-main p-2">
                             <div class="auth-logo">
-                                <a href="#" class="logo logo-dark text-center">
+                                <a href="{{route('login')}}" class="logo logo-dark text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="22">
+                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="42">
                                             </span>
                                 </a>
 
-                                <a href="#" class="logo logo-light text-center">
+                                <a href="{{route('login')}}" class="logo logo-light text-center">
                                             <span class="logo-lg">
-                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="22">
+                                                <img src="{{asset('assets/backend/images/logo.png')}}" alt="" height="42">
                                             </span>
                                 </a>
                             </div>
@@ -58,7 +58,7 @@
                         </div>
 
 
-                        <form action="{{ route('login.unlock') }}" method="post">
+                        <form action="{{ route('login.unlock') }}" method="post" autocomplete="off">
 @csrf
                             <div class="mb-3 mt-3">
                                 <label for="password" class="form-label">प्रयोगकर्ता पासवर्ड <span class="text-danger">*</span></label>

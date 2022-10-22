@@ -34,18 +34,18 @@
                             <div class="card mb_30">
                                 <div class="card-body p-3">
                                     <div class="font-black" id="printData">
-                                        <h5 class="text-center">सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन</h5>
+                                        <h5 class="text-center mb-2">सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन</h5>
                                         <table class="table table-bordered">
                                             <thead>
                                             <tr>
                                                 <th scope="col">घरधनीको नाम/ठेगाना </th>
-                                                <td></td>
+                                                <td>{{$mapApply->houseOwner->name??''}} {{$mapApply->houseOwner->address??''}}</td>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <th scope="col">नक्सा दर्ता नं.</th>
-                                                <td></td>
+                                                <td>{{$mapApply->registration_no}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="col">कन्सल्टेन्सीको नाम</th>
@@ -53,7 +53,7 @@
                                             </tr>
                                             <tr>
                                                 <th scope="col">निर्माणकर्मी/ठेकेदार</th>
-                                                <td></td>
+                                                <td>{{$mapApply->designerDetails->first()->name??''}}</td>
                                             </tr>
                                             </tbody>
                                         </table>

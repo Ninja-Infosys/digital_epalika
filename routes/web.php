@@ -30,6 +30,7 @@ Route::get('single-photo', [FrontController::class, 'single_photo'])->name('sing
 Route::get('video', [FrontController::class, 'video'])->name('video');
 Route::get('employee', [FrontController::class, 'employee'])->name('employee');
 Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
+Route::get('organization', [FrontController::class, 'org'])->name('organization');
 Route::get('executive', [FrontController::class, 'executive'])->name('executive');
 Route::get('single-executive', [FrontController::class, 'single_executive'])->name('single-executive');
 Route::get('service-details', [FrontController::class, 'service_details'])->name('service-details');

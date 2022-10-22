@@ -140,6 +140,9 @@ class MapController extends Controller
 
     public function superVisor(MapApply $mapApply): Factory|View|Application
     {
+        $mapApply->load(['landDetail', 'houseOwner', 'designerDetails' => function ($query) {
+            $query->where('post', PostsEnum::CONTRACTOR->value)->first();
+        }]);
         return view('emap::admin.notice.supervisor', compact('mapApply'));
     }
 
@@ -188,7 +191,7 @@ class MapController extends Controller
 
     public function superstructure(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load(['landDetail', 'landOwner', 'houseOwner']);
+        $mapApply->load(['landDetail', 'landOwner', 'houseOwner:id,name']);
         return view('emap::admin.notice.superstructure', compact('mapApply'));
     }
 
@@ -218,6 +221,28 @@ class MapController extends Controller
 
         return \view('emap::admin.notice.house_map_namsari', compact('mapApply'));
     }
+
+    public function permissionView(MapApply $mapApply): View|Factory|Application
+    {
+        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit');
+
+        return \view('emap::admin.notice.permission', compact('mapApply'));
+    }
+
+    public function heirView(MapApply $mapApply): View|Factory|Application
+    {
+        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit');
+
+        return \view('emap::admin.notice.heir', compact('mapApply'));
+    }
+
+    public function buildingConstructionCompletionCertificate(MapApply $mapApply): View|Factory|Application
+    {
+        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit','structureType');
+
+        return \view('emap::admin.notice.building_construction_completion_certificate', compact('mapApply'));
+    }
+
 
     public function notice(Request $request, MapApply $mapApply): RedirectResponse
     {
@@ -302,6 +327,36 @@ class MapController extends Controller
         ]);
         $mapApplyData = $mapApply->applyMapNotices()->create($data + [
                 'type' => FileTypeEnum::ORDER->value
+            ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+
+    public function heir(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::HEIR->value
+            ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+
+    public function permission(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::PERMISSION->value
             ]);
 
         Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));

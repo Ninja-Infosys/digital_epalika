@@ -2,13 +2,29 @@
     "use strict";
 
     function e() {
-        this.$body = l("body"), this.$modal = l("#event-modal"), this.$calendar = l("#calendar"), this.$formEvent = l("#form-event"), this.$btnNewEvent = l("#btn-new-event"), this.$btnDeleteEvent = l("#btn-delete-event"), this.$btnSaveEvent = l("#btn-save-event"), this.$modalTitle = l("#modal-title"), this.$calendarObj = null, this.$selectedEvent = null, this.$newEventData = null
+            this.$body = l("body"),
+            this.$modal = l("#event-modal"),
+            this.$calendar = l("#calendar"),
+            this.$formEvent = l("#form-event"),
+            this.$btnNewEvent = l("#btn-new-event"),
+                this.$btnDeleteEvent = l("#btn-delete-event"),
+            this.$btnSaveEvent = l("#btn-save-event"),
+                this.$modalTitle = l("#modal-title"),
+            this.$calendarObj = null, this.$selectedEvent = null,
+            this.$newEventData = null
     }
 
     e.prototype.onEventClick = function (e) {
         this.$formEvent[0].reset(), this.$formEvent.removeClass("was-validated"), this.$newEventData = null, this.$btnDeleteEvent.show(), this.$modalTitle.text("Edit Event"), this.$modal.show(), this.$selectedEvent = e.event, l("#event-title").val(this.$selectedEvent.title), l("#event-category").val(this.$selectedEvent.classNames[0])
     }, e.prototype.onSelect = function (e) {
-        this.$formEvent[0].reset(), this.$formEvent.removeClass("was-validated"), this.$selectedEvent = null, this.$newEventData = e, this.$btnDeleteEvent.hide(), this.$modalTitle.text("Add New Event"), this.$modal.show(), this.$calendarObj.unselect()
+        this.$formEvent[0].reset(),
+            this.$formEvent.removeClass("was-validated"),
+            this.$selectedEvent = null,
+            this.$newEventData = e,
+            this.$btnDeleteEvent.hide(),
+            this.$modalTitle.text("Add New Event"),
+            this.$modal.show(),
+            this.$calendarObj.unselect()
     }, e.prototype.init = function () {
         this.$modal = new bootstrap.Modal(document.getElementById("event-modal"), {keyboard: !1});
         var e = new Date(l.now());

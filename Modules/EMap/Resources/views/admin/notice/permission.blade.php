@@ -2,14 +2,28 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
-                                requestRoute="{{route('print.office-letter-print')}}">
-                            <i class="fa fa-print"></i> Print
-                        </button>
+            <div>
+                @error('file')
+                <div class="alert alert-danger">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+            <div class="card mb_30">
+                <div class="card-header p-3">
+                    <div class="main-title d-flex justify-content-between">
+                        <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION->label()}}</h3>
+                        <div class="d-flex justify-content-between">
+                            <x-application-component
+                                :application-type="\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION"
+                                url="{{route('emap.admin.map.map-apply.notice.upload.permission',$mapApply)}}"/>
 
+                            <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
+                                    requestRoute="{{route('print.application-print')}}">
+                                <i class="fa fa-print"></i> Print
+                            </button>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,7 +46,7 @@
                                         हाल<span class="underline-dotted custom-width"></span> उ.न.पा. वडा नं.<span class="underline-dotted custom-width"></span>
                                         स्थित कि.नं.<span class="underline-dotted custom-width"></span> क्षेत्रफल<span class="underline-dotted custom-width"></span>
                                         भएको जग्गामा घरटहरा, पर्वत, बाटो बनाउनको लागि<span class="underline-dotted custom-width"></span> उ.न.पा. कार्यालयमा नक्सा संहितको दरखास्त
-                                         दिई नक्सा पास तथा निर्माण इजाजत लिनका लागि<span class="underline-dotted custom-width"></span> उ.न.पा. वडा नं.<span class="underline-dotted custom-width"></span>
+                                        दिई नक्सा पास तथा निर्माण इजाजत लिनका लागि<span class="underline-dotted custom-width"></span> उ.न.पा. वडा नं.<span class="underline-dotted custom-width"></span>
                                         बस्ने वर्ष<span class="underline-dotted custom-width"></span> को श्री<span class="underline-dotted custom-width"></span> ले मन्जुरीनामा लेखिदिनु भनी मलाई भन्दा
                                         मेरो चित्त बुझ्यो | उक्त जग्गामा घर, टहरा, पर्खाल, बाटो निर्माण गरेमा मेरो मन्जुरी छ | पछि उक्त मेरो नाउँको जग्गामा बनाउन पाउने होइन भनी कुनै कुराको उजुरी गर्ने छैन | गरे
                                         यसै कागजबाट बदर गरिदिनु भनी मेरो मनोमान खुशीराजीसँग<span class="underline-dotted custom-width"></span> बनाउन मन्जुरीनामाको कागज लेखिदिएँ साक्षी किनारको सदर |

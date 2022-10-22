@@ -65,20 +65,29 @@
                                         लागि)</b></h3>
 
                                 <p class="mb-3">
-                                    श्री/श्रीमती<span class="underline-dotted custom-width"></span> ले जग्गा धनी
-                                    श्री<span class="underline-dotted custom-width"></span>
-                                    को नाममा दर्ता रहेको यस ने.उ.म.न.पा.वडा नं.<span
+                                    श्री/श्रीमती<span
+                                        class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले जग्गा धनी
+                                    श्री<span class="underline-dotted">{{$mapApply->landOwner->name??''}}</span>
+                                    को नाममा दर्ता रहेको यस {{config('applicationDetail.office_short_name')}} वडा
+                                    नं.<span
+                                        class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
+                                    टोल<span
+                                        class="underline-dotted custom-width">{{$mapApply->landDetail->tole??''}}</span>
+                                    मा रहेको साविक<span
                                         class="underline-dotted custom-width"></span>
-                                    टोल<span class="underline-dotted custom-width"></span> मा रहेको साविक<span
-                                        class="underline-dotted custom-width"></span>
-                                    गा.वि.स.वडा नं.<span class="underline-dotted custom-width"></span> कित्ता नं.<span
-                                        class="underline-dotted custom-width"></span>
-                                    ज.वि.जम्मा<span class="underline-dotted custom-width"></span>
+                                    गा.वि.स.वडा नं.<span
+                                        class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
+                                    कित्ता नं.<span
+                                        class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span>
+                                    ज.वि.जम्मा<span
+                                        class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
                                     को जग्गामा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४
                                     अनुसार
                                     नक्सा पास प्रक्रिया पुरा भैसकेको हुँदा यसको पछिल्लो पानामा उल्लेखित शर्तहरु र यसै
                                     साथ दिईएको स्वीकृत नक्सा बमोजिम
-                                    <span class="underline-dotted custom-width"></span> निर्माण गर्न नक्सा पास भएकोले यो
+                                    <span
+                                        class="underline-dotted custom-width">{{$mapApply->construction_type->label()??''}}</span>
+                                    निर्माण गर्न नक्सा पास भएकोले यो
                                     प्रमाण-पत्र दिईएको छ |
                                     'आधारभूत निर्माण मापदण्ड-२०७२' तथा 'राष्ट्रिय भवन निर्माण संहिता-२०६०' बमोजिम
                                     निर्माण कार्य गर्नुहोला | स्वीकृत भएको नक्सा
@@ -222,7 +231,8 @@
                                     </tbody>
                                 </table>
                                 <p>नक्सा स्वीकृत अगावै निर्माण कार्य भएको भए सो को विवरण :</p>
-                                <p>(स्वीकृत नक्सा अनुसार हाल<span class="underline-dotted custom-width"></span>तल्ला
+                                <p>(स्वीकृत नक्सा अनुसार हाल<span
+                                        class="underline-dotted">{{$mapApply->current_storey}}</span>तल्ला
                                     निर्माण गरिनेछ | </p>
                                 <div class="d-flex justify-content-around mt-4">
                                     <p class="text-center"><span class="underline-dotted custom-width"></span><br>
@@ -232,75 +242,60 @@
                                     <p class="text-center"><span class="underline-dotted custom-width"></span><br>
                                         स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </p>
                                 </div>
+
+
+                                <h5>दोस्रो चरणका इजाजत नविकरण </h5>
+                                <table class="table table-bordered mt-2">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">नविकरण गरेको मिति</th>
+                                        <th scope="col">म्याद पुग्ने मिति</th>
+                                        <th scope="col">सिफारिस गर्ने</th>
+                                        <th scope="col">स्वीकृत गर्ने</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <h5>दोस्रो चरणका इजाजत नामसारी </h5>
+                                <table class="table table-bordered mt-2">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">नामसारी गरी दिने नामथर</th>
+                                        <th scope="col">नामसारी गरी लिनेको नामथर</th>
+                                        <th scope="col">सिफारिस गर्ने</th>
+                                        <th scope="col">स्वीकृत गर्ने</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @for($i=1 ; $i<21; $i++)
+                                        <tr>
+                                            <td>{{$i}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    @endfor
+
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card mb_30">
-                        <div class="card-body p-3">
-                            <h5>दोस्रो चरणका इजाजत नविकरण </h5>
-                            <table class="table table-bordered mt-2">
-                                <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">नविकरण गरेको मिति</th>
-                                    <th scope="col">म्याद पुग्ने मिति</th>
-                                    <th scope="col">सिफारिस गर्ने</th>
-                                    <th scope="col">स्वीकृत गर्ने</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <h5>दोस्रो चरणका इजाजत नामसारी </h5>
-                            <table class="table table-bordered mt-2">
-                                <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">नामसारी गरी दिने नामथर</th>
-                                    <th scope="col">नामसारी गरी लिनेको नामथर</th>
-                                    <th scope="col">सिफारिस गर्ने</th>
-                                    <th scope="col">स्वीकृत गर्ने</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 

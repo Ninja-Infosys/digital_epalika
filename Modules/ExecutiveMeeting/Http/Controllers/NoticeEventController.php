@@ -13,7 +13,7 @@ class NoticeEventController extends Controller
 
     {
 
-        $data = NoticeEvent::select(['title', 'start', 'end'])->whereDate('start', '>=', $request->start)
+        $data = NoticeEvent::whereDate('start', '>=', $request->start)
             ->whereDate('end', '<=', $request->end)
             ->get();
         return NoticeEventResource::collection($data);
@@ -29,7 +29,7 @@ class NoticeEventController extends Controller
             'title' => $request->title,
             'start' => $request->start,
             'end' => $request->end,
-            'className' => 'bg-success'
+            'className' => $request->className,
         ]);
 
 

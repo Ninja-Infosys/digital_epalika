@@ -13,7 +13,7 @@
                             <div class="col-sm-6 col-md-3 mb-3 ">
                                 <div class="card border rounded contact-item">
                                     <i class="fa fa-house-laptop fa-2xl pt-3"></i>
-                                    <div class="textbox mb-3"><small>कार्यालय</small>
+                                    <div class="textbox mb-3 text-center"><small>कार्यालय</small>
                                         <h6 class="heading-01">{{$officeSetting->localBody->local_body??''}}</h6>
                                     </div>
                                 </div>
@@ -21,7 +21,7 @@
                             <div class="col-sm-6 col-md-3">
                                 <div class=" card border rounded contact-item">
                                     <i class="fa fa-location fa-2xl pt-3"></i>
-                                     <div class="textbox"><small>ठेगाना</small>
+                                     <div class="textbox text-center"><small>ठेगाना</small>
                                         <h6 class="heading-01">{{$officeSetting->site_address??''}}</h6>
                                     </div>
                                 </div>
@@ -29,7 +29,7 @@
                             <div class="col-sm-6 col-md-3 mt-3 mt-md-0">
                                 <div class="card border rounded contact-item">
                                     <i class="fa fa-envelope fa-2xl pt-3"></i>
-                                    <div class="textbox"><small>ईमेल</small>
+                                    <div class="textbox text-center"><small>ईमेल</small>
                                         <a href="#">
                                             <h6 class="heading-01">{{$officeSetting->email??''}}</h6>
                                         </a>
@@ -39,7 +39,7 @@
                             <div class="col-sm-6 col-md-3 mt-3 mt-md-0">
                                 <div class="card border rounded contact-item">
                                     <i class="fa fa-phone fa-2xl pt-3"></i>
-                                    <div class="textbox"><small>फोन</small>
+                                    <div class="textbox text-center"><small>फोन</small>
                                         <h6 class="heading-01">{{$officeSetting->phone??''}}</h6>
                                     </div>
                                 </div>
