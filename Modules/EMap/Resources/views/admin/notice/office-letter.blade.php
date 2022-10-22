@@ -29,7 +29,7 @@
             <div class="card mb_30">
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
-                        <div class="top-line d-flex justify-content-between">
+                        <div class="top-line d-flex justify-content-between mt-4">
                             <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
                             <p>मिति: <span class="underline-dotted custom-width">
                             </span></p>
@@ -40,10 +40,10 @@
                         <h4 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
                             </b></h4>
                         <p class="my-2">
-                            यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
+                            &emsp;&emsp;&emsp;यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
                                 {{$mapApply->landDetail->ward_no??''}}
                             </span> टोल <span class="underline-dotted"> {{$mapApply->landDetail->tole??''}}
-                            </span> मा अवस्थित साविक <span class="underline-dotted">
+                            </span><span class="underline-dotted custom-width"></span> मा अवस्थित साविक <span class="underline-dotted">
                                    {{$mapApply->landDetail->former_ward_no??''}}
                             </span>किता नं. <span class="underline-dotted">
  {{$mapApply->landDetail->plot_no??''}}
@@ -68,7 +68,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr >
+                            <tr>
                                 <td></td>
                                 <td>(फिट/मिटर)</td>
                                 <td class="text-center" width="100">कि.नं.</td>
@@ -113,7 +113,7 @@
                                 class="underline-dotted">{{$mapApply->height??''}}
                             </span> तल्ला संख्या: <span class="underline-dotted">{{$mapApply->current_storey??''}}
                             </span></p>
-                        <p class="mt-3"> बोधार्थ: १. <span class="underline-dotted custom-width"></span>नं. वडा
+                        <p class="mt-4"> बोधार्थ: १. <span class="underline-dotted custom-width"></span>नं. वडा
                             वडाध्यक्ष/वडा प्रतिनिधि : कुनै प्रतिक्रिया भए जनाईदिनुहुन अनुरोध छ |</p>
                         <div class="d-flex justify-content-end mt-5"><span class="underline-dotted custom-width"></span>
                         </div>

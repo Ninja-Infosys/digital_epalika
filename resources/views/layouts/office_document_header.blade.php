@@ -60,6 +60,9 @@
         .d-flex {
             display: flex !important;
         }
+        .table thead tr{
+            font-weight: 600;
+        }
 
         @media print {
             .break-page {
@@ -76,7 +79,7 @@
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-2">
             <a href="https://digital-palika.ninjainfosys.com.np" class="main-logo">
-                <img alt="nepal-government-logo" class="m-2" style="height:90px; object-fit: contain;"
+                <img alt="nepal-government-logo" class="m-2" style="height:70px; object-fit: contain;"
                      src="{{asset('images/np.png')}}">
             </a>
         </div>
