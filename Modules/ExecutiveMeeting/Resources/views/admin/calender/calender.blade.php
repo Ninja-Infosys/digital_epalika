@@ -29,6 +29,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3">
+                            <select id='locale-selector'></select>
                             <button class="btn btn-lg font-16 btn-primary w-100" id="btn-new-event"><i
                                     class="mdi mdi-plus-circle-outline"></i> Create New Event
                             </button>
@@ -137,13 +138,14 @@
 
     @push('style')
         <link href="{{asset('assets/backend/libs/fullcalendar/main.min.css')}}" rel="stylesheet" type="text/css"/>
+
     @endpush
 
     @push('scripts')
         <!-- plugin js -->
         <script src="{{asset('assets/backend/libs/moment/min/moment.min.js')}}"></script>
         <script src="{{asset('assets/backend/libs/fullcalendar/main.min.js')}}"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
         <!-- Calendar init -->
         <script type="text/javascript">
             $(document).ready(function () {
@@ -155,17 +157,23 @@
                 const modal = new bootstrap.Modal(document.getElementById('event-modal'));
                 const form = new bootstrap.Modal(document.getElementById('form-event'));
                 const calendarEl = document.getElementById('calendar');
+                let initialLocaleCode = 'ne';
+                const localeSelectorEl = document.getElementById('locale-selector');
+
                 const calendar = new FullCalendar.Calendar(calendarEl, {
                     headerToolbar: {
                         left: 'prev,next today',
                         center: 'title',
                         right: 'dayGridMonth,dayGridWeek,dayGridDay,dayGrid'
                     },
+                    locale: initialLocaleCode,
                     initialView: 'dayGridMonth',
                     selectable: true,
                     droppable: true,
                     editable: true,
                     dayMaxEvents: true,
+                    nowIndicator:true,
+                    displayEventTime:true,
                     businessHours: {
                         // days of week. an array of zero-based day of week integers (0=Sunday)
                         daysOfWeek: [ 0, 1, 2, 3, 4, 5 ],
@@ -242,6 +250,23 @@
                     }
                 }
                 calendar.render();
+
+
+                // build the locale selector's options
+                calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
+                    const optionEl = document.createElement('option');
+                    optionEl.value = localeCode;
+                    optionEl.selected = localeCode === initialLocaleCode;
+                    optionEl.innerText = localeCode;
+                    localeSelectorEl.appendChild(optionEl);
+                });
+
+                // when the selected option changes, dynamically change the calendar option
+                localeSelectorEl.addEventListener('change', function() {
+                    if (this.value) {
+                        calendar.setOption('locale', this.value);
+                    }
+                });
             });
         </script>
     @endpush

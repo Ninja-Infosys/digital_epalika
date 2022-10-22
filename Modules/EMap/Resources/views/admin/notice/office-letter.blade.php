@@ -10,7 +10,7 @@
     <div class="card mb_30">
         <div class="card-header p-3">
             <div class="main-title d-flex justify-content-between">
-             <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR->label()}}</h3>
+                <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR->label()}}</h3>
                 <div class="d-flex justify-content-between">
                     <x-application-component
                         :application-type="\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR"
@@ -45,14 +45,14 @@
                         <p class="mb-3">
                             यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
                                 {{$mapApply->landDetail->ward_no??''}}
-                            </span> टोल <span class="underline-dotted custom-width"> {{$mapApply->landDetail->tole??''}}
-                            </span> मा अवस्थित साविक <span class="underline-dotted custom-width">
+                            </span> टोल <span class="underline-dotted"> {{$mapApply->landDetail->tole??''}}
+                            </span> मा अवस्थित साविक <span class="underline-dotted">
                                    {{$mapApply->landDetail->former_ward_no??''}}
-                            </span>किता नं. <span class="underline-dotted custom-width">
+                            </span>किता नं. <span class="underline-dotted">
  {{$mapApply->landDetail->plot_no??''}}
-                            </span> क्षेत्रफल <span class="underline-dotted custom-width">
+                            </span> क्षेत्रफल <span class="underline-dotted">
  {{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}
-                            </span> मा भवन निर्माण गर्ने घरधनी श्री <span class="underline-dotted custom-width">
+                            </span> मा भवन निर्माण गर्ने घरधनी श्री <span class="underline-dotted">
  {{$mapApply->houseOwner->name??''}}
                             </span>ले यस नक्सा बमोजिमको भवन निर्माण गर्न निवेदन पेश गरेकोमा संधियारको नाममा यो सुचना
                             प्रकाशित गरिएको छ | निवेदन साथ पेश हुन आएको प्रमाण र नक्साको आधारमा निर्माण स्वीकृति दिंदा
@@ -83,9 +83,11 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th scope="row">द्क्षिण</th>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -95,9 +97,11 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th scope="row">पश्चिम</th>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -105,12 +109,11 @@
                             </tbody>
                         </table>
                         <p class="house_measurment mt-2">
-                            घरको नाप: लम्बाई: <span class="underline-dotted custom-width"> {{$mapApply->length??''}}</span> चौडाई: <span
-                                class="underline-dotted custom-width"> {{$mapApply->breadth??''}} </span> उचाई: <span
-                                class="underline-dotted custom-width">
-{{$mapApply->height??''}}
-                            </span> तल्ला संख्या: <span class="underline-dotted custom-width">
-{{$mapApply->current_storey??''}}
+                            घरको नाप: लम्बाई: <span
+                                class="underline-dotted"> {{$mapApply->length??''}}</span> चौडाई: <span
+                                class="underline-dotted"> {{$mapApply->breadth??''}} </span> उचाई: <span
+                                class="underline-dotted">{{$mapApply->height??''}}
+                            </span> तल्ला संख्या: <span class="underline-dotted">{{$mapApply->current_storey??''}}
                             </span></p>
                         <p class="mt-3"> बोधार्थ: १. <span class="underline-dotted custom-width"></span>नं. वडा
                             वडाध्यक्ष/वडा प्रतिनिधि : कुनै प्रतिक्रिया भए जनाईदिनुहुन अनुरोध छ |</p>

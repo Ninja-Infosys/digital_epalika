@@ -4,20 +4,16 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Notifications\ApplyMapNoticeNotification;
-use Cassandra\Map;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
-use Modules\EMap\Entities\ApplyMapApplication;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\FileTypeEnum;
-use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class MapController extends Controller
@@ -84,9 +80,9 @@ class MapController extends Controller
 
     public function sendingDetails(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load('landDetail.unit','landOwner','houseOwner','storeyDetails.mapFee');
+        $mapApply->load('landDetail.unit', 'landOwner', 'houseOwner', 'storeyDetails.mapFee');
 
-        return view('emap::admin.notice.sending_details',compact('mapApply'));
+        return view('emap::admin.notice.sending_details', compact('mapApply'));
     }
 
     public function mapArrears(MapApply $mapApply): Factory|View|Application
@@ -238,7 +234,7 @@ class MapController extends Controller
 
     public function buildingConstructionCompletionCertificate(MapApply $mapApply): View|Factory|Application
     {
-        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit','structureType');
+        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit', 'structureType');
 
         return \view('emap::admin.notice.building_construction_completion_certificate', compact('mapApply'));
     }
@@ -254,7 +250,23 @@ class MapController extends Controller
                 'type' => FileTypeEnum::NOTICE->value
             ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+        return back();
+    }
+
+
+    public function registration(Request $request, MapApply $mapApply): RedirectResponse
+    {
+        $data = $request->validate([
+            'file' => ['required', 'mimes:pdf'],
+            'file_type' => ['required']
+        ]);
+        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
+                'type' => FileTypeEnum::REGISTRATION->value
+            ]);
+
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
@@ -269,7 +281,7 @@ class MapController extends Controller
                 'type' => FileTypeEnum::REPORT->value
             ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
@@ -284,7 +296,7 @@ class MapController extends Controller
                 'type' => FileTypeEnum::CERTIFICATE->value
             ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
@@ -299,7 +311,7 @@ class MapController extends Controller
                 'type' => FileTypeEnum::BOND->value
             ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
@@ -314,7 +326,7 @@ class MapController extends Controller
                 'type' => FileTypeEnum::AGREEMENT->value
             ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
@@ -329,7 +341,7 @@ class MapController extends Controller
                 'type' => FileTypeEnum::ORDER->value
             ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
@@ -344,7 +356,7 @@ class MapController extends Controller
                 'type' => FileTypeEnum::HEIR->value
             ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
@@ -359,7 +371,7 @@ class MapController extends Controller
                 'type' => FileTypeEnum::PERMISSION->value
             ]);
 
-        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
