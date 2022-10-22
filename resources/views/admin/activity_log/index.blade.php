@@ -25,9 +25,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">प्रयोगकर्ता गतिविधिहरू</h4>
+                        <button type="button" onclick="printJS({ printable: 'printJS-form', type: 'html',
+                        css: '{{asset('assets/backend/css/bootstrap.min.css')}}', documentTitle: 'test'})">
+                            Print Form with Header
+                        </button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="printJS-form">
                     <ul class="list-unstyled timeline-sm">
                         @forelse($activityLogs as $activityLog)
                         <li class="timeline-sm-item">
