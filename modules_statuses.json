@@ -6,5 +6,6 @@
     "GrievanceHandling": true,
     "BusinessRegistration": true,
     "ExecutiveMeeting": true,
-    "ListRegistration": true
+    "ListRegistration": true,
+    "Roaster": true
 }
