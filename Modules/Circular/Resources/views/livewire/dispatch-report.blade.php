@@ -64,7 +64,9 @@
                                     <td>{{$dispatch->subject}}</td>
                                     <td>{{$dispatch->receiver_contact}}</td>
                                     <td>
+                                        @if($dispatch->receiver_signature_url)
                                         <img height="50" width="85" src="{{$dispatch->receiver_signature_url}}" alt="">
+                                        @endif
                                     </td>
 
                                     <td>{{$dispatch->remarks}}</td>

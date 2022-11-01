@@ -66,7 +66,9 @@
                                     <td>{{$registration->subject}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>
+                                        @if($registration->signature_image_url)
                                         <img height="50" width="85" src="{{$registration->signature_image_url}}" alt="">
+                                        @endif
                                     </td>
                                     <td>{{$registration->date}}</td>
                                     <td>{{$registration->remarks}}</td>
