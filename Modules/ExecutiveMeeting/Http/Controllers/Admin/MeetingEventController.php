@@ -12,11 +12,20 @@ class MeetingEventController extends Controller
 {
     public function index($event_for)
     {
-        $meetingEvents = MeetingEvent::where('event_for',$event_for)
-            ->whereDate('en_start_date','<=',today()->toDateString())
+        $meetingEvents = MeetingEvent::where('event_for', $event_for)
+            ->whereDate('en_start_date', '<=', today()->toDateString())
             ->latest()->paginate(15);
 
         return view('executivemeeting::admin.meeting_event.index', compact('event_for', 'meetingEvents'));
+    }
+
+    public function upcomingMeetings($event_for)
+    {
+        $meetingEvents = MeetingEvent::where('event_for', $event_for)
+            ->whereDate('en_start_date', '>', today()->toDateString())
+            ->latest()->paginate(15);
+
+        return view('executivemeeting::admin.meeting_event.upcoming_meeting', compact('event_for','meetingEvents'));
     }
 
     public function create($event_for)
@@ -41,7 +50,7 @@ class MeetingEventController extends Controller
 
     public function edit($event_for, MeetingEvent $meetingEvent)
     {
-        return view('executivemeeting::admin.meeting_event.edit', compact('event_for','meetingEvent'));
+        return view('executivemeeting::admin.meeting_event.edit', compact('event_for', 'meetingEvent'));
     }
 
     public function update(UpdateMeetingEventRequest $request, $event_for, MeetingEvent $meetingEvent)

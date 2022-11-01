@@ -13,7 +13,8 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('calender', [CalenderController::class, 'index'])->name('calender.index');
 Route::get('meeting-calendar', [CalenderController::class, 'getData'])->name('meetingCalendar');
 
-Route::resource('{event_for}/meetingEvent', MeetingEventController::class)->whereIn('event_for',['municipal','ward']);
+Route::resource('{event_for}/meetingEvent', MeetingEventController::class)->whereIn('event_for', ['municipal', 'ward']);
+Route::get('{event_for}/upcoming-meetings', [MeetingEventController::class, 'upcomingMeetings'])->name('upcomingMeetingEvents')->whereIn('event_for', ['municipal', 'ward']);
 
 Route::resource('municipalCommittee', MunicipalCommitteeController::class);
 Route::resource('wardCommittee', WardCommitteeController::class);

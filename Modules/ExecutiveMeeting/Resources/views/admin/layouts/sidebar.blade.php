@@ -43,9 +43,9 @@
                         <span> बैठक बिबरण </span>
                     </a>
                 </li>
-                <li class="{{request()->is('admin/executivemeeting/municipal/meetingEvent*') ? 'active' : ''}}">
-                    <a href="{{route('admin.executiveMeeting.meetingEvent.index','municipal')}}">
-                        <span> बैठक बिबरण </span>
+                <li class="{{request()->is('admin/executivemeeting/municipal/upcoming-meetings') ? 'active' : ''}}">
+                    <a href="{{route('admin.executiveMeeting.upcomingMeetingEvents','municipal')}}">
+                        <span> आगामी बैठकहरू </span>
                     </a>
                 </li>
                 <li class="{{request()->is('admin/executivemeeting/municipal/municipalMeetingDecision*') ? 'active' : ''}}">
@@ -80,6 +80,12 @@
                 <li class="{{request()->is('admin/executivemeeting/ward/meetingEvent') ? 'active' : ''}}">
                     <a href="{{route('admin.executiveMeeting.meetingEvent.index','ward')}}">
                         <span> बैठक बिबरण </span>
+                    </a>
+                </li>
+
+                <li class="{{request()->is('admin/executivemeeting/ward/upcoming-meetings') ? 'active' : ''}}">
+                    <a href="{{route('admin.executiveMeeting.upcomingMeetingEvents','ward')}}">
+                        <span> आगामी बैठकहरू </span>
                     </a>
                 </li>
 
