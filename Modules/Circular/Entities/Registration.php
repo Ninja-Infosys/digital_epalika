@@ -45,7 +45,10 @@ class Registration extends Model
 
     public function getSignatureImageUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->attributes['signature_image']);
+        return
+            $this->attributes['signature_image']
+                ? Storage::disk('public')->url($this->attributes['signature_image'])
+                : '';
     }
 
     public function setSignatureImageAttribute($value)
