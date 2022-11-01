@@ -12,7 +12,7 @@ class MeetingEventController extends Controller
 {
     public function index()
     {
-        $meetingEvents=MeetingEvent::paginate(10);
+        $meetingEvents=MeetingEvent::latest()->paginate(10);
 
         return view('executivemeeting::admin.meeting_event.index',compact('meetingEvents'));
     }
