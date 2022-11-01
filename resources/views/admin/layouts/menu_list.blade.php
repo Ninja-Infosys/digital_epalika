@@ -111,7 +111,7 @@
                 </a>
             </div>
             <div class="col-md-4 border">
-                <a href="#">
+                <a href="{{route('admin.grant.dashboard')}}">
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/anudan.png')}}"
                              height="50" width="50">

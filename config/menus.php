@@ -8,7 +8,8 @@
         'businessregistration',
         'executivemeeting',
         'listregistration',
-        'roaster'
+        'roaster',
+        'grant'
     ],
     'sidebars' => [
         'website',

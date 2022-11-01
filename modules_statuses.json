@@ -7,5 +7,6 @@
     "BusinessRegistration": true,
     "ExecutiveMeeting": true,
     "ListRegistration": true,
-    "Roaster": true
+    "Roaster": true,
+    "Grant": true
 }

@@ -6,15 +6,15 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.grant.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">शाखा</li>
+                        <li class="breadcrumb-item active">पूर्वाधार शीर्षकहरु </li>
                     </ol>
                 </div>
-                <h4 class="page-title">शाखा</h4>
+                <h4 class="page-title">पूर्वाधार शीर्षकहरु </h4>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">शाखा सूची</h4>
-                        @can('branch_create')
-                            <a href="{{route('admin.helpDesk.branch.create')}}"
+                        <h4 class="header-title">पूर्वाधार शीर्षक सूची</h4>
+                        @can('infrastructure_create')
+                            <a href="{{route('admin.grant.infrastructure.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -39,23 +39,24 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शाखा नाम</th>
-                                <th>मुख्य शाखा</th>
+                                <th>शीर्षक</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($branches as $key=>$branch)
+                            @forelse($infrastructures as $infrastructure)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <th>{{$branch->branch_name}}</th>
-                                    <td></td>
+                                    <th>{{$infrastructure->title}}</th>
                                     <td>
-                                        <a href="{{route('admin.helpDesk.branch.edit',$branch)}}"
+                                        @can('infrastructure_edit')
+                                        <a href="{{route('admin.grant.infrastructure.edit',$infrastructure)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.helpDesk.branch.destroy',$branch)}}"
+                                        @endcan
+                                        @can('infrastructure_delete')
+                                        <form action="{{route('admin.grant.infrastructure.destroy',$infrastructure)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
@@ -63,35 +64,12 @@
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
+                                            @endcan
                                     </td>
                                 </tr>
-                                @foreach($branch->branches as $subBranch)
-                                    <tr>
-                                        <td>
-                                            {{$key+1}}.
-                                            {{$loop->iteration}}
-                                        </td>
-                                        <td>{{$subBranch->branch_name}}</td>
-                                        <td>{{$subBranch->branch->branch_name??''}}</td>
-                                        <td>
-                                            <a href="{{route('admin.helpDesk.branch.edit',$subBranch)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                            <form action="{{route('admin.helpDesk.branch.destroy',$subBranch)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
