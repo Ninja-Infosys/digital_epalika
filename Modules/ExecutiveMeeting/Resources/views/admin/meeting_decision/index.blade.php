@@ -6,14 +6,11 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.executiveMeeting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">इ-कार्यपालिका</a>
-                        </li>
-                        <li class="breadcrumb-item active">पालिका बैठक निर्णयहरु </li>
+                        <li class="breadcrumb-item active"> बैठक निर्णयहरु </li>
                     </ol>
                 </div>
                 <h4 class="page-title">निर्णयहरु</h4>
@@ -26,11 +23,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">पालिका बैठक निर्णयहरु </h4>
-                        @can('municipalMeeting_access')
-                            <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.create')}}"
+                        <h4 class="header-title"> बैठक निर्णयहरु </h4>
+                        @can('meetingDecision_access')
+                            <a href="{{route('admin.executiveMeeting.meetingDecision.create',$meeting_for)}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ निर्णयहरु थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -48,22 +45,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($municipalMeetingDecisions as $municipalMeetingDecision)
+                            @forelse($meetingDecisions as $meetingDecision)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$municipalMeetingDecision->meetingDetail->meeting_subject??''}}</td>
-                                    <td>{{$municipalMeetingDecision->date ? $municipalMeetingDecision->date->toDateString():'' }}</td>
-                                    <td>{{$municipalMeetingDecision->subject}}</td>
+                                    <td>{{$meetingDecision->meetingEvent->event_name??''}}</td>
+                                    <td>{{$meetingDecision->date }}</td>
+                                    <td>{{$meetingDecision->subject}}</td>
 
                                     <td>
-                                        @can('municipalMeeting_edit')
-                                            <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.edit',$municipalMeetingDecision)}}"
+                                        @can('meetingDecision_edit')
+                                            <a href="{{route('admin.executiveMeeting.meetingDecision.edit',[$meeting_for,$meetingDecision])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('municipalMeeting_delete')
-                                            <form action="{{route('admin.executiveMeeting.municipalMeetingDecision.destroy',$municipalMeetingDecision)}}"
+                                        @can('meetingDecision_delete')
+                                            <form action="{{route('admin.executiveMeeting.meetingDecision.destroy',[$meeting_for,$meetingDecision])}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

@@ -4,12 +4,12 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-<li class="{{request()->is('admin/executivemeeting/calender') ? 'active' : ''}}">
-    <a href="{{route('admin.executiveMeeting.calender.index')}}">
+{{--<li class="{{request()->is('admin/executivemeeting/calendar') ? 'active' : ''}}">
+    <a href="{{route('admin.executiveMeeting.calendar.index')}}">
         <i class="fa fa-home"></i>
         <span> Calender</span>
     </a>
-</li>
+</li>--}}
 @can('executiveCommittee_access')
     <li class="{{request()->is('admin/executivemeeting/municipalCommittee*') ? 'active' : ''}}">
         <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">
@@ -39,6 +39,11 @@
         <ul class="nav-second-level">
             @can('municipalMeeting_access')
                 <li class="{{request()->is('admin/executivemeeting/municipal/meetingEvent*') ? 'active' : ''}}">
+                    <a href="{{route('admin.executiveMeeting.calendar.index','municipal')}}">
+                        <span> बैठक Calendar </span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/executivemeeting/municipal/meetingEvent*') ? 'active' : ''}}">
                     <a href="{{route('admin.executiveMeeting.meetingEvent.index','municipal')}}">
                         <span> बैठक बिबरण </span>
                     </a>
@@ -48,8 +53,8 @@
                         <span> आगामी बैठकहरू </span>
                     </a>
                 </li>
-                <li class="{{request()->is('admin/executivemeeting/municipal/municipalMeetingDecision*') ? 'active' : ''}}">
-                    <a href="{{route('admin.executiveMeeting.municipalMeetingDecision.index')}}">
+                <li class="{{request()->is('admin/executivemeeting/municipal/meetingDecision*') ? 'active' : ''}}">
+                    <a href="{{route('admin.executiveMeeting.meetingDecision.index','municipal')}}">
                         <span> निर्णयहरु</span>
                     </a>
                 </li>
@@ -76,6 +81,11 @@
          id="sidebarExecutiveMeetingWard">
         <ul class="nav-second-level">
             @can('wardMeeting_access')
+                <li class="{{request()->is('admin/executivemeeting/ward/calendar') ? 'active' : ''}}">
+                    <a href="{{route('admin.executiveMeeting.calendar.index','ward')}}">
+                        <span> बैठक Calendar </span>
+                    </a>
+                </li>
 
                 <li class="{{request()->is('admin/executivemeeting/ward/meetingEvent') ? 'active' : ''}}">
                     <a href="{{route('admin.executiveMeeting.meetingEvent.index','ward')}}">
@@ -88,12 +98,13 @@
                         <span> आगामी बैठकहरू </span>
                     </a>
                 </li>
-
-                <li class="{{request()->is('admin/executivemeeting/ward/wardMeetingDecision*') ? 'active' : ''}}">
-                    <a href="{{route('admin.executiveMeeting.wardMeetingDecision.index')}}">
+                <li class="{{request()->is('admin/executivemeeting/ward/meetingDecision*') ? 'active' : ''}}">
+                    <a href="{{route('admin.executiveMeeting.meetingDecision.index','ward')}}">
                         <span> निर्णयहरु</span>
                     </a>
                 </li>
+
+
 {{--                <li class="{{request()->is('admin/executivemeeting/ward/wardMeetingDetails/report') ? 'active' : ''}}">--}}
 {{--                    <a href="{{route('admin.executiveMeeting.wardMeetingDetailsReport')}}">--}}
 {{--                        <span> बैठक बिबरण रिपोर्ट </span>--}}

@@ -2,19 +2,18 @@
 
 namespace Modules\ExecutiveMeeting\Entities;
 
-use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
 
-class MunicipalMeetingDecision extends Model
+class MeetingDecision extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
     protected $dates = [
-        'date',
         'created_at',
         'updated_at',
         'deleted_at'
@@ -22,8 +21,10 @@ class MunicipalMeetingDecision extends Model
 
     protected $fillable = [
         'meeting_event_id',
+        'meeting_for',
         'subject',
         'date',
+        'en_date',
         'description',
         'decision_file',
     ];
@@ -40,8 +41,10 @@ class MunicipalMeetingDecision extends Model
         }
     }
 
-    public function getDecisionFileUrlAttribute()
+    public function getDecisionFileUrlAttribute(): string
     {
-        $this->attributes['decision_file'] ? Storage::disk('public')->url($this->attributes['decision_file']) : '';
+        return $this->attributes['decision_file']
+            ? Storage::disk('public')->url($this->attributes['decision_file'])
+            : '';
     }
 }

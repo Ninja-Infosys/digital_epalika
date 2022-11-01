@@ -6,7 +6,8 @@ use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
-use Modules\ExecutiveMeeting\Entities\MunicipalMeetingDecision;
+use Modules\ExecutiveMeeting\Entities\MeetingDecision;
+use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 
 class FrontController extends Controller
 {
@@ -18,13 +19,11 @@ class FrontController extends Controller
             $notices = Notice::where('type', 'Notice')->orderBy('date')->limit(3)->get();
             $newses = Notice::where('type', 'News')->orderBy('date')->limit(3)->get();
 
-            $meetingDetails = MunicipalMeetingDecision::with('meetingDetail')->whereHas('meetingDetail', function ($query) {
-                $query->orderByDesc('meeting_date');
-            })->get();
+            $meetingDecisions = MeetingDecision::with('meetingEvent')->latest()->get();
             $sliders = Slider::latest()->get();
             $municipalDetails = MunicipalDetail::all();
 
-            return view('frontend.website', compact('employees', 'notices', 'newses', 'meetingDetails', 'sliders', 'municipalDetails'));
+            return view('frontend.website', compact('employees', 'notices', 'newses', 'meetingDecisions', 'sliders', 'municipalDetails'));
         } else {
             return view('frontend.digital_board');
         }

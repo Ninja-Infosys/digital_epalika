@@ -108,11 +108,13 @@
                         <p class="mb-0 text-white">कार्यपालिका बोर्ड निर्णय</p>
                     </div>
                     <ul class="list-group">
-                        @foreach($meetingDetails as $meetingDetail)
+                        @foreach($meetingDecisions as $meetingDecision)
                             <li class="list-group-item">
                                 <i class="fa fa-angle-right"></i>
-                                <a href="">{{Str::words($news->subject,12)}}</a>
-                                <span><small>{{$news->date->toDateString()}}</small></span>
+                                <a href="">{{Str::words($meetingDecision->subject,12)}}</a>
+                                <span>
+                                    <small>{{$meetingDecision->date}}</small>
+                                </span>
 
                             </li>
                         @endforeach
