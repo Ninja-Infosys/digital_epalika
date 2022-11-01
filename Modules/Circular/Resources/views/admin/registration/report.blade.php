@@ -20,10 +20,28 @@
             </div>
         </div>
     </div>
+    <div class="row mb-2">
+        <div class="col-sm-4">
+            <a href="{{route('admin.circular.registration.index')}}" class="btn btn-danger rounded-pill waves-effect waves-light mb-3">
+                <i class="fa fa-plus"></i> पत्र दर्ता</a>
+        </div>
+        <div class="col-sm-8">
+            <div class="text-sm-end">
+                <div class="btn-group mb-3">
+                    <button class="btn btn-primary float-right" onclick="printJS({
+                    printable: 'printData',
+                    type: 'html',
+                    documentTitle: '{{$officeSetting->localBody->local_body ?? ''}}',
+                    showModal: true,
+                    css: '{{asset('assets/backend/css/print.css')}}',
+                    modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})">
+                        <i class="fa fa-print"></i> Print
+                    </button>
+                </div>
+            </div>
+        </div><!-- end col-->
+    </div>
     <livewire:circular::registration-report />
-    <button class="btn btn-primary float-right" id="printBtn" >
-        <i class="fa fa-print"></i> Print
-    </button>
 
     @push('scripts')
         <script>

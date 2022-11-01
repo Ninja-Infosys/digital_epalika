@@ -11,45 +11,45 @@
                 </div>
             </div>
 
-            <div class="printData">
+            <div id="printData">
 
-                <style>
-                    table, th, td {
-                        border: 1px solid black;
-                        border-collapse: collapse;
-                        text-align: center;
-                    }
+{{--                <style>--}}
+{{--                    table, th, td {--}}
+{{--                        border: 1px solid black;--}}
+{{--                        border-collapse: collapse;--}}
+{{--                        text-align: center;--}}
+{{--                    }--}}
 
-                    @media print {
-                        table, th, td {
-                            border: 1px solid black;
-                            border-collapse: collapse;
-                            text-align: center;
-                        }
+{{--                    @media print {--}}
+{{--                        table, th, td {--}}
+{{--                            border: 1px solid black;--}}
+{{--                            border-collapse: collapse;--}}
+{{--                            text-align: center;--}}
+{{--                        }--}}
 
-                        .logo {
-                            margin: 20px;
-                        }
+{{--                        .logo {--}}
+{{--                            margin: 20px;--}}
+{{--                        }--}}
 
-                        .row {
-                            display: flex;
-                            align-content: center;
-                        }
+{{--                        .row {--}}
+{{--                            display: flex;--}}
+{{--                            align-content: center;--}}
+{{--                        }--}}
 
-                        .col-md-8 {
-                            width: 66.66666667%;
-                        }
+{{--                        .col-md-8 {--}}
+{{--                            width: 66.66666667%;--}}
+{{--                        }--}}
 
-                        .col-md-2 {
-                            width: 16.66666667%;
-                        }
+{{--                        .col-md-2 {--}}
+{{--                            width: 16.66666667%;--}}
+{{--                        }--}}
 
-                        .text-center {
-                            text-align: center;
-                        }
-                    }
+{{--                        .text-center {--}}
+{{--                            text-align: center;--}}
+{{--                        }--}}
+{{--                    }--}}
 
-                </style>
+{{--                </style>--}}
 
 
                 <div class="card-body">
@@ -73,8 +73,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
-                            <thead>
+                        <table class="table table-sm table-bordered">
+                            <thead class="text-center">
                             <tr>
                                 <th rowspan="2">क्र.स</th>
                                 <th rowspan="2">दर्ता न.</th>
@@ -115,12 +115,9 @@
                             @endforeach
                             </tbody>
                         </table>
-
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>
