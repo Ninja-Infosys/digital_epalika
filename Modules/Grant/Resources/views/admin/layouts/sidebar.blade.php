@@ -4,14 +4,6 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-@can('organization_access')
-    <li class="{{request()->is('admin/emap/organization') ? 'active' : ''}}">
-        <a href="{{route('emap.admin.organization.index')}}">
-            <i class="fa fa-stamp"></i>
-            <span>दर्ता भएका संगठन</span>
-        </a>
-    </li>
-@endcan
 <li class="{{request()->is('admin/grant/setting/*') ? 'active' : ''}}">
     <a href="#sidebarGrantSetting"
        {{request()->is('admin/grant/setting/*') ? 'aria-expanded=true' : ''}}
