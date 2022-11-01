@@ -56,14 +56,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end mb-4">
+                                <div class="d-flex justify-content-end">
                                 </div>
                                 <div class="top-line d-flex justify-content-between">
                                     <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
-                                    <p class="">मिति: <span class="underline-dotted custom-width"> </span></p>
+                                    <p>मिति: <span class="underline-dotted custom-width"> </span></p>
                                 </div>
-                                <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width"></span></p>
-                                <h3 class="text-center my-3"><b> प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></h3>
+                                <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
+                                <h4 class="text-center"><b> प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></h4>
 
                                 <p class="mb-3">
                                     तपाई श्री/श्रीमती<span
@@ -91,9 +91,9 @@
                                     निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण
                                     कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ ।
                                 </p>
-                                <h4 class="text-center"><b>निर्माण स्वीकृति भएको विवरण </b></h4>
-                                <h5>जग्गा बिकास तथा भवन मापदण्ड २०६४</h5>
-                                <table class="table table-bordered mt-2">
+                                <h5 class="text-center"><b>निर्माण स्वीकृति भएको विवरण </b></h5>
+                                <h6>जग्गा बिकास तथा भवन मापदण्ड २०६४</h6>
+                                <table class="table table-bordered mb-1">
                                     <thead>
                                     <tr>
                                         <th scope="col">क्र.स.</th>
@@ -135,8 +135,8 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <h5>राष्ट्रिय भवन निर्माण संहिता २०६०</h5>
-                                <table class="table table-bordered mt-2">
+                                <h6>राष्ट्रिय भवन निर्माण संहिता २०६०</h6>
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th scope="col">क्र.स.</th>
@@ -185,8 +185,8 @@
                                         स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </p>
                                 </div>
                                 <div class="break-page"></div>
-                                <h5>प्रथम चरणका इजाजत नविकरण </h5>
-                                <table class="table table-bordered mt-2">
+                                <h6>प्रथम चरणका इजाजत नविकरण </h6>
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th scope="col"></th>
@@ -207,7 +207,7 @@
                                     </tbody>
                                 </table>
                                 <h5>प्रथम चरणका इजाजत नामसारी </h5>
-                                <table class="table table-bordered mt-2">
+                                <table class="table table-bordered">
                                     <thead>
                                     <tr>
                                         <th scope="col"></th>
