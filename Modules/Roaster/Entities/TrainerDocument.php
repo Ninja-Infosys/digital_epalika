@@ -22,4 +22,23 @@ class TrainerDocument extends Model
        'title',
        'document',
    ];
+
+
+    public function setDocumentAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['document'] = $value->store('trainer_documents/' . Str::slug($this->attributes['title'], "_"), 'public');
+        }
+    }
+
+    public function getDocumentUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->attributes['document']);
+    }
+
+
+    public function trainer(): BelongsTo
+    {
+        return $this->belongsTo(Trainer::class);
+    }
 }

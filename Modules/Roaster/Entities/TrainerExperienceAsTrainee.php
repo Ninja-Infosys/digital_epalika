@@ -4,6 +4,7 @@ namespace Modules\Roaster\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -24,4 +25,9 @@ class TrainerExperienceAsTrainee extends Model
        'duration',
        'venue',
    ];
+
+    public function trainer(): BelongsTo
+    {
+        return $this->belongsTo(Trainer::class);
+    }
 }
