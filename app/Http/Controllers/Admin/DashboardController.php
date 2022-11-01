@@ -8,9 +8,7 @@ use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\EMap\Entities\Organization;
-use Modules\ExecutiveMeeting\Entities\MeetingDetail;
-use Modules\ExecutiveMeeting\Entities\MunicipalMeetingNotice;
-use Modules\ExecutiveMeeting\Entities\WardMeetingNotice;
+use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
@@ -31,8 +29,8 @@ class DashboardController extends Controller
         $replied_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Replied')->count();
         $investigated_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Investigated')->count();
         $closed_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Closed')->count();
-        $ward_meetings_count = MeetingDetail::where('model_type', WardMeetingNotice::class)->count();
-        $municipal_meetings_count = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->count();
+        $ward_meetings_count = MeetingEvent::where('event_for', 'ward')->count();
+        $municipal_meetings_count = MeetingEvent::where('event_for', 'municipal')->count();
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
         $organizations_count=Organization::where('is_active',1)->count();
 

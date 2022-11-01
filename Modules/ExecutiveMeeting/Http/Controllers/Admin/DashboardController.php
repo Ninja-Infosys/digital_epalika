@@ -3,16 +3,15 @@
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Modules\ExecutiveMeeting\Entities\MeetingDetail;
-use Modules\ExecutiveMeeting\Entities\MunicipalMeetingNotice;
-use Modules\ExecutiveMeeting\Entities\WardMeetingNotice;
+use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 
 class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $ward_meetings_count = MeetingDetail::where('model_type', WardMeetingNotice::class)->count();
-        $municipal_meetings_count = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->count();
+        $ward_meetings_count = MeetingEvent::where('event_for', 'ward')->count();
+        $municipal_meetings_count = MeetingEvent::where('event_for', 'municipal')->count();
+
         return view('executivemeeting::admin.dashboard');
     }
 }

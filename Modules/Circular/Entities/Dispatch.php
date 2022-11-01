@@ -41,7 +41,9 @@ class Dispatch extends Model
 
     public function getReceiverSignatureUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->attributes['receiver_signature']);
+        return $this->attributes['receiver_signature']
+            ? Storage::disk('public')->url($this->attributes['receiver_signature'])
+            : '';
     }
 
     public function setReceiverSignatureAttribute($value)

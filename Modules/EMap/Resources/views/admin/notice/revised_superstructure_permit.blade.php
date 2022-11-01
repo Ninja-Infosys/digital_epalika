@@ -38,7 +38,7 @@
                                     <p>मिति: <span class="underline-dotted custom-width">
                             </span></p>
                                 </div>
-                                <p class="mt-2">चलानी नं:<span class="underline-dotted custom-width"></span></p>
+                                <p>चलानी नं:<span class="underline-dotted custom-width"></span></p>
                                 <p class="text-center my-3">
                                     <b>बिषय: {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT->label()}}
                                         ।</b></p>

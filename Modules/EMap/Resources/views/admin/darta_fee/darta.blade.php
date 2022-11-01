@@ -7,7 +7,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">दस्तुर तथा दर्ता सम्बन्धी</h4>
                         <div class="d-flex justify-content-between">
-                            <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
+                            <button id="printButton" class="btn btn-sm btn-success"
                                     requestRoute="{{route('print.office-letter-print')}}">
                                 <i class="fa fa-print"></i> Print
                             </button>

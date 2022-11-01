@@ -21,16 +21,16 @@ class MunicipalMeetingDecision extends Model
     ];
 
     protected $fillable = [
-        'meeting_detail_id',
+        'meeting_event_id',
         'subject',
         'date',
         'description',
         'decision_file',
     ];
 
-    public function meetingDetail(): BelongsTo
+    public function meetingEvent(): BelongsTo
     {
-        return $this->belongsTo(MeetingDetail::class);
+        return $this->belongsTo(MeetingEvent::class);
     }
 
     public function setDecisionFileAttribute($value)

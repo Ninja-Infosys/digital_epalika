@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -6,17 +7,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.executiveMeeting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">इ-कार्यपालिका</a>
-                        </li>
-                        <li class="breadcrumb-item active">सूचना प्रशारण </li>
+                        <li class="breadcrumb-item active">आगामी बैठकहरू</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सूचना प्रशारण</h4>
+                <h4 class="page-title">आगामी बैठकहरू</h4>
             </div>
         </div>
     </div>
@@ -26,44 +24,48 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> वडा सूचना प्रशारण सूची</h4>
-                        @can('wardMeeting_access')
-                            <a href="{{route('admin.executiveMeeting.wardMeetingNotice.create')}}"
+                        <h4 class="header-title"> आगामी बैठकहरू</h4>
+                        @can('executiveCommittee_create')
+                            <a href="{{route('admin.executiveMeeting.meetingEvent.create',$event_for)}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ सूचना प्रशारण थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>सूचना प्रसारण मिति</th>
-                                <th>प्रकार</th>
-                                <th>बैठकको बिषय </th>
+                                <th>नाम</th>
+                                <th>विवरण</th>
+                                <th>Recurrence</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($wardMeetingNotices as $wardMeetingNotice)
+                            @forelse($meetingEvents as $meetingEvent)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$wardMeetingNotice->broadcast_date ? $wardMeetingNotice->broadcast_date->toDateString() : ''}}</td>
-                                    <td>{{$wardMeetingNotice->type}}</td>
-                                    <td>{{$wardMeetingNotice->meeting_subject}}</td>
+                                    <td>{{$meetingEvent->event_name}}</td>
+                                    <td>{{$meetingEvent->description}}</td>
+                                    <td>{{$meetingEvent->recurrence->label()}}</td>
+                                    <td>{{$meetingEvent->start_date}}({{$meetingEvent->en_start_date?->toDateString()}})</td>
+                                    <td>{{$meetingEvent->end_date}}({{$meetingEvent->en_end_date?->toDateString()}})</td>
 
                                     <td>
-                                        @can('wardMeeting_edit')
-                                            <a href="{{route('admin.executiveMeeting.wardMeetingNotice.edit',$wardMeetingNotice)}}"
+                                        @can('executiveCommittee_edit')
+                                            <a href="{{route('admin.executiveMeeting.meetingEvent.edit',[$event_for,$meetingEvent])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('wardMeeting_delete')
-                                            <form action="{{route('admin.executiveMeeting.wardMeetingNotice.destroy',$wardMeetingNotice)}}"
+                                        @can('executiveCommittee_delete')
+                                            <form action="{{route('admin.executiveMeeting.meetingEvent.destroy',[$event_for,$meetingEvent])}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
@@ -81,10 +83,11 @@
                             @endforelse
                             </tbody>
                         </table>
+                        {{$meetingEvents->links()}}
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 @endsection
-

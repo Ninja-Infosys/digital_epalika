@@ -26,7 +26,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> बैठक क्यालेन्डर</h4>
                         @can('executiveCommittee_create')
-                            <a href="{{route('admin.executiveMeeting.meetingEvent.create')}}"
+                            <a href="{{route('admin.executiveMeeting.meetingEvent.create',$event_for)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -54,18 +54,18 @@
                                     <td>{{$meetingEvent->event_name}}</td>
                                     <td>{{$meetingEvent->description}}</td>
                                     <td>{{$meetingEvent->recurrence->label()}}</td>
-                                    <td>{{$meetingEvent->start_date}}</td>
-                                    <td>{{$meetingEvent->end_date}}</td>
+                                    <td>{{$meetingEvent->start_date}}({{$meetingEvent->en_start_date?->toDateString()}})</td>
+                                    <td>{{$meetingEvent->end_date}}({{$meetingEvent->en_end_date?->toDateString()}})</td>
 
                                     <td>
                                         @can('executiveCommittee_edit')
-                                            <a href="{{route('admin.executiveMeeting.meetingEvent.edit',$meetingEvent)}}"
+                                            <a href="{{route('admin.executiveMeeting.meetingEvent.edit',[$event_for,$meetingEvent])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
                                         @can('executiveCommittee_delete')
-                                            <form action="{{route('admin.executiveMeeting.meetingEvent.destroy',$meetingEvent)}}"
+                                            <form action="{{route('admin.executiveMeeting.meetingEvent.destroy',[$event_for,$meetingEvent])}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
@@ -85,6 +85,7 @@
                         </table>
                         {{$meetingEvents->links()}}
                     </div>
+
                 </div>
             </div>
         </div>

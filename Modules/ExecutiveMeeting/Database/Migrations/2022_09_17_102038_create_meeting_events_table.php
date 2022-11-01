@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('en_start_date');
             $table->string('end_date')->nullable();
             $table->date('en_end_date')->nullable();
-            $table->enum('event_for',['Municipal','Ward'])->default('Municipal');
+            $table->enum('event_for',['municipal','ward'])->default('municipal');
             $table->string('url')->nullable();
             $table->string('recurrence_end_date')->nullable();
             $table->string('en_recurrence_end_date')->nullable();

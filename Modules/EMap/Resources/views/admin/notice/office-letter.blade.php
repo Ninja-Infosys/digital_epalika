@@ -30,23 +30,20 @@
             <div class="card mb_30">
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
-                        <div class="top-line d-flex justify-content-between">
-                            <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
+                        <div class="top-line d-flex justify-content-between mt-4">
+                            <p>पत्र सं: <span class="underline-dotted custom-width"></span><br>
+                                चलानी नं: <span class="underline-dotted custom-width">
+                            </span></p>
                             <p>मिति: <span class="underline-dotted custom-width">
                             </span></p>
                         </div>
-
-
-                        <p class="mt-2">चलानी नं: <span class="underline-dotted custom-width">
-
-                            </span></p>
-                        <h3 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
-                            </b></h3>
-                        <p class="mb-3">
-                            यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
+                        <h4 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
+                            </b></h4>
+                        <p class="my-2">
+                            &emsp;&emsp;&emsp;यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
                                 {{$mapApply->landDetail->ward_no??''}}
                             </span> टोल <span class="underline-dotted"> {{$mapApply->landDetail->tole??''}}
-                            </span> मा अवस्थित साविक <span class="underline-dotted">
+                            </span><span class="underline-dotted custom-width"></span> मा अवस्थित साविक <span class="underline-dotted">
                                    {{$mapApply->landDetail->former_ward_no??''}}
                             </span>किता नं. <span class="underline-dotted">
  {{$mapApply->landDetail->plot_no??''}}
@@ -61,12 +58,12 @@
                             सुचित गरिन्छ |
                             म्याद नाघी आएको उजुरी उपर कुनै किसिमको कारवाही नहुने व्यहोरा जानकारी गराईन्छ |
                         </p>
-                        <h4>१. निर्माणका निमित्त प्रस्तावित जग्गा चारकिल्ला विवरण:</h4>
-                        <table class="table table-bordered">
+                        <h6><b>१. निर्माणका निमित्त प्रस्तावित जग्गा चारकिल्ला विवरण:</b></h6>
+                        <table class="table table-sm table-bordered">
                             <thead>
                             <tr>
-                                <th scope="col" rowspan="2">दिशा</th>
-                                <th scope="col" rowspan="2">आफ्नो जग्गा लम्बाई</th>
+                                <th scope="col" width="80" rowspan="2">दिशा</th>
+                                <th scope="col" width="150" rowspan="2" >आफ्नो जग्गा लम्बाई</th>
                                 <th colspan="3" class="text-center">संधियार</th>
                             </tr>
                             </thead>
@@ -74,9 +71,9 @@
                             <tr>
                                 <td></td>
                                 <td>(फिट/मिटर)</td>
-                                <td>कि.नं.</td>
-                                <td>लेन्डस्केपको प्रकार</td>
-                                <td>नाम</td>
+                                <td class="text-center" width="100">कि.नं.</td>
+                                <td class="text-center" width="200">लेन्डस्केपको प्रकार</td>
+                                <td class="text-center">नाम</td>
                             </tr>
                             <tr>
                                 <th scope="row">उतर</th>
@@ -84,13 +81,16 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+
+
                             </tr>
                             <tr>
-                                <th scope="row">द्क्षिण</th>
+                                <th scope="row">दक्षिण</th>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
+
                             </tr>
                             <tr>
                                 <th scope="row">पुर्व</th>
@@ -98,6 +98,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+
                             </tr>
                             <tr>
                                 <th scope="row">पश्चिम</th>
@@ -105,6 +106,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+
                             </tr>
                             </tbody>
                         </table>
@@ -115,7 +117,7 @@
                                 class="underline-dotted">{{$mapApply->height??''}}
                             </span> तल्ला संख्या: <span class="underline-dotted">{{$mapApply->current_storey??''}}
                             </span></p>
-                        <p class="mt-3"> बोधार्थ: १. <span class="underline-dotted custom-width"></span>नं. वडा
+                        <p class="mt-4"> बोधार्थ: १. <span class="underline-dotted custom-width"></span>नं. वडा
                             वडाध्यक्ष/वडा प्रतिनिधि : कुनै प्रतिक्रिया भए जनाईदिनुहुन अनुरोध छ |</p>
                         <div class="d-flex justify-content-end mt-5"><span class="underline-dotted custom-width"></span>
                         </div>
@@ -124,23 +126,6 @@
             </div>
         </div>
     </div>
-
-    @push('style')
-        <style>
-            .font-black p {
-                color: black;
-            }
-
-            .underline-dotted {
-                border-bottom: dotted 2px !important;
-                padding: 0 20px;
-            }
-
-            .custom-width {
-                padding: 0 50px !important;
-            }
-        </style>
-    @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>
     @endpush

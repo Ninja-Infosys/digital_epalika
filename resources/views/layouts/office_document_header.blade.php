@@ -36,6 +36,11 @@
             color: #000;
             line-height: 1.8;
             text-align: justify;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .table{
+            font-size: 12px;
         }
 
         .vertical {
@@ -59,6 +64,8 @@
             display: flex !important;
         }
 
+
+
         @media print {
             .break-page {
                 page-break-after: always !important;
@@ -74,7 +81,7 @@
     <div class="row">
         <div class="col-md-2 col-sm-2 col-xs-2">
             <a href="https://digital-palika.ninjainfosys.com.np" class="main-logo">
-                <img alt="nepal-government-logo" class="m-2" style="height:90px; object-fit: contain;"
+                <img alt="nepal-government-logo" class="m-2" style="height:70px; object-fit: contain;"
                      src="{{asset('images/np.png')}}">
             </a>
         </div>
