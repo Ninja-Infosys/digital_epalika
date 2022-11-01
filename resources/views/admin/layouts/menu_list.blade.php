@@ -102,9 +102,9 @@
                 </a>
             </div>
             <div class="col-md-4 border">
-                <a href="#">
+                <a href="{{route('admin.roaster.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/talim.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/roaster.png')}}"
                              height="50" width="50">
                         <h4 class="p-1">तालिम व्यवस्थापन</h4>
                     </div>

@@ -1,0 +1,26 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('subjects', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('level');
+            $table->string('duration')->nullable();
+            $table->text('content')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('subjects');
+    }
+};
