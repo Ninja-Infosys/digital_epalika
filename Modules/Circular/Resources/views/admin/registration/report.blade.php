@@ -33,16 +33,7 @@
                     </button>
                 </div>
                 <div class="btn-group mb-3">
-                    <button class="btn btn-primary float-right" onclick="printJS({
-                    printable: 'printData',
-                    type: 'html',
-                    documentTitle: '{{$officeSetting->localBody->local_body ?? ''}}को पत्र दर्ता रिपोर्ट',
-                    showModal: true,
-                    css: '{{asset('assets/backend/css/print.css')}}',
-                    honorMarginPadding : false,
-                    modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})">
-                        <i class="fa fa-print"></i> Print
-                    </button>
+                    <x-print-button title="{{$officeSetting->localBody->local_body ?? ''}}को पत्र दर्ता रिपोर्ट"/>
                 </div>
             </div>
         </div><!-- end col-->
