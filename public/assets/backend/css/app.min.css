@@ -9376,3 +9376,14 @@ table[data-toggle=table] {
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.underline-dotted {
+    border-bottom: dotted 2px !important;
+    padding: 0 20px;
+}
+
+.custom-width {
+    padding: 0 50px !important;
+}
+.font-black p {
+    color: #000000;
+}
