@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.executiveMeeting.meetingEvent.index')}}">बैठक क्यालेन्डर</a>
+                            <a href="{{route('admin.executiveMeeting.meetingEvent.index',$event_for)}}">बैठक क्यालेन्डर</a>
                         </li>
                         <li class="breadcrumb-item active"> नयाँ बैठक क्यालेन्डर थप्नुहोस्</li>
                     </ol>
@@ -28,14 +28,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ बैठक क्यालेन्डर थप्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.meetingEvent.index')}}"
+                        <a href="{{route('admin.executiveMeeting.meetingEvent.index',$event_for)}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> बैठक क्यालेन्डर बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.meetingEvent.store')}}" method="post"
+                    <form action="{{route('admin.executiveMeeting.meetingEvent.store',$event_for)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="row">

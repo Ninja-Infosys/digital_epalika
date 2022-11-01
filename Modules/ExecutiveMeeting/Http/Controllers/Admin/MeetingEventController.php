@@ -10,50 +10,54 @@ use Modules\ExecutiveMeeting\Http\Requests\MeetingEvent\UpdateMeetingEventReques
 
 class MeetingEventController extends Controller
 {
-    public function index()
+    public function index($event_for)
     {
-        $meetingEvents=MeetingEvent::latest()->paginate(10);
+        $meetingEvents = MeetingEvent::where('event_for',$event_for)
+            ->whereDate('en_start_date','<=',today()->toDateString())
+            ->latest()->paginate(15);
 
-        return view('executivemeeting::admin.meeting_event.index',compact('meetingEvents'));
+        return view('executivemeeting::admin.meeting_event.index', compact('event_for', 'meetingEvents'));
     }
 
-    public function create()
+    public function create($event_for)
     {
-        return view('executivemeeting::admin.meeting_event.create');
+        return view('executivemeeting::admin.meeting_event.create', compact('event_for'));
     }
 
-    public function store(StoreMeetingEventRequest $request)
+    public function store(StoreMeetingEventRequest $request, $event_for)
     {
-        MeetingEvent::create($request->validated());
+        MeetingEvent::create($request->validated() + [
+                'event_for' => $event_for
+            ]);
 
-        toast('Event Added Successfully','success');
+        toast('Event Added Successfully', 'success');
         return back();
     }
 
-    public function show(MeetingEvent $meetingEvent)
+    public function show($event_for, MeetingEvent $meetingEvent)
     {
         return view('executivemeeting::show');
     }
 
-    public function edit(MeetingEvent $meetingEvent)
+    public function edit($event_for, MeetingEvent $meetingEvent)
     {
-        return view('executivemeeting::admin.meeting_event.edit',compact('meetingEvent'));
+        return view('executivemeeting::admin.meeting_event.edit', compact('event_for','meetingEvent'));
     }
 
-    public function update(UpdateMeetingEventRequest $request, MeetingEvent $meetingEvent)
+    public function update(UpdateMeetingEventRequest $request, $event_for, MeetingEvent $meetingEvent)
     {
         $meetingEvent->update($request->validated());
 
-        toast('Meeting Event Updated Successfully','success');
+        toast('Meeting Event Updated Successfully', 'success');
 
         return redirect(route('admin.executiveMeeting.meetingEvent.index'));
     }
 
-    public function destroy(MeetingEvent $meetingEvent)
+    public function destroy($event_for, MeetingEvent $meetingEvent)
     {
         $meetingEvent->delete();
 
-        toast('Meeting Event Deleted Successfully','success');
+        toast('Meeting Event Deleted Successfully', 'success');
 
         return back();
     }

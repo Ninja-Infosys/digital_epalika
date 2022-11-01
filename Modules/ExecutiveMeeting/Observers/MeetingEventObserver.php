@@ -56,7 +56,7 @@ class MeetingEventObserver
                         'en_start_date' => $en_start_date,
                         'end_date' => $end_date,
                         'en_end_date' => $en_end_date,
-                        'meetingEvent_for' => $meetingEvent->meetingEvent_for ?? 'Municipal',
+                        'event_for' => $meetingEvent->event_for,
                         'url' => $meetingEvent->url,
                         'recurrence_end_date' => $meetingEvent->recurrence_end_date,
                         'en_recurrence_end_date' => $meetingEvent->en_recurrence_end_date,
