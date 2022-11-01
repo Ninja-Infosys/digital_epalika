@@ -180,7 +180,7 @@
                         startTime: '10:00', // a start time (10am in this example)
                         endTime: '17:00', // an end time (6pm in this example)
                     },
-                    events: "{{route('admin.executiveMeeting.meetingCalendar')}}",
+                    events: "{{route('admin.executiveMeeting.calendar.meetingCalendar',$event_for)}}",
 
                     dateClick: function (event) {
 
@@ -207,7 +207,7 @@
                     if (title) {
                         console.log('ok');
                         $.ajax({
-                            url: "{{route('admin.executiveMeeting.event.store')}}",
+                            url: "",
                             data: {
                                 title: title,
                                 className: eventClass,

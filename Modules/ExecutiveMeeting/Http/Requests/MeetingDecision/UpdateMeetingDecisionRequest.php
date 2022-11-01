@@ -1,22 +1,22 @@
 <?php
 
-namespace Modules\ExecutiveMeeting\Http\Requests\MunicipalMeetingDecision;
+namespace Modules\ExecutiveMeeting\Http\Requests\MeetingDecision;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
-class UpdateDecisionRequest extends FormRequest
+class UpdateMeetingDecisionRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('municipalMeeting_edit');
+        return Gate::allows('meetingDecision_edit');
     }
 
     public function rules(): array
     {
         return [
-            'meeting_detail_id' => ['required', Rule::exists('meeting_details', 'id')->withoutTrashed()],
+            'meeting_event_id' => ['required', Rule::exists('meeting_events', 'id')->withoutTrashed()],
             'subject' => ['nullable', 'string'],
             'date' => ['nullable'],
             'description' => ['nullable'],
@@ -27,7 +27,7 @@ class UpdateDecisionRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'meeting_detail_id.required' => 'नगरपालिका बैठक आईडी आवश्यक छ',
+            'meeting_event_id.required' => 'बैठक आवश्यक छ',
             'decision_file.mimes' => 'निर्णय फाइल अनिबार्य png, jpeg, jpg मा हुनुपर्छ '
         ];
     }
