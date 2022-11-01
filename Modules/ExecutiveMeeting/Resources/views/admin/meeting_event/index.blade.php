@@ -54,8 +54,8 @@
                                     <td>{{$meetingEvent->event_name}}</td>
                                     <td>{{$meetingEvent->description}}</td>
                                     <td>{{$meetingEvent->recurrence->label()}}</td>
-                                    <td>{{$meetingEvent->start_date}}</td>
-                                    <td>{{$meetingEvent->end_date}}</td>
+                                    <td>{{$meetingEvent->start_date}}({{$meetingEvent->en_start_date?->toDateString()}})</td>
+                                    <td>{{$meetingEvent->end_date}}({{$meetingEvent->en_end_date?->toDateString()}})</td>
 
                                     <td>
                                         @can('executiveCommittee_edit')
@@ -85,6 +85,7 @@
                         </table>
                         {{$meetingEvents->links()}}
                     </div>
+
                 </div>
             </div>
         </div>

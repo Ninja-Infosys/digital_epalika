@@ -39,7 +39,7 @@
                           enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-12 mb-2">
                                 <label for="event_name" class="form-label">नाम *</label>
                                 <input
                                     type="text"
@@ -52,6 +52,21 @@
                                 @error('event_name')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-2">
+                                <x-date-input-component
+                                    nameNe="start_date" labelNe="सुरू मिति *"
+                                    nameEn="en_start_date" labelEn="Start Date"
+                                    :getTodayDate="false"
+                                />
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <x-date-input-component
+                                    nameNe="end_date" labelNe="अन्तिम मिति"
+                                    nameEn="en_end_date" labelEn="End Date"
+                                    :getTodayDate="false"
+                                />
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="recurrence" class="form-label">पुनरावृत्ति *</label>
@@ -75,15 +90,8 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <x-date-input-component
-                                    nameNe="start_date" labelNe="सुरू मिति *"
-                                    nameEn="en_start_date" labelEn="Start Date"
-                                    :getTodayDate="false"
-                                />
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <x-date-input-component
-                                    nameNe="end_date" labelNe="अन्तिम मिति"
-                                    nameEn="en_end_date" labelEn="End Date"
+                                    nameNe="recurrence_end_date" labelNe="पुनरावृत्ति अन्तिम मिति"
+                                    nameEn="en_recurrence_end_date" labelEn="Recurrence End Date"
                                     :getTodayDate="false"
                                 />
                             </div>
