@@ -15,6 +15,7 @@
                     <x-application-component
                         :application-type="\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR"
                         url="{{route('emap.admin.map.map-apply.notice.upload.notice',$mapApply)}}"/>
+
                     <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                             requestRoute="{{route('print.office-letter-print')}}">
                         <i class="fa fa-print"></i> Print
@@ -58,7 +59,7 @@
                             म्याद नाघी आएको उजुरी उपर कुनै किसिमको कारवाही नहुने व्यहोरा जानकारी गराईन्छ |
                         </p>
                         <h6><b>१. निर्माणका निमित्त प्रस्तावित जग्गा चारकिल्ला विवरण:</b></h6>
-                        <table class="table table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead>
                             <tr>
                                 <th scope="col" width="80" rowspan="2">दिशा</th>
@@ -125,23 +126,6 @@
             </div>
         </div>
     </div>
-
-    @push('style')
-        <style>
-            .font-black p {
-                color: black;
-            }
-
-            .underline-dotted {
-                border-bottom: dotted 2px !important;
-                padding: 0 20px;
-            }
-
-            .custom-width {
-                padding: 0 50px !important;
-            }
-        </style>
-    @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>
     @endpush
