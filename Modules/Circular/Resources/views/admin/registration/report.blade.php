@@ -28,12 +28,18 @@
         <div class="col-sm-8">
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
+                    <button class="btn btn-info float-right">
+                        <i class="fa fa-file-excel"></i> Export Excel
+                    </button>
+                </div>
+                <div class="btn-group mb-3">
                     <button class="btn btn-primary float-right" onclick="printJS({
                     printable: 'printData',
                     type: 'html',
-                    documentTitle: '{{$officeSetting->localBody->local_body ?? ''}}',
+                    documentTitle: '{{$officeSetting->localBody->local_body ?? ''}}को पत्र दर्ता रिपोर्ट',
                     showModal: true,
                     css: '{{asset('assets/backend/css/print.css')}}',
+                    honorMarginPadding : false,
                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})">
                         <i class="fa fa-print"></i> Print
                     </button>
@@ -42,20 +48,4 @@
         </div><!-- end col-->
     </div>
     <livewire:circular::registration-report />
-
-    @push('scripts')
-        <script>
-            $("#printBtn").click(function(e){
-                var print_area = window.open();
-                print_area.document.write(document.getElementsByClassName('printData')[0].innerHTML);
-                print_area.document.close();
-                print_area.focus();
-                print_area.print();
-                print_area.close();
-
-            });
-        </script>
-
-    @endpush
-
 @endsection

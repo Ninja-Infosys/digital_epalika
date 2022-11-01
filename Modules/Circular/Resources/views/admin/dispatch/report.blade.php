@@ -20,24 +20,33 @@
             </div>
         </div>
     </div>
+    <div class="row mb-2">
+        <div class="col-sm-4">
+            <a href="{{route('admin.circular.dispatch.index')}}" class="btn btn-danger rounded-pill waves-effect waves-light mb-3">
+                <i class="fa fa-plus"></i> पत्र चलानी</a>
+        </div>
+        <div class="col-sm-8">
+            <div class="text-sm-end">
+                <div class="btn-group mb-3">
+                    <button class="btn btn-info float-right">
+                        <i class="fa fa-file-excel"></i> Export Excel
+                    </button>
+                </div>
+                <div class="btn-group mb-3">
+                    <button class="btn btn-primary float-right" onclick="printJS({
+                    printable: 'printData',
+                    type: 'html',
+                    documentTitle: '{{$officeSetting->localBody->local_body ?? ''}}को पत्र चलानी रिपोर्ट',
+                    showModal: true,
+                    css: '{{asset('assets/backend/css/print.css')}}',
+                    honorMarginPadding : false,
+                    modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})">
+                        <i class="fa fa-print"></i> Print
+                    </button>
+                </div>
+            </div>
+        </div><!-- end col-->
+    </div>
     <livewire:circular::dispatch-report />
-    <button class="btn btn-primary float-right" id="printBtnDispatch" >
-        <i class="fa fa-print"></i> Print
-    </button>
-
-    @push('scripts')
-        <script>
-            $("#printBtnDispatch").click(function(e){
-                var print_area = window.open();
-                print_area.document.write(document.getElementsByClassName('printDataDipatch')[0].innerHTML);
-                print_area.document.close();
-                print_area.focus();
-                print_area.print();
-                print_area.close();
-
-            });
-        </script>
-
-    @endpush
 
 @endsection
