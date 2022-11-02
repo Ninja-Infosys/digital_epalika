@@ -8,17 +8,18 @@ use Illuminate\Validation\Rule;
 
 class UpdateObjectTransactionRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('objectTransaction_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
 
-            return [
-                'title' => ['required', 'string', 'max:255'],
-            ];
+        return [
+            'title' => ['required', 'string', 'max:255'],
+            'object_transaction_id' => ['nullable', Rule::exists('object_transactions', 'id')]
+        ];
 
     }
 }

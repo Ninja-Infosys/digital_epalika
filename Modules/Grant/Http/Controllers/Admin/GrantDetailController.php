@@ -1,30 +1,21 @@
 <?php
 
-namespace Modules\Grant\Http\Controllers;
+namespace Modules\Grant\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
-use Modules\Grant\Entities\GrantActivity;
 
-class GrantActivityController extends Controller
+class GrantDetailController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('grantActivity_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
-
-        $grantActivities=GrantActivity::all();
-
-        return view('grant::admin.grant_activity.index',compact('grantActivities'));
+        return view('grant::admin.grant_detail.index');
     }
 
     public function create()
     {
-        return view('grant::admin.grant_activity.create');
+        return view('grant::admin.grant_detail.create');
     }
 
     public function store(Request $request)

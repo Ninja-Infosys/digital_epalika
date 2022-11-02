@@ -14,7 +14,10 @@ class UpdateSubjectRequest extends FormRequest
     public function rules():array
     {
         return [
-            //
+            'title' => ['required'],
+            'level' => ['required'],
+            'duration' => ['required'],
+            'content' => ['nullable'],
         ];
     }
 }

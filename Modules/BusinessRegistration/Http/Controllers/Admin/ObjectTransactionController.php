@@ -16,8 +16,8 @@ class ObjectTransactionController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        $objectTransactions = ObjectTransaction::get();
-        return view('businessregistration::admin.setting.objectTransaction.index',compact('objectTransactions'));
+        $objectTransactions = ObjectTransaction::with('objectTransaction')->latest()->get();
+        return view('businessregistration::admin.setting.objectTransaction.index', compact('objectTransactions'));
     }
 
     public function create()
@@ -27,7 +27,9 @@ class ObjectTransactionController extends Controller
             'You are not allowed to digital board news access'
         );
 
-        return view('businessregistration::admin.setting.objectTransaction.create');
+        $parentObjectTransactions = ObjectTransaction::whereNull('object_transaction_id')->get();
+
+        return view('businessregistration::admin.setting.objectTransaction.create', compact('parentObjectTransactions'));
     }
 
     public function store(StoreObjectTransactionRequest $request)
@@ -36,8 +38,10 @@ class ObjectTransactionController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         ObjectTransaction::create($request->validated());
-        toast(' कारोबार गर्ने वस्तु  सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
+        toast(' कारोबार गर्ने वस्तु  सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -56,7 +60,10 @@ class ObjectTransactionController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        return view('businessregistration::admin.setting.objectTransaction.edit',compact('objectTransaction'));
+
+        $parentObjectTransactions = ObjectTransaction::whereNull('object_transaction_id')->get();
+
+        return view('businessregistration::admin.setting.objectTransaction.edit', compact('objectTransaction', 'parentObjectTransactions'));
 
     }
 

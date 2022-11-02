@@ -60,7 +60,7 @@ class MeetingEventController extends Controller
                 'event_for' => $event_for
             ]);
 
-        toast('Event Added Successfully', 'success');
+        toast('बैठक सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -93,9 +93,9 @@ class MeetingEventController extends Controller
 
         $meetingEvent->update($request->validated());
 
-        toast('Meeting Event Updated Successfully', 'success');
+        toast('बैठक सफलतापूर्वक अद्यावधिक गरियो','success');
 
-        return redirect(route('admin.executiveMeeting.meetingEvent.index'));
+        return redirect(route('admin.executiveMeeting.meetingEvent.index',$event_for));
     }
 
     public function destroy($event_for, MeetingEvent $meetingEvent)
@@ -107,7 +107,7 @@ class MeetingEventController extends Controller
 
         $meetingEvent->delete();
 
-        toast('Meeting Event Deleted Successfully', 'success');
+        toast('बैठक सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
     }
