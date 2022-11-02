@@ -6,12 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="#">
+                            <a href="{{route('admin.roaster.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">तालिम व्यवस्थापन</a>
+                            <a href="{{route('admin.roaster.setting.department.index')}}">बिभाग</a>
                         </li>
                         <li class="breadcrumb-item active">बिभाग सम्पादन</li>
                     </ol>
@@ -37,10 +37,7 @@
                           enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong> विवरण </strong>
-                            </legend>
+                        <div class="col-md-12 p-2 mb-2">
                             <div class="row">
                                 <div class="col-md-6 mb-2">
                                     <label for="title" class="form-label">विभाग *</label>
@@ -51,7 +48,7 @@
                                     @enderror
                                 </div>
                             </div>
-                        </fieldset>
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
