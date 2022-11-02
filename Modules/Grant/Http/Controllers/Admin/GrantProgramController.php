@@ -20,7 +20,7 @@ class GrantProgramController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $grantPrograms = GrantProgram::with('fiscalYear')->latest()->get();
+        $grantPrograms = GrantProgram::with('fiscalYear')->latest()->paginate(10);
 
         return view('grant::admin.grant_program.index', compact('grantPrograms'));
     }
