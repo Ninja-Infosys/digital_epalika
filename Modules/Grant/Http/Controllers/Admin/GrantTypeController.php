@@ -19,17 +19,30 @@ class GrantTypeController extends Controller
             'You are not allowed to access this resource'
         );
 
-        return view('grant::index');
+        $grantTypes=GrantType::all();
+
+        return view('grant::admin.grant_type.index', compact('grantTypes'));
     }
 
     public function create()
     {
-        return view('grant::create');
+        abort_if(Gate::denies('grantType_create'),
+            403,
+            'You are not allowed to access this resource'
+        );
+        return view('grant::admin.grant_type.create');
     }
 
     public function store(StoreGrantTypeRequest $request)
     {
-        //
+        abort_if(Gate::denies('grantType_create'),
+            403,
+            'You are not allowed to access this resource'
+        );
+        GrantType::create($request->validated());
+
+        toast('अनुदान प्रकार सफलतापूर्वक थपियो', 'success');
+        return back();
     }
 
     public function show(GrantType $grantType)
@@ -39,16 +52,33 @@ class GrantTypeController extends Controller
 
     public function edit(GrantType $grantType)
     {
-        return view('grant::edit');
+        abort_if(Gate::denies('grantType_edit'),
+            403,
+            'You are not allowed to access this resource'
+        );
+        return view('grant::admin.grant_type.edit', compact('grantType'));
     }
 
     public function update(UpdateGrantTypeRequest $request, GrantType $grantType)
     {
-        //
+        abort_if(Gate::denies('grantType_edit'),
+        403,
+        'You are not allowed to edit this resource'
+    );
+        $grantType->update($request->validated());
+
+        toast('अनुदान प्रकार सफलतापूर्वक अद्यावधिक गरियो','success');
+        return redirect(route('admin.grant.grantType.index'));
     }
 
     public function destroy(GrantType $grantType)
     {
-        //
+        abort_if(Gate::denies('grantType_delete'),
+        403,
+        'you are not allowed to delete this resource');
+        $grantType->delete();
+
+        toast('अनुदान प्रकार सफलतापूर्वक मेटाइयो', 'success');
+        return back();
     }
 }
