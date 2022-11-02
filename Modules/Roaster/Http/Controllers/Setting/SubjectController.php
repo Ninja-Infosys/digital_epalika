@@ -21,8 +21,9 @@ class SubjectController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+        $subjects = Subject::latest()->get();
 
-        return view('roaster::index');
+        return view('roaster::admin.setting.subject.index', compact('subjects'));
     }
 
     public function create()
@@ -33,7 +34,7 @@ class SubjectController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
-        return view('roaster::create');
+        return view('roaster::admin.setting.subject.create');
     }
 
     public function store(StoreSubjectRequest $request)
@@ -43,6 +44,10 @@ class SubjectController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+        Subject::create($request->validated());
+
+        toast('Subject Created Successfully', 'success');
+        return redirect(route('admin.roaster.setting.subject.index'));
     }
 
     public function show(Subject $subject)
@@ -63,7 +68,7 @@ class SubjectController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
-        return view('roaster::edit');
+        return view('roaster::admin.setting.subject.edit', compact('subject'));
     }
 
     public function update(UpdateSubjectRequest $request, Subject $subject)
@@ -73,6 +78,9 @@ class SubjectController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+        $subject->update($request->validated());
+        toast('Subject Updated Successfully', 'success');
+        return redirect(route('admin.roaster.setting.subject.index'));
     }
 
     public function destroy(Subject $subject)
@@ -82,5 +90,8 @@ class SubjectController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+        $subject->delete();
+        toast('Subject Deleted Successfully', 'success');
+        return back();
     }
 }

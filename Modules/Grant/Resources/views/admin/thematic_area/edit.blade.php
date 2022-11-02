@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">विषयगत क्षेत्र थप्नुहोस </h4>
+                        <h4 class="header-title">विषयगत क्षेत्र सम्पादन गर्नुहोस  </h4>
                         <a href="{{route('admin.grant.thematicArea.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> पूर्वाधार शीर्षक सूची
                         </a>

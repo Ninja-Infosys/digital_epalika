@@ -3,11 +3,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Grant\Http\Controllers\Admin\DashboardController;
+use Modules\Grant\Http\Controllers\Admin\GrantActivityController;
 use Modules\Grant\Http\Controllers\Admin\GrantProgramController;
 use Modules\Grant\Http\Controllers\Admin\GrantTypeController;
 use Modules\Grant\Http\Controllers\Admin\InfrastructureController;
 use Modules\Grant\Http\Controllers\Admin\ThematicAreaController;
-use Modules\Grant\Http\Controllers\GrantActivityController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
