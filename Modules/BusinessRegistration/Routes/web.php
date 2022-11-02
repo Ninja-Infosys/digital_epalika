@@ -19,3 +19,4 @@ use Modules\BusinessRegistration\Http\Controllers\Frontend\FrontendController;
 
 Route::get('/business',[FrontendController::class,'business'])->name('business');
 Route::get('/proprietorDetail/{proprietorDetail}/print',[FrontendController::class,'printPdf'])->name('print');
+Route::view('schedule','businessregistration::frontend.schedule.schedule_1')->name('schedule_1');
