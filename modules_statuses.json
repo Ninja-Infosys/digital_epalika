@@ -8,5 +8,6 @@
     "ExecutiveMeeting": true,
     "ListRegistration": true,
     "Roaster": true,
-    "Grant": true
+    "Grant": true,
+    "Request": true
 }

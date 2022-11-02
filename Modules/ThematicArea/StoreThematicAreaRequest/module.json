@@ -1,0 +1,11 @@
+{
+    "name": "ThematicArea/StoreThematicAreaRequest",
+    "alias": "thematicarea/storethematicarearequest",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ThematicArea/StoreThematicAreaRequest\\Providers\\ThematicArea/StoreThematicAreaRequestServiceProvider"
+    ],
+    "files": []
+}
