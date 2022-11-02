@@ -9387,3 +9387,6 @@ table[data-toggle=table] {
 .font-black p {
     color: #000000;
 }
+.p-space{
+    text-indent: 20px;
+}
