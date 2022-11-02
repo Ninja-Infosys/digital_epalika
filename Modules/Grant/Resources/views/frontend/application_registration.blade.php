@@ -35,8 +35,8 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for="local_body">वडा नं</label>
-                            <select id="local_body" class="form-control">
+                            <label for="ward_no">वडा नं</label>
+                            <select id="ward_no" class="form-control">
                                 <option>--वडा नं छानुहोस्--</option>
                             </select>
                         </div>

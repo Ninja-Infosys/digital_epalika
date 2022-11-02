@@ -4,6 +4,12 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+<li>
+    <a href="{{route('admin.grant.grantDetail.create')}}">
+        <i class="fa-regular fa-file"></i>
+        <span>अनुदान विवरण</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/grant/setting/*') ? 'active' : ''}}">
     <a href="#sidebarGrantSetting"
        {{request()->is('admin/grant/setting/*') ? 'aria-expanded=true' : ''}}
