@@ -24,6 +24,13 @@
                 </a>
             </li>
             @endcan
+            @can('thematicArea_access')
+            <li class="{{request()->is('admin/grant/setting/thematicArea') ? 'active' : ''}}">
+                <a href="{{route('admin.grant.thematicArea.index')}}">
+                    <span>  विषयगत क्षेत्र  </span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </li>
