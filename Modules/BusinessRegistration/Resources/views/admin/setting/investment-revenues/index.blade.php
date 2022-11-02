@@ -11,13 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">व्यवसाय को
-                                प्रकृति </a>
+                            <a href="{{route('admin.businessRegistration.setting.investmentRevenue.index')}}">पुँजीगत लगानी र राजस्वो </a>
                         </li>
-                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु</li>
+                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु उप श्रेणी</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कारोबार गर्ने वस्तु </h4>
+                <h4 class="page-title">कारोबार गर्ने वस्तु उप श्रेणी</h4>
             </div>
         </div>
     </div>
@@ -27,12 +26,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कारोबार गर्ने वस्तु सूची</h4>
-
-                        @can('objectTransaction_create')
-                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.create')}}"
+                        <h4 class="header-title">पुँजीगत लगानी र राजस्वो सूची</h4>
+                        @can('objectTransactionSubCategory_create')
+                            <a href="{{route('admin.businessRegistration.setting.investmentRevenue.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ वकारोबार गर्ने वस्तु थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ पुँजीगत लगानी र राजस्वो  थप्नुहोस्
                             </a>
                         @endcan
 
@@ -44,30 +42,34 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>कारोबार गर्ने वस्तुको वर्ग</th>
-                                <th>शिर्षक</th>
+                                <th>शिर्षक </th>
+                                <th>बर्ग</th>
+                                <th>नयाँ व्यवसाय दर्ता गर्दा लाग्ने
+                                        शुल्क</th>
+                                <th>व्यवसाय नबिकरण दर्ता गर्दा लाग्ने शुल्क</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($objectTransactions as $objectTransaction)
+                            @forelse($investmentRevenues as $investmentRevenue)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$objectTransaction->objectTransaction->title ?? ''}}</td>
-                                    <td>{{$objectTransaction->title}}</td>
+                                    <td>{{$investmentRevenue->title}}</td>
+                                    <td>{{$investmentRevenue->objectTransaction->title??''}}</td>
+                                    <td>{{$investmentRevenue->registration_amount??0}}</td>
+                                    <td>{{$investmentRevenue->renew_amount??0}}</td>
                                     <td>
-                                        @can('objectTransaction_edit')
-                                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.edit',$objectTransaction)}}"
+                                        @can('objectTransactionSubCategory_edit')
+                                            <a href="{{route('admin.businessRegistration.setting.investmentRevenue.edit',$investmentRevenue)}}"
                                                class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        <form
-                                            action="{{route('admin.businessRegistration.setting.objectTransaction.destroy',$objectTransaction)}}"
-                                            method="post">
+                                        <form action="{{route('admin.businessRegistration.setting.investmentRevenue.destroy',$investmentRevenue)}}"
+                                              method="post">
                                             @csrf
                                             @method('delete')
-                                            @can('objectTransaction_delete')
+                                            @can('investmentRevenue_delete')
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
                                                     <i class="fa fa-trash"></i> मेटाउनु होस्
                                                 </button>

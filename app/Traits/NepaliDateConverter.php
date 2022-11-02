@@ -7,7 +7,7 @@ use RuntimeException;
 
 trait NepaliDateConverter
 {
-    private $nepali_length = array(
+    private array $nepali_length = array(
         1975 => array(31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31),
         1976 => array(31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30),
         1977 => array(31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30),
@@ -132,13 +132,13 @@ trait NepaliDateConverter
         //OH GOD!  I am tired.
     );
 
-    private $firstDay_en = "1918-04-13";
-    private $start_ne = "1975";
-    private $start_en = "1918";
-    private $end_ne = "2095";
-    private $end_en = "2038";
-    private $month_name = array('बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मङ्सिर', 'पुस', 'माघ', 'फाल्गुण', 'चैत');
-    private $day_name = array('आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहिबार', 'शुक्रबार', 'शनिवार');
+    private string $firstDay_en = "1918-04-13";
+    private string $start_ne = "1975";
+    private string $start_en = "1918";
+    private string $end_ne = "2095";
+    private string $end_en = "2038";
+    private array $month_name = array('बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मङ्सिर', 'पुस', 'माघ', 'फाल्गुण', 'चैत');
+    private array $day_name = array('आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहिबार', 'शुक्रबार', 'शनिवार');
 
     private function get_week_ne($year, $month, $day): string
     {

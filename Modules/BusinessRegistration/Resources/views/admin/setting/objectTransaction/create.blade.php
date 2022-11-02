@@ -12,7 +12,8 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">कारोबार गर्ने वस्तु </a>
+                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">कारोबार
+                                गर्ने वस्तु </a>
                         </li>
                         <li class="breadcrumb-item active">कारोबार गर्ने वस्तु</li>
                     </ol>
@@ -28,7 +29,8 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">कारोबार गर्ने वस्तु थप्नुहोस्</h4>
-                        <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i>कारोबार गर्ने वस्तु सूची
                         </a>
                     </div>
@@ -42,6 +44,20 @@
                                 <strong> कारोबार गर्ने वस्तु</strong>
                             </legend>
                             <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    <label for="object_transaction_id" class="form-label">कारोबार गर्ने वस्तुको
+                                        वर्ग</label>
+                                    <select name="object_transaction_id" id="object_transaction_id" class="form-control @error('object_transaction_id') is-invalid @enderror">
+                                        <option value="">कारोबार गर्ने वस्तुको वर्ग छान्नुहोस्</option>
+                                        @foreach($parentObjectTransactions as $parentObjectTransaction)
+                                            <option
+                                                value="{{$parentObjectTransaction->id}}" {{old('object_transaction_id') == $parentObjectTransaction->id ? 'selected':'' }}>{{$parentObjectTransaction->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('object_transaction_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="title" class="form-label">शिर्षक *</label>
                                     <input
