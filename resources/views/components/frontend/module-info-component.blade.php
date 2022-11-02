@@ -51,7 +51,7 @@
     </div>
     <div class="col-md-3">
         <div class="info-card">
-            <a href="{{route('grant')}}">
+            <a href="{{route('grant.index')}}">
                 <div class="p-2 text-center">
                     <img src="{{asset('assets/backend/images/modules/anudan.png')}}" width="50" height="50">
                     <h4>अनुदान</h4>
@@ -73,7 +73,7 @@
         <div class="info-card">
             <a href="{{route('train')}}">
                 <div class="p-2 text-center">
-                    <img src="{{asset('assets/backend/images/modules/talim.png')}}" width="50" height="50">
+                    <img src="{{asset('assets/backend/images/modules/roaster.png')}}" width="50" height="50">
                     <h4>तालिम</h4>
                 </div>
             </a>
