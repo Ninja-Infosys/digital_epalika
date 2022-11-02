@@ -2,47 +2,53 @@
 
 namespace Modules\Roaster\Entities;
 
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Trainer extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-       'name',
-       'designation_id',
-       'department_id',
-       'level',
-       'province_id',
-       'district_id',
-       'local_body_id',
-       'ward',
-       'tole',
-       'office',
-       'appointment_date',
-       'phone',
-       'email',
-       'photo',
-       'pan',
-       'experience',
-       'qualification',
-       'bank_detail',
-       'experience_as_trainee',
-       'experience_as_trainer',
-   ];
+    protected $fillable = [
+        'name',
+        'designation_id',
+        'department_id',
+        'level',
+        'province_id',
+        'district_id',
+        'local_body_id',
+        'ward',
+        'tole',
+        'office',
+        'appointment_date',
+        'phone',
+        'email',
+        'photo',
+        'pan',
+        'experience',
+        'qualification',
+        'bank_detail',
+        'experience_as_trainee',
+        'experience_as_trainer',
+    ];
 
 
     public function designation(): BelongsTo
@@ -72,12 +78,9 @@ class Trainer extends Model
 
     public function getPhotoUrlAttribute(): string
     {
-        if ($this->photo != null) {
-            $photoUrl = Storage::disk('public')->url($this->attributes['photo']);
-        } else {
-            $photoUrl = '';
-        }
-        return $photoUrl;
+        return $this->attributes['photo']
+            ? Storage::disk('public')->url($this->attributes['photo'])
+            : asset('images/user_icon.png');
     }
 
     public function setPhotoAttribute($value)
