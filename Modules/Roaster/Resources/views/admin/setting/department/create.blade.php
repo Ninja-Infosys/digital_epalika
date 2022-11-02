@@ -39,7 +39,7 @@
                         @csrf
                         <div class=" col-md-12 p-2 mb-2">
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="title" class="form-label">विभाग *</label>
                                     <input id="title" type="text" name="title" placeholder="बिभाग"
                                            class="form-control @error('title') is-invalid @enderror"

@@ -3,6 +3,7 @@
 namespace Modules\Roaster\Http\Requests\Settings\Designation;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDesignationRequest extends FormRequest
 {
@@ -14,7 +15,7 @@ class UpdateDesignationRequest extends FormRequest
     public function rules():array
     {
         return [
-            //
+            'title' => ['required', Rule::unique('designations', 'title')->ignore($this->designation)->withoutTrashed()]
         ];
     }
 }
