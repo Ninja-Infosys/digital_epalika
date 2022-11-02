@@ -31,6 +31,13 @@
                 </a>
             </li>
             @endcan
+            @can('grantType_access')
+            <li class="{{request()->is('admin/grant/setting/grantType') ? 'active' : ''}}">
+                <a href="{{route('admin.grant.grantType.index')}}">
+                    <span> अनुदान प्रकार  </span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </li>
