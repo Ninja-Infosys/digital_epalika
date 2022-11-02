@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up()
@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('business_nature')->nullable();
             $table->string('registration_date')->nullable();
             $table->string('pan_no')->nullable();
-            $table->string('price')->nullable();
             $table->boolean('is_registered')->default(0);
             $table->boolean('is_rent')->default(0);
             $table->string('amount_cost')->nullable();
@@ -31,7 +30,7 @@ return new class extends Migration {
             $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->foreignId('object_transaction_sub_category_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('investment_revenue_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('ward_no')->nullable();
             $table->string('way')->nullable();
             $table->string('tole')->nullable();

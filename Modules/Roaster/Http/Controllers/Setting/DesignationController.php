@@ -20,8 +20,8 @@ class DesignationController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
-
-        return view('roaster::index');
+        $designations = Designation::latest()->get();
+        return view('roaster::admin.setting.designation.index', compact('designations'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class DesignationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        return view('roaster::create');
+        return view('roaster::admin.setting.designation.create');
     }
 
     public function store(StoreDesignationRequest $request)
@@ -42,6 +42,10 @@ class DesignationController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+        $designation = Designation::create($request->validated());
+
+        toast('Designation Added successfully!', 'success');
+        return redirect()->route('admin.roaster.setting.designation.index');
 
     }
 
@@ -63,8 +67,7 @@ class DesignationController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
-
-        return view('roaster::edit');
+        return view('roaster::admin.setting.designation.edit', compact('designation'));
     }
 
     public function update(UpdateDesignationRequest $request, Designation $designation)
@@ -74,6 +77,9 @@ class DesignationController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+        $designation->update($request->validated());
+        toast('Designation Updated successfully!', 'success');
+        return redirect(route('admin.roaster.setting.designation.index'));
 
     }
 
@@ -84,6 +90,8 @@ class DesignationController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
-
+        $designation->delete();
+        toast('Designation Deleted successfully!', 'success');
+        return back();
     }
 }

@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.dispatch.index')}}">विषय</a>
+                            <a href="{{route('admin.roaster.setting.subject.index')}}">विषय</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ विषय थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">विषय</h4>
+                <h4 class="page-title">विषय थप्नुहोस्</h4>
             </div>
         </div>
     </div>
@@ -26,13 +26,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">विषय थप्नुहोस्</h4>
-                        <a href="#" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.roaster.setting.subject.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> विषय सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="#" method="post"
+                    <form action="{{route('admin.roaster.setting.subject.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">

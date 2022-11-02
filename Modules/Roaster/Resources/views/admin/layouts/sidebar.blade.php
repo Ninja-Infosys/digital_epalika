@@ -17,11 +17,6 @@
     <div class="collapse {{request()->is('admin/roaster/dashboard/*') ? 'show' : ''}}"
          id="sidebarEMapSetting">
         <ul class="nav-second-level">
-            <li class="{{request()->is('admin/roaster/dashboard/*') ? 'active' : ''}}">
-                <a href="{{url('admin/roaster/subject/create')}}">
-                    <span>विषय</span>
-                </a>
-            </li>
             <li class="{{request()->is('admin/emap/setting/mapFee/*') ? 'active' : ''}}">
                 <a href="{{route('admin.roaster.dashboard')}}">
                     <span>प्रशिक्षक</span>
@@ -50,6 +45,11 @@
     <div class="collapse {{request()->is('admin/roaster/setting/*') ? 'show' : ''}}"
          id="sidebarRoaster">
         <ul class="nav-second-level">
+            <li class="{{request()->is('admin/roaster/setting/subject') ? 'active' : ''}}">
+                <a href="{{route('admin.roaster.setting.subject.index')}}">
+                    <span>विषय</span>
+                </a>
+            </li>
             <li class="{{request()->is('admin/roaster/setting/designation') ? 'active' : ''}}">
                 <a href="{{route('admin.roaster.setting.designation.index')}}">
                     <span>पद थप्नुहोस् </span>
@@ -60,6 +60,7 @@
                     <span>विभाग थप्नुहोस् </span>
                 </a>
             </li>
+
         </ul>
     </div>
 </li>

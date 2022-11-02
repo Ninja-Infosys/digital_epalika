@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदान प्रकार थप्नुहोस </h4>
+                        <h4 class="header-title">अनुदान प्रकार सम्पादन गर्नुहोस  </h4>
                         <a href="{{route('admin.grant.grantType.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> अनुदान प्रकार सूची
                         </a>
