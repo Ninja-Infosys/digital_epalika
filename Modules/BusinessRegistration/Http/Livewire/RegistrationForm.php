@@ -5,15 +5,19 @@ namespace Modules\BusinessRegistration\Http\Livewire;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
+use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
-use Modules\BusinessRegistration\Entities\ObjectTransactionSubCategory;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 
 class RegistrationForm extends Component
@@ -34,7 +38,7 @@ class RegistrationForm extends Component
     public $permanent_localBody_preview;
 
 
-    public $provices = [];
+    public $provinces = [];
     public $districts = [];
     public $localBodies = [];
     public $wards = 0;
@@ -42,7 +46,7 @@ class RegistrationForm extends Component
     public $businessPurposes = [];
 
 
-    public $prices = 0;
+    public $investmentRevenues = [];
     public $threeGenerationDetails = [];
     public $partnerDetails = [];
     public $permanent_provinces = [];
@@ -62,8 +66,8 @@ class RegistrationForm extends Component
         'account_no' => null,
         'national_card_no' => null,
         'education_qualification' => null,
-        'object_transaction_sub_category_id' => null,
-        'price' => null,
+        'object_transaction_id' => null,
+        'investment_revenues_id' => null,
         'occupation' => null,
         'email' => null,
         'citizenship_no' => null,
@@ -111,7 +115,7 @@ class RegistrationForm extends Component
     ];
 
 
-    public function mount()
+    public function mount(): void
     {
         $officeSetting = OfficeSetting::first();
         $this->permanent_provinces = Province::all();
@@ -122,16 +126,16 @@ class RegistrationForm extends Component
         $this->all_districts = District::all();
         $this->businessNatures = BusinessNature::all();
         $this->businessPurposes = BusinessPurpose::all();
-        $this->objectTransactions = ObjectTransaction::with('objectTransactionSubCategories')->get();
+        $this->objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
     }
 
-    public function nextStep($step)
+    public function nextStep($step): void
     {
         $this->validate();
         $this->currentStep = $step;
     }
 
-    public function backStep($step)
+    public function backStep($step): void
     {
         $this->currentStep = $step;
     }
@@ -173,8 +177,8 @@ class RegistrationForm extends Component
         'form.establish_year' => ['nullable'],
         'form.registration_date' => ['nullable'],
         'form.pan_no' => ['nullable'],
-        'form.object_transaction_sub_category_id' => ['nullable'],
-        'form.price' => ['nullable'],
+        'form.object_transaction_id' => ['nullable'],
+        'form.investment_revenue_id' => ['nullable'],
         'form.amount_cost' => ['nullable'],
         'form.source_of_capital' => ['nullable'],
         'form.employment' => ['nullable'],
@@ -292,7 +296,7 @@ class RegistrationForm extends Component
         ];
     }
 
-    public function rules()
+    public function rules(): array
     {
         switch ($this->currentStep) {
             case 1:
@@ -322,7 +326,7 @@ class RegistrationForm extends Component
         }
     }
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
@@ -332,85 +336,83 @@ class RegistrationForm extends Component
         $this->validate();
         $proprietorDetails = DB::transaction(function () {
             $proprietorDetails = ProprietorDetail::create([
-                'name' => $this->form['name'],
-                'citizenship_no' => $this->form['citizenship_no'],
-                'issue_date' => $this->form['issue_date'],
-                'issue_district_id' => $this->form['issue_district_id'],
-                'phone' => $this->form['phone'],
-                'email' => $this->form['email'],
-                'province_id' => $this->form['permanent_province_id'],
-                'district_id' => $this->form['permanent_district_id'],
-                'local_body_id' => $this->form['permanent_local_body_id'],
-                'ward_no' => $this->form['permanent_ward_no'],
-                'way' => $this->form['permanent_way'],
-                'tole' => $this->form['permanent_tole'],
-                'house_no' => $this->form['house_no'],
-                'account_no' => $this->form['account_no'],
-                'national_card_no' => $this->form['national_card_no'],
-                'gender' => $this->form['gender'],
-                'education_qualification' => $this->form['education_qualification'],
-                'occupation' => $this->form['occupation'],
+                'name' => $this->form['name'] ?? '',
+                'citizenship_no' => $this->form['citizenship_no'] ?? '',
+                'issue_date' => $this->form['issue_date'] ?? '',
+                'issue_district_id' => $this->form['issue_district_id'] ?? '',
+                'phone' => $this->form['phone'] ?? '',
+                'email' => $this->form['email'] ?? '',
+                'province_id' => $this->form['permanent_province_id'] ?? '',
+                'district_id' => $this->form['permanent_district_id'] ?? '',
+                'local_body_id' => $this->form['permanent_local_body_id'] ?? '',
+                'ward_no' => $this->form['permanent_ward_no'] ?? '',
+                'way' => $this->form['permanent_way'] ?? '',
+                'tole' => $this->form['permanent_tole'] ?? '',
+                'house_no' => $this->form['house_no'] ?? '',
+                'account_no' => $this->form['account_no'] ?? '',
+                'national_card_no' => $this->form['national_card_no'] ?? '',
+                'gender' => $this->form['gender'] ?? '',
+                'education_qualification' => $this->form['education_qualification'] ?? '',
+                'occupation' => $this->form['occupation'] ?? '',
             ]);
 
+            $officeSetting = OfficeSetting::with('fiscalYear')->first();
+            $number = Str::padLeft(random_int(1, 999999), 6, 0);
+            $random_number = ($officeSetting->fiscalYear->title ?? '') . "_" . $number;
+
             $businessDetail = $proprietorDetails->businessDetail()->create([
-
-                $fiscalYear = OfficeSetting::with('fiscalYear')->first(),
-                $number = random_int(100000, 999999),
-                $random_number = $fiscalYear->fiscalYear->title . '_' . $number,
-
-                'business_detail_name' => $this->form['business_detail_name'],
-                'object_transaction_sub_category_id' => $this->form['object_transaction_sub_category_id'],
-                'price' => $this->form['price'],
-                'is_rent' => $this->form['is_rent'],
-                'is_registered' => $this->form['is_registered'],
-                'submission_no' => $random_number,
-                'business_detail_name_en' => $this->form['business_detail_name_en'],
-                'business_nature' => $this->form['business_nature'],
-                'establish_year' => $this->form['establish_year'],
-                'registration_date' => $this->form['registration_date'],
-                'pan_no' => $this->form['pan_no'],
-                'amount_cost' => $this->form['amount_cost'],
-                'source_of_capital' => $this->form['source_of_capital'],
-                'employment' => $this->form['employment'],
-                'house_owner_name' => $this->form['house_owner_name'],
-                'house_owner_phone' => $this->form['house_owner_phone'],
-                'house_owner_address' => $this->form['house_owner_address'],
-                'house_owner_monthly_rent' => $this->form['house_owner_monthly_rent'],
-                'province_id' => $this->form['province_id'],
-                'district_id' => $this->form['district_id'],
-                'local_body_id' => $this->form['local_body_id'],
-                'ward_no' => $this->form['ward_no'],
-                'way' => $this->form['way'],
-                'tole' => $this->form['tole'],
+                'business_detail_name' => $this->form['business_detail_name'] ?? '',
+                'investment_revenue_id' => $this->form['investment_revenue_id'] ?? '',
+                'is_rent' => $this->form['is_rent'] ?? '',
+                'is_registered' => $this->form['is_registered'] ?? '',
+                'submission_no' => $random_number ?? '',
+                'business_detail_name_en' => $this->form['business_detail_name_en'] ?? '',
+                'business_nature' => $this->form['business_nature'] ?? '',
+                'establish_year' => $this->form['establish_year'] ?? '',
+                'registration_date' => $this->form['registration_date'] ?? '',
+                'pan_no' => $this->form['pan_no'] ?? '',
+                'amount_cost' => $this->form['amount_cost'] ?? '',
+                'source_of_capital' => $this->form['source_of_capital'] ?? '',
+                'employment' => $this->form['employment'] ?? '',
+                'house_owner_name' => $this->form['house_owner_name'] ?? '',
+                'house_owner_phone' => $this->form['house_owner_phone'] ?? '',
+                'house_owner_address' => $this->form['house_owner_address'] ?? '',
+                'house_owner_monthly_rent' => $this->form['house_owner_monthly_rent'] ?? '',
+                'province_id' => $this->form['province_id'] ?? null,
+                'district_id' => $this->form['district_id'] ?? null,
+                'local_body_id' => $this->form['local_body_id'] ?? null,
+                'ward_no' => $this->form['ward_no'] ?? '',
+                'way' => $this->form['way'] ?? '',
+                'tole' => $this->form['tole'] ?? '',
             ]);
 
             $businessDetail->businessPurposes()->attach($this->form['purpose']);
 
             foreach ($this->form['threeGenerationDetails'] as $threeGenerationDetail) {
                 $proprietorDetails->threeGenerationDetails()->create([
-                    'relation' => $threeGenerationDetail['relation'],
-                    'name' => $threeGenerationDetail['name'],
-                    'name_en' => $threeGenerationDetail['name_en'],
-                    'citizenship_no' => $threeGenerationDetail['citizenship_no'],
-                    'mobile_no' => $threeGenerationDetail['mobile_no']
+                    'relation' => $threeGenerationDetail['relation'] ?? '',
+                    'name' => $threeGenerationDetail['name'] ?? '',
+                    'name_en' => $threeGenerationDetail['name_en'] ?? '',
+                    'citizenship_no' => $threeGenerationDetail['citizenship_no'] ?? '',
+                    'mobile_no' => $threeGenerationDetail['mobile_no'] ?? ''
                 ]);
             }
 
             foreach ($this->form['partnerDetails'] as $partnerDetail) {
                 $businessDetail->partnerDetails()->create([
-                    'relation' => $partnerDetail['relation'],
-                    'name' => $partnerDetail['name'],
-                    'citizenship_no' => $partnerDetail['citizenship_no'],
-                    'mobile_no' => $partnerDetail['mobile_no']
+                    'relation' => $partnerDetail['relation'] ?? '',
+                    'name' => $partnerDetail['name'] ?? '',
+                    'citizenship_no' => $partnerDetail['citizenship_no'] ?? '',
+                    'mobile_no' => $partnerDetail['mobile_no'] ?? ''
                 ]);
             }
 
             foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
                 $businessDetail->registeredBusinesses()->create([
-                    'registration_no' => $registeredBusiness['registration_no'],
-                    'business_name' => $registeredBusiness['business_name'],
-                    'registration_date' => $registeredBusiness['registration_date'],
-                    'active' => $registeredBusiness['active']
+                    'registration_no' => $registeredBusiness['registration_no'] ?? '',
+                    'business_name' => $registeredBusiness['business_name'] ?? '',
+                    'registration_date' => $registeredBusiness['registration_date'] ?? '',
+                    'active' => $registeredBusiness['active'] ?? ''
                 ]);
             }
             $proprietorDetails->businessRegisteredFile()->create([
@@ -437,45 +439,47 @@ class RegistrationForm extends Component
             'text' => "तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो",
         ]);
 
+        $this->emit('productStore');
+
         $this->reset('form');
 
         return redirect()->route('businessRegistration.print', $proprietorDetails->id);
     }
 
-    public function documentsArrayIncrement()
+    public function documentsArrayIncrement(): void
     {
         $this->form['threeGenerationDetails'][] = [];
     }
 
-    public function documentsArrayDecrement($index)
+    public function documentsArrayDecrement($index): void
     {
         unset($this->form['threeGenerationDetails'][$index]);
         $this->form['threeGenerationDetails'] = array_values($this->form['threeGenerationDetails']);
     }
 
-    public function partnerDetailIncrement()
+    public function partnerDetailIncrement(): void
     {
         $this->form['partnerDetails'][] = [];
     }
 
-    public function partnerDetailDecrement($index)
+    public function partnerDetailDecrement($index): void
     {
         unset($this->form['partnerDetails'][$index]);
         $this->form['partnerDetails'] = array_values($this->form['partnerDetails']);
     }
 
-    public function registeredBusinessArrayIncrement()
+    public function registeredBusinessArrayIncrement(): void
     {
         $this->form['registeredBusinesses'][] = [];
     }
 
-    public function registeredBusinessArrayDecrement($index)
+    public function registeredBusinessArrayDecrement($index): void
     {
         unset($this->form['registeredBusinesses'][$index]);
         $this->form['registeredBusinesses'] = array_values($this->form['registeredBusinesses']);
     }
 
-    public function render()
+    public function render(): Factory|View|Application
     {
         if (!empty($this->form['permanent_province_id'])) {
             $this->permanent_districts = Province::with('districts')->findOrFail($this->form['permanent_province_id'])->districts;
@@ -497,10 +501,8 @@ class RegistrationForm extends Component
             $this->wards = LocalBody::findOrFail($this->form['local_body_id'])->wards;
         }
 
-        if (!empty($this->form['object_transaction_sub_category_id'])) {
-            $this->prices = ObjectTransactionSubCategory::where('id', $this->form['object_transaction_sub_category_id'])->first();
-        } else {
-            $this->prices = '';
+        if (!empty($this->form['object_transaction_id'])) {
+            $this->investmentRevenues = InvestmentRevenue::where('object_transaction_id', $this->form['object_transaction_id'])->get();
         }
 
         //temporary address preview

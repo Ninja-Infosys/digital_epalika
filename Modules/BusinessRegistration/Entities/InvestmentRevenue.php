@@ -2,13 +2,14 @@
 
 namespace Modules\BusinessRegistration\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ObjectTransactionSubCategory extends Model
+class InvestmentRevenue extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -19,15 +20,29 @@ class ObjectTransactionSubCategory extends Model
     ];
 
     protected $fillable = [
-        'title',
-        'category_a',
-        'category_b',
-        'category_c',
         'object_transaction_id',
+        'title',
+        'registration_amount',
+        'renew_amount',
     ];
 
     public function objectTransaction(): BelongsTo
     {
         return $this->belongsTo(ObjectTransaction::class);
+    }
+
+    public function businessDetails(): HasMany
+    {
+        return $this->hasMany(BusinessDetail::class);
+    }
+
+    public function scopeForRenew($query)
+    {
+        return $query->where('is_renew', 1);
+    }
+
+    public function scopeForRegistration($query)
+    {
+        return $query->where('is_renew', 0);
     }
 }
