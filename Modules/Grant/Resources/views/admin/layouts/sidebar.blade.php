@@ -38,6 +38,13 @@
                 </a>
             </li>
             @endcan
+            @can('grantProgram_access')
+            <li class="{{request()->is('admin/grant/setting/grantProgram') ? 'active' : ''}}">
+                <a href="{{route('admin.grant.grantProgram.index')}}">
+                    <span> अनुदान कार्यक्रम  </span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </li>
