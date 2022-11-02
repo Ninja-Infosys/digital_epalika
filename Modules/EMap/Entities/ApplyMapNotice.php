@@ -13,7 +13,7 @@ use Modules\EMap\Enums\NoticeTypeEnum;
 
 class ApplyMapNotice extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',

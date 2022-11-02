@@ -11,3 +11,8 @@
 |
 */
 
+use Modules\Grant\Http\Controllers\FrontendController;
+
+Route::controller(FrontendController::class)->group(function (){
+    \Illuminate\Support\Facades\Route::get('application-registration','applicationRegistration')->name('applicationRegistration');
+});

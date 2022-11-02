@@ -11,7 +11,7 @@ use Modules\EMap\Enums\PostsEnum;
 
 class DesignerDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',

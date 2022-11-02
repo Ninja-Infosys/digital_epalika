@@ -12,7 +12,7 @@ use Modules\EMap\Enums\LandOwnerTypeEnum;
 
 class LandOwner extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',
