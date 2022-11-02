@@ -11,7 +11,7 @@ use Modules\EMap\Enums\FourSideParticularEnum;
 
 class FourFort extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',

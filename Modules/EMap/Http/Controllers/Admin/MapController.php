@@ -65,7 +65,8 @@ class MapController extends Controller
     public function officeLetter(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail',
-            'houseOwner'
+            'houseOwner',
+            'client'
         );
         return view('emap::admin.notice.office-letter', compact('mapApply'));
     }

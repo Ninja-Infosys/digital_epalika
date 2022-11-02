@@ -15,7 +15,7 @@ use Modules\EMap\Enums\RelationEnum;
 
 class ApplicantDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',

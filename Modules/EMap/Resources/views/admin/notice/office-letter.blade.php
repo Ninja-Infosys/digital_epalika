@@ -15,12 +15,11 @@
                     <x-application-component
                         :application-type="\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR"
                         url="{{route('emap.admin.map.map-apply.notice.upload.notice',$mapApply)}}"/>
-
+                    <x-print-button title="{{$mapApply->client->name}}को संघियारको नाममा जारी भएको सूचना"/>
                     <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
                             requestRoute="{{route('print.office-letter-print')}}">
                         <i class="fa fa-print"></i> Print
                     </button>
-
                 </div>
             </div>
         </div>
@@ -30,36 +29,34 @@
             <div class="card mb_30">
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
-                        <div class="top-line d-flex justify-content-between mt-4">
-                            <p>पत्र सं: <span class="underline-dotted custom-width"></span><br>
-                                चलानी नं: <span class="underline-dotted custom-width">
-                            </span></p>
-                            <p>मिति: <span class="underline-dotted custom-width">
-                            </span></p>
+                        <div class="d-flex justify-content-between mt-2">
+                            <span>
+                                पत्र सं: <span class="underline-dotted custom-width"></span><br>
+                                चलानी नं: <span class="underline-dotted custom-width"></span>
+                            </span>
+                            <span>मिति: <span class="underline-dotted custom-width"></span></span>
                         </div>
-                        <h4 class="text-center my-3"><b>संधियारको नाममा जारी भएको सूचना
-                            </b></h4>
-                        <p class="my-2">
-                            &emsp;&emsp;&emsp;यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
+                        <h4 class="text-center fw-bold mt-2">संधियारको नाममा जारी भएको सूचना</h4>
+                        <span class="mt-2 p-space">यस {{config('applicationDetail.office_type')}} वडा नं. <span class="underline-dotted">
                                 {{$mapApply->landDetail->ward_no??''}}
                             </span> टोल <span class="underline-dotted"> {{$mapApply->landDetail->tole??''}}
                             </span><span class="underline-dotted custom-width"></span> मा अवस्थित साविक <span class="underline-dotted">
                                    {{$mapApply->landDetail->former_ward_no??''}}
                             </span>किता नं. <span class="underline-dotted">
- {{$mapApply->landDetail->plot_no??''}}
+                                {{$mapApply->landDetail->plot_no??''}}
                             </span> क्षेत्रफल <span class="underline-dotted">
- {{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}
+                                {{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}
                             </span> मा भवन निर्माण गर्ने घरधनी श्री <span class="underline-dotted">
- {{$mapApply->houseOwner->name??''}}
+                                {{$mapApply->houseOwner->name??''}}
                             </span>ले यस नक्सा बमोजिमको भवन निर्माण गर्न निवेदन पेश गरेकोमा संधियारको नाममा यो सुचना
-                            प्रकाशित गरिएको छ | निवेदन साथ पेश हुन आएको प्रमाण र नक्साको आधारमा निर्माण स्वीकृति दिंदा
+                            प्रकाशित गरिएको छ । निवेदन साथ पेश हुन आएको प्रमाण र नक्साको आधारमा निर्माण स्वीकृति दिंदा
                             तपाइको जग्गा लगायत सार्वजनिक स्थलको हानी निक्सानी हुन्छ, हुदैन, सन्धी सर्पन हानी नोक्सानी
                             हुने भए यो सुचना प्रकाशित भएको १५ दिनभित्र सबुत प्रमाण सहित उप-महानगरपालिकामा उजुर गर्न
-                            सुचित गरिन्छ |
-                            म्याद नाघी आएको उजुरी उपर कुनै किसिमको कारवाही नहुने व्यहोरा जानकारी गराईन्छ |
-                        </p>
-                        <h6><b>१. निर्माणका निमित्त प्रस्तावित जग्गा चारकिल्ला विवरण:</b></h6>
-                        <table class="table table-sm table-bordered">
+                            सुचित गरिन्छ ।
+                            म्याद नाघी आएको उजुरी उपर कुनै किसिमको कारवाही नहुने व्यहोरा जानकारी गराईन्छ ।
+                        </span>
+                        <h5 class="fw-bold mt-2">१. निर्माणका निमित्त प्रस्तावित जग्गा चारकिल्ला विवरण:</h5>
+                        <table class="table table-sm table-bordered mt-2">
                             <thead>
                             <tr>
                                 <th scope="col" width="80" rowspan="2">दिशा</th>
@@ -118,8 +115,8 @@
                             </span> तल्ला संख्या: <span class="underline-dotted">{{$mapApply->current_storey??''}}
                             </span></p>
                         <p class="mt-4"> बोधार्थ: १. <span class="underline-dotted custom-width"></span>नं. वडा
-                            वडाध्यक्ष/वडा प्रतिनिधि : कुनै प्रतिक्रिया भए जनाईदिनुहुन अनुरोध छ |</p>
-                        <div class="d-flex justify-content-end mt-5"><span class="underline-dotted custom-width"></span>
+                            वडाध्यक्ष/वडा प्रतिनिधि : कुनै प्रतिक्रिया भए जनाईदिनुहुन अनुरोध छ ।</p>
+                        <div class="d-flex justify-content-end mt-2"><span class="underline-dotted custom-width"></span>
                         </div>
                     </div>
                 </div>

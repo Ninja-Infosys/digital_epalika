@@ -1,4 +1,5 @@
 @media print {
+
     table, td, th {
         border: 1px solid #000000;
         border-collapse: collapse;
@@ -28,6 +29,19 @@
     }
     .font-black p {
         color: #000000;
+    }
+    .my-2{
+        margin-top: .75rem !important;
+        margin-bottom: .75rem !important;
+    }
+    .d-flex{
+        display: flex;
+    }
+    .justify-content-between{
+        justify-content: space-between;
+    }
+    .justify-content-end{
+        justify-content: end;
     }
 }
 
