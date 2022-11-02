@@ -25,7 +25,7 @@ class Subject extends Model
         'content',
     ];
 
-    public function trainers(): BelongsToMany
+    public function trainers()
     {
         return $this->belongsToMany(Trainer::class);
     }

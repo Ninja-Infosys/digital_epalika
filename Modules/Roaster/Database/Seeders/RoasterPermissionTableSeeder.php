@@ -20,6 +20,10 @@ class RoasterPermissionTableSeeder extends Seeder
             'designation_create',
             'designation_edit',
             'designation_delete',
+            'subject_access',
+            'subject_create',
+            'subject_edit',
+            'subject_delete',
         ];
 
         $this->storePermission($permissions);
