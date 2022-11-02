@@ -51,6 +51,13 @@
                 </a>
             </li>
             @endcan
+            @can('grantActivity_access')
+            <li class="{{request()->is('admin/grant/setting/grantActivity') ? 'active' : ''}}">
+                <a href="{{route('admin.grant.grantActivity.index')}}">
+                    <span> अनुदान क्रियाकलाप  </span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </li>
