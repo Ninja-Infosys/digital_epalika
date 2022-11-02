@@ -17,6 +17,14 @@ class StorePasswordRequest extends FormRequest
             'password' => [
                 'string', 'min:8', 'confirmed'
             ],
+            'g-recaptcha-response' => ['recaptcha'],
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            'g-recaptcha-response.recaptcha' => 'Please verify captcha'
         ];
     }
 }

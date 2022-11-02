@@ -7,7 +7,9 @@
         'emap',
         'businessregistration',
         'executivemeeting',
-        'listregistration'
+        'listregistration',
+        'roaster',
+        'grant'
     ],
     'sidebars' => [
         'website',

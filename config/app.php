@@ -16,7 +16,6 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
     'website_type' => env('WEBSITE_TYPE', 'digital_board'),
 
     /*
@@ -29,7 +28,6 @@ return [
     | services the application utilizes. Set this in your ".env" file.
     |
     */
-
     'env' => env('APP_ENV', 'production'),
 
     /*
