@@ -5,7 +5,7 @@
     </a>
 </li>
 <li>
-    <a href="{{route('admin.grant.grantDetail.create')}}">
+    <a href="{{route('admin.grant.grantDetail.index')}}">
         <i class="fa fa-file-contract"></i>
         <span>अनुदान विवरण</span>
     </a>
