@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
 
 class Document extends Model
 {
@@ -23,4 +24,22 @@ class Document extends Model
        'title',
        'document',
    ];
+
+
+    public function model(): \Illuminate\Database\Eloquent\Relations\MorphTo
+    {
+        return $this->morphTo();
+    }
+
+    public function setDocumentAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['document'] = $value->store('documents/', 'public');
+        }
+    }
+
+    public function getDocumentUrlAttribute(): string
+    {
+        return $this->attributes['document'] ? Storage::disk('public')->url($this->attributes['document']) : asset('images/user_icon.jpg');
+    }
 }

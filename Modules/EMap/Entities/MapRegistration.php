@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MapRegistration extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',
