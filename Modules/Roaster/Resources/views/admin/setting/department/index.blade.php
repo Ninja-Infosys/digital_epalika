@@ -6,14 +6,13 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="#">
+                            <a href="{{route('admin.roaster.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="#">तालिम व्यवस्थापन</a>
+                            <a href="{{route('admin.roaster.setting.department.index')}}">बिभागहरुको विवरण</a>
                         </li>
-                        <li class="breadcrumb-item active">बिभागहरुको विवरण</li>
                     </ol>
                 </div>
                 <h4 class="page-title">बिभागहरुको विवरण</h4>
