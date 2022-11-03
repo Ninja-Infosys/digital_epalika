@@ -11,12 +11,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.businessNature.index')}}">व्यवसाय को प्रकृति </a>
+                            <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">व्यवसाय
+                                दर्ता </a>
                         </li>
-                        <li class="breadcrumb-item active">व्यवसाय को प्रकृति </li>
+                        <li class="breadcrumb-item active">व्यवसाय दर्ता</li>
                     </ol>
                 </div>
-                <h4 class="page-title">व्यवसाय को प्रकृति </h4>
+                <h4 class="page-title">व्यवसाय दर्ता </h4>
             </div>
         </div>
     </div>
@@ -26,43 +27,64 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसाय को प्रकृति सूची</h4>
-                        @can('businessNature_create')
-                            <a href="{{route('admin.businessRegistration.setting.businessNature.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ व्यवसाय को प्रकृति थप्नुहोस्
-                            </a>
-                        @endcan
+                        <h4 class="header-title">व्यवसाय दर्ता सूची</h4>
+
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm mb-0 table-striped table-hover text-center">
                             <thead>
                             <tr>
-                                <th>क्र.स</th>
-                                <th>शिर्षक. </th>
-                                <th>#</th>
+                                <th rowspan="2">क्र.स</th>
+                                <th rowspan="2">सबमिशन नं</th>
+                                <th rowspan="2">दर्ता नं</th>
+                                <th rowspan="2">दर्ता मिति</th>
+                                <th colspan="4">व्यवसायी</th>
+                                <th colspan="4">व्यवसाय</th>
+                                <th rowspan="2">#</th>
+                            </tr>
+                            <tr>
+                                <th>नाम</th>
+                                <th>ठेगाना</th>
+                                <th>फोन</th>
+                                <th>इमेल</th>
+                                <th>नाम</th>
+                                <th>ठेगाना</th>
+                                <th>प्रकृति</th>
+                                <th>पूँजी लगानी रु.:</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($proprietors as $businessNature)
+                            @forelse($proprietors as $proprietor)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$businessNature->title}}</td>
+                                    <td>{{$proprietor->businessDetail->submission_no ?? ''}}</td>
+                                    <td>{{$proprietor->businessDetail->registration_no ?? ''}}</td>
+                                    <td>{{$proprietor->businessDetail->registration_date_ne ?? ''}}</td>
+                                    <td>{{$proprietor->name}}</td>
                                     <td>
-                                        <a href="{{route('admin.businessRegistration.setting.businessNature.edit',$businessNature)}}"
-                                           class="btn btn-xs btn-outline-warning">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                        <span>{{$proprietor->localBody->local_body??''}}
+                                - {{$proprietor->ward_no??''}}
+                                , {{$proprietor->district->district??''}}
+                                , {{$proprietor->province->province??''}}, </span>
+                                    </td>
+                                    <td>{{$proprietor->phone ?? ''}}</td>
+                                    <td>{{$proprietor->email ??  ''}}</td>
+                                    <td>{{$proprietor->businessDetail->business_detail_name ?? ''}}</td>
+                                    <td>
+                                        <span>{{$proprietor->businessDetail->localBody->local_body??''}}
+                                - {{$proprietor->businessDetail->ward_no??''}}
+                                , {{$proprietor->businessDetail->district->district??''}}
+                                , {{$proprietor->businessDetail->province->province??''}}, </span>
+                                    </td>
+                                    <td>{{$proprietor->businessDetail->business_nature->label() ?? ''}}</td>
+                                    <td>{{$proprietor->businessDetail->amount_cost ?? ''}}</td>
+                                    <td>
+                                        <a href="{{route('admin.businessRegistration.businessRegistration.show',$proprietor)}}"
+                                           class="btn btn-xs btn-outline-info">
+                                            <i class="fa fa-eye"></i> पुरा विवरण हेर्नुहोस
                                         </a>
-                                        <form action="{{route('admin.businessRegistration.setting.businessNature.destroy',$businessNature)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
-                                        </form>
                                     </td>
                                 </tr>
                             @empty

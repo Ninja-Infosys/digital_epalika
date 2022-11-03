@@ -117,7 +117,26 @@ class GrantDetailLivewire extends Component
     public function messages(): array
     {
         return [
-
+            'form.fiscal_year_id.required'=>'आर्थिक वर्ष आवश्यक छ',
+            'form.grant_program_id.required'=>'अनुदान कार्यक्रम आवश्यक छ',
+            'form.grant_recipient_name.required'=>'अनुदान प्राप्तकर्ता नाम आवश्यक छ',
+            'form.grant_recipient_code_no.required'=>'अनुदान प्राप्तकर्ता कोड नम्बर आवश्यक छ',
+            'form.province_id.required'=>'प्रदेश आवश्यक छ',
+            'form.district_id.required'=>'जिल्ला आवश्यक छ',
+            'form.local_body_id.required'=>'स्थानीय निकाय आवश्यक छ',
+            'form.ward_no.required'=>'वार्ड नम्बर आवश्यक छ',
+            'form.grant_recipient_type.required'=>'अनुदान प्राप्तकर्ताको प्रकार आवश्यक छ',
+            'form.grant_type_id.required'=>'अनुदान प्रकार आवश्यक छ',
+            'form.grant_activity_id.required'=>'अनुदान गतिविधि आवश्यक छ',
+            'form.total_cost.required'=>'कुल लागत आवश्यक छ',
+            'form.grant_amount.required'=>'अनुदान रकम आवश्यक छ',
+            'form.investment_amount.required'=>'लगानी रकम आवश्यक छ',
+            'form.beneficial_area.required'=>'लाभदायक क्षेत्र आवश्यक छ',
+            'form.contact_person_name.required'=>'सम्पर्क व्यक्तिको नाम आवश्यक छ',
+            'form.phone.required'=>'फोन आवश्यक छ',
+            'form.prev_fiscal_year_id.required_if'=>'अघिल्लो आर्थिक वर्ष आवश्यक छ',
+            'form.prev_cost_amount.required_if'=>'अघिल्लो लागत रकम आवश्यक छ',
+            'form.beneficial_places.required'=>'लाभदायक स्थान आवश्यक छ',
         ];
     }
 }

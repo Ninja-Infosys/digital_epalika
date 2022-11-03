@@ -14,7 +14,7 @@
 <section class="row justify-content-center my-4">
     <div class="card col-md-8">
         <div class="card-body">
-        <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला</p>
+            <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला</p>
             <button class="btn btn-info" onclick="printJS({
             printable: 'printData',
             type: 'html',
@@ -26,24 +26,12 @@
             <div id="printData">
                 <div class="row">
                     <div class="col-md-2 col-sm-2 col-xs-2">
-                            <img alt="nepal-government-logo" class="m-2" height="120" width="140"
-                                 src="{{asset('images/np.png')}}">
+                        <img alt="nepal-government-logo" class="m-2" height="120" width="140"
+                             src="{{asset('images/np.png')}}">
                     </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                        <div class="row mt-3">
-                            <div class="text-center">
-                                <div>
-                                    <p>
-                                        {{config('applicationDetail.to_office.to')}}
-                                        <br>
-                                        {{config('applicationDetail.to_office.office_name')}}
-                                        <br>
-                                        {{config('applicationDetail.to_office.office')}}
-                                        <br>
-                                        {{config('applicationDetail.to_office.office_address')}}
-                                    </p>
-                                </div>
-                            </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 text-center">
+                        <div class="col-md-8 text-center">
+                            <x-header-component/>
                         </div>
                     </div>
                     <div
