@@ -2,7 +2,7 @@
     <form wire:submit.prevent="storeData">
 
         <fieldset class="border p-2">
-            <legend class="float-none w-auto">व्यक्तिगत विवरण</legend>
+            <legend class="float-none w-auto fs-4 text-dark">व्यक्तिगत विवरण</legend>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label for="name" class="form-label">पुरा नाम *</label>
@@ -99,7 +99,7 @@
         </fieldset>
 
         <fieldset class="border p-2 mt-2">
-            <legend class="float-none w-auto">ठेगाना</legend>
+            <legend class="float-none w-auto fs-4 text-dark">ठेगाना</legend>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="province_id">प्रदेश *</label>
@@ -202,7 +202,7 @@
 
         @if(config('trainer.status.bankDetailForm') && config('trainer.type.bankDetailForm') === 'extended')
             <fieldset class="border p-2 mt-2">
-                <legend class="float-none w-auto">बैंक खाता विवरण</legend>
+                <legend class="float-none w-auto fs-4 text-dark">बैंक खाता विवरण</legend>
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
                         <tr>
@@ -298,7 +298,7 @@
 
         @if(config('trainer.status.compactForm'))
             <fieldset class="border p-2 mt-2">
-                <legend class="float-none w-auto">अन्य विवरण</legend>
+                <legend class="float-none w-auto fs-4 text-dark">अन्य विवरण</legend>
                 <div class="row">
                     @if(config('trainer.type.bankDetailForm') == 'compact')
                         <div class="col-md-3 mb-3">
@@ -379,7 +379,7 @@
 
         @if(config('trainer.status.experienceForm') && config('trainer.type.experienceForm') == 'extended')
             <fieldset class="border p-2 mt-2">
-                <legend class="float-none w-auto">कार्य अनुभव</legend>
+                <legend class="float-none w-auto fs-4 text-dark">कार्य अनुभव</legend>
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
                         <tr>
@@ -507,7 +507,7 @@
 
         @if(config('trainer.status.qualificationForm') && config('trainer.type.qualificationForm') == 'extended')
             <fieldset class="border p-2 mt-2">
-                <legend class="float-none w-auto">शैक्षिक योग्यता</legend>
+                <legend class="float-none w-auto fs-4 text-dark">शैक्षिक योग्यता</legend>
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
                         <tr>
@@ -621,7 +621,7 @@
 
         @if(config('trainer.status.experienceAsTraineeForm') && config('trainer.type.experienceAsTraineeForm') == 'extended')
             <fieldset class="border p-2 mt-2">
-                <legend class="float-none w-auto">संलग्न तालिमको विवरण</legend>
+                <legend class="float-none w-auto fs-4 text-dark">संलग्न तालिमको विवरण</legend>
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
                         <tr>
@@ -719,7 +719,7 @@
 
         @if(config('trainer.status.experienceAsTrainerForm') && config('trainer.type.experienceAsTrainerForm') == 'extended')
             <fieldset class="border p-2 mt-2">
-                <legend class="float-none w-auto">तालिममा प्रशिक्षक भएको अनुभव</legend>
+                <legend class="float-none w-auto fs-4 text-dark">तालिममा प्रशिक्षक भएको अनुभव</legend>
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
                         <tr>
@@ -844,7 +844,7 @@
 
         @if(config('trainer.status.otherDocumentForm'))
             <fieldset class="border p-2 mt-2">
-                <legend class="float-none w-auto">अन्य कागजातहरु</legend>
+                <legend class="float-none w-auto fs-4 text-dark">अन्य कागजातहरु</legend>
                 <div class="table-responsive">
                     <table class="table table-hover table-striped">
                         <tr>
@@ -921,7 +921,7 @@
 
 
         <fieldset class="border p-2 mt-2 mb-2">
-            <legend class="float-none w-auto">बिषय विज्ञता</legend>
+            <legend class="float-none w-auto fs-4 text-dark">बिषय विज्ञता</legend>
             <div class="row mt-2">
                 @foreach($subjects as $index=>$subject)
                     <div class="col-md-6">
@@ -948,9 +948,8 @@
             @enderror
         </fieldset>
 
-
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Save</button>
+        <div class="col-12 d-flex pb-2 justify-content-around">
+            <button type="submit" class="btn btn-primary  ">Save</button>
         </div>
     </form>
 </div>
