@@ -11,7 +11,6 @@
                                     requestRoute="{{route('print.application-print')}}">
                                 <i class="fa fa-print"></i> Print
                             </button>
-
                         </div>
                     </div>
                 </div>

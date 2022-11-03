@@ -1376,9 +1376,6 @@
                     </div>
 
                     @break
-
-
-
                 @default
                     <div class="card">
                         <div class="card-header">
