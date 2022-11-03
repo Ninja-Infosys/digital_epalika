@@ -5,6 +5,7 @@ namespace Modules\BusinessRegistration\Entities;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -51,13 +52,22 @@ class BusinessDetail extends Model
         'tole',
         'submission_no',
         'is_registered',
-        'is_rent'
+        'is_rent',
+        'fiscal_year_id',
+        'registration_no',
+        'registration_date_ne',
+        'registration_date_en',
     ];
     protected $casts = [
         'business_nature' => BusinessNature::class,
         'source_of_capital' => SourceOfCapital::class
 
     ];
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
 
     public function investmentRevenue(): BelongsTo
     {

@@ -29,7 +29,6 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
@@ -71,7 +70,7 @@
                                             <button type="button"
                                                     class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split text-white"
                                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <span class="visually-hidden">Toggle Dropdown</span>
+                                                <i class="fas fa-angle-down"></i>
                                             </button>
                                             <div class="dropdown-menu"
                                                  style="position: absolute; inset: 0 auto auto 0; margin: 0; transform: translate(76px, 40px);"
@@ -97,7 +96,6 @@
                             @endforelse
                             </tbody>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>

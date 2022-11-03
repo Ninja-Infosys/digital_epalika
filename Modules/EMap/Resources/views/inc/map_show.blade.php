@@ -60,29 +60,29 @@
     <div class="d-flex flex-wrap">
         <p>
             १.५ हाल निर्माण गर्ने तल्ला संख्या : <span
-                class="underline-dotted custom-width"> {{$mapApply->current_storey}} </span>
+                class="underline-dotted"> {{$mapApply->current_storey}} </span>
         </p>
         <p class="mx-3">
             १.६ प्लिन्थको क्षेत्रफल : <span
-                class="underline-dotted custom-width"> {{$mapApply->area_of_plinth}} </span>
+                class="underline-dotted"> {{$mapApply->area_of_plinth}} </span>
         </p>
     </div>
     <p>
         १.७ भविष्यमा निर्माण गर्ने तल्ला संख्या :
-        <span class="underline-dotted custom-width">
+        <span class="underline-dotted">
                                 {{$mapApply->future_storey}}
                             </span>
     </p>
     <div class="d-flex flex-wrap">
         <p>
             १.८ कुल भवनको लम्बाई :
-            <span class="underline-dotted custom-width">
+            <span class="underline-dotted">
                                     {{$mapApply->length}}
                                 </span>
         </p>
         <p class="mx-3">
             १.९ कुल भवनको चौडाई :
-            <span class="underline-dotted custom-width">
+            <span class="underline-dotted">
                                     {{$mapApply->breadth}}
                                 </span>
         </p>
@@ -90,7 +90,7 @@
 
     <p>
         १.१० भवनको कुल उचाई जमिनको सतहबाट :
-        <span class="underline-dotted custom-width">
+        <span class="underline-dotted">
                                 {{$mapApply->height}}
                             </span>
     </p>
@@ -127,52 +127,52 @@
     </p>
     <p>
         २.१ भू-उपयोग्य क्षेत्र :
-        <span class="underline-dotted custom-width">
+        <span class="underline-dotted">
                                 {{$mapApply->landDetail->land_use_area??''}}
                             </span>
     </p>
     <div class="d-flex flex-wrap">
         <p>
             २.२ वडा नं : <span
-                class="underline-dotted custom-width"> {{$mapApply->landDetail->ward_no ?? ''}} </span>
+                class="underline-dotted"> {{$mapApply->landDetail->ward_no ?? ''}} </span>
         </p>
         <p class="mx-3">
             २.३ साविक वडा नं : <span
-                class="underline-dotted custom-width"> {{$mapApply->landDetail->former_ward_no??''}} </span>
+                class="underline-dotted"> {{$mapApply->landDetail->former_ward_no??''}} </span>
         </p>
     </div>
 
     <div class="d-flex flex-wrap">
         <p>
             २.४ टोलको नाम :
-            <span class="underline-dotted custom-width">
+            <span class="underline-dotted">
                                     {{$mapApply->landDetail->tole ?? ''}}
                                 </span>
         </p>
         <p class="mx-3">
             २.५ सडक कोड नं :
-            <span class="underline-dotted custom-width">
+            <span class="underline-dotted">
                                     {{$mapApply->landDetail->street_code_no??''}}
                                 </span>
         </p>
     </div>
     <p>
         २.६ जग्गा कित्ता नं :
-        <span class="underline-dotted custom-width">
+        <span class="underline-dotted">
                                 {{$mapApply->landDetail->plot_no??''}}
                             </span>
     </p>
 
     <p>
         २.७ क्षेत्रफल
-        <span class="underline-dotted custom-width">
+        <span class="underline-dotted">
                                 {{$mapApply->landDetail->unit_value??''}} {{$mapApply->landDetail->unit->title??''}}
                             </span>
     </p>
 
     <p>
         २.८ भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR):
-        <span class="underline-dotted custom-width">
+        <span class="underline-dotted">
                                 {{$mapApply->landDetail->percentage_of_area_covered_by_building??''}}
                             </span>
     </p>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\Setting\EthnicityController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\SettingDashboardController;
@@ -45,7 +46,7 @@ Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileSt
 //Fiscal Year
 Route::prefix('setting')->group(function () {
     Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
-
+    Route::resource('ethnicity', EthnicityController::class);
     Route::resource('fiscalYear', FiscalYearController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
