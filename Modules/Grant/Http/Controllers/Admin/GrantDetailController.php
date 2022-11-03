@@ -17,7 +17,7 @@ class GrantDetailController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $grantDetails=GrantDetail::latest()->get();
+        $grantDetails=GrantDetail::with('fiscalYear','grantProgram')->latest()->get();
 
         return view('grant::admin.grant_detail.index',compact('grantDetails'));
     }
@@ -57,7 +57,7 @@ class GrantDetailController extends Controller
             'You are not allowed to access this resource'
         );
 
-        return view('grant::edit');
+        return view('grant::admin.grant_detail.edit',compact('grantDetail'));
     }
 
     public function update(Request $request, GrantDetail $grantDetail)
@@ -74,5 +74,10 @@ class GrantDetailController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
+        $grantDetail->delete();
+
+        toast('अनुदान विवरण सफलतापूर्वक मेटाइयो','success');
+        return back();
     }
 }

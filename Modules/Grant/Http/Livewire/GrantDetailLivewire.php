@@ -23,6 +23,7 @@ class GrantDetailLivewire extends Component
     public $districts = [];
     public $localBodies = [];
     public $wards=[];
+    public object $grantDetail;
 
     public array $form = [
         'fiscal_year_id' => null,
@@ -50,11 +51,18 @@ class GrantDetailLivewire extends Component
         'remarks'=>null
     ];
 
-    public function mount()
+    public function mount($grantDetail=null)
     {
         $this->fiscalYears = FiscalYear::all();
         $this->grantTypes=GrantType::all();
         $this->provinces=Province::all();
+
+        if(!empty($grantDetail)){
+            $this->grantDetail=$grantDetail;
+            foreach ($this->form as $key=>$data){
+                $this->form[$key]=$grantDetail[$key];
+            }
+        }
     }
 
     protected array $rules=[
@@ -90,14 +98,24 @@ class GrantDetailLivewire extends Component
 
     public function submitFormData()
     {
-        GrantDetail::create($this->validate()['form']);
+        if(!empty($this->grantDetail)){
+            $this->grantDetail->update($this->validate()['form']);
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => "success",
+                'title' => "धन्यबाद",
+                'text' => "अनुदान विवरण सफलतापूर्वक अद्यावधिक गरियो",
+            ]);
+            return redirect(route('admin.grant.grantDetail.index'));
+        }else{
+            GrantDetail::create($this->validate()['form']);
 
-        $this->reset('form','districts','localBodies','wards','grantPrograms','grantActivities');
-        $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "अनुदान विवरण सफलतापूर्वक थपियो",
-        ]);
+            $this->reset('form','districts','localBodies','wards','grantPrograms','grantActivities');
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => "success",
+                'title' => "धन्यबाद",
+                'text' => "अनुदान विवरण सफलतापूर्वक थपियो",
+            ]);
+        }
     }
 
     public function render()
