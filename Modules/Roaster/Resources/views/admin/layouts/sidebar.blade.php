@@ -25,8 +25,8 @@
         </ul>
     </div>
 </li>
-<li class="{{request()->is('admin/roaster/dashboard') ? 'active' : ''}}">
-    <a href="{{route('admin.roaster.dashboard')}}">
+<li class="{{request()->is('#') ? 'active' : ''}}">
+    <a href="#">
         <i class="fa fa-book"></i>
         <span>तालिम</span>
     </a>
