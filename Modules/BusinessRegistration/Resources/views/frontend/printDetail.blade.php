@@ -14,7 +14,7 @@
 <section class="row justify-content-center my-4">
     <div class="card col-md-8">
         <div class="card-body">
-        <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला। </p>
+        <p class="text-danger">नोट: आवेदन अनिवार्य प्रिन्ट गरि कार्यालयमा हाजिर हुनुहोला</p>
             <button class="btn btn-info" onclick="printJS({
             printable: 'printData',
             type: 'html',
