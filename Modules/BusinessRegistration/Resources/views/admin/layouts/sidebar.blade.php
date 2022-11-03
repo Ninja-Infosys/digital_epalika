@@ -4,6 +4,12 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+<li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
+    <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
+        <i class="fa fa-home"></i>
+        <span> दर्ता भएका व्यवसाय</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/businessRegistration/setting/*') ? 'active' : ''}}">
     <a href="#sidebarBusinessRegistrationSetting"
        {{request()->is('admin/businessRegistration/setting/*') ? 'aria-expanded=true  ' : ''}}
@@ -14,7 +20,8 @@
                         <i class="fa fa-angle-right"></i>
                     </span>
     </a>
-    <div class="collapse {{request()->is('admin/businessRegistration/setting/*') ? 'show' : ''}}" id="sidebarBusinessRegistrationSetting">
+    <div class="collapse {{request()->is('admin/businessRegistration/setting/*') ? 'show' : ''}}"
+         id="sidebarBusinessRegistrationSetting">
         <ul class="nav-second-level">
             @can('businessNature_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/businessNature/*') ? 'active' : ''}}">
