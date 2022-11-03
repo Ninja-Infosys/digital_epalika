@@ -2,18 +2,27 @@
 
 namespace Modules\Grant\Http\Livewire;
 
+use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use Livewire\Component;
 use Modules\Grant\Entities\GrantActivity;
+use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
+use Modules\Roaster\Traits\helpers\AddressHelperTrait;
 
 class GrantDetailLivewire extends Component
 {
+    use AddressHelperTrait;
+
     public $fiscalYears = [];
     public $grantPrograms = [];
     public $grantTypes = [];
     public $grantActivities = [];
+    public $provinces = [];
+    public $districts = [];
+    public $localBodies = [];
+    public $wards=[];
 
     public array $form = [
         'fiscal_year_id' => null,
@@ -45,6 +54,7 @@ class GrantDetailLivewire extends Component
     {
         $this->fiscalYears = FiscalYear::all();
         $this->grantTypes=GrantType::all();
+        $this->provinces=Province::all();
     }
 
     protected array $rules=[
@@ -80,7 +90,14 @@ class GrantDetailLivewire extends Component
 
     public function submitFormData()
     {
-        $this->validate();
+        GrantDetail::create($this->validate()['form']);
+
+        $this->reset('form','districts','localBodies','wards','grantPrograms','grantActivities');
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => "success",
+            'title' => "धन्यबाद",
+            'text' => "अनुदान विवरण सफलतापूर्वक थपियो",
+        ]);
     }
 
     public function render()
@@ -92,6 +109,7 @@ class GrantDetailLivewire extends Component
         if(!empty($this->form['grant_recipient_type'])){
             $this->grantActivities=GrantActivity::where('grant_recipient_type',$this->form['grant_recipient_type'])->get();
         }
+        $this->getDependentAddressData();
 
         return view('grant::livewire.grant-detail-livewire');
     }
