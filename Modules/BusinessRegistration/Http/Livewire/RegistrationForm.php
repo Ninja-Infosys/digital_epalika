@@ -9,9 +9,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\BusinessRegistration\Entities\BusinessNature;
@@ -298,32 +296,13 @@ class RegistrationForm extends Component
 
     public function rules(): array
     {
-        switch ($this->currentStep) {
-            case 1:
-                {
-                    return $this->firstStepValidations;
-                }
-                break;
-            case 2:
-                {
-                    return $this->secondStepValidations;
-                }
-                break;
-            case 3:
-                {
-                    return $this->thirdStepValidations;
-                }
-                break;
-            case 4:
-                {
-                    return $this->fourthStepValidations;
-                }
-                break;
-            default:
-            {
-                return array_merge($this->firstStepValidations, $this->secondStepValidations, $this->thirdStepValidations, $this->fourthStepValidations, $this->fifthStepValidations);
-            }
-        }
+        return match ($this->currentStep) {
+            1 => $this->firstStepValidations,
+            2 => $this->secondStepValidations,
+            3 => $this->thirdStepValidations,
+            4 => $this->fourthStepValidations,
+            default => array_merge($this->firstStepValidations, $this->secondStepValidations, $this->thirdStepValidations, $this->fourthStepValidations, $this->fifthStepValidations),
+        };
     }
 
     public function updated($propertyName): void
@@ -342,10 +321,10 @@ class RegistrationForm extends Component
                 'issue_district_id' => $this->form['issue_district_id'] ?? '',
                 'phone' => $this->form['phone'] ?? '',
                 'email' => $this->form['email'] ?? '',
-                'province_id' => $this->form['permanent_province_id'] ?? '',
-                'district_id' => $this->form['permanent_district_id'] ?? '',
-                'local_body_id' => $this->form['permanent_local_body_id'] ?? '',
-                'ward_no' => $this->form['permanent_ward_no'] ?? '',
+                'province_id' => $this->form['permanent_province_id'] ?? null,
+                'district_id' => $this->form['permanent_district_id'] ?? null,
+                'local_body_id' => $this->form['permanent_local_body_id'] ?? null,
+                'ward_no' => $this->form['permanent_ward_no'] ?? null,
                 'way' => $this->form['permanent_way'] ?? '',
                 'tole' => $this->form['permanent_tole'] ?? '',
                 'house_no' => $this->form['house_no'] ?? '',
@@ -356,23 +335,19 @@ class RegistrationForm extends Component
                 'occupation' => $this->form['occupation'] ?? '',
             ]);
 
-            $officeSetting = OfficeSetting::with('fiscalYear')->first();
-            $number = Str::padLeft(random_int(1, 999999), 6, 0);
-            $random_number = ($officeSetting->fiscalYear->title ?? '') . "_" . $number;
-
             $businessDetail = $proprietorDetails->businessDetail()->create([
                 'business_detail_name' => $this->form['business_detail_name'] ?? '',
                 'investment_revenue_id' => $this->form['investment_revenue_id'] ?? '',
-                'is_rent' => $this->form['is_rent'] ?? '',
-                'is_registered' => $this->form['is_registered'] ?? '',
-                'submission_no' => $random_number ?? '',
+                'is_rent' => $this->form['is_rent'] ?? null,
+                'is_registered' => $this->form['is_registered'] ?? null,
+                'submission_no' => time(),
                 'business_detail_name_en' => $this->form['business_detail_name_en'] ?? '',
                 'business_nature' => $this->form['business_nature'] ?? '',
                 'establish_year' => $this->form['establish_year'] ?? '',
                 'registration_date' => $this->form['registration_date'] ?? '',
                 'pan_no' => $this->form['pan_no'] ?? '',
                 'amount_cost' => $this->form['amount_cost'] ?? '',
-                'source_of_capital' => $this->form['source_of_capital'] ?? '',
+                'source_of_capital' => $this->form['source_of_capital'] ?? null,
                 'employment' => $this->form['employment'] ?? '',
                 'house_owner_name' => $this->form['house_owner_name'] ?? '',
                 'house_owner_phone' => $this->form['house_owner_phone'] ?? '',
