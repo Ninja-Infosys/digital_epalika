@@ -113,7 +113,7 @@ class RegistrationForm extends Component
     ];
 
 
-    public function mount(): void
+    public function mount()
     {
         $officeSetting = OfficeSetting::first();
         $this->permanent_provinces = Province::all();

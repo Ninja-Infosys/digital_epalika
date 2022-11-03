@@ -24,6 +24,7 @@ class FrontendController extends Controller
             'businessDetail.partnerDetails',
             'businessDetail.registeredBusinesses'
         );
+
         return view('businessregistration::frontend.printDetail', compact('proprietorDetail'));
     }
 
