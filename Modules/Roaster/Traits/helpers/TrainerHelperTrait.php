@@ -321,7 +321,7 @@ trait TrainerHelperTrait
                     'title' => "Thank You",
                     'text' => "Trainer Data Updated Successfully",
                 ]);
-                return redirect(route('admin.trainer.index'));
+                return redirect(route('admin.roaster.trainer.index'));
             }
 
             $trainer = Trainer::create($data);

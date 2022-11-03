@@ -34,22 +34,58 @@ class TrainerController extends Controller
         //
     }
 
-    public function show($id)
+    public function show(Trainer $trainer)
     {
-        return view('roaster::show');
+
+        abort_if(
+            Gate::denies('trainer_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $trainer->load(
+            'designation',
+            'department',
+            'province',
+            'localBody',
+            'district',
+            'subjects',
+            'trainerDocuments',
+            'trainerExperienceInTrainings',
+            'trainerExperienceAsTrainees',
+            'trainerExperiences.designation',
+            'trainerQualifications',
+            'trainerBankDetails'
+        );
+
+        return view('roaster::admin.trainer.show',compact('trainer'));
     }
 
-    public function edit($id)
+    public function edit(Trainer $trainer)
     {
-        return view('roaster::edit');
+
+        abort_if(
+            Gate::denies('trainer_edit'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+        $trainer->load(
+            'trainerDocuments',
+            'trainerExperienceInTrainings',
+            'trainerExperienceAsTrainees',
+            'trainerExperiences.designation',
+            'trainerQualifications',
+            'trainerBankDetails'
+        );
+        return view('roaster::admin.trainer.edit',compact('trainer'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Trainer $trainer)
     {
         //
     }
 
-    public function destroy($id)
+    public function destroy(Trainer $trainer)
     {
         //
     }
