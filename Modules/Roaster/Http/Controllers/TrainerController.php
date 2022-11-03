@@ -29,10 +29,7 @@ class TrainerController extends Controller
         return view('roaster::create');
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     public function show(Trainer $trainer)
     {
@@ -78,15 +75,5 @@ class TrainerController extends Controller
             'trainerBankDetails'
         );
         return view('roaster::admin.trainer.edit',compact('trainer'));
-    }
-
-    public function update(Request $request, Trainer $trainer)
-    {
-        //
-    }
-
-    public function destroy(Trainer $trainer)
-    {
-        //
     }
 }

@@ -85,16 +85,7 @@
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('trainer_delete')
-                                            <form action="{{route('admin.roaster.trainer.delete', $trainer)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        @endcan
+
                                     </td>
                                 </tr>
                             @empty
