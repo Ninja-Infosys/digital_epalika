@@ -95,4 +95,11 @@ class GrantDetailLivewire extends Component
 
         return view('grant::livewire.grant-detail-livewire');
     }
+
+    public function messages(): array
+    {
+        return [
+
+        ];
+    }
 }
