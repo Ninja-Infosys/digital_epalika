@@ -3,11 +3,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Grant\Http\Controllers\Admin\DashboardController;
+use Modules\Grant\Http\Controllers\Admin\GrantActivityController;
+use Modules\Grant\Http\Controllers\Admin\GrantDetailController;
 use Modules\Grant\Http\Controllers\Admin\GrantProgramController;
 use Modules\Grant\Http\Controllers\Admin\GrantTypeController;
 use Modules\Grant\Http\Controllers\Admin\InfrastructureController;
 use Modules\Grant\Http\Controllers\Admin\ThematicAreaController;
-use Modules\Grant\Http\Controllers\GrantActivityController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -19,4 +20,4 @@ Route::prefix('setting')->group(function (){
     Route::resource('grantProgram', GrantProgramController::class);
 });
 
-Route::view('grantDetail','grant::admin.grant_detail.create')->name('grantDetail.create');
+Route::resource('grantDetail', GrantDetailController::class);

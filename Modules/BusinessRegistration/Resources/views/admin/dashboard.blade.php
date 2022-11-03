@@ -32,7 +32,7 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                        2
+                                        {{$totalBusinessCount}}
                                     </span>
                                         </h3>
                                         <p class="text-muted mb-1">जम्मा व्यवसाय</p>
@@ -55,10 +55,10 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                         3
+                                         {{$totalBusinessDetailPurposeCount}}
                                     </span>
                                         </h3>
-                                        <p class="text-muted mb-1">जम्मा दर्ता भएका व्यवसायहरु</p>
+                                        <p class="text-muted mb-1">जम्मा उदेश्यहरु</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -77,8 +77,8 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">4</span></h3>
-                                        <p class="text-muted mb-1"> व्यवसाय प्रकृति</p>
+                                        <h3 class="mt-1"><span data-plugin="counterup">{{$totalObjectTransactionCategoryCount}}</span></h3>
+                                        <p class="text-muted mb-1">जम्मा कारोबार गर्ने वस्तु</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -98,9 +98,9 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                       6
+                                       {{$totalInvestmentRevenueCount}}
                                     </span></h3>
-                                        <p class="text-muted mb-1">जम्मा उदेश्यहरु
+                                        <p class="text-muted mb-1">जम्मा कारोबार गर्ने वस्तु उप श्रेणी
                                         <p>
                                     </div>
                                 </div>
@@ -113,69 +113,10 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Line Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="line-chart-example" height="350" data-colors="#1abc9c,#f1556c"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Bar Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="bar-chart-example" height="350" data-colors="#4a81d4,#e3eaef"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Pie Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="pie-chart-example" height="350" class="mt-4"
-                                        data-colors="#6658dd,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Donut Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="donut-chart-example" height="350"
-                                        data-colors="#6c757d,#1abc9c,#ebeff2"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Polar area Chart</h4>
-
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="polar-chart-example" height="350"
-                                        data-colors="#4a81d4,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
-                            </div>
-
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Radar Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="radar-chart-example" height="350" data-colors="#39afd1,#a17fe0"></canvas>
-                            </div>
+                            <x-charts.pie-chart-component :labels="$businessPurposesChartData['labels']"
+                                                          :dataSets="$businessPurposesChartData['dataSets']"
+                                                          id="businessPurpose" chartName="व्यवसायको उदेश्य"
+                                                          chartType="pie"/>
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div> <!-- end col -->

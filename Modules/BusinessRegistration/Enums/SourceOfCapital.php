@@ -4,7 +4,7 @@ namespace Modules\BusinessRegistration\Enums;
 
 enum SourceOfCapital: string
 {
-    case ANCESTRALPROPERTY = 'ancestral property';
+    case ANCESTRAL_PROPERTY = 'ancestral property';
     case BUSINESS = 'business';
     case SALARY = 'salary';
 
@@ -16,7 +16,7 @@ enum SourceOfCapital: string
     public static function getLabel(self $value): string
     {
         return match ($value) {
-            self::ANCESTRALPROPERTY => 'पैतृक सम्पति',
+            self::ANCESTRAL_PROPERTY => 'पैतृक सम्पति',
             self::BUSINESS  => 'ब्यापार व्यवसाय',
             self::SALARY  => 'तलब',
         };

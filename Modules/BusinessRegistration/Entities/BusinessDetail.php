@@ -5,13 +5,14 @@ namespace Modules\BusinessRegistration\Entities;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
-use \Modules\BusinessRegistration\Enums\BusinessNature;
+use Modules\BusinessRegistration\Enums\BusinessNature;
 use Modules\BusinessRegistration\Enums\SourceOfCapital;
 
 class BusinessDetail extends Model
@@ -30,7 +31,7 @@ class BusinessDetail extends Model
         'proprietor_detail_id',
         'business_detail_name',
         'business_detail_name_en',
-        'object_transaction_sub_category_id',
+        'investment_revenue_id',
         'business_nature_id',
         'establish_year',
         'registration_date',
@@ -51,7 +52,11 @@ class BusinessDetail extends Model
         'tole',
         'submission_no',
         'is_registered',
-        'is_rent'
+        'is_rent',
+        'fiscal_year_id',
+        'registration_no',
+        'registration_date_ne',
+        'registration_date_en',
     ];
     protected $casts = [
         'business_nature' => BusinessNature::class,
@@ -59,17 +64,27 @@ class BusinessDetail extends Model
 
     ];
 
-    public function province()
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function investmentRevenue(): BelongsTo
+    {
+        return $this->belongsTo(InvestmentRevenue::class);
+    }
+
+    public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
     }
 
-    public function district()
+    public function district(): BelongsTo
     {
         return $this->belongsTo(District::class);
     }
 
-    public function localBody()
+    public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);
     }
@@ -82,11 +97,6 @@ class BusinessDetail extends Model
     public function registeredBusinesses(): HasMany
     {
         return $this->hasMany(RegisteredBusiness::class);
-    }
-
-    public function objectTransactions(): BelongsToMany
-    {
-        return $this->belongsToMany(ObjectTransaction::class);
     }
 
     public function businessPurposes(): BelongsToMany

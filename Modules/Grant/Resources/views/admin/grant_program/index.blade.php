@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -48,16 +48,16 @@
                             @forelse($grantPrograms as $grantProgram)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <th>{{$grantProgram->title}}</th>
-                                    <th>{{$grantProgram->fiscalYear->title??''}}</th>
+                                    <td>{{$grantProgram->fiscalYear->title??''}}</td>
+                                    <td>{{$grantProgram->program_name}}</td>
                                     <td>
-                                        @can('grantProgram _edit')
+                                        @can('grantProgram_edit')
                                             <a href="{{route('admin.grant.grantProgram.edit',$grantProgram)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('grantProgram _delete')
+                                        @can('grantProgram_delete')
                                             <form action="{{route('admin.grant.grantProgram.destroy',$grantProgram)}}"
                                                   method="post">
                                                 @csrf
@@ -76,6 +76,7 @@
                             @endforelse
                             </tbody>
                         </table>
+                        {{$grantPrograms->links()}}
                     </div>
                 </div>
             </div>

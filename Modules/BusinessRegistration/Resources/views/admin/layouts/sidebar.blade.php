@@ -38,10 +38,10 @@
                     </a>
                 </li>
             @endcan
-            @can('objectTransactionSubCategory_access')
-                <li class="{{request()->is('admin/businessRegistration/setting/objectTransactionSubCategory/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}">
-                        <span>कारोबार गर्ने वस्तु उप श्रेणी</span>
+            @can('investmentRevenue_access')
+                <li class="{{request()->is('admin/businessRegistration/setting/investmentRevenue/*') ? 'active' : ''}}">
+                    <a href="{{route('admin.businessRegistration.setting.investmentRevenue.index')}}">
+                        <span>पुँजीगत लगानी र राजस्वो</span>
                     </a>
                 </li>
             @endcan

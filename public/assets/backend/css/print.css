@@ -25,7 +25,8 @@
         padding: 0 20px;
     }
     .custom-width {
-        padding: 0 50px !important;
+       display: inline-block;
+        width: 10%;
     }
     .font-black p {
         color: #000000;
@@ -38,10 +39,20 @@
         display: flex;
     }
     .justify-content-between{
-        justify-content: space-between;
+        justify-content: space-between !important;
     }
     .justify-content-end{
         justify-content: end;
+    }
+    #printData{
+        line-height: 1.8;
+        text-align: justify;
+    }
+    .text-end {
+        text-align: right !important;
+    }
+    .table-sm > :not(caption) > * > * {
+        padding: .5rem .5rem;
     }
 }
 
