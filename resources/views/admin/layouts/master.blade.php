@@ -40,7 +40,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
     @stack('style')
     @livewireStyles
-    @stack('style')
 </head>
 
 <!-- body start -->

@@ -16,6 +16,22 @@ class GrantPermissionTableSeeder extends Seeder
             'infrastructure_create',
             'infrastructure_edit',
             'infrastructure_delete',
+            'thematicArea_access',
+            'thematicArea_create',
+            'thematicArea_edit',
+            'thematicArea_delete',
+            'grantType_access',
+            'grantType_create',
+            'grantType_edit',
+            'grantType_delete',
+            'grantActivity_access',
+            'grantActivity_create',
+            'grantActivity_edit',
+            'grantActivity_delete',
+            'grantProgram_access',
+            'grantProgram_create',
+            'grantProgram_edit',
+            'grantProgram_delete',
         ];
 
         $this->storePermission($permissions);

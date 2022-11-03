@@ -28,7 +28,6 @@ Route::get('audio', [FrontController::class, 'audio'])->name('audio');
 Route::get('photo', [FrontController::class, 'photo'])->name('photo');
 Route::get('single-photo', [FrontController::class, 'single_photo'])->name('single-photo');
 Route::get('video', [FrontController::class, 'video'])->name('video');
-Route::get('grant', [FrontController::class, 'grant'])->name('grant');
 Route::get('train', [FrontController::class, 'train'])->name('train');
 Route::get('employee', [FrontController::class, 'employee'])->name('employee');
 Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');

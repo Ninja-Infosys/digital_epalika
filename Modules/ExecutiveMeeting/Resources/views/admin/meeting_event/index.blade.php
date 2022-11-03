@@ -11,10 +11,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">बैठक क्यालेन्डर</li>
+                        <li class="breadcrumb-item active">बैठक विवरण </li>
                     </ol>
                 </div>
-                <h4 class="page-title">बैठक क्यालेन्डर</h4>
+                <h4 class="page-title">बैठक विवरण </h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> बैठक क्यालेन्डर</h4>
+                        <h4 class="header-title"> बैठक विवरण </h4>
                         @can('executiveCommittee_create')
                             <a href="{{route('admin.executiveMeeting.meetingEvent.create',$event_for)}}"
                                class="btn btn-sm btn-outline-primary">

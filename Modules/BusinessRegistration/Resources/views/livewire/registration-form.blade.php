@@ -218,43 +218,40 @@
                                     </div>
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.object_transaction_sub_category_id" class="form-label">कारोबार
+                                        <label for="form.object_transaction_id" class="form-label">कारोबार
                                             गर्ने वस्तु</label>
                                         <select
-                                            class="form-select @error('form.object_transaction_sub_category_id') is-invalid @enderror"
-                                            wire:model="form.object_transaction_sub_category_id"
-                                            id="form.object_transaction_sub_category_id">
+                                            class="form-select @error('form.object_transaction_id') is-invalid @enderror"
+                                            wire:model="form.object_transaction_id"
+                                            id="form.object_transaction_id">
                                             <option value="">--- कारोबार गर्ने वस्तु छान्नुहोस् ---</option>
                                             @foreach($objectTransactions as $objectTransaction)
                                                 <option value="{{$objectTransaction->id}}"
                                                         disabled>{{$objectTransaction->title}}
                                                 </option>
-                                                @foreach($objectTransaction->objectTransactionSubCategories as $object)
+                                                @foreach($objectTransaction->objectTransactions as $object)
                                                     <option value="{{$object->id}}">---{{$object->title}}</option>
                                                 @endforeach
                                             @endforeach
                                         </select>
-                                        @error('form.object_transaction_sub_category_id')
+                                        @error('form.object_transaction_id')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.price" class="form-label">बर्ग</label>
+                                        <label for="form.investment_revenue_id" class="form-label">पुँजीगत लगानी</label>
                                         <select
-                                            class="form-select @error('form.price') is-invalid @enderror"
-                                            wire:model="form.price"
-                                            id="form.price">
+                                            class="form-select @error('form.investment_revenue_id') is-invalid @enderror"
+                                            wire:model="form.investment_revenue_id"
+                                            id="form.investment_revenue_id">
                                             <option value="">छान्नुहोस्</option>
-                                            @if(!empty($prices))
+                                            @foreach($investmentRevenues as $investmentRevenue)
                                                 <option
-                                                    value="{{$prices->category_a ??''}}">{{$prices->category_a ??''}}</option>
-                                                <option
-                                                    value="{{$prices->category_b ??''}}">{{$prices->category_b ??''}}</option>
-                                                <option
-                                                    value="{{$prices->category_c ??''}}">{{$prices->category_c ??''}}</option>
-                                            @endif
+                                                    value="{{$investmentRevenue->id ??''}}">{{$investmentRevenue->title ??''}}(रु.{{$investmentRevenue->registration_amount ??0}})</option>
+
+                                            @endforeach
                                         </select>
-                                        @error('form.price')
+                                        @error('form.investment_revenue_id')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
@@ -825,11 +822,11 @@
                                     <tbody>
                                     <tr>
                                         <th>व्यवसायी नाम</th>
-                                        <td>{{$form['name']}}</td>
+                                        <td>{{$form['name'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>फोन न</th>
-                                        <td>{{$form['phone']}}</td>
+                                        <td>{{$form['phone'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>लिङ्ग</th>
@@ -850,40 +847,40 @@
 
                                     <tr>
                                         <th> इमेल</th>
-                                        <td>{{$form['email']}}</td>
+                                        <td>{{$form['email'] ?? ''}}</td>
                                     </tr>
 
                                     <tr>
                                         <th> घर नम्बर</th>
-                                        <td>{{$form['house_no']}}</td>
+                                        <td>{{$form['house_no'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>
                                             व्यक्तिगत स्थाई लेखा नम्बर
                                         </th>
-                                        <td>{{$form['account_no']}}</td>
+                                        <td>{{$form['account_no'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> राष्ट्रियता परिचयपत्र नम्बर</th>
-                                        <td>{{$form['national_card_no']}}</td>
+                                        <td>{{$form['national_card_no'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> शैक्षिक योग्यता</th>
-                                        <td>{{$form['education_qualification']}}</td>
+                                        <td>{{$form['education_qualification'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> मुखय पेशा</th>
-                                        <td>{{$form['occupation']}}</td>
+                                        <td>{{$form['occupation'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> नागरिकता नम्बर</th>
-                                        <td>{{$form['citizenship_no']}}</td>
+                                        <td>{{$form['citizenship_no'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>
                                             जारी मिति
                                         </th>
-                                        <td>{{$form['issue_date']}}</td>
+                                        <td>{{$form['issue_date'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> जारी जिल्ला</th>
@@ -903,16 +900,16 @@
                                     </tr>
                                     <tr>
                                         <th> वार्ड</th>
-                                        <td>{{$form['permanent_ward_no']}}</td>
+                                        <td>{{$form['permanent_ward_no'] ?? '' }}</td>
                                     </tr>
 
                                     <tr>
                                         <th> मार्ग</th>
-                                        <td>{{$form['permanent_way']}}</td>
+                                        <td>{{$form['permanent_way'] ?? '' }}</td>
                                     </tr>
                                     <tr>
                                         <th> गाउ/टोल</th>
-                                        <td>{{$form['permanent_tole']}}</td>
+                                        <td>{{$form['permanent_tole'] ?? '' }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -938,11 +935,11 @@
                                     <tbody>
                                     @foreach($form['threeGenerationDetails'] as $threeGenerationDetail)
                                         <tr>
-                                            <td>   {{$threeGenerationDetail['relation']}}</td>
-                                            <td>   {{$threeGenerationDetail['name']}}</td>
-                                            <td>   {{$threeGenerationDetail['name_en']}}</td>
-                                            <td>   {{$threeGenerationDetail['citizenship_no']}}</td>
-                                            <td>   {{$threeGenerationDetail['mobile_no']}}</td>
+                                            <td>   {{$threeGenerationDetail['relation'] ?? ''}}</td>
+                                            <td>   {{$threeGenerationDetail['name'] ?? ''}}</td>
+                                            <td>   {{$threeGenerationDetail['name_en'] ?? ''}}</td>
+                                            <td>   {{$threeGenerationDetail['citizenship_no'] ?? ''}}</td>
+                                            <td>   {{$threeGenerationDetail['mobile_no'] ?? ''}}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -961,11 +958,11 @@
                                     <tbody>
                                     <tr>
                                         <th>फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा</th>
-                                        <td>{{$form['business_detail_name']}}</td>
+                                        <td>{{$form['business_detail_name'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</th>
-                                        <td>{{$form['business_detail_name_en']}}</td>
+                                        <td>{{$form['business_detail_name_en'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>व्यवसायको प्रकृति</th>
@@ -988,19 +985,19 @@
 
                                     <tr>
                                         <th> व्यवसाय दर्ता मिति</th>
-                                        <td>{{$form['registration_date']}}</td>
+                                        <td>{{$form['registration_date'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>
 
                                             पान नम्बर
                                         </th>
-                                        <td>{{$form['pan_no']}}</td>
+                                        <td>{{$form['pan_no'] ?? ''}}</td>
                                     </tr>
 
                                     <tr>
                                         <th> लागत रकम रु</th>
-                                        <td>{{$form['amount_cost']}}</td>
+                                        <td>{{$form['amount_cost'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>
@@ -1056,18 +1053,18 @@
                                                 <tr>
 
                                                     <td>
-                                                        {{$partnerDetail['relation']}}
+                                                        {{$partnerDetail['relation'] ?? ''}}
                                                     </td>
                                                     <td>
-                                                        {{$partnerDetail['name']}}
+                                                        {{$partnerDetail['name'] ?? ''}}
                                                     </td>
 
                                                     <td>
 
-                                                        {{$partnerDetail['citizenship_no']}}
+                                                        {{$partnerDetail['citizenship_no'] ?? ''}}
                                                     </td>
                                                     <td>
-                                                        {{$partnerDetail['mobile_no']}}
+                                                        {{$partnerDetail['mobile_no'] ?? ''}}
                                                     </td>
 
                                                 </tr>
@@ -1094,19 +1091,19 @@
                                             <tr>
                                                 <th>घर धनिको नाम थर</th>
                                                 <td>
-                                                    {{$form['house_owner_name']}}
+                                                    {{$form['house_owner_name'] ?? ''}}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>घर धनिको मोबाइल न</th>
                                                 <td>
-                                                    {{$form['house_owner_phone']}}
+                                                    {{$form['house_owner_phone'] ?? ''}}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>ठेगाना</th>
                                                 <td>
-                                                    {{$form['house_owner_address']}}
+                                                    {{$form['house_owner_address'] ?? ''}}
                                                 </td>
                                             </tr>
 
@@ -1114,7 +1111,7 @@
                                                 <th> मासिक भाडा रु
                                                 </th>
                                                 <td>
-                                                    {{$form['house_owner_monthly_rent']}}
+                                                    {{$form['house_owner_monthly_rent'] ?? ''}}
                                                 </td>
                                             </tr>
 
@@ -1160,14 +1157,14 @@
                                             <th> वार्ड
                                             </th>
                                             <td>
-                                                {{$form['ward_no']}}
+                                                {{$form['ward_no'] ?? ''}}
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <th> मार्ग</th>
                                             <td>
-                                                {{$form['way']}}
+                                                {{$form['way'] ?? ''}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1176,7 +1173,7 @@
                                                 गाउ/टोल
                                             </th>
                                             <td>
-                                                {{$form['tole']}}
+                                                {{$form['tole'] ?? ''}}
                                             </td>
                                         </tr>
 

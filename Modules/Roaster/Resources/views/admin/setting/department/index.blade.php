@@ -1,74 +1,81 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="">
-        <div class="page-title d-flex justify-content-between">
-            <h5>बिभागहरु</h5>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">ड्यासबोर्ड</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">बिभागहरुको विवरण</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="card mb-3">
-            <div class="card-header d-flex justify-content-between">
-                <h6>बिभागहरुको विवरण</h6>
-            </div>
-            <form action="{{route('admin.roaster.setting.department.store')}}" method="post">
-                <div class="card-body">
-                    @csrf
-                    <div class="col-md-12 col-sm-12 form-group">
-                        <label for="title">बिभाग * </label>
-                        <input id="title" type="text" name="title" placeholder="बिभाग"
-                               class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}">
-                        @error('title')
-                        <div class="text-danger">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.roaster.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.roaster.setting.department.index')}}">बिभागहरुको विवरण</a>
+                        </li>
+                    </ol>
                 </div>
-            </form>
+                <h4 class="page-title">बिभागहरुको विवरण</h4>
+            </div>
         </div>
-
-        <div class="card">
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>क्र.सं</th>
-                            <th>बिभाग</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @forelse($departments as $departments)
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">बिभाग सूची</h4>
+                        @can('department_create')
+                            <a href="{{route('admin.roaster.setting.department.create')}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
+                            </a>
+                        @endcan
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0 table-striped table-hover">
+                            <thead>
                             <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$departments->title}}</td>
-                                <td class="d-flex justify-center">
-                                    <a href="{{route('admin.roaster.setting.department.edit', $departments)}}" type="button"
-                                       class="btn btn-primary">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{route('admin.roaster.setting.department.destroy', $departments)}}"
-                                          method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="show_confirm btn btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                <th>क्र.स</th>
+                                <th>विभाग</th>
+                                <th></th>
+
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3">Data not found !!!</td>
-                            </tr>
-                        @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @forelse($departments as $departments)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$departments->title}}</td>
+                                    <td>
+                                        @can('department_edit')
+                                            <a href="{{route('admin.roaster.setting.department.edit', $departments)}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+                                        @can('department_delete')
+                                            <form action="{{route('admin.roaster.setting.department.destroy', $departments)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            </form>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

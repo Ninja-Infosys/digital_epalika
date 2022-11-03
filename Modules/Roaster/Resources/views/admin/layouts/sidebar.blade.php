@@ -1,12 +1,12 @@
-<li class="{{request()->is('admin/dashboard') ? 'active' : ''}}">
+<li class="{{request()->is('admin/roaster/dashboard') ? 'active' : ''}}">
     <a href="{{route('admin.roaster.dashboard')}}">
         <i class="fa fa-home"></i>
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-<li class="{{request()->is('admin/emap/setting/*') ? 'active' : ''}}">
+<li class="{{request()->is('admin/roaster/dashboard/*') ? 'active' : ''}}">
     <a href="#sidebarEMapSetting"
-       {{request()->is('admin/emap/setting/*') ? 'aria-expanded=true' : ''}}
+       {{request()->is('admin/roaster/dashboard/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-user"></i>
         <span>प्रशिक्षक थप्नुहोस्</span>
@@ -14,24 +14,19 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('admin/emap/setting/*') ? 'show' : ''}}"
+    <div class="collapse {{request()->is('admin/roaster/dashboard/*') ? 'show' : ''}}"
          id="sidebarEMapSetting">
         <ul class="nav-second-level">
-            <li class="{{request()->is('admin/emap/setting/mapSetting') ? 'active' : ''}}">
-                <a href="{{route('emap.admin.mapSetting.index')}}">
-                    <span>विषय</span>
-                </a>
-            </li>
             <li class="{{request()->is('admin/emap/setting/mapFee/*') ? 'active' : ''}}">
-                <a href="{{route('emap.admin.mapFee.index')}}">
+                <a href="{{route('admin.roaster.dashboard')}}">
                     <span>प्रशिक्षक</span>
                 </a>
             </li>
         </ul>
     </div>
 </li>
-<li class="{{request()->is('admin/emap/files') ? 'active' : ''}}">
-    <a href="{{route('emap.admin.files.file')}}">
+<li class="{{request()->is('admin/roaster/dashboard') ? 'active' : ''}}">
+    <a href="{{route('admin.roaster.dashboard')}}">
         <i class="fa fa-book"></i>
         <span>तालिम</span>
     </a>
@@ -50,6 +45,11 @@
     <div class="collapse {{request()->is('admin/roaster/setting/*') ? 'show' : ''}}"
          id="sidebarRoaster">
         <ul class="nav-second-level">
+            <li class="{{request()->is('admin/roaster/setting/subject') ? 'active' : ''}}">
+                <a href="{{route('admin.roaster.setting.subject.index')}}">
+                    <span>विषय</span>
+                </a>
+            </li>
             <li class="{{request()->is('admin/roaster/setting/designation') ? 'active' : ''}}">
                 <a href="{{route('admin.roaster.setting.designation.index')}}">
                     <span>पद थप्नुहोस् </span>
@@ -60,6 +60,7 @@
                     <span>विभाग थप्नुहोस् </span>
                 </a>
             </li>
+
         </ul>
     </div>
 </li>

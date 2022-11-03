@@ -25,6 +25,11 @@ class DepartmentController extends Controller
         return view('roaster::admin.setting.department.index', compact('departments'));
     }
 
+    public function create()
+    {
+        return view('roaster::admin.setting.department.create');
+    }
+
     public function store(StoreDepartmentRequest $request)
     {
         abort_if(

@@ -1,16 +1,9 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::prefix('roaster')->group(function() {
-    Route::get('/', 'RoasterController@index');
-});
+use Illuminate\Support\Facades\Route;
+use Modules\Roaster\Http\Controllers\FrontendController;
+
+Route::get('trainer-form',[FrontendController::class,'trainerForm'])->name('trainer-form');
+
+

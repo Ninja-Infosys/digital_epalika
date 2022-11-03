@@ -1,18 +1,8 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+use Illuminate\Support\Facades\Route;
 use Modules\Grant\Http\Controllers\FrontendController;
 
 Route::controller(FrontendController::class)->group(function (){
-    \Illuminate\Support\Facades\Route::get('application-registration','applicationRegistration')->name('applicationRegistration');
+    Route::get('/','index')->name('index');
+    Route::get('application-registration','applicationRegistration')->name('applicationRegistration');
 });
