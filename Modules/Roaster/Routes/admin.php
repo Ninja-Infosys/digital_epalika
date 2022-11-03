@@ -18,7 +18,10 @@ Route::prefix('setting')->as('setting.')->group(function (){
 });
 
 Route::resource('trainer', TrainerController::class);
+Route::put('training/{training}/update-marks', [TrainingController::class, 'updateMarks'])->name('training.update-marks');
+Route::get('training/{training}/report', [TrainingController::class, 'report'])->name('training.report');
 Route::get('training/{training}/update-status', [TrainingController::class, 'setFormStatus'])->name('training.set-form-status');
-Route::get('training/{training}/update-status', [TrainingController::class, 'setFormStatus'])->name('training.set-form-status');
+Route::get('training/{training}/marks', [TrainingController::class, 'marks'])->name('training.marks');
+Route::put('training/{training}/update-photo', [TrainingController::class, 'storePhotos'])->name('training.store-photos');
 Route::get('training/{training}/pdf', [TrainingController::class, 'pdfExport'])->name('training.pdfExport');
 Route::resource('training', TrainingController::class);

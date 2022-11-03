@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\View;
 use Modules\Roaster\Entities\Trainer;
 use Modules\Roaster\Entities\Training;
 use Modules\Roaster\Http\Requests\Training\StoreTrainingRequest;
+use Modules\Roaster\Http\Requests\Training\UpdateTrainingMarkRequest;
 use Modules\Roaster\Http\Requests\Training\UpdateTrainingRequest;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
@@ -146,4 +147,75 @@ class TrainingController extends Controller
         toast('Training Status Updated Successfully', 'success');
         return redirect(route('admin.roaster.training.index'));
     }
+
+
+
+    public function report(Training $training)
+    {
+        abort_if(
+            Gate::denies('training_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $training->load(
+            'trainingTrainees.model.localBody',
+            'trainingTrainees.model.district',
+            'trainingTrainees.model.province',
+            'trainers.localBody',
+            'trainers.district',
+            'trainers.province',
+            'trainers.designation',
+        );
+
+        return view($training->form_type === 'technicalTrainee' ? 'roaster::admin.training.technicalTraineeReport' : 'roaster::admin.training.report', compact('training'));
+    }
+
+    public function storePhotos(Request $request, Training $training)
+    {
+        abort_if(
+            Gate::denies('training_edit'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $request->validate([
+            'images' => ['required', 'array'],
+            'images.*' => ['image', 'max:300']
+        ]);
+
+        foreach ($request->file('images') as $image) {
+            $training->documents()->create([
+                'document' => $image
+            ]);
+        }
+
+        toast('Photos Added Successfully', 'success');
+        return redirect()->back();
+    }
+
+    public function marks(Training $training)
+    {
+        abort_if(
+            Gate::denies('training_edit'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+        return view('roaster::admin.training.mark-sheet', compact('training'));
+    }
+
+    public function updateMarks(UpdateTrainingMarkRequest $request, Training $training)
+    {
+        abort_if(
+            Gate::denies('training_edit'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $training->update($request->validated());
+
+        toast('Marks Updated Successfully', 'success');
+        return redirect()->back();
+    }
+
 }
