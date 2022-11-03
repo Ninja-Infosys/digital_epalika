@@ -14,7 +14,7 @@ use App\Traits\EventObserveTrait;
 
 class Training extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory,SoftDeletes;
 
    protected $dates = [
        'created_at',
