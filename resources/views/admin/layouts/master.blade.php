@@ -127,5 +127,15 @@
 @stack('scripts')
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 @livewireScripts
+{{--listener for livewire alert message--}}
+<script>
+    window.addEventListener('alert_message', event => {
+        swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+        });
+    });
+</script>
 </body>
 </html>

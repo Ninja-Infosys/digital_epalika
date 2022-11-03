@@ -55,7 +55,7 @@
         text-align: right !important;
     }
     .table-sm > :not(caption) > * > * {
-        padding: .5rem .5rem;
+        padding: .1rem .1rem;
     }
 }
 
