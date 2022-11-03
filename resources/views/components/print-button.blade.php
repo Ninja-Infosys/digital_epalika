@@ -1,5 +1,5 @@
 <div>
-    <button class="btn btn-primary float-right"
+    <button class="btn btn-success float-right"
             onclick="printForm()">
         <i class="fa fa-print"></i> Print
     </button>
