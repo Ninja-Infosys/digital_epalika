@@ -2,18 +2,28 @@
 
 namespace Modules\Grant\Http\Livewire;
 
+use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
+use App\Traits\AddressHelperTrait;
 use Livewire\Component;
 use Modules\Grant\Entities\GrantActivity;
+use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
 
 class GrantDetailLivewire extends Component
 {
+    use AddressHelperTrait;
+
     public $fiscalYears = [];
     public $grantPrograms = [];
     public $grantTypes = [];
     public $grantActivities = [];
+    public $provinces = [];
+    public $districts = [];
+    public $localBodies = [];
+    public $wards=[];
+    public object $grantDetail;
 
     public array $form = [
         'fiscal_year_id' => null,
@@ -41,10 +51,18 @@ class GrantDetailLivewire extends Component
         'remarks'=>null
     ];
 
-    public function mount()
+    public function mount($grantDetail=null)
     {
         $this->fiscalYears = FiscalYear::all();
         $this->grantTypes=GrantType::all();
+        $this->provinces=Province::all();
+
+        if(!empty($grantDetail)){
+            $this->grantDetail=$grantDetail;
+            foreach ($this->form as $key=>$data){
+                $this->form[$key]=$grantDetail[$key];
+            }
+        }
     }
 
     protected array $rules=[
@@ -80,7 +98,24 @@ class GrantDetailLivewire extends Component
 
     public function submitFormData()
     {
-        $this->validate();
+        if(!empty($this->grantDetail)){
+            $this->grantDetail->update($this->validate()['form']);
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => "success",
+                'title' => "धन्यबाद",
+                'text' => "अनुदान विवरण सफलतापूर्वक अद्यावधिक गरियो",
+            ]);
+            return redirect(route('admin.grant.grantDetail.index'));
+        }else{
+            GrantDetail::create($this->validate()['form']);
+
+            $this->reset('form','districts','localBodies','wards','grantPrograms','grantActivities');
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => "success",
+                'title' => "धन्यबाद",
+                'text' => "अनुदान विवरण सफलतापूर्वक थपियो",
+            ]);
+        }
     }
 
     public function render()
@@ -92,6 +127,7 @@ class GrantDetailLivewire extends Component
         if(!empty($this->form['grant_recipient_type'])){
             $this->grantActivities=GrantActivity::where('grant_recipient_type',$this->form['grant_recipient_type'])->get();
         }
+        $this->getDependentAddressData();
 
         return view('grant::livewire.grant-detail-livewire');
     }
@@ -99,7 +135,26 @@ class GrantDetailLivewire extends Component
     public function messages(): array
     {
         return [
-
+            'form.fiscal_year_id.required'=>'आर्थिक वर्ष आवश्यक छ',
+            'form.grant_program_id.required'=>'अनुदान कार्यक्रम आवश्यक छ',
+            'form.grant_recipient_name.required'=>'अनुदान प्राप्तकर्ता नाम आवश्यक छ',
+            'form.grant_recipient_code_no.required'=>'अनुदान प्राप्तकर्ता कोड नम्बर आवश्यक छ',
+            'form.province_id.required'=>'प्रदेश आवश्यक छ',
+            'form.district_id.required'=>'जिल्ला आवश्यक छ',
+            'form.local_body_id.required'=>'स्थानीय निकाय आवश्यक छ',
+            'form.ward_no.required'=>'वार्ड नम्बर आवश्यक छ',
+            'form.grant_recipient_type.required'=>'अनुदान प्राप्तकर्ताको प्रकार आवश्यक छ',
+            'form.grant_type_id.required'=>'अनुदान प्रकार आवश्यक छ',
+            'form.grant_activity_id.required'=>'अनुदान गतिविधि आवश्यक छ',
+            'form.total_cost.required'=>'कुल लागत आवश्यक छ',
+            'form.grant_amount.required'=>'अनुदान रकम आवश्यक छ',
+            'form.investment_amount.required'=>'लगानी रकम आवश्यक छ',
+            'form.beneficial_area.required'=>'लाभदायक क्षेत्र आवश्यक छ',
+            'form.contact_person_name.required'=>'सम्पर्क व्यक्तिको नाम आवश्यक छ',
+            'form.phone.required'=>'फोन आवश्यक छ',
+            'form.prev_fiscal_year_id.required_if'=>'अघिल्लो आर्थिक वर्ष आवश्यक छ',
+            'form.prev_cost_amount.required_if'=>'अघिल्लो लागत रकम आवश्यक छ',
+            'form.beneficial_places.required'=>'लाभदायक स्थान आवश्यक छ',
         ];
     }
 }

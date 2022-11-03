@@ -4,7 +4,6 @@
         <span> गृहपृष्ठ </span>
     </a>
 </li>
-
 <li class="{{request()->is('admin/setting/userManagement/*') ? 'active' : ''}}">
     <a href="#userManagement"
        {{request()->is('admin/setting/userManagement/*') ? 'aria-expanded=true  ' : ''}}

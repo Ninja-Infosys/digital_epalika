@@ -4,58 +4,108 @@
         border: 1px solid #000000;
         border-collapse: collapse;
     }
+
     table {
         width: 100%;
     }
-    .mt-2{
+
+    .mt-2 {
         margin-top: 10px;
     }
-    .mt-1{
+
+    .mt-1 {
         margin-top: 5px;
     }
-    .fw-bold{
+
+    .fw-bold {
         font-weight: 600;
     }
+
     .row {
         display: flex;
         align-content: center;
     }
+
     .text-center {
         text-align: center;
     }
+
     .underline-dotted {
         border-bottom: dotted 2px !important;
         padding: 0 20px;
     }
+
     .custom-width {
-       display: inline-block;
+        display: inline-block;
         width: 10%;
     }
+
     .font-black p {
         color: #000000;
     }
-    .my-2{
+
+    .my-2 {
         margin-top: .75rem !important;
         margin-bottom: .75rem !important;
     }
-    .d-flex{
+
+    .d-flex {
         display: flex;
+        justify-content: space-around;
     }
-    .justify-content-between{
+
+    .justify-content-between {
         justify-content: space-between !important;
     }
-    .justify-content-end{
+
+    .justify-content-end {
         justify-content: end;
     }
-    #printData{
+
+    #printData {
         line-height: 1.8;
         text-align: justify;
     }
+
     .text-end {
         text-align: right !important;
     }
+
     .table-sm > :not(caption) > * > * {
         padding: .1rem .1rem;
     }
+
+    .break-page {
+        margin-top: 40px;
+    }
+
+    h6 {
+        margin-top: 1px;
+    }
+
+    .vertical {
+        transform: rotate(90deg);
+        transform-origin: left top 0;
+        margin-left: 30px;
+        padding: 0 120px;
+        color: black;
+    }
+    .fing {
+        margin-top: 15rem;
+        border: 1px solid #d0d0d0;
+    }
+
+    .sign {
+        margin-top: 17rem;
+    }
+    .person{
+        margin-top: 12rem;
+    }
+    .border {
+        width: 100%;
+        padding: 0.5rem;
+        border: 2px solid black;
+    }
+
 }
 

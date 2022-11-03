@@ -40,8 +40,11 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>आर्थिक वर्ष</th>
+                                <th>कार्यक्रमको नाम</th>
                                 <th>अनुदानग्राहीको नाम</th>
+                                <th>जम्मा लागत</th>
                                 <th>अनुदान रकम</th>
+                                <th>अनुदानग्राहीको लगानी</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -49,12 +52,17 @@
                             @forelse($grantDetails as $grantDetail)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <th>{{$grantDetail->title}}</th>
+                                    <td>{{$grantDetail->fiscalYear->title??''}}</td>
+                                    <td>{{$grantDetail->grantProgram->program_name??''}}</td>
+                                    <td>{{$grantDetail->grant_recipient_name}}</td>
+                                    <td>रु. {{$grantDetail->total_cost}}</td>
+                                    <td>रु. {{$grantDetail->grant_amount}}</td>
+                                    <td>रु. {{$grantDetail->investment_amount}}</td>
                                     <td>
                                         @can('grantDetail_edit')
                                             <a href="{{route('admin.grant.grantDetail.edit',$grantDetail)}}"
                                                class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('grantDetail_delete')
@@ -63,7 +71,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

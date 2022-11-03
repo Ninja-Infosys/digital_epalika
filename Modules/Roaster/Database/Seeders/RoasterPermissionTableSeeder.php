@@ -28,6 +28,10 @@ class RoasterPermissionTableSeeder extends Seeder
             'trainer_create',
             'trainer_edit',
             'trainer_delete',
+            'training_access',
+            'training_create',
+            'training_edit',
+            'training_delete',
         ];
 
         $this->storePermission($permissions);

@@ -15,7 +15,7 @@ class TrainerController extends Controller
     {
 
         abort_if(
-            Gate::denies('trainer_access'),
+            Gate::denies('training_access'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );

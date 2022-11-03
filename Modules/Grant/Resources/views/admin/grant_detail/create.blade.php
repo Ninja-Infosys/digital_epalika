@@ -12,7 +12,7 @@
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.grant.grantDetail.index')}}">
-                                <i class="fa fa-home"></i> अनुदान विवरण
+                                अनुदान विवरण
                             </a>
                         </li>
                         <li class="breadcrumb-item active">अनुदान विवरण थप्नुहोस</li>

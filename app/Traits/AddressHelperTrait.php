@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Roaster\Traits\helpers;
+namespace App\Traits;
 
 
 use App\Models\Address\District;

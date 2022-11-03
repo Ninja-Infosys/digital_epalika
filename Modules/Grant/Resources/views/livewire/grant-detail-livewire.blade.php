@@ -64,40 +64,86 @@
     </fieldset>
 
     <fieldset class="mt-2">
-        <legend><h5><b>ठेगाना</b></h5></legend>
+        <legend>
+            <h5><b>ठेगाना</b></h5>
+        </legend>
         <div class="row">
             <div class="col-md-4 mb-2">
-                <label for="province">प्रदेश</label>
-                <select id="province" class="form-control">
-                    <option selected>---प्रदेश छानुहोस्---</option>
-                    <option>078/079</option>
+                <label for="province_id">प्रदेश *</label>
+                <select id="province_id"
+                        wire:model="form.province_id"
+                        class="form-select @error('form.province_id') is-invalid @enderror">
+                    <option value="">---प्रदेश छानुहोस्---</option>
+                    @foreach($provinces as $province)
+                    <option value="{{$province->id}}">
+                        {{$province->province}}
+                    </option>
+                    @endforeach
                 </select>
+                @error('form.province_id')
+                <div class="invalid-feedback">{{$message}}</div>
+                @enderror
             </div>
             <div class="col-md-4 mb-2">
-                <label for="district">जिल्ला</label>
-                <select id="district" class="form-control">
-                    <option selected>---जिल्ला छानुहोस्---</option>
-                    <option>078/079</option>
+                <label for="district_id">जिल्ला *</label>
+                <select id="district_id"
+                        wire:model="form.district_id"
+                        class="form-select @error('form.district_id') is-invalid @enderror">
+                    <option value="">---जिल्ला छानुहोस्---</option>
+                    @foreach($districts as $district)
+                    <option value="{{$district->id}}">
+                        {{$district->district}}
+                    </option>
+                    @endforeach
                 </select>
+                @error('form.district_id')
+                <div class="invalid-feedback">{{$message}}</div>
+                @enderror
             </div>
             <div class="col-md-4 mb-2">
-                <label for="local_body">पालिका</label>
-                <select id="local_body" class="form-control">
-                    <option selected>---पालिका छानुहोस्---</option>
-                    <option>078/079</option>
+                <label for="local_body_id">पालिका *</label>
+                <select id="local_body_id"
+                        wire:model="form.local_body_id"
+                        class="form-select @error('form.local_body_id') is-invalid @enderror">
+                    <option value="">---पालिका छानुहोस्---</option>
+                    @foreach($localBodies as $localBody)
+                    <option value="{{$localBody->id}}">
+                        {{$localBody->local_body}}
+                    </option>
+                    @endforeach
                 </select>
+                @error('form.local_body_id')
+                <div class="invalid-feedback">{{$message}}</div>
+                @enderror
             </div>
             <div class="col-md-6 mb-2">
-                <label for="ward_no">वडा नं.</label>
-                <select id="ward_no" class="form-control">
-                    <option selected>---वडा नं छानुहोस्---</option>
-                    <option>078/079</option>
+                <label for="ward_no">वडा नं. *</label>
+                <select id="ward_no"
+                        wire:model="form.ward_no"
+                        class="form-select @error('form.ward_no') is-invalid @enderror">
+                    <option value="">---वडा नं छानुहोस्---</option>
+                    @foreach($wards as $ward)
+                    <option value="{{$ward}}">
+                        {{$ward}}
+                    </option>
+                    @endforeach
                 </select>
+                @error('form.ward_no')
+                <div class="invalid-feedback">{{$message}}</div>
+                @enderror
             </div>
             <div class="col-md-6 mb-2">
                 <label for="tole">
-                    टोल</label>
-                <input type="text" class="form-control" id="tole" placeholder="टोल">
+                    टोल
+                </label>
+                <input type="text"
+                       wire:model="form.tole"
+                       class="form-control @error('form.tole') is-invalid @enderror"
+                       id="tole"
+                       placeholder="टोल">
+                @error('form.tole')
+                <div class="invalid-feedback">{{$message}}</div>
+                @enderror
             </div>
         </div>
     </fieldset>
@@ -260,6 +306,7 @@
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
+            @if($form['is_continuity']==1)
             <div class="col-md-4 mb-2">
                 <label for="prev_fiscal_year_id">
                     पहिले पाएको आ. व. *
@@ -296,6 +343,7 @@
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-md-6 mb-2">
