@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -12,26 +11,25 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.fiscalYear.index')}}">आर्थिक बर्ष</a>
+                            <a href="{{route('admin.ethnicity.index')}}">जातियता</a>
                         </li>
-                        <li class="breadcrumb-item active">आर्थिक बर्ष</li>
+                        <li class="breadcrumb-item active">जातियता विवरण</li>
                     </ol>
                 </div>
-                <h4 class="page-title">आर्थिक बर्ष</h4>
+                <h4 class="page-title">जातियता विवरण</h4>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> आर्थिक बर्ष सूची</h4>
+                        <h4 class="header-title"> जातियता सूची</h4>
                         @can('user_create')
-                            <a href="{{route('admin.fiscalYear.create')}}"
+                            <a href="{{route('admin.ethnicity.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ आर्थिक बर्ष थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ जातियता थप्नुहोस्
                             </a>
                         @endcan
                     </div>
@@ -42,26 +40,24 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>बर्ष</th>
-                                <th>#</th>
+                                <th>जातियता</th>
+                                <th>कार्य</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($fiscalYears as $fiscalYear)
+                            @forelse($ethnicities as $ethnicity)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$ethnicity->title}}</td>
                                     <td>
-                                       {{$fiscalYear->title}}
-                                    </td>
-                                    <td>
-                                        @can('user_edit')
-                                            <a href="{{route('admin.fiscalYear.edit',$fiscalYear)}}"
+                                        @can('ethnicity_edit')
+                                            <a href="{{route('admin.ethnicity.edit', $ethnicity)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('user_delete')
-                                            <form action="{{route('admin.fiscalYear.destroy',$fiscalYear)}}"
+                                        @can('ethnicity_delete')
+                                            <form action="{{route('admin.ethnicity.destroy', $ethnicity)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
@@ -74,7 +70,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td class="text-center" colspan="7">जातियतामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
