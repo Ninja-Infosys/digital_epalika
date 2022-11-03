@@ -106,6 +106,9 @@
         padding: 0.5rem;
         border: 2px solid black;
     }
+    .head{
+        text-decoration: underline;
+    }
 
 }
 

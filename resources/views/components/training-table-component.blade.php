@@ -39,7 +39,7 @@
                        title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <a href=""
+                    <a href="{{route('admin.roaster.training.report', $training)}}"
                        type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top"
                        title="View Report">
                         <i class="fa fa-file"></i>

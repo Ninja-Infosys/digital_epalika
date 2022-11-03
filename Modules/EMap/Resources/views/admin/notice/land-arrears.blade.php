@@ -93,7 +93,7 @@
                         <div class="text-center my-2">दक्षिण वर्ष<span
                                 class="underline-dotted custom-width"></span>&ensp;&ensp;&ensp; &emsp; को श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></div>
-                        <h4 class="text-decoration-underline mt-2">छिमेकि सक्षीवाला</h4>
+                        <h4 class="head text-decoration-underline mt-2">छिमेकि सक्षीवाला</h4>
                         <span class="d-flex justify-content-center my-2">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             <span
                                 class="underline-dotted custom-width"></span>बस्ने<span
@@ -129,20 +129,21 @@
                                 class="underline-dotted custom-width"></span>बस्ने<span
                                 class="underline-dotted custom-width"></span> वर्षको श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></span>
-                        <h4 class="text-decoration-underline">रोहवरमा</h4>
-                        <span>सहिछाप</span>
+                        <span class="head text-decoration-underline">रोहवरमा</span><br>
+                        <span>सहिछाप</span><br>
                         <span>१. {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             वडा नं.<span class="underline-dotted custom-width"></span>
                             बस्ने वर्ष <span class="underline-dotted custom-width"></span> को जग्गा धनी
                             श्रीमान/श्रीमती/सुश्री <span
-                                class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span></span>
+                                class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span></span><br>
                         <span class="mt-2">२. वडा नं.<span class="underline-dotted custom-width"></span>को वडा
-                            अध्यक्ष श्री <span class="underline-dotted custom-width"></span></span>
-                        <span class="text-decoration-underline mt-2">काम तामेल गर्ने </span>
+                            अध्यक्ष श्री <span class="underline-dotted custom-width"></span></span><br>
+                        <span class=" text-decoration-underline mt-2">काम तामेल गर्ने </span><br>
                         <span>प्रविधिक श्री <span class="underline-dotted custom-width"></span>पद <span
-                                class="underline-dotted custom-width"></span>प्रशासनिक कर्मचारी श्री <span
+                                class="underline-dotted custom-width"></span><br>
+                            प्रशासनिक कर्मचारी श्री <span
                                 class="underline-dotted custom-width"></span>पद <span
-                                class="underline-dotted custom-width"></span>
+                                class="underline-dotted custom-width"></span><br>
                             ईति सम्वत् <span class="underline-dotted custom-width"></span>
                             साल <span class="underline-dotted custom-width"></span>
                             महिना <span class="underline-dotted custom-width"></span>
