@@ -12,8 +12,8 @@
         <i class="fa fa-users-cog"></i>
         <span>प्रयोगकर्ता र भूमिका</span>
         <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
     <div class="collapse {{request()->is('admin/setting/userManagement/*') ? 'show' : ''}}"
          id="userManagement">
@@ -37,6 +37,14 @@
         <a href="{{route('admin.fiscalYear.index')}}">
             <i class="fa fa-calendar"></i>
             <span> आर्थिक बर्ष </span>
+        </a>
+    </li>
+@endcan
+@can('ethnicity_access')
+    <li class="{{request()->is('admin/setting/fiscalYear/*') ? 'active' : ''}}">
+        <a href="{{route('admin.ethnicity.index')}}">
+            <i class="fa fa-user"></i>
+            <span> जातियता </span>
         </a>
     </li>
 @endcan

@@ -113,10 +113,7 @@
                         </div>
 
                         <div class="tab-pane" id="map-registration-tab" role="tabpanel">
-
                                 @includeIf('emap::admin.map.map-registration.print')
-
-
                         </div>
 
 

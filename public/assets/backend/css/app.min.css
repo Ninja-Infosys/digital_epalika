@@ -9382,13 +9382,22 @@ table[data-toggle=table] {
 }
 
 .custom-width {
-    padding: 0 50px !important;
+    display: inline-block;
+    width: 10%;
 }
 .font-black p {
     color: #000000;
 }
 .p-space{
     text-indent: 20px;
+}
+#printData{
+    line-height: 1.8;
+    text-align: justify;
+}
+.hr {
+    border: none;
+    border-top: 1px dotted black;
 }
 .p-space{
     text-indent: 20px;
