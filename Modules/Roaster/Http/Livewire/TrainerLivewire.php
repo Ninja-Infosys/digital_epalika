@@ -3,16 +3,16 @@
 namespace Modules\Roaster\Http\Livewire;
 
 use App\Models\Address\Province;
+use App\Traits\AddressHelperTrait;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Modules\Roaster\Traits\helpers\AddressHelperTrait;
-use Modules\Roaster\Traits\helpers\TrainerHelperTrait;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Roaster\Entities\Department;
 use Modules\Roaster\Entities\Designation;
 use Modules\Roaster\Entities\Subject;
+use Modules\Roaster\Traits\helpers\TrainerHelperTrait;
 
 class TrainerLivewire extends Component
 {

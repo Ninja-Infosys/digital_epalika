@@ -4,12 +4,12 @@ namespace Modules\Grant\Http\Livewire;
 
 use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
+use App\Traits\AddressHelperTrait;
 use Livewire\Component;
 use Modules\Grant\Entities\GrantActivity;
 use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
-use Modules\Roaster\Traits\helpers\AddressHelperTrait;
 
 class GrantDetailLivewire extends Component
 {
