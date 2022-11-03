@@ -7,7 +7,7 @@
             <th>खोलिएको मिति</th>
             <th>बन्द हुने मिति</th>
             <th>फारमको स्थिति</th>
-            <th></th>
+            <th class="text-center"> कार्य</th>
         </tr>
         </thead>
         <tbody>
@@ -26,27 +26,26 @@
                     @else
                         <i class="fa fa-2x fa-toggle-off text-secondary "></i>
                     @endif
-
                 </td>
-                <td class="d-flex justify-center">
-                    <a href="{{route('admin.roaster.training.show', $training)}}" class="btn btn-info"
+                <td>
+                    <a href="{{route('admin.roaster.training.show', $training)}}" class="btn btn-xs btn-outline-info"
                        data-toggle="tooltip" data-placement="top"
                        title="{{$training->training_trainees_count}} Trainees Detail">
                         <i class="fa fa-users"></i>
                     </a>
                     <a href="{{route('admin.roaster.training.edit', $training)}}"
-                       type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                       type="button" class="btn btn-xs btn-outline-primary" data-toggle="tooltip" data-placement="top"
                        title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
                     <a href="{{route('admin.roaster.training.report', $training)}}"
-                       type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                       type="button" class="btn btn-xs btn-outline-success" data-toggle="tooltip" data-placement="top"
                        title="View Report">
                         <i class="fa fa-file"></i>
                     </a>
 
                     <a href="javascript:void(0)"
-                       class="btn btn-info printDetail"
+                       class="btn btn-xs btn-outline-info printDetail"
                        data-toggle="tooltip"
                        title="Print Trainees Detail" route_action="{{route('admin.roaster.training.pdfExport', $training)}}" >
                         <i class="fa fa-print"></i>
@@ -55,7 +54,7 @@
                           method="post">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="show_confirm btn btn-danger"
+                        <button type="submit" class="show_confirm btn btn-xs btn-outline-danger"
                                 data-toggle="tooltip" data-placement="top"
                                 title="Delete">
                             <i class="fa fa-trash"></i>

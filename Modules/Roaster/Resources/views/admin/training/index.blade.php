@@ -1,19 +1,30 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="">
-        <div class="page-title d-flex justify-content-between">
-            <h5>तालिम</h5>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">ड्यासबोर्ड</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">तालिम विवरण</li>
-                </ol>
-            </nav>
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{route('admin.roaster.dashboard')}}">
+                                    <i class="fa fa-home"></i> गृहपृष्ठ
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{route('admin.roaster.training.index')}}">तालिम</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                तालिम विवरण
+                            </li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">तालिम विवरण</h4>
+                </div>
+            </div>
         </div>
-
         <div class="card mb-3">
-            <div class="card-header d-flex justify-content-between">
-                <h6>तालिम खोल्नुहोस</h6>
+            <div class="card-header text-dark d-flex justify-content-between">
+                <h5>तालिम खोल्नुहोस</h5>
             </div>
             <form action="{{route('admin.roaster.training.store')}}" method="post">
                 <div class="card-body">
@@ -80,8 +91,8 @@
             </form>
         </div>
         <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <h6>तालिमको विवरण</h6>
+            <div class="card-header text-dark d-flex justify-content-between">
+                <h5>तालिमको विवरण</h5>
 
             </div>
             <div class="card-body">
@@ -103,7 +114,6 @@
                     <div class="tab-pane show active" id="tab-all">
                         <x-training-table-component :training-data="$trainings"/>
                     </div>
-
                     @foreach(\Modules\Roaster\Enums\TrainingTypeEnum::cases() as $key=>$typeData)
                     <div class="tab-pane" id="tab-{{$typeData->value}}">
                         <x-training-table-component :training-data="$trainings->where('form_type',$typeData)"/>
@@ -112,7 +122,6 @@
                 </div>
             </div>
         </div>
-    </div>
     @push('scripts')
         <script>
             $(".printDetail").on("click",function(e){
