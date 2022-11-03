@@ -12,4 +12,8 @@ class FrontendController extends Controller
     {
         return view('roaster::frontend.trainer-form');
     }
+    public function application()
+    {
+        return view('roaster::frontend.application');
+    }
 }
