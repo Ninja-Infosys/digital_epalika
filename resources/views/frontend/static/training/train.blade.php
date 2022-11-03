@@ -58,7 +58,7 @@
                                     <h5 class="fw-semibold mt-2">तालिम आवेदन</h5>
                                     <i class="fa fa-file-invoice fs-5"></i>
                                     <p>नयाँ आवेदन को लागि आवेदन दिनुहोस ।</p>
-                                    <a href="#" class="btn btn-light"><span>तालिम आवेदन</span>
+                                    <a href="{{route('application')}}" class="btn btn-light"><span>तालिम आवेदन</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>

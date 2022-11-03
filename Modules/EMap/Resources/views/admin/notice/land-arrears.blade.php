@@ -138,7 +138,7 @@
                                 class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span></span><br>
                         <span class="mt-2">२. वडा नं.<span class="underline-dotted custom-width"></span>को वडा
                             अध्यक्ष श्री <span class="underline-dotted custom-width"></span></span><br>
-                        <span class=" text-decoration-underline mt-2">काम तामेल गर्ने </span><br>
+                        <span class="head text-decoration-underline mt-2">काम तामेल गर्ने </span><br>
                         <span>प्रविधिक श्री <span class="underline-dotted custom-width"></span>पद <span
                                 class="underline-dotted custom-width"></span><br>
                             प्रशासनिक कर्मचारी श्री <span
