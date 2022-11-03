@@ -28,7 +28,6 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">व्यवसाय दर्ता सूची</h4>
-
                     </div>
                 </div>
                 <div class="card-body">
@@ -65,18 +64,14 @@
                                     <td>{{$proprietor->name}}</td>
                                     <td>
                                         <span>{{$proprietor->localBody->local_body??''}}
-                                - {{$proprietor->ward_no??''}}
-                                , {{$proprietor->district->district??''}}
-                                , {{$proprietor->province->province??''}}, </span>
+                                - {{$proprietor->ward_no??''}} </span>
                                     </td>
                                     <td>{{$proprietor->phone ?? ''}}</td>
                                     <td>{{$proprietor->email ??  ''}}</td>
                                     <td>{{$proprietor->businessDetail->business_detail_name ?? ''}}</td>
                                     <td>
                                         <span>{{$proprietor->businessDetail->localBody->local_body??''}}
-                                - {{$proprietor->businessDetail->ward_no??''}}
-                                , {{$proprietor->businessDetail->district->district??''}}
-                                , {{$proprietor->businessDetail->province->province??''}}, </span>
+                                - {{$proprietor->businessDetail->ward_no??''}} </span>
                                     </td>
                                     <td>{{$proprietor->businessDetail->business_nature->label() ?? ''}}</td>
                                     <td>{{$proprietor->businessDetail->amount_cost ?? ''}}</td>
