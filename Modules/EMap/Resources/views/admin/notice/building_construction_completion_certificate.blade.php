@@ -71,19 +71,19 @@
 
                         <h3 class="text-center"><b>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</b></h3>
 
-                        <p>
+                        <span>
                             श्री<span class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले
                             यस {{config('applicationDetail.office_type')}}
                             वडा नं.<span class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
                             मा निम्न बमोजिम निर्माण कार्य पूरा गरेकोले यो निर्माण कार्य सम्पन्न प्रमाण-पत्र
-                            प्रदान गरिएको छ |</p>
-                        <p>१. जग्गाधनीको नाम, थर<span
+                            प्रदान गरिएको छ |</span><br>
+                        <span>१. जग्गाधनीको नाम, थर<span
                                 class="underline-dotted">{{$mapApply->landOwner->name??''}}</span>
-                        </p>
-                        <p>२. घरधनीको नाम, थर, वतन <span
+                        </span><br>
+                        <span>२. घरधनीको नाम, थर, वतन <span
                                 class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span><span
-                                class="underline-dotted custom-width"></span></p>
-                        <p>३. जग्गाको विवरण साविक<span
+                                class="underline-dotted custom-width"></span></span><br>
+                        <span>३. जग्गाको विवरण साविक<span
                                 class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
                             हालको वडा नं.<span
                                 class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
@@ -95,10 +95,10 @@
                                 class="underline-dotted">{{$mapApply->landDetail->unit_value??''}} {{$mapApply->landDetail->unit->title??''}}</span>
                             भू-उपयोग क्षेत्र<span
                                 class="underline-dotted">{{$mapApply->landDetail->land_use_area??''}}</span>
-                        </p>
-                        <p>
+                        </span><br>
+                        <span>
                             ५. राष्ट्रिय भवन संहिता अनुसार भवनको वर्गिकरण :&nbsp;&nbsp;
-                        </p>
+                        </span><br>
                         <div class="d-flex flex-wrap">
                             @foreach(\Modules\EMap\Enums\CategorizationEnum::cases() as $category)
                                 <div class="m-1">
@@ -109,14 +109,14 @@
                                 </div>
                             @endforeach
                         </div>
-                        <p>
+                        <span>
 
                             निर्माणको स्ट्रक्चरल सिस्टम<span
-                                class="underline-dotted">{{$mapApply->structureType->title??''}}</span></p>
-                        <p>६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति<span
-                                class="underline-dotted custom-width"></span></p>
-                        <p>७.</p>
-                        <table class="table table-bordered mt-2">
+                                class="underline-dotted">{{$mapApply->structureType->title??''}}</span></span><br>
+                        <span>६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति<span
+                                class="underline-dotted custom-width"></span></span><br>
+                        <span>७.
+                        <table class="table table-sm table-borderless">
                             <thead>
                             <tr>
                                 <th scope="col">तला</th>
@@ -186,37 +186,38 @@
                             </tr>
                             </tbody>
                         </table>
-                        <p>जम्मा क्षेत्रफल<span class="underline-dotted custom-width"></span></p>
-                        <p class="mt-2">८. भवनको ग्राउण्ड कभरेज: <span
-                                class="underline-dotted custom-width"></span></p>
-                        <p class="mt-2">९. बनेको भवनको उचाई <span class="underline-dotted">{{$mapApply->height}}</span>
-                            तला संख्या <span class="underline-dotted">{{$mapApply->current_storey}}</span></p>
-                        <p class="mt-2">१०. घर बनेको प्लटसँग जोडिएको सडकको सडक सिमानाबाट न्युनतम छाड्न पर्ने
+                            </span>
+                        <span>जम्मा क्षेत्रफल<span class="underline-dotted custom-width"></span></span><br>
+                        <span class="mt-2">८. भवनको ग्राउण्ड कभरेज: <span
+                                class="underline-dotted custom-width"></span></span><br>
+                        <span class="mt-2">९. बनेको भवनको उचाई <span class="underline-dotted">{{$mapApply->height}}</span>
+                            तला संख्या <span class="underline-dotted">{{$mapApply->current_storey}}</span></span><br>
+                        <span class="mt-2">१०. घर बनेको प्लटसँग जोडिएको सडकको सडक सिमानाबाट न्युनतम छाड्न पर्ने
                             दूरी<span class="underline-dotted custom-width"></span>
-                            छाडिएको दूरी<span class="underline-dotted custom-width"></span></p>
-                        <p class="mt-2">११. बिजुलीको तार नजिक भएमा छाड्न पर्ने दूरी<span
+                            छाडिएको दूरी<span class="underline-dotted custom-width"></span></span><br>
+                        <span class="mt-2">११. बिजुलीको तार नजिक भएमा छाड्न पर्ने दूरी<span
                                 class="underline-dotted custom-width"></span> छाडेको दूरी <span
-                                class="underline-dotted custom-width"></span></p>
-                        <p class="mt-2">१२. नदी, नालाको किनार भएमा छाड्न पर्ने दूरी <span
+                                class="underline-dotted custom-width"></span></span><br>
+                        <span class="mt-2">१२. नदी, नालाको किनार भएमा छाड्न पर्ने दूरी <span
                                 class="underline-dotted custom-width"></span> छाडेको दूरी <span
-                                class="underline-dotted custom-width"></span></p>
-                        <p class="mt-2">१३. ढल निकास सम्बन्धी ढल, सेप्टिकटैक, सोकपिट भए सो को विवरण : <span
-                                class="underline-dotted custom-width"></span></p>
-                        <p class="mt-2">१४. अन्य कुनै भए विवरण : <span
-                                class="underline-dotted custom-width"></span></p>
-                        <p class="mt-2">१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको </p>
-                        <p>पालना नभएको भए विवरण : <span class="underline-dotted custom-width"></span></p>
+                                class="underline-dotted custom-width"></span></span><br>
+                        <span class="mt-2">१३. ढल निकास सम्बन्धी ढल, सेप्टिकटैक, सोकपिट भए सो को विवरण : <span
+                                class="underline-dotted custom-width"></span></span><br>
+                        <span class="mt-2">१४. अन्य कुनै भए विवरण : <span
+                                class="underline-dotted custom-width"></span></span><br>
+                        <span class="mt-2">१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको </span><br>
+                        <span>पालना नभएको भए विवरण : <span class="underline-dotted custom-width"></span></span>
                         <div class="d-flex justify-content-around my-4">
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>
-                                तयार गर्ने </p>
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
-                                गर्ने<br>(इन्जिनियर)</p>
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>
-                                स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </p>
+                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                तयार गर्ने </span>
+                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
+                                गर्ने<br>(इन्जिनियर)</span>
+                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </span>
                         </div>
                         <div class="break-page"></div>
-                        <table class="table table-bordered mt-2">
+                        <table class="table table-sm table-bordered mt-2">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
