@@ -1,0 +1,92 @@
+<?php
+
+namespace Modules\Roaster\Http\Controllers;
+
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Controllers\Controller;
+use Modules\Roaster\Entities\Trainer;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+
+class TrainerController extends Controller
+{
+    public function index()
+    {
+
+        abort_if(
+            Gate::denies('trainer_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $trainers = Trainer::with('department', 'designation')->latest()->get();
+        return view('roaster::admin.trainer.index',compact('trainers'));
+    }
+
+    public function create()
+    {
+        return view('roaster::create');
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show(Trainer $trainer)
+    {
+
+        abort_if(
+            Gate::denies('trainer_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $trainer->load(
+            'designation',
+            'department',
+            'province',
+            'localBody',
+            'district',
+            'subjects',
+            'trainerDocuments',
+            'trainerExperienceInTrainings',
+            'trainerExperienceAsTrainees',
+            'trainerExperiences.designation',
+            'trainerQualifications',
+            'trainerBankDetails'
+        );
+
+        return view('roaster::admin.trainer.show',compact('trainer'));
+    }
+
+    public function edit(Trainer $trainer)
+    {
+
+        abort_if(
+            Gate::denies('trainer_edit'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+        $trainer->load(
+            'trainerDocuments',
+            'trainerExperienceInTrainings',
+            'trainerExperienceAsTrainees',
+            'trainerExperiences.designation',
+            'trainerQualifications',
+            'trainerBankDetails'
+        );
+        return view('roaster::admin.trainer.edit',compact('trainer'));
+    }
+
+    public function update(Request $request, Trainer $trainer)
+    {
+        //
+    }
+
+    public function destroy(Trainer $trainer)
+    {
+        //
+    }
+}

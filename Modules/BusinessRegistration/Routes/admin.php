@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessNatureController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessPurposeController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\BusinessRegistrationController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\InvestmentRevenueController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
@@ -17,6 +18,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('investmentRevenue', InvestmentRevenueController::class);
     Route::resource('businessPurpose', BusinessPurposeController::class);
 });
+    Route::resource('businessRegistration', BusinessRegistrationController::class);
 
 Route::prefix('files')->as('files.')->group(function (){
     Route::view('file', 'businessregistration::admin.file.file')->name('file');

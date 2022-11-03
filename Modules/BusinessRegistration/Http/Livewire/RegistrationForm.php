@@ -113,7 +113,7 @@ class RegistrationForm extends Component
     ];
 
 
-    public function mount(): void
+    public function mount()
     {
         $officeSetting = OfficeSetting::first();
         $this->permanent_provinces = Province::all();
@@ -337,7 +337,7 @@ class RegistrationForm extends Component
 
             $businessDetail = $proprietorDetails->businessDetail()->create([
                 'business_detail_name' => $this->form['business_detail_name'] ?? '',
-                'investment_revenue_id' => $this->form['investment_revenue_id'] ?? '',
+                'investment_revenue_id' => $this->form['investment_revenue_id'] ?? null,
                 'is_rent' => $this->form['is_rent'] ?? null,
                 'is_registered' => $this->form['is_registered'] ?? null,
                 'submission_no' => time(),
@@ -418,7 +418,7 @@ class RegistrationForm extends Component
 
         $this->reset('form');
 
-        return redirect()->route('businessRegistration.print', $proprietorDetails->id);
+        return redirect()->route('businessRegistration.detail.print', $proprietorDetails->id);
     }
 
     public function documentsArrayIncrement(): void

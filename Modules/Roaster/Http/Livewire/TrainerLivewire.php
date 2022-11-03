@@ -81,6 +81,9 @@ class TrainerLivewire extends Component
         return view('roaster::livewire.trainer-livewire');
     }
 
+
+
+
     private function setDataForEdit($trainer): void
     {
         foreach ($this->form as $key => $data) {
