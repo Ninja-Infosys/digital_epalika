@@ -74,42 +74,42 @@
                         <h5 class="fw-bold mt-2">१. निर्माणका निमित्त प्रस्तावित जग्गा चारकिल्ला विवरण:</h5>
                         <table class="table table-sm table-bordered mt-2">
                             <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th rowspan="2">दिशा</th>
-                                <th rowspan="2">आफ्नो जग्गा लम्बाई (फिट/मिटर)</th>
+                                <th rowspan="2">आफ्नो जग्गा लम्बाई(फिट/मिटर)</th>
                                 <th colspan="3">संधियार</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr class="text-center">
                                 <td></td>
                                 <td></td>
                                 <td>कि.नं.</td>
                                 <td>लेन्डस्केपको प्रकार</td>
                                 <td>नाम</td>
                             </tr>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="row">उतर</th>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="row">दक्षिण</th>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="row">पुर्व</th>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="row">पश्चिम</th>
                                 <td></td>
                                 <td></td>
