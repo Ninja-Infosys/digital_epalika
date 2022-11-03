@@ -17,7 +17,7 @@ Route::prefix('setting')->as('setting.')->group(function (){
     Route::resource('subject', SubjectController::class);
 });
 
-Route::resource('trainer', TrainerController::class);
+Route::resource('trainer', TrainerController::class)->except(['store','destroy','update']);
 Route::put('training/{training}/update-marks', [TrainingController::class, 'updateMarks'])->name('training.update-marks');
 Route::get('training/{training}/report', [TrainingController::class, 'report'])->name('training.report');
 Route::get('training/{training}/update-status', [TrainingController::class, 'setFormStatus'])->name('training.set-form-status');
