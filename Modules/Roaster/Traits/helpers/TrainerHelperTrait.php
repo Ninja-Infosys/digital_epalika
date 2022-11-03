@@ -15,12 +15,11 @@ use Modules\Roaster\Entities\TrainerQualification;
 
 trait TrainerHelperTrait
 {
-    public function addColumnToWorkExperienceArray()
+    public function addColumnToWorkExperienceArray(): void
     {
-        dd('sss');
+
         $this->form['workExperiences'][] = [];
     }
-
     public function removeColumnFromWorkExperienceArray($index): void
     {
         unset($this->form['workExperiences'][$index]);
@@ -322,19 +321,17 @@ trait TrainerHelperTrait
                     'title' => "Thank You",
                     'text' => "Trainer Data Updated Successfully",
                 ]);
-                return redirect(route('admin.trainer.index'));
+                return redirect(route('admin.roaster.trainer.index'));
             }
 
             $trainer = Trainer::create($data);
             $this->saveArrayData($trainer, $this->form);
-
             $this->reset('form');
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => "success",
                 'title' => "Thank You",
                 'text' => "Your Form Submitted Successfully",
             ]);
-            return redirect(route('admin.trainer.index'));
         });
     }
 

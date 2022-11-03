@@ -4,11 +4,14 @@
         border: 1px solid #000000;
         border-collapse: collapse;
     }
-    .table {
+    table {
         width: 100%;
     }
     .mt-2{
         margin-top: 10px;
+    }
+    .mt-1{
+        margin-top: 5px;
     }
     .fw-bold{
         font-weight: 600;

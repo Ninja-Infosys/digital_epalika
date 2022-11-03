@@ -14,11 +14,11 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('admin/roaster/dashboard/*') ? 'show' : ''}}"
+    <div class="collapse {{request()->is('admin/roaster/trainer/*') ? 'show' : ''}}"
          id="sidebarEMapSetting">
         <ul class="nav-second-level">
-            <li class="{{request()->is('admin/emap/setting/mapFee/*') ? 'active' : ''}}">
-                <a href="{{route('admin.roaster.dashboard')}}">
+            <li class="{{request()->is('admin/roaster/trainer/*') ? 'active' : ''}}">
+                <a href="{{route('admin.roaster.trainer.index')}}">
                     <span>प्रशिक्षक</span>
                 </a>
             </li>

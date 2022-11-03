@@ -200,7 +200,7 @@
 
         </fieldset>
 
-        @if(config('trainer.status.bankDetailForm') && config('trainer.type.bankDetailForm') == 'extended')
+        @if(config('trainer.status.bankDetailForm') && config('trainer.type.bankDetailForm') === 'extended')
             <fieldset class="border p-2 mt-2">
                 <legend class="float-none w-auto">बैंक खाता विवरण</legend>
                 <div class="table-responsive">
@@ -211,8 +211,12 @@
                             <th>शाखा</th>
                             <th>खाता नं.</th>
                             <th>खाता वालाको नाम</th>
-                            <th><i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                   wire:click.prevent="addColumnToBankDetailArray"></i></th>
+                            <th>
+                                <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToBankDetailArray">
+                                    <i class="fa fa-plus-square"
+                                       ></i>
+                                </button>
+                               </th>
                         </tr>
                         @forelse($form['bankDetails'] as $index=>$bankDetail)
                             <tr>
@@ -262,16 +266,22 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <i class="fa fa-minus-square text-danger" aria-hidden="true"
-                                       wire:click.prevent="removeColumnFromBankDetailArray({{$index}})"></i>
+
+                                    <button class="btn btn-danger btn-sm" wire:click.prevent="removeColumnFromBankDetailArray({{$index}})">
+                                        <i class="fa fa-minus-square"
+                                        ></i>
+                                    </button>
                                 </td>
                             </tr>
                         @empty
                             <tr class="text-center">
                                 <td colspan="8">
                                     रो थप्नको लागि
-                                    <i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                       wire:click.prevent="addColumnToBankDetailArray"></i>
+
+                                    <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToBankDetailArray">
+                                        <i class="fa fa-plus-square"
+                                        ></i>
+                                    </button>
                                     थिच्नुहोस
                                 </td>
                             </tr>
@@ -380,8 +390,13 @@
                             <th>मिति सम्म (YYYY-MM-DD)</th>
                             <th>मुख्य जिम्मेवारी</th>
                             <th>कैफियत</th>
-                            <th><i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                   wire:click.prevent="addColumnToWorkExperienceArray"></i></th>
+                            <th>
+                                <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToWorkExperienceArray">
+                                    <i class="fa fa-plus-square"
+                                    ></i>
+                                </button>
+
+                            </th>
                         </tr>
                         @forelse($form['workExperiences'] as $index=>$workExperience)
                             <tr>
@@ -457,21 +472,30 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <i class="fa fa-minus-square text-danger" aria-hidden="true"
-                                       wire:click.prevent="removeColumnFromWorkExperienceArray({{$index}})"></i>
+
+
+                                    <button class="btn btn-danger btn-sm" wire:click.prevent="removeColumnFromWorkExperienceArray({{$index}})">
+                                        <i class="fa fa-minus-square"
+                                        ></i>
+                                    </button>
                                 </td>
                             </tr>
                         @empty
                             <tr class="text-center">
                                 <td colspan="8">
                                     रो थप्नको लागि
-                                    <i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                       wire:click.prevent="addColumnToWorkExperienceArray"></i>
+                                    <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToWorkExperienceArray">
+                                        <i class="fa fa-plus-square"
+                                        ></i>
+
+                                    </button>
+
                                     थिच्नुहोस
                                 </td>
                             </tr>
                         @endforelse
                     </table>
+
                     @error('form.workExperiences')
                     <span class="text-danger">
                             {{$message}}
@@ -493,8 +517,15 @@
                             <th>विश्वविद्यालय/शैक्षिक संस्था</th>
                             <th>सम्पन्न वर्ष</th>
                             <th>कैफियत</th>
-                            <th><i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                   wire:click.prevent="addColumnToQualificationArray"></i></th>
+                            <th>
+
+                                <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToQualificationArray">
+                                    <i class="fa fa-plus-square"
+                                    ></i>
+
+                                </button>
+
+                            </th>
                         </tr>
                         @forelse($form['qualifications'] as $index=>$qualification)
                             <tr>
@@ -554,18 +585,28 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <i class="fa fa-minus-square text-danger" aria-hidden="true"
-                                       wire:click.prevent="removeColumnFromQualificationArray({{$index}})"></i>
+                                    <button class="btn btn-danger btn-sm" wire:click.prevent="removeColumnFromQualificationArray({{$index}})">
+                                        <i class="fa fa-minus-square"
+                                        ></i>
+
+                                    </button>
                                 </td>
                             </tr>
                         @empty
                             <tr class="text-center">
                                 <td colspan="8">
                                     रो थप्नको लागि
-                                    <i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                       wire:click.prevent="addColumnToQualificationArray"></i>
+                                    <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToQualificationArray">
+                                        <i class="fa fa-plus-square"
+                                        ></i>
+
+                                    </button>
                                     थिच्नुहोस
+
+
                                 </td>
+
+
                             </tr>
                         @endforelse
                     </table>
@@ -589,8 +630,13 @@
                             <th>तालिम दिने निकाय</th>
                             <th>तालिमको अवधि</th>
                             <th>स्थान</th>
-                            <th><i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                   wire:click.prevent="addColumnToExperienceAsTraineeArray"></i></th>
+                            <th>
+                                <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToExperienceAsTraineeArray">
+                                    <i class="fa fa-plus-square"
+                                    ></i>
+
+                                </button>
+                            </th>
                         </tr>
                         @forelse($form['experienceAsTrainees'] as $index=>$experienceAsTrainee)
                             <tr>
@@ -639,16 +685,24 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <i class="fa fa-minus-square text-danger" aria-hidden="true"
-                                       wire:click.prevent="removeColumnFromExperienceAsTraineeArray({{$index}})"></i>
+
+                                    <button class="btn btn-danger btn-sm" wire:click.prevent="removeColumnFromExperienceAsTraineeArray({{$index}})">
+                                        <i class="fa fa-minus-square"
+                                        ></i>
+
+                                    </button>
                                 </td>
                             </tr>
                         @empty
                             <tr class="text-center">
                                 <td colspan="8">
                                     रो थप्नको लागि
-                                    <i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                       wire:click.prevent="addColumnToExperienceAsTraineeArray"></i>
+
+                                    <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToExperienceAsTraineeArray">
+                                        <i class="fa fa-plus-square"
+                                        ></i>
+
+                                    </button>
                                     थिच्नुहोस
                                 </td>
                             </tr>
@@ -676,8 +730,15 @@
                             <th>तालिमको अवधि</th>
                             <th>सहभागीको स्तर</th>
                             <th>कैफियत</th>
-                            <th><i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                   wire:click.prevent="addColumnToExperienceAsTrainerArray"></i></th>
+                            <th>
+
+
+                                    <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToExperienceAsTrainerArray">
+                                        <i class="fa fa-plus-square"
+                                        ></i>
+
+                                    </button>
+                            </th>
                         </tr>
                         @forelse($form['experienceAsTrainers'] as $index=>$experienceAsTrainer)
                             <tr>
@@ -749,16 +810,24 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <i class="fa fa-minus-square text-danger" aria-hidden="true"
-                                       wire:click.prevent="removeColumnFromExperienceAsTrainerArray({{$index}})"></i>
+
+                                    <button class="btn btn-danger btn-sm" wire:click.prevent="removeColumnFromExperienceAsTrainerArray({{$index}})">
+                                        <i class="fa fa-minus-square"
+                                        ></i>
+
+                                    </button>
                                 </td>
                             </tr>
                         @empty
                             <tr class="text-center">
                                 <td colspan="8">
+
                                     रो थप्नको लागि
-                                    <i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                       wire:click.prevent="addColumnToExperienceAsTrainerArray"></i>
+                                    <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToExperienceAsTrainerArray">
+                                        <i class="fa fa-plus-square"
+                                        ></i>
+
+                                    </button>
                                     थिच्नुहोस
                                 </td>
                             </tr>
@@ -782,8 +851,15 @@
                             <th>क्र.सं.</th>
                             <th>कागजातको नाम</th>
                             <th>फाइल</th>
-                            <th><i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                   wire:click.prevent="addColumnToDocumentArray"></i></th>
+                            <th>
+
+
+                                <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToDocumentArray">
+                                    <i class="fa fa-plus-square"
+                                    ></i>
+
+                                </button>
+                            </th>
                         </tr>
                         @forelse($form['documents'] as $index=>$document)
                             <tr>
@@ -811,16 +887,24 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <i class="fa fa-minus-square text-danger" aria-hidden="true"
-                                       wire:click.prevent="removeColumnFromDocumentArray({{$index}})"></i>
+
+                                    <button class="btn btn-danger btn-sm" wire:click.prevent="removeColumnFromDocumentArray({{$index}})">
+                                        <i class="fa fa-minus-square"
+                                        ></i>
+
+                                    </button>
                                 </td>
                             </tr>
                         @empty
                             <tr class="text-center">
                                 <td colspan="8">
                                     रो थप्नको लागि
-                                    <i class="fa fa-plus-square text-primary" aria-hidden="true"
-                                       wire:click.prevent="addColumnToDocumentArray"></i>
+                                    <button class="btn btn-primary btn-sm" wire:click.prevent="addColumnToDocumentArray">
+                                        <i class="fa fa-plus-square"
+                                        ></i>
+
+                                    </button>
+
                                     थिच्नुहोस
                                 </td>
                             </tr>
