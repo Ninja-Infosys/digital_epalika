@@ -5,7 +5,7 @@
             <div class="breadcrumb-item">
                 <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
                 <i class="fa fa-angle-double-right"></i>
-                <a class="ml-1 text-primary-500" href="{{route('train')}}">तालिम</a>
+                <a class="ml-1 text-primary-500" href="{{route('roaster.index')}}">तालिम</a>
                 <i class="fa fa-angle-double-right"></i>
                 <a class="ml-1 text-primary-500">तालिम आवेदन</a>
             </div>
@@ -22,7 +22,7 @@
                                 </h5>
                                 <i class="fa fa-file-invoice fs-1 py-2"></i>
                                 <p></p>
-                                <a href="{{route('individual-training-view','technical_trainee')}}" class="btn btn-light"><span>तालिम आवेदन</span>
+                                <a href="{{route('roaster.individual-training-view','technical_trainee')}}" class="btn btn-light"><span>तालिम आवेदन</span>
                                     <i class="fa fa-angle-double-right"></i>
                                 </a>
                             </div>
@@ -36,7 +36,7 @@
                                 </h5>
                                 <i class="fa fa-file-invoice fs-1 py-2"></i>
                                 <p></p>
-                                <a href="{{route('individual-training-view','trainee')}}" class="btn btn-light"><span>तालिम आवेदन</span>
+                                <a href="{{route('roaster.individual-training-view','trainee')}}" class="btn btn-light"><span>तालिम आवेदन</span>
                                     <i class="fa fa-angle-double-right"></i>
                                 </a>
                             </div>

@@ -91,7 +91,7 @@
                                     <h5 class="fw-semibold mt-2">तालिम आवेदन</h5>
                                     <i class="fa fa-file-invoice fs-5"></i>
                                     <p>नयाँ आवेदन को लागि आवेदन दिनुहोस ।</p>
-                                    <a href="{{route('application')}}" class="btn btn-light"><span>तालिम आवेदन</span>
+                                    <a href="{{route('roaster.application')}}" class="btn btn-light"><span>तालिम आवेदन</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>
@@ -116,7 +116,7 @@
                                     <h5 class="fw-semibold mt-2">प्रशिक्षक दर्ता फर्म</h5>
                                     <i class="fa fa-address-card fs-5"></i>
                                     <p>नयाँ प्रशिक्षकको लागि दर्ता गर्नुहोस् ।</p>
-                                    <a href="{{route('trainer-form')}}" class="btn btn-light"><span>प्रशिक्षक दर्ता फर्म</span>
+                                    <a href="{{route('roaster.trainer-form')}}" class="btn btn-light"><span>प्रशिक्षक दर्ता फर्म</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>
