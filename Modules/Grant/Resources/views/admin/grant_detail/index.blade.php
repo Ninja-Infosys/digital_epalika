@@ -40,6 +40,7 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>आर्थिक वर्ष</th>
+                                <th>अनुदानको प्रकार</th>
                                 <th>कार्यक्रमको नाम</th>
                                 <th>अनुदानग्राहीको नाम</th>
                                 <th>जम्मा लागत</th>
@@ -53,6 +54,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$grantDetail->fiscalYear->title??''}}</td>
+                                    <td>{{$grantDetail->grantType->title??''}}</td>
                                     <td>{{$grantDetail->grantProgram->program_name??''}}</td>
                                     <td>{{$grantDetail->grant_recipient_name}}</td>
                                     <td>रु. {{$grantDetail->total_cost}}</td>

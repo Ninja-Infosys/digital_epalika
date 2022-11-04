@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Roaster\Http\Requests\Settings\Department;
+namespace App\Http\Requests\Setting\Department;
 
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -17,6 +17,13 @@ class UpdateDepartmentRequest extends FormRequest
     {
         return [
             'title' => ['required', Rule::unique('departments', 'title')->ignore($this->department)->withoutTrashed()],
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'विभाग अनिवार्य छ',
+            'title.unique' => 'विभाग अद्वितीय हुनुपर्छ',
         ];
     }
 }

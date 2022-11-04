@@ -6,12 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.setting.department.index')}}">बिभाग</a>
+                            <a href="{{route('admin.department.index')}}">बिभाग</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ बिभाग थप्नुहोस्</li>
                     </ol>
@@ -27,14 +27,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">विभाग थप्नुहोस्</h4>
-                        <a href="{{route('admin.roaster.setting.department.index')}}"
+                        <a href="{{route('admin.department.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> विभाग सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.roaster.setting.department.store')}}" method="post"
+                    <form action="{{route('admin.department.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class=" col-md-12 p-2 mb-2">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>

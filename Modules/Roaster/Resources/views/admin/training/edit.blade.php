@@ -91,7 +91,7 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    <button type="submit" class="btn btn-primary mt-3">पेश गर्नुहोस्</button>
                 </div>
             </form>
         </div>

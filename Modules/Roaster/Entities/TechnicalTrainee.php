@@ -6,13 +6,14 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Ethnicity;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Settings\Department;
+use App\Models\Settings\Designation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 

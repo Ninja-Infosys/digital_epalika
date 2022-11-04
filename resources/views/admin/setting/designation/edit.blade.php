@@ -6,17 +6,17 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.setting.designation.index')}}">पद</a>
+                            <a href="{{route('admin.designation.index')}}">पद</a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ पद थप्नुहोस्</li>
+                        <li class="breadcrumb-item active"> पद सम्पादन</li>
                     </ol>
                 </div>
-                <h4 class="page-title">पद थप्नुहोस्</h4>
+                <h4 class="page-title">पद सम्पादन</h4>
             </div>
         </div>
     </div>
@@ -26,24 +26,20 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">पद थप्नुहोस्</h4>
-                        <a href="{{route('admin.roaster.setting.designation.index')}}"
-                           class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> पद सूची
-                        </a>
+                        <h4 class="header-title">पद सम्पादन</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.roaster.setting.designation.store')}}" method="post"
+                    <form action="{{route('admin.designation.update',$designation)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class=" col-md-12 p-2 mb-2">
                             <div class="row">
                                 <div class="col-md-12 mb-2">
                                     <label for="title" class="form-label">पद *</label>
                                     <input id="title" type="text" name="title" placeholder="पद"
-                                           class="form-control @error('title') is-invalid @enderror"
-                                           value="{{old('title')}}">
+                                           class="form-control @error('title') is-invalid @enderror" value="{{old('title', $designation->title)}}">
                                     @error('title')
                                     <div class="text-danger">{{$message}}</div>
                                     @enderror
@@ -51,7 +47,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>

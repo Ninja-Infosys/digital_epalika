@@ -6,43 +6,44 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.setting.department.index')}}">बिभाग</a>
+                            <a href="{{route('admin.designation.index')}}">पद</a>
                         </li>
-                        <li class="breadcrumb-item active">बिभाग सम्पादन</li>
+                        <li class="breadcrumb-item active">नयाँ पद थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">बिभाग सम्पादन</h4>
+                <h4 class="page-title">पद थप्नुहोस्</h4>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">विभाग सम्पादन</h4>
-                        <a href="{{route('admin.roaster.setting.department.index')}}"
+                        <h4 class="header-title">पद थप्नुहोस्</h4>
+                        <a href="{{route('admin.designation.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> विभाग सूची
+                            <i class="fa fa-list"></i> पद सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.roaster.setting.department.update',$department)}}" method="post"
+                    <form action="{{route('admin.designation.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
-                        <div class="col-md-12 p-2 mb-2">
+                        <div class=" col-md-12 p-2 mb-2">
                             <div class="row">
                                 <div class="col-md-12 mb-2">
-                                    <label for="title" class="form-label">विभाग *</label>
-                                    <input id="title" type="text" name="title" placeholder="बिभाग"
-                                           class="form-control @error('title') is-invalid @enderror" value="{{old('title', $department->title)}}">
+                                    <label for="title" class="form-label">पद *</label>
+                                    <input id="title" type="text" name="title" placeholder="पद"
+                                           class="form-control @error('title') is-invalid @enderror"
+                                           value="{{old('title')}}">
                                     @error('title')
                                     <div class="text-danger">{{$message}}</div>
                                     @enderror
@@ -50,7 +51,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>

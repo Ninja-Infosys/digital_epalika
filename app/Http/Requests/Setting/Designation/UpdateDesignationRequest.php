@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Roaster\Http\Requests\Settings\Designation;
+namespace App\Http\Requests\Setting\Designation;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -16,6 +16,13 @@ class UpdateDesignationRequest extends FormRequest
     {
         return [
             'title' => ['required', Rule::unique('designations', 'title')->ignore($this->designation)->withoutTrashed()]
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'पद अनिवार्य छ',
+            'title.unique' => ' पद अद्वितीय हुनुपर्छ'
         ];
     }
 }

@@ -6,16 +6,16 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.setting.department.index')}}">बिभागहरुको विवरण</a>
+                            <a href="{{route('admin.designation.index')}}">पदहरुको विवरण</a>
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title">बिभागहरुको विवरण</h4>
+                <h4 class="page-title">पदहरुको विवरण</h4>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">बिभाग सूची</h4>
-                        @can('department_create')
-                            <a href="{{route('admin.roaster.setting.department.create')}}"
+                        <h4 class="header-title">पद सूची</h4>
+                        @can('designation_create')
+                            <a href="{{route('admin.designation.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -39,25 +39,24 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>विभाग</th>
-                                <th></th>
-
+                                <th>पद</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($departments as $departments)
+                            @forelse($designations as $designation)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$departments->title}}</td>
+                                    <td>{{$designation->title}}</td>
                                     <td>
-                                        @can('department_edit')
-                                            <a href="{{route('admin.roaster.setting.department.edit', $departments)}}"
+                                        @can('designation_edit')
+                                            <a href="{{route('admin.designation.edit', $designation)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('department_delete')
-                                            <form action="{{route('admin.roaster.setting.department.destroy', $departments)}}"
+                                        @can('designation_delete')
+                                            <form action="{{route('admin.designation.destroy', $designation)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
@@ -70,7 +69,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
@@ -81,3 +80,4 @@
         </div>
     </div>
 @endsection
+
