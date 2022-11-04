@@ -1,17 +1,30 @@
 @extends('frontend.layouts.master')
 @section('content')
-<h1 class="text-center">प्रशिक्षक दर्ता फारम</h1>
-<livewire:roaster::trainer-livewire />
-@push('scripts')
-    {{--listener for toastr--}}
-    <script>
-        window.addEventListener('alert_message', event => {
-            swal.fire({
-                title: event.detail.title,
-                text: event.detail.text,
-                icon: event.detail.type,
+    <div class="container">
+        <div class="breadcrumb d-flex">
+            <div class="breadcrumb-item">
+                <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
+                <i class="fa fa-angle-double-right"></i>
+                <a class="ml-1 text-primary-500" href="{{route('train')}}">तालिम</a>
+                <i class="fa fa-angle-double-right"></i>
+                <a class="ml-1 text-primary-500">प्रशिक्षक दर्ता फारम</a>
+            </div>
+        </div>
+        <div class="shadow p-2">
+            <h4 class="text-center">प्रशिक्षक दर्ता फारम</h4>
+            <livewire:roaster::trainer-livewire/>
+        </div>
+    </div>
+    @push('scripts')
+        {{--listener for toastr--}}
+        <script>
+            window.addEventListener('alert_message', event => {
+                swal.fire({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                });
             });
-        });
-    </script>
-@endpush
+        </script>
+    @endpush
 @endsection
