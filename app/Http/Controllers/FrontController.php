@@ -93,10 +93,6 @@ class FrontController extends Controller
     {
         return view('frontend.static.org.org');
     }
-    public function train()
-    {
-        return view('frontend.static.training.train');
-    }
 
     public function executive()
     {
