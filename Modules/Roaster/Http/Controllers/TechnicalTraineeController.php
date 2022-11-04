@@ -47,7 +47,6 @@ class TechnicalTraineeController extends Controller
 
     public function updateSelectTechnicalTrainee(TechnicalTrainee $technicalTrainee)
     {
-
         $technicalTrainee->update([
             'select' => !$technicalTrainee->select
         ]);
