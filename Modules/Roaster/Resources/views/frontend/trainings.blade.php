@@ -1,28 +1,37 @@
 @extends('frontend.layouts.master')
 @section('content')
-    <section class="container-fluid mt-4">
+    <section class="container">
+        <div class="breadcrumb d-flex p-3">
+            <div class="breadcrumb-item">
+                <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
+                <i class="fa fa-angle-double-right"></i>
+                <a class="ml-1 text-primary-500" href="{{route('train')}}">तालिम</a>
+                <i class="fa fa-angle-double-right"></i>
+                <a class="ml-1 text-primary-500">तालिम आवेदन</a>
+            </div>
+        </div>
         @switch($trainingType)
             @case('trainee')
-                <div class="bg-light p-2 mt-3">
                     <div class="text-center">
-                        <h5 class="fw-bold text-decoration-underline">चलिरहेका कृषकका लागि तालिमहरु</h5>
+                        <h4 class="fw-bold">चलिरहेका कृषकका लागि तालिमहरु</h4>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <div class="row card shadow p-2">
                         @foreach($trainings as $training)
                             <div class="col-md-4">
-                                <div class="card shadow2">
+                                <div class="card rounded shadow text-center">
                                     <div class="card-body">
-                                        <h4 class="fw-bold">
+                                        <h5>
                                             {{$training->name}}
-                                        </h4>
-                                        <p>
-                                            <b>खुलेको मिति:</b> {{$training->open_date}} | <b>बन्द हुने
-                                                मिति: </b> {{$training->closed_date}}
-                                        </p>
+                                        </h5>
+                                        <div class="d-flex justify-content-center">
+                                            <i class="fa fa-clock px-1 text-primary"></i><h6>खुलेको मिति:</h6> <small>{{$training->open_date}} </small>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <i class="fa fa-clock px-1 text-primary"></i><h6>बन्द हुने मिति: </h6> <small>{{$training->closed_date}}</small>
+                                        </div>
                                         @foreach($training->trainers as $trainer)
                                             <div class="user">
-                                                <img src="{{$trainer->photo_url}}" alt="user"/>
+                                                <img class="p-2 rounded" src="{{$trainer->photo_url}}" alt="user"/>
                                                 <div class="user-info">
                                                     <h5>{{$trainer->name}}</h5>
                                                 </div>
@@ -32,7 +41,7 @@
                                     <div class="card-footer">
                                         <div class="text-center">
                                             <a href="{{route('traineeForm',$training)}}"
-                                               class="btn btn-dark btn-effect">आवेदन
+                                               class="btn btn-primary btn-effect">आवेदन
                                                 दिनुहोस्
                                                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                             </a>
@@ -42,29 +51,28 @@
                             </div>
                         @endforeach
                     </div>
-                </div>
                 @break
             @case('technical_trainee')
-                <div class="bg-light p-2 mt-3">
                     <div class="text-center">
-                        <h5 class="fw-bold text-decoration-underline">चलिरहेका सेवा कालिन तालिमहरु</h5>
+                        <h4 class="fw-bold">चलिरहेका सेवा कालिन तालिमहरु</h4>
                     </div>
-                    <hr>
-                    <div class="row">
+                    <div class="row card">
                         @foreach($trainings as $training)
                             <div class="col-md-4">
-                                <div class="card shadow2">
+                                <div class="card shadow text-center">
                                     <div class="card-body">
-                                        <h4 class="fw-bold">
+                                        <h5>
                                             {{$training->name}}
-                                        </h4>
-                                        <p>
-                                            <b>खुलेको मिति:</b> {{$training->open_date}} | <b>बन्द हुने
-                                                मिति: </b> {{$training->closed_date}}
-                                        </p>
+                                        </h5>
+                                        <div class="d-flex justify-content-center">
+                                            <i class="fa fa-clock px-1 text-primary"></i><h6>खुलेको मिति:</h6> <small>{{$training->open_date}} </small>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <i class="fa fa-clock px-1 text-primary"></i><h6>बन्द हुने मिति: </h6> <small>{{$training->closed_date}}</small>
+                                        </div>
                                         @foreach($training->trainers as $trainer)
                                             <div class="user">
-                                                <img src="{{$trainer->photo_url}}" alt="user"/>
+                                                <img class="p-2 rounded" src="{{$trainer->photo_url}}" alt="user"/>
                                                 <div class="user-info">
                                                     <h5>{{$trainer->name}}</h5>
                                                 </div>
@@ -74,7 +82,7 @@
                                     <div class="card-footer">
                                         <div class="text-center">
                                             <a href="{{route('technicalTraineeForm',$training)}}"
-                                               class="btn btn-dark btn-effect">आवेदन दिनुहोस्
+                                               class="btn btn-primary btn-effect">आवेदन दिनुहोस्
                                                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                             </a>
                                         </div>
@@ -83,7 +91,6 @@
                             </div>
                         @endforeach
                     </div>
-                </div>
                 @break
             @default
                 <h5>कुनै पनि तालिम भेटिएन</h5>
