@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 use Illuminate\Support\Str;
 
 class Trainee extends Model
@@ -181,12 +180,12 @@ class Trainee extends Model
         ];
     }
 
-    public function designation()
+    public function designation(): BelongsTo
     {
         return $this->belongsTo(Designation::class);
     }
 
-    public function department()
+    public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
     }
