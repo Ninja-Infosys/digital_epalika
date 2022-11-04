@@ -4,6 +4,10 @@ namespace Modules\Roaster\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Roaster\Entities\TechnicalTrainee;
+use Modules\Roaster\Entities\Trainee;
+use Modules\Roaster\Observers\TechnicalTraineeObserver;
+use Modules\Roaster\Observers\TraineeObserver;
 
 class RoasterServiceProvider extends ServiceProvider
 {
@@ -24,6 +28,10 @@ class RoasterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Trainee::observe(TraineeObserver::class);
+        TechnicalTrainee::observe(TechnicalTraineeObserver::class);
+
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();

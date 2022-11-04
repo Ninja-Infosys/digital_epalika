@@ -23,4 +23,13 @@ class StoreTrainingRequest extends FormRequest
             'trainers.*' => [Rule::exists('trainers', 'id')]
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'तालिमको नाम अनिवार्य छ',
+            'form_type.required' => 'प्रशिक्षार्थीको प्रकार अनिवार्य छ',
+            'closed_date.required' => 'वन्द मिति अनिवार्य छ',
+            'open_date.required' => 'खुल्ने मिति अनिवार्य छ',
+        ];
+    }
 }

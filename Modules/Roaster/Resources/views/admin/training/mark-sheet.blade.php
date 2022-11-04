@@ -127,7 +127,7 @@
                         @enderror
                     </div>
                         <div class="col-md-12 d-flex justify-content-around pt-1">
-                            <button class="btn btn-danger" type="submit"> Save</button>
+                            <button class="btn btn-danger" type="submit"> पेश गर्नुहोस्</button>
                         </div>
                 </div>
             </form>

@@ -18,4 +18,12 @@ class StoreDesignationRequest extends FormRequest
             'title' => ['required', Rule::unique('designations', 'title')->withoutTrashed()]
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+          'title.required' => 'पद अनिवार्य छ',
+            'title.unique' => ' पद अद्वितीय हुनुपर्छ'
+        ];
+    }
 }
