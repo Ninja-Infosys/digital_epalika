@@ -20,11 +20,7 @@ class DashboardController extends Controller
 
         $businessPurposesChartData = $this->getTotalBusinessPurposesData();
 
-        return view('businessregistration::admin.dashboard', compact('totalBusinessCount',
-            'totalBusinessDetailPurposeCount',
-            'totalObjectTransactionCategoryCount',
-            'totalInvestmentRevenueCount',
-        'businessPurposesChartData'));
+        return view('businessregistration::admin.dashboard', compact('totalBusinessCount', 'totalBusinessDetailPurposeCount', 'totalObjectTransactionCategoryCount', 'totalInvestmentRevenueCount', 'businessPurposesChartData'));
     }
 
     public function getTotalBusinessPurposesData(): array
