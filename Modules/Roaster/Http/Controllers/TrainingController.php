@@ -10,8 +10,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
+use Modules\Roaster\Entities\PesticideRetailerTrainee;
+use Modules\Roaster\Entities\TechnicalTrainee;
+use Modules\Roaster\Entities\Trainee;
 use Modules\Roaster\Entities\Trainer;
 use Modules\Roaster\Entities\Training;
+use Modules\Roaster\Enums\TrainingTypeEnum;
 use Modules\Roaster\Http\Requests\Training\StoreTrainingRequest;
 use Modules\Roaster\Http\Requests\Training\UpdateTrainingMarkRequest;
 use Modules\Roaster\Http\Requests\Training\UpdateTrainingRequest;
@@ -64,7 +68,25 @@ class TrainingController extends Controller
 
     public function show(Training $training)
     {
-        return view('roaster::show');
+
+        abort_if(
+            Gate::denies('training_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        if ($training->form_type === TrainingTypeEnum::TECHNICAL_TRAINEE) {
+            $trainees = TechnicalTrainee::with('designation', 'department','localBody','district','province')->whereHas('trainingTrainee', function ($query) use ($training) {
+                $query->where('training_id', $training->id);
+            })->paginate(20);
+        }
+        if($training->form_type === TrainingTypeEnum::TRAINEE)
+        {
+            $trainees = Trainee::with('designation', 'department','ethnicity','localBody','district','province')->whereHas('trainingTrainee', function ($query) use ($training) {
+                $query->where('training_id', $training->id);
+            })->paginate(20);
+        }
+        return view('roaster::admin.training.show',compact( 'trainees','training'));
     }
 
     public function edit(Training $training)
