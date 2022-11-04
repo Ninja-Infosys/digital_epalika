@@ -5,28 +5,21 @@ namespace Modules\Roaster\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Modules\Roaster\Entities\TechnicalTrainee;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class TechnicalTraineeController extends Controller
 {
-    public function index()
-    {
-        return view('roaster::index');
-    }
-
-    public function create()
-    {
-        return view('roaster::create');
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
 
     public function show(TechnicalTrainee $technicalTrainee)
     {
 
+        abort_if(
+            Gate::denies('technicalTrainee_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
 
         $technicalTrainee->load('province', 'district', 'localBody', 'documents', 'department', 'designation');
 
@@ -36,24 +29,23 @@ class TechnicalTraineeController extends Controller
     public function edit(TechnicalTrainee $technicalTrainee)
     {
 
-
+        abort_if(
+            Gate::denies('technicalTrainee_edit'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
         $technicalTrainee->load('trainingTrainee');
         return view('roaster::admin.training.technicalTrainee.edit', compact('technicalTrainee'));
     }
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
-
-
     public function updateSelectTechnicalTrainee(TechnicalTrainee $technicalTrainee)
     {
+
+        abort_if(
+            Gate::denies('technicalTrainee_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
         $technicalTrainee->update([
             'select' => !$technicalTrainee->select
         ]);

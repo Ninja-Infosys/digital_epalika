@@ -4,12 +4,12 @@ namespace Modules\Roaster\Http\Livewire;
 
 use App\Models\Address\Province;
 use App\Models\Ethnicity;
+use App\Models\Settings\Department;
+use App\Models\Settings\Designation;
 use App\Traits\AddressHelperTrait;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Modules\Roaster\Entities\Department;
-use Modules\Roaster\Entities\Designation;
 use Modules\Roaster\Entities\Document;
 use Modules\Roaster\Entities\TechnicalTrainee;
 

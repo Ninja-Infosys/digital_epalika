@@ -51,7 +51,7 @@
                             @forelse($trainers as $trainer)
                                 <tr>
                                     <td>{{$loop->iteration ?? ''}}</td>
-                                    <td><img src="{{$trainer->photo_url ?? ''}}" alt="{{$trainer->name ?? ''}}" height="100" width="100"></td>
+                                    <td><img src="{{$trainer->photo_url ?? ''}}" alt="{{$trainer->name ?? ''}}" height="100" width="100" class="img-fluid avatar-md rounded-circle"></td>
                                     <td>{{$trainer->name ?? ''}}</td>
                                     <td>{{$trainer->department->title ??''}}</td>
                                     <td>{{$trainer->designation->title ??''}}</td>

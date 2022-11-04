@@ -26,19 +26,25 @@
             <td>{{$trainee->contact_no}}</td>
             <td>{{$trainee->email}}</td>
             <td>
+                @can('technicalTrainee_access')
                 <a href="{{route('admin.roaster.technicalTrainee.updateSelectTrainee', $trainee)}}"
                    class=" text-{{$trainee->select == 1 ? 'primary':'danger'}} btn-sm">
                    <i class="fa fa-2x fa-toggle-{{$trainee->select == 1 ? 'on':'off'}}"></i>
                 </a>
+                @endcan
             </td>
             <td class="d-flex justify-center">
+                @can('technicalTrainee_edit')
                 <a href="{{route('admin.roaster.technicalTrainee.edit', $trainee)}}" type="button"
                    class="btn btn-sm btn-primary">
                     <i class="fa fa-edit"></i>
                 </a>
+                @endcan
+                @can('technicalTrainee_access')
                 <a href="{{route('admin.roaster.technicalTrainee.show',$trainee )}}" class="btn btn-info btn-sm">
                     <i class="fa fa-eye"></i>
                 </a>
+                    @endcan
             </td>
         </tr>
     @empty
