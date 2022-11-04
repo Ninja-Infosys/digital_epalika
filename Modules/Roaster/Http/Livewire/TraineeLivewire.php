@@ -102,7 +102,7 @@ class TraineeLivewire extends Component
                     'title' => "Thank You",
                     'text' => "Farmer Details Updated Successfully",
                 ]);
-                return redirect(route('admin.trainings.training.show', $trainee->trainingTrainee->training_id));
+                return redirect(route('admin.roaster.training.show', $trainee->trainingTrainee->training_id));
             } else {
                 $trainee = Trainee::create($validated['form']);
                 $trainee->trainingTrainee()->create([

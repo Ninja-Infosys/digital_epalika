@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\Setting\DepartmentController;
+use App\Http\Controllers\Admin\Setting\DesignationController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
@@ -48,6 +50,9 @@ Route::prefix('setting')->group(function () {
     Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
     Route::resource('ethnicity', EthnicityController::class);
     Route::resource('fiscalYear', FiscalYearController::class);
+
+    Route::resource('department', DepartmentController::class);
+    Route::resource('designation',DesignationController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
         Route::resource('role', RoleController::class);

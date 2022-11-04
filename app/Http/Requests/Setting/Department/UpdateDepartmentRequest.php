@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Roaster\Http\Requests\Settings\Department;
+namespace App\Http\Requests\Setting\Department;
 
 
 use Illuminate\Foundation\Http\FormRequest;

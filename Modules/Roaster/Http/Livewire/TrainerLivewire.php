@@ -3,14 +3,14 @@
 namespace Modules\Roaster\Http\Livewire;
 
 use App\Models\Address\Province;
+use App\Models\Settings\Department;
+use App\Models\Settings\Designation;
 use App\Traits\AddressHelperTrait;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Modules\Roaster\Entities\Department;
-use Modules\Roaster\Entities\Designation;
 use Modules\Roaster\Entities\Subject;
 use Modules\Roaster\Traits\helpers\TrainerHelperTrait;
 

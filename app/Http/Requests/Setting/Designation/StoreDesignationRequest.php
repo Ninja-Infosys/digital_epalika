@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Roaster\Http\Requests\Settings\Designation;
+namespace App\Http\Requests\Setting\Designation;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

@@ -26,7 +26,7 @@
             <td>{{$trainee->contact_no}}</td>
             <td>{{$trainee->email}}</td>
             <td>
-                <a href="{{route('admin.roaster.technicalTrainee.updateSelectTechnicalTrainee', $trainee)}}"
+                <a href="{{route('admin.roaster.technicalTrainee.updateSelectTrainee', $trainee)}}"
                    class=" text-{{$trainee->select == 1 ? 'primary':'danger'}} btn-sm">
                    <i class="fa fa-2x fa-toggle-{{$trainee->select == 1 ? 'on':'off'}}"></i>
                 </a>
