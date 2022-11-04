@@ -24,14 +24,21 @@ class TechnicalTraineeController extends Controller
         //
     }
 
-    public function show($id)
+    public function show(TechnicalTrainee $technicalTrainee)
     {
-        return view('roaster::show');
+
+
+        $technicalTrainee->load('province', 'district', 'localBody', 'documents', 'department', 'designation');
+
+        return view('roaster::admin.training.technicalTrainee.show', compact('technicalTrainee'));
     }
 
-    public function edit($id)
+    public function edit(TechnicalTrainee $technicalTrainee)
     {
-        return view('roaster::edit');
+
+
+        $technicalTrainee->load('trainingTrainee');
+        return view('roaster::admin.training.technicalTrainee.edit', compact('technicalTrainee'));
     }
 
     public function update(Request $request, $id)
