@@ -2,6 +2,7 @@
 
 namespace Modules\Roaster\Entities;
 
+use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -13,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\EventObserveTrait;
+use Illuminate\Support\Str;
 
 class Trainee extends Model
 {
@@ -52,6 +55,10 @@ class Trainee extends Model
         'other_training',
         'select',
         'reference_id'
+    ];
+
+    protected $casts = [
+        'gender' => Gender::class
     ];
 
     public function setPhotoAttribute($value)

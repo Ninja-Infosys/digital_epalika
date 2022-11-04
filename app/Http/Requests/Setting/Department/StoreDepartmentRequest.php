@@ -18,4 +18,11 @@ class StoreDepartmentRequest extends FormRequest
             'title' => ['required', Rule::unique('departments', 'title')->withoutTrashed()],
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'विभाग अनिवार्य छ',
+            'title.unique' => 'विभाग अद्वितीय हुनुपर्छ',
+        ];
+    }
 }

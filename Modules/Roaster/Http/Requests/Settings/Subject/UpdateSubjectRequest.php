@@ -20,4 +20,12 @@ class UpdateSubjectRequest extends FormRequest
             'content' => ['nullable'],
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'विषय अनिवार्य छ',
+            'level.required' => 'स्तर अनिवार्य छ',
+            'duration.required' => 'अवधि अनिवार्य छ',
+        ];
+    }
 }
