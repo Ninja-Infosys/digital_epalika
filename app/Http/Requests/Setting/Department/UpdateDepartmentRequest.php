@@ -1,11 +1,12 @@
 <?php
 
-namespace Modules\Roaster\Http\Requests\Settings\Department;
+namespace App\Http\Requests\Setting\Department;
+
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreDepartmentRequest extends FormRequest
+class UpdateDepartmentRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,7 +16,7 @@ class StoreDepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', Rule::unique('departments', 'title')->withoutTrashed()],
+            'title' => ['required', Rule::unique('departments', 'title')->ignore($this->department)->withoutTrashed()],
         ];
     }
 }

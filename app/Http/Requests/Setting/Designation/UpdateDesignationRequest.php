@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Roaster\Http\Requests\Settings\Designation;
+namespace App\Http\Requests\Setting\Designation;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreDesignationRequest extends FormRequest
+class UpdateDesignationRequest extends FormRequest
 {
     public function authorize():bool
     {
@@ -15,7 +15,7 @@ class StoreDesignationRequest extends FormRequest
     public function rules():array
     {
         return [
-            'title' => ['required', Rule::unique('designations', 'title')->withoutTrashed()]
+            'title' => ['required', Rule::unique('designations', 'title')->ignore($this->designation)->withoutTrashed()]
         ];
     }
 }

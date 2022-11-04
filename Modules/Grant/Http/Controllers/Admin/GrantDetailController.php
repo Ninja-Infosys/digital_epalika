@@ -17,7 +17,7 @@ class GrantDetailController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $grantDetails=GrantDetail::with('fiscalYear','grantProgram')->latest()->get();
+        $grantDetails=GrantDetail::with('fiscalYear','grantType','grantProgram')->latest()->get();
 
         return view('grant::admin.grant_detail.index',compact('grantDetails'));
     }
