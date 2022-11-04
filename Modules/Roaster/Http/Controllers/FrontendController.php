@@ -9,6 +9,11 @@ use Modules\Roaster\Entities\Training;
 
 class FrontendController extends Controller
 {
+    public function index()
+    {
+        return view('roaster::frontend.index');
+    }
+
     public function trainerForm()
     {
         return view('roaster::frontend.trainer-form');
