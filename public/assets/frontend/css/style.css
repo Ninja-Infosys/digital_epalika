@@ -1039,8 +1039,8 @@ h6,
 /*roaster*/
 .trainerUser>img{
     object-fit: cover;
-    height: 6rem;
-    width: 6rem;
+    height: 3rem;
+    width: 3rem;
     border-radius: 50%;
     border: 3px double #0a53be;
 }
