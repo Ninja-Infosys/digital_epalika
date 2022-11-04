@@ -11,7 +11,8 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        return view('roaster::frontend.index');
+        $trainings = Training::whereNull('closed_at')->get();
+        return view('roaster::frontend.index',compact('trainings'));
     }
 
     public function trainerForm()
