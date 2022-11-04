@@ -1,19 +1,30 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="">
-        <div class="page-title d-flex justify-content-between">
-            <h5>मार्क अपडेट</h5>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">ड्यासबोर्ड</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">मार्क अपडेट</li>
-                </ol>
-            </nav>
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{route('admin.roaster.dashboard')}}">
+                                    <i class="fa fa-home"></i> गृहपृष्ठ
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{route('admin.roaster.training.index')}}">तालिम विवरण</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                 मार्क अपडेट
+                            </li>
+                        </ol>
+                    </div>
+                    <h5 class="page-title"> मार्क अपडेट</h5>
+                </div>
+            </div>
         </div>
-    </div>
     <div class="card">
         <div class="card-header">
-            <h6>मार्क अपडेट गर्नुहोस्</h6>
+            <h4>मार्क अपडेट गर्नुहोस्</h4>
         </div>
         <div class="card-body">
             <form action="{{route('admin.roaster.training.update-marks', $training)}}" method="POST"
@@ -115,11 +126,10 @@
                         <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
-                    <div>
-                        <div class="col-md-12">
-                            <button class="btn btn-danger" type="submit"> Save</button>
+                        <div class="col-md-12 d-flex justify-content-around pt-1">
+                            <button class="btn btn-danger" type="submit"> पेश गर्नुहोस्</button>
                         </div>
-                    </div>
+                </div>
             </form>
         </div>
     </div>

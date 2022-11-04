@@ -1,20 +1,30 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="">
-        <div class="page-title d-flex justify-content-between">
-            <h5>किसानका लागि फारम</h5>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="">फारमको विवरण</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">किसानको फारम</li>
-                </ol>
-            </nav>
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{route('admin.roaster.dashboard')}}">
+                                    <i class="fa fa-home"></i> गृहपृष्ठ
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{route('admin.roaster.training.index')}}">तालिम</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                तालिम सम्पादन
+                            </li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">तालिम सम्पादन</h4>
+                </div>
+            </div>
         </div>
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h6>किसानको फारम</h6>
+                <h5>तालिम विवरण सम्पादन</h5>
             </div>
             <form action="{{route('admin.roaster.training.update',$training)}}" method="post">
                 <div class="card-body">
@@ -81,9 +91,8 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    <button type="submit" class="btn btn-primary mt-3">पेश गर्नुहोस्</button>
                 </div>
             </form>
         </div>
-    </div>
 @endsection

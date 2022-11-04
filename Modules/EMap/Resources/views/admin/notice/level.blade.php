@@ -20,65 +20,39 @@
             </div>
         </div>
     </div>
-{{--    <div>--}}
-{{--        @error('file')--}}
-{{--        <div class="alert alert-danger">--}}
-{{--            {{$message}}--}}
-{{--        </div>--}}
-{{--        @enderror--}}
-{{--    </div>--}}
+    {{--    <div>--}}
+    {{--        @error('file')--}}
+    {{--        <div class="alert alert-danger">--}}
+    {{--            {{$message}}--}}
+    {{--        </div>--}}
+    {{--        @enderror--}}
+    {{--    </div>--}}
     <div class="row mb-2">
         <div class="col-sm-4">
-            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::SARZAMIN_MUCHULKA->label()}}</h3></div>
+            <h4> {{\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL->label()}}</h4>
+        </div>
         <div class="col-sm-8">
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
                     <x-application-component
-                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::SARZAMIN_MUCHULKA"
-                        url="{{route('emap.admin.map.map-apply.notice.upload.bond',$mapApply)}}"/>
+                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL"
+                        url="{{route('emap.admin.map.map-apply.notice.upload.certificate',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}सरजमिन मुचुल्का"/>
+                    <x-print-button title="{{$mapApply->client->name}}प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र"/>
                 </div>
             </div>
         </div><!-- end col-->
     </div>
-{{--    <div class="card mb_30">--}}
-{{--        <div class="card-header p-3">--}}
-{{--            <div class="main-title d-flex justify-content-between">--}}
-{{--                <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL->label()}}</h3>--}}
-{{--                <div class="d-flex justify-content-between">--}}
-{{--                    <x-application-component--}}
-{{--                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL"--}}
-{{--                        url="{{route('emap.admin.map.map-apply.notice.upload.certificate',$mapApply)}}"/>--}}
-
-{{--                    <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'--}}
-{{--                            requestRoute="{{route('print.application-print')}}">--}}
-{{--                        <i class="fa fa-print"></i> Print--}}
-{{--                    </button>--}}
-
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card mb_30">
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-2 col-xs-2">
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-8">
-                                <div class="row mt-3">
-                                    <div class="text-center">
-                                        <x-header-component/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-sm-2 col-xs-2">
-                                <div class="row mt-3">
-                                    <div class="card" style="width: 120px; height: 120px;">
+                        <div class="d-flex justify-content-end mb-4">
+                            <div class="row ">
+                                <div class="col-sm-6">
+                                    <div class="card" style="width: 7rem; height: 8rem;">
                                         <div class="card-body">
                                             <h5 class="card-title text-center my-4">फोटो</h5>
                                         </div>
@@ -88,15 +62,17 @@
                         </div>
                         <div class="d-flex justify-content-end">
                         </div>
-                        <div class="top-line d-flex justify-content-between">
-                            <p>पत्र सं: <span class="underline-dotted custom-width"></span></p>
-                            <p>मिति: <span class="underline-dotted custom-width"> </span></p>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                पत्र सं: <div class="underline-dotted custom-width"></div><br>
+                                चलानी नं: <div class="underline-dotted custom-width"></div>
+                            </div>
+                            <div class="col-md-6 text-end">मिति: <div class="underline-dotted custom-width"></div></div>
                         </div>
-                        <p>चलानी नं: <span class="underline-dotted custom-width"></span></p>
                         <h4 class="text-center"><b> प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></h4>
 
-                        <p class="mb-3">
-                            तपाई श्री/श्रीमती<span
+                        <span>
+                            &emsp;&emsp;&emsp;&emsp;तपाई श्री/श्रीमती<span
                                 class="underline-dotted ">{{$mapApply->houseOwner->name??''}}</span> ले जग्गा
                             धनी<span
                                 class="underline-dotted custom-width">{{$mapApply->landOwner->name??''}}</span>
@@ -120,12 +96,12 @@
                             गर्नुहोला । डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन
                             निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण
                             कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ ।
-                        </p>
-                        <h5 class="text-center"><b>निर्माण स्वीकृति भएको विवरण </b></h5>
-                        <h6>जग्गा बिकास तथा भवन मापदण्ड २०६४</h6>
-                        <table class="table table-bordered mb-1">
+                        </span>
+                        <div class="text-center"><b>निर्माण स्वीकृति भएको विवरण </b></div>
+                        <div class="fw-bold">जग्गा बिकास तथा भवन मापदण्ड २०६४</div>
+                        <table class="table table-sm table-bordered mb-1">
                             <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="col">क्र.स.</th>
                                 <th scope="col">विवरण</th>
                                 <th scope="col">स्वीकृति अनुसार</th>
@@ -168,7 +144,7 @@
                         <h6>राष्ट्रिय भवन निर्माण संहिता २०६०</h6>
                         <table class="table table-bordered">
                             <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="col">क्र.स.</th>
                                 <th scope="col">विवरण</th>
                                 <th scope="col">स्वीकृति अनुसार</th>
@@ -207,12 +183,12 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-around">
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>
-                                तयार गर्ने </p>
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
-                                गर्ने<br>(इन्जिनियर)</p>
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>
-                                स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </p>
+                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                तयार गर्ने </span>
+                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
+                                गर्ने<br>(इन्जिनियर)</span>
+                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </span>
                         </div>
                         <div class="break-page"></div>
                         <h6>प्रथम चरणका इजाजत नविकरण </h6>
