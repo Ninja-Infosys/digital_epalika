@@ -46,6 +46,39 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <th>3</th>
+                                <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
+                                <td>२०७९/०२/११</td>
+                                <td>
+                                    <div class="d-flex justify-content-between">
+                                        <a href=""><i class="fa fa-eye"></i></a>
+                                        <a href=""><i class="fa fa-download"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>4</th>
+                                <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
+                                <td>२०७९/०२/११</td>
+                                <td>
+                                    <div class="d-flex justify-content-between">
+                                        <a href=""><i class="fa fa-eye"></i></a>
+                                        <a href=""><i class="fa fa-download"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>5</th>
+                                <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
+                                <td>२०७९/०२/११</td>
+                                <td>
+                                    <div class="d-flex justify-content-between">
+                                        <a href=""><i class="fa fa-eye"></i></a>
+                                        <a href=""><i class="fa fa-download"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -93,7 +126,7 @@
                             <div class="card bg-info text-light text-center">
                                 <div class="card-body">
                                     <h5 class="fw-semibold mt-2">हाम्रा प्रशिक्षकहरु</h5>
-                                    <i class="fa-regular fa-id-card-clip"></i>
+                                    <i class="fa fa-user"></i>
                                     <p>हाम्रा प्रशिक्षकहरु ।</p>
                                     <a href="#" class="btn btn-light"><span>हाम्रा प्रशिक्षकहरु</span>
                                         <i class="fa fa-angle-double-right"></i>
