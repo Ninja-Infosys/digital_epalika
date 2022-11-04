@@ -19,4 +19,11 @@ class UpdateDepartmentRequest extends FormRequest
             'title' => ['required', Rule::unique('departments', 'title')->ignore($this->department)->withoutTrashed()],
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'विभाग अनिवार्य छ',
+            'title.unique' => 'विभाग अद्वितीय हुनुपर्छ',
+        ];
+    }
 }
