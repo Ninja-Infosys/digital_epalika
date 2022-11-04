@@ -20,13 +20,13 @@
             </div>
         </div>
     </div>
-    {{--    <div>--}}
-    {{--        @error('file')--}}
-    {{--        <div class="alert alert-danger">--}}
-    {{--            {{$message}}--}}
-    {{--        </div>--}}
-    {{--        @enderror--}}
-    {{--    </div>--}}
+        <div>
+            @error('file')
+            <div class="alert alert-danger">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
     <div class="row mb-2">
         <div class="col-sm-4">
             <h4> {{\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL->label()}}</h4>

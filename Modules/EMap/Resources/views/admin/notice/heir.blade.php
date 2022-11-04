@@ -50,13 +50,12 @@
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
                         <h3 class="text-center"><b>वारेसनामा</b></h3>
-                        <div class="d-flex flex-wrap">
-{{--                            <div>--}}
+{{--                        <div>--}}
 {{--                                <span class="vertical">--}}
 {{--                                    दस्तखत : <span class="underline-dotted custom-width"></span>--}}
 {{--                                </span>--}}
-{{--                            </div>--}}
-                            <div>
+{{--                        </div>--}}
+                        <div>
                                 <span>
                                     लिखितम<span class="underline-dotted custom-width"></span>जिल्ला<span
                                         class="underline-dotted custom-width"></span>
@@ -90,34 +89,34 @@
                                         class="underline-dotted custom-width"></span> उ.न.पा. कार्यालयमा बसेर
                                     वारेसनामा लेखी
                                     नीज<span class="underline-dotted custom-width"></span> लाई दिएँ |
-                                </span>
-                                <span class="letter mt-2">
+                                </span><br>
+                            <span class="letter mt-2">
                                     इति सम्वत्<span class="underline-dotted custom-width"></span>
                                     साल<span class="underline-dotted custom-width"></span>
                                     महिना<span class="underline-dotted custom-width"></span>
                                     गते रोज<span class="underline-dotted custom-width"></span>
                                     शुभम</span>
-                            </div>
                         </div>
+
 
                         <div class="row mt-4">
                             <div class="d-flex justify-content-between">
-                                <p class="sign my-5">दस्तखत:</p>
+                                <p class="signature my-5">दस्तखत:<span class="underline-dotted"></span></p>
                                 <div class="d-flex justify-content-end">
                                     <div class="row p-4">
                                         <div class="col-md-6">
-                                            <div class="fing" style="width: 7rem; height: 8rem;">
+                                            <div class="finger" style="width: 7rem; height: 8rem;">
                                                 <div class="card-body">
-                                                    <h5 class="card-title text-center">दायाँ</h5>
+                                                    <h5 class="card-title text-center mt-2">दायाँ</h5>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row p-4">
                                         <div class="col-md-6">
-                                            <div class="fing" style="width: 7rem; height: 8rem;">
+                                            <div class="finger" style="width: 7rem; height: 8rem;">
                                                 <div class="card-body">
-                                                    <h5 class="card-title text-center">वायाँ</h5>
+                                                    <h5 class="card-title text-center mt-2">वायाँ</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,9 +125,11 @@
                             </div>
                         </div>
                         <div class="person">
-                        <h5 class="text-decoration-underline">सक्षीहरु</h5>
-                        <p>१. श्री<span class="underline-dotted custom-width"></span> दरखास्त<span class="underline-dotted custom-width"></span></p>
-                        <p class="mt-2">२. श्री<span class="underline-dotted custom-width"></span> दरखास्त<span class="underline-dotted custom-width"></span></p>
+                            <h5 class="text-decoration-underline">सक्षीहरु</h5>
+                            <p>१. श्री<span class="underline-dotted custom-width"></span> दरखास्त<span
+                                    class="underline-dotted custom-width"></span></p>
+                            <p class="mt-2">२. श्री<span class="underline-dotted custom-width"></span> दरखास्त<span
+                                    class="underline-dotted custom-width"></span></p>
                         </div>
                     </div>
                 </div>

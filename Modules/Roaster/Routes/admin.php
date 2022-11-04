@@ -25,8 +25,8 @@ Route::resource('training', TrainingController::class);
 
 //trainee
 Route::get('trainee/{trainee}/updateSelectTrainee', [TraineeController::class, 'updateSelectTrainee'])->name('trainee.updateSelectTrainee');
-Route::resource('trainee', TraineeController::class);
+Route::resource('trainee', TraineeController::class)->only(['updateSelectTrainee','show','edit']);
 
 //technical Trainee
 Route::get('technicalTrainee/{technicalTrainee}/updateSelectTechnicalTrainee', [TechnicalTraineeController::class, 'updateSelectTechnicalTrainee'])->name('technicalTrainee.updateSelectTrainee');
-Route::resource('technicalTrainee', TechnicalTraineeController::class);
+Route::resource('technicalTrainee', TechnicalTraineeController::class)->only(['updateSelectTechnicalTrainee','show','edit']);;

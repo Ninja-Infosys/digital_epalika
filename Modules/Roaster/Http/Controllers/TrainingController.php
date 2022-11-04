@@ -157,7 +157,7 @@ class TrainingController extends Controller
     public function setFormStatus(Training $training)
     {
         abort_if(
-            Gate::denies('training_edit'),
+            Gate::denies('training_access'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
