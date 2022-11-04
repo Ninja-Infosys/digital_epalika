@@ -76,7 +76,7 @@ enum NoticeTypeEnum: string
             self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => 'संघियारको नाममा जारी भएको सूचना',
             self::FIFTEEN_DAYS_NOTICE_ADJOURNED => '१५ दिने सूचना टाँस सम्बन्धमा',
             self::REGARDING_SENDING_DETAILS => 'विवरण पठाएको सम्बन्धमा',
-            self::REVISED_SUPERSTRUCTURE_PERMIT => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
+            self::REVISED_SUPERSTRUCTURE_PERMIT => 'संशोधित सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             //bond enums
             self::FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS => 'नक्सा पासको लागि १५ दिने टाँस मुचुल्का',
             self::SARZAMIN_MUCHULKA => 'सरजमिन मुचुल्का',

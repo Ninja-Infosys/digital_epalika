@@ -6,12 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.roaster.setting.designation.index')}}">पद</a>
+                            <a href="{{route('admin.designation.index')}}">पद</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ पद थप्नुहोस्</li>
                     </ol>
@@ -27,14 +27,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पद थप्नुहोस्</h4>
-                        <a href="{{route('admin.roaster.setting.designation.index')}}"
+                        <a href="{{route('admin.designation.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> पद सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.roaster.setting.designation.store')}}" method="post"
+                    <form action="{{route('admin.designation.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class=" col-md-12 p-2 mb-2">

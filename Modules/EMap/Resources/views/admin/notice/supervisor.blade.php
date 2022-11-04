@@ -1,7 +1,25 @@
 @extends('admin.layouts.master')
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.circular.registration.index')}}">ई-नक्सा </a>
+                        </li>
+                        <li class="breadcrumb-item active">नक्सा विवरण</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">ई-नक्सा</h4>
+            </div>
+        </div>
+    </div>
 
                 <div>
                     @error('file')
@@ -10,24 +28,23 @@
                     </div>
                     @enderror
                 </div>
-                <div class="card mb_30">
-                    <div class="card-header p-3">
-                        <div class="main-title d-flex justify-content-between">
-                            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE->label()}}</h3>
-                            <div class="d-flex justify-content-between">
-                                <x-application-component
-                                    :application-type="\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE"
-                                    url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
-
-                                <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
-                                        requestRoute="{{route('print.application-print')}}">
-                                    <i class="fa fa-print"></i> Print
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
+    <div class="row mb-2">
+        <div class="col-sm-4">
+            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE->label()}}</h3>
+        </div>
+        <div class="col-sm-8">
+            <div class="text-sm-end">
+                <div class="btn-group mb-3">
+                    <x-application-component
+                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE"
+                        url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
                 </div>
+                <div class="btn-group mb-3">
+                    <x-print-button title="{{$mapApply->client->name}}सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन"/>
+                </div>
+            </div>
+        </div><!-- end col-->
+    </div>
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-lg-12">
@@ -35,7 +52,7 @@
                                 <div class="card-body p-3">
                                     <div class="font-black" id="printData">
                                         <h5 class="text-center mb-2">सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन</h5>
-                                        <table class="table table-bordered">
+                                        <table class="table table-sm table-bordered text-center">
                                             <thead>
                                             <tr>
                                                 <th scope="col">घरधनीको नाम/ठेगाना </th>
@@ -58,9 +75,9 @@
                                             </tbody>
                                         </table>
                                         <h4><b>पिलरवाला घर</b></h4>
-                                        <table class="table table-bordered">
+                                        <table class="table table-sm table-bordered">
                                             <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th scope="col">फोटो र फोटोको विवरण</th>
                                                 <th scope="col">कैफियत</th>
                                             </tr>
@@ -79,7 +96,7 @@
                                                     </ul></td>
                                             </tr>
                                             <tr>
-                                                <th scope="col">टाइबिम वा बिममाथिको पिलरको डण्डी बाँध्दा </th>
+                                                <th scope="col">टाइबिम वा बिममाथिको पिलरको डण्डी बाँध्दा</th>
                                                 <th scope="col"></th>
                                             </tr>
                                             <tr>
@@ -113,9 +130,9 @@
                                             </tbody>
                                         </table>
                                         <div class="break-page"></div>
-                                        <table class="table table-bordered">
+                                        <table class="table table-sm table-bordered">
                                             <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th scope="col">फोटो र फोटोको विवरण</th>
                                                 <th scope="col">कैफियत</th>
                                             </tr>
@@ -184,9 +201,9 @@
                                         </table>
                                         <div class="break-page"></div>
                                         <h4><b>गारोवाला घर</b></h4>
-                                        <table class="table table-bordered">
+                                        <table class="table table-sm table-bordered">
                                             <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th scope="col">फोटो र फोटोको विवरण</th>
                                                 <th scope="col">कैफियत</th>
                                             </tr>
@@ -211,9 +228,9 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <table class="table table-bordered mt-2">
+                                        <table class="table table-sm table-bordered mt-2">
                                             <thead>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <th scope="col">फोटो र फोटोको विवरण</th>
                                                 <th scope="col">कैफियत</th>
                                             </tr>
@@ -261,7 +278,7 @@
                                             </tbody>
                                         </table>
                                         <div class="break-page"></div>
-                                        <table class="table table-bordered mt-2">
+                                        <table class="table table-sm table-bordered mt-2">
                                             <thead>
                                             <tr>
                                                 <th scope="col">स्ल्याब र स्ल्याब बन्धनको ढलान</th>
@@ -309,24 +326,7 @@
                         </div>
                     </div>
                 </div>
-        </div>
-    </div>
-    @push('style')
-        <style>
-            .font-black p {
-                color: black;
-            }
 
-            .underline-dotted {
-                border-bottom: dotted 2px !important;
-                padding: 0 20px;
-            }
-
-            .custom-width {
-                padding: 0 80px !important;
-            }
-        </style>
-    @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>
     @endpush

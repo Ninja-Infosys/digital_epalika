@@ -1,20 +1,19 @@
 <?php
 
-namespace Modules\Roaster\Http\Controllers\Setting;
+namespace App\Http\Controllers\Admin\Setting;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Setting\Department\StoreDepartmentRequest;
+use App\Http\Requests\Setting\Department\UpdateDepartmentRequest;
+use App\Models\Settings\Department;
 use Illuminate\Support\Facades\Gate;
-use Modules\Roaster\Entities\Department;
-use Modules\Roaster\Http\Requests\Settings\Department\StoreDepartmentRequest;
-use Modules\Roaster\Http\Requests\Settings\Department\UpdateDepartmentRequest;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class DepartmentController extends Controller
 {
     public function index()
     {
-
         abort_if(
             Gate::denies('department_access'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -22,12 +21,12 @@ class DepartmentController extends Controller
         );
 
         $departments = Department::latest()->get();
-        return view('roaster::admin.setting.department.index', compact('departments'));
+        return view('admin.setting.department.index', compact('departments'));
     }
 
     public function create()
     {
-        return view('roaster::admin.setting.department.create');
+        return view('admin.setting.department.create');
     }
 
     public function store(StoreDepartmentRequest $request)
@@ -41,18 +40,7 @@ class DepartmentController extends Controller
         Department::create($request->validated());
 
         toast('department added successfully!', 'success');
-        return redirect()->route('admin.roaster.setting.department.index');
-    }
-
-    public function show(Department $department)
-    {
-        abort_if(
-            Gate::denies('department_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
-
-        return view('roaster::admin.setting.department.index', compact('department'));
+        return back();
     }
 
     public function edit(Department $department)
@@ -63,7 +51,7 @@ class DepartmentController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        return view('roaster::admin.setting.department.edit', compact('department'));
+        return view('admin.setting.department.edit', compact('department'));
     }
 
     public function update(UpdateDepartmentRequest $request, Department $department)
@@ -76,7 +64,7 @@ class DepartmentController extends Controller
 
         $department->update($request->validated());
         toast('department updated successfully!', 'success');
-        return redirect()->route('admin.roaster.setting.department.index');
+        return redirect()->route('admin.department.index');
     }
 
     public function destroy(Department $department)
@@ -90,6 +78,6 @@ class DepartmentController extends Controller
         $department->delete();
 
         toast('department deleted successfully!', 'success');
-        return redirect()->route('admin.roaster.setting.department.index');
+        return back();
     }
 }

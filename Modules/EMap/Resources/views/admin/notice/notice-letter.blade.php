@@ -1,7 +1,25 @@
 @extends('admin.layouts.master')
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.circular.registration.index')}}">ई-नक्सा </a>
+                        </li>
+                        <li class="breadcrumb-item active">नक्सा विवरण</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">ई-नक्सा</h4>
+            </div>
+        </div>
+    </div>
             <div>
                 @error('file')
                 <div class="alert alert-danger">
@@ -9,41 +27,42 @@
                 </div>
                 @enderror
             </div>
-            <div class="card mb_30">
-                <div class="card-header p-3">
-                    <div class="main-title d-flex justify-content-between">
-                        <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::FIFTEEN_DAYS_NOTICE_ADJOURNED->label()}}</h3>
-                        <div class="d-flex justify-content-between">
-                            <x-application-component
-                                :application-type="\Modules\EMap\Enums\NoticeTypeEnum::FIFTEEN_DAYS_NOTICE_ADJOURNED"
-                                url="{{route('emap.admin.map.map-apply.notice.upload.notice',$mapApply)}}"/>
-
-                            <button id="printButton" class="btn btn-sm btn-success" printElementId='printData'
-                                    requestRoute="{{route('print.office-letter-print')}}">
-                                <i class="fa fa-print"></i> Print
-                            </button>
-
-                        </div>
-                    </div>
+    <div class="row mb-2">
+        <div class="col-sm-4">
+            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::FIFTEEN_DAYS_NOTICE_ADJOURNED->label()}}</h3>
+        </div>
+        <div class="col-sm-8">
+            <div class="text-sm-end">
+                <div class="btn-group mb-3">
+                    <x-application-component
+                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::FIFTEEN_DAYS_NOTICE_ADJOURNED"
+                        url="{{route('emap.admin.map.map-apply.notice.upload.notice',$mapApply)}}"/>
+                </div>
+                <div class="btn-group mb-3">
+                    <x-print-button title="{{$mapApply->client->name}}१५ दिने सूचना टास सम्बन्धमा"/>
                 </div>
             </div>
+        </div><!-- end col-->
+    </div>
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <div class="top-line d-flex justify-content-between mt-3">
-                                    <p>पत्र सं: <span class="underline-dotted custom-width"></span>
-                                    <br>चलानी नं: <span class="underline-dotted custom-width"></span></p>
-                                    <p>मिति: <span class="underline-dotted custom-width"></span></p>
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        पत्र सं: <div class="underline-dotted custom-width"></div><br>
+                                        चलानी नं: <div class="underline-dotted custom-width"></div>
+                                    </div>
+                                    <div class="col-md-6 text-end">मिति: <div class="underline-dotted custom-width"></div></div>
                                 </div>
 
-                                <div class="res mt-3">
+                                <div class="res my-4">
                                     <p>श्री वडा समितिको कार्यालय <br>
                                         {{config('applicationDetail.to_office.office_name')}} <br>
                                         वडा नं:<span class="underline-dotted custom-width"></span></p>
                                 </div>
-                                <p class="text-center my-3"><b>बिषय: १५ दिने सूचना टास सम्बन्धमा
+                                <p class="text-center my-3"><b>बिषय:- १५ दिने सूचना टास सम्बन्धमा
                                         ।</b></p>
                                 <p class="mb-3">
                                     &emsp;&emsp;&emsp;यस {{config('applicationDetail.to_office.office_name')}} वडा नं. <span
