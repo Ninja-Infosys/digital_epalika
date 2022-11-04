@@ -126,11 +126,10 @@
                         <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
-                    <div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 d-flex justify-content-around pt-1">
                             <button class="btn btn-danger" type="submit"> Save</button>
                         </div>
-                    </div>
+                </div>
             </form>
         </div>
     </div>
