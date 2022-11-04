@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover text-center">
+                        <table class="table table-bordered table-sm mb-0 table-striped table-hover text-center">
                             <thead>
                             <tr>
                                 <th rowspan="2">क्र.स</th>
