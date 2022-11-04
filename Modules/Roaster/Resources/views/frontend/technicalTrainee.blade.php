@@ -1,6 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="container-fluid mt-4">
+
         <div class="text-center">
             <h4 class="fw-bold text-decoration-underline">सेवा कालिन तालिम आवेदन फारम</h4>
         </div>

@@ -7,7 +7,9 @@
                 <i class="fa fa-angle-double-right"></i>
                 <a class="ml-1 text-primary-500" href="{{route('train')}}">तालिम</a>
                 <i class="fa fa-angle-double-right"></i>
-                <a class="ml-1 text-primary-500">तालिम आवेदन</a>
+                <a class="ml-1 text-primary-500" href="{{route('application')}}">तालिम आवेदन</a>
+                <i class="fa fa-angle-double-right"></i>
+                <a class="ml-1 text-primary-500" >तालिमहरु</a>
             </div>
         </div>
         @switch($trainingType)
@@ -30,9 +32,9 @@
                                             <i class="fa fa-clock px-1 text-primary"></i><h6>बन्द हुने मिति: </h6> <small>{{$training->closed_date}}</small>
                                         </div>
                                         @foreach($training->trainers as $trainer)
-                                            <div class="user">
-                                                <img class="p-2 rounded" src="{{$trainer->photo_url}}" alt="user"/>
-                                                <div class="user-info">
+                                            <div class="trainerUser d-flex py-2">
+                                                <img class="shadow" src="{{$trainer->photo_url}}" alt="user"/>
+                                                <div class="user-info my-auto px-3">
                                                     <h5>{{$trainer->name}}</h5>
                                                 </div>
                                             </div>
@@ -56,7 +58,7 @@
                     <div class="text-center">
                         <h4 class="fw-bold">चलिरहेका सेवा कालिन तालिमहरु</h4>
                     </div>
-                    <div class="row card">
+                    <div class="row card p-2">
                         @foreach($trainings as $training)
                             <div class="col-md-4">
                                 <div class="card shadow text-center">
@@ -71,9 +73,9 @@
                                             <i class="fa fa-clock px-1 text-primary"></i><h6>बन्द हुने मिति: </h6> <small>{{$training->closed_date}}</small>
                                         </div>
                                         @foreach($training->trainers as $trainer)
-                                            <div class="user">
-                                                <img class="p-2 rounded" src="{{$trainer->photo_url}}" alt="user"/>
-                                                <div class="user-info">
+                                            <div class="trainerUser d-flex py-2">
+                                                <img class="shadow" src="{{$trainer->photo_url}}" alt="user"/>
+                                                <div class="user-info my-auto px-3">
                                                     <h5>{{$trainer->name}}</h5>
                                                 </div>
                                             </div>

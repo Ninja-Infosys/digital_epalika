@@ -12,8 +12,8 @@
         </div>
         <div class="row d-flex justify-content-center pb-5">
             <h4 class="text-center">तालिम आवेदन</h4>
-            <div class="col-sm-6">
-                <div class="row d-flex justify-content-center">
+            <div class="col-sm-6 ">
+                <div class="row  d-flex justify-content-center">
                     <div class="col-md-6 p-2">
                         <div class="card bg-primary text-light text-center">
                             <div class="card-body">
