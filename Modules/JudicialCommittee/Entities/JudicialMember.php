@@ -2,6 +2,7 @@
 
 namespace Modules\JudicialCommittee\Entities;
 
+use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -43,6 +44,10 @@ class JudicialMember extends Model
        'mother_name',
        'grandfather_name',
        'status'
+   ];
+
+   protected $casts=[
+       'gender'=>Gender::class
    ];
 
     public function getPhotoUrlAttribute(): string

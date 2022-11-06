@@ -29,7 +29,7 @@ class StoreJudicialMemberRequest extends FormRequest
             'gender' => ['required'],
             'dob' => ['required'],
             'en_dob' => ['required', 'date'],
-            'blood_group' => ['required'],
+            'blood_group' => ['nullable'],
             'father_name' => ['required'],
             'mother_name' => ['required'],
             'grandfather_name' => ['required'],
