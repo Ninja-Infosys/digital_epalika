@@ -9,5 +9,6 @@
     "ListRegistration": true,
     "Roaster": true,
     "Grant": true,
-    "JudicialCommittee": true
+    "JudicialCommittee": true,
+    "TaskManagement": true
 }

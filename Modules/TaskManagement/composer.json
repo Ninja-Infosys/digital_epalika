@@ -1,5 +1,5 @@
 {
-    "name": "nwidart/thematicarea/storethematicarearequest",
+    "name": "nwidart/taskmanagement",
     "description": "",
     "authors": [
         {
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\ThematicArea/StoreThematicAreaRequest\\": ""
+            "Modules\\TaskManagement\\": ""
         }
     }
 }

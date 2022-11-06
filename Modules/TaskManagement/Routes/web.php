@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('thematicarea/storethematicarearequest')->group(function() {
-    Route::get('/', 'ThematicArea/StoreThematicAreaRequestController@index');
+Route::prefix('taskmanagement')->group(function() {
+    Route::get('/', 'TaskManagementController@index');
 });

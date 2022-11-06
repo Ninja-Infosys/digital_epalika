@@ -10,7 +10,8 @@
         'listregistration',
         'roaster',
         'grant',
-        'judicialcommittee'
+        'judicialcommittee',
+        'taskmanagement'
     ],
     'sidebars' => [
         'website',
