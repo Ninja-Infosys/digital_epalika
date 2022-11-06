@@ -265,7 +265,6 @@
                                 <button class="btn btn-primary btn-sm" wire:click.prevent="documentsArrayIncrement">
                                     <i class="fa fa-plus-square"></i>
                                 </button>
-
                                 थिच्नुहोस
                             </td>
                         </tr>

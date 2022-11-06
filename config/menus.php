@@ -9,7 +9,9 @@
         'executivemeeting',
         'listregistration',
         'roaster',
-        'grant'
+        'grant',
+        'judicialcommittee',
+        'taskmanagement'
     ],
     'sidebars' => [
         'website',

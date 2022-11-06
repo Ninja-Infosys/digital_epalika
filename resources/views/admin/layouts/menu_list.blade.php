@@ -30,11 +30,11 @@
                 </div>
             @endif
             <div class="col-md-4 border">
-                <a href="{{route('admin.listRegistrations.dashboard')}}">
+                <a href="{{route('admin.taskManagement.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/listregistration.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/task.png')}}"
                              height="50" width="50">
-                        <h4 class="p-1">सुची दर्ता प्रणाली</h4>
+                        <h4 class="p-1">कार्य व्यवस्थापन</h4>
                     </div>
                 </a>
             </div>
@@ -48,11 +48,11 @@
                 </a>
             </div>
             <div class="col-md-4 border">
-                <a href="{{route('admin.grievanceHandling.dashboard')}}">
+                <a href="{{route('admin.listRegistrations.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/grievancehandling.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/listregistration.png')}}"
                              height="50" width="50">
-                        <h4 class="p-1">ई-गुनासो</h4>
+                        <h4 class="p-1">सुची दर्ता प्रणाली</h4>
                     </div>
                 </a>
             </div>
@@ -62,6 +62,24 @@
                         <img src="{{asset('assets/backend/images/modules/executivemeeting.png')}}"
                              height="50" width="50">
                         <h4 class="p-1">ई-कार्यपालिका</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 border">
+                <a href="{{route('admin.grievanceHandling.dashboard')}}">
+                    <div class="p-2 text-center">
+                        <img src="{{asset('assets/backend/images/modules/grievancehandling.png')}}"
+                             height="50" width="50">
+                        <h4 class="p-1">ई-गुनासो</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 border">
+                <a href="#">
+                    <div class="p-2 text-center">
+                        <img src="{{asset('assets/backend/images/modules/rajashow.png')}}"
+                             height="50" width="50">
+                        <h4 class="p-1">राजस्व</h4>
                     </div>
                 </a>
             </div>
@@ -120,10 +138,10 @@
                 </a>
             </div>
             <div class="col-md-4 border">
-                <a href="#">
+                <a href="{{route('admin.judicialCommittee.dashboard')}}">
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/nyayik.png')}}"
-                             height="50" width="50">
+                             height="50" width="50" alt="">
                         <h4 class="p-1">न्यायिक समिति</h4>
                     </div>
                 </a>
