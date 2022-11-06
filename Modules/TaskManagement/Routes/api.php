@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/thematicarea/storethematicarearequest', function (Request $request) {
+Route::middleware('auth:api')->get('/taskmanagement', function (Request $request) {
     return $request->user();
 });
