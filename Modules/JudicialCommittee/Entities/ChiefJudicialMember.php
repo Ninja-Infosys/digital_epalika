@@ -15,20 +15,20 @@ class ChiefJudicialMember extends Model
 {
     use HasFactory,SoftDeletes,EventObserveTrait;
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+   protected $dates = [
+       'created_at',
+       'updated_at',
+       'deleted_at'
+   ];
 
-    protected $fillable = [
-        'name',
-        'photo',
-        'position',
-        'designation_id',
-        'phone',
-        'status'
-    ];
+   protected $fillable = [
+       'name',
+       'photo',
+       'position',
+       'designation_id',
+       'phone',
+       'status'
+   ];
 
     public function setPhotoAttribute($value)
     {
@@ -47,5 +47,5 @@ class ChiefJudicialMember extends Model
     public function designation(): BelongsTo
     {
         return $this->belongsTo(Designation::class);
-    }
+   }
 }

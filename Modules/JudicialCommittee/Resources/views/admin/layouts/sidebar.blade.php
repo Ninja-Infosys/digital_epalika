@@ -5,7 +5,7 @@
     </a>
 </li>
 <li>
-    <a href="{{route('admin.grant.grantDetail.index')}}">
+    <a href="{{route('admin.judicialCommittee.chiefJudicialMember.index')}}">
         <i class="fa fa-user"></i>
         <span>प्रमुख न्यायिक सदस्य</span>
     </a>

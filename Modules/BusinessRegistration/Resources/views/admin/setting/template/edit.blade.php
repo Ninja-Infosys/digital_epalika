@@ -36,6 +36,7 @@
                     <form action="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.update',$businessRegistrationTemplate)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong> टेम्प्लेट</strong>
@@ -60,7 +61,7 @@
                                     <select name="for" id="for" class="form-control">
                                         <option value="">छान्नुहोस्</option>
                                         @foreach(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::cases() as $templateType)
-                                            <option value="{{$templateType->value}}"{{old('for',$templateType->value)==$businessRegistrationTemplate->for ? 'selected':''}}>{{$templateType->label()}}
+                                            <option value="{{$templateType->value}}"{{old('for',$templateType->value)==$businessRegistrationTemplate->for->value ? 'selected':''}}>{{$templateType->label()}}
                                             </option>
                                         @endforeach
                                         @error('for')
