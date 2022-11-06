@@ -5,7 +5,6 @@
     </a>
 </li>
 <li>
-    <a href="{{route('admin.judicialCommittee.chiefJudicialMember.index')}}">
     <a href="{{route('admin.judicialCommittee.applicationForm')}}">
         <i class="fa fa-paperclip"></i>
         <span>निबेदन फारम</span>
