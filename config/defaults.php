@@ -30,21 +30,31 @@ return [
         'शुक्रबार' => 'Friday',
         'शनिबार' => 'Saturday',
     ],
-   /* 'complaint_severity' => [
-        'साधारण' => 'Simple',
-        'प्राथमिकता' => 'Priority',
-        'उच्च प्राथमिकता' => 'High priority'
-    ],
-    'status' => [
-        'नहेरिएको' => 'Unseen',
-        'अनुसन्धान गरिदै' => 'Investigated',
-        'जवाफ दिनुभयो' => 'Replied',
-        'बन्द' => 'Closed'
-    ],*/
+    /* 'complaint_severity' => [
+         'साधारण' => 'Simple',
+         'प्राथमिकता' => 'Priority',
+         'उच्च प्राथमिकता' => 'High priority'
+     ],
+     'status' => [
+         'नहेरिएको' => 'Unseen',
+         'अनुसन्धान गरिदै' => 'Investigated',
+         'जवाफ दिनुभयो' => 'Replied',
+         'बन्द' => 'Closed'
+     ],*/
 
     'gender' => [
         'पूरुष' => 'Male',
         'महिला' => 'Female',
         'अन्य' => 'Other',
     ],
+    'blood_groups' => [
+        'A+',
+        'A-',
+        'B+',
+        'B-',
+        'O+',
+        'O-',
+        'AB+',
+        'AB-'
+    ]
 ];

@@ -5,7 +5,7 @@
     </a>
 </li>
 <li class="{{request()->is('admin/grant/dashboard') ? 'active' : ''}}">
-    <a href="{{route('admin.taskManagement.dashboard')}}">
+    <a href="{{route('admin.taskManagement.task.index')}}">
         <i class="fa fa-tasks"></i>
         <span> दैनिक कार्य</span>
     </a>

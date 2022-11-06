@@ -39,9 +39,10 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>नाम </th>
+                                <th>नाम</th>
                                 <th>पद</th>
                                 <th>सम्पर्क नं.</th>
+                                <th>ठेगाना</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -49,22 +50,32 @@
                             @forelse($judicialMembers as $judicialMember)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$judicialMember->name}}</td>
+                                    <td class="table-user">
+                                        <img src="{{$judicialMember->photo_url}}" class="me-2 rounded-circle" alt="">
+                                        {{$judicialMember->name}}
+                                    </td>
                                     <td>{{$judicialMember->designation->title??''}}</td>
+                                    <td>{{$judicialMember->phone}}</td>
+                                    <td>
+                                        {{$judicialMember->localBody->local_body??''}} - {{$judicialMember->ward_no}}
+                                        , {{$judicialMember->district->district??''}}
+                                        , {{$judicialMember->province->province??''}}
+                                    </td>
                                     <td>
                                         @can('judicialMember_edit')
                                             <a href="{{route('admin.judicialCommittee.judicialMember.edit',$judicialMember)}}"
                                                class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('judicialMember_delete')
-                                            <form action="{{route('admin.judicialCommittee.judicialMember.destroy',$judicialMember)}}"
-                                                  method="post">
+                                            <form
+                                                action="{{route('admin.judicialCommittee.judicialMember.destroy',$judicialMember)}}"
+                                                method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

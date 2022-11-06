@@ -70,10 +70,10 @@
                                             <div class="col-md-6 mb-2">
                                                 <label for="designation_id" class="form-label">पद</label>
                                                 <select name="designation_id" class="form-control" id="designation_id">
-                                                    <option value="#">select Designation</option>
+                                                    <option value="#">--select Designation--</option>
                                                     @foreach($designations as $designation)
                                                         <option
-                                                            {{$designation->value==old('designation_id',$designation->designation->title) ? 'selected' : ''}}
+                                                            {{$designation->value==old('designation_id',$designation->designation_id) ? 'selected' : ''}}
                                                             value="{{$designation->id}}">{{$designation->title}}</option>
                                                     @endforeach
                                                 </select>

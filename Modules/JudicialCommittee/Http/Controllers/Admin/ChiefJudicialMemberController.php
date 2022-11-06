@@ -42,7 +42,7 @@ class ChiefJudicialMemberController extends Controller
         );
         ChiefJudicialMember::create($request->validated());
 
-        toast('success', 'success');
+        toast('मुख्य न्यायिक सदस्य सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -71,7 +71,13 @@ class ChiefJudicialMemberController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        //
+        if($request->hasFile('photo'))
+        {
+            $this->deleteFile($chiefJudicialMember->photo);
+        }
+        $chiefJudicialMember->update($request->validated());
+        toast('मुख्य न्यायिक सदस्य सफलतापूर्वक सम्पादन गरियो ', 'success');
+        return redirect(route('admin.judicialCommittee.chiefJudicialMember.index'));
     }
 
     public function destroy(ChiefJudicialMember $chiefJudicialMember)
@@ -80,10 +86,10 @@ class ChiefJudicialMemberController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        $this->deleteFile($chiefJudicialMember->photo);
+        $this->deleteFile($chiefJudicialMember->photo_url);
         $chiefJudicialMember->delete();
 
-        toast('success','success');
+        toast('मुख्य न्यायिक सदस्य सफलतापूर्वक हटाइयो','success');
         return back();
     }
     public function updateStatus(ChiefJudicialMember $chiefJudicialMember)
