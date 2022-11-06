@@ -8,6 +8,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\InvestmentRevenueController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionSubCategoryController;
+use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -17,6 +18,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('objectTransactionSubCategory', ObjectTransactionSubCategoryController::class);
     Route::resource('investmentRevenue', InvestmentRevenueController::class);
     Route::resource('businessPurpose', BusinessPurposeController::class);
+    Route::resource('businessRegistrationTemplate', BusinessRegistrationTemplateController::class);
 });
     Route::resource('businessRegistration', BusinessRegistrationController::class);
 
