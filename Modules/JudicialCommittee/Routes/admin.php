@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\JudicialCommittee\Http\Controllers\Admin\AdministrationMemberController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ChiefJudicialMemberController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DashboardController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialMemberController;
@@ -11,6 +12,8 @@ Route::get('chiefJudicialMember/{chiefJudicialMember}/updateStatus', [ChiefJudic
 Route::resource('chiefJudicialMember',ChiefJudicialMemberController::class);
 
 Route::resource('judicialMember', JudicialMemberController::class);
+
+Route::resource('administrationMember', AdministrationMemberController::class);
 
 
 //static routes

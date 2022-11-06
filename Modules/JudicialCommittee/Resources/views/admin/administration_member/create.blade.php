@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">मुख्य न्यायिक सदस्य</li>
+                        <li class="breadcrumb-item active">प्रशासन सदस्य</li>
                     </ol>
                 </div>
-                <h4 class="page-title">मुख्य न्यायिक सदस्य</h4>
+                <h4 class="page-title">प्रशासन सदस्य</h4>
             </div>
         </div>
     </div>
