@@ -48,35 +48,35 @@
                             </tr>
                             </thead>
                             <tbody>
-{{--                            @forelse($objectTransactionSubCategories as $objectTransactionSubCategory)--}}
-{{--                                <tr>--}}
-{{--                                    <th scope="row">{{$loop->iteration}}</th>--}}
-{{--                                    <td>{{$objectTransactionSubCategory->title}}</td>--}}
-{{--                                    <td>{{$objectTransactionSubCategory->objectTransaction->title??''}}</td>--}}
-{{--                                    <td>--}}
-{{--                                        @can('businessRegistrationTemplate_edit')--}}
-{{--                                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.edit',$objectTransactionSubCategory)}}"--}}
-{{--                                               class="btn btn-xs btn-outline-warning">--}}
-{{--                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्--}}
-{{--                                            </a>--}}
-{{--                                        @endcan--}}
-{{--                                        <form action="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.destroy',$objectTransactionSubCategory)}}"--}}
-{{--                                              method="post">--}}
-{{--                                            @csrf--}}
-{{--                                            @method('delete')--}}
-{{--                                            @can('businessRegistrationTemplate_delete')--}}
-{{--                                                <button class="btn btn-xs btn-outline-danger show_confirm">--}}
-{{--                                                    <i class="fa fa-trash"></i> मेटाउनु होस्--}}
-{{--                                                </button>--}}
-{{--                                            @endcan--}}
-{{--                                        </form>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            @empty--}}
-{{--                                <tr>--}}
-{{--                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>--}}
-{{--                                </tr>--}}
-{{--                            @endforelse--}}
+                            @forelse($businessRegistrationTemplates as $businessRegistrationTemplate)
+                                <tr>
+                                    <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$businessRegistrationTemplate->title}}</td>
+                                    <td>{{$businessRegistrationTemplate->for->label() ??''}}</td>
+                                    <td>
+                                        @can('businessRegistrationTemplate_edit')
+                                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.edit',$businessRegistrationTemplate)}}"
+                                               class="btn btn-xs btn-outline-warning">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+                                        <form action="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.destroy',$businessRegistrationTemplate)}}"
+                                              method="post">
+                                            @csrf
+                                            @method('delete')
+                                            @can('businessRegistrationTemplate_delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            @endcan
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
