@@ -72,139 +72,16 @@
                         <div class="tab-pane" id="reg">
                             <div class="font-black" id="printData">
                                 {!! $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()['data'] ?? ''!!}
+                                {!! $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()['data'] ?? ''!!}
 
-                                <hr class="style">
-                                <h5 class="mt-2">कार्यालय प्रयोजनका लागि मात्र :-</h5>
-                                <p>निवेदन दस्तुर :<span class="underline-dotted"></span> दर्ता दस्तुर <span
-                                        class="underline-dotted"></span>
-                                    व्यवसाय कर <span class="underline-dotted"></span> परिचय पाटी
-                                    दस्तुर<span class="underline-dotted"></span>
-                                    जरिवाना<span class="underline-dotted"></span> जम्मा <span
-                                        class="underline-dotted"></span> व्यवसाय प्रमाण पत्र नं. :<span
-                                        class="underline-dotted"></span>
-                                    मिति : <span class="underline-dotted"></span> पेश गर्ने/ठिक छ भनी
-                                    पप्रमाणितगर्ने/स्वीकृत गर्ने</p>
+
                             </div>
                         </div>
 
                         <div class="tab-pane" id="tax">
                             <div class="font-black" id="printData">
-                                <p class="text-center">फिदिम नगरपालिका<br>
-                                    नगर कार्यपालिकाको कार्यालय<br>
-                                    व्यवसाय कर दर्ता किताब</p>
-                                <p>करदाता प्रमाणपत्र नं. :
-                                    <br>जारी भएको मिति :</p>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th width="35%" scope="col">व्यवसायको विवरण</th>
-                                            <th width="35%" scope="col">परिचयपाटी विवरण</th>
-                                            <th width="35%" scope="col">व्यवसायीको विवरण</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>१) व्यवसायको प्रकृति :</td>
-                                            <td>१) फर्म/कं. को नाम :</td>
-                                            <td>१) नाम, थर :</td>
-                                        </tr>
-                                        <tr>
-                                            <td>२) व्यवसायको किसिम :</td>
-                                            <td>२) साइज :</td>
-                                            <td>२) नागरिकता नं:</td>
-                                        </tr>
-                                        <tr>
-                                            <td>३) रहने स्थान/ठेगाना:<br>
-                                                वडा नं.: घर नं.: बाटोको नाम:
-                                            </td>
-                                            <td>३) किसिम: जारी भेय्को जिल्ला :</td>
-                                            <td>३) ठेगाना: थायी:<br>
-                                                अस्थायी :
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>४) अन्य :</td>
-                                            <td>४) घर धनीको नाम :</td>
-                                            <td>४) बाबुको नाम :</td>
-                                        </tr>
-                                        <tr>
-                                            <td>५) बजेको नाम :</td>
-                                        </tr>
-                                        <tr>
-                                            <td>६) सम्पर्क फोन नं. :</td>
-                                        </tr>
-                                        <tr>
-                                            <td>७) अन्य :</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">असुली</th>
-                                            <th scope="col">आ.व</th>
-                                            <th scope="col">मिति</th>
-                                            <th scope="col">निवेदन<br>
-                                                दस्तुर
-                                            </th>
-                                            <th scope="col">दर्ता<br>
-                                                शुल्क
-                                            </th>
-                                            <th scope="col">चालु <br>
-                                                आ.व.को<br>
-                                                व्यवसाय<br>
-                                                कर रु.
-                                            </th>
-                                            <th scope="col">परिचय
-                                                <br>पाटी
-                                            </th>
-                                            <th scope="col">वक्यौता</th>
-                                            <th scope="col">जरिवाना</th>
-                                            <th scope="col">जम्मा<br>रकम</th>
-                                            <th scope="col">रसिद<br>नं.</th>
-                                            <th scope="col">प्रमणित<br>गर्नेको<br>सही</th>
-                                            <th scope="col">कैफियत</th>
+                                {!! $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()['data'] ?? ''!!}
 
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="application">
