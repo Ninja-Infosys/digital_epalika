@@ -129,6 +129,15 @@
 @livewireScripts
 {{--listener for livewire alert message--}}
 <script>
+    function myFunction() {
+        const copyText = document.getElementById("copy");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        alert("Copied the text: " + copyText.value);
+    }
+</script>
+<script>
     window.addEventListener('alert_message', event => {
         swal.fire({
             title: event.detail.title,
