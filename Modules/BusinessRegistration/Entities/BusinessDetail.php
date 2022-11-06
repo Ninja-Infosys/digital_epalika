@@ -26,7 +26,7 @@ class BusinessDetail extends Model
     ];
 
     protected $fillable = [
-        'price',
+
         'business_nature',
         'proprietor_detail_id',
         'business_detail_name',

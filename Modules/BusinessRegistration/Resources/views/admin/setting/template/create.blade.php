@@ -86,7 +86,7 @@
                                     @enderror
                                 </div>
                                 <div class="row">
-                                    प्रोप्रिटर
+
                                     @foreach( (new Modules\BusinessRegistration\Entities\ProprietorDetail)->getTemplateOptions() as $template)
                                         <div class="col-md-12">
                                             <h6>{{$template['title'] ?? ''}}</h6>
