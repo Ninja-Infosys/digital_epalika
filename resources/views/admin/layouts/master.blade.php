@@ -128,6 +128,7 @@
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 @livewireScripts
 {{--listener for livewire alert message--}}
+
 <script>
     window.addEventListener('alert_message', event => {
         swal.fire({

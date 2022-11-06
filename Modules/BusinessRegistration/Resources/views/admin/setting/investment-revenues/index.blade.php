@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पुँजीगत लगानी र राजस्वो सूची</h4>
-                        @can('objectTransactionSubCategory_create')
+                        @can('investmentRevenue_create')
                             <a href="{{route('admin.businessRegistration.setting.investmentRevenue.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ पुँजीगत लगानी र राजस्वो  थप्नुहोस्

@@ -140,7 +140,7 @@ class TechnicalTraineeLivewire extends Component
                     'title' => "Thank You",
                     'text' => "Trainee Details Updated Successfully",
                 ]);
-                return redirect(route('admin.trainings.training.show', $technicalTrainee->trainingTrainee->training_id));
+                return redirect(route('admin.roaster.training.show', $technicalTrainee->trainingTrainee->training_id));
             } else {
                 $technicalTrainee = TechnicalTrainee::create($data);
                 $technicalTrainee->trainingTrainee()->create([

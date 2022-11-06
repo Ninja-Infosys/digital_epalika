@@ -5,6 +5,7 @@
     </a>
 </li>
 <li>
+    <a href="{{route('admin.judicialCommittee.chiefJudicialMember.index')}}">
     <a href="{{route('admin.judicialCommittee.applicationForm')}}">
         <i class="fa fa-paperclip"></i>
         <span>निबेदन फारम</span>
@@ -34,6 +35,20 @@
         <span>प्रमुख न्यायिक सदस्य</span>
     </a>
 </li>
+<li>
+    <a href="{{route('admin.grant.grantDetail.index')}}">
+        <i class="fa fa-user"></i>
+        <span>प्रशासन सदस्यहरू</span>
+    </a>
+</li>
+@can('judicialMember_access')
+<li>
+    <a href="{{route('admin.judicialCommittee.judicialMember.index')}}">
+        <i class="fa fa-user"></i>
+        <span>न्यायिक समिति विवरण </span>
+    </a>
+</li>
+@endcan
 <li class="{{request()->is('admin/grant/report/*') ? 'active' : ''}}">
     <a href="#sidebarGrantReport"
        {{request()->is('admin/circular/report/*') ? 'aria-expanded=true  ' : ''}}

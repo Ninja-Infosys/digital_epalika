@@ -22,11 +22,10 @@ class NoticeController extends Controller
         );
         if ($type === 'News') {
             $notices = Notice::with('user')->where('type', 'News')->orderByDesc('date')->get();
-            return view('digitalboard::notice.index', compact('notices', 'type'));
         } else {
             $notices = Notice::with('user')->where('type', 'Notice')->orderByDesc('date')->get();
-            return view('digitalboard::notice.index', compact('notices', 'type'));
         }
+        return view('digitalboard::notice.index', compact('notices', 'type'));
 
     }
 

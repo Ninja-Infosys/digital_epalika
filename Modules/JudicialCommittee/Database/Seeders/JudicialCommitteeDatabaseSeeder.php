@@ -8,6 +8,8 @@ class JudicialCommitteeDatabaseSeeder extends Seeder
 {
     public function run()
     {
-
+        $this->call([
+            JudicialPermissionTableSeeder::class
+        ]);
     }
 }
