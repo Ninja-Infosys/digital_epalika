@@ -39,11 +39,11 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>नाम </th>
-                                <th>पद </th>
-                                <th>फोन </th>
-                                <th>रातो हस्ताक्षर  </th>
-                                <th>कालो हस्ताक्षर </th>
+                                <th>नाम</th>
+                                <th>पद</th>
+                                <th>फोन</th>
+                                <th>रातो हस्ताक्षर</th>
+                                <th>कालो हस्ताक्षर</th>
                                 <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
@@ -52,13 +52,16 @@
                             @forelse($administrationMembers as $administrationMember)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td><img src="{{$administrationMember->photo_url}}" height="40" width="40" class="me-2 rounded-circle"
+                                    <td><img src="{{$administrationMember->photo_url}}" height="40" width="40"
+                                             class="me-2 rounded-circle"
                                              alt="">
                                         {{$administrationMember->name}}</td>
                                     <td>{{$administrationMember->designation->title}}</td>
                                     <td>{{$administrationMember->phone}}</td>
-                                    <td><img src="{{$administrationMember->red_signature_url}}" width="60" height="60" alt=""></td>
-                                    <td><img src="{{$administrationMember->black_signature_url}}" width="60" height="60" alt=""></td>
+                                    <td><img src="{{$administrationMember->red_signature_url}}" width="60" height="60"
+                                             alt=""></td>
+                                    <td><img src="{{$administrationMember->black_signature_url}}" width="60" height="60"
+                                             alt=""></td>
                                     <td>
                                         <a href="{{route('admin.judicialCommittee.administrationMember.updateStatus',$administrationMember)}}">
                                             <i class="fa fa-2x {{$administrationMember->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>

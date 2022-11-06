@@ -43,6 +43,7 @@
                                 <th>पद</th>
                                 <th>सम्पर्क नं.</th>
                                 <th>ठेगाना</th>
+                                <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -60,6 +61,11 @@
                                         {{$judicialMember->localBody->local_body??''}} - {{$judicialMember->ward_no}}
                                         , {{$judicialMember->district->district??''}}
                                         , {{$judicialMember->province->province??''}}
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.judicialCommittee.judicialMember.updateStatus',$judicialMember)}}">
+                                            <i class="fa fa-2x {{$judicialMember->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
+                                        </a>
                                     </td>
                                     <td>
                                         @can('judicialMember_edit')
@@ -83,7 +89,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

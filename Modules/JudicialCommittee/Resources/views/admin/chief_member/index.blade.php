@@ -39,7 +39,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>नाम </th>
+                                <th>नाम</th>
                                 <th>फोन</th>
                                 <th>पद</th>
                                 <th>स्थिति</th>
@@ -50,7 +50,8 @@
                             @forelse($chiefJudicialMembers as $chiefJudicialMember)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td><img src="{{$chiefJudicialMember->photo_url}}" height="40" width="40" class="me-2 rounded-circle"
+                                    <td><img src="{{$chiefJudicialMember->photo_url}}" height="40" width="40"
+                                             class="me-2 rounded-circle"
                                              alt="">
                                         {{$chiefJudicialMember->name}}</td>
                                     <td>{{$chiefJudicialMember->phone}}</td>

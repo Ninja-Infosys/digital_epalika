@@ -23,21 +23,21 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">मुख्य न्यायिक सदस्य थप्नुहोस </h4>
-                        <a href="{{route('admin.judicialCommittee.chiefJudicialMember.index')}}"
+                        <h4 class="header-title">प्रशासन सदस्य थप्नुहोस </h4>
+                        <a href="{{route('admin.judicialCommittee.administrationMember.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> मुख्य न्यायिक सदस्य सूची
+                            <i class="fa fa-list"></i> प्रशासन सदस्य सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.judicialCommittee.chiefJudicialMember.store')}}" method="post">
+                    <form action="{{route('admin.judicialCommittee.administrationMember.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
-                                        <label for="name" class="form-label">मुख्य न्यायिक सदस्य नाम *</label>
+                                        <label for="name" class="form-label"> नाम *</label>
                                         <input
                                             type="text"
                                             name="name"
@@ -58,6 +58,32 @@
                                                id="photo"
                                                alt="hello"/>
                                         @error('photo')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <label for="red_signature" class="form-label">रातो हस्ताक्षर </label>
+                                        <input type="file"
+                                               name="red_signature"
+                                               class="form-control @error('red_signature') is-invalid @enderror"
+                                               id="red_signature"
+                                               alt=""
+                                        />
+                                        @error('red_signature')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <label for="black_signature" class="form-label">रातो हस्ताक्षर </label>
+                                        <input type="file"
+                                               name="black_signature"
+                                               class="form-control @error('black_signature') is-invalid @enderror"
+                                               id="black_signature"
+                                               alt=""
+                                        />
+                                        @error('black_signature')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
