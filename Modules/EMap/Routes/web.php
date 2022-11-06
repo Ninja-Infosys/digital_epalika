@@ -30,7 +30,7 @@ Route::prefix('organization')->as('organization.')->group(function () {
 Route::controller(FrontendController::class)->group(function () {
     Route::get('e-map', 'eMap')->name('e-map');
     Route::get('downloads', 'downloads');
-    Route::get('notice', 'notice');
+    Route::get('form', 'form');
 });
 
 

@@ -55,10 +55,10 @@
                         <div class="col-md-6 p-2">
                             <div class="card bg-primary text-light text-center">
                                 <div class="card-body">
-                                    <h5 class="fw-semibold mt-2">सूचना</h5>
+                                    <h5 class="fw-semibold mt-2">नक्सा दरखास्त फारम</h5>
                                     <i class="fa fa-file-invoice fs-5"></i>
-                                    <p>नयाँ सूचनाहरु हेर्नुहोस ।</p>
-                                    <a href="{{url('notice')}}" class="btn btn-light"><span>सूचनाहरु</span>
+                                    <p>नयाँ नक्सा दरखास्त फारम भर्नुहोस ।</p>
+                                    <a href="{{url('form')}}" class="btn btn-light"><span>नक्सा दरखास्त</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>
