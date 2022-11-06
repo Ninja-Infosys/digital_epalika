@@ -18,8 +18,8 @@ class BusinessRegistrationTemplateController extends Controller
             403,
             'तपाईंलाई अनुमति छैन'
         );
-//        $businessRegistrationTemplates
-        return view('businessregistration::admin.setting.template.index');
+        $businessRegistrationTemplates = BusinessRegistrationTemplate::latest()->get();
+        return view('businessregistration::admin.setting.template.index',compact('businessRegistrationTemplates'));
     }
 
     public function create()
@@ -37,6 +37,10 @@ class BusinessRegistrationTemplateController extends Controller
             403,
             'तपाईंलाई अनुमति छैन'
         );
+
+        BusinessRegistrationTemplate::create($request->validated());
+        toast('टेम्प्लेट सफलतापूर्वक थपियो','success');
+        return back();
     }
 
     public function show(BusinessRegistrationTemplate $businessRegistrationTemplate)
@@ -55,7 +59,7 @@ class BusinessRegistrationTemplateController extends Controller
             403,
             'तपाईंलाई अनुमति छैन'
         );
-        return view('businessregistration::edit');
+        return view('businessregistration::admin.setting.template.edit',compact('businessRegistrationTemplate'));
     }
 
     public function update(UpdateBusinessRegistrationTemplateRequest $request, BusinessRegistrationTemplate $businessRegistrationTemplate)
@@ -64,6 +68,10 @@ class BusinessRegistrationTemplateController extends Controller
             403,
             'तपाईंलाई अनुमति छैन'
         );
+
+        $businessRegistrationTemplate->update($request->validated());
+        toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो','success');
+        return redirect(route('admin.businessRegistration.setting.businessRegistrationTemplate.index'));
     }
 
     public function destroy(BusinessRegistrationTemplate $businessRegistrationTemplate)
@@ -72,5 +80,11 @@ class BusinessRegistrationTemplateController extends Controller
             403,
             'तपाईंलाई अनुमति छैन'
         );
+
+        $businessRegistrationTemplate->delete();
+        toast('टेम्प्लेट सफलतापूर्वक मेटियो','success');
+
+        return back();
+
     }
 }
