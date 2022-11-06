@@ -13,3 +13,15 @@
     border-radius: 50%;
     border: double 3px var(--primary);
 }
+/*--------JudicialComittee---------------*/
+.judicial_application{
+    border: dashed 2px #1a202c;
+}
+.application_header .application_logo_1>img{
+    object-fit: contain;
+    height: 5.5rem;
+    width: 5.5rem;
+}
+.application_policy>h5, h4{
+    line-height: 2rem;
+}
