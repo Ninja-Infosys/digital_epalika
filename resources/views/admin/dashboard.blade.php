@@ -249,4 +249,8 @@
             </div> <!-- end card-->
         </div> <!-- end col -->
     </div>
+    <div>
+        <input type="text" value="Hello World" id="copy">
+        <button onclick="myFunction()">Copy text</button>
+    </div>
 @endsection
