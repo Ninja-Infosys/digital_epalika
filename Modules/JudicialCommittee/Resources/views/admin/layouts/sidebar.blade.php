@@ -10,6 +10,18 @@
         <span>प्रमुख न्यायिक सदस्य</span>
     </a>
 </li>
+<li>
+    <a href="{{route('admin.grant.grantDetail.index')}}">
+        <i class="fa fa-user"></i>
+        <span>प्रशासन सदस्यहरू</span>
+    </a>
+</li>
+<li>
+    <a href="{{route('admin.grant.grantDetail.index')}}">
+        <i class="fa fa-user"></i>
+        <span>न्यायिक समिति विवरण </span>
+    </a>
+</li>
 <li class="{{request()->is('admin/grant/report/*') ? 'active' : ''}}">
     <a href="#sidebarGrantReport"
        {{request()->is('admin/circular/report/*') ? 'aria-expanded=true  ' : ''}}
