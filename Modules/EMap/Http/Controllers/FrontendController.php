@@ -20,9 +20,9 @@ class FrontendController extends Controller
     {
         return view('emap::frontend.e-map.e-help.e-help');
     }
-    public function notice()
+    public function form()
     {
-        return view('emap::frontend.e-map.notice.notice');
+        return view('emap::frontend.e-map.form.form');
     }
     public function register()
     {
