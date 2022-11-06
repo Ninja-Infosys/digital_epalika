@@ -2,6 +2,7 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
+use App\Models\Settings\Designation;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class JudicialMemberController extends Controller
 
         $judicialMembers=JudicialMember::with('designation')->orderBy('position')->get();
 
-        return view('judicialcommittee::admin.judicial_member.index');
+        return view('judicialcommittee::admin.judicial_member.index',compact('judicialMembers'));
     }
 
     public function create()
@@ -29,8 +30,9 @@ class JudicialMemberController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+        $designations=Designation::all();
 
-        return view('judicialcommittee::admin.judicial_member.create');
+        return view('judicialcommittee::admin.judicial_member.create',compact('designations'));
     }
 
     public function store(StoreJudicialMemberRequest $request)
