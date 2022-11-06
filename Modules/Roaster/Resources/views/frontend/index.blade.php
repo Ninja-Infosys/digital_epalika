@@ -11,74 +11,39 @@
                             <a class="ml-1 text-primary-500">तालिम</a>
                         </div>
                     </div>
-                    <h4>हालसालै प्रकसित भयका सूचनाहरु</h4>
-                    <p>तल दिएको सूचना पढनुहोस् र आफुले चाहेको सूचना डाउनलोड गर्नुहोस्। </p>
+                    <h4>हालसालै चलिरहेका तालिमहरु</h4>
                     <div class="shadow">
                         <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स.</th>
-                                <th>सूचना शीर्षक</th>
-                                <th>प्रकाशित मिति</th>
-                                <th>फाईल</th>
+                                <th>तालिमको नाम</th>
+                                <th>खुलेको मिति</th>
+                                <th>बन्द हुने मिति</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($trainings as $training)
                             <tr>
-                                <th>१</th>
-                                <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
-                                <td>२०७९/०२/११</td>
+                                <th>{{$loop->iteration}}</th>
+                                <td>{{$training->name}}</td>
+                                <td>{{$training->open_date}}</td>
+                                <td>{{$training->closed_date}}</td>
                                 <td>
+                                    @if($training->form_type === \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
                                     <div class="d-flex justify-content-between">
-                                        <a href=""><i class="fa fa-eye"></i></a>
-                                        <a href=""><i class="fa fa-download"></i></a>
+                                        <a href="{{route('roaster.technicalTraineeForm',$training)}}"><i class="fa fa-eye"></i></a>
                                     </div>
+                                    @else
+                                        <div class="d-flex justify-content-between">
+                                            <a href="{{route('roaster.traineeForm',$training)}}"><i class="fa fa-eye"></i></a>
+                                        </div>
+                                    @endif
+
                                 </td>
                             </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
-                                <td>२०७९/०२/११</td>
-                                <td>
-                                    <div class="d-flex justify-content-between">
-                                        <a href=""><i class="fa fa-eye"></i></a>
-                                        <a href=""><i class="fa fa-download"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
-                                <td>२०७९/०२/११</td>
-                                <td>
-                                    <div class="d-flex justify-content-between">
-                                        <a href=""><i class="fa fa-eye"></i></a>
-                                        <a href=""><i class="fa fa-download"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>4</th>
-                                <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
-                                <td>२०७९/०२/११</td>
-                                <td>
-                                    <div class="d-flex justify-content-between">
-                                        <a href=""><i class="fa fa-eye"></i></a>
-                                        <a href=""><i class="fa fa-download"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>5</th>
-                                <td>विपन्‍न बस्तीमा मुख्यमन्त्री कार्यक्रम सञ्‍चालन मापदण्ड, २०७८</td>
-                                <td>२०७९/०२/११</td>
-                                <td>
-                                    <div class="d-flex justify-content-between">
-                                        <a href=""><i class="fa fa-eye"></i></a>
-                                        <a href=""><i class="fa fa-download"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -91,7 +56,7 @@
                                     <h5 class="fw-semibold mt-2">तालिम आवेदन</h5>
                                     <i class="fa fa-file-invoice fs-5"></i>
                                     <p>नयाँ आवेदन को लागि आवेदन दिनुहोस ।</p>
-                                    <a href="{{route('application')}}" class="btn btn-light"><span>तालिम आवेदन</span>
+                                    <a href="{{route('roaster.application')}}" class="btn btn-light"><span>तालिम आवेदन</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>
@@ -116,7 +81,7 @@
                                     <h5 class="fw-semibold mt-2">प्रशिक्षक दर्ता फर्म</h5>
                                     <i class="fa fa-address-card fs-5"></i>
                                     <p>नयाँ प्रशिक्षकको लागि दर्ता गर्नुहोस् ।</p>
-                                    <a href="{{route('trainer-form')}}" class="btn btn-light"><span>प्रशिक्षक दर्ता फर्म</span>
+                                    <a href="{{route('roaster.trainer-form')}}" class="btn btn-light"><span>प्रशिक्षक दर्ता फर्म</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>

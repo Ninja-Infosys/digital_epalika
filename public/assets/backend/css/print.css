@@ -78,25 +78,28 @@
     .break-page {
         margin-top: 40px;
     }
+    h5{
+        margin-top: 3rem;
+    }
 
-    h6 {
+     h6 {
         margin-top: 1px;
     }
 
     .vertical {
         transform: rotate(90deg);
         transform-origin: left top 0;
-        margin-left: 30px;
-        padding: 0 120px;
+        margin: 70px 10px;
+        padding: 0 2px;
         color: black;
     }
     .fing {
-        margin-top: 15rem;
-        border: 1px solid #d0d0d0;
+        margin-top: 4rem;
+        border: 1px solid #000000;
     }
 
     .sign {
-        margin-top: 17rem;
+        margin-top: 5rem;
     }
     .person{
         margin-top: 12rem;
@@ -109,6 +112,24 @@
     .head{
         text-decoration: underline;
     }
-
+    .submit{
+        margin-top: 2rem;
+    }
+    .res{
+        margin: 50px 0px;
+    }
+    .letter{
+        margin-top: 8rem;
+    }
+    .signature{
+        margin-top: 17rem;
+    }
+    .finger{
+        margin-top: 14rem;
+        border: 1px solid #000000;
+    }
+    .detail{
+        margin-top: 3rem;
+    }
 }
 

@@ -25,29 +25,37 @@
             }
         </style>
     @endpush
-    <div class="">
-        <div class="page-title d-flex justify-content-between">
-            <h5>कृषक विवरण</h5>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{route('admin.dashboard')}}">
-                            ड्यासबोर्ड
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        कृषक विवरण अपडेट गर्नुहोस
-                    </li>
-                </ol>
-            </nav>
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{route('admin.roaster.dashboard')}}">
+                                    <i class="fa fa-home"></i> गृहपृष्ठ
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{{route('admin.roaster.training.index')}}">तालिम</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                तालिम विवरण
+                            </li>
+                            <li class="breadcrumb-item">
+                                प्रशिक्षार्थीहरू सम्पादन
+                            </li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">प्रशिक्षार्थीहरू सम्पादन</h4>
+                </div>
+            </div>
         </div>
         <div class="card mb-3">
             <div class="card-header d-flex justify-content-between">
-                <h6>कृषक विवरण</h6>
+                <h4>प्रशिक्षार्थीहरू विवरण</h4>
             </div>
             @livewire('roaster::trainee-livewire',['trainee'=>$trainee])
 
         </div>
 
-    </div>
 @endsection

@@ -61,7 +61,7 @@
         @endforeach
 
     </table>
-@elseif($training->form_type==='technicalTrainee')
+@elseif($training->form_type=== \Modules\Roaster\Enums\TrainingTypeEnum::TECHNICAL_TRAINEE)
     <table>
         <tr>
             <td>क्र.सं.</td>

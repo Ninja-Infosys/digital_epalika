@@ -1,4 +1,4 @@
-<div class="bg-light p-2 mt-3">
+<div class=" p-2 mt-3">
     <form wire:submit.prevent="save">
         <fieldset class="border p-2">
             <legend class="float-none w-auto">१. व्यक्तिगत विवरण</legend>
@@ -265,7 +265,6 @@
                                 <button class="btn btn-primary btn-sm" wire:click.prevent="documentsArrayIncrement">
                                     <i class="fa fa-plus-square"></i>
                                 </button>
-
                                 थिच्नुहोस
                             </td>
                         </tr>
@@ -279,8 +278,8 @@
                 @enderror
             </div>
         </fieldset>
-        <div class="col-12 mt-5">
-            <button type="submit" class="btn btn-primary">Save</button>
+        <div class="col-12 d-flex pb-2 justify-content-around">
+            <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
         </div>
     </form>
 </div>

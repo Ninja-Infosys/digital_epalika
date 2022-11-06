@@ -9,6 +9,12 @@ use Modules\Roaster\Entities\Training;
 
 class FrontendController extends Controller
 {
+    public function index()
+    {
+        $trainings = Training::whereNull('closed_at')->get();
+        return view('roaster::frontend.index',compact('trainings'));
+    }
+
     public function trainerForm()
     {
         return view('roaster::frontend.trainer-form');

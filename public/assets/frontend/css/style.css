@@ -1036,7 +1036,12 @@ h6,
     width: 300%;
     height: 100%;
 }
-
-
+/*roaster*/
+.trainerUser>img{
+    object-fit: cover;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
 
 

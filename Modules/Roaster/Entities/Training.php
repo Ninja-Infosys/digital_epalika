@@ -21,7 +21,9 @@ class Training extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'open_date',
+        'closed_date',
     ];
 
     protected $fillable = [

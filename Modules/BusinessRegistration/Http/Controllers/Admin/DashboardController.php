@@ -3,6 +3,7 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Traits\SamayaSms;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
@@ -19,11 +20,7 @@ class DashboardController extends Controller
 
         $businessPurposesChartData = $this->getTotalBusinessPurposesData();
 
-        return view('businessregistration::admin.dashboard', compact('totalBusinessCount',
-            'totalBusinessDetailPurposeCount',
-            'totalObjectTransactionCategoryCount',
-            'totalInvestmentRevenueCount',
-        'businessPurposesChartData'));
+        return view('businessregistration::admin.dashboard', compact('totalBusinessCount', 'totalBusinessDetailPurposeCount', 'totalObjectTransactionCategoryCount', 'totalInvestmentRevenueCount', 'businessPurposesChartData'));
     }
 
     public function getTotalBusinessPurposesData(): array
