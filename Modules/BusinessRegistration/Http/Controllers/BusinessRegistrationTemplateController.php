@@ -38,8 +38,16 @@ class BusinessRegistrationTemplateController extends Controller
             'तपाईंलाई अनुमति छैन'
         );
 
-        BusinessRegistrationTemplate::create($request->validated());
-        toast('टेम्प्लेट सफलतापूर्वक थपियो','success');
+        $businessRegistrationTemplate = BusinessRegistrationTemplate::where('for',$request->input('for'))->first();
+        if(empty($businessRegistrationTemplate))
+        {
+            BusinessRegistrationTemplate::create($request->validated());
+            toast('टेम्प्लेट सफलतापूर्वक थपियो','success');
+        }
+        else{
+            toast('टेम्प्लेट पहिले नै उपलब्ध छ','warning');
+        }
+
         return back();
     }
 
@@ -83,7 +91,6 @@ class BusinessRegistrationTemplateController extends Controller
 
         $businessRegistrationTemplate->delete();
         toast('टेम्प्लेट सफलतापूर्वक मेटियो','success');
-
         return back();
 
     }

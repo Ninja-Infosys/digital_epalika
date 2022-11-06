@@ -6,16 +6,17 @@ use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\BusinessRegistration\Traits\ProprietorTemplateTrait;
 
 class ProprietorDetail extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, ProprietorTemplateTrait;
 
     protected $dates = [
         'created_at',
@@ -44,9 +45,9 @@ class ProprietorDetail extends Model
         'occupation',
     ];
 
-    protected $casts =[
-        'gender'=>Gender::class
-        ];
+    protected $casts = [
+        'gender' => Gender::class
+    ];
 
     public function province(): BelongsTo
     {
@@ -54,6 +55,11 @@ class ProprietorDetail extends Model
     }
 
     public function district(): BelongsTo
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function issueDistrict(): BelongsTo
     {
         return $this->belongsTo(District::class);
     }
@@ -83,4 +89,6 @@ class ProprietorDetail extends Model
     {
         return $this->hasOne(Introboard::class);
     }
+
+
 }

@@ -11,10 +11,8 @@ CKEDITOR.ClassicEditor.create( document.querySelector( '.ckEditor' ),{
             '-',
             'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
             'alignment', '|',
-            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-            'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-            'textPartLanguage', '|',
-            'sourceEditing'
+            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', '|',
+            'specialCharacters', 'horizontalLine', 'pageBreak',
         ],
         shouldNotGroupWhenFull: true
     },
