@@ -85,7 +85,7 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label for="data" class="form-label">डाटा *</label>
-                                    <textarea name="data" id="data" cols="30" rows="10" class="form-control">{{old('data',$businessRegistrationTemplate->data)}}</textarea>
+                                    <textarea name="data" id="data" cols="30" rows="10" class="form-control ckEditor">{{old('data',$businessRegistrationTemplate->data)}}</textarea>
                                 </div>
                             </div>
                         </fieldset>
@@ -97,5 +97,15 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/ckEditor.min.js')}}"></script>
+        <script src="{{asset('assets/backend/js/ckEditor.js')}}"></script>
+        <script>
+            function copyText(text) {
+                navigator.clipboard.writeText(text);
+            }
+        </script>
+    @endpush
 @endsection
 
