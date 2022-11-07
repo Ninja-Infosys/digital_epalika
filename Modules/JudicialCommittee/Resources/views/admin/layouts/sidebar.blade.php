@@ -28,12 +28,14 @@
     </a>
 </li>
 @endcan
+@can('complaintApplication_access')
 <li>
-    <a href="{{route('admin.judicialCommittee.applicationForm')}}">
+    <a href="{{route('admin.judicialCommittee.complaintApplication.index')}}">
         <i class="fa fa-user"></i>
         <span>निबेदन फारम</span>
     </a>
 </li>
+@endcan
 <li>
     <a href="{{route('admin.judicialCommittee.nissaForm')}}">
         <i class="fa fa-user"></i>
