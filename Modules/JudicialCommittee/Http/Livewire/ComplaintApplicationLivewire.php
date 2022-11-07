@@ -44,6 +44,17 @@ class ComplaintApplicationLivewire extends Component
         $this->provinces = Province::all();
     }
 
+    protected function getListeners(): array
+    {
+        return ['postAdded' => 'incrementPostCount'];
+    }
+
+    public function incrementPostCount($nepaliDate, $englishDate)
+    {
+        $this->form['date'] = $nepaliDate;
+        $this->form['en_date'] = $englishDate;
+    }
+
     protected array $rules = [
         'form.complainant_province_id' => ['required', 'exists:provinces,id'],
         'form.complainant_district_id' => ['required', 'exists:districts,id'],

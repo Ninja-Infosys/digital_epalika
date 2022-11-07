@@ -60,16 +60,6 @@
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        <form action="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.destroy',$businessRegistrationTemplate)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            @can('businessRegistrationTemplate_delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            @endcan
-                                        </form>
                                     </td>
                                 </tr>
                             @empty
