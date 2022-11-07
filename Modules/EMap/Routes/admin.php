@@ -43,7 +43,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('heir','heirView')->name('heir');
         Route::get('building-construction-completion-certificate','buildingConstructionCompletionCertificate')->name('building-construction-completion-certificate');
         Route::prefix('upload')->as('upload.')->group(function (){
-            Route::post('notice','notice')->name('notice');
+            Route::post('form','form')->name('form');
             Route::post('registration','registration')->name('registration');
             Route::post('application','application')->name('application');
             Route::post('bond','bond')->name('bond');
@@ -71,14 +71,4 @@ Route::prefix('files')->as('files.')->group(function (){
     Route::view('file', 'emap::admin.file.file')->name('file');
 });
 
-Route::view('darta', 'emap::admin.darta_fee.darta')->name('darta');
-Route::view('structure', 'emap::admin.tipani.structure');
-Route::view('estd', 'emap::admin.tipani.estd');
-Route::view('second', 'emap::admin.tipani.second');
-Route::view('secondphase', 'emap::admin.tipani.secondphase');
-Route::view('parmana', 'emap::admin.certificate.parmana');
-Route::view('detail', 'emap::admin.certificate.detail');
-Route::view('bloodrelation', 'emap::admin.certificate.bloodrelation');
-Route::view('manjuri', 'emap::admin.certificate.manjuri');
-Route::view('supervisor', 'emap::admin.notice.supervisor');
-Route::view('PlinthLevelSupervisorReport', 'emap::admin.notice.PlinthLevelSupervisorReport');
+Route::view('nbc', 'emap::admin.nbc.nbc')->name('nbc');

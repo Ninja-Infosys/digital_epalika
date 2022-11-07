@@ -29,13 +29,15 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">न्यायिक समिति विवरण थप्नुहोस्</h4>
-                        <a href="{{route('admin.judicialCommittee.judicialMember.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.judicialCommittee.judicialMember.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> न्यायिक समिति विवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.judicialCommittee.judicialMember.store')}}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('admin.judicialCommittee.judicialMember.store')}}"
+                          enctype="multipart/form-data" method="post">
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
@@ -101,7 +103,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="gender" class="form-label">लिङ्ग  *</label>
+                                    <label for="gender" class="form-label">लिङ्ग *</label>
                                     <select
                                         name="gender"
                                         class="form-control @error('gender') is-invalid @enderror"

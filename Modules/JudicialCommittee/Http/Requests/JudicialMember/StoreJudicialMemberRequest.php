@@ -36,4 +36,23 @@ class StoreJudicialMemberRequest extends FormRequest
             'status' => ['nullable', 'boolean']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'नाम आवश्यक छ',
+            'designation_id.required' => 'पद आवश्यक छ',
+            'phone.required' => 'फोन आवश्यक छ',
+            'province_id.required' => 'प्रदेश आवश्यक छ',
+            'district_id.required' => 'जिल्ला आवश्यक छ',
+            'local_body_id.required' => 'स्थानीय निकाय आवश्यक छ',
+            'ward_no.required' => 'वार्ड नं आवश्यक छ',
+            'gender.required' => 'लिङ्ग आवश्यक छ',
+            'dob.required' => 'जन्म मिति आवश्यक छ',
+            'en_dob.required' => 'जन्म मिति आवश्यक छ',
+            'father_name.required' => 'बुबाको नाम आवश्यक छ',
+            'mother_name.required' => 'आमाको नाम आवश्यक छ',
+            'grandfather_name.required' => 'हजुरबुबाको नाम आवश्यक छ',
+        ];
+    }
 }

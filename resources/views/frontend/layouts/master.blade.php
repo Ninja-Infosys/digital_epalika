@@ -8,6 +8,7 @@
     <title>Digital e-Palika</title>
     <link rel="stylesheet" href="{{asset('assets/frontend/css/style.css')}}"/>
     <link href="{{asset('assets/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/fontawesome/all.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/frontend/css/sweetalert2.min.css')}}">
     @stack('styles')
@@ -34,6 +35,7 @@
 <script src="{{asset('assets/frontend/js/fontawesome/all.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/sweetalert2.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/jquery-3.2.1.slim.min.js')}}"></script>
+<script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 
 @livewireScripts
 

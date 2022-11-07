@@ -7,6 +7,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Modules\JudicialCommittee\Entities\AdministrationMember;
 use Modules\JudicialCommittee\Entities\JudicialMember;
 use Modules\JudicialCommittee\Http\Requests\JudicialMember\StoreJudicialMemberRequest;
 use Modules\JudicialCommittee\Http\Requests\JudicialMember\UpdateJudicialMemberRequest;
@@ -100,6 +101,21 @@ class JudicialMemberController extends Controller
         $judicialMember->delete();
 
         toast('न्यायिक समितिको विवरण सफलतापूर्वक मेटाइयो','success');
+        return back();
+    }
+
+    public function updateStatus(JudicialMember $judicialMember)
+    {
+        abort_if(Gate::denies('judicialMember_edit'),
+            403,
+            'you are not able to edit this resource'
+        );
+
+        $judicialMember->update([
+            'is_active' => !$judicialMember->is_active
+        ]);
+
+        toast('न्यायिक सदस्य स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 }

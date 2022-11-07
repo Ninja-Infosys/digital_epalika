@@ -286,7 +286,7 @@
                                         <div class="card-header">कम्पनी दर्ताको प्रमाणपत्र</div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$organization->organizationDetail->org_registration_document_url}}"
+                                                src="{{$organization->organizationDetail->org_registration_document_url ?? ''}}"
                                                 alt="" style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
@@ -295,7 +295,7 @@
                                     <div class="card">
                                         <div class="card-header">कम्पनी PANको प्रमाणपत्र</div>
                                         <div class="card-body">
-                                            <img src="{{$organization->organizationDetail->org_pan_document_url}}"
+                                            <img src="{{$organization->organizationDetail->org_pan_document_url ?? ''}}"
                                                  alt="" style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
@@ -304,7 +304,7 @@
                                     <div class="card">
                                         <div class="card-header">लोगो</div>
                                         <div class="card-body">
-                                            <img src="{{$organization->organizationDetail->logo_url}}" alt=""
+                                            <img src="{{$organization->organizationDetail->logo_url ?? ''}}" alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
@@ -321,7 +321,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($organization->organizationDetail->taxClearances as $taxClearance)
+                                        @foreach($organization->organizationDetail->taxClearances ?? collect() as $taxClearance)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$taxClearance->year ?? ''}}</td>

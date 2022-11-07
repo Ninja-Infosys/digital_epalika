@@ -83,6 +83,28 @@
                                     @enderror
                                 </div>
 
+                                <div class="row">
+
+                                    @foreach( (new Modules\BusinessRegistration\Entities\ProprietorDetail)->getTemplateOptions() as $template)
+                                        <div class="col-md-12">
+                                            <h6>{{$template['title'] ?? ''}}</h6>
+                                        </div>
+                                        <div class="col-md-12">
+
+                                            <div class="row">
+                                                @forelse($template['data'] as $key=>$templateValue)
+                                                    <button class="col-md-2 btn btn-primary btn-sm m-1" type="button"
+                                                            onclick="copyText('{{$templateValue}}')">{{$key}}</button>
+                                                @empty
+                                                    <button class="col-md-2 btn btn-primary btn-sm m-1" type="button">दाटा छैन</button>
+                                                @endforelse
+
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+
                                 <div class="col-md-12 mb-2">
                                     <label for="data" class="form-label">डाटा *</label>
                                     <textarea name="data" id="data" cols="30" rows="10" class="form-control ckEditor">{{old('data',$businessRegistrationTemplate->data)}}</textarea>

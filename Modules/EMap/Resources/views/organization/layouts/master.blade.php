@@ -17,6 +17,7 @@
 
 
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/vendors/font_awesome/css/all.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/metisMenu.css')}}">
 
@@ -59,6 +60,8 @@
 <script src="{{asset('assets/backend/emap/admin/js/custom.js')}}"></script>
 
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
+
+<script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 
 <script>
     $('.show_confirm').click(function (event) {

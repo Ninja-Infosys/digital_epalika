@@ -29,13 +29,15 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">न्यायिक समिति सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.judicialCommittee.judicialMember.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.judicialCommittee.judicialMember.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> न्यायिक समिति विवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.judicialCommittee.judicialMember.update',$judicialMember)}}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('admin.judicialCommittee.judicialMember.update',$judicialMember)}}"
+                          enctype="multipart/form-data" method="post">
                         @csrf
                         @method('put')
                         <fieldset class="border p-2 mb-2">
@@ -65,8 +67,9 @@
                                         id="designation_id" data-toggle="select2" data-width="100%">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($designations as $designation)
-                                            <option {{$designation->id==old('designation_id',$judicialMember->designation_id) ? 'selected' : ''}}
-                                                    value="{{$designation->id}}">
+                                            <option
+                                                {{$designation->id==old('designation_id',$judicialMember->designation_id) ? 'selected' : ''}}
+                                                value="{{$designation->id}}">
                                                 {{$designation->title}}
                                             </option>
                                         @endforeach
@@ -105,15 +108,16 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="gender" class="form-label">लिङ्ग  *</label>
+                                    <label for="gender" class="form-label">लिङ्ग *</label>
                                     <select
                                         name="gender"
                                         class="form-control @error('gender') is-invalid @enderror"
                                         id="gender" data-toggle="select2" data-width="100%">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach(\App\Enums\Gender::cases() as $gender)
-                                            <option {{$gender->value==old('gender',$judicialMember->gender->value) ? 'selected' : ''}}
-                                                    value="{{$gender->value}}">
+                                            <option
+                                                {{$gender->value==old('gender',$judicialMember->gender->value) ? 'selected' : ''}}
+                                                value="{{$gender->value}}">
                                                 {{$gender->label()}}
                                             </option>
                                         @endforeach
@@ -130,8 +134,9 @@
                                         id="blood_group" data-toggle="select2" data-width="100%">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach(config('defaults.blood_groups') as $blood_group)
-                                            <option {{$blood_group==old('blood_group',$judicialMember->blood_group) ? 'selected' : ''}}
-                                                    value="{{$blood_group}}">
+                                            <option
+                                                {{$blood_group==old('blood_group',$judicialMember->blood_group) ? 'selected' : ''}}
+                                                value="{{$blood_group}}">
                                                 {{$blood_group}}
                                             </option>
                                         @endforeach
