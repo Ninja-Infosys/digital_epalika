@@ -72,3 +72,4 @@ Route::prefix('files')->as('files.')->group(function (){
 });
 
 Route::view('nbc', 'emap::admin.nbc.nbc')->name('nbc');
+Route::view('type', 'emap::admin.static.type')->name('type');
