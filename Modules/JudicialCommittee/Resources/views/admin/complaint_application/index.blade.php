@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">मुख्य न्यायिक सदस्य</li>
+                        <li class="breadcrumb-item active">निवेदन फारम</li>
                     </ol>
                 </div>
-                <h4 class="page-title">मुख्य न्यायिक सदस्य</h4>
+                <h4 class="page-title">निवेदन फारम</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">मुख्य न्यायिक सदस्य सूची</h4>
+                        <h4 class="header-title">उजुरी फारम सूची</h4>
                         @can('complaintApplication_create')
                             <a href="{{route('admin.judicialCommittee.complaintApplication.create')}}"
                                class="btn btn-sm btn-outline-primary">

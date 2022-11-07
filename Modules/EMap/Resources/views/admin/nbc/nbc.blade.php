@@ -139,8 +139,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>3.2 Min. opening area of natural ventilator for lighting largest habitable room from
-                                    external wall
+                                <td>3.2 Min. opening area of natural ventilator for lighting largest habitable room from external wall
                                 </td>
                                 <td class="text-end">sq.m.</td>
                                 <td></td>
@@ -178,8 +177,7 @@
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>5.1 Is there a provision of separate entrance for disabled people next to the
-                                    primary entrance of a building
+                                <td>5.1 Is there a provision of separate entrance for disabled people next to the primary entrance of a building
                                 </td>
                                 <td class="text-end">Yes/No</td>
                                 <td></td>
@@ -217,11 +215,11 @@
                             <span>House Owner Name :<span class="underline-dotted custom-width"></span><span
                                     class="underline-dotted custom-width"></span></span><br>
                             <span>Note : If some section are not applicable write NA in the remarks</span>
-                            <table class="table-xs table-bordered" style="width: 100%">
+                            <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th class="text-center" scope="col">A</th>
-                                    <th scope="col">General Information</th>
+                                    <th class="text-center">A</th>
+                                    <th colspan="4">General Information</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -311,76 +309,13 @@
                                         <label class="form-check-label" for="inlineRadio4">D</label>&emsp;
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <th class="text-center">A.3</th>
-                                    <td>
-                                        <table class="table-xs table-bordered" style="width: 100%">
-                                            <tr>
-                                                <th width="200">Designed By</th>
-                                                <td>Name</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Architecture</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Structure</td>
-                                                <td></td>
-                                            </tr>
-                                                <tr>
-                                                    <td>Sanitary</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Electrical</td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Soil Test</td>
-                                                    <td></td>
-                                                </tr>
-
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center">A.4</th>
-                                    <th>Geometrical structure</th>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <td>
-                                        <table class="table-xs table-bordered" style="width: 100%">
-                                            <tr>
-                                                <td width="500">Architecture</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Structure</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sanitary</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Electrical</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Soil Test</td>
-                                                <td></td>
-                                            </tr>
-
-                                            </tr>
-                                        </table>
-                                    </td>
+                                    <th rowspan="1">Designed By</th>
+                                    <th width="600" rowspan="3">Name</th>
                                 </tr>
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>

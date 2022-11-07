@@ -4,6 +4,7 @@ namespace Modules\JudicialCommittee\Http\Livewire;
 
 use App\Models\Address\Province;
 use Livewire\Component;
+use Modules\JudicialCommittee\Entities\ComplaintApplication;
 
 class ComplaintApplicationLivewire extends Component
 {
@@ -43,8 +44,63 @@ class ComplaintApplicationLivewire extends Component
         $this->provinces = Province::all();
     }
 
+    protected array $rules = [
+        'form.complainant_province_id' => ['required', 'exists:provinces,id'],
+        'form.complainant_district_id' => ['required', 'exists:districts,id'],
+        'form.complainant_local_body_id' => ['required', 'exists:local_bodies,id'],
+        'form.complainant_ward_no' => ['required', 'integer'],
+        'form.complainant_tole' => ['nullable'],
+        'form.complainant_guardian_name' => ['required', 'string', 'max:255'],
+        'form.complainant_relationship' => ['required'],
+        'form.complainant_age' => ['required', 'integer'],
+        'form.complainant_name' => ['required', 'string', 'max:255'],
+        'form.defendant_province_id' => ['required', 'exists:provinces,id'],
+        'form.defendant_district_id' => ['required', 'exists:districts,id'],
+        'form.defendant_local_body_id' => ['required', 'exists:local_bodies,id'],
+        'form.defendant_ward_no' => ['required', 'integer'],
+        'form.defendant_tole' => ['nullable'],
+        'form.defendant_guardian_name' => ['required', 'string', 'max:255'],
+        'form.defendant_relationship' => ['required'],
+        'form.defendant_age' => ['required', 'integer'],
+        'form.defendant_name' => ['required', 'string', 'max:255'],
+        'form.subject' => ['required', 'string', 'max:255'],
+        'form.complaint_detail' => ['required'],
+        'form.date' => ['required'],
+        'form.en_date' => ['required'],
+        'form.applicant_name' => ['required', 'string', 'max:255'],
+        'form.applicant_phone' => ['required'],
+        'form.applicant_address' => ['nullable'],
+        'form.applicant_signature' => ['required', 'image']
+    ];
+
+    public function updated($propertyName): void
+    {
+        $this->validateOnly($propertyName);
+    }
+
+    public function submitFormData()
+    {
+        dd($this->validate());
+        //ComplaintApplication::create($this->validate()['form']);
+
+        $this->reset('form', 'districts', 'localBodies');
+
+        $this->dispatchBrowserEvent('alert_message', [
+            'type' => "success",
+            'title' => "धन्यबाद",
+            'text' => "उजुरी पत्र सफलतापूर्वक थपियो",
+        ]);
+    }
+
     public function render()
     {
         return view('judicialcommittee::livewire.complaint-application-livewire');
+    }
+
+    public function messages(): array
+    {
+        return [
+            'form.complainant_province_id' => 'उजुरीकर्ताको प्रदेश अनिवार्य छ'
+        ];
     }
 }
