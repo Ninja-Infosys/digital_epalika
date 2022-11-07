@@ -5,12 +5,14 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\TaskManagement\Entities\DailyTask;
 
 class DailyTaskController extends Controller
 {
     public function index()
     {
-        return view('taskmanagement::admin.daily_task.index');
+        $dailyTasks = DailyTask::with('taskDivision')->get();
+        return view('taskmanagement::admin.daily_task.index', compact('dailyTasks'));
     }
 
     public function create()
@@ -28,9 +30,9 @@ class DailyTaskController extends Controller
         return view('taskmanagement::show');
     }
 
-    public function edit($id)
+    public function edit(DailyTask $dailyTask)
     {
-        return view('taskmanagement::edit');
+        return view('taskmanagement::admin.daily_task.edit', compact('dailyTask'));
     }
 
     public function update(Request $request, $id)
@@ -38,8 +40,11 @@ class DailyTaskController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(DailyTask $dailyTask)
     {
-        //
+        $dailyTask->delete();
+
+        toast('दैनिक कार्य सफलतापूर्वक मेटाइयो','success');
+        return back();
     }
 }
