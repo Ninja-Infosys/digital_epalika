@@ -6,16 +6,16 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TaskController extends Controller
+class DailyTaskController extends Controller
 {
     public function index()
     {
-        return view('taskmanagement::admin.task.index');
+        return view('taskmanagement::admin.daily_task.index');
     }
 
     public function create()
     {
-        return view('taskmanagement::admin.task.create');
+        return view('taskmanagement::admin.daily_task.create');
     }
 
     public function store(Request $request)

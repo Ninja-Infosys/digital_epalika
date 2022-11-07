@@ -23,7 +23,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">दैनिक कार्य थप्नुहोस्</h4>
-                        <a href="{{route('admin.taskManagement.task.index')}}"
+                        <a href="{{route('admin.taskManagement.dailyTask.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> विवरण हेर्नुहोस्
                         </a>
@@ -41,19 +41,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="title" class="form-label">शीर्षक *</label>
-                                <input type="text" id="title" class="form-control" placeholder="शीर्षक">
-                                @error('title')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
                                 <label for="branch_id" class="form-label">शाखा *</label>
                                 <select
                                     name="branch_id"
                                     class="form-select @error('branch_id') is-invalid @enderror"
                                     id="branch_id">
-                                    <option value="">छान्नुहोस्</option>
+                                    <option value="">--- छान्नुहोस् ---</option>
                                     <option value="1">Test</option>
                                 </select>
                                 @error('branch_id')
@@ -61,12 +54,12 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="branch_id" class="form-label">वर्ग *</label>
+                                <label for="branch_id" class="form-label">शाखाहरु अनुसार कार्यहरू  *</label>
                                 <select
                                     name="branch_id"
                                     class="form-select @error('branch_id') is-invalid @enderror"
                                     id="branch_id">
-                                    <option value="">छान्नुहोस्</option>
+                                    <option value="">--- छान्नुहोस् ---</option>
                                     <option value="1">Test</option>
                                 </select>
                                 @error('branch_id')
@@ -74,9 +67,15 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="service_name" class="form-label">कैफियत *</label>
-                                <textarea class="form-control" id="example-textarea" rows="5"></textarea>
-                                @error('service_name')
+                                <label for="branch_id" class="form-label">कार्य विभाजन  *</label>
+                                <select
+                                    name="branch_id"
+                                    class="form-select @error('branch_id') is-invalid @enderror"
+                                    id="branch_id">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    <option value="1">Test</option>
+                                </select>
+                                @error('branch_id')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -84,6 +83,13 @@
                                 <label for="files" class="form-label">कागजातहरू</label>
                                 <input type="file" id="files" class="form-control">
                                 @error('files')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="service_name" class="form-label">कैफियत *</label>
+                                <textarea class="form-control" id="example-textarea" rows="5"></textarea>
+                                @error('service_name')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

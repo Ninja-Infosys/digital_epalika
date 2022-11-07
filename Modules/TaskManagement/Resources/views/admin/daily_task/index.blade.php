@@ -23,7 +23,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">दैनिक कार्य</h4>
-                            <a href="{{route('admin.taskManagement.task.create')}}"
+                            <a href="{{route('admin.taskManagement.dailyTask.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
