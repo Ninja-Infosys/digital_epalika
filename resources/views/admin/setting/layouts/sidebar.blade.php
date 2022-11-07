@@ -86,6 +86,15 @@
     </div>
 </li>
 
+@can('branch_access')
+    <li class="{{request()->is('admin/setting/branch*') ? 'active' : ''}}">
+        <a href="{{route('admin.branch.index')}}">
+            <i class="fa fa-code-branch"></i>
+            <span> शाखा </span>
+        </a>
+    </li>
+@endcan
+
 <li class="{{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'active' : ''}}">
     <a href="#designationDepartment"
        {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'aria-expanded=true' : ''}}

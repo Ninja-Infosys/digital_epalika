@@ -100,10 +100,10 @@ class ChiefJudicialMemberController extends Controller
         );
 
         $chiefJudicialMember->update([
-            'is_active' => !$chiefJudicialMember->is_active
+            'status' => !$chiefJudicialMember->status
         ]);
 
-        toast('प्रयोगकर्ता स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('मुख्य न्यायिक सदस्य स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
     }
 }

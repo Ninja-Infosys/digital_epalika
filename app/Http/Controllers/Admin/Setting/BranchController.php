@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\HelpDesk\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Setting\Branch\StoreBranchRequest;
+use App\Http\Requests\Setting\Branch\UpdateBranchRequest;
+use App\Models\Settings\Branch;
 use Illuminate\Support\Facades\Gate;
-use Modules\HelpDesk\Entities\Branch;
-use Modules\HelpDesk\Http\Requests\Branch\StoreBranchRequest;
-use Modules\HelpDesk\Http\Requests\Branch\UpdateBranchRequest;
 
 class BranchController extends Controller
 {
@@ -19,7 +19,7 @@ class BranchController extends Controller
 
         $branches = Branch::with('branches.branch')->whereNull('branch_id')->orderBy('branch_id')->get();
 
-        return view('helpdesk::admin.branch.index', compact('branches'));
+        return view('admin.setting.branch.index', compact('branches'));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class BranchController extends Controller
 
         $mainBranches = Branch::whereNull('branch_id')->get();
 
-        return view('helpdesk::admin.branch.create', compact('mainBranches'));
+        return view('admin.setting.branch.create', compact('mainBranches'));
     }
 
     public function store(StoreBranchRequest $request)
@@ -46,16 +46,6 @@ class BranchController extends Controller
         return back();
     }
 
-    public function show(Branch $branch)
-    {
-        abort_if(Gate::denies('branch_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
-
-        return view('helpdesk::admin.branch.show');
-    }
-
     public function edit(Branch $branch)
     {
         abort_if(Gate::denies('branch_edit'),
@@ -64,7 +54,7 @@ class BranchController extends Controller
         );
         $mainBranches = Branch::whereNull('branch_id')->get();
 
-        return view('helpdesk::admin.branch.edit', compact('branch', 'mainBranches'));
+        return view('admin.setting.branch.edit', compact('branch', 'mainBranches'));
     }
 
     public function update(UpdateBranchRequest $request, Branch $branch)
@@ -78,7 +68,7 @@ class BranchController extends Controller
 
         toast('शाखा सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.helpDesk.branch.index'));
+        return redirect(route('admin.branch.index'));
     }
 
     public function destroy(Branch $branch)

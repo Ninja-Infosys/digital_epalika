@@ -103,8 +103,8 @@
                                                             <tr>
                                                                 <th>साझेदार सँगको नाता</th>
                                                                 <th>साझेदार को नाम थर</th>
-                                                                <th>नागरिकता न</th>
-                                                                <th>सम्पर्क न</th>
+                                                                <th>नागरिकता नं</th>
+                                                                <th>सम्पर्क नं</th>
                                                                 <th>
                                                                     <button type="button"
                                                                             wire:click.prevent="partnerDetailIncrement"
@@ -138,7 +138,7 @@
                                                                     </td>
 
                                                                     <td>
-                                                                        <input type="text" placeholder="नागरिकता न"
+                                                                        <input type="text" placeholder="नागरिकता नं"
                                                                                wire:model="form.partnerDetails.{{$index}}.citizenship_no"
                                                                                class="form-control @error('form.partnerDetails.'.$index.'.citizenship_no') is-invalid @enderror">
                                                                         @error('form.partnerDetails.'.$index.'.citizenship_no')
@@ -146,7 +146,7 @@
                                                                         @enderror
                                                                     </td>
                                                                     <td>
-                                                                        <input type="text" placeholder="सम्पर्क न"
+                                                                        <input type="text" placeholder="सम्पर्क नं"
                                                                                wire:model="form.partnerDetails.{{$index}}.mobile_no"
                                                                                class="form-control @error('form.partnerDetails.'.$index.'.mobile_no') is-invalid @enderror">
                                                                         @error('form.partnerDetails.'.$index.'.mobile_no')
@@ -370,13 +370,13 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="form.house_owner_phone" class="form-label">घर धनिको मोबाइल
-                                                न </label>
+                                                नं </label>
                                             <input
                                                 name="form.house_owner_phone"
                                                 class="form-control @error('form.house_owner_phone') is-invalid @enderror"
                                                 type="text"
                                                 id="form.house_owner_phone"
-                                                placeholder="घर धनिको मोबाइल न"
+                                                placeholder="घर धनिको मोबाइल नं"
                                                 wire:model="form.house_owner_phone"
                                             />
                                             @error('form.house_owner_phone')
@@ -832,16 +832,7 @@
                                         <th>लिङ्ग</th>
                                         <td>
 
-                                            @switch($form['gender'])
-                                                @case('Male')
-                                                    पुरुष
-                                                    @break
-                                                @case('Female')
-                                                    महिला
-                                                    @break
-                                                @default
-                                                    अन्य
-                                            @endswitch
+                                            {{!empty($form['gender']) ? \App\Enums\Gender::tryFrom($form['gender'])->label() :''}}
                                         </td>
                                     </tr>
 
@@ -928,8 +919,8 @@
                                         <th>नाता</th>
                                         <th> नाम, थर</th>
                                         <th>नाम, थर(English)</th>
-                                        <th>नागरिकता न</th>
-                                        <th>सम्पर्क न</th>
+                                        <th>नागरिकता नं</th>
+                                        <th>सम्पर्क नं</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -968,13 +959,8 @@
                                         <th>व्यवसायको प्रकृति</th>
                                         <td>
 
-                                            @switch($form['business_nature'])
-                                                @case('partnership')
-                                                    साझेदारी
-                                                    @break
-                                                @default
-                                                    एकल
-                                            @endswitch
+                                                {{!empty($form['business_nature']) ? \Modules\BusinessRegistration\Enums\BusinessNature::tryFrom($form['business_nature'])->label() :''}}
+
                                         </td>
                                     </tr>
 
@@ -1044,12 +1030,12 @@
                                             <tr>
                                                 <th>साझेदार सँगको नाता</th>
                                                 <th>साझेदार को नाम थर</th>
-                                                <th>नागरिकता न</th>
-                                                <th>सम्पर्क न</th>
+                                                <th>नागरिकता नं</th>
+                                                <th>सम्पर्क नं</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($form['partnerDetails'] as $index=>$partnerDetail)
+                                            @foreach($form['partnerDetails'] as $partnerDetail)
                                                 <tr>
 
                                                     <td>
@@ -1095,7 +1081,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>घर धनिको मोबाइल न</th>
+                                                <th>घर धनिको मोबाइल नं</th>
                                                 <td>
                                                     {{$form['house_owner_phone'] ?? ''}}
                                                 </td>
@@ -1400,7 +1386,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.phone" class="form-label">फोन न:</label>
+                                        <label for="form.phone" class="form-label">फोन नं:</label>
                                         <input
                                             name="form.phone"
                                             class="form-control @error('form.phone') is-invalid @enderror"
@@ -1509,7 +1495,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="occupation" class="form-label">मुखय पेशा</label>
+                                        <label for="occupation" class="form-label">मुख्य पेशा</label>
                                         <input
                                             name="form.occupation"
                                             class="form-control @error('form.occupation') is-invalid @enderror"
@@ -1691,8 +1677,8 @@
                                         <th>नाता</th>
                                         <th>नाम, थर</th>
                                         <th>नाम, थर( अंग्रेजीमा)</th>
-                                        <th>नागरिकता न</th>
-                                        <th>सम्पर्क न</th>
+                                        <th>नागरिकता नं</th>
+                                        <th>सम्पर्क नं</th>
                                         <th>
                                             <button type="button" wire:click.prevent="documentsArrayIncrement"
                                                     class="btn btn-primary">
@@ -1730,7 +1716,7 @@
                                                 @enderror
                                             </td>
                                             <td>
-                                                <input type="text" placeholder="नागरिकता न"
+                                                <input type="text" placeholder="नागरिकता नं"
                                                        wire:model="form.threeGenerationDetails.{{$index}}.citizenship_no"
                                                        class="form-control @error('form.threeGenerationDetails.'.$index.'.citizenship_no') is-invalid @enderror">
                                                 @error('form.threeGenerationDetails.'.$index.'.citizenship_no')
@@ -1738,7 +1724,7 @@
                                                 @enderror
                                             </td>
                                             <td>
-                                                <input type="text" placeholder="सम्पर्क न"
+                                                <input type="text" placeholder="सम्पर्क नं"
                                                        wire:model="form.threeGenerationDetails.{{$index}}.mobile_no"
                                                        class="form-control @error('form.threeGenerationDetails.'.$index.'.mobile_no') is-invalid @enderror">
                                                 @error('form.threeGenerationDetails.'.$index.'.mobile_no')

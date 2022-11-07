@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\HelpDesk\Http\Requests\Branch;
+namespace App\Http\Requests\Setting\Branch;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateBranchRequest extends FormRequest
+class StoreBranchRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,7 +15,7 @@ class UpdateBranchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_name' => ['required', Rule::unique('branches', 'branch_name')->withoutTrashed()->ignore($this->branch)],
+            'branch_name' => ['required', 'string', 'max:255', Rule::unique('branches', 'branch_name')->withoutTrashed()],
             'branch_id' => ['nullable', Rule::exists('branches', 'id')]
         ];
     }

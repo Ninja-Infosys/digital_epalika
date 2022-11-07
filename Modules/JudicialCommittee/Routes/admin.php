@@ -11,8 +11,10 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('chiefJudicialMember/{chiefJudicialMember}/updateStatus', [ChiefJudicialMemberController::class,'updateStatus'])->name('chiefJudicialMember.updateStatus');
 Route::resource('chiefJudicialMember',ChiefJudicialMemberController::class);
 
+Route::get('judicialMember/{judicialMember}/updateStatus', [JudicialMemberController::class, 'updateStatus'])->name('judicialMember.updateStatus');
 Route::resource('judicialMember', JudicialMemberController::class);
 
+Route::get('administrationMember/{administrationMember}/updateStatus', [AdministrationMemberController::class,'updateStatus'])->name('administrationMember.updateStatus');
 Route::resource('administrationMember', AdministrationMemberController::class);
 
 

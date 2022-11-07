@@ -6,12 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.helpDesk.branch.index')}}">हेल्प डेस्क </a>
+                            <a href="{{route('admin.branch.index')}}">हेल्प डेस्क </a>
                         </li>
                         <li class="breadcrumb-item active">शाखा</li>
                     </ol>
@@ -27,13 +27,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ शाखा थप्नुहोस्</h4>
-                        <a href="{{route('admin.helpDesk.branch.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.branch.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> शाखा सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.helpDesk.branch.store')}}" method="post">
+                    <form action="{{route('admin.branch.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">

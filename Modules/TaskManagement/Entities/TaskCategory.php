@@ -1,15 +1,16 @@
 <?php
 
-namespace Modules\HelpDesk\Entities;
+namespace Modules\TaskManagement\Entities;
 
-use App\Traits\EventObserveTrait;
+use App\Models\Settings\Branch;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\EventObserveTrait;
 
-class Branch extends Model
+class TaskCategory extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -21,7 +22,7 @@ class Branch extends Model
 
     protected $fillable = [
         'branch_id',
-        'branch_name'
+        'title'
     ];
 
     public function branch(): BelongsTo
@@ -29,13 +30,8 @@ class Branch extends Model
         return $this->belongsTo(Branch::class);
     }
 
-    public function branches(): HasMany
+    public function taskDivisions(): HasMany
     {
-        return $this->hasMany(Branch::class);
-    }
-
-    public function services(): HasMany
-    {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(TaskDivision::class);
     }
 }
