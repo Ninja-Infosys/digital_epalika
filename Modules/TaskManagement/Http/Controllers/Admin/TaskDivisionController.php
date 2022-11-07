@@ -19,7 +19,7 @@ class TaskDivisionController extends Controller
 
     public function create()
     {
-        $taskCategories = TaskCategory::with('taskCategory')->get();
+        $taskCategories = TaskCategory::all();
 
         return view('taskmanagement::admin.task_division.create', compact('taskCategories'));
     }

@@ -41,7 +41,7 @@
                                     id="branch_id">
                                     <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($taskCategories as $taskCategory)
-                                    <option value="1">Test</option>
+                                    <option value="{{$taskCategory->id}}">{{$taskCategory->title}}</option>
                                     @endforeach
                                 </select>
                                 @error('branch_id')

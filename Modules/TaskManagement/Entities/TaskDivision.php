@@ -10,16 +10,21 @@ use App\Traits\EventObserveTrait;
 
 class TaskDivision extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-       'task_category_id',
-       'title'
-   ];
+    protected $fillable = [
+        'task_category_id',
+        'title'
+    ];
+
+    public function taskCategory(): BelongsTo
+    {
+        return $this->belongsTo(TaskCategory::class);
+    }
 }
