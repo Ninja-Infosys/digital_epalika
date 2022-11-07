@@ -31,7 +31,7 @@
 @can('complaintApplication_access')
 <li>
     <a href="{{route('admin.judicialCommittee.complaintApplication.index')}}">
-        <i class="fa fa-user"></i>
+        <i class="fa fa-edit"></i>
         <span>निबेदन फारम</span>
     </a>
 </li>
