@@ -108,7 +108,10 @@ class RegistrationForm extends Component
         'registeredBusinesses' => [],
         'is_rent' => 0,
         'is_registered' => 0,
-        'is_confirmed' => null
+        'is_confirmed' => null,
+        'length'=>null,
+        'width'=>null,
+        'square'=>0
 
     ];
 
@@ -509,8 +512,13 @@ class RegistrationForm extends Component
         if (!empty($this->form['purpose'])) {
             $this->dbBusinessPurposes = BusinessPurpose::whereIn('id', $this->form['purpose'])->get();
         }
-
-
+        if(!empty($this->form['length'] && $this->form['width']))
+        {
+            $this->form['square'] = $this->form['length'] *  $this->form['width'];
+        }
+        else{
+            $this->form['square'] = '';
+        }
         return view('businessregistration::livewire.registration-form');
     }
 }

@@ -20,6 +20,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('businessPurpose', BusinessPurposeController::class);
     Route::resource('businessRegistrationTemplate', BusinessRegistrationTemplateController::class);
 });
+Route::get('businessRegistration/{proprietorDetail}/{type}/editTemplate',[BusinessRegistrationController::class,'editData'])->name('edit.template');
+Route::post('businessRegistration/{proprietorDetail}/{type}/editTemplate',[BusinessRegistrationController::class,'storeData'])->name('store.template');
     Route::resource('businessRegistration', BusinessRegistrationController::class);
 
 Route::prefix('files')->as('files.')->group(function (){

@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">टेम्प्लेट </a>
                         </li>
-                        <li class="breadcrumb-item active">टेम्प्लेट</li>
+                        <li class="breadcrumb-item active">टेम्प्लेट सम्पादन गर्नुहोस</li>
                     </ol>
                 </div>
                 <h4 class="page-title">टेम्प्लेट</h4>
@@ -77,7 +77,7 @@
                                         class="form-check-input @error('requires_header') is-invalid @enderror"
                                         id="requires_header" {{ old('requires_header',$businessRegistrationTemplate->requires_header) === 1 ?'checked':'' }}
                                     />
-                                    <label for="requires_header" class="form-label">Header *</label>
+                                    <label for="requires_header" class="form-label">हेडर *</label>
                                     @error('requires_header')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
