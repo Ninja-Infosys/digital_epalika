@@ -34,7 +34,7 @@ class DailyTaskLivewire extends Component
         $this->branches = Branch::with('branches')->whereNull('branch_id')->get();
     }
 
-    protected function getListeners()
+    protected function getListeners(): array
     {
         return ['postAdded' => 'incrementPostCount'];
     }

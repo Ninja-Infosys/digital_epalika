@@ -1,9 +1,9 @@
-<form wire:submit.prevent="submitFormData" xmlns="http://www.w3.org/1999/html">
+<form wire:submit.prevent="submitFormData">
     <div class="row">
         <div class="col-md-12 mb-2">
             <div class="row pb-2">
-                <div class="col-md-6">
-                    <label for="subject" class="form-label">विषय</label>
+                <div class="col-md-6 mb-2">
+                    <label for="subject" class="form-label">विषय *</label>
                     <input
                         type="text"
                         wire:model="form.subject"
@@ -15,10 +15,10 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-3">
-                    <label for="date" class="form-label">मिति</label>
+                <div class="col-md-3 mb-2">
+                    <label for="date" class="form-label">मिति *</label>
                     <input
-                        type="date"
+                        type="text"
                         wire:model="form.date"
                         class="form-control"
                         id="date"
@@ -28,21 +28,21 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-3">
-                    <label for="date" class="form-label">Date</label>
+                <div class="col-md-3 mb-2">
+                    <label for="en_date" class="form-label">मिति(AD) *</label>
                     <input
                         type="date"
-                        wire:model="form.date"
+                        wire:model="form.en_date"
                         class="form-control"
-                        id="date"
+                        id="en_date"
                         placeholder="Date"
                     />
-                    @error('form.date')
+                    @error('form.en_date')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="col-md-auto">
-                    <label for="complaint_detail" class="form-label">उजुरी विवरण</label>
+                    <label for="complaint_detail" class="form-label">उजुरी विवरण *</label>
                     <textarea id="complaint_detail"
                               wire:model="form.complaint_detail"
                               class="form-control @error('form.complaint_detail') is-invalid @enderror"
@@ -372,3 +372,43 @@
         Save
     </button>
 </form>
+
+@once
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+    @endpush
+@endonce
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#date").nepaliDatePicker({
+                ndpYear: true,
+                ndpMonth: true,
+                onChange: function () {
+                    let inputFieldDate = $("#date").val();
+                    let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                    let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                    let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                    $("#en_date").val(formattedDate);
+
+                    Livewire.emit('postAdded', inputFieldDate, formattedDate);
+                }
+            });
+
+            $("#en_date").change(function () {
+                let inputFieldDate = $("#en_date").val();
+                let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                let nepaliDate = NepaliFunctions.AD2BS(parsedDate.parsedDate)
+                let formattedDate = NepaliFunctions.ConvertDateFormat(nepaliDate, "YYYY-MM-DD")
+                $("#date").val(formattedDate);
+
+                Livewire.emit('postAdded', formattedDate, inputFieldDate);
+            })
+
+
+            let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
+            let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
+            Livewire.emit('postAdded', todayBsDate, todayAdDate);
+        });
+    </script>
+@endpush
