@@ -30,12 +30,12 @@
     <div class="collapse {{request()->is('admin/taskmanagement/setting/*') ? 'show' : ''}}"
          id="sidebarTaskManagementSetting">
         <ul class="nav-second-level">
-                <li class="{{request()->is('admin/taskmanagement/taskCategory') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/taskmanagement/setting/taskCategory*') ? 'active' : ''}}">
                     <a href="{{route('admin.taskManagement.taskCategory.index')}}">
                         <span> शाखाहरु अनुसार कार्यहरू </span>
                     </a>
                 </li>
-                <li class="{{request()->is('admin/taskmanagement/taskDivision') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/taskmanagement/setting/taskDivision*') ? 'active' : ''}}">
                     <a href="{{route('admin.taskManagement.taskDivision.index')}}">
                         <span> कार्य विभाजन </span>
                     </a>

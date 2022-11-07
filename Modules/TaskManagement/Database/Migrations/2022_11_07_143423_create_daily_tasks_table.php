@@ -10,9 +10,10 @@ return new class extends Migration
     {
         Schema::create('daily_tasks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('task_division_id')->constrained()->cascadeOnDelete();
             $table->string('date');
-            $table->string('remarks');
-            $table->string('documents');
+            $table->date('en_date')->nullable();
+            $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
