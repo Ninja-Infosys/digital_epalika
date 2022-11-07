@@ -64,7 +64,7 @@
                                              alt=""></td>
                                     <td>
                                         <a href="{{route('admin.judicialCommittee.administrationMember.updateStatus',$administrationMember)}}">
-                                            <i class="fa fa-2x {{$administrationMember->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
+                                            <i class="fa fa-2x {{$administrationMember->status ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
                                         </a>
                                     </td>
                                     <td>

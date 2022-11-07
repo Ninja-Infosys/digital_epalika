@@ -58,7 +58,7 @@
                                     <td>{{$chiefJudicialMember->designation->title}}</td>
                                     <td>
                                         <a href="{{route('admin.judicialCommittee.chiefJudicialMember.updateStatus',$chiefJudicialMember)}}">
-                                            <i class="fa fa-2x {{$chiefJudicialMember->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
+                                            <i class="fa fa-2x {{$chiefJudicialMember->status ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
                                         </a>
                                     </td>
                                     <td>

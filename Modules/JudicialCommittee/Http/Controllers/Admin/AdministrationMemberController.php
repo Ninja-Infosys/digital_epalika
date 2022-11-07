@@ -114,7 +114,7 @@ class AdministrationMemberController extends Controller
         );
 
         $administrationMember->update([
-            'is_active' => !$administrationMember->is_active
+            'status' => !$administrationMember->status
         ]);
 
         toast('प्रशासन सदस्य स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
