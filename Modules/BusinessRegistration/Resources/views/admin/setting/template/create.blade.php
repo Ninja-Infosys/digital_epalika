@@ -11,13 +11,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">कारोबार
-                                गर्ने वस्तु उप श्रेणी </a>
+                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">टेम्प्लेट
+                            </a>
                         </li>
-                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु उप श्रेणी</li>
+                        <li class="breadcrumb-item active">टेम्प्लेट थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कारोबार गर्ने वस्तु उप श्रेणी</h4>
+                <h4 class="page-title">टेम्प्लेट</h4>
             </div>
         </div>
     </div>
@@ -27,10 +27,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कारोबार गर्ने वस्तु उप श्रेणी थप्नुहोस्</h4>
+                        <h4 class="header-title">टेम्प्लेट थप्नुहोस्</h4>
                         <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> कारोबार गर्ने वस्तु उप श्रेणी सूची
+                            <i class="fa fa-list"></i> टेम्प्लेट सूची
                         </a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong> कारोबार गर्ने वस्तु उप श्रेणी</strong>
+                                <strong>टेम्प्लेट</strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
@@ -80,7 +80,7 @@
                                         class="form-check-input @error('requires_header') is-invalid @enderror"
                                         id="requires_header" {{ old('requires_header') === 1 ?'checked':'' }}
                                     />
-                                    <label for="requires_header" class="form-label">Header *</label>
+                                    <label for="requires_header" class="form-label">हेडर *</label>
                                     @error('requires_header')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

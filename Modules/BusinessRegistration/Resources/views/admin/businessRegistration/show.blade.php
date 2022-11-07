@@ -25,7 +25,7 @@
         <div class="col-lg-4 col-xl-4">
             <div class="card text-center">
                 <div class="card-body">
-                    <img src="{{$proprietorDetail->name}}" class="rounded-circle avatar-lg img-thumbnail"
+                    <img src="{{asset('images/user_icon.jpg')}}" class="rounded-circle avatar-lg img-thumbnail"
                          alt="profile-image">
 
                     <h4 class="mb-0">{{$proprietorDetail->name}}</h4>
@@ -71,8 +71,19 @@
                         </div>
                         <div class="tab-pane" id="reg">
                             <div class="font-black" id="printData">
-                                {!! $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()['data'] ?? ''!!}
-                                {!! $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()['data'] ?? ''!!}
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">
+                                    सम्पादन गर्नुहोस
+                                </a>
+                                {!!$printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()->data
+                                   ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()['data']
+                                   ?? ''!!}
+
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">
+                                    सम्पादन गर्नुहोस
+                                </a>
+                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()->data
+                                   ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()['data']
+                                   ?? ''!!}
 
 
                             </div>
@@ -80,7 +91,12 @@
 
                         <div class="tab-pane" id="tax">
                             <div class="font-black" id="printData">
-                                {!! $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()['data'] ?? ''!!}
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">
+                                    सम्पादन गर्नुहोस
+                                </a>
+                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()->data
+                                   ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()['data']
+                                   ?? ''!!}
 
                             </div>
                         </div>
