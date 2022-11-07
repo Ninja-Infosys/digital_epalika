@@ -19,7 +19,8 @@
         "realrashid/sweet-alert": "^5.1",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-medialibrary": "^10.0.0",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "ext-zip": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

@@ -50,5 +50,9 @@
         </div>
     </div>
 </div>
+<script src="{{asset('assets/backend/editor/ckFinder/ckfinder.js')}}"></script>
+<script>
+    CKFinder.start();
+</script>
 </body>
 </html>
