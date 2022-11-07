@@ -1,4 +1,4 @@
-<form  method="post">
+<form wire:submit.prevent="submitFormData">
     <div class="row">
         <div class="col-md-12 mb-2">
             <div class="row">
