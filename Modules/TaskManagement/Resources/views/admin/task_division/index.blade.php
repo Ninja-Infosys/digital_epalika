@@ -23,7 +23,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">कार्य विभाजन </h4>
-                        <a href="{{route('admin.taskManagement.subCategory.create')}}"
+                        <a href="{{route('admin.taskManagement.taskDivision.create')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                         </a>
@@ -41,15 +41,31 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @forelse($taskDivisions as $taskDivision)
                             <tr>
-                                <td>1</td>
-                                <td>utyuty</td>
-                                <td>ncbncbn</td>
-                                <td></td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$taskDivision->taskCategory->title??''}}</td>
+                                <td>{{$taskDivision->title}}</td>
+                                <td>
+                                    <a href="{{route('admin.taskManagement.taskDivision.edit',$taskDivision)}}"
+                                       class="btn btn-xs btn-outline-primary">
+                                        <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                    </a>
+                                    <form action="{{route('admin.taskManagement.taskDivision.destroy',$taskDivision)}}"
+                                          method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <i class="fa fa-trash"></i> मेटाउनु होस्
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
-                            <tr>
-                                <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                            </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
