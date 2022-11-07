@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\File;
+use CKSource\CKFinder\CKFinder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,11 @@ class FileController extends Controller
 {
     public function index()
     {
-        $files = File::whereNull('model_type')->get();
-        return view('admin.files.index', compact('files'));
+        $ckfinder = new CKFinder(config('ckFinder'));
+
+        $ckfinder->run();
+//        $files = File::whereNull('model_type')->get();
+//        return view('admin.files.index', compact('files'));
     }
 
     public function show(File $file): JsonResponse
