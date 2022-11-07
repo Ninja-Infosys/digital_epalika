@@ -2,8 +2,8 @@
 
 namespace Modules\HelpDesk\Http\Livewire;
 
+use App\Models\Settings\Branch;
 use Livewire\Component;
-use Modules\HelpDesk\Entities\Branch;
 use Modules\HelpDesk\Entities\Service;
 
 class HelpDeskLivewire extends Component
