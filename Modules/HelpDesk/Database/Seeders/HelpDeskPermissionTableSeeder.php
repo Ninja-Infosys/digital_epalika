@@ -13,10 +13,6 @@ class HelpDeskPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'branch_access',
-            'branch_create',
-            'branch_edit',
-            'branch_delete',
             'service_access',
             'service_create',
             'service_edit',
