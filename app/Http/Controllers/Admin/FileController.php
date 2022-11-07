@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\File;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -12,6 +13,15 @@ class FileController extends Controller
     {
         $files = File::whereNull('model_type')->get();
         return view('admin.files.index', compact('files'));
+    }
+
+    public function show(File $file): JsonResponse
+    {
+        return response()->json([
+            'fileName' => $file->file_name,
+            'uploaded' => true,
+            'url' => $file->file_url
+        ]);
     }
 
     public function store(Request $request)

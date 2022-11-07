@@ -75,7 +75,7 @@ Route::prefix('setting')->group(function () {
 
 
 //deleteFile
-Route::resource('file', FileController::class)->only('index', 'store', 'destroy');
+Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
 // website admin routes
 Route::prefix('website')->as('website.')->middleware('can:websiteAdmin_access')->group(function () {
