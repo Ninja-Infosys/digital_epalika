@@ -40,9 +40,7 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>निवेदकको पुरा नाम </th>
-                                <th>ठेगाना</th>
                                 <th>प्रतिवादीको पुरा नाम </th>
-                                <th>ठेगाना</th>
                                 <th>मिति</th>
                                 <th>विषय</th>
                                 <th>कार्य</th>
@@ -53,22 +51,20 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$complaintApplication->complainant_name}}</td>
-                                    <td>{{$complaintApplication->complainant_province_id}}</td>
                                     <td>{{$complaintApplication->defendant_name}}</td>
-                                    <td>{{$complaintApplication->defendant_province_id}}</td>
                                     <td>{{$complaintApplication->date}}</td>
                                     <td>{{$complaintApplication->subject}}</td>
                                     <td>
                                         @can('complaintApplication_edit')
                                             <a href="{{route('admin.judicialCommittee.complaintApplication.edit',$complaintApplication)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-warning">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                             @can('complaintApplication_access')
-                                            <a href="{{route('admin.judicialCommittee.static.applicationForm')}}"
+                                            <a href="{{route('admin.judicialCommittee.applicationForm')}}"
                                                class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-eye"></i> विवरण
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('complaintApplication_delete')
@@ -78,7 +74,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

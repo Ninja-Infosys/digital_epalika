@@ -77,9 +77,9 @@
                         <select wire:model="form.complainant_district_id" class="form-control"
                                 id="complainant_district_id">
                             <option value="">जिल्ला छान्नुहोस्</option>
-                            @foreach($provinces as $province)
+                            @foreach($complainantDistricts as $district)
                                 <option
-                                    value="{{$province->id}}">{{$province->province}}</option>
+                                    value="{{$district->id}}">{{$district->district}}</option>
                             @endforeach
                         </select>
                         @error('form.complainant_district_id')
@@ -91,9 +91,9 @@
                         <select wire:model="form.complainant_local_body_id" class="form-control"
                                 id="complainant_local_body_id">
                             <option value="">पालिका छान्नुहोस्</option>
-                            @foreach($provinces as $province)
+                            @foreach($complainantLocalBodies as $localBody)
                                 <option
-                                    value="{{$province->id}}">{{$province->province}}</option>
+                                    value="{{$localBody->id}}">{{$localBody->local_body}}</option>
                             @endforeach
                         </select>
                         @error('form.complainant_local_body_id')
@@ -104,9 +104,9 @@
                         <label for="complainant_ward_no" class="form-label">वार्ड न:*</label>
                         <select wire:model="form.complainant_ward_no" class="form-control" id="complainant_ward_no">
                             <option value="">वार्ड न: छान्नुहोस्</option>
-                            @foreach($provinces as $province)
+                            @foreach($complainantWards as $ward)
                                 <option
-                                    value="{{$province->id}}">{{$province->province}}</option>
+                                    value="{{$ward}}">{{$ward}}</option>
                             @endforeach
                         </select>
                         @error('form.complainant_ward_no')
@@ -141,13 +141,14 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label for="complainant_relationship" class="form-label">नाता</label>
-                        <input
-                            type="text"
-                            wire:model="form.complainant_relationship"
-                            class="form-control"
-                            id="complainant_relationship"
-                            placeholder="नाता"
-                        />
+                        <select wire:model="form.complainant_relationship" class="form-control"
+                                id="complainant_relationship">
+                            <option value="">पालिका छान्नुहोस्</option>
+                            @foreach(\App\Enums\FamilyRelationEnum::cases() as $relation)
+                                <option
+                                    value="{{$relation->value}}">{{$relation->label()}}</option>
+                            @endforeach
+                        </select>
                         @error('form.complainant_relationship')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -155,7 +156,7 @@
                     <div class="col-md-4 mb-2">
                         <label for="complainant_age" class="form-label">उमेर</label>
                         <input
-                            type="text"
+                            type="number"
                             wire:model="form.complainant_age"
                             class="form-control"
                             id="complainant_age"
@@ -204,9 +205,9 @@
                         <select wire:model="form.defendant_district_id" class="form-control"
                                 id="defendant_district_id">
                             <option value="">जिल्ला छान्नुहोस्</option>
-                            @foreach($provinces as $province)
+                            @foreach($defendantDistricts as $district)
                                 <option
-                                    value="{{$province->id}}">{{$province->province}}</option>
+                                    value="{{$district->id}}">{{$district->district}}</option>
                             @endforeach
                         </select>
                         @error('form.defendant_district_id')
@@ -218,9 +219,9 @@
                         <select wire:model="form.defendant_local_body_id" class="form-control"
                                 id="defendant_local_body_id">
                             <option value="">पालिका छान्नुहोस्</option>
-                            @foreach($provinces as $province)
+                            @foreach($defendantLocalBodies as $localBody)
                                 <option
-                                    value="{{$province->id}}">{{$province->province}}</option>
+                                    value="{{$localBody->id}}">{{$localBody->local_body}}</option>
                             @endforeach
                         </select>
                         @error('form.defendant_local_body_id')
@@ -231,9 +232,9 @@
                         <label for="defendant_ward_no" class="form-label">वार्ड न:*</label>
                         <select wire:model="form.defendant_ward_no" class="form-control" id="defendant_ward_no">
                             <option value="">वार्ड न: छान्नुहोस्</option>
-                            @foreach($provinces as $province)
+                            @foreach($defendantWards as $ward)
                                 <option
-                                    value="{{$province->id}}">{{$province->province}}</option>
+                                    value="{{$ward}}">{{$ward}}</option>
                             @endforeach
                         </select>
                         @error('form.defendant_ward_no')
@@ -268,13 +269,14 @@
                     </div>
                     <div class="col-md-4 mb-2">
                         <label for="defendant_relationship" class="form-label">नाता</label>
-                        <input
-                            type="text"
-                            wire:model="form.defendant_relationship"
-                            class="form-control"
-                            id="defendant_relationship"
-                            placeholder="नाता"
-                        />
+                        <select wire:model="form.defendant_relationship" class="form-control"
+                                id="defendant_relationship">
+                            <option value="">पालिका छान्नुहोस्</option>
+                            @foreach(\App\Enums\FamilyRelationEnum::cases() as $relation)
+                                <option
+                                    value="{{$relation->value}}">{{$relation->label()}}</option>
+                            @endforeach
+                        </select>
                         @error('form.defendant_relationship')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -282,7 +284,7 @@
                     <div class="col-md-4 mb-2">
                         <label for="defendant_age" class="form-label">उमेर</label>
                         <input
-                            type="text"
+                            type="number"
                             wire:model="form.defendant_age"
                             class="form-control"
                             id="defendant_age"

@@ -2,13 +2,27 @@
 
 namespace Modules\JudicialCommittee\Http\Livewire;
 
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\Settings\OfficeSetting;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 
 class ComplaintApplicationLivewire extends Component
 {
+    use WithFileUploads;
+
     public $provinces = [];
+
+    public $complainantDistricts = [];
+    public $complainantLocalBodies = [];
+    public $complainantWards = [];
+
+    public $defendantDistricts = [];
+    public $defendantLocalBodies = [];
+    public $defendantWards = [];
 
     public array $form = [
         'complainant_province_id' => null,
@@ -91,10 +105,11 @@ class ComplaintApplicationLivewire extends Component
 
     public function submitFormData()
     {
-        dd($this->validate());
-        //ComplaintApplication::create($this->validate()['form']);
+        ComplaintApplication::create($this->validate()['form'] + [
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
+            ]);
 
-        $this->reset('form', 'districts', 'localBodies');
+        $this->reset('form', 'complainantDistricts', 'complainantLocalBodies', 'complainantWards', 'defendantDistricts', 'defendantLocalBodies', 'defendantWards');
 
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",
@@ -105,6 +120,26 @@ class ComplaintApplicationLivewire extends Component
 
     public function render()
     {
+        if (!empty($this->form['complainant_province_id'])) {
+            $this->complainantDistricts = District::where('province_id', $this->form['complainant_province_id'])->get();
+        }
+        if (!empty($this->form['complainant_district_id'])) {
+            $this->complainantLocalBodies = LocalBody::where('district_id', $this->form['complainant_district_id'])->get();
+        }
+        if (!empty($this->form['complainant_local_body_id'])) {
+            $this->complainantWards = LocalBody::findOrFail($this->form['complainant_local_body_id'])->ward_no;
+        }
+
+        if (!empty($this->form['defendant_province_id'])) {
+            $this->defendantDistricts = District::where('province_id', $this->form['defendant_province_id'])->get();
+        }
+        if (!empty($this->form['defendant_district_id'])) {
+            $this->defendantLocalBodies = LocalBody::where('district_id', $this->form['defendant_district_id'])->get();
+        }
+        if (!empty($this->form['defendant_local_body_id'])) {
+            $this->defendantWards = LocalBody::findOrFail($this->form['defendant_local_body_id'])->ward_no;
+        }
+
         return view('judicialcommittee::livewire.complaint-application-livewire');
     }
 
