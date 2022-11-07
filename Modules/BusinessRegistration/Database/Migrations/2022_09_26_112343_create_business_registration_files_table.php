@@ -12,7 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('proprietor_detail_id')->constrained()->cascadeOnDelete();
             $table->string('photo')->nullable();
-            $table->string('citizen_ship')->nullable();
+            $table->string('citizenship_front')->nullable();
+            $table->string('citizenship_back')->nullable();
             $table->string('company_registration')->nullable();
             $table->string('tax_pay_file')->nullable();
             $table->string('property')->nullable();

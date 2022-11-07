@@ -37,23 +37,41 @@
                                 <th>क्र.स</th>
                                 <th>मिति</th>
                                 <th>शाखा</th>
-                                <th>शीर्षक</th>
-                                <th>कोठा नम्बर/कार्यालय </th>
+                                <th>मुख्य कार्य</th>
+                                <th>कार्य</th>
+                                <th>कैफियत</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @forelse($dailyTasks as $dailyTask)
                                 <tr>
-                                    <td>1</td>
-                                    <td>test</td>
-                                    <td>utyuty</td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$dailyTask->date}}</td>
+                                    <td>hdfh</td>
                                     <td>ncbncbn</td>
-                                    <td>iouioy</td>
-                                    <td></td>
+                                    <td>{{$dailyTask->taskDivision->title}}</td>
+                                    <td>{{$dailyTask->remarks}}</td>
+                                    <td>
+                                        <a href="{{route('admin.taskManagement.dailyTask.edit',$dailyTask)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                        </a>
+                                        <form action="{{route('admin.taskManagement.dailyTask.destroy',$dailyTask)}}"
+                                              method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
+                            @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

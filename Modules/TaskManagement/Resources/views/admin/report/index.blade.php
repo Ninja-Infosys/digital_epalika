@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">दैनिक कार्य</li>
+                        <li class="breadcrumb-item active"> रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title">दैनिक कार्य थप्नुहोस्</h4>
+                <h4 class="page-title"> रिपोर्ट</h4>
             </div>
         </div>
     </div>
@@ -22,18 +22,12 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">दैनिक कार्य थप्नुहोस्</h4>
-                        <a href="{{route('admin.taskManagement.dailyTask.index')}}"
-                           class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> विवरण हेर्नुहोस्
-                        </a>
+                        <h4 class="header-title"> रिपोर्ट</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    @livewire('taskmanagement::daily-task-livewire')
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

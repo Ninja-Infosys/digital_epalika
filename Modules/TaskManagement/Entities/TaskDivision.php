@@ -5,6 +5,7 @@ namespace Modules\TaskManagement\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -26,5 +27,10 @@ class TaskDivision extends Model
     public function taskCategory(): BelongsTo
     {
         return $this->belongsTo(TaskCategory::class);
+    }
+
+    public function dailyTasks(): HasMany
+    {
+        return $this->hasMany(DailyTask::class);
     }
 }

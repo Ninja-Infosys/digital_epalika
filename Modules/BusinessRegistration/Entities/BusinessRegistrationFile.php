@@ -21,7 +21,8 @@ class BusinessRegistrationFile extends Model
     protected $fillable = [
         'proprietor_detail_id',
         'photo',
-        'citizen_ship',
+        'citizenship_front',
+        'citizenship_back',
         'company_registration',
         'tax_pay_file',
         'property',
@@ -38,12 +39,35 @@ class BusinessRegistrationFile extends Model
         }
     }
 
-    public function setCitizenShipAttribute($value)
+    public function getPhotoUrlAttribute()
+    {
+        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']):'';
+    }
+
+    public function setCitizenshipFrontAttribute($value)
     {
         if(!empty($value) && !is_string($value))
         {
-            $this->attributes['citizen_ship'] = $value->store('business_registered/','public');
+            $this->attributes['citizenship_front'] = $value->store('business_registered/','public');
         }
+    }
+
+    public function getCitizenshipFrontUrlAttribute()
+    {
+        return $this->attributes['citizenship_front'] ? Storage::disk('public')->url($this->attributes['citizenship_front']):'';
+    }
+
+    public function setCitizenshipBackAttribute($value)
+    {
+        if(!empty($value) && !is_string($value))
+        {
+            $this->attributes['citizenship_back'] = $value->store('business_registered/','public');
+        }
+    }
+
+    public function getCitizenshipBackUrlAttribute()
+    {
+        return $this->attributes['citizenship_back'] ? Storage::disk('public')->url($this->attributes['citizenship_back']):'';
     }
 
     public function setCompanyRegistrationAttribute($value)
@@ -67,12 +91,22 @@ class BusinessRegistrationFile extends Model
         }
     }
 
+    public function getTaxPayFileUrlAttribute()
+    {
+        return $this->attributes['tax_pay_file'] ? Storage::disk('public')->url($this->attributes['tax_pay_file']):'';
+    }
+
     public function setPropertyAttribute($value)
     {
         if(!empty($value) && !is_string($value))
         {
             $this->attributes['property'] = $value->store('business_registered/','public');
         }
+    }
+
+    public function getPropertyUrlAttribute()
+    {
+        return $this->attributes['property'] ? Storage::disk('public')->url($this->attributes['property']):'';
     }
 
     public function setSignatureAttribute($value)
@@ -82,12 +116,23 @@ class BusinessRegistrationFile extends Model
             $this->attributes['signature'] = $value->store('business_registered/','public');
         }
     }
+
+    public function getSignatureUrlAttribute()
+    {
+        return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']):'';
+    }
+
     public function setThumbAttribute($value)
     {
         if(!empty($value) && !is_string($value))
         {
             $this->attributes['thumb'] = $value->store('business_registered/','public');
         }
+    }
+
+    public function getThumbUrlAttribute()
+    {
+        return $this->attributes['thumb'] ? Storage::disk('public')->url($this->attributes['thumb']):'';
     }
 
 

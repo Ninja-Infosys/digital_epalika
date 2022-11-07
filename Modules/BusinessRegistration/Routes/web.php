@@ -22,4 +22,5 @@ Route::get('/proprietorDetail/{proprietorDetail}/detail/print',[FrontendControll
 //Route::get('/proprietorDetail/{proprietorDetail}/print',[FrontendController::class,'printPdf'])->name('print');
 Route::view('schedule','businessregistration::frontend.schedule.schedule_1')->name('schedule_1');
 Route::view('schedule_2','businessregistration::frontend.schedule.schedule_2')->name('schedule_2');
+Route::view('schedule_3','businessregistration::frontend.schedule.schedule_3')->name('schedule_3');
 

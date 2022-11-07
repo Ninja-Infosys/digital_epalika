@@ -89,9 +89,6 @@ class BusinessRegistrationTemplateController extends Controller
             'तपाईंलाई अनुमति छैन'
         );
 
-        $businessRegistrationTemplate->delete();
-        toast('टेम्प्लेट सफलतापूर्वक मेटियो','success');
-        return back();
 
     }
 }

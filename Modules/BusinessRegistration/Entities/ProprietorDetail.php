@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\BusinessRegistration\Enums\Qualification;
 use Modules\BusinessRegistration\Traits\ProprietorTemplateTrait;
 
 class ProprietorDetail extends Model
@@ -46,7 +47,8 @@ class ProprietorDetail extends Model
     ];
 
     protected $casts = [
-        'gender' => Gender::class
+        'gender' => Gender::class,
+        'education_qualification'=>Qualification::class
     ];
 
     public function province(): BelongsTo
