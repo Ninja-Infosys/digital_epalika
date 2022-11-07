@@ -345,7 +345,7 @@
                             wire:model="form.applicant_address"
                             class="form-control"
                             id="applicant_address"
-                            placeholder="उमेर"
+                            placeholder="ठेगाना"
                         />
                         @error('form.applicant_address')
                         <div class="invalid-feedback">{{$message}}</div>
