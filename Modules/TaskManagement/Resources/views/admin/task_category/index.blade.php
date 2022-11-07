@@ -23,7 +23,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">शाखाहरु अनुसार कार्यहरू </h4>
-                        <a href="{{route('admin.taskManagement.mainCategory.create')}}"
+                        <a href="{{route('admin.taskManagement.taskCategory.create')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                         </a>
@@ -41,15 +41,18 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @forelse($taskCategories as $taskCategory)
                             <tr>
-                                <td>1</td>
-                                <td>utyuty</td>
-                                <td>ncbncbn</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$taskCategory->branch->branch_name??''}}</td>
+                                <td>{{$taskCategory->title}}</td>
                                 <td></td>
                             </tr>
+                            @empty
                             <tr>
-                                <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                             </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\TaskManagement\Http\Requests\MainCategory;
+namespace Modules\TaskManagement\Http\Requests\TaskCategory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMainCategoryActivityRequest extends FormRequest
+class StoreTaskCategoryRequest extends FormRequest
 {
     public function authorize():bool
     {
@@ -18,7 +18,7 @@ class StoreMainCategoryActivityRequest extends FormRequest
             'title' => ['required']
         ];
     }
-    public function messages()
+    public function messages(): array
     {
         return[
             'branch_id.required'=>'शाखा आवश्यक छ',

@@ -2,27 +2,32 @@
 
 namespace Modules\TaskManagement\Http\Controllers\Admin;
 
+use App\Models\Settings\Branch;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\TaskManagement\Entities\MainCategory;
-use Modules\TaskManagement\Http\Requests\MainCategory\StoreMainCategoryActivityRequest;
+use Modules\TaskManagement\Entities\TaskCategory;
+use Modules\TaskManagement\Http\Requests\TaskCategory\StoreTaskCategoryRequest;
 
-class CategoryController extends Controller
+class TaskCategoryController extends Controller
 {
     public function index()
     {
-        return view('taskmanagement::admin.main_category.index');
+        $taskCategories=TaskCategory::with('branch')->get();
+
+        return view('taskmanagement::admin.task_category.index',compact('taskCategories'));
     }
 
     public function create()
     {
-        return view('taskmanagement::admin.main_category.create');
+        $branches=Branch::with('branches')->get();
+
+        return view('taskmanagement::admin.task_category.create',compact('branches'));
     }
 
-    public function store(StoreMainCategoryActivityRequest $request)
+    public function store(StoreTaskCategoryRequest $request)
     {
-        MainCategory::create($request->validated());
+        TaskCategory::create($request->validated());
 
         toast('शाखाहरु अनुसार कार्यहरू सफलतापूर्वक थपियो','success');
         return back();

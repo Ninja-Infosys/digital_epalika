@@ -6,12 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.helpDesk.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.helpDesk.branch.index')}}">हेल्प डेस्क </a>
                         </li>
                         <li class="breadcrumb-item active">सेवा</li>
                     </ol>

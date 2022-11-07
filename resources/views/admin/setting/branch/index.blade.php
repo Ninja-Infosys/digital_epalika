@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -26,7 +26,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">शाखा सूची</h4>
                         @can('branch_create')
-                            <a href="{{route('admin.helpDesk.branch.create')}}"
+                            <a href="{{route('admin.branch.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -51,11 +51,11 @@
                                     <th>{{$branch->branch_name}}</th>
                                     <td></td>
                                     <td>
-                                        <a href="{{route('admin.helpDesk.branch.edit',$branch)}}"
+                                        <a href="{{route('admin.branch.edit',$branch)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.helpDesk.branch.destroy',$branch)}}"
+                                        <form action="{{route('admin.branch.destroy',$branch)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
@@ -74,11 +74,11 @@
                                         <td>{{$subBranch->branch_name}}</td>
                                         <td>{{$subBranch->branch->branch_name??''}}</td>
                                         <td>
-                                            <a href="{{route('admin.helpDesk.branch.edit',$subBranch)}}"
+                                            <a href="{{route('admin.branch.edit',$subBranch)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
-                                            <form action="{{route('admin.helpDesk.branch.destroy',$subBranch)}}"
+                                            <form action="{{route('admin.branch.destroy',$subBranch)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

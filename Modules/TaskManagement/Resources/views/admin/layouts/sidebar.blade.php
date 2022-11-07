@@ -17,9 +17,9 @@
     </a>
 </li>
 
-<li class="{{request()->is('admin/grant/setting/*') ? 'active' : ''}}">
-    <a href="#sidebarGrantSetting"
-       {{request()->is('admin/grant/setting/*') ? 'aria-expanded=true' : ''}}
+<li class="{{request()->is('admin/taskmanagement/setting/*') ? 'active' : ''}}">
+    <a href="#sidebarTaskManagementSetting"
+       {{request()->is('admin/taskmanagement/setting/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span>सेटिङ</span>
@@ -27,11 +27,11 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('/admin/taskmanagement/*') ? 'show' : ''}}"
-         id="sidebarGrantSetting">
+    <div class="collapse {{request()->is('/admin/taskmanagement/setting/*') ? 'show' : ''}}"
+         id="sidebarTaskManagementSetting">
         <ul class="nav-second-level">
-                <li class="{{request()->is('/admin/taskmanagement/mainCategory') ? 'active' : ''}}">
-                    <a href="{{route('admin.taskManagement.mainCategory.index')}}">
+                <li class="{{request()->is('/admin/taskmanagement/taskCategory') ? 'active' : ''}}">
+                    <a href="{{route('admin.taskManagement.taskCategory.index')}}">
                         <span> शाखाहरु अनुसार कार्यहरू </span>
                     </a>
                 </li>

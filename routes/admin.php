@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\Setting\BranchController;
 use App\Http\Controllers\Admin\Setting\DepartmentController;
 use App\Http\Controllers\Admin\Setting\DesignationController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
@@ -53,6 +54,8 @@ Route::prefix('setting')->group(function () {
 
     Route::resource('department', DepartmentController::class);
     Route::resource('designation',DesignationController::class);
+
+    Route::resource('branch', BranchController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
         Route::resource('role', RoleController::class);

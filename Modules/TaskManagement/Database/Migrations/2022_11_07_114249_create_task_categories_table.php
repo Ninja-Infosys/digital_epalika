@@ -8,8 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('sub_categories', function (Blueprint $table) {
+        Schema::create('task_categories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
+            $table->string('title');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -17,6 +19,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('sub_categories');
+        Schema::dropIfExists('task_categories');
     }
 };
