@@ -132,7 +132,6 @@
     @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckFinder/ckfinder.js')}}"></script>
         <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
 
         <script>
@@ -155,8 +154,6 @@
                     filebrowserBrowseUrl: "{{route('admin.file.index')}}",
                     filebrowserUploadUrl: "{{route('admin.file.store',['_token'=>csrf_token()])}}"
                 });
-
-                CKFinder.setupCKEditor(editor);
 
                 if (wysiwygareaAvailable) {
                     CKEDITOR.replace(this.id);
