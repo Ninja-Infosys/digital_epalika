@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\JudicialCommittee\Http\Controllers\Admin\AdministrationMemberController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ChiefJudicialMemberController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintApplicationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DashboardController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialMemberController;
 
@@ -16,6 +17,8 @@ Route::resource('judicialMember', JudicialMemberController::class);
 
 Route::get('administrationMember/{administrationMember}/updateStatus', [AdministrationMemberController::class,'updateStatus'])->name('administrationMember.updateStatus');
 Route::resource('administrationMember', AdministrationMemberController::class);
+
+Route::resource('complaintApplication', ComplaintApplicationController::class);
 
 
 //static routes

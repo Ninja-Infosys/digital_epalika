@@ -23,17 +23,19 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="action_section bg-light d-flex pt-1">
-                    <div class="col-sm-8 px-3">
-                        <button class="btn btn-sm btn-outline-primary"><i class="fa fa-edit px-1"></i>सम्पादन गर्नुहोस्
-                        </button>
-                        <button class="btn btn-sm btn-outline-info"><i class="fa fa-check px-1"></i>Paid</button>
+                <div class="row justify-content-between p-2">
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-success waves-effect waves-light mb-2 me-1">
+                            <i class="fa fa-edit px-1"></i>सम्पादन गर्नुहोस्</button>
+                        <button type="button" class="btn btn-info waves-effect waves-light mb-2 me-1">
+                            <i class="fa fa-check px-1"></i>Paid</button>
                     </div>
-                    <div class="col-sm-4 px-5">
-                        <button class="btn btn-sm btn-outline-success"><i class="fa fa-print px-1"></i>प्रिन्ट गर्नुहोस्
-                        </button>
-                    </div>
-                    <hr>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end">
+                            <button type="button" class="btn btn-danger waves-effect waves-light mb-2" data-bs-toggle="modal" data-bs-target="#custom-modal">
+                                <i class="fa fa-print px-1"></i>प्रिन्ट गर्नुहोस्</button>
+                        </div>
+                    </div><!-- end col-->
                 </div>
                 <div class="container">
                     <div class="row judicial_application pt-4 px-3">
@@ -117,7 +119,7 @@
                                 <p>सम्पर्क न.:</p>
                                 <p>ठेगाना:</p>
                                 <p>टोल:</p>
-                                <p class="d-flex">सहि:<img class="application_sign" src="{{asset('assets/backend/images/np.png')}}" alt=""></p>
+                                <p class="d-flex">सहि:<img class="application_sign" src="{{asset('assets/backend/images/sign.png')}}" alt=""></p>
 
                             </div>
                             <div class="col-sm-6 px-5 bg-light">
@@ -126,7 +128,7 @@
                                 <p>सम्पर्क न.:</p>
                                 <p>ठेगाना:</p>
                                 <p>टोल:</p>
-                                <p class="d-flex">सहि:<img class="application_sign" src="{{asset('assets/backend/images/np.png')}}" alt=""></p>
+                                <p class="d-flex">सहि:<img class="application_sign" src="{{asset('assets/backend/images/sign.png')}}" alt=""></p>
                             </div>
                         </div>
                     </div>
