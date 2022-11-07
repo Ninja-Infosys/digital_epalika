@@ -47,7 +47,11 @@ class PermissionSeeder extends Seeder
             'ethnicity_access',
             'ethnicity_create',
             'ethnicity_edit',
-            'ethnicity_delete'
+            'ethnicity_delete',
+            'branch_access',
+            'branch_create',
+            'branch_edit',
+            'branch_delete',
         ];
 
         $this->storePermission($permissions);

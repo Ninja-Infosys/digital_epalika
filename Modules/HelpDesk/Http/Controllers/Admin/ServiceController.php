@@ -3,9 +3,9 @@
 namespace Modules\HelpDesk\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Branch;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Modules\HelpDesk\Entities\Branch;
 use Modules\HelpDesk\Entities\Service;
 use Modules\HelpDesk\Entities\ServiceDocument;
 use Modules\HelpDesk\Entities\ServiceProcess;

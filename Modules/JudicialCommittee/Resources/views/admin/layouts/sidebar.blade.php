@@ -28,6 +28,38 @@
     </a>
 </li>
 @endcan
+@can('complaintApplication_access')
+<li>
+    <a href="{{route('admin.judicialCommittee.complaintApplication.index')}}">
+        <i class="fa fa-user"></i>
+        <span>निबेदन फारम</span>
+    </a>
+</li>
+@endcan
+<li>
+    <a href="{{route('admin.judicialCommittee.nissaForm')}}">
+        <i class="fa fa-user"></i>
+        <span> निस्सा सनाखत </span>
+    </a>
+</li>
+<li>
+    <a href="{{route('admin.judicialCommittee.defendantContinuedTime')}}">
+        <i class="fa fa-user"></i>
+        <span>प्रतिवादी जारि म्याद  </span>
+    </a>
+</li>
+<li>
+    <a href="{{route('admin.judicialCommittee.stayDateForm')}}">
+        <i class="fa fa-user"></i>
+        <span>तारिख पर्चा  </span>
+    </a>
+</li>
+<li>
+    <a href="{{route('admin.judicialCommittee.stayDateCompensation')}}">
+        <i class="fa fa-user"></i>
+        <span>तारिख भरपाई</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/grant/report/*') ? 'active' : ''}}">
     <a href="#sidebarGrantReport"
        {{request()->is('admin/circular/report/*') ? 'aria-expanded=true  ' : ''}}

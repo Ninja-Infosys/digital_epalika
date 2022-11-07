@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\FileUploadController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\OfficeHeaderController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\Setting\BranchController;
 use App\Http\Controllers\Admin\Setting\DepartmentController;
 use App\Http\Controllers\Admin\Setting\DesignationController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
@@ -26,14 +27,13 @@ use App\Http\Controllers\Admin\Website\SliderController;
 use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
 use App\Http\Controllers\TechController;
 use Illuminate\Support\Facades\Route;
-use Modules\ListRegistration\Http\Controllers\Admin\ListRegistrationController;
 
 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
-Route::get('tech-help', [TechController::class,'index'])->name('tech');
+Route::get('tech-help', [TechController::class, 'index'])->name('tech');
 Route::view('lock-screen', 'admin.lock_screen.lock_screen')->name('lock-screen');
 Route::view('terms', 'admin.terms_and_conditions.index')->name('terms');
 
@@ -52,7 +52,9 @@ Route::prefix('setting')->group(function () {
     Route::resource('fiscalYear', FiscalYearController::class);
 
     Route::resource('department', DepartmentController::class);
-    Route::resource('designation',DesignationController::class);
+    Route::resource('designation', DesignationController::class);
+
+    Route::resource('branch', BranchController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
         Route::resource('role', RoleController::class);
@@ -73,7 +75,7 @@ Route::prefix('setting')->group(function () {
 
 
 //deleteFile
-Route::resource('file', FileController::class)->only('destroy');
+Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
 // website admin routes
 Route::prefix('website')->as('website.')->middleware('can:websiteAdmin_access')->group(function () {

@@ -11,13 +11,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">कारोबार
-                                गर्ने वस्तु उप श्रेणी </a>
+                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">टेम्प्लेट
+                            </a>
                         </li>
-                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु उप श्रेणी</li>
+                        <li class="breadcrumb-item active">टेम्प्लेट थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कारोबार गर्ने वस्तु उप श्रेणी</h4>
+                <h4 class="page-title">टेम्प्लेट</h4>
             </div>
         </div>
     </div>
@@ -27,10 +27,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कारोबार गर्ने वस्तु उप श्रेणी थप्नुहोस्</h4>
+                        <h4 class="header-title">टेम्प्लेट थप्नुहोस्</h4>
                         <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> कारोबार गर्ने वस्तु उप श्रेणी सूची
+                            <i class="fa fa-list"></i> टेम्प्लेट सूची
                         </a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong> कारोबार गर्ने वस्तु उप श्रेणी</strong>
+                                <strong>टेम्प्लेट</strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
@@ -80,7 +80,7 @@
                                         class="form-check-input @error('requires_header') is-invalid @enderror"
                                         id="requires_header" {{ old('requires_header') === 1 ?'checked':'' }}
                                     />
-                                    <label for="requires_header" class="form-label">Header *</label>
+                                    <label for="requires_header" class="form-label">हेडर *</label>
                                     @error('requires_header')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -98,7 +98,9 @@
                                                     <button class="col-md-2 btn btn-primary btn-sm m-1" type="button"
                                                             onclick="copyText('{{$templateValue}}')">{{$key}}</button>
                                                 @empty
-                                                    <button class="col-md-2 btn btn-primary btn-sm m-1" type="button">दाटा छैन</button>
+                                                    <button class="col-md-2 btn btn-primary btn-sm m-1" type="button">
+                                                        दाटा छैन
+                                                    </button>
                                                 @endforelse
 
                                             </div>
@@ -107,11 +109,11 @@
 
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="data" class="form-label">डाटा *</label>
-                                    <textarea name="data" id="data" cols="30" rows="10"
+                                    <label for="editor" class="form-label">डाटा *</label>
+                                    <textarea name="data" id="editor" cols="30" rows="10"
                                               class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
                                     @error('data')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                    {{--                                    <div class="invalid-feedback">{{$message}}</div>--}}
                                     @enderror
                                 </div>
                             </div>
@@ -124,9 +126,67 @@
             </div>
         </div>
     </div>
+    @push('style')
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/css/editor.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/css/neo.css')}}">
+    @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/js/ckEditor.min.js')}}"></script>
-        <script src="{{asset('assets/backend/js/ckEditor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/js/editor.js')}}"></script>
+
+        <script>
+            if (CKEDITOR.env.ie && CKEDITOR.env.version < 9)
+                CKEDITOR.tools.enableHtml5Elements(document);
+
+            // The trick to keep the editor in the sample quite small
+            // unless user specified own height.
+            CKEDITOR.config.height = 150;
+            CKEDITOR.config.width = 'auto';
+
+
+            const wysiwygareaAvailable = isWysiwygareaAvailable(),
+                isBBCodeBuiltIn = !!CKEDITOR.plugins.get('bbcode');
+
+
+            const editorElement = CKEDITOR.document.getById('editor');
+
+            CKEDITOR.replace('editor', {
+                filebrowserBrowseUrl: "{{route('admin.file.index')}}",
+                filebrowserUploadUrl: "{{route('admin.file.store',['_token'=>csrf_token()])}}"
+            });
+
+            // :(((
+            if (isBBCodeBuiltIn) {
+                editorElement.setHtml(
+                    'Hello world!\n\n' +
+                    'I\'m an instance of [url=https://ckeditor.com]CKEditor[/url].'
+                );
+            }
+
+            // Depending on the wysiwygarea plugin availability initialize classic or inline editor.
+            if (wysiwygareaAvailable) {
+                CKEDITOR.replace('editor');
+            } else {
+                editorElement.setAttribute('contenteditable', 'true');
+                CKEDITOR.inline('editor');
+
+                // TODO we can consider displaying some info box that
+                // without wysiwygarea the classic editor may not work.
+            }
+
+            function isWysiwygareaAvailable() {
+                // If in development mode, then the wysiwygarea must be available.
+                // Split REV into two strings so builder does not replace it :D.
+                if (CKEDITOR.revision == ('%RE' + 'V%')) {
+                    return true;
+                }
+
+                return !!CKEDITOR.plugins.get('wysiwygarea');
+            }
+
+
+        </script>
+
         <script>
             function copyText(text) {
                 navigator.clipboard.writeText(text);

@@ -89,8 +89,6 @@ trait ProprietorTemplateTrait
 
     ];
 
-    private ProprietorDetail $proprietorDetail;
-
 
     public function getTemplateDataAttribute(): Collection
     {
@@ -102,6 +100,13 @@ trait ProprietorTemplateTrait
                 'data' => $data
             ];
         });
+    }
+
+    public function getSpecificTemplateData($type): string
+    {
+
+        $businessTemplate = BusinessRegistrationTemplate::where('for', $type)->first();
+        return $this->getData($businessTemplate->data);
     }
 
     public function getTemplateOptions(): array
@@ -122,12 +127,12 @@ trait ProprietorTemplateTrait
         return [
             '[@businessDetail.business_detail_name]'=>$this->businessDetail->business_detail_name ?? '',
             '[@businessDetail.business_detail_name_en]'=>$this->businessDetail->business_detail_name_en ?? '',
-            '[@businessDetail.business_nature]'=>$this->businessDetail->business_nature->label() ?? '',
+            '[@businessDetail.business_nature]'=> !empty($this->businessDetail->business_nature) ? $this->businessDetail->business_nature->label() : '',
             '[@businessDetail.establish_year]'=>$this->businessDetail->establish_year ?? '',
             '[@businessDetail.registration_date]'=>$this->businessDetail->registration_date ?? '',
             '[@businessDetail.pan_no]'=>$this->businessDetail->pan_no ?? '',
             '[@businessDetail.amount_cost]'=>$this->businessDetail->amount_cost ?? '',
-            '[@businessDetail.source_of_capital]'=>$this->businessDetail->source_of_capital->label() ?? '',
+            '[@businessDetail.source_of_capital]'=> !empty($this->businessDetail->source_of_capital) ? $this->businessDetail->source_of_capital->label() : '',
             '[@businessDetail.purpose]'=>$this->businessDetail->purpose ?? '',
             '[@businessDetail.employment]'=>$this->businessDetail->employment ?? '',
             '[@businessDetail.house_owner_name]'=>$this->businessDetail->house_owner_name ?? '',
