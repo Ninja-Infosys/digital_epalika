@@ -35,8 +35,8 @@
                         <span> शाखाहरु अनुसार कार्यहरू </span>
                     </a>
                 </li>
-                <li class="{{request()->is('/admin/taskmanagement/subCategory') ? 'active' : ''}}">
-                    <a href="{{route('admin.taskManagement.subCategory.index')}}">
+                <li class="{{request()->is('/admin/taskmanagement/taskDivision') ? 'active' : ''}}">
+                    <a href="{{route('admin.taskManagement.taskDivision.index')}}">
                         <span> कार्य विभाजन </span>
                     </a>
                 </li>

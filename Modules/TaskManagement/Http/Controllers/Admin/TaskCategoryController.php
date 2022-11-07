@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\TaskManagement\Entities\TaskCategory;
 use Modules\TaskManagement\Http\Requests\TaskCategory\StoreTaskCategoryRequest;
+use Modules\TaskManagement\Http\Requests\TaskCategory\UpdateTaskCategoryRequest;
 
 class TaskCategoryController extends Controller
 {
@@ -40,12 +41,17 @@ class TaskCategoryController extends Controller
 
     public function edit(TaskCategory $taskCategory)
     {
-        return view('taskmanagement::admin.task_category.edit');
+        $branches=Branch::with('branches')->whereNull('branch_id')->get();
+
+        return view('taskmanagement::admin.task_category.edit', compact('branches', 'taskCategory'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateTaskCategoryRequest $request, TaskCategory $taskCategory)
     {
-        //
+        $taskCategory->update($request->validated());
+
+        toast('शाखाहरु अनुसार कार्यहरू सफलतापूर्वक अद्यावधिक गरियो','success');
+        return redirect(route('admin.taskManagement.taskCategory.index'));
     }
 
     public function destroy(TaskCategory $taskCategory)

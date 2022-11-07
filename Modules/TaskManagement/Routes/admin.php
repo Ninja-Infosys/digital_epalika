@@ -12,5 +12,5 @@ Route::resource('task', TaskController::class);
 
 Route::prefix('setting')->group(function (){
     Route::resource('taskCategory', TaskCategoryController::class);
-    Route::resource('subCategory', TaskDivisionController::class);
+    Route::resource('taskDivision', TaskDivisionController::class);
 });
