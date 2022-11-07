@@ -98,7 +98,8 @@ class RegistrationForm extends Component
         'house_owner_address' => null,
         'house_owner_monthly_rent' => null,
         'photo' => null,
-        'citizen_ship' => null,
+        'citizenship_back' => null,
+        'citizenship_front' => null,
         'company_registration' => null,
         'tax_pay_file' => null,
         'signature' => null,
@@ -210,7 +211,8 @@ class RegistrationForm extends Component
 
     protected array $thirdStepValidations = [
         'form.photo' => ['nullable'],
-        'form.citizen_ship' => ['nullable'],
+        'form.citizenship_back' => ['nullable'],
+        'form.citizenship_front' => ['nullable'],
         'form.company_registration' => ['nullable'],
         'form.tax_pay_file' => ['nullable'],
         'form.signature' => ['nullable'],
@@ -288,7 +290,8 @@ class RegistrationForm extends Component
             'form.registeredBusinesses.*.registration_date.required' => ['दर्ता मिति आबश्यक छ '],
             'form.registeredBusinesses.*.active.required' => ['ब्यबसाय सक्रिय आबस्यक छ '],
             'form.photo.required' => ['फोटो आबश्यक छ '],
-            'form.citizen_ship.required' => ['नागरिकता आबश्यकता छ '],
+            'form.citizenship_front.required' => ['नागरिकता आबश्यकता छ '],
+            'form.citizenship_back.required' => ['नागरिकता आबश्यकता छ '],
             'form.company_registration.required' => ['कम्पनि दर्ता आबश्यक छ '],
             'form.tax_pay_file.required' => ['कर तिरेको फाइल आबश्यक छ '],
             'form.signature.required' => ['हस्ताक्षर आबश्यक छ '],
@@ -395,7 +398,8 @@ class RegistrationForm extends Component
             }
             $proprietorDetails->businessRegisteredFile()->create([
                 'photo' => $this->form['photo'] ?? null,
-                'citizen_ship' => $this->form['citizen_ship'] ?? null,
+                'citizenship_front' => $this->form['citizenship_front'] ?? null,
+                'citizenship_back' => $this->form['citizenship_back'] ?? null,
                 'company_registration' => $this->form['company_registration'] ?? null,
                 'tax_pay_file' => $this->form['tax_pay_file'] ?? null,
                 'signature' => $this->form['signature'] ?? null,
