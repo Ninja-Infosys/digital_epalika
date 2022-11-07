@@ -9,7 +9,7 @@
                         wire:model="form.subject"
                         class="form-control"
                         id="subject"
-                        placeholder="नाता"
+                        placeholder="उजुरी विषय"
                     />
                     @error('form.subject')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -55,7 +55,7 @@
             </div>
             <fieldset>
                 <legend>
-                    <h4 class="text-info"><b>वादीको विवरण</b></h4>
+                    <h4 class="text-info">वादीको विवरण</h4>
                 </legend>
                 <div class="row">
                     <div class="col-md-4 mb-2">
@@ -182,7 +182,7 @@
             </fieldset>
             <fieldset>
                 <legend>
-                    <h4 class="text-info"><b>प्रतिवादी विवरण</b></h4>
+                    <h4 class="text-info">प्रतिवादी विवरण</h4>
                 </legend>
                 <div class="row">
                     <div class="col-md-4 mb-2">
@@ -309,7 +309,7 @@
             </fieldset>
             <fieldset>
                 <legend>
-                    <h4 class="text-info"><b>उजुरीकर्ताको विवरण</b></h4>
+                    <h4 class="text-info">उजुरीकर्ताको विवरण</h4>
                 </legend>
                 <div class="row">
                     <div class="col-md-4 mb-2">
@@ -345,7 +345,7 @@
                             wire:model="form.applicant_address"
                             class="form-control"
                             id="applicant_address"
-                            placeholder="उमेर"
+                            placeholder="ठेगाना"
                         />
                         @error('form.applicant_address')
                         <div class="invalid-feedback">{{$message}}</div>
