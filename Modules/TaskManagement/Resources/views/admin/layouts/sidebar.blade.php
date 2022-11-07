@@ -10,8 +10,8 @@
         <span> दैनिक कार्य</span>
     </a>
 </li>
-<li class="{{request()->is('admin/grant/dashboard') ? 'active' : ''}}">
-    <a href="{{route('admin.taskManagement.dashboard')}}">
+<li class="{{request()->is('admin/taskmanagement/report') ? 'active' : ''}}">
+    <a href="{{route('admin.taskManagement.report.index')}}">
         <i class="fa fa-clipboard-list"></i>
         <span> रिपोर्ट</span>
     </a>

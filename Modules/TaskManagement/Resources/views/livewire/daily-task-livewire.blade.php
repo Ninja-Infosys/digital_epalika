@@ -1,7 +1,7 @@
 <form wire:submit.prevent="submitFormData">
     <div class="row">
         <div class="col-md-4 mb-2">
-            <label for="date">Date</label>
+            <label for="date">मिति *</label>
             <input type="text"
                    wire:model="form.date" class="form-control" id="date">
             @error('form.date')
@@ -82,7 +82,7 @@
             @enderror
         </div>
         <div class="col-md-4 mb-2">
-            <label for="remarks" class="form-label">कैफियत *</label>
+            <label for="remarks" class="form-label">कैफियत</label>
             <textarea class="form-control" wire:model="form.remarks" id="remarks" rows="5"></textarea>
             @error('form.remarks')
             <div class="invalid-feedback">{{$message}}</div>
@@ -91,7 +91,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">
-        Save
+        पेश गर्नुहोस्
     </button>
 </form>
 
@@ -116,17 +116,6 @@
                     Livewire.emit('postAdded', inputFieldDate, formattedDate);
                 }
             });
-
-            // $("#en_date").change(function () {
-            //     let inputFieldDate = $("#en_date").val();
-            //     let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
-            //     let nepaliDate = NepaliFunctions.AD2BS(parsedDate.parsedDate)
-            //     let formattedDate = NepaliFunctions.ConvertDateFormat(nepaliDate, "YYYY-MM-DD")
-            //     $("#date").val(formattedDate);
-            //
-            //     Livewire.emit('postAdded', formattedDate, inputFieldDate);
-            // })
-
 
             let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
             let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
