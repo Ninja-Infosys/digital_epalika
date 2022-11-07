@@ -9,7 +9,7 @@
                         wire:model="form.subject"
                         class="form-control"
                         id="subject"
-                        placeholder="नाता"
+                        placeholder="उजुरी विषय"
                     />
                     @error('form.subject')
                     <div class="invalid-feedback">{{$message}}</div>
