@@ -23,20 +23,21 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="action_section bg-light d-flex pt-1">
-                    <div class="col-sm-8 px-3">
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-edit px-1"></i>सम्पादन गर्नुहोस्
-                        </button>
-                        <button class="btn btn-sm btn-info"><i class="fa fa-check px-1"></i> सहि गरेको पत्र अपलोड गरियो
-                        </button>
-                        <button class="btn btn-sm btn-info"><i class="fa fa-check px-1"></i> बुझीलिएको पत्र अपलोड गरियो
-                        </button>
+                <div class="row justify-content-between p-2">
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-success waves-effect waves-light mb-2 me-1">
+                            <i class="fa fa-edit px-1"></i>सम्पादन गर्नुहोस्</button>
+                        <button type="button" class="btn btn-info waves-effect waves-light mb-2 me-1">
+                            <i class="fa fa-check "></i>सहि गरेको पत्र अपलोड गरियो</button>
+                        <button type="button" class="btn btn-info waves-effect waves-light mb-2 ">
+                            <i class="fa fa-check "></i>बुझिलिएको पत्र अपलोड गरियो</button>
                     </div>
-                    <div class="col-sm-4 px-5">
-                        <button class="btn btn-sm btn-success"><i class="fa fa-print px-1"></i>प्रिन्ट गर्नुहोस्
-                        </button>
-                    </div>
-                    <hr>
+                    <div class="col-sm-5">
+                        <div class="text-sm-end">
+                            <button type="button" class="btn btn-danger waves-effect waves-light mb-2" data-bs-toggle="modal" data-bs-target="#custom-modal">
+                                <i class="fa fa-print px-1"></i>प्रिन्ट गर्नुहोस्</button>
+                        </div>
+                    </div><!-- end col-->
                 </div>
                 <div class="container">
                     <div class="row judicial_application pt-4 px-3">
@@ -104,10 +105,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="action_section bg-light d-flex pt-1">
-                    <button class="btn btn-sm btn-success"><i class="fa fa-print px-1"></i>प्रिन्ट गर्नुहोस्
-                    </button>
+                <div class="row justify-content-between p-2">
 
+                        <div class="text-sm-end">
+                            <button type="button" class="btn btn-danger waves-effect waves-light mb-2" data-bs-toggle="modal" data-bs-target="#custom-modal">
+                                <i class="fa fa-print px-1"></i>प्रिन्ट गर्नुहोस्</button>
+                        </div>
+                    <!-- end col-->
                 </div>
                 <div class="container">
                     <div class="row judicial_application pt-4 px-3">
