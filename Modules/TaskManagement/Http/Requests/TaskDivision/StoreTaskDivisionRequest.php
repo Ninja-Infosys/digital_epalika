@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\TaskManagement\Http\Requests\SubCategory;
+namespace Modules\TaskManagement\Http\Requests\TaskDivision;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSubCategoryActivityRequest extends FormRequest
+class StoreTaskDivisionRequest extends FormRequest
 {
     public function authorize():bool
     {
@@ -14,14 +14,14 @@ class StoreSubCategoryActivityRequest extends FormRequest
     public function rules():array
     {
         return [
-            'main_category_id' => ['required'],
-            'title' => ['required']
+            'task_category_id' => ['required'],
+            'title'=> ['required']
         ];
     }
-    public function messages()
+    public function messages(): array
     {
         return[
-            'branch_id.required'=>'कार्य आवश्यक छ',
+            'task_category_id.required'=>'कार्य आवश्यक छ',
             'title.required'=> 'शीर्षक आवश्यक छ'
         ];
     }

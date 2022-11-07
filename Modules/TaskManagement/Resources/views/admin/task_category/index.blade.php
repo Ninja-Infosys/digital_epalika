@@ -46,7 +46,20 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$taskCategory->branch->branch_name??''}}</td>
                                 <td>{{$taskCategory->title}}</td>
-                                <td></td>
+                                <td>
+                                        <a href="{{route('admin.taskManagement.taskCategory.edit',$taskCategory)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                        </a>
+                                        <form action="{{route('admin.taskManagement.taskCategory.destroy',$taskCategory)}}"
+                                              method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            </button>
+                                        </form>
+                                </td>
                             </tr>
                             @empty
                             <tr>

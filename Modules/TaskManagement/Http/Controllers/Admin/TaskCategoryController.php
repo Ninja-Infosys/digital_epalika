@@ -20,7 +20,7 @@ class TaskCategoryController extends Controller
 
     public function create()
     {
-        $branches=Branch::with('branches')->get();
+        $branches=Branch::with('branches')->whereNull('branch_id')->get();
 
         return view('taskmanagement::admin.task_category.create',compact('branches'));
     }
@@ -38,9 +38,9 @@ class TaskCategoryController extends Controller
         return view('taskmanagement::show');
     }
 
-    public function edit($id)
+    public function edit(TaskCategory $taskCategory)
     {
-        return view('taskmanagement::edit');
+        return view('taskmanagement::admin.task_category.edit');
     }
 
     public function update(Request $request, $id)
@@ -48,8 +48,11 @@ class TaskCategoryController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(TaskCategory $taskCategory)
     {
-        //
+        $taskCategory->delete();
+
+        toast('शाखाहरु अनुसार कार्य सफलतापूर्वक मेटाइयो','success');
+        return back();
     }
 }

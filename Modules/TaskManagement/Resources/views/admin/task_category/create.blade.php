@@ -39,7 +39,7 @@
                                     name="branch_id"
                                     class="form-select @error('branch_id') is-invalid @enderror"
                                     id="branch_id">
-                                    <option value="">छान्नुहोस्</option>
+                                    <option value="">--- छान्नुहोस् ---</option>
                                     @foreach($branches as $branch)
                                         @if(count($branch->branches)>0)
                                             <optgroup label="{{$branch->branch_name}}">
@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="title" class="form-label">शीर्षक *</label>
-                                <input type="text" id="title" value="{{old('title')}}" class="form-control" placeholder="शीर्षक">
+                                <input type="text" id="title" value="{{old('title')}}" name="title" class="form-control" placeholder="शीर्षक">
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -72,7 +72,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>

@@ -39,8 +39,10 @@
                                     name="branch_id"
                                     class="form-select @error('branch_id') is-invalid @enderror"
                                     id="branch_id">
-                                    <option value="">छान्नुहोस्</option>
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($taskCategories as $taskCategory)
                                     <option value="1">Test</option>
+                                    @endforeach
                                 </select>
                                 @error('branch_id')
                                 <div class="invalid-feedback">{{$message}}</div>
