@@ -74,61 +74,16 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <label for="service_name" class="form-label">सेवा नाम *</label>
-                                <input
-                                    type="text"
-                                    name="service_name"
-                                    value="{{old('service_name')}}"
-                                    class="form-control @error('service_name') is-invalid @enderror"
-                                    id="service_name"
-                                    placeholder="सेवा नाम"
-                                />
+                                <label for="service_name" class="form-label">कैफियत *</label>
+                                <textarea class="form-control" id="example-textarea" rows="5"></textarea>
                                 @error('service_name')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
-                            <div class="col-md-6 mb-2">
-                                <label for="time_taken" class="form-label">लाग्ने समय *</label>
-                                <input
-                                    type="text"
-                                    name="time_taken"
-                                    value="{{old('time_taken')}}"
-                                    class="form-control @error('time_taken') is-invalid @enderror"
-                                    id="time_taken"
-                                    placeholder="लाग्ने समय "
-                                />
-                                @error('time_taken')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-2">
-                                <label for="responsible_officer" class="form-label">जिम्मेवार अधिकारी *</label>
-                                <input
-                                    type="text"
-                                    name="responsible_officer"
-                                    value="{{old('responsible_officer')}}"
-                                    class="form-control @error('responsible_officer') is-invalid @enderror"
-                                    id="responsible_officer"
-                                    placeholder="लाग्ने समय "
-                                />
-                                @error('responsible_officer')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-2">
-                                <label for="office" class="form-label">कोठा नम्बर /कार्यालय *</label>
-                                <input
-                                    type="text"
-                                    name="office"
-                                    value="{{old('office')}}"
-                                    class="form-control @error('office') is-invalid @enderror"
-                                    id="office"
-                                    placeholder="नम्बर /कार्यालय"
-                                />
-                                @error('office')
+                            <div class="col-md-4 mb-2">
+                                <label for="files" class="form-label">कागजातहरू</label>
+                                <input type="file" id="files" class="form-control">
+                                @error('files')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

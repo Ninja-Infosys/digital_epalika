@@ -12,7 +12,7 @@
 </span><br>
 <span>१. सडक अधिकार क्षेत्र सम्बन्धि मापदण्ड पालना भएको
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-    <label class="form-check-label" for="inlineRadio1">छ&ensp;कि&emsp; </label>
+    <label class="form-check-label" for="inlineRadio1">छ कि&emsp;</label>
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
     <label class="form-check-label" for="inlineRadio2">छैन&ensp;</label> (छैन भने विवरण खुलाउने)<br>
     &emsp;<span class="underline-dotted"></span>
@@ -59,7 +59,7 @@
 </span><br>
 <span class="mt-2">५. नेपाल राष्ट्रिय भवन निर्माण संहिता २०६० अनुसार निर्माण भएको
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-    <label class="form-check-label" for="inlineRadio1">छ&ensp; कि&emsp;</label>
+    <label class="form-check-label" for="inlineRadio1">छ&ensp;</label>कि
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
     <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
     &emsp;<span class="underline-dotted"></span>

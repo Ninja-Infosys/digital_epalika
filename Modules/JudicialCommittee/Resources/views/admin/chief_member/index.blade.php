@@ -39,7 +39,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>मुख्य न्यायिक सदस्य</th>
+                                <th>नाम</th>
                                 <th>फोन</th>
                                 <th>पद</th>
                                 <th>स्थिति</th>
@@ -50,14 +50,15 @@
                             @forelse($chiefJudicialMembers as $chiefJudicialMember)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td><img src="{{$chiefJudicialMember->photo_url}}" height="40" width="40" class="me-2 rounded-circle"
+                                    <td><img src="{{$chiefJudicialMember->photo_url}}" height="40" width="40"
+                                             class="me-2 rounded-circle"
                                              alt="">
                                         {{$chiefJudicialMember->name}}</td>
                                     <td>{{$chiefJudicialMember->phone}}</td>
                                     <td>{{$chiefJudicialMember->designation->title}}</td>
                                     <td>
                                         <a href="{{route('admin.judicialCommittee.chiefJudicialMember.updateStatus',$chiefJudicialMember)}}">
-                                            <i class="fa fa-2x {{$chiefJudicialMember->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
+                                            <i class="fa fa-2x {{$chiefJudicialMember->status ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
                                         </a>
                                     </td>
                                     <td>

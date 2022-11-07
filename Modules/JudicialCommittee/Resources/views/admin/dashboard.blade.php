@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row mt-2">
         <div class="col-12">
@@ -18,7 +17,6 @@
                 </div>
                 <h4 class="page-title">गृहपृष्ठ </h4>
             </div>
-
             <div class="row">
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
@@ -35,14 +33,13 @@
                                         2
                                     </span>
                                         </h3>
-                                        <p class="text-muted mb-1">जम्मा शाखा</p>
+                                        <p class="text-muted mb-1">जम्मा उजुरी</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
@@ -58,7 +55,29 @@
                                          3
                                     </span>
                                         </h3>
-                                        <p class="text-muted mb-1">जम्मा उप-शाखा</p>
+                                        <p class="text-muted mb-1">जम्मा दर्ता उजुरी</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-secondary border-secondary border">
+                                        <i class="fa fa-code-branch font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                         3
+                                    </span>
+                                        </h3>
+                                        <p class="text-muted mb-1">छिनोफानो भैसकेको</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -77,7 +96,7 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">4</span></h3>
-                                        <p class="text-muted mb-1">जम्मा सेवा</p>
+                                        <p class="text-muted mb-1">नहेरीयको</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
