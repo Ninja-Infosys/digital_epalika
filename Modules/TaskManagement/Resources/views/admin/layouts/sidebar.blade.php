@@ -4,8 +4,8 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-<li class="{{request()->is('admin/taskmanagement/task') ? 'active' : ''}}">
-    <a href="{{route('admin.taskManagement.task.index')}}">
+<li class="{{request()->is('admin/taskmanagement/dailyTask') ? 'active' : ''}}">
+    <a href="{{route('admin.taskManagement.dailyTask.index')}}">
         <i class="fa fa-tasks"></i>
         <span> दैनिक कार्य</span>
     </a>
