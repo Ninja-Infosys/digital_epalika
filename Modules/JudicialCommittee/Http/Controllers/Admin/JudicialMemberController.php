@@ -112,7 +112,7 @@ class JudicialMemberController extends Controller
         );
 
         $judicialMember->update([
-            'is_active' => !$judicialMember->is_active
+            'status' => !$judicialMember->status
         ]);
 
         toast('न्यायिक सदस्य स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
