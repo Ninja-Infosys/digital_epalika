@@ -34,6 +34,7 @@ class Organization extends Authenticatable
         'email',
         'phone',
         'is_active',
+        'is_organization',
         'password',
     ];
 
@@ -72,6 +73,26 @@ class Organization extends Authenticatable
     public function userDetail(): HasOne
     {
         return $this->hasOne(UserDetail::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active',1);
+    }
+
+    public function scopeNotActive($query)
+    {
+        return $query->where('is_active',0);
+    }
+
+    public function scopeOrganization($query)
+    {
+        return $query->where('is_organization',1);
+    }
+
+    public function scopeNotOrganization($query)
+    {
+        return $query->where('is_organization',0);
     }
 
     public function organizationDetail(): HasOne
