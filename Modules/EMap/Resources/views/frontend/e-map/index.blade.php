@@ -98,6 +98,10 @@
                                     <a href="{{route('organization.register.form')}}" class="btn btn-light"><span>नयाँ दर्ता गर्नुहोस्</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
+
+                                    <a href="{{route('organization.register.formPerson')}}" class="btn btn-light"><span>नयाँ व्यक्तिगत विवरण दर्ता गर्नुहोस्</span>
+                                        <i class="fa fa-angle-double-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
