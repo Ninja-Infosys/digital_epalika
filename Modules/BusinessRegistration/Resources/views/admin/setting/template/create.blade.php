@@ -113,7 +113,7 @@
                                     <textarea name="data" id="data" cols="30" rows="10"
                                               class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
                                     @error('data')
-                                    {{--                                    <div class="invalid-feedback">{{$message}}</div>--}}
+                                    <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>

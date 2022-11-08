@@ -23,8 +23,6 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public $is_same_as_permanent = false;
 
-    public $is_organization = "1";
-
     public $districts = [];
     public $provinces = [];
 
@@ -35,9 +33,6 @@ class OrganizationRegisterPersonLivewire extends Component
         'temporaryProvince' => null,
         'temporaryDistrict' => null,
         'temporaryLocalBody' => null,
-        'organizationProvince' => null,
-        'organizationDistrict' => null,
-        'organizationLocalBody' => null,
         'citizenshipIssuedDistrict' => null,
         'permanentLocalBodies' => [],
         'permanentWards' => [],
@@ -45,9 +40,7 @@ class OrganizationRegisterPersonLivewire extends Component
         'temporaryLocalBodies' => [],
         'temporaryWards' => [],
         'temporaryDistricts' => [],
-        'organizationLocalBodies' => [],
-        'organizationWards' => [],
-        'organizationDistricts' => [],
+
     ];
 
     public array $user = [
@@ -85,30 +78,8 @@ class OrganizationRegisterPersonLivewire extends Component
         'temporary_tole' => null,
     ];
 
-    public array $organizationDetail = [
-        'org_name_ne' => null,
-        'org_name_en' => null,
-        'org_email' => null,
-        'org_contact' => null,
-        'org_registration_no' => null,
-        'org_registration_document' => null,
-        'org_pan_no' => null,
-        'org_pan_document' => null,
-        'logo' => null,
-        'province_id' => null,
-        'district_id' => null,
-        'local_body_id' => null,
-        'ward' => null,
-        'tole' => null,
-    ];
-
-    public array $taxClearance = [
-        'document' => null,
-        'year' => null,
-    ];
 
     protected array $firstStepValidations = [
-        'is_organization' => ['required'],
         'userDetail.name_ne' => ['required'],
         'userDetail.name_en' => ['required'],
         'userDetail.email' => ['required', 'email'],
@@ -144,28 +115,6 @@ class OrganizationRegisterPersonLivewire extends Component
     ];
 
     protected array $fourthStepValidations = [
-        'organizationDetail.org_name_ne' => ['required'],
-        'organizationDetail.org_name_en' => ['required'],
-        'organizationDetail.org_email' => ['required'],
-        'organizationDetail.org_contact' => ['required'],
-        'organizationDetail.org_registration_no' => ['required'],
-        'organizationDetail.org_pan_no' => ['required'],
-        'organizationDetail.province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
-        'organizationDetail.district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
-        'organizationDetail.local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
-        'organizationDetail.ward' => ['required'],
-        'organizationDetail.tole' => ['nullable'],
-    ];
-
-    protected array $fifthStepValidations = [
-        'organizationDetail.org_registration_document' => ['required', 'image', 'max:300'],
-        'organizationDetail.org_pan_document' => ['required', 'image', 'max:300'],
-        'organizationDetail.logo' => ['required', 'image', 'max:200'],
-        'taxClearance.document' => ['required', 'max:300'],
-        'taxClearance.year' => ['required'],
-    ];
-
-    protected array $sixthStepValidations = [
         'user.name' => ['required', 'unique:organizations,name'],
         'user.email' => ['required', 'email', 'unique:organizations,email'],
         'user.phone' => ['required', 'unique:organizations,phone'],
@@ -196,8 +145,6 @@ class OrganizationRegisterPersonLivewire extends Component
             2 => $this->secondStepValidations,
             3 => $this->thirdStepValidations,
             4 => $this->fourthStepValidations,
-            5 => $this->fifthStepValidations,
-            6 => $this->sixthStepValidations,
             default => $this->firstStepValidations,
         };
 
@@ -212,14 +159,10 @@ class OrganizationRegisterPersonLivewire extends Component
     {
         $this->validate();
         DB::transaction(function () {
-            $DbUser = Organization::create($this->user);
+            $DbUser = Organization::create($this->user + [
+                    'is_organization' => 0
+                ]);
             $DbUser->userDetail()->create($this->userDetail);
-
-            if ($this->is_organization) {
-                $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
-                $DbOrgDetail->taxClearances()->create($this->taxClearance);
-            }
-
             $this->resetForm();
         });
         $this->dispatchBrowserEvent('alert_message', [
@@ -231,7 +174,7 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('is_organization', 'is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user', 'organizationDetail', 'taxClearance');
+        $this->reset('is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user');
 
     }
 
@@ -292,22 +235,6 @@ class OrganizationRegisterPersonLivewire extends Component
         }
     }
 
-    public function checkOrganizationAddress(): void
-    {
-        if (!empty($this->organizationDetail['province_id'])) {
-            $this->address['organizationDistricts'] = Province::with('districts')->findOrFail($this->organizationDetail['province_id'])->districts;
-            $this->address['organizationProvince'] = $this->provinces->firstWhere('id', $this->organizationDetail['province_id']);
-        }
-        if (!empty($this->organizationDetail['district_id'])) {
-            $this->address['organizationLocalBodies'] = District::with('localBodies')->findOrFail($this->organizationDetail['district_id'])->localBodies;
-            $this->address['organizationDistrict'] = $this->address['organizationDistricts']->firstWhere('id', $this->organizationDetail['district_id']);
-        }
-        if (!empty($this->organizationDetail['local_body_id'])) {
-            $this->address['organizationWards'] = LocalBody::findOrFail($this->organizationDetail['local_body_id'])->ward_no;
-            $this->address['organizationLocalBody'] = $this->address['organizationLocalBodies']->firstWhere('id', $this->organizationDetail['local_body_id']);
-        }
-    }
-
     private function calculateProgressPercentage()
     {
         $this->reset('progressPercentage');
@@ -317,7 +244,6 @@ class OrganizationRegisterPersonLivewire extends Component
     public function messages(): array
     {
         return [
-            'is_organization.required' => 'संस्था/व्यक्ति छानुहोस् ।',
             'userDetail.name_ne.required' => 'नेपालीमा नाम आवश्यक छ ।',
             'userDetail.name_en.required' => 'अंग्रेजीमा नाम आवश्यक छ ।',
             'userDetail.email.required' => 'इमेल आवश्यक छ ।',
@@ -330,6 +256,8 @@ class OrganizationRegisterPersonLivewire extends Component
             'userDetail.citizenship_issued_district.required' => ' नागरिकता जारी गरिएको जिल्ला आवश्यक छ ।',
             'userDetail.citizenship_issued_date.required' => 'नागरिकता जारी गरिएको मिति आवश्यक छ ।',
             'userDetail.citizenship_front.required' => 'नागरिकताको फोटो आवश्यक छ।',
+            'userDetail.citizenship_back.max' => 'नागरिकताको फोटो आवश्यक छ।',
+            'userDetail.citizenship_back.image' => 'नागरिकताको फोटो आवश्यक छ।',
             'userDetail.citizenship_front.max' => 'कागजात अधिकतम साइज २०० केबी ।',
             'userDetail.citizenship_front.image' => 'फाइल फोटोमा हुनुपर्छ ।',
             'userDetail.permanent_province_id.required' => 'स्थायी प्रदेश आवश्यक छ ।',
@@ -340,28 +268,6 @@ class OrganizationRegisterPersonLivewire extends Component
             'userDetail.temporary_district_id.required' => 'अस्थायी जिल्ला आवश्यक छ ।',
             'userDetail.temporary_local_body_id.required' => 'अस्थायी पालिका आवश्यक छ ।',
             'userDetail.temporary_ward.required' => 'अस्थायी वडा नं आवश्यक छ ।',
-            'organizationDetail.org_name_ne.required' => 'संस्थाको नाम नेपालीमा आवश्यक छ । ',
-            'organizationDetail.org_name_en.required' => 'संस्थाको नाम अंग्रेजीमा आवश्यक छ । ',
-            'organizationDetail.org_email.required' => 'संस्थाको इमेल आवश्यक छ । ',
-            'organizationDetail.org_contact.required' => 'संस्थाको सम्पर्क नं आवश्यक छ । ',
-            'organizationDetail.org_registration_no.required' => 'संस्था दर्ता भएको नं आवश्यक छ ।',
-            'organizationDetail.org_pan_no.required' => 'संस्थाको पाना नं आवश्यक छ । ',
-            'organizationDetail.province_id.required' => 'प्रदेश आवश्यक छ ।',
-            'organizationDetail.district_id.required' => 'जिल्ला आवश्यक छ ।',
-            'organizationDetail.local_body_id.required' => 'पालिका आवश्यक छ ।',
-            'organizationDetail.ward.required' => 'वडा नं आवश्यक छ ।',
-            'organizationDetail.org_registration_document.required' => 'संस्था दर्ता भएको कागजात आवश्यक छ ।',
-            'organizationDetail.org_registration_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
-            'organizationDetail.org_registration_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',
-            'organizationDetail.org_pan_document.required' => 'संस्थाको पाना नं को कागजात आवश्यक छ ।',
-            'organizationDetail.org_pan_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
-            'organizationDetail.org_pan_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',
-            'organizationDetail.logo.required' => 'संस्थाको लोगो आवश्यक छ ।',
-            'organizationDetail.logo.max' => 'कागजात अधिकतम साइज २०० केबी ।',
-            'organizationDetail.logo.image' => 'फाइल फोटोमा हुनुपर्छ ।',
-            'taxClearance.document.required' => 'संस्थाले कर तिरेको कागजात आवश्यक छ ।',
-            'taxClearance.document.max' => 'कागजात अधिकतम साइज २०० केबी ।',
-            'taxClearance.year.required' => 'संस्थाले कर तिरेको वर्ष आवश्यक छ ।',
             'user.name.required' => 'प्रयोगकर्ताको नाम आवश्यक छ ।',
             'user.name.unique' => 'यो संगठन पहिल्यै भई सकेको छ ।',
             'user.email.required' => 'इमेल आवश्यक छ ।',
@@ -376,7 +282,6 @@ class OrganizationRegisterPersonLivewire extends Component
     public function render()
     {
         $this->checkPermanentAddress();
-        $this->checkOrganizationAddress();
         $this->checkTemporaryAddress();
 
         if (!empty($this->userDetail['citizenship_issued_district'])) {
