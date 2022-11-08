@@ -6,12 +6,11 @@
         'active'=>!($currentStep != 1),
         'success'=>$currentStep>1
 ])><a href="#step-1" type="button">प्रोपाईटरको
-                        बिवरण </a></li>
+                        विवरण </a></li>
                 <li @class([
         'active'=>!($currentStep != 2),
         'success'=>$currentStep>2
-])><a href="#step-2" type="button">ब्यावसाहिक
-                        बिवरण </a></li>
+])><a href="#step-2" type="button">व्यावसाहिक विवरण </a></li>
                 <li @class([
         'active'=>!($currentStep != 3),
         'success'=>$currentStep>3
@@ -36,13 +35,13 @@
                 @case(2)
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">व्यावसाहिक बिवरण</h2>
+                            <h2 class="font-weight-bold text-center">व्यावसाहिक विवरण</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.business_detail_name" class="form-label">फर्म/कम्पनी/ब्यवसाय को
+                                        <label for="form.business_detail_name" class="form-label">फर्म/कम्पनी/व्यवसाय  को
                                             नाम
                                             नेपलीमा</label>
                                         <input
@@ -50,7 +49,7 @@
                                             class="form-control @error('form.business_detail_name') is-invalid @enderror"
                                             type="text"
                                             id="form.business_detail_name"
-                                            placeholder="फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा"
+                                            placeholder="फर्म/कम्पनी/व्यवसाय  को नाम नेपलीमा"
                                             wire:model="form.business_detail_name"
                                         />
                                         @error('form.business_detail_name')
@@ -58,7 +57,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.business_detail_name_en" class="form-label">फर्म/कम्पनी/ब्यवसाय
+                                        <label for="form.business_detail_name_en" class="form-label">फर्म/कम्पनी/व्यवसाय
                                             को नाम
                                             अंग्रेजीमा</label>
                                         <input
@@ -66,7 +65,7 @@
                                             class="form-control @error('form.business_detail_name_en') is-invalid @enderror"
                                             type="text"
                                             id="form.business_detail_name_en"
-                                            placeholder="फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा"
+                                            placeholder="फर्म/कम्पनी/व्यवसाय  को नाम अंग्रेजीमा"
                                             wire:model="form.business_detail_name_en"
                                         />
                                         @error('form.business_detail_name_en')
@@ -92,7 +91,7 @@
                                     @if($form['business_nature']==='partnership')
                                         <div class="card mt-3 mb-3">
                                             <div class="card-header">
-                                                <h2 class="font-weight-bold text-center">साझेदार हरुको बिवरण</h2>
+                                                <h2 class="font-weight-bold text-center">साझेदार हरुको विवरण</h2>
                                             </div>
                                             <div class="card-body">
                                                 <fieldset>
@@ -421,7 +420,7 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/ब्यबसाय को ठेगाना</h2>
+                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/व्यवसाय  को ठेगाना</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -832,7 +831,7 @@
                                         <td>{{$form['name'] ?? ''}}</td>
                                     </tr>
                                     <tr>
-                                        <th>फोन न</th>
+                                        <th>फोन नं</th>
                                         <td>{{$form['phone'] ?? ''}}</td>
                                     </tr>
                                     <tr>
@@ -916,7 +915,9 @@
                     </div>
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="text-center font-weight-bold"> तिन पुस्ते बिवरण</h2>
+                            <h2 class="text-center font-weight-bold">
+                                तिन पुस्ते विवरण
+                            </h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -948,18 +949,20 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="text-center font-weight-bold">ब्यावसाहिक बिवरण</h2>
+                            <h2 class="text-center font-weight-bold">
+                                व्यावसाहिक विवरण
+                            </h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
                                 <table class="table table-bordered">
                                     <tbody>
                                     <tr>
-                                        <th>फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा</th>
+                                        <th>फर्म/कम्पनी/व्यवसाय को नाम नेपलीमा</th>
                                         <td>{{$form['business_detail_name'] ?? ''}}</td>
                                     </tr>
                                     <tr>
-                                        <th>फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</th>
+                                        <th>फर्म/कम्पनी/व्यवसाय को नाम अंग्रेजीमा</th>
                                         <td>{{$form['business_detail_name_en'] ?? ''}}</td>
                                     </tr>
                                     <tr>
@@ -1027,7 +1030,7 @@
                     @if($form['business_nature']==='partnership')
                         <div class="card mt-3 mb-3">
                             <div class="card-header">
-                                <h2 class="font-weight-bold text-center">साझेदार हरुको बिवरण</h2>
+                                <h2 class="font-weight-bold text-center">साझेदार हरुको विवरण</h2>
                             </div>
                             <div class="card-body">
                                 <fieldset>
@@ -1120,7 +1123,7 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/ब्यबसाय को ठेगाना</h2>
+                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/व्यवसाय को ठेगाना</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -1387,7 +1390,7 @@
                             <fieldset>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.name" class="form-label">व्यवसायी नाम:</label>
+                                        <label for="form.name" class="form-label">व्यवसायी नाम</label>
                                         <input
                                             name="form.name"
                                             class="form-control @error('form.name') is-invalid @enderror"
@@ -1401,7 +1404,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.phone" class="form-label">फोन नं:</label>
+                                        <label for="form.phone" class="form-label">फोन नं</label>
                                         <input
                                             name="form.phone"
                                             class="form-control @error('form.phone') is-invalid @enderror"
@@ -1431,7 +1434,7 @@
                                     </div>
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.email" class="form-label">इमेल:</label>
+                                        <label for="form.email" class="form-label">इमेल</label>
                                         <input
                                             name="form.email"
                                             class="form-control @error('form.email') is-invalid @enderror"
@@ -1516,7 +1519,7 @@
                                             class="form-control @error('form.occupation') is-invalid @enderror"
                                             type="text"
                                             id="form.occupation"
-                                            placeholder="मुखय पेशा"
+                                            placeholder="मुख्य पेशा"
                                             wire:model="form.occupation"
                                         />
                                         @error('form.occupation')
@@ -1524,7 +1527,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.citizenship_no" class="form-label">नागरिकता नम्बर: </label>
+                                        <label for="form.citizenship_no" class="form-label">नागरिकता नम्बर </label>
                                         <input
                                             name="form.citizenship_no"
                                             class="form-control @error('form.citizenship_no') is-invalid @enderror"
@@ -1538,7 +1541,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.issue_date" class="form-label">जारी मिति:</label>
+                                        <label for="form.issue_date" class="form-label">जारी मिति</label>
                                         <input
                                             name="form.issue_date"
                                             class="form-control @error('form.issue_date') is-invalid @enderror"
@@ -1682,7 +1685,7 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">तिन पुस्ते बिवरण</h2>
+                            <h2 class="font-weight-bold text-center">तिन पुस्ते विवरण</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>

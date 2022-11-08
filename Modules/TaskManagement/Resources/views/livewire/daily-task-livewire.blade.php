@@ -3,7 +3,7 @@
         <div class="col-md-4 mb-2">
             <label for="date">मिति *</label>
             <input type="text"
-                   wire:model="form.date" class="form-control" id="date">
+                   wire:model="form.date" class="form-control" id="date" placeholder="मिति">
             @error('form.date')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror

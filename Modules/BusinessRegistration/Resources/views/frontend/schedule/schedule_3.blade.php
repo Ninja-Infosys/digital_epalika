@@ -27,13 +27,13 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12" id="printData">
                     <div class="card mb_30 ">
-                        <div class="card-body border border-5 p-3">
+                        <div class="card-body">
                             <div class="font-black">
-                                <h5 class="text-center mt-3"><b> अनुसूची-३</b></h5>
+                                <h5 class="text-center"><b> अनुसूची-३</b></h5>
                                 <div class="text-center">
                                             <span><b>कार्यविधिको दफा<span
-                                                        class="underline-dotted custom-width"></span>को उपदफा(<span
-                                                        class="underline-dotted custom-width"></span>)
+                                                        class="underline-dotted"></span>को उपदफा(<span
+                                                        class="underline-dotted"></span>)
                                         संग सम्बन्धित</b><br>
                                     <span class="underline-dotted custom-width"></span>
                                         <span class="underline-dotted custom-width"></span> पालिका<br>
@@ -60,9 +60,9 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="card border border-dark"
-                                                     style="width: 7rem; height: 8rem;">
+                                                     style="width: 6rem; height: 6rem;">
                                                     <div class="card-body">
-                                                        <h5 class="card-title text-center my-4">फोटो</h5>
+                                                        <h5 class="card-title text-center my-1">फोटो</h5>
                                                     </div>
                                                 </div>
                                             </div>

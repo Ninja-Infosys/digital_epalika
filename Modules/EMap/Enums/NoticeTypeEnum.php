@@ -6,48 +6,47 @@ enum NoticeTypeEnum: string
 {
 
     //application
-    case MAP_ACCEPTANCE = 'map acceptance';
-    case TECHNICIAN_APPROVAL = 'technician approval';
-    case ENGINEER_APPROVAL = 'engineer approval';
-    case MAP_PASS_FOR_BUILDING = 'map pass for building';
-    case REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE = 'regarding permission for construction work of superstructure';
-    case CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION = 'application for construction completion certificate';
-    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = 'regarding construction completion certificate';
+    case MAP_ACCEPTANCE = 'map_acceptance';
+    case TECHNICIAN_APPROVAL = 'technician_approval';
+    case ENGINEER_APPROVAL = 'engineer_approval';
+    case MAP_PASS_FOR_BUILDING = 'map_pass_building';
+    case REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE = 'permission_construction_work_superstructure';
+    case CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION = 'application_construction_completion_certificate';
+    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = ' construction_completion_certificate';
 
     //notice enums
-    case NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR = 'notice issued in the name of sanghiar';
-    case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15 days notice adjourned';
-    case REGARDING_SENDING_DETAILS = 'regarding sending details';
-    case REVISED_SUPERSTRUCTURE_PERMIT = 'revised superstructure permit';
+    case NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR = 'notice_issued_name_sanghiar';
+    case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15_days_notice_adjourned';
+    case REGARDING_SENDING_DETAILS = ' sending_details';
+    case REVISED_SUPERSTRUCTURE_PERMIT = 'revised_superstructure_permit';
     //bond enums
-    case FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS = '15 day grace period for map pass';
-    case SARZAMIN_MUCHULKA = 'sarzamin muchulka';
+    case FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS = '15_day_grace_period_map_pass';
+    case SARZAMIN_MUCHULKA = 'sarzamin_muchulka';
     //report enums
-    case TECHNICAL_REPORT = 'technical report';
-    case CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL = 'construction supervision report up to plinth level';
-    case THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT = 'the technician who completed the first phase of work report';
-    case CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE = 'consultants Report on Completion of First Phase';
-    case THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT = 'the technician who completed the second phase of work report';
-    case CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE = 'consultants Report on Completion of Second Phase';
-    case CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE = 'construction supervision report upto superstructure';
+    case TECHNICAL_REPORT = 'technical_report';
+    case CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL = 'construction_supervision_report_plinth_level';
+    case THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT = 'technician_completed_first_phase_work_report';
+    case CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE = 'consultants_Report_on_Completion_First_Phase';
+    case THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT = 'technician_completed_second_phase_work_report';
+    case CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE = 'consultants_Report_on_Completion_Second_Phase';
+    case CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE = 'construction_supervision_report_superstructure';
     //certificate enums
-    case PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL = 'permission letter for construction work up to plinth level';
-    case PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE = 'Permanent Building Permit (for Superstructure)';
-    case BUILDING_COMPLETION_CERTIFICATE = 'building completion certificate';
+    case PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL = 'permission_letter_construction_work_plinth_level';
+    case PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE = 'Permanent_Building_Permit_Superstructure';
+    case BUILDING_COMPLETION_CERTIFICATE = 'building_completion_certificate';
     //agreement enums
-    case AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD = 'agreement letter (between supervisor/consultant and landlord)';
-    case AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR = 'agreement letter (homeowner and builder/contractor)';
+    case AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD = 'agreement_letter_supervisor_landlord)';
+    case AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR = 'agreement_letter_homeowner_contractor)';
     //order enums
-    case GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE = 'granting permission for construction up to the plinth level of the house';
-    case REGARDING_SUPERSTRUCTURE_PERMIT = 'regarding superstructure permit';
-    case REVISED_SUPERSTRUCTURE_PERMIT_ORDER = 'revised superstructure permit order';
-    case HOUSE_MAP_NAMSARI = 'house map namsari';
+    case GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE = 'granting_plinth_permit';
+    case REGARDING_SUPERSTRUCTURE_PERMIT = 'superstructure_permit';
+    case REVISED_SUPERSTRUCTURE_PERMIT_ORDER = 'revised_superstructure_permit_order';
+    case HOUSE_MAP_NAMSARI = 'house_map_namsari';
 
-//    registration
-    case REGARDING_FEES_AND_REGISTRATION = 'regarding fees and registration';
+    //registration
+    case REGARDING_FEES_AND_REGISTRATION = 'fees_registration';
 
     //heir
-
     case HEIR = 'heir';
 
     //permission enums
@@ -98,12 +97,12 @@ enum NoticeTypeEnum: string
             self::REGARDING_SUPERSTRUCTURE_PERMIT => 'सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             self::HOUSE_MAP_NAMSARI => 'घरनक्सा नामसारी',
-            //    certificate enums
+            //certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',
             self::BUILDING_COMPLETION_CERTIFICATE => 'भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र',
 
-//            registration
+           //registration
             self::REGARDING_FEES_AND_REGISTRATION => 'दस्तुर तथा दर्ता सम्बन्धि',
 
             //heir

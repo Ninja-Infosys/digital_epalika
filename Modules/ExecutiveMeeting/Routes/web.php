@@ -12,5 +12,5 @@
 */
 
 Route::prefix('executivemeeting')->group(function() {
-    Route::get('/', 'ExecutiveMeetingController@index');
+//    Route::get('/', 'ExecutiveMeetingController@index');
 });
