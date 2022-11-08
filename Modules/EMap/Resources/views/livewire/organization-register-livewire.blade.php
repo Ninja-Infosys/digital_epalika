@@ -6,7 +6,7 @@
                 <span class="d-none d-sm-inline">व्यक्तिगत विवरण</span>
             </a>
         </li>
-        @if($is_organization==="0")
+
         <li class="nav-item">
             <a class="nav-link rounded-0 pt-2 pb-2 {{$currentStep===2 ? 'active' : ''}}">
                 <i class="fa fa-check-circle me-1"></i>
@@ -19,7 +19,6 @@
                 <span class="d-none d-sm-inline">ठेगाना</span>
             </a>
         </li>
-        @endif
         @if($is_organization==="1")
             <li class="nav-item">
                 <a class="nav-link rounded-0 pt-2 pb-2 {{$currentStep===4 ? 'active' : ''}}">
@@ -990,7 +989,6 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-
                 <fieldset>
                     <legend class="title">ब्यतिगत बिबरण</legend>
                     <div class="row">
@@ -1120,9 +1118,11 @@
                 </fieldset>
                 <ul class="list-inline wizard mt-3">
                     <li class="next d-flex justify-content-around">
-                        <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-success">
-                            <i class="fa fa-arrow-circle-right"></i> अर्को
-                        </button>
+
+                            <button type="button" wire:click.prevent="nextStep(2)" class="btn btn-success">
+                                <i class="fa fa-arrow-circle-right"></i> अर्को
+                            </button>
+
                     </li>
                 </ul>
         @endswitch
