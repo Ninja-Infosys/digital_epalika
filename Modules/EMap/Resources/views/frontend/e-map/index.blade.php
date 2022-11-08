@@ -80,10 +80,10 @@
                         <div class="col-md-6 p-2">
                             <div class="card bg-danger text-light text-center">
                                 <div class="card-body">
-                                    <h5 class="fw-semibold mt-2">डाउनलोड</h5>
+                                    <h5 class="fw-semibold mt-2">नक्सा ट्रयाक</h5>
                                     <i class="fa fa-download fs-5"></i>
-                                    <p>नक्सा समन्धी कागजा ।</p>
-                                    <a href="{{url('downloads')}}" class="btn btn-light"><span>डाउनलोडहरु</span>
+                                    <p>घर नक्साको स्थिति बुझन</p>
+                                    <a href="{{route('mapTrack')}}" class="btn btn-light"><span>ट्रयाक</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>

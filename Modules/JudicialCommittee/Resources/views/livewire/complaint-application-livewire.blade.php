@@ -446,7 +446,6 @@
                 Livewire.emit('postAdded', formattedDate, inputFieldDate);
             })
 
-
             let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
             let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
             Livewire.emit('postAdded', todayBsDate, todayAdDate);
