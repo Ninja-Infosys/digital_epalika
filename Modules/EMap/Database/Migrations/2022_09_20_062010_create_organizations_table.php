@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('phone')->nullable();
             $table->boolean('is_active')->default(0);
+            $table->boolean('is_organization')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

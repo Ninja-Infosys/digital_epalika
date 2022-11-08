@@ -47,6 +47,12 @@ class OrganizationAuthController extends Controller
     }
 
 
+    public function showOrganizationRegisterFormPerson()
+    {
+        return view('emap::organization.auth.register_person');
+    }
+
+
     public function invitation(Organization $organization)
     {
         if (!request()->hasValidSignature() || $organization->password) {

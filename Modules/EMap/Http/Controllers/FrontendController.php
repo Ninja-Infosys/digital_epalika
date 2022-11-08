@@ -36,4 +36,8 @@ class FrontendController extends Controller
     {
         return view('emap::frontend.e-map.map_track.form_details');
     }
+    public function mapForm()
+    {
+        return view('emap::frontend.e-map.map_track.form');
+    }
 }

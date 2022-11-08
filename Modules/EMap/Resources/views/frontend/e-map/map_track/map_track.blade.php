@@ -27,7 +27,7 @@
                                         <input type="text" name="phone_no" id="phone_no">
                                     </div>
                                 </div> <!-- end row-->
-                                <div class="d-flex justify-content-center pt-3">
+                                <div class="d-flex justify-content-end pt-3">
                                     <a href="{{route('formDetails')}}" class="btn btn-primary btn-sm">
                                         <i class="fa fa-search"></i>
                                         <span>ट्रयाक गर्नुहोस्</span>
