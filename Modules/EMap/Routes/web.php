@@ -33,6 +33,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('form', 'form');
     Route::get('mapTrack', 'mapTrack')->name('mapTrack');
     Route::get('formDetails', 'formDetails')->name('formDetails');
+    Route::get('mapForm', 'mapForm')->name('mapForm');
 });
 
 //track map

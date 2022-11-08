@@ -83,7 +83,7 @@
                         <td>१२.</td>
                         <td>प्लिन्थ लेभलसम्मको निर्माण कार्य इजाजतको लागि निवेदन
                         </td>
-                        <td class="text-center"><a href="#" class="btn btn-primary btn-sm">
+                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-edit"></i>
                                 <span>फार्म भर्नुहोस्</span>
                             </a>
@@ -92,7 +92,7 @@
                     <tr>
                         <td>१३.</td>
                         <td>लेआउट तथा जग जाँचको लागि निवेदन</td>
-                        <td class="text-center"><a href="#" class="btn btn-primary btn-sm">
+                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-edit"></i>
                                 <span>फार्म भर्नुहोस्</span>
                             </a>
@@ -107,7 +107,7 @@
                         <td>१५.</td>
                         <td>सुपरस्ट्रक्चरको निर्माण कार्य इजाजतको लागि निवेदन
                         </td>
-                        <td class="text-center"><a href="#" class="btn btn-primary btn-sm">
+                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-edit"></i>
                                 <span>फार्म भर्नुहोस्</span>
                             </a>
@@ -117,7 +117,7 @@
                         <td>१६.</td>
                         <td>निर्माण कार्य सम्पन्न प्रमाण-पत्रको लागि निवेदन
                         </td>
-                        <td class="text-center"><a href="#" class="btn btn-primary btn-sm">
+                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-edit"></i>
                                 <span>फार्म भर्नुहोस्</span>
                             </a>
@@ -126,7 +126,7 @@
                     <tr>
                         <td>१७.</td>
                         <td>वारेसनामा</td>
-                        <td class="text-center"><a href="#" class="btn btn-primary btn-sm">
+                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-edit"></i>
                                 <span>फार्म भर्नुहोस्</span>
                             </a>
@@ -135,7 +135,7 @@
                     <tr>
                         <td>१८.</td>
                         <td>मन्जुरीनामा</td>
-                        <td class="text-center"><a href="#" class="btn btn-primary btn-sm">
+                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-edit"></i>
                                 <span>फार्म भर्नुहोस्</span>
                             </a>
