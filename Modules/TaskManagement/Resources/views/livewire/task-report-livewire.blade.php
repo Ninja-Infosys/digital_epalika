@@ -2,92 +2,91 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form wire:submit.prevent="submitFormData">
-                    <div class="row">
-                        <div class="col-md-3 mb-2">
-                            <label for="from_date">मिति देखि</label>
-                            <input type="text"
-                                   wire:model="form.from_date" class="form-control" id="from_date" placeholder="मिति देखि">
-                            @error('form.from_date')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label for="to_date">मिति सम्म</label>
-                            <input type="text"
-                                   wire:model="form.to_date" class="form-control" id="to_date" placeholder="मिति सम्म">
-                            @error('form.to_date')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label for="branch_id" class="form-label">शाखा</label>
-                            <select
-                                wire:model="form.branch_id"
-                                class="form-select @error('branch_id') is-invalid @enderror"
-                                id="branch_id">
-                                <option value="">--- छान्नुहोस् ---</option>
-                                @foreach($branches as $branch)
-                                    @if(count($branch->branches)>0)
-                                        <optgroup label="{{$branch->branch_name}}">
-                                            @foreach($branch->branches as $sub_branch)
-                                                <option
-                                                    value="{{$sub_branch->id}}">
-                                                    {{$sub_branch->branch_name}}
-                                                </option>
-                                            @endforeach
-                                        </optgroup>
-                                    @else
-                                        <option
-                                            value="{{$branch->id}}">
-                                            {{$branch->branch_name}}
-                                        </option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            @error('form.branch_id')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label for="branch_id" class="form-label">शाखाहरु अनुसार कार्यहरू</label>
-                            <select
-                                wire:model="form.task_category_id"
-                                class="form-select @error('task_category_id') is-invalid @enderror"
-                                id="branch_id">
-                                <option value="">--- छान्नुहोस् ---</option>
-                                @foreach($taskCategories as $taskCategory)
-                                    <option value="{{$taskCategory->id}}">
-                                        {{$taskCategory->title}}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('form.task_category_id')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <label for="branch_id" class="form-label">कार्य विभाजन *</label>
-                            <select
-                                wire:model="form.task_division_id"
-                                class="form-select @error('branch_id') is-invalid @enderror"
-                                id="branch_id">
-                                <option value="">--- छान्नुहोस् ---</option>
-                                @foreach($taskDivisions as $taskDivision)
-                                    <option value="{{$taskDivision->id}}">
-                                        {{$taskDivision->title}}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('form.task_division_id')
-                            <div class="invalid-feedback">{{$message}}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </form>
+                {{--                <form wire:submit.prevent="submitFormData">--}}
+                {{--                    <div class="row">--}}
+                {{--                        <div class="col-md-3 mb-2">--}}
+                {{--                        <label>मिति</label>--}}
+                {{--                        <div class="input-group">--}}
+                {{--                            <input type="text"--}}
+                {{--                                   wire:model="form.from_date" class="form-control" id="from_date" placeholder="मिति देखि">--}}
+                {{--                            @error('form.from_date')--}}
+                {{--                            <div class="invalid-feedback">{{$message}}</div>--}}
+                {{--                            @enderror--}}
+                {{--                            <input type="text"--}}
+                {{--                                   wire:model="form.to_date" class="form-control" id="to_date" placeholder="मिति सम्म">--}}
+                {{--                            @error('form.to_date')--}}
+                {{--                            <div class="invalid-feedback">{{$message}}</div>--}}
+                {{--                            @enderror--}}
+                {{--                        </div>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="col-md-3 mb-2">--}}
+                {{--                            <label for="branch_id" class="form-label">शाखा</label>--}}
+                {{--                            <select--}}
+                {{--                                wire:model="form.branch_id"--}}
+                {{--                                class="form-select @error('branch_id') is-invalid @enderror"--}}
+                {{--                                id="branch_id">--}}
+                {{--                                <option value="">--- छान्नुहोस् ---</option>--}}
+                {{--                                @foreach($branches as $branch)--}}
+                {{--                                    @if(count($branch->branches)>0)--}}
+                {{--                                        <optgroup label="{{$branch->branch_name}}">--}}
+                {{--                                            @foreach($branch->branches as $sub_branch)--}}
+                {{--                                                <option--}}
+                {{--                                                    value="{{$sub_branch->id}}">--}}
+                {{--                                                    {{$sub_branch->branch_name}}--}}
+                {{--                                                </option>--}}
+                {{--                                            @endforeach--}}
+                {{--                                        </optgroup>--}}
+                {{--                                    @else--}}
+                {{--                                        <option--}}
+                {{--                                            value="{{$branch->id}}">--}}
+                {{--                                            {{$branch->branch_name}}--}}
+                {{--                                        </option>--}}
+                {{--                                    @endif--}}
+                {{--                                @endforeach--}}
+                {{--                            </select>--}}
+                {{--                            @error('form.branch_id')--}}
+                {{--                            <div class="invalid-feedback">{{$message}}</div>--}}
+                {{--                            @enderror--}}
+                {{--                        </div>--}}
+                {{--                        <div class="col-md-3 mb-2">--}}
+                {{--                            <label for="branch_id" class="form-label">शाखाहरु अनुसार कार्यहरू</label>--}}
+                {{--                            <select--}}
+                {{--                                wire:model="form.task_category_id"--}}
+                {{--                                class="form-select @error('task_category_id') is-invalid @enderror"--}}
+                {{--                                id="branch_id">--}}
+                {{--                                <option value="">--- छान्नुहोस् ---</option>--}}
+                {{--                                @foreach($taskCategories as $taskCategory)--}}
+                {{--                                    <option value="{{$taskCategory->id}}">--}}
+                {{--                                        {{$taskCategory->title}}--}}
+                {{--                                    </option>--}}
+                {{--                                @endforeach--}}
+                {{--                            </select>--}}
+                {{--                            @error('form.task_category_id')--}}
+                {{--                            <div class="invalid-feedback">{{$message}}</div>--}}
+                {{--                            @enderror--}}
+                {{--                        </div>--}}
+                {{--                        <div class="col-md-3 mb-2">--}}
+                {{--                            <label for="branch_id" class="form-label">कार्य विभाजन *</label>--}}
+                {{--                            <select--}}
+                {{--                                wire:model="form.task_division_id"--}}
+                {{--                                class="form-select @error('branch_id') is-invalid @enderror"--}}
+                {{--                                id="branch_id">--}}
+                {{--                                <option value="">--- छान्नुहोस् ---</option>--}}
+                {{--                                @foreach($taskDivisions as $taskDivision)--}}
+                {{--                                    <option value="{{$taskDivision->id}}">--}}
+                {{--                                        {{$taskDivision->title}}--}}
+                {{--                                    </option>--}}
+                {{--                                @endforeach--}}
+                {{--                            </select>--}}
+                {{--                            @error('form.task_division_id')--}}
+                {{--                            <div class="invalid-feedback">{{$message}}</div>--}}
+                {{--                            @enderror--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                    <button type="submit" class="btn btn-primary">--}}
+                {{--                        <i class="fa fa-search"></i>--}}
+                {{--                    </button>--}}
+                {{--                </form>--}}
             </div>
         </div>
     </div>
@@ -96,7 +95,62 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive">
+                <div id="headingOne">
+                    <button type="button" class="btn btn-info dropdown-toggle"  data-bs-toggle="collapse" href="#collapseOne" aria-expanded="true">
+                        फिल्टर <i class="fa fa-filter"></i>
+                    </button>
+            </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion" style="">
+                    <form class="p-1 border mt-1" wire:submit.prevent="submitFormData">
+                        <div class="row">
+                            <div class="col-md-3 mb-1">
+                                <label>मिति</label>
+                                <div class="input-group">
+                                    <input type="text"
+                                           wire:model="form.from_date" class="form-control" id="from_date"
+                                           placeholder="मिति देखि">
+                                    <input type="text"
+                                           wire:model="form.to_date" class="form-control" id="to_date"
+                                           placeholder="मिति सम्म">
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label for="branch_id" class="form-label">शाखा</label>
+                                @foreach($branches as $branch)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input"
+                                               id="{{$branch->id}}">
+                                        <label class="form-check-label"
+                                               for="{{$branch->id}}">{{$branch->branch_name}}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label for="branch_id" class="form-label">शाखाहरु अनुसार कार्यहरू</label>
+                                @foreach($taskCategories as $taskCategory)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input"
+                                               id="{{$taskCategory->id}}">
+                                        <label class="form-check-label"
+                                               for="{{$taskCategory->id}}">{{$taskCategory->branch_name}}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <label for="branch_id" class="form-label">कार्य विभाजन</label>
+                                @foreach($taskDivisions as $taskDivision)
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input"
+                                               id="{{$taskDivision->id}}">
+                                        <label class="form-check-label"
+                                               for="{{$taskDivision->id}}">{{$taskDivision->branch_name}}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive mt-2">
                     <table class="table table-sm table-bordered">
                         <thead>
                         <tr>

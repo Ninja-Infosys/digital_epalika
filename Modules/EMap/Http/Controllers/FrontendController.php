@@ -28,8 +28,12 @@ class FrontendController extends Controller
     {
         return view('emap::frontend.e-map.register.register-form');
     }
-    public function track()
+    public function mapTrack()
     {
-        return view('emap::frontend.e-map.track.track');
+        return view('emap::frontend.e-map.map_track.map_track');
+    }
+    public function formDetails()
+    {
+        return view('emap::frontend.e-map.map_track.form_details');
     }
 }
