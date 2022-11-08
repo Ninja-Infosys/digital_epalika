@@ -3,69 +3,6 @@
         <div class="col-md-12 mb-2">
             <fieldset class="mb-2">
                 <legend>
-                    <h4 class="text-info">निवेदकको विवरण</h4>
-                </legend>
-                <div class="row">
-                    <div class="col-md-4 mb-2">
-                        <label for="applicant_name" class="form-label">निवेदक को नाम<span
-                                class="text-danger">*</span></label>
-                        <input
-                            type="text"
-                            wire:model="form.applicant_name"
-                            class="form-control"
-                            id="applicant_name"
-                            placeholder="उजुरीकर्ता को नाम"
-                        />
-                        @error('form.applicant_name')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="applicant_phone" class="form-label">फोन न:<span class="text-danger">*</span></label>
-                        <input
-                            type="text"
-                            wire:model="form.applicant_phone"
-                            class="form-control"
-                            id="applicant_phone"
-                            placeholder="नाता"
-                        />
-                        @error('form.applicant_phone')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="applicant_address" class="form-label">ठेगाना<span
-                                class="text-danger">*</span></label>
-                        <input
-                            type="text"
-                            wire:model="form.applicant_address"
-                            class="form-control"
-                            id="applicant_address"
-                            placeholder="ठेगाना"
-                        />
-                        @error('form.applicant_address')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="applicant_signature" class="form-label">निवेदकको सहि<span
-                                class="text-danger">*</span></label>
-                        <input
-                            type="file"
-                            wire:model="form.applicant_signature"
-                            class="form-control"
-                            id="defendant_name"
-                            placeholder="प्रतिवादी को नाम"
-                        />
-                        @error('form.applicant_signature')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset class="mb-2">
-                <legend>
                     <h4 class="text-info">वादीको विवरण</h4>
                 </legend>
                 <div class="row">

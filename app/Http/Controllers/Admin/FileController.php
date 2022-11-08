@@ -24,7 +24,7 @@ class FileController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         if ($request->hasFile('upload')) {
             $file = File::create([

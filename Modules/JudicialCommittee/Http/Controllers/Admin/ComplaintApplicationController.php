@@ -4,12 +4,18 @@ namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 
 class ComplaintApplicationController extends Controller
 {
     public function index()
     {
+        abort_if(Gate::denies('complaintApplication_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
         $complaintApplications=ComplaintApplication::orderByDesc('date')->get();
 
         return view('judicialcommittee::admin.complaint_application.index',compact('complaintApplications'));
@@ -17,31 +23,47 @@ class ComplaintApplicationController extends Controller
 
     public function create()
     {
+        abort_if(Gate::denies('complaintApplication_create'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
         return view('judicialcommittee::admin.complaint_application.create');
     }
 
-    public function store(Request $request)
+    public function show(ComplaintApplication $complaintApplication)
     {
-        //
-    }
+        abort_if(Gate::denies('complaintApplication_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
 
-    public function show($id)
-    {
         return view('judicialcommittee::show');
     }
 
-    public function edit($id)
+    public function edit(ComplaintApplication $complaintApplication)
     {
+        abort_if(Gate::denies('complaintApplication_edit'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
         return view('judicialcommittee::edit');
     }
 
-    public function update(Request $request, $id)
+    public function destroy(ComplaintApplication $complaintApplication)
     {
-        //
-    }
+        abort_if(Gate::denies('complaintApplication_delete'),
+            403,
+            'You are not allowed to access this resource'
+        );
+        if($complaintApplication->applicant_signature){
+            $this->deleteFile($complaintApplication->applicant_signature);
+        }
 
-    public function destroy($id)
-    {
-        //
+        $complaintApplication->delete();
+
+        toast('आवेदन सफलतापूर्वक मेटाइयो','success');
+        return back();
     }
 }

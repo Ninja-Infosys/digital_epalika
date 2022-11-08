@@ -109,8 +109,8 @@
 
                                 </div>
                                 <div class="col-md-12 mb-2">
-                                    <label for="editor" class="form-label">डाटा *</label>
-                                    <textarea name="data" id="editor" cols="30" rows="10"
+                                    <label for="data" class="form-label">डाटा *</label>
+                                    <textarea name="data" id="data" cols="30" rows="10"
                                               class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
                                     @error('data')
                                     {{--                                    <div class="invalid-feedback">{{$message}}</div>--}}
@@ -127,12 +127,12 @@
         </div>
     </div>
     @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/css/neo.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
     @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/editor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/js/editor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
 
         <script>
             if (CKEDITOR.env.ie && CKEDITOR.env.version < 9)
@@ -140,39 +140,30 @@
 
             // The trick to keep the editor in the sample quite small
             // unless user specified own height.
-            CKEDITOR.config.height = 150;
+            CKEDITOR.config.height = 200;
             CKEDITOR.config.width = 'auto';
 
 
             const wysiwygareaAvailable = isWysiwygareaAvailable(),
                 isBBCodeBuiltIn = !!CKEDITOR.plugins.get('bbcode');
 
+            $(".ckEditor").each(function () {
+                const editorElement = CKEDITOR.document.getById(this.id);
 
-            const editorElement = CKEDITOR.document.getById('editor');
+                const editor = CKEDITOR.replace(this.id, {
+                    filebrowserBrowseUrl: "{{route('admin.file.index')}}",
+                    filebrowserUploadUrl: "{{route('admin.file.store',['_token'=>csrf_token()])}}"
+                });
 
-            CKEDITOR.replace('editor', {
-                filebrowserBrowseUrl: "{{route('admin.file.index')}}",
-                filebrowserUploadUrl: "{{route('admin.file.store',['_token'=>csrf_token()])}}"
-            });
+                if (wysiwygareaAvailable) {
+                    CKEDITOR.replace(this.id);
+                } else {
+                    editorElement.setAttribute('contenteditable', 'true');
+                    CKEDITOR.inline(this.id);
 
-            // :(((
-            if (isBBCodeBuiltIn) {
-                editorElement.setHtml(
-                    'Hello world!\n\n' +
-                    'I\'m an instance of [url=https://ckeditor.com]CKEditor[/url].'
-                );
-            }
+                }
+            })
 
-            // Depending on the wysiwygarea plugin availability initialize classic or inline editor.
-            if (wysiwygareaAvailable) {
-                CKEDITOR.replace('editor');
-            } else {
-                editorElement.setAttribute('contenteditable', 'true');
-                CKEDITOR.inline('editor');
-
-                // TODO we can consider displaying some info box that
-                // without wysiwygarea the classic editor may not work.
-            }
 
             function isWysiwygareaAvailable() {
                 // If in development mode, then the wysiwygarea must be available.

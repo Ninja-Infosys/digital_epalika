@@ -36,7 +36,7 @@
                 @case(2)
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">ब्यावसाहिक बिवरण</h2>
+                            <h2 class="font-weight-bold text-center">व्यावसाहिक बिवरण</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -677,11 +677,18 @@
 
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="form.citizen_ship" class="form-label">नागरिकता प्रमाणपत्रको
-                                            प्रतिलिपि-१</label>
-                                        <input type="file" class="form-control" id="form.citizen_ship"
-                                               wire:model="form.citizen_ship"/>
-                                        @error('form.citizen_ship')
+                                        <label for="form.citizenship_front" class="form-label"> नागरिकता अपलोड गर्नुहोस् (आगाडी)</label>
+                                        <input type="file" class="form-control" id="form.citizenship_front"
+                                               wire:model="form.citizenship_front"/>
+                                        @error('form.citizenship_front')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="form.citizenship_back" class="form-label"> नागरिकता अपलोड गर्नुहोस् (पछाडी)</label>
+                                        <input type="file" class="form-control" id="form.citizenship_back"
+                                               wire:model="form.citizenship_back"/>
+                                        @error('form.citizenship_back')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </div>
@@ -713,7 +720,7 @@
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <label for="form.thumb" class="form-label">औठाको छाप</label>
                                         <input type="file" class="form-control" id="form.thumb"
                                                wire:model="form.thumb"/>
@@ -786,7 +793,7 @@
                                             id="form.square"
                                             placeholder="वर्गफिट"
                                             wire:model="form.square"
-                                        />
+                                         disabled />
                                         @error('form.square')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -1237,10 +1244,18 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>नागरिकता प्रमाणपत्रको प्रतिलिपि-१</th>
+                                        <th>नागरिकता अपलोड गर्नुहोस् (आगाडी)</th>
                                         <td>
-                                            @if(!empty($form['citizen_ship']))
-                                                <img src="{{$form['citizen_ship']->temporaryUrl()}}" alt="" height="60">
+                                            @if(!empty($form['citizenship_front']))
+                                                <img src="{{$form['citizenship_front']->temporaryUrl()}}" alt="" height="60">
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>नागरिकता अपलोड गर्नुहोस् (पछाडी)</th>
+                                        <td>
+                                            @if(!empty($form['citizenship_back']))
+                                                <img src="{{$form['citizenship_back']->temporaryUrl()}}" alt="" height="60">
                                             @endif
                                         </td>
                                     </tr>
