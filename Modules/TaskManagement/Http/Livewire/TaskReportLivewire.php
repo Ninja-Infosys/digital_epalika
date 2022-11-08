@@ -3,7 +3,9 @@
 namespace Modules\TaskManagement\Http\Livewire;
 
 use App\Models\Settings\Branch;
+use Illuminate\Console\View\Components\Task;
 use Livewire\Component;
+use Modules\TaskManagement\Entities\DailyTask;
 use Modules\TaskManagement\Entities\TaskCategory;
 use Modules\TaskManagement\Entities\TaskDivision;
 
@@ -12,20 +14,22 @@ class TaskReportLivewire extends Component
     public $branches = [];
     public $taskCategories = [];
     public $taskDivisions = [];
+    public $dailyTasks = [];
 
     public array $form = [
         'from_date' => null,
         'to_date' => null,
-        'branch_id' => null,
-        'task_category_id' => null,
-        'task_division_id' => null,
+        'branch_id' => [],
+        'task_category_id' => [],
+        'task_division_id' => [],
     ];
 
-    public function mount(){
-        $this->branches = Branch::with('branches')->whereNull('branch_id')->get();
+    public function mount()
+    {
+        $this->branches = Branch::all();
     }
 
-    protected $listeners=['fromDateChanged','toDateChanged'];
+    protected $listeners = ['fromDateChanged', 'toDateChanged'];
 
     public function fromDateChanged($nepaliDate, $englishDate)
     {
@@ -40,14 +44,35 @@ class TaskReportLivewire extends Component
     public function render()
     {
         if (!empty($this->form['branch_id'])) {
-            $this->taskCategories = TaskCategory::where('branch_id', $this->form['branch_id'])->get();
+            $this->taskCategories = TaskCategory::whereIn('branch_id', $this->form['branch_id'])->get();
         }
         if (!empty($this->form['task_category_id'])) {
-            $this->taskDivisions = TaskDivision::where('task_category_id', $this->form['task_category_id'])->get();
+            $this->taskDivisions = TaskDivision::whereIn('task_category_id', $this->form['task_category_id'])->get();
         }
-        return view('taskmanagement::livewire.task-report-livewire');
-    }
-    public function submitFormData(){
 
+        $this->dailyTasks = DailyTask::with('taskDivision.taskCategory')->where(function ($query) {
+            if (!empty($this->form['from_date'])) {
+                $query->whereDate('date', '>=', $this->form['from_date']);
+            }
+            if (!empty($this->form['to_date'])) {
+                $query->whereDate('date', '<=', $this->form['to_date']);
+            }
+            if (!empty($this->form['branch_id'])) {
+                $query->whereHas('taskDivision.taskCategory.branch', function ($query) {
+                    $query->whereIn('id', $this->form['branch_id']);
+                });
+            }
+            if (!empty($this->form['task_category_id'])) {
+                $query->whereHas('taskDivision.taskCategory', function ($query) {
+                    $query->whereIn('id', $this->form['task_category_id']);
+                });
+            }
+            if (!empty($this->form['task_division_id'])) {
+                $query->whereIn('task_division_id', $this->form['task_division_id']);
+            }
+
+        })->orderByDesc('date')->get();
+
+        return view('taskmanagement::livewire.task-report-livewire');
     }
 }

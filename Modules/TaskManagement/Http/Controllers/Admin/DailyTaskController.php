@@ -42,6 +42,11 @@ class DailyTaskController extends Controller
 
     public function destroy(DailyTask $dailyTask)
     {
+        foreach ($dailyTask->files as $file){
+            $this->deleteFile($file->file);
+        }
+        $dailyTask->files()->delete();
+
         $dailyTask->delete();
 
         toast('दैनिक कार्य सफलतापूर्वक मेटाइयो','success');

@@ -3,6 +3,7 @@
 namespace Modules\TaskManagement\Http\Livewire;
 
 use App\Models\Settings\Branch;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -67,6 +68,7 @@ class DailyTaskLivewire extends Component
 
         DB::transaction(function () use ($formData) {
             $dailyTask = DailyTask::create([
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                 'date' => $formData['date'],
                 'en_date' => $formData['en_date'],
                 'task_division_id' => $formData['task_division_id'],
@@ -82,7 +84,7 @@ class DailyTaskLivewire extends Component
             }
         });
 
-        $this->reset('form','taskCategories','taskDivisions');
+        $this->reset('form', 'taskCategories', 'taskDivisions');
 
         $this->dispatchBrowserEvent('alert_message', [
             'type' => "success",

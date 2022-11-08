@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\EMap\Http\Controllers\Admin\DashboardController;
+use Modules\EMap\Http\Controllers\Admin\EMapTemplateController;
 use Modules\EMap\Http\Controllers\Admin\MapController;
 use Modules\EMap\Http\Controllers\Admin\MapFeeController;
 use Modules\EMap\Http\Controllers\Admin\MapRegistrationController;
@@ -65,6 +66,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
 Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
+    Route::resource('eMapTemplate', EMapTemplateController::class);
 });
 
 Route::prefix('files')->as('files.')->group(function (){

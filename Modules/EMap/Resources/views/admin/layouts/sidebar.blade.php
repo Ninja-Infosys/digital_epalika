@@ -38,9 +38,14 @@
                     <span> नक्शा सेटिङ </span>
                 </a>
             </li>
-            <li class="{{request()->is('admin/emap/setting/mapFee/*') ? 'active' : ''}}">
+            <li class="{{request()->is('admin/emap/setting/mapFee*') ? 'active' : ''}}">
                 <a href="{{route('emap.admin.mapFee.index')}}">
                     <span> नक्शा दस्तुर  </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/emap/setting/eMapTemplate*') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.eMapTemplate.index')}}">
+                    <span> टेम्प्लेट  </span>
                 </a>
             </li>
         </ul>

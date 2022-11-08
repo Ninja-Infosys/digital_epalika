@@ -16,7 +16,7 @@ class BusinessRegistrationTemplateController extends Controller
     {
         abort_if(Gate::denies('businessRegistrationTemplate_access'),
             403,
-            'तपाईंलाई अनुमति छैन'
+            'You not allowed to access this resource'
         );
         $businessRegistrationTemplates = BusinessRegistrationTemplate::latest()->get();
         return view('businessregistration::admin.setting.template.index',compact('businessRegistrationTemplates'));
@@ -26,7 +26,7 @@ class BusinessRegistrationTemplateController extends Controller
     {
         abort_if(Gate::denies('businessRegistrationTemplate_create'),
             403,
-            'तपाईंलाई अनुमति छैन'
+            'You not allowed to access this resource'
         );
         return view('businessregistration::admin.setting.template.create');
     }
@@ -35,7 +35,7 @@ class BusinessRegistrationTemplateController extends Controller
     {
         abort_if(Gate::denies('businessRegistrationTemplate_create'),
             403,
-            'तपाईंलाई अनुमति छैन'
+            'You not allowed to access this resource'
         );
 
         $businessRegistrationTemplate = BusinessRegistrationTemplate::where('for',$request->input('for'))->first();
@@ -55,7 +55,7 @@ class BusinessRegistrationTemplateController extends Controller
     {
         abort_if(Gate::denies('businessRegistrationTemplate_access'),
             403,
-            'तपाईंलाई अनुमति छैन'
+            'You not allowed to access this resource'
         );
         return view('businessregistration::show');
     }
@@ -65,7 +65,7 @@ class BusinessRegistrationTemplateController extends Controller
 
         abort_if(Gate::denies('businessRegistrationTemplate_edit'),
             403,
-            'तपाईंलाई अनुमति छैन'
+            'You not allowed to access this resource'
         );
         return view('businessregistration::admin.setting.template.edit',compact('businessRegistrationTemplate'));
     }
@@ -74,7 +74,7 @@ class BusinessRegistrationTemplateController extends Controller
     {
         abort_if(Gate::denies('businessRegistrationTemplate_edit'),
             403,
-            'तपाईंलाई अनुमति छैन'
+            'You not allowed to access this resource'
         );
 
         $businessRegistrationTemplate->update($request->validated());
@@ -86,7 +86,7 @@ class BusinessRegistrationTemplateController extends Controller
     {
         abort_if(Gate::denies('businessRegistrationTemplate_delete'),
             403,
-            'तपाईंलाई अनुमति छैन'
+            'You not allowed to access this resource'
         );
 
 

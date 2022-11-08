@@ -3,6 +3,7 @@
 namespace Modules\TaskManagement\Entities;
 
 use App\Models\File;
+use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,11 +23,17 @@ class DailyTask extends Model
     ];
 
     protected $fillable = [
+        'fiscal_year_id',
         'task_division_id',
         'date',
         'en_date',
         'remarks'
     ];
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
 
     public function taskDivision(): BelongsTo
     {
