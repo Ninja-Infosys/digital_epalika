@@ -36,7 +36,6 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>मिति</th>
-                                <th>शाखा</th>
                                 <th>मुख्य कार्य</th>
                                 <th>कार्य</th>
                                 <th>कैफियत</th>
@@ -48,9 +47,8 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$dailyTask->date}}</td>
-                                    <td>hdfh</td>
-                                    <td>ncbncbn</td>
-                                    <td>{{$dailyTask->taskDivision->title}}</td>
+                                    <td>{{$dailyTask->taskDivision->taskCategory->title??''}}</td>
+                                    <td>{{$dailyTask->taskDivision->title ??''}}</td>
                                     <td>{{$dailyTask->remarks}}</td>
                                     <td>
                                         <a href="{{route('admin.taskManagement.dailyTask.edit',$dailyTask)}}"

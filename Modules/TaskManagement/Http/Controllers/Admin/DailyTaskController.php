@@ -11,7 +11,7 @@ class DailyTaskController extends Controller
 {
     public function index()
     {
-        $dailyTasks = DailyTask::with('taskDivision')->get();
+        $dailyTasks = DailyTask::with('taskDivision.taskCategory')->get();
         return view('taskmanagement::admin.daily_task.index', compact('dailyTasks'));
     }
 
