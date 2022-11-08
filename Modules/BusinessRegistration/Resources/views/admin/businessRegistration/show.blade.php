@@ -459,35 +459,77 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="reg">
-                            <div class="font-black" id="printData">
+                            <div class="d-flex justify-content-end mb-2">
                                 <a class="btn btn-primary btn-sm"
                                    href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">
-                                    सम्पादन गर्नुहोस
+                                    <i class="fa fa-pen"></i>
                                 </a>
+                                <button class="btn btn btn-info mx-1" onclick="printJS({
+                                    printable: 'printData4',
+                                     type: 'html',
+                                     documentTitle: '{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM->label()}}',
+                                     showModal: true,
+                                     css: '{{asset('assets/backend/css/print.css')}}',
+                                     honorMarginPadding: false,
+                                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।',
+                                      style: '.col-md-8 { width: 66.66666667%; }',
+                                         })"><i class="fa fa-print"></i>
+                                </button>
+                            </div>
+                            <div class="font-black" id="printData4">
+
                                 {!!$printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()->data
                                    ?? $proprietorDetail->template_data
                                    ->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)
                                    ->first()['data']
                                    ?? ''!!}
 
+                            </div>
+
+                            <div class="d-flex justify-content-end mb-2 mt-2">
                                 <a class="btn btn-primary btn-sm"
                                    href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">
-                                    सम्पादन गर्नुहोस
+                                    <i class="fa fa-pen"></i>
                                 </a>
+                                <button class="btn btn btn-info mx-1" onclick="printJS({
+                                    printable: 'printData3',
+                                     type: 'html',
+                                     documentTitle: '{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS->label()}}',
+                                     showModal: true,
+                                     css: '{{asset('assets/backend/css/print.css')}}',
+                                     honorMarginPadding: false,
+                                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।',
+                                      style: '.col-md-8 { width: 66.66666667%; }',
+                                         })"><i class="fa fa-print"></i>
+                                </button>
+                            </div>
+                            <div class="font-black" id="printData3">
+
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()->data
                                    ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()['data']
                                    ?? ''!!}
-
-
                             </div>
                         </div>
 
                         <div class="tab-pane" id="tax">
-                            <div class="font-black" id="printData">
+                            <div class="d-flex justify-content-end mb-2">
                                 <a class="btn btn-primary btn-sm"
                                    href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">
-                                    सम्पादन गर्नुहोस
+                                    <i class="fa fa-pen"></i>
                                 </a>
+                                <button class="btn btn btn-info mx-1" onclick="printJS({
+                                    printable: 'printData2',
+                                     type: 'html',
+                                     documentTitle: '{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK->label()}}',
+                                     showModal: true,
+                                     css: '{{asset('assets/backend/css/print.css')}}',
+                                     honorMarginPadding: false,
+                                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।',
+                                      style: '.col-md-8 { width: 66.66666667%; }',
+                                         })"><i class="fa fa-print"></i>
+                                </button>
+                            </div>
+                            <div class="font-black" id="printData2">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()->data
                                    ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()['data']
                                    ?? ''!!}
@@ -495,11 +537,35 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="application">
-                            testttt
+                            <div class="d-flex justify-content-end mb-2">
+                                <a class="btn btn-primary btn-sm"
+                                   href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE])}}">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                                <button class="btn btn btn-info mx-1" onclick="printJS({
+                                    printable: 'printData1',
+                                     type: 'html',
+                                     documentTitle: '{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE->label()}}',
+                                     showModal: true,
+                                     css: '{{asset('assets/backend/css/print.css')}}',
+                                     honorMarginPadding: false,
+                                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।',
+                                      style: '.col-md-8 { width: 66.66666667%; }',
+                                         })"><i class="fa fa-print"></i>
+                                </button>
+                            </div>
+                            <div class="font-black" id="printData1">
+                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()->data
+                                   ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()['data']
+                                   ?? ''!!}
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 @endsection
