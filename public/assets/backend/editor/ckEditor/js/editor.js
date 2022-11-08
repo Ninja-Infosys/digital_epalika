@@ -6,11 +6,10 @@ if (CKEDITOR.env.ie && CKEDITOR.env.version < 9)
 CKEDITOR.config.height = 200;
 CKEDITOR.config.width = 'auto';
 
-const csrf_token = $('meta[name="_token"]').attr('content');
+const csrf_token = $('meta[name="csrf-token"]').attr('content');
 const wysiwygareaAvailable = isWysiwygareaAvailable(),
     isBBCodeBuiltIn = !!CKEDITOR.plugins.get('bbcode');
 
-const route_prefix = "/filemanager";
 $(".ckEditor").each(function () {
     const editorElement = CKEDITOR.document.getById(this.id);
     const editor = CKEDITOR.replace(this.id, {

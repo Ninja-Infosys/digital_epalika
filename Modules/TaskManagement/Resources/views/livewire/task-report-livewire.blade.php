@@ -5,10 +5,18 @@
                 <form wire:submit.prevent="submitFormData">
                     <div class="row">
                         <div class="col-md-3 mb-2">
-                            <label for="date">मिति</label>
+                            <label for="from_date">मिति देखि</label>
                             <input type="text"
-                                   wire:model="form.date" class="form-control" id="date" placeholder="मिति">
-                            @error('form.date')
+                                   wire:model="form.from_date" class="form-control" id="from_date" placeholder="मिति देखि">
+                            @error('form.from_date')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="to_date">मिति सम्म</label>
+                            <input type="text"
+                                   wire:model="form.to_date" class="form-control" id="to_date" placeholder="मिति सम्म">
+                            @error('form.to_date')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
@@ -125,23 +133,38 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#date").nepaliDatePicker({
+            $("#from_date").nepaliDatePicker({
                 ndpYear: true,
                 ndpMonth: true,
                 onChange: function () {
-                    let inputFieldDate = $("#date").val();
+                    let inputFieldDate = $("#from_date").val();
                     let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
                     let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
                     let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
-                    $("#en_date").val(formattedDate);
+                    //$("#en_from_date").val(formattedDate);
 
-                    Livewire.emit('postAdded', inputFieldDate, formattedDate);
+                    Livewire.emit('fromDateChanged', inputFieldDate, formattedDate);
+                }
+            });
+
+            $("#to_date").nepaliDatePicker({
+                ndpYear: true,
+                ndpMonth: true,
+                onChange: function () {
+                    let inputFieldDate = $("#to_date").val();
+                    let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                    let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                    let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                    //$("#en_to_date").val(formattedDate);
+
+                    Livewire.emit('toDateChanged', inputFieldDate, formattedDate);
                 }
             });
 
             let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
             let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
-            Livewire.emit('postAdded', todayBsDate, todayAdDate);
+            Livewire.emit('fromDateChanged', todayBsDate, todayAdDate);
+            Livewire.emit('toDateChanged', todayBsDate, todayAdDate);
         });
     </script>
 @endpush

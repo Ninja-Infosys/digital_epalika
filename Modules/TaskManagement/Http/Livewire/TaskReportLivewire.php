@@ -14,14 +14,29 @@ class TaskReportLivewire extends Component
     public $taskDivisions = [];
 
     public array $form = [
-        'date' => null,
+        'from_date' => null,
+        'to_date' => null,
         'branch_id' => null,
         'task_category_id' => null,
         'task_division_id' => null,
     ];
+
     public function mount(){
         $this->branches = Branch::with('branches')->whereNull('branch_id')->get();
     }
+
+    protected $listeners=['fromDateChanged','toDateChanged'];
+
+    public function fromDateChanged($nepaliDate, $englishDate)
+    {
+        $this->form['from_date'] = $nepaliDate;
+    }
+
+    public function toDateChanged($nepaliDate, $englishDate)
+    {
+        $this->form['to_date'] = $nepaliDate;
+    }
+
     public function render()
     {
         if (!empty($this->form['branch_id'])) {
