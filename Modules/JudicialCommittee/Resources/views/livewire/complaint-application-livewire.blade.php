@@ -1,5 +1,72 @@
 <form wire:submit.prevent="submitFormData">
-    <div class="row">
+    <div class="row mb-2">
+        <div class="col-md-12">
+        <fieldset class="mb-2">
+            <legend>
+                <h4 class="text-info">निवेदक को विवरण</h4>
+            </legend>
+            <div class="row">
+                <div class="col-md-4 mb-2">
+                    <label for="applicant_name" class="form-label"> नाम <span
+                            class="text-danger">*</span></label>
+                    <input
+                        type="text"
+                        wire:model="form.applicant_name"
+                        class="form-control"
+                        id="applicant_name"
+                        placeholder="निवेदक को नाम"
+                    />
+                    @error('form.applicant_name')
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="col-md-4 mb-2">
+                    <label for="applicant_phone" class="form-label"> फोन न:<span
+                            class="text-danger">*</span></label>
+                    <input
+                        type="text"
+                        wire:model="form.applicant_phone"
+                        class="form-control"
+                        id="applicant_name"
+                        placeholder="फोन न"
+                    />
+                    @error('form.applicant_phone')
+
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="col-md-4 mb-2">
+                    <label for="applicant_address" class="form-label">ठेगाना</label>
+                    <input
+                        type="text"
+                        wire:model="form.applicant_address"
+                        class="form-control"
+                        id="applicant_address"
+                        placeholder="ठेगाना"
+                    />
+                    @error('form.applicant_address')
+
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="col-md-4 mb-2">
+                    <label for="applicant_signature" class="form-label">सहि<span
+                            class="text-danger">*</span></label>
+                    <input
+                        type="file"
+                        wire:model="form.applicant_signature"
+                        class="form-control"
+                        id="applicant_signature"
+                        placeholder="सहि"
+                    />
+                    @error('form.applicant_signature')
+
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+            </div>
+        </fieldset>
+        </div>
         <div class="col-md-12 mb-2">
             <fieldset class="mb-2">
                 <legend>
@@ -175,7 +242,8 @@
                     </div>
 
                     <div class="col-md-4 mb-2">
-                        <label for="defendant_guardian_name" class="form-label">अभिभावक को नाम<span class="text-danger">*</span></label>
+                        <label for="defendant_guardian_name" class="form-label">अभिभावक को नाम<span
+                                class="text-danger">*</span></label>
                         <input
                             type="text"
                             wire:model="form.defendant_guardian_name"
@@ -229,9 +297,9 @@
                             <select wire:model="form.defendant_district_id" class="form-control"
                                     id="defendant_district_id">
                                 <option value="">जिल्ला छान्नुहोस्</option>
-                                @foreach($provinces as $province)
+                                @foreach($defendantDistricts as $district)
                                     <option
-                                        value="{{$province->id}}">{{$province->province}}</option>
+                                        value="{{$district->id}}">{{$district->district}}</option>
                                 @endforeach
                             </select>
                             @error('form.defendant_district_id')
@@ -244,9 +312,9 @@
                             <select wire:model="form.defendant_local_body_id" class="form-control"
                                     id="defendant_local_body_id">
                                 <option value="">पालिका छान्नुहोस्</option>
-                                @foreach($provinces as $province)
+                                @foreach($defendantLocalBodies as $localBody)
                                     <option
-                                        value="{{$province->id}}">{{$province->province}}</option>
+                                        value="{{$localBody->id}}">{{$localBody->local_body}}</option>
                                 @endforeach
                             </select>
                             @error('form.defendant_local_body_id')
@@ -258,9 +326,9 @@
                                     class="text-danger">*</span></label>
                             <select wire:model="form.defendant_ward_no" class="form-control" id="defendant_ward_no">
                                 <option value="">वार्ड न: छान्नुहोस्</option>
-                                @foreach($provinces as $province)
+                                @foreach($defendantWards as $ward)
                                     <option
-                                        value="{{$province->id}}">{{$province->province}}</option>
+                                        value="{{$ward}}">{{$ward}}</option>
                                 @endforeach
                             </select>
                             @error('form.defendant_ward_no')
@@ -338,10 +406,12 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex justify-content-between">
+       <button type="submit" class="btn btn-primary">
+           पेश गर्नुहोस्
+        </button>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">
-        पेश गर्नुहोस्
-    </button>
 </form>
 
 @once
