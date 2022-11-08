@@ -26,6 +26,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @livewire('taskmanagement::task-report-livewire')
                 </div>
             </div>
         </div>
