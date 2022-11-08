@@ -29,7 +29,9 @@
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
 
-    {!! ReCaptcha::htmlScriptTagJsApi() !!}
+    @if(config('app.env') === 'production')
+        {!! ReCaptcha::htmlScriptTagJsApi() !!}
+    @endif
 </head>
 <body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
 height: 100vh;
