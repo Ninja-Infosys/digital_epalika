@@ -88,8 +88,8 @@ class OrganizationAuthController extends Controller
         $redirect = redirect()->route('organization.admin.dashboard');
         $user = auth('organization')->user();
 
-        if (!$user->password) {
-            $user->update([
+        if (!$user?->password) {
+            $user?->update([
                 'password' => $request->input('password')
             ]);
 
