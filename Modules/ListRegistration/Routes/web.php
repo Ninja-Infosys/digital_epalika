@@ -12,5 +12,5 @@
 */
 
 Route::prefix('listregistration')->group(function() {
-    Route::get('/', 'ListRegistrationController@index');
+//    Route::get('/', 'ListRegistrationController@index');
 });

@@ -133,56 +133,6 @@
     @push('scripts')
         <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
         <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
-
-        <script>
-            if (CKEDITOR.env.ie && CKEDITOR.env.version < 9)
-                CKEDITOR.tools.enableHtml5Elements(document);
-
-            // The trick to keep the editor in the sample quite small
-            // unless user specified own height.
-            CKEDITOR.config.height = 200;
-            CKEDITOR.config.width = 'auto';
-
-
-            const wysiwygareaAvailable = isWysiwygareaAvailable(),
-                isBBCodeBuiltIn = !!CKEDITOR.plugins.get('bbcode');
-
-            $(".ckEditor").each(function () {
-                const editorElement = CKEDITOR.document.getById(this.id);
-
-                const editor = CKEDITOR.replace(this.id, {
-                    filebrowserBrowseUrl: "{{route('admin.file.index')}}",
-                    filebrowserUploadUrl: "{{route('admin.file.store',['_token'=>csrf_token()])}}"
-                });
-
-                if (wysiwygareaAvailable) {
-                    CKEDITOR.replace(this.id);
-                } else {
-                    editorElement.setAttribute('contenteditable', 'true');
-                    CKEDITOR.inline(this.id);
-
-                }
-            })
-
-
-            function isWysiwygareaAvailable() {
-                // If in development mode, then the wysiwygarea must be available.
-                // Split REV into two strings so builder does not replace it :D.
-                if (CKEDITOR.revision == ('%RE' + 'V%')) {
-                    return true;
-                }
-
-                return !!CKEDITOR.plugins.get('wysiwygarea');
-            }
-
-
-        </script>
-
-        <script>
-            function copyText(text) {
-                navigator.clipboard.writeText(text);
-            }
-        </script>
     @endpush
 @endsection
 
