@@ -95,11 +95,11 @@
                                     <h5 class="fw-semibold mt-2">संस्था दर्ता</h5>
                                     <i class="fa fa-address-card fs-5"></i>
                                     <p>नयाँ इ-नक्साको लागि दर्ता गर्नुहोस् ।</p>
-                                    <a href="{{route('organization.register.form')}}" class="btn btn-light"><span>नयाँ दर्ता गर्नुहोस्</span>
+                                    <a href="{{route('organization.register.form')}}" class="btn btn-light"><span> संस्था </span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
 
-                                    <a href="{{route('organization.register.formPerson')}}" class="btn btn-light"><span>नयाँ व्यक्तिगत विवरण दर्ता गर्नुहोस्</span>
+                                    <a href="{{route('organization.register.formPerson')}}" class="btn btn-light"><span> व्यक्ति</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
                                 </div>

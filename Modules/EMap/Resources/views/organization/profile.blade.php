@@ -124,16 +124,20 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-pills nav-fill navtab-bg">
+                        @if($organization->is_organization==0)
                         <li class="nav-item">
                             <a href="#aboutme" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
                                 व्यक्तिगत विवरण
                             </a>
                         </li>
+                        @endif
+                        @if($organization->is_organization==1)
                         <li class="nav-item">
                             <a href="#timeline" data-bs-toggle="tab" aria-expanded="true" class="nav-link ">
                                 संगठनको विवरण
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item">
                             <a href="#settings" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                                 आवश्यक कागजात
@@ -141,8 +145,8 @@
                         </li>
                     </ul>
                     <div class="tab-content">
+                        @if($organization->is_organization==0)
                         <div class="tab-pane show active" id="aboutme">
-
                             <table class="table table-sm mb-0 table-striped table-hover">
                                 <tr>
                                     <th>नाम</th>
@@ -214,7 +218,8 @@
                             </table>
 
                         </div>
-
+                        @endif
+                            @if($organization->is_organization==1)
                         <div class="tab-pane " id="timeline">
                             <table class="table table-sm mb-0 table-striped table-hover">
                                 <tr>
@@ -251,9 +256,11 @@
 
                             </table>
                         </div>
+                            @endif
 
                         <div class="tab-pane" id="settings">
                             <div class="row">
+                                @if($organization->is_organization==0)
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">नागरिकता (आगाडी)</div>
@@ -281,6 +288,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+                                    @if($organization->is_organization==1)
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">कम्पनी दर्ताको प्रमाणपत्र</div>
@@ -309,7 +318,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                    @endif
                             </div>
+                            @if($organization->is_organization==1)
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-sm mb-0 table-striped table-hover">
@@ -333,6 +344,7 @@
                                     </table>
                                 </div>
                             </div>
+                            @endif
                         </div>
 
                     </div>
