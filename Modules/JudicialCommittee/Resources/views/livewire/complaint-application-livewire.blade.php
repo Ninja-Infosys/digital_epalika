@@ -86,9 +86,9 @@
                             <select wire:model="form.complainant_district_id" class="form-control"
                                     id="complainant_district_id">
                                 <option value="">जिल्ला छान्नुहोस्</option>
-                                @foreach($provinces as $province)
+                                @foreach($complainantDistricts as $district)
                                     <option
-                                        value="{{$province->id}}">{{$province->province}}</option>
+                                        value="{{$district->id}}">{{$district->district}}</option>
                                 @endforeach
                             </select>
                             @error('form.complainant_district_id')
@@ -101,9 +101,9 @@
                             <select wire:model="form.complainant_local_body_id" class="form-control"
                                     id="complainant_local_body_id">
                                 <option value="">पालिका छान्नुहोस्</option>
-                                @foreach($provinces as $province)
+                                @foreach($complainantLocalBodies as $localBody)
                                     <option
-                                        value="{{$province->id}}">{{$province->province}}</option>
+                                        value="{{$localBody->id}}">{{$localBody->local_body}}</option>
                                 @endforeach
                             </select>
                             @error('form.complainant_local_body_id')
@@ -115,9 +115,9 @@
                                     class="text-danger">*</span></label>
                             <select wire:model="form.complainant_ward_no" class="form-control" id="complainant_ward_no">
                                 <option value="">वार्ड न: छान्नुहोस्</option>
-                                @foreach($provinces as $province)
+                                @foreach($complainantWards as $ward)
                                     <option
-                                        value="{{$province->id}}">{{$province->province}}</option>
+                                        value="{{$ward}}">{{$ward}}</option>
                                 @endforeach
                             </select>
                             @error('form.complainant_ward_no')
