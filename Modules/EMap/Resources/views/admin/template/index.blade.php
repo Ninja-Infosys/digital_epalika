@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
-                        @can('businessRegistrationTemplate_create')
+                        @can('eMapTemplate_create')
                             <a href="{{route('emap.admin.eMapTemplate.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
