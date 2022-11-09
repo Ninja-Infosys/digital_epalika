@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 use Modules\DigitalBoard\Entities\Notice;
+use Modules\TaskManagement\Entities\DailyTask;
 
 class FiscalYear extends Model
 {
@@ -38,5 +39,10 @@ class FiscalYear extends Model
     public function notices(): HasMany
     {
         return $this->hasMany(Notice::class);
+    }
+
+    public function dailyTasks(): HasMany
+    {
+        return $this->hasMany(DailyTask::class);
     }
 }

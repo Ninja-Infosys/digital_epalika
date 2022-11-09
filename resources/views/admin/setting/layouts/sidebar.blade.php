@@ -26,7 +26,7 @@
     <li class="{{request()->is('admin/setting/branch*') ? 'active' : ''}}">
         <a href="{{route('admin.branch.index')}}">
             <i class="fa fa-code-branch"></i>
-            <span> शाखाहरु थप्नुहोस् </span>
+            <span> शाखा/उपशाखा थप्नुहोस् </span>
         </a>
     </li>
 @endcan
