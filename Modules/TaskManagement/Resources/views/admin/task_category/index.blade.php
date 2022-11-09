@@ -44,8 +44,12 @@
                             @forelse($taskCategories as $taskCategory)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$taskCategory->branch->branch_name??''}}</td>
-                                <td>{{$taskCategory->title}}</td>
+                                <td>
+                                    {{\Illuminate\Support\Str::words($taskCategory->branch->branch_name??'',10)}}
+                                </td>
+                                <td>
+                                    {{\Illuminate\Support\Str::words($taskCategory->title,10)}}
+                                </td>
                                 <td>
                                         <a href="{{route('admin.taskManagement.taskCategory.edit',$taskCategory)}}"
                                            class="btn btn-xs btn-outline-primary">
