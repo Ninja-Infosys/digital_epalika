@@ -24,14 +24,6 @@
 
         </li>
 
-        <li class="{{Route::is('organization.admin.clients.client.*')?'mm-active':''}}">
-            <a href="{{route('organization.admin.clients.client.index')}}">
-
-                <img src="{{asset('assets/backend/emap/admin/img/menu-icon/6.svg')}}" alt="">
-                <span>सेवाग्राही</span>
-            </a>
-
-        </li>
         <li class="{{Route::is('organization.admin.clients.map.apply.*')?'mm-active':''}}">
             <a href="{{route('organization.admin.clients.map.apply.index')}}">
 

@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
+use Modules\EMap\Traits\EMapTemplateTrait;
 
 class MapApply extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,EMapTemplateTrait;
 
     protected $dates = [
         'created_at',

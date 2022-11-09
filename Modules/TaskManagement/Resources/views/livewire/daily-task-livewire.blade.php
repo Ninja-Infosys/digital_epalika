@@ -20,14 +20,14 @@
                         <optgroup label="{{$branch->branch_name}}">
                             @foreach($branch->branches as $sub_branch)
                                 <option
-                                        value="{{$sub_branch->id}}">
+                                    value="{{$sub_branch->id}}">
                                     {{$sub_branch->branch_name}}
                                 </option>
                             @endforeach
                         </optgroup>
                     @else
                         <option
-                                value="{{$branch->id}}">
+                            value="{{$branch->id}}">
                             {{$branch->branch_name}}
                         </option>
                     @endif
@@ -38,16 +38,16 @@
             @enderror
         </div>
         <div class="col-md-4 mb-2">
-            <label for="branch_id" class="form-label">शाखाहरु अनुसार कार्यहरू  *</label>
+            <label for="branch_id" class="form-label">शाखाहरु अनुसार कार्यहरू *</label>
             <select
                 wire:model="form.task_category_id"
                 class="form-select @error('task_category_id') is-invalid @enderror"
                 id="branch_id">
                 <option value="">--- छान्नुहोस् ---</option>
                 @foreach($taskCategories as $taskCategory)
-                <option value="{{$taskCategory->id}}">
-                    {{$taskCategory->title}}
-                </option>
+                    <option value="{{$taskCategory->id}}">
+                        {{$taskCategory->title}}
+                    </option>
                 @endforeach
             </select>
             @error('form.task_category_id')
@@ -55,16 +55,16 @@
             @enderror
         </div>
         <div class="col-md-4 mb-2">
-            <label for="branch_id" class="form-label">कार्य विभाजन  *</label>
+            <label for="branch_id" class="form-label">कार्य विभाजन *</label>
             <select
                 wire:model="form.task_division_id"
                 class="form-select @error('branch_id') is-invalid @enderror"
                 id="branch_id">
                 <option value="">--- छान्नुहोस् ---</option>
                 @foreach($taskDivisions as $taskDivision)
-                <option value="{{$taskDivision->id}}">
-                    {{$taskDivision->title}}
-                </option>
+                    <option value="{{$taskDivision->id}}">
+                        {{$taskDivision->title}}
+                    </option>
                 @endforeach
             </select>
             @error('form.task_division_id')
@@ -117,9 +117,12 @@
                 }
             });
 
+            @if(empty($dailyTask))
+
             let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
             let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
             Livewire.emit('postAdded', todayBsDate, todayAdDate);
+            @endif
         });
     </script>
 @endpush

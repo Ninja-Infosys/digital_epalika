@@ -91,6 +91,4 @@ class ProprietorDetail extends Model
     {
         return $this->hasOne(Introboard::class);
     }
-
-
 }

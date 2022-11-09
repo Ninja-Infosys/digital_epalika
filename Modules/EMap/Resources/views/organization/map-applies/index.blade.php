@@ -32,7 +32,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>
-                                    <a href="{{route('organization.admin.clients.map.apply.edit', $mapApply)}}"> Edit</a>
+                                    <a class="btn btn-warning" href="{{route('organization.admin.clients.map.apply.edit', $mapApply)}}"> <i class="fa fa-pen"></i></a>
                                 </td>
                             </tr>
                         @endforeach
