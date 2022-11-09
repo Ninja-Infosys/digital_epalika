@@ -26,9 +26,12 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->whereHas('applyMapNotices', function ($query) {
-            $query->selectRaw('id,map_apply_id,type,file_type,created_at')->where('type', FileTypeEnum::APPLICATION->value)->whereNull('rejected_at')->latest();
-        })->get();
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->get();
+
+
+//            ->whereHas('applyMapNotices', function ($query) {
+//            $query->selectRaw('id,map_apply_id,type,file_type,created_at')->where('type', FileTypeEnum::APPLICATION->value)->whereNull('rejected_at')->latest();
+//        })->get();
 
 
         return view('emap::admin.map.index', compact('maps', 'application_types'));

@@ -48,98 +48,104 @@
                     </div>
 
                 </div>
-            </div> <!-- end card -->
+            </div>
 
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title mb-3">Activities</h4>
+            {{--            <div class="card">--}}
+            {{--                <div class="card-body">--}}
+            {{--                    <h4 class="header-title mb-3">Activities</h4>--}}
 
-                    <div class="inbox-widget" data-simplebar style="max-height: 350px;">
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="assets/images/users/user-2.jpg" class="rounded-circle"
-                                                             alt=""></div>
-                            <p class="inbox-item-author">Tomaslau</p>
-                            <p class="inbox-item-text">I've finished it! See you so...</p>
-                            <p class="inbox-item-date">
-                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                            </p>
-                        </div>
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="assets/images/users/user-3.jpg" class="rounded-circle"
-                                                             alt=""></div>
-                            <p class="inbox-item-author">Stillnotdavid</p>
-                            <p class="inbox-item-text">This theme is awesome!</p>
-                            <p class="inbox-item-date">
-                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                            </p>
-                        </div>
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="assets/images/users/user-4.jpg" class="rounded-circle"
-                                                             alt=""></div>
-                            <p class="inbox-item-author">Kurafire</p>
-                            <p class="inbox-item-text">Nice to meet you</p>
-                            <p class="inbox-item-date">
-                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                            </p>
-                        </div>
+            {{--                    <div class="inbox-widget" data-simplebar style="max-height: 350px;">--}}
+            {{--                        <div class="inbox-item">--}}
+            {{--                            <div class="inbox-item-img"><img src="assets/images/users/user-2.jpg" class="rounded-circle"--}}
+            {{--                                                             alt=""></div>--}}
+            {{--                            <p class="inbox-item-author">Tomaslau</p>--}}
+            {{--                            <p class="inbox-item-text">I've finished it! See you so...</p>--}}
+            {{--                            <p class="inbox-item-date">--}}
+            {{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
+            {{--                            </p>--}}
+            {{--                        </div>--}}
+            {{--                        <div class="inbox-item">--}}
+            {{--                            <div class="inbox-item-img"><img src="assets/images/users/user-3.jpg" class="rounded-circle"--}}
+            {{--                                                             alt=""></div>--}}
+            {{--                            <p class="inbox-item-author">Stillnotdavid</p>--}}
+            {{--                            <p class="inbox-item-text">This theme is awesome!</p>--}}
+            {{--                            <p class="inbox-item-date">--}}
+            {{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
+            {{--                            </p>--}}
+            {{--                        </div>--}}
+            {{--                        <div class="inbox-item">--}}
+            {{--                            <div class="inbox-item-img"><img src="assets/images/users/user-4.jpg" class="rounded-circle"--}}
+            {{--                                                             alt=""></div>--}}
+            {{--                            <p class="inbox-item-author">Kurafire</p>--}}
+            {{--                            <p class="inbox-item-text">Nice to meet you</p>--}}
+            {{--                            <p class="inbox-item-date">--}}
+            {{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
+            {{--                            </p>--}}
+            {{--                        </div>--}}
 
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="assets/images/users/user-5.jpg" class="rounded-circle"
-                                                             alt=""></div>
-                            <p class="inbox-item-author">Shahedk</p>
-                            <p class="inbox-item-text">Hey! there I'm available...</p>
-                            <p class="inbox-item-date">
-                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                            </p>
-                        </div>
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="assets/images/users/user-6.jpg" class="rounded-circle"
-                                                             alt=""></div>
-                            <p class="inbox-item-author">Adhamdannaway</p>
-                            <p class="inbox-item-text">This theme is awesome!</p>
-                            <p class="inbox-item-date">
-                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                            </p>
-                        </div>
+            {{--                        <div class="inbox-item">--}}
+            {{--                            <div class="inbox-item-img"><img src="assets/images/users/user-5.jpg" class="rounded-circle"--}}
+            {{--                                                             alt=""></div>--}}
+            {{--                            <p class="inbox-item-author">Shahedk</p>--}}
+            {{--                            <p class="inbox-item-text">Hey! there I'm available...</p>--}}
+            {{--                            <p class="inbox-item-date">--}}
+            {{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
+            {{--                            </p>--}}
+            {{--                        </div>--}}
+            {{--                        <div class="inbox-item">--}}
+            {{--                            <div class="inbox-item-img"><img src="assets/images/users/user-6.jpg" class="rounded-circle"--}}
+            {{--                                                             alt=""></div>--}}
+            {{--                            <p class="inbox-item-author">Adhamdannaway</p>--}}
+            {{--                            <p class="inbox-item-text">This theme is awesome!</p>--}}
+            {{--                            <p class="inbox-item-date">--}}
+            {{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
+            {{--                            </p>--}}
+            {{--                        </div>--}}
 
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="assets/images/users/user-3.jpg" class="rounded-circle"
-                                                             alt=""></div>
-                            <p class="inbox-item-author">Stillnotdavid</p>
-                            <p class="inbox-item-text">This theme is awesome!</p>
-                            <p class="inbox-item-date">
-                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                            </p>
-                        </div>
-                        <div class="inbox-item">
-                            <div class="inbox-item-img"><img src="assets/images/users/user-4.jpg" class="rounded-circle"
-                                                             alt=""></div>
-                            <p class="inbox-item-author">Kurafire</p>
-                            <p class="inbox-item-text">Nice to meet you</p>
-                            <p class="inbox-item-date">
-                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>
-                            </p>
-                        </div>
-                    </div> <!-- end inbox-widget -->
-                </div>
-            </div> <!-- end card-->
+            {{--                        <div class="inbox-item">--}}
+            {{--                            <div class="inbox-item-img"><img src="assets/images/users/user-3.jpg" class="rounded-circle"--}}
+            {{--                                                             alt=""></div>--}}
+            {{--                            <p class="inbox-item-author">Stillnotdavid</p>--}}
+            {{--                            <p class="inbox-item-text">This theme is awesome!</p>--}}
+            {{--                            <p class="inbox-item-date">--}}
+            {{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
+            {{--                            </p>--}}
+            {{--                        </div>--}}
+            {{--                        <div class="inbox-item">--}}
+            {{--                            <div class="inbox-item-img"><img src="assets/images/users/user-4.jpg" class="rounded-circle"--}}
+            {{--                                                             alt=""></div>--}}
+            {{--                            <p class="inbox-item-author">Kurafire</p>--}}
+            {{--                            <p class="inbox-item-text">Nice to meet you</p>--}}
+            {{--                            <p class="inbox-item-date">--}}
+            {{--                                <a href="javascript:(0);" class="btn btn-sm btn-link text-info font-13"> Reply </a>--}}
+            {{--                            </p>--}}
+            {{--                        </div>--}}
+            {{--                    </div> <!-- end inbox-widget -->--}}
+            {{--                </div>--}}
+            {{--            </div> --}}
 
-        </div> <!-- end col-->
+        </div>
 
         <div class="col-lg-8 col-xl-8">
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-pills nav-fill navtab-bg">
-                        <li class="nav-item">
-                            <a href="#aboutme" data-bs-toggle="tab" aria-expanded="false" class="nav-link active">
-                                व्यक्तिगत विवरण
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#timeline" data-bs-toggle="tab" aria-expanded="true" class="nav-link ">
-                                संगठनको विवरण
-                            </a>
-                        </li>
+                        @if($organization->is_organization==0)
+                            <li class="nav-item">
+                                <a href="#aboutme" data-bs-toggle="tab" aria-expanded="false"
+                                   class="nav-link {{$organization->is_organization==0 ? 'active':''}}">
+                                    व्यक्तिगत विवरण
+                                </a>
+                            </li>
+                        @endif
+                        @if($organization->is_organization==1)
+                            <li class="nav-item">
+                                <a href="#timeline" data-bs-toggle="tab" aria-expanded="true"
+                                   class="nav-link {{$organization->is_organization==1 ? 'active':''}}">
+                                    संगठनको विवरण
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a href="#settings" data-bs-toggle="tab" aria-expanded="false" class="nav-link">
                                 आवश्यक कागजात
@@ -147,8 +153,8 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="aboutme">
-
+                        @if($organization->is_organization==0)
+                        <div class="tab-pane {{$organization->is_organization==0 ? 'show active':''}}" id="aboutme">
                             <table class="table table-sm mb-0 table-striped table-hover">
                                 <tr>
                                     <th>नाम</th>
@@ -166,11 +172,11 @@
                                 </tr>
                                 <tr>
                                     <th>लिङ्ग</th>
-                                    <td>{{ $organization->userDetail->gender->label() }}</td>
+                                    <td>{{ $organization->userDetail?->gender->label() }}</td>
                                 </tr>
                                 <tr>
                                     <th>बैबाहिक स्थिति</th>
-                                    <td>{{ $organization->userDetail->marital_status->label() }}</td>
+                                    <td>{{ $organization->userDetail?->marital_status->label() }}</td>
                                 </tr>
                                 <tr>
                                     <th>बुवाको नाम</th>
@@ -218,10 +224,10 @@
 
                                 </tr>
                             </table>
-
                         </div>
-
-                        <div class="tab-pane " id="timeline">
+                        @endif
+                            @if($organization->is_organization==1)
+                        <div class="tab-pane {{$organization->is_organization==1 ? 'show active':''}}" id="timeline">
                             <table class="table table-sm mb-0 table-striped table-hover">
                                 <tr>
                                     <th>नाम</th>
@@ -257,9 +263,11 @@
 
                             </table>
                         </div>
+                            @endif
 
                         <div class="tab-pane" id="settings">
                             <div class="row">
+                                @if($organization->is_organization==0)
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">नागरिकता (आगाडी)</div>
@@ -269,6 +277,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+                                    @if($organization->is_organization==0)
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">नागरिकता (पछाडी)</div>
@@ -278,6 +288,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                    @endif
+                                    @if($organization->is_organization==0)
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">NEC को प्रमाणपत्र</div>
@@ -287,6 +299,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                    @endif
+                                @if($organization->is_organization==1)
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">कम्पनी दर्ताको प्रमाणपत्र</div>
@@ -297,6 +311,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+                                @if($organization->is_organization==1)
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">कम्पनी PANको प्रमाणपत्र</div>
@@ -306,6 +322,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+                                @if($organization->is_organization==1)
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">लोगो</div>
@@ -315,7 +333,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                             </div>
+                            @if($organization->is_organization==1)
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-sm mb-0 table-striped table-hover">
@@ -341,6 +361,7 @@
                                     </table>
                                 </div>
                             </div>
+                            @endif
                         </div>
 
                     </div>
