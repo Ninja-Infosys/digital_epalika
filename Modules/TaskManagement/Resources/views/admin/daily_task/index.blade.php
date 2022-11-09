@@ -58,7 +58,7 @@
                                         {{\Illuminate\Support\Str::words($dailyTask->taskDivision->title ??'',10)}}
                                     </td>
                                     <td>{{$dailyTask->remarks}}</td>
-                                    <td width="200">
+                                    <td width="140">
                                         <a href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
                                            class="btn btn-xs btn-outline-info">
                                             <i class="fa fa-eye"></i>
