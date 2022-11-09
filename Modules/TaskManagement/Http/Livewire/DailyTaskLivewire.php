@@ -36,14 +36,9 @@ class DailyTaskLivewire extends Component
     {
         if(!empty($dailyTask)){
             $this->dailyTask=$dailyTask;
-            $this->form = [
-                'date' => $dailyTask->date,
-                'en_date' => $dailyTask->en_date,
-                'branch_id' => $dailyTask->taskDivision->taskCategory->branch_id ?? '',
-                'task_category_id' => $dailyTask->taskDivision->task_category_id ?? '',
-                'task_division_id' => $dailyTask->task_division_id ?? '',
-                'remarks' => $dailyTask->remarks,
-            ];
+            foreach ($this->form as $key=>$data){
+                $this->form[$key]=$this->dailyTask[$key];
+            }
         }
         $this->branches = Branch::with('branches')->whereNull('branch_id')->get();
     }
@@ -64,7 +59,7 @@ class DailyTaskLivewire extends Component
         'form.en_date' => ['required', 'date'],
         'form.branch_id' => ['required', 'exists:branches,id'],
         'form.task_category_id' => ['required', 'exists:task_categories,id'],
-        'form.task_division_id' => ['required', 'exists:task_divisions,id'],
+        'form.task_division_id' => ['nullable', 'exists:task_divisions,id'],
         'form.documents' => ['nullable', 'array'],
         'form.documents.*' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
         'form.remarks' => ['nullable']
@@ -81,12 +76,15 @@ class DailyTaskLivewire extends Component
 
         DB::transaction(function () use ($formData) {
             if(!empty($this->dailyTask)){
-                $this->dailyTask->update($formData);
+                $dailyTask=$this->dailyTask;
+                $dailyTask->update($formData);
             }else{
                 $dailyTask = DailyTask::create([
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'date' => $formData['date'],
                     'en_date' => $formData['en_date'],
+                    'branch_id' => $formData['branch_id'],
+                    'task_category_id' => $formData['task_category_id'],
                     'task_division_id' => $formData['task_division_id'],
                     'remarks' => $formData['remarks'],
                 ]);

@@ -14,7 +14,7 @@ class TaskCategoryController extends Controller
 {
     public function index()
     {
-        $taskCategories=TaskCategory::with('branch')->get();
+        $taskCategories=TaskCategory::with('branch')->paginate(10);
 
         return view('taskmanagement::admin.task_category.index',compact('taskCategories'));
     }

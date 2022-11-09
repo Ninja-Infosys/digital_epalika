@@ -58,14 +58,10 @@ class TaskReportLivewire extends Component
                 $query->whereDate('date', '<=', $this->form['to_date']);
             }
             if (!empty($this->form['branch_id'])) {
-                $query->whereHas('taskDivision.taskCategory.branch', function ($query) {
-                    $query->whereIn('id', $this->form['branch_id']);
-                });
+                $query->whereIn('branch_id', $this->form['branch_id']);
             }
             if (!empty($this->form['task_category_id'])) {
-                $query->whereHas('taskDivision.taskCategory', function ($query) {
-                    $query->whereIn('id', $this->form['task_category_id']);
-                });
+                $query->whereIn('task_category_id', $this->form['task_category_id']);
             }
             if (!empty($this->form['task_division_id'])) {
                 $query->whereIn('task_division_id', $this->form['task_division_id']);

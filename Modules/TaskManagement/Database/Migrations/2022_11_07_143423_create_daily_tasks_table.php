@@ -11,7 +11,9 @@ return new class extends Migration
         Schema::create('daily_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('task_division_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('branch_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('task_category_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('task_division_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('date');
             $table->date('en_date')->nullable();
             $table->text('remarks')->nullable();

@@ -17,7 +17,7 @@ class BranchController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $branches = Branch::with('branches.branch')->whereNull('branch_id')->orderBy('branch_id')->get();
+        $branches = Branch::with('branches.branch')->whereNull('branch_id')->orderBy('branch_id')->paginate(10);
 
         return view('admin.setting.branch.index', compact('branches'));
     }

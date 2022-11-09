@@ -14,7 +14,7 @@ class TaskDivisionController extends Controller
 {
     public function index()
     {
-        $taskDivisions = TaskDivision::with('taskCategory')->get();
+        $taskDivisions = TaskDivision::with('taskCategory')->paginate(10);
 
         return view('taskmanagement::admin.task_division.index', compact('taskDivisions'));
     }
