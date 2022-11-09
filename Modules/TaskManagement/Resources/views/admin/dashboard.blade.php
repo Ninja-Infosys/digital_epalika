@@ -18,7 +18,6 @@
                 </div>
                 <h4 class="page-title">गृहपृष्ठ </h4>
             </div>
-
             <div class="row">
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
@@ -26,45 +25,22 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                        <i class="fa fa-code-branch font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        2
-                                    </span>
-                                        </h3>
-                                        <p class="text-muted mb-1">जम्मा शाखाहरु</p>
-                                    </div>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-secondary border-secondary border">
                                         <i class="fa fa-tasks font-22 avatar-title text-white"></i>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                         3
+                                         {{$dailyTaskCount}}
                                     </span>
                                         </h3>
                                         <p class="text-muted mb-1">आजका कार्यहरू</p>
                                     </div>
                                 </div>
-                            </div> <!-- end row-->
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                    </div>
+                </div>
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
@@ -76,15 +52,74 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">4</span></h3>
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                        {{$totalTaskCount}}
+                                            </span>
+                                        </h3>
                                         <p class="text-muted mb-1">जम्मा कार्यहरू</p>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-info border-info border">
+                                        <i class="fa fa-tasks font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                        {{$totalTaskCategory}}
+                                            </span>
+                                        </h3>
+                                        <p class="text-muted mb-1">शाखाहरु अनुसार कार्यहरू</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="avatar-lg rounded-circle bg-primary border-primary border">
+                                        <i class="fa fa-tasks font-22 avatar-title text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-end">
+                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                        {{$totalTaskDivision}}
+                                            </span>
+                                        </h3>
+                                        <p class="text-muted mb-1">कार्य विभाजन</p>
+                                    </div>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component id="bar-chart" chartTitle="आर्थिक वर्ष अनुसार जम्मा कार्यहरु"
+                                                  :labels="$taskChartData['labels']"
+                                                  :dataSets="$taskChartData['dataSets']"/>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col -->
     </div>
 @endsection
