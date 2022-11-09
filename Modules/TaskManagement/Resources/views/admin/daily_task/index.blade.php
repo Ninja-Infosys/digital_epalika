@@ -49,13 +49,13 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$dailyTask->date}}</td>
                                     <td>
-                                        {{\Illuminate\Support\Str::words($dailyTask->branch->branch_name??'',20)}}
+                                        {{\Illuminate\Support\Str::words($dailyTask->branch->branch_name??'',10)}}
                                     </td>
                                     <td>
-                                        {{\Illuminate\Support\Str::words($dailyTask->taskCategory->title??'',20)}}
+                                        {{\Illuminate\Support\Str::words($dailyTask->taskCategory->title??'',10)}}
                                     </td>
                                     <td>
-                                        {{\Illuminate\Support\Str::words($dailyTask->taskDivision->title ??'',20)}}
+                                        {{\Illuminate\Support\Str::words($dailyTask->taskDivision->title ??'',10)}}
                                     </td>
                                     <td>{{$dailyTask->remarks}}</td>
                                     <td>
