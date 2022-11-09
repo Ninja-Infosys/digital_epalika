@@ -17,11 +17,11 @@ class MapApplyController extends Controller
     }
 
 
-    public function show(Client $client, MapApply $mapApply)
+    public function show( MapApply $mapApply)
     {
         $mapApply->load('fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
 
-        return view('emap::organization.clients.map.show', compact('client', 'mapApply'));
+        return view('emap::organization.map-applies.show', compact( 'mapApply'));
     }
 
     public function edit( MapApply $mapApply)

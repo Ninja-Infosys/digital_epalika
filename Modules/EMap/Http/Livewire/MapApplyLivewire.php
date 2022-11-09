@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Enums\BuildingDetailEnum;
+use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\DetailsRegardingCriteriaEnum;
 use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
@@ -41,12 +42,11 @@ class MapApplyLivewire extends Component
 
     public array $buildingDetails = [];
 
-    public function mount(MapApply $mapApply)
+    public function mount(MapApply $mapApply): void
     {
         $this->setting = MapSetting::with('landMeasurement')->first();
 
         $this->mapApply = $mapApply;
-
 
         foreach (FourSideParticularEnum::cases() as $fourSide) {
             $this->fourFortDetails[] = [
@@ -84,13 +84,39 @@ class MapApplyLivewire extends Component
             ];
         }
 
-        foreach (BuildingDetailEnum::cases() as $buildingDetail) {
-            $this->buildingDetails[] = [
-                'detail' => $buildingDetail->value,
-                'description' => null,
-                'remarks' => null,
+        $this->buildingDetails =
+            [
+                [
+                    'detail' => BuildingDetailEnum::BUILDING_CATEGORY->value,
+                    'description' => $mapApply->building_category?->label(),
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::PLINTH_AREA->value,
+                    'description' => $mapApply->area_of_plinth ?? null,
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::LENGTH->value,
+                    'description' => $mapApply->length ?? '',
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::BREADTH->value,
+                    'description' => $mapApply->breadth ?? '',
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::STOREY_COUNT->value,
+                    'description' => $mapApply->current_storey ?? '',
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::HEIGHT->value,
+                    'description' => $mapApply->height ?? null,
+                    'remarks' => null,
+                ],
             ];
-        }
     }
 
     protected array $fourFortValidations = [
@@ -140,7 +166,7 @@ class MapApplyLivewire extends Component
         'applyMap.consultant_nec_no' => ['required'],
     ];
 
-    public function rules()
+    public function rules(): array
     {
         return array_merge(
             $this->fourFortValidations,
@@ -151,7 +177,7 @@ class MapApplyLivewire extends Component
         );
     }
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
