@@ -18,34 +18,9 @@
     </p>
     <p>तपसिल</p>
     <livewire:emap::edit.map-apply-edit-livewire :mapApply="$mapApply"/>
-
     <p class="break-page"></p>
-    <p>
-        १.११ तल्लाको क्षेत्रफल र उचाईको विवरण :
-    </p>
-    <table
-        class="table table-sm table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th>तल्ला</th>
-            <th>प्रस्तावित निर्माणको क्षेत्रफल</th>
-            <th>साविक निर्माणको क्षेत्रफल</th>
-            <th>जम्मा क्षेत्रफल</th>
-            <th>उचाई</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($mapApply->storeyDetails as $storeyDetail)
-            <tr class="text-center">
-                <td>{{$storeyDetail->mapFee->storey??''}}</td>
-                <td>{{$storeyDetail->area_of_proposed_construction}}</td>
-                <td>{{$storeyDetail->area_of_former_construction}}</td>
-                <td>{{$storeyDetail->total_area}}</td>
-                <td>{{$storeyDetail->height}}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <livewire:emap::edit.storey-detail-edit-livewire :mapApply="$mapApply"/>
+
 
     <p>
         <b>२. जग्गाको विवरण</b>
