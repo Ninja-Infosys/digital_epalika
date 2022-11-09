@@ -12,7 +12,7 @@
                         <b>१.११ तल्लाको क्षेत्रफल र उचाईको विवरण: </b>
                         <div class="table-responsive">
                             <table
-                                class="table table-striped table-hover table-responsive table-bordered">
+                                class="table table-striped table-bordered">
                                 <thead>
                                 <tr class="text-center">
                                     <th>तल्ला</th>
@@ -81,26 +81,29 @@
                                             @enderror
                                         </td>
                                         <td>
+
                                             @if($dataToEdit === null)
-                                                <button type="button" class="btn btn-info"
+                                                <div class="d-flex">
+                                                <button type="button" class="btn btn-sm btn-primary"
                                                         wire:click.prevent="setDataForEdit({{$index}})"><i
                                                         class="fa fa-pen"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-danger"
+                                                <button type="button" class="btn btn-sm btn-danger"
                                                         wire:click.prevent="deleteData({{$index}})"><i
                                                         class="fa fa-trash"></i>
                                                 </button>
-
+                                            </div>
                                             @else
+
                                                 @if($dataToEdit===$index)
-                                                    <div class="mt-4 d-flex justify-content-end">
-                                                        <button type="submit" class="btn btn-primary    "><i
+                                                    <div class="d-flex">
+                                                        <button type="submit" class="btn btn-sm btn-primary    "><i
                                                                 class="fa fa-save"></i></button>
-                                                    </div>
-                                                    <button type="button" class="btn btn-danger"
+                                                    <button type="button" class="btn btn-sm btn-danger"
                                                             wire:click.prevent="setDataForEdit()"><i
                                                             class="fa fa-trash"></i>
                                                     </button>
+                                                    </div>
                                                 @endif
 
                                             @endif
