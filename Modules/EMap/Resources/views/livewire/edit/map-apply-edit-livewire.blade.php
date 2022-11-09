@@ -5,12 +5,12 @@
 
     <fieldset>
         <legend>१. प्रस्तावित भवनको विवरण</legend>
-        <div class="row">
+
             <div class="mb-3">
                 <b class="form-label">१.१ निर्माण कार्यको किसिम *</b> <br>
                 <div class="row">
                     @foreach(\Modules\EMap\Enums\TypeOfConstructionWorkEnum::cases() as $constructionType)
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <input type="radio"
                                    id="{{$constructionType->name}}"
                                    wire:model="applyMap.construction_type"
@@ -211,7 +211,7 @@
                 </div>
             </div>
 
-        </div>
+
     </fieldset>
     @if($editForm)
         <div class="mt-4 d-flex justify-content-end">
