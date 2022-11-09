@@ -29,96 +29,83 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट थप्नुहोस्</h4>
-                        <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}"
+                        <a href="{{route('emap.admin.eMapTemplate.index')}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> टेम्प्लेट सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.store')}}"
+                    <form action="{{route('emap.admin.eMapTemplate.store')}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>टेम्प्लेट</strong>
-                            </legend>
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label for="title" class="form-label">शिर्षक *</label>
-                                    <input
-                                        type="text"
-                                        name="title"
-                                        value="{{old('title')}}"
-                                        class="form-control @error('title') is-invalid @enderror"
-                                        id="title"
-                                        placeholder="शिर्षक "
-                                    />
-                                    @error('title')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="for" class="form-label">टेम्प्लेट *</label>
-                                    <select name="for" id="for" class="form-control">
-                                        <option value="">छान्नुहोस्</option>
-                                        @foreach(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::cases() as $templateType)
-                                            <option
-                                                value="{{$templateType->value}}"{{old('for')==$templateType->value ? 'selected':''}}>{{$templateType->label()}}
-                                            </option>
-                                        @endforeach
-                                        @error('for')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <input
-                                        type="checkbox"
-                                        name="requires_header"
-                                        value="1"
-                                        class="form-check-input @error('requires_header') is-invalid @enderror"
-                                        id="requires_header" {{ old('requires_header') === 1 ?'checked':'' }}
-                                    />
-                                    <label for="requires_header" class="form-label">हेडर *</label>
-                                    @error('requires_header')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="row">
-
-                                    @foreach( (new Modules\BusinessRegistration\Entities\ProprietorDetail)->getTemplateOptions() as $template)
-                                        <div class="col-md-12">
-                                            <h6>{{$template['title'] ?? ''}}</h6>
-                                        </div>
-                                        <div class="col-md-12">
-
-                                            <div class="row">
-                                                @forelse($template['data'] as $key=>$templateValue)
-                                                    <button class="col-md-2 btn btn-primary btn-sm m-1" type="button"
-                                                            onclick="copyText('{{$templateValue}}')">{{$key}}</button>
-                                                @empty
-                                                    <button class="col-md-2 btn btn-primary btn-sm m-1" type="button">
-                                                        दाटा छैन
-                                                    </button>
-                                                @endforelse
-
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="data" class="form-label">डाटा *</label>
-                                    <textarea name="data" id="data" cols="30" rows="10"
-                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
-                                    @error('data')
-                                    {{--                                    <div class="invalid-feedback">{{$message}}</div>--}}
-                                    @enderror
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <label for="title" class="form-label">शिर्षक *</label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value="{{old('title')}}"
+                                    class="form-control @error('title') is-invalid @enderror"
+                                    id="title"
+                                    placeholder="शिर्षक "
+                                />
+                                @error('title')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
-                        </fieldset>
+                            <div class="col-md-6 mb-2">
+                                <label for="for" class="form-label">टेम्प्लेट *</label>
+                                <select name="for" id="for" class="form-control">
+                                    <option value="">छान्नुहोस्</option>
+                                    @foreach(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::cases() as $templateType)
+                                        <option
+                                            value="{{$templateType->value}}"{{old('for')==$templateType->value ? 'selected':''}}>{{$templateType->label()}}
+                                        </option>
+                                    @endforeach
+                                    @error('for')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <input
+                                    type="checkbox"
+                                    name="requires_header"
+                                    value="1"
+                                    class="form-check-input @error('requires_header') is-invalid @enderror"
+                                    id="requires_header" {{ old('requires_header') === 1 ?'checked':'' }}
+                                />
+                                <label for="requires_header" class="form-label">हेडर *</label>
+                                @error('requires_header')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="row">
+
+                                @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
+                                    <div class="col-md-12">
+                                        <h6>{{$template['title'] ?? ''}}</h6>
+                                    </div>
+                                    <div class="col-md-12">
+                                        @foreach($template['data'] as $key=>$templateValue)
+                                            <a class="badge badge-outline-primary text-primary"
+                                                    onclick="copyText('{{$templateValue}}')">{{$key}} : {{$templateValue}}</a>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="data" class="form-label">डाटा *</label>
+                                <textarea name="data" id="data" cols="30" rows="10"
+                                          class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
+                                @error('data')
+                                {{--                                    <div class="invalid-feedback">{{$message}}</div>--}}
+                                @enderror
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
