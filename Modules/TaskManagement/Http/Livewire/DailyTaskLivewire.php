@@ -19,6 +19,8 @@ class DailyTaskLivewire extends Component
     public $taskCategories = [];
     public $taskDivisions = [];
 
+    public object $dailyTask;
+
     public array $form = [
         'date' => null,
         'en_date' => null,
@@ -30,8 +32,19 @@ class DailyTaskLivewire extends Component
         'remarks' => null
     ];
 
-    public function mount()
+    public function mount($dailyTask=null)
     {
+        if(!empty($dailyTask)){
+            $this->dailyTask=$dailyTask;
+            $this->form = [
+                'date' => $dailyTask->date,
+                'en_date' => $dailyTask->en_date,
+                'branch_id' => $dailyTask->taskDivision->taskCategory->branch_id ?? '',
+                'task_category_id' => $dailyTask->taskDivision->task_category_id ?? '',
+                'task_division_id' => $dailyTask->task_division_id ?? '',
+                'remarks' => $dailyTask->remarks,
+            ];
+        }
         $this->branches = Branch::with('branches')->whereNull('branch_id')->get();
     }
 
@@ -42,7 +55,7 @@ class DailyTaskLivewire extends Component
 
     public function incrementPostCount($nepaliDate, $englishDate)
     {
-        $this->form['date'] = $nepaliDate;
+        $this->form['date'] =!$this->form['date'] ? $nepaliDate:$this->form['date'];
         $this->form['en_date'] = $englishDate;
     }
 
@@ -67,30 +80,44 @@ class DailyTaskLivewire extends Component
         $formData = $this->validate()['form'];
 
         DB::transaction(function () use ($formData) {
-            $dailyTask = DailyTask::create([
-                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-                'date' => $formData['date'],
-                'en_date' => $formData['en_date'],
-                'task_division_id' => $formData['task_division_id'],
-                'remarks' => $formData['remarks'],
-            ]);
-
+            if($dailyTask=$this->dailyTask){
+                $dailyTask->update($formData);
+            }else{
+                $dailyTask = DailyTask::create([
+                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                    'date' => $formData['date'],
+                    'en_date' => $formData['en_date'],
+                    'task_division_id' => $formData['task_division_id'],
+                    'remarks' => $formData['remarks'],
+                ]);
+            }
             if (!empty($this->form['documents'])) {
                 foreach ($this->form['documents'] as $document) {
                     $dailyTask->files()->create([
+                        'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                        'extension' => $document->getClientOriginalExtension(),
                         'file' => $document->store('task_management/daily_tasks/documents', 'public')
                     ]);
                 }
             }
         });
 
-        $this->reset('form', 'taskCategories', 'taskDivisions');
+        if($this->dailyTask){
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => "success",
+                'title' => "धन्यबाद",
+                'text' => "उजुरी पत्र सफलतापूर्वक updated",
+            ]);
+            return redirect(route('admin.taskManagement.dailyTask.index'));
+        }else{
+            $this->reset('form', 'taskCategories', 'taskDivisions');
 
-        $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "उजुरी पत्र सफलतापूर्वक थपियो",
-        ]);
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => "success",
+                'title' => "धन्यबाद",
+                'text' => "उजुरी पत्र सफलतापूर्वक थपियो",
+            ]);
+        }
     }
 
     public function render()

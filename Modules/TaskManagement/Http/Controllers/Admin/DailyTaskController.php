@@ -25,13 +25,16 @@ class DailyTaskController extends Controller
         //
     }
 
-    public function show($id)
+    public function show(DailyTask $dailyTask)
     {
-        return view('taskmanagement::show');
+        $dailyTask->load('fiscalYear','taskDivision', 'files');
+        return view('taskmanagement::admin.daily_task.show', compact('dailyTask'));
     }
 
     public function edit(DailyTask $dailyTask)
     {
+        $dailyTask->load('taskDivision.taskCategory');
+
         return view('taskmanagement::admin.daily_task.edit', compact('dailyTask'));
     }
 
