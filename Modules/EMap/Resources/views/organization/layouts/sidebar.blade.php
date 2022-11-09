@@ -15,14 +15,14 @@
             </a>
 
         </li>
-        <li class="{{Route::is('organization.admin.clients.client.*')?'mm-active':''}}">
-            <a href="#">
-
+        @if(auth('organization')->user()->is_organization==1)
+        <li class="{{Route::is('organization.admin.clients.taxClearance.*') ? 'mm-active':''}}">
+            <a href="{{route('organization.admin.clients.taxClearance.index')}}">
                 <img src="{{asset('assets/backend/emap/admin/img/menu-icon/6.svg')}}" alt="">
                 <span>कर चुक्ता</span>
             </a>
-
         </li>
+        @endif
 
         <li class="{{Route::is('organization.admin.clients.map.apply.*')?'mm-active':''}}">
             <a href="{{route('organization.admin.clients.map.apply.index')}}">
