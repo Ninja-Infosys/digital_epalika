@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\EMap\Enums\EMapFormFillerTypeEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
 
 class EMapTemplate extends Model
@@ -27,6 +28,7 @@ class EMapTemplate extends Model
     ];
 
     protected $casts = [
-        'for' => NoticeTypeEnum::class
+        'for' => NoticeTypeEnum::class,
+        'type' => EMapFormFillerTypeEnum::class
     ];
 }

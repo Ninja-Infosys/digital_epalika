@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\EMap\Entities\EMapTemplate;
+use Modules\EMap\Http\Requests\Template\StoreEMapTemplateRequest;
 
 class EMapTemplateController extends Controller
 {
@@ -21,7 +22,7 @@ class EMapTemplateController extends Controller
         return view('emap::admin.template.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreEMapTemplateRequest $request)
     {
         //
     }

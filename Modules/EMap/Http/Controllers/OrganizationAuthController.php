@@ -84,7 +84,7 @@ class OrganizationAuthController extends Controller
 
     public function store(StorePasswordRequest $request)
     {
-//        dd($request->validated());
+
         $redirect = redirect()->route('organization.admin.dashboard');
         $user = auth('organization')->user();
 
