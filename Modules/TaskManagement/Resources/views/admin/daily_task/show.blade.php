@@ -69,7 +69,6 @@
                             <div class="col-md-4 mb-3">
                                 <div class="card">
                                     <div class="card-header">
-                                    <span style="float: right">
                                         <form action="{{route('admin.file.destroy',$document)}}"
                                               method="post">
                                             @csrf
@@ -78,12 +77,11 @@
                                                 <i class="fa fa-window-close"></i>
                                             </button>
                                         </form>
-                                    </span>
                                     </div>
                                     <div class="card-body">
                                         @if($document->extension ==='pdf')
                                             <iframe src="{{$document->file_url}}" frameborder="0" width="100%"></iframe>
-                                        @elseif(($document->extension ==='png') or ($document->extension ==='jpg') or ($document->extension ==='jpeg'))
+                                        @elseif(in_array($document->extension,['png', 'jpg', 'jpeg']))
                                             <img src="{{ $document->file_url }}" class="card-image" alt="Image"
                                                  height=150px;" width="100%">
                                         @endif

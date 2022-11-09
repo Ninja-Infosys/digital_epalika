@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @livewire('taskmanagement::daily-task-livewire')
+                    @livewire('taskmanagement::daily-task-livewire',['dailyTask'=>$dailyTask])
                 </div>
             </div>
         </div>

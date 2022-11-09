@@ -33,6 +33,8 @@ class DailyTaskController extends Controller
 
     public function edit(DailyTask $dailyTask)
     {
+        $dailyTask->load('taskDivision.taskCategory');
+
         return view('taskmanagement::admin.daily_task.edit', compact('dailyTask'));
     }
 
