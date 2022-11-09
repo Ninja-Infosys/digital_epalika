@@ -17,11 +17,17 @@
                            {{-- <x-application-component
                                 :application-type="\Modules\EMap\Enums\NoticeTypeEnum::MAP_PASS_FOR_BUILDING"
                                 url="{{route('organization.admin.clients.application.apply-map-application',[$mapApply])}}"></x-application-component>--}}
-
-                            <button id="printButton" class="btn btn-sm btn-success mx-2" printElementId='printData'
-                                    requestRoute="{{route('print.application-print')}}" title="Print Application">
-                                <i class="fa fa-print"></i>
-                            </button>
+                            <div class="btn-group mb-3">
+                                <button class="bg-success text-white" onclick=" printJS({
+                printable: 'printData',
+                type: 'html',
+                documentTitle: 'ufjgjufgjh',
+                showModal: true,
+                css: '{{asset('assets/backend/css/print.css')}}',
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
+                                </button>
+                            </div>
 
                         </div>
                     </div>

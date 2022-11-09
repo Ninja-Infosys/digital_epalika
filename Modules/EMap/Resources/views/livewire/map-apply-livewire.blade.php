@@ -3,7 +3,7 @@
     @csrf
 
     <fieldset>
-        <legend>१. चार किल्लाको विवरण</legend>
+        <legend class="title">१. चार किल्लाको विवरण</legend>
         <div class="row">
             <div class="mb-3">
                 <div class="row">

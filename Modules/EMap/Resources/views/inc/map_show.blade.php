@@ -1,13 +1,13 @@
 <div class="font-black" id="printData">
-    <p>
+    <span>
         {{config('applicationDetail.to_office.to')}}<br>
         {{config('applicationDetail.to_office.office_name')}}<br>
         {{config('applicationDetail.to_office.office')}}<br>
         {{config('applicationDetail.to_office.office_address')}}
-    </p>
-    <p class="text-center"><b>बिषय: भबन निर्माणको लागि नक्सापास सम्बन्धमा ।</b></p>
+    </span><br>
+    <p class="text-center fw-bold">बिषय: भबन निर्माणको लागि नक्सापास सम्बन्धमा ।</p>
 
-    <p>
+    <span>
         मैले/हामीले देहायमा लेखिए बमोजिम भवन निर्माण कार्य गर्ने भएकोले उक्त निर्माण कार्यको बिबरण
         तपसिलमा खुलाई आफ्नो हक भोगको निस्साको नक्कल, कित्ता नापी नक्साको नक्कल र घरको नक्सा लगायत
         आवस्यक कागजात सहित निवेदन पेश गरेको छु/छौं । उक्त नक्सापास गरी निर्माण कार्य गर्न स्वीकृति
@@ -15,13 +15,13 @@
         भएपछी {{config('applicationDetail.office_type')}} द्वारा स्वीकृत मापदण्ड तथा राष्ट्रिय भवन
         संहिता भित्र रही निर्माण कार्य गर्नेछु/छौं। यस दरखास्त फाराममा लेखिएको व्यहोरा ठीक साँचो छ,
         झुठ्ठा ठहरे कानून बमोजिम सहुँला बुझाउँला।
-    </p>
-    <p>तपसिल</p>
-    <p>
-        <b>१. प्रस्तावित भवनको विवरण </b>
-    </p>
-    <p>१.१ निर्माण कार्यको किसिम</p>
-    <div class="d-flex flex-wrap">
+    </span><br>
+    <span class="fw-bold">तपसिल</span><br>
+    <span class="fw-bold">
+        १. प्रस्तावित भवनको विवरण
+    </span><br>
+    <span>१.१ निर्माण कार्यको किसिम</span><br>
+    <span class="d-flex flex-wrap">
         @foreach(\Modules\EMap\Enums\TypeOfConstructionWorkEnum::cases() as $constructionType)
             <div class="m-1">
                 <input type="checkbox"
@@ -30,10 +30,10 @@
                 {{$constructionType->label()}}
             </div>
         @endforeach
-    </div>
+    </span>
 
-    <p>१.२ प्रयोजन</p>
-    <div class="d-flex flex-wrap">
+    <span>१.२ प्रयोजन</span><br>
+    <span class="d-flex flex-wrap">
         @foreach(\Modules\EMap\Enums\BuildingUsageEnum::cases() as $usages)
             <div class="m-1">
                 <input type="checkbox"
@@ -42,9 +42,9 @@
                 {{$usages->label()}}
             </div>
         @endforeach
-    </div>
+    </span>
     <div class="d-flex flex-wrap">
-        <p>१.३ भवन ऐन अनुसार वर्गीकरण : </p>
+        <span>१.३ भवन ऐन अनुसार वर्गीकरण : </span><br>
         @foreach(\Modules\EMap\Enums\CategorizationEnum::cases() as $categorization)
             <div class="mx-2">
                 <input type="checkbox"
@@ -54,50 +54,50 @@
             </div>
         @endforeach
     </div>
-    <p>
+    <span>
         १.४ स्ट्रकचर टाईप : {{$mapApply->structureType->title??''}}
-    </p>
+    </span><br>
     <div class="d-flex flex-wrap">
-        <p>
+        <span>
             १.५ हाल निर्माण गर्ने तल्ला संख्या : <span
                 class="underline-dotted"> {{$mapApply->current_storey}} </span>
-        </p>
-        <p class="mx-3">
+        </span><br>
+        <span class="mx-3">
             १.६ प्लिन्थको क्षेत्रफल : <span
                 class="underline-dotted"> {{$mapApply->area_of_plinth}} </span>
-        </p>
+        </span>
     </div>
-    <p>
+    <span>
         १.७ भविष्यमा निर्माण गर्ने तल्ला संख्या :
         <span class="underline-dotted">
                                 {{$mapApply->future_storey}}
                             </span>
-    </p>
+    </span><br>
     <div class="d-flex flex-wrap">
-        <p>
+        <span>
             १.८ कुल भवनको लम्बाई :
             <span class="underline-dotted">
                                     {{$mapApply->length}}
                                 </span>
-        </p>
-        <p class="mx-3">
+        </span><br>
+        <span class="mx-3">
             १.९ कुल भवनको चौडाई :
             <span class="underline-dotted">
                                     {{$mapApply->breadth}}
                                 </span>
-        </p>
+        </span>
     </div>
 
-    <p>
+    <span>
         १.१० भवनको कुल उचाई जमिनको सतहबाट :
         <span class="underline-dotted">
                                 {{$mapApply->height}}
                             </span>
-    </p>
-    <p class="break-page"></p>
-    <p>
+    </span><br>
+    <span class="break-page"></span>
+    <span>
         १.११ तल्लाको क्षेत्रफल र उचाईको विवरण :
-    </p>
+    </span><br>
     <table
         class="table table-sm table-bordered">
         <thead>
@@ -122,65 +122,65 @@
         </tbody>
     </table>
 
-    <p>
+    <span>
         <b>२. जग्गाको विवरण</b>
-    </p>
-    <p>
+    </span><br>
+    <span>
         २.१ भू-उपयोग्य क्षेत्र :
         <span class="underline-dotted">
                                 {{$mapApply->landDetail->land_use_area??''}}
                             </span>
-    </p>
+    </span><br>
     <div class="d-flex flex-wrap">
-        <p>
+        <span>
             २.२ वडा नं : <span
                 class="underline-dotted"> {{$mapApply->landDetail->ward_no ?? ''}} </span>
-        </p>
-        <p class="mx-3">
+        </span><br>
+        <span class="mx-3">
             २.३ साविक वडा नं : <span
                 class="underline-dotted"> {{$mapApply->landDetail->former_ward_no??''}} </span>
-        </p>
+        </span><br>
     </div>
 
     <div class="d-flex flex-wrap">
-        <p>
+        <span>
             २.४ टोलको नाम :
             <span class="underline-dotted">
                                     {{$mapApply->landDetail->tole ?? ''}}
                                 </span>
-        </p>
-        <p class="mx-3">
+        </span><br>
+        <span class="mx-3">
             २.५ सडक कोड नं :
             <span class="underline-dotted">
                                     {{$mapApply->landDetail->street_code_no??''}}
                                 </span>
-        </p>
+        </span><br>
     </div>
-    <p>
+    <span>
         २.६ जग्गा कित्ता नं :
         <span class="underline-dotted">
                                 {{$mapApply->landDetail->plot_no??''}}
                             </span>
-    </p>
+    </span><br>
 
-    <p>
+    <span>
         २.७ क्षेत्रफल
         <span class="underline-dotted">
                                 {{$mapApply->landDetail->unit_value??''}} {{$mapApply->landDetail->unit->title??''}}
                             </span>
-    </p>
+    </span><br>
 
-    <p>
+    <span>
         २.८ भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR):
         <span class="underline-dotted">
                                 {{$mapApply->landDetail->percentage_of_area_covered_by_building??''}}
                             </span>
-    </p>
+    </span><br>
 
-    <p>
+    <span>
         <b>३. जग्गा धनीको विवरण</b>
-    </p>
-    <p>३.१ जग्गा धनीको किसिम : </p>
+    </span><br>
+    <span>३.१ जग्गा धनीको किसिम : </span><br>
     <div class="d-flex flex-wrap">
         @foreach(\Modules\EMap\Enums\LandOwnerTypeEnum::cases() as $landOwnerType)
             <div class="mx-2">
@@ -222,9 +222,9 @@
         </tbody>
     </table>
 
-    <p>
+    <span>
         <b>४. घर धनीको विवरण (जग्गाधनी भन्दा फरक भएमा)</b>
-    </p>
+    </span><br>
     <table
         class="table table-sm table-bordered">
         <tbody>
@@ -256,10 +256,10 @@
         </tbody>
     </table>
 
-    <p class="break-page"></p>
-    <p>
+    <span class="break-page"></span><br>
+    <span>
         <b>५. चार किल्लाको विवरण</b>
-    </p>
+    </span><br>
     <table
         class="table table-sm table-bordered">
         <thead>
@@ -286,9 +286,9 @@
         </tbody>
     </table>
 
-    <p>
+    <span>
         <b>६. डिजाइनरको विवरण</b>
-    </p>
+    </span><br>
     <table
         class="table table-sm table-bordered">
         <thead>
@@ -315,11 +315,11 @@
         </tbody>
     </table>
 
-    <p>
+    <span>
         <b>७. निवेदकको विवरण</b>
-    </p>
+    </span><br>
     <div class="d-flex flex-wrap">
-        <p>७.१ निवेदकको प्रकार : </p>
+        <span>७.१ निवेदकको प्रकार : </span>
         @foreach(\Modules\EMap\Enums\ApplicantTypeEnum::cases() as $applicantType)
             <div class="mx-2">
                 <input type="checkbox"
@@ -330,7 +330,7 @@
         @endforeach
     </div>
     <div class="d-flex flex-wrap">
-        <p>७.२ घरधनी सँगको सम्बन्ध </p>
+        <span>७.२ घरधनी सँगको सम्बन्ध </span>
         @foreach(\Modules\EMap\Enums\RelationEnum::cases() as $relation)
             <div class="mx-2">
                 <input type="checkbox"
@@ -341,9 +341,9 @@
         @endforeach
     </div>
 
-    <p>
+    <span>
         <b>जग्गाधनी वा घरधनी भन्दा फरक भएमा</b>
-    </p>
+    </span><br>
     <table
         class="table table-sm table-bordered">
         <tbody>
@@ -377,22 +377,22 @@
     <div class="d-flex justify-content-between">
         <div>
             <div class="my-5">
-                <p class="underline-dotted">
+                <span class="underline-dotted">
                     {{$mapApply->applicantDetail->application_date??''}}
-                </p>
-                <p>निबेदनको मिति</p>
+                </span>
+                <span>निबेदनको मिति</span>
             </div>
         </div>
         <div>
             <div class="my-5">
-                <p class="custom-width underline-dotted"></p>
-                <p>निवेदकको सहि</p>
+                <span class="custom-width underline-dotted"></span>
+                <span>निवेदकको सहि</span>
             </div>
         </div>
     </div>
 
 
-    <p class="break-page"></p>
+    <span class="break-page"></span><br>
 
     <h4 class="text-center">
         निर्माण हुने भवन तथा मापदण्ड सम्बन्धि संक्षिप्त विवरण
@@ -458,12 +458,12 @@
     <div class="d-flex justify-content-end">
         <div>
             <div class="my-5">
-                <p class="custom-width underline-dotted"></p>
-                <p>(कन्सल्टेन्ट इंन्जिनियरको सहि)</p>
+                <span class="custom-width underline-dotted"></span><br>
+                <span>(कन्सल्टेन्ट इंन्जिनियरको सहि)</span><br>
             </div>
-            <p> नाम : {{$mapApply->consultant_name}}</p>
-            <p> मोबाइल नं. : {{$mapApply->consultant_mobile_no}}</p>
-            <p> एन. ई. सी. नं. : {{$mapApply->consultant_nec_no}} </p>
+            <span> नाम : {{$mapApply->consultant_name}}</span><br>
+            <span> मोबाइल नं. : {{$mapApply->consultant_mobile_no}}</span><br>
+            <span> एन. ई. सी. नं. : {{$mapApply->consultant_nec_no}} </span><br>
         </div>
     </div>
 </div>
