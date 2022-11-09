@@ -39,7 +39,15 @@
                         url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}दोस्रो चरणको कार्य सम्पन्नको"/>
+                    <button class="bg-success text-white" onclick=" printJS({
+                printable: 'printData',
+                type: 'html',
+                documentTitle: 'दोस्रो चरणको कार्य सम्पन्नको परामर्शको प्राविधिकको प्रतिवेदन',
+                showModal: true,
+                css: '{{asset('assets/backend/css/print.css')}}',
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
+                    </button>
                 </div>
             </div>
         </div><!-- end col-->

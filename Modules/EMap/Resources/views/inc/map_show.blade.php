@@ -17,109 +17,11 @@
         झुठ्ठा ठहरे कानून बमोजिम सहुँला बुझाउँला।
     </p>
     <p>तपसिल</p>
-    <livewire:emap::edit.map-apply-edit-livewire :mapApply="$mapApply"/>
+    <livewire:emap::edit.map-apply-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
     <p class="break-page"></p>
     <livewire:emap::edit.storey-detail-edit-livewire :mapApply="$mapApply"/>
-    <p>
-        <b>२. जग्गाको विवरण</b>
-    </p>
-    <p>
-        २.१ भू-उपयोग्य क्षेत्र :
-        <span class="underline-dotted">
-                                {{$mapApply->landDetail->land_use_area??''}}
-                            </span>
-    </p>
-    <div class="d-flex flex-wrap">
-        <p>
-            २.२ वडा नं : <span
-                class="underline-dotted"> {{$mapApply->landDetail->ward_no ?? ''}} </span>
-        </p>
-        <p class="mx-3">
-            २.३ साविक वडा नं : <span
-                class="underline-dotted"> {{$mapApply->landDetail->former_ward_no??''}} </span>
-        </p>
-    </div>
-
-    <div class="d-flex flex-wrap">
-        <p>
-            २.४ टोलको नाम :
-            <span class="underline-dotted">
-                                    {{$mapApply->landDetail->tole ?? ''}}
-                                </span>
-        </p>
-        <p class="mx-3">
-            २.५ सडक कोड नं :
-            <span class="underline-dotted">
-                                    {{$mapApply->landDetail->street_code_no??''}}
-                                </span>
-        </p>
-    </div>
-    <p>
-        २.६ जग्गा कित्ता नं :
-        <span class="underline-dotted">
-                                {{$mapApply->landDetail->plot_no??''}}
-                            </span>
-    </p>
-
-    <p>
-        २.७ क्षेत्रफल
-        <span class="underline-dotted">
-                                {{$mapApply->landDetail->unit_value??''}} {{$mapApply->landDetail->unit->title??''}}
-                            </span>
-    </p>
-
-    <p>
-        २.८ भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR):
-        <span class="underline-dotted">
-                                {{$mapApply->landDetail->percentage_of_area_covered_by_building??''}}
-                            </span>
-    </p>
-
-    <p>
-        <b>३. जग्गा धनीको विवरण</b>
-    </p>
-    <p>३.१ जग्गा धनीको किसिम : </p>
-    <div class="d-flex flex-wrap">
-        @foreach(\Modules\EMap\Enums\LandOwnerTypeEnum::cases() as $landOwnerType)
-            <div class="mx-2">
-                <input type="checkbox"
-                       {{$landOwnerType->value==$mapApply->landOwner->land_owner_type->value ? 'checked' : ''}}
-                       disabled>
-                {{$landOwnerType->label()}}
-            </div>
-        @endforeach
-    </div>
-    <table
-        class="table table-sm table-bordered">
-        <tbody>
-        <tr>
-            <td>
-                १.१ नाम : {{$mapApply->landOwner->name??''}}
-            </td>
-            <td>
-                १.२ फोन नं. : {{$mapApply->landOwner->phone??''}}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                १.३ बुवाको नाम : {{$mapApply->landOwner->father_name??''}}
-            </td>
-            <td>
-                १.४ नागरिकता लिएको जिल्ला
-                : {{$mapApply->landOwner->citizenshipIssueDistrict->district??''}}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                १.५ नागरिकत नम्बर : {{$mapApply->landOwner->citizenship_no??''}}
-            </td>
-            <td>
-                १.६ नागरिकता लिएको मिति : {{$mapApply->landOwner->citizenship_issue_date??''}}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
+    <livewire:emap::edit.land-detail-edit-livewire :mapApply="$mapApply"/>
+    <livewire:emap::edit.land-owner-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
     <p>
         <b>४. घर धनीको विवरण (जग्गाधनी भन्दा फरक भएमा)</b>
     </p>

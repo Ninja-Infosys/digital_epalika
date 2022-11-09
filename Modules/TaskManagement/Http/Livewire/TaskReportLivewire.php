@@ -50,7 +50,7 @@ class TaskReportLivewire extends Component
             $this->taskDivisions = TaskDivision::whereIn('task_category_id', $this->form['task_category_id'])->get();
         }
 
-        $this->dailyTasks = DailyTask::with('taskDivision.taskCategory')->where(function ($query) {
+        $this->dailyTasks = DailyTask::with('branch','taskCategory','taskDivision')->where(function ($query) {
             if (!empty($this->form['from_date'])) {
                 $query->whereDate('date', '>=', $this->form['from_date']);
             }
@@ -58,14 +58,10 @@ class TaskReportLivewire extends Component
                 $query->whereDate('date', '<=', $this->form['to_date']);
             }
             if (!empty($this->form['branch_id'])) {
-                $query->whereHas('taskDivision.taskCategory.branch', function ($query) {
-                    $query->whereIn('id', $this->form['branch_id']);
-                });
+                $query->whereIn('branch_id', $this->form['branch_id']);
             }
             if (!empty($this->form['task_category_id'])) {
-                $query->whereHas('taskDivision.taskCategory', function ($query) {
-                    $query->whereIn('id', $this->form['task_category_id']);
-                });
+                $query->whereIn('task_category_id', $this->form['task_category_id']);
             }
             if (!empty($this->form['task_division_id'])) {
                 $query->whereIn('task_division_id', $this->form['task_division_id']);

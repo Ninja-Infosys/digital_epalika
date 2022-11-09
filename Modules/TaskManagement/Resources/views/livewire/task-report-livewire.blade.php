@@ -85,6 +85,7 @@
                                 <tr>
                                     <th>क्र.स</th>
                                     <th>मिति</th>
+                                    <th>शाखा</th>
                                     <th>मुख्य कार्य</th>
                                     <th>कार्य</th>
                                     <th>कैफियत</th>
@@ -95,7 +96,8 @@
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$task->date}}</td>
-                                        <td>{{$task->taskDivision->taskCategory->title??''}}</td>
+                                        <td>{{$task->branch->branch_name??''}}</td>
+                                        <td>{{$task->taskCategory->title??''}}</td>
                                         <td>{{$task->taskDivision->title??''}}</td>
                                         <td>{{$task->remarks}}</td>
                                     </tr>

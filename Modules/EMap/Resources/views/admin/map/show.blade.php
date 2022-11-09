@@ -26,6 +26,57 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
+                        <div class="card mb-1">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="m-0">
+                                    <a class="text-dark collapsed" data-bs-toggle="collapse" href="#mapNavigationSelect"
+                                       aria-expanded="false">
+                                        <button class="btn btn-sm btn-secondary">main-title</button>
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="mapNavigationSelect" class="collapse" aria-labelledby="headingTwo"
+                                 data-bs-parent="#accordion" style="">
+                                <div class="card-body">
+                                    <a href="#1" class="btn btn-sm btn-primary my-1">navigation 1</a>
+                                    <a href="#2" class="btn btn-sm btn-primary my-1">navigation 2</a>
+                                    <a href="#3" class="btn btn-sm btn-primary my-1">navigation 3</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="d-flex justify-content-between">
+                            <h4>शिर्षक नाम:</h4>
+                            <div class="btn-group mb-3 ">
+                                <button class="bg-success text-white" onclick=" printJS({
+                printable: 'printData',
+                type: 'html',
+                documentTitle: 'ufjgjufgjh',
+                showModal: true,
+                css: '{{asset('assets/backend/css/print.css')}}',
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bs-spy="scroll" data-bs-offset="0">
+                        <section id="1" style="height: 800px; background-color: red;">1</section>
+                        <section id="2" style="height: 900px; background-color: blue;">2</section>
+                        <section id="3" style="height: 1000px; background-color: green;">3</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
                         <h4 class="header-title">नक्सा सूची</h4>
                     </div>
                 </div>
@@ -113,7 +164,7 @@
                         </div>
 
                         <div class="tab-pane" id="map-registration-tab" role="tabpanel">
-                                @includeIf('emap::admin.map.map-registration.print')
+                            @includeIf('emap::admin.map.map-registration.print')
                         </div>
 
 
@@ -228,10 +279,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">संघियारको नाममा जारी भएको सूचना</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">१५ दिने सूचना टाँस सम्बन्धमा</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.sendingDetails',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">{{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_SENDING_DETAILS->label()}}</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.revisedSuperStructurePermit',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.office-letter',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">संघियारको नाममा जारी भएको सूचना</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.notice-letter',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">१५ दिने सूचना टाँस सम्बन्धमा</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.sendingDetails',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">{{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_SENDING_DETAILS->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.revisedSuperStructurePermit',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT->label()}}</a>
 
                 </div>
             </div>
@@ -262,13 +317,28 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्राविधिक प्रतिवेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.plinth-level-supervisor-report',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण प्रतिवेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-consultant-report',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-technician-report',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">प्रथम चरणको कार्य सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}} प्राबिधिकको प्रतिबेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.second-phase-consultant-report',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">दोस्रो चरणको कार्य सम्पन्नको परामर्शको प्राविधिकको प्रतिवेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.second-phase-technician-report',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">दोस्रो चरणको कार्य सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}} प्रबिधिकको प्रतिवेदन</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.supervisor',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.technician-notice',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">प्राविधिक प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.plinth-level-supervisor-report',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण
+                        प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-consultant-report',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको
+                        प्रतिबेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.first-phase-technician-report',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">प्रथम चरणको कार्य
+                        सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        प्राबिधिकको प्रतिबेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.second-phase-consultant-report',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">दोस्रो चरणको कार्य सम्पन्नको परामर्शको प्राविधिकको
+                        प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.second-phase-technician-report',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">दोस्रो चरणको कार्य
+                        सम्पन्नको {{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        प्रबिधिकको प्रतिवेदन</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.supervisor',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण
+                        प्रतिवेदन</a>
                 </div>
             </div>
         </div>
@@ -280,8 +350,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सरजमिन मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.map-arrears',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">नक्सा पासको लागि १५ दिने टाँस मुचुल्का</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.land-arrears',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">सरजमिन मुचुल्का</a>
                 </div>
             </div>
         </div>
@@ -293,9 +365,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
-                   </div>
+                    <a href="{{route('emap.admin.map.map-apply.notice.ch-agreement',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी
+                        बीच)</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.agent-agreement',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1">सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)</a>
+                </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -306,11 +381,16 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.superstructure-permission',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_SUPERSTRUCTURE_PERMIT->label()}}</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.constructionCompletionCertificate',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE->label()}}</a>
-                    <a href="{{route('emap.admin.map.map-apply.notice.revisedSuperStructurePermitOrder',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT_ORDER->label()}}</a>
-                     <a href="{{route('emap.admin.map.map-apply.notice.houseMapNamsari',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::HOUSE_MAP_NAMSARI->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.permission-letter',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.superstructure-permission',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_SUPERSTRUCTURE_PERMIT->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.constructionCompletionCertificate',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.revisedSuperStructurePermitOrder',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::REVISED_SUPERSTRUCTURE_PERMIT_ORDER->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.houseMapNamsari',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::HOUSE_MAP_NAMSARI->label()}}</a>
                 </div>
             </div>
         </div>
@@ -322,7 +402,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.heir',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::HEIR->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.heir',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::HEIR->label()}}</a>
 
                 </div>
             </div>
@@ -335,7 +416,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{route('emap.admin.map.map-apply.notice.permission',$mapApply)}}" class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION->label()}}</a>
+                    <a href="{{route('emap.admin.map.map-apply.notice.permission',$mapApply)}}"
+                       class="btn btn-sm btn-outline-primary mb-1"> {{\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION->label()}}</a>
 
                 </div>
             </div>

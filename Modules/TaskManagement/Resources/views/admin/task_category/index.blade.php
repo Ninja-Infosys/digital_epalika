@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -44,8 +44,12 @@
                             @forelse($taskCategories as $taskCategory)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$taskCategory->branch->branch_name??''}}</td>
-                                <td>{{$taskCategory->title}}</td>
+                                <td>
+                                    {{\Illuminate\Support\Str::words($taskCategory->branch->branch_name??'',10)}}
+                                </td>
+                                <td>
+                                    {{\Illuminate\Support\Str::words($taskCategory->title,10)}}
+                                </td>
                                 <td>
                                         <a href="{{route('admin.taskManagement.taskCategory.edit',$taskCategory)}}"
                                            class="btn btn-xs btn-outline-primary">
@@ -68,6 +72,7 @@
                             @endforelse
                             </tbody>
                         </table>
+                        {{$taskCategories->links()}}
                     </div>
                 </div>
             </div>
