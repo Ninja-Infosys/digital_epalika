@@ -69,7 +69,21 @@
                                     @enderror
                                 </select>
                             </div>
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
+                                <label for="type" class="form-label">घरधनी/परामर्शदाता/पालिका</label>
+                                <select name="type" id="type" class="form-control">
+                                    <option value="">छान्नुहोस्</option>
+                                    @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $type)
+                                        <option
+                                            value="{{$type->value}}"{{old('type')==$type->value ? 'selected':''}}>{{$type->label()}}
+                                        </option>
+                                    @endforeach
+                                    @error('type')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
                                 <input
                                     type="checkbox"
                                     name="requires_header"
