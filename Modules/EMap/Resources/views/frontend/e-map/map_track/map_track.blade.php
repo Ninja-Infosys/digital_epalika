@@ -36,9 +36,9 @@
                                             <span>ट्रयाक गर्नुहोस्</span>
                                         </a>
                                     </div>
-                                </div> <!-- end row-->
+                                </div>
                             </div>
-                        </div> <!-- end widget-rounded-circle-->
+                        </div>
                     </div>
                 </div>
             </form>

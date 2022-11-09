@@ -181,35 +181,26 @@
                                 <table class="table table-sm mb-0 table-striped table-hover">
                                     <tr>
                                         <th>नाम</th>
-                                        <td>{{$mapApply->organization->organizationDetail->org_name_ne ?? ''}}
-                                            ({{$mapApply->organization->organizationDetail->org_name_en ?? ''}})
+                                        <td>{{$mapApply->organization->organizationDetail->org_name_ne ?? $mapApply->organization->userDetail->name_ne ?? ''}}
+                                            ({{$mapApply->organization->organizationDetail->org_name_en ?? $mapApply->organization->userDetail->name_en ?? ''}})
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>इमेल</th>
-                                        <td>{{$mapApply->organization->organizationDetail->org_email ?? ''}}</td>
+                                        <td>{{$mapApply->organization->organizationDetail->org_email ?? $mapApply->organization->userDetail->email ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>फोन</th>
-                                        <td>{{$mapApply->organization->organizationDetail->org_contact ?? ''}}</td>
+                                        <td>{{$mapApply->organization->organizationDetail->org_contact ?? $mapApply->organization->userDetail->phone ??''}}</td>
                                     </tr>
-                                    <tr>
-                                        <th>लिङ्ग</th>
-                                        <td>{{$mapApply->organization->organizationDetail->org_registration_no ?? ''}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>इमेल</th>
-                                        <td>{{$mapApply->organization->organizationDetail->org_pan_no ?? ''}}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>ठेगाना</th>
-                                        <td>{{$mapApply->organization->organizationDetail->localBody->local_body ?? ''}}
-                                            -{{$mapApply->organization->organizationDetail->ward ?? ''}}
-                                            , {{$mapApply->organization->organizationDetail->tole ?? ''}}
-                                            , {{$mapApply->organization->organizationDetail->district->district ?? ''}}
-                                            , {{$mapApply->organization->organizationDetail->province->province ?? ''}}</td>
-                                    </tr>
+{{--                                    <tr>--}}
+{{--                                        <th>ठेगाना</th>--}}
+{{--                                        <td>{{$mapApply->organization->organizationDetail->localBody->local_body ?? ''}}--}}
+{{--                                            -{{$mapApply->organization->organizationDetail->ward ?? ''}}--}}
+{{--                                            , {{$mapApply->organization->organizationDetail->tole ?? ''}}--}}
+{{--                                            , {{$mapApply->organization->organizationDetail->district->district ?? ''}}--}}
+{{--                                            , {{$mapApply->organization->organizationDetail->province->province ?? ''}}</td>--}}
+{{--                                    </tr>--}}
                                     <tr>
                                         <td colspan="2">
                                             <a href="{{route('emap.admin.organization.show',$mapApply->organization_id)}}"
