@@ -29,7 +29,9 @@
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
 
+    @if(config('app.env')==='production')
     {!! ReCaptcha::htmlScriptTagJsApi() !!}
+    @endif
 </head>
 
 <body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
@@ -95,10 +97,13 @@ overflow: hidden">
                                         </div>
                                     </div>
                                     <div class="mb-2">
+                                        @if(config('app.env')==='production')
                                         {!! htmlFormSnippet() !!}
+                                        @endif
                                         @error('g-recaptcha-response')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
+
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" class="btn btn-success waves-effect waves-light">

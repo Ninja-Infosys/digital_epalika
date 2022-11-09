@@ -10,7 +10,7 @@
                         <a class=" text-primary-500 text-center">नक्सा दरखास्त फारम</a>
                     </div>
                 </div>
-                <h4 class="fw-semibold heading-line">नक्सा दरखास्त फारम</h4>
+                <h4 class="fw-semibold text-center">नक्सा दरखास्त फारम</h4>
                 <div class="row mb-2">
                     <div class="col-sm-4">
                         <h3></h3>

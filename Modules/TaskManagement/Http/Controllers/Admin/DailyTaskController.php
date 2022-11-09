@@ -11,7 +11,7 @@ class DailyTaskController extends Controller
 {
     public function index()
     {
-        $dailyTasks = DailyTask::with('taskDivision.taskCategory')->get();
+        $dailyTasks = DailyTask::with('branch','taskCategory','taskDivision')->paginate(10);
         return view('taskmanagement::admin.daily_task.index', compact('dailyTasks'));
     }
 
@@ -27,14 +27,13 @@ class DailyTaskController extends Controller
 
     public function show(DailyTask $dailyTask)
     {
-        $dailyTask->load('fiscalYear','taskDivision', 'files');
+        $dailyTask->load('fiscalYear','branch','taskCategory','taskDivision', 'files');
+
         return view('taskmanagement::admin.daily_task.show', compact('dailyTask'));
     }
 
     public function edit(DailyTask $dailyTask)
     {
-        $dailyTask->load('taskDivision.taskCategory');
-
         return view('taskmanagement::admin.daily_task.edit', compact('dailyTask'));
     }
 

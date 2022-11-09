@@ -3,14 +3,13 @@
     @csrf
 
     <div class="row">
-        <div class="mb-3">
+        <div class=" col-md-8 ">
 
-            <div class="row">
-                <label for="organization_id">संस्था *</label>
+                <label for="organization_id">संस्था <span class="text-danger">*</span></label>
                 <select
                     wire:model="applyMap.organization_id" id="organization_id"
                     name="organization_id">
-                    <option value="">छान्नुहोस्</option>
+                    <option value="">संस्था छान्नुहोस्</option>
                     @foreach($organizations as $organization)
                         <option
                             value="{{$organization->id}}">{{$organization->organizationDetail->org_name_ne ?? $organization->userDetail->name_ne ?? ''}}</option>
@@ -19,10 +18,8 @@
                 @error('applyMap.organization_id')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
-            </div>
         </div>
     </div>
-
     <fieldset>
         <legend>१. प्रस्तावित भवनको विवरण</legend>
         <div class="row">

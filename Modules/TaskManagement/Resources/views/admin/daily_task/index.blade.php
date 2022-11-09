@@ -31,11 +31,12 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>मिति</th>
+                                <th>शाखा</th>
                                 <th>मुख्य कार्य</th>
                                 <th>कार्य</th>
                                 <th>कैफियत</th>
@@ -47,10 +48,17 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$dailyTask->date}}</td>
-                                    <td>{{$dailyTask->taskDivision->taskCategory->title??''}}</td>
-                                    <td>{{$dailyTask->taskDivision->title ??''}}</td>
-                                    <td>{{$dailyTask->remarks}}</td>
                                     <td>
+                                        {{\Illuminate\Support\Str::words($dailyTask->branch->branch_name??'',10)}}
+                                    </td>
+                                    <td>
+                                        {{\Illuminate\Support\Str::words($dailyTask->taskCategory->title??'',10)}}
+                                    </td>
+                                    <td>
+                                        {{\Illuminate\Support\Str::words($dailyTask->taskDivision->title ??'',10)}}
+                                    </td>
+                                    <td>{{$dailyTask->remarks}}</td>
+                                    <td width="140">
                                         <a href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
                                            class="btn btn-xs btn-outline-info">
                                             <i class="fa fa-eye"></i>
@@ -76,6 +84,7 @@
                             @endforelse
                             </tbody>
                         </table>
+                        {{$dailyTasks->links()}}
                     </div>
                 </div>
             </div>

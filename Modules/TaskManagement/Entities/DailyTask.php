@@ -3,6 +3,7 @@
 namespace Modules\TaskManagement\Entities;
 
 use App\Models\File;
+use App\Models\Settings\Branch;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,6 +25,8 @@ class DailyTask extends Model
 
     protected $fillable = [
         'fiscal_year_id',
+        'branch_id',
+        'task_category_id',
         'task_division_id',
         'date',
         'en_date',
@@ -33,6 +36,16 @@ class DailyTask extends Model
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function branch(): BelongsTo
+    {
+        return  $this->belongsTo(Branch::class);
+    }
+
+    public function taskCategory(): BelongsTo
+    {
+        return $this->belongsTo(TaskCategory::class);
     }
 
     public function taskDivision(): BelongsTo
