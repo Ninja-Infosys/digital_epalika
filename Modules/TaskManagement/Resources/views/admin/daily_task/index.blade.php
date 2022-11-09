@@ -48,9 +48,15 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$dailyTask->date}}</td>
-                                    <td>{{$dailyTask->branch->branch_name??''}}</td>
-                                    <td>{{$dailyTask->taskCategory->title??''}}</td>
-                                    <td>{{$dailyTask->taskDivision->title ??''}}</td>
+                                    <td>
+                                        {{\Illuminate\Support\Str::words($dailyTask->branch->branch_name??'',20)}}
+                                    </td>
+                                    <td>
+                                        {{\Illuminate\Support\Str::words($dailyTask->taskCategory->title??'',20)}}
+                                    </td>
+                                    <td>
+                                        {{\Illuminate\Support\Str::words($dailyTask->taskDivision->title ??'',20)}}
+                                    </td>
                                     <td>{{$dailyTask->remarks}}</td>
                                     <td>
                                         <a href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
