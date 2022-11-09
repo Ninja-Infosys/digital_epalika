@@ -43,11 +43,13 @@
                     <span> नक्शा दस्तुर  </span>
                 </a>
             </li>
+            @can('eMapTemplate_access')
             <li class="{{request()->is('admin/emap/setting/eMapTemplate*') ? 'active' : ''}}">
                 <a href="{{route('emap.admin.eMapTemplate.index')}}">
                     <span> टेम्प्लेट  </span>
                 </a>
             </li>
+            @endcan
         </ul>
     </div>
 </li>

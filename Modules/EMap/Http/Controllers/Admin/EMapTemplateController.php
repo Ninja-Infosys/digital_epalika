@@ -5,13 +5,20 @@ namespace Modules\EMap\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Http\Requests\Template\StoreEMapTemplateRequest;
+use Modules\EMap\Http\Requests\Template\UpdateEMapTemplateRequest;
 
 class EMapTemplateController extends Controller
 {
     public function index()
     {
+        abort_if(Gate::denies('eMapTemplate_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
         $eMapTemplates=EMapTemplate::latest()->get();
 
         return view('emap::admin.template.index',compact('eMapTemplates'));
@@ -19,31 +26,65 @@ class EMapTemplateController extends Controller
 
     public function create()
     {
+        abort_if(Gate::denies('eMapTemplate_create'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
         return view('emap::admin.template.create');
     }
 
     public function store(StoreEMapTemplateRequest $request)
     {
-        //
+        abort_if(Gate::denies('eMapTemplate_create'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
+        EMapTemplate::create($request->validated());
+
+        toast('टेम्प्लेट सफलतापूर्वक थपियो','success');
+        return back();
     }
 
-    public function show($id)
+    public function show(EMapTemplate $eMapTemplate)
     {
+        abort_if(Gate::denies('eMapTemplate_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
         return view('emap::show');
     }
 
-    public function edit($id)
+    public function edit(EMapTemplate $eMapTemplate)
     {
-        return view('emap::edit');
+        abort_if(Gate::denies('eMapTemplate_edit'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
+        return view('emap::admin.template.edit',compact('eMapTemplate'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateEMapTemplateRequest $request, EMapTemplate $eMapTemplate)
     {
-        //
+        abort_if(Gate::denies('eMapTemplate_edit'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
+        $eMapTemplate->update($request->validated());
+
+        toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो','success');
+        return redirect(route('emap.admin.eMapTemplate.index'));
     }
 
-    public function destroy($id)
+    public function destroy(EMapTemplate $eMapTemplate)
     {
-        //
+        abort_if(Gate::denies('eMapTemplate_delete'),
+            403,
+            'You are not allowed to access this resource'
+        );
     }
 }

@@ -59,29 +59,30 @@
                                 <label for="for" class="form-label">टेम्प्लेट *</label>
                                 <select name="for" id="for" class="form-control">
                                     <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::cases() as $templateType)
-                                        <option
-                                            value="{{$templateType->value}}"{{old('for')==$templateType->value ? 'selected':''}}>{{$templateType->label()}}
+                                    @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $templateType)
+                                        <option {{old('for')==$templateType->value ? 'selected':''}}
+                                                value="{{$templateType->value}}">
+                                            {{$templateType->label()}}
                                         </option>
                                     @endforeach
-                                    @error('for')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </select>
+                                @error('for')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="type" class="form-label">घरधनी/परामर्शदाता/पालिका</label>
                                 <select name="type" id="type" class="form-control">
                                     <option value="">छान्नुहोस्</option>
                                     @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $type)
-                                        <option
-                                            value="{{$type->value}}"{{old('type')==$type->value ? 'selected':''}}>{{$type->label()}}
+                                        <option {{old('type')==$type->value ? 'selected':''}}
+                                            value="{{$type->value}}">{{$type->label()}}
                                         </option>
                                     @endforeach
-                                    @error('type')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </select>
+                                @error('type')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 mb-2">
                                 <input
@@ -105,7 +106,8 @@
                                     <div class="col-md-12">
                                         @foreach($template['data'] as $key=>$templateValue)
                                             <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
-                                                    onclick="copyText('{{$templateValue}}')">{{$key}} : {{$templateValue}}</a>
+                                               onclick="copyText('{{$templateValue}}')">{{$key}}
+                                                : {{$templateValue}}</a>
                                         @endforeach
                                     </div>
                                 @endforeach
@@ -113,10 +115,12 @@
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>
-                                <textarea name="data" id="data" cols="30" rows="10"
+                                <textarea name="data"
+                                          id="data"
+                                          cols="30" rows="10"
                                           class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data')}}</textarea>
                                 @error('data')
-                                {{--                                    <div class="invalid-feedback">{{$message}}</div>--}}
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
