@@ -20,8 +20,6 @@
     <livewire:emap::edit.map-apply-edit-livewire :mapApply="$mapApply"/>
     <p class="break-page"></p>
     <livewire:emap::edit.storey-detail-edit-livewire :mapApply="$mapApply"/>
-
-
     <p>
         <b>२. जग्गाको विवरण</b>
     </p>
