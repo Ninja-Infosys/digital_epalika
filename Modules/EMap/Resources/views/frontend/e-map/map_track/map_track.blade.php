@@ -10,14 +10,18 @@
                         <a class=" text-primary-500 text-center">नक्सा ट्रयाक</a>
                     </div>
                 </div>
-                <h4 class="fw-semibold text-center">नक्सा ट्रयाक </h4>
+                <div class="py-3">
+                    <h4 class="fw-semibold text-center">नक्सा ट्रयाक </h4>
+                    <h6 class="text-center">तपाइको घर-नक्सा आवेदनको स्थिति थाहा पाउन उल्लेखित विवरण भरेर पठाउनुहोस
+                        ।</h6>
+                </div>
             </div>
             <form action="">
                 <div class="row justify-content-center pb-1">
                     <div class="col-md-6 col-xl-8">
                         <div class="widget-rounded-circle card">
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row pt-1">
                                     <div class="col-6">
                                         <label class="form-check-label" for="submision_no">सबमिसन न:</label>&emsp;
                                         <input type="text" name="submision_no" id="submision_no">
@@ -26,13 +30,13 @@
                                         <label class="form-check-label px-2" for="phone_no">फोन न:</label>&emsp;
                                         <input type="text" name="phone_no" id="phone_no">
                                     </div>
+                                    <div class="d-flex justify-content-end pt-3">
+                                        <a href="{{route('formDetails')}}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-search"></i>
+                                            <span>ट्रयाक गर्नुहोस्</span>
+                                        </a>
+                                    </div>
                                 </div> <!-- end row-->
-                                <div class="d-flex justify-content-end pt-3">
-                                    <a href="{{route('formDetails')}}" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-search"></i>
-                                        <span>ट्रयाक गर्नुहोस्</span>
-                                    </a>
-                                </div>
                             </div>
                         </div> <!-- end widget-rounded-circle-->
                     </div>
