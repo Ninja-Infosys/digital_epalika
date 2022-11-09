@@ -49,7 +49,7 @@ class Organization extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($value)
+    public function setPasswordAttribute($value): void
     {
         if (!empty($value)) {
             $this->attributes['password'] = bcrypt($value);
@@ -63,7 +63,7 @@ class Organization extends Authenticatable
             : asset('images/user_icon.jpg');
     }
 
-    public function setProfilePhotoPathAttribute($value)
+    public function setProfilePhotoPathAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
