@@ -7,6 +7,7 @@ use Modules\EMap\Http\Controllers\Clients\ClientController;
 use Modules\EMap\Http\Controllers\Clients\MapApplyController;
 use Modules\EMap\Http\Controllers\OrganizationAuthController;
 use Modules\EMap\Http\Controllers\OrganizationDashboardController;
+use Modules\EMap\Http\Controllers\TaxClearanceController;
 
 
 Route::get('dashboard', OrganizationDashboardController::class)->name('dashboard');
@@ -29,4 +30,5 @@ Route::prefix('clients')->as('clients.')->group(function () {
 
     Route::resource('mapApply', MapApplyController::class)->names('map.apply');
     Route::resource('client', ClientController::class);
+    Route::resource('taxClearance', TaxClearanceController::class);
 });
