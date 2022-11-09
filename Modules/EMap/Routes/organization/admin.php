@@ -27,6 +27,6 @@ Route::prefix('clients')->as('clients.')->group(function () {
             Route::post('applyMapApplication','applyMapApplication')->name('apply-map-application');
         });
 
-    Route::resource('client/{client}/mapApply', MapApplyController::class)->names('mapApply');
+    Route::resource('mapApply', MapApplyController::class)->names('map.apply');
     Route::resource('client', ClientController::class);
 });

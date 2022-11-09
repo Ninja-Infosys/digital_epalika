@@ -29,7 +29,9 @@
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
 
-    {!! ReCaptcha::htmlScriptTagJsApi() !!}
+    @if(config('app.env') === 'production')
+        {!! ReCaptcha::htmlScriptTagJsApi() !!}
+    @endif
 </head>
 <body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
 height: 100vh;
@@ -63,8 +65,8 @@ overflow: hidden">
                             <div class="card">
                                 <div class="card-body">
                                     <h2 class="text-center">
-                                            <i class="fa fa-user-lock"></i>
-                                        </h2>
+                                        <i class="fa fa-user-lock"></i>
+                                    </h2>
                                     <form action="{{route('organization.login')}}" method="post">
                                         @csrf
                                         <div class="mb-2">
@@ -99,13 +101,15 @@ overflow: hidden">
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
+                                        @if(config('app.env') === 'production')
+                                            <div class="mb-2">
+                                                {!! htmlFormSnippet() !!}
+                                                @error('g-recaptcha-response')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                        @endif
 
-                                        <div class="mb-2">
-                                            {!! htmlFormSnippet() !!}
-                                            @error('g-recaptcha-response')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
 
                                         <div class="d-flex justify-content-center">
                                             <button type="submit" class="btn btn-success waves-effect waves-light">
