@@ -112,12 +112,13 @@
     </div>
     <div class="row">
 
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-{{--                    <x-charts.bar-chart-component id="bar-chart" chartTitle="आर्थिक वर्ष अनुसार जम्मा कार्यहरु"--}}
-{{--                                                  :labels="$taskChartData['labels']"--}}
-{{--                                                  :dataSets="$taskChartData['dataSets']"/>--}}
+                    <x-charts.pie-chart-component id="task-report-chart"
+                                                  chartName="आर्थिक वर्ष अनुसार जम्मा कार्यहरु"
+                                                  :labels="$taskData['labels']"
+                                                  :dataSets="$taskData['dataSets']"/>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col -->

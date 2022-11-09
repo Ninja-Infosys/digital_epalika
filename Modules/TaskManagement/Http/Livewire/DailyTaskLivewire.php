@@ -55,7 +55,7 @@ class DailyTaskLivewire extends Component
 
     public function incrementPostCount($nepaliDate, $englishDate)
     {
-        $this->form['date'] =!$this->form['date'] ? $nepaliDate:$this->form['date'];
+        $this->form['date'] =$nepaliDate;
         $this->form['en_date'] = $englishDate;
     }
 
@@ -80,8 +80,8 @@ class DailyTaskLivewire extends Component
         $formData = $this->validate()['form'];
 
         DB::transaction(function () use ($formData) {
-            if($dailyTask=$this->dailyTask){
-                $dailyTask->update($formData);
+            if(!empty($this->dailyTask)){
+                $this->dailyTask->update($formData);
             }else{
                 $dailyTask = DailyTask::create([
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
@@ -102,7 +102,7 @@ class DailyTaskLivewire extends Component
             }
         });
 
-        if($this->dailyTask){
+        if(!empty($this->dailyTask)){
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => "success",
                 'title' => "धन्यबाद",

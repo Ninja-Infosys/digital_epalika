@@ -2,6 +2,7 @@
 
 namespace Modules\TaskManagement\Http\Controllers\Admin;
 
+use App\Models\Settings\FiscalYear;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,11 +15,26 @@ class DashboardController extends Controller
     public function __invoke()
     {
         $dailyTaskCount=DailyTask::whereDate('en_date',now()->toDateString())->count();
-        $totalTaskCount=DailyTask::all()->count();
-        $totalTaskCategory=TaskCategory::all()->count();
-        $totalTaskDivision=TaskDivision::all()->count();
+        $totalTaskCount=DailyTask::count();
+        $totalTaskCategory=TaskCategory::count();
+        $totalTaskDivision=TaskDivision::count();
+        $taskData=$this->taskData();
 
         return view('taskmanagement::admin.dashboard',compact('dailyTaskCount',
-            'totalTaskCount', 'totalTaskCategory', 'totalTaskDivision'));
+            'totalTaskCount', 'totalTaskCategory', 'totalTaskDivision','taskData'));
+    }
+
+    public function taskData(): array
+    {
+        $fiscalYears = FiscalYear::withCount('dailyTasks')->get();
+
+        return [
+            "labels" => $fiscalYears->pluck('title')->toArray(),
+            "dataSets" => [
+                [
+                    'data' => $fiscalYears->pluck('daily_tasks_count')->toArray(),
+                ]
+            ],
+        ];
     }
 }

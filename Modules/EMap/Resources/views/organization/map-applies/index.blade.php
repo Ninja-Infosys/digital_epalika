@@ -32,6 +32,7 @@
                                 <td></td>
                                 <td></td>
                                 <td>
+                                    <a class="btn btn-primary" href="{{route('organization.admin.clients.map.apply.show', $mapApply)}}"> <i class="fa fa-eye"></i></a>
                                     <a class="btn btn-warning" href="{{route('organization.admin.clients.map.apply.edit', $mapApply)}}"> <i class="fa fa-pen"></i></a>
                                 </td>
                             </tr>

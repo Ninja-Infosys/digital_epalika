@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         @foreach($template['data'] as $key=>$templateValue)
-                                            <a class="badge badge-outline-primary text-primary"
+                                            <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
                                                     onclick="copyText('{{$templateValue}}')">{{$key}} : {{$templateValue}}</a>
                                         @endforeach
                                     </div>
