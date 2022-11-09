@@ -70,7 +70,7 @@
                             सूचना
                             घरधनीले हामीहरुको रोहवरमा निर्माण स्थलको सबैले देख्ने ठाउँमा टास गरेको ठिक हो |
                         </p>
-                        <h5>साक्षीहरु :-</h5>
+                        <h4>साक्षीहरु :-</h4>
                         <p>१. श्री<span class="underline-dotted custom-width"></span> दरखास्त <span
                                 class="underline-dotted custom-width"></span></p>
                         <p class="mt-2">२. श्री<span class="underline-dotted custom-width"></span> दरखास्त <span

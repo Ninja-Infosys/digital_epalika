@@ -54,6 +54,7 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
             Route::post('certificate','certificate')->name('certificate');
             Route::post('heir','heir')->name('heir');
             Route::post('permission','permission')->name('permission');
+            Route::post('notice','notice')->name('notice');
         });
 
     });
