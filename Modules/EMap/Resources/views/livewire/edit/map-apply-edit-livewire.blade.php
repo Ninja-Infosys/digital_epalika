@@ -1,8 +1,9 @@
 <form wire:submit.prevent="saveFormData" method="post"
       class="building-construction-application">
     @csrf
-<button wire:click.prevent="setEditForm"><i class="fa fa-pen"></i></button>
-
+    <div class="d-flex justify-content-end">
+<button class="btn btn-sm btn-primary rounded-pill waves-effect waves-light" wire:click.prevent="setEditForm"><i class="fa fa-pen px-2"></i>सम्पादन</button>
+    </div>
     <fieldset>
         <legend>१. प्रस्तावित भवनको विवरण</legend>
 

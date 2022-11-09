@@ -1,7 +1,6 @@
 <form wire:submit.prevent="saveFormData" method="post"
       class="building-construction-application">
     @csrf
-
     <fieldset>
         <legend class="title">१. चार किल्लाको विवरण</legend>
         <div class="row">
