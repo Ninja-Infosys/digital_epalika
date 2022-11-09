@@ -51,7 +51,7 @@
                                     <td>{{$dailyTask->taskDivision->title ??''}}</td>
                                     <td>{{$dailyTask->remarks}}</td>
                                     <td>
-                                        <a href="{{route('admin.taskManagement.dailyTask.edit',$dailyTask)}}"
+                                        <a href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
                                            class="btn btn-xs btn-outline-info">
                                             <i class="fa fa-eye"></i>
                                         </a>

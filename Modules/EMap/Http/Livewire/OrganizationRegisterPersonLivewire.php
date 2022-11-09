@@ -91,9 +91,9 @@ class OrganizationRegisterPersonLivewire extends Component
     ];
 
     protected array $secondStepValidations = [
-        'userDetail.pan_no' => ['nullable'],
-        'userDetail.nec_no' => ['nullable'],
-        'userDetail.nec_certificate' => ['nullable', 'image', 'max:300'],
+        'userDetail.pan_no' => ['required'],
+        'userDetail.nec_no' => ['required'],
+        'userDetail.nec_certificate' => ['required', 'image', 'max:300'],
         'userDetail.citizenship_no' => ['required'],
         'userDetail.citizenship_issued_district' => ['required', 'exists:districts,id,deleted_at,NULL'],
         'userDetail.citizenship_issued_date' => ['required'],
@@ -255,6 +255,10 @@ class OrganizationRegisterPersonLivewire extends Component
             'userDetail.citizenship_no.required' => 'नागरिकता नम्बर आवश्यक छ ।',
             'userDetail.citizenship_issued_district.required' => ' नागरिकता जारी गरिएको जिल्ला आवश्यक छ ।',
             'userDetail.citizenship_issued_date.required' => 'नागरिकता जारी गरिएको मिति आवश्यक छ ।',
+            'userDetail.pan_no.required' => 'पाना नं आवश्यक छ।',
+            'userDetail.nec_no.required' => 'NEC नं आवश्यक छ।',
+            'userDetail.nec_certificate.required'=>'NEC को प्रमाणपत्र आवश्यक छ।',
+            'userDetail.nec_certificate.max' => 'NEC को प्रमाणपत्रको अधिकतम साइज ३०० केबी ।',
             'userDetail.citizenship_front.required' => 'नागरिकताको फोटो आवश्यक छ।',
             'userDetail.citizenship_back.max' => 'नागरिकताको फोटो आवश्यक छ।',
             'userDetail.citizenship_back.image' => 'नागरिकताको फोटो आवश्यक छ।',
