@@ -1,4 +1,13 @@
 <h5 class="text-center mb-2"><b>कार्यालय प्रयोजनको लागि</b></h5>
+
+{{--<div class="row">--}}
+{{--    <div class="col-md-2">--}}
+{{--            <input id="checkid"  type="checkbox" value="test" /> छ कि--}}
+{{--    </div>--}}
+{{--    <div class="col-md-2">--}}
+{{--            <input id="checkid"  type="checkbox" value="test" /> testdata--}}
+{{--    </div>--}}
+{{--</div>--}}
 <span class="mb-3">
     यस {{config('applicationDetail.office_type')}}को स्थान<span class="underline-dotted"></span>
     वडा नं.<span class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>मा अवस्थित साविक
@@ -12,9 +21,9 @@
 </span><br>
 <span>१. सडक अधिकार क्षेत्र सम्बन्धि मापदण्ड पालना भएको
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-    <label class="form-check-label" for="inlineRadio1">छ कि&emsp;</label>
+   छ कि&emsp;
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-    <label class="form-check-label" for="inlineRadio2">छैन&ensp;</label> (छैन भने विवरण खुलाउने)<br>
+    छैन&ensp;(छैन भने विवरण खुलाउने)<br>
     &emsp;<span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
@@ -23,22 +32,23 @@
     <span class="underline-dotted"></span>
 </span><br>
 <span class="mt-2">२. साइट प्लानमा देखाइए बमोजिम सेटब्याक पालना भएको
-    <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-    <label class="form-check-label" for="inlineRadio1">छ&ensp;कि&emsp; </label>
+   <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+   छ कि&emsp;
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
-    &emsp;<span class="underline-dotted "></span>
-    <span class="underline-dotted "></span>
-    <span class="underline-dotted "></span>
-    <span class="underline-dotted "></span>
-    <span class="underline-dotted "></span>
+    छैन&ensp;(छैन भने विवरण खुलाउने)<br>
+    &emsp;<span class="underline-dotted"></span>
+    <span class="underline-dotted"></span>
+    <span class="underline-dotted"></span>
+    <span class="underline-dotted"></span>
+    <span class="underline-dotted"></span>
+    <span class="underline-dotted"></span>
 </span><br>
 <span class="mt-2">३. ग्राउण्ड कभरेजमा फरक परेको
-    <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-    <label class="form-check-label" for="inlineRadio1">छ&ensp;कि&emsp;</label>
+   <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+   छ कि&emsp;
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
- &emsp;<span class="underline-dotted"></span>
+    छैन&ensp;(छैन भने विवरण खुलाउने)<br>
+    &emsp;<span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
@@ -47,10 +57,10 @@
 </span><br>
 <span class="mt-2">४. छज्जा (क्यान्टीलिभर), बार्दली, बाहिरको सिँढी आदि निकालेको हकमा मापदण्डको पालना भएको
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-    <label class="form-check-label" for="inlineRadio1">छ&ensp; कि&emsp;</label>
+   छ कि&emsp;
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
- &emsp;<span class="underline-dotted"></span>
+    छैन&ensp;(छैन भने विवरण खुलाउने)<br>
+    &emsp;<span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
@@ -58,10 +68,10 @@
     <span class="underline-dotted"></span>
 </span><br>
 <span class="mt-2">५. नेपाल राष्ट्रिय भवन निर्माण संहिता २०६० अनुसार निर्माण भएको
-    <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-    <label class="form-check-label" for="inlineRadio1">छ&ensp;</label>कि
+   <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+   छ कि&emsp;
     <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-    <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label> (छैन भने विवरण खुलाउने)<br>
+    छैन&ensp;(छैन भने विवरण खुलाउने)<br>
     &emsp;<span class="underline-dotted"></span>
     <span class="underline-dotted"></span>
     <span class="underline-dotted"></span>

@@ -39,7 +39,15 @@
                         url="{{route('emap.admin.map.map-apply.notice.upload.agreement',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}सम्झौत पत्र(सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)"/>
+                    <button class="bg-success text-white" onclick=" printJS({
+                printable: 'printData',
+                type: 'html',
+                documentTitle: 'सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच',
+                showModal: true,
+                css: '{{asset('assets/backend/css/print.css')}}',
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
+                    </button>
                 </div>
             </div>
         </div><!-- end col-->

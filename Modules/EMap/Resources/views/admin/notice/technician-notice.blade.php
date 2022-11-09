@@ -75,21 +75,21 @@
                         <span>२.१&emsp;&ensp;बाटोको किसिम :
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                            <label class="form-check-label" for="inlineRadio1">पिच&emsp;</label>
+                            पिच&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                            <label class="form-check-label" for="inlineRadio2">ग्राभेल&emsp;</label>
+                            ग्राभेल&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                            <label class="form-check-label" for="inlineRadio3">मोटर जाने&emsp;</label>
+                            मोटर जाने&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio4" value="option4">
-                            <label class="form-check-label" for="inlineRadio4">कच्ची&emsp;</label>
+                           कच्ची&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio5" value="option5">
-                            <label class="form-check-label" for="inlineRadio5">अन्य भए खुलाउने
+                           अन्य भए खुलाउने
                                 <span class="underline-dotted custom-width"></span>
-                               </label>
+
                         </span><br>
                         <span class="mt-2">२.२&emsp;&ensp;बाटोको चौडाई<span class="underline-dotted custom-width"></span></span><br>
                         <span class="mt-2">२.३&emsp;&ensp;मापदण्ड बमोजिमको सडक अधिकार क्षेत्रसँग साइट प्लान मेल खान्छ, खादैन
@@ -99,10 +99,10 @@
                         <span class="mt-2">३.&emsp;&emsp;निर्माण हुने भवनले सार्बजनिक स्थल वा निर्माणलाई बाधा पुर्याएको
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                            <label class="form-check-label" for="inlineRadio1">छ&emsp;</label>
+                            छ&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                            <label class="form-check-label" for="inlineRadio2">छैन&emsp;</label>सो को विवरण<br>&emsp;&emsp;&emsp;<span
+                            छैन&emsp;सो को विवरण<br>&emsp;&emsp;&emsp;<span
                                 class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span>
                         </span><br>
                         <span class="mt-2">४.&emsp;&emsp;खोला/खहरे/नदी/ताल/कुलो आदि नजिक भए सो देखि </span><br>
@@ -113,10 +113,10 @@
                         <span class="mt-2">५.&emsp;&emsp;निर्माण हुने जग्गा वा सो को नजिकबाट हाइटेन्सन लाइन गएको
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                            <label class="form-check-label" for="inlineRadio1">छ&emsp;</label>
+                            छ&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                            <label class="form-check-label" for="inlineRadio2">छैन ?</label>
+                            छैन ?
                         </span><br>
                         <span class="mt-2">५.१&emsp;&ensp;छ भने</span><br>
                         <span class="mt-2">५.१.१&emsp;निर्माणको निमित्त प्रस्तावित जग्गासम्मको दुरी:<span
@@ -126,21 +126,21 @@
                         <span class="mt-2">६.&emsp;&emsp;नापी नक्सा र फिल्डको आकार प्रकार
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                            <label class="form-check-label" for="inlineRadio1">मिल्छ&emsp;</label>
+                            मिल्छ&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                            <label class="form-check-label" for="inlineRadio2">मिल्दैन</label>
+                            मिल्दैन
                         </span><br>
                         <span class="mt-2">७.&emsp;&emsp;लालपुर्जा भन्दा फिल्डमा जग्गा
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                            <label class="form-check-label" for="inlineRadio1">ठिक&emsp;</label>
+                            ठिक&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                            <label class="form-check-label" for="inlineRadio2">बढी&emsp;</label>
+                            बढी&emsp;
                             <input class="form-check-input form-check-inline" type="checkbox"
                                    name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                            <label class="form-check-label" for="inlineRadio3">घटी देखिन्छ</label>
+                            घटी देखिन्छ
                         </span><br>
                         <span class="mt-2">८.&emsp;&emsp;प्रविधिकको अन्य कुनै कुरा भए व्यहोरा खुलाउने</span><br>
                         <span class="mt-2">(क)&emsp;&ensp;भिरालो जग्गा भए <span class="underline-dotted custom-width"></span>

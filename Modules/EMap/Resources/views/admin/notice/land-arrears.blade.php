@@ -76,7 +76,7 @@
                             बुझाउँला भनी यस मुचुल्कामा सही छाप गरि नेपालगञ्ज उप-महानगरपालिकामा चढायौ | पुनश्च :
                         </span><br>
                         <div class="text-center fw-bold">तपसिल</div>
-                            <div class="row mt-2 border">
+                            <div class="row border">
                                 <div class="col-md-6 text-lg-center">
                                     सही छाप
                                 </div>
@@ -93,38 +93,38 @@
                         <div class="text-center my-2">दक्षिण वर्ष<span
                                 class="underline-dotted custom-width"></span>&ensp;&ensp;&ensp; &emsp; को श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></div>
-                        <h4 class="head text-decoration-underline mt-2">छिमेकि सक्षीवाला</h4>
-                        <span class="d-flex justify-content-center my-2">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        <h4 class="head text-decoration-underline mt-1">छिमेकि सक्षीवाला</h4>
+                        <span class="d-flex justify-content-center">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             <span
                                 class="underline-dotted custom-width"></span>बस्ने<span
                                 class="underline-dotted custom-width"></span> वर्षको श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></span>
-                        <span class="d-flex justify-content-center my-2">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        <span class="d-flex justify-content-center ">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             <span
                                 class="underline-dotted custom-width"></span>बस्ने<span
                                 class="underline-dotted custom-width"></span> वर्षको श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></span>
-                        <span class="d-flex justify-content-center my-2">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        <span class="d-flex justify-content-center ">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             <span
                                 class="underline-dotted custom-width"></span>बस्ने<span
                                 class="underline-dotted custom-width"></span> वर्षको श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></span>
-                        <span class="d-flex justify-content-center my-2">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        <span class="d-flex justify-content-center">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             <span
                                 class="underline-dotted custom-width"></span>बस्ने<span
                                 class="underline-dotted custom-width"></span> वर्षको श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></span>
-                        <span class="d-flex justify-content-center my-2">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        <span class="d-flex justify-content-center">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             <span
                                 class="underline-dotted custom-width"></span>बस्ने<span
                                 class="underline-dotted custom-width"></span> वर्षको श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></span>
-                        <span class="d-flex justify-content-center my-2">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        <span class="d-flex justify-content-center">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             <span
                                 class="underline-dotted custom-width"></span>बस्ने<span
                                 class="underline-dotted custom-width"></span> वर्षको श्रीमान/श्रीमती/सुश्री<span
                                 class="underline-dotted custom-width"></span></span>
-                        <span class="d-flex justify-content-center my-2">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
+                        <span class="d-flex justify-content-center">{{config('applicationDetail.place')}} {{config('applicationDetail.office_short_name')}}
                             <span
                                 class="underline-dotted custom-width"></span>बस्ने<span
                                 class="underline-dotted custom-width"></span> वर्षको श्रीमान/श्रीमती/सुश्री<span

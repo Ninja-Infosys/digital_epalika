@@ -39,7 +39,15 @@
                         url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}दोस्रो चरणको कार्य"/>
+                    <button class="bg-success text-white" onclick=" printJS({
+                printable: 'printData',
+                type: 'html',
+                documentTitle: 'दोस्रो चरणको कार्य सम्पन्नको नेपालगन्ज उप-महानगरपालिकाको प्रबिधिकको प्रतिवेदन',
+                showModal: true,
+                css: '{{asset('assets/backend/css/print.css')}}',
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
+                    </button>
                 </div>
             </div>
         </div><!-- end col-->
@@ -49,7 +57,7 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <h3 class="text-center mb-2"><b>दोस्रो चरणको कार्य सम्पन्नको नेपालगन्ज उप-महानगरपालिकाको प्रबिधिकको प्रतिवेदन</b></h3>
+                                <h3 class="text-center"><b>दोस्रो चरणको कार्य सम्पन्नको नेपालगन्ज उप-महानगरपालिकाको प्रबिधिकको प्रतिवेदन</b></h3>
                                 @includeIf('emap::admin.map.report.second_phase')
                                     हस्ताक्षर:<span class="underline-dotted custom-width"></span><span class="underline-dotted custom-width"></span></span><br>
 
