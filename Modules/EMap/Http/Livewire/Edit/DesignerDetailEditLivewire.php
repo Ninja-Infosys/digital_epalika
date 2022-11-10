@@ -100,7 +100,7 @@ class DesignerDetailEditLivewire extends Component
                 if (!empty($dataToSave['id'])) {
                     DesignerDetail::find($dataToSave['id'])?->update($dataToSave);
                 } else {
-                    DesignerDetail::create($dataToSave+['map_apply_id'=>$this->mapApply->id]);
+                    DesignerDetail::create($dataToSave + ['map_apply_id' => $this->mapApply->id]);
                 }
             });
 
