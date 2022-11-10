@@ -22,9 +22,7 @@
                 </div>
             @endif
             <div class="card-body p-3">
-                <form id="show_popup" action="{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}"
-                      method="post">
-                    @csrf
+                <form id="show_pohypup">
                     <div class="row">
                         <div class="col-md-12">
                             <label for="data">डाटा</label>
@@ -33,85 +31,84 @@
                         </div>
                     </div>
                     <div class=" d-flex justify-content-end pt-3">
-                        <button type="submit" class="btn btn-sm btn-primary ">पेश गर्नुहोस्</button>
+                        <button type="button" id="show_popup" class="btn btn-sm btn-primary ">पेश गर्नुहोस्</button>
                     </div>
                 </form>
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="otpVerificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">OTP कोड राख्नुहोस्</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-danger" id="error_message"></p>
+                            <form id="otp_form">
+                                <div class="form-group">
+                                    <label for="otp">ओ.टि.पी.</label>
+                                    <input type="text" class="form-control" name="otp" id="otp" placeholder="६ अंकको ओ.टि.पी. कोड राख्नुहोस्">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
+                                    <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
     @push('scripts')
         <script>
-            $('#show_popup').submit(function (event) {
+
+            $(document).ready(function () {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                var form = $(this).closest("form");
-                event.preventDefault();
 
-                $(document.body).delegate("#storeBankForm","submit",function(e){
-                    e.preventDefault();
-                    var form_data=new FormData(this);
-
+                $('#show_popup').on('click', function (event) {
+                    event.preventDefault();
                     $.ajax({
-                        type:"post",
-                        url:$(this).attr("route_action"),
-                        data:form_data,
-                        processData: false,
-                        contentType: false,
-                        beforeSend:function(){
-                            $("#storeBankBtn").attr("disabled",true);
+                        type: "get",
+                        url: "{{route('send-otp',$mapApply)}}",
+                        success: function (resp) {
+                            $("#otpVerificationModal").modal('toggle');
+
                         },
-                        success:function(resp){
-                            $("#yield-content").html(resp.view);
-                            toastr.success(resp.alert_message);
+                        error: function () {
+                            alert("Something Went Wrong");
                         },
-                        error:function(XMLHttpRequest, textStatus, errorThrown){
-                            $("#storeBankBtn").attr("disabled",false);
-                            if(XMLHttpRequest.status==422){
-                                $.each(XMLHttpRequest.responseJSON.errors,function(prefix,value){
-                                    $('span.'+prefix+'-error').text(value);
-                                });
-                            }
-                            else{
-                                alert("Something Went Wrong");
-                            }
-                        },
-                        complete:function(){
-                            $("#storeBankBtn").attr("disabled",false);
-                        },
-                        timeout:10000
+                        timeout: 10000
                     });
                 });
 
-
-
-
-
-                swal.fire({
-                    title: "OTP कोड राख्नुहोस्",
-                    input: 'text',
-                    inputPlaceholder: '६ अंकको ओ.टि.पी. कोड राख्नुहोस्',
-                    icon: "edit",
-                    showCancelButton: true,
-                    confirmButtonColor: 'green',
-                    confirmButtonText: "पेश गर्नुहोस्",
-                    cancelButtonText: "रद्द गर्नुहोस्",
-                    dangerMode: true,
-                    inputValidator: (value) => {
-                        if (!value) {
-                            return 'कृपया ओ.टि.पी. कोड राख्नुहोस् !'
-                        }
-                    }
-
-                })
-                    .then((data) => {
-                        if (data.value) {
-                            $("#otp").val(data.value)
-                            form.submit();
-                        }
+                $(document.body).delegate('#otp_form','submit', function (event) {
+                    event.preventDefault();
+                    $.ajax({
+                        type: "post",
+                        data: {
+                          otp:$("#otp").val(),
+                          data:$("#data").val()
+                        },
+                        url: "{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}",
+                        success: function (resp) {
+                            $("#otpVerificationModal").modal('toggle');
+                            $("#otp").val('')
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            $("#error_message").html(XMLHttpRequest.responseJSON.message);
+                        },
+                        timeout: 10000
                     });
+                });
             });
         </script>
     @endpush

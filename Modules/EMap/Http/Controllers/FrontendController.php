@@ -2,6 +2,8 @@
 
 namespace Modules\EMap\Http\Controllers;
 
+use App\Models\Otp;
+use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -100,17 +102,58 @@ class FrontendController extends Controller
         if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
             abort(401);
         }
-        ApplyMapNotice::updateOrCreate([
-            'map_apply_id' => $mapApply->id,
-            'file_type' => $noticeTypeEnum->value
-        ],
-            [
-                'data' => $request->input('data'),
+        if ($this->verifyOtp($request, $mapApply)) {
+            ApplyMapNotice::updateOrCreate([
+                'map_apply_id' => $mapApply->id,
+                'file_type' => $noticeTypeEnum->value,
+            ],
+                [
+                    'data' => $request->input('data'),
+                ]);
+
+            return response([
+                'message'=>'Added successfully !!',
+
+            ],200);
+        }
+
+        return response([
+            'message'=>'otp does not matched',
+
+        ],419);
+
+    }
+
+
+    /**
+     * @throws Exception
+     */
+    public function sendOtp(MapApply $mapApply)
+    {
+        if (request()?->ajax()) {
+            $number = random_int(111111, 999999);
+            $mapApply->otp()->create([
+                'otp' => $number,
             ]);
 
 
-        return back()->with('message', 'Added successfully !!!!');
-
-
+            return response(['message' => 'Otp sent successfully'], 200);
+        }
     }
+
+    public function verifyOtp(Request $request, MapApply $mapApply): bool
+    {
+        $request->validate([
+            'otp' => ['required','integer']
+        ]);
+
+        $checkedMapApply = $mapApply->loadExists(['otp'=>function($q) use($request){
+            $q->where('otp',$request->input('otp'));
+        }]);
+
+        info($checkedMapApply->otp->is_expired);
+
+        return $checkedMapApply !== null && !$checkedMapApply->otp->is_expired;
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Otp;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -150,5 +151,10 @@ class MapApply extends Model
     public function mapRegistration(): HasOne
     {
         return $this->hasOne(MapRegistration::class);
+    }
+
+    public function otp(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(Otp::class,'model')->latest();
     }
 }

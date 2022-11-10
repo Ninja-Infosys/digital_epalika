@@ -214,4 +214,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'otp_expiry_time' => env('OTP_EXPIRY_TIME', 5)
 ];
