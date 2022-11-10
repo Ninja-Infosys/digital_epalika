@@ -24,16 +24,13 @@
         </li>
         @endif
 
-        <li class="{{Route::is('organization.admin.clients.map.apply.*')?'mm-active':''}}">
-            <a href="{{route('organization.admin.clients.map.apply.index')}}">
+        <li class="{{Route::is('organization.admin.mapApply.*')?'mm-active':''}}">
+            <a href="{{route('organization.admin.mapApply.index')}}">
 
                 <img src="{{asset('assets/backend/emap/admin/img/menu-icon/6.svg')}}" alt="">
                 <span>नक्सा</span>
             </a>
 
         </li>
-
-
-
     </ul>
 </nav>

@@ -1,11 +1,13 @@
 <form wire:submit.prevent="saveFormData" method="post"
       class="building-construction-application">
     @csrf
-    <div class="d-flex justify-content-end">
-<button class="btn btn-sm btn-primary rounded-pill waves-effect waves-light" wire:click.prevent="setEditForm"><i class="fa fa-pen px-2"></i>सम्पादन</button>
-    </div>
     <fieldset>
-        <legend>१. प्रस्तावित भवनको विवरण</legend>
+        <div class="d-flex justify-content-between my-2">
+            <h3>१. प्रस्तावित भवनको विवरण</h3>
+            <div>
+                <button class="btn btn-sm btn-primary rounded-pill waves-effect waves-light" wire:click.prevent="setEditForm"><i class="fa fa-pen px-2"></i>सम्पादन</button>
+            </div>
+        </div>
 
             <div class="mb-3">
                 <b class="form-label">१.१ निर्माण कार्यको किसिम *</b> <br>
@@ -215,7 +217,7 @@
 
     </fieldset>
     @if($editForm)
-        <div class="mt-4 d-flex justify-content-end">
+        <div class="my-4 d-flex justify-content-end">
             <button type="submit" class="btn btn-sm btn-primary rounded-pill waves-effect waves-light "><i class="fa fa-save px-1"></i>पेश गर्नुहोस्</button>
         </div>
     @endif

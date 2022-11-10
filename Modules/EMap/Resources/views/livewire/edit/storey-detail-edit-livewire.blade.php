@@ -1,11 +1,8 @@
 <form method="post"
       class="building-construction-application">
     @csrf
-
     <fieldset>
-
         <div class="row">
-
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-12">
