@@ -5,6 +5,7 @@ namespace Modules\EMap\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\EMap\Entities\MapApply;
 
 class FrontendController extends Controller
 {
@@ -39,5 +40,16 @@ class FrontendController extends Controller
     public function mapForm()
     {
         return view('emap::frontend.e-map.map_track.form');
+    }
+
+    public function track_Map(Request $request)
+    {
+        $request->validate([
+            'submission_no' => ['required'],
+            'phone_no' => ['required']
+        ]);
+       $mapApplay =  MapApply::whereHas('houseOwner', function ($query) use ($request) {
+            $query->where('phone', $request->input('phone'));
+        });
     }
 }
