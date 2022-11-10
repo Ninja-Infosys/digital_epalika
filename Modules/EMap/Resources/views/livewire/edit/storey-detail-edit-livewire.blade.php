@@ -128,9 +128,9 @@
 @push('style')
     <style>
     .edit{
-        --bs-btn-padding-y: 0.25rem;
-        --bs-btn-padding-x: 0.25rem;
-        --bs-btn-font-size: 0.50rem;
+        --bs-btn-padding-y: 0.10rem;
+        --bs-btn-padding-x: 0.30rem;
+        --bs-btn-font-size: 0.80rem;
         --bs-btn-border-radius: 0.25rem;
     }
     </style>
