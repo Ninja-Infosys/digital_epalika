@@ -72,7 +72,7 @@ trait EMapTemplateTrait
             '[@registration_date]' => $this->registration_date ?? '',
             '[@construction_type]' => $this->construction_type?->label() ?? '',
             '[@usage]' => $this->usage?->label() ?? '',
-            '[@building_category]' => $this->building_category ?? '',
+            '[@building_category]' => $this->building_category?->label() ?? '',
             '[@structureType]' => $this->structureType->title ?? '',
             '[@current_storey]' => $this->current_storey ?? '',
             '[@future_storey]' => $this->future_storey ?? '',

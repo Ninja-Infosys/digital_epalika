@@ -10,8 +10,7 @@ return new class extends Migration {
         Schema::create('apply_map_notices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
-            $table->string('file');
-            $table->string('type');
+            $table->longText('data');
             $table->timestamp('rejected_at')->nullable();
             $table->text('file_type');
             $table->string('remarks')->nullable();

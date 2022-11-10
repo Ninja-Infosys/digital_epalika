@@ -36,6 +36,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('formDetails', 'formDetails')->name('formDetails');
     Route::get('mapForm', 'mapForm')->name('mapForm');
     Route::post('map-track','track_Map')->name('map-track');
+    Route::get('mapApply/{mapApply:uuid}/trackData','trackData')->name('track-data');
 });
 
 //track map
