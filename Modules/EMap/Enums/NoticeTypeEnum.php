@@ -5,29 +5,40 @@ namespace Modules\EMap\Enums;
 enum NoticeTypeEnum: string
 {
 
-    //application
-    case MAP_ACCEPTANCE = 'map_acceptance';
+    //for consultant
     case TECHNICIAN_APPROVAL = 'technician_approval';
     case ENGINEER_APPROVAL = 'engineer_approval';
-    case MAP_PASS_FOR_BUILDING = 'map_pass_building';
+    case APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR = 'approval_letter_from_building_contractor';
+    case BUILDING_DESIGN_DETAILS = 'building_design_details';
+    case BUILDING_COMPLIANCE_CHECKLIST = 'building_compliance_checklist';
+
+    //municipal
+    case REGARDING_FEES_AND_REGISTRATION = 'fees_registration';
+    case NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR = 'notice_issued_name_sanghiar';
+    case SARZAMIN_MUCHULKA = 'sarzamin_muchulka';
+
+    //house owner
+    case CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL = 'construction_supervision_report_plinth_level';
     case REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE = 'permission_construction_work_superstructure';
     case CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION = 'application_construction_completion_certificate';
+    case HEIR = 'heir';
+    case PERMISSION = 'permission';
+
+    case MAP_ACCEPTANCE = 'map_acceptance';
+
+
+    case MAP_PASS_FOR_BUILDING = 'map_pass_building';
     case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = ' construction_completion_certificate';
 
     //notice enums
-    case NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR = 'notice_issued_name_sanghiar';
     case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15_days_notice_adjourned';
     case REGARDING_SENDING_DETAILS = ' sending_details';
     case REVISED_SUPERSTRUCTURE_PERMIT = 'revised_superstructure_permit';
     //bond enums
     case FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS = '15_day_grace_period_map_pass';
-    case SARZAMIN_MUCHULKA = 'sarzamin_muchulka';
     //report enums
 
-    case BUILDING_DESIGN_DETAILS = 'building_design_details';
-    case BUILDING_COMPLIANCE_CHECKLIST = 'building_compliance_checklist';
     case TECHNICAL_REPORT = 'technical_report';
-    case CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL = 'construction_supervision_report_plinth_level';
     case THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT = 'technician_completed_first_phase_work_report';
     case CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE = 'consultants_Report_on_Completion_First_Phase';
     case THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT = 'technician_completed_second_phase_work_report';
@@ -46,16 +57,6 @@ enum NoticeTypeEnum: string
     case REVISED_SUPERSTRUCTURE_PERMIT_ORDER = 'revised_superstructure_permit_order';
     case HOUSE_MAP_NAMSARI = 'house_map_namsari';
 
-    //registration
-    case REGARDING_FEES_AND_REGISTRATION = 'fees_registration';
-
-    //heir
-    case HEIR = 'heir';
-
-    //permission enums
-    case PERMISSION = 'permission';
-
-
     public function label(): string
     {
         return self::getLabel($this);
@@ -69,6 +70,7 @@ enum NoticeTypeEnum: string
             self::MAP_ACCEPTANCE => 'भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम',
             self::TECHNICIAN_APPROVAL => 'नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र',
             self::ENGINEER_APPROVAL => 'भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र',
+            self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR => 'भवन निर्माण गर्ने ठेकेदारद्वारा मन्जुरी पत्र',
             self::MAP_PASS_FOR_BUILDING => 'भवन निर्माणको लागि नक्सापास सम्बन्धमा',
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE => 'सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे',
             self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION => 'निर्माण कार्य सम्पन्न प्रमाण पत्रको लागि निवेदन',
@@ -129,18 +131,20 @@ enum NoticeTypeEnum: string
             //consultant
             self::TECHNICIAN_APPROVAL,
             self::BUILDING_COMPLIANCE_CHECKLIST,
+            self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR,
             self::ENGINEER_APPROVAL,
             self::BUILDING_DESIGN_DETAILS => EMapFormFillerTypeEnum::CONSULTANT,
 
             //municipal
             self::REGARDING_FEES_AND_REGISTRATION,
-            self::SARZAMIN_MUCHULKA,
             self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => EMapFormFillerTypeEnum::MUNICIPAL,
+            self::SARZAMIN_MUCHULKA,
 
-            //house owner
+                //house owner
             self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION,
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE,
-            self::HEIR, self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL,
+            self::HEIR,
+            self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL,
             self::PERMISSION => EMapFormFillerTypeEnum::HOUSE_OWNER,
 
             //application enums
