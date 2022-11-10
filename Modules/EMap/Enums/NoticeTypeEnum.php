@@ -126,29 +126,37 @@ enum NoticeTypeEnum: string
     {
         return match ($value) {
 
+            //consultant
+            self::TECHNICIAN_APPROVAL,
+            self::BUILDING_COMPLIANCE_CHECKLIST,
+            self::ENGINEER_APPROVAL,
+            self::BUILDING_DESIGN_DETAILS => EMapFormFillerTypeEnum::CONSULTANT,
+
+            //municipal
+            self::REGARDING_FEES_AND_REGISTRATION,
+            self::SARZAMIN_MUCHULKA,
+            self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => EMapFormFillerTypeEnum::MUNICIPAL,
+
+            //house owner
+            self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION,
+            self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE,
+            self::HEIR, self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL,
+            self::PERMISSION => EMapFormFillerTypeEnum::HOUSE_OWNER,
+
             //application enums
             self::MAP_ACCEPTANCE,
-            self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION => EMapFormFillerTypeEnum::HOUSE_OWNER,
-            self::TECHNICIAN_APPROVAL => 'नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र',
-            self::ENGINEER_APPROVAL => 'भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र',
             self::MAP_PASS_FOR_BUILDING => 'भवन निर्माणको लागि नक्सापास सम्बन्धमा',
-            self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE => EMapFormFillerTypeEnum::HOUSE_OWNER,
             self::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE => 'निर्माण कार्य सम्पन्न प्रमाण-पत्र सम्बन्धमा',
 
             //notice enums
-            self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => 'संघियारको नाममा जारी भएको सूचना',
             self::FIFTEEN_DAYS_NOTICE_ADJOURNED => '१५ दिने सूचना टाँस सम्बन्धमा',
             self::REGARDING_SENDING_DETAILS => 'विवरण पठाएको सम्बन्धमा',
             self::REVISED_SUPERSTRUCTURE_PERMIT => 'संशोधित सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             //bond enums
             self::FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS => 'नक्सा पासको लागि १५ दिने टाँस मुचुल्का',
-            self::SARZAMIN_MUCHULKA => 'सरजमिन मुचुल्का',
             //report enums
 
-            self::BUILDING_DESIGN_DETAILS => 'भवन डिजाइन विवरण',
-            self::BUILDING_COMPLIANCE_CHECKLIST => 'भवन अनुपालन चेकलिस्ट',
             self::TECHNICAL_REPORT => 'प्राविधिक प्रतिवेदन',
-            self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण प्रतिवेदन',
             self::THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT => 'प्रथम चरणको कार्य सम्पन्नको प्राबिधिकको प्रतिबेदन',
             self::CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE => 'प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन',
             self::THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT => 'दोस्रो चरणको कार्य सम्पन्नको प्राबिधिकको प्रतिबेदन',
@@ -168,14 +176,6 @@ enum NoticeTypeEnum: string
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',
             self::BUILDING_COMPLETION_CERTIFICATE => 'भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र',
-
-            //registration
-            self::REGARDING_FEES_AND_REGISTRATION => EMapFormFillerTypeEnum::MUNICIPAL,
-
-            //heir
-            self::HEIR => EMapFormFillerTypeEnum::HOUSE_OWNER,
-            //permission enums
-            self::PERMISSION => EMapFormFillerTypeEnum::HOUSE_OWNER
         };
     }
 }

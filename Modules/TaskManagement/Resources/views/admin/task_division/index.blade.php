@@ -44,8 +44,10 @@
                             @forelse($taskDivisions as $taskDivision)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$taskDivision->taskCategory->title??''}}</td>
-                                <td>{{$taskDivision->title}}</td>
+                                <td>
+                                    {{\Illuminate\Support\Str::words($taskDivision->taskCategory->title??'',10)}}
+                                </td>
+                                <td>{{\Illuminate\Support\Str::words($taskDivision->title,10)}}</td>
                                 <td>
                                     <a href="{{route('admin.taskManagement.taskDivision.edit',$taskDivision)}}"
                                        class="btn btn-xs btn-outline-primary">

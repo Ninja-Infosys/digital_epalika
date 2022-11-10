@@ -321,6 +321,7 @@ class MapApplicationForm extends Component
 
     public function saveFormData(): void
     {
+
         $this->validate();
         DB::transaction(function () {
 

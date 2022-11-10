@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -58,7 +58,7 @@
                                         {{\Illuminate\Support\Str::words($dailyTask->taskDivision->title ??'',10)}}
                                     </td>
                                     <td>{{$dailyTask->remarks}}</td>
-                                    <td>
+                                    <td width="140">
                                         <a href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
                                            class="btn btn-xs btn-outline-info">
                                             <i class="fa fa-eye"></i>
@@ -84,6 +84,7 @@
                             @endforelse
                             </tbody>
                         </table>
+                        {{$dailyTasks->links()}}
                     </div>
                 </div>
             </div>

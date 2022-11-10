@@ -11,7 +11,7 @@ class DailyTaskController extends Controller
 {
     public function index()
     {
-        $dailyTasks = DailyTask::with('branch','taskCategory','taskDivision')->get();
+        $dailyTasks = DailyTask::with('branch','taskCategory','taskDivision')->paginate(10);
         return view('taskmanagement::admin.daily_task.index', compact('dailyTasks'));
     }
 

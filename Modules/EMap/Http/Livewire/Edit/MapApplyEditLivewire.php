@@ -38,7 +38,7 @@ class MapApplyEditLivewire extends Component
         $this->editForm = !$this->editForm;
     }
 
-    public function mount(MapApply $mapApply): void
+    public function mount(MapApply $mapApply, $districts): void
     {
         $this->mapApply = $mapApply;
 
@@ -57,7 +57,7 @@ class MapApplyEditLivewire extends Component
         ];
 
         $this->structureTypes = StructureType::latest()->get();
-        $this->allDistricts = District::all();
+        $this->allDistricts = $districts;
     }
 
     public function setStructureType(): void

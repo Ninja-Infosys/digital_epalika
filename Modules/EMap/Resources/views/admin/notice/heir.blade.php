@@ -39,7 +39,15 @@
                         url="{{route('emap.admin.map.map-apply.notice.upload.heir',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}वारेसनामा"/>
+                    <button class="bg-success text-white" onclick=" printJS({
+                printable: 'printData',
+                type: 'html',
+                documentTitle: 'वारेसनामा',
+                showModal: true,
+                css: '{{asset('assets/backend/css/print.css')}}',
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
+                    </button>
                 </div>
             </div>
         </div><!-- end col-->
@@ -50,12 +58,10 @@
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
                         <h3 class="text-center"><b>वारेसनामा</b></h3>
-{{--                        <div>--}}
-{{--                                <span class="vertical">--}}
-{{--                                    दस्तखत : <span class="underline-dotted custom-width"></span>--}}
-{{--                                </span>--}}
-{{--                        </div>--}}
-                        <div>
+                        <div class="vertical">
+                            दस्तखत : <span class="underline-dotted custom-width"></span>
+                        </div>
+                        <div class="text">
                                 <span>
                                     लिखितम<span class="underline-dotted custom-width"></span>जिल्ला<span
                                         class="underline-dotted custom-width"></span>
@@ -105,7 +111,7 @@
                                 <div class="d-flex justify-content-end">
                                     <div class="row p-4">
                                         <div class="col-md-6">
-                                            <div class="finger" style="width: 7rem; height: 8rem;">
+                                            <div class="finger" style="width: 7rem; height: 10rem;">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center mt-2">दायाँ</h5>
                                                 </div>
@@ -114,7 +120,7 @@
                                     </div>
                                     <div class="row p-4">
                                         <div class="col-md-6">
-                                            <div class="finger" style="width: 7rem; height: 8rem;">
+                                            <div class="finger" style="width: 7rem; height: 10rem;">
                                                 <div class="card-body">
                                                     <h5 class="card-title text-center mt-2">वायाँ</h5>
                                                 </div>

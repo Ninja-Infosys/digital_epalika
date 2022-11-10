@@ -16,29 +16,36 @@
                         ।</h6>
                 </div>
             </div>
-            <form action="">
+            <form action="{{route('map-track')}}" method="post">
+                @csrf
                 <div class="row justify-content-center pb-1">
                     <div class="col-md-6 col-xl-8">
                         <div class="widget-rounded-circle card">
                             <div class="card-body">
                                 <div class="row pt-1">
                                     <div class="col-6">
-                                        <label class="form-check-label" for="submision_no">सबमिसन न:</label>&emsp;
-                                        <input type="text" name="submision_no" id="submision_no">
+                                        <label class="form-check-label" for="submission_no">सबमिसन न:</label>&emsp;
+                                        <input type="text" name="submission_no" id="submission_no">
+                                        @error('submission_no')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <div class="col-6">
                                         <label class="form-check-label px-2" for="phone_no">फोन न:</label>&emsp;
                                         <input type="text" name="phone_no" id="phone_no">
+                                        @error('phone_no')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
                                     </div>
                                     <div class="d-flex justify-content-end pt-3">
-                                        <a href="{{route('formDetails')}}" class="btn btn-primary btn-sm">
+                                        <button type="submit" class="btn btn-primary">
                                             <i class="fa fa-search"></i>
                                             <span>ट्रयाक गर्नुहोस्</span>
-                                        </a>
+                                        </button>
                                     </div>
-                                </div> <!-- end row-->
+                                </div>
                             </div>
-                        </div> <!-- end widget-rounded-circle-->
+                        </div>
                     </div>
                 </div>
             </form>
