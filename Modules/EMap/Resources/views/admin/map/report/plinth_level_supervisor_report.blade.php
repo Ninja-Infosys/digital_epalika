@@ -39,7 +39,15 @@
                         url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}प्लिन्थ लेभलसम्मको निर्माणको"/>
+                    <button class="bg-success text-white" onclick=" printJS({
+                printable: 'printData',
+                type: 'html',
+                documentTitle: 'प्लिन्थ लेभलसम्मको निर्माणको सुपरिवेक्षण प्रतिवेदन',
+                showModal: true,
+                css: '{{asset('assets/backend/css/print.css')}}',
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
+                    </button>
                 </div>
             </div>
         </div><!-- end col-->
@@ -80,7 +88,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                <tr class="mx-4">
                                     <td></td>
                                     <td>
                                         <ul>
@@ -137,7 +145,7 @@
                                 </tbody>
                             </table>
                             <div class="break-page"></div>
-                            <table class="table table-sm table-bordered">
+                            <table class="table table-sm table-bordered mt-2">
                                 <thead>
                                 <tr class="text-center">
                                     <th scope="col">फोटो र फोटोको विवरण</th>
@@ -313,7 +321,10 @@
                                     <th scope="col">प्लिन्थ लेभलसम्म गारो लगाउँदा</th>
                                     <th scope="col"></th>
                                 </tr>
-                                <tr>
+                                </tbody>
+                            </table>
+                            <div class="page-break"></div>
+                            <table class="table table-sm table-bordered">
                                 <tr>
                                     <td></td>
                                     <td>
