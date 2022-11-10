@@ -22,69 +22,8 @@
     <livewire:emap::edit.storey-detail-edit-livewire :mapApply="$mapApply"/>
     <livewire:emap::edit.land-detail-edit-livewire :mapApply="$mapApply"/>
     <livewire:emap::edit.land-owner-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-    <p>
-        <b>४. घर धनीको विवरण (जग्गाधनी भन्दा फरक भएमा)</b>
-    </p>
-    <table
-        class="table table-sm table-bordered">
-        <tbody>
-        <tr>
-            <td>
-                १.१ नाम : {{$mapApply->houseOwner->name??''}}
-            </td>
-            <td>
-                १.२ फोन नं. : {{$mapApply->houseOwner->phone??''}}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                १.३ बुवाको नाम : {{$mapApply->houseOwner->father_name??''}}
-            </td>
-            <td>
-                १.४ नागरिकता लिएको जिल्ला
-                : {{$mapApply->houseOwner->citizenshipIssueDistrict->district??''}}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                १.५ नागरिकत नम्बर : {{$mapApply->houseOwner->citizenship_no??''}}
-            </td>
-            <td>
-                १.६ नागरिकता लिएको मिति : {{$mapApply->houseOwner->citizenship_issue_date??''}}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <p class="break-page"></p>
-    <p>
-        <b>५. चार किल्लाको विवरण</b>
-    </p>
-    <table
-        class="table table-sm table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th>विवरण</th>
-            <th>पूर्व</th>
-            <th>दक्षिण</th>
-            <th>पश्चिम</th>
-            <th>उत्तर</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($mapApply->fourForts as $fourFort)
-            <tr>
-                <td>
-                    {{$fourFort->detail->label()}}
-                </td>
-                <td>{{$fourFort->east}}</td>
-                <td>{{$fourFort->south}}</td>
-                <td>{{$fourFort->west}}</td>
-                <td>{{$fourFort->north}}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <livewire:emap::edit.house-owner-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
+    <livewire:emap::edit.four-fort-detail-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
 
     <p>
         <b>६. डिजाइनरको विवरण</b>

@@ -1,4 +1,4 @@
-<form wire:submit.prevent="saveFormData" method="post"
+<form method="post"
       class="building-construction-application">
     @csrf
 
@@ -84,25 +84,26 @@
 
                                             @if($dataToEdit === null)
                                                 <div class="d-flex">
-                                                <button type="button" class="btn btn-sm btn-primary"
-                                                        wire:click.prevent="setDataForEdit({{$index}})"><i
-                                                        class="fa fa-pen"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-danger"
-                                                        wire:click.prevent="deleteData({{$index}})"><i
-                                                        class="fa fa-trash"></i>
-                                                </button>
-                                            </div>
+                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                            wire:click.prevent="setDataForEdit({{$index}})"><i
+                                                            class="fa fa-pen"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-danger"
+                                                            wire:click.prevent="deleteData({{$index}})"><i
+                                                            class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
                                             @else
 
                                                 @if($dataToEdit===$index)
                                                     <div class="d-flex">
-                                                        <button type="submit" class="btn btn-sm btn-primary    "><i
+                                                        <button type="button" class="btn btn-sm btn-primary"
+                                                                wire:click.prevent="saveFormData"><i
                                                                 class="fa fa-save"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-danger"
-                                                            wire:click.prevent="setDataForEdit()"><i
-                                                            class="fa fa-trash"></i>
-                                                    </button>
+                                                        <button type="button" class="btn btn-sm btn-danger"
+                                                                wire:click.prevent="setDataForEdit()"><i
+                                                                class="fa fa-trash"></i>
+                                                        </button>
                                                     </div>
                                                 @endif
 
