@@ -5,20 +5,20 @@
         <legend>२. डिजाइनरको विवरण</legend>
         @foreach($designerDetails as $key=>$designerDetail)
             <div class="row">
-                <label class="fs-6 fw-semibold pb-3"
+                <label class="fs-6 fw-semibold pb-3 mb-3"
                        for="designerDetails.{{$key}}.post">
                     १.{{$loop->iteration}} {{\Modules\EMap\Enums\PostsEnum::tryFrom($designerDetail['post'])->label()}}
                     @if($dataToEdit === null)
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-sm btn-primary"
+                        <div class="d-flex justify-content-end" style="margin: -30px 10px;">
+                            <button class="btn btn-sm btn-primary rounded-pill waves-effect waves-light"
                                     wire:click.prevent="setDataForEdit({{$key}})"><i
-                                    class="fa fa-pen"></i>
+                                    class="fa fa-pen px-2"></i>सम्पादन
                             </button>
                         </div>
                     @else
 
                         @if($dataToEdit===$key)
-                            <div class="d-flex justify-content-end">
+                            <div class="d-flex justify-content-end" style="margin: -30px 10px;">
                                 <button type="button" class="btn btn-sm btn-primary mx-1"
                                         wire:click.prevent="saveFormData"><i
                                         class="fa fa-save"></i></button>
