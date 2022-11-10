@@ -1,13 +1,14 @@
 <form wire:submit.prevent="saveFormData" method="post"
       class="building-construction-application">
     @csrf
-    <div class="d-flex justify-content-end">
-        <button class="btn btn-sm btn-primary rounded-pill waves-effect waves-light" wire:click.prevent="setEditForm"><i
-                class="fa fa-pen px-2"></i>सम्पादन
-        </button>
-    </div>
     <fieldset>
-        <legend>२. जग्गाको विवरण</legend>
+        <div class="d-flex justify-content-between my-2">
+            <h3>२. जग्गाको विवरण</h3>
+            <div>
+                <button class="btn btn-sm btn-primary rounded-pill waves-effect waves-light" wire:click.prevent="setEditForm"><i
+                        class="fa fa-pen px-2"></i>सम्पादन
+                </button>
+            </div></div>
         <div class="row">
             <div class="mb-3">
                 <div class="row">
@@ -145,7 +146,7 @@
         </div>
     </fieldset>
     @if($editForm)
-        <div class="mt-4 d-flex justify-content-end">
+        <div class="my-4 d-flex justify-content-end">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>
     @endif

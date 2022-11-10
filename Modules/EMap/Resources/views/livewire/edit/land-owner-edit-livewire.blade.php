@@ -1,15 +1,16 @@
 <form wire:submit.prevent="saveFormData" method="post"
       class="building-construction-application">
     @csrf
-
-    <div class="d-flex justify-content-end">
-        <button class="btn btn-sm btn-primary rounded-pill waves-effect waves-light" wire:click.prevent="setEditForm"><i
-                class="fa fa-pen px-2"></i>सम्पादन
-        </button>
-    </div>
-
     <fieldset>
-        <legend>३. जग्गा धनीको विवरण</legend>
+        <div class="d-flex justify-content-between my-2">
+            <h4>३. जग्गा धनीको विवरण</h4>
+            <div>
+                <button class="btn btn-sm btn-primary rounded-pill waves-effect waves-light"
+                        wire:click.prevent="setEditForm"><i
+                        class="fa fa-pen"></i>सम्पादन
+                </button>
+            </div>
+        </div>
         <div class="row">
             <div class="mb-3">
                 <b class="form-label">३.१ जग्गा धनीको किसिम *</b> <br>
@@ -172,8 +173,8 @@
     </fieldset>
 
     @if($editForm)
-        <div class="mt-4 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary    ">Save</button>
+        <div class="my-4 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     @endif
 </form>
