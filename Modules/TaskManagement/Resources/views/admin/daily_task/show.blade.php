@@ -46,15 +46,15 @@
                             </tr>
                             <tr>
                                 <th>शाखा</th>
-                                <td>{{$dailyTask->branch->branch_name}}</td>
+                                <td>{{$dailyTask->branch->branch_name ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>मुख्य कार्य</th>
-                                <td>{{$dailyTask->taskCategory->title}}</td>
+                                <td>{{$dailyTask->taskCategory->title ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>कार्य</th>
-                                <td>{{$dailyTask->taskDivision->title}}</td>
+                                <td>{{$dailyTask->taskDivision->title ?? ''}}</td>
                             </tr>
                             <tr>
                                 <th>कैफियत</th>

@@ -50,7 +50,7 @@ class TaskReportLivewire extends Component
             $this->taskDivisions = TaskDivision::whereIn('task_category_id', $this->form['task_category_id'])->get();
         }
 
-        $this->dailyTasks = DailyTask::with('taskDivision.taskCategory')->where(function ($query) {
+        $this->dailyTasks = DailyTask::with('branch','taskCategory','taskDivision')->where(function ($query) {
             if (!empty($this->form['from_date'])) {
                 $query->whereDate('date', '>=', $this->form['from_date']);
             }

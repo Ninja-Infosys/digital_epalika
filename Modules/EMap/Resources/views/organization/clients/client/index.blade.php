@@ -5,10 +5,7 @@
             <div class="card mb_30">
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
-                        <h3 class="mb-0">सेवाग्राही सुची</h3>
-                        <a href="{{route('organization.admin.clients.client.create')}}" class="btn btn-primary btn-sm">
-                            <i class="fa fa-plus"></i> सेवाग्राही थप्नुहोस
-                        </a>
+                        <h3 class="mb-0">नक्सा दर्ता सुची </h3>
                     </div>
                 </div>
                 <div class="card-body">

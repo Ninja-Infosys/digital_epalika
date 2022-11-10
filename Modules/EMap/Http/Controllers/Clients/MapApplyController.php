@@ -3,6 +3,7 @@
 namespace Modules\EMap\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address\District;
 use Illuminate\Http\Request;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapApply;
@@ -19,9 +20,10 @@ class MapApplyController extends Controller
 
     public function show( MapApply $mapApply)
     {
+        $districts = District::get();
         $mapApply->load('fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
 
-        return view('emap::organization.map-applies.show', compact( 'mapApply'));
+        return view('emap::organization.map-applies.show', compact( 'mapApply','districts'));
     }
 
     public function edit( MapApply $mapApply)
