@@ -116,13 +116,73 @@ enum NoticeTypeEnum: string
             self::PERMISSION => 'मन्जुरीनामा'
         };
     }
+    public function fileType()
+    {
+        return self::getFileType($this);
+    }
 
-    public function type(): string
+    public static function getFileType(self $value)
+    {
+        return match ($value) {
+
+            //application enums
+            self::MAP_ACCEPTANCE,
+            self::TECHNICIAN_APPROVAL,
+            self::ENGINEER_APPROVAL,
+            self::MAP_PASS_FOR_BUILDING,
+            self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE,
+            self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION,
+            self::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE => FileTypeEnum::APPLICATION,
+
+            //notice enums
+            self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR,
+            self::REGARDING_SENDING_DETAILS,
+            self::FIFTEEN_DAYS_NOTICE_ADJOURNED,
+            self::REVISED_SUPERSTRUCTURE_PERMIT => FileTypeEnum::NOTICE,
+            //bond enums
+            self::FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS,
+            self::SARZAMIN_MUCHULKA => FileTypeEnum::BOND,
+            //report enums
+            self::BUILDING_DESIGN_DETAILS,
+            self::BUILDING_COMPLIANCE_CHECKLIST,
+            self::TECHNICAL_REPORT,
+            self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL,
+            self::THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT,
+            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE,
+            self::THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT,
+            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE,
+            self::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE => FileTypeEnum::REPORT,
+
+            //agreement
+            self::AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD,
+            self::AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR => FileTypeEnum::AGREEMENT,
+
+            //order
+            self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE,
+            self::REGARDING_SUPERSTRUCTURE_PERMIT,
+            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER,
+            self::HOUSE_MAP_NAMSARI => FileTypeEnum::ORDER,
+            //certificate enums
+            self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL,
+            self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE,
+            self::BUILDING_COMPLETION_CERTIFICATE => FileTypeEnum::CERTIFICATE,
+
+            //registration
+            self::REGARDING_FEES_AND_REGISTRATION => FileTypeEnum::REGISTRATION,
+
+            //heir
+            self::HEIR => FileTypeEnum::HEIR,
+            //permission enums
+            self::PERMISSION => FileTypeEnum::PERMISSION
+        };
+    }
+
+    public function type(): string|EMapFormFillerTypeEnum
     {
         return self::getType($this);
     }
 
-    public static function getType(self $value): string
+    public static function getType(self $value): string|EMapFormFillerTypeEnum
     {
         return match ($value) {
 

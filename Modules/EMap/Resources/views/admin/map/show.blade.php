@@ -120,6 +120,13 @@
                                 आवेदन भर्ने संस्था
                             </a>
                         </li>
+
+                        <li class="nav-item" role="presentation">
+                            <a href="#test" data-bs-toggle="tab" aria-expanded="false"
+                               class="nav-link" aria-selected="true" role="tab">
+                                Test
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="application_tab" role="tabpanel">
@@ -262,6 +269,17 @@
                                     </tr>
 
                                 </table>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane" id="test" role="tabpanel">
+                            <a href="{{route('emap.admin.map.map-apply.notice.upload.getTemplateData',[$mapApply])}}" class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                {!!  $mapApply->template_data->where('for', \Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE)?->first()['data']
+                                  ?? ''!!}
                             </div>
                         </div>
                     </div>

@@ -24,16 +24,14 @@ class ApplyMapNotice extends Model
 
     protected $fillable = [
         'map_apply_id',
-        'file',
-        'type',
         'file_type',
+        'data',
         'rejected_at',
         'remarks'
     ];
 
     protected $casts = [
-        'file_type' => NoticeTypeEnum::class,
-        'type' => FileTypeEnum::class
+        'file_type' => NoticeTypeEnum::class
     ];
 
     public function scopeNotice($query)
