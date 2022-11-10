@@ -146,7 +146,7 @@
     </fieldset>
     @if($editForm)
         <div class="mt-4 d-flex justify-content-end">
-            <button type="submit" class="btn btn-primary    ">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     @endif
 </form>

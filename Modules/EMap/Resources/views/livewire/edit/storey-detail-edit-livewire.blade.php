@@ -84,11 +84,11 @@
 
                                             @if($dataToEdit === null)
                                                 <div class="d-flex">
-                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                    <button type="button" class=" edit btn btn-primary mx-1"
                                                             wire:click.prevent="setDataForEdit({{$index}})"><i
                                                             class="fa fa-pen"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-sm btn-danger"
+                                                    <button type="button" class="edit btn btn-danger mx-1"
                                                             wire:click.prevent="deleteData({{$index}})"><i
                                                             class="fa fa-trash"></i>
                                                     </button>
@@ -97,12 +97,12 @@
 
                                                 @if($dataToEdit===$index)
                                                     <div class="d-flex">
-                                                        <button type="button" class="btn btn-sm btn-primary"
+                                                        <button type="button" class="edit btn btn-primary mx-1"
                                                                 wire:click.prevent="saveFormData"><i
                                                                 class="fa fa-save"></i></button>
-                                                        <button type="button" class="btn btn-sm btn-danger"
+                                                        <button type="button" class="edit btn btn-danger mx-1"
                                                                 wire:click.prevent="setDataForEdit()"><i
-                                                                class="fa fa-trash"></i>
+                                                                class="fa fa-times"></i>
                                                         </button>
                                                     </div>
                                                 @endif
@@ -125,3 +125,13 @@
         </div>
     </fieldset>
 </form>
+@push('style')
+    <style>
+    .edit{
+        --bs-btn-padding-y: 0.10rem;
+        --bs-btn-padding-x: 0.30rem;
+        --bs-btn-font-size: 0.80rem;
+        --bs-btn-border-radius: 0.25rem;
+    }
+    </style>
+@endpush

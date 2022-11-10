@@ -23,36 +23,9 @@
     <livewire:emap::edit.land-detail-edit-livewire :mapApply="$mapApply"/>
     <livewire:emap::edit.land-owner-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
     <livewire:emap::edit.house-owner-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-    <livewire:emap::edit.four-fort-detail-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-
-    <p>
-        <b>६. डिजाइनरको विवरण</b>
-    </p>
-    <table
-        class="table table-sm table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th>पद</th>
-            <th>नाम</th>
-            <th>NEC Council No.</th>
-            <th>पालिकाको दर्ता नं</th>
-            <th>कन्सल्टिंग फर्मबाट भए सो को नाम</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($mapApply->designerDetails as $designerDetail)
-            <tr>
-                <td>
-                    {{$designerDetail->post->label()}}
-                </td>
-                <td>{{$designerDetail->name}}</td>
-                <td>{{$designerDetail->nec_council_no}}</td>
-                <td>{{$designerDetail->local_body_registration_no}}</td>
-                <td>{{$designerDetail->consulting_firm_name}}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <livewire:emap::edit.four-fort-detail-edit-livewire :mapApply="$mapApply"/>
+    <livewire:emap::edit.designer-detail-edit-livewire :mapApply="$mapApply"/>
+{{--    <livewire:emap::edit.applicant-detail-edit-livewire :mapApply="$mapApply" :districts="$districts"/>--}}
 
     <p>
         <b>७. निवेदकको विवरण</b>
