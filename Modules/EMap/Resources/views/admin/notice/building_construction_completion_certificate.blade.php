@@ -53,7 +53,7 @@
                         <div class="d-flex justify-content-end mb-4">
                             <div class="row ">
                                 <div class="col-sm-6">
-                                    <div class="card" style="width: 7rem; height: 8rem;">
+                                    <div class="photo" style="width: 6rem; height: 6rem;">
                                         <div class="card-body">
                                             <h5 class="card-title text-center my-4">फोटो</h5>
                                         </div>
@@ -61,29 +61,38 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                पत्र सं: <div class="underline-dotted custom-width"></div><br>
-                                चलानी नं: <div class="underline-dotted custom-width"></div>
+                        <div class="date">
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    पत्र सं:
+                                    <div class="underline-dotted custom-width"></div>
+                                    <br>
+                                    चलानी नं:
+                                    <div class="underline-dotted custom-width"></div>
+                                </div>
+                                <div class="col-md-6 text-end">मिति:
+                                    <div class="underline-dotted custom-width"></div>
+                                </div>
                             </div>
-                            <div class="col-md-6 text-end">मिति: <div class="underline-dotted custom-width"></div></div>
                         </div>
 
-                        <h3 class="text-center"><b>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</b></h3>
+                        <h3 class="top text-center"><b>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</b></h3>
 
-                        <span>
+                        <div class="top">
                             श्री<span class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले
                             यस {{config('applicationDetail.office_type')}}
                             वडा नं.<span class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
                             मा निम्न बमोजिम निर्माण कार्य पूरा गरेकोले यो निर्माण कार्य सम्पन्न प्रमाण-पत्र
-                            प्रदान गरिएको छ |</span><br>
-                        <span>१. जग्गाधनीको नाम, थर<span
+                            प्रदान गरिएको छ |
+                        </div>
+                        <br>
+                        <span class="word">१. जग्गाधनीको नाम, थर<span
                                 class="underline-dotted">{{$mapApply->landOwner->name??''}}</span>
                         </span><br>
-                        <span>२. घरधनीको नाम, थर, वतन <span
+                        <span class="word">२. घरधनीको नाम, थर, वतन <span
                                 class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span><span
                                 class="underline-dotted custom-width"></span></span><br>
-                        <span>३. जग्गाको विवरण साविक<span
+                        <span class="word">३. जग्गाको विवरण साविक<span
                                 class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
                             हालको वडा नं.<span
                                 class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
@@ -96,27 +105,31 @@
                             भू-उपयोग क्षेत्र<span
                                 class="underline-dotted">{{$mapApply->landDetail->land_use_area??''}}</span>
                         </span><br>
-                        <span>
+                        <span class="word">
                             ५. राष्ट्रिय भवन संहिता अनुसार भवनको वर्गिकरण :&nbsp;&nbsp;
+
+
+                                <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1"
+                              value="option1">
+                              (क)&emsp;
+                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2"
+                               value="option2">
+                                 (ख)&emsp;
+                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions"
+                                   id="inlineRadio3" value="option3">
+                                  (ग)&emsp;
+                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions"
+                                   id="inlineRadio4" value="option4">
+                                         (घ)&emsp;
                         </span><br>
-                        <div class="d-flex flex-wrap">
-                            @foreach(\Modules\EMap\Enums\CategorizationEnum::cases() as $category)
-                                <div class="m-1">
-                                    <input type="checkbox"
-                                           {{$category->value==$mapApply->building_category->value ? 'checked' : ''}}
-                                           disabled>
-                                    {{$category->label()}}
-                                </div>
-                            @endforeach
-                        </div>
-                        <span>
+                        <span class="word">
 
                             निर्माणको स्ट्रक्चरल सिस्टम<span
                                 class="underline-dotted">{{$mapApply->structureType->title??''}}</span></span><br>
-                        <span>६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति<span
+                        <span class="word">६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति<span
                                 class="underline-dotted custom-width"></span></span><br>
                         <span>७.
-                        <table class="table table-sm table-borderless">
+                        <table class="table table-sm table-borderless word">
                             <thead>
                             <tr>
                                 <th scope="col">तला</th>
@@ -187,28 +200,29 @@
                             </tbody>
                         </table>
                             </span>
-                        <span>जम्मा क्षेत्रफल<span class="underline-dotted custom-width"></span></span><br>
-                        <span class="mt-2">८. भवनको ग्राउण्ड कभरेज: <span
+                        <span class="word">जम्मा क्षेत्रफल<span class="underline-dotted custom-width"></span></span><br>
+                        <span class="word">८. भवनको ग्राउण्ड कभरेज: <span
                                 class="underline-dotted custom-width"></span></span><br>
-                        <span class="mt-2">९. बनेको भवनको उचाई <span class="underline-dotted">{{$mapApply->height}}</span>
+                        <span class="word">९. बनेको भवनको उचाई <span
+                                class="underline-dotted">{{$mapApply->height}}</span>
                             तला संख्या <span class="underline-dotted">{{$mapApply->current_storey}}</span></span><br>
-                        <span class="mt-2">१०. घर बनेको प्लटसँग जोडिएको सडकको सडक सिमानाबाट न्युनतम छाड्न पर्ने
+                        <span class="word">१०. घर बनेको प्लटसँग जोडिएको सडकको सडक सिमानाबाट न्युनतम छाड्न पर्ने
                             दूरी<span class="underline-dotted custom-width"></span>
                             छाडिएको दूरी<span class="underline-dotted custom-width"></span></span><br>
-                        <span class="mt-2">११. बिजुलीको तार नजिक भएमा छाड्न पर्ने दूरी<span
+                        <span class="word">११. बिजुलीको तार नजिक भएमा छाड्न पर्ने दूरी<span
                                 class="underline-dotted custom-width"></span> छाडेको दूरी <span
                                 class="underline-dotted custom-width"></span></span><br>
-                        <span class="mt-2">१२. नदी, नालाको किनार भएमा छाड्न पर्ने दूरी <span
+                        <span class="word">१२. नदी, नालाको किनार भएमा छाड्न पर्ने दूरी <span
                                 class="underline-dotted custom-width"></span> छाडेको दूरी <span
                                 class="underline-dotted custom-width"></span></span><br>
-                        <span class="mt-2">१३. ढल निकास सम्बन्धी ढल, सेप्टिकटैक, सोकपिट भए सो को विवरण : <span
+                        <span class="word">१३. ढल निकास सम्बन्धी ढल, सेप्टिकटैक, सोकपिट भए सो को विवरण : <span
                                 class="underline-dotted custom-width"></span></span><br>
-                        <span class="mt-2">१४. अन्य कुनै भए विवरण : <span
+                        <span class="word">१४. अन्य कुनै भए विवरण : <span
                                 class="underline-dotted custom-width"></span></span><br>
-                        <span class="mt-2">१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="word">१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको </span><br>
-                        <span>पालना नभएको भए विवरण : <span class="underline-dotted custom-width"></span></span>
-                        <div class="d-flex justify-content-around my-4">
+                        <span class="word">पालना नभएको भए विवरण : <span class="underline-dotted custom-width"></span></span>
+                        <div class="d-flex justify-content-around">
                             <span class="text-center"><span class="underline-dotted custom-width"></span><br>
                                 तयार गर्ने </span>
                             <span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
@@ -256,6 +270,13 @@
             </div>
         </div>
     </div>
+    @push('style')
+        <style>
+            .word {
+                font-size: 10px;
+            }
+        </style>
+    @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>
     @endpush
