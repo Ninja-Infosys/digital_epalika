@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
@@ -247,24 +248,55 @@ class MapController extends Controller
     }
 
 
+    public function getTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    {
+        $mapApply->load(['applyMapNotices' => function ($q) use ($noticeTypeEnum) {
+            $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
+        }]);
+
+        return \view('emap::admin.map.edit', compact('mapApply', 'noticeTypeEnum'));
+    }
 
     public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
     {
-        $data = $request->validate([
+        $request->validate([
             'data' => ['required'],
+            'files' => ['nullable', 'array'],
+            'files.*' => ['mimes:jpg,png,jpeg,pdf']
         ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'file_type'=>$noticeTypeEnum->value
-            ]);
+
+        $mapApplyData = DB::transaction(function () use ($request, $mapApply, $noticeTypeEnum) {
+            $mapApplyData = ApplyMapNotice::updateOrCreate([
+                'map_apply_id' => $mapApply->id,
+                'file_type' => $noticeTypeEnum->value
+            ],
+                [
+                    'data' => $request->input('data'),
+                ]);
+
+            if ($request->hasFile('files')) {
+                $this->uploadDocuments($request, $mapApplyData);
+            }
+
+            return $mapApplyData;
+        });
+
 
         Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
         return back();
     }
 
-    public function getTemplateData(MapApply $mapApply)
+
+    private function uploadDocuments($request, $mapApplyData): void
     {
-        return \view('emap::admin.notice.heir', compact('mapApply'));
+        foreach ($request->file('files') as $document) {
+            $mapApplyData->files()->create([
+                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $document->getClientOriginalExtension(),
+                'file' => $document->store('emapTemplateFile', 'public')
+            ]);
+        }
     }
 
 }

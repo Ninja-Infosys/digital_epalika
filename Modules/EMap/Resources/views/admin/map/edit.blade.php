@@ -12,12 +12,12 @@
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">
-                                {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}} </a>
+                                {{Str::words($noticeTypeEnum->label(),3)}} </a>
                         </li>
-                        <li class="breadcrumb-item active"> {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</li>
+                        <li class="breadcrumb-item active"> {{Str::words($noticeTypeEnum->label(),3)}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</h4>
+                <h4 class="page-title">{{Str::words($noticeTypeEnum->label(),5)}}</h4>
             </div>
         </div>
     </div>
@@ -27,11 +27,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">   {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</h4>
+                        <h4 class="header-title">   {{$noticeTypeEnum->label()}}</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('emap.admin.map.map-apply.notice.upload.storeTemplateData',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}"
+                    <form action="{{route('emap.admin.map.map-apply.notice.upload.store-template-data',[$mapApply,$noticeTypeEnum])}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -41,7 +41,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="data" class="form-label">डाटा *</label>
                                     <textarea name="data" id="data" cols="30" rows="10"
-                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($printed_data->data ?? $proprietorDetail->getSpecificTemplateData($type) ?? ''))}}</textarea>
+                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($mapApply->applyMapNotices->first()?->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? ''))}}</textarea>
                                     @error('data')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

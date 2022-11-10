@@ -2,10 +2,12 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\File;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\FileTypeEnum;
@@ -34,11 +36,6 @@ class ApplyMapNotice extends Model
         'file_type' => NoticeTypeEnum::class
     ];
 
-    public function scopeNotice($query)
-    {
-        return $query->where('type', FileTypeEnum::NOTICE->value);
-    }
-
     public function scopeRejected($query)
     {
         return $query->whereNull('rejected_at');
@@ -54,15 +51,8 @@ class ApplyMapNotice extends Model
         return $this->belongsTo(MapApply::class);
     }
 
-    public function setFileAttribute($value): void
+    public function files(): MorphMany
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['file'] = $value->store('applyMapNotice', 'public');
-        }
-    }
-
-    public function getFileUrlAttribute(): string
-    {
-        return $this->attributes['file'] ? Storage::disk('public')->url($this->attributes['file']) : '';
+        return $this->morphMany(File::class, 'model');
     }
 }
