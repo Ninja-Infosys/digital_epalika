@@ -5,10 +5,7 @@
             <div class="card mb_30">
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
-                        <h3 class="mb-0">सेवाग्राही सुची</h3>
-                        <a href="{{route('organization.admin.clients.client.create')}}" class="btn btn-primary btn-sm">
-                            <i class="fa fa-plus"></i> सेवाग्राही थप्नुहोस
-                        </a>
+                        <h3 class="mb-0">नक्सा विवरण</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -17,9 +14,9 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">सब्मिसन आइडी</th>
-                            <th scope="col">ठेगाना</th>
-                            <th scope="col">इमेल</th>
-                            <th scope="col">फोन</th>
+                            <th scope="col">घर धनीको नाम</th>
+                            <th scope="col">घर धनीको फोन नं.</th>
+                            <th scope="col">निर्माण कार्यको किसिम</th>
                             <th scope="col">#</th>
                         </tr>
                         </thead>
@@ -28,12 +25,19 @@
                             <tr>
                                 <td>{{$loop->iteration ?? ''}}</td>
                                 <td>{{$mapApply->unique_id ?? ''}}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$mapApply->houseOwner->name??''}}</td>
+                                <td>{{$mapApply->houseOwner->phone??''}}</td>
+                                <td>{{$mapApply->construction_type->label()}}</td>
                                 <td>
-                                    <a class="btn btn-primary" href="{{route('organization.admin.clients.map.apply.show', $mapApply)}}"> <i class="fa fa-eye"></i></a>
-                                    <a class="btn btn-warning" href="{{route('organization.admin.clients.map.apply.edit', $mapApply)}}"> <i class="fa fa-pen"></i></a>
+                                    <a class="btn btn-sm btn-primary" href="{{route('organization.admin.mapApply.show', $mapApply)}}">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-warning" href="{{route('organization.admin.mapApply.edit', $mapApply)}}">
+                                        <i class="fa fa-pen"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-primary" href="{{route('organization.admin.mapFormInfo', $mapApply)}}">
+                                        <i class="fa fa-list"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
