@@ -165,6 +165,27 @@
     .text{
         padding: 0 50px;
     }
+    .photo{
+        margin: -100px 10px;
+        border: 1px solid #000000;
+
+    }
+    .date{
+        margin-top: -80px;
+    }
+    .top{
+        margin-top: -5px;
+    }
+    .topic{
+        margin-top: 7rem;
+    }
+    .break-page{
+        page-break-after: always;
+    }
+    .line{
+        margin-top: 4rem;
+    }
+
 
 }
 

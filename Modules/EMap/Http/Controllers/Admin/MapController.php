@@ -4,6 +4,7 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Address\District;
 use App\Notifications\ApplyMapNoticeNotification;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\FileTypeEnum;
+use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class MapController extends Controller
@@ -42,7 +44,8 @@ class MapController extends Controller
         $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
             $query->latest();
         }]);
-        return view('emap::admin.map.show', compact('mapApply'));
+        $districts = District::all();
+        return view('emap::admin.map.show', compact('mapApply', 'districts'));
 
     }
 
@@ -244,14 +247,14 @@ class MapController extends Controller
     }
 
 
-    public function notice(Request $request, MapApply $mapApply): RedirectResponse
+
+    public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
     {
         $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
+            'data' => ['required'],
         ]);
         $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::NOTICE->value
+                'file_type'=>$noticeTypeEnum->value
             ]);
 
         Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
@@ -259,125 +262,9 @@ class MapController extends Controller
         return back();
     }
 
-
-    public function registration(Request $request, MapApply $mapApply): RedirectResponse
+    public function getTemplateData(MapApply $mapApply)
     {
-        $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
-        ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::REGISTRATION->value
-            ]);
-
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
-        toast('फाईल सफलता पुर्बक थपियो', 'success');
-        return back();
-    }
-
-    public function report(Request $request, MapApply $mapApply): RedirectResponse
-    {
-        $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
-        ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::REPORT->value
-            ]);
-
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
-        toast('फाईल सफलता पुर्बक थपियो', 'success');
-        return back();
-    }
-
-    public function certificate(Request $request, MapApply $mapApply): RedirectResponse
-    {
-        $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
-        ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::CERTIFICATE->value
-            ]);
-
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
-        toast('फाईल सफलता पुर्बक थपियो', 'success');
-        return back();
-    }
-
-    public function bond(Request $request, MapApply $mapApply): RedirectResponse
-    {
-        $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
-        ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::BOND->value
-            ]);
-
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
-        toast('फाईल सफलता पुर्बक थपियो', 'success');
-        return back();
-    }
-
-    public function agreement(Request $request, MapApply $mapApply): RedirectResponse
-    {
-        $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
-        ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::AGREEMENT->value
-            ]);
-
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
-        toast('फाईल सफलता पुर्बक थपियो', 'success');
-        return back();
-    }
-
-    public function order(Request $request, MapApply $mapApply): RedirectResponse
-    {
-        $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
-        ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::ORDER->value
-            ]);
-
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
-        toast('फाईल सफलता पुर्बक थपियो', 'success');
-        return back();
-    }
-
-    public function heir(Request $request, MapApply $mapApply): RedirectResponse
-    {
-        $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
-        ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::HEIR->value
-            ]);
-
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
-        toast('फाईल सफलता पुर्बक थपियो', 'success');
-        return back();
-    }
-
-    public function permission(Request $request, MapApply $mapApply): RedirectResponse
-    {
-        $data = $request->validate([
-            'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
-        ]);
-        $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::PERMISSION->value
-            ]);
-
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
-        toast('फाईल सफलता पुर्बक थपियो', 'success');
-        return back();
+        return \view('emap::admin.notice.heir', compact('mapApply'));
     }
 
 }

@@ -16,12 +16,18 @@
                         ।</h6>
                 </div>
             </div>
+
             <form action="{{route('map-track')}}" method="post">
                 @csrf
                 <div class="row justify-content-center pb-1">
                     <div class="col-md-6 col-xl-8">
                         <div class="widget-rounded-circle card">
                             <div class="card-body">
+                                @if(session()->has('message'))
+                                    <div class="alert alert-success">
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
                                 <div class="row pt-1">
                                     <div class="col-6">
                                         <label class="form-check-label" for="submission_no">सबमिसन न:</label>&emsp;

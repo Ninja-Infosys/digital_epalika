@@ -18,129 +18,33 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th >क्र.स</th>
-                        <th >निवेदन/प्रतिवेदन किसिम</th>
-                        <th >स्थिति</th>
+                        <th>क्र.स</th>
+                        <th>निवेदन/प्रतिवेदन किसिम</th>
+                        <th>स्थिति</th>
+                        <th>#</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>१.</td>
-                        <td>नक्सा बनाउने प्राविधिकद्धारा मन्जुरी पत्र</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>२.</td>
-                        <td>भवन डिजाईनको प्राविधिकद्धारा मन्जुरी पत्र</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>३.</td>
-                        <td>भवन निर्माण गर्ने ठेकेदारद्धारा मन्जुरी पत्र</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>४.</td>
-                        <td>भवन डिजाईन विवरण</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>५.</td>
-                        <td>भवन अनुपालन चेकलिष्ट</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>६.</td>
-                        <td>दस्तुर तथा दर्ता सम्बन्धी</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>७.</td>
-                        <td>संधियारको नाममा जारी भएको सूचनाबारे</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>८.</td>
-                        <td>सूचना बुझाएको भर्पाई तथा टाँस मुचुल्का बारे</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>९.</td>
-                        <td>सार्जमिन मुचुल्का</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>१०.</td>
-                        <td>सार्जमिनमा उ.न.पा.प्राविधिकको प्रतिवेदन</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>११.</td>
-                        <td>अमिन प्रतिवेदन</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>१२.</td>
-                        <td>प्लिन्थ लेभलसम्मको निर्माण कार्य इजाजतको लागि निवेदन
-                        </td>
-                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-edit"></i>
-                                <span>फार्म भर्नुहोस्</span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>१३.</td>
-                        <td>लेआउट तथा जग जाँचको लागि निवेदन</td>
-                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-edit"></i>
-                                <span>फार्म भर्नुहोस्</span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>१४.</td>
-                        <td>लेआउट गरेको प्रतिवेदन</td>
-                        <td class="text-center"><i class="fas fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>१५.</td>
-                        <td>सुपरस्ट्रक्चरको निर्माण कार्य इजाजतको लागि निवेदन
-                        </td>
-                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-edit"></i>
-                                <span>फार्म भर्नुहोस्</span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>१६.</td>
-                        <td>निर्माण कार्य सम्पन्न प्रमाण-पत्रको लागि निवेदन
-                        </td>
-                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-edit"></i>
-                                <span>फार्म भर्नुहोस्</span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>१७.</td>
-                        <td>वारेसनामा</td>
-                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-edit"></i>
-                                <span>फार्म भर्नुहोस्</span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>१८.</td>
-                        <td>मन्जुरीनामा</td>
-                        <td class="text-center"><a href="{{route('mapForm')}}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-edit"></i>
-                                <span>फार्म भर्नुहोस्</span>
-                            </a>
-                        </td>
-                    </tr>
+                    @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeTypeEnum)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$noticeTypeEnum->label()}}</td>
+                            <td class="text-center">
+                                @if($mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)->count() >0)
+                                    <i class="fas fa-check"></i>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                @if($noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::HOUSE_OWNER)
+                                    <a href="{{route('mapForm')}}"
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                        <span>फार्म भर्नुहोस्</span>
+                                    </a>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

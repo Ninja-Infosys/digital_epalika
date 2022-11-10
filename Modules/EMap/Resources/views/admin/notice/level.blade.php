@@ -20,13 +20,13 @@
             </div>
         </div>
     </div>
-        <div>
-            @error('file')
-            <div class="alert alert-danger">
-                {{$message}}
-            </div>
-            @enderror
+    <div>
+        @error('file')
+        <div class="alert alert-danger">
+            {{$message}}
         </div>
+        @enderror
+    </div>
     <div class="row mb-2">
         <div class="col-sm-4">
             <h4> {{\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL->label()}}</h4>
@@ -46,32 +46,37 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-12">
-            <div class="card mb_30">
+            <div class="card">
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
                         <div class="d-flex justify-content-end mb-4">
                             <div class="row ">
                                 <div class="col-sm-6">
-                                    <div class="card" style="width: 7rem; height: 8rem;">
+                                    <div class="photo" style="width: 6rem; height: 6rem;">
                                         <div class="card-body">
-                                            <h5 class="card-title text-center my-4">फोटो</h5>
+                                            <h5 class="card-title text-center">फोटो</h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end">
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                पत्र सं: <div class="underline-dotted custom-width"></div><br>
-                                चलानी नं: <div class="underline-dotted custom-width"></div>
+                        <div class="date">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    पत्र सं:
+                                    <div class="underline-dotted custom-width"></div>
+                                    <br>
+                                    चलानी नं:
+                                    <div class="underline-dotted custom-width"></div>
+                                </div>
+                                <div class="col-md-6 text-end">मिति:
+                                    <div class="underline-dotted custom-width"></div>
+                                </div>
                             </div>
-                            <div class="col-md-6 text-end">मिति: <div class="underline-dotted custom-width"></div></div>
                         </div>
-                        <h4 class="text-center"><b> प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></h4>
+                        <h4 class="top text-center"><b> प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></h4>
 
-                        <span>
+                        <div class="top">
                             &emsp;&emsp;&emsp;&emsp;तपाई श्री/श्रीमती<span
                                 class="underline-dotted ">{{$mapApply->houseOwner->name??''}}</span> ले जग्गा
                             धनी<span
@@ -96,8 +101,8 @@
                             गर्नुहोला । डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन
                             निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण
                             कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ ।
-                        </span>
-                        <div class="text-center"><b>निर्माण स्वीकृति भएको विवरण </b></div>
+                        </div>
+                        <div class="text-center topic"><b>निर्माण स्वीकृति भएको विवरण </b></div>
                         <div class="fw-bold">जग्गा बिकास तथा भवन मापदण्ड २०६४</div>
                         <table class="table table-sm table-bordered mb-1">
                             <thead>
@@ -112,30 +117,30 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>१.</td>
+                                <td class="text-center">१.</td>
                                 <td>लम्बाई(रनिङ फिट)</td>
                                 <td>{{$mapApply->length}}</td>
-                                <td>४.</td>
+                                <td class="text-center">४.</td>
                                 <td>दायाँ/बायाँ छोड्ने दुरी<br>
                                     (रनिङ फिट)
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>२.</td>
+                                <td class="text-center">२.</td>
                                 <td>चौडाई(रनिङ फिट)</td>
                                 <td>{{$mapApply->breadth}}</td>
-                                <td>५.</td>
+                                <td class="text-center">५.</td>
                                 <td>कम्पाउन्ड वाल<br>
                                     (रनिङ फिट)
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>३.</td>
+                                <td class="text-center">३.</td>
                                 <td>सेट ब्याक<br>(छडको चौडाई सहित)</td>
                                 <td>{{$mapApply->criteriaDetails->where('detail',\Modules\EMap\Enums\DetailsRegardingCriteriaEnum::SET_BACK)->first()->according_to_criteria??''}}</td>
-                                <td>६.</td>
+                                <td class="text-center">६.</td>
                                 <td>लिन्थ लेभलको उचाई</td>
                                 <td>{{$mapApply->height}}</td>
                             </tr>
@@ -155,28 +160,28 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>१.</td>
+                                <td class="text-center">१.</td>
                                 <td>भवनको वर्गिकरण</td>
                                 <td>{{$mapApply->building_category->label()}}</td>
-                                <td>४.</td>
+                                <td class="text-center">४.</td>
                                 <td>पिलरको साईज (इन्च)</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>२.</td>
+                                <td class="text-center">२.</td>
                                 <td>भवन स्ट्रक्चरल सिस्टम</td>
                                 <td>{{$mapApply->structureType->title??''}}</td>
-                                <td>५.</td>
+                                <td class="text-center">५.</td>
                                 <td>पिल्र्मा प्रयोग गर्ने डण्डीको<br>
                                     साईज र संख्या
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>३.</td>
+                                <td class="text-center">३.</td>
                                 <td>जगको साईज (फिट)</td>
                                 <td></td>
-                                <td>६.</td>
+                                <td class="text-center">६.</td>
                                 <td>पिलरको छुरीको साईज</td>
                                 <td></td>
                             </tr>

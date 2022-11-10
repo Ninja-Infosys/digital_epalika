@@ -30,7 +30,7 @@
                 </div>
     <div class="row mb-2">
         <div class="col-sm-4">
-            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE->label()}}</h3>
+            <h4> {{\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE->label()}}</h4>
         </div>
         <div class="col-sm-8">
             <div class="text-sm-end">
@@ -40,7 +40,15 @@
                         url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन"/>
+                    <button class="bg-success text-white" onclick=" printJS({
+                printable: 'printData',
+                type: 'html',
+                documentTitle: 'सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन',
+                showModal: true,
+                css: '{{asset('assets/backend/css/print.css')}}',
+                honorMarginPadding: false,
+                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
+                    </button>
                 </div>
             </div>
         </div><!-- end col-->
