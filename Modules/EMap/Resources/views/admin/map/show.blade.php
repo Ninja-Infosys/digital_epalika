@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -20,38 +19,59 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="card mb-1">
-                            <div class="card-header" id="headingTwo">
-                                <h5 class="m-0">
-                                    <a class="text-dark collapsed" data-bs-toggle="collapse" href="#mapNavigationSelect"
-                                       aria-expanded="false">
-                                        <button class="btn btn-sm btn-secondary">main-title</button>
-                                    </a>
-                                </h5>
-                            </div>
-                            <div id="mapNavigationSelect" class="collapse" aria-labelledby="headingTwo"
-                                 data-bs-parent="#accordion" style="">
-                                <div class="card-body">
-                                    <a href="#1" class="btn btn-sm btn-primary my-1">navigation 1</a>
-                                    <a href="#2" class="btn btn-sm btn-primary my-1">navigation 2</a>
-                                    <a href="#3" class="btn btn-sm btn-primary my-1">navigation 3</a>
-                                </div>
-                            </div>
+                <div class="card-body">
+                    <div class="mega-menu py-1">
+                        <div class="btn-group ">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="defaultDropdown"
+                                    data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                navigation title
+                            </button>
+                            <ul class="dropdown-menu mega-menu-content" aria-labelledby="defaultDropdown">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <ul>
+                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#1">navigation
+                                                        1</a>
+                                                </li>
+                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#2">navigation
+                                                        2</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <ul>
+                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#1">navigation
+                                                        1</a>
+                                                </li>
+                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#2">navigation
+                                                        2</a>
+                                                </li>
+                                            </ul>
+                                            </div>
+                                        <div class="col-md-4">
+                                            <ul>
+                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#1">navigation
+                                                        1</a>
+                                                </li>
+                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#2">navigation
+                                                        2</a>
+                                                </li>
+                                            </ul>
+                                            </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <h4>शिर्षक नाम:</h4>
                             <div class="btn-group mb-3 ">
-                                <button class="bg-success text-white" onclick=" printJS({
+                                <button class="bg-success text-white btn btn-sm" onclick=" printJS({
                 printable: 'printData',
                 type: 'html',
                 documentTitle: 'ufjgjufgjh',
@@ -64,9 +84,9 @@
                         </div>
                     </div>
                     <div data-bs-spy="scroll" data-bs-offset="0">
-                        <section id="1" style="height: 800px; background-color: red;">1</section>
-                        <section id="2" style="height: 900px; background-color: blue;">2</section>
-                        <section id="3" style="height: 1000px; background-color: green;">3</section>
+                        <section id="1" style="height: 800px; ">1</section>
+                        <section id="2" style="height: 900px; ">2</section>
+                        <section id="3" style="height: 1000px;">3</section>
                     </div>
                 </div>
             </div>
@@ -76,6 +96,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
+
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नक्सा सूची</h4>
                     </div>
