@@ -102,7 +102,7 @@
                                                                 class="fa fa-save"></i></button>
                                                         <button type="button" class="edit btn btn-danger mx-1"
                                                                 wire:click.prevent="setDataForEdit()"><i
-                                                                class="fa fa-trash"></i>
+                                                                class="fa fa-times"></i>
                                                         </button>
                                                     </div>
                                                 @endif

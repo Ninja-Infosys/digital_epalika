@@ -9,7 +9,7 @@
                        for="designerDetails.{{$key}}.post">
                     १.{{$loop->iteration}} {{\Modules\EMap\Enums\PostsEnum::tryFrom($designerDetail['post'])->label()}}
                     @if($dataToEdit === null)
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-sm btn-primary"
                                     wire:click.prevent="setDataForEdit({{$key}})"><i
                                     class="fa fa-pen"></i>
@@ -18,13 +18,13 @@
                     @else
 
                         @if($dataToEdit===$key)
-                            <div class="d-flex">
-                                <button type="button" class="btn btn-sm btn-primary"
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-sm btn-primary mx-1"
                                         wire:click.prevent="saveFormData"><i
                                         class="fa fa-save"></i></button>
-                                <button type="button" class="btn btn-sm btn-danger"
+                                <button type="button" class="btn btn-sm btn-danger mx-1"
                                         wire:click.prevent="setDataForEdit()"><i
-                                        class="fa fa-trash"></i>
+                                        class="fa fa-times"></i>
                                 </button>
                             </div>
                         @endif
