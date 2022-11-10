@@ -44,8 +44,8 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('heir','heirView')->name('heir');
         Route::get('building-construction-completion-certificate','buildingConstructionCompletionCertificate')->name('building-construction-completion-certificate');
         Route::prefix('upload')->as('upload.')->group(function (){
-            Route::post('storeTemplateData','storeTemplateData')->name('store-template-data');
-            Route::get('getTemplateData','getTemplateData')->name('get-template-data');
+            Route::post('storeTemplateData/{noticeTypeEnum}','storeTemplateData')->name('store-template-data');
+            Route::get('getTemplateData/{noticeTypeEnum}','getTemplateData')->name('get-template-data');
         });
 
     });
