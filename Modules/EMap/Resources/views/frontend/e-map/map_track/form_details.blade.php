@@ -36,11 +36,20 @@
                             </td>
                             <td class="text-center">
                                 @if($noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::HOUSE_OWNER)
-                                    <a href="{{route('mapForm')}}"
+                                   @if(!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum))
+                                    <a href="{{route('load-template-data',[$mapApply,$noticeTypeEnum])}}"
                                        class="btn btn-primary btn-sm">
-                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-plus"></i>
                                         <span>फार्म भर्नुहोस्</span>
                                     </a>
+                                    @else
+                                        <a href="{{route('load-template-data',[$mapApply,$noticeTypeEnum])}}"
+                                           class="btn btn-info text-white btn-sm">
+                                            <i class="fa fa-pen"></i>
+                                            <span>फार्म सम्पादन गर्नुहोस</span>
+                                        </a>
+                                    @endif
+
                                 @endif
                             </td>
                         </tr>

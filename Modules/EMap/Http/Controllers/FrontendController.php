@@ -5,7 +5,11 @@ namespace Modules\EMap\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Enums\EMapFormFillerTypeEnum;
+use Modules\EMap\Enums\NoticeTypeEnum;
 
 class FrontendController extends Controller
 {
@@ -72,7 +76,41 @@ class FrontendController extends Controller
 
     public function trackData(MapApply $mapApply)
     {
-        $mapApply->load('applyMapNotices');
+        $mapApply->load('applyMapNotices:map_apply_id,file_type');
+
         return view('emap::frontend.e-map.map_track.form_details', compact('mapApply'));
+    }
+
+
+    public function loadTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    {
+        if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
+            abort(401);
+        }
+
+        $mapApply->load(['applyMapNotices' => function ($q) use ($noticeTypeEnum) {
+            $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
+        }]);
+        return view('emap::frontend.e-map.map_track.form', compact('mapApply', 'noticeTypeEnum'));
+    }
+
+    public function storeEmapTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    {
+
+        if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
+            abort(401);
+        }
+        ApplyMapNotice::updateOrCreate([
+            'map_apply_id' => $mapApply->id,
+            'file_type' => $noticeTypeEnum->value
+        ],
+            [
+                'data' => $request->input('data'),
+            ]);
+
+
+        return back()->with('message', 'Added successfully !!!!');
+
+
     }
 }
