@@ -8,7 +8,6 @@ use Livewire\WithFileUploads;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Enums\BuildingDetailEnum;
-use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\DetailsRegardingCriteriaEnum;
 use Modules\EMap\Enums\FourSideParticularEnum;
 use Modules\EMap\Enums\PostsEnum;
