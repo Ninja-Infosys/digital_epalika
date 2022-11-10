@@ -148,6 +148,12 @@
                                 Test
                             </a>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <a href="#test1" data-bs-toggle="tab" aria-expanded="false"
+                               class="nav-link" aria-selected="true" role="tab">
+                                Test 1
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="application_tab" role="tabpanel">
@@ -292,17 +298,32 @@
                                 </table>
                             </div>
                         </div>
-
-
                         <div class="tab-pane" id="test" role="tabpanel">
-                            <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-pen"></i>
-                            </a>
-                            <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-print"></i>
-                            </a>
+                            <div class="d-flex justify-content-end">
+                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}" class="btn btn-primary btn-sm mx-1">
+                                    <i class="fa fa-print"></i>
+                                </a>
+                            </div>
                             <div class="row row-cols-1 row-cols-md-3 g-3">
                                 {!!  $mapApply->template_data->where('for', \Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE)?->first()['data']
+                                  ?? ''!!}
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="test1" role="tabpanel">
+                            <div class="d-flex justify-content-end">
+                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION])}}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION])}}" class="btn btn-primary btn-sm mx-1">
+                                    <i class="fa fa-print"></i>
+                                </a>
+                            </div>
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                {!!  $mapApply->template_data->where('for', \Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION)?->first()['data']
                                   ?? ''!!}
                             </div>
                         </div>

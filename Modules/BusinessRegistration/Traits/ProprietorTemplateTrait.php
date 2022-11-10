@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
+use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 
 trait ProprietorTemplateTrait
 {
@@ -102,11 +103,16 @@ trait ProprietorTemplateTrait
         });
     }
 
-    public function getSpecificTemplateData($type): string
+    public function getSpecificTemplateData(TemplateTypeEnum $templateTypeEnum): string
     {
 
-        $businessTemplate = BusinessRegistrationTemplate::where('for', $type)->first();
-        return $this->getData($businessTemplate->data);
+        $businessTemplate = BusinessRegistrationTemplate::where('for', $templateTypeEnum->value)->first();
+        if ($businessTemplate) {
+            return $this->getData($businessTemplate->data);
+        }
+
+        return '';
+
     }
 
     public function getTemplateOptions(): array
@@ -118,38 +124,38 @@ trait ProprietorTemplateTrait
     {
         $replace = [];
 
-        $replace = array_merge( $this->getProprietorReplacement(), $replace, $this->getInvestmentRevenueReplacement(), $this->getIntroBoardReplacement(), $this->getBusinessDetailReplacement(), $this->getBusinessCategoryReplacement());
+        $replace = array_merge($this->getProprietorReplacement(), $replace, $this->getInvestmentRevenueReplacement(), $this->getIntroBoardReplacement(), $this->getBusinessDetailReplacement(), $this->getBusinessCategoryReplacement());
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
     private function getBusinessDetailReplacement(): array
     {
         return [
-            '[@businessDetail.business_detail_name]'=>$this->businessDetail->business_detail_name ?? '',
-            '[@businessDetail.business_detail_name_en]'=>$this->businessDetail->business_detail_name_en ?? '',
-            '[@businessDetail.business_nature]'=> $this->businessDetail->business_nature?->label() ?? '',
-            '[@businessDetail.establish_year]'=>$this->businessDetail->establish_year ?? '',
-            '[@businessDetail.registration_date]'=>$this->businessDetail->registration_date ?? '',
-            '[@businessDetail.pan_no]'=>$this->businessDetail->pan_no ?? '',
-            '[@businessDetail.amount_cost]'=>$this->businessDetail->amount_cost ?? '',
-            '[@businessDetail.source_of_capital]'=>  $this->businessDetail->source_of_capital?->label() ?? '',
-            '[@businessDetail.purpose]'=>$this->businessDetail->purpose ?? '',
-            '[@businessDetail.employment]'=>$this->businessDetail->employment ?? '',
-            '[@businessDetail.house_owner_name]'=>$this->businessDetail->house_owner_name ?? '',
-            '[@businessDetail.house_owner_phone]'=>$this->businessDetail->house_owner_phone ?? '',
-            '[@businessDetail.house_owner_address]'=>$this->businessDetail->house_owner_address ?? '',
-            '[@businessDetail.house_owner_monthly_rent]'=>$this->businessDetail->house_owner_monthly_rent ?? '',
-            '[@businessDetail.province.province]'=>$this->businessDetail->province->province ?? '',
-            '[@businessDetail.district.district]'=>$this->businessDetail->district->district ?? '',
-            '[@businessDetail.localBody.local_body]'=>$this->businessDetail->localBody->local_body ?? '',
-            '[@businessDetail.ward_no]'=>$this->businessDetail->ward_no ?? '',
-            '[@businessDetail.way]'=>$this->businessDetail->way ?? '',
-            '[@businessDetail.tole]'=>$this->businessDetail->tole ?? '',
-            '[@businessDetail.submission_no]'=>$this->businessDetail->submission_no ?? '',
-            '[@businessDetail.fiscalYear.year]'=>$this->businessDetail->fiscalYear->year ?? '',
-            '[@businessDetail.registration_no]'=>$this->businessDetail->registration_no ?? '',
-            '[@businessDetail.registration_date_ne]'=>$this->businessDetail->registration_date_ne ?? '',
-            '[@businessDetail.registration_date_en]'=>$this->businessDetail->registration_date_en ?? '',
+            '[@businessDetail.business_detail_name]' => $this->businessDetail->business_detail_name ?? '',
+            '[@businessDetail.business_detail_name_en]' => $this->businessDetail->business_detail_name_en ?? '',
+            '[@businessDetail.business_nature]' => $this->businessDetail->business_nature?->label() ?? '',
+            '[@businessDetail.establish_year]' => $this->businessDetail->establish_year ?? '',
+            '[@businessDetail.registration_date]' => $this->businessDetail->registration_date ?? '',
+            '[@businessDetail.pan_no]' => $this->businessDetail->pan_no ?? '',
+            '[@businessDetail.amount_cost]' => $this->businessDetail->amount_cost ?? '',
+            '[@businessDetail.source_of_capital]' => $this->businessDetail->source_of_capital?->label() ?? '',
+            '[@businessDetail.purpose]' => $this->businessDetail->purpose ?? '',
+            '[@businessDetail.employment]' => $this->businessDetail->employment ?? '',
+            '[@businessDetail.house_owner_name]' => $this->businessDetail->house_owner_name ?? '',
+            '[@businessDetail.house_owner_phone]' => $this->businessDetail->house_owner_phone ?? '',
+            '[@businessDetail.house_owner_address]' => $this->businessDetail->house_owner_address ?? '',
+            '[@businessDetail.house_owner_monthly_rent]' => $this->businessDetail->house_owner_monthly_rent ?? '',
+            '[@businessDetail.province.province]' => $this->businessDetail->province->province ?? '',
+            '[@businessDetail.district.district]' => $this->businessDetail->district->district ?? '',
+            '[@businessDetail.localBody.local_body]' => $this->businessDetail->localBody->local_body ?? '',
+            '[@businessDetail.ward_no]' => $this->businessDetail->ward_no ?? '',
+            '[@businessDetail.way]' => $this->businessDetail->way ?? '',
+            '[@businessDetail.tole]' => $this->businessDetail->tole ?? '',
+            '[@businessDetail.submission_no]' => $this->businessDetail->submission_no ?? '',
+            '[@businessDetail.fiscalYear.year]' => $this->businessDetail->fiscalYear->year ?? '',
+            '[@businessDetail.registration_no]' => $this->businessDetail->registration_no ?? '',
+            '[@businessDetail.registration_date_ne]' => $this->businessDetail->registration_date_ne ?? '',
+            '[@businessDetail.registration_date_en]' => $this->businessDetail->registration_date_en ?? '',
         ];
 
     }
@@ -200,8 +206,8 @@ trait ProprietorTemplateTrait
     private function getBusinessCategoryReplacement(): array
     {
         return [
-           '[@businessDetail.investmentRevenue.objectTransaction.objectTransaction.title]'=>$this->businessDetail->investmentRevenue->objectTransaction->objectTransaction->title ?? '',
-           '[@businessDetail.investmentRevenue.objectTransaction.title]'=>$this->businessDetail->investmentRevenue->objectTransaction->title ?? '',
+            '[@businessDetail.investmentRevenue.objectTransaction.objectTransaction.title]' => $this->businessDetail->investmentRevenue->objectTransaction->objectTransaction->title ?? '',
+            '[@businessDetail.investmentRevenue.objectTransaction.title]' => $this->businessDetail->investmentRevenue->objectTransaction->title ?? '',
         ];
     }
 }

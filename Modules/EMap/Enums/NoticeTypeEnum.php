@@ -197,8 +197,8 @@ enum NoticeTypeEnum: string
 
             //municipal
             self::REGARDING_FEES_AND_REGISTRATION,
-            self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => EMapFormFillerTypeEnum::MUNICIPAL,
             self::SARZAMIN_MUCHULKA,
+            self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => EMapFormFillerTypeEnum::MUNICIPAL,
 
                 //house owner
             self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION,

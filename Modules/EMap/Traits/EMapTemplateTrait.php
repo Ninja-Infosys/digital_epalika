@@ -5,6 +5,7 @@ namespace Modules\EMap\Traits;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\EMapTemplate;
+use Modules\EMap\Enums\NoticeTypeEnum;
 
 trait EMapTemplateTrait
 {
@@ -45,11 +46,15 @@ trait EMapTemplateTrait
         });
     }
 
-    public function getSpecificTemplateData($type): string
+    public function getSpecificTemplateData(NoticeTypeEnum $noticeTypeEnum): string
     {
 
-        $businessTemplate = EMapTemplate::where('for', $type)->first();
-        return $this->getData($businessTemplate->data);
+        $mapTemplate = EMapTemplate::where('for', $noticeTypeEnum->value)->first();
+
+        if ($mapTemplate){
+            return $this->getData($mapTemplate->data);
+        }
+        return '';
     }
 
     public function getTemplateOptions(): array
