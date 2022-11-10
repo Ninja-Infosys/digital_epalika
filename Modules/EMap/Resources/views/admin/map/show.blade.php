@@ -295,7 +295,7 @@
 
 
                         <div class="tab-pane" id="test" role="tabpanel">
-                            <a href="{{route('emap.admin.map.map-apply.notice.upload.getTemplateData',[$mapApply])}}" class="btn btn-primary btn-sm">
+                            <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply])}}" class="btn btn-primary btn-sm">
                                 Edit
                             </a>
                             <div class="row row-cols-1 row-cols-md-3 g-3">

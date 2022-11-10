@@ -264,7 +264,7 @@ class MapController extends Controller
 
     public function getTemplateData(MapApply $mapApply)
     {
-
+        return \view('emap::admin.notice.heir', compact('mapApply'));
     }
 
 }
