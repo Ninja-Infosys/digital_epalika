@@ -28,21 +28,19 @@ class ApplicantDetailEditLivewire extends Component
         $this->mapApply = $mapApply;
         $this->allDistricts = $districts;
 
-        foreach ($mapApply->applicantDetail as $applicantDetail) {
             $this->applicantDetail = [
-                'applicant_type' => $applicantDetail->applicant_type->value ,
-                'relation_with_owner' => $applicantDetail->relation_with_owner->value ?? null,
-                'name' => $applicantDetail->name ?? null,
-                'phone' => $applicantDetail->phone ?? null,
-                'father_name' => $applicantDetail->father_name ?? null,
-                'citizenship_issue_district_id' => $applicantDetail->citizenship_issue_district_id ?? null,
-                'citizenship_no' => $applicantDetail->citizenship_no ?? null,
-                'citizenship_issue_date' => $applicantDetail->citizenship_issue_date ?? null,
-                'application_date' => $applicantDetail->application_date ?? null,
-                'signature' => $applicantDetail->signature ?? null
+                'applicant_type' => $mapApply->applicantDetail->applicant_type->value ??null,
+                'relation_with_owner' => $mapApply->applicantDetail->relation_with_owner->value ?? null,
+                'name' => $mapApply->applicantDetail->name ?? null,
+                'phone' => $mapApply->applicantDetail->phone ?? null,
+                'father_name' => $mapApply->applicantDetail->father_name ?? null,
+                'citizenship_issue_district_id' => $mapApply->applicantDetail->citizenship_issue_district_id ?? null,
+                'citizenship_no' => $mapApply->applicantDetail->citizenship_no ?? null,
+                'citizenship_issue_date' => $mapApply->applicantDetail->citizenship_issue_date ?? null,
+                'application_date' => $mapApply->applicantDetail->application_date ?? null,
+                'signature' => $mapApply->applicantDetail->signature ?? null
             ];
-        }
-        dd($this->applicantDetail);
+
     }
 
     public function render()
