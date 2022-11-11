@@ -34,12 +34,10 @@
         <div class="col-sm-8">
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
-                    <x-application-component
-                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL"
-                        url="{{route('emap.admin.map.map-apply.notice.upload.certificate',$mapApply)}}"/>
+
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र"/>
+                    <x-print-button title="प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र"/>
                 </div>
             </div>
         </div><!-- end col-->
@@ -218,7 +216,7 @@
                             </tbody>
                         </table>
                         <h5>प्रथम चरणका इजाजत नामसारी </h5>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered word">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -247,6 +245,19 @@
             </div>
         </div>
     </div>
+    @push('style')
+        <style>
+            .word{
+                font-size: 10px;
+            }
+            .word>tbody>tr{
+                line-height: .70rem;
+            }
+            .word>thead>tr{
+                line-height: .70rem;
+            }
+        </style>
+    @endpush
     @push('scripts')
         <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>
     @endpush
