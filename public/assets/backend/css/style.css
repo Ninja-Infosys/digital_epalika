@@ -29,6 +29,7 @@
     width: 1020px;
 }
 .map_template_exclamation{
+    margin-top: -15px !important;
     animation-name: stretch;
     animation-duration: 1.5s;
     animation-timing-function: ease-out;
@@ -38,8 +39,8 @@
 }
 
 @keyframes stretch {
-    0%   {color: red;}
-    100% {color: #ffba00;}
+    0%   {color: red; top: -10px;}
+    100% {color: #ffba00; top: -10px;}
 }
 .border_yellow{
     border: 1px solid #DF3434;
