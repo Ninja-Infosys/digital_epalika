@@ -100,14 +100,15 @@
                             <div class="row">
 
                                 @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 mt-1">
                                         <h6>{{$template['title'] ?? ''}}</h6>
                                     </div>
                                     <div class="col-md-12">
                                         @foreach($template['data'] as $key=>$templateValue)
                                             <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
-                                               onclick="copyText('{{$templateValue}}')">{{$key}}
-                                                : {{$templateValue}}</a>
+                                               onclick="copyText('{{$templateValue}}')">
+                                                {{$key}}
+                                            </a>
                                         @endforeach
                                     </div>
                                 @endforeach
