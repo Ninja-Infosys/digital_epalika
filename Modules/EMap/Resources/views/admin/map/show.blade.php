@@ -75,8 +75,10 @@
                         @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeType)
                             <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
                                 <h4 class="mt-2"> {{$noticeType->label()}}</h4>
-                                <div class="card-body mt-2" style="border: 1px solid black;border-radius: 5px;">
-                                    <div class="d-flex justify-content-end">
+                                <div class=" border_yellow p-1">
+                                    <i class="fa fa-exclamation-triangle map_template_exclamation "></i>
+
+                                    <div class="d-flex justify-content-end ">
                                         @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
                                         <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}" class="mx-2">
                                             <i class="fa fa-pen"></i>
