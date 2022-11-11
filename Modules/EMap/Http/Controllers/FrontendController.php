@@ -102,6 +102,7 @@ class FrontendController extends Controller
         if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
             abort(401);
         }
+
         if ($this->verifyOtp($request, $mapApply)) {
             ApplyMapNotice::updateOrCreate([
                 'map_apply_id' => $mapApply->id,

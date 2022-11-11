@@ -96,7 +96,7 @@
                         type: "post",
                         data: {
                           otp:$("#otp").val(),
-                          data:$("#data").val()
+                          data:$("textarea#data").val()
                         },
                         url: "{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}",
                         success: function (resp) {
