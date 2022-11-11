@@ -11,7 +11,7 @@ trait EMapTemplateTrait
 {
     private array $template = [
         [
-            'title' => 'विवरण',
+            'title' => 'प्रस्तावित भवनको विवरण',
             'data' => [
                 'दर्ता नम्बर' => '[@registration_no]',
                 'दर्ता मिति' => '[@registration_date]',
@@ -25,6 +25,7 @@ trait EMapTemplateTrait
                 'कुल भवनको लम्बाई' => '[@length]',
                 'कुल भवनको चौडाई' => '[@breadth]',
                 'भवनको कुल उचाई जमिनको सतहबाट' => '[@height]',
+                'तल्लाको क्षेत्रफल र उचाईको विवरण' => '[@storeyDetails]',
             ],
         ],
         [
@@ -72,20 +73,37 @@ trait EMapTemplateTrait
             ],
         ],
         [
+            'title' => 'चार किल्लाको विवरण',
+            'data' => [
+                'किल्ला' => '[@fourForts]',
+            ],
+        ],
+        [
+            'title' => 'डिजाइनरको विवरण',
+            'data' => [
+                'निवेदकको प्रकार' => '[@applicantDetail.applicant_type]',
+                'घरधनी सँगको सम्बन्ध' => '[@applicantDetail.relation_with_owner]',
+                'नाम' => '[@applicantDetail.name]',
+                'फोन नं.' => '[@applicantDetail.phone]',
+                'बुवाको नाम' => '[@applicantDetail.father_name]',
+                'नागरिकता लिएको जिल्ला' => '[@applicantDetail.citizenship_issue_district]',
+                'नागरिकत नम्बर' => '[@applicantDetail.citizenship_no]',
+                'नागरिकता लिएको मिति' => '[@applicantDetail.citizenship_issue_date]',
+                'निवेदकको सहि' => '[@applicantDetail.applicant_signature_url]',
+            ],
+        ],
+        [
             'title' => 'निवेदकको विवरण',
             'data' => [
                 'निवेदकको प्रकार' => '[@applicantDetail.applicant_type]',
-                'घरधनी सँगको सम्बन्ध' => '[@applicantDetail.name]',
+                'घरधनी सँगको सम्बन्ध' => '[@applicantDetail.relation_with_owner]',
                 'नाम' => '[@applicantDetail.name]',
-                'फोन नं.' => '[@houseOwner.phone]',
-                'बुवाको नाम' => '[@houseOwner.father_name]',
-                'हजुरबुबाको नाम' => '[@houseOwner.grandfather_name]',
-                'नागरिकता लिएको जिल्ला' => '[@houseOwner.citizenship_issue_district]',
-                'नागरिकत नम्बर' => '[@houseOwner.citizenship_no]',
-                'नागरिकता लिएको मिति' => '[@houseOwner.citizenship_issue_date]',
-                'ठेगाना' => '[@houseOwner.address]',
-                'पालिका' => '[@houseOwner.local_body]',
-                'वडा नं' => '[@houseOwner.ward_no]',
+                'फोन नं.' => '[@applicantDetail.phone]',
+                'बुवाको नाम' => '[@applicantDetail.father_name]',
+                'नागरिकता लिएको जिल्ला' => '[@applicantDetail.citizenship_issue_district]',
+                'नागरिकत नम्बर' => '[@applicantDetail.citizenship_no]',
+                'नागरिकता लिएको मिति' => '[@applicantDetail.citizenship_issue_date]',
+                'निवेदकको सहि' => '[@applicantDetail.applicant_signature_url]',
             ],
         ],
     ];

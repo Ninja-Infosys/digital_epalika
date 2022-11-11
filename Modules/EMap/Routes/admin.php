@@ -67,6 +67,9 @@ Route::prefix('files')->as('files.')->group(function (){
 
 Route::view('nbc', 'emap::admin.nbc.nbc')->name('nbc');
 Route::view('type', 'emap::admin.static.type')->name('type');
+Route::view('officeletter', 'emap::admin.notice.office-letter')->name('officeletter');
+Route::view('noticeletter', 'emap::admin.notice.notice-letter')->name('noticeletter');
 Route::view('level', 'emap::admin.notice.level')->name('level');
 Route::view('superstructure', 'emap::admin.notice.superstructure')->name('superstructure');
 Route::view('building', 'emap::admin.notice.building_construction_completion_certificate')->name('building');
+

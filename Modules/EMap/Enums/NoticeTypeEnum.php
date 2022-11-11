@@ -34,7 +34,7 @@ enum NoticeTypeEnum: string
 
     //notice enums
     case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15_days_notice_adjourned';
-    case REGARDING_SENDING_DETAILS = ' sending_details';
+    case REGARDING_SENDING_DETAILS = 'sending_details';
     case REVISED_SUPERSTRUCTURE_PERMIT = 'revised_superstructure_permit';
     //bond enums
     case FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS = '15_day_grace_period_map_pass';

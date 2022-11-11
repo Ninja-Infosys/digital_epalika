@@ -34,12 +34,9 @@
         <div class="col-sm-8">
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
-                    <x-application-component
-                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR"
-                        url="{{route('emap.admin.map.map-apply.notice.upload.notice',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}को संघियारको नाममा जारी भएको सूचना"/>
+                    <x-print-button title="को संघियारको नाममा जारी भएको सूचना"/>
                 </div>
             </div>
         </div><!-- end col-->
@@ -54,7 +51,8 @@
                                 पत्र सं: <div class="underline-dotted custom-width"></div><br>
                                 चलानी नं: <div class="underline-dotted custom-width"></div>
                             </div>
-                            <div class="col-md-6 text-end">मिति: <div class="underline-dotted custom-width"></div></div>
+                            <div class="col-md-6 text-end">मिति: <div class="underline-dotted custom-width"></div>
+                            </div>
                         </div>
                         <h4 class="text-center fw-bold mt-2">संधियारको नाममा जारी भएको सूचना</h4>
                         <span class="mt-2">
