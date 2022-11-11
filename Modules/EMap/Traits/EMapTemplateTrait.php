@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Enums\NoticeTypeEnum;
+use Modules\EMap\Enums\PostsEnum;
 
 trait EMapTemplateTrait
 {
@@ -96,15 +97,15 @@ trait EMapTemplateTrait
         [
             'title' => 'सुपरभाइजर विवरण',
             'data' => [
-                'नाम' => '[@superVisorDetail.name]',
-                'फोन नं.' => '[@superVisorDetail.phone]',
-                'बुवाको नाम' => '[@superVisorDetail.father_name]',
-                'ठेगाना' => '[@superVisorDetail.address]',
-                'पालिका' => '[@superVisorDetail.local_body]',
-                'वडा नं.' => '[@superVisorDetail.ward_no]',
-                'NEC Council No.' => '[@superVisorDetail.nec_council_no]',
-                'पालिकाको दर्ता नं.' => '[@superVisorDetail.local_body_registration_no]',
-                'कन्सल्टिंग फर्मबाट भए सो को नाम ' => '[@superVisorDetail.consulting_firm_name]',
+                'नाम' => '[@supervisorDetail.name]',
+                'फोन नं.' => '[@supervisorDetail.phone]',
+                'बुवाको नाम' => '[@supervisorDetail.father_name]',
+                'ठेगाना' => '[@supervisorDetail.address]',
+                'पालिका' => '[@supervisorDetail.local_body]',
+                'वडा नं.' => '[@supervisorDetail.ward_no]',
+                'NEC Council No.' => '[@supervisorDetail.nec_council_no]',
+                'पालिकाको दर्ता नं.' => '[@supervisorDetail.local_body_registration_no]',
+                'कन्सल्टिंग फर्मबाट भए सो को नाम ' => '[@supervisorDetail.consulting_firm_name]',
             ],
         ],
         [
@@ -181,7 +182,18 @@ trait EMapTemplateTrait
     {
         $replace = [];
 
-        $replace = array_merge($this->getMapApplyReplacement(), $replace, $this->getLandDetailReplacement(), $this->getLandOwnerReplacement(), $this->getHouseOwnerReplacement(), $this->getFourFortsReplacement(), $this->getApplicantDetailReplacement(), $this->getCriteriaDetailsReplacement(),$this->getBuildingDetailsReplacement());
+        $replace = array_merge($this->getMapApplyReplacement(),
+            $replace,
+            $this->getLandDetailReplacement(),
+            $this->getLandOwnerReplacement(),
+            $this->getHouseOwnerReplacement(),
+            $this->getFourFortsReplacement(),
+            $this->getApplicantDetailReplacement(),
+            $this->getCriteriaDetailsReplacement(),
+            $this->getBuildingDetailsReplacement(),
+            $this->getDesignerDetailsReplacement(),
+            $this->getSupervisorDetailsReplacement(),
+            $this->getContractorDetailsReplacement());
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
@@ -259,12 +271,51 @@ trait EMapTemplateTrait
         ];
     }
 
-    private function getDesignerDetailReplacement(): array
+    private function getDesignerDetailsReplacement(): array
     {
+        $designerDetail = $this->designerDetails->where('post', PostsEnum::DESIGNER)->first();
         return [
-            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
-                'fourForts' => $this->fourForts
-            ])
+            '[@designerDetail.name]' => $designerDetail->name ?? '',
+            '[@designerDetail.father_name]' => $designerDetail->father_name ?? '',
+            '[@designerDetail.phone]' => $designerDetail->name ?? '',
+            '[@designerDetail.address]' => $designerDetail->address ?? '',
+            '[@designerDetail.local_body]' => $designerDetail->local_body ?? '',
+            '[@designerDetail.ward_no]' => $designerDetail->ward_no ?? '',
+            '[@designerDetail.nec_council_no]' => $designerDetail->nec_council_no ?? '',
+            '[@designerDetail.local_body_registration_no]' => $designerDetail->local_body_registration_no ?? '',
+            '[@designerDetail.consulting_firm_name]' => $designerDetail->consulting_firm_name ?? '',
+        ];
+    }
+
+    private function getSupervisorDetailsReplacement(): array
+    {
+        $supervisorDetail = $this->designerDetails->where('post', PostsEnum::SUPERVISOR)->first();
+        return [
+            '[@supervisorDetail.name]' => $supervisorDetail->name ?? '',
+            '[@supervisorDetail.father_name]' => $supervisorDetail->father_name ?? '',
+            '[@supervisorDetail.phone]' => $supervisorDetail->name ?? '',
+            '[@supervisorDetail.address]' => $supervisorDetail->address ?? '',
+            '[@supervisorDetail.local_body]' => $supervisorDetail->local_body ?? '',
+            '[@supervisorDetail.ward_no]' => $supervisorDetail->ward_no ?? '',
+            '[@supervisorDetail.nec_council_no]' => $supervisorDetail->nec_council_no ?? '',
+            '[@supervisorDetail.local_body_registration_no]' => $supervisorDetail->local_body_registration_no ?? '',
+            '[@supervisorDetail.consulting_firm_name]' => $supervisorDetail->consulting_firm_name ?? '',
+        ];
+    }
+
+    private function getContractorDetailsReplacement(): array
+    {
+        $contractorDetail = $this->designerDetails->where('post', PostsEnum::CONTRACTOR)->first();
+        return [
+            '[@contractorDetail.name]' => $contractorDetail->name ?? '',
+            '[@contractorDetail.father_name]' => $contractorDetail->father_name ?? '',
+            '[@contractorDetail.phone]' => $contractorDetail->name ?? '',
+            '[@contractorDetail.address]' => $contractorDetail->address ?? '',
+            '[@contractorDetail.local_body]' => $contractorDetail->local_body ?? '',
+            '[@contractorDetail.ward_no]' => $contractorDetail->ward_no ?? '',
+            '[@contractorDetail.nec_council_no]' => $contractorDetail->nec_council_no ?? '',
+            '[@contractorDetail.local_body_registration_no]' => $contractorDetail->local_body_registration_no ?? '',
+            '[@contractorDetail.consulting_firm_name]' => $contractorDetail->consulting_firm_name ?? '',
         ];
     }
 
