@@ -26,44 +26,8 @@
     <livewire:emap::edit.four-fort-detail-edit-livewire :mapApply="$mapApply"/>
     <livewire:emap::edit.designer-detail-edit-livewire :mapApply="$mapApply"/>
     <livewire:emap::edit.applicant-detail-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-
-
     <p class="break-page"></p>
-
-    <h4 class="text-center">
-        निर्माण हुने भवन तथा मापदण्ड सम्बन्धि संक्षिप्त विवरण
-    </h4>
-
-    <h6>
-        मापदण्ड सम्बन्धि विवरण
-    </h6>
-    <table
-        class="table table-sm table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th>क्र.सं</th>
-            <th>विवरण</th>
-            <th>मापदण्ड अनुसार</th>
-            <th>नक्सा अनुसार</th>
-            <th>अनुपालन</th>
-            <th>कैफियत</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($mapApply->criteriaDetails as $criteriaDetail)
-            <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>
-                    {{$criteriaDetail->detail->label()}}
-                </td>
-                <td>{{$criteriaDetail->according_to_criteria}}</td>
-                <td>{{$criteriaDetail->according_to_map}}</td>
-                <td>{{$criteriaDetail->compliance}}</td>
-                <td>{{$criteriaDetail->remarks }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <livewire:emap::edit.criteria-detail-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
 
     <h6>
         भवन सम्बन्धि विवरण :
