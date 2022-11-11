@@ -79,6 +79,20 @@ trait EMapTemplateTrait
             ],
         ],
         [
+            'title' => 'डिजाइनरको विवरण',
+            'data' => [
+                'निवेदकको प्रकार' => '[@applicantDetail.applicant_type]',
+                'घरधनी सँगको सम्बन्ध' => '[@applicantDetail.relation_with_owner]',
+                'नाम' => '[@applicantDetail.name]',
+                'फोन नं.' => '[@applicantDetail.phone]',
+                'बुवाको नाम' => '[@applicantDetail.father_name]',
+                'नागरिकता लिएको जिल्ला' => '[@applicantDetail.citizenship_issue_district]',
+                'नागरिकत नम्बर' => '[@applicantDetail.citizenship_no]',
+                'नागरिकता लिएको मिति' => '[@applicantDetail.citizenship_issue_date]',
+                'निवेदकको सहि' => '[@applicantDetail.applicant_signature_url]',
+            ],
+        ],
+        [
             'title' => 'निवेदकको विवरण',
             'data' => [
                 'निवेदकको प्रकार' => '[@applicantDetail.applicant_type]',

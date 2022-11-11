@@ -30,11 +30,11 @@ enum NoticeTypeEnum: string
 
 
     case MAP_PASS_FOR_BUILDING = 'map_pass_building';
-    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = ' construction_completion_certificate';
+    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = 'construction_completion_certificate';
 
     //notice enums
     case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15_days_notice_adjourned';
-    case REGARDING_SENDING_DETAILS = ' sending_details';
+    case REGARDING_SENDING_DETAILS = 'sending_details';
     case REVISED_SUPERSTRUCTURE_PERMIT = 'revised_superstructure_permit';
     //bond enums
     case FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS = '15_day_grace_period_map_pass';
