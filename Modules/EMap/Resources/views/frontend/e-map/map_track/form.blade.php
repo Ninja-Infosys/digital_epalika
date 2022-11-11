@@ -16,11 +16,6 @@
                 </div>
                 <h4 class="fw-semibold text-center">विवरण भर्नुहोस्</h4>
             </div>
-            @if(session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
-                </div>
-            @endif
             <div class="card-body p-3">
                 <form id="show_pohypup">
                     <div class="row">
@@ -92,11 +87,12 @@
 
                 $(document.body).delegate('#otp_form','submit', function (event) {
                     event.preventDefault();
+                    console.log($(CKEDITOR.instances['data'].getData()))
                     $.ajax({
                         type: "post",
                         data: {
                           otp:$("#otp").val(),
-                          data:$("textarea#data").val()
+                          // data:$("textarea#data").val()
                         },
                         url: "{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}",
                         success: function (resp) {
