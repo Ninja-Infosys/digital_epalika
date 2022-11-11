@@ -2,6 +2,8 @@
 
 namespace Modules\EMap\Enums;
 
+use Illuminate\Support\Collection;
+
 enum NoticeTypeEnum: string
 {
 
@@ -241,5 +243,10 @@ enum NoticeTypeEnum: string
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',
             self::BUILDING_COMPLETION_CERTIFICATE => 'भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र',
         };
+    }
+
+    public static function getAllValues(): Collection
+    {
+        return collect(self::cases())->pluck('value');
     }
 }

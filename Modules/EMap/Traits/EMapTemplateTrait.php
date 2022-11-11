@@ -11,7 +11,7 @@ trait EMapTemplateTrait
 {
     private array $template = [
         [
-            'title' => 'विवरण',
+            'title' => 'प्रस्तावित भवनको विवरण',
             'data' => [
                 'दर्ता नम्बर' => '[@registration_no]',
                 'दर्ता मिति' => '[@registration_date]',
@@ -25,13 +25,73 @@ trait EMapTemplateTrait
                 'कुल भवनको लम्बाई' => '[@length]',
                 'कुल भवनको चौडाई' => '[@breadth]',
                 'भवनको कुल उचाई जमिनको सतहबाट' => '[@height]',
-//                'स्ट्रकचर टाईप' => '[@usage.consultant_signature]',
-//                'स्ट्रकचर टाईप' => '[@usage.consultant_name]',
-//                'स्ट्रकचर टाईप' => '[@usage.consultant_mobile_no]',
-//                'स्ट्रकचर टाईप' => '[@usage.consultant_nec_no]',
+                'तल्लाको क्षेत्रफल र उचाईको विवरण' => '[@storeyDetails]',
             ],
         ],
-
+        [
+            'title' => 'जग्गाको विवरण',
+            'data' => [
+                'भू-उपयोग्य क्षेत्र' => '[@landDetail.land_use_area]',
+                'वडा नं.' => '[@landDetail.ward_no]',
+                'साविक वडा नं.' => '[@landDetail.former_ward_no]',
+                'टोलको नाम' => '[@landDetail.tole]',
+                'सडक कोड नं.' => '[@landDetail.street_code_no]',
+                'जग्गा कित्ता नं.' => '[@landDetail.plot_no]',
+                'क्षेत्रफल' => '[@landDetail.area]',
+                'भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR)' => '[@landDetail.percentage_of_area_covered_by_building]',
+            ],
+        ],
+        [
+            'title' => 'जग्गा धनीको विवरण',
+            'data' => [
+                'जग्गा धनीको किसिम' => '[@landOwner.land_owner_type]',
+                'नाम' => '[@landOwner.name]',
+                'फोन नं.' => '[@landOwner.phone]',
+                'बुवाको नाम' => '[@landOwner.father_name]',
+                'हजुरबुबाको नाम' => '[@landOwner.grandfather_name]',
+                'नागरिकता लिएको जिल्ला' => '[@landOwner.citizenship_issue_district]',
+                'नागरिकत नम्बर' => '[@landOwner.citizenship_no]',
+                'नागरिकता लिएको मिति' => '[@landOwner.citizenship_issue_date]',
+                'ठेगाना' => '[@landOwner.address]',
+                'पालिका' => '[@landOwner.local_body]',
+                'वडा नं' => '[@landOwner.ward_no]',
+            ],
+        ],
+        [
+            'title' => 'घर धनीको विवरण',
+            'data' => [
+                'नाम' => '[@houseOwner.name]',
+                'फोन नं.' => '[@houseOwner.phone]',
+                'बुवाको नाम' => '[@houseOwner.father_name]',
+                'हजुरबुबाको नाम' => '[@houseOwner.grandfather_name]',
+                'नागरिकता लिएको जिल्ला' => '[@houseOwner.citizenship_issue_district]',
+                'नागरिकत नम्बर' => '[@houseOwner.citizenship_no]',
+                'नागरिकता लिएको मिति' => '[@houseOwner.citizenship_issue_date]',
+                'ठेगाना' => '[@houseOwner.address]',
+                'पालिका' => '[@houseOwner.local_body]',
+                'वडा नं' => '[@houseOwner.ward_no]',
+            ],
+        ],
+        [
+            'title' => 'चार किल्लाको विवरण',
+            'data' => [
+                'किल्ला' => '[@fourForts]',
+            ],
+        ],
+        [
+            'title' => 'निवेदकको विवरण',
+            'data' => [
+                'निवेदकको प्रकार' => '[@applicantDetail.applicant_type]',
+                'घरधनी सँगको सम्बन्ध' => '[@applicantDetail.relation_with_owner]',
+                'नाम' => '[@applicantDetail.name]',
+                'फोन नं.' => '[@applicantDetail.phone]',
+                'बुवाको नाम' => '[@applicantDetail.father_name]',
+                'नागरिकता लिएको जिल्ला' => '[@applicantDetail.citizenship_issue_district]',
+                'नागरिकत नम्बर' => '[@applicantDetail.citizenship_no]',
+                'नागरिकता लिएको मिति' => '[@applicantDetail.citizenship_issue_date]',
+                'निवेदकको सहि' => '[@applicantDetail.applicant_signature_url]',
+            ],
+        ],
     ];
 
 

@@ -1043,5 +1043,11 @@ h6,
     width: 3rem;
     border-radius: 50%;
 }
+/*--------otp--modal------------*/
+.otpModal{
+    position: fixed !important;
+    top: 30%;
+    right: 50%;
+    z-index: 11111111111;
 
-
+}

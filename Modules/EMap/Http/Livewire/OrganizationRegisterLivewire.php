@@ -87,7 +87,7 @@ class OrganizationRegisterLivewire extends Component
 
     protected array $thirdStepValidations = [
         'user.name' => ['required', 'unique:organizations,name'],
-        'user.email' => ['required', 'email', 'unique:organizations,email'],
+        'user.email' => ['required', 'email', "unique:organizations,email"],
         'user.phone' => ['required', 'unique:organizations,phone'],
     ];
 
