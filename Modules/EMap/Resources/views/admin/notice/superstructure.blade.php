@@ -34,13 +34,9 @@
         <div class="col-sm-8">
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
-                    <x-application-component
-                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE"
-                        url="{{route('emap.admin.map.map-apply.notice.upload.certificate',$mapApply)}}"/>
-
-                </div>
+                    </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}भवन निर्माण स्थायी ईजाजत पत्र "/>
+                    <x-print-button title="भवन निर्माण स्थायी ईजाजत पत्र "/>
                 </div>
             </div>
         </div><!-- end col-->
@@ -106,7 +102,7 @@
                                     'आधारभूत निर्माण मापदण्ड-२०७२' तथा 'राष्ट्रिय भवन निर्माण संहिता-२०६०' बमोजिम
                                     निर्माण कार्य गर्नुहोला । स्वीकृत भएको नक्सा
                                     बमोजिम निर्माण कार्य गरिसकेपछि "निर्माण सम्पन्न प्रमाणपत्र" अनिवार्य लिनुपर्नेछ ।
-                                </div><br>
+                                </div>
                         <div class="fw-bold line">जग्गा बिकास तथा भवन मापदण्ड २०६४</div>
                         <table class="table table-sm table-bordered text-center word">
                             <thead>
@@ -248,13 +244,13 @@
                         <p class="word">(स्वीकृत नक्सा अनुसार हाल<span
                                 class="underline-dotted">{{$mapApply->current_storey}}</span>तल्ला
                             निर्माण गरिनेछ | </p>
-                        <div class="d-flex justify-content-around mt-4">
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>
-                                तयार गर्ने </p>
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
-                                गर्ने<br>(इन्जिनियर)</p>
-                            <p class="text-center"><span class="underline-dotted custom-width"></span><br>
-                                स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </p>
+                        <div class="d-flex">
+                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                तयार गर्ने </span></div>
+                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
+                                गर्ने<br>(इन्जिनियर)</span></div>
+                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                स्वीकृत गर्ने <br><small>(प्रमुख प्रशासकिय अधिकृत)</small></span></div>
                         </div>
 
                         <div class="break-page"></div>
@@ -315,8 +311,11 @@
             .word{
                 font-size: 10px;
             }
-            .super{
-                font-size: 10px;
+            .word>tbody>tr{
+                line-height: .70rem;
+            }
+            .word>thead>tr{
+                line-height: .70rem;
             }
         </style>
     @endpush

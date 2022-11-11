@@ -34,13 +34,9 @@
         <div class="col-sm-8">
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
-                    <x-application-component
-                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::BUILDING_COMPLETION_CERTIFICATE"
-                        url="{{route('emap.admin.map.map-apply.notice.upload.certificate',$mapApply)}}"/>
-
-                </div>
+                    </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}भवन निर्माण कार्य सम्पन्न प्रमाण-पत्"/>
+                    <x-print-button title="भवन निर्माण कार्य सम्पन्न प्रमाण-पत्"/>
                 </div>
             </div>
         </div><!-- end col-->
@@ -222,13 +218,13 @@
                         <span class="word">१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको </span><br>
                         <span class="word">पालना नभएको भए विवरण : <span class="underline-dotted custom-width"></span></span>
-                        <div class="d-flex justify-content-around">
-                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>
-                                तयार गर्ने </span>
-                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
-                                गर्ने<br>(इन्जिनियर)</span>
-                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>
-                                स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </span>
+                        <div class="d-flex">
+                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                तयार गर्ने </span></div>
+                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
+                                गर्ने<br>(इन्जिनियर)</span></div>
+                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                                स्वीकृत गर्ने <br><small>(प्रमुख प्रशासकिय अधिकृत)</small></span></div>
                         </div>
                         <div class="break-page"></div>
                         <table class="table table-sm table-bordered mt-2">
@@ -274,6 +270,9 @@
         <style>
             .word {
                 font-size: 10px;
+            }
+            .word>tbody>tr{
+                line-height: .70rem;
             }
         </style>
     @endpush
