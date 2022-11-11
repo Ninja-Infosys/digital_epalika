@@ -28,3 +28,20 @@
 .mega-menu-content{
     width: 1020px;
 }
+.map_template_exclamation{
+    animation-name: stretch;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stretch {
+    0%   {color: red;}
+    100% {color: #ffba00;}
+}
+.border_yellow{
+    border: 1px solid #DF3434;
+    border-radius: 5px;
+}
