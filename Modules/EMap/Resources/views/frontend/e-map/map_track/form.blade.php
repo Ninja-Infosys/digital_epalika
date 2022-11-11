@@ -22,7 +22,7 @@
                         <div class="col-md-12">
                             <label for="data">डाटा</label>
                             <textarea class="form-control ckEditor" placeholder="डाटा" name="data" id="data" cols="50"
-                                      rows="10">{{old('data',($mapApply->applyMapNotices->first()?->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? ''))}}</textarea>
+                                      rows="10">{{old('data',( $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? $mapApply->applyMapNotices->first()?->data ?? ''))}}</textarea>
                         </div>
                     </div>
                     <div class=" d-flex justify-content-end pt-3">
@@ -91,7 +91,7 @@
                         type: "post",
                         data: {
                           otp:$("#otp").val(),
-                          // data:$("textarea#data").val()
+                          data:$("textarea#data").val()
                         },
                         url: "{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}",
                         success: function (resp) {
