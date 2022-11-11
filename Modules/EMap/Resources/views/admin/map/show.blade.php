@@ -31,39 +31,27 @@
                             </button>
                             <ul class="dropdown-menu mega-menu-content" aria-labelledby="defaultDropdown">
                                 <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <ul>
-                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#1">navigation
-                                                        1</a>
-                                                </li>
-                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#2">navigation
-                                                        2</a>
-                                                </li>
+                                    @foreach(\Modules\EMap\Enums\NoticeTypeEnum::getAllValues()->chunk(6) as $noticeTypeEnums)
+                                        <div class="row">
+                                            @foreach($noticeTypeEnums->chunk(2) as $noticeTypeEnum)
+                                                <div class="col-md-4">
+                                                    <ul>
+                                                        @foreach($noticeTypeEnum as $value)
+                                                            <li>
+                                                                <i class="fa fa-angle-right px-1 text-primary"></i>
+                                                                <a href="#notice_{{$loop->iteration}}">
+                                                                    {{\Modules\EMap\Enums\NoticeTypeEnum::tryFrom($value)->label()}}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
 
-                                            </ul>
+                                                    </ul>
+                                                </div>
+                                            @endforeach
+
                                         </div>
-                                        <div class="col-md-4">
-                                            <ul>
-                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#1">navigation
-                                                        1</a>
-                                                </li>
-                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#2">navigation
-                                                        2</a>
-                                                </li>
-                                            </ul>
-                                            </div>
-                                        <div class="col-md-4">
-                                            <ul>
-                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#1">navigation
-                                                        1</a>
-                                                </li>
-                                                <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#2">navigation
-                                                        2</a>
-                                                </li>
-                                            </ul>
-                                            </div>
-                                    </div>
+                                    @endforeach
+
                                 </li>
                             </ul>
                         </div>
