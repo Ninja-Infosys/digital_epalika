@@ -181,7 +181,7 @@ trait EMapTemplateTrait
     {
         $replace = [];
 
-        $replace = array_merge($this->getMapApplyReplacement(), $replace, $this->getLandDetailReplacement(), $this->getLandOwnerReplacement(), $this->getHouseOwnerReplacement(),$this->getFourFortsReplacement(),$this->getApplicantDetailReplacement());
+        $replace = array_merge($this->getMapApplyReplacement(), $replace, $this->getLandDetailReplacement(), $this->getLandOwnerReplacement(), $this->getHouseOwnerReplacement(), $this->getFourFortsReplacement(), $this->getApplicantDetailReplacement(), $this->getCriteriaDetailsReplacement());
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
@@ -271,6 +271,15 @@ trait EMapTemplateTrait
             '[@applicantDetail.citizenship_no]' => $this->applicantDetail->citizenship_no ?? '',
             '[@applicantDetail.citizenship_issue_date]' => $this->applicantDetail->citizenship_issue_date ?? '',
             '[@applicantDetail.signature_url]' => $this->applicantDetail->signature_url ?? '',
+        ];
+    }
+
+    private function getCriteriaDetailsReplacement(): array
+    {
+        return [
+            '[@criteriaDetails]' => (string)View::make('emap::inc.criteria_details', [
+                'criteriaDetails' => $this->criteriaDetails
+            ])
         ];
     }
 }
