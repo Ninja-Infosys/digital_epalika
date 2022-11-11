@@ -70,6 +70,7 @@ Route::view('type', 'emap::admin.static.type')->name('type');
 Route::view('officeletter', 'emap::admin.notice.office-letter')->name('officeletter');
 Route::view('noticeletter', 'emap::admin.notice.notice-letter')->name('noticeletter');
 Route::view('level', 'emap::admin.notice.level')->name('level');
+Route::view('technician_notice', 'emap::admin.notice.technician-notice')->name('technician_notice');
 Route::view('superstructure', 'emap::admin.notice.superstructure')->name('superstructure');
 Route::view('building', 'emap::admin.notice.building_construction_completion_certificate')->name('building');
 
