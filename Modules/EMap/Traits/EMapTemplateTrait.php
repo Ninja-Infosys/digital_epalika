@@ -132,7 +132,7 @@ trait EMapTemplateTrait
                 'नागरिकता लिएको जिल्ला' => '[@applicantDetail.citizenship_issue_district]',
                 'नागरिकत नम्बर' => '[@applicantDetail.citizenship_no]',
                 'नागरिकता लिएको मिति' => '[@applicantDetail.citizenship_issue_date]',
-                'निवेदकको सहि' => '[@applicantDetail.applicant_signature_url]',
+                'निवेदकको सहि' => '[@applicantDetail.signature_url]',
             ],
         ],
         [
@@ -181,7 +181,7 @@ trait EMapTemplateTrait
     {
         $replace = [];
 
-        $replace = array_merge($this->getMapApplyReplacement(), $replace, $this->getLandDetailReplacement(), $this->getLandOwnerReplacement(), $this->getHouseOwnerReplacement(),$this->getFourFortsReplacement());
+        $replace = array_merge($this->getMapApplyReplacement(), $replace, $this->getLandDetailReplacement(), $this->getLandOwnerReplacement(), $this->getHouseOwnerReplacement(),$this->getFourFortsReplacement(),$this->getApplicantDetailReplacement());
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
@@ -256,6 +256,21 @@ trait EMapTemplateTrait
             '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
                 'fourForts' => $this->fourForts
             ])
+        ];
+    }
+
+    private function getApplicantDetailReplacement(): array
+    {
+        return [
+            '[@applicantDetail.applicant_type]' => $this->applicantDetail->applicant_type->label() ?? '',
+            '[@applicantDetail.relation_with_owner]' => $this->applicantDetail->relation_with_owner->label() ?? '',
+            '[@applicantDetail.name]' => $this->applicantDetail->name ?? '',
+            '[@applicantDetail.phone]' => $this->applicantDetail->phone ?? '',
+            '[@applicantDetail.father_name]' => $this->applicantDetail->father_name ?? '',
+            '[@applicantDetail.citizenship_issue_district]' => $this->applicantDetail->citizenshipIssueDistrict->district ?? '',
+            '[@applicantDetail.citizenship_no]' => $this->applicantDetail->citizenship_no ?? '',
+            '[@applicantDetail.citizenship_issue_date]' => $this->applicantDetail->citizenship_issue_date ?? '',
+            '[@applicantDetail.signature_url]' => $this->applicantDetail->signature_url ?? '',
         ];
     }
 }
