@@ -58,7 +58,6 @@
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
                         <h3 class="text-center mt-3"><b>मन्जुरीनामा</b></h3>
-
                         <div class="vertical">
                             दस्तखत : <span class="underline-dotted custom-width"></span>
                         </div>
