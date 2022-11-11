@@ -58,8 +58,9 @@ class ApplicantDetail extends Model
         return Storage::disk('public')->url($this->attributes['signature']);
     }
 
-    public function setSignatureAttribute($value)
+    public function setSignatureAttribute($value): void
     {
+        info($value);
         if (!empty($value) && !is_string($value)) {
             $this->attributes['signature'] = $value->store('e_map/applicant/' . Str::slug($this->attributes['name'], '_') . '/signature', 'public');
         }
