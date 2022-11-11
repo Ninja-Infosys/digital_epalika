@@ -39,7 +39,7 @@
                                                         @foreach($noticeTypeEnum as $value)
                                                             <li>
                                                                 <i class="fa fa-angle-right px-1 text-primary"></i>
-                                                                <a href="#notice_{{$loop->iteration}}">
+                                                                <a href="#{{\Illuminate\Support\Str::limit($value,10,'mmm')}}">
                                                                     {{\Modules\EMap\Enums\NoticeTypeEnum::tryFrom($value)->label()}}
                                                                 </a>
                                                             </li>
@@ -51,31 +51,52 @@
 
                                         </div>
                                     @endforeach
-
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="d-flex justify-content-between">
-                            <h4>शिर्षक नाम:</h4>
-                            <div class="btn-group mb-3 ">
-                                <button class="bg-success text-white btn btn-sm" onclick=" printJS({
-                printable: 'printData',
-                type: 'html',
-                documentTitle: 'ufjgjufgjh',
-                showModal: true,
-                css: '{{asset('assets/backend/css/print.css')}}',
-                honorMarginPadding: false,
-                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="row">--}}
+{{--                        <div class="d-flex justify-content-between">--}}
+{{--                            <h4>शिर्षक नाम:</h4>--}}
+{{--                            <div class="btn-group mb-3 ">--}}
+{{--                                <button class="bg-success text-white btn btn-sm" onclick=" printJS({--}}
+{{--                printable: 'printData',--}}
+{{--                type: 'html',--}}
+{{--                documentTitle: 'ufjgjufgjh',--}}
+{{--                showModal: true,--}}
+{{--                css: '{{asset('assets/backend/css/print.css')}}',--}}
+{{--                honorMarginPadding: false,--}}
+{{--                modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'})"><i class="fa fa-print"></i> Print--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div data-bs-spy="scroll" data-bs-offset="0">
-                        <section id="1" style="height: 800px; ">1</section>
-                        <section id="2" style="height: 900px; ">2</section>
-                        <section id="3" style="height: 1000px;">3</section>
+                        @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeType)
+                            <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
+                                <h4 class="mt-2"> {{$noticeType->label()}}</h4>
+                                <div class="card-body mt-2" style="border: 1px solid black;border-radius: 5px;">
+                                    <div class="d-flex justify-content-end">
+                                        @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
+                                        <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}" class="mx-2">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                            <a href="">
+                                                <i class="fa fa-print"></i>
+                                            </a>
+                                        @else
+                                        <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                        @endif
+                                    </div>
+                                    {!!  $mapApply->template_data
+                                  ->where('for', \Modules\EMap\Enums\NoticeTypeEnum::tryFrom($noticeType->value))?->first()['data']
+                                  ?? ''!!}
+                                </div>
+                            </section>
+
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -256,7 +277,8 @@
                                     <tr>
                                         <th>नाम</th>
                                         <td>{{$mapApply->organization->organizationDetail->org_name_ne ?? $mapApply->organization->userDetail->name_ne ?? ''}}
-                                            ({{$mapApply->organization->organizationDetail->org_name_en ?? $mapApply->organization->userDetail->name_en ?? ''}})
+                                            ({{$mapApply->organization->organizationDetail->org_name_en ?? $mapApply->organization->userDetail->name_en ?? ''}}
+                                            )
                                         </td>
                                     </tr>
                                     <tr>
@@ -267,14 +289,14 @@
                                         <th>फोन</th>
                                         <td>{{$mapApply->organization->organizationDetail->org_contact ?? $mapApply->organization->userDetail->phone ??''}}</td>
                                     </tr>
-{{--                                    <tr>--}}
-{{--                                        <th>ठेगाना</th>--}}
-{{--                                        <td>{{$mapApply->organization->organizationDetail->localBody->local_body ?? ''}}--}}
-{{--                                            -{{$mapApply->organization->organizationDetail->ward ?? ''}}--}}
-{{--                                            , {{$mapApply->organization->organizationDetail->tole ?? ''}}--}}
-{{--                                            , {{$mapApply->organization->organizationDetail->district->district ?? ''}}--}}
-{{--                                            , {{$mapApply->organization->organizationDetail->province->province ?? ''}}</td>--}}
-{{--                                    </tr>--}}
+                                    {{--                                    <tr>--}}
+                                    {{--                                        <th>ठेगाना</th>--}}
+                                    {{--                                        <td>{{$mapApply->organization->organizationDetail->localBody->local_body ?? ''}}--}}
+                                    {{--                                            -{{$mapApply->organization->organizationDetail->ward ?? ''}}--}}
+                                    {{--                                            , {{$mapApply->organization->organizationDetail->tole ?? ''}}--}}
+                                    {{--                                            , {{$mapApply->organization->organizationDetail->district->district ?? ''}}--}}
+                                    {{--                                            , {{$mapApply->organization->organizationDetail->province->province ?? ''}}</td>--}}
+                                    {{--                                    </tr>--}}
                                     <tr>
                                         <td colspan="2">
                                             <a href="{{route('emap.admin.organization.show',$mapApply->organization_id)}}"
@@ -289,10 +311,12 @@
                         </div>
                         <div class="tab-pane" id="test" role="tabpanel">
                             <div class="d-flex justify-content-end">
-                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}" class="btn btn-primary btn-sm">
+                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}"
+                                   class="btn btn-primary btn-sm">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}" class="btn btn-primary btn-sm mx-1">
+                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::MAP_ACCEPTANCE])}}"
+                                   class="btn btn-primary btn-sm mx-1">
                                     <i class="fa fa-print"></i>
                                 </a>
                             </div>
@@ -304,10 +328,12 @@
 
                         <div class="tab-pane" id="test1" role="tabpanel">
                             <div class="d-flex justify-content-end">
-                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION])}}" class="btn btn-primary btn-sm">
+                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION])}}"
+                                   class="btn btn-primary btn-sm">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION])}}" class="btn btn-primary btn-sm mx-1">
+                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,\Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION])}}"
+                                   class="btn btn-primary btn-sm mx-1">
                                     <i class="fa fa-print"></i>
                                 </a>
                             </div>
