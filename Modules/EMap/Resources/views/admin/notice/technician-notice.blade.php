@@ -34,12 +34,9 @@
         <div class="col-sm-8">
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
-                    <x-application-component
-                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::TECHNICAL_REPORT"
-                        url="{{route('emap.admin.map.map-apply.notice.upload.report',$mapApply)}}"/>
-                </div>
+                    </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}प्रविधिक प्रतिवेदन"/>
+                    <x-print-button title="प्रविधिक प्रतिवेदन"/>
                 </div>
             </div>
         </div><!-- end col-->
@@ -49,6 +46,13 @@
             <div class="card mb_30">
                 <div class="card-body p-3">
                     <div class="font-black" id="printData">
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                पत्र सं: <div class="underline-dotted custom-width"></div><br>
+                                चलानी नं: <div class="underline-dotted custom-width"></div>
+                            </div>
+                            <div class="col-md-6 text-end">मिति: <div class="underline-dotted custom-width"></div></div>
+                        </div>
                         <h3 class="text-center"><b>प्रविधिक प्रतिवेदन</b></h3>
                         <p class="text-center"><b>(स्थानीय सरकार संचालन ऐन २०७४ को दफा ३१ र ३२ बमोजिम सर्जमिन
                                 खटी गएको )</b></p>
@@ -94,7 +98,8 @@
                         <span class="mt-2">२.२&emsp;&ensp;बाटोको चौडाई<span class="underline-dotted custom-width"></span></span><br>
                         <span class="mt-2">२.३&emsp;&ensp;मापदण्ड बमोजिमको सडक अधिकार क्षेत्रसँग साइट प्लान मेल खान्छ, खादैन
                             सो को विवरण <span
-                                class="underline-dotted custom-width">{{$mapApply->criteriaDetails->where('detail',\Modules\EMap\Enums\DetailsRegardingCriteriaEnum::ROAD_JURISDICTION)->first()->according_to_criteria??''}}</span>
+                                class="underline-dotted custom-width">
+{{--                                {{$mapApply->criteriaDetails->where('detail',\Modules\EMap\Enums\DetailsRegardingCriteriaEnum::ROAD_JURISDICTION)->first()->according_to_criteria??''}}</span>--}}
                         </span><br>
                         <span class="mt-2">३.&emsp;&emsp;निर्माण हुने भवनले सार्बजनिक स्थल वा निर्माणलाई बाधा पुर्याएको
                             <input class="form-check-input form-check-inline" type="checkbox"
