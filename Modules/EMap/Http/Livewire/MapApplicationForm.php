@@ -119,7 +119,11 @@ class MapApplicationForm extends Component
         $this->officeSetting = OfficeSetting::with('localBody')->first();
 
         if (empty($this->setting->land_measurement_id)) {
-            $this->redirect(route('emap.admin.setting.index'));
+            $this->dispatchBrowserEvent('alert_message', [
+                'type' => "error",
+                'title' => "माफ गर्नुहोस्",
+                'text' => "मापन एकाइ सेट छैनो",
+            ]);
         }
 
         $this->conversion_units = MeasurementUnit::where('type_id', $this->setting->land_measurement_id)->get();

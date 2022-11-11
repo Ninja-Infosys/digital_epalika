@@ -43,5 +43,15 @@
 
 @stack('scripts')
 
+<script>
+    window.addEventListener('alert_message', event => {
+        swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+        });
+    });
+</script>
+
 </body>
 </html>
