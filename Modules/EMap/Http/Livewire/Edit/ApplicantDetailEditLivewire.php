@@ -98,9 +98,13 @@ class ApplicantDetailEditLivewire extends Component
             $this->validate();
             DB::transaction(function () {
 
-                $this->mapApply->applicantDetail()->update($this->applicantDetail + [
+                $this->mapApply->applicantDetail()->update($this->applicantDetail);
+
+                if ($this->signature) {
+                    $this->mapApply->update([
                         'signature' => $this->signature->store('e_map/applicant/' . Str::slug(($this->mapApply->houseOwner->name ?? 'default'), '_') . '/signature', 'public')
                     ]);
+                }
             });
 
             $this->reset('editForm');

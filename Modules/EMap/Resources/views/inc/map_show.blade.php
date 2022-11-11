@@ -27,45 +27,9 @@
     <livewire:emap::edit.designer-detail-edit-livewire :mapApply="$mapApply"/>
     <livewire:emap::edit.applicant-detail-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
     <p class="break-page"></p>
-    <livewire:emap::edit.criteria-detail-edit-livewire :mapApply="$mapApply" :districts="$districts"/>
-
-    <h6>
-        भवन सम्बन्धि विवरण :
-    </h6>
-    <table
-        class="table table-sm table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th>क्र.सं</th>
-            <th colspan="2" class="text-center">विवरण</th>
-            <th>कैफियत</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($mapApply->buildingDetails as $buildingDetail)
-            <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>
-                    {{$buildingDetail->detail->label()}}
-                </td>
-                <td>{{$buildingDetail->description}} </td>
-                <td>{{$buildingDetail->remarks}}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-    <div class="d-flex justify-content-end">
-        <div>
-            <div class="my-5">
-                <p class="custom-width underline-dotted"></p>
-                <p>(कन्सल्टेन्ट इंन्जिनियरको सहि)</p>
-            </div>
-            <p> नाम : {{$mapApply->consultant_name}}</p>
-            <p> मोबाइल नं. : {{$mapApply->consultant_mobile_no}}</p>
-            <p> एन. ई. सी. नं. : {{$mapApply->consultant_nec_no}} </p>
-        </div>
-    </div>
+    <livewire:emap::edit.criteria-detail-edit-livewire :mapApply="$mapApply"/>
+    <livewire:emap::edit.building-detail-edit-livewire :mapApply="$mapApply" />
+    <livewire:emap::edit.consultancy-detail-edit-liveware :mapApply="$mapApply"/>
 </div>
 
 @push('style')
