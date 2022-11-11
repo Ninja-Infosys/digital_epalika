@@ -6,13 +6,13 @@
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">कर चुक्ता सम्पादन</h3>
-                        <a href="{{route('organization.admin.clients.client.index')}}" class="btn btn-primary btn-sm">
+                        <a href="{{route('organization.admin.taxClearance.index')}}" class="btn btn-primary btn-sm">
                             <i class="fa fa-list"></i> कर चुक्ता सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('organization.admin.clients.taxClearance.update',$taxClearance)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('organization.admin.taxClearance.update',$taxClearance)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="mb-6">

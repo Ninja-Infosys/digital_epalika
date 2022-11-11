@@ -6,7 +6,7 @@
                 <div class="card-header p-3">
                     <div class="main-title d-flex justify-content-between">
                         <h3 class="mb-0">कर चुक्ता</h3>
-                        <a href="{{route('organization.admin.clients.taxClearance.create')}}" class="btn btn-primary btn-sm">
+                        <a href="{{route('organization.admin.taxClearance.create')}}" class="btn btn-primary btn-sm">
                             <i class="fa fa-plus"></i> कर चुक्ता थप्नुहोस
                         </a>
                     </div>
@@ -31,11 +31,11 @@
                                 </td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{route('organization.admin.clients.taxClearance.edit',$taxClearance)}}"
+                                        <a href="{{route('organization.admin.taxClearance.edit',$taxClearance)}}"
                                            class="btn btn-sm btn-outline-warning mx-1">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस
                                         </a>
-                                        <form action="{{route('organization.admin.clients.taxClearance.destroy',$taxClearance)}}"
+                                        <form action="{{route('organization.admin.taxClearance.destroy',$taxClearance)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

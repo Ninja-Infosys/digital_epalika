@@ -75,9 +75,16 @@
                         @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeType)
                             <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
                                 <h4 class="mt-2"> {{$noticeType->label()}}</h4>
-                                <div class="card-body mt-2 border_yellow">
-                                    <div class="">
-                                    <i class="fa fa-exclamation-triangle map_template_exclamation fs-3" data-bs-toggle="tooltip" data-bs-placement="right" title="शिर्षक कार्य"></i>
+                                <div class="card-body mt-2 {{$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType) ? 'border_black':'border_yellow'}}">
+                                    <div >
+                                        @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
+
+                                        <i class="fs-3" data-bs-toggle="tooltip" data-bs-placement="right" title="शिर्षक कार्य"></i>
+                                        @else
+                                            <i class="fa fa-exclamation-triangle map_template_exclamation fs-3" data-bs-toggle="tooltip" data-bs-placement="right" title="शिर्षक कार्य"></i>
+
+                                        @endif
+
                                     </div>
                                     <div class="d-flex justify-content-end">
                                         @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
