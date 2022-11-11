@@ -40,6 +40,7 @@
                                                 <li><i class="fa fa-angle-right px-1 text-primary"></i><a href="#2">navigation
                                                         2</a>
                                                 </li>
+
                                             </ul>
                                         </div>
                                         <div class="col-md-4">
@@ -323,7 +324,8 @@
                                 </a>
                             </div>
                             <div class="row row-cols-1 row-cols-md-3 g-3">
-                                {!!  $mapApply->template_data->where('for', \Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION)?->first()['data']
+                                {!!  $mapApply->template_data
+                                  ->where('for', \Modules\EMap\Enums\NoticeTypeEnum::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION)?->first()['data']
                                   ?? ''!!}
                             </div>
                         </div>

@@ -16,11 +16,6 @@
                 </div>
                 <h4 class="fw-semibold text-center">विवरण भर्नुहोस्</h4>
             </div>
-            @if(session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
-                </div>
-            @endif
             <div class="card-body p-3">
                 <form id="show_pohypup">
                     <div class="row">
@@ -35,9 +30,8 @@
                     </div>
                 </form>
             </div>
-
             <!-- Modal -->
-            <div class="modal fade" id="otpVerificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class=" fade otpModal" id="otpVerificationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -92,11 +86,12 @@
 
                 $(document.body).delegate('#otp_form','submit', function (event) {
                     event.preventDefault();
+                    console.log($(CKEDITOR.instances['data'].getData()))
                     $.ajax({
                         type: "post",
                         data: {
                           otp:$("#otp").val(),
-                          data:$("textarea#data").val()
+                          // data:$("textarea#data").val()
                         },
                         url: "{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}",
                         success: function (resp) {
