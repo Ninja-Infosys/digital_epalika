@@ -181,7 +181,7 @@ trait EMapTemplateTrait
     {
         $replace = [];
 
-        $replace = array_merge($this->getMapApplyReplacement(), $replace, $this->getLandDetailReplacement(), $this->getLandOwnerReplacement(), $this->getHouseOwnerReplacement(), $this->getFourFortsReplacement(), $this->getApplicantDetailReplacement(), $this->getCriteriaDetailsReplacement());
+        $replace = array_merge($this->getMapApplyReplacement(), $replace, $this->getLandDetailReplacement(), $this->getLandOwnerReplacement(), $this->getHouseOwnerReplacement(), $this->getFourFortsReplacement(), $this->getApplicantDetailReplacement(), $this->getCriteriaDetailsReplacement(),$this->getBuildingDetailsReplacement());
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
@@ -259,6 +259,15 @@ trait EMapTemplateTrait
         ];
     }
 
+    private function getDesignerDetailReplacement(): array
+    {
+        return [
+            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
+                'fourForts' => $this->fourForts
+            ])
+        ];
+    }
+
     private function getApplicantDetailReplacement(): array
     {
         return [
@@ -279,6 +288,15 @@ trait EMapTemplateTrait
         return [
             '[@criteriaDetails]' => (string)View::make('emap::inc.criteria_details', [
                 'criteriaDetails' => $this->criteriaDetails
+            ])
+        ];
+    }
+
+    private function getBuildingDetailsReplacement(): array
+    {
+        return [
+            '[@buildingDetails]' => (string)View::make('emap::inc.building_details', [
+                'buildingDetails' => $this->buildingDetails
             ])
         ];
     }

@@ -104,7 +104,7 @@ enum NoticeTypeEnum: string
             //order
             self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE => 'घरको प्लिन्थ लेभल सम्मको निर्माणका निमित्त इजाजत प्रदान गर्ने',
             self::REGARDING_SUPERSTRUCTURE_PERMIT => 'सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
-            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
+            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER => '(टिप्पणी र आदेश) संशोधित सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
             self::HOUSE_MAP_NAMSARI => 'घरनक्सा नामसारी',
             //certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
