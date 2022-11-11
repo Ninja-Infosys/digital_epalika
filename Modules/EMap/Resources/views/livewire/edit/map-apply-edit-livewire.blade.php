@@ -218,7 +218,9 @@
     </fieldset>
     @if($editForm)
         <div class="my-4 d-flex justify-content-end">
-            <button type="submit" class="btn btn-sm btn-primary rounded-pill waves-effect waves-light "><i class="fa fa-save px-1"></i>पेश गर्नुहोस्</button>
+            <button type="submit" class="btn btn-sm btn-primary rounded-pill waves-effect waves-light "><i
+                    class="fa fa-save px-1"></i>पेश गर्नुहोस्
+            </button>
         </div>
     @endif
 

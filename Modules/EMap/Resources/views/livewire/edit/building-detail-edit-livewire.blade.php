@@ -2,78 +2,55 @@
     @csrf
 
     <fieldset>
-        <legend class="text-center"><b>निर्माण हुने भवन तथा मापदण्ड सम्बन्धि संक्षिप्त विवरण</b>
-        </legend>
+
         <div class="row">
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-12">
-                        <b>मापदण्ड सम्बन्धि विवरण :</b>
+                        <b>भवन सम्बन्धि विवरण :</b>
                         <table
                             class="table table-hover table-responsive table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.सं</th>
-                                <th>विवरण</th>
-                                <th>मापदण्ड अनुसार</th>
-                                <th>नक्सा अनुसार</th>
-                                <th>अनुपालन</th>
+                                <th colspan="2" class="text-center">विवरण</th>
                                 <th>कैफियत</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($criteriaDetails as $key=>$criteriaDetail)
+                            @foreach($buildingDetails as $key=>$buildingDetail)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$key+1}}</td>
                                     <td>
                                         <label
                                             for="name">
-                                            {{\Modules\EMap\Enums\DetailsRegardingCriteriaEnum::tryFrom($criteriaDetail['detail'])->label()}}
+                                            {{\Modules\EMap\Enums\BuildingDetailEnum::tryFrom($buildingDetail['detail'])->label()}}
                                         </label>
                                         <input type="hidden"
-                                               id="criteriaDetails.{{$key}}.detail"
-                                               wire:model="criteriaDetails.{{$key}}.detail"
-                                            {{$dataToEdit !== $key ?'disabled':''}}
+                                               id="detail"
+                                               wire:model="buildingDetails.{{$key}}.detail"
+                                               {{$dataToEdit !== $key ?'disabled':''}}
                                         >
-                                        @error("criteriaDetails.$key.detail")
+                                        @error("buildingDetails.$key.detail")
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
                                         <input type="text"
-                                               wire:model="criteriaDetails.{{$key}}.according_to_criteria"
-                                            {{$dataToEdit !== $key ?'disabled':''}}
+                                               wire:model="buildingDetails.{{$key}}.description"
+                                               {{$dataToEdit !== $key ?'disabled':''}}
                                         >
-                                        @error("criteriaDetails.$key.according_to_criteria")
+                                        @error("buildingDetails.$key.description")
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
                                     <td>
                                         <input type="text"
-                                               wire:model="criteriaDetails.{{$key}}.according_to_map"
-                                            {{$dataToEdit !== $key ?'disabled':''}}
+                                               wire:model="buildingDetails.{{$key}}.remarks"
+                                               {{$dataToEdit !== $key ?'disabled':''}}
                                         >
-                                        @error("criteriaDetails.$key.according_to_map")
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </td>
-                                    <td>
-                                        <input type="text"
-                                               wire:model="criteriaDetails.{{$key}}.compliance"
-                                            {{$dataToEdit !== $key ?'disabled':''}}
-                                        >
-                                        @error("criteriaDetails.$key.compliance")
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </td>
-
-                                    <td>
-                                        <input type="text"
-                                               wire:model="criteriaDetails.{{$key}}.remarks"
-                                            {{$dataToEdit !== $key ?'disabled':''}}
-                                        >
-                                        @error("criteriaDetails.$key.remarks")
+                                        @error("buildingDetails.$key.remarks")
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
@@ -103,7 +80,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            @error("criteriaDetails")
+                            @error("buildingDetails")
                             <p class="text-danger">{{$message}}</p>
                             @enderror
 
@@ -116,4 +93,5 @@
         </div>
 
     </fieldset>
+
 </form>

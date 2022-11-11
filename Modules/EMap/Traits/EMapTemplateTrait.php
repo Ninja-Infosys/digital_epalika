@@ -3,6 +3,7 @@
 namespace Modules\EMap\Traits;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Enums\NoticeTypeEnum;
@@ -131,7 +132,7 @@ trait EMapTemplateTrait
                 'नागरिकता लिएको जिल्ला' => '[@applicantDetail.citizenship_issue_district]',
                 'नागरिकत नम्बर' => '[@applicantDetail.citizenship_no]',
                 'नागरिकता लिएको मिति' => '[@applicantDetail.citizenship_issue_date]',
-                'निवेदकको सहि' => '[@applicantDetail.applicant_signature_url]',
+                'निवेदकको सहि' => '[@applicantDetail.signature_url]',
             ],
         ],
         [
@@ -165,7 +166,7 @@ trait EMapTemplateTrait
 
         $mapTemplate = EMapTemplate::where('for', $noticeTypeEnum->value)->first();
 
-        if ($mapTemplate){
+        if ($mapTemplate) {
             return $this->getData($mapTemplate->data);
         }
         return '';
@@ -180,7 +181,7 @@ trait EMapTemplateTrait
     {
         $replace = [];
 
-        $replace = array_merge($this->getMapApplyReplacement(), $replace);
+        $replace = array_merge($this->getMapApplyReplacement(), $replace, $this->getLandDetailReplacement(), $this->getLandOwnerReplacement(), $this->getHouseOwnerReplacement(), $this->getFourFortsReplacement(), $this->getApplicantDetailReplacement(), $this->getCriteriaDetailsReplacement());
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
@@ -199,6 +200,86 @@ trait EMapTemplateTrait
             '[@length]' => $this->length ?? '',
             '[@breadth]' => $this->breadth ?? '',
             '[@height]' => $this->height ?? ''
+        ];
+    }
+
+    private function getLandDetailReplacement(): array
+    {
+        return [
+            '[@landDetail.land_use_area]' => $this->landDetail->land_use_area ?? '',
+            '[@landDetail.ward_no]' => $this->landDetail->ward_no ?? '',
+            '[@landDetail.former_ward_no]' => $this->landDetail->former_ward_no ?? '',
+            '[@landDetail.tole]' => $this->landDetail->tole ?? '',
+            '[@landDetail.street_code_no]' => $this->landDetail->street_code_no ?? '',
+            '[@landDetail.plot_no]' => $this->landDetail->plot_no ?? '',
+            '[@landDetail.area]' => $this->landDetail->area ?? '',
+            '[@landDetail.percentage_of_area_covered_by_building]' => $this->landDetail->percentage_of_area_covered_by_building ?? '',
+        ];
+    }
+
+    private function getLandOwnerReplacement(): array
+    {
+        return [
+            '[@landOwner.land_owner_type]' => $this->landOwner->land_owner_type->label() ?? '',
+            '[@landOwner.name]' => $this->landOwner->name ?? '',
+            '[@landOwner.phone]' => $this->landOwner->phone ?? '',
+            '[@landOwner.father_name]' => $this->landOwner->father_name ?? '',
+            '[@landOwner.grandfather_name]' => $this->landOwner->grandfather_name ?? '',
+            '[@landOwner.citizenship_issue_district]' => $this->landOwner->citizenshipIssueDistrict->district ?? '',
+            '[@landOwner.citizenship_no]' => $this->landOwner->citizenship_no ?? '',
+            '[@landOwner.citizenship_issue_date]' => $this->landOwner->citizenship_issue_date ?? '',
+            '[@landOwner.address]' => $this->landOwner->address ?? '',
+            '[@landOwner.local_body]' => $this->landOwner->local_body ?? '',
+            '[@landOwner.ward_no]' => $this->landOwner->ward_no ?? '',
+        ];
+    }
+
+    private function getHouseOwnerReplacement(): array
+    {
+        return [
+            '[@houseOwner.name]' => $this->houseOwner->name ?? '',
+            '[@houseOwner.phone]' => $this->houseOwner->phone ?? '',
+            '[@houseOwner.father_name]' => $this->houseOwner->father_name ?? '',
+            '[@houseOwner.grandfather_name]' => $this->houseOwner->grandfather_name ?? '',
+            '[@houseOwner.citizenship_issue_district]' => $this->houseOwner->citizenshipIssueDistrict->district ?? '',
+            '[@houseOwner.citizenship_no]' => $this->houseOwner->citizenship_no ?? '',
+            '[@houseOwner.citizenship_issue_date]' => $this->houseOwner->citizenship_issue_date ?? '',
+            '[@houseOwner.address]' => $this->houseOwner->address ?? '',
+            '[@houseOwner.local_body]' => $this->houseOwner->local_body ?? '',
+            '[@houseOwner.ward_no]' => $this->houseOwner->ward_no ?? '',
+        ];
+    }
+
+    private function getFourFortsReplacement(): array
+    {
+        return [
+            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
+                'fourForts' => $this->fourForts
+            ])
+        ];
+    }
+
+    private function getApplicantDetailReplacement(): array
+    {
+        return [
+            '[@applicantDetail.applicant_type]' => $this->applicantDetail->applicant_type->label() ?? '',
+            '[@applicantDetail.relation_with_owner]' => $this->applicantDetail->relation_with_owner->label() ?? '',
+            '[@applicantDetail.name]' => $this->applicantDetail->name ?? '',
+            '[@applicantDetail.phone]' => $this->applicantDetail->phone ?? '',
+            '[@applicantDetail.father_name]' => $this->applicantDetail->father_name ?? '',
+            '[@applicantDetail.citizenship_issue_district]' => $this->applicantDetail->citizenshipIssueDistrict->district ?? '',
+            '[@applicantDetail.citizenship_no]' => $this->applicantDetail->citizenship_no ?? '',
+            '[@applicantDetail.citizenship_issue_date]' => $this->applicantDetail->citizenship_issue_date ?? '',
+            '[@applicantDetail.signature_url]' => $this->applicantDetail->signature_url ?? '',
+        ];
+    }
+
+    private function getCriteriaDetailsReplacement(): array
+    {
+        return [
+            '[@criteriaDetails]' => (string)View::make('emap::inc.criteria_details', [
+                'criteriaDetails' => $this->criteriaDetails
+            ])
         ];
     }
 }
