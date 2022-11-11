@@ -25,13 +25,21 @@ trait EMapTemplateTrait
                 'कुल भवनको लम्बाई' => '[@length]',
                 'कुल भवनको चौडाई' => '[@breadth]',
                 'भवनको कुल उचाई जमिनको सतहबाट' => '[@height]',
-//                'स्ट्रकचर टाईप' => '[@usage.consultant_signature]',
-//                'स्ट्रकचर टाईप' => '[@usage.consultant_name]',
-//                'स्ट्रकचर टाईप' => '[@usage.consultant_mobile_no]',
-//                'स्ट्रकचर टाईप' => '[@usage.consultant_nec_no]',
             ],
         ],
-
+        [
+            'title' => 'जग्गाको विवरण',
+            'data' => [
+                'भू-उपयोग्य क्षेत्र' => '[@landDetail.land_use_area]',
+                'वडा नं.' => '[@landDetail.ward_no]',
+                'साविक वडा नं.' => '[@landDetail.former_ward_no]',
+                'टोलको नाम' => '[@landDetail.tole]',
+                'सडक कोड नं.' => '[@landDetail.street_code_no]',
+                'जग्गा कित्ता नं.' => '[@landDetail.plot_no]',
+                'क्षेत्रफल' => '[@landDetail.area]',
+                'भवनले ढाक्ने क्षेत्रफलको प्रतिशत (GCR)' => '[@landDetail.percentage_of_area_covered_by_building]',
+            ],
+        ],
     ];
 
 
