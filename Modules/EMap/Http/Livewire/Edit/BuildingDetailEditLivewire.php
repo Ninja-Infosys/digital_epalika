@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\EMap\Entities\BuildingDetail;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Enums\BuildingDetailEnum;
 
 class BuildingDetailEditLivewire extends Component
 {
@@ -17,7 +18,7 @@ class BuildingDetailEditLivewire extends Component
     public function mount(MapApply $mapApply): void
     {
         $this->mapApply = $mapApply;
-
+        $availableBuildingDetail = collect();
         foreach ($mapApply->buildingDetails as $buildingDetail) {
             $this->buildingDetails[] = [
                 'id' => $buildingDetail->id ?? null,
@@ -25,7 +26,51 @@ class BuildingDetailEditLivewire extends Component
                 'description' => $buildingDetail->description ?? null,
                 'remarks' => $buildingDetail->remarks ?? null,
             ];
+            $availableBuildingDetail->push($buildingDetail->detail->value);
         }
+        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::BUILDING_CATEGORY->value)) {
+            $this->buildingDetails[] = [
+                'detail' => BuildingDetailEnum::BUILDING_CATEGORY->value,
+                'description' => $mapApply->building_category?->label(),
+                'remarks' => null,
+            ];
+        }
+        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::PLINTH_AREA->value)) {
+            $this->buildingDetails[] = [
+                'detail' => BuildingDetailEnum::PLINTH_AREA->value,
+                'description' => $mapApply->area_of_plinth ?? null,
+                'remarks' => null,
+            ];
+        }
+        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::LENGTH->value)) {
+            $this->buildingDetails[] = [
+                'detail' => BuildingDetailEnum::LENGTH->value,
+                'description' => $mapApply->length ?? '',
+                'remarks' => null,
+            ];
+        }
+        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::BREADTH->value)) {
+            $this->buildingDetails[] = [
+                'detail' => BuildingDetailEnum::BREADTH->value,
+                'description' => $mapApply->breadth ?? '',
+                'remarks' => null,
+            ];
+        }
+        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::STOREY_COUNT->value)) {
+            $this->buildingDetails[] = [
+                'detail' => BuildingDetailEnum::STOREY_COUNT->value,
+                'description' => $mapApply->current_storey ?? '',
+                'remarks' => null,
+            ];
+        }
+        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::HEIGHT->value)) {
+            $this->buildingDetails[] = [
+                'detail' => BuildingDetailEnum::HEIGHT->value,
+                'description' => $mapApply->height ?? null,
+                'remarks' => null,
+            ];
+        }
+
 
     }
 
