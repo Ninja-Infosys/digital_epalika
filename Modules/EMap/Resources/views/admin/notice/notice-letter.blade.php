@@ -34,12 +34,9 @@
         <div class="col-sm-8">
             <div class="text-sm-end">
                 <div class="btn-group mb-3">
-                    <x-application-component
-                        :application-type="\Modules\EMap\Enums\NoticeTypeEnum::FIFTEEN_DAYS_NOTICE_ADJOURNED"
-                        url="{{route('emap.admin.map.map-apply.notice.upload.notice',$mapApply)}}"/>
                 </div>
                 <div class="btn-group mb-3">
-                    <x-print-button title="{{$mapApply->client->name}}१५ दिने सूचना टास सम्बन्धमा"/>
+                    <x-print-button title="१५ दिने सूचना टास सम्बन्धमा"/>
                 </div>
             </div>
         </div><!-- end col-->
