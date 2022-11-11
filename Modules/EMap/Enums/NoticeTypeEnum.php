@@ -30,7 +30,7 @@ enum NoticeTypeEnum: string
 
 
     case MAP_PASS_FOR_BUILDING = 'map_pass_building';
-    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = ' construction_completion_certificate';
+    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = 'construction_completion_certificate';
 
     //notice enums
     case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15_days_notice_adjourned';
