@@ -3,26 +3,31 @@
         @if(!empty($mapApply->mapRegistration))
             <div class="font-black" id="printData1">
                 <h5 class="text-center"><b>दस्तुर तथा दर्ता सम्बन्धि</b></h5>
-                <p>घरधनीको नाम, थर: <span class="underline-dotted">{{$mapApply->houseOwner->name ?? ''}}</span></p>
-                <p>भू-उपयोग क्षेत्र : <span
+                <span>घरधनीको नाम, थर: <span class="underline-dotted">{{$mapApply->houseOwner->name ?? ''}}</span></span>
+                <br>
+                <span>भू-उपयोग क्षेत्र : <span
                         class="underline-dotted">{{$mapApply->landDetail->land_use_area??''}} {{$mapApply->landDetail->unit->title??''}}</span>
-                </p>
-                <p>निर्माणको विवरण : <span class="underline-dotted">{{$mapApply->usage->label()??''}}</span></p>
-                <p>निर्माणको प्रयोजन : <span
-                        class="underline-dotted">{{$mapApply->construction_type->label() ??''}}</span></p>
-                <p>भवनको वर्गीकरण :
+                </span>
+                <br>
+                <span>निर्माणको विवरण : <span class="underline-dotted">{{$mapApply->usage->label()??''}}</span></span>
+                <br>
+                <span>निर्माणको प्रयोजन : <span
+                        class="underline-dotted">{{$mapApply->construction_type->label() ??''}}</span></span>
+                <br>
+                <span>भवनको वर्गीकरण :
                     @foreach(\Modules\EMap\Enums\CategorizationEnum::cases() as $categorization)
 
-                        <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions"
-                               id="categorization{{$loop->index}}"
+                        <input type="checkbox"
                                {{$categorization->value===$mapApply->building_category->value ? 'checked' : ''}}
                                disabled>
-                        <label class="form-check-label"
-                               for="categorization{{$loop->index}}">{{$categorization->label()}}</label>
+                        {{$categorization->label()}}
+                        &emsp;
                     @endforeach
-                </p>
-                <p>निर्माणको स्ट्रक्चरल सिस्टम : <span
-                        class="underline-dotted "> {{$mapApply->structureType->title??''}}</span></p>
+                </span>
+                <br>
+                <span>निर्माणको स्ट्रक्चरल सिस्टम : <span
+                        class="underline-dotted "> {{$mapApply->structureType->title??''}}</span></span>
+                <br>
                 <table class="table table-bordered mt-2">
                     <thead>
                     <tr class="text-center">
@@ -75,23 +80,28 @@
                     </tr>
                     </tbody>
                 </table>
-                <p>अक्षरेपी
+                <span>अक्षरेपी
                     <x-number-into-unicode :is_currency="true" :number="$mapApply->mapRegistration->total_amount ?? ''"
                                            id="in_amount" class="underline-dotted"/>
                     मात्र
-                </p>
-                <p>फाटवालाको सही: <span class="underline-dotted custom-width"></span></p>
-                <p>मिति:<span class="underline-dotted">{{$mapApply->mapRegistration->nepali_date ?? ''}}</span>
+                </span>
+                <br>
+                <span>फाटवालाको सही: <span class="underline-dotted custom-width"></span></span>
+                <br>
+                <span>मिति:<span class="underline-dotted">{{$mapApply->mapRegistration->nepali_date ?? ''}}</span>
                     रसिद नं: <span class="underline-dotted">{{$mapApply->mapRegistration->receipt_no ?? ''}}</span>
                     रकम बुझने: <span class="underline-dotted">{{$mapApply->mapRegistration->recipient ?? ''}}</span>
-                </p>
+                </span>
+                <br>
                 <strong>राजस्व शाखाको प्रयोजनको लागि</strong>
-                <p>निवेदकको नक्सा पास दस्तुर वापत रु: <span
+                <br>
+                <span>निवेदकको नक्सा पास दस्तुर वापत रु: <span
                         class="underline-dotted">{{$mapApply->mapRegistration->total_amount ?? ''}}</span> बाट प्राप्त
-                    भयो |</p>
-                <p>मिति: <span class="underline-dotted">{{$mapApply->mapRegistration->nepali_date ?? ''}}</span>
+                    भयो |</span>
+                <br>
+                <span>मिति: <span class="underline-dotted">{{$mapApply->mapRegistration->nepali_date ?? ''}}</span>
                     रसिद नं:<span class="underline-dotted">{{$mapApply->mapRegistration->receipt_no ?? ''}}</span>
-                    रकम बुझने: <span class="underline-dotted">{{$mapApply->mapRegistration->recipient ?? ''}}</span></p>
+                    रकम बुझने: <span class="underline-dotted">{{$mapApply->mapRegistration->recipient ?? ''}}</span></span>
             </div>
         @endif
     </div>
