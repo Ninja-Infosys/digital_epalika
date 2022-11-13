@@ -64,7 +64,6 @@
                                          (घ)&emsp;
                         </span><br>
                         <span class="word">
-
                             निर्माणको स्ट्रक्चरल सिस्टम<......................</span><br>
                         <span class="word">६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति......................</span><br>
                         <span>७.
@@ -153,7 +152,7 @@
                         <span class="word">१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको </span><br>
                         <span class="word">पालना नभएको भए विवरण : ......................</span>
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-around">
                             <div class="col-sm-4 text-center"><span class="text-center">......................<br>
                                 तयार गर्ने </span></div>
                             <div class="col-sm-4 text-center"><span class="text-center">......................<br>चेक
