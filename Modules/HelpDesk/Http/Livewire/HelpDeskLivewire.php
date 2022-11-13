@@ -22,7 +22,6 @@ class HelpDeskLivewire extends Component
     {
         $branch->load('services');
         $this->services = $branch->services;
-
     }
 
     public function resetService()

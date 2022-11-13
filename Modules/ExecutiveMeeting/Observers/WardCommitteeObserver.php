@@ -6,11 +6,11 @@ use Modules\ExecutiveMeeting\Entities\WardCommittee;
 
 class WardCommitteeObserver
 {
-
     public function creating(WardCommittee $wardCommittee)
     {
         if (is_null($wardCommittee->position)) {
             $wardCommittee->position = WardCommittee::max('position') + 1;
+
             return;
         }
 
@@ -35,11 +35,11 @@ class WardCommitteeObserver
 
         if ($wardCommittee->getOriginal('position') > $wardCommittee->position) {
             $positionRange = [
-                $wardCommittee->position, $wardCommittee->getOriginal('position')
+                $wardCommittee->position, $wardCommittee->getOriginal('position'),
             ];
         } else {
             $positionRange = [
-                $wardCommittee->getOriginal('position'), $wardCommittee->position
+                $wardCommittee->getOriginal('position'), $wardCommittee->position,
             ];
         }
 

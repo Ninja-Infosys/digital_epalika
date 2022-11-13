@@ -4,7 +4,6 @@ namespace Modules\EMap\Http\Requests\MapFee;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
 class UpdateMapFeeRequest extends FormRequest
 {
@@ -17,7 +16,7 @@ class UpdateMapFeeRequest extends FormRequest
     {
         return [
             'storey' => ['required', 'string', 'max:255'],
-            'rate' => ['required', 'numeric']
+            'rate' => ['required', 'numeric'],
         ];
     }
 

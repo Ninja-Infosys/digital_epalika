@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'name' => 'JudicialCommittee'
+    'name' => 'JudicialCommittee',
 ];

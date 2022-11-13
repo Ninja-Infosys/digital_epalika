@@ -2,10 +2,8 @@
 
 namespace Modules\TaskManagement\Http\Controllers\Admin;
 
-use App\Models\Settings\Branch;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Branch;
 use Modules\TaskManagement\Entities\TaskCategory;
 use Modules\TaskManagement\Http\Requests\TaskCategory\StoreTaskCategoryRequest;
 use Modules\TaskManagement\Http\Requests\TaskCategory\UpdateTaskCategoryRequest;
@@ -14,23 +12,24 @@ class TaskCategoryController extends Controller
 {
     public function index()
     {
-        $taskCategories=TaskCategory::with('branch')->paginate(10);
+        $taskCategories = TaskCategory::with('branch')->paginate(10);
 
-        return view('taskmanagement::admin.task_category.index',compact('taskCategories'));
+        return view('taskmanagement::admin.task_category.index', compact('taskCategories'));
     }
 
     public function create()
     {
-        $branches=Branch::with('branches')->whereNull('branch_id')->get();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
 
-        return view('taskmanagement::admin.task_category.create',compact('branches'));
+        return view('taskmanagement::admin.task_category.create', compact('branches'));
     }
 
     public function store(StoreTaskCategoryRequest $request)
     {
         TaskCategory::create($request->validated());
 
-        toast('शाखाहरु अनुसार कार्यहरू सफलतापूर्वक थपियो','success');
+        toast('शाखाहरु अनुसार कार्यहरू सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -41,7 +40,7 @@ class TaskCategoryController extends Controller
 
     public function edit(TaskCategory $taskCategory)
     {
-        $branches=Branch::with('branches')->whereNull('branch_id')->get();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
 
         return view('taskmanagement::admin.task_category.edit', compact('branches', 'taskCategory'));
     }
@@ -50,7 +49,8 @@ class TaskCategoryController extends Controller
     {
         $taskCategory->update($request->validated());
 
-        toast('शाखाहरु अनुसार कार्यहरू सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('शाखाहरु अनुसार कार्यहरू सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.taskManagement.taskCategory.index'));
     }
 
@@ -58,7 +58,8 @@ class TaskCategoryController extends Controller
     {
         $taskCategory->delete();
 
-        toast('शाखाहरु अनुसार कार्य सफलतापूर्वक मेटाइयो','success');
+        toast('शाखाहरु अनुसार कार्य सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

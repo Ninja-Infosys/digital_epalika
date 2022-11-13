@@ -9,8 +9,7 @@ class GrantDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            GrantPermissionTableSeeder::class
+            GrantPermissionTableSeeder::class,
         ]);
-
     }
 }

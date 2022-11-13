@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-
 use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
@@ -14,6 +13,7 @@ class Converter extends Component
     public $conversion_units = [];
 
     public $conversion = [];
+
     public MapSetting $setting;
 
     public $conversion_id;
@@ -21,12 +21,12 @@ class Converter extends Component
     public $units = [];
 
     public $si_unit_value = 0;
+
     public $convertedData = 0;
 
     public function mount()
     {
         $this->setting = MapSetting::with('landMeasurement')->first();
-
 
         if (empty($this->setting->land_measurement_id)) {
             $this->redirect(route('emap.admin.setting.index'));
@@ -37,15 +37,13 @@ class Converter extends Component
 
     public function convert()
     {
-        if ($this->si_unit_value > 0 && !empty($this->conversion_id)) {
-
+        if ($this->si_unit_value > 0 && ! empty($this->conversion_id)) {
             $rate = $this->conversionToSmallest();
-
 
             $this->convertedData = $rate * $this->si_unit_value;
             $data = [];
             foreach ($this->units as $index => $unit) {
-                $data['data' . $index] = $this->conversionLogic($unit);
+                $data['data'.$index] = $this->conversionLogic($unit);
             }
             $this->conversion = $data;
         }
@@ -61,7 +59,6 @@ class Converter extends Component
                 ->orderBy('position')
                 ->get();
 
-
             foreach ($getSmallerUnits as $smallerUnit) {
                 $rate = $rate * $this->getRate($smallerUnit);
             }
@@ -74,7 +71,8 @@ class Converter extends Component
         $conversionData = UnitConversion::where('conversion_to', $minUnit->id)
             ->where('conversion_from', $id)
             ->first();
-        return  $rate/$conversionData->rate ;
+
+        return  $rate / $conversionData->rate;
     }
 
     public function getRate(Unit $biggerUnit): float|int
@@ -83,7 +81,7 @@ class Converter extends Component
             ->whereMeasurementUnitId($biggerUnit->measurement_unit_id)
             ->first();
 
-        if (!empty($smallerUnit)) {
+        if (! empty($smallerUnit)) {
             $conversionRate = UnitConversion::where('conversion_to', $smallerUnit->id)
                 ->where('conversion_from', $biggerUnit->id)
                 ->first();
@@ -98,31 +96,35 @@ class Converter extends Component
     {
         if ($unit->position - 1 > 0) {
             $biggerUnit = Unit::where('position', $unit->position - 1)->first();
-            if (!empty($biggerUnit)) {
+            if (! empty($biggerUnit)) {
                 $conversionRate = UnitConversion::where('conversion_to', $biggerUnit->id)
                     ->where('conversion_from', $unit->id)
                     ->first();
-                if (!empty($conversionRate->rate)) {
+                if (! empty($conversionRate->rate)) {
                     $totalData = $this->convertedData * $conversionRate->rate;
                     $wholePart = floor($totalData);
                     $fraction = $totalData - $wholePart;
                     $this->convertedData = $wholePart;
-                    return ($fraction / $conversionRate->rate);
+
+                    return $fraction / $conversionRate->rate;
                 }
+
                 return 0;
             }
+
             return $this->convertedData;
         }
+
         return $this->convertedData;
     }
 
     public function render()
     {
         $this->convert();
-        if (!empty($this->conversion_id)) {
+        if (! empty($this->conversion_id)) {
             $this->units = Unit::where('measurement_unit_id', $this->conversion_id)->orderByDesc('position')->get();
         }
+
         return view('livewire.converter');
     }
-
 }

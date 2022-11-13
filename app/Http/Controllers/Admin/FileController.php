@@ -12,6 +12,7 @@ class FileController extends Controller
     public function index()
     {
         $files = File::whereNull('model_type')->get();
+
         return view('admin.files.index', compact('files'));
     }
 
@@ -20,7 +21,7 @@ class FileController extends Controller
         return response()->json([
             'fileName' => $file->file_name,
             'uploaded' => true,
-            'url' => $file->file_url
+            'url' => $file->file_url,
         ]);
     }
 
@@ -30,17 +31,18 @@ class FileController extends Controller
             $file = File::create([
                 'file_name' => pathinfo($request->file('upload')?->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $request->file('upload')?->getClientOriginalExtension(),
-                'file' => $request->file('upload')?->store('editor/file', 'public')
+                'file' => $request->file('upload')?->store('editor/file', 'public'),
             ]);
 
             return response()->json([
                 'fileName' => $file->file_name,
                 'uploaded' => true,
-                'url' => $file->file_url
+                'url' => $file->file_url,
             ]);
         }
+
         return response()->json([
-            'uploaded' => false
+            'uploaded' => false,
         ]);
     }
 
@@ -51,6 +53,7 @@ class FileController extends Controller
         }
         toast('फाइल सफलतापूर्वक मेटियो', 'success');
         $file->delete();
+
         return back();
     }
 }

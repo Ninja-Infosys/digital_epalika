@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $ward_meetings_count = MeetingEvent::where('event_for', 'ward')->count();
         $municipal_meetings_count = MeetingEvent::where('event_for', 'municipal')->count();
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
-        $organizations_count=Organization::where('is_active',1)->count();
+        $organizations_count = Organization::where('is_active', 1)->count();
 
         return view('admin.dashboard', compact(['user_count',
             'grievance_user_count',
@@ -48,7 +48,7 @@ class DashboardController extends Controller
             'ward_meetings_count',
             'grievanceTypes',
             'unseen_grievances',
-            'organizations_count'
+            'organizations_count',
         ]));
     }
 }

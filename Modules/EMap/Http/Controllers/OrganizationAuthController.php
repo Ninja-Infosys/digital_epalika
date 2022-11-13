@@ -11,7 +11,6 @@ use Modules\EMap\Http\Requests\StorePasswordRequest;
 
 class OrganizationAuthController extends Controller
 {
-
     public function showOrganizationLoginForm()
     {
         return view('emap::organization.auth.login');
@@ -20,7 +19,8 @@ class OrganizationAuthController extends Controller
     public function organizationLogin(Request $request): RedirectResponse
     {
         if (config('app.env') === 'production') {
-            $request->validate([
+            $request->validate(
+                [
                 'email' => 'required|email',
                 'password' => 'required|min:6',
                 'g-recaptcha-response' => ['recaptcha'],
@@ -28,43 +28,41 @@ class OrganizationAuthController extends Controller
                 ['g-recaptcha-response.recaptcha' => 'Please verify captcha']
             );
         } else {
-            $request->validate([
-                    'email' => 'required|email',
-                    'password' => 'required|min:6'
-                ]
+            $request->validate(
+                [
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+            ]
             );
         }
 
-
         if (Auth::guard('organization')->attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => 1], $request->get('remember'))) {
-
             return redirect()->route('organization.admin.dashboard');
         }
+
         return back()->withInput($request->only('email', 'remember'));
     }
 
     public function logout()
     {
         Auth::guard('organization')->logout();
+
         return redirect('/');
     }
-
 
     public function showOrganizationRegisterForm()
     {
         return view('emap::organization.auth.register');
     }
 
-
     public function showOrganizationRegisterFormPerson()
     {
         return view('emap::organization.auth.register_person');
     }
 
-
     public function invitation(Organization $organization)
     {
-        if (!request()->hasValidSignature() || $organization->password) {
+        if (! request()->hasValidSignature() || $organization->password) {
             abort(401);
         }
 
@@ -84,13 +82,12 @@ class OrganizationAuthController extends Controller
 
     public function store(StorePasswordRequest $request)
     {
-
         $redirect = redirect()->route('organization.admin.dashboard');
         $user = auth('organization')->user();
 
-        if (!$user?->password) {
+        if (! $user?->password) {
             $user?->update([
-                'password' => $request->input('password')
+                'password' => $request->input('password'),
             ]);
 
             toast('पासवर्ड सफलतापुर्वक राखियो', 'success');

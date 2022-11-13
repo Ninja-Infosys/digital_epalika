@@ -4,7 +4,6 @@ namespace Modules\DigitalBoard\Http\Requests\Notice;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
 class StoreNoticeRequest extends FormRequest
 {
@@ -21,9 +20,9 @@ class StoreNoticeRequest extends FormRequest
             'description' => ['nullable'],
             'closed_at' => ['nullable'],
             'show_on_index' => ['nullable', 'boolean'],
-//            'type'=>'Notice',
-//            'files' => ['required_if:type,Notice','nullable', 'array'],
-//            'files.*' => ['mimes:png,jpeg,jpg'],
+            //            'type'=>'Notice',
+            //            'files' => ['required_if:type,Notice','nullable', 'array'],
+            //            'files.*' => ['mimes:png,jpeg,jpg'],
         ];
     }
 
@@ -31,7 +30,7 @@ class StoreNoticeRequest extends FormRequest
     {
         return [
             'title.required' => 'शिर्षक अनिबार्य छ।',
-            'date.required' => 'मिति अनिबार्य छ।'
+            'date.required' => 'मिति अनिबार्य छ।',
         ];
     }
 }

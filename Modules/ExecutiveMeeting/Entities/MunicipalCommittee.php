@@ -15,12 +15,14 @@ use Illuminate\Support\Str;
 
 class MunicipalCommittee extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -35,7 +37,7 @@ class MunicipalCommittee extends Model
         'ward_no',
         'village',
         'tole',
-        'position'
+        'position',
     ];
 
     public function getPhotoUrlAttribute(): string
@@ -47,8 +49,8 @@ class MunicipalCommittee extends Model
 
     public function setPhotoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('municipal_committee/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['photo'] = $value->store('municipal_committee/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 

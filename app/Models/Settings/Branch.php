@@ -12,17 +12,19 @@ use Modules\HelpDesk\Entities\Service;
 
 class Branch extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
         'branch_id',
-        'branch_name'
+        'branch_name',
     ];
 
     public function branch(): BelongsTo

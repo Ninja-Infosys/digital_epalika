@@ -2,7 +2,7 @@
 
 namespace Modules\ExecutiveMeeting\Enums;
 
-enum  NotificationTypeEnum: string
+enum NotificationTypeEnum: string
 {
     case ONE_TIME = 'one time';
     case WEEKLY = 'weekly';

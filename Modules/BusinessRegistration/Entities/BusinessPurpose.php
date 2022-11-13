@@ -9,16 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BusinessPurpose extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
-        'title'
+        'title',
     ];
 
     public function businessDetails(): BelongsToMany

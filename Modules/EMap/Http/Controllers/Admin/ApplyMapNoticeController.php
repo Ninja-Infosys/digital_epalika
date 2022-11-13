@@ -2,9 +2,8 @@
 
 namespace Modules\EMap\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ApplyMapNoticeController extends Controller
 {

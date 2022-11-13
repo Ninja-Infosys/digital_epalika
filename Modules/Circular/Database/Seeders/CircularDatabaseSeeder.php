@@ -9,7 +9,7 @@ class CircularDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            CircularPermissionTableSeeder::class
+            CircularPermissionTableSeeder::class,
         ]);
     }
 }

@@ -30,7 +30,7 @@ class StoreServiceEmployeeRequest extends FormRequest
             'photo.image' => 'फोटो फर्ममा हुनुपर्छ ',
             'email.email' => 'इमेल फर्ममा हुनुपर्छ ',
             'designation.required' => 'पद आबश्यक छ ',
-            'position.integer' => 'स्थिति अंकमा हुनुपर्छ '
+            'position.integer' => 'स्थिति अंकमा हुनुपर्छ ',
         ];
     }
 }

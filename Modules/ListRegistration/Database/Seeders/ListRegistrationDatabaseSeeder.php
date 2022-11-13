@@ -8,6 +8,5 @@ class ListRegistrationDatabaseSeeder extends Seeder
 {
     public function run()
     {
-
     }
 }

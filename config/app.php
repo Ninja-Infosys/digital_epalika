@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'debug' => (bool)env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -214,5 +214,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
-    'otp_expiry_time' => env('OTP_EXPIRY_TIME', 5)
+    'otp_expiry_time' => env('OTP_EXPIRY_TIME', 5),
 ];

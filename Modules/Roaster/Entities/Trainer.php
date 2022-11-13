@@ -20,12 +20,13 @@ use Illuminate\Support\Str;
 
 class Trainer extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -50,7 +51,6 @@ class Trainer extends Model
         'experience_as_trainee',
         'experience_as_trainer',
     ];
-
 
     public function designation(): BelongsTo
     {
@@ -86,8 +86,8 @@ class Trainer extends Model
 
     public function setPhotoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('trainer/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['photo'] = $value->store('trainer/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 

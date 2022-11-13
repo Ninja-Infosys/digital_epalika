@@ -11,7 +11,7 @@ class PrintButton extends Component
 
     public function __construct(public $title)
     {
-        $this->setting = OfficeSetting::with('province','district','localBody')->first();
+        $this->setting = OfficeSetting::with('province', 'district', 'localBody')->first();
     }
 
     public function render()

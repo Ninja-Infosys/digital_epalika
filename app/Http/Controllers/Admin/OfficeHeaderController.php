@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\OfficeHeader\UpdateOfficeHeaderRequest;
 use App\Models\OfficeHeader;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class OfficeHeaderController extends Controller
 {
-
     public function edit(OfficeHeader $officeHeader)
     {
         return view('admin.setting.officeSetting.edit', compact('officeHeader'));
@@ -19,6 +17,7 @@ class OfficeHeaderController extends Controller
     {
         $officeHeader->update($request->validated());
         toast('सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.officeSetting.index'));
     }
 
@@ -26,6 +25,7 @@ class OfficeHeaderController extends Controller
     {
         $officeHeader->delete();
         toast('सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 }

@@ -4,7 +4,6 @@ return [
     /**
      * Show or hide form in trainer form
      **/
-
     'status' => [
         'bankDetailForm' => env('TRAINER_STATUS_BANK_DETAIL_FORM', true),
         'experienceForm' => env('TRAINER_STATUS_EXPERIENCE_FORM', true),
@@ -12,13 +11,12 @@ return [
         'experienceAsTraineeForm' => env('TRAINER_STATUS_EXPERIENCE_AS_TRAINEE_FORM', true),
         'experienceAsTrainerForm' => env('TRAINER_STATUS_EXPERIENCE_AS_TRAINER_FORM', true),
         'otherDocumentForm' => env('TRAINER_STATUS_OTHER_DOCUMENT_FORM', false),
-        'compactForm' =>env('TRAINER_COMPACT_FORM', true)
+        'compactForm' => env('TRAINER_COMPACT_FORM', true),
     ],
     /**
      * Type of form in trainer form
      * it takes  "compact" or "extended" type only
      **/
-
     'type' => [
         'bankDetailForm' => env('TRAINER_BANK_DETAIL_FORM_TYPE', 'compact'),
         'experienceForm' => env('TRAINER_EXPERIENCE_FORM_TYPE', 'compact'),

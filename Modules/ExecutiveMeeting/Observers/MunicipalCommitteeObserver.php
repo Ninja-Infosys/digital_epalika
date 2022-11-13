@@ -6,11 +6,11 @@ use Modules\ExecutiveMeeting\Entities\MunicipalCommittee;
 
 class MunicipalCommitteeObserver
 {
-
     public function creating(MunicipalCommittee $municipalCommittee)
     {
         if (is_null($municipalCommittee->position)) {
             $municipalCommittee->position = MunicipalCommittee::max('position') + 1;
+
             return;
         }
 
@@ -35,11 +35,11 @@ class MunicipalCommitteeObserver
 
         if ($municipalCommittee->getOriginal('position') > $municipalCommittee->position) {
             $positionRange = [
-                $municipalCommittee->position, $municipalCommittee->getOriginal('position')
+                $municipalCommittee->position, $municipalCommittee->getOriginal('position'),
             ];
         } else {
             $positionRange = [
-                $municipalCommittee->getOriginal('position'), $municipalCommittee->position
+                $municipalCommittee->getOriginal('position'), $municipalCommittee->position,
             ];
         }
 

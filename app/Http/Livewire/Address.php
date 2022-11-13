@@ -10,20 +10,26 @@ use Livewire\Component;
 class Address extends Component
 {
     public $province_id = '';
+
     public $district_id = '';
+
     public $local_body_id = '';
+
     public $ward_no = '';
 
     public $provinces = [];
+
     public $districts = [];
+
     public $localBodies = [];
+
     public $wards = '';
 
     public function mount($address = null)
     {
         $this->provinces = Province::all();
 
-        if (!empty($address)) {
+        if (! empty($address)) {
             $this->province_id = $address['province_id'] ?? '';
             $this->district_id = $address['district_id'] ?? '';
             $this->local_body_id = $address['local_body_id'] ?? '';
@@ -33,13 +39,13 @@ class Address extends Component
 
     public function render()
     {
-        if (!empty($this->province_id)) {
+        if (! empty($this->province_id)) {
             $this->districts = Province::with('districts')->findOrFail($this->province_id)->districts;
         }
-        if (!empty($this->district_id)) {
+        if (! empty($this->district_id)) {
             $this->localBodies = District::with('localBodies')->findOrFail($this->district_id)->localBodies;
         }
-        if (!empty($this->local_body_id)) {
+        if (! empty($this->local_body_id)) {
             $this->wards = LocalBody::findOrFail($this->local_body_id)->wards;
         }
 

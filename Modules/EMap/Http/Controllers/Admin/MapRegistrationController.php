@@ -13,10 +13,10 @@ use Modules\EMap\Http\Requests\MapRegistration\UpdateMapRegistrationRequest;
 
 class MapRegistrationController extends Controller
 {
-
     public function create(MapApply $mapApply)
     {
         $mapApply->load(['storeyDetails', 'storeyDetails.mapFee']);
+
         return view('emap::admin.map.map-registration.create', compact('mapApply'));
     }
 
@@ -33,15 +33,15 @@ class MapRegistrationController extends Controller
                 $registrationNo = MapApply::whereFiscalYearId($mapApply->fiscal_year_id)->max('registration_no') + 1;
                 $mapApply->update([
                     'registration_date' => now(),
-                    'registration_no' => $registrationNo
+                    'registration_no' => $registrationNo,
                 ]);
             }
         });
 
         toast('दस्तुर तथा दर्ता सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
-
 
     public function edit(MapApply $mapApply, MapRegistration $mapRegistration)
     {
@@ -50,7 +50,7 @@ class MapRegistrationController extends Controller
 
     public function update(UpdateMapRegistrationRequest $request, MapApply $mapApply, MapRegistration $mapRegistration): RedirectResponse
     {
-        DB::transaction(function () use ($request, $mapApply, $mapRegistration) {
+        DB::transaction(function () use ($request, $mapRegistration) {
             $mapRegistration->update($request->validated());
 
             foreach ($request->input('particulars') as $particular) {
@@ -63,7 +63,7 @@ class MapRegistrationController extends Controller
         });
 
         toast('दस्तुर तथा दर्ता सफलतापूर्वक अपडेट भयो', 'success');
+
         return back();
     }
-
 }

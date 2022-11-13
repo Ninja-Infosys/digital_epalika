@@ -2,8 +2,6 @@
 
 namespace Modules\Circular\Database\Seeders;
 
-use App\Models\UserManagement\Permission;
-use App\Models\UserManagement\Role;
 use App\Traits\StorePermissionTrait;
 use Illuminate\Database\Seeder;
 

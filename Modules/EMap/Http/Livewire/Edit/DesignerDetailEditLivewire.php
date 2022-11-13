@@ -11,7 +11,9 @@ use Modules\EMap\Enums\PostsEnum;
 class DesignerDetailEditLivewire extends Component
 {
     public MapApply $mapApply;
+
     public array $designerDetails = [];
+
     public ?int $dataToEdit = null;
 
     public function mount(MapApply $mapApply): void
@@ -38,7 +40,7 @@ class DesignerDetailEditLivewire extends Component
         }
 
         foreach (PostsEnum::cases() as $postsEnum) {
-            if (!$availablePost->unique()->contains($postsEnum->value)) {
+            if (! $availablePost->unique()->contains($postsEnum->value)) {
                 $this->designerDetails[] = [
                     'post' => $postsEnum->value,
                     'name' => null,
@@ -56,7 +58,6 @@ class DesignerDetailEditLivewire extends Component
         }
     }
 
-
     public function rules(): array
     {
         if ($this->dataToEdit === null) {
@@ -65,17 +66,17 @@ class DesignerDetailEditLivewire extends Component
 
         return [
             'designerDetails' => ['required', 'array'],
-            'designerDetails.' . $this->dataToEdit . '.name' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.father_name' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.grandfather_name' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.phone' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.address' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.local_body' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.ward_no' => ['required', 'integer'],
-            'designerDetails.' . $this->dataToEdit . '.post' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.nec_council_no' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.local_body_registration_no' => ['required'],
-            'designerDetails.' . $this->dataToEdit . '.consulting_firm_name' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.name' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.father_name' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.grandfather_name' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.phone' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.address' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.local_body' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.ward_no' => ['required', 'integer'],
+            'designerDetails.'.$this->dataToEdit.'.post' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.nec_council_no' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.local_body_registration_no' => ['required'],
+            'designerDetails.'.$this->dataToEdit.'.consulting_firm_name' => ['required'],
         ];
     }
 
@@ -83,7 +84,6 @@ class DesignerDetailEditLivewire extends Component
     {
         $this->validateOnly($propertyName);
     }
-
 
     public function setDataForEdit(?int $index = null): void
     {
@@ -97,7 +97,7 @@ class DesignerDetailEditLivewire extends Component
             DB::transaction(function () {
                 $dataToSave = $this->designerDetails[$this->dataToEdit];
 
-                if (!empty($dataToSave['id'])) {
+                if (! empty($dataToSave['id'])) {
                     DesignerDetail::find($dataToSave['id'])?->update($dataToSave);
                 } else {
                     DesignerDetail::create($dataToSave + ['map_apply_id' => $this->mapApply->id]);
@@ -107,9 +107,9 @@ class DesignerDetailEditLivewire extends Component
             $this->reset('dataToEdit');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }

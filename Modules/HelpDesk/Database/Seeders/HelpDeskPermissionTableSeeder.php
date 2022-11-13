@@ -2,7 +2,6 @@
 
 namespace Modules\HelpDesk\Database\Seeders;
 
-use App\Models\UserManagement\Permission;
 use App\Traits\StorePermissionTrait;
 use Illuminate\Database\Seeder;
 

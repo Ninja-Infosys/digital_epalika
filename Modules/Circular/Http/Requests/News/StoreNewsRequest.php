@@ -2,23 +2,22 @@
 
 namespace Modules\Circular\Http\Requests\News;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
 class StoreNewsRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('digitalBoardNews_create');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'title'=>['required','string','max:255'],
-            'date'=>['nullable'],
-            'description'=>['nullable'],
+            'title' => ['required', 'string', 'max:255'],
+            'date' => ['nullable'],
+            'description' => ['nullable'],
         ];
     }
 }

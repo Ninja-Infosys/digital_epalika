@@ -16,7 +16,9 @@ class DailyTaskLivewire extends Component
     use WithFileUploads;
 
     public $branches = [];
+
     public $taskCategories = [];
+
     public $taskDivisions = [];
 
     public object $dailyTask;
@@ -29,15 +31,15 @@ class DailyTaskLivewire extends Component
         'task_division_id' => null,
         'documents' => null,
         'documents.*' => null,
-        'remarks' => null
+        'remarks' => null,
     ];
 
-    public function mount($dailyTask=null)
+    public function mount($dailyTask = null)
     {
-        if(!empty($dailyTask)){
-            $this->dailyTask=$dailyTask;
-            foreach ($this->form as $key=>$data){
-                $this->form[$key]=$this->dailyTask[$key];
+        if (! empty($dailyTask)) {
+            $this->dailyTask = $dailyTask;
+            foreach ($this->form as $key => $data) {
+                $this->form[$key] = $this->dailyTask[$key];
             }
         }
         $this->branches = Branch::with('branches')->whereNull('branch_id')->get();
@@ -50,7 +52,7 @@ class DailyTaskLivewire extends Component
 
     public function incrementPostCount($nepaliDate, $englishDate)
     {
-        $this->form['date'] =$nepaliDate;
+        $this->form['date'] = $nepaliDate;
         $this->form['en_date'] = $englishDate;
     }
 
@@ -62,7 +64,7 @@ class DailyTaskLivewire extends Component
         'form.task_division_id' => ['nullable', 'exists:task_divisions,id'],
         'form.documents' => ['nullable', 'array'],
         'form.documents.*' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
-        'form.remarks' => ['nullable']
+        'form.remarks' => ['nullable'],
     ];
 
     public function updated($propertyName): void
@@ -75,10 +77,10 @@ class DailyTaskLivewire extends Component
         $formData = $this->validate()['form'];
 
         DB::transaction(function () use ($formData) {
-            if(!empty($this->dailyTask)){
-                $dailyTask=$this->dailyTask;
+            if (! empty($this->dailyTask)) {
+                $dailyTask = $this->dailyTask;
                 $dailyTask->update($formData);
-            }else{
+            } else {
                 $dailyTask = DailyTask::create([
                     'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'date' => $formData['date'],
@@ -89,41 +91,42 @@ class DailyTaskLivewire extends Component
                     'remarks' => $formData['remarks'],
                 ]);
             }
-            if (!empty($this->form['documents'])) {
+            if (! empty($this->form['documents'])) {
                 foreach ($this->form['documents'] as $document) {
                     $dailyTask->files()->create([
                         'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                         'extension' => $document->getClientOriginalExtension(),
-                        'file' => $document->store('task_management/daily_tasks/documents', 'public')
+                        'file' => $document->store('task_management/daily_tasks/documents', 'public'),
                     ]);
                 }
             }
         });
 
-        if(!empty($this->dailyTask)){
+        if (! empty($this->dailyTask)) {
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "उजुरी पत्र सफलतापूर्वक updated",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'उजुरी पत्र सफलतापूर्वक updated',
             ]);
+
             return redirect(route('admin.taskManagement.dailyTask.index'));
-        }else{
+        } else {
             $this->reset('form', 'taskCategories', 'taskDivisions');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "उजुरी पत्र सफलतापूर्वक थपियो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'उजुरी पत्र सफलतापूर्वक थपियो',
             ]);
         }
     }
 
     public function render()
     {
-        if (!empty($this->form['branch_id'])) {
+        if (! empty($this->form['branch_id'])) {
             $this->taskCategories = TaskCategory::where('branch_id', $this->form['branch_id'])->get();
         }
-        if (!empty($this->form['task_category_id'])) {
+        if (! empty($this->form['task_category_id'])) {
             $this->taskDivisions = TaskDivision::where('task_category_id', $this->form['task_category_id'])->get();
         }
 

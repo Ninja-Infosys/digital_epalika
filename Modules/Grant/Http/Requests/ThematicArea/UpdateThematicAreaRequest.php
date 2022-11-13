@@ -15,7 +15,7 @@ class UpdateThematicAreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required',Rule::unique('thematic_areas','title')->withoutTrashed()->ignore($this->thematicArea)]
+            'title' => ['required', Rule::unique('thematic_areas', 'title')->withoutTrashed()->ignore($this->thematicArea)],
         ];
     }
 

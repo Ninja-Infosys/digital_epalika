@@ -17,11 +17,15 @@ class ComplaintApplicationLivewire extends Component
     public $provinces = [];
 
     public $complainantDistricts = [];
+
     public $complainantLocalBodies = [];
+
     public $complainantWards = [];
 
     public $defendantDistricts = [];
+
     public $defendantLocalBodies = [];
+
     public $defendantWards = [];
 
     public array $form = [
@@ -50,7 +54,7 @@ class ComplaintApplicationLivewire extends Component
         'applicant_name' => null,
         'applicant_phone' => null,
         'applicant_address' => null,
-        'applicant_signature' => null
+        'applicant_signature' => null,
     ];
 
     public function mount()
@@ -95,7 +99,7 @@ class ComplaintApplicationLivewire extends Component
         'form.applicant_name' => ['required', 'string', 'max:255'],
         'form.applicant_phone' => ['required'],
         'form.applicant_address' => ['nullable'],
-        'form.applicant_signature' => ['required', 'image']
+        'form.applicant_signature' => ['required', 'image'],
     ];
 
     public function updated($propertyName): void
@@ -106,37 +110,37 @@ class ComplaintApplicationLivewire extends Component
     public function submitFormData()
     {
         ComplaintApplication::create($this->validate()['form'] + [
-                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
-            ]);
+            'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+        ]);
 
         $this->reset('form', 'complainantDistricts', 'complainantLocalBodies', 'complainantWards', 'defendantDistricts', 'defendantLocalBodies', 'defendantWards');
 
         $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "उजुरी पत्र सफलतापूर्वक थपियो",
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'उजुरी पत्र सफलतापूर्वक थपियो',
         ]);
     }
 
     public function render()
     {
-        if (!empty($this->form['complainant_province_id'])) {
+        if (! empty($this->form['complainant_province_id'])) {
             $this->complainantDistricts = District::where('province_id', $this->form['complainant_province_id'])->get();
         }
-        if (!empty($this->form['complainant_district_id'])) {
+        if (! empty($this->form['complainant_district_id'])) {
             $this->complainantLocalBodies = LocalBody::where('district_id', $this->form['complainant_district_id'])->get();
         }
-        if (!empty($this->form['complainant_local_body_id'])) {
+        if (! empty($this->form['complainant_local_body_id'])) {
             $this->complainantWards = LocalBody::findOrFail($this->form['complainant_local_body_id'])->ward_no;
         }
 
-        if (!empty($this->form['defendant_province_id'])) {
+        if (! empty($this->form['defendant_province_id'])) {
             $this->defendantDistricts = District::where('province_id', $this->form['defendant_province_id'])->get();
         }
-        if (!empty($this->form['defendant_district_id'])) {
+        if (! empty($this->form['defendant_district_id'])) {
             $this->defendantLocalBodies = LocalBody::where('district_id', $this->form['defendant_district_id'])->get();
         }
-        if (!empty($this->form['defendant_local_body_id'])) {
+        if (! empty($this->form['defendant_local_body_id'])) {
             $this->defendantWards = LocalBody::findOrFail($this->form['defendant_local_body_id'])->ward_no;
         }
 

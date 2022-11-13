@@ -7,7 +7,6 @@ use App\Models\UserManagement\Role;
 
 trait StorePermissionTrait
 {
-
     public function storePermission($permissions): void
     {
         Permission::whereIn('title', $permissions)->delete();

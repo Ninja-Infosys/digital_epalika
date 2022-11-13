@@ -9,13 +9,13 @@ class ServiceProcessLivewire extends Component
 {
     public $serviceProcesses = [];
 
-    public function mount($service=null)
+    public function mount($service = null)
     {
-        if (!empty($service)) {
+        if (! empty($service)) {
             foreach ($service->serviceProcesses as $serviceProcess) {
                 $this->serviceProcesses[] = [
                     'id' => $serviceProcess->id,
-                    'description' => $serviceProcess->description
+                    'description' => $serviceProcess->description,
                 ];
             }
         } else {
@@ -30,7 +30,7 @@ class ServiceProcessLivewire extends Component
 
     public function removeRow($index)
     {
-        if (!empty($this->serviceProcesses[$index]['id'])) {
+        if (! empty($this->serviceProcesses[$index]['id'])) {
             ServiceProcess::find($this->serviceProcesses[$index]['id'])->delete();
         }
 

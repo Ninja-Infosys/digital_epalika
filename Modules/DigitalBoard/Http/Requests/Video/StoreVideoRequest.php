@@ -16,14 +16,14 @@ class StoreVideoRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string', 'max:255'],
-            'video' => ['required']
+            'video' => ['required'],
         ];
     }
 
     public function messages()
     {
         return [
-          'video.required'=>'भिडियो अनिबार्य छ '
+            'video.required' => 'भिडियो अनिबार्य छ ',
         ];
     }
 }

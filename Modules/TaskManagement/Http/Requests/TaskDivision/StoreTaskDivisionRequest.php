@@ -6,23 +6,24 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTaskDivisionRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'task_category_id' => ['required'],
-            'title'=> ['required']
+            'title' => ['required'],
         ];
     }
+
     public function messages(): array
     {
         return[
-            'task_category_id.required'=>'कार्य आवश्यक छ',
-            'title.required'=> 'शीर्षक आवश्यक छ'
+            'task_category_id.required' => 'कार्य आवश्यक छ',
+            'title.required' => 'शीर्षक आवश्यक छ',
         ];
     }
 }

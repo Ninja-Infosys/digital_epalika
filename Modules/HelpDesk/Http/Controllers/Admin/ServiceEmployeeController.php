@@ -19,12 +19,12 @@ class ServiceEmployeeController extends Controller
         return view('helpdesk::admin.service_employee.index', compact('service'));
     }
 
-
     public function store(StoreServiceEmployeeRequest $request, Service $service)
     {
         $service->serviceEmployees()->create($request->validated());
 
         toast('कर्मचारी सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 

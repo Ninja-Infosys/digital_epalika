@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class OfficeSettingResource extends JsonResource
 {
-
     public function toArray($request)
     {
         return [
@@ -17,8 +16,8 @@ class OfficeSettingResource extends JsonResource
             'logo2' => $this->logo2_url ?? '',
             'email' => $this->email ?? '',
             'phone' => $this->phone ?? '',
-            'address'=>$this->site_address??'',
-            'background_image' => $this->background_image_url ?? ''
+            'address' => $this->site_address ?? '',
+            'background_image' => $this->background_image_url ?? '',
         ];
     }
 }

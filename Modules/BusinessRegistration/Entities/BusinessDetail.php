@@ -17,12 +17,13 @@ use Modules\BusinessRegistration\Enums\SourceOfCapital;
 
 class BusinessDetail extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -58,9 +59,10 @@ class BusinessDetail extends Model
         'registration_date_ne',
         'registration_date_en',
     ];
+
     protected $casts = [
         'business_nature' => BusinessNature::class,
-        'source_of_capital' => SourceOfCapital::class
+        'source_of_capital' => SourceOfCapital::class,
 
     ];
 

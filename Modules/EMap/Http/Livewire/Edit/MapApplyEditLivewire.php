@@ -2,7 +2,6 @@
 
 namespace Modules\EMap\Http\Livewire\Edit;
 
-use App\Models\Address\District;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\EMap\Entities\MapApply;
@@ -29,13 +28,14 @@ class MapApplyEditLivewire extends Component
     public bool $editForm = false;
 
     public $open_structure_type = 0;
+
     public $structureTypes;
 
     public $allDistricts;
 
     public function setEditForm(): void
     {
-        $this->editForm = !$this->editForm;
+        $this->editForm = ! $this->editForm;
     }
 
     public function mount(MapApply $mapApply, $districts): void
@@ -62,7 +62,7 @@ class MapApplyEditLivewire extends Component
 
     public function setStructureType(): void
     {
-        $this->open_structure_type = !$this->open_structure_type;
+        $this->open_structure_type = ! $this->open_structure_type;
     }
 
     protected array $applyMapValidations = [
@@ -79,19 +79,16 @@ class MapApplyEditLivewire extends Component
         'applyMap.height' => ['required', 'numeric'],
     ];
 
-
     public function rules(): array
     {
         return $this->applyMapValidations;
     }
-
 
     public function saveFormData(): void
     {
         if ($this->editForm) {
             $this->validate();
             DB::transaction(function () {
-
                 if ($this->applyMap['structure_type']) {
                     $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
 
@@ -99,15 +96,14 @@ class MapApplyEditLivewire extends Component
                 }
 
                 $this->mapApply->update($this->applyMap);
-
             });
 
             $this->reset('editForm');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }
@@ -132,7 +128,6 @@ class MapApplyEditLivewire extends Component
             'applyMap.height.numeric' => 'भवनको उचाई नम्बरमा हुनुपर्छ|',
         ];
     }
-
 
     public function updated($propertyName): void
     {

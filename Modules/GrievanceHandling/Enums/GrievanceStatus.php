@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Modules\GrievanceHandling\Enums;
 
 enum GrievanceStatus: string

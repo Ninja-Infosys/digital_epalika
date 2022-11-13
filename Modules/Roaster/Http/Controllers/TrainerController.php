@@ -2,10 +2,8 @@
 
 namespace Modules\Roaster\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Modules\Roaster\Entities\Trainer;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
@@ -13,7 +11,6 @@ class TrainerController extends Controller
 {
     public function index()
     {
-
         abort_if(
             Gate::denies('training_access'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -21,7 +18,8 @@ class TrainerController extends Controller
         );
 
         $trainers = Trainer::with('department', 'designation')->latest()->get();
-        return view('roaster::admin.trainer.index',compact('trainers'));
+
+        return view('roaster::admin.trainer.index', compact('trainers'));
     }
 
     public function create()
@@ -29,11 +27,8 @@ class TrainerController extends Controller
         return view('roaster::create');
     }
 
-
-
     public function show(Trainer $trainer)
     {
-
         abort_if(
             Gate::denies('trainer_access'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -55,12 +50,11 @@ class TrainerController extends Controller
             'trainerBankDetails'
         );
 
-        return view('roaster::admin.trainer.show',compact('trainer'));
+        return view('roaster::admin.trainer.show', compact('trainer'));
     }
 
     public function edit(Trainer $trainer)
     {
-
         abort_if(
             Gate::denies('trainer_edit'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -74,6 +68,7 @@ class TrainerController extends Controller
             'trainerQualifications',
             'trainerBankDetails'
         );
-        return view('roaster::admin.trainer.edit',compact('trainer'));
+
+        return view('roaster::admin.trainer.edit', compact('trainer'));
     }
 }

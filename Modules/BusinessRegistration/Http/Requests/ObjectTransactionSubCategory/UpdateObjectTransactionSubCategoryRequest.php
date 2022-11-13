@@ -20,7 +20,7 @@ class UpdateObjectTransactionSubCategoryRequest extends FormRequest
             'category_a' => ['required', 'string'],
             'category_b' => ['required', 'string'],
             'category_c' => ['required', 'string'],
-            'object_transaction_id' => ['nullable', Rule::exists('object_transactions', 'id')->withoutTrashed()]
+            'object_transaction_id' => ['nullable', Rule::exists('object_transactions', 'id')->withoutTrashed()],
         ];
     }
 }

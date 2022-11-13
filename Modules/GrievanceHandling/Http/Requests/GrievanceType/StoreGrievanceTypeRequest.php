@@ -16,7 +16,7 @@ class StoreGrievanceTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', Rule::unique('grievance_types', 'title')->withoutTrashed()]
+            'title' => ['required', Rule::unique('grievance_types', 'title')->withoutTrashed()],
         ];
     }
 

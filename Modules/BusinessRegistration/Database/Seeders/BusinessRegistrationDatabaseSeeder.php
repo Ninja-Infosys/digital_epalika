@@ -9,7 +9,7 @@ class BusinessRegistrationDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            BusinessRegistrationPermissionTableSeeder::class
+            BusinessRegistrationPermissionTableSeeder::class,
         ]);
     }
 }

@@ -15,7 +15,8 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('registration_access'),
+        abort_if(
+            Gate::denies('registration_access'),
             403,
             'You are not allowed to registration access'
         );
@@ -27,26 +28,28 @@ class RegistrationController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('registration_create'),
+        abort_if(
+            Gate::denies('registration_create'),
             403,
             'You are not allowed to registration create'
         );
-        $registration_no = 'R-' . Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
+        $registration_no = 'R-'.Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
 
         return view('circular::admin/registration.create', compact('registration_no'));
     }
 
     public function store(StoreRegistrationRequest $request)
     {
-        abort_if(Gate::denies('registration_create'),
+        abort_if(
+            Gate::denies('registration_create'),
             403,
             'You are not allowed to registration create'
         );
 
         DB::transaction(function () use ($request) {
             $registration = Registration::create($request->validated() + [
-                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
-                ]);
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+            ]);
 
             $this->uploadDocuments($request, $registration);
         });
@@ -58,7 +61,8 @@ class RegistrationController extends Controller
 
     public function show(Registration $registration)
     {
-        abort_if(Gate::denies('registration_access'),
+        abort_if(
+            Gate::denies('registration_access'),
             403,
             'You are not allowed to registration access'
         );
@@ -69,7 +73,8 @@ class RegistrationController extends Controller
 
     public function edit(Registration $registration)
     {
-        abort_if(Gate::denies('registration_edit'),
+        abort_if(
+            Gate::denies('registration_edit'),
             403,
             'You are not allowed to registration edit'
         );
@@ -79,13 +84,13 @@ class RegistrationController extends Controller
 
     public function update(UpdateRegistrationRequest $request, Registration $registration)
     {
-        abort_if(Gate::denies('registration_edit'),
+        abort_if(
+            Gate::denies('registration_edit'),
             403,
             'You are not allowed to registration edit'
         );
 
         DB::transaction(function () use ($request, $registration) {
-
             if ($request->hasFile('signature_image') && $registration->signature_image) {
                 $this->deleteFile($registration->signature_image);
             }
@@ -104,7 +109,8 @@ class RegistrationController extends Controller
 
     public function destroy(Registration $registration)
     {
-        abort_if(Gate::denies('registration_delete'),
+        abort_if(
+            Gate::denies('registration_delete'),
             403,
             'You are not allowed to registration delete'
         );
@@ -120,12 +126,10 @@ class RegistrationController extends Controller
         toast('दर्ता सफलतापूर्वक मेटियो', 'success');
 
         return back();
-
     }
 
     public function registrationReport()
     {
-
         return view('circular::admin/registration.report');
     }
 
@@ -135,7 +139,7 @@ class RegistrationController extends Controller
             $registration->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('registration/' . Str::slug($registration->receiver_name, '_') . '/documents', 'public')
+                'file' => $document->store('registration/'.Str::slug($registration->receiver_name, '_').'/documents', 'public'),
             ]);
         }
     }

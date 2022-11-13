@@ -19,6 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('home',[PublicApiController::class,'home'])->name('home');
-Route::get('officeSetting',[PublicApiController::class,'officeSetting'])->name('officeSetting');
+Route::get('home', [PublicApiController::class, 'home'])->name('home');
+Route::get('officeSetting', [PublicApiController::class, 'officeSetting'])->name('officeSetting');

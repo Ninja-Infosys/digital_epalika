@@ -7,12 +7,12 @@ use Illuminate\Validation\Rule;
 
 class StoreExternalUnitConversionRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'conversion' => ['required', 'array'],

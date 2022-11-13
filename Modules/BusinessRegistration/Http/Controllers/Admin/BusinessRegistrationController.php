@@ -4,8 +4,6 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
@@ -40,13 +38,11 @@ class BusinessRegistrationController extends Controller
         $printed_data = PrintedData::where(
             [
                 'proprietor_detail_id' => $id,
-                'for' => $type
+                'for' => $type,
             ]
         )->latest()->first();
 
-
         return view('businessregistration::admin.businessRegistration.edit', compact('proprietorDetail', 'type', 'printed_data'));
-
     }
 
     public function storeData(StorePrintedDataRequest $request, $id, $type)
@@ -55,10 +51,10 @@ class BusinessRegistrationController extends Controller
             $printed_data = PrintedData::updateOrCreate(
                 [
                     'proprietor_detail_id' => $id,
-                    'for' => $type
+                    'for' => $type,
                 ],
                 [
-                    'data' => $request->input('data')
+                    'data' => $request->input('data'),
                 ]
             );
 
@@ -68,8 +64,8 @@ class BusinessRegistrationController extends Controller
         });
 
         toast('फाइल सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return back();
 
+        return back();
     }
 
     private function uploadDocuments($request, $printed_data): void
@@ -78,7 +74,7 @@ class BusinessRegistrationController extends Controller
             $printed_data->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('PrintedFile', 'public')
+                'file' => $document->store('PrintedFile', 'public'),
             ]);
         }
     }

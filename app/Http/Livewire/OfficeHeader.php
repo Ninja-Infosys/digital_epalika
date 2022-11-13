@@ -2,38 +2,34 @@
 
 namespace App\Http\Livewire;
 
-
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class OfficeHeader extends Component
 {
-
     public $officeHeaders = [];
 
-
     public $title;
-    public $font_color;
-    public $font_size;
-    public $position;
-    public $font;
 
+    public $font_color;
+
+    public $font_size;
+
+    public $position;
+
+    public $font;
 
     public function mount()
     {
-
-
     }
 
     protected $rules = [
 
-
-        'officeHeaders.*.title' => ['required','string','max:255'],
+        'officeHeaders.*.title' => ['required', 'string', 'max:255'],
         'officeHeaders.*.font_color' => ['nullable'],
-        'officeHeaders.*.font_size' => ['required','max:255'],
-        'officeHeaders.*.position' => ['nullable','integer'],
+        'officeHeaders.*.font_size' => ['required', 'max:255'],
+        'officeHeaders.*.position' => ['nullable', 'integer'],
         'officeHeaders.*.font' => ['required'],
-
 
     ];
 
@@ -62,13 +58,10 @@ class OfficeHeader extends Component
         });
 
         return redirect(route('admin.officeSetting.index'));
-
     }
 
     public function render()
     {
-
         return view('livewire.office-header');
     }
 }
-

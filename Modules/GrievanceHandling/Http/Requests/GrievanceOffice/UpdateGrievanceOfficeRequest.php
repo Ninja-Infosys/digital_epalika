@@ -8,15 +8,15 @@ use Illuminate\Validation\Rule;
 
 class UpdateGrievanceOfficeRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('grievanceOffice_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'title'=>['required',Rule::unique('grievance_offices','title')->withoutTrashed()->ignore($this->grievanceOffice)]
+            'title' => ['required', Rule::unique('grievance_offices', 'title')->withoutTrashed()->ignore($this->grievanceOffice)],
         ];
     }
 }

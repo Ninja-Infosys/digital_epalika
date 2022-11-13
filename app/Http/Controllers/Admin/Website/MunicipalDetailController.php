@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\MunicipalDetail\StoreMunicipalDetailRequest;
 use App\Http\Requests\Website\MunicipalDetail\UpdateMunicipalDetailRequest;
 use App\Models\Website\MunicipalDetail;
-use Illuminate\Http\Request;
 
 class MunicipalDetailController extends Controller
 {
@@ -26,7 +25,8 @@ class MunicipalDetailController extends Controller
     {
         MunicipalDetail::create($request->validated());
 
-        toast('नगरपालिका विवरण सफलतापूर्वक थपियो','success');
+        toast('नगरपालिका विवरण सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -37,14 +37,15 @@ class MunicipalDetailController extends Controller
 
     public function edit(MunicipalDetail $municipalDetail)
     {
-        return view('admin.website.municipal_detail.edit',compact('municipalDetail'));
+        return view('admin.website.municipal_detail.edit', compact('municipalDetail'));
     }
 
     public function update(UpdateMunicipalDetailRequest $request, MunicipalDetail $municipalDetail)
     {
         $municipalDetail->update($request->validated());
 
-        toast('नगरपालिका विवरण सफलतापूर्वक अपडेट गरियो','success');
+        toast('नगरपालिका विवरण सफलतापूर्वक अपडेट गरियो', 'success');
+
         return redirect(route('admin.website.municipalDetail.index'));
     }
 
@@ -53,6 +54,7 @@ class MunicipalDetailController extends Controller
         $municipalDetail->delete();
 
         toast('नगरपालिका विवरण सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

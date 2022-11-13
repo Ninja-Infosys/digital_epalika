@@ -6,7 +6,6 @@ use App\Models\Settings\Units\Unit;
 
 class UnitObserver
 {
-
     public function creating(Unit $unit)
     {
         if ($unit->is_smallest == 1) {
@@ -14,6 +13,7 @@ class UnitObserver
         }
         if (is_null($unit->position)) {
             $unit->position = Unit::where('measurement_unit_id', $unit->measurement_unit_id)->max('position') + 1;
+
             return;
         }
 
@@ -27,10 +27,9 @@ class UnitObserver
         }
     }
 
-
     public function updating(Unit $unit)
     {
-        if (!$unit->isClean('is_smallest') && $unit->is_smallest == 1) {
+        if (! $unit->isClean('is_smallest') && $unit->is_smallest == 1) {
             Unit::where('measurement_unit_id', $unit->measurement_unit_id)->update(['is_smallest' => 0]);
         }
 
@@ -44,11 +43,11 @@ class UnitObserver
 
         if ($unit->getOriginal('position') > $unit->position) {
             $positionRange = [
-                $unit->position, $unit->getOriginal('position')
+                $unit->position, $unit->getOriginal('position'),
             ];
         } else {
             $positionRange = [
-                $unit->getOriginal('position'), $unit->position
+                $unit->getOriginal('position'), $unit->position,
             ];
         }
 
@@ -78,5 +77,4 @@ class UnitObserver
             $lowerPriorityUnit->saveQuietly();
         }
     }
-
 }

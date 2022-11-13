@@ -16,7 +16,6 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-
     public function register()
     {
         Paginator::useBootstrapFive();
@@ -24,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Model::preventLazyLoading(!$this->app->isProduction());
+        Model::preventLazyLoading(! $this->app->isProduction());
         OfficeHeader::observe(OfficeHeaderObserver::class);
         Unit::observe(UnitObserver::class);
         MunicipalDetail::observe(MunicipalDetailObserver::class);

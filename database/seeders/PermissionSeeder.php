@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserManagement\Permission;
-use App\Models\UserManagement\Role;
 use App\Traits\StorePermissionTrait;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder

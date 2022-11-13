@@ -13,14 +13,13 @@ class LoginController extends Controller
 
         $this->middleware('guest')->except([
             'locked',
-            'unlock'
+            'unlock',
         ]);
     }
 
     public function locked()
     {
-
-        if (!session('lock-expires-at')) {
+        if (! session('lock-expires-at')) {
             return redirect('/');
         }
 
@@ -35,9 +34,9 @@ class LoginController extends Controller
     {
         $check = Hash::check($request->input('password'), $request->user()->password);
 
-        if (!$check) {
+        if (! $check) {
             return redirect()->route('login.locked')->withErrors([
-                'Your password does not match your profile.'
+                'Your password does not match your profile.',
             ]);
         }
 
