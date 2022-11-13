@@ -58,7 +58,15 @@
 
         </div>
     </section>
+
+
+    @push('style')
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
+    @endpush
     @push('scripts')
+        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
         <script>
 
             $(document).ready(function () {
@@ -90,8 +98,8 @@
                     $.ajax({
                         type: "post",
                         data: {
-                          otp:$("#otp").val(),
-                          data:$("textarea#data").val()
+                            otp:$("#otp").val(),
+                            data:$("textarea#data").val()
                         },
                         url: "{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}",
                         success: function (resp) {
@@ -106,15 +114,6 @@
                 });
             });
         </script>
-    @endpush
-
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-    @endpush
-    @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
     @endpush
 @endsection
 
