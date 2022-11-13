@@ -25,26 +25,24 @@
 .application_policy>h5, h4{
     line-height: 2rem;
 }
-@media  (max-width: 768px) and  (min-width: 480px) {
-    .mega-menu-content{
-        width: 500px;
-    }
+.mega-menu-content{
+    width: 1030px;
 }
-@media  (max-width: 999px) and  (min-width: 767px) {
-    .mega-menu-content{
-        width: 600px;
-    }
-}
-@media  (max-width: 1600px) and  (min-width: 1000px) {
-    .mega-menu-content{
-        width: 1000px;
-    }
-}
-@media  (max-width: 1600px) and (min-width:1001px ) {
-    .mega-menu-content{
-        width: 1280px;
-    }
-}
+/*@media  (max-width: 768px) and  (min-width: 480px) {*/
+/*    .mega-menu-content{*/
+/*        width: 500px;*/
+/*    }*/
+/*}*/
+/*@media  (max-width: 999px) and  (min-width: 767px) {*/
+/*    .mega-menu-content{*/
+/*        width: 600px;*/
+/*    }*/
+/*}*/
+/*@media  (max-width: 1600px) and  (min-width: 1000px) {*/
+/*    .mega-menu-content{*/
+/*        width: 1000px;*/
+/*    }*/
+/*}*/
 
 .menu_content>ul>li{
     list-style: none;

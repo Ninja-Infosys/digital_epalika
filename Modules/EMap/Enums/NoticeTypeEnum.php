@@ -51,7 +51,7 @@ enum NoticeTypeEnum: string
     case PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL = 'permission_letter_construction_work_plinth_level';
     case PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE = 'Permanent_Building_Permit_Superstructure';
     case BUILDING_COMPLETION_CERTIFICATE = 'building_completion_certificate';
-    case NOTICE_CERTIFICATE = 'notice_certificate';
+    case MAP_CERTIFICATE = 'map_certificate';
     //agreement enums
     case AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD = 'agreement_letter_supervisor_landlord)';
     case AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR = 'agreement_letter_homeowner_contractor)';
@@ -112,7 +112,7 @@ enum NoticeTypeEnum: string
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',
             self::BUILDING_COMPLETION_CERTIFICATE => 'भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र',
-            self::NOTICE_CERTIFICATE => 'नक्सा प्रमाणित प्रमाण-पत्र',
+            self::MAP_CERTIFICATE => 'नक्सा प्रमाणित प्रमाण-पत्र',
 
             //registration
             self::REGARDING_FEES_AND_REGISTRATION => 'दस्तुर तथा दर्ता सम्बन्धि',

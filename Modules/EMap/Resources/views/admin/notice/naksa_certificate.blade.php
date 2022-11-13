@@ -29,7 +29,7 @@
     </div>
     <div class="row mb-2">
         <div class="col-sm-4">
-            <h4> {{\Modules\EMap\Enums\NoticeTypeEnum::NOTICE_CERTIFICATE->label()}}</h4>
+            <h4> {{\Modules\EMap\Enums\NoticeTypeEnum::MAP_CERTIFICATE->label()}}</h4>
         </div>
         <div class="col-sm-8">
             <div class="text-sm-end">
