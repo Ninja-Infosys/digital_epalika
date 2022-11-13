@@ -1,29 +1,4 @@
 <div class="card">
-    <div class="card-header">
-        <div class="d-flex justify-content-between">
-            <h4 class="header-title">नक्सा दर्ता तथा दस्तुर सम्बन्धि</h4>
-            <div>
-                @if(!empty($mapApply->mapRegistration))
-                    <a class="btn btn-info btn-sm"
-                       href="{{route('emap.admin.map.map-apply.map-registration.edit',[$mapApply,$mapApply->mapRegistration])}}">
-                        <i class="fa fa-edit"></i> दर्ता
-                        गरिएको नक्सा अपडेट गर्नुहोस्</a>
-
-                    <button class="btn btn-sm btn-success mx-2 printButton" printElementId='printData1'
-                            requestRoute="{{route('print.application-print')}}" title="Print Application">
-                        <i class="fa fa-print"></i>
-                    </button>
-                @else
-                    <a class="btn btn-primary btn-sm"
-                       href="{{route('emap.admin.map.map-apply.map-registration.create',$mapApply)}}"> <i
-                            class="fa fa-plus"></i> नक्सा दर्ता
-                        गर्नुहोस</a>
-                @endif
-
-
-            </div>
-        </div>
-    </div>
     <div class="card-body">
         @if(!empty($mapApply->mapRegistration))
             <div class="font-black" id="printData1">

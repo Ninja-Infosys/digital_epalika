@@ -51,6 +51,19 @@
 
                                         </div>
                                     @endforeach
+                                        <div class="row">
+                                            <div class="col-md-4 menu_content">
+                                                <ul>
+                                                    <li>
+                                                        <i class="fa fa-angle-right px-1 text-primary"></i>
+                                                        <a href="#registration-and-fees">
+                                                            नक्सा दर्ता तथा दस्तुर सम्बन्धि
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
                                 </li>
                             </ul>
                         </div>
@@ -106,8 +119,51 @@
 
                                 </div>
                             </section>
-
                         @endforeach
+                            <section id="registration-and-fees">
+                                <h4 class="mt-2"> नक्सा दर्ता तथा दस्तुर सम्बन्धि </h4>
+                                <div
+                                    class="card-body mt-2 {{!empty($mapApply->mapRegistration) ? 'border_black':'border_yellow'}}">
+                                    <div>
+                                        @if(empty($mapApply->mapRegistration))
+
+                                            <i class="fa fa-exclamation-triangle map_template_exclamation"
+                                               data-bs-toggle="tooltip" data-bs-placement="right"
+                                               title="नक्सा दर्ता तथा दस्तुर सेभ भएको छैन"></i>
+
+                                        @endif
+
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        @if(!empty($mapApply->mapRegistration))
+                                            <a href="{{route('emap.admin.map.map-apply.map-registration.edit',[$mapApply,$mapApply->mapRegistration])}}"
+                                               class="mx-2">
+                                                <i class="fa fa-pen"></i>
+                                            </a>
+                                            <div class="btn-group mb-3 ">
+                                                <i class="fa fa-print text-primary" onclick=" printJS({
+                                                        printable: 'print-registration-fees',
+                                                        type: 'html',
+                                                        documentTitle: 'नक्सा दर्ता तथा दस्तुर',
+                                                        showModal: true,
+                                                        targetStyles: ['*'],
+                                                        honorMarginPadding: false,
+                                                        modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'
+                                               })"
+                                                ></i>
+                                            </div>
+                                        @else
+                                            <a href="{{route('emap.admin.map.map-apply.map-registration.create',$mapApply)}}">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                    <div id="print-registration-fees">
+                                        @includeIf('emap::admin.map.map-registration.print')
+                                    </div>
+
+                                </div>
+                            </section>
                     </div>
                 </div>
             </div>
