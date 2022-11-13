@@ -180,7 +180,7 @@ enum NoticeTypeEnum: string
             //certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL,
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE,
-            self::NOTICE_CERTIFICATE,
+            self::MAP_CERTIFICATE,
             self::BUILDING_COMPLETION_CERTIFICATE => FileTypeEnum::CERTIFICATE,
 
             //registration
@@ -232,7 +232,7 @@ enum NoticeTypeEnum: string
             self::HOUSE_MAP_NAMSARI,
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL,
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE,
-            self::NOTICE_CERTIFICATE,
+            self::MAP_CERTIFICATE,
             self::BUILDING_COMPLETION_CERTIFICATE => EMapFormFillerTypeEnum::MUNICIPAL,
 
                 //house owner
