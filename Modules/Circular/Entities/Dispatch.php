@@ -15,7 +15,9 @@ use Illuminate\Support\Str;
 
 class Dispatch extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'en_dispatch_date',

@@ -13,7 +13,8 @@ class ObjectTransactionSubCategoryController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('objectTransactionSubCategory_access'),
+        abort_if(
+            Gate::denies('objectTransactionSubCategory_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -24,7 +25,8 @@ class ObjectTransactionSubCategoryController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('objectTransactionSubCategory_create'),
+        abort_if(
+            Gate::denies('objectTransactionSubCategory_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -35,7 +37,8 @@ class ObjectTransactionSubCategoryController extends Controller
 
     public function store(StoreObjectTransactionSubCategoryRequest $request)
     {
-        abort_if(Gate::denies('objectTransactionSubCategory_create'),
+        abort_if(
+            Gate::denies('objectTransactionSubCategory_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -47,7 +50,8 @@ class ObjectTransactionSubCategoryController extends Controller
 
     public function show($id)
     {
-        abort_if(Gate::denies('objectTransactionSubCategory_access'),
+        abort_if(
+            Gate::denies('objectTransactionSubCategory_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -57,7 +61,8 @@ class ObjectTransactionSubCategoryController extends Controller
 
     public function edit(ObjectTransactionSubCategory $objectTransactionSubCategory)
     {
-        abort_if(Gate::denies('objectTransactionSubCategory_edit'),
+        abort_if(
+            Gate::denies('objectTransactionSubCategory_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -68,7 +73,8 @@ class ObjectTransactionSubCategoryController extends Controller
 
     public function update(UpdateObjectTransactionSubCategoryRequest $request, ObjectTransactionSubCategory $objectTransactionSubCategory)
     {
-        abort_if(Gate::denies('objectTransactionSubCategory_edit'),
+        abort_if(
+            Gate::denies('objectTransactionSubCategory_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -80,7 +86,8 @@ class ObjectTransactionSubCategoryController extends Controller
 
     public function destroy(ObjectTransactionSubCategory $objectTransactionSubCategory)
     {
-        abort_if(Gate::denies('objectTransactionSubCategory_delete'),
+        abort_if(
+            Gate::denies('objectTransactionSubCategory_delete'),
             403,
             'You are not allowed to digital board news access'
         );

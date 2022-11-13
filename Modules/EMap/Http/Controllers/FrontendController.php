@@ -98,13 +98,15 @@ class FrontendController extends Controller
         }
 
         if ($this->verifyOtp($request, $mapApply)) {
-            ApplyMapNotice::updateOrCreate([
+            ApplyMapNotice::updateOrCreate(
+                [
                 'map_apply_id' => $mapApply->id,
                 'file_type' => $noticeTypeEnum->value,
             ],
                 [
                     'data' => $request->input('data'),
-                ]);
+                ]
+            );
 
             return response([
                 'message' => 'Added successfully !!',

@@ -22,7 +22,8 @@ class OfficeSettingController extends Controller
 
     public function update(Request $request, OfficeSetting $officeSetting)
     {
-        $validationData = $request->validate([
+        $validationData = $request->validate(
+            [
             'name' => ['required', 'string'],
             'site_address' => ['nullable', 'string'],
             'logo' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
@@ -40,10 +41,10 @@ class OfficeSettingController extends Controller
             'email' => ['nullable'],
             'website' => ['nullable', 'url'],
             'facebook_link' => ['nullable', 'url'],
-        ], [
+        ],
+            [
             'name.required' => 'नाम अनिवार्य छ|',
         ]
-
         );
 
         if ($request->hasFile('logo') && $officeSetting->logo) {

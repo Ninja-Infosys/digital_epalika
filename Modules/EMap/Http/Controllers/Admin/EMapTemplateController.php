@@ -13,7 +13,8 @@ class EMapTemplateController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('eMapTemplate_access'),
+        abort_if(
+            Gate::denies('eMapTemplate_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -25,7 +26,8 @@ class EMapTemplateController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('eMapTemplate_create'),
+        abort_if(
+            Gate::denies('eMapTemplate_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -35,7 +37,8 @@ class EMapTemplateController extends Controller
 
     public function store(StoreEMapTemplateRequest $request)
     {
-        abort_if(Gate::denies('eMapTemplate_create'),
+        abort_if(
+            Gate::denies('eMapTemplate_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -49,7 +52,8 @@ class EMapTemplateController extends Controller
 
     public function show(EMapTemplate $eMapTemplate)
     {
-        abort_if(Gate::denies('eMapTemplate_access'),
+        abort_if(
+            Gate::denies('eMapTemplate_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -59,7 +63,8 @@ class EMapTemplateController extends Controller
 
     public function edit(EMapTemplate $eMapTemplate)
     {
-        abort_if(Gate::denies('eMapTemplate_edit'),
+        abort_if(
+            Gate::denies('eMapTemplate_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -69,7 +74,8 @@ class EMapTemplateController extends Controller
 
     public function update(UpdateEMapTemplateRequest $request, EMapTemplate $eMapTemplate)
     {
-        abort_if(Gate::denies('eMapTemplate_edit'),
+        abort_if(
+            Gate::denies('eMapTemplate_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -83,7 +89,8 @@ class EMapTemplateController extends Controller
 
     public function destroy(EMapTemplate $eMapTemplate)
     {
-        abort_if(Gate::denies('eMapTemplate_delete'),
+        abort_if(
+            Gate::denies('eMapTemplate_delete'),
             403,
             'You are not allowed to access this resource'
         );
@@ -91,7 +98,8 @@ class EMapTemplateController extends Controller
 
     public function getStaticTemplate(Request $request)
     {
-        abort_if(Gate::denies('eMapTemplate_create'),
+        abort_if(
+            Gate::denies('eMapTemplate_create'),
             403,
             'You are not allowed to access this resource'
         );

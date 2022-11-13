@@ -182,7 +182,8 @@ trait EMapTemplateTrait
     {
         $replace = [];
 
-        $replace = array_merge($this->getMapApplyReplacement(),
+        $replace = array_merge(
+            $this->getMapApplyReplacement(),
             $replace,
             $this->getLandDetailReplacement(),
             $this->getLandOwnerReplacement(),
@@ -193,7 +194,8 @@ trait EMapTemplateTrait
             $this->getBuildingDetailsReplacement(),
             $this->getDesignerDetailsReplacement(),
             $this->getSupervisorDetailsReplacement(),
-            $this->getContractorDetailsReplacement());
+            $this->getContractorDetailsReplacement()
+        );
 
         return Str::replace(array_keys($replace), $replace, $data);
     }

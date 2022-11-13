@@ -12,7 +12,8 @@ class TypeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('unitType_access'),
+        abort_if(
+            Gate::denies('unitType_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -23,7 +24,8 @@ class TypeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('unitType_create'),
+        abort_if(
+            Gate::denies('unitType_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -33,7 +35,8 @@ class TypeController extends Controller
 
     public function store(Request $request)
     {
-        abort_if(Gate::denies('unitType_create'),
+        abort_if(
+            Gate::denies('unitType_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -55,7 +58,8 @@ class TypeController extends Controller
 
     public function edit(Type $type)
     {
-        abort_if(Gate::denies('unitType_edit'),
+        abort_if(
+            Gate::denies('unitType_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -65,7 +69,8 @@ class TypeController extends Controller
 
     public function update(Request $request, Type $type)
     {
-        abort_if(Gate::denies('unitType_edit'),
+        abort_if(
+            Gate::denies('unitType_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -82,7 +87,8 @@ class TypeController extends Controller
 
     public function destroy(Type $type)
     {
-        abort_if(Gate::denies('unitType_delete'),
+        abort_if(
+            Gate::denies('unitType_delete'),
             403,
             'You are not allowed to access this resource'
         );

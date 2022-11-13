@@ -12,7 +12,8 @@ class ExternalUnitConversionController extends Controller
 {
     public function index(Unit $unit)
     {
-        abort_if(Gate::denies('unit_access'),
+        abort_if(
+            Gate::denies('unit_access'),
             403,
             'You are not allowed to digital board news access'
         );

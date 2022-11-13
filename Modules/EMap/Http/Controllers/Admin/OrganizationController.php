@@ -13,7 +13,8 @@ class OrganizationController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('organization_access'),
+        abort_if(
+            Gate::denies('organization_access'),
             403,
             'You are not allowed to employee access'
         );
@@ -24,7 +25,8 @@ class OrganizationController extends Controller
 
     public function updateLoginStatus(Organization $organization)
     {
-        abort_if(Gate::denies('organization_edit'),
+        abort_if(
+            Gate::denies('organization_edit'),
             403,
             'You are not allowed to employee access'
         );
@@ -48,7 +50,8 @@ class OrganizationController extends Controller
 
     public function show(Organization $organization)
     {
-        abort_if(Gate::denies('organization_access'),
+        abort_if(
+            Gate::denies('organization_access'),
             403,
             'You are not allowed to employee access'
         );
@@ -66,7 +69,8 @@ class OrganizationController extends Controller
 
     public function destroy(Organization $organization)
     {
-        abort_if(Gate::denies('organization_delete'),
+        abort_if(
+            Gate::denies('organization_delete'),
             403,
             'You are not allowed to employee access'
         );

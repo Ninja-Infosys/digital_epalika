@@ -13,7 +13,8 @@ class ChiefJudicialMemberController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('chiefJudicialMember_access'),
+        abort_if(
+            Gate::denies('chiefJudicialMember_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -24,7 +25,8 @@ class ChiefJudicialMemberController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('chiefJudicialMember_create'),
+        abort_if(
+            Gate::denies('chiefJudicialMember_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -35,7 +37,8 @@ class ChiefJudicialMemberController extends Controller
 
     public function store(StoreChiefJudicialMemeberRequest $request)
     {
-        abort_if(Gate::denies('chiefJudicialMember_create'),
+        abort_if(
+            Gate::denies('chiefJudicialMember_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -48,7 +51,8 @@ class ChiefJudicialMemberController extends Controller
 
     public function show(ChiefJudicialMember $chiefJudicialMember)
     {
-        abort_if(Gate::denies('chiefJudicialMember_access'),
+        abort_if(
+            Gate::denies('chiefJudicialMember_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -58,7 +62,8 @@ class ChiefJudicialMemberController extends Controller
 
     public function edit(ChiefJudicialMember $chiefJudicialMember)
     {
-        abort_if(Gate::denies('chiefJudicialMember_edit'),
+        abort_if(
+            Gate::denies('chiefJudicialMember_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -69,7 +74,8 @@ class ChiefJudicialMemberController extends Controller
 
     public function update(UpdateChiefJudicialMemberRequest $request, ChiefJudicialMember $chiefJudicialMember)
     {
-        abort_if(Gate::denies('chiefJudicialMember_edit'),
+        abort_if(
+            Gate::denies('chiefJudicialMember_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -84,7 +90,8 @@ class ChiefJudicialMemberController extends Controller
 
     public function destroy(ChiefJudicialMember $chiefJudicialMember)
     {
-        abort_if(Gate::denies('chiefJudicialMember_delete'),
+        abort_if(
+            Gate::denies('chiefJudicialMember_delete'),
             403,
             'You are not allowed to access this resource'
         );
@@ -98,7 +105,8 @@ class ChiefJudicialMemberController extends Controller
 
     public function updateStatus(ChiefJudicialMember $chiefJudicialMember)
     {
-        abort_if(Gate::denies('chiefJudicialMember_edit'),
+        abort_if(
+            Gate::denies('chiefJudicialMember_edit'),
             403,
             'you are not able to edit chief judicial member'
         );

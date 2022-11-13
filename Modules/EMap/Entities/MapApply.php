@@ -20,7 +20,9 @@ use Modules\EMap\Traits\EMapTemplateTrait;
 
 class MapApply extends Model
 {
-    use HasFactory, SoftDeletes,EMapTemplateTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EMapTemplateTrait;
 
     protected $dates = [
         'created_at',

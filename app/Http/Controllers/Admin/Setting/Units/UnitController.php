@@ -12,7 +12,8 @@ class UnitController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('unit_access'),
+        abort_if(
+            Gate::denies('unit_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -24,7 +25,8 @@ class UnitController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('unit_create'),
+        abort_if(
+            Gate::denies('unit_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -34,7 +36,8 @@ class UnitController extends Controller
 
     public function store(StoreUnitRequest $request)
     {
-        abort_if(Gate::denies('unit_create'),
+        abort_if(
+            Gate::denies('unit_create'),
             403,
             'You are not allowed to this resource'
         );
@@ -51,7 +54,8 @@ class UnitController extends Controller
 
     public function edit(Unit $unit)
     {
-        abort_if(Gate::denies('unit_edit'),
+        abort_if(
+            Gate::denies('unit_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -63,7 +67,8 @@ class UnitController extends Controller
 
     public function update(UpdateUnitRequest $request, Unit $unit)
     {
-        abort_if(Gate::denies('unit_edit'),
+        abort_if(
+            Gate::denies('unit_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -76,7 +81,8 @@ class UnitController extends Controller
 
     public function destroy(Unit $unit)
     {
-        abort_if(Gate::denies('unit_delete'),
+        abort_if(
+            Gate::denies('unit_delete'),
             403,
             'You are not allowed to access this resource'
         );

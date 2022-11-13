@@ -18,7 +18,8 @@ use Illuminate\Support\Str;
 
 class Trainee extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',

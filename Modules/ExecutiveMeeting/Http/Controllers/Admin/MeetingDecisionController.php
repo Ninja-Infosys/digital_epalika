@@ -13,7 +13,8 @@ class MeetingDecisionController extends Controller
 {
     public function index($meeting_for)
     {
-        abort_if(Gate::denies('meetingDecision_access'),
+        abort_if(
+            Gate::denies('meetingDecision_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -25,7 +26,8 @@ class MeetingDecisionController extends Controller
 
     public function create($meeting_for)
     {
-        abort_if(Gate::denies('meetingDecision_create'),
+        abort_if(
+            Gate::denies('meetingDecision_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -39,7 +41,8 @@ class MeetingDecisionController extends Controller
 
     public function store(StoreMeetingDecisionRequest $request, $meeting_for)
     {
-        abort_if(Gate::denies('meetingDecision_create'),
+        abort_if(
+            Gate::denies('meetingDecision_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -55,7 +58,8 @@ class MeetingDecisionController extends Controller
 
     public function show($meeting_for, MeetingDecision $meetingDecision)
     {
-        abort_if(Gate::denies('meetingDecision_access'),
+        abort_if(
+            Gate::denies('meetingDecision_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -63,7 +67,8 @@ class MeetingDecisionController extends Controller
 
     public function edit($meeting_for, MeetingDecision $meetingDecision)
     {
-        abort_if(Gate::denies('meetingDecision_edit'),
+        abort_if(
+            Gate::denies('meetingDecision_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -77,7 +82,8 @@ class MeetingDecisionController extends Controller
 
     public function update(UpdateMeetingDecisionRequest $request, $meeting_for, MeetingDecision $meetingDecision)
     {
-        abort_if(Gate::denies('meetingDecision_edit'),
+        abort_if(
+            Gate::denies('meetingDecision_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -97,7 +103,8 @@ class MeetingDecisionController extends Controller
 
     public function destroy($meeting_for, MeetingDecision $meetingDecision)
     {
-        abort_if(Gate::denies('meetingDecision_delete'),
+        abort_if(
+            Gate::denies('meetingDecision_delete'),
             403,
             'You are not allowed to access this resource'
         );

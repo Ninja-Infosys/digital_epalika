@@ -12,7 +12,8 @@ class BusinessRegistrationTemplateController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('businessRegistrationTemplate_access'),
+        abort_if(
+            Gate::denies('businessRegistrationTemplate_access'),
             403,
             'You not allowed to access this resource'
         );
@@ -23,7 +24,8 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('businessRegistrationTemplate_create'),
+        abort_if(
+            Gate::denies('businessRegistrationTemplate_create'),
             403,
             'You not allowed to access this resource'
         );
@@ -33,7 +35,8 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function store(StoreBusinessRegistrationTemplateRequest $request)
     {
-        abort_if(Gate::denies('businessRegistrationTemplate_create'),
+        abort_if(
+            Gate::denies('businessRegistrationTemplate_create'),
             403,
             'You not allowed to access this resource'
         );
@@ -51,7 +54,8 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function show(BusinessRegistrationTemplate $businessRegistrationTemplate)
     {
-        abort_if(Gate::denies('businessRegistrationTemplate_access'),
+        abort_if(
+            Gate::denies('businessRegistrationTemplate_access'),
             403,
             'You not allowed to access this resource'
         );
@@ -61,7 +65,8 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function edit(BusinessRegistrationTemplate $businessRegistrationTemplate)
     {
-        abort_if(Gate::denies('businessRegistrationTemplate_edit'),
+        abort_if(
+            Gate::denies('businessRegistrationTemplate_edit'),
             403,
             'You not allowed to access this resource'
         );
@@ -71,7 +76,8 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function update(UpdateBusinessRegistrationTemplateRequest $request, BusinessRegistrationTemplate $businessRegistrationTemplate)
     {
-        abort_if(Gate::denies('businessRegistrationTemplate_edit'),
+        abort_if(
+            Gate::denies('businessRegistrationTemplate_edit'),
             403,
             'You not allowed to access this resource'
         );
@@ -84,7 +90,8 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function destroy(BusinessRegistrationTemplate $businessRegistrationTemplate)
     {
-        abort_if(Gate::denies('businessRegistrationTemplate_delete'),
+        abort_if(
+            Gate::denies('businessRegistrationTemplate_delete'),
             403,
             'You not allowed to access this resource'
         );

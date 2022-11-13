@@ -12,7 +12,8 @@ class BusinessNatureController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('businessNature_access'),
+        abort_if(
+            Gate::denies('businessNature_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -23,7 +24,8 @@ class BusinessNatureController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('businessNature_create'),
+        abort_if(
+            Gate::denies('businessNature_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -33,7 +35,8 @@ class BusinessNatureController extends Controller
 
     public function store(StoreBusinessNature $request)
     {
-        abort_if(Gate::denies('businessNature_create'),
+        abort_if(
+            Gate::denies('businessNature_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -46,7 +49,8 @@ class BusinessNatureController extends Controller
 
     public function show(BusinessNature $businessNature)
     {
-        abort_if(Gate::denies('businessNature_access'),
+        abort_if(
+            Gate::denies('businessNature_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -56,7 +60,8 @@ class BusinessNatureController extends Controller
 
     public function edit(BusinessNature $businessNature)
     {
-        abort_if(Gate::denies('businessNature_edit'),
+        abort_if(
+            Gate::denies('businessNature_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -66,7 +71,8 @@ class BusinessNatureController extends Controller
 
     public function update(UpdateBusinessNature $request, BusinessNature $businessNature)
     {
-        abort_if(Gate::denies('businessNature_edit'),
+        abort_if(
+            Gate::denies('businessNature_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -79,7 +85,8 @@ class BusinessNatureController extends Controller
 
     public function destroy(BusinessNature $businessNature)
     {
-        abort_if(Gate::denies('businessNature_delete'),
+        abort_if(
+            Gate::denies('businessNature_delete'),
             403,
             'You are not allowed to digital board news access'
         );

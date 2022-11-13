@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ActivityLog extends Model
 {
-    use HasFactory, SoftDeletes, QueryFilterTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use QueryFilterTrait;
 
     protected $dates = [
         'created_at',

@@ -11,7 +11,8 @@ class GrantDetailController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('grantDetail_access'),
+        abort_if(
+            Gate::denies('grantDetail_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -23,7 +24,8 @@ class GrantDetailController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('grantDetail_create'),
+        abort_if(
+            Gate::denies('grantDetail_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -33,7 +35,8 @@ class GrantDetailController extends Controller
 
     public function store(Request $request)
     {
-        abort_if(Gate::denies('grantDetail_create'),
+        abort_if(
+            Gate::denies('grantDetail_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -41,7 +44,8 @@ class GrantDetailController extends Controller
 
     public function show(GrantDetail $grantDetail)
     {
-        abort_if(Gate::denies('grantDetail_access'),
+        abort_if(
+            Gate::denies('grantDetail_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -51,7 +55,8 @@ class GrantDetailController extends Controller
 
     public function edit(GrantDetail $grantDetail)
     {
-        abort_if(Gate::denies('grantDetail_edit'),
+        abort_if(
+            Gate::denies('grantDetail_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -61,7 +66,8 @@ class GrantDetailController extends Controller
 
     public function update(Request $request, GrantDetail $grantDetail)
     {
-        abort_if(Gate::denies('grantDetail_edit'),
+        abort_if(
+            Gate::denies('grantDetail_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -69,7 +75,8 @@ class GrantDetailController extends Controller
 
     public function destroy(GrantDetail $grantDetail)
     {
-        abort_if(Gate::denies('grantDetail_delete'),
+        abort_if(
+            Gate::denies('grantDetail_delete'),
             403,
             'You are not allowed to access this resource'
         );

@@ -15,7 +15,8 @@ class NoticeController extends Controller
 {
     public function index($type)
     {
-        abort_if(Gate::denies('digitalBoardNotice_access'),
+        abort_if(
+            Gate::denies('digitalBoardNotice_access'),
             403,
             'तपाईंलाई डिजिटल बोर्ड सूचना पहुँच गर्न अनुमति छैन'
         );
@@ -30,7 +31,8 @@ class NoticeController extends Controller
 
     public function create($type)
     {
-        abort_if(Gate::denies('digitalBoardNotice_create'),
+        abort_if(
+            Gate::denies('digitalBoardNotice_create'),
             403,
             'तपाईंलाई डिजिटल बोर्ड सूचना सिर्जना गर्न अनुमति छैन'
         );
@@ -40,7 +42,8 @@ class NoticeController extends Controller
 
     public function store($type, Request $request)
     {
-        abort_if(Gate::denies('digitalBoardNotice_create'),
+        abort_if(
+            Gate::denies('digitalBoardNotice_create'),
             403,
             'तपाईंलाई डिजिटल बोर्ड सूचना सिर्जना गर्न अनुमति छैन'
         );
@@ -86,7 +89,8 @@ class NoticeController extends Controller
 
     public function show($type, Notice $notice)
     {
-        abort_if(Gate::denies('digitalBoardNotice_access'),
+        abort_if(
+            Gate::denies('digitalBoardNotice_access'),
             403,
             'तपाईंलाई डिजिटल बोर्ड सूचना पहुँच गर्न अनुमति छैन'
         );
@@ -98,7 +102,8 @@ class NoticeController extends Controller
 
     public function edit($type, Notice $notice)
     {
-        abort_if(Gate::denies('digitalBoardNotice_edit'),
+        abort_if(
+            Gate::denies('digitalBoardNotice_edit'),
             403,
             'तपाईंलाई डिजिटल बोर्ड सूचना अद्यावधिक गर्न अनुमति छैन'
         );
@@ -108,7 +113,8 @@ class NoticeController extends Controller
 
     public function update($type, UpdateNoticeRequest $request, Notice $notice)
     {
-        abort_if(Gate::denies('digitalBoardNotice_edit'),
+        abort_if(
+            Gate::denies('digitalBoardNotice_edit'),
             403,
             'तपाईंलाई डिजिटल बोर्ड सूचना अद्यावधिक गर्न अनुमति छैन'
         );
@@ -127,7 +133,8 @@ class NoticeController extends Controller
 
     public function destroy($type, Notice $notice)
     {
-        abort_if(Gate::denies('digitalBoardNotice_delete'),
+        abort_if(
+            Gate::denies('digitalBoardNotice_delete'),
             403,
             'तपाइलाई डिजिटल बोर्ड सूचना मेटाउन अनुमति छैन '
         );

@@ -30,7 +30,9 @@ class DashboardController extends Controller
 
         $registrationYearlyChartData = $this->getCurrentFyMonthlyRegistrationAndDispatch($officeSetting);
 
-        return view('circular::admin.dashboard', compact(
+        return view(
+            'circular::admin.dashboard',
+            compact(
             'total_registrations',
             'yearly_registrations',
             'monthly_registrations',

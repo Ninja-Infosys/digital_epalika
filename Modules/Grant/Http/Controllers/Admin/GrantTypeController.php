@@ -12,7 +12,8 @@ class GrantTypeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('grantType_access'),
+        abort_if(
+            Gate::denies('grantType_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -24,7 +25,8 @@ class GrantTypeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('grantType_create'),
+        abort_if(
+            Gate::denies('grantType_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -34,7 +36,8 @@ class GrantTypeController extends Controller
 
     public function store(StoreGrantTypeRequest $request)
     {
-        abort_if(Gate::denies('grantType_create'),
+        abort_if(
+            Gate::denies('grantType_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -52,7 +55,8 @@ class GrantTypeController extends Controller
 
     public function edit(GrantType $grantType)
     {
-        abort_if(Gate::denies('grantType_edit'),
+        abort_if(
+            Gate::denies('grantType_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -62,7 +66,8 @@ class GrantTypeController extends Controller
 
     public function update(UpdateGrantTypeRequest $request, GrantType $grantType)
     {
-        abort_if(Gate::denies('grantType_edit'),
+        abort_if(
+            Gate::denies('grantType_edit'),
             403,
             'You are not allowed to edit this resource'
         );
@@ -75,9 +80,11 @@ class GrantTypeController extends Controller
 
     public function destroy(GrantType $grantType)
     {
-        abort_if(Gate::denies('grantType_delete'),
+        abort_if(
+            Gate::denies('grantType_delete'),
             403,
-            'you are not allowed to delete this resource');
+            'you are not allowed to delete this resource'
+        );
         $grantType->delete();
 
         toast('अनुदान प्रकार सफलतापूर्वक मेटाइयो', 'success');

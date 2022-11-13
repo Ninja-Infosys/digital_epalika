@@ -13,7 +13,8 @@ class MeasurementUnitController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('MeasurementUnit_access'),
+        abort_if(
+            Gate::denies('MeasurementUnit_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -24,7 +25,8 @@ class MeasurementUnitController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('MeasurementUnit_create'),
+        abort_if(
+            Gate::denies('MeasurementUnit_create'),
             403,
             'You are not allowed to this resource'
         );
@@ -36,7 +38,8 @@ class MeasurementUnitController extends Controller
 
     public function store(StoreMeasurementUnitRequest $request)
     {
-        abort_if(Gate::denies('MeasurementUnit_create'),
+        abort_if(
+            Gate::denies('MeasurementUnit_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -54,7 +57,8 @@ class MeasurementUnitController extends Controller
 
     public function edit(MeasurementUnit $measurementUnit)
     {
-        abort_if(Gate::denies('MeasurementUnit_edit'),
+        abort_if(
+            Gate::denies('MeasurementUnit_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -66,7 +70,8 @@ class MeasurementUnitController extends Controller
 
     public function update(UpdateMeasurementUnitRequest $request, MeasurementUnit $measurementUnit)
     {
-        abort_if(Gate::denies('MeasurementUnit_edit'),
+        abort_if(
+            Gate::denies('MeasurementUnit_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -79,7 +84,8 @@ class MeasurementUnitController extends Controller
 
     public function destroy(MeasurementUnit $measurementUnit)
     {
-        abort_if(Gate::denies('MeasurementUnit_delete'),
+        abort_if(
+            Gate::denies('MeasurementUnit_delete'),
             403,
             'You are not allowed to access this resource'
         );

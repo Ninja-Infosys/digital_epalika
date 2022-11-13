@@ -12,7 +12,8 @@ class ThematicAreaController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('thematicArea_access'),
+        abort_if(
+            Gate::denies('thematicArea_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -24,7 +25,8 @@ class ThematicAreaController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('thematicArea_create'),
+        abort_if(
+            Gate::denies('thematicArea_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -34,7 +36,8 @@ class ThematicAreaController extends Controller
 
     public function store(StoreThematicAreaRequest $request)
     {
-        abort_if(Gate::denies('thematicArea_create'),
+        abort_if(
+            Gate::denies('thematicArea_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -48,7 +51,8 @@ class ThematicAreaController extends Controller
 
     public function show(ThematicArea $thematicArea)
     {
-        abort_if(Gate::denies('thematicArea_access'),
+        abort_if(
+            Gate::denies('thematicArea_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -58,7 +62,8 @@ class ThematicAreaController extends Controller
 
     public function edit(ThematicArea $thematicArea)
     {
-        abort_if(Gate::denies('thematicArea_edit'),
+        abort_if(
+            Gate::denies('thematicArea_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -68,7 +73,8 @@ class ThematicAreaController extends Controller
 
     public function update(UpdateThematicAreaRequest $request, ThematicArea $thematicArea)
     {
-        abort_if(Gate::denies('thematicArea_edit'),
+        abort_if(
+            Gate::denies('thematicArea_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -82,7 +88,8 @@ class ThematicAreaController extends Controller
 
     public function destroy(ThematicArea $thematicArea)
     {
-        abort_if(Gate::denies('thematicArea_delete'),
+        abort_if(
+            Gate::denies('thematicArea_delete'),
             403,
             'You are not allowed to access this resource'
         );

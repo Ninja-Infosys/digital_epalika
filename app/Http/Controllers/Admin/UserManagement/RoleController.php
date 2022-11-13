@@ -15,7 +15,8 @@ class RoleController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('role_access'),
+        abort_if(
+            Gate::denies('role_access'),
             403,
             'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
         );
@@ -27,7 +28,8 @@ class RoleController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('role_create'),
+        abort_if(
+            Gate::denies('role_create'),
             403,
             'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
         );
@@ -39,7 +41,8 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        abort_if(Gate::denies('role_create'),
+        abort_if(
+            Gate::denies('role_create'),
             403,
             'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
         );
@@ -57,7 +60,8 @@ class RoleController extends Controller
 
     public function show(Role $role)
     {
-        abort_if(Gate::denies('role_access'),
+        abort_if(
+            Gate::denies('role_access'),
             403,
             'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
         );
@@ -65,7 +69,8 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        abort_if(Gate::denies('role_edit'),
+        abort_if(
+            Gate::denies('role_edit'),
             403,
             'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
         );
@@ -78,7 +83,8 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        abort_if(Gate::denies('role_edit'),
+        abort_if(
+            Gate::denies('role_edit'),
             403,
             'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
         );
@@ -95,7 +101,8 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        abort_if(Gate::denies('role_delete'),
+        abort_if(
+            Gate::denies('role_delete'),
             403,
             'तपाईंलाई भूमिका मेटाउन अनुमति छैन'
         );

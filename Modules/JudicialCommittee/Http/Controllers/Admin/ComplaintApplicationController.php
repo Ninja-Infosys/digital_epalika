@@ -10,7 +10,8 @@ class ComplaintApplicationController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('complaintApplication_access'),
+        abort_if(
+            Gate::denies('complaintApplication_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -22,7 +23,8 @@ class ComplaintApplicationController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('complaintApplication_create'),
+        abort_if(
+            Gate::denies('complaintApplication_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -32,7 +34,8 @@ class ComplaintApplicationController extends Controller
 
     public function show(ComplaintApplication $complaintApplication)
     {
-        abort_if(Gate::denies('complaintApplication_access'),
+        abort_if(
+            Gate::denies('complaintApplication_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -42,7 +45,8 @@ class ComplaintApplicationController extends Controller
 
     public function edit(ComplaintApplication $complaintApplication)
     {
-        abort_if(Gate::denies('complaintApplication_edit'),
+        abort_if(
+            Gate::denies('complaintApplication_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -52,7 +56,8 @@ class ComplaintApplicationController extends Controller
 
     public function destroy(ComplaintApplication $complaintApplication)
     {
-        abort_if(Gate::denies('complaintApplication_delete'),
+        abort_if(
+            Gate::denies('complaintApplication_delete'),
             403,
             'You are not allowed to access this resource'
         );

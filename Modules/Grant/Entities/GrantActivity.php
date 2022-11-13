@@ -10,7 +10,9 @@ use Modules\Grant\Enums\GrantRecipientTypeEnum;
 
 class GrantActivity extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
