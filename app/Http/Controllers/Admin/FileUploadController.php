@@ -15,7 +15,7 @@ class FileUploadController extends Controller
     {
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
 
-        if (!$receiver->isUploaded()) {
+        if (! $receiver->isUploaded()) {
             // file not uploaded
             return response()->json(['message' => 'File not uploaded'], 500);
         }
@@ -30,21 +30,23 @@ class FileUploadController extends Controller
 //
 //            $disk = Storage::disk(config('filesystems.default'));
 //            $path = $disk->putFileAs('videos', $file, $fileName);
-            $path = Storage::disk('public')->putFile('file/' . Str::slug($file->getClientOriginalExtension()), $file);
+            $path = Storage::disk('public')->putFile('file/'.Str::slug($file->getClientOriginalExtension()), $file);
             // delete chunked file
             unlink($file->getPathname());
+
             return [
                 'url' => Storage::disk('public')->url($path),
                 'path' => $path,
-                'filename' => $file->getClientOriginalName()
+                'filename' => $file->getClientOriginalName(),
             ];
         }
 
         // otherwise return percentage information
         $handler = $fileReceived->handler();
+
         return [
             'done' => $handler->getPercentageDone(),
-            'status' => true
+            'status' => true,
         ];
     }
 }

@@ -10,11 +10,11 @@ use Modules\Roaster\Http\Controllers\TrainingController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
-Route::prefix('setting')->as('setting.')->group(function (){
+Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('subject', SubjectController::class);
 });
 
-Route::resource('trainer', TrainerController::class)->except(['store','destroy','update']);
+Route::resource('trainer', TrainerController::class)->except(['store', 'destroy', 'update']);
 Route::put('training/{training}/update-marks', [TrainingController::class, 'updateMarks'])->name('training.update-marks');
 Route::get('training/{training}/report', [TrainingController::class, 'report'])->name('training.report');
 Route::get('training/{training}/update-status', [TrainingController::class, 'setFormStatus'])->name('training.set-form-status');
@@ -25,8 +25,8 @@ Route::resource('training', TrainingController::class);
 
 //trainee
 Route::get('trainee/{trainee}/updateSelectTrainee', [TraineeController::class, 'updateSelectTrainee'])->name('trainee.updateSelectTrainee');
-Route::resource('trainee', TraineeController::class)->only(['updateSelectTrainee','show','edit']);
+Route::resource('trainee', TraineeController::class)->only(['updateSelectTrainee', 'show', 'edit']);
 
 //technical Trainee
 Route::get('technicalTrainee/{technicalTrainee}/updateSelectTechnicalTrainee', [TechnicalTraineeController::class, 'updateSelectTechnicalTrainee'])->name('technicalTrainee.updateSelectTrainee');
-Route::resource('technicalTrainee', TechnicalTraineeController::class)->only(['updateSelectTechnicalTrainee','show','edit']);;
+Route::resource('technicalTrainee', TechnicalTraineeController::class)->only(['updateSelectTechnicalTrainee', 'show', 'edit']);

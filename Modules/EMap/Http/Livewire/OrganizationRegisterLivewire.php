@@ -18,10 +18,11 @@ class OrganizationRegisterLivewire extends Component
     use WithFileUploads;
 
     public int $currentStep = 1;
+
     public float $progressPercentage = 0;
 
-
     public $districts = [];
+
     public $provinces = [];
 
     public array $address = [
@@ -34,11 +35,10 @@ class OrganizationRegisterLivewire extends Component
         'organizationDistricts' => [],
     ];
 
-
     public array $user = [
         'name' => null,
         'email' => null,
-        'phone' => null
+        'phone' => null,
     ];
 
     public array $organizationDetail = [
@@ -87,7 +87,7 @@ class OrganizationRegisterLivewire extends Component
 
     protected array $thirdStepValidations = [
         'user.name' => ['required', 'unique:organizations,name'],
-        'user.email' => ['required', 'email', "unique:organizations,email"],
+        'user.email' => ['required', 'email', 'unique:organizations,email'],
         'user.phone' => ['required', 'unique:organizations,phone'],
     ];
 
@@ -117,7 +117,6 @@ class OrganizationRegisterLivewire extends Component
             3 => $this->thirdStepValidations,
             default => $this->firstStepValidations,
         };
-
     }
 
     public function updated($propertyName): void
@@ -130,35 +129,34 @@ class OrganizationRegisterLivewire extends Component
         $this->validate();
         DB::transaction(function () {
             $DbUser = Organization::create($this->user);
-                $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
-                $DbOrgDetail->taxClearances()->create($this->taxClearance);
+            $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
+            $DbOrgDetail->taxClearances()->create($this->taxClearance);
 
             $this->resetForm();
         });
         $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
         ]);
     }
 
     public function resetForm(): void
     {
-        $this->reset( 'currentStep', 'address', 'user', 'organizationDetail', 'taxClearance');
-
+        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance');
     }
 
     public function checkOrganizationAddress(): void
     {
-        if (!empty($this->organizationDetail['province_id'])) {
+        if (! empty($this->organizationDetail['province_id'])) {
             $this->address['organizationDistricts'] = Province::with('districts')->findOrFail($this->organizationDetail['province_id'])->districts;
             $this->address['organizationProvince'] = $this->provinces->firstWhere('id', $this->organizationDetail['province_id']);
         }
-        if (!empty($this->organizationDetail['district_id'])) {
+        if (! empty($this->organizationDetail['district_id'])) {
             $this->address['organizationLocalBodies'] = District::with('localBodies')->findOrFail($this->organizationDetail['district_id'])->localBodies;
             $this->address['organizationDistrict'] = $this->address['organizationDistricts']->firstWhere('id', $this->organizationDetail['district_id']);
         }
-        if (!empty($this->organizationDetail['local_body_id'])) {
+        if (! empty($this->organizationDetail['local_body_id'])) {
             $this->address['organizationWards'] = LocalBody::findOrFail($this->organizationDetail['local_body_id'])->ward_no;
             $this->address['organizationLocalBody'] = $this->address['organizationLocalBodies']->firstWhere('id', $this->organizationDetail['local_body_id']);
         }
@@ -168,7 +166,7 @@ class OrganizationRegisterLivewire extends Component
     {
         $this->checkOrganizationAddress();
 
-        if (!empty($this->userDetail['citizenship_issued_district'])) {
+        if (! empty($this->userDetail['citizenship_issued_district'])) {
             $this->address['citizenshipIssuedDistrict'] = $this->districts->firstWhere('id', $this->userDetail['citizenship_issued_district']);
         }
 

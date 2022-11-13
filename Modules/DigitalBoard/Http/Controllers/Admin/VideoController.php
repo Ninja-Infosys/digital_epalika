@@ -12,7 +12,8 @@ class VideoController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('digitalBoardVideo_access'),
+        abort_if(
+            Gate::denies('digitalBoardVideo_access'),
             403,
             'You are not allowed to digital board video access'
         );
@@ -24,7 +25,8 @@ class VideoController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('digitalBoardVideo_create'),
+        abort_if(
+            Gate::denies('digitalBoardVideo_create'),
             403,
             'You are not allowed to digital board video create'
         );
@@ -34,7 +36,8 @@ class VideoController extends Controller
 
     public function store(StoreVideoRequest $request)
     {
-        abort_if(Gate::denies('digitalBoardVideo_create'),
+        abort_if(
+            Gate::denies('digitalBoardVideo_create'),
             403,
             'You are not allowed to digital board video create'
         );
@@ -42,12 +45,14 @@ class VideoController extends Controller
         Video::create($request->validated());
 
         toast('भिडियो सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
     public function show(Video $video)
     {
-        abort_if(Gate::denies('digitalBoardVideo_access'),
+        abort_if(
+            Gate::denies('digitalBoardVideo_access'),
             403,
             'You are not allowed to digital board video access'
         );
@@ -55,7 +60,8 @@ class VideoController extends Controller
 
     public function edit(Video $video)
     {
-        abort_if(Gate::denies('digitalBoardVideo_edit'),
+        abort_if(
+            Gate::denies('digitalBoardVideo_edit'),
             403,
             'You are not allowed to digital board video edit'
         );
@@ -65,7 +71,8 @@ class VideoController extends Controller
 
     public function update(UpdateVideoRequest $request, Video $video)
     {
-        abort_if(Gate::denies('digitalBoardVideo_edit'),
+        abort_if(
+            Gate::denies('digitalBoardVideo_edit'),
             403,
             'You are not allowed to digital board video edit'
         );
@@ -82,7 +89,8 @@ class VideoController extends Controller
 
     public function destroy(Video $video)
     {
-        abort_if(Gate::denies('digitalBoardVideo_delete'),
+        abort_if(
+            Gate::denies('digitalBoardVideo_delete'),
             403,
             'You are not allowed to digital board video delete'
         );

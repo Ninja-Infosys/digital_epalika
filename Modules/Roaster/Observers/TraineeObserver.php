@@ -2,7 +2,6 @@
 
 namespace Modules\Roaster\Observers;
 
-
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -10,7 +9,6 @@ use Modules\Roaster\Entities\Trainee;
 
 class TraineeObserver
 {
-
     /**
      * @throws \Exception
      */
@@ -21,7 +19,7 @@ class TraineeObserver
         checkAgain:
 
         $randomNumber = random_int(1, 99999);
-        $referenceNumber = $setting . '-T-' . Str::padLeft($randomNumber, 5, 0);
+        $referenceNumber = $setting.'-T-'.Str::padLeft($randomNumber, 5, 0);
 
         if (DB::table('trainees')
                 ->select('reference_id')

@@ -73,7 +73,6 @@ Route::prefix('setting')->group(function () {
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
 });
 
-
 //deleteFile
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 

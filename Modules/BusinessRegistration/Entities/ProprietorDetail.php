@@ -17,12 +17,14 @@ use Modules\BusinessRegistration\Traits\ProprietorTemplateTrait;
 
 class ProprietorDetail extends Model
 {
-    use HasFactory, SoftDeletes, ProprietorTemplateTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use ProprietorTemplateTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -48,7 +50,7 @@ class ProprietorDetail extends Model
 
     protected $casts = [
         'gender' => Gender::class,
-        'education_qualification'=>Qualification::class
+        'education_qualification' => Qualification::class,
     ];
 
     public function province(): BelongsTo
@@ -75,7 +77,6 @@ class ProprietorDetail extends Model
     {
         return $this->hasMany(ThreeGenerationDetail::class);
     }
-
 
     public function businessDetail(): HasOne
     {

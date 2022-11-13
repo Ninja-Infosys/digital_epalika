@@ -2,7 +2,6 @@
 
 namespace App\View\Components;
 
-use App\Enums\ApplicationTypeEnum;
 use Illuminate\View\Component;
 
 class ApplicationComponent extends Component

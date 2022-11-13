@@ -10,12 +10,13 @@ use Illuminate\Support\Collection;
 
 class LocalBody extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -36,6 +37,7 @@ class LocalBody extends Model
         for ($i = 1; $i <= $this->wards; $i++) {
             $ward_no->push($i);
         }
+
         return $ward_no;
     }
 }

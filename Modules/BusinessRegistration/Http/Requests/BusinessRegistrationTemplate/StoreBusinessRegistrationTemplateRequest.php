@@ -18,7 +18,7 @@ class StoreBusinessRegistrationTemplateRequest extends FormRequest
             'title' => ['required'],
             'for' => ['required'],
             'data' => ['required'],
-            'requires_header' => ['nullable', 'boolean']
+            'requires_header' => ['nullable', 'boolean'],
         ];
     }
 }

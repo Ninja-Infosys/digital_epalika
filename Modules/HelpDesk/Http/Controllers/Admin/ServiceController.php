@@ -16,7 +16,8 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('service_access'),
+        abort_if(
+            Gate::denies('service_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -28,7 +29,8 @@ class ServiceController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('service_access'),
+        abort_if(
+            Gate::denies('service_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -39,7 +41,8 @@ class ServiceController extends Controller
 
     public function store(StoreServiceRequest $request)
     {
-        abort_if(Gate::denies('service_create'),
+        abort_if(
+            Gate::denies('service_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -63,7 +66,8 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        abort_if(Gate::denies('service_access'),
+        abort_if(
+            Gate::denies('service_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -74,7 +78,8 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        abort_if(Gate::denies('service_edit'),
+        abort_if(
+            Gate::denies('service_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -85,7 +90,8 @@ class ServiceController extends Controller
 
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        abort_if(Gate::denies('service_edit'),
+        abort_if(
+            Gate::denies('service_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -94,18 +100,18 @@ class ServiceController extends Controller
             $service->update($request->validated());
 
             foreach ($request->input('serviceDocuments') as $serviceDocument) {
-                if (!empty($serviceDocument['id'])) {
+                if (! empty($serviceDocument['id'])) {
                     ServiceDocument::find($serviceDocument['id'])->update([
-                        'description' => $serviceDocument['description']
+                        'description' => $serviceDocument['description'],
                     ]);
                 } else {
                     $service->serviceDocuments()->create($serviceDocument);
                 }
             }
             foreach ($request->input('serviceProcesses') as $serviceProcess) {
-                if (!empty($serviceProcess['id'])) {
+                if (! empty($serviceProcess['id'])) {
                     ServiceProcess::find($serviceProcess['id'])->update([
-                        'description' => $serviceProcess['description']
+                        'description' => $serviceProcess['description'],
                     ]);
                 } else {
                     $service->serviceProcesses()->create($serviceProcess);
@@ -120,7 +126,8 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-        abort_if(Gate::denies('service_delete'),
+        abort_if(
+            Gate::denies('service_delete'),
             403,
             'You are not allowed to access this resource'
         );
@@ -134,6 +141,7 @@ class ServiceController extends Controller
         $service->delete();
 
         toast('सेवा सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 }

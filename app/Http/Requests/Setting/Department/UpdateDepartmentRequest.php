@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Setting\Department;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -19,6 +18,7 @@ class UpdateDepartmentRequest extends FormRequest
             'title' => ['required', Rule::unique('departments', 'title')->ignore($this->department)->withoutTrashed()],
         ];
     }
+
     public function messages(): array
     {
         return [

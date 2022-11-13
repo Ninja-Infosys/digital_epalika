@@ -5,7 +5,6 @@ namespace Modules\BusinessRegistration\Traits;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
-use Modules\BusinessRegistration\Entities\ProprietorDetail;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 
 trait ProprietorTemplateTrait
@@ -90,29 +89,26 @@ trait ProprietorTemplateTrait
 
     ];
 
-
     public function getTemplateDataAttribute(): Collection
     {
-
         return BusinessRegistrationTemplate::get()->map(function ($applicationTemplate) {
             $data = $this->getData($applicationTemplate->data);
+
             return [
                 'for' => $applicationTemplate->for,
-                'data' => $data
+                'data' => $data,
             ];
         });
     }
 
     public function getSpecificTemplateData(TemplateTypeEnum $templateTypeEnum): string
     {
-
         $businessTemplate = BusinessRegistrationTemplate::where('for', $templateTypeEnum->value)->first();
         if ($businessTemplate) {
             return $this->getData($businessTemplate->data);
         }
 
         return '';
-
     }
 
     public function getTemplateOptions(): array
@@ -125,6 +121,7 @@ trait ProprietorTemplateTrait
         $replace = [];
 
         $replace = array_merge($this->getProprietorReplacement(), $replace, $this->getInvestmentRevenueReplacement(), $this->getIntroBoardReplacement(), $this->getBusinessDetailReplacement(), $this->getBusinessCategoryReplacement());
+
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
@@ -157,7 +154,6 @@ trait ProprietorTemplateTrait
             '[@businessDetail.registration_date_ne]' => $this->businessDetail->registration_date_ne ?? '',
             '[@businessDetail.registration_date_en]' => $this->businessDetail->registration_date_en ?? '',
         ];
-
     }
 
     private function getIntroBoardReplacement(): array

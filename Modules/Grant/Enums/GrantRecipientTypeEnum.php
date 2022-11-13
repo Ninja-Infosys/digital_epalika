@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Modules\Grant\Enums;
 
 enum GrantRecipientTypeEnum: string

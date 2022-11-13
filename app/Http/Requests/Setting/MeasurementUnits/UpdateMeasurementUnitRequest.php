@@ -7,17 +7,16 @@ use Illuminate\Validation\Rule;
 
 class UpdateMeasurementUnitRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
-
 
     public function rules(): array
     {
         return [
             'type_id' => ['required', Rule::exists('types', 'id')->withoutTrashed()],
-            'title' => ['required', Rule::unique('measurement_units', 'title')->withoutTrashed()->ignore($this->measurementUnit)]
+            'title' => ['required', Rule::unique('measurement_units', 'title')->withoutTrashed()->ignore($this->measurementUnit)],
         ];
     }
 

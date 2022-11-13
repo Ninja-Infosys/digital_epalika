@@ -7,16 +7,19 @@ use Livewire\Component;
 class DateLivewire extends Component
 {
     public $name_ne = 'date_ne';
+
     public $name_en = 'date';
+
     public $label_ne = 'मिति';
+
     public $label_en = 'date';
 
     public $nepali_date = '';
+
     public $english_date = '';
 
     public function mount()
     {
-
     }
 
     protected function getListeners()

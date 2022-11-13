@@ -3,21 +3,21 @@
 namespace Modules\EMap\Entities;
 
 use App\Models\Address\District;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 use Modules\EMap\Enums\LandOwnerTypeEnum;
 
 class LandOwner extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -36,7 +36,7 @@ class LandOwner extends Model
     ];
 
     protected $casts = [
-        'land_owner_type' => LandOwnerTypeEnum::class
+        'land_owner_type' => LandOwnerTypeEnum::class,
     ];
 
     public function mapApply(): BelongsTo

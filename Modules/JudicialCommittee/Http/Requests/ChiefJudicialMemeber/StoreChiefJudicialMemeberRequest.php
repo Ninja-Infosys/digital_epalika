@@ -20,16 +20,17 @@ class StoreChiefJudicialMemeberRequest extends FormRequest
             'designation_id' => ['required', Rule::exists('designations', 'id')],
             'phone' => ['nullable'],
             'status' => ['nullable', 'boolean'],
-            'position' => ['nullable', 'integer']
+            'position' => ['nullable', 'integer'],
         ];
     }
+
     public function messages()
     {
         return[
-            'name.required'=> 'नाम आवश्यक छ',
-            'photo.mimes'=>'फोटो jpg, png, jpeg फर्म मा हुनुपर्छ ',
-            'designation_id.required'=>'पद आवश्यक छ',
-            'position.integer'=>'स्थिति पूर्णांकमा हुनुपर्छ'
+            'name.required' => 'नाम आवश्यक छ',
+            'photo.mimes' => 'फोटो jpg, png, jpeg फर्म मा हुनुपर्छ ',
+            'designation_id.required' => 'पद आवश्यक छ',
+            'position.integer' => 'स्थिति पूर्णांकमा हुनुपर्छ',
         ];
     }
 }

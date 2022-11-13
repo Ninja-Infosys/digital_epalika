@@ -15,11 +15,11 @@ class NoticeEventResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id ?? '',
-            'title'=>$this->title ?? '',
-            'className'=>$this->className ?? '',
-            'start'=>$this->start?->toDateString() ?? '',
-            'end'=>$this->end?->toDateString() ?? '',
+            'id' => $this->id ?? '',
+            'title' => $this->title ?? '',
+            'className' => $this->className ?? '',
+            'start' => $this->start?->toDateString() ?? '',
+            'end' => $this->end?->toDateString() ?? '',
         ];
     }
 }

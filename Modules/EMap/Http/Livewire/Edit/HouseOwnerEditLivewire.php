@@ -8,7 +8,6 @@ use Modules\EMap\Entities\MapApply;
 
 class HouseOwnerEditLivewire extends Component
 {
-
     public MapApply $mapApply;
 
     public array $houseOwner = [
@@ -38,6 +37,7 @@ class HouseOwnerEditLivewire extends Component
     ];
 
     public bool $editForm = false;
+
     public $allDistricts;
 
     public function mount(MapApply $mapApply, $districts)
@@ -57,12 +57,11 @@ class HouseOwnerEditLivewire extends Component
             'local_body' => $mapApply->houseOwner->local_body ?? null,
             'ward_no' => $mapApply->houseOwner->ward_no ?? null,
         ];
-
     }
 
     public function setEditForm(): void
     {
-        $this->editForm = !$this->editForm;
+        $this->editForm = ! $this->editForm;
     }
 
     public function rules(): array
@@ -92,17 +91,15 @@ class HouseOwnerEditLivewire extends Component
         if ($this->editForm) {
             $this->validate();
             DB::transaction(function () {
-
                 $this->mapApply->houseOwner()->update($this->houseOwner);
-
             });
 
             $this->reset('editForm');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }

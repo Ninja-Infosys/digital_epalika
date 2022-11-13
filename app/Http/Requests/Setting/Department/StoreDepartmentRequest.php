@@ -18,6 +18,7 @@ class StoreDepartmentRequest extends FormRequest
             'title' => ['required', Rule::unique('departments', 'title')->withoutTrashed()],
         ];
     }
+
     public function messages(): array
     {
         return [

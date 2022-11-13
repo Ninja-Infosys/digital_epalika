@@ -22,7 +22,6 @@ class DashboardController extends Controller
         $investigatedGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', GrievanceStatus::INVESTIGATED->value)->count();
         $seenGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', '!=', GrievanceStatus::UNSEEN->value)->count();
 
-
         $grievanceCountAccordingToSeverity = $this->getDataAccordingToSeverity();
 
         $grievanceCountAccordingToStatus = $this->getDataAccordingToStatus();
@@ -31,7 +30,8 @@ class DashboardController extends Controller
 
         $dataAccordingToGrievanceOffice = $this->getDataAccordingToGrievanceOffice();
 
-        return view('grievancehandling::admin.dashboard', compact('grievanceCountAccordingToSeverity',
+        return view('grievancehandling::admin.dashboard', compact(
+            'grievanceCountAccordingToSeverity',
             'seenGrievanceCount',
             'registeredGrievanceCount',
             'publicGrievanceCount',
@@ -41,9 +41,9 @@ class DashboardController extends Controller
             'investigatedGrievanceCount',
             'grievanceCountAccordingToStatus',
             'dataAccordingToGrievanceType',
-            'dataAccordingToGrievanceOffice'));
+            'dataAccordingToGrievanceOffice'
+        ));
     }
-
 
     public function getDataAccordingToSeverity(): array
     {
@@ -59,13 +59,13 @@ class DashboardController extends Controller
         }
 
         return [
-            "labels" => $label,
-            "dataSets" => [
+            'labels' => $label,
+            'dataSets' => [
                 [
-                    "label" => 'गुनासो गम्भीरता',
-                    "data" => $grievanceAccordingToSeverityCount
-                ]
-            ]
+                    'label' => 'गुनासो गम्भीरता',
+                    'data' => $grievanceAccordingToSeverityCount,
+                ],
+            ],
         ];
     }
 
@@ -83,13 +83,13 @@ class DashboardController extends Controller
         }
 
         return [
-            "labels" => $label,
-            "dataSets" => [
+            'labels' => $label,
+            'dataSets' => [
                 [
-                    "label" => 'गुनासोको स्थिति',
-                    "data" => $grievanceAccordingToStatusCount
-                ]
-            ]
+                    'label' => 'गुनासोको स्थिति',
+                    'data' => $grievanceAccordingToStatusCount,
+                ],
+            ],
         ];
     }
 
@@ -100,13 +100,13 @@ class DashboardController extends Controller
         }])->get();
 
         return [
-            "labels" => $grievanceTypes->pluck('title')->toArray(),
-            "dataSets" => [
+            'labels' => $grievanceTypes->pluck('title')->toArray(),
+            'dataSets' => [
                 [
-                    "label" => 'गुनासोको प्रकार',
-                    "data" => $grievanceTypes->pluck('grievance_details_count')->toArray(),
-                ]
-            ]
+                    'label' => 'गुनासोको प्रकार',
+                    'data' => $grievanceTypes->pluck('grievance_details_count')->toArray(),
+                ],
+            ],
         ];
     }
 
@@ -117,13 +117,13 @@ class DashboardController extends Controller
         }])->get();
 
         return [
-            "labels" => $grievanceOffice->pluck('title')->toArray(),
-            "dataSets" => [
+            'labels' => $grievanceOffice->pluck('title')->toArray(),
+            'dataSets' => [
                 [
-                    "label" => 'गुनासो शाखा',
-                    "data" => $grievanceOffice->pluck('grievance_details_count')->toArray(),
-                ]
-            ]
+                    'label' => 'गुनासो शाखा',
+                    'data' => $grievanceOffice->pluck('grievance_details_count')->toArray(),
+                ],
+            ],
         ];
     }
 }

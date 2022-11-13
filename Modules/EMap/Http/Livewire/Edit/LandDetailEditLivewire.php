@@ -9,10 +9,10 @@ use Modules\EMap\Entities\MapSetting;
 
 class LandDetailEditLivewire extends Component
 {
-
     public MapApply $mapApply;
 
     public $conversion_units;
+
     public bool $editForm = false;
 
     public array $landDescription = [
@@ -30,7 +30,6 @@ class LandDetailEditLivewire extends Component
     {
         $this->mapApply = $mapApply;
 
-
         $this->landDescription = [
             'land_use_area' => $mapApply->landDetail->land_use_area ?? null,
             'ward_no' => $mapApply->landDetail->ward_no ?? null,
@@ -41,14 +40,12 @@ class LandDetailEditLivewire extends Component
             'unit_value' => $mapApply->landDetail->unit_value ?? 0,
             'percentage_of_area_covered_by_building' => $mapApply->landDetail->percentage_of_area_covered_by_building ?? null,
         ];
-
     }
 
     public function setEditForm(): void
     {
-        $this->editForm = !$this->editForm;
+        $this->editForm = ! $this->editForm;
     }
-
 
     protected array $landDescriptionValidations = [
         'landDescription.land_use_area' => ['required', 'numeric'],
@@ -72,20 +69,19 @@ class LandDetailEditLivewire extends Component
             $this->validate();
             DB::transaction(function () {
                 $this->mapApply->landDetail()->update($this->landDescription + [
-                        'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null
-                    ]);
+                    'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
+                ]);
             });
 
             $this->reset('editForm');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }
-
 
     public function updated($propertyName): void
     {
@@ -109,7 +105,6 @@ class LandDetailEditLivewire extends Component
 
     public function render()
     {
-
         return view('emap::livewire.edit.land-detail-edit-livewire');
     }
 }

@@ -7,11 +7,12 @@ use Livewire\Component;
 class MeetingNotice extends Component
 {
     public $type;
+
     public $meeting_at;
 
     public function mount($meetingNotice = null)
     {
-        if (!empty($meetingNotice)) {
+        if (! empty($meetingNotice)) {
             $this->type = $meetingNotice->type;
             $this->meeting_at = $meetingNotice->meeting_at;
         }

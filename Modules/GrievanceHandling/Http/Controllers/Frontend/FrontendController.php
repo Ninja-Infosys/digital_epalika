@@ -9,12 +9,11 @@ use Modules\GrievanceHandling\Entities\GrievanceType;
 
 class FrontendController extends Controller
 {
-
     public function singleGrievance(Request $request)
     {
         $request->validate([
             'token' => ['required'],
-            'phone' => ['required']
+            'phone' => ['required'],
         ]);
 
         $grievanceDetail = GrievanceDetail::with('grievanceDetails.files', 'files', 'grievanceType', 'grievanceOffice')
@@ -32,6 +31,7 @@ class FrontendController extends Controller
     {
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
         $grievanceDetails = GrievanceDetail::whereNull('grievance_detail_id')->public()->get();
+
         return view('grievancehandling::frontend.index', compact('grievanceTypes', 'grievanceDetails'));
     }
 

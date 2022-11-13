@@ -7,23 +7,23 @@ use Illuminate\Validation\Rule;
 
 class UpdateGrantTypeRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'title'=>['required', Rule::unique('grant_types', 'title')->withoutTrashed()]
+            'title' => ['required', Rule::unique('grant_types', 'title')->withoutTrashed()],
         ];
     }
 
     public function messages()
     {
         return[
-            'title.required'=>'अनुदान प्रकार आवश्यक छ',
-            'title.unique'=>'अनुदान प्रकार अद्वितीय छ'
+            'title.required' => 'अनुदान प्रकार आवश्यक छ',
+            'title.unique' => 'अनुदान प्रकार अद्वितीय छ',
         ];
     }
 }

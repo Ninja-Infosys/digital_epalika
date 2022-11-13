@@ -13,7 +13,8 @@ class EMapTemplateController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('eMapTemplate_access'),
+        abort_if(
+            Gate::denies('eMapTemplate_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -25,7 +26,8 @@ class EMapTemplateController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('eMapTemplate_create'),
+        abort_if(
+            Gate::denies('eMapTemplate_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -35,7 +37,8 @@ class EMapTemplateController extends Controller
 
     public function store(StoreEMapTemplateRequest $request)
     {
-        abort_if(Gate::denies('eMapTemplate_create'),
+        abort_if(
+            Gate::denies('eMapTemplate_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -43,12 +46,14 @@ class EMapTemplateController extends Controller
         EMapTemplate::create($request->validated());
 
         toast('टेम्प्लेट सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
     public function show(EMapTemplate $eMapTemplate)
     {
-        abort_if(Gate::denies('eMapTemplate_access'),
+        abort_if(
+            Gate::denies('eMapTemplate_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -58,7 +63,8 @@ class EMapTemplateController extends Controller
 
     public function edit(EMapTemplate $eMapTemplate)
     {
-        abort_if(Gate::denies('eMapTemplate_edit'),
+        abort_if(
+            Gate::denies('eMapTemplate_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -68,7 +74,8 @@ class EMapTemplateController extends Controller
 
     public function update(UpdateEMapTemplateRequest $request, EMapTemplate $eMapTemplate)
     {
-        abort_if(Gate::denies('eMapTemplate_edit'),
+        abort_if(
+            Gate::denies('eMapTemplate_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -76,27 +83,29 @@ class EMapTemplateController extends Controller
         $eMapTemplate->update($request->validated());
 
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('emap.admin.eMapTemplate.index'));
     }
 
     public function destroy(EMapTemplate $eMapTemplate)
     {
-        abort_if(Gate::denies('eMapTemplate_delete'),
+        abort_if(
+            Gate::denies('eMapTemplate_delete'),
             403,
             'You are not allowed to access this resource'
         );
     }
 
-
     public function getStaticTemplate(Request $request)
     {
-        abort_if(Gate::denies('eMapTemplate_create'),
+        abort_if(
+            Gate::denies('eMapTemplate_create'),
             403,
             'You are not allowed to access this resource'
         );
 
         $request->validate([
-            'type' => ['required']
+            'type' => ['required'],
         ]);
 
         return match ($request->input('type')) {
@@ -106,7 +115,5 @@ class EMapTemplateController extends Controller
             'construction-completion-certificate' => \View::make('emap::admin.notice.building_construction_completion_certificate'),
             default => 'Enter Valid Type',
         };
-
-
     }
 }

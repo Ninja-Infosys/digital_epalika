@@ -43,7 +43,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
                 ->prefix('file_manager')
                 ->as('file_manager.')->group(base_path('routes/file_manager.php'));
-
         });
     }
 

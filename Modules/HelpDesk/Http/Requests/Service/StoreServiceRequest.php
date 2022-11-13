@@ -24,7 +24,7 @@ class StoreServiceRequest extends FormRequest
             'serviceDocuments' => ['required', 'array'],
             'serviceDocuments.*.description' => ['required'],
             'serviceProcesses' => ['required', 'array'],
-            'serviceProcesses.*.description' => ['required']
+            'serviceProcesses.*.description' => ['required'],
         ];
     }
 
@@ -43,7 +43,7 @@ class StoreServiceRequest extends FormRequest
             'serviceDocuments.required' => 'कागजात आवश्यक छ',
             'serviceDocuments.*.description.required' => 'कागजात आबश्यक छ ',
             'serviceProcesses.required' => 'सेवा उपलब्ध प्रक्रिया आवश्यक छ',
-            'serviceProcesses.*.description.required' => 'उपलब्ध प्रक्रिया आबश्यक छ '
+            'serviceProcesses.*.description.required' => 'उपलब्ध प्रक्रिया आबश्यक छ ',
         ];
     }
 }

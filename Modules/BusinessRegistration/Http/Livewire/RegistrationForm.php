@@ -22,38 +22,52 @@ class RegistrationForm extends Component
 {
     use WithFileUploads;
 
-
     public int $currentStep = 1;
 
     public $district_preview;
+
     public $province_preview;
+
     public $localBody_preview;
 
     public $issue_district_preview;
 
     public $permanent_district_preview;
+
     public $permanent_province_preview;
+
     public $permanent_localBody_preview;
 
-
     public $provinces = [];
+
     public $districts = [];
+
     public $localBodies = [];
+
     public $wards = 0;
+
     public $objectTransactions = [];
+
     public $businessPurposes = [];
 
-
     public $investmentRevenues = [];
+
     public $threeGenerationDetails = [];
+
     public $partnerDetails = [];
+
     public $permanent_provinces = [];
+
     public $permanent_districts = [];
+
     public $all_districts = [];
+
     public $permanent_localBodies = [];
+
     public $permanent_wards = '';
 
     public $businessNatures = [];
+
     public $dbBusinessPurposes = [];
 
     public array $form = [
@@ -110,12 +124,11 @@ class RegistrationForm extends Component
         'is_rent' => 0,
         'is_registered' => 0,
         'is_confirmed' => null,
-        'length'=>null,
-        'width'=>null,
-        'square'=>0
+        'length' => null,
+        'width' => null,
+        'square' => 0,
 
     ];
-
 
     public function mount()
     {
@@ -141,7 +154,6 @@ class RegistrationForm extends Component
     {
         $this->currentStep = $step;
     }
-
 
     protected array $firstStepValidations = [
         'form.name' => ['required', 'string', 'max:255'],
@@ -227,7 +239,7 @@ class RegistrationForm extends Component
     ];
 
     protected array $fifthStepValidations = [
-        'form.is_confirmed' => ['required']
+        'form.is_confirmed' => ['required'],
     ];
 
     public function messages(): array
@@ -375,7 +387,7 @@ class RegistrationForm extends Component
                     'name' => $threeGenerationDetail['name'] ?? '',
                     'name_en' => $threeGenerationDetail['name_en'] ?? '',
                     'citizenship_no' => $threeGenerationDetail['citizenship_no'] ?? '',
-                    'mobile_no' => $threeGenerationDetail['mobile_no'] ?? ''
+                    'mobile_no' => $threeGenerationDetail['mobile_no'] ?? '',
                 ]);
             }
 
@@ -384,7 +396,7 @@ class RegistrationForm extends Component
                     'relation' => $partnerDetail['relation'] ?? '',
                     'name' => $partnerDetail['name'] ?? '',
                     'citizenship_no' => $partnerDetail['citizenship_no'] ?? '',
-                    'mobile_no' => $partnerDetail['mobile_no'] ?? ''
+                    'mobile_no' => $partnerDetail['mobile_no'] ?? '',
                 ]);
             }
 
@@ -393,7 +405,7 @@ class RegistrationForm extends Component
                     'registration_no' => $registeredBusiness['registration_no'] ?? '',
                     'business_name' => $registeredBusiness['business_name'] ?? '',
                     'registration_date' => $registeredBusiness['registration_date'] ?? '',
-                    'active' => $registeredBusiness['active'] ?? ''
+                    'active' => $registeredBusiness['active'] ?? '',
                 ]);
             }
             $proprietorDetails->businessRegisteredFile()->create([
@@ -413,12 +425,11 @@ class RegistrationForm extends Component
             ]);
 
             return $proprietorDetails;
-
         });
         $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो",
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'तपाइको व्यवसाय सफलता पुर्बक दर्ता भयो',
         ]);
 
         $this->emit('productStore');
@@ -463,67 +474,65 @@ class RegistrationForm extends Component
 
     public function render(): Factory|View|Application
     {
-        if (!empty($this->form['permanent_province_id'])) {
+        if (! empty($this->form['permanent_province_id'])) {
             $this->permanent_districts = Province::with('districts')->findOrFail($this->form['permanent_province_id'])->districts;
         }
-        if (!empty($this->form['permanent_district_id'])) {
+        if (! empty($this->form['permanent_district_id'])) {
             $this->permanent_localBodies = District::with('localBodies')->findOrFail($this->form['permanent_district_id'])->localBodies;
         }
-        if (!empty($this->form['permanent_local_body_id'])) {
+        if (! empty($this->form['permanent_local_body_id'])) {
             $this->permanent_wards = LocalBody::findOrFail($this->form['permanent_local_body_id'])->wards;
         }
 
-        if (!empty($this->form['province_id'])) {
+        if (! empty($this->form['province_id'])) {
             $this->districts = Province::with('districts')->findOrFail($this->form['province_id'])->districts;
         }
-        if (!empty($this->form['district_id'])) {
+        if (! empty($this->form['district_id'])) {
             $this->localBodies = District::with('localBodies')->findOrFail($this->form['district_id'])->localBodies;
         }
-        if (!empty($this->form['local_body_id'])) {
+        if (! empty($this->form['local_body_id'])) {
             $this->wards = LocalBody::findOrFail($this->form['local_body_id'])->wards;
         }
 
-        if (!empty($this->form['object_transaction_id'])) {
+        if (! empty($this->form['object_transaction_id'])) {
             $this->investmentRevenues = InvestmentRevenue::where('object_transaction_id', $this->form['object_transaction_id'])->get();
         }
 
         //temporary address preview
-        if (!empty($this->form['district_id'])) {
+        if (! empty($this->form['district_id'])) {
             $this->district_preview = District::find($this->form['district_id']);
         }
-        if (!empty($this->form['province_id'])) {
+        if (! empty($this->form['province_id'])) {
             $this->province_preview = Province::find($this->form['province_id']);
         }
-        if (!empty($this->form['local_body_id'])) {
+        if (! empty($this->form['local_body_id'])) {
             $this->localBody_preview = LocalBody::find($this->form['local_body_id']);
         }
 
         //permanent address preview
 
-        if (!empty($this->form['permanent_province_id'])) {
+        if (! empty($this->form['permanent_province_id'])) {
             $this->permanent_province_preview = Province::find($this->form['permanent_province_id']);
         }
-        if (!empty($this->form['permanent_district_id'])) {
+        if (! empty($this->form['permanent_district_id'])) {
             $this->permanent_district_preview = District::find($this->form['permanent_district_id']);
         }
-        if (!empty($this->form['permanent_local_body_id'])) {
+        if (! empty($this->form['permanent_local_body_id'])) {
             $this->permanent_localBody_preview = LocalBody::find($this->form['permanent_local_body_id']);
         }
 
-        if (!empty($this->form['issue_district_id'])) {
+        if (! empty($this->form['issue_district_id'])) {
             $this->issue_district_preview = District::find($this->form['issue_district_id']);
         }
-        if (!empty($this->form['purpose'])) {
+        if (! empty($this->form['purpose'])) {
             $this->dbBusinessPurposes = BusinessPurpose::whereIn('id', $this->form['purpose'])->get();
         }
-        if(!empty($this->form['length'] && $this->form['width']))
-        {
-            $this->form['square'] = $this->form['length'] *  $this->form['width'];
-        }
-        else{
+        if (! empty($this->form['length'] && $this->form['width'])) {
+            $this->form['square'] = $this->form['length'] * $this->form['width'];
+        } else {
             $this->form['square'] = '';
         }
+
         return view('businessregistration::livewire.registration-form');
     }
 }
-

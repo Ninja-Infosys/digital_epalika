@@ -21,12 +21,17 @@ class TrainerLivewire extends Component
     use AddressHelperTrait;
 
     public $designations = [];
+
     public $departments = [];
+
     public $provinces = [];
+
     public $subjects = [];
 
     public $districts = [];
+
     public $localBodies = [];
+
     public $wards = [];
 
     public $trainer;
@@ -69,7 +74,7 @@ class TrainerLivewire extends Component
         $this->provinces = Province::all();
         $this->subjects = Subject::latest()->get();
 
-        if (!empty($trainer)) {
+        if (! empty($trainer)) {
             $this->setDataForEdit($trainer);
         }
     }
@@ -80,9 +85,6 @@ class TrainerLivewire extends Component
 
         return view('roaster::livewire.trainer-livewire');
     }
-
-
-
 
     private function setDataForEdit($trainer): void
     {
@@ -107,7 +109,7 @@ class TrainerLivewire extends Component
         foreach ($trainer->trainerDocuments as $document) {
             $this->form['documents'][] = [
                 'id' => $document->id,
-                'title' => $document->title
+                'title' => $document->title,
             ];
         }
         //bank details

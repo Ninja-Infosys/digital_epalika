@@ -33,7 +33,6 @@ enum FileTypeEnum: string
             self::HEIR => 'वारेसनामा',
             self::PERMISSION => 'मन्जुरीनामा',
             self::REGISTRATION => 'दर्ता तथा दस्तुर',
-
         };
     }
 }

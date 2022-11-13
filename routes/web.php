@@ -35,7 +35,6 @@ Route::get('executive', [FrontController::class, 'executive'])->name('executive'
 Route::get('single-executive', [FrontController::class, 'single_executive'])->name('single-executive');
 Route::get('service-details', [FrontController::class, 'service_details'])->name('service-details');
 
-
 Route::get('/static/notice', [FrontController::class, 'notice'])->name('notice');
 Route::get('/static/single-notice/{notice}', [FrontController::class, 'singleNotice'])->name('single-notice');
 
@@ -47,7 +46,6 @@ Route::prefix('print')->as('print.')->controller(PrintController::class)->group(
 
 Route::get('login/locked', [LoginController::class, 'locked'])->middleware('auth')->name('login.locked');
 Route::post('login/locked', [LoginController::class, 'unlock'])->name('login.unlock');
-
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();

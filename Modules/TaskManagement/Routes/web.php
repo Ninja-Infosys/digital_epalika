@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('taskmanagement')->group(function() {
+Route::prefix('taskmanagement')->group(function () {
 //    Route::get('/', 'TaskManagementController@index');
 });

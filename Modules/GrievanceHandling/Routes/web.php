@@ -11,11 +11,10 @@
 |
 */
 
-
 use Illuminate\Support\Facades\Route;
 use Modules\GrievanceHandling\Http\Controllers\Frontend\FrontendController;
 
-Route::get('single-grievance',[FrontendController::class,'singleGrievance'])->name('single-grievance');
+Route::get('single-grievance', [FrontendController::class, 'singleGrievance'])->name('single-grievance');
 
 Route::controller(FrontendController::class)->group(function () {
     Route::get('grievance', 'grievanceHandling')->name('grievance');

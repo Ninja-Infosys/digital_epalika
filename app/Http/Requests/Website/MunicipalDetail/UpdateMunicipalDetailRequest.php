@@ -18,7 +18,7 @@ class UpdateMunicipalDetailRequest extends FormRequest
             'icon' => ['required'],
             'count' => ['required'],
             'bg_color' => ['required'],
-            'position' => ['nullable', 'integer']
+            'position' => ['nullable', 'integer'],
         ];
     }
 
@@ -29,7 +29,7 @@ class UpdateMunicipalDetailRequest extends FormRequest
             'icon.required' => 'आइकन अनिबार्य छ ',
             'count.required' => 'गणना अनिबार्य छ ',
             'bg_color.required' => 'कलर अनिबार्य छ ',
-            'position.integer' => 'स्थिति अङ्कमा हुनुपर्छ '
+            'position.integer' => 'स्थिति अङ्कमा हुनुपर्छ ',
         ];
     }
 }

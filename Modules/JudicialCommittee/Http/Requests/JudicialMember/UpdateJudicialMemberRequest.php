@@ -32,7 +32,7 @@ class UpdateJudicialMemberRequest extends FormRequest
             'father_name' => ['required'],
             'mother_name' => ['required'],
             'grandfather_name' => ['required'],
-            'status' => ['nullable', 'boolean']
+            'status' => ['nullable', 'boolean'],
         ];
     }
 

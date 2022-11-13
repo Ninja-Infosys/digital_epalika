@@ -5,9 +5,6 @@ namespace Modules\EMap\Http\Livewire;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -15,15 +12,16 @@ use Modules\EMap\Entities\Organization;
 
 class OrganizationRegisterPersonLivewire extends Component
 {
-
     use WithFileUploads;
 
     public int $currentStep = 1;
+
     public float $progressPercentage = 0;
 
     public $is_same_as_permanent = false;
 
     public $districts = [];
+
     public $provinces = [];
 
     public array $address = [
@@ -46,7 +44,7 @@ class OrganizationRegisterPersonLivewire extends Component
     public array $user = [
         'name' => null,
         'email' => null,
-        'phone' => null
+        'phone' => null,
     ];
 
     public array $userDetail = [
@@ -77,7 +75,6 @@ class OrganizationRegisterPersonLivewire extends Component
         'temporary_ward' => null,
         'temporary_tole' => null,
     ];
-
 
     protected array $firstStepValidations = [
         'userDetail.name_ne' => ['required'],
@@ -147,7 +144,6 @@ class OrganizationRegisterPersonLivewire extends Component
             4 => $this->fourthStepValidations,
             default => $this->firstStepValidations,
         };
-
     }
 
     public function updated($propertyName): void
@@ -160,35 +156,34 @@ class OrganizationRegisterPersonLivewire extends Component
         $this->validate();
         DB::transaction(function () {
             $DbUser = Organization::create($this->user + [
-                    'is_organization' => 0
-                ]);
+                'is_organization' => 0,
+            ]);
             $DbUser->userDetail()->create($this->userDetail);
             $this->resetForm();
         });
         $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
         ]);
     }
 
     public function resetForm(): void
     {
         $this->reset('is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user');
-
     }
 
     public function checkPermanentAddress(): void
     {
-        if (!empty($this->userDetail['permanent_province_id'])) {
+        if (! empty($this->userDetail['permanent_province_id'])) {
             $this->address['permanentDistricts'] = Province::with('districts')->findOrFail($this->userDetail['permanent_province_id'])->districts;
             $this->address['permanentProvince'] = $this->provinces->firstWhere('id', $this->userDetail['permanent_province_id']);
         }
-        if (!empty($this->userDetail['permanent_district_id'])) {
+        if (! empty($this->userDetail['permanent_district_id'])) {
             $this->address['permanentLocalBodies'] = District::with('localBodies')->findOrFail($this->userDetail['permanent_district_id'])->localBodies;
             $this->address['permanentDistrict'] = $this->address['permanentDistricts']->firstWhere('id', $this->userDetail['permanent_district_id']);
         }
-        if (!empty($this->userDetail['permanent_local_body_id'])) {
+        if (! empty($this->userDetail['permanent_local_body_id'])) {
             $this->address['permanentWards'] = LocalBody::findOrFail($this->userDetail['permanent_local_body_id'])->ward_no;
             $this->address['permanentLocalBody'] = $this->address['permanentLocalBodies']->firstWhere('id', $this->userDetail['permanent_local_body_id']);
         }
@@ -196,15 +191,15 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function checkTemporaryAddress(): void
     {
-        if (!empty($this->userDetail['temporary_province_id'])) {
+        if (! empty($this->userDetail['temporary_province_id'])) {
             $this->address['temporaryDistricts'] = Province::with('districts')->findOrFail($this->userDetail['temporary_province_id'])->districts;
             $this->address['temporaryProvince'] = $this->provinces->firstWhere('id', $this->userDetail['temporary_province_id']);
         }
-        if (!empty($this->userDetail['temporary_district_id'])) {
+        if (! empty($this->userDetail['temporary_district_id'])) {
             $this->address['temporaryLocalBodies'] = District::with('localBodies')->findOrFail($this->userDetail['temporary_district_id'])->localBodies;
             $this->address['temporaryDistrict'] = $this->address['temporaryDistricts']->firstWhere('id', $this->userDetail['temporary_district_id']);
         }
-        if (!empty($this->userDetail['temporary_local_body_id'])) {
+        if (! empty($this->userDetail['temporary_local_body_id'])) {
             $this->address['temporaryWards'] = LocalBody::findOrFail($this->userDetail['temporary_local_body_id'])->ward_no;
             $this->address['temporaryLocalBody'] = $this->address['temporaryLocalBodies']->firstWhere('id', $this->userDetail['temporary_local_body_id']);
         }
@@ -212,7 +207,7 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function checkSameAsPermanentAddress(): void
     {
-        $this->is_same_as_permanent = !$this->is_same_as_permanent;
+        $this->is_same_as_permanent = ! $this->is_same_as_permanent;
 
         if ($this->is_same_as_permanent) {
             $this->address['temporaryDistricts'] = $this->address['permanentDistricts'] ?? [];
@@ -257,7 +252,7 @@ class OrganizationRegisterPersonLivewire extends Component
             'userDetail.citizenship_issued_date.required' => 'नागरिकता जारी गरिएको मिति आवश्यक छ ।',
             'userDetail.pan_no.required' => 'पाना नं आवश्यक छ।',
             'userDetail.nec_no.required' => 'NEC नं आवश्यक छ।',
-            'userDetail.nec_certificate.required'=>'NEC को प्रमाणपत्र आवश्यक छ।',
+            'userDetail.nec_certificate.required' => 'NEC को प्रमाणपत्र आवश्यक छ।',
             'userDetail.nec_certificate.max' => 'NEC को प्रमाणपत्रको अधिकतम साइज ३०० केबी ।',
             'userDetail.citizenship_front.required' => 'नागरिकताको फोटो आवश्यक छ।',
             'userDetail.citizenship_back.max' => 'नागरिकताको फोटो आवश्यक छ।',
@@ -282,15 +277,15 @@ class OrganizationRegisterPersonLivewire extends Component
         ];
     }
 
-
     public function render()
     {
         $this->checkPermanentAddress();
         $this->checkTemporaryAddress();
 
-        if (!empty($this->userDetail['citizenship_issued_district'])) {
+        if (! empty($this->userDetail['citizenship_issued_district'])) {
             $this->address['citizenshipIssuedDistrict'] = $this->districts->firstWhere('id', $this->userDetail['citizenship_issued_district']);
         }
+
         return view('emap::livewire.organization-register-person-livewire');
     }
 }

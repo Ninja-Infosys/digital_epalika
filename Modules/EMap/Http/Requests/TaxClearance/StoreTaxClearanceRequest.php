@@ -6,16 +6,16 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTaxClearanceRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'year'=>['required'],
-            'document'=>['required','mimes:png,jpg,jpeg'],
+            'year' => ['required'],
+            'document' => ['required', 'mimes:png,jpg,jpeg'],
         ];
     }
 }

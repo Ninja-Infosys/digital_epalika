@@ -7,22 +7,23 @@ use Illuminate\Validation\Rule;
 
 class UpdateDesignationRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'title' => ['required', Rule::unique('designations', 'title')->ignore($this->designation)->withoutTrashed()]
+            'title' => ['required', Rule::unique('designations', 'title')->ignore($this->designation)->withoutTrashed()],
         ];
     }
+
     public function messages(): array
     {
         return [
             'title.required' => 'पद अनिवार्य छ',
-            'title.unique' => ' पद अद्वितीय हुनुपर्छ'
+            'title.unique' => ' पद अद्वितीय हुनुपर्छ',
         ];
     }
 }

@@ -8,7 +8,7 @@ class TraineeTable extends Component
 {
     public $trainees = [];
 
-    public function __construct($trainees=null)
+    public function __construct($trainees = null)
     {
         $this->trainees = $trainees;
     }

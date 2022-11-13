@@ -8,19 +8,19 @@ use Illuminate\Validation\Rule;
 
 class UpdateEMapTemplateRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('eMapTemplate_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'title' => ['required'],
-            'for' => ['required',Rule::unique('e_map_templates','for')->withoutTrashed()->ignore($this->eMapTemplate)],
+            'for' => ['required', Rule::unique('e_map_templates', 'for')->withoutTrashed()->ignore($this->eMapTemplate)],
             'type' => ['required'],
             'data' => ['required'],
-            'requires_header' => ['nullable', 'boolean']
+            'requires_header' => ['nullable', 'boolean'],
         ];
     }
 }

@@ -12,7 +12,8 @@ class UnitController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('unit_access'),
+        abort_if(
+            Gate::denies('unit_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -24,7 +25,8 @@ class UnitController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('unit_create'),
+        abort_if(
+            Gate::denies('unit_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -34,24 +36,26 @@ class UnitController extends Controller
 
     public function store(StoreUnitRequest $request)
     {
-        abort_if(Gate::denies('unit_create'),
+        abort_if(
+            Gate::denies('unit_create'),
             403,
             'You are not allowed to this resource'
         );
 
         Unit::create($request->validated());
         toast('मापन एकाइ सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('admin.units.unit.index'));
     }
 
     public function show(Unit $unit)
     {
-
     }
 
     public function edit(Unit $unit)
     {
-        abort_if(Gate::denies('unit_edit'),
+        abort_if(
+            Gate::denies('unit_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -63,24 +67,28 @@ class UnitController extends Controller
 
     public function update(UpdateUnitRequest $request, Unit $unit)
     {
-        abort_if(Gate::denies('unit_edit'),
+        abort_if(
+            Gate::denies('unit_edit'),
             403,
             'You are not allowed to access this resource'
         );
         $unit->update($request->validated());
 
         toast('मापन एकाइ सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.units.unit.index'));
     }
 
     public function destroy(Unit $unit)
     {
-        abort_if(Gate::denies('unit_delete'),
+        abort_if(
+            Gate::denies('unit_delete'),
             403,
             'You are not allowed to access this resource'
         );
         $unit->delete();
         toast('मापन एकाइ सफलतापूर्वक मेटाइयो', 'success');
+
         return redirect(route('admin.units.unit.index'));
     }
 }

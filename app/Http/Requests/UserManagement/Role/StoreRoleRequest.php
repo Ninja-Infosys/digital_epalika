@@ -17,16 +17,16 @@ class StoreRoleRequest extends FormRequest
         return [
             'title' => ['required', Rule::unique('roles', 'title')->withoutTrashed()],
             'permissions' => ['required', 'array'],
-            'permissions.*' => [Rule::exists('permissions', 'id')]
+            'permissions.*' => [Rule::exists('permissions', 'id')],
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required'=>'भूमिका शिर्षक अनिबार्य छ।',
-            'title.unique'=>'भूमिका शीर्षक पहिले नै लिइएको छ।',
-            'permissions.required'=>'अनुमति क्षेत्र आवश्यक छ।',
+            'title.required' => 'भूमिका शिर्षक अनिबार्य छ।',
+            'title.unique' => 'भूमिका शीर्षक पहिले नै लिइएको छ।',
+            'permissions.required' => 'अनुमति क्षेत्र आवश्यक छ।',
         ];
     }
 }

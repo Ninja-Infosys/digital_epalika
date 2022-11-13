@@ -2,10 +2,8 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use App\Models\Settings\FiscalYear;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\FiscalYear;
 use Illuminate\Support\Facades\Gate;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Http\Requests\GrantProgram\StoreGrantProgramRequest;
@@ -15,7 +13,8 @@ class GrantProgramController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('grantProgram_access'),
+        abort_if(
+            Gate::denies('grantProgram_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -27,7 +26,8 @@ class GrantProgramController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('grantProgram_create'),
+        abort_if(
+            Gate::denies('grantProgram_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -39,7 +39,8 @@ class GrantProgramController extends Controller
 
     public function store(StoreGrantProgramRequest $request)
     {
-        abort_if(Gate::denies('grantProgram_create'),
+        abort_if(
+            Gate::denies('grantProgram_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -47,12 +48,14 @@ class GrantProgramController extends Controller
         GrantProgram::create($request->validated());
 
         toast('कार्यक्रम सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
     public function show(GrantProgram $grantProgram)
     {
-        abort_if(Gate::denies('grantProgram_access'),
+        abort_if(
+            Gate::denies('grantProgram_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -62,18 +65,20 @@ class GrantProgramController extends Controller
 
     public function edit(GrantProgram $grantProgram)
     {
-        abort_if(Gate::denies('grantProgram_edit'),
+        abort_if(
+            Gate::denies('grantProgram_edit'),
             403,
             'You are not allowed to access this resource'
         );
         $fiscalYears = FiscalYear::all();
 
-        return view('grant::admin.grant_program.edit',compact('fiscalYears','grantProgram'));
+        return view('grant::admin.grant_program.edit', compact('fiscalYears', 'grantProgram'));
     }
 
     public function update(UpdateGrantProgramRequest $request, GrantProgram $grantProgram)
     {
-        abort_if(Gate::denies('grantProgram_edit'),
+        abort_if(
+            Gate::denies('grantProgram_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -81,12 +86,14 @@ class GrantProgramController extends Controller
         $grantProgram->update($request->validated());
 
         toast('कार्यक्रम सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.grant.grantProgram.index'));
     }
 
     public function destroy(GrantProgram $grantProgram)
     {
-        abort_if(Gate::denies('grantProgram_delete'),
+        abort_if(
+            Gate::denies('grantProgram_delete'),
             403,
             'You are not allowed to access this resource'
         );
@@ -94,6 +101,7 @@ class GrantProgramController extends Controller
         $grantProgram->delete();
 
         toast('कार्यक्रम सफलतापूर्वक हटाइयो', 'success');
+
         return back();
     }
 }

@@ -14,7 +14,8 @@ class ListRegistrationController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('listRegistration_access'),
+        abort_if(
+            Gate::denies('listRegistration_access'),
             403,
             'You are not allowed to list registration access'
         );
@@ -26,18 +27,20 @@ class ListRegistrationController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('listRegistration_create'),
+        abort_if(
+            Gate::denies('listRegistration_create'),
             403,
             'You are not allowed to list registration create'
         );
-        $registration_no = 'R-' . Str::padLeft(DB::table('list_registrations')->max('id') + 1, 2, 0);
+        $registration_no = 'R-'.Str::padLeft(DB::table('list_registrations')->max('id') + 1, 2, 0);
 
         return view('listregistration::admin.list_registration.create', compact('registration_no'));
     }
 
     public function store(StoreListRegistrationRequest $request)
     {
-        abort_if(Gate::denies('listRegistration_create'),
+        abort_if(
+            Gate::denies('listRegistration_create'),
             403,
             'You are not allowed to list registration create'
         );
@@ -45,28 +48,32 @@ class ListRegistrationController extends Controller
         DB::transaction(function () use ($request) {
             $listRegistration = ListRegistration::create($request->validated());
 
-            if (!empty($request->validated()['files'])) {
+            if (! empty($request->validated()['files'])) {
                 $this->uploadDocuments($request, $listRegistration);
             }
         });
 
         toast('मौजुदा सुची दर्ता सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
     public function show(ListRegistration $listRegistration)
     {
-        abort_if(Gate::denies('listRegistration_access'),
+        abort_if(
+            Gate::denies('listRegistration_access'),
             403,
             'You are not allowed to list registration access'
         );
         $listRegistration->load('files');
+
         return view('listregistration::admin.list_registration.show', compact('listRegistration'));
     }
 
     public function edit(ListRegistration $listRegistration)
     {
-        abort_if(Gate::denies('listRegistration_edit'),
+        abort_if(
+            Gate::denies('listRegistration_edit'),
             403,
             'You are not allowed to list registration edit'
         );
@@ -76,7 +83,8 @@ class ListRegistrationController extends Controller
 
     public function update(UpdateListRegistrationRequest $request, ListRegistration $listRegistration)
     {
-        abort_if(Gate::denies('listRegistration_edit'),
+        abort_if(
+            Gate::denies('listRegistration_edit'),
             403,
             'You are not allowed to list registration edit'
         );
@@ -99,18 +107,20 @@ class ListRegistrationController extends Controller
 
             $listRegistration->update($request->validated());
 
-            if (!empty($request->validated()['files'])) {
+            if (! empty($request->validated()['files'])) {
                 $this->uploadDocuments($request, $listRegistration);
             }
         });
 
         toast('मौजुदा सुची दर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.listRegistrations.listRegistration.index'));
     }
 
     public function destroy(ListRegistration $listRegistration)
     {
-        abort_if(Gate::denies('listRegistration_delete'),
+        abort_if(
+            Gate::denies('listRegistration_delete'),
             403,
             'You are not allowed to list registration delete'
         );
@@ -146,7 +156,7 @@ class ListRegistrationController extends Controller
             $listRegistration->files()->create([
                 'file_name' => $file['file_name'] ?? pathinfo($file['file']->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $file['file']->getClientOriginalExtension(),
-                'file' => $file['file']->store('list_registration/' . Str::slug($listRegistration->main_person, '_') . '/files', 'public')
+                'file' => $file['file']->store('list_registration/'.Str::slug($listRegistration->main_person, '_').'/files', 'public'),
             ]);
         }
     }

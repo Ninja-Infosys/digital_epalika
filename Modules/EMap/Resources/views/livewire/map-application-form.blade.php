@@ -1,28 +1,28 @@
 <form wire:submit.prevent="saveFormData" method="post"
       class="building-construction-application">
     @csrf
-
-    <div class="row">
-        <div class=" col-md-8 ">
-
-                <label for="organization_id">संस्था <span class="text-danger">*</span></label>
-                <select
-                    wire:model="applyMap.organization_id" id="organization_id"
-                    name="organization_id">
-                    <option value="">संस्था छान्नुहोस्</option>
-                    @foreach($organizations as $organization)
-                        <option
-                            value="{{$organization->id}}">{{$organization->organizationDetail->org_name_ne ?? $organization->userDetail->name_ne ?? ''}}</option>
-                    @endforeach
-                </select>
-                @error('applyMap.organization_id')
-                <p class="text-danger">{{$message}}</p>
-                @enderror
+    <div class="row pb-2 d-flex">
+        <div class="col-md-1">
+            <label for="organization_id" class="fs-5">संस्था <span
+                    class="text-danger">*</span></label>
+        </div>
+        <div class="col-md-11">
+            <select wire:model="applyMap.organization_id" id="organization_id"
+                    name="organization_id" class="form-control">
+                <option value="">संस्था छान्नुहोस्</option>
+                @foreach($organizations as $organization)
+                    <option
+                        value="{{$organization->id}}">{{$organization->organizationDetail->org_name_ne ?? $organization->userDetail->name_ne ?? ''}}</option>
+                @endforeach
+            </select>
+            @error('applyMap.organization_id')
+            <p class="text-danger">{{$message}}</p>
+            @enderror
         </div>
     </div>
     <fieldset>
         <legend>१. प्रस्तावित भवनको विवरण</legend>
-        <div class="row">
+        <div class="row p-2 border">
             <div class="mb-3">
                 <b class="form-label">१.१ निर्माण कार्यको किसिम *</b> <br>
                 <div class="row">
@@ -147,7 +147,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-12">
@@ -165,7 +164,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md-6">
@@ -224,8 +222,8 @@
                                     <th>जम्मा क्षेत्रफल</th>
                                     <th>उचाई</th>
                                     <th>
-                                        <button type="button" class="btn btn-primary"
-                                                wire:click.prevent="addStoreyDetail">थप्नुहोस
+                                        <button type="button" class="btn btn-sm btn-primary"
+                                                wire:click.prevent="addStoreyDetail"><i class="fa fa-plus px-1"></i>थप्नुहोस
                                         </button>
                                     </th>
                                 </tr>
@@ -300,24 +298,12 @@
             </div>
         </div>
     </fieldset>
-
     <fieldset>
         <legend>२. जग्गाको विवरण</legend>
-        <div class="row">
+        <div class="row p-2 border">
             <div class="mb-3">
                 <div class="row">
-                    <div class="col-md-6">
-                        <label
-                            for="landDescription.land_use_area"><b>२.१ भू-उपयोग्य क्षेत्र: </b></label>
-                        <input type="text"
-                               id="landDescription.land_use_area"
-                               wire:model="landDescription.land_use_area"
-                        >
-                        @error('landDescription.land_use_area')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 pb-2">
                         <label for="convert_to">Convert To</label>
                         <select name="convert_to" id="convert_to" wire:model="conversion_id"
                                 wire:change="conversionLogic">
@@ -327,127 +313,105 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
-            </div>
+                    <table class=" table table-hover table-responsive table-bordered">
+                        <tr>
+                            <td><label
+                                    for="landDescription.land_use_area"><b>२.१ भू-उपयोग्य क्षेत्र: </b></label>
+                                <input class="form-control" type="text"
+                                       id="landDescription.land_use_area"
+                                       wire:model="landDescription.land_use_area"
+                                >
+                                @error('landDescription.land_use_area')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror</td>
+                            <td><label
+                                    for="landDescription.ward_no"><b>२.२ वडा नं: </b></label>
+                                <input class="form-control" type="text"
+                                       id="landDescription.ward_no"
+                                       wire:model="landDescription.ward_no"
+                                >
+                                @error('landDescription.ward_no')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror</td>
+                            <td><label
+                                    for="landDescription.former_ward_no"><b>२.३ साविक वडा नं: </b></label>
+                                <input class="form-control" type="text"
+                                       id="landDescription.former_ward_no"
+                                       wire:model="landDescription.former_ward_no"
+                                >
+                                @error('landDescription.former_ward_no')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror</td>
+                        </tr>
+                        <tr>
+                            <td><label
+                                    for="landDescription.tole"><b>२.४ टोलको नाम: </b></label>
+                                <input class="form-control" type="text"
+                                       id="landDescription.tole"
+                                       wire:model="landDescription.tole"
+                                >
+                                @error('landDescription.tole')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror</td>
+                            <td><label
+                                    for="landDescription.street_code_no"><b>२.५ सडक कोड नं: </b></label>
+                                <input class="form-control" type="text"
+                                       id="landDescription.street_code_no"
+                                       wire:model="landDescription.street_code_no"
+                                >
+                                @error('landDescription.street_code_no')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror</td>
+                            <td><label
+                                    for="landDescription.plot_no"><b>२.६ जग्गा कित्ता नं: </b></label>
+                                <input class="form-control" type="text"
+                                       id="landDescription.plot_no"
+                                       wire:model="landDescription.plot_no"
+                                >
+                                @error('landDescription.plot_no')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror</td>
+                        </tr>
+                        <tr>
+                            <td><b>२.७ क्षेत्रफल </b>
+                                @foreach($units as $index=>$unit)
+                                    <label for="{{$unit->id}}">{{$unit->title}}</label>
+                                    <input type="text" id="{{$unit->id}}" wire:model="conversion.data{{$index}}"
+                                           readonly>
+                                @endforeach
 
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label
-                            for="landDescription.ward_no"><b>२.२ वडा नं: </b></label>
-                        <input type="text"
-                               id="landDescription.ward_no"
-                               wire:model="landDescription.ward_no"
-                        >
-                        @error('landDescription.ward_no')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="col-md-6">
-                        <label
-                            for="landDescription.former_ward_no"><b>२.३ साविक वडा नं: </b></label>
-                        <input type="text"
-                               id="landDescription.former_ward_no"
-                               wire:model="landDescription.former_ward_no"
-                        >
-                        @error('landDescription.former_ward_no')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label
-                            for="landDescription.tole"><b>२.४ टोलको नाम: </b></label>
-                        <input type="text"
-                               id="landDescription.tole"
-                               wire:model="landDescription.tole"
-                        >
-                        @error('landDescription.tole')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-                    <div class="col-md-6">
-                        <label
-                            for="landDescription.street_code_no"><b>२.५ सडक कोड नं: </b></label>
-                        <input type="text"
-                               id="landDescription.street_code_no"
-                               wire:model="landDescription.street_code_no"
-                        >
-                        @error('landDescription.street_code_no')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label
-                            for="landDescription.plot_no"><b>२.६ जग्गा कित्ता नं: </b></label>
-                        <input type="text"
-                               id="landDescription.plot_no"
-                               wire:model="landDescription.plot_no"
-                        >
-                        @error('landDescription.plot_no')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <b>२.७ क्षेत्रफल </b>
-                        @foreach($units as $index=>$unit)
-                            <label for="{{$unit->id}}">{{$unit->title}}</label>
-                            <input type="text" id="{{$unit->id}}" wire:model="conversion.data{{$index}}" readonly>
-                        @endforeach
-
-                        {{'('}}
-                        <input type="text"
-                               id="landDescription.unit_value"
-                               wire:model="landDescription.unit_value"
-                        >
-                        <label
-                            for="landDescription.unit_value">{{$setting->standardLandMeasurement->title ?? ''}}</label>
-                        @error('landDescription.unit_value')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                        {{')'}}
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label
-                            for="landDescription.percentage_of_area_covered_by_building">
-                            <b>२.८ भवनले ढाक्ने
-                                क्षेत्रफलको प्रतिशत (GCR): </b>
-                        </label>
-                        <input type="text"
-                               id="landDescription.percentage_of_area_covered_by_building"
-                               wire:model="landDescription.percentage_of_area_covered_by_building"
-                        >
-                        @error('landDescription.percentage_of_area_covered_by_building')
-                        <p class="text-danger">{{$message}}</p>
-                        @enderror
-                    </div>
+                                {{'('}}
+                                <input type="text"
+                                       id="landDescription.unit_value"
+                                       wire:model="landDescription.unit_value"
+                                >
+                                <label
+                                    for="landDescription.unit_value">{{$setting->standardLandMeasurement->title ?? ''}}</label>
+                                @error('landDescription.unit_value')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                                {{')'}}</td>
+                            <td><label
+                                    for="landDescription.percentage_of_area_covered_by_building">
+                                    <b>२.८ भवनले ढाक्ने
+                                        क्षेत्रफलको प्रतिशत (GCR): </b>
+                                </label>
+                                <input class="form-control" type="text"
+                                       id="landDescription.percentage_of_area_covered_by_building"
+                                       wire:model="landDescription.percentage_of_area_covered_by_building"
+                                >
+                                @error('landDescription.percentage_of_area_covered_by_building')
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </fieldset>
-
     <fieldset>
         <legend>३. जग्गा धनीको विवरण</legend>
-        <div class="row">
+        <div class="row p-2 border">
             <div class="mb-3">
                 <b class="form-label">३.१ जग्गा धनीको किसिम *</b> <br>
                 <div class="row">
@@ -476,7 +440,7 @@
                             <tr>
                                 <td>
                                     <label for="name">१.१ नाम :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="name"
                                            wire:model="landOwner.name"
                                     >
@@ -486,7 +450,7 @@
                                 </td>
                                 <td>
                                     <label for="phone">१.२ फोन नं. :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="phone"
                                            wire:model="landOwner.phone"
                                     >
@@ -496,7 +460,7 @@
                                 </td>
                                 <td>
                                     <label for="father_name">१.३ बुवाको नाम :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="father_name"
                                            wire:model="landOwner.father_name"
                                     >
@@ -508,7 +472,7 @@
                             <tr>
                                 <td>
                                     <label for="landOwner.grandfather_name">१.४ हजुरबुबाको नाम :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="landOwner.grandfather_name"
                                            wire:model="landOwner.grandfather_name"
                                     >
@@ -519,7 +483,7 @@
                                 <td>
                                     <label for="landOwner.citizenship_issue_district_id">१.५ नागरिकता लिएको जिल्ला
                                         :</label>
-                                    <select wire:model="landOwner.citizenship_issue_district_id"
+                                    <select class="form-control" wire:model="landOwner.citizenship_issue_district_id"
                                             id="landOwner.citizenship_issue_district_id">
                                         <option value=""></option>
                                         @foreach($allDistricts as $district)
@@ -534,7 +498,7 @@
                                 </td>
                                 <td>
                                     <label for="citizenship_no">१.६ नागरिकत नम्बर :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="citizenship_no"
                                            wire:model="landOwner.citizenship_no"
                                     >
@@ -547,7 +511,7 @@
                                 <td>
                                     <label for="citizenship_issue_date">१.७ नागरिकता लिएको मिति :
                                         :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="citizenship_issue_date"
                                            wire:model="landOwner.citizenship_issue_date"
                                     >
@@ -555,11 +519,9 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <label for="landOwner.address">१.८ ठेगाना :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="landOwner.address"
                                            wire:model="landOwner.address"
                                     >
@@ -569,7 +531,7 @@
                                 </td>
                                 <td>
                                     <label for="landOwner.local_body">१.९ पालिका :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="landOwner.local_body"
                                            wire:model="landOwner.local_body"
                                     >
@@ -577,9 +539,11 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     <label for="landOwner.ward_no">१.१० वडा नं. :</label>
-                                    <input type="number"
+                                    <input class="form-control" type="number"
                                            id="landOwner.ward_no"
                                            wire:model="landOwner.ward_no"
                                     >
@@ -600,14 +564,15 @@
 
     <fieldset>
         <legend>४. घर धनीको विवरण (जग्गाधनी भन्दा फरक भएमा)</legend>
-        <div class="row">
+        <div class="row p-2 border">
             <div class="my-2">
                 <div class="form-check-primary0 d-flex">
-                    <h5 class="fw-bold mt-1" for="address_check">
-                        के घर धनीको विवरण र जग्गाधनीको विवरण एउटै हो?
-                    </h5>
+                    <h6 class=" mt-1" for="address_check">
+                        <span class="text-danger">के घर धनीको विवरण र जग्गाधनीको विवरण एउटै हो ?</span>
+                    </h6>
                     <div class="font px-2">
-                        <button wire:click.prevent="checkSameAsLandOwner" type="button" class=" btn btn-light btn-sm">
+                        <button wire:click.prevent="checkSameAsLandOwner" type="button"
+                                class=" btn btn-light btn-sm">
                             <i
                                 class="fa fa-toggle-{{$same_as_land_owner ? 'on' :'off' }} fa-2x"></i>
                         </button>
@@ -622,7 +587,7 @@
                                 <tr>
                                     <td>
                                         <label for="houseOwner.name">१.१ नाम :</label>
-                                        <input type="text"
+                                        <input class="form-control" type="text"
                                                id="houseOwner.name"
                                                wire:model="houseOwner.name"
                                         >
@@ -632,7 +597,7 @@
                                     </td>
                                     <td>
                                         <label for="houseOwner.phone">१.२ फोन नं. :</label>
-                                        <input type="text"
+                                        <input class="form-control" type="text"
                                                id="houseOwner.phone"
                                                wire:model="houseOwner.phone"
                                         >
@@ -642,7 +607,7 @@
                                     </td>
                                     <td>
                                         <label for="houseOwner.father_name">१.३ बुवाको नाम :</label>
-                                        <input type="text"
+                                        <input class="form-control" type="text"
                                                id="houseOwner.father_name"
                                                wire:model="houseOwner.father_name"
                                         >
@@ -654,7 +619,7 @@
                                 <tr>
                                     <td>
                                         <label for="houseOwner.grandfather_name">१.४ हजुरबुबाको नाम :</label>
-                                        <input type="text"
+                                        <input class="form-control" type="text"
                                                id="houseOwner.grandfather_name"
                                                wire:model="houseOwner.grandfather_name"
                                         >
@@ -668,7 +633,7 @@
                                             :
                                         </label>
                                         <select
-                                            id="houseOwner.citizenship_issue_district_id"
+                                            class="form-control" id="houseOwner.citizenship_issue_district_id"
                                             wire:model="houseOwner.citizenship_issue_district_id">
                                             <option value=""></option>
                                             @foreach($allDistricts as $district)
@@ -685,7 +650,7 @@
                                         <label for="houseOwner.citizenship_no">
                                             १.६ नागरिकत नम्बर :
                                         </label>
-                                        <input type="text"
+                                        <input class="form-control" type="text"
                                                id="houseOwner.citizenship_no"
                                                wire:model="houseOwner.citizenship_no"
                                         >
@@ -699,7 +664,7 @@
                                         <label for="houseOwner.citizenship_issue_date">
                                             १.७ नागरिकता लिएको मिति :
                                         </label>
-                                        <input type="text"
+                                        <input class="form-control" type="text"
                                                id="houseOwner.citizenship_issue_date"
                                                wire:model="houseOwner.citizenship_issue_date"
                                         >
@@ -707,13 +672,11 @@
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
-                                </tr>
-                                <tr>
                                     <td>
                                         <label for="houseOwner.address">
                                             १.८ ठेगाना :
                                         </label>
-                                        <input type="text"
+                                        <input class="form-control" type="text"
                                                id="houseOwner.address"
                                                wire:model="houseOwner.address"
                                         >
@@ -723,7 +686,7 @@
                                     </td>
                                     <td>
                                         <label for="houseOwner.local_body">१.९ पालिका :</label>
-                                        <input type="text"
+                                        <input class="form-control" type="text"
                                                id="houseOwner.local_body"
                                                wire:model="houseOwner.local_body"
                                         >
@@ -731,9 +694,11 @@
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </td>
+                                </tr>
+                                <tr>
                                     <td>
                                         <label for="houseOwner.ward_no">१.१० वडा नं. :</label>
-                                        <input type="number"
+                                        <input class="form-control" type="number"
                                                id="houseOwner.ward_no"
                                                wire:model="houseOwner.ward_no"
                                         >
@@ -755,7 +720,7 @@
 
     <fieldset>
         <legend>७. निवेदकको विवरण</legend>
-        <div class="row">
+        <div class="row p-2 border">
             <div class="mb-3">
                 <b class="form-label">७.१ निवेदकको प्रकार : </b> <br>
                 <div class="row">
@@ -803,7 +768,7 @@
                             <tr>
                                 <td>
                                     <label for="applicantDetail.name">१.१ नाम :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="applicantDetail.name"
                                            wire:model="applicantDetail.name"
                                     >
@@ -813,7 +778,7 @@
                                 </td>
                                 <td>
                                     <label for="applicantDetail.phone">१.२ फोन नं. :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="applicantDetail.phone"
                                            wire:model="applicantDetail.phone"
                                     >
@@ -821,11 +786,9 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <label for="applicantDetail.father_name">१.३ बुवाको नाम :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="applicantDetail.father_name"
                                            wire:model="applicantDetail.father_name"
                                     >
@@ -833,12 +796,15 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     <label for="applicantDetail.citizenship_issue_district_id">
                                         १.४ नागरिकता लिएको
                                         जिल्ला :
                                     </label>
-                                    <select wire:model="applicantDetail.citizenship_issue_district_id">
+                                    <select class="form-control"
+                                            wire:model="applicantDetail.citizenship_issue_district_id">
                                         <option value=""></option>
                                         @foreach($allDistricts as $district)
                                             <option value="{{$district->id}}">
@@ -850,11 +816,9 @@
                                     <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <label for="applicantDetail.citizenship_no">१.५ नागरिकत नम्बर :</label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="applicantDetail.citizenship_no"
                                            wire:model="applicantDetail.citizenship_no"
                                     >
@@ -867,7 +831,7 @@
                                         १.६ नागरिकता लिएको मिति :
                                         :
                                     </label>
-                                    <input type="text"
+                                    <input class="form-control" type="text"
                                            id="applicantDetail.citizenship_issue_date"
                                            wire:model="applicantDetail.citizenship_issue_date"
                                     >
@@ -886,42 +850,44 @@
         </div>
 
     </fieldset>
-    <div class="d-flex justify-content-between ">
-        <div>
+    <div class="d-flex justify-content-between pt-3 ">
+        <div class="d-flex">
+            <div class="px-1">
+                <label
+                    for="application_date"><b>निबेदनको मिति : </b></label>
+            </div>
             <div>
                 <input type="text"
                        id="application_date"
                        wire:model="applicantDetail.application_date"
                 >
-            </div>
-            <div class="px-5">
-                <label
-                    for="application_date"><b>निबेदनको मिति : </b></label>
+                @error('applicantDetail.application_date')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
             </div>
 
-            @error('applicantDetail.application_date')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
         </div>
-        <div>
-
+        <div class="d-flex">
+            <div class="px-1">
+                <label
+                    for="applicant_signature"><b>निवेदकको सहि: </b></label>
+            </div>
             <div>
                 <input type="file"
                        id="applicant_signature"
                        wire:model="applicantDetail.signature"
                 >
+                @error('applicantDetail.signature')
+                <p class="text-danger">{{$message}}</p>
+                @enderror
             </div>
-            <div class="px-5">
-                <label
-                    for="applicant_signature"><b>निवेदकको सहि: </b></label>
-            </div>
-            @error('applicantDetail.signature')
-            <p class="text-danger">{{$message}}</p>
-            @enderror
+
+
         </div>
     </div>
 
     <div class="mt-4 d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary    ">Save</button>
+        <button type="submit" class="btn btn-primary    ">पेश गर्नुहोस्</button>
     </div>
+
 </form>

@@ -10,7 +10,9 @@ use Modules\EMap\Entities\MapApply;
 class FourFortDetailEditLivewire extends Component
 {
     public array $fourFortDetails = [];
+
     public MapApply $mapApply;
+
     public ?int $dataToEdit = null;
 
     public function mount(MapApply $mapApply): void
@@ -25,7 +27,7 @@ class FourFortDetailEditLivewire extends Component
                 'east' => $fourFort->east ?? null,
                 'south' => $fourFort->south ?? null,
                 'west' => $fourFort->west ?? null,
-                'north' => $fourFort->north ?? null
+                'north' => $fourFort->north ?? null,
             ];
         }
     }
@@ -35,16 +37,16 @@ class FourFortDetailEditLivewire extends Component
         if ($this->dataToEdit === null) {
             return [];
         }
+
         return [
             'fourFortDetails' => ['required', 'array'],
-            'fourFortDetails.' . $this->dataToEdit . '.detail' => ['required'],
-            'fourFortDetails.' . $this->dataToEdit . '.east' => ['required'],
-            'fourFortDetails.' . $this->dataToEdit . '.south' => ['required'],
-            'fourFortDetails.' . $this->dataToEdit . '.west' => ['required'],
-            'fourFortDetails.' . $this->dataToEdit . '.north' => ['required'],
+            'fourFortDetails.'.$this->dataToEdit.'.detail' => ['required'],
+            'fourFortDetails.'.$this->dataToEdit.'.east' => ['required'],
+            'fourFortDetails.'.$this->dataToEdit.'.south' => ['required'],
+            'fourFortDetails.'.$this->dataToEdit.'.west' => ['required'],
+            'fourFortDetails.'.$this->dataToEdit.'.north' => ['required'],
         ];
     }
-
 
     public function setDataForEdit(?int $index = null): void
     {
@@ -58,7 +60,7 @@ class FourFortDetailEditLivewire extends Component
             DB::transaction(function () {
                 $dataToSave = $this->fourFortDetails[$this->dataToEdit];
 
-                if (!empty($dataToSave['id'])) {
+                if (! empty($dataToSave['id'])) {
                     FourFort::find($dataToSave['id'])?->update($dataToSave);
                 }
             });
@@ -66,9 +68,9 @@ class FourFortDetailEditLivewire extends Component
             $this->reset('dataToEdit');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }
@@ -83,7 +85,6 @@ class FourFortDetailEditLivewire extends Component
             'fourFortDetails.*.north.required' => 'उत्तर दिशा अनिवार्य छ|',
         ];
     }
-
 
     public function updated($propertyName): void
     {

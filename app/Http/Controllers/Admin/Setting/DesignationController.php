@@ -19,6 +19,7 @@ class DesignationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
         $designations = Designation::latest()->get();
+
         return view('admin.setting.designation.index', compact('designations'));
     }
 
@@ -43,8 +44,8 @@ class DesignationController extends Controller
         $designation = Designation::create($request->validated());
 
         toast('Designation Added successfully!', 'success');
-        return redirect()->route('admin.designation.index');
 
+        return redirect()->route('admin.designation.index');
     }
 
     public function edit(Designation $designation)
@@ -54,6 +55,7 @@ class DesignationController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+
         return view('admin.setting.designation.edit', compact('designation'));
     }
 
@@ -66,8 +68,8 @@ class DesignationController extends Controller
         );
         $designation->update($request->validated());
         toast('Designation Updated successfully!', 'success');
-        return redirect(route('admin.designation.index'));
 
+        return redirect(route('admin.designation.index'));
     }
 
     public function destroy(Designation $designation)
@@ -79,6 +81,7 @@ class DesignationController extends Controller
         );
         $designation->delete();
         toast('Designation Deleted successfully!', 'success');
+
         return back();
     }
 }

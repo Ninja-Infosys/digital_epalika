@@ -35,14 +35,12 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('mapTrack', 'mapTrack')->name('mapTrack');
     Route::get('formDetails', 'formDetails')->name('formDetails');
     Route::get('mapForm', 'mapForm')->name('mapForm');
-    Route::post('map-track','track_Map')->name('map-track');
-    Route::get('mapApply/{mapApply:uuid}/trackData','trackData')->name('track-data');
-    Route::get('mapApply/{mapApply:uuid}/sendOtp','sendOtp')->name('send-otp');
-    Route::post('mapApply/{mapApply:uuid}/verifyOtp','verifyOtp')->name('verify-otp');
-    Route::get('mapApply/{mapApply:uuid}/{noticeTypeEnum}/trackData','loadTemplateData')->name('load-template-data');
-    Route::post('mapApply/{mapApply:uuid}/{noticeTypeEnum}/storeEmapTemplateData','storeEmapTemplateData')->name('store-emap-template-data');
+    Route::post('map-track', 'track_Map')->name('map-track');
+    Route::get('mapApply/{mapApply:uuid}/trackData', 'trackData')->name('track-data');
+    Route::get('mapApply/{mapApply:uuid}/sendOtp', 'sendOtp')->name('send-otp');
+    Route::post('mapApply/{mapApply:uuid}/verifyOtp', 'verifyOtp')->name('verify-otp');
+    Route::get('mapApply/{mapApply:uuid}/{noticeTypeEnum}/trackData', 'loadTemplateData')->name('load-template-data');
+    Route::post('mapApply/{mapApply:uuid}/{noticeTypeEnum}/storeEmapTemplateData', 'storeEmapTemplateData')->name('store-emap-template-data');
 });
 
 //track map
-
-

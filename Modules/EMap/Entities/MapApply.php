@@ -20,13 +20,15 @@ use Modules\EMap\Traits\EMapTemplateTrait;
 
 class MapApply extends Model
 {
-    use HasFactory, SoftDeletes,EMapTemplateTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EMapTemplateTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
-        'sent_to_admin_at'
+        'sent_to_admin_at',
     ];
 
     protected $fillable = [
@@ -50,7 +52,7 @@ class MapApply extends Model
         'consultant_name',
         'consultant_mobile_no',
         'consultant_nec_no',
-        'sent_to_admin_at'
+        'sent_to_admin_at',
     ];
 
     protected $casts = [
@@ -61,7 +63,7 @@ class MapApply extends Model
 
     public function setConsultantSignatureAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
         }
     }
@@ -158,7 +160,7 @@ class MapApply extends Model
 
     public function otp(): MorphOne
     {
-        return $this->morphOne(Otp::class,'model')->latest();
+        return $this->morphOne(Otp::class, 'model')->latest();
     }
 
     public function scopeSentToAdmin($query)

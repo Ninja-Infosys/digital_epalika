@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Setting;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Department\StoreDepartmentRequest;
 use App\Http\Requests\Setting\Department\UpdateDepartmentRequest;
@@ -21,6 +20,7 @@ class DepartmentController extends Controller
         );
 
         $departments = Department::latest()->get();
+
         return view('admin.setting.department.index', compact('departments'));
     }
 
@@ -40,6 +40,7 @@ class DepartmentController extends Controller
         Department::create($request->validated());
 
         toast('department added successfully!', 'success');
+
         return back();
     }
 
@@ -64,6 +65,7 @@ class DepartmentController extends Controller
 
         $department->update($request->validated());
         toast('department updated successfully!', 'success');
+
         return redirect()->route('admin.department.index');
     }
 
@@ -78,6 +80,7 @@ class DepartmentController extends Controller
         $department->delete();
 
         toast('department deleted successfully!', 'success');
+
         return back();
     }
 }

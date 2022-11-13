@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\UserManagement\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -12,7 +11,7 @@ class RoleSeeder extends Seeder
     {
         Role::create([
             'title' => 'Super Admin',
-            'type' => 'Super'
+            'type' => 'Super',
         ]);
     }
 }

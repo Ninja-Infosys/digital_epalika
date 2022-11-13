@@ -2,12 +2,9 @@
 
 namespace Modules\EMap\Http\Controllers;
 
-use App\Models\Otp;
-use Exception;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use Exception;
+use Illuminate\Http\Request;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
@@ -59,7 +56,7 @@ class FrontendController extends Controller
     {
         $request->validate([
             'submission_no' => ['required', 'exists:map_applies,unique_id'],
-            'phone_no' => ['required']
+            'phone_no' => ['required'],
         ]);
 
         $mapApply = MapApply::whereHas('houseOwner', function ($query) use ($request) {
@@ -72,8 +69,6 @@ class FrontendController extends Controller
         }
 
         return back()->with('message', 'Record does not match !!!!');
-
-
     }
 
     public function trackData(MapApply $mapApply)
@@ -82,7 +77,6 @@ class FrontendController extends Controller
 
         return view('emap::frontend.e-map.map_track.form_details', compact('mapApply'));
     }
-
 
     public function loadTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
     {
@@ -93,38 +87,38 @@ class FrontendController extends Controller
         $mapApply->load(['applyMapNotices' => function ($q) use ($noticeTypeEnum) {
             $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
         }]);
+
         return view('emap::frontend.e-map.map_track.form', compact('mapApply', 'noticeTypeEnum'));
     }
 
     public function storeEmapTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
     {
-
         if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
             abort(401);
         }
 
         if ($this->verifyOtp($request, $mapApply)) {
-            ApplyMapNotice::updateOrCreate([
+            ApplyMapNotice::updateOrCreate(
+                [
                 'map_apply_id' => $mapApply->id,
                 'file_type' => $noticeTypeEnum->value,
             ],
                 [
                     'data' => $request->input('data'),
-                ]);
+                ]
+            );
 
             return response([
-                'message'=>'Added successfully !!',
+                'message' => 'Added successfully !!',
 
-            ],200);
+            ], 200);
         }
 
         return response([
-            'message'=>'otp does not matched',
+            'message' => 'otp does not matched',
 
-        ],419);
-
+        ], 419);
     }
-
 
     /**
      * @throws Exception
@@ -137,7 +131,6 @@ class FrontendController extends Controller
                 'otp' => $number,
             ]);
 
-
             return response(['message' => 'Otp sent successfully'], 200);
         }
     }
@@ -145,16 +138,15 @@ class FrontendController extends Controller
     public function verifyOtp(Request $request, MapApply $mapApply): bool
     {
         $request->validate([
-            'otp' => ['required','integer']
+            'otp' => ['required', 'integer'],
         ]);
 
-        $checkedMapApply = $mapApply->loadExists(['otp'=>function($q) use($request){
-            $q->where('otp',$request->input('otp'));
+        $checkedMapApply = $mapApply->loadExists(['otp' => function ($q) use ($request) {
+            $q->where('otp', $request->input('otp'));
         }]);
 
         info($checkedMapApply->otp->is_expired);
 
-        return $checkedMapApply !== null && !$checkedMapApply->otp->is_expired;
+        return $checkedMapApply !== null && ! $checkedMapApply->otp->is_expired;
     }
-
 }

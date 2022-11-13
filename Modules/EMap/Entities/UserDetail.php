@@ -7,9 +7,8 @@ use App\Enums\MaritalStatusEnum;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -17,12 +16,13 @@ use Illuminate\Support\Str;
 
 class UserDetail extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -55,10 +55,9 @@ class UserDetail extends Model
         'organization_id',
     ];
 
-
     protected $casts = [
         'gender' => Gender::class,
-        'marital_status' => MaritalStatusEnum::class
+        'marital_status' => MaritalStatusEnum::class,
     ];
 
     public function getNecCertificateUrlAttribute(): string
@@ -70,8 +69,8 @@ class UserDetail extends Model
 
     public function setNecCertificateAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['nec_certificate'] = $value->store('user/detail/' . Str::slug($this->attributes['name_ne'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['nec_certificate'] = $value->store('user/detail/'.Str::slug($this->attributes['name_ne'], '_'), 'public');
         }
     }
 
@@ -84,8 +83,8 @@ class UserDetail extends Model
 
     public function setCitizenshipFrontAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['citizenship_front'] = $value->store('user/detail/' . Str::slug($this->attributes['name_ne'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['citizenship_front'] = $value->store('user/detail/'.Str::slug($this->attributes['name_ne'], '_'), 'public');
         }
     }
 
@@ -98,8 +97,8 @@ class UserDetail extends Model
 
     public function setCitizenshipBackAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['citizenship_back'] = $value->store('user/detail/' . Str::slug($this->attributes['name_ne'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['citizenship_back'] = $value->store('user/detail/'.Str::slug($this->attributes['name_ne'], '_'), 'public');
         }
     }
 

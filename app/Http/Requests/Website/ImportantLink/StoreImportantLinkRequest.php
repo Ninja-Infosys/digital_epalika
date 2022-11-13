@@ -15,7 +15,7 @@ class StoreImportantLinkRequest extends FormRequest
     {
         return [
             'link_title' => ['required', 'string', 'max:255'],
-            'link_url' => ['required', 'url']
+            'link_url' => ['required', 'url'],
         ];
     }
 
@@ -24,7 +24,7 @@ class StoreImportantLinkRequest extends FormRequest
         return [
             'link_title.required' => 'शीर्षक आवश्यक छ',
             'link_url.required' => 'url आवश्यक छ',
-            'link_url.url' => 'url फर्ममा हुनुपर्छ '
+            'link_url.url' => 'url फर्ममा हुनुपर्छ ',
         ];
     }
 }

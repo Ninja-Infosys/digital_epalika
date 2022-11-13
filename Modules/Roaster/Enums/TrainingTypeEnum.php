@@ -19,5 +19,4 @@ enum TrainingTypeEnum: string
             self::TECHNICAL_TRAINEE => 'प्राविधिक प्रशिक्षार्थीको लागि तालिम',
         };
     }
-
 }

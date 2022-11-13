@@ -16,7 +16,7 @@ class StoreInfrastructureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', Rule::unique('infrastructures', 'title')->withoutTrashed()]
+            'title' => ['required', Rule::unique('infrastructures', 'title')->withoutTrashed()],
         ];
     }
 
@@ -24,7 +24,7 @@ class StoreInfrastructureRequest extends FormRequest
     {
         return [
             'title.required' => 'पूर्वाधार शीर्षक आवश्यक छ',
-            'title.unique' => 'पूर्वाधार शीर्षक अद्वितीय हुनुपर्छ'
+            'title.unique' => 'पूर्वाधार शीर्षक अद्वितीय हुनुपर्छ',
         ];
     }
 }

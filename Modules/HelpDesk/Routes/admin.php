@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\Setting\BranchController;
 use Illuminate\Support\Facades\Route;
-use Modules\HelpDesk\Http\Controllers\{Admin\DashboardController,
-    Admin\ServiceController,
-    Admin\ServiceEmployeeController};
+use Modules\HelpDesk\Http\Controllers\Admin\DashboardController;
+use Modules\HelpDesk\Http\Controllers\Admin\ServiceController;
+use Modules\HelpDesk\Http\Controllers\Admin\ServiceEmployeeController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::resource('service', ServiceController::class);

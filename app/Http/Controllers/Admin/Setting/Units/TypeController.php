@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Setting\Units;
 
-use App\Models\Settings\FiscalYear;
-use App\Models\Settings\Units\Type;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Units\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
@@ -13,26 +12,31 @@ class TypeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('unitType_access'),
+        abort_if(
+            Gate::denies('unitType_access'),
             403,
             'You are not allowed to access this resource'
         );
         $types = Type::get();
+
         return view('admin.setting.units.type.index', compact('types'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('unitType_create'),
+        abort_if(
+            Gate::denies('unitType_create'),
             403,
             'You are not allowed to access this resource'
         );
+
         return view('admin.setting.units.type.create');
     }
 
     public function store(Request $request)
     {
-        abort_if(Gate::denies('unitType_create'),
+        abort_if(
+            Gate::denies('unitType_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -43,6 +47,7 @@ class TypeController extends Controller
 
         Type::create($validationData);
         toast('मापन एकाइ प्रकार सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('admin.units.type.index'));
     }
 
@@ -53,16 +58,19 @@ class TypeController extends Controller
 
     public function edit(Type $type)
     {
-        abort_if(Gate::denies('unitType_edit'),
+        abort_if(
+            Gate::denies('unitType_edit'),
             403,
             'You are not allowed to access this resource'
         );
+
         return view('admin.setting.units.type.edit', compact('type'));
     }
 
     public function update(Request $request, Type $type)
     {
-        abort_if(Gate::denies('unitType_edit'),
+        abort_if(
+            Gate::denies('unitType_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -73,17 +81,20 @@ class TypeController extends Controller
         $type->update($validationData);
 
         toast('मापन एकाइ प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.units.type.index'));
     }
 
     public function destroy(Type $type)
     {
-        abort_if(Gate::denies('unitType_delete'),
+        abort_if(
+            Gate::denies('unitType_delete'),
             403,
             'You are not allowed to access this resource'
         );
         $type->delete();
         toast('मापन एकाइ प्रकार सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

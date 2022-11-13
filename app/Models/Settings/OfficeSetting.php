@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Storage;
 
 class OfficeSetting extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -39,33 +41,33 @@ class OfficeSetting extends Model
         'website',
         'facebook_link',
         'introduction',
-        'fiscal_year_id'
+        'fiscal_year_id',
     ];
 
     public function setLogoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['logo'] = $value->store('office_setting/logo', 'public');
         }
     }
 
     public function setLogo1Attribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['logo1'] = $value->store('office_setting/logo', 'public');
         }
     }
 
     public function setLogo2Attribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['logo2'] = $value->store('office_setting/logo', 'public');
         }
     }
 
     public function setBackgroundImageAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['background_image'] = $value->store('office_setting/logo', 'public');
         }
     }

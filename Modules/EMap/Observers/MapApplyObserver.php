@@ -8,7 +8,6 @@ use Modules\EMap\Entities\MapApply;
 
 class MapApplyObserver
 {
-
     public function creating(MapApply $mapApply): void
     {
         $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;

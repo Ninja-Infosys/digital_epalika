@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateGrantProgramRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('grantProgram_edit');
     }
@@ -17,7 +17,7 @@ class UpdateGrantProgramRequest extends FormRequest
     {
         return [
             'fiscal_year_id' => ['required', Rule::exists('fiscal_years', 'id')->withoutTrashed()],
-            'program_name' => ['required']
+            'program_name' => ['required'],
         ];
     }
 
@@ -25,7 +25,7 @@ class UpdateGrantProgramRequest extends FormRequest
     {
         return [
             'fiscal_year_id.required' => 'आर्थिक वर्ष आवश्यक छ',
-            'program_name.required' => 'कार्यक्रम शीर्षक आवश्यक छ'
+            'program_name.required' => 'कार्यक्रम शीर्षक आवश्यक छ',
         ];
     }
 }

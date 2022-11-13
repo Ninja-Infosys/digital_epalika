@@ -27,7 +27,7 @@ class UpdateWardCommitteeRequest extends FormRequest
             'ward_no' => ['nullable', 'integer'],
             'village' => ['nullable', 'string'],
             'tole' => ['nullable', 'string'],
-            'position' => ['nullable', 'integer']
+            'position' => ['nullable', 'integer'],
         ];
     }
 
@@ -44,7 +44,7 @@ class UpdateWardCommitteeRequest extends FormRequest
             'ward_no.integer' => 'वार्ड न. अंकमा हुनुपर्छ ',
             'village.string' => 'गाउँ स्ट्रिङमा हुनुपर्छ',
             'tole.string' => 'टोल स्ट्रिङमा हुनुपर्छ',
-            'position.integer' => 'स्थिति अंकमा हुनुपर्छ '
+            'position.integer' => 'स्थिति अंकमा हुनुपर्छ ',
         ];
     }
 }

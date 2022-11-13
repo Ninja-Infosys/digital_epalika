@@ -15,11 +15,9 @@ class UpdateObjectTransactionRequest extends FormRequest
 
     public function rules(): array
     {
-
         return [
             'title' => ['required', 'string', 'max:255'],
-            'object_transaction_id' => ['nullable', Rule::exists('object_transactions', 'id')]
+            'object_transaction_id' => ['nullable', Rule::exists('object_transactions', 'id')],
         ];
-
     }
 }

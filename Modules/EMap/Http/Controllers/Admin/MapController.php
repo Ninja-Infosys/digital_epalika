@@ -31,11 +31,9 @@ class MapController extends Controller
 
         $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->sentToAdmin()->get();
 
-
 //            ->whereHas('applyMapNotices', function ($query) {
 //            $query->selectRaw('id,map_apply_id,type,file_type,created_at')->where('type', FileTypeEnum::APPLICATION->value)->whereNull('rejected_at')->latest();
 //        })->get();
-
 
         return view('emap::admin.map.index', compact('maps', 'application_types'));
     }
@@ -46,8 +44,8 @@ class MapController extends Controller
             $query->latest();
         }]);
         $districts = District::all();
-        return view('emap::admin.map.show', compact('mapApply', 'districts'));
 
+        return view('emap::admin.map.show', compact('mapApply', 'districts'));
     }
 
     public function rejectApplication(Request $request, MapApply $mapApply, ApplyMapNotice $applyMapNotice): \Illuminate\Routing\Redirector|Application|RedirectResponse
@@ -55,34 +53,38 @@ class MapController extends Controller
         if ($applyMapNotice->rejected_at === null) {
             $applyMapNotice->update([
                 'rejected_at' => now(),
-                'remarks' => $request->input('remarks')
+                'remarks' => $request->input('remarks'),
             ]);
         } else {
             $applyMapNotice->update([
                 'rejected_at' => null,
-                'remarks' => null
+                'remarks' => null,
             ]);
         }
 
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');
+
         return redirect(route('emap.admin.map.mapApply.show', $mapApply));
     }
 
-
     public function officeLetter(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load('landDetail',
+        $mapApply->load(
+            'landDetail',
             'houseOwner',
             'client'
         );
+
         return view('emap::admin.notice.office-letter', compact('mapApply'));
     }
 
     public function noticeLetter(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load('landDetail',
+        $mapApply->load(
+            'landDetail',
             'houseOwner'
         );
+
         return view('emap::admin.notice.notice-letter', compact('mapApply'));
     }
 
@@ -96,19 +98,26 @@ class MapController extends Controller
     public function mapArrears(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'houseOwner');
+
         return view('emap::admin.notice.map-arrears', compact('mapApply'));
     }
 
     public function landArrears(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'houseOwner', 'landOwner');
+
         return view('emap::admin.notice.land-arrears', compact('mapApply'));
     }
 
     public function technicianNotice(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load('landDetail', 'houseOwner', 'fourForts',
-            'criteriaDetails');
+        $mapApply->load(
+            'landDetail',
+            'houseOwner',
+            'fourForts',
+            'criteriaDetails'
+        );
+
         return view('emap::admin.notice.technician-notice', compact('mapApply'));
     }
 
@@ -117,6 +126,7 @@ class MapController extends Controller
         $mapApply->load(['houseOwner', 'designerDetails' => function ($query) {
             $query->where('post', PostsEnum::SUPERVISOR->value)->first();
         }]);
+
         return view('emap::admin.notice.ch-agreement', compact('mapApply'));
     }
 
@@ -125,12 +135,14 @@ class MapController extends Controller
         $mapApply->load(['houseOwner', 'designerDetails' => function ($query) {
             $query->where('post', PostsEnum::CONTRACTOR->value)->first();
         }]);
+
         return view('emap::admin.notice.agent-agreement', compact('mapApply'));
     }
 
     public function permissionLetter(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'landOwner', 'houseOwner');
+
         return view('emap::admin.notice.permission-letter', compact('mapApply'));
     }
 
@@ -138,7 +150,8 @@ class MapController extends Controller
     {
         $mapApply->load(['landDetail.unit', 'landOwner', 'houseOwner', 'structureType',
             'criteriaDetails',
-            'buildingDetails']);
+            'buildingDetails', ]);
+
         return view('emap::admin.notice.level', compact('mapApply'));
     }
 
@@ -147,33 +160,36 @@ class MapController extends Controller
         $mapApply->load(['landDetail', 'houseOwner', 'designerDetails' => function ($query) {
             $query->where('post', PostsEnum::CONTRACTOR->value)->first();
         }]);
+
         return view('emap::admin.notice.supervisor', compact('mapApply'));
     }
 
     public function firstPhaseConsultantReport(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'houseOwner');
+
         return view('emap::admin.map.report.first_phase_consultant_report', compact('mapApply'));
     }
 
     public function firstPhaseTechnicianReport(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'houseOwner');
-        return view('emap::admin.map.report.first_phase_technician_report', compact('mapApply'));
 
+        return view('emap::admin.map.report.first_phase_technician_report', compact('mapApply'));
     }
 
     public function secondPhaseConsultantReport(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'houseOwner');
+
         return view('emap::admin.map.report.second_phase_consultant_report', compact('mapApply'));
     }
 
     public function secondPhaseTechnicianReport(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'houseOwner');
-        return view('emap::admin.map.report.second_phase_technician_report', compact('mapApply'));
 
+        return view('emap::admin.map.report.second_phase_technician_report', compact('mapApply'));
     }
 
     public function plinthLevelSupervisorReport(MapApply $mapApply): Factory|View|Application
@@ -181,21 +197,21 @@ class MapController extends Controller
         $mapApply->load(['landDetail', 'houseOwner', 'designerDetails' => function ($query) {
             $query->where('post', PostsEnum::CONTRACTOR->value)->first();
         }]);
-        return view('emap::admin.map.report.plinth_level_supervisor_report', compact('mapApply'));
 
+        return view('emap::admin.map.report.plinth_level_supervisor_report', compact('mapApply'));
     }
 
     public function superStructurePermission(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load(['landDetail', 'landOwner', 'houseOwner']);
+
         return view('emap::admin.notice.superstructure-permission', compact('mapApply'));
-
     }
-
 
     public function superstructure(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load(['landDetail', 'landOwner', 'houseOwner:id,name']);
+
         return view('emap::admin.notice.superstructure', compact('mapApply'));
     }
 
@@ -216,6 +232,7 @@ class MapController extends Controller
     public function revisedSuperStructurePermitOrder(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landOwner', 'landDetail.unit');
+
         return view('emap::admin.notice.revised_superstructure_permit_order', compact('mapApply'));
     }
 
@@ -247,10 +264,9 @@ class MapController extends Controller
         return \view('emap::admin.notice.building_construction_completion_certificate', compact('mapApply'));
     }
 
-
     public function getTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
     {
-        $mapApply->load(['applyMapNotices.files','applyMapNotices' => function ($q) use ($noticeTypeEnum) {
+        $mapApply->load(['applyMapNotices.files', 'applyMapNotices' => function ($q) use ($noticeTypeEnum) {
             $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
         }]);
 
@@ -262,17 +278,19 @@ class MapController extends Controller
         $request->validate([
             'data' => ['required'],
             'files' => ['nullable', 'array'],
-            'files.*' => ['mimes:jpg,png,jpeg,pdf']
+            'files.*' => ['mimes:jpg,png,jpeg,pdf'],
         ]);
 
         $mapApplyData = DB::transaction(function () use ($request, $mapApply, $noticeTypeEnum) {
-            $mapApplyData = ApplyMapNotice::updateOrCreate([
+            $mapApplyData = ApplyMapNotice::updateOrCreate(
+                [
                 'map_apply_id' => $mapApply->id,
-                'file_type' => $noticeTypeEnum->value
+                'file_type' => $noticeTypeEnum->value,
             ],
                 [
                     'data' => $request->input('data'),
-                ]);
+                ]
+            );
 
             if ($request->hasFile('files')) {
                 $this->uploadDocuments($request, $mapApplyData);
@@ -281,12 +299,11 @@ class MapController extends Controller
             return $mapApplyData;
         });
 
-
         Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
+
         return back();
     }
-
 
     private function uploadDocuments($request, $mapApplyData): void
     {
@@ -294,9 +311,8 @@ class MapController extends Controller
             $mapApplyData->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('emapTemplateFile', 'public')
+                'file' => $document->store('emapTemplateFile', 'public'),
             ]);
         }
     }
-
 }

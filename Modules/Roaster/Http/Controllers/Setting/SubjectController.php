@@ -2,8 +2,6 @@
 
 namespace Modules\Roaster\Http\Controllers\Setting;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Roaster\Entities\Subject;
@@ -15,7 +13,6 @@ class SubjectController extends Controller
 {
     public function index()
     {
-
         abort_if(
             Gate::denies('subject_access'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -28,12 +25,12 @@ class SubjectController extends Controller
 
     public function create()
     {
-
         abort_if(
             Gate::denies('subject_create'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+
         return view('roaster::admin.setting.subject.create');
     }
 
@@ -47,17 +44,18 @@ class SubjectController extends Controller
         Subject::create($request->validated());
 
         toast('Subject Created Successfully', 'success');
+
         return redirect(route('admin.roaster.setting.subject.index'));
     }
 
     public function show(Subject $subject)
     {
-
         abort_if(
             Gate::denies('subject_access'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+
         return view('roaster::show');
     }
 
@@ -68,6 +66,7 @@ class SubjectController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+
         return view('roaster::admin.setting.subject.edit', compact('subject'));
     }
 
@@ -80,6 +79,7 @@ class SubjectController extends Controller
         );
         $subject->update($request->validated());
         toast('Subject Updated Successfully', 'success');
+
         return redirect(route('admin.roaster.setting.subject.index'));
     }
 
@@ -92,6 +92,7 @@ class SubjectController extends Controller
         );
         $subject->delete();
         toast('Subject Deleted Successfully', 'success');
+
         return back();
     }
 }

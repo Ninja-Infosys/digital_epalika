@@ -16,13 +16,14 @@ class OfficeSettingController extends Controller
         $officeSetting = OfficeSetting::first();
         $fiscalYears = FiscalYear::get();
         $officeHeaders = OfficeHeader::orderBy('position')->get();
-        return view('admin.setting.officeSetting.index', compact('officeSetting','officeHeaders','fiscalYears'));
-    }
 
+        return view('admin.setting.officeSetting.index', compact('officeSetting', 'officeHeaders', 'fiscalYears'));
+    }
 
     public function update(Request $request, OfficeSetting $officeSetting)
     {
-        $validationData = $request->validate([
+        $validationData = $request->validate(
+            [
             'name' => ['required', 'string'],
             'site_address' => ['nullable', 'string'],
             'logo' => ['nullable', 'mimes:png,jpg,jpeg,gif'],
@@ -39,11 +40,11 @@ class OfficeSettingController extends Controller
             'introduction' => ['nullable'],
             'email' => ['nullable'],
             'website' => ['nullable', 'url'],
-            'facebook_link' => ['nullable', 'url']
-        ],[
-            'name.required'=>'नाम अनिवार्य छ|'
-            ]
-
+            'facebook_link' => ['nullable', 'url'],
+        ],
+            [
+            'name.required' => 'नाम अनिवार्य छ|',
+        ]
         );
 
         if ($request->hasFile('logo') && $officeSetting->logo) {
@@ -61,7 +62,7 @@ class OfficeSettingController extends Controller
         $officeSetting->update($validationData);
 
         toast('कार्यालय सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
-
 }

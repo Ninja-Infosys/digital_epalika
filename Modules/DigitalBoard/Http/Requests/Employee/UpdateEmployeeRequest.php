@@ -8,32 +8,33 @@ use Illuminate\Validation\Rule;
 
 class UpdateEmployeeRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('employee_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],
             'department' => ['nullable', 'string'],
             'designation' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:png,jpeg,jpg'],
-            'email' => ['nullable','email', Rule::unique('employees', 'email')->withoutTrashed()->ignore($this->employee)],
+            'email' => ['nullable', 'email', Rule::unique('employees', 'email')->withoutTrashed()->ignore($this->employee)],
             'phone' => ['nullable', Rule::unique('employees', 'phone')->withoutTrashed()->ignore($this->employee)],
             'position' => ['nullable', 'integer'],
             'status' => ['nullable', 'boolean'],
         ];
     }
+
     public function messages()
     {
         return [
-            'name.required'=>'नाम अनिबार्य छ।',
-            'photo.mimes'=>'फोटो अनिबार्य jpg, jpeg, png मा छ। ',
-            'email.unique'=>'इमेल पहिले नै अवस्थित छ।',
-            'phone.unique'=>'फोन पहिले नै अवस्थित छ।',
-            'position.integer'=>'position पूर्णांक हुनुपर्छ'
+            'name.required' => 'नाम अनिबार्य छ।',
+            'photo.mimes' => 'फोटो अनिबार्य jpg, jpeg, png मा छ। ',
+            'email.unique' => 'इमेल पहिले नै अवस्थित छ।',
+            'phone.unique' => 'फोन पहिले नै अवस्थित छ।',
+            'position.integer' => 'position पूर्णांक हुनुपर्छ',
 
         ];
     }

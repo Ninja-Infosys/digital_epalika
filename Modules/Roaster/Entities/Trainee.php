@@ -18,12 +18,13 @@ use Illuminate\Support\Str;
 
 class Trainee extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -53,97 +54,95 @@ class Trainee extends Model
         'visa',
         'other_training',
         'select',
-        'reference_id'
+        'reference_id',
     ];
 
     protected $casts = [
-        'gender' => Gender::class
+        'gender' => Gender::class,
     ];
 
     public function setPhotoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('trainee/' . Str::slug($this->attributes['full_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['photo'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
 
     public function getPhotoUrlAttribute(): string
     {
-        return $this->attributes['photo'] ? asset('storage/' . $this->attributes['photo']) : asset('images/user_icon.jpg');
+        return $this->attributes['photo'] ? asset('storage/'.$this->attributes['photo']) : asset('images/user_icon.jpg');
     }
 
     public function setApplicationFormAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['application_form'] = $value->store('trainee/' . Str::slug($this->attributes['full_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['application_form'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
 
     public function getApplicationFormAttribute(): string
     {
-        return asset('storage/' . $this->attributes['application_form']);
+        return asset('storage/'.$this->attributes['application_form']);
     }
 
     public function setWardRecommendationAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['ward_recommendation'] = $value->store('trainee/' . Str::slug($this->attributes['full_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['ward_recommendation'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
 
     public function getWardRecommendationAttribute(): string
     {
-        return asset('storage/' . $this->attributes['ward_recommendation']);
+        return asset('storage/'.$this->attributes['ward_recommendation']);
     }
-
 
     public function setMarkSheetAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['mark_sheet'] = $value->store('trainee/' . Str::slug($this->attributes['full_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['mark_sheet'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
 
     public function getMarkSheetAttribute(): string
     {
-        return asset('storage/' . $this->attributes['mark_sheet']);
+        return asset('storage/'.$this->attributes['mark_sheet']);
     }
-
 
     public function setCitizenshipFrontAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['citizenship_front'] = $value->store('trainee/' . Str::slug($this->attributes['full_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['citizenship_front'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
 
     public function getCitizenshipFrontAttribute(): string
     {
-        return asset('storage/' . $this->attributes['citizenship_front']);
+        return asset('storage/'.$this->attributes['citizenship_front']);
     }
 
     public function setCitizenshipBackAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['citizenship_back'] = $value->store('trainee/' . Str::slug($this->attributes['full_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['citizenship_back'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
 
     public function getCitizenshipBackAttribute(): string
     {
-        return asset('storage/' . $this->attributes['citizenship_back']);
+        return asset('storage/'.$this->attributes['citizenship_back']);
     }
 
     public function setPassportAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['passport'] = $value->store('trainee/' . Str::slug($this->attributes['full_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['passport'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
         }
     }
 
     public function getPassportAttribute(): string
     {
-        return asset('storage/' . $this->attributes['passport']);
+        return asset('storage/'.$this->attributes['passport']);
     }
 
     public function trainingTrainee(): MorphOne

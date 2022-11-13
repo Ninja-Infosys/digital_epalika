@@ -4,7 +4,6 @@ namespace Modules\DigitalBoard\Http\Requests\Notice;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
 class UpdateNoticeRequest extends FormRequest
 {
@@ -24,15 +23,13 @@ class UpdateNoticeRequest extends FormRequest
             'files' => ['nullable', 'array'],
             'files.*' => ['mimes:png,jpeg,jpg'],
         ];
-
-
     }
 
     public function messages()
     {
         return[
-            'title.required'=>'शिर्षक अनिबार्य छ।',
-            'date.required'=>'मिति अनिबार्य छ।'
+            'title.required' => 'शिर्षक अनिबार्य छ।',
+            'date.required' => 'मिति अनिबार्य छ।',
         ];
     }
 }
