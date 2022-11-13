@@ -60,14 +60,14 @@
                         <div class="date">
                             <div class="row mt-2">
                                 <div class="col-md-6">
-                                    पत्र सं:
-                                    <div class="underline-dotted custom-width"></div>
+                                    पत्र सं: ......................
+
                                     <br>
-                                    चलानी नं:
-                                    <div class="underline-dotted custom-width"></div>
+                                    चलानी नं: ......................
+
                                 </div>
-                                <div class="col-md-6 text-end">मिति:
-                                    <div class="underline-dotted custom-width"></div>
+                                <div class="col-md-6 text-end">मिति: ......................
+
                                 </div>
                             </div>
                         </div>
@@ -75,28 +75,19 @@
                                 लागि)</b></h3>
 
                         <div class="super">
-                                    श्री/श्रीमती<span
-                                class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले जग्गा धनी
-                                    श्री<span class="underline-dotted">{{$mapApply->landOwner->name??''}}</span>
+                                    श्री/श्रीमती...................... ले जग्गा धनी
+                                    श्री......................
                                     को नाममा दर्ता रहेको यस {{config('applicationDetail.office_short_name')}} वडा
-                                    नं.<span
-                                class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
-                                    टोल<span
-                                class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span>
-                                    मा रहेको साविक<span
-                                class="underline-dotted custom-width"></span>
-                                    गा.वि.स.वडा नं.<span
-                                class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
-                                    कित्ता नं.<span
-                                class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span>
-                                    ज.वि.जम्मा<span
-                                class="underline-dotted">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
+                                    नं.......................
+                                    टोल......................
+                                    मा रहेको साविक......................
+                                    गा.वि.स.वडा नं.......................
+                                    कित्ता नं.......................
+                                    ज.वि.जम्मा......................
                                     को जग्गामा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४
                                     अनुसार
                                     नक्सा पास प्रक्रिया पुरा भैसकेको हुँदा यसको पछिल्लो पानामा उल्लेखित शर्तहरु र यसै
-                                    साथ दिईएको स्वीकृत नक्सा बमोजिम
-                                    <span
-                                        class="underline-dotted">{{$mapApply->construction_type->label()??''}}</span>
+                                    साथ दिईएको स्वीकृत नक्सा बमोजिम ......................
                                     निर्माण गर्न नक्सा पास भएकोले यो
                                     प्रमाण-पत्र दिईएको छ ।
                                     'आधारभूत निर्माण मापदण्ड-२०७२' तथा 'राष्ट्रिय भवन निर्माण संहिता-२०६०' बमोजिम
@@ -241,15 +232,14 @@
                             </tbody>
                         </table>
                         <p class="word">नक्सा स्वीकृत अगावै निर्माण कार्य भएको भए सो को विवरण :</p>
-                        <p class="word">(स्वीकृत नक्सा अनुसार हाल<span
-                                class="underline-dotted">{{$mapApply->current_storey}}</span>तल्ला
+                        <p class="word">(स्वीकृत नक्सा अनुसार हाल......................तल्ला
                             निर्माण गरिनेछ | </p>
                         <div class="d-flex">
-                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>
                                 तयार गर्ने </span></div>
-                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
+                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>चेक
                                 गर्ने<br>(इन्जिनियर)</span></div>
-                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>
                                 स्वीकृत गर्ने <br><small>(प्रमुख प्रशासकिय अधिकृत)</small></span></div>
                         </div>
 

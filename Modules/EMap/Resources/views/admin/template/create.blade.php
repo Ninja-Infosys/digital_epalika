@@ -116,11 +116,25 @@
                                     <h6>Static Template</h6>
                                 </div>
                                 <div class="col-md-12">
-
+                                    <span style="cursor: pointer"
+                                          class="badge badge-outline-primary text-primary getTemplate"
+                                          data-bs-type="level">
+                                        प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र
+                                    </span>
+                                    <span style="cursor: pointer"
+                                          class="badge badge-outline-primary text-primary getTemplate"
+                                          data-bs-type="superstructure">
+                                        भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)
+                                    </span>
+                                    <span style="cursor: pointer"
+                                          class="badge badge-outline-primary text-primary getTemplate"
+                                          data-bs-type="construction-completion-certificate">
+                                        भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र
+                                    </span>
                                     <span style="cursor: pointer"
                                           class="badge badge-outline-primary text-primary getTemplate"
                                           data-bs-type="naksa_certificate">
-                                        नक्सा प्रमाणपत्र
+                                        नक्सा प्रमाणित प्रमाण-पत्र
                                     </span>
                                 </div>
                             </div>
@@ -173,8 +187,7 @@
                             type: type
                         },
                         success: function (resp) {
-                            console.log($('.ckEditor:first'));
-                            $('.ckEditor:first').val(resp);
+                            CKEDITOR.instances.data.setData(resp);
                         },
                         error: function () {
                             alert("Something Went Wrong");

@@ -31,9 +31,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('emap.admin.map.map-apply.notice.upload.store-template-data',[$mapApply,$noticeTypeEnum])}}"
-                          method="post"
-                          enctype="multipart/form-data">
+                    <form
+                        action="{{route('emap.admin.map.map-apply.notice.upload.store-template-data',[$mapApply,$noticeTypeEnum])}}"
+                        method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
 
@@ -55,6 +56,13 @@
                                         class="form-control @error('files') is-invalid @enderror"
                                         id="files"
                                         multiple/>
+                                    @foreach($mapApply->applyMapNotices as $applyMapNotice)
+                                        @foreach($applyMapNotice->files as $file)
+                                            <a href="{{$file->file_url}}" download="{{$file->file_url}}">
+                                                <i class="fa fa-download"></i>
+                                                Download &nbsp;</a>
+                                        @endforeach
+                                    @endforeach
                                     @error('files')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

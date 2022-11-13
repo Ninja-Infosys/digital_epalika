@@ -60,14 +60,11 @@
                         <div class="date">
                             <div class="row mt-2">
                                 <div class="col-md-6">
-                                    पत्र सं:
-                                    <div class="underline-dotted custom-width"></div>
+                                    पत्र सं:......................
                                     <br>
-                                    चलानी नं:
-                                    <div class="underline-dotted custom-width"></div>
+                                    चलानी नं:......................
                                 </div>
-                                <div class="col-md-6 text-end">मिति:
-                                    <div class="underline-dotted custom-width"></div>
+                                <div class="col-md-6 text-end">मिति:......................
                                 </div>
                             </div>
                         </div>
@@ -75,31 +72,22 @@
                         <h3 class="top text-center"><b>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</b></h3>
 
                         <div class="top">
-                            श्री<span class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span> ले
+                            श्री...................... ले
                             यस {{config('applicationDetail.office_type')}}
-                            वडा नं.<span class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
+                            वडा नं.......................
                             मा निम्न बमोजिम निर्माण कार्य पूरा गरेकोले यो निर्माण कार्य सम्पन्न प्रमाण-पत्र
                             प्रदान गरिएको छ |
                         </div>
                         <br>
-                        <span class="word">१. जग्गाधनीको नाम, थर<span
-                                class="underline-dotted">{{$mapApply->landOwner->name??''}}</span>
+                        <span class="word">१. जग्गाधनीको नाम, थर......................
                         </span><br>
-                        <span class="word">२. घरधनीको नाम, थर, वतन <span
-                                class="underline-dotted">{{$mapApply->houseOwner->name??''}}</span><span
-                                class="underline-dotted custom-width"></span></span><br>
-                        <span class="word">३. जग्गाको विवरण साविक<span
-                                class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
-                            हालको वडा नं.<span
-                                class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
-                            घर नं.<span class="underline-dotted"></span> सडकको नाम<span
-                                class="underline-dotted">{{$mapApply->landDetail->street_code_no??''}}</span>
-                            साविक<span class="underline-dotted custom-width"></span> कि.नं.<span
-                                class="underline-dotted">{{$mapApply->landDetail->plot_no??''}}</span>
-                            क्षेत्रफल<span
-                                class="underline-dotted">{{$mapApply->landDetail->unit_value??''}} {{$mapApply->landDetail->unit->title??''}}</span>
-                            भू-उपयोग क्षेत्र<span
-                                class="underline-dotted">{{$mapApply->landDetail->land_use_area??''}}</span>
+                        <span class="word">२. घरधनीको नाम, थर, वतन ...................... ......................</span><br>
+                        <span class="word">३. जग्गाको विवरण साविक......................
+                            हालको वडा नं.......................
+                            घर नं....................... सडकको नाम......................
+                            साविक...................... कि.नं.......................
+                            क्षेत्रफल......................
+                            भू-उपयोग क्षेत्र......................
                         </span><br>
                         <span class="word">
                             ५. राष्ट्रिय भवन संहिता अनुसार भवनको वर्गिकरण :&nbsp;&nbsp;
@@ -120,10 +108,8 @@
                         </span><br>
                         <span class="word">
 
-                            निर्माणको स्ट्रक्चरल सिस्टम<span
-                                class="underline-dotted">{{$mapApply->structureType->title??''}}</span></span><br>
-                        <span class="word">६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति<span
-                                class="underline-dotted custom-width"></span></span><br>
+                            निर्माणको स्ट्रक्चरल सिस्टम<......................</span><br>
+                        <span class="word">६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति......................</span><br>
                         <span>७.
                         <table class="table table-sm table-borderless word">
                             <thead>
@@ -139,91 +125,83 @@
                             <tbody>
                             <tr>
                                 <td>भूमिगत वा अर्ध भूमिगत तला १</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                                 <td>पाचौ</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                             </tr>
                             <tr>
                                 <td>भूमिगत वा अर्ध भूमिगत तला २</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                                 <td>छैठौ</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                             </tr>
                             <tr>
                                 <td>जमिन तला</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                                 <td>सातौ</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                             </tr>
                             <tr>
                                 <td>पहिलो तला</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                                 <td>आठौ</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                             </tr>
                             <tr>
                                 <td>दोस्रो तला</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                                 <td>नवौ</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                             </tr>
                             <tr>
                                 <td>तेस्रो तला</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                                 <td>दशौ</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                             </tr>
                             <tr>
                                 <td>चौथो तला</td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                                 <td></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
-                                <td><span class="underline-dotted custom-width"></span></td>
+                                <td>......................</td>
+                                <td>......................</td>
                             </tr>
                             </tbody>
                         </table>
                             </span>
-                        <span class="word">जम्मा क्षेत्रफल<span class="underline-dotted custom-width"></span></span><br>
-                        <span class="word">८. भवनको ग्राउण्ड कभरेज: <span
-                                class="underline-dotted custom-width"></span></span><br>
-                        <span class="word">९. बनेको भवनको उचाई <span
-                                class="underline-dotted">{{$mapApply->height}}</span>
-                            तला संख्या <span class="underline-dotted">{{$mapApply->current_storey}}</span></span><br>
+                        <span class="word">जम्मा क्षेत्रफल......................</span><br>
+                        <span class="word">८. भवनको ग्राउण्ड कभरेज: ......................</span><br>
+                        <span class="word">९. बनेको भवनको उचाई......................
+                            तला संख्या ......................</span><br>
                         <span class="word">१०. घर बनेको प्लटसँग जोडिएको सडकको सडक सिमानाबाट न्युनतम छाड्न पर्ने
-                            दूरी<span class="underline-dotted custom-width"></span>
-                            छाडिएको दूरी<span class="underline-dotted custom-width"></span></span><br>
-                        <span class="word">११. बिजुलीको तार नजिक भएमा छाड्न पर्ने दूरी<span
-                                class="underline-dotted custom-width"></span> छाडेको दूरी <span
-                                class="underline-dotted custom-width"></span></span><br>
-                        <span class="word">१२. नदी, नालाको किनार भएमा छाड्न पर्ने दूरी <span
-                                class="underline-dotted custom-width"></span> छाडेको दूरी <span
-                                class="underline-dotted custom-width"></span></span><br>
-                        <span class="word">१३. ढल निकास सम्बन्धी ढल, सेप्टिकटैक, सोकपिट भए सो को विवरण : <span
-                                class="underline-dotted custom-width"></span></span><br>
-                        <span class="word">१४. अन्य कुनै भए विवरण : <span
-                                class="underline-dotted custom-width"></span></span><br>
+                            दूरी......................
+                            छाडिएको दूरी......................</span><br>
+                        <span class="word">११. बिजुलीको तार नजिक भएमा छाड्न पर्ने दूरी...................... छाडेको दूरी ......................</span><br>
+                        <span class="word">१२. नदी, नालाको किनार भएमा छाड्न पर्ने दूरी ...................... छाडेको दूरी ......................</span><br>
+                        <span class="word">१३. ढल निकास सम्बन्धी ढल, सेप्टिकटैक, सोकपिट भए सो को विवरण : ......................</span><br>
+                        <span class="word">१४. अन्य कुनै भए विवरण : ......................</span><br>
                         <span class="word">१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको </span><br>
-                        <span class="word">पालना नभएको भए विवरण : <span class="underline-dotted custom-width"></span></span>
+                        <span class="word">पालना नभएको भए विवरण : ......................</span>
                         <div class="d-flex">
-                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>
                                 तयार गर्ने </span></div>
-                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
+                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>चेक
                                 गर्ने<br>(इन्जिनियर)</span></div>
-                            <div class="col-sm-4 text-center"><span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>
                                 स्वीकृत गर्ने <br><small>(प्रमुख प्रशासकिय अधिकृत)</small></span></div>
                         </div>
                         <div class="break-page"></div>
