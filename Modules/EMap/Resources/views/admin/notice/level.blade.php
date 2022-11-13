@@ -1,47 +1,4 @@
-@extends('admin.layouts.master')
-@section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.registration.index')}}">ई-नक्सा </a>
-                        </li>
-                        <li class="breadcrumb-item active">नक्सा विवरण</li>
-                    </ol>
-                </div>
-                <h4 class="page-title">ई-नक्सा</h4>
-            </div>
-        </div>
-    </div>
-    <div>
-        @error('file')
-        <div class="alert alert-danger">
-            {{$message}}
-        </div>
-        @enderror
-    </div>
-    <div class="row mb-2">
-        <div class="col-sm-4">
-            <h4> {{\Modules\EMap\Enums\NoticeTypeEnum::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL->label()}}</h4>
-        </div>
-        <div class="col-sm-8">
-            <div class="text-sm-end">
-                <div class="btn-group mb-3">
 
-                </div>
-                <div class="btn-group mb-3">
-                    <x-print-button title="प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र"/>
-                </div>
-            </div>
-        </div><!-- end col-->
-    </div>
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card">
@@ -61,39 +18,27 @@
                         <div class="date">
                             <div class="row">
                                 <div class="col-md-6">
-                                    पत्र सं:
-                                    <div class="underline-dotted custom-width"></div>
+                                    पत्र सं: ......................
                                     <br>
-                                    चलानी नं:
-                                    <div class="underline-dotted custom-width"></div>
+                                    चलानी नं: ....................
                                 </div>
-                                <div class="col-md-6 text-end">मिति:
-                                    <div class="underline-dotted custom-width"></div>
+                                <div class="col-md-6 text-end">
+                                    मिति: ..............................
                                 </div>
                             </div>
                         </div>
                         <h4 class="top text-center"><b> प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</b></h4>
 
                         <div class="top">
-                            &emsp;&emsp;&emsp;&emsp;तपाई श्री/श्रीमती<span
-                                class="underline-dotted ">{{$mapApply->houseOwner->name??''}}</span> ले जग्गा
-                            धनी<span
-                                class="underline-dotted custom-width">{{$mapApply->landOwner->name??''}}</span>
+                            &emsp;&emsp;&emsp;&emsp;तपाई श्री/श्रीमती ................... ले जग्गा धनी ...................
                             को नाममा दर्ता रहेको
                             {{config('applicationDetail.place_short_name')}} {{config('applicationDetail.office_short_name')}}
-                            वडा नं.<span class="underline-dotted">{{$mapApply->landDetail->ward_no??''}}</span>
-                            टोल <span class="underline-dotted">{{$mapApply->landDetail->tole??''}}</span> मा
-                            रहेको साविक <span
-                                class="underline-dotted">{{$mapApply->landDetail->former_ward_no??''}}</span>
-                            गा.वि.स. वडा नं.<span class="underline-dotted custom-width"></span> किता नं.<span
-                                class="underline-dotted custom-width">{{$mapApply->landDetail->plot_no??''}}</span>
-                            ज.वि.जम्मा<span
-                                class="underline-dotted custom-width">{{$mapApply->landDetail->unit_value??''}}  {{$mapApply->landDetail->unit->title??''}}</span>
-                            को जग्गामा भवन निर्माण स्वीकृतिको
-                            लागि मिति<span class="underline-dotted custom-width"></span> मा दरखास्त सहित नक्सा
+                            वडा नं .................... टोल ................... मा
+                            रहेको साविक ................... गा.वि.स. वडा नं.................... किता नं ....................
+                            ज.वि.जम्मा ................... को जग्गामा भवन निर्माण स्वीकृतिको
+                            लागि मिति ................... मा दरखास्त सहित नक्सा
                             पेश गर्नु भएकोमा 'स्थानीय सरकार संचालन ऐन, २०७४' को दफा २७, २८, २९, ३०, ३१, ३२, ३३,
-                            ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति<span
-                                class="underline-dotted custom-width"></span>
+                            ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति ...................
                             को निर्माण बमोजिम प्रथम चरणमा 'आधारभूत निर्माण मापदण्ड-२०७२' तथा 'राष्ट्रिय भवन
                             निर्माण संहिता-२०६०' बमोजिम निम्नाअनुसार डि.पि.सि.लेभलसम्म मात्र निर्माण कार्य
                             गर्नुहोला । डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन
@@ -117,7 +62,7 @@
                             <tr>
                                 <td class="text-center">१.</td>
                                 <td>लम्बाई(रनिङ फिट)</td>
-                                <td>{{$mapApply->length}}</td>
+                                <td>...................</td>
                                 <td class="text-center">४.</td>
                                 <td>दायाँ/बायाँ छोड्ने दुरी<br>
                                     (रनिङ फिट)
@@ -127,7 +72,7 @@
                             <tr>
                                 <td class="text-center">२.</td>
                                 <td>चौडाई(रनिङ फिट)</td>
-                                <td>{{$mapApply->breadth}}</td>
+                                <td>...................</td>
                                 <td class="text-center">५.</td>
                                 <td>कम्पाउन्ड वाल<br>
                                     (रनिङ फिट)
@@ -137,10 +82,10 @@
                             <tr>
                                 <td class="text-center">३.</td>
                                 <td>सेट ब्याक<br>(छडको चौडाई सहित)</td>
-                                <td>{{$mapApply->criteriaDetails->where('detail',\Modules\EMap\Enums\DetailsRegardingCriteriaEnum::SET_BACK)->first()->according_to_criteria??''}}</td>
+                                <td>...................</td>
                                 <td class="text-center">६.</td>
                                 <td>लिन्थ लेभलको उचाई</td>
-                                <td>{{$mapApply->height}}</td>
+                                <td>...................</td>
                             </tr>
                             </tbody>
                         </table>
@@ -160,7 +105,7 @@
                             <tr>
                                 <td class="text-center">१.</td>
                                 <td>भवनको वर्गिकरण</td>
-                                <td>{{$mapApply->building_category->label()}}</td>
+                                <td>...................</td>
                                 <td class="text-center">४.</td>
                                 <td>पिलरको साईज (इन्च)</td>
                                 <td></td>
@@ -168,7 +113,7 @@
                             <tr>
                                 <td class="text-center">२.</td>
                                 <td>भवन स्ट्रक्चरल सिस्टम</td>
-                                <td>{{$mapApply->structureType->title??''}}</td>
+                                <td>...................</td>
                                 <td class="text-center">५.</td>
                                 <td>पिल्र्मा प्रयोग गर्ने डण्डीको<br>
                                     साईज र संख्या
@@ -178,19 +123,19 @@
                             <tr>
                                 <td class="text-center">३.</td>
                                 <td>जगको साईज (फिट)</td>
-                                <td></td>
+                                <td>...................</td>
                                 <td class="text-center">६.</td>
                                 <td>पिलरको छुरीको साईज</td>
-                                <td></td>
+                                <td>...................</td>
                             </tr>
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-around">
-                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                            <span class="text-center">...................<br>
                                 तयार गर्ने </span>
-                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>चेक
+                            <span class="text-center">...................<br>चेक
                                 गर्ने<br>(इन्जिनियर)</span>
-                            <span class="text-center"><span class="underline-dotted custom-width"></span><br>
+                            <span class="text-center">...................<br>
                                 स्वीकृत गर्ने <br>(प्रमुख प्रशासकिय अधिकृत) </span>
                         </div>
                         <div class="break-page"></div>
@@ -245,21 +190,4 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <style>
-            .word{
-                font-size: 10px;
-            }
-            .word>tbody>tr{
-                line-height: .70rem;
-            }
-            .word>thead>tr{
-                line-height: .70rem;
-            }
-        </style>
-    @endpush
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>
-    @endpush
 
-@endsection

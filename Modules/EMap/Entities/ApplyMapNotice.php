@@ -21,7 +21,8 @@ class ApplyMapNotice extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'rejected_at'
+        'rejected_at',
+        'sent_to_admin_at',
     ];
 
     protected $fillable = [
@@ -29,7 +30,8 @@ class ApplyMapNotice extends Model
         'file_type',
         'data',
         'rejected_at',
-        'remarks'
+        'remarks',
+        'sent_to_admin_at'
     ];
 
     protected $casts = [
@@ -54,5 +56,15 @@ class ApplyMapNotice extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
+    }
+
+    public function scopeSentToAdmin($query)
+    {
+        return $query->whereNotNull('sent_to_admin_at');
+    }
+
+    public function scopeNotSentToAdmin($query)
+    {
+        return $query->whereNull('sent_to_admin_at');
     }
 }

@@ -22,7 +22,7 @@
                         <div class="col-md-12">
                             <label for="data">डाटा</label>
                             <textarea class="form-control ckEditor" placeholder="डाटा" name="data" id="data" cols="50"
-                                      rows="10">{{old('data',( $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? $mapApply->applyMapNotices->first()?->data ?? ''))}}</textarea>
+                                      rows="10">{{old('data',( $mapApply->applyMapNotices->first()?->data ?? $mapApply->getSpecificTemplateData($noticeTypeEnum) ?? ''))}}</textarea>
                         </div>
                     </div>
                     <div class=" d-flex justify-content-end pt-3">
@@ -58,7 +58,16 @@
 
         </div>
     </section>
+
+
+    @push('style')
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
+    @endpush
     @push('scripts')
+        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+
         <script>
 
             $(document).ready(function () {
@@ -86,12 +95,12 @@
 
                 $(document.body).delegate('#otp_form','submit', function (event) {
                     event.preventDefault();
-                    console.log($(CKEDITOR.instances['data'].getData()))
+                    
                     $.ajax({
                         type: "post",
                         data: {
-                          otp:$("#otp").val(),
-                          data:$("textarea#data").val()
+                            otp:$("#otp").val(),
+                            data:CKEDITOR.instances.data.getData()
                         },
                         url: "{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}",
                         success: function (resp) {
@@ -106,15 +115,6 @@
                 });
             });
         </script>
-    @endpush
-
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
-    @endpush
-    @push('scripts')
-        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
-        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
     @endpush
 @endsection
 

@@ -38,6 +38,9 @@
                                             <i class="fa fa-edit"></i>
                                             <span>फार्म भर्नुहोस्</span>
                                         </a>
+                                        <a href="" class="mx-2 btn btn-primary btn-sm">
+                                            <i class="fa fa-check"></i>
+                                        </a>
                                     @endif
                                 </td>
                             </tr>

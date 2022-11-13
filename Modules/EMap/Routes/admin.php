@@ -30,22 +30,22 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
         Route::get('level', 'level')->name('level');
         Route::get('supervisor', 'superVisor')->name('supervisor');
         Route::get('superstructure-permission', 'superStructurePermission')->name('superstructure-permission');
-        Route::get('revised-superstructure-permit','revisedSuperStructurePermit')->name('revisedSuperStructurePermit');
-        Route::get('revised-superstructure-permit-order','revisedSuperStructurePermitOrder')->name('revisedSuperStructurePermitOrder');
-        Route::get('construction-completion-certificate','constructionCompletionCertificate')->name('constructionCompletionCertificate');
-        Route::get('house-map-namsari','houseMapNamsari')->name('houseMapNamsari');
+        Route::get('revised-superstructure-permit', 'revisedSuperStructurePermit')->name('revisedSuperStructurePermit');
+        Route::get('revised-superstructure-permit-order', 'revisedSuperStructurePermitOrder')->name('revisedSuperStructurePermitOrder');
+        Route::get('construction-completion-certificate', 'constructionCompletionCertificate')->name('constructionCompletionCertificate');
+        Route::get('house-map-namsari', 'houseMapNamsari')->name('houseMapNamsari');
         Route::get('superstructure', 'superStructure')->name('superstructure');
         Route::get('plinth-level-supervisor-report', 'plinthLevelSupervisorReport')->name('plinth-level-supervisor-report');
-        Route::get('first-phase-consultant-report','firstPhaseConsultantReport')->name('first-phase-consultant-report');
-        Route::get('first-phase-technician-report','firstPhaseTechnicianReport')->name('first-phase-technician-report');
-        Route::get('second-phase-consultant-report','secondPhaseConsultantReport')->name('second-phase-consultant-report');
-        Route::get('second-phase-technician-report','secondPhaseTechnicianReport')->name('second-phase-technician-report');
-        Route::get('permission','permissionView')->name('permission');
-        Route::get('heir','heirView')->name('heir');
-        Route::get('building-construction-completion-certificate','buildingConstructionCompletionCertificate')->name('building-construction-completion-certificate');
-        Route::prefix('upload')->as('upload.')->group(function (){
-            Route::post('storeTemplateData/{noticeTypeEnum}','storeTemplateData')->name('store-template-data');
-            Route::get('getTemplateData/{noticeTypeEnum}','getTemplateData')->name('get-template-data');
+        Route::get('first-phase-consultant-report', 'firstPhaseConsultantReport')->name('first-phase-consultant-report');
+        Route::get('first-phase-technician-report', 'firstPhaseTechnicianReport')->name('first-phase-technician-report');
+        Route::get('second-phase-consultant-report', 'secondPhaseConsultantReport')->name('second-phase-consultant-report');
+        Route::get('second-phase-technician-report', 'secondPhaseTechnicianReport')->name('second-phase-technician-report');
+        Route::get('permission', 'permissionView')->name('permission');
+        Route::get('heir', 'heirView')->name('heir');
+        Route::get('building-construction-completion-certificate', 'buildingConstructionCompletionCertificate')->name('building-construction-completion-certificate');
+        Route::prefix('upload')->as('upload.')->group(function () {
+            Route::post('storeTemplateData/{noticeTypeEnum}', 'storeTemplateData')->name('store-template-data');
+            Route::get('getTemplateData/{noticeTypeEnum}', 'getTemplateData')->name('get-template-data');
         });
 
     });
@@ -58,10 +58,11 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
 Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
+    Route::post('eMapTemplate/getStaticTemplate', [EMapTemplateController::class, 'getStaticTemplate'])->name('template-emap.get-static-template');
     Route::resource('eMapTemplate', EMapTemplateController::class);
 });
 
-Route::prefix('files')->as('files.')->group(function (){
+Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'emap::admin.file.file')->name('file');
 });
 

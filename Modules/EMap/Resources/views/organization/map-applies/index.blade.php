@@ -32,7 +32,10 @@
                                     <a class="btn btn-sm btn-primary" href="{{route('organization.admin.mapApply.show', $mapApply)}}">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a class="btn btn-sm btn-primary" href="{{route('organization.admin.mapFormInfo', $mapApply)}}">
+                                    <a class="btn btn-sm btn-warning" href="{{route('organization.admin.updateStatus', $mapApply)}}">
+                                        <i class="fa {{$mapApply->sent_to_admin_at==null ? 'fa-check':'fa-times'}}"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-info" href="{{route('organization.admin.mapFormInfo', $mapApply)}}">
                                         <i class="fa fa-list"></i>
                                     </a>
                                 </td>

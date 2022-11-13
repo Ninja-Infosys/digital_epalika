@@ -7,14 +7,15 @@ use App\Models\Address\District;
 use App\Models\User;
 use App\Notifications\ApplyMapNoticeNotification;
 use App\Notifications\MapApplicationNotification;
-use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Enums\NoticeTypeEnum;
+use function Termwind\renderUsing;
 
 class MapApplyController extends Controller
 {
@@ -24,21 +25,22 @@ class MapApplyController extends Controller
         return view('emap::organization.map-applies.index', compact('mapApplies'));
     }
 
-    public function show( MapApply $mapApply)
+    public function show(MapApply $mapApply)
     {
+
         $districts = District::get();
         $mapApply->load('fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
 
-        return view('emap::organization.map-applies.show', compact( 'mapApply','districts'));
+        return view('emap::organization.map-applies.show', compact('mapApply', 'districts'));
     }
 
-    public function edit( MapApply $mapApply)
+    public function edit(MapApply $mapApply)
     {
         $mapSetting = MapSetting::first();
-        return view('emap::organization.map-applies.edit', compact( 'mapSetting', 'mapApply'));
+        return view('emap::organization.map-applies.edit', compact('mapSetting', 'mapApply'));
     }
 
-    public function update(Request $request,MapApply $mapApply)
+    public function update(Request $request, MapApply $mapApply)
     {
         //
     }
@@ -50,7 +52,7 @@ class MapApplyController extends Controller
 
     public function mapFormInfo(MapApply $mapApply)
     {
-        return view('emap::organization.map-applies.map_form_info',compact('mapApply'));
+        return view('emap::organization.map-applies.map_form_info', compact('mapApply'));
     }
 
     public function getTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
@@ -102,5 +104,17 @@ class MapApplyController extends Controller
                 'file' => $document->store('emapTemplateFile', 'public')
             ]);
         }
+    }
+
+
+    public function updateStatus(MapApply $mapApply)
+    {
+        $mapApply->update([
+            'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null
+        ]);
+
+        toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
+        return back();
+
     }
 }
