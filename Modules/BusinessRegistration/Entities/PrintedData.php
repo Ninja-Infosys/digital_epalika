@@ -3,12 +3,12 @@
 namespace Modules\BusinessRegistration\Entities;
 
 use App\Models\File;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 
 class PrintedData extends Model
@@ -18,7 +18,7 @@ class PrintedData extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -28,7 +28,7 @@ class PrintedData extends Model
     ];
 
     protected $casts = [
-        'for' => TemplateTypeEnum::class
+        'for' => TemplateTypeEnum::class,
     ];
 
     public function proprietorDetail(): BelongsTo

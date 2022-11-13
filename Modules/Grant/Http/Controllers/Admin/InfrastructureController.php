@@ -2,8 +2,6 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Grant\Entities\Infrastructure;
@@ -19,9 +17,9 @@ class InfrastructureController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $infrastructures=Infrastructure::all();
+        $infrastructures = Infrastructure::all();
 
-        return view('grant::admin.infrastructure.index',compact('infrastructures'));
+        return view('grant::admin.infrastructure.index', compact('infrastructures'));
     }
 
     public function create()
@@ -44,6 +42,7 @@ class InfrastructureController extends Controller
         Infrastructure::create($request->validated());
 
         toast('पूर्वाधार शीर्षक सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -64,7 +63,7 @@ class InfrastructureController extends Controller
             'You are not allowed to access this resource'
         );
 
-        return view('grant::admin.infrastructure.edit',compact('infrastructure'));
+        return view('grant::admin.infrastructure.edit', compact('infrastructure'));
     }
 
     public function update(UpdateInfrastructureRequest $request, Infrastructure $infrastructure)
@@ -90,6 +89,7 @@ class InfrastructureController extends Controller
         $infrastructure->delete();
 
         toast('पूर्वाधार शीर्षक सफलतापूर्वक हटाइयो', 'success');
+
         return back();
     }
 }

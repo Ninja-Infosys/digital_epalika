@@ -19,7 +19,7 @@ class Notice extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -31,7 +31,7 @@ class Notice extends Model
         'show_on_index',
         'user_id',
         'type',
-        'fiscal_year_id'
+        'fiscal_year_id',
     ];
 
     public function user(): BelongsTo

@@ -21,68 +21,67 @@ class TechnicalTrainee extends Model
 {
     use HasFactory,SoftDeletes;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 
-   protected $fillable = [
-       'employee_name',
-       'photo',
-       'designation_id',
-       'department_id',
-       'service_time',
-       'label',
-       'education_qualification',
-       'province_id',
-       'district_id',
-       'local_body_id',
-       'ward_no',
-       'tole',
-       'contact_no',
-       'email',
-       'responsibility',
-       'training',
-       'hobby',
-       'excellence',
-       'learning_subject',
-       'expectation',
-       'office_name',
-       'office_address',
-       'office_phone',
-       'office_email',
-       'nomination_letter',
-       'recommendation_letter',
-       'select',
-       'reference_id'
-   ];
-
+    protected $fillable = [
+        'employee_name',
+        'photo',
+        'designation_id',
+        'department_id',
+        'service_time',
+        'label',
+        'education_qualification',
+        'province_id',
+        'district_id',
+        'local_body_id',
+        'ward_no',
+        'tole',
+        'contact_no',
+        'email',
+        'responsibility',
+        'training',
+        'hobby',
+        'excellence',
+        'learning_subject',
+        'expectation',
+        'office_name',
+        'office_address',
+        'office_phone',
+        'office_email',
+        'nomination_letter',
+        'recommendation_letter',
+        'select',
+        'reference_id',
+    ];
 
     public function setPhotoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('technical_trainee/' . Str::slug($this->attributes['employee_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['photo'] = $value->store('technical_trainee/'.Str::slug($this->attributes['employee_name'], '_'), 'public');
         }
     }
 
     public function setNominationLetterAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['recommendation_letter'] = $value->store('technical_trainee/' . Str::slug($this->attributes['employee_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['recommendation_letter'] = $value->store('technical_trainee/'.Str::slug($this->attributes['employee_name'], '_'), 'public');
         }
     }
 
     public function setRecommendationLetterAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['nomination_letter'] = $value->store('technical_trainee/' . Str::slug($this->attributes['employee_name'], "_"), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['nomination_letter'] = $value->store('technical_trainee/'.Str::slug($this->attributes['employee_name'], '_'), 'public');
         }
     }
 
     public function getPhotoUrlAttribute(): string
     {
-        return $this->attributes['photo'] ? asset('storage/' . $this->attributes['photo']) : asset('images/user_icon.jpg');
+        return $this->attributes['photo'] ? asset('storage/'.$this->attributes['photo']) : asset('images/user_icon.jpg');
     }
 
     public function getNominationLetterUrlAttribute(): string
@@ -100,17 +99,17 @@ class TechnicalTrainee extends Model
         return $this->morphOne(TrainingTrainee::class, 'model');
     }
 
-    public function province(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
     }
 
-    public function district(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function district(): BelongsTo
     {
         return $this->belongsTo(District::class);
     }
 
-    public function localBody(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);
     }
@@ -129,10 +128,12 @@ class TechnicalTrainee extends Model
     {
         return $this->morphMany(Document::class, 'model');
     }
+
     public function ethnicity(): BelongsTo
     {
         return $this->belongsTo(Ethnicity::class);
     }
+
     public function toSearchableArray(): array
     {
         return [

@@ -17,7 +17,8 @@ class GrievanceOfficeController extends Controller
             'You are not allowed to access this resource'
         );
         $grievanceOffices = GrievanceOffice::latest()->get();
-        return view('grievancehandling::admin.setting.grievance_office.index',compact('grievanceOffices'));
+
+        return view('grievancehandling::admin.setting.grievance_office.index', compact('grievanceOffices'));
     }
 
     public function create()
@@ -26,6 +27,7 @@ class GrievanceOfficeController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grievancehandling::admin.setting.grievance_office.create');
     }
 
@@ -37,6 +39,7 @@ class GrievanceOfficeController extends Controller
         );
         GrievanceOffice::create($request->validated());
         toast('शाखा/कार्यालय सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -46,6 +49,7 @@ class GrievanceOfficeController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grievancehandling::show');
     }
 
@@ -55,7 +59,8 @@ class GrievanceOfficeController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        return view('grievancehandling::admin.setting.grievance_office.edit',compact('grievanceOffice'));
+
+        return view('grievancehandling::admin.setting.grievance_office.edit', compact('grievanceOffice'));
     }
 
     public function update(UpdateGrievanceOfficeRequest $request, GrievanceOffice $grievanceOffice)
@@ -66,6 +71,7 @@ class GrievanceOfficeController extends Controller
         );
         $grievanceOffice->update($request->validated());
         toast(' शाखा/कार्यालय सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.grievanceHandling.setting.grievanceOffice.index'));
     }
 
@@ -77,6 +83,7 @@ class GrievanceOfficeController extends Controller
         );
         $grievanceOffice->delete();
         toast(' शाखा/कार्यालय सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

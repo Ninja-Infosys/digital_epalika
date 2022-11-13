@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\ImportantLink\StoreImportantLinkRequest;
 use App\Http\Requests\Website\ImportantLink\UpdateImportantLinkRequest;
 use App\Models\Website\ImportantLink;
-use Illuminate\Http\Request;
 
 class ImportantLinkController extends Controller
 {
@@ -27,6 +26,7 @@ class ImportantLinkController extends Controller
         ImportantLink::create($request->validated());
 
         toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -54,6 +54,7 @@ class ImportantLinkController extends Controller
         $importantLink->delete();
 
         toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 }

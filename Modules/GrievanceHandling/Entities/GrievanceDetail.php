@@ -20,7 +20,7 @@ class GrievanceDetail extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -36,7 +36,7 @@ class GrievanceDetail extends Model
         'is_open',
         'status',
         'is_approved',
-        'is_public'
+        'is_public',
     ];
 
     protected $casts = [

@@ -2,7 +2,6 @@
 
 namespace Modules\Roaster\Traits\helpers;
 
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Modules\Roaster\Entities\Trainer;
@@ -17,9 +16,9 @@ trait TrainerHelperTrait
 {
     public function addColumnToWorkExperienceArray(): void
     {
-
         $this->form['workExperiences'][] = [];
     }
+
     public function removeColumnFromWorkExperienceArray($index): void
     {
         unset($this->form['workExperiences'][$index]);
@@ -107,8 +106,8 @@ trait TrainerHelperTrait
 
     protected function mergeBankDetailValidation(): array
     {
-        if(config('trainer.status.bankDetailForm')) {
-            if(config('trainer.type.bankDetailForm') === 'compact') {
+        if (config('trainer.status.bankDetailForm')) {
+            if (config('trainer.type.bankDetailForm') === 'compact') {
                 $this->validationRules = array_merge($this->validationRules, [
                     'form.bank_detail' => ['nullable'],
                 ]);
@@ -124,6 +123,7 @@ trait TrainerHelperTrait
 
             return $this->validationRules;
         }
+
         return [];
     }
 
@@ -148,6 +148,7 @@ trait TrainerHelperTrait
 
             return $this->validationRules;
         }
+
         return [];
     }
 
@@ -171,6 +172,7 @@ trait TrainerHelperTrait
 
             return $this->validationRules;
         }
+
         return [];
     }
 
@@ -193,6 +195,7 @@ trait TrainerHelperTrait
 
             return $this->validationRules;
         }
+
         return [];
     }
 
@@ -217,6 +220,7 @@ trait TrainerHelperTrait
 
             return $this->validationRules;
         }
+
         return [];
     }
 
@@ -228,9 +232,9 @@ trait TrainerHelperTrait
                 'form.documents.*.title' => ['required'],
             ]);
 
-
             return $this->validationRules;
         }
+
         return [];
     }
 
@@ -264,48 +268,48 @@ trait TrainerHelperTrait
     }
 
     protected array $messages = [
-        'form.name.required' => "पूरा नाम आवश्यक छ ।",
-        'form.designation_id.required' => "पद आवश्यक छ ।",
-        'form.department_id.required' => "सेवा समुह आवश्यक छ ।",
-        'form.email.required' => "इमेल आवश्यक छ ।",
-        'form.phone.required' => "फोन नम्बर आवश्यक छ ।",
-        'form.phone.regex' => "फोन नम्बर 98XXXX,98XXXX ।",
-        'form.level.required' => "तह आवश्यक छ ।",
-        'form.pan.required' => "स्थायी लेखा नम्बर आवश्यक छ ।",
-        'form.province_id.required' => "प्रदेश आवश्यक छ ।",
-        'form.district_id.required' => "जिल्ला आवश्यक छ ।",
-        'form.local_body_id.required' => "स्थानीय निकाय आवश्यक छ ।",
-        'form.ward.required' => "वार्ड नम्बर आवश्यक छ ।",
-        'form.tole.required' => "टोल आवश्यक छ ।",
-        'form.photo.required' => "फोटो आवश्यक छ ।",
-        'form.office.required' => "हाल कार्यरत कार्यालयको नाम र ठेगाना आवश्यक छ ।",
-        'form.experience.required' => "कार्य अनुभव (बर्ष) आवश्यक छ ।",
-        'form.qualification.required' => "शैक्षिक योग्यता  आवश्यक छ ।",
-        'form.bank_detail.required' => "बैंक खाता आवश्यक छ ।",
-        'form.experience_as_trainee.required' => "संलग्न तालिमको विवरण आवश्यक छ ।",
-        'form.experience_as_trainer.required' => "तालिममा प्रशिक्षक भएको अनुभव आवश्यक छ ।",
-        'form.subject_ids.required' => "बिषय विज्ञता आवश्यक छ ।",
-        'form.bankDetails.*.bank_name.required' => "बैंकको नाम आवश्यक छ ।",
-        'form.bankDetails.*.bank_branch.required' => "शाखाको नाम आवश्यक छ ।",
-        'form.bankDetails.*.account_number.required' => "खाता नं. आवश्यक छ ।",
-        'form.bankDetails.*.account_holder.required' => "खाता वालाको नाम आवश्यक छ ।",
-        'form.qualifications.*.achievement.required' => "शैक्षिक तह आवश्यक छ ।",
-        'form.qualifications.*.institute.required' => "विश्वविद्यालय/शैक्षिक संस्था आवश्यक छ ।",
-        'form.workExperiences.*.office.required' => "कार्यालय/संस्था आवश्यक छ ।",
-        'form.workExperiences.*.designation_id.required' => "पद आवश्यक छ ।",
-        'form.workExperiences.*.responsibility.required' => "मुख्य जिम्मेवारी आवश्यक छ ।",
-        'form.workExperiences.*.from.required' => "मिति देखि आवश्यक छ ।",
-        'form.documents.*.title.required' => "मकागजातको नाम आवश्यक छ ।",
-        'form.documents.*.document.required' => "फाइल आवश्यक छ ।",
-        'form.experienceAsTrainees.*.subject.required' => "तालिमको विषय आवश्यक छ ।",
-        'form.experienceAsTrainees.*.provider.required' => "तालिम दिने निकाय आवश्यक छ ।",
-        'form.experienceAsTrainees.*.duration.required' => "तालिमको अवधि आवश्यक छ ।",
-        'form.experienceAsTrainees.*.venue.required' => "स्थान आवश्यक छ ।",
-        'form.experienceAsTrainers.*.sector.required' => "तालिमको क्षेत्र आवश्यक छ ।",
-        'form.experienceAsTrainers.*.subject.required' => "प्रशिक्षणको विषय आवश्यक छ ।",
-        'form.experienceAsTrainers.*.organization.required' => "तालिम दिने निकाय आवश्यक छ ।",
-        'form.experienceAsTrainers.*.training_level.required' => "सहभागीको स्तर आवश्यक छ ।",
-        'form.experienceAsTrainers.*.training_time.required' => "तालिमको अवधि आवश्यक छ ।",
+        'form.name.required' => 'पूरा नाम आवश्यक छ ।',
+        'form.designation_id.required' => 'पद आवश्यक छ ।',
+        'form.department_id.required' => 'सेवा समुह आवश्यक छ ।',
+        'form.email.required' => 'इमेल आवश्यक छ ।',
+        'form.phone.required' => 'फोन नम्बर आवश्यक छ ।',
+        'form.phone.regex' => 'फोन नम्बर 98XXXX,98XXXX ।',
+        'form.level.required' => 'तह आवश्यक छ ।',
+        'form.pan.required' => 'स्थायी लेखा नम्बर आवश्यक छ ।',
+        'form.province_id.required' => 'प्रदेश आवश्यक छ ।',
+        'form.district_id.required' => 'जिल्ला आवश्यक छ ।',
+        'form.local_body_id.required' => 'स्थानीय निकाय आवश्यक छ ।',
+        'form.ward.required' => 'वार्ड नम्बर आवश्यक छ ।',
+        'form.tole.required' => 'टोल आवश्यक छ ।',
+        'form.photo.required' => 'फोटो आवश्यक छ ।',
+        'form.office.required' => 'हाल कार्यरत कार्यालयको नाम र ठेगाना आवश्यक छ ।',
+        'form.experience.required' => 'कार्य अनुभव (बर्ष) आवश्यक छ ।',
+        'form.qualification.required' => 'शैक्षिक योग्यता  आवश्यक छ ।',
+        'form.bank_detail.required' => 'बैंक खाता आवश्यक छ ।',
+        'form.experience_as_trainee.required' => 'संलग्न तालिमको विवरण आवश्यक छ ।',
+        'form.experience_as_trainer.required' => 'तालिममा प्रशिक्षक भएको अनुभव आवश्यक छ ।',
+        'form.subject_ids.required' => 'बिषय विज्ञता आवश्यक छ ।',
+        'form.bankDetails.*.bank_name.required' => 'बैंकको नाम आवश्यक छ ।',
+        'form.bankDetails.*.bank_branch.required' => 'शाखाको नाम आवश्यक छ ।',
+        'form.bankDetails.*.account_number.required' => 'खाता नं. आवश्यक छ ।',
+        'form.bankDetails.*.account_holder.required' => 'खाता वालाको नाम आवश्यक छ ।',
+        'form.qualifications.*.achievement.required' => 'शैक्षिक तह आवश्यक छ ।',
+        'form.qualifications.*.institute.required' => 'विश्वविद्यालय/शैक्षिक संस्था आवश्यक छ ।',
+        'form.workExperiences.*.office.required' => 'कार्यालय/संस्था आवश्यक छ ।',
+        'form.workExperiences.*.designation_id.required' => 'पद आवश्यक छ ।',
+        'form.workExperiences.*.responsibility.required' => 'मुख्य जिम्मेवारी आवश्यक छ ।',
+        'form.workExperiences.*.from.required' => 'मिति देखि आवश्यक छ ।',
+        'form.documents.*.title.required' => 'मकागजातको नाम आवश्यक छ ।',
+        'form.documents.*.document.required' => 'फाइल आवश्यक छ ।',
+        'form.experienceAsTrainees.*.subject.required' => 'तालिमको विषय आवश्यक छ ।',
+        'form.experienceAsTrainees.*.provider.required' => 'तालिम दिने निकाय आवश्यक छ ।',
+        'form.experienceAsTrainees.*.duration.required' => 'तालिमको अवधि आवश्यक छ ।',
+        'form.experienceAsTrainees.*.venue.required' => 'स्थान आवश्यक छ ।',
+        'form.experienceAsTrainers.*.sector.required' => 'तालिमको क्षेत्र आवश्यक छ ।',
+        'form.experienceAsTrainers.*.subject.required' => 'प्रशिक्षणको विषय आवश्यक छ ।',
+        'form.experienceAsTrainers.*.organization.required' => 'तालिम दिने निकाय आवश्यक छ ।',
+        'form.experienceAsTrainers.*.training_level.required' => 'सहभागीको स्तर आवश्यक छ ।',
+        'form.experienceAsTrainers.*.training_time.required' => 'तालिमको अवधि आवश्यक छ ।',
     ];
 
     public function storeData(): void
@@ -313,14 +317,15 @@ trait TrainerHelperTrait
         $data = $this->validate()['form'];
 
         DB::transaction(function () use ($data) {
-            if (!empty($this->trainer)) {
+            if (! empty($this->trainer)) {
                 $this->trainer->update($data);
                 $this->saveArrayData($this->trainer, $this->form);
                 $this->dispatchBrowserEvent('alert_message', [
-                    'type' => "success",
-                    'title' => "Thank You",
-                    'text' => "Trainer Data Updated Successfully",
+                    'type' => 'success',
+                    'title' => 'Thank You',
+                    'text' => 'Trainer Data Updated Successfully',
                 ]);
+
                 return redirect(route('admin.roaster.trainer.index'));
             }
 
@@ -328,9 +333,9 @@ trait TrainerHelperTrait
             $this->saveArrayData($trainer, $this->form);
             $this->reset('form');
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "Thank You",
-                'text' => "Your Form Submitted Successfully",
+                'type' => 'success',
+                'title' => 'Thank You',
+                'text' => 'Your Form Submitted Successfully',
             ]);
         });
     }

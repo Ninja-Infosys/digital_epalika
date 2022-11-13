@@ -17,7 +17,7 @@ class ListRegistration extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -47,8 +47,8 @@ class ListRegistration extends Model
 
     public function setApplicationPhotoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['application_photo'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/application', 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['application_photo'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/application', 'public');
         }
     }
 
@@ -60,8 +60,8 @@ class ListRegistration extends Model
 
     public function setRegistrationCertificateAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['registration_certificate'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/registration_certificate', 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['registration_certificate'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/registration_certificate', 'public');
         }
     }
 
@@ -73,8 +73,8 @@ class ListRegistration extends Model
 
     public function setPanPhotoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['pan_photo'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/pan_photo', 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['pan_photo'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/pan_photo', 'public');
         }
     }
 
@@ -86,8 +86,8 @@ class ListRegistration extends Model
 
     public function setTaxPaymentCertificateAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['tax_payment_certificate'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/tax_payment_certificate', 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['tax_payment_certificate'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/tax_payment_certificate', 'public');
         }
     }
 
@@ -99,8 +99,8 @@ class ListRegistration extends Model
 
     public function setLicensePhotoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['license_photo'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/license_photo', 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['license_photo'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/license_photo', 'public');
         }
     }
 

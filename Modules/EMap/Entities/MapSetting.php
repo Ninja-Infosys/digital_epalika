@@ -4,11 +4,10 @@ namespace Modules\EMap\Entities;
 
 use App\Models\Settings\Units\Type;
 use App\Models\Settings\Units\Unit;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class MapSetting extends Model
 {
@@ -17,7 +16,7 @@ class MapSetting extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -28,11 +27,11 @@ class MapSetting extends Model
 
     public function landMeasurement(): BelongsTo
     {
-        return $this->belongsTo(Type::class,'land_measurement_id');
+        return $this->belongsTo(Type::class, 'land_measurement_id');
     }
 
     public function standardLandMeasurement(): BelongsTo
     {
-        return $this->belongsTo(Unit::class,'land_measurement_standard_id');
+        return $this->belongsTo(Unit::class, 'land_measurement_standard_id');
     }
 }

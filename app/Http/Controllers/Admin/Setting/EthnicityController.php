@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Ethnicity\StoreEthnicityRequest;
 use App\Http\Requests\Setting\Ethnicity\UpdateEthnicityRequest;
 use App\Models\Ethnicity;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use Modules\Roaster\Http\Requests\Settings\Subject\UpdateSubjectRequest;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class EthnicityController extends Controller
@@ -22,6 +20,7 @@ class EthnicityController extends Controller
         );
 
         $ethnicities = Ethnicity::get();
+
         return view('admin.setting.ethnicity.index', compact('ethnicities'));
     }
 
@@ -32,9 +31,8 @@ class EthnicityController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+
         return view('admin.setting.ethnicity.create');
-
-
     }
 
     public function store(StoreEthnicityRequest $request)
@@ -47,12 +45,12 @@ class EthnicityController extends Controller
 
         Ethnicity::create($request->validated());
         toast('Ethnicity added successfully', 'success');
+
         return back();
     }
 
     public function show(Ethnicity $ethnicity)
     {
-
     }
 
     public function edit(Ethnicity $ethnicity)
@@ -76,6 +74,7 @@ class EthnicityController extends Controller
 
         $ethnicity->update($request->validated());
         toast('Ethnicity updated successfully', 'success');
+
         return redirect(route('admin.ethnicity.index'));
     }
 
@@ -89,6 +88,7 @@ class EthnicityController extends Controller
 
         $ethnicity->delete();
         toast('Ethnicity deleted successfully', 'success');
+
         return back();
     }
 }

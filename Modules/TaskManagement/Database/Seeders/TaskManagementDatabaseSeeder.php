@@ -8,6 +8,5 @@ class TaskManagementDatabaseSeeder extends Seeder
 {
     public function run()
     {
-
     }
 }

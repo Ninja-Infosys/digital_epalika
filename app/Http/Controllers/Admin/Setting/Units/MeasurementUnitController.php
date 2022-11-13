@@ -30,6 +30,7 @@ class MeasurementUnitController extends Controller
         );
 
         $types = Type::latest()->get();
+
         return view('admin.setting.units.measurementUnit.create', compact(['types']));
     }
 
@@ -42,6 +43,7 @@ class MeasurementUnitController extends Controller
 
         MeasurementUnit::create($request->validated());
         toast('मापन एकाइ विविधता सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('admin.units.measurementUnit.index'));
     }
 
@@ -58,6 +60,7 @@ class MeasurementUnitController extends Controller
         );
 
         $types = Type::latest()->get();
+
         return view('admin.setting.units.measurementUnit.edit', compact('measurementUnit', 'types'));
     }
 
@@ -70,6 +73,7 @@ class MeasurementUnitController extends Controller
         $measurementUnit->update($request->validated());
 
         toast('मापन एकाइ विविधता सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.units.measurementUnit.index'));
     }
 
@@ -81,6 +85,7 @@ class MeasurementUnitController extends Controller
         );
         $measurementUnit->delete();
         toast('मापन एकाइ विविधता सफलतापूर्वक मेटाइयो', 'success');
+
         return redirect(route('admin.units.measurementUnit.index'));
     }
 }

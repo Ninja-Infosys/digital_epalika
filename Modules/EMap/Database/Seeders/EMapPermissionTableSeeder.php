@@ -2,8 +2,6 @@
 
 namespace Modules\EMap\Database\Seeders;
 
-use App\Models\UserManagement\Permission;
-use App\Models\UserManagement\Role;
 use App\Traits\StorePermissionTrait;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +11,6 @@ class EMapPermissionTableSeeder extends Seeder
 
     public function run()
     {
-
         $permissions = [
             'organization_access',
             'organization_edit',

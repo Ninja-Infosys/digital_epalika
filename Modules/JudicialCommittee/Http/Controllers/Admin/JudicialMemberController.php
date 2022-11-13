@@ -2,12 +2,9 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use App\Models\Settings\Designation;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Designation;
 use Illuminate\Support\Facades\Gate;
-use Modules\JudicialCommittee\Entities\AdministrationMember;
 use Modules\JudicialCommittee\Entities\JudicialMember;
 use Modules\JudicialCommittee\Http\Requests\JudicialMember\StoreJudicialMemberRequest;
 use Modules\JudicialCommittee\Http\Requests\JudicialMember\UpdateJudicialMemberRequest;
@@ -21,9 +18,9 @@ class JudicialMemberController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $judicialMembers=JudicialMember::with('designation','province','district','localBody')->orderBy('position')->get();
+        $judicialMembers = JudicialMember::with('designation', 'province', 'district', 'localBody')->orderBy('position')->get();
 
-        return view('judicialcommittee::admin.judicial_member.index',compact('judicialMembers'));
+        return view('judicialcommittee::admin.judicial_member.index', compact('judicialMembers'));
     }
 
     public function create()
@@ -32,9 +29,9 @@ class JudicialMemberController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        $designations=Designation::all();
+        $designations = Designation::all();
 
-        return view('judicialcommittee::admin.judicial_member.create',compact('designations'));
+        return view('judicialcommittee::admin.judicial_member.create', compact('designations'));
     }
 
     public function store(StoreJudicialMemberRequest $request)
@@ -46,7 +43,8 @@ class JudicialMemberController extends Controller
 
         JudicialMember::create($request->validated());
 
-        toast('न्यायिक समिति विवरण सफलतापूर्वक थपियो','success');
+        toast('न्यायिक समिति विवरण सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -67,9 +65,9 @@ class JudicialMemberController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $designations=Designation::all();
+        $designations = Designation::all();
 
-        return view('judicialcommittee::admin.judicial_member.edit',compact('judicialMember','designations'));
+        return view('judicialcommittee::admin.judicial_member.edit', compact('judicialMember', 'designations'));
     }
 
     public function update(UpdateJudicialMemberRequest $request, JudicialMember $judicialMember)
@@ -79,12 +77,13 @@ class JudicialMemberController extends Controller
             'You are not allowed to access this resource'
         );
 
-        if($request->hasFile('photo') && $judicialMember->photo){
+        if ($request->hasFile('photo') && $judicialMember->photo) {
             $this->deleteFile($judicialMember->photo);
         }
         $judicialMember->update($request->validated());
 
-        toast('न्यायिक समिति विवरण सफलतापूर्वक अपडेट गरियो','success');
+        toast('न्यायिक समिति विवरण सफलतापूर्वक अपडेट गरियो', 'success');
+
         return redirect(route('admin.judicialCommittee.judicialMember.index'));
     }
 
@@ -95,12 +94,13 @@ class JudicialMemberController extends Controller
             'You are not allowed to access this resource'
         );
 
-        if($judicialMember->photo){
+        if ($judicialMember->photo) {
             $this->deleteFile($judicialMember->photo);
         }
         $judicialMember->delete();
 
-        toast('न्यायिक समितिको विवरण सफलतापूर्वक मेटाइयो','success');
+        toast('न्यायिक समितिको विवरण सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 
@@ -112,10 +112,11 @@ class JudicialMemberController extends Controller
         );
 
         $judicialMember->update([
-            'status' => !$judicialMember->status
+            'status' => ! $judicialMember->status,
         ]);
 
         toast('न्यायिक सदस्य स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 }

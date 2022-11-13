@@ -150,26 +150,26 @@ trait EMapTemplateTrait
         ],
     ];
 
-
     public function getTemplateDataAttribute(): Collection
     {
         return EMapTemplate::get()->map(function ($applicationTemplate) {
             $data = $this->getData($applicationTemplate->data);
+
             return [
                 'for' => $applicationTemplate->for,
-                'data' => $data
+                'data' => $data,
             ];
         });
     }
 
     public function getSpecificTemplateData(NoticeTypeEnum $noticeTypeEnum): string
     {
-
         $mapTemplate = EMapTemplate::where('for', $noticeTypeEnum->value)->first();
 
         if ($mapTemplate) {
             return $this->getData($mapTemplate->data);
         }
+
         return '';
     }
 
@@ -194,6 +194,7 @@ trait EMapTemplateTrait
             $this->getDesignerDetailsReplacement(),
             $this->getSupervisorDetailsReplacement(),
             $this->getContractorDetailsReplacement());
+
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
@@ -211,7 +212,7 @@ trait EMapTemplateTrait
             '[@area_of_plinth]' => $this->area_of_plinth ?? '',
             '[@length]' => $this->length ?? '',
             '[@breadth]' => $this->breadth ?? '',
-            '[@height]' => $this->height ?? ''
+            '[@height]' => $this->height ?? '',
         ];
     }
 
@@ -265,15 +266,16 @@ trait EMapTemplateTrait
     private function getFourFortsReplacement(): array
     {
         return [
-            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
-                'fourForts' => $this->fourForts
-            ])
+            '[@fourForts]' => (string) View::make('emap::inc.four_forts_table', [
+                'fourForts' => $this->fourForts,
+            ]),
         ];
     }
 
     private function getDesignerDetailsReplacement(): array
     {
         $designerDetail = $this->designerDetails->where('post', PostsEnum::DESIGNER)->first();
+
         return [
             '[@designerDetail.name]' => $designerDetail->name ?? '',
             '[@designerDetail.father_name]' => $designerDetail->father_name ?? '',
@@ -290,6 +292,7 @@ trait EMapTemplateTrait
     private function getSupervisorDetailsReplacement(): array
     {
         $supervisorDetail = $this->designerDetails->where('post', PostsEnum::SUPERVISOR)->first();
+
         return [
             '[@supervisorDetail.name]' => $supervisorDetail->name ?? '',
             '[@supervisorDetail.father_name]' => $supervisorDetail->father_name ?? '',
@@ -306,6 +309,7 @@ trait EMapTemplateTrait
     private function getContractorDetailsReplacement(): array
     {
         $contractorDetail = $this->designerDetails->where('post', PostsEnum::CONTRACTOR)->first();
+
         return [
             '[@contractorDetail.name]' => $contractorDetail->name ?? '',
             '[@contractorDetail.father_name]' => $contractorDetail->father_name ?? '',
@@ -337,18 +341,18 @@ trait EMapTemplateTrait
     private function getCriteriaDetailsReplacement(): array
     {
         return [
-            '[@criteriaDetails]' => (string)View::make('emap::inc.criteria_details', [
-                'criteriaDetails' => $this->criteriaDetails
-            ])
+            '[@criteriaDetails]' => (string) View::make('emap::inc.criteria_details', [
+                'criteriaDetails' => $this->criteriaDetails,
+            ]),
         ];
     }
 
     private function getBuildingDetailsReplacement(): array
     {
         return [
-            '[@buildingDetails]' => (string)View::make('emap::inc.building_details', [
-                'buildingDetails' => $this->buildingDetails
-            ])
+            '[@buildingDetails]' => (string) View::make('emap::inc.building_details', [
+                'buildingDetails' => $this->buildingDetails,
+            ]),
         ];
     }
 }

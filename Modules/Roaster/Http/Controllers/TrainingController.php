@@ -2,15 +2,13 @@
 
 namespace Modules\Roaster\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
-use Modules\Roaster\Entities\PesticideRetailerTrainee;
 use Modules\Roaster\Entities\TechnicalTrainee;
 use Modules\Roaster\Entities\Trainee;
 use Modules\Roaster\Entities\Trainer;
@@ -25,7 +23,6 @@ class TrainingController extends Controller
 {
     public function index()
     {
-
         abort_if(
             Gate::denies('training_access'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -33,7 +30,8 @@ class TrainingController extends Controller
         );
         $trainings = Training::withCount('trainingTrainees')->latest()->get();
         $trainers = Trainer::selectRaw('id,name')->latest()->get();
-        return view('roaster::admin.training.index',compact('trainings','trainers'));
+
+        return view('roaster::admin.training.index', compact('trainings', 'trainers'));
     }
 
     public function create()
@@ -49,26 +47,25 @@ class TrainingController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-
         $setting = OfficeSetting::first();
-        if (!$setting->fiscal_year_id) {
+        if (! $setting->fiscal_year_id) {
             toast('Fiscal year not added in setting', 'error');
+
             return back();
         }
         DB::transaction(function () use ($request, $setting) {
             $training = Training::create($request->validated() + [
-                    'fiscal_year_id' => $setting->fiscal_year_id
-                ]);
+                'fiscal_year_id' => $setting->fiscal_year_id,
+            ]);
             $training->trainers()->sync($request->input('trainers'));
         });
         toast('Training Added Successfully', 'success');
-        return back();
 
+        return back();
     }
 
     public function show(Training $training)
     {
-
         abort_if(
             Gate::denies('training_access'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -76,22 +73,21 @@ class TrainingController extends Controller
         );
 
         if ($training->form_type === TrainingTypeEnum::TECHNICAL_TRAINEE) {
-            $trainees = TechnicalTrainee::with('designation', 'department','localBody','district','province')->whereHas('trainingTrainee', function ($query) use ($training) {
+            $trainees = TechnicalTrainee::with('designation', 'department', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
                 $query->where('training_id', $training->id);
             })->paginate(20);
         }
-        if($training->form_type === TrainingTypeEnum::TRAINEE)
-        {
-            $trainees = Trainee::with('designation', 'department','ethnicity','localBody','district','province')->whereHas('trainingTrainee', function ($query) use ($training) {
+        if ($training->form_type === TrainingTypeEnum::TRAINEE) {
+            $trainees = Trainee::with('designation', 'department', 'ethnicity', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
                 $query->where('training_id', $training->id);
             })->paginate(20);
         }
-        return view('roaster::admin.training.show',compact( 'trainees','training'));
+
+        return view('roaster::admin.training.show', compact('trainees', 'training'));
     }
 
     public function edit(Training $training)
     {
-
         abort_if(
             Gate::denies('training_edit'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -101,7 +97,8 @@ class TrainingController extends Controller
         $training->load('fiscalYear');
         $fiscalYears = FiscalYear::get();
         $trainers = Trainer::selectRaw('id,name')->latest()->get();
-        return view('roaster::admin.training.edit',compact('training', 'fiscalYears', 'trainers'));
+
+        return view('roaster::admin.training.edit', compact('training', 'fiscalYears', 'trainers'));
     }
 
     public function update(UpdateTrainingRequest $request, Training $training)
@@ -113,12 +110,13 @@ class TrainingController extends Controller
         );
         DB::transaction(function () use ($request, $training) {
             $training->update($request->validated() + [
-                    'closed_at' => $request->input('form_status') == 1 ? now() : null
-                ]);
+                'closed_at' => $request->input('form_status') == 1 ? now() : null,
+            ]);
             $training->trainers()->sync($request->input('trainers'));
         });
 
         toast('Training Updated Successfully', 'success');
+
         return redirect(route('admin.roaster.training.index'));
     }
 
@@ -133,6 +131,7 @@ class TrainingController extends Controller
         $training->delete();
 
         toast('Training Deleted Successfully', 'success');
+
         return redirect(route('admin.roaster.training.index'));
     }
 
@@ -147,12 +146,12 @@ class TrainingController extends Controller
             $trainees = collect();
         }
 
-        $view = (string)View::make('roaster::admin.training.print_trainee', compact('training', 'trainees'));
+        $view = (string) View::make('roaster::admin.training.print_trainee', compact('training', 'trainees'));
+
         return response()->json([
-            'view' => $view
+            'view' => $view,
         ]);
     }
-
 
     public function setFormStatus(Training $training)
     {
@@ -163,14 +162,13 @@ class TrainingController extends Controller
         );
 
         $training->update([
-            'closed_at' => empty($training->closed_at) ? now() : null
+            'closed_at' => empty($training->closed_at) ? now() : null,
         ]);
 
         toast('Training Status Updated Successfully', 'success');
+
         return redirect(route('admin.roaster.training.index'));
     }
-
-
 
     public function report(Training $training)
     {
@@ -203,16 +201,17 @@ class TrainingController extends Controller
 
         $request->validate([
             'images' => ['required', 'array'],
-            'images.*' => ['image', 'max:300']
+            'images.*' => ['image', 'max:300'],
         ]);
 
         foreach ($request->file('images') as $image) {
             $training->documents()->create([
-                'document' => $image
+                'document' => $image,
             ]);
         }
 
         toast('Photos Added Successfully', 'success');
+
         return redirect()->back();
     }
 
@@ -223,6 +222,7 @@ class TrainingController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+
         return view('roaster::admin.training.mark-sheet', compact('training'));
     }
 
@@ -237,7 +237,7 @@ class TrainingController extends Controller
         $training->update($request->validated());
 
         toast('Marks Updated Successfully', 'success');
+
         return redirect()->back();
     }
-
 }

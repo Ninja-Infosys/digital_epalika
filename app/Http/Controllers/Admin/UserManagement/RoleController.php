@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin\UserManagement;
 
-use App\Events\ActivityLogEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserManagement\Role\StoreRoleRequest;
 use App\Http\Requests\UserManagement\Role\UpdateRoleRequest;
 use App\Models\UserManagement\Permission;
 use App\Models\UserManagement\Role;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -53,6 +51,7 @@ class RoleController extends Controller
         });
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 
@@ -90,6 +89,7 @@ class RoleController extends Controller
         });
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.userManagement.role.index'));
     }
 
@@ -102,12 +102,14 @@ class RoleController extends Controller
 
         if ($role->type == 'Super') {
             toast('super role मेटाउन सकिँदैन', 'error');
+
             return back();
         }
         $role->permissions()->detach();
         $role->delete();
 
         toast('भूमिका सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 
@@ -115,8 +117,9 @@ class RoleController extends Controller
     {
         return Permission::all()
             ->map(function ($permission) {
-                $array = explode("_", $permission->title);
+                $array = explode('_', $permission->title);
                 $last = array_pop($array);
+
                 return [
                     'id' => $permission->id,
                     'name' => Str::headline(implode(' ', $array)),

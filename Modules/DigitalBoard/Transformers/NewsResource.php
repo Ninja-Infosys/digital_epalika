@@ -7,7 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class NewsResource extends JsonResource
 {
-
     public function toArray($request)
     {
         return [
@@ -15,7 +14,7 @@ class NewsResource extends JsonResource
             'title' => $this->title ?? '',
             'date' => $this->date->toDateString() ?? '',
             'description' => $this->description ?? '',
-            'files' => FileResource::collection($this->whenLoaded('files'))
+            'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }
 }

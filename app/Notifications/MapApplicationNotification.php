@@ -3,10 +3,8 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Modules\EMap\Entities\ApplyMapApplication;
 use Modules\EMap\Entities\ApplyMapNotice;
 
 class MapApplicationNotification extends Notification
@@ -57,9 +55,9 @@ class MapApplicationNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'map_apply_id'=>$this->applyMapNotice->map_apply_id,
-            'file'=>$this->applyMapNotice->file,
-            'file_type'=>$this->applyMapNotice->file_type,
+            'map_apply_id' => $this->applyMapNotice->map_apply_id,
+            'file' => $this->applyMapNotice->file,
+            'file_type' => $this->applyMapNotice->file_type,
         ];
     }
 }

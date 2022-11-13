@@ -2,8 +2,6 @@
 
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
@@ -47,8 +45,8 @@ class MeetingDecisionController extends Controller
         );
 
         MeetingDecision::create($request->validated() + [
-                'meeting_for' => $meeting_for
-            ]);
+            'meeting_for' => $meeting_for,
+        ]);
 
         toast('बैठक निर्णय सफलतापूर्वक थपियो', 'success');
 
@@ -74,7 +72,7 @@ class MeetingDecisionController extends Controller
             ->whereDate('en_start_date', '<=', today()->toDateString())
             ->latest()->get();
 
-        return view('executivemeeting::admin.meeting_decision.edit', compact('meeting_for','meetingEvents', 'meetingDecision'));
+        return view('executivemeeting::admin.meeting_decision.edit', compact('meeting_for', 'meetingEvents', 'meetingDecision'));
     }
 
     public function update(UpdateMeetingDecisionRequest $request, $meeting_for, MeetingDecision $meetingDecision)
@@ -93,6 +91,7 @@ class MeetingDecisionController extends Controller
         $meetingDecision->update($request->validated());
 
         toast('बैठक निर्णय सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.executiveMeeting.meetingDecision.index', $meeting_for));
     }
 

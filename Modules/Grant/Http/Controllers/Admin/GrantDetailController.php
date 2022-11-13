@@ -2,9 +2,8 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\Grant\Entities\GrantDetail;
 
@@ -17,9 +16,9 @@ class GrantDetailController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $grantDetails=GrantDetail::with('fiscalYear','grantType','grantProgram')->latest()->get();
+        $grantDetails = GrantDetail::with('fiscalYear', 'grantType', 'grantProgram')->latest()->get();
 
-        return view('grant::admin.grant_detail.index',compact('grantDetails'));
+        return view('grant::admin.grant_detail.index', compact('grantDetails'));
     }
 
     public function create()
@@ -57,7 +56,7 @@ class GrantDetailController extends Controller
             'You are not allowed to access this resource'
         );
 
-        return view('grant::admin.grant_detail.edit',compact('grantDetail'));
+        return view('grant::admin.grant_detail.edit', compact('grantDetail'));
     }
 
     public function update(Request $request, GrantDetail $grantDetail)
@@ -77,7 +76,8 @@ class GrantDetailController extends Controller
 
         $grantDetail->delete();
 
-        toast('अनुदान विवरण सफलतापूर्वक मेटाइयो','success');
+        toast('अनुदान विवरण सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

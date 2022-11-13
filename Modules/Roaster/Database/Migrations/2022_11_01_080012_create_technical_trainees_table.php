@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -13,17 +13,17 @@ return new class extends Migration
             $table->string('employee_name');
             $table->string('photo');
             $table->foreignId('designation_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            ;
+
             $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            ;
+
             $table->string('service_time')->nullable();
             $table->string('label')->nullable();
             $table->string('education_qualification')->nullable();
             $table->foreignId('province_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            ;
+
             $table->foreignId('local_body_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            ;
+
             $table->integer('ward_no')->nullable();
             $table->string('tole')->nullable();
             $table->string('contact_no');

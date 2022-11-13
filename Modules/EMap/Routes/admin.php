@@ -47,13 +47,11 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
             Route::post('storeTemplateData/{noticeTypeEnum}', 'storeTemplateData')->name('store-template-data');
             Route::get('getTemplateData/{noticeTypeEnum}', 'getTemplateData')->name('get-template-data');
         });
-
     });
     Route::get('mapApply/{mapApply}', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
     Route::get('mapApply', 'index')->name('mapApply.index');
 });
-
 
 Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
@@ -76,4 +74,3 @@ Route::view('level', 'emap::admin.notice.level')->name('level');
 Route::view('technician_notice', 'emap::admin.notice.technician-notice')->name('technician_notice');
 Route::view('superstructure', 'emap::admin.notice.superstructure')->name('superstructure');
 Route::view('building', 'emap::admin.notice.building_construction_completion_certificate')->name('building');
-

@@ -31,7 +31,7 @@ class RegistrationController extends Controller
             403,
             'You are not allowed to registration create'
         );
-        $registration_no = 'R-' . Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
+        $registration_no = 'R-'.Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
 
         return view('circular::admin/registration.create', compact('registration_no'));
     }
@@ -45,8 +45,8 @@ class RegistrationController extends Controller
 
         DB::transaction(function () use ($request) {
             $registration = Registration::create($request->validated() + [
-                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
-                ]);
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+            ]);
 
             $this->uploadDocuments($request, $registration);
         });
@@ -85,7 +85,6 @@ class RegistrationController extends Controller
         );
 
         DB::transaction(function () use ($request, $registration) {
-
             if ($request->hasFile('signature_image') && $registration->signature_image) {
                 $this->deleteFile($registration->signature_image);
             }
@@ -120,12 +119,10 @@ class RegistrationController extends Controller
         toast('दर्ता सफलतापूर्वक मेटियो', 'success');
 
         return back();
-
     }
 
     public function registrationReport()
     {
-
         return view('circular::admin/registration.report');
     }
 
@@ -135,7 +132,7 @@ class RegistrationController extends Controller
             $registration->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('registration/' . Str::slug($registration->receiver_name, '_') . '/documents', 'public')
+                'file' => $document->store('registration/'.Str::slug($registration->receiver_name, '_').'/documents', 'public'),
             ]);
         }
     }

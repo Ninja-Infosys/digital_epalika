@@ -13,5 +13,5 @@ return [
     'office_district' => 'बाँके',
     'place_short_name' => 'ने.',
     'office_type' => OfficeTypeEnum::SUB_METROPOLITAN->label(),
-    'office_short_name' => OfficeTypeEnum::SUB_METROPOLITAN->shortName()
+    'office_short_name' => OfficeTypeEnum::SUB_METROPOLITAN->shortName(),
 ];

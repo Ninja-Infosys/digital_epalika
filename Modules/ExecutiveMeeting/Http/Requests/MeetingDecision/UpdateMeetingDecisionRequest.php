@@ -20,7 +20,7 @@ class UpdateMeetingDecisionRequest extends FormRequest
             'subject' => ['nullable', 'string'],
             'date' => ['nullable'],
             'description' => ['nullable'],
-            'decision_file' => ['nullable', 'mimes:png,jpeg,jpg']
+            'decision_file' => ['nullable', 'mimes:png,jpeg,jpg'],
         ];
     }
 
@@ -28,7 +28,7 @@ class UpdateMeetingDecisionRequest extends FormRequest
     {
         return [
             'meeting_event_id.required' => 'बैठक आवश्यक छ',
-            'decision_file.mimes' => 'निर्णय फाइल अनिबार्य png, jpeg, jpg मा हुनुपर्छ '
+            'decision_file.mimes' => 'निर्णय फाइल अनिबार्य png, jpeg, jpg मा हुनुपर्छ ',
         ];
     }
 }

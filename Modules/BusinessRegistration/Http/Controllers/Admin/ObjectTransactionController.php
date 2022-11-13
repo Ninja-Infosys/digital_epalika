@@ -17,6 +17,7 @@ class ObjectTransactionController extends Controller
             'You are not allowed to digital board news access'
         );
         $objectTransactions = ObjectTransaction::with('objectTransaction')->latest()->get();
+
         return view('businessregistration::admin.setting.objectTransaction.index', compact('objectTransactions'));
     }
 
@@ -42,6 +43,7 @@ class ObjectTransactionController extends Controller
         ObjectTransaction::create($request->validated());
 
         toast(' कारोबार गर्ने वस्तु  सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -51,6 +53,7 @@ class ObjectTransactionController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('businessregistration::show');
     }
 
@@ -64,7 +67,6 @@ class ObjectTransactionController extends Controller
         $parentObjectTransactions = ObjectTransaction::whereNull('object_transaction_id')->get();
 
         return view('businessregistration::admin.setting.objectTransaction.edit', compact('objectTransaction', 'parentObjectTransactions'));
-
     }
 
     public function update(UpdateObjectTransactionRequest $request, ObjectTransaction $objectTransaction)
@@ -75,6 +77,7 @@ class ObjectTransactionController extends Controller
         );
         $objectTransaction->update($request->validated());
         toast('  सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.businessRegistration.setting.objectTransaction.index'));
     }
 
@@ -85,6 +88,7 @@ class ObjectTransactionController extends Controller
             'You are not allowed to digital board news access'
         );
         $objectTransaction->delete();
+
         return back();
     }
 }

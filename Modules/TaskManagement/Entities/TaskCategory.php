@@ -3,12 +3,12 @@
 namespace Modules\TaskManagement\Entities;
 
 use App\Models\Settings\Branch;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class TaskCategory extends Model
 {
@@ -17,12 +17,12 @@ class TaskCategory extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
         'branch_id',
-        'title'
+        'title',
     ];
 
     public function branch(): BelongsTo

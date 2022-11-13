@@ -17,8 +17,8 @@ enum SourceOfCapital: string
     {
         return match ($value) {
             self::ANCESTRAL_PROPERTY => 'पैतृक सम्पति',
-            self::BUSINESS  => 'ब्यापार व्यवसाय',
-            self::SALARY  => 'तलब',
+            self::BUSINESS => 'ब्यापार व्यवसाय',
+            self::SALARY => 'तलब',
         };
     }
 }

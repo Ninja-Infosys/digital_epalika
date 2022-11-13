@@ -17,6 +17,7 @@ class BusinessNatureController extends Controller
             'You are not allowed to digital board news access'
         );
         $businessNatures = BusinessNature::latest()->get();
+
         return view('businessregistration::admin.setting.businessNature.index', compact('businessNatures'));
     }
 
@@ -26,6 +27,7 @@ class BusinessNatureController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('businessregistration::admin.setting.businessNature.create');
     }
 
@@ -38,6 +40,7 @@ class BusinessNatureController extends Controller
 
         BusinessNature::create($request->validated());
         toast(' व्यवसाय प्रकृति सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -47,6 +50,7 @@ class BusinessNatureController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('businessregistration::show');
     }
 
@@ -56,6 +60,7 @@ class BusinessNatureController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('businessregistration::admin.setting.businessNature.edit', compact('businessNature'));
     }
 
@@ -68,6 +73,7 @@ class BusinessNatureController extends Controller
 
         $businessNature->update($request->validated());
         toast(' व्यवसाय प्रकृति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.businessRegistration.setting.businessNature.index'));
     }
 
@@ -79,7 +85,8 @@ class BusinessNatureController extends Controller
         );
 
         $businessNature->delete();
-        toast( ' सफलतापूर्वक मेटियो', 'success');
+        toast(' सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 }

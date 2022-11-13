@@ -15,7 +15,7 @@ class LocalBody extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -36,6 +36,7 @@ class LocalBody extends Model
         for ($i = 1; $i <= $this->wards; $i++) {
             $ward_no->push($i);
         }
+
         return $ward_no;
     }
 }

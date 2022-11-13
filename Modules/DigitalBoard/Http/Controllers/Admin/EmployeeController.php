@@ -41,6 +41,7 @@ class EmployeeController extends Controller
 
         Employee::create($request->validated());
         toast('कर्मचारी सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -60,6 +61,7 @@ class EmployeeController extends Controller
             403,
             'You are not allowed to employee edit'
         );
+
         return view('digitalboard::employee.edit', compact('employee'));
     }
 
@@ -79,6 +81,7 @@ class EmployeeController extends Controller
         $employee->update($request->validated());
 
         toast('कर्मचारी सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.digitalBoard.employee.index'));
     }
 
@@ -88,13 +91,13 @@ class EmployeeController extends Controller
             403,
             'You are not allowed to employee delete'
         );
-        if($employee->photo)
-        {
+        if ($employee->photo) {
             $this->deleteFile($employee->photo);
         }
 
         $employee->delete();
         toast(' कर्मचारी सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 
@@ -105,9 +108,10 @@ class EmployeeController extends Controller
             'You are not allowed to employee access'
         );
         $employee->update([
-            'status' => !$employee->status
+            'status' => ! $employee->status,
         ]);
         toast('कर्मचारी स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 }

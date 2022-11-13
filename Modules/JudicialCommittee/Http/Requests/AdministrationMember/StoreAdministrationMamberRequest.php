@@ -22,7 +22,7 @@ class StoreAdministrationMamberRequest extends FormRequest
             'phone' => ['nullable'],
             'red_signature' => ['nullable', 'image', 'mimes:jpg, png, jpeg'],
             'black_signature' => ['nullable', 'image', 'mimes:jpg, png, jpeg'],
-            'status' => ['nullable', 'boolean']
+            'status' => ['nullable', 'boolean'],
         ];
     }
 

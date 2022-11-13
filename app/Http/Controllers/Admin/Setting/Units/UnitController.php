@@ -41,12 +41,12 @@ class UnitController extends Controller
 
         Unit::create($request->validated());
         toast('मापन एकाइ सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('admin.units.unit.index'));
     }
 
     public function show(Unit $unit)
     {
-
     }
 
     public function edit(Unit $unit)
@@ -70,6 +70,7 @@ class UnitController extends Controller
         $unit->update($request->validated());
 
         toast('मापन एकाइ सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.units.unit.index'));
     }
 
@@ -81,6 +82,7 @@ class UnitController extends Controller
         );
         $unit->delete();
         toast('मापन एकाइ सफलतापूर्वक मेटाइयो', 'success');
+
         return redirect(route('admin.units.unit.index'));
     }
 }

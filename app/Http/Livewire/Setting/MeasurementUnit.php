@@ -8,15 +8,17 @@ use Livewire\Component;
 class MeasurementUnit extends Component
 {
     public $types = [];
+
     public $measurementUnits = [];
 
     public $type_id;
+
     public $measurement_unit_id;
 
     public function mount($unit = null)
     {
         $this->types = Type::all();
-        if (!empty($unit)) {
+        if (! empty($unit)) {
             $this->type_id = $unit['type_id'] ?? '';
             $this->measurement_unit_id = $unit['measurement_unit_id'] ?? '';
         }
@@ -24,7 +26,7 @@ class MeasurementUnit extends Component
 
     public function render()
     {
-        if (!empty($this->type_id)) {
+        if (! empty($this->type_id)) {
             $this->measurementUnits = Type::with('measurementUnit')->find($this->type_id)->measurementUnit;
         }
 

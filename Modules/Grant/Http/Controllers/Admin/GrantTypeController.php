@@ -2,8 +2,6 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Grant\Entities\GrantType;
@@ -19,7 +17,7 @@ class GrantTypeController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $grantTypes=GrantType::all();
+        $grantTypes = GrantType::all();
 
         return view('grant::admin.grant_type.index', compact('grantTypes'));
     }
@@ -30,6 +28,7 @@ class GrantTypeController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grant::admin.grant_type.create');
     }
 
@@ -42,6 +41,7 @@ class GrantTypeController extends Controller
         GrantType::create($request->validated());
 
         toast('अनुदान प्रकार सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -56,29 +56,32 @@ class GrantTypeController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grant::admin.grant_type.edit', compact('grantType'));
     }
 
     public function update(UpdateGrantTypeRequest $request, GrantType $grantType)
     {
         abort_if(Gate::denies('grantType_edit'),
-        403,
-        'You are not allowed to edit this resource'
-    );
+            403,
+            'You are not allowed to edit this resource'
+        );
         $grantType->update($request->validated());
 
-        toast('अनुदान प्रकार सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('अनुदान प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.grant.grantType.index'));
     }
 
     public function destroy(GrantType $grantType)
     {
         abort_if(Gate::denies('grantType_delete'),
-        403,
-        'you are not allowed to delete this resource');
+            403,
+            'you are not allowed to delete this resource');
         $grantType->delete();
 
         toast('अनुदान प्रकार सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

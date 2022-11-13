@@ -3,7 +3,6 @@
 namespace Modules\EMap\Entities;
 
 use App\Enums\ApplicationTypeEnum;
-use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +17,7 @@ class ApplyMapApplication extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'rejected_at'
+        'rejected_at',
     ];
 
     protected $fillable = [
@@ -26,11 +25,11 @@ class ApplyMapApplication extends Model
         'file',
         'file_type',
         'rejected_at',
-        'remarks'
+        'remarks',
     ];
 
     protected $casts = [
-        'file_type' => ApplicationTypeEnum::class
+        'file_type' => ApplicationTypeEnum::class,
     ];
 
     public function getApplicationTypeAttribute()
@@ -45,7 +44,7 @@ class ApplyMapApplication extends Model
 
     public function setFileAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['file'] = $value->store('applyMapApplication', 'public');
         }
     }

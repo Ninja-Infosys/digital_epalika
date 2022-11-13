@@ -6,11 +6,11 @@ use Modules\DigitalBoard\Entities\Employee;
 
 class EmployeeObserver
 {
-
     public function creating(Employee $employee)
     {
         if (is_null($employee->position)) {
             $employee->position = Employee::max('position') + 1;
+
             return;
         }
 
@@ -35,11 +35,11 @@ class EmployeeObserver
 
         if ($employee->getOriginal('position') > $employee->position) {
             $positionRange = [
-                $employee->position, $employee->getOriginal('position')
+                $employee->position, $employee->getOriginal('position'),
             ];
         } else {
             $positionRange = [
-                $employee->getOriginal('position'), $employee->position
+                $employee->getOriginal('position'), $employee->position,
             ];
         }
 

@@ -2,13 +2,10 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use App\Models\Settings\Designation;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\Designation;
 use Illuminate\Support\Facades\Gate;
 use Modules\JudicialCommittee\Entities\AdministrationMember;
-use Modules\JudicialCommittee\Entities\ChiefJudicialMember;
 use Modules\JudicialCommittee\Http\Requests\AdministrationMember\StoreAdministrationMamberRequest;
 use Modules\JudicialCommittee\Http\Requests\AdministrationMember\UpdateAdministrationMemberRequest;
 
@@ -21,6 +18,7 @@ class AdministrationMemberController extends Controller
             'You are not allowed to access this resource'
         );
         $administrationMembers = AdministrationMember::with('designation')->orderBy('position')->get();
+
         return view('judicialcommittee::admin.administration_member.index', compact('administrationMembers'));
     }
 
@@ -32,6 +30,7 @@ class AdministrationMemberController extends Controller
         );
 
         $designations = Designation::all();
+
         return view('judicialcommittee::admin.administration_member.create', compact('designations'));
     }
 
@@ -44,6 +43,7 @@ class AdministrationMemberController extends Controller
         AdministrationMember::create($request->validated());
 
         toast('प्रशासन सदस्य सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -65,6 +65,7 @@ class AdministrationMemberController extends Controller
         );
 
         $designations = Designation::all();
+
         return view('judicialcommittee::admin.administration_member.edit', compact('administrationMember', 'designations'));
     }
 
@@ -88,6 +89,7 @@ class AdministrationMemberController extends Controller
         $administrationMember->update($request->validated());
 
         toast('प्रशासन सदस्य सफलतापूर्वक सम्पादन गरियो', 'success');
+
         return redirect(route('admin.judicialCommittee.administrationMember.index'));
     }
 
@@ -103,6 +105,7 @@ class AdministrationMemberController extends Controller
         $administrationMember->delete();
 
         toast('प्रशासन सदस्य सफलतापूर्वक हटाइयो', 'success');
+
         return back();
     }
 
@@ -114,10 +117,11 @@ class AdministrationMemberController extends Controller
         );
 
         $administrationMember->update([
-            'status' => !$administrationMember->status
+            'status' => ! $administrationMember->status,
         ]);
 
         toast('प्रशासन सदस्य स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 }

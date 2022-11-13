@@ -3,7 +3,6 @@
 namespace Modules\Grant\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\Grant\Entities\GrantActivity;
 use Modules\Grant\Http\Requests\GrantActivity\StoreGrantActivityRequest;
@@ -18,9 +17,9 @@ class GrantActivityController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $grantActivities=GrantActivity::all();
+        $grantActivities = GrantActivity::all();
 
-        return view('grant::admin.grant_activity.index',compact('grantActivities'));
+        return view('grant::admin.grant_activity.index', compact('grantActivities'));
     }
 
     public function create()
@@ -29,6 +28,7 @@ class GrantActivityController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grant::admin.grant_activity.create');
     }
 
@@ -40,7 +40,8 @@ class GrantActivityController extends Controller
         );
         GrantActivity::create($request->validated());
 
-        toast('अनुदान क्रियाकलाप सफलतापूर्वक थपियो','success');
+        toast('अनुदान क्रियाकलाप सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -50,6 +51,7 @@ class GrantActivityController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grant::show');
     }
 
@@ -59,7 +61,8 @@ class GrantActivityController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        return view('grant::admin.grant_activity.edit',compact('grantActivity'));
+
+        return view('grant::admin.grant_activity.edit', compact('grantActivity'));
     }
 
     public function update(UpdateGrantActivityRequest $request, GrantActivity $grantActivity)
@@ -70,7 +73,8 @@ class GrantActivityController extends Controller
         );
         $grantActivity->update($request->validated());
 
-        toast('अनुदान क्रियाकलाप सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('अनुदान क्रियाकलाप सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.grant.grantActivity.index'));
     }
 
@@ -82,7 +86,8 @@ class GrantActivityController extends Controller
         );
         $grantActivity->delete();
 
-        toast('अनुदान क्रियाकलाप सफलतापूर्वक मेटाइयो','success');
+        toast('अनुदान क्रियाकलाप सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

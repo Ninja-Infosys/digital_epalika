@@ -18,7 +18,8 @@ class ObjectTransactionSubCategoryController extends Controller
             'You are not allowed to digital board news access'
         );
         $objectTransactionSubCategories = ObjectTransactionSubCategory::with('objectTransaction')->get();
-        return view('businessregistration::admin.setting.objectTransactionSubCategory.index',compact('objectTransactionSubCategories'));
+
+        return view('businessregistration::admin.setting.objectTransactionSubCategory.index', compact('objectTransactionSubCategories'));
     }
 
     public function create()
@@ -28,7 +29,8 @@ class ObjectTransactionSubCategoryController extends Controller
             'You are not allowed to digital board news access'
         );
         $all_objectTransactions = ObjectTransaction::get();
-        return view('businessregistration::admin.setting.objectTransactionSubCategory.create',compact('all_objectTransactions'));
+
+        return view('businessregistration::admin.setting.objectTransactionSubCategory.create', compact('all_objectTransactions'));
     }
 
     public function store(StoreObjectTransactionSubCategoryRequest $request)
@@ -39,6 +41,7 @@ class ObjectTransactionSubCategoryController extends Controller
         );
         ObjectTransactionSubCategory::create($request->validated());
         toast(' कारोबार गर्ने वस्तु  सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 
@@ -48,6 +51,7 @@ class ObjectTransactionSubCategoryController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('businessregistration::show');
     }
 
@@ -58,7 +62,8 @@ class ObjectTransactionSubCategoryController extends Controller
             'You are not allowed to digital board news access'
         );
         $all_objectTransactions = ObjectTransaction::get();
-        return view('businessregistration::admin.setting.objectTransactionSubCategory.edit',compact('objectTransactionSubCategory','all_objectTransactions'));
+
+        return view('businessregistration::admin.setting.objectTransactionSubCategory.edit', compact('objectTransactionSubCategory', 'all_objectTransactions'));
     }
 
     public function update(UpdateObjectTransactionSubCategoryRequest $request, ObjectTransactionSubCategory $objectTransactionSubCategory)
@@ -69,17 +74,18 @@ class ObjectTransactionSubCategoryController extends Controller
         );
         $objectTransactionSubCategory->update($request->validated());
         toast('  सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.businessRegistration.setting.objectTransactionSubCategory.index'));
     }
 
     public function destroy(ObjectTransactionSubCategory $objectTransactionSubCategory)
     {
-
         abort_if(Gate::denies('objectTransactionSubCategory_delete'),
             403,
             'You are not allowed to digital board news access'
         );
         $objectTransactionSubCategory->delete();
+
         return back();
     }
 }

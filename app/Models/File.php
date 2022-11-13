@@ -11,10 +11,10 @@ class File extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [

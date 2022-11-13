@@ -3,7 +3,6 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Traits\SamayaSms;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
@@ -28,14 +27,13 @@ class DashboardController extends Controller
         $businessPurposes = BusinessPurpose::withCount('businessDetails')->get();
 
         return [
-            "labels" => $businessPurposes->pluck('title')->toArray(),
-            "dataSets" => [
+            'labels' => $businessPurposes->pluck('title')->toArray(),
+            'dataSets' => [
                 [
-                    "label" => 'व्यवसायको उदेश्य',
-                    "data" => $businessPurposes->pluck('business_details_count')->toArray()
-                ]
-            ]
+                    'label' => 'व्यवसायको उदेश्य',
+                    'data' => $businessPurposes->pluck('business_details_count')->toArray(),
+                ],
+            ],
         ];
-
     }
 }

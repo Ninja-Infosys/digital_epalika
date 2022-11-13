@@ -2,18 +2,18 @@
 
 namespace Modules\EMap\Http\Controllers\Clients;
 
-use Illuminate\Auth\Access\AuthorizationException;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Modules\EMap\Entities\Client;
 
 class ClientController extends Controller
 {
-
     public function index()
     {
         $clients = Client::with('province', 'district', 'localBody')->where('organization_id', auth('organization')->user()->id)->get();
+
         return view('emap::organization.clients.client.index', compact('clients'));
     }
 
@@ -25,11 +25,11 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required',],
+            'name' => ['required'],
             'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
             'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
             'local_body_id' => ['required', Rule::exists('local_bodies', 'id')->withoutTrashed()],
-            'ward_no' => ['required',],
+            'ward_no' => ['required'],
             'tole' => ['nullable'],
             'phone' => ['required'],
             'email' => ['nullable'],
@@ -37,6 +37,7 @@ class ClientController extends Controller
         Client::create($data + ['organization_id' => auth('organization')->id()]);
 
         toast(' सेवाग्राही सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('organization.admin.clients.client.index'));
     }
 
@@ -47,9 +48,9 @@ class ClientController extends Controller
     {
         $this->authorize('view', $client);
 
-        $client->load(['mapApplies'=>function($query){
+        $client->load(['mapApplies' => function ($query) {
             $query->orderByDesc('fiscal_year_id');
-        },'mapApplies.fiscalYear']);
+        }, 'mapApplies.fiscalYear']);
 
         return view('emap::organization.clients.client.show', compact('client'));
     }
@@ -72,11 +73,11 @@ class ClientController extends Controller
         $this->authorize('update', $client);
 
         $data = $request->validate([
-            'name' => ['required',],
+            'name' => ['required'],
             'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
             'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
             'local_body_id' => ['required', Rule::exists('local_bodies', 'id')->withoutTrashed()],
-            'ward_no' => ['required',],
+            'ward_no' => ['required'],
             'tole' => ['nullable'],
             'phone' => ['required'],
             'email' => ['nullable'],
@@ -85,6 +86,7 @@ class ClientController extends Controller
         $client->update($data);
 
         toast('सेवाग्राही सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('organization.admin.clients.client.index'));
     }
 
@@ -98,6 +100,7 @@ class ClientController extends Controller
         $client->delete();
 
         toast('सेवाग्राही सफलतापूर्वक मेटाइयो', 'success');
+
         return redirect(route('organization.admin.clients.client.index'));
     }
 }

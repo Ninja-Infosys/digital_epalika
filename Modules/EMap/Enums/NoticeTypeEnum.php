@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 
 enum NoticeTypeEnum: string
 {
-
     //for consultant
     case TECHNICIAN_APPROVAL = 'technician_approval';
     case ENGINEER_APPROVAL = 'engineer_approval';
@@ -28,7 +27,6 @@ enum NoticeTypeEnum: string
     case PERMISSION = 'permission';
 
     case MAP_ACCEPTANCE = 'map_acceptance';
-
 
     case MAP_PASS_FOR_BUILDING = 'map_pass_building';
     case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = 'construction_completion_certificate';
@@ -69,7 +67,6 @@ enum NoticeTypeEnum: string
     public static function getLabel(self $value): string
     {
         return match ($value) {
-
             //application enums
             self::MAP_ACCEPTANCE => 'भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम',
             self::TECHNICIAN_APPROVAL => 'नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र',
@@ -138,7 +135,6 @@ enum NoticeTypeEnum: string
     public static function getFileType(self $value): FileTypeEnum
     {
         return match ($value) {
-
             //application enums
             self::MAP_ACCEPTANCE,
             self::TECHNICIAN_APPROVAL,
@@ -201,7 +197,6 @@ enum NoticeTypeEnum: string
     public static function getType(self $value): EMapFormFillerTypeEnum
     {
         return match ($value) {
-
             //consultant
             self::TECHNICIAN_APPROVAL,
             self::BUILDING_COMPLIANCE_CHECKLIST,
@@ -235,7 +230,7 @@ enum NoticeTypeEnum: string
             self::MAP_CERTIFICATE,
             self::BUILDING_COMPLETION_CERTIFICATE => EMapFormFillerTypeEnum::MUNICIPAL,
 
-                //house owner
+            //house owner
             self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION,
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE,
             self::HEIR,
@@ -243,8 +238,6 @@ enum NoticeTypeEnum: string
             self::PERMISSION,
             self::MAP_ACCEPTANCE,
             self::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE => EMapFormFillerTypeEnum::HOUSE_OWNER,
-
-
         };
     }
 

@@ -44,6 +44,7 @@ class WardCommitteeController extends Controller
         WardCommittee::create($request->validated());
 
         toast('वडा समिति  सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -78,6 +79,7 @@ class WardCommitteeController extends Controller
         $wardCommittee->update($request->validated());
 
         toast('वडा समिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.executiveMeeting.wardCommittee.index'));
     }
 

@@ -2,8 +2,6 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Grant\Entities\ThematicArea;
@@ -19,7 +17,7 @@ class ThematicAreaController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $thematicAreas=ThematicArea::all();
+        $thematicAreas = ThematicArea::all();
 
         return view('grant::admin.thematic_area.index', compact('thematicAreas'));
     }
@@ -43,7 +41,8 @@ class ThematicAreaController extends Controller
 
         ThematicArea::create($request->validated());
 
-        toast('विषयगत क्षेत्र सफलतापूर्वक थपियो','success');
+        toast('विषयगत क्षेत्र सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -53,6 +52,7 @@ class ThematicAreaController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grant::show');
     }
 
@@ -62,7 +62,8 @@ class ThematicAreaController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        return view('grant::admin.thematic_area.edit',compact('thematicArea'));
+
+        return view('grant::admin.thematic_area.edit', compact('thematicArea'));
     }
 
     public function update(UpdateThematicAreaRequest $request, ThematicArea $thematicArea)
@@ -75,6 +76,7 @@ class ThematicAreaController extends Controller
         $thematicArea->update($request->validated());
 
         toast('विषयगत क्षेत्र सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.grant.thematicArea.index'));
     }
 
@@ -86,7 +88,8 @@ class ThematicAreaController extends Controller
         );
         $thematicArea->delete();
 
-        toast('विषयगत क्षेत्र सफलतापूर्वक मेटाइयो','success');
+        toast('विषयगत क्षेत्र सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

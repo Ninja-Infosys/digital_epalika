@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum  FamilyRelationEnum: string
+enum FamilyRelationEnum: string
 {
     case FATHER = 'father';
     case MOTHER = 'mother';
@@ -11,11 +11,13 @@ enum  FamilyRelationEnum: string
     case GRANDSON = 'grandson';
     case GRANDDAUGHTER = 'granddaughter';
 
-    public function label(): string {
+    public function label(): string
+    {
         return self::getLabel($this);
     }
 
-    public static function getLabel(self $value): string {
+    public static function getLabel(self $value): string
+    {
         return match ($value) {
             self::FATHER => 'बुबा',
             self::MOTHER => 'आमा',

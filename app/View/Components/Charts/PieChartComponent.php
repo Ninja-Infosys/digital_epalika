@@ -11,13 +11,12 @@ use Illuminate\View\Component;
 
 class PieChartComponent extends Component
 {
-    public function __construct(public array  $labels = [],
-                                public array  $dataSets = [],
-                                public string $id = "pie-chart",
-                                public string $chartName = "pie-chart",
-                                public string $chartType = "pie")
+    public function __construct(public array $labels = [],
+                                public array $dataSets = [],
+                                public string $id = 'pie-chart',
+                                public string $chartName = 'pie-chart',
+                                public string $chartType = 'pie')
     {
-
     }
 
     public function render(): View|Factory|Htmlable|string|Closure|Application

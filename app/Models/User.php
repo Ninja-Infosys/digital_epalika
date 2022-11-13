@@ -9,7 +9,6 @@ use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
 use App\Traits\LockableTrait;
 use App\Traits\QueryFilterTrait;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -37,7 +36,7 @@ class User extends Authenticatable
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -52,7 +51,7 @@ class User extends Authenticatable
         'district_id',
         'local_body_id',
         'ward_no',
-        'profile_photo_path'
+        'profile_photo_path',
     ];
 
     protected $hidden = [
@@ -68,7 +67,7 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value)
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
@@ -82,8 +81,8 @@ class User extends Authenticatable
 
     public function setProfilePhotoPathAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['profile_photo_path'] = $value->store('user/profile/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 

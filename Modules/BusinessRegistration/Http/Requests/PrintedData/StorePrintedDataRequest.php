@@ -16,7 +16,7 @@ class StorePrintedDataRequest extends FormRequest
         return [
             'data' => ['required'],
             'files' => ['nullable', 'array'],
-            'files.*' => ['mimes:jpg,png,jpeg,pdf']
+            'files.*' => ['mimes:jpg,png,jpeg,pdf'],
         ];
     }
 }

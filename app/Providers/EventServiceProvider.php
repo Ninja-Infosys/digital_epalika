@@ -21,8 +21,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         ActivityLogEvent::class => [
-            ActivityEventListener::class
-        ]
+            ActivityEventListener::class,
+        ],
     ];
 
     /**
@@ -32,7 +32,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Event::listen(['eloquent.created'],function($model){
+        \Event::listen(['eloquent.created'], function ($model) {
             info('created');
         });
     }

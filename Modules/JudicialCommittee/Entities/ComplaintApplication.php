@@ -6,11 +6,11 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
 
 class ComplaintApplication extends Model
@@ -21,7 +21,7 @@ class ComplaintApplication extends Model
         'en_date',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -51,7 +51,7 @@ class ComplaintApplication extends Model
         'applicant_name',
         'applicant_phone',
         'applicant_address',
-        'applicant_signature'
+        'applicant_signature',
     ];
 
     public function fiscalYear(): BelongsTo
@@ -61,45 +61,45 @@ class ComplaintApplication extends Model
 
     public function getApplicantSignatureUrlAttribute(): string
     {
-        return !empty($this->attributes['applicant_signature'])
+        return ! empty($this->attributes['applicant_signature'])
             ? Storage::disk('public')->url($this->attributes['applicant_signature'])
             : '';
     }
 
     public function setApplicantSignatureAttribute($value)
     {
-        if(!empty($value) && !is_string($value)){
-            $this->attributes['applicant_signature']=$value->store('judicial_committee/applicant_signature','public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['applicant_signature'] = $value->store('judicial_committee/applicant_signature', 'public');
         }
     }
 
     public function complainantProvince(): BelongsTo
     {
-        return $this->belongsTo(Province::class,'complainant_province_id');
+        return $this->belongsTo(Province::class, 'complainant_province_id');
     }
 
     public function complainantDistrict(): BelongsTo
     {
-        return $this->belongsTo(District::class,'complainant_district_id');
+        return $this->belongsTo(District::class, 'complainant_district_id');
     }
 
     public function complainantLocalBody(): BelongsTo
     {
-        return $this->belongsTo(LocalBody::class,'complainant_local_body_id');
+        return $this->belongsTo(LocalBody::class, 'complainant_local_body_id');
     }
 
     public function defendantProvince(): BelongsTo
     {
-        return $this->belongsTo(Province::class,'defendant_province_id');
+        return $this->belongsTo(Province::class, 'defendant_province_id');
     }
 
     public function defendantDistrict(): BelongsTo
     {
-        return $this->belongsTo(District::class,'defendant_district_id');
+        return $this->belongsTo(District::class, 'defendant_district_id');
     }
 
     public function defendantLocalBody(): BelongsTo
     {
-        return $this->belongsTo(LocalBody::class,'defendant_local_body_id');
+        return $this->belongsTo(LocalBody::class, 'defendant_local_body_id');
     }
 }

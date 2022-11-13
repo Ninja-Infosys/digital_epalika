@@ -18,7 +18,8 @@ class GrievanceTypeController extends Controller
         );
 
         $grievance_types = GrievanceType::latest()->get();
-        return view('grievancehandling::admin.setting.grievance_type.index',compact('grievance_types'));
+
+        return view('grievancehandling::admin.setting.grievance_type.index', compact('grievance_types'));
     }
 
     public function create()
@@ -27,6 +28,7 @@ class GrievanceTypeController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grievancehandling::admin.setting.grievance_type.create');
     }
 
@@ -39,8 +41,8 @@ class GrievanceTypeController extends Controller
 
         GrievanceType::create($request->validated());
         toast('गुनासो प्रकार  सफलतापूर्वक थपियो', 'success');
-        return back();
 
+        return back();
     }
 
     public function show(GrievanceType $grievanceType)
@@ -49,6 +51,7 @@ class GrievanceTypeController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
         return view('grievancehandling::admin.setting.grievance_type.show');
     }
 
@@ -71,6 +74,7 @@ class GrievanceTypeController extends Controller
 
         $grievanceType->update($request->validated());
         toast('गुनासो प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.grievanceHandling.setting.grievanceType.index'));
     }
 
@@ -82,6 +86,7 @@ class GrievanceTypeController extends Controller
         );
         $grievanceType->delete();
         toast(' गुनासो प्रकार सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

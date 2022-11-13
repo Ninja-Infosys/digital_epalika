@@ -10,10 +10,12 @@ use Modules\EMap\Entities\StoreyDetail;
 
 class StoreyDetailEditLivewire extends Component
 {
-
     public MapApply $mapApply;
+
     public $mapFees;
+
     public $storeyDetails = [];
+
     public ?int $dataToEdit = null;
 
     public function mount(MapApply $mapApply): void
@@ -44,7 +46,7 @@ class StoreyDetailEditLivewire extends Component
     {
         if ($index !== null) {
             $dataToDelete = $this->storeyDetails[$index];
-            if (!empty($dataToDelete['id'])) {
+            if (! empty($dataToDelete['id'])) {
                 StoreyDetail::find($dataToDelete['id'])?->delete();
 
                 unset($this->storeyDetails[$index]);
@@ -61,14 +63,13 @@ class StoreyDetailEditLivewire extends Component
 
         return [
             'storeyDetails' => ['nullable', 'array'],
-            'storeyDetails.' . $this->dataToEdit . '.map_fee_id' => ['required', 'exists:map_fees,id'],
-            'storeyDetails.' . $this->dataToEdit . '.area_of_proposed_construction' => ['required', 'numeric'],
-            'storeyDetails.' . $this->dataToEdit . '.area_of_former_construction' => ['nullable', 'numeric'],
-            'storeyDetails.' . $this->dataToEdit . '.total_area' => ['required', 'numeric'],
-            'storeyDetails.' . $this->dataToEdit . '.height' => ['required', 'numeric'],
+            'storeyDetails.'.$this->dataToEdit.'.map_fee_id' => ['required', 'exists:map_fees,id'],
+            'storeyDetails.'.$this->dataToEdit.'.area_of_proposed_construction' => ['required', 'numeric'],
+            'storeyDetails.'.$this->dataToEdit.'.area_of_former_construction' => ['nullable', 'numeric'],
+            'storeyDetails.'.$this->dataToEdit.'.total_area' => ['required', 'numeric'],
+            'storeyDetails.'.$this->dataToEdit.'.height' => ['required', 'numeric'],
         ];
     }
-
 
     public function setDataForEdit(?int $index = null): void
     {
@@ -82,7 +83,7 @@ class StoreyDetailEditLivewire extends Component
             DB::transaction(function () {
                 $dataToSave = $this->storeyDetails[$this->dataToEdit];
 
-                if (!empty($dataToSave['id'])) {
+                if (! empty($dataToSave['id'])) {
                     StoreyDetail::find($dataToSave['id'])?->update($dataToSave);
                 } else {
                     StoreyDetail::create($dataToSave + ['map_apply_id' => $this->mapApply->id]);
@@ -92,9 +93,9 @@ class StoreyDetailEditLivewire extends Component
             $this->reset('dataToEdit');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }
@@ -113,7 +114,6 @@ class StoreyDetailEditLivewire extends Component
             'storeyDetails.*.height.numeric' => 'उचाई नम्बरमा हुनुपर्छ|',
         ];
     }
-
 
     public function updated($propertyName): void
     {

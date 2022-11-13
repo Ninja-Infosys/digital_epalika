@@ -16,7 +16,7 @@ class StoreMeasurementUnitRequest extends FormRequest
     {
         return [
             'type_id' => ['required', Rule::exists('types', 'id')->withoutTrashed()],
-            'title' => ['required', Rule::unique('measurement_units', 'title')->withoutTrashed()]
+            'title' => ['required', Rule::unique('measurement_units', 'title')->withoutTrashed()],
         ];
     }
 

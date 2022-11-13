@@ -19,9 +19,9 @@ class StoreMeetingDecisionRequest extends FormRequest
             'meeting_event_id' => ['required', Rule::exists('meeting_events', 'id')->withoutTrashed()],
             'subject' => ['required', 'string'],
             'date' => ['required'],
-            'en_date' => ['nullable','date'],
+            'en_date' => ['nullable', 'date'],
             'description' => ['nullable'],
-            'decision_file' => ['required', 'mimes:png,jpeg,jpg']
+            'decision_file' => ['required', 'mimes:png,jpeg,jpg'],
         ];
     }
 
@@ -30,7 +30,7 @@ class StoreMeetingDecisionRequest extends FormRequest
         return [
             'meeting_event_id.required' => 'बैठक आवश्यक छ',
             'decision_file.required' => 'निर्णय फाइल आवश्यक छ',
-            'decision_file.mimes' => 'फाइल png, jpeg, jpg मा हुनुपर्छ '
+            'decision_file.mimes' => 'फाइल png, jpeg, jpg मा हुनुपर्छ ',
         ];
     }
 }

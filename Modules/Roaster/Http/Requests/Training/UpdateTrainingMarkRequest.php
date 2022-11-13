@@ -27,6 +27,7 @@ class UpdateTrainingMarkRequest extends FormRequest
             'included_subjects' => ['nullable'],
         ];
     }
+
     public function messages(): array
     {
         return [

@@ -10,6 +10,7 @@ class ServiceEmployeeObserver
     {
         if (is_null($serviceEmployee->position)) {
             $serviceEmployee->position = ServiceEmployee::max('position') + 1;
+
             return;
         }
 
@@ -34,11 +35,11 @@ class ServiceEmployeeObserver
 
         if ($serviceEmployee->getOriginal('position') > $serviceEmployee->position) {
             $positionRange = [
-                $serviceEmployee->position, $serviceEmployee->getOriginal('position')
+                $serviceEmployee->position, $serviceEmployee->getOriginal('position'),
             ];
         } else {
             $positionRange = [
-                $serviceEmployee->getOriginal('position'), $serviceEmployee->position
+                $serviceEmployee->getOriginal('position'), $serviceEmployee->position,
             ];
         }
 
@@ -66,5 +67,4 @@ class ServiceEmployeeObserver
             $lowerPriorityServiceEmployee->saveQuietly();
         }
     }
-
 }

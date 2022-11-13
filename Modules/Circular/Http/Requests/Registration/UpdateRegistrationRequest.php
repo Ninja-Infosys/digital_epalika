@@ -29,7 +29,7 @@ class UpdateRegistrationRequest extends FormRequest
             'date' => ['nullable'],
             'remarks' => ['nullable'],
             'documents' => ['nullable', 'array'],
-            'documents.*' => ['mimes:jpg,png,jpeg,pdf']
+            'documents.*' => ['mimes:jpg,png,jpeg,pdf'],
         ];
     }
 

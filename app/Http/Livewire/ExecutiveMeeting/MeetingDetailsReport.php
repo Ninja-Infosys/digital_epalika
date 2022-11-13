@@ -9,9 +9,13 @@ use Modules\ExecutiveMeeting\Entities\MeetingDetail;
 class MeetingDetailsReport extends Component
 {
     public $meetingDetails = [];
+
     public $officeSetting;
+
     public $from_date;
+
     public $to_date;
+
     public $model_type;
 
     public function mount($model_type)
@@ -27,10 +31,10 @@ class MeetingDetailsReport extends Component
     {
         $this->meetingDetails = MeetingDetail::where('model_type', $this->model_type)->latest()
             ->where(function ($query) {
-                if (!empty($this->from_date)) {
+                if (! empty($this->from_date)) {
                     $query->whereDate('meeting_date', '>=', $this->from_date);
                 }
-                if (!empty($this->to_date)) {
+                if (! empty($this->to_date)) {
                     $query->whereDate('meeting_date', '<=', $this->to_date);
                 }
             })

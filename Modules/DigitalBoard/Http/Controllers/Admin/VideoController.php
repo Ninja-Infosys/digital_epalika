@@ -42,6 +42,7 @@ class VideoController extends Controller
         Video::create($request->validated());
 
         toast('भिडियो सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 

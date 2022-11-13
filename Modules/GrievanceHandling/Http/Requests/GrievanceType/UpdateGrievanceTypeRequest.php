@@ -16,7 +16,7 @@ class UpdateGrievanceTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', Rule::unique('grievance_types', 'title')->withoutTrashed()->ignore($this->grievanceType)]
+            'title' => ['required', Rule::unique('grievance_types', 'title')->withoutTrashed()->ignore($this->grievanceType)],
         ];
     }
 }

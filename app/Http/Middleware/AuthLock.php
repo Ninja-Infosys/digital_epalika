@@ -9,10 +9,10 @@ class AuthLock
 {
     public function handle(Request $request, Closure $next)
     {
-        if(!$request->user()){
+        if (! $request->user()) {
             return $next($request);
         }    // If the user does not have this feature enabled, then just return next.
-        if (!$request->user()->hasLockoutTime()) {
+        if (! $request->user()->hasLockoutTime()) {
             // Check if previous session was set, if so, remove it because we don't need it here.
             if (session('lock-expires-at')) {
                 session()->forget('lock-expires-at');
@@ -21,7 +21,7 @@ class AuthLock
             return $next($request);
         }
 
-        if (($lockExpiresAt = session('lock-expires-at')) && $lockExpiresAt < now() ) {
+        if (($lockExpiresAt = session('lock-expires-at')) && $lockExpiresAt < now()) {
             return redirect(route('login.locked'));
         }
 

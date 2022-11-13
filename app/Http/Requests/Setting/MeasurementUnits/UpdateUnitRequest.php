@@ -27,7 +27,7 @@ class UpdateUnitRequest extends FormRequest
     {
         return [
             'measurement_unit_id.required' => 'एकाइ मापन आवश्यक छ',
-            'title.required' => 'शिर्षक अनिबार्य छ '
+            'title.required' => 'शिर्षक अनिबार्य छ ',
         ];
     }
 }

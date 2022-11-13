@@ -2,8 +2,6 @@
 
 namespace Modules\TaskManagement\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\TaskManagement\Entities\TaskCategory;
 use Modules\TaskManagement\Entities\TaskDivision;
@@ -30,7 +28,8 @@ class TaskDivisionController extends Controller
     {
         TaskDivision::create($request->validated());
 
-        toast('कार्य विभाजन सफलतापूर्वक थपियो','success');
+        toast('कार्य विभाजन सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -50,7 +49,8 @@ class TaskDivisionController extends Controller
     {
         $taskDivision->update($request->validated());
 
-        toast('कार्य विभाजन सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('कार्य विभाजन सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.taskManagement.taskDivision.index'));
     }
 
@@ -58,7 +58,8 @@ class TaskDivisionController extends Controller
     {
         $taskDivision->delete();
 
-        toast('कार्य विभाजन सफलतापूर्वक मेटाइयो','success');
+        toast('कार्य विभाजन सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

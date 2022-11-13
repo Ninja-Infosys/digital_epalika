@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class OfficeHeaderResource extends JsonResource
 {
-
     public function toArray($request)
     {
         return [
@@ -14,7 +13,7 @@ class OfficeHeaderResource extends JsonResource
             'title' => $this->title ?? '',
             'font' => $this->font ?? '',
             'font_size' => $this->font_size ?? '',
-            'font_color' => $this->font_color ?? ''
+            'font_color' => $this->font_color ?? '',
         ];
     }
 }

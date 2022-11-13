@@ -14,7 +14,7 @@ class UnitConversion extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -24,7 +24,7 @@ class UnitConversion extends Model
     ];
 
     protected $casts = [
-        'rate' => 'double'
+        'rate' => 'double',
     ];
 
     public function conversionFrom(): BelongsTo

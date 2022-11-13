@@ -10,6 +10,7 @@ class MunicipalDetailObserver
     {
         if (is_null($municipalDetail->position)) {
             $municipalDetail->position = MunicipalDetail::max('position') + 1;
+
             return;
         }
 
@@ -34,11 +35,11 @@ class MunicipalDetailObserver
 
         if ($municipalDetail->getOriginal('position') > $municipalDetail->position) {
             $positionRange = [
-                $municipalDetail->position, $municipalDetail->getOriginal('position')
+                $municipalDetail->position, $municipalDetail->getOriginal('position'),
             ];
         } else {
             $positionRange = [
-                $municipalDetail->getOriginal('position'), $municipalDetail->position
+                $municipalDetail->getOriginal('position'), $municipalDetail->position,
             ];
         }
 
@@ -66,5 +67,4 @@ class MunicipalDetailObserver
             $lowerPriorityMunicipalDetail->saveQuietly();
         }
     }
-
 }

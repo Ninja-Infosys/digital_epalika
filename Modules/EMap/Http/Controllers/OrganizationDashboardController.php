@@ -8,11 +8,10 @@ use Modules\EMap\Entities\MapApply;
 
 class OrganizationDashboardController extends Controller
 {
-
     public function __invoke(Request $request)
     {
-        $mapApplyCount=MapApply::where('organization_id',auth('organization')->user()->id)->count();
+        $mapApplyCount = MapApply::where('organization_id', auth('organization')->user()->id)->count();
 
-        return view('emap::organization.dashboard',compact('mapApplyCount'));
+        return view('emap::organization.dashboard', compact('mapApplyCount'));
     }
 }

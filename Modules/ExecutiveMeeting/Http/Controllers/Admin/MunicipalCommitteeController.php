@@ -43,6 +43,7 @@ class MunicipalCommitteeController extends Controller
         MunicipalCommittee::create($request->validated());
 
         toast('पालिका समिति  सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -77,6 +78,7 @@ class MunicipalCommitteeController extends Controller
         $municipalCommittee->update($request->validated());
 
         toast('पालिका समिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.executiveMeeting.municipalCommittee.index'));
     }
 
@@ -93,6 +95,7 @@ class MunicipalCommitteeController extends Controller
         $municipalCommittee->delete();
 
         toast('पालिका समिति सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

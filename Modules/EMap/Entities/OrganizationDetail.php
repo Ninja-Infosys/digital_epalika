@@ -5,9 +5,8 @@ namespace Modules\EMap\Entities;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +20,7 @@ class OrganizationDetail extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -76,8 +75,8 @@ class OrganizationDetail extends Model
 
     public function setOrgRegistrationDocumentAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['org_registration_document'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['org_registration_document'] = $value->store('user/detail/org/'.Str::slug($this->attributes['org_name_en'], '_'), 'public');
         }
     }
 
@@ -90,8 +89,8 @@ class OrganizationDetail extends Model
 
     public function setOrgPanDocumentAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['org_pan_document'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['org_pan_document'] = $value->store('user/detail/org/'.Str::slug($this->attributes['org_name_en'], '_'), 'public');
         }
     }
 
@@ -104,8 +103,8 @@ class OrganizationDetail extends Model
 
     public function setLogoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['logo'] = $value->store('user/detail/org/' . Str::slug($this->attributes['org_name_en'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['logo'] = $value->store('user/detail/org/'.Str::slug($this->attributes['org_name_en'], '_'), 'public');
         }
     }
 }

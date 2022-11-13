@@ -10,6 +10,7 @@ class OfficeHeaderObserver
     {
         if (is_null($officeHeader->position)) {
             $officeHeader->position = OfficeHeader::max('position') + 1;
+
             return;
         }
 
@@ -34,11 +35,11 @@ class OfficeHeaderObserver
 
         if ($officeHeader->getOriginal('position') > $officeHeader->position) {
             $positionRange = [
-                $officeHeader->position, $officeHeader->getOriginal('position')
+                $officeHeader->position, $officeHeader->getOriginal('position'),
             ];
         } else {
             $positionRange = [
-                $officeHeader->getOriginal('position'), $officeHeader->position
+                $officeHeader->getOriginal('position'), $officeHeader->position,
             ];
         }
 
@@ -66,5 +67,4 @@ class OfficeHeaderObserver
             $lowerPriorityOfficeHeader->saveQuietly();
         }
     }
-
 }

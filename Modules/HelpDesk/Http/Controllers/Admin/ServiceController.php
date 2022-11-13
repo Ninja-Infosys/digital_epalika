@@ -94,18 +94,18 @@ class ServiceController extends Controller
             $service->update($request->validated());
 
             foreach ($request->input('serviceDocuments') as $serviceDocument) {
-                if (!empty($serviceDocument['id'])) {
+                if (! empty($serviceDocument['id'])) {
                     ServiceDocument::find($serviceDocument['id'])->update([
-                        'description' => $serviceDocument['description']
+                        'description' => $serviceDocument['description'],
                     ]);
                 } else {
                     $service->serviceDocuments()->create($serviceDocument);
                 }
             }
             foreach ($request->input('serviceProcesses') as $serviceProcess) {
-                if (!empty($serviceProcess['id'])) {
+                if (! empty($serviceProcess['id'])) {
                     ServiceProcess::find($serviceProcess['id'])->update([
-                        'description' => $serviceProcess['description']
+                        'description' => $serviceProcess['description'],
                     ]);
                 } else {
                     $service->serviceProcesses()->create($serviceProcess);
@@ -134,6 +134,7 @@ class ServiceController extends Controller
         $service->delete();
 
         toast('सेवा सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 }

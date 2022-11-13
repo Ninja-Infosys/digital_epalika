@@ -24,7 +24,7 @@ class UpdateServiceRequest extends FormRequest
             'serviceDocuments' => ['required', 'array'],
             'serviceDocuments.*.description' => ['required'],
             'serviceProcesses' => ['required', 'array'],
-            'serviceProcesses.*.description' => ['required']
+            'serviceProcesses.*.description' => ['required'],
         ];
     }
 
@@ -38,7 +38,7 @@ class UpdateServiceRequest extends FormRequest
             'serviceDocuments.required' => 'आबश्यक कागजात अनिबार्य छ ',
             'serviceDocuments.*.description.required' => 'कागजात आबश्यक छ ',
             'serviceProcesses.required' => 'उपलब्ध गराउने प्रक्रिया अनिबार्य छ ',
-            'serviceProcesses.*.description.required' => 'उपलब्ध गराउने प्रक्रिया आबश्यक छ '
+            'serviceProcesses.*.description.required' => 'उपलब्ध गराउने प्रक्रिया आबश्यक छ ',
         ];
     }
 }

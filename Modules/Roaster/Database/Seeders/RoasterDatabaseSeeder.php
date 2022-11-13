@@ -9,7 +9,7 @@ class RoasterDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            RoasterPermissionTableSeeder::class
+            RoasterPermissionTableSeeder::class,
         ]);
     }
 }

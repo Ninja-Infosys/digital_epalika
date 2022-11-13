@@ -89,7 +89,7 @@ class Kernel extends HttpKernel
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
         'checkRoleMiddleware' => CheckRoleMiddleware::class,
-        'password.check'    =>  CheckOrganizationPassword::class,
+        'password.check' => CheckOrganizationPassword::class,
         'auth.lock' => AuthLock::class,
     ];
 }

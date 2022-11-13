@@ -17,13 +17,16 @@ class MapApplyLivewire extends Component
     use WithFileUploads;
 
     public MapApply $mapApply;
+
     public int $currentStep = 1;
 
     //    conversion
     public $conversion_units = [];
 
     public $conversion = [];
+
     public MapSetting $setting;
+
     public object $officeSetting;
 
     public array $applyMap = [
@@ -79,7 +82,7 @@ class MapApplyLivewire extends Component
                 'according_to_criteria' => null,
                 'according_to_map' => null,
                 'compliance' => null,
-                'remarks' => $criteriaDetail->remarks()
+                'remarks' => $criteriaDetail->remarks(),
             ];
         }
 
@@ -186,7 +189,6 @@ class MapApplyLivewire extends Component
         $this->validate();
 
         DB::transaction(function () {
-
             $this->mapApply->update($this->applyMap);
             foreach ($this->fourFortDetails as $fourFortDetail) {
                 $this->mapApply->fourForts()->create($fourFortDetail);
@@ -195,7 +197,6 @@ class MapApplyLivewire extends Component
             foreach ($this->designerDetails as $designerDetail) {
                 $this->mapApply->designerDetails()->create($designerDetail);
             }
-
 
             foreach ($this->criteriaDetails as $criteriaDetail) {
                 $this->mapApply->criteriaDetails()->create($criteriaDetail);
@@ -209,15 +210,14 @@ class MapApplyLivewire extends Component
         $this->reset('fourFortDetails', 'designerDetails', 'criteriaDetails', 'buildingDetails');
 
         $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
         ]);
     }
 
     public function render()
     {
-
         return view('emap::livewire.map-apply-livewire');
     }
 

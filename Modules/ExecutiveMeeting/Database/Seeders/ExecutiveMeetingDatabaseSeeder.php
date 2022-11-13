@@ -9,7 +9,7 @@ class ExecutiveMeetingDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            ExecutiveMeetingPermissionTableSeeder::class
+            ExecutiveMeetingPermissionTableSeeder::class,
         ]);
     }
 }

@@ -2,16 +2,16 @@
 
 namespace Modules\TaskManagement\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\TaskManagement\Entities\DailyTask;
 
 class DailyTaskController extends Controller
 {
     public function index()
     {
-        $dailyTasks = DailyTask::with('branch','taskCategory','taskDivision')->paginate(10);
+        $dailyTasks = DailyTask::with('branch', 'taskCategory', 'taskDivision')->paginate(10);
+
         return view('taskmanagement::admin.daily_task.index', compact('dailyTasks'));
     }
 
@@ -27,7 +27,7 @@ class DailyTaskController extends Controller
 
     public function show(DailyTask $dailyTask)
     {
-        $dailyTask->load('fiscalYear','branch','taskCategory','taskDivision', 'files');
+        $dailyTask->load('fiscalYear', 'branch', 'taskCategory', 'taskDivision', 'files');
 
         return view('taskmanagement::admin.daily_task.show', compact('dailyTask'));
     }
@@ -44,14 +44,15 @@ class DailyTaskController extends Controller
 
     public function destroy(DailyTask $dailyTask)
     {
-        foreach ($dailyTask->files as $file){
+        foreach ($dailyTask->files as $file) {
             $this->deleteFile($file->file);
         }
         $dailyTask->files()->delete();
 
         $dailyTask->delete();
 
-        toast('दैनिक कार्य सफलतापूर्वक मेटाइयो','success');
+        toast('दैनिक कार्य सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

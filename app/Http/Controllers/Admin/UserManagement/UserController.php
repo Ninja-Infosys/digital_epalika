@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Admin\UserManagement;
 
-use App\Events\ActivityLogEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserManagement\User\StoreUserRequest;
 use App\Http\Requests\UserManagement\User\UpdateUserRequest;
 use App\Models\User;
 use App\Models\UserManagement\Role;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -45,10 +43,11 @@ class UserController extends Controller
         );
 
         User::create($request->validated() + [
-                'user_id' => auth()->id(),
-            ]);
+            'user_id' => auth()->id(),
+        ]);
 
         toast('प्रयोगकर्ता सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('admin.userManagement.user.index'));
     }
 
@@ -68,6 +67,7 @@ class UserController extends Controller
         );
         $roles = Role::all();
         $user->load('role');
+
         return view('admin.userManagement.user.edit', compact('user', 'roles'));
     }
 
@@ -81,8 +81,8 @@ class UserController extends Controller
         $user->update($request->validated());
 
         toast('प्रयोगकर्ता सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect(route('admin.userManagement.user.index'));
 
+        return redirect(route('admin.userManagement.user.index'));
     }
 
     public function destroy(User $user)
@@ -95,6 +95,7 @@ class UserController extends Controller
         $user->delete();
 
         toast('प्रयोगकर्ता सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 
@@ -106,10 +107,11 @@ class UserController extends Controller
         );
 
         $user->update([
-            'is_active' => !$user->is_active
+            'is_active' => ! $user->is_active,
         ]);
 
         toast('प्रयोगकर्ता स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 }

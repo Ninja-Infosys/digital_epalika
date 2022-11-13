@@ -17,12 +17,12 @@ class Branch extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
         'branch_id',
-        'branch_name'
+        'branch_name',
     ];
 
     public function branch(): BelongsTo

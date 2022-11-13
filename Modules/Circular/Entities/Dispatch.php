@@ -5,8 +5,8 @@ namespace Modules\Circular\Entities;
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +21,7 @@ class Dispatch extends Model
         'en_dispatch_date',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -48,8 +48,8 @@ class Dispatch extends Model
 
     public function setReceiverSignatureAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['receiver_signature'] = $value->store('dispatch/signature/' . Str::slug($this->attributes['receiver_name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['receiver_signature'] = $value->store('dispatch/signature/'.Str::slug($this->attributes['receiver_name'], '_'), 'public');
         }
     }
 

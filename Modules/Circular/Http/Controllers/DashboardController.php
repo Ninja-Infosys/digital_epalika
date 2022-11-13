@@ -26,21 +26,20 @@ class DashboardController extends Controller
         $yearly_dispatches = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->count();
         $monthly_dispatches = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('dispatch_date', $nepali_date['m'])->count();
 
-
         $registrationChartData = $this->getTotalRegistrationAndDispatchData();
 
         $registrationYearlyChartData = $this->getCurrentFyMonthlyRegistrationAndDispatch($officeSetting);
 
         return view('circular::admin.dashboard', compact(
-                'total_registrations',
-                'yearly_registrations',
-                'monthly_registrations',
-                'total_dispatches',
-                'yearly_dispatches',
-                'monthly_dispatches',
-                'registrationChartData',
-                'registrationYearlyChartData'
-            )
+            'total_registrations',
+            'yearly_registrations',
+            'monthly_registrations',
+            'total_dispatches',
+            'yearly_dispatches',
+            'monthly_dispatches',
+            'registrationChartData',
+            'registrationYearlyChartData'
+        )
         );
     }
 
@@ -51,26 +50,25 @@ class DashboardController extends Controller
     {
         $fiscalYears = FiscalYear::withCount(['registrations', 'dispatch'])->get();
 
-
         return [
-            "labels" => $fiscalYears->pluck('title')->toArray(),
-            "dataSets" => [
+            'labels' => $fiscalYears->pluck('title')->toArray(),
+            'dataSets' => [
                 [
                     'data' => $fiscalYears->pluck('registrations_count')->toArray(),
-                    "label" => "दर्ता",
-                    "fill" => "false"
+                    'label' => 'दर्ता',
+                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYears->pluck('dispatch_count')->toArray(),
-                    "label" => "चलानी",
-                    "fill" => "false"
-                ]
+                    'label' => 'चलानी',
+                    'fill' => 'false',
+                ],
             ],
         ];
     }
 
     /**
-     * @param OfficeSetting $officeSetting
+     * @param  OfficeSetting  $officeSetting
      * @return array
      */
     public function getCurrentFyMonthlyRegistrationAndDispatch(OfficeSetting $officeSetting): array
@@ -88,18 +86,18 @@ class DashboardController extends Controller
         }
 
         return [
-            "labels" => $this->month_name,
-            "dataSets" => [
+            'labels' => $this->month_name,
+            'dataSets' => [
                 [
                     'data' => $monthlyRegistrations,
-                    "label" => "दर्ता",
-                    "fill" => "false"
+                    'label' => 'दर्ता',
+                    'fill' => 'false',
                 ],
                 [
                     'data' => $monthlyDispatches,
-                    "label" => "चलानी",
-                    "fill" => "false"
-                ]
+                    'label' => 'चलानी',
+                    'fill' => 'false',
+                ],
             ],
         ];
     }

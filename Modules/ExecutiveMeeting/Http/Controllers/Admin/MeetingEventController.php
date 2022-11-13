@@ -3,7 +3,6 @@
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingEvent\StoreMeetingEventRequest;
@@ -36,7 +35,7 @@ class MeetingEventController extends Controller
             ->whereDate('en_start_date', '>', today()->toDateString())
             ->latest()->paginate(15);
 
-        return view('executivemeeting::admin.meeting_event.upcoming_meeting', compact('event_for','meetingEvents'));
+        return view('executivemeeting::admin.meeting_event.upcoming_meeting', compact('event_for', 'meetingEvents'));
     }
 
     public function create($event_for)
@@ -57,10 +56,11 @@ class MeetingEventController extends Controller
         );
 
         MeetingEvent::create($request->validated() + [
-                'event_for' => $event_for
-            ]);
+            'event_for' => $event_for,
+        ]);
 
         toast('बैठक सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -93,9 +93,9 @@ class MeetingEventController extends Controller
 
         $meetingEvent->update($request->validated());
 
-        toast('बैठक सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('बैठक सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.executiveMeeting.meetingEvent.index',$event_for));
+        return redirect(route('admin.executiveMeeting.meetingEvent.index', $event_for));
     }
 
     public function destroy($event_for, MeetingEvent $meetingEvent)

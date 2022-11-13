@@ -10,9 +10,10 @@ use Modules\EMap\Enums\BuildingDetailEnum;
 
 class BuildingDetailEditLivewire extends Component
 {
-
     public MapApply $mapApply;
+
     public array $buildingDetails = [];
+
     public ?int $dataToEdit = null;
 
     public function mount(MapApply $mapApply): void
@@ -28,66 +29,63 @@ class BuildingDetailEditLivewire extends Component
             ];
             $availableBuildingDetail->push($buildingDetail->detail->value);
         }
-        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::BUILDING_CATEGORY->value)) {
+        if (! $availableBuildingDetail->unique()->contains(BuildingDetailEnum::BUILDING_CATEGORY->value)) {
             $this->buildingDetails[] = [
                 'detail' => BuildingDetailEnum::BUILDING_CATEGORY->value,
                 'description' => $mapApply->building_category?->label(),
                 'remarks' => null,
             ];
         }
-        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::PLINTH_AREA->value)) {
+        if (! $availableBuildingDetail->unique()->contains(BuildingDetailEnum::PLINTH_AREA->value)) {
             $this->buildingDetails[] = [
                 'detail' => BuildingDetailEnum::PLINTH_AREA->value,
                 'description' => $mapApply->area_of_plinth ?? null,
                 'remarks' => null,
             ];
         }
-        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::LENGTH->value)) {
+        if (! $availableBuildingDetail->unique()->contains(BuildingDetailEnum::LENGTH->value)) {
             $this->buildingDetails[] = [
                 'detail' => BuildingDetailEnum::LENGTH->value,
                 'description' => $mapApply->length ?? '',
                 'remarks' => null,
             ];
         }
-        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::BREADTH->value)) {
+        if (! $availableBuildingDetail->unique()->contains(BuildingDetailEnum::BREADTH->value)) {
             $this->buildingDetails[] = [
                 'detail' => BuildingDetailEnum::BREADTH->value,
                 'description' => $mapApply->breadth ?? '',
                 'remarks' => null,
             ];
         }
-        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::STOREY_COUNT->value)) {
+        if (! $availableBuildingDetail->unique()->contains(BuildingDetailEnum::STOREY_COUNT->value)) {
             $this->buildingDetails[] = [
                 'detail' => BuildingDetailEnum::STOREY_COUNT->value,
                 'description' => $mapApply->current_storey ?? '',
                 'remarks' => null,
             ];
         }
-        if (!$availableBuildingDetail->unique()->contains(BuildingDetailEnum::HEIGHT->value)) {
+        if (! $availableBuildingDetail->unique()->contains(BuildingDetailEnum::HEIGHT->value)) {
             $this->buildingDetails[] = [
                 'detail' => BuildingDetailEnum::HEIGHT->value,
                 'description' => $mapApply->height ?? null,
                 'remarks' => null,
             ];
         }
-
-
     }
-
 
     public function rules(): array
     {
         if ($this->dataToEdit === null) {
             return [];
         }
+
         return [
             'buildingDetails' => ['required', 'array'],
-            'buildingDetails.' . $this->dataToEdit . '.detail' => ['required'],
-            'buildingDetails.' . $this->dataToEdit . '.description' => ['required'],
-            'buildingDetails.' . $this->dataToEdit . '.remarks' => ['nullable'],
+            'buildingDetails.'.$this->dataToEdit.'.detail' => ['required'],
+            'buildingDetails.'.$this->dataToEdit.'.description' => ['required'],
+            'buildingDetails.'.$this->dataToEdit.'.remarks' => ['nullable'],
         ];
     }
-
 
     public function setDataForEdit(?int $index = null): void
     {
@@ -101,7 +99,7 @@ class BuildingDetailEditLivewire extends Component
             DB::transaction(function () {
                 $dataToSave = $this->buildingDetails[$this->dataToEdit];
 
-                if (!empty($dataToSave['id'])) {
+                if (! empty($dataToSave['id'])) {
                     BuildingDetail::find($dataToSave['id'])?->update($dataToSave);
                 } else {
                     BuildingDetail::create($dataToSave + ['map_apply_id' => $this->mapApply->id]);
@@ -111,9 +109,9 @@ class BuildingDetailEditLivewire extends Component
             $this->reset('dataToEdit');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }
@@ -125,7 +123,6 @@ class BuildingDetailEditLivewire extends Component
             'buildingDetails.*.description.required' => 'विवरण अनिवार्य छ|',
         ];
     }
-
 
     public function updated($propertyName): void
     {

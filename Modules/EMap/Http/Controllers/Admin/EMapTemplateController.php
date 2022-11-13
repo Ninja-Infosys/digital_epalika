@@ -43,6 +43,7 @@ class EMapTemplateController extends Controller
         EMapTemplate::create($request->validated());
 
         toast('टेम्प्लेट सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -76,6 +77,7 @@ class EMapTemplateController extends Controller
         $eMapTemplate->update($request->validated());
 
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('emap.admin.eMapTemplate.index'));
     }
 
@@ -87,7 +89,6 @@ class EMapTemplateController extends Controller
         );
     }
 
-
     public function getStaticTemplate(Request $request)
     {
         abort_if(Gate::denies('eMapTemplate_create'),
@@ -96,7 +97,7 @@ class EMapTemplateController extends Controller
         );
 
         $request->validate([
-            'type' => ['required']
+            'type' => ['required'],
         ]);
 
         return match ($request->input('type')) {
@@ -106,7 +107,5 @@ class EMapTemplateController extends Controller
             'construction-completion-certificate' => \View::make('emap::admin.notice.building_construction_completion_certificate'),
             default => 'Enter Valid Type',
         };
-
-
     }
 }

@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
-use Modules\EMap\Entities\ApplyMapApplication;
 use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\FileTypeEnum;
@@ -30,6 +29,7 @@ class ApplicationController extends Controller
         $mapApply->load(['houseOwner', 'landDetail', 'landDetail.unit', 'designerDetails' => function ($query) {
             $query->where('post', PostsEnum::DESIGNER->value)->first();
         }]);
+
         return view('emap::organization.clients.map.application.technician_approval', compact('client', 'mapApply'));
     }
 
@@ -38,14 +38,15 @@ class ApplicationController extends Controller
         $mapApply->load(['houseOwner', 'landDetail', 'landDetail.unit', 'designerDetails' => function ($query) {
             $query->where('post', PostsEnum::DESIGNER->value)->first();
         }]);
+
         return view('emap::organization.clients.map.application.engineer_approval', compact('client', 'mapApply'));
     }
 
     public function superStructureConstructionPermission(Client $client, MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('landDetail', 'landDetail.unit', 'applicantDetail');
-        return view('emap::organization.clients.map.application.super_structure_construction', compact('client', 'mapApply'));
 
+        return view('emap::organization.clients.map.application.super_structure_construction', compact('client', 'mapApply'));
     }
 
     public function constructionCompletionCertificate(Client $client, MapApply $mapApply)
@@ -57,19 +58,18 @@ class ApplicationController extends Controller
 
     public function applyMapApplication(Request $request, Client $client, MapApply $mapApply)
     {
-
         $data = $request->validate([
             'file' => ['required', 'mimes:pdf'],
-            'file_type' => ['required']
+            'file_type' => ['required'],
         ]);
 
         $mapApplyData = $mapApply->applyMapNotices()->create($data + [
-                'type' => FileTypeEnum::APPLICATION->value
-            ]);
+            'type' => FileTypeEnum::APPLICATION->value,
+        ]);
 
         Notification::send(User::all(), new MapApplicationNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
+
         return back();
     }
-
 }

@@ -23,7 +23,7 @@ class StoreMeetingEventRequest extends FormRequest
             'url' => ['nullable'],
             'recurrence_end_date' => ['nullable'],
             'en_recurrence_end_date' => ['nullable', 'date'],
-            'description' => ['required']
+            'description' => ['required'],
         ];
     }
 }

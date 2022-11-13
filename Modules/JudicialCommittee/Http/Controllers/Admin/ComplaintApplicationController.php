@@ -3,7 +3,6 @@
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 
@@ -16,9 +15,9 @@ class ComplaintApplicationController extends Controller
             'You are not allowed to access this resource'
         );
 
-        $complaintApplications=ComplaintApplication::orderByDesc('date')->get();
+        $complaintApplications = ComplaintApplication::orderByDesc('date')->get();
 
-        return view('judicialcommittee::admin.complaint_application.index',compact('complaintApplications'));
+        return view('judicialcommittee::admin.complaint_application.index', compact('complaintApplications'));
     }
 
     public function create()
@@ -57,13 +56,14 @@ class ComplaintApplicationController extends Controller
             403,
             'You are not allowed to access this resource'
         );
-        if($complaintApplication->applicant_signature){
+        if ($complaintApplication->applicant_signature) {
             $this->deleteFile($complaintApplication->applicant_signature);
         }
 
         $complaintApplication->delete();
 
-        toast('आवेदन सफलतापूर्वक मेटाइयो','success');
+        toast('आवेदन सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

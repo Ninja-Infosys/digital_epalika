@@ -1,4 +1,6 @@
-<?php return [
+<?php
+
+return [
     'modules' => [
         'digitalboard',
         'circular',
@@ -11,10 +13,10 @@
         'roaster',
         'grant',
         'judicialcommittee',
-        'taskmanagement'
+        'taskmanagement',
     ],
     'sidebars' => [
         'website',
-        'setting'
-    ]
+        'setting',
+    ],
 ];

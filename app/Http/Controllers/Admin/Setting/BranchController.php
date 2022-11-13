@@ -43,6 +43,7 @@ class BranchController extends Controller
         Branch::create($request->validated());
 
         toast('शाखा सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -81,6 +82,7 @@ class BranchController extends Controller
         $branch->delete();
 
         toast('शाखा सफलतापूर्वक हटाइयो', 'success');
+
         return back();
     }
 }

@@ -15,7 +15,7 @@ class StoreThematicAreaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required',Rule::unique('thematic_areas','title')->withoutTrashed()]
+            'title' => ['required', Rule::unique('thematic_areas', 'title')->withoutTrashed()],
         ];
     }
 

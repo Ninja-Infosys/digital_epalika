@@ -25,7 +25,7 @@ class Organization extends Authenticatable
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -51,7 +51,7 @@ class Organization extends Authenticatable
 
     public function setPasswordAttribute($value): void
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
@@ -65,8 +65,8 @@ class Organization extends Authenticatable
 
     public function setProfilePhotoPathAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['profile_photo_path'] = $value->store('user/profile/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 
@@ -77,22 +77,22 @@ class Organization extends Authenticatable
 
     public function scopeActive($query)
     {
-        return $query->where('is_active',1);
+        return $query->where('is_active', 1);
     }
 
     public function scopeNotActive($query)
     {
-        return $query->where('is_active',0);
+        return $query->where('is_active', 0);
     }
 
     public function scopeOrganization($query)
     {
-        return $query->where('is_organization',1);
+        return $query->where('is_organization', 1);
     }
 
     public function scopeNotOrganization($query)
     {
-        return $query->where('is_organization',0);
+        return $query->where('is_organization', 0);
     }
 
     public function organizationDetail(): HasOne

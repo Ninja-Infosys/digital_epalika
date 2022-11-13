@@ -16,6 +16,7 @@ class FiscalYearController extends Controller
             'You are not allowed to digital board news access'
         );
         $fiscalYears = FiscalYear::get();
+
         return view('admin.setting.fiscalYear.index', compact('fiscalYears'));
     }
 
@@ -25,6 +26,7 @@ class FiscalYearController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('admin.setting.fiscalYear.create');
     }
 
@@ -34,13 +36,14 @@ class FiscalYearController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-          $validationData =  $request->validate(
-              ['title' => 'required'],
-              ['title.required' => 'आर्थिक बर्ष अनिवार्य छ|']
-          );
+        $validationData = $request->validate(
+            ['title' => 'required'],
+            ['title.required' => 'आर्थिक बर्ष अनिवार्य छ|']
+        );
 
         FiscalYear::create($validationData);
         toast('आर्थिक बर्ष सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -55,6 +58,7 @@ class FiscalYearController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('admin.setting.fiscalYear.edit', compact('fiscalYear'));
     }
 
@@ -64,13 +68,14 @@ class FiscalYearController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        $validationData =  $request->validate(
+        $validationData = $request->validate(
             ['title' => 'required'],
             ['title.required' => 'आर्थिक बर्ष अनिवार्य छ|']
         );
         $fiscalYear->update($validationData);
 
         toast('आर्थिक बर्ष सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.fiscalYear.index'));
     }
 
@@ -82,6 +87,7 @@ class FiscalYearController extends Controller
         );
         $fiscalYear->delete();
         toast(' आर्थिक बर्ष सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

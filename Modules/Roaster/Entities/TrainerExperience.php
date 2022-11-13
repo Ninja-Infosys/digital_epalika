@@ -12,22 +12,21 @@ class TrainerExperience extends Model
 {
     use HasFactory,SoftDeletes;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 
-   protected $fillable = [
-       'trainer_id',
-       'designation_id',
-       'office',
-       'responsibility',
-       'from',
-       'to',
-       'remarks',
-   ];
-
+    protected $fillable = [
+        'trainer_id',
+        'designation_id',
+        'office',
+        'responsibility',
+        'from',
+        'to',
+        'remarks',
+    ];
 
     public function trainer(): BelongsTo
     {

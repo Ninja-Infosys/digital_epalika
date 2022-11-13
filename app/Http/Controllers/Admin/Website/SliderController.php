@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\Slider\StoreSliderRequest;
 use App\Http\Requests\Website\Slider\UpdateSliderRequest;
 use App\Models\Website\Slider;
-use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
@@ -26,7 +25,8 @@ class SliderController extends Controller
     {
         Slider::create($request->validated());
 
-        toast('स्लाइडर सफलतापूर्वक थपियो','success');
+        toast('स्लाइडर सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -42,23 +42,25 @@ class SliderController extends Controller
 
     public function update(UpdateSliderRequest $request, Slider $slider)
     {
-        if ($request->hasFile('image') && $slider->image){
+        if ($request->hasFile('image') && $slider->image) {
             $this->deleteFile($slider->image);
         }
 
         $slider->update($request->validated());
 
         toast('स्लाइडर सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.website.slider.index'));
     }
 
     public function destroy(Slider $slider)
     {
-        if ($slider->image){
+        if ($slider->image) {
             $this->deleteFile($slider->image);
         }
         $slider->delete();
         toast('स्लाइडर सफलतापूर्वक मेटाइयो', 'success');
+
         return back();
     }
 }

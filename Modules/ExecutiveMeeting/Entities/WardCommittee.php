@@ -20,7 +20,7 @@ class WardCommittee extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -35,7 +35,7 @@ class WardCommittee extends Model
         'ward_no',
         'village',
         'tole',
-        'position'
+        'position',
     ];
 
     public function getPhotoUrlAttribute(): string
@@ -47,8 +47,8 @@ class WardCommittee extends Model
 
     public function setPhotoAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('ward_committee/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['photo'] = $value->store('ward_committee/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 

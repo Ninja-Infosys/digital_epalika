@@ -3,14 +3,11 @@
 namespace Modules\EMap\Entities;
 
 use App\Models\File;
-use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
-use Modules\EMap\Enums\FileTypeEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
 
 class ApplyMapNotice extends Model
@@ -31,11 +28,11 @@ class ApplyMapNotice extends Model
         'data',
         'rejected_at',
         'remarks',
-        'sent_to_admin_at'
+        'sent_to_admin_at',
     ];
 
     protected $casts = [
-        'file_type' => NoticeTypeEnum::class
+        'file_type' => NoticeTypeEnum::class,
     ];
 
     public function scopeRejected($query)

@@ -17,6 +17,7 @@ class BusinessPurposeController extends Controller
             'You are not allowed to digital board news access'
         );
         $businessPurposes = BusinessPurpose::get();
+
         return view('businessregistration::admin.setting.businessPurpose.index', compact('businessPurposes'));
     }
 
@@ -26,18 +27,19 @@ class BusinessPurposeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('businessregistration::admin.setting.businessPurpose.create');
     }
 
     public function store(StoreBusinessPurposeRequest $request)
     {
-
         abort_if(Gate::denies('businessPurpose_create'),
             403,
             'You are not allowed to digital board news access'
         );
         BusinessPurpose::create($request->validated());
         toast(' उदेश्य सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -47,6 +49,7 @@ class BusinessPurposeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('businessregistration::show');
     }
 
@@ -56,7 +59,8 @@ class BusinessPurposeController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        return view('businessregistration::admin.setting.businessPurpose.edit',compact('businessPurpose'));
+
+        return view('businessregistration::admin.setting.businessPurpose.edit', compact('businessPurpose'));
     }
 
     public function update(UpdateBusinessPurposeRequest $request, BusinessPurpose $businessPurpose)
@@ -67,6 +71,7 @@ class BusinessPurposeController extends Controller
         );
         $businessPurpose->update($request->validated());
         toast('उदेश्य सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.businessRegistration.setting.businessPurpose.index'));
     }
 
@@ -77,7 +82,8 @@ class BusinessPurposeController extends Controller
             'You are not allowed to digital board news access'
         );
         $businessPurpose->delete();
-        toast( ' सफलतापूर्वक मेटियो', 'success');
+        toast(' सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 }

@@ -15,11 +15,10 @@ class NumberIntoUnicode extends Component
      *
      * @return void
      */
-    public function __construct(public string $id, public string $number,public string $class="", public bool $isCurrency = true)
+    public function __construct(public string $id, public string $number, public string $class = '', public bool $isCurrency = true)
     {
         //
     }
-
 
     public function render(): View|Factory|Htmlable|\Closure|string|Application
     {

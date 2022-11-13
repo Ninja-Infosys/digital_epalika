@@ -2,10 +2,8 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
-use App\Models\Settings\FiscalYear;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\FiscalYear;
 use Illuminate\Support\Facades\Gate;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Http\Requests\GrantProgram\StoreGrantProgramRequest;
@@ -47,6 +45,7 @@ class GrantProgramController extends Controller
         GrantProgram::create($request->validated());
 
         toast('कार्यक्रम सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -68,7 +67,7 @@ class GrantProgramController extends Controller
         );
         $fiscalYears = FiscalYear::all();
 
-        return view('grant::admin.grant_program.edit',compact('fiscalYears','grantProgram'));
+        return view('grant::admin.grant_program.edit', compact('fiscalYears', 'grantProgram'));
     }
 
     public function update(UpdateGrantProgramRequest $request, GrantProgram $grantProgram)
@@ -81,6 +80,7 @@ class GrantProgramController extends Controller
         $grantProgram->update($request->validated());
 
         toast('कार्यक्रम सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.grant.grantProgram.index'));
     }
 
@@ -94,6 +94,7 @@ class GrantProgramController extends Controller
         $grantProgram->delete();
 
         toast('कार्यक्रम सफलतापूर्वक हटाइयो', 'success');
+
         return back();
     }
 }

@@ -11,13 +11,11 @@ use Illuminate\View\Component;
 
 class BarChartComponent extends Component
 {
-
-
-    public function __construct(public array  $labels,
-                                public array  $dataSets,
+    public function __construct(public array $labels,
+                                public array $dataSets,
                                 public string $chartTitle,
-                                public string $chartType = "bar",
-                                public string $id = "myChart")
+                                public string $chartType = 'bar',
+                                public string $id = 'myChart')
     {
     }
 

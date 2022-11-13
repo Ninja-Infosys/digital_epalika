@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use Modules\Grant\Http\Controllers\Admin\DashboardController;
 use Modules\Grant\Http\Controllers\Admin\GrantActivityController;
@@ -12,7 +11,7 @@ use Modules\Grant\Http\Controllers\Admin\ThematicAreaController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
-Route::prefix('setting')->group(function (){
+Route::prefix('setting')->group(function () {
     Route::resource('infrastructure', InfrastructureController::class);
     Route::resource('thematicArea', ThematicAreaController::class);
     Route::resource('grantType', GrantTypeController::class);

@@ -6,12 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSubjectRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'title' => ['required'],
@@ -20,6 +20,7 @@ class StoreSubjectRequest extends FormRequest
             'content' => ['nullable'],
         ];
     }
+
     public function messages(): array
     {
         return [

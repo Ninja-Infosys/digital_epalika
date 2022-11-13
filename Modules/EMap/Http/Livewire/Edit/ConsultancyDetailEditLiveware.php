@@ -3,7 +3,6 @@
 namespace Modules\EMap\Http\Livewire\Edit;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\MapApply;
@@ -13,7 +12,9 @@ class ConsultancyDetailEditLiveware extends Component
     use WithFileUploads;
 
     public MapApply $mapApply;
+
     public bool $editForm = false;
+
     public $signatureUrl;
 
     public array $applyMap = [
@@ -37,7 +38,7 @@ class ConsultancyDetailEditLiveware extends Component
 
     public function setEditForm(): void
     {
-        $this->editForm = !$this->editForm;
+        $this->editForm = ! $this->editForm;
     }
 
     protected array $applyMapValidations = [
@@ -47,30 +48,25 @@ class ConsultancyDetailEditLiveware extends Component
         'applyMap.consultant_nec_no' => ['required'],
     ];
 
-
     public function rules(): array
     {
         return $this->applyMapValidations;
     }
-
 
     public function saveFormData(): void
     {
         if ($this->editForm) {
             $this->validate();
             DB::transaction(function () {
-
                 $this->mapApply->update($this->applyMap);
-
-
             });
 
             $this->reset('editForm');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }
@@ -85,7 +81,6 @@ class ConsultancyDetailEditLiveware extends Component
             'applyMap.consultant_nec_no.required' => ' एन. ई. सी. नं अनिवार्य छ|',
         ];
     }
-
 
     public function updated($propertyName): void
     {

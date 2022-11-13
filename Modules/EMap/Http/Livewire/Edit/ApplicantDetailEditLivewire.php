@@ -13,9 +13,13 @@ class ApplicantDetailEditLivewire extends Component
     use WithFileUploads;
 
     public MapApply $mapApply;
+
     public $allDistricts = [];
+
     public bool $editForm = false;
+
     public $signature;
+
     public $signatureUrl;
 
     public array $applicantDetail = [
@@ -51,7 +55,7 @@ class ApplicantDetailEditLivewire extends Component
 
     public function setEditForm(): void
     {
-        $this->editForm = !$this->editForm;
+        $this->editForm = ! $this->editForm;
     }
 
     public function rules(): array
@@ -69,7 +73,7 @@ class ApplicantDetailEditLivewire extends Component
         'applicantDetail.citizenship_no' => ['required'],
         'applicantDetail.citizenship_issue_date' => ['required'],
         'applicantDetail.application_date' => ['nullable'],
-        'signature' => ['nullable', 'image']
+        'signature' => ['nullable', 'image'],
     ];
 
     public function messages(): array
@@ -97,12 +101,11 @@ class ApplicantDetailEditLivewire extends Component
         if ($this->editForm) {
             $this->validate();
             DB::transaction(function () {
-
                 $this->mapApply->applicantDetail()->update($this->applicantDetail);
 
                 if ($this->signature) {
                     $this->mapApply->update([
-                        'signature' => $this->signature->store('e_map/applicant/' . Str::slug(($this->mapApply->houseOwner->name ?? 'default'), '_') . '/signature', 'public')
+                        'signature' => $this->signature->store('e_map/applicant/'.Str::slug(($this->mapApply->houseOwner->name ?? 'default'), '_').'/signature', 'public'),
                     ]);
                 }
             });
@@ -110,9 +113,9 @@ class ApplicantDetailEditLivewire extends Component
             $this->reset('editForm');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }

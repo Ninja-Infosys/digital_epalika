@@ -5,12 +5,12 @@ namespace Modules\TaskManagement\Entities;
 use App\Models\File;
 use App\Models\Settings\Branch;
 use App\Models\Settings\FiscalYear;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class DailyTask extends Model
 {
@@ -20,7 +20,7 @@ class DailyTask extends Model
         'en_date',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -30,7 +30,7 @@ class DailyTask extends Model
         'task_division_id',
         'date',
         'en_date',
-        'remarks'
+        'remarks',
     ];
 
     public function fiscalYear(): BelongsTo
@@ -55,6 +55,6 @@ class DailyTask extends Model
 
     public function files(): MorphMany
     {
-        return $this->morphMany(File::class,'model');
+        return $this->morphMany(File::class, 'model');
     }
 }

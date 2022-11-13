@@ -7,7 +7,6 @@ use App\Models\Website\Slider;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
-use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 
 class FrontController extends Controller
 {
@@ -32,12 +31,14 @@ class FrontController extends Controller
     public function notice()
     {
         $notices = Notice::where('type', 'Notice')->orderBy('date')->get();
+
         return view('frontend.static.notice.index', compact('notices'));
     }
 
     public function singleNotice(Notice $notice)
     {
         $notice->load('files');
+
         return view('frontend.static.notice.single-notice', compact('notice'));
     }
 
@@ -85,10 +86,12 @@ class FrontController extends Controller
     {
         return view('frontend.static.employee.index');
     }
+
     public function aboutUs()
     {
         return view('frontend.static.about_us');
     }
+
     public function org()
     {
         return view('frontend.static.org.org');

@@ -29,7 +29,7 @@ class StoreRegistrationRequest extends FormRequest
             'date' => ['nullable'],
             'remarks' => ['nullable'],
             'documents' => ['required', 'array'],
-            'documents.*' => ['mimes:jpg,png,jpeg,pdf']
+            'documents.*' => ['mimes:jpg,png,jpeg,pdf'],
         ];
     }
 
@@ -45,7 +45,7 @@ class StoreRegistrationRequest extends FormRequest
             'receiver_name.required' => 'बुझिलिनेको नाम अनिबार्य छ।',
             'circularDocuments.required' => 'कागजात अनिबार्य छ।',
             'signature_image.image' => 'हस्ताक्षर फोटो फर्ममा छ।',
-            'documents.mimes' => 'फाइल अनिबार्य jpg, png, jpeg, pdf मा हुनुपर्छ।'
+            'documents.mimes' => 'फाइल अनिबार्य jpg, png, jpeg, pdf मा हुनुपर्छ।',
         ];
     }
 }

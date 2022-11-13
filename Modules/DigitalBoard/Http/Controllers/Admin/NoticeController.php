@@ -2,7 +2,6 @@
 
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
@@ -25,8 +24,8 @@ class NoticeController extends Controller
         } else {
             $notices = Notice::with('user')->where('type', 'Notice')->orderByDesc('date')->get();
         }
-        return view('digitalboard::notice.index', compact('notices', 'type'));
 
+        return view('digitalboard::notice.index', compact('notices', 'type'));
     }
 
     public function create($type)
@@ -68,20 +67,20 @@ class NoticeController extends Controller
             ]);
         }
 
-
         DB::transaction(function () use ($request, $type, $data) {
             $officeSetting = OfficeSetting::first();
             $notice = Notice::create($data + [
-                    'user_id' => auth()->id(),
-                    'type' => $type,
-                    'fiscal_year_id' => $officeSetting->fiscal_year_id ?? null
-                ]);
+                'user_id' => auth()->id(),
+                'type' => $type,
+                'fiscal_year_id' => $officeSetting->fiscal_year_id ?? null,
+            ]);
 
             if ($request->hasFile('files')) {
                 $this->fileUpload($notice, $request);
             }
         });
         toast($type === 'News' ? 'समाचार सफलतापूर्वक थपियो' : 'सूचना सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -93,6 +92,7 @@ class NoticeController extends Controller
         );
 
         $notice->load('files');
+
         return view('digitalboard::notice.show', compact('notice', 'type'));
     }
 
@@ -120,8 +120,8 @@ class NoticeController extends Controller
             }
         });
 
-
         toast($type === 'News' ? 'समाचार सफलतापूर्वक अद्यावधिक गरियो' : 'सूचना सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.digitalBoard.notice.index', $type));
     }
 
@@ -138,28 +138,29 @@ class NoticeController extends Controller
         $notice->files()->delete();
         $notice->delete();
 
-        toast($type . ' सफलतापूर्वक मेटियो', 'success');
+        toast($type.' सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 
     public function updateClosedDate($type, Notice $notice)
     {
         $notice->update([
-            'closed_at' => !empty($notice->closed_at) ? null : now()
+            'closed_at' => ! empty($notice->closed_at) ? null : now(),
         ]);
         toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return back();
 
+        return back();
     }
 
     public function updateShowOnIndex($type, Notice $notice)
     {
         $notice->update([
-            'show_on_index' => !$notice->show_on_index
+            'show_on_index' => ! $notice->show_on_index,
         ]);
         toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return back();
 
+        return back();
     }
 
     public function fileUpload($notice, $request)
@@ -170,7 +171,7 @@ class NoticeController extends Controller
             $notice->files()->create([
                 'file_name' => $name,
                 'extension' => $extension,
-                'file' => $file->store('notice/' . Str::slug($request->input('title'), '_'), 'public')
+                'file' => $file->store('notice/'.Str::slug($request->input('title'), '_'), 'public'),
             ]);
         }
     }

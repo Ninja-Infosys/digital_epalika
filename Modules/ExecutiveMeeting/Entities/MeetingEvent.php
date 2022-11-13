@@ -2,12 +2,12 @@
 
 namespace Modules\ExecutiveMeeting\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 use Modules\ExecutiveMeeting\Enums\RecurrenceTypeEnum;
 
 class MeetingEvent extends Model
@@ -19,7 +19,7 @@ class MeetingEvent extends Model
         'en_end_date',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -34,11 +34,11 @@ class MeetingEvent extends Model
         'url',
         'recurrence_end_date',
         'en_recurrence_end_date',
-        'description'
+        'description',
     ];
 
-    protected $casts=[
-        'recurrence'=>RecurrenceTypeEnum::class
+    protected $casts = [
+        'recurrence' => RecurrenceTypeEnum::class,
     ];
 
     public function meetingEvent(): BelongsTo

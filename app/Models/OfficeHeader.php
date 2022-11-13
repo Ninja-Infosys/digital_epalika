@@ -10,17 +10,17 @@ class OfficeHeader extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $dates=[
+    protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
-    protected $fillable=[
+    protected $fillable = [
         'title',
         'font',
         'font_size',
         'position',
-        'font_color'
+        'font_color',
     ];
 }

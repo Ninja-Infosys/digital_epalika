@@ -12,14 +12,17 @@ use Modules\Roaster\Entities\Trainee;
 
 class TraineeLivewire extends Component
 {
-
     use WithFileUploads;
     use AddressHelperTrait;
 
     public $provinces = [];
+
     public $districts = [];
+
     public $localBodies = [];
+
     public $wards = [];
+
     public $ethnicities = [];
 
     public $form = [
@@ -35,9 +38,11 @@ class TraineeLivewire extends Component
         'district_id' => null,
         'local_body_id' => null,
         'ward_no' => null,
-        'tole' => null
+        'tole' => null,
     ];
+
     public $trainee;
+
     public $training;
 
     public function mount($trainee = null, $training = null)
@@ -48,7 +53,7 @@ class TraineeLivewire extends Component
         $this->provinces = Province::all();
         $this->ethnicities = Ethnicity::all();
 
-        if (!empty($trainee)) {
+        if (! empty($trainee)) {
             foreach ($this->form as $key => $data) {
                 $this->form[$key] = $trainee[$key];
             }
@@ -93,31 +98,31 @@ class TraineeLivewire extends Component
         $validated = $this->validate();
 
         DB::transaction(function () use ($validated) {
-            if (!empty($this->trainee)) {
+            if (! empty($this->trainee)) {
                 $trainee = $this->trainee;
                 $trainee->update($validated['form']);
 
                 $this->dispatchBrowserEvent('alert_message', [
-                    'type' => "success",
-                    'title' => "Thank You",
-                    'text' => "Farmer Details Updated Successfully",
+                    'type' => 'success',
+                    'title' => 'Thank You',
+                    'text' => 'Farmer Details Updated Successfully',
                 ]);
+
                 return redirect(route('admin.roaster.training.show', $trainee->trainingTrainee->training_id));
             } else {
                 $trainee = Trainee::create($validated['form']);
                 $trainee->trainingTrainee()->create([
-                    'training_id' => $this->training->id
+                    'training_id' => $this->training->id,
                 ]);
                 $this->reset('form');
                 $this->dispatchBrowserEvent('alert_message', [
-                    'type' => "success",
-                    'title' => "Thank You",
+                    'type' => 'success',
+                    'title' => 'Thank You',
                     'text' => "तपाईंको फारम सफलतापूर्वक पेश गरियो र तपाईंको प्रशिक्षार्थी आईडी $trainee->reference_id हो। कृपया भविष्यमा प्रयोगको लागि आईडी सुरक्षित राख्नुहोस्।",
                 ]);
             }
         });
     }
-
 
     protected $validationRules = [
         'form.full_name' => ['required', 'string', 'max:255'],
@@ -136,36 +141,37 @@ class TraineeLivewire extends Component
     ];
 
     protected $messages = [
-        'form.full_name.required' => "पूरा नाम आवश्यक छ ।",
-        'form.citizenship_no.required' => "नागरिकता नम्बर आवश्यक छ ।",
-        'form.phone_no.required' => "फोन नम्बर आवश्यक छ ।",
-        'form.phone_no.regex' => "फोन नम्बर 98XXXX,98XXXX ।",
-        'form.email_id.required' => "इमेल आवश्यक छ ।",
-        'form.ethnicity_id.required' => "जातियता आवश्यक छ ।",
-        'form.qualification.required' => "शैक्षिक योग्यता आवश्यक छ ।",
-        'form.gender.required' => "लिंग आवश्यक छ ।",
-        'form.current_profession.required' => "वर्तमान पेशा आवश्यक छ ।",
-        'form.province_id.required' => "प्रदेश आवश्यक छ ।",
-        'form.district_id.required' => "जिल्ला आवश्यक छ ।",
-        'form.local_body_id.required' => "स्थानीय निकाय आवश्यक छ ।",
-        'form.ward_no.required' => "वार्ड नम्बर आवश्यक छ ।",
-        'form.tole.required' => "टोल आवश्यक छ ।",
-        'form.photo.required' => "फोटो आवश्यक छ ।",
-        'form.photo.max' => "300kb भन्दा कम मात्र ।",
-        'form.application_form.required' => "आवेदन फारम आवश्यक छ ।",
-        'form.application_form.max' => "300kb भन्दा कम मात्र ।",
-        'form.ward_recommendation.required' => "वडाको सिफारिस आवश्यक छ ।",
-        'form.ward_recommendation.max' => "300kb भन्दा कम मात्र ।",
-        'form.citizenship_front.required' => "नागरीकता (अगाडी) आवश्यक छ ।",
-        'form.citizenship_front.max' => "300kb भन्दा कम मात्र ।",
-        'form.citizenship_back.max' => "300kb भन्दा कम मात्र ।",
-        'form.passport.max' => "300kb भन्दा कम मात्र ।",
-        'form.mark_sheet.max' => "300kb भन्दा कम मात्र ।",
+        'form.full_name.required' => 'पूरा नाम आवश्यक छ ।',
+        'form.citizenship_no.required' => 'नागरिकता नम्बर आवश्यक छ ।',
+        'form.phone_no.required' => 'फोन नम्बर आवश्यक छ ।',
+        'form.phone_no.regex' => 'फोन नम्बर 98XXXX,98XXXX ।',
+        'form.email_id.required' => 'इमेल आवश्यक छ ।',
+        'form.ethnicity_id.required' => 'जातियता आवश्यक छ ।',
+        'form.qualification.required' => 'शैक्षिक योग्यता आवश्यक छ ।',
+        'form.gender.required' => 'लिंग आवश्यक छ ।',
+        'form.current_profession.required' => 'वर्तमान पेशा आवश्यक छ ।',
+        'form.province_id.required' => 'प्रदेश आवश्यक छ ।',
+        'form.district_id.required' => 'जिल्ला आवश्यक छ ।',
+        'form.local_body_id.required' => 'स्थानीय निकाय आवश्यक छ ।',
+        'form.ward_no.required' => 'वार्ड नम्बर आवश्यक छ ।',
+        'form.tole.required' => 'टोल आवश्यक छ ।',
+        'form.photo.required' => 'फोटो आवश्यक छ ।',
+        'form.photo.max' => '300kb भन्दा कम मात्र ।',
+        'form.application_form.required' => 'आवेदन फारम आवश्यक छ ।',
+        'form.application_form.max' => '300kb भन्दा कम मात्र ।',
+        'form.ward_recommendation.required' => 'वडाको सिफारिस आवश्यक छ ।',
+        'form.ward_recommendation.max' => '300kb भन्दा कम मात्र ।',
+        'form.citizenship_front.required' => 'नागरीकता (अगाडी) आवश्यक छ ।',
+        'form.citizenship_front.max' => '300kb भन्दा कम मात्र ।',
+        'form.citizenship_back.max' => '300kb भन्दा कम मात्र ।',
+        'form.passport.max' => '300kb भन्दा कम मात्र ।',
+        'form.mark_sheet.max' => '300kb भन्दा कम मात्र ।',
     ];
+
     public function render()
     {
-
         $this->getDependentAddressData();
+
         return view('roaster::livewire.trainee-livewire');
     }
 }

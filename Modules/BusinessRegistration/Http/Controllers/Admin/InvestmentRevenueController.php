@@ -44,6 +44,7 @@ class InvestmentRevenueController extends Controller
         InvestmentRevenue::create($request->validated());
 
         toast(' पुँजीगत लगानी र राजस्वो  सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -53,6 +54,7 @@ class InvestmentRevenueController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
+
         return view('businessregistration::show');
     }
 
@@ -65,12 +67,11 @@ class InvestmentRevenueController extends Controller
 
         $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
 
-        return view('businessregistration::admin.setting.investment-revenues.edit', compact('objectTransactions','investmentRevenue'));
+        return view('businessregistration::admin.setting.investment-revenues.edit', compact('objectTransactions', 'investmentRevenue'));
     }
 
     public function update(UpdateInvestmentRevenueRequest $request, InvestmentRevenue $investmentRevenue): RedirectResponse
     {
-
         abort_if(Gate::denies('investmentRevenue_edit'),
             403,
             'You are not allowed to digital board news access'
@@ -79,6 +80,7 @@ class InvestmentRevenueController extends Controller
         $investmentRevenue->update($request->validated());
 
         toast(' पुँजीगत लगानी र राजस्वो  अद्यावधिक गरियो', 'success');
+
         return back();
     }
 
@@ -92,6 +94,7 @@ class InvestmentRevenueController extends Controller
         $investmentRevenue->delete();
 
         toast(' पुँजीगत लगानी र राजस्वो  हटाइयो', 'success');
+
         return back();
     }
 }

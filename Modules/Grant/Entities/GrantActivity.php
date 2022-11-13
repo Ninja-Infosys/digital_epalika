@@ -2,10 +2,10 @@
 
 namespace Modules\Grant\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Grant\Enums\GrantRecipientTypeEnum;
 
 class GrantActivity extends Model
@@ -15,15 +15,15 @@ class GrantActivity extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
         'grant_recipient_type',
-        'title'
+        'title',
     ];
 
-    protected $casts=[
-        'grant_recipient_type'=>GrantRecipientTypeEnum::class
+    protected $casts = [
+        'grant_recipient_type' => GrantRecipientTypeEnum::class,
     ];
 }

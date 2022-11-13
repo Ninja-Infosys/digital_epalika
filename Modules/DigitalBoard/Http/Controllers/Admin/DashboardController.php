@@ -25,7 +25,6 @@ class DashboardController extends Controller
 
         $totalNewsAndNoticeChartData = $this->getTotalNewsNoticeAccordingToFy();
 
-
         return view('digitalboard::admin.dashboard', compact('employee_count', 'video_count', 'notice_count', 'news_count', 'noticeFyChartData', 'totalNewsAndNoticeChartData'));
     }
 
@@ -49,22 +48,21 @@ class DashboardController extends Controller
         }
 
         return [
-            "labels" => $this->month_name,
-            "dataSets" => [
+            'labels' => $this->month_name,
+            'dataSets' => [
                 [
                     'data' => $monthlyNotices,
-                    "label" => "सूचना",
-                    "fill" => "false"
+                    'label' => 'सूचना',
+                    'fill' => 'false',
                 ],
                 [
                     'data' => $MonthlyNews,
-                    "label" => "समाचार",
-                    "fill" => "false"
-                ]
+                    'label' => 'समाचार',
+                    'fill' => 'false',
+                ],
             ],
         ];
     }
-
 
     public function getTotalNewsNoticeAccordingToFy(): array
     {
@@ -74,22 +72,21 @@ class DashboardController extends Controller
                 $query->where('type', 'Notice');
             }, 'notices as news_count' => function ($query) {
                 $query->where('type', 'News');
-            }])->get();
-
+            }, ])->get();
 
         return [
-            "labels" => $fiscalYears->pluck('title')->toArray(),
-            "dataSets" => [
+            'labels' => $fiscalYears->pluck('title')->toArray(),
+            'dataSets' => [
                 [
                     'data' => $fiscalYears->pluck('notice_count')->toArray(),
-                    "label" => "सूचना",
-                    "fill" => "false"
+                    'label' => 'सूचना',
+                    'fill' => 'false',
                 ],
                 [
                     'data' => $fiscalYears->pluck('news_count')->toArray(),
-                    "label" => "समाचार",
-                    "fill" => "false"
-                ]
+                    'label' => 'समाचार',
+                    'fill' => 'false',
+                ],
             ],
         ];
     }

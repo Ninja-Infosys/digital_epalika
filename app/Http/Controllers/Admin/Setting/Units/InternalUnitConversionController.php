@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Setting\Units;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\MeasurementUnits\StoreUnitConversionRequest;
-use App\Http\Requests\Setting\MeasurementUnits\UpdateUnitConversionRequest;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
 use Illuminate\Support\Facades\Gate;
@@ -20,6 +19,7 @@ class InternalUnitConversionController extends Controller
 
         $conversionUnits = Unit::where('measurement_unit_id', $unit->measurement_unit_id)->get();
         $conversions = UnitConversion::where('conversion_from', $unit->id)->get();
+
         return view('admin.setting.units.unit.conversion.internal.index', compact('unit', 'conversionUnits', 'conversions'));
     }
 
@@ -30,12 +30,13 @@ class InternalUnitConversionController extends Controller
                 $conversionData->update(['rate' => $conversion['rate'] ?? '']);
             } else {
                 UnitConversion::create($conversion + [
-                        'conversion_from' => $unit->id,
-                    ]);
+                    'conversion_from' => $unit->id,
+                ]);
             }
         }
 
         toast('मापन एकाइ रुपान्तरण सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('admin.units.unit.index'));
     }
 }

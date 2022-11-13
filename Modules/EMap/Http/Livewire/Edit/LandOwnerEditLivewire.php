@@ -9,7 +9,9 @@ use Modules\EMap\Entities\MapApply;
 class LandOwnerEditLivewire extends Component
 {
     public MapApply $mapApply;
+
     public $allDistricts = [];
+
     public bool $editForm = false;
 
     public function mount(MapApply $mapApply, $districts)
@@ -34,7 +36,7 @@ class LandOwnerEditLivewire extends Component
 
     public function setEditForm(): void
     {
-        $this->editForm = !$this->editForm;
+        $this->editForm = ! $this->editForm;
     }
 
     public array $landOwner = [
@@ -80,17 +82,15 @@ class LandOwnerEditLivewire extends Component
         if ($this->editForm) {
             $this->validate();
             DB::transaction(function () {
-
                 $this->mapApply->landOwner()->update($this->landOwner);
-
             });
 
             $this->reset('editForm');
 
             $this->dispatchBrowserEvent('alert_message', [
-                'type' => "success",
-                'title' => "धन्यबाद",
-                'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+                'type' => 'success',
+                'title' => 'धन्यबाद',
+                'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
             ]);
         }
     }

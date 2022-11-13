@@ -24,7 +24,7 @@ class StoreUserRequest extends FormRequest
             'province_id' => ['nullable', Rule::exists('provinces', 'id')],
             'district_id' => ['nullable', Rule::exists('districts', 'id')],
             'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')],
-            'ward_no' => ['nullable', 'integer']
+            'ward_no' => ['nullable', 'integer'],
         ];
     }
 
@@ -40,7 +40,7 @@ class StoreUserRequest extends FormRequest
             'password.required' => 'पासवर्ड अनिबार्य छ।',
             'password.confirmed' => 'पासवर्डसंग मेल खाएन।',
             'password.min' => 'पासवर्ड न्युनतम ७ अक्षरको हुनुपर्छ ।',
-            'ward_no.integer' => 'वार्ड न. अंकमा हुनुपर्छ ।'
+            'ward_no.integer' => 'वार्ड न. अंकमा हुनुपर्छ ।',
         ];
     }
 }

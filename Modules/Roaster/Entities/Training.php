@@ -4,14 +4,13 @@ namespace Modules\Roaster\Entities;
 
 use App\Models\Settings\FiscalYear;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 use Modules\Roaster\Enums\TrainingTypeEnum;
 
 class Training extends Model
@@ -42,11 +41,11 @@ class Training extends Model
         'post_min_mark',
         'post_average_mark',
         'fiscal_year_id',
-        'included_subjects'
+        'included_subjects',
     ];
 
     protected $casts = [
-        'form_type' => TrainingTypeEnum::class
+        'form_type' => TrainingTypeEnum::class,
     ];
 
     public function trainingTrainees(): HasMany
@@ -59,7 +58,8 @@ class Training extends Model
         $openDate = Carbon::parse($this->attributes['open_date'])->format('Y-m-d H:i:s');
         $closeDate = Carbon::parse($this->attributes['closed_date'])->format('Y-m-d H:i:s');
         $today = now()->format('Y-m-d H:i:s');
-        return ($openDate <= $today && $today <=$closeDate );
+
+        return $openDate <= $today && $today <= $closeDate;
     }
 
     public function fiscalYear(): BelongsTo

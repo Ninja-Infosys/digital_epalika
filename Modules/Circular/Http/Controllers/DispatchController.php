@@ -2,10 +2,8 @@
 
 namespace Modules\Circular\Http\Controllers;
 
-use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -33,7 +31,7 @@ class DispatchController extends Controller
             403,
             'You are not allowed to dispatch create'
         );
-        $dispatch_no = 'D-' . Str::padLeft(DB::table('dispatches')->max('id') + 1, 2, 0);
+        $dispatch_no = 'D-'.Str::padLeft(DB::table('dispatches')->max('id') + 1, 2, 0);
 
         return view('circular::admin/dispatch.create', compact('dispatch_no'));
     }
@@ -47,13 +45,14 @@ class DispatchController extends Controller
 
         DB::transaction(function () use ($request) {
             $dispatch = Dispatch::create($request->validated() + [
-                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
-                ]);
+                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+            ]);
 
             $this->uploadDocuments($request, $dispatch);
         });
 
         toast('चलानी सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
@@ -98,6 +97,7 @@ class DispatchController extends Controller
         });
 
         toast('चलानी सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.circular.dispatch.index'));
     }
 
@@ -133,7 +133,7 @@ class DispatchController extends Controller
             $dispatch->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('dispatch/' . Str::slug($dispatch->receiver_name, '_') . '/documents', 'public')
+                'file' => $document->store('dispatch/'.Str::slug($dispatch->receiver_name, '_').'/documents', 'public'),
             ]);
         }
     }

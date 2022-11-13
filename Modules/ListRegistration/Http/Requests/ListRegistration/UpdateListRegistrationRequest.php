@@ -34,7 +34,7 @@ class UpdateListRegistrationRequest extends FormRequest
             'date' => ['required'],
             'files' => ['nullable', 'array'],
             'files.*.file_name' => ['required'],
-            'files.*.file' => ['required', 'mimes:jpg,jpeg,png,pdf']
+            'files.*.file' => ['required', 'mimes:jpg,jpeg,png,pdf'],
         ];
     }
 
