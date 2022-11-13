@@ -2,6 +2,7 @@
 
 namespace Modules\EMap\Enums;
 
+use Exception;
 use Illuminate\Support\Collection;
 
 enum NoticeTypeEnum: string
@@ -122,12 +123,19 @@ enum NoticeTypeEnum: string
             self::PERMISSION => 'मन्जुरीनामा'
         };
     }
-    public function fileType()
+
+    /**
+     * @throws Exception
+     */
+    public function fileType(): FileTypeEnum
     {
         return self::getFileType($this);
     }
 
-    public static function getFileType(self $value)
+    /**
+     * @throws Exception
+     */
+    public static function getFileType(self $value): FileTypeEnum
     {
         return match ($value) {
 
@@ -138,6 +146,7 @@ enum NoticeTypeEnum: string
             self::MAP_PASS_FOR_BUILDING,
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE,
             self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION,
+            self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR,
             self::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE => FileTypeEnum::APPLICATION,
 
             //notice enums
@@ -171,6 +180,7 @@ enum NoticeTypeEnum: string
             //certificate enums
             self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL,
             self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE,
+            self::NOTICE_CERTIFICATE,
             self::BUILDING_COMPLETION_CERTIFICATE => FileTypeEnum::CERTIFICATE,
 
             //registration
@@ -179,16 +189,16 @@ enum NoticeTypeEnum: string
             //heir
             self::HEIR => FileTypeEnum::HEIR,
             //permission enums
-            self::PERMISSION => FileTypeEnum::PERMISSION
+            self::PERMISSION => FileTypeEnum::PERMISSION,
         };
     }
 
-    public function type(): string|EMapFormFillerTypeEnum
+    public function type(): EMapFormFillerTypeEnum
     {
         return self::getType($this);
     }
 
-    public static function getType(self $value): string|EMapFormFillerTypeEnum
+    public static function getType(self $value): EMapFormFillerTypeEnum
     {
         return match ($value) {
 
@@ -197,53 +207,44 @@ enum NoticeTypeEnum: string
             self::BUILDING_COMPLIANCE_CHECKLIST,
             self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR,
             self::ENGINEER_APPROVAL,
-            self::BUILDING_DESIGN_DETAILS => EMapFormFillerTypeEnum::CONSULTANT,
+            self::BUILDING_DESIGN_DETAILS,
+            self::MAP_PASS_FOR_BUILDING,
+            self::AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD,
+            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE,
+            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE,
+            self::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE,
+            self::AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR => EMapFormFillerTypeEnum::CONSULTANT,
 
             //municipal
             self::REGARDING_FEES_AND_REGISTRATION,
             self::SARZAMIN_MUCHULKA,
-            self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => EMapFormFillerTypeEnum::MUNICIPAL,
+            self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR,
+            self::FIFTEEN_DAYS_NOTICE_ADJOURNED,
+            self::REGARDING_SENDING_DETAILS,
+            self::REVISED_SUPERSTRUCTURE_PERMIT,
+            self::FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS,
+            self::TECHNICAL_REPORT,
+            self::THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT,
+            self::THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT,
+            self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE,
+            self::REGARDING_SUPERSTRUCTURE_PERMIT,
+            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER,
+            self::HOUSE_MAP_NAMSARI,
+            self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL,
+            self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE,
+            self::NOTICE_CERTIFICATE,
+            self::BUILDING_COMPLETION_CERTIFICATE => EMapFormFillerTypeEnum::MUNICIPAL,
 
                 //house owner
             self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION,
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE,
             self::HEIR,
             self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL,
-            self::PERMISSION => EMapFormFillerTypeEnum::HOUSE_OWNER,
-
-            //application enums
+            self::PERMISSION,
             self::MAP_ACCEPTANCE,
-            self::MAP_PASS_FOR_BUILDING => 'भवन निर्माणको लागि नक्सापास सम्बन्धमा',
-            self::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE => 'निर्माण कार्य सम्पन्न प्रमाण-पत्र सम्बन्धमा',
+            self::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE => EMapFormFillerTypeEnum::HOUSE_OWNER,
 
-            //notice enums
-            self::FIFTEEN_DAYS_NOTICE_ADJOURNED => '१५ दिने सूचना टाँस सम्बन्धमा',
-            self::REGARDING_SENDING_DETAILS => 'विवरण पठाएको सम्बन्धमा',
-            self::REVISED_SUPERSTRUCTURE_PERMIT => 'संशोधित सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
-            //bond enums
-            self::FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS => 'नक्सा पासको लागि १५ दिने टाँस मुचुल्का',
-            //report enums
 
-            self::TECHNICAL_REPORT => 'प्राविधिक प्रतिवेदन',
-            self::THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT => 'प्रथम चरणको कार्य सम्पन्नको प्राबिधिकको प्रतिबेदन',
-            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE => 'प्रथम चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन',
-            self::THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT => 'दोस्रो चरणको कार्य सम्पन्नको प्राबिधिकको प्रतिबेदन',
-            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE => 'दोस्रो चरणको कार्य सम्पन्नको परामर्शदाताको प्रतिबेदन',
-            self::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE => 'सुपरस्ट्रक्चर सम्म निर्माणको सुपरिवेक्षण प्रतिवेदन',
-
-            //agreement
-            self::AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD => 'सम्झौता पत्र (सुपरिवेक्षक/कन्सल्टेन्ट तथा घरधनी बीच)',
-            self::AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR => 'सम्झौता पत्र (घरधनी र निर्माणकर्मी/ठेकेदार)',
-
-            //order
-            self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE => 'घरको प्लिन्थ लेभल सम्मको निर्माणका निमित्त इजाजत प्रदान गर्ने',
-            self::REGARDING_SUPERSTRUCTURE_PERMIT => 'सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
-            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER => 'संशोधत सुपरस्ट्रक्चर इजाजत सम्बन्धमा',
-            self::HOUSE_MAP_NAMSARI => 'घरनक्सा नामसारी',
-            //certificate enums
-            self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => 'प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र',
-            self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => 'भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)',
-            self::BUILDING_COMPLETION_CERTIFICATE => 'भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र',
         };
     }
 
