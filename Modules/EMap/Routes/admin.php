@@ -69,6 +69,7 @@ Route::view('nbc', 'emap::admin.nbc.nbc')->name('nbc');
 Route::view('type', 'emap::admin.static.type')->name('type');
 Route::view('officeletter', 'emap::admin.notice.office-letter')->name('office-letter');
 Route::view('noticeletter', 'emap::admin.notice.notice-letter')->name('notice-letter');
+Route::view('naksa_certificate', 'emap::admin.notice.naksa_certificate')->name('naksa_certificate');
 Route::view('revised-superstructure-permit', 'emap::admin.notice.revised_superstructure_Permit')->name('revised-superstructure-permit');
 Route::view('level', 'emap::admin.notice.level')->name('level');
 Route::view('technician_notice', 'emap::admin.notice.technician-notice')->name('technician_notice');

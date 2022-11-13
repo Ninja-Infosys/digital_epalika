@@ -25,16 +25,16 @@
                 <div class="card-body">
                     <div class="mega-menu py-1">
                         <div class="btn-group ">
-                            <button class="btn btn-info dropdown-toggle" type="button" id="defaultDropdown"
+                            <button class="btn btn-info dropdown-toggle fs-4" type="button" id="defaultDropdown"
                                     data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                                नक्सा विवरण
+                                नक्सा विवरण <i class="fa fa-angle-down px-1"></i>
                             </button>
                             <ul class="dropdown-menu mega-menu-content" aria-labelledby="defaultDropdown">
                                 <li>
                                     @foreach(\Modules\EMap\Enums\NoticeTypeEnum::getAllValues()->chunk(6) as $noticeTypeEnums)
                                         <div class="row">
                                             @foreach($noticeTypeEnums->chunk(2) as $noticeTypeEnum)
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 menu_content">
                                                     <ul>
                                                         @foreach($noticeTypeEnum as $value)
                                                             <li>
@@ -65,7 +65,7 @@
                                     <div>
                                         @if(!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
 
-                                            <i class="fa fa-exclamation-triangle map_template_exclamation fs-3"
+                                            <i class="fa fa-exclamation-triangle map_template_exclamation"
                                                data-bs-toggle="tooltip" data-bs-placement="right"
                                                title="{{$noticeType->label()}} सेभ भएको छैन"></i>
 
