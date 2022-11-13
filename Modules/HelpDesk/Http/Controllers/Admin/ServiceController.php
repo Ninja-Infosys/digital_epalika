@@ -16,7 +16,8 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('service_access'),
+        abort_if(
+            Gate::denies('service_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -28,7 +29,8 @@ class ServiceController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('service_access'),
+        abort_if(
+            Gate::denies('service_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -39,7 +41,8 @@ class ServiceController extends Controller
 
     public function store(StoreServiceRequest $request)
     {
-        abort_if(Gate::denies('service_create'),
+        abort_if(
+            Gate::denies('service_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -63,7 +66,8 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        abort_if(Gate::denies('service_access'),
+        abort_if(
+            Gate::denies('service_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -74,7 +78,8 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        abort_if(Gate::denies('service_edit'),
+        abort_if(
+            Gate::denies('service_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -85,7 +90,8 @@ class ServiceController extends Controller
 
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        abort_if(Gate::denies('service_edit'),
+        abort_if(
+            Gate::denies('service_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -120,7 +126,8 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-        abort_if(Gate::denies('service_delete'),
+        abort_if(
+            Gate::denies('service_delete'),
             403,
             'You are not allowed to access this resource'
         );

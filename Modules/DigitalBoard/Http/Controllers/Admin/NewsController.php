@@ -12,7 +12,8 @@ class NewsController extends Controller
 {
     public function index($type)
     {
-        abort_if(Gate::denies('digitalBoardNews_access'),
+        abort_if(
+            Gate::denies('digitalBoardNews_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -23,7 +24,8 @@ class NewsController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('digitalBoardNews_create'),
+        abort_if(
+            Gate::denies('digitalBoardNews_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -33,7 +35,8 @@ class NewsController extends Controller
 
     public function store(StoreNewsRequest $request)
     {
-        abort_if(Gate::denies('digitalBoardNews_create'),
+        abort_if(
+            Gate::denies('digitalBoardNews_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -48,7 +51,8 @@ class NewsController extends Controller
 
     public function show(News $news)
     {
-        abort_if(Gate::denies('digitalBoardNews_access'),
+        abort_if(
+            Gate::denies('digitalBoardNews_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -58,7 +62,8 @@ class NewsController extends Controller
 
     public function edit(News $news)
     {
-        abort_if(Gate::denies('digitalBoardNews_edit'),
+        abort_if(
+            Gate::denies('digitalBoardNews_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -68,7 +73,8 @@ class NewsController extends Controller
 
     public function update(UpdateNewsRequest $request, News $news)
     {
-        abort_if(Gate::denies('digitalBoardNews_edit'),
+        abort_if(
+            Gate::denies('digitalBoardNews_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -81,7 +87,8 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-        abort_if(Gate::denies('digitalBoardNews_delete'),
+        abort_if(
+            Gate::denies('digitalBoardNews_delete'),
             403,
             'You are not allowed to digital board news access'
         );

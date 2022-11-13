@@ -18,8 +18,13 @@ class DashboardController extends Controller
         $totalTaskDivision = TaskDivision::count();
         $taskData = $this->taskData();
 
-        return view('taskmanagement::admin.dashboard', compact('dailyTaskCount',
-            'totalTaskCount', 'totalTaskCategory', 'totalTaskDivision', 'taskData'));
+        return view('taskmanagement::admin.dashboard', compact(
+            'dailyTaskCount',
+            'totalTaskCount',
+            'totalTaskCategory',
+            'totalTaskDivision',
+            'taskData'
+        ));
     }
 
     public function taskData(): array

@@ -30,7 +30,8 @@ class DashboardController extends Controller
 
         $dataAccordingToGrievanceOffice = $this->getDataAccordingToGrievanceOffice();
 
-        return view('grievancehandling::admin.dashboard', compact('grievanceCountAccordingToSeverity',
+        return view('grievancehandling::admin.dashboard', compact(
+            'grievanceCountAccordingToSeverity',
             'seenGrievanceCount',
             'registeredGrievanceCount',
             'publicGrievanceCount',
@@ -40,7 +41,8 @@ class DashboardController extends Controller
             'investigatedGrievanceCount',
             'grievanceCountAccordingToStatus',
             'dataAccordingToGrievanceType',
-            'dataAccordingToGrievanceOffice'));
+            'dataAccordingToGrievanceOffice'
+        ));
     }
 
     public function getDataAccordingToSeverity(): array

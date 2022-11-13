@@ -69,7 +69,8 @@ class MapController extends Controller
 
     public function officeLetter(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load('landDetail',
+        $mapApply->load(
+            'landDetail',
             'houseOwner',
             'client'
         );
@@ -79,7 +80,8 @@ class MapController extends Controller
 
     public function noticeLetter(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load('landDetail',
+        $mapApply->load(
+            'landDetail',
             'houseOwner'
         );
 
@@ -109,8 +111,12 @@ class MapController extends Controller
 
     public function technicianNotice(MapApply $mapApply): Factory|View|Application
     {
-        $mapApply->load('landDetail', 'houseOwner', 'fourForts',
-            'criteriaDetails');
+        $mapApply->load(
+            'landDetail',
+            'houseOwner',
+            'fourForts',
+            'criteriaDetails'
+        );
 
         return view('emap::admin.notice.technician-notice', compact('mapApply'));
     }
@@ -277,13 +283,15 @@ class MapController extends Controller
         ]);
 
         $mapApplyData = DB::transaction(function () use ($request, $mapApply, $noticeTypeEnum) {
-            $mapApplyData = ApplyMapNotice::updateOrCreate([
+            $mapApplyData = ApplyMapNotice::updateOrCreate(
+                [
                 'map_apply_id' => $mapApply->id,
                 'file_type' => $noticeTypeEnum->value,
             ],
                 [
                     'data' => $request->input('data'),
-                ]);
+                ]
+            );
 
             if (!$mapApplyData->wasChanged()) {
                 $mapApplyData->update([

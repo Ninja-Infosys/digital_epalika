@@ -13,7 +13,8 @@ class GrantProgramController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('grantProgram_access'),
+        abort_if(
+            Gate::denies('grantProgram_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -25,7 +26,8 @@ class GrantProgramController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('grantProgram_create'),
+        abort_if(
+            Gate::denies('grantProgram_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -37,7 +39,8 @@ class GrantProgramController extends Controller
 
     public function store(StoreGrantProgramRequest $request)
     {
-        abort_if(Gate::denies('grantProgram_create'),
+        abort_if(
+            Gate::denies('grantProgram_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -51,7 +54,8 @@ class GrantProgramController extends Controller
 
     public function show(GrantProgram $grantProgram)
     {
-        abort_if(Gate::denies('grantProgram_access'),
+        abort_if(
+            Gate::denies('grantProgram_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -61,7 +65,8 @@ class GrantProgramController extends Controller
 
     public function edit(GrantProgram $grantProgram)
     {
-        abort_if(Gate::denies('grantProgram_edit'),
+        abort_if(
+            Gate::denies('grantProgram_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -72,7 +77,8 @@ class GrantProgramController extends Controller
 
     public function update(UpdateGrantProgramRequest $request, GrantProgram $grantProgram)
     {
-        abort_if(Gate::denies('grantProgram_edit'),
+        abort_if(
+            Gate::denies('grantProgram_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -86,7 +92,8 @@ class GrantProgramController extends Controller
 
     public function destroy(GrantProgram $grantProgram)
     {
-        abort_if(Gate::denies('grantProgram_delete'),
+        abort_if(
+            Gate::denies('grantProgram_delete'),
             403,
             'You are not allowed to access this resource'
         );

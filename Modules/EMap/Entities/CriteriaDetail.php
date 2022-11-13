@@ -10,7 +10,8 @@ use Modules\EMap\Enums\DetailsRegardingCriteriaEnum;
 
 class CriteriaDetail extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',

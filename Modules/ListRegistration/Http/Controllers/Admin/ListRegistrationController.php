@@ -14,7 +14,8 @@ class ListRegistrationController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('listRegistration_access'),
+        abort_if(
+            Gate::denies('listRegistration_access'),
             403,
             'You are not allowed to list registration access'
         );
@@ -26,7 +27,8 @@ class ListRegistrationController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('listRegistration_create'),
+        abort_if(
+            Gate::denies('listRegistration_create'),
             403,
             'You are not allowed to list registration create'
         );
@@ -37,7 +39,8 @@ class ListRegistrationController extends Controller
 
     public function store(StoreListRegistrationRequest $request)
     {
-        abort_if(Gate::denies('listRegistration_create'),
+        abort_if(
+            Gate::denies('listRegistration_create'),
             403,
             'You are not allowed to list registration create'
         );
@@ -57,7 +60,8 @@ class ListRegistrationController extends Controller
 
     public function show(ListRegistration $listRegistration)
     {
-        abort_if(Gate::denies('listRegistration_access'),
+        abort_if(
+            Gate::denies('listRegistration_access'),
             403,
             'You are not allowed to list registration access'
         );
@@ -68,7 +72,8 @@ class ListRegistrationController extends Controller
 
     public function edit(ListRegistration $listRegistration)
     {
-        abort_if(Gate::denies('listRegistration_edit'),
+        abort_if(
+            Gate::denies('listRegistration_edit'),
             403,
             'You are not allowed to list registration edit'
         );
@@ -78,7 +83,8 @@ class ListRegistrationController extends Controller
 
     public function update(UpdateListRegistrationRequest $request, ListRegistration $listRegistration)
     {
-        abort_if(Gate::denies('listRegistration_edit'),
+        abort_if(
+            Gate::denies('listRegistration_edit'),
             403,
             'You are not allowed to list registration edit'
         );
@@ -113,7 +119,8 @@ class ListRegistrationController extends Controller
 
     public function destroy(ListRegistration $listRegistration)
     {
-        abort_if(Gate::denies('listRegistration_delete'),
+        abort_if(
+            Gate::denies('listRegistration_delete'),
             403,
             'You are not allowed to list registration delete'
         );

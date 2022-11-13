@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Otp extends Model
 {
-    use HasFactory, SoftDeletes, HasUuids;
+    use HasFactory;
+    use SoftDeletes;
+    use HasUuids;
 
     protected static function boot()
     {

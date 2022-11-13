@@ -15,7 +15,8 @@ use Modules\Roaster\Enums\TrainingTypeEnum;
 
 class Training extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',

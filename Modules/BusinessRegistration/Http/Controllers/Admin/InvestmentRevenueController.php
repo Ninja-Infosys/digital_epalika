@@ -14,7 +14,8 @@ class InvestmentRevenueController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('investmentRevenue_access'),
+        abort_if(
+            Gate::denies('investmentRevenue_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -25,7 +26,8 @@ class InvestmentRevenueController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('investmentRevenue_create'),
+        abort_if(
+            Gate::denies('investmentRevenue_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -36,7 +38,8 @@ class InvestmentRevenueController extends Controller
 
     public function store(StoreInvestmentRevenueRequest $request): RedirectResponse
     {
-        abort_if(Gate::denies('investmentRevenue_create'),
+        abort_if(
+            Gate::denies('investmentRevenue_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -50,7 +53,8 @@ class InvestmentRevenueController extends Controller
 
     public function show(InvestmentRevenue $investmentRevenue)
     {
-        abort_if(Gate::denies('investmentRevenue_access'),
+        abort_if(
+            Gate::denies('investmentRevenue_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -60,7 +64,8 @@ class InvestmentRevenueController extends Controller
 
     public function edit(InvestmentRevenue $investmentRevenue)
     {
-        abort_if(Gate::denies('investmentRevenue_edit'),
+        abort_if(
+            Gate::denies('investmentRevenue_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -72,7 +77,8 @@ class InvestmentRevenueController extends Controller
 
     public function update(UpdateInvestmentRevenueRequest $request, InvestmentRevenue $investmentRevenue): RedirectResponse
     {
-        abort_if(Gate::denies('investmentRevenue_edit'),
+        abort_if(
+            Gate::denies('investmentRevenue_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -86,7 +92,8 @@ class InvestmentRevenueController extends Controller
 
     public function destroy(InvestmentRevenue $investmentRevenue): RedirectResponse
     {
-        abort_if(Gate::denies('investmentRevenue_delete'),
+        abort_if(
+            Gate::denies('investmentRevenue_delete'),
             403,
             'You are not allowed to digital board news access'
         );

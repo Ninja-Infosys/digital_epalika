@@ -74,13 +74,15 @@ class MapApplyController extends Controller
         ]);
 
         $mapApplyData = DB::transaction(function () use ($request, $mapApply, $noticeTypeEnum) {
-            $mapApplyData = ApplyMapNotice::updateOrCreate([
+            $mapApplyData = ApplyMapNotice::updateOrCreate(
+                [
                 'map_apply_id' => $mapApply->id,
                 'file_type' => $noticeTypeEnum->value,
             ],
                 [
                     'data' => $request->input('data'),
-                ]);
+                ]
+            );
 
             if (!$mapApplyData->wasChanged()) {
                 $mapApplyData->update([

@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Storage;
 
 class BusinessRegistrationFile extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',

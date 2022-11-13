@@ -17,7 +17,9 @@ use Modules\BusinessRegistration\Traits\ProprietorTemplateTrait;
 
 class ProprietorDetail extends Model
 {
-    use HasFactory, SoftDeletes, ProprietorTemplateTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use ProprietorTemplateTrait;
 
     protected $dates = [
         'created_at',

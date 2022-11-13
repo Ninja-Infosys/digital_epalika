@@ -12,7 +12,8 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('employee_access'),
+        abort_if(
+            Gate::denies('employee_access'),
             403,
             'You are not allowed to employee access'
         );
@@ -24,7 +25,8 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('employee_create'),
+        abort_if(
+            Gate::denies('employee_create'),
             403,
             'You are not allowed to employee create'
         );
@@ -34,7 +36,8 @@ class EmployeeController extends Controller
 
     public function store(StoreEmployeeRequest $request)
     {
-        abort_if(Gate::denies('employee_create'),
+        abort_if(
+            Gate::denies('employee_create'),
             403,
             'You are not allowed to employee create'
         );
@@ -47,7 +50,8 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        abort_if(Gate::denies('employee_access'),
+        abort_if(
+            Gate::denies('employee_access'),
             403,
             'You are not allowed to employee access'
         );
@@ -57,7 +61,8 @@ class EmployeeController extends Controller
 
     public function edit(Employee $employee)
     {
-        abort_if(Gate::denies('employee_edit'),
+        abort_if(
+            Gate::denies('employee_edit'),
             403,
             'You are not allowed to employee edit'
         );
@@ -67,7 +72,8 @@ class EmployeeController extends Controller
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        abort_if(Gate::denies('employee_edit'),
+        abort_if(
+            Gate::denies('employee_edit'),
             403,
             'You are not allowed to employee edit'
         );
@@ -87,7 +93,8 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
-        abort_if(Gate::denies('employee_delete'),
+        abort_if(
+            Gate::denies('employee_delete'),
             403,
             'You are not allowed to employee delete'
         );
@@ -103,7 +110,8 @@ class EmployeeController extends Controller
 
     public function updateEmployeeStatus(Employee $employee)
     {
-        abort_if(Gate::denies('employee_access'),
+        abort_if(
+            Gate::denies('employee_access'),
             403,
             'You are not allowed to employee access'
         );

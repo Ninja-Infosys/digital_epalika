@@ -19,7 +19,8 @@ class OrganizationAuthController extends Controller
     public function organizationLogin(Request $request): RedirectResponse
     {
         if (config('app.env') === 'production') {
-            $request->validate([
+            $request->validate(
+                [
                 'email' => 'required|email',
                 'password' => 'required|min:6',
                 'g-recaptcha-response' => ['recaptcha'],
@@ -27,7 +28,8 @@ class OrganizationAuthController extends Controller
                 ['g-recaptcha-response.recaptcha' => 'Please verify captcha']
             );
         } else {
-            $request->validate([
+            $request->validate(
+                [
                 'email' => 'required|email',
                 'password' => 'required|min:6',
             ]

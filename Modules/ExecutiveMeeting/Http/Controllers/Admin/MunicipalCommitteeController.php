@@ -13,7 +13,8 @@ class MunicipalCommitteeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('executiveCommittee_access'),
+        abort_if(
+            Gate::denies('executiveCommittee_access'),
             403,
             'You are not allowed to executive committee access'
         );
@@ -25,7 +26,8 @@ class MunicipalCommitteeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('executiveCommittee_create'),
+        abort_if(
+            Gate::denies('executiveCommittee_create'),
             403,
             'You are not allowed to executive committee create'
         );
@@ -36,7 +38,8 @@ class MunicipalCommitteeController extends Controller
 
     public function store(StoreMunicipalCommitteeRequest $request)
     {
-        abort_if(Gate::denies('executiveCommittee_create'),
+        abort_if(
+            Gate::denies('executiveCommittee_create'),
             403,
             'You are not allowed to executive committee create'
         );
@@ -49,7 +52,8 @@ class MunicipalCommitteeController extends Controller
 
     public function show(MunicipalCommittee $municipalCommittee)
     {
-        abort_if(Gate::denies('executiveCommittee_access'),
+        abort_if(
+            Gate::denies('executiveCommittee_access'),
             403,
             'You are not allowed to executive committee access'
         );
@@ -57,7 +61,8 @@ class MunicipalCommitteeController extends Controller
 
     public function edit(MunicipalCommittee $municipalCommittee)
     {
-        abort_if(Gate::denies('executiveCommittee_edit'),
+        abort_if(
+            Gate::denies('executiveCommittee_edit'),
             403,
             'You are not allowed to executive committee edit'
         );
@@ -67,7 +72,8 @@ class MunicipalCommitteeController extends Controller
 
     public function update(UpdateMunicipalCommitteeRequest $request, MunicipalCommittee $municipalCommittee)
     {
-        abort_if(Gate::denies('executiveCommittee_edit'),
+        abort_if(
+            Gate::denies('executiveCommittee_edit'),
             403,
             'You are not allowed to executive committee edit'
         );
@@ -84,7 +90,8 @@ class MunicipalCommitteeController extends Controller
 
     public function destroy(MunicipalCommittee $municipalCommittee)
     {
-        abort_if(Gate::denies('executiveCommittee_delete'),
+        abort_if(
+            Gate::denies('executiveCommittee_delete'),
             403,
             'You are not allowed to executive committee delete'
         );

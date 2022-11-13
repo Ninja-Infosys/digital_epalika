@@ -14,8 +14,14 @@ class FrontendController extends Controller
 
     public function printDetail(ProprietorDetail $proprietorDetail)
     {
-        $proprietorDetail->load('province', 'district', 'localBody', 'threeGenerationDetails',
-            'introboard', 'businessDetail.province', 'businessDetail.district',
+        $proprietorDetail->load(
+            'province',
+            'district',
+            'localBody',
+            'threeGenerationDetails',
+            'introboard',
+            'businessDetail.province',
+            'businessDetail.district',
             'businessDetail.localBody',
             'businessRegisteredFile',
             'businessDetail.partnerDetails',
@@ -27,8 +33,14 @@ class FrontendController extends Controller
 
     public function printPdf(ProprietorDetail $proprietorDetail)
     {
-        $proprietorDetail->load('province', 'district', 'localBody', 'threeGenerationDetails',
-            'introboard', 'businessDetail.province', 'businessDetail.district',
+        $proprietorDetail->load(
+            'province',
+            'district',
+            'localBody',
+            'threeGenerationDetails',
+            'introboard',
+            'businessDetail.province',
+            'businessDetail.district',
             'businessDetail.localBody',
             'businessRegisteredFile',
             'businessDetail.partnerDetails',

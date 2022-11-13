@@ -12,7 +12,8 @@ class MeetingEventController extends Controller
 {
     public function index($event_for)
     {
-        abort_if(Gate::denies('meetingEvent_access'),
+        abort_if(
+            Gate::denies('meetingEvent_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -26,7 +27,8 @@ class MeetingEventController extends Controller
 
     public function upcomingMeetings($event_for)
     {
-        abort_if(Gate::denies('meetingEvent_access'),
+        abort_if(
+            Gate::denies('meetingEvent_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -40,7 +42,8 @@ class MeetingEventController extends Controller
 
     public function create($event_for)
     {
-        abort_if(Gate::denies('meetingEvent_create'),
+        abort_if(
+            Gate::denies('meetingEvent_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -50,7 +53,8 @@ class MeetingEventController extends Controller
 
     public function store(StoreMeetingEventRequest $request, $event_for)
     {
-        abort_if(Gate::denies('meetingEvent_create'),
+        abort_if(
+            Gate::denies('meetingEvent_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -66,7 +70,8 @@ class MeetingEventController extends Controller
 
     public function show($event_for, MeetingEvent $meetingEvent)
     {
-        abort_if(Gate::denies('meetingEvent_access'),
+        abort_if(
+            Gate::denies('meetingEvent_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -76,7 +81,8 @@ class MeetingEventController extends Controller
 
     public function edit($event_for, MeetingEvent $meetingEvent)
     {
-        abort_if(Gate::denies('meetingEvent_edit'),
+        abort_if(
+            Gate::denies('meetingEvent_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -86,7 +92,8 @@ class MeetingEventController extends Controller
 
     public function update(UpdateMeetingEventRequest $request, $event_for, MeetingEvent $meetingEvent)
     {
-        abort_if(Gate::denies('meetingEvent_edit'),
+        abort_if(
+            Gate::denies('meetingEvent_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -100,7 +107,8 @@ class MeetingEventController extends Controller
 
     public function destroy($event_for, MeetingEvent $meetingEvent)
     {
-        abort_if(Gate::denies('meetingEvent_delete'),
+        abort_if(
+            Gate::denies('meetingEvent_delete'),
             403,
             'You are not allowed to access this resource'
         );
