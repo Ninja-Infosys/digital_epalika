@@ -173,8 +173,7 @@
                             type: type
                         },
                         success: function (resp) {
-                            console.log($('.ckEditor:first'));
-                            $('.ckEditor:first').val(resp);
+                            CKEDITOR.instances.data.setData(resp);
                         },
                         error: function () {
                             alert("Something Went Wrong");
