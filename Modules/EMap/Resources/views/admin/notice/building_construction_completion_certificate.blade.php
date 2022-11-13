@@ -1,46 +1,3 @@
-@extends('admin.layouts.master')
-@section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.registration.index')}}">ई-नक्सा </a>
-                        </li>
-                        <li class="breadcrumb-item active">नक्सा विवरण</li>
-                    </ol>
-                </div>
-                <h4 class="page-title">ई-नक्सा</h4>
-            </div>
-        </div>
-    </div>
-    <div>
-        @error('file')
-        <div class="alert alert-danger">
-            {{$message}}
-        </div>
-        @enderror
-    </div>
-    <div class="row mb-2">
-        <div class="col-sm-4">
-            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::BUILDING_COMPLETION_CERTIFICATE->label()}}</h3>
-        </div>
-        <div class="col-sm-8">
-            <div class="text-sm-end">
-                <div class="btn-group mb-3">
-                    </div>
-                <div class="btn-group mb-3">
-                    <x-print-button title="भवन निर्माण कार्य सम्पन्न प्रमाण-पत्"/>
-                </div>
-            </div>
-        </div><!-- end col-->
-    </div>
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card mb_30">
@@ -266,18 +223,3 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <style>
-            .word {
-                font-size: 10px;
-            }
-            .word>tbody>tr{
-                line-height: .70rem;
-            }
-        </style>
-    @endpush
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>
-    @endpush
-
-@endsection
