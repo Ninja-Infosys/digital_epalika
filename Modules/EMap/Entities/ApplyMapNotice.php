@@ -45,6 +45,12 @@ class ApplyMapNotice extends Model
         return $this->attributes['file_type'];
     }
 
+    public function getIsSentAttribute(): bool
+    {
+
+        return !empty($this->attributes['sent_to_admin_at']);
+    }
+
     public function mapApply(): BelongsTo
     {
         return $this->belongsTo(MapApply::class);
