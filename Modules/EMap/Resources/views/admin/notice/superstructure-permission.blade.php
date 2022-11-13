@@ -50,8 +50,6 @@
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
                                 <div class="row mt-2">
-                                    <div class="col-md-6">
-                                    </div>
                                     <div class="col-md-6 text-end">मिति: <div class="underline-dotted custom-width"></div></div>
                                 </div>
                                 <h3 class="text-center mt-3"><b>टिप्पणी र आदेश</b></h3>

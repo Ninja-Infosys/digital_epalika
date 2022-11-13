@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\EMap\Enums\BuildingUsageEnum;
@@ -153,7 +154,7 @@ class MapApply extends Model
         return $this->hasOne(MapRegistration::class);
     }
 
-    public function otp(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    public function otp(): MorphOne
     {
         return $this->morphOne(Otp::class,'model')->latest();
     }

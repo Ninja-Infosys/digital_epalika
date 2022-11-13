@@ -32,9 +32,6 @@
                                     <a class="btn btn-sm btn-primary" href="{{route('organization.admin.mapApply.show', $mapApply)}}">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a class="btn btn-sm btn-warning" href="{{route('organization.admin.mapApply.edit', $mapApply)}}">
-                                        <i class="fa fa-pen"></i>
-                                    </a>
                                     <a class="btn btn-sm btn-primary" href="{{route('organization.admin.mapFormInfo', $mapApply)}}">
                                         <i class="fa fa-list"></i>
                                     </a>

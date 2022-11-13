@@ -69,3 +69,7 @@
     border: 1px solid #DF3434;
     border-radius: 5px;
 }
+.border_black{
+    border: 1px solid black;
+    border-radius: 5px;
+}
