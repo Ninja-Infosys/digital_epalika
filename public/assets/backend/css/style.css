@@ -25,6 +25,9 @@
 .application_policy>h5, h4{
     line-height: 2rem;
 }
+.mega-menu-content{
+    width: 1080px;
+}
 @media  (max-width: 768px) and  (min-width: 480px) {
     .mega-menu-content{
         width: 500px;
