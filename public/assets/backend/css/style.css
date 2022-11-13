@@ -43,11 +43,6 @@
         width: 1000px;
     }
 }
-@media  (max-width: 1600px) and (min-width:1001px ) {
-    .mega-menu-content{
-        width: 1280px;
-    }
-}
 
 .menu_content>ul>li{
     list-style: none;
