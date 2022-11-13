@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('otps', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('id')->primary();
             $table->nullableMorphs('model');
             $table->string('otp');
             $table->timestamp('expire_at');

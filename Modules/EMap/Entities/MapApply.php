@@ -25,7 +25,8 @@ class MapApply extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'sent_to_admin_at'
     ];
 
     protected $fillable = [
@@ -48,7 +49,8 @@ class MapApply extends Model
         'consultant_signature',
         'consultant_name',
         'consultant_mobile_no',
-        'consultant_nec_no'
+        'consultant_nec_no',
+        'sent_to_admin_at'
     ];
 
     protected $casts = [
@@ -157,5 +159,15 @@ class MapApply extends Model
     public function otp(): MorphOne
     {
         return $this->morphOne(Otp::class,'model')->latest();
+    }
+
+    public function scopeSentToAdmin($query)
+    {
+        return $query->whereNotNull('sent_to_admin_at');
+    }
+
+    public function scopeNotSentToAdmin($query)
+    {
+        return $query->whereNull('sent_to_admin_at');
     }
 }

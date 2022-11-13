@@ -84,7 +84,7 @@
                                                         type: 'html',
                                                         documentTitle: '{{$noticeType->label()}}',
                                                         showModal: true,
-                                                        css: '{{asset('assets/backend/css/print.css')}}',
+                                                        targetStyles: ['*'],
                                                         honorMarginPadding: false,
                                                         modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'
                                                })"

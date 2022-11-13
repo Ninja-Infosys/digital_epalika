@@ -29,7 +29,7 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->get();
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->sentToAdmin()->get();
 
 
 //            ->whereHas('applyMapNotices', function ($query) {
@@ -250,7 +250,7 @@ class MapController extends Controller
 
     public function getTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
     {
-        $mapApply->load(['applyMapNotices' => function ($q) use ($noticeTypeEnum) {
+        $mapApply->load(['applyMapNotices.files','applyMapNotices' => function ($q) use ($noticeTypeEnum) {
             $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
         }]);
 

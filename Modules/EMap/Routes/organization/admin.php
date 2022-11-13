@@ -18,6 +18,7 @@ Route::prefix('profile')->group(function () {
 
 Route::controller(MapApplyController::class)->group(function (){
     Route::get('mapApply/{mapApply}/map-form-info','mapFormInfo')->name('mapFormInfo');
+    Route::get('mapApply/{mapApply}/update-sent-admin-status','updateStatus')->name('updateStatus');
     Route::get('mapApply/{mapApply}/template-data/{noticeTypeEnum}','getTemplateData')->name('getTemplateData');
     Route::post('mapApply/{mapApply}/storeTemplateData/{noticeTypeEnum}','storeTemplateData')->name('storeTemplateData');
 });
