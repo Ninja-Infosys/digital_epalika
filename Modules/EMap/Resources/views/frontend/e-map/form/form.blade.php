@@ -11,19 +11,12 @@
                     </div>
                 </div>
                 <h4 class="fw-semibold text-center">नक्सा दरखास्त फारम</h4>
-                <div class="row mb-2">
-                    <div class="col-sm-4">
-                        <h3></h3>
-                    </div>
-                </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="card mb_30">
-                            <div class="card-body p-3">
+                        <div class="card mb_30 p-3">
+
                                 <livewire:emap::map-application-form/>
-                            </div>
+
                         </div>
-                    </div>
                 </div>
                 @push('scripts')
                     <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>

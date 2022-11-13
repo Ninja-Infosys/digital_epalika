@@ -103,7 +103,7 @@ class EMapTemplateController extends Controller
             'naksa_certificate' => \View::make('emap::admin.notice.naksa_certificate'),
             'level' => \View::make('emap::admin.notice.level'),
             'superstructure' => \View::make('emap::admin.notice.superstructure'),
-            'construction-completion-certificate' => \View::make('emap::admin.notice.construction_completion_certificate'),
+            'construction-completion-certificate' => \View::make('emap::admin.notice.building_construction_completion_certificate'),
             default => 'Enter Valid Type',
         };
 

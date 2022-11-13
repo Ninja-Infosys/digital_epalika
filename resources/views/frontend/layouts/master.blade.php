@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/frontend/css/fontawesome/all.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/frontend/css/sweetalert2.min.css')}}">
+
     @stack('styles')
 
     @livewireStyles
