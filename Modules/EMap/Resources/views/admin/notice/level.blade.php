@@ -4,24 +4,22 @@
             <div class="card-body p-3">
                 <div class="font-black" id="printData">
                     <div class="row">
-                        <div class="col-md-2" style="text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
+                        <div class="col-md-2" style="text-align:center">
+                            <img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
 
-                        <div class="col-md-8 text-center" style="text-align:center"><span style="font-size:20px">नेपालगन्ज उप-महानगरपालिका </span></div>
-
-                        <div class="col-md-8 text-center" style="text-align:center"><span style="font-size:20px">नगर कार्यपालिका कार्यलय</span><br />
+                        <div class="col-md-8 text-center" style="text-align:center">
+                            <span style="font-size:20px">नेपालगन्ज उप-महानगरपालिका </span>
+                            <span style="font-size:20px">नगर कार्यपालिका कार्यलय</span><br />
                             <span style="font-size:18px">नेपालगन्ज,बाँके</span><br />
-                            <span style="font-size:16px">लुम्बिनी प्रदेश,नेपाल</span></div>
-
-                        <div class="d-flex justify-content-end">
-                            <div class="photo" style="height:6rem; width:6rem">
-                                <div class="card-body">
-                                    <h5>फोटो</h5>
-                                </div>
+                            <span style="font-size:16px">लुम्बिनी प्रदेश,नेपाल</span>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="photo" style="height:6rem; width:6rem; border:1px solid black">
                             </div>
+                                    <h5>फोटो</h5>
                         </div>
                     </div>
                 </div>
-
                 <div class="date">
                     <div class="row">
                         <div class="col-md-6">पत्र सं: ......................<br />
