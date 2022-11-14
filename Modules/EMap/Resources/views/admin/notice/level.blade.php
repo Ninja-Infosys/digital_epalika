@@ -4,11 +4,9 @@
             <div class="card-body p-3">
                 <div class="font-black" id="printData">
                     <div class="row">
-                        <div class="col-md-2" style="text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
+                        <div class="col-md-2 text-center" style="text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:103px; width:132px" /><span style="font-size:22px"><strong>नेपालगन्ज उप-महानगरपालिका </strong></span></div>
 
-                        <div class="col-md-8 text-center" style="text-align:center"><span style="font-size:20px">नेपालगन्ज उप-महानगरपालिका </span></div>
-
-                        <div class="col-md-8 text-center" style="text-align:center"><span style="font-size:20px">नगर कार्यपालिका कार्यलय</span><br />
+                        <div class="col-md-8 text-center" style="text-align:center"><strong><span style="font-size:20px">नगर कार्यपालिका कार्यलय</span></strong><br />
                             <span style="font-size:18px">नेपालगन्ज,बाँके</span><br />
                             <span style="font-size:16px">लुम्बिनी प्रदेश,नेपाल</span></div>
 
