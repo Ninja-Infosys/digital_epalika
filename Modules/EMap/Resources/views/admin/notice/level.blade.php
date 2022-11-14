@@ -165,7 +165,7 @@
                     </tbody>
                 </table>
 
-                <h5><strong><span style="font-size:15px">प्रथम चरणका इजाजत नामसारी</span></strong></h5>
+                <h5><strong><span style="font-size:14px">प्रथम चरणका इजाजत नामसारी</span></strong></h5>
 
                 <table class="table table-bordered word" style="height:564px; width:888px">
                     <thead>
