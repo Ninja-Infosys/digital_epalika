@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Traits;
+namespace App\Helper\SMS;
+
+use App\Models\Sms;
 
 class SamayaSms
 {
-    public static function sendTextSMS($contact, $message = 'Hello Test'): bool|string
+
+    public static function sendTextSMS($contact, $message = 'Hello Test'): Sms
     {
+
         $api_key = config('sms.api_key');
         $from = config('sms.sms_id');
         $contacts = $contact;
@@ -20,13 +24,14 @@ class SamayaSms
         $response = curl_exec($ch);
         curl_close($ch);
 
-        return $response;
+
+        return self::storeSmsDetail($contact, $message, $response);
     }
 
     public static function getCreditBalance(): bool|string
     {
         $api_key = config('sms.api_key');
-        $api_url = 'https://bulk.textnepal.com/miscapi/'.$api_key.'/getBalance/true/';
+        $api_url = 'https://bulk.textnepal.com/miscapi/' . $api_key . '/getBalance/true/';
 
         //Submit to server
 
@@ -35,7 +40,7 @@ class SamayaSms
 
     public static function fetchApiKey($login_id, $password): bool|string
     {
-        $api_url = 'https://bulk.textnepal.com/getkey/'.$login_id.'/'.$password;
+        $api_url = 'https://bulk.textnepal.com/getkey/' . $login_id . '/' . $password;
 
         //Submit to server
 
@@ -46,10 +51,25 @@ class SamayaSms
     {
         $api_key = config('sms.api_key');
 
-        $api_url = 'https://bulk.textnepal.com/lasttran/index.php?key='.$api_key;
+        $api_url = 'https://bulk.textnepal.com/lasttran/index.php?key=' . $api_key;
 
         //Submit to server
 
         return file_get_contents($api_url);
+    }
+
+    /**
+     * @param $contact
+     * @param mixed $message
+     * @param bool|string $response
+     * @return Sms
+     */
+    public static function storeSmsDetail($contact, mixed $message, bool|string $response): Sms
+    {
+        return Sms::create([
+            'phone' => $contact,
+            'message' => $message,
+            'response_data' => $response,
+        ]);
     }
 }
