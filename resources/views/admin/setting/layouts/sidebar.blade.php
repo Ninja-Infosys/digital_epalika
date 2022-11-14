@@ -36,6 +36,12 @@
         <span> कार्यालय सेटिङ </span>
     </a>
 </li>
+<li class="{{request()->is('admin/setting/sms*') ? 'active' : ''}}">
+    <a href="{{route('admin.setting.sms')}}">
+        <i class="fa fa-envelope"></i>
+        <span> एस.एम.एस सेटिङ </span>
+    </a>
+</li>
 <li class="{{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'active' : ''}}">
     <a href="#designationDepartment"
        {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'aria-expanded=true' : ''}}
@@ -46,8 +52,9 @@
                             <i class="fas fa-angle-right"></i>
                         </span>
     </a>
-    <div class="collapse {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'show' : ''}}"
-         id="designationDepartment">
+    <div
+        class="collapse {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'show' : ''}}"
+        id="designationDepartment">
         <ul class="nav-second-level">
             @can('designation_access')
                 <li class="{{request()->is('admin/setting/designation*') ? 'active' : ''}}">

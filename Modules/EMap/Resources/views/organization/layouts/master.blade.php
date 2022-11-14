@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{app()->getLocale()}}">
+{{--<html lang="{{app()->getLocale()}}">--}}
 
 <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 
@@ -23,6 +23,14 @@
 
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/style1.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
+
+    <link
+        href="{{asset('assets/backend/css/app.min.css')}}"
+        rel="stylesheet"
+        type="text/css"
+        id="app-style"
+    />
+
 
     @stack('style')
     @livewireStyles

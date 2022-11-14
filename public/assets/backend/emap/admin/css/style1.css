@@ -6717,3 +6717,10 @@ canvas#highlights {
     transition: .3s;
     transform: scale(1)
 }
+.noti-icon-badge{
+    top:0 !important;
+    right: 20px !important;
+    font-size: .7rem;
+
+
+}

@@ -2,9 +2,11 @@
 
 namespace Modules\EMap\Http\Controllers;
 
+use App\Helper\SMS\SamayaSms;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\EMapFormFillerTypeEnum;
@@ -12,6 +14,7 @@ use Modules\EMap\Enums\NoticeTypeEnum;
 
 class FrontendController extends Controller
 {
+
     public function eMap()
     {
         return view('emap::frontend.e-map.index');
@@ -100,9 +103,9 @@ class FrontendController extends Controller
         if ($this->verifyOtp($request, $mapApply)) {
             ApplyMapNotice::updateOrCreate(
                 [
-                'map_apply_id' => $mapApply->id,
-                'file_type' => $noticeTypeEnum->value,
-            ],
+                    'map_apply_id' => $mapApply->id,
+                    'file_type' => $noticeTypeEnum->value,
+                ],
                 [
                     'data' => $request->input('data'),
                 ]
@@ -125,14 +128,20 @@ class FrontendController extends Controller
      */
     public function sendOtp(MapApply $mapApply)
     {
-        if (request()?->ajax()) {
-            $number = random_int(111111, 999999);
-            $mapApply->otp()->create([
-                'otp' => $number,
-            ]);
 
-            return response(['message' => 'Otp sent successfully'], 200);
+        if (request()?->ajax()) {
+                $number = random_int(111111, 999999);
+                $mapApply->otp()->create([
+                    'otp' => $number,
+                ]);
+
+                $sms = SamayaSms::sendTextSMS($mapApply->houseOwner->phone, "Dear Sir, Your Otp is $number, please do not share to anyone.");
+
+                return response(['message' => 'Otp sent successfully'], 200);
+
+
         }
+        return response(['message' => 'Something Wrong'], 500);
     }
 
     public function verifyOtp(Request $request, MapApply $mapApply): bool
@@ -147,6 +156,6 @@ class FrontendController extends Controller
 
         info($checkedMapApply->otp->is_expired);
 
-        return $checkedMapApply !== null && ! $checkedMapApply->otp->is_expired;
+        return $checkedMapApply !== null && !$checkedMapApply->otp->is_expired;
     }
 }
