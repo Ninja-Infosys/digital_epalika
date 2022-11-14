@@ -1,14 +1,15 @@
 <div class="flex-container mt-5" style="display:flex">
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:0rem; margin-right:4rem; margin-top:0rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
 
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><strong><span style="font-size:20px">नेपालगन्ज उप-महानगरपालिका </span> <span style="font-size:20px">नगर कार्यपालिका कार्यलय</span></strong><br />
+    <div class="item-auto" style="flex:1 1 auto; margin-right:4rem; margin-top:0rem; text-align:center"><strong><span style="font-size:22px">नेपालगन्ज उप-महानगरपालिका</span><br />
+            <span style="font-size:22px">नगर कार्यपालिका </span><span style="font-size:20px">कार्यलय</span></strong><br />
         <strong><span style="font-size:16px">नेपालगन्ज,बाँके<br />
 लुम्बिनी प्रदेश,नेपाल</span></strong></div>
 
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center">
-        <div class="photo" style="border:1px solid black; height:6rem; width:6rem">&nbsp;</div>
-
-        <h5>फोटो</h5>
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:0rem; text-align:center">
+        <div class="photo" style="border:1px solid black; height:6rem; width:6rem">&nbsp;
+            <h5>फोटो</h5>
+        </div>
     </div>
 </div>
 

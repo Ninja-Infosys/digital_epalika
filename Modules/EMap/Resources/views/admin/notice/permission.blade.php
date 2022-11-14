@@ -52,89 +52,29 @@
             </div>
         </div><!-- end col-->
     </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-12">
-            <div class="card mb_30">
-                <div class="card-body p-3">
-                    <div class="font-black" id="printData">
-                        <h3 class="text-center mt-3"><b>मन्जुरीनामा</b></h3>
-                        <div class="vertical">
-                            दस्तखत : <span class="underline-dotted custom-width"></span>
-                        </div>
-                        <div class="text">
-                                    <span>
-                                        लिखितम<span class="underline-dotted custom-width"></span>जिल्ला<span
-                                            class="underline-dotted custom-width"></span>
-                                        उ.न.पा./गा.वि.स. वडा नं.<span class="underline-dotted custom-width"></span>
-                                        बस्ने वर्ष<span class="underline-dotted custom-width"></span>
-                                        को आगे<span class="underline-dotted custom-width"></span> मेरो/हाम्रो नाउँमा
-                                        दर्ता भएको साविक<span class="underline-dotted custom-width"></span>
-                                        हाल<span class="underline-dotted custom-width"></span> उ.न.पा. वडा नं.<span
-                                            class="underline-dotted custom-width"></span>
-                                        स्थित कि.नं.<span class="underline-dotted custom-width"></span> क्षेत्रफल<span
-                                            class="underline-dotted custom-width"></span>
-                                        भएको जग्गामा घरटहरा, पर्वत, बाटो बनाउनको लागि<span
-                                            class="underline-dotted custom-width"></span> उ.न.पा. कार्यालयमा नक्सा
-                                        संहितको दस्तखत
-                                        दिई नक्सा पास तथा निर्माण इजाजत लिनका लागि<span
-                                            class="underline-dotted custom-width"></span> उ.न.पा. वडा नं.<span
-                                            class="underline-dotted custom-width"></span>
-                                        बस्ने वर्ष<span class="underline-dotted custom-width"></span> को श्री<span
-                                            class="underline-dotted custom-width"></span> ले मन्जुरीनामा लेखिदिनु भनी
-                                        मलाई भन्दा
-                                        मेरो चित्त बुझ्यो | उक्त जग्गामा घर, टहरा, पर्खाल, बाटो निर्माण गरेमा मेरो
-                                        मन्जुरी छ | पछि उक्त मेरो नाउँको जग्गामा बनाउन पाउने होइन भनी कुनै कुराको उजुरी
-                                        गर्ने छैन | गरे
-                                        यसै कागजबाट बदर गरिदिनु भनी मेरो मनोमान खुशीराजीसँग<span
-                                            class="underline-dotted custom-width"></span> बनाउन मन्जुरीनामाको कागज
-                                        लेखिदिएँ साक्षी किनारको सदर |
-                                    </span><br>
+    <h3 style="text-align:center"><span style="font-size:20px"><strong>मन्जुरीनामा</strong></span></h3>
 
+    <div class="vertical" style="color:black; margin-bottom:0; margin-left:15px; margin-right:15px; margin-top:0; padding:0 150px; text-orientation:upright; transform-origin:left top 0; transform:rotate(90deg)">दस्तखत : .................................</div>
 
-                            <span class="letter mt-2">
-                                    इति सम्वत्<span class="underline-dotted custom-width"></span>
-                                    साल<span class="underline-dotted custom-width"></span>
-                                    महिना<span class="underline-dotted custom-width"></span>
-                                    गते रोज<span class="underline-dotted custom-width"></span>
-                                    शुभम</span>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="d-flex justify-content-between">
-                                <p class="signature my-5">दस्तखत:<span class="underline-dotted"></span></p>
-                                <div class="d-flex justify-content-end">
-                                    <div class="row p-4">
-                                        <div class="col-md-6">
-                                            <div class="finger" style="width: 7rem; height: 10rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center mt-2">दायाँ</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row p-4">
-                                        <div class="col-md-6">
-                                            <div class="finger" style="width: 7rem; height: 10rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center mt-2">वायाँ</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="person">
-                            <h5 class="text-decoration-underline">सक्षीहरु</h5>
-                            <p>१. श्री<span class="underline-dotted custom-width"></span> दरखास्त<span
-                                    class="underline-dotted custom-width"></span></p>
-                            <p class="mt-2">२. श्री<span class="underline-dotted custom-width"></span>
-                                दरखास्त<span class="underline-dotted custom-width"></span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="text" style="margin-left:80px; text-align:justify">लिखितम ...................................................... जिल्ला ...................................... उ.न.पा./गा.वि.स. वडा नं. ..................................... बस्ने वर्ष ....................... को आगे ...................................................मेरो/हाम्रो नाउँमा दर्ता भएको साविक ....................................... हाल .............................................. उ.न.पा. वडा नं. .......................... स्थित कि.नं. ........................................ क्षेत्रफल ....................................... भएको जग्गामा घरटहरा, पर्वत, बाटो बनाउनको लागि ................................ उ.न.पा. कार्यालयमा नक्सा संहितको दस्तखत दिई नक्सा पास तथा निर्माण इजाजत लिनका लागि&nbsp;............................................. उ.न.पा. वडा नं.&nbsp;.............. बस्ने वर्ष ...............को श्री&nbsp;......................................................... ले मन्जुरीनामा लेखिदिनु भनी मलाई भन्दा मेरो चित्त बुझ्यो | उक्त जग्गामा घर, टहरा, पर्खाल, बाटो निर्माण गरेमा मेरो मन्जुरी छ | पछि उक्त मेरो नाउँको जग्गामा बनाउन पाउने होइन भनी कुनै कुराको उजुरी गर्ने छैन | गरे यसै कागजबाट बदर गरिदिनु भनी मेरो मनोमान खुशीराजीसँग&nbsp;........................................................... बनाउन मन्जुरीनामाको कागज लेखिदिएँ साक्षी किनारको सदर |<br />
+        इति सम्वत् साल महिना गते रोज शुभम</div>
+
+    <div class="flex-container" style="display:flex; margin-bottom:50px; margin-left:0; margin-right:0; margin-top:20px">
+        <div class="auto item" style="flex:1 1 auto; margin-bottom:30px; margin-left:80px; margin-right:0; margin-top:30px">दस्तखत: ............................</div>
+
+        <div class="initial item my-4" style="border:1px solid black; flex:initial; height:7rem; margin-bottom:1em; margin-left:80px; margin-right:1em; margin-top:1em; text-align:center; width:6rem">दायाँ</div>
+
+        <div class="initial item" style="border:1px solid black; flex:initial; height:7rem; margin-bottom:1em; margin-left:80px; margin-right:1em; margin-top:1em; text-align:center; width:6rem">वायाँ</div>
     </div>
+
+    <div class="person">
+        <h5 style="margin-left:80px">सक्षीहरु</h5>
+
+        <p style="margin-left:80px">१. श्री ...................................................................... दरखास्त ................................................</p>
+
+        <p style="margin-left:80px">२. श्री ...................................................................... दरखास्त ................................................</p>
+    </div>
+
 
 
     @push('scripts')
