@@ -1,5 +1,5 @@
 <div class="flex-container mt-5" style="display:flex">
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:0rem; margin-right:4rem; margin-top:4rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
 
     <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><strong><span style="font-size:20px">नेपालगन्ज उप-महानगरपालिका </span> <span style="font-size:20px">नगर कार्यपालिका कार्यलय</span></strong><br />
         <strong><span style="font-size:16px">नेपालगन्ज,बाँके<br />

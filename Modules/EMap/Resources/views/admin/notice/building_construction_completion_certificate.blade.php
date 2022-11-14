@@ -1,260 +1,173 @@
-@extends('admin.layouts.master')
-@section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.registration.index')}}">ई-नक्सा </a>
-                        </li>
-                        <li class="breadcrumb-item active">नक्सा विवरण</li>
-                    </ol>
-                </div>
-                <h4 class="page-title">ई-नक्सा</h4>
-            </div>
+<div class="flex-container mt-5" style="display:flex">
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:0rem; margin-right:4rem; margin-top:4rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
+
+    <div class="item-auto" style="flex:1 1 auto; margin-right:4rem; margin-top:4rem; text-align:center"><strong><span style="font-size:22px">नेपालगन्ज उप-महानगरपालिका</span><br />
+            <span style="font-size:22px">नगर कार्यपालिका </span><span style="font-size:20px">कार्यलय</span></strong><br />
+        <strong><span style="font-size:16px">नेपालगन्ज,बाँके<br />
+लुम्बिनी प्रदेश,नेपाल</span></strong></div>
+
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center">
+        <div class="photo" style="border:1px solid black; height:6rem; width:6rem">&nbsp;
+            <h5>फोटो</h5>
         </div>
     </div>
-    <div>
-        @error('file')
-        <div class="alert alert-danger">
-            {{$message}}
-        </div>
-        @enderror
-    </div>
-    <div class="row mb-2">
-        <div class="col-sm-4">
-            <h3> {{\Modules\EMap\Enums\NoticeTypeEnum::BUILDING_COMPLETION_CERTIFICATE->label()}}</h3>
-        </div>
-        <div class="col-sm-8">
-            <div class="text-sm-end">
-                <div class="btn-group mb-3">
+</div>
+
+                    <div class="date">
+                        <div class="mt-2 row">
+                            <div class="col-md-6"><span style="font-size:16px"><strong>पत्र सं:......................<br />
+चलानी नं:......................</strong></span></div>
+
+                            <div class="col-md-6 text-end" style="text-align:right"><span style="font-size:16px"><strong>मिति:......................</strong></span></div>
+                        </div>
                     </div>
-                <div class="btn-group mb-3">
-                    <x-print-button title="भवन निर्माण कार्य सम्पन्न प्रमाण-पत्"/>
-                </div>
-            </div>
-        </div><!-- end col-->
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-12">
-            <div class="card mb_30">
-                <div class="card-body p-3">
-                    <div class="font-black" id="printData">
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="row ">
-                                <div class="col-sm-6">
-                                    <div class="photo" style="width: 6rem; height: 6rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center my-4">फोटो</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="date">
-                            <div class="row mt-2">
-                                <div class="col-md-6">
-                                    पत्र सं:......................
-                                    <br>
-                                    चलानी नं:......................
-                                </div>
-                                <div class="col-md-6 text-end">मिति:......................
-                                </div>
-                            </div>
-                        </div>
 
-                        <h3 class="top text-center"><b>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</b></h3>
+                    <h3 style="text-align:center"><span style="font-size:24px"><strong>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</strong></span></h3>
 
-                        <div class="top">
-                            श्री...................... ले
-                            यस {{config('applicationDetail.office_type')}}
-                            वडा नं.......................
-                            मा निम्न बमोजिम निर्माण कार्य पूरा गरेकोले यो निर्माण कार्य सम्पन्न प्रमाण-पत्र
-                            प्रदान गरिएको छ |
-                        </div>
-                        <br>
-                        <span class="word">१. जग्गाधनीको नाम, थर......................
-                        </span><br>
-                        <span class="word">२. घरधनीको नाम, थर, वतन ...................... ......................</span><br>
-                        <span class="word">३. जग्गाको विवरण साविक......................
-                            हालको वडा नं.......................
-                            घर नं....................... सडकको नाम......................
-                            साविक...................... कि.नं.......................
-                            क्षेत्रफल......................
-                            भू-उपयोग क्षेत्र......................
-                        </span><br>
-                        <span class="word">
-                            ५. राष्ट्रिय भवन संहिता अनुसार भवनको वर्गिकरण :&nbsp;&nbsp;
+                    <div class="top" style="text-align:justify"><span style="font-size:16px"><strong>श्री.................................................................... ले यस उप-महानगरपालिका वडा नं................................ मा निम्न बमोजिम निर्माण कार्य पूरा गरेकोले यो निर्माण कार्य सम्पन्न प्रमाण-पत्र प्रदान गरिएको छ |</strong></span></div>
 
+                    <p><span style="font-size:16px"><strong>१. जग्गाधनीको नाम, थर............................................................................................................................................................................................................<br />
+२. घरधनीको नाम, थर, वतन .....................................................................................................................................................................................................<br />
+३. जग्गाको विवरण साविक................................................................................................. हालको वडा नं...................................... घर नं....................................<br />
+सडकको नाम......................................................................... साविक...................... कि.नं.................................. क्षेत्रफल..........................................................<br />
+भू-उपयोग क्षेत्र.........................................................................................................................................................................................................................<br />
+५. राष्ट्रिय भवन संहिता अनुसार भवनको वर्गिकरण :&nbsp;&nbsp; <input name="inlineRadioOptions" type="checkbox" value="option1" /> (क)&emsp; <input name="inlineRadioOptions" type="checkbox" value="option2" /> (ख)&emsp; <input name="inlineRadioOptions" type="checkbox" value="option3" /> (ग)&emsp; <input name="inlineRadioOptions" type="checkbox" value="option4" /> (घ)&emsp;<br />
+निर्माणको स्ट्रक्चरल सिस्टम .......................................................................<br />
+६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति ..............................................................................<br />
+७.</strong></span></p>
 
-                                <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio1"
-                              value="option1">
-                              (क)&emsp;
-                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions" id="inlineRadio2"
-                               value="option2">
-                                 (ख)&emsp;
-                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions"
-                                   id="inlineRadio3" value="option3">
-                                  (ग)&emsp;
-                            <input class="form-check-input form-check-inline" type="checkbox" name="inlineRadioOptions"
-                                   id="inlineRadio4" value="option4">
-                                         (घ)&emsp;
-                        </span><br>
-                        <span class="word">
-                            निर्माणको स्ट्रक्चरल सिस्टम<......................</span><br>
-                        <span class="word">६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति......................</span><br>
-                        <span>७.
-                        <table class="table table-sm table-borderless word">
-                            <thead>
-                            <tr>
-                                <th scope="col">तला</th>
-                                <th scope="col">स्वीकृत क्षेत्रफल</th>
-                                <th scope="col">निर्माण क्षेत्रफल</th>
-                                <th scope="col">तला</th>
-                                <th scope="col">स्वीकृत क्षेत्रफल</th>
-                                <th scope="col">निर्माण क्षेत्रफल</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>भूमिगत वा अर्ध भूमिगत तला १</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                                <td>पाचौ</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                            </tr>
-                            <tr>
-                                <td>भूमिगत वा अर्ध भूमिगत तला २</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                                <td>छैठौ</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                            </tr>
-                            <tr>
-                                <td>जमिन तला</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                                <td>सातौ</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                            </tr>
-                            <tr>
-                                <td>पहिलो तला</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                                <td>आठौ</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                            </tr>
-                            <tr>
-                                <td>दोस्रो तला</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                                <td>नवौ</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                            </tr>
-                            <tr>
-                                <td>तेस्रो तला</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                                <td>दशौ</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                            </tr>
-                            <tr>
-                                <td>चौथो तला</td>
-                                <td>......................</td>
-                                <td>......................</td>
-                                <td></td>
-                                <td>......................</td>
-                                <td>......................</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                            </span>
-                        <span class="word">जम्मा क्षेत्रफल......................</span><br>
-                        <span class="word">८. भवनको ग्राउण्ड कभरेज: ......................</span><br>
-                        <span class="word">९. बनेको भवनको उचाई......................
-                            तला संख्या ......................</span><br>
-                        <span class="word">१०. घर बनेको प्लटसँग जोडिएको सडकको सडक सिमानाबाट न्युनतम छाड्न पर्ने
-                            दूरी......................
-                            छाडिएको दूरी......................</span><br>
-                        <span class="word">११. बिजुलीको तार नजिक भएमा छाड्न पर्ने दूरी...................... छाडेको दूरी ......................</span><br>
-                        <span class="word">१२. नदी, नालाको किनार भएमा छाड्न पर्ने दूरी ...................... छाडेको दूरी ......................</span><br>
-                        <span class="word">१३. ढल निकास सम्बन्धी ढल, सेप्टिकटैक, सोकपिट भए सो को विवरण : ......................</span><br>
-                        <span class="word">१४. अन्य कुनै भए विवरण : ......................</span><br>
-                        <span class="word">१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको </span><br>
-                        <span class="word">पालना नभएको भए विवरण : ......................</span>
-                        <div class="d-flex justify-content-around">
-                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>
-                                तयार गर्ने </span></div>
-                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>चेक
-                                गर्ने<br>(इन्जिनियर)</span></div>
-                            <div class="col-sm-4 text-center"><span class="text-center">......................<br>
-                                स्वीकृत गर्ने <br><small>(प्रमुख प्रशासकिय अधिकृत)</small></span></div>
-                        </div>
-                        <div class="break-page"></div>
-                        <table class="table table-sm table-bordered mt-2">
-                            <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">नामसारी गरी दिने नामथर</th>
-                                <th scope="col">नामसारी गरी लिनेको नामथर</th>
-                                <th scope="col">सिफारिस गर्ने</th>
-                                <th scope="col">स्वीकृत गर्ने</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <table class="table table-borderless table-sm word" style="border: 2px solid black; height:217px; width:1018px">
+                        <thead>
+                        <tr>
+                            <th scope="col"><span style="font-size:16px"><strong>तला</strong></span></th>
+                            <th scope="col"><span style="font-size:16px"><strong>स्वीकृत क्षेत्रफल</strong></span></th>
+                            <th scope="col"><span style="font-size:16px"><strong>निर्माण क्षेत्रफल</strong></span></th>
+                            <th scope="col"><span style="font-size:16px"><strong>तला</strong></span></th>
+                            <th scope="col"><span style="font-size:16px"><strong>स्वीकृत क्षेत्रफल</strong></span></th>
+                            <th scope="col"><span style="font-size:16px"><strong>निर्माण क्षेत्रफल</strong></span></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><span style="font-size:16px"><strong>भूमिगत वा अर्ध भूमिगत तला १</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>पाचौ</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-size:16px"><strong>भूमिगत वा अर्ध भूमिगत तला २</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>छैठौ</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-size:16px"><strong>जमिन तला</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>सातौ</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-size:16px"><strong>पहिलो तला</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>आठौ</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-size:16px"><strong>दोस्रो तला</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>नवौ</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-size:16px"><strong>तेस्रो तला</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>दशौ</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                        </tr>
+                        <tr>
+                            <td><span style="font-size:16px"><strong>चौथो तला</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td>&nbsp;</td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                            <td><span style="font-size:16px"><strong>......................</strong></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <p><span style="font-size:16px"><strong>जम्मा क्षेत्रफल ......................<br />
+८. भवनको ग्राउण्ड कभरेज : ......................<br />
+९. बनेको भवनको उचाई ...................... तला संख्या ......................<br />
+१०. घर बनेको प्लटसँग जोडिएको सडकको सडक सिमानाबाट न्युनतम छाड्न पर्ने दूरी ...................................... छाडिएको दूरी .........................................<br />
+११. बिजुलीको तार नजिक भएमा छाड्न पर्ने दूरी ...................... छाडेको दूरी .......................<br />
+१२. नदी, नालाको किनार भएमा छाड्न पर्ने दूरी ...................... छाडेको दूरी ......................<br />
+१३. ढल निकास सम्बन्धी ढल, सेप्टिकटैक, सोकपिट भए सो को विवरण : ......................<br />
+१४. अन्य कुनै भए विवरण : ......................<br />
+१५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको</strong><br />
+<strong>पालना नभएको भए विवरण : .........................................................................................................................................................</strong></span></p>
+
+                    <div class="flex-container mt-5" style="display:flex">
+                        <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:16px"><strong>....................................<br />
+तयार गर्ने</strong></span></div>
+
+                        <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:16px"><strong>...................................<br />
+चेक गर्ने<br />
+(इन्जिनियर)</strong></span></div>
+
+                        <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:16px"><strong>...................................<br />
+स्वीकृत गर्ने<br />
+(प्रमुख प्रशासकिय अधिकृत)</strong></span></div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @push('style')
-        <style>
-            .word {
-                font-size: 10px;
-            }
-            .word>tbody>tr{
-                line-height: .70rem;
-            }
-        </style>
-    @endpush
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/printAjaxScript.js')}}"></script>
-    @endpush
 
-@endsection
+                    <div class="break-page">
+                        <div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>
+
+                        <p>&nbsp;</p>
+                    </div>
+
+                    <table class="mt-2 table table-bordered table-sm" style="border: 2px solid black; height:110px; width:1014px">
+                        <thead>
+                        <tr>
+                            <th scope="col">&nbsp;</th>
+                            <th scope="col"><strong>नामसारी गरी दिने नामथर</strong></th>
+                            <th scope="col"><strong>नामसारी गरी लिनेको नामथर</strong></th>
+                            <th scope="col"><strong>सिफारिस गर्ने</strong></th>
+                            <th scope="col"><strong>स्वीकृत गर्ने</strong></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </tbody>
+                    </table>
