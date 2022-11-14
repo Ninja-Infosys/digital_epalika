@@ -50,7 +50,10 @@ class MapApplyController extends Controller
 
     public function mapFormInfo(MapApply $mapApply)
     {
-        return view('emap::organization.map-applies.map_form_info', compact('mapApply'));
+        $mapApply->load('applyMapNotices:map_apply_id,file_type,sent_to_admin_at');
+        $fileTypes = $mapApply->applyMapNotices->pluck('file_type');
+
+        return view('emap::organization.map-applies.map_form_info', compact('mapApply', 'fileTypes'));
     }
 
     public function getTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
@@ -80,6 +83,13 @@ class MapApplyController extends Controller
                     'data' => $request->input('data'),
                 ]
             );
+
+            if (!$mapApplyData->wasChanged()) {
+                $mapApplyData->update([
+                    'sent_to_admin_at' => now()
+                ]);
+            }
+
 
             if ($request->hasFile('files')) {
                 $this->uploadDocuments($request, $mapApplyData);
@@ -112,6 +122,18 @@ class MapApplyController extends Controller
             'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
         ]);
 
+        toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
+        return back();
+
+    }
+
+    public function updateStatusOrganization(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    {
+
+        $data = ApplyMapNotice::where('map_apply_id', $mapApply->id)->where('file_type', $noticeTypeEnum->value)->first();
+        $data->update([
+            'sent_to_admin_at' => empty($data->sent_to_admin_at) ? now() : null
+        ]);
         toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
 
         return back();

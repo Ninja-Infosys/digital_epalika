@@ -18,6 +18,7 @@
                             <th scope="col">क्र.स.</th>
                             <th scope="col">निबेदन/प्रतिबेदनको किसिम</th>
                             <th>स्थिति</th>
+                            <th>घरधनिको निबेदन को स्थिति</th>
                             <th>#</th>
                         </tr>
                         </thead>
@@ -32,16 +33,23 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
+                                    @if($fileTypes->contains($noticeTypeEnum) && $noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::HOUSE_OWNER)
+                                        <a href="{{route('organization.admin.updateStatusOrganization',[$mapApply,$noticeTypeEnum->value])}}" class="mx-2 btn {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->is_sent ? 'btn-primary':'btn-danger'}} btn-sm">
+                                          <i class="fa {{$mapApply->applyMapNotices->where('file_type',$noticeTypeEnum)?->first()->is_sent ? 'fa-check':'fa-times'}}"></i>
+                                        </a>
+                                    @endif
+
+                                </td>
+                                <td class="text-center">
                                     @if($noticeTypeEnum->type() === \Modules\EMap\Enums\EMapFormFillerTypeEnum::CONSULTANT)
                                         <a href="{{route('organization.admin.getTemplateData',[$mapApply,$noticeTypeEnum->value])}}"
                                            class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i>
                                             <span>फार्म भर्नुहोस्</span>
                                         </a>
-                                        <a href="" class="mx-2 btn btn-primary btn-sm">
-                                            <i class="fa fa-check"></i>
-                                        </a>
+
                                     @endif
+
                                 </td>
                             </tr>
                         @endforeach

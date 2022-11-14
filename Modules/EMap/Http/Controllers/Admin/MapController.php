@@ -275,6 +275,7 @@ class MapController extends Controller
 
     public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
     {
+
         $request->validate([
             'data' => ['required'],
             'files' => ['nullable', 'array'],
@@ -291,6 +292,12 @@ class MapController extends Controller
                     'data' => $request->input('data'),
                 ]
             );
+
+            if (!$mapApplyData->wasChanged()) {
+                $mapApplyData->update([
+                    'sent_to_admin_at' => now()
+                ]);
+            }
 
             if ($request->hasFile('files')) {
                 $this->uploadDocuments($request, $mapApplyData);

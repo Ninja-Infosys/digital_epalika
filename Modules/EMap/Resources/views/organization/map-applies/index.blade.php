@@ -30,7 +30,7 @@
                                 <td>{{$mapApply->construction_type->label()}}</td>
                                 <td>
                                     <a class="btn btn-sm btn-primary" href="{{route('organization.admin.mapApply.show', $mapApply)}}">
-                                        <i class="fa fa-eye"></i>
+                                        <i class="fa fa-pen"></i>
                                     </a>
                                     <a class="btn btn-sm btn-warning" href="{{route('organization.admin.updateStatus', $mapApply)}}">
                                         <i class="fa {{$mapApply->sent_to_admin_at==null ? 'fa-check':'fa-times'}}"></i>
