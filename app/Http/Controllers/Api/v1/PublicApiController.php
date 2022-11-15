@@ -94,7 +94,7 @@ class PublicApiController extends Controller
      */
     public function getDataFromMainModule(Collection $data): void
     {
-        $setting = OfficeSetting::latest()->firstOrFail();
+        $setting = $this->getOfficeSetting();
 
         $data->push([
             'setting' => SettingResource::make($setting),

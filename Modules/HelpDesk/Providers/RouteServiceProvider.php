@@ -35,5 +35,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->group(module_path('HelpDesk', '/Routes/api.php'));
+        Route::prefix('api/v1/helpdesk')
+            ->middleware('api')
+            ->group(module_path('HelpDesk', '/Routes/api/v1/public_api.php'));
     }
 }

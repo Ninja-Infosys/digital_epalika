@@ -29,12 +29,12 @@ class Branch extends Model
 
     public function branch(): BelongsTo
     {
-        return $this->belongsTo(Branch::class);
+        return $this->belongsTo(__CLASS__);
     }
 
     public function branches(): HasMany
     {
-        return $this->hasMany(Branch::class);
+        return $this->hasMany(__CLASS__);
     }
 
     public function services(): HasMany
