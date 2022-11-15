@@ -7,7 +7,7 @@
 लुम्बिनी प्रदेश,नेपाल</span></strong></div>
 
     <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:0rem; text-align:center">
-        <div class="photo" style="border:1px solid black; height:6rem; width:6rem">&nbsp;
+        <div class="photo" style="border:1px solid black; height:8rem; width:7rem">&nbsp;
             <h5>फोटो</h5>
         </div>
     </div>
