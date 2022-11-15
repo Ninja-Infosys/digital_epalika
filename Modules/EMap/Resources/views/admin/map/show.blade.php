@@ -97,7 +97,6 @@
                                                         type: 'html',
                                                         documentTitle: '{{$noticeType->label()}}',
                                                         showModal: true,
-                                                        targetStyles: ['*'],
                                                         honorMarginPadding: false,
                                                         modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'
                                                })"
@@ -106,7 +105,7 @@
                                             @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
                                                 <form
                                                     action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
-                                                    method="POST" class="show_reject_confirm">
+                                                    method="POST"  class="{{empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks) ? 'show_reject_confirm':'show_accept_confirm'}}">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" class="reject_remarks" name="remarks">
