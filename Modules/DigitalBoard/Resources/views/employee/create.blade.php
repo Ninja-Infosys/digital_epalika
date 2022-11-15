@@ -39,7 +39,7 @@
                         @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong>कर्मचारी  विवरण </strong>
+                                <strong>कर्मचारी विवरण </strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
@@ -125,7 +125,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="position" class="form-label">स्थान </label>
                                     <input
                                         type="text"
@@ -139,7 +139,47 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="is_employee" class="form-label">कर्मचारीको प्रकार *</label>
 
+                                    <select class="form-control @error('is_employee') is-invalid @enderror"
+                                            name="is_employee" id="is_employee">
+                                        <option value="1" {{old('is_employee') === 1 ? 'selected':''}}>कर्मचारी</option>
+                                        <option value="0" {{old('is_employee')===0 ? 'selected':''}}>जनप्रतिनिधि
+                                        </option>
+                                    </select>
+                                    @error('is_employee')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="show_to_index" class="form-label">गृहपृष्ठमा देखाउनुहोस् *</label>
+
+                                    <select class="form-control @error('show_to_index') is-invalid @enderror"
+                                            name="show_to_index" id="show_to_index">
+                                        <option value="1" {{old('show_to_index') === 1 ? 'selected':''}}>देखाउने
+                                        </option>
+                                        <option value="0" {{old('show_to_index')===0 ? 'selected':''}}>नदेखाउने
+                                        </option>
+                                    </select>
+                                    @error('show_to_index')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="show_to_mobile_app" class="form-label">मोबाइलमा देखाउनुहोस् *</label>
+
+                                    <select class="form-control @error('show_to_mobile_app') is-invalid @enderror"
+                                            name="show_to_mobile_app" id="show_to_mobile_app">
+                                        <option value="1" {{old('show_to_mobile_app') === 1 ? 'selected':''}}>देखाउने
+                                        </option>
+                                        <option value="0" {{old('show_to_mobile_app')===0 ? 'selected':''}}>नदेखाउने
+                                        </option>
+                                    </select>
+                                    @error('show_to_mobile_app')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary">

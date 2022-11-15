@@ -31,7 +31,7 @@ class Slider extends Model
         return Storage::disk('public')->url($this->attributes['image']);
     }
 
-    public function setImageAttribute($value)
+    public function setImageAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['image'] = $value->store('slider', 'public');

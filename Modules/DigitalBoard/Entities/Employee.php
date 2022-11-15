@@ -30,6 +30,9 @@ class Employee extends Model
         'phone',
         'position',
         'status',
+        'is_employee',
+        'show_to_mobile_app',
+        'show_to_index',
     ];
 
     public function getPhotoUrlAttribute(): string
@@ -39,10 +42,50 @@ class Employee extends Model
             : asset('images/user_icon.jpg');
     }
 
-    public function setPhotoAttribute($value)
+    public function setPhotoAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['photo'] = $value->store('employee/'.Str::slug($this->attributes['name'], '_'), 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['photo'] = $value->store('employee/' . Str::slug($this->attributes['name'], '_'), 'public');
         }
+    }
+
+    public function scopeActive($builder)
+    {
+        return $builder->where('status', 1);
+    }
+
+    public function scopeInactive($builder)
+    {
+        return $builder->where('status', 0);
+    }
+
+    public function scopeEmployee($builder)
+    {
+        return $builder->where('is_employee', 1);
+    }
+
+    public function scopePeopleRepresentative($builder)
+    {
+        return $builder->where('is_employee', 0);
+    }
+
+    public function scopeShowForMobileAppRequest($builder)
+    {
+        return $builder->where('show_to_mobile_app', 1);
+    }
+
+    public function scopeHideForMobileAppRequest($builder)
+    {
+        return $builder->where('show_to_mobile_app', 0);
+    }
+
+    public function scopeShowInIndex($builder)
+    {
+        return $builder->where('show_to_index', 1);
+    }
+
+    public function scopeHideInIndex($builder)
+    {
+        return $builder->where('show_to_index', 0);
     }
 }
