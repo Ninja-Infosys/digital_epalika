@@ -18,7 +18,7 @@ return array(
     'Modules\\DigitalBoard\\Http\\Controllers\\Admin\\NewsController' => $baseDir . '/Http/Controllers/Admin/NewsController.php',
     'Modules\\DigitalBoard\\Http\\Controllers\\Admin\\NoticeController' => $baseDir . '/Http/Controllers/Admin/NoticeController.php',
     'Modules\\DigitalBoard\\Http\\Controllers\\Admin\\VideoController' => $baseDir . '/Http/Controllers/Admin/VideoController.php',
-    'Modules\\DigitalBoard\\Http\\Controllers\\Api\\DigitalBoardApiController' => $baseDir . '/Http/Controllers/Api/DigitalBoardApiController.php',
+    'Modules\\DigitalBoard\\Http\\Controllers\\Api\\DigitalBoardApiController' => $baseDir . '/Http/Controllers/api/DigitalBoardApiController.php',
     'Modules\\DigitalBoard\\Http\\Requests\\Employee\\StoreEmployeeRequest' => $baseDir . '/Http/Requests/Employee/StoreEmployeeRequest.php',
     'Modules\\DigitalBoard\\Http\\Requests\\Employee\\UpdateEmployeeRequest' => $baseDir . '/Http/Requests/Employee/UpdateEmployeeRequest.php',
     'Modules\\DigitalBoard\\Http\\Requests\\Notice\\StoreNoticeRequest' => $baseDir . '/Http/Requests/Notice/StoreNoticeRequest.php',
