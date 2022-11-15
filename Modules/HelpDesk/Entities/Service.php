@@ -38,16 +38,16 @@ class Service extends Model
 
     public function serviceDocuments(): HasMany
     {
-        return $this->hasMany(ServiceDocument::class);
+        return $this->hasMany(ServiceDocument::class)->orderBy('position');
     }
 
     public function serviceProcesses(): HasMany
     {
-        return $this->hasMany(ServiceProcess::class);
+        return $this->hasMany(ServiceProcess::class)->orderBy('position');
     }
 
     public function serviceEmployees(): HasMany
     {
-        return $this->hasMany(ServiceEmployee::class);
+        return $this->hasMany(ServiceEmployee::class)->orderBy('position');
     }
 }

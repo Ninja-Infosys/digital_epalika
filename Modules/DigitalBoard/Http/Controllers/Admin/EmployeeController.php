@@ -3,6 +3,7 @@
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Http\Requests\Employee\StoreEmployeeRequest;
@@ -106,20 +107,20 @@ class EmployeeController extends Controller
         toast(' कर्मचारी सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
-    }
+        }
 
-    public function updateEmployeeStatus(Employee $employee)
-    {
-        abort_if(
-            Gate::denies('employee_access'),
-            403,
-            'You are not allowed to employee access'
-        );
-        $employee->update([
-            'status' => ! $employee->status,
-        ]);
-        toast('कर्मचारी स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        public function updateEmployeeStatus(Employee $employee): RedirectResponse
+        {
+            abort_if(
+                Gate::denies('employee_access'),
+                403,
+                'You are not allowed to employee access'
+            );
+            $employee->update([
+                'status' => !$employee->status,
+            ]);
+            toast('कर्मचारी स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return back();
-    }
+            return back();
+        }
 }

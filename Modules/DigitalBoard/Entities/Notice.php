@@ -50,4 +50,29 @@ class Notice extends Model
     {
         return $this->belongsTo(FiscalYear::class);
     }
+
+    public function scopeShowInIndex($builder)
+    {
+        return $builder->where('show_on_index', 1);
+    }
+
+    public function scopeHideInIndex($builder)
+    {
+        return $builder->where('show_on_index', 0);
+    }
+
+    public function scopeNullClosedAt($builder)
+    {
+        return $builder->whereNull('closed_at');
+    }
+
+    public function scopeNotice($builder)
+    {
+        return $builder->where('type', 'Notice');
+    }
+
+    public function scopeNews($builder)
+    {
+        return $builder->where('type', "News");
+    }
 }

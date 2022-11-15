@@ -24,6 +24,9 @@ class UpdateEmployeeRequest extends FormRequest
             'phone' => ['nullable', Rule::unique('employees', 'phone')->withoutTrashed()->ignore($this->employee)],
             'position' => ['nullable', 'integer'],
             'status' => ['nullable', 'boolean'],
+            'is_employee' => ['required', 'boolean'],
+            'show_to_mobile_app' => ['required', 'boolean'],
+            'show_to_index' => ['required', 'boolean'],
         ];
     }
 

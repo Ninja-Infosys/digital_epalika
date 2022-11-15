@@ -3,6 +3,7 @@
 namespace Modules\HelpDesk\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Modules\HelpDesk\Entities\Service;
 use Modules\HelpDesk\Entities\ServiceEmployee;
 use Modules\HelpDesk\Http\Requests\ServiceEmployee\StoreServiceEmployeeRequest;
@@ -19,7 +20,7 @@ class ServiceEmployeeController extends Controller
         return view('helpdesk::admin.service_employee.index', compact('service'));
     }
 
-    public function store(StoreServiceEmployeeRequest $request, Service $service)
+    public function store(StoreServiceEmployeeRequest $request, Service $service): RedirectResponse
     {
         $service->serviceEmployees()->create($request->validated());
 
@@ -40,7 +41,7 @@ class ServiceEmployeeController extends Controller
 
     public function update(UpdateServiceEmployeeRequest $request, Service $service, ServiceEmployee $serviceEmployee)
     {
-        if ($request->hasFile('photo') && $serviceEmployee->photo) {
+        if ($serviceEmployee->photo && $request->hasFile('photo')) {
             $this->deleteFile($serviceEmployee->photo);
         }
         $serviceEmployee->update($request->validated());
@@ -50,7 +51,7 @@ class ServiceEmployeeController extends Controller
         return redirect(route('admin.helpDesk.service.serviceEmployee.index', $service));
     }
 
-    public function destroy(Service $service, ServiceEmployee $serviceEmployee)
+    public function destroy(Service $service, ServiceEmployee $serviceEmployee): RedirectResponse
     {
         if ($serviceEmployee->photo) {
             $this->deleteFile($serviceEmployee->photo);
