@@ -51,19 +51,19 @@
 
                                         </div>
                                     @endforeach
-                                        <div class="row">
-                                            <div class="col-md-4 menu_content">
-                                                <ul>
-                                                    <li>
-                                                        <i class="fa fa-angle-right px-1 text-primary"></i>
-                                                        <a href="#registration-and-fees">
-                                                            नक्सा दर्ता तथा दस्तुर सम्बन्धि
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
+                                    <div class="row">
+                                        <div class="col-md-4 menu_content">
+                                            <ul>
+                                                <li>
+                                                    <i class="fa fa-angle-right px-1 text-primary"></i>
+                                                    <a href="#registration-and-fees">
+                                                        नक्सा दर्ता तथा दस्तुर सम्बन्धि
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
+
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -104,16 +104,19 @@
                                                 ></i>
                                             </div>
                                             @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
-
                                                 <form
                                                     action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
                                                     method="POST" class="show_reject_confirm">
                                                     @csrf
                                                     @method('PUT')
-                                                    <input type="hidden" id="reject_remarks" name="remarks">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
+                                                    <input type="hidden" class="reject_remarks" name="remarks">
+
+                                                        @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
+                                                            <i class="fa fa-times mx-2"></i>
+                                                        @else
+                                                            <i class="fa fa-check mx-2"></i>
+                                                        @endif
+
                                                 </form>
                                             @endif
                                         @else
@@ -134,28 +137,28 @@
                                 </div>
                             </section>
                         @endforeach
-                            <section id="registration-and-fees">
-                                <h4 class="mt-2"> नक्सा दर्ता तथा दस्तुर सम्बन्धि </h4>
-                                <div
-                                    class="card-body mt-2 {{!empty($mapApply->mapRegistration) ? 'border_black':'border_yellow'}}">
-                                    <div>
-                                        @if(empty($mapApply->mapRegistration))
+                        <section id="registration-and-fees">
+                            <h4 class="mt-2"> नक्सा दर्ता तथा दस्तुर सम्बन्धि </h4>
+                            <div
+                                class="card-body mt-2 {{!empty($mapApply->mapRegistration) ? 'border_black':'border_yellow'}}">
+                                <div>
+                                    @if(empty($mapApply->mapRegistration))
 
-                                            <i class="fa fa-exclamation-triangle map_template_exclamation"
-                                               data-bs-toggle="tooltip" data-bs-placement="right"
-                                               title="नक्सा दर्ता तथा दस्तुर सेभ भएको छैन"></i>
+                                        <i class="fa fa-exclamation-triangle map_template_exclamation"
+                                           data-bs-toggle="tooltip" data-bs-placement="right"
+                                           title="नक्सा दर्ता तथा दस्तुर सेभ भएको छैन"></i>
 
-                                        @endif
+                                    @endif
 
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        @if(!empty($mapApply->mapRegistration))
-                                            <a href="{{route('emap.admin.map.map-apply.map-registration.edit',[$mapApply,$mapApply->mapRegistration])}}"
-                                               class="mx-2">
-                                                <i class="fa fa-pen"></i>
-                                            </a>
-                                            <div class="btn-group mb-3 ">
-                                                <i class="fa fa-print text-primary" onclick=" printJS({
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    @if(!empty($mapApply->mapRegistration))
+                                        <a href="{{route('emap.admin.map.map-apply.map-registration.edit',[$mapApply,$mapApply->mapRegistration])}}"
+                                           class="mx-2">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                        <div class="btn-group mb-3 ">
+                                            <i class="fa fa-print text-primary" onclick=" printJS({
                                                         printable: 'print-registration-fees',
                                                         type: 'html',
                                                         documentTitle: 'नक्सा दर्ता तथा दस्तुर',
@@ -164,20 +167,20 @@
                                                         honorMarginPadding: false,
                                                         modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'
                                                })"
-                                                ></i>
-                                            </div>
-                                        @else
-                                            <a href="{{route('emap.admin.map.map-apply.map-registration.create',$mapApply)}}">
-                                                <i class="fa fa-plus"></i>
-                                            </a>
-                                        @endif
-                                    </div>
-                                    <div id="print-registration-fees">
-                                        @includeIf('emap::admin.map.map-registration.print')
-                                    </div>
-
+                                            ></i>
+                                        </div>
+                                    @else
+                                        <a href="{{route('emap.admin.map.map-apply.map-registration.create',$mapApply)}}">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    @endif
                                 </div>
-                            </section>
+                                <div id="print-registration-fees">
+                                    @includeIf('emap::admin.map.map-registration.print')
+                                </div>
+
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
@@ -208,9 +211,10 @@
                     }
 
                 })
+
                     .then((data) => {
                         if (data.value) {
-                            $("#reject_remarks").val(data.value)
+                            $(".reject_remarks").val(data.value)
                             form.submit();
                         }
                     });

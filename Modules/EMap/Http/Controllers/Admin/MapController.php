@@ -58,7 +58,9 @@ class MapController extends Controller
     public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
     {
 
-        $data = ApplyMapNotice::where('map_apply_id',$mapApply->id)->where('file_type',$noticeTypeEnum)->first();
+//        dd($request->input('remarks'));
+//        dd($noticeTypeEnum->value);
+        $data = ApplyMapNotice::where('map_apply_id',$mapApply->id)->where('file_type',$noticeTypeEnum->value)->first();
         if ($data->rejected_at === null) {
             $data->update([
                 'rejected_at' => now(),
@@ -70,6 +72,8 @@ class MapController extends Controller
                 'remarks' => null,
             ]);
         }
+
+        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($data));
 
         toast('आवेदन सफलतापूर्वक अस्वीकार गरियो', 'success');
 
