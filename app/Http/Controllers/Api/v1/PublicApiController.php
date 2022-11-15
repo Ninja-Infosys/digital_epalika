@@ -102,4 +102,5 @@ class PublicApiController extends Controller
             'sliders' => $this->slider(),
         ]);
     }
+
 }
