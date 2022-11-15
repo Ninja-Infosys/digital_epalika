@@ -5,7 +5,9 @@ namespace Modules\EMap\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use App\Models\Address\District;
 use App\Models\User;
+use App\Notifications\ApplyMapNoticeNotification;
 use App\Notifications\MapApplicationNotification;
+use App\Notifications\MapApplyNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -98,7 +100,7 @@ class MapApplyController extends Controller
             return $mapApplyData;
         });
 
-        Notification::send(User::all(), new MapApplicationNotification($mapApplyData));
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
 
         toast('फाईल सफलता पुर्बक थपियो', 'success');
 
@@ -118,10 +120,11 @@ class MapApplyController extends Controller
 
     public function updateStatus(MapApply $mapApply)
     {
-        $mapApply->update([
+         $mapApply->update([
             'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
         ]);
 
+        Notification::send(User::all(), new MapApplyNotification($mapApply));
         toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
         return back();
 
@@ -134,6 +137,8 @@ class MapApplyController extends Controller
         $data->update([
             'sent_to_admin_at' => empty($data->sent_to_admin_at) ? now() : null
         ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($data));
         toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
 
         return back();

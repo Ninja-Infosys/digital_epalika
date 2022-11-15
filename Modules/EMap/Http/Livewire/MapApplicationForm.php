@@ -7,7 +7,11 @@ use App\Models\Settings\OfficeSetting;
 use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
+use App\Notifications\ApplyMapNoticeNotification;
+use App\Notifications\MapApplicationNotification;
+use App\Notifications\MapApplyNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\MapApply;
@@ -336,7 +340,7 @@ class MapApplicationForm extends Component
     public function saveFormData(): void
     {
         $this->validate();
-        DB::transaction(function () {
+       DB::transaction(function () {
             if ($this->applyMap['structure_type']) {
                 $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
 
@@ -358,7 +362,13 @@ class MapApplicationForm extends Component
             $mapApply->houseOwner()->create($this->houseOwner);
 
             $mapApply->applicantDetail()->create($this->applicantDetail);
+
+           Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
         });
+
+
+
+
 
         $this->reset('applyMap', 'landDescription', 'landOwner', 'houseOwner', 'applicantDetail');
 

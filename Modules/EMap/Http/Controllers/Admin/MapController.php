@@ -38,8 +38,15 @@ class MapController extends Controller
         return view('emap::admin.map.index', compact('maps', 'application_types'));
     }
 
+
+    public function noticeList(MapApply $mapApply)
+    {
+        return view('emap::admin.map.notice-list', compact('mapApply'));
+    }
+
     public function show(MapApply $mapApply)
     {
+
         $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
             $query->latest();
         }]);
@@ -48,15 +55,17 @@ class MapController extends Controller
         return view('emap::admin.map.show', compact('mapApply', 'districts'));
     }
 
-    public function rejectApplication(Request $request, MapApply $mapApply, ApplyMapNotice $applyMapNotice): \Illuminate\Routing\Redirector|Application|RedirectResponse
+    public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
     {
-        if ($applyMapNotice->rejected_at === null) {
-            $applyMapNotice->update([
+
+        $data = ApplyMapNotice::where('map_apply_id',$mapApply->id)->where('file_type',$noticeTypeEnum)->first();
+        if ($data->rejected_at === null) {
+            $data->update([
                 'rejected_at' => now(),
                 'remarks' => $request->input('remarks'),
             ]);
         } else {
-            $applyMapNotice->update([
+            $data->update([
                 'rejected_at' => null,
                 'remarks' => null,
             ]);
@@ -306,7 +315,6 @@ class MapController extends Controller
             return $mapApplyData;
         });
 
-        Notification::send($mapApply->organization, new ApplyMapNoticeNotification($mapApplyData));
         toast('फाईल सफलता पुर्बक थपियो', 'success');
 
         return back();

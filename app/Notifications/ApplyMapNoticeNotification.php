@@ -33,7 +33,7 @@ class ApplyMapNoticeNotification extends Notification
     {
         return [
             'map_apply_id' => $this->applyMapNotice->map_apply_id,
-            'file' => $this->applyMapNotice->file,
+            'data' => $this->applyMapNotice->data,
             'file_type' => $this->applyMapNotice->file_type,
         ];
     }

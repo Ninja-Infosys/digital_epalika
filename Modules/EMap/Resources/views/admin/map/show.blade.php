@@ -103,11 +103,25 @@
                                                })"
                                                 ></i>
                                             </div>
+                                            @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
+
+                                                <form
+                                                    action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
+                                                    method="POST" class="show_reject_confirm">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" id="reject_remarks" name="remarks">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         @else
                                             <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
                                                 <i class="fa fa-plus"></i>
                                             </a>
                                         @endif
+
                                     </div>
                                     <div
                                         id="print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}">
