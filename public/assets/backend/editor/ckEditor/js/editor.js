@@ -13,7 +13,7 @@ const wysiwygareaAvailable = isWysiwygareaAvailable(),
 $(".ckEditor").each(function () {
     const editorElement = CKEDITOR.document.getById(this.id);
     const editor = CKEDITOR.replace(this.id, {
-        height: 100,
+        height: 600,
         filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
         filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+csrf_token,
         filebrowserBrowseUrl: '/laravel-filemanager?type=Files',

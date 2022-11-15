@@ -92,29 +92,24 @@
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                             <div class="btn-group mb-3 ">
-                                                <i class="fa fa-print text-primary" onclick=" printJS({
-                                                        printable: 'print{{\Illuminate\Support\Str::limit($value,10,"pt-".$loop->iteration)}}',
-                                                        type: 'html',
-                                                        documentTitle: '{{$noticeType->label()}}',
-                                                        showModal: true,
-                                                        honorMarginPadding: false,
-                                                        modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'
-                                               })"
+                                                <i class="fa fa-print text-primary"
+                                                   onclick="print('print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}')"
                                                 ></i>
                                             </div>
                                             @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
                                                 <form
                                                     action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
-                                                    method="POST"  class="{{empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks) ? 'show_reject_confirm':'show_accept_confirm'}}">
+                                                    method="POST"
+                                                    class="{{empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks) ? 'show_reject_confirm':'show_accept_confirm'}}">
                                                     @csrf
                                                     @method('PUT')
                                                     <input type="hidden" class="reject_remarks" name="remarks">
 
-                                                        @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
-                                                            <i class="fa fa-times mx-2"></i>
-                                                        @else
-                                                            <i class="fa fa-check mx-2"></i>
-                                                        @endif
+                                                    @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
+                                                        <i class="fa fa-times mx-2"></i>
+                                                    @else
+                                                        <i class="fa fa-check mx-2"></i>
+                                                    @endif
 
                                                 </form>
                                             @endif
@@ -126,7 +121,8 @@
 
                                     </div>
                                     <div
-                                        id="print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}">
+                                        id="print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}"
+                                        class="ckEditor">
                                         {!!  $mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->data
                                      ??  $mapApply->template_data
                                      ->where('for', \Modules\EMap\Enums\NoticeTypeEnum::tryFrom($noticeType->value))?->first()['data']
@@ -157,7 +153,8 @@
                                             <i class="fa fa-pen"></i>
                                         </a>
                                         <div class="btn-group mb-3 ">
-                                            <i class="fa fa-print text-primary" onclick=" printJS({
+                                            <i class="fa fa-print text-primary"
+                                               onclick=" printJS({
                                                         printable: 'print-registration-fees',
                                                         type: 'html',
                                                         documentTitle: 'नक्सा दर्ता तथा दस्तुर',
@@ -187,6 +184,8 @@
     </div>
 
     @push('scripts')
+        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/ckEditor/js/print.js')}}"></script>
         <script>
             $('.show_reject_confirm').click(function (event) {
                 const form = $(this).closest("form");
@@ -238,6 +237,13 @@
                         }
                     });
             });
+        </script>
+
+        <script>
+            function print(editorName) {
+                const editor = CKEDITOR.instances[editorName];
+                editor.execCommand('print');
+            }
         </script>
     @endpush
 @endsection
