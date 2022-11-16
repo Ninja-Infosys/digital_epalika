@@ -31,35 +31,58 @@
                     <table class="table table-sm mb-0 table-striped table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">क्र.सं.</th>
+
                             <th scope="col">निबेदन/प्रतिबेदनको किसिम</th>
                             @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $formFiller)
-                            <th scope="col">{{$formFiller->label()??''}}</th>
+                                <th scope="col">{{$formFiller->label()??''}}</th>
                             @endforeach
                             <th scope="col">#</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeTypeEnum)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$noticeTypeEnum->label() ?? ''}}</td>
-                                @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $formFillerData)
-                                    <td>
-                                        @if($noticeTypeEnum->type() === $formFillerData)
-                                            @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum))
-                                                <i class="fa fa-check"></i>
+                            @if($applicationFormTypeEnum===\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED)
+                                @if($noticeTypeEnum->showInMapVerification())
+                                    <tr>
+                                        <td>{{$noticeTypeEnum->label() ?? ''}}</td>
+                                        @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $formFillerData)
+                                            <td>
+                                                @if($noticeTypeEnum->type() === $formFillerData)
+                                                    @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum))
+                                                        <i class="fa fa-check"></i>
+                                                    @endif
+                                                @endif
+                                            </td>
+                                        @endforeach
+                                        <td>
+                                            <a href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,'#'.\Illuminate\Support\Str::limit($noticeTypeEnum->value,10,'mmm')])}}"
+                                               type="button" class="btn btn-info btn-sm text-white">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @else
+                                <tr>
+
+                                    <td>{{$noticeTypeEnum->label() ?? ''}}</td>
+                                    @foreach(\Modules\EMap\Enums\EMapFormFillerTypeEnum::cases() as $formFillerData)
+                                        <td>
+                                            @if($noticeTypeEnum->type() === $formFillerData)
+                                                @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeTypeEnum))
+                                                    <i class="fa fa-check"></i>
+                                                @endif
                                             @endif
-                                        @endif
+                                        </td>
+                                    @endforeach
+                                    <td>
+                                        <a href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,'#'.\Illuminate\Support\Str::limit($noticeTypeEnum->value,10,'mmm')])}}"
+                                           type="button" class="btn btn-info btn-sm text-white">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                     </td>
-                                @endforeach
-                                <td>
-                                    <a href="{{route('emap.admin.map.mapApply.show', [$mapApply,'#'.\Illuminate\Support\Str::limit($noticeTypeEnum->value,10,'mmm')])}}"
-                                       type="button" class="btn btn-info btn-sm text-white">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>

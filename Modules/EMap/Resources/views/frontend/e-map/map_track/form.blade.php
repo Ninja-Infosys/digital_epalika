@@ -95,7 +95,7 @@
 
                 $(document.body).delegate('#otp_form','submit', function (event) {
                     event.preventDefault();
-                    
+
                     $.ajax({
                         type: "post",
                         data: {
@@ -105,7 +105,8 @@
                         url: "{{route('store-emap-template-data',[$mapApply,$noticeTypeEnum])}}",
                         success: function (resp) {
                             $("#otpVerificationModal").modal('toggle');
-                            $("#otp").val('')
+                            $("#otp").val('');
+                            toastr.success(resp.alert_message);
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $("#error_message").html(XMLHttpRequest.responseJSON.message);
@@ -116,5 +117,7 @@
             });
         </script>
     @endpush
+
+
 @endsection
 

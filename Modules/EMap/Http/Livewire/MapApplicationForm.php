@@ -54,6 +54,7 @@ class MapApplicationForm extends Component
     public $convertedData = 0;
 
     public array $applyMap = [
+        'application_type'=>null,
         'construction_type' => null,
         'usage' => null,
         'building_category' => null,
@@ -250,6 +251,7 @@ class MapApplicationForm extends Component
     }
 
     protected array $applyMapValidations = [
+        'applyMap.application_type'=>['required'],
         'applyMap.organization_id' => ['required'],
         'applyMap.construction_type' => ['required'],
         'applyMap.usage' => ['required'],
@@ -382,6 +384,7 @@ class MapApplicationForm extends Component
     public function messages(): array
     {
         return [
+            'applyMap.application_type.required'=>'अनिवार्य छ',
             'applyMap.construction_type.required' => 'निर्माण कार्यको किसिम अनिवार्य छ |',
             'applyMap.usage.required' => 'प्रयोजन अनिवार्य छ |',
             'applyMap.building_category.required' => ' भवनको वर्गीकरण अनिवार्य छ|',

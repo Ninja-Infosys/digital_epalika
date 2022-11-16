@@ -51,7 +51,7 @@
                                     <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                                     <td>{{$mapApply->organization->name ?? ''}}</td>
                                     <td>
-                                        <a href="{{route('emap.admin.map.mapApply.noticeList', $mapApply)}}"
+                                        <a href="{{route('emap.admin.map.mapApply.noticeList', [$mapApply,$applicationFormTypeEnum])}}"
                                            type="button" class="btn btn-info btn-sm text-white">
                                             <i class="fa fa-eye"></i>
                                         </a>

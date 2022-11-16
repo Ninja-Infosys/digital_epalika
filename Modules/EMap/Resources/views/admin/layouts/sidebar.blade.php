@@ -12,14 +12,33 @@
     </a>
 </li>
 @endcan
-@can('mapFee_access')
-<li class="{{request()->is('admin/emap/map/mapApply') ? 'active' : ''}}">
-    <a href="{{route('emap.admin.map.mapApply.index')}}">
+<li class="">
+    <a href="#sidebarMaptype"
+       data-bs-toggle="collapse">
         <i class="fa fa-map"></i>
         <span>नक्सा</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
+    <div class="collapse {{request()->is('admin/emap/setting/*') ? 'show' : ''}}"
+         id="sidebarMaptype">
+        <ul class="nav-second-level">
+            @can('mapFee_access')
+            <li class="{{request()->is('admin/emap/map/mapApply') ? 'active' : ''}}">
+                <a href="{{route('emap.admin.map.mapApply.index',\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION)}}">
+                    <span> नक्सा दर्ता </span>
+                </a>
+            </li>
+            @endcan
+            <li class="">
+                <a href="{{route('emap.admin.map.mapApply.index',\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED)}}">
+                    <span> नक्सा प्रमाणित</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
-@endcan
 <li class="{{request()->is('admin/emap/setting/*') ? 'active' : ''}}">
     <a href="#sidebarEMapSetting"
        {{request()->is('admin/emap/setting/*') ? 'aria-expanded=true' : ''}}

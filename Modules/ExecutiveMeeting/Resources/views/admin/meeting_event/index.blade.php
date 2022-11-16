@@ -57,11 +57,11 @@
                                     <td>{{$meetingEvent->start_date}}({{$meetingEvent->en_start_date?->toDateString()}})</td>
                                     <td>{{$meetingEvent->end_date}}({{$meetingEvent->en_end_date?->toDateString()}})</td>
 
-                                    <td>
+                                    <td width="90">
                                         @can('executiveCommittee_edit')
                                             <a href="{{route('admin.executiveMeeting.meetingEvent.edit',[$event_for,$meetingEvent])}}"
                                                class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('executiveCommittee_delete')
@@ -70,7 +70,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan
