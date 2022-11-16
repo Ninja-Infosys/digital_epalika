@@ -101,9 +101,9 @@ trait ProprietorTemplateTrait
         });
     }
 
-    public function getSpecificTemplateData(TemplateTypeEnum $templateTypeEnum): string
+    public function getSpecificTemplateData($type): string
     {
-        $businessTemplate = BusinessRegistrationTemplate::where('for', $templateTypeEnum->value)->first();
+        $businessTemplate = BusinessRegistrationTemplate::where('for', $type)->first();
         if ($businessTemplate) {
             return $this->getData($businessTemplate->data);
         }

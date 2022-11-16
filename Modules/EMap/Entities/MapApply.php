@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\EMap\Enums\ApplicationFormTypeEnum;
 use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
@@ -53,12 +54,14 @@ class MapApply extends Model
         'consultant_mobile_no',
         'consultant_nec_no',
         'sent_to_admin_at',
+        'application_type'
     ];
 
     protected $casts = [
         'construction_type' => TypeOfConstructionWorkEnum::class,
         'usage' => BuildingUsageEnum::class,
         'building_category' => CategorizationEnum::class,
+        'application_type'=>ApplicationFormTypeEnum::class
     ];
 
     public function setConsultantSignatureAttribute($value): void
@@ -166,6 +169,11 @@ class MapApply extends Model
     public function scopeSentToAdmin($query)
     {
         return $query->whereNotNull('sent_to_admin_at');
+    }
+
+    public function scopeIsMapVerified($query,ApplicationFormTypeEnum $applicationFormTypeEnum)
+    {
+        return $query->where('application_type',$applicationFormTypeEnum->value);
     }
 
     public function scopeNotSentToAdmin($query)

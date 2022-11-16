@@ -31,26 +31,50 @@
                             </button>
                             <ul class="dropdown-menu mega-menu-content" aria-labelledby="defaultDropdown">
                                 <li>
-                                    @foreach(\Modules\EMap\Enums\NoticeTypeEnum::getAllValues()->chunk(6) as $noticeTypeEnums)
-                                        <div class="row">
-                                            @foreach($noticeTypeEnums->chunk(2) as $noticeTypeEnum)
-                                                <div class="col-md-4 menu_content">
-                                                    <ul>
-                                                        @foreach($noticeTypeEnum as $value)
-                                                            <li>
-                                                                <i class="fa fa-angle-right px-1 text-primary"></i>
-                                                                <a href="#{{\Illuminate\Support\Str::limit($value,10,'mmm')}}">
-                                                                    {{\Modules\EMap\Enums\NoticeTypeEnum::tryFrom($value)->label()}}
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
+                                    @if($applicationFormTypeEnum===\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED)
+                                        @foreach(\Modules\EMap\Enums\NoticeTypeEnum::getAllVerifiedField()->chunk(6) as $noticeTypeEnums)
+                                            <div class="row">
+                                                @foreach($noticeTypeEnums->chunk(2) as $noticeTypeEnum)
+                                                    <div class="col-md-4 menu_content">
+                                                        <ul>
+                                                            @foreach($noticeTypeEnum as $value)
+                                                                <li>
+                                                                    <i class="fa fa-angle-right px-1 text-primary"></i>
+                                                                    <a href="#{{\Illuminate\Support\Str::limit($value,10,'mmm')}}">
+                                                                        {{\Modules\EMap\Enums\NoticeTypeEnum::tryFrom($value)->label()}}
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
 
-                                                    </ul>
-                                                </div>
-                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endforeach
 
-                                        </div>
-                                    @endforeach
+                                            </div>
+                                        @endforeach
+
+                                    @else
+                                        @foreach(\Modules\EMap\Enums\NoticeTypeEnum::getAllValues()->chunk(6) as $noticeTypeEnums)
+                                            <div class="row">
+                                                @foreach($noticeTypeEnums->chunk(2) as $noticeTypeEnum)
+                                                    <div class="col-md-4 menu_content">
+                                                        <ul>
+                                                            @foreach($noticeTypeEnum as $value)
+                                                                <li>
+                                                                    <i class="fa fa-angle-right px-1 text-primary"></i>
+                                                                    <a href="#{{\Illuminate\Support\Str::limit($value,10,'mmm')}}">
+                                                                        {{\Modules\EMap\Enums\NoticeTypeEnum::tryFrom($value)->label()}}
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+
+                                                        </ul>
+                                                    </div>
+                                                @endforeach
+
+                                            </div>
+                                        @endforeach
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-4 menu_content">
                                             <ul>
@@ -71,66 +95,133 @@
 
                     <div data-bs-spy="scroll" data-bs-offset="0">
                         @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeType)
-                            <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
-                                <h4 class="mt-2"> {{$noticeType->label()}}</h4>
-                                <div
-                                    class="card-body mt-2 {{$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType) ? 'border_black':'border_yellow'}}">
-                                    <div>
-                                        @if(!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
 
-                                            <i class="fa fa-exclamation-triangle map_template_exclamation"
-                                               data-bs-toggle="tooltip" data-bs-placement="right"
-                                               title="{{$noticeType->label()}} सेभ भएको छैन"></i>
+                            @if($applicationFormTypeEnum===\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED)
+                                @if($noticeType->showInMapVerification())
+                                    <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
+                                        <h4 class="mt-2"> {{$noticeType->label()}}</h4>
+                                        <div
+                                            class="card-body mt-2 {{$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType) ? 'border_black':'border_yellow'}}">
+                                            <div>
+                                                @if(!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
 
-                                        @endif
+                                                    <i class="fa fa-exclamation-triangle map_template_exclamation"
+                                                       data-bs-toggle="tooltip" data-bs-placement="right"
+                                                       title="{{$noticeType->label()}} सेभ भएको छैन"></i>
 
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
-                                            <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}"
-                                               class="mx-2">
-                                                <i class="fa fa-pen"></i>
-                                            </a>
-                                            <div class="btn-group mb-3 ">
-                                                <i class="fa fa-print text-primary"
-                                                   onclick="print('print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}')"
-                                                ></i>
+                                                @endif
+
                                             </div>
-                                            @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
-                                                <form
-                                                    action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
-                                                    method="POST"
-                                                    class="{{empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks) ? 'show_reject_confirm':'show_accept_confirm'}}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="hidden" class="reject_remarks" name="remarks">
+                                            <div class="d-flex justify-content-end">
+                                                @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
+                                                    <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}"
+                                                       class="mx-2">
+                                                        <i class="fa fa-pen"></i>
+                                                    </a>
+                                                    <div class="btn-group mb-3 ">
+                                                        <i class="fa fa-print text-primary"
+                                                           onclick="print('print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}')"
+                                                        ></i>
+                                                    </div>
+                                                    @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
+                                                        <form
+                                                            action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
+                                                            method="POST"
+                                                            class="{{empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks) ? 'show_reject_confirm':'show_accept_confirm'}}">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="hidden" class="reject_remarks" name="remarks">
 
-                                                    @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
-                                                        <i class="fa fa-times mx-2"></i>
-                                                    @else
-                                                        <i class="fa fa-check mx-2"></i>
+                                                            @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
+                                                                <i class="fa fa-times mx-2"></i>
+                                                            @else
+                                                                <i class="fa fa-check mx-2"></i>
+                                                            @endif
+
+                                                        </form>
                                                     @endif
+                                                @else
+                                                    <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                @endif
 
-                                                </form>
-                                            @endif
-                                        @else
-                                            <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
-                                                <i class="fa fa-plus"></i>
-                                            </a>
-                                        @endif
+                                            </div>
+                                            <div
+                                                id="print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}"
+                                                class="ckEditor">
+                                                {!!  $mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->data
+                                             ??  $mapApply->template_data
+                                             ->where('for', \Modules\EMap\Enums\NoticeTypeEnum::tryFrom($noticeType->value))?->first()['data']
+                                             ?? ''!!}
+                                            </div>
 
-                                    </div>
+                                        </div>
+                                    </section>
+                                @endif
+                            @else
+                                <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
+                                    <h4 class="mt-2"> {{$noticeType->label()}}</h4>
                                     <div
-                                        id="print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}"
-                                        class="ckEditor">
-                                        {!!  $mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->data
-                                     ??  $mapApply->template_data
-                                     ->where('for', \Modules\EMap\Enums\NoticeTypeEnum::tryFrom($noticeType->value))?->first()['data']
-                                     ?? ''!!}
-                                    </div>
+                                        class="card-body mt-2 {{$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType) ? 'border_black':'border_yellow'}}">
+                                        <div>
+                                            @if(!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
 
-                                </div>
-                            </section>
+                                                <i class="fa fa-exclamation-triangle map_template_exclamation"
+                                                   data-bs-toggle="tooltip" data-bs-placement="right"
+                                                   title="{{$noticeType->label()}} सेभ भएको छैन"></i>
+
+                                            @endif
+
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
+                                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}"
+                                                   class="mx-2">
+                                                    <i class="fa fa-pen"></i>
+                                                </a>
+                                                <div class="btn-group mb-3 ">
+                                                    <i class="fa fa-print text-primary"
+                                                       onclick="print('print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}')"
+                                                    ></i>
+                                                </div>
+                                                @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
+                                                    <form
+                                                        action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
+                                                        method="POST"
+                                                        class="{{empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks) ? 'show_reject_confirm':'show_accept_confirm'}}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="hidden" class="reject_remarks" name="remarks">
+
+                                                        @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
+                                                            <i class="fa fa-times mx-2"></i>
+                                                        @else
+                                                            <i class="fa fa-check mx-2"></i>
+                                                        @endif
+
+                                                    </form>
+                                                @endif
+                                            @else
+                                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            @endif
+
+                                        </div>
+                                        <div
+                                            id="print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}"
+                                            class="ckEditor">
+                                            {!!  $mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->data
+                                         ??  $mapApply->template_data
+                                         ->where('for', \Modules\EMap\Enums\NoticeTypeEnum::tryFrom($noticeType->value))?->first()['data']
+                                         ?? ''!!}
+                                        </div>
+
+                                    </div>
+                                </section>
+                            @endif
+
                         @endforeach
                         <section id="registration-and-fees">
                             <h4 class="mt-2"> नक्सा दर्ता तथा दस्तुर सम्बन्धि </h4>

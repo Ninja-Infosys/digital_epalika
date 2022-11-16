@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Enums\ApplicationFormTypeEnum;
 use Modules\EMap\Enums\FileTypeEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
 
 class MapController extends Controller
 {
-    public function index()
+    public function index(ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
         $application_types = collect();
 
@@ -29,22 +30,19 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->sentToAdmin()->get();
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->sentToAdmin()->isMapVerified($applicationFormTypeEnum)->get();
+        return view('emap::admin.map.index', compact('maps', 'application_types','applicationFormTypeEnum'));
 
-//            ->whereHas('applyMapNotices', function ($query) {
-//            $query->selectRaw('id,map_apply_id,type,file_type,created_at')->where('type', FileTypeEnum::APPLICATION->value)->whereNull('rejected_at')->latest();
-//        })->get();
 
-        return view('emap::admin.map.index', compact('maps', 'application_types'));
     }
 
 
-    public function noticeList(MapApply $mapApply)
+    public function noticeList(MapApply $mapApply ,ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
-        return view('emap::admin.map.notice-list', compact('mapApply'));
+        return view('emap::admin.map.notice-list', compact('mapApply','applicationFormTypeEnum'));
     }
 
-    public function show(MapApply $mapApply)
+    public function show(MapApply $mapApply,ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
 
         $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
@@ -52,7 +50,7 @@ class MapController extends Controller
         }]);
         $districts = District::all();
 
-        return view('emap::admin.map.show', compact('mapApply', 'districts'));
+        return view('emap::admin.map.show', compact('mapApply', 'districts','applicationFormTypeEnum'));
     }
 
     public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
