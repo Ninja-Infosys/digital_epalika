@@ -8,7 +8,6 @@ class SmsController extends Controller
 {
     public function setting()
     {
-
         return view('admin.setting.sms.index');
     }
 
