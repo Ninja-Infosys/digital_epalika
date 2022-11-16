@@ -49,10 +49,10 @@ Route::controller(MapController::class)->prefix('map')->as('map.')->group(functi
             Route::put('reject/{noticeTypeEnum}','reject')->name('reject');
         });
     });
-    Route::get('mapApply/{mapApply}/noticeList', 'noticeList')->name('mapApply.noticeList');
-    Route::get('mapApply/{mapApply}/showFullDetail', 'show')->name('mapApply.show');
+    Route::get('mapApply/{mapApply}/noticeList/{applicationFormTypeEnum}', 'noticeList')->name('mapApply.noticeList');
+    Route::get('mapApply/{mapApply}/{applicationFormTypeEnum}/showFullDetail', 'show')->name('mapApply.show');
     Route::put('mapApply/{mapApply}/applyMapNotice/{applyMapNotice}/reject', 'rejectApplication')->name('mapApply.reject');
-    Route::get('mapApply', 'index')->name('mapApply.index');
+    Route::get('mapApply/{applicationFormTypeEnum}', 'index')->name('mapApply.index');
 });
 
 Route::prefix('setting')->group(function () {
