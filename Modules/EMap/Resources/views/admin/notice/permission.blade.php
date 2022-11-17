@@ -52,29 +52,28 @@
             </div>
         </div><!-- end col-->
     </div>
-    <h3 style="text-align:center"><span style="font-size:20px"><strong>मन्जुरीनामा</strong></span></h3>
+    <h3 style="text-align:center"><span style="font-size:22px"><strong>मन्जुरीनामा</strong></span></h3>
 
-    <div class="vertical" style="color:black; margin-bottom:0; margin-left:15px; margin-right:15px; margin-top:0; padding:0 150px; text-orientation:upright; transform-origin:left top 0; transform:rotate(90deg)">दस्तखत : .................................</div>
+    <div class="vertical" style="color:black; margin-bottom:0; margin-left:15px; margin-right:15px; margin-top:0; padding:0 150px; text-orientation:upright; transform-origin:left top 0; transform:rotate(90deg)"><strong><span style="font-size:16px">दस्तखत : .................................</span></strong></div>
 
-    <div class="text" style="margin-left:80px; text-align:justify">लिखितम ...................................................... जिल्ला ...................................... उ.न.पा./गा.वि.स. वडा नं. ..................................... बस्ने वर्ष ....................... को आगे ...................................................मेरो/हाम्रो नाउँमा दर्ता भएको साविक ....................................... हाल .............................................. उ.न.पा. वडा नं. .......................... स्थित कि.नं. ........................................ क्षेत्रफल ....................................... भएको जग्गामा घरटहरा, पर्वत, बाटो बनाउनको लागि ................................ उ.न.पा. कार्यालयमा नक्सा संहितको दस्तखत दिई नक्सा पास तथा निर्माण इजाजत लिनका लागि&nbsp;............................................. उ.न.पा. वडा नं.&nbsp;.............. बस्ने वर्ष ...............को श्री&nbsp;......................................................... ले मन्जुरीनामा लेखिदिनु भनी मलाई भन्दा मेरो चित्त बुझ्यो | उक्त जग्गामा घर, टहरा, पर्खाल, बाटो निर्माण गरेमा मेरो मन्जुरी छ | पछि उक्त मेरो नाउँको जग्गामा बनाउन पाउने होइन भनी कुनै कुराको उजुरी गर्ने छैन | गरे यसै कागजबाट बदर गरिदिनु भनी मेरो मनोमान खुशीराजीसँग&nbsp;........................................................... बनाउन मन्जुरीनामाको कागज लेखिदिएँ साक्षी किनारको सदर |<br />
-        इति सम्वत् साल महिना गते रोज शुभम</div>
+    <div class="text" style="margin-left:80px; text-align:justify"><strong><span style="font-size:16px">लिखितम ...................................................... जिल्ला ...................................... उ.न.पा./गा.वि.स. वडा नं. ..................................... बस्ने वर्ष ....................... को आगे ...................................................मेरो/हाम्रो नाउँमा दर्ता भएको साविक ....................................... हाल .............................................. उ.न.पा. वडा नं. .......................... स्थित कि.नं. ........................................ क्षेत्रफल ....................................... भएको जग्गामा घरटहरा, पर्वत, बाटो बनाउनको लागि ................................ उ.न.पा. कार्यालयमा नक्सा संहितको दस्तखत दिई नक्सा पास तथा निर्माण इजाजत लिनका लागि&nbsp;............................................. उ.न.पा. वडा नं.&nbsp;.............. बस्ने वर्ष ...............को श्री&nbsp;......................................................... ले मन्जुरीनामा लेखिदिनु भनी मलाई भन्दा मेरो चित्त बुझ्यो | उक्त जग्गामा घर, टहरा, पर्खाल, बाटो निर्माण गरेमा मेरो मन्जुरी छ | पछि उक्त मेरो नाउँको जग्गामा बनाउन पाउने होइन भनी कुनै कुराको उजुरी गर्ने छैन | गरे यसै कागजबाट बदर गरिदिनु भनी मेरो मनोमान खुशीराजीसँग&nbsp;........................................................... बनाउन मन्जुरीनामाको कागज लेखिदिएँ साक्षी किनारको सदर |<br />
+इति सम्वत् साल महिना गते रोज शुभम</span></strong></div>
 
     <div class="flex-container" style="display:flex; margin-bottom:50px; margin-left:0; margin-right:0; margin-top:20px">
-        <div class="auto item" style="flex:1 1 auto; margin-bottom:30px; margin-left:80px; margin-right:0; margin-top:30px">दस्तखत: ............................</div>
+        <div class="auto item" style="flex:1 1 auto; margin-bottom:30px; margin-left:80px; margin-right:0; margin-top:30px; text-align:justify"><strong><span style="font-size:16px">दस्तखत: ............................</span></strong></div>
 
-        <div class="initial item my-4" style="border:1px solid black; flex:initial; height:7rem; margin-bottom:1em; margin-left:80px; margin-right:1em; margin-top:1em; text-align:center; width:6rem">दायाँ</div>
+        <div class="initial item my-4" style="border:1px solid black; flex:initial; height:7rem; margin-bottom:1em; margin-left:80px; margin-right:1em; margin-top:1em; text-align:center; width:6rem"><strong><span style="font-size:16px">दायाँ</span></strong></div>
 
-        <div class="initial item" style="border:1px solid black; flex:initial; height:7rem; margin-bottom:1em; margin-left:80px; margin-right:1em; margin-top:1em; text-align:center; width:6rem">वायाँ</div>
+        <div class="initial item my-4" style="border:1px solid black; flex:initial; height:7rem; margin-bottom:1em; margin-left:80px; margin-right:1em; margin-top:1em; text-align:center; width:6rem"><strong><span style="font-size:16px">वायाँ</span></strong></div>
     </div>
 
     <div class="person">
-        <h5 style="margin-left:80px">सक्षीहरु</h5>
+        <h5 style="margin-left:80px; text-align:justify"><strong><span style="font-size:16px">सक्षीहरु</span></strong></h5>
 
-        <p style="margin-left:80px">१. श्री ...................................................................... दरखास्त ................................................</p>
+        <p style="margin-left:80px; text-align:justify"><strong><span style="font-size:16px">१. श्री ..................................................... दरखास्त ................................................</span></strong></p>
 
-        <p style="margin-left:80px">२. श्री ...................................................................... दरखास्त ................................................</p>
+        <p style="margin-left:80px; text-align:justify"><strong><span style="font-size:16px">२. श्री ....................................................&nbsp; दरखास्त ............................................</span></strong>....</p>
     </div>
-
 
 
     @push('scripts')
