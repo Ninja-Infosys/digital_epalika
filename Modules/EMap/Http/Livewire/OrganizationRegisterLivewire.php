@@ -143,7 +143,7 @@ class OrganizationRegisterLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance');
+        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance','progressPercentage');
     }
 
     public function checkOrganizationAddress(): void

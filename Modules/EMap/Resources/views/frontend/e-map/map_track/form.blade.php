@@ -106,7 +106,16 @@
                         success: function (resp) {
                             $("#otpVerificationModal").modal('toggle');
                             $("#otp").val('');
-                            toastr.success(resp.alert_message);
+                            swal.fire({
+                                title: 'Data Submitted Successfully',
+                                toast:true,
+                                position:'top-right',
+                                timer:3000,
+                                showConfirmButton:false,
+                                timerProgressBar:true,
+                                width:400,
+                                icon: 'success',
+                            });
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $("#error_message").html(XMLHttpRequest.responseJSON.message);

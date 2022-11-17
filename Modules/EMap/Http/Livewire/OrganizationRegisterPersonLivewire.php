@@ -170,7 +170,7 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user');
+        $this->reset('is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user','progressPercentage');
     }
 
     public function checkPermanentAddress(): void

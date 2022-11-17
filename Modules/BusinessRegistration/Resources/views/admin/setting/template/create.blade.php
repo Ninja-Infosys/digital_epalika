@@ -106,7 +106,16 @@
                                             </div>
                                         </div>
                                     @endforeach
-
+                                    <div class="col-md-12 mt-1">
+                                        <h6>Static Template</h6>
+                                    </div>
+                                    <div class="col-md-12">
+                                    <span style="cursor: pointer"
+                                          class="badge badge-outline-primary text-primary getTemplate"
+                                          data-bs-type="level1">
+                                        व्यवसाय दर्ता प्रमाण-पत्र
+                                    </span>
+                                    </div>
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="data" class="form-label">डाटा *</label>
@@ -133,6 +142,39 @@
     @push('scripts')
         <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
         <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+        <script>
+
+            $(document).ready(function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $('.getTemplate').on('click', function (event) {
+                    event.preventDefault();
+
+                    const button = event.target
+                    // Extract info from data-bs-* attributes
+                    const type = button.getAttribute('data-bs-type')
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{route('admin.businessRegistration.setting.get-static-template')}}",
+                        data: {
+                            type: type
+                        },
+                        success: function (resp) {
+                            CKEDITOR.instances.data.setData(resp);
+                        },
+                        error: function () {
+                            alert("Something Went Wrong");
+                        },
+                        timeout: 10000
+                    });
+                });
+            });
+        </script>
     @endpush
 @endsection
 

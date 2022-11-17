@@ -342,7 +342,7 @@ class MapApplicationForm extends Component
     public function saveFormData(): void
     {
         $this->validate();
-       DB::transaction(function () {
+    $data =   DB::transaction(function () {
             if ($this->applyMap['structure_type']) {
                 $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
 
@@ -366,6 +366,9 @@ class MapApplicationForm extends Component
             $mapApply->applicantDetail()->create($this->applicantDetail);
 
            Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
+
+           return $mapApply;
+
         });
 
 
@@ -377,7 +380,7 @@ class MapApplicationForm extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
-            'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
+            'text' => "तपाईंको फारम सफलतापूर्वक पेश गरियो र तपाईंको आईडी $data->unique_id हो। कृपया भविष्यमा प्रयोगको लागि आईडी सुरक्षित राख्नुहोस्।",
         ]);
     }
 

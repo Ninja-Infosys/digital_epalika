@@ -7,7 +7,7 @@
 @can('organization_access')
 <li class="{{request()->is('admin/emap/organization') ? 'active' : ''}}">
     <a href="{{route('emap.admin.organization.index')}}">
-        <i class="fa fa-stamp"></i>
+        <i class="fa fa-building"></i>
         <span>दर्ता भएका संगठन</span>
     </a>
 </li>
@@ -21,7 +21,7 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('admin/emap/setting/*') ? 'show' : ''}}"
+    <div class="collapse {{request()->is('admin/emap/map/mapApply*') ? 'show' : ''}}"
          id="sidebarMaptype">
         <ul class="nav-second-level">
             @can('mapFee_access')

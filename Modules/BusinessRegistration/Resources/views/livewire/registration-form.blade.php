@@ -1389,6 +1389,21 @@
                         <div class="card-body">
                             <fieldset>
                                 <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="form.business_type" class="form-label">व्यवसायी</label>
+                                        <select
+                                            class="form-select @error('form.business_type') is-invalid @enderror"
+                                            wire:model="form.business_type"
+                                            id="form.business_type">
+                                            <option value="">---छान्नुहोस् ---</option>
+                                            @foreach(\Modules\BusinessRegistration\Enums\BusinessTypeEnum::cases() as $key=>$businessTypeEnum)
+                                                <option value="{{$businessTypeEnum->value}}">{{$businessTypeEnum->label()}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('form.business_type')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="form.name" class="form-label">व्यवसायी नाम</label>
                                         <input

@@ -86,6 +86,19 @@ trait ProprietorTemplateTrait
                 'व्यवसायको उप-वर्ग ' => '[@businessDetail.investmentRevenue.objectTransaction.title]',
             ],
         ],
+        [
+            'title' => 'दस्तुर',
+            'data' => [
+                'निवेदन दस्तुर' => '[@businessDetail.application_fee]',
+                'दर्ता दस्तुर' => '[@businessDetail.registration_fee]',
+                'व्यवसाय कर' => '[@businessDetail.business_tax]',
+                'परिचय पाटी दस्तुर ' => '[@businessDetail.introduction_board_fees]',
+                'जरिवाना' => '[@businessDetail.fine]',
+                'दर्ता नम्बर' => '[@businessDetail.registration_no]',
+                'मिति' => '[@businessDetail.date]',
+                'जम्मा' => '[@businessDetail.total]',
+            ],
+        ],
 
     ];
 
@@ -120,9 +133,24 @@ trait ProprietorTemplateTrait
     {
         $replace = [];
 
-        $replace = array_merge($this->getProprietorReplacement(), $replace, $this->getInvestmentRevenueReplacement(), $this->getIntroBoardReplacement(), $this->getBusinessDetailReplacement(), $this->getBusinessCategoryReplacement());
+        $replace = array_merge($this->getProprietorReplacement(), $replace, $this->getCustomsDetailReplacement(), $this->getInvestmentRevenueReplacement(), $this->getIntroBoardReplacement(), $this->getBusinessDetailReplacement(), $this->getBusinessCategoryReplacement());
 
         return Str::replace(array_keys($replace), $replace, $data);
+    }
+
+
+    private function getCustomsDetailReplacement(): array
+    {
+        return [
+            '[@businessDetail.application_fee]' => $this->customs->application_fee ?? '',
+            '[@businessDetail.registration_fee]' => $this->customs->registration_fee ?? '',
+            '[@businessDetail.business_tax]' => $this->customs->business_tax ?? '',
+            '[@businessDetail.introduction_board_fees]' => $this->customs->introduction_board_fees ?? '',
+            '[@businessDetail.fine]' => $this->customs->fine ?? '',
+            '[@businessDetail.registration_no]' => $this->customs->registration_no ?? '',
+            '[@businessDetail.date]' => $this->customs->date ?? '',
+            '[@businessDetail.total]' => 'dd',
+        ];
     }
 
     private function getBusinessDetailReplacement(): array
@@ -206,4 +234,5 @@ trait ProprietorTemplateTrait
             '[@businessDetail.investmentRevenue.objectTransaction.title]' => $this->businessDetail->investmentRevenue->objectTransaction->title ?? '',
         ];
     }
+
 }
