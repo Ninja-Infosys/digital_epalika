@@ -149,7 +149,7 @@ trait ProprietorTemplateTrait
             '[@businessDetail.fine]' => $this->customs->fine ?? '',
             '[@businessDetail.registration_no]' => $this->customs->registration_no ?? '',
             '[@businessDetail.date]' => $this->customs->date ?? '',
-            '[@businessDetail.total]' => 'dd',
+            '[@businessDetail.total]' => $this->customs->total_amount ?? 0,
         ];
     }
 

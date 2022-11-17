@@ -35,5 +35,10 @@ class Customs extends Model
     }
 
 
+    public function getTotalAmountAttribute()
+    {
+        return $this->application_fee + $this->registration_fee + $this->business_tax + $this->introduction_board_fees + $this->fine;
+    }
+
 
 }
