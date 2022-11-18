@@ -3,8 +3,10 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\Customs;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
@@ -16,7 +18,7 @@ class BusinessRegistrationController extends Controller
     {
         $proprietors = ProprietorDetail::with('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses')
             ->latest()
-            ->get();
+            ->paginate(15);
 
         return view('businessregistration::admin.businessRegistration.index', compact('proprietors'));
     }
@@ -98,14 +100,17 @@ class BusinessRegistrationController extends Controller
             'business_tax' => ['required'],
             'introduction_board_fees' => ['required'],
             'fine' => ['required'],
-            'date' => ['required'],
-            'registration_no' => ['required'],
+            'date' => ['nullable'],
+            'registration_no' => ['nullable'],
         ]);
 
-        Customs::updateOrCreate([
-            'proprietor_detail_id' => $id
-        ],
-            $data);
+        DB::transaction(function () use ($id, $data) {
+            $customs = Customs::updateOrCreate([
+                'proprietor_detail_id' => $id
+            ],
+                $data);
+        });
+
 
         toast('दस्तुर सफलतापूर्वक थपियो', 'success');
 

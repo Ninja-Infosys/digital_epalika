@@ -6,7 +6,12 @@ use App\Helper\SMS\SamayaSms;
 use App\Http\Controllers\Controller;
 use App\Notifications\ApplyMapNoticeNotification;
 use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
@@ -74,14 +79,14 @@ class FrontendController extends Controller
         return back()->with('message', 'Record does not match !!!!');
     }
 
-    public function trackData(MapApply $mapApply)
+    public function trackData(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load('applyMapNotices:map_apply_id,file_type');
 
         return view('emap::frontend.e-map.map_track.form_details', compact('mapApply'));
     }
 
-    public function loadTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    public function loadTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): Factory|View|Application
     {
         if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
             abort(401);
@@ -94,7 +99,7 @@ class FrontendController extends Controller
         return view('emap::frontend.e-map.map_track.form', compact('mapApply', 'noticeTypeEnum'));
     }
 
-    public function storeEmapTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    public function storeEmapTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): Response|Application|ResponseFactory
     {
         if ($noticeTypeEnum->type() !== EMapFormFillerTypeEnum::HOUSE_OWNER) {
             abort(401);
@@ -127,7 +132,7 @@ class FrontendController extends Controller
     /**
      * @throws Exception
      */
-    public function sendOtp(MapApply $mapApply)
+    public function sendOtp(MapApply $mapApply): Response|Application|ResponseFactory
     {
 
         if (request()?->ajax()) {

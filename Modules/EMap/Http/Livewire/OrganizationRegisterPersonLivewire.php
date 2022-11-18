@@ -112,7 +112,7 @@ class OrganizationRegisterPersonLivewire extends Component
     ];
 
     protected array $fourthStepValidations = [
-        'user.name' => ['required', 'unique:organizations,name'],
+        'user.name' => ['required'],
         'user.email' => ['required', 'email', 'unique:organizations,email'],
         'user.phone' => ['required', 'unique:organizations,phone'],
     ];
