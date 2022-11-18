@@ -80,11 +80,13 @@ class PublicApiController extends Controller
     public function getDataFromDigitalBoardModule($modules, Collection $data): void
     {
         if ($modules->has('DigitalBoard')) {
-            $data->merge([
+            $collection = collect([
                 'employees' => EmployeeResource::collection(Employee::orderBy('position')->active()->showForMobileAppRequest()->get()),
                 'news' => NewsResource::collection(Notice::orderByDesc('date')->news()->showInIndex()->nullClosedAt()->limit(3)->get()),
                 'notice' => NoticeResource::collection(Notice::orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->limit(3)->get()),
             ]);
+
+            $data->merge($collection);
         }
     }
 
@@ -95,11 +97,11 @@ class PublicApiController extends Controller
     public function getDataFromMainModule(Collection $data): void
     {
         $setting = $this->getOfficeSetting();
-
-        $data->merge([
+        $settings = collect([
             'setting' => SettingResource::make($setting),
             'sliders' => $this->slider(),
         ]);
+        $data->merge($settings);
     }
 
 }
