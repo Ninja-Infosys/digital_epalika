@@ -3,8 +3,10 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\Customs;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
@@ -102,10 +104,22 @@ class BusinessRegistrationController extends Controller
             'registration_no' => ['required'],
         ]);
 
-        Customs::updateOrCreate([
-            'proprietor_detail_id' => $id
-        ],
-            $data);
+        $years = OfficeSetting::with('fiscalYear')->first();
+
+        $registration_number = $years->fiscalYear->title ?? '';
+        DB::transaction(function () use ($id, $data, $registration_number) {
+            $customs = Customs::updateOrCreate([
+                'proprietor_detail_id' => $id
+            ],
+                $data);
+            BusinessDetail::updateOrCreate([
+                'proprietor_detail_id' => $id
+            ], [
+                'registration_no' => $registration_number,
+                'registration_date_en' => today()
+            ]);
+        });
+
 
         toast('दस्तुर सफलतापूर्वक थपियो', 'success');
 
