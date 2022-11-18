@@ -12,6 +12,8 @@ class HelpDeskLivewire extends Component
 
     public $services = [];
 
+    public $indexToShow = 0;
+
     public function mount()
     {
         $this->branches = Branch::with('branches')->whereNull('branch_id')->get();
