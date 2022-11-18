@@ -10,7 +10,6 @@ use App\Models\Settings\OfficeSetting;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\Slider;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Collection;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Transformers\api\v1\EmployeeResource;
@@ -21,15 +20,9 @@ use Nwidart\Modules\Facades\Module;
 
 class PublicApiController extends Controller
 {
-    public function index(): Collection
+    public function index(): array
     {
-        $data = collect();
-
-        $this->getDataFromMainModule($data);
-
-        $this->checkModuleData($data);
-
-        return $data;
+        return array_merge($this->getDataFromMainModule(), $this->checkModuleData());
     }
 
     public function setting(): SettingResource
@@ -61,47 +54,35 @@ class PublicApiController extends Controller
         return OfficeSetting::latest()->firstOrFail();
     }
 
-    /**
-     * @param Collection $data
-     * @return void
-     */
-    public function checkModuleData(Collection $data): void
+    public function checkModuleData(): array
     {
         $modules = Module::collections();
 
-        $this->getDataFromDigitalBoardModule($modules, $data);
+        return $this->getDataFromDigitalBoardModule($modules);
     }
 
-    /**
-     * @param $modules
-     * @param Collection $data
-     * @return void
-     */
-    public function getDataFromDigitalBoardModule($modules, Collection $data): void
+
+    public function getDataFromDigitalBoardModule($modules): array
     {
         if ($modules->has('DigitalBoard')) {
-            $collection = collect([
+            return [
                 'employees' => EmployeeResource::collection(Employee::orderBy('position')->active()->showForMobileAppRequest()->get()),
                 'news' => NewsResource::collection(Notice::orderByDesc('date')->news()->showInIndex()->nullClosedAt()->limit(3)->get()),
                 'notice' => NoticeResource::collection(Notice::orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->limit(3)->get()),
-            ]);
-
-            $data->merge($collection);
+            ];
         }
+        return [];
     }
 
-    /**
-     * @param Collection $data
-     * @return void
-     */
-    public function getDataFromMainModule(Collection $data): void
+
+    public function getDataFromMainModule(): array
     {
         $setting = $this->getOfficeSetting();
-        $settings = collect([
+        return [
             'setting' => SettingResource::make($setting),
             'sliders' => $this->slider(),
-        ]);
-        $data->merge($settings);
+        ];
+
     }
 
 }
