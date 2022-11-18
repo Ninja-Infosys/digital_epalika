@@ -3,7 +3,9 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Modules\BusinessRegistration\Entities\Customs;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
@@ -77,5 +79,37 @@ class BusinessRegistrationController extends Controller
                 'file' => $document->store('PrintedFile', 'public'),
             ]);
         }
+    }
+
+
+    public function addData($id, $type)
+    {
+        $proprietorDetail = ProprietorDetail::find($id);
+        $customs = Customs::where('proprietor_detail_id', $id)->first();
+        return view('businessregistration::admin.businessRegistration.customs.index', compact('proprietorDetail', 'type', 'customs'));
+    }
+
+    public function customData(Request $request, $id, $type)
+    {
+
+        $data = $request->validate([
+            'application_fee' => ['required'],
+            'registration_fee' => ['required'],
+            'business_tax' => ['required'],
+            'introduction_board_fees' => ['required'],
+            'fine' => ['required'],
+            'date' => ['required'],
+            'registration_no' => ['required'],
+        ]);
+
+        Customs::updateOrCreate([
+            'proprietor_detail_id' => $id
+        ],
+            $data);
+
+        toast('दस्तुर सफलतापूर्वक थपियो', 'success');
+
+        return back();
+
     }
 }

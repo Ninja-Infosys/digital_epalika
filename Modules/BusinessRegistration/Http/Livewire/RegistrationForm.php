@@ -72,6 +72,7 @@ class RegistrationForm extends Component
 
     public array $form = [
         'name' => null,
+        'business_type' => null,
         'gender' => null,
         'house_no' => null,
         'phone' => null,
@@ -157,6 +158,7 @@ class RegistrationForm extends Component
 
     protected array $firstStepValidations = [
         'form.name' => ['required', 'string', 'max:255'],
+        'form.business_type' => ['required', 'string'],
         'form.gender' => ['required'],
         'form.house_no' => ['nullable'],
         'form.phone' => ['required'],
@@ -246,6 +248,7 @@ class RegistrationForm extends Component
     {
         return [
             'form.name.required' => ['नाम आवश्यक छ'],
+            'form.business_type.required' => ['आवश्यक छ'],
             'form.is_confirmed.required' => ['बिवरण पुष्टि गर्नुहोस्'],
             'form.gender.required' => ['लिंग आबश्यक छ '],
             'form.house_no.required' => ['घर न. आबश्यक छ '],
@@ -334,6 +337,7 @@ class RegistrationForm extends Component
         $proprietorDetails = DB::transaction(function () {
             $proprietorDetails = ProprietorDetail::create([
                 'name' => $this->form['name'] ?? '',
+                'business_type' => $this->form['business_type'] ?? '',
                 'citizenship_no' => $this->form['citizenship_no'] ?? '',
                 'issue_date' => $this->form['issue_date'] ?? '',
                 'issue_district_id' => $this->form['issue_district_id'] ?? '',

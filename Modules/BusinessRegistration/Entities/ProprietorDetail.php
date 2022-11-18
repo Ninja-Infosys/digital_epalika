@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 use Modules\BusinessRegistration\Enums\Qualification;
 use Modules\BusinessRegistration\Traits\ProprietorTemplateTrait;
 
@@ -29,6 +30,7 @@ class ProprietorDetail extends Model
 
     protected $fillable = [
         'name',
+        'business_type',
         'citizenship_no',
         'issue_date',
         'issue_district_id',
@@ -51,6 +53,7 @@ class ProprietorDetail extends Model
     protected $casts = [
         'gender' => Gender::class,
         'education_qualification' => Qualification::class,
+        'business_type' => BusinessTypeEnum::class
     ];
 
     public function province(): BelongsTo
@@ -91,5 +94,10 @@ class ProprietorDetail extends Model
     public function introboard(): HasOne
     {
         return $this->hasOne(Introboard::class);
+    }
+
+    public function customs(): HasOne
+    {
+        return $this->hasOne(Customs::class);
     }
 }

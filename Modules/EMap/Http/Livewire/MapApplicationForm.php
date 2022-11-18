@@ -54,6 +54,7 @@ class MapApplicationForm extends Component
     public $convertedData = 0;
 
     public array $applyMap = [
+        'application_type'=>null,
         'construction_type' => null,
         'usage' => null,
         'building_category' => null,
@@ -250,6 +251,7 @@ class MapApplicationForm extends Component
     }
 
     protected array $applyMapValidations = [
+        'applyMap.application_type'=>['required'],
         'applyMap.organization_id' => ['required'],
         'applyMap.construction_type' => ['required'],
         'applyMap.usage' => ['required'],
@@ -340,7 +342,7 @@ class MapApplicationForm extends Component
     public function saveFormData(): void
     {
         $this->validate();
-       DB::transaction(function () {
+    $data =   DB::transaction(function () {
             if ($this->applyMap['structure_type']) {
                 $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
 
@@ -364,6 +366,9 @@ class MapApplicationForm extends Component
             $mapApply->applicantDetail()->create($this->applicantDetail);
 
            Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
+
+           return $mapApply;
+
         });
 
 
@@ -375,13 +380,14 @@ class MapApplicationForm extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
-            'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
+            'text' => "तपाईंको फारम सफलतापूर्वक पेश गरियो र तपाईंको आईडी $data->unique_id हो। कृपया भविष्यमा प्रयोगको लागि आईडी सुरक्षित राख्नुहोस्।",
         ]);
     }
 
     public function messages(): array
     {
         return [
+            'applyMap.application_type.required'=>'अनिवार्य छ',
             'applyMap.construction_type.required' => 'निर्माण कार्यको किसिम अनिवार्य छ |',
             'applyMap.usage.required' => 'प्रयोजन अनिवार्य छ |',
             'applyMap.building_category.required' => ' भवनको वर्गीकरण अनिवार्य छ|',

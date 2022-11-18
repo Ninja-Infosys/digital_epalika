@@ -10,5 +10,6 @@
     "Roaster": true,
     "Grant": true,
     "JudicialCommittee": true,
-    "TaskManagement": true
+    "TaskManagement": true,
+    "Recommendation": true
 }

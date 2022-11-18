@@ -19,6 +19,24 @@
             <p class="text-danger">{{$message}}</p>
             @enderror
         </div>
+
+        <div class="col-md-1 mt-5">
+            <label for="application_type" class="fs-5"> नक्सा <span
+                    class="text-danger">*</span></label>
+        </div>
+        <div class="col-md-11 mt-5">
+            <select wire:model="applyMap.application_type" id="organization_id"
+                    name="application_type" class="form-control">
+                <option value="">नक्सा छान्नुहोस्</option>
+                @foreach(\Modules\EMap\Enums\ApplicationFormTypeEnum::cases() as $applicationFormTypeEnum)
+                    <option
+                        value="{{$applicationFormTypeEnum->value}}">{{$applicationFormTypeEnum->label()}}</option>
+                @endforeach
+            </select>
+            @error('applyMap.application_type')
+            <p class="text-danger">{{$message}}</p>
+            @enderror
+        </div>
     </div>
     <fieldset>
         <legend>१. प्रस्तावित भवनको विवरण</legend>

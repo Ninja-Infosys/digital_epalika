@@ -112,7 +112,7 @@ class OrganizationRegisterPersonLivewire extends Component
     ];
 
     protected array $fourthStepValidations = [
-        'user.name' => ['required', 'unique:organizations,name'],
+        'user.name' => ['required'],
         'user.email' => ['required', 'email', 'unique:organizations,email'],
         'user.phone' => ['required', 'unique:organizations,phone'],
     ];
@@ -170,7 +170,7 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user');
+        $this->reset('is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user','progressPercentage');
     }
 
     public function checkPermanentAddress(): void
