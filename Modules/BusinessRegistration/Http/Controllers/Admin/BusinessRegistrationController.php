@@ -18,7 +18,7 @@ class BusinessRegistrationController extends Controller
     {
         $proprietors = ProprietorDetail::with('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses')
             ->latest()
-            ->get();
+            ->paginate(15);
 
         return view('businessregistration::admin.businessRegistration.index', compact('proprietors'));
     }
@@ -104,20 +104,11 @@ class BusinessRegistrationController extends Controller
             'registration_no' => ['required'],
         ]);
 
-        $years = OfficeSetting::with('fiscalYear')->first();
-
-        $registration_number = $years->fiscalYear->title ?? '';
-        DB::transaction(function () use ($id, $data, $registration_number) {
+        DB::transaction(function () use ($id, $data) {
             $customs = Customs::updateOrCreate([
                 'proprietor_detail_id' => $id
             ],
                 $data);
-            BusinessDetail::updateOrCreate([
-                'proprietor_detail_id' => $id
-            ], [
-                'registration_no' => $registration_number,
-                'registration_date_en' => today()
-            ]);
         });
 
 

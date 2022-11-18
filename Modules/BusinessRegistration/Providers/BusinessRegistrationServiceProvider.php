@@ -3,6 +3,8 @@
 namespace Modules\BusinessRegistration\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\BusinessRegistration\Entities\Customs;
+use Modules\BusinessRegistration\Observers\CustomObserver;
 
 class BusinessRegistrationServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,7 @@ class BusinessRegistrationServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+        Customs::observe(CustomObserver::class);
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
 

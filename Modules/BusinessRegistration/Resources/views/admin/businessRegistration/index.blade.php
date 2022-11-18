@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm mb-0 table-striped table-hover text-center">
+                        <table class="table table-bordered table-sm mb-2 table-striped table-hover text-center">
                             <thead>
                             <tr>
                                 <th rowspan="2">क्र.स</th>
@@ -60,7 +60,7 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$proprietor->businessDetail->submission_no ?? ''}}</td>
                                     <td>{{$proprietor->businessDetail->registration_no ?? ''}}</td>
-                                    <td>{{$proprietor->businessDetail->registration_date_ne ?? ''}}</td>
+                                    <td>{{$proprietor->businessDetail->registration_date_en ?? ''}}</td>
                                     <td>{{$proprietor->name}}</td>
                                     <td>
                                         <span>{{$proprietor->localBody->local_body??''}}
@@ -89,7 +89,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                        {{$proprietors->links()}}
                     </div>
+
                 </div>
             </div>
         </div>
