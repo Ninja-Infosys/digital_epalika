@@ -100,8 +100,8 @@ class BusinessRegistrationController extends Controller
             'business_tax' => ['required'],
             'introduction_board_fees' => ['required'],
             'fine' => ['required'],
-            'date' => ['required'],
-            'registration_no' => ['required'],
+            'date' => ['nullable'],
+            'registration_no' => ['nullable'],
         ]);
 
         DB::transaction(function () use ($id, $data) {
