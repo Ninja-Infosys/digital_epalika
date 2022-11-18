@@ -144,8 +144,8 @@
 
                                     <select class="form-control @error('is_employee') is-invalid @enderror"
                                             name="is_employee" id="is_employee">
-                                        <option value="1" {{old('is_employee') === 1 ? 'selected':''}}>कर्मचारी</option>
-                                        <option value="0" {{old('is_employee')===0 ? 'selected':''}}>जनप्रतिनिधि
+                                        <option value="1" {{old('is_employee') == 1 ? 'selected':''}}>कर्मचारी</option>
+                                        <option value="0" {{old('is_employee')==0 ? 'selected':''}}>जनप्रतिनिधि
                                         </option>
                                     </select>
                                     @error('is_employee')
@@ -157,9 +157,9 @@
 
                                     <select class="form-control @error('show_to_index') is-invalid @enderror"
                                             name="show_to_index" id="show_to_index">
-                                        <option value="1" {{old('show_to_index') === 1 ? 'selected':''}}>देखाउने
+                                        <option value="1" {{old('show_to_index') == 1 ? 'selected':''}}>देखाउने
                                         </option>
-                                        <option value="0" {{old('show_to_index')===0 ? 'selected':''}}>नदेखाउने
+                                        <option value="0" {{old('show_to_index')==0 ? 'selected':''}}>नदेखाउने
                                         </option>
                                     </select>
                                     @error('show_to_index')
@@ -171,9 +171,9 @@
 
                                     <select class="form-control @error('show_to_mobile_app') is-invalid @enderror"
                                             name="show_to_mobile_app" id="show_to_mobile_app">
-                                        <option value="1" {{old('show_to_mobile_app') === 1 ? 'selected':''}}>देखाउने
+                                        <option value="1" {{old('show_to_mobile_app') == 1 ? 'selected':''}}>देखाउने
                                         </option>
-                                        <option value="0" {{old('show_to_mobile_app')===0 ? 'selected':''}}>नदेखाउने
+                                        <option value="0" {{old('show_to_mobile_app')==0 ? 'selected':''}}>नदेखाउने
                                         </option>
                                     </select>
                                     @error('show_to_mobile_app')
