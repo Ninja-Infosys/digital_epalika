@@ -1051,4 +1051,7 @@ h6,
     z-index: 11111111111;
 
 }
-
+.disable_menu{
+    background-color: rgba(0,0,0,0.2);
+    opacity: 0.5;
+}

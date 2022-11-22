@@ -24,7 +24,7 @@
 
 <h4 style="text-align:center"><span style="font-size:24px"><strong>प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</strong></span></h4>
 
-<div class="top" style="text-align:justify"><span style="font-size:16px"><strong>&emsp;&emsp;&emsp;</strong></span><span style="font-size:14px">&emsp;</span><span style="font-size:16px">तपाई श्री/श्रीमती ................... ले जग्गा धनी [@landOwner.name] को नाममा दर्ता रहेको ने. उ.म.न.पा. वडा नं [@landDetail.ward_no] टोल [@landDetail.tole]मा रहेको साविक [@landDetail.former_ward_no] गा.वि.स. वडा नं [@landDetail.ward_no] किता नं [@landDetail.plot_no] ज.वि.जम्मा 24 को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति २०७९-०७-२० मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा &#39;स्थानीय सरकार संचालन ऐन, २०७४&#39; को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति २०७९-०७-२५ को निर्माण बमोजिम प्रथम चरणमा &#39;आधारभूत निर्माण मापदण्ड-२०७२&#39; तथा &#39;राष्ट्रिय भवन निर्माण संहिता-२०६०&#39; बमोजिम निम्नाअनुसार डि.पि.सि.लेभलसम्म मात्र निर्माण कार्य गर्नुहोला । डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ ।</span></div>
+<div class="top" style="text-align:justify"><span style="font-size:16px"><strong>&emsp;&emsp;&emsp;</strong></span><span style="font-size:14px">&emsp;</span><span style="font-size:16px">तपाई श्री/श्रीमती ................... ले जग्गा धनी <u>[@landOwner.name]</u> को नाममा दर्ता रहेको ने. उ.म.न.पा. वडा नं <u>[@landDetail.ward_no]</u> टोल <u>[@landDetail.tole]</u> मा रहेको साविक <u>[@landDetail.former_ward_no]</u> गा.वि.स. वडा नं <u>[@landDetail.ward_no]</u> किता नं <u>[@landDetail.plot_no]</u> ज.वि.जम्मा 24 को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति २०७९-०७-२० मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा &#39;स्थानीय सरकार संचालन ऐन, २०७४&#39; को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति २०७९-०७-२५ को निर्माण बमोजिम प्रथम चरणमा &#39;आधारभूत निर्माण मापदण्ड-२०७२&#39; तथा &#39;राष्ट्रिय भवन निर्माण संहिता-२०६०&#39; बमोजिम निम्नाअनुसार डि.पि.सि.लेभलसम्म मात्र निर्माण कार्य गर्नुहोला । डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ ।</span></div>
 
 <div class="top" style="text-align:justify">&nbsp;</div>
 
@@ -45,30 +45,30 @@
     </thead>
     <tbody>
     <tr>
-        <td style="text-align:center"><span style="font-size:12px"><strong>१.</strong></span></td>
-        <td><span style="font-size:12px"><strong>लम्बाई(रनिङ फिट)</strong></span></td>
+        <td style="text-align:center"><span style="font-size:14px"><strong>१.</strong></span></td>
+        <td><span style="font-size:14px"><strong>लम्बाई(रनिङ फिट)</strong></span></td>
         <td>&nbsp;</td>
-        <td style="text-align:center"><span style="font-size:12px"><strong>४.</strong></span></td>
-        <td><span style="font-size:12px"><strong>दायाँ/बायाँ छोड्ने दुरी<br />
+        <td style="text-align:center"><span style="font-size:14px"><strong>४.</strong></span></td>
+        <td><span style="font-size:14px"><strong>दायाँ/बायाँ छोड्ने दुरी<br />
 			(रनिङ फिट)</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td style="text-align:center"><span style="font-size:12px"><strong>२.</strong></span></td>
-        <td><span style="font-size:12px"><strong>चौडाई(रनिङ फिट)</strong></span></td>
+        <td style="text-align:center"><span style="font-size:14px"><strong>२.</strong></span></td>
+        <td><span style="font-size:14px"><strong>चौडाई(रनिङ फिट)</strong></span></td>
         <td>&nbsp;</td>
-        <td style="text-align:center"><span style="font-size:12px"><strong>५.</strong></span></td>
-        <td><span style="font-size:12px"><strong>कम्पाउन्ड वाल<br />
+        <td style="text-align:center"><span style="font-size:14px"><strong>५.</strong></span></td>
+        <td><span style="font-size:14px"><strong>कम्पाउन्ड वाल<br />
 			(रनिङ फिट)</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td style="text-align:center"><span style="font-size:12px"><strong>३.</strong></span></td>
-        <td><span style="font-size:12px"><strong>सेट ब्याक<br />
+        <td style="text-align:center"><span style="font-size:14px"><strong>३.</strong></span></td>
+        <td><span style="font-size:14px"><strong>सेट ब्याक<br />
 			(छडको चौडाई सहित)</strong></span></td>
         <td>&nbsp;</td>
-        <td style="text-align:center"><span style="font-size:12px"><strong>६.</strong></span></td>
-        <td><span style="font-size:12px"><strong>लिन्थ लेभलको उचाई</strong></span></td>
+        <td style="text-align:center"><span style="font-size:14px"><strong>६.</strong></span></td>
+        <td><span style="font-size:14px"><strong>लिन्थ लेभलको उचाई</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     </tbody>
@@ -89,28 +89,28 @@
     </thead>
     <tbody>
     <tr>
-        <td style="text-align:center"><span style="font-size:12px"><strong>१.</strong></span></td>
-        <td><span style="font-size:12px"><strong>भवनको वर्गिकरण</strong></span></td>
-        <td><span style="font-size:12px"><strong>क&emsp;&emsp; ख&emsp;&emsp; ग &emsp;&emsp;घ</strong></span></td>
-        <td style="text-align:center"><span style="font-size:12px"><strong>४.</strong></span></td>
-        <td><span style="font-size:12px"><strong>पिलरको साईज (इन्च)</strong></span></td>
+        <td style="text-align:center"><span style="font-size:14px"><strong>१.</strong></span></td>
+        <td><span style="font-size:14px"><strong>भवनको वर्गिकरण</strong></span></td>
+        <td><span style="font-size:14px"><strong>क&emsp;&emsp; ख&emsp;&emsp; ग &emsp;&emsp;घ</strong></span></td>
+        <td style="text-align:center"><span style="font-size:14px"><strong>४.</strong></span></td>
+        <td><span style="font-size:14px"><strong>पिलरको साईज (इन्च)</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td style="text-align:center"><span style="font-size:12px"><strong>२.</strong></span></td>
-        <td><span style="font-size:12px"><strong>भवन स्ट्रक्चरल सिस्टम</strong></span></td>
-        <td><span style="font-size:12px"><strong>फ्रेम/वाल</strong></span></td>
-        <td style="text-align:center"><span style="font-size:12px"><strong>५.</strong></span></td>
-        <td><span style="font-size:12px"><strong>पिल्र्मा प्रयोग गर्ने डण्डीको<br />
+        <td style="text-align:center"><span style="font-size:14px"><strong>२.</strong></span></td>
+        <td><span style="font-size:14px"><strong>भवन स्ट्रक्चरल सिस्टम</strong></span></td>
+        <td><span style="font-size:14px"><strong>फ्रेम/वाल</strong></span></td>
+        <td style="text-align:center"><span style="font-size:14px"><strong>५.</strong></span></td>
+        <td><span style="font-size:14px"><strong>पिल्र्मा प्रयोग गर्ने डण्डीको<br />
 			साईज र संख्या</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td style="text-align:center"><span style="font-size:12px"><strong>३.</strong></span></td>
-        <td><span style="font-size:12px"><strong>जगको साईज (फिट)</strong></span></td>
+        <td style="text-align:center"><span style="font-size:14px"><strong>३.</strong></span></td>
+        <td><span style="font-size:14px"><strong>जगको साईज (फिट)</strong></span></td>
         <td>&nbsp;</td>
-        <td style="text-align:center"><span style="font-size:12px"><strong>६.</strong></span></td>
-        <td><span style="font-size:12px"><strong>पिलरको छुरीको साईज</strong></span></td>
+        <td style="text-align:center"><span style="font-size:14px"><strong>६.</strong></span></td>
+        <td><span style="font-size:14px"><strong>पिलरको छुरीको साईज</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     </tbody>

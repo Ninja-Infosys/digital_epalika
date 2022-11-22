@@ -76,3 +76,7 @@
     border: 1px solid black;
     border-radius: 5px;
 }
+.disable_menu{
+    background-color: rgba(0,0,0,0.2);
+    opacity: 0.5;
+}
