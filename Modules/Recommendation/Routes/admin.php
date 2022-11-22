@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
+use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::view('relation_identify','recommendation::admin.relation.relation_identify')->name('relation_identify');
@@ -14,7 +15,47 @@ Route::view('birth_date','recommendation::admin.relation.birth_date')->name('bir
 Route::view('birth_amendment','recommendation::admin.relation.birth_amendment')->name('birth_amendment');
 Route::view('business_closed','recommendation::admin.relation.business_closed')->name('business_closed');
 Route::view('business_operation','recommendation::admin.relation.business_operation')->name('business_operation');
+Route::view('house_destroy','recommendation::admin.relation.house_destroy')->name('house_destroy');
+Route::view('personal_detail','recommendation::admin.relation.personal_detail_certifiate_recommendation')->name('personal_detail');
+Route::view('name_birth','recommendation::admin.relation.Name_birth_recommendation')->name('name_birth');
+Route::view('land_paper','recommendation::admin.relation.land_paper_lost_recommendation')->name('land_paper');
+Route::view('kitta_recommendation','recommendation::admin.relation.kitta_recommendation')->name('kitta_recommendation');
+Route::view('protector_proven','recommendation::admin.relation.protector_proven')->name('protector_proven');
+Route::view('relation_proof','recommendation::admin.relation.relation_proof_between_deathperson_recommendation')->name('relation_proof');
+Route::view('alive_proof','recommendation::admin.relation.alive_proof_recommendation')->name('alive_proof');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::view('Health_Treatment_recommendation','recommendation::admin.relation.health_treatment_recommendation')->name('health_treatment_recommendation');
+Route::view('birth_property','recommendation::admin.relation.birth_certificate_property_valuation')->name('birth_property');
+Route::view('house_map_place','recommendation::admin.relation.house_map_place_recommendation')->name('house_map_place');
+Route::view('same_person_confirmation','recommendation::admin.relation.same_persion_confirmation')->name('same_person_confirmation');
+Route::view('protector_recommendation','recommendation::admin.relation.prorector_recommendation')->name('protector_recommendation');
+Route::view('relation_proof_living','recommendation::admin.relation.relation_proof_living')->name('relation_proof_living');
+Route::view('rights_one_proof','recommendation::admin.relation.rights_one_proof')->name('rights_one_proof');
+
+Route::prefix('setting')->as('setting.')->group(function (){
+    Route::resource('formBuilder', FormBuilderController::class);
+});
 
 

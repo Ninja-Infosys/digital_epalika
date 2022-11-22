@@ -42,11 +42,13 @@ class PublicApiController extends Controller
         return LinkResource::collection(ImportantLink::latest()->get());
     }
 
-    public function introduction(): string
+    public function introduction(): array
     {
         $setting = $this->getOfficeSetting();
 
-        return strip_tags($setting->introduction ?? '') ?? '';
+        return [
+            'introduction' => strip_tags($setting->introduction ?? '') ?? ''
+        ];
     }
 
     public function getOfficeSetting(): OfficeSetting
@@ -68,7 +70,7 @@ class PublicApiController extends Controller
             return [
                 'employees' => EmployeeResource::collection(Employee::orderBy('position')->active()->showForMobileAppRequest()->get()),
                 'news' => NewsResource::collection(Notice::orderByDesc('date')->news()->showInIndex()->nullClosedAt()->limit(3)->get()),
-                'notice' => NoticeResource::collection(Notice::orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->limit(3)->get()),
+                'notices' => NoticeResource::collection(Notice::orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->limit(3)->get()),
             ];
         }
         return [];
