@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="col-md-3">
-        <div class="info-card">
+        <div class="info-card disable_menu">
             <a href="#">
                 <div class="p-2 text-center">
                     <img src="{{asset('assets/backend/images/modules/rajashow.png')}}" width="50" height="50">
