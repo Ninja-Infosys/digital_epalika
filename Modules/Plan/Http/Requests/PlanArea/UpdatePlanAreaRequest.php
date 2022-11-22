@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Requests\Setting\PlanArea;
+namespace Modules\Plan\Http\Requests\PlanArea;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
-class StorePlanAreaRequest extends FormRequest
+class UpdatePlanAreaRequest extends FormRequest
 {
-    public function authorize(): bool
+    public function authorize():bool
     {
-        return Gate::allows('planArea_create');
+        return Gate::allows('planArea_edit');
     }
 
-    public function rules(): array
+    public function rules():array
     {
         return [
             'plan_area_id' => ['nullable', Rule::exists('plan_areas', 'id')->withoutTrashed()],
-            'area_name' => ['required', Rule::unique('plan_areas', 'area_name')->withoutTrashed()]
+            'area_name' => ['required', Rule::unique('plan_areas', 'area_name')->withoutTrashed()->ignore($this->planArea)]
         ];
     }
 
