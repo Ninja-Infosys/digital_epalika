@@ -74,7 +74,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 border">
+            <div class="col-md-4 border disable_menu">
                 <a href="#">
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/rajashow.png')}}"
@@ -101,7 +101,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 border">
+            <div class="col-md-4 border disable_menu">
                 <a href="#">
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/sifarish-parnali.png')}}"
@@ -110,7 +110,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 border">
+            <div class="col-md-4 border disable_menu">
                 <a href="#">
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/yojana.png')}}"
@@ -146,7 +146,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 border">
+            <div class="col-md-4 border disable_menu">
                 <a href="#">
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/kramachari.png')}}"
