@@ -12,7 +12,7 @@
                         {{$branch->branch_name}}
                     </button>
                 </p>
-                @if(count($branch->branches)!=0)
+                @if(count($branch->branches)!==0)
                     <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
                         <div class="card-body sub-branch">
                             <ul class="list-group">

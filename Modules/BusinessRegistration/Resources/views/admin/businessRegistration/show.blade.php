@@ -166,11 +166,11 @@
                                                         <th>{{$proprietorDetail->businessDetail->pan_no??''}}</th>
                                                     </tr>
                                                     <tr>
-                                                        <th>  कारोबार गर्ने वस्तु  </th>
+                                                        <th> कारोबार गर्ने वस्तु</th>
                                                         <th>{{$proprietorDetail->businessDetail->investmentRevenue->objectTransaction->title??''}}</th>
                                                     </tr>
                                                     <tr>
-                                                        <th> पुँजीगत लगानी  </th>
+                                                        <th> पुँजीगत लगानी</th>
                                                         <th>{{$proprietorDetail->businessDetail->investmentRevenue->registration_amount??''}}</th>
                                                     </tr>
                                                     <tr>
@@ -214,111 +214,111 @@
                                     </div>
                                 </div>
                                 @if($proprietorDetail->threeGenerationDetails->count() >0)
-                                <div class="col-md-6">
-                                    <div class="card mt-3">
-                                        <div class="card-header">
-                                            <h4 class="header-title">
-                                                तिन पुस्ते विवरण
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div>
-                                                <table class="table table-sm mb-0 table-striped table-hover">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>नाता</th>
-                                                        <th>नाम, थर</th>
-                                                        <th>नाम, थर( अंग्रेजीमा)</th>
-                                                        <th>नागरिकता नं</th>
-                                                        <th>सम्पर्क नं</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($proprietorDetail->threeGenerationDetails as $threeGenerationDetail)
+                                    <div class="col-md-6">
+                                        <div class="card mt-3">
+                                            <div class="card-header">
+                                                <h4 class="header-title">
+                                                    तिन पुस्ते विवरण
+                                                </h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div>
+                                                    <table class="table table-sm mb-0 table-striped table-hover">
+                                                        <thead>
                                                         <tr>
-                                                            <td>{{$threeGenerationDetail->relation}}</td>
-                                                            <td>{{$threeGenerationDetail->name}}</td>
-                                                            <td>{{$threeGenerationDetail->name_en}}</td>
-                                                            <td>{{$threeGenerationDetail->citizenship_no}}</td>
-                                                            <td>{{$threeGenerationDetail->mobile_no}}</td>
+                                                            <th>नाता</th>
+                                                            <th>नाम, थर</th>
+                                                            <th>नाम, थर( अंग्रेजीमा)</th>
+                                                            <th>नागरिकता नं</th>
+                                                            <th>सम्पर्क नं</th>
                                                         </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($proprietorDetail->threeGenerationDetails as $threeGenerationDetail)
+                                                            <tr>
+                                                                <td>{{$threeGenerationDetail->relation}}</td>
+                                                                <td>{{$threeGenerationDetail->name}}</td>
+                                                                <td>{{$threeGenerationDetail->name_en}}</td>
+                                                                <td>{{$threeGenerationDetail->citizenship_no}}</td>
+                                                                <td>{{$threeGenerationDetail->mobile_no}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                                 @if($proprietorDetail->businessDetail->is_rent==1)
-                                <div class="col-md-6">
-                                    <div class="card mt-3">
-                                        <div class="card-header">
-                                            <h4 class="header-title">
-                                                बहालमा
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-sm mb-0 table-striped table-hover">
-                                                    <thead>
-                                                    <tr>
-                                                        <th> घर धनिको नाम थर</th>
-                                                        <th>{{$proprietorDetail->businessDetail->house_owner_name??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> घर धनिको मोबाइल नं</th>
-                                                        <th>{{$proprietorDetail->businessDetail->house_owner_phone??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> ठेगाना</th>
-                                                        <th>{{$proprietorDetail->businessDetail->house_owner_address??''}}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th> मासिक भाडा रु</th>
-                                                        <th>{{$proprietorDetail->businessDetail->house_owner_monthly_rent??''}}</th>
-                                                    </tr>
-                                                    </thead>
-                                                </table>
+                                    <div class="col-md-6">
+                                        <div class="card mt-3">
+                                            <div class="card-header">
+                                                <h4 class="header-title">
+                                                    बहालमा
+                                                </h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm mb-0 table-striped table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th> घर धनिको नाम थर</th>
+                                                            <th>{{$proprietorDetail->businessDetail->house_owner_name??''}}</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> घर धनिको मोबाइल नं</th>
+                                                            <th>{{$proprietorDetail->businessDetail->house_owner_phone??''}}</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> ठेगाना</th>
+                                                            <th>{{$proprietorDetail->businessDetail->house_owner_address??''}}</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th> मासिक भाडा रु</th>
+                                                            <th>{{$proprietorDetail->businessDetail->house_owner_monthly_rent??''}}</th>
+                                                        </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                                 @if($proprietorDetail->businessDetail->business_nature->value == \Modules\BusinessRegistration\Enums\BusinessNature::PARTNERSHIP->value)
-                                <div class="col-md-6">
-                                    <div class="card mt-3">
-                                        <div class="card-header">
-                                            <h4 class="header-title">
-                                                साझेदार हरुको विवरण
-                                            </h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div>
-                                                <table class="table table-sm mb-0 table-striped table-hover">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>साझेदार सँगको नाता</th>
-                                                        <th>साझेदार को नाम थर</th>
-                                                        <th>नागरिकता नं</th>
-                                                        <th>सम्पर्क नं</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($proprietorDetail->businessDetail->partnerDetails as $partnerDetails)
+                                    <div class="col-md-6">
+                                        <div class="card mt-3">
+                                            <div class="card-header">
+                                                <h4 class="header-title">
+                                                    साझेदार हरुको विवरण
+                                                </h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div>
+                                                    <table class="table table-sm mb-0 table-striped table-hover">
+                                                        <thead>
                                                         <tr>
-                                                            <td>{{$partnerDetails->relation}}</td>
-                                                            <td>{{$partnerDetails->name}}</td>
-                                                            <td>{{$partnerDetails->citizenship_no}}</td>
-                                                            <td>{{$partnerDetails->mobile_no}}</td>
+                                                            <th>साझेदार सँगको नाता</th>
+                                                            <th>साझेदार को नाम थर</th>
+                                                            <th>नागरिकता नं</th>
+                                                            <th>सम्पर्क नं</th>
                                                         </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($proprietorDetail->businessDetail->partnerDetails as $partnerDetails)
+                                                            <tr>
+                                                                <td>{{$partnerDetails->relation}}</td>
+                                                                <td>{{$partnerDetails->name}}</td>
+                                                                <td>{{$partnerDetails->citizenship_no}}</td>
+                                                                <td>{{$partnerDetails->mobile_no}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endif
                                 @if($proprietorDetail->businessDetail->is_registered == 1)
                                     <div class="col-md-6">
@@ -392,7 +392,8 @@
                                     <div class="card">
                                         <div class="card-header">व्यवसायीको पासपोर्ट साइजको फोटो</div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->photo_url??''}}" alt=""
+                                            <img src="{{$proprietorDetail->businessRegisteredFile->photo_url??''}}"
+                                                 alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
@@ -401,8 +402,10 @@
                                     <div class="card">
                                         <div class="card-header">नागरिकता (आगाडी)</div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->citizenship_front_url??''}}" alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                            <img
+                                                src="{{$proprietorDetail->businessRegisteredFile->citizenship_front_url??''}}"
+                                                alt=""
+                                                style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
@@ -411,8 +414,10 @@
                                     <div class="card">
                                         <div class="card-header">नागरिकता (पछाडी)</div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->citizenship_back_url??''}}" alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                            <img
+                                                src="{{$proprietorDetail->businessRegisteredFile->citizenship_back_url??''}}"
+                                                alt=""
+                                                style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
@@ -421,18 +426,24 @@
                                     <div class="card">
                                         <div class="card-header">फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->company_registration_url??''}}" alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                            <img
+                                                src="{{$proprietorDetail->businessRegisteredFile->company_registration_url??''}}"
+                                                alt=""
+                                                style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-header"> आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि </div>
+                                        <div class="card-header"> आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको
+                                            करदाता प्रमाणपत्रको प्रतिलिपि
+                                        </div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->tax_pay_file_url??''}}" alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                            <img
+                                                src="{{$proprietorDetail->businessRegisteredFile->tax_pay_file_url??''}}"
+                                                alt=""
+                                                style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
                                 </div>
@@ -441,7 +452,8 @@
                                     <div class="card">
                                         <div class="card-header">हस्ताक्षर</div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->signature_url??''}}" alt=""
+                                            <img src="{{$proprietorDetail->businessRegisteredFile->signature_url??''}}"
+                                                 alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
@@ -449,9 +461,11 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            औठाको छाप</div>
+                                            औठाको छाप
+                                        </div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->thumb_url??''}}" alt=""
+                                            <img src="{{$proprietorDetail->businessRegisteredFile->thumb_url??''}}"
+                                                 alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
                                     </div>
@@ -464,19 +478,13 @@
                                    href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <button class="btn btn btn-info mx-1" onclick="printJS({
-                                    printable: 'printData4',
-                                     type: 'html',
-                                     documentTitle: '{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM->label()}}',
-                                     showModal: true,
-                                     css: '{{asset('assets/backend/css/print.css')}}',
-                                     honorMarginPadding: false,
-                                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।',
-                                      style: '.col-md-8 { width: 66.66666667%; }',
-                                         })"><i class="fa fa-print"></i>
+                                <button class="btn btn btn-info mx-1" onclick="print('print1')"><i
+                                        class="fa fa-print"></i>
                                 </button>
+
+
                             </div>
-                            <div class="font-black" id="printData4">
+                            <div class="font-black ckEditor" id="print1">
 
                                 {!!$printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()->data
                                    ?? $proprietorDetail->template_data
@@ -486,24 +494,21 @@
 
                             </div>
 
+
                             <div class="d-flex justify-content-end mb-2 mt-2">
                                 <a class="btn btn-primary btn-sm"
                                    href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <button class="btn btn btn-info mx-1" onclick="printJS({
-                                    printable: 'printData3',
-                                     type: 'html',
-                                     documentTitle: '{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS->label()}}',
-                                     showModal: true,
-                                     css: '{{asset('assets/backend/css/print.css')}}',
-                                     honorMarginPadding: false,
-                                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।',
-                                      style: '.col-md-8 { width: 66.66666667%; }',
-                                         })"><i class="fa fa-print"></i>
+                                <button class="btn btn btn-info mx-1" onclick="print('print2')"><i
+                                        class="fa fa-print"></i>
                                 </button>
+                                <a href="{{route('admin.businessRegistration.add-data.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}"
+                                   class="btn btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                </a>
                             </div>
-                            <div class="font-black" id="printData3">
+                            <div class="font-black ckEditor" id="print2">
 
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()->data
                                    ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()['data']
@@ -517,19 +522,11 @@
                                    href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <button class="btn btn btn-info mx-1" onclick="printJS({
-                                    printable: 'printData2',
-                                     type: 'html',
-                                     documentTitle: '{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK->label()}}',
-                                     showModal: true,
-                                     css: '{{asset('assets/backend/css/print.css')}}',
-                                     honorMarginPadding: false,
-                                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।',
-                                      style: '.col-md-8 { width: 66.66666667%; }',
-                                         })"><i class="fa fa-print"></i>
+                                <button class="btn btn btn-info mx-1" onclick="print('print3')"><i
+                                        class="fa fa-print"></i>
                                 </button>
                             </div>
-                            <div class="font-black" id="printData2">
+                            <div class="font-black ckEditor" id="print3">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()->data
                                    ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()['data']
                                    ?? ''!!}
@@ -542,30 +539,35 @@
                                    href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE])}}">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <button class="btn btn btn-info mx-1" onclick="printJS({
-                                    printable: 'printData1',
-                                     type: 'html',
-                                     documentTitle: '{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE->label()}}',
-                                     showModal: true,
-                                     css: '{{asset('assets/backend/css/print.css')}}',
-                                     honorMarginPadding: false,
-                                     modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।',
-                                      style: '.col-md-8 { width: 66.66666667%; }',
-                                         })"><i class="fa fa-print"></i>
+                                <button class="btn btn btn-info mx-1" onclick="print('print4')"><i
+                                        class="fa fa-print"></i>
                                 </button>
                             </div>
-                            <div class="font-black" id="printData1">
+                            <div class="font-black ckEditor" id="print4">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()->data
-                                   ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()['data']
-                                   ?? ''!!}
-
+                                                            ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()['data']
+                                                            ?? ''!!}
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+    @push('scripts')
+        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/ckEditor/js/print.js')}}"></script>
+
+
+        <script>
+            function print(editorName) {
+                const editor = CKEDITOR.instances[editorName];
+                editor.execCommand('print');
+            }
+        </script>
+    @endpush
 
 @endsection

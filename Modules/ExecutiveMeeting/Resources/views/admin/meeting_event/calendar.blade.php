@@ -28,32 +28,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3">
-                            <select id='locale-selector'></select>
-                            <button class="btn btn-lg font-16 btn-primary w-100" id="btn-new-event"><i
-                                    class="mdi mdi-plus-circle-outline"></i> Create New Event
-                            </button>
-
-                            <div id="external-events">
-                                <br>
-                                <p class="text-muted">तपाईंको घटना तान्नुहोस् र छोड्नुहोस् वा पात्रोमा क्लिक
-                                    गर्नुहोस्</p>
-                                <div class="external-event bg-success" data-class="bg-success">
-                                    <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>
-                                    New Theme Release
-                                </div>
-                                <div class="external-event bg-info" data-class="bg-info">
-                                    <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>My Event
-                                </div>
-                                <div class="external-event bg-warning" data-class="bg-warning">
-                                    <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>Meet manager
-                                </div>
-                                <div class="external-event bg-danger" data-class="bg-danger">
-                                    <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>Create New theme
-                                </div>
-                            </div>
-                        </div> <!-- end col-->
-                        <div class="col-lg-9">
+                        <div class="col-lg-12">
                             <div id="calendar"></div>
                         </div> <!-- end col -->
                     </div>
@@ -181,74 +156,9 @@
                         endTime: '17:00', // an end time (6pm in this example)
                     },
                     events: "{{route('admin.executiveMeeting.calendar.meetingCalendar',$event_for)}}",
-
-                    dateClick: function (event) {
-
-                    },
-                    select: function (event) {
-                        document.getElementById('event-start-date').value = event.startStr;
-                        document.getElementById('event-end-date').value = event.endStr;
-                        modal.show();
-                    },
-                    drop: function (event) {
-                        alert('a day has been dropped!' + event.startStr + ' to ' + event.endStr);
-                    },
                 });
 
-                $('#btn-save-event').click((e) => {
-                    e.preventDefault();
-                    validateForm();
-                    const title = document.getElementById('event-title').value;
-                    const eventClass = document.getElementById('event-class').value;
 
-                    const start = document.getElementById('event-start-date').value;
-                    const end = document.getElementById('event-end-date').value;
-
-                    if (title) {
-                        console.log('ok');
-                        $.ajax({
-                            url: "",
-                            data: {
-                                title: title,
-                                className: eventClass,
-                                start: start,
-                                end: end
-                            },
-                            type: "POST",
-                            success: function (data) {
-                                calendar.addEvent({
-                                    id: data.id,
-                                    title: data.title,
-                                    start: data.start,
-                                    end: data.end,
-                                    allDay: true
-                                })
-                                $('#form-event').trigger("reset");
-                                modal.hide();
-                            }
-                        });
-                    }
-                })
-
-                function validateForm(){
-                    const title = document.getElementById('event-title').value;
-                    const eventClass = document.getElementById('event-class').value;
-
-                    const start = document.getElementById('event-start-date').value;
-
-                    if (title==null || title===""){
-                        $("#error-title").addClass("invalid-feedback").removeClass("d-none");
-                        return false;
-                    }
-                    else if (eventClass==null || eventClass===""){
-                        $("#error-class").addClass("invalid-feedback").removeClass("d-none");
-                        return false;
-                    }
-                    else if (start==null || start===""){
-                        $("#error-date").addClass("invalid-feedback").removeClass("d-none");
-                        return false;
-                    }
-                }
                 calendar.render();
 
 

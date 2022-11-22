@@ -86,7 +86,7 @@ class OrganizationRegisterLivewire extends Component
     ];
 
     protected array $thirdStepValidations = [
-        'user.name' => ['required', 'unique:organizations,name'],
+        'user.name' => ['required'],
         'user.email' => ['required', 'email', 'unique:organizations,email'],
         'user.phone' => ['required', 'unique:organizations,phone'],
     ];
@@ -143,7 +143,7 @@ class OrganizationRegisterLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance');
+        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance','progressPercentage');
     }
 
     public function checkOrganizationAddress(): void

@@ -1,30 +1,30 @@
-<div class="flex-container mt-5" style="display:flex">
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:0rem; margin-right:4rem; margin-top:0rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:120px" /></div>
+<div class="flex-container" style="display:flex">
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:0rem; margin-right:4rem; margin-top:0rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:80px; width:110px" /></div>
 
-    <div class="item-auto" style="flex:1 1 auto; margin-right:4rem; margin-top:0rem; text-align:center"><strong><span style="font-size:22px">नेपालगन्ज उप-महानगरपालिका</span><br />
-            <span style="font-size:22px">नगर कार्यपालिका </span><span style="font-size:20px">कार्यलय</span></strong><br />
-        <strong><span style="font-size:16px">नेपालगन्ज,बाँके<br />
-लुम्बिनी प्रदेश,नेपाल</span></strong></div>
+    <div class="item-auto" style="flex:1 1 auto; margin-right:1rem; margin-top:0rem; text-align:center"><strong><span style="font-size:20px">नेपालगन्ज उप-महानगरपालिका</span><br />
+            <span style="font-size:16px">नगर कार्यपालिका कार्यलय</span></strong><br />
+        <span style="font-size:14px">नेपालगन्ज,बाँके<br />
+लुम्बिनी प्रदेश,नेपाल</span></div>
 
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:0rem; text-align:center">
-        <div class="photo" style="border:1px solid black; height:8rem; width:7rem">&nbsp;
-            <h5>फोटो</h5>
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:0rem; margin-top:0rem; text-align:center">
+        <div class="photo" style="border:1px solid black; height:6rem; width:6rem">&nbsp;
+            <h5><span style="font-size:16px"><strong>फोटो</strong></span></h5>
         </div>
     </div>
 </div>
 
 <div class="date">
     <div class="mt-2 row">
-        <div class="col-md-6"><span style="font-size:16px"><strong>पत्र सं: ......................<br />
-चलानी नं: ....................</strong></span></div>
+        <div class="col-md-6"><span style="font-size:16px">पत्र सं: ......................<br />
+चलानी नं: ....................</span></div>
 
-        <div class="col-md-6 text-end" style="text-align:right"><span style="font-size:16px"><strong>मिति: ..............................</strong></span></div>
+        <div class="col-md-6 text-end" style="text-align:right"><span style="font-size:16px">मिति: ..............................</span></div>
     </div>
 </div>
 
 <h4 style="text-align:center"><span style="font-size:24px"><strong>प्लिन्थ लेभलसम्म निर्माण कार्यको इजाजत पत्र ।</strong></span></h4>
 
-<div class="top" style="text-align:justify"><span style="font-size:16px"><strong>&emsp;&emsp;&emsp;&emsp;तपाई श्री/श्रीमती ................... ले जग्गा धनी ................... को नाममा दर्ता रहेको ने. उ.म.न.पा. वडा नं .................... टोल ................... मा रहेको साविक ................... गा.वि.स. वडा नं.................... किता नं .................... ज.वि.जम्मा ................... को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति ................... मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा &#39;स्थानीय सरकार संचालन ऐन, २०७४&#39; को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति ................... को निर्माण बमोजिम प्रथम चरणमा &#39;आधारभूत निर्माण मापदण्ड-२०७२&#39; तथा &#39;राष्ट्रिय भवन निर्माण संहिता-२०६०&#39; बमोजिम निम्नाअनुसार डि.पि.सि.लेभलसम्म मात्र निर्माण कार्य गर्नुहोला । डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ ।</strong></span></div>
+<div class="top" style="text-align:justify"><span style="font-size:16px"><strong>&emsp;&emsp;&emsp;</strong></span><span style="font-size:14px">&emsp;</span><span style="font-size:16px">तपाई श्री/श्रीमती ................... ले जग्गा धनी [@landOwner.name] को नाममा दर्ता रहेको ने. उ.म.न.पा. वडा नं [@landDetail.ward_no] टोल [@landDetail.tole]मा रहेको साविक [@landDetail.former_ward_no] गा.वि.स. वडा नं [@landDetail.ward_no] किता नं [@landDetail.plot_no] ज.वि.जम्मा 24 को जग्गामा भवन निर्माण स्वीकृतिको लागि मिति २०७९-०७-२० मा दरखास्त सहित नक्सा पेश गर्नु भएकोमा &#39;स्थानीय सरकार संचालन ऐन, २०७४&#39; को दफा २७, २८, २९, ३०, ३१, ३२, ३३, ३४ अनुसार प्रक्रिया पुरा भई यस कार्यालयको मिति २०७९-०७-२५ को निर्माण बमोजिम प्रथम चरणमा &#39;आधारभूत निर्माण मापदण्ड-२०७२&#39; तथा &#39;राष्ट्रिय भवन निर्माण संहिता-२०६०&#39; बमोजिम निम्नाअनुसार डि.पि.सि.लेभलसम्म मात्र निर्माण कार्य गर्नुहोला । डि.पि.सि.सम्मको निर्माण कार्य सकिएपछि सो भन्दा माथिको स्वीकृति (भवन निर्माण स्थायी ईजाजत पत्र) को लागि कन्सल्टेन्ट/ईन्जिनियरबाट डि.पि.सि. निर्माण कार्यको फिल्ड प्रतिवेदन लिनु भै उपस्थित हुन जानकारी गराईन्छ ।</span></div>
 
 <div class="top" style="text-align:justify">&nbsp;</div>
 
@@ -32,101 +32,99 @@
 
 <div class="fw-bold"><span style="font-size:16px"><strong>जग्गा बिकास तथा भवन मापदण्ड २०६४</strong></span></div>
 
-<table border="1" class="mb-1 table table-bordered table-sm" style="border:2px solid black; height:170px; width:894px">
+<table border="1" cellpadding="8" cellspacing="0" class="mb-1 table table-bordered table-sm" style="border:2px solid black; height:246px; width:894px">
     <thead>
     <tr>
-        <th scope="col"><span style="font-size:16px"><strong>क्र.स.</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>विवरण</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>स्वीकृति अनुसार</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>क्र.स.</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>विवरण</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>स्वीकृति अनुसार</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>क्र.स.</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>विवरण</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>स्वीकृति अनुसार</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>क्र.स.</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>विवरण</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>स्वीकृति अनुसार</strong></span></th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td style="text-align:center"><span style="font-size:16px"><strong>१.</strong></span></td>
-        <td><span style="font-size:16px"><strong>लम्बाई(रनिङ फिट)</strong></span></td>
+        <td style="text-align:center"><span style="font-size:12px"><strong>१.</strong></span></td>
+        <td><span style="font-size:12px"><strong>लम्बाई(रनिङ फिट)</strong></span></td>
         <td>&nbsp;</td>
-        <td style="text-align:center"><span style="font-size:16px"><strong>४.</strong></span></td>
-        <td><span style="font-size:16px"><strong>दायाँ/बायाँ छोड्ने दुरी<br />
+        <td style="text-align:center"><span style="font-size:12px"><strong>४.</strong></span></td>
+        <td><span style="font-size:12px"><strong>दायाँ/बायाँ छोड्ने दुरी<br />
 			(रनिङ फिट)</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td style="text-align:center"><span style="font-size:16px"><strong>२.</strong></span></td>
-        <td><span style="font-size:16px"><strong>चौडाई(रनिङ फिट)</strong></span></td>
+        <td style="text-align:center"><span style="font-size:12px"><strong>२.</strong></span></td>
+        <td><span style="font-size:12px"><strong>चौडाई(रनिङ फिट)</strong></span></td>
         <td>&nbsp;</td>
-        <td style="text-align:center"><span style="font-size:16px"><strong>५.</strong></span></td>
-        <td><span style="font-size:16px"><strong>कम्पाउन्ड वाल<br />
+        <td style="text-align:center"><span style="font-size:12px"><strong>५.</strong></span></td>
+        <td><span style="font-size:12px"><strong>कम्पाउन्ड वाल<br />
 			(रनिङ फिट)</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td style="text-align:center"><span style="font-size:16px"><strong>३.</strong></span></td>
-        <td><span style="font-size:16px"><strong>सेट ब्याक<br />
+        <td style="text-align:center"><span style="font-size:12px"><strong>३.</strong></span></td>
+        <td><span style="font-size:12px"><strong>सेट ब्याक<br />
 			(छडको चौडाई सहित)</strong></span></td>
         <td>&nbsp;</td>
-        <td style="text-align:center"><span style="font-size:16px"><strong>६.</strong></span></td>
-        <td><span style="font-size:16px"><strong>लिन्थ लेभलको उचाई</strong></span></td>
+        <td style="text-align:center"><span style="font-size:12px"><strong>६.</strong></span></td>
+        <td><span style="font-size:12px"><strong>लिन्थ लेभलको उचाई</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     </tbody>
 </table>
 
-<h6>&nbsp;</h6>
-
 <h6><span style="font-size:16px"><strong>राष्ट्रिय भवन निर्माण संहिता २०६०</strong></span></h6>
 
-<table border="1" class="table table-bordered" style="border:2px solid black; height:130px; width:892px">
+<table border="1" cellpadding="8" cellspacing="0" class="table table-bordered" style="border:2px solid black; height:193px; width:892px">
     <thead>
     <tr>
-        <th scope="col"><span style="font-size:16px"><strong>क्र.स.</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>विवरण</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>स्वीकृति अनुसार</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>क्र.स.</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>विवरण</strong></span></th>
-        <th scope="col"><span style="font-size:16px"><strong>स्वीकृति अनुसार</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>क्र.स.</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>विवरण</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>स्वीकृति अनुसार</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>क्र.स.</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>विवरण</strong></span></th>
+        <th scope="col"><span style="font-size:14px"><strong>स्वीकृति अनुसार</strong></span></th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td style="text-align:center"><span style="font-size:16px"><strong>१.</strong></span></td>
-        <td><span style="font-size:16px"><strong>भवनको वर्गिकरण</strong></span></td>
-        <td><span style="font-size:16px"><strong>क&emsp;&emsp; ख&emsp;&emsp; ग &emsp;&emsp;घ</strong></span></td>
-        <td style="text-align:center"><span style="font-size:16px"><strong>४.</strong></span></td>
-        <td><span style="font-size:16px"><strong>पिलरको साईज (इन्च)</strong></span></td>
+        <td style="text-align:center"><span style="font-size:12px"><strong>१.</strong></span></td>
+        <td><span style="font-size:12px"><strong>भवनको वर्गिकरण</strong></span></td>
+        <td><span style="font-size:12px"><strong>क&emsp;&emsp; ख&emsp;&emsp; ग &emsp;&emsp;घ</strong></span></td>
+        <td style="text-align:center"><span style="font-size:12px"><strong>४.</strong></span></td>
+        <td><span style="font-size:12px"><strong>पिलरको साईज (इन्च)</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td style="text-align:center"><span style="font-size:16px"><strong>२.</strong></span></td>
-        <td><span style="font-size:16px"><strong>भवन स्ट्रक्चरल सिस्टम</strong></span></td>
-        <td><span style="font-size:16px"><strong>फ्रेम/वाल</strong></span></td>
-        <td style="text-align:center"><span style="font-size:16px"><strong>५.</strong></span></td>
-        <td><span style="font-size:16px"><strong>पिल्र्मा प्रयोग गर्ने डण्डीको<br />
+        <td style="text-align:center"><span style="font-size:12px"><strong>२.</strong></span></td>
+        <td><span style="font-size:12px"><strong>भवन स्ट्रक्चरल सिस्टम</strong></span></td>
+        <td><span style="font-size:12px"><strong>फ्रेम/वाल</strong></span></td>
+        <td style="text-align:center"><span style="font-size:12px"><strong>५.</strong></span></td>
+        <td><span style="font-size:12px"><strong>पिल्र्मा प्रयोग गर्ने डण्डीको<br />
 			साईज र संख्या</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     <tr>
-        <td style="text-align:center"><span style="font-size:16px"><strong>३.</strong></span></td>
-        <td><span style="font-size:16px"><strong>जगको साईज (फिट)</strong></span></td>
+        <td style="text-align:center"><span style="font-size:12px"><strong>३.</strong></span></td>
+        <td><span style="font-size:12px"><strong>जगको साईज (फिट)</strong></span></td>
         <td>&nbsp;</td>
-        <td style="text-align:center"><span style="font-size:16px"><strong>६.</strong></span></td>
-        <td><span style="font-size:16px"><strong>पिलरको छुरीको साईज</strong></span></td>
+        <td style="text-align:center"><span style="font-size:12px"><strong>६.</strong></span></td>
+        <td><span style="font-size:12px"><strong>पिलरको छुरीको साईज</strong></span></td>
         <td>&nbsp;</td>
     </tr>
     </tbody>
 </table>
 
 <div class="flex-container mt-5" style="display:flex">
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:16px"><strong>....................................<br />
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:14px"><strong>....................................<br />
 तयार गर्ने</strong></span></div>
 
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:16px"><strong>...................................<br />
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:14px"><strong>...................................<br />
 चेक गर्ने<br />
 (इन्जिनियर)</strong></span></div>
 
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:16px"><strong>...................................<br />
+    <div class="item-auto" style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center"><span style="font-size:14px"><strong>...................................<br />
 स्वीकृत गर्ने<br />
 (प्रमुख प्रशासकिय अधिकृत)</strong></span></div>
 </div>
@@ -139,7 +137,7 @@
 
 <h6><span style="font-size:16px"><strong>प्रथम चरणका इजाजत नविकरण</strong></span></h6>
 
-<table class="table table-bordered" style="border: 2px solid black; height:61px; width:891px">
+<table border="1" cellpadding="8" cellspacing="0" class="table table-bordered" style="border:2px solid black; height:61px; width:891px">
     <thead>
     <tr>
         <th scope="col">&nbsp;</th>
@@ -162,7 +160,7 @@
 
 <h5><span style="font-size:16px"><strong>प्रथम चरणका इजाजत नामसारी</strong></span></h5>
 
-<table class="table table-bordered word" style="border: 2px solid black; height:560px; width:889px">
+<table border="1" cellpadding="8" cellspacing="0" class="table table-bordered word" style="border:2px solid black; height:560px; width:889px">
     <thead>
     <tr>
         <th scope="col">&nbsp;</th>

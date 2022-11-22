@@ -4,6 +4,8 @@ namespace Modules\BusinessRegistration\Http\Requests\BusinessRegistrationTemplat
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rules\Enum;
+use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 
 class StoreBusinessRegistrationTemplateRequest extends FormRequest
 {
@@ -16,7 +18,7 @@ class StoreBusinessRegistrationTemplateRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'for' => ['required'],
+            'for' => ['required', new Enum(TemplateTypeEnum::class)],
             'data' => ['required'],
             'requires_header' => ['nullable', 'boolean'],
         ];

@@ -37,7 +37,7 @@ class ServiceEmployee extends Model
         return $this->photo ? Storage::disk('public')->url($this->attributes['photo']) : asset('images/user_icon.jpg');
     }
 
-    public function setPhotoAttribute($value)
+    public function setPhotoAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['photo'] = $value->store('service/'.Str::slug($this->attributes['employee_name'], '_'), 'public');

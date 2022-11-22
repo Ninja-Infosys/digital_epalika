@@ -36,7 +36,6 @@
 <script src="{{asset('assets/frontend/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/fontawesome/all.min.js')}}"></script>
 <script src="{{asset('assets/frontend/js/sweetalert2.min.js')}}"></script>
-{{--<script src="{{asset('assets/frontend/js/jquery-3.2.1.slim.min.js')}}"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 
@@ -53,6 +52,6 @@
         });
     });
 </script>
-
+@include('sweetalert::alert')
 </body>
 </html>

@@ -37,5 +37,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->group(module_path('DigitalBoard', '/Routes/api.php'));
+
+        Route::prefix('api/v1/digitalboard')
+            ->middleware('api')
+            ->group(module_path('DigitalBoard', '/Routes/api/v1/public_api.php'));
     }
 }

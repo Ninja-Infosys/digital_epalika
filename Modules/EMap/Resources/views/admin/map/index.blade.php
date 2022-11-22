@@ -38,7 +38,6 @@
                                 <th scope="col">युनिक आइडी</th>
                                 <th scope="col">निर्माण कार्यको किसिम</th>
                                 <th scope="col">आवेदन भर्ने संस्था </th>
-                                <th scope="col">आवेदन विवरण</th>
                                 <th scope="col">#</th>
                             </tr>
                             </thead>
@@ -52,41 +51,7 @@
                                     <td>{{$mapApply->construction_type->label() ?? ''}}</td>
                                     <td>{{$mapApply->organization->name ?? ''}}</td>
                                     <td>
-                                        <div class="btn-group">
-                                            <a href="#"
-                                               type="button" @class([
-                                                        "btn",
-                                                        "btn-danger"=>$application_types->diff($mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type'))->count() >0,
-                                                        "btn-success"=>$application_types->diff($mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type'))->count() <=0,
-                                                        "btn-sm",
-                                                        "text-white"
-                                                ])>
-                                                <i @class([
-                                                "fa",
-                                                "fa-window-close"=>$application_types->diff($mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type'))->count() > 0,
-                                                "fa-check"=>$application_types->diff($mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type'))->count() <= 0
-                                                ])></i>
-                                            </a>
-                                            <button type="button"
-                                                    class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split text-white"
-                                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                <i class="fas fa-angle-down"></i>
-                                            </button>
-                                            <div class="dropdown-menu"
-                                                 style="position: absolute; inset: 0 auto auto 0; margin: 0; transform: translate(76px, 40px);"
-                                                 data-popper-placement="bottom-start">
-                                                @foreach(\App\Enums\ApplicationTypeEnum::cases() as $type)
-                                                    <a class="dropdown-item" href="#">{{$type->label()}} <i @class([
-                                                        'fa',
-                                                        'fa-check text-success'=>$mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type')->contains($type->value),
-                                                        'fa-window-close text-danger'=>!$mapApply->applyMapNotices->whereNull('rejected_at')->pluck('application_type')->contains($type->value),
-                                                    ])></i></a>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('emap.admin.map.mapApply.show', $mapApply)}}"
+                                        <a href="{{route('emap.admin.map.mapApply.noticeList', [$mapApply,$applicationFormTypeEnum])}}"
                                            type="button" class="btn btn-info btn-sm text-white">
                                             <i class="fa fa-eye"></i>
                                         </a>

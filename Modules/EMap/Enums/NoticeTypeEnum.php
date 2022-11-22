@@ -121,6 +121,70 @@ enum NoticeTypeEnum: string
         };
     }
 
+    public function showInMapVerification(): bool
+    {
+        return self::getShowInMapVerification($this);
+    }
+
+    public static function getShowInMapVerification(self $value): bool
+    {
+        return match ($value) {
+
+            //heir
+            self::HEIR => true,
+            //permission enums
+            self::PERMISSION => true,
+            //application enums
+            self::MAP_ACCEPTANCE => true,
+            self::TECHNICIAN_APPROVAL => true,
+            self::ENGINEER_APPROVAL => true,
+            self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR => false,
+            self::MAP_PASS_FOR_BUILDING => true,
+            self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE => false,
+            self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION => false,
+            self::REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE => false,
+
+            //notice enums
+            self::NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR => true,
+            self::FIFTEEN_DAYS_NOTICE_ADJOURNED => true,
+            self::REGARDING_SENDING_DETAILS => false,
+            self::REVISED_SUPERSTRUCTURE_PERMIT => false,
+            //bond enums
+            self::FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS => true,
+            self::SARZAMIN_MUCHULKA => true,
+            //report enums
+            self::BUILDING_DESIGN_DETAILS => false,
+            self::BUILDING_COMPLIANCE_CHECKLIST => false,
+            self::TECHNICAL_REPORT => true,
+            self::CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL => false,
+            self::THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT => false,
+            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE => false,
+            self::THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT => false,
+            self::CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE => false,
+            self::CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE => false,
+
+            //agreement
+            self::AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD => true,
+            self::AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR => true,
+
+            //order
+            self::GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE => true,
+            self::REGARDING_SUPERSTRUCTURE_PERMIT => false,
+            self::REVISED_SUPERSTRUCTURE_PERMIT_ORDER => false,
+            self::HOUSE_MAP_NAMSARI => false,
+            //certificate enums
+            self::PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL => false,
+            self::PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE => false,
+            self::BUILDING_COMPLETION_CERTIFICATE => false,
+            self::MAP_CERTIFICATE => false,
+
+            //registration
+            self::REGARDING_FEES_AND_REGISTRATION => false,
+
+
+        };
+    }
+
     /**
      * @throws Exception
      */
@@ -244,5 +308,12 @@ enum NoticeTypeEnum: string
     public static function getAllValues(): Collection
     {
         return collect(self::cases())->pluck('value');
+    }
+
+    public static function getAllVerifiedField(): Collection
+    {
+        return collect(self::cases())->filter(function ($notice) {
+            return $notice->showInMapVerification();
+        })->pluck('value');
     }
 }

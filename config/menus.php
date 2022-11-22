@@ -14,6 +14,7 @@ return [
         'grant',
         'judicialcommittee',
         'taskmanagement',
+        'recommendation'
     ],
     'sidebars' => [
         'website',

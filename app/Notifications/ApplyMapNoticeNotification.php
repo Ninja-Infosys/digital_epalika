@@ -5,6 +5,7 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 use Modules\EMap\Entities\ApplyMapNotice;
 
 class ApplyMapNoticeNotification extends Notification
@@ -33,7 +34,7 @@ class ApplyMapNoticeNotification extends Notification
     {
         return [
             'map_apply_id' => $this->applyMapNotice->map_apply_id,
-            'file' => $this->applyMapNotice->file,
+            'data' => Str::words(strip_tags($this->applyMapNotice->data,10)),
             'file_type' => $this->applyMapNotice->file_type,
         ];
     }

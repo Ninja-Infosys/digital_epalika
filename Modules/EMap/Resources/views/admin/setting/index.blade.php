@@ -80,9 +80,6 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/super-build/ckeditor.js"></script>
-        <script src="{{asset('assets/backend/js/ckEditor.js')}}"></script>
 
-    @endpush
+
 @endsection

@@ -3,6 +3,7 @@
 namespace Modules\BusinessRegistration\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
 use Modules\BusinessRegistration\Http\Requests\BusinessRegistrationTemplate\StoreBusinessRegistrationTemplateRequest;
@@ -95,5 +96,19 @@ class BusinessRegistrationTemplateController extends Controller
             403,
             'You not allowed to access this resource'
         );
+    }
+
+
+    public function getStaticTemplate(Request $request)
+    {
+
+        $request->validate([
+            'type' => ['required'],
+        ]);
+
+        return match ($request->input('type')) {
+            'level1' => \View::make('businessregistration::admin.setting.template.staticTemplate.business-registration-certificate'),
+            default => 'Enter Valid Type',
+        };
     }
 }
