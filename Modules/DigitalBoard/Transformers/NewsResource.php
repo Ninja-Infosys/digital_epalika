@@ -14,7 +14,6 @@ class NewsResource extends JsonResource
             'title' => $this->title ?? '',
             'date' => $this->date->toDateString() ?? '',
             'description' => $this->description ?? '',
-            'type' => 'समाचार',
             'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }
