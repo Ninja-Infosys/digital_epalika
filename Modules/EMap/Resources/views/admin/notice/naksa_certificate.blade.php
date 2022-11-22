@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<h4 style="text-align:center"><span style="font-size:20px"><strong><u>नक्सा प्रमाणित प्रमाण-पत्र</u></strong></span></h4>
+<h4 style="text-align:center"><span style="font-size:22px"><strong><u>नक्सा प्रमाणित प्रमाण-पत्र</u></strong></span></h4>
 
 <p>&nbsp;</p>
 

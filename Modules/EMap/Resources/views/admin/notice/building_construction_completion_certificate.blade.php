@@ -15,16 +15,16 @@
 
 <div class="date">
     <div class="mt-2 row">
-        <div class="col-md-6"><span style="font-size:14px">पत्र सं:......................<br />
+        <div class="col-md-6"><span style="font-size:16px">पत्र सं:......................<br />
 चलानी नं:......................</span></div>
 
-        <div class="col-md-6 text-end" style="text-align:right"><span style="font-size:14px">मिति:......................</span></div>
+        <div class="col-md-6 text-end" style="text-align:right"><span style="font-size:16px">मिति:......................</span></div>
     </div>
 </div>
 
 <h3 style="text-align:center"><span style="font-size:20px"><strong>भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र</strong></span></h3>
 
-<div class="top" style="text-align:justify"><span style="font-size:16px">श्री.................................................................... ले यस उप-महानगरपालिका वडा नं................................ मा निम्न बमोजिम निर्माण कार्य पूरा गरेकोले यो निर्माण कार्य सम्पन्न प्रमाण-पत्र प्रदान गरिएको छ |</span></div>
+<p style="text-align:justify"><span style="font-size:16px">श्री.................................................................... ले यस उप-महानगरपालिका वडा नं................................ मा निम्न बमोजिम निर्माण कार्य पूरा गरेकोले यो निर्माण कार्य सम्पन्न प्रमाण-पत्र प्रदान गरिएको छ |</span></p>
 
 <div class="top" style="text-align:justify"><span style="font-size:16px">१. जग्गाधनीको नाम, थर..................................................................................................................................<br />
 २. घरधनीको नाम, थर, वतन ...........................................................................................................................<br />
@@ -34,80 +34,80 @@
 ५. राष्ट्रिय भवन संहिता अनुसार भवनको वर्गिकरण :&nbsp;&nbsp; <input name="inlineRadioOptions" type="checkbox" value="option1" /> (क)&emsp; <input name="inlineRadioOptions" type="checkbox" value="option2" /> (ख)&emsp; <input name="inlineRadioOptions" type="checkbox" value="option3" /> (ग)&emsp; <input name="inlineRadioOptions" type="checkbox" value="option4" /> (घ)&emsp;<br />
 निर्माणको स्ट्रक्चरल सिस्टम .......................................................................<br />
 ६. निर्माण कार्य इजाजत प्रमाण-पत्र लिएको मिति ..............................................................................<br />
-७.</span></div>
+७.</span>
 
-<table border="1" cellpadding="5" cellspacing="0" class="table table-borderless table-sm word" style="border:2px solid black; height:295px; width:851px">
-    <thead>
-    <tr>
-        <th scope="col"><span style="font-size:14px">तला</span></th>
-        <th scope="col"><span style="font-size:14px">स्वीकृत क्षेत्रफल</span></th>
-        <th scope="col"><span style="font-size:14px">निर्माण क्षेत्रफल</span></th>
-        <th scope="col"><span style="font-size:14px">तला</span></th>
-        <th scope="col"><span style="font-size:14px">स्वीकृत क्षेत्रफल</span></th>
-        <th scope="col"><span style="font-size:14px">निर्माण क्षेत्रफल</span></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><span style="font-size:12px"><strong>भूमिगत वा अर्ध भूमिगत तला १</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><span style="font-size:12px"><strong>पाचौ</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td><span style="font-size:12px"><strong>भूमिगत वा अर्ध भूमिगत तला २</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><span style="font-size:12px"><strong>छैठौ</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td><span style="font-size:12px"><strong>जमिन तला</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><span style="font-size:12px"><strong>सातौ</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td><span style="font-size:12px"><strong>पहिलो तला</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><span style="font-size:12px"><strong>आठौ</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td><span style="font-size:12px"><strong>दोस्रो तला</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><span style="font-size:12px"><strong>नवौ</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td><span style="font-size:12px"><strong>तेस्रो तला</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td><span style="font-size:12px"><strong>दशौ</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td><span style="font-size:12px"><strong>चौथो तला</strong></span></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    </tbody>
-</table>
+    <table border="1" cellpadding="5" cellspacing="0" class="table table-borderless table-sm word" style="border:2px solid black; height:295px; width:851px">
+        <thead>
+        <tr>
+            <th scope="col"><span style="font-size:14px">तला</span></th>
+            <th scope="col"><span style="font-size:14px">स्वीकृत क्षेत्रफल</span></th>
+            <th scope="col"><span style="font-size:14px">निर्माण क्षेत्रफल</span></th>
+            <th scope="col"><span style="font-size:14px">तला</span></th>
+            <th scope="col"><span style="font-size:14px">स्वीकृत क्षेत्रफल</span></th>
+            <th scope="col"><span style="font-size:14px">निर्माण क्षेत्रफल</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><span style="font-size:14px"><strong>भूमिगत वा अर्ध भूमिगत तला १</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><span style="font-size:14px"><strong>पाचौ</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><span style="font-size:14px"><strong>भूमिगत वा अर्ध भूमिगत तला २</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><span style="font-size:14px"><strong>छैठौ</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><span style="font-size:14px"><strong>जमिन तला</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><span style="font-size:14px"><strong>सातौ</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><span style="font-size:14px"><strong>पहिलो तला</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><span style="font-size:14px"><strong>आठौ</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><span style="font-size:14px"><strong>दोस्रो तला</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><span style="font-size:14px"><strong>नवौ</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><span style="font-size:14px"><strong>तेस्रो तला</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td><span style="font-size:14px"><strong>दशौ</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><span style="font-size:14px"><strong>चौथो तला</strong></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
 
-<p><span style="font-size:16px">जम्मा क्षेत्रफल ......................<br />
+    <p><span style="font-size:16px">जम्मा क्षेत्रफल ......................<br />
 ८. भवनको ग्राउण्ड कभरेज : ......................<br />
 ९. बनेको भवनको उचाई ...................... तला संख्या ......................<br />
 १०. घर बनेको प्लटसँग जोडिएको सडकको सडक सिमानाबाट न्युनतम छाड्न पर्ने दूरी ..................... छाडिएको दूरी ....................<br />
@@ -118,51 +118,50 @@
 १५. नेपाल राष्ट्रिय भवन संहिता २०६० सम्बन्धी विवरण :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना भएको &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; पालना नभएको<br />
 पालना नभएको भए विवरण : ..................................................................................</span></p>
 
-<div class="flex-container mt-2" style="display:flex">
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:4rem; margin-top:0rem; text-align:center"><span style="font-size:14px">....................................<br />
-तयार गर्ने</span></div>
+    <div class="flex-container mt-2" style="display:flex">
+        <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:4rem; margin-top:2rem; text-align:center"><strong><span style="font-size:14px">....................................<br />
+तयार गर्ने</span></strong></div>
 
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:4rem; margin-top:0rem; text-align:center"><span style="font-size:14px">...................................<br />
+        <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:4rem; margin-top:2rem; text-align:center"><strong><span style="font-size:14px">...................................<br />
 चेक गर्ने<br />
-(इन्जिनियर)</span></div>
+(इन्जिनियर)</span></strong></div>
 
-    <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:4rem; margin-top:0rem; text-align:center"><span style="font-size:14px">...................................<br />
+        <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:4rem; margin-top:2rem; text-align:center"><strong><span style="font-size:14px">...................................<br />
 स्वीकृत गर्ने<br />
-(प्रमुख प्रशासकिय अधिकृत)</span>
+(प्रमुख प्रशासकिय अधिकृत)</span></strong>
 
-        <div style="page-break-after:always"><span style="display:none">&nbsp;</span></div>
-
-        <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </div>
     </div>
-</div>
 
-<table border="1" cellpadding="8" cellspacing="0" class="mt-2 table table-bordered table-sm" style="border:2px solid black; height:110px; width:839px">
-    <thead>
-    <tr>
-        <th scope="col"><span style="font-size:14px">नामसारी गरी दिने नामथर</span></th>
-        <th scope="col"><span style="font-size:14px">नामसारी गरी लिनेको नामथर</span></th>
-        <th scope="col"><span style="font-size:14px">सिफारिस गर्ने</span></th>
-        <th scope="col"><span style="font-size:14px">स्वीकृत गर्ने</span></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-    </tbody>
-</table>
+    <table border="1" cellpadding="8" cellspacing="0" class="mt-2 table table-bordered table-sm" style="border:2px solid black; height:110px; width:839px">
+        <thead>
+        <tr>
+            <th scope="col"><span style="font-size:14px">नामसारी गरी दिने नामथर</span></th>
+            <th scope="col"><span style="font-size:14px">नामसारी गरी लिनेको नामथर</span></th>
+            <th scope="col"><span style="font-size:14px">सिफारिस गर्ने</span></th>
+            <th scope="col"><span style="font-size:14px">स्वीकृत गर्ने</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
