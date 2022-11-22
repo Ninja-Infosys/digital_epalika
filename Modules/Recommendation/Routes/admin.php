@@ -43,6 +43,7 @@ Route::view('house_map_place','recommendation::admin.relation.house_map_place_re
 Route::view('same_person_confirmation','recommendation::admin.relation.same_persion_confirmation')->name('same_person_confirmation');
 Route::view('protector_recommendation','recommendation::admin.relation.prorector_recommendation')->name('protector_recommendation');
 Route::view('relation_proof_living','recommendation::admin.relation.relation_proof_living')->name('relation_proof_living');
+Route::view('rights_one_proof','recommendation::admin.relation.rights_one_proof')->name('rights_one_proof');
 
 
 
