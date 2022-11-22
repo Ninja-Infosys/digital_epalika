@@ -12,7 +12,22 @@ class PlanPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'chiefJudicialMember_access',
+            'planArea_access',
+            'planArea_create',
+            'planArea_edit',
+            'planArea_delete',
+            'planLevel_access',
+            'planLevel_create',
+            'planLevel_edit',
+            'planLevel_delete',
+            'budgetHead_access',
+            'budgetHead_create',
+            'budgetHead_edit',
+            'budgetHead_delete',
+            'budgetSource_access',
+            'budgetSource_create',
+            'budgetSource_edit',
+            'budgetSource_delete',
         ];
 
         $this->storePermission($permissions);
