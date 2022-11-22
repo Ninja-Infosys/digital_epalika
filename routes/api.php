@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FileController;
 use App\Http\Controllers\Api\PublicApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('home', [PublicApiController::class, 'home'])->name('home');
-Route::get('officeSetting', [PublicApiController::class, 'officeSetting'])->name('officeSetting');
+
+Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy')->names('api.file');
