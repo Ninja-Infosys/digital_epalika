@@ -12,8 +12,9 @@ class NoticeResource extends JsonResource
         return [
             'id' => $this->id ?? '',
             'title' => $this->title ?? '',
-            'date' => $this->date->toDateString() ?? '',
+            'date' => $this->date ?? '',
             'description' => $this->description ?? '',
+            'type' => 'Notice',
             'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }
