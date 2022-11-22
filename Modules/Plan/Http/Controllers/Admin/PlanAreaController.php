@@ -2,13 +2,11 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use App\Http\Requests\Setting\PlanArea\StorePlanAreaRequest;
-use App\Http\Requests\Setting\PlanArea\UpdatePlanAreaRequest;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Plan\Entities\PlanArea;
+use Modules\Plan\Http\Requests\PlanArea\StorePlanAreaRequest;
+use Modules\Plan\Http\Requests\PlanArea\UpdatePlanAreaRequest;
 
 class PlanAreaController extends Controller
 {
