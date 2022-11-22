@@ -2,13 +2,11 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use App\Http\Requests\PlanLevel\StorePlanLevelRequest;
-use App\Http\Requests\PlanLevel\UpdatePlanLevelRequest;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Plan\Entities\PlanLevel;
+use Modules\Plan\Http\Requests\PlanLevel\StorePlanLevelRequest;
+use Modules\Plan\Http\Requests\PlanLevel\UpdatePlanLevelRequest;
 
 class PlanLevelController extends Controller
 {

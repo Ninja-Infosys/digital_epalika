@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\BudgetSource;
+namespace Modules\Plan\Http\Requests\BudgetSource;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBudgetSourceRequest extends FormRequest
+class UdpateBudgetSourceRequest extends FormRequest
 {
     public function authorize(): bool
     {

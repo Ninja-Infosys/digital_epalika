@@ -2,13 +2,11 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use App\Http\Requests\PlanLevel\StoreBudgetHeadRequest;
-use App\Http\Requests\PlanLevel\UpdateBudgetHeadRequest;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Plan\Entities\BudgetHead;
+use Modules\Plan\Http\Requests\BudgetHead\StoreBudgetHeadRequest;
+use Modules\Plan\Http\Requests\BudgetHead\UpdateBudgetHeadRequest;
 
 class BudgetHeadController extends Controller
 {
