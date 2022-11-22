@@ -11,5 +11,6 @@
     "Grant": true,
     "JudicialCommittee": true,
     "TaskManagement": true,
-    "Recommendation": true
+    "Recommendation": true,
+    "Plan": true
 }

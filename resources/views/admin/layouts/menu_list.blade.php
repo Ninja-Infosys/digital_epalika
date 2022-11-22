@@ -74,7 +74,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 border disable_menu">
+            <div class="col-md-4 border">
                 <a href="#">
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/rajashow.png')}}"
@@ -110,10 +110,10 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 border disable_menu">
-                <a href="#">
+            <div class="col-md-4 border">
+                <a href="{{route('admin.plan.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/yojana.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/plan.png')}}"
                              height="50" width="50">
                         <h4 class="p-1">योजना व्यवस्थापन</h4>
                     </div>
