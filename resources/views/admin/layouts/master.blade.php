@@ -34,7 +34,6 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/backend/css/nepali.datepicker.v3.7.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/backend/summernote/summernote-bs4.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
@@ -107,17 +106,6 @@
                     form.submit();
                 }
             });
-    });
-</script>
-
-<script src="{{asset('assets/backend/summernote/summernote-bs4.js')}}"></script>
-<script>
-    $(document).ready(function () {
-        $('.summernote').summernote({
-            placeholder: 'Description',
-            tabsize: 2,
-            height: 200
-        });
     });
 </script>
 

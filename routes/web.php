@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\DynamicFormsStorageController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrintController;
+use App\Http\Controllers\ResourceController;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,4 +52,24 @@ Route::post('login/locked', [LoginController::class, 'unlock'])->name('login.unl
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
+    // Dummy route, we can use the route() helper to give formiojs the base path for this group
+    Route::get('/')->name('index');
+
+    Route::post('storage/s3', [DynamicFormsStorageController::class, 'storeS3'])
+        ->withoutMiddleware([VerifyCsrfToken::class]);
+
+    Route::get('storage/s3', [DynamicFormsStorageController::class, 'showS3'])->name('S3-file-download');
+    Route::get('storage/s3/{fileKey}', [DynamicFormsStorageController::class, 'showS3'])->name('S3-file-redirect');
+
+    Route::post('storage/url', [DynamicFormsStorageController::class, 'storeURL'])
+        ->withoutMiddleware([VerifyCsrfToken::class]);
+
+    Route::get('storage/url', [DynamicFormsStorageController::class, 'showURL'])->name('url-file-download');
+    Route::delete('storage/url', [DynamicFormsStorageController::class, 'deleteURL']);
+
+    Route::get('form', [ResourceController::class, 'index']);
+    Route::get('form/{resource}', [ResourceController::class, 'resource']);
+    Route::get('form/{resource}/submission', [ResourceController::class, 'resourceSubmissions']);
 });

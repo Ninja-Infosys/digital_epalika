@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
         "mhmiton/laravel-modules-livewire": "^1.5",
+        "northwestern-sysdev/dynamic-forms": "^0.10.0",
         "nwidart/laravel-modules": "^9.0",
         "pion/laravel-chunk-upload": "^1.5",
         "realrashid/sweet-alert": "^5.1",
