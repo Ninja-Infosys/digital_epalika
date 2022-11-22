@@ -18,7 +18,7 @@ class NoticeController extends Controller
         abort_if(
             Gate::denies('digitalBoardNotice_access'),
             403,
-            'तपाईंलाई डिजिटल बोर्ड सूचना पहुँच गर्न अनुमति छैन'
+            'You are not allowed to access this resource'
         );
         if ($type === 'News') {
             $notices = Notice::with('user')->where('type', 'News')->orderByDesc('date')->get();
@@ -34,7 +34,7 @@ class NoticeController extends Controller
         abort_if(
             Gate::denies('digitalBoardNotice_create'),
             403,
-            'तपाईंलाई डिजिटल बोर्ड सूचना सिर्जना गर्न अनुमति छैन'
+            'You are not allowed to access this resource'
         );
 
         return view('digitalboard::notice.create', compact('type'));
@@ -45,7 +45,7 @@ class NoticeController extends Controller
         abort_if(
             Gate::denies('digitalBoardNotice_create'),
             403,
-            'तपाईंलाई डिजिटल बोर्ड सूचना सिर्जना गर्न अनुमति छैन'
+            'You are not allowed to access this resource'
         );
 
         if ($type === 'News') {
@@ -92,7 +92,7 @@ class NoticeController extends Controller
         abort_if(
             Gate::denies('digitalBoardNotice_access'),
             403,
-            'तपाईंलाई डिजिटल बोर्ड सूचना पहुँच गर्न अनुमति छैन'
+            'You are not allowed to access this resource'
         );
 
         $notice->load('files');
@@ -105,7 +105,7 @@ class NoticeController extends Controller
         abort_if(
             Gate::denies('digitalBoardNotice_edit'),
             403,
-            'तपाईंलाई डिजिटल बोर्ड सूचना अद्यावधिक गर्न अनुमति छैन'
+            'You are not allowed to access this resource'
         );
 
         return view('digitalboard::notice.edit', compact('notice', 'type'));
@@ -116,7 +116,7 @@ class NoticeController extends Controller
         abort_if(
             Gate::denies('digitalBoardNotice_edit'),
             403,
-            'तपाईंलाई डिजिटल बोर्ड सूचना अद्यावधिक गर्न अनुमति छैन'
+            'You are not allowed to access this resource'
         );
 
         DB::transaction(function () use ($request, $notice) {
@@ -136,7 +136,7 @@ class NoticeController extends Controller
         abort_if(
             Gate::denies('digitalBoardNotice_delete'),
             403,
-            'तपाइलाई डिजिटल बोर्ड सूचना मेटाउन अनुमति छैन '
+            'You are not allowed to access this resource'
         );
 
         foreach ($notice->files as $file) {

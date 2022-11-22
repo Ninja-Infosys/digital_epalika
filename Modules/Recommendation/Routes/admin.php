@@ -26,3 +26,32 @@ Route::view('alive_proof','recommendation::admin.relation.alive_proof_recommenda
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::view('Health_Treatment_recommendation','recommendation::admin.relation.health_treatment_recommendation')->name('health_treatment_recommendation');
+Route::view('birth_property','recommendation::admin.relation.birth_certificate_property_valuation')->name('birth_property');
+Route::view('house_map_place','recommendation::admin.relation.house_map_place_recommendation')->name('house_map_place');
+Route::view('same_person_confirmation','recommendation::admin.relation.same_persion_confirmation')->name('same_person_confirmation');
+Route::view('protector_recommendation','recommendation::admin.relation.prorector_recommendation')->name('protector_recommendation');
+Route::view('relation_proof_living','recommendation::admin.relation.relation_proof_living')->name('relation_proof_living');
+
+
+
+

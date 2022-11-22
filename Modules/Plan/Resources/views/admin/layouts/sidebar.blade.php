@@ -26,9 +26,9 @@
     </div>
 </li>
 
-<li class="{{request()->is('admin/grant/setting/*') ? 'active' : ''}}">
-    <a href="#sidebarGrantSetting"
-       {{request()->is('admin/grant/setting/*') ? 'aria-expanded=true' : ''}}
+<li class="{{request()->is('admin/plan/setting/*') ? 'active' : ''}}">
+    <a href="#sidebarPlanSetting"
+       {{request()->is('admin/plan/setting/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span>सेटिङ</span>
@@ -36,16 +36,37 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('admin/grant/setting/*') ? 'show' : ''}}"
-         id="sidebarGrantSetting">
+    <div class="collapse {{request()->is('admin/plan/setting/*') ? 'show' : ''}}"
+         id="sidebarPlanSetting">
         <ul class="nav-second-level">
-            @can('infrastructure_access')
-                <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                    <a href="{{route('admin.grant.infrastructure.index')}}">
-                        <span>  पूर्वाधार शीर्षकहरु  </span>
+            @can('planArea_access')
+                <li class="{{request()->is('admin/plan/setting/planArea') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planArea.index')}}">
+                        <span>  योजना क्षेत्र/उप-क्षेत्र  </span>
                     </a>
                 </li>
             @endcan
+            @can('planLevel_access')
+                <li class="{{request()->is('admin/plan/setting/planLevel') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planLevel.index')}}">
+                        <span> योजना स्तर/उप-स्तरहरु </span>
+                    </a>
+                </li>
+            @endcan
+                @can('budgetHead_access')
+                    <li class="{{request()->is('admin/plan/setting/budgetHead') ? 'active' : ''}}">
+                        <a href="{{route('admin.plan.budgetHead.index')}}">
+                            <span> बजेट शिर्षक/उप-शिर्षक </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('budgetSource_access')
+                    <li class="{{request()->is('admin/plan/setting/budgetSource') ? 'active' : ''}}">
+                        <a href="{{route('admin.plan.budgetSource.index')}}">
+                            <span> बजेट श्रोत </span>
+                        </a>
+                    </li>
+                @endcan
         </ul>
     </div>
 </li>
