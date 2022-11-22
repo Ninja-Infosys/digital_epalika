@@ -59,7 +59,7 @@
                                     value="{{old('area_name')}}"
                                     class="form-control @error('area_name') is-invalid @enderror"
                                     id="area_name"
-                                    placeholder="क्षेत्र को नाम"
+                                    placeholder="योजना क्षेत्र"
                                 />
                                 @error('area_name')
                                 <div class="invalid-feedback">{{$message}}</div>

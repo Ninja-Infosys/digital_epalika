@@ -46,6 +46,27 @@
                     </a>
                 </li>
             @endcan
+            @can('planLevel_access')
+                <li class="{{request()->is('admin/plan/setting/planLevel') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planLevel.index')}}">
+                        <span> योजना स्तर/उप-स्तरहरु </span>
+                    </a>
+                </li>
+            @endcan
+                @can('budgetHead_access')
+                    <li class="{{request()->is('admin/plan/setting/budgetHead') ? 'active' : ''}}">
+                        <a href="{{route('admin.plan.budgetHead.index')}}">
+                            <span> बजेट शिर्षक/उप-शिर्षक </span>
+                        </a>
+                    </li>
+                @endcan
+                @can('budgetSource_access')
+                    <li class="{{request()->is('admin/plan/setting/budgetSource') ? 'active' : ''}}">
+                        <a href="{{route('admin.plan.budgetSource.index')}}">
+                            <span> बजेट श्रोत </span>
+                        </a>
+                    </li>
+                @endcan
         </ul>
     </div>
 </li>

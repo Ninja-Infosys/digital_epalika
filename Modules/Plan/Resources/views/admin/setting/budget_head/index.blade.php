@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">योजना स्तरहरू</li>
+                        <li class="breadcrumb-item active">बजेट शिर्षकहरू</li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजना स्तरहरू</h4>
+                <h4 class="page-title">बजेट शिर्षकहरू</h4>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजना स्तर सूची</h4>
-                        @can('planLevel_create')
-                            <a href="{{route('admin.plan.planLevel.create')}}"
+                        <h4 class="header-title">बजेट शिर्षक सूची</h4>
+                        @can('budgetHead_create')
+                            <a href="{{route('admin.plan.budgetHead.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -39,24 +39,24 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>योजनाको स्तर</th>
+                                <th>बजेट शिर्षक</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($planLevels as $key=>$planLevel)
+                            @forelse($budgetHeads as $budgetHead)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$planLevel->level_name}}</td>
+                                    <td>{{$budgetHead->title}}</td>
                                     <td>
-                                        @can('planLevel_edit')
-                                            <a href="{{route('admin.plan.planLevel.edit',$planLevel)}}"
+                                        @can('budgetHead_edit')
+                                            <a href="{{route('admin.plan.budgetHead.edit',$budgetHead)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('planLevel_delete')
-                                            <form action="{{route('admin.plan.planLevel.destroy',$planLevel)}}"
+                                        @can('budgetHead_delete')
+                                            <form action="{{route('admin.plan.budgetHead.destroy',$budgetHead)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')

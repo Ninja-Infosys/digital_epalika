@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">योजना स्तरहरू</li>
+                        <li class="breadcrumb-item active">बजेट शिर्षकहरू</li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजना स्तरहरू</h4>
+                <h4 class="page-title">बजेट शिर्षकहरू</h4>
             </div>
         </div>
     </div>
@@ -23,46 +23,45 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजना स्तर सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.plan.planLevel.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> योजना स्तरहरू
+                        <h4 class="header-title">नयाँ बजेट शिर्षक थप्नुहोस्</h4>
+                        <a href="{{route('admin.plan.budgetHead.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> बजेट शिर्षकहरू
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.plan.planLevel.update',$planLevel)}}" method="post">
+                    <form action="{{route('admin.plan.budgetHead.store')}}" method="post">
                         @csrf
-                        @method('put')
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="plan_level_id" class="form-label">मुख्य योजना स्तर</label>
+                                <label for="budget_head_id" class="form-label">मुख्य बजेट शिर्षक</label>
                                 <select
-                                    name="plan_level_id"
-                                    class="form-control @error('plan_level_id') is-invalid @enderror"
-                                    id="plan_level_id" data-toggle="select2" data-width="100%">
+                                    name="budget_head_id"
+                                    class="form-control @error('budget_head_id') is-invalid @enderror"
+                                    id="budget_head_id" data-toggle="select2" data-width="100%">
                                     <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach($mainLevels as $mainLevel)
-                                        <option {{$mainLevel->id==old('plan_level_id',$planLevel->plan_level_id) ? 'selected' : ''}}
-                                                value="{{$mainLevel->id}}">
-                                            {{$mainLevel->level_name}}
+                                    @foreach($mainBudgetHeads as $mainBudgetHead)
+                                        <option {{$mainBudgetHead->id==old('budget_head_id') ? 'selected' : ''}}
+                                                value="{{$mainBudgetHead->id}}">
+                                            {{$mainBudgetHead->title}}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('plan_level_id')
+                                @error('budget_head_id')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="level_name" class="form-label">स्तर को नाम *</label>
+                                <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
-                                    name="level_name"
-                                    value="{{old('level_name',$planLevel->level_name)}}"
-                                    class="form-control @error('level_name') is-invalid @enderror"
-                                    id="level_name"
-                                    placeholder="योजना स्तर"
+                                    name="title"
+                                    value="{{old('title')}}"
+                                    class="form-control @error('title') is-invalid @enderror"
+                                    id="title"
+                                    placeholder="बजेट शिर्षक"
                                 />
-                                @error('level_name')
+                                @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
