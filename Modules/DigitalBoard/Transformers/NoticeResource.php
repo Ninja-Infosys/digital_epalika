@@ -14,7 +14,7 @@ class NoticeResource extends JsonResource
             'title' => $this->title ?? '',
             'date' => $this->date ?? '',
             'description' => $this->description ?? '',
-            'type' => 'Notice',
+            'type' => 'सूचना',
             'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }

@@ -87,5 +87,12 @@ class PlanAreaController extends Controller
             403,
             'You are not allowed to access this resource'
         );
+
+        $planArea->planAreas()->delete();
+        $planArea->delete();
+
+        toast('योजना क्षेत्र सफलतापूर्वक मेटाइयो','success');
+
+        return back();
     }
 }

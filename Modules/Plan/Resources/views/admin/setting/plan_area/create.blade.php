@@ -40,10 +40,10 @@
                                     class="form-control @error('plan_area_id') is-invalid @enderror"
                                     id="plan_area_id" data-toggle="select2" data-width="100%">
                                     <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach($mainPlanAreas as $planArea)
-                                        <option {{$planArea->id==old('plan_area_id') ? 'selected' : ''}}
-                                                value="{{$planArea->id}}">
-                                            {{$planArea->area_name}}
+                                    @foreach($mainPlanAreas as $mainPlanArea)
+                                        <option {{$mainPlanArea->id==old('plan_area_id') ? 'selected' : ''}}
+                                                value="{{$mainPlanArea->id}}">
+                                            {{$mainPlanArea->area_name}}
                                         </option>
                                     @endforeach
                                 </select>
