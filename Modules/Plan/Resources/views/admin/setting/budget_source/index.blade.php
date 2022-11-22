@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">बजेट शिर्षकहरू</li>
+                        <li class="breadcrumb-item active">बजेट श्रोत हरू</li>
                     </ol>
                 </div>
-                <h4 class="page-title">बजेट शिर्षकहरू</h4>
+                <h4 class="page-title">बजेट श्रोतहरू</h4>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">बजेट शिर्षक सूची</h4>
-                        @can('budgetHead_create')
-                            <a href="{{route('admin.plan.budgetHead.create')}}"
+                        <h4 class="header-title">बजेट श्रोत  सूची</h4>
+                        @can('budgetSource_create')
+                            <a href="{{route('admin.plan.budgetSource.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -39,24 +39,24 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>बजेट शिर्षक</th>
+                                <th>बजेट श्रोत </th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($budgetHeads as $budgetHead)
+                            @forelse($budgetSources as $key=>$budgetSource)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$budgetHead->title}}</td>
+                                    <td>{{$budgetSource->source_name}}</td>
                                     <td>
-                                        @can('budgetHead_edit')
-                                            <a href="{{route('admin.plan.budgetHead.edit',$budgetHead)}}"
+                                        @can('budgetSource_edit')
+                                            <a href="{{route('admin.plan.budgetSource.edit',$budgetSource)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('budgetHead_delete')
-                                            <form action="{{route('admin.plan.budgetHead.destroy',$budgetHead)}}"
+                                        @can('budgetSource_delete')
+                                            <form action="{{route('admin.plan.budgetSource.destroy',$budgetSource)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
