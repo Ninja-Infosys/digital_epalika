@@ -14,7 +14,7 @@ class TechnicalTraineeObserver
      */
     public function creating(TechnicalTrainee $technicalTrainee)
     {
-        $setting = OfficeSetting::with('fiscalYear')->first()->fiscalYear->year;
+        $setting = OfficeSetting::with('fiscalYear')->first()->fiscalYear->title;
 
         checkAgain:
 
