@@ -22,6 +22,17 @@ Route::view('kitta_recommendation','recommendation::admin.relation.kitta_recomme
 Route::view('protector_proven','recommendation::admin.relation.protector_proven')->name('protector_proven');
 Route::view('relation_proof','recommendation::admin.relation.relation_proof_between_deathperson_recommendation')->name('relation_proof');
 Route::view('alive_proof','recommendation::admin.relation.alive_proof_recommendation')->name('alive_proof');
+Route::view('land_owner','recommendation::admin.relation.land_owner_right_recommendation')->name('land_owner');
+Route::view('enterprises','recommendation::admin.relation.enterprises_placechange_recommendation')->name('enterprises');
+Route::view('maintain_house','recommendation::admin.relation.maintain_house')->name('maintain_house');
+Route::view('classes_adding','recommendation::admin.relation.school_classes_adding_recommendation')->name('classes_adding');
+Route::view('disabled_people','recommendation::admin.relation.disabled_recommendation')->name('disabled_people');
+Route::view('financial_certificate','recommendation::admin.relation.financial_condition_certificate')->name('financial_certificate');
+Route::view('weak_financial','recommendation::admin.relation.weak_financial_condition')->name('weak_financial');
+Route::view('school_area_changing','recommendation::admin.relation.school_area_changing_recommendation')->name('school_area_changing');
+Route::view('water_electricity','recommendation::admin.relation.water_electricity_adding_recommendation')->name('water_electricity');
+Route::view('caste_identify','recommendation::admin.relation.caste_identify_and_caste_recommendation')->name('caste_identify');
+Route::view('prevailing_law','recommendation::admin.relation.prevailing_law_recommendation')->name('prevailing_law');
 
 
 
