@@ -15,7 +15,7 @@ class FormBuilderController extends Controller
     public function index()
     {
         abort_if(
-            Gate::denies('FormBuilder_access'),
+            Gate::denies('formBuilder_access'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
@@ -28,7 +28,7 @@ class FormBuilderController extends Controller
     public function create()
     {
         abort_if(
-            Gate::denies('FormBuilder_create'),
+            Gate::denies('formBuilder_create'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
@@ -39,7 +39,7 @@ class FormBuilderController extends Controller
     public function store(StoreFormBuilderRequest $request): RedirectResponse
     {
         abort_if(
-            Gate::denies('FormBuilder_create'),
+            Gate::denies('formBuilder_create'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
@@ -54,7 +54,7 @@ class FormBuilderController extends Controller
     public function show(FormBuilder $formBuilder)
     {
         abort_if(
-            Gate::denies('FormBuilder_access'),
+            Gate::denies('formBuilder_access'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
@@ -68,7 +68,7 @@ class FormBuilderController extends Controller
     public function edit(FormBuilder $formBuilder)
     {
         abort_if(
-            Gate::denies('FormBuilder_edit'),
+            Gate::denies('formBuilder_edit'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
@@ -82,7 +82,7 @@ class FormBuilderController extends Controller
     public function update(UpdateFormBuilderRequest $request, FormBuilder $formBuilder)
     {
         abort_if(
-            Gate::denies('FormBuilder_edit'),
+            Gate::denies('formBuilder_edit'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
@@ -97,7 +97,7 @@ class FormBuilderController extends Controller
     public function destroy(FormBuilder $formBuilder)
     {
         abort_if(
-            Gate::denies('FormBuilder_delete'),
+            Gate::denies('formBuilder_delete'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
