@@ -3,6 +3,9 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceType;
@@ -23,11 +26,17 @@ class FrontendController extends Controller
             })
             ->where('token', $request->input('token'))
             ->first();
+        if($grievanceDetail > 0)
+        {
+            return view('grievancehandling::frontend.grievance.single-grievance', compact('grievanceDetail'));
 
-        return view('grievancehandling::frontend.grievance.single-grievance', compact('grievanceDetail'));
+        }
+        toast('तपाइले उपलब्ध गराएको विवरण मिलेन', 'error');
+        return back();
+
     }
 
-    public function grievanceHandling()
+    public function grievanceHandling(): Factory|View|Application
     {
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
         $grievanceDetails = GrievanceDetail::whereNull('grievance_detail_id')->public()->get();

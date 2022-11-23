@@ -2,13 +2,16 @@
 
 namespace Modules\Roaster\Http\Controllers;
 
+use App\Exports\TraineeExport;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\Roaster\Entities\TechnicalTrainee;
 use Modules\Roaster\Entities\Trainee;
 use Modules\Roaster\Entities\Trainer;
@@ -135,7 +138,7 @@ class TrainingController extends Controller
         return redirect(route('admin.roaster.training.index'));
     }
 
-    public function pdfExport(Training $training)
+    public function pdfExport(Training $training): JsonResponse
     {
         $training->load(['trainingTrainees.model' => function ($query) {
             $query->with('province', 'district', 'localBody', 'designation', 'department', 'ethnicity');
@@ -239,5 +242,19 @@ class TrainingController extends Controller
         toast('Marks Updated Successfully', 'success');
 
         return redirect()->back();
+    }
+
+    public function excelExport(Training $training)
+    {
+        $training->load(['trainingTrainees.model' => function ($query) {
+            $query->with('province', 'district', 'localBody', 'designation', 'department', 'ethnicity');
+        }]);
+        if ($training->trainingTrainees) {
+            $trainees = $training->trainingTrainees->pluck('model');
+        } else {
+            $trainees = collect();
+        }
+
+        return Excel::download(new TraineeExport($trainees,$training),$training->name.'.xlsx');
     }
 }

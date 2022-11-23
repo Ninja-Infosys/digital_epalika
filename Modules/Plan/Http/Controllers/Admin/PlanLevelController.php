@@ -39,7 +39,7 @@ class PlanLevelController extends Controller
         );
         PlanLevel::create($request->validated());
 
-        toast('Plan Level Added Successfully', 'success');
+        toast('योजना स्तर सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -61,7 +61,7 @@ class PlanLevelController extends Controller
         );
         $planLevel->update($request->validated());
 
-        toast('Plan Level Updated Successfully', 'success');
+        toast('योजना स्तर सफलतापूर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.plan.planLevel.index'));
     }
 
@@ -74,7 +74,7 @@ class PlanLevelController extends Controller
         $planLevel->planLevels()->delete();
         $planLevel->delete();
 
-        toast('Plan Level Deleted Successfully', 'success');
+        toast('योजना स्तर सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 }

@@ -14,11 +14,8 @@ class NoticeResource extends JsonResource
             'title' => $this->title ?? '',
             'date' => $this->date ?? '',
             'type' => 'सूचना',
-            $this->mergeWhen(\Route::is('api-public.show-notice'),[
-                'description' => $this->description ?? '',
-                'files' => FileResource::collection($this->whenLoaded('files')),
-            ]),
-
+            'description' => $this->description ?? '',
+            'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }
 }
