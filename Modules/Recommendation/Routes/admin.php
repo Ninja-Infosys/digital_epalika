@@ -34,6 +34,7 @@ Route::view('school_area_changing','recommendation::admin.relation.school_area_c
 Route::view('water_electricity','recommendation::admin.relation.water_electricity_adding_recommendation')->name('water_electricity');
 Route::view('caste_identify','recommendation::admin.relation.caste_identify_and_caste_recommendation')->name('caste_identify');
 Route::view('prevailing_law','recommendation::admin.relation.prevailing_law_recommendation')->name('prevailing_law');
+Route::view('business_renewal','recommendation::admin.relation.business_renewal')->name('business_renewal');
 
 
 
