@@ -32,16 +32,16 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                        2
+                                                {{$organization_count}}
                                     </span>
                                         </h3>
                                         <p class="text-muted mb-1">जम्मा संगठन</p>
                                     </div>
                                 </div>
-                            </div> <!-- end row-->
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                    </div>
+                </div>
 
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
@@ -55,16 +55,16 @@
                                 <div class="col-6">
                                     <div class="text-end">
                                         <h3 class="mt-1"><span data-plugin="counterup">
-                                         3
+                                         {{$map_apply_count}}
                                     </span>
                                         </h3>
                                         <p class="text-muted mb-1">जम्मा नक्सा</p>
                                     </div>
                                 </div>
-                            </div> <!-- end row-->
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                    </div>
+                </div>
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
@@ -82,10 +82,10 @@
                                         <p class="text-muted mb-1">वार्षिक दर्ता नक्सा</p>
                                     </div>
                                 </div>
-                            </div> <!-- end row-->
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                    </div>
+                </div>
                 <div class="col-md-6 col-xl-3">
                     <div class="widget-rounded-circle card">
                         <div class="card-body">
@@ -103,78 +103,22 @@
                                         <p class="text-muted mb-1">मासिक दर्ता नक्सा</p>
                                     </div>
                                 </div>
-                            </div> <!-- end row-->
+                            </div>
                         </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title">Line Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="line-chart-example" height="350" data-colors="#1abc9c,#f1556c"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Bar Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="bar-chart-example" height="350" data-colors="#4a81d4,#e3eaef"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Pie Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="pie-chart-example" height="350" class="mt-4" data-colors="#6658dd,#fa5c7c,#4fc6e1,#ebeff2"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Donut Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="donut-chart-example" height="350" data-colors="#6c757d,#1abc9c,#ebeff2"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Polar area Chart</h4>
-
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="polar-chart-example" height="350" data-colors="#4a81d4,#fa5c7c,#4fc6e1,#ebeff2"> </canvas>
-                            </div>
-
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title">Radar Chart</h4>
-                            <div class="mt-4 chartjs-chart">
-                                <canvas id="radar-chart-example" height="350" data-colors="#39afd1,#a17fe0"></canvas>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
+{{--                            <x-charts.bar-chart-component id="bar-chart4" chartType='line'--}}
+{{--                                                          chartTitle="बिषय अनुसार कुल प्रशिक्षक"--}}
+{{--                                                          :labels="$mapAppliesAccordingToFiscalYears['labels']"--}}
+{{--                                                          :dataSets="$mapAppliesAccordingToFiscalYears['dataSets']"/>--}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -23,8 +23,16 @@ class FrontendController extends Controller
             })
             ->where('token', $request->input('token'))
             ->first();
+        if($grievanceDetail > 0)
+        {
+            return view('grievancehandling::frontend.grievance.single-grievance', compact('grievanceDetail'));
 
-        return view('grievancehandling::frontend.grievance.single-grievance', compact('grievanceDetail'));
+        }
+        else{
+            toast('Invalid credential','error');
+           return back();
+        }
+
     }
 
     public function grievanceHandling()
