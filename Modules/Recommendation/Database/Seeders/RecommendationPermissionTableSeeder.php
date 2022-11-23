@@ -16,6 +16,10 @@ class RecommendationPermissionTableSeeder extends Seeder
             'formBuilder_create',
             'formBuilder_edit',
             'formBuilder_delete',
+            'recommendation_access',
+            'recommendation_create',
+            'recommendation_edit',
+            'recommendation_delete',
         ];
 
         $this->storePermission($permissions);

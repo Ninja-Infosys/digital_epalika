@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
+use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::view('relation_identify','recommendation::admin.relation.relation_identify')->name('relation_identify');
@@ -34,39 +35,23 @@ Route::view('school_area_changing','recommendation::admin.relation.school_area_c
 Route::view('water_electricity','recommendation::admin.relation.water_electricity_adding_recommendation')->name('water_electricity');
 Route::view('caste_identify','recommendation::admin.relation.caste_identify_and_caste_recommendation')->name('caste_identify');
 Route::view('prevailing_law','recommendation::admin.relation.prevailing_law_recommendation')->name('prevailing_law');
+Route::view('business_renewal','recommendation::admin.relation.business_renewal')->name('business_renewal');
+Route::view('Health_Treatment_recommendation', 'recommendation::admin.relation.health_treatment_recommendation')->name('health_treatment_recommendation');
+Route::view('birth_property', 'recommendation::admin.relation.birth_certificate_property_valuation')->name('birth_property');
+Route::view('house_map_place', 'recommendation::admin.relation.house_map_place_recommendation')->name('house_map_place');
+Route::view('same_person_confirmation', 'recommendation::admin.relation.same_persion_confirmation')->name('same_person_confirmation');
+Route::view('protector_recommendation', 'recommendation::admin.relation.prorector_recommendation')->name('protector_recommendation');
+Route::view('relation_proof_living', 'recommendation::admin.relation.relation_proof_living')->name('relation_proof_living');
+Route::view('rights_one_proof', 'recommendation::admin.relation.rights_one_proof')->name('rights_one_proof');
+Route::view('transfer_recommendation', 'recommendation::admin.relation.transfer_recommendation')->name('transfer_recommendation');
+Route::view('primary_school', 'recommendation::admin.relation.primary_school_recommendation')->name('primary_school');
+Route::view('land_valuation', 'recommendation::admin.relation.land_valuation')->name('land_valuation');
+Route::view('way_house_proof', 'recommendation::admin.relation.way_house_proof')->name('way_house_proof');
+Route::view('fort_detail_proof', 'recommendation::admin.relation.fort_detail_proof')->name('fort_detail_proof');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::view('Health_Treatment_recommendation','recommendation::admin.relation.health_treatment_recommendation')->name('health_treatment_recommendation');
-Route::view('birth_property','recommendation::admin.relation.birth_certificate_property_valuation')->name('birth_property');
-Route::view('house_map_place','recommendation::admin.relation.house_map_place_recommendation')->name('house_map_place');
-Route::view('same_person_confirmation','recommendation::admin.relation.same_persion_confirmation')->name('same_person_confirmation');
-Route::view('protector_recommendation','recommendation::admin.relation.prorector_recommendation')->name('protector_recommendation');
-Route::view('relation_proof_living','recommendation::admin.relation.relation_proof_living')->name('relation_proof_living');
-Route::view('rights_one_proof','recommendation::admin.relation.rights_one_proof')->name('rights_one_proof');
-
-Route::prefix('setting')->as('setting.')->group(function (){
+Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('formBuilder', FormBuilderController::class);
 });
 
-
+Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');
+Route::resource('application/{applicationTypeEnum}/recommendation', RecommendationController::class)->names('recommendation');
