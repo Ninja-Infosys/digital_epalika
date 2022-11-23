@@ -73,7 +73,7 @@
                                         <span>{{$proprietor->businessDetail->localBody->local_body??''}}
                                 - {{$proprietor->businessDetail->ward_no??''}} </span>
                                     </td>
-                                    <td>{{$proprietor->businessDetail->business_nature->label() ?? ''}}</td>
+                                    <td>{{$proprietor->businessDetail?->business_nature?->label() ?? ''}}</td>
                                     <td>{{$proprietor->businessDetail->amount_cost ?? ''}}</td>
                                     <td>
                                         <a href="{{route('admin.businessRegistration.businessRegistration.show',$proprietor)}}"
