@@ -52,6 +52,14 @@
                     </a>
 
                         @endcan
+                        @can('training_access')
+                    <a href="{{route('admin.roaster.training.excelReport', $training)}}"
+                       type="button" class="btn btn-xs btn-outline-success" data-toggle="tooltip" data-placement="top"
+                       title="View Report">
+                        <i class="fa fa-file-excel"></i>
+                    </a>
+
+                        @endcan
 
                     <a href="javascript:void(0)"
                        class="btn btn-xs btn-outline-info printDetail"

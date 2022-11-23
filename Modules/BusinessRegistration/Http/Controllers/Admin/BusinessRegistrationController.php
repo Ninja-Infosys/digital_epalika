@@ -4,6 +4,10 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
@@ -14,7 +18,7 @@ use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataReque
 
 class BusinessRegistrationController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         $proprietors = ProprietorDetail::with('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses')
             ->latest()
@@ -23,7 +27,7 @@ class BusinessRegistrationController extends Controller
         return view('businessregistration::admin.businessRegistration.index', compact('proprietors'));
     }
 
-    public function show($id)
+    public function show($id): Factory|View|Application
     {
         $proprietorDetail = ProprietorDetail::findOrFail($id);
         $proprietorDetail->load('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses');
@@ -35,7 +39,7 @@ class BusinessRegistrationController extends Controller
         return view('businessregistration::admin.businessRegistration.show', compact('proprietorDetail', 'printed_data'));
     }
 
-    public function editData($id, $type)
+    public function editData($id, $type): Factory|View|Application
     {
         $proprietorDetail = ProprietorDetail::findOrFail($id);
 
@@ -49,7 +53,7 @@ class BusinessRegistrationController extends Controller
         return view('businessregistration::admin.businessRegistration.edit', compact('proprietorDetail', 'type', 'printed_data'));
     }
 
-    public function storeData(StorePrintedDataRequest $request, $id, $type)
+    public function storeData(StorePrintedDataRequest $request, $id, $type): RedirectResponse
     {
         DB::transaction(function () use ($request, $id, $type) {
             $printed_data = PrintedData::updateOrCreate(
@@ -84,14 +88,14 @@ class BusinessRegistrationController extends Controller
     }
 
 
-    public function addData($id, $type)
+    public function addData($id, $type): Factory|View|Application
     {
         $proprietorDetail = ProprietorDetail::find($id);
         $customs = Customs::where('proprietor_detail_id', $id)->first();
         return view('businessregistration::admin.businessRegistration.customs.index', compact('proprietorDetail', 'type', 'customs'));
     }
 
-    public function customData(Request $request, $id, $type)
+    public function customData(Request $request, $id, $type): RedirectResponse
     {
 
         $data = $request->validate([
