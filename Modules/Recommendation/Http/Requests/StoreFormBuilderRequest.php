@@ -11,7 +11,7 @@ class StoreFormBuilderRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::denies('FormBuilder_create');
+        return Gate::denies('formBuilder_create');
     }
 
     public function rules(): array

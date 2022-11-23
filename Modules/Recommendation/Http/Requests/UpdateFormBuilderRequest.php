@@ -11,7 +11,7 @@ class UpdateFormBuilderRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('FormBuilder_edit');
+        return Gate::allows('formBuilder_edit');
     }
 
     public function rules(): array

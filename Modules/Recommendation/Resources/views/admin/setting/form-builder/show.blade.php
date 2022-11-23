@@ -6,12 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.setting.dashboard')}}">
+                            <a href="{{ route('admin.setting.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.setting.formBuilder.index')}}">फारम बिल्डर</a>
+                            <a href="{{ route('admin.recommendation.setting.formBuilder.index') }}">फारम बिल्डर</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ फारम बिल्डर थप्नुहोस्</li>
                     </ol>
@@ -27,8 +27,8 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">फारम बिल्डर थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.setting.formBuilder.index')}}"
-                           class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('admin.recommendation.setting.formBuilder.index') }}"
+                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> फारम बिल्डर सूची
                         </a>
                     </div>
@@ -49,13 +49,14 @@
 
         <script lang="text/javascript">
             window.onload = function() {
-                // The third param's readOnly flag turns off buttons & marks all fields as readonly.
-                Formio.createForm(document.getElementById('formio-form'), {!! $formBuilder->form !!}, {readOnly: true}).then(function (form) {
-                    form.submission = {
-                        data: {!! $data !!},
-                    };
-                });
-            }
+                    // The third param's readOnly flag turns off buttons & marks all fields as readonly.
+                    Formio.createForm(document.getElementById('formio-form'), {!! $formBuilder !!}, {
+                            readOnly: true
+                        }).then(function(form) {
+                                form.submission = {
+                                    data: {!! $data !!},
+                                };
+                            };
         </script>
     @endpush
 @endsection

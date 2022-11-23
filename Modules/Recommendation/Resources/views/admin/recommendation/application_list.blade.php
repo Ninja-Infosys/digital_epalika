@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">फारम बिल्डर</li>
+                        <li class="breadcrumb-item active">फारम</li>
                     </ol>
                 </div>
-                <h4 class="page-title">फारम बिल्डर</h4>
+                <h4 class="page-title">फारम</h4>
             </div>
         </div>
     </div>
@@ -24,13 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">फारम बिल्डर सूची</h4>
-                        @can('branch_create')
-                            <a href="{{ route('admin.recommendation.setting.formBuilder.create') }}"
-                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                        <h4 class="header-title">फारम सूची</h4>
                     </div>
                 </div>
                 <div class="card-body">

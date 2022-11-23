@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Illuminate\Support\Facades\Gate;
+use Modules\Recommendation\Entities\FormBuilder;
 use Modules\Recommendation\Entities\Recommendation;
 use Modules\Recommendation\Http\Requests\Recommendation\StoreRecommendationRequest;
 use Modules\Recommendation\Http\Requests\Recommendation\UpdateRecommendationRequest;
@@ -35,7 +36,9 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        return view('recommendation::admin.recommendation.index');
+        $recommendations = Recommendation::where('application_type', $applicationTypeEnum->value)->get();
+
+        return view('recommendation::admin.recommendation.index', compact('applicationTypeEnum', 'recommendations'));
     }
 
     public function create(ApplicationTypeEnum $applicationTypeEnum)
@@ -46,9 +49,10 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        $recommendations = Recommendation::where('application_type', $applicationTypeEnum->value)->get();
+        $definition = FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first(); // get some definition JSON
+        $data = '{}';
 
-        return view('recommendation::admin.recommendation.create', compact('applicationTypeEnum', 'recommendations'));
+        return view('recommendation::admin.recommendation.create', compact('applicationTypeEnum', 'definition', 'data'));
     }
 
     public function store(Request $request, ApplicationTypeEnum $applicationTypeEnum)
