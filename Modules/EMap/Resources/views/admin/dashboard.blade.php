@@ -109,13 +109,54 @@
                 </div>
             </div>
             <div class="row">
+
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-{{--                            <x-charts.bar-chart-component id="bar-chart4" chartType='line'--}}
-{{--                                                          chartTitle="बिषय अनुसार कुल प्रशिक्षक"--}}
-{{--                                                          :labels="$mapAppliesAccordingToFiscalYears['labels']"--}}
-{{--                                                          :dataSets="$mapAppliesAccordingToFiscalYears['dataSets']"/>--}}
+                            <x-charts.pie-chart-component id="bar-chart5"
+                                                          chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार प्रयोजन "
+                                                          :labels="$mapApplyBuildingUsageAccordingToFiscalYears['labels']"
+                                                          :dataSets="$mapApplyBuildingUsageAccordingToFiscalYears['dataSets']"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-charts.bar-chart-component id="bar-chart6"
+                                                          chartTitle="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}}  अनुसार भवन  वर्गीकरण "
+                                                          :labels="$mapApplyBuildingCategoryAccordingToFiscalYears['labels']"
+                                                          :dataSets="$mapApplyBuildingCategoryAccordingToFiscalYears['dataSets']"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-charts.pie-chart-component id="bar-chart7"
+                                                          chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम "
+                                                          :labels="$mapApplyConstructionTypeAccordingToFiscalYears['labels']"
+                                                          :dataSets="$mapApplyConstructionTypeAccordingToFiscalYears['dataSets']"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-charts.pie-chart-component id="bar-chart8"
+                                                          chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम "
+                                                          :labels="$mapApplyStructureTypeAccordingToFiscalYears['labels']"
+                                                          :dataSets="$mapApplyStructureTypeAccordingToFiscalYears['dataSets']"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-charts.bar-chart-component id="bar-chart4" chartType='line'
+                                                          chartTitle="आर्थिक बर्ष अनुसारले नक्सा बिवरण"
+                                                          :labels="$mapAppliesAccordingToFiscalYears['labels']"
+                                                          :dataSets="$mapAppliesAccordingToFiscalYears['dataSets']"/>
                         </div>
                     </div>
                 </div>
