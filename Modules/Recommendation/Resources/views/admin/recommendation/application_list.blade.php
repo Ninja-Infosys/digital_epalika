@@ -39,38 +39,21 @@
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
-                                    <th>फारम बिल्डर नाम</th>
+                                    <th>सिफारस</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($formBuilders as $formBuilder)
+                                @foreach (\Modules\Recommendation\Enums\ApplicationTypeEnum::cases() as $application)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $formBuilder->application_type->label() ?? '' }}</td>
+                                        <td>{{ $application->label() ?? '' }}</td>
                                         <td>
-                                            @can('formBuilder_access')
-                                                <a href="{{ route('admin.recommendation.setting.formBuilder.show', $formBuilder) }}"
+                                            @can('recommendation_access')
+                                                <a href="{{ route('admin.recommendation.recommendation.index', $application) }}"
                                                     class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-eye"></i> हेर्नुहोस
+                                                    <i class="fa fa-pen"></i> फारम भर्नुहोस्
                                                 </a>
-                                            @endcan
-                                            @can('formBuilder_edit')
-                                                <a href="{{ route('admin.recommendation.setting.formBuilder.edit', $formBuilder) }}"
-                                                    class="btn btn-xs btn-outline-info">
-                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                                </a>
-                                            @endcan
-                                            @can('formBuilder_delete')
-                                                <form
-                                                    action="{{ route('admin.recommendation.setting.formBuilder.destroy', $formBuilder) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                    </button>
-                                                </form>
                                             @endcan
                                         </td>
                                     </tr>
