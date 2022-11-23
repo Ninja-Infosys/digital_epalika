@@ -35,7 +35,7 @@ class PublicApiController extends Controller
 
     public function notice(): AnonymousResourceCollection
     {
-        $notices = Notice::orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->get();
+        $notices = Notice::with('files')->orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->get();
 
         return NoticeResource::collection($notices);
     }
