@@ -38,7 +38,7 @@ class BudgetHeadController extends Controller
 
         BudgetHead::create($request->validated());
 
-        toast('Budget Head Added Successfully ', 'success');
+        toast('बजेट शिर्षक सफलतापूर्वक थपियो ', 'success');
         return back();
     }
 
@@ -60,7 +60,7 @@ class BudgetHeadController extends Controller
 
         $budgetHead->update($request->validated());
 
-        toast('Budget Head Updated Successfully', 'success');
+        toast('बजेट शिर्षक सफलतापूर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.plan.budgetHead.index'));
     }
 
@@ -72,7 +72,7 @@ class BudgetHeadController extends Controller
         $budgetHead->budgetHeads()->delete();
         $budgetHead->delete();
 
-        toast('Budget Head Deleted Successfully', 'success');
+        toast('बजेट शिर्षक सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\HelpDesk\Entities\Service;
 
@@ -27,6 +28,16 @@ class Branch extends Model
         'branch_name',
     ];
 
+    public function scopeMainBranch($query)
+    {
+        return $query->whereNull('branch_id');
+    }
+
+    public function ScopeSubBranch($query)
+    {
+        return $query->whereNotNull('branch_id');
+    }
+
     public function branch(): BelongsTo
     {
         return $this->belongsTo(__CLASS__);
@@ -40,5 +51,16 @@ class Branch extends Model
     public function services(): HasMany
     {
         return $this->hasMany(Service::class);
+    }
+
+    public function branchServices(): HasManyThrough
+    {
+        return $this->hasManyThrough(Service::class, __CLASS__);
+    }
+
+    public function getTotalServiceCountAttribute(): int
+    {
+        $this->load('services', 'branchServices');
+        return count($this->services ?? 0) + count($this->branchServices ?? 0);
     }
 }

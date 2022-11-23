@@ -199,6 +199,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="#user" data-bs-toggle="tab" aria-expanded="false"
+                                           class="nav-link">
+                                            प्रयोगकर्ता
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="#settings" data-bs-toggle="tab" aria-expanded="false"
                                            class="nav-link">
                                             आवश्यक कागजातहरु
@@ -240,6 +246,26 @@
                                                     {{$address['organizationProvince']->province??''}}
                                                 </td>
                                             </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane" id="user">
+                                        <table class="table table-sm mb-0 table-striped table-hover">
+                                            <tr>
+                                                <td>प्रयोगकर्ताको नाम</td>
+                                                <td>
+                                                    {{$user['name']}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>इमेल</td>
+                                                <td>{{$user['email']}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>सम्पर्क नं</td>
+                                                <td>{{$user['phone']}}</td>
+                                            </tr>
+
                                         </table>
                                     </div>
 

@@ -44,19 +44,38 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($budgetHeads as $budgetHead)
+                            @forelse($budgetHeads as $key=>$budgetHead)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$budgetHead->title}}</td>
+                                    <th>{{$loop->iteration}}</th>
+                                    <th>{{$budgetHead->title}}</th>
                                     <td>
-                                        @can('budgetHead_edit')
-                                            <a href="{{route('admin.plan.budgetHead.edit',$budgetHead)}}"
+                                        <a href="{{route('admin.plan.budgetHead.edit',$budgetHead)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                        </a>
+                                        <form action="{{route('admin.plan.budgetHead.destroy',$budgetHead)}}"
+                                              method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @foreach($budgetHead->budgetHeads as $budgetSubHead)
+                                    <tr>
+                                        <td>
+                                            {{$key+1}}.
+                                            {{$loop->iteration}}
+                                        </td>
+                                        <td>{{$budgetSubHead->title}}</td>
+                                        <td>
+                                            <a href="{{route('admin.plan.budgetHead.edit',$budgetSubHead)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
-                                        @endcan
-                                        @can('budgetHead_delete')
-                                            <form action="{{route('admin.plan.budgetHead.destroy',$budgetHead)}}"
+                                            <form action="{{route('admin.plan.budgetHead.destroy',$budgetSubHead)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
@@ -64,9 +83,9 @@
                                                     <i class="fa fa-trash"></i> मेटाउनु होस्
                                                 </button>
                                             </form>
-                                        @endcan
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @empty
                                 <tr>
                                     <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>

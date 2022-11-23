@@ -46,17 +46,36 @@
                             <tbody>
                             @forelse($planLevels as $key=>$planLevel)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$planLevel->level_name}}</td>
+                                    <th>{{$loop->iteration}}</th>
+                                    <th>{{$planLevel->level_name}}</th>
                                     <td>
-                                        @can('planLevel_edit')
-                                            <a href="{{route('admin.plan.planLevel.edit',$planLevel)}}"
+                                        <a href="{{route('admin.plan.planLevel.edit',$planLevel)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                        </a>
+                                        <form action="{{route('admin.plan.planLevel.destroy',$planLevel)}}"
+                                              method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @foreach($planLevel->planLevels as $planSubLevel)
+                                    <tr>
+                                        <td>
+                                            {{$key+1}}.
+                                            {{$loop->iteration}}
+                                        </td>
+                                        <td>{{$planSubLevel->level_name}}</td>
+                                        <td>
+                                            <a href="{{route('admin.plan.planLevel.edit',$planSubLevel)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
-                                        @endcan
-                                        @can('planLevel_delete')
-                                            <form action="{{route('admin.plan.planLevel.destroy',$planLevel)}}"
+                                            <form action="{{route('admin.plan.planLevel.destroy',$planSubLevel)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
@@ -64,9 +83,9 @@
                                                     <i class="fa fa-trash"></i> मेटाउनु होस्
                                                 </button>
                                             </form>
-                                        @endcan
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @empty
                                 <tr>
                                     <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>

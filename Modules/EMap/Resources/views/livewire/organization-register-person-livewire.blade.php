@@ -261,12 +261,12 @@
                     </fieldset>
                     <div class="my-2">
                         <div class="form-check-primary0 d-flex">
-                            <h5 class="fw-bold mt-1" for="address_check" >
+                            <h5 class="fw-bold mt-1" for="address_check">
                                 के स्थायी र अस्थायी ठेगाना एउटै हो?
                             </h5>
                             <div class="font px-2">
                                 <i wire:click.prevent="checkSameAsPermanentAddress"
-                                   class="fa fa-toggle-{{$is_same_as_permanent ? 'on' :'off' }} fa-2x"  ></i>
+                                   class="fa fa-toggle-{{$is_same_as_permanent ? 'on' :'off' }} fa-2x"></i>
                             </div>
                         </div>
                     </div>
@@ -452,6 +452,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="#user" data-bs-toggle="tab" aria-expanded="false"
+                                           class="nav-link">
+                                            प्रयोगकर्ता
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="#settings" data-bs-toggle="tab" aria-expanded="false"
                                            class="nav-link">
                                             आवश्यक कागजातहरु
@@ -533,6 +539,29 @@
                                                     {{$address['temporaryProvince']->province??''}}
                                                 </td>
                                             </tr>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane" id="user">
+                                        <table class="table table-sm mb-0 table-striped table-hover">
+                                            <tr>
+                                                <th>प्रयोगकर्ताको नाम</th>
+                                                <td>
+                                                    {{$user['name']}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>इमेल</th>
+                                                <td>
+                                                    {{$user['email']}}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>सम्पर्क नं</th>
+                                                <td>
+                                                    {{$user['phone']}}
+                                                </td>
+                                            </tr>
+
                                         </table>
                                     </div>
 

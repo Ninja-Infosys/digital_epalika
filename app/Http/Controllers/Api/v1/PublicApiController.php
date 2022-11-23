@@ -42,11 +42,13 @@ class PublicApiController extends Controller
         return LinkResource::collection(ImportantLink::latest()->get());
     }
 
-    public function introduction(): string
+    public function introduction(): array
     {
         $setting = $this->getOfficeSetting();
 
-        return strip_tags($setting->introduction ?? '') ?? '';
+        return [
+            'introduction' => strip_tags($setting->introduction ?? '') ?? ''
+        ];
     }
 
     public function getOfficeSetting(): OfficeSetting

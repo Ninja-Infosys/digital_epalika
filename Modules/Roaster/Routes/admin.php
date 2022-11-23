@@ -21,6 +21,7 @@ Route::get('training/{training}/update-status', [TrainingController::class, 'set
 Route::get('training/{training}/marks', [TrainingController::class, 'marks'])->name('training.marks');
 Route::put('training/{training}/update-photo', [TrainingController::class, 'storePhotos'])->name('training.store-photos');
 Route::get('training/{training}/pdf', [TrainingController::class, 'pdfExport'])->name('training.pdfExport');
+Route::get('training/{training}/excelExport', [TrainingController::class, 'excelExport'])->name('training.excelReport');
 Route::resource('training', TrainingController::class);
 
 //trainee

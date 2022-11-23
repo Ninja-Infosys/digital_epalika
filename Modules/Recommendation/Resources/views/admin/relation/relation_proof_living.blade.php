@@ -62,7 +62,7 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-end mt-2">
-                                    <p class="text-center"> हतक्षर्........................
+                                    <p class="text-center"> हतक्षर्.......................
                                         <br>
                                         (वडा अध्यक्ष) </p>
                                 </div>

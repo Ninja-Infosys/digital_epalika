@@ -32,7 +32,7 @@
 
 
 
-@if($training->form_type==='trainee')
+@if($training->form_type===\Modules\Roaster\Enums\TrainingTypeEnum::TRAINEE)
     <table>
         <tr>
             <td>क्र.सं.</td>
