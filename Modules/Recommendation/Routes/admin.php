@@ -52,6 +52,11 @@ Route::view('same_person_confirmation','recommendation::admin.relation.same_pers
 Route::view('protector_recommendation','recommendation::admin.relation.prorector_recommendation')->name('protector_recommendation');
 Route::view('relation_proof_living','recommendation::admin.relation.relation_proof_living')->name('relation_proof_living');
 Route::view('rights_one_proof','recommendation::admin.relation.rights_one_proof')->name('rights_one_proof');
+Route::view('transfer_recommendation','recommendation::admin.relation.transfer_recommendation')->name('transfer_recommendation');
+Route::view('primary_school','recommendation::admin.relation.primary_school_recommendation')->name('primary_school');
+Route::view('land_valuation','recommendation::admin.relation.land_valuation')->name('land_valuation');
+Route::view('way_house_proof','recommendation::admin.relation.way_house_proof')->name('way_house_proof');
+Route::view('fort_detail_proof','recommendation::admin.relation.fort_detail_proof')->name('fort_detail_proof');
 
 
 
