@@ -3,42 +3,118 @@
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Modules\Recommendation\Enums\ApplicationTypeEnum;
+use Illuminate\Support\Facades\Gate;
+use Modules\Recommendation\Entities\Recommendation;
+use Modules\Recommendation\Http\Requests\Recommendation\StoreRecommendationRequest;
+use Modules\Recommendation\Http\Requests\Recommendation\UpdateRecommendationRequest;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RecommendationController extends Controller
 {
-    public function index()
+    public function getApplicationList(): Factory|View|Application
     {
-        return view('recommendation::index');
+        abort_if(
+            Gate::denies('recommendation_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        return view('recommendation::admin.recommendation.application_list');
     }
 
-    public function create()
+    public function index(ApplicationTypeEnum $applicationTypeEnum)
     {
-        return view('recommendation::create');
+        abort_if(
+            Gate::denies('recommendation_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        return view('recommendation::admin.recommendation.index');
     }
 
-    public function store(Request $request)
+    public function create(ApplicationTypeEnum $applicationTypeEnum)
     {
-        //
+        abort_if(
+            Gate::denies('recommendation_create'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $recommendations = Recommendation::where('application_type', $applicationTypeEnum->value)->get();
+
+        return view('recommendation::admin.recommendation.create', compact('applicationTypeEnum', 'recommendations'));
     }
 
-    public function show($id)
+    public function store(Request $request, ApplicationTypeEnum $applicationTypeEnum)
     {
-        return view('recommendation::show');
+        abort_if(
+            Gate::denies('recommendation_create'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        Recommendation::create($request->validated() + ['application_type' => $applicationTypeEnum->value]);
+
+        toast('फारम सफलतापूर्वक थपियो', 'success');
+
+        return back();
     }
 
-    public function edit($id)
+    public function show(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
     {
-        return view('recommendation::edit');
+        abort_if(
+            Gate::denies('recommendation_access'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        return view('recommendation::admin.recommendation.show', compact('applicationTypeEnum', 'recommendation'));
     }
 
-    public function update(Request $request, $id)
+    public function edit(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
     {
-        //
+        abort_if(
+            Gate::denies('recommendation_edit'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        return view('recommendation::admin.recommendation.edit', compact('applicationTypeEnum', 'recommendation'));
     }
 
-    public function destroy($id)
+    public function update(Request $request, ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
     {
-        //
+        abort_if(
+            Gate::denies('recommendation_edit'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $recommendation->update($request->validated());
+
+        toast('फारम सफलतापूर्वक सम्पादन भयो', 'success');
+
+        return back();
+    }
+
+    public function destroy(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
+    {
+        abort_if(
+            Gate::denies('recommendation_delete'),
+            ResponseAlias::HTTP_FORBIDDEN,
+            '403 Forbidden | you are not allowed to access this resource'
+        );
+
+        $recommendation->delete();
+
+        toast('फारम सफलतापूर्वक हटाइयो', 'success');
+
+        return back();
     }
 }

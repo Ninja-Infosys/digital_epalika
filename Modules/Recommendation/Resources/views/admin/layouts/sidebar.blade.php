@@ -4,6 +4,12 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+<li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
+    <a href="{{route('admin.recommendation.recommendation.list')}}">
+        <i class="fa fa-thumbs-up"></i>
+        <span>सिफारिस</span>
+    </a>
+</li>
 
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
     <a href="#setting"
