@@ -47,6 +47,8 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
+
+
         $definition = FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first(); // get some definition JSON
         $data = '{}';
 
@@ -60,6 +62,8 @@ class RecommendationController extends Controller
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
+
+
 
         if ($request->get('state') === 'draft') {
             // Someone added a 'Save Draft' button to the form, and the user clicked that.

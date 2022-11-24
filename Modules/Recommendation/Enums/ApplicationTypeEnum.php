@@ -23,7 +23,7 @@ enum ApplicationTypeEnum: string
     case BIRTH_CERTIFICATE_PROPERTY_VALUATION = 'birth_certificate_property_valuation';
     case HOUSE_DESTROY = 'house_destroy';
     case PERSONAL_DETAIL_CERTIFICATE_RECOMMENDATION = 'personal_detail_certificate_recommendation';
-    case HOUSE_MAP_PLACE_RECOMMENDATION = ' house_map_place_recommendation';
+    case HOUSE_MAP_PLACE_RECOMMENDATION = 'house_map_place_recommendation';
     case SAME_PERSON_CONFIRMATION = 'same_person_confirmation';
     case NAME_BIRTH_RECOMMENDATION = 'name_birth_recommendation';
     case LAND_PAPER_LOST_RECOMMENDATION = 'land_paper_lost_recommendation';
