@@ -61,9 +61,7 @@
                         </div>
                         <!-- This becomes the builder. -->
                         <div id="formio-form"></div>
-                        <button type="submit" class="btn btn-primary">
-                            पेश गर्नुहोस्
-                        </button>
+
                     </form>
                 </div>
             </div>
@@ -75,11 +73,13 @@
     @endpush
 
     @push('scripts')
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.form.io/formiojs/formio.full.min.js"></script>
 
-        <script lang="text/javascript">
-            window.onload = function() {
-                Formio.createForm(document.getElementById('formio-form'), {!! $definition !!}).then(function(form) {
+        <script>
+            $(document).ready(function() {
+                Formio.createForm(document.getElementById('formio-form'), {!! $definition->form !!}).then(function(form) {
                     form.submission = {
                         data: {!! $data !!},
                     };
@@ -93,7 +93,7 @@
                         submitForm.submit();
                     });
                 });
-            };
+            });
         </script>
     @endpush
 @endsection
