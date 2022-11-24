@@ -29,8 +29,6 @@ return new class extends Migration
             $table->double('physical_progress_target',12,2)->default(0);
             $table->double('physical_progress_completed',12,2)->default(0);
             $table->string('physical_progress_unit')->nullable();
-            $table->string('consumer_committee_name')->nullable();
-            $table->string('consumer_committee_address')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
