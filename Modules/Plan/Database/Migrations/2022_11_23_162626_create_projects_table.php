@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('project_status');
             $table->string('project_start_date')->nullable();
             $table->string('project_completion_date')->nullable();
-            $table->foreignId('project_level_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('plan_level_id')->nullable()->constrained()->nullOnDelete();
             $table->integer('ward_no')->nullable();
             $table->foreignId('budget_source_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('budget_head_id')->nullable()->constrained()->nullOnDelete();
