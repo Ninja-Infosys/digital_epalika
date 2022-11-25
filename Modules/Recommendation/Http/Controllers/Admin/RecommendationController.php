@@ -11,8 +11,6 @@ use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Illuminate\Support\Facades\Gate;
 use Modules\Recommendation\Entities\FormBuilder;
 use Modules\Recommendation\Entities\Recommendation;
-use Modules\Recommendation\Http\Requests\Recommendation\StoreRecommendationRequest;
-use Modules\Recommendation\Http\Requests\Recommendation\UpdateRecommendationRequest;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RecommendationController extends Controller
@@ -49,6 +47,8 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
+
+
         $definition = FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first(); // get some definition JSON
         $data = '{}';
 
@@ -63,6 +63,19 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
+
+
+        if ($request->get('state') === 'draft') {
+            // Someone added a 'Save Draft' button to the form, and the user clicked that.
+            // You can do some different behaviours if you'd like.
+        }
+
+        $data = $request->validateDynamicForm(
+            FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first(), // get some definition JSON
+            $request->get('submissionValues')
+        );
+
+        dd($data);
         Recommendation::create($request->validated() + ['application_type' => $applicationTypeEnum->value]);
 
         toast('फारम सफलतापूर्वक थपियो', 'success');

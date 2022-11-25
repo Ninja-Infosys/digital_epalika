@@ -45,18 +45,23 @@
     @endpush
 
     @push('scripts')
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.form.io/formiojs/formio.full.min.js"></script>
 
-        <script lang="text/javascript">
-            window.onload = function() {
-                    // The third param's readOnly flag turns off buttons & marks all fields as readonly.
-                    Formio.createForm(document.getElementById('formio-form'), {!! $formBuilder !!}, {
-                            readOnly: true
-                        }).then(function(form) {
-                                form.submission = {
-                                    data: {!! $data !!},
-                                };
-                            };
+        <script>
+            $(document).ready(function() {
+                // The third param's readOnly flag turns off buttons & marks all fields as readonly.
+                Formio.createForm(document.getElementById('formio-form'),
+                        {!! $formBuilder->form !!}, {
+                            readOnly: false
+                        })
+                    .then(function(form) {
+                        form.submission = {
+                            data: {!! $data !!},
+                        };
+                    });
+            });
         </script>
     @endpush
 @endsection
