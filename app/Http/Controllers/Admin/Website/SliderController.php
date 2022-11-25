@@ -53,17 +53,6 @@ class SliderController extends Controller
         return back();
     }
 
-    public function show(Slider $slider): Factory|View|Application
-    {
-
-        abort_if(
-            Gate::denies('slider_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
-        return view('admin.website.slider.show');
-    }
-
     public function edit(Slider $slider): Factory|View|Application
     {
 
