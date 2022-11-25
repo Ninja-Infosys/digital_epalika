@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
             $table->string('project_name');
             $table->foreignId('plan_area_id')->nullable()->constrained()->nullOnDelete();
             $table->string('project_status');

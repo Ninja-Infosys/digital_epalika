@@ -30,11 +30,6 @@ class SliderController extends Controller
         return back();
     }
 
-    public function show(Slider $slider)
-    {
-        return view('admin.website.slider.show');
-    }
-
     public function edit(Slider $slider)
     {
         return view('admin.website.slider.edit', compact('slider'));

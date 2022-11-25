@@ -2,6 +2,7 @@
 
 namespace Modules\Plan\Entities;
 
+use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +23,7 @@ class Project extends Model
     ];
 
     protected $fillable = [
+        'fiscal_year_id',
         'project_name',
         'plan_area_id',
         'project_status',
@@ -46,6 +48,11 @@ class Project extends Model
     protected $casts = [
         'project_status' => ProjectStatusEnum::class
     ];
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
 
     public function planArea(): BelongsTo
     {
@@ -75,5 +82,15 @@ class Project extends Model
     public function projectGrantDetails(): HasMany
     {
         return $this->hasMany(ProjectGrantDetail::class);
+    }
+
+    public function benefitedMemberDetails(): HasMany
+    {
+        return $this->hasMany(BenefitedMemberDetail::class);
+    }
+
+    public function consumerCommittee(): HasOne
+    {
+        return $this->hasOne(ConsumerCommittee::class);
     }
 }
