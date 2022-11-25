@@ -27,11 +27,12 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">उदेश्य सूची</h4>
-
+                        @can('businessPurpose_create')
                             <a href="{{route('admin.businessRegistration.setting.businessPurpose.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ उदेश्य थप्नुहोस्
                             </a>
+                        @endcan
 
                     </div>
                 </div>
@@ -41,7 +42,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक </th>
+                                <th>शिर्षक</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -51,17 +52,23 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$businessPurpose->title}}</td>
                                     <td>
-                                        <a href="{{route('admin.businessRegistration.setting.businessPurpose.edit',$businessPurpose)}}"
-                                           class="btn btn-xs btn-outline-warning">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
-                                        <form action="{{route('admin.businessRegistration.setting.businessPurpose.destroy',$businessPurpose)}}"
-                                              method="post">
+                                        @can('businessPurpose_edit')
+                                            <a href="{{route('admin.businessRegistration.setting.businessPurpose.edit',$businessPurpose)}}"
+                                               class="btn btn-xs btn-outline-warning">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+
+                                        <form
+                                            action="{{route('admin.businessRegistration.setting.businessPurpose.destroy',$businessPurpose)}}"
+                                            method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
+                                            @can('businessPurpose_delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

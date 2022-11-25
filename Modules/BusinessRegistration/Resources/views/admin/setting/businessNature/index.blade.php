@@ -51,17 +51,21 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$businessNature->title}}</td>
                                     <td>
+                                        @can('businessNature_edit')
                                         <a href="{{route('admin.businessRegistration.setting.businessNature.edit',$businessNature)}}"
                                            class="btn btn-xs btn-outline-warning">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
+                                        @endcan
                                         <form action="{{route('admin.businessRegistration.setting.businessNature.destroy',$businessNature)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
+                                            @can('businessNature_delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

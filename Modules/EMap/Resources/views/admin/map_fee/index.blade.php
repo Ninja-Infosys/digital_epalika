@@ -55,17 +55,22 @@
                                     <td>{{$mapFee->unit->title??''}}</td>
                                     <td>{{$mapFee->rate}}</td>
                                     <td>
+                                        @can('mapFee_edit')
                                         <a href="{{route('emap.admin.mapFee.edit',$mapFee)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
+                                        @endcan
+
                                         <form action="{{route('emap.admin.mapFee.destroy',$mapFee)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
+                                            @can('mapFee_delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

@@ -59,7 +59,7 @@
                                     <td>{{$investmentRevenue->registration_amount??0}}</td>
                                     <td>{{$investmentRevenue->renew_amount??0}}</td>
                                     <td>
-                                        @can('objectTransactionSubCategory_edit')
+                                        @can('investmentRevenue_edit')
                                             <a href="{{route('admin.businessRegistration.setting.investmentRevenue.edit',$investmentRevenue)}}"
                                                class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्

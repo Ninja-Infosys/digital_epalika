@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\Customs;
 use Modules\BusinessRegistration\Entities\PrintedData;
@@ -20,6 +21,11 @@ class BusinessRegistrationController extends Controller
 {
     public function index(): Factory|View|Application
     {
+        abort_if(
+            Gate::denies('businessRegistration_access'),
+            403,
+            'You not allowed to access this resource'
+        );
         $proprietors = ProprietorDetail::with('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses')
             ->latest()
             ->paginate(15);
@@ -29,6 +35,13 @@ class BusinessRegistrationController extends Controller
 
     public function show($id): Factory|View|Application
     {
+
+        abort_if(
+            Gate::denies('businessRegistration_access'),
+            403,
+            'You not allowed to access this resource'
+        );
+
         $proprietorDetail = ProprietorDetail::findOrFail($id);
         $proprietorDetail->load('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses');
 
@@ -41,6 +54,12 @@ class BusinessRegistrationController extends Controller
 
     public function editData($id, $type): Factory|View|Application
     {
+        abort_if(
+            Gate::denies('businessRegistration_edit'),
+            403,
+            'You not allowed to access this resource'
+        );
+
         $proprietorDetail = ProprietorDetail::findOrFail($id);
 
         $printed_data = PrintedData::where(
@@ -55,6 +74,12 @@ class BusinessRegistrationController extends Controller
 
     public function storeData(StorePrintedDataRequest $request, $id, $type): RedirectResponse
     {
+
+        abort_if(
+            Gate::denies('businessRegistration_edit'),
+            403,
+            'You not allowed to access this resource'
+        );
         DB::transaction(function () use ($request, $id, $type) {
             $printed_data = PrintedData::updateOrCreate(
                 [
@@ -90,6 +115,12 @@ class BusinessRegistrationController extends Controller
 
     public function addData($id, $type): Factory|View|Application
     {
+
+        abort_if(
+            Gate::denies('customs_edit'),
+            403,
+            'You not allowed to access this resource'
+        );
         $proprietorDetail = ProprietorDetail::find($id);
         $customs = Customs::where('proprietor_detail_id', $id)->first();
         return view('businessregistration::admin.businessRegistration.customs.index', compact('proprietorDetail', 'type', 'customs'));
@@ -97,6 +128,12 @@ class BusinessRegistrationController extends Controller
 
     public function customData(Request $request, $id, $type): RedirectResponse
     {
+
+        abort_if(
+            Gate::denies('customs_edit'),
+            403,
+            'You not allowed to access this resource'
+        );
 
         $data = $request->validate([
             'application_fee' => ['required'],

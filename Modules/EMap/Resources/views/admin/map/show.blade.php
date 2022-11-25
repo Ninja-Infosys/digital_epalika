@@ -95,7 +95,6 @@
 
                     <div data-bs-spy="scroll" data-bs-offset="0">
                         @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $noticeType)
-
                             @if($applicationFormTypeEnum===\Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_VERIFIED)
                                 @if($noticeType->showInMapVerification())
                                     <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
@@ -114,15 +113,19 @@
                                             </div>
                                             <div class="d-flex justify-content-end">
                                                 @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
-                                                    <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}"
-                                                       class="mx-2">
-                                                        <i class="fa fa-pen"></i>
-                                                    </a>
-                                                    <div class="btn-group mb-3 ">
-                                                        <i class="fa fa-print text-primary"
-                                                           onclick="print('print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}')"
-                                                        ></i>
-                                                    </div>
+                                                    @can('mapApplyNotice_access')
+                                                        <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}"
+                                                           class="mx-2">
+                                                            <i class="fa fa-pen"></i>
+                                                        </a>
+                                                    @endcan
+                                                    @can('mapApplyNotice_print')
+                                                        <div class="btn-group mb-3 ">
+                                                            <i class="fa fa-print text-primary"
+                                                               onclick="print('print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}')"
+                                                            ></i>
+                                                        </div>
+                                                    @endcan
                                                     @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
                                                         <form
                                                             action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
@@ -133,17 +136,23 @@
                                                             <input type="hidden" class="reject_remarks" name="remarks">
 
                                                             @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
+                                                                @can('mapApplyNoticeReject_access')
                                                                 <i class="fa fa-times mx-2"></i>
+                                                                @endcan
                                                             @else
+                                                                @can('mapApplyNoticeReject_access')
                                                                 <i class="fa fa-check mx-2"></i>
+                                                                @endcan
                                                             @endif
 
                                                         </form>
                                                     @endif
                                                 @else
-                                                    <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
-                                                        <i class="fa fa-plus"></i>
-                                                    </a>
+                                                    @can('mapApplyNotice_access')
+                                                        <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
+                                                            <i class="fa fa-plus"></i>
+                                                        </a>
+                                                    @endcan
                                                 @endif
 
                                             </div>
@@ -176,15 +185,19 @@
                                         </div>
                                         <div class="d-flex justify-content-end">
                                             @if($mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
-                                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}"
-                                                   class="mx-2">
-                                                    <i class="fa fa-pen"></i>
-                                                </a>
-                                                <div class="btn-group mb-3 ">
-                                                    <i class="fa fa-print text-primary"
-                                                       onclick="print('print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}')"
-                                                    ></i>
-                                                </div>
+                                                @can('mapApplyNotice_access')
+                                                    <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}"
+                                                       class="mx-2">
+                                                        <i class="fa fa-pen"></i>
+                                                    </a>
+                                                @endcan
+                                                @can('mapApplyNotice_print')
+                                                    <div class="btn-group mb-3 ">
+                                                        <i class="fa fa-print text-primary"
+                                                           onclick="print('print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}')"
+                                                        ></i>
+                                                    </div>
+                                                @endcan
                                                 @if($noticeType->type() !== \Modules\EMap\Enums\EMapFormFillerTypeEnum::MUNICIPAL)
                                                     <form
                                                         action="{{route('emap.admin.map.map-apply.notice.upload.reject',[$mapApply,$noticeType])}}"
@@ -195,17 +208,23 @@
                                                         <input type="hidden" class="reject_remarks" name="remarks">
 
                                                         @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
+                                                            @can('mapApplyNoticeReject_access')
                                                             <i class="fa fa-times mx-2"></i>
+                                                            @endcan
                                                         @else
+                                                            @can('mapApplyNoticeReject_access')
                                                             <i class="fa fa-check mx-2"></i>
+                                                            @endcan
                                                         @endif
 
                                                     </form>
                                                 @endif
                                             @else
+                                                @can('mapApplyNotice_access')
                                                 <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
                                                     <i class="fa fa-plus"></i>
                                                 </a>
+                                                @endcan
                                             @endif
 
                                         </div>

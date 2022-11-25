@@ -49,7 +49,7 @@
                                     <td>{{$organization->phone}}</td>
                                     <td>{{$organization->organizationDetail->org_name_ne ?? ''}}</td>
                                     <td>
-                                        @can('organization_access')
+                                        @can('organization_edit')
                                         <a href="{{route('emap.admin.organization.update-login-status',$organization)}}"
                                            class="btn btn-xs btn-outline-{{$organization->is_active==1 ?'primary':'danger'}}" title="लग इन {{$organization->is_active==1 ?'गर्न मिल्छ':'गर्न मिल्दैन'}}">
                                             <i class="fa  {{$organization->is_active==1 ?' fa-check':'fa-window-close'}}"></i>

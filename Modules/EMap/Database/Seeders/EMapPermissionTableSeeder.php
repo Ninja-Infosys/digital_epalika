@@ -27,6 +27,11 @@ class EMapPermissionTableSeeder extends Seeder
             'mapApply_create',
             'mapApply_edit',
             'mapApply_delete',
+            'mapSetting_access',
+            'mapSetting_create',
+            'mapApplyNotice_access',
+            'mapApplyNotice_print',
+            'mapApplyNoticeReject_access',
         ];
 
         $this->storePermission($permissions);

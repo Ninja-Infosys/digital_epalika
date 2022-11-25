@@ -10,7 +10,7 @@ class StoreWardCommitteeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('executiveCommittee_create');
+        return Gate::allows('executiveWardCommittee_create');
     }
 
     public function rules(): array

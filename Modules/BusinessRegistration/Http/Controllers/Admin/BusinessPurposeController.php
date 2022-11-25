@@ -3,6 +3,7 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Http\Requests\BusinessPurpose\StoreBusinessPurposeRequest;
@@ -33,7 +34,7 @@ class BusinessPurposeController extends Controller
         return view('businessregistration::admin.setting.businessPurpose.create');
     }
 
-    public function store(StoreBusinessPurposeRequest $request)
+    public function store(StoreBusinessPurposeRequest $request): RedirectResponse
     {
         abort_if(
             Gate::denies('businessPurpose_create'),
@@ -81,7 +82,7 @@ class BusinessPurposeController extends Controller
         return redirect(route('admin.businessRegistration.setting.businessPurpose.index'));
     }
 
-    public function destroy(BusinessPurpose $businessPurpose)
+    public function destroy(BusinessPurpose $businessPurpose): RedirectResponse
     {
         abort_if(
             Gate::denies('businessPurpose_delete'),

@@ -63,6 +63,12 @@ class MapController extends Controller
     public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
     {
 
+        abort_if(
+            Gate::denies('mapApplyNoticeReject_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
         $data = ApplyMapNotice::where('map_apply_id', $mapApply->id)
             ->where('file_type', $noticeTypeEnum->value)
             ->first();
@@ -108,6 +114,13 @@ class MapController extends Controller
 
     public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
     {
+
+        abort_if(
+            Gate::denies('mapApplyNotice_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
+
 
         $request->validate([
             'data' => ['required'],
