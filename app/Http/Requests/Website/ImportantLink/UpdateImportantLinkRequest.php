@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Website\ImportantLink;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateImportantLinkRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('importantLink_edit');
     }
 
     public function rules(): array

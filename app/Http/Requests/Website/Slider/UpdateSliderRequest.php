@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Website\Slider;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateSliderRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('slider_edit');
     }
 
     public function rules(): array

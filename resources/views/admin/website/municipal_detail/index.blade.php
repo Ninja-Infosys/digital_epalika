@@ -28,7 +28,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">पालिका विवरण सूची</h4>
-                        @can('role_create')
+                        @can('municipalDetail_create')
                             <a href="{{route('admin.website.municipalDetail.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ पालिका विवरण थप्नुहोस्
@@ -62,18 +62,22 @@
                                     <td>{{$municipalDetail->count}}</td>
                                     <td>{{$municipalDetail->position}}</td>
                                     <td>
+                                        @can('municipalDetail_edit')
                                         <a href="{{route('admin.website.municipalDetail.edit',$municipalDetail)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
+                                        @endcan
                                         <form
                                             action="{{route('admin.website.municipalDetail.destroy',$municipalDetail)}}"
                                             method="post">
                                             @csrf
                                             @method('delete')
+                                            @can('municipalDetail_delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>

@@ -84,7 +84,7 @@ Route::prefix('setting')->group(function () {
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
 // website admin routes
-Route::prefix('website')->as('website.')->middleware('can:websiteAdmin_access')->group(function () {
+Route::prefix('website')->as('website.')->group(function () {
     Route::get('dashboard', WebsiteDashboardController::class)->name('dashboard');
     Route::resource('slider', SliderController::class);
     Route::resource('municipalDetail', MunicipalDetailController::class);

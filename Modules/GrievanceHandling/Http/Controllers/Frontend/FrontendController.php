@@ -26,7 +26,8 @@ class FrontendController extends Controller
             })
             ->where('token', $request->input('token'))
             ->first();
-        if($grievanceDetail > 0)
+
+        if($grievanceDetail->count() > 0)
         {
             return view('grievancehandling::frontend.grievance.single-grievance', compact('grievanceDetail'));
 
