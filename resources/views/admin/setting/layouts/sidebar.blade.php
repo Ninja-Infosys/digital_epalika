@@ -30,18 +30,22 @@
         </a>
     </li>
 @endcan
+@can('officeSetting_access')
 <li class="{{request()->is('admin/setting/officeSetting*') ? 'active' : ''}}">
     <a href="{{route('admin.officeSetting.index')}}">
         <i class="fa fa-cogs"></i>
         <span> कार्यालय सेटिङ </span>
     </a>
 </li>
+@endcan
+@can('sms_access')
 <li class="{{request()->is('admin/setting/sms*') ? 'active' : ''}}">
     <a href="{{route('admin.setting.sms')}}">
         <i class="fa fa-envelope"></i>
         <span> एस.एम.एस सेटिङ </span>
     </a>
 </li>
+@endcan
 <li class="{{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'active' : ''}}">
     <a href="#designationDepartment"
        {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'aria-expanded=true' : ''}}
@@ -99,6 +103,7 @@
         </ul>
     </div>
 </li>
+
 <li class="{{request()->is('admin/setting/units/*') ? 'active' : ''}}">
     <a href="#measurementUnits"
        {{request()->is('admin/setting/units/*') ? 'aria-expanded=true  ' : ''}}

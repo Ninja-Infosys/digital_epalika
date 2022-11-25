@@ -4,6 +4,9 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
@@ -12,11 +15,12 @@ use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
+use Modules\EMap\Enums\ApplicationFormTypeEnum;
 use Modules\EMap\Enums\BuildingUsageEnum;
 
 class DashboardController extends Controller
 {
-    public function __invoke()
+    public function __invoke(): Factory|View|Application
     {
         $totalBusinessCount = ProprietorDetail::count();
         $totalBusinessDetailPurposeCount = BusinessPurpose::count();
@@ -30,8 +34,9 @@ class DashboardController extends Controller
         $businessDetailTransaction = $this->getTotalTransactionData();
 
         $businessDetailAccordingToBusinessType = $this->getBusinessDetailAccordingToBusinessTypes();
+        $investmentRevenueDetail = $this->getInvestmentRevenueData();
 
-        return view('businessregistration::admin.dashboard', compact('businessDetailAccordingToBusinessType','businessDetailTransaction','totalBusinessCount', 'businessRegistrationAccordingToFiscalYear','totalBusinessDetailPurposeCount', 'totalObjectTransactionCategoryCount', 'totalInvestmentRevenueCount', 'businessPurposesChartData'));
+        return view('businessregistration::admin.dashboard', compact('investmentRevenueDetail', 'businessDetailAccordingToBusinessType', 'businessDetailTransaction', 'totalBusinessCount', 'businessRegistrationAccordingToFiscalYear', 'totalBusinessDetailPurposeCount', 'totalObjectTransactionCategoryCount', 'totalInvestmentRevenueCount', 'businessPurposesChartData'));
     }
 
     public function getTotalBusinessPurposesData(): array
@@ -54,13 +59,12 @@ class DashboardController extends Controller
     {
 
         return BusinessDetail::where(function ($query) use ($hasCurrentFiscalYear) {
-                if ($hasCurrentFiscalYear) {
-                    $query->where('fiscal_year_id', $hasCurrentFiscalYear);
-                }
-            })
+            if ($hasCurrentFiscalYear) {
+                $query->where('fiscal_year_id', $hasCurrentFiscalYear);
+            }
+        })
             ->get();
     }
-
 
 
     public function getBusinessRegistrationAccordingToFiscalYear(): array
@@ -68,7 +72,7 @@ class DashboardController extends Controller
 
         $businessDetails = $this->getBusinessDetail();
         return [
-            'labels' =>['दर्ता भएका','दर्ता नभएका'],
+            'labels' => ['दर्ता भएका', 'दर्ता नभएका'],
             'dataSets' => [
                 [
                     'label' => 'व्यवसाय',
@@ -89,7 +93,7 @@ class DashboardController extends Controller
     {
         $transaction = ObjectTransaction::withCount('objectTransactions')->whereNull('object_transaction_id')->get();
         return [
-            'labels'=>$transaction->pluck('title')->toArray(),
+            'labels' => $transaction->pluck('title')->toArray(),
             'dataSets' => [
                 [
                     'data' => $transaction->pluck('object_transactions_count')->toArray(),
@@ -102,31 +106,54 @@ class DashboardController extends Controller
     }
 
 
-
     public function getBusinessDetailAccordingToBusinessTypes(): array
     {
-        $businessDetail = DB::table('proprietor_details')
-            ->whereNull('deleted_at')
-            ->get()
-            ->groupBy('business_type')
-            ->map(function ($business_detail, $key) {
-                return [
-                    'business_type' => BusinessTypeEnum::tryFrom($key)?->label(),
-                    'count' => count($business_detail),
-                ];
-            });
-
+        $officeSetting = $this->getOfficeSetting();
+        $proprietorDetail = ProprietorDetail::whereHas('businessDetail', function ($query) use ($officeSetting) {
+            $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
+        })->get();
         return [
-            'labels' => $businessDetail->pluck('business_type')->toArray(),
+            'labels' => ['नयाँ दर्ता', 'नवीकरण'],
             'dataSets' => [
                 [
-                    'data' => $businessDetail->pluck('count')->toArray(),
+                    'data' => [$proprietorDetail->where('business_type', BusinessTypeEnum::NEW_REGISTRATION)->count(),
+                        $proprietorDetail->where('business_type', BusinessTypeEnum::RENEWAL)->count()
+                    ],
                     'label' => 'जम्मा',
                     'fill' => 'false',
                 ]
             ],
-
-
         ];
+    }
+
+
+    public function getInvestmentRevenueData(): array
+    {
+        $investmentRevenues = InvestmentRevenue::withCount(['businessDetails',
+            'businessDetails as registered_business_count' => fn($q) => $q->whereNotNull('registration_no'),
+            'businessDetails as not_registered_business_count' => fn($q) => $q->whereNull('registration_no'),
+        ])
+            ->get();
+        return [
+            'labels' => $investmentRevenues->pluck('title')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $investmentRevenues->pluck('business_details_count')->toArray(),
+                    'label' => 'जम्मा व्यवसाय',
+                    'fill' => 'false',
+                ],
+                [
+                    'data' => $investmentRevenues->pluck('registered_business_count')->toArray(),
+                    'label' => 'दर्ता भएका',
+                    'fill' => 'false',
+                ],
+                [
+                    'data' => $investmentRevenues->pluck('not_registered_business_count')->toArray(),
+                    'label' => 'दर्ता नभएको',
+                    'fill' => 'false',
+                ]
+            ],
+        ];
+
     }
 }

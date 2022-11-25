@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Website\MunicipalDetail;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreMunicipalDetailRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('municipalDetail_create');
     }
 
     public function rules(): array

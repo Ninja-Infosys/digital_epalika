@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Website\MunicipalDetail;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateMunicipalDetailRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('municipalDetail_edit');
     }
 
     public function rules(): array

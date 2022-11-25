@@ -276,19 +276,23 @@
                                             <td>{{$officeheader->position}}</td>
                                             <td>
 
-                                                <a href="{{route('admin.officeHeader.edit',$officeheader)}}"
-                                                   class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                                </a>
+                                                @can('officeHeader_edit')
+                                                    <a href="{{route('admin.officeHeader.edit',$officeheader)}}"
+                                                       class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                    </a>
+                                                @endcan
 
 
                                                 <form action="{{route('admin.officeHeader.destroy',$officeheader)}}"
                                                       method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                    </button>
+                                                    @can('officeHeader_delete')
+                                                        <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                            <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                        </button>
+                                                    @endcan
                                                 </form>
 
                                             </td>

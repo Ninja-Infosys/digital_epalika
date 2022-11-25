@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
@@ -24,6 +25,12 @@ class MapController extends Controller
 {
     public function index(ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
+
+        abort_if(
+            Gate::denies('mapApply_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
         $application_types = collect();
 
         foreach (ApplicationTypeEnum::cases() as $applicationType) {
@@ -37,7 +44,7 @@ class MapController extends Controller
     }
 
 
-    public function noticeList(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
+    public function noticeList(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum): Factory|View|Application
     {
         return view('emap::admin.map.notice-list', compact('mapApply', 'applicationFormTypeEnum'));
     }
@@ -79,201 +86,15 @@ class MapController extends Controller
         return back();
     }
 
-    public function officeLetter(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(
-            'landDetail',
-            'houseOwner',
-            'client'
-        );
 
-        return view('emap::admin.notice.office-letter', compact('mapApply'));
-    }
 
-    public function noticeLetter(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(
-            'landDetail',
-            'houseOwner'
-        );
 
-        return view('emap::admin.notice.notice-letter', compact('mapApply'));
-    }
-
-    public function sendingDetails(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail.unit', 'landOwner', 'houseOwner', 'storeyDetails.mapFee');
-
-        return view('emap::admin.notice.sending_details', compact('mapApply'));
-    }
-
-    public function mapArrears(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail', 'houseOwner');
-
-        return view('emap::admin.notice.map-arrears', compact('mapApply'));
-    }
-
-    public function landArrears(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail', 'houseOwner', 'landOwner');
-
-        return view('emap::admin.notice.land-arrears', compact('mapApply'));
-    }
-
-    public function technicianNotice(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(
-            'landDetail',
-            'houseOwner',
-            'fourForts',
-            'criteriaDetails'
-        );
-
-        return view('emap::admin.notice.technician-notice', compact('mapApply'));
-    }
-
-    public function chAgreement(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(['houseOwner', 'designerDetails' => function ($query) {
-            $query->where('post', PostsEnum::SUPERVISOR->value)->first();
-        }]);
-
-        return view('emap::admin.notice.ch-agreement', compact('mapApply'));
-    }
-
-    public function agentAgreement(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(['houseOwner', 'designerDetails' => function ($query) {
-            $query->where('post', PostsEnum::CONTRACTOR->value)->first();
-        }]);
-
-        return view('emap::admin.notice.agent-agreement', compact('mapApply'));
-    }
-
-    public function permissionLetter(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail', 'landOwner', 'houseOwner');
-
-        return view('emap::admin.notice.permission-letter', compact('mapApply'));
-    }
-
-    public function level(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(['landDetail.unit', 'landOwner', 'houseOwner', 'structureType',
-            'criteriaDetails',
-            'buildingDetails',]);
-
-        return view('emap::admin.notice.level', compact('mapApply'));
-    }
-
-    public function superVisor(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(['landDetail', 'houseOwner', 'designerDetails' => function ($query) {
-            $query->where('post', PostsEnum::CONTRACTOR->value)->first();
-        }]);
-
-        return view('emap::admin.notice.supervisor', compact('mapApply'));
-    }
-
-    public function firstPhaseConsultantReport(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail', 'houseOwner');
-
-        return view('emap::admin.map.report.first_phase_consultant_report', compact('mapApply'));
-    }
-
-    public function firstPhaseTechnicianReport(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail', 'houseOwner');
-
-        return view('emap::admin.map.report.first_phase_technician_report', compact('mapApply'));
-    }
-
-    public function secondPhaseConsultantReport(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail', 'houseOwner');
-
-        return view('emap::admin.map.report.second_phase_consultant_report', compact('mapApply'));
-    }
-
-    public function secondPhaseTechnicianReport(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail', 'houseOwner');
-
-        return view('emap::admin.map.report.second_phase_technician_report', compact('mapApply'));
-    }
-
-    public function plinthLevelSupervisorReport(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(['landDetail', 'houseOwner', 'designerDetails' => function ($query) {
-            $query->where('post', PostsEnum::CONTRACTOR->value)->first();
-        }]);
-
-        return view('emap::admin.map.report.plinth_level_supervisor_report', compact('mapApply'));
-    }
-
-    public function superStructurePermission(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load(['landDetail', 'landOwner', 'houseOwner']);
-
-        return view('emap::admin.notice.superstructure-permission', compact('mapApply'));
-    }
 
     public function superstructure(MapApply $mapApply): Factory|View|Application
     {
         $mapApply->load(['landDetail', 'landOwner', 'houseOwner:id,name']);
 
         return view('emap::admin.notice.superstructure', compact('mapApply'));
-    }
-
-    public function revisedSuperStructurePermit(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landDetail.unit');
-
-        return view('emap::admin.notice.revised_superstructure_permit', compact('mapApply'));
-    }
-
-    public function constructionCompletionCertificate(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landOwner', 'landDetail.unit');
-
-        return view('emap::admin.notice.construction_completion_certificate', compact('mapApply'));
-    }
-
-    public function revisedSuperStructurePermitOrder(MapApply $mapApply): Factory|View|Application
-    {
-        $mapApply->load('landOwner', 'landDetail.unit');
-
-        return view('emap::admin.notice.revised_superstructure_permit_order', compact('mapApply'));
-    }
-
-    public function houseMapNamsari(MapApply $mapApply): View|Factory|Application
-    {
-        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit');
-
-        return \view('emap::admin.notice.house_map_namsari', compact('mapApply'));
-    }
-
-    public function permissionView(MapApply $mapApply): View|Factory|Application
-    {
-        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit');
-
-        return \view('emap::admin.notice.permission', compact('mapApply'));
-    }
-
-    public function heirView(MapApply $mapApply): View|Factory|Application
-    {
-        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit');
-
-        return \view('emap::admin.notice.heir', compact('mapApply'));
-    }
-
-    public function buildingConstructionCompletionCertificate(MapApply $mapApply): View|Factory|Application
-    {
-        $mapApply->load('landOwner', 'houseOwner', 'landDetail.unit', 'structureType');
-
-        return \view('emap::admin.notice.building_construction_completion_certificate', compact('mapApply'));
     }
 
     public function getTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)

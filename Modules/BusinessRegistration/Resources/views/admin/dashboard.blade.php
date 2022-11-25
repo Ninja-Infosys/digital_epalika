@@ -126,11 +126,12 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <x-charts.pie-chart-component id="bar-chart15"
-                                                          chartType="pie"
-                                                          chartName=" आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} दर्ता भएका व्यवसायहरु"
-                                                          :labels="$businessRegistrationAccordingToFiscalYear['labels']"
-                                                          :dataSets="$businessRegistrationAccordingToFiscalYear['dataSets']"
+                            <x-charts.pie-chart-component
+                                id="bar-chart15"
+                                chartType="pie"
+                                chartName=" आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} दर्ता भएका व्यवसायहरु"
+                                :labels="$businessRegistrationAccordingToFiscalYear['labels']"
+                                :dataSets="$businessRegistrationAccordingToFiscalYear['dataSets']"
 
                             />
 
@@ -141,31 +142,46 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <x-charts.bar-chart-component id="bar-chart16"
-                                                          chartTitle="कारोबार गर्ने वस्तु श्रेणी"
-                                                          :labels="$businessDetailTransaction['labels']"
-                                                          :dataSets="$businessDetailTransaction['dataSets']"
+                            <x-charts.bar-chart-component
+                                id="bar-chart16"
+                                chartTitle="कारोबार गर्ने वस्तु श्रेणी"
+                                :labels="$businessDetailTransaction['labels']"
+                                :dataSets="$businessDetailTransaction['dataSets']"></x-charts.bar-chart-component>
 
-                            />
-
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div><!-- end col -->
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <x-charts.bar-chart-component id="bar-chart17"
-                                                          chartTitle="व्यवसायको अवस्था"
-                                                          :labels="$businessDetailAccordingToBusinessType['labels']"
-                                                          :dataSets="$businessDetailAccordingToBusinessType['dataSets']"
+                            <x-charts.pie-chart-component
+                                id="bar-chart17"
+                                chartName=" आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} व्यवसायको अवस्था"
+                                :labels="$businessDetailAccordingToBusinessType['labels']"
+                                :dataSets="$businessDetailAccordingToBusinessType['dataSets']"
 
                             />
 
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <x-charts.bar-chart-component
+                                id="bar-chart18"
+                                chartTitle="पुँजीगत अनुसार व्यवसाय"
+                                :labels="$investmentRevenueDetail['labels']"
+                                :dataSets="$investmentRevenueDetail['dataSets']"></x-charts.bar-chart-component>
+
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
+    </div>
     </div>
 @endsection

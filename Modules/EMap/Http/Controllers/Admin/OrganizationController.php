@@ -4,6 +4,9 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OrganizationRegistered;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
@@ -11,7 +14,7 @@ use Modules\EMap\Entities\Organization;
 
 class OrganizationController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         abort_if(
             Gate::denies('organization_access'),
