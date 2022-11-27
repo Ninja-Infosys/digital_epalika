@@ -2,9 +2,12 @@
 
 namespace Modules\Recommendation\Entities;
 
+use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
 
@@ -20,11 +23,33 @@ class Recommendation extends Model
 
 
     protected $fillable = [
+        'fiscal_year_id',
+        'date_ne',
+        'date_en',
+        'name',
         'application_type',
-        'form',
+        'data',
     ];
 
     protected $casts = [
         'application_type' => ApplicationTypeEnum::class,
     ];
+
+    protected function data(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value,
+            set: fn($value) => json_encode($value)
+        );
+    }
+
+    protected function getDataInArrayAttribute()
+    {
+        return json_decode($this->attributes['data'], true);
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
 }

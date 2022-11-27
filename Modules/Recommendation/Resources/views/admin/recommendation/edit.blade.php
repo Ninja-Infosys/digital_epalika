@@ -17,10 +17,10 @@
                             <a
                                 href="{{ route('admin.recommendation.recommendation.index', $applicationTypeEnum) }}">{{ $applicationTypeEnum->label() }}</a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ {{ $applicationTypeEnum->label() }} थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">{{$recommendation->name ?? ''}} सम्पादन गर्नुहोस</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{ $applicationTypeEnum->label() }} थप्नुहोस्</h4>
+                <h4 class="page-title">{{$recommendation->name ?? ''}} सम्पादन गर्नुहोस</h4>
             </div>
         </div>
     </div>
@@ -30,9 +30,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">{{ $applicationTypeEnum->label() }} थप्नुहोस्</h4>
+                        <h4 class="header-title">{{$recommendation->name ?? ''}} सम्पादन गर्नुहोस</h4>
                         <a href="{{ route('admin.recommendation.recommendation.index', $applicationTypeEnum) }}"
-                            class="btn btn-sm btn-outline-primary">
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> {{ $applicationTypeEnum->label() }} सूची
                         </a>
                     </div>
@@ -48,15 +48,17 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ route('admin.recommendation.recommendation.store', $applicationTypeEnum) }}"
+                    <form
+                        action="{{ route('admin.recommendation.recommendation.update', [$applicationTypeEnum, $recommendation]) }}"
                         method="post" enctype="multipart/form-data" id="submissionForm">
                         @csrf
+                        @method('PUT')
                         <div class="col-md-12 mb-2">
                             <label for="name" class="form-label">सेवा ग्राहीको नाम *</label>
                             <input
                                 type="text"
                                 name="name"
-                                value="{{old('name')}}"
+                                value="{{old('name',$recommendation->name)}}"
                                 class="form-control @error('name') is-invalid @enderror"
                                 id="name"
                                 placeholder="सेवा ग्राहीको नाम"
@@ -69,6 +71,8 @@
                             <x-date-input-component
                                 nameNe="date_ne" labelNe="मिति *"
                                 nameEn="date_en" labelEn="Date"
+                                :editDateNe="$recommendation->date_ne"
+                                :editDateEn="$recommendation->date_en"
                             />
                         </div>
                         <div class=" col-md-12 p-2 mb-2">
@@ -90,18 +94,18 @@
 
     @push('scripts')
         <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+                integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
         <script src="https://cdn.form.io/formiojs/formio.full.min.js"></script>
 
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 Formio.createForm(document.getElementById('formio-form'), {!! $definition->form !!})
-                    .then(function(form) {
+                    .then(function (form) {
                         form.submission = {
-                            data: {!! $data !!},
+                            data: {!! $recommendation->data !!},
                         };
 
-                        form.on('submit', function(submission) {
+                        form.on('submit', function (submission) {
                             var submitForm = document.getElementById('submissionForm');
                             submitForm.querySelector('input[name=state]').value = submission.state;
                             submitForm.querySelector('input[name=submissionValues]').value = JSON.stringify(

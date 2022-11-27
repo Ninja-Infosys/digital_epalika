@@ -43,7 +43,8 @@ class SendExecutiveCommitteeMessage extends Command
             } else {
                 $phone = implode(',', $municipalCommittees->pluck('phone')->toArray());
             }
-            SamayaSms::sendTextSMS($phone, $meetingEvent->description);
+
+            (new SamayaSms)->sendTextSMS($phone, $meetingEvent->description);
         }
         return 0;
     }

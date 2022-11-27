@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::post('file/store-in-storage', [FileController::class, 'storeInStorage'])
+    ->name('file.store-in-storage');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy')->names('api.file');
