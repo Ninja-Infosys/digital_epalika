@@ -13,10 +13,10 @@ class BudgetSourceController extends Controller
     public function index()
     {
         abort_if(Gate::denies('budgetSource_access'),
-        403,
-        'you are not able to access this resource');
+            403,
+            'you are not able to access this resource');
 
-        $budgetSources=BudgetSource::all();
+        $budgetSources = BudgetSource::all();
         return view('plan::admin.setting.budget_source.index', compact('budgetSources'));
     }
 
@@ -47,7 +47,7 @@ class BudgetSourceController extends Controller
             403,
             'you are not able to access this resource');
 
-        return view('plan::admin.setting.budget_source.edit',compact('budgetSource'));
+        return view('plan::admin.setting.budget_source.edit', compact('budgetSource'));
     }
 
     public function update(UdpateBudgetSourceRequest $request, BudgetSource $budgetSource)

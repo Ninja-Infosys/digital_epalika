@@ -6,8 +6,11 @@ use Modules\Plan\Http\Controllers\Admin\BudgetSourceController;
 use Modules\Plan\Http\Controllers\Admin\DashboardController;
 use Modules\Plan\Http\Controllers\Admin\PlanAreaController;
 use Modules\Plan\Http\Controllers\Admin\PlanLevelController;
+use Modules\Plan\Http\Controllers\Admin\ProjectController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+Route::resource('project', ProjectController::class);
 
 Route::prefix('setting')->group(function (){
     Route::resource('planArea', PlanAreaController::class)->except('show');

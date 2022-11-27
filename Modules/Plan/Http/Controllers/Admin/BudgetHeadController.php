@@ -13,10 +13,11 @@ class BudgetHeadController extends Controller
     public function index()
     {
         abort_if(Gate::denies('budgetHead_access'),
-        403,
-        'you are not able to access this resource');
+            403,
+            'you are not able to access this resource');
 
-        $budgetHeads=BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+        $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+
         return view('plan::admin.setting.budget_head.index', compact('budgetHeads'));
     }
 
@@ -26,8 +27,9 @@ class BudgetHeadController extends Controller
             403,
             'you are not able to access this resource');
 
-        $mainBudgetHeads=BudgetHead::whereNull('budget_head_id')->get();
-        return view('plan::admin.setting.budget_head.create',compact('mainBudgetHeads'));
+        $mainBudgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+
+        return view('plan::admin.setting.budget_head.create', compact('mainBudgetHeads'));
     }
 
     public function store(StoreBudgetHeadRequest $request)
@@ -48,8 +50,9 @@ class BudgetHeadController extends Controller
             403,
             'you are not able to access this resource');
 
-        $mainBudgetHeads=BudgetHead::whereNull('budget_head_id')->get();
-        return view('plan::admin.setting.budget_head.edit',compact('budgetHead','mainBudgetHeads'));
+        $mainBudgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+
+        return view('plan::admin.setting.budget_head.edit', compact('budgetHead', 'mainBudgetHeads'));
     }
 
     public function update(UpdateBudgetHeadRequest $request, BudgetHead $budgetHead)

@@ -28,6 +28,10 @@ class PlanPermissionTableSeeder extends Seeder
             'budgetSource_create',
             'budgetSource_edit',
             'budgetSource_delete',
+            'project_access',
+            'project_create',
+            'project_edit',
+            'project_delete',
         ];
 
         $this->storePermission($permissions);

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
 
 class Project extends Model
@@ -23,6 +24,7 @@ class Project extends Model
     ];
 
     protected $fillable = [
+        'registration_no',
         'fiscal_year_id',
         'project_name',
         'plan_area_id',
@@ -37,6 +39,7 @@ class Project extends Model
         'project_venue',
         'evaluation_amount',
         'purpose',
+        'operated_through',
         'is_deadline_extended',
         'extended_date',
         'progress_spent_amount',
@@ -46,7 +49,8 @@ class Project extends Model
     ];
 
     protected $casts = [
-        'project_status' => ProjectStatusEnum::class
+        'project_status' => ProjectStatusEnum::class,
+        'operated_through' => ProjectOperatedThroughEnum::class
     ];
 
     public function fiscalYear(): BelongsTo
