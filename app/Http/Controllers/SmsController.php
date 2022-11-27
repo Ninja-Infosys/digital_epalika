@@ -2,17 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Gate;
 
 class SmsController extends Controller
 {
-    public function setting()
+    public function setting(): Factory|View|Application
     {
+        abort_if(
+            Gate::denies('sms_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
         return view('admin.setting.sms.index');
     }
 
-    public function setSmsKeyInEnvironment(Request $request)
+    public function setSmsKeyInEnvironment(Request $request): Redirector|Application|RedirectResponse
     {
+        abort_if(
+            Gate::denies('sms_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
         $request->validate([
             'samaya_api_key' => ['required'],
             'samaya_sender_id' => ['required'],
@@ -26,7 +42,7 @@ class SmsController extends Controller
         return redirect(route('admin.setting.sms'));
     }
 
-    public function setEnvironmentValue($envKey, $envValue): void
+    private function setEnvironmentValue($envKey, $envValue): void
     {
         $envFile = app()->environmentFilePath();
         $str = file_get_contents($envFile);

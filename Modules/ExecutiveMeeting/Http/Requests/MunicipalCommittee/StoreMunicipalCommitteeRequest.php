@@ -10,7 +10,7 @@ class StoreMunicipalCommitteeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('executiveCommittee_create');
+        return Gate::allows('executiveMunicipalCommittee_create');
     }
 
     public function rules(): array

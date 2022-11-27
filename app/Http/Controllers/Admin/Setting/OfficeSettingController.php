@@ -6,13 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\OfficeHeader;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class OfficeSettingController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
+
+        abort_if(
+            Gate::denies('officeSetting_access'),
+            403,
+            'You are not allowed to access this resource'
+        );
         $officeSetting = OfficeSetting::first();
         $fiscalYears = FiscalYear::get();
         $officeHeaders = OfficeHeader::orderBy('position')->get();
@@ -22,6 +32,12 @@ class OfficeSettingController extends Controller
 
     public function update(Request $request, OfficeSetting $officeSetting)
     {
+
+        abort_if(
+            Gate::denies('officeSetting_edit'),
+            403,
+            'You are not allowed to access this resource'
+        );
         $validationData = $request->validate(
             [
             'name' => ['required', 'string'],

@@ -336,80 +336,80 @@ class RegistrationForm extends Component
         $this->validate();
         $proprietorDetails = DB::transaction(function () {
             $proprietorDetails = ProprietorDetail::create([
-                'name' => $this->form['name'] ?? '',
-                'business_type' => $this->form['business_type'] ?? '',
-                'citizenship_no' => $this->form['citizenship_no'] ?? '',
-                'issue_date' => $this->form['issue_date'] ?? '',
-                'issue_district_id' => $this->form['issue_district_id'] ?? '',
-                'phone' => $this->form['phone'] ?? '',
-                'email' => $this->form['email'] ?? '',
+                'name' => $this->form['name'] ?? null,
+                'business_type' => $this->form['business_type'] ?? null,
+                'citizenship_no' => $this->form['citizenship_no'] ?? null,
+                'issue_date' => $this->form['issue_date'] ?? null,
+                'issue_district_id' => $this->form['issue_district_id'] ?? null,
+                'phone' => $this->form['phone'] ?? null,
+                'email' => $this->form['email'] ?? null,
                 'province_id' => $this->form['permanent_province_id'] ?? null,
                 'district_id' => $this->form['permanent_district_id'] ?? null,
                 'local_body_id' => $this->form['permanent_local_body_id'] ?? null,
                 'ward_no' => $this->form['permanent_ward_no'] ?? null,
-                'way' => $this->form['permanent_way'] ?? '',
-                'tole' => $this->form['permanent_tole'] ?? '',
-                'house_no' => $this->form['house_no'] ?? '',
-                'account_no' => $this->form['account_no'] ?? '',
-                'national_card_no' => $this->form['national_card_no'] ?? '',
-                'gender' => $this->form['gender'] ?? '',
-                'education_qualification' => $this->form['education_qualification'] ?? '',
-                'occupation' => $this->form['occupation'] ?? '',
+                'way' => $this->form['permanent_way'] ?? null,
+                'tole' => $this->form['permanent_tole'] ?? null,
+                'house_no' => $this->form['house_no'] ?? null,
+                'account_no' => $this->form['account_no'] ?? null,
+                'national_card_no' => $this->form['national_card_no'] ?? null,
+                'gender' => $this->form['gender'] ?? null,
+                'education_qualification' => $this->form['education_qualification'] ?? null,
+                'occupation' => $this->form['occupation'] ?? null,
             ]);
 
             $businessDetail = $proprietorDetails->businessDetail()->create([
-                'business_detail_name' => $this->form['business_detail_name'] ?? '',
+                'business_detail_name' => $this->form['business_detail_name'] ?? null,
                 'investment_revenue_id' => $this->form['investment_revenue_id'] ?? null,
                 'is_rent' => $this->form['is_rent'] ?? null,
                 'is_registered' => $this->form['is_registered'] ?? null,
                 'submission_no' => time(),
-                'business_detail_name_en' => $this->form['business_detail_name_en'] ?? '',
-                'business_nature' => $this->form['business_nature'] ?? '',
-                'establish_year' => $this->form['establish_year'] ?? '',
-                'registration_date' => $this->form['registration_date'] ?? '',
-                'pan_no' => $this->form['pan_no'] ?? '',
-                'amount_cost' => $this->form['amount_cost'] ?? '',
+                'business_detail_name_en' => $this->form['business_detail_name_en'] ?? null,
+                'business_nature' => $this->form['business_nature'] ?? null,
+                'establish_year' => $this->form['establish_year'] ?? null,
+                'registration_date' => $this->form['registration_date'] ?? null,
+                'pan_no' => $this->form['pan_no'] ?? null,
+                'amount_cost' => $this->form['amount_cost'] ?? 0,
                 'source_of_capital' => $this->form['source_of_capital'] ?? null,
-                'employment' => $this->form['employment'] ?? '',
-                'house_owner_name' => $this->form['house_owner_name'] ?? '',
-                'house_owner_phone' => $this->form['house_owner_phone'] ?? '',
-                'house_owner_address' => $this->form['house_owner_address'] ?? '',
-                'house_owner_monthly_rent' => $this->form['house_owner_monthly_rent'] ?? '',
+                'employment' => $this->form['employment'] ?? null,
+                'house_owner_name' => $this->form['house_owner_name'] ?? null,
+                'house_owner_phone' => $this->form['house_owner_phone'] ?? null,
+                'house_owner_address' => $this->form['house_owner_address'] ?? null,
+                'house_owner_monthly_rent' => $this->form['house_owner_monthly_rent'] ?? null,
                 'province_id' => $this->form['province_id'] ?? null,
                 'district_id' => $this->form['district_id'] ?? null,
                 'local_body_id' => $this->form['local_body_id'] ?? null,
-                'ward_no' => $this->form['ward_no'] ?? '',
-                'way' => $this->form['way'] ?? '',
-                'tole' => $this->form['tole'] ?? '',
+                'ward_no' => $this->form['ward_no'] ?? null,
+                'way' => $this->form['way'] ?? null,
+                'tole' => $this->form['tole'] ?? null,
             ]);
 
             $businessDetail->businessPurposes()->attach($this->form['purpose']);
 
             foreach ($this->form['threeGenerationDetails'] as $threeGenerationDetail) {
                 $proprietorDetails->threeGenerationDetails()->create([
-                    'relation' => $threeGenerationDetail['relation'] ?? '',
-                    'name' => $threeGenerationDetail['name'] ?? '',
-                    'name_en' => $threeGenerationDetail['name_en'] ?? '',
-                    'citizenship_no' => $threeGenerationDetail['citizenship_no'] ?? '',
-                    'mobile_no' => $threeGenerationDetail['mobile_no'] ?? '',
+                    'relation' => $threeGenerationDetail['relation'] ?? null,
+                    'name' => $threeGenerationDetail['name'] ?? null,
+                    'name_en' => $threeGenerationDetail['name_en'] ?? null,
+                    'citizenship_no' => $threeGenerationDetail['citizenship_no'] ?? null,
+                    'mobile_no' => $threeGenerationDetail['mobile_no'] ?? null,
                 ]);
             }
 
             foreach ($this->form['partnerDetails'] as $partnerDetail) {
                 $businessDetail->partnerDetails()->create([
-                    'relation' => $partnerDetail['relation'] ?? '',
-                    'name' => $partnerDetail['name'] ?? '',
-                    'citizenship_no' => $partnerDetail['citizenship_no'] ?? '',
-                    'mobile_no' => $partnerDetail['mobile_no'] ?? '',
+                    'relation' => $partnerDetail['relation'] ?? null,
+                    'name' => $partnerDetail['name'] ?? null,
+                    'citizenship_no' => $partnerDetail['citizenship_no'] ?? null,
+                    'mobile_no' => $partnerDetail['mobile_no'] ?? null,
                 ]);
             }
 
             foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
                 $businessDetail->registeredBusinesses()->create([
-                    'registration_no' => $registeredBusiness['registration_no'] ?? '',
-                    'business_name' => $registeredBusiness['business_name'] ?? '',
-                    'registration_date' => $registeredBusiness['registration_date'] ?? '',
-                    'active' => $registeredBusiness['active'] ?? '',
+                    'registration_no' => $registeredBusiness['registration_no'] ?? null,
+                    'business_name' => $registeredBusiness['business_name'] ?? null,
+                    'registration_date' => $registeredBusiness['registration_date'] ?? null,
+                    'active' => $registeredBusiness['active'] ?? null,
                 ]);
             }
             $proprietorDetails->businessRegisteredFile()->create([
@@ -423,9 +423,9 @@ class RegistrationForm extends Component
             ]);
 
             $proprietorDetails->introboard()->create([
-                'length' => $this->form['length'] ?? null,
-                'width' => $this->form['width'] ?? null,
-                'square' => $this->form['square'] ?? null,
+                'length' => $this->form['length'] ?? 0,
+                'width' => $this->form['width'] ?? 0,
+                'square' => $this->form['square'] ?? 0,
             ]);
 
             return $proprietorDetails;
@@ -478,60 +478,60 @@ class RegistrationForm extends Component
 
     public function render(): Factory|View|Application
     {
-        if (! empty($this->form['permanent_province_id'])) {
+        if (!empty($this->form['permanent_province_id'])) {
             $this->permanent_districts = Province::with('districts')->findOrFail($this->form['permanent_province_id'])->districts;
         }
-        if (! empty($this->form['permanent_district_id'])) {
+        if (!empty($this->form['permanent_district_id'])) {
             $this->permanent_localBodies = District::with('localBodies')->findOrFail($this->form['permanent_district_id'])->localBodies;
         }
-        if (! empty($this->form['permanent_local_body_id'])) {
+        if (!empty($this->form['permanent_local_body_id'])) {
             $this->permanent_wards = LocalBody::findOrFail($this->form['permanent_local_body_id'])->wards;
         }
 
-        if (! empty($this->form['province_id'])) {
+        if (!empty($this->form['province_id'])) {
             $this->districts = Province::with('districts')->findOrFail($this->form['province_id'])->districts;
         }
-        if (! empty($this->form['district_id'])) {
+        if (!empty($this->form['district_id'])) {
             $this->localBodies = District::with('localBodies')->findOrFail($this->form['district_id'])->localBodies;
         }
-        if (! empty($this->form['local_body_id'])) {
+        if (!empty($this->form['local_body_id'])) {
             $this->wards = LocalBody::findOrFail($this->form['local_body_id'])->wards;
         }
 
-        if (! empty($this->form['object_transaction_id'])) {
+        if (!empty($this->form['object_transaction_id'])) {
             $this->investmentRevenues = InvestmentRevenue::where('object_transaction_id', $this->form['object_transaction_id'])->get();
         }
 
         //temporary address preview
-        if (! empty($this->form['district_id'])) {
+        if (!empty($this->form['district_id'])) {
             $this->district_preview = District::find($this->form['district_id']);
         }
-        if (! empty($this->form['province_id'])) {
+        if (!empty($this->form['province_id'])) {
             $this->province_preview = Province::find($this->form['province_id']);
         }
-        if (! empty($this->form['local_body_id'])) {
+        if (!empty($this->form['local_body_id'])) {
             $this->localBody_preview = LocalBody::find($this->form['local_body_id']);
         }
 
         //permanent address preview
 
-        if (! empty($this->form['permanent_province_id'])) {
+        if (!empty($this->form['permanent_province_id'])) {
             $this->permanent_province_preview = Province::find($this->form['permanent_province_id']);
         }
-        if (! empty($this->form['permanent_district_id'])) {
+        if (!empty($this->form['permanent_district_id'])) {
             $this->permanent_district_preview = District::find($this->form['permanent_district_id']);
         }
-        if (! empty($this->form['permanent_local_body_id'])) {
+        if (!empty($this->form['permanent_local_body_id'])) {
             $this->permanent_localBody_preview = LocalBody::find($this->form['permanent_local_body_id']);
         }
 
-        if (! empty($this->form['issue_district_id'])) {
+        if (!empty($this->form['issue_district_id'])) {
             $this->issue_district_preview = District::find($this->form['issue_district_id']);
         }
-        if (! empty($this->form['purpose'])) {
+        if (!empty($this->form['purpose'])) {
             $this->dbBusinessPurposes = BusinessPurpose::whereIn('id', $this->form['purpose'])->get();
         }
-        if (! empty($this->form['length'] && $this->form['width'])) {
+        if (!empty($this->form['length'] && $this->form['width'])) {
             $this->form['square'] = $this->form['length'] * $this->form['width'];
         } else {
             $this->form['square'] = '';

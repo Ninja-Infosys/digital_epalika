@@ -24,7 +24,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> बैठक निर्णयहरु </h4>
-                        @can('meetingDecision_access')
+                        @can($meeting_for . 'MeetingDecision_create')
                             <a href="{{route('admin.executiveMeeting.meetingDecision.create',$meeting_for)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
@@ -53,13 +53,13 @@
                                     <td>{{$meetingDecision->subject}}</td>
 
                                     <td>
-                                        @can('meetingDecision_edit')
+                                        @can($meeting_for . 'MeetingDecision_edit')
                                             <a href="{{route('admin.executiveMeeting.meetingDecision.edit',[$meeting_for,$meetingDecision])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('meetingDecision_delete')
+                                        @can($meeting_for . 'MeetingDecision_delete')
                                             <form action="{{route('admin.executiveMeeting.meetingDecision.destroy',[$meeting_for,$meetingDecision])}}"
                                                   method="post">
                                                 @csrf

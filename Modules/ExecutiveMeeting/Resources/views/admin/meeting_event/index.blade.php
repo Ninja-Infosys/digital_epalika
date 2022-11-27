@@ -25,7 +25,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> बैठक विवरण </h4>
-                        @can('executiveCommittee_create')
+                        @can($event_for . 'MeetingEvent_create')
                             <a href="{{route('admin.executiveMeeting.meetingEvent.create',$event_for)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
@@ -58,13 +58,13 @@
                                     <td>{{$meetingEvent->end_date}}({{$meetingEvent->en_end_date?->toDateString()}})</td>
 
                                     <td width="90">
-                                        @can('executiveCommittee_edit')
+                                        @can($event_for . 'MeetingEvent_edit')
                                             <a href="{{route('admin.executiveMeeting.meetingEvent.edit',[$event_for,$meetingEvent])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('executiveCommittee_delete')
+                                        @can($event_for . 'MeetingEvent_delete')
                                             <form action="{{route('admin.executiveMeeting.meetingEvent.destroy',[$event_for,$meetingEvent])}}"
                                                   method="post">
                                                 @csrf

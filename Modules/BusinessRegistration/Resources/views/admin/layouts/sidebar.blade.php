@@ -4,12 +4,14 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-<li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
-    <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
-        <i class="fa fa-home"></i>
-        <span> दर्ता भएका व्यवसाय</span>
-    </a>
-</li>
+@can('businessRegistration_access')
+    <li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
+        <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
+            <i class="fa fa-home"></i>
+            <span> दर्ता भएका व्यवसाय</span>
+        </a>
+    </li>
+@endcan
 <li class="{{request()->is('admin/businessRegistration/setting/*') ? 'active' : ''}}">
     <a href="#sidebarBusinessRegistrationSetting"
        {{request()->is('admin/businessRegistration/setting/*') ? 'aria-expanded=true  ' : ''}}
@@ -37,7 +39,6 @@
                     </a>
                 </li>
             @endcan
-
             @can('objectTransaction_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/objectTransaction/*') ? 'active' : ''}}">
                     <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">
@@ -52,14 +53,13 @@
                     </a>
                 </li>
             @endcan
-
-                @can('businessRegistrationTemplate_access')
-                    <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">
-                        <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">
-                            <span>टेम्प्लेट</span>
-                        </a>
-                    </li>
-                @endcan
+            @can('businessRegistrationTemplate_access')
+                <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">
+                    <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">
+                        <span>टेम्प्लेट</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

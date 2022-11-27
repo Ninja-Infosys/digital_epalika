@@ -32,6 +32,12 @@ class BusinessRegistrationPermissionTableSeeder extends Seeder
             'businessRegistrationTemplate_create',
             'businessRegistrationTemplate_edit',
             'businessRegistrationTemplate_delete',
+            'businessRegistration_access',
+            'businessRegistration_create',
+            'businessRegistration_edit',
+            'businessRegistration_delete',
+            'businessRegistrationPrint_access',
+            'customs_edit'
         ];
 
         $this->storePermission($permissions);

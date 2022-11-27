@@ -76,10 +76,12 @@
                                     <td>{{$proprietor->businessDetail?->business_nature?->label() ?? ''}}</td>
                                     <td>{{$proprietor->businessDetail->amount_cost ?? ''}}</td>
                                     <td>
+                                        @can('businessRegistration_access')
                                         <a href="{{route('admin.businessRegistration.businessRegistration.show',$proprietor)}}"
                                            class="btn btn-xs btn-outline-info">
                                             <i class="fa fa-eye"></i> पुरा विवरण हेर्नुहोस
                                         </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty

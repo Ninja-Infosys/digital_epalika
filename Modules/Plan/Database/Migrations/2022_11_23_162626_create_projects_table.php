@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
             $table->string('project_name');
             $table->foreignId('plan_area_id')->nullable()->constrained()->nullOnDelete();
             $table->string('project_status');
@@ -29,8 +30,6 @@ return new class extends Migration
             $table->double('physical_progress_target',12,2)->default(0);
             $table->double('physical_progress_completed',12,2)->default(0);
             $table->string('physical_progress_unit')->nullable();
-            $table->string('consumer_committee_name')->nullable();
-            $table->string('consumer_committee_address')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

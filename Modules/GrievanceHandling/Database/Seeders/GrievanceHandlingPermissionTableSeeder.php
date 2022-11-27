@@ -24,6 +24,7 @@ class GrievanceHandlingPermissionTableSeeder extends Seeder
             'grievanceDetail_create',
             'grievanceDetail_edit',
             'grievanceDetail_delete',
+            'grievanceUser_access'
         ];
 
         $this->storePermission($permissions);
