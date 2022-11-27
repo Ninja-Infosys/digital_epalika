@@ -60,12 +60,12 @@
                                 <label for="for" class="form-label">टेम्प्लेट *</label>
                                 <select name="for" id="for" class="form-control">
                                     <option value="">छान्नुहोस्</option>
-{{--                                    @foreach(\Modules\Recommendation\Enums\ApplicationTypeEnum::cases() as $templateType)--}}
-{{--                                        <option {{old('for',$eMapTemplate->for->value)==$templateType->value ? 'selected':''}}--}}
-{{--                                                value="{{$templateType->value}}">--}}
-{{--                                            {{$templateType->label()}}--}}
-{{--                                        </option>--}}
-{{--                                    @endforeach--}}
+                                    @foreach(\Modules\Recommendation\Enums\ApplicationTypeEnum::cases() as $templateType)
+                                        <option {{old('for',$recommendationTemplate->for->value)==$templateType->value ? 'selected':''}}
+                                                value="{{$templateType->value}}">
+                                            {{$templateType->label()}}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('for')
                                 <div class="invalid-feedback">{{$message}}</div>
