@@ -26,9 +26,16 @@
         id="setting">
         <ul class="nav-second-level">
             @can('formBuilder_access')
-                <li class="{{request()->is('admin/setting/form-builder*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/recommendation/setting/form-builder*') ? 'active' : ''}}">
                     <a href="{{route('admin.recommendation.setting.formBuilder.index')}}">
                         <span>फारम बिल्डर</span>
+                    </a>
+                </li>
+            @endcan
+            @can('recommendationTemplate_access')
+                <li class="{{request()->is('admin/recommendation/setting/recommendationTemplate*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.recommendationTemplate.index')}}">
+                        <span>टेम्पलेट</span>
                     </a>
                 </li>
             @endcan

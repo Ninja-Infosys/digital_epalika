@@ -6,12 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.dashboard')}}">
+                            <a href="{{route('admin.recommendation.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.eMapTemplate.index')}}"> टेम्प्लेट</a>
+                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.index')}}"> टेम्प्लेट</a>
                         </li>
                         <li class="breadcrumb-item active">टेम्प्लेट</li>
                     </ol>
@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
                         @can('eMapTemplate_create')
-                            <a href="{{route('emap.admin.eMapTemplate.create')}}"
+                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
                             </a>
@@ -48,14 +48,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($eMapTemplates as $eMapTemplate)
+                            @forelse($recommendationTemplates as $recommendationTemplates)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$eMapTemplate->title}}</td>
-                                    <td>{{$eMapTemplate->for->label() ??''}}</td>
+                                    <td>{{$recommendationTemplates->title}}</td>
+                                    <td>{{$recommendationTemplates->for->label() ??''}}</td>
                                     <td>
-                                        @can('eMapTemplate_edit')
-                                            <a href="{{route('emap.admin.eMapTemplate.edit',$eMapTemplate)}}"
+                                        @can('recommendationTemplate_edit')
+                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',$recommendationTemplates)}}"
                                                class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
