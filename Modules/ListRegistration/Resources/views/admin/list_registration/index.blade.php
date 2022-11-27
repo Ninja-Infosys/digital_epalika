@@ -28,7 +28,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">मौजुदा सुची दर्ताहरु</h4>
-                        @can('executiveCommittee_create')
+                        @can('listRegistration_create')
                             <a href="{{route('admin.listRegistrations.listRegistration.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
@@ -57,18 +57,18 @@
                                     <td>{{$listRegistration->date}}</td>
 
                                     <td>
-                                        @can('executiveCommittee_access')
+                                        @can('listRegistration_access')
                                             <a href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}" class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-eye"></i> थप हेर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('executiveCommittee_edit')
+                                        @can('listRegistration_edit')
                                             <a href="{{route('admin.listRegistrations.listRegistration.edit',$listRegistration)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('executiveCommittee_delete')
+                                        @can('listRegistration_delete')
                                             <form action="{{route('admin.listRegistrations.listRegistration.destroy',$listRegistration)}}"
                                                   method="post">
                                                 @csrf

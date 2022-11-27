@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\Website\SliderController;
 use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\TechController;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
@@ -50,7 +51,7 @@ Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileSt
 Route::prefix('setting')->group(function () {
     Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
 
-//    sms
+    //    sms
     Route::get('sms', [SmsController::class, 'setting'])->name('setting.sms');
     Route::post('sms', [SmsController::class, 'setSmsKeyInEnvironment'])->name('sms.set-sms-key-in-environment');
 

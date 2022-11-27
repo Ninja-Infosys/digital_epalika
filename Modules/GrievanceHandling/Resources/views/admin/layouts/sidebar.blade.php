@@ -5,19 +5,21 @@
     </a>
 </li>
 @can('grievanceDetail_access')
-<li class="{{request()->is('admin/grievanceHandling/grievanceDetail') ? 'active' : ''}}">
-    <a href=" {{route('admin.grievanceHandling.grievanceDetail.index')}}">
-        <i class="fa fa-clipboard-list"></i>
-        <span> गुनासो बिबरण </span>
-    </a>
-</li>
+    <li class="{{request()->is('admin/grievanceHandling/grievanceDetail') ? 'active' : ''}}">
+        <a href=" {{route('admin.grievanceHandling.grievanceDetail.index')}}">
+            <i class="fa fa-clipboard-list"></i>
+            <span> गुनासो बिबरण </span>
+        </a>
+    </li>
 @endcan
-<li class="{{request()->is('admin/grievanceHandling/grievanceUser/*') ? 'active' : ''}}">
-    <a href=" {{route('admin.grievanceHandling.grievanceUser.index')}}">
-        <i class="fa fa-user"></i>
-        <span> गुनासो प्रयोगकर्ता </span>
-    </a>
-</li>
+@can('grievanceUser_access')
+    <li class="{{request()->is('admin/grievanceHandling/grievanceUser/*') ? 'active' : ''}}">
+        <a href=" {{route('admin.grievanceHandling.grievanceUser.index')}}">
+            <i class="fa fa-user"></i>
+            <span> गुनासो प्रयोगकर्ता </span>
+        </a>
+    </li>
+@endcan
 <li class="{{request()->is('admin/grievanceHandling/setting/*') ? 'active' : ''}}">
     <a href="#sidebarGrievanceHandlingSetting"
        {{request()->is('admin/grievanceHandling/setting/*') ? 'aria-expanded=true  ' : ''}}

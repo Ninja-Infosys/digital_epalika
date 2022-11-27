@@ -10,7 +10,7 @@ class StoreMeetingDecisionRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('meetingDecision_create');
+        return true;
     }
 
     public function rules(): array

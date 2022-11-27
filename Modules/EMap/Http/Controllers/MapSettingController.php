@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\Units\Type;
 use App\Models\Settings\Units\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Modules\EMap\Entities\MapSetting;
 
@@ -13,6 +14,12 @@ class MapSettingController extends Controller
 {
     public function index()
     {
+
+        abort_if(
+            Gate::denies('mapSetting_access'),
+            403,
+            'You are not allowed to employee access'
+        );
         $mapSetting = MapSetting::first();
         $unitTypes = Type::all();
         $units = Unit::all();
@@ -22,6 +29,12 @@ class MapSettingController extends Controller
 
     public function store(Request $request)
     {
+
+        abort_if(
+            Gate::denies('mapSetting_create'),
+            403,
+            'You are not allowed to employee access'
+        );
         $data = $request->validate([
             'map_request_form_format' => ['nullable'],
             'land_measurement_id' => ['nullable', Rule::exists('types', 'id')->withoutTrashed()],

@@ -474,13 +474,17 @@
                         </div>
                         <div class="tab-pane" id="reg">
                             <div class="d-flex justify-content-end mb-2">
-                                <a class="btn btn-primary btn-sm"
-                                   href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">
-                                    <i class="fa fa-pen"></i>
-                                </a>
-                                <button class="btn btn btn-info mx-1" onclick="print('print1')"><i
-                                        class="fa fa-print"></i>
-                                </button>
+                                @can('businessRegistration_edit')
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">
+                                        <i class="fa fa-pen"></i>
+                                    </a>
+                                @endcan
+                                @can('businessRegistrationPrint_access')
+                                    <button class="btn btn btn-info mx-1" onclick="print('print1')"><i
+                                            class="fa fa-print"></i>
+                                    </button>
+                                @endcan
 
 
                             </div>
@@ -496,17 +500,23 @@
 
 
                             <div class="d-flex justify-content-end mb-2 mt-2">
-                                <a class="btn btn-primary btn-sm"
-                                   href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">
-                                    <i class="fa fa-pen"></i>
-                                </a>
-                                <button class="btn btn btn-info mx-1" onclick="print('print2')"><i
-                                        class="fa fa-print"></i>
-                                </button>
-                                <a href="{{route('admin.businessRegistration.add-data.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}"
-                                   class="btn btn-primary">
-                                    <i class="fa fa-plus"></i>
-                                </a>
+                                @can('businessRegistration_edit')
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">
+                                        <i class="fa fa-pen"></i>
+                                    </a>
+                                @endcan
+                                @can('businessRegistrationPrint_access')
+                                    <button class="btn btn btn-info mx-1" onclick="print('print2')"><i
+                                            class="fa fa-print"></i>
+                                    </button>
+                                @endcan
+                                @can('customs_edit')
+                                    <a href="{{route('admin.businessRegistration.add-data.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}"
+                                       class="btn btn-primary">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                @endcan
                             </div>
                             <div class="font-black ckEditor" id="print2">
 
@@ -518,13 +528,17 @@
 
                         <div class="tab-pane" id="tax">
                             <div class="d-flex justify-content-end mb-2">
-                                <a class="btn btn-primary btn-sm"
-                                   href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">
-                                    <i class="fa fa-pen"></i>
-                                </a>
-                                <button class="btn btn btn-info mx-1" onclick="print('print3')"><i
-                                        class="fa fa-print"></i>
-                                </button>
+                                @can('businessRegistration_edit')
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">
+                                        <i class="fa fa-pen"></i>
+                                    </a>
+                                @endcan
+                                @can('businessRegistrationPrint_access')
+                                    <button class="btn btn btn-info mx-1" onclick="print('print3')"><i
+                                            class="fa fa-print"></i>
+                                    </button>
+                                @endcan
                             </div>
                             <div class="font-black ckEditor" id="print3">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()->data
@@ -535,13 +549,17 @@
                         </div>
                         <div class="tab-pane" id="application">
                             <div class="d-flex justify-content-end mb-2">
-                                <a class="btn btn-primary btn-sm"
-                                   href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE])}}">
-                                    <i class="fa fa-pen"></i>
-                                </a>
-                                <button class="btn btn btn-info mx-1" onclick="print('print4')"><i
-                                        class="fa fa-print"></i>
-                                </button>
+                                @can('businessRegistration_edit')
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE])}}">
+                                        <i class="fa fa-pen"></i>
+                                    </a>
+                                @endcan
+                                @can('businessRegistrationPrint_access')
+                                    <button class="btn btn btn-info mx-1" onclick="print('print4')"><i
+                                            class="fa fa-print"></i>
+                                    </button>
+                                @endcan
                             </div>
                             <div class="font-black ckEditor" id="print4">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()->data

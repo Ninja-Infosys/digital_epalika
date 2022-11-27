@@ -10,7 +10,7 @@ class UpdateMeetingDecisionRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('meetingDecision_edit');
+        return true;
     }
 
     public function rules(): array

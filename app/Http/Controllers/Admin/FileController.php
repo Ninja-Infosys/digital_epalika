@@ -46,6 +46,29 @@ class FileController extends Controller
         ]);
     }
 
+    public function storeInStorage(Request $request): JsonResponse
+    {
+        $request->validate([
+            'upload' => ['required']
+        ]);
+        if ($request->hasFile('upload')) {
+            $file_name = pathinfo($request->file('upload')?->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $request->file('upload')?->getClientOriginalExtension();
+            $file = $request->file('upload')?->store('recommendation/', 'public');
+
+            return response()->json([
+                'fileName' => $file_name,
+                'uploaded' => true,
+                'url' => $file,
+                'extension' => $extension,
+            ]);
+        }
+
+        return response()->json([
+            'uploaded' => false,
+        ]);
+    }
+
     public function destroy(File $file)
     {
         if ($file->file) {

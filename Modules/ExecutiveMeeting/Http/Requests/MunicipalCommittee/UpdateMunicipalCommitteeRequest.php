@@ -10,7 +10,7 @@ class UpdateMunicipalCommitteeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('executiveCommittee_edit');
+        return Gate::allows('executiveMunicipalCommittee_edit');
     }
 
     public function rules(): array

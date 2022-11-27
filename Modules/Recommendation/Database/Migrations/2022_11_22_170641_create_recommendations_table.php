@@ -9,6 +9,10 @@ return new class extends Migration {
     {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fiscal_year_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('date_ne');
+            $table->string('date_en');
+            $table->string('name')->nullable();
             $table->string('application_type');
             $table->json('data');
             $table->timestamps();

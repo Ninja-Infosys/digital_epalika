@@ -106,11 +106,11 @@ class FrontendController extends Controller
         }
 
         if ($this->verifyOtp($request, $mapApply)) {
-            $mapApplyData =   ApplyMapNotice::updateOrCreate(
+            $mapApplyData = ApplyMapNotice::updateOrCreate(
                 [
-                'map_apply_id' => $mapApply->id,
-                'file_type' => $noticeTypeEnum->value,
-            ],
+                    'map_apply_id' => $mapApply->id,
+                    'file_type' => $noticeTypeEnum->value,
+                ],
                 [
                     'data' => $request->input('data'),
                 ]
@@ -141,9 +141,9 @@ class FrontendController extends Controller
                 'otp' => $number,
             ]);
 
-                $sms = SamayaSms::sendTextSMS($mapApply->houseOwner->phone, "Dear Sir, Your Otp is $number, please do not share to anyone.");
+            $sms = (new SamayaSms)->sendTextSMS($mapApply->houseOwner->phone, "Dear Sir, Your Otp is $number, please do not share to anyone.");
 
-                return response(['message' => 'Otp sent successfully'], 200);
+            return response(['message' => 'Otp sent successfully'], 200);
 
 
         }
@@ -162,6 +162,6 @@ class FrontendController extends Controller
 
         info($checkedMapApply->otp->is_expired);
 
-        return $checkedMapApply !== null && ! $checkedMapApply->otp->is_expired;
+        return $checkedMapApply !== null && !$checkedMapApply->otp->is_expired;
     }
 }

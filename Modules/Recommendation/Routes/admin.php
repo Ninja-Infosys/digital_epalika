@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
+use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::view('relation_identify','recommendation::admin.relation.relation_identify')->name('relation_identify');
@@ -51,6 +52,7 @@ Route::view('fort_detail_proof', 'recommendation::admin.relation.fort_detail_pro
 
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('formBuilder', FormBuilderController::class);
+    Route::resource('recommendationTemplate', RecommendationTemplateController::class);
 });
 
 Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');

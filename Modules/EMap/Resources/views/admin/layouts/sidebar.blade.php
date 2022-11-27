@@ -54,16 +54,20 @@
     <div class="collapse {{request()->is('admin/emap/setting/*') ? 'show' : ''}}"
          id="sidebarEMapSetting">
         <ul class="nav-second-level">
+            @can('mapSetting_access')
             <li class="{{request()->is('admin/emap/setting/mapSetting') ? 'active' : ''}}">
                 <a href="{{route('emap.admin.mapSetting.index')}}">
                     <span> नक्शा सेटिङ </span>
                 </a>
             </li>
+            @endcan
+                @can('mapFee_access')
             <li class="{{request()->is('admin/emap/setting/mapFee*') ? 'active' : ''}}">
                 <a href="{{route('emap.admin.mapFee.index')}}">
                     <span> नक्शा दस्तुर  </span>
                 </a>
             </li>
+                @endcan
             @can('eMapTemplate_access')
                 <li class="{{request()->is('admin/emap/setting/eMapTemplate*') ? 'active' : ''}}">
                     <a href="{{route('emap.admin.eMapTemplate.index')}}">

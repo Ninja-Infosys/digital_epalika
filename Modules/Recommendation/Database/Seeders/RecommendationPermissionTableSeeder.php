@@ -20,6 +20,10 @@ class RecommendationPermissionTableSeeder extends Seeder
             'recommendation_create',
             'recommendation_edit',
             'recommendation_delete',
+            'recommendationTemplate_access',
+            'recommendationTemplate_create',
+            'recommendationTemplate_edit',
+            'recommendationTemplate_delete',
         ];
 
         $this->storePermission($permissions);

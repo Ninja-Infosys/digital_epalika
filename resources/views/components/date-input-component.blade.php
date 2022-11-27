@@ -46,8 +46,8 @@
                 $("#{{$labelEn}}").change(function () {
                     let parsedDate = NepaliFunctions.ParseDate($("#{{$labelEn}}").val());
                     let nepaliDate = NepaliFunctions.AD2BS(parsedDate.parsedDate)
-                    let formattedDate = NepaliFunctions.ConvertDateFormat(nepaliDate, "YYYY-MM-DD")
-                    $("#{{$nameNe}}").val(formattedDate)
+                    let formattedNepaliDate = NepaliFunctions.ConvertDateFormat(nepaliDate, "YYYY-MM-DD")
+                    $("#{{$nameNe}}").val(formattedNepaliDate)
                 })
 
                 @if($getTodayDate)
