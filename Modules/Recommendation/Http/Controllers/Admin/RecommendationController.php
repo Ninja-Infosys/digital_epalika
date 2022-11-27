@@ -3,6 +3,8 @@
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\OfficeHeader;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -11,6 +13,8 @@ use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Illuminate\Support\Facades\Gate;
 use Modules\Recommendation\Entities\FormBuilder;
 use Modules\Recommendation\Entities\Recommendation;
+use Modules\Recommendation\Http\Requests\StoreRecommendationRequest;
+use Modules\Recommendation\Http\Requests\UpdateRecommendationRequest;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RecommendationController extends Controller
@@ -34,7 +38,10 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        $recommendations = Recommendation::where('application_type', $applicationTypeEnum->value)->get();
+        $recommendations = Recommendation::with('fiscalYear')
+            ->where('application_type', $applicationTypeEnum->value)
+            ->latest('date_ne')
+            ->paginate(1);
 
         return view('recommendation::admin.recommendation.index', compact('applicationTypeEnum', 'recommendations'));
     }
@@ -49,14 +56,22 @@ class RecommendationController extends Controller
 
 
 
-        $definition = FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first(); // get some definition JSON
+        $definition = $this->getDefinition($applicationTypeEnum);
+
+        if (empty($definition)) {
+            toast('फारम बनेको छैन', 'error');
+            return redirect()->route('admin.recommendation.setting.formBuilder.create')
+                ->withInput(['application_type' => $applicationTypeEnum->value]);
+        }
+
         $data = '{}';
 
         return view('recommendation::admin.recommendation.create', compact('applicationTypeEnum', 'definition', 'data'));
     }
 
-    public function store(Request $request, ApplicationTypeEnum $applicationTypeEnum)
+    public function store(StoreRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum)
     {
+        // dd($request->all());
         abort_if(
             Gate::denies('recommendation_create'),
             ResponseAlias::HTTP_FORBIDDEN,
@@ -65,18 +80,28 @@ class RecommendationController extends Controller
 
 
 
-        if ($request->get('state') === 'draft') {
-            // Someone added a 'Save Draft' button to the form, and the user clicked that.
-            // You can do some different behaviours if you'd like.
+        $builder = $this->getDefinition($applicationTypeEnum);
+
+        if (empty($builder)) {
+            toast('फारम बनेको छैन', 'error');
+            return redirect()->route('admin.recommendation.setting.formBuilder.create')
+                ->withInput(['application_type' => $applicationTypeEnum->value]);
         }
 
         $data = $request->validateDynamicForm(
-            FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first(), // get some definition JSON
-            $request->get('submissionValues')
+            $builder?->form,
+            $request->get('submissionValues'),
+            null
         );
 
-        dd($data);
-        Recommendation::create($request->validated() + ['application_type' => $applicationTypeEnum->value]);
+        Recommendation::create([
+            'application_type' => $applicationTypeEnum->value,
+            'data' => $data,
+            'fiscal_year_id' => OfficeSetting::latest()->first()?->fiscal_year_id ?? null,
+            'date_ne' => $request->input('date_ne'),
+            'date_en' => $request->input('date_en'),
+            'name' => $request->input('name'),
+        ]);
 
         toast('फारम सफलतापूर्वक थपियो', 'success');
 
@@ -91,7 +116,15 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        return view('recommendation::admin.recommendation.show', compact('applicationTypeEnum', 'recommendation'));
+        $definition = $this->getDefinition($applicationTypeEnum);
+
+        if (empty($definition)) {
+            toast('फारम बनेको छैन', 'error');
+            return redirect()->route('admin.recommendation.setting.formBuilder.create')
+                ->withInput(['application_type' => $applicationTypeEnum->value]);
+        }
+
+        return view('recommendation::admin.recommendation.show', compact('applicationTypeEnum', 'recommendation', 'definition'));
     }
 
     public function edit(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
@@ -102,10 +135,18 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        return view('recommendation::admin.recommendation.edit', compact('applicationTypeEnum', 'recommendation'));
+        $definition = $this->getDefinition($applicationTypeEnum);
+
+        if (empty($definition)) {
+            toast('फारम बनेको छैन', 'error');
+            return redirect()->route('admin.recommendation.setting.formBuilder.create')
+                ->withInput(['application_type' => $applicationTypeEnum->value]);
+        }
+
+        return view('recommendation::admin.recommendation.edit', compact('applicationTypeEnum', 'recommendation', 'definition'));
     }
 
-    public function update(Request $request, ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
+    public function update(UpdateRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
     {
         abort_if(
             Gate::denies('recommendation_edit'),
@@ -113,7 +154,30 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        $recommendation->update($request->validated());
+        $builder = $this->getDefinition($applicationTypeEnum);
+
+        if (empty($builder)) {
+            toast('फारम बनेको छैन', 'error');
+            return redirect()->route('admin.recommendation.setting.formBuilder.create')
+                ->withInput(['application_type' => $applicationTypeEnum->value]);
+        }
+
+        $data = $request->validateDynamicForm(
+            $builder?->form,
+            $request->get('submissionValues'),
+            null
+        );
+
+        $recommendation->update([
+            'application_type' => $applicationTypeEnum->value,
+            'data' => $data,
+            'fiscal_year_id' => OfficeSetting::latest()->first()?->fiscal_year_id ?? null,
+            'date_ne' => $request->input('date_ne'),
+            'date_en' => $request->input('date_en'),
+            'name' => $request->input('name'),
+        ]);
+
+
 
         toast('फारम सफलतापूर्वक सम्पादन भयो', 'success');
 
@@ -133,5 +197,10 @@ class RecommendationController extends Controller
         toast('फारम सफलतापूर्वक हटाइयो', 'success');
 
         return back();
+    }
+
+    public function getDefinition(ApplicationTypeEnum $applicationTypeEnum): null|FormBuilder
+    {
+        return FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first();
     }
 }

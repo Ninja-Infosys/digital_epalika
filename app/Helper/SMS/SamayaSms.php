@@ -7,7 +7,7 @@ use App\Models\Sms;
 class SamayaSms
 {
 
-    public static function sendTextSMS($contact, $message = 'Hello Test'): Sms
+    public function sendTextSMS($contact, $message = 'Hello Test'): Sms
     {
 
         $api_key = config('sms.api_key');
@@ -28,7 +28,7 @@ class SamayaSms
         return self::storeSmsDetail($contact, $message, $response);
     }
 
-    public static function getCreditBalance(): bool|string
+    public function getCreditBalance(): bool|string
     {
         $api_key = config('sms.api_key');
         $api_url = 'https://bulk.textnepal.com/miscapi/' . $api_key . '/getBalance/true/';
@@ -38,7 +38,7 @@ class SamayaSms
         return file_get_contents($api_url);
     }
 
-    public static function fetchApiKey($login_id, $password): bool|string
+    public function fetchApiKey($login_id, $password): bool|string
     {
         $api_url = 'https://bulk.textnepal.com/getkey/' . $login_id . '/' . $password;
 
@@ -47,7 +47,7 @@ class SamayaSms
         return file_get_contents($api_url);
     }
 
-    public static function getLastTransactionReport(): bool|string
+    public function getLastTransactionReport(): bool|string
     {
         $api_key = config('sms.api_key');
 
@@ -64,7 +64,7 @@ class SamayaSms
      * @param bool|string $response
      * @return Sms
      */
-    public static function storeSmsDetail($contact, mixed $message, bool|string $response): Sms
+    public function storeSmsDetail($contact, mixed $message, bool|string $response): Sms
     {
         return Sms::create([
             'phone' => $contact,
