@@ -18,6 +18,7 @@ class Sms extends Model
     ];
 
     protected $fillable = [
+        'api_used',
         'phone',
         'message',
         'response_data',

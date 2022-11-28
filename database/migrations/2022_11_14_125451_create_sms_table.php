@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::create('sms', function (Blueprint $table) {
             $table->id();
+            $table->text('api_used')->nullable();
             $table->text('phone');
             $table->text('message');
             $table->json("response_data")->nullable();
