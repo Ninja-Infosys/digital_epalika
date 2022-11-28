@@ -31,21 +31,54 @@
     </li>
 @endcan
 @can('officeSetting_access')
-<li class="{{request()->is('admin/setting/officeSetting*') ? 'active' : ''}}">
-    <a href="{{route('admin.officeSetting.index')}}">
-        <i class="fa fa-cogs"></i>
-        <span> कार्यालय सेटिङ </span>
-    </a>
-</li>
+    <li class="{{request()->is('admin/setting/officeSetting*') ? 'active' : ''}}">
+        <a href="{{route('admin.officeSetting.index')}}">
+            <i class="fa fa-cogs"></i>
+            <span> कार्यालय सेटिङ </span>
+        </a>
+    </li>
 @endcan
-@can('sms_access')
-<li class="{{request()->is('admin/setting/sms*') ? 'active' : ''}}">
-    <a href="{{route('admin.setting.sms')}}">
-        <i class="fa fa-envelope"></i>
-        <span> एस.एम.एस सेटिङ </span>
-    </a>
-</li>
+@can('feature_access')
+    <li class="{{request()->is('admin/setting/sms*') ? 'active' : ''}}">
+        <a href="{{route('admin.feature-activation')}}">
+            <i class="fa fa-envelope"></i>
+            <span> सुविधा सक्रियता </span>
+        </a>
+    </li>
 @endcan
+
+<li class="{{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'active' : ''}}">
+    <a href="#featureSeting"
+       {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-key"></i>
+        <span>सुविधा </span>
+        <span class="menu-arrow">
+                            <i class="fas fa-angle-right"></i>
+                        </span>
+    </a>
+    <div
+        class="collapse {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'show' : ''}}"
+        id="featureSeting">
+        <ul class="nav-second-level">
+            @can('sms_access')
+                <li class="{{request()->is('admin/setting/sms*') ? 'active' : ''}}">
+                    <a href="{{route('admin.sms-setting')}}">
+                        <span> एस.एम.एस सेटिङ </span>
+                    </a>
+                </li>
+            @endcan
+            @can('mail_access')
+                <li class="{{request()->is('admin/setting/sms*') ? 'active' : ''}}">
+                    <a href="{{route('admin.mail-setting')}}">
+                        <span>मेल सेटिङ </span>
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </div>
+</li>
+
 <li class="{{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'active' : ''}}">
     <a href="#designationDepartment"
        {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'aria-expanded=true' : ''}}
@@ -53,8 +86,8 @@
         <i class="fa fa-list"></i>
         <span>पद/विभाग</span>
         <span class="menu-arrow">
-                            <i class="fas fa-angle-right"></i>
-                        </span>
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
     <div
         class="collapse {{request()->is('admin/setting/designation*') || request()->is('admin/setting/department*') ? 'show' : ''}}"

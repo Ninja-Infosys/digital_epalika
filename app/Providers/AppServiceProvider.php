@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\FeatureActivation;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Units\Unit;
 use App\Models\Website\MunicipalDetail;
+use App\Observers\FeatureActivationObserver;
 use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
 use App\Observers\UnitObserver;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::preventLazyLoading(!$this->app->isProduction());
         OfficeHeader::observe(OfficeHeaderObserver::class);
+        FeatureActivation::observe(FeatureActivationObserver::class);
         Unit::observe(UnitObserver::class);
         MunicipalDetail::observe(MunicipalDetailObserver::class);
 

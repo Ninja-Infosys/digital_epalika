@@ -51,6 +51,8 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
+        $project->load('projectCostDetail','projectGrantDetails');
+
         return view('plan::admin.project.show',compact('project'));
     }
 

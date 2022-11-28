@@ -7,6 +7,7 @@ use App\Http\Requests\UserManagement\Role\StoreRoleRequest;
 use App\Http\Requests\UserManagement\Role\UpdateRoleRequest;
 use App\Models\UserManagement\Permission;
 use App\Models\UserManagement\Role;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -39,6 +40,8 @@ class RoleController extends Controller
             $role = Role::create($request->validated());
 
             $role->permissions()->attach($request->validated()['permissions']);
+
+            $this->permissionCacheClear();
         });
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -68,6 +71,8 @@ class RoleController extends Controller
         DB::transaction(function () use ($request, $role) {
             $role->update($request->validated());
             $role->permissions()->sync($request->validated()['permissions']);
+
+            $this->permissionCacheClear();
         });
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -84,6 +89,8 @@ class RoleController extends Controller
 
             return back();
         }
+        $this->permissionCacheClear();
+
         $role->permissions()->detach();
         $role->delete();
 
@@ -105,5 +112,16 @@ class RoleController extends Controller
                     'title' => Str::headline($last),
                 ];
             })->groupBy('name');
+    }
+
+    /**
+     * @return void
+     */
+    function permissionCacheClear(): void
+    {
+        if (Cache::has('permissions')) {
+            //
+            Cache::forget('permissions');
+        }
     }
 }
