@@ -5,6 +5,7 @@ use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
+use Modules\Recommendation\Http\Controllers\ShowApplicationListController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::view('relation_identify','recommendation::admin.relation.relation_identify')->name('relation_identify');
@@ -51,8 +52,9 @@ Route::view('way_house_proof', 'recommendation::admin.relation.way_house_proof')
 Route::view('fort_detail_proof', 'recommendation::admin.relation.fort_detail_proof')->name('fort_detail_proof');
 
 Route::prefix('setting')->as('setting.')->group(function () {
-    Route::resource('formBuilder', FormBuilderController::class);
-    Route::resource('recommendationTemplate', RecommendationTemplateController::class);
+    Route::resource('{applicationTypeEnum}/formBuilder', FormBuilderController::class);
+    Route::resource('{applicationTypeEnum}/recommendationTemplate', RecommendationTemplateController::class);
+    Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
 });
 
 Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');

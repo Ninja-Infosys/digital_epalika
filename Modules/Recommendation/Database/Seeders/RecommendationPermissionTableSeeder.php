@@ -24,6 +24,7 @@ class RecommendationPermissionTableSeeder extends Seeder
             'recommendationTemplate_create',
             'recommendationTemplate_edit',
             'recommendationTemplate_delete',
+            'applicationFormSetting_access'
         ];
 
         $this->storePermission($permissions);

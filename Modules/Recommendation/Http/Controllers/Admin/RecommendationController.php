@@ -27,7 +27,7 @@ class RecommendationController extends Controller
             '403 Forbidden | you are not allowed to access this resource'
         );
 
-        return view('recommendation::admin.recommendation.application_list');
+        return view('recommendation::admin.application_list');
     }
 
     public function index(ApplicationTypeEnum $applicationTypeEnum)

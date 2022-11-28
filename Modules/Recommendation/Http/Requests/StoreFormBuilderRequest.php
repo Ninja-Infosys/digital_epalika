@@ -17,7 +17,6 @@ class StoreFormBuilderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'application_type' => ['required', new Enum(ApplicationTypeEnum::class)],
             'form' => ['required', 'json'],
         ];
     }

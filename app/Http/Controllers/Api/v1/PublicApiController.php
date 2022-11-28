@@ -22,7 +22,7 @@ class PublicApiController extends Controller
 {
     public function index(): array
     {
-        return array_merge($this->getDataFromMainModule(), $this->checkModuleData());
+        return array_merge($this->getDataFromMainModule(), $this->checkModuleData(),$this->getAllModulesData());
     }
 
     public function setting(): SettingResource
@@ -83,6 +83,44 @@ class PublicApiController extends Controller
         return [
             'setting' => SettingResource::make($setting),
             'sliders' => $this->slider(),
+        ];
+
+    }
+
+
+    public function getAllModulesData(): array
+    {
+        return [
+            [
+                'name' => 'गुनासो',
+                'logo' => asset('assets/backend/images/modules/grievancehandling.png'),
+                'url' => route('grievanceHandling.grievance')
+            ],
+            [
+                'name' => 'घर-नक्सा',
+                'logo' => asset('assets/backend/images/modules/emap.png'),
+                'url' => route('e-map')
+            ],
+            [
+                'name' => 'हेल्प डेस्क',
+                'logo' => asset('assets/backend/images/modules/helpdesk.png'),
+                'url' => route('helpdesk.helpdesk')
+            ],
+            [
+                'name' => 'व्यवसाय दर्ता',
+                'logo' => asset('assets/backend/images/modules/businessregistration.png'),
+                'url' => route('businessRegistration.business')
+            ],
+            [
+                'name' => 'अनुदान',
+                'logo' => asset('assets/backend/images/modules/anudan.png'),
+                'url' => route('grant.index')
+            ],
+            [
+                'name' => 'तालिम',
+                'logo' => asset('assets/backend/images/modules/roaster.png'),
+                'url' => route('roaster.index')
+            ],
         ];
 
     }

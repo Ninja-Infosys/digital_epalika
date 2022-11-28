@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Recommendation\Entities\RecommendationTemplate;
+use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Modules\Recommendation\Http\Requests\Template\StoreRecommendationTemplateRequest;
 use Modules\Recommendation\Http\Requests\Template\UpdateRecommendationTemplateRequest;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RecommendationTemplateController extends Controller
 {
-    public function index()
+    public function index(ApplicationTypeEnum $applicationTypeEnum)
     {
         abort_if(
             Gate::denies('recommendationTemplate_access'),
@@ -26,7 +27,7 @@ class RecommendationTemplateController extends Controller
         return view('recommendation::admin.setting.recommendationTemplate.index', compact('recommendationTemplates'));
     }
 
-    public function create()
+    public function create(ApplicationTypeEnum $applicationTypeEnum)
     {
         abort_if(
             Gate::denies('recommendationTemplate_create'),
@@ -37,7 +38,7 @@ class RecommendationTemplateController extends Controller
         return view('recommendation::admin.setting.recommendationTemplate.create');
     }
 
-    public function store(StoreRecommendationTemplateRequest $request)
+    public function store(StoreRecommendationTemplateRequest $request ,ApplicationTypeEnum $applicationTypeEnum)
     {
         abort_if(
             Gate::denies('recommendationTemplate_create'),
@@ -56,12 +57,12 @@ class RecommendationTemplateController extends Controller
         return back();
     }
 
-    public function show(RecommendationTemplate $recommendationTemplate)
+    public function show(ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
         return view('recommendation::show');
     }
 
-    public function edit(RecommendationTemplate $recommendationTemplate)
+    public function edit(ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
         abort_if(
             Gate::denies('recommendationTemplate_edit'),
@@ -72,7 +73,7 @@ class RecommendationTemplateController extends Controller
         return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate'));
     }
 
-    public function update(UpdateRecommendationTemplateRequest $request, RecommendationTemplate $recommendationTemplate)
+    public function update(UpdateRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
         abort_if(
             Gate::denies('recommendationTemplate_edit'),
@@ -86,7 +87,7 @@ class RecommendationTemplateController extends Controller
         return redirect(route('admin.recommendation.setting.recommendationTemplate.index'));
     }
 
-    public function destroy(RecommendationTemplate $recommendationTemplate)
+    public function destroy(ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
         //
     }
