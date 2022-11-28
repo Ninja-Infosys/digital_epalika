@@ -38,7 +38,7 @@ class ProjectDetailLivewire extends Component
         'progress_spent_amount' => null,
         'physical_progress_target' => null,
         'physical_progress_completed' => null,
-        'physical_progress_unit' => null
+        'physical_progress_unit' => null,
     ];
 
     public function mount($project = null)
@@ -73,28 +73,31 @@ class ProjectDetailLivewire extends Component
         $this->form['extended_date'] = $nepaliDate;
     }
 
-    protected $rules = [
-        'form.registration_no' => ['required'],
-        'form.project_name' => ['required'],
-        'form.plan_area_id' => ['required'],
-        'form.project_status' => ['required'],
-        'form.form.project_start_date' => ['nullable'],
-        'form.project_completion_date' => ['nullable'],
-        'form.plan_level_id' => ['required'],
-        'form.ward_no' => ['nullable', 'integer'],
-        'form.budget_source_id' => ['nullable'],
-        'form.budget_head_id' => ['nullable'],
-        'form.allocated_amount' => ['nullable', 'numeric'],
-        'form.project_venue' => ['nullable'],
-        'form.purpose' => ['nullable'],
-        'form.operated_through' => ['nullable'],
-        'form.is_deadline_extended' => ['required', 'boolean'],
-        'form.extended_date' => ['required_if:form.is_deadline_extended,1'],
-        'form.progress_spent_amount' => ['nullable', 'numeric'],
-        'form.physical_progress_target' => ['nullable', 'numeric'],
-        'form.physical_progress_completed' => ['nullable', 'numeric'],
-        'form.physical_progress_unit' => ['nullable']
-    ];
+    public function rules()
+    {
+        return [
+            'form.registration_no' => ['required','unique:projects,registration_no,'.$this->project->id],
+            'form.project_name' => ['required'],
+            'form.plan_area_id' => ['required'],
+            'form.project_status' => ['required'],
+            'form.form.project_start_date' => ['nullable'],
+            'form.project_completion_date' => ['nullable'],
+            'form.plan_level_id' => ['required'],
+            'form.ward_no' => ['nullable', 'integer'],
+            'form.budget_source_id' => ['nullable'],
+            'form.budget_head_id' => ['nullable'],
+            'form.allocated_amount' => ['nullable', 'numeric'],
+            'form.project_venue' => ['nullable'],
+            'form.purpose' => ['nullable'],
+            'form.operated_through' => ['nullable'],
+            'form.is_deadline_extended' => ['required', 'boolean'],
+            'form.extended_date' => ['required_if:form.is_deadline_extended,1'],
+            'form.progress_spent_amount' => ['nullable', 'numeric'],
+            'form.physical_progress_target' => ['nullable', 'numeric'],
+            'form.physical_progress_completed' => ['nullable', 'numeric'],
+            'form.physical_progress_unit' => ['nullable']
+        ];
+    }
 
     public function updated($propertyName)
     {

@@ -53,8 +53,8 @@
                             @forelse($projects as $project)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$project->project_name}}</td>
                                     <td>{{$project->registration_no}}</td>
+                                    <td>{{$project->project_name}}</td>
                                     <td>{{$project->project_start_date}}</td>
                                     <td>{{$project->project_completion_date}}</td>
                                     <td>{{$project->ward_no}}</td>

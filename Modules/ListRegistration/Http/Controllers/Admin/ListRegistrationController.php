@@ -14,12 +14,7 @@ class ListRegistrationController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('listRegistration_access'),
-            403,
-            'You are not allowed to list registration access'
-        );
-
+        $this->checkAuthorization('listRegistration_access');
         $listRegistrations = ListRegistration::latest()->get();
 
         return view('listregistration::admin.list_registration.index', compact('listRegistrations'));
@@ -27,11 +22,7 @@ class ListRegistrationController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('listRegistration_create'),
-            403,
-            'You are not allowed to list registration create'
-        );
+        $this->checkAuthorization('listRegistration_create');
         $registration_no = 'R-'.Str::padLeft(DB::table('list_registrations')->max('id') + 1, 2, 0);
 
         return view('listregistration::admin.list_registration.create', compact('registration_no'));
@@ -39,11 +30,7 @@ class ListRegistrationController extends Controller
 
     public function store(StoreListRegistrationRequest $request)
     {
-        abort_if(
-            Gate::denies('listRegistration_create'),
-            403,
-            'You are not allowed to list registration create'
-        );
+        $this->checkAuthorization('listRegistration_create');
 
         DB::transaction(function () use ($request) {
             $listRegistration = ListRegistration::create($request->validated());
@@ -60,11 +47,7 @@ class ListRegistrationController extends Controller
 
     public function show(ListRegistration $listRegistration)
     {
-        abort_if(
-            Gate::denies('listRegistration_access'),
-            403,
-            'You are not allowed to list registration access'
-        );
+        $this->checkAuthorization('listRegistration_access');
         $listRegistration->load('files');
 
         return view('listregistration::admin.list_registration.show', compact('listRegistration'));
@@ -72,22 +55,14 @@ class ListRegistrationController extends Controller
 
     public function edit(ListRegistration $listRegistration)
     {
-        abort_if(
-            Gate::denies('listRegistration_edit'),
-            403,
-            'You are not allowed to list registration edit'
-        );
+        $this->checkAuthorization('listRegistration_edit');
 
         return view('listregistration::admin.list_registration.edit', compact('listRegistration'));
     }
 
     public function update(UpdateListRegistrationRequest $request, ListRegistration $listRegistration)
     {
-        abort_if(
-            Gate::denies('listRegistration_edit'),
-            403,
-            'You are not allowed to list registration edit'
-        );
+        $this->checkAuthorization('listRegistration_edit');
         DB::transaction(function () use ($request, $listRegistration) {
             if ($request->hasFile('application_photo') && $listRegistration->application_photo) {
                 $this->deleteFile($listRegistration->application_photo);
@@ -119,11 +94,7 @@ class ListRegistrationController extends Controller
 
     public function destroy(ListRegistration $listRegistration)
     {
-        abort_if(
-            Gate::denies('listRegistration_delete'),
-            403,
-            'You are not allowed to list registration delete'
-        );
+        $this->checkAuthorization('listRegistration_delete');
         foreach ($listRegistration->files as $file) {
             $this->deleteFile($file->file);
         }

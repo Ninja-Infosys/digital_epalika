@@ -12,11 +12,7 @@ class GrantTypeController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('grantType_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantType_access');
 
         $grantTypes = GrantType::all();
 
@@ -25,22 +21,14 @@ class GrantTypeController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('grantType_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantType_create');
 
         return view('grant::admin.grant_type.create');
     }
 
     public function store(StoreGrantTypeRequest $request)
     {
-        abort_if(
-            Gate::denies('grantType_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantType_create');
         GrantType::create($request->validated());
 
         toast('अनुदान प्रकार सफलतापूर्वक थपियो', 'success');
@@ -55,22 +43,14 @@ class GrantTypeController extends Controller
 
     public function edit(GrantType $grantType)
     {
-        abort_if(
-            Gate::denies('grantType_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantType_edit');
 
         return view('grant::admin.grant_type.edit', compact('grantType'));
     }
 
     public function update(UpdateGrantTypeRequest $request, GrantType $grantType)
     {
-        abort_if(
-            Gate::denies('grantType_edit'),
-            403,
-            'You are not allowed to edit this resource'
-        );
+        $this->checkAuthorization('grantType_edit');
         $grantType->update($request->validated());
 
         toast('अनुदान प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -80,11 +60,7 @@ class GrantTypeController extends Controller
 
     public function destroy(GrantType $grantType)
     {
-        abort_if(
-            Gate::denies('grantType_delete'),
-            403,
-            'you are not allowed to delete this resource'
-        );
+        $this->checkAuthorization('grantType_delete');
         $grantType->delete();
 
         toast('अनुदान प्रकार सफलतापूर्वक मेटाइयो', 'success');

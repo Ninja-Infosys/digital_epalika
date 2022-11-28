@@ -12,11 +12,7 @@ class MeetingEventController extends Controller
 {
     public function index($event_for)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_access');
 
         $meetingEvents = MeetingEvent::where('event_for', $event_for)
             ->whereDate('en_start_date', '<=', today()->toDateString())
@@ -27,11 +23,7 @@ class MeetingEventController extends Controller
 
     public function upcomingMeetings($event_for)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_access');
 
         $meetingEvents = MeetingEvent::where('event_for', $event_for)
             ->whereDate('en_start_date', '>', today()->toDateString())
@@ -42,22 +34,14 @@ class MeetingEventController extends Controller
 
     public function create($event_for)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_create');
 
         return view('executivemeeting::admin.meeting_event.create', compact('event_for'));
     }
 
     public function store(StoreMeetingEventRequest $request, $event_for)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_create');
 
         MeetingEvent::create($request->validated() + [
             'event_for' => $event_for,
@@ -70,33 +54,21 @@ class MeetingEventController extends Controller
 
     public function show($event_for, MeetingEvent $meetingEvent)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_access');
 
         return view('executivemeeting::show');
     }
 
     public function edit($event_for, MeetingEvent $meetingEvent)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_edit');
 
         return view('executivemeeting::admin.meeting_event.edit', compact('event_for', 'meetingEvent'));
     }
 
     public function update(UpdateMeetingEventRequest $request, $event_for, MeetingEvent $meetingEvent)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_edit');
 
         $meetingEvent->update($request->validated());
 
@@ -107,11 +79,7 @@ class MeetingEventController extends Controller
 
     public function destroy($event_for, MeetingEvent $meetingEvent)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_delete');
 
         $meetingEvent->delete();
 

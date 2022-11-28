@@ -26,11 +26,7 @@ class UserController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('user_create'),
-            403,
-            'तपाईंलाई प्रयोगकर्ता सिर्जना गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('user_create');
 
         $roles = Role::all();
 
@@ -39,11 +35,7 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        abort_if(
-            Gate::denies('user_create'),
-            403,
-            'तपाईंलाई प्रयोगकर्ता सिर्जना गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('user_create');
 
         User::create($request->validated() + [
             'user_id' => auth()->id(),
@@ -56,20 +48,12 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        abort_if(
-            Gate::denies('user_access'),
-            403,
-            'तपाईंलाई प्रयोगकर्ता पहुँच गर्न अनुमति छैन'
-        );
+       $this->checkAuthorization('user_access');
     }
 
     public function edit(User $user)
     {
-        abort_if(
-            Gate::denies('user_edit'),
-            403,
-            'तपाईंलाई प्रयोगकर्ता सम्पादन गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('user_edit');
         $roles = Role::all();
         $user->load('role');
 
@@ -78,11 +62,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        abort_if(
-            Gate::denies('user_edit'),
-            403,
-            'तपाईंलाई प्रयोगकर्ता सम्पादन गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('user_edit');
 
         $user->update($request->validated());
 
@@ -93,11 +73,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        abort_if(
-            Gate::denies('user_delete'),
-            403,
-            'तपाईंलाई प्रयोगकर्ता मेटाउन अनुमति छैन'
-        );
+        $this->checkAuthorization('user_delete');
 
         $user->delete();
 
@@ -108,11 +84,7 @@ class UserController extends Controller
 
     public function updateStatus(User $user)
     {
-        abort_if(
-            Gate::denies('user_edit'),
-            403,
-            'तपाईंलाई प्रयोगकर्ता सम्पादन गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('user_edit');
 
         $user->update([
             'is_active' => ! $user->is_active,

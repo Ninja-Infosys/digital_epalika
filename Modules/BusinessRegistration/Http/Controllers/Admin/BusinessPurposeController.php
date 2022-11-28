@@ -13,11 +13,7 @@ class BusinessPurposeController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('businessPurpose_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('businessPurpose_access');
         $businessPurposes = BusinessPurpose::get();
 
         return view('businessregistration::admin.setting.businessPurpose.index', compact('businessPurposes'));
@@ -25,22 +21,14 @@ class BusinessPurposeController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('businessPurpose_create'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('businessPurpose_create');
 
         return view('businessregistration::admin.setting.businessPurpose.create');
     }
 
     public function store(StoreBusinessPurposeRequest $request): RedirectResponse
     {
-        abort_if(
-            Gate::denies('businessPurpose_create'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('businessPurpose_create');
         BusinessPurpose::create($request->validated());
         toast(' उदेश्य सफलतापूर्वक थपियो', 'success');
 
@@ -49,33 +37,21 @@ class BusinessPurposeController extends Controller
 
     public function show(BusinessPurpose $businessPurpose)
     {
-        abort_if(
-            Gate::denies('businessPurpose_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('businessPurpose_access');
 
         return view('businessregistration::show');
     }
 
     public function edit(BusinessPurpose $businessPurpose)
     {
-        abort_if(
-            Gate::denies('businessPurpose_edit'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('businessPurpose_edit');
 
         return view('businessregistration::admin.setting.businessPurpose.edit', compact('businessPurpose'));
     }
 
     public function update(UpdateBusinessPurposeRequest $request, BusinessPurpose $businessPurpose)
     {
-        abort_if(
-            Gate::denies('businessPurpose_edit'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('businessPurpose_edit');
         $businessPurpose->update($request->validated());
         toast('उदेश्य सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
@@ -84,11 +60,7 @@ class BusinessPurposeController extends Controller
 
     public function destroy(BusinessPurpose $businessPurpose): RedirectResponse
     {
-        abort_if(
-            Gate::denies('businessPurpose_delete'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('businessPurpose_delete');
         $businessPurpose->delete();
         toast(' सफलतापूर्वक मेटियो', 'success');
 

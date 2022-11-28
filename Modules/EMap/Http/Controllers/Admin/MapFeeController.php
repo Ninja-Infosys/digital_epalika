@@ -13,10 +13,8 @@ class MapFeeController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('mapFee_access'),
-            403,
-            'You are not allowed to access this resource'
+        $this->checkAuthorization(
+            'mapFee_access'
         );
 
         $mapFees = MapFee::with('unit')->get();
@@ -26,22 +24,14 @@ class MapFeeController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('mapFee_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('mapFee_create');
 
         return view('emap::admin.map_fee.create');
     }
 
     public function store(StoreMapFeeRequest $request)
     {
-        abort_if(
-            Gate::denies('mapFee_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('mapFee_create');
 
         MapFee::create($request->validated() + [
             'unit_id' => MapSetting::first()->land_measurement_standard_id,
@@ -54,33 +44,21 @@ class MapFeeController extends Controller
 
     public function show(MapFee $mapFee)
     {
-        abort_if(
-            Gate::denies('mapFee_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+       $this->checkAuthorization('mapFee_access');
 
         return view('emap::show');
     }
 
     public function edit(MapFee $mapFee)
     {
-        abort_if(
-            Gate::denies('mapFee_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('mapFee_edit');
 
         return view('emap::admin.map_fee.edit', compact('mapFee'));
     }
 
     public function update(UpdateMapFeeRequest $request, MapFee $mapFee)
     {
-        abort_if(
-            Gate::denies('mapFee_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('mapFee_edit');
 
         $mapFee->update($request->validated() + [
             'unit_id' => MapSetting::first()->land_measurement_standard_id,
@@ -93,11 +71,7 @@ class MapFeeController extends Controller
 
     public function destroy(MapFee $mapFee)
     {
-        abort_if(
-            Gate::denies('mapFee_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('mapFee_delete');
 
         $mapFee->delete();
 

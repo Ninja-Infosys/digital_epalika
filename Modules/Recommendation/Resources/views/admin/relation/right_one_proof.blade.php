@@ -19,16 +19,15 @@
                     <div class="card mb_30">
                         <div class="card-body p-3">
                             <div class="font-black" id="printData">
-                                <div class="image mt-3">
-                                    <img height="80" width="100" src="{{asset('images/np.png')}}">
-                                    <div class="text-center" style="margin-top: -80px;">
-                                        <h5>
-                                            <b>....................पालिका</b><br>
-                                            <b>वडा नं. ....................को कार्यालय</b><br>
-                                            <b>........(कार्यालय रहेको स्थान) ............(जिल्ला)</b>.<br>
-                                            <b>........................ प्रदेश, नेपाल</b>
-                                        </h5>
-                                    </div>
+                                <div class="flex-container" style="display:flex">
+                                    <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:0rem; margin-right:4rem; margin-top:0rem; text-align:center"><img alt="" src="http://localhost:8000/storage/photos/1/cropped-logo.png" style="float:left; height:100px; width:110px" /></div>
+
+                                    <div class="item-auto" style="flex:1 1 auto; margin-right:8rem; margin-top:0rem; text-align:center"><strong><span style="font-size:20px">....................पालिका</span><br />
+                                            <span style="font-size:16px">वडा नं. ....................को कार्यालय</span></strong><br />
+                                        <span style="font-size:14px">........(कार्यालय रहेको स्थान) ............(जिल्ला)<br />
+........................ प्रदेश, नेपाल</span></div>
+
+                                    <div class="item-auto" style="flex:1 1 auto; margin-bottom:0rem; margin-left:4rem; margin-right:0rem; margin-top:0rem; text-align:center">&nbsp;</div>
                                 </div>
                                 <p class="text-center pt-4"><b>विषय : हकवाला वा हकदार प्रमाणित । (२३) </b></p>
                                 <p >जो जससंग सम्बन्धित छ ।</p>

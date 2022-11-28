@@ -25,20 +25,14 @@
         class="collapse {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'show' : ''}}"
         id="setting">
         <ul class="nav-second-level">
-            @can('formBuilder_access')
-                <li class="{{request()->is('admin/recommendation/setting/form-builder*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.setting.formBuilder.index')}}">
-                        <span>फारम बिल्डर</span>
+{{--            @can('applicationFormSetting_access')--}}
+
+                <li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
+                    <a href="{{route('admin.recommendation.setting.showApplicationList')}}">
+                        <span>निवेदन फारम सेटिंग</span>
                     </a>
                 </li>
-            @endcan
-            @can('recommendationTemplate_access')
-                <li class="{{request()->is('admin/recommendation/setting/recommendationTemplate*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.setting.recommendationTemplate.index')}}">
-                        <span>टेम्पलेट</span>
-                    </a>
-                </li>
-            @endcan
+{{--            @endcan--}}
         </ul>
     </div>
 </li>

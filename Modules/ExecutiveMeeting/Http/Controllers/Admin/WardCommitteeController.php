@@ -13,11 +13,7 @@ class WardCommitteeController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('executiveWardCommittee_access'),
-            403,
-            'You are not allowed to executive committee access'
-        );
+        $this->checkAuthorization('executiveWardCommittee_access');
 
         $wardCommittees = WardCommittee::orderBy('position')->get();
 
@@ -26,11 +22,7 @@ class WardCommitteeController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('executiveWardCommittee_create'),
-            403,
-            'You are not allowed to executive committee create'
-        );
+        $this->checkAuthorization('executiveWardCommittee_create');
         $officeSetting = OfficeSetting::first();
 
         return view('executivemeeting::admin.ward_committee.create', compact('officeSetting'));
@@ -38,11 +30,7 @@ class WardCommitteeController extends Controller
 
     public function store(StoreWardCommitteeRequest $request)
     {
-        abort_if(
-            Gate::denies('executiveWardCommittee_create'),
-            403,
-            'You are not allowed to executive committee create'
-        );
+        $this->checkAuthorization('executiveWardCommittee_create');
 
         WardCommittee::create($request->validated());
 
@@ -53,31 +41,19 @@ class WardCommitteeController extends Controller
 
     public function show(WardCommittee $wardCommittee)
     {
-        abort_if(
-            Gate::denies('executiveWardCommittee_access'),
-            403,
-            'You are not allowed to executive committee access'
-        );
+        $this->checkAuthorization('executiveWardCommittee_access');
     }
 
     public function edit(WardCommittee $wardCommittee)
     {
-        abort_if(
-            Gate::denies('executiveWardCommittee_edit'),
-            403,
-            'You are not allowed to executive committee edit'
-        );
+        $this->checkAuthorization('executiveWardCommittee_edit');
 
         return view('executivemeeting::admin.ward_committee.edit', compact('wardCommittee'));
     }
 
     public function update(UpdateWardCommitteeRequest $request, WardCommittee $wardCommittee)
     {
-        abort_if(
-            Gate::denies('executiveWardCommittee_edit'),
-            403,
-            'You are not allowed to executive committee edit'
-        );
+        $this->checkAuthorization('executiveWardCommittee_edit');
 
         if ($request->hasFile('photo') && $wardCommittee->photo) {
             $this->deleteFile($wardCommittee->photo);
@@ -91,11 +67,7 @@ class WardCommitteeController extends Controller
 
     public function destroy(WardCommittee $wardCommittee)
     {
-        abort_if(
-            Gate::denies('executiveWardCommittee_delete'),
-            403,
-            'You are not allowed to executive committee delete'
-        );
+        $this->checkAuthorization('executiveWardCommittee_delete');
 
         if ($wardCommittee->photo) {
             $this->deleteFile($wardCommittee->photo);

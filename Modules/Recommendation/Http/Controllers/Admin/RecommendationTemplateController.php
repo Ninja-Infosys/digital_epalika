@@ -7,43 +7,32 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Recommendation\Entities\RecommendationTemplate;
+use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Modules\Recommendation\Http\Requests\Template\StoreRecommendationTemplateRequest;
 use Modules\Recommendation\Http\Requests\Template\UpdateRecommendationTemplateRequest;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RecommendationTemplateController extends Controller
 {
-    public function index()
+    public function index(ApplicationTypeEnum $applicationTypeEnum)
     {
-        abort_if(
-            Gate::denies('recommendationTemplate_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendationTemplate_access');
 
         $recommendationTemplates = RecommendationTemplate::latest()->get();
 
         return view('recommendation::admin.setting.recommendationTemplate.index', compact('recommendationTemplates'));
     }
 
-    public function create()
+    public function create(ApplicationTypeEnum $applicationTypeEnum)
     {
-        abort_if(
-            Gate::denies('recommendationTemplate_create'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendationTemplate_create');
 
         return view('recommendation::admin.setting.recommendationTemplate.create');
     }
 
-    public function store(StoreRecommendationTemplateRequest $request)
+    public function store(StoreRecommendationTemplateRequest $request ,ApplicationTypeEnum $applicationTypeEnum)
     {
-        abort_if(
-            Gate::denies('recommendationTemplate_create'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendationTemplate_create');
 
         $recommendationTemplates = RecommendationTemplate::where('for', $request->input('for'))->first();
         if (empty($recommendationTemplates)) {
@@ -56,29 +45,21 @@ class RecommendationTemplateController extends Controller
         return back();
     }
 
-    public function show(RecommendationTemplate $recommendationTemplate)
+    public function show(ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
         return view('recommendation::show');
     }
 
-    public function edit(RecommendationTemplate $recommendationTemplate)
+    public function edit(ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
-        abort_if(
-            Gate::denies('recommendationTemplate_edit'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendationTemplate_edit');
 
         return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate'));
     }
 
-    public function update(UpdateRecommendationTemplateRequest $request, RecommendationTemplate $recommendationTemplate)
+    public function update(UpdateRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
-        abort_if(
-            Gate::denies('recommendationTemplate_edit'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendationTemplate_edit');
 
         $recommendationTemplate->update($request->validated());
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -86,7 +67,7 @@ class RecommendationTemplateController extends Controller
         return redirect(route('admin.recommendation.setting.recommendationTemplate.index'));
     }
 
-    public function destroy(RecommendationTemplate $recommendationTemplate)
+    public function destroy(ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
         //
     }

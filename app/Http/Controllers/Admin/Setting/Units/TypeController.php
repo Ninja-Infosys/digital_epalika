@@ -12,11 +12,7 @@ class TypeController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('unitType_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('unitType_access');
         $types = Type::get();
 
         return view('admin.setting.units.type.index', compact('types'));
@@ -24,22 +20,14 @@ class TypeController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('unitType_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('unitType_create');
 
         return view('admin.setting.units.type.create');
     }
 
     public function store(Request $request)
     {
-        abort_if(
-            Gate::denies('unitType_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('unitType_create');
         $validationData = $request->validate(
             ['title' => 'required', Rule::unique('types', 'title')->withoutTrashed()],
             ['title.required' => 'मापन एकाइ प्रकार अनिवार्य छ|', 'title.unique' => 'मापन एकाइ प्रकार पहिले नै अवस्थित छ']
@@ -58,22 +46,14 @@ class TypeController extends Controller
 
     public function edit(Type $type)
     {
-        abort_if(
-            Gate::denies('unitType_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('unitType_edit');
 
         return view('admin.setting.units.type.edit', compact('type'));
     }
 
     public function update(Request $request, Type $type)
     {
-        abort_if(
-            Gate::denies('unitType_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('unitType_edit');
         $validationData = $request->validate(
             ['title' => 'required', Rule::unique('types', 'title')->withoutTrashed()->ignore($type)],
             ['title.required' => 'मापन एकाइ प्रकार अनिवार्य छ|', 'title.unique' => 'मापन एकाइ प्रकार पहिले नै अवस्थित छ']
@@ -87,11 +67,7 @@ class TypeController extends Controller
 
     public function destroy(Type $type)
     {
-        abort_if(
-            Gate::denies('unitType_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('unitType_delete');
         $type->delete();
         toast('मापन एकाइ प्रकार सफलतापूर्वक मेटाइयो', 'success');
 

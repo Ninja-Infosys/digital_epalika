@@ -42,7 +42,7 @@
                     <h4 class="header-title">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
                 </div>
                 <div class="card-body">
-                    @livewire('plan::project-detail-livewire',['project'=>$project])
+                    @livewire('plan::project-cost-detail-livewire',['project_id'=>$project->id])
                 </div>
             </div>
         </div>

@@ -12,11 +12,7 @@ class InternalUnitConversionController extends Controller
 {
     public function index(Unit $unit)
     {
-        abort_if(
-            Gate::denies('unit_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('unit_access');
 
         $conversionUnits = Unit::where('measurement_unit_id', $unit->measurement_unit_id)->get();
         $conversions = UnitConversion::where('conversion_from', $unit->id)->get();
@@ -26,6 +22,7 @@ class InternalUnitConversionController extends Controller
 
     public function store(StoreUnitConversionRequest $request, Unit $unit)
     {
+
         foreach ($request->input('conversion') as $conversion) {
             if ($conversionData = UnitConversion::where('conversion_to', $conversion['conversion_to'])->where('conversion_from', $unit->id)->first()) {
                 $conversionData->update(['rate' => $conversion['rate'] ?? '']);

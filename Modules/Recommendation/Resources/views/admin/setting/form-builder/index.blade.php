@@ -20,14 +20,14 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">फारम बिल्डर सूची</h4>
                         @can('branch_create')
-                            <a href="{{ route('admin.recommendation.setting.formBuilder.create') }}"
-                                class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('admin.recommendation.setting.formBuilder.create',$applicationTypeEnum) }}"
+                               class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
@@ -37,44 +37,95 @@
                     <div class="table-responsive">
                         <table class="table table-sm table-striped table-hover">
                             <thead>
-                                <tr>
-                                    <th>क्र.स</th>
-                                    <th>फारम बिल्डर नाम</th>
-                                    <th>#</th>
-                                </tr>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>फारम बिल्डर नाम</th>
+                                <th>#</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach ($formBuilders as $formBuilder)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $formBuilder->application_type->label() ?? '' }}</td>
-                                        <td>
-                                            @can('formBuilder_access')
-                                                <a href="{{ route('admin.recommendation.setting.formBuilder.show', $formBuilder) }}"
-                                                    class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-eye"></i> हेर्नुहोस
-                                                </a>
-                                            @endcan
-                                            @can('formBuilder_edit')
-                                                <a href="{{ route('admin.recommendation.setting.formBuilder.edit', $formBuilder) }}"
-                                                    class="btn btn-xs btn-outline-info">
-                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                                </a>
-                                            @endcan
-                                            @can('formBuilder_delete')
-                                                <form
-                                                    action="{{ route('admin.recommendation.setting.formBuilder.destroy', $formBuilder) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                    </button>
-                                                </form>
-                                            @endcan
-                                        </td>
-                                    </tr>
-                                @endforeach
+                            @foreach ($formBuilders as $formBuilder)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $formBuilder->application_type->label() ?? '' }}</td>
+                                    <td>
+
+                                        @can('formBuilder_access')
+                                            <a href="{{ route('admin.recommendation.setting.formBuilder.show', [$applicationTypeEnum,$formBuilder]) }}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i> हेर्नुहोस
+                                            </a>
+                                        @endcan
+                                        @can('formBuilder_edit')
+                                            <a href="{{ route('admin.recommendation.setting.formBuilder.edit', [$applicationTypeEnum,$formBuilder]) }}"
+                                               class="btn btn-xs btn-outline-info">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+                                        @can('formBuilder_delete')
+                                            <form
+                                                action="{{ route('admin.recommendation.setting.formBuilder.destroy', [$applicationTypeEnum,$formBuilder]) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            </form>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">टेम्प्लेट सूची</h4>
+                        @can('eMapTemplate_create')
+                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.create',$applicationTypeEnum)}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
+                            </a>
+                        @endcan
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0 table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>शिर्षक </th>
+                                <th>बर्ग</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+{{--                            @forelse($recommendationTemplates as $recommendationTemplat)--}}
+{{--                                <tr>--}}
+{{--                                    <th scope="row">{{$loop->iteration}}</th>--}}
+{{--                                    <td>{{$recommendationTemplate->title}}</td>--}}
+{{--                                    <td>{{$recommendationTemplate->for->label() ??''}}</td>--}}
+{{--                                    <td>--}}
+{{--                                        @can('recommendationTemplate_edit')--}}
+{{--                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"--}}
+{{--                                               class="btn btn-xs btn-outline-warning">--}}
+{{--                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्--}}
+{{--                                            </a>--}}
+{{--                                        @endcan--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            @empty--}}
+{{--                                <tr>--}}
+{{--                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>--}}
+{{--                                </tr>--}}
+{{--                            @endforelse--}}
                             </tbody>
                         </table>
                     </div>

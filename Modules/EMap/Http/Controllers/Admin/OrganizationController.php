@@ -16,11 +16,7 @@ class OrganizationController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        abort_if(
-            Gate::denies('organization_access'),
-            403,
-            'You are not allowed to employee access'
-        );
+        $this->checkAuthorization('organization_access');
         $organizations = Organization::with('organizationDetail')->latest()->get();
 
         return view('emap::admin.organization.index', compact('organizations'));
@@ -28,11 +24,7 @@ class OrganizationController extends Controller
 
     public function updateLoginStatus(Organization $organization)
     {
-        abort_if(
-            Gate::denies('organization_edit'),
-            403,
-            'You are not allowed to employee access'
-        );
+        $this->checkAuthorization('organization_edit');
 
         DB::transaction(function () use ($organization) {
             $organization->update([
@@ -53,11 +45,7 @@ class OrganizationController extends Controller
 
     public function show(Organization $organization)
     {
-        abort_if(
-            Gate::denies('organization_access'),
-            403,
-            'You are not allowed to employee access'
-        );
+        $this->checkAuthorization('organization_access');
         $organization->load(['userDetail.citizenshipIssuedDistrict',
             'userDetail.permanentLocalBody',
             'userDetail.permanentDistrict',
@@ -72,11 +60,7 @@ class OrganizationController extends Controller
 
     public function destroy(Organization $organization)
     {
-        abort_if(
-            Gate::denies('organization_delete'),
-            403,
-            'You are not allowed to employee access'
-        );
+        $this->checkAuthorization('organization_delete');
         $organization->delete();
         toast(' संगठन सफलतापूर्वक मेटाइयो', 'success');
 

@@ -18,11 +18,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('project_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('project_access');
 
         $projects = Project::latest()->get();
 
@@ -31,11 +27,7 @@ class ProjectController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('project_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('project_create');
 
         $planAreas = PlanArea::with('planAreas')->whereNull('plan_area_id')->get();
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
@@ -47,11 +39,7 @@ class ProjectController extends Controller
 
     public function store(StoreProjectRequest $request)
     {
-        abort_if(
-            Gate::denies('project_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('project_create');
 
         Project::create($request->validated() + [
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
@@ -63,6 +51,8 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
+        $project->load('projectCostDetail','projectGrantDetails');
+
         return view('plan::admin.project.show',compact('project'));
     }
 

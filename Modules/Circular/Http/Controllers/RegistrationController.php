@@ -15,11 +15,7 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('registration_access'),
-            403,
-            'You are not allowed to registration access'
-        );
+        $this->checkAuthorization('registration_access');
 
         $registrations = Registration::latest()->get();
 
@@ -28,11 +24,7 @@ class RegistrationController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('registration_create'),
-            403,
-            'You are not allowed to registration create'
-        );
+        $this->checkAuthorization('registration_create');
         $registration_no = 'R-'.Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
 
         return view('circular::admin.registration.create', compact('registration_no'));
@@ -40,11 +32,7 @@ class RegistrationController extends Controller
 
     public function store(StoreRegistrationRequest $request)
     {
-        abort_if(
-            Gate::denies('registration_create'),
-            403,
-            'You are not allowed to registration create'
-        );
+        $this->checkAuthorization('registration_create');
 
         DB::transaction(function () use ($request) {
             $registration = Registration::create($request->validated() + [
@@ -61,11 +49,7 @@ class RegistrationController extends Controller
 
     public function show(Registration $registration)
     {
-        abort_if(
-            Gate::denies('registration_access'),
-            403,
-            'You are not allowed to registration access'
-        );
+        $this->checkAuthorization('registration_access');
         $registration->load('fiscalYear', 'files');
 
         return view('circular::admin.registration.show', compact('registration'));
@@ -73,22 +57,14 @@ class RegistrationController extends Controller
 
     public function edit(Registration $registration)
     {
-        abort_if(
-            Gate::denies('registration_edit'),
-            403,
-            'You are not allowed to registration edit'
-        );
+        $this->checkAuthorization('registration_edit');
 
         return view('circular::admin.registration.edit', compact('registration'));
     }
 
     public function update(UpdateRegistrationRequest $request, Registration $registration)
     {
-        abort_if(
-            Gate::denies('registration_edit'),
-            403,
-            'You are not allowed to registration edit'
-        );
+        $this->checkAuthorization('registration_edit');
 
         DB::transaction(function () use ($request, $registration) {
             if ($request->hasFile('signature_image') && $registration->signature_image) {
@@ -109,11 +85,7 @@ class RegistrationController extends Controller
 
     public function destroy(Registration $registration)
     {
-        abort_if(
-            Gate::denies('registration_delete'),
-            403,
-            'You are not allowed to registration delete'
-        );
+        $this->checkAuthorization('registration_delete');
         foreach ($registration->files as $file) {
             $this->deleteFile($file->file);
         }

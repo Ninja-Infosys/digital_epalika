@@ -5,6 +5,7 @@ namespace Modules\Recommendation\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Modules\Recommendation\Entities\FormBuilder;
+use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Modules\Recommendation\Http\Requests\StoreFormBuilderRequest;
 use Modules\Recommendation\Http\Requests\UpdateFormBuilderRequest;
 use Illuminate\Support\Facades\Gate;
@@ -12,80 +13,63 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class FormBuilderController extends Controller
 {
-    public function index()
+    public function index(ApplicationTypeEnum $applicationTypeEnum)
     {
-        abort_if(
-            Gate::denies('formBuilder_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_access');
 
-        $formBuilders = FormBuilder::latest()->get();
+        $formBuilders = FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->get();
 
-        return view('recommendation::admin.setting.form-builder.index', compact('formBuilders'));
+        return view('recommendation::admin.setting.form-builder.index', compact('formBuilders','applicationTypeEnum'));
     }
 
-    public function create()
+    public function create(ApplicationTypeEnum $applicationTypeEnum)
     {
-        abort_if(
-            Gate::denies('formBuilder_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_create');
 
-        return view('recommendation::admin.setting.form-builder.create');
+        return view('recommendation::admin.setting.form-builder.create', compact('applicationTypeEnum'));
     }
 
-    public function store(StoreFormBuilderRequest $request): RedirectResponse
+    public function store(StoreFormBuilderRequest $request,ApplicationTypeEnum $applicationTypeEnum): RedirectResponse
     {
-        abort_if(
-            Gate::denies('formBuilder_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_create');
 
-        FormBuilder::create($request->validated());
+        FormBuilder::create($request->validated() + ['application_type' => $applicationTypeEnum->value]);
 
         toast('फारम सफलतापूर्वक थपियो', 'success');
 
         return back();
     }
 
-    public function show(FormBuilder $formBuilder)
+    public function show(ApplicationTypeEnum $applicationTypeEnum,FormBuilder $formBuilder)
     {
-        abort_if(
-            Gate::denies('formBuilder_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_access');
 
-        return view('recommendation::admin.setting.form-builder.show',)->with([
-            'formBuilder' => $formBuilder,
-            'data' => '{}',
-        ]);
+        $data = '{}';
+        return view('recommendation::admin.setting.form-builder.show', compact([
+            'formBuilder',
+            'data',
+            'applicationTypeEnum'
+        ]));
     }
 
-    public function edit(FormBuilder $formBuilder)
+    public function edit(ApplicationTypeEnum $applicationTypeEnum,FormBuilder $formBuilder)
     {
         abort_if(
             Gate::denies('formBuilder_edit'),
             ResponseAlias::HTTP_FORBIDDEN,
             '403 Forbidden | you are not allowed to access this resource'
         );
-
-        return view('recommendation::admin.setting.form-builder.edit',)->with([
-            'formBuilder' => $formBuilder,
-            'data' => '{}',
-        ]);
+        $data = '{}';
+        return view('recommendation::admin.setting.form-builder.edit',compact([
+            'formBuilder',
+            'data',
+            'applicationTypeEnum'
+        ]));
     }
 
-    public function update(UpdateFormBuilderRequest $request, FormBuilder $formBuilder)
+    public function update(UpdateFormBuilderRequest $request, ApplicationTypeEnum $applicationTypeEnum,FormBuilder $formBuilder)
     {
-        abort_if(
-            Gate::denies('formBuilder_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_edit');
 
         $formBuilder->update($request->validated());
 
@@ -94,13 +78,9 @@ class FormBuilderController extends Controller
         return back();
     }
 
-    public function destroy(FormBuilder $formBuilder)
+    public function destroy(ApplicationTypeEnum $applicationTypeEnum,FormBuilder $formBuilder)
     {
-        abort_if(
-            Gate::denies('formBuilder_delete'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_delete');
 
         $formBuilder->delete();
 

@@ -12,11 +12,7 @@ class ThematicAreaController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('thematicArea_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('thematicArea_access');
 
         $thematicAreas = ThematicArea::all();
 
@@ -25,22 +21,14 @@ class ThematicAreaController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('thematicArea_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('thematicArea_create');
 
         return view('grant::admin.thematic_area.create');
     }
 
     public function store(StoreThematicAreaRequest $request)
     {
-        abort_if(
-            Gate::denies('thematicArea_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('thematicArea_create');
 
         ThematicArea::create($request->validated());
 
@@ -51,33 +39,21 @@ class ThematicAreaController extends Controller
 
     public function show(ThematicArea $thematicArea)
     {
-        abort_if(
-            Gate::denies('thematicArea_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('thematicArea_access');
 
         return view('grant::show');
     }
 
     public function edit(ThematicArea $thematicArea)
     {
-        abort_if(
-            Gate::denies('thematicArea_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('thematicArea_edit');
 
         return view('grant::admin.thematic_area.edit', compact('thematicArea'));
     }
 
     public function update(UpdateThematicAreaRequest $request, ThematicArea $thematicArea)
     {
-        abort_if(
-            Gate::denies('thematicArea_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('thematicArea_edit');
 
         $thematicArea->update($request->validated());
 
@@ -88,11 +64,7 @@ class ThematicAreaController extends Controller
 
     public function destroy(ThematicArea $thematicArea)
     {
-        abort_if(
-            Gate::denies('thematicArea_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('thematicArea_delete');
         $thematicArea->delete();
 
         toast('विषयगत क्षेत्र सफलतापूर्वक मेटाइयो', 'success');

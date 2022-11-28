@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use App\Models\Settings\OfficeSetting;
-use App\Models\Website\ImportantLink;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +11,6 @@ trait BaseControllerTrait
 
     public function constructionMethod(): void
     {
-        view()->share('important_links', ImportantLink::all());
         view()->share('officeSetting', OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first());
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
 use Modules\DigitalBoard\Entities\Employee;
@@ -10,6 +11,12 @@ use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 
 class FrontController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        view()->share('important_links', ImportantLink::all());
+    }
+
     public function index()
     {
         if (config('app.website_type') === 'website') {
@@ -23,9 +30,9 @@ class FrontController extends Controller
             $municipalDetails = MunicipalDetail::all();
 
             return view('frontend.website', compact('employees', 'notices', 'newses', 'meetingDecisions', 'sliders', 'municipalDetails'));
-        } else {
-            return view('frontend.digital_board');
         }
+
+        return view('frontend.digital_board');
     }
 
     public function notice()
@@ -52,9 +59,9 @@ class FrontController extends Controller
         return view('frontend.static.introduction');
     }
 
-    public function category()
+    public function category(): void
     {
-        return view('frontend.static.category.category');
+//        return view('frontend.static.category.category');
     }
 
     public function representative()
@@ -102,13 +109,13 @@ class FrontController extends Controller
         return view('frontend.static.executive-board.index');
     }
 
-    public function single_executive()
+    public function single_executive(): void
     {
-        return view('frontend.static.executive-board.single-executive-board');
+//        return view('frontend.static.executive-board.single-executive-board');
     }
 
-    public function service_details()
+    public function service_details(): void
     {
-        return view('frontend.static.chat.service');
+//        return view('frontend.static.chat.service');
     }
 }

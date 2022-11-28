@@ -12,11 +12,7 @@ class PlanAreaController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('planArea_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('planArea_access');
 
         $planAreas=PlanArea::with('planAreas')->whereNull('plan_area_id')->get();
 
@@ -25,11 +21,7 @@ class PlanAreaController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('planArea_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('planArea_create');
 
         $mainPlanAreas=PlanArea::whereNull('plan_area_id')->get();
 
@@ -38,11 +30,7 @@ class PlanAreaController extends Controller
 
     public function store(StorePlanAreaRequest $request)
     {
-        abort_if(
-            Gate::denies('planArea_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('planArea_create');
 
         PlanArea::create($request->validated());
 
@@ -53,11 +41,7 @@ class PlanAreaController extends Controller
 
     public function edit(PlanArea $planArea)
     {
-        abort_if(
-            Gate::denies('planArea_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('planArea_edit');
 
         $mainPlanAreas=PlanArea::whereNull('plan_area_id')->get();
 
@@ -66,11 +50,7 @@ class PlanAreaController extends Controller
 
     public function update(UpdatePlanAreaRequest $request, PlanArea $planArea)
     {
-        abort_if(
-            Gate::denies('planArea_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('planArea_edit');
 
         $planArea->update($request->validated());
 
@@ -80,11 +60,7 @@ class PlanAreaController extends Controller
 
     public function destroy(PlanArea $planArea)
     {
-        abort_if(
-            Gate::denies('planArea_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('planArea_delete');
 
         $planArea->planAreas()->delete();
         $planArea->delete();
