@@ -103,31 +103,48 @@
 
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="aakash_api_key" class="form-label">API Key *</label>
+                                <label for="AAKASH_SMS_KEY" class="form-label">API Key *</label>
                                 <input
                                     type="text"
-                                    name="aakash_api_key"
-                                    value="{{old('aakash_api_key', config('sms.aakash.api_key'))}}"
-                                    class="form-control @error('aakash_api_key') is-invalid @enderror"
-                                    id="aakash_api_key"
+                                    name="AAKASH_SMS_KEY"
+                                    value="{{old('AAKASH_SMS_KEY', config('sms.aakash.api_key'))}}"
+                                    class="form-control @error('AAKASH_SMS_KEY') is-invalid @enderror"
+                                    id="AAKASH_SMS_KEY"
                                     placeholder="नाम"
                                 />
-                                @error('aakash_api_key')
+                                @error('AAKASH_SMS_KEY')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="aakash_is_active" class="form-label">Active *</label>
-                                <input
-                                    type="checkbox"
-                                    name="aakash_is_active"
-                                    value="1"
-                                    class="@error('aakash_is_active') is-invalid @enderror"
-                                    id="aakash_is_active"
-                                    placeholder="ठेगाना"
-                                    {{(bool) old('aakash_is_active',config('sms.aakash.is_active')) ? 'checked':'' }}
-                                />
-                                @error('aakash_is_active')
+                                <label for="active_status" class="form-label">Active *</label>
+                                <div class="d-flex">
+                                    <div class="mx-1">
+                                        <input
+                                            type="radio"
+                                            name="AAKASH_IS_ACTIVE"
+                                            value="1"
+                                            class="@error('AAKASH_IS_ACTIVE') is-invalid @enderror"
+                                            id="aakash_deactive"
+                                            {{!old('AAKASH_IS_ACTIVE',config('sms.aakash.is_active')) ? 'checked':'' }}
+                                        />
+                                        <label for="aakash_deactive">Deactivate</label>
+                                    </div>
+                                   <div class="mx-1">
+                                       <input
+                                           type="radio"
+                                           name="AAKASH_IS_ACTIVE"
+                                           value="0"
+                                           class="@error('AAKASH_IS_ACTIVE') is-invalid @enderror"
+                                           id="aakash_active"
+                                           {{old('AAKASH_IS_ACTIVE',config('sms.aakash.is_active')) ? 'checked':'' }}
+                                       />
+                                       <label for="aakash_active">Activate</label>
+                                   </div>
+
+                                </div>
+
+                                @error('AAKASH_IS_ACTIVE')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Setting\BranchController;
 use App\Http\Controllers\Admin\Setting\DepartmentController;
 use App\Http\Controllers\Admin\Setting\DesignationController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
+use App\Http\Controllers\Admin\Setting\FeatureActivationController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\SettingDashboardController;
@@ -52,9 +53,16 @@ Route::prefix('setting')->group(function () {
     Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
 
     //    sms
-    Route::get('sms', [SmsController::class, 'setting'])->name('setting.sms');
-    Route::post('sms/samaya', [SmsController::class, 'setSamayaSmsConfig'])->name('sms.set-samaya-sms-config');
-    Route::post('sms/aakash', [SmsController::class, 'setAakashSmsConfig'])->name('sms.set-aakash-sms-config');
+    Route::get('feature', [FeatureActivationController::class, 'showFeatureActivationPage'])->name('feature-activation');
+    Route::post('featureActivation/{featureActivation}', [FeatureActivationController::class, 'updateFeatureActivation'])->name('update-feature-activation');
+
+//    sms setting
+    Route::get('sms', [FeatureActivationController::class, 'smsSetting'])->name('sms-setting');
+    Route::post('sms', [FeatureActivationController::class, 'smsSetting'])->name('sms-setting');
+
+//    mail settig
+    Route::get('mail', [FeatureActivationController::class, 'mailSetting'])->name('mail-setting');
+    Route::post('mail', [FeatureActivationController::class, 'mailSetting'])->name('mail-setting');
 
 
     Route::resource('ethnicity', EthnicityController::class);
