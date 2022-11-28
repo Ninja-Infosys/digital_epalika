@@ -54,13 +54,7 @@
                                             @can('recommendation_access')
                                                 <a href="{{ route('admin.recommendation.setting.formBuilder.index', [$application]) }}"
                                                    class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-pen"></i> Form भर्नुहोस्
-                                                </a>
-                                            @endcan
-                                            @can('recommendation_access')
-                                                <a href="{{ route('admin.recommendation.setting.recommendationTemplate.index', [$application]) }}"
-                                                   class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-pen"></i> टेम्प्लेट भर्नुहोस्
+                                                    <i class="fa fa-eye"></i> सेटिंग
                                                 </a>
                                             @endcan
                                         @endif

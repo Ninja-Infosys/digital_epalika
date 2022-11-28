@@ -11,14 +11,14 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.index')}}">
+                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.index',$applicationTypeEnum)}}">
                                 टेम्प्लेट
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">टेम्प्लेट थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">{{$applicationTypeEnum->label()}} टेम्प्लेट थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">टेम्प्लेट</h4>
+                <h4 class="page-title">{{$applicationTypeEnum->label()}} टेम्प्लेट</h4>
             </div>
         </div>
     </div>
@@ -28,20 +28,20 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">टेम्प्लेट थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.setting.recommendationTemplate.index')}}"
+                        <h4 class="header-title">{{$applicationTypeEnum->label()}} टेम्प्लेट थप्नुहोस्</h4>
+                        <a href="{{route('admin.recommendation.setting.recommendationTemplate.index',$applicationTypeEnum)}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> टेम्प्लेट सूची
+                            <i class="fa fa-list"></i> {{$applicationTypeEnum->label()}} टेम्प्लेट सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.recommendation.setting.recommendationTemplate.store')}}"
+                    <form action="{{route('admin.recommendation.setting.recommendationTemplate.store',$applicationTypeEnum)}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
@@ -52,34 +52,6 @@
                                     placeholder="शिर्षक "
                                 />
                                 @error('title')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="for" class="form-label">टेम्प्लेट *</label>
-                                <select name="for" id="for" class="form-control">
-                                    <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\Recommendation\Enums\ApplicationTypeEnum::cases() as $templateType)
-                                        <option {{old('for')==$templateType->value ? 'selected':''}}
-                                                value="{{$templateType->value}}">
-                                            {{$templateType->label()}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('for')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 mb-2">
-                                <input
-                                    type="checkbox"
-                                    name="requires_header"
-                                    value="1"
-                                    class="form-check-input @error('requires_header') is-invalid @enderror"
-                                    id="requires_header" {{ old('requires_header') === 1 ?'checked':'' }}
-                                />
-                                <label for="requires_header" class="form-label">हेडर *</label>
-                                @error('requires_header')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

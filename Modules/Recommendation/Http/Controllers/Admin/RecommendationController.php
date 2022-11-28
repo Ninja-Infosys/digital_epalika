@@ -59,7 +59,7 @@ class RecommendationController extends Controller
 
     public function store(StoreRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum)
     {
-        // dd($request->all());
+
         $this->checkAuthorization('recommendation_create');
 
 

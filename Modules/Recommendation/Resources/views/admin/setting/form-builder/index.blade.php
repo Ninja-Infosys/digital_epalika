@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">फारम बिल्डर</li>
+                        <li class="breadcrumb-item active"> सेटिंग</li>
                     </ol>
                 </div>
-                <h4 class="page-title">फारम बिल्डर</h4>
+                <h4 class="page-title">सेटिंग</h4>
             </div>
         </div>
     </div>
@@ -40,6 +40,8 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>फारम बिल्डर नाम</th>
+                                <th>स्थिति</th>
+                                <th>सिर्जना गरियो</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -49,17 +51,25 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $formBuilder->application_type->label() ?? '' }}</td>
                                     <td>
+                                        <a href="">
+                                            <i class="fa fa-2x fa-toggle-on"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <x-ad-to-bs id="fb_{{$loop->iteration}}" adDate="{{$formBuilder->created_at->toDateString()}}" />
+                                    </td>
+                                    <td>
 
                                         @can('formBuilder_access')
                                             <a href="{{ route('admin.recommendation.setting.formBuilder.show', [$applicationTypeEnum,$formBuilder]) }}"
                                                class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-eye"></i> हेर्नुहोस
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('formBuilder_edit')
                                             <a href="{{ route('admin.recommendation.setting.formBuilder.edit', [$applicationTypeEnum,$formBuilder]) }}"
                                                class="btn btn-xs btn-outline-info">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('formBuilder_delete')
@@ -69,7 +79,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan
@@ -103,29 +113,35 @@
                                 <th>क्र.स</th>
                                 <th>शिर्षक </th>
                                 <th>बर्ग</th>
+                                <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-{{--                            @forelse($recommendationTemplates as $recommendationTemplat)--}}
-{{--                                <tr>--}}
-{{--                                    <th scope="row">{{$loop->iteration}}</th>--}}
-{{--                                    <td>{{$recommendationTemplate->title}}</td>--}}
-{{--                                    <td>{{$recommendationTemplate->for->label() ??''}}</td>--}}
-{{--                                    <td>--}}
-{{--                                        @can('recommendationTemplate_edit')--}}
-{{--                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"--}}
-{{--                                               class="btn btn-xs btn-outline-warning">--}}
-{{--                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्--}}
-{{--                                            </a>--}}
-{{--                                        @endcan--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                            @empty--}}
-{{--                                <tr>--}}
-{{--                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>--}}
-{{--                                </tr>--}}
-{{--                            @endforelse--}}
+                            @forelse($recommendationTemplates as $recommendationTemplate )
+                                <tr>
+                                    <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$recommendationTemplate->title ??''}}</td>
+                                    <td>{{$recommendationTemplate->for->label() ??''}}</td>
+                                    <td>
+                                        <a href="">
+                                            <i class="fa fa-2x fa-toggle-on"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @can('recommendationTemplate_edit')
+                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
+                                               class="btn btn-xs btn-outline-warning">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text-center" colspan="6">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
