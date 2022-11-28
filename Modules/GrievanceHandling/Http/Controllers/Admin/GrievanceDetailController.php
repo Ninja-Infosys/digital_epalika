@@ -13,11 +13,7 @@ class GrievanceDetailController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('grievanceDetail_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceDetail_access');
         $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->latest()->paginate(10);
 
         return view('grievancehandling::admin.grievanceDetail.index', compact('grievanceDetails'));
@@ -25,31 +21,19 @@ class GrievanceDetailController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('grievanceDetail_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceDetail_create');
 
         return view('grievancehandling::create');
     }
 
     public function store(Request $request)
     {
-        abort_if(
-            Gate::denies('grievanceDetail_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+       $this->checkAuthorization('grievanceDetail_create');
     }
 
     public function show(GrievanceDetail $grievanceDetail)
     {
-        abort_if(
-            Gate::denies('grievanceDetail_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceDetail_access');
         $grievanceDetail->load(
             'grievanceDetails',
             'grievanceType',
@@ -62,31 +46,19 @@ class GrievanceDetailController extends Controller
 
     public function edit($id)
     {
-        abort_if(
-            Gate::denies('grievanceDetail_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceDetail_edit');
 
         return view('grievancehandling::edit');
     }
 
     public function update(Request $request, $id)
     {
-        abort_if(
-            Gate::denies('grievanceDetail_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceDetail_edit');
     }
 
     public function destroy($id)
     {
-        abort_if(
-            Gate::denies('grievanceDetail_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceDetail_delete');
     }
 
     public function updateStatus(Request $request, GrievanceDetail $grievanceDetail): RedirectResponse

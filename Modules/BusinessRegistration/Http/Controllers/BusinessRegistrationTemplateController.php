@@ -13,11 +13,7 @@ class BusinessRegistrationTemplateController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('businessRegistrationTemplate_access'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('businessRegistrationTemplate_access');
         $businessRegistrationTemplates = BusinessRegistrationTemplate::latest()->get();
 
         return view('businessregistration::admin.setting.template.index', compact('businessRegistrationTemplates'));
@@ -25,22 +21,14 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('businessRegistrationTemplate_create'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('businessRegistrationTemplate_create');
 
         return view('businessregistration::admin.setting.template.create');
     }
 
     public function store(StoreBusinessRegistrationTemplateRequest $request)
     {
-        abort_if(
-            Gate::denies('businessRegistrationTemplate_create'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('businessRegistrationTemplate_create');
 
         $businessRegistrationTemplate = BusinessRegistrationTemplate::where('for', $request->input('for'))->first();
         if (empty($businessRegistrationTemplate)) {
@@ -55,33 +43,21 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function show(BusinessRegistrationTemplate $businessRegistrationTemplate)
     {
-        abort_if(
-            Gate::denies('businessRegistrationTemplate_access'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('businessRegistrationTemplate_access');
 
         return view('businessregistration::show');
     }
 
     public function edit(BusinessRegistrationTemplate $businessRegistrationTemplate)
     {
-        abort_if(
-            Gate::denies('businessRegistrationTemplate_edit'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('businessRegistrationTemplate_edit');
 
         return view('businessregistration::admin.setting.template.edit', compact('businessRegistrationTemplate'));
     }
 
     public function update(UpdateBusinessRegistrationTemplateRequest $request, BusinessRegistrationTemplate $businessRegistrationTemplate)
     {
-        abort_if(
-            Gate::denies('businessRegistrationTemplate_edit'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('businessRegistrationTemplate_edit');
 
         $businessRegistrationTemplate->update($request->validated());
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -91,11 +67,7 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function destroy(BusinessRegistrationTemplate $businessRegistrationTemplate)
     {
-        abort_if(
-            Gate::denies('businessRegistrationTemplate_delete'),
-            403,
-            'You not allowed to access this resource'
-        );
+        $this->checkAuthorization('businessRegistrationTemplate_delete');
     }
 
 

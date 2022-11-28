@@ -13,11 +13,7 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('department_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('department_access');
 
         $departments = Department::latest()->get();
 
@@ -26,16 +22,13 @@ class DepartmentController extends Controller
 
     public function create()
     {
+        $this->checkAuthorization('department_create');
         return view('admin.setting.department.create');
     }
 
     public function store(StoreDepartmentRequest $request)
     {
-        abort_if(
-            Gate::denies('department_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('department_create');
 
         Department::create($request->validated());
 
@@ -46,22 +39,14 @@ class DepartmentController extends Controller
 
     public function edit(Department $department)
     {
-        abort_if(
-            Gate::denies('department_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('department_edit');
 
         return view('admin.setting.department.edit', compact('department'));
     }
 
     public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        abort_if(
-            Gate::denies('department_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('department_edit');
 
         $department->update($request->validated());
         toast('department updated successfully!', 'success');
@@ -71,11 +56,7 @@ class DepartmentController extends Controller
 
     public function destroy(Department $department)
     {
-        abort_if(
-            Gate::denies('department_delete'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('department_delete');
 
         $department->delete();
 

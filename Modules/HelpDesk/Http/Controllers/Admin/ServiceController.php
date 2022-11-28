@@ -16,11 +16,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('service_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('service_access');
 
         $services = Service::with('branch')->get();
 
@@ -29,11 +25,7 @@ class ServiceController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('service_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('service_create');
         $mainBranches = Branch::with('branches')->whereNull('branch_id')->get();
 
         return view('helpdesk::admin.service.create', compact('mainBranches'));
@@ -41,11 +33,7 @@ class ServiceController extends Controller
 
     public function store(StoreServiceRequest $request)
     {
-        abort_if(
-            Gate::denies('service_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('service_create');
 
         DB::transaction(function () use ($request) {
             $service = Service::create($request->validated());
@@ -66,11 +54,7 @@ class ServiceController extends Controller
 
     public function show(Service $service)
     {
-        abort_if(
-            Gate::denies('service_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('service_access');
         $service->load('branch', 'serviceDocuments', 'serviceProcesses', 'serviceEmployees');
 
         return view('helpdesk::admin.service.show', compact('service'));
@@ -78,11 +62,7 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        abort_if(
-            Gate::denies('service_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('service_edit');
         $mainBranches = Branch::with('branches')->whereNull('branch_id')->get();
 
         return view('helpdesk::admin.service.edit', compact('service', 'mainBranches'));
@@ -90,11 +70,7 @@ class ServiceController extends Controller
 
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        abort_if(
-            Gate::denies('service_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('service_edit');
 
         DB::transaction(function () use ($request, $service) {
             $service->update($request->validated());
@@ -126,11 +102,7 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-        abort_if(
-            Gate::denies('service_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('service_delete');
         $service->serviceDocuments()->delete();
         $service->serviceProcesses()->delete();
         $service->serviceEmployees()->delete();

@@ -12,20 +12,14 @@ class PlanLevelController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('planLevel_access'),
-            403,
-            'you are not able to access this resource'
-        );
+        $this->checkAuthorization('planLevel_access');
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
         return view('plan::admin.setting.plan_level.index', compact('planLevels'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('planLevel_create'),
-            403,
-            'you are not able to access this resource'
-        );
+        $this->checkAuthorization('planLevel_create');
         $mainPlanLevels=PlanLevel::whereNull('plan_level_id')->get();
 
         return view('plan::admin.setting.plan_level.create',compact('mainPlanLevels'));
@@ -33,10 +27,7 @@ class PlanLevelController extends Controller
 
     public function store(StorePlanLevelRequest $request)
     {
-        abort_if(Gate::denies('planLevel_create'),
-            403,
-            'you are not able to access this resource'
-        );
+        $this->checkAuthorization('planLevel_create');
         PlanLevel::create($request->validated());
 
         toast('योजना स्तर सफलतापूर्वक थपियो', 'success');
@@ -45,20 +36,14 @@ class PlanLevelController extends Controller
 
     public function edit(PlanLevel $planLevel)
     {
-        abort_if(Gate::denies('planLevel_edit'),
-            403,
-            'you are not able to access this resource'
-        );
+        $this->checkAuthorization('planLevel_edit');
         $mainLevels=PlanLevel::whereNull('plan_level_id')->get();
         return view('plan::admin.setting.plan_level.edit', compact('planLevel', 'mainLevels'));
     }
 
     public function update(UpdatePlanLevelRequest $request, PlanLevel $planLevel)
     {
-        abort_if(Gate::denies('planLevel_edit'),
-            403,
-            'you are not able to access this resource'
-        );
+        $this->checkAuthorization('planLevel_edit');
         $planLevel->update($request->validated());
 
         toast('योजना स्तर सफलतापूर्वक सम्पादन गरियो', 'success');
@@ -67,10 +52,7 @@ class PlanLevelController extends Controller
 
     public function destroy(PlanLevel $planLevel)
     {
-        abort_if(Gate::denies('planLevel_delete'),
-            403,
-            'you are not able to access this resource'
-        );
+        $this->checkAuthorization('planLevel_delete');
         $planLevel->planLevels()->delete();
         $planLevel->delete();
 

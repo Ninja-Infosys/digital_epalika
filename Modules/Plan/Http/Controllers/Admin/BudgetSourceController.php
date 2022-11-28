@@ -12,9 +12,7 @@ class BudgetSourceController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('budgetSource_access'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetSource_access');
 
         $budgetSources = BudgetSource::all();
         return view('plan::admin.setting.budget_source.index', compact('budgetSources'));
@@ -22,18 +20,14 @@ class BudgetSourceController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('budgetSource_create'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetSource_create');
 
         return view('plan::admin.setting.budget_source.create');
     }
 
     public function store(StoreBudgetSourceRequest $request)
     {
-        abort_if(Gate::denies('budgetSource_create'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetSource_create');
 
         BudgetSource::create($request->validated());
 
@@ -43,18 +37,14 @@ class BudgetSourceController extends Controller
 
     public function edit(BudgetSource $budgetSource)
     {
-        abort_if(Gate::denies('budgetSource_edit'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetSource_edit');
 
         return view('plan::admin.setting.budget_source.edit', compact('budgetSource'));
     }
 
     public function update(UdpateBudgetSourceRequest $request, BudgetSource $budgetSource)
     {
-        abort_if(Gate::denies('budgetSource_edit'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetSource_edit');
 
         $budgetSource->update($request->validated());
 
@@ -64,9 +54,8 @@ class BudgetSourceController extends Controller
 
     public function destroy(BudgetSource $budgetSource)
     {
-        abort_if(Gate::denies('budgetSource_delete'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetSource_delete');
+
 
         $budgetSource->delete();
 

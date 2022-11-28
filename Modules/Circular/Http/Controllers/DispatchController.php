@@ -15,11 +15,7 @@ class DispatchController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('dispatch_access'),
-            403,
-            'You are not allowed to dispatch access'
-        );
+        $this->checkAuthorization('dispatch_access');
 
         $dispatches = Dispatch::latest()->get();
 
@@ -28,11 +24,7 @@ class DispatchController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('dispatch_create'),
-            403,
-            'You are not allowed to dispatch create'
-        );
+        $this->checkAuthorization('dispatch_create');
         $dispatch_no = 'D-'.Str::padLeft(DB::table('dispatches')->max('id') + 1, 2, 0);
 
         return view('circular::admin.dispatch.create', compact('dispatch_no'));
@@ -40,11 +32,7 @@ class DispatchController extends Controller
 
     public function store(StoreDispatchRequest $request)
     {
-        abort_if(
-            Gate::denies('dispatch_create'),
-            403,
-            'You are not allowed to dispatch create'
-        );
+        $this->checkAuthorization('dispatch_create');
 
         DB::transaction(function () use ($request) {
             $dispatch = Dispatch::create($request->validated() + [
@@ -61,11 +49,7 @@ class DispatchController extends Controller
 
     public function show(Dispatch $dispatch)
     {
-        abort_if(
-            Gate::denies('dispatch_access'),
-            403,
-            'You are not allowed to dispatch access'
-        );
+        $this->checkAuthorization('dispatch_access');
         $dispatch->load('fiscalYear', 'files');
 
         return view('circular::admin.dispatch.show', compact('dispatch'));
@@ -73,22 +57,14 @@ class DispatchController extends Controller
 
     public function edit(Dispatch $dispatch)
     {
-        abort_if(
-            Gate::denies('dispatch_edit'),
-            403,
-            'You are not allowed to dispatch edit'
-        );
+        $this->checkAuthorization('dispatch_edit');
 
         return view('circular::admin.dispatch.edit', compact('dispatch'));
     }
 
     public function update(UpdateDispatchRequest $request, Dispatch $dispatch)
     {
-        abort_if(
-            Gate::denies('dispatch_edit'),
-            403,
-            'You are not allowed to dispatch edit'
-        );
+        $this->checkAuthorization('dispatch_edit');
 
         DB::transaction(function () use ($request, $dispatch) {
             if ($request->hasFile('receiver_signature') && $dispatch->receiver_signature) {
@@ -109,11 +85,7 @@ class DispatchController extends Controller
 
     public function destroy(Dispatch $dispatch)
     {
-        abort_if(
-            Gate::denies('dispatch_delete'),
-            403,
-            'You are not allowed to dispatch delete'
-        );
+        $this->checkAuthorization('dispatch_delete');
         foreach ($dispatch->files as $file) {
             $this->deleteFile($file->file);
         }

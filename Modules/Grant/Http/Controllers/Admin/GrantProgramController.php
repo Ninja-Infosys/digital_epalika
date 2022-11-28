@@ -13,11 +13,7 @@ class GrantProgramController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('grantProgram_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantProgram_access');
 
         $grantPrograms = GrantProgram::with('fiscalYear')->latest()->paginate(10);
 
@@ -26,11 +22,7 @@ class GrantProgramController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('grantProgram_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantProgram_create');
 
         $fiscalYears = FiscalYear::all();
 
@@ -39,11 +31,7 @@ class GrantProgramController extends Controller
 
     public function store(StoreGrantProgramRequest $request)
     {
-        abort_if(
-            Gate::denies('grantProgram_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantProgram_create');
 
         GrantProgram::create($request->validated());
 
@@ -54,22 +42,14 @@ class GrantProgramController extends Controller
 
     public function show(GrantProgram $grantProgram)
     {
-        abort_if(
-            Gate::denies('grantProgram_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantProgram_access');
 
         return view('grant::show');
     }
 
     public function edit(GrantProgram $grantProgram)
     {
-        abort_if(
-            Gate::denies('grantProgram_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantProgram_edit');
         $fiscalYears = FiscalYear::all();
 
         return view('grant::admin.grant_program.edit', compact('fiscalYears', 'grantProgram'));
@@ -77,11 +57,7 @@ class GrantProgramController extends Controller
 
     public function update(UpdateGrantProgramRequest $request, GrantProgram $grantProgram)
     {
-        abort_if(
-            Gate::denies('grantProgram_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantProgram_edit');
 
         $grantProgram->update($request->validated());
 
@@ -92,11 +68,7 @@ class GrantProgramController extends Controller
 
     public function destroy(GrantProgram $grantProgram)
     {
-        abort_if(
-            Gate::denies('grantProgram_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantProgram_delete');
 
         $grantProgram->delete();
 

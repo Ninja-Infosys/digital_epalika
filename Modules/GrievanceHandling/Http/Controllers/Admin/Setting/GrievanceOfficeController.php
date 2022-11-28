@@ -12,11 +12,7 @@ class GrievanceOfficeController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('grievanceOffice_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceOffice_access');
         $grievanceOffices = GrievanceOffice::latest()->get();
 
         return view('grievancehandling::admin.setting.grievance_office.index', compact('grievanceOffices'));
@@ -24,22 +20,14 @@ class GrievanceOfficeController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('grievanceOffice_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceOffice_create');
 
         return view('grievancehandling::admin.setting.grievance_office.create');
     }
 
     public function store(StoreGrievanceOfficeRequest $request)
     {
-        abort_if(
-            Gate::denies('grievanceOffice_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceOffice_create');
         GrievanceOffice::create($request->validated());
         toast('शाखा/कार्यालय सफलतापूर्वक थपियो', 'success');
 
@@ -48,33 +36,21 @@ class GrievanceOfficeController extends Controller
 
     public function show(GrievanceOffice $grievanceOffice)
     {
-        abort_if(
-            Gate::denies('grievanceOffice_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceOffice_access');
 
         return view('grievancehandling::show');
     }
 
     public function edit(GrievanceOffice $grievanceOffice)
     {
-        abort_if(
-            Gate::denies('grievanceOffice_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceOffice_edit');
 
         return view('grievancehandling::admin.setting.grievance_office.edit', compact('grievanceOffice'));
     }
 
     public function update(UpdateGrievanceOfficeRequest $request, GrievanceOffice $grievanceOffice)
     {
-        abort_if(
-            Gate::denies('grievanceOffice_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceOffice_edit');
         $grievanceOffice->update($request->validated());
         toast(' शाखा/कार्यालय सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
@@ -83,11 +59,7 @@ class GrievanceOfficeController extends Controller
 
     public function destroy(GrievanceOffice $grievanceOffice)
     {
-        abort_if(
-            Gate::denies('grievanceOffice_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceOffice_delete');
         $grievanceOffice->delete();
         toast(' शाखा/कार्यालय सफलतापूर्वक मेटाइयो', 'success');
 
