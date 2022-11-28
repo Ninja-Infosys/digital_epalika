@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        dd((new AakashSms())->sendTextSMS('9864663780'));
+//        dd((new AakashSms())->sendTextSMS('9864663780'));
         return view('recommendation::admin.dashboard');
     }
 }
