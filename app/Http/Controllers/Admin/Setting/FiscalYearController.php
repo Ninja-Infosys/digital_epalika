@@ -11,11 +11,8 @@ class FiscalYearController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('fiscalYear_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('fiscalYear_access');
+
         $fiscalYears = FiscalYear::get();
 
         return view('admin.setting.fiscalYear.index', compact('fiscalYears'));
@@ -23,22 +20,15 @@ class FiscalYearController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('fiscalYear_create'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('fiscalYear_create');
 
         return view('admin.setting.fiscalYear.create');
     }
 
     public function store(Request $request)
     {
-        abort_if(
-            Gate::denies('fiscalYear_create'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('fiscalYear_create');
+
         $validationData = $request->validate(
             ['title' => 'required'],
             ['title.required' => 'आर्थिक बर्ष अनिवार्य छ|']
@@ -57,22 +47,15 @@ class FiscalYearController extends Controller
 
     public function edit(FiscalYear $fiscalYear)
     {
-        abort_if(
-            Gate::denies('fiscalYear_edit'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('fiscalYear_edit');
 
         return view('admin.setting.fiscalYear.edit', compact('fiscalYear'));
     }
 
     public function update(Request $request, FiscalYear $fiscalYear)
     {
-        abort_if(
-            Gate::denies('fiscalYear_edit'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('fiscalYear_edit');
+
         $validationData = $request->validate(
             ['title' => 'required'],
             ['title.required' => 'आर्थिक बर्ष अनिवार्य छ|']
@@ -86,11 +69,7 @@ class FiscalYearController extends Controller
 
     public function destroy(FiscalYear $fiscalYear)
     {
-        abort_if(
-            Gate::denies('fiscalYear_delete'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('fiscalYear_delete');
         $fiscalYear->delete();
         toast(' आर्थिक बर्ष सफलतापूर्वक मेटाइयो', 'success');
 

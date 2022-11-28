@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
                         @can('eMapTemplate_create')
-                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.create')}}"
+                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.create',$applicationTypeEnum)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
                             </a>
@@ -48,14 +48,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($recommendationTemplates as $recommendationTemplates)
+                            @forelse($recommendationTemplates as $recommendationTemplat)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$recommendationTemplates->title}}</td>
-                                    <td>{{$recommendationTemplates->for->label() ??''}}</td>
+                                    <td>{{$recommendationTemplate->title}}</td>
+                                    <td>{{$recommendationTemplate->for->label() ??''}}</td>
                                     <td>
                                         @can('recommendationTemplate_edit')
-                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',$recommendationTemplates)}}"
+                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
                                                class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>

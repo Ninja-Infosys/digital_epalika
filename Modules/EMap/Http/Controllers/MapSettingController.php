@@ -15,11 +15,7 @@ class MapSettingController extends Controller
     public function index()
     {
 
-        abort_if(
-            Gate::denies('mapSetting_access'),
-            403,
-            'You are not allowed to employee access'
-        );
+        $this->checkAuthorization('mapSetting_access');
         $mapSetting = MapSetting::first();
         $unitTypes = Type::all();
         $units = Unit::all();
@@ -30,11 +26,7 @@ class MapSettingController extends Controller
     public function store(Request $request)
     {
 
-        abort_if(
-            Gate::denies('mapSetting_create'),
-            403,
-            'You are not allowed to employee access'
-        );
+        $this->checkAuthorization('mapSetting_create');
         $data = $request->validate([
             'map_request_form_format' => ['nullable'],
             'land_measurement_id' => ['nullable', Rule::exists('types', 'id')->withoutTrashed()],

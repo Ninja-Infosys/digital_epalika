@@ -13,11 +13,7 @@ class SubjectController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('subject_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('subject_access');
         $subjects = Subject::latest()->get();
 
         return view('roaster::admin.setting.subject.index', compact('subjects'));
@@ -25,22 +21,14 @@ class SubjectController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('subject_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('subject_create');
 
         return view('roaster::admin.setting.subject.create');
     }
 
     public function store(StoreSubjectRequest $request)
     {
-        abort_if(
-            Gate::denies('subject_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('subject_create');
         Subject::create($request->validated());
 
         toast('Subject Created Successfully', 'success');
@@ -50,33 +38,21 @@ class SubjectController extends Controller
 
     public function show(Subject $subject)
     {
-        abort_if(
-            Gate::denies('subject_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('subject_access');
 
         return view('roaster::show');
     }
 
     public function edit(Subject $subject)
     {
-        abort_if(
-            Gate::denies('subject_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('subject_edit');
 
         return view('roaster::admin.setting.subject.edit', compact('subject'));
     }
 
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-        abort_if(
-            Gate::denies('subject_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('subject_edit');
         $subject->update($request->validated());
         toast('Subject Updated Successfully', 'success');
 
@@ -85,11 +61,7 @@ class SubjectController extends Controller
 
     public function destroy(Subject $subject)
     {
-        abort_if(
-            Gate::denies('subject_delete'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('subject_delete');
         $subject->delete();
         toast('Subject Deleted Successfully', 'success');
 

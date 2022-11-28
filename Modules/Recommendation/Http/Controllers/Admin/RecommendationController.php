@@ -21,22 +21,14 @@ class RecommendationController extends Controller
 {
     public function getApplicationList(): Factory|View|Application
     {
-        abort_if(
-            Gate::denies('recommendation_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendation_access');
 
-        return view('recommendation::admin.recommendation.application_list');
+        return view('recommendation::admin.application_list');
     }
 
     public function index(ApplicationTypeEnum $applicationTypeEnum)
     {
-        abort_if(
-            Gate::denies('recommendation_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendation_access');
 
         $recommendations = Recommendation::with('fiscalYear')
             ->where('application_type', $applicationTypeEnum->value)
@@ -48,11 +40,7 @@ class RecommendationController extends Controller
 
     public function create(ApplicationTypeEnum $applicationTypeEnum)
     {
-        abort_if(
-            Gate::denies('recommendation_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendation_create');
 
 
 
@@ -72,11 +60,7 @@ class RecommendationController extends Controller
     public function store(StoreRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum)
     {
         // dd($request->all());
-        abort_if(
-            Gate::denies('recommendation_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendation_create');
 
 
 
@@ -110,11 +94,7 @@ class RecommendationController extends Controller
 
     public function show(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
     {
-        abort_if(
-            Gate::denies('recommendation_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendation_access');
 
         $definition = $this->getDefinition($applicationTypeEnum);
 
@@ -129,11 +109,7 @@ class RecommendationController extends Controller
 
     public function edit(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
     {
-        abort_if(
-            Gate::denies('recommendation_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendation_edit');
 
         $definition = $this->getDefinition($applicationTypeEnum);
 
@@ -148,11 +124,7 @@ class RecommendationController extends Controller
 
     public function update(UpdateRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
     {
-        abort_if(
-            Gate::denies('recommendation_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendation_edit');
 
         $builder = $this->getDefinition($applicationTypeEnum);
 
@@ -186,11 +158,7 @@ class RecommendationController extends Controller
 
     public function destroy(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
     {
-        abort_if(
-            Gate::denies('recommendation_delete'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('recommendation_delete');
 
         $recommendation->delete();
 

@@ -18,11 +18,7 @@ class SliderController extends Controller
     public function index(): Factory|View|Application
     {
 
-        abort_if(
-            Gate::denies('slider_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+       $this->checkAuthorization('slider_access');
 
         $sliders = Slider::all();
         return view('admin.website.slider.index', compact('sliders'));
@@ -30,22 +26,14 @@ class SliderController extends Controller
 
     public function create(): Factory|View|Application
     {
-        abort_if(
-            Gate::denies('slider_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('slider_create');
         return view('admin.website.slider.create');
     }
 
     public function store(StoreSliderRequest $request): RedirectResponse
     {
 
-        abort_if(
-            Gate::denies('slider_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('slider_create');
         Slider::create($request->validated());
 
         toast('स्लाइडर सफलतापूर्वक थपियो', 'success');
@@ -56,21 +44,13 @@ class SliderController extends Controller
     public function edit(Slider $slider): Factory|View|Application
     {
 
-        abort_if(
-            Gate::denies('slider_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('slider_edit');
         return view('admin.website.slider.edit', compact('slider'));
     }
 
     public function update(UpdateSliderRequest $request, Slider $slider): Redirector|Application|RedirectResponse
     {
-        abort_if(
-            Gate::denies('slider_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('slider_edit');
 
         if ($request->hasFile('image') && $slider->image) {
             $this->deleteFile($slider->image);
@@ -86,11 +66,7 @@ class SliderController extends Controller
     public function destroy(Slider $slider): RedirectResponse
     {
 
-        abort_if(
-            Gate::denies('slider_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('slider_delete');
         if ($slider->image) {
             $this->deleteFile($slider->image);
         }

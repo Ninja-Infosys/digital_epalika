@@ -15,11 +15,7 @@ class NoticeController extends Controller
 {
     public function index($type)
     {
-        abort_if(
-            Gate::denies('digitalBoardNotice_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('digitalBoardNotice_access');
         if ($type === 'News') {
             $notices = Notice::with('user')->where('type', 'News')->orderByDesc('date')->get();
         } else {
@@ -31,22 +27,14 @@ class NoticeController extends Controller
 
     public function create($type)
     {
-        abort_if(
-            Gate::denies('digitalBoardNotice_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('digitalBoardNotice_create');
 
         return view('digitalboard::notice.create', compact('type'));
     }
 
     public function store($type, Request $request)
     {
-        abort_if(
-            Gate::denies('digitalBoardNotice_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('digitalBoardNotice_create');
 
         if ($type === 'News') {
             $data = $request->validate([
@@ -89,11 +77,7 @@ class NoticeController extends Controller
 
     public function show($type, Notice $notice)
     {
-        abort_if(
-            Gate::denies('digitalBoardNotice_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('digitalBoardNotice_access');
 
         $notice->load('files');
 
@@ -102,22 +86,14 @@ class NoticeController extends Controller
 
     public function edit($type, Notice $notice)
     {
-        abort_if(
-            Gate::denies('digitalBoardNotice_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('digitalBoardNotice_edit');
 
         return view('digitalboard::notice.edit', compact('notice', 'type'));
     }
 
     public function update($type, UpdateNoticeRequest $request, Notice $notice)
     {
-        abort_if(
-            Gate::denies('digitalBoardNotice_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('digitalBoardNotice_edit');
 
         DB::transaction(function () use ($request, $notice) {
             $notice->update($request->validated());
@@ -133,11 +109,7 @@ class NoticeController extends Controller
 
     public function destroy($type, Notice $notice)
     {
-        abort_if(
-            Gate::denies('digitalBoardNotice_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('digitalBoardNotice_delete');
 
         foreach ($notice->files as $file) {
             $this->deleteFile($file->file);

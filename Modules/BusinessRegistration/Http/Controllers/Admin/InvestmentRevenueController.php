@@ -14,11 +14,7 @@ class InvestmentRevenueController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('investmentRevenue_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('investmentRevenue_access');
         $investmentRevenues = InvestmentRevenue::with('objectTransaction')->get();
 
         return view('businessregistration::admin.setting.investment-revenues.index', compact('investmentRevenues'));
@@ -26,11 +22,7 @@ class InvestmentRevenueController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('investmentRevenue_create'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('investmentRevenue_create');
         $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
 
         return view('businessregistration::admin.setting.investment-revenues.create', compact('objectTransactions'));
@@ -38,11 +30,7 @@ class InvestmentRevenueController extends Controller
 
     public function store(StoreInvestmentRevenueRequest $request): RedirectResponse
     {
-        abort_if(
-            Gate::denies('investmentRevenue_create'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('investmentRevenue_create');
 
         InvestmentRevenue::create($request->validated());
 
@@ -53,22 +41,14 @@ class InvestmentRevenueController extends Controller
 
     public function show(InvestmentRevenue $investmentRevenue)
     {
-        abort_if(
-            Gate::denies('investmentRevenue_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('investmentRevenue_access');
 
         return view('businessregistration::show');
     }
 
     public function edit(InvestmentRevenue $investmentRevenue)
     {
-        abort_if(
-            Gate::denies('investmentRevenue_edit'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('investmentRevenue_edit');
 
         $objectTransactions = ObjectTransaction::with('objectTransactions')->whereNull('object_transaction_id')->get();
 
@@ -77,11 +57,7 @@ class InvestmentRevenueController extends Controller
 
     public function update(UpdateInvestmentRevenueRequest $request, InvestmentRevenue $investmentRevenue): RedirectResponse
     {
-        abort_if(
-            Gate::denies('investmentRevenue_edit'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('investmentRevenue_edit');
 
         $investmentRevenue->update($request->validated());
 
@@ -92,11 +68,7 @@ class InvestmentRevenueController extends Controller
 
     public function destroy(InvestmentRevenue $investmentRevenue): RedirectResponse
     {
-        abort_if(
-            Gate::denies('investmentRevenue_delete'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('investmentRevenue_delete');
 
         $investmentRevenue->delete();
 

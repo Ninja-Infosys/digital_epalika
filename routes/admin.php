@@ -53,7 +53,8 @@ Route::prefix('setting')->group(function () {
 
     //    sms
     Route::get('sms', [SmsController::class, 'setting'])->name('setting.sms');
-    Route::post('sms', [SmsController::class, 'setSmsKeyInEnvironment'])->name('sms.set-sms-key-in-environment');
+    Route::post('sms/samaya', [SmsController::class, 'setSamayaSmsConfig'])->name('sms.set-samaya-sms-config');
+    Route::post('sms/aakash', [SmsController::class, 'setAakashSmsConfig'])->name('sms.set-aakash-sms-config');
 
 
     Route::resource('ethnicity', EthnicityController::class);
