@@ -106,7 +106,8 @@
             @enderror
         </div>
         <div class="col-md-12 mb-2">
-            <label for="estimated_cost_excluding_vat" class="form-label">लागत अनुमान (भ्याट, ओभर हेड, कन्टिन्जेन्सी बाहेक)</label>
+            <label for="estimated_cost_excluding_vat" class="form-label">लागत अनुमान (भ्याट, ओभर हेड, कन्टिन्जेन्सी
+                बाहेक)</label>
             <input
                 type="number"
                 wire:model="form.estimated_cost_excluding_vat"
@@ -137,62 +138,63 @@
             </thead>
             <tbody>
             @forelse($form['projectGrantDetails'] as $key=>$projectGrantDetail)
-            <tr>
-                <td width="250">
-                    <select
-                        wire:model="form.projectGrantDetails.{{$key}}.grant_source"
-                        class="form-select">
-                        <option value="">--- छान्नुहोस् ---</option>
-                        @foreach(\Modules\Plan\Enums\GrantSourceEnum::cases() as $grantSource)
-                            <option
-                                value="{{$grantSource->value}}">
-                                {{$grantSource->label()}}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error("form.projectGrantDetails.$key.grant_source")
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </td>
-                <td>
-                    <input
-                        type="text"
-                        wire:model="form.projectGrantDetails.{{$key}}.asset_name"
-                        class="form-control"
-                        placeholder="सामाग्रीको नाम"
-                    />
-                    @error("form.projectGrantDetails.$key.asset_name")
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </td>
-                <td>
-                    <input
-                        type="number"
-                        wire:model="form.projectGrantDetails.{{$key}}.quantity"
-                        class="form-control"
-                        placeholder="परिमाण"
-                    />
-                    @error("form.projectGrantDetails.$key.quantity")
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </td>
-                <td>
-                    <input
-                        type="text"
-                        wire:model="form.projectGrantDetails.{{$key}}.asset_unit"
-                        class="form-control"
-                        placeholder="एकाइ"
-                    />
-                    @error("form.projectGrantDetails.$key.asset_unit")
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </td>
-                <td>
-                    <button type="button" wire:click="removeProjectGrantDetails({{$key}})" class="btn btn-xs btn-outline-danger">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
+                <tr>
+                    <td width="250">
+                        <select
+                            wire:model="form.projectGrantDetails.{{$key}}.grant_source"
+                            class="form-select form-select-sm">
+                            <option value="">--- छान्नुहोस् ---</option>
+                            @foreach(\Modules\Plan\Enums\GrantSourceEnum::cases() as $grantSource)
+                                <option
+                                    value="{{$grantSource->value}}">
+                                    {{$grantSource->label()}}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error("form.projectGrantDetails.$key.grant_source")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            wire:model="form.projectGrantDetails.{{$key}}.asset_name"
+                            class="form-control form-control-sm"
+                            placeholder="सामाग्रीको नाम"
+                        />
+                        @error("form.projectGrantDetails.$key.asset_name")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td>
+                        <input
+                            type="number"
+                            wire:model="form.projectGrantDetails.{{$key}}.quantity"
+                            class="form-control form-control-sm"
+                            placeholder="परिमाण"
+                        />
+                        @error("form.projectGrantDetails.$key.quantity")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            wire:model="form.projectGrantDetails.{{$key}}.asset_unit"
+                            class="form-control form-control-sm"
+                            placeholder="एकाइ"
+                        />
+                        @error("form.projectGrantDetails.$key.asset_unit")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td>
+                        <button type="button" wire:click="removeProjectGrantDetails({{$key}})"
+                                class="btn btn-xs btn-outline-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
             @empty
                 <tr>
                     <td class="text-center" colspan="5">
@@ -232,6 +234,128 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
+    </div>
+
+    <h4 class="header-title border-bottom mb-2">योजनाबाट प्रत्यक्ष रुपमा लाभान्वित हुने घरधुरी तथा जनसंख्याको विवरण</h4>
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered">
+            <thead>
+            <tr>
+                <th rowspan="2" class="align-middle">वडा नं.</th>
+                <th rowspan="2" class="align-middle text-center">गाँउ बस्ति</th>
+                <th colspan="3" class="text-center">घरधुरी संख्या</th>
+                <th colspan="3" class="text-center">जनसंख्या</th>
+                <th rowspan="2" class="align-middle">
+                    <button type="button" wire:click="addBenefitedMemberDetails" class="btn btn-xs btn-outline-primary">
+                        <i class="fa fa-plus-circle"></i>
+                    </button>
+                </th>
+            </tr>
+            <tr>
+                <th>दलित/पिछडिएका</th>
+                <th>अन्य</th>
+                <th>जम्मा</th>
+                <th>महिला</th>
+                <th>पुरुष</th>
+                <th>जम्मा</th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($form['benefitedMemberDetails'] as $key=>$benefitedMemberDetail)
+                <tr>
+                    <td width="90">
+                        <select
+                            wire:model="form.benefitedMemberDetails.{{$key}}.ward_no"
+                            class="form-select form-select-sm">
+                            <option value="">वडा</option>
+                            @foreach($officeSetting->localBody->ward_no as $ward)
+                                <option
+                                    value="{{$ward}}">
+                                    {{$ward}}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error("form.benefitedMemberDetails.$key.ward_no")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            wire:model="form.benefitedMemberDetails.{{$key}}.village"
+                            class="form-control form-control-sm"
+                            placeholder="गाँउ बस्ति"
+                        />
+                        @error("form.benefitedMemberDetails.$key.village")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td width="120">
+                        <input
+                            type="number"
+                            wire:model="form.benefitedMemberDetails.{{$key}}.dalit_backward_no"
+                            class="form-control form-control-sm"
+                            placeholder="दलित/पिछडिएका"
+                        />
+                        @error("form.benefitedMemberDetails.$key.dalit_backward_no")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td width="90">
+                        <input
+                            type="number"
+                            wire:model="form.benefitedMemberDetails.{{$key}}.other_households_no"
+                            class="form-control form-control-sm"
+                            placeholder="अन्य"
+                        />
+                        @error("form.benefitedMemberDetails.$key.other_households_no")
+                        <div class="invalid-feedback">{{$message}}</div>
+                    </td>
+                    @enderror
+                    <td>
+                        {{($form['benefitedMemberDetails'][$key]['dalit_backward_no']??0)+($form['benefitedMemberDetails'][$key]['other_households_no']??0)}}
+                    </td>
+                    <td width="90">
+                        <input
+                            type="text"
+                            wire:model="form.benefitedMemberDetails.{{$key}}.no_of_female"
+                            class="form-control form-control-sm"
+                            placeholder="महिला"
+                        />
+                        @error("form.benefitedMemberDetails.$key.no_of_female")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td width="90">
+                        <input
+                            type="text"
+                            wire:model="form.benefitedMemberDetails.{{$key}}.no_of_male"
+                            class="form-control form-control-sm"
+                            placeholder="पुरुष"
+                        />
+                        @error("form.benefitedMemberDetails.$key.no_of_male")
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </td>
+                    <td>
+                        {{($form['benefitedMemberDetails'][$key]['no_of_female']??0)+($form['benefitedMemberDetails'][$key]['no_of_male']??0)}}
+                    </td>
+                    <td>
+                        <button type="button" wire:click="removeBenefitedMemberDetails({{$key}})"
+                                class="btn btn-xs btn-outline-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td class="text-center" colspan="9">
+                        विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                    </td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
     </div>
 
     <button type="submit" class="btn btn-primary">

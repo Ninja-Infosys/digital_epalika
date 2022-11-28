@@ -51,23 +51,15 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
+        $this->checkAuthorization('project_access');
+
         $project->load('projectCostDetail','projectGrantDetails');
 
         return view('plan::admin.project.show',compact('project'));
     }
 
-    public function edit($id)
+    public function destroy(Project $project)
     {
-        return view('plan::edit');
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        $this->checkAuthorization('project_delete');
     }
 }
