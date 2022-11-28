@@ -23,6 +23,7 @@ class ProjectGrantDetail extends Model
         'project_id',
         'grant_source',
         'asset_name',
+        'quantity',
         'asset_unit'
     ];
 
