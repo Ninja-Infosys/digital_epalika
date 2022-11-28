@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum)}}">फारम बिल्डर</a>
+                            <a href="{{route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum)}}"> {{$applicationTypeEnum->label()}}</a>
                         </li>
-                        <li class="breadcrumb-item active">नयाँ फारम बिल्डर थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">नयाँ {{$applicationTypeEnum->label()}} थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">फारम बिल्डर थप्नुहोस्</h4>
+                <h4 class="page-title">{{$applicationTypeEnum->label()}} थप्नुहोस्</h4>
             </div>
         </div>
     </div>
@@ -26,10 +26,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">फारम बिल्डर थप्नुहोस्</h4>
+                        <h4 class="header-title">{{$applicationTypeEnum->label()}} थप्नुहोस्</h4>
                         <a href="{{route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum)}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> फारम बिल्डर सूची
+                            <i class="fa fa-list"></i> {{$applicationTypeEnum->label()}} सूची
                         </a>
                     </div>
                 </div>
@@ -38,24 +38,7 @@
                           enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="form" id="form" value="">
-                        <div class=" col-md-12 p-2 mb-2">
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label for="application_type" class="form-label">सिफारिसको प्रकार *</label>
-                                    <select name="application_type" id="application_type"
-                                            class="form-control @error('application_type') is-invalid @enderror">
-                                        <option value="">छान्नुहोस्</option>
-                                        @foreach(\Modules\Recommendation\Enums\ApplicationTypeEnum::cases() as $applicationTypeEnum)
-                                            <option
-                                                value="{{$applicationTypeEnum->value}}" {{old('application_type')===$applicationTypeEnum->value ? 'selected':''}}>{{$applicationTypeEnum->label()}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('application_type')
-                                    <div class="text-danger">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
+
                         <div id="formio-builder"></div>
                         <button type="submit" class="btn btn-primary">
                             पेश गर्नुहोस्
