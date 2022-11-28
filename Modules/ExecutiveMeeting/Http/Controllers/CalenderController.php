@@ -11,11 +11,7 @@ class CalenderController extends Controller
 {
     public function index($event_for)
     {
-        abort_if(
-            Gate::denies($event_for . 'MeetingEvent_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingEvent_access');
         return view('executivemeeting::admin.meeting_event.calendar', compact('event_for'));
     }
 

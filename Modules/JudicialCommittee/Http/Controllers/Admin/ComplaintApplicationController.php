@@ -10,11 +10,7 @@ class ComplaintApplicationController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('complaintApplication_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('complaintApplication_access');
 
         $complaintApplications = ComplaintApplication::orderByDesc('date')->get();
 
@@ -23,44 +19,28 @@ class ComplaintApplicationController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('complaintApplication_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('complaintApplication_create');
 
         return view('judicialcommittee::admin.complaint_application.create');
     }
 
     public function show(ComplaintApplication $complaintApplication)
     {
-        abort_if(
-            Gate::denies('complaintApplication_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('complaintApplication_access');
 
         return view('judicialcommittee::show');
     }
 
     public function edit(ComplaintApplication $complaintApplication)
     {
-        abort_if(
-            Gate::denies('complaintApplication_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('complaintApplication_edit');
 
         return view('judicialcommittee::edit');
     }
 
     public function destroy(ComplaintApplication $complaintApplication)
     {
-        abort_if(
-            Gate::denies('complaintApplication_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('complaintApplication_delete');
         if ($complaintApplication->applicant_signature) {
             $this->deleteFile($complaintApplication->applicant_signature);
         }

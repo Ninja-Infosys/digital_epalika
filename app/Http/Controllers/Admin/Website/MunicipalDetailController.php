@@ -13,11 +13,7 @@ class MunicipalDetailController extends Controller
     public function index()
     {
 
-        abort_if(
-            Gate::denies('municipalDetail_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('municipalDetail_access');
 
         $municipalDetails = MunicipalDetail::orderBy('position')->get();
 
@@ -26,22 +22,14 @@ class MunicipalDetailController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('municipalDetail_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('municipalDetail_create');
         return view('admin.website.municipal_detail.create');
     }
 
     public function store(StoreMunicipalDetailRequest $request)
     {
 
-        abort_if(
-            Gate::denies('municipalDetail_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('municipalDetail_create');
         MunicipalDetail::create($request->validated());
 
         toast('नगरपालिका विवरण सफलतापूर्वक थपियो', 'success');
@@ -57,22 +45,14 @@ class MunicipalDetailController extends Controller
     public function edit(MunicipalDetail $municipalDetail)
     {
 
-        abort_if(
-            Gate::denies('municipalDetail_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('municipalDetail_edit');
         return view('admin.website.municipal_detail.edit', compact('municipalDetail'));
     }
 
     public function update(UpdateMunicipalDetailRequest $request, MunicipalDetail $municipalDetail)
     {
 
-        abort_if(
-            Gate::denies('municipalDetail_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('municipalDetail_edit');
         $municipalDetail->update($request->validated());
 
         toast('नगरपालिका विवरण सफलतापूर्वक अपडेट गरियो', 'success');
@@ -83,11 +63,7 @@ class MunicipalDetailController extends Controller
     public function destroy(MunicipalDetail $municipalDetail)
     {
 
-        abort_if(
-            Gate::denies('municipalDetail_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('municipalDetail_delete');
         $municipalDetail->delete();
 
         toast('नगरपालिका विवरण सफलतापूर्वक मेटाइयो', 'success');

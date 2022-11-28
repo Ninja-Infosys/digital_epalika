@@ -11,22 +11,14 @@ class OfficeHeaderController extends Controller
 {
     public function edit(OfficeHeader $officeHeader)
     {
-        abort_if(
-            Gate::denies('officeHeader_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('officeHeader_edit');
         return view('admin.setting.officeSetting.edit', compact('officeHeader'));
     }
 
     public function update(UpdateOfficeHeaderRequest $request, OfficeHeader $officeHeader)
     {
 
-        abort_if(
-            Gate::denies('officeHeader_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('officeHeader_edit');
         $officeHeader->update($request->validated());
         toast('सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
@@ -36,11 +28,7 @@ class OfficeHeaderController extends Controller
     public function destroy(OfficeHeader $officeHeader)
     {
 
-        abort_if(
-            Gate::denies('officeHeader_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('officeHeader_delete');
         $officeHeader->delete();
         toast('सफलतापूर्वक मेटियो', 'success');
 

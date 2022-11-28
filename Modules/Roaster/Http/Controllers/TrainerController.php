@@ -11,11 +11,7 @@ class TrainerController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('training_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_access');
 
         $trainers = Trainer::with('department', 'designation')->latest()->get();
 
@@ -29,11 +25,7 @@ class TrainerController extends Controller
 
     public function show(Trainer $trainer)
     {
-        abort_if(
-            Gate::denies('trainer_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_access');
 
         $trainer->load(
             'designation',
@@ -55,11 +47,7 @@ class TrainerController extends Controller
 
     public function edit(Trainer $trainer)
     {
-        abort_if(
-            Gate::denies('trainer_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_edit');
         $trainer->load(
             'trainerDocuments',
             'trainerExperienceInTrainings',

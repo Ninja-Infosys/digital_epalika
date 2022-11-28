@@ -18,11 +18,7 @@ class OfficeSettingController extends Controller
     public function index(): Factory|View|Application
     {
 
-        abort_if(
-            Gate::denies('officeSetting_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('officeSetting_access');
         $officeSetting = OfficeSetting::first();
         $fiscalYears = FiscalYear::get();
         $officeHeaders = OfficeHeader::orderBy('position')->get();
@@ -33,11 +29,7 @@ class OfficeSettingController extends Controller
     public function update(Request $request, OfficeSetting $officeSetting)
     {
 
-        abort_if(
-            Gate::denies('officeSetting_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('officeSetting_edit');
         $validationData = $request->validate(
             [
             'name' => ['required', 'string'],

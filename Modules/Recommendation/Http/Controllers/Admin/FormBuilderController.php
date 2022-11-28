@@ -14,11 +14,7 @@ class FormBuilderController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('formBuilder_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_access');
 
         $formBuilders = FormBuilder::latest()->get();
 
@@ -27,22 +23,14 @@ class FormBuilderController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('formBuilder_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_create');
 
         return view('recommendation::admin.setting.form-builder.create');
     }
 
     public function store(StoreFormBuilderRequest $request): RedirectResponse
     {
-        abort_if(
-            Gate::denies('formBuilder_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_create');
 
         FormBuilder::create($request->validated());
 
@@ -53,11 +41,7 @@ class FormBuilderController extends Controller
 
     public function show(FormBuilder $formBuilder)
     {
-        abort_if(
-            Gate::denies('formBuilder_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_access');
 
         return view('recommendation::admin.setting.form-builder.show',)->with([
             'formBuilder' => $formBuilder,
@@ -67,11 +51,7 @@ class FormBuilderController extends Controller
 
     public function edit(FormBuilder $formBuilder)
     {
-        abort_if(
-            Gate::denies('formBuilder_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_edit');
 
         return view('recommendation::admin.setting.form-builder.edit',)->with([
             'formBuilder' => $formBuilder,
@@ -81,11 +61,7 @@ class FormBuilderController extends Controller
 
     public function update(UpdateFormBuilderRequest $request, FormBuilder $formBuilder)
     {
-        abort_if(
-            Gate::denies('formBuilder_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_edit');
 
         $formBuilder->update($request->validated());
 
@@ -96,11 +72,7 @@ class FormBuilderController extends Controller
 
     public function destroy(FormBuilder $formBuilder)
     {
-        abort_if(
-            Gate::denies('formBuilder_delete'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('formBuilder_delete');
 
         $formBuilder->delete();
 

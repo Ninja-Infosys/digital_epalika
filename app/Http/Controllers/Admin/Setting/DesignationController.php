@@ -13,11 +13,7 @@ class DesignationController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('designation_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('designation_access');
         $designations = Designation::latest()->get();
 
         return view('admin.setting.designation.index', compact('designations'));
@@ -25,22 +21,14 @@ class DesignationController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('designation_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('designation_create');
 
         return view('admin.setting.designation.create');
     }
 
     public function store(StoreDesignationRequest $request)
     {
-        abort_if(
-            Gate::denies('designation_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('designation_create');
         $designation = Designation::create($request->validated());
 
         toast('Designation Added successfully!', 'success');
@@ -50,22 +38,14 @@ class DesignationController extends Controller
 
     public function edit(Designation $designation)
     {
-        abort_if(
-            Gate::denies('designation_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('designation_edit');
 
         return view('admin.setting.designation.edit', compact('designation'));
     }
 
     public function update(UpdateDesignationRequest $request, Designation $designation)
     {
-        abort_if(
-            Gate::denies('designation_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('designation_edit');
         $designation->update($request->validated());
         toast('Designation Updated successfully!', 'success');
 
@@ -74,11 +54,7 @@ class DesignationController extends Controller
 
     public function destroy(Designation $designation)
     {
-        abort_if(
-            Gate::denies('designation_delete'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('designation_delete');
         $designation->delete();
         toast('Designation Deleted successfully!', 'success');
 

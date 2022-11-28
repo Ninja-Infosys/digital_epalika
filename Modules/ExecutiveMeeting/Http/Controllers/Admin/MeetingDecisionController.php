@@ -14,11 +14,7 @@ class MeetingDecisionController extends Controller
     public function index($meeting_for)
     {
 
-        abort_if(
-            Gate::denies($meeting_for . 'MeetingDecision_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingDecision_access');
 
         $meetingDecisions = MeetingDecision::with('meetingEvent')->where('meeting_for', $meeting_for)->latest()->get();
 
@@ -27,11 +23,7 @@ class MeetingDecisionController extends Controller
 
     public function create($meeting_for)
     {
-        abort_if(
-            Gate::denies($meeting_for . 'MeetingDecision_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingDecision_create');
 
         $meetingEvents = MeetingEvent::where('event_for', $meeting_for)
             ->whereDate('en_start_date', '<=', today()->toDateString())
@@ -42,11 +34,7 @@ class MeetingDecisionController extends Controller
 
     public function store(StoreMeetingDecisionRequest $request, $meeting_for)
     {
-        abort_if(
-            Gate::denies($meeting_for . 'MeetingDecision_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingDecision_create');
 
         MeetingDecision::create($request->validated() + [
                 'meeting_for' => $meeting_for,
@@ -59,20 +47,12 @@ class MeetingDecisionController extends Controller
 
     public function show($meeting_for, MeetingDecision $meetingDecision)
     {
-        abort_if(
-            Gate::denies($meeting_for . 'MeetingDecision_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingDecision_access');
     }
 
     public function edit($meeting_for, MeetingDecision $meetingDecision)
     {
-        abort_if(
-            Gate::denies($meeting_for . 'MeetingDecision_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingDecision_edit');
 
         $meetingEvents = MeetingEvent::where('event_for', $meeting_for)
             ->whereDate('en_start_date', '<=', today()->toDateString())
@@ -83,11 +63,7 @@ class MeetingDecisionController extends Controller
 
     public function update(UpdateMeetingDecisionRequest $request, $meeting_for, MeetingDecision $meetingDecision)
     {
-        abort_if(
-            Gate::denies($meeting_for . 'MeetingDecision_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingDecision_edit');
 
         if ($request->hasFile('decision_file')) {
             if ($meetingDecision->decision_file) {
@@ -104,11 +80,7 @@ class MeetingDecisionController extends Controller
 
     public function destroy($meeting_for, MeetingDecision $meetingDecision)
     {
-        abort_if(
-            Gate::denies($meeting_for . 'MeetingDecision_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('MeetingDecision_delete');
 
         if ($meetingDecision->decision_file) {
             $this->deleteFile($meetingDecision->decision_file);

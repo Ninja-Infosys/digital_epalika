@@ -26,11 +26,7 @@ class TrainingController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('training_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_access');
         $trainings = Training::withCount('trainingTrainees')->latest()->get();
         $trainers = Trainer::selectRaw('id,name')->latest()->get();
 
@@ -44,11 +40,7 @@ class TrainingController extends Controller
 
     public function store(StoreTrainingRequest $request)
     {
-        abort_if(
-            Gate::denies('training_create'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_create');
 
         $setting = OfficeSetting::first();
         if (! $setting->fiscal_year_id) {
@@ -69,11 +61,7 @@ class TrainingController extends Controller
 
     public function show(Training $training)
     {
-        abort_if(
-            Gate::denies('training_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_access');
 
         if ($training->form_type === TrainingTypeEnum::TECHNICAL_TRAINEE) {
             $trainees = TechnicalTrainee::with('designation', 'department', 'localBody', 'district', 'province')->whereHas('trainingTrainee', function ($query) use ($training) {
@@ -91,11 +79,7 @@ class TrainingController extends Controller
 
     public function edit(Training $training)
     {
-        abort_if(
-            Gate::denies('training_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_edit');
 
         $training->load('fiscalYear');
         $fiscalYears = FiscalYear::get();
@@ -106,11 +90,7 @@ class TrainingController extends Controller
 
     public function update(UpdateTrainingRequest $request, Training $training)
     {
-        abort_if(
-            Gate::denies('training_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_edit');
         DB::transaction(function () use ($request, $training) {
             $training->update($request->validated() + [
                 'closed_at' => $request->input('form_status') == 1 ? now() : null,
@@ -125,11 +105,7 @@ class TrainingController extends Controller
 
     public function destroy(Training $training)
     {
-        abort_if(
-            Gate::denies('training_delete'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_delete');
         $training->trainingTrainees()->delete();
         $training->delete();
 
@@ -158,11 +134,7 @@ class TrainingController extends Controller
 
     public function setFormStatus(Training $training)
     {
-        abort_if(
-            Gate::denies('training_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_access');
 
         $training->update([
             'closed_at' => empty($training->closed_at) ? now() : null,
@@ -175,11 +147,7 @@ class TrainingController extends Controller
 
     public function report(Training $training)
     {
-        abort_if(
-            Gate::denies('training_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_access');
 
         $training->load(
             'trainingTrainees.model.localBody',
@@ -196,11 +164,7 @@ class TrainingController extends Controller
 
     public function storePhotos(Request $request, Training $training)
     {
-        abort_if(
-            Gate::denies('training_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_edit');
 
         $request->validate([
             'images' => ['required', 'array'],
@@ -220,22 +184,14 @@ class TrainingController extends Controller
 
     public function marks(Training $training)
     {
-        abort_if(
-            Gate::denies('training_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_edit');
 
         return view('roaster::admin.training.mark-sheet', compact('training'));
     }
 
     public function updateMarks(UpdateTrainingMarkRequest $request, Training $training)
     {
-        abort_if(
-            Gate::denies('training_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('training_edit');
 
         $training->update($request->validated());
 
