@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.recommendation.setting.formBuilder.index') }}">फारम बिल्डर</a>
+                            <a href="{{ route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum) }}">फारम बिल्डर</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ फारम बिल्डर थप्नुहोस्</li>
                     </ol>
@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">फारम बिल्डर थप्नुहोस्</h4>
-                        <a href="{{ route('admin.recommendation.setting.formBuilder.index') }}"
+                        <a href="{{ route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum) }}"
                             class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> फारम बिल्डर सूची
                         </a>

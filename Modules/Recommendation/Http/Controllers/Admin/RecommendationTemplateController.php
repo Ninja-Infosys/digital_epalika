@@ -27,7 +27,7 @@ class RecommendationTemplateController extends Controller
     {
         $this->checkAuthorization('recommendationTemplate_create');
 
-        return view('recommendation::admin.setting.recommendationTemplate.create');
+        return view('recommendation::admin.setting.recommendationTemplate.create',compact('applicationTypeEnum'));
     }
 
     public function store(StoreRecommendationTemplateRequest $request ,ApplicationTypeEnum $applicationTypeEnum)
@@ -47,14 +47,14 @@ class RecommendationTemplateController extends Controller
 
     public function show(ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
-        return view('recommendation::show');
+        return view('recommendation::show',compact('applicationTypeEnum','recommendationTemplate'));
     }
 
     public function edit(ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_edit');
 
-        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate'));
+        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate','applicationTypeEnum'));
     }
 
     public function update(UpdateRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum,RecommendationTemplate $recommendationTemplate)
