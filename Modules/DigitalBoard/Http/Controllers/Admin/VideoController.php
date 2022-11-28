@@ -12,11 +12,7 @@ class VideoController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('digitalBoardVideo_access'),
-            403,
-            'You are not allowed to digital board video access'
-        );
+        $this->checkAuthorization('digitalBoardVideo_access');
 
         $videos = Video::latest()->get();
 
@@ -25,22 +21,14 @@ class VideoController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('digitalBoardVideo_create'),
-            403,
-            'You are not allowed to digital board video create'
-        );
+        $this->checkAuthorization('digitalBoardVideo_create');
 
         return view('digitalboard::video.create');
     }
 
     public function store(StoreVideoRequest $request)
     {
-        abort_if(
-            Gate::denies('digitalBoardVideo_create'),
-            403,
-            'You are not allowed to digital board video create'
-        );
+        $this->checkAuthorization('digitalBoardVideo_create');
 
         Video::create($request->validated());
 
@@ -51,31 +39,19 @@ class VideoController extends Controller
 
     public function show(Video $video)
     {
-        abort_if(
-            Gate::denies('digitalBoardVideo_access'),
-            403,
-            'You are not allowed to digital board video access'
-        );
+        $this->checkAuthorization('digitalBoardVideo_access');
     }
 
     public function edit(Video $video)
     {
-        abort_if(
-            Gate::denies('digitalBoardVideo_edit'),
-            403,
-            'You are not allowed to digital board video edit'
-        );
+        $this->checkAuthorization('digitalBoardVideo_edit');
 
         return view('digitalboard::video.edit', compact('video'));
     }
 
     public function update(UpdateVideoRequest $request, Video $video)
     {
-        abort_if(
-            Gate::denies('digitalBoardVideo_edit'),
-            403,
-            'You are not allowed to digital board video edit'
-        );
+        $this->checkAuthorization('digitalBoardVideo_edit');
         if ($video->video !== $request->input('video')) {
             $this->deleteFile($video->video);
         }
@@ -89,11 +65,7 @@ class VideoController extends Controller
 
     public function destroy(Video $video)
     {
-        abort_if(
-            Gate::denies('digitalBoardVideo_delete'),
-            403,
-            'You are not allowed to digital board video delete'
-        );
+        $this->checkAuthorization('digitalBoardVideo_delete');
 
         if ($video->video) {
             $this->deleteFile($video->video);

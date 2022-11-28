@@ -12,30 +12,25 @@ class BudgetHeadController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('budgetHead_access'),
-        403,
-        'you are not able to access this resource');
+        $this->checkAuthorization('budgetHead_access');
 
-        $budgetHeads=BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+        $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+
         return view('plan::admin.setting.budget_head.index', compact('budgetHeads'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('budgetHead_create'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetHead_create');
 
-        $mainBudgetHeads=BudgetHead::whereNull('budget_head_id')->get();
-        return view('plan::admin.setting.budget_head.create',compact('mainBudgetHeads'));
+        $mainBudgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+
+        return view('plan::admin.setting.budget_head.create', compact('mainBudgetHeads'));
     }
 
     public function store(StoreBudgetHeadRequest $request)
     {
-        abort_if(Gate::denies('budgetHead_create'),
-            403,
-            'you are not able to access this resource');
-
+        $this->checkAuthorization('budgetHead_create');
         BudgetHead::create($request->validated());
 
         toast('बजेट शिर्षक सफलतापूर्वक थपियो ', 'success');
@@ -44,19 +39,16 @@ class BudgetHeadController extends Controller
 
     public function edit(BudgetHead $budgetHead)
     {
-        abort_if(Gate::denies('budgetHead_edit'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetHead_edit');
 
-        $mainBudgetHeads=BudgetHead::whereNull('budget_head_id')->get();
-        return view('plan::admin.setting.budget_head.edit',compact('budgetHead','mainBudgetHeads'));
+        $mainBudgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+
+        return view('plan::admin.setting.budget_head.edit', compact('budgetHead', 'mainBudgetHeads'));
     }
 
     public function update(UpdateBudgetHeadRequest $request, BudgetHead $budgetHead)
     {
-        abort_if(Gate::denies('budgetHead_edit'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetHead_edit');
 
         $budgetHead->update($request->validated());
 
@@ -66,9 +58,7 @@ class BudgetHeadController extends Controller
 
     public function destroy(BudgetHead $budgetHead)
     {
-        abort_if(Gate::denies('budgetHead_delete'),
-            403,
-            'you are not able to access this resource');
+        $this->checkAuthorization('budgetHead_delete');
         $budgetHead->budgetHeads()->delete();
         $budgetHead->delete();
 

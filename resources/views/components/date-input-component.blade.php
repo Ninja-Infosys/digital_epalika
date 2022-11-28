@@ -8,9 +8,6 @@
         @error($nameNe)
         <span class="text-danger">{{$message}}</span>
         @enderror
-        @error($nameEn)
-        <span class="text-danger">{{$message}}</span>
-        @enderror
     </div>
     <div @class([
         'col-md-6'=>$showEnglishDate,

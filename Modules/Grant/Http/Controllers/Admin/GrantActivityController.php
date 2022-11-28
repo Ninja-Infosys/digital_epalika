@@ -12,11 +12,7 @@ class GrantActivityController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('grantActivity_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantActivity_access');
 
         $grantActivities = GrantActivity::all();
 
@@ -25,22 +21,14 @@ class GrantActivityController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('grantActivity_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantActivity_create');
 
         return view('grant::admin.grant_activity.create');
     }
 
     public function store(StoreGrantActivityRequest $request)
     {
-        abort_if(
-            Gate::denies('grantActivity_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantActivity_create');
         GrantActivity::create($request->validated());
 
         toast('अनुदान क्रियाकलाप सफलतापूर्वक थपियो', 'success');
@@ -50,33 +38,21 @@ class GrantActivityController extends Controller
 
     public function show(GrantActivity $grantActivity)
     {
-        abort_if(
-            Gate::denies('grantActivity_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantActivity_access');
 
         return view('grant::show');
     }
 
     public function edit(GrantActivity $grantActivity)
     {
-        abort_if(
-            Gate::denies('grantActivity_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantActivity_edit');
 
         return view('grant::admin.grant_activity.edit', compact('grantActivity'));
     }
 
     public function update(UpdateGrantActivityRequest $request, GrantActivity $grantActivity)
     {
-        abort_if(
-            Gate::denies('grantActivity_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantActivity_edit');
         $grantActivity->update($request->validated());
 
         toast('अनुदान क्रियाकलाप सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -86,11 +62,7 @@ class GrantActivityController extends Controller
 
     public function destroy(GrantActivity $grantActivity)
     {
-        abort_if(
-            Gate::denies('grantActivity_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grantActivity_delete');
         $grantActivity->delete();
 
         toast('अनुदान क्रियाकलाप सफलतापूर्वक मेटाइयो', 'success');

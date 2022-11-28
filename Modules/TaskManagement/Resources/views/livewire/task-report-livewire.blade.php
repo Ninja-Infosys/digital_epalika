@@ -119,43 +119,41 @@
 @once
     @push('scripts')
         <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#from_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    onChange: function () {
+                        let inputFieldDate = $("#from_date").val();
+                        let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                        let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                        let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                        //$("#en_from_date").val(formattedDate);
+
+                        Livewire.emit('fromDateChanged', inputFieldDate, formattedDate);
+                    }
+                });
+
+                $("#to_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    onChange: function () {
+                        let inputFieldDate = $("#to_date").val();
+                        let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                        let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                        let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                        //$("#en_to_date").val(formattedDate);
+
+                        Livewire.emit('toDateChanged', inputFieldDate, formattedDate);
+                    }
+                });
+
+                // let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
+                // let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
+                // Livewire.emit('fromDateChanged', todayBsDate, todayAdDate);
+                // Livewire.emit('toDateChanged', todayBsDate, todayAdDate);
+            });
+        </script>
     @endpush
 @endonce
-@push('scripts')
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#from_date").nepaliDatePicker({
-                ndpYear: true,
-                ndpMonth: true,
-                onChange: function () {
-                    let inputFieldDate = $("#from_date").val();
-                    let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
-                    let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
-                    let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
-                    //$("#en_from_date").val(formattedDate);
-
-                    Livewire.emit('fromDateChanged', inputFieldDate, formattedDate);
-                }
-            });
-
-            $("#to_date").nepaliDatePicker({
-                ndpYear: true,
-                ndpMonth: true,
-                onChange: function () {
-                    let inputFieldDate = $("#to_date").val();
-                    let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
-                    let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
-                    let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
-                    //$("#en_to_date").val(formattedDate);
-
-                    Livewire.emit('toDateChanged', inputFieldDate, formattedDate);
-                }
-            });
-
-            // let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-            // let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
-            // Livewire.emit('fromDateChanged', todayBsDate, todayAdDate);
-            // Livewire.emit('toDateChanged', todayBsDate, todayAdDate);
-        });
-    </script>
-@endpush

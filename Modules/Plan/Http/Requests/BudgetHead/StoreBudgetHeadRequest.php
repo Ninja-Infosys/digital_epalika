@@ -20,7 +20,7 @@ class StoreBudgetHeadRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'title.required' => 'शीर्षक आवश्यक छ'

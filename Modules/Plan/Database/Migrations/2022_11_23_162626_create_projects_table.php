@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->string('registration_no');
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
             $table->string('project_name');
             $table->foreignId('plan_area_id')->nullable()->constrained()->nullOnDelete();
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('project_venue')->nullable();
             $table->double('evaluation_amount',12,2)->default(0);
             $table->string('purpose')->nullable();
+            $table->string('operated_through');
             $table->boolean('is_deadline_extended')->default(0);
             $table->string('extended_date')->nullable();
             $table->double('progress_spent_amount',12,2)->default(0);

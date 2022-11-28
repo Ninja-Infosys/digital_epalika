@@ -26,11 +26,7 @@ class MapController extends Controller
     public function index(ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
 
-        abort_if(
-            Gate::denies('mapApply_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('mapApply_access');
         $application_types = collect();
 
         foreach (ApplicationTypeEnum::cases() as $applicationType) {
@@ -63,11 +59,7 @@ class MapController extends Controller
     public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
     {
 
-        abort_if(
-            Gate::denies('mapApplyNoticeReject_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('mapApplyNoticeReject_access');
 
         $data = ApplyMapNotice::where('map_apply_id', $mapApply->id)
             ->where('file_type', $noticeTypeEnum->value)
@@ -115,11 +107,7 @@ class MapController extends Controller
     public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
     {
 
-        abort_if(
-            Gate::denies('mapApplyNotice_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('mapApplyNotice_access');
 
 
         $request->validate([

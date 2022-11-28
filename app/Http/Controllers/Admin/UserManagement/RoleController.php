@@ -15,11 +15,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('role_access'),
-            403,
-            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_access');
 
         $roles = Role::all();
 
@@ -28,11 +24,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('role_create'),
-            403,
-            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_create');
 
         $permissionGroups = $this->permissionGroups();
 
@@ -41,11 +33,7 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        abort_if(
-            Gate::denies('role_create'),
-            403,
-            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
-        );
+       $this->checkAuthorization('role_create');
 
         DB::transaction(function () use ($request) {
             $role = Role::create($request->validated());
@@ -60,20 +48,12 @@ class RoleController extends Controller
 
     public function show(Role $role)
     {
-        abort_if(
-            Gate::denies('role_access'),
-            403,
-            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
-        );
+       $this->checkAuthorization('role_access');
     }
 
     public function edit(Role $role)
     {
-        abort_if(
-            Gate::denies('role_edit'),
-            403,
-            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_edit');
 
         $role->load('permissions');
         $permissionGroups = $this->permissionGroups();
@@ -83,11 +63,7 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        abort_if(
-            Gate::denies('role_edit'),
-            403,
-            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_edit');
 
         DB::transaction(function () use ($request, $role) {
             $role->update($request->validated());
@@ -101,11 +77,7 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        abort_if(
-            Gate::denies('role_delete'),
-            403,
-            'तपाईंलाई भूमिका मेटाउन अनुमति छैन'
-        );
+        $this->checkAuthorization('role_delete');
 
         if ($role->type == 'Super') {
             toast('super role मेटाउन सकिँदैन', 'error');

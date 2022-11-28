@@ -12,11 +12,7 @@ class BranchController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('branch_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('branch_access');
 
         $branches = Branch::with('branches.branch')->whereNull('branch_id')->orderBy('branch_id')->paginate(10);
 
@@ -25,11 +21,7 @@ class BranchController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('branch_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('branch_create');
 
         $mainBranches = Branch::whereNull('branch_id')->get();
 
@@ -38,11 +30,7 @@ class BranchController extends Controller
 
     public function store(StoreBranchRequest $request)
     {
-        abort_if(
-            Gate::denies('branch_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('branch_create');
         Branch::create($request->validated());
 
         toast('शाखा सफलतापूर्वक थपियो', 'success');
@@ -52,11 +40,7 @@ class BranchController extends Controller
 
     public function edit(Branch $branch)
     {
-        abort_if(
-            Gate::denies('branch_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+       $this->checkAuthorization('branch_edit');
         $mainBranches = Branch::whereNull('branch_id')->get();
 
         return view('admin.setting.branch.edit', compact('branch', 'mainBranches'));
@@ -64,11 +48,7 @@ class BranchController extends Controller
 
     public function update(UpdateBranchRequest $request, Branch $branch)
     {
-        abort_if(
-            Gate::denies('branch_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('branch_edit');
 
         $branch->update($request->validated());
 
@@ -79,11 +59,7 @@ class BranchController extends Controller
 
     public function destroy(Branch $branch)
     {
-        abort_if(
-            Gate::denies('branch_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('branch_delete');
         $branch->branches()->delete();
         $branch->delete();
 

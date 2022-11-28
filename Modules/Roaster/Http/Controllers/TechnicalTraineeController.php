@@ -11,11 +11,7 @@ class TechnicalTraineeController extends Controller
 {
     public function show(TechnicalTrainee $technicalTrainee)
     {
-        abort_if(
-            Gate::denies('technicalTrainee_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('technicalTrainee_access');
 
         $technicalTrainee->load('province', 'district', 'localBody', 'documents', 'department', 'designation');
 
@@ -24,11 +20,7 @@ class TechnicalTraineeController extends Controller
 
     public function edit(TechnicalTrainee $technicalTrainee)
     {
-        abort_if(
-            Gate::denies('technicalTrainee_edit'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('technicalTrainee_edit');
         $technicalTrainee->load('trainingTrainee');
 
         return view('roaster::admin.training.technicalTrainee.edit', compact('technicalTrainee'));
@@ -36,11 +28,7 @@ class TechnicalTraineeController extends Controller
 
     public function updateSelectTechnicalTrainee(TechnicalTrainee $technicalTrainee)
     {
-        abort_if(
-            Gate::denies('technicalTrainee_access'),
-            ResponseAlias::HTTP_FORBIDDEN,
-            '403 Forbidden | you are not allowed to access this resource'
-        );
+        $this->checkAuthorization('technicalTrainee_access');
         $technicalTrainee->update([
             'select' => ! $technicalTrainee->select,
         ]);

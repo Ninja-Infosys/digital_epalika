@@ -8,51 +8,49 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Gate;
 
 class SmsController extends Controller
 {
     public function setting(): Factory|View|Application
     {
-        abort_if(
-            Gate::denies('sms_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('sms_access');
+
         return view('admin.setting.sms.index');
     }
 
-    public function setSmsKeyInEnvironment(Request $request): Redirector|Application|RedirectResponse
+    public function setSamayaSmsConfig(Request $request)
     {
-        abort_if(
-            Gate::denies('sms_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('sms_access');
+
         $request->validate([
             'samaya_api_key' => ['required'],
             'samaya_sender_id' => ['required'],
+            'samaya_is_active' => ['nullable', 'boolean'],
         ]);
 
-        $this->setEnvironmentValue('SMS_API_KEY', $request->input('samaya_api_key'));
-        $this->setEnvironmentValue('SMS_SENDER_ID', $request->input('samaya_sender_id'));
+        config()->set('sms.samaya.is_active', $request->boolean('samaya_is_active'));
+        config()->set('sms.samaya.api_key', $request->input('samaya_api_key'));
+        config()->set('sms.samaya.sms_id', $request->input('samaya_sender_id'));
 
         toast('Samaya Sms set Successfully');
 
         return redirect(route('admin.setting.sms'));
     }
 
-    private function setEnvironmentValue($envKey, $envValue): void
+    public function setAakashSmsConfig(Request $request)
     {
-        $envFile = app()->environmentFilePath();
-        $str = file_get_contents($envFile);
+        $this->checkAuthorization('sms_access');
 
-        $oldValue = env($envKey);
+        $request->validate([
+            'aakash_api_key' => ['required'],
+            'aakash_is_active' => ['nullable', 'boolean'],
+        ]);
 
-        $str = str_replace("{$envKey}='{$oldValue}'", "{$envKey}='{$envValue}'\n", $str);
+        \Config::set("sms.aakash.is_active", $request->boolean('aakash_is_active'));
+        \Config::set("sms.aakash.api_key", $request->input('aakash_api_key'));
 
-        $fp = fopen($envFile, 'wb');
-        fwrite($fp, $str);
-        fclose($fp);
+        toast('Aakash Sms set Successfully');
+
+        return redirect(route('admin.setting.sms'));
     }
 }

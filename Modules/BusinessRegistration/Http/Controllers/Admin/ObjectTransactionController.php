@@ -12,11 +12,7 @@ class ObjectTransactionController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('objectTransaction_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('objectTransaction_access');
         $objectTransactions = ObjectTransaction::with('objectTransaction')->latest()->get();
 
         return view('businessregistration::admin.setting.objectTransaction.index', compact('objectTransactions'));
@@ -24,11 +20,7 @@ class ObjectTransactionController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('objectTransaction_create'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('objectTransaction_create');
 
         $parentObjectTransactions = ObjectTransaction::whereNull('object_transaction_id')->get();
 
@@ -37,11 +29,7 @@ class ObjectTransactionController extends Controller
 
     public function store(StoreObjectTransactionRequest $request)
     {
-        abort_if(
-            Gate::denies('objectTransaction_create'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('objectTransaction_create');
 
         ObjectTransaction::create($request->validated());
 
@@ -52,22 +40,14 @@ class ObjectTransactionController extends Controller
 
     public function show($id)
     {
-        abort_if(
-            Gate::denies('objectTransaction_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('objectTransaction_access');
 
         return view('businessregistration::show');
     }
 
     public function edit(ObjectTransaction $objectTransaction)
     {
-        abort_if(
-            Gate::denies('objectTransaction_edit'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('objectTransaction_edit');
 
         $parentObjectTransactions = ObjectTransaction::whereNull('object_transaction_id')->get();
 
@@ -76,11 +56,7 @@ class ObjectTransactionController extends Controller
 
     public function update(UpdateObjectTransactionRequest $request, ObjectTransaction $objectTransaction)
     {
-        abort_if(
-            Gate::denies('objectTransaction_edit'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('objectTransaction_edit');
         $objectTransaction->update($request->validated());
         toast('  सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
@@ -89,11 +65,7 @@ class ObjectTransactionController extends Controller
 
     public function destroy(ObjectTransaction $objectTransaction)
     {
-        abort_if(
-            Gate::denies('objectTransaction_delete'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('objectTransaction_delete');
         $objectTransaction->delete();
 
         return back();

@@ -13,11 +13,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('employee_access'),
-            403,
-            'You are not allowed to employee access'
-        );
+        $this->checkAuthorization('employee_access');
 
         $employees = Employee::orderBy('position')->get();
 
@@ -26,22 +22,14 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('employee_create'),
-            403,
-            'You are not allowed to employee create'
-        );
+        $this->checkAuthorization('employee_create');
 
         return view('digitalboard::employee.create');
     }
 
     public function store(StoreEmployeeRequest $request)
     {
-        abort_if(
-            Gate::denies('employee_create'),
-            403,
-            'You are not allowed to employee create'
-        );
+        $this->checkAuthorization('employee_create');
 
         Employee::create($request->validated());
         toast('कर्मचारी सफलतापूर्वक थपियो', 'success');
@@ -51,33 +39,21 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        abort_if(
-            Gate::denies('employee_access'),
-            403,
-            'You are not allowed to employee access'
-        );
+        $this->checkAuthorization('employee_access');
 
         return view('digitalboard::employee.show', compact('employee'));
     }
 
     public function edit(Employee $employee)
     {
-        abort_if(
-            Gate::denies('employee_edit'),
-            403,
-            'You are not allowed to employee edit'
-        );
+        $this->checkAuthorization('employee_edit');
 
         return view('digitalboard::employee.edit', compact('employee'));
     }
 
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        abort_if(
-            Gate::denies('employee_edit'),
-            403,
-            'You are not allowed to employee edit'
-        );
+        $this->checkAuthorization('employee_edit');
 
         if ($request->hasFile('photo')) {
             if ($employee->photo) {
@@ -94,11 +70,7 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
-        abort_if(
-            Gate::denies('employee_delete'),
-            403,
-            'You are not allowed to employee delete'
-        );
+        $this->checkAuthorization('employee_delete');
         if ($employee->photo) {
             $this->deleteFile($employee->photo);
         }
@@ -111,11 +83,7 @@ class EmployeeController extends Controller
 
         public function updateEmployeeStatus(Employee $employee): RedirectResponse
         {
-            abort_if(
-                Gate::denies('employee_access'),
-                403,
-                'You are not allowed to employee access'
-            );
+            $this->checkAuthorization('employee_access');
             $employee->update([
                 'status' => !$employee->status,
             ]);

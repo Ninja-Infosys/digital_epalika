@@ -12,11 +12,7 @@ class ExternalUnitConversionController extends Controller
 {
     public function index(Unit $unit)
     {
-        abort_if(
-            Gate::denies('unit_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('unit_access');
 
         $conversionUnits = Unit::where('type_id', $unit->type_id)
             ->where('is_smallest', 1)

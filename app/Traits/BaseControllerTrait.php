@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Traits;
+
+use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+
+trait BaseControllerTrait
+{
+
+    public function constructionMethod(): void
+    {
+        view()->share('officeSetting', OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first());
+    }
+
+    /**
+     * @param $permission
+     * @return void
+     */
+    public function checkAuthorization($permission): void
+    {
+        abort_if(
+            Gate::denies($permission),
+            403,
+            'You are not allowed to access this resource'
+        );
+    }
+
+    public function deleteFile($file_url): void
+    {
+        if (Storage::disk('public')->exists($file_url)) {
+            Storage::disk('public')->delete($file_url);
+        }
+    }
+}

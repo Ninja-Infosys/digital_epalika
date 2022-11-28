@@ -12,11 +12,7 @@ class ImportantLinkController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('importantLink_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('importantLink_access');
         $importantLinks = ImportantLink::all();
 
         return view('admin.website.important_link.index', compact('importantLinks'));
@@ -25,22 +21,14 @@ class ImportantLinkController extends Controller
     public function create()
     {
 
-        abort_if(
-            Gate::denies('importantLink_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('importantLink_create');
         return view('admin.website.important_link.create');
     }
 
     public function store(StoreImportantLinkRequest $request)
     {
 
-        abort_if(
-            Gate::denies('importantLink_create'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('importantLink_create');
         ImportantLink::create($request->validated());
 
         toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक थपियो', 'success');
@@ -56,22 +44,14 @@ class ImportantLinkController extends Controller
     public function edit(ImportantLink $importantLink)
     {
 
-        abort_if(
-            Gate::denies('importantLink_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('importantLink_edit');
         return view('admin.website.important_link.edit', compact('importantLink'));
     }
 
     public function update(UpdateImportantLinkRequest $request, ImportantLink $importantLink)
     {
 
-        abort_if(
-            Gate::denies('importantLink_edit'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('importantLink_edit');
         $importantLink->update($request->validated());
 
         toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -82,11 +62,7 @@ class ImportantLinkController extends Controller
     public function destroy(ImportantLink $importantLink)
     {
 
-        abort_if(
-            Gate::denies('importantLink_delete'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('importantLink_delete');
         $importantLink->delete();
 
         toast('महत्त्वपूर्ण लिङ्क सफलतापूर्वक मेटियो', 'success');

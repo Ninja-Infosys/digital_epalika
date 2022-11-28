@@ -13,6 +13,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->string('grant_source');
             $table->string('asset_name');
+            $table->double('quantity',12,2)->default(0);
             $table->string('asset_unit');
             $table->timestamps();
             $table->softDeletes();

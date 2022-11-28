@@ -10,11 +10,7 @@ class GrievanceUserController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('grievanceUser_access'),
-            403,
-            'You are not allowed to access this resource'
-        );
+        $this->checkAuthorization('grievanceUser_access');
         $grievanceUsers = GrievanceUser::withCount('grievanceDetails')->latest()->get();
 
         return view('grievancehandling::admin.user.index', compact('grievanceUsers'));

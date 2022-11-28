@@ -13,11 +13,7 @@ class MunicipalCommitteeController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('executiveMunicipalCommittee_access'),
-            403,
-            'You are not allowed to executive committee access'
-        );
+        $this->checkAuthorization('executiveMunicipalCommittee_access');
 
         $municipalCommittees = MunicipalCommittee::with('province', 'district', 'localBody')->orderBy('position')->get();
 
@@ -26,11 +22,7 @@ class MunicipalCommitteeController extends Controller
 
     public function create()
     {
-        abort_if(
-            Gate::denies('executiveMunicipalCommittee_create'),
-            403,
-            'You are not allowed to executive committee create'
-        );
+        $this->checkAuthorization('executiveMunicipalCommittee_create');
         $officeSetting = OfficeSetting::first();
 
         return view('executivemeeting::admin.municipal_committee.create', compact('officeSetting'));
@@ -38,11 +30,7 @@ class MunicipalCommitteeController extends Controller
 
     public function store(StoreMunicipalCommitteeRequest $request)
     {
-        abort_if(
-            Gate::denies('executiveMunicipalCommittee_create'),
-            403,
-            'You are not allowed to executive committee create'
-        );
+        $this->checkAuthorization('executiveMunicipalCommittee_create');
         MunicipalCommittee::create($request->validated());
 
         toast('पालिका समिति  सफलतापूर्वक थपियो', 'success');
@@ -52,31 +40,19 @@ class MunicipalCommitteeController extends Controller
 
     public function show(MunicipalCommittee $municipalCommittee)
     {
-        abort_if(
-            Gate::denies('executiveMunicipalCommittee_access'),
-            403,
-            'You are not allowed to executive committee access'
-        );
+        $this->checkAuthorization('executiveMunicipalCommittee_access');
     }
 
     public function edit(MunicipalCommittee $municipalCommittee)
     {
-        abort_if(
-            Gate::denies('executiveMunicipalCommittee_edit'),
-            403,
-            'You are not allowed to executive committee edit'
-        );
+        $this->checkAuthorization('executiveMunicipalCommittee_edit');
 
         return view('executivemeeting::admin.municipal_committee.edit', compact('municipalCommittee'));
     }
 
     public function update(UpdateMunicipalCommitteeRequest $request, MunicipalCommittee $municipalCommittee)
     {
-        abort_if(
-            Gate::denies('executiveMunicipalCommittee_edit'),
-            403,
-            'You are not allowed to executive committee edit'
-        );
+        $this->checkAuthorization('executiveMunicipalCommittee_edit');
 
         if ($request->hasFile('photo') && $municipalCommittee->photo) {
             $this->deleteFile($municipalCommittee->photo);
@@ -90,11 +66,7 @@ class MunicipalCommitteeController extends Controller
 
     public function destroy(MunicipalCommittee $municipalCommittee)
     {
-        abort_if(
-            Gate::denies('executiveMunicipalCommittee_delete'),
-            403,
-            'You are not allowed to executive committee delete'
-        );
+        $this->checkAuthorization('executiveMunicipalCommittee_delete');
 
         if ($municipalCommittee->photo) {
             $this->deleteFile($municipalCommittee->photo);

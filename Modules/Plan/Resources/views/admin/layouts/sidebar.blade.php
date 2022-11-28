@@ -4,6 +4,14 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+@can('project_access')
+<li class="{{request()->is('admin/plan/project') ? 'active' : ''}}">
+    <a href="{{route('admin.plan.project.index')}}">
+        <i class="fa fa-list"></i>
+        <span> योजना/आयोजना दर्ता </span>
+    </a>
+</li>
+@endcan
 <li class="{{request()->is('admin/plan/report/*') ? 'active' : ''}}">
     <a href="#sidebarPlanReport"
        {{request()->is('admin/plan/report/*') ? 'aria-expanded=true  ' : ''}}
