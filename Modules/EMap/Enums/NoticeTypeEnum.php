@@ -17,47 +17,48 @@ enum NoticeTypeEnum: string
     //municipal
     case REGARDING_FEES_AND_REGISTRATION = 'fees_registration';
     case NOTICE_ISSUED_IN_THE_NAME_OF_SANGHIAR = 'notice_issued_name_sanghiar';
-    case SARZAMIN_MUCHULKA = 'sarzamin_muchulka';
-
-    //house owner
-    case CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL = 'construction_supervision_report_plinth_level';
-    case REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE = 'permission_construction_work_superstructure';
-    case CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION = 'application_construction_completion_certificate';
-    case HEIR = 'heir';
-    case PERMISSION = 'permission';
-
-    case MAP_ACCEPTANCE = 'map_acceptance';
-
-    case MAP_PASS_FOR_BUILDING = 'map_pass_building';
-    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = 'construction_completion_certificate';
-
-    //notice enums
     case FIFTEEN_DAYS_NOTICE_ADJOURNED = '15_days_notice_adjourned';
-    case REGARDING_SENDING_DETAILS = 'sending_details';
-    case REVISED_SUPERSTRUCTURE_PERMIT = 'revised_superstructure_permit';
-    //bond enums
     case FIFTEEN_DAY_GRACE_PERIOD_FOR_MAP_PASS = '15_day_grace_period_map_pass';
-    //report enums
-
+    case SARZAMIN_MUCHULKA = 'sarzamin_muchulka';
     case TECHNICAL_REPORT = 'technical_report';
-    case THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT = 'technician_completed_first_phase_work_report';
-    case CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE = 'consultants_Report_on_Completion_First_Phase';
-    case THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT = 'technician_completed_second_phase_work_report';
-    case CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE = 'consultants_Report_on_Completion_Second_Phase';
-    case CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE = 'construction_supervision_report_superstructure';
-    //certificate enums
-    case PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL = 'permission_letter_construction_work_plinth_level';
-    case PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE = 'Permanent_Building_Permit_Superstructure';
-    case BUILDING_COMPLETION_CERTIFICATE = 'building_completion_certificate';
-    case MAP_CERTIFICATE = 'map_certificate';
     //agreement enums
     case AGREEMENT_LETTER_BETWEEN_SUPERVISOR_CONSULTANT_AND_LANDLORD = 'agreement_letter_supervisor_landlord)';
     case AGREEMENT_LETTER_HOMEOWNER_AND_BUILDER_CONTRACTOR = 'agreement_letter_homeowner_contractor)';
-    //order enums
     case GRANTING_PERMISSION_FOR_CONSTRUCTION_UP_TO_THE_PLINTH_LEVEL_OF_THE_HOUSE = 'granting_plinth_permit';
+    case PERMISSION_LETTER_FOR_CONSTRUCTION_WORK_UP_TO_PLINTH_LEVEL = 'permission_letter_construction_work_plinth_level';
+    case CONSTRUCTION_SUPERVISION_REPORT_UP_TO_PLINTH_LEVEL = 'construction_supervision_report_plinth_level';
+    case CONSULTANTS_REPORT_ON_COMPLETION_OF_FIRST_PHASE = 'consultants_Report_on_Completion_First_Phase';
+    case THE_TECHNICIAN_WHO_COMPLETED_THE_FIRST_PHASE_OF_WORK_REPORT = 'technician_completed_first_phase_work_report';
+    case REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE = 'permission_construction_work_superstructure';
     case REGARDING_SUPERSTRUCTURE_PERMIT = 'superstructure_permit';
+    case PERMANENT_BUILDING_PERMIT_FOR_SUPERSTRUCTURE = 'Permanent_Building_Permit_Superstructure';
+    case CONSTRUCTION_SUPERVISION_REPORT_UPTO_SUPERSTRUCTURE = 'construction_supervision_report_superstructure';
     case REVISED_SUPERSTRUCTURE_PERMIT_ORDER = 'revised_superstructure_permit_order';
+    case REVISED_SUPERSTRUCTURE_PERMIT = 'revised_superstructure_permit';
+    case CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION = 'application_construction_completion_certificate';
+    case CONSULTANTS_REPORT_ON_COMPLETION_OF_SECOND_PHASE = 'consultants_Report_on_Completion_Second_Phase';
+    case THE_TECHNICIAN_WHO_COMPLETED_THE_SECOND_PHASE_OF_WORK_REPORT = 'technician_completed_second_phase_work_report';
+    case REGARDING_CONSTRUCTION_COMPLETION_CERTIFICATE = 'construction_completion_certificate';
+    case BUILDING_COMPLETION_CERTIFICATE = 'building_completion_certificate';
     case HOUSE_MAP_NAMSARI = 'house_map_namsari';
+    case REGARDING_SENDING_DETAILS = 'sending_details';
+    case HEIR = 'heir';
+    case PERMISSION = 'permission';
+
+
+
+
+    case MAP_ACCEPTANCE = 'map_acceptance';
+    case MAP_PASS_FOR_BUILDING = 'map_pass_building';
+
+    //certificate enums
+    case MAP_CERTIFICATE = 'map_certificate';
+
+
+
+
+
+
 
     public function label(): string
     {
