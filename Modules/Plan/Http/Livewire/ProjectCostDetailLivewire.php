@@ -4,6 +4,7 @@ namespace Modules\Plan\Http\Livewire;
 
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
+use Modules\Plan\Entities\BenefitedMemberDetail;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectCostDetail;
 use Modules\Plan\Entities\ProjectGrantDetail;
@@ -23,7 +24,8 @@ class ProjectCostDetailLivewire extends Component
         'estimated_cost_excluding_vat' => null,
         'benefited_organization' => null,
         'others_benefited' => null,
-        'projectGrantDetails' => []
+        'projectGrantDetails' => [],
+        'benefitedMemberDetails' => []
     ];
 
     public object $project;
@@ -54,6 +56,12 @@ class ProjectCostDetailLivewire extends Component
             'form.projectGrantDetails.*.asset_name' => ['required'],
             'form.projectGrantDetails.*.quantity' => ['required', 'numeric'],
             'form.projectGrantDetails.*.asset_unit' => ['required'],
+            'form.benefitedMemberDetails.*.ward_no' => ['required', 'integer'],
+            'form.benefitedMemberDetails.*.village' => ['required'],
+            'form.benefitedMemberDetails.*.dalit_backward_no' => ['required', 'integer'],
+            'form.benefitedMemberDetails.*.other_households_no' => ['required', 'integer'],
+            'form.benefitedMemberDetails.*.no_of_male' => ['required', 'integer'],
+            'form.benefitedMemberDetails.*.no_of_female' => ['required', 'integer'],
         ];
     }
 
@@ -76,13 +84,27 @@ class ProjectCostDetailLivewire extends Component
         $this->form['projectGrantDetails'] = array_values($this->form['projectGrantDetails']);
     }
 
+    public function addBenefitedMemberDetails()
+    {
+        $this->form['benefitedMemberDetails'][] = [];
+    }
+
+    public function removeBenefitedMemberDetails($index)
+    {
+        if (!empty($this->form['benefitedMemberDetails'][$index]['id'])) {
+            BenefitedMemberDetail::find($this->form['benefitedMemberDetails'][$index]['id'])->delete();
+        }
+        unset($this->form['benefitedMemberDetails'][$index]);
+        $this->form['benefitedMemberDetails'] = array_values($this->form['benefitedMemberDetails']);
+    }
+
     private function assignProjectData($project_id)
     {
-        $project = Project::with('projectCostDetail', 'projectGrantDetails')->find($project_id);
+        $project = Project::with('projectCostDetail', 'projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
         $this->project = $project;
         if ($projectCostDetail = $project->projectCostDetail) {
             foreach ($this->form as $key => $data) {
-                if ($key != 'projectGrantDetails') {
+                if ($key != 'projectGrantDetails' && $key != 'benefitedMemberDetails') {
                     $this->form[$key] = $projectCostDetail[$key];
                 }
             }
@@ -94,6 +116,17 @@ class ProjectCostDetailLivewire extends Component
                 'asset_name' => $projectGrantDetail->asset_name ?? null,
                 'quantity' => $projectGrantDetail->quantity ?? 0,
                 'asset_unit' => $projectGrantDetail->asset_unit ?? null,
+            ];
+        }
+        foreach ($project->benefitedMemberDetails as $benefitedMemberDetail) {
+            $this->form['benefitedMemberDetails'][] = [
+                'id' => $benefitedMemberDetail->id ?? null,
+                'ward_no' => $benefitedMemberDetail->ward_no ?? null,
+                'village' => $benefitedMemberDetail->village ?? null,
+                'dalit_backward_no' => $benefitedMemberDetail->dalit_backward_no ?? 0,
+                'other_households_no' => $benefitedMemberDetail->other_households_no ?? 0,
+                'no_of_male' => $benefitedMemberDetail->no_of_male ?? 0,
+                'no_of_female' => $benefitedMemberDetail->no_of_female ?? 0
             ];
         }
     }
@@ -123,6 +156,13 @@ class ProjectCostDetailLivewire extends Component
             ProjectGrantDetail::updateOrCreate(
                 ['project_id' => $this->project->id, 'id' => $projectGrantDetail['id'] ?? null],
                 $projectGrantDetail
+            );
+        }
+
+        foreach ($this->form['benefitedMemberDetails'] as $benefitedMemberDetail) {
+            BenefitedMemberDetail::updateOrCreate(
+                ['project_id' => $this->project->id, 'id' => $benefitedMemberDetail['id'] ?? null],
+                $benefitedMemberDetail
             );
         }
 
