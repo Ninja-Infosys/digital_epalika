@@ -18,6 +18,7 @@ class StoreFormBuilderRequest extends FormRequest
     {
         return [
             'form' => ['required', 'json'],
+            'title' => ['nullable', 'string', 'max:255']
         ];
     }
 }

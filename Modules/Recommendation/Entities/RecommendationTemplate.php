@@ -19,14 +19,13 @@ class RecommendationTemplate extends Model
     ];
 
     protected $fillable = [
-        'for',
-        'type',
+        'application_type',
         'title',
         'data',
-        'requires_header',
+        'status'
     ];
 
     protected $casts = [
-        'for' => ApplicationTypeEnum::class,
+        'application_type' => ApplicationTypeEnum::class,
     ];
 }

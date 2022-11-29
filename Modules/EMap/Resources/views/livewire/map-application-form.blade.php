@@ -515,7 +515,7 @@
                                     @enderror
                                 </td>
                                 <td>
-                                    <label for="citizenship_no">१.६ नागरिकत नम्बर :</label>
+                                    <label for="citizenship_no">१.६ नागरिकता नम्बर :</label>
                                     <input class="form-control" type="text"
                                            id="citizenship_no"
                                            wire:model="landOwner.citizenship_no"

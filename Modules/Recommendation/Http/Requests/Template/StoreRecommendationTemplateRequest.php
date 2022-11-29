@@ -19,9 +19,7 @@ class StoreRecommendationTemplateRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'for' => ['required', new Enum(ApplicationTypeEnum::class)],
-            'data' => ['required'],
-            'requires_header' => ['nullable', 'boolean'],
+            'data' => ['required']
         ];
     }
 }

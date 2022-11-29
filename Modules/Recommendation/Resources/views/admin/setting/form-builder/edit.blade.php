@@ -39,6 +39,20 @@
                           enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        <div class="col-md-12 mb-2">
+                            <label for="title" class="form-label">शिर्षक *</label>
+                            <input
+                                type="text"
+                                name="title"
+                                value="{{old('title',$formBuilder->title)}}"
+                                class="form-control @error('title') is-invalid @enderror"
+                                id="name"
+                                placeholder="शिर्षक"
+                            />
+                            @error('title')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
                         <input type="hidden" name="form" id="form" value="">
                         <div id="formio-builder"></div>
                         <button type="submit" class="btn btn-primary">
