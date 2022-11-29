@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('consumer_committee_officials', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('post')->nullable();
+            $table->foreignId('consumer_committee_id')->constrained()->cascadeOnDelete();
+            $table->string('post');
             $table->string('name');
             $table->string('father_name')->nullable();
             $table->string('grandfather_name')->nullable();
@@ -18,9 +18,6 @@ return new class extends Migration {
             $table->string('gender')->nullable();
             $table->string('phone')->nullable();
             $table->string('citizenship_no')->nullable();
-            $table->boolean('is_disabled')->default(0);
-            $table->boolean('is_dalit_janajati_aadibasi')->default(0);
-            $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
