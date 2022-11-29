@@ -80,7 +80,7 @@ class RecommendationTemplateController extends Controller
         }
 
         $recommendationTemplate->delete();
-        toast('सफलतापूर्वक मेटियो', 'success');
+        toast('टेम्प्लेट सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 
@@ -97,7 +97,7 @@ class RecommendationTemplateController extends Controller
             ]);
         });
 
-        toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
     }

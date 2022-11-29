@@ -116,7 +116,7 @@ class FormBuilderController extends Controller
             ]);
         });
 
-        toast('स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('फारम बिल्डर स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
     }
