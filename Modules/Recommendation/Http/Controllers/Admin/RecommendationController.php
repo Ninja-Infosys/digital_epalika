@@ -47,9 +47,7 @@ class RecommendationController extends Controller
         $definition = $this->getDefinition($applicationTypeEnum);
 
         if (empty($definition)) {
-            toast('फारम बनेको छैन', 'error');
-            return redirect()->route('admin.recommendation.setting.formBuilder.create')
-                ->withInput(['application_type' => $applicationTypeEnum->value]);
+            return $this->redirectIfEmptyDefination($applicationTypeEnum);
         }
 
         $data = '{}';
@@ -66,14 +64,12 @@ class RecommendationController extends Controller
 
         $builder = $this->getDefinition($applicationTypeEnum);
 
-        if (empty($builder)) {
-            toast('फारम बनेको छैन', 'error');
-            return redirect()->route('admin.recommendation.setting.formBuilder.create')
-                ->withInput(['application_type' => $applicationTypeEnum->value]);
+        if ($builder === null) {
+            return $this->redirectIfEmptyDefination($applicationTypeEnum);
         }
 
         $data = $request->validateDynamicForm(
-            $builder?->form,
+            $builder->form,
             $request->get('submissionValues'),
             null
         );
@@ -99,9 +95,7 @@ class RecommendationController extends Controller
         $definition = $this->getDefinition($applicationTypeEnum);
 
         if (empty($definition)) {
-            toast('फारम बनेको छैन', 'error');
-            return redirect()->route('admin.recommendation.setting.formBuilder.create')
-                ->withInput(['application_type' => $applicationTypeEnum->value]);
+            return $this->redirectIfEmptyDefination($applicationTypeEnum);
         }
 
         return view('recommendation::admin.recommendation.show', compact('applicationTypeEnum', 'recommendation', 'definition'));
@@ -114,9 +108,7 @@ class RecommendationController extends Controller
         $definition = $this->getDefinition($applicationTypeEnum);
 
         if (empty($definition)) {
-            toast('फारम बनेको छैन', 'error');
-            return redirect()->route('admin.recommendation.setting.formBuilder.create')
-                ->withInput(['application_type' => $applicationTypeEnum->value]);
+            return $this->redirectIfEmptyDefination($applicationTypeEnum);
         }
 
         return view('recommendation::admin.recommendation.edit', compact('applicationTypeEnum', 'recommendation', 'definition'));
@@ -129,9 +121,7 @@ class RecommendationController extends Controller
         $builder = $this->getDefinition($applicationTypeEnum);
 
         if (empty($builder)) {
-            toast('फारम बनेको छैन', 'error');
-            return redirect()->route('admin.recommendation.setting.formBuilder.create')
-                ->withInput(['application_type' => $applicationTypeEnum->value]);
+            return $this->redirectIfEmptyDefination($applicationTypeEnum);
         }
 
         $data = $request->validateDynamicForm(
@@ -170,5 +160,15 @@ class RecommendationController extends Controller
     public function getDefinition(ApplicationTypeEnum $applicationTypeEnum): null|FormBuilder
     {
         return FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first();
+    }
+
+    /**
+     * @param ApplicationTypeEnum $applicationTypeEnum
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function redirectIfEmptyDefination(ApplicationTypeEnum $applicationTypeEnum): \Illuminate\Http\RedirectResponse
+    {
+        toast('फारम बनेको छैन', 'error');
+        return redirect()->route('admin.recommendation.setting.formBuilder.create', $applicationTypeEnum);
     }
 }

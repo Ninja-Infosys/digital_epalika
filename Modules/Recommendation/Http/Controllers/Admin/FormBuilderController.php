@@ -4,6 +4,7 @@ namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Modules\Recommendation\Entities\FormBuilder;
 use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
@@ -19,7 +20,7 @@ class FormBuilderController extends Controller
         $this->checkAuthorization('formBuilder_access');
 
         $formBuilders = FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->get();
-        $recommendationTemplates = RecommendationTemplate::where('for', $applicationTypeEnum->value)->latest()->get();
+        $recommendationTemplates = RecommendationTemplate::where('application_type', $applicationTypeEnum->value)->latest()->get();
         return view('recommendation::admin.setting.form-builder.index', compact('formBuilders', 'recommendationTemplates', 'applicationTypeEnum'));
     }
 
@@ -32,9 +33,15 @@ class FormBuilderController extends Controller
 
     public function store(StoreFormBuilderRequest $request, ApplicationTypeEnum $applicationTypeEnum): RedirectResponse
     {
+
         $this->checkAuthorization('formBuilder_create');
 
-        FormBuilder::create($request->validated() + ['application_type' => $applicationTypeEnum->value]);
+        FormBuilder::create($request->validated() + [
+                'application_type' => $applicationTypeEnum->value,
+                'status' => FormBuilder::where('application_type', $applicationTypeEnum->value)
+                    ->where('status', 1)
+                    ->count() === 0 ? '1' : '0'
+            ]);
 
         toast('फारम सफलतापूर्वक थपियो', 'success');
 
@@ -82,10 +89,34 @@ class FormBuilderController extends Controller
     public function destroy(ApplicationTypeEnum $applicationTypeEnum, FormBuilder $formBuilder)
     {
         $this->checkAuthorization('formBuilder_delete');
+        if ($formBuilder->status == 1) {
+            toast('Error while deleting file', 'error');
 
+            return back();
+        }
         $formBuilder->delete();
 
         toast('फारम सफलतापूर्वक हटाइयो', 'success');
+
+        return back();
+    }
+
+    public function updateStatus(ApplicationTypeEnum $applicationTypeEnum, FormBuilder $formBuilder)
+    {
+
+        $this->checkAuthorization('formBuilder_access');
+
+        DB::transaction(function () use ($formBuilder, $applicationTypeEnum) {
+
+            $formBuilder->update([
+                'status' => 1
+            ]);
+            FormBuilder::whereNot('id', $formBuilder->id)->where('application_type', $applicationTypeEnum->value)->where('status', 1)->update([
+                'status' => 0
+            ]);
+        });
+
+        toast('फारम बिल्डर स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
     }

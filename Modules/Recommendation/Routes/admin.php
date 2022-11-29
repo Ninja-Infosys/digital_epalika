@@ -52,8 +52,10 @@ Route::view('way_house_proof', 'recommendation::admin.relation.way_house_proof')
 Route::view('fort_detail_proof', 'recommendation::admin.relation.fort_detail_proof')->name('fort_detail_proof');
 
 Route::prefix('setting')->as('setting.')->group(function () {
-    Route::resource('{applicationTypeEnum}/formBuilder', FormBuilderController::class);
-    Route::resource('{applicationTypeEnum}/recommendationTemplate', RecommendationTemplateController::class);
+    Route::get('{applicationTypeEnum}/formBuilder/{formBuilder}/updateStatus', [FormBuilderController::class,'updateStatus'])->name('formBuilder.updateStatus');
+    Route::resource('{applicationTypeEnum}/formBuilder', FormBuilderController::class)->names('formBuilder');
+    Route::get('{applicationTypeEnum}/recommendationTemplate/{recommendationTemplate}/updateStatus',[RecommendationTemplateController::class,'updateStatus'])->name('recommendationTemplate.updateStatus');
+    Route::resource('{applicationTypeEnum}/recommendationTemplate', RecommendationTemplateController::class)->names('recommendationTemplate');
     Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
 });
 

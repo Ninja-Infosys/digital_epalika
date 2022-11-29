@@ -41,7 +41,7 @@
                                 <th>क्र.स</th>
                                 <th>फारम बिल्डर नाम</th>
                                 <th>स्थिति</th>
-                                <th>सिर्जना गरियो</th>
+                                <th>मिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -49,11 +49,13 @@
                             @foreach ($formBuilders as $formBuilder)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $formBuilder->application_type->label() ?? '' }}</td>
+                                    <td>{{ $formBuilder->title?? '' }}</td>
                                     <td>
-                                        <a href="">
-                                            <i class="fa fa-2x fa-toggle-on"></i>
+                                        @can('formBuilder_access')
+                                        <a href="{{route('admin.recommendation.setting.formBuilder.updateStatus',[$applicationTypeEnum,$formBuilder])}}">
+                                            <i class="fa fa-2x  {{$formBuilder->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                         </a>
+                                        @endcan
                                     </td>
                                     <td>
                                         <x-ad-to-bs id="fb_{{$loop->iteration}}" adDate="{{$formBuilder->created_at->toDateString()}}" />
@@ -78,9 +80,11 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
+                                                @if($formBuilder->status===0)
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
+                                                @endif
                                             </form>
                                         @endcan
                                     </td>
@@ -114,6 +118,7 @@
                                 <th>शिर्षक </th>
                                 <th>बर्ग</th>
                                 <th>स्थिति</th>
+                                <th>मिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -122,19 +127,38 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$recommendationTemplate->title ??''}}</td>
-                                    <td>{{$recommendationTemplate->for->label() ??''}}</td>
+                                    <td>{{$recommendationTemplate->application_type->label() ??''}}</td>
                                     <td>
-                                        <a href="">
-                                            <i class="fa fa-2x fa-toggle-on"></i>
-                                        </a>
+                                        @can('recommendationTemplate_access')
+                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$applicationTypeEnum,$recommendationTemplate])}}">
+                                                <i class="fa fa-2x  {{$recommendationTemplate->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                            </a>
+                                        @endcan
+                                    </td>
+                                    <td>
+                                        <x-ad-to-bs id="fb1_{{$loop->iteration}}" adDate="{{$recommendationTemplate->created_at->toDateString()}}" />
                                     </td>
                                     <td>
                                         @can('recommendationTemplate_edit')
                                             <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
                                                class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
+
+                                            <form
+                                                action="{{ route('admin.recommendation.setting.recommendationTemplate.destroy', [$applicationTypeEnum,$recommendationTemplate]) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                @if($recommendationTemplate->status===0)
+                                                    @can('recommendationTemplate_delete')
+                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                    @endcan
+                                                @endif
+                                            </form>
                                     </td>
                                 </tr>
                             @empty

@@ -47,4 +47,17 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="header-title">३. उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको विवरण</h4>
+                </div>
+                <div class="card-body">
+                    @livewire('plan::consumer-committee-livewire',['project_id'=>$project->id])
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
