@@ -60,4 +60,10 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @livewire('plan::installment-detail-livewire',['project_id'=>$project->id])
+        </div>
+    </div>
 @endsection
