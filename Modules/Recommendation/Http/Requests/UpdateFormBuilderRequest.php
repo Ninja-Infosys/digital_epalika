@@ -17,8 +17,8 @@ class UpdateFormBuilderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'application_type' => ['required', new Enum(ApplicationTypeEnum::class)],
             'form' => ['required', 'json'],
+            'title' => ['nullable', 'string', 'max:255']
         ];
     }
 }

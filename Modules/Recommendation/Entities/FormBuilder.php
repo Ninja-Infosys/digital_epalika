@@ -22,6 +22,8 @@ class FormBuilder extends Model
     protected $fillable = [
         'application_type',
         'form',
+        'title',
+        'status'
     ];
 
     protected $casts = [

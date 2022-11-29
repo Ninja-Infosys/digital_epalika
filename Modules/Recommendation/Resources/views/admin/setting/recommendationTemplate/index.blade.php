@@ -44,15 +44,25 @@
                                 <th>क्र.स</th>
                                 <th>शिर्षक </th>
                                 <th>बर्ग</th>
+                                <th>स्थिति</th>
+                                <th>Date</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($recommendationTemplates as $recommendationTemplat)
+                            @forelse($recommendationTemplates as $recommendationTemplate)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$recommendationTemplate->title}}</td>
                                     <td>{{$recommendationTemplate->for->label() ??''}}</td>
+                                    <td>
+                                        <a href="">
+                                            <i class="fa fa-2x fa-toggle-on"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <x-ad-to-bs id="fb_{{$loop->iteration}}" adDate="{{$formBuilder->created_at->toDateString()}}" />
+                                    </td>
                                     <td>
                                         @can('recommendationTemplate_edit')
                                             <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
