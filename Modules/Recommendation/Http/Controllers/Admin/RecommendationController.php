@@ -64,12 +64,12 @@ class RecommendationController extends Controller
 
         $builder = $this->getDefinition($applicationTypeEnum);
 
-        if (empty($builder)) {
+        if ($builder === null) {
             return $this->redirectIfEmptyDefination($applicationTypeEnum);
         }
 
         $data = $request->validateDynamicForm(
-            $builder?->form,
+            $builder->form,
             $request->get('submissionValues'),
             null
         );

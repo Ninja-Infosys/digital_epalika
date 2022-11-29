@@ -78,7 +78,7 @@
                                         @endcan
                                         @can('recommendation_delete')
                                             <form
-                                                action="{{ route('admin.recommendation.recommendation.edit', [$applicationTypeEnum, $recommendation]) }}"
+                                                action="{{ route('admin.recommendation.recommendation.destroy', [$applicationTypeEnum, $recommendation]) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
