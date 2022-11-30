@@ -10,6 +10,7 @@ enum NoticeTypeEnum: string
     //for consultant
     case TECHNICIAN_APPROVAL = 'technician_approval';
     case ENGINEER_APPROVAL = 'engineer_approval';
+    case MAP_ACCEPTANCE = 'map_acceptance';
     case APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR = 'approval_letter_from_building_contractor';
     case BUILDING_DESIGN_DETAILS = 'building_design_details';
     case BUILDING_COMPLIANCE_CHECKLIST = 'building_compliance_checklist';
@@ -48,7 +49,7 @@ enum NoticeTypeEnum: string
 
 
 
-    case MAP_ACCEPTANCE = 'map_acceptance';
+
     case MAP_PASS_FOR_BUILDING = 'map_pass_building';
 
     //certificate enums
