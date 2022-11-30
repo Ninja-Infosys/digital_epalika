@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Modules\EMap\Entities\FourFort;
 use Modules\EMap\Entities\MapApply;
+use Modules\EMap\Enums\FourSideParticularEnum;
 
 class FourFortDetailEditLivewire extends Component
 {
@@ -18,7 +19,7 @@ class FourFortDetailEditLivewire extends Component
     public function mount(MapApply $mapApply): void
     {
         $this->mapApply = $mapApply;
-
+        $loadedFourFort = collect();
         $mapApply->load('fourForts');
         foreach ($mapApply->fourForts as $fourFort) {
             $this->fourFortDetails[] = [
@@ -29,7 +30,23 @@ class FourFortDetailEditLivewire extends Component
                 'west' => $fourFort->west ?? null,
                 'north' => $fourFort->north ?? null,
             ];
+
+            $loadedFourFort->push($fourFort->detail);
         }
+
+        foreach (FourSideParticularEnum::cases() as $forts) {
+            if (!$loadedFourFort->contains($forts)) {
+                $this->fourFortDetails[] = [
+                    'id' => null,
+                    'detail' => $forts->value ?? null,
+                    'east' => null,
+                    'south' => null,
+                    'west' => null,
+                    'north' => null,
+                ];
+            }
+        }
+
     }
 
     public function rules(): array
@@ -40,11 +57,11 @@ class FourFortDetailEditLivewire extends Component
 
         return [
             'fourFortDetails' => ['required', 'array'],
-            'fourFortDetails.'.$this->dataToEdit.'.detail' => ['required'],
-            'fourFortDetails.'.$this->dataToEdit.'.east' => ['required'],
-            'fourFortDetails.'.$this->dataToEdit.'.south' => ['required'],
-            'fourFortDetails.'.$this->dataToEdit.'.west' => ['required'],
-            'fourFortDetails.'.$this->dataToEdit.'.north' => ['required'],
+            'fourFortDetails.' . $this->dataToEdit . '.detail' => ['required'],
+            'fourFortDetails.' . $this->dataToEdit . '.east' => ['required'],
+            'fourFortDetails.' . $this->dataToEdit . '.south' => ['required'],
+            'fourFortDetails.' . $this->dataToEdit . '.west' => ['required'],
+            'fourFortDetails.' . $this->dataToEdit . '.north' => ['required'],
         ];
     }
 
@@ -60,7 +77,7 @@ class FourFortDetailEditLivewire extends Component
             DB::transaction(function () {
                 $dataToSave = $this->fourFortDetails[$this->dataToEdit];
 
-                if (! empty($dataToSave['id'])) {
+                if (!empty($dataToSave['id'])) {
                     FourFort::find($dataToSave['id'])?->update($dataToSave);
                 }
             });
