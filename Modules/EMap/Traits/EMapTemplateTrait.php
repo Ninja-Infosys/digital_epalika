@@ -3,6 +3,7 @@
 namespace Modules\EMap\Traits;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Modules\EMap\Entities\EMapTemplate;
@@ -152,7 +153,7 @@ trait EMapTemplateTrait
 
     public function getTemplateDataAttribute(): Collection
     {
-        return EMapTemplate::get()->map(function ($applicationTemplate) {
+        return $this->getEmapTemplates()->map(function ($applicationTemplate) {
             $data = $this->getData($applicationTemplate->data);
 
             return [
@@ -164,7 +165,8 @@ trait EMapTemplateTrait
 
     public function getSpecificTemplateData(NoticeTypeEnum $noticeTypeEnum): string
     {
-        $mapTemplate = EMapTemplate::where('for', $noticeTypeEnum->value)->first();
+        $eMapTemplate = $this->getEmapTemplates();
+        $mapTemplate = $eMapTemplate->where('for', $noticeTypeEnum)->first();
 
         if ($mapTemplate) {
             return $this->getData($mapTemplate->data);
@@ -268,7 +270,7 @@ trait EMapTemplateTrait
     private function getFourFortsReplacement(): array
     {
         return [
-            '[@fourForts]' => (string) View::make('emap::inc.four_forts_table', [
+            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
                 'fourForts' => $this->fourForts,
             ]),
         ];
@@ -343,7 +345,7 @@ trait EMapTemplateTrait
     private function getCriteriaDetailsReplacement(): array
     {
         return [
-            '[@criteriaDetails]' => (string) View::make('emap::inc.criteria_details', [
+            '[@criteriaDetails]' => (string)View::make('emap::inc.criteria_details', [
                 'criteriaDetails' => $this->criteriaDetails,
             ]),
         ];
@@ -352,9 +354,19 @@ trait EMapTemplateTrait
     private function getBuildingDetailsReplacement(): array
     {
         return [
-            '[@buildingDetails]' => (string) View::make('emap::inc.building_details', [
+            '[@buildingDetails]' => (string)View::make('emap::inc.building_details', [
                 'buildingDetails' => $this->buildingDetails,
             ]),
         ];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmapTemplates(): mixed
+    {
+        return Cache::rememberForever('eMapTemplates', function () {
+            return EMapTemplate::all();
+        });
     }
 }

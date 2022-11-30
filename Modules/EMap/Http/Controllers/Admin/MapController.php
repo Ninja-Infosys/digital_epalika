@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Notification;
@@ -33,7 +34,11 @@ class MapController extends Controller
             $application_types->push($applicationType->value);
         }
 
-        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])->sentToAdmin()->isMapVerified($applicationFormTypeEnum)->get();
+        $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])
+            ->sentToAdmin()
+            ->isMapVerified($applicationFormTypeEnum)
+            ->get();
+
         return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum'));
 
 
@@ -51,7 +56,10 @@ class MapController extends Controller
         $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
             $query->latest();
         }]);
-        $districts = District::all();
+
+        $districts = Cache::rememberForever('allDistricts', function ()  {
+            return District::all();
+        });;
 
         return view('emap::admin.map.show', compact('mapApply', 'districts', 'applicationFormTypeEnum'));
     }
@@ -83,9 +91,6 @@ class MapController extends Controller
 
         return back();
     }
-
-
-
 
 
     public function superstructure(MapApply $mapApply): Factory|View|Application

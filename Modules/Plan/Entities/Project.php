@@ -97,4 +97,9 @@ class Project extends Model
     {
         return $this->hasOne(ConsumerCommittee::class);
     }
+
+    public function projectInstallmentDetails(): HasMany
+    {
+        return $this->hasMany(ProjectInstallmentDetail::class);
+    }
 }

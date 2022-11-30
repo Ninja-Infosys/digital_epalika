@@ -100,7 +100,10 @@
                                     <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
                                         <h4 class="mt-2"> {{$noticeType->label()}}</h4>
                                         <div
-                                            class="card-body mt-2 {{$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType) ? 'border_black':'border_yellow'}}">
+                                            class="card-body mt-2 {{$mapApply->applyMapNotices
+->pluck('file_type')
+->unique()
+->contains($noticeType) ? 'border_black':'border_yellow'}}">
                                             <div>
                                                 @if(!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
 
@@ -172,7 +175,11 @@
                                 <section id="{{\Illuminate\Support\Str::limit($noticeType->value,10,'mmm')}}">
                                     <h4 class="mt-2"> {{$noticeType->label()}}</h4>
                                     <div
-                                        class="card-body mt-2 {{$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType) ? 'border_black':'border_yellow'}}">
+                                        class="card-body mt-2 {{$mapApply
+                                             ->applyMapNotices
+                                             ->pluck('file_type')
+                                             ->unique()
+                                             ->contains($noticeType) ? 'border_black':'border_yellow'}}">
                                         <div>
                                             @if(!$mapApply->applyMapNotices->pluck('file_type')->unique()->contains($noticeType))
 
@@ -232,8 +239,7 @@
                                             id="print{{\Illuminate\Support\Str::limit($value,10,'pt-'.$loop->iteration)}}"
                                             class="ckEditor">
                                             {!!  $mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->data
-                                         ??  $mapApply->template_data
-                                         ->where('for', \Modules\EMap\Enums\NoticeTypeEnum::tryFrom($noticeType->value))?->first()['data']
+                                         ??  $mapApply->getSpecificTemplateData($noticeType)
                                          ?? ''!!}
                                         </div>
 
