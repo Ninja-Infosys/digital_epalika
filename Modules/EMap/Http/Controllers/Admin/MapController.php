@@ -57,9 +57,7 @@ class MapController extends Controller
             $query->latest();
         }]);
 
-        $districts = Cache::rememberForever('allDistricts', function ()  {
-            return District::all();
-        });;
+        $districts = get_districts();
 
         return view('emap::admin.map.show', compact('mapApply', 'districts', 'applicationFormTypeEnum'));
     }

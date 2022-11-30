@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
+use App\Models\Address\Province;
 use App\Models\FeatureActivation;
 
 if (!function_exists('get_setting')) {
@@ -12,5 +15,55 @@ if (!function_exists('get_setting')) {
         $setting = $settings->where('feature_name_en', $key)->first();
 
         return $setting == null ? $default : $setting->feature_status;
+    }
+}
+
+if (!function_exists('get_provinces')) {
+    function get_provinces(int $provinceId = null)
+    {
+        $provinces = Cache::rememberForever('provinces', function () {
+            return Province::all();
+        });
+
+        if ($provinceId !== null) {
+            $provinces=$provinces->where('id', $provinceId)->first();
+        }
+
+        return $provinces ?? [];
+    }
+}
+
+if (!function_exists('get_districts')) {
+    function get_districts(array $province_ids = [], int $districtId = null)
+    {
+        $allDistricts = Cache::rememberForever('allDistricts', function () {
+            return District::orderBy('province_id')->get();
+        });
+        if (!empty($province_ids)) {
+            $allDistricts = $allDistricts->whereIn('province_id', $province_ids);
+        }
+
+        if ($districtId !== null) {
+            $allDistricts = $allDistricts->where('id', $districtId)->first();
+        }
+
+        return $allDistricts ?? [];
+    }
+}
+
+if (!function_exists('get_local_bodies')) {
+    function get_local_bodies(array $district_ids = [], int $localBodyId = null)
+    {
+        $allLocalBodies = Cache::rememberForever('localBodies', function () {
+            return LocalBody::all();
+        });
+        if (!empty($district_ids)) {
+            $allLocalBodies = $allLocalBodies->whereIn('district_id', $district_ids);
+        }
+
+        if ($localBodyId !== null) {
+            $allLocalBodies = $allLocalBodies->where('id', $localBodyId)->first();
+        }
+        return $allLocalBodies ?? [];
     }
 }

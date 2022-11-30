@@ -2,7 +2,7 @@
     <div class="card-header d-flex justify-content-between">
         <h4 class="header-title">५. उपभोक्ता समिति समुदायमा अधारित संस्था गैरसरकारी संस्थाले प्राप्त गर्ने किस्ता विवरण:</h4>
         <button type="button" wire:click="openCreateModal" class="btn btn-xs btn-outline-primary">
-            <i class="fa fa-plus-circle"> Add New</i>
+            <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
         </button>
     </div>
     <div class="card-body">
@@ -39,18 +39,18 @@
             </table>
         </div>
         @if($createModalOpened)
-            <div class="modal fade show" id="bs-example-modal-lg" tabindex="-1" aria-labelledby="myLargeModalLabel" aria-modal="true" role="dialog" style="display: block;">
+            <div class="modal fade show" id="bs-example-modal-lg" tabindex="-1" aria-labelledby="myLargeModalLabel" aria-modal="true" role="dialog" style="display: block;backdrop-filter: brightness(50%);">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" wire:click="closeModal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             ...
                         </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
+                    </div>
+                </div>
             </div>
         @endif
     </div>

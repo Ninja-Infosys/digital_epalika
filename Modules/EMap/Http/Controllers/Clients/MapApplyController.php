@@ -27,7 +27,7 @@ class MapApplyController extends Controller
 
     public function show(MapApply $mapApply)
     {
-        $districts = District::get();
+        $districts = get_districts();
         $mapApply->load('fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
 
         return view('emap::organization.map-applies.show', compact('mapApply', 'districts'));
