@@ -13,7 +13,7 @@
                     </div>
                     <h4>दरखास्त फारम साथ संलग्न कागजातहरु</h4>
                     <h6>तल दिएका कागजातहरु अनिवार्य राख्नु पर्नेछ । </h6>
-                    <div class="vertical-scroll shadow">
+                    <div class="scroll shadow">
                         <div class="doc">
                         <table class="table table-bordered">
                             <thead>
@@ -152,12 +152,12 @@
                 color: var(--mainColor);
             }
 
-            .vertical-scroll {
+            .scroll {
                 border-radius: 5px;
                 border: 2px solid #0D6EFD;
                 width: 100%;
-                height: 53vh;
-                margin: 0  auto;
+                height: 50vh;
+                margin: 10px  auto;
                 overflow: hidden;
                 position: relative;
                 box-sizing: border-box;
