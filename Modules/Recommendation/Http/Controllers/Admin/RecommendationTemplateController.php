@@ -66,7 +66,7 @@ class RecommendationTemplateController extends Controller
         $recommendationTemplate->update($request->validated());
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.recommendation.setting.recommendationTemplate.index'));
+        return back();
     }
 
     public function destroy(ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
