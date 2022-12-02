@@ -36,8 +36,8 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12-off mb-2">
-                                <label for="type" class="form-label">प्रकार *</label>
-                                <input id="title" type="text" name="type" placeholder="प्रकार"
+                                <label for="type" class="form-label">प्रकार आबश्यक छ *</label>
+                                <input id="title" type="text" name="type" placeholder="प्रकार आबश्यक छ "
                                        class="form-control @error('type') is-invalid @enderror"
                                        value="{{old('type')}}">
                                 @error('type')
@@ -46,8 +46,8 @@
                             </div>
 
                             <div class="col-md-12-off mb-2">
-                                <label for="title" class="form-label">Title *</label>
-                                <input id="title" type="text" name="title" placeholder="Title"
+                                <label for="title" class="form-label">शिर्षक आबस्यक छ *</label>
+                                <input id="title" type="text" name="title" placeholder="शिर्षक आबस्यक छ"
                                        class="form-control @error('title') is-invalid @enderror"
                                        value="{{old('title')}}">
                                 @error('title')
@@ -56,8 +56,8 @@
                             </div>
 
                             <div class="col-md-12-off mb-2">
-                                <label for="contact_no" class="form-label">Contact Number *</label>
-                                <input id="title" type="text" name="contact_no" placeholder="Contact Number"
+                                <label for="contact_no" class="form-label">सम्पर्क नं. आबश्यक छ *</label>
+                                <input id="title" type="text" name="contact_no" placeholder="सम्पर्क नं. आबश्यक छ"
                                        class="form-control @error('contact_no') is-invalid @enderror"
                                        value="{{old('contact_no')}}">
                                 @error('contact_no')
