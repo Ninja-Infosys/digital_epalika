@@ -11,6 +11,10 @@ enum NoticeTypeEnum: string
     case MAP_ACCEPTANCE = 'map_acceptance';
     case TECHNICIAN_APPROVAL = 'technician_approval';
     case ENGINEER_APPROVAL = 'engineer_approval';
+    case BUILDING_DESIGN = 'building_design';
+    case STRUCTURAL_DETAIL = 'structural_detail';
+    case DESIGN_RELATED = 'design_related';
+    case ELECTRICAL_DESIGN = 'electrical_design';
     case APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR = 'approval_letter_from_building_contractor';
     case BUILDING_DESIGN_DETAILS = 'building_design_details';
     case BUILDING_COMPLIANCE_CHECKLIST = 'building_compliance_checklist';
@@ -61,6 +65,10 @@ enum NoticeTypeEnum: string
             self::TECHNICIAN_APPROVAL => 'नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र',
             self::MAP_ACCEPTANCE => 'भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम',
             self::ENGINEER_APPROVAL => 'भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र',
+            self::BUILDING_DESIGN => 'भवन डिजाईनको विवरण (आर्किटेक्चरल डिजाइन सम्बन्धी)',
+            self::STRUCTURAL_DETAIL => 'स्ट्रक्चरल डिजाईन सम्बन्धी विवरण फारम',
+            self::DESIGN_RELATED => 'स्यानिटरि डिजाईन सम्बन्धी',
+            self::ELECTRICAL_DESIGN => 'इलेक्ट्रिकल डिजाईन सम्बन्धी',
             self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR => 'भवन निर्माण गर्ने ठेकेदारद्वारा मन्जुरी पत्र',
             self::MAP_PASS_FOR_BUILDING => 'भवन निर्माणको लागि नक्सापास सम्बन्धमा',
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE => 'सुपरस्ट्रक्चरको निर्माण कार्यको लागि इजाजत बारे',
@@ -127,7 +135,11 @@ enum NoticeTypeEnum: string
             //application enums
             self::MAP_ACCEPTANCE => true,
             self::TECHNICIAN_APPROVAL => true,
+            self::BUILDING_DESIGN => true,
             self::ENGINEER_APPROVAL => true,
+            self::STRUCTURAL_DETAIL => true,
+            self::DESIGN_RELATED => true,
+            self::ELECTRICAL_DESIGN => true,
             self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR => false,
             self::MAP_PASS_FOR_BUILDING => true,
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE => false,
@@ -191,8 +203,12 @@ enum NoticeTypeEnum: string
         return match ($value) {
             //application enums
             self::MAP_ACCEPTANCE,
+            self::BUILDING_DESIGN,
             self::TECHNICIAN_APPROVAL,
             self::ENGINEER_APPROVAL,
+            self::STRUCTURAL_DETAIL,
+            self::DESIGN_RELATED,
+            self::ELECTRICAL_DESIGN,
             self::MAP_PASS_FOR_BUILDING,
             self::REGARDING_PERMISSION_FOR_CONSTRUCTION_WORK_OF_SUPERSTRUCTURE,
             self::CONSTRUCTION_COMPLETION_CERTIFICATE_APPLICATION,
@@ -255,6 +271,10 @@ enum NoticeTypeEnum: string
             self::TECHNICIAN_APPROVAL,
             self::BUILDING_COMPLIANCE_CHECKLIST,
             self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR,
+            self::BUILDING_DESIGN,
+            self::STRUCTURAL_DETAIL,
+            self::DESIGN_RELATED,
+            self::ELECTRICAL_DESIGN,
             self::ENGINEER_APPROVAL,
             self::BUILDING_DESIGN_DETAILS,
             self::MAP_PASS_FOR_BUILDING,
