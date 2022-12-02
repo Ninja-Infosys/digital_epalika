@@ -38,7 +38,7 @@ Route::prefix('userManagement')->as('userManagement.')->group(function () {
 //chunk file upload
 Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileStore'])->name('fileUpload.chunkStore');
 
-//Fiscal Year
+//setting
 Route::prefix('setting')->group(function () {
     Route::resource('fiscalYear', FiscalYearController::class);
 
