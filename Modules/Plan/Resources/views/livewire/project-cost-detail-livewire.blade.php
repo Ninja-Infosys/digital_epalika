@@ -317,7 +317,7 @@
                     </td>
                     <td width="90">
                         <input
-                            type="text"
+                            type="number"
                             wire:model="form.benefitedMemberDetails.{{$key}}.no_of_female"
                             class="form-control form-control-sm"
                             placeholder="महिला"
@@ -328,7 +328,7 @@
                     </td>
                     <td width="90">
                         <input
-                            type="text"
+                            type="number"
                             wire:model="form.benefitedMemberDetails.{{$key}}.no_of_male"
                             class="form-control form-control-sm"
                             placeholder="पुरुष"

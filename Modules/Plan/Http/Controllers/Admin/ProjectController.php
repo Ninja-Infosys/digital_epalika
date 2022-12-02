@@ -13,6 +13,7 @@ use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
+use Modules\Plan\Entities\ProjectAgreementTerm;
 
 class ProjectController extends Controller
 {
@@ -53,7 +54,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectCostDetail','projectGrantDetails');
+        $project->load('projectCostDetail','projectGrantDetails','projectAgreementTerm');
 
         return view('plan::admin.project.show',compact('project'));
     }
@@ -61,5 +62,22 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $this->checkAuthorization('project_delete');
+    }
+
+    public function saveProjectAgreementTerm(Request $request,Project $project)
+    {
+        $request->validate([
+            'data'=>['required']
+        ]);
+
+        ProjectAgreementTerm::updateOrCreate(
+            ['project_id' => $project->id],
+            [
+                'data'=>$request->input('data')
+            ]
+        );
+
+        toast('सम्झौता शर्त सफलतापूर्वक अद्यावधिक गरियो','success');
+        return back();
     }
 }

@@ -48,7 +48,7 @@ Route::get('readAllNotification', [NotificationController::class, 'readAllNotifi
 //chunk file upload
 Route::post('file-upload/chunkStore', [FileUploadController::class, 'chunkFileStore'])->name('fileUpload.chunkStore');
 
-//Fiscal Year
+// setting
 Route::prefix('setting')->group(function () {
     Route::get('dashboard', SettingDashboardController::class)->name('setting.dashboard');
 

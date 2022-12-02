@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h4 class="header-title">
-            ४. उपभोक्ता समिति समुदायमा अधारित संस्था गैरसरकारी संस्थाले प्राप्त गर्ने किस्ता विवरण:
+            ४. मोविलाईजेशन पेश्की/रनिङ विल विवरण
         </h4>
         <button type="button" wire:click="create" class="btn btn-xs btn-outline-primary">
             <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
@@ -12,28 +12,26 @@
             <table class="table table-sm table-bordered">
                 <thead>
                 <tr>
-                    <th>किस्ताको क्रम</th>
+                    <th>बिल/पेश्कीको प्रकार</th>
+                    <th>बिल/पेश्कीको क्रम</th>
                     <th>मिति</th>
-                    <th>निर्माण समाग्री परिमाण</th>
-                    <th>किस्ताको रकम</th>
-                    <th>कैफियत</th>
+                    <th> रकम</th>
                     <th> #</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($project->projectInstallmentDetails as $key=>$installmentDetail)
+                @forelse($project->projectBidSubmissions as $key=>$projectBidSubmission)
                     <tr>
-                        <td>{{$installmentDetail->installment_type->label()}}</td>
-                        <td>{{$installmentDetail->date}}</td>
-                        <td>{{$installmentDetail->construction_material_quantity}}</td>
-                        <td>{{$installmentDetail->amount}}</td>
-                        <td>{{$installmentDetail->remarks}}</td>
+                        <td>{{$projectBidSubmission->submission_type->label()}}</td>
+                        <td>{{$projectBidSubmission->submission_no}}</td>
+                        <td>{{$projectBidSubmission->date}}</td>
+                        <td>{{$projectBidSubmission->amount}}</td>
                         <td>
-                            <button type="button" wire:click="edit({{$installmentDetail->id}})"
+                            <button type="button" wire:click="edit({{$projectBidSubmission->id}})"
                                     class="btn btn-xs btn-outline-primary">
                                 <i class="fa fa-edit"></i>
                             </button>
-                            <button type="button" wire:click="deleteInstallmentDetail({{$installmentDetail->id}})"
+                            <button type="button" wire:click="delete({{$projectBidSubmission->id}})"
                                     class="btn btn-xs btn-outline-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -47,15 +45,6 @@
                     </tr>
                 @endforelse
                 </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="3" class="text-center">जम्मा रकम</td>
-                    <td>
-                        {{$project->project_installment_details_sum_amount}}
-                    </td>
-                    <td></td>
-                </tr>
-                </tfoot>
             </table>
         </div>
         <div class="modal fade show {{!$createModalOpened ? 'd-none' : ''}}" id="bs-example-modal-lg" tabindex="-1"
@@ -65,7 +54,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <h4 class="modal-title text-light" id="myLargeModalLabel">
-                            किस्ता विवरण थप्नुहोस्
+                             विल विवरण थप्नुहोस्
                         </h4>
                         <button type="button" class="btn-close" wire:click="closeModal" aria-label="Close"></button>
                     </div>
@@ -73,25 +62,38 @@
                         <form wire:submit.prevent="store">
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="installment_type" class="form-label">किस्ताको क्रम *</label>
+                                    <label for="submission_type" class="form-label">बिल/पेश्कीको प्रकार *</label>
                                     <select
-                                        wire:model="form.installment_type"
-                                        id="installment_type"
-                                        class="form-select @error('form.installment_type') is-invalid @enderror">
+                                        wire:model="form.submission_type"
+                                        id="submission_type"
+                                        class="form-select @error('form.submission_type') is-invalid @enderror">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach(\Modules\Plan\Enums\InstallmentTypeEnum::cases() as $installmentType)
+                                        @foreach(\Modules\Plan\Enums\BidSubmissionTypeEnum::cases() as $submissionType)
                                             <option
-                                                value="{{$installmentType->value}}">
-                                                {{$installmentType->label()}}
+                                                value="{{$submissionType->value}}">
+                                                {{$submissionType->label()}}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('form.installment_type')
+                                    @error('form.submission_type')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label"> मिति </label>
+                                    <label for="submission_no" class="form-label">बिल/पेश्कीको क्रम</label>
+                                    <input
+                                        type="text"
+                                        wire:model="form.submission_no"
+                                        class="form-control @error('form.submission_no') is-invalid @enderror"
+                                        id="submission_no"
+                                        placeholder="बिल/पेश्कीको क्रम"
+                                    />
+                                    @error('form.submission_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="date" class="form-label"> मिति *</label>
                                     <input
                                         type="text"
                                         wire:model="form.date"
@@ -104,41 +106,15 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="amount" class="form-label"> किस्ताको रकम * </label>
+                                    <label for="amount" class="form-label"> रकम * </label>
                                     <input
                                         type="number"
                                         wire:model="form.amount"
                                         class="form-control @error('form.amount') is-invalid @enderror"
                                         id="amount"
-                                        placeholder="किस्ताको रकम"
+                                        placeholder="रकम"
                                     />
                                     @error('form.amount')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="construction_material_quantity" class="form-label"> निर्माण समाग्री
-                                        परिमाण </label>
-                                    <input
-                                        type="text"
-                                        wire:model="form.construction_material_quantity"
-                                        class="form-control @error('form.construction_material_quantity') is-invalid @enderror"
-                                        id="construction_material_quantity"
-                                        placeholder="निर्माण समाग्री परिमाण"
-                                    />
-                                    @error('form.construction_material_quantity')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="remarks" class="form-label">कैफियत</label>
-                                    <textarea
-                                        wire:model="form.remarks"
-                                        id="remarks"
-                                        class="form-control @error('form.remarks') is-invalid @enderror"
-                                        placeholder="कैफियत"
-                                        cols="30" rows="2"></textarea>
-                                    @error('form.remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -164,7 +140,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <h4 class="modal-title text-light" id="myLargeModalLabel">
-                            किस्ता विवरण सम्पादन गर्नुहोस्
+                            विल विवरण सम्पादन गर्नुहोस्
                         </h4>
                         <button type="button" class="btn-close" wire:click="closeModal" aria-label="Close"></button>
                     </div>
@@ -172,25 +148,38 @@
                         <form wire:submit.prevent="update">
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="installment_type" class="form-label">किस्ताको क्रम *</label>
+                                    <label for="submission_type" class="form-label">बिल/पेश्कीको प्रकार *</label>
                                     <select
-                                        wire:model="form.installment_type"
-                                        id="installment_type"
-                                        class="form-select @error('form.installment_type') is-invalid @enderror">
+                                        wire:model="form.submission_type"
+                                        id="submission_type"
+                                        class="form-select @error('form.submission_type') is-invalid @enderror">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach(\Modules\Plan\Enums\InstallmentTypeEnum::cases() as $installmentType)
+                                        @foreach(\Modules\Plan\Enums\BidSubmissionTypeEnum::cases() as $submissionType)
                                             <option
-                                                value="{{$installmentType->value}}">
-                                                {{$installmentType->label()}}
+                                                value="{{$submissionType->value}}">
+                                                {{$submissionType->label()}}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('form.installment_type')
+                                    @error('form.submission_type')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label"> मिति </label>
+                                    <label for="submission_no" class="form-label">बिल/पेश्कीको क्रम</label>
+                                    <input
+                                        type="text"
+                                        wire:model="form.submission_no"
+                                        class="form-control @error('form.submission_no') is-invalid @enderror"
+                                        id="submission_no"
+                                        placeholder="बिल/पेश्कीको क्रम"
+                                    />
+                                    @error('form.submission_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="date" class="form-label"> मिति *</label>
                                     <input
                                         type="text"
                                         wire:model="form.date"
@@ -203,41 +192,15 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="amount" class="form-label"> किस्ताको रकम * </label>
+                                    <label for="amount" class="form-label"> रकम * </label>
                                     <input
                                         type="number"
                                         wire:model="form.amount"
                                         class="form-control @error('form.amount') is-invalid @enderror"
                                         id="amount"
-                                        placeholder="किस्ताको रकम"
+                                        placeholder="रकम"
                                     />
                                     @error('form.amount')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="construction_material_quantity" class="form-label"> निर्माण समाग्री
-                                        परिमाण </label>
-                                    <input
-                                        type="text"
-                                        wire:model="form.construction_material_quantity"
-                                        class="form-control @error('form.construction_material_quantity') is-invalid @enderror"
-                                        id="construction_material_quantity"
-                                        placeholder="निर्माण समाग्री परिमाण"
-                                    />
-                                    @error('form.construction_material_quantity')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="remarks" class="form-label">कैफियत</label>
-                                    <textarea
-                                        wire:model="form.remarks"
-                                        id="remarks"
-                                        class="form-control @error('form.remarks') is-invalid @enderror"
-                                        placeholder="कैफियत"
-                                        cols="30" rows="2"></textarea>
-                                    @error('form.remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
