@@ -24,7 +24,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card" style="height: 97%;">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">मेल सेटिंग</h4>
@@ -163,7 +163,7 @@
 
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary mt-4">
                             Save
                         </button>
                     </form>
@@ -202,6 +202,31 @@
                             Save
                         </button>
                     </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">निर्देशन</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="text-danger">Please be carefull when you are configuring SMTP. For incorrect configuration you will get error at the time of order place, new registration, sending newsletter.</p>
+                    <h4 class="mt-2">For Non-SSL</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item text-dark">Select sendmail for Mail Driver if you face any issue after configuring smtp as Mail Driver</li>
+                        <li class="list-group-item text-dark">Set Mail Host according to your server Mail Client Manual Settings</li>
+                        <li class="list-group-item text-dark">Set Mail port as 587</li>
+                        <li class="list-group-item text-dark">Set Mail Encryption as ssl if you face issue with tls</li>
+                    </ul>
+                    <br>
+                    <h4>For SSL</h4>
+                    <ul class="list-group mar-no">
+                        <li class="list-group-item text-dark">Select sendmail for Mail Driver if you face any issue after configuring smtp as Mail Driver</li>
+                        <li class="list-group-item text-dark">Set Mail Host according to your server Mail Client Manual Settings</li>
+                        <li class="list-group-item text-dark">Set Mail port as 465</li>
+                        <li class="list-group-item text-dark">Set Mail Encryption as ssl</li>
+                    </ul>
                 </div>
             </div>
         </div>
