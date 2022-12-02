@@ -13,8 +13,10 @@ use App\Http\Controllers\Admin\Setting\DesignationController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
 use App\Http\Controllers\Admin\Setting\FeatureActivationController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
+use App\Http\Controllers\Admin\Setting\MailSettingController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\SettingDashboardController;
+use App\Http\Controllers\Admin\Setting\SmsSettingController;
 use App\Http\Controllers\Admin\Setting\Units\ExternalUnitConversionController;
 use App\Http\Controllers\Admin\Setting\Units\InternalUnitConversionController;
 use App\Http\Controllers\Admin\Setting\Units\MeasurementUnitController;
@@ -26,9 +28,7 @@ use App\Http\Controllers\Admin\Website\ImportantLinkController;
 use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
 use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
-use App\Http\Controllers\SmsController;
 use App\Http\Controllers\TechController;
-use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
@@ -54,15 +54,17 @@ Route::prefix('setting')->group(function () {
 
     //    sms
     Route::get('feature', [FeatureActivationController::class, 'showFeatureActivationPage'])->name('feature-activation');
-    Route::post('featureActivation/{featureActivation}', [FeatureActivationController::class, 'updateFeatureActivation'])->name('update-feature-activation');
+    Route::get('featureActivation/{featureActivation}', [FeatureActivationController::class, 'updateFeatureActivation'])->name('update-feature-activation');
 
 //    sms setting
-    Route::get('sms', [FeatureActivationController::class, 'smsSetting'])->name('sms-setting');
-    Route::post('sms', [FeatureActivationController::class, 'smsSetting'])->name('sms-setting');
+    Route::get('sms', [SmsSettingController::class, 'smsSetting'])->name('sms-setting');
+    Route::put('update-samaya-sms-config', [SmsSettingController::class, 'updateSamayaSmsConfig'])->name('update-samaya-sms-config');
+    Route::put('update-aakash-sms-config', [SmsSettingController::class, 'updateAakashSmsConfig'])->name('update-aakash-sms-config');
 
-//    mail settig
-    Route::get('mail', [FeatureActivationController::class, 'mailSetting'])->name('mail-setting');
-    Route::post('mail', [FeatureActivationController::class, 'mailSetting'])->name('mail-setting');
+//    mail setting
+    Route::get('mail', [MailSettingController::class, 'mailSetting'])->name('mail-setting');
+    Route::put('update-mail-setting', [MailSettingController::class, 'updateMailSetting'])->name('update-mail-setting');
+    Route::post('send-test-mail', [MailSettingController::class, 'sendTestMail'])->name('send-test-mail');
 
 
     Route::resource('ethnicity', EthnicityController::class);
