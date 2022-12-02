@@ -12,10 +12,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->string('office_name')->nullable();
-            $table->string('public_service')->nullable();
-            $table->string('service_fee')->nullable();
-            $table->string('from_fee_donation')->nullable();
-            $table->string('others')->nullable();
+            $table->double('public_service',12,2)->default(0);
+            $table->double('service_fee',12,2)->default(0);
+            $table->double('from_fee_donation',12,2)->default(0);
+            $table->double('others',12,2)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

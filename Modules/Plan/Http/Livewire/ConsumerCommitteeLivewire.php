@@ -11,6 +11,8 @@ use Modules\Plan\Enums\ConsumerCommitteePostEnum;
 
 class ConsumerCommitteeLivewire extends Component
 {
+    public Project $project;
+
     public array $form = [
         'name' => null,
         'address' => null,
@@ -23,15 +25,12 @@ class ConsumerCommitteeLivewire extends Component
         'experience_in_project' => null,
         'consumerCommitteeOfficials' => []
     ];
-    public object $project;
 
     protected $listeners = ['formationDateChanged', 'committeeRegistrationDateChanged', 'meetingDateChanged'];
 
-    public function mount($project_id = null)
+    public function mount(Project $project)
     {
-        if (!empty($project_id)) {
-            $this->assignConsumerCommitteeData($project_id);
-        }
+        $this->assignConsumerCommitteeData($project);
     }
 
     public function formationDateChanged($nepaliDate, $englishDate)
@@ -63,10 +62,9 @@ class ConsumerCommitteeLivewire extends Component
         $this->form['consumerCommitteeOfficials'] = array_values($this->form['consumerCommitteeOfficials']);
     }
 
-    private function assignConsumerCommitteeData($project_id)
+    private function assignConsumerCommitteeData($project)
     {
-        $project = Project::with('consumerCommittee.consumerCommitteeOfficials')->find($project_id);
-        $this->project = $project;
+        $this->project = $project->load('consumerCommittee.consumerCommitteeOfficials');
         if ($consumerCommittee = $project->consumerCommittee) {
             foreach ($this->form as $key => $data) {
                 if ($key != 'consumerCommitteeOfficials') {
@@ -145,7 +143,7 @@ class ConsumerCommitteeLivewire extends Component
         }
 
         $this->reset('form');
-        $this->assignConsumerCommitteeData($this->project->id);
+        $this->assignConsumerCommitteeData($this->project);
 
         $this->dispatchBrowserEvent('toast_message', [
             'type' => 'success',

@@ -10,6 +10,7 @@ use Modules\Plan\Http\Controllers\Admin\ProjectController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
+Route::post('project/{project}/agreement-term',[ProjectController::class,'saveProjectAgreementTerm'])->name('save-project-agreement-term');
 Route::resource('project', ProjectController::class);
 
 Route::prefix('setting')->group(function (){

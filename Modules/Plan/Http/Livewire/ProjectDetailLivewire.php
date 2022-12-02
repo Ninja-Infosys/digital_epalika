@@ -73,15 +73,15 @@ class ProjectDetailLivewire extends Component
         $this->form['extended_date'] = $nepaliDate;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'form.registration_no' => ['required','unique:projects,registration_no,'.$this->project->id],
             'form.project_name' => ['required'],
             'form.plan_area_id' => ['required'],
             'form.project_status' => ['required'],
-            'form.form.project_start_date' => ['nullable'],
-            'form.project_completion_date' => ['nullable'],
+            'form.project_start_date' => ['nullable'],
+            'form.project_completion_date' => ['nullable','after:form.project_start_date'],
             'form.plan_level_id' => ['required'],
             'form.ward_no' => ['nullable', 'integer'],
             'form.budget_source_id' => ['nullable'],

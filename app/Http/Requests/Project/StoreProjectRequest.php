@@ -20,7 +20,7 @@ class StoreProjectRequest extends FormRequest
             'plan_area_id' => ['required', Rule::exists('plan_areas', 'id')->withoutTrashed()],
             'project_status' => ['required'],
             'project_start_date' => ['nullable'],
-            'project_completion_date' => ['nullable'],
+            'project_completion_date' => ['nullable','after:project_start_date'],
             'plan_level_id' => ['required', Rule::exists('plan_levels', 'id')->withoutTrashed()],
             'ward_no' => ['nullable', 'integer'],
             'budget_source_id' => ['nullable', Rule::exists('budget_sources', 'id')->withoutTrashed()],
