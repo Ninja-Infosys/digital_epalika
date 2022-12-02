@@ -8,9 +8,9 @@ use Illuminate\Support\Collection;
 enum NoticeTypeEnum: string
 {
     //for consultant
+    case MAP_ACCEPTANCE = 'map_acceptance';
     case TECHNICIAN_APPROVAL = 'technician_approval';
     case ENGINEER_APPROVAL = 'engineer_approval';
-    case MAP_ACCEPTANCE = 'map_acceptance';
     case APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR = 'approval_letter_from_building_contractor';
     case BUILDING_DESIGN_DETAILS = 'building_design_details';
     case BUILDING_COMPLIANCE_CHECKLIST = 'building_compliance_checklist';
@@ -45,21 +45,9 @@ enum NoticeTypeEnum: string
     case REGARDING_SENDING_DETAILS = 'sending_details';
     case HEIR = 'heir';
     case PERMISSION = 'permission';
-
-
-
-
-
     case MAP_PASS_FOR_BUILDING = 'map_pass_building';
-
     //certificate enums
     case MAP_CERTIFICATE = 'map_certificate';
-
-
-
-
-
-
 
     public function label(): string
     {
@@ -70,8 +58,8 @@ enum NoticeTypeEnum: string
     {
         return match ($value) {
             //application enums
-            self::MAP_ACCEPTANCE => 'भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम',
             self::TECHNICIAN_APPROVAL => 'नक्सा बनाउने प्राविधिकद्वारा मन्जुरी पत्र',
+            self::MAP_ACCEPTANCE => 'भवन निर्माण सहिता अनुसार नक्शा / डिजाईनको लागि दरखास्त फाराम',
             self::ENGINEER_APPROVAL => 'भवन डिजाईन गर्ने प्राविधिकद्वारा मन्जुरी पत्र',
             self::APPROVAL_LETTER_FROM_BUILDING_CONTRACTOR => 'भवन निर्माण गर्ने ठेकेदारद्वारा मन्जुरी पत्र',
             self::MAP_PASS_FOR_BUILDING => 'भवन निर्माणको लागि नक्सापास सम्बन्धमा',
