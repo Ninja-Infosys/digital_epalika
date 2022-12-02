@@ -5,12 +5,12 @@
     </a>
 </li>
 @can('project_access')
-<li class="{{request()->is('admin/plan/project') ? 'active' : ''}}">
-    <a href="{{route('admin.plan.project.index')}}">
-        <i class="fa fa-list"></i>
-        <span> योजना/आयोजना दर्ता </span>
-    </a>
-</li>
+    <li class="{{request()->is('admin/plan/project') ? 'active' : ''}}">
+        <a href="{{route('admin.plan.project.index')}}">
+            <i class="fa fa-list"></i>
+            <span> योजना/आयोजना दर्ता </span>
+        </a>
+    </li>
 @endcan
 <li class="{{request()->is('admin/plan/report/*') ? 'active' : ''}}">
     <a href="#sidebarPlanReport"
@@ -61,20 +61,28 @@
                     </a>
                 </li>
             @endcan
-                @can('budgetHead_access')
-                    <li class="{{request()->is('admin/plan/setting/budgetHead') ? 'active' : ''}}">
-                        <a href="{{route('admin.plan.budgetHead.index')}}">
-                            <span> बजेट शिर्षक/उप-शिर्षक </span>
-                        </a>
-                    </li>
-                @endcan
-                @can('budgetSource_access')
-                    <li class="{{request()->is('admin/plan/setting/budgetSource') ? 'active' : ''}}">
-                        <a href="{{route('admin.plan.budgetSource.index')}}">
-                            <span> बजेट श्रोत </span>
-                        </a>
-                    </li>
-                @endcan
+            @can('budgetHead_access')
+                <li class="{{request()->is('admin/plan/setting/budgetHead') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.budgetHead.index')}}">
+                        <span> बजेट शिर्षक/उप-शिर्षक </span>
+                    </a>
+                </li>
+            @endcan
+            @can('budgetSource_access')
+                <li class="{{request()->is('admin/plan/setting/budgetSource') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.budgetSource.index')}}">
+                        <span> बजेट श्रोत </span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('planTemplate_access')
+                <li class="{{request()->is('admin/plan/setting/planTemplate') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planTemplate.index')}}">
+                        <span> टेम्प्लेट </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>
