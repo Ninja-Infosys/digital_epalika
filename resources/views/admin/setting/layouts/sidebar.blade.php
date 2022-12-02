@@ -13,11 +13,21 @@
         </a>
     </li>
 @endcan
+
 @can('ethnicity_access')
     <li class="{{request()->is('admin/setting/fiscalYear/*') ? 'active' : ''}}">
         <a href="{{route('admin.ethnicity.index')}}">
             <i class="fa fa-user"></i>
             <span> जातियता </span>
+        </a>
+    </li>
+@endcan
+
+@can('emergencyNumber_access')
+    <li class="{{request()->is('admin/setting/fiscalYear/*') ? 'active' : ''}}">
+        <a href="{{route('admin.emergencyNumber.index')}}">
+            <i class="fa fa-user"></i>
+            <span> Emergency Number </span>
         </a>
     </li>
 @endcan
