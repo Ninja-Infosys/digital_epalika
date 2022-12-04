@@ -491,9 +491,7 @@
                             <div class="font-black ckEditor" id="print1">
 
                                 {!!$printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()->data
-                                   ?? $proprietorDetail->template_data
-                                   ->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)
-                                   ->first()['data']
+                                   ?? $proprietorDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)
                                    ?? ''!!}
 
                             </div>
@@ -521,7 +519,7 @@
                             <div class="font-black ckEditor" id="print2">
 
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()->data
-                                   ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()['data']
+                                   ?? $proprietorDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)
                                    ?? ''!!}
                             </div>
                         </div>
@@ -542,7 +540,7 @@
                             </div>
                             <div class="font-black ckEditor" id="print3">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()->data
-                                   ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()['data']
+                                   ?? $proprietorDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)
                                    ?? ''!!}
 
                             </div>
@@ -563,7 +561,7 @@
                             </div>
                             <div class="font-black ckEditor" id="print4">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()->data
-                                                            ?? $proprietorDetail->template_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()['data']
+                                                            ?? $proprietorDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)
                                                             ?? ''!!}
                             </div>
                         </div>

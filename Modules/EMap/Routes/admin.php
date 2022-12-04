@@ -34,7 +34,9 @@ Route::prefix('setting')->group(function () {
     Route::resource('mapSetting', MapSettingController::class)->only('index', 'store');
     Route::resource('mapFee', MapFeeController::class);
     Route::post('eMapTemplate/getStaticTemplate', [EMapTemplateController::class, 'getStaticTemplate'])->name('template-emap.get-static-template');
-    Route::resource('eMapTemplate', EMapTemplateController::class);
+    Route::get('eMapTemplate/enumList',[EMapTemplateController::class,'enumList'])->name('eMapTemplate.enumList');
+    Route::get('{noticeTypeEnum}/eMapTemplate/{eMapTemplate}/updateStatus',[EMapTemplateController::class,'updateStatus'])->name('eMapTemplate.updateStatus');
+    Route::resource('{noticeTypeEnum}/eMapTemplate', EMapTemplateController::class)->names('eMapTemplate');
 });
 
 Route::prefix('files')->as('files.')->group(function () {

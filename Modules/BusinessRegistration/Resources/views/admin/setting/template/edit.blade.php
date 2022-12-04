@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">टेम्प्लेट </a>
+                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index',$templateTypeEnum)}}">टेम्प्लेट </a>
                         </li>
                         <li class="breadcrumb-item active">टेम्प्लेट सम्पादन गर्नुहोस</li>
                     </ol>
@@ -27,13 +27,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सम्पादन गर्नुहोस</h4>
-                        <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index',$templateTypeEnum)}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> टेम्प्लेट सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.update',$businessRegistrationTemplate)}}" method="post"
+                    <form action="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.update',[$templateTypeEnum,$businessRegistrationTemplate])}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('put')
@@ -56,32 +56,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="for" class="form-label">टेम्प्लेट *</label>
-                                    <select name="for" id="for" class="form-control">
-                                        <option value="">छान्नुहोस्</option>
-                                        @foreach(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::cases() as $templateType)
-                                            <option value="{{$templateType->value}}"{{old('for',$templateType->value)==$businessRegistrationTemplate->for->value ? 'selected':''}}>{{$templateType->label()}}
-                                            </option>
-                                        @endforeach
-                                        @error('for')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mb-2">
-                                    <input
-                                        type="checkbox"
-                                        name="requires_header"
-                                        value="1"
-                                        class="form-check-input @error('requires_header') is-invalid @enderror"
-                                        id="requires_header" {{ old('requires_header',$businessRegistrationTemplate->requires_header) === 1 ?'checked':'' }}
-                                    />
-                                    <label for="requires_header" class="form-label">हेडर *</label>
-                                    @error('requires_header')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
+
 
                                 <div class="row">
 

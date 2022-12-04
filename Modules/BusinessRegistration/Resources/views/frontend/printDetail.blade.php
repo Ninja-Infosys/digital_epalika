@@ -8,6 +8,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="{{asset('assets/backend/emap/admin/css/bootstrap1.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css"
+          integrity="sha512-3PN6gfRNZEX4YFyz+sIyTF6pGlQiryJu9NlGhu9LrLMQ7eDjNgudQoFDK3WSNAayeIKc6B8WXXpo4a7HqxjKwg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <title>{{$proprietorDetail->name}}को व्यवसाय दर्ता आवेदन</title>
 </head>
 <body class="container">
@@ -108,17 +111,26 @@
                     </div>
                 </div>
                 <div class="note mt-2">
-                    <span class="fw-bold">कृपया यस आवेदनको साथमा तल उल्लेखित कागजातहरू बोक्नुहोस्।</span><br>
-                    <span>१. आफनै घर जग्गा भए जग्गा धनी प्रमाण पत्रको प्रतिलिपि-१</span><br>
-                    <span>२. भाडामा बस्ने भए भाडा रकम र भुत्तानी तरिका समेत खुलेको वहाल
-                        सम्झौतापत्र-१</span><br>
-                    <span>३. नागरिकको हकमा नेपालस्थित राजदुतावासबाट व्यवसायीको नाममा जारी
-                        कागजात-१</span><br>
-                    <span>४. करदाताको हालसालैको पासपोर्ट साईजको फोटो २ प्रति, फर्म कम्पनी भएमा
-                        दर्ता</span><br>
-                    <span>५. इजाजत प्रमाणपत्र</span><br>
-                    <span>६. आन्तरिक राजस्व कार्यालयमा अघिल्लो आ.व.सम्मको कर तिरेको करदाता
-                        प्रमाणपत्रको प्रतिलिपि</span>
+                    <span class="fw-bold">कृपया यस आवेदनको साथमा तल उल्लेखित कागजातहरू बोक्नुहोस्। </span><br>
+                    <span>१. व्यवसायीको पासपोर्ट साइजको
+                                            फोटो  <i
+                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->photo ??'') ? 'fa-check':''}}"></i> </span><br>
+                    <span>२. नागरिकता अपलोड गर्नुहोस् (आगाडी)  <i
+                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->citizenship_front ??'') ? 'fa-check':''}}"></i> </span><br>
+                    <span>३. नागरिकता अपलोड गर्नुहोस् (पछाडी)  <i
+                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->citizenship_back ??'') ? 'fa-check':''}}"></i> </span><br>
+                    <span>४. फार्म कम्पनी भयमा
+                                            दर्ता, इजाजत
+                                            प्रमाणपत्र  <i
+                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->company_registration ??'') ? 'fa-check':''}}"></i> </span><br>
+                    <span>५.आन्तरिक राजस्व कार्यालयमा
+                                            आघिल्लो आ.व
+                                            सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि  <i
+                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->tax_pay_file ??'') ? 'fa-check':''}}"></i> </span><br>
+                    <span>६. हस्ताक्षर <i
+                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->signature ??'') ? 'fa-check':''}}"></i> </span><br>
+                    <span>७. औठाको छाप <i
+                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->thumb ??'') ? 'fa-check':''}}"></i>  </span>
                 </div>
             </div>
         </div>

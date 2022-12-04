@@ -166,7 +166,7 @@ trait EMapTemplateTrait
     public function getSpecificTemplateData(NoticeTypeEnum $noticeTypeEnum): string
     {
         $eMapTemplate = $this->getEmapTemplates();
-        $mapTemplate = $eMapTemplate->where('for', $noticeTypeEnum)->first();
+        $mapTemplate = $eMapTemplate->where('for', $noticeTypeEnum)->where('status',1)->first();
 
         if ($mapTemplate) {
             return $this->getData($mapTemplate->data);

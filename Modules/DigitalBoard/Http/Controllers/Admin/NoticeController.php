@@ -4,6 +4,7 @@ namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -107,7 +108,7 @@ class NoticeController extends Controller
         return redirect(route('admin.digitalBoard.notice.index', $type));
     }
 
-    public function destroy($type, Notice $notice)
+    public function destroy($type, Notice $notice): RedirectResponse
     {
         $this->checkAuthorization('digitalBoardNotice_delete');
 
@@ -122,7 +123,7 @@ class NoticeController extends Controller
         return back();
     }
 
-    public function updateClosedDate($type, Notice $notice)
+    public function updateClosedDate($type, Notice $notice): RedirectResponse
     {
         $notice->update([
             'closed_at' => ! empty($notice->closed_at) ? null : now(),
@@ -132,7 +133,7 @@ class NoticeController extends Controller
         return back();
     }
 
-    public function updateShowOnIndex($type, Notice $notice)
+    public function updateShowOnIndex($type, Notice $notice): RedirectResponse
     {
         $notice->update([
             'show_on_index' => ! $notice->show_on_index,
@@ -142,7 +143,7 @@ class NoticeController extends Controller
         return back();
     }
 
-    public function fileUpload($notice, $request)
+    public function fileUpload($notice, $request): void
     {
         foreach ($request->file('files') as $file) {
             $extension = $file->getClientOriginalExtension();

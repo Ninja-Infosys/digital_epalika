@@ -13,7 +13,7 @@ class CheckRoleMiddleware
     {
 
         if (!empty($request->user()->role)) {
-            $permissions = Cache::rememberForever('permissions', function () use ($request) {
+            $permissions = Cache::remember('permissions',12*60*60, function () use ($request) {
                 return $request->user()->role->permissions->pluck('title');
             });
 

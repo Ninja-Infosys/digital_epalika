@@ -53,10 +53,17 @@
                     </a>
                 </li>
             @endcan
+{{--            @can('businessRegistrationTemplate_access')--}}
+{{--                <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">--}}
+{{--                    <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">--}}
+{{--                        <span>टेम्प्लेट</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endcan--}}
             @can('businessRegistrationTemplate_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">
-                        <span>टेम्प्लेट</span>
+                    <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.enumList')}}">
+                        <span>सेटिङ</span>
                     </a>
                 </li>
             @endcan

@@ -18,14 +18,17 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('objectTransactionSubCategory', ObjectTransactionSubCategoryController::class);
     Route::resource('investmentRevenue', InvestmentRevenueController::class);
     Route::resource('businessPurpose', BusinessPurposeController::class);
-    Route::resource('businessRegistrationTemplate', BusinessRegistrationTemplateController::class);
     Route::post('businessRegistrationTemplate/staticTemplate', [BusinessRegistrationTemplateController::class,'getStaticTemplate'])->name('get-static-template');
+    Route::get('businessRegistrationTemplate/EnumList',[BusinessRegistrationTemplateController::class,'enumList'])->name('businessRegistrationTemplate.enumList');
+    Route::get('{templateTypeEnum}/businessRegistrationTemplate/{businessRegistrationTemplate}/updateStatus',[BusinessRegistrationTemplateController::class,'updateStatus'])->name('businessRegistrationTemplate.updateStatus');
+    Route::resource('{templateTypeEnum}/businessRegistrationTemplate', BusinessRegistrationTemplateController::class)->names('businessRegistrationTemplate');
 });
-Route::get('businessRegistration/{proprietorDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
+Route::get('businessRegistration/{proprietorDetail}/{templateTypeEnum}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
 Route::post('businessRegistration/{proprietorDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'storeData'])->name('store.template');
 Route::post('businessRegistration/{proprietorDetail}/{type}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
 Route::get('businessRegistration/{proprietorDetail}/{type}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
 Route::resource('businessRegistration', BusinessRegistrationController::class);
+
 
 Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'businessregistration::admin.file.file')->name('file');
