@@ -8,6 +8,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\InvestmentRevenueController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionSubCategoryController;
+use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -26,9 +27,17 @@ Route::prefix('setting')->as('setting.')->group(function () {
 Route::get('businessRegistration/{proprietorDetail}/{templateTypeEnum}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
 Route::post('businessRegistration/{proprietorDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'storeData'])->name('store.template');
 Route::post('businessRegistration/{proprietorDetail}/{type}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
-Route::get('businessRegistration/{proprietorDetail}/{type}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
+Route::get('businessRegistration/{proprietorDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
 Route::resource('businessRegistration', BusinessRegistrationController::class);
 
+Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportController::class)->group(function () {
+    Route::get('dateWise','dateWise')->name('dateWise');
+    Route::get('businessNature','businessNature')->name('businessNature');
+
+});
+
+
+Route::resource('businessRegistrationReport', BusinessRegistrationReportController::class);
 
 Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'businessregistration::admin.file.file')->name('file');

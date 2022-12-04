@@ -24,9 +24,7 @@ class Customs extends Model
         'registration_fee',
         'business_tax',
         'introduction_board_fees',
-        'fine',
-        'date',
-        'registration_no',
+        'fine'
     ];
 
     public function proprietorDetail(): BelongsTo

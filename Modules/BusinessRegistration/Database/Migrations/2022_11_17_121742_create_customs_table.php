@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('business_tax')->nullable();
             $table->string('introduction_board_fees')->nullable();
             $table->string('fine')->nullable();
-            $table->string('date')->nullable();
-            $table->string('registration_no')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
