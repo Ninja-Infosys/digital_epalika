@@ -12,6 +12,38 @@
         </a>
     </li>
 @endcan
+
+
+
+<li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">
+    <a href="#sidebarBusinessRegistrationReport"
+       {{request()->is('admin/businessRegistration/report/*') ? 'aria-expanded=true  ' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-file"></i>
+        <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+                        <i class="fa fa-angle-right"></i>
+                    </span>
+    </a>
+    <div class="collapse {{request()->is('admin/businessRegistration/report/*') ? 'show' : ''}}"
+         id="sidebarBusinessRegistrationReport">
+        <ul class="nav-second-level">
+                <li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">
+                    <a href="{{route('admin.businessRegistration.report.dateWise')}}">
+                        <span>व्यवसाय दर्ता अनुसार रिपोर्ट</span>
+                    </a>
+                </li>
+                <li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">
+                    <a href="{{route('admin.businessRegistration.report.dateWise')}}">
+                        <span>व्यवसाय प्रकृति अनुसार रिपोर्ट</span>
+                    </a>
+                </li>
+
+        </ul>
+    </div>
+</li>
+
+
 <li class="{{request()->is('admin/businessRegistration/setting/*') ? 'active' : ''}}">
     <a href="#sidebarBusinessRegistrationSetting"
        {{request()->is('admin/businessRegistration/setting/*') ? 'aria-expanded=true  ' : ''}}

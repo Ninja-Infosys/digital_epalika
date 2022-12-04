@@ -11,13 +11,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">
-                                {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}} </a>
+                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index',$templateTypeEnum)}}">
+                                {{$templateTypeEnum->label()}} </a>
                         </li>
-                        <li class="breadcrumb-item active"> {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</li>
+                        <li class="breadcrumb-item active"> {{$templateTypeEnum->label()}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</h4>
+                <h4 class="page-title">{{$templateTypeEnum->label()}}</h4>
             </div>
         </div>
     </div>
@@ -27,11 +27,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">   {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</h4>
+                        <h4 class="header-title">   {{$templateTypeEnum->label()}}</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.businessRegistration.store.custom',[$proprietorDetail,$type])}}"
+                    <form action="{{route('admin.businessRegistration.store.custom',[$proprietorDetail,$templateTypeEnum])}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -98,7 +98,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="fine" class="form-label"> जरिवाना *</label>
                                     <input
                                         type="number"
@@ -110,36 +110,6 @@
                                         id="fine"
                                     />
                                     @error('fine')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label"> मिति *</label>
-                                    <input
-                                        type="text"
-                                        name="date"
-                                        placeholder=" मिति "
-                                        value="{{ old('date',$customs->date??'')}}"
-                                        class="form-control @error('date') is-invalid @enderror"
-                                        id="date"
-                                    />
-                                    @error('date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6 mb-2">
-                                    <label for="registration_no" class="form-label"> दर्ता नम्बर *</label>
-                                    <input
-                                        type="text"
-                                        name="registration_no"
-                                        value="{{old('registration_no',$customs->registration_no??'')}}"
-                                        placeholder=" दर्ता नम्बर"
-                                        class="form-control @error('registration_no') is-invalid @enderror"
-                                        id="registration_no"
-                                    />
-                                    @error('registration_no')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
