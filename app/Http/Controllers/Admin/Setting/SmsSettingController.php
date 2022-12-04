@@ -28,7 +28,7 @@ class SmsSettingController extends Controller
             $this->overWriteEnvFile($type, $request->input($type));
         }
 
-        toast('Featured Updated Successfully', 'success');
+        toast('विशेष गरी सफलतापूर्वक अद्यावधिक गर्नुहोस्', 'success');
         return back();
     }
 
@@ -47,7 +47,7 @@ class SmsSettingController extends Controller
             $this->overWriteEnvFile($type, $request->input($type));
         }
 
-        toast('Featured Updated Successfully', 'success');
+        toast('विशेष अपडेट सफलतापूर्वक', 'success');
         return back();
     }
 

@@ -34,7 +34,7 @@ class EmergencyNumberController extends Controller
 
         EmergencyNumber::create($request->validated());
 
-        toast('Emergency Number added successfully', 'success');
+        toast('आपतकालीन नम्बर सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -52,7 +52,7 @@ class EmergencyNumberController extends Controller
 
         $emergencyNumber->update($request->validated());
 
-        toast('Emergency Number updated successfully', 'success');
+        toast('आपतकालीन नम्बर सफलतापूर्वक अपडेट गरियो', 'success');
 
         return redirect(route('admin.emergencyNumber.index'));
     }
@@ -61,7 +61,7 @@ class EmergencyNumberController extends Controller
     {
         $this->checkAuthorization('emergencyNumber_delete');
         $emergencyNumber->delete();
-        toast('Emergency Number Deleted successfully!', 'success');
+        toast('आपतकालीन नम्बर सफलतापूर्वक मेटियो!', 'success');
 
         return back();
     }

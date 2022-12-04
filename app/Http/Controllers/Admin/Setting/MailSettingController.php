@@ -40,7 +40,7 @@ class MailSettingController extends Controller
             $this->overWriteEnvFile($type, $request->input($type));
         }
 
-        toast('Mail Updated Successfully', 'success');
+        toast('मेल सफलतापूर्वक अपडेट गरियो', 'success');
         return back();
     }
 
@@ -52,7 +52,7 @@ class MailSettingController extends Controller
 
         Mail::to($request->input('email'))->send(new TestMail());
 
-        toast('Please check your mail', 'success');
+        toast('कृपया आफ्नो मेल जाँच गर्नुहोस्', 'success');
         return back();
     }
 }
