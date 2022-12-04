@@ -94,7 +94,8 @@ Route::prefix('setting')->group(function () {
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
 });
 
-//deleteFile
+//file
+Route::get('file/{file}/download',[FileController::class,'download'])->name('file.download');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
 // website admin routes

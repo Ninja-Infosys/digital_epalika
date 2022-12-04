@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -78,5 +79,10 @@ class FileController extends Controller
         $file->delete();
 
         return back();
+    }
+
+    public function download(File $file)
+    {
+        return Storage::disk('public')->download($file->file, $file->file_name . $file->extension);
     }
 }

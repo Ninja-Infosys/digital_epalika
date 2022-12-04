@@ -2,12 +2,14 @@
 
 namespace Modules\Plan\Entities;
 
+use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Modules\Plan\Enums\ProjectOperatedThroughEnum;
@@ -121,5 +123,15 @@ class Project extends Model
     public function projectBidSubmissions(): HasMany
     {
         return $this->hasMany(ProjectBidSubmission::class);
+    }
+
+    public function projectDocuments(): HasMany
+    {
+        return $this->hasMany(ProjectDocument::class);
+    }
+
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class,'model');
     }
 }

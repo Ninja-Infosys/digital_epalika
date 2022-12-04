@@ -46,7 +46,7 @@ class ProjectController extends Controller
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
             ]);
 
-        toast('योजना/कार्यक्रम सफलतापूर्वक थपियो','success');
+        toast('योजना/कार्यक्रम सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -54,9 +54,9 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectCostDetail','projectGrantDetails','projectAgreementTerm');
+        $project->load('projectCostDetail', 'projectGrantDetails', 'projectAgreementTerm', 'projectDocuments', 'files');
 
-        return view('plan::admin.project.show',compact('project'));
+        return view('plan::admin.project.show', compact('project'));
     }
 
     public function destroy(Project $project)
@@ -64,20 +64,42 @@ class ProjectController extends Controller
         $this->checkAuthorization('project_delete');
     }
 
-    public function saveProjectAgreementTerm(Request $request,Project $project)
+    public function saveProjectAgreementTerm(Request $request, Project $project)
     {
         $request->validate([
-            'data'=>['required']
+            'data' => ['required']
         ]);
 
         ProjectAgreementTerm::updateOrCreate(
             ['project_id' => $project->id],
             [
-                'data'=>$request->input('data')
+                'data' => $request->input('data')
             ]
         );
 
-        toast('सम्झौता शर्त सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('सम्झौता शर्त सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function uploadFilePage(Project $project)
+    {
+        return view('plan::admin.project.upload_files', compact('project'));
+    }
+
+    public function uploadFile(Request $request, Project $project)
+    {
+        $formData = $request->validate([
+            'file_name' => ['nullable'],
+            'file' => ['required', 'file']
+        ]);
+
+        $project->files()->create([
+            'file_name' => $formData['file_name'] ?? pathinfo($formData['file']->getClientOriginalName(), PATHINFO_FILENAME),
+            'extension' => $formData['file']->getClientOriginalExtension(),
+            'file' => $formData['file']->store('project_files', 'public')
+        ]);
+
+        toast('फाइल सफलतापूर्वक अपलोड गरियो', 'success');
         return back();
     }
 }
