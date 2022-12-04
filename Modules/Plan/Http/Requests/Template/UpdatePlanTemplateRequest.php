@@ -16,7 +16,7 @@ class UpdatePlanTemplateRequest extends FormRequest
     {
         return [
             'type' => ['required'],
-            'title' => ['required', Rule::unique('plan_templates', 'title')->withoutTrashed()],
+            'title' => ['required', Rule::unique('plan_templates', 'title')->withoutTrashed()->ignore($this->planTemplate)],
             'data' => ['required']
         ];
     }

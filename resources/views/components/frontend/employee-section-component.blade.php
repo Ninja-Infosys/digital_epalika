@@ -1,62 +1,48 @@
-<section class="employee pt-2 pb-2">
-    <div id="carouselExampleSlidesOnly" class="carousel slide height" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                    <div class="d-flex justify-content-center pb-3">
-                        <div class="card-employee rounded">
-                            <div class="card-employee-image">
-                                <h5>{{$employees->first()->designation ?? ''}}</h5>
-                                <img
-                                    src="{{$employees->first()->photo_url ?? ''}}"
-                                    alt="{{$employees->first()->name ?? ''}}">
-                            </div>
-                            <div class="textbox-01 px-2">
-                                <h5>{{$employees->first()->name ?? ''}}</h5>
-                                <p><i class="fa fa-phone px-1"></i>{{$employees->first()->phone ?? ''}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pb-3">
-                        @foreach($employees->skip(1)->take(2) as $otherEmployee)
-                            <div class="col-md-6">
-                                <div class="card-employee rounded">
-                                    <div class="card-employee-image">
-                                        <h5>{{$otherEmployee->designation}}</h5>
-                                        <img
-                                            src="{{$otherEmployee->photo_url}}"
-                                            alt="{{$otherEmployee->name}}">
-                                    </div>
-                                    <div class="textbox-01 px-2">
-                                        <h5>{{$otherEmployee->name}}</h5>
-                                        <p><i class="fa fa-phone px-1"></i>{{$otherEmployee->phone}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-            </div>
-            @foreach($employees->skip(3)->chunk(4) as $empChunk)
-                <div class="carousel-item">
-                    <div class="row">
-                        @foreach($empChunk as $employee)
-                            <div class="col-md-6 mb-3">
-                                <div class="card-employee rounded">
-                                    <div class="card-employee-image">
-                                        <h5>{{$employee->designation}}</h5>
-                                        <img
-                                            src="{{$employee->photo_url}}"
-                                            alt="{{$employee->name}}">
-                                    </div>
-                                    <div class="textbox-01 px-2">
-                                        <h5>{{$employee->name}}</h5>
-                                        <p><i class="fa fa-phone px-1"></i>{{$employee->phone}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endforeach
-        </div>
+<div class="card mb-3 mt-2" style="max-width: 700px; height:27%; background-color: #0DCAF0;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/naparaja_upathhayaya/FMBDC707ie5KllHGJQsu6U8bfba3oxrod0LGW5va.jpg" class="img-fluid rounded-start" alt="..." style="object-fit: contain;
+    height: 10rem;
+    width: 70%;">
     </div>
-</section>
+    <div class="col-md-8">
+      <div class="card-body mt-2">
+        <h5 class="card-title" style="font-size: 22px"><b>डम्बर बहादुर बि.क</b></h5>
+        <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
+        <p style="font-size: 18px"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card mb-3 mt-2" style="max-width: 700px; height:27%; background-color: #0DCAF0;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/damabra_bhathara_bka/Jyk8kJDSunO9HJmK7tMbFCsSEBKzctX0ea6F1fIM.png" class="img-fluid rounded-start" alt="..." style="object-fit: contain;
+    height: 10rem;
+    width: 70%;">
+    </div>
+    <div class="col-md-8">
+    <div class="card-body mt-2">
+        <h5 class="card-title" style="font-size: 22px"><b>डम्बर बहादुर बि.क</b></h5>
+        <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
+        <p style="font-size: 18px"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card mt-2" style="max-width: 700px; height:27%; background-color: #0DCAF0;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/maniaja_mall/gObKPy1oIfYaXrR2fXxyIi0gXnbU6F9zYAUKlHyk.png" class="img-fluid rounded-start" alt="..." style="object-fit: contain;
+    height: 10rem;
+    width: 70%;">
+    </div>
+    <div class="col-md-8">
+    <div class="card-body mt-2">
+        <h5 class="card-title" style="font-size: 22px"><b>डम्बर बहादुर बि.क</b></h5>
+        <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
+        <p style="font-size: 18px"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
+      </div>
+    </div>
+  </div>
+</div>
