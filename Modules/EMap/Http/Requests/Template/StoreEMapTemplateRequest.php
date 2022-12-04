@@ -17,10 +17,8 @@ class StoreEMapTemplateRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'for' => ['required', Rule::unique('e_map_templates', 'for')->withoutTrashed()],
             'type' => ['required'],
             'data' => ['required'],
-            'requires_header' => ['nullable', 'boolean'],
         ];
     }
 }

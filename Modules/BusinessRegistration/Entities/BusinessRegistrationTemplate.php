@@ -25,6 +25,7 @@ class BusinessRegistrationTemplate extends Model
         'data',
         'title',
         'requires_header',
+        'status'
     ];
 
     protected $casts = [

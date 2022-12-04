@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,5 +33,10 @@ trait BaseControllerTrait
         if (Storage::disk('public')->exists($file_url)) {
             Storage::disk('public')->delete($file_url);
         }
+    }
+
+    public function forgotCache(string $cacheName): void
+    {
+        Cache::forget($cacheName);
     }
 }

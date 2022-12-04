@@ -12,7 +12,6 @@ return new class () extends Migration {
             $table->string('for');
             $table->string('title');
             $table->longText('data');
-            $table->boolean('requires_header')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

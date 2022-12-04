@@ -100,4 +100,9 @@ class ProprietorDetail extends Model
     {
         return $this->hasOne(Customs::class);
     }
+
+    public function printedData(): HasMany
+    {
+        return $this->hasMany(PrintedData::class);
+    }
 }

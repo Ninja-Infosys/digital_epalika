@@ -16,9 +16,7 @@ class UpdateBusinessRegistrationTemplateRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'for' => ['required'],
             'data' => ['required'],
-            'requires_header' => ['nullable', 'boolean'],
         ];
     }
 }

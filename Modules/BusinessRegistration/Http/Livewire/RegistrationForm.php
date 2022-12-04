@@ -383,7 +383,7 @@ class RegistrationForm extends Component
                 'tole' => $this->form['tole'] ?? null,
             ]);
 
-            $businessDetail->businessPurposes()->attach($this->form['purpose']);
+            $businessDetail->businessPurposes()->attach($this->form['purpose'] ?? null);
 
             foreach ($this->form['threeGenerationDetails'] as $threeGenerationDetail) {
                 $proprietorDetails->threeGenerationDetails()->create([
