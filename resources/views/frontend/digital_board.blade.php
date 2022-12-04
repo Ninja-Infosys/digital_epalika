@@ -4,25 +4,32 @@
         <section class="news-section">
             <x-frontend.scroll-news-component/>
         </section>
+</main>
+<div class="container">
         <section class="mid">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-8">
                 <x-frontend.notice-vertical-slider-component/>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                    <x-frontend.employee-section-component/>
                 </div>
             </div>
         </section>
-        <section class="last mt-1">
+        <section>
             <div class="row">
-                <div class="col-md-6">
-                    <x-frontend.module-info-component/>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <x-frontend.digital-board-video-component/>
+                </div>
+                <div class="col-md-4">
+                    <x-frontend.notice-section-component/>
                 </div>
             </div>
         </section>
-    </main>
+</div>
 @endsection
+
+
+<!-- <div class="col-md-6">
+                    <x-frontend.module-info-component/>
+                </div> -->
