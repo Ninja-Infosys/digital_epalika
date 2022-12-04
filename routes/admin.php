@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\Setting\BranchController;
 use App\Http\Controllers\Admin\Setting\DepartmentController;
 use App\Http\Controllers\Admin\Setting\DesignationController;
+use App\Http\Controllers\Admin\Setting\EmergencyNumberController;
 use App\Http\Controllers\Admin\Setting\EthnicityController;
 use App\Http\Controllers\Admin\Setting\FeatureActivationController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
@@ -69,6 +70,7 @@ Route::prefix('setting')->group(function () {
 
     Route::resource('ethnicity', EthnicityController::class);
     Route::resource('fiscalYear', FiscalYearController::class);
+    Route::resource('emergencyNumber', EmergencyNumberController::class);
 
     Route::resource('department', DepartmentController::class);
     Route::resource('designation', DesignationController::class);

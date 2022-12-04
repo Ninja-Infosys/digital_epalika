@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">
+                            <a href="">
                                 {{Str::words($noticeTypeEnum->label(),3)}} </a>
                         </li>
                         <li class="breadcrumb-item active"> {{Str::words($noticeTypeEnum->label(),3)}}</li>

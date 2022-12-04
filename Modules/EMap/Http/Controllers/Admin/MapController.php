@@ -104,6 +104,7 @@ class MapController extends Controller
             $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
         }]);
 
+
         return \view('emap::admin.map.edit', compact('mapApply', 'noticeTypeEnum'));
     }
 

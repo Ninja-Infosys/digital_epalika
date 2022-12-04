@@ -3,6 +3,7 @@
 namespace Modules\BusinessRegistration\Traits;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
@@ -102,21 +103,16 @@ trait ProprietorTemplateTrait
 
     ];
 
-    public function getTemplateDataAttribute(): Collection
-    {
-        return BusinessRegistrationTemplate::get()->map(function ($applicationTemplate) {
-            $data = $this->getData($applicationTemplate->data);
 
-            return [
-                'for' => $applicationTemplate->for,
-                'data' => $data,
-            ];
-        });
-    }
-
-    public function getSpecificTemplateData($type): string
+    public function getSpecificTemplateData(TemplateTypeEnum $type): string
     {
-        $businessTemplate = BusinessRegistrationTemplate::where('for', $type)->first();
+
+        $templates = $this->getTemplateCache();
+
+        $businessTemplate = $templates->where('status', 1)
+            ->where('for', $type)
+            ->first();
+
         if ($businessTemplate) {
             return $this->getData($businessTemplate->data);
         }
@@ -233,6 +229,16 @@ trait ProprietorTemplateTrait
             '[@businessDetail.investmentRevenue.objectTransaction.objectTransaction.title]' => $this->businessDetail->investmentRevenue->objectTransaction->objectTransaction->title ?? '',
             '[@businessDetail.investmentRevenue.objectTransaction.title]' => $this->businessDetail->investmentRevenue->objectTransaction->title ?? '',
         ];
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getTemplateCache(): mixed
+    {
+        return Cache::rememberForever('businessTemplates', function () {
+            return BusinessRegistrationTemplate::all();
+        });
     }
 
 }

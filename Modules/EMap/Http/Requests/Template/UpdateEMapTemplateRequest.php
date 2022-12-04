@@ -17,10 +17,8 @@ class UpdateEMapTemplateRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'for' => ['required', Rule::unique('e_map_templates', 'for')->withoutTrashed()->ignore($this->eMapTemplate)],
             'type' => ['required'],
             'data' => ['required'],
-            'requires_header' => ['nullable', 'boolean'],
         ];
     }
 }

@@ -70,7 +70,7 @@
                 @endcan
             @can('eMapTemplate_access')
                 <li class="{{request()->is('admin/emap/setting/eMapTemplate*') ? 'active' : ''}}">
-                    <a href="{{route('emap.admin.eMapTemplate.index')}}">
+                    <a href="{{route('emap.admin.eMapTemplate.enumList')}}">
                         <span> टेम्प्लेट  </span>
                     </a>
                 </li>

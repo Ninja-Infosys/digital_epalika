@@ -15,6 +15,7 @@ use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\Customs;
 use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
+use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
 
 class BusinessRegistrationController extends Controller
@@ -32,7 +33,7 @@ class BusinessRegistrationController extends Controller
     public function show($id): Factory|View|Application
     {
 
-       $this->checkAuthorization('businessRegistration_access');
+        $this->checkAuthorization('businessRegistration_access');
 
         $proprietorDetail = ProprietorDetail::findOrFail($id);
         $proprietorDetail->load('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses');
@@ -44,20 +45,18 @@ class BusinessRegistrationController extends Controller
         return view('businessregistration::admin.businessRegistration.show', compact('proprietorDetail', 'printed_data'));
     }
 
-    public function editData($id, $type): Factory|View|Application
+    public function editData(ProprietorDetail $proprietorDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
     {
         $this->checkAuthorization('businessRegistration_edit');
 
-        $proprietorDetail = ProprietorDetail::findOrFail($id);
+        $proprietorDetail->load('printedData');
+        $printed_data = $proprietorDetail->printedData
+            ->where('for', $templateTypeEnum)
+            ->sortByDesc('created_at')
+            ->first();
 
-        $printed_data = PrintedData::where(
-            [
-                'proprietor_detail_id' => $id,
-                'for' => $type,
-            ]
-        )->latest()->first();
 
-        return view('businessregistration::admin.businessRegistration.edit', compact('proprietorDetail', 'type', 'printed_data'));
+        return view('businessregistration::admin.businessRegistration.edit', compact('proprietorDetail', 'templateTypeEnum', 'printed_data'));
     }
 
     public function storeData(StorePrintedDataRequest $request, $id, $type): RedirectResponse
@@ -134,4 +133,5 @@ class BusinessRegistrationController extends Controller
         return back();
 
     }
+
 }

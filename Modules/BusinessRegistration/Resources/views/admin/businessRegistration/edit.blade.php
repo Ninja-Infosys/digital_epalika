@@ -11,13 +11,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">
-                                {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}} </a>
+                            <a href="">
+                              {{$templateTypeEnum->label()??''}} </a>
                         </li>
-                        <li class="breadcrumb-item active"> {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</li>
+                        <li class="breadcrumb-item active"> {{$templateTypeEnum->label()}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</h4>
+                <h4 class="page-title">{{$templateTypeEnum->label()}}</h4>
             </div>
         </div>
     </div>
@@ -27,11 +27,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">   {{\Modules\BusinessRegistration\Enums\TemplateTypeEnum::tryFrom($type)->label()}}</h4>
+                        <h4 class="header-title">   {{$templateTypeEnum->label()}}</h4>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.businessRegistration.store.template',[$proprietorDetail,$type])}}"
+                    <form action="{{route('admin.businessRegistration.store.template',[$proprietorDetail,$templateTypeEnum])}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -41,7 +41,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="data" class="form-label">डाटा *</label>
                                     <textarea name="data" id="data" cols="30" rows="10"
-                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($printed_data->data ?? $proprietorDetail->getSpecificTemplateData($type) ?? ''))}}</textarea>
+                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($printed_data->data ?? $proprietorDetail->getSpecificTemplateData($templateTypeEnum) ?? ''))}}</textarea>
                                     @error('data')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

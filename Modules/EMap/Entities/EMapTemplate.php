@@ -26,7 +26,7 @@ class EMapTemplate extends Model
         'type',
         'data',
         'title',
-        'requires_header',
+        'status'
     ];
 
     protected $casts = [
