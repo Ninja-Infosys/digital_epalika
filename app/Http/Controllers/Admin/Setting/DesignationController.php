@@ -31,7 +31,7 @@ class DesignationController extends Controller
         $this->checkAuthorization('designation_create');
         $designation = Designation::create($request->validated());
 
-        toast('Designation Added successfully!', 'success');
+        toast('पदनाम सफलतापूर्वक थपियो!', 'success');
 
         return redirect()->route('admin.designation.index');
     }
@@ -56,7 +56,7 @@ class DesignationController extends Controller
     {
         $this->checkAuthorization('designation_delete');
         $designation->delete();
-        toast('Designation Deleted successfully!', 'success');
+        toast('पदनाम सफलतापूर्वक मेटियो!', 'success');
 
         return back();
     }

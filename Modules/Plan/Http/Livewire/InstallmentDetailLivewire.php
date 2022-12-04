@@ -11,7 +11,9 @@ use Modules\Plan\Enums\InstallmentTypeEnum;
 class InstallmentDetailLivewire extends Component
 {
     public bool $createModalOpened = false;
-    public object $project;
+    public bool $editModalOpened = false;
+    public Project $project;
+    public ProjectInstallmentDetail $projectInstallmentDetail;
 
     public array $form = [
         'installment_type' => null,
@@ -23,9 +25,9 @@ class InstallmentDetailLivewire extends Component
 
     protected $listeners = ['dateChanged'];
 
-    public function mount($project_id)
+    public function mount($project)
     {
-        $this->getProjectData($project_id);
+        $this->getProjectData($project);
     }
 
     public function dateChanged($nepaliDate, $englishDate)
@@ -33,20 +35,31 @@ class InstallmentDetailLivewire extends Component
         $this->form['date'] = $nepaliDate;
     }
 
-    public function openCreateModal()
+    public function create()
     {
         $this->createModalOpened = true;
+    }
+
+    public function edit(ProjectInstallmentDetail $projectInstallmentDetail)
+    {
+        $this->projectInstallmentDetail = $projectInstallmentDetail;
+        $this->editModalOpened = true;
+        foreach ($this->form as $key => $value) {
+            $this->form[$key] = $projectInstallmentDetail[$key];
+        }
     }
 
     public function closeModal()
     {
         $this->reset('form');
         $this->createModalOpened = false;
+        $this->editModalOpened = false;
+        $this->resetValidation();
     }
 
-    public function getProjectData($project_id)
+    public function getProjectData($project)
     {
-        $this->project=Project::with('projectInstallmentDetails')->find($project_id);
+        $this->project = $project->load('projectInstallmentDetails')->loadSum('projectInstallmentDetails', 'amount');
     }
 
     public function rules(): array
@@ -65,26 +78,37 @@ class InstallmentDetailLivewire extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function submitFormData()
+    public function store()
     {
         $this->project->projectInstallmentDetails()->create($this->validate()['form']);
         $this->closeModal();
-        $this->getProjectData($this->project->id);
+        $this->getProjectData($this->project);
 
-        $this->dispatchBrowserEvent('toast_message', [
-            'type' => 'success',
-            'title' => 'किस्ता विवरण सफलतापूर्वक थपियो',
-        ]);
+        $this->toastMessage('किस्ता विवरण सफलतापूर्वक थपियो');
+    }
+
+    public function update()
+    {
+        $this->projectInstallmentDetail->update($this->validate()['form']);
+        $this->closeModal();
+        $this->getProjectData($this->project);
+
+        $this->toastMessage('किस्ता विवरण सफलतापूर्वक अद्यावधिक गरियो');
     }
 
     public function deleteInstallmentDetail(ProjectInstallmentDetail $projectInstallmentDetail)
     {
         $projectInstallmentDetail->delete();
-        $this->getProjectData($this->project->id);
+        $this->getProjectData($this->project);
 
+        $this->toastMessage('किस्ता विवरण सफलतापूर्वक मेटाइयो');
+    }
+
+    public function toastMessage($title)
+    {
         $this->dispatchBrowserEvent('toast_message', [
             'type' => 'success',
-            'title' => 'किस्ता विवरण सफलतापूर्वक मेटाइयो',
+            'title' => $title,
         ]);
     }
 

@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('performance_bond_bank')->nullable();
             $table->string('performance_bond_issue_date')->nullable();
             $table->string('performance_bond_expiry_date')->nullable();
+            $table->string('performance_bond_extended_date')->nullable();
             $table->string('insurance_issue_date')->nullable();
             $table->string('insurance_expiry_date')->nullable();
             $table->string('insurance_extended_date')->nullable();

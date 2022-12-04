@@ -35,10 +35,10 @@ class EthnicityController extends Controller
 
     public function store(StoreEthnicityRequest $request): RedirectResponse
     {
-       $this->checkAuthorization('ethnicity_create');
+        $this->checkAuthorization('ethnicity_create');
 
         Ethnicity::create($request->validated());
-        toast('Ethnicity added successfully', 'success');
+        toast('जातीयता सफलतापूर्वक थपियो', 'success');
 
         return back();
     }
@@ -59,7 +59,7 @@ class EthnicityController extends Controller
         $this->checkAuthorization('ethnicity_edit');
 
         $ethnicity->update($request->validated());
-        toast('Ethnicity updated successfully', 'success');
+        toast('जातीयता सफलतापूर्वक अपडेट गरियो', 'success');
 
         return redirect(route('admin.ethnicity.index'));
     }
@@ -69,7 +69,7 @@ class EthnicityController extends Controller
         $this->checkAuthorization('ethnicity_delete');
 
         $ethnicity->delete();
-        toast('Ethnicity deleted successfully', 'success');
+        toast('जातीयता सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
     }

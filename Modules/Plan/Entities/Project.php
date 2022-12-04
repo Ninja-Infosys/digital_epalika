@@ -102,4 +102,24 @@ class Project extends Model
     {
         return $this->hasMany(ProjectInstallmentDetail::class);
     }
+
+    public function projectMaintenanceArrangement(): HasOne
+    {
+        return $this->hasOne(ProjectMaintenanceArrangement::class);
+    }
+
+    public function projectAgreementTerm(): HasOne
+    {
+        return $this->hasOne(ProjectAgreementTerm::class);
+    }
+
+    public function projectBidDetail(): HasOne
+    {
+        return $this->hasOne(ProjectBidDetail::class);
+    }
+
+    public function projectBidSubmissions(): HasMany
+    {
+        return $this->hasMany(ProjectBidSubmission::class);
+    }
 }
