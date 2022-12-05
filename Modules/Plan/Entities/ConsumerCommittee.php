@@ -29,6 +29,7 @@ class ConsumerCommittee extends Model
         'meeting_date',
         'registration_no',
         'beneficiary_no',
+        'member_number',
         'experience_in_project'
     ];
 

@@ -140,11 +140,11 @@
 
                                                             @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
                                                                 @can('mapApplyNoticeReject_access')
-                                                                <i class="fa fa-times mx-2"></i>
+                                                                    <i class="fa fa-times mx-2"></i>
                                                                 @endcan
                                                             @else
                                                                 @can('mapApplyNoticeReject_access')
-                                                                <i class="fa fa-check mx-2"></i>
+                                                                    <i class="fa fa-check mx-2"></i>
                                                                 @endcan
                                                             @endif
 
@@ -216,11 +216,11 @@
 
                                                         @if(empty($mapApply->applyMapNotices->where('file_type',$noticeType)?->first()->remarks))
                                                             @can('mapApplyNoticeReject_access')
-                                                            <i class="fa fa-times mx-2"></i>
+                                                                <i class="fa fa-times mx-2"></i>
                                                             @endcan
                                                         @else
                                                             @can('mapApplyNoticeReject_access')
-                                                            <i class="fa fa-check mx-2"></i>
+                                                                <i class="fa fa-check mx-2"></i>
                                                             @endcan
                                                         @endif
 
@@ -228,9 +228,9 @@
                                                 @endif
                                             @else
                                                 @can('mapApplyNotice_access')
-                                                <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
+                                                    <a href="{{route('emap.admin.map.map-apply.notice.upload.get-template-data',[$mapApply,$noticeType->value])}}">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
                                                 @endcan
                                             @endif
 

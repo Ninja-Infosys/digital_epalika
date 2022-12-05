@@ -22,6 +22,7 @@ class ConsumerCommitteeLivewire extends Component
         'meeting_date' => null,
         'registration_no' => null,
         'beneficiary_no' => null,
+        'member_number' => null,
         'experience_in_project' => null,
         'consumerCommitteeOfficials' => []
     ];
@@ -46,11 +47,6 @@ class ConsumerCommitteeLivewire extends Component
     public function meetingDateChanged($nepaliDate, $englishDate)
     {
         $this->form['meeting_date'] = $nepaliDate;
-    }
-
-    public function addConsumerCommitteeOfficials()
-    {
-        $this->form['consumerCommitteeOfficials'][] = [];
     }
 
     public function removeConsumerCommitteeOfficials($index)
@@ -98,6 +94,7 @@ class ConsumerCommitteeLivewire extends Component
             'form.meeting_date' => ['nullable'],
             'form.registration_no' => ['required'],
             'form.beneficiary_no' => ['required', 'integer'],
+            'form.member_number' => ['required', 'integer'],
             'form.experience_in_project' => ['nullable'],
             'form.consumerCommitteeOfficials' => ['nullable', 'array'],
             'form.consumerCommitteeOfficials.*.post' => ['required', new Enum(ConsumerCommitteePostEnum::class)],
@@ -116,6 +113,15 @@ class ConsumerCommitteeLivewire extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function setConsumerCommitteeMembers()
+    {
+        if (count($this->form['consumerCommitteeOfficials']) < $this->form['member_number']) {
+            for ($i = count($this->form['consumerCommitteeOfficials']); $i < $this->form['member_number']; $i++) {
+                $this->form['consumerCommitteeOfficials'][] = [];
+            }
+        }
+    }
+
     public function submitFormData()
     {
         $formData = $this->validate()['form'];
@@ -131,6 +137,7 @@ class ConsumerCommitteeLivewire extends Component
                 'meeting_date' => $formData['meeting_date'],
                 'registration_no' => $formData['registration_no'],
                 'beneficiary_no' => $formData['beneficiary_no'],
+                'member_number' => $formData['member_number'],
                 'experience_in_project' => $formData['experience_in_project']
             ]
         );
