@@ -79,21 +79,6 @@ class ReportLivewire extends Component
     {
         $this->validate();
         $this->businessDetails = BusinessDetail::with('proprietorDetail', 'localBody')
-            ->whereHas('investmentRevenue', function ($subQuery) {
-                if (!empty($this->form['object_transaction'])) {
-                    $subQuery->whereIn('object_transaction_id', $this->form['object_transaction']);
-                }
-            })
-            ->whereHas('proprietorDetail', function ($subQuery) {
-                if (!empty($this->form['registration_renewal'])) {
-                    $subQuery->whereIn('business_type', $this->form['registration_renewal']);
-                }
-            })
-            ->whereHas('proprietorDetail.introboard', function ($subQuery) {
-                if (!empty($this->form['introBoard']['from']) && !empty($this->form['introBoard']['to'])) {
-                    $subQuery->whereBetween('square', [$this->form['introBoard']['from'], $this->form['introBoard']['to']]);
-                }
-            })
             ->where(function ($q) {
                 if (!empty($this->form['date']['from']) && !empty($this->form['date']['to'])) {
                     $q->whereDateBetween('registration_date_ne', [$this->form['date']['from'], $this->form['date']['to']]);
@@ -128,6 +113,25 @@ class ReportLivewire extends Component
                 }
             })
             ->get();
+
+        $this->businessDetails
+            ->loadExists(['investmentRevenue' => function ($subQuery) {
+                if (!empty($this->form['object_transaction'])) {
+                    $subQuery->whereIn('object_transaction_id', $this->form['object_transaction']);
+                }
+            }]);
+        $this->businessDetails
+            ->loadExists(['proprietorDetail' => function ($subQuery) {
+                if (!empty($this->form['registration_renewal'])) {
+                    $subQuery->whereIn('business_type', $this->form['registration_renewal']);
+                }
+            }]);
+        $this->businessDetails
+            ->loadExists(['proprietorDetail.introboard' => function ($subQuery) {
+                if (!empty($this->form['introBoard']['from']) && !empty($this->form['introBoard']['to'])) {
+                    $subQuery->whereBetween('square', [$this->form['introBoard']['from'], $this->form['introBoard']['to']]);
+                }
+            }]);
     }
 
     public function render(): Factory|View|Application
