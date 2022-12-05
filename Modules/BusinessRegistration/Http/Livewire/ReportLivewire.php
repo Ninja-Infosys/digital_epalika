@@ -40,7 +40,7 @@ class ReportLivewire extends Component
         'business_year' => [],
         'introBoard' => [],
     ];
-    public bool $showForm = false;
+    public array $class = ["card-body","d-none"];
 
     protected $rules = [
         'form.date.from_date' => ['nullable', 'date', 'before_or_equal:form.date.to_date'],
@@ -106,7 +106,11 @@ class ReportLivewire extends Component
 
     public function showFilterForm(): void
     {
-        $this->showForm = !$this->showForm;
+        if (in_array('d-none', $this->class)) {
+            unset($this->class[1]);
+        } else {
+            $this->class[] = "d-none";
+        }
     }
 
     /**

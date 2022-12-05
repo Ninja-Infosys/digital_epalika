@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 {{--                @if($showForm)--}}
-                <div class="card-body">
+                <div @class($class)>
 
                     <form wire:submit.prevent="submitForm">
                         <fieldset class="border p-2 mb-2">
