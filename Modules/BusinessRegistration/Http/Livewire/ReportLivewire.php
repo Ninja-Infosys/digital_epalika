@@ -80,11 +80,8 @@ class ReportLivewire extends Component
         $this->validate();
         $this->businessDetails = BusinessDetail::with('proprietorDetail', 'localBody')
             ->where(function ($q) {
-                if (!empty($this->form['date']['from'])) {
-                    $q->whereDate('registration_date_ne', '<=', $this->form['date']['from']);
-                }
-                if (!empty($this->form['date']['to'])) {
-                    $q->whereDate('registration_date_ne', '>=', $this->form['date']['to']);
+                if (!empty($this->form['date']['from']) && !empty($this->form['date']['to'])) {
+                    $q->whereDateBetween('registration_date_ne', [$this->form['date']['from'], $this->form['date']['to']]);
                 }
             })
             ->get();
