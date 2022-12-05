@@ -5,7 +5,7 @@
             <x-frontend.scroll-news-component/>
         </section>
 </main>
-<div class="container">
+<div class="container" style="color: #E2DFDF">
         <section class="mid">
             <div class="row">
                 <div class="col-md-8">
@@ -30,6 +30,6 @@
 @endsection
 
 
-<!-- <div class="col-md-6">
+{{-- <div class="col-md-6">
                     <x-frontend.module-info-component/>
-                </div> -->
+                </div>  --}}

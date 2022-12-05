@@ -1,4 +1,4 @@
-<div class="mt-2">
+<div class="mt-4">
     <div class="vertical-scroll shadow">
         <div class="move">
             @foreach($notices as $notice)
