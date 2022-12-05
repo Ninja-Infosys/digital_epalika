@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class File extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $dates = [
         'created_at',
