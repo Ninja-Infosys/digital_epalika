@@ -40,7 +40,7 @@ class ReportLivewire extends Component
         'business_year' => [],
         'introBoard' => [],
     ];
-    public array $class = ["card-body","d-none"];
+    public array $class = ["card-body", "d-none"];
 
     protected $rules = [
         'form.date.from_date' => ['nullable', 'date', 'before_or_equal:form.date.to_date'],
@@ -155,8 +155,11 @@ class ReportLivewire extends Component
      */
     private function filterDataFromUser($q): void
     {
-        if (!empty($this->form['date']['from']) && !empty($this->form['date']['to'])) {
-            $q->whereDateBetween('registration_date_ne', [$this->form['date']['from'], $this->form['date']['to']]);
+        if (!empty($this->form['date']['from_date'])) {
+            $q->whereDate('registration_date_ne', '<=', $this->form['date']['from_date']);
+        }
+        if (!empty($this->form['date']['to_date'])) {
+            $q->whereDate('registration_date_ne', '>=', $this->form['date']['to_date']);
         }
 
         if (!empty($this->form['fiscal_year'])) {
@@ -178,16 +181,19 @@ class ReportLivewire extends Component
         if (!empty($this->form['investment']['from'])) {
             $q->where('amount_cost', '>=', (int)$this->form['investment']['from']);
         }
-        if ( !empty($this->form['investment']['to'])) {
-            $q->where('amount_cost','<=',  (int)$this->form['investment']['to']);
+        if (!empty($this->form['investment']['to'])) {
+            $q->where('amount_cost', '<=', (int)$this->form['investment']['to']);
         }
 
-        if (!empty($this->form['employment']['from']) && !empty($this->form['employment']['to'])) {
-            $q->whereBetween('employment', [$this->form['employment']['from'], $this->form['employment']['to']]);
+        if (!empty($this->form['employment']['from'])) {
+            $q->where('employment', '>=', (int)$this->form['employment']['from']);
+        }
+        if (!empty($this->form['employment']['to'])) {
+            $q->where('employment', '<=', (int)$this->form['employment']['to']);
         }
 
-        if (!empty($this->form['business_year']['from']) && !empty($this->form['business_year']['to'])) {
-            $q->whereBetween('establish_year', [$this->form['business_year']['from'], $this->form['business_year']['to']]);
+        if (!empty($this->form['business_year'])) {
+            $q->whereIn('establish_year', $this->form['business_year']);
         }
     }
 
