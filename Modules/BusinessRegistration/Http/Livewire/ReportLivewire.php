@@ -79,9 +79,52 @@ class ReportLivewire extends Component
     {
         $this->validate();
         $this->businessDetails = BusinessDetail::with('proprietorDetail', 'localBody')
+            ->whereHas('investmentRevenue', function ($subQuery) {
+                if (!empty($this->form['object_transaction'])) {
+                    $subQuery->whereIn('object_transaction_id', $this->form['object_transaction']);
+                }
+            })
+            ->whereHas('proprietorDetail', function ($subQuery) {
+                if (!empty($this->form['registration_renewal'])) {
+                    $subQuery->whereIn('business_type', $this->form['registration_renewal']);
+                }
+            })
+            ->whereHas('proprietorDetail.introboard', function ($subQuery) {
+                if (!empty($this->form['introBoard']['from']) && !empty($this->form['introBoard']['to'])) {
+                    $subQuery->whereBetween('square', [$this->form['introBoard']['from'], $this->form['introBoard']['to']]);
+                }
+            })
             ->where(function ($q) {
                 if (!empty($this->form['date']['from']) && !empty($this->form['date']['to'])) {
                     $q->whereDateBetween('registration_date_ne', [$this->form['date']['from'], $this->form['date']['to']]);
+                }
+
+                if (!empty($this->form['fiscal_year'])) {
+                    $q->whereIn('fiscal_year_id', $this->form['fiscal_year']);
+                }
+
+                if (!empty($this->form['business_nature'])) {
+                    $q->whereIn('business_nature', $this->form['business_nature']);
+                }
+
+                if (!empty($this->form['business_purpose'])) {
+                    $q->whereIn('investment_revenue_id', $this->form['business_purpose']);
+                }
+
+                if (!empty($this->form['investment_revenue'])) {
+                    $q->whereIn('investment_revenue_id', $this->form['investment_revenue']);
+                }
+
+                if (!empty($this->form['investment']['from']) && !empty($this->form['investment']['to'])) {
+                    $q->whereBetween('amount_cost', [$this->form['investment']['from'], $this->form['investment']['to']]);
+                }
+
+                if (!empty($this->form['employment']['from']) && !empty($this->form['employment']['to'])) {
+                    $q->whereBetween('employment', [$this->form['employment']['from'], $this->form['employment']['to']]);
+                }
+
+                if (!empty($this->form['business_year']['from']) && !empty($this->form['business_year']['to'])) {
+                    $q->whereBetween('establish_year', [$this->form['business_year']['from'], $this->form['business_year']['to']]);
                 }
             })
             ->get();
