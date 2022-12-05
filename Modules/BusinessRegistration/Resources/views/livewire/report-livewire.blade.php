@@ -350,11 +350,6 @@
                         Livewire.emit('toDateChanged', inputFieldDate);
                     }
                 });
-
-                let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-                Livewire.emit('fromDateChanged', todayBsDate);
-                Livewire.emit('toDateChanged', todayBsDate);
-
             });
         </script>
     @endpush
