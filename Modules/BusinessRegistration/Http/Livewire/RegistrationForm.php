@@ -190,7 +190,7 @@ class RegistrationForm extends Component
         'form.business_detail_name' => ['nullable'],
         'form.business_detail_name_en' => ['nullable'],
         'form.business_nature' => ['required'],
-        'form.establish_year' => ['nullable'],
+        'form.establish_year' => ['nullable', 'numeric', 'digits:4'],
         'form.registration_date' => ['nullable'],
         'form.pan_no' => ['nullable'],
         'form.object_transaction_id' => ['nullable'],
