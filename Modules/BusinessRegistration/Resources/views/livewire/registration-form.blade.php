@@ -176,9 +176,9 @@
                                             साल</label>
                                         <input
                                             name="form.establish_year"
-                                            class="form-control @error('form.establish_year') is-invalid @enderror"
+                                            class="form-control  @error('form.establish_year') is-invalid @enderror"
                                             type="text"
-                                            id="form.establish_year"
+                                            id="form.establish_year" required
                                             placeholder="व्यवसाय स्थापना गरेको साल"
                                             wire:model="form.establish_year"
                                         />

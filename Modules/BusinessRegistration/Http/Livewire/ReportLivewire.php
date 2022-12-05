@@ -47,7 +47,7 @@ class ReportLivewire extends Component
         'form.date.to_date' => ['nullable', 'date', 'after_or_equal:form.date.from_date']
     ];
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
@@ -77,71 +77,26 @@ class ReportLivewire extends Component
 
     public function submitForm(): void
     {
-        dd($this->form);
+//        dd($this->form);
         $this->validate();
         $this->businessDetails = BusinessDetail::with(['proprietorDetail',
             'localBody',
-            'investmentRevenue' => function ($q) {
-                if (!empty($this->form['object_transaction'])) {
-                    $q->whereHas('object_transaction_id', function ($q) {
-                        $q->whereIn('object_transaction_id', $this->form['object_transaction']);
-                    });
-                }
-            },
-            'proprietorDetail' => function ($q) {
-                if (!empty($this->form['registration_renewal'])) {
-                    $q->whereHas('business_type', function ($q) {
-                        $q->whereIn('business_type', $this->form['registration_renewal']);
-                    });
-                }
-            },
-            'proprietorDetail.introboard' => function ($q) {
-                if (!empty($this->form['introBoard']['from']) && !empty($this->form['introBoard']['to'])) {
-                    $q->whereHas('square', function ($q) {
-                        $q->whereBetween('square', [$this->form['introBoard']['from'], $this->form['introBoard']['to']]);
-                    });
-                }
-            },
+            'investmentRevenue',
+            'proprietorDetail.introboard',
+            'proprietorDetail'
+
         ])
             ->where(function ($q) {
-                if (!empty($this->form['date']['from'])) {
-                    $q->whereDate('registration_date_ne', '<=', $this->form['date']['to']);
-                }
-                if (!empty($this->form['date']['to'])) {
-                    $q->whereDate('registration_date_ne', '>=', $this->form['date']['to']);
-                }
-
-                if (!empty($this->form['fiscal_year'])) {
-                    $q->whereIn('fiscal_year_id', $this->form['fiscal_year']);
-                }
-
-                if (!empty($this->form['business_nature'])) {
-                    $q->whereIn('business_nature', $this->form['business_nature']);
-                }
-
-                if (!empty($this->form['business_purpose'])) {
-                    $q->whereIn('investment_revenue_id', $this->form['business_purpose']);
-                }
-
-                if (!empty($this->form['investment_revenue'])) {
-                    $q->whereIn('investment_revenue_id', $this->form['investment_revenue']);
-                }
-
-                if (!empty($this->form['investment']['from']) && !empty($this->form['investment']['to'])) {
-                    $q->whereBetween('amount_cost', [$this->form['investment']['from'], $this->form['investment']['to']]);
-                }
-
-                if (!empty($this->form['employment']['from']) && !empty($this->form['employment']['to'])) {
-                    $q->whereBetween('employment', [$this->form['employment']['from'], $this->form['employment']['to']]);
-                }
-
-                if (!empty($this->form['business_year']['from']) && !empty($this->form['business_year']['to'])) {
-                    $q->whereBetween('establish_year', [$this->form['business_year']['from'], $this->form['business_year']['to']]);
-                }
+                $this->filterDataFromUser($q);
             })
-            ->toSql();
+            ->get();
 
-        dd($this->businessDetails);
+        $this->filterIntroBoardData();
+
+        $this->filterObjectTransaction();
+
+        $this->filterRegistrationRenewal();
+
     }
 
     public function render(): Factory|View|Application
@@ -149,7 +104,7 @@ class ReportLivewire extends Component
         return view('businessregistration::livewire.report-livewire');
     }
 
-    public function showFilterForm()
+    public function showFilterForm(): void
     {
         $this->showForm = !$this->showForm;
     }
@@ -188,5 +143,96 @@ class ReportLivewire extends Component
             'from' => 0,
             'to' => (int)Introboard::select('square')->max('square'),
         ];
+    }
+
+    /**
+     * @param $q
+     * @return void
+     */
+    private function filterDataFromUser($q): void
+    {
+        if (!empty($this->form['date']['from']) && !empty($this->form['date']['to'])) {
+            $q->whereDateBetween('registration_date_ne', [$this->form['date']['from'], $this->form['date']['to']]);
+        }
+
+        if (!empty($this->form['fiscal_year'])) {
+            $q->whereIn('fiscal_year_id', $this->form['fiscal_year']);
+        }
+
+        if (!empty($this->form['business_nature'])) {
+            $q->whereIn('business_nature', $this->form['business_nature']);
+        }
+
+        if (!empty($this->form['business_purpose'])) {
+            $q->whereIn('investment_revenue_id', $this->form['business_purpose']);
+        }
+
+        if (!empty($this->form['investment_revenue'])) {
+            $q->whereIn('investment_revenue_id', $this->form['investment_revenue']);
+        }
+
+        if (!empty($this->form['investment']['from'])) {
+            $q->where('amount_cost', '>=', (int)$this->form['investment']['from']);
+        }
+        if ( !empty($this->form['investment']['to'])) {
+            $q->where('amount_cost','<=',  (int)$this->form['investment']['to']);
+        }
+
+        if (!empty($this->form['employment']['from']) && !empty($this->form['employment']['to'])) {
+            $q->whereBetween('employment', [$this->form['employment']['from'], $this->form['employment']['to']]);
+        }
+
+        if (!empty($this->form['business_year']['from']) && !empty($this->form['business_year']['to'])) {
+            $q->whereBetween('establish_year', [$this->form['business_year']['from'], $this->form['business_year']['to']]);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function filterIntroBoardData(): void
+    {
+        if (!empty($this->form['introBoard']['from']) && !empty($this->form['introBoard']['to'])) {
+            $this->businessDetails = $this->businessDetails->filter(function ($detail) {
+                if (!empty($detail->proprietorDetail)
+                    && !empty($detail->proprietorDetail->introboard)) {
+                    $square = (int)$detail->proprietorDetail->introboard->square;
+                    return $this->form['introBoard']['from'] <= $square && $square <= $this->form['introBoard']['to'];
+                }
+                return false;
+            });
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function filterObjectTransaction(): void
+    {
+        if (!empty($this->form['object_transaction'])) {
+            $this->businessDetails = $this->businessDetails->filter(function ($detail) {
+                if (!empty($detail->investmentRevenue)) {
+                    $objectTransactionId = (int)$detail->investmentRevenue->object_transaction_id;
+                    return in_array($objectTransactionId, $this->form['object_transaction'], true);
+                }
+                return false;
+            });
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function filterRegistrationRenewal(): void
+    {
+        if (!empty($this->form['registration_renewal'])) {
+            $this->businessDetails = $this->businessDetails->filter(function ($detail) {
+                if (!empty($detail->proprietorDetail)) {
+                    $businessType = (int)$detail->proprietorDetail->business_type;
+                    return in_array($businessType, $this->form['registration_renewal'], true);
+                }
+                return false;
+            });
+        }
     }
 }

@@ -60,9 +60,9 @@
                             <div class="row">
                                 <div class="col-md-12 mb-2">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
-                                    <select name="fiscal_year" multiple data-toggle="select2"
+                                    <select name="fiscal_year" multiple
                                             wire:model="form.fiscal_year" id="fiscal_year" class="form-control">
-                                        <option value=""> --आर्थिक बर्ष--</option>
+{{--                                        <option value=""> --आर्थिक बर्ष--</option>--}}
                                         @foreach($fiscalYears as $fiscalYear)
                                             <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
                                         @endforeach
@@ -80,7 +80,7 @@
                             <div class="row">
                                 <div class="col-md-12 mb-2">
                                     <label for="business_nature">व्यवसाय प्रकृति अनुसार</label>
-                                    <select name="business_nature" multiple data-toggle="select2"
+                                    <select name="business_nature" multiple
                                             wire:model="form.business_nature" id="business_nature"
                                             class="form-control">
                                         <option value=""> --व्यवसाय प्रकृति अनुसार--</option>
@@ -102,7 +102,7 @@
                             <div class="row">
                                 <div class="col-md-12 mb-2">
                                     <label for="business_purpose">उदेश्य अनुसार</label>
-                                    <select name="business_purpose" multiple data-toggle="select2"
+                                    <select name="business_purpose" multiple
                                             wire:model="form.business_purpose"
                                             id="business_purpose" class="form-control">
                                         <option value=""> --उदेश्य अनुसार--</option>
@@ -124,7 +124,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="object_transaction">कारोबार वस्तु अनुसार</label>
                                     <select name="object_transaction" wire:model="form.object_transaction" multiple
-                                            data-toggle="select2" id="object_transaction" class="form-control">
+                                            id="object_transaction" class="form-control">
                                         <option value=""> --कारोबार वस्तु--</option>
                                         @foreach($objectTransactions as $objectTransaction)
                                             <option
@@ -145,7 +145,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="investment_revenue">पुँजीगत लगानी र राजस्वो</label>
                                     <select name="investment_revenue" id="investment_revenue" multiple
-                                            data-toggle="select2" wire:model="form.investment_revenue"
+                                             wire:model="form.investment_revenue"
                                             class="form-control">
                                         <option value=""> --पुँजीगत लगानी र राजस्वो--</option>
                                         @foreach($investmentRevenues as $investmentRevenue)
@@ -168,7 +168,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="registration_renewal">दर्ता र नविकरण अनुसार</label>
                                     <select name="registration_renewal" id="registration_renewal" multiple
-                                            data-toggle="select2" wire:model="form.registration_renewal"
+                                             wire:model="form.registration_renewal"
                                             class="form-control">
                                         <option value=""> --दर्ता र नविकरण अनुसार--</option>
                                         @foreach(\Modules\BusinessRegistration\Enums\BusinessTypeEnum::cases() as $businessTypeEnum)
@@ -230,7 +230,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="business_year">साल</label>
                                     <select name="business_year" id="business_year" multiple
-                                            data-toggle="select2" wire:model="form.business_year"
+                                             wire:model="form.business_year"
                                             class="form-control">
                                         <option value=""> --साल--</option>
                                         @foreach($businessYears as $year)
@@ -264,7 +264,7 @@
 
 
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            Filter
                         </button>
 
                     </form>
