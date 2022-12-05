@@ -65,79 +65,80 @@ class ReportLivewire extends Component
 
     protected $listeners = ['fromDateChanged', 'toDateChanged'];
 
-    public function fromDateChanged($nepaliDate, $englishDate): void
+    public function fromDateChanged($nepaliDate): void
     {
         $this->form['date']['from_date'] = $nepaliDate;
     }
 
-    public function toDateChanged($nepaliDate, $englishDate): void
+    public function toDateChanged($nepaliDate): void
     {
         $this->form['date']['to_date'] = $nepaliDate;
     }
 
     public function submitForm(): void
     {
+//        dd($this->form);
         $this->validate();
-        $business = BusinessDetail::query();
-        $business->with('proprietorDetail', 'localBody');
-
-        if (!empty($this->form['object_transaction'])) {
-            $business->whereHas('investmentRevenue', function ($subQuery) {
+        $this->businessDetails = BusinessDetail::with(['proprietorDetail',
+            'localBody',
+            'investmentRevenue' => function ($q) {
                 if (!empty($this->form['object_transaction'])) {
-                    $subQuery->whereIn('object_transaction_id', $this->form['object_transaction']);
+                    $q->whereHas('object_transaction_id', function ($q) {
+                        $q->whereIn('object_transaction_id', $this->form['object_transaction']);
+                    });
                 }
-            });
-        }
-
-        if (!empty($this->form['registration_renewal'])) {
-            $business->whereHas('proprietorDetail', function ($subQuery) {
+            },
+            'proprietorDetail' => function ($q) {
                 if (!empty($this->form['registration_renewal'])) {
-                    $subQuery->whereIn('business_type', $this->form['registration_renewal']);
+                    $q->whereHas('business_type', function ($q) {
+                        $q->whereIn('business_type', $this->form['registration_renewal']);
+                    });
                 }
-            });
-        }
-
-        if (!empty($this->form['introBoard']['from']) && !empty($this->form['introBoard']['to'])) {
-            $business->whereHas('proprietorDetail.introboard', function ($subQuery) {
+            },
+            'proprietorDetail.introboard' => function ($q) {
                 if (!empty($this->form['introBoard']['from']) && !empty($this->form['introBoard']['to'])) {
-                    $subQuery->whereBetween('square', [$this->form['introBoard']['from'], $this->form['introBoard']['to']]);
+                    $q->whereHas('square', function ($q) {
+                        $q->whereBetween('square', [$this->form['introBoard']['from'], $this->form['introBoard']['to']]);
+                    });
                 }
-            });
-        }
-        $this->businessDetails = $business->where(function ($q) {
-            if (!empty($this->form['date']['from']) && !empty($this->form['date']['to'])) {
-                $q->whereDateBetween('registration_date_ne', [$this->form['date']['from'], $this->form['date']['to']]);
-            }
+            },
+        ])
+            ->where(function ($q) {
+                if (!empty($this->form['date']['from']) && !empty($this->form['date']['to'])) {
+                    $q->whereDateBetween('registration_date_ne', [$this->form['date']['from'], $this->form['date']['to']]);
+                }
 
-            if (!empty($this->form['fiscal_year'])) {
-                $q->whereIn('fiscal_year_id', $this->form['fiscal_year']);
-            }
+                if (!empty($this->form['fiscal_year'])) {
+                    $q->whereIn('fiscal_year_id', $this->form['fiscal_year']);
+                }
 
-            if (!empty($this->form['business_nature'])) {
-                $q->whereIn('business_nature', $this->form['business_nature']);
-            }
+                if (!empty($this->form['business_nature'])) {
+                    $q->whereIn('business_nature', $this->form['business_nature']);
+                }
 
-            if (!empty($this->form['business_purpose'])) {
-                $q->whereIn('investment_revenue_id', $this->form['business_purpose']);
-            }
+                if (!empty($this->form['business_purpose'])) {
+                    $q->whereIn('investment_revenue_id', $this->form['business_purpose']);
+                }
 
-            if (!empty($this->form['investment_revenue'])) {
-                $q->whereIn('investment_revenue_id', $this->form['investment_revenue']);
-            }
+                if (!empty($this->form['investment_revenue'])) {
+                    $q->whereIn('investment_revenue_id', $this->form['investment_revenue']);
+                }
 
-            if (!empty($this->form['investment']['from']) && !empty($this->form['investment']['to'])) {
-                $q->whereBetween('amount_cost', [$this->form['investment']['from'], $this->form['investment']['to']]);
-            }
+                if (!empty($this->form['investment']['from']) && !empty($this->form['investment']['to'])) {
+                    $q->whereBetween('amount_cost', [$this->form['investment']['from'], $this->form['investment']['to']]);
+                }
 
-            if (!empty($this->form['employment']['from']) && !empty($this->form['employment']['to'])) {
-                $q->whereBetween('employment', [$this->form['employment']['from'], $this->form['employment']['to']]);
-            }
+                if (!empty($this->form['employment']['from']) && !empty($this->form['employment']['to'])) {
+                    $q->whereBetween('employment', [$this->form['employment']['from'], $this->form['employment']['to']]);
+                }
 
-            if (!empty($this->form['business_year']['from']) && !empty($this->form['business_year']['to'])) {
-                $q->whereBetween('establish_year', [$this->form['business_year']['from'], $this->form['business_year']['to']]);
-            }
-        })
-            ->get();
+                if (!empty($this->form['business_year']['from']) && !empty($this->form['business_year']['to'])) {
+                    $q->whereBetween('establish_year', [$this->form['business_year']['from'], $this->form['business_year']['to']]);
+                }
+            })
+            ->toSql();
+
+        dd($this->businessDetails);
     }
 
     public function render(): Factory|View|Application
