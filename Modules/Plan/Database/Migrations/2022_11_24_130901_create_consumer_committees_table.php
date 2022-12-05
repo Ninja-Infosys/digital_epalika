@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('meeting_date')->nullable();
             $table->string('registration_no')->nullable();
             $table->integer('beneficiary_no')->nullable();
+            $table->integer('member_number')->default(0);
             $table->string('experience_in_project')->nullable();
             $table->timestamps();
             $table->softDeletes();

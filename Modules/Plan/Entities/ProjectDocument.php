@@ -5,11 +5,10 @@ namespace Modules\Plan\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class ConsumerCommittee extends Model
+class ProjectDocument extends Model
 {
     use HasFactory, SoftDeletes, EventObserveTrait;
 
@@ -21,25 +20,13 @@ class ConsumerCommittee extends Model
 
     protected $fillable = [
         'project_id',
-        'name',
-        'address',
-        'phone',
-        'formation_date',
-        'committee_registration_date',
-        'meeting_date',
-        'registration_no',
-        'beneficiary_no',
-        'member_number',
-        'experience_in_project'
+        'document_type',
+        'document_name',
+        'data'
     ];
 
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
-    }
-
-    public function consumerCommitteeOfficials(): HasMany
-    {
-        return $this->hasMany(ConsumerCommitteeOfficial::class);
     }
 }

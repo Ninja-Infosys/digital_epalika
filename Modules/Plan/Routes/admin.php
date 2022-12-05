@@ -8,11 +8,15 @@ use Modules\Plan\Http\Controllers\Admin\PlanAreaController;
 use Modules\Plan\Http\Controllers\Admin\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\PlanTemplateController;
 use Modules\Plan\Http\Controllers\Admin\ProjectController;
+use Modules\Plan\Http\Controllers\Admin\ProjectDocumentController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::post('project/{project}/agreement-term',[ProjectController::class,'saveProjectAgreementTerm'])->name('save-project-agreement-term');
+Route::get('project{project}/upload-file',[ProjectController::class,'uploadFilePage'])->name('project.uploadFilePage');
+Route::post('project/{project}/upload-file',[ProjectController::class,'uploadFile'])->name('project.uploadFile');
 Route::resource('project', ProjectController::class);
+Route::resource('project/{project}/projectDocument', ProjectDocumentController::class)->names('project.projectDocument');
 
 Route::prefix('setting')->group(function (){
     Route::resource('planArea', PlanAreaController::class)->except('show');

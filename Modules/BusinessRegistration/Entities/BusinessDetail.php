@@ -66,6 +66,53 @@ class BusinessDetail extends Model
 
     ];
 
+    public function scopeFilterData($query, $param = [])
+    {
+        if (!empty($param['from_date'])) {
+            $query->whereDate('registration_date_ne', '>=', $param['from_date']);
+        }
+        if (!empty($param['to_date'])) {
+            $query->whereDate('registration_date_ne', '<=', $param['to_date']);
+        }
+        if (!empty($param['fiscal_year'])) {
+            $query->where('fiscal_year_id', $param['fiscal_year']);
+        }
+        if (!empty($param['business_nature'])) {
+            $query->where('business_nature', $param['business_nature']);
+        }
+//        if (!empty($param['business_purpose'])){
+//            $query->where('registration_date_ne',$param['business_purpose']);
+//        }
+//        if (!empty($param['object_transaction'])){
+//            $query->where('registration_date_ne',$param['object_transaction']);
+//        }
+        if (!empty($param['investment_revenue'])) {
+            $query->whereDate('investment_revenue_id', $param['investment_revenue']);
+        }
+        if (!empty($param['registration_renewal'])) {
+            $query->where('business_nature', $param['registration_renewal']);
+        }
+        if (!empty($param['investment'])) {
+            $query->where('amount_cost', $param['investment']);
+        }
+        if (!empty($param['employment'])) {
+            $query->where('employment', $param['employment']);
+        }
+        if (!empty($param['business_year'])) {
+            $query->where('establish_year', $param['business_year']);
+        }
+
+        if (!empty($param['introboard'])) {
+            $query->whereHas('proprietorDetail.introboard', function ($subQuery) use ($param) {
+                $subQuery->where('length', 'like', '%' . $param['introboard'] . '%');
+                $subQuery->orWhere('width', 'like', '%' . $param['introboard'] . '%');
+                $subQuery->orWhere('square', 'like', '%' . $param['introboard'] . '%');
+            });
+        }
+
+        return $query;
+    }
+
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
@@ -104,5 +151,10 @@ class BusinessDetail extends Model
     public function businessPurposes(): BelongsToMany
     {
         return $this->belongsToMany(BusinessPurpose::class);
+    }
+
+    public function proprietorDetail(): BelongsTo
+    {
+        return $this->belongsTo(ProprietorDetail::class);
     }
 }

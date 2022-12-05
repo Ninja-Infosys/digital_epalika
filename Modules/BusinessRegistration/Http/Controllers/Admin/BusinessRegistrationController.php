@@ -96,13 +96,13 @@ class BusinessRegistrationController extends Controller
     }
 
 
-    public function addData($id, $type): Factory|View|Application
+    public function addData($id, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
     {
 
         $this->checkAuthorization('customs_edit');
         $proprietorDetail = ProprietorDetail::find($id);
         $customs = Customs::where('proprietor_detail_id', $id)->first();
-        return view('businessregistration::admin.businessRegistration.customs.index', compact('proprietorDetail', 'type', 'customs'));
+        return view('businessregistration::admin.businessRegistration.customs.index', compact('proprietorDetail', 'templateTypeEnum', 'customs'));
     }
 
     public function customData(Request $request, $id, $type): RedirectResponse
@@ -116,8 +116,6 @@ class BusinessRegistrationController extends Controller
             'business_tax' => ['required'],
             'introduction_board_fees' => ['required'],
             'fine' => ['required'],
-            'date' => ['nullable'],
-            'registration_no' => ['nullable'],
         ]);
 
         DB::transaction(function () use ($id, $data) {

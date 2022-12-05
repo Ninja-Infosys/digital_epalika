@@ -79,7 +79,7 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-3 mb-2">
             <label for="registration_no" class="form-label">समिती दर्ता नं. *</label>
             <input
                 type="text"
@@ -92,7 +92,7 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-3 mb-2">
             <label for="beneficiary_no" class="form-label">गठन गर्दा उपस्थित लाभान्वितको संख्या</label>
             <input
                 type="number"
@@ -105,7 +105,27 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-3 mb-2">
+            <label for="member_number" class="form-label">
+                सदस्य संख्या
+            </label>
+            <div class="input-group input-group-merge">
+                <input
+                    type="number"
+                    wire:model="form.member_number"
+                    class="form-control @error('form.member_number') is-invalid @enderror"
+                    id="member_number"
+                    placeholder="सदस्य संख्या"
+                />
+                <div class="input-group-text bg-soft-success">
+                    <span wire:click="setConsumerCommitteeMembers" class="fa fa-users"></span>
+                </div>
+                @error('form.member_number')
+                <div class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
             <label for="experience_in_project" class="form-label">आयोजना संचालन सम्बन्धी अनुभव</label>
             <input
                 type="text"
@@ -133,9 +153,7 @@
                 <th>बुवा/पतिको नाम	</th>
                 <th>बाजेको नाम</th>
                 <th>
-                    <button type="button" wire:click="addConsumerCommitteeOfficials" class="btn btn-xs btn-outline-primary">
-                        <i class="fa fa-plus-circle"></i>
-                    </button>
+                    #
                 </th>
             </tr>
             </thead>
