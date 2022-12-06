@@ -77,7 +77,7 @@ class ReportLivewire extends Component
 
     public function submitForm(): void
     {
-//        dd($this->form);
+
         $this->validate();
         $this->businessDetails = BusinessDetail::with(['proprietorDetail',
             'localBody',
@@ -96,6 +96,7 @@ class ReportLivewire extends Component
         $this->filterObjectTransaction();
 
         $this->filterRegistrationRenewal();
+        $this->reset('class');
 
     }
 
@@ -156,10 +157,10 @@ class ReportLivewire extends Component
     private function filterDataFromUser($q): void
     {
         if (!empty($this->form['date']['from_date'])) {
-            $q->whereDate('registration_date_ne', '<=', $this->form['date']['from_date']);
+            $q->whereDate('registration_date_ne', '>=', $this->form['date']['from_date']);
         }
         if (!empty($this->form['date']['to_date'])) {
-            $q->whereDate('registration_date_ne', '>=', $this->form['date']['to_date']);
+            $q->whereDate('registration_date_ne', '<=', $this->form['date']['to_date']);
         }
 
         if (!empty($this->form['fiscal_year'])) {
