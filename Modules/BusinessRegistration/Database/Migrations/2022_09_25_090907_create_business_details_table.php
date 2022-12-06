@@ -30,7 +30,7 @@ return new class () extends Migration {
             $table->foreignId('province_id')->nullable()->comment('प्रदेश')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('district_id')->nullable()->comment('जिल्ला')->constrained()->nullOnDelete()->onUpdate('no action');
             $table->foreignId('local_body_id')->nullable()->comment('पालिका')->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->foreignId('investment_revenue_id')->nullable()->comment('')->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('investment_revenue_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->string('ward_no')->nullable()->comment('वार्ड');
             $table->string('way')->nullable()->comment('मार्ग');
             $table->string('tole')->nullable()->comment(' गाउ/टोल ');
