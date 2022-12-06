@@ -1,108 +1,32 @@
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-    <div class="card" style="max-width: 700px; height:31rem;">
-      <div class="card mb-3 mt-4" style="max-width: 700px; height:26%; background-color: #0DCAF0;">
-          <div class="row g-0">
-              <div class="col-md-4">
-                  <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/naparaja_upathhayaya/FMBDC707ie5KllHGJQsu6U8bfba3oxrod0LGW5va.jpg"
-                      class="img-fluid rounded-start" alt="..."
-                      style="object-fit: contain; height: 8rem; width: 77%;">
-              </div>
-              <div class="col-md-8">
-                  <div class="card-body mt-2">
-                      <h5 class="card-title" style="font-size: 22px; color:black"><b>डम्बर बहादुर बि.क</b></h5>
-                      <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
-                      <p style="font-size: 18px;color:black"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="card mb-3 mt-4" style="max-width: 700px; height:26%; background-color: #0DCAF0;">
-          <div class="row g-0">
-              <div class="col-md-4">
-                  <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/damabra_bhathara_bka/Jyk8kJDSunO9HJmK7tMbFCsSEBKzctX0ea6F1fIM.png"
-                      class="img-fluid rounded-start" alt="..."
-                      style="object-fit: contain; height: 8rem; width: 77%;">
-              </div>
-              <div class="col-md-8">
-                  <div class="card-body mt-2">
-                      <h5 class="card-title" style="font-size: 22px;color:black"><b>डम्बर बहादुर बि.क</b></h5>
-                      <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
-                      <p style="font-size: 18px;color:black"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="card mt-4" style="max-width: 700px; height:26%; background-color: #0DCAF0;">
-          <div class="row g-0">
-              <div class="col-md-4">
-                  <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/maniaja_mall/gObKPy1oIfYaXrR2fXxyIi0gXnbU6F9zYAUKlHyk.png"
-                      class="img-fluid rounded-start" alt="..."
-                      style="object-fit: contain; height: 8rem; width: 77%;">
-              </div>
-              <div class="col-md-8">
-                  <div class="card-body mt-2">
-                      <h5 class="card-title" style="font-size: 22px;color:black"><b>डम्बर बहादुर बि.क</b></h5>
-                      <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
-                      <p style="font-size: 18px;color:black"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @foreach ($employees->chunk(3) as $empChunk)
+            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                <div class="employee" style="max-width: 700px; height:31rem;">
+                    @foreach ($empChunk as $employee)
+                        <div class="card mb-3 mt-4" style="max-width: 700px; height:26%; background-color: #0DCAF0;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="{{ $employee->photo_url }}" class="img-fluid rounded-start"
+                                        alt="{{ $employee->name }}"
+                                        style="object-fit: contain; height: 8rem; width: 77%;">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body mt-2">
+                                        <h5 class="card-title" style="font-size: 22px; color:black">
+                                            <b>{{ $employee->name }}</b>
+                                        </h5>
+                                        <p class="card-text" style="color: #0047AB; font-size: 18px">
+                                            {{ $employee->designation }}</p>
+                                        <p style="font-size: 18px;color:black"><i
+                                                class="fa-solid fa-phone"></i>{{ $employee->phone }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
     </div>
-    <div class="carousel-item active">
-      <div class="card" style="max-width: 700px; height:31rem;">
-        <div class="card mb-3 mt-4" style="max-width: 700px; height:26%; background-color: #0DCAF0;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/naparaja_upathhayaya/FMBDC707ie5KllHGJQsu6U8bfba3oxrod0LGW5va.jpg"
-                        class="img-fluid rounded-start" alt="..."
-                        style="object-fit: contain; height: 8rem; width: 77%;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body mt-2">
-                        <h5 class="card-title" style="font-size: 22px; color:black"><b>डम्बर बहादुर बि.क</b></h5>
-                        <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
-                        <p style="font-size: 18px;color:black"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mb-3 mt-4" style="max-width: 700px; height:26%; background-color: #0DCAF0;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/damabra_bhathara_bka/Jyk8kJDSunO9HJmK7tMbFCsSEBKzctX0ea6F1fIM.png"
-                        class="img-fluid rounded-start" alt="..."
-                        style="object-fit: contain; height: 8rem; width: 77%;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body mt-2">
-                        <h5 class="card-title" style="font-size: 22px;color:black"><b>डम्बर बहादुर बि.क</b></h5>
-                        <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
-                        <p style="font-size: 18px;color:black"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card mt-4" style="max-width: 700px; height:26%; background-color: #0DCAF0;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://digital-epalika.ninjainfosys.com.np/storage/employee/maniaja_mall/gObKPy1oIfYaXrR2fXxyIi0gXnbU6F9zYAUKlHyk.png"
-                        class="img-fluid rounded-start" alt="..."
-                        style="object-fit: contain; height: 8rem; width: 77%;">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body mt-2">
-                        <h5 class="card-title" style="font-size: 22px;color:black"><b>डम्बर बहादुर बि.क</b></h5>
-                        <p class="card-text" style="color: #0047AB; font-size: 18px">अध्क्षय</p>
-                        <p style="font-size: 18px;color:black"><i class="fa-solid fa-phone"></i>९८५८०२१६८२</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-      </div>
-  </div>
 </div>
