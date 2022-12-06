@@ -335,9 +335,10 @@ class RegistrationForm extends Component
     public function submitForm()
     {
         $this->validate();
-        $proprietorDetails = DB::transaction(function () {
+        $businessDetail = DB::transaction(function () {
 
             $businessDetail = BusinessDetail::create([
+                'business_type' => $this->form['business_type'] ?? null,
                 'business_detail_name' => $this->form['business_detail_name'] ?? null,
                 'investment_revenue_id' => $this->form['investment_revenue_id'] ?? null,
                 'is_rent' => $this->form['is_rent'] ?? null,
@@ -373,9 +374,8 @@ class RegistrationForm extends Component
                 'square' => $this->form['square'] ?? 0,
             ]);
 
-            $proprietorDetails = $businessDetail->proprietorDetail()->create([
+            $proprietorDetail = $businessDetail->proprietorDetail()->create([
                 'name' => $this->form['name'] ?? null,
-                'business_type' => $this->form['business_type'] ?? null,
                 'citizenship_no' => $this->form['citizenship_no'] ?? null,
                 'issue_date' => $this->form['issue_date'] ?? null,
                 'issue_district_id' => $this->form['issue_district_id'] ?? null,
@@ -400,7 +400,7 @@ class RegistrationForm extends Component
             $businessDetail->businessPurposes()->attach($this->form['purpose'] ?? null);
 
             foreach ($this->form['threeGenerationDetails'] as $threeGenerationDetail) {
-                $proprietorDetails->threeGenerationDetails()->create([
+                $proprietorDetail->threeGenerationDetails()->create([
                     'relation' => $threeGenerationDetail['relation'] ?? null,
                     'name' => $threeGenerationDetail['name'] ?? null,
                     'name_en' => $threeGenerationDetail['name_en'] ?? null,
@@ -428,7 +428,7 @@ class RegistrationForm extends Component
             }
 
 
-            return $proprietorDetails;
+            return $businessDetail;
         });
 
         $this->dispatchBrowserEvent('alert_message', [
@@ -441,7 +441,7 @@ class RegistrationForm extends Component
 
         $this->reset('form');
 
-        return redirect()->route('businessRegistration.detail.print', $proprietorDetails->id);
+        return redirect()->route('businessRegistration.detail.print', $businessDetails->id);
     }
 
     public function documentsArrayIncrement(): void

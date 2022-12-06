@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css"
           integrity="sha512-3PN6gfRNZEX4YFyz+sIyTF6pGlQiryJu9NlGhu9LrLMQ7eDjNgudQoFDK3WSNAayeIKc6B8WXXpo4a7HqxjKwg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <title>{{$proprietorDetail->name}}को व्यवसाय दर्ता आवेदन</title>
+    <title>{{$businessDetail->name}}को व्यवसाय दर्ता आवेदन</title>
 </head>
 <body class="container">
 <section class="row justify-content-center my-4">
@@ -21,9 +21,11 @@
             <button class="btn btn-info" onclick="printJS({
             printable: 'printData',
             type: 'html',
-            css: '{{asset('assets/backend/css/print.css')}}',
-            documentTitle: '{{$proprietorDetail->name}}को व्यवसाय दर्ता आवेदन'
+            targetStyles: ['{{asset('assets/backend/css/print.css')}}',
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css'],
+            documentTitle: '{{$businessDetail->name}}को व्यवसाय दर्ता आवेदन'
             })">
+            
                 <i class="fa fa-print"></i> Print
             </button>
             <div id="printData">
@@ -38,7 +40,7 @@
                         </div>
                     </div>
                     <div
-                        class="col-md-2 col-sm-2 col-xs-2">{!! QrCode::generate($proprietorDetail->businessDetail->submission_no??''); !!}</div>
+                        class="col-md-2 col-sm-2 col-xs-2">{!! QrCode::generate($businessDetail->submission_no??''); !!}</div>
                 </div>
                 <hr>
                 <div class="col-md-12">
@@ -47,7 +49,7 @@
                             <span class="fw-bold">सबमिशन नम्बर:</span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$proprietorDetail->businessDetail->submission_no??''}}</span>
+                            <span>{{$businessDetail->submission_no??''}}</span>
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -55,7 +57,7 @@
                             <span class="fw-bold">व्यवसायीको नाम, थर:</span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$proprietorDetail->name}}</span>
+                            <span>{{$businessDetail->proprietorDetail->name}}</span>
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -63,7 +65,7 @@
                             <span class="fw-bold">व्यवसायीको सम्पर्क नं.:</span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$proprietorDetail->phone}}</span>
+                            <span>{{$businessDetail->proprietorDetail->phone}}</span>
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -71,7 +73,7 @@
                             <span class="fw-bold">व्यवसायीको इमेल ठेगाना:</span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$proprietorDetail->email}}</span>
+                            <span>{{$businessDetail->proprietorDetail->email}}</span>
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -79,10 +81,10 @@
                             <span class="fw-bold">व्यवसायीको ठेगाना:</span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$proprietorDetail->localBody->local_body??''}}
-                                - {{$proprietorDetail->businessDetail->ward_no??''}}
-                                , {{$proprietorDetail->district->district??''}}
-                                , {{$proprietorDetail->province->province??''}}, </span>
+                            <span>{{$businessDetail->proprietorDetail->localBody->local_body??''}}
+                                - {{$businessDetail->proprietorDetail->businessDetail->ward_no??''}}
+                                , {{$businessDetail->proprietorDetail->district->district??''}}
+                                , {{$businessDetail->proprietorDetail->province->province??''}}, </span>
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -90,7 +92,7 @@
                             <span class="fw-bold">व्यवसायको विवरण/प्रकृति:</span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$proprietorDetail->businessDetail->business_nature->label() ??''}}</span>
+                            <span>{{$businessDetail->business_nature->label() ??''}}</span>
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -98,7 +100,7 @@
                             <span class="fw-bold">व्यवसायको नाम:</span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$proprietorDetail->businessDetail->business_detail_name ??''}}</span>
+                            <span>{{$businessDetail->business_detail_name ??''}}</span>
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -106,7 +108,7 @@
                             <span class="fw-bold">पूँजी लगानी रु.: </span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$proprietorDetail->businessDetail->amount_cost??''}}</span>
+                            <span>{{$businessDetail->amount_cost??''}}</span>
                         </div>
                     </div>
                 </div>
@@ -114,23 +116,23 @@
                     <span class="fw-bold">कृपया यस आवेदनको साथमा तल उल्लेखित कागजातहरू बोक्नुहोस्। </span><br>
                     <span>१. व्यवसायीको पासपोर्ट साइजको
                                             फोटो  <i
-                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->photo ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->photo ??'') ? 'fa-check':''}}"></i> </span><br>
                     <span>२. नागरिकता अपलोड गर्नुहोस् (आगाडी)  <i
-                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->citizenship_front ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->citizenship_front ??'') ? 'fa-check':''}}"></i> </span><br>
                     <span>३. नागरिकता अपलोड गर्नुहोस् (पछाडी)  <i
-                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->citizenship_back ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->citizenship_back ??'') ? 'fa-check':''}}"></i> </span><br>
                     <span>४. फार्म कम्पनी भयमा
                                             दर्ता, इजाजत
                                             प्रमाणपत्र  <i
-                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->company_registration ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->company_registration ??'') ? 'fa-check':''}}"></i> </span><br>
                     <span>५.आन्तरिक राजस्व कार्यालयमा
                                             आघिल्लो आ.व
                                             सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि  <i
-                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->tax_pay_file ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->tax_pay_file ??'') ? 'fa-check':''}}"></i> </span><br>
                     <span>६. हस्ताक्षर <i
-                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->signature ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->signature ??'') ? 'fa-check':''}}"></i> </span><br>
                     <span>७. औठाको छाप <i
-                            class="fa {{!empty($proprietorDetail->businessRegisteredFile->thumb ??'') ? 'fa-check':''}}"></i>  </span>
+                            class="fa {{!empty($businessDetail->thumb ??'') ? 'fa-check':''}}"></i>  </span>
                 </div>
             </div>
         </div>

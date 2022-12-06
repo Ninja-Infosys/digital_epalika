@@ -84,7 +84,10 @@ trait GetAllColumns
                 return !empty($column->Comment);
             })
                 ->map(function ($column) {
-                    return [$column->Comment => $column->Field];
+                    return [
+                        'name' => $column->Comment,
+                        'column' => $column->Field
+                    ];
                 })->toArray();
         } else {
             $columns = $tableColumnInfos

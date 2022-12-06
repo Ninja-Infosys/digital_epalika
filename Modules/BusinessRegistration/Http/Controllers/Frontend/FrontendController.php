@@ -3,6 +3,7 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 
 class FrontendController extends Controller
@@ -12,23 +13,16 @@ class FrontendController extends Controller
         return view('businessregistration::frontend.index');
     }
 
-    public function printDetail(ProprietorDetail $proprietorDetail)
+    public function printDetail(BusinessDetail $businessDetail)
     {
-        $proprietorDetail->load(
-            'province',
-            'district',
-            'localBody',
-            'threeGenerationDetails',
-            'introboard',
-            'businessDetail.province',
-            'businessDetail.district',
-            'businessDetail.localBody',
-            'businessRegisteredFile',
-            'businessDetail.partnerDetails',
-            'businessDetail.registeredBusinesses'
+        $businessDetail->load(
+            'proprietorDetail.province',
+            'proprietorDetail.district',
+            'proprietorDetail.localBody',
+            'proprietorDetail',
         );
 
-        return view('businessregistration::frontend.printDetail', compact('proprietorDetail'));
+        return view('businessregistration::frontend.printDetail', compact('businessDetail'));
     }
 
     public function printPdf(ProprietorDetail $proprietorDetail)

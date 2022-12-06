@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 
-trait ProprietorTemplateTrait
+trait BusinessDetailTemplateTrait
 {
     private array $template = [
         [
@@ -138,87 +138,87 @@ trait ProprietorTemplateTrait
     private function getCustomsDetailReplacement(): array
     {
         return [
-            '[@businessDetail.application_fee]' => $this->customs->application_fee ?? '',
-            '[@businessDetail.registration_fee]' => $this->customs->registration_fee ?? '',
-            '[@businessDetail.business_tax]' => $this->customs->business_tax ?? '',
-            '[@businessDetail.introduction_board_fees]' => $this->customs->introduction_board_fees ?? '',
-            '[@businessDetail.fine]' => $this->customs->fine ?? '',
-            '[@businessDetail.registration_no]' => $this->customs->registration_no ?? '',
-            '[@businessDetail.date]' => $this->customs->date ?? '',
-            '[@businessDetail.total]' => $this->customs->total_amount ?? 0,
+            '[@businessDetail.application_fee]' => $this->application_fee ?? '',
+            '[@businessDetail.registration_fee]' => $this->registration_fee ?? '',
+            '[@businessDetail.business_tax]' => $this->business_tax ?? '',
+            '[@businessDetail.introduction_board_fees]' => $this->introduction_board_fees ?? '',
+            '[@businessDetail.fine]' => $this->fine ?? '',
+            '[@businessDetail.registration_no]' => $this->registration_no ?? '',
+            '[@businessDetail.date]' => $this->date ?? '',
+            '[@businessDetail.total]' => $this->total_amount ?? 0,
         ];
     }
 
     private function getBusinessDetailReplacement(): array
     {
         return [
-            '[@businessDetail.business_detail_name]' => $this->businessDetail->business_detail_name ?? '',
-            '[@businessDetail.business_detail_name_en]' => $this->businessDetail->business_detail_name_en ?? '',
-            '[@businessDetail.business_nature]' => $this->businessDetail->business_nature?->label() ?? '',
-            '[@businessDetail.establish_year]' => $this->businessDetail->establish_year ?? '',
-            '[@businessDetail.registration_date]' => $this->businessDetail->registration_date ?? '',
-            '[@businessDetail.pan_no]' => $this->businessDetail->pan_no ?? '',
-            '[@businessDetail.amount_cost]' => $this->businessDetail->amount_cost ?? '',
-            '[@businessDetail.source_of_capital]' => $this->businessDetail->source_of_capital?->label() ?? '',
-            '[@businessDetail.purpose]' => $this->businessDetail->purpose ?? '',
-            '[@businessDetail.employment]' => $this->businessDetail->employment ?? '',
-            '[@businessDetail.house_owner_name]' => $this->businessDetail->house_owner_name ?? '',
-            '[@businessDetail.house_owner_phone]' => $this->businessDetail->house_owner_phone ?? '',
-            '[@businessDetail.house_owner_address]' => $this->businessDetail->house_owner_address ?? '',
-            '[@businessDetail.house_owner_monthly_rent]' => $this->businessDetail->house_owner_monthly_rent ?? '',
-            '[@businessDetail.province.province]' => $this->businessDetail->province->province ?? '',
-            '[@businessDetail.district.district]' => $this->businessDetail->district->district ?? '',
-            '[@businessDetail.localBody.local_body]' => $this->businessDetail->localBody->local_body ?? '',
-            '[@businessDetail.ward_no]' => $this->businessDetail->ward_no ?? '',
-            '[@businessDetail.way]' => $this->businessDetail->way ?? '',
-            '[@businessDetail.tole]' => $this->businessDetail->tole ?? '',
-            '[@businessDetail.submission_no]' => $this->businessDetail->submission_no ?? '',
-            '[@businessDetail.fiscalYear.year]' => $this->businessDetail->fiscalYear->year ?? '',
-            '[@businessDetail.registration_no]' => $this->businessDetail->registration_no ?? '',
-            '[@businessDetail.registration_date_ne]' => $this->businessDetail->registration_date_ne ?? '',
-            '[@businessDetail.registration_date_en]' => $this->businessDetail->registration_date_en ?? '',
+            '[@businessDetail.business_detail_name]' => $this->business_detail_name ?? '',
+            '[@businessDetail.business_detail_name_en]' => $this->business_detail_name_en ?? '',
+            '[@businessDetail.business_nature]' => $this->business_nature?->label() ?? '',
+            '[@businessDetail.establish_year]' => $this->establish_year ?? '',
+            '[@businessDetail.registration_date]' => $this->registration_date ?? '',
+            '[@businessDetail.pan_no]' => $this->pan_no ?? '',
+            '[@businessDetail.amount_cost]' => $this->amount_cost ?? '',
+            '[@businessDetail.source_of_capital]' => $this->source_of_capital?->label() ?? '',
+            '[@businessDetail.purpose]' => $this->purpose ?? '',
+            '[@businessDetail.employment]' => $this->employment ?? '',
+            '[@businessDetail.house_owner_name]' => $this->house_owner_name ?? '',
+            '[@businessDetail.house_owner_phone]' => $this->house_owner_phone ?? '',
+            '[@businessDetail.house_owner_address]' => $this->house_owner_address ?? '',
+            '[@businessDetail.house_owner_monthly_rent]' => $this->house_owner_monthly_rent ?? '',
+            '[@businessDetail.province.province]' => $this->province->province ?? '',
+            '[@businessDetail.district.district]' => $this->district->district ?? '',
+            '[@businessDetail.localBody.local_body]' => $this->localBody->local_body ?? '',
+            '[@businessDetail.ward_no]' => $this->ward_no ?? '',
+            '[@businessDetail.way]' => $this->way ?? '',
+            '[@businessDetail.tole]' => $this->tole ?? '',
+            '[@businessDetail.submission_no]' => $this->submission_no ?? '',
+            '[@businessDetail.fiscalYear.year]' => $this->fiscalYear->year ?? '',
+            '[@businessDetail.registration_no]' => $this->registration_no ?? '',
+            '[@businessDetail.registration_date_ne]' => $this->registration_date_ne ?? '',
+            '[@businessDetail.registration_date_en]' => $this->registration_date_en ?? '',
         ];
     }
 
     private function getIntroBoardReplacement(): array
     {
         return [
-            '[@introBoard.length]' => $this->introboard->length ?? '',
-            '[@introBoard.width]' => $this->introboard->width ?? '',
-            '[@introBoard.square]' => $this->introboard->square ?? '',
+            '[@introBoard.length]' => $this->length ?? '',
+            '[@introBoard.width]' => $this->width ?? '',
+            '[@introBoard.square]' => $this->square ?? '',
         ];
     }
 
     private function getInvestmentRevenueReplacement(): array
     {
         return [
-            '[@businessDetail.investment_revenue.title]' => $this->businessDetail->investRevenue->title ?? '',
-            '[@businessDetail.investment_revenue.registration_amount]' => $this->businessDetail->investRevenue->registration_amount ?? '',
-            '[@businessDetail.investment_revenue.renew_amount]' => $this->businessDetail->investRevenue->renew_amount ?? '',
+            '[@businessDetail.investment_revenue.title]' => $this->investRevenue->title ?? '',
+            '[@businessDetail.investment_revenue.registration_amount]' => $this->investRevenue->registration_amount ?? '',
+            '[@businessDetail.investment_revenue.renew_amount]' => $this->investRevenue->renew_amount ?? '',
         ];
     }
 
     private function getProprietorReplacement(): array
     {
         return [
-            '[@name]' => $this->attributes['name'] ?? '',
-            '[@citizenship_no]' => $this->attributes['citizenship_no'] ?? '',
-            '[@issue_date]' => $this->attributes['name'] ?? '',
-            '[@phone]' => $this->attributes['phone'] ?? '',
-            '[@email]' => $this->attributes['email'] ?? '',
-            '[@ward_no]' => $this->attributes['ward_no'] ?? '',
-            '[@way]' => $this->attributes['way'] ?? '',
-            '[@tole]' => $this->attributes['tole'] ?? '',
-            '[@house_no]' => $this->attributes['house_no'] ?? '',
-            '[@account_no]' => $this->attributes['account_no'] ?? '',
-            '[@national_card_no]' => $this->attributes['national_card_no'] ?? '',
-            '[@gender]' => $this->attributes['gender'] ?? '',
-            '[@education_qualification]' => $this->attributes['education_qualification'] ?? '',
-            '[@occupation]' => $this->attributes['occupation'] ?? '',
-            '[@issueDistrict.district]' => $this->issueDistrict->district ?? '',
-            '[@province.province]' => $this->province->province ?? '',
-            '[@district.district]' => $this->district->district ?? '',
-            '[@localBody.local_body]' => $this->localBody->local_body ?? '',
+            '[@name]' => $this->proprietorDetail->attributes['name'] ?? '',
+            '[@citizenship_no]' => $this->proprietorDetail->attributes['citizenship_no'] ?? '',
+            '[@issue_date]' => $this->proprietorDetail->attributes['name'] ?? '',
+            '[@phone]' => $this->proprietorDetail->attributes['phone'] ?? '',
+            '[@email]' => $this->proprietorDetail->attributes['email'] ?? '',
+            '[@ward_no]' => $this->proprietorDetail->attributes['ward_no'] ?? '',
+            '[@way]' => $this->proprietorDetail->attributes['way'] ?? '',
+            '[@tole]' => $this->proprietorDetail->attributes['tole'] ?? '',
+            '[@house_no]' => $this->proprietorDetail->attributes['house_no'] ?? '',
+            '[@account_no]' => $this->proprietorDetail->attributes['account_no'] ?? '',
+            '[@national_card_no]' => $this->proprietorDetail->attributes['national_card_no'] ?? '',
+            '[@gender]' => $this->proprietorDetail->attributes['gender'] ?? '',
+            '[@education_qualification]' => $this->proprietorDetail->attributes['education_qualification'] ?? '',
+            '[@occupation]' => $this->proprietorDetail->attributes['occupation'] ?? '',
+            '[@issueDistrict.district]' => $this->proprietorDetail->issueDistrict->district ?? '',
+            '[@province.province]' => $this->proprietorDetail->province->province ?? '',
+            '[@district.district]' => $this->proprietorDetail->district->district ?? '',
+            '[@localBody.local_body]' => $this->proprietorDetail->localBody->local_body ?? '',
 
         ];
     }
@@ -226,8 +226,8 @@ trait ProprietorTemplateTrait
     private function getBusinessCategoryReplacement(): array
     {
         return [
-            '[@businessDetail.investmentRevenue.objectTransaction.objectTransaction.title]' => $this->businessDetail->investmentRevenue->objectTransaction->objectTransaction->title ?? '',
-            '[@businessDetail.investmentRevenue.objectTransaction.title]' => $this->businessDetail->investmentRevenue->objectTransaction->title ?? '',
+            '[@businessDetail.investmentRevenue.objectTransaction.objectTransaction.title]' => $this->investmentRevenue->objectTransaction->objectTransaction->title ?? '',
+            '[@businessDetail.investmentRevenue.objectTransaction.title]' => $this->investmentRevenue->objectTransaction->title ?? '',
         ];
     }
 

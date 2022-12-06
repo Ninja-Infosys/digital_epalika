@@ -24,11 +24,11 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('{templateTypeEnum}/businessRegistrationTemplate/{businessRegistrationTemplate}/updateStatus',[BusinessRegistrationTemplateController::class,'updateStatus'])->name('businessRegistrationTemplate.updateStatus');
     Route::resource('{templateTypeEnum}/businessRegistrationTemplate', BusinessRegistrationTemplateController::class)->names('businessRegistrationTemplate');
 });
-Route::get('businessRegistration/{proprietorDetail}/{templateTypeEnum}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
-Route::post('businessRegistration/{proprietorDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'storeData'])->name('store.template');
-Route::post('businessRegistration/{proprietorDetail}/{type}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
-Route::get('businessRegistration/{proprietorDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
-Route::resource('businessRegistration', BusinessRegistrationController::class);
+Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
+Route::post('businessRegistration/{businessDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'storeData'])->name('store.template');
+Route::post('businessRegistration/{businessDetail}/{type}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
+Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
+Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
 
 Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportController::class)->group(function () {
     Route::get('dateWise','dateWise')->name('dateWise');

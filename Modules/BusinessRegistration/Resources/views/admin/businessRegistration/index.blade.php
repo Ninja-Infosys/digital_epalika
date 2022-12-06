@@ -55,32 +55,32 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($proprietors as $proprietor)
+                            @forelse($businessDetails as $businessDetail)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$proprietor->businessDetail->submission_no ?? ''}}</td>
-                                    <td>{{$proprietor->businessDetail->registration_no ?? ''}}</td>
-                                    <td>{{$proprietor->businessDetail->registration_date_ne ?? ''}}</td>
-                                    <td>{{$proprietor->name}}</td>
+                                    <td>{{$businessDetail->submission_no ?? ''}}</td>
+                                    <td>{{$businessDetail->registration_no ?? ''}}</td>
+                                    <td>{{$businessDetail->registration_date_ne ?? ''}}</td>
+                                    <td>{{$businessDetail->proprietorDetail->name}}</td>
                                     <td>
-                                        <span>{{$proprietor->localBody->local_body??''}}
-                                - {{$proprietor->ward_no??''}} </span>
+                                        <span>{{$businessDetail->proprietorDetail->localBody->local_body??''}}
+                                - {{$businessDetail->proprietorDetail->ward_no??''}} </span>
                                     </td>
-                                    <td>{{$proprietor->phone ?? ''}}</td>
-                                    <td>{{$proprietor->email ??  ''}}</td>
-                                    <td>{{$proprietor->businessDetail->business_detail_name ?? ''}}</td>
+                                    <td>{{$businessDetail->proprietorDetail->phone ?? ''}}</td>
+                                    <td>{{$businessDetail->proprietorDetail->email ??  ''}}</td>
+                                    <td>{{$businessDetail->business_detail_name ?? ''}}</td>
                                     <td>
-                                        <span>{{$proprietor->businessDetail->localBody->local_body??''}}
-                                - {{$proprietor->businessDetail->ward_no??''}} </span>
+                                        <span>{{$businessDetail->localBody->local_body??''}}
+                                - {{$businessDetail->ward_no??''}} </span>
                                     </td>
-                                    <td>{{$proprietor->businessDetail?->business_nature?->label() ?? ''}}</td>
-                                    <td>{{$proprietor->businessDetail->amount_cost ?? ''}}</td>
+                                    <td>{{$businessDetail?->business_nature?->label() ?? ''}}</td>
+                                    <td>{{$businessDetail->amount_cost ?? ''}}</td>
                                     <td>
                                         @can('businessRegistration_access')
-                                        <a href="{{route('admin.businessRegistration.businessRegistration.show',$proprietor)}}"
-                                           class="btn btn-xs btn-outline-info">
-                                            <i class="fa fa-eye"></i> पुरा विवरण हेर्नुहोस
-                                        </a>
+                                            <a href="{{route('admin.businessRegistration.businessRegistration.show',$businessDetail)}}"
+                                               class="btn btn-xs btn-outline-info">
+                                                <i class="fa fa-eye"></i> पुरा विवरण हेर्नुहोस
+                                            </a>
                                         @endcan
                                     </td>
                                 </tr>
@@ -91,7 +91,7 @@
                             @endforelse
                             </tbody>
                         </table>
-                        {{$proprietors->links()}}
+                        {{$businessDetails->links()}}
                     </div>
 
                 </div>
