@@ -14,10 +14,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
+use Modules\Plan\Traits\PlanTemplateTrait;
 
 class Project extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait,PlanTemplateTrait;
 
     protected $dates = [
         'created_at',

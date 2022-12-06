@@ -220,7 +220,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>
                                         <a href="{{route('admin.file.download',$file)}}">
-                                            <i class="fa fa-download"> {{$file->file_name}}</i>
+                                            <i class="fa fa-download"></i> {{$file->file_name}}
                                         </a>
                                     </td>
                                     <td>

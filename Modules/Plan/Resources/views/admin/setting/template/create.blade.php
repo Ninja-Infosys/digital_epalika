@@ -57,10 +57,10 @@
                                 <label for="type" class="form-label">टेम्प्लेट *</label>
                                 <select name="type" id="type" class="form-control">
                                     <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\EMap\Enums\NoticeTypeEnum::cases() as $templateType)
-                                        <option {{old('type')==$templateType->value ? 'selected':''}}
-                                                value="{{$templateType->value}}">
-                                            {{$templateType->label()}}
+                                    @foreach(\Modules\Plan\Enums\ProjectOperatedThroughEnum::cases() as $operatedThrough)
+                                        <option {{old('type')==$operatedThrough->value ? 'selected':''}}
+                                                value="{{$operatedThrough->value}}">
+                                            {{$operatedThrough->label()}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="row">
 
-                                @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
+                                @foreach( (new \Modules\Plan\Entities\Project())->getTemplateOptions() as $template)
                                     <div class="col-md-12 mt-1">
                                         <h6>{{$template['title'] ?? ''}}</h6>
                                     </div>
@@ -78,36 +78,11 @@
                                         @foreach($template['data'] as $key=>$templateValue)
                                             <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
                                                onclick="copyText('{{$templateValue}}')">
-                                                {{$key}}
+                                                {{$key}} : {{$templateValue}}
                                             </a>
                                         @endforeach
                                     </div>
                                 @endforeach
-                                <div class="col-md-12 mt-1">
-                                    <h6>Static Template</h6>
-                                </div>
-                                <div class="col-md-12">
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="level">
-                                        प्लिन्थ लेभलसम्म निर्माण कार्यको ईजाजत पत्र
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="superstructure">
-                                        भवन निर्माण स्थायी ईजाजत पत्र (Superstructure को लागि)
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="construction-completion-certificate">
-                                        भवन निर्माण कार्य सम्पन्न प्रमाण-पत्र
-                                    </span>
-                                    <span style="cursor: pointer"
-                                          class="badge badge-outline-primary text-primary getTemplate"
-                                          data-bs-type="naksa_certificate">
-                                        नक्सा प्रमाणित प्रमाण-पत्र
-                                    </span>
-                                </div>
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>
