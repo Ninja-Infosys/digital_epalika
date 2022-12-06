@@ -20,6 +20,7 @@ body {
 }
 .main-heading{
     font-family: 'Noto Sans Devanagari', sans-serif;
+    color: #E30814;
 }
 .carousel-item > img {
     object-fit: cover;
@@ -442,7 +443,7 @@ margin-top: -1px;
 video{
     width: 90%;
     margin: 0 40px;
-  
+
 }
 .scrollbar {
     float: left;
@@ -455,18 +456,18 @@ video{
   .force-overflow {
     min-height: 450px;
   }
-  
+
   .scrollbar-primary::-webkit-scrollbar {
     width: 12px;
     background-color: #F5F5F5;
   }
-  
+
   .scrollbar-primary::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
     background-color: #4285F4;
   }
-  
+
   .scrollbar-primary {
     scrollbar-color: #4285F4 #F5F5F5;
   }
@@ -503,12 +504,12 @@ select{
     background-color: #fff;
 }
 .logo {
-    height: 100px;
-    width: 120px;
+    height: 120px;
 }
 .logo-nep {
-    height: 100px;
-    width: 90px;
+    height: 120px;
+    width: 100px;
+    margin-left: 200px;
 }
 .textbox-01{
     color:white;
@@ -1107,4 +1108,11 @@ h6,
         width: 100% !important;
         margin: 0;
     }
+    .mid{
+        margin: 0 !important;
+    }
+}
+
+.mid{
+    margin: 0 -40px;
 }
