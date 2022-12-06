@@ -155,7 +155,8 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="object_transaction">कारोबार वस्तु अनुसार</label>
-                                            <select name="object_transaction" wire:model="form.object_transaction" multiple
+                                            <select name="object_transaction" wire:model="form.object_transaction"
+                                                    multiple
                                                     id="object_transaction" class="form-control">
                                                 <option value=""> --कारोबार वस्तु--</option>
                                                 @foreach($objectTransactions as $objectTransaction)
@@ -183,7 +184,8 @@
                                                     class="form-control">
                                                 <option value=""> --पुँजीगत लगानी र राजस्वो--</option>
                                                 @foreach($investmentRevenues as $investmentRevenue)
-                                                    <option value="{{$investmentRevenue->id}}">{{$investmentRevenue->title}}
+                                                    <option
+                                                        value="{{$investmentRevenue->id}}">{{$investmentRevenue->title}}
                                                         ({{$investmentRevenue->registration_amount}})
                                                     </option>
                                                 @endforeach
@@ -203,7 +205,8 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="investment.from">देखि</label>
-                                            <input type="number" name="investment[from]" wire:model="form.investment.from"
+                                            <input type="number" name="investment[from]"
+                                                   wire:model="form.investment.from"
                                                    id="investment.from" class="form-control" placeholder="लगानी अनुसार">
                                         </div>
 
@@ -225,7 +228,8 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="employment.from">देखि</label>
-                                            <input type="number" name="employment[from]" wire:model="form.employment.from"
+                                            <input type="number" name="employment[from]"
+                                                   wire:model="form.employment.from"
                                                    id="employment.from" class="form-control" placeholder="लगानी अनुसार">
                                         </div>
 
@@ -247,7 +251,8 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="introBoard.from">देखि</label>
-                                            <input type="number" name="introBoard[from]" wire:model="form.introBoard.from"
+                                            <input type="number" name="introBoard[from]"
+                                                   wire:model="form.introBoard.from"
                                                    id="introBoard.from" class="form-control" placeholder="लगानी अनुसार">
                                         </div>
 
@@ -261,13 +266,6 @@
                             </div>
                         </div>
 
-
-
-
-
-
-
-
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>
@@ -278,7 +276,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="business_year">साल</label>
                                     <select name="business_year" id="business_year" multiple
-                                             wire:model="form.business_year"
+                                            wire:model="form.business_year"
                                             class="form-control">
                                         <option value=""> --साल--</option>
                                         @foreach($businessYears as $year)
@@ -287,6 +285,31 @@
                                     </select>
 
                                 </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2 mb-2">
+                            <legend class="font-16 text-info">
+                                <strong>
+                                    Columns
+                                </strong>
+                            </legend>
+                            <div class="row">
+                                @foreach($columnData as $columns)
+                                    <div class="col-md-6 mb-2">
+                                        <label for="form.column">{{$columns['name']}}</label>
+                                        <select name="form.column" id="form.column" multiple
+                                                wire:model="form.column.{{$columns['table_name']}}"
+                                                class="form-control">
+                                            <option value="">--select Column--</option>
+
+                                            @foreach($columns['columns'] as $column)
+                                                <option value="{{$column}}">{{$column}}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                @endforeach
+
                             </div>
                         </fieldset>
 
