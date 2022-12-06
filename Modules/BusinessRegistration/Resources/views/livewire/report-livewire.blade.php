@@ -48,7 +48,7 @@
                                         placeholder="सम्म "
                                     />
                                     @error('form.date.to_date')
-                                    <div class="text-danger">{{$message}}</div>
+                                    {{--                                    <div class="text-danger">{{$message}}</div>--}}
                                     @enderror
                                 </div>
                             </div>
@@ -303,7 +303,7 @@
                                             <option value="">--select Column--</option>
 
                                             @foreach($columns['columns'] as $column)
-                                                <option value="{{$column}}">{{$column}}</option>
+                                                <option value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>
                                             @endforeach
                                         </select>
 
