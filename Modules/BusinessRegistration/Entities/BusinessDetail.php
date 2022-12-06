@@ -6,12 +6,15 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Modules\BusinessRegistration\Enums\BusinessNature;
 use Modules\BusinessRegistration\Enums\SourceOfCapital;
 
@@ -19,6 +22,7 @@ class BusinessDetail extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -28,6 +32,7 @@ class BusinessDetail extends Model
 
     protected $fillable = [
 
+        'business_type',
         'business_nature',
         'proprietor_detail_id',
         'business_detail_name',
@@ -58,6 +63,22 @@ class BusinessDetail extends Model
         'registration_no',
         'registration_date_ne',
         'registration_date_en',
+        'photo',
+        'citizenship_front',
+        'citizenship_back',
+        'company_registration',
+        'tax_pay_file',
+        'property',
+        'signature',
+        'thumb',
+        'length',
+        'width',
+        'square',
+        'application_fee',
+        'registration_fee',
+        'business_tax',
+        'introduction_board_fees',
+        'fine'
     ];
 
     protected $casts = [
@@ -66,52 +87,7 @@ class BusinessDetail extends Model
 
     ];
 
-    public function scopeFilterData($query, $param = [])
-    {
-        if (!empty($param['from_date'])) {
-            $query->whereDate('registration_date_ne', '>=', $param['from_date']);
-        }
-        if (!empty($param['to_date'])) {
-            $query->whereDate('registration_date_ne', '<=', $param['to_date']);
-        }
-        if (!empty($param['fiscal_year'])) {
-            $query->where('fiscal_year_id', $param['fiscal_year']);
-        }
-        if (!empty($param['business_nature'])) {
-            $query->where('business_nature', $param['business_nature']);
-        }
-//        if (!empty($param['business_purpose'])){
-//            $query->where('registration_date_ne',$param['business_purpose']);
-//        }
-//        if (!empty($param['object_transaction'])){
-//            $query->where('registration_date_ne',$param['object_transaction']);
-//        }
-        if (!empty($param['investment_revenue'])) {
-            $query->whereDate('investment_revenue_id', $param['investment_revenue']);
-        }
-        if (!empty($param['registration_renewal'])) {
-            $query->where('business_nature', $param['registration_renewal']);
-        }
-        if (!empty($param['investment'])) {
-            $query->where('amount_cost', $param['investment']);
-        }
-        if (!empty($param['employment'])) {
-            $query->where('employment', $param['employment']);
-        }
-        if (!empty($param['business_year'])) {
-            $query->where('establish_year', $param['business_year']);
-        }
 
-        if (!empty($param['introboard'])) {
-            $query->whereHas('proprietorDetail.introboard', function ($subQuery) use ($param) {
-                $subQuery->where('length', 'like', '%' . $param['introboard'] . '%');
-                $subQuery->orWhere('width', 'like', '%' . $param['introboard'] . '%');
-                $subQuery->orWhere('square', 'like', '%' . $param['introboard'] . '%');
-            });
-        }
-
-        return $query;
-    }
 
     public function fiscalYear(): BelongsTo
     {
@@ -153,8 +129,121 @@ class BusinessDetail extends Model
         return $this->belongsToMany(BusinessPurpose::class);
     }
 
-    public function proprietorDetail(): BelongsTo
+    public function proprietorDetail(): HasOne
     {
-        return $this->belongsTo(ProprietorDetail::class);
+        return $this->hasOne(ProprietorDetail::class);
     }
+
+    public function printedData(): HasMany
+    {
+        return $this->hasMany(PrintedData::class);
+    }
+
+
+    public function setPhotoAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['photo'] = $value->store('business_registered/', 'public');
+        }
+    }
+    public function setSquareAttribute($value): void
+    {
+       $this->attributes['square'] = $this->attributes['length'] * $this->attributes['width'];
+    }
+
+    public function getPhotoUrlAttribute(): string
+    {
+        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
+    }
+
+    public function setCitizenshipFrontAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['citizenship_front'] = $value->store('business_registered/', 'public');
+        }
+    }
+
+    public function getCitizenshipFrontUrlAttribute(): string
+    {
+        return $this->attributes['citizenship_front'] ? Storage::disk('public')->url($this->attributes['citizenship_front']) : '';
+    }
+
+    public function setCitizenshipBackAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['citizenship_back'] = $value->store('business_registered/', 'public');
+        }
+    }
+
+    public function getCitizenshipBackUrlAttribute(): string
+    {
+        return $this->attributes['citizenship_back'] ? Storage::disk('public')->url($this->attributes['citizenship_back']) : '';
+    }
+
+    public function setCompanyRegistrationAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['company_registration'] = $value->store('business_registered/', 'public');
+        }
+    }
+
+    public function getCompanyRegistrationUrlAttribute(): string
+    {
+        return $this->attributes['company_registration'] ? Storage::disk('public')->url($this->attributes['company_registration']) : '';
+    }
+
+    public function setTaxPayFileAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['tax_pay_file'] = $value->store('business_registered/', 'public');
+        }
+    }
+
+    public function getTaxPayFileUrlAttribute(): string
+    {
+        return $this->attributes['tax_pay_file'] ? Storage::disk('public')->url($this->attributes['tax_pay_file']) : '';
+    }
+
+    public function setPropertyAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['property'] = $value->store('business_registered/', 'public');
+        }
+    }
+
+    public function getPropertyUrlAttribute(): string
+    {
+        return $this->attributes['property'] ? Storage::disk('public')->url($this->attributes['property']) : '';
+    }
+
+    public function setSignatureAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['signature'] = $value->store('business_registered/', 'public');
+        }
+    }
+
+    public function getSignatureUrlAttribute(): string
+    {
+        return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
+    }
+
+    public function setThumbAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['thumb'] = $value->store('business_registered/', 'public');
+        }
+    }
+
+    public function getThumbUrlAttribute(): string
+    {
+        return $this->attributes['thumb'] ? Storage::disk('public')->url($this->attributes['thumb']) : '';
+    }
+
+    public function getTotalAmountAttribute()
+    {
+        return $this->application_fee + $this->registration_fee + $this->business_tax + $this->introduction_board_fees + $this->fine;
+    }
+
+
 }

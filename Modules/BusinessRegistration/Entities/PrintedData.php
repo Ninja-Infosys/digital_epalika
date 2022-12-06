@@ -24,7 +24,7 @@ class PrintedData extends Model
     ];
 
     protected $fillable = [
-        'proprietor_detail_id',
+        'business_detail_id',
         'data',
         'for',
     ];

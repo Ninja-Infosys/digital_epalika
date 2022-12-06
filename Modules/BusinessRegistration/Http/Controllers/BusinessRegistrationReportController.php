@@ -16,14 +16,9 @@ class BusinessRegistrationReportController extends Controller
 {
     use NepaliDateConverter;
 
-    public function dateWise(Request $request)
+    public function dateWise()
     {
-        $businessDetails=BusinessDetail::with('proprietorDetail','localBody')->filterData($request->all())->get();
-        $fiscalYears = FiscalYear::get();
-        $businessPurposes = BusinessPurpose::get();
-        $objectTransactions = ObjectTransaction::get();
-        $investmentRevenues = InvestmentRevenue::get();
-        return view('businessregistration::admin.businessRegistrationReport.index',compact('investmentRevenues','objectTransactions','businessDetails','fiscalYears','businessPurposes'));
+        return view('businessregistration::admin.businessRegistrationReport.index');
     }
 
 }

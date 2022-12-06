@@ -29,8 +29,8 @@ class ProprietorDetail extends Model
     ];
 
     protected $fillable = [
+        'business_detail_id',
         'name',
-        'business_type',
         'citizenship_no',
         'issue_date',
         'issue_district_id',
@@ -81,28 +81,10 @@ class ProprietorDetail extends Model
         return $this->hasMany(ThreeGenerationDetail::class);
     }
 
-    public function businessDetail(): HasOne
+    public function businessDetail(): BelongsTo
     {
-        return $this->hasOne(BusinessDetail::class);
+        return $this->belongsTo(BusinessDetail::class);
     }
 
-    public function businessRegisteredFile(): HasOne
-    {
-        return $this->hasOne(BusinessRegistrationFile::class);
-    }
 
-    public function introboard(): HasOne
-    {
-        return $this->hasOne(Introboard::class);
-    }
-
-    public function customs(): HasOne
-    {
-        return $this->hasOne(Customs::class);
-    }
-
-    public function printedData(): HasMany
-    {
-        return $this->hasMany(PrintedData::class);
-    }
 }

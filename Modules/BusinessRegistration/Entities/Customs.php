@@ -20,11 +20,7 @@ class Customs extends Model
 
     protected $fillable = [
         'proprietor_detail_id',
-        'application_fee',
-        'registration_fee',
-        'business_tax',
-        'introduction_board_fees',
-        'fine'
+
     ];
 
     public function proprietorDetail(): BelongsTo

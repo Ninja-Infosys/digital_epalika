@@ -12,6 +12,7 @@ return new class () extends Migration {
             $table->string('for');
             $table->string('title');
             $table->longText('data');
+            $table->boolean('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

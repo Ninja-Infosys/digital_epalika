@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('object_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->comment('शिर्षक');
             $table->foreignId('object_transaction_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->timestamps();
             $table->softDeletes();

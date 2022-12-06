@@ -23,6 +23,7 @@ class ReportLivewire extends Component
     public $objectTransactions = [];
     public $investmentRevenues = [];
     public $businessYears = [];
+    public $columnData = [];
 
     public array $form = [
         'date' => [
@@ -39,6 +40,7 @@ class ReportLivewire extends Component
         'employment' => [],
         'business_year' => [],
         'introBoard' => [],
+        'column' => [],
     ];
     public array $class = ["card-body", "d-none"];
 
@@ -54,13 +56,15 @@ class ReportLivewire extends Component
 
     public function mount(): void
     {
-
         $this->fiscalYears = FiscalYear::get();
         $this->businessPurposes = BusinessPurpose::get();
         $this->objectTransactions = ObjectTransaction::get();
         $this->investmentRevenues = InvestmentRevenue::get();
         $this->setBusinessYear();
         $this->setFromData();
+
+
+        $this->getColumns();
     }
 
     protected $listeners = ['fromDateChanged', 'toDateChanged'];
@@ -77,15 +81,21 @@ class ReportLivewire extends Component
 
     public function submitForm(): void
     {
-//        dd($this->form);
         $this->validate();
-        $this->businessDetails = BusinessDetail::with(['proprietorDetail',
+
+        if (!empty($this->form['column']['business_details'])) {
+            $filteredColumns = $this->form['column']['business_details'];
+        }
+
+        $this->businessDetails = BusinessDetail::with([
+            'proprietorDetail',
             'localBody',
             'investmentRevenue',
             'proprietorDetail.introboard',
             'proprietorDetail'
 
         ])
+            ->select(!empty($filteredColumns) ? array_merge($filteredColumns, ['id']) : '*')
             ->where(function ($q) {
                 $this->filterDataFromUser($q);
             })
@@ -96,6 +106,7 @@ class ReportLivewire extends Component
         $this->filterObjectTransaction();
 
         $this->filterRegistrationRenewal();
+        $this->reset('class');
 
     }
 
@@ -113,9 +124,6 @@ class ReportLivewire extends Component
         }
     }
 
-    /**
-     * @return void
-     */
     public function setBusinessYear(): void
     {
         $minYear = Carbon::create(BusinessDetail::select('establish_year')->min('establish_year'));
@@ -128,9 +136,6 @@ class ReportLivewire extends Component
 
     }
 
-    /**
-     * @return void
-     */
     public function setFromData(): void
     {
         $this->form['investment'] = [
@@ -145,21 +150,17 @@ class ReportLivewire extends Component
 
         $this->form['introBoard'] = [
             'from' => 0,
-            'to' => (int)Introboard::select('square')->max('square'),
+            'to' => (int)BusinessDetail::select('square')->max('square'),
         ];
     }
 
-    /**
-     * @param $q
-     * @return void
-     */
     private function filterDataFromUser($q): void
     {
         if (!empty($this->form['date']['from_date'])) {
-            $q->whereDate('registration_date_ne', '<=', $this->form['date']['from_date']);
+            $q->whereDate('registration_date_ne', '>=', $this->form['date']['from_date']);
         }
         if (!empty($this->form['date']['to_date'])) {
-            $q->whereDate('registration_date_ne', '>=', $this->form['date']['to_date']);
+            $q->whereDate('registration_date_ne', '<=', $this->form['date']['to_date']);
         }
 
         if (!empty($this->form['fiscal_year'])) {
@@ -197,9 +198,6 @@ class ReportLivewire extends Component
         }
     }
 
-    /**
-     * @return void
-     */
     private function filterIntroBoardData(): void
     {
         if (!empty($this->form['introBoard']['from']) && !empty($this->form['introBoard']['to'])) {
@@ -214,9 +212,6 @@ class ReportLivewire extends Component
         }
     }
 
-    /**
-     * @return void
-     */
     private function filterObjectTransaction(): void
     {
         if (!empty($this->form['object_transaction'])) {
@@ -230,9 +225,6 @@ class ReportLivewire extends Component
         }
     }
 
-    /**
-     * @return void
-     */
     private function filterRegistrationRenewal(): void
     {
         if (!empty($this->form['registration_renewal'])) {
@@ -244,5 +236,34 @@ class ReportLivewire extends Component
                 return false;
             });
         }
+    }
+
+    public function getColumns(): void
+    {
+        $columnData = collect();
+
+        (new BusinessDetail())
+            ->ownAndRelatedModelsFillableColumns()
+            ->filter(function ($column) {
+//                return true;
+                return array_keys($column, 'BusinessDetail')
+                    || array_keys($column, 'proprietorDetail')
+                    || array_keys($column, 'partnerDetails')
+                    || array_keys($column, 'businessPurposes')
+                    || array_keys($column, 'registeredBusinesses');
+            })
+            ->each(function ($column) use ($columnData) {
+                $array = ['id', 'deleted_at', 'created_at', 'updated_at'];
+
+                $filtered_columns = collect(array_values($column['columns']
+                    ->filter(function ($nested_col) use ($array) {
+                        return (!in_array($nested_col, $array, true));
+                    })
+                    ->toArray()));
+
+                $columnData->push(collect($column)->put('columns', $filtered_columns));
+            });
+//        dd($columnData);
+        $this->columnData = $columnData;
     }
 }
