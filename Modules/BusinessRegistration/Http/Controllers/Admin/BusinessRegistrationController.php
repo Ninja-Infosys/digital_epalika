@@ -4,6 +4,7 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -20,53 +21,57 @@ use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataReque
 
 class BusinessRegistrationController extends Controller
 {
+    use NepaliDateConverter;
+
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('businessRegistration_access');
-        $proprietors = ProprietorDetail::with('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses')
-            ->latest()
+        $businessDetails = BusinessDetail::with('proprietorDetail')->latest()
             ->paginate(15);
 
-        return view('businessregistration::admin.businessRegistration.index', compact('proprietors'));
+        return view('businessregistration::admin.businessRegistration.index', compact('businessDetails'));
     }
 
-    public function show($id): Factory|View|Application
+    public function show(BusinessDetail $businessDetail): Factory|View|Application
     {
 
         $this->checkAuthorization('businessRegistration_access');
 
-        $proprietorDetail = ProprietorDetail::findOrFail($id);
-        $proprietorDetail->load('province', 'district', 'localBody', 'threeGenerationDetails', 'introboard', 'businessDetail.province', 'businessDetail.district', 'businessDetail.localBody', 'businessRegisteredFile', 'businessDetail.partnerDetails', 'businessDetail.registeredBusinesses');
+        $businessDetail->load('partnerDetails', 'registeredBusinesses', 'proprietorDetail',
+            'proprietorDetail.province',
+            'proprietorDetail.localBody',
+            'proprietorDetail.threeGenerationDetails',
+            'proprietorDetail.district');
 
-        $printed_data = PrintedData::where('proprietor_detail_id', $id)
+        $printed_data = PrintedData::where('business_detail_id', $businessDetail->id)
             ->latest()
             ->get();
 
-        return view('businessregistration::admin.businessRegistration.show', compact('proprietorDetail', 'printed_data'));
+        return view('businessregistration::admin.businessRegistration.show', compact('businessDetail', 'printed_data'));
     }
 
-    public function editData(ProprietorDetail $proprietorDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
+    public function editData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
     {
         $this->checkAuthorization('businessRegistration_edit');
 
-        $proprietorDetail->load('printedData');
-        $printed_data = $proprietorDetail->printedData
+        $businessDetail->load('printedData');
+        $printed_data = $businessDetail->printedData
             ->where('for', $templateTypeEnum)
             ->sortByDesc('created_at')
             ->first();
 
 
-        return view('businessregistration::admin.businessRegistration.edit', compact('proprietorDetail', 'templateTypeEnum', 'printed_data'));
+        return view('businessregistration::admin.businessRegistration.edit', compact('businessDetail', 'templateTypeEnum', 'printed_data'));
     }
 
-    public function storeData(StorePrintedDataRequest $request, $id, $type): RedirectResponse
+    public function storeData(StorePrintedDataRequest $request, BusinessDetail $businessDetail, $type): RedirectResponse
     {
 
         $this->checkAuthorization('businessRegistration_edit');
-        DB::transaction(function () use ($request, $id, $type) {
+        DB::transaction(function () use ($request, $businessDetail, $type) {
             $printed_data = PrintedData::updateOrCreate(
                 [
-                    'proprietor_detail_id' => $id,
+                    'business_detail_id' => $businessDetail->id,
                     'for' => $type,
                 ],
                 [
@@ -96,16 +101,14 @@ class BusinessRegistrationController extends Controller
     }
 
 
-    public function addData($id, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
+    public function addData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
     {
 
         $this->checkAuthorization('customs_edit');
-        $proprietorDetail = ProprietorDetail::find($id);
-        $customs = Customs::where('proprietor_detail_id', $id)->first();
-        return view('businessregistration::admin.businessRegistration.customs.index', compact('proprietorDetail', 'templateTypeEnum', 'customs'));
+        return view('businessregistration::admin.businessRegistration.customs.index', compact('businessDetail', 'templateTypeEnum'));
     }
 
-    public function customData(Request $request, $id, $type): RedirectResponse
+    public function customData(Request $request, BusinessDetail $businessDetail, $type): RedirectResponse
     {
 
         $this->checkAuthorization('customs_edit');
@@ -118,11 +121,24 @@ class BusinessRegistrationController extends Controller
             'fine' => ['required'],
         ]);
 
-        DB::transaction(function () use ($id, $data) {
-            $customs = Customs::updateOrCreate([
-                'proprietor_detail_id' => $id
-            ],
-                $data);
+        DB::transaction(function () use ($businessDetail, $data) {
+
+
+            if (empty($businessDetail->registration_no)) {
+                $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;
+
+                $registrationNo = BusinessDetail::whereFiscalYearId($fiscal_year)
+                        ->max('registration_no') + 1;
+
+                $data = array_merge($data, [
+                    'fiscal_year_id' => $fiscal_year,
+                    'registration_no' => $registrationNo,
+                    'registration_date_en' => today()->toDateString(),
+                    'registration_date_ne' => $this->get_today_nepali_date()
+                ]);
+            }
+
+            $businessDetail->update($data);
         });
 
 

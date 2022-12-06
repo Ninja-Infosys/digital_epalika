@@ -17,12 +17,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\BusinessRegistration\Enums\BusinessNature;
 use Modules\BusinessRegistration\Enums\SourceOfCapital;
+use Modules\BusinessRegistration\Traits\BusinessDetailTemplateTrait;
 
 class BusinessDetail extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use GetAllColumns;
+
+    use BusinessDetailTemplateTrait;
 
     protected $dates = [
         'created_at',

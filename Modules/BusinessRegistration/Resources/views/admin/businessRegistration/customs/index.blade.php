@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.businessRegistration.store.custom',[$proprietorDetail,$templateTypeEnum])}}"
+                    <form action="{{route('admin.businessRegistration.store.custom',[$businessDetail,$templateTypeEnum])}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -45,7 +45,7 @@
                                         name="application_fee"
                                         step="0.01"
                                         placeholder="निवेदन दस्तुर "
-                                        value="{{old('application_fee',$customs->application_fee??'')}}"
+                                        value="{{old('application_fee',$businessDetail->application_fee??'')}}"
                                         class="form-control @error('application_fee') is-invalid @enderror"
                                         id="application_fee"
                                     />
@@ -59,7 +59,7 @@
                                         type="number"
                                         step="0.01"
                                         name="registration_fee"
-                                        value="{{old('registration_fee',$customs->registration_fee??'')}}"
+                                        value="{{old('registration_fee',$businessDetail->registration_fee??'')}}"
                                         placeholder="दर्ता दस्तुर "
                                         class="form-control @error('registration_fee') is-invalid @enderror"
                                         id="registration_fee"
@@ -74,7 +74,7 @@
                                         type="number"
                                         step="0.01"
                                         name="business_tax"
-                                        value="{{old('business_tax',$customs->business_tax??'')}}"
+                                        value="{{old('business_tax',$businessDetail->business_tax??'')}}"
                                         placeholder="व्यवसाय कर "
                                         class="form-control @error('business_tax') is-invalid @enderror"
                                         id="business_tax"
@@ -89,7 +89,7 @@
                                         type="number"
                                         step="0.01"
                                         name="introduction_board_fees"
-                                        value="{{old('introduction_board_fees',$customs->introduction_board_fees??'') }}"
+                                        value="{{old('introduction_board_fees',$businessDetail->introduction_board_fees??'') }}"
                                         placeholder=" परिचय पाटी दस्तुर "
                                         class="form-control @error('introduction_board_fees') is-invalid @enderror"
                                         id="introduction_board_fees"
@@ -104,7 +104,7 @@
                                         type="number"
                                         step="0.01"
                                         name="fine"
-                                        value="{{ old('fine',$customs->fine??'')}}"
+                                        value="{{ old('fine',$businessDetail->fine??'')}}"
                                         placeholder=" जरिवाना "
                                         class="form-control @error('fine') is-invalid @enderror"
                                         id="fine"

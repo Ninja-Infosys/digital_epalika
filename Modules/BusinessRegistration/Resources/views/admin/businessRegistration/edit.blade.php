@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.businessRegistration.store.template',[$proprietorDetail,$templateTypeEnum])}}"
+                    <form action="{{route('admin.businessRegistration.store.template',[$businessDetail,$templateTypeEnum])}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -41,7 +41,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="data" class="form-label">डाटा *</label>
                                     <textarea name="data" id="data" cols="30" rows="10"
-                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($printed_data->data ?? $proprietorDetail->getSpecificTemplateData($templateTypeEnum) ?? ''))}}</textarea>
+                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',($printed_data->data ?? $businessDetail->getSpecificTemplateData($templateTypeEnum) ?? ''))}}</textarea>
                                     @error('data')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

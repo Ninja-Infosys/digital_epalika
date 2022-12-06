@@ -63,68 +63,68 @@
                                                     <thead>
                                                     <tr>
                                                         <th>व्यवसायीको नाम</th>
-                                                        <th>{{$proprietorDetail->name}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->name}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>फोन नं.</th>
-                                                        <th>{{$proprietorDetail->phone}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->phone}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>इमेल</th>
-                                                        <th>{{$proprietorDetail->email}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->email}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>नागरिकता नम्बर</th>
-                                                        <th>{{$proprietorDetail->citizenship_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>लिङ्ग</th>
-                                                        <th>{{$proprietorDetail->gender->label()}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->gender->label()}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>इमेल</th>
-                                                        <th>{{$proprietorDetail->email}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->email}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> घर नम्बर</th>
-                                                        <th>{{$proprietorDetail->house_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->house_no}}</th>
                                                     </tr>
 
                                                     <tr>
                                                         <th> व्यक्तिगत स्थाई लेखा नम्बर</th>
-                                                        <th>{{$proprietorDetail->account_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->account_no}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> राष्ट्रियता परिचयपत्र नम्बर</th>
-                                                        <th>{{$proprietorDetail->national_card_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->national_card_no}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> शैक्षिक योग्यता</th>
-                                                        <th>{{$proprietorDetail->education_qualification?->label() ??''}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->education_qualification?->label() ??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> मुख्य पेशा</th>
-                                                        <th>{{$proprietorDetail->occupation}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->occupation}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> नागरिकता नम्बर</th>
-                                                        <th>{{$proprietorDetail->citizenship_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> जारी मिति</th>
-                                                        <th>{{$proprietorDetail->issue_date}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->issue_date}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> जारी जिल्ला</th>
-                                                        <th>{{$proprietorDetail->issueDistrict->district??''}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->issueDistrict->district??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>ठेगाना</th>
-                                                        <th>{{$proprietorDetail->LocalBody->local_body ?? ''}}
-                                                            -{{$proprietorDetail->ward_no ?? ''}}
-                                                            , {{$proprietorDetail->tole ?? ''}}
-                                                            , {{$proprietorDetail->District->district ?? ''}}
-                                                            , {{$proprietorDetail->Province->province ?? ''}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->LocalBody->local_body ?? ''}}
+                                                            -{{$businessDetail->proprietorDetail->ward_no ?? ''}}
+                                                            , {{$businessDetail->proprietorDetail->tole ?? ''}}
+                                                            , {{$businessDetail->proprietorDetail->District->district ?? ''}}
+                                                            , {{$businessDetail->proprietorDetail->Province->province ?? ''}}</th>
                                                     </tr>
                                                     </thead>
                                                 </table>
@@ -146,61 +146,61 @@
                                                     <thead>
                                                     <tr>
                                                         <th> फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा</th>
-                                                        <th>{{$proprietorDetail->businessDetail->business_detail_name??''}}</th>
+                                                        <th>{{$businessDetail->business_detail_name??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</th>
-                                                        <th>{{$proprietorDetail->businessDetail->business_detail_name_en??''}}</th>
+                                                        <th>{{$businessDetail->business_detail_name_en??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> व्यवसायको प्रकृति</th>
-                                                        <th>{{$proprietorDetail->businessDetail->business_nature->label()??''}}</th>
+                                                        <th>{{$businessDetail->business_nature->label()??''}}</th>
                                                     </tr>
 
                                                     <tr>
                                                         <th> व्यवसाय स्थापना गरेको साल</th>
-                                                        <th>{{$proprietorDetail->businessDetail->establish_year??''}}</th>
+                                                        <th>{{$businessDetail->establish_year??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> पान नम्बर</th>
-                                                        <th>{{$proprietorDetail->businessDetail->pan_no??''}}</th>
+                                                        <th>{{$businessDetail->pan_no??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> कारोबार गर्ने वस्तु</th>
-                                                        <th>{{$proprietorDetail->businessDetail->investmentRevenue->objectTransaction->title??''}}</th>
+                                                        <th>{{$businessDetail->investmentRevenue->objectTransaction->title??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> पुँजीगत लगानी</th>
-                                                        <th>{{$proprietorDetail->businessDetail->investmentRevenue->registration_amount??''}}</th>
+                                                        <th>{{$businessDetail->investmentRevenue->registration_amount??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> लागत रकम रु</th>
-                                                        <th>{{$proprietorDetail->businessDetail->amount_cost??''}}</th>
+                                                        <th>{{$businessDetail->amount_cost??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> पूजीको स्रोत</th>
-                                                        <th>{{$proprietorDetail->businessDetail->source_of_capital?->label()??''}}</th>
+                                                        <th>{{$businessDetail->source_of_capital?->label()??''}}</th>
                                                     </tr>
 
 
                                                     <tr>
                                                         <th> उदेश्य</th>
-                                                        <th>@foreach($proprietorDetail->businessDetail->businessPurposes as $businessPurposes)
+                                                        <th>@foreach($businessDetail->businessPurposes as $businessPurposes)
                                                                 {{$businessPurposes->title}} {{!$loop->last ? ", ":''}}
                                                             @endforeach</th>
                                                     </tr>
                                                     <tr>
                                                         <th> रोजगार संख्या</th>
-                                                        <th>{{$proprietorDetail->businessDetail->employment??''}}</th>
+                                                        <th>{{$businessDetail->employment??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> ठेगाना</th>
                                                         <th>
-                                                            {{$proprietorDetail->businessDetail->LocalBody->local_body ?? ''}}
-                                                            -{{$proprietorDetail->businessDetail->ward_no ?? ''}}
-                                                            , {{$proprietorDetail->businessDetail->tole ?? ''}}
-                                                            , {{$proprietorDetail->businessDetail->District->district ?? ''}}
-                                                            , {{$proprietorDetail->businessDetail->Province->province ?? ''}}
+                                                            {{$businessDetail->LocalBody->local_body ?? ''}}
+                                                            -{{$businessDetail->ward_no ?? ''}}
+                                                            , {{$businessDetail->tole ?? ''}}
+                                                            , {{$businessDetail->District->district ?? ''}}
+                                                            , {{$businessDetail->Province->province ?? ''}}
 
 
                                                         </th>
@@ -213,7 +213,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if($proprietorDetail->threeGenerationDetails->count() >0)
+                                @if($businessDetail->proprietorDetail->threeGenerationDetails->count() >0)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">
@@ -234,7 +234,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @foreach($proprietorDetail->threeGenerationDetails as $threeGenerationDetail)
+                                                        @foreach($businessDetail->proprietorDetail->threeGenerationDetails as $threeGenerationDetail)
                                                             <tr>
                                                                 <td>{{$threeGenerationDetail->relation}}</td>
                                                                 <td>{{$threeGenerationDetail->name}}</td>
@@ -250,7 +250,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if($proprietorDetail->businessDetail->is_rent==1)
+                                @if($businessDetail->is_rent==1)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">
@@ -264,19 +264,19 @@
                                                         <thead>
                                                         <tr>
                                                             <th> घर धनिको नाम थर</th>
-                                                            <th>{{$proprietorDetail->businessDetail->house_owner_name??''}}</th>
+                                                            <th>{{$businessDetail->house_owner_name??''}}</th>
                                                         </tr>
                                                         <tr>
                                                             <th> घर धनिको मोबाइल नं</th>
-                                                            <th>{{$proprietorDetail->businessDetail->house_owner_phone??''}}</th>
+                                                            <th>{{$businessDetail->house_owner_phone??''}}</th>
                                                         </tr>
                                                         <tr>
                                                             <th> ठेगाना</th>
-                                                            <th>{{$proprietorDetail->businessDetail->house_owner_address??''}}</th>
+                                                            <th>{{$businessDetail->house_owner_address??''}}</th>
                                                         </tr>
                                                         <tr>
                                                             <th> मासिक भाडा रु</th>
-                                                            <th>{{$proprietorDetail->businessDetail->house_owner_monthly_rent??''}}</th>
+                                                            <th>{{$businessDetail->house_owner_monthly_rent??''}}</th>
                                                         </tr>
                                                         </thead>
                                                     </table>
@@ -285,7 +285,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if($proprietorDetail->businessDetail->business_nature->value == \Modules\BusinessRegistration\Enums\BusinessNature::PARTNERSHIP->value)
+                                @if($businessDetail->business_nature->value == \Modules\BusinessRegistration\Enums\BusinessNature::PARTNERSHIP->value)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">
@@ -305,7 +305,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @foreach($proprietorDetail->businessDetail->partnerDetails as $partnerDetails)
+                                                        @foreach($businessDetail->partnerDetails as $partnerDetails)
                                                             <tr>
                                                                 <td>{{$partnerDetails->relation}}</td>
                                                                 <td>{{$partnerDetails->name}}</td>
@@ -320,7 +320,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if($proprietorDetail->businessDetail->is_registered == 1)
+                                @if($businessDetail->is_registered == 1)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">
@@ -340,7 +340,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @foreach($proprietorDetail->businessDetail->registeredBusinesses as $registeredBusinesses)
+                                                        @foreach($businessDetail->registeredBusinesses as $registeredBusinesses)
                                                             <tr>
                                                                 <td>{{$registeredBusinesses->registration_no}}</td>
                                                                 <td>{{$registeredBusinesses->business_name}}</td>
@@ -369,15 +369,15 @@
                                                     <thead>
                                                     <tr>
                                                         <th> लम्बाई</th>
-                                                        <th>{{$proprietorDetail->introboard->length??''}}</th>
+                                                        <th>{{$businessDetail->length??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> चौडाई</th>
-                                                        <th>{{$proprietorDetail->introboard->width??''}}</th>
+                                                        <th>{{$businessDetail->width??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> वर्गफिट</th>
-                                                        <th>{{$proprietorDetail->introboard->square??''}}</th>
+                                                        <th>{{$businessDetail->square??''}}</th>
                                                     </tr>
                                                     </thead>
                                                 </table>
@@ -392,7 +392,7 @@
                                     <div class="card">
                                         <div class="card-header">व्यवसायीको पासपोर्ट साइजको फोटो</div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->photo_url??''}}"
+                                            <img src="{{$businessDetail->photo_url??''}}"
                                                  alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
@@ -403,7 +403,7 @@
                                         <div class="card-header">नागरिकता (आगाडी)</div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$proprietorDetail->businessRegisteredFile->citizenship_front_url??''}}"
+                                                src="{{$businessDetail->citizenship_front_url??''}}"
                                                 alt=""
                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
@@ -415,7 +415,7 @@
                                         <div class="card-header">नागरिकता (पछाडी)</div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$proprietorDetail->businessRegisteredFile->citizenship_back_url??''}}"
+                                                src="{{$businessDetail->citizenship_back_url??''}}"
                                                 alt=""
                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
@@ -427,7 +427,7 @@
                                         <div class="card-header">फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$proprietorDetail->businessRegisteredFile->company_registration_url??''}}"
+                                                src="{{$businessDetail->company_registration_url??''}}"
                                                 alt=""
                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
@@ -441,7 +441,7 @@
                                         </div>
                                         <div class="card-body">
                                             <img
-                                                src="{{$proprietorDetail->businessRegisteredFile->tax_pay_file_url??''}}"
+                                                src="{{$businessDetail->tax_pay_file_url??''}}"
                                                 alt=""
                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
@@ -452,7 +452,7 @@
                                     <div class="card">
                                         <div class="card-header">हस्ताक्षर</div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->signature_url??''}}"
+                                            <img src="{{$businessDetail->signature_url??''}}"
                                                  alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
@@ -464,7 +464,7 @@
                                             औठाको छाप
                                         </div>
                                         <div class="card-body">
-                                            <img src="{{$proprietorDetail->businessRegisteredFile->thumb_url??''}}"
+                                            <img src="{{$businessDetail->thumb_url??''}}"
                                                  alt=""
                                                  style="max-width: 100%;height: 200px;object-fit: contain;">
                                         </div>
@@ -476,7 +476,7 @@
                             <div class="d-flex justify-content-end mb-2">
                                 @can('businessRegistration_edit')
                                     <a class="btn btn-primary btn-sm"
-                                       href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">
+                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">
                                         <i class="fa fa-pen"></i>
                                     </a>
                                 @endcan
@@ -491,7 +491,7 @@
                             <div class="font-black ckEditor" id="print1">
 
                                 {!!$printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()->data
-                                   ?? $proprietorDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)
+                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)
                                    ?? ''!!}
 
                             </div>
@@ -500,7 +500,7 @@
                             <div class="d-flex justify-content-end mb-2 mt-2">
                                 @can('businessRegistration_edit')
                                     <a class="btn btn-primary btn-sm"
-                                       href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">
+                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">
                                         <i class="fa fa-pen"></i>
                                     </a>
                                 @endcan
@@ -510,7 +510,7 @@
                                     </button>
                                 @endcan
                                 @can('customs_edit')
-                                    <a href="{{route('admin.businessRegistration.add-data.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}"
+                                    <a href="{{route('admin.businessRegistration.add-data.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}"
                                        class="btn btn-primary">
                                         <i class="fa fa-plus"></i>
                                     </a>
@@ -519,7 +519,7 @@
                             <div class="font-black ckEditor" id="print2">
 
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()->data
-                                   ?? $proprietorDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)
+                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)
                                    ?? ''!!}
                             </div>
                         </div>
@@ -528,7 +528,7 @@
                             <div class="d-flex justify-content-end mb-2">
                                 @can('businessRegistration_edit')
                                     <a class="btn btn-primary btn-sm"
-                                       href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">
+                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK])}}">
                                         <i class="fa fa-pen"></i>
                                     </a>
                                 @endcan
@@ -540,7 +540,7 @@
                             </div>
                             <div class="font-black ckEditor" id="print3">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)->first()->data
-                                   ?? $proprietorDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)
+                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::REGISTRATION_BOOK)
                                    ?? ''!!}
 
                             </div>
@@ -549,7 +549,7 @@
                             <div class="d-flex justify-content-end mb-2">
                                 @can('businessRegistration_edit')
                                     <a class="btn btn-primary btn-sm"
-                                       href="{{route('admin.businessRegistration.edit.template',[$proprietorDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE])}}">
+                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE])}}">
                                         <i class="fa fa-pen"></i>
                                     </a>
                                 @endcan
@@ -561,7 +561,7 @@
                             </div>
                             <div class="font-black ckEditor" id="print4">
                                 {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)->first()->data
-                                                            ?? $proprietorDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)
+                                                            ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CERTIFICATE)
                                                             ?? ''!!}
                             </div>
                         </div>
