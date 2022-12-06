@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('printed_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('proprietor_detail_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('business_detail_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
             $table->longText('data');
             $table->string('for');
             $table->timestamps();

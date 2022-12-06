@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('business_purposes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->comment('शिर्षक');
             $table->timestamps();
             $table->softDeletes();
         });
