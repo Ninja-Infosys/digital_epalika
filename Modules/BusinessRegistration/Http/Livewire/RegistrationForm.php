@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
@@ -335,29 +336,8 @@ class RegistrationForm extends Component
     {
         $this->validate();
         $proprietorDetails = DB::transaction(function () {
-            $proprietorDetails = ProprietorDetail::create([
-                'name' => $this->form['name'] ?? null,
-                'business_type' => $this->form['business_type'] ?? null,
-                'citizenship_no' => $this->form['citizenship_no'] ?? null,
-                'issue_date' => $this->form['issue_date'] ?? null,
-                'issue_district_id' => $this->form['issue_district_id'] ?? null,
-                'phone' => $this->form['phone'] ?? null,
-                'email' => $this->form['email'] ?? null,
-                'province_id' => $this->form['permanent_province_id'] ?? null,
-                'district_id' => $this->form['permanent_district_id'] ?? null,
-                'local_body_id' => $this->form['permanent_local_body_id'] ?? null,
-                'ward_no' => $this->form['permanent_ward_no'] ?? null,
-                'way' => $this->form['permanent_way'] ?? null,
-                'tole' => $this->form['permanent_tole'] ?? null,
-                'house_no' => $this->form['house_no'] ?? null,
-                'account_no' => $this->form['account_no'] ?? null,
-                'national_card_no' => $this->form['national_card_no'] ?? null,
-                'gender' => $this->form['gender'] ?? null,
-                'education_qualification' => $this->form['education_qualification'] ?? null,
-                'occupation' => $this->form['occupation'] ?? null,
-            ]);
 
-            $businessDetail = $proprietorDetails->businessDetail()->create([
+            $businessDetail = BusinessDetail::create([
                 'business_detail_name' => $this->form['business_detail_name'] ?? null,
                 'investment_revenue_id' => $this->form['investment_revenue_id'] ?? null,
                 'is_rent' => $this->form['is_rent'] ?? null,
@@ -381,7 +361,41 @@ class RegistrationForm extends Component
                 'ward_no' => $this->form['ward_no'] ?? null,
                 'way' => $this->form['way'] ?? null,
                 'tole' => $this->form['tole'] ?? null,
+                'photo' => $this->form['photo'] ?? null,
+                'citizenship_front' => $this->form['citizenship_front'] ?? null,
+                'citizenship_back' => $this->form['citizenship_back'] ?? null,
+                'company_registration' => $this->form['company_registration'] ?? null,
+                'tax_pay_file' => $this->form['tax_pay_file'] ?? null,
+                'signature' => $this->form['signature'] ?? null,
+                'thumb' => $this->form['thumb'] ?? null,
+                'length' => $this->form['length'] ?? 0,
+                'width' => $this->form['width'] ?? 0,
+                'square' => $this->form['square'] ?? 0,
             ]);
+
+            $proprietorDetails = $businessDetail->proprietorDetail()->create([
+                'name' => $this->form['name'] ?? null,
+                'business_type' => $this->form['business_type'] ?? null,
+                'citizenship_no' => $this->form['citizenship_no'] ?? null,
+                'issue_date' => $this->form['issue_date'] ?? null,
+                'issue_district_id' => $this->form['issue_district_id'] ?? null,
+                'phone' => $this->form['phone'] ?? null,
+                'email' => $this->form['email'] ?? null,
+                'province_id' => $this->form['permanent_province_id'] ?? null,
+                'district_id' => $this->form['permanent_district_id'] ?? null,
+                'local_body_id' => $this->form['permanent_local_body_id'] ?? null,
+                'ward_no' => $this->form['permanent_ward_no'] ?? null,
+                'way' => $this->form['permanent_way'] ?? null,
+                'tole' => $this->form['permanent_tole'] ?? null,
+                'house_no' => $this->form['house_no'] ?? null,
+                'account_no' => $this->form['account_no'] ?? null,
+                'national_card_no' => $this->form['national_card_no'] ?? null,
+                'gender' => $this->form['gender'] ?? null,
+                'education_qualification' => $this->form['education_qualification'] ?? null,
+                'occupation' => $this->form['occupation'] ?? null,
+            ]);
+
+
 
             $businessDetail->businessPurposes()->attach($this->form['purpose'] ?? null);
 
@@ -412,24 +426,11 @@ class RegistrationForm extends Component
                     'active' => $registeredBusiness['active'] ?? null,
                 ]);
             }
-            $proprietorDetails->businessRegisteredFile()->create([
-                'photo' => $this->form['photo'] ?? null,
-                'citizenship_front' => $this->form['citizenship_front'] ?? null,
-                'citizenship_back' => $this->form['citizenship_back'] ?? null,
-                'company_registration' => $this->form['company_registration'] ?? null,
-                'tax_pay_file' => $this->form['tax_pay_file'] ?? null,
-                'signature' => $this->form['signature'] ?? null,
-                'thumb' => $this->form['thumb'] ?? null,
-            ]);
 
-            $proprietorDetails->introboard()->create([
-                'length' => $this->form['length'] ?? 0,
-                'width' => $this->form['width'] ?? 0,
-                'square' => $this->form['square'] ?? 0,
-            ]);
 
             return $proprietorDetails;
         });
+
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
