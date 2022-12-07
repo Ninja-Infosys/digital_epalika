@@ -21,11 +21,9 @@
             <button class="btn btn-info" onclick="printJS({
             printable: 'printData',
             type: 'html',
-            targetStyles: ['{{asset('assets/backend/css/print.css')}}',
-            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css'],
+            targetStyles: ['{{asset('assets/backend/css/print.css')}}','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.0/css/all.min.css'],
             documentTitle: '{{$businessDetail->name}}को व्यवसाय दर्ता आवेदन'
             })">
-            
                 <i class="fa fa-print"></i> Print
             </button>
             <div id="printData">
@@ -68,6 +66,7 @@
                             <span>{{$businessDetail->proprietorDetail->phone}}</span>
                         </div>
                     </div>
+                    
                     <div class="row mt-1">
                         <div class="col-md-4">
                             <span class="fw-bold">व्यवसायीको इमेल ठेगाना:</span>
