@@ -57,15 +57,11 @@ class ReportLivewire extends Component
 
     public function mount(): void
     {
-        $this->fiscalYears = FiscalYear::get();
-        $this->businessPurposes = BusinessPurpose::get();
-        $this->objectTransactions = ObjectTransaction::get();
-        $this->investmentRevenues = InvestmentRevenue::get();
-        $this->setBusinessYear();
-        $this->setFromData();
 
 
-        $this->getColumns();
+
+
+
     }
 
     protected $listeners = ['fromDateChanged', 'toDateChanged'];
@@ -117,79 +113,9 @@ class ReportLivewire extends Component
         }
     }
 
-    public function setBusinessYear(): void
-    {
-        $minYear = Carbon::create(BusinessDetail::select('establish_year')->min('establish_year'));
-        $maxYear = Carbon::create(BusinessDetail::select('establish_year')->max('establish_year'));
-        $range = CarbonPeriod::create($minYear, '1 year', $maxYear);
 
-        foreach ($range as $year) {
-            $this->businessYears[] = $year->year;
-        }
 
-    }
 
-    public function setFromData(): void
-    {
-        $this->form['investment'] = [
-            'from' => 0,
-            'to' => (int)BusinessDetail::select('amount_cost')->max('amount_cost')
-        ];
-
-        $this->form['employment'] = [
-            'from' => 0,
-            'to' => (int)BusinessDetail::select('employment')->max('employment')
-        ];
-
-        $this->form['introBoard'] = [
-            'from' => 0,
-            'to' => (int)BusinessDetail::select('square')->max('square'),
-        ];
-    }
-
-    private function filterDataFromUser($q): void
-    {
-        if (!empty($this->form['date']['from_date'])) {
-            $q->whereDate('registration_date_ne', '>=', $this->form['date']['from_date']);
-        }
-        if (!empty($this->form['date']['to_date'])) {
-            $q->whereDate('registration_date_ne', '<=', $this->form['date']['to_date']);
-        }
-
-        if (!empty($this->form['fiscal_year'])) {
-            $q->whereIn('fiscal_year_id', $this->form['fiscal_year']);
-        }
-
-        if (!empty($this->form['business_nature'])) {
-            $q->whereIn('business_nature', $this->form['business_nature']);
-        }
-
-        if (!empty($this->form['business_purpose'])) {
-            $q->whereIn('investment_revenue_id', $this->form['business_purpose']);
-        }
-
-        if (!empty($this->form['investment_revenue'])) {
-            $q->whereIn('investment_revenue_id', $this->form['investment_revenue']);
-        }
-
-        if (!empty($this->form['investment']['from'])) {
-            $q->where('amount_cost', '>=', (int)$this->form['investment']['from']);
-        }
-        if (!empty($this->form['investment']['to'])) {
-            $q->where('amount_cost', '<=', (int)$this->form['investment']['to']);
-        }
-
-        if (!empty($this->form['employment']['from'])) {
-            $q->where('employment', '>=', (int)$this->form['employment']['from']);
-        }
-        if (!empty($this->form['employment']['to'])) {
-            $q->where('employment', '<=', (int)$this->form['employment']['to']);
-        }
-
-        if (!empty($this->form['business_year'])) {
-            $q->whereIn('establish_year', $this->form['business_year']);
-        }
-    }
 
     private function filterIntroBoardData(): void
     {
@@ -231,32 +157,5 @@ class ReportLivewire extends Component
         }
     }
 
-    public function getColumns(): void
-    {
-        $columnData = collect();
 
-        (new BusinessDetail())
-            ->ownAndRelatedModelsFillableColumns()
-            ->filter(function ($column) {
-//                return true;
-                return array_keys($column, 'BusinessDetail')
-                    || array_keys($column, 'proprietorDetail')
-                    || array_keys($column, 'partnerDetails')
-                    || array_keys($column, 'businessPurposes')
-                    || array_keys($column, 'registeredBusinesses');
-            })
-            ->each(function ($column) use ($columnData) {
-                $array = ['id', 'deleted_at', 'created_at', 'updated_at'];
-
-                $filtered_columns = collect(array_values($column['columns']
-                    ->filter(function ($nested_col) use ($array) {
-                        return (!in_array($nested_col, $array, true));
-                    })
-                    ->toArray()));
-
-                $columnData->push(collect($column)->put('columns', $filtered_columns));
-            });
-//        dd($columnData);
-        $this->columnData = $columnData;
-    }
 }

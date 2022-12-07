@@ -37,5 +37,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->group(module_path('BusinessRegistration', '/Routes/api.php'));
+
+            Route::middleware(['api', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+            ->prefix('api/admin/businessRegistration')
+            ->as('api.admin.businessRegistration.')
+            ->group(module_path('BusinessRegistration', '/Routes/v1/private_api.php'));
+
     }
 }
