@@ -10,7 +10,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('map_applies', function (Blueprint $table) {
-            $table->string('application_type')->nullable();
+            $table->string('application_type')->nullable()->comment('संस्था');
         });
     }
 
