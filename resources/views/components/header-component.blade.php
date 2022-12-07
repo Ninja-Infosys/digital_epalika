@@ -9,8 +9,7 @@
         @endif
     @endforeach
 </div> --}}
-
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between mb-2">
     <div class="main-heading ">
         @foreach ($headers as $header)
         <span
