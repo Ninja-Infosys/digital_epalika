@@ -93,9 +93,14 @@
     @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
         <div class="row">
             <div class="col-md-12">
+                @livewire('plan::project-bill-livewire',['project'=>$project])
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="header-title">५. आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था</h4>
+                        <h4 class="header-title">७. आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था</h4>
                     </div>
                     <div class="card-body">
                         @livewire('plan::maintenance-arrangement-livewire',['project'=>$project])
@@ -103,8 +108,6 @@
                 </div>
             </div>
         </div>
-    @endif
-    @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

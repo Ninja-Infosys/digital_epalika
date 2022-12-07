@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h4 class="header-title">
-            ४. उपभोक्ता समिति समुदायमा अधारित संस्था गैरसरकारी संस्थाले प्राप्त गर्ने किस्ता विवरण:
+            ५. उपभोक्ता समिति समुदायमा अधारित संस्था गैरसरकारी संस्थाले प्राप्त गर्ने किस्ता विवरण:
         </h4>
         <button type="button" wire:click="create" class="btn btn-xs btn-outline-primary">
             <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
