@@ -42,6 +42,7 @@ class ReportLivewire extends Component
         'introBoard' => [],
         'column' => [],
     ];
+
     public array $class = ["card-body", "d-none"];
 
     protected $rules = [
