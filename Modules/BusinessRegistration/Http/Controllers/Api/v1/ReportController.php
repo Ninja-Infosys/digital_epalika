@@ -154,18 +154,8 @@ class ReportController extends Controller
                     || array_keys($column, 'partnerDetails')
                     || array_keys($column, 'businessPurposes')
                     || array_keys($column, 'registeredBusinesses');
-            })
-            ->each(function ($column) use ($columnData) {
-                $array = ['id', 'deleted_at', 'created_at', 'updated_at'];
-
-                $filtered_columns = collect(array_values($column['columns']
-                    ->filter(function ($nested_col) use ($array) {
-                        return (!in_array($nested_col, $array, true));
-                    })
-                    ->toArray()));
-
-                $columnData->push(collect($column)->put('columns', $filtered_columns));
             });
+
         return $columnData;
     }
 

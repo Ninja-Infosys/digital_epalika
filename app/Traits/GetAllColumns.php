@@ -18,25 +18,19 @@ trait GetAllColumns
             'name' => Str::title(Str::replace('_', ' ', $this->getTable())),
             'table_name' => $this->getTable(),
             'columns' => $this->getColumns($this->getTable())
-//        'columns' => collect($this->getFillable())->filter(function ($item) {
-//                return ((Str::substr($item, -5) !== "ed_at") );
-//            })
-            ,
         ];
 
-        return $this->relatedModels()->map(function ($model) {
-            $modelName = $this->$model()->getRelated();
-            return [
-                'model' => $model,
-                'name' => Str::title(Str::replace('_', ' ', $modelName->getTable())),
-                'table_name' => $modelName->getTable(),
-                'columns' => $this->getColumns($modelName->getTable())
-//                'columns' => collect($modelName->getFillable())->filter(function ($item) {
-//                    return ((Str::substr($item, -5) !== "ed_at"));
-//                })
-                ,
-            ];
-        })->prepend($ownColumns);
+        return $this->relatedModels()
+            ->map(function ($model) {
+                $modelName = $this->$model()->getRelated();
+                return [
+                    'model' => $model,
+                    'name' => Str::title(Str::replace('_', ' ', $modelName->getTable())),
+                    'table_name' => $modelName->getTable(),
+                    'columns' => $this->getColumns($modelName->getTable())
+                ];
+            })
+            ->prepend($ownColumns);
     }
 
     public function relatedModels(): Collection
@@ -66,7 +60,7 @@ trait GetAllColumns
     {
         $tableColumnInfos = collect(DB::select('SHOW FULL COLUMNS FROM ' . $table));
 
-        $array = $this->getTableColumns($tableColumnInfos, true);
+        $array = $this->getTableColumns($tableColumnInfos);
 
         return collect(array_values($array));
     }
@@ -79,21 +73,23 @@ trait GetAllColumns
     public function getTableColumns(Collection $tableColumnInfos, bool $checkByComment = true): mixed
     {
         if ($checkByComment) {
-            $columns = $tableColumnInfos->filter(function ($column) {
-
-                return !empty($column->Comment);
-            })
+            $columns = $tableColumnInfos
+                ->filter(function ($column) {
+                    return !empty($column->Comment);
+                })
                 ->map(function ($column) {
                     return [
                         'name' => $column->Comment,
                         'column' => $column->Field
                     ];
-                })->toArray();
+                })
+                ->toArray();
         } else {
             $columns = $tableColumnInfos
                 ->map(function ($column) {
-                    return $column->Field;
-                })->toArray();
+                    return ['column' => $column->Field];
+                })
+                ->toArray();
         }
 
         return $columns;
