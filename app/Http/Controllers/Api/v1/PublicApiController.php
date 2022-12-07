@@ -20,6 +20,16 @@ use Nwidart\Modules\Facades\Module;
 
 class PublicApiController extends Controller
 {
+    public function getToken()
+    {
+        if (auth()->check()) {
+            $token = auth()->user()->createToken('report user token');
+
+            return response()->json(['message' => 'Successfully', 'data' => $token->plainTextToken], 400);
+        }
+        return response()->json(['message' => 'Please Login First'], 400);
+    }
+
     public function index(): array
     {
         return array_merge($this->getDataFromMainModule(), $this->checkModuleData(), $this->getAllModulesData());
