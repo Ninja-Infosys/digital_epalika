@@ -16,7 +16,7 @@
                 </div>
             </div>
         </section>
-        <section>
+        <section class="mid mb-4">
             <div class="row">
                 <div class="col-md-8">
                     <x-frontend.digital-board-video-component/>

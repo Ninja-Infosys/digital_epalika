@@ -3,7 +3,7 @@
         <div class="col-md-2 col-sm-2 col-xs-2">
             <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-government-logo" class="logo"
-                     src="{{$officeSetting->logo_url}}"/>
+                     src="{{ asset('assets/frontend/image/logo.png') }}"/>
             </a>
         </div>
         <div class="col-md-8 col-sm-8 col-xs-8">
@@ -15,7 +15,7 @@
         <div class="col-md-2 col-sm-2 col-xs-2 d-flex justify-content-around">
             <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-flag" class="logo-nep float-start d-none d-lg-block"
-                     src="{{$officeSetting->logo2_url}}"/>
+                     src="{{ asset('assets/backend/images/nepal_flag.gif') }}"/>
             </a>
         </div>
     </div>
