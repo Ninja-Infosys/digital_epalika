@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\v1\PublicApiController;
 
+Route::get('get-auth-token', [PublicApiController::class, 'getToken'])->name('get-token');
 Route::get('/', [PublicApiController::class, 'index'])->name('public-api.index');
 Route::get('slider', [PublicApiController::class, 'slider'])->name('public-api.slider');
 Route::get('importantLink', [PublicApiController::class, 'importantLink'])->name('public-api.important-link');

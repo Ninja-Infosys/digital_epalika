@@ -20,12 +20,15 @@ use Nwidart\Modules\Facades\Module;
 
 class PublicApiController extends Controller
 {
-    public function getToken()
+    public function getToken(): \Illuminate\Http\JsonResponse
     {
         if (auth()->check()) {
-            $token = auth()->user()->createToken('report user token');
+            $token = auth()->user()?->createToken('report user token');
 
-            return response()->json(['message' => 'Successfully', 'data' => $token->plainTextToken], 400);
+            return response()->json([
+                'message' => 'Successfully',
+                'data' => $token->plainTextToken
+            ]);
         }
         return response()->json(['message' => 'Please Login First'], 400);
     }
