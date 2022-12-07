@@ -472,22 +472,20 @@ video{
     scrollbar-color: #4285F4 #F5F5F5;
   }
 .info-card{
-    background-color: #dbdbfb;
-    text-align: center;
-    padding: 1vh;
-    margin-top: 5vh;
-    border-radius: 10px;
+    background-color: #0DCAF0;
+text-align: center;
+padding: 1vh;
+margin: 4vh;
+width: 80%;
+float: right;
 
-}
-.info-card:hover{
-    border: 1px solid #0062CC;
-    background-color: transparent;
-    transition: .9s;
-    transform: translateY(-10px);
 }
 .info-card a{
     text-decoration: none;
     font-size: 1.5rem;
+}
+.info-card h4{
+    color: black;
 }
 
 /*topbar css*/
