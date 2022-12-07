@@ -25,7 +25,7 @@ trait GetAllColumns
         ];
 
         return $this->relatedModels()->map(function ($model) {
-            $modelName = call_user_func([$this, $model])->getRelated();
+            $modelName = $this->$model()->getRelated();
             return [
                 'model' => $model,
                 'name' => Str::title(Str::replace('_', ' ', $modelName->getTable())),
@@ -53,7 +53,7 @@ trait GetAllColumns
                     Relations\HasOne::class,
                     Relations\HasOneThrough::class,
                     Relations\Relation::class,
-                ]);
+                ], true);
             })
             ->map(function (ReflectionMethod $reflectionMethod) {
                 return $reflectionMethod->getName();
