@@ -87,15 +87,7 @@ class ReportLivewire extends Component
             $filteredColumns = $this->form['column']['business_details'];
         }
 
-        $this->businessDetails = BusinessDetail::with([
-            'proprietorDetail',
-            'localBody',
-            'investmentRevenue',
-            'proprietorDetail.introboard',
-            'proprietorDetail'
-
-        ])
-            ->select(!empty($filteredColumns) ? array_merge($filteredColumns, ['id']) : '*')
+        $this->businessDetails = BusinessDetail::select(!empty($filteredColumns) ? array_merge($filteredColumns, ['id']) : '*')
             ->where(function ($q) {
                 $this->filterDataFromUser($q);
             })
