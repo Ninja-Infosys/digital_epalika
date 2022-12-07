@@ -26,6 +26,8 @@
                 </div>
             </div>
         </section>
+    </div>
+    <div class="container" style="color: #E2DFDF">
         <section class="mid mb-4">
             <div class="row">
                 <div class="col-md-12">

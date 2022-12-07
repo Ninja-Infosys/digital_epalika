@@ -8,7 +8,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::table('apply_map_notices', function (Blueprint $table) {
-            $table->timestamp('sent_to_admin_at')->nullable();
+            $table->timestamp('sent_to_admin_at')->nullable()->comment('admin लाई पठाएको मिति ');
         });
     }
 

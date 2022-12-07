@@ -13,9 +13,9 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->boolean('is_employee')->default(true);
-            $table->boolean('show_to_mobile_app')->default(false);
-            $table->boolean('show_to_index')->default(true);
+            $table->boolean('is_employee')->default(true)->comment('कर्मचारी ');
+            $table->boolean('show_to_mobile_app')->default(false)->comment('मोबाइल एपमा देखाउने');
+            $table->boolean('show_to_index')->default(true)->comment('index मा देखाउने ');
         });
     }
 

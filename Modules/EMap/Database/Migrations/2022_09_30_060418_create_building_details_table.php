@@ -10,9 +10,9 @@ return new class () extends Migration {
         Schema::create('building_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
-            $table->string('detail')->nullable();
-            $table->text('description')->nullable();
-            $table->text('remarks')->nullable();
+            $table->string('detail')->nullable()->comment('विस्तार ');
+            $table->text('description')->nullable()->comment('विवरण');
+            $table->text('remarks')->nullable()->comment('कैफियत ');
             $table->timestamps();
             $table->softDeletes();
         });

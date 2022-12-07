@@ -9,10 +9,10 @@ return new class () extends Migration {
     {
         Schema::create('e_map_templates', function (Blueprint $table) {
             $table->id();
-            $table->string('for');
-            $table->string('type')->nullable();
-            $table->string('title');
-            $table->longText('data');
+            $table->string('for')->comment('लागि ');
+            $table->string('type')->nullable()->comment('प्रकार ');
+            $table->string('title')->comment('शिर्षक ');
+            $table->longText('data')->comment('डाटा');
             $table->timestamps();
             $table->softDeletes();
         });
