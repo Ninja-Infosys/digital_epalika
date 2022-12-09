@@ -335,7 +335,7 @@ class RegistrationForm extends Component
     public function submitForm()
     {
         $this->validate();
-        $businessDetail = DB::transaction(function () {
+        $businessDetails = DB::transaction(function () {
 
             $businessDetail = BusinessDetail::create([
                 'business_type' => $this->form['business_type'] ?? null,
