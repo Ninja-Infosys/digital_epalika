@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 class LoginController extends Controller
 {
@@ -49,29 +50,22 @@ class LoginController extends Controller
         return redirect($redirectTo);
     }
 
-    public function login(Request $request): \Illuminate\Http\RedirectResponse
+    public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+//        $credentials = $request->validate([
+//            'email' => ['required', 'email'],
+//            'password' => ['required'],
+//        ]);
+
+        //auth()->attempt($credentials);
+
+        $response = Http::post(route('api.login'),[
+            'email'=>$request->input('email'),
+            'password'=>$request->input('password')
         ]);
+        info(gettype($response));
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "content-Type:application/json",
-            "Accept:application/json"
-        ));
-        curl_setopt($ch, CURLOPT_URL, route('api.login')."?email=".$request->input('email')."&password=".$request->input('password'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
-        $response = curl_exec($ch);
-        info($response);
-        curl_close($ch);
-
-        auth()->attempt($credentials);
-
-//        if(\auth()->check())
+//        if(auth()->check())
 //        {
 //            return redirect(route('admin.dashboard'));
 //        }

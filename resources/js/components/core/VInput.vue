@@ -3,11 +3,14 @@
     <input
         :type="inputType"
         :id="id"
-        v-bind:class="[inputClass]"
+        v-bind:class="[inputClass, { 'is-invalid': error.$error }]"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         :placeholder="label"
     />
+    <div v-if="error.$error" class="invalid-feedback">
+        {{ error.$errors[0].$message }}
+    </div>
 </template>
 
 <script setup>
@@ -27,9 +30,12 @@ defineProps({
     label: {
         type: String,
     },
+    error: {
+        type: Object,
+        default:{}
+    },
     modelValue: {
         type: String,
-        default: "",
         required: true,
     },
 });
