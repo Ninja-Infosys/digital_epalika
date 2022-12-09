@@ -81,7 +81,8 @@ class BusinessDetail extends Model
         'registration_fee',
         'business_tax',
         'introduction_board_fees',
-        'fine'
+        'fine',
+        'object_transaction_id'
     ];
 
     protected $casts = [
@@ -140,6 +141,11 @@ class BusinessDetail extends Model
     public function printedData(): HasMany
     {
         return $this->hasMany(PrintedData::class);
+    }
+
+    public function objectTransaction(): BelongsTo
+    {
+        return $this->belongsTo(ObjectTransaction::class);
     }
 
 

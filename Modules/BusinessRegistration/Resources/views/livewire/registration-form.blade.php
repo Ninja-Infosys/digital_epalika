@@ -758,7 +758,7 @@
                                         <input
                                             name="form.length"
                                             class="form-control @error('form.length') is-invalid @enderror"
-                                            type="text"
+                                            type="number"
                                             id="form.length"
                                             placeholder="लम्बाई"
                                             wire:model="form.length"
@@ -774,7 +774,7 @@
                                         <input
                                             name="form.width"
                                             class="form-control @error('form.width') is-invalid @enderror"
-                                            type="text"
+                                            type="number"
                                             id="form.width"
                                             placeholder="चौडाई"
                                             wire:model="form.width"
@@ -788,7 +788,7 @@
                                         <input
                                             name="form.square"
                                             class="form-control @error('form.square') is-invalid @enderror"
-                                            type="text"
+                                            type="number"
                                             id="form.square"
                                             placeholder="वर्गफिट"
                                             wire:model="form.square"
