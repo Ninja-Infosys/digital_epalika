@@ -20,5 +20,12 @@
             </div>
         </div>
     </div>
-    @livewire('businessregistration::report-livewire')
+{{--    @livewire('businessregistration::report-livewire')--}}
+    <div id="vue-app">
+
+    </div>
+
+    @push('scripts')
+        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+    @endpush
 @endsection
