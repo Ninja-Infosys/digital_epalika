@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActivityLogEvent;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -50,37 +52,27 @@ class LoginController extends Controller
         return redirect($redirectTo);
     }
 
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
-//        $credentials = $request->validate([
-//            'email' => ['required', 'email'],
-//            'password' => ['required'],
-//        ]);
-
-        //auth()->attempt($credentials);
-
-        $response = Http::post(route('api.login'),[
-            'email'=>$request->input('email'),
-            'password'=>$request->input('password')
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
-        info(gettype($response));
 
-//        if(auth()->check())
-//        {
-//            return redirect(route('admin.dashboard'));
-//        }
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-//        if (auth('web')->attempt($credentials)) {
-////            $request->session()->regenerate();
-//            return redirect(route('admin.dashboard'));
-//        }
+            event(new ActivityLogEvent('Login'));
+            return redirect()->intended(route('admin.dashboard'));
+        }
 
-//        return back()->withErrors([
-//            'email' => 'The provided credentials do not match our records.',
-//        ])->onlyInput('email');
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
-    public function logout(Request $request): \Illuminate\Http\RedirectResponse
+
+    public function logout(Request $request): RedirectResponse
     {
         session()->flush();
         Auth::guard('web')->logout();
@@ -91,5 +83,6 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
+
 
 }

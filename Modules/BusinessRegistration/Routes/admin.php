@@ -8,6 +8,7 @@ use Modules\BusinessRegistration\Http\Controllers\Admin\DashboardController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\InvestmentRevenueController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionController;
 use Modules\BusinessRegistration\Http\Controllers\Admin\ObjectTransactionSubCategoryController;
+use Modules\BusinessRegistration\Http\Controllers\Admin\ReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationReportController;
 use Modules\BusinessRegistration\Http\Controllers\BusinessRegistrationTemplateController;
 
@@ -37,7 +38,10 @@ Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportCon
 });
 
 
-Route::resource('businessRegistrationReport', BusinessRegistrationReportController::class);
+Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function (){
+    Route::get('/','getRequiredData')->name('report');
+    Route::post('report-data','report')->name('report-data');
+});
 
 Route::prefix('files')->as('files.')->group(function () {
     Route::view('file', 'businessregistration::admin.file.file')->name('file');

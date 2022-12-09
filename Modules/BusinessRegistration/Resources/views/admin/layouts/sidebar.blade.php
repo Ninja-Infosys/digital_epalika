@@ -7,40 +7,17 @@
 @can('businessRegistration_access')
     <li class="{{request()->is('admin/businessRegistration/businessRegistration') ? 'active' : ''}}">
         <a href="{{route('admin.businessRegistration.businessRegistration.index')}}">
-            <i class="fa fa-home"></i>
+            <i class="fa fa-building"></i>
             <span> दर्ता भएका व्यवसाय</span>
         </a>
     </li>
 @endcan
 
-
-
 <li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">
-    <a href="#sidebarBusinessRegistrationReport"
-       {{request()->is('admin/businessRegistration/report/*') ? 'aria-expanded=true  ' : ''}}
-       data-bs-toggle="collapse">
+    <a href="{{route('admin.businessRegistration.report.report')}}">
         <i class="fa fa-file"></i>
         <span>रिपोर्ट</span>
-        <span class="menu-arrow">
-                        <i class="fa fa-angle-right"></i>
-                    </span>
     </a>
-    <div class="collapse {{request()->is('admin/businessRegistration/report/*') ? 'show' : ''}}"
-         id="sidebarBusinessRegistrationReport">
-        <ul class="nav-second-level">
-                <li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.businessRegistration.report.dateWise')}}">
-                        <span>व्यवसाय दर्ता अनुसार रिपोर्ट</span>
-                    </a>
-                </li>
-                <li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.businessRegistration.report.dateWise')}}">
-                        <span>व्यवसाय प्रकृति अनुसार रिपोर्ट</span>
-                    </a>
-                </li>
-
-        </ul>
-    </div>
 </li>
 
 
@@ -85,13 +62,13 @@
                     </a>
                 </li>
             @endcan
-{{--            @can('businessRegistrationTemplate_access')--}}
-{{--                <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">--}}
-{{--                    <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">--}}
-{{--                        <span>टेम्प्लेट</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            @endcan--}}
+            {{--            @can('businessRegistrationTemplate_access')--}}
+            {{--                <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">--}}
+            {{--                    <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">--}}
+            {{--                        <span>टेम्प्लेट</span>--}}
+            {{--                    </a>--}}
+            {{--                </li>--}}
+            {{--            @endcan--}}
             @can('businessRegistrationTemplate_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">
                     <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.enumList')}}">
@@ -102,6 +79,7 @@
         </ul>
     </div>
 </li>
+
 <li class="{{request()->is('admin/businessRegistration/files/file/*') ? 'active' : ''}}">
     <a href="{{route('admin.businessRegistration.files.file')}}">
         <i class="fa fa-file-archive"></i>

@@ -1,11 +1,14 @@
 <?php
 
-namespace Modules\BusinessRegistration\Http\Controllers\Api\v1;
+namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Models\Settings\FiscalYear;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,7 +24,7 @@ use Modules\BusinessRegistration\Transformers\ObjectTransactionResource;
 
 class ReportController extends Controller
 {
-    public function getRequiredData(): JsonResponse
+    public function getRequiredData(): Application|Factory|View
     {
         $fiscalYears = FiscalYear::get();
         $businessPurposes = BusinessPurpose::get();
@@ -31,19 +34,20 @@ class ReportController extends Controller
         $investmentData = $this->setInvestmentData();
         $employmentData = $this->setEmploymentData();
         $introBoardData = $this->setIntroBoardData();
-        $getColumns = $this->getColumns();
+        $columnData = $this->getColumns();
 
-        return response()->json([
-            'investment_data' => $investmentData,
-            'employment_data' => $employmentData,
-            'intro_board_data' => $introBoardData,
-            'businessYear' => $businessYears,
-            'get_columns' => $getColumns,
-            'fiscal_year' => FiscalYearResource::collection($fiscalYears),
-            'business_purpose' => BusinessPurposeResource::collection($businessPurposes),
-            'object_transaction' => ObjectTransactionResource::collection($objectTransactions),
-            'investment_revenue' => InvestmentRevenueResource::collection($investmentRevenues),
-        ]);
+        return view('businessregistration::admin.businessRegistrationReport.index', compact([
+            'fiscalYears',
+            'businessPurposes',
+            'objectTransactions',
+            'investmentRevenues',
+            'businessYears',
+            'investmentData',
+            'employmentData',
+            'introBoardData',
+            'columnData',
+        ]));
+
     }
 
     public function report(Request $request)

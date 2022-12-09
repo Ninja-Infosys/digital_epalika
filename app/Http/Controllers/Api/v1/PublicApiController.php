@@ -9,6 +9,7 @@ use App\Http\Resources\Api\v1\SliderResource;
 use App\Models\Settings\OfficeSetting;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\Slider;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
@@ -20,9 +21,9 @@ use Nwidart\Modules\Facades\Module;
 
 class PublicApiController extends Controller
 {
-    public function getToken(): \Illuminate\Http\JsonResponse
+    public function getToken(): JsonResponse
     {
-        if (auth()->check()) {
+        if (auth('web')->check()) {
             $token = auth()->user()?->createToken('report user token');
 
             return response()->json([
