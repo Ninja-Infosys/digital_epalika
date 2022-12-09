@@ -154,8 +154,10 @@ class ReportController extends Controller
                     || array_keys($column, 'partnerDetails')
                     || array_keys($column, 'businessPurposes')
                     || array_keys($column, 'registeredBusinesses');
+            })
+            ->each(function ($column) use ($columnData) {
+                $columnData->push(collect($column)->put('columns', $column['columns']));
             });
-
         return $columnData;
     }
 

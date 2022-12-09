@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -47,4 +48,42 @@ class LoginController extends Controller
 
         return redirect($redirectTo);
     }
+
+    public function login(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        Auth::guard('api')->attempt($credentials);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+//    public function logout(Request $request): \Illuminate\Http\RedirectResponse
+//    {
+//        $credentials = $request->validate([
+//            'email' => ['required', 'email'],
+//            'password' => ['required'],
+//        ]);
+//
+//        Auth::guard('api')->attempt($credentials);
+//
+//        if (Auth::attempt($credentials)) {
+//            $request->session()->regenerate();
+//            return redirect()->intended('dashboard');
+//        }
+//
+//        return back()->withErrors([
+//            'email' => 'The provided credentials do not match our records.',
+//        ])->onlyInput('email');
+//    }
+
 }
