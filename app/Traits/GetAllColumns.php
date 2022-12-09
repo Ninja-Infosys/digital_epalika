@@ -47,7 +47,7 @@ trait GetAllColumns
                     Relations\HasOne::class,
                     Relations\HasOneThrough::class,
                     Relations\Relation::class,
-                ], true);
+                ]);
             })
             ->map(function (ReflectionMethod $reflectionMethod) {
                 return $reflectionMethod->getName();
