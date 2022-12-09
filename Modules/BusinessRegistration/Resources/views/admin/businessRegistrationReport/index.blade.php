@@ -28,48 +28,34 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">व्यवसाय दर्ता रिपोर्ट</h4>
 
-                        <button class="btn btn-primary" type="button" wire:click.prevent="showFilterForm">
+                        <button class="btn btn-primary" type="button">
                             <i class="fa fa-filter"></i>
                         </button>
                     </div>
                 </div>
                 <div class="card-body">
 
-                    <form wire:submit.prevent="submitForm">
+                    <form action="#" method="POST">
+                        @csrf
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>मिति </strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="from_date">देखि</label>
-                                    <input
-                                        type="text"
-                                        name="from_date"
-                                        value="{{old('from_date')}}"
-                                        wire:model.debounce="form.date.from_date"
-                                        class="form-control nepali_date @error('from_date') is-invalid @enderror"
-                                        id="from_date"
-                                        placeholder="देखि "
+                                    <x-date-input-component
+                                        nameNe="from_date" labelNe="देखि"
+                                        nameEn="en_from_date" labelEn="From"
+                                        :get-today-date="false"
                                     />
-                                    @error('form.date.from_date')
-                                    <div class="text-danger">{{$message}}</div>
-                                    @enderror
+
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="to_date">सम्म</label>
-                                    <input
-                                        type="text"
-                                        name="to_date"
-                                        wire:model.debounce="form.date.to_date"
-                                        value="{{old('to_date')}}"
-                                        class="form-control nepali_date @error('to_date') is-invalid @enderror"
-                                        id="to_date"
-                                        placeholder="सम्म "
+                                    <x-date-input-component
+                                        nameNe="to_date" labelNe="सम्म"
+                                        nameEn="en_to_date" labelEn="To"
+                                        :get-today-date="false"
                                     />
-                                    @error('form.date.to_date')
-                                    <div class="text-danger">{{$message}}</div>
-                                    @enderror
                                 </div>
                             </div>
                         </fieldset>
@@ -82,8 +68,8 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="fiscal_year">आर्थिक बर्ष</label>
-                                            <select name="fiscal_year" multiple
-                                                    wire:model="form.fiscal_year" id="fiscal_year" class="form-control">
+                                            <select name="fiscal_year" multiple data-toggle="select2"
+                                                    id="fiscal_year" class="form-control">
                                                 {{--                                        <option value=""> --आर्थिक बर्ष--</option>--}}
                                                 @foreach($fiscalYears as $fiscalYear)
                                                     <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
@@ -104,8 +90,8 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="business_nature">व्यवसाय प्रकृति अनुसार</label>
-                                            <select name="business_nature" multiple
-                                                    wire:model="form.business_nature" id="business_nature"
+                                            <select name="business_nature" multiple data-toggle="select2"
+                                                    id="business_nature"
                                                     class="form-control">
                                                 <option value=""> --व्यवसाय प्रकृति अनुसार--</option>
                                                 @foreach(\Modules\BusinessRegistration\Enums\BusinessNature::cases() as $businessNature)
@@ -129,7 +115,7 @@
                                         <div class="col-md-12 mb-2">
                                             <label for="registration_renewal">दर्ता र नविकरण अनुसार</label>
                                             <select name="registration_renewal" id="registration_renewal" multiple
-                                                    wire:model="form.registration_renewal"
+                                                    data-toggle="select2"
                                                     class="form-control">
                                                 <option value=""> --दर्ता र नविकरण अनुसार--</option>
                                                 @foreach(\Modules\BusinessRegistration\Enums\BusinessTypeEnum::cases() as $businessTypeEnum)
@@ -152,8 +138,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="business_purpose">उदेश्य अनुसार</label>
-                                            <select name="business_purpose" multiple
-                                                    wire:model="form.business_purpose"
+                                            <select name="business_purpose" multiple data-toggle="select2"
                                                     id="business_purpose" class="form-control">
                                                 <option value=""> --उदेश्य अनुसार--</option>
                                                 @foreach($businessPurposes as $businessPurpose)
@@ -175,8 +160,8 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="object_transaction">कारोबार वस्तु अनुसार</label>
-                                            <select name="object_transaction" wire:model="form.object_transaction"
-                                                    multiple
+                                            <select name="object_transaction"
+                                                    multiple data-toggle="select2"
                                                     id="object_transaction" class="form-control">
                                                 <option value=""> --कारोबार वस्तु--</option>
                                                 @foreach($objectTransactions as $objectTransaction)
@@ -200,7 +185,7 @@
                                         <div class="col-md-12 mb-2">
                                             <label for="investment_revenue">पुँजीगत लगानी र राजस्वो</label>
                                             <select name="investment_revenue" id="investment_revenue" multiple
-                                                    wire:model="form.investment_revenue"
+                                                    data-toggle="select2"
                                                     class="form-control">
                                                 <option value=""> --पुँजीगत लगानी र राजस्वो--</option>
                                                 @foreach($investmentRevenues as $investmentRevenue)
@@ -215,7 +200,7 @@
                                     </div>
                                 </fieldset>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <fieldset class="border p-2 mb-2">
                                     <legend class="font-16 text-info">
                                         <strong>
@@ -226,19 +211,20 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="investment.from">देखि</label>
                                             <input type="number" name="investment[from]"
-                                                   wire:model="form.investment.from"
+                                                   value="{{old('investment.from',$investmentData['from'])}}"
                                                    id="investment.from" class="form-control" placeholder="लगानी अनुसार">
                                         </div>
 
                                         <div class="col-md-6 mb-2">
                                             <label for="investment.to">सम्म</label>
-                                            <input type="number" name="investment[to]" wire:model="form.investment.to"
+                                            <input type="number" name="investment[to]"
+                                                   value="{{old('investment.to',$investmentData['to'])}}"
                                                    id="investment.to" class="form-control" placeholder="लगानी अनुसार">
                                         </div>
                                     </div>
                                 </fieldset>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <fieldset class="border p-2 mb-2">
                                     <legend class="font-16 text-info">
                                         <strong>
@@ -249,19 +235,20 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="employment.from">देखि</label>
                                             <input type="number" name="employment[from]"
-                                                   wire:model="form.employment.from"
+                                                   value="{{old('employment.from',$employmentData['from'])}}"
                                                    id="employment.from" class="form-control" placeholder="लगानी अनुसार">
                                         </div>
 
                                         <div class="col-md-6 mb-2">
                                             <label for="employment.to">सम्म</label>
-                                            <input type="number" name="employment[to]" wire:model="form.employment.to"
+                                            <input type="number" name="employment[to]"
+                                                   value="{{old('employment.to',$employmentData['to'])}}"
                                                    id="employment.to" class="form-control" placeholder="लगानी अनुसार">
                                         </div>
                                     </div>
                                 </fieldset>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <fieldset class="border p-2 mb-2">
                                     <legend class="font-16 text-info">
                                         <strong>
@@ -272,41 +259,45 @@
                                         <div class="col-md-6 mb-2">
                                             <label for="introBoard.from">देखि</label>
                                             <input type="number" name="introBoard[from]"
-                                                   wire:model="form.introBoard.from"
+                                                   value="{{old('introBoard.from',$introBoardData['from'])}}"
                                                    id="introBoard.from" class="form-control" placeholder="लगानी अनुसार">
                                         </div>
 
                                         <div class="col-md-6 mb-2">
                                             <label for="introBoard.to">सम्म</label>
-                                            <input type="number" name="introBoard[to]" wire:model="form.introBoard.to"
+                                            <input type="number" name="introBoard[to]"
+                                                   value="{{old('introBoard.to',$introBoardData['to'])}}"
                                                    id="introBoard.to" class="form-control" placeholder="लगानी अनुसार">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset class="border p-2 mb-2">
+                                    <legend class="font-16 text-info">
+                                        <strong>
+                                            व्यवसाय स्थापना साल
+                                        </strong>
+                                    </legend>
+                                    <div class="row">
+                                        <div class="col-md-12 mb-2">
+                                            <label for="business_year">साल</label>
+                                            <select name="business_year" id="business_year" multiple
+                                                    data-toggle="select2"
+                                                    class="form-control">
+                                                <option value=""> --साल--</option>
+                                                @foreach($businessYears as $year)
+                                                    <option value="{{$year}}">{{$year}}</option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                     </div>
                                 </fieldset>
                             </div>
                         </div>
 
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>
-                                    व्यवसाय स्थापना साल
-                                </strong>
-                            </legend>
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label for="business_year">साल</label>
-                                    <select name="business_year" id="business_year" multiple
-                                            wire:model="form.business_year"
-                                            class="form-control">
-                                        <option value=""> --साल--</option>
-                                        @foreach($businessYears as $year)
-                                            <option value="{{$year}}">{{$year}}</option>
-                                        @endforeach
-                                    </select>
 
-                                </div>
-                            </div>
-                        </fieldset>
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>
@@ -316,9 +307,8 @@
                             <div class="row">
                                 @foreach($columnData as $columns)
                                     <div class="col-md-6 mb-2">
-                                        <label for="form.column">{{$columns['name']}}</label>
-                                        <select name="form.column" id="form.column" multiple
-                                                wire:model="form.column.{{$columns['table_name']}}"
+                                        <label for="form.column.{{$columns['table_name']}}">{{$columns['name']}}</label>
+                                        <select name="form.column" id="form.column.{{$columns['table_name']}}" multiple data-toggle="select2"
                                                 class="form-control">
                                             <option value="">--select Column--</option>
 
