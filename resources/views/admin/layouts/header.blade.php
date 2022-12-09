@@ -104,13 +104,13 @@
                         <span>गतिविधिहरू</span>
                     </a>
                     <div class="dropdown-divider"></div>
-{{--                    <form action="{{route('logout')}}" method="post">--}}
-{{--                        @csrf--}}
-{{--                        <button type="submit" class="dropdown-item notify-item">--}}
-{{--                            <i class="fa fa-sign-out-alt"></i>--}}
-{{--                            <span>बाहिर निस्कनु</span>--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button type="submit" class="dropdown-item notify-item">
+                            <i class="fa fa-sign-out-alt"></i>
+                            <span>बाहिर निस्कनु</span>
+                        </button>
+                    </form>
                 </div>
             </li>
         </ul>

@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes(): void
     {
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
             ->prefix('admin/businessRegistration')
             ->as('admin.businessRegistration.')
             ->group(module_path('BusinessRegistration', '/Routes/admin.php'));

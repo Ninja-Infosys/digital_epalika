@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('roaster.')
             ->group(module_path('Roaster', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
             ->prefix('admin/roaster')
             ->as('admin.roaster.')
             ->group(module_path('Roaster', '/Routes/admin.php'));

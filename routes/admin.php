@@ -29,9 +29,9 @@ use App\Http\Controllers\Admin\Website\ImportantLinkController;
 use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
 use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TechController;
 use Illuminate\Support\Facades\Route;
-
 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');

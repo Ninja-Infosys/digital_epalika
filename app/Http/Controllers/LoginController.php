@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->middleware('guest')->except([
-            'locked',
-            'unlock',
-        ]);
-    }
+//    public function __construct()
+//    {
+//        parent::__construct();
+//
+//        $this->middleware('guest')->except([
+//            'locked',
+//            'unlock',
+//        ]);
+//    }
 
     public function locked()
     {
@@ -56,34 +56,46 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        Auth::guard('api')->attempt($credentials);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "content-Type:application/json",
+            "Accept:application/json"
+        ));
+        curl_setopt($ch, CURLOPT_URL, route('api.login')."?email=".$request->input('email')."&password=".$request->input('password'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
+        $response = curl_exec($ch);
+        info($response);
+        curl_close($ch);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard');
-        }
+        auth()->attempt($credentials);
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
-    }
-//    public function logout(Request $request): \Illuminate\Http\RedirectResponse
-//    {
-//        $credentials = $request->validate([
-//            'email' => ['required', 'email'],
-//            'password' => ['required'],
-//        ]);
-//
-//        Auth::guard('api')->attempt($credentials);
-//
-//        if (Auth::attempt($credentials)) {
-//            $request->session()->regenerate();
-//            return redirect()->intended('dashboard');
+//        if(\auth()->check())
+//        {
+//            return redirect(route('admin.dashboard'));
 //        }
-//
+
+//        if (auth('web')->attempt($credentials)) {
+////            $request->session()->regenerate();
+//            return redirect(route('admin.dashboard'));
+//        }
+
 //        return back()->withErrors([
 //            'email' => 'The provided credentials do not match our records.',
 //        ])->onlyInput('email');
-//    }
+    }
+
+    public function logout(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        session()->flush();
+        Auth::guard('web')->logout();
+        return redirect(route('login'));
+    }
+
+    public function loginPage()
+    {
+        return view('auth.login');
+    }
 
 }

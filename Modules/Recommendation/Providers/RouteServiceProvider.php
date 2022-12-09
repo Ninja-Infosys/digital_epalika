@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('recommendation')
             ->group(module_path('Recommendation', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
             ->prefix('admin/recommendation')
             ->as('admin.recommendation.')
             ->group(module_path('Recommendation', '/Routes/admin.php'));

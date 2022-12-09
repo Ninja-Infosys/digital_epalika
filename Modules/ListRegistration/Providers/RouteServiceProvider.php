@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->group(module_path('ListRegistration', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
             ->prefix('admin/listregistration')
             ->as('admin.listRegistrations.')
             ->group(module_path('ListRegistration', '/Routes/admin.php'));

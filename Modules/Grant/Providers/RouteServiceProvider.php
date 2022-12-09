@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('grant.')
             ->group(module_path('Grant', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
             ->prefix('admin/grant')
             ->as('admin.grant.')
             ->group(module_path('Grant', '/Routes/admin.php'));

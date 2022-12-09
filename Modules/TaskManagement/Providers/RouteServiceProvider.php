@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('taskManagement')
             ->group(module_path('TaskManagement', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'checkRoleMiddleware'])
             ->prefix('admin/taskmanagement')
             ->as('admin.taskManagement.')
             ->group(module_path('TaskManagement', '/Routes/admin.php'));

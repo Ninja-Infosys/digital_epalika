@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('digitalBoard.')
             ->group(module_path('DigitalBoard', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
             ->prefix('admin/digitalBoard')
             ->as('admin.digitalBoard.')
             ->group(module_path('DigitalBoard', '/Routes/admin.php'));
