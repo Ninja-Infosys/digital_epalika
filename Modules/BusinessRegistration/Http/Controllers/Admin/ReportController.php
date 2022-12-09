@@ -8,7 +8,6 @@ use Carbon\CarbonPeriod;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,10 +20,11 @@ use Modules\BusinessRegistration\Transformers\BusinessPurposeResource;
 use Modules\BusinessRegistration\Transformers\FiscalYearResource;
 use Modules\BusinessRegistration\Transformers\InvestmentRevenueResource;
 use Modules\BusinessRegistration\Transformers\ObjectTransactionResource;
+use Illuminate\Support\Facades\View;
 
 class ReportController extends Controller
 {
-    public function getRequiredData(): Application|Factory|View
+    public function getRequiredData()
     {
         $fiscalYears = FiscalYear::get();
         $businessPurposes = BusinessPurpose::get();
@@ -35,7 +35,12 @@ class ReportController extends Controller
         $employmentData = $this->setEmploymentData();
         $introBoardData = $this->setIntroBoardData();
         $columnData = $this->getColumns();
-
+dd($columnData->pluck('columns')
+    ->map(function ($c){
+    return collect($c)
+        ->map(function($f){
+        return array($f['column']=>$f['name']);
+    });
         return view('businessregistration::admin.businessRegistrationReport.index', compact([
             'fiscalYears',
             'businessPurposes',
@@ -53,8 +58,8 @@ class ReportController extends Controller
     public function report(Request $request)
     {
         $request->validate([
-            'date.from' => ['nullable', 'date', 'before_or_equal:date.to_date'],
-            'date.to' => ['nullable', 'date', 'after_or_equal:date.from_date'],
+            'date.from_date' => ['nullable', 'date', 'before_or_equal:date.to_date'],
+            'date.to_date' => ['nullable', 'date', 'after_or_equal:date.from_date'],
             'columns' => ['nullable', 'array']
         ]);
 
@@ -62,7 +67,8 @@ class ReportController extends Controller
             $filteredColumns = $request->input('columns.business_details');
         }
 
-        $businessDetails = BusinessDetail::select(!empty($filteredColumns)
+        $businessDetails = BusinessDetail::with('proprietorDetail')
+            ->select(!empty($filteredColumns)
             ? array_merge($filteredColumns, ['id'])
             : '*')
             ->where(function ($q) use ($request) {
@@ -71,21 +77,24 @@ class ReportController extends Controller
             ->get();
 
 
+
         $businessDetails = $this->filterObjectTransaction($businessDetails, $request);
 
         $businessDetails = $this->filterRegistrationRenewal($businessDetails, $request);
 
-        return $businessDetails;
+        return response()->json([
+            'view'=>(String)View::make('businessregistration::admin.businessRegistrationReport.report_table',compact('businessDetails'))
+        ]);
     }
 
     private function filterObjectTransaction($businessDetails, $request)
     {
-        if (!empty($this->form['object_transaction'])) {
+        if (!empty($request->input('columns.object_transaction'))) {
             $businessDetails = $businessDetails
                 ->filter(function ($detail) use ($request) {
                     if (!empty($detail->investmentRevenue)) {
                         $objectTransactionId = (int)$detail->investmentRevenue->object_transaction_id;
-                        return in_array($objectTransactionId, $request->input('object_transaction'), true);
+                        return in_array($objectTransactionId, $request->input('columns.object_transaction'), true);
                     }
                     return false;
                 });

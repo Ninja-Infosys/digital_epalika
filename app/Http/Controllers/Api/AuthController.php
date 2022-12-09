@@ -15,20 +15,23 @@ class AuthController extends Controller
             'password' => ['required', 'min:7']
         ]);
 
-        if (!auth()->attempt($validated)) {
-            return response()->json([
-                'message' => "Invalid Credentials",
-                'errors' => [
-                    'password' => [
-                        'Invalid credentials'
-                    ]
-                ]
-            ], 422);
-        }
-        return response()->json([
-            'message' => "Signed In Successfully",
-            'access_token' => $request->user()->createToken('auth-token')->plainTextToken,
-        ]);
+        auth()->attempt($validated);
+        info('authenticated');
+
+//        if (!auth()->attempt($validated)) {
+//            return response()->json([
+//                'message' => "Invalid Credentials",
+//                'errors' => [
+//                    'password' => [
+//                        'Invalid credentials'
+//                    ]
+//                ]
+//            ], 422);
+//        }
+//        return response()->json([
+//            'message' => "Signed In Successfully",
+//            'access_token' => $request->user()->createToken('auth-token')->plainTextToken,
+//        ]);
     }
 
     public function logout(Request $request)

@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        Model::preventLazyLoading(!$this->app->isProduction());
+//        Model::preventLazyLoading(!$this->app->isProduction());
         OfficeHeader::observe(OfficeHeaderObserver::class);
         FeatureActivation::observe(FeatureActivationObserver::class);
         Unit::observe(UnitObserver::class);

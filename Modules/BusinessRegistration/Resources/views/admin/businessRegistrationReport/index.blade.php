@@ -35,8 +35,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="#" method="POST">
-                        @csrf
+                    <form id="report-filter-form" method="POST">
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>मिति </strong>
@@ -45,7 +44,7 @@
                                 <div class="col-md-6 mb-2">
                                     <x-date-input-component
                                         nameNe="from_date" labelNe="देखि"
-                                        nameEn="en_from_date" labelEn="From"
+                                        nameEn="en_from_date" labelEn="From Date"
                                         :get-today-date="false"
                                     />
 
@@ -53,7 +52,7 @@
                                 <div class="col-md-6 mb-2">
                                     <x-date-input-component
                                         nameNe="to_date" labelNe="सम्म"
-                                        nameEn="en_to_date" labelEn="To"
+                                        nameEn="en_to_date" labelEn="To Date"
                                         :get-today-date="false"
                                     />
                                 </div>
@@ -68,9 +67,9 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="fiscal_year">आर्थिक बर्ष</label>
-                                            <select name="fiscal_year" multiple data-toggle="select2"
+                                            <select name="fiscal_year[]" multiple data-toggle="select2"
                                                     id="fiscal_year" class="form-control">
-                                                {{--                                        <option value=""> --आर्थिक बर्ष--</option>--}}
+                                                <option value="">--- छान्नुहोस् ---</option>
                                                 @foreach($fiscalYears as $fiscalYear)
                                                     <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
                                                 @endforeach
@@ -90,7 +89,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="business_nature">व्यवसाय प्रकृति अनुसार</label>
-                                            <select name="business_nature" multiple data-toggle="select2"
+                                            <select name="business_nature[]" multiple data-toggle="select2"
                                                     id="business_nature"
                                                     class="form-control">
                                                 <option value=""> --व्यवसाय प्रकृति अनुसार--</option>
@@ -114,7 +113,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="registration_renewal">दर्ता र नविकरण अनुसार</label>
-                                            <select name="registration_renewal" id="registration_renewal" multiple
+                                            <select name="registration_renewal[]" id="registration_renewal" multiple
                                                     data-toggle="select2"
                                                     class="form-control">
                                                 <option value=""> --दर्ता र नविकरण अनुसार--</option>
@@ -138,7 +137,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="business_purpose">उदेश्य अनुसार</label>
-                                            <select name="business_purpose" multiple data-toggle="select2"
+                                            <select name="business_purpose[]" multiple data-toggle="select2"
                                                     id="business_purpose" class="form-control">
                                                 <option value=""> --उदेश्य अनुसार--</option>
                                                 @foreach($businessPurposes as $businessPurpose)
@@ -160,7 +159,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="object_transaction">कारोबार वस्तु अनुसार</label>
-                                            <select name="object_transaction"
+                                            <select name="object_transaction[]"
                                                     multiple data-toggle="select2"
                                                     id="object_transaction" class="form-control">
                                                 <option value=""> --कारोबार वस्तु--</option>
@@ -184,7 +183,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="investment_revenue">पुँजीगत लगानी र राजस्वो</label>
-                                            <select name="investment_revenue" id="investment_revenue" multiple
+                                            <select name="investment_revenue[]" id="investment_revenue" multiple
                                                     data-toggle="select2"
                                                     class="form-control">
                                                 <option value=""> --पुँजीगत लगानी र राजस्वो--</option>
@@ -282,7 +281,7 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <label for="business_year">साल</label>
-                                            <select name="business_year" id="business_year" multiple
+                                            <select name="business_year[]" id="business_year" multiple
                                                     data-toggle="select2"
                                                     class="form-control">
                                                 <option value=""> --साल--</option>
@@ -307,8 +306,8 @@
                             <div class="row">
                                 @foreach($columnData as $columns)
                                     <div class="col-md-6 mb-2">
-                                        <label for="form.column.{{$columns['table_name']}}">{{$columns['name']}}</label>
-                                        <select name="form.column" id="form.column.{{$columns['table_name']}}" multiple data-toggle="select2"
+                                        <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
+                                        <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"
                                                 class="form-control">
                                             <option value="">--select Column--</option>
 
@@ -324,7 +323,7 @@
                             </div>
                         </fieldset>
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" id="submitFormBtn" class="btn btn-primary">
                             Filter
                         </button>
 
@@ -336,8 +335,65 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title"> व्यवसाय दर्ता रिपोर्ट</h4>
+                        <a href="" class="btn btn-primary btn-sm">
+                            <i class="fa fa-print"></i>
+                            Print
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body" id="report-table">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     @push('scripts')
         <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
+        <script>
+            $(document).ready(function() {
+                // x-csrf protection
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $(document.body).delegate('#report-filter-form','submit',function (e){
+                    e.preventDefault()
+                    $.ajax({
+                        type:"post",
+                        url:"{{route('admin.businessRegistration.report.report-data')}}",
+                        data:new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        beforeSend:function(){
+                            $("#submitFormBtn").prop('disabled',true);
+                        },
+                        success:function(resp){
+                            $("#submitFormBtn").prop('disabled',false);
+                            $('#report-table').html(resp.view)
+                        },
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                            $('#submitFormBtn').prop('disabled',false)
+                            if(XMLHttpRequest.status===422){
+                                $.each(XMLHttpRequest.responseJSON.errors,function(prefix,value){
+                                    $('span.'+prefix+'-error').text(value);
+                                });
+                            }
+                            else{
+                                alert("Something Went Wrong");
+                            }
+                        }
+                    });
+                })
+            });
+        </script>
     @endpush
 @endsection

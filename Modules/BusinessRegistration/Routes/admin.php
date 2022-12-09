@@ -34,7 +34,6 @@ Route::resource('businessDetail', BusinessRegistrationController::class)->names(
 Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportController::class)->group(function () {
     Route::get('dateWise','dateWise')->name('dateWise');
     Route::get('businessNature','businessNature')->name('businessNature');
-
 });
 
 
