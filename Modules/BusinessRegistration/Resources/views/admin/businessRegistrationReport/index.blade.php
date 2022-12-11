@@ -374,10 +374,12 @@
                         contentType: false,
                         beforeSend:function(){
                             $("#submitFormBtn").prop('disabled',true);
+                            $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
                         },
                         success:function(resp){
                             $("#submitFormBtn").prop('disabled',false);
                             $("#collapseFilterForm").collapse('hide')
+                            $("#submitFormBtn").html("Filter");
                             $('#report-table').html(resp.view)
                         },
                         error:function(XMLHttpRequest, textStatus, errorThrown){
