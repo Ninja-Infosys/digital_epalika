@@ -71,11 +71,24 @@ class ReportController extends Controller
                 $this->filterDataFromUser($q, $request);
             })
             ->get();
+$keys = collect();
 
-        $businessDetails = $this->filterRegistrationRenewal($businessDetails, $request);
+         collect($businessDetails[0])->each(function ($b, $k) use($keys){
+if (is_array($b)){
+    collect($b)->each(function ($l, $key) use($keys){
+        if (is_array($l)){
+            collect($l);
+        }else{
+            $keys->push($key);
+        }
+    });
+}else{
+    $keys->push($k);
+}
+        });
 
         return response()->json([
-            'view' => (string)View::make('businessregistration::admin.businessRegistrationReport.report_table', compact('businessDetails'))
+            'view' => (string)View::make('businessregistration::admin.businessRegistrationReport.report_table', compact('businessDetails', 'keys'))
         ]);
     }
 
@@ -229,3 +242,4 @@ class ReportController extends Controller
         }
     }
 }
+
