@@ -305,7 +305,6 @@ font-weight: 600;
 padding: .2rem 3rem .2rem 3rem;
 -webkit-clip-path: polygon(0 0,88% 0,100% 50%,88% 100%,0 100%);
 /* clip-path: polygon(0 0,88% 0,100% 50%,88% 100%,0 100%); */
-margin-top: -1px;
 }
 .marquee-list span.type {
     background-color:#fff;
@@ -382,7 +381,7 @@ margin-top: -1px;
 }
 .vertical-scroll {
     width: 90%;
-    height:64vh;
+    height:76vh;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
@@ -474,7 +473,6 @@ video{
 .info-card{
     background-color: #0DCAF0;
 text-align: center;
-padding: 1vh;
 margin: 4vh;
 width: 80%;
 float: right;
