@@ -13,8 +13,8 @@ return new class () extends Migration {
     public function up()
     {
         Schema::table('grievance_details', function (Blueprint $table) {
-            $table->boolean('is_approved')->default(0);
-            $table->boolean('is_public')->default(0);
+            $table->boolean('is_approved')->default(0)->comment('स्वीकृत');
+            $table->boolean('is_public')->default(0)->comment('सार्वजनिक');
         });
     }
 

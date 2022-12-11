@@ -9,14 +9,14 @@ return new class () extends Migration {
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('department')->nullable();
-            $table->string('designation')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->integer('position')->nullable();
-            $table->boolean('status')->default(true);
+            $table->string('name')->comment('नाम');
+            $table->string('department')->nullable()->comment('विभाग');
+            $table->string('designation')->nullable()->comment('पदनाम');
+            $table->string('photo')->nullable()->comment('फोटो');
+            $table->string('email')->nullable()->comment('इमेल');
+            $table->string('phone')->nullable()->comment('फोटो');
+            $table->integer('position')->nullable()->comment('स्थान');
+            $table->boolean('status')->default(true)->comment('स्थिति');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -9,24 +9,24 @@ return new class () extends Migration {
     {
         Schema::create('judicial_members', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('photo')->nullable();
-            $table->integer('position');
+            $table->string('name')->comment('नाम');
+            $table->string('photo')->nullable()->comment('फोटो');
+            $table->integer('position')->comment('स्थान');
             $table->foreignId('designation_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('phone')->nullable();
+            $table->string('phone')->nullable()->comment('फोन');
             $table->foreignId('province_id')->nullable()->constrained();
             $table->foreignId('district_id')->nullable()->constrained();
             $table->foreignId('local_body_id')->nullable()->constrained();
-            $table->integer('ward_no')->nullable();
-            $table->string('tole')->nullable();
-            $table->string('gender');
-            $table->string('dob')->nullable();
-            $table->string('en_dob')->nullable();
-            $table->string('blood_group')->nullable();
-            $table->string('father_name')->nullable();
-            $table->string('mother_name')->nullable();
-            $table->string('grandfather_name')->nullable();
-            $table->boolean('status')->default(1);
+            $table->integer('ward_no')->nullable()->comment('वार्ड नं');
+            $table->string('tole')->nullable()->comment('टोल');
+            $table->string('gender')->comment('लिङ्ग');
+            $table->string('dob')->nullable()->comment('जन्म मिति');
+            $table->string('en_dob')->nullable()->comment('जन्म मिति अंग्रेजी');
+            $table->string('blood_group')->nullable()->comment('रक्त समूह');
+            $table->string('father_name')->nullable()->comment('बुबाको नाम');
+            $table->string('mother_name')->nullable()->comment('आमाको नाम');
+            $table->string('grandfather_name')->nullable()->comment('हजुरबुबाको नाम');
+            $table->boolean('status')->default(1)->comment('स्थिति');
             $table->timestamps();
             $table->softDeletes();
         });

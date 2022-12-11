@@ -9,18 +9,18 @@ return new class () extends Migration {
     {
         Schema::create('municipal_committees', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('designation')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('email')->nullable();
+            $table->string('name')->comment('नाम');
+            $table->string('designation')->nullable()->comment('पदनाम');
+            $table->string('phone')->nullable()->comment('फोन');
+            $table->string('photo')->nullable()->comment('फोटो');
+            $table->string('email')->nullable()->comment('इमेल');
             $table->foreignId('province_id')->nullable()->constrained();
             $table->foreignId('district_id')->nullable()->constrained();
             $table->foreignId('local_body_id')->nullable()->constrained();
-            $table->integer('ward_no')->nullable();
-            $table->string('village')->nullable();
-            $table->string('tole')->nullable();
-            $table->integer('position');
+            $table->integer('ward_no')->nullable()->comment('वार्ड नं');
+            $table->string('village')->nullable()->comment('गाउँ');
+            $table->string('tole')->nullable()->comment('टोल');
+            $table->integer('position')->comment('ठाउँ');
             $table->timestamps();
             $table->softDeletes();
         });

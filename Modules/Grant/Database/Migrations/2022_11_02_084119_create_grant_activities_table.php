@@ -9,8 +9,8 @@ return new class () extends Migration {
     {
         Schema::create('grant_activities', function (Blueprint $table) {
             $table->id();
-            $table->string('grant_recipient_type');
-            $table->string('title');
+            $table->string('grant_recipient_type')->comment('अनुदान प्राप्तकर्ता प्रकार');
+            $table->string('title')->comment('शीर्षक');
             $table->timestamps();
             $table->softDeletes();
         });

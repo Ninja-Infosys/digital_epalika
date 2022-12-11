@@ -10,7 +10,7 @@ return new class () extends Migration {
         Schema::create('grant_programs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
-            $table->string('program_name');
+            $table->string('program_name')->comment('कार्यक्रम नाम');
             $table->timestamps();
             $table->softDeletes();
         });

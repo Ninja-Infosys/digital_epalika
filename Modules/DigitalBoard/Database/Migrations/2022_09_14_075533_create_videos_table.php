@@ -9,8 +9,8 @@ return new class () extends Migration {
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('video');
+            $table->string('title')->nullable()->comment('शीर्षक');
+            $table->string('video')->comment('भिडियो');
             $table->timestamps();
             $table->softDeletes();
         });
