@@ -21,6 +21,7 @@ use Modules\BusinessRegistration\Transformers\FiscalYearResource;
 use Modules\BusinessRegistration\Transformers\InvestmentRevenueResource;
 use Modules\BusinessRegistration\Transformers\ObjectTransactionResource;
 use Illuminate\Support\Facades\View;
+use function _\flatten;
 
 class ReportController extends Controller
 {
@@ -35,12 +36,7 @@ class ReportController extends Controller
         $employmentData = $this->setEmploymentData();
         $introBoardData = $this->setIntroBoardData();
         $columnData = $this->getColumns();
-dd($columnData->pluck('columns')
-    ->map(function ($c){
-    return collect($c)
-        ->map(function($f){
-        return array($f['column']=>$f['name']);
-    });
+
         return view('businessregistration::admin.businessRegistrationReport.index', compact([
             'fiscalYears',
             'businessPurposes',
