@@ -34,7 +34,6 @@ class BusinessDetail extends Model
     ];
 
     protected $fillable = [
-
         'business_type',
         'business_nature',
         'proprietor_detail_id',

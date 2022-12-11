@@ -65,38 +65,20 @@ class ReportController extends Controller
 
         $businessDetails = BusinessDetail::with('proprietorDetail')
             ->select(!empty($filteredColumns)
-            ? array_merge($filteredColumns, ['id'])
-            : '*')
+                ? array_merge($filteredColumns, ['id'])
+                : '*')
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
             })
             ->get();
 
-
-
-        $businessDetails = $this->filterObjectTransaction($businessDetails, $request);
-
         $businessDetails = $this->filterRegistrationRenewal($businessDetails, $request);
 
         return response()->json([
-            'view'=>(String)View::make('businessregistration::admin.businessRegistrationReport.report_table',compact('businessDetails'))
+            'view' => (string)View::make('businessregistration::admin.businessRegistrationReport.report_table', compact('businessDetails'))
         ]);
     }
 
-    private function filterObjectTransaction($businessDetails, $request)
-    {
-        if (!empty($request->input('columns.object_transaction'))) {
-            $businessDetails = $businessDetails
-                ->filter(function ($detail) use ($request) {
-                    if (!empty($detail->investmentRevenue)) {
-                        $objectTransactionId = (int)$detail->investmentRevenue->object_transaction_id;
-                        return in_array($objectTransactionId, $request->input('columns.object_transaction'), true);
-                    }
-                    return false;
-                });
-        }
-        return $businessDetails;
-    }
 
     private function filterRegistrationRenewal($businessDetails, $request)
     {
@@ -173,7 +155,7 @@ class ReportController extends Controller
     public function filterDataFromUser($q, Request $request): void
     {
         $this->filterFromIntroBoard($request, $q);
-        $this->filterFronRegistrationDate($request, $q);
+        $this->filterFromRegistrationDate($request, $q);
 
         if (!empty($request->input('fiscal_year'))) {
             $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
@@ -189,6 +171,10 @@ class ReportController extends Controller
 
         if (!empty($request->input('investment_revenue'))) {
             $q->whereIn('investment_revenue_id', $request->input('investment_revenue'));
+        }
+
+        if (!empty($request->input('object_transaction'))) {
+            $q->whereIn('object_transaction_id', $request->input('object_transaction'));
         }
 
         if (!empty($request->input('investment.from'))) {
@@ -216,11 +202,12 @@ class ReportController extends Controller
      * @param $q
      * @return void
      */
-    public function filterFronRegistrationDate(Request $request, $q): void
+    public function filterFromRegistrationDate(Request $request, $q): void
     {
         if (!empty($request->input('date.from'))) {
             $q->whereDate('registration_date_ne', '>=', $request->input('date.from'));
         }
+
         if (!empty($request->input('date.to'))) {
             $q->whereDate('registration_date_ne', '<=', $request->input('date.to'));
         }
@@ -236,6 +223,7 @@ class ReportController extends Controller
         if (!empty($request->input('introBoard.from'))) {
             $q->where('square', '>=', $request->input('introBoard.from'));
         }
+
         if (!empty($request->input('introBoard.to'))) {
             $q->where('square', '<=', $request->input('introBoard.to'));
         }
