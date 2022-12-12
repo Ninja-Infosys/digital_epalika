@@ -24,6 +24,19 @@ class PlanArea extends Model
         'area_name'
     ];
 
+    public function scopeFilterData($query, $params = [])
+    {
+        if (!empty($params['plan_area_id'])) {
+            if (is_array($params['plan_area_id'])) {
+                $query->whereIn('plan_area_id', $params['plan_area_id']);
+            } else {
+                $query->where('plan_area_id', $params['plan_area_id']);
+            }
+        }
+
+        return $query;
+    }
+
     public function planArea(): BelongsTo
     {
         return $this->belongsTo(PlanArea::class);
