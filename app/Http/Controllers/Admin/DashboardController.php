@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $municipal_meetings_count = MeetingEvent::where('event_for', 'municipal')->count();
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
         $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count();
-        $activityLogs = ActivityLog::with('user','model')->whereDate('created_at', today()->toDateString())->paginate(15);
+        $activityLogs = ActivityLog::with('user','model')->whereDate('created_at', today()->toDateString())->paginate(5);
 
         return view('admin.dashboard', compact(['user_count',
             'businessDetail_count',
