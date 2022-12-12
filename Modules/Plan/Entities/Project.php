@@ -4,6 +4,7 @@ namespace Modules\Plan\Entities;
 
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +19,7 @@ use Modules\Plan\Traits\PlanTemplateTrait;
 
 class Project extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait,PlanTemplateTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait,PlanTemplateTrait,GetAllColumns;
 
     protected $dates = [
         'created_at',

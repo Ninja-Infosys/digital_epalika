@@ -90,8 +90,6 @@ class BusinessDetail extends Model
 
     ];
 
-
-
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
