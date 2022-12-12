@@ -69,7 +69,7 @@ class DashboardController extends Controller
         $officeSetting = OfficeSetting::first();
         $planAreas = PlanArea::with(['planAreas' => function ($query) use ($officeSetting) {
             $query->withCount('projects');
-        }])->get()->map(function ($planArea){
+        }])->whereNull('plan_area_id')->get()->map(function ($planArea){
             $count=0;
             foreach($planArea->planAreas as $area){
                 $count+=$area->projects_count;

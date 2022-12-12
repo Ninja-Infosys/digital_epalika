@@ -217,7 +217,7 @@
                     <div class="card-body">
                         <x-charts.pie-chart-component
                             id="bar-chart17"
-                            chartName="name"
+                            chartName="क्षेत्र अनुसारको रिपोर्ट"
                             :labels="$planAreas['labels']"
                             :dataSets="$planAreas['dataSets']"
 
