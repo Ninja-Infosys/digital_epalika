@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('recommendation_templates', function (Blueprint $table) {
             $table->id();
-            $table->string('application_type');
-            $table->string('title');
-            $table->longText('data');
+            $table->string('application_type')->comment('आवेदन प्रकार');
+            $table->string('title')->comment('शीर्षक');
+            $table->longText('data')->comment('डाटा');
             $table->timestamps();
             $table->softDeletes();
         });

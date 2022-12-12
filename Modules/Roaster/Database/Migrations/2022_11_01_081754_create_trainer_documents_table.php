@@ -10,8 +10,8 @@ return new class () extends Migration {
         Schema::create('trainer_documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('trainer_id')->constrained()->cascadeOnDelete();
-            $table->string('title');
-            $table->string('document');
+            $table->string('title')->comment('शिर्षक');
+            $table->string('document')->comment('कागजात');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -10,17 +10,17 @@ return new class () extends Migration {
         Schema::create('meeting_events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meeting_event_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('event_name');
-            $table->string('recurrence');
-            $table->string('start_date');
-            $table->date('en_start_date');
-            $table->string('end_date')->nullable();
-            $table->date('en_end_date')->nullable();
-            $table->enum('event_for', ['municipal', 'ward'])->default('municipal');
-            $table->string('url')->nullable();
-            $table->string('recurrence_end_date')->nullable();
-            $table->string('en_recurrence_end_date')->nullable();
-            $table->text('description')->nullable();
+            $table->string('event_name')->comment('कार्यक्रम नाम');
+            $table->string('recurrence')->comment('पुनरावर्ती');
+            $table->string('start_date')->comment('सुरू मिति');
+            $table->date('en_start_date')->comment('सुरू मिति अंग्रेजी');
+            $table->string('end_date')->nullable()->comment('अन्त्य मिति');
+            $table->date('en_end_date')->nullable()->comment('अन्त्य मिति अंग्रेजी');
+            $table->enum('event_for', ['municipal', 'ward'])->default('municipal')->comment('कार्यक्रम लागि');
+            $table->string('url')->nullable()->comment('url');
+            $table->string('recurrence_end_date')->nullable()->comment('पुनरावृत्ति अन्त्य  मिति');
+            $table->string('en_recurrence_end_date')->nullable()->comment('पुनरावृत्ति अन्त्य  अंग्रेजी मिति');
+            $table->text('description')->nullable()->comment('विवरण');
             $table->timestamps();
             $table->softDeletes();
         });

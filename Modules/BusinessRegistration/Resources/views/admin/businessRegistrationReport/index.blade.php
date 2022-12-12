@@ -69,7 +69,7 @@
                                                 <label for="fiscal_year">आर्थिक बर्ष</label>
                                                 <select name="fiscal_year[]" multiple data-toggle="select2"
                                                         id="fiscal_year" class="form-control">
-                                                    <option value="">--- छान्नुहोस् ---</option>
+                                                    <option disabled>--- छान्नुहोस् ---</option>
                                                     @foreach($fiscalYears as $fiscalYear)
                                                         <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
                                                     @endforeach
@@ -92,7 +92,7 @@
                                                 <select name="business_nature[]" multiple data-toggle="select2"
                                                         id="business_nature"
                                                         class="form-control">
-                                                    <option value=""> --व्यवसाय प्रकृति अनुसार--</option>
+                                                    <option disabled> --- छान्नुहोस् ---</option>
                                                     @foreach(\Modules\BusinessRegistration\Enums\BusinessNature::cases() as $businessNature)
                                                         <option
                                                             value="{{$businessNature->value}}">{{$businessNature->label()}}</option>
@@ -116,7 +116,7 @@
                                                 <select name="registration_renewal[]" id="registration_renewal" multiple
                                                         data-toggle="select2"
                                                         class="form-control">
-                                                    <option value=""> --दर्ता र नविकरण अनुसार--</option>
+                                                    <option disabled>--- छान्नुहोस् ---</option>
                                                     @foreach(\Modules\BusinessRegistration\Enums\BusinessTypeEnum::cases() as $businessTypeEnum)
                                                         <option
                                                             value="{{$businessTypeEnum->value}}">{{$businessTypeEnum->label()}}</option>
@@ -139,7 +139,7 @@
                                                 <label for="business_purpose">उदेश्य अनुसार</label>
                                                 <select name="business_purpose[]" multiple data-toggle="select2"
                                                         id="business_purpose" class="form-control">
-                                                    <option value=""> --उदेश्य अनुसार--</option>
+                                                    <option disabled>--- छान्नुहोस् ---</option>
                                                     @foreach($businessPurposes as $businessPurpose)
                                                         <option
                                                             value="{{$businessPurpose->id}}">{{$businessPurpose->title}}</option>
@@ -162,7 +162,7 @@
                                                 <select name="object_transaction[]"
                                                         multiple data-toggle="select2"
                                                         id="object_transaction" class="form-control">
-                                                    <option value=""> --कारोबार वस्तु--</option>
+                                                    <option disabled>--- छान्नुहोस् ---</option>
                                                     @foreach($objectTransactions as $objectTransaction)
                                                         <option
                                                             value="{{$objectTransaction->id}}">{{$objectTransaction->title}}</option>
@@ -186,7 +186,7 @@
                                                 <select name="investment_revenue[]" id="investment_revenue" multiple
                                                         data-toggle="select2"
                                                         class="form-control">
-                                                    <option value=""> --पुँजीगत लगानी र राजस्वो--</option>
+                                                    <option disabled>--- छान्नुहोस् ---</option>
                                                     @foreach($investmentRevenues as $investmentRevenue)
                                                         <option
                                                             value="{{$investmentRevenue->id}}">{{$investmentRevenue->title}}
@@ -284,7 +284,7 @@
                                                 <select name="business_year[]" id="business_year" multiple
                                                         data-toggle="select2"
                                                         class="form-control">
-                                                    <option value=""> --साल--</option>
+                                                    <option disabled> --- छान्नुहोस् ---</option>
                                                     @foreach($businessYears as $year)
                                                         <option value="{{$year}}">{{$year}}</option>
                                                     @endforeach
@@ -309,8 +309,7 @@
                                             <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
                                             <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"
                                                     class="form-control">
-                                                <option value="">--select Column--</option>
-
+                                                <option disabled>--- छान्नुहोस् ---</option>
                                                 @foreach($columns['columns'] as $column)
                                                     <option
                                                         value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>

@@ -10,8 +10,8 @@ return new class () extends Migration {
         Schema::create('service_processes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id')->constrained()->cascadeOnDelete();
-            $table->text('description')->nullable();
-            $table->integer('position')->default(0);
+            $table->text('description')->nullable()->comment('विवरण');
+            $table->integer('position')->default(0)->comment('स्थान');
             $table->timestamps();
             $table->softDeletes();
         });

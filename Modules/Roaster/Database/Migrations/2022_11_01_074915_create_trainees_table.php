@@ -9,21 +9,21 @@ return new class () extends Migration {
     {
         Schema::create('trainees', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->foreignId('province_id')->constrained()->onDelete('cascade')->onUpdate('no action');
-            $table->foreignId('district_id')->constrained()->onDelete('cascade')->onUpdate('no action');
-            $table->foreignId('local_body_id')->constrained()->onDelete('cascade')->onUpdate('no action');
-            $table->integer('ward_no')->nullable();
-            $table->string('tole')->nullable();
-            $table->string('citizenship_no');
-            $table->string('gender');
-            $table->foreignId('ethnicity_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('category')->nullable();
-            $table->string('phone_no')->nullable();
-            $table->string('email_id')->nullable();
-            $table->string('qualification')->nullable();
-            $table->string('current_profession')->nullable();
-            $table->string('farming_area')->nullable();
+            $table->string('full_name')->comment('पुरा नाम');
+            $table->foreignId('province_id')->comment('प्रदेश')->constrained()->onDelete('cascade')->onUpdate('no action');
+            $table->foreignId('district_id')->comment('जिल्ला')->constrained()->onDelete('cascade')->onUpdate('no action');
+            $table->foreignId('local_body_id')->comment('पालिका')->constrained()->onDelete('cascade')->onUpdate('no action');
+            $table->integer('ward_no')->nullable()->comment('वार्ड नं.');
+            $table->string('tole')->nullable()->comment('टोल');
+            $table->string('citizenship_no')->comment('नागरिकता नं.');
+            $table->string('gender')->comment('लिङ्ग');
+            $table->foreignId('ethnicity_id')->nullable()->comment('जातियता')->constrained()->cascadeOnDelete();
+            $table->string('category')->nullable()->comment('वर्ग');
+            $table->string('phone_no')->nullable()->comment('फोन');
+            $table->string('email_id')->nullable()->comment('ईमेल');
+            $table->string('qualification')->nullable()->comment('योग्यता');
+            $table->string('current_profession')->nullable()->comment('वर्तमान पेशा');
+            $table->string('farming_area')->nullable()->comment('खेती क्षेत्र');
             $table->string('photo')->nullable();
             $table->string('application_form')->nullable();
             $table->string('ward_recommendation')->nullable();
@@ -33,7 +33,7 @@ return new class () extends Migration {
             $table->string('passport')->nullable();
             $table->string('visa')->nullable();
             $table->string('other_training')->nullable();
-            $table->boolean('select')->default(0);
+            $table->boolean('select')->default(0)->comment('छनोट');
             $table->string('reference_id')->unique();
             $table->timestamps();
             $table->softDeletes();

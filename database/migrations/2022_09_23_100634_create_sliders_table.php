@@ -9,9 +9,9 @@ return new class () extends Migration {
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('image');
-            $table->text('description')->nullable();
+            $table->string('title')->nullable()->comment('शीर्षक');
+            $table->string('image')->comment('फोटो');
+            $table->text('description')->nullable()->comment('विवरण');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -10,8 +10,8 @@ return new class () extends Migration {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
             $table->nullableMorphs('model');
-            $table->string('activity_type');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('activity_type')->comment('गतिविधि प्रकार');
+            $table->foreignId('user_id')->comment('प्रयोगकर्ता ID')->constrained()->cascadeOnDelete();
             $table->ipAddress('ip');
             $table->string('agent');
             $table->boolean('is_seen')->default(0);

@@ -9,15 +9,15 @@ return new class () extends Migration {
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->foreignId('fiscal_year_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
-            $table->timestamp('open_date')->nullable();
-            $table->timestamp('closed_date')->nullable();
-            $table->string('form_type')->default('Farmer');
+            $table->text('name')->comment('नाम');
+            $table->foreignId('fiscal_year_id')->nullable()->comment('आर्थिक वर्ष')->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->timestamp('open_date')->nullable()->comment('फारम खुल्ने मिति');
+            $table->timestamp('closed_date')->nullable()->comment('फारम बन्द हुने मिति');
+            $table->string('form_type')->default('Farmer')->comment('प्रशिक्षार्थीको प्रकार');
             $table->timestamp('closed_at')->nullable();
-            $table->text('aim')->nullable();
-            $table->text('description')->nullable();
-            $table->text('included_subjects')->nullable();
+            $table->text('aim')->nullable()->comment('लक्ष्य');
+            $table->text('description')->nullable()->comment('विवरण');
+            $table->text('included_subjects')->nullable()->comment('समावेश विषयहरू');
             $table->string('places')->nullable();
             $table->double('pre_max_mark', 10, 2)->nullable();
             $table->double('pre_min_mark', 10, 2)->nullable();

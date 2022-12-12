@@ -10,12 +10,12 @@ return new class () extends Migration {
         Schema::create('meeting_decisions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meeting_event_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->enum('meeting_for', ['municipal', 'ward'])->default('municipal');
-            $table->string('subject')->nullable();
-            $table->string('date')->nullable();
-            $table->string('en_date')->nullable();
-            $table->longText('description')->nullable();
-            $table->string('decision_file')->nullable();
+            $table->enum('meeting_for', ['municipal', 'ward'])->default('municipal')->comment('बैठक को लागी');
+            $table->string('subject')->nullable()->comment('विषय');
+            $table->string('date')->nullable()->comment('मिति');
+            $table->string('en_date')->nullable()->comment('अंग्रेजी मिति');
+            $table->longText('description')->nullable()->comment('विवरण');
+            $table->string('decision_file')->nullable()->comment('निर्णय फाइल');
             $table->timestamps();
             $table->softDeletes();
         });

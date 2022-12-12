@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique();
+            $table->string('title')->unique()->comment('शीर्षक');
             $table->timestamps();
         });
     }

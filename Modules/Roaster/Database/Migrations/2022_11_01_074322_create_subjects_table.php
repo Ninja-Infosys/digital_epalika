@@ -9,10 +9,10 @@ return new class () extends Migration {
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('level');
-            $table->string('duration')->nullable();
-            $table->text('content')->nullable();
+            $table->string('title')->comment('शिर्षक');
+            $table->string('level')->comment('तह');
+            $table->string('duration')->nullable()->comment('अवधि');
+            $table->text('content')->nullable()->comment('सामग्री');
             $table->timestamps();
             $table->softDeletes();
         });

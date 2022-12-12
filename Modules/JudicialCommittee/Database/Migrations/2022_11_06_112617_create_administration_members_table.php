@@ -9,14 +9,14 @@ return new class () extends Migration {
     {
         Schema::create('administration_members', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('photo')->nullable();
-            $table->integer('position');
+            $table->string('name')->comment('नाम');
+            $table->string('photo')->nullable()->comment('फोटो');
+            $table->integer('position')->comment('स्थान');
             $table->foreignId('designation_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('phone')->nullable();
-            $table->string('red_signature')->nullable();
-            $table->string('black_signature')->nullable();
-            $table->boolean('status')->default(1);
+            $table->string('phone')->nullable()->comment('फोन');
+            $table->string('red_signature')->nullable()->comment('रातो हस्ताक्षर');
+            $table->string('black_signature')->nullable()->comment('कालो हस्ताक्षर');
+            $table->boolean('status')->default(1)->comment('स्थिति');
             $table->timestamps();
             $table->softDeletes();
         });

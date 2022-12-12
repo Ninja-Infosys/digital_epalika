@@ -8,7 +8,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::table('grievance_details', function (Blueprint $table) {
-            $table->string('status')->default('unseen');
+            $table->string('status')->default('unseen')->comment('स्थिति');
         });
     }
 

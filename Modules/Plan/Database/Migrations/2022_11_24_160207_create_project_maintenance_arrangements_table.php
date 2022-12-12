@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('project_maintenance_arrangements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->string('office_name')->nullable();
-            $table->double('public_service',12,2)->default(0);
-            $table->double('service_fee',12,2)->default(0);
-            $table->double('from_fee_donation',12,2)->default(0);
-            $table->double('others',12,2)->default(0);
+            $table->foreignId('project_id')->comment('कार्यक्रम आईडी')->constrained()->cascadeOnDelete();
+            $table->string('office_name')->nullable()->comment('कार्यालयको नाम');
+            $table->double('public_service',12,2)->default(0)->comment('सार्वजनिक सेवा');
+            $table->double('service_fee',12,2)->default(0)->comment('सेवा शुल्क');
+            $table->double('from_fee_donation',12,2)->default(0)->comment('शुल्क दानबाट');
+            $table->double('others',12,2)->default(0)->comment('अरू');
             $table->timestamps();
             $table->softDeletes();
         });

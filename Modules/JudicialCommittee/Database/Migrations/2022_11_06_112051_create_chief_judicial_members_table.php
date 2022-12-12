@@ -9,12 +9,12 @@ return new class () extends Migration {
     {
         Schema::create('chief_judicial_members', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('photo')->nullable();
-            $table->integer('position');
+            $table->string('name')->comment('नाम');
+            $table->string('photo')->nullable()->comment('फोटो');
+            $table->integer('position')->comment('स्थान');
             $table->foreignId('designation_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('phone')->nullable();
-            $table->boolean('status')->default(1);
+            $table->string('phone')->nullable()->comment('फोन');
+            $table->boolean('status')->default(1)->comment('स्थिति ');
             $table->timestamps();
             $table->softDeletes();
         });

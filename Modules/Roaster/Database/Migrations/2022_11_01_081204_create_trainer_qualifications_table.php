@@ -10,10 +10,10 @@ return new class () extends Migration {
         Schema::create('trainer_qualifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('trainer_id')->constrained()->cascadeOnDelete();
-            $table->string('achievement');
-            $table->text('institute');
+            $table->string('achievement')->comment('उपलब्धि');
+            $table->text('institute')->comment('संस्थान');
             $table->string('passed_year')->nullable();
-            $table->text('major_subjects')->nullable();
+            $table->text('major_subjects')->nullable()->comment('प्रमुख विषयहरू');
             $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
