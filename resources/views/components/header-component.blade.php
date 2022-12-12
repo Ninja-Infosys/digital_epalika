@@ -67,15 +67,15 @@
     <script>
         function makeDigitalClock() {
 // get current time
-            var currentTime = new Date();
+            const currentTime = new Date();
 
 // extract hours, minutes, and seconds from the current time
-            var hours = currentTime.getHours();
-            var minutes = currentTime.getMinutes();
-            var seconds = currentTime.getSeconds();
+            let hours = currentTime.getHours();
+            let minutes = currentTime.getMinutes();
+            let seconds = currentTime.getSeconds();
 
 // convert hours to 12-hour format and add AM or PM
-            var ampm = "विहानको";
+            let ampm = "विहानको";
             if (hours > 12) {
                 hours = hours - 12;
                 ampm = "अपराह्नको";
@@ -93,7 +93,10 @@
 
 // create digital clock HTML
 // add the digital clock to the page
-            document.getElementById("clock-container").innerHTML = ampm + " " + NepaliFunctions.ConvertToUnicode(hours) + ":" + NepaliFunctions.ConvertToUnicode(minutes) + ":" + NepaliFunctions.ConvertToUnicode(seconds);
+            document.getElementById("clock-container").innerHTML = ampm + " " +
+                NepaliFunctions.ConvertToUnicode(hours) + ":" +
+                NepaliFunctions.ConvertToUnicode(minutes) + ":" +
+                NepaliFunctions.ConvertToUnicode(seconds);
 
 
         }
