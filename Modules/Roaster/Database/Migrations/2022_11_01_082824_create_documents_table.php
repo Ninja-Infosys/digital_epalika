@@ -10,8 +10,8 @@ return new class () extends Migration {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->morphs('model');
-            $table->string('title')->nullable();
-            $table->string('document');
+            $table->string('title')->nullable()->comment('शीर्षक');
+            $table->string('document')->comment('कागजात');
             $table->timestamps();
             $table->softDeletes();
         });

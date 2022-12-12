@@ -10,11 +10,11 @@ return new class () extends Migration {
         Schema::create('trainer_experiences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('trainer_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('designation_id')->constrained()->cascadeOnDelete();
-            $table->string('office');
-            $table->string('responsibility')->nullable();
-            $table->string('from');
-            $table->string('to')->nullable();
+            $table->foreignId('designation_id')->comment('पद')->constrained()->cascadeOnDelete();
+            $table->string('office')->comment('कार्यालय');
+            $table->string('responsibility')->nullable()->comment('जिम्मेवारी');
+            $table->string('from')->comment('देखि');
+            $table->string('to')->nullable()->comment('सम्म');
             $table->longText('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
