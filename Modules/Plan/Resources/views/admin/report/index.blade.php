@@ -34,49 +34,40 @@
                     <div class="card-body">
                         <form id="report-filter-form" method="POST">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <fieldset class="border p-2 mb-2">
-                                        <legend class="font-16 text-info">
-                                            <strong>मिति </strong>
-                                        </legend>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-2">
-                                                <x-date-input-component
-                                                    nameNe="from_date" labelNe="देखि"
-                                                    nameEn="en_from_date" labelEn="From Date"
-                                                    :get-today-date="false"
-                                                />
-
-                                            </div>
-                                            <div class="col-md-6 mb-2">
-                                                <x-date-input-component
-                                                    nameNe="to_date" labelNe="सम्म"
-                                                    nameEn="en_to_date" labelEn="To Date"
-                                                    :get-today-date="false"
-                                                />
-                                            </div>
-                                        </div>
-                                    </fieldset>
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="from_date" labelNe="मिति देखि"
+                                        nameEn="en_from_date" labelEn="From Date"
+                                        :get-today-date="false"
+                                    />
                                 </div>
-                                <div class="col-md-4">
-                                    <fieldset class="border p-2 mb-2">
-                                        <legend class="font-16 text-info">
-                                            <strong>आर्थिक बर्ष </strong>
-                                        </legend>
-                                        <div class="row">
-                                            <div class="col-md-12 mb-2">
-                                                <label for="fiscal_year">आर्थिक बर्ष</label>
-                                                <select name="fiscal_year[]" multiple data-toggle="select2"
-                                                        id="fiscal_year" class="form-control">
-                                                    <option disabled>--- छान्नुहोस् ---</option>
-                                                    @foreach($fiscalYears as $fiscalYear)
-                                                        <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
-                                                    @endforeach
-                                                </select>
+                                <div class="col-md-3">
+                                    <x-date-input-component
+                                        nameNe="to_date" labelNe="मिति सम्म"
+                                        nameEn="en_to_date" labelEn="To Date"
+                                        :get-today-date="false"
+                                    />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="fiscal_year">आर्थिक बर्ष</label>
+                                    <select name="fiscal_year[]" multiple data-toggle="select2"
+                                            id="fiscal_year" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($fiscalYears as $fiscalYear)
+                                            <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="ward_no">वडा नं.</label>
+                                    <select name="ward_no[]" multiple data-toggle="select2"
+                                            id="ward_no" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($officeSetting->localBody->ward_no as $ward)
+                                            <option value="{{$ward}}">{{$ward}}</option>
+                                        @endforeach
+                                    </select>
 
-                                            </div>
-                                        </div>
-                                    </fieldset>
                                 </div>
                             </div>
                             <fieldset class="border p-2 mb-2">
@@ -87,7 +78,7 @@
                                 </legend>
                                 <div class="row">
                                     @foreach($columnData as $columns)
-                                        <div class="col-md-4 mb-2">
+                                        <div class="col-md-3 mb-2">
                                             <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
                                             <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"
                                                     class="form-control">
