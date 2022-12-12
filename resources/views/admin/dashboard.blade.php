@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{ route('admin.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -20,174 +20,145 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary">
+                <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                <i class="fa fa-users font-22 avatar-title text-white"></i>
+                        <div class="col-md">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $user_count }}
+                                </span>
+                            </h3>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$user_count}}
-                                    </span>
-                                </h3>
-                                <p class="text-muted mb-1">जम्मा प्रयोगकर्ताहरु</p>
-                            </div>
+                            <p class="text my-1">जम्मा प्रयोगकर्ताहरु</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
 
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-secondary border-secondary border">
-                                <i class="fa fa-clipboard-list font-22 avatar-title text-white"></i>
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $notice_count }}
+                                </span>
+                            </h3>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">
-                                         {{$notice_count}}
-                                    </span>
-                                </h3>
-                                <p class="text-muted mb-1">जम्मा सूचना</p>
-                            </div>
+                            <p class="text my-1">जम्मा सम्पन्न तालिम</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
 
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary">
+                <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-blue border-blue border">
-                                <i class="fa fa-newspaper font-22 avatar-title text-white"></i>
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">{{ $news_count }}</span></h3>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">{{$news_count}}</span></h3>
-                                <p class="text-muted mb-1">जम्मा समाचार</p>
-                            </div>
+                            <p class="text my-1">सम्झौता हुनबाँकि कार्यर्कम</p>
+
                         </div>
                     </div> <!-- end row-->
                 </div>
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
 
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-pink border-pink border">
-                                <i class="fa fa-comment font-22 avatar-title text-white"></i>
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $registration_count }}</span></h3>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$replied_grievance_count + $investigated_grievance_count}}
-                                    </span></h3>
-                                <p class="text-muted mb-1">जम्मा चलिरहेको गुनासोहरु</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-primary border-primary border">
-                                <i class="fa fa-building font-22 avatar-title text-white"></i>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$organizations_count}}
-                                    </span></h3>
-                                <p class="text-muted mb-1">जम्मा दर्ता भएका व्यवसायहरु </p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-info border-info border">
-                                <i class="fa fa-file-alt font-22 avatar-title text-white"></i>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$dispatch_count}}</span></h3>
-                                <p class="text-muted mb-1">जम्मा चलानी पत्रहरु</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-success border-success border">
-                                <i class="fa fa-file-alt font-22 avatar-title text-white"></i>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$registration_count}}</span></h3>
-                                <p class="text-muted mb-1">जम्मा दर्ता पत्रहरु</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                <i class="fa fa-handshake font-22 avatar-title text-white"></i>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$municipal_meetings_count}}</span></h3>
-                                <p class="text-muted mb-1">जम्मा कार्यपालिका बैठकहरु</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-    </div>
+                            <p class="text my-1">दर्ता/प्रमाणित घरनक्सा</p>
 
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $replied_grievance_count + $investigated_grievance_count }}
+                                </span></h3>
+                            </div>
+                            <p class="text my-1">दर्ता भएका गुनासोहरु</p>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $organizations_count }}
+                                </span></h3>
+                            </div>
+                            <p class="text my-1">दर्ता भएका व्यवसायहरु </p>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        {{-- <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="text mb-1">जम्मा चलानी पत्रहरु</p>
+                            <h3 class="mt-1"><span class="num" data-plugin="counterup">
+                                    {{ $dispatch_count }}</span></h3>
+                        </div>
+                        <div class="col-4">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <i class="fa fa-file-alt avatar-title"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="text mb-1">जम्मा कार्यपालिका बैठकहरु</p>
+                            <h3 class="mt-1"><span class="num" data-plugin="counterup">
+                                    {{ $municipal_meetings_count }}</span></h3>
+                        </div>
+                        <div class="col-4">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <i class="fa fa-handshake avatar-title"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 @endsection

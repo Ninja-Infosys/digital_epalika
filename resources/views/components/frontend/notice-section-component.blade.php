@@ -32,13 +32,13 @@
                     <i class="fa-solid fa-clock fa-xl" style="color: #0047AB; margin: 0 10px"></i>अनुमति लग्ने समय
                     <p style="color: #828282; padding: 0 50px; font-size: 15px">सोहि दिन सर्जमिनको हकमा बढीमा ५ दिनभित्र</p>
                 </div>
-        
+
                 <div class="title" style="color: #0047AB; font-size: 20px; padding: 0 15px;">
                     <i class="fa-solid fa-user fa-xl" style="color: #0047AB; margin: 0 10px"></i>जिम्मेवार अधिकारी
                     <p style="color: #828282; padding: 0 50px; font-size: 15px">वडाअध्क्षय, वडा सचिव, सम्वन्धित फाटका कर्मचारी
                     </p>
                 </div>
-        
+
                 <div class="title" style="color: #0047AB; font-size: 20px; padding: 0 15px;">
                     <i class="fa-solid fa-file-contract fa-xl" style="color: #0047AB; margin: 0 10px"></i>आवश्यक कागजातहरु
                     <p style="color: #828282; padding: 0 50px; font-size: 15px">१. प्रचलित नागरिकता ऐन र नियमावलीले तोकेको
@@ -88,13 +88,13 @@
                     <i class="fa-solid fa-clock fa-xl" style="color: #0047AB; margin: 0 10px"></i>अनुमति लग्ने समय
                     <p style="color: #828282; padding: 0 50px; font-size: 15px">सोहि दिन सर्जमिनको हकमा बढीमा ५ दिनभित्र</p>
                 </div>
-        
+
                 <div class="title" style="color: #0047AB; font-size: 20px; padding: 0 15px;">
                     <i class="fa-solid fa-user fa-xl" style="color: #0047AB; margin: 0 10px"></i>जिम्मेवार अधिकारी
                     <p style="color: #828282; padding: 0 50px; font-size: 15px">वडाअध्क्षय, वडा सचिव, सम्वन्धित फाटका कर्मचारी
                     </p>
                 </div>
-        
+
                 <div class="title" style="color: #0047AB; font-size: 20px; padding: 0 15px;">
                     <i class="fa-solid fa-file-contract fa-xl" style="color: #0047AB; margin: 0 10px"></i>आवश्यक कागजातहरु
                     <p style="color: #828282; padding: 0 50px; font-size: 15px">१. प्रचलित नागरिकता ऐन र नियमावलीले तोकेको
@@ -114,15 +114,6 @@
         </div>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
 
 @push('styles')
 <style>
@@ -140,11 +131,10 @@
                 border-radius: 5px;
                 width: 100%;
                 height: 38vh;
-                
                 overflow: hidden;
                 position: relative;
                 box-sizing: border-box;
             }
-</style>    
+</style>
 @endpush
 

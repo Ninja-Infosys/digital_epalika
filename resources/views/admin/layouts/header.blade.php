@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
             <li class="border rounded p-1 mt-3">
-                <h4 class="text-white">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
+                <h4 class="text-blue">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-inline-block d-lg-none">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
