@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('consumer_committees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('project_id')->comment('कार्यक्रम आईडी')->constrained()->cascadeOnDelete();
             $table->string('name')->nullable()->comment('नाम');
             $table->string('address')->nullable()->comment('ठेगाना');
             $table->string('phone')->nullable()->comment('फोन');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('registration_no')->nullable()->comment('दर्ता नं');
             $table->integer('beneficiary_no')->nullable()->comment('लाभार्थी नं');
             $table->integer('member_number')->default(0)->comment('सदस्य संख्या');
-            $table->string('experience_in_project')->nullable()->comment('परियोजना मा अनुभव');
+            $table->string('experience_in_project')->nullable()->comment('कार्यक्रममा अनुभव');
             $table->timestamps();
             $table->softDeletes();
         });

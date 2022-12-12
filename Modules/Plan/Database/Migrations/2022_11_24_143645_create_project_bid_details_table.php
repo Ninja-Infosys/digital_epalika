@@ -10,15 +10,15 @@ return new class extends Migration
     {
         Schema::create('project_bid_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('project_id')->comment('कार्यक्रम आईडी')->constrained()->cascadeOnDelete();
             $table->double('cost_estimation',12,2)->default(0)->comment('लागत अनुमान');
             $table->string('notice_published_date')->nullable()->comment('सूचना प्रकाशित मिति');
-            $table->string('newspaper_name')->nullable()->comment('अखबारको नाम');
+            $table->string('newspaper_name')->nullable()->comment('पत्रिकाको नाम');
             $table->string('contract_evaluation_decision_date')->nullable()->comment('अनुबंध मूल्याङ्कन निर्णय मिति');
             $table->string('intent_notice_publish_date')->nullable()->comment('आशय सूचना प्रकाशित मिति');
             $table->string('contract_newspaper_name')->nullable()->comment('सम्झौता पत्रपत्रिका नाम');
             $table->string('contract_acceptance_decision_date')->nullable()->comment('सम्झौता स्वीकृति निर्णय मिति');
-            $table->double('contract_percentage',12,2)->default(0)->comment('अनुबंध प्रतिशत');
+            $table->double('contract_percentage',12,2)->default(0)->comment('सम्झौता प्रतिशत');
             $table->string('contractor_name')->nullable()->comment('ठेकेदार नाम');
             $table->string('contractor_address')->nullable()->comment('ठेकेदार ठेगाना');
             $table->string('contractor_phone')->nullable()->comment('ठेकेदार फोन');
