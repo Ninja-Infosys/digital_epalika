@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('budget_heads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('budget_head_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('title');
+            $table->foreignId('budget_head_id')->nullable()->comment('बजेट शीर्षक')->constrained()->cascadeOnDelete();
+            $table->string('title')->comment('शीर्षक');
             $table->timestamps();
             $table->softDeletes();
         });

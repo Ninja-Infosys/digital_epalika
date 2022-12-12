@@ -9,12 +9,12 @@ return new class extends Migration {
     {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fiscal_year_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('date_ne');
-            $table->string('date_en');
-            $table->string('name')->nullable();
-            $table->string('application_type');
-            $table->json('data');
+            $table->foreignId('fiscal_year_id')->nullable()->comment('आर्थिक वर्ष आईडी')->constrained()->cascadeOnDelete();
+            $table->string('date_ne')->comment('मिति वि.क.');
+            $table->string('date_en')->comment('मिति AD');
+            $table->string('name')->nullable()->comment('नाम');
+            $table->string('application_type')->comment('आवेदन प्रकार');
+            $table->json('data')->comment('डाटा');
             $table->timestamps();
             $table->softDeletes();
         });

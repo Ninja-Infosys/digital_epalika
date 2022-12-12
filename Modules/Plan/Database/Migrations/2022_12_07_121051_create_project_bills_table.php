@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('project_bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->double('amount',12,2)->default(0);
-            $table->string('bill_date');
+            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->double('amount',12,2)->default(0)->comment('रकम');
+            $table->string('bill_date')->comment('बिल मिति');
             $table->timestamps();
             $table->softDeletes();
         });

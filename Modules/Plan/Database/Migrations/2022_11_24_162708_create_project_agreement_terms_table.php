@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('project_agreement_terms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->longText('data');
+            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->longText('data')->comment('डाटा');
             $table->timestamps();
             $table->softDeletes();
         });

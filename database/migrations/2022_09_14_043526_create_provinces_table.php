@@ -9,8 +9,8 @@ return new class () extends Migration {
     {
         Schema::create('provinces', function (Blueprint $table) {
             $table->id();
-            $table->string('province');
-            $table->string('province_en')->nullable();
+            $table->string('province')->comment('प्रदेश ');
+            $table->string('province_en')->nullable()->comment('प्रदेश en');
             $table->timestamps();
             $table->softDeletes();
         });

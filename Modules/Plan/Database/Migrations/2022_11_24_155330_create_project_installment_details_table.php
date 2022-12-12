@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('project_installment_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->string('installment_type');
-            $table->string('date')->nullable();
-            $table->double('amount',12,2)->default(0);
-            $table->string('construction_material_quantity')->nullable();
-            $table->text('remarks')->nullable();
+            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->string('installment_type')->comment('किस्ता प्रकार');
+            $table->string('date')->nullable()->comment('मिति');
+            $table->double('amount',12,2)->default(0)->comment('रकम');
+            $table->string('construction_material_quantity')->nullable()->comment('निर्माण मिटरियल मात्रा');
+            $table->text('remarks')->nullable()->comment('कैफियत');
             $table->timestamps();
             $table->softDeletes();
         });

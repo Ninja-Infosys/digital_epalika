@@ -10,11 +10,11 @@ return new class extends Migration
     {
         Schema::create('project_bid_submissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->string('submission_type');
-            $table->string('submission_no');
-            $table->string('date');
-            $table->double('amount',12,2)->default(0);
+            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->string('submission_type')->comment('बुझाउने प्रकार');
+            $table->string('submission_no')->comment('बुझाउने नम्बर');
+            $table->string('date')->comment('मिति');
+            $table->double('amount',12,2)->default(0)->comment('रकम');
             $table->timestamps();
             $table->softDeletes();
         });

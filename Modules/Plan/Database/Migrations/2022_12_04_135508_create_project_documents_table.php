@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('project_documents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->string('document_type')->nullable();
-            $table->string('document_name');
-            $table->longText('data');
+            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->string('document_type')->nullable()->comment('कागजात प्रकार');
+            $table->string('document_name')->comment('कागजात नाम');
+            $table->longText('data')->comment('डाटा');
             $table->timestamps();
             $table->softDeletes();
         });
