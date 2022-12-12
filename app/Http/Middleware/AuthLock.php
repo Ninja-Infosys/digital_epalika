@@ -11,7 +11,7 @@ class AuthLock
     public function handle(Request $request, Closure $next)
     {
 
-//        if (App::environment() === 'production') {
+        if (!app()->environment('local')) {
         if (!$request->user()) {
             return $next($request);
         }
@@ -30,7 +30,7 @@ class AuthLock
         }
 
         session(['lock-expires-at' => now()->addMinutes($request->user()->getLockoutTime())]);
-//        }
+        }
         return $next($request);
     }
 }

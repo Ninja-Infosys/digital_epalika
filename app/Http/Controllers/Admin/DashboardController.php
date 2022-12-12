@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityLog;
 use App\Models\User;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 use Modules\DigitalBoard\Entities\Notice;
@@ -32,9 +34,12 @@ class DashboardController extends Controller
         $ward_meetings_count = MeetingEvent::where('event_for', 'ward')->count();
         $municipal_meetings_count = MeetingEvent::where('event_for', 'municipal')->count();
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
-        $organizations_count = Organization::where('is_active', 1)->count();
+        $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count();
+        $activityLogs = ActivityLog::with('user','model')->whereDate('created_at', today()->toDateString())->paginate(15);
 
         return view('admin.dashboard', compact(['user_count',
+            'businessDetail_count',
+            'activityLogs',
             'grievance_user_count',
             'notice_count',
             'news_count',
@@ -48,7 +53,6 @@ class DashboardController extends Controller
             'ward_meetings_count',
             'grievanceTypes',
             'unseen_grievances',
-            'organizations_count',
         ]));
     }
 }

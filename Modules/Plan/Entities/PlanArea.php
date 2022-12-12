@@ -39,11 +39,11 @@ class PlanArea extends Model
 
     public function planArea(): BelongsTo
     {
-        return $this->belongsTo(PlanArea::class);
+        return $this->belongsTo(__CLASS__);
     }
 
     public function planAreas(): HasMany
     {
-        return $this->hasMany(PlanArea::class);
+        return $this->hasMany(__CLASS__);
     }
 }
