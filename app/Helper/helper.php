@@ -4,6 +4,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\FeatureActivation;
+use Illuminate\Support\Facades\Cache;
 
 if (!function_exists('get_setting')) {
     function get_setting($key, $default = null)

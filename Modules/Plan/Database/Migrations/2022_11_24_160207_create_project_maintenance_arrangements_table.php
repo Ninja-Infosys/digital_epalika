@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('project_maintenance_arrangements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('project_id')->comment('कार्यक्रम आईडी')->constrained()->cascadeOnDelete();
             $table->string('office_name')->nullable()->comment('कार्यालयको नाम');
             $table->double('public_service',12,2)->default(0)->comment('सार्वजनिक सेवा');
             $table->double('service_fee',12,2)->default(0)->comment('सेवा शुल्क');

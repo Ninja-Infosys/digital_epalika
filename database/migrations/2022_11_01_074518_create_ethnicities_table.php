@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('ethnicities', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->comment('शीर्षक');
             $table->timestamps();
             $table->softDeletes();
         });

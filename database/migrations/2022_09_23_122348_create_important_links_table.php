@@ -9,8 +9,8 @@ return new class () extends Migration {
     {
         Schema::create('important_links', function (Blueprint $table) {
             $table->id();
-            $table->string('link_title');
-            $table->string('link_url');
+            $table->string('link_title')->comment('लिङ्क शीर्षक');
+            $table->string('link_url')->comment('लिङ्क url');
             $table->timestamps();
             $table->softDeletes();
         });

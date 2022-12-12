@@ -13,7 +13,7 @@ return new class () extends Migration {
             $table->string('icon')->nullable()->comment('आइकन');
             $table->string('count')->comment('गणना');
             $table->string('bg_color')->nullable()->comment('पृष्ठभूमि रंग');
-            $table->integer('position')->comment('');
+            $table->integer('position')->comment('स्थान');
             $table->timestamps();
             $table->softDeletes();
         });

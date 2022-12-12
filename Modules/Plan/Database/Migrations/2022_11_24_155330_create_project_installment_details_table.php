@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('project_installment_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->comment('परियोजना आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('project_id')->comment('कार्यक्रम आईडी')->constrained()->cascadeOnDelete();
             $table->string('installment_type')->comment('किस्ता प्रकार');
             $table->string('date')->nullable()->comment('मिति');
             $table->double('amount',12,2)->default(0)->comment('रकम');
