@@ -16,7 +16,7 @@ class ReportController extends Controller
         $fiscalYears = FiscalYear::get();
         $columnData = $this->getColumns();
 
-        return view('plan::admin.report.index',compact('fiscalYears','columnData'));
+        return view('plan::admin.report.index', compact('fiscalYears', 'columnData'));
     }
 
     private function getColumns(): Collection
@@ -27,7 +27,9 @@ class ReportController extends Controller
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
                 return array_keys($column, 'Project')
-                    || array_keys($column, 'projectCostDetail');
+                    || array_keys($column, 'projectCostDetail')
+                    || array_keys($column, 'projectMaintenanceArrangement')
+                    || array_keys($column, 'consumerCommittee');
             })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
