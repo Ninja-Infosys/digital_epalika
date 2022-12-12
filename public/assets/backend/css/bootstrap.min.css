@@ -9719,7 +9719,7 @@ textarea.form-control-lg {
 
 .text-light {
     --ct-text-opacity: 1;
-    color: rgba(var(--ct-light-rgb), var(--ct-text-opacity)) !important
+    color: rgba(var(--ct-light-rgb), var(--ct-text-opacity))
 }
 
 .text-dark {

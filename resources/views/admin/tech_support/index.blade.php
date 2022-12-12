@@ -42,7 +42,7 @@
                             <div class="row mt-2">
                                 <div class="col-md-4 border" id="citizen">
                                     <a href="{{route('admin.digitalBoard.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/digitalboard.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">नागरिक वडापत्र</h4>
@@ -52,7 +52,7 @@
                                 @if(Route::has('admin.circular.dashboard'))
                                     <div class="col-md-4 border" id="darta">
                                         <a href="{{route('admin.circular.dashboard')}}">
-                                            <div class="p-2 text-center">
+                                            <div class="p-2 center">
                                                 <img src="{{asset('assets/backend/images/modules/circular.png')}}"
                                                      height="50" width="50">
                                                 <h4 class="p-1">दर्ता चलानी प्रणाली</h4>
@@ -62,7 +62,7 @@
                                 @endif
                                 <div class="col-md-4 border" id="listregistration">
                                     <a href="{{route('admin.listRegistrations.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/listregistration.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">सुची दर्ता प्रणाली</h4>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="helpdesk">
                                     <a href="{{route('admin.helpDesk.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/helpdesk.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">हेल्प डेस्क</h4>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="grievancehandling">
                                     <a href="{{route('admin.grievanceHandling.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/grievancehandling.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">ई-गुनासो</h4>
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="executivemeeting">
                                     <a href="{{route('admin.executiveMeeting.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/executivemeeting.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">ई-कार्यपालिका</h4>
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="businessregistration">
                                     <a href="{{route('admin.businessRegistration.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/businessregistration.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">व्यवसाय दर्ता</h4>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="emap">
                                     <a href="{{route('emap.admin.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/emap.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">घर-नक्सा पास</h4>
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="recommendation">
                                     <a href="#">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/sifarish-parnali.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">शिफारिस प्रणाली</h4>
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="yojana">
                                     <a href="#">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/yojana.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">योजना व्यवस्थापन</h4>
@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="talim">
                                     <a href="#">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/talim.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">तालिम व्यवस्थापन</h4>
@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="anudan">
                                     <a href="#">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/anudan.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">अनुदान व्यवस्थापन</h4>
@@ -152,7 +152,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="nyayik">
                                     <a href="#">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/nyayik.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">न्यायिक समिति</h4>
@@ -161,7 +161,7 @@
                                 </div>
                                 <div class="col-md-4 border" id="kramachari">
                                     <a href="#">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/kramachari.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">कर्मचारी व्यवस्थापन</h4>
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="col-md-4 border">
                                     <a href="{{route('admin.setting.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/setting.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">सेटिङ</h4>
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-md-4 border">
                                     <a href="{{route('admin.website.dashboard')}}">
-                                        <div class="p-2 text-center">
+                                        <div class="p-2 center">
                                             <img src="{{asset('assets/backend/images/modules/website.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">वेबसाइट सेटिङ</h4>
