@@ -1955,9 +1955,9 @@ color: white;
     font-weight: 600
 }
 
-#sidebar-menu .active > a {
+/* #sidebar-menu .active > a {
    color: var(--primary)
-}
+} */
 
 /* #sidebar-menu .active {
     color: var(--primary)
@@ -2546,7 +2546,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
 }
 
 .navbar-custom {
-    background-color: #F0F0F0;
+    background-color: #E8E9EB;
     -webkit-box-shadow: var(--ct-box-shadow);
     box-shadow: var(--ct-box-shadow);
     padding: 0 10px 0 0;
