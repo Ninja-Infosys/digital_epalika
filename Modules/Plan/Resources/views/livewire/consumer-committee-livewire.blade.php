@@ -117,9 +117,12 @@
                     id="member_number"
                     placeholder="सदस्य संख्या"
                 />
-                <div class="input-group-text bg-soft-success">
-                    <span wire:click="setConsumerCommitteeMembers" class="fa fa-users"></span>
-                </div>
+                <button
+                    wire:click="setConsumerCommitteeMembers"
+                    class="btn input-group-text btn-success waves-effect waves-light"
+                    type="button">
+                    <i class="fa fa-users"></i>
+                </button>
                 @error('form.member_number')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
@@ -150,7 +153,7 @@
                 <th>ना.प्र.नं.</th>
                 <th>लिङ्ग</th>
                 <th>ठेगाना</th>
-                <th>बुवा/पतिको नाम	</th>
+                <th>बुवा/पतिको नाम</th>
                 <th>बाजेको नाम</th>
                 <th>
                     #

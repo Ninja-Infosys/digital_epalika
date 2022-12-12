@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('plan_levels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plan_level_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('level_name');
+            $table->foreignId('plan_level_id')->nullable()->comment('योजना स्तर')->constrained()->cascadeOnDelete();
+            $table->string('level_name')->comment('स्तर नाम');
             $table->timestamps();
             $table->softDeletes();
         });

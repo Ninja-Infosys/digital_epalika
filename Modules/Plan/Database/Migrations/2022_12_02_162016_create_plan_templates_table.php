@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('plan_templates', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('title');
-            $table->longText('data');
+            $table->string('type')->comment('प्रकार');
+            $table->string('title')->comment('शीर्षक');
+            $table->longText('data')->comment('डाटा');
             $table->timestamps();
             $table->softDeletes();
         });

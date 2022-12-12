@@ -9,6 +9,7 @@ use Modules\Plan\Http\Controllers\Admin\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\PlanTemplateController;
 use Modules\Plan\Http\Controllers\Admin\ProjectController;
 use Modules\Plan\Http\Controllers\Admin\ProjectDocumentController;
+use Modules\Plan\Http\Controllers\Admin\ReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -24,4 +25,9 @@ Route::prefix('setting')->group(function (){
     Route::resource('budgetHead', BudgetHeadController::class)->except('show');
     Route::resource('budgetSource', BudgetSourceController::class)->except('show');
     Route::resource('planTemplate', PlanTemplateController::class)->except('show');
+});
+
+//report
+Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function (){
+    Route::get('/','index')->name('index');
 });

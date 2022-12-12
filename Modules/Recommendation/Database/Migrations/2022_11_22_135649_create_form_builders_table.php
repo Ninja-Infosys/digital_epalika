@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('form_builders', function (Blueprint $table) {
             $table->id();
-            $table->string('application_type');
-            $table->json('form');
+            $table->string('application_type')->comment('आवेदन प्रकार');
+            $table->json('form')->comment('फारम');
             $table->softDeletes();
             $table->timestamps();
         });

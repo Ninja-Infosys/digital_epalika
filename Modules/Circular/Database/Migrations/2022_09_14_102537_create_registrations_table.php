@@ -11,8 +11,8 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
             $table->string('registration_no')->comment('दर्ता नं');
-            $table->string('registration_date')->nullable()->comment('दर्ता नं');
-            $table->date('en_registration_date')->nullable()->comment('दर्ता मिति अंग्रेजी');
+            $table->string('registration_date')->nullable()->comment('दर्ता मिति वि.स.');
+            $table->date('en_registration_date')->nullable()->comment('दर्ता मिति AD');
             $table->string('letter_number')->nullable()->comment('पत्र पछि');
             $table->string('letter_date')->nullable()->comment('पत्र मिति');
             $table->string('sender_name')->nullable()->comment('प्रेषकको नाम');

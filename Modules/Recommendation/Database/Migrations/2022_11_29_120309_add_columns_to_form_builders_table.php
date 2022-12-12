@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('form_builders', function (Blueprint $table) {
-            $table->boolean('status')->default(0);
-            $table->string('title')->nullable();
+            $table->boolean('status')->default(0)->comment('स्थिति');
+            $table->string('title')->nullable()->comment('शीर्षक');
         });
     }
 

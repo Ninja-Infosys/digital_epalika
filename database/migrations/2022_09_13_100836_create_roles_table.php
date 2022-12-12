@@ -9,8 +9,8 @@ return new class () extends Migration {
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('type')->nullable()->unique();
+            $table->string('title')->comment('शीर्षक');
+            $table->string('type')->nullable()->unique()->comment('प्रकार');
             $table->timestamps();
             $table->softDeletes();
         });

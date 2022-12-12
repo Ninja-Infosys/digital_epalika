@@ -9,13 +9,13 @@ return new class () extends Migration {
     {
         Schema::create('daily_tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('branch_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('task_category_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('task_division_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('date');
-            $table->date('en_date')->nullable();
-            $table->text('remarks')->nullable();
+            $table->foreignId('fiscal_year_id')->comment('आर्थिक वर्ष आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('branch_id')->nullable()->comment('शाखा आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('task_category_id')->nullable()->comment('कार्य वर्ग कार्य कोटी आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('task_division_id')->nullable()->comment('कार्य विभाजन आईडी')->constrained()->cascadeOnDelete();
+            $table->string('date')->comment('मिति वि.क.');
+            $table->date('en_date')->nullable()->comment('मिति AD');
+            $table->text('remarks')->nullable()->comment('कैफियत');
             $table->timestamps();
             $table->softDeletes();
         });

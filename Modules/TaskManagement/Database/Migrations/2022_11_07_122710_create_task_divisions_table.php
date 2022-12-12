@@ -9,8 +9,8 @@ return new class () extends Migration {
     {
         Schema::create('task_divisions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('task_category_id')->constrained()->cascadeOnDelete();
-            $table->string('title');
+            $table->foreignId('task_category_id')->comment('कार्य वर्ग आईडी')->constrained()->cascadeOnDelete();
+            $table->string('title')->comment('शीर्षक');
             $table->timestamps();
             $table->softDeletes();
         });

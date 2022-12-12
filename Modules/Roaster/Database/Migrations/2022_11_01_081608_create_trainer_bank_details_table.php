@@ -10,10 +10,10 @@ return new class () extends Migration {
         Schema::create('trainer_bank_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('trainer_id')->constrained()->cascadeOnDelete();
-            $table->string('bank_name');
-            $table->string('bank_branch');
-            $table->string('account_number');
-            $table->string('account_holder');
+            $table->string('bank_name')->comment('बैंक नाम');
+            $table->string('bank_branch')->comment('बैंक शाखा');
+            $table->string('account_number')->comment('खाता नम्बर');
+            $table->string('account_holder')->comment('खातावाला');
             $table->timestamps();
             $table->softDeletes();
         });
