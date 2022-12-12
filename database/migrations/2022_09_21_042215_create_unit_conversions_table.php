@@ -9,9 +9,9 @@ return new class () extends Migration {
     {
         Schema::create('unit_conversions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('conversion_from')->constrained('units');
-            $table->foreignId('conversion_to')->constrained('units');
-            $table->string('rate')->default(1);
+            $table->foreignId('conversion_from')->comment('बाट रूपान्तरण')->constrained('units');
+            $table->foreignId('conversion_to')->comment('मा रूपान्तरण')->constrained('units');
+            $table->string('rate')->default(1)->comment('दर');
             $table->timestamps();
             $table->softDeletes();
         });
