@@ -212,6 +212,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <x-charts.pie-chart-component
+                            id="bar-chart17"
+                            chartName="name"
+                            :labels="$planAreas['labels']"
+                            :dataSets="$planAreas['dataSets']"
+
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

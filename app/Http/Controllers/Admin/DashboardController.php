@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
+use App\Models\Settings\OfficeSetting;
 use App\Models\User;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\Circular\Entities\Dispatch;
@@ -14,6 +15,7 @@ use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
+use Modules\Plan\Entities\PlanArea;
 
 class DashboardController extends Controller
 {
@@ -35,10 +37,14 @@ class DashboardController extends Controller
         $municipal_meetings_count = MeetingEvent::where('event_for', 'municipal')->count();
         $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
         $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count();
-        $activityLogs = ActivityLog::with('user','model')->whereDate('created_at', today()->toDateString())->paginate(5);
+        $activityLogs = ActivityLog::with('user', 'model')->whereDate('created_at', today()->toDateString())->paginate(5);
+
+        $planAreas = $this->setPlanData();
+
 
         return view('admin.dashboard', compact(['user_count',
             'businessDetail_count',
+            'planAreas',
             'activityLogs',
             'grievance_user_count',
             'notice_count',
@@ -54,5 +60,36 @@ class DashboardController extends Controller
             'grievanceTypes',
             'unseen_grievances',
         ]));
+
+
+    }
+
+    private function setPlanData(): array
+    {
+        $officeSetting = OfficeSetting::first();
+        $planAreas = PlanArea::with(['planAreas' => function ($query) use ($officeSetting) {
+            $query->withCount('projects');
+        }])->get()->map(function ($planArea){
+            $count=0;
+            foreach($planArea->planAreas as $area){
+                $count+=$area->projects_count;
+            }
+            return [
+                'area_name'=>$planArea->area_name,
+                'projects_count'=>$count
+            ];
+        });
+
+        return [
+            'labels' => $planAreas->pluck('area_name')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $planAreas->pluck('projects_count')->toArray(),
+                    'label' => 'जम्मा',
+                    'fill' => 'false',
+                ],
+            ],
+        ];
+
     }
 }
