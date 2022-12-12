@@ -3,12 +3,14 @@
 namespace App\View\Components\Frontend;
 
 use Illuminate\View\Component;
+use Modules\HelpDesk\Entities\Service;
 
 class NoticeSectionComponent extends Component
 {
+    public $services;
     public function __construct()
     {
-       
+       $this->services = Service::with('serviceDocuments')->get();
     }
 
     public function render()

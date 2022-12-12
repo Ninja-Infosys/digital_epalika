@@ -103,6 +103,14 @@
                         <i class="fa fa-tasks"></i>
                         <span>गतिविधिहरू</span>
                     </a>
+                    <a href="{{route('admin.setting.dashboard')}}" class="dropdown-item notify-item">
+                        <i class="fa fa-spin fa-cog"></i>
+                        <span>सेटिङ</span>
+                    </a>
+                    <a href="{{route('admin.website.dashboard')}}" class="dropdown-item notify-item">
+                        <i class="fa  fa-cogs"></i>
+                        <span>वेबसाइट सेटिङ</span>
+                    </a>
                     <div class="dropdown-divider"></div>
                     <form action="{{route('logout')}}" method="post">
                         @csrf
