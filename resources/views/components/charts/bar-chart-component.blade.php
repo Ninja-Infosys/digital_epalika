@@ -1,4 +1,4 @@
-<h4 class="header-title">{{$chartTitle}} {{$displayLegend}}</h4>
+<h4 class="header-title">{{$chartTitle}}</h4>
 <div class="mt-4 chartjs-chart">
     <canvas id="{{$id}}"></canvas>
 </div>

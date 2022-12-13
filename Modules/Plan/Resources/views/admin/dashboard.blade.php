@@ -73,11 +73,24 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component
+                        id="area-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु"
+                        :labels="$planAreaWiseProjects['labels']"
+                        :dataSets="$planAreaWiseProjects['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <x-charts.bar-chart-component
-                        id="bar-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"
+                        id="ward-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"
                         :labels="$wardWiseProjects['labels']"
                         :dataSets="$wardWiseProjects['dataSets']"
                         :displayLegend="false"
