@@ -2,18 +2,6 @@
 @section('content')
     <div class="row mt-2">
         <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.plan.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                    </ol>
-                </div>
-                <h4 class="page-title">गृहपृष्ठ </h4>
-            </div>
             <div class="row">
                 <div class="col-md-6 col-xl-4">
                     <div class="widget-rounded-circle card">
@@ -85,11 +73,28 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component
+                        id="area-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु"
+                        :labels="$planAreaWiseProjects['labels']"
+                        :dataSets="$planAreaWiseProjects['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <x-charts.bar-chart-component id="bar-chart" chartTitle="आर्थिक वर्ष अनुसार दर्ता र चलानी"
-                                                  :labels="$registrationChartData['labels']" :dataSets="$registrationChartData['dataSets']" />
+                    <x-charts.bar-chart-component
+                        id="ward-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"
+                        :labels="$wardWiseProjects['labels']"
+                        :dataSets="$wardWiseProjects['dataSets']"
+                        :displayLegend="false"
+                    />
                 </div>
             </div>
         </div>
