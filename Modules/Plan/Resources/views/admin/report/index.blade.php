@@ -146,30 +146,30 @@
 
                                 </div>
                             </div>
-                            <fieldset class="border p-2 mb-2">
-                                <legend class="font-16 text-info">
-                                    <strong>
-                                        Columns
-                                    </strong>
-                                </legend>
-                                <div class="row">
-                                    @foreach($columnData as $columns)
-                                        <div class="col-md-3 mb-2">
-                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
-                                            <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"
-                                                    class="form-control">
-                                                <option disabled>--- छान्नुहोस् ---</option>
-                                                @foreach($columns['columns'] as $column)
-                                                    <option
-                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>
-                                                @endforeach
-                                            </select>
+{{--                            <fieldset class="border p-2 mb-2">--}}
+{{--                                <legend class="font-16 text-info">--}}
+{{--                                    <strong>--}}
+{{--                                        Columns--}}
+{{--                                    </strong>--}}
+{{--                                </legend>--}}
+{{--                                <div class="row">--}}
+{{--                                    @foreach($columnData as $columns)--}}
+{{--                                        <div class="col-md-3 mb-2">--}}
+{{--                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>--}}
+{{--                                            <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"--}}
+{{--                                                    class="form-control">--}}
+{{--                                                <option disabled>--- छान्नुहोस् ---</option>--}}
+{{--                                                @foreach($columns['columns'] as $column)--}}
+{{--                                                    <option--}}
+{{--                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
 
-                                        </div>
-                                    @endforeach
+{{--                                        </div>--}}
+{{--                                    @endforeach--}}
 
-                                </div>
-                            </fieldset>
+{{--                                </div>--}}
+{{--                            </fieldset>--}}
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 Filter

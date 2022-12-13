@@ -64,31 +64,13 @@ class ReportController extends Controller
         }
 
         $businessDetails = BusinessDetail::with('proprietorDetail')
-            ->select(!empty($filteredColumns)
-                ? array_merge($filteredColumns, ['id'])
-                : '*')
             ->where(function ($q) use ($request) {
                 $this->filterDataFromUser($q, $request);
             })
             ->get();
-$keys = collect();
-
-         collect($businessDetails[0])->each(function ($b, $k) use($keys){
-if (is_array($b)){
-    collect($b)->each(function ($l, $key) use($keys){
-        if (is_array($l)){
-            collect($l);
-        }else{
-            $keys->push($key);
-        }
-    });
-}else{
-    $keys->push($k);
-}
-        });
 
         return response()->json([
-            'view' => (string)View::make('businessregistration::admin.businessRegistrationReport.report_table', compact('businessDetails', 'keys'))
+            'view' => (string)View::make('businessregistration::admin.businessRegistrationReport.report_table', compact('businessDetails'))
         ]);
     }
 

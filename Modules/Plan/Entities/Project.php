@@ -19,7 +19,7 @@ use Modules\Plan\Traits\PlanTemplateTrait;
 
 class Project extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait,PlanTemplateTrait,GetAllColumns;
+    use HasFactory, SoftDeletes, EventObserveTrait, PlanTemplateTrait, GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -134,7 +134,7 @@ class Project extends Model
 
     public function files(): MorphMany
     {
-        return $this->morphMany(File::class,'model');
+        return $this->morphMany(File::class, 'model');
     }
 
     public function projectBills(): HasMany
