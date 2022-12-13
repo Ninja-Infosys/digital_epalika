@@ -67,18 +67,23 @@ class DashboardController extends Controller
     private function setPlanData(): array
     {
         $officeSetting = OfficeSetting::first();
-        $planAreas = PlanArea::with(['planAreas' => function ($query) use ($officeSetting) {
-            $query->withCount('projects');
-        }])->whereNull('plan_area_id')->get()->map(function ($planArea){
-            $count=0;
-            foreach($planArea->planAreas as $area){
-                $count+=$area->projects_count;
-            }
-            return [
-                'area_name'=>$planArea->area_name,
-                'projects_count'=>$count
-            ];
-        });
+        $planAreas = PlanArea::withCount(['projects' => function ($query) use ($officeSetting) {
+            $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
+        }])
+            ->with(['planAreas' => function ($query) use ($officeSetting) {
+                $query->withCount(['projects' => function ($sub_query) use ($officeSetting) {
+                    $sub_query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
+                }]);
+            }])->whereNull('plan_area_id')->get()->map(function ($planArea) {
+                $count = 0;
+                foreach ($planArea->planAreas as $area) {
+                    $count += $area->projects_count;
+                }
+                return [
+                    'area_name' => $planArea->area_name,
+                    'projects_count' => $count + $planArea->projects_count
+                ];
+            });
 
         return [
             'labels' => $planAreas->pluck('area_name')->toArray(),
