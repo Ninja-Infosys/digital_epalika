@@ -145,10 +145,17 @@
         </div>
 
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+
             <li>
                 <button class="button-menu-mobile waves-effect waves-light">
                     <i class="fa fa-bars"></i>
                 </button>
+            </li>
+            <li class="border rounded p-1 mx-3 my-3">
+                <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
+                data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                <h4 class="text-blue">ई-कार्यपालिका <span class=" blink text-danger text-underline">click here</span></h4>
+                </a>
             </li>
             <li class="dropdown d-none d-lg-inline-block">
                 <h3 class="text-light fw-bold mt-3">
@@ -167,12 +174,7 @@
                 </a>
                 <!-- End mobile menu toggle-->
             </li>
-            <li class="border rounded p-1 mx-3 my-3">
-                <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
-                data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
-                <h4 class="text-blue">Menu</h4>
-                </a>
-            </li>
+
         </ul>
         <div class="clearfix"></div>
     </div>

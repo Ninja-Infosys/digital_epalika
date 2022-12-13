@@ -14429,3 +14429,25 @@ textarea.form-control-lg {
     color: white;
     margin: 2px 0;
  }
+ .blink {
+    width: 220px;
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+  }
+  h4 span {
+    font-family: cursive;
+    color: #fff;
+    animation: blink 2s linear infinite;
+  }
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: .5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

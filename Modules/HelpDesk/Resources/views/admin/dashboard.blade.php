@@ -20,71 +20,56 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-xl-4">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                        <i class="fa fa-code-branch font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$main_branch_count}}
+                                        </span>
+                                            </h3>
                                     </div>
+                                    <p class="text my-1">जम्मा शाखा</p>
                                 </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$main_branch_count}}
-                                    </span>
-                                        </h3>
-                                        <p class="text-muted mb-1">जम्मा शाखा</p>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> <!-- end row-->
                         </div>
-                    </div>
-                </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-4">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-secondary border-secondary border">
-                                        <i class="fa fa-code-branch font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$sub_branch_count}}
+                                       </span>
+                                           </h3>
                                     </div>
+                                    <p class="text my-1">जम्मा उप-शाखा</p>
                                 </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                         {{$sub_branch_count}}
-                                    </span>
-                                        </h3>
-                                        <p class="text-muted mb-1">जम्मा उप-शाखा</p>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> <!-- end row-->
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-4">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-blue border-blue border">
-                                        <i class="fa fa-scroll font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
                                         <h3 class="mt-1"><span data-plugin="counterup">{{$service_count}}</span></h3>
-                                        <p class="text-muted mb-1">जम्मा सेवा</p>
                                     </div>
+                                    <p class="text my-1">जम्मा सेवा</p>
                                 </div>
-                            </div>
+                            </div> <!-- end row-->
                         </div>
-                    </div>
-                </div>
-
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
             </div>
             <div class="row">
                 <div class="col-lg-6">
