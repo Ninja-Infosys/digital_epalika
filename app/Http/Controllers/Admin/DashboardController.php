@@ -57,13 +57,9 @@ class DashboardController extends Controller
                     $sub_query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
                 }]);
             }])->whereNull('plan_area_id')->get()->map(function ($planArea) {
-                $count = 0;
-                foreach ($planArea->planAreas as $area) {
-                    $count += $area->projects_count;
-                }
                 return [
                     'area_name' => $planArea->area_name,
-                    'projects_count' => $count + $planArea->projects_count
+                    'projects_count' =>  $planArea->projects_count+$planArea->planAreas->sum('projects_count')
                 ];
             });
 
