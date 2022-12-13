@@ -1,4 +1,5 @@
 <div class="row">
+    @if(Route::has('grievanceHandling.grievance'))
     <div class="col-md-3">
         <div class="info-card">
             <a href="{{route('grievanceHandling.grievance')}}">
@@ -9,6 +10,8 @@
             </a>
         </div>
     </div>
+    @endif
+        @if(Route::has('e-map'))
     <div class="col-md-3">
         <div class="info-card">
             <a href="{{route('e-map')}}">
@@ -19,6 +22,8 @@
             </a>
         </div>
     </div>
+        @endif
+        @if(Route::has('helpdesk.helpdesk'))
     <div class="col-md-3">
         <div class="info-card">
             <a href="{{route('helpdesk.helpdesk')}}">
@@ -29,6 +34,8 @@
             </a>
         </div>
     </div>
+        @endif
+        @if(Route::has('recommendation.index'))
     <div class="col-md-3">
         <div class="info-card">
             <a href="#">
@@ -39,6 +46,8 @@
             </a>
         </div>
     </div>
+        @endif
+        @if(Route::has('businessRegistration.business'))
     <div class="col-md-3">
         <div class="info-card">
             <a href="{{route('businessRegistration.business')}}">
@@ -49,6 +58,8 @@
             </a>
         </div>
     </div>
+        @endif
+        @if(Route::has('grant.index'))
     <div class="col-md-3">
         <div class="info-card">
             <a href="{{route('grant.index')}}">
@@ -59,6 +70,8 @@
             </a>
         </div>
     </div>
+        @endif
+        @if(Route::has('payment.index'))
     <div class="col-md-3">
         <div class="info-card disable_menu">
             <a href="#">
@@ -69,6 +82,8 @@
             </a>
         </div>
     </div>
+        @endif
+        @if(Route::has('roaster.index'))
     <div class="col-md-3">
         <div class="info-card">
             <a href="{{route('roaster.index')}}">
@@ -79,4 +94,5 @@
             </a>
         </div>
     </div>
+        @endif
 </div>
