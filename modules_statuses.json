@@ -2,7 +2,7 @@
     "DigitalBoard": true,
     "Circular": false,
     "EMap": false,
-    "HelpDesk": false,
+    "HelpDesk": true,
     "GrievanceHandling": false,
     "BusinessRegistration": false,
     "ExecutiveMeeting": false,
