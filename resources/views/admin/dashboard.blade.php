@@ -197,7 +197,7 @@
                                         <td>{{$activity_log->user->name??''}}</td>
                                         <td>{{$activity_log->activity_type}}</td>
                                         <td>{{$activity_log->ip}}</td>
-                                        <td>{{$activity_log->model_type}}</td>
+                                        <td>{{class_basename($activity_log->model_type)}}</td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -214,10 +214,17 @@
             </div>
             <div class="col-lg-6">
                 <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="header-title">
+                                क्षेत्र अनुसारको रिपोर्ट
+                            </h4>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <x-charts.pie-chart-component
                             id="bar-chart17"
-                            chartName="क्षेत्र अनुसारको रिपोर्ट"
+                            chartName=""
                             :labels="$planAreas['labels']"
                             :dataSets="$planAreas['dataSets']"
 
