@@ -135,7 +135,7 @@
                              height="40"/>
                     @else
                         <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
-                             height="40"/>
+                             height="35"/>
                     @endif
               </span>
             </a>
@@ -166,6 +166,12 @@
                     </div>
                 </a>
                 <!-- End mobile menu toggle-->
+            </li>
+            <li class="border rounded p-1 mx-3 my-3">
+                <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
+                data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                <h4 class="text-blue">Menu</h4>
+                </a>
             </li>
         </ul>
         <div class="clearfix"></div>
