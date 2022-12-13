@@ -20,109 +20,85 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                        <i class="fa fa-handshake font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            2
+                                        </span>
+                                            </h3>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        2
-                                    </span>
-                                        </h3>
-                                        <p class="text-muted mb-1">जम्मा वैठक</p>
-                                    </div>
+                                    <p class="text my-1">जम्मा वैठक</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-secondary border-secondary border">
-                                        <i class="fa fa-clipboard-list font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            2
+                                        </span>
+                                            </h3>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                         3
-                                    </span>
-                                        </h3>
-                                        <p class="text-muted mb-1">जम्मा वडा वैठक</p>
-                                    </div>
+                                    <p class="text my-1">जम्मा वडा वैठक</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-blue border-blue border">
-                                        <i class="fa fa-clipboard-list font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">4</span></h3>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">4</span></h3>
-                                        <p class="text-muted mb-1">जम्मा पालिका वैठक</p>
-                                    </div>
+                                    <p class="text my-1">जम्मा पालिका वैठक</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-pink border-pink border">
-                                        <i class="fa fa-user font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            6
+                                         </span></h3>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                       6
-                                    </span></h3>
-                                        <p class="text-muted mb-1">पालिका समिति सदस्य</p>
-                                    </div>
+                                    <p class="text my-1">पालिका समिति सदस्य</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
+
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-primary border-primary border">
-                                        <i class="fa fa-user font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            7
+                                        </span></h3>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        7
-                                    </span></h3>
-                                        <p class="text-muted mb-1">वडा समिति सदस्य</p>
-                                    </div>
+                                    <p class="text my-1">वडा समिति सदस्य</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
