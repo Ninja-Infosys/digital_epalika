@@ -31,8 +31,8 @@ class ReportController extends Controller
     public function report(Request $request)
     {
         $request->validate([
-            'date.from_date' => ['nullable', 'date', 'before_or_equal:date.to_date'],
-            'date.to_date' => ['nullable', 'date', 'after_or_equal:date.from_date'],
+            'date.from_date' => ['nullable', 'before_or_equal:date.to_date'],
+            'date.to_date' => ['nullable', 'after_or_equal:date.from_date'],
             'columns' => ['nullable', 'array']
         ]);
 
