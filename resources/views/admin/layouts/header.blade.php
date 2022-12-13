@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
             <li class="border rounded p-1 mt-3">
-                <h4 class="text-blue">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
+                <h4 class="text-blue" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-inline-block d-lg-none">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
@@ -17,7 +17,7 @@
 
             <li class="dropdown d-none d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
-                   data-toggle="fullscreen"
+                   data-toggle="fullscreen" id="full-tour"
                    href="#">
                     <i class="fa fa-expand-arrows-alt noti-icon"></i>
                 </a>
@@ -30,7 +30,7 @@
                     href="#"
                     role="button"
                     aria-haspopup="false"
-                    aria-expanded="false">
+                    aria-expanded="false" id="noti-tour">
                     <i @class([
             'ring-bell'=>count(auth()->user()->unreadNotifications)>0,
             'fa', 'fa-bell', 'noti-icon'
@@ -85,7 +85,7 @@
                    href="#"
                    role="button"
                    aria-haspopup="false"
-                   aria-expanded="false">
+                   aria-expanded="false" id="profile-tour">
                     <img src="{{auth()->user()->profile_photo_url ?? ''}}"
                          alt="user-image"
                          class="rounded-circle"/>
@@ -125,7 +125,7 @@
         <!-- LOGO -->
         <div class="logo-box dropdown notification-list topbar-dropdown">
             <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
-               data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+               data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" id="menu-tour">
                 <span class="logo-lg">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
                         <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
@@ -150,12 +150,6 @@
                 <button class="button-menu-mobile waves-effect waves-light">
                     <i class="fa fa-bars"></i>
                 </button>
-            </li>
-            <li class="border rounded p-1 mx-3 my-3">
-                        <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
-                data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
-                <h4 class="text-blue">ई-कार्यपालिका <span class=" blink text-danger text-underline">click here</span></h4>
-                </a>
             </li>
 
             <li class="dropdown d-none d-lg-inline-block">

@@ -69,6 +69,9 @@
                         &copy; Design & Developed by <a href="#">NINJA INFOSYS</a>
             </div>
         </footer>
+        <div class="floating-container">
+            <div class="floating-button">+</div>
+          </div>
         <!-- end Footer -->
     </div>
 </div>
