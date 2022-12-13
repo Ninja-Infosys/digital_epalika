@@ -1,4 +1,7 @@
 @extends('admin.layouts.master')
+@push('style')
+    <link href="{{asset('assets/backend/libs/hopscotch/css/hopscotch.min.css')}}" rel="stylesheet" type="text/css"/>
+@endpush
 @section('content')
     <div class="row mt-2">
         <div class="col-12">
@@ -236,5 +239,8 @@
             </div>
         </div>
     </div>
-
+    @push('scripts')
+    <script src="{{asset('assets/backend/libs/hopscotch/js/hopscotch.min.js')}}"></script>
+    <script src="{{asset('assets/backend/js/pages/dashboard.init.js')}}"></script>
+@endpush
 @endsection
