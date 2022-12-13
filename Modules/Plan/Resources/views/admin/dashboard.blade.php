@@ -84,4 +84,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component id="bar-chart" chartTitle="आर्थिक वर्ष अनुसार दर्ता र चलानी"
+                                                  :labels="$registrationChartData['labels']" :dataSets="$registrationChartData['dataSets']" />
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
