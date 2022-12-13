@@ -217,7 +217,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title">
-                               आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} को  क्षेत्र अनुसारको रिपोर्ट
+                               आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} को  क्षेत्र अनुसार रिपोर्ट
                             </h4>
                         </div>
                     </div>
