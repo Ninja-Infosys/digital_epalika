@@ -20,159 +20,129 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                        <i class="fa fa-file-contract font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$grievanceCount}}
+                                        </span>
+                                            </h3>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$grievanceCount}}
-                                    </span>
-                                        </h3>
-                                        <p class="text-muted mb-1">जम्मा गुनासो</p>
-                                    </div>
+                                    <p class="text my-1">जम्मा गुनासो</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-secondary border-secondary border">
-                                        <i class="fa fa-file-contract font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$registeredGrievanceCount}}
+                                       </span>
+                                           </h3>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                         {{$registeredGrievanceCount}}
-                                    </span>
-                                        </h3>
-                                        <p class="text-muted mb-1">जम्मा दर्ता गुनासो</p>
-                                    </div>
+                                    <p class="text my-1">जम्मा दर्ता गुनासो</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-blue border-blue border">
-                                        <i class="fa fa-check-double font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">{{$closedGrievanceCount}}</span>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">{{$closedGrievanceCount}}</span>
                                         </h3>
-                                        <p class="text-muted mb-1">फर्छ्यौट भएको</p>
                                     </div>
+                                    <p class="text my-1">फर्छ्यौट भएको</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-pink border-pink border">
-                                        <i class="fa fa-search font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$investigatedGrievanceCount}}
+                                         </span></h3>
                                     </div>
+                                    <p class="text my-1">अनुसन्धान गरिदै</p>
                                 </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                       {{$investigatedGrievanceCount}}
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary">
+                        <div class="card-body" style="padding: 10px 20px;">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$unseenGrievanceCount}}
                                     </span></h3>
-                                        <p class="text-muted mb-1">अनुसन्धान गरिदै</p>
                                     </div>
+                                    <p class="text my-1">नहेरिएका गुनासो</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-primary border-primary border">
-                                        <i class="fa fa-eye font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$seenGrievanceCount}}
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$publicGrievanceCount}}
                                     </span></h3>
-                                        <p class="text-muted mb-1">जम्मा हेरिएको गुनासो </p>
                                     </div>
+                                    <p class="text my-1">सार्वजनिक गुनासो</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
+
+                <div class="col-md-6 col-xl-2">
+                    <div class="widget-rounded-circle card-primary">
+                        <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-info border-info border">
-                                        <i class="fa fa-eye-slash font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                                {{$unseenGrievanceCount}}
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$seenGrievanceCount}}
                                         </span></h3>
-                                        <p class="text-muted mb-1"> नहेरिएका गुनासो</p>
                                     </div>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-info border-info border">
-                                        <i class="fa fa-user font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                                {{$publicGrievanceCount}}
-                                        </span></h3>
-                                        <p class="text-muted mb-1"> सार्वजनिक गुनासो</p>
-                                    </div>
+                                    <p class="text my-1">जम्मा हेरिएको गुनासो</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
             </div>
-            <div class="row">
+
+
+            <div class="row mt-2">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
