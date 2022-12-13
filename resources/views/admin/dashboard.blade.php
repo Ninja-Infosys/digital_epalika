@@ -29,7 +29,7 @@
                                 <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
                                     {{ $user_count }}
                                 </span>
-                            </h3>
+                                </h3>
                             </div>
                             <p class="text my-1">जम्मा प्रयोगकर्ताहरु</p>
                         </div>
@@ -45,9 +45,9 @@
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
-                                    {{ $notice_count }}
+                                    {{ $training_count }}
                                 </span>
-                            </h3>
+                                </h3>
                             </div>
                             <p class="text my-1">जम्मा सम्पन्न तालिम</p>
                         </div>
@@ -62,7 +62,9 @@
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">{{ $news_count }}</span></h3>
+                                <h3 class="mt-1 text-center"><span class="num"
+                                                                   data-plugin="counterup">{{ $project_count }}</span>
+                                </h3>
                             </div>
                             <p class="text my-1">सम्झौता हुनबाँकि कार्यर्कम</p>
 
@@ -79,7 +81,7 @@
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
-                                    {{ $registration_count }}</span></h3>
+                                    {{ $map_count }}</span></h3>
                             </div>
                             <p class="text my-1">दर्ता/प्रमाणित घरनक्सा</p>
 
@@ -96,7 +98,7 @@
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
-                                    {{ $replied_grievance_count + $investigated_grievance_count }}
+                                    {{ $grievance_count }}
                                 </span></h3>
                             </div>
                             <p class="text my-1">दर्ता भएका गुनासोहरु</p>
@@ -186,7 +188,7 @@
                                     <th>क्र.स.</th>
                                     <th>प्रयोगकर्ता नाम</th>
                                     <th>गतिविधिको प्रकार</th>
-                                    <th>आईपी </th>
+                                    <th>आईपी</th>
                                     <th>मोडेल प्रकार</th>
                                 </tr>
                                 </thead>
@@ -217,7 +219,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title">
-                               आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} को  क्षेत्र अनुसार रिपोर्ट
+                                आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} को क्षेत्र अनुसार रिपोर्ट
                             </h4>
                         </div>
                     </div>
