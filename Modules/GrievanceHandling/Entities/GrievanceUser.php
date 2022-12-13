@@ -26,7 +26,7 @@ class GrievanceUser extends Model
         'password',
     ];
 
-    public function setPasswordAttribute($value)
+    public function setPasswordAttribute($value): void
     {
         if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);

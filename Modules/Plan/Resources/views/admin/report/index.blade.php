@@ -69,6 +69,82 @@
                                     </select>
 
                                 </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="plan_area_id">योजनाको क्षेत्</label>
+                                    <select name="plan_area_id[]" multiple data-toggle="select2"
+                                            id="plan_area_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($planAreas as $planArea)
+                                            <option value="{{$planArea->id}}">{{$planArea->area_name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="plan_sub_area_id">योजना उपक्षेत्र</label>
+                                    <select name="plan_sub_area_id[]" multiple data-toggle="select2"
+                                            id="plan_sub_area_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="plan_level_id">योजनाको स्तर</label>
+                                    <select name="plan_level_id[]" multiple data-toggle="select2"
+                                            id="plan_level_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($planLevels as $planLevel)
+                                            <option value="{{$planLevel->id}}">{{$planLevel->level_name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="plan_sub_level_id"> योजना उपस्तर</label>
+                                    <select name="plan_sub_level_id[]" multiple data-toggle="select2"
+                                            id="plan_sub_level_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="budget_head_id">बजेट शिर्षक</label>
+                                    <select name="budget_head_id[]" multiple data-toggle="select2"
+                                            id="budget_head_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($budgetHeads as $budgetHead)
+                                            <option value="{{$budgetHead->id}}">{{$budgetHead->title}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="budget_sub_head_id">बजेट उप-शिर्षक</label>
+                                    <select name="budget_sub_head_id[]" multiple data-toggle="select2"
+                                            id="budget_sub_head_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="budget_source_id">बजेट स्रोत</label>
+                                    <select name="budget_source_id[]" multiple data-toggle="select2"
+                                            id="budget_source_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($budgetSources as $budgetSource)
+                                            <option value="{{$budgetSource->id}}">{{$budgetSource->source_name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="project_status">योजनाको अवस्था</label>
+                                    <select name="project_status"
+                                            id="project_status" class="form-select">
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach(\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
+                                            <option value="{{$projectStatus->value}}">{{$projectStatus->label()}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
                             </div>
                             <fieldset class="border p-2 mb-2">
                                 <legend class="font-16 text-info">
@@ -111,7 +187,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> व्यवसाय दर्ता रिपोर्ट</h4>
+                        <h4 class="header-title"> योजना रिपोर्ट</h4>
                         <a href="" class="btn btn-primary btn-sm">
                             <i class="fa fa-print"></i>
                             Print
@@ -140,7 +216,7 @@
                     e.preventDefault()
                     $.ajax({
                         type:"post",
-                        url:"{{route('admin.businessRegistration.report.report-data')}}",
+                        url:"{{route('admin.plan.report.report-data')}}",
                         data:new FormData(this),
                         processData: false,
                         contentType: false,
@@ -156,17 +232,86 @@
                         },
                         error:function(XMLHttpRequest, textStatus, errorThrown){
                             $('#submitFormBtn').prop('disabled',false)
-                            if(XMLHttpRequest.status===422){
-                                $.each(XMLHttpRequest.responseJSON.errors,function(prefix,value){
-                                    $('span.'+prefix+'-error').text(value);
-                                });
-                            }
-                            else{
-                                alert("Something Went Wrong");
-                            }
+                            toastMessage('error',XMLHttpRequest.responseJSON.message)
                         }
                     });
                 })
+
+                $(document.body).delegate('#plan_area_id','change',function (e){
+                    let plan_area_id=$('#plan_area_id').val()
+                    $('#plan_sub_area_id').html('<option disabled>--- छान्नुहोस् ---</option>')
+                    if(!plan_area_id.length){
+                        return false;
+                    }
+                    $.ajax({
+                        type:'get',
+                        data:{plan_area_id:plan_area_id},
+                        url:"{{route('admin.plan.planSubArea')}}",
+                        success:function(resp){
+                            $(resp.data).each(function (key,data){
+                                $('#plan_sub_area_id').append("<option value="+data.id+">"+data.area_name+"</option>")
+                            })
+                        },
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                            toastMessage('error',XMLHttpRequest.responseJSON.message)
+                        }
+                    })
+                })
+
+                $(document.body).delegate('#plan_level_id','change',function (e){
+                    let plan_level_id=$('#plan_level_id').val()
+                    $('#plan_sub_level_id').html('<option disabled>--- छान्नुहोस् ---</option>')
+                    if(!plan_level_id.length){
+                        return false;
+                    }
+                    $.ajax({
+                        type:'get',
+                        data:{plan_level_id:plan_level_id},
+                        url:"{{route('admin.plan.planSubLevel')}}",
+                        success:function(resp){
+                            $(resp.data).each(function (key,data){
+                                $('#plan_sub_level_id').append("<option value="+data.id+">"+data.level_name+"</option>")
+                            })
+                        },
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                            toastMessage('error',XMLHttpRequest.responseJSON.message)
+                        }
+                    })
+                })
+
+                $(document.body).delegate('#budget_head_id','change',function (e){
+                    let budget_head_id=$('#budget_head_id').val()
+                    $('#budget_sub_head_id').html('<option disabled>--- छान्नुहोस् ---</option>')
+                    if(!budget_head_id.length){
+                        return false;
+                    }
+                    $.ajax({
+                        type:'get',
+                        data:{budget_head_id:budget_head_id},
+                        url:"{{route('admin.plan.budgetSubHead')}}",
+                        success:function(resp){
+                            $(resp.data).each(function (key,data){
+                                $('#budget_sub_head_id').append("<option value="+data.id+">"+data.title+"</option>")
+                            })
+                        },
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                            toastMessage('error',XMLHttpRequest.responseJSON.message)
+                        }
+                    })
+                })
+
+                function toastMessage(type,title){
+                    swal.fire({
+                        title: title,
+                        toast:true,
+                        position:'top-right',
+                        showConfirmButton:false,
+                        width:450,
+                        timer:3000,
+                        timerProgressBar:true,
+                        icon: type,
+                    });
+                }
             });
         </script>
     @endpush

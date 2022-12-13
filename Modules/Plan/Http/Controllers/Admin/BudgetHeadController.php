@@ -3,6 +3,7 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Http\Requests\BudgetHead\StoreBudgetHeadRequest;
@@ -17,6 +18,17 @@ class BudgetHeadController extends Controller
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
 
         return view('plan::admin.setting.budget_head.index', compact('budgetHeads'));
+    }
+
+    public function budgetSubHead(Request $request)
+    {
+        $request->validate([
+            'budget_head_id' => ['required']
+        ]);
+
+        return response()->json([
+            'data' => BudgetHead::filterData($request->all())->get()
+        ]);
     }
 
     public function create()

@@ -12,7 +12,7 @@ return new class () extends Migration {
             $table->string('name')->comment('नाम');
             $table->string('photo')->nullable()->comment('फोटो');
             $table->integer('position')->comment('स्थान');
-            $table->foreignId('designation_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('designation_id')->nullable()->comment('पद')->constrained()->nullOnDelete();
             $table->string('phone')->nullable()->comment('फोन');
             $table->string('red_signature')->nullable()->comment('रातो हस्ताक्षर');
             $table->string('black_signature')->nullable()->comment('कालो हस्ताक्षर');

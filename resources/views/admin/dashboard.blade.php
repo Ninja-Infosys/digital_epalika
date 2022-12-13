@@ -113,7 +113,7 @@
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
-                                    {{ $organizations_count }}
+                                    {{ $businessDetail_count }}
                                 </span></h3>
                             </div>
                             <p class="text my-1">दर्ता भएका व्यवसायहरु </p>
@@ -156,9 +156,83 @@
                                 <i class="fa fa-handshake avatar-title"></i>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="text-end">
+                                <h3 class="mt-1"><span data-plugin="counterup">
+                                        {{$municipal_meetings_count}}</span></h3>
+                                <p class="text-muted mb-1">जम्मा कार्यपालिका बैठकहरु</p>
+                            </div>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+        --}}
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="header-title">
+                                प्रयोगकर्ता गतिविधिहरू
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0 table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>क्र.स.</th>
+                                    <th>प्रयोगकर्ता नाम</th>
+                                    <th>गतिविधिको प्रकार</th>
+                                    <th>आईपी </th>
+                                    <th>मोडेल प्रकार</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($activityLogs as $activity_log)
+                                    <tr>
+                                        <th scope="row">{{$loop->iteration}}</th>
+                                        <td>{{$activity_log->user->name??''}}</td>
+                                        <td>{{$activity_log->activity_type}}</td>
+                                        <td>{{$activity_log->ip}}</td>
+                                        <td>{{class_basename($activity_log->model_type)}}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="5">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+
+                        </div>
+                        {{$activityLogs->links()}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="header-title">
+                                क्षेत्र अनुसारको रिपोर्ट
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <x-charts.pie-chart-component
+                            id="bar-chart17"
+                            chartName=""
+                            :labels="$planAreas['labels']"
+                            :dataSets="$planAreas['dataSets']"
+
+                        />
                     </div>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
+
 @endsection

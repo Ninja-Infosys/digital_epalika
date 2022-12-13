@@ -155,23 +155,5 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-4 border">
-                <a href="{{route('admin.setting.dashboard')}}">
-                    <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/setting.png')}}"
-                             height="50" width="50">
-                        <h4 class="p-1">सेटिङ</h4>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 border">
-                <a href="{{route('admin.website.dashboard')}}">
-                    <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/website.png')}}"
-                             height="50" width="50">
-                        <h4 class="p-1">वेबसाइट सेटिङ</h4>
-                    </div>
-                </a>
-            </div>
         </div>
     </div>

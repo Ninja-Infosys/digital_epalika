@@ -14,9 +14,9 @@ return new class () extends Migration {
             $table->string('phone')->nullable()->comment('फोन');
             $table->string('photo')->nullable()->comment('फोटो');
             $table->string('email')->nullable()->comment('इमेल');
-            $table->foreignId('province_id')->nullable()->constrained();
-            $table->foreignId('district_id')->nullable()->constrained();
-            $table->foreignId('local_body_id')->nullable()->constrained();
+            $table->foreignId('province_id')->nullable()->comment('प्रदेश')->constrained();
+            $table->foreignId('district_id')->nullable()->comment('जिल्ला')->constrained();
+            $table->foreignId('local_body_id')->nullable()->comment('पालिका')->constrained();
             $table->integer('ward_no')->nullable()->comment('वार्ड नं');
             $table->string('village')->nullable()->comment('गाउँ');
             $table->string('tole')->nullable()->comment('टोल');
