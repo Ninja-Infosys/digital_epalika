@@ -14439,6 +14439,7 @@ textarea.form-control-lg {
     font-family: cursive;
     color: #fff;
     animation: blink 2s linear infinite;
+    font-size: 10px;
   }
   @keyframes blink {
     0% {
