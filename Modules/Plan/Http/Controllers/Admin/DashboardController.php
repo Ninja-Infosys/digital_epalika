@@ -85,19 +85,9 @@ class DashboardController extends Controller
             'dataSets' => [
                 [
                     'data' => $planAreas->pluck('projects_count')->toArray(),
-                    'label' => 'शुरु नभएका योजनाहरु ',
+                    'label' => 'जम्मा',
                     'fill' => 'false',
-                ],
-                [
-                    'data' => $planAreas->pluck('projects_count')->toArray(),
-                    'label' => 'चालु योजनाहरु',
-                    'fill' => 'false',
-                ],
-                [
-                    'data' => $planAreas->pluck('projects_count')->toArray(),
-                    'label' => 'सम्पन्न योजनाहरू',
-                    'fill' => 'false',
-                ],
+                ]
             ],
         ];
     }

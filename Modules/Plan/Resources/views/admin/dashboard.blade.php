@@ -84,6 +84,18 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.pie-chart-component
+                        id="budget-head-wise-chart"
+                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु"
+                        :labels="$planAreaWiseProjects['labels']"
+                        :dataSets="$planAreaWiseProjects['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
