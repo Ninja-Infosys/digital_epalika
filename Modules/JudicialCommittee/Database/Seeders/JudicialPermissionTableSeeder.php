@@ -28,6 +28,10 @@ class JudicialPermissionTableSeeder extends Seeder
             'complaintApplication_create',
             'complaintApplication_edit',
             'complaintApplication_delete',
+            'lawsuitNature_access',
+            'lawsuitNature_create',
+            'lawsuitNature_edit',
+            'lawsuitNature_delete',
         ];
 
         $this->storePermission($permissions);
