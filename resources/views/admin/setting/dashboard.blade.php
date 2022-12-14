@@ -12,7 +12,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('emap.admin.dashboard')}}">इ-नक्सा</a>
+                            <a href="{{route('admin.setting.dashboard')}}">इ-नक्सा</a>
                         </li>
                     </ol>
                 </div>

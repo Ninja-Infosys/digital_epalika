@@ -7,32 +7,58 @@ use App\Models\ActivityLog;
 use App\Models\Settings\OfficeSetting;
 use App\Models\User;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
-use Modules\Circular\Entities\Dispatch;
-use Modules\Circular\Entities\Registration;
-use Modules\DigitalBoard\Entities\Notice;
 use Modules\EMap\Entities\MapApply;
-use Modules\EMap\Entities\Organization;
-use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
-use Modules\GrievanceHandling\Entities\GrievanceType;
-use Modules\GrievanceHandling\Entities\GrievanceUser;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\Project;
 use Modules\Roaster\Entities\Training;
+use Nwidart\Modules\Facades\Module;
+use Schema;
 
 class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $user_count = User::count();
+        $businessDetail_count = 0;
+        $training_count = 0;
+        $project_count = 0;
+        $map_count = 0;
+        $grievance_count = 0;
+        $planAreas = [
+            'labels' => [],
+            'dataSets' => [
+                [
+                    'data' => [],
+                ]
+            ]
+        ];
 
-        $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count();
+        $user_count = User::count();
         $activityLogs = ActivityLog::with('user')->whereDate('created_at', today()->toDateString())->paginate(5);
-        $training_count = Training::whereDate('closed_date', '<=', today()->toDateString())->count();
-        $project_count = Project::count();
-        $map_count = MapApply::count();
-        $grievance_count = GrievanceDetail::approved()->count();
-        $planAreas = $this->setPlanData();
+
+        if (Schema::hasTable('business_details')) {
+            $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count();
+        }
+
+        if (Schema::hasTable('trainings')) {
+            $training_count = Training::whereDate('closed_date', '<=', today()->toDateString())->count() ?? 0;
+        }
+
+        if (Schema::hasTable('projects')) {
+            $project_count = Project::count() ?? 0;
+        }
+
+        if (Schema::hasTable('map_applies')) {
+            $map_count = MapApply::count() ?? 0;
+        }
+
+        if (Schema::hasTable('grievance_details')) {
+            $grievance_count = GrievanceDetail::approved()->count() ?? 0;
+        }
+
+        if (Schema::hasTable('plan_areas')) {
+            $planAreas = $this->setPlanData();
+        }
 
 
         return view('admin.dashboard', compact(['user_count',
@@ -49,6 +75,7 @@ class DashboardController extends Controller
     private function setPlanData(): array
     {
         $officeSetting = OfficeSetting::first();
+
         $planAreas = PlanArea::withCount(['projects' => function ($query) use ($officeSetting) {
             $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
         }])
@@ -58,10 +85,11 @@ class DashboardController extends Controller
                 }]);
             }])->whereNull('plan_area_id')->get()->map(function ($planArea) {
                 return [
-                    'area_name' => $planArea->area_name,
-                    'projects_count' =>  $planArea->projects_count+$planArea->planAreas->sum('projects_count')
+                    'area_name' => $planArea->area_name ?? '',
+                    'projects_count' => $planArea->projects_count + $planArea->planAreas->sum('projects_count')
                 ];
             });
+
 
         return [
             'labels' => $planAreas->pluck('area_name')->toArray(),
