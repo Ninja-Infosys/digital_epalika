@@ -70,7 +70,7 @@
             </div>
         </footer>
         <div class="floating-container">
-            <div class="floating-button">+</div>
+            <div class="floating-button"><a href="{{route('admin.dashboard')}}"><i class="fa fa-home" style="color: white"></i></a></div>
           </div>
         <!-- end Footer -->
     </div>
