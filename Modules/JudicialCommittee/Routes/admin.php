@@ -6,6 +6,7 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\ChiefJudicialMemberControll
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintApplicationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DashboardController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialMemberController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\LawsuitNatureController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -19,6 +20,10 @@ Route::get('administrationMember/{administrationMember}/updateStatus', [Administ
 Route::resource('administrationMember', AdministrationMemberController::class);
 
 Route::resource('complaintApplication', ComplaintApplicationController::class);
+
+Route::prefix('setting')->group(function (){
+    Route::resource('lawsuitNature', LawsuitNatureController::class);
+});
 
 //static routes
 Route::view('application-form', 'judicialcommittee::admin.static.application_form')->name('applicationForm');

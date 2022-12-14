@@ -31,8 +31,8 @@ class ReportController extends Controller
     public function report(Request $request)
     {
         $request->validate([
-            'date.from_date' => ['nullable', 'before_or_equal:date.to_date'],
-            'date.to_date' => ['nullable', 'after_or_equal:date.from_date'],
+            'from_date' => ['nullable', 'before_or_equal:to_date'],
+            'to_date' => ['nullable', 'after_or_equal:from_date'],
             'columns' => ['nullable', 'array']
         ]);
 
@@ -70,12 +70,12 @@ class ReportController extends Controller
             $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
         }
 
-        if (!empty($request->input('date.from'))) {
-            $q->whereDate('project_start_date', '>=', $request->input('date.from'));
+        if (!empty($request->input('from_date'))) {
+            $q->whereDate('project_start_date', '>=', $request->input('from_date'));
         }
 
-        if (!empty($request->input('date.to'))) {
-            $q->whereDate('project_start_date', '<=', $request->input('date.to'));
+        if (!empty($request->input('to_date'))) {
+            $q->whereDate('project_start_date', '<=', $request->input('to_date'));
         }
 
         if (!empty($request->input('ward_no'))) {
