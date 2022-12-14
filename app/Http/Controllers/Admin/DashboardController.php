@@ -26,12 +26,12 @@ class DashboardController extends Controller
     {
         $user_count = User::count();
 
-        $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count();
+        $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count() ?? 0;
         $activityLogs = ActivityLog::with('user')->whereDate('created_at', today()->toDateString())->paginate(5);
-        $training_count = Training::whereDate('closed_date', '<=', today()->toDateString())->count();
-        $project_count = Project::count();
-        $map_count = MapApply::count();
-        $grievance_count = GrievanceDetail::approved()->count();
+        $training_count = Training::whereDate('closed_date', '<=', today()->toDateString())->count() ?? 0;
+        $project_count = Project::count() ?? 0;
+        $map_count = MapApply::count() ?? 0;
+        $grievance_count = GrievanceDetail::approved()->count() ?? 0;
         $planAreas = $this->setPlanData();
 
 
@@ -59,20 +59,33 @@ class DashboardController extends Controller
             }])->whereNull('plan_area_id')->get()->map(function ($planArea) {
                 return [
                     'area_name' => $planArea->area_name,
-                    'projects_count' =>  $planArea->projects_count+$planArea->planAreas->sum('projects_count')
+                    'projects_count' => $planArea->projects_count + $planArea->planAreas->sum('projects_count')
                 ];
             });
 
-        return [
-            'labels' => $planAreas->pluck('area_name')->toArray(),
-            'dataSets' => [
-                [
-                    'data' => $planAreas->pluck('projects_count')->toArray(),
-                    'label' => 'जम्मा',
-                    'fill' => 'false',
+        if (!empty($planArea)) {
+            $data = [
+                'labels' => $planAreas->pluck('area_name')->toArray(),
+                'dataSets' => [
+                    [
+                        'data' => $planAreas->pluck('projects_count')->toArray(),
+                        'label' => 'जम्मा',
+                        'fill' => 'false',
+                    ],
                 ],
-            ],
-        ];
+            ];
+        } else {
+            $data = [
+                'labels' => [],
+                'dataSets' => [
+                    [
+                        'data' => [],
+                    ]
+                ]
+            ];
+        }
+
+        return $data;
 
     }
 }
