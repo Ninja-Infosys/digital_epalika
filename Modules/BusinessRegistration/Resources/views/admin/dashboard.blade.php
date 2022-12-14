@@ -13,7 +13,7 @@
                                         </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">जम्मा व्यवसाय</p>
+                            <p class="text my-1">व्यवसाय</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
@@ -31,7 +31,7 @@
                                        </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">जम्मा उदेश्यहरु</p>
+                            <p class="text my-1">उदेश्यहरु</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
@@ -48,7 +48,7 @@
                                         data-plugin="counterup">{{$totalObjectTransactionCategoryCount}}</span>
                                 </h3>
                             </div>
-                            <p class="text my-1">जम्मा कारोबार गर्ने वस्तु</p>
+                            <p class="text my-1">कारोबार गर्ने वस्तु</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
@@ -65,7 +65,7 @@
                                             {{$totalInvestmentRevenueCount}}
                                          </span></h3>
                             </div>
-                            <p class="text my-1">जम्मा कारोबार गर्ने वस्तु उप श्रेणी</p>
+                            <p class="text my-1">कारोबार गर्ने वस्तु उप श्रेणी</p>
                         </div>
                     </div> <!-- end row-->
                 </div>

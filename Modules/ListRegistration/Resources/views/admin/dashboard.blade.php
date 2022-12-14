@@ -31,7 +31,7 @@
                                         </span>
                                             </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा सुची दर्ता</p>
+                                    <p class="text my-1">सुची दर्ता</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
