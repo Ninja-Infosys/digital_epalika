@@ -31,7 +31,7 @@
                                     </span>
                                         </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा संगठन</p>
+                                    <p class="text my-1">संगठन</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -49,7 +49,7 @@
                                        </span>
                                            </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा नक्सा</p>
+                                    <p class="text my-1">नक्सा</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>

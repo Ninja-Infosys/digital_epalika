@@ -12,7 +12,7 @@
                                         </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">जम्मा उजुरी</p>
+                            <p class="text my-1">उजुरी</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
@@ -30,7 +30,7 @@
                                        </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">जम्मा दर्ता उजुरी</p>
+                            <p class="text my-1">दर्ता उजुरी</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
