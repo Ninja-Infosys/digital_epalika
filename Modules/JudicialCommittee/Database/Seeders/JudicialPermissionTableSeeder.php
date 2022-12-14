@@ -12,6 +12,10 @@ class JudicialPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'lawsuitNature_access',
+            'lawsuitNature_create',
+            'lawsuitNature_edit',
+            'lawsuitNature_delete',
             'chiefJudicialMember_access',
             'chiefJudicialMember_create',
             'chiefJudicialMember_edit',
@@ -28,10 +32,6 @@ class JudicialPermissionTableSeeder extends Seeder
             'complaintApplication_create',
             'complaintApplication_edit',
             'complaintApplication_delete',
-            'lawsuitNature_access',
-            'lawsuitNature_create',
-            'lawsuitNature_edit',
-            'lawsuitNature_delete',
         ];
 
         $this->storePermission($permissions);
