@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}} सूची</h4>
+                        <h4 class="header-title">{{$type==='Notice' ?'सूचना':'समाचार'}} सुची</h4>
                         @can('user_create')
                             <a href="{{route('admin.digitalBoard.notice.create',$type)}}"
                                class="btn btn-sm btn-outline-primary">
