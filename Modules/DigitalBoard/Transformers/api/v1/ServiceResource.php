@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ServiceResource extends JsonResource
 {
 
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'service_name' => $this->service_name ?? '',
@@ -17,7 +17,7 @@ class ServiceResource extends JsonResource
             'remarks' => $this->remarks ?? '',
             'documents' => ServiceDocumentResource::collection($this->whenLoaded('serviceDocuments')),
             'process' => ServiceDocumentResource::collection($this->whenLoaded('serviceProcesses')),
-            'employee' => ServiceDocumentResource::collection($this->whenLoaded('serviceEmployees')),
+            'employee' => ServiceEmployeeResource::collection($this->whenLoaded('serviceEmployees')),
         ];
     }
 }

@@ -32,6 +32,7 @@ class DigitalBoardApiController extends Controller
             'videos' => VideoResource::collection($videos),
             'employees' => EmployeeResource::collection($employees),
             'services' => ServiceResource::collection($services),
+            'officeSetting'=>$this->officeSetting()
         ];
     }
 
