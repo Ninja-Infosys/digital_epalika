@@ -28,6 +28,8 @@ class ComplaintApplication extends Model
 
     protected $fillable = [
         'fiscal_year_id',
+        'submission_no',
+        'registration_no',
         'complainant_province_id',
         'complainant_district_id',
         'complainant_local_body_id',
