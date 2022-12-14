@@ -69,7 +69,7 @@
                                                                    data-plugin="counterup">{{ $project_count }}</span>
                                 </h3>
                             </div>
-                            <p class="text my-1">सम्झौता हुनबाँकि कार्यर्कम</p>
+                            <p class="text my-1">सम्झौता हुनबाँकि कार्यर्कमहरु</p>
 
                         </div>
                     </div> <!-- end row-->

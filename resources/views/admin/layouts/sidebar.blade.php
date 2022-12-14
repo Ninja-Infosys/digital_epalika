@@ -7,6 +7,6 @@
 <li class="{{request()->is('admin/tech') ? 'active' : ''}}">
     <a href="{{route('admin.tech')}}">
         <i class="fa fa-chalkboard-teacher"></i>
-        <span> प्राविधिक मद्दत</span>
+        <span> प्राविधिक मद्दत (सहयोग)</span>
     </a>
 </li>

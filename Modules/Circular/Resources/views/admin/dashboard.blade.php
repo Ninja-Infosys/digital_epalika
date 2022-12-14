@@ -32,7 +32,7 @@
                                             </span>
                                         </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा चलानी पत्रहरु</p>
+                                    <p class="text my-1">चलानी पत्रहरु</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
