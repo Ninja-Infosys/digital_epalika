@@ -13,6 +13,7 @@ use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\Project;
 use Modules\Roaster\Entities\Training;
 use Nwidart\Modules\Facades\Module;
+use Schema;
 
 class DashboardController extends Controller
 {
@@ -23,32 +24,39 @@ class DashboardController extends Controller
         $project_count = 0;
         $map_count = 0;
         $grievance_count = 0;
-        $planAreas = [];
+        $planAreas = [
+            'labels' => [],
+            'dataSets' => [
+                [
+                    'data' => [],
+                ]
+            ]
+        ];
 
         $user_count = User::count();
         $activityLogs = ActivityLog::with('user')->whereDate('created_at', today()->toDateString())->paginate(5);
 
-        if (Module::has('BusinessRegistration')) {
+        if (Schema::hasTable('business_details')) {
             $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count();
         }
 
-        if (Module::has('Roaster')) {
+        if (Schema::hasTable('trainings')) {
             $training_count = Training::whereDate('closed_date', '<=', today()->toDateString())->count() ?? 0;
         }
 
-        if (Module::has('Plan')) {
+        if (Schema::hasTable('projects')) {
             $project_count = Project::count() ?? 0;
         }
 
-        if (Module::has('EMapl')) {
+        if (Schema::hasTable('map_applies')) {
             $map_count = MapApply::count() ?? 0;
         }
 
-        if (Module::has('GrievanceHandling')) {
+        if (Schema::hasTable('grievance_details')) {
             $grievance_count = GrievanceDetail::approved()->count() ?? 0;
         }
 
-        if (Module::has('Plan')) {
+        if (Schema::hasTable('plan_areas')) {
             $planAreas = $this->setPlanData();
         }
 
@@ -82,29 +90,17 @@ class DashboardController extends Controller
                 ];
             });
 
-        if (!empty($planArea)) {
-            $data = [
-                'labels' => $planAreas->pluck('area_name')->toArray(),
-                'dataSets' => [
-                    [
-                        'data' => $planAreas->pluck('projects_count')->toArray(),
-                        'label' => 'जम्मा',
-                        'fill' => 'false',
-                    ],
-                ],
-            ];
-        } else {
-            $data = [
-                'labels' => [],
-                'dataSets' => [
-                    [
-                        'data' => [],
-                    ]
-                ]
-            ];
-        }
 
-        return $data;
+        return [
+            'labels' => $planAreas->pluck('area_name')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $planAreas->pluck('projects_count')->toArray(),
+                    'label' => 'जम्मा',
+                    'fill' => 'false',
+                ],
+            ],
+        ];
 
     }
 }
