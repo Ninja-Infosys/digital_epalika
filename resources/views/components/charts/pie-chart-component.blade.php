@@ -54,6 +54,9 @@
                     y: {
                         beginAtZero: true
                     }
+                },
+                legend:{
+                    display:"{{$displayLegend}}"
                 }
             }
         });

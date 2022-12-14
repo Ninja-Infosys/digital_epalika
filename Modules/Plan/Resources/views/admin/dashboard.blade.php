@@ -73,23 +73,37 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                    <x-charts.bar-chart-component
-                        id="area-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु"
-                        :labels="$planAreaWiseProjects['labels']"
-                        :dataSets="$planAreaWiseProjects['dataSets']"
-                    />
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <x-charts.pie-chart-component
                         id="budget-head-wise-chart"
                         chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु"
+                        :labels="$budgetHeadWiseProjects['labels']"
+                        :dataSets="$budgetHeadWiseProjects['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.pie-chart-component
+                        id="plan-level-wise-chart"
+                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) योजना स्तर अनुसारका योजनाहरु"
+                        :labels="$planLevelWiseProjects['labels']"
+                        :dataSets="$planLevelWiseProjects['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component
+                        id="area-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु"
                         :labels="$planAreaWiseProjects['labels']"
                         :dataSets="$planAreaWiseProjects['dataSets']"
                     />

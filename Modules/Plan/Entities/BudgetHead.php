@@ -46,4 +46,9 @@ class BudgetHead extends Model
     {
         return $this->hasMany(BudgetHead::class);
     }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
 }
