@@ -9719,7 +9719,7 @@ textarea.form-control-lg {
 
 .text-light {
     --ct-text-opacity: 1;
-    color: rgba(var(--ct-light-rgb), var(--ct-text-opacity)) !important
+    color: rgba(var(--ct-light-rgb), var(--ct-text-opacity))
 }
 
 .text-dark {
@@ -14425,3 +14425,30 @@ textarea.form-control-lg {
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
+ h5{
+    color: white;
+    margin: 2px 0;
+ }
+ .blink {
+    width: 220px;
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+  }
+  h4 span {
+    font-family: cursive;
+    color: #fff;
+    animation: blink 2s linear infinite;
+    font-size: 10px;
+  }
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: .5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

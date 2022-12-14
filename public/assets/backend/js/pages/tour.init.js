@@ -216,5 +216,20 @@ $(document).ready(function () {
             }
         ],
         showPrevButton: !0
+    },
+    {
+        id: "dashboard-tour",
+        steps: [
+            {
+                target: "menu-tour",
+                title: "डिजिटल ई-पालिकाको लोगो",
+                placement: "bottom",
+                yOffset: 10,
+                xOffset: -105,
+                arrowOffset: "center"
+            }
+
+        ],
+        showPrevButton: !0
     })
 });

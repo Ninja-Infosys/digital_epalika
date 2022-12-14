@@ -63,18 +63,8 @@
                                     <td>
                                         <a href="{{route('admin.plan.project.show',$project)}}"
                                            class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i>
+                                            <i class="fa fa-eye"> विवरण हेर्नुहोस्</i>
                                         </a>
-                                        @can('project_delete')
-                                            <form action="{{route('admin.plan.project.destroy',$project)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
-                                        @endcan
                                     </td>
                                 </tr>
                             @empty

@@ -24,6 +24,19 @@ class PlanLevel extends Model
         'level_name'
     ];
 
+    public function scopeFilterData($query, $params = [])
+    {
+        if (!empty($params['plan_level_id'])) {
+            if (is_array($params['plan_level_id'])) {
+                $query->whereIn('plan_level_id', $params['plan_level_id']);
+            } else {
+                $query->where('plan_level_id', $params['plan_level_id']);
+            }
+        }
+
+        return $query;
+    }
+
     public function planLevel(): BelongsTo
     {
         return $this->belongsTo(PlanLevel::class);

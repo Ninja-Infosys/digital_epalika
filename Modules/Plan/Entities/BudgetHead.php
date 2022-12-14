@@ -24,6 +24,19 @@ class BudgetHead extends Model
         'title'
     ];
 
+    public function scopeFilterData($query, $params = [])
+    {
+        if (!empty($params['budget_head_id'])) {
+            if (is_array($params['budget_head_id'])) {
+                $query->whereIn('budget_head_id', $params['budget_head_id']);
+            } else {
+                $query->where('budget_head_id', $params['budget_head_id']);
+            }
+        }
+
+        return $query;
+    }
+
     public function budgetHead(): BelongsTo
     {
         return $this->belongsTo(BudgetHead::class);

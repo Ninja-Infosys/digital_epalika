@@ -21,95 +21,76 @@
 
             <div class="row">
                 <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
+                    <div class="widget-rounded-circle card-primary">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-danger border-danger border">
-                                        <i class="fa fa-sitemap font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
                                                 {{$organization_count}}
                                     </span>
                                         </h3>
-                                        <p class="text-muted mb-1">जम्मा संगठन</p>
                                     </div>
+                                    <p class="text my-1">जम्मा संगठन</p>
                                 </div>
-                            </div>
+                            </div> <!-- end row-->
                         </div>
-                    </div>
-                </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
 
                 <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-secondary border-secondary border">
-                                        <i class="fa fa-map-marked font-22 avatar-title text-white"></i>
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            {{$map_apply_count}}
+                                       </span>
+                                           </h3>
                                     </div>
+                                    <p class="text my-1">जम्मा नक्सा</p>
                                 </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                         {{$map_apply_count}}
-                                    </span>
-                                        </h3>
-                                        <p class="text-muted mb-1">जम्मा नक्सा</p>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> <!-- end row-->
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-pink border-pink border">
-                                        <i class="fa fa-file font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                       6
-                                    </span></h3>
-                                        <p class="text-muted mb-1">वार्षिक दर्ता नक्सा</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="avatar-lg rounded-circle bg-primary border-primary border">
-                                        <i class="fa fa-file font-22 avatar-title text-white"></i>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="text-end">
-                                        <h3 class="mt-1"><span data-plugin="counterup">
-                                        7
-                                    </span></h3>
-                                        <p class="text-muted mb-1">मासिक दर्ता नक्सा</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
 
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-primary">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            6
+                                         </span></h3>
+                                    </div>
+                                    <p class="text my-1">वार्षिक दर्ता नक्सा</p>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+
+                <div class="col-md-6 col-xl-3">
+                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="avatar-lg rounded-circle bg-light border">
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                            6
+                                         </span></h3>
+                                    </div>
+                                    <p class="text my-1">मासिक दर्ता नक्सा</p>
+                                </div>
+                            </div> <!-- end row-->
+                        </div>
+                    </div> <!-- end widget-rounded-circle-->
+                </div> <!-- end col-->
+
+            <div class="row mt-2">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">

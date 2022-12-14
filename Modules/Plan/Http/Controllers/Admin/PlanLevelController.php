@@ -3,6 +3,7 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Http\Requests\PlanLevel\StorePlanLevelRequest;
@@ -13,16 +14,31 @@ class PlanLevelController extends Controller
     public function index()
     {
         $this->checkAuthorization('planLevel_access');
+
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
+
         return view('plan::admin.setting.plan_level.index', compact('planLevels'));
+    }
+
+    public function planSubLevel(Request $request)
+    {
+        $request->validate([
+            'plan_level_id' => ['required']
+        ]);
+
+        $this->checkAuthorization('planLevel_access');
+
+        return response()->json([
+            'data' => PlanLevel::filterData($request->all())->get()
+        ]);
     }
 
     public function create()
     {
         $this->checkAuthorization('planLevel_create');
-        $mainPlanLevels=PlanLevel::whereNull('plan_level_id')->get();
+        $mainPlanLevels = PlanLevel::whereNull('plan_level_id')->get();
 
-        return view('plan::admin.setting.plan_level.create',compact('mainPlanLevels'));
+        return view('plan::admin.setting.plan_level.create', compact('mainPlanLevels'));
     }
 
     public function store(StorePlanLevelRequest $request)
@@ -37,7 +53,7 @@ class PlanLevelController extends Controller
     public function edit(PlanLevel $planLevel)
     {
         $this->checkAuthorization('planLevel_edit');
-        $mainLevels=PlanLevel::whereNull('plan_level_id')->get();
+        $mainLevels = PlanLevel::whereNull('plan_level_id')->get();
         return view('plan::admin.setting.plan_level.edit', compact('planLevel', 'mainLevels'));
     }
 

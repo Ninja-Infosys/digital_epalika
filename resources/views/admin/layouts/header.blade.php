@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
             <li class="border rounded p-1 mt-3">
-                <h4 class="text-white">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
+                <h4 class="text-blue" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-inline-block d-lg-none">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
@@ -17,7 +17,7 @@
 
             <li class="dropdown d-none d-lg-inline-block">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
-                   data-toggle="fullscreen"
+                   data-toggle="fullscreen" id="full-tour"
                    href="#">
                     <i class="fa fa-expand-arrows-alt noti-icon"></i>
                 </a>
@@ -30,7 +30,7 @@
                     href="#"
                     role="button"
                     aria-haspopup="false"
-                    aria-expanded="false">
+                    aria-expanded="false" id="noti-tour">
                     <i @class([
             'ring-bell'=>count(auth()->user()->unreadNotifications)>0,
             'fa', 'fa-bell', 'noti-icon'
@@ -85,7 +85,7 @@
                    href="#"
                    role="button"
                    aria-haspopup="false"
-                   aria-expanded="false">
+                   aria-expanded="false" id="profile-tour">
                     <img src="{{auth()->user()->profile_photo_url ?? ''}}"
                          alt="user-image"
                          class="rounded-circle"/>
@@ -103,6 +103,14 @@
                         <i class="fa fa-tasks"></i>
                         <span>गतिविधिहरू</span>
                     </a>
+                    <a href="{{route('admin.setting.dashboard')}}" class="dropdown-item notify-item">
+                        <i class="fa fa-spin fa-cog"></i>
+                        <span>सेटिङ</span>
+                    </a>
+                    <a href="{{route('admin.website.dashboard')}}" class="dropdown-item notify-item">
+                        <i class="fa  fa-cogs"></i>
+                        <span>वेबसाइट सेटिङ</span>
+                    </a>
                     <div class="dropdown-divider"></div>
                     <form action="{{route('logout')}}" method="post">
                         @csrf
@@ -117,7 +125,7 @@
         <!-- LOGO -->
         <div class="logo-box dropdown notification-list topbar-dropdown">
             <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
-               data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+               data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" id="menu-tour">
                 <span class="logo-lg">
                     @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
                         <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
@@ -127,7 +135,7 @@
                              height="40"/>
                     @else
                         <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
-                             height="40"/>
+                             height="35"/>
                     @endif
               </span>
             </a>
@@ -137,11 +145,13 @@
         </div>
 
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+
             <li>
                 <button class="button-menu-mobile waves-effect waves-light">
                     <i class="fa fa-bars"></i>
                 </button>
             </li>
+
             <li class="dropdown d-none d-lg-inline-block">
                 <h3 class="text-light fw-bold mt-3">
                     {{$officeSetting->localBody->local_body ?? ''}}
@@ -159,6 +169,7 @@
                 </a>
                 <!-- End mobile menu toggle-->
             </li>
+
         </ul>
         <div class="clearfix"></div>
     </div>
