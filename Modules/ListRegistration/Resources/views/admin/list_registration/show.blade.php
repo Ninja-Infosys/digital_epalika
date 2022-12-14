@@ -76,6 +76,9 @@
                                         <th>निवेदक /अनुसूची</th>
                                         <td>
                                             <img src="{{$listRegistration->application_photo_url}}" alt="" height="60px;">
+                                            <a href="{{route('admin.file-url-download',['file_url'=>$listRegistration->application_photo])}}" class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i> डाउनलोड
+                                            </a>
                                         </td>
                                     </tr>  <tr>
                                         <th>संस्था वा फार्म दर्ताको प्रमाण पत्र.</th>
