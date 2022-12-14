@@ -30,7 +30,7 @@
                                         </span>
                                             </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा भिडियो</p>
+                                    <p class="text my-1">भिडियोहरु</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -48,7 +48,7 @@
                                        </span>
                                            </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा समाचार</p>
+                                    <p class="text my-1">समाचारहरु</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -65,7 +65,7 @@
                                             {{$notice_count ?? 0}}
                                         </span></h3>
                                     </div>
-                                    <p class="text my-1">जम्मा सूचना</p>
+                                    <p class="text my-1">सूचनाहरु</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -82,7 +82,7 @@
                                             {{$employee_count ?? 0}}
                                          </span></h3>
                                     </div>
-                                    <p class="text my-1">जम्मा कर्मचारी</p>
+                                    <p class="text my-1">कर्मचारी/जनप्रतिनिधि</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>

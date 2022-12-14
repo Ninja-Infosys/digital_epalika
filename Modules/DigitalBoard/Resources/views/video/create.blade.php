@@ -53,7 +53,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="video" class="form-label">भिडियो *</label>
+                                <label for="video" class="form-label">भिडियो * (कृपया MP4 भिडियो उपलोड गर्नुहोला)</label>
                                 <input type="hidden" name="video" id="video">
                                 @error('video')
                                 <div class="invalid-feedback">{{$message}}</div>

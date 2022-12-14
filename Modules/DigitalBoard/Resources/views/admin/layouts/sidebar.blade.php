@@ -16,7 +16,7 @@
 <li class="{{request()->is('admin/digitalBoard/Notice/notice*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.notice.index','Notice')}}">
         <i class="fa fa-paperclip"></i>
-        <span> सूचना </span>
+        <span> सूचनाहरु </span>
     </a>
 </li>
 @endcan
@@ -24,7 +24,7 @@
 <li class="{{request()->is('admin/digitalBoard/News/notice*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.notice.index','News')}}">
         <i class="fa fa-newspaper"></i>
-        <span> समाचार</span>
+        <span> समाचारहरु</span>
     </a>
 </li>
 @endcan
@@ -32,7 +32,7 @@
 <li class="{{request()->is('admin/digitalBoard/employee*') ? 'active' : ''}}">
     <a href="{{route('admin.digitalBoard.employee.index')}}">
         <i class="fa fa-user"></i>
-        <span> कर्मचारीहरु</span>
+        <span>जनप्रतिनिधि/कर्मचारीहरु</span>
     </a>
 </li>
 @endcan
