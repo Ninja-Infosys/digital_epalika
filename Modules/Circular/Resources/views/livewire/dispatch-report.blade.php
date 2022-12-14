@@ -7,12 +7,12 @@
                     <div>
                         <input type="text" class="form-control" wire:model="search" placeholder="चलानी न./ चलानी मिती">
                     </div>
-
                 </div>
             </div>
 
             <div id="printData">
                 <div class="m-1 mt-2">
+
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered text-center">
                             <thead>

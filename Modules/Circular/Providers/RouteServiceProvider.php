@@ -24,6 +24,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
             ->prefix('admin/circular')
             ->as('admin.circular.')
+            ->group(module_path('Circular', '/Routes/admin.php'));
+
+        Route::middleware('web')
+            ->prefix('circular')
+            ->as('circular.')
             ->group(module_path('Circular', '/Routes/web.php'));
     }
 

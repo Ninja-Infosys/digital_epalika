@@ -36,14 +36,14 @@
             @can('registration_access')
                 <li class="{{request()->is('admin/circular/report/registration') ? 'active' : ''}}">
                     <a href="{{route('admin.circular.registration.report')}}">
-                        <span> दर्ता प्रणाली रिपोर्ट   </span>
+                        <span> दर्ता रिपोर्ट   </span>
                     </a>
                 </li>
             @endcan
             @can('dispatch_access')
                 <li class="{{request()->is('admin/circular/report/dispatch') ? 'active' : ''}}">
-                    <a href="{{route('admin.circular.dispatch.report')}}">
-                        <span> चलानी प्रणाली रिपोर्ट</span>
+                    <a href="{{route('admin.circular.report.dispatch.index')}}">
+                        <span> चलानी रिपोर्ट</span>
                     </a>
                 </li>
             @endcan

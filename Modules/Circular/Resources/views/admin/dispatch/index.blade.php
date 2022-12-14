@@ -6,12 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.circular.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.dispatch.index')}}">चलानी पत्र </a>
                         </li>
                         <li class="breadcrumb-item active">चलानी</li>
                     </ol>
@@ -44,6 +41,7 @@
                                 <th>चलानी न.</th>
                                 <th>पाउने कार्यालयको नाम</th>
                                 <th>चलानी मिति</th>
+                                <th>बिषय</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -53,8 +51,8 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$dispatch->dispatch_no}}</td>
                                     <td>{{$dispatch->receiver_name}}</td>
-
                                     <td>{{$dispatch->dispatch_date}}</td>
+                                    <td>{{$dispatch->subject}}</td>
                                     <td>
                                         @can('dispatch_access')
                                             <a href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary">
