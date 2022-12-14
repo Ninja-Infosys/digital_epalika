@@ -12,6 +12,10 @@ class JudicialPermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'lawsuitNature_access',
+            'lawsuitNature_create',
+            'lawsuitNature_edit',
+            'lawsuitNature_delete',
             'chiefJudicialMember_access',
             'chiefJudicialMember_create',
             'chiefJudicialMember_edit',

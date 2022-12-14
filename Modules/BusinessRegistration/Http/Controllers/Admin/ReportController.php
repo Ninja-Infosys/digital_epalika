@@ -54,8 +54,8 @@ class ReportController extends Controller
     public function report(Request $request)
     {
         $request->validate([
-            'date.from_date' => ['nullable', 'date', 'before_or_equal:date.to_date'],
-            'date.to_date' => ['nullable', 'date', 'after_or_equal:date.from_date'],
+            'from_date' => ['nullable', 'date', 'before_or_equal:to_date'],
+            'to_date' => ['nullable', 'date', 'after_or_equal:from_date'],
             'columns' => ['nullable', 'array']
         ]);
 
@@ -199,12 +199,12 @@ class ReportController extends Controller
      */
     public function filterFromRegistrationDate(Request $request, $q): void
     {
-        if (!empty($request->input('date.from'))) {
-            $q->whereDate('registration_date_ne', '>=', $request->input('date.from'));
+        if (!empty($request->input('from_date'))) {
+            $q->whereDate('registration_date_ne', '>=', $request->input('from_date'));
         }
 
-        if (!empty($request->input('date.to'))) {
-            $q->whereDate('registration_date_ne', '<=', $request->input('date.to'));
+        if (!empty($request->input('to_date'))) {
+            $q->whereDate('registration_date_ne', '<=', $request->input('to_date'));
         }
     }
 

@@ -46,4 +46,9 @@ class PlanLevel extends Model
     {
         return $this->hasMany(PlanLevel::class);
     }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
 }

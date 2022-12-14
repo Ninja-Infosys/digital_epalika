@@ -7,7 +7,9 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
+use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Entities\PlanArea;
+use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Enums\ProjectStatusEnum;
 
@@ -20,8 +22,8 @@ class DashboardController extends Controller
     {
         parent::__construct();
 
-        $this->officeSetting=OfficeSetting::with('localBody')->first();
-        $this->projects=Project::where('fiscal_year_id',$this->officeSetting->fiscal_year_id)->get();
+        $this->officeSetting = OfficeSetting::with('localBody')->first();
+        $this->projects = Project::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
     }
 
     public function __invoke()
@@ -29,26 +31,30 @@ class DashboardController extends Controller
         $not_started_project_count = $this->projects->where('project_status', ProjectStatusEnum::NOT_STARTED)->count();
         $in_progress_project_count = $this->projects->where('project_status', ProjectStatusEnum::IN_PROGRESS)->count();
         $completed_project_count = $this->projects->where('project_status', ProjectStatusEnum::COMPLETED)->count();
-        $wardWiseProjects=$this->getWardWiseProjects();
-        $planAreaWiseProjects=$this->getPlanAreaWiseProjects();
+        $wardWiseProjects = $this->getWardWiseProjects();
+        $planAreaWiseProjects = $this->getPlanAreaWiseProjects();
+        $budgetHeadWiseProjects = $this->getBudgetHeadWiseProjects();
+        $planLevelWiseProjects = $this->getPlanLevelWiseProjects();
 
         return view('plan::admin.dashboard', compact(
             'not_started_project_count',
             'in_progress_project_count',
             'completed_project_count',
             'wardWiseProjects',
-            'planAreaWiseProjects'
+            'planAreaWiseProjects',
+            'budgetHeadWiseProjects',
+            'planLevelWiseProjects'
         ));
     }
 
     private function getWardWiseProjects()
     {
-        $wardsData=collect();
+        $wardsData = collect();
 
-        foreach ($this->officeSetting->localBody->ward_no as $ward){
+        foreach ($this->officeSetting->localBody->ward_no as $ward) {
             $wardsData->push([
-                'ward_no'=>"वार्ड नं. $ward",
-                'projects_count'=>$this->projects->where('ward_no',$ward)->count()
+                'ward_no' => "वार्ड नं. $ward",
+                'projects_count' => $this->projects->where('ward_no', $ward)->count()
             ]);
         }
 
@@ -76,7 +82,7 @@ class DashboardController extends Controller
             }])->whereNull('plan_area_id')->get()->map(function ($planArea) {
                 return [
                     'area_name' => $planArea->area_name,
-                    'projects_count' =>  $planArea->projects_count+$planArea->planAreas->sum('projects_count')
+                    'projects_count' => $planArea->projects_count + $planArea->planAreas->sum('projects_count')
                 ];
             });
 
@@ -99,6 +105,65 @@ class DashboardController extends Controller
                     'fill' => 'false',
                 ],
             ],
+
+        ];
+    }
+
+    private function getBudgetHeadWiseProjects()
+    {
+        $budgetHeads = BudgetHead::withCount(['projects' => function ($query) {
+            $query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+        }])
+            ->with(['budgetHeads' => function ($query) {
+                $query->withCount(['projects' => function ($sub_query) {
+                    $sub_query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+                }]);
+            }])->whereNull('budget_head_id')->get()->map(function ($budgetHead) {
+                return [
+                    'title' => $budgetHead->title,
+                    'projects_count' => $budgetHead->projects_count + $budgetHead->budgetHeads->sum('projects_count')
+                ];
+            });
+
+        return [
+            'labels' => $budgetHeads->pluck('title')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $budgetHeads->pluck('projects_count')->toArray(),
+                    'label' => 'जम्मा',
+                    'fill' => 'false',
+                ]
+            ],
+
+        ];
+    }
+
+    private function getPlanLevelWiseProjects()
+    {
+        $planLevels = PlanLevel::withCount(['projects' => function ($query) {
+            $query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+        }])
+            ->with(['planLevels' => function ($query) {
+                $query->withCount(['projects' => function ($sub_query) {
+                    $sub_query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+                }]);
+            }])->whereNull('plan_level_id')->get()->map(function ($planLevel) {
+                return [
+                    'level_name' => $planLevel->level_name,
+                    'projects_count' => $planLevel->projects_count + $planLevel->planLevels->sum('projects_count')
+                ];
+            });
+
+        return [
+            'labels' => $planLevels->pluck('level_name')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $planLevels->pluck('projects_count')->toArray(),
+                    'label' => 'जम्मा',
+                    'fill' => 'false',
+                ]
+            ],
+
         ];
     }
 }

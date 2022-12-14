@@ -10,6 +10,7 @@ class JudicialCommitteeDatabaseSeeder extends Seeder
     {
         $this->call([
             JudicialPermissionTableSeeder::class,
+            LawsuitNatureTableSeeder::class
         ]);
     }
 }

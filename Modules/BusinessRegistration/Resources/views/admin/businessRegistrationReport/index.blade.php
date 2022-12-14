@@ -383,6 +383,7 @@
                         },
                         error:function(XMLHttpRequest, textStatus, errorThrown){
                             $('#submitFormBtn').prop('disabled',false)
+                            $("#submitFormBtn").html("Filter");
                             toastMessage('error',XMLHttpRequest.responseJSON.message)
                         }
                     });

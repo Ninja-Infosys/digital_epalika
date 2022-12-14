@@ -85,4 +85,14 @@ class FileController extends Controller
     {
         return Storage::disk('public')->download($file->file, $file->file_name . $file->extension);
     }
+
+    public function downloadFile($file_url)
+    {
+        if (Storage::disk('public')->exists($file_url)) {
+            return Storage::disk('public')->download($file_url);
+        } else {
+            toast('माफ गर्नुहोस् फाइल फेला परेन', 'error');
+            return back();
+        }
+    }
 }
