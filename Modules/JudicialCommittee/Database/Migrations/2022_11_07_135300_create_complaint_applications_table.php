@@ -10,6 +10,8 @@ return new class () extends Migration {
         Schema::create('complaint_applications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->comment('आर्थिक बर्ष')->constrained();
+            $table->string('submission_no')->comment('सबमिशन नं.');
+            $table->string('registration_no')->nullable()->comment('दर्ता नम्बर');
             $table->foreignId('complainant_province_id')->nullable()->comment('गुनासो प्रदेश')->constrained('provinces');
             $table->foreignId('complainant_district_id')->nullable()->comment('गुनासो जिल्ला')->constrained('districts');
             $table->foreignId('complainant_local_body_id')->nullable()->comment('गुनासो स्थानीय तह')->constrained('local_bodies');

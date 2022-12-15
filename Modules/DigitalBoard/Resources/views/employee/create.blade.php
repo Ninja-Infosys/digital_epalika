@@ -126,7 +126,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="position" class="form-label">स्थान </label>
+                                    <label for="position" class="form-label">मर्यादाक्रम </label>
                                     <input
                                         type="text"
                                         name="position"
@@ -140,7 +140,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="is_employee" class="form-label">कर्मचारीको प्रकार *</label>
+                                    <label for="is_employee" class="form-label">प्रकार छान्नुहोस *</label>
 
                                     <select class="form-control @error('is_employee') is-invalid @enderror"
                                             name="is_employee" id="is_employee">

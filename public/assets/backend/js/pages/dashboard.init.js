@@ -51,8 +51,7 @@ $(document).ready(function () {
                 "&#8594; वेबसाइटको सेटिङ परिर्वतन गर्न<br>"+
                 "&#8594; प्रणालीबाट बाहिर निस्किन<br>",
                 placement: "left",
-            }
-
+            },
         ],
         showPrevButton: !0
     })

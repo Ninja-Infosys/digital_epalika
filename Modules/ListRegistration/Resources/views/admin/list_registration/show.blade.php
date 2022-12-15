@@ -25,13 +25,25 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">मौजुदा सुची दर्ताहरु</h4>
+                    <div class="d-flex">
+                        <div class="col-md-7">
+                            <h4 class="header-title">मौजुदा सुची दर्ताहरु</h4>
+                        </div>
+                        <div class="col-md-5 d-flex justify-content-between">
+                            <div class="app-search-box dropdown">
+                                <div class="input-group">
+                                    <input type="search" class="form-control" placeholder="Search..." id="top-search">
+                                    <button class="btn btn-outline-primary input-group-text" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
 
-                        <a href="{{route('admin.listRegistrations.listRegistration.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> मौजुदा सूची
-                        </a>
-
+                            <a href="{{route('admin.listRegistrations.listRegistration.index')}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-list"></i> मौजुदा सूची
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -68,34 +80,61 @@
                                     <tr>
                                         <th>टेलिफोन नम्बर.</th>
                                         <td>{{$listRegistration->telephone}}</td>
-                                    </tr>  <tr>
+                                    </tr>
+                                    <tr>
                                         <th>मोबाइल नम्बर</th>
                                         <td>{{$listRegistration->mobile_no}}</td>
                                     </tr>
                                     <tr>
                                         <th>निवेदक /अनुसूची</th>
                                         <td>
-                                            <img src="{{$listRegistration->application_photo_url}}" alt="" height="60px;">
+                                            <img src="{{$listRegistration->application_photo_url}}" alt=""
+                                                 height="60px;">
+                                            <a href="{{route('admin.file-url-download',['file_url'=>$listRegistration->application_photo])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i> डाउनलोड
+                                            </a>
                                         </td>
-                                    </tr>  <tr>
+                                    </tr>
+                                    <tr>
                                         <th>संस्था वा फार्म दर्ताको प्रमाण पत्र.</th>
-                                        <td><img src="{{$listRegistration->registration_certificate_url}}" alt="" height="60px;"></td>
-                                    </tr>  <tr>
+                                        <td><img src="{{$listRegistration->registration_certificate_url}}" alt=""
+                                                 height="60px;">
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->registration_certificate])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i> डाउनलोड
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <th>स्थायी लेखा नम्बर(PAN)</th>
                                         <td>
                                             <img src="{{$listRegistration->pan_photo_url}}" alt="" height="60px;">
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->pan_photo])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i> डाउनलोड
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>कर चुक्ता प्रमाण पत्र</th>
                                         <td>
-                                            <img src="{{$listRegistration->tax_payment_certificate_url}}" alt="" height="60px;">
+                                            <img src="{{$listRegistration->tax_payment_certificate_url}}" alt=""
+                                                 height="60px;">
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->tax_payment_certificate])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i> डाउनलोड
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>कुन खरिद को लागि सुची दर्ता हुन निबेदन दिने हो सो को लागि इजाजत पत्र</th>
                                         <td>
                                             <img src="{{$listRegistration->license_photo_url}}" alt="" height="60px;">
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->license_photo])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i> डाउनलोड
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -130,7 +169,8 @@
                                         @if($document->extension ==='pdf')
                                             <iframe src="{{$document->file_url}}" frameborder="0" width="100%"></iframe>
                                         @elseif(($document->extension ==='png') or ($document->extension ==='jpg') or ($document->extension ==='jpeg'))
-                                            <img src="{{ $document->file_url }}" class="card-image" alt="Image" height=150px;" width="100%">
+                                            <img src="{{ $document->file_url }}" class="card-image" alt="Image"
+                                                 height=150px;" width="100%">
                                         @endif
                                     </div>
                                 </div>
@@ -138,8 +178,14 @@
                         @endforeach
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+    @push('style')
+        <style>
+            tbody, td, tfoot, th, thead, tr {
+                font-family: Kalimati, serif;
+            }
+        </style>
+    @endpush
 @endsection

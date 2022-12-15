@@ -34,7 +34,7 @@
                                 </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">जम्मा प्रयोगकर्ताहरु</p>
+                            <p class="text my-1">प्रयोगकर्ताहरु</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
@@ -52,7 +52,7 @@
                                 </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">जम्मा सम्पन्न तालिम</p>
+                            <p class="text my-1">सम्पन्न तालिम</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
@@ -69,7 +69,7 @@
                                                                    data-plugin="counterup">{{ $project_count }}</span>
                                 </h3>
                             </div>
-                            <p class="text my-1">सम्झौता हुनबाँकि कार्यर्कम</p>
+                            <p class="text my-1">सम्झौता हुनबाँकि कार्यर्कमहरु</p>
 
                         </div>
                     </div> <!-- end row-->

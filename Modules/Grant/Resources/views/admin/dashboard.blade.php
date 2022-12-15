@@ -30,7 +30,7 @@
                                         </span>
                                             </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा शाखा</p>
+                                    <p class="text my-1">शाखा</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -48,7 +48,7 @@
                                        </span>
                                            </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा उप-शाखा</p>
+                                    <p class="text my-1">उप-शाखा</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -63,7 +63,7 @@
                                     <div class="avatar-lg rounded-circle bg-light border">
                                         <h3 class="mt-1 text-center"><span data-plugin="counterup">4</span></h3>
                                     </div>
-                                    <p class="text my-1">जम्मा सेवा</p>
+                                    <p class="text my-1">सेवा</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>

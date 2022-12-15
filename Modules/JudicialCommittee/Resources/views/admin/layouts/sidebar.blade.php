@@ -100,6 +100,11 @@
     <div class="collapse {{request()->is('admin/grant/setting/*') ? 'show' : ''}}"
          id="sidebarGrantSetting">
         <ul class="nav-second-level">
+            <li class="{{request()->is('admin/grant/setting/lawsuitNature') ? 'active' : ''}}">
+                <a href="{{route('admin.judicialCommittee.lawsuitNature.index')}}">
+                    <span>  मुद्दा प्रकृति </span>
+                </a>
+            </li>
             @can('infrastructure_access')
                 <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                     <a href="{{route('admin.grant.infrastructure.index')}}">

@@ -31,7 +31,7 @@
                                         </span>
                                             </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा गुनासो</p>
+                                    <p class="text my-1">गुनासो</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -49,7 +49,7 @@
                                        </span>
                                            </h3>
                                     </div>
-                                    <p class="text my-1">जम्मा दर्ता गुनासो</p>
+                                    <p class="text my-1">दर्ता गुनासो</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -133,7 +133,7 @@
                                             {{$seenGrievanceCount}}
                                         </span></h3>
                                     </div>
-                                    <p class="text my-1">जम्मा हेरिएको गुनासो</p>
+                                    <p class="text my-1">हेरिएको गुनासो</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>

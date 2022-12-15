@@ -50,7 +50,7 @@ class ListRegistration extends Model
     public function setApplicationPhotoAttribute($value)
     {
         if (! empty($value) && ! is_string($value)) {
-            $this->attributes['application_photo'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/application', 'public');
+            $this->attributes['application_photo'] = $value->store('list_registration/application', 'public');
         }
     }
 
