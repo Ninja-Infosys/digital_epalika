@@ -31,7 +31,7 @@
                                     </span>
                                         </h3>
                                     </div>
-                                    <p class="text my-1">संगठन</p>
+                                    <p class="text my-1">दर्ता भएका संगठन</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -47,9 +47,9 @@
                                         <h3 class="mt-1 text-center"><span data-plugin="counterup">
                                             {{$map_apply_count}}
                                        </span>
-                                           </h3>
+                                        </h3>
                                     </div>
-                                    <p class="text my-1">नक्सा</p>
+                                    <p class="text my-1">जम्मा दर्ता नक्सा</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -90,58 +90,60 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-            <div class="row mt-2">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.pie-chart-component id="bar-chart5"
-                                                          chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार प्रयोजन "
-                                                          :labels="$mapApplyBuildingUsageAccordingToFiscalYears['labels']"
-                                                          :dataSets="$mapApplyBuildingUsageAccordingToFiscalYears['dataSets']"/>
+                <div class="row mt-2">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <x-charts.pie-chart-component id="bar-chart5"
+                                                              chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार प्रयोजन "
+                                                              :labels="$mapApplyBuildingUsageAccordingToFiscalYears['labels']"
+                                                              :dataSets="$mapApplyBuildingUsageAccordingToFiscalYears['dataSets']"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.bar-chart-component id="bar-chart6"
-                                                          chartTitle="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}}  अनुसार भवन  वर्गीकरण "
-                                                          :labels="$mapApplyBuildingCategoryAccordingToFiscalYears['labels']"
-                                                          :dataSets="$mapApplyBuildingCategoryAccordingToFiscalYears['dataSets']"/>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <x-charts.bar-chart-component id="bar-chart6"
+                                                              chartTitle="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}}  अनुसार भवन  वर्गीकरण "
+                                                              :labels="$mapApplyBuildingCategoryAccordingToFiscalYears['labels']"
+                                                              :dataSets="$mapApplyBuildingCategoryAccordingToFiscalYears['dataSets']"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.pie-chart-component id="bar-chart7"
-                                                          chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम "
-                                                          :labels="$mapApplyConstructionTypeAccordingToFiscalYears['labels']"
-                                                          :dataSets="$mapApplyConstructionTypeAccordingToFiscalYears['dataSets']"/>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <x-charts.pie-chart-component
+                                    id="bar-chart7"
+                                    chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम "
+                                    :labels="$mapApplyConstructionTypeAccordingToFiscalYears['labels']"
+                                    :dataSets="$mapApplyConstructionTypeAccordingToFiscalYears['dataSets']"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.pie-chart-component id="bar-chart8"
-                                                          chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} अनुसार भवन निर्माण कार्यको किसिम "
-                                                          :labels="$mapApplyStructureTypeAccordingToFiscalYears['labels']"
-                                                          :dataSets="$mapApplyStructureTypeAccordingToFiscalYears['dataSets']"/>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <x-charts.pie-chart-component
+                                    id="bar-chart8"
+                                    chartName="आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} इस्टकचर अनुसार भवनको किसिम "
+                                    :labels="$mapApplyStructureTypeAccordingToFiscalYears['labels']"
+                                    :dataSets="$mapApplyStructureTypeAccordingToFiscalYears['dataSets']"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <x-charts.bar-chart-component id="bar-chart4" chartType='line'
-                                                          chartTitle="आर्थिक बर्ष अनुसारले नक्सा बिवरण"
-                                                          :labels="$mapAppliesAccordingToFiscalYears['labels']"
-                                                          :dataSets="$mapAppliesAccordingToFiscalYears['dataSets']"/>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <x-charts.bar-chart-component id="bar-chart4" chartType='line'
+                                                              chartTitle="आर्थिक बर्ष अनुसारले नक्सा बिवरण"
+                                                              :labels="$mapAppliesAccordingToFiscalYears['labels']"
+                                                              :dataSets="$mapAppliesAccordingToFiscalYears['dataSets']"/>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 @endsection

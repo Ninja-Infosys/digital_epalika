@@ -134,7 +134,7 @@ class GrievanceFormWizard extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
-            'text' => 'तपाईंको गुनासो फारम सफलतापूर्वक पेश गरियो, तपाईको गुनासो गुनासो नम्बर '.$grievanceDetail->token.' पछी हेर्नको लागि सुरक्षित राख्नुहोला',
+            'text' => 'तपाईंको गुनासो फारम सफलतापूर्वक भएको छ, तपाईको गुनासो टोकन नम्बर '.$grievanceDetail->token.' हो, पछी हेर्नको लागि सुरक्षित राख्नुहोला',
         ]);
     }
 

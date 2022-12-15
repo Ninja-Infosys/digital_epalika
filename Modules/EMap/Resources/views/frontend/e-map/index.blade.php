@@ -11,7 +11,7 @@
                             <a class="ml-1 text-primary-500">घर नक्सा</a>
                         </div>
                     </div>
-                    <h4>दरखास्त फारम साथ संलग्न कागजातहरु</h4>
+                    <h5>दरखास्त फारम साथ संलग्न कागजातहरु</h5>
                     <h6>तल दिएका कागजातहरु अनिवार्य राख्नु पर्नेछ । </h6>
                     <div class="scroll shadow">
                         <div class="doc">
@@ -87,7 +87,7 @@
                                 <div class="card-body">
                                     <h5 class="fw-semibold mt-2">नक्सा दरखास्त फारम</h5>
                                     <i class="fa fa-file-invoice fs-5"></i>
-                                    <p>नयाँ नक्सा दरखास्त फारम भर्नुहोस ।</p>
+                                    <h6>नयाँ नक्सा दरखास्त फारम भर्नुहोस ।</h6>
                                     <a href="{{url('form')}}" class="btn btn-light"><span>नक्सा दरखास्त</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
@@ -99,7 +99,7 @@
                                 <div class="card-body">
                                     <h5 class="fw-semibold mt-2">लग इन</h5>
                                     <i class="fa fa-gears fs-5"></i>
-                                    <p>इ-नक्सा लग इन </p>
+                                    <h6>इ-नक्सा लग इन </h6>
                                     <a href="{{route('organization.login.form')}}" class="btn btn-light"
                                        ><span>लग इन गर्नुहोस्</span>
                                         <i class="fa fa-angle-double-right"></i>
@@ -112,7 +112,7 @@
                                 <div class="card-body">
                                     <h5 class="fw-semibold mt-2">नक्सा ट्रयाक</h5>
                                     <i class="fa fa-download fs-5"></i>
-                                    <p>घर नक्साको स्थिति बुझन</p>
+                                    <h6>घर नक्साको स्थिति बुझन</h6>
                                     <a href="{{route('mapTrack')}}" class="btn btn-light"><span>ट्रयाक</span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>
@@ -124,7 +124,8 @@
                                 <div class="card-body">
                                     <h5 class="fw-semibold mt-2">संस्था दर्ता</h5>
                                     <i class="fa fa-address-card fs-5"></i>
-                                    <p>नयाँ इ-नक्साको लागि दर्ता गर्नुहोस् ।</p>
+                                    <h6>नयाँ इ-नक्साको लागि दर्ता गर्नुहोस् ।</h6>
+                                    <h6>(NEC नम्बर लिएकोले ।)</h6>
                                     <a href="{{route('organization.register.form')}}" class="btn btn-light"><span> संस्था </span>
                                         <i class="fa fa-angle-double-right"></i>
                                     </a>

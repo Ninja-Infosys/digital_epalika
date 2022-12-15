@@ -8,7 +8,7 @@
     <li class="{{request()->is('admin/emap/organization') ? 'active' : ''}}">
         <a href="{{route('emap.admin.organization.index')}}">
             <i class="fa fa-building"></i>
-            <span>दर्ता भएका संगठन</span>
+            <span>दर्ता भएका संगठन विवरण</span>
         </a>
     </li>
 @endcan
@@ -16,7 +16,7 @@
     <a href="#sidebarMaptype"
        data-bs-toggle="collapse">
         <i class="fa fa-map"></i>
-        <span>नक्सा</span>
+        <span>नक्सा दर्ता प्रमाणित</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -41,6 +41,14 @@
         </ul>
     </div>
 </li>
+@can('mapFee_access')
+    <li class="{{request()->is('admin/emap/setting/mapFee*') ? 'active' : ''}}">
+        <a href="{{route('emap.admin.mapFee.index')}}">
+            <i class="fa fa-file"></i>
+            <span>नक्शा दस्तुर</span>
+        </a>
+    </li>
+@endcan
 <li class="{{request()->is('admin/emap/setting/*') ? 'active' : ''}}">
     <a href="#sidebarEMapSetting"
        {{request()->is('admin/emap/setting/*') ? 'aria-expanded=true' : ''}}
@@ -61,13 +69,6 @@
                 </a>
             </li>
             @endcan
-                @can('mapFee_access')
-            <li class="{{request()->is('admin/emap/setting/mapFee*') ? 'active' : ''}}">
-                <a href="{{route('emap.admin.mapFee.index')}}">
-                    <span> नक्शा दस्तुर  </span>
-                </a>
-            </li>
-                @endcan
             @can('eMapTemplate_access')
                 <li class="{{request()->is('admin/emap/setting/eMapTemplate*') ? 'active' : ''}}">
                     <a href="{{route('emap.admin.eMapTemplate.enumList')}}">
