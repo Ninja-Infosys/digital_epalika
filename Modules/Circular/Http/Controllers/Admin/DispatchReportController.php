@@ -23,8 +23,10 @@ class DispatchReportController extends Controller
     public function report(Request $request)
     {
         $request->validate([
-            'from_date' => ['nullable', 'before_or_equal:to_date'],
-            'to_date' => ['nullable', 'after_or_equal:from_date'],
+            'en_from_dispatch_date' => ['nullable'],
+            'en_to_dispatch_date' => ['nullable', 'after_or_equal:en_from_dispatch_date'],
+            'en_from_letter_date' => ['nullable'],
+            'en_to_letter_date' => ['nullable', 'after_or_equal:en_from_letter_date'],
             'columns' => ['nullable', 'array']
         ]);
 
@@ -34,7 +36,7 @@ class DispatchReportController extends Controller
             ->get();
 
         return response()->json([
-            'view' => (string)View::make('circular::admin.report.dispatch.report_table', compact('dispatches'))
+            'view' => (string)View::make('circular::admin.report.dispatch.table_data', compact('dispatches'))
         ]);
     }
 
@@ -59,32 +61,25 @@ class DispatchReportController extends Controller
             $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
         }
 
-        if (!empty($request->input('from_date'))) {
-            $q->whereDate('project_start_date', '>=', $request->input('from_date'));
+        if (!empty($request->input('en_from_dispatch_date'))) {
+            $q->whereDate('en_dispatch_date', '>=', $request->input('en_from_dispatch_date'));
         }
 
-        if (!empty($request->input('to_date'))) {
-            $q->whereDate('project_start_date', '<=', $request->input('to_date'));
+        if (!empty($request->input('en_to_dispatch_date'))) {
+            $q->whereDate('en_dispatch_date', '<=', $request->input('en_to_dispatch_date'));
+        }
+        if (!empty($request->input('en_from_letter_date'))) {
+            $q->whereDate('en_letter_date', '>=', $request->input('en_from_letter_date'));
+        }
+        if (!empty($request->input('en_to_letter_date'))) {
+            $q->whereDate('en_letter_date', '<=', $request->input('en_to_letter_date'));
         }
 
-        if (!empty($request->input('ward_no'))) {
-            $q->whereIn('ward_no', $request->input('ward_no'));
+        if (!empty($request->input('dispatch_no'))) {
+            $q->where('dispatch_no', $request->input('dispatch_no'));
         }
-
-        if (!empty($request->input('plan_sub_area_id'))) {
-            $q->whereIn('plan_area_id', $request->input('plan_sub_area_id'));
-        }
-
-        if (!empty($request->input('plan_sub_level_id'))) {
-            $q->whereIn('plan_level_id', $request->input('plan_sub_level_id'));
-        }
-
-        if (!empty($request->input('budget_sub_head_id'))) {
-            $q->whereIn('budget_head_id', $request->input('budget_sub_head_id'));
-        }
-
-        if (!empty($request->input('project_status'))) {
-            $q->where('project_status', $request->input('project_status'));
+        if (!empty($request->input('letter_number'))) {
+            $q->where('letter_number', $request->input('letter_number'));
         }
     }
 }

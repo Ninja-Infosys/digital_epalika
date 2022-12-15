@@ -23,6 +23,7 @@ class Dispatch extends Model
 
     protected $dates = [
         'en_dispatch_date',
+        'en_letter_date',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -35,6 +36,7 @@ class Dispatch extends Model
         'en_dispatch_date',
         'letter_number',
         'letter_date',
+        'en_letter_date',
         'subject',
         'receiver_name',
         'receiver_address',

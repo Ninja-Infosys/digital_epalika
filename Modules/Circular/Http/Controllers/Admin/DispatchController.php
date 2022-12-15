@@ -38,7 +38,9 @@ class DispatchController extends Controller
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
             ]);
 
-            $this->uploadDocuments($request, $dispatch);
+            if ($request->hasFile('documents')){
+                $this->uploadDocuments($request, $dispatch);
+            }
         });
 
         toast('चलानी सफलतापूर्वक थपियो', 'success');

@@ -46,15 +46,15 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-2">
                                                 <x-date-input-component
-                                                    nameNe="dispatch_from_date" labelNe="मिति देखि"
-                                                    nameEn="en_dispatch_from_date" labelEn="From Date"
+                                                    nameNe="from_dispatch_date" labelNe="मिति देखि"
+                                                    nameEn="en_from_dispatch_date" labelEn="From Date"
                                                     :get-today-date="false"
                                                 />
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <x-date-input-component
-                                                    nameNe="dispatch_from_date" labelNe="मिति सम्म"
-                                                    nameEn="en_dispatch_to_date" labelEn="To Date"
+                                                    nameNe="to_dispatch_date" labelNe="मिति सम्म"
+                                                    nameEn="en_to_dispatch_date" labelEn="To Date"
                                                     :get-today-date="false"
                                                 />
                                             </div>
@@ -71,15 +71,15 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-2">
                                                 <x-date-input-component
-                                                    nameNe="from_date" labelNe="मिति देखि"
-                                                    nameEn="en_from_date" labelEn="From Date"
+                                                    nameNe="from_letter_date" labelNe="मिति देखि"
+                                                    nameEn="en_from_letter_date" labelEn="From Date"
                                                     :get-today-date="false"
                                                 />
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <x-date-input-component
-                                                    nameNe="to_date" labelNe="मिति सम्म"
-                                                    nameEn="en_to_date" labelEn="To Date"
+                                                    nameNe="to_letter_date" labelNe="मिति सम्म"
+                                                    nameEn="en_to_letter_date" labelEn="To Date"
                                                     :get-today-date="false"
                                                 />
                                             </div>
@@ -87,7 +87,7 @@
                                     </fieldset>
                                 </div>
 
-                                <div class="col-md-3 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
                                     <select name="fiscal_year[]" multiple data-toggle="select2"
                                             id="fiscal_year" class="form-control">
@@ -96,6 +96,15 @@
                                             <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+
+                                <div class="col-md-4 mb-2">
+                                    <label for="dispatch_no">चलानी नं.</label>
+                                    <input type="text" id="dispatch_no" name="dispatch_no" class="form-control" placeholder="चलानी नं.">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="letter_number">पत्र संख्या </label>
+                                    <input type="text" id="letter_number" name="letter_number" class="form-control" placeholder="पत्र संख्या">
                                 </div>
                             </div>
                             <fieldset class="border p-2 mb-2">
@@ -126,7 +135,7 @@
                             </fieldset>
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
-                                Filter
+                                पेश गर्नुहोस्
                             </button>
 
                         </form>
@@ -141,7 +150,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> योजना रिपोर्ट</h4>
+                        <h4 class="header-title">चलानी रिपोर्ट</h4>
                         <a href="" class="btn btn-primary btn-sm">
                             <i class="fa fa-print"></i>
                             Print
@@ -181,12 +190,12 @@
                         success: function (resp) {
                             $("#submitFormBtn").prop('disabled', false);
                             $("#collapseFilterForm").collapse('hide')
-                            $("#submitFormBtn").html("Filter");
+                            $("#submitFormBtn").html("पेश गर्नुहोस्");
                             $('#report-table').html(resp.view)
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             $('#submitFormBtn').prop('disabled', false)
-                            $("#submitFormBtn").html("Filter");
+                            $("#submitFormBtn").html("पेश गर्नुहोस्");
                             toastMessage('error', XMLHttpRequest.responseJSON.message)
                         }
                     });

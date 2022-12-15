@@ -38,9 +38,11 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>चलानी न.</th>
+                                <th>चलानी नं.</th>
                                 <th>पाउने कार्यालयको नाम</th>
                                 <th>चलानी मिति</th>
+                                <th>पत्र संख्या</th>
+                                <th>पत्रको मिति</th>
                                 <th>बिषय</th>
                                 <th>#</th>
                             </tr>
@@ -52,17 +54,20 @@
                                     <td>{{$dispatch->dispatch_no}}</td>
                                     <td>{{$dispatch->receiver_name}}</td>
                                     <td>{{$dispatch->dispatch_date}}</td>
+                                    <td>{{$dispatch->letter_number}}</td>
+                                    <td>{{$dispatch->letter_date}}</td>
                                     <td>{{$dispatch->subject}}</td>
                                     <td>
                                         @can('dispatch_access')
-                                            <a href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-eye"></i> थप हेर्नुहोस्
+                                            <a href="{{route('admin.circular.dispatch.show', $dispatch)}}" class="btn btn-xs btn-outline-primary" title="थप हेर्नुहोस्">
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('dispatch_edit')
                                             <a href="{{route('admin.circular.dispatch.edit',$dispatch)}}"
+                                               title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('dispatch_delete')
@@ -70,8 +75,8 @@
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                         @endcan
@@ -79,7 +84,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
