@@ -4,6 +4,7 @@ use Modules\Circular\Http\Controllers\Admin\DashboardController;
 use Modules\Circular\Http\Controllers\Admin\DispatchController;
 use Modules\Circular\Http\Controllers\Admin\DispatchReportController;
 use Modules\Circular\Http\Controllers\Admin\RegistrationController;
+use Modules\Circular\Http\Controllers\Admin\RegistrationReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 //report
@@ -20,6 +21,11 @@ Route::resource('dispatch', DispatchController::class);
 
 //dispatch report
 Route::controller(DispatchReportController::class)->prefix('report/dispatch')->as('report.dispatch.')->group(function (){
+    Route::get('/','index')->name('index');
+    Route::post('report-data','report')->name('report-data');
+});
+//registration report
+Route::controller(RegistrationReportController::class)->prefix('report/registration')->as('report.registration.')->group(function (){
     Route::get('/','index')->name('index');
     Route::post('report-data','report')->name('report-data');
 });

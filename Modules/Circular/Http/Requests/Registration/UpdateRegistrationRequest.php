@@ -27,7 +27,7 @@ class UpdateRegistrationRequest extends FormRequest
             'receiver_name' => ['required'],
             'phone' => ['nullable'],
             'signature_image' => ['nullable', 'image'],
-            'date' => ['nullable'],
+            'date' => ['required'],
             'remarks' => ['nullable'],
             'documents' => ['nullable', 'array'],
             'documents.*' => ['mimes:jpg,png,jpeg,pdf'],
