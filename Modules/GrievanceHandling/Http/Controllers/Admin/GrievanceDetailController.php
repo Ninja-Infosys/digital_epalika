@@ -84,12 +84,15 @@ class GrievanceDetailController extends Controller
                 'user_id' => auth()->id(),
             ]);
 
-            foreach ($request->file('files') as $file) {
-                $data->files()->create([
-                    'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-                    'extension' => $file->getClientOriginalExtension(),
-                    'file' => $file->store('grievanceDocument/documents', 'public'),
-                ]);
+            if($request->hasFile('files'))
+            {
+                foreach ($request->file('files') as $file) {
+                    $data->files()->create([
+                        'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                        'extension' => $file->getClientOriginalExtension(),
+                        'file' => $file->store('grievanceDocument/documents', 'public'),
+                    ]);
+                }
             }
         });
 

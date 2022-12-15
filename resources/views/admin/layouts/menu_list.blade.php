@@ -73,7 +73,7 @@
                 </a>
             </div>
             @endif
-            @if(Route::has('admin.admin.dashboard'))
+            @if(Route::has('emap.admin.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('emap.admin.dashboard')}}">
                     <div class="p-2 text-center">
