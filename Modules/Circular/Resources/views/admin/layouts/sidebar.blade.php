@@ -35,7 +35,7 @@
         <ul class="nav-second-level">
             @can('registration_access')
                 <li class="{{request()->is('admin/circular/report/registration') ? 'active' : ''}}">
-                    <a href="{{route('admin.circular.registration.report')}}">
+                    <a href="{{route('admin.circular.report.registration.index')}}">
                         <span> दर्ता रिपोर्ट   </span>
                     </a>
                 </li>

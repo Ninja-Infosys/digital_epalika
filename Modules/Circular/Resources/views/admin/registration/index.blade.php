@@ -43,6 +43,7 @@
                                 <th>पत्र संख्या</th>
                                 <th>पठाउने कार्यालयको नाम</th>
                                 <th>बुझिलिनेको नाम</th>
+                                <th>बिषय</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -55,30 +56,37 @@
                                     <td>{{$registration->letter_number}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
+                                    <td>{{$registration->subject}}</td>
                                     <td>
                                         <a href="{{route('admin.circular.registration.show',$registration)}}"
                                            title="थप हेर्नुहोस्"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <a href="{{route('admin.circular.registration.edit',$registration)}}"
-                                           title="सम्पादन गर्नुहोस्"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <form action="{{route('admin.circular.registration.destroy',$registration)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
+                                        @can('registration_edit')
+                                            <a href="{{route('admin.circular.registration.edit',$registration)}}"
+                                               title="सम्पादन गर्नुहोस्"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('registration_delete')
+                                            <form
+                                                action="{{route('admin.circular.registration.destroy',$registration)}}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-xs btn-outline-danger show_confirm"
+                                                        title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

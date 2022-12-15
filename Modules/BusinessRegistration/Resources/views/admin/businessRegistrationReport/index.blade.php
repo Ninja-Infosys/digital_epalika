@@ -6,12 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.dashboard') }}">
+                            <a href="{{ route('admin.businessRegistration.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href=""> व्यवसाय दर्ता रिपोर्ट </a>
                         </li>
                         <li class="breadcrumb-item active"> व्यवसाय दर्ता रिपोर्ट</li>
                     </ol>
@@ -33,8 +30,8 @@
                         </button>
                     </div>
                 </div>
-                <div class="collapse show" id="collapseFilterForm" style="">
-                    <div class="card-body">
+                <div class="card-body">
+                    <div class="collapse show mb-2" id="collapseFilterForm">
                         <form id="report-filter-form" method="POST">
                             <fieldset class="border p-2 mb-2">
                                 <legend class="font-16 text-info">
@@ -297,56 +294,38 @@
                             </div>
 
 
-{{--                            <fieldset class="border p-2 mb-2">--}}
-{{--                                <legend class="font-16 text-info">--}}
-{{--                                    <strong>--}}
-{{--                                        Columns--}}
-{{--                                    </strong>--}}
-{{--                                </legend>--}}
-{{--                                <div class="row">--}}
-{{--                                    @foreach($columnData as $columns)--}}
-{{--                                        <div class="col-md-6 mb-2">--}}
-{{--                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>--}}
-{{--                                            <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"--}}
-{{--                                                    class="form-control">--}}
-{{--                                                <option disabled>--- छान्नुहोस् ---</option>--}}
-{{--                                                @foreach($columns['columns'] as $column)--}}
-{{--                                                    <option--}}
-{{--                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
+                            {{--                            <fieldset class="border p-2 mb-2">--}}
+                            {{--                                <legend class="font-16 text-info">--}}
+                            {{--                                    <strong>--}}
+                            {{--                                        Columns--}}
+                            {{--                                    </strong>--}}
+                            {{--                                </legend>--}}
+                            {{--                                <div class="row">--}}
+                            {{--                                    @foreach($columnData as $columns)--}}
+                            {{--                                        <div class="col-md-6 mb-2">--}}
+                            {{--                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>--}}
+                            {{--                                            <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"--}}
+                            {{--                                                    class="form-control">--}}
+                            {{--                                                <option disabled>--- छान्नुहोस् ---</option>--}}
+                            {{--                                                @foreach($columns['columns'] as $column)--}}
+                            {{--                                                    <option--}}
+                            {{--                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>--}}
+                            {{--                                                @endforeach--}}
+                            {{--                                            </select>--}}
 
-{{--                                        </div>--}}
-{{--                                    @endforeach--}}
+                            {{--                                        </div>--}}
+                            {{--                                    @endforeach--}}
 
-{{--                                </div>--}}
-{{--                            </fieldset>--}}
+                            {{--                                </div>--}}
+                            {{--                            </fieldset>--}}
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
-                                Filter
+                                पेश गर्नुहोस्
                             </button>
 
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> व्यवसाय दर्ता रिपोर्ट</h4>
-                        <a href="" class="btn btn-primary btn-sm">
-                            <i class="fa fa-print"></i>
-                            Print
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body" id="report-table">
-
+                    <div id="report-table"></div>
                 </div>
             </div>
         </div>
@@ -378,12 +357,12 @@
                         success:function(resp){
                             $("#submitFormBtn").prop('disabled',false);
                             $("#collapseFilterForm").collapse('hide')
-                            $("#submitFormBtn").html("Filter");
+                            $("#submitFormBtn").html("पेश गर्नुहोस्");
                             $('#report-table').html(resp.view)
                         },
                         error:function(XMLHttpRequest, textStatus, errorThrown){
                             $('#submitFormBtn').prop('disabled',false)
-                            $("#submitFormBtn").html("Filter");
+                            $("#submitFormBtn").html("पेश गर्नुहोस्");
                             toastMessage('error',XMLHttpRequest.responseJSON.message)
                         }
                     });

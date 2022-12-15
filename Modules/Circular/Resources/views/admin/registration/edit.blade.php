@@ -6,17 +6,17 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.circular.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.registration.index')}}">दर्ता प्रणाली </a>
+                            <a href="{{route('admin.circular.registration.index')}}">दर्ता पत्र </a>
                         </li>
                         <li class="breadcrumb-item active"> दर्ता पत्र सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">दर्ता प्रणाली</h4>
+                <h4 class="page-title">दर्ता पत्र</h4>
             </div>
         </div>
     </div>
@@ -62,6 +62,7 @@
                                         nameEn="en_registration_date" labelEn="Registration Date"
                                         :getTodayDate="false"
                                         :editDateNe="$registration->registration_date"
+                                        :editDateEn="$registration->en_registration_date"
                                     />
                                 </div>
                                 <div class="col-md-6 mb-2">
@@ -84,6 +85,7 @@
                                         nameEn="en_letter_date" labelEn="Letter Date"
                                         :getTodayDate="false"
                                         :editDateNe="$registration->letter_date"
+                                        :editDateEn="$registration->en_letter_date"
                                     />
                                 </div>
                                 <div class="col-md-6 mb-2">
@@ -175,7 +177,7 @@
                                 <div class="col-md-6 mb-2">
                                     <x-date-input-component
                                         nameNe="date" labelNe="मिति"
-                                        nameEn="date" labelEn="Date"
+                                        nameEn="en_date" labelEn="Date"
                                         :getTodayDate="false"
                                         :editDateNe="$registration->date"
                                     />
@@ -213,16 +215,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".nepali_date").nepaliDatePicker({
-                    ndpYear: true,
-                    ndpMonth: true,
-                    ndpYear: true
-                });
-            });
-        </script>
-    @endpush
 @endsection

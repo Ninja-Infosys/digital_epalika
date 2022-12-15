@@ -22,8 +22,6 @@ class Dispatch extends Model
     use GetAllColumns;
 
     protected $dates = [
-        'en_dispatch_date',
-        'en_letter_date',
         'created_at',
         'updated_at',
         'deleted_at',
