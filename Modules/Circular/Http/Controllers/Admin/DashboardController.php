@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
+use Illuminate\Support\Carbon;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 
@@ -33,15 +34,15 @@ class DashboardController extends Controller
         return view(
             'circular::admin.dashboard',
             compact(
-            'total_registrations',
-            'yearly_registrations',
-            'monthly_registrations',
-            'total_dispatches',
-            'yearly_dispatches',
-            'monthly_dispatches',
-            'registrationChartData',
-            'registrationYearlyChartData'
-        )
+                'total_registrations',
+                'yearly_registrations',
+                'monthly_registrations',
+                'total_dispatches',
+                'yearly_dispatches',
+                'monthly_dispatches',
+                'registrationChartData',
+                'registrationYearlyChartData'
+            )
         );
     }
 
@@ -70,21 +71,35 @@ class DashboardController extends Controller
     }
 
     /**
-     * @param  OfficeSetting  $officeSetting
+     * @param OfficeSetting $officeSetting
      * @return array
      */
     public function getCurrentFyMonthlyRegistrationAndDispatch(OfficeSetting $officeSetting): array
     {
         $monthlyRegistrations = [];
+        $registrations = Registration::where('fiscal_year_id', $officeSetting->fiscal_year_id)
+            ->get()
+            ->map(function ($registration) {
+                return [
+                    'month' => explode('-', $registration->registration_date)[1] ?? ''
+                ];
+            });
 
-        for ($i = 1; $i <= 12; $i++) {
-            $monthlyRegistrations[] = Registration::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('registration_date', $i)->count();
+        foreach ($this->month_name as $key => $month) {
+            $monthlyRegistrations[] = $registrations->where('month', ($key + 1))->count();
         }
 
         $monthlyDispatches = [];
+        $dispatches=Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)
+            ->get()
+            ->map(function ($dispatch){
+                return [
+                    'month' => explode('-', $dispatch->dispatch_date)[1] ?? ''
+                ];
+            });
 
         foreach ($this->month_name as $key => $month) {
-            $monthlyDispatches[] = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('dispatch_date', ($key + 1))->count();
+            $monthlyDispatches[] = $dispatches->where('month', ($key + 1))->count();;
         }
 
         return [
