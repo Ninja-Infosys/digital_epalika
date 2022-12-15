@@ -25,13 +25,15 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">योजना रिपोर्ट</h4>
 
-                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false" aria-controls="collapseExample">
+                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                aria-controls="collapseExample">
                             <i class="fa fa-filter"></i>
                         </button>
                     </div>
                 </div>
-                <div class="collapse show" id="collapseFilterForm" style="">
-                    <div class="card-body">
+                <div class="card-body">
+                    <div class="collapse show mb-2" id="collapseFilterForm" style="">
                         <form id="report-filter-form" method="POST">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
@@ -129,7 +131,8 @@
                                             id="budget_source_id" class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($budgetSources as $budgetSource)
-                                            <option value="{{$budgetSource->id}}">{{$budgetSource->source_name}}</option>
+                                            <option
+                                                value="{{$budgetSource->id}}">{{$budgetSource->source_name}}</option>
                                         @endforeach
                                     </select>
 
@@ -140,62 +143,45 @@
                                             id="project_status" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach(\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
-                                            <option value="{{$projectStatus->value}}">{{$projectStatus->label()}}</option>
+                                            <option
+                                                value="{{$projectStatus->value}}">{{$projectStatus->label()}}</option>
                                         @endforeach
                                     </select>
 
                                 </div>
                             </div>
-{{--                            <fieldset class="border p-2 mb-2">--}}
-{{--                                <legend class="font-16 text-info">--}}
-{{--                                    <strong>--}}
-{{--                                        Columns--}}
-{{--                                    </strong>--}}
-{{--                                </legend>--}}
-{{--                                <div class="row">--}}
-{{--                                    @foreach($columnData as $columns)--}}
-{{--                                        <div class="col-md-3 mb-2">--}}
-{{--                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>--}}
-{{--                                            <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"--}}
-{{--                                                    class="form-control">--}}
-{{--                                                <option disabled>--- छान्नुहोस् ---</option>--}}
-{{--                                                @foreach($columns['columns'] as $column)--}}
-{{--                                                    <option--}}
-{{--                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
+                            {{--                            <fieldset class="border p-2 mb-2">--}}
+                            {{--                                <legend class="font-16 text-info">--}}
+                            {{--                                    <strong>--}}
+                            {{--                                        Columns--}}
+                            {{--                                    </strong>--}}
+                            {{--                                </legend>--}}
+                            {{--                                <div class="row">--}}
+                            {{--                                    @foreach($columnData as $columns)--}}
+                            {{--                                        <div class="col-md-3 mb-2">--}}
+                            {{--                                            <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>--}}
+                            {{--                                            <select name="columns[{{$columns['table_name']}}][]" id="column.{{$columns['table_name']}}" multiple data-toggle="select2"--}}
+                            {{--                                                    class="form-control">--}}
+                            {{--                                                <option disabled>--- छान्नुहोस् ---</option>--}}
+                            {{--                                                @foreach($columns['columns'] as $column)--}}
+                            {{--                                                    <option--}}
+                            {{--                                                        value="{{$column['column'] ?? ''}}">{{$column['name'] ?? ''}}</option>--}}
+                            {{--                                                @endforeach--}}
+                            {{--                                            </select>--}}
 
-{{--                                        </div>--}}
-{{--                                    @endforeach--}}
+                            {{--                                        </div>--}}
+                            {{--                                    @endforeach--}}
 
-{{--                                </div>--}}
-{{--                            </fieldset>--}}
+                            {{--                                </div>--}}
+                            {{--                            </fieldset>--}}
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
-                                Filter
+                                पेश गर्नुहोस्
                             </button>
 
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> योजना रिपोर्ट</h4>
-                        <a href="" class="btn btn-primary btn-sm">
-                            <i class="fa fa-print"></i>
-                            Print
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body" id="report-table">
-
+                    <div id="report-table"></div>
                 </div>
             </div>
         </div>
@@ -204,7 +190,7 @@
     @push('scripts')
         <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 // x-csrf protection
                 $.ajaxSetup({
                     headers: {
@@ -212,104 +198,104 @@
                     }
                 });
 
-                $(document.body).delegate('#report-filter-form','submit',function (e){
+                $(document.body).delegate('#report-filter-form', 'submit', function (e) {
                     e.preventDefault()
                     $.ajax({
-                        type:"post",
-                        url:"{{route('admin.plan.report.report-data')}}",
-                        data:new FormData(this),
+                        type: "post",
+                        url: "{{route('admin.plan.report.report-data')}}",
+                        data: new FormData(this),
                         processData: false,
                         contentType: false,
-                        beforeSend:function(){
-                            $("#submitFormBtn").prop('disabled',true);
+                        beforeSend: function () {
+                            $("#submitFormBtn").prop('disabled', true);
                             $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
                         },
-                        success:function(resp){
-                            $("#submitFormBtn").prop('disabled',false);
+                        success: function (resp) {
+                            $("#submitFormBtn").prop('disabled', false);
                             $("#collapseFilterForm").collapse('hide')
-                            $("#submitFormBtn").html("Filter");
+                            $("#submitFormBtn").html("पेश गर्नुहोस्");
                             $('#report-table').html(resp.view)
                         },
-                        error:function(XMLHttpRequest, textStatus, errorThrown){
-                            $('#submitFormBtn').prop('disabled',false)
-                            $("#submitFormBtn").html("Filter");
-                            toastMessage('error',XMLHttpRequest.responseJSON.message)
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            $('#submitFormBtn').prop('disabled', false)
+                            $("#submitFormBtn").html("पेश गर्नुहोस्");
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
                         }
                     });
                 })
 
-                $(document.body).delegate('#plan_area_id','change',function (e){
-                    let plan_area_id=$('#plan_area_id').val()
+                $(document.body).delegate('#plan_area_id', 'change', function (e) {
+                    let plan_area_id = $('#plan_area_id').val()
                     $('#plan_sub_area_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if(!plan_area_id.length){
+                    if (!plan_area_id.length) {
                         return false;
                     }
                     $.ajax({
-                        type:'get',
-                        data:{plan_area_id:plan_area_id},
-                        url:"{{route('admin.plan.planSubArea')}}",
-                        success:function(resp){
-                            $(resp.data).each(function (key,data){
-                                $('#plan_sub_area_id').append("<option value="+data.id+">"+data.area_name+"</option>")
+                        type: 'get',
+                        data: {plan_area_id: plan_area_id},
+                        url: "{{route('admin.plan.planSubArea')}}",
+                        success: function (resp) {
+                            $(resp.data).each(function (key, data) {
+                                $('#plan_sub_area_id').append("<option value=" + data.id + ">" + data.area_name + "</option>")
                             })
                         },
-                        error:function(XMLHttpRequest, textStatus, errorThrown){
-                            toastMessage('error',XMLHttpRequest.responseJSON.message)
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
                         }
                     })
                 })
 
-                $(document.body).delegate('#plan_level_id','change',function (e){
-                    let plan_level_id=$('#plan_level_id').val()
+                $(document.body).delegate('#plan_level_id', 'change', function (e) {
+                    let plan_level_id = $('#plan_level_id').val()
                     $('#plan_sub_level_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if(!plan_level_id.length){
+                    if (!plan_level_id.length) {
                         return false;
                     }
                     $.ajax({
-                        type:'get',
-                        data:{plan_level_id:plan_level_id},
-                        url:"{{route('admin.plan.planSubLevel')}}",
-                        success:function(resp){
-                            $(resp.data).each(function (key,data){
-                                $('#plan_sub_level_id').append("<option value="+data.id+">"+data.level_name+"</option>")
+                        type: 'get',
+                        data: {plan_level_id: plan_level_id},
+                        url: "{{route('admin.plan.planSubLevel')}}",
+                        success: function (resp) {
+                            $(resp.data).each(function (key, data) {
+                                $('#plan_sub_level_id').append("<option value=" + data.id + ">" + data.level_name + "</option>")
                             })
                         },
-                        error:function(XMLHttpRequest, textStatus, errorThrown){
-                            toastMessage('error',XMLHttpRequest.responseJSON.message)
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
                         }
                     })
                 })
 
-                $(document.body).delegate('#budget_head_id','change',function (e){
-                    let budget_head_id=$('#budget_head_id').val()
+                $(document.body).delegate('#budget_head_id', 'change', function (e) {
+                    let budget_head_id = $('#budget_head_id').val()
                     $('#budget_sub_head_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if(!budget_head_id.length){
+                    if (!budget_head_id.length) {
                         return false;
                     }
                     $.ajax({
-                        type:'get',
-                        data:{budget_head_id:budget_head_id},
-                        url:"{{route('admin.plan.budgetSubHead')}}",
-                        success:function(resp){
-                            $(resp.data).each(function (key,data){
-                                $('#budget_sub_head_id').append("<option value="+data.id+">"+data.title+"</option>")
+                        type: 'get',
+                        data: {budget_head_id: budget_head_id},
+                        url: "{{route('admin.plan.budgetSubHead')}}",
+                        success: function (resp) {
+                            $(resp.data).each(function (key, data) {
+                                $('#budget_sub_head_id').append("<option value=" + data.id + ">" + data.title + "</option>")
                             })
                         },
-                        error:function(XMLHttpRequest, textStatus, errorThrown){
-                            toastMessage('error',XMLHttpRequest.responseJSON.message)
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
                         }
                     })
                 })
 
-                function toastMessage(type,title){
+                function toastMessage(type, title) {
                     swal.fire({
                         title: title,
-                        toast:true,
-                        position:'top-right',
-                        showConfirmButton:false,
-                        width:450,
-                        timer:3000,
-                        timerProgressBar:true,
+                        toast: true,
+                        position: 'top-right',
+                        showConfirmButton: false,
+                        width: 450,
+                        timer: 3000,
+                        timerProgressBar: true,
                         icon: type,
                     });
                 }
