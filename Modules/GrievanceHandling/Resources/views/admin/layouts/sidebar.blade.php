@@ -8,7 +8,7 @@
     <li class="{{request()->is('admin/grievanceHandling/grievanceDetail') ? 'active' : ''}}">
         <a href=" {{route('admin.grievanceHandling.grievanceDetail.index')}}">
             <i class="fa fa-clipboard-list"></i>
-            <span> गुनासो बिबरण </span>
+            <span>प्राप्त गुनासोहरु</span>
         </a>
     </li>
 @endcan
