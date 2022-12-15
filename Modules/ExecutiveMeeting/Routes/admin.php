@@ -6,7 +6,7 @@ use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingDecisionController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MeetingEventController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\MunicipalCommitteeController;
 use Modules\ExecutiveMeeting\Http\Controllers\Admin\WardCommitteeController;
-use Modules\ExecutiveMeeting\Http\Controllers\CalenderController;
+use Modules\ExecutiveMeeting\Http\Controllers\Admin\CalenderController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 

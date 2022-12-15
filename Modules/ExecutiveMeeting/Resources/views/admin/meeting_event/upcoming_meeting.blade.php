@@ -25,9 +25,9 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> आगामी बैठकहरू</h4>
-                        @can('executiveCommittee_create')
-                            <a href="{{route('admin.executiveMeeting.meetingEvent.create',$event_for)}}"
-                               class="btn btn-sm btn-outline-primary">
+                        @can($event_for . 'MeetingEvent_create')
+                            <a href="{{ route('admin.executiveMeeting.meetingEvent.create', $event_for) }}"
+                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
                         @endcan
@@ -58,18 +58,20 @@
                                     <td>{{$meetingEvent->end_date}}({{$meetingEvent->en_end_date?->toDateString()}})</td>
 
                                     <td width="90">
-                                        @can('executiveCommittee_edit')
-                                            <a href="{{route('admin.executiveMeeting.meetingEvent.edit',[$event_for,$meetingEvent])}}"
-                                               class="btn btn-xs btn-outline-primary">
+                                        @can($event_for . 'MeetingEvent_edit')
+                                            <a href="{{ route('admin.executiveMeeting.meetingEvent.edit', [$event_for, $meetingEvent]) }}"
+                                                title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('executiveCommittee_delete')
-                                            <form action="{{route('admin.executiveMeeting.meetingEvent.destroy',[$event_for,$meetingEvent])}}"
-                                                  method="post">
+                                        @can($event_for . 'MeetingEvent_delete')
+                                            <form
+                                                action="{{ route('admin.executiveMeeting.meetingEvent.destroy', [$event_for, $meetingEvent]) }}"
+                                                method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button type="submit" class="btn btn-xs btn-outline-danger show_confirm"
+                                                    title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

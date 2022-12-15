@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\ExecutiveMeeting\Http\Controllers;
+namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
