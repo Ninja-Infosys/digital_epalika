@@ -81,18 +81,13 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="letter_date" class="form-label">पत्रको मिति </label>
-                                    <input
-                                        type="text"
-                                        name="letter_date"
-                                        value="{{old('letter_date', $dispatch->letter_date)}}"
-                                        class="form-control nepali_date @error('letter_date') is-invalid @enderror"
-                                        id="letter_date"
-                                        placeholder="पत्रको मिति "
+                                    <x-date-input-component
+                                        nameNe="letter_date" labelNe="पत्रको मिति *"
+                                        nameEn="en_letter_date" labelEn="Letter Date"
+                                        :get-today-date="false"
+                                        :editDateNe="$dispatch->letter_date"
+                                        :editDateEn="$dispatch->en_letter_date"
                                     />
-                                    @error('letter_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="receiver_name" class="form-label">पाउने कार्यालयको नाम </label>

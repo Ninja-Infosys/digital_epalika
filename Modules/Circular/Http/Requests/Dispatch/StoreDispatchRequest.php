@@ -21,13 +21,14 @@ class StoreDispatchRequest extends FormRequest
             'en_dispatch_date' => ['nullable', 'date'],
             'letter_number' => ['required'],
             'letter_date' => ['required'],
+            'en_letter_date' => ['nullable', 'date'],
             'subject' => ['required', 'max:255'],
             'receiver_name' => ['required', 'max:255'],
             'receiver_address' => ['required', 'max:255'],
             'receiver_contact' => ['required'],
             'receiver_signature' => ['nullable', 'image'],
             'remarks' => ['nullable'],
-            'documents' => ['required', 'array'],
+            'documents' => ['nullable', 'array'],
             'documents.*' => ['mimes:jpg,jpeg,png,pdf'],
         ];
     }

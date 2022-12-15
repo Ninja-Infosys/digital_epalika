@@ -1,11 +1,10 @@
 <?php
 
-namespace Modules\Circular\Http\Controllers;
+namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Http\Requests\Dispatch\StoreDispatchRequest;
@@ -39,7 +38,9 @@ class DispatchController extends Controller
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
             ]);
 
-            $this->uploadDocuments($request, $dispatch);
+            if ($request->hasFile('documents')){
+                $this->uploadDocuments($request, $dispatch);
+            }
         });
 
         toast('चलानी सफलतापूर्वक थपियो', 'success');
@@ -99,11 +100,6 @@ class DispatchController extends Controller
         toast('चलानी सफलतापूर्वक मेटियो', 'success');
 
         return back();
-    }
-
-    public function dispatchReport()
-    {
-        return view('circular::admin.dispatch.report');
     }
 
     private function uploadDocuments($request, $dispatch)

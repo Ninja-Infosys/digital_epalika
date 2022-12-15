@@ -5,6 +5,7 @@ namespace Modules\Circular\Entities;
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,9 +19,11 @@ class Dispatch extends Model
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'en_dispatch_date',
+        'en_letter_date',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -33,6 +36,7 @@ class Dispatch extends Model
         'en_dispatch_date',
         'letter_number',
         'letter_date',
+        'en_letter_date',
         'subject',
         'receiver_name',
         'receiver_address',

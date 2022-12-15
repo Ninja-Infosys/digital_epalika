@@ -21,6 +21,7 @@ class Registration extends Model
 
     protected $dates = [
         'en_registration_date',
+        'en_letter_date',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -33,6 +34,7 @@ class Registration extends Model
         'en_registration_date',
         'letter_number',
         'letter_date',
+        'en_letter_date',
         'sender_name',
         'subject',
         'receiver_name',

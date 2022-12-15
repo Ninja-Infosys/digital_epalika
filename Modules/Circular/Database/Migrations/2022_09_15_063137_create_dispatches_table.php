@@ -10,11 +10,12 @@ return new class () extends Migration {
         Schema::create('dispatches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->constrained()->cascadeOnDelete();
-            $table->string('dispatch_no')->comment('प्रेषण नम्बर');
-            $table->string('dispatch_date')->nullable()->comment('पठाउने मिति');
-            $table->date('en_dispatch_date')->nullable()->comment('प्रेषण मिति अंग्रेजी');
-            $table->string('letter_number')->nullable()->comment('पत्र नं');
+            $table->string('dispatch_no')->comment('चलानी नं.');
+            $table->string('dispatch_date')->nullable()->comment('चलानी मिति');
+            $table->date('en_dispatch_date')->nullable()->comment('चलानी मिति अंग्रेजी');
+            $table->string('letter_number')->nullable()->comment('पत्र संख्या');
             $table->string('letter_date')->nullable()->comment('पत्र मिति');
+            $table->date('en_letter_date')->nullable()->comment('पत्र मिति अंग्रेजी');
             $table->string('subject')->nullable()->comment('विषय');
             $table->string('receiver_name')->nullable()->comment('प्राप्तकर्ता नाम');
             $table->string('receiver_address')->nullable()->comment('प्राप्तकर्ता ठेगाना');

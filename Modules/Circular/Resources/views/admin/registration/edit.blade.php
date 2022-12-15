@@ -173,18 +173,12 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label">मिति </label>
-                                    <input
-                                        type="text"
-                                        name="date"
-                                        value="{{old('date',$registration->date)}}"
-                                        class="form-control @error('date') is-invalid @enderror"
-                                        id="date"
-                                        placeholder="मिति"
+                                    <x-date-input-component
+                                        nameNe="date" labelNe="मिति"
+                                        nameEn="date" labelEn="Date"
+                                        :getTodayDate="false"
+                                        :editDateNe="$registration->date"
                                     />
-                                    @error('date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                             </div>
                         </fieldset>

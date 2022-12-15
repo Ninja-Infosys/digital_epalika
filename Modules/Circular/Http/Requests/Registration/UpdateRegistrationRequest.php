@@ -21,6 +21,7 @@ class UpdateRegistrationRequest extends FormRequest
             'en_registration_date' => ['nullable', 'date'],
             'letter_number' => ['nullable'],
             'letter_date' => ['required'],
+            'en_letter_date' => ['nullable','date'],
             'sender_name' => ['required'],
             'subject' => ['required'],
             'receiver_name' => ['required'],

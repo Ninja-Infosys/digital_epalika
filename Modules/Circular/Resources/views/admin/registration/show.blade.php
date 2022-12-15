@@ -6,12 +6,12 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.circular.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.registration.index')}}">दर्ता प्रणाली </a>
+                            <a href="{{route('admin.circular.registration.index')}}"> दर्ता पत्र </a>
                         </li>
                         <li class="breadcrumb-item active">दर्ता</li>
                     </ol>

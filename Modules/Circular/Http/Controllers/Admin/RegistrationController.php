@@ -1,11 +1,10 @@
 <?php
 
-namespace Modules\Circular\Http\Controllers;
+namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Modules\Circular\Entities\Registration;
 use Modules\Circular\Http\Requests\Registration\StoreRegistrationRequest;

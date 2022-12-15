@@ -6,17 +6,14 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.circular.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.registration.index')}}">दर्ता प्रणाली </a>
                         </li>
                         <li class="breadcrumb-item active">दर्ता</li>
                     </ol>
                 </div>
-                <h4 class="page-title">दर्ता प्रणाली</h4>
+                <h4 class="page-title">दर्ता पत्र</h4>
             </div>
         </div>
     </div>
@@ -26,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">दर्ता प्रणाली सूची</h4>
+                        <h4 class="header-title">दर्ता पत्र सूची</h4>
                         @can('registration_create')
                             <a href="{{route('admin.circular.registration.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -42,9 +39,10 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>दर्ता न.</th>
+                                <th>दर्ता मिति</th>
+                                <th>पत्र संख्या</th>
                                 <th>पठाउने कार्यालयको नाम</th>
                                 <th>बुझिलिनेको नाम</th>
-                                <th>दर्ता मिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -53,26 +51,27 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$registration->registration_no}}</td>
+                                    <td>{{$registration->registration_date}}</td>
+                                    <td>{{$registration->letter_number}}</td>
                                     <td>{{$registration->sender_name}}</td>
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>
-                                        {{$registration->registration_date}}
-                                    </td>
-                                    <td>
                                         <a href="{{route('admin.circular.registration.show',$registration)}}"
+                                           title="थप हेर्नुहोस्"
                                            class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i> थप हेर्नुहोस्
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <a href="{{route('admin.circular.registration.edit',$registration)}}"
+                                           title="सम्पादन गर्नुहोस्"
                                            class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.circular.registration.destroy',$registration)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button type="submit" class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>

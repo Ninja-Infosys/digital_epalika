@@ -7,17 +7,17 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.circular.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.circular.registration.index')}}">दर्ता प्रणाली </a>
+                            <a href="{{route('admin.circular.registration.index')}}">दर्ता पत्र सूची</a>
                         </li>
                         <li class="breadcrumb-item active">नयाँ दर्ता पत्र थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">दर्ता प्रणाली</h4>
+                <h4 class="page-title">दर्ता पत्र</h4>
             </div>
         </div>
     </div>
@@ -170,18 +170,11 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label">मिति </label>
-                                    <input
-                                        type="text"
-                                        name="date"
-                                        value="{{old('date')}}"
-                                        class="form-control @error('date') is-invalid @enderror"
-                                        id="date"
-                                        placeholder="मिति"
+                                    <x-date-input-component
+                                        nameNe="date" labelNe="मिति"
+                                        nameEn="en_date" labelEn=" Date"
+                                        :get-today-date="false"
                                     />
-                                    @error('date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                             </div>
                         </fieldset>
