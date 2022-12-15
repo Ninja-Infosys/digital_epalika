@@ -8,7 +8,7 @@
     <li class="{{request()->is('admin/executivemeeting/municipalCommittee*') ? 'active' : ''}}">
         <a href="{{route('admin.executiveMeeting.municipalCommittee.index')}}">
             <i class="fa fa-list-alt"></i>
-            <span> पालिका समिति बिवरण</span>
+            <span> पालिका कार्यसमितिहरु</span>
         </a>
     </li>
 @endcan
@@ -16,7 +16,7 @@
     <li class="{{request()->is('admin/executivemeeting/wardCommittee*') ? 'active' : ''}}">
         <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}">
             <i class="fa fa-list-alt"></i>
-            <span> वडा समिति बिवरण</span>
+            <span> वडा समितिहरु</span>
         </a>
     </li>
 @endcan
@@ -26,7 +26,7 @@
        {{request()->is('admin/executivemeeting/municipal/*') ? 'aria-expanded=true  ' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-layer-group"></i>
-        <span>पालिका समिति बैठक</span>
+        <span>कार्यपालिका बैठक</span>
         <span class="menu-arrow">
             <i class="fa fa-angle-right"></i>
         </span>
@@ -68,7 +68,7 @@
        {{request()->is('admin/executivemeeting/ward/*') ? 'aria-expanded=true  ' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-layer-group"></i>
-        <span>वडा समिति बैठक</span>
+        <span>वडासमिति बैठक</span>
         <span class="menu-arrow">
             <i class="fa fa-angle-right"></i>
         </span>

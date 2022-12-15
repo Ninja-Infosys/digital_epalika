@@ -28,7 +28,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> पालिका समिति सूची</h4>
-                        @can('executiveCommittee_create')
+                        @can('executiveWardCommittee_create')
                             <a href="{{route('admin.executiveMeeting.municipalCommittee.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ पालिका समिति थप्नुहोस्
@@ -63,13 +63,13 @@
                                     <td>{{$municipalCommittee->email}}</td>
 
                                     <td>
-                                        @can('executiveCommittee_edit')
+                                        @can('executiveWardCommittee_edit')
                                             <a href="{{route('admin.executiveMeeting.municipalCommittee.edit',$municipalCommittee)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('executiveCommittee_delete')
+                                        @can('executiveWardCommittee_delete')
                                             <form action="{{route('admin.executiveMeeting.municipalCommittee.destroy',$municipalCommittee)}}"
                                                   method="post">
                                                 @csrf
