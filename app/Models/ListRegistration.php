@@ -23,6 +23,7 @@ class ListRegistration extends Model
     ];
 
     protected $fillable = [
+        'fiscal_year_id',
         'registration_no',
         'applicant_type',
         'name',
