@@ -18,9 +18,6 @@ class MeetingEvent extends Model
     use EventObserveTrait;
 
     protected $dates = [
-        'en_start_date',
-        'en_end_date',
-        'en_recurrence_end_date',
         'created_at',
         'updated_at',
         'deleted_at',

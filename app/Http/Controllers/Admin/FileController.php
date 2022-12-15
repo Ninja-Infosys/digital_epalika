@@ -88,7 +88,7 @@ class FileController extends Controller
 
     public function downloadFile()
     {
-        if (Storage::disk('public')->exists($_GET['file_url'])) {
+        if (!empty($_GET['file_url']) && Storage::disk('public')->exists($_GET['file_url'])) {
             return Storage::disk('public')->download($_GET['file_url']);
         } else {
             toast('माफ गर्नुहोस् फाइल फेला परेन', 'error');
