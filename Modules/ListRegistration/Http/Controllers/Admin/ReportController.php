@@ -1,29 +1,16 @@
 <?php
 
-namespace Modules\Plan\Http\Controllers\Admin;
+namespace Modules\ListRegistration\Http\Controllers\Admin;
 
-use App\Models\Settings\FiscalYear;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
-use Modules\Plan\Entities\BudgetHead;
-use Modules\Plan\Entities\BudgetSource;
-use Modules\Plan\Entities\PlanArea;
-use Modules\Plan\Entities\PlanLevel;
-use Modules\Plan\Entities\Project;
 
 class ReportController extends Controller
 {
     public function index()
     {
         $fiscalYears = FiscalYear::get();
-        $columnData = $this->getColumns();
-        $planAreas = PlanArea::whereNull('plan_area_id')->get();
-        $planLevels = PlanLevel::whereNull('plan_level_id')->get();
-        $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
-        $budgetSources = BudgetSource::all();
 
         return view('plan::admin.report.index', compact('fiscalYears', 'columnData', 'planAreas', 'planLevels', 'budgetHeads', 'budgetSources'));
     }

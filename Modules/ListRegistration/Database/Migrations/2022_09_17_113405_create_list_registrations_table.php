@@ -9,6 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('list_registrations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fiscal_year_id')->comment('आर्थिक वर्ष')->constrained();
             $table->string('registration_no')->comment('दर्ता नं');
             $table->string('applicant_type')->nullable()->comment('आवेदक प्रकार');
             $table->string('name')->nullable()->comment('नाम');

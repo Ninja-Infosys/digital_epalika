@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +25,7 @@ class ListRegistration extends Model
     ];
 
     protected $fillable = [
+        'fiscal_year_id',
         'registration_no',
         'applicant_type',
         'name',
@@ -104,6 +107,11 @@ class ListRegistration extends Model
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['license_photo'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/license_photo', 'public');
         }
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 
     public function files(): MorphMany

@@ -55,7 +55,7 @@
                                         @foreach($meetingEvents as $meetingEvent)
                                             <option {{$meetingEvent->id===old('meeting_event_id',$meetingDecision->meeting_event_id) ? 'selected' : ''}}
                                                     value="{{$meetingEvent->id}}">
-                                                {{$meetingEvent->event_name}}
+                                                {{$meetingEvent->event_name}} ({{$meetingEvent->start_date}})
                                             </option>
                                         @endforeach
                                     </select>
