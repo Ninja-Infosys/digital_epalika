@@ -24,7 +24,6 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">चलानी रिपोर्ट</h4>
-
                         <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                 aria-controls="collapseExample">
@@ -32,8 +31,8 @@
                         </button>
                     </div>
                 </div>
-                <div class="collapse show" id="collapseFilterForm" style="">
-                    <div class="card-body">
+                <div class="card-body">
+                    <div class="collapse show mb-2" id="collapseFilterForm" style="">
                         <form id="report-filter-form" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
@@ -100,11 +99,13 @@
 
                                 <div class="col-md-4 mb-2">
                                     <label for="dispatch_no">चलानी नं.</label>
-                                    <input type="text" id="dispatch_no" name="dispatch_no" class="form-control" placeholder="चलानी नं.">
+                                    <input type="text" id="dispatch_no" name="dispatch_no" class="form-control"
+                                           placeholder="चलानी नं.">
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="letter_number">पत्र संख्या </label>
-                                    <input type="text" id="letter_number" name="letter_number" class="form-control" placeholder="पत्र संख्या">
+                                    <input type="text" id="letter_number" name="letter_number" class="form-control"
+                                           placeholder="पत्र संख्या">
                                 </div>
                             </div>
                             <fieldset class="border p-2 mb-2">
@@ -140,25 +141,7 @@
 
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">चलानी रिपोर्ट</h4>
-                        <a href="" class="btn btn-primary btn-sm">
-                            <i class="fa fa-print"></i>
-                            Print
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body" id="report-table">
-
+                    <div id="report-table"></div>
                 </div>
             </div>
         </div>
