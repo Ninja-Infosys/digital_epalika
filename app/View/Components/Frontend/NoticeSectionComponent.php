@@ -8,9 +8,10 @@ use Modules\HelpDesk\Entities\Service;
 class NoticeSectionComponent extends Component
 {
     public $services;
+
     public function __construct()
     {
-       $this->services = Service::with('serviceDocuments')->get();
+        $this->services = Service::with('serviceDocuments')->get() ?? [];
     }
 
     public function render()

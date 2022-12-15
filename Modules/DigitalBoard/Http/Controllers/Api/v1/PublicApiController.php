@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
+use Modules\DigitalBoard\Entities\Video;
 use Modules\DigitalBoard\Transformers\api\v1\EmployeeResource;
 use Modules\DigitalBoard\Transformers\api\v1\NewsResource;
 use Modules\DigitalBoard\Transformers\api\v1\NoticeResource;
+use Modules\DigitalBoard\Transformers\VideoResource;
 
 class PublicApiController extends Controller
 {
@@ -38,6 +40,13 @@ class PublicApiController extends Controller
         $notices = Notice::with('files')->orderByDesc('date')->notice()->showInIndex()->nullClosedAt()->get();
 
         return NoticeResource::collection($notices);
+    }
+
+    public function video(): AnonymousResourceCollection
+    {
+        $videos = Video::latest()->get();
+
+        return VideoResource::collection($videos);
     }
 
     public function showNotice(Notice $notice): NoticeResource
