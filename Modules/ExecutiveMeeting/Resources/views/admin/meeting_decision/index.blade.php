@@ -54,21 +54,22 @@
 
                                     <td>
                                         @can($meeting_for . 'MeetingDecision_edit')
-                                            <a href="{{route('admin.executiveMeeting.meetingDecision.edit',[$meeting_for,$meetingDecision])}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                        @endcan
-                                        @can($meeting_for . 'MeetingDecision_delete')
-                                            <form action="{{route('admin.executiveMeeting.meetingDecision.destroy',[$meeting_for,$meetingDecision])}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
-                                        @endcan
+                                        <a href="{{route('admin.executiveMeeting.meetingDecision.edit',[$meeting_for,$meetingDecision])}}"
+                                        title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    @endcan
+                                    @can($meeting_for . 'MeetingDecision_delete')
+                                    <form action="{{route('admin.executiveMeeting.meetingDecision.destroy',[$meeting_for,$meetingDecision])}}"
+                                    method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-xs btn-outline-danger show_confirm"
+                                                title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                     </td>
                                 </tr>
                             @empty

@@ -59,21 +59,22 @@
 
                                     <td width="90">
                                         @can($event_for . 'MeetingEvent_edit')
-                                            <a href="{{route('admin.executiveMeeting.meetingEvent.edit',[$event_for,$meetingEvent])}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        @endcan
-                                        @can($event_for . 'MeetingEvent_delete')
+                                        <a href="{{route('admin.executiveMeeting.meetingEvent.edit',[$event_for,$meetingEvent])}}"
+                                        title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    @endcan
+                                    @can($event_for . 'MeetingEvent_delete')
                                             <form action="{{route('admin.executiveMeeting.meetingEvent.destroy',[$event_for,$meetingEvent])}}"
                                                   method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        @endcan
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-xs btn-outline-danger show_confirm"
+                                                title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                     </td>
                                 </tr>
                             @empty

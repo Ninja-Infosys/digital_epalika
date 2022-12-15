@@ -12,7 +12,7 @@ class MeetingEventController extends Controller
 {
     public function index($event_for)
     {
-        $this->checkAuthorization('MeetingEvent_access');
+        $this->checkAuthorization($event_for.'MeetingEvent_access');
 
         $meetingEvents = MeetingEvent::where('event_for', $event_for)
             ->whereDate('en_start_date', '<=', today()->toDateString())
@@ -23,7 +23,7 @@ class MeetingEventController extends Controller
 
     public function upcomingMeetings($event_for)
     {
-        $this->checkAuthorization('MeetingEvent_access');
+        $this->checkAuthorization($event_for.'MeetingEvent_access');
 
         $meetingEvents = MeetingEvent::where('event_for', $event_for)
             ->whereDate('en_start_date', '>', today()->toDateString())
@@ -34,15 +34,14 @@ class MeetingEventController extends Controller
 
     public function create($event_for)
     {
-        $this->checkAuthorization('MeetingEvent_create');
+        $this->checkAuthorization($event_for.'MeetingEvent_create');
 
         return view('executivemeeting::admin.meeting_event.create', compact('event_for'));
     }
 
     public function store(StoreMeetingEventRequest $request, $event_for)
     {
-        $this->checkAuthorization('MeetingEvent_create');
-
+        $this->checkAuthorization($event_for.'MeetingEvent_create');
         MeetingEvent::create($request->validated() + [
             'event_for' => $event_for,
         ]);
@@ -54,21 +53,19 @@ class MeetingEventController extends Controller
 
     public function show($event_for, MeetingEvent $meetingEvent)
     {
-        $this->checkAuthorization('MeetingEvent_access');
-
+        $this->checkAuthorization($event_for.'MeetingEvent_access');
         return view('executivemeeting::show');
     }
 
     public function edit($event_for, MeetingEvent $meetingEvent)
     {
-        $this->checkAuthorization('MeetingEvent_edit');
-
+        $this->checkAuthorization($event_for.'MeetingEvent_edit');
         return view('executivemeeting::admin.meeting_event.edit', compact('event_for', 'meetingEvent'));
     }
 
     public function update(UpdateMeetingEventRequest $request, $event_for, MeetingEvent $meetingEvent)
     {
-        $this->checkAuthorization('MeetingEvent_edit');
+        $this->checkAuthorization($event_for.'MeetingEvent_edit');
 
         $meetingEvent->update($request->validated());
 
@@ -79,7 +76,7 @@ class MeetingEventController extends Controller
 
     public function destroy($event_for, MeetingEvent $meetingEvent)
     {
-        $this->checkAuthorization('MeetingEvent_delete');
+        $this->checkAuthorization($event_for.'MeetingEvent_delete');
 
         $meetingEvent->delete();
 

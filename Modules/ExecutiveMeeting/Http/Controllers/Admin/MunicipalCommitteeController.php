@@ -38,10 +38,11 @@ class MunicipalCommitteeController extends Controller
         return back();
     }
 
-    public function show(MunicipalCommittee $municipalCommittee)
-    {
-        $this->checkAuthorization('executiveMunicipalCommittee_access');
-    }
+    // public function show(MunicipalCommittee $municipalCommittee)
+    // {
+    //     $this->checkAuthorization('executiveMunicipalCommittee_access');
+    //     return view('executivemeeting::admin.municipal_committee.show', compact('municipalCommittee'));
+    // }
 
     public function edit(MunicipalCommittee $municipalCommittee)
     {

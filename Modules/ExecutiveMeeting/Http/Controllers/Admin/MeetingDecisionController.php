@@ -14,8 +14,7 @@ class MeetingDecisionController extends Controller
     public function index($meeting_for)
     {
 
-        $this->checkAuthorization('MeetingDecision_access');
-
+        $this->checkAuthorization($meeting_for.'MeetingDecision_access');
         $meetingDecisions = MeetingDecision::with('meetingEvent')->where('meeting_for', $meeting_for)->latest()->get();
 
         return view('executivemeeting::admin.meeting_decision.index', compact('meeting_for', 'meetingDecisions'));
@@ -23,7 +22,7 @@ class MeetingDecisionController extends Controller
 
     public function create($meeting_for)
     {
-        $this->checkAuthorization('MeetingDecision_create');
+        $this->checkAuthorization($meeting_for.'MeetingDecision_create');
 
         $meetingEvents = MeetingEvent::where('event_for', $meeting_for)
             ->whereDate('en_start_date', '<=', today()->toDateString())
@@ -34,7 +33,7 @@ class MeetingDecisionController extends Controller
 
     public function store(StoreMeetingDecisionRequest $request, $meeting_for)
     {
-        $this->checkAuthorization('MeetingDecision_create');
+        $this->checkAuthorization($meeting_for.'MeetingDecision_create');
 
         MeetingDecision::create($request->validated() + [
                 'meeting_for' => $meeting_for,
@@ -47,13 +46,11 @@ class MeetingDecisionController extends Controller
 
     public function show($meeting_for, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization('MeetingDecision_access');
-    }
+        $this->checkAuthorization($meeting_for.'MeetingDecision_access');    }
 
     public function edit($meeting_for, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization('MeetingDecision_edit');
-
+        $this->checkAuthorization($meeting_for.'MeetingDecision_edit');
         $meetingEvents = MeetingEvent::where('event_for', $meeting_for)
             ->whereDate('en_start_date', '<=', today()->toDateString())
             ->latest()->get();
@@ -63,7 +60,7 @@ class MeetingDecisionController extends Controller
 
     public function update(UpdateMeetingDecisionRequest $request, $meeting_for, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization('MeetingDecision_edit');
+        $this->checkAuthorization($meeting_for.'MeetingDecision_edit');
 
         if ($request->hasFile('decision_file')) {
             if ($meetingDecision->decision_file) {
@@ -80,7 +77,7 @@ class MeetingDecisionController extends Controller
 
     public function destroy($meeting_for, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization('MeetingDecision_delete');
+        $this->checkAuthorization($meeting_for.'MeetingDecision_delete');
 
         if ($meetingDecision->decision_file) {
             $this->deleteFile($meetingDecision->decision_file);

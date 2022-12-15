@@ -14,7 +14,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('admin.executiveMeeting.meetingEvent.index',$event_for)}}">बैठक विवरण </a>
                         </li>
-                        <li class="breadcrumb-item active"> नयाँ बैठक विवरण  थप्नुहोस्</li>
+                        <li class="breadcrumb-item active"> नयाँ बैठक विवरण थप्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">बैठक विवरण </h4>

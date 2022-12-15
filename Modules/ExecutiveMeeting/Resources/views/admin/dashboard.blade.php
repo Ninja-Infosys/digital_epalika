@@ -31,24 +31,6 @@
                                         </span>
                                             </h3>
                                     </div>
-                                    <p class="text my-1">वैठक</p>
-                                </div>
-                            </div> <!-- end row-->
-                        </div>
-                    </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->
-
-                <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            2
-                                        </span>
-                                            </h3>
-                                    </div>
                                     <p class="text my-1">वडा वैठक</p>
                                 </div>
                             </div> <!-- end row-->
@@ -57,7 +39,7 @@
                 </div> <!-- end col-->
 
                 <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary">
+                    <div class="widget-rounded-circle card-primary"  style="background-color: #0047AB">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -72,7 +54,7 @@
                 </div> <!-- end col-->
 
                 <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                    <div class="widget-rounded-circle card-primary">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -81,7 +63,7 @@
                                             6
                                          </span></h3>
                                     </div>
-                                    <p class="text my-1">पालिका समिति सदस्य</p>
+                                    <p class="text my-1">कार्यपालिका सदस्य</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -89,7 +71,7 @@
                 </div> <!-- end col-->
 
                 <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary">
+                    <div class="widget-rounded-circle card-primary"  style="background-color: #0047AB">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
