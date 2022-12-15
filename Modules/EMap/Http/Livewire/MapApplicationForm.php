@@ -380,7 +380,7 @@ class MapApplicationForm extends Component
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'धन्यबाद',
-            'text' => "तपाईंको फारम सफलतापूर्वक पेश गरियो र तपाईंको आईडी $data->unique_id हो। कृपया भविष्यमा प्रयोगको लागि आईडी सुरक्षित राख्नुहोस्।",
+            'text' => "तपाईंको फारम सफलतापूर्वक पेश भएको छ तपाईंको टोकन नं. $data->unique_id हो। कृपया भविष्यमा प्रयोगको लागि टोकन नं. सुरक्षित राख्नुहोस्।",
         ]);
     }
 

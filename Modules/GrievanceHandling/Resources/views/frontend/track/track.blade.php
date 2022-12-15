@@ -13,7 +13,7 @@
             </div>
             <div class="row card-01 text-center justify-content-center">
                 <h4 class="fw-bold">गुनासो ट्रयाक</h4>
-                <p>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन तल उल्लेखित विवरण भरेर पठाउनुहोस् ।</p>
+                <h6>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन तल उल्लेखित विवरण भरेर पठाउनुहोस् ।</h6>
                 <div class="mt-3">
                     <form class="m-2" method="get" action="{{route('grievanceHandling.single-grievance')}}">
                         @csrf
