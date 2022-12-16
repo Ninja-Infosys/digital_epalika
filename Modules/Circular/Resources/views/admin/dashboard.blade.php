@@ -106,7 +106,7 @@
                             </div> <!-- end row-->
                         </div>
                     </div> <!-- end widget-rounded-circle-->
-                </div> <!-- end col-->\
+                </div> <!-- end col-->
             </div>
             <div class="row">
                 <div class="col-lg-6">
