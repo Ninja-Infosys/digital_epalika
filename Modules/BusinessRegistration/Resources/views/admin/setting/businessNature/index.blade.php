@@ -37,7 +37,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-2">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -76,6 +77,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $businessNatures->onEachSide(5)->links() }}
                     </div>
                 </div>
             </div>

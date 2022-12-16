@@ -7,13 +7,19 @@ use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransaction\StoreObjectTransactionRequest;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransaction\UpdateObjectTransactionRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class ObjectTransactionController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('objectTransaction_access');
-        $objectTransactions = ObjectTransaction::with('objectTransaction')->latest()->get();
+
+        $objectTransactions = ObjectTransaction::with('objectTransaction')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
 
         return view('businessregistration::admin.setting.objectTransaction.index', compact('objectTransactions'));
     }

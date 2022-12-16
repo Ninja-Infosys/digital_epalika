@@ -7,13 +7,19 @@ use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Http\Requests\BusinessNature\StoreBusinessNature;
 use Modules\BusinessRegistration\Http\Requests\BusinessNature\UpdateBusinessNature;
+use Illuminate\Database\Eloquent\Builder;
 
 class BusinessNatureController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('businessNature_access');
-        $businessNatures = BusinessNature::latest()->get();
+        $businessNatures = BusinessNature::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
 
         return view('businessregistration::admin.setting.businessNature.index', compact('businessNatures'));
     }

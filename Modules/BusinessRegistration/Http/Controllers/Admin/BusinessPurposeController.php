@@ -8,13 +8,19 @@ use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Http\Requests\BusinessPurpose\StoreBusinessPurposeRequest;
 use Modules\BusinessRegistration\Http\Requests\BusinessPurpose\UpdateBusinessPurposeRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class BusinessPurposeController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('businessPurpose_access');
-        $businessPurposes = BusinessPurpose::get();
+        $businessPurposes = BusinessPurpose::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+            ->paginate(10);
+
 
         return view('businessregistration::admin.setting.businessPurpose.index', compact('businessPurposes'));
     }
