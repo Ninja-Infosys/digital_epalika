@@ -5,6 +5,8 @@ namespace Modules\ListRegistration\Http\Requests\ListRegistration;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
+use Modules\ListRegistration\Enums\BusinessNatureEnum;
 
 class StoreListRegistrationRequest extends FormRequest
 {
@@ -29,7 +31,7 @@ class StoreListRegistrationRequest extends FormRequest
             'pan_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'tax_payment_certificate' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
             'license_photo' => ['nullable', 'mimes:jpg,jpeg,png,pdf'],
-            'business_nature' => ['required', Rule::in(config('defaults.business_natures'))],
+            'business_nature' => ['required',new Enum(BusinessNatureEnum::class)],
             'business_nature_description' => ['required'],
             'date' => ['required'],
             'files' => ['nullable', 'array'],

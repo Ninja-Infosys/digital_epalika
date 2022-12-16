@@ -11,6 +11,13 @@
         <span>मौजुदा सुची दर्ता</span>
     </a>
 </li>
+
+<li class="{{request()->is('admin/listregistration/report*') ? 'active' : ''}}">
+    <a href="{{route('admin.listRegistrations.report.index')}}">
+        <i class="fa fa-file"></i>
+        <span>रिपोर्ट</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/listregistration/files*') ? 'active' : ''}}">
     <a href="{{route('admin.listRegistrations.files.file')}}">
         <i class="fa fa-file-archive"></i>
