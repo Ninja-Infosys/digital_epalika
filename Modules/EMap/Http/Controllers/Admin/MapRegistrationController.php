@@ -4,6 +4,7 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapRegistration;
@@ -22,11 +23,15 @@ class MapRegistrationController extends Controller
 
     public function store(StoreMapRegistrationRequest $request, MapApply $mapApply): RedirectResponse
     {
+
+
         DB::transaction(function () use ($request, $mapApply) {
             $mapRegistration = MapRegistration::create($request->validated() + ['map_apply_id' => $mapApply->id]);
 
-            foreach ($request->input('particulars') as $particular) {
-                $mapRegistration->mapRegistrationParticulars()->create($particular);
+            if(!empty($request->input('particulars'))) {
+                foreach ($request->input('particulars') as $particular) {
+                    $mapRegistration->mapRegistrationParticulars()->create($particular);
+                }
             }
 
             if (empty($mapApply->registration_no)) {
@@ -50,14 +55,17 @@ class MapRegistrationController extends Controller
 
     public function update(UpdateMapRegistrationRequest $request, MapApply $mapApply, MapRegistration $mapRegistration): RedirectResponse
     {
+
         DB::transaction(function () use ($request, $mapRegistration) {
             $mapRegistration->update($request->validated());
 
-            foreach ($request->input('particulars') as $particular) {
-                if ($particular['id']) {
-                    MapRegistrationParticular::find($particular['id'])?->update($particular);
-                } else {
-                    $mapRegistration->mapRegistrationParticulars()->create($particular);
+            if (!empty($request->input('particulars'))) {
+                foreach ($request->input('particulars') as $particular) {
+                    if ($particular['id']) {
+                        MapRegistrationParticular::find($particular['id'])?->update($particular);
+                    } else {
+                        $mapRegistration->mapRegistrationParticulars()->create($particular);
+                    }
                 }
             }
         });

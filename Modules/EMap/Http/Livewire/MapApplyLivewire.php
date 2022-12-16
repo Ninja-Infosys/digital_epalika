@@ -184,7 +184,7 @@ class MapApplyLivewire extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function saveFormData()
+    public function saveFormData(): void
     {
         $this->validate();
 
