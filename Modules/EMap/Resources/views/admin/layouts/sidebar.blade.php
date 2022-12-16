@@ -12,6 +12,13 @@
         </a>
     </li>
 @endcan
+<li class="{{request()->is('admin/emap/organization/reports') ? 'active' : ''}}">
+    <a href="{{route('emap.admin.report.report')}}">
+        <i class="fa fa-building"></i>
+        <span>नक्सा दर्ता रिपोर्ट</span>
+    </a>
+</li>
+
 <li class="">
     <a href="#sidebarMaptype"
        data-bs-toggle="collapse">
@@ -63,11 +70,11 @@
          id="sidebarEMapSetting">
         <ul class="nav-second-level">
             @can('mapSetting_access')
-            <li class="{{request()->is('admin/emap/setting/mapSetting') ? 'active' : ''}}">
-                <a href="{{route('emap.admin.mapSetting.index')}}">
-                    <span> नक्शा सेटिङ </span>
-                </a>
-            </li>
+                <li class="{{request()->is('admin/emap/setting/mapSetting') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.mapSetting.index')}}">
+                        <span> नक्शा सेटिङ </span>
+                    </a>
+                </li>
             @endcan
             @can('eMapTemplate_access')
                 <li class="{{request()->is('admin/emap/setting/eMapTemplate*') ? 'active' : ''}}">
