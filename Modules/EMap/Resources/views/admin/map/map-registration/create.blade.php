@@ -77,7 +77,7 @@
                                                 <tr>
                                                     <th scope="row">फारम दस्तुर</th>
                                                     <td colspan="2">
-                                                        <input type="text" class="form-control @error("form_receipt") is-invalid @enderror" name="form_receipt"
+                                                        <input type="number" class="form-control @error("form_receipt") is-invalid @enderror" name="form_receipt"
                                                                                value="{{old('form_receipt',0) }}">
                                                          @error("form_receipt")
                                                             <span class="text-danger">{{$message}}</span>
@@ -88,7 +88,7 @@
                                                 <tr>
                                                     <th scope="row">निवेदक दर्ता दस्तुर</th>
                                                     <td colspan="2">
-                                                        <input type="text" class="form-control @error("application_registration_fee") is-invalid @enderror"
+                                                        <input type="number" class="form-control @error("application_registration_fee") is-invalid @enderror"
                                                                                name="application_registration_fee"
                                                                                value="{{old('application_registration_fee',0) }}">
                                                          @error("application_registration_fee")
@@ -99,7 +99,7 @@
                                                 <tr>
                                                     <th scope="row">अन्य</th>
                                                     <td colspan="2">
-                                                        <input type="text" class="form-control @error("other") is-invalid @enderror" name="other"
+                                                        <input type="number" class="form-control @error("other") is-invalid @enderror" name="other"
                                                                                value="{{old('other',0) }}">
                                                          @error("other")
                                                             <span class="text-danger">{{$message}}</span>
@@ -118,10 +118,10 @@
                                                 <div class="col-md-6 ">
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <label for="">रसिद नं:</label>
+                                                            <label for="receipt_no">रसिद नं:</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control @error("receipt_no") is-invalid @enderror"
+                                                            <input type="number" class="form-control @error("receipt_no") is-invalid @enderror"
                                                                    name="receipt_no"
                                                                    value="{{old('receipt_no') }}">
                                                             @error("receipt_no")
@@ -133,10 +133,10 @@
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <label for="">रकम बुझने:</label>
+                                                            <label for="recipient">रकम बुझने:</label>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            <input type="text" class="form-control @error("recipient") is-invalid @enderror"
+                                                            <input type="number" class="form-control @error("recipient") is-invalid @enderror"
                                                                    name="recipient"
                                                                    value="{{old('recipient') }}">
                                                             @error("recipient")

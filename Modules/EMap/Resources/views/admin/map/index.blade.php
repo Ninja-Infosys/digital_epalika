@@ -52,7 +52,7 @@
                                     <td>{{$mapApply->organization->name ?? ''}}</td>
                                     <td>
                                         <a href="{{route('emap.admin.map.mapApply.noticeList', [$mapApply,$applicationFormTypeEnum])}}"
-                                           type="button" class="btn btn-info btn-sm text-white">
+                                           type="button" class="btn btn-info btn-sm text-white" title="पुरा विवरण हेर्नुहोस्">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>

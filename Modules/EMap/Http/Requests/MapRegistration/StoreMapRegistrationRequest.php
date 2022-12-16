@@ -14,7 +14,7 @@ class StoreMapRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'particulars' => ['required', 'array'],
+            'particulars' => ['nullable', 'array'],
             'particulars.*.storey' => ['required', 'string'],
             'particulars.*.area' => ['required', 'numeric', 'min:0'],
             'particulars.*.rate' => ['required', 'numeric', 'min:0'],

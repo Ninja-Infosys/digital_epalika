@@ -21,6 +21,7 @@ use Modules\EMap\Enums\ApplicationFormTypeEnum;
 use Modules\EMap\Enums\FileTypeEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
+use Illuminate\Database\Eloquent\Builder;
 
 class MapController extends Controller
 {
@@ -37,7 +38,14 @@ class MapController extends Controller
         $maps = MapApply::with(['fiscalYear', 'organization:id,name', 'applyMapNotices'])
             ->sentToAdmin()
             ->isMapVerified($applicationFormTypeEnum)
-            ->get();
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['registration_no','unique_id','organization.name'], request('search'));
+                }
+            })
+            ->latest()
+            ->paginate(10);
+
 
         return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum'));
 
