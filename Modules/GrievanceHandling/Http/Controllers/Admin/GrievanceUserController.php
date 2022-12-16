@@ -15,4 +15,10 @@ class GrievanceUserController extends Controller
 
         return view('grievancehandling::admin.user.index', compact('grievanceUsers'));
     }
+    public function show(GrievanceUser $grievanceUser)
+    {
+        $this->checkAuthorization('grievanceUser_access');
+
+        return view('grievancehandling::admin.user.show', compact('grievanceUser'));
+    }
 }

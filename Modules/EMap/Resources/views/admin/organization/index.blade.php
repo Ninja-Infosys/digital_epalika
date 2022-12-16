@@ -58,10 +58,16 @@
                                         @endcan
                                         @can('organization_access')
                                         <a href="{{route('emap.admin.organization.show',$organization)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i> हेर्नुहोस्
+                                           title="हेर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         @endcan
+                                            @can('executiveWardCommittee_edit')
+                                                <a href="{{route('admin.executiveMeeting.wardCommittee.edit',$wardCommittee)}}"
+                                                   title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endcan
                                         <form action="{{route('emap.admin.organization.destroy',$organization)}}"
                                               method="post">
                                             @csrf

@@ -77,23 +77,29 @@ class DashboardController extends Controller
     public function getCurrentFyMonthlyRegistrationAndDispatch(OfficeSetting $officeSetting): array
     {
         $monthlyRegistrations = [];
-        $registrations=Registration::where('fiscal_year_id',$officeSetting->fiscal_year_id)
+        $registrations = Registration::where('fiscal_year_id', $officeSetting->fiscal_year_id)
             ->get()
-            ->map(function ($registration){
-            $month=explode('-',$registration->registration_date)[1]??0;
-            return [
-                'month'=>$month
-            ];
-        });
+            ->map(function ($registration) {
+                return [
+                    'month' => explode('-', $registration->registration_date)[1] ?? ''
+                ];
+            });
 
         foreach ($this->month_name as $key => $month) {
-            $monthlyRegistrations[] = $registrations->where('month', ($key+1))->count();
+            $monthlyRegistrations[] = $registrations->where('month', ($key + 1))->count();
         }
 
         $monthlyDispatches = [];
+        $dispatches=Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)
+            ->get()
+            ->map(function ($dispatch){
+                return [
+                    'month' => explode('-', $dispatch->dispatch_date)[1] ?? ''
+                ];
+            });
 
         foreach ($this->month_name as $key => $month) {
-            $monthlyDispatches[] = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('dispatch_date', ($key + 1))->count();
+            $monthlyDispatches[] = $dispatches->where('month', ($key + 1))->count();;
         }
 
         return [

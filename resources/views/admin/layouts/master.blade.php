@@ -74,14 +74,9 @@
             <div class="floating-button"><a href="{{route('admin.dashboard')}}"><i class="fa fa-home" style="color: white"></i></a></div>
             <div class="element-container">
                 <a href="#"> <span class="float-element tooltip-left">phone</span>
-                  <i class="material-icons"></i></a>
-
                   <span class="float-element">नयाँ दर्ता थप्नुहोस
-                  <i class="material-icons">+</i>
-
                 </span>
-                  <span class="float-element">
-                  +<i class="material-icons">नयाँ चलानी थप्नुहोस</i>
+                  <span class="float-element">नयाँ चलानी थप्नुहोस
                 </span>
               </div>
         </div>

@@ -6,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.listRegistrations.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -24,27 +24,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex">
-                        <div class="col-md-7">
-                            <h4 class="header-title">मौजुदा सुची दर्ताहरु</h4>
-                        </div>
-                        <div class="col-md-5 d-flex justify-content-between">
-                            <div class="app-search-box dropdown">
-                                <div class="input-group">
-                                    <input type="search" class="form-control" placeholder="Search..." id="top-search">
-                                    <button class="btn btn-outline-primary input-group-text" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <a href="{{route('admin.listRegistrations.listRegistration.index')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-list"></i> मौजुदा सूची
-                            </a>
-                        </div>
-                    </div>
+                <div class="card-header d-flex justify-content-between">
+                    <h4 class="header-title">मौजुदा सुची दर्ताहरु</h4>
+                    <a href="{{route('admin.listRegistrations.listRegistration.index')}}"
+                       class="btn btn-sm btn-outline-primary">
+                        <i class="fa fa-list"></i> मौजुदा सूची
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="row">

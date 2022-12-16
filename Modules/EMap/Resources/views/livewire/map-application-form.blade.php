@@ -39,7 +39,7 @@
         </div>
     </div>
     <fieldset>
-        <legend>१. प्रस्तावित भवनको विवरण</legend>
+        <legend><h5>१. प्रस्तावित भवनको विवरण</h5></legend>
         <div class="row p-2 border">
             <div class="mb-3">
                 <b class="form-label">१.१ निर्माण कार्यको किसिम *</b> <br>
@@ -157,7 +157,7 @@
                         <input type="text"
                                id="applyMap.area_of_plinth"
                                wire:model="applyMap.area_of_plinth"
-                        >
+                        >(वर्ग मिटर)
 
                         @error('applyMap.area_of_plinth')
                         <p class="text-danger">{{$message}}</p>
@@ -190,7 +190,7 @@
                         <input type="text"
                                id="applyMap.length"
                                wire:model="applyMap.length"
-                        >
+                        >(मिटर)
                         @error('applyMap.length')
                         <p class="text-danger">{{$message}}</p>
                         @enderror
@@ -201,7 +201,7 @@
                         <input type="text"
                                id="applyMap.breadth"
                                wire:model="applyMap.breadth"
-                        >
+                        >(मिटर)
                         @error('applyMap.breadth')
                         <p class="text-danger">{{$message}}</p>
                         @enderror
@@ -217,7 +217,7 @@
                         <input type="text"
                                id="applyMap.height"
                                wire:model="applyMap.height"
-                        >
+                        >(मिटर)
                         @error('applyMap.height')
                         <p class="text-danger">{{$message}}</p>
                         @enderror
@@ -317,7 +317,7 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>२. जग्गाको विवरण</legend>
+        <legend><h5>२. जग्गाको विवरण</h5></legend>
         <div class="row p-2 border">
             <div class="mb-3">
                 <div class="row">
@@ -428,7 +428,7 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>३. जग्गा धनीको विवरण</legend>
+        <legend><h5>३. जग्गा धनीको विवरण</h5></legend>
         <div class="row p-2 border">
             <div class="mb-3">
                 <b class="form-label">३.१ जग्गा धनीको किसिम *</b> <br>
@@ -579,9 +579,8 @@
         </div>
 
     </fieldset>
-
     <fieldset>
-        <legend>४. घर धनीको विवरण (जग्गाधनी भन्दा फरक भएमा)</legend>
+        <legend><h5>४. घर धनीको विवरण (जग्गाधनी भन्दा फरक भएमा)</h5></legend>
         <div class="row p-2 border">
             <div class="my-2">
                 <div class="form-check-primary0 d-flex">
@@ -735,9 +734,8 @@
             </div>
         </div>
     </fieldset>
-
     <fieldset>
-        <legend>७. निवेदकको विवरण</legend>
+        <legend><h5>७. निवेदकको विवरण</h5></legend>
         <div class="row p-2 border">
             <div class="mb-3">
                 <b class="form-label">७.१ निवेदकको प्रकार : </b> <br>
@@ -868,7 +866,7 @@
         </div>
 
     </fieldset>
-    <div class="d-flex justify-content-between pt-3 ">
+    <div class="d-flex justify-content-between pt-3 " >
         <div class="d-flex">
             <div class="px-1">
                 <label
@@ -903,9 +901,8 @@
 
         </div>
     </div>
-
     <div class="mt-4 d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary    ">पेश गर्नुहोस्</button>
+        <button type="submit" class="btn btn-primary ">पेश गर्नुहोस्</button>
     </div>
 
 </form>

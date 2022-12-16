@@ -7,12 +7,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.listRegistrations.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.listRegistrations.listRegistration.index')}}">सुची दर्ता प्रणालि</a>
                         </li>
                         <li class="breadcrumb-item active">मौजुदा सुची दर्ता</li>
                     </ol>
@@ -55,17 +52,19 @@
                                     <td>{{$listRegistration->main_person}}</td>
                                     <td>{{$listRegistration->mobile_no}}</td>
                                     <td>{{$listRegistration->date}}</td>
-
                                     <td>
                                         @can('listRegistration_access')
-                                            <a href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}" class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-eye"></i> थप हेर्नुहोस्
+                                            <a href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}"
+                                               title="थप हेर्नुहोस्"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('listRegistration_edit')
                                             <a href="{{route('admin.listRegistrations.listRegistration.edit',$listRegistration)}}"
+                                               title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('listRegistration_delete')
@@ -73,8 +72,8 @@
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan
