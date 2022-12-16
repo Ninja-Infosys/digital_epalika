@@ -105,8 +105,11 @@
                         @foreach($dispatch->files as $document)
                             <div class="col-md-4 mb-3">
                                 <div class="card">
-                                    <div class="card-header">
-                                    <span style="float: right">
+                                    <div class="card-header d-flex justify-content-around">
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$document->file])}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
                                         <form action="{{route('admin.file.destroy',$document)}}"
                                               method="post">
                                             @csrf
@@ -115,7 +118,6 @@
                                                 <i class="fa fa-window-close"></i>
                                             </button>
                                         </form>
-                                    </span>
                                     </div>
                                     <div class="card-body">
                                         @if($document->extension ==='pdf')
@@ -130,7 +132,6 @@
                         @endforeach
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

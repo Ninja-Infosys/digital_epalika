@@ -19,6 +19,7 @@ class FiscalYearController extends Controller
                 $q->whereLike(['title'], request('search'));
             }
         })
+            ->latest()
             ->paginate(10);
 
         return view('admin.setting.fiscalYear.index', compact('fiscalYears'));

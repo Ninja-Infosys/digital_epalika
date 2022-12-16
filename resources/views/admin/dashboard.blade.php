@@ -127,52 +127,6 @@
                 </div>
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
-
-        {{-- <div class="col-md-6 col-xl-2">
-            <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
-                    <div class="row">
-                        <div class="col-8">
-                            <p class="text mb-1">जम्मा चलानी पत्रहरु</p>
-                            <h3 class="mt-1"><span class="num" data-plugin="counterup">
-                                    {{ $dispatch_count }}</span></h3>
-                        </div>
-                        <div class="col-4">
-                            <div class="avatar-lg rounded-circle bg-light border">
-                                <i class="fa fa-file-alt avatar-title"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-xl-2">
-            <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
-                    <div class="row">
-                        <div class="col-8">
-                            <p class="text mb-1">जम्मा कार्यपालिका बैठकहरु</p>
-                            <h3 class="mt-1"><span class="num" data-plugin="counterup">
-                                    {{ $municipal_meetings_count }}</span></h3>
-                        </div>
-                        <div class="col-4">
-                            <div class="avatar-lg rounded-circle bg-light border">
-                                <i class="fa fa-handshake avatar-title"></i>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="mt-1"><span data-plugin="counterup">
-                                        {{$municipal_meetings_count}}</span></h3>
-                                <p class="text-muted mb-1">जम्मा कार्यपालिका बैठकहरु</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-        --}}
         <div class="row mt-2">
             <div class="col-md-6">
                 <div class="card">
@@ -213,7 +167,7 @@
                             </table>
 
                         </div>
-                        {{$activityLogs->links()}}
+                        {{$activityLogs->onEachSide(config('app.pagination_count'))->links()}}
                     </div>
                 </div>
             </div>
@@ -240,7 +194,7 @@
         </div>
     </div>
     @push('scripts')
-    <script src="{{asset('assets/backend/libs/hopscotch/js/hopscotch.min.js')}}"></script>
-    <script src="{{asset('assets/backend/js/pages/dashboard.init.js')}}"></script>
-@endpush
+        <script src="{{asset('assets/backend/libs/hopscotch/js/hopscotch.min.js')}}"></script>
+        <script src="{{asset('assets/backend/js/pages/dashboard.init.js')}}"></script>
+    @endpush
 @endsection
