@@ -116,7 +116,7 @@ class DailyTaskLivewire extends Component
             $this->dispatchBrowserEvent('alert_message', [
                 'type' => 'success',
                 'title' => 'धन्यबाद',
-                'text' => 'उजुरी पत्र सफलतापूर्वक थपियो',
+                'text' => 'सफलता पूर्वक थपिएको छ',
             ]);
         }
     }

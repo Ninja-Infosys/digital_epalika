@@ -29,7 +29,7 @@
                                        </span>
                                            </h3>
                                     </div>
-                                    <p class="text my-1">आजका कार्यहरू</p>
+                                    <p class="text my-1">आज थपिएको कार्य</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -47,7 +47,7 @@
                                        </span>
                                            </h3>
                                     </div>
-                                    <p class="text my-1">कार्यहरू</p>
+                                    <p class="text my-1">जम्मा प्रयोगकर्ता</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>
@@ -65,7 +65,7 @@
                                        </span>
                                            </h3>
                                     </div>
-                                    <p class="text my-1">शाखाहरु अनुसार कार्यहरू</p>
+                                    <p class="text my-1">उपलब्ध सेवाहरु</p>
                                 </div>
                             </div> <!-- end row-->
                         </div>

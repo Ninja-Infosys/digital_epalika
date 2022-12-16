@@ -55,7 +55,7 @@
             @enderror
         </div>
         <div class="col-md-4 mb-2">
-            <label for="branch_id" class="form-label">कार्य विभाजन *</label>
+            <label for="branch_id" class="form-label">कार्य क्षेत्र *</label>
             <select
                 wire:model="form.task_division_id"
                 class="form-select @error('branch_id') is-invalid @enderror"
