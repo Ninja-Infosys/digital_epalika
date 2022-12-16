@@ -71,24 +71,7 @@
                 &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
             </div>
         </footer>
-        <div class="floating-container">
-            <div class="floating-button">
-                <a href="{{route('admin.dashboard')}}">
-                    <i class="fa fa-home" style="color: white"></i>
-                </a>
-            </div>
-            @if(array_key_exists(Str::lower(Request::segment(2)),config('floating-menu')))
-                <div class="element-container">
-                    @foreach(config('floating-menu.'.Str::lower(Request::segment(2))) as $key=>$menu)
-                        <a href="{{route($menu)}}" class="float-element tooltip-left">
-
-                            <i class="fa fa-plus"></i> {{$key}}
-
-                        </a>
-                    @endforeach
-                </div>
-            @endif
-        </div>
+        @include('inc\floating-menu')
         <!-- end Footer -->
     </div>
 </div>
