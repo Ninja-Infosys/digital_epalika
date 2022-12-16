@@ -71,7 +71,7 @@
                 &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
             </div>
         </footer>
-        @include('inc\floating-menu')
+        @include('floating-menu')
         <!-- end Footer -->
     </div>
 </div>
