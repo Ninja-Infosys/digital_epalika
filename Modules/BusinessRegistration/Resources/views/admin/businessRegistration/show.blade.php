@@ -390,7 +390,13 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-header">व्यवसायीको पासपोर्ट साइजको फोटो</div>
+                                        <div class="card-header d-flex justify-content-around">
+                                            <p>व्यवसायीको पासपोर्ट साइजको फोटो</p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->photo])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </div>
                                         <div class="card-body">
                                             <img src="{{$businessDetail->photo_url??''}}"
                                                  alt=""
@@ -400,7 +406,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-header">नागरिकता (आगाडी)</div>
+                                        <div class="card-header d-flex justify-content-around">
+                                            <p>नागरिकता (आगाडी)</p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->citizenship_front])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </div>
                                         <div class="card-body">
                                             <img
                                                 src="{{$businessDetail->citizenship_front_url??''}}"
@@ -412,7 +424,13 @@
 
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-header">नागरिकता (पछाडी)</div>
+                                        <div class="card-header d-flex justify-content-around">
+                                            <p>नागरिकता (पछाडी)</p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->citizenship_back])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </div>
                                         <div class="card-body">
                                             <img
                                                 src="{{$businessDetail->citizenship_back_url??''}}"
@@ -424,7 +442,13 @@
 
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-header">फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</div>
+                                        <div class="card-header d-flex justify-content-around">
+                                            <p>फार्म कम्पनी भयमा दर्ता, इजाजत प्रमाणपत्र</p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->company_registration])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </div>
                                         <div class="card-body">
                                             <img
                                                 src="{{$businessDetail->company_registration_url??''}}"
@@ -436,8 +460,13 @@
 
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-header"> आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको
-                                            करदाता प्रमाणपत्रको प्रतिलिपि
+                                        <div class="card-header d-flex justify-content-around">
+                                            <p>आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको
+                                            करदाता प्रमाणपत्रको प्रतिलिपि</p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->tax_pay_file])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
                                         </div>
                                         <div class="card-body">
                                             <img
@@ -450,7 +479,13 @@
 
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-header">हस्ताक्षर</div>
+                                        <div class="card-header d-flex justify-content-around">
+                                            <p>हस्ताक्षर</p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->tax_pay_file])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </div>
                                         <div class="card-body">
                                             <img src="{{$businessDetail->signature_url??''}}"
                                                  alt=""
@@ -460,8 +495,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-header">
-                                            औठाको छाप
+                                        <div class="card-header d-flex justify-content-around">
+                                            <p>औठाको छाप</p>
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->thumb])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
                                         </div>
                                         <div class="card-body">
                                             <img src="{{$businessDetail->thumb_url??''}}"

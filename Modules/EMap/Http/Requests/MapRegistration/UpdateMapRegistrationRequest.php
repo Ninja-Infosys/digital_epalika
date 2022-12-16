@@ -14,7 +14,7 @@ class UpdateMapRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'particulars' => ['required', 'array'],
+            'particulars' => ['nullable', 'array'],
             'particulars.*.id' => ['required', 'string'],
             'particulars.*.storey' => ['required', 'string'],
             'particulars.*.area' => ['required', 'numeric', 'min:0'],

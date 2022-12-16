@@ -24,7 +24,8 @@
             <button class="btn btn-sm btn-info"
                     onclick="printJS({
                     printable: 'printData',
-                    css: '{{asset('assets/backend/css/print.css')}}',
+                    targetStyles: ['*'],
+                    ignoreElements:['ignore-header'],
                     type: 'html'
                     })">
                 <i class="fa fa-print"></i> Print
@@ -41,9 +42,9 @@
 
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="printData">
                     <div class="table-responsive">
-                        <div id="printData">
+                        <div>
                         <table class="table table-sm mb-0 table-striped table-hover">
 
                             <tbody>
@@ -80,14 +81,18 @@
                         @foreach($dailyTask->files as $document)
                             <div class="col-md-4 mb-3">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <form action="{{route('admin.file.destroy',$document)}}"
+                                    <div class="card-header" id="ignore-header" >
+                                        <form class="d-flex justify-content-between" action="{{route('admin.file.destroy',$document)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
                                                 <i class="fa fa-window-close"></i>
                                             </button>
+
+                                            <a href="{{$document->file_url}}" download="{{$document->file_url}}">
+                                                <i class="fa fa-download"></i>
+                                            </a>
                                         </form>
                                     </div>
                                     <div class="card-body">

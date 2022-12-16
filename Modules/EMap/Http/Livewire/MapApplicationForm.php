@@ -54,7 +54,7 @@ class MapApplicationForm extends Component
     public $convertedData = 0;
 
     public array $applyMap = [
-        'application_type'=>null,
+        'application_type' => null,
         'construction_type' => null,
         'usage' => null,
         'building_category' => null,
@@ -149,7 +149,7 @@ class MapApplicationForm extends Component
 //    convert Functions
     public function convert(): void
     {
-        if ((! empty($this->landDescription['unit_value'])) > 0 && ! empty($this->conversion_id)) {
+        if ((!empty($this->landDescription['unit_value'])) > 0 && !empty($this->conversion_id)) {
             $si_unit_value = $this->landDescription['unit_value'];
 
             $rate = $this->conversionToSmallest();
@@ -157,7 +157,7 @@ class MapApplicationForm extends Component
             $this->convertedData = $rate * $si_unit_value;
             $data = [];
             foreach ($this->units as $index => $unit) {
-                $data['data'.$index] = $this->conversionLogic($unit);
+                $data['data' . $index] = $this->conversionLogic($unit);
             }
             $this->conversion = $data;
         }
@@ -210,11 +210,11 @@ class MapApplicationForm extends Component
     {
         if ($unit->position - 1 > 0) {
             $biggerUnit = Unit::where('position', $unit->position - 1)->first();
-            if (! empty($biggerUnit)) {
+            if (!empty($biggerUnit)) {
                 $conversionRate = UnitConversion::where('conversion_to', $biggerUnit->id)
                     ->where('conversion_from', $unit->id)
                     ->first();
-                if (! empty($conversionRate->rate)) {
+                if (!empty($conversionRate->rate)) {
                     $totalData = $this->convertedData * $conversionRate->rate;
                     $wholePart = floor($totalData);
                     $fraction = $totalData - $wholePart;
@@ -247,11 +247,11 @@ class MapApplicationForm extends Component
 
     public function setStructureType(): void
     {
-        $this->open_structure_type = ! $this->open_structure_type;
+        $this->open_structure_type = !$this->open_structure_type;
     }
 
     protected array $applyMapValidations = [
-        'applyMap.application_type'=>['required'],
+        'applyMap.application_type' => ['required'],
         'applyMap.organization_id' => ['required'],
         'applyMap.construction_type' => ['required'],
         'applyMap.usage' => ['required'],
@@ -342,22 +342,24 @@ class MapApplicationForm extends Component
     public function saveFormData(): void
     {
         $this->validate();
-    $data =   DB::transaction(function () {
+        $data = DB::transaction(function () {
             if ($this->applyMap['structure_type']) {
                 $structure_type = StructureType::create(['title' => $this->applyMap['structure_type']]);
 
                 $this->applyMap['structure_type_id'] = $structure_type->id ?? '';
             }
 
-            $mapApply = MapApply::create($this->applyMap);
+            $mapApply = MapApply::create($this->applyMap + [
+                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
+                ]);
 
             foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
                 $mapApply->storeyDetails()->create($storeyDetail);
             }
 
             $mapApply->landDetail()->create($this->landDescription + [
-                'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
-            ]);
+                    'unit_id' => MapSetting::first()->land_measurement_standard_id ?? null,
+                ]);
 
             $mapApply->landOwner()->create($this->landOwner);
 
@@ -365,14 +367,11 @@ class MapApplicationForm extends Component
 
             $mapApply->applicantDetail()->create($this->applicantDetail);
 
-           Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
+            Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
 
-           return $mapApply;
+            return $mapApply;
 
         });
-
-
-
 
 
         $this->reset('applyMap', 'landDescription', 'landOwner', 'houseOwner', 'applicantDetail');
@@ -387,7 +386,7 @@ class MapApplicationForm extends Component
     public function messages(): array
     {
         return [
-            'applyMap.application_type.required'=>'अनिवार्य छ',
+            'applyMap.application_type.required' => 'अनिवार्य छ',
             'applyMap.construction_type.required' => 'निर्माण कार्यको किसिम अनिवार्य छ |',
             'applyMap.usage.required' => 'प्रयोजन अनिवार्य छ |',
             'applyMap.building_category.required' => ' भवनको वर्गीकरण अनिवार्य छ|',
@@ -459,7 +458,7 @@ class MapApplicationForm extends Component
 
     public function checkSameAsLandOwner(): void
     {
-        $this->same_as_land_owner = ! $this->same_as_land_owner;
+        $this->same_as_land_owner = !$this->same_as_land_owner;
         if ($this->same_as_land_owner) {
             $this->houseOwner = [
                 'name' => $this->landOwner['name'] ?? null,
@@ -522,7 +521,7 @@ class MapApplicationForm extends Component
     {
         $this->convert();
         $this->setApplicantData();
-        if (! empty($this->conversion_id)) {
+        if (!empty($this->conversion_id)) {
             $this->units = Unit::where('measurement_unit_id', $this->conversion_id)->orderByDesc('position')->get();
         }
 
