@@ -10,9 +10,6 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.branch.index')}}">हेल्प डेस्क </a>
-                        </li>
                         <li class="breadcrumb-item active">शाखा</li>
                     </ol>
                 </div>

@@ -17,7 +17,6 @@ class DashboardController extends Controller
     public function __invoke()
     {
         $nepali_date = $this->get_nepali_date(now()->format('Y'), now()->format('m'), now()->format('d'));
-//        dd($nepali_date);
 
         $officeSetting = OfficeSetting::first();
         $total_registrations = Registration::count();

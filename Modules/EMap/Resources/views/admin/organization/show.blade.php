@@ -196,7 +196,13 @@
                                 @if($organization->is_organization==0)
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <div class="card-header">नागरिकता (आगाडी)</div>
+                                            <div class="card-header d-flex justify-content-around">
+                                                <p>नागरिकता (आगाडी)</p>
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$organization->userDetail->citizenship_front]??'')}}"
+                                                   class="btn btn-xs ">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
                                             <div class="card-body">
                                                 <img src="{{$organization->userDetail->citizenship_front_url ?? ''}}"
                                                      alt=""
@@ -208,7 +214,13 @@
                                 @if($organization->is_organization==0)
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <div class="card-header">नागरिकता (पछाडी)</div>
+                                            <div class="card-header d-flex justify-content-around">
+                                                <p>नागरिकता (पछाडी)</p>
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$organization->userDetail->citizenship_back]??'')}}"
+                                                   class="btn btn-xs">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
                                             <div class="card-body">
                                                 <img src="{{$organization->userDetail->citizenship_back_url ?? ''}}"
                                                      alt=""
@@ -220,7 +232,13 @@
                                 @if($organization->is_organization==0)
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <div class="card-header">NEC को प्रमाणपत्र</div>
+                                            <div class="card-header d-flex justify-content-around">
+                                                <p>NEC को प्रमाणपत्र</p>
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$organization->userDetail->nec_certificate]??'')}}"
+                                                   class="btn btn-xs">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
                                             <div class="card-body">
                                                 <img src="{{$organization->userDetail->nec_certificate_url ?? ''}}"
                                                      alt=""
@@ -232,7 +250,13 @@
                                 @if($organization->is_organization==1)
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <div class="card-header">कम्पनी दर्ताको प्रमाणपत्र</div>
+                                            <div class="card-header d-flex justify-content-around">
+                                                <p>कम्पनी दर्ताको प्रमाणपत्र</p>
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$organization->organizationDetail->org_registration_document]??'')}}"
+                                                   class="btn btn-xs">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
                                             <div class="card-body">
                                                 <img
                                                     src="{{$organization->organizationDetail->org_registration_document_url ?? ''}}"
@@ -244,7 +268,13 @@
                                 @if($organization->is_organization==1)
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <div class="card-header">कम्पनी PANको प्रमाणपत्र</div>
+                                            <div class="card-header d-flex justify-content-around">
+                                                <p>कम्पनी PANको प्रमाणपत्र</p>
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$organization->organizationDetail->org_pan_document]??'')}}"
+                                                   class="btn btn-xs ">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
                                             <div class="card-body">
                                                 <img
                                                     src="{{$organization->organizationDetail->org_pan_document_url ?? ''}}"
@@ -256,7 +286,13 @@
                                 @if($organization->is_organization==1)
                                     <div class="col-md-4">
                                         <div class="card">
-                                            <div class="card-header">लोगो</div>
+                                            <div class="card-header d-flex justify-content-around">
+                                                <p>लोगो</p>
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$organization->organizationDetail->logo]??'')}}"
+                                                   class="btn btn-xs">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
                                             <div class="card-body">
                                                 <img src="{{$organization->organizationDetail->logo_url ?? ''}}" alt=""
                                                      style="max-width: 100%;height: 200px;object-fit: contain;">
@@ -280,14 +316,18 @@
                                             @foreach($organization->organizationDetail->taxClearances??collect() as $taxClearance)
                                                 <tr>
                                                     <td>{{$loop->iteration}}</td>
-                                                    <td>{{$taxClearance->year ?? ''}}</td>
+                                                    <td>{{$taxClearance->year ?? ''}}
+                                                        <a href="{{route('admin.file-url-download', ['file_url'=>$taxClearance->document]??'')}}"
+                                                           class="btn btn-xs text-primary">
+                                                            <i class="fa fa-download"></i>
+                                                        </a>
+                                                    </td>
                                                     <td><img src="{{$taxClearance->document_url}}" alt=""
                                                              style="max-width: 100%;height: 200px;object-fit: contain;">
                                                     </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
-
                                         </table>
                                     </div>
                                 </div>
