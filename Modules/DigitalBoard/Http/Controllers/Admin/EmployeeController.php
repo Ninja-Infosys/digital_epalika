@@ -8,14 +8,20 @@ use Illuminate\Support\Facades\Gate;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Http\Requests\Employee\StoreEmployeeRequest;
 use Modules\DigitalBoard\Http\Requests\Employee\UpdateEmployeeRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class EmployeeController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('employee_access');
 
-        $employees = Employee::orderBy('position')->get();
+        $employees = Employee::orderBy('position')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('digitalboard::employee.index', compact('employees'));
     }

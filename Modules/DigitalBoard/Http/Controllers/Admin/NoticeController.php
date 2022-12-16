@@ -11,16 +11,34 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Http\Requests\Notice\UpdateNoticeRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class NoticeController extends Controller
 {
     public function index($type)
     {
         $this->checkAuthorization('digitalBoardNotice_access');
         if ($type === 'News') {
-            $notices = Notice::with('user')->where('type', 'News')->orderByDesc('date')->get();
+            $notices = Notice::with('user')
+            ->where('type', 'News')
+            ->orderByDesc('date')
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['title'], request('search'));
+                }
+            })
+            ->latest()->paginate(10);
+
         } else {
-            $notices = Notice::with('user')->where('type', 'Notice')->orderByDesc('date')->get();
+            $notices = Notice::with('user')
+            ->where('type', 'Notice')
+            ->orderByDesc('date')
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['title'], request('search'));
+                }
+            })
+            ->latest()->paginate(10);
+
         }
 
         return view('digitalboard::notice.index', compact('notices', 'type'));

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Modules\Circular\Http\Requests\News\StoreNewsRequest;
 use Modules\Circular\Http\Requests\News\UpdateNewsRequest;
 use Modules\DigitalBoard\Entities\News;
-
+use Illuminate\Database\Eloquent\Builder;
 class NewsController extends Controller
 {
     public function index($type)
@@ -17,7 +17,13 @@ class NewsController extends Controller
             403,
             'You are not allowed to digital board news access'
         );
-        $newses = News::latest()->get();
+        $newses = News::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('digitalboard::news.index', compact('newses'));
     }

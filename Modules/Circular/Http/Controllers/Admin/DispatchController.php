@@ -9,14 +9,20 @@ use Illuminate\Support\Str;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Http\Requests\Dispatch\StoreDispatchRequest;
 use Modules\Circular\Http\Requests\Dispatch\UpdateDispatchRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class DispatchController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('dispatch_access');
 
-        $dispatches = Dispatch::latest()->get();
+        $dispatches = Dispatch::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['dispatch_no','receiver_name','subject'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('circular::admin.dispatch.index', compact('dispatches'));
     }

@@ -16,7 +16,7 @@ class ObjectTransactionController extends Controller
 
         $objectTransactions = ObjectTransaction::with('objectTransaction')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['title'], request('search'));
+                $q->whereLike(['title','objectTransaction->title'], request('search'));
             }
         })
         ->latest()->paginate(10);
