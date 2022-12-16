@@ -167,7 +167,7 @@
                             </table>
 
                         </div>
-                        {{$activityLogs->onEachSide(config('app.pagination_count'))->links()}}
+                        {{$activityLogs->links()}}
                     </div>
                 </div>
             </div>
