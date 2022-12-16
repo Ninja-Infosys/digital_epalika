@@ -34,14 +34,18 @@ class DashboardController extends Controller
         ];
 
         $user_count = User::count();
-        $activityLogs = ActivityLog::with('user')->whereDate('created_at', today()->toDateString())->paginate(5);
+        $activityLogs = ActivityLog::with('user')
+            ->whereDate('created_at', today()->toDateString())
+            ->paginate(5);
 
         if (Schema::hasTable('business_details')) {
-            $businessDetail_count = BusinessDetail::whereNotNull('registration_no')->count();
+            $businessDetail_count = BusinessDetail::whereNotNull('registration_no')
+                ->count();
         }
 
         if (Schema::hasTable('trainings')) {
-            $training_count = Training::whereDate('closed_date', '<=', today()->toDateString())->count() ?? 0;
+            $training_count = Training::whereDate('closed_date', '<=', today()->toDateString())
+                ->count() ?? 0;
         }
 
         if (Schema::hasTable('projects')) {

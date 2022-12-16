@@ -8,12 +8,12 @@
         content="A complete solution for a digital palika."
         name="description"
     />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta content="Ninja Infosys" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
-    <link href="{{asset('assets/backend/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/backend/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
     <!-- App css -->
@@ -23,6 +23,7 @@
         type="text/css"
         id="app-style"
     />
+
     <link
         href="{{asset('assets/backend/css/bootstrap.min.css')}}"
         rel="stylesheet"
@@ -63,22 +64,14 @@
         <!-- Footer Start -->
         <footer class="footer">
             <div class="container-fluid text-center">
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        &copy; Design & Developed by <a href="#">NINJA INFOSYS</a>
+                <script>
+                    const date = new Date.getFullYear();
+                    document.write(date);
+                </script>
+                &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
             </div>
         </footer>
-        <div class="floating-container">
-            <div class="floating-button"><a href="{{route('admin.dashboard')}}"><i class="fa fa-home" style="color: white"></i></a></div>
-            <div class="element-container">
-                <a href="#"> <span class="float-element tooltip-left">phone</span>
-                  <span class="float-element">नयाँ दर्ता थप्नुहोस
-                </span>
-                  <span class="float-element">नयाँ चलानी थप्नुहोस
-                </span>
-              </div>
-        </div>
+        @include('inc.floating-menu')
         <!-- end Footer -->
     </div>
 </div>
@@ -138,13 +131,23 @@
     window.addEventListener('toast_message', event => {
         swal.fire({
             title: event.detail.title,
-            toast:true,
-            position:'top-right',
-            showConfirmButton:false,
-            width:400,
-            timer:3000,
-            timerProgressBar:true,
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            width: 400,
+            timer: 3000,
+            timerProgressBar: true,
             icon: event.detail.type,
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        //submit form if any of the input with class filter-form's focus is removed
+
+        $('.filter-form').focusout(function () {
+            $(this).closest('form').submit();
         });
     });
 </script>

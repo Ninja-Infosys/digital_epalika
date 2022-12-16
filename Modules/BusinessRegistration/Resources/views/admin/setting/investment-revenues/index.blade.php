@@ -30,7 +30,7 @@
                         @can('investmentRevenue_create')
                             <a href="{{route('admin.businessRegistration.setting.investmentRevenue.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ पुँजीगत लगानी र राजस्वो  थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ पुँजीगत लगानी र राजस्वो थप्नुहोस्
                             </a>
                         @endcan
 
@@ -38,7 +38,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -84,6 +85,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $investmentRevenues->links() }}
                     </div>
                 </div>
             </div>

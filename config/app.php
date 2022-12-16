@@ -17,6 +17,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
     'website_type' => env('WEBSITE_TYPE', 'digital_board'),
+    'pagination_count' => env('PAGINATION_COUNT', 2),
 
     /*
     |--------------------------------------------------------------------------
