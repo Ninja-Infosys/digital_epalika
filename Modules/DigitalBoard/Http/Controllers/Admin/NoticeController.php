@@ -23,7 +23,7 @@ class NoticeController extends Controller
             ->orderByDesc('date')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
-                    $q->whereLike(['title'], request('search'));
+                    $q->whereLike(['title','date'], request('search'));
                 }
             })
             ->latest()->paginate(10);
@@ -34,7 +34,7 @@ class NoticeController extends Controller
             ->orderByDesc('date')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
-                    $q->whereLike(['title'], request('search'));
+                    $q->whereLike(['title','date'], request('search'));
                 }
             })
             ->latest()->paginate(10);

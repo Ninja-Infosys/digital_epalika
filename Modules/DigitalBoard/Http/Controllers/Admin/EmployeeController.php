@@ -17,7 +17,7 @@ class EmployeeController extends Controller
 
         $employees = Employee::orderBy('position')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['title'], request('search'));
+                $q->whereLike(['designation','name',''], request('search'));
             }
         })
         ->latest()->paginate(10);
