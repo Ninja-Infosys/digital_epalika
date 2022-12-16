@@ -62,7 +62,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1"><span data-plugin="counterup">{{$service_count}}</span></h3>
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">{{$service_count}}</span></h3>
                                     </div>
                                     <p class="text my-1">सेवाहरु</p>
                                 </div>
