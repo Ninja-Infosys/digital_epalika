@@ -36,7 +36,7 @@ class DashboardController extends Controller
         $user_count = User::count();
         $activityLogs = ActivityLog::with('user')
             ->whereDate('created_at', today()->toDateString())
-            ->cursorPaginate(5);
+            ->paginate(5);
 
         if (Schema::hasTable('business_details')) {
             $businessDetail_count = BusinessDetail::whereNotNull('registration_no')
