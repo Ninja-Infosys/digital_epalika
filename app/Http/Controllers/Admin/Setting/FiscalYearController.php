@@ -20,7 +20,7 @@ class FiscalYearController extends Controller
             }
         })
             ->latest()
-            ->get();
+            ->paginate(10);
 
         return view('admin.setting.fiscalYear.index', compact('fiscalYears'));
     }

@@ -9,13 +9,17 @@ use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Http\Requests\InvestmentRevenue\StoreInvestmentRevenueRequest;
 use Modules\BusinessRegistration\Http\Requests\InvestmentRevenue\UpdateInvestmentRevenueRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class InvestmentRevenueController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('investmentRevenue_access');
-        $investmentRevenues = InvestmentRevenue::with('objectTransaction')->get();
+        $investmentRevenues = InvestmentRevenue::with('objectTransaction')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })->latest()->paginate(10);;
 
         return view('businessregistration::admin.setting.investment-revenues.index', compact('investmentRevenues'));
     }

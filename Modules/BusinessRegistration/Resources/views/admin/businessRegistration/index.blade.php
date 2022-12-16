@@ -32,7 +32,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm mb-2 table-striped table-hover text-center">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-bordered table-sm mb-2 table-striped table-hover text-center mt-3">
                             <thead>
                             <tr>
                                 <th rowspan="2">क्र.स</th>

@@ -18,7 +18,7 @@ use Modules\BusinessRegistration\Entities\PrintedData;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class BusinessRegistrationController extends Controller
 {
     use NepaliDateConverter;
@@ -26,7 +26,12 @@ class BusinessRegistrationController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('businessRegistration_access');
-        $businessDetails = BusinessDetail::with('proprietorDetail')->latest()
+
+        $businessDetails = BusinessDetail::with('proprietorDetail')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })->latest()
             ->paginate(15);
 
         return view('businessregistration::admin.businessRegistration.index', compact('businessDetails'));
