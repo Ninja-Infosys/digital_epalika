@@ -167,7 +167,7 @@
                             </table>
 
                         </div>
-                        {{$activityLogs->links()}}
+                        {{$activityLogs->onEachSide(3)->links()}}
                     </div>
                 </div>
             </div>

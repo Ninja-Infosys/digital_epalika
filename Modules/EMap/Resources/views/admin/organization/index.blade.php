@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -50,34 +49,35 @@
                                     <td>{{$organization->organizationDetail->org_name_ne ?? ''}}</td>
                                     <td>
                                         @can('organization_edit')
-                                        <a href="{{route('emap.admin.organization.update-login-status',$organization)}}"
-                                           class="btn btn-xs btn-outline-{{$organization->is_active==1 ?'primary':'danger'}}" title="लग इन {{$organization->is_active==1 ?'गर्न मिल्छ':'गर्न मिल्दैन'}}">
-                                            <i class="fa  {{$organization->is_active==1 ?' fa-check':'fa-window-close'}}"></i>
-                                            लग इन स्थिति
-                                        </a>
+                                            <a href="{{route('emap.admin.organization.update-login-status',$organization)}}"
+                                               class="btn btn-xs btn-outline-{{$organization->is_active==1 ?'primary':'danger'}}"
+                                               title="लग इन {{$organization->is_active==1 ?'गर्न मिल्छ':'गर्न मिल्दैन'}}">
+                                                <i class="fa  {{$organization->is_active==1 ?' fa-check':'fa-window-close'}}"></i>
+                                            </a>
                                         @endcan
                                         @can('organization_access')
-                                        <a href="{{route('emap.admin.organization.show',$organization)}}"
-                                           title="हेर्नुहोस्" class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
+                                            <a href="{{route('emap.admin.organization.show',$organization)}}"
+                                               title="हेर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                         @endcan
-                                            @can('executiveWardCommittee_edit')
-                                                <a href="{{route('admin.executiveMeeting.wardCommittee.edit',$wardCommittee)}}"
-                                                   title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                            @endcan
-                                        <form action="{{route('emap.admin.organization.destroy',$organization)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            @can('organization_delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
-                                            @endcan
-                                        </form>
+                                        @can('organization_edit')
+                                            <a href="{{route('emap.admin.organization.edit',$organization)}}"
+                                               title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('organization_delete')
+                                            <form action="{{route('emap.admin.organization.destroy',$organization)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                        title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
