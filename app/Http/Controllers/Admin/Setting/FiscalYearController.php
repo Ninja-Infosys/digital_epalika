@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\Builder;
 
 class FiscalYearController extends Controller
 {
@@ -13,7 +14,13 @@ class FiscalYearController extends Controller
     {
         $this->checkAuthorization('fiscalYear_access');
 
-        $fiscalYears = FiscalYear::get();
+        $fiscalYears = FiscalYear::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+            ->latest()
+            ->get();
 
         return view('admin.setting.fiscalYear.index', compact('fiscalYears'));
     }

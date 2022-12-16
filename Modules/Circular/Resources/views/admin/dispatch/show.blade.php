@@ -22,7 +22,17 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm" style="text-align: end">
+            <button class="btn btn-sm btn-info"
+                    onclick="printJS({
+                    printable: 'printData',
+                    css: '{{asset('assets/backend/css/print.css')}}',
+                    type: 'html'
+                    })">
+                <i class="fa fa-print"></i> Print
+            </button>
+        </div>
+        <div class="col-md-12 mt-2">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -36,6 +46,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        <div id="printData">
                         <table class="table table-sm mb-0 table-striped table-hover">
 
                             <tbody>
@@ -89,12 +100,16 @@
                             </tbody>
                         </table>
                     </div>
+                    </div>
                     <div class="row">
                         @foreach($dispatch->files as $document)
                             <div class="col-md-4 mb-3">
                                 <div class="card">
-                                    <div class="card-header">
-                                    <span style="float: right">
+                                    <div class="card-header d-flex justify-content-around">
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$document->file])}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
                                         <form action="{{route('admin.file.destroy',$document)}}"
                                               method="post">
                                             @csrf
@@ -103,7 +118,6 @@
                                                 <i class="fa fa-window-close"></i>
                                             </button>
                                         </form>
-                                    </span>
                                     </div>
                                     <div class="card-body">
                                         @if($document->extension ==='pdf')
@@ -118,7 +132,6 @@
                         @endforeach
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

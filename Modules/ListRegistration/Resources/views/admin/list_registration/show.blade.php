@@ -138,17 +138,21 @@
                         @foreach($listRegistration->files as $document)
                             <div class="col-md-4 mb-3">
                                 <div class="card">
-                                    <div class="card-header">
-                                    <span style="display: flex;justify-content: space-between;">
-                                        <p>{{$document->file_name}}</p>
-                                        <form action="{{route('admin.file.destroy',$document)}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
-                                                <i class="fa fa-window-close"></i>
-                                            </button>
-                                        </form>
-                                    </span>
+                                    <div class="card-header d-flex justify-content-around">
+                                        <p class="col-md-8">{{$document->file_name}}</p>
+                                        <div class=" col-md-4 d-flex justify-content-around">
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$document->file])}}"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                            <form action="{{route('admin.file.destroy',$document)}}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
+                                                    <i class="fa fa-window-close"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                     <div class="card-body">
                                         @if($document->extension ==='pdf')

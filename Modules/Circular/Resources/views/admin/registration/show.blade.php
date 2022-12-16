@@ -100,7 +100,11 @@
                         @foreach($registration->files as $document)
                             <div class="col-md-4 mb-3">
                                 <div class="card">
-                                    <div class="card-header">
+                                    <div class="card-header ">
+                                        <a href="{{route('admin.file-url-download', ['file_url'=>$document->file])}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-download"></i>
+                                        </a>
                                         <form action="{{route('admin.file.destroy',$document)}}" style="float: right"
                                               method="post">
                                             @csrf
@@ -123,8 +127,8 @@
                         @endforeach
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 @endsection
+

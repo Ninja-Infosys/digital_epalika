@@ -11,11 +11,12 @@ use App\Observers\MunicipalDetailObserver;
 use App\Observers\OfficeHeaderObserver;
 use App\Observers\UnitObserver;
 use Gate;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,17 +28,63 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 //        Model::preventLazyLoading(!$this->app->isProduction());
+        $this->defileObservers();
+
+        Blade::componentNamespace('App\\View\\Components\\Navigation', 'admin');
+
+        $this->defineGate();
+
+        JsonResource::withoutWrapping();
+
+        $this->defineMacro();
+    }
+
+    /**
+     * @return void
+     */
+    public function defileObservers(): void
+    {
         OfficeHeader::observe(OfficeHeaderObserver::class);
         FeatureActivation::observe(FeatureActivationObserver::class);
         Unit::observe(UnitObserver::class);
         MunicipalDetail::observe(MunicipalDetailObserver::class);
+    }
 
-        Blade::componentNamespace('App\\View\\Components\\Navigation', 'admin');
-
+    /**
+     * @return void
+     */
+    public function defineGate(): void
+    {
         Gate::define('uploadFiles', function () {
             return true;
         });
+    }
 
-        JsonResource::withoutWrapping();
+    /**
+     * @return void
+     */
+    public function defineMacro(): void
+    {
+        Builder::macro('whereLike', function ($attributes, string $searchTerm) {
+            $this->where(function (Builder $query) use ($attributes, $searchTerm) {
+                foreach (Arr::wrap($attributes) as $attribute) {
+                    $query->when(
+                        str_contains($attribute, '.'),
+                        function (Builder $query) use ($attribute, $searchTerm) {
+                            [$relationName, $relationAttribute] = explode('.', $attribute);
+
+                            $query->orWhereHas($relationName, function (Builder $query) use ($relationAttribute, $searchTerm) {
+                                $query->where($relationAttribute, 'LIKE', "%{$searchTerm}%");
+                            });
+                        },
+                        function (Builder $query) use ($attribute, $searchTerm) {
+                            $query->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
+                        }
+                    );
+                }
+            });
+
+            return $this;
+        });
     }
 }
