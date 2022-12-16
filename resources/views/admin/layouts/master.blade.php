@@ -23,6 +23,7 @@
         type="text/css"
         id="app-style"
     />
+
     <link
         href="{{asset('assets/backend/css/bootstrap.min.css')}}"
         rel="stylesheet"
@@ -150,6 +151,16 @@
             timer:3000,
             timerProgressBar:true,
             icon: event.detail.type,
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        //submit form if any of the input with class filter-form's focus is removed
+
+        $('.filter-form').focusout(function () {
+            $(this).closest('form').submit();
         });
     });
 </script>
