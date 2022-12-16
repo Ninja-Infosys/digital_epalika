@@ -22,7 +22,17 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-sm" style="text-align: end">
+            <button class="btn btn-sm btn-info"
+                    onclick="printJS({
+                    printable: 'printData',
+                    css: '{{asset('assets/backend/css/print.css')}}',
+                    type: 'html'
+                    })">
+                <i class="fa fa-print"></i> Print
+            </button>
+        </div>
+        <div class="col-md-12 mt-2">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -36,6 +46,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        <div id="printData">
                         <table class="table table-sm mb-0 table-striped table-hover">
 
                             <tbody>
@@ -88,6 +99,7 @@
                             <tr>
                             </tbody>
                         </table>
+                    </div>
                     </div>
                     <div class="row">
                         @foreach($dispatch->files as $document)

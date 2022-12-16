@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -38,6 +37,10 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        <form action="" method="get">
+                            <input type="text" name="search" value="{{old('search',\request('search'))}}"
+                                   class="filter-form">
+                        </form>
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
@@ -51,7 +54,7 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>
-                                       {{$fiscalYear->title}}
+                                        {{$fiscalYear->title}}
                                     </td>
                                     <td>
                                         @can('user_edit')

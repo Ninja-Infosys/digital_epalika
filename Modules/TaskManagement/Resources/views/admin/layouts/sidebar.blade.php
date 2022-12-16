@@ -7,13 +7,13 @@
 <li class="{{request()->is('admin/taskmanagement/dailyTask') ? 'active' : ''}}">
     <a href="{{route('admin.taskManagement.dailyTask.index')}}">
         <i class="fa fa-tasks"></i>
-        <span> दैनिक कार्य</span>
+        <span> दैनिक कार्यहरु</span>
     </a>
 </li>
 <li class="{{request()->is('admin/taskmanagement/report') ? 'active' : ''}}">
     <a href="{{route('admin.taskManagement.report.index')}}">
         <i class="fa fa-clipboard-list"></i>
-        <span> रिपोर्ट</span>
+        <span> रिपोर्टहरु</span>
     </a>
 </li>
 
