@@ -44,7 +44,7 @@
                                     </tr>
                                     <tr>
                                         <th>प्रकार</th>
-                                        <td>{{$listRegistration->applicant_type}}</td>
+                                        <td>{{$listRegistration->applicant_type->label()}}</td>
                                     </tr>
                                     <tr>
                                         <th>नाम.</th>

@@ -2,17 +2,21 @@
 
 namespace Modules\ListRegistration\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\FiscalYear;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\View;
+use Modules\ListRegistration\Entities\ListRegistration;
 
 class ReportController extends Controller
 {
     public function index()
     {
         $fiscalYears = FiscalYear::get();
+        $columnData = $this->getColumns();
 
-        return view('plan::admin.report.index', compact('fiscalYears', 'columnData', 'planAreas', 'planLevels', 'budgetHeads', 'budgetSources'));
+        return view('listregistration::admin.report.index', compact('fiscalYears', 'columnData'));
     }
 
     public function report(Request $request)
@@ -23,13 +27,12 @@ class ReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $projects = Project::with('budgetHead','budgetSource','planArea')->where(function ($q) use ($request) {
+        $listRegistrations = ListRegistration::where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
-        })
-            ->get();
+        })->get();
 
         return response()->json([
-            'view' => (string)View::make('plan::admin.report.report_table', compact('projects'))
+            'view' => (string)View::make('listregistration::admin.report.table_data', compact('listRegistrations'))
         ]);
     }
 
@@ -37,13 +40,10 @@ class ReportController extends Controller
     {
         $columnData = collect();
 
-        (new Project())
+        (new ListRegistration())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
-                return array_keys($column, 'Project')
-                    || array_keys($column, 'projectCostDetail')
-                    || array_keys($column, 'projectMaintenanceArrangement')
-                    || array_keys($column, 'consumerCommittee');
+                return array_keys($column, 'ListRegistration');
             })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
@@ -58,31 +58,23 @@ class ReportController extends Controller
         }
 
         if (!empty($request->input('from_date'))) {
-            $q->whereDate('project_start_date', '>=', $request->input('from_date'));
+            $q->whereDate('date', '>=', $request->input('from_date'));
         }
 
         if (!empty($request->input('to_date'))) {
-            $q->whereDate('project_start_date', '<=', $request->input('to_date'));
+            $q->whereDate('date', '<=', $request->input('to_date'));
         }
 
-        if (!empty($request->input('ward_no'))) {
-            $q->whereIn('ward_no', $request->input('ward_no'));
+        if (!empty($request->input('registration_no'))) {
+            $q->where('registration_no', $request->input('registration_no'));
         }
 
-        if (!empty($request->input('plan_sub_area_id'))) {
-            $q->whereIn('plan_area_id', $request->input('plan_sub_area_id'));
+        if (!empty($request->input('applicant_type'))) {
+            $q->whereIn('applicant_type', $request->input('applicant_type'));
         }
 
-        if (!empty($request->input('plan_sub_level_id'))) {
-            $q->whereIn('plan_level_id', $request->input('plan_sub_level_id'));
-        }
-
-        if (!empty($request->input('budget_sub_head_id'))) {
-            $q->whereIn('budget_head_id', $request->input('budget_sub_head_id'));
-        }
-
-        if (!empty($request->input('project_status'))) {
-            $q->where('project_status', $request->input('project_status'));
+        if (!empty($request->input('business_nature'))) {
+            $q->whereIn('business_nature', $request->input('business_nature'));
         }
     }
 }

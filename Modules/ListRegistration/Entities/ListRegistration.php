@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace Modules\ListRegistration\Entities;
 
+use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,12 +13,15 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\ListRegistration\Enums\ApplicantCategoryEnum;
+use Modules\ListRegistration\Enums\BusinessNatureEnum;
 
 class ListRegistration extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -44,6 +49,11 @@ class ListRegistration extends Model
         'date',
     ];
 
+    protected $casts = [
+        'applicant_type' => ApplicantCategoryEnum::class,
+        'business_nature' => BusinessNatureEnum::class
+    ];
+
     public function getApplicationPhotoUrlAttribute(): string
     {
         return $this->attributes['application_photo'] ?
@@ -52,7 +62,7 @@ class ListRegistration extends Model
 
     public function setApplicationPhotoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['application_photo'] = $value->store('list_registration/application', 'public');
         }
     }
@@ -65,8 +75,8 @@ class ListRegistration extends Model
 
     public function setRegistrationCertificateAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['registration_certificate'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/registration_certificate', 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['registration_certificate'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/registration_certificate', 'public');
         }
     }
 
@@ -78,8 +88,8 @@ class ListRegistration extends Model
 
     public function setPanPhotoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['pan_photo'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/pan_photo', 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['pan_photo'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/pan_photo', 'public');
         }
     }
 
@@ -91,8 +101,8 @@ class ListRegistration extends Model
 
     public function setTaxPaymentCertificateAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['tax_payment_certificate'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/tax_payment_certificate', 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['tax_payment_certificate'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/tax_payment_certificate', 'public');
         }
     }
 
@@ -104,8 +114,8 @@ class ListRegistration extends Model
 
     public function setLicensePhotoAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['license_photo'] = $value->store('list_registration/'.Str::slug($this->attributes['main_person'], '_').'/license_photo', 'public');
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['license_photo'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/license_photo', 'public');
         }
     }
 

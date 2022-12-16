@@ -3,11 +3,10 @@
 namespace Modules\ListRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ListRegistration;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+use Modules\ListRegistration\Entities\ListRegistration;
 use Modules\ListRegistration\Http\Requests\ListRegistration\StoreListRegistrationRequest;
 use Modules\ListRegistration\Http\Requests\ListRegistration\UpdateListRegistrationRequest;
 

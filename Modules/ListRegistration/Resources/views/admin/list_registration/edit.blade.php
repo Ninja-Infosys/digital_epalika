@@ -7,12 +7,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.listRegistrations.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.listRegistrations.listRegistration.index')}}">सुची दर्ता प्रणालि</a>
                         </li>
                         <li class="breadcrumb-item active">मौजुदा सुची सम्पादन थप्नुहोस</li>
                     </ol>
@@ -69,10 +66,10 @@
                                             class="form-select @error('applicant_type') is-invalid @enderror"
                                             id="applicant_type">
                                         <option value="">छान्नुहोस्</option>
-                                        @foreach(config('defaults.applicant_types') as $applicant_type)
+                                        @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
                                             <option
-                                                value="{{$applicant_type}}" {{$applicant_type==old('applicant_type',$listRegistration->applicant_type) ? 'selected' : ''}}>
-                                                {{$applicant_type}}
+                                                value="{{$applicantType->value}}" {{$applicantType->value==old('applicant_type',$listRegistration->applicant_type->value) ? 'selected' : ''}}>
+                                                {{$applicantType->label()}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -249,10 +246,10 @@
                                         class="form-select @error('business_nature') is-invalid @enderror"
                                         id="business_nature">
                                         <option value="">छान्नुहोस्</option>
-                                        @foreach(config('defaults.business_natures') as $business_nature)
+                                        @foreach(\Modules\ListRegistration\Enums\BusinessNatureEnum::cases() as $business_nature)
                                             <option
-                                                value="{{$business_nature}}" {{$business_nature==old('business_nature',$listRegistration->business_nature) ? 'selected' : ''}}>
-                                                {{$business_nature}}
+                                                value="{{$business_nature->value}}" {{$business_nature->value==old('business_nature',$listRegistration->business_nature->value) ? 'selected' : ''}}>
+                                                {{$business_nature->label()}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -283,18 +280,12 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="date" class="form-label">मिति *</label>
-                                    <input
-                                        type="text"
-                                        name="date"
-                                        value="{{old('date',$listRegistration->date)}}"
-                                        class="form-control nepali_date @error('date') is-invalid @enderror"
-                                        id="date"
-                                        placeholder="मिति"
+                                    <x-date-input-component
+                                        nameNe="date" labelNe="मिति *"
+                                        nameEn="en_date" labelEn="Date"
+                                        :getTodayDate="false"
+                                        :editDateNe="$listRegistration->date"
                                     />
-                                    @error('date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                             </div>
                         </fieldset>
@@ -307,16 +298,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".nepali_date").nepaliDatePicker({
-                    ndpYear: true,
-                    ndpMonth: true,
-                    ndpYear: true
-                });
-            });
-        </script>
-    @endpush
 @endsection
