@@ -38,7 +38,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -59,20 +60,20 @@
                                     <td>{{$employee->position}}</td>
                                     <td>
                                         <a href="{{route('admin.digitalBoard.employee.updateEmployeeStatus',$employee)}}"
-                                           class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}}">
+                                           class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}}" title="स्थिति">
                                             <i class="fa  {{$employee->status==1 ?' fa-check':'fa-window-close'}}"></i>
-                                            स्थिति
+
                                         </a>
                                         <a href="{{route('admin.digitalBoard.employee.edit',$employee)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.digitalBoard.employee.destroy',$employee)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
@@ -85,6 +86,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{ $employees->onEachSide(config('app.pagination_count'))->links() }}
                 </div>
             </div>
         </div>

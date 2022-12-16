@@ -9,14 +9,20 @@ use Illuminate\Support\Str;
 use Modules\Circular\Entities\Registration;
 use Modules\Circular\Http\Requests\Registration\StoreRegistrationRequest;
 use Modules\Circular\Http\Requests\Registration\UpdateRegistrationRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class RegistrationController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('registration_access');
 
-        $registrations = Registration::latest()->get();
+        $registrations = Registration::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title','registration_no','sender_name','subject',], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('circular::admin.registration.index', compact('registrations'));
     }

@@ -47,22 +47,27 @@
                             <tbody>
                             @forelse($branches as $key=>$branch)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <th>{{$loop->iteration}}</th>
                                     <th>{{$branch->branch_name}}</th>
                                     <td></td>
                                     <td>
-                                        <a href="{{route('admin.branch.edit',$branch)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
-                                        <form action="{{route('admin.branch.destroy',$branch)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
-                                        </form>
+                                        @can('branch_edit')
+                                            <a href="{{route('admin.branch.edit',$branch)}}"
+                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('branch_delete')
+                                            <form action="{{route('admin.branch.destroy',$branch)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                        title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @foreach($branch->branches as $subBranch)
@@ -74,18 +79,24 @@
                                         <td>{{$subBranch->branch_name}}</td>
                                         <td>{{$subBranch->branch->branch_name??''}}</td>
                                         <td>
-                                            <a href="{{route('admin.branch.edit',$subBranch)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                            <form action="{{route('admin.branch.destroy',$subBranch)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
+                                            @can('branch_edit')
+                                                <a href="{{route('admin.branch.edit',$subBranch)}}"
+                                                   title="सम्पादन गर्नुहोस्"
+                                                   class="btn btn-xs btn-outline-primary">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endcan
+                                            @can('branch_delete')
+                                                <form action="{{route('admin.branch.destroy',$subBranch)}}"
+                                                      method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                            title="मेटाउनु होस्">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

@@ -7,14 +7,20 @@ use Illuminate\Support\Facades\Gate;
 use Modules\DigitalBoard\Entities\Video;
 use Modules\DigitalBoard\Http\Requests\Video\StoreVideoRequest;
 use Modules\DigitalBoard\Http\Requests\Video\UpdateVideoRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class VideoController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('digitalBoardVideo_access');
 
-        $videos = Video::latest()->get();
+        $videos = Video::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('digitalboard::video.index', compact('videos'));
     }
