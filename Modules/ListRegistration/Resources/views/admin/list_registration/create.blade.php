@@ -35,7 +35,6 @@
                     <form action="{{route('admin.listRegistrations.listRegistration.store')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
-
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
                                 <strong>
@@ -64,10 +63,10 @@
                                             class="form-select @error('applicant_type') is-invalid @enderror"
                                             id="applicant_type">
                                         <option value="">छान्नुहोस्</option>
-                                        @foreach(config('defaults.applicant_types') as $applicant_type)
+                                        @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
                                             <option
-                                                value="{{$applicant_type}}" {{$applicant_type==old('applicant_type') ? 'selected' : ''}}>
-                                                {{$applicant_type}}
+                                                value="{{$applicantType->value}}" {{$applicantType->value==old('applicant_type') ? 'selected' : ''}}>
+                                                {{$applicantType->label()}}
                                             </option>
                                         @endforeach
                                     </select>

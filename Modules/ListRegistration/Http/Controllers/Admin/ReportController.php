@@ -58,11 +58,23 @@ class ReportController extends Controller
         }
 
         if (!empty($request->input('from_date'))) {
-            $q->whereDate('project_start_date', '>=', $request->input('from_date'));
+            $q->whereDate('date', '>=', $request->input('from_date'));
         }
 
         if (!empty($request->input('to_date'))) {
-            $q->whereDate('project_start_date', '<=', $request->input('to_date'));
+            $q->whereDate('date', '<=', $request->input('to_date'));
+        }
+
+        if (!empty($request->input('registration_no'))) {
+            $q->where('registration_no', $request->input('registration_no'));
+        }
+
+        if (!empty($request->input('applicant_type'))) {
+            $q->whereIn('applicant_type', $request->input('applicant_type'));
+        }
+
+        if (!empty($request->input('business_nature'))) {
+            $q->whereIn('business_nature', $request->input('business_nature'));
         }
     }
 }

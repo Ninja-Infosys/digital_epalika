@@ -11,9 +11,6 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.listRegistrations.listRegistration.index')}}">सुची दर्ता प्रणालि</a>
-                        </li>
                         <li class="breadcrumb-item active">मौजुदा सुची सम्पादन थप्नुहोस</li>
                     </ol>
                 </div>
@@ -69,10 +66,10 @@
                                             class="form-select @error('applicant_type') is-invalid @enderror"
                                             id="applicant_type">
                                         <option value="">छान्नुहोस्</option>
-                                        @foreach(config('defaults.applicant_types') as $applicant_type)
+                                        @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
                                             <option
-                                                value="{{$applicant_type}}" {{$applicant_type==old('applicant_type',$listRegistration->applicant_type) ? 'selected' : ''}}>
-                                                {{$applicant_type}}
+                                                value="{{$applicantType->value}}" {{$applicantType->value==old('applicant_type',$listRegistration->applicant_type->value) ? 'selected' : ''}}>
+                                                {{$applicantType->label()}}
                                             </option>
                                         @endforeach
                                     </select>

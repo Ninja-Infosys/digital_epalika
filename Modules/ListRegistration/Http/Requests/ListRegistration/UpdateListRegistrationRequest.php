@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+use Modules\ListRegistration\Enums\ApplicantCategoryEnum;
 use Modules\ListRegistration\Enums\BusinessNatureEnum;
 
 class UpdateListRegistrationRequest extends FormRequest
@@ -19,7 +20,7 @@ class UpdateListRegistrationRequest extends FormRequest
     {
         return [
             'registration_no' => ['required', Rule::unique('list_registrations', 'registration_no')->ignore($this->listRegistration)],
-            'applicant_type' => ['required', Rule::in(config('defaults.applicant_types'))],
+            'applicant_type' => ['required', new Enum(ApplicantCategoryEnum::class)],
             'name' => ['nullable'],
             'address' => ['required'],
             'mailing_address' => ['required'],

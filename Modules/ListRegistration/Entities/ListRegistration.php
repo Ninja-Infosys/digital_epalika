@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Modules\ListRegistration\Enums\ApplicantCategoryEnum;
 use Modules\ListRegistration\Enums\BusinessNatureEnum;
 
 class ListRegistration extends Model
@@ -49,6 +50,7 @@ class ListRegistration extends Model
     ];
 
     protected $casts = [
+        'applicant_type' => ApplicantCategoryEnum::class,
         'business_nature' => BusinessNatureEnum::class
     ];
 

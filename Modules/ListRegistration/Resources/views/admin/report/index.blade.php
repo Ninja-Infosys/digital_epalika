@@ -77,6 +77,26 @@
                                     <input type="text" id="registration_no" name="registration_no" class="form-control"
                                            placeholder="दर्ता नं.">
                                 </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="applicant_type">प्रकार</label>
+                                    <select name="applicant_type[]" multiple data-toggle="select2"
+                                            id="applicant_type" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
+                                            <option value="{{$applicantType->value}}">{{$applicantType->label()}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="business_nature">खरिद प्रकृति</label>
+                                    <select name="business_nature[]" multiple data-toggle="select2"
+                                            id="business_nature" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach(\Modules\ListRegistration\Enums\BusinessNatureEnum::cases() as $businessNature)
+                                            <option value="{{$businessNature->value}}">{{$businessNature->label()}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <fieldset class="border p-2 mb-2">
                                 <legend class="font-16 text-info">
@@ -132,7 +152,7 @@
                     e.preventDefault()
                     $.ajax({
                         type: "post",
-                        url: "{{route('admin.circular.report.dispatch.report-data')}}",
+                        url: "{{route('admin.listRegistrations.report.report-data')}}",
                         data: new FormData(this),
                         processData: false,
                         contentType: false,

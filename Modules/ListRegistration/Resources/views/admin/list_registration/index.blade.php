@@ -39,6 +39,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                <th>दर्ता नम्बर</th>
                                 <th>मुख्य व्यक्तिको  नाम</th>
                                 <th>फोन नम्बर </th>
                                 <th>निबेदन मिति </th>
@@ -49,6 +50,7 @@
                             @forelse($listRegistrations as $listRegistration)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$listRegistration->registration_no}}</td>
                                     <td>{{$listRegistration->main_person}}</td>
                                     <td>{{$listRegistration->mobile_no}}</td>
                                     <td>{{$listRegistration->date}}</td>
