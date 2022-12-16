@@ -1,7 +1,7 @@
 <form wire:submit.prevent="submitFormData">
     <fieldset>
         <legend>
-            <h5><b>विवरण</b></h5>
+            <h4>विवरण</h4>
         </legend>
         <div class="row">
             <div class="col-md-3 mb-2">
@@ -65,7 +65,7 @@
 
     <fieldset class="mt-2">
         <legend>
-            <h5><b>ठेगाना</b></h5>
+            <h4>ठेगाना</h4>
         </legend>
         <div class="row">
             <div class="col-md-4 mb-2">
@@ -150,7 +150,7 @@
 
     <fieldset class="mt-2">
         <legend>
-            <h5><b>अनुदान विवरण</b></h5>
+            <h4>अनुदान विवरण</h4>
         </legend>
         <div class="row">
             <div class="col-md-4 mb-2">
@@ -292,7 +292,7 @@
     </fieldset>
 
     <fieldset class="mt-2">
-        <legend><h5><b>पहिले अनुदान प्राप्त गरे नगरेको</b></h5></legend>
+        <legend><h4>पहिले अनुदान प्राप्त गरे नगरेको</h4></legend>
         <div class="row">
             <div class="col-md-4 mb-2">
                 <label for="is_continuity">आयोजना नयाँ वा पहिलेको अनुदानको निरन्तरता हो ?</label>
