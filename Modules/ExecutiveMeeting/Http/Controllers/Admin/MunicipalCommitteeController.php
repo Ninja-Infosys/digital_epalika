@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\MunicipalCommittee;
 use Modules\ExecutiveMeeting\Http\Requests\MunicipalCommittee\StoreMunicipalCommitteeRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MunicipalCommittee\UpdateMunicipalCommitteeRequest;
+use Illuminate\Database\Eloquent\Builder;
 
 class MunicipalCommitteeController extends Controller
 {
@@ -15,7 +16,14 @@ class MunicipalCommitteeController extends Controller
     {
         $this->checkAuthorization('executiveMunicipalCommittee_access');
 
-        $municipalCommittees = MunicipalCommittee::with('province', 'district', 'localBody')->orderBy('position')->get();
+        $municipalCommittees = MunicipalCommittee::with('province', 'district', 'localBody')->orderBy('position')
+        ->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name','phone','email'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('executivemeeting::admin.municipal_committee.index', compact('municipalCommittees'));
     }

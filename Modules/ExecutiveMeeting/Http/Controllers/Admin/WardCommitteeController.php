@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\WardCommittee;
 use Modules\ExecutiveMeeting\Http\Requests\WardCommittee\StoreWardCommitteeRequest;
 use Modules\ExecutiveMeeting\Http\Requests\WardCommittee\UpdateWardCommitteeRequest;
+use Illuminate\Database\Eloquent\Builder;
 
 class WardCommitteeController extends Controller
 {
@@ -15,7 +16,14 @@ class WardCommitteeController extends Controller
     {
         $this->checkAuthorization('executiveWardCommittee_access');
 
-        $wardCommittees = WardCommittee::orderBy('position')->get();
+        $wardCommittees = WardCommittee::orderBy('position')
+        ->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name','designation','phone','email'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('executivemeeting::admin.ward_committee.index', compact('wardCommittees'));
     }

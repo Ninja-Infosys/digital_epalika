@@ -11,13 +11,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
+use Illuminate\Database\Eloquent\Builder;
 
 class OrganizationController extends Controller
 {
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('organization_access');
-        $organizations = Organization::with('organizationDetail')->latest()->get();
+        $organizations = Organization::with('organizationDetail')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['email','phone','name'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('emap::admin.organization.index', compact('organizations'));
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\Grant\Entities\GrantDetail;
+use Illuminate\Database\Eloquent\Builder;
 
 class GrantDetailController extends Controller
 {
@@ -13,7 +14,13 @@ class GrantDetailController extends Controller
     {
         $this->checkAuthorization('grantDetail_access');
 
-        $grantDetails = GrantDetail::with('fiscalYear', 'grantType', 'grantProgram')->latest()->get();
+        $grantDetails = GrantDetail::with('fiscalYear', 'grantType', 'grantProgram')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['fiscalYear.title','grantProgram.program_name','grant_recipient_name'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('grant::admin.grant_detail.index', compact('grantDetails'));
     }

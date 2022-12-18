@@ -29,7 +29,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                    @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th scope="col">क्र.सं.</th>
@@ -61,6 +62,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                </div>
+                <div class="mt-2">
+                    {{ $maps->onEachSide(config('app.pagination_count'))->links() }}
                 </div>
             </div>
         </div>

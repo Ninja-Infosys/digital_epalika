@@ -35,7 +35,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm table-striped table-hover mt-3">
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
@@ -54,9 +55,9 @@
                                         <td>{{ $meetingEvent->event_name }}</td>
                                         <td>{{ $meetingEvent->description }}</td>
                                         <td>{{ $meetingEvent->recurrence->label() }}</td>
-                                        <td>{{ $meetingEvent->start_date }}({{ $meetingEvent->en_start_date?->toDateString() }})
+                                        <td>{{ $meetingEvent->start_date }}({{ $meetingEvent->en_start_date }})
                                         </td>
-                                        <td>{{ $meetingEvent->end_date }}({{ $meetingEvent->en_end_date?->toDateString() }})
+                                        <td>{{ $meetingEvent->end_date }}({{ $meetingEvent->en_end_date }})
                                         </td>
 
                                         <td width="90">
@@ -87,9 +88,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {{ $meetingEvents->links() }}
-                    </div>
-
+                        {{ $meetingEvents->onEachSide(config('app.pagination_count'))->links() }}                    </div>
                 </div>
             </div>
         </div>
