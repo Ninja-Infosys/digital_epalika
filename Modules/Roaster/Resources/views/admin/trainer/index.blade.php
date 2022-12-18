@@ -32,7 +32,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-bordered table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-bordered table-hover mt-2">
                             <thead>
                             <tr>
                                 <th>क्र.सं</th>
@@ -95,6 +96,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $trainers->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

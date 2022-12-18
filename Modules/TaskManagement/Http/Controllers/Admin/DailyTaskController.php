@@ -3,6 +3,7 @@
 namespace Modules\TaskManagement\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Modules\TaskManagement\Entities\DailyTask;
 
@@ -10,7 +11,12 @@ class DailyTaskController extends Controller
 {
     public function index()
     {
-        $dailyTasks = DailyTask::with('branch', 'taskCategory', 'taskDivision')->paginate(10);
+        $dailyTasks = DailyTask::with('branch', 'taskCategory', 'taskDivision')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['date'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
 
         return view('taskmanagement::admin.daily_task.index', compact('dailyTasks'));
     }
