@@ -4,6 +4,7 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Branch;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Modules\TaskManagement\Entities\TaskCategory;
 use Modules\TaskManagement\Http\Requests\TaskCategory\StoreTaskCategoryRequest;
@@ -18,7 +19,13 @@ class TaskCategoryController extends Controller
                 'data' => TaskCategory::filterData($request->all())->get()
             ]);
         } else {
-            $taskCategories = TaskCategory::with('branch')->paginate(10);
+            $taskCategories = TaskCategory::with('branch')->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['title'], request('search'));
+                }
+            })
+                ->latest()->paginate(10);
+
 
             return view('taskmanagement::admin.task_category.index', compact('taskCategories'));
         }

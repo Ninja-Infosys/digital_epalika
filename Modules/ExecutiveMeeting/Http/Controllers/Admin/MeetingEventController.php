@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingEvent\StoreMeetingEventRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingEvent\UpdateMeetingEventRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class MeetingEventController extends Controller
 {
     public function index($event_for)
@@ -16,7 +16,13 @@ class MeetingEventController extends Controller
 
         $meetingEvents = MeetingEvent::where('event_for', $event_for)
             ->whereDate('en_start_date', '<=', today()->toDateString())
-            ->latest()->paginate(15);
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['event_name','start_date','description'], request('search'));
+                }
+            })
+            ->latest()->paginate(10);
+
 
         return view('executivemeeting::admin.meeting_event.index', compact('event_for', 'meetingEvents'));
     }
@@ -27,7 +33,12 @@ class MeetingEventController extends Controller
 
         $meetingEvents = MeetingEvent::where('event_for', $event_for)
             ->whereDate('en_start_date', '>', today()->toDateString())
-            ->latest()->paginate(15);
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['event_name','start_date','description'], request('search'));
+                }
+            })
+            ->latest()->paginate(10);
 
         return view('executivemeeting::admin.meeting_event.upcoming_meeting', compact('event_for', 'meetingEvents'));
     }

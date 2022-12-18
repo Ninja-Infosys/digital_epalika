@@ -11,6 +11,7 @@ use Modules\HelpDesk\Entities\ServiceDocument;
 use Modules\HelpDesk\Entities\ServiceProcess;
 use Modules\HelpDesk\Http\Requests\Service\StoreServiceRequest;
 use Modules\HelpDesk\Http\Requests\Service\UpdateServiceRequest;
+use Illuminate\Database\Eloquent\Builder;
 
 class ServiceController extends Controller
 {
@@ -18,7 +19,14 @@ class ServiceController extends Controller
     {
         $this->checkAuthorization('service_access');
 
-        $services = Service::with('branch')->get();
+        $services = Service::with('branch')
+        ->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('helpdesk::admin.service.index', compact('services'));
     }

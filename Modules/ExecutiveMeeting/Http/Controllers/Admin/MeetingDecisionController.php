@@ -8,6 +8,7 @@ use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\StoreMeetingDecisionRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\UpdateMeetingDecisionRequest;
+use Illuminate\Database\Eloquent\Builder;
 
 class MeetingDecisionController extends Controller
 {
@@ -15,7 +16,14 @@ class MeetingDecisionController extends Controller
     {
 
         $this->checkAuthorization($meeting_for.'MeetingDecision_access');
-        $meetingDecisions = MeetingDecision::with('meetingEvent')->where('meeting_for', $meeting_for)->latest()->get();
+        $meetingDecisions = MeetingDecision::with('meetingEvent')->where('meeting_for', $meeting_for)
+        ->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['meetingEvent.event_name','date'], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('executivemeeting::admin.meeting_decision.index', compact('meeting_for', 'meetingDecisions'));
     }
