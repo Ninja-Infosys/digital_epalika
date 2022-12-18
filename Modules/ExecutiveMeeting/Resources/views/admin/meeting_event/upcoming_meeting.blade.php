@@ -35,6 +35,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        @includeIf('inc.filter_form')
                         <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
@@ -54,8 +55,8 @@
                                     <td>{{$meetingEvent->event_name}}</td>
                                     <td>{{$meetingEvent->description}}</td>
                                     <td>{{$meetingEvent->recurrence->label()}}</td>
-                                    <td>{{$meetingEvent->start_date}}({{$meetingEvent->en_start_date?->toDateString()}})</td>
-                                    <td>{{$meetingEvent->end_date}}({{$meetingEvent->en_end_date?->toDateString()}})</td>
+                                    <td>{{$meetingEvent->start_date}}({{$meetingEvent->en_start_date}})</td>
+                                    <td>{{$meetingEvent->end_date}}({{$meetingEvent->en_end_date}})</td>
 
                                     <td width="90">
                                         @can($event_for . 'MeetingEvent_edit')
