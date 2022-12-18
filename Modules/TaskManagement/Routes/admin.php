@@ -11,11 +11,13 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 
 Route::resource('dailyTask', DailyTaskController::class);
 
-Route::prefix('report')->as('report.')->group(function () {
-    Route::get('/', [ReportController::class, 'index'])->name('index');
-});
-
 Route::prefix('setting')->group(function () {
     Route::resource('taskCategory', TaskCategoryController::class);
     Route::resource('taskDivision', TaskDivisionController::class);
+});
+
+//report
+Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function (){
+    Route::get('/','index')->name('index');
+    Route::post('report-data','report')->name('report-data');
 });

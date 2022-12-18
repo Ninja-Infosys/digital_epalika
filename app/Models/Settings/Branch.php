@@ -38,6 +38,19 @@ class Branch extends Model
         return $query->whereNotNull('branch_id');
     }
 
+    public function scopeFilterData($query, $params = [])
+    {
+        if (!empty($params['branch_id'])) {
+            if (is_array($params['branch_id'])) {
+                $query->whereIn('branch_id', $params['branch_id']);
+            } else {
+                $query->where('branch_id', $params['branch_id']);
+            }
+        }
+
+        return $query;
+    }
+
     public function branch(): BelongsTo
     {
         return $this->belongsTo(__CLASS__);

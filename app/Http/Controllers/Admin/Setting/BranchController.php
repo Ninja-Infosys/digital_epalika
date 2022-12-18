@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Branch\StoreBranchRequest;
 use App\Http\Requests\Setting\Branch\UpdateBranchRequest;
 use App\Models\Settings\Branch;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Modules\Plan\Entities\PlanArea;
 
 class BranchController extends Controller
 {
@@ -17,6 +19,17 @@ class BranchController extends Controller
         $branches = Branch::with('branches.branch')->whereNull('branch_id')->orderBy('branch_id')->paginate(10);
 
         return view('admin.setting.branch.index', compact('branches'));
+    }
+
+    public function subBranch(Request $request)
+    {
+        $request->validate([
+            'branch_id' => ['required']
+        ]);
+
+        return response()->json([
+            'data' => Branch::filterData($request->all())->get()
+        ]);
     }
 
     public function create()
