@@ -89,6 +89,20 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-md-4 mb-2">
+                                    <label for="task_category_id">शाखाहरु अनुसार कार्यहरू</label>
+                                    <select name="task_category_id[]" multiple data-toggle="select2"
+                                            id="task_category_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="task_division_id">कार्य विभाजन</label>
+                                    <select name="task_division_id[]" multiple data-toggle="select2"
+                                            id="task_division_id" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-2">
                                     <label for="fiscal_year">आर्थिक बर्ष</label>
                                     <select name="fiscal_year[]" multiple data-toggle="select2"
                                             id="fiscal_year" class="form-control">
@@ -196,19 +210,19 @@
                     })
                 })
 
-                $(document.body).delegate('#plan_level_id', 'change', function (e) {
-                    let plan_level_id = $('#plan_level_id').val()
-                    $('#plan_sub_level_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if (!plan_level_id.length) {
+                $(document.body).delegate('#branch_id', 'change', function (e) {
+                    let branch_id = $('#branch_id').val()
+                    $('#sub_branch_id').html('<option disabled>--- छान्नुहोस् ---</option>')
+                    if (!branch_id.length) {
                         return false;
                     }
                     $.ajax({
                         type: 'get',
-                        data: {plan_level_id: plan_level_id},
-                        url: "{{route('admin.plan.planSubLevel')}}",
+                        data: {branch_id: branch_id},
+                        url: "{{route('admin.subBranch')}}",
                         success: function (resp) {
                             $(resp.data).each(function (key, data) {
-                                $('#plan_sub_level_id').append("<option value=" + data.id + ">" + data.level_name + "</option>")
+                                $('#sub_branch_id').append("<option value=" + data.id + ">" + data.branch_name + "</option>")
                             })
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -217,19 +231,19 @@
                     })
                 })
 
-                $(document.body).delegate('#budget_head_id', 'change', function (e) {
-                    let budget_head_id = $('#budget_head_id').val()
-                    $('#budget_sub_head_id').html('<option disabled>--- छान्नुहोस् ---</option>')
-                    if (!budget_head_id.length) {
+                $(document.body).delegate('#sub_branch_id', 'change', function (e) {
+                    let sub_branch_id = $('#sub_branch_id').val()
+                    $('#task_category_id').html('<option disabled>--- छान्नुहोस् ---</option>')
+                    if (!sub_branch_id.length) {
                         return false;
                     }
                     $.ajax({
                         type: 'get',
-                        data: {budget_head_id: budget_head_id},
-                        url: "{{route('admin.plan.budgetSubHead')}}",
+                        data: {sub_branch_id: sub_branch_id},
+                        url: "{{route('admin.taskManagement.taskCategory.index')}}",
                         success: function (resp) {
                             $(resp.data).each(function (key, data) {
-                                $('#budget_sub_head_id').append("<option value=" + data.id + ">" + data.title + "</option>")
+                                $('#task_category_id').append("<option value=" + data.id + ">" + data.title + "</option>")
                             })
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {

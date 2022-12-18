@@ -4,17 +4,24 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Branch;
+use Illuminate\Http\Request;
 use Modules\TaskManagement\Entities\TaskCategory;
 use Modules\TaskManagement\Http\Requests\TaskCategory\StoreTaskCategoryRequest;
 use Modules\TaskManagement\Http\Requests\TaskCategory\UpdateTaskCategoryRequest;
 
 class TaskCategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $taskCategories = TaskCategory::with('branch')->paginate(10);
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => TaskCategory::filterData($request->all())->get()
+            ]);
+        } else {
+            $taskCategories = TaskCategory::with('branch')->paginate(10);
 
-        return view('taskmanagement::admin.task_category.index', compact('taskCategories'));
+            return view('taskmanagement::admin.task_category.index', compact('taskCategories'));
+        }
     }
 
     public function create()
