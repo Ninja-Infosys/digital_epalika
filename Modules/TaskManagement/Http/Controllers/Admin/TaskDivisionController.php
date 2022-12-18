@@ -14,19 +14,17 @@ class TaskDivisionController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             return response()->json([
                 'data' => TaskDivision::filterData($request->all())->get()
             ]);
-        }else{
-            $taskDivisions = TaskDivision::with('taskCategory')->paginate(10);
-        $taskDivisions = TaskDivision::with('taskCategory')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['title'], request('search'));
-            }
-        })
-            ->latest()->paginate(10);
-
+        } else {
+            $taskDivisions = TaskDivision::with('taskCategory')->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['title'], request('search'));
+                }
+            })
+                ->latest()->paginate(10);
 
             return view('taskmanagement::admin.task_division.index', compact('taskDivisions'));
         }
