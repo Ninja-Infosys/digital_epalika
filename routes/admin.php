@@ -75,6 +75,7 @@ Route::prefix('setting')->group(function () {
     Route::resource('department', DepartmentController::class);
     Route::resource('designation', DesignationController::class);
 
+    Route::get('subBranch',[BranchController::class,'subBranch'])->name('subBranch');
     Route::resource('branch', BranchController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {

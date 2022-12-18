@@ -13,7 +13,7 @@
 <li class="{{request()->is('admin/taskmanagement/report') ? 'active' : ''}}">
     <a href="{{route('admin.taskManagement.report.index')}}">
         <i class="fa fa-clipboard-list"></i>
-        <span> रिपोर्टहरु</span>
+        <span> रिपोर्ट</span>
     </a>
 </li>
 

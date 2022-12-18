@@ -18,7 +18,7 @@ class RegistrationController extends Controller
 
         $registrations = Registration::where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['title','registration_no','sender_name','subject',], request('search'));
+                $q->whereLike(['registration_no','letter_number','sender_name','subject',], request('search'));
             }
         })
         ->latest()->paginate(10);
