@@ -4,6 +4,7 @@ namespace Modules\ListRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Modules\ListRegistration\Entities\ListRegistration;
@@ -15,7 +16,12 @@ class ListRegistrationController extends Controller
     public function index()
     {
         $this->checkAuthorization('listRegistration_access');
-        $listRegistrations = ListRegistration::latest()->get();
+        $listRegistrations = ListRegistration::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
 
         return view('listregistration::admin.list_registration.index', compact('listRegistrations'));
     }

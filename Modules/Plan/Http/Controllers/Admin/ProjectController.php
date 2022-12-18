@@ -5,6 +5,7 @@ namespace Modules\Plan\Http\Controllers\Admin;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -21,7 +22,13 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $projects = Project::latest()->get();
+        $projects = Project::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['registration_no', 'project_name', 'ward_no'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
+
 
         return view('plan::admin.project.index', compact('projects'));
     }
