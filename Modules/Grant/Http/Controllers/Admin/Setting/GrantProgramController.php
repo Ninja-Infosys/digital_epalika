@@ -26,7 +26,7 @@ class GrantProgramController extends Controller
     {
         $this->checkAuthorization('grantProgram_create');
 
-        return view('grant::admin.grant.setting.grantProgram.create');
+        return view('grant::admin.setting.grantProgram.create');
     }
 
     public function store(StoreGrantProgramRequest $request): RedirectResponse
@@ -43,22 +43,25 @@ class GrantProgramController extends Controller
     {
         $this->checkAuthorization('grantProgram_edit');
 
-        return view('grant::admin.grant.setting.grantProgram.create');
+        return view('grant::admin.setting.grantProgram.edit', compact('grantProgram'));
     }
 
-    public function update(UpdateGrantProgramRequest $request, $id)
+    public function update(UpdateGrantProgramRequest $request, GrantProgram $grantProgram)
     {
         $this->checkAuthorization('grantProgram_edit');
 
-        GrantProgram::update($request->validated());
+        $grantProgram->update($request->validated());
         toast('Grant Program  updated Successfully', 'success');
         return redirect(route('admin.grant.setting.grantProgram.index'));
 
     }
 
-    public function destroy($id)
+    public function destroy(GrantProgram $grantProgram)
     {
         $this->checkAuthorization('grantProgram_delete');
+        $grantProgram->delete();
+        toast('Grant Program deleted Successfully', 'success');
+        return back();
 
     }
 }

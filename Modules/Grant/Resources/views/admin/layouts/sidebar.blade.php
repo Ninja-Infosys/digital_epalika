@@ -42,14 +42,13 @@
                         <span> सहकारीको आवध्ता </span>
                     </a>
                 </li>
-            @endcan
+                @endcan
             @can('enterpriseType_access')
                 <li class="{{request()->is('admin/grant/setting/enterpriseType') ? 'active' : ''}}">
                     <a href="{{ route('admin.grant.setting.enterpriseType.index') }}">
                         <span> उद्यमको प्रकार </span>
                     </a>
                 </li>
-            @endcan
             @endcan
                 @can('affiliation_access')
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
@@ -59,7 +58,7 @@
             </li>
                 @endcan
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href=#>
+                <a href="{{route('admin.grant.setting.enterpriseType.index')}}">
                     <span> उद्यमको प्रकार </span>
                 </a>
             </li>
@@ -70,15 +69,10 @@
                 </a>
             </li>
                 @endcan
-            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="#">
-                    <span> अनुदान दिने सस्था </span>
-                </a>
-            </li>
             @can('grantOffice_access')
                 <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                     <a href="{{route('admin.grant.setting.grantOffice.index')}}">
-                        <span> अनुदान कार्यालय</span>
+                        <span> अनुदान दिने सस्था</span>
                     </a>
                 </li>
             @endcan
