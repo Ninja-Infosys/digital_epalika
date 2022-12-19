@@ -16,6 +16,7 @@ class ListRegistrationController extends Controller
     public function index()
     {
         $this->checkAuthorization('listRegistration_access');
+
         $listRegistrations = ListRegistration::where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['name'], request('search'));
