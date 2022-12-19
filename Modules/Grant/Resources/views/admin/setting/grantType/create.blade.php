@@ -24,13 +24,13 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ अनुदान थप्नुहोस्</h4>
-                        <a href="{{route('admin.plan.budgetHead.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> अनुदान शिर्षकहरु
+                        <a href="{{route('admin.grant.setting.grantType.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> अनुदान सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.grantType.store')}}" method="post">
+                    <form action="{{route('admin.grant.setting.grantType.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
