@@ -10,11 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-
-                        <li class="breadcrumb-item active">पूर्वाधार शीर्षकहरु </li>
+                        <li class="breadcrumb-item active">अनुदान प्रकार</li>
                     </ol>
                 </div>
-                <h4 class="page-title">पूर्वाधार शीर्षकहरु </h4>
+                <h4 class="page-title">अनुदान व्यवस्थापन</h4>
             </div>
         </div>
     </div>
@@ -24,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">पूर्वाधार शीर्षक सूची</h4>
-                        @can('infrastructure_create')
-                            <a href="{{route('admin.grant.infrastructure.create')}}"
+                        <h4 class="header-title">अनुदान प्रकारहरु</h4>
+                        @can('grantType_access')
+                            <a href="{{route('admin.grant.setting.grantType.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -35,28 +34,25 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शीर्षक</th>
+                                <th>बजेट शिर्षक</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($infrastructures as $infrastructure)
+                            @forelse($grantTypes as $grantType)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <th>{{$infrastructure->title}}</th>
+                                    <th>{{$loop->iteration}}</th>
+                                    <th>{{$grantType->title}}</th>
                                     <td>
-                                        @can('infrastructure_edit')
-                                        <a href="{{route('admin.grant.infrastructure.edit',$infrastructure)}}"
+                                        <a href="{{route('admin.grantType.edit', $grantType)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        @endcan
-                                        @can('infrastructure_delete')
-                                        <form action="{{route('admin.grant.infrastructure.destroy',$infrastructure)}}"
+                                        <form action="{{route('admin.grantType.destroy', $grantType)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
@@ -64,7 +60,6 @@
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
-                                            @endcan
                                     </td>
                                 </tr>
                             @empty

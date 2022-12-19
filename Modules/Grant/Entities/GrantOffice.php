@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
-class GrantProgram extends Model
+class GrantOffice extends Model
 {
     use HasFactory,SoftDeletes,EventObserveTrait;
 
@@ -18,6 +18,6 @@ class GrantProgram extends Model
    ];
 
    protected $fillable = [
-       'name'
+       'office_name'
    ];
 }
