@@ -9696,7 +9696,7 @@ table[data-toggle=table] {
 }
 
 .floating-container:hover {
-    height: 300px;
+    height: 200px;
 }
 
 .floating-container:hover .floating-button {
