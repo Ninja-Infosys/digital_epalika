@@ -8,12 +8,12 @@ use Illuminate\Validation\Rule;
 
 class UpdatePlanAreaRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('planArea_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'plan_area_id' => ['nullable', Rule::exists('plan_areas', 'id')->withoutTrashed()],

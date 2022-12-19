@@ -9,7 +9,6 @@ use App\Models\UserManagement\Permission;
 use App\Models\UserManagement\Role;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class RoleController extends Controller
@@ -34,7 +33,7 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-       $this->checkAuthorization('role_create');
+        $this->checkAuthorization('role_create');
 
         DB::transaction(function () use ($request) {
             $role = Role::create($request->validated());
@@ -51,7 +50,7 @@ class RoleController extends Controller
 
     public function show(Role $role)
     {
-       $this->checkAuthorization('role_access');
+        $this->checkAuthorization('role_access');
     }
 
     public function edit(Role $role)
@@ -117,7 +116,7 @@ class RoleController extends Controller
     /**
      * @return void
      */
-    function permissionCacheClear(): void
+    public function permissionCacheClear(): void
     {
         if (Cache::has('permissions')) {
             //

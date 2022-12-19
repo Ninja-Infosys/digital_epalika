@@ -10,7 +10,6 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-
         $main_branch_count = Branch::mainBranch()->count();
         $sub_branch_count = Branch::subBranch()->count();
         $service_count = Service::count();
@@ -20,8 +19,14 @@ class DashboardController extends Controller
         $subBranchServicesData = $this->getTotalSubBranchesData();
 
 
-        return view('helpdesk::admin.dashboard', compact('main_branch_count',
-            'sub_branch_count', 'service_count', 'branchesData','branchServicesData','subBranchServicesData'));
+        return view('helpdesk::admin.dashboard', compact(
+            'main_branch_count',
+            'sub_branch_count',
+            'service_count',
+            'branchesData',
+            'branchServicesData',
+            'subBranchServicesData'
+        ));
     }
 
     public function getTotalServiceData(): array
@@ -38,7 +43,6 @@ class DashboardController extends Controller
                 ]
             ],
         ];
-
     }
 
 

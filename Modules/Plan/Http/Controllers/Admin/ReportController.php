@@ -3,7 +3,6 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Models\Settings\FiscalYear;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -36,7 +35,7 @@ class ReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $projects = Project::with('budgetHead','budgetSource','planArea')->where(function ($q) use ($request) {
+        $projects = Project::with('budgetHead', 'budgetSource', 'planArea')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })
             ->get();

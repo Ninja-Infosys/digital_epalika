@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
 use Illuminate\Database\Eloquent\Builder;
+
 class GrievanceUserController extends Controller
 {
     public function index(): Factory|View|Application

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Enums\FeatureTypeEnum;
 use App\Models\FeatureActivation;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class FeatureActivationSeeder extends Seeder
@@ -43,6 +42,5 @@ class FeatureActivationSeeder extends Seeder
         ];
 
         FeatureActivation::insert($data);
-
     }
 }

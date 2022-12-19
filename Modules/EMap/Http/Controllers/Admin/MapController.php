@@ -4,30 +4,24 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Enums\ApplicationTypeEnum;
 use App\Http\Controllers\Controller;
-use App\Models\Address\District;
 use App\Notifications\ApplyMapNoticeNotification;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Notification;
 use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Enums\ApplicationFormTypeEnum;
-use Modules\EMap\Enums\FileTypeEnum;
 use Modules\EMap\Enums\NoticeTypeEnum;
-use Modules\EMap\Enums\PostsEnum;
 use Illuminate\Database\Eloquent\Builder;
 
 class MapController extends Controller
 {
     public function index(ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
-
         $this->checkAuthorization('mapApply_access');
         $application_types = collect();
 
@@ -48,8 +42,6 @@ class MapController extends Controller
 
 
         return view('emap::admin.map.index', compact('maps', 'application_types', 'applicationFormTypeEnum'));
-
-
     }
 
 
@@ -60,7 +52,6 @@ class MapController extends Controller
 
     public function show(MapApply $mapApply, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
-
         $mapApply->load(['fiscalYear', 'mapRegistration', 'mapRegistration.mapRegistrationParticulars', 'organization.organizationDetail', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails', 'mapApplyApplications', 'applyMapNotices' => function ($query) {
             $query->latest();
         }]);
@@ -72,7 +63,6 @@ class MapController extends Controller
 
     public function reject(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): \Illuminate\Routing\Redirector|Application|RedirectResponse
     {
-
         $this->checkAuthorization('mapApplyNoticeReject_access');
 
         $data = ApplyMapNotice::where('map_apply_id', $mapApply->id)
@@ -118,7 +108,6 @@ class MapController extends Controller
 
     public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum): RedirectResponse
     {
-
         $this->checkAuthorization('mapApplyNotice_access');
 
 

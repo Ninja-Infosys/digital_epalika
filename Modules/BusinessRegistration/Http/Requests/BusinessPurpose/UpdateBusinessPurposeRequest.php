@@ -9,7 +9,8 @@ class UpdateBusinessPurposeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-          return Gate::allows('businessPurpose_edit');;
+        return Gate::allows('businessPurpose_edit');
+        ;
     }
 
     public function rules(): array

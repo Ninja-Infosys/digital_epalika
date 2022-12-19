@@ -7,12 +7,12 @@ use Illuminate\Validation\Rule;
 
 class UpdatePlanTemplateRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'type' => ['required'],

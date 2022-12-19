@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use Modules\Circular\Http\Controllers\Admin\DashboardController;
 use Modules\Circular\Http\Controllers\Admin\DispatchController;
@@ -20,12 +21,12 @@ Route::resource('registration', RegistrationController::class);
 Route::resource('dispatch', DispatchController::class);
 
 //dispatch report
-Route::controller(DispatchReportController::class)->prefix('report/dispatch')->as('report.dispatch.')->group(function (){
-    Route::get('/','index')->name('index');
-    Route::post('report-data','report')->name('report-data');
+Route::controller(DispatchReportController::class)->prefix('report/dispatch')->as('report.dispatch.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('report-data', 'report')->name('report-data');
 });
 //registration report
-Route::controller(RegistrationReportController::class)->prefix('report/registration')->as('report.registration.')->group(function (){
-    Route::get('/','index')->name('index');
-    Route::post('report-data','report')->name('report-data');
+Route::controller(RegistrationReportController::class)->prefix('report/registration')->as('report.registration.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('report-data', 'report')->name('report-data');
 });

@@ -244,7 +244,7 @@ trait NepaliDateConverter
         $dateArray = explode('-', today()->toDateString());
         $nepaliDate=$this->get_nepali_date($dateArray[0], $dateArray[1], $dateArray[2]);
 
-        return $nepaliDate['y'].'-'.(Str::padLeft($nepaliDate['m'],2,0)).'-'.(Str::padLeft($nepaliDate['d'],2,0));
+        return $nepaliDate['y'].'-'.(Str::padLeft($nepaliDate['m'], 2, 0)).'-'.(Str::padLeft($nepaliDate['d'], 2, 0));
     }
 
     //Convert Nepali Date to english

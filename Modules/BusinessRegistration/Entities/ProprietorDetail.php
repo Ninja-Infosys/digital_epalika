@@ -10,11 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 use Modules\BusinessRegistration\Enums\Qualification;
-use Modules\BusinessRegistration\Traits\ProprietorTemplateTrait;
 
 class ProprietorDetail extends Model
 {
@@ -85,6 +83,4 @@ class ProprietorDetail extends Model
     {
         return $this->belongsTo(BusinessDetail::class);
     }
-
-
 }

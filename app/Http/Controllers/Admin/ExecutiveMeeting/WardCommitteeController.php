@@ -13,7 +13,8 @@ class WardCommitteeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('executiveCommittee_access'),
+        abort_if(
+            Gate::denies('executiveCommittee_access'),
             403,
             'You are not allowed to executive committee access'
         );
@@ -25,7 +26,8 @@ class WardCommitteeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('executiveCommittee_create'),
+        abort_if(
+            Gate::denies('executiveCommittee_create'),
             403,
             'You are not allowed to executive committee create'
         );
@@ -36,7 +38,8 @@ class WardCommitteeController extends Controller
 
     public function store(StoreWardCommitteeRequest $request)
     {
-        abort_if(Gate::denies('executiveCommittee_create'),
+        abort_if(
+            Gate::denies('executiveCommittee_create'),
             403,
             'You are not allowed to executive committee create'
         );
@@ -49,7 +52,8 @@ class WardCommitteeController extends Controller
 
     public function show(WardCommittee $wardCommittee)
     {
-        abort_if(Gate::denies('executiveCommittee_access'),
+        abort_if(
+            Gate::denies('executiveCommittee_access'),
             403,
             'You are not allowed to executive committee access'
         );
@@ -57,7 +61,8 @@ class WardCommitteeController extends Controller
 
     public function edit(WardCommittee $wardCommittee)
     {
-        abort_if(Gate::denies('executiveCommittee_edit'),
+        abort_if(
+            Gate::denies('executiveCommittee_edit'),
             403,
             'You are not allowed to executive committee edit'
         );
@@ -67,7 +72,8 @@ class WardCommitteeController extends Controller
 
     public function update(UpdateWardCommitteeRequest $request, WardCommittee $wardCommittee)
     {
-        abort_if(Gate::denies('executiveCommittee_edit'),
+        abort_if(
+            Gate::denies('executiveCommittee_edit'),
             403,
             'You are not allowed to executive committee edit'
         );
@@ -83,7 +89,8 @@ class WardCommitteeController extends Controller
 
     public function destroy(WardCommittee $wardCommittee)
     {
-        abort_if(Gate::denies('executiveCommittee_delete'),
+        abort_if(
+            Gate::denies('executiveCommittee_delete'),
             403,
             'You are not allowed to executive committee delete'
         );

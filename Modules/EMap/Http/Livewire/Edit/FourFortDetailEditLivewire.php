@@ -46,7 +46,6 @@ class FourFortDetailEditLivewire extends Component
                 ];
             }
         }
-
     }
 
     public function rules(): array

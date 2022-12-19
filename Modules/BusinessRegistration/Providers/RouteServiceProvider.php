@@ -45,6 +45,5 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('api/admin/businessRegistration')
             ->as('api.admin.businessRegistration.')
             ->group(module_path('BusinessRegistration', '/Routes/v1/private_api.php'));
-
     }
 }

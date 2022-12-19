@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Fortify\Fortify;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     public function up()
     {
         Schema::table('organizations', function (Blueprint $table) {
@@ -17,7 +16,6 @@ return new class extends Migration
             $table->text('two_factor_recovery_codes')
                 ->after('two_factor_secret')
                 ->nullable();
-
         });
     }
 

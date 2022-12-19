@@ -2,12 +2,9 @@
 
 namespace Modules\Plan\Http\Livewire;
 
-use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectBill;
-use Modules\Plan\Entities\ProjectInstallmentDetail;
-use Modules\Plan\Enums\InstallmentTypeEnum;
 
 class ProjectBillLivewire extends Component
 {

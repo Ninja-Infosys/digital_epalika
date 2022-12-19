@@ -7,12 +7,12 @@ use Illuminate\Validation\Rule;
 
 class UpdatePlanLevelRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
             'plan_level_id' => ['nullable', Rule::exists('plan_levels', 'id')->withoutTrashed()],

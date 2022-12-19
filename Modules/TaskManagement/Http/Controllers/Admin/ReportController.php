@@ -18,7 +18,7 @@ class ReportController extends Controller
         $branches=Branch::whereNull('branch_id')->get();
         $columnData = $this->getColumns();
 
-        return view('taskmanagement::admin.report.index', compact('fiscalYears', 'columnData','branches'));
+        return view('taskmanagement::admin.report.index', compact('fiscalYears', 'columnData', 'branches'));
     }
 
     public function report(Request $request)
@@ -29,7 +29,7 @@ class ReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $dailyTasks = DailyTask::with('branch','taskCategory','taskDivision')->where(function ($q) use ($request) {
+        $dailyTasks = DailyTask::with('branch', 'taskCategory', 'taskDivision')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })
             ->get();

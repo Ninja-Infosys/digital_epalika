@@ -4,9 +4,7 @@ namespace Modules\Roaster\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Gate;
 use Modules\Roaster\Entities\Trainer;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class TrainerController extends Controller
 {
@@ -15,10 +13,10 @@ class TrainerController extends Controller
         $this->checkAuthorization('training_access');
 
         $trainers = Trainer::with('department', 'designation')->where(function (Builder $q) {
-        if (!is_null(request('search'))) {
-            $q->whereLike(['name', 'level', 'ward'], request('search'));
-        }
-    })
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name', 'level', 'ward'], request('search'));
+            }
+        })
         ->latest()->paginate(10);
 
 

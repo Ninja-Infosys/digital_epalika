@@ -13,7 +13,8 @@ class WardMeetingNoticeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('wardMeeting_access'),
+        abort_if(
+            Gate::denies('wardMeeting_access'),
             403,
             'You are not allowed to ward meeting access'
         );
@@ -25,7 +26,8 @@ class WardMeetingNoticeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('wardMeeting_create'),
+        abort_if(
+            Gate::denies('wardMeeting_create'),
             403,
             'You are not allowed to ward meeting create'
         );
@@ -35,7 +37,8 @@ class WardMeetingNoticeController extends Controller
 
     public function store(StoreNoticeRequest $request)
     {
-        abort_if(Gate::denies('wardMeeting_create'),
+        abort_if(
+            Gate::denies('wardMeeting_create'),
             403,
             'You are not allowed to ward meeting create'
         );
@@ -48,7 +51,8 @@ class WardMeetingNoticeController extends Controller
 
     public function show(WardMeetingNotice $wardMeetingNotice)
     {
-        abort_if(Gate::denies('wardMeeting_access'),
+        abort_if(
+            Gate::denies('wardMeeting_access'),
             403,
             'You are not allowed to ward meeting access'
         );
@@ -56,7 +60,8 @@ class WardMeetingNoticeController extends Controller
 
     public function edit(WardMeetingNotice $wardMeetingNotice)
     {
-        abort_if(Gate::denies('wardMeeting_edit'),
+        abort_if(
+            Gate::denies('wardMeeting_edit'),
             403,
             'You are not allowed to ward meeting edit'
         );
@@ -66,7 +71,8 @@ class WardMeetingNoticeController extends Controller
 
     public function update(UpdateNoticeRequest $request, WardMeetingNotice $wardMeetingNotice)
     {
-        abort_if(Gate::denies('wardMeeting_edit'),
+        abort_if(
+            Gate::denies('wardMeeting_edit'),
             403,
             'You are not allowed to ward meeting edit'
         );
@@ -80,7 +86,8 @@ class WardMeetingNoticeController extends Controller
 
     public function destroy(WardMeetingNotice $wardMeetingNotice)
     {
-        abort_if(Gate::denies('wardMeeting_delete'),
+        abort_if(
+            Gate::denies('wardMeeting_delete'),
             403,
             'You are not allowed to ward meeting delete'
         );

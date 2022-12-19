@@ -4,8 +4,6 @@ namespace Modules\BusinessRegistration\Http\Requests\BusinessRegistrationTemplat
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rules\Enum;
-use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 
 class StoreBusinessRegistrationTemplateRequest extends FormRequest
 {

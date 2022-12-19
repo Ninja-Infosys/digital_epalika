@@ -4,7 +4,6 @@ namespace Modules\BusinessRegistration\Enums;
 
 enum BusinessTypeEnum: string
 {
-
     case NEW_REGISTRATION = 'new_registration';
     case RENEWAL = 'renewal';
 

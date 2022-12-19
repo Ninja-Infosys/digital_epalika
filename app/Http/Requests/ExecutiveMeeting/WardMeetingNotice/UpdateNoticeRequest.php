@@ -15,7 +15,6 @@ class UpdateNoticeRequest extends FormRequest
 
     public function rules(): array
     {
-
         return [
             'broadcast_date' => ['required'],
             'broadcast_time' => ['required'],
@@ -24,7 +23,6 @@ class UpdateNoticeRequest extends FormRequest
             'meeting_subject' => ['required', 'string'],
             'description' => ['required']
         ];
-
     }
 
     public function messages()

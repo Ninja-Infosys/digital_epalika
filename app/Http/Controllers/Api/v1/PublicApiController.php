@@ -18,7 +18,6 @@ use Modules\DigitalBoard\Transformers\api\v1\NewsResource;
 use Modules\DigitalBoard\Transformers\api\v1\NoticeResource;
 use Nwidart\Modules\Facades\Module;
 
-
 class PublicApiController extends Controller
 {
     public function getToken(): JsonResponse
@@ -98,7 +97,6 @@ class PublicApiController extends Controller
             'setting' => SettingResource::make($setting),
             'sliders' => $this->slider(),
         ];
-
     }
 
 
@@ -138,7 +136,5 @@ class PublicApiController extends Controller
                 ],
             ]
         ];
-
     }
-
 }

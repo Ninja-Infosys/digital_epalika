@@ -3,7 +3,6 @@
 namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\EMap\Entities\MapFee;
 use Modules\EMap\Entities\MapSetting;
 use Modules\EMap\Http\Requests\MapFee\StoreMapFeeRequest;
@@ -44,7 +43,7 @@ class MapFeeController extends Controller
 
     public function show(MapFee $mapFee)
     {
-       $this->checkAuthorization('mapFee_access');
+        $this->checkAuthorization('mapFee_access');
 
         return view('emap::show');
     }

@@ -8,6 +8,7 @@ use Modules\Circular\Http\Requests\News\StoreNewsRequest;
 use Modules\Circular\Http\Requests\News\UpdateNewsRequest;
 use Modules\DigitalBoard\Entities\News;
 use Illuminate\Database\Eloquent\Builder;
+
 class NewsController extends Controller
 {
     public function index($type)

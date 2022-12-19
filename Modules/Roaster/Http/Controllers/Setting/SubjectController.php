@@ -3,11 +3,9 @@
 namespace Modules\Roaster\Http\Controllers\Setting;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\Roaster\Entities\Subject;
 use Modules\Roaster\Http\Requests\Settings\Subject\StoreSubjectRequest;
 use Modules\Roaster\Http\Requests\Settings\Subject\UpdateSubjectRequest;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class SubjectController extends Controller
 {
