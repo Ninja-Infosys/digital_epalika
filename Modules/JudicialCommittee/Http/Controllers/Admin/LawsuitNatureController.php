@@ -13,7 +13,7 @@ class LawsuitNatureController extends Controller
     {
         $this->checkAuthorization('lawsuitNature_access');
 
-        $lawSuitNatures=LawsuitNature::latest()->get();
+        $lawSuitNatures = LawsuitNature::latest()->get();
 
         return view('judicialcommittee::admin.setting.lawsuit_nature.index', compact('lawSuitNatures'));
     }

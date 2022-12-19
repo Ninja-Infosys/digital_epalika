@@ -70,7 +70,7 @@
                                     <div class="col-md-6 mb-2">
                                         <label for="code" class="form-label">कोड *</label>
                                         <input
-                                            type="number"
+                                            type="text"
                                             name="code"
                                             value="{{old('code',$lawsuitNature->code)}}"
                                             class="form-control  @error('code') is-invalid @enderror"

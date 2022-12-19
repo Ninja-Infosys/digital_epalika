@@ -4,26 +4,10 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-@can('chiefJudicialMember_access')
-    <li>
-        <a href="{{route('admin.judicialCommittee.chiefJudicialMember.index')}}">
-            <i class="fa fa-user"></i>
-            <span>प्रमुख न्यायिक सदस्य</span>
-        </a>
-    </li>
-@endcan
-@can('administrationMember_access')
-    <li>
-        <a href="{{route('admin.judicialCommittee.administrationMember.index')}}">
-            <i class="fa fa-user"></i>
-            <span>प्रशासन सदस्यहरू</span>
-        </a>
-    </li>
-@endcan
 @can('judicialMember_access')
     <li>
         <a href="{{route('admin.judicialCommittee.judicialMember.index')}}">
-            <i class="fa fa-user"></i>
+            <i class="fa fa-users"></i>
             <span>न्यायिक समिति विवरण </span>
         </a>
     </li>
