@@ -36,20 +36,20 @@
                     <span> सहकारीको प्रकार </span>
                 </a>
             </li>
-                @can('affiliation_access')
-            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="{{route('admin.grant.setting.affiliation.index')}}">
-                    <span> सहकारीको आवध्ता </span>
-                </a>
-            </li>
-                @endcan
-                @can('enterpriseType_access')
-            <li class="{{request()->is('admin/grant/setting/enterpriseType') ? 'active' : ''}}">
-                <a href="{{ route('admin.grant.setting.enterpriseType.index') }}">
-                    <span> उद्यमको प्रकार </span>
-                </a>
-            </li>
-                @endcan
+            @can('affiliation_access')
+                <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                    <a href="{{route('admin.grant.setting.affiliation.index')}}">
+                        <span> सहकारीको आवध्ता </span>
+                    </a>
+                </li>
+            @endcan
+            @can('enterpriseType_access')
+                <li class="{{request()->is('admin/grant/setting/enterpriseType') ? 'active' : ''}}">
+                    <a href="{{ route('admin.grant.setting.enterpriseType.index') }}">
+                        <span> उद्यमको प्रकार </span>
+                    </a>
+                </li>
+            @endcan
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                 <a href="#">
                     <span> कार्यक्रम बिषय </span>
@@ -60,6 +60,13 @@
                     <span> अनुदान दिने सस्था </span>
                 </a>
             </li>
+            @can('grantOffice_access')
+                <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                    <a href="{{route('admin.grant.setting.grantOffice.index')}}">
+                        <span> अनुदान कार्यालय</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>
