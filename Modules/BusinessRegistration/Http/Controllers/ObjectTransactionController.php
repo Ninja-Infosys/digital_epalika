@@ -2,25 +2,21 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransaction\StoreObjectTransactionRequest;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransaction\UpdateObjectTransactionRequest;
-use function Termwind\renderUsing;
 
 class ObjectTransactionController extends Controller
 {
     public function index()
     {
         $objectTransactions = ObjectTransaction::get();
-        return view('businessregistration::admin.setting.objectTransaction.index',compact('objectTransactions'));
+        return view('businessregistration::admin.setting.objectTransaction.index', compact('objectTransactions'));
     }
 
     public function create()
     {
-
         return view('businessregistration::admin.setting.objectTransaction.create');
     }
 
@@ -38,9 +34,7 @@ class ObjectTransactionController extends Controller
 
     public function edit(ObjectTransaction $objectTransaction)
     {
-
-        return view('businessregistration::admin.setting.objectTransaction.edit',compact('objectTransaction'));
-
+        return view('businessregistration::admin.setting.objectTransaction.edit', compact('objectTransaction'));
     }
 
     public function update(UpdateObjectTransactionRequest $request, ObjectTransaction $objectTransaction)

@@ -4,11 +4,11 @@ namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Gate;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Http\Requests\Employee\StoreEmployeeRequest;
 use Modules\DigitalBoard\Http\Requests\Employee\UpdateEmployeeRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class EmployeeController extends Controller
 {
     public function index()
@@ -85,7 +85,7 @@ class EmployeeController extends Controller
         toast(' कर्मचारी सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
-        }
+    }
 
         public function updateEmployeeStatus(Employee $employee): RedirectResponse
         {

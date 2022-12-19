@@ -45,7 +45,7 @@ class GrantTypeController extends Controller
     {
         $this->checkAuthorization('grantType_edit');
 
-        return view('grant::edit',compact('grantType'));
+        return view('grant::admin.setting.grantType.edit',compact('grantType'));
     }
 
     public function update(UpdateGrantTypeRequest $request, GrantType $grantType)

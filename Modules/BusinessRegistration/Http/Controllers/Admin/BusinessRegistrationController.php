@@ -11,14 +11,12 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
-use Modules\BusinessRegistration\Entities\Customs;
 use Modules\BusinessRegistration\Entities\PrintedData;
-use Modules\BusinessRegistration\Entities\ProprietorDetail;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 use Modules\BusinessRegistration\Http\Requests\PrintedData\StorePrintedDataRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class BusinessRegistrationController extends Controller
 {
     use NepaliDateConverter;
@@ -39,14 +37,17 @@ class BusinessRegistrationController extends Controller
 
     public function show(BusinessDetail $businessDetail): Factory|View|Application
     {
-
         $this->checkAuthorization('businessRegistration_access');
 
-        $businessDetail->load('partnerDetails', 'registeredBusinesses', 'proprietorDetail',
+        $businessDetail->load(
+            'partnerDetails',
+            'registeredBusinesses',
+            'proprietorDetail',
             'proprietorDetail.province',
             'proprietorDetail.localBody',
             'proprietorDetail.threeGenerationDetails',
-            'proprietorDetail.district');
+            'proprietorDetail.district'
+        );
 
         $printed_data = PrintedData::where('business_detail_id', $businessDetail->id)
             ->latest()
@@ -71,7 +72,6 @@ class BusinessRegistrationController extends Controller
 
     public function storeData(StorePrintedDataRequest $request, BusinessDetail $businessDetail, $type): RedirectResponse
     {
-
         $this->checkAuthorization('businessRegistration_edit');
         DB::transaction(function () use ($request, $businessDetail, $type) {
             $printed_data = PrintedData::updateOrCreate(
@@ -108,14 +108,12 @@ class BusinessRegistrationController extends Controller
 
     public function addData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
     {
-
         $this->checkAuthorization('customs_edit');
         return view('businessregistration::admin.businessRegistration.customs.index', compact('businessDetail', 'templateTypeEnum'));
     }
 
     public function customData(Request $request, BusinessDetail $businessDetail, $type): RedirectResponse
     {
-
         $this->checkAuthorization('customs_edit');
 
         $data = $request->validate([
@@ -127,8 +125,6 @@ class BusinessRegistrationController extends Controller
         ]);
 
         DB::transaction(function () use ($businessDetail, $data) {
-
-
             if (empty($businessDetail->registration_no)) {
                 $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;
 
@@ -150,7 +146,5 @@ class BusinessRegistrationController extends Controller
         toast('दस्तुर सफलतापूर्वक थपियो', 'success');
 
         return back();
-
     }
-
 }

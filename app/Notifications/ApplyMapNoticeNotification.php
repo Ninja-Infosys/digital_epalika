@@ -34,7 +34,7 @@ class ApplyMapNoticeNotification extends Notification
     {
         return [
             'map_apply_id' => $this->applyMapNotice->map_apply_id,
-            'data' => Str::words(strip_tags($this->applyMapNotice->data,10)),
+            'data' => Str::words(strip_tags($this->applyMapNotice->data, 10)),
             'file_type' => $this->applyMapNotice->file_type,
         ];
     }

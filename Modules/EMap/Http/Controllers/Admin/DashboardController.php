@@ -17,13 +17,11 @@ use Modules\EMap\Enums\ApplicationFormTypeEnum;
 use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
-use Modules\Roaster\Entities\Subject;
 
 class DashboardController extends Controller
 {
     public function __invoke(): Factory|View|Application
     {
-
         $organization_count = Organization::count();
         $map_apply_count = MapApply::count();
         $mapAppliesAccordingToFiscalYears = $this->getMapApplyAccordingToFiscalYear();
@@ -58,10 +56,10 @@ class DashboardController extends Controller
     {
         $fiscalYear = FiscalYear::withCount(['mapApplies',
             'mapApplies as mapRegistrationCount' => function ($query) {
-            $query->where('application_type', ApplicationFormTypeEnum::MAP_REGISTRATION);
-        }, 'mapApplies as mapVerificationCount' => function ($query) {
-            $query->where('application_type', ApplicationFormTypeEnum::MAP_VERIFIED);
-        },])
+                $query->where('application_type', ApplicationFormTypeEnum::MAP_REGISTRATION);
+            }, 'mapApplies as mapVerificationCount' => function ($query) {
+                $query->where('application_type', ApplicationFormTypeEnum::MAP_VERIFIED);
+            },])
             ->selectRaw('id,title')
             ->get();
         return [
@@ -90,9 +88,8 @@ class DashboardController extends Controller
 
     public function getMapApply($hasCurrentFiscalYear = null): Collection
     {
-
         return DB::table('map_applies')
-            ->select('usage', 'building_category', 'application_type', 'construction_type','deleted_at')
+            ->select('usage', 'building_category', 'application_type', 'construction_type', 'deleted_at')
             ->whereNull('deleted_at')
             ->where(function ($query) use ($hasCurrentFiscalYear) {
                 if ($hasCurrentFiscalYear) {

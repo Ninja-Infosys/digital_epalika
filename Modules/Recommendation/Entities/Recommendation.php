@@ -13,7 +13,9 @@ use Modules\Recommendation\Enums\ApplicationTypeEnum;
 
 class Recommendation extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -38,8 +40,8 @@ class Recommendation extends Model
     protected function data(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value,
-            set: fn($value) => json_encode($value)
+            get: fn ($value) => $value,
+            set: fn ($value) => json_encode($value)
         );
     }
 

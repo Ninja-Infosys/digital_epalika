@@ -4,7 +4,6 @@ namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Designation;
-use Illuminate\Support\Facades\Gate;
 use Modules\JudicialCommittee\Entities\JudicialMember;
 use Modules\JudicialCommittee\Http\Requests\JudicialMember\StoreJudicialMemberRequest;
 use Modules\JudicialCommittee\Http\Requests\JudicialMember\UpdateJudicialMemberRequest;

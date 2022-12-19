@@ -23,5 +23,4 @@ class Introboard extends Model
         'width',
         'square',
     ];
-
 }

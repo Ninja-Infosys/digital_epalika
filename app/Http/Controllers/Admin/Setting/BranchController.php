@@ -7,8 +7,6 @@ use App\Http\Requests\Setting\Branch\StoreBranchRequest;
 use App\Http\Requests\Setting\Branch\UpdateBranchRequest;
 use App\Models\Settings\Branch;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Modules\Plan\Entities\PlanArea;
 
 class BranchController extends Controller
 {
@@ -53,7 +51,7 @@ class BranchController extends Controller
 
     public function edit(Branch $branch)
     {
-       $this->checkAuthorization('branch_edit');
+        $this->checkAuthorization('branch_edit');
         $mainBranches = Branch::whereNull('branch_id')->get();
 
         return view('admin.setting.branch.edit', compact('branch', 'mainBranches'));

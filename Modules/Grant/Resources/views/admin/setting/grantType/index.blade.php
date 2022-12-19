@@ -38,8 +38,8 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>बजेट शिर्षक</th>
-                                <th>#</th>
+                                <th>अनुदान प्रकार</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -48,11 +48,11 @@
                                     <th>{{$loop->iteration}}</th>
                                     <th>{{$grantType->title}}</th>
                                     <td>
-                                        <a href="{{route('admin.grantType.edit', $grantType)}}"
+                                        <a href="{{route('admin.grant.setting.grantType.edit', $grantType)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.grantType.destroy', $grantType)}}"
+                                        <form action="{{route('admin.grant.setting.grantType.destroy', $grantType)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

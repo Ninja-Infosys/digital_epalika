@@ -12,7 +12,6 @@ class FeatureActivationController extends Controller
         $this->checkAuthorization('feature_access');
 
         $featureActivations = FeatureActivation::get()->groupBy(function ($feature) {
-
             return $feature->getRawOriginal('feature_type');
         });
 

@@ -35,13 +35,15 @@ class DashboardController extends Controller
         $yearlyRegistrations = $this->listRegistrations->count();
         $monthlyRegistrations = ListRegistration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->whereMonth('date', $nepali_date['m'])->count();
 
-        return view('listregistration::admin.dashboard', compact(
-                'applicantTypeWiseData',
-                'businessNatureWiseData',
-                'totalRegistrations',
-                'yearlyRegistrations',
-                'monthlyRegistrations'
-            )
+        return view(
+            'listregistration::admin.dashboard',
+            compact(
+            'applicantTypeWiseData',
+            'businessNatureWiseData',
+            'totalRegistrations',
+            'yearlyRegistrations',
+            'monthlyRegistrations'
+        )
         );
     }
 

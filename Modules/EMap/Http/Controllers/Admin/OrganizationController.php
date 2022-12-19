@@ -8,7 +8,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Modules\EMap\Entities\Organization;
 use Illuminate\Database\Eloquent\Builder;

@@ -2,7 +2,6 @@
 
 namespace Modules\Plan\Http\Livewire;
 
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Entities\BudgetSource;
@@ -116,7 +115,7 @@ class ProjectDetailLivewire extends Component
 
     public function render()
     {
-        if($this->form['is_deadline_extended']!=1){
+        if ($this->form['is_deadline_extended']!=1) {
             $this->form['extended_date']=null;
         }
 

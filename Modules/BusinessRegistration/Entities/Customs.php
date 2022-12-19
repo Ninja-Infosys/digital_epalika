@@ -10,7 +10,9 @@ use App\Traits\EventObserveTrait;
 
 class Customs extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -33,6 +35,4 @@ class Customs extends Model
     {
         return $this->application_fee + $this->registration_fee + $this->business_tax + $this->introduction_board_fees + $this->fine;
     }
-
-
 }

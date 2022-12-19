@@ -10,14 +10,12 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class OfficeSettingController extends Controller
 {
     public function index(): Factory|View|Application
     {
-
         $this->checkAuthorization('officeSetting_access');
         $officeSetting = OfficeSetting::first();
         $fiscalYears = FiscalYear::get();
@@ -28,7 +26,6 @@ class OfficeSettingController extends Controller
 
     public function update(Request $request, OfficeSetting $officeSetting)
     {
-
         $this->checkAuthorization('officeSetting_edit');
         $validationData = $request->validate(
             [

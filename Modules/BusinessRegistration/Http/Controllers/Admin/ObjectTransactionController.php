@@ -3,11 +3,11 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransaction\StoreObjectTransactionRequest;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransaction\UpdateObjectTransactionRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class ObjectTransactionController extends Controller
 {
     public function index()

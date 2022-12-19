@@ -29,9 +29,9 @@ use App\Http\Controllers\Admin\Website\ImportantLinkController;
 use App\Http\Controllers\Admin\Website\MunicipalDetailController;
 use App\Http\Controllers\Admin\Website\SliderController;
 use App\Http\Controllers\Admin\Website\WebsiteDashboardController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TechController;
 use Illuminate\Support\Facades\Route;
+
 Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
 Route::patch('profile/update', [ProfileController::class, 'updateProfile'])->name('updateProfile');
 Route::patch('password/update', [ProfileController::class, 'updatePassword'])->name('updatePassword');
@@ -75,7 +75,7 @@ Route::prefix('setting')->group(function () {
     Route::resource('department', DepartmentController::class);
     Route::resource('designation', DesignationController::class);
 
-    Route::get('subBranch',[BranchController::class,'subBranch'])->name('subBranch');
+    Route::get('subBranch', [BranchController::class,'subBranch'])->name('subBranch');
     Route::resource('branch', BranchController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
@@ -96,8 +96,8 @@ Route::prefix('setting')->group(function () {
 });
 
 //file
-Route::get('file/{file}/download',[FileController::class,'download'])->name('file.download');
-Route::get('file-download',[FileController::class,'downloadFile'])->name('file-url-download');
+Route::get('file/{file}/download', [FileController::class,'download'])->name('file.download');
+Route::get('file-download', [FileController::class,'downloadFile'])->name('file-url-download');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
 // website admin routes

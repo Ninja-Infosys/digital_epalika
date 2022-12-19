@@ -2,8 +2,6 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
@@ -14,7 +12,8 @@ class BusinessPurposeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('businessPurpose_access'),
+        abort_if(
+            Gate::denies('businessPurpose_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -24,7 +23,8 @@ class BusinessPurposeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('businessPurpose_create'),
+        abort_if(
+            Gate::denies('businessPurpose_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -33,8 +33,8 @@ class BusinessPurposeController extends Controller
 
     public function store(StoreBusinessPurposeRequest $request)
     {
-
-        abort_if(Gate::denies('businessPurpose_create'),
+        abort_if(
+            Gate::denies('businessPurpose_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -45,7 +45,8 @@ class BusinessPurposeController extends Controller
 
     public function show(BusinessPurpose $businessPurpose)
     {
-        abort_if(Gate::denies('businessPurpose_access'),
+        abort_if(
+            Gate::denies('businessPurpose_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -54,16 +55,18 @@ class BusinessPurposeController extends Controller
 
     public function edit(BusinessPurpose $businessPurpose)
     {
-        abort_if(Gate::denies('businessPurpose_edit'),
+        abort_if(
+            Gate::denies('businessPurpose_edit'),
             403,
             'You are not allowed to digital board news access'
         );
-        return view('businessregistration::admin.setting.businessPurpose.edit',compact('businessPurpose'));
+        return view('businessregistration::admin.setting.businessPurpose.edit', compact('businessPurpose'));
     }
 
     public function update(UpdateBusinessPurposeRequest $request, BusinessPurpose $businessPurpose)
     {
-        abort_if(Gate::denies('businessPurpose_edit'),
+        abort_if(
+            Gate::denies('businessPurpose_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -74,12 +77,13 @@ class BusinessPurposeController extends Controller
 
     public function destroy(BusinessPurpose $businessPurpose)
     {
-        abort_if(Gate::denies('businessPurpose_delete'),
+        abort_if(
+            Gate::denies('businessPurpose_delete'),
             403,
             'You are not allowed to digital board news access'
         );
         $businessPurpose->delete();
-        toast( ' सफलतापूर्वक मेटियो', 'success');
+        toast(' सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 }

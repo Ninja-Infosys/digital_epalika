@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\Units\Type;
 use App\Models\Settings\Units\Unit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Modules\EMap\Entities\MapSetting;
 
@@ -14,7 +13,6 @@ class MapSettingController extends Controller
 {
     public function index()
     {
-
         $this->checkAuthorization('mapSetting_access');
         $mapSetting = MapSetting::first();
         $unitTypes = Type::all();
@@ -25,7 +23,6 @@ class MapSettingController extends Controller
 
     public function store(Request $request)
     {
-
         $this->checkAuthorization('mapSetting_create');
         $data = $request->validate([
             'map_request_form_format' => ['nullable'],

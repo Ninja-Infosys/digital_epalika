@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Department\StoreDepartmentRequest;
 use App\Http\Requests\Setting\Department\UpdateDepartmentRequest;
 use App\Models\Settings\Department;
-use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class DepartmentController extends Controller
 {

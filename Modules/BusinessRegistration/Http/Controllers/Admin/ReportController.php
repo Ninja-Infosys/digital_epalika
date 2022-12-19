@@ -5,10 +5,6 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 use App\Models\Settings\FiscalYear;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
@@ -16,12 +12,7 @@ use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
-use Modules\BusinessRegistration\Transformers\BusinessPurposeResource;
-use Modules\BusinessRegistration\Transformers\FiscalYearResource;
-use Modules\BusinessRegistration\Transformers\InvestmentRevenueResource;
-use Modules\BusinessRegistration\Transformers\ObjectTransactionResource;
 use Illuminate\Support\Facades\View;
-use function _\flatten;
 
 class ReportController extends Controller
 {
@@ -48,7 +39,6 @@ class ReportController extends Controller
             'introBoardData',
             'columnData',
         ]));
-
     }
 
     public function report(Request $request)
@@ -109,7 +99,6 @@ class ReportController extends Controller
             'from' => 0,
             'to' => (int)BusinessDetail::select('amount_cost')->max('amount_cost')
         ];
-
     }
 
     private function setEmploymentData(): array
@@ -224,4 +213,3 @@ class ReportController extends Controller
         }
     }
 }
-

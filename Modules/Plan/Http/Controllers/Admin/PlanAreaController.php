@@ -3,7 +3,6 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Http\Requests\PlanArea\StorePlanAreaRequest;

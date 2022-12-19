@@ -2,18 +2,14 @@
 
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Modules\Recommendation\Entities\FormBuilder;
 use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Modules\Recommendation\Http\Requests\Template\StoreRecommendationTemplateRequest;
 use Modules\Recommendation\Http\Requests\Template\UpdateRecommendationTemplateRequest;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RecommendationTemplateController extends Controller
 {
@@ -36,7 +32,6 @@ class RecommendationTemplateController extends Controller
 
     public function store(StoreRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum)
     {
-
         $this->checkAuthorization('recommendationTemplate_create');
 
         RecommendationTemplate::create($request->validated() + [
@@ -74,7 +69,6 @@ class RecommendationTemplateController extends Controller
 
     public function destroy(ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
     {
-
         $this->checkAuthorization('recommendationTemplate_delete');
         if ($recommendationTemplate->status == 1) {
             toast('Error while deleting file', 'error');
@@ -91,7 +85,6 @@ class RecommendationTemplateController extends Controller
     {
         $this->checkAuthorization('recommendationTemplate_access');
         DB::transaction(function () use ($applicationTypeEnum, $recommendationTemplate) {
-
             $recommendationTemplate->update([
                 'status' => 1
             ]);

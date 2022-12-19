@@ -3,7 +3,6 @@
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
 use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingDecision\StoreMeetingDecisionRequest;
@@ -14,7 +13,6 @@ class MeetingDecisionController extends Controller
 {
     public function index($meeting_for)
     {
-
         $this->checkAuthorization($meeting_for.'MeetingDecision_access');
         $meetingDecisions = MeetingDecision::with('meetingEvent')->where('meeting_for', $meeting_for)
         ->where(function (Builder $q) {
@@ -54,7 +52,8 @@ class MeetingDecisionController extends Controller
 
     public function show($meeting_for, MeetingDecision $meetingDecision)
     {
-        $this->checkAuthorization($meeting_for.'MeetingDecision_access');    }
+        $this->checkAuthorization($meeting_for.'MeetingDecision_access');
+    }
 
     public function edit($meeting_for, MeetingDecision $meetingDecision)
     {

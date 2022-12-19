@@ -3,11 +3,11 @@
 namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingEvent\StoreMeetingEventRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MeetingEvent\UpdateMeetingEventRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class MeetingEventController extends Controller
 {
     public function index($event_for)

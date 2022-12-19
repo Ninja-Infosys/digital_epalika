@@ -2,8 +2,6 @@
 
 namespace Modules\Circular\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -16,7 +14,8 @@ class DispatchController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('dispatch_access'),
+        abort_if(
+            Gate::denies('dispatch_access'),
             403,
             'You are not allowed to dispatch access'
         );
@@ -28,7 +27,8 @@ class DispatchController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('dispatch_create'),
+        abort_if(
+            Gate::denies('dispatch_create'),
             403,
             'You are not allowed to dispatch create'
         );
@@ -39,7 +39,8 @@ class DispatchController extends Controller
 
     public function store(StoreDispatchRequest $request)
     {
-        abort_if(Gate::denies('dispatch_create'),
+        abort_if(
+            Gate::denies('dispatch_create'),
             403,
             'You are not allowed to dispatch create'
         );
@@ -56,7 +57,8 @@ class DispatchController extends Controller
 
     public function show(Dispatch $dispatch)
     {
-        abort_if(Gate::denies('dispatch_access'),
+        abort_if(
+            Gate::denies('dispatch_access'),
             403,
             'You are not allowed to dispatch access'
         );
@@ -67,7 +69,8 @@ class DispatchController extends Controller
 
     public function edit(Dispatch $dispatch)
     {
-        abort_if(Gate::denies('dispatch_edit'),
+        abort_if(
+            Gate::denies('dispatch_edit'),
             403,
             'You are not allowed to dispatch edit'
         );
@@ -77,7 +80,8 @@ class DispatchController extends Controller
 
     public function update(UpdateDispatchRequest $request, Dispatch $dispatch)
     {
-        abort_if(Gate::denies('dispatch_edit'),
+        abort_if(
+            Gate::denies('dispatch_edit'),
             403,
             'You are not allowed to dispatch edit'
         );
@@ -100,7 +104,8 @@ class DispatchController extends Controller
 
     public function destroy(Dispatch $dispatch)
     {
-        abort_if(Gate::denies('dispatch_delete'),
+        abort_if(
+            Gate::denies('dispatch_delete'),
             403,
             'You are not allowed to dispatch delete'
         );

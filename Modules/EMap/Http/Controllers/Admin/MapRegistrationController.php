@@ -4,7 +4,6 @@ namespace Modules\EMap\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapRegistration;
@@ -23,12 +22,10 @@ class MapRegistrationController extends Controller
 
     public function store(StoreMapRegistrationRequest $request, MapApply $mapApply): RedirectResponse
     {
-
-
         DB::transaction(function () use ($request, $mapApply) {
             $mapRegistration = MapRegistration::create($request->validated() + ['map_apply_id' => $mapApply->id]);
 
-            if(!empty($request->input('particulars'))) {
+            if (!empty($request->input('particulars'))) {
                 foreach ($request->input('particulars') as $particular) {
                     $mapRegistration->mapRegistrationParticulars()->create($particular);
                 }
@@ -55,7 +52,6 @@ class MapRegistrationController extends Controller
 
     public function update(UpdateMapRegistrationRequest $request, MapApply $mapApply, MapRegistration $mapRegistration): RedirectResponse
     {
-
         DB::transaction(function () use ($request, $mapRegistration) {
             $mapRegistration->update($request->validated());
 

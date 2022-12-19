@@ -1,4 +1,5 @@
 <?php
+
 return [
     'circular' => [
         'दर्ता थप्नुहोस' => 'admin.circular.registration.create',

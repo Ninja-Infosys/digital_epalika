@@ -53,7 +53,6 @@ class RecommendationController extends Controller
 
     public function store(StoreRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum)
     {
-
         $this->checkAuthorization('recommendation_create');
 
 
@@ -171,12 +170,10 @@ class RecommendationController extends Controller
         $applicationTypeEnum = $recommendation->application_type;
 
         return view('recommendation::admin.recommendation.template', compact('resolvedData', 'applicationTypeEnum'));
-
     }
 
     private function getData($data)
     {
-
         $resolvedData = [];
 
         foreach ($data as $key => $value) {
@@ -204,5 +201,4 @@ class RecommendationController extends Controller
         $replace = $this->getData($data);
         return Str::replace(array_keys($replace), $replace, $template->data);
     }
-
 }

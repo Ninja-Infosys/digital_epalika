@@ -13,7 +13,7 @@ Route::resource('judicialMember', JudicialMemberController::class);
 
 Route::resource('complaintApplication', ComplaintApplicationController::class);
 
-Route::prefix('setting')->group(function (){
+Route::prefix('setting')->group(function () {
     Route::resource('lawsuitNature', LawsuitNatureController::class);
 });
 

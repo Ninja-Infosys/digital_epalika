@@ -10,18 +10,20 @@ use App\Traits\EventObserveTrait;
 
 class ProjectAgreementTerm extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-       'project_id',
-       'data'
-   ];
+    protected $fillable = [
+        'project_id',
+        'data'
+    ];
 
     public function project(): BelongsTo
     {

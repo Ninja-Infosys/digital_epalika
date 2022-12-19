@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Requests\Setting\EmergencyNumber\StoreEmergencyNumberRequest;
 use App\Http\Requests\Setting\EmergencyNumber\UpdateEmergencyNumberRequest;
-use App\Models\Ethnicity;
 use App\Models\Settings\EmergencyNumber;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class EmergencyNumberController extends Controller
 {
@@ -25,7 +23,6 @@ class EmergencyNumberController extends Controller
         $this->checkAuthorization('emergencyNumber_create');
 
         return view('admin.setting.emergencyNumber.create');
-
     }
 
     public function store(StoreEmergencyNumberRequest $request)
@@ -43,7 +40,6 @@ class EmergencyNumberController extends Controller
         $this->checkAuthorization('emergencyNumber_edit');
 
         return view('admin.setting.emergencyNumber.edit', compact('emergencyNumber'));
-
     }
 
     public function update(UpdateEmergencyNumberRequest $request, EmergencyNumber $emergencyNumber)

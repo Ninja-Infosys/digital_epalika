@@ -10,6 +10,7 @@ use Modules\Circular\Entities\Registration;
 use Modules\Circular\Http\Requests\Registration\StoreRegistrationRequest;
 use Modules\Circular\Http\Requests\Registration\UpdateRegistrationRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class RegistrationController extends Controller
 {
     public function index()
