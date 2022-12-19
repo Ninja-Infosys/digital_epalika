@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grant.setting.enterpriseType.index')}}">उद्यम प्रकार</a>
+                            <a href="{{route('admin.grant.setting.grantOffice.index')}}">अनुदान कार्यालय</a>
                         </li>
-                        <li class="breadcrumb-item active">उद्यम प्रकार सम्पादन गर्नुहोस</li>
+                        <li class="breadcrumb-item active">अनुदान कार्यालय थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">उद्यम प्रकार सम्पादन गर्नुहोस</h4>
+                <h4 class="page-title">अनुदान कार्यालय थप्नुहोस्</h4>
             </div>
         </div>
     </div>
@@ -25,29 +25,30 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">उद्यम प्रकार सम्पादन गर्नुहोस</h4>
-                        <a href="{{route('admin.grant.setting.enterpriseType.index')}}"
+                        <h4 class="header-title">अनुदान कार्यालय थप्नुहोस्</h4>
+                        @can('grantOffice_access')
+                        <a href="{{route('admin.grant.setting.grantOffice.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> उद्यम प्रकार सूची
+                            <i class="fa fa-list"></i> अनुदान कार्यालय सूची
                         </a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.grant.setting.enterpriseType.update',$enterpriseType)}}" method="post">
+                    <form action="{{route('admin.grant.setting.grantOffice.store')}}" method="post">
                         @csrf
-                        @method('put')
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="title" class="form-label">शीर्षक</label>
+                                <label for="office_name" class="form-label">अनुदान कार्यालय</label>
                                 <input
                                     type="text"
-                                    name="title"
-                                    value="{{old('title',$enterpriseType)}}"
-                                    class="form-control @error('title') is-invalid @enderror"
-                                    id="title"
-                                    placeholder="शीर्षक"
+                                    name="office_name"
+                                    value="{{old('office_name')}}"
+                                    class="form-control @error('office_name') is-invalid @enderror"
+                                    id="office_name"
+                                    placeholder="अनुदान कार्यालय"
                                 />
-                                @error('title')
+                                @error('office_name')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

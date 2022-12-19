@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">न्यायिक समिति विवरण</li>
+                        <li class="breadcrumb-item active">न्यायिक सदस्य विवरण</li>
                     </ol>
                 </div>
-                <h4 class="page-title">न्यायिक समिति विवरण </h4>
+                <h4 class="page-title">न्यायिक सदस्य विवरण </h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">न्यायिक समिति विवरण सूची</h4>
+                        <h4 class="header-title">न्यायिक सदस्य सूची</h4>
                         @can('judicialMember_create')
                             <a href="{{route('admin.judicialCommittee.judicialMember.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -42,8 +42,8 @@
                                 <th>नाम</th>
                                 <th>पद</th>
                                 <th>सम्पर्क नं.</th>
+                                <th>इमेल</th>
                                 <th>ठेगाना</th>
-                                <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -51,25 +51,15 @@
                             @forelse($judicialMembers as $judicialMember)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td class="table-user">
-                                        <img src="{{$judicialMember->photo_url}}" class="me-2 rounded-circle" alt="">
-                                        {{$judicialMember->name}}
-                                    </td>
-                                    <td>{{$judicialMember->designation->title??''}}</td>
+                                    <td>{{$judicialMember->name}}</td>
+                                    <td>{{$judicialMember->designation}}</td>
                                     <td>{{$judicialMember->phone}}</td>
-                                    <td>
-                                        {{$judicialMember->localBody->local_body??''}} - {{$judicialMember->ward_no}}
-                                        , {{$judicialMember->district->district??''}}
-                                        , {{$judicialMember->province->province??''}}
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.judicialCommittee.judicialMember.updateStatus',$judicialMember)}}">
-                                            <i class="fa fa-2x {{$judicialMember->status ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
-                                        </a>
-                                    </td>
+                                    <td>{{$judicialMember->email}}</td>
+                                    <td>{{$judicialMember->address}}</td>
                                     <td>
                                         @can('judicialMember_edit')
                                             <a href="{{route('admin.judicialCommittee.judicialMember.edit',$judicialMember)}}"
+                                               title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -80,7 +70,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

@@ -21,7 +21,6 @@ class JudicialMember extends Model
     use EventObserveTrait;
 
     protected $dates = [
-        'en_dob',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -29,70 +28,10 @@ class JudicialMember extends Model
 
     protected $fillable = [
         'name',
-        'photo',
-        'position',
-        'designation_id',
         'phone',
-        'province_id',
-        'district_id',
-        'local_body_id',
-        'ward_no',
-        'tole',
-        'gender',
-        'dob',
-        'en_dob',
-        'blood_group',
-        'father_name',
-        'mother_name',
-        'grandfather_name',
-        'status',
+        'email',
+        'designation',
+        'address',
+        'position',
     ];
-
-    protected $casts = [
-        'gender' => Gender::class,
-    ];
-
-    public function getPhotoUrlAttribute(): string
-    {
-        return ! empty($this->attributes['photo'])
-            ? Storage::disk('public')->url($this->attributes['photo'])
-            : asset('images/user_icon.jpg');
-    }
-
-    public function getAddressAttribute(): array
-    {
-        return [
-            'province_id' => $this->attributes['province_id'],
-            'district_id' => $this->attributes['district_id'],
-            'local_body_id' => $this->attributes['local_body_id'],
-            'ward_no' => $this->attributes['ward_no'],
-        ];
-    }
-
-    public function setPhotoAttribute($value)
-    {
-        if (! empty($value) && ! is_string($value)) {
-            $this->attributes['photo'] = $value->store('judicial_committee/chief_members', 'public');
-        }
-    }
-
-    public function designation(): BelongsTo
-    {
-        return  $this->belongsTo(Designation::class);
-    }
-
-    public function province(): BelongsTo
-    {
-        return $this->belongsTo(Province::class);
-    }
-
-    public function district(): BelongsTo
-    {
-        return $this->belongsTo(District::class);
-    }
-
-    public function localBody(): BelongsTo
-    {
-        return $this->belongsTo(LocalBody::class);
-    }
 }

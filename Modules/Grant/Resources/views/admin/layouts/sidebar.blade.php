@@ -36,6 +36,20 @@
                     <span> सहकारीको प्रकार </span>
                 </a>
             </li>
+            @can('affiliation_access')
+                <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                    <a href="{{route('admin.grant.setting.affiliation.index')}}">
+                        <span> सहकारीको आवध्ता </span>
+                    </a>
+                </li>
+                @endcan
+            @can('enterpriseType_access')
+                <li class="{{request()->is('admin/grant/setting/enterpriseType') ? 'active' : ''}}">
+                    <a href="{{ route('admin.grant.setting.enterpriseType.index') }}">
+                        <span> उद्यमको प्रकार </span>
+                    </a>
+                </li>
+            @endcan
                 @can('affiliation_access')
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                 <a href="{{route('admin.grant.setting.affiliation.index')}}">
@@ -44,20 +58,24 @@
             </li>
                 @endcan
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="{{route('admin.grant.setting.cooperativeType.index')}}">
+                <a href="{{route('admin.grant.setting.enterpriseType.index')}}">
                     <span> उद्यमको प्रकार </span>
                 </a>
             </li>
+                @can('grantProgram_access')
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="#">
+                <a href="{{route('admin.grant.setting.grantProgram.index')}}">
                     <span> कार्यक्रम बिषय </span>
                 </a>
             </li>
-            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="#">
-                    <span> अनुदान दिने सस्था </span>
-                </a>
-            </li>
+                @endcan
+            @can('grantOffice_access')
+                <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                    <a href="{{route('admin.grant.setting.grantOffice.index')}}">
+                        <span> अनुदान दिने सस्था</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

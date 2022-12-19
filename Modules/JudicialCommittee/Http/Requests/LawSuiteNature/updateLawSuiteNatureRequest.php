@@ -17,12 +17,12 @@ class updateLawSuiteNatureRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'title_en' => ['nullable', 'string', 'max:255'],
-            'code' => ['required', 'numeric'],
+            'code' => ['required'],
         ];
     }
 
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'title.required' => ['शीर्षक आवश्यक छ'],

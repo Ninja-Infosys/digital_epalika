@@ -6,27 +6,27 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.judicialCommittee.dashboard')}}">
+                            <a href="{{route('admin.grant.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-
-                        <li class="breadcrumb-item active">मुख्य न्यायिक सदस्य</li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.grant.setting.grantOffice.index')}}">अनुदान कार्यालय</a>
+                        </li>
                     </ol>
                 </div>
-                <h4 class="page-title">मुख्य न्यायिक सदस्य</h4>
+                <h4 class="page-title">अनुदान कार्यालय विवरण</h4>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">मुख्य न्यायिक सदस्य सूची</h4>
-                        @can('chiefJudicialMember_create')
-                            <a href="{{route('admin.judicialCommittee.chiefJudicialMember.create')}}"
+                        <h4 class="header-title">अनुदान कार्यालय सूची</h4>
+                        @can('grantOffice_create')
+                            <a href="{{route('admin.grant.setting.grantOffice.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -38,39 +38,26 @@
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>क्र.स</th>
-                                <th>नाम</th>
-                                <th>फोन</th>
-                                <th>पद</th>
-                                <th>स्थिति</th>
+                                <th>क्र.सं</th>
+                                <th>अनुदान कार्यालय</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($chiefJudicialMembers as $chiefJudicialMember)
+                            @forelse($offices as $office)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td><img src="{{$chiefJudicialMember->photo_url}}" height="40" width="40"
-                                             class="me-2 rounded-circle"
-                                             alt="">
-                                        {{$chiefJudicialMember->name}}</td>
-                                    <td>{{$chiefJudicialMember->phone}}</td>
-                                    <td>{{$chiefJudicialMember->designation->title}}</td>
+                                    <td>{{$office->office_name}}</td>
                                     <td>
-                                        <a href="{{route('admin.judicialCommittee.chiefJudicialMember.updateStatus',$chiefJudicialMember)}}">
-                                            <i class="fa fa-2x {{$chiefJudicialMember->status ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        @can('chiefJudicialMember_edit')
-                                            <a href="{{route('admin.judicialCommittee.chiefJudicialMember.edit',$chiefJudicialMember)}}"
+                                        @can('grantOffice_edit')
+                                            <a href="{{route('admin.grant.setting.grantOffice.edit', $office)}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('chiefJudicialMember_delete')
+                                        @can('grantOffice_delete')
                                             <form
-                                                action="{{route('admin.judicialCommittee.chiefJudicialMember.destroy',$chiefJudicialMember)}}"
+                                                action="{{route('admin.grant.setting.grantOffice.destroy', $office)}}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
@@ -83,7 +70,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
@@ -94,3 +81,5 @@
         </div>
     </div>
 @endsection
+
+
