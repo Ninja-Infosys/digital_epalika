@@ -47,6 +47,6 @@ Route::prefix('files')->as('files.')->group(function () {
 //report
 
 Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
-    Route::get('/','getRequiredData')->name('report');
-    Route::post('report-data','report')->name('report-data');
+    Route::get('/', 'getRequiredData')->name('report');
+    Route::post('report-data', 'report')->name('report-data');
 });

@@ -6,13 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Website\MunicipalDetail\StoreMunicipalDetailRequest;
 use App\Http\Requests\Website\MunicipalDetail\UpdateMunicipalDetailRequest;
 use App\Models\Website\MunicipalDetail;
-use Illuminate\Support\Facades\Gate;
 
 class MunicipalDetailController extends Controller
 {
     public function index()
     {
-
         $this->checkAuthorization('municipalDetail_access');
 
         $municipalDetails = MunicipalDetail::orderBy('position')->get();
@@ -28,7 +26,6 @@ class MunicipalDetailController extends Controller
 
     public function store(StoreMunicipalDetailRequest $request)
     {
-
         $this->checkAuthorization('municipalDetail_create');
         MunicipalDetail::create($request->validated());
 
@@ -44,14 +41,12 @@ class MunicipalDetailController extends Controller
 
     public function edit(MunicipalDetail $municipalDetail)
     {
-
         $this->checkAuthorization('municipalDetail_edit');
         return view('admin.website.municipal_detail.edit', compact('municipalDetail'));
     }
 
     public function update(UpdateMunicipalDetailRequest $request, MunicipalDetail $municipalDetail)
     {
-
         $this->checkAuthorization('municipalDetail_edit');
         $municipalDetail->update($request->validated());
 
@@ -62,7 +57,6 @@ class MunicipalDetailController extends Controller
 
     public function destroy(MunicipalDetail $municipalDetail)
     {
-
         $this->checkAuthorization('municipalDetail_delete');
         $municipalDetail->delete();
 

@@ -8,14 +8,14 @@ use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingDecision\UpdateDecisionRe
 use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\ExecutiveMeeting\MunicipalMeetingDecision;
 use App\Models\ExecutiveMeeting\MunicipalMeetingNotice;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class MunicipalMeetingDecisionController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('municipalMeeting_access'),
+        abort_if(
+            Gate::denies('municipalMeeting_access'),
             403,
             'You are not allowed to municipal meeting access'
         );
@@ -27,7 +27,8 @@ class MunicipalMeetingDecisionController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('municipalMeeting_create'),
+        abort_if(
+            Gate::denies('municipalMeeting_create'),
             403,
             'You are not allowed to municipal meeting access'
         );
@@ -39,7 +40,8 @@ class MunicipalMeetingDecisionController extends Controller
 
     public function store(StoreDecisionRequest $request)
     {
-        abort_if(Gate::denies('municipalMeeting_create'),
+        abort_if(
+            Gate::denies('municipalMeeting_create'),
             403,
             'You are not allowed to municipal meeting access'
         );
@@ -53,7 +55,8 @@ class MunicipalMeetingDecisionController extends Controller
 
     public function show(MunicipalMeetingDecision $municipalMeetingDecision)
     {
-        abort_if(Gate::denies('municipalMeeting_access'),
+        abort_if(
+            Gate::denies('municipalMeeting_access'),
             403,
             'You are not allowed to municipal meeting access'
         );
@@ -61,7 +64,8 @@ class MunicipalMeetingDecisionController extends Controller
 
     public function edit(MunicipalMeetingDecision $municipalMeetingDecision)
     {
-        abort_if(Gate::denies('municipalMeeting_edit'),
+        abort_if(
+            Gate::denies('municipalMeeting_edit'),
             403,
             'You are not allowed to municipal meeting access'
         );
@@ -73,7 +77,8 @@ class MunicipalMeetingDecisionController extends Controller
 
     public function update(UpdateDecisionRequest $request, MunicipalMeetingDecision $municipalMeetingDecision)
     {
-        abort_if(Gate::denies('municipalMeeting_edit'),
+        abort_if(
+            Gate::denies('municipalMeeting_edit'),
             403,
             'You are not allowed to municipal meeting access'
         );
@@ -92,7 +97,8 @@ class MunicipalMeetingDecisionController extends Controller
 
     public function destroy(MunicipalMeetingDecision $municipalMeetingDecision)
     {
-        abort_if(Gate::denies('municipalMeeting_delete'),
+        abort_if(
+            Gate::denies('municipalMeeting_delete'),
             403,
             'You are not allowed to municipal meeting access'
         );

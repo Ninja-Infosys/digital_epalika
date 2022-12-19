@@ -171,9 +171,9 @@ class MapApply extends Model
         return $query->whereNotNull('sent_to_admin_at');
     }
 
-    public function scopeIsMapVerified($query,ApplicationFormTypeEnum $applicationFormTypeEnum)
+    public function scopeIsMapVerified($query, ApplicationFormTypeEnum $applicationFormTypeEnum)
     {
-        return $query->where('application_type',$applicationFormTypeEnum->value);
+        return $query->where('application_type', $applicationFormTypeEnum->value);
     }
 
     public function scopeNotSentToAdmin($query)

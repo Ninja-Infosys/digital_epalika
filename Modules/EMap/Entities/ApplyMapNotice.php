@@ -48,7 +48,6 @@ class ApplyMapNotice extends Model
 
     public function getIsSentAttribute(): bool
     {
-
         return !empty($this->attributes['sent_to_admin_at']);
     }
 

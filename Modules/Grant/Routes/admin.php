@@ -16,4 +16,3 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('affiliation', AffiliationController::class);
     Route::resource('cooperativeType', CooperativeTypeController::class);
 });
-

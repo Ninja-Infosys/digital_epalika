@@ -3,7 +3,6 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Setting;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\StoreGrievanceOfficeRequest;
@@ -13,17 +12,19 @@ class GrievanceOfficeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('grievanceOffice_access'),
+        abort_if(
+            Gate::denies('grievanceOffice_access'),
             403,
             'You are not allowed to access this resource'
         );
         $grievanceOffices = GrievanceOffice::latest()->get();
-        return view('grievancehandling::admin.setting.grievance_office.index',compact('grievanceOffices'));
+        return view('grievancehandling::admin.setting.grievance_office.index', compact('grievanceOffices'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('grievanceOffice_create'),
+        abort_if(
+            Gate::denies('grievanceOffice_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -32,7 +33,8 @@ class GrievanceOfficeController extends Controller
 
     public function store(StoreGrievanceOfficeRequest $request)
     {
-        abort_if(Gate::denies('grievanceOffice_create'),
+        abort_if(
+            Gate::denies('grievanceOffice_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -43,7 +45,8 @@ class GrievanceOfficeController extends Controller
 
     public function show(GrievanceOffice $grievanceOffice)
     {
-        abort_if(Gate::denies('grievanceOffice_access'),
+        abort_if(
+            Gate::denies('grievanceOffice_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -52,16 +55,18 @@ class GrievanceOfficeController extends Controller
 
     public function edit(GrievanceOffice $grievanceOffice)
     {
-        abort_if(Gate::denies('grievanceOffice_edit'),
+        abort_if(
+            Gate::denies('grievanceOffice_edit'),
             403,
             'You are not allowed to access this resource'
         );
-        return view('grievancehandling::admin.setting.grievance_office.edit',compact('grievanceOffice'));
+        return view('grievancehandling::admin.setting.grievance_office.edit', compact('grievanceOffice'));
     }
 
     public function update(UpdateGrievanceOfficeRequest $request, GrievanceOffice $grievanceOffice)
     {
-        abort_if(Gate::denies('grievanceOffice_edit'),
+        abort_if(
+            Gate::denies('grievanceOffice_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -72,7 +77,8 @@ class GrievanceOfficeController extends Controller
 
     public function destroy(GrievanceOffice $grievanceOffice)
     {
-        abort_if(Gate::denies('grievanceOffice_delete'),
+        abort_if(
+            Gate::denies('grievanceOffice_delete'),
             403,
             'You are not allowed to access this resource'
         );

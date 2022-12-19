@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Northwestern\SysDev\DynamicForms\Storage\Concerns\HandlesDynamicFormsStorage;
-
 
 /**
  * Storage/retrieval for file uploads.
@@ -36,7 +34,6 @@ class DynamicFormsStorageController extends Controller
      */
     protected function authorizeFileAction(string $action, string $fileKey, Request $request, string $backend): void
     {
-
         $permission = "${action}Files"; // uploadFiles, downloadFiles -- it's a convention
 
         Gate::authorize($permission, [

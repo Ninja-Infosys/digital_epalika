@@ -27,14 +27,11 @@ class FrontendController extends Controller
             ->where('token', $request->input('token'))
             ->first();
 
-        if($grievanceDetail)
-        {
+        if ($grievanceDetail) {
             return view('grievancehandling::frontend.grievance.single-grievance', compact('grievanceDetail'));
-
         }
         toast('तपाइले उपलब्ध गराएको विवरण मिलेन', 'error');
         return back();
-
     }
 
     public function grievanceHandling(): Factory|View|Application

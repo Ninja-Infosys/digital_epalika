@@ -18,8 +18,7 @@ class PieChartComponent extends Component
         public string $chartName = 'pie-chart',
         public string $chartType = 'pie',
         public bool $displayLegend=true
-    )
-    {
+    ) {
     }
 
     public function render(): View|Factory|Htmlable|string|Closure|Application

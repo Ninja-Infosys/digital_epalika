@@ -48,7 +48,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-       $this->checkAuthorization('user_access');
+        $this->checkAuthorization('user_access');
     }
 
     public function edit(User $user)

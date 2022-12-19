@@ -9,14 +9,14 @@ use App\Http\Requests\ExecutiveMeeting\WardMeetingDecision\StoreDecisionRequest;
 use App\Models\ExecutiveMeeting\MeetingDetail;
 use App\Models\ExecutiveMeeting\WardMeetingDecision;
 use App\Models\ExecutiveMeeting\WardMeetingNotice;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class WardMeetingDecisionController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('wardMeeting_access'),
+        abort_if(
+            Gate::denies('wardMeeting_access'),
             403,
             'You are not allowed to ward meeting access'
         );
@@ -28,7 +28,8 @@ class WardMeetingDecisionController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('wardMeeting_create'),
+        abort_if(
+            Gate::denies('wardMeeting_create'),
             403,
             'You are not allowed to ward meeting create'
         );
@@ -40,7 +41,8 @@ class WardMeetingDecisionController extends Controller
 
     public function store(StoreDecisionRequest $request)
     {
-        abort_if(Gate::denies('wardMeeting_create'),
+        abort_if(
+            Gate::denies('wardMeeting_create'),
             403,
             'You are not allowed to ward meeting create'
         );
@@ -53,7 +55,8 @@ class WardMeetingDecisionController extends Controller
 
     public function show(WardMeetingDecision $wardMeetingDecision)
     {
-        abort_if(Gate::denies('wardMeeting_access'),
+        abort_if(
+            Gate::denies('wardMeeting_access'),
             403,
             'You are not allowed to ward meeting access'
         );
@@ -61,7 +64,8 @@ class WardMeetingDecisionController extends Controller
 
     public function edit(WardMeetingDecision $wardMeetingDecision)
     {
-        abort_if(Gate::denies('wardMeeting_edit'),
+        abort_if(
+            Gate::denies('wardMeeting_edit'),
             403,
             'You are not allowed to ward meeting edit'
         );
@@ -73,7 +77,8 @@ class WardMeetingDecisionController extends Controller
 
     public function update(UpdateDecisionRequest $request, WardMeetingDecision $wardMeetingDecision)
     {
-        abort_if(Gate::denies('wardMeeting_edit'),
+        abort_if(
+            Gate::denies('wardMeeting_edit'),
             403,
             'You are not allowed to ward meeting edit'
         );
@@ -89,7 +94,8 @@ class WardMeetingDecisionController extends Controller
 
     public function destroy(WardMeetingDecision $wardMeetingDecision)
     {
-        abort_if(Gate::denies('wardMeeting_delete'),
+        abort_if(
+            Gate::denies('wardMeeting_delete'),
             403,
             'You are not allowed to ward meeting delete'
         );

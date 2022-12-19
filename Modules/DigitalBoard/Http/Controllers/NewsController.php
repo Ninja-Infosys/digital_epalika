@@ -2,8 +2,6 @@
 
 namespace Modules\DigitalBoard\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\Circular\Http\Requests\News\StoreNewsRequest;
@@ -14,7 +12,8 @@ class NewsController extends Controller
 {
     public function index($type)
     {
-        abort_if(Gate::denies('digitalBoardNews_access'),
+        abort_if(
+            Gate::denies('digitalBoardNews_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -25,7 +24,8 @@ class NewsController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('digitalBoardNews_create'),
+        abort_if(
+            Gate::denies('digitalBoardNews_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -34,8 +34,8 @@ class NewsController extends Controller
 
     public function store(StoreNewsRequest $request)
     {
-
-        abort_if(Gate::denies('digitalBoardNews_create'),
+        abort_if(
+            Gate::denies('digitalBoardNews_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -49,7 +49,8 @@ class NewsController extends Controller
 
     public function show(News $news)
     {
-        abort_if(Gate::denies('digitalBoardNews_access'),
+        abort_if(
+            Gate::denies('digitalBoardNews_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -58,7 +59,8 @@ class NewsController extends Controller
 
     public function edit(News $news)
     {
-        abort_if(Gate::denies('digitalBoardNews_edit'),
+        abort_if(
+            Gate::denies('digitalBoardNews_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -67,7 +69,8 @@ class NewsController extends Controller
 
     public function update(UpdateNewsRequest $request, News $news)
     {
-        abort_if(Gate::denies('digitalBoardNews_edit'),
+        abort_if(
+            Gate::denies('digitalBoardNews_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -75,12 +78,12 @@ class NewsController extends Controller
         $news->update($request->validated());
         toast('समाचार सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.digitalBoard.news.index'));
-
     }
 
     public function destroy(News $news)
     {
-        abort_if(Gate::denies('digitalBoardNews_delete'),
+        abort_if(
+            Gate::denies('digitalBoardNews_delete'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -92,11 +95,10 @@ class NewsController extends Controller
 
     public function updateClosedDate(News $news)
     {
-            $news->update([
-               'closed_at'=> !empty($news->closed_at) ? null :now()
-            ]);
+        $news->update([
+           'closed_at'=> !empty($news->closed_at) ? null : now()
+        ]);
         toast('समाचार स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return back();
-
     }
 }

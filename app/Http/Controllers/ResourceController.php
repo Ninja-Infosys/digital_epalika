@@ -1,15 +1,10 @@
 <?php
 
-
 namespace App\Http\Controllers;
-
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Str;
 use Northwestern\SysDev\DynamicForms\ResourceRegistry;
-use Northwestern\SysDev\DynamicForms\Resources\ResourceInterface;
-use Symfony\Component\Finder\Finder;
 
 class ResourceController extends Controller
 {
@@ -55,8 +50,7 @@ class ResourceController extends Controller
     public function resource($resource, ResourceRegistry $resourceRegistry)
     {
         $resourceList = $resourceRegistry->registered();
-        if(!isset($resourceList[$resource]))
-        {
+        if (!isset($resourceList[$resource])) {
             abort(404, 'Given Resource does not exist');
         }
         $componentList = json_encode($resourceList[$resource]::components());
@@ -72,8 +66,7 @@ class ResourceController extends Controller
     public function resourceSubmissions(Request $request, $resource, ResourceRegistry $resourceRegistry)
     {
         $resourceList = $resourceRegistry->registered();
-        if(!isset($resourceList[$resource]))
-        {
+        if (!isset($resourceList[$resource])) {
             abort(404, 'Given Resource does not exist');
         }
         $params = $request->query();
@@ -83,8 +76,7 @@ class ResourceController extends Controller
         $searchValue = '';
         foreach ($params as $key => $value) {
             if (str_starts_with($key, 'data')) {
-                if($key !== 'data__regex' && preg_match('/data_(.*)__regex/', $key, $match))
-                {
+                if ($key !== 'data__regex' && preg_match('/data_(.*)__regex/', $key, $match)) {
                     $searchKey = $match[1];
                 }
                 $searchValue = $value;
@@ -94,20 +86,16 @@ class ResourceController extends Controller
         $resourceSubmissions = $resourceList[$resource]::submissions($limit, $skip, $searchKey, $searchValue);
         $handlesPaginationAndSearch = $resourceList[$resource]::handlesPaginationAndSearch();
 
-        if(!$handlesPaginationAndSearch)
-        {
-            if($searchValue !== '')
-            {
+        if (!$handlesPaginationAndSearch) {
+            if ($searchValue !== '') {
                 $resourceSubmissions = array_filter($resourceSubmissions, function ($submissions) use ($limit, $skip, $searchKey, $searchValue) {
-                    foreach ($submissions as $submissionComponent => $submissionValue)
-                    {
-                        if(($searchKey === '' || $submissionComponent === $searchKey) && str_contains($submissionValue, $searchValue) )
-                        {
+                    foreach ($submissions as $submissionComponent => $submissionValue) {
+                        if (($searchKey === '' || $submissionComponent === $searchKey) && str_contains($submissionValue, $searchValue)) {
                             return true;
                         }
                     }
                     return false;
-                } );
+                });
             }
 
             $resourceSubmissions = array_slice($resourceSubmissions, $skip, $limit);
@@ -129,7 +117,6 @@ class ResourceController extends Controller
                 ];
                 $count++;
             }
-
         }
         $str = json_encode($submissions);
 

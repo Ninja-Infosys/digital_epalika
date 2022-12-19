@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class InvestmentRevenueResource extends JsonResource
 {
-
     public function toArray($request): array
     {
         return [

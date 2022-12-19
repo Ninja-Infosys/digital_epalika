@@ -12,7 +12,6 @@ use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\Project;
 use Modules\Roaster\Entities\Training;
-use Nwidart\Modules\Facades\Module;
 use Schema;
 
 class DashboardController extends Controller
@@ -105,6 +104,5 @@ class DashboardController extends Controller
                 ],
             ],
         ];
-
     }
 }

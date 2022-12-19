@@ -11,14 +11,12 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Gate;
 
 class SliderController extends Controller
 {
     public function index(): Factory|View|Application
     {
-
-       $this->checkAuthorization('slider_access');
+        $this->checkAuthorization('slider_access');
 
         $sliders = Slider::all();
         return view('admin.website.slider.index', compact('sliders'));
@@ -32,7 +30,6 @@ class SliderController extends Controller
 
     public function store(StoreSliderRequest $request): RedirectResponse
     {
-
         $this->checkAuthorization('slider_create');
         Slider::create($request->validated());
 
@@ -43,7 +40,6 @@ class SliderController extends Controller
 
     public function edit(Slider $slider): Factory|View|Application
     {
-
         $this->checkAuthorization('slider_edit');
         return view('admin.website.slider.edit', compact('slider'));
     }
@@ -65,7 +61,6 @@ class SliderController extends Controller
 
     public function destroy(Slider $slider): RedirectResponse
     {
-
         $this->checkAuthorization('slider_delete');
         if ($slider->image) {
             $this->deleteFile($slider->image);

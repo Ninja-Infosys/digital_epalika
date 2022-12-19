@@ -5,7 +5,6 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use Carbon\CarbonPeriod;
-use Illuminate\Support\Carbon;
 use Modules\TaskManagement\Entities\DailyTask;
 use Modules\TaskManagement\Entities\TaskCategory;
 use Modules\TaskManagement\Entities\TaskDivision;
@@ -48,11 +47,11 @@ class DashboardController extends Controller
     public function weeklyTasks()
     {
         $weeklyData=collect();
-        $weekDays=CarbonPeriod::create(now()->subWeek()->toDateString(),'1 day',now()->toDateString());
-        foreach ($weekDays as $weekDay){
+        $weekDays=CarbonPeriod::create(now()->subWeek()->toDateString(), '1 day', now()->toDateString());
+        foreach ($weekDays as $weekDay) {
             $weeklyData->push([
                 'date'=>$weekDay->toDateString(),
-                'tasks_count'=>DailyTask::whereDate('en_date',$weekDay->toDateString())->count()
+                'tasks_count'=>DailyTask::whereDate('en_date', $weekDay->toDateString())->count()
             ]);
         }
 

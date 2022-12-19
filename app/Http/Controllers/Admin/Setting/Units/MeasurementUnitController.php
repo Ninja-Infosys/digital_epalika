@@ -7,7 +7,6 @@ use App\Http\Requests\Setting\MeasurementUnits\StoreMeasurementUnitRequest;
 use App\Http\Requests\Setting\MeasurementUnits\UpdateMeasurementUnitRequest;
 use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Type;
-use Illuminate\Support\Facades\Gate;
 
 class MeasurementUnitController extends Controller
 {

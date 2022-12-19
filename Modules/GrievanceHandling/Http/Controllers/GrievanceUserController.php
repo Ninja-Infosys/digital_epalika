@@ -3,7 +3,6 @@
 namespace Modules\GrievanceHandling\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Modules\GrievanceHandling\Entities\GrievanceUser;
 
 class GrievanceUserController extends Controller
@@ -13,5 +12,4 @@ class GrievanceUserController extends Controller
         $grievanceUsers = GrievanceUser::withCount('grievanceDetails')->latest()->get();
         return view('grievancehandling::admin.user.index', compact('grievanceUsers'));
     }
-
 }

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExternalUnitConversionRequest;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
-use Illuminate\Support\Facades\Gate;
 
 class ExternalUnitConversionController extends Controller
 {

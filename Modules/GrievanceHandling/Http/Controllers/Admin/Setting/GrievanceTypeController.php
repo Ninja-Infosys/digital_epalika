@@ -3,7 +3,6 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Http\Requests\GrievanceType\StoreGrievanceTypeRequest;
 use Modules\GrievanceHandling\Http\Requests\GrievanceType\UpdateGrievanceTypeRequest;

@@ -3,11 +3,11 @@
 namespace Modules\DigitalBoard\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\DigitalBoard\Entities\Video;
 use Modules\DigitalBoard\Http\Requests\Video\StoreVideoRequest;
 use Modules\DigitalBoard\Http\Requests\Video\UpdateVideoRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class VideoController extends Controller
 {
     public function index()

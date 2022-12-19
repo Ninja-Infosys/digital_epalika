@@ -127,7 +127,6 @@ enum NoticeTypeEnum: string
     public static function getShowInMapVerification(self $value): bool
     {
         return match ($value) {
-
             //heir
             self::HEIR => true,
             //permission enums
@@ -182,8 +181,6 @@ enum NoticeTypeEnum: string
 
             //registration
             self::REGARDING_FEES_AND_REGISTRATION => false,
-
-
         };
     }
 

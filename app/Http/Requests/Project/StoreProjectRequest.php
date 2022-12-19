@@ -15,7 +15,7 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'registration_no' => ['required',Rule::unique('projects','registration_no')->withoutTrashed()],
+            'registration_no' => ['required',Rule::unique('projects', 'registration_no')->withoutTrashed()],
             'project_name' => ['required'],
             'plan_area_id' => ['required', Rule::exists('plan_areas', 'id')->withoutTrashed()],
             'project_status' => ['required'],

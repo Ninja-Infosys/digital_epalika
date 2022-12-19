@@ -15,15 +15,15 @@ class RegistrationReport extends Component
     {
         $this->registrations = Registration::where(function ($query) {
             if (!empty($this->search)) {
-                $query->where('registration_no','LIKE', '%'.$this->search.'%');
-                $query->orWhere('registration_date','LIKE', '%'.$this->search.'%');
+                $query->where('registration_no', 'LIKE', '%'.$this->search.'%');
+                $query->orWhere('registration_date', 'LIKE', '%'.$this->search.'%');
             }
         })
             ->latest()
             ->get();
 
-        $setting = OfficeSetting::with('province','district','localBody')->first();
+        $setting = OfficeSetting::with('province', 'district', 'localBody')->first();
 
-        return view('circular::livewire.registration-report',compact('setting'));
+        return view('circular::livewire.registration-report', compact('setting'));
     }
 }

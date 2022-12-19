@@ -3,7 +3,6 @@
 namespace Modules\EMap\Http\Controllers;
 
 use App\Models\Settings\FiscalYear;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
@@ -11,10 +10,8 @@ use Modules\EMap\Entities\MapApply;
 
 class ReportController extends Controller
 {
-
     public function getRequiredData()
     {
-
         $fiscalYears = FiscalYear::get();
         $length = $this->setLengthData();
         $breadth = $this->setBreadthData();
@@ -22,7 +19,6 @@ class ReportController extends Controller
         $current_storey = $this->setCurrentStoreyData();
         $future_storey = $this->setFutureStoreyData();
         return view('emap::admin.emapReport.index', compact('fiscalYears', 'length', 'breadth', 'area_of_plinth', 'current_storey', 'future_storey'));
-
     }
 
     public function report(Request $request)
@@ -47,7 +43,6 @@ class ReportController extends Controller
 
     public function filterDataFromUser($q, Request $request): void
     {
-
         if (!empty($request->input('fiscal_year'))) {
             $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
         }
@@ -103,7 +98,6 @@ class ReportController extends Controller
         if (!empty($request->input('breadth.to'))) {
             $q->where('breadth', '<=', (int)$request->input('breadth.to'));
         }
-
     }
 
 
@@ -113,7 +107,6 @@ class ReportController extends Controller
             'from' => 0,
             'to' => (int)MapApply::select('length')->max('length')
         ];
-
     }
 
     private function setBreadthData(): array
@@ -122,7 +115,6 @@ class ReportController extends Controller
             'from' => 0,
             'to' => (int)MapApply::select('breadth')->max('breadth')
         ];
-
     }
 
     private function setAreaofPlinthData(): array
@@ -131,7 +123,6 @@ class ReportController extends Controller
             'from' => 0,
             'to' => (int)MapApply::select('area_of_plinth')->max('area_of_plinth')
         ];
-
     }
 
     private function setCurrentStoreyData(): array
@@ -140,7 +131,6 @@ class ReportController extends Controller
             'from' => 0,
             'to' => (int)MapApply::select('current_storey')->max('current_storey')
         ];
-
     }
 
     private function setFutureStoreyData(): array
@@ -149,6 +139,5 @@ class ReportController extends Controller
             'from' => 0,
             'to' => (int)MapApply::select('future_storey')->max('future_storey')
         ];
-
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Helper\SMS\SamayaSms;
-use App\Models\Sms;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Modules\ExecutiveMeeting\Entities\MeetingEvent;
@@ -44,7 +43,7 @@ class SendExecutiveCommitteeMessage extends Command
                 $phone = implode(',', $municipalCommittees->pluck('phone')->toArray());
             }
 
-            (new SamayaSms)->sendTextSMS($phone, $meetingEvent->description);
+            (new SamayaSms())->sendTextSMS($phone, $meetingEvent->description);
         }
         return 0;
     }

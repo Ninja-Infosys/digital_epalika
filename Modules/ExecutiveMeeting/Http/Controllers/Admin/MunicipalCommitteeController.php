@@ -4,7 +4,6 @@ namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
-use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\MunicipalCommittee;
 use Modules\ExecutiveMeeting\Http\Requests\MunicipalCommittee\StoreMunicipalCommitteeRequest;
 use Modules\ExecutiveMeeting\Http\Requests\MunicipalCommittee\UpdateMunicipalCommitteeRequest;

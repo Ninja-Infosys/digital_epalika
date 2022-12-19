@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OfficeHeader\UpdateOfficeHeaderRequest;
 use App\Models\OfficeHeader;
-use Illuminate\Support\Facades\Gate;
 
 class OfficeHeaderController extends Controller
 {
@@ -17,7 +16,6 @@ class OfficeHeaderController extends Controller
 
     public function update(UpdateOfficeHeaderRequest $request, OfficeHeader $officeHeader)
     {
-
         $this->checkAuthorization('officeHeader_edit');
         $officeHeader->update($request->validated());
         toast('सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -27,7 +25,6 @@ class OfficeHeaderController extends Controller
 
     public function destroy(OfficeHeader $officeHeader)
     {
-
         $this->checkAuthorization('officeHeader_delete');
         $officeHeader->delete();
         toast('सफलतापूर्वक मेटियो', 'success');

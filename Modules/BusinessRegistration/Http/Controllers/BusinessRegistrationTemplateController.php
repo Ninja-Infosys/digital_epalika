@@ -6,12 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
 use Modules\BusinessRegistration\Enums\TemplateTypeEnum;
 use Modules\BusinessRegistration\Http\Requests\BusinessRegistrationTemplate\StoreBusinessRegistrationTemplateRequest;
 use Modules\BusinessRegistration\Http\Requests\BusinessRegistrationTemplate\UpdateBusinessRegistrationTemplateRequest;
-use Modules\Recommendation\Entities\RecommendationTemplate;
 
 class BusinessRegistrationTemplateController extends Controller
 {
@@ -92,7 +90,6 @@ class BusinessRegistrationTemplateController extends Controller
     {
         $this->checkAuthorization('businessRegistrationTemplate_access');
         DB::transaction(function () use ($templateTypeEnum, $businessRegistrationTemplate) {
-
             $this->forgotCache('businessTemplates');
 
             $businessRegistrationTemplate->update([
@@ -115,7 +112,6 @@ class BusinessRegistrationTemplateController extends Controller
 
     public function getStaticTemplate(Request $request)
     {
-
         $request->validate([
             'type' => ['required'],
         ]);
@@ -131,6 +127,4 @@ class BusinessRegistrationTemplateController extends Controller
     {
         return view('businessregistration::admin.setting.template.enumList');
     }
-
-
 }

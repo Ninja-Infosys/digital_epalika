@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\MeasurementUnits\StoreUnitConversionRequest;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
-use Illuminate\Support\Facades\Gate;
 
 class InternalUnitConversionController extends Controller
 {
@@ -22,7 +21,6 @@ class InternalUnitConversionController extends Controller
 
     public function store(StoreUnitConversionRequest $request, Unit $unit)
     {
-
         foreach ($request->input('conversion') as $conversion) {
             if ($conversionData = UnitConversion::where('conversion_to', $conversion['conversion_to'])->where('conversion_from', $unit->id)->first()) {
                 $conversionData->update(['rate' => $conversion['rate'] ?? '']);

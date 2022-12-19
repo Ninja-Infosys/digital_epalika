@@ -19,7 +19,11 @@ use Modules\Plan\Traits\PlanTemplateTrait;
 
 class Project extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, PlanTemplateTrait, GetAllColumns;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use PlanTemplateTrait;
+    use GetAllColumns;
 
     protected $dates = [
         'created_at',

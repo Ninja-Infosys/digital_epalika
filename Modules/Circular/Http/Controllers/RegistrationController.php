@@ -14,7 +14,8 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('registration_access'),
+        abort_if(
+            Gate::denies('registration_access'),
             403,
             'You are not allowed to registration access'
         );
@@ -26,7 +27,8 @@ class RegistrationController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('registration_create'),
+        abort_if(
+            Gate::denies('registration_create'),
             403,
             'You are not allowed to registration create'
         );
@@ -37,7 +39,8 @@ class RegistrationController extends Controller
 
     public function store(StoreRegistrationRequest $request)
     {
-        abort_if(Gate::denies('registration_create'),
+        abort_if(
+            Gate::denies('registration_create'),
             403,
             'You are not allowed to registration create'
         );
@@ -55,7 +58,8 @@ class RegistrationController extends Controller
 
     public function show(Registration $registration)
     {
-        abort_if(Gate::denies('registration_access'),
+        abort_if(
+            Gate::denies('registration_access'),
             403,
             'You are not allowed to registration access'
         );
@@ -66,7 +70,8 @@ class RegistrationController extends Controller
 
     public function edit(Registration $registration)
     {
-        abort_if(Gate::denies('registration_edit'),
+        abort_if(
+            Gate::denies('registration_edit'),
             403,
             'You are not allowed to registration edit'
         );
@@ -76,13 +81,13 @@ class RegistrationController extends Controller
 
     public function update(UpdateRegistrationRequest $request, Registration $registration)
     {
-        abort_if(Gate::denies('registration_edit'),
+        abort_if(
+            Gate::denies('registration_edit'),
             403,
             'You are not allowed to registration edit'
         );
 
         DB::transaction(function () use ($request, $registration) {
-
             if ($request->hasFile('signature_image') && $registration->signature_image) {
                 $this->deleteFile($registration->signature_image);
             }
@@ -101,7 +106,8 @@ class RegistrationController extends Controller
 
     public function destroy(Registration $registration)
     {
-        abort_if(Gate::denies('registration_delete'),
+        abort_if(
+            Gate::denies('registration_delete'),
             403,
             'You are not allowed to registration delete'
         );
@@ -117,12 +123,10 @@ class RegistrationController extends Controller
         toast('दर्ता सफलतापूर्वक मेटियो', 'success');
 
         return back();
-
     }
 
     public function registrationReport()
     {
-
         return view('circular::registration.report');
     }
 
