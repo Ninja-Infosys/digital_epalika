@@ -8,7 +8,6 @@ class ListRegistrationDatabaseSeeder extends Seeder
 {
     public function run()
     {
-
         $this->call([
            ListRegistrationPermissionTableSeeder::class
         ]);

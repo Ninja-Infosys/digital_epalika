@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     public function up()
     {
         Schema::create('project_bid_submissions', function (Blueprint $table) {
@@ -14,7 +13,7 @@ return new class extends Migration
             $table->string('submission_type')->comment('बुझाउने प्रकार');
             $table->string('submission_no')->comment('बुझाउने नम्बर');
             $table->string('date')->comment('मिति');
-            $table->double('amount',12,2)->default(0)->comment('रकम');
+            $table->double('amount', 12, 2)->default(0)->comment('रकम');
             $table->timestamps();
             $table->softDeletes();
         });

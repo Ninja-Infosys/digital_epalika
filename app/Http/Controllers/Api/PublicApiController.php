@@ -10,7 +10,6 @@ use App\Http\Resources\OfficeHeaderResource;
 use App\Http\Resources\OfficeSettingResource;
 use App\Http\Resources\VideoResource;
 use App\Models\Settings\OfficeSetting;
-use Illuminate\Http\Request;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\Video;

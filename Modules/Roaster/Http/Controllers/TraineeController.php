@@ -3,9 +3,7 @@
 namespace Modules\Roaster\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\Roaster\Entities\Trainee;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class TraineeController extends Controller
 {

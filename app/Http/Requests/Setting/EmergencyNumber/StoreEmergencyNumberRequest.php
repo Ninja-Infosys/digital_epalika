@@ -28,5 +28,4 @@ class StoreEmergencyNumberRequest extends FormRequest
             'contact_no.required' => 'सम्पर्क नं. आबश्यक छ'
         ];
     }
-
 }

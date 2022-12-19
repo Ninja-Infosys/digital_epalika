@@ -2,7 +2,6 @@
 
 namespace Modules\BusinessRegistration\Traits;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
@@ -106,7 +105,6 @@ trait BusinessDetailTemplateTrait
 
     public function getSpecificTemplateData(TemplateTypeEnum $type): string
     {
-
         $templates = $this->getTemplateCache();
 
         $businessTemplate = $templates->where('status', 1)
@@ -240,5 +238,4 @@ trait BusinessDetailTemplateTrait
             return BusinessRegistrationTemplate::all();
         });
     }
-
 }

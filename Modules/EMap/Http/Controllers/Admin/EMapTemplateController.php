@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
-use Modules\BusinessRegistration\Entities\BusinessRegistrationTemplate;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Http\Requests\Template\StoreEMapTemplateRequest;
@@ -70,7 +68,7 @@ class EMapTemplateController extends Controller
 
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('emap.admin.eMapTemplate.index',$noticeTypeEnum));
+        return redirect(route('emap.admin.eMapTemplate.index', $noticeTypeEnum));
     }
 
     public function destroy(NoticeTypeEnum $noticeTypeEnum, EMapTemplate $eMapTemplate): RedirectResponse
@@ -109,7 +107,6 @@ class EMapTemplateController extends Controller
         $this->checkAuthorization('eMapTemplate_access');
 
         DB::transaction(function () use ($eMapTemplate, $noticeTypeEnum) {
-
             $this->forgotCache('eMapTemplates');
             $eMapTemplate->update([
                 'status' => 1

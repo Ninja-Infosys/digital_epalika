@@ -18,8 +18,7 @@ class BarChartComponent extends Component
         public string $chartType = 'bar',
         public string $id = 'myChart',
         public bool $displayLegend=true
-    )
-    {
+    ) {
     }
 
     public function render(): View|Factory|Htmlable|Closure|string|Application

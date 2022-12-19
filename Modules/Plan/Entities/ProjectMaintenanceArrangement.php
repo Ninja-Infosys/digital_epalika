@@ -10,25 +10,27 @@ use App\Traits\EventObserveTrait;
 
 class ProjectMaintenanceArrangement extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
-   protected $fillable = [
-       'project_id',
-       'office_name',
-       'public_service',
-       'service_fee',
-       'from_fee_donation',
-       'others'
-   ];
+    protected $fillable = [
+        'project_id',
+        'office_name',
+        'public_service',
+        'service_fee',
+        'from_fee_donation',
+        'others'
+    ];
 
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
-   }
+    }
 }

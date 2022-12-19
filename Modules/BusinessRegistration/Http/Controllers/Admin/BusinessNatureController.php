@@ -3,7 +3,6 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Http\Requests\BusinessNature\StoreBusinessNature;
 use Modules\BusinessRegistration\Http\Requests\BusinessNature\UpdateBusinessNature;

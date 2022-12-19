@@ -14,7 +14,7 @@ class LawsuitNatureTableSeeder extends Seeder
             ['title' => 'फौजदारी प्रकृति', 'title_en' => 'Criminal', 'code' => 'CR']
         ];
 
-        foreach ($lawsuitNatures as $lawsuitNature){
+        foreach ($lawsuitNatures as $lawsuitNature) {
             LawsuitNature::create($lawsuitNature);
         }
     }

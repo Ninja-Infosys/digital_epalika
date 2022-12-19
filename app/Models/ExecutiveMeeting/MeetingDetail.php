@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MeetingDetail extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'meeting_date',
@@ -30,5 +31,4 @@ class MeetingDetail extends Model
     {
         return $this->morphTo();
     }
-
 }

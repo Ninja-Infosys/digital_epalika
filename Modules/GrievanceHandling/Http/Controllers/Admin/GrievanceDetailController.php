@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -35,7 +34,7 @@ class GrievanceDetailController extends Controller
 
     public function store(Request $request)
     {
-       $this->checkAuthorization('grievanceDetail_create');
+        $this->checkAuthorization('grievanceDetail_create');
     }
 
     public function show(GrievanceDetail $grievanceDetail)
@@ -91,8 +90,7 @@ class GrievanceDetailController extends Controller
                 'user_id' => auth()->id(),
             ]);
 
-            if($request->hasFile('files'))
-            {
+            if ($request->hasFile('files')) {
                 foreach ($request->file('files') as $file) {
                     $data->files()->create([
                         'file_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),

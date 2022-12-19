@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Ethnicity;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class EthnicitySeeder extends Seeder
@@ -19,8 +18,7 @@ class EthnicitySeeder extends Seeder
             ['title'=>'नेवार'],
         ];
 
-        foreach ($ethnicities as $ethnicity)
-        {
+        foreach ($ethnicities as $ethnicity) {
             Ethnicity::create($ethnicity);
         }
     }

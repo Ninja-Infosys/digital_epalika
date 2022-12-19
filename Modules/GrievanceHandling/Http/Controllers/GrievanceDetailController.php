@@ -2,7 +2,6 @@
 
 namespace Modules\GrievanceHandling\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +12,8 @@ class GrievanceDetailController extends Controller
 {
     public function index()
     {
-
-        abort_if(Gate::denies('grievanceDetail_access'),
+        abort_if(
+            Gate::denies('grievanceDetail_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -24,7 +23,8 @@ class GrievanceDetailController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('grievanceDetail_create'),
+        abort_if(
+            Gate::denies('grievanceDetail_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -33,7 +33,8 @@ class GrievanceDetailController extends Controller
 
     public function store(Request $request)
     {
-        abort_if(Gate::denies('grievanceDetail_create'),
+        abort_if(
+            Gate::denies('grievanceDetail_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -41,19 +42,24 @@ class GrievanceDetailController extends Controller
 
     public function show(GrievanceDetail $grievanceDetail)
     {
-        abort_if(Gate::denies('grievanceDetail_access'),
+        abort_if(
+            Gate::denies('grievanceDetail_access'),
             403,
             'You are not allowed to access this resource'
         );
-        $grievanceDetail->load('grievanceDetails', 'grievanceType',
+        $grievanceDetail->load(
+            'grievanceDetails',
+            'grievanceType',
             'grievanceOffice',
-            'files');
-        return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail',));
+            'files'
+        );
+        return view('grievancehandling::admin.grievanceDetail.show', compact('grievanceDetail', ));
     }
 
     public function edit($id)
     {
-        abort_if(Gate::denies('grievanceDetail_edit'),
+        abort_if(
+            Gate::denies('grievanceDetail_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -62,7 +68,8 @@ class GrievanceDetailController extends Controller
 
     public function update(Request $request, $id)
     {
-        abort_if(Gate::denies('grievanceDetail_edit'),
+        abort_if(
+            Gate::denies('grievanceDetail_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -70,7 +77,8 @@ class GrievanceDetailController extends Controller
 
     public function destroy($id)
     {
-        abort_if(Gate::denies('grievanceDetail_delete'),
+        abort_if(
+            Gate::denies('grievanceDetail_delete'),
             403,
             'You are not allowed to access this resource'
         );
@@ -87,7 +95,6 @@ class GrievanceDetailController extends Controller
 
     public function replayGrievance(Request $request, GrievanceDetail $grievanceDetail)
     {
-
         $validated = $request->validate([
             'description' => ['required'],
             'files.*' => ['mimes:png,jpeg,jpg'],
@@ -110,7 +117,5 @@ class GrievanceDetailController extends Controller
 
         toast('सफलतापूर्वक थपियो', 'success');
         return back();
-
-
     }
 }

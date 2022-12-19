@@ -7,8 +7,6 @@ use App\Models\Settings\OfficeSetting;
 use App\Models\Settings\Units\MeasurementUnit;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
-use App\Notifications\ApplyMapNoticeNotification;
-use App\Notifications\MapApplicationNotification;
 use App\Notifications\MapApplyNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -370,7 +368,6 @@ class MapApplicationForm extends Component
             Notification::send($mapApply->organization, new MapApplyNotification($mapApply));
 
             return $mapApply;
-
         });
 
 

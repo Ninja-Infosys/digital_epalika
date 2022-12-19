@@ -2,8 +2,6 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\ObjectTransactionSubCategory;
@@ -15,18 +13,17 @@ class ObjectTransactionSubCategoryController extends Controller
     public function index()
     {
         $objectTransactionSubCategories = ObjectTransactionSubCategory::with('objectTransaction')->get();
-        return view('businessregistration::admin.setting.objectTransactionSubCategory.index',compact('objectTransactionSubCategories'));
+        return view('businessregistration::admin.setting.objectTransactionSubCategory.index', compact('objectTransactionSubCategories'));
     }
 
     public function create()
     {
         $all_objectTransactions = ObjectTransaction::get();
-        return view('businessregistration::admin.setting.objectTransactionSubCategory.create',compact('all_objectTransactions'));
+        return view('businessregistration::admin.setting.objectTransactionSubCategory.create', compact('all_objectTransactions'));
     }
 
     public function store(StoreObjectTransactionSubCategoryRequest $request)
     {
-
 //        dd($request->all());
         ObjectTransactionSubCategory::create($request->validated());
         toast(' कारोबार गर्ने वस्तु  सफलतापूर्वक अद्यावधिक गरियो', 'success');
@@ -41,7 +38,7 @@ class ObjectTransactionSubCategoryController extends Controller
     public function edit(ObjectTransactionSubCategory $objectTransactionSubCategory)
     {
         $all_objectTransactions = ObjectTransaction::get();
-        return view('businessregistration::admin.setting.objectTransactionSubCategory.edit',compact('objectTransactionSubCategory','all_objectTransactions'));
+        return view('businessregistration::admin.setting.objectTransactionSubCategory.edit', compact('objectTransactionSubCategory', 'all_objectTransactions'));
     }
 
     public function update(UpdateObjectTransactionSubCategoryRequest $request, ObjectTransactionSubCategory $objectTransactionSubCategory)

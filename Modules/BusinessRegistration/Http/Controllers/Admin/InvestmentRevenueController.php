@@ -4,12 +4,12 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Http\Requests\InvestmentRevenue\StoreInvestmentRevenueRequest;
 use Modules\BusinessRegistration\Http\Requests\InvestmentRevenue\UpdateInvestmentRevenueRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class InvestmentRevenueController extends Controller
 {
     public function index()
@@ -19,7 +19,8 @@ class InvestmentRevenueController extends Controller
             if (!is_null(request('search'))) {
                 $q->whereLike(['title'], request('search'));
             }
-        })->latest()->paginate(10);;
+        })->latest()->paginate(10);
+        ;
 
         return view('businessregistration::admin.setting.investment-revenues.index', compact('investmentRevenues'));
     }

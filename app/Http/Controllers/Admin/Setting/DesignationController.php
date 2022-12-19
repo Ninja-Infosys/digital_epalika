@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\Designation\StoreDesignationRequest;
 use App\Http\Requests\Setting\Designation\UpdateDesignationRequest;
 use App\Models\Settings\Designation;
-use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class DesignationController extends Controller
 {

@@ -2,12 +2,8 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\EMap\Entities\EMapTemplate;
 use Modules\Plan\Entities\PlanTemplate;
-use Modules\Plan\Http\Requests\PlanArea\StorePlanAreaRequest;
 use Modules\Plan\Http\Requests\Template\StorePlanTemplateRequest;
 use Modules\Plan\Http\Requests\Template\UpdatePlanTemplateRequest;
 
@@ -35,7 +31,7 @@ class PlanTemplateController extends Controller
 
         PlanTemplate::create($request->validated());
 
-        toast('टेम्प्लेट सफलतापूर्वक थपियो','success');
+        toast('टेम्प्लेट सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -43,7 +39,7 @@ class PlanTemplateController extends Controller
     {
         $this->checkAuthorization('planTemplate_edit');
 
-        return view('plan::admin.setting.template.edit',compact('planTemplate'));
+        return view('plan::admin.setting.template.edit', compact('planTemplate'));
     }
 
     public function update(UpdatePlanTemplateRequest $request, PlanTemplate $planTemplate)
@@ -52,7 +48,7 @@ class PlanTemplateController extends Controller
 
         $planTemplate->update($request->validated());
 
-        toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return redirect(route('admin.plan.planTemplate.index'));
     }

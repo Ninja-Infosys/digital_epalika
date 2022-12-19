@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class ObjectTransactionTest extends TestCase
 {
-//write unit test for object transaction Create operations in laravel
+    //write unit test for object transaction Create operations in laravel
     use DatabaseMigrations;
 
     /** @test */
@@ -23,5 +23,4 @@ class ObjectTransactionTest extends TestCase
         //He should be able to read the task
         $response->assertSee($task->title);
     }
-
 }

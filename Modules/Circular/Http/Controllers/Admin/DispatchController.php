@@ -10,6 +10,7 @@ use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Http\Requests\Dispatch\StoreDispatchRequest;
 use Modules\Circular\Http\Requests\Dispatch\UpdateDispatchRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class DispatchController extends Controller
 {
     public function index()
@@ -44,7 +45,7 @@ class DispatchController extends Controller
                 'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
             ]);
 
-            if ($request->hasFile('documents')){
+            if ($request->hasFile('documents')) {
                 $this->uploadDocuments($request, $dispatch);
             }
         });

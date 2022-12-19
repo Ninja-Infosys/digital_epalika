@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
-use Illuminate\Support\Carbon;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 
@@ -91,14 +90,15 @@ class DashboardController extends Controller
         $monthlyDispatches = [];
         $dispatches=Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)
             ->get()
-            ->map(function ($dispatch){
+            ->map(function ($dispatch) {
                 return [
                     'month' => explode('-', $dispatch->dispatch_date)[1] ?? ''
                 ];
             });
 
         foreach ($this->month_name as $key => $month) {
-            $monthlyDispatches[] = $dispatches->where('month', ($key + 1))->count();;
+            $monthlyDispatches[] = $dispatches->where('month', ($key + 1))->count();
+            ;
         }
 
         return [

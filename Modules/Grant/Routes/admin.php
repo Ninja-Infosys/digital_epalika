@@ -11,4 +11,3 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('grantType', GrantTypeController::class);
     Route::resource('enterpriseType', EnterpriseTypeController::class);
 });
-

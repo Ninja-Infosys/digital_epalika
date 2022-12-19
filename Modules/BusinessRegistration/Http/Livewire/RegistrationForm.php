@@ -17,7 +17,6 @@ use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
-use Modules\BusinessRegistration\Entities\ProprietorDetail;
 
 class RegistrationForm extends Component
 {
@@ -336,7 +335,6 @@ class RegistrationForm extends Component
     {
         $this->validate();
         $businessDetails = DB::transaction(function () {
-
             $businessDetail = BusinessDetail::create([
                 'business_type' => $this->form['business_type'] ?? null,
                 'business_detail_name' => $this->form['business_detail_name'] ?? null,

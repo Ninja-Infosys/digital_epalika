@@ -33,7 +33,6 @@ class FormBuilderController extends Controller
 
     public function store(StoreFormBuilderRequest $request, ApplicationTypeEnum $applicationTypeEnum): RedirectResponse
     {
-
         $this->checkAuthorization('formBuilder_create');
 
         FormBuilder::create($request->validated() + [
@@ -103,11 +102,9 @@ class FormBuilderController extends Controller
 
     public function updateStatus(ApplicationTypeEnum $applicationTypeEnum, FormBuilder $formBuilder)
     {
-
         $this->checkAuthorization('formBuilder_access');
 
         DB::transaction(function () use ($formBuilder, $applicationTypeEnum) {
-
             $formBuilder->update([
                 'status' => 1
             ]);

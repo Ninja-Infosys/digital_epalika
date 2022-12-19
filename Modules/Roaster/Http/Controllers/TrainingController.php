@@ -9,7 +9,6 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Roaster\Entities\TechnicalTrainee;
@@ -20,7 +19,6 @@ use Modules\Roaster\Enums\TrainingTypeEnum;
 use Modules\Roaster\Http\Requests\Training\StoreTrainingRequest;
 use Modules\Roaster\Http\Requests\Training\UpdateTrainingMarkRequest;
 use Modules\Roaster\Http\Requests\Training\UpdateTrainingRequest;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class TrainingController extends Controller
 {
@@ -211,6 +209,6 @@ class TrainingController extends Controller
             $trainees = collect();
         }
 
-        return Excel::download(new TraineeExport($trainees,$training),$training->name.'.xlsx');
+        return Excel::download(new TraineeExport($trainees, $training), $training->name.'.xlsx');
     }
 }

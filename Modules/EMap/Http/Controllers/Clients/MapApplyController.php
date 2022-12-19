@@ -3,10 +3,8 @@
 namespace Modules\EMap\Http\Controllers\Clients;
 
 use App\Http\Controllers\Controller;
-use App\Models\Address\District;
 use App\Models\User;
 use App\Notifications\ApplyMapNoticeNotification;
-use App\Notifications\MapApplicationNotification;
 use App\Notifications\MapApplyNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -120,19 +118,17 @@ class MapApplyController extends Controller
 
     public function updateStatus(MapApply $mapApply)
     {
-         $mapApply->update([
-            'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
+        $mapApply->update([
+           'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
         ]);
 
         Notification::send(User::all(), new MapApplyNotification($mapApply));
         toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
         return back();
-
     }
 
     public function updateStatusOrganization(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
     {
-
         $data = ApplyMapNotice::where('map_apply_id', $mapApply->id)->where('file_type', $noticeTypeEnum->value)->first();
         $data->update([
             'sent_to_admin_at' => empty($data->sent_to_admin_at) ? now() : null

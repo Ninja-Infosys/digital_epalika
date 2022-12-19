@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\ExecutiveMeeting;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ExecutiveMeeting\MunicipalCommittee\StoreMunicipalCommitteeRequest;
 use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingNotice\StoreNoticeRequest;
 use App\Http\Requests\ExecutiveMeeting\MunicipalMeetingNotice\UpdateNoticeRequest;
 use App\Models\ExecutiveMeeting\MeetingDetail;
@@ -14,7 +13,8 @@ class MunicipalMeetingNoticeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('municipalMeeting_access'),
+        abort_if(
+            Gate::denies('municipalMeeting_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -26,7 +26,8 @@ class MunicipalMeetingNoticeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('municipalMeeting_create'),
+        abort_if(
+            Gate::denies('municipalMeeting_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -35,7 +36,8 @@ class MunicipalMeetingNoticeController extends Controller
 
     public function store(StoreNoticeRequest $request)
     {
-        abort_if(Gate::denies('municipalMeeting_create'),
+        abort_if(
+            Gate::denies('municipalMeeting_create'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -49,7 +51,8 @@ class MunicipalMeetingNoticeController extends Controller
 
     public function show(MunicipalMeetingNotice $municipalMeetingNotice)
     {
-        abort_if(Gate::denies('municipalMeeting_access'),
+        abort_if(
+            Gate::denies('municipalMeeting_access'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -57,7 +60,8 @@ class MunicipalMeetingNoticeController extends Controller
 
     public function edit(MunicipalMeetingNotice $municipalMeetingNotice)
     {
-        abort_if(Gate::denies('municipalMeeting_edit'),
+        abort_if(
+            Gate::denies('municipalMeeting_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -66,7 +70,8 @@ class MunicipalMeetingNoticeController extends Controller
 
     public function update(UpdateNoticeRequest $request, MunicipalMeetingNotice $municipalMeetingNotice)
     {
-        abort_if(Gate::denies('municipalMeeting_edit'),
+        abort_if(
+            Gate::denies('municipalMeeting_edit'),
             403,
             'You are not allowed to digital board news access'
         );
@@ -80,7 +85,8 @@ class MunicipalMeetingNoticeController extends Controller
 
     public function destroy(MunicipalMeetingNotice $municipalMeetingNotice)
     {
-        abort_if(Gate::denies('municipalMeeting_delete'),
+        abort_if(
+            Gate::denies('municipalMeeting_delete'),
             403,
             'You are not allowed to digital board news access'
         );

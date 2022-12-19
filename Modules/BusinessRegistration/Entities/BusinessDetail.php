@@ -154,7 +154,7 @@ class BusinessDetail extends Model
     }
     public function setSquareAttribute($value): void
     {
-       $this->attributes['square'] = $this->attributes['length'] * $this->attributes['width'];
+        $this->attributes['square'] = $this->attributes['length'] * $this->attributes['width'];
     }
 
     public function getPhotoUrlAttribute(): string
@@ -250,6 +250,4 @@ class BusinessDetail extends Model
     {
         return $this->application_fee + $this->registration_fee + $this->business_tax + $this->introduction_board_fees + $this->fine;
     }
-
-
 }
