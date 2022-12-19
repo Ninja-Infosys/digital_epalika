@@ -1,0 +1,34 @@
+.responsible-person img {
+    object-fit: cover;
+    height: 8rem;
+    width: 8rem;
+    border: double var(--mainColor);
+}
+
+.responsible-person p {
+    line-height: .8123rem;
+}
+
+.list-group-item:hover {
+    cursor: pointer;
+    transition: .7s;
+    transform: translateY(-10px);
+    background-color: var(--mainColor);
+    color: var(--whiteColor);
+}
+.list-group a{
+    text-decoration: none;
+}
+.card .list-group a li{
+    background-color: var(--secondaryColor);
+}
+.card .list-group a li:hover{
+    background-color: var(--mainColor);
+}
+.branch-title .btn{
+    color: var(--whiteColor);
+    background-color: var(--mainColor);
+}
+.branch-title .btn:hover{
+    color: var(--whiteColor);
+}
