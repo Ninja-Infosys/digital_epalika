@@ -44,7 +44,7 @@
             </li>
                 @endcan
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="#">
+                <a href="{{route('admin.grant.setting.cooperativeType.index')}}">
                     <span> उद्यमको प्रकार </span>
                 </a>
             </li>
