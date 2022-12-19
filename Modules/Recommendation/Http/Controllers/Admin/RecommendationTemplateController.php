@@ -5,6 +5,7 @@ namespace Modules\Recommendation\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Modules\Recommendation\Entities\FormBuilder;
@@ -58,7 +59,7 @@ class RecommendationTemplateController extends Controller
         $this->checkAuthorization('recommendationTemplate_edit');
 
         $formFields = $this->getFormFields($applicationTypeEnum);
-        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate', 'applicationTypeEnum','formFields'));
+        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate', 'applicationTypeEnum', 'formFields'));
     }
 
     public function update(UpdateRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
@@ -104,11 +105,7 @@ class RecommendationTemplateController extends Controller
         return back();
     }
 
-    /**
-     * @param ApplicationTypeEnum $applicationTypeEnum
-     * @return \Illuminate\Support\Collection
-     */
-    public function getFormFields(ApplicationTypeEnum $applicationTypeEnum): \Illuminate\Support\Collection
+    public function getFormFields(ApplicationTypeEnum $applicationTypeEnum): Collection
     {
         $formBuilder = FormBuilder::active()
             ->where('application_type', $applicationTypeEnum->value)
@@ -116,7 +113,7 @@ class RecommendationTemplateController extends Controller
 
         $form = json_decode($formBuilder?->form)?->components;
 
-        $formFields = collect($form)
+        return collect($form)
             ->map(function ($item) {
                 return [
                     'name' => $item->label,
@@ -125,6 +122,5 @@ class RecommendationTemplateController extends Controller
                 ];
             })
             ->slice(0, -1);
-        return $formFields;
     }
 }
