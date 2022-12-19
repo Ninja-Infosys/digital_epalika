@@ -3,7 +3,6 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\ObjectTransactionSubCategory;
 use Modules\BusinessRegistration\Http\Requests\ObjectTransactionSubCategory\StoreObjectTransactionSubCategoryRequest;

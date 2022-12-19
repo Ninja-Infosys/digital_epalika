@@ -2,9 +2,6 @@
 
 namespace Modules\EMap\Http\Livewire;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -170,7 +167,7 @@ class OrganizationRegisterPersonLivewire extends Component
 
     public function resetForm(): void
     {
-        $this->reset('is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user','progressPercentage');
+        $this->reset('is_same_as_permanent', 'currentStep', 'address', 'userDetail', 'user', 'progressPercentage');
     }
 
     public function checkPermanentAddress(): void

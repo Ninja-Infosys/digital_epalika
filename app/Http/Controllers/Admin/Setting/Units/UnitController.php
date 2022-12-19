@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\MeasurementUnits\StoreUnitRequest;
 use App\Http\Requests\Setting\MeasurementUnits\UpdateUnitRequest;
 use App\Models\Settings\Units\Unit;
-use Illuminate\Support\Facades\Gate;
 
 class UnitController extends Controller
 {
@@ -28,7 +27,7 @@ class UnitController extends Controller
 
     public function store(StoreUnitRequest $request)
     {
-       $this->checkAuthorization('unit_create');
+        $this->checkAuthorization('unit_create');
 
         Unit::create($request->validated());
         toast('मापन एकाइ सफलतापूर्वक थपियो', 'success');

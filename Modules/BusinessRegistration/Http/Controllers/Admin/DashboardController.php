@@ -8,15 +8,12 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Entities\InvestmentRevenue;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
-use Modules\EMap\Enums\ApplicationFormTypeEnum;
-use Modules\EMap\Enums\BuildingUsageEnum;
 
 class DashboardController extends Controller
 {
@@ -57,7 +54,6 @@ class DashboardController extends Controller
 
     public function getBusinessDetail($hasCurrentFiscalYear = null): Collection
     {
-
         return BusinessDetail::where(function ($query) use ($hasCurrentFiscalYear) {
             if ($hasCurrentFiscalYear) {
                 $query->where('fiscal_year_id', $hasCurrentFiscalYear);
@@ -69,7 +65,6 @@ class DashboardController extends Controller
 
     public function getBusinessRegistrationAccordingToFiscalYear(): array
     {
-
         $businessDetails = $this->getBusinessDetail();
         return [
             'labels' => ['दर्ता भएका', 'दर्ता नभएका'],
@@ -102,7 +97,6 @@ class DashboardController extends Controller
                 ]
             ],
         ];
-
     }
 
 
@@ -130,8 +124,8 @@ class DashboardController extends Controller
     public function getInvestmentRevenueData(): array
     {
         $investmentRevenues = InvestmentRevenue::withCount(['businessDetails',
-            'businessDetails as registered_business_count' => fn($q) => $q->whereNotNull('registration_no'),
-            'businessDetails as not_registered_business_count' => fn($q) => $q->whereNull('registration_no'),
+            'businessDetails as registered_business_count' => fn ($q) => $q->whereNotNull('registration_no'),
+            'businessDetails as not_registered_business_count' => fn ($q) => $q->whereNull('registration_no'),
         ])
             ->get();
         return [
@@ -154,6 +148,5 @@ class DashboardController extends Controller
                 ]
             ],
         ];
-
     }
 }

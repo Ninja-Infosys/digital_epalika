@@ -4,7 +4,6 @@ namespace Modules\ExecutiveMeeting\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Modules\ExecutiveMeeting\Entities\MeetingEvent;
 use Modules\ExecutiveMeeting\Transformers\MeetingEventResource;
 

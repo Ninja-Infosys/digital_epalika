@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 
 class SendMeetingMessage extends Command
 {
-
     protected $name = 'meeting:message';
 
     protected $description = 'Send Meeting Message to specified group';

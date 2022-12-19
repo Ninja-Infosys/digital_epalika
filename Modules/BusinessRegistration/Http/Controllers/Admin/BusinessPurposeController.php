@@ -4,11 +4,11 @@ namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Gate;
 use Modules\BusinessRegistration\Entities\BusinessPurpose;
 use Modules\BusinessRegistration\Http\Requests\BusinessPurpose\StoreBusinessPurposeRequest;
 use Modules\BusinessRegistration\Http\Requests\BusinessPurpose\UpdateBusinessPurposeRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class BusinessPurposeController extends Controller
 {
     public function index()

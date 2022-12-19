@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Setting\Units;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Units\Type;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class TypeController extends Controller

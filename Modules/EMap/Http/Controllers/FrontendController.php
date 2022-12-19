@@ -134,18 +134,15 @@ class FrontendController extends Controller
      */
     public function sendOtp(MapApply $mapApply): Response|Application|ResponseFactory
     {
-
         if (request()?->ajax()) {
             $number = random_int(111111, 999999);
             $mapApply->otp()->create([
                 'otp' => $number,
             ]);
 
-            $sms = (new SamayaSms)->sendTextSMS($mapApply->houseOwner->phone, "Dear Sir, Your Otp is $number, please do not share to anyone.");
+            $sms = (new SamayaSms())->sendTextSMS($mapApply->houseOwner->phone, "Dear Sir, Your Otp is $number, please do not share to anyone.");
 
             return response(['message' => 'Otp sent successfully'], 200);
-
-
         }
         return response(['message' => 'Something Wrong'], 500);
     }

@@ -7,7 +7,6 @@ use App\Models\Sms;
 
 class AakashSms implements SmsInterface
 {
-
     public function sendTextSMS($contact, $message = "Hello Text"): Sms
     {
         $args = http_build_query(array(
@@ -74,7 +73,7 @@ class AakashSms implements SmsInterface
      */
     public function makeTheCallUsingAPI(string $url, string $args): string|bool
     {
-# Make the call using API.
+        # Make the call using API.
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, 1); ///

@@ -2,8 +2,6 @@
 
 namespace Modules\GrievanceHandling\Http\Controllers\Setting;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceType;
@@ -14,18 +12,20 @@ class GrievanceTypeController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('grievanceType_access'),
+        abort_if(
+            Gate::denies('grievanceType_access'),
             403,
             'You are not allowed to access this resource'
         );
 
         $grievance_types = GrievanceType::latest()->get();
-        return view('grievancehandling::admin.setting.grievance_type.index',compact('grievance_types'));
+        return view('grievancehandling::admin.setting.grievance_type.index', compact('grievance_types'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('grievanceType_create'),
+        abort_if(
+            Gate::denies('grievanceType_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -34,7 +34,8 @@ class GrievanceTypeController extends Controller
 
     public function store(StoreGrievanceTypeRequest $request)
     {
-        abort_if(Gate::denies('grievanceType_create'),
+        abort_if(
+            Gate::denies('grievanceType_create'),
             403,
             'You are not allowed to access this resource'
         );
@@ -42,12 +43,12 @@ class GrievanceTypeController extends Controller
         GrievanceType::create($request->validated());
         toast('गुनासो प्रकार  सफलतापूर्वक थपियो', 'success');
         return back();
-
     }
 
     public function show(GrievanceType $grievanceType)
     {
-        abort_if(Gate::denies('grievanceType_access'),
+        abort_if(
+            Gate::denies('grievanceType_access'),
             403,
             'You are not allowed to access this resource'
         );
@@ -56,7 +57,8 @@ class GrievanceTypeController extends Controller
 
     public function edit(GrievanceType $grievanceType)
     {
-        abort_if(Gate::denies('grievanceType_edit'),
+        abort_if(
+            Gate::denies('grievanceType_edit'),
             403,
             'You are not allowed to access this resource'
         );
@@ -66,7 +68,8 @@ class GrievanceTypeController extends Controller
 
     public function update(UpdateGrievanceTypeRequest $request, GrievanceType $grievanceType)
     {
-        abort_if(Gate::denies('grievanceType_edit'),
+        abort_if(
+            Gate::denies('grievanceType_edit'),
             403,
             'You are not allowed to grievance edit'
         );
@@ -78,7 +81,8 @@ class GrievanceTypeController extends Controller
 
     public function destroy(GrievanceType $grievanceType)
     {
-        abort_if(Gate::denies('grievanceType_delete'),
+        abort_if(
+            Gate::denies('grievanceType_delete'),
             403,
             'You are not allowed to grievance delete'
         );

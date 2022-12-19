@@ -3,7 +3,6 @@
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 
 class ComplaintApplicationController extends Controller

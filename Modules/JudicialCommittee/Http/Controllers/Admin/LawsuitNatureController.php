@@ -2,8 +2,6 @@
 
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\LawsuitNature;
 use Modules\JudicialCommittee\Http\Requests\LawSuiteNature\StoreLawSuiteNatureRequest;
@@ -50,7 +48,7 @@ class LawsuitNatureController extends Controller
 
         $lawsuitNature->update($request->validated());
 
-        toast('मुद्दा प्रकृति सफलतापूर्वक अपडेट गरियो','success');
+        toast('मुद्दा प्रकृति सफलतापूर्वक अपडेट गरियो', 'success');
         return redirect(route('admin.judicialCommittee.lawsuitNature.index'));
     }
 
@@ -60,7 +58,7 @@ class LawsuitNatureController extends Controller
 
         $lawsuitNature->delete();
 
-        toast('मुद्दा प्रकृति सफलतापूर्वक हटाइयो','success');
+        toast('मुद्दा प्रकृति सफलतापूर्वक हटाइयो', 'success');
         return back();
     }
 }

@@ -10,14 +10,11 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class EthnicityController extends Controller
 {
     public function index(): Factory|View|Application
     {
-
         $this->checkAuthorization('ethnicity_access');
 
         $ethnicities = Ethnicity::get();
@@ -27,7 +24,6 @@ class EthnicityController extends Controller
 
     public function create()
     {
-
         $this->checkAuthorization('ethnicity_create');
 
         return view('admin.setting.ethnicity.create');

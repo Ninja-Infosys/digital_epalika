@@ -2,18 +2,11 @@
 
 namespace Modules\BusinessRegistration\Http\Livewire;
 
-use App\Models\Settings\FiscalYear;
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
-use Modules\BusinessRegistration\Entities\BusinessPurpose;
-use Modules\BusinessRegistration\Entities\Introboard;
-use Modules\BusinessRegistration\Entities\InvestmentRevenue;
-use Modules\BusinessRegistration\Entities\ObjectTransaction;
 
 class ReportLivewire extends Component
 {
@@ -57,11 +50,6 @@ class ReportLivewire extends Component
 
     public function mount(): void
     {
-
-
-
-
-
     }
 
     protected $listeners = ['fromDateChanged', 'toDateChanged'];
@@ -96,7 +84,6 @@ class ReportLivewire extends Component
 
         $this->filterRegistrationRenewal();
         $this->reset('class');
-
     }
 
     public function render(): Factory|View|Application
@@ -156,6 +143,4 @@ class ReportLivewire extends Component
             });
         }
     }
-
-
 }

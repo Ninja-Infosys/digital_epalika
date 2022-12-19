@@ -21,8 +21,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('investmentRevenue', InvestmentRevenueController::class);
     Route::resource('businessPurpose', BusinessPurposeController::class);
     Route::post('businessRegistrationTemplate/staticTemplate', [BusinessRegistrationTemplateController::class,'getStaticTemplate'])->name('get-static-template');
-    Route::get('businessRegistrationTemplate/EnumList',[BusinessRegistrationTemplateController::class,'enumList'])->name('businessRegistrationTemplate.enumList');
-    Route::get('{templateTypeEnum}/businessRegistrationTemplate/{businessRegistrationTemplate}/updateStatus',[BusinessRegistrationTemplateController::class,'updateStatus'])->name('businessRegistrationTemplate.updateStatus');
+    Route::get('businessRegistrationTemplate/EnumList', [BusinessRegistrationTemplateController::class,'enumList'])->name('businessRegistrationTemplate.enumList');
+    Route::get('{templateTypeEnum}/businessRegistrationTemplate/{businessRegistrationTemplate}/updateStatus', [BusinessRegistrationTemplateController::class,'updateStatus'])->name('businessRegistrationTemplate.updateStatus');
     Route::resource('{templateTypeEnum}/businessRegistrationTemplate', BusinessRegistrationTemplateController::class)->names('businessRegistrationTemplate');
 });
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
@@ -32,14 +32,14 @@ Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [
 Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');
 
 Route::prefix('report')->as('report.')->controller(BusinessRegistrationReportController::class)->group(function () {
-    Route::get('dateWise','dateWise')->name('dateWise');
-    Route::get('businessNature','businessNature')->name('businessNature');
+    Route::get('dateWise', 'dateWise')->name('dateWise');
+    Route::get('businessNature', 'businessNature')->name('businessNature');
 });
 
 
-Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function (){
-    Route::get('/','getRequiredData')->name('report');
-    Route::post('report-data','report')->name('report-data');
+Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
+    Route::get('/', 'getRequiredData')->name('report');
+    Route::post('report-data', 'report')->name('report-data');
 });
 
 Route::prefix('files')->as('files.')->group(function () {

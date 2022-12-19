@@ -2,7 +2,6 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

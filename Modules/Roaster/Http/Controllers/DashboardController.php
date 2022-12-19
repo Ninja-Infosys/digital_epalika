@@ -4,7 +4,6 @@ namespace Modules\Roaster\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
-use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -19,7 +18,6 @@ class DashboardController extends Controller
 {
     public function __invoke(): Factory|View|Application
     {
-
         [$trainingCount, $trainingCountInFy, $trainingInFyData] = $this->getTrainingData();
 
         [$trainerCount, $trainerAccordingToDistrictsData] = $this->getTrainerData();

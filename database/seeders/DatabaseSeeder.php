@@ -7,10 +7,8 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-
     public function run()
     {
-
         $this->call([
             EthnicitySeeder::class,
             TypeSeeder::class,

@@ -8,7 +8,6 @@ class ApplyMapNoticeObserver
 {
     public function creating(ApplyMapNotice $applyMapNotice): void
     {
-
         $appliedApplications = ApplyMapNotice::whereNull('rejected_at')
             ->where('map_apply_id', $applyMapNotice->map_apply_id)
             ->where('file_type', $applyMapNotice->file_type->value)

@@ -2,15 +2,12 @@
 
 namespace Modules\Recommendation\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class ShowApplicationListController extends Controller
 {
-
     public function __invoke()
     {
 //        abort_if(

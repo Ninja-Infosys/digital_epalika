@@ -7,11 +7,11 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Http\Requests\Notice\UpdateNoticeRequest;
 use Illuminate\Database\Eloquent\Builder;
+
 class NoticeController extends Controller
 {
     public function index($type)
@@ -27,7 +27,6 @@ class NoticeController extends Controller
                 }
             })
             ->latest()->paginate(10);
-
         } else {
             $notices = Notice::with('user')
             ->where('type', 'Notice')
@@ -38,7 +37,6 @@ class NoticeController extends Controller
                 }
             })
             ->latest()->paginate(10);
-
         }
 
         return view('digitalboard::notice.index', compact('notices', 'type'));
