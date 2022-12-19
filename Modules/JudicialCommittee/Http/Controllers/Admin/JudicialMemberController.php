@@ -15,7 +15,7 @@ class JudicialMemberController extends Controller
     {
         $this->checkAuthorization('judicialMember_access');
 
-        $judicialMembers = JudicialMember::with('designation', 'province', 'district', 'localBody')->orderBy('position')->get();
+        $judicialMembers = JudicialMember::orderBy('position')->get();
 
         return view('judicialcommittee::admin.judicial_member.index', compact('judicialMembers'));
     }
@@ -34,16 +34,9 @@ class JudicialMemberController extends Controller
 
         JudicialMember::create($request->validated());
 
-        toast('न्यायिक समिति विवरण सफलतापूर्वक थपियो', 'success');
+        toast('न्यायिक सदस्य सफलतापूर्वक थपियो', 'success');
 
         return back();
-    }
-
-    public function show(JudicialMember $judicialMember)
-    {
-        $this->checkAuthorization('judicialMember_access');
-
-        return view('judicialcommittee::show');
     }
 
     public function edit(JudicialMember $judicialMember)
@@ -64,7 +57,7 @@ class JudicialMemberController extends Controller
         }
         $judicialMember->update($request->validated());
 
-        toast('न्यायिक समिति विवरण सफलतापूर्वक अपडेट गरियो', 'success');
+        toast('न्यायिक सदस्य सफलतापूर्वक अपडेट गरियो', 'success');
 
         return redirect(route('admin.judicialCommittee.judicialMember.index'));
     }
@@ -78,7 +71,7 @@ class JudicialMemberController extends Controller
         }
         $judicialMember->delete();
 
-        toast('न्यायिक समितिको विवरण सफलतापूर्वक मेटाइयो', 'success');
+        toast('न्यायिक सदस्य सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
     }
@@ -91,7 +84,7 @@ class JudicialMemberController extends Controller
             'status' => ! $judicialMember->status,
         ]);
 
-        toast('न्यायिक सदस्य स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('नन्यायिक सदस्य सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
     }

@@ -15,7 +15,7 @@ class LawsuitNatureController extends Controller
     {
         $this->checkAuthorization('lawsuitNature_access');
 
-        $lawSuitNatures=LawsuitNature::latest()->get();
+        $lawSuitNatures = LawsuitNature::latest()->get();
 
         return view('judicialcommittee::admin.setting.lawsuit_nature.index', compact('lawSuitNatures'));
     }
@@ -50,7 +50,7 @@ class LawsuitNatureController extends Controller
 
         $lawsuitNature->update($request->validated());
 
-        toast('मुद्दा प्रकृति सफलतापूर्वक अपडेट गरियो','success');
+        toast('मुद्दा प्रकृति सफलतापूर्वक अपडेट गरियो', 'success');
         return redirect(route('admin.judicialCommittee.lawsuitNature.index'));
     }
 
@@ -60,7 +60,7 @@ class LawsuitNatureController extends Controller
 
         $lawsuitNature->delete();
 
-        toast('मुद्दा प्रकृति सफलतापूर्वक हटाइयो','success');
+        toast('मुद्दा प्रकृति सफलतापूर्वक हटाइयो', 'success');
         return back();
     }
 }
