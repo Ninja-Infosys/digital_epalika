@@ -2,14 +2,21 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\Redirector;
 use Modules\Grant\Entities\Affiliation;
+use Modules\Grant\Http\Requests\Affiliation\StoreAffiliationRequest;
+use Modules\Grant\Http\Requests\Affiliation\UpdateAffiliationRequest;
 
 class AffiliationController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         $this->checkAuthorization('affiliation_access');
         $affiliations = Affiliation::latest()->get();
@@ -18,31 +25,44 @@ class AffiliationController extends Controller
 
     public function create()
     {
-        return view('grant::create');
+        $this->checkAuthorization('affiliation_create');
+
+        return view('grant::admin.setting.affiliation.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreAffiliationRequest $request): RedirectResponse
     {
+        $this->checkAuthorization('affiliation_create');
+
+        Affiliation::create($request->validated());
+        toast('Affiliation Added Successfully !!', 'success');
+        return back();
 
     }
 
-    public function show($id)
+    public function edit(Affiliation $affiliation)
     {
-        return view('grant::show');
+        $this->checkAuthorization('affiliation_edit');
+
+
+        return view('grant::admin.setting.affiliation.edit', compact('affiliation'));
     }
 
-    public function edit($id)
+    public function update(UpdateAffiliationRequest $request, Affiliation $affiliation): Redirector|Application|RedirectResponse
     {
-        return view('grant::edit');
+        $this->checkAuthorization('affiliation_edit');
+
+        $affiliation->update($request->validated());
+        toast('Affiliation Updated Successfully !!', 'message');
+        return redirect(route('admin.grant.setting.affiliation.index'));
+
     }
 
-    public function update(Request $request, $id)
+    public function destroy(Affiliation $affiliation): RedirectResponse
     {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        $this->checkAuthorization('affiliation_delete');
+        $affiliation->delete();
+        toast('Affiliation Deleted SuccessFully !!', 'success' );
+        return back();
     }
 }

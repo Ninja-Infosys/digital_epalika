@@ -46,7 +46,7 @@
                             @forelse($affiliations as $affiliation)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <th>{{$affiliation->title}}</th>
+                                    <th>{{$affiliation->name}}</th>
                                     <td>
                                         <a href="{{route('admin.grant.setting.affiliation.edit', $affiliation)}}"
                                            class="btn btn-xs btn-outline-primary">
