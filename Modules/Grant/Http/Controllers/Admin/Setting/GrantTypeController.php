@@ -18,7 +18,9 @@ class GrantTypeController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('grantType_access');
+
         $grantTypes = GrantType::latest()->get();
+
         return view('grant::admin.setting.grantType.index', compact('grantTypes'));
     }
 
