@@ -3,23 +3,20 @@
 namespace Modules\Recommendation\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\OfficeHeader;
 use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
+use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
-use Illuminate\Support\Facades\Gate;
 use Modules\Recommendation\Entities\FormBuilder;
 use Modules\Recommendation\Entities\Recommendation;
 use Modules\Recommendation\Http\Requests\StoreRecommendationRequest;
 use Modules\Recommendation\Http\Requests\UpdateRecommendationRequest;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class RecommendationController extends Controller
 {
-    public function getApplicationList(): Factory|View|Application
+    public function getApplicationList()
     {
         $this->checkAuthorization('recommendation_access');
 
@@ -43,11 +40,10 @@ class RecommendationController extends Controller
         $this->checkAuthorization('recommendation_create');
 
 
-
         $definition = $this->getDefinition($applicationTypeEnum);
 
         if (empty($definition)) {
-            return $this->redirectIfEmptyDefination($applicationTypeEnum);
+            return $this->redirectIfEmptyDefinition($applicationTypeEnum);
         }
 
         $data = '{}';
@@ -61,11 +57,10 @@ class RecommendationController extends Controller
         $this->checkAuthorization('recommendation_create');
 
 
-
         $builder = $this->getDefinition($applicationTypeEnum);
 
         if ($builder === null) {
-            return $this->redirectIfEmptyDefination($applicationTypeEnum);
+            return $this->redirectIfEmptyDefinition($applicationTypeEnum);
         }
 
         $data = $request->validateDynamicForm(
@@ -74,7 +69,7 @@ class RecommendationController extends Controller
             null
         );
 
-        Recommendation::create([
+        $recommendation = Recommendation::create([
             'application_type' => $applicationTypeEnum->value,
             'data' => $data,
             'fiscal_year_id' => OfficeSetting::latest()->first()?->fiscal_year_id ?? null,
@@ -85,7 +80,7 @@ class RecommendationController extends Controller
 
         toast('फारम सफलतापूर्वक थपियो', 'success');
 
-        return back();
+        return redirect(route('admin.recommendation.recommendation.print', compact('recommendation')));
     }
 
     public function show(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
@@ -95,7 +90,7 @@ class RecommendationController extends Controller
         $definition = $this->getDefinition($applicationTypeEnum);
 
         if (empty($definition)) {
-            return $this->redirectIfEmptyDefination($applicationTypeEnum);
+            return $this->redirectIfEmptyDefinition($applicationTypeEnum);
         }
 
         return view('recommendation::admin.recommendation.show', compact('applicationTypeEnum', 'recommendation', 'definition'));
@@ -108,7 +103,7 @@ class RecommendationController extends Controller
         $definition = $this->getDefinition($applicationTypeEnum);
 
         if (empty($definition)) {
-            return $this->redirectIfEmptyDefination($applicationTypeEnum);
+            return $this->redirectIfEmptyDefinition($applicationTypeEnum);
         }
 
         return view('recommendation::admin.recommendation.edit', compact('applicationTypeEnum', 'recommendation', 'definition'));
@@ -121,7 +116,7 @@ class RecommendationController extends Controller
         $builder = $this->getDefinition($applicationTypeEnum);
 
         if (empty($builder)) {
-            return $this->redirectIfEmptyDefination($applicationTypeEnum);
+            return $this->redirectIfEmptyDefinition($applicationTypeEnum);
         }
 
         $data = $request->validateDynamicForm(
@@ -138,7 +133,6 @@ class RecommendationController extends Controller
             'date_en' => $request->input('date_en'),
             'name' => $request->input('name'),
         ]);
-
 
 
         toast('फारम सफलतापूर्वक सम्पादन भयो', 'success');
@@ -162,13 +156,53 @@ class RecommendationController extends Controller
         return FormBuilder::where('application_type', $applicationTypeEnum->value)->latest()->first();
     }
 
-    /**
-     * @param ApplicationTypeEnum $applicationTypeEnum
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function redirectIfEmptyDefination(ApplicationTypeEnum $applicationTypeEnum): \Illuminate\Http\RedirectResponse
+    public function redirectIfEmptyDefinition(ApplicationTypeEnum $applicationTypeEnum): RedirectResponse
     {
         toast('फारम बनेको छैन', 'error');
         return redirect()->route('admin.recommendation.setting.formBuilder.create', $applicationTypeEnum);
     }
+
+    public function printRecommendation(Recommendation $recommendation)
+    {
+        $this->checkAuthorization('recommendation_access');
+
+        $resolvedData = $this->resolve($recommendation);
+
+        $applicationTypeEnum = $recommendation->application_type;
+
+        return view('recommendation::admin.recommendation.template', compact('resolvedData', 'applicationTypeEnum'));
+
+    }
+
+    private function getData($data)
+    {
+
+        $resolvedData = [];
+
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $viewData = View::make('recommendation::admin.recommendation.templateData', compact('value'))->render();
+                $resolvedData["@[$key]"] = $viewData;
+            } else {
+                $resolvedData["@[$key]"] = $value;
+            }
+        }
+        return $resolvedData;
+    }
+
+    /**
+     * @param Recommendation $recommendation
+     * @return string
+     */
+    private function resolve(Recommendation $recommendation): string
+    {
+        $template = RecommendationTemplate::active()
+            ->where('application_type', $recommendation->application_type->value)
+            ->first();
+
+        $data = collect(json_decode($recommendation->data));
+        $replace = $this->getData($data);
+        return Str::replace(array_keys($replace), $replace, $template->data);
+    }
+
 }
