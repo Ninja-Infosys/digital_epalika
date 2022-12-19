@@ -61,7 +61,7 @@ class Trainee extends Model
         'gender' => Gender::class,
     ];
 
-    public function setPhotoAttribute($value)
+    public function setPhotoAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['photo'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
@@ -73,7 +73,7 @@ class Trainee extends Model
         return $this->attributes['photo'] ? asset('storage/'.$this->attributes['photo']) : asset('images/user_icon.jpg');
     }
 
-    public function setApplicationFormAttribute($value)
+    public function setApplicationFormAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['application_form'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
@@ -85,7 +85,7 @@ class Trainee extends Model
         return asset('storage/'.$this->attributes['application_form']);
     }
 
-    public function setWardRecommendationAttribute($value)
+    public function setWardRecommendationAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['ward_recommendation'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
@@ -97,7 +97,7 @@ class Trainee extends Model
         return asset('storage/'.$this->attributes['ward_recommendation']);
     }
 
-    public function setMarkSheetAttribute($value)
+    public function setMarkSheetAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['mark_sheet'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
@@ -109,7 +109,7 @@ class Trainee extends Model
         return asset('storage/'.$this->attributes['mark_sheet']);
     }
 
-    public function setCitizenshipFrontAttribute($value)
+    public function setCitizenshipFrontAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['citizenship_front'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
@@ -121,7 +121,7 @@ class Trainee extends Model
         return asset('storage/'.$this->attributes['citizenship_front']);
     }
 
-    public function setCitizenshipBackAttribute($value)
+    public function setCitizenshipBackAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['citizenship_back'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');
@@ -133,7 +133,7 @@ class Trainee extends Model
         return asset('storage/'.$this->attributes['citizenship_back']);
     }
 
-    public function setPassportAttribute($value)
+    public function setPassportAttribute($value): void
     {
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['passport'] = $value->store('trainee/'.Str::slug($this->attributes['full_name'], '_'), 'public');

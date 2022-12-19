@@ -8,8 +8,7 @@
                 <th>प्रयोजन</th>
                 <th>भवन ऐन अनुसार वर्गीकरण</th>
                 <th>नक्सा</th>
-                <th> हाल निर्माण गर्ने तल्ला संख्या</th>
-                <th> भविष्यमा निर्माण गर्ने तल्ला संख्या</th>
+                <th>#</th>
             </tr>
             </thead>
             <tbody>
@@ -20,8 +19,11 @@
                     <td>{{$mapApply->usage->label() ?? ''}}</td>
                     <td>{{$mapApply->building_category->label() ?? ''}}</td>
                     <td>{{$mapApply->application_type->label()}}</td>
-                    <td>{{$mapApply->current_storey ?? ''}}</td>
-                    <td>{{$mapApply->future_storey ??  ''}}</td>
+                    <td>
+                        <a href="">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
                 </tr>
             @empty
                 <tr>

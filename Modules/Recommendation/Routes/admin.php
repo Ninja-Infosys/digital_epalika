@@ -61,4 +61,6 @@ Route::prefix('setting')->as('setting.')->group(function () {
 
 Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');
 Route::get('application/recommendation/{recommendation}/print', [RecommendationController::class, 'printRecommendation'])->name('recommendation.print');
+Route::post('recommendation/{recommendation}/storeFormData', [RecommendationController::class,'formData'])->name('recommendation.storeFormData');
 Route::resource('application/{applicationTypeEnum}/recommendation', RecommendationController::class)->names('recommendation');
+

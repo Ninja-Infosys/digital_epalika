@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
 
@@ -53,5 +54,10 @@ class Recommendation extends Model
     public function fiscalYear(): BelongsTo
     {
         return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function recommendationDataForm(): HasOne
+    {
+        return $this->hasOne(RecommendationFormData::class);
     }
 }

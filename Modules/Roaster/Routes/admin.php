@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Roaster\Http\Controllers\DashboardController;
+use Modules\Roaster\Http\Controllers\ReportController;
 use Modules\Roaster\Http\Controllers\Setting\SubjectController;
 use Modules\Roaster\Http\Controllers\TechnicalTraineeController;
 use Modules\Roaster\Http\Controllers\TraineeController;
@@ -31,3 +32,9 @@ Route::resource('trainee', TraineeController::class)->only(['updateSelectTrainee
 //technical Trainee
 Route::get('technicalTrainee/{technicalTrainee}/updateSelectTechnicalTrainee', [TechnicalTraineeController::class, 'updateSelectTechnicalTrainee'])->name('technicalTrainee.updateSelectTrainee');
 Route::resource('technicalTrainee', TechnicalTraineeController::class)->only(['updateSelectTechnicalTrainee', 'show', 'edit']);
+
+
+Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function (){
+    Route::get('/','getRequiredData')->name('report');
+    Route::post('report-data','report')->name('report-data');
+});

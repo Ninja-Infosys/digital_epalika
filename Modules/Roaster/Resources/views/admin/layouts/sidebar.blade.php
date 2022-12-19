@@ -31,6 +31,12 @@
         <span>तालिम</span>
     </a>
 </li>
+<li class="{{request()->is('admin/roaster/training/*') ? 'active' : ''}}">
+    <a href="{{route('admin.roaster.report.report')}}">
+        <i class="fa fa-book"></i>
+        <span>तालिम दर्ता रिपोर्ट</span>
+    </a>
+</li>
 
 <li class="{{request()->is('admin/roaster/setting/*') ? 'active' : ''}}">
     <a href="#sidebarRoaster"

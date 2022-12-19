@@ -5,8 +5,10 @@ namespace Modules\Recommendation\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
+use Modules\Recommendation\Entities\RecommendationFormData;
 use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Modules\Recommendation\Entities\FormBuilder;
@@ -53,6 +55,7 @@ class RecommendationController extends Controller
 
     public function store(StoreRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum)
     {
+
         $this->checkAuthorization('recommendation_create');
 
 
@@ -88,7 +91,7 @@ class RecommendationController extends Controller
 
         $definition = $this->getDefinition($applicationTypeEnum);
 
-        if (empty($definition)) {
+        if ($definition === null) {
             return $this->redirectIfEmptyDefinition($applicationTypeEnum);
         }
 
@@ -101,7 +104,7 @@ class RecommendationController extends Controller
 
         $definition = $this->getDefinition($applicationTypeEnum);
 
-        if (empty($definition)) {
+        if ($definition === null) {
             return $this->redirectIfEmptyDefinition($applicationTypeEnum);
         }
 
@@ -114,7 +117,7 @@ class RecommendationController extends Controller
 
         $builder = $this->getDefinition($applicationTypeEnum);
 
-        if (empty($builder)) {
+        if ($builder === null) {
             return $this->redirectIfEmptyDefinition($applicationTypeEnum);
         }
 
@@ -169,11 +172,13 @@ class RecommendationController extends Controller
 
         $applicationTypeEnum = $recommendation->application_type;
 
-        return view('recommendation::admin.recommendation.template', compact('resolvedData', 'applicationTypeEnum'));
+        return view('recommendation::admin.recommendation.template', compact('resolvedData', 'applicationTypeEnum', 'recommendation'));
+
     }
 
     private function getData($data)
     {
+
         $resolvedData = [];
 
         foreach ($data as $key => $value) {
@@ -201,4 +206,20 @@ class RecommendationController extends Controller
         $replace = $this->getData($data);
         return Str::replace(array_keys($replace), $replace, $template->data);
     }
+
+    public function formData(Request $request, Recommendation $recommendation)
+    {
+//        dd($request->input('data'));
+        RecommendationFormData::updateOrCreate(
+            [
+                'recommendation_id' => $recommendation->id,
+            ],
+            [
+                'data' => $request->input('data'),
+            ]
+        );
+        toast('डाटा सफलतापूर्वक थपियो', 'success');
+        return back();
+    }
+
 }

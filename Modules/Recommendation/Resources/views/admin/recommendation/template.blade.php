@@ -38,13 +38,20 @@
                         @endcan
                     </div>
                 </div>
+            </div>
+            <form action="{{route('admin.recommendation.recommendation.storeFormData', $recommendation)}}"
+                  method="post">
+                @csrf
+                <div class="form-group">
+                    <textarea class="form-control ckEditor" name="data" id="data">{!! $resolvedData ?? '' !!}</textarea>
                 </div>
-            <div id="printData" class="ckEditor">
-                {!! $resolvedData ?? '' !!}
-            </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">
+                        Save
+                    </button>
+                </div>
+            </form>
 
-            <div class="card-body">
-            </div>
         </div>
     </div>
 
