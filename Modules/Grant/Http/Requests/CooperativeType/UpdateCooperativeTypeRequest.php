@@ -2,8 +2,9 @@
 
 namespace Modules\Grant\Http\Requests\CooperativeType;
 
-use Illuminate\Auth\Access\Gate;
+
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateCooperativeTypeRequest extends FormRequest
 {
