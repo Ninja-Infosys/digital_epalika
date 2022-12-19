@@ -1,0 +1,35 @@
+/*breadcrumb*/
+.breadcrumb .breadcrumb-item a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+.breadcrumb .breadcrumb-item{
+    padding: 5px 5px 5px 20px;
+}
+.breadcrumb .breadcrumb-item {
+    position: relative;
+    background: var(--mainColor);
+}
+.breadcrumb .breadcrumb-item:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 10px solid white;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+}
+.breadcrumb .breadcrumb-item:before {
+    content: "";
+    position: absolute;
+    right: -15px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 16px solid var(--mainColor);
+    border-top: 20px solid transparent;
+    border-bottom: 15px solid transparent;
+}
