@@ -56,7 +56,20 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            <div class="row">
 
+                                <div class="col-md-12 mt-1">
+                                    <h6>फारम फिल्ड</h6>
+                                </div>
+                                <div class="col-md-12">
+                                    @foreach($formFields as $formField)
+                                        <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
+                                           onclick="copyText('{{$formField['value'] ?? ''}}')">
+                                            {{$formField['name'] ?? ''}} {{!empty($formField['placeholder']) ? "(".$formField['placeholder'].")" : ''}}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>
                                 <textarea name="data"

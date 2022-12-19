@@ -30,5 +30,13 @@ class FormBuilder extends Model
         'application_type' => ApplicationTypeEnum::class,
     ];
 
+    public function scopeActive($q)
+    {
+        return $q->where('status', 1);
+    }
+    public function scopeNotActive($q)
+    {
+        return $q->where('status', 0);
+    }
 
 }
