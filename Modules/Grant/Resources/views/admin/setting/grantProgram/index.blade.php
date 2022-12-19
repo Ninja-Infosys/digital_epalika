@@ -38,21 +38,21 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>अनुदान प्रकार</th>
+                                <th>कार्यक्रम विषय</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($grantTypes as $grantType)
+                            @forelse($grantPrograms as $grantProgram)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <th>{{$grantType->title}}</th>
+                                    <th>{{$grantProgram->name}}</th>
                                     <td>
-                                        <a href="{{route('admin.grant.setting.grantType.edit', $grantType)}}"
+                                        <a href="{{route('admin.grant.setting.grantProgram.edit', $grantProgram)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.grant.setting.grantType.destroy', $grantType)}}"
+                                        <form action="{{route('admin.grant.setting.grantProgram.destroy', $grantProgram)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

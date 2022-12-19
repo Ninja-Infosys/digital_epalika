@@ -52,11 +52,13 @@
                     <span> उद्यमको प्रकार </span>
                 </a>
             </li>
+                @can('grantProgram_access')
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="#">
+                <a href="{{route('admin.grant.setting.grantProgram.index')}}">
                     <span> कार्यक्रम बिषय </span>
                 </a>
             </li>
+                @endcan
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                 <a href="#">
                     <span> अनुदान दिने सस्था </span>
