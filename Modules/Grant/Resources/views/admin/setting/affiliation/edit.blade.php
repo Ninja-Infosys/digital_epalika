@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">अनुदान थप</li>
+                        <li class="breadcrumb-item active">आव्धता सम्पादन</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> अनुदानहरु</h4>
+                <h4 class="page-title"> आव्धताहरु</h4>
             </div>
         </div>
     </div>
@@ -23,27 +23,28 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ अनुदान थप्नुहोस्</h4>
-                        <a href="{{route('admin.grant.setting.grantType.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> अनुदान सुची
+                        <h4 class="header-title"> आव्धता सम्पादन</h4>
+                        <a href="{{route('admin.grant.setting.affiliation.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> आव्धता सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.grant.setting.grantType.store')}}" method="post">
+                    <form action="{{route('admin.grant.setting.affiliation.update', $affiliation)}}" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="title" class="form-label">अनुदान प्रकार *</label>
+                                <label for="name" class="form-label">आव्धता *</label>
                                 <input
                                     type="text"
-                                    name="title"
-                                    value="{{old('title')}}"
-                                    class="form-control @error('title') is-invalid @enderror"
-                                    id="title"
-                                    placeholder="अनुदान प्रकार"
+                                    name="name"
+                                    value="{{old('name', $affiliation->name)}}"
+                                    class="form-control @error('name') is-invalid @enderror"
+                                    id="name"
+                                    placeholder="आव्धता"
                                 />
-                                @error('title')
+                                @error('name')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -59,4 +60,5 @@
         </div>
     </div>
 @endsection
+
 

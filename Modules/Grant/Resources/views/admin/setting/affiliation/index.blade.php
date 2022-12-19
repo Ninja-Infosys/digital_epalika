@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">अनुदान प्रकार</li>
+                        <li class="breadcrumb-item active">सहकारी आव्धता</li>
                     </ol>
                 </div>
-                <h4 class="page-title">अनुदान व्यवस्थापन</h4>
+                <h4 class="page-title">सहकारी आव्धता</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदान प्रकारहरु</h4>
+                        <h4 class="header-title">सहकारी आव्धता</h4>
                         @can('grantType_access')
-                            <a href="{{route('admin.grant.setting.grantType.create')}}"
+                            <a href="{{route('admin.grant.setting.affiliation.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -38,21 +38,21 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>अनुदान प्रकार</th>
+                                <th>आव्धता</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($grantTypes as $grantType)
+                            @forelse($affiliations as $affiliation)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <th>{{$grantType->title}}</th>
+                                    <th>{{$affiliation->name}}</th>
                                     <td>
-                                        <a href="{{route('admin.grant.setting.grantType.edit', $grantType)}}"
+                                        <a href="{{route('admin.grant.setting.affiliation.edit', $affiliation)}}"
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.grant.setting.grantType.destroy', $grantType)}}"
+                                        <form action="{{route('admin.grant.setting.affiliation.destroy', $affiliation)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

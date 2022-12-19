@@ -3,9 +3,11 @@
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Http\Requests\GrantType\StoreGrantTypeRequest;
@@ -16,7 +18,9 @@ class GrantTypeController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('grantType_access');
+
         $grantTypes = GrantType::latest()->get();
+
         return view('grant::admin.setting.grantType.index', compact('grantTypes'));
     }
 
@@ -34,13 +38,14 @@ class GrantTypeController extends Controller
         GrantType::create($request->validated());
         toast('Grant Type Added Successfully', 'success');
         return back();
+
     }
 
     public function edit(GrantType $grantType)
     {
         $this->checkAuthorization('grantType_edit');
 
-        return view('grant::edit', compact('grantType'));
+        return view('grant::admin.setting.grantType.edit',compact('grantType'));
     }
 
     public function update(UpdateGrantTypeRequest $request, GrantType $grantType)
@@ -59,5 +64,6 @@ class GrantTypeController extends Controller
 
         toast('Grant Type deleted Successfully', 'success');
         return back();
+
     }
 }
