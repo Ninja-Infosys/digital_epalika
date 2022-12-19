@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 @section('content')
     <div class="row mt-2">
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-primary">
                 <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
@@ -19,7 +19,7 @@
             </div> <!-- end widget-rounded-circle-->
         </div>
 
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                 <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
@@ -30,14 +30,14 @@
                                        </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">जम्मा प्रयोगकर्ता</p>
+                            <p class="text my-1">जम्मा कार्यहरू</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
             </div> <!-- end widget-rounded-circle-->
         </div>
 
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-primary">
                 <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
@@ -48,14 +48,14 @@
                                        </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">उपलब्ध सेवाहरु</p>
+                            <p class="text my-1">उपलब्ध सेवाहरू</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
             </div> <!-- end widget-rounded-circle-->
         </div>
 
-        <div class="col-md-6 col-xl-2">
+        <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                 <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="row mt-2">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <x-charts.pie-chart-component
@@ -82,6 +82,20 @@
                         chartName="आर्थिक वर्ष अनुसार जम्मा कार्यहरु"
                         :labels="$taskData['labels']"
                         :dataSets="$taskData['dataSets']"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component
+                        id="weekly-tasks-chart"
+                        chartTitle="साप्ताहिक कार्यहरू"
+                        :labels="$weeklyTasks['labels']"
+                        :dataSets="$weeklyTasks['dataSets']"
+                        chartType="line"
+                        :display-legend="false"
+                    />
                 </div>
             </div>
         </div>

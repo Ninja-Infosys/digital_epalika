@@ -8,13 +8,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
+use Illuminate\Database\Eloquent\Builder;
 
 class GrievanceDetailController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('grievanceDetail_access');
-        $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->latest()->paginate(10);
+        $grievanceDetails = GrievanceDetail::with('grievanceType')->whereNull('grievance_detail_id')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['token','grievanceType.title',], request('search'));
+            }
+        })
+        ->latest()->paginate(10);
+
 
         return view('grievancehandling::admin.grievanceDetail.index', compact('grievanceDetails'));
     }

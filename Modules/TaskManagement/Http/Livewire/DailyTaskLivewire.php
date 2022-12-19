@@ -103,20 +103,18 @@ class DailyTaskLivewire extends Component
         });
 
         if (! empty($this->dailyTask)) {
-            $this->dispatchBrowserEvent('alert_message', [
+            $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
-                'title' => 'धन्यबाद',
-                'text' => 'उजुरी पत्र सफलतापूर्वक updated',
+                'title' => 'दैनिक कार्य सफलतापूर्वक अपडेट गरियो',
             ]);
 
             return redirect(route('admin.taskManagement.dailyTask.index'));
         } else {
             $this->reset('form', 'taskCategories', 'taskDivisions');
 
-            $this->dispatchBrowserEvent('alert_message', [
+            $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
-                'title' => 'धन्यबाद',
-                'text' => 'सफलता पूर्वक थपिएको छ',
+                'title' => 'दैनिक कार्य सफलतापूर्वक थपियो',
             ]);
         }
     }

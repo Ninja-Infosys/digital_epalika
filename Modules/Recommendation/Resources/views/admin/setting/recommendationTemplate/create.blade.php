@@ -57,19 +57,17 @@
                             </div>
                             <div class="row">
 
-                                @foreach( (new \Modules\EMap\Entities\MapApply())->getTemplateOptions() as $template)
                                     <div class="col-md-12 mt-1">
-                                        <h6>{{$template['title'] ?? ''}}</h6>
+                                        <h6>फारम फिल्ड</h6>
                                     </div>
                                     <div class="col-md-12">
-                                        @foreach($template['data'] as $key=>$templateValue)
+                                        @foreach($formFields as $formField)
                                             <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
-                                               onclick="copyText('{{$templateValue}}')">
-                                                {{$key}}
+                                               onclick="copyText('{{$formField['value'] ?? ''}}')">
+                                                {{$formField['name'] ?? ''}} {{!empty($formField['placeholder']) ? "(".$formField['placeholder'].")" : ''}}
                                             </a>
                                         @endforeach
                                     </div>
-                                @endforeach
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>

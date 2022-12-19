@@ -29,7 +29,8 @@ class RecommendationTemplateController extends Controller
     {
         $this->checkAuthorization('recommendationTemplate_create');
 
-        return view('recommendation::admin.setting.recommendationTemplate.create', compact('applicationTypeEnum'));
+        $formFields = $this->getFormFields($applicationTypeEnum);
+        return view('recommendation::admin.setting.recommendationTemplate.create', compact('applicationTypeEnum', 'formFields'));
     }
 
     public function store(StoreRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum)
@@ -56,7 +57,8 @@ class RecommendationTemplateController extends Controller
     {
         $this->checkAuthorization('recommendationTemplate_edit');
 
-        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate', 'applicationTypeEnum'));
+        $formFields = $this->getFormFields($applicationTypeEnum);
+        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate', 'applicationTypeEnum','formFields'));
     }
 
     public function update(UpdateRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
@@ -100,5 +102,29 @@ class RecommendationTemplateController extends Controller
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
+    }
+
+    /**
+     * @param ApplicationTypeEnum $applicationTypeEnum
+     * @return \Illuminate\Support\Collection
+     */
+    public function getFormFields(ApplicationTypeEnum $applicationTypeEnum): \Illuminate\Support\Collection
+    {
+        $formBuilder = FormBuilder::active()
+            ->where('application_type', $applicationTypeEnum->value)
+            ->first();
+
+        $form = json_decode($formBuilder?->form)?->components;
+
+        $formFields = collect($form)
+            ->map(function ($item) {
+                return [
+                    'name' => $item->label,
+                    'placeholder' => $item->placeholder ?? '',
+                    'value' => "@[$item->key]",
+                ];
+            })
+            ->slice(0, -1);
+        return $formFields;
     }
 }
