@@ -167,7 +167,7 @@
                     e.preventDefault()
                     $.ajax({
                         type: "post",
-                        url: "{{route('admin.plan.report.report-data')}}",
+                        url: "{{route('admin.taskManagement.report.report-data')}}",
                         data: new FormData(this),
                         processData: false,
                         contentType: false,
@@ -239,11 +239,32 @@
                     }
                     $.ajax({
                         type: 'get',
-                        data: {sub_branch_id: sub_branch_id},
+                        data: {branch_id: sub_branch_id},
                         url: "{{route('admin.taskManagement.taskCategory.index')}}",
                         success: function (resp) {
                             $(resp.data).each(function (key, data) {
                                 $('#task_category_id').append("<option value=" + data.id + ">" + data.title + "</option>")
+                            })
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
+                        }
+                    })
+                })
+
+                $(document.body).delegate('#task_category_id', 'change', function (e) {
+                    let task_category_id = $('#task_category_id').val()
+                    $('#task_division_id').html('<option disabled>--- छान्नुहोस् ---</option>')
+                    if (!task_category_id.length) {
+                        return false;
+                    }
+                    $.ajax({
+                        type: 'get',
+                        data: {task_category_id: task_category_id},
+                        url: "{{route('admin.taskManagement.taskDivision.index')}}",
+                        success: function (resp) {
+                            $(resp.data).each(function (key, data) {
+                                $('#task_division_id').append("<option value=" + data.id + ">" + data.title + "</option>")
                             })
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {

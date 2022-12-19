@@ -4,6 +4,7 @@ namespace Modules\TaskManagement\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Modules\TaskManagement\Entities\TaskCategory;
 use Modules\TaskManagement\Entities\TaskDivision;
 use Modules\TaskManagement\Http\Requests\TaskDivision\StoreTaskDivisionRequest;
@@ -11,17 +12,22 @@ use Modules\TaskManagement\Http\Requests\TaskDivision\UpdateTaskDivisionRequest;
 
 class TaskDivisionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $taskDivisions = TaskDivision::with('taskCategory')->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['title'], request('search'));
-            }
-        })
-            ->latest()->paginate(10);
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => TaskDivision::filterData($request->all())->get()
+            ]);
+        } else {
+            $taskDivisions = TaskDivision::with('taskCategory')->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['title'], request('search'));
+                }
+            })
+                ->latest()->paginate(10);
 
-
-        return view('taskmanagement::admin.task_division.index', compact('taskDivisions'));
+            return view('taskmanagement::admin.task_division.index', compact('taskDivisions'));
+        }
     }
 
     public function create()

@@ -26,6 +26,19 @@ class TaskDivision extends Model
         'title',
     ];
 
+    public function scopeFilterData($query, $params = [])
+    {
+        if (!empty($params['task_category_id'])) {
+            if (is_array($params['task_category_id'])) {
+                $query->whereIn('task_category_id', $params['task_category_id']);
+            } else {
+                $query->where('task_category_id', $params['task_category_id']);
+            }
+        }
+
+        return $query;
+    }
+
     public function taskCategory(): BelongsTo
     {
         return $this->belongsTo(TaskCategory::class);
