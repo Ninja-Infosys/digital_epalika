@@ -3,12 +3,13 @@
 namespace Modules\JudicialCommittee\Http\Requests\LawSuiteNature;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreLawSuiteNatureRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('lawsuitNature_create');
     }
 
     public function rules(): array

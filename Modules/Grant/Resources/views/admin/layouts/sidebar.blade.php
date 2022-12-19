@@ -5,7 +5,7 @@
     </a>
 </li>
 <li>
-    <a href="{{route('admin.grant.grantDetail.index')}}">
+    <a href="#">
         <i class="fa fa-file-contract"></i>
         <span>अनुदान विवरण</span>
     </a>
@@ -24,41 +24,38 @@
     <div class="collapse {{request()->is('admin/grant/setting/*') ? 'show' : ''}}"
          id="sidebarGrantSetting">
         <ul class="nav-second-level">
-            @can('infrastructure_access')
-            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="{{route('admin.grant.infrastructure.index')}}">
-                    <span>  पूर्वाधार शीर्षकहरु  </span>
-                </a>
-            </li>
-            @endcan
-            @can('thematicArea_access')
-            <li class="{{request()->is('admin/grant/setting/thematicArea') ? 'active' : ''}}">
-                <a href="{{route('admin.grant.thematicArea.index')}}">
-                    <span>  विषयगत क्षेत्र  </span>
-                </a>
-            </li>
-            @endcan
             @can('grantType_access')
-            <li class="{{request()->is('admin/grant/setting/grantType') ? 'active' : ''}}">
-                <a href="{{route('admin.grant.grantType.index')}}">
-                    <span> अनुदान प्रकार  </span>
+                <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                    <a href="{{route('admin.grant.setting.grantType.index')}}">
+                        <span> अनुदानको प्रकार </span>
+                    </a>
+                </li>
+            @endcan
+            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                <a href="#">
+                    <span> सहकारीको प्रकार </span>
                 </a>
             </li>
-            @endcan
-            @can('grantProgram_access')
-            <li class="{{request()->is('admin/grant/setting/grantProgram') ? 'active' : ''}}">
-                <a href="{{route('admin.grant.grantProgram.index')}}">
-                    <span> अनुदान कार्यक्रम  </span>
+            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                <a href="#">
+                    <span> सहकारीको आवध्ता </span>
                 </a>
             </li>
-            @endcan
-            @can('grantActivity_access')
-            <li class="{{request()->is('admin/grant/setting/grantActivity') ? 'active' : ''}}">
-                <a href="{{route('admin.grant.grantActivity.index')}}">
-                    <span> अनुदान क्रियाकलाप  </span>
+            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                <a href="#">
+                    <span> उद्यमको प्रकार </span>
                 </a>
             </li>
-            @endcan
+            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                <a href="#">
+                    <span> कार्यक्रम बिषय </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
+                <a href="#">
+                    <span> अनुदान दिने सस्था </span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

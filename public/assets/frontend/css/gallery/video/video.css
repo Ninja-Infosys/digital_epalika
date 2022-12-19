@@ -1,0 +1,30 @@
+.font-weight-bold {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.card-06 {
+    background-color: #fff;
+    padding: .5rem;
+    box-shadow: 0 2px 4px #e0e0e0;
+    border-radius: 4px;
+}
+
+.card-06 h6 {
+    color: #333;
+    font-size: .833rem;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+h6 {
+    margin-top: 0;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.card-06:hover {
+    background-color: var(--redColor);
+    transition: all .5s ease;
+    color: var(--whiteColor);
+}
