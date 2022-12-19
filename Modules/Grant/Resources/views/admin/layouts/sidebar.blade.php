@@ -43,11 +43,13 @@
                 </a>
             </li>
                 @endcan
-            <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="#">
+                @can('enterpriseType_access')
+            <li class="{{request()->is('admin/grant/setting/enterpriseType') ? 'active' : ''}}">
+                <a href="{{ route('admin.grant.setting.enterpriseType.index') }}">
                     <span> उद्यमको प्रकार </span>
                 </a>
             </li>
+                @endcan
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                 <a href="#">
                     <span> कार्यक्रम बिषय </span>
