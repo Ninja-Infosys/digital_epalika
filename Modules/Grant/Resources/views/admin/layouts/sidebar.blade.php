@@ -36,11 +36,13 @@
                     <span> सहकारीको प्रकार </span>
                 </a>
             </li>
+                @can('affiliation_access')
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="#">
+                <a href="{{route('admin.grant.setting.affiliation.index')}}">
                     <span> सहकारीको आवध्ता </span>
                 </a>
             </li>
+                @endcan
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                 <a href="#">
                     <span> उद्यमको प्रकार </span>
