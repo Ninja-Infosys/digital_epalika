@@ -33,7 +33,8 @@ class FarmerController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $this->checkAuthorization('farmer_create');
+
     }
 
     public function show(Farmer $farmer)
