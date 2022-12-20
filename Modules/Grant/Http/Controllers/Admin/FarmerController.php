@@ -44,14 +44,14 @@ class FarmerController extends Controller
     {
         $this->checkAuthorization('farmer_create');
 
-        $farmer = DB::transaction(function () use ($request) {
-            $farmer = Farmer::create($request->validated() + $request->validated()['address']);
+        DB::transaction(function () use ($request) {
+            $farmer = Farmer::create($request->validated());
 
-            $farmer->groups()->attach($request->validated()['groups']);
-            $farmer->enterprises()->attach($request->validated()['enterprises']);
-            $farmer->cooperatives()->attach($request->validated()['cooperatives']);
-
+            $farmer->groups()->attach($request->input('groups'));
+            $farmer->enterprises()->attach($request->input('enterprises'));
+            $farmer->cooperatives()->attach($request->input('cooperatives'));
         });
+
         toast('कृषक सफलता पुर्वक थपियो !', 'success');
         return back();
     }
@@ -73,6 +73,19 @@ class FarmerController extends Controller
 
     public function destroy(Farmer $farmer)
     {
-        //
+        $this->checkAuthorization('farmer_delete');
+
+        $farmer->groups()->detach();
+        $farmer->enterprises()->detach();
+        $farmer->cooperatives()->detach();
+
+        if ($farmer->photo) {
+            $this->deleteFile($farmer->photo);
+        }
+        $farmer->delete();
+
+        toast('कृषक सफलता पुर्वक हटाईयो !', 'success');
+
+        return back();
     }
 }

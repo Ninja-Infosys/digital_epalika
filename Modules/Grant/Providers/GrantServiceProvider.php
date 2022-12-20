@@ -3,6 +3,8 @@
 namespace Modules\Grant\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Observers\FarmerObserver;
 
 class GrantServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,8 @@ class GrantServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        Farmer::observe(FarmerObserver::class);
     }
 
     /**

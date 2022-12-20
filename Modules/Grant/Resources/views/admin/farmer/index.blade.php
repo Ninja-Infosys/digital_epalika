@@ -41,6 +41,8 @@
                                 <th>कृषक परिचय पत्र नं.</th>
                                 <th>पुरा नाम</th>
                                 <th>फोटो</th>
+                                <th>बुबाको नाम</th>
+                                <th>नागरिकता नं</th>
                                 <th>सम्पर्क नं.</th>
                                 <th>Action</th>
                             </tr>
@@ -48,32 +50,36 @@
                             <tbody>
                             @forelse($farmers as $farmer)
                                 <tr>
-                                    <th>{{$loop->iteration}}</th>
-                                    <th>{{$farmer->farmer_id_card_no}}</th>
-                                    <th>{{$farmer->frist_name}} {{$farmer->middle_name}}{{$farmer->last_name}}</th>
-                                    <th><img src="{{$farmer->photo_url}}"
-                                             alt="{{$farmer->frist_name}} {{$farmer->middle_name}}{{$farmer->last_name}}"
-                                             style="object-fit:cover; height: 4rem; width: 4rem;">
-                                    </th>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$farmer->unique_id}}</td>
+                                    <td>{{$farmer->name}}</td>
+
+                                    <td class="table-user"><img class="me-2 rounded-circle" src="{{$farmer->photo_url}}"
+                                             alt="{{$farmer->name}}"
+                                             >
+                                    </td>
+                                    <td>{{$farmer->father_name}}</td>
+                                    <td>{{$farmer->citizenship_no}}</td>
+                                    <td>{{$farmer->phone_no}}</td>
                                     <td>
                                         <a href="{{route('admin.grant.farmer.edit', $farmer)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form
                                             action="{{route('admin.grant.farmer.destroy', $farmer)}}"
                                             method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm"title=" मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="9" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
