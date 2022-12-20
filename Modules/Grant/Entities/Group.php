@@ -18,6 +18,18 @@ class Group extends Model
    ];
 
    protected $fillable = [
-
+    'unique_id',
+    'name',
+    'registration_date',
+    'registered_office',
+    'monthly_meeting',
+    'vat_pan',
+    'province_id',
+    'district_id',
+    'local_body_id',
+    'ward_no',
+    'village',
+    'tole',
+    'user_id',
    ];
 }
