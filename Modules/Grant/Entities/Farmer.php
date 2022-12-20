@@ -79,42 +79,6 @@ class Farmer extends Model
             . (!empty($this->attributes['last_name']) ? ($this->attributes['last_name'] ?? '') : "");
     }
 
-    public function scopeFilter($query, $param = [])
-    {
-        //filter by user role
-        $this->filterByUserRole($query, $param);
-
-        //filter by address
-        $this->filterByAddress($query, $param);
-
-        if (!empty($param['gender'])) {
-            if (is_array($param['gender'])) {
-                $query->whereIn('gender', $param['gender']);
-            } else {
-                $query->where('gender', $param['gender']);
-            }
-        }
-
-        if (!empty($param['relationship_status'])) {
-            if (is_array($param['relationship_status'])) {
-                $query->whereIn('relationship_status', $param['relationship_status']);
-            } else {
-                $query->where('relationship_status', $param['relationship_status']);
-            }
-        }
-        if (!empty($param['search'])) {
-            $key = '%' . trim($param['search']) . '%';
-            $query->where('unique_id', 'like', $key)
-                ->orWhere('first_name', 'like', $key)
-                ->orWhere('middle_name', 'like', $key)
-                ->orWhere('last_name', 'like', $key)
-                ->orWhere('email', 'like', $key)
-                ->orWhere('phone', 'like', $key);
-        }
-
-        return $query;
-    }
-
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
