@@ -5,19 +5,24 @@ namespace Modules\Grant\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Factory;
-use Illuminate\Console\Application;
-use Illuminate\Contracts\View\View;
 use Modules\Grant\Entities\Group;
 use Modules\Grant\Http\Requests\Group\StoreGroupRequest;
+use Modules\Grant\Http\Requests\Group\UpdateGroupRequest;
+use Illuminate\Database\Eloquent\Builder;
+use Modules\Grant\Entities\Farmer;
 
 class GroupController extends Controller
 {
-    public function index(): Factory|View|Application
+    public function index()
     {
         $this->checkAuthorization('group_access');
 
-        $groups = Group::latest()->get();
+        $groups = Group::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['unique_id', 'name', 'vat_pan', 'registration_date',], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
 
         return view('grant::admin.group.index', compact('groups'));
     }
@@ -26,7 +31,9 @@ class GroupController extends Controller
     {
         $this->checkAuthorization('group_create');
 
-        return view('grant::admin.group.create');
+        $farmers = Farmer::latest()->get();
+
+        return view('grant::admin.group.create', compact('farmers'));
     }
 
     public function store(StoreGroupRequest $request)
@@ -44,13 +51,20 @@ class GroupController extends Controller
         return view('grant::admin.group.edit');
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateGroupRequest $request, Group $group)
     {
-        //
+        $this->checkAuthorization('group_edit');
+
+        $group->update($request->validated());
+        toast('समूह सफलतापूर्वक थपियो', 'message');
+        return redirect(route('admin.group.index'));
     }
 
-    public function destroy($id)
+    public function destroy(Group $group)
     {
-        //
+        $this->checkAuthorization('group_delete');
+        $group->delete();
+        toast('समूह प्रकार सफलतापूर्वक मेटाइयो', 'success');
+        return back();
     }
 }
