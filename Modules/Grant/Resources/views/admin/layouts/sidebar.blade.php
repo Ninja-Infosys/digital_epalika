@@ -38,6 +38,13 @@
                     </a>
                 </li>
             @endcan
+                @can('enterprise_access')
+                <li class="{{request()->is('admin/grant/grantee/group*') ? 'active' : ''}}">
+                    <a href="#">
+                        <span> निजि उधम/फर्म </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

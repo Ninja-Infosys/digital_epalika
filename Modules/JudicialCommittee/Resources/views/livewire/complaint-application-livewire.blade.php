@@ -89,7 +89,7 @@
                     <div class="col-md-4 mb-2">
                         <label for="complainant_age" class="form-label">उमेर <span class="text-danger">*</span></label>
                         <input
-                            type="text"
+                            type="number"
                             wire:model="form.complainant_age"
                             class="form-control"
                             id="complainant_age"
@@ -354,6 +354,25 @@
 
             <div class="row pb-2">
                 <div class="col-md-6 mb-2">
+                    <label for="lawsuit_nature_id" class="form-label">मुद्दा प्रकृति<span
+                            class="text-danger">*</span></label>
+                    <select
+                        wire:model="form.lawsuit_nature_id"
+                        class="form-select"
+                        id="lawsuit_nature_id">
+                        <option value="">--छान्नुहोस्--</option>
+                        @foreach($lawsuitNatures as $lawsuitNature)
+                            <option
+                                value="{{$lawsuitNature->id}}" {{$lawsuitNature->id==old('lawsuit_nature_id') ? 'selected' : ''}}>
+                                {{$lawsuitNature->title}} ({{$lawsuitNature->code}})
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('form.lawsuit_nature_id')
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="col-md-6 mb-2">
                     <label for="subject" class="form-label">विषय<span class="text-danger">*</span></label>
                     <input
                         type="text"
@@ -363,6 +382,19 @@
                         placeholder="उजुरी विषय"
                     />
                     @error('form.subject')
+                    <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="col-md-6 mb-2">
+                    <label for="submission_no" class="form-label">सबमिशन नम्बर<span class="text-danger">*</span></label>
+                    <input
+                        type="text"
+                        wire:model="form.submission_no"
+                        class="form-control"
+                        id="submission_no"
+                        placeholder="सबमिशन नम्बर"
+                    />
+                    @error('form.submission_no')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
@@ -379,20 +411,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-3 mb-2">
-                    <label for="en_date" class="form-label">मिति(AD) <span class="text-danger">*</span></label>
-                    <input
-                        type="date"
-                        wire:model="form.en_date"
-                        class="form-control"
-                        id="en_date"
-                        placeholder="Date"
-                    />
-                    @error('form.en_date')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-auto">
+                <div class="col-md-12">
                     <label for="complaint_detail" class="form-label">उजुरी विवरण <span
                             class="text-danger">*</span></label>
                     <textarea id="complaint_detail"
@@ -407,9 +426,9 @@
             </div>
         </div>
         <div class="d-flex justify-content-between">
-       <button type="submit" class="btn btn-primary">
-           पेश गर्नुहोस्
-        </button>
+            <button type="submit" class="btn btn-primary">
+                पेश गर्नुहोस्
+            </button>
         </div>
     </div>
 </form>
@@ -432,23 +451,13 @@
                     let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
                     $("#en_date").val(formattedDate);
 
-                    Livewire.emit('postAdded', inputFieldDate, formattedDate);
+                    Livewire.emit('dateChanged', inputFieldDate, formattedDate);
                 }
             });
 
-            $("#en_date").change(function () {
-                let inputFieldDate = $("#en_date").val();
-                let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
-                let nepaliDate = NepaliFunctions.AD2BS(parsedDate.parsedDate)
-                let formattedDate = NepaliFunctions.ConvertDateFormat(nepaliDate, "YYYY-MM-DD")
-                $("#date").val(formattedDate);
-
-                Livewire.emit('postAdded', formattedDate, inputFieldDate);
-            })
-
             let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
             let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
-            Livewire.emit('postAdded', todayBsDate, todayAdDate);
+            Livewire.emit('dateChanged', todayBsDate, todayAdDate);
         });
     </script>
 @endpush

@@ -39,10 +39,12 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                <th>सबमिशन नं.</th>
                                 <th>निवेदकको पुरा नाम </th>
                                 <th>प्रतिवादीको पुरा नाम </th>
                                 <th>मिति</th>
                                 <th>विषय</th>
+                                <th>मुद्दा प्रकृति</th>
                                 <th>कार्य</th>
                             </tr>
                             </thead>
@@ -50,10 +52,14 @@
                             @forelse($complaintApplications as $complaintApplication)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
+                                    <td>{{$complaintApplication->submission_no}}</td>
                                     <td>{{$complaintApplication->complainant_name}}</td>
                                     <td>{{$complaintApplication->defendant_name}}</td>
                                     <td>{{$complaintApplication->date}}</td>
                                     <td>{{$complaintApplication->subject}}</td>
+                                    <td>
+                                        {{$complaintApplication->lawsuitNature->title??''}}
+                                    </td>
                                     <td>
                                         @can('complaintApplication_edit')
                                             <a href="{{route('admin.judicialCommittee.complaintApplication.edit',$complaintApplication)}}"
