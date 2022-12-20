@@ -19,5 +19,6 @@ class Farmer extends Model
 
    protected $fillable = [
 
+
    ];
 }
