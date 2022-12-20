@@ -8,7 +8,7 @@
     <li>
         <a href="{{route('admin.judicialCommittee.judicialMember.index')}}">
             <i class="fa fa-users"></i>
-            <span>न्यायिक समिति विवरण </span>
+            <span> न्यायिक सदस्य विवरण  </span>
         </a>
     </li>
 @endcan

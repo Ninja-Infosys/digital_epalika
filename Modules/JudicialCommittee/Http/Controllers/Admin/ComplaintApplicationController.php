@@ -11,7 +11,7 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        $complaintApplications = ComplaintApplication::orderByDesc('date')->get();
+        $complaintApplications = ComplaintApplication::with('lawsuitNature')->orderByDesc('date')->get();
 
         return view('judicialcommittee::admin.complaint_application.index', compact('complaintApplications'));
     }
