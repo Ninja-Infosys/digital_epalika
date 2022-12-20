@@ -18,6 +18,6 @@ class Enterprise extends Model
    ];
 
    protected $fillable = [
-
+'dfndfg'
    ];
 }
