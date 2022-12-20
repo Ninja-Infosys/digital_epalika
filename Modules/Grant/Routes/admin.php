@@ -20,3 +20,8 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('grantProgram', GrantProgramController::class);
     Route::resource('grantOffice', GrantOfficeController::class);
 });
+
+Route::prefix('grantee')->as('grantee.')->group(function (){
+
+
+});
