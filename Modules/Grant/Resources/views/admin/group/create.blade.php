@@ -68,13 +68,11 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="registration_date" class="form-label">दर्ता मिति *</label>
-                                    <input type="text" name="registration_date" value="{{ old('registration_date') }}"
-                                        class="form-control @error('registration_date') is-invalid @enderror"
-                                        id="registration_date" placeholder="दर्ता मिति" />
-                                    @error('registration_date')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <x-date-input-component
+                                        nameNe="registration_date" labelNe="दर्ता मिति *"
+                                        nameEn="en_registration_date" labelEn="Registration Date"
+                                        :getTodayDate="false"
+                                    />
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="vat_pan" class="form-label">पाना/भ्याट *</label>

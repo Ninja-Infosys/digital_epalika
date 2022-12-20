@@ -41,20 +41,24 @@ class GroupController extends Controller
     {
         $this->checkAuthorization('group_create');
 
-        toast('समूह सफलतापूर्वक थपियो', 'success');
-        $group = DB::transaction(function () use ($request) {
-            $group = Group::create($request->validated() + $request->validated()['address']);
+        DB::transaction(function () use ($request) {
+            $group = Group::create($request->validated());
 
-            $group->farmers()->attach($request->validated()['farmers']);
+            $group->farmers()->attach($request->input('farmers'));
 
-            return $group;
         });
+        toast('समूह सफलतापूर्वक थपियो', 'success');
+        return back();
     }
 
     public function edit(Group $group)
     {
         $this->checkAuthorization('group_edit');
-        return view('grant::admin.group.edit');
+
+        $farmers = Farmer::latest()->get();
+        $group->load('farmers');
+
+        return view('grant::admin.group.edit', compact('farmers','group'));
     }
 
     public function update(UpdateGroupRequest $request, Group $group)
@@ -62,20 +66,25 @@ class GroupController extends Controller
         $this->checkAuthorization('group_edit');
 
         $group->update($request->validated());
-        toast('समूह सफलतापूर्वक थपियो', 'message');
-        DB::transaction(function () use ($request, $group) {
-            $group->update($request->validated() + $request->validated()['address']);
 
-            $group->farmers()->sync($request->validated()['farmers']);
+        DB::transaction(function () use ($request, $group) {
+            $group->update($request->validated());
+
+            $group->farmers()->sync($request->input('farmers'));
         });
-        return redirect(route('admin.group.index'));
+
+        toast('समूह सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return redirect(route('admin.grant.group.index'));
     }
 
     public function destroy(Group $group)
     {
         $this->checkAuthorization('group_delete');
+
+        $group->farmers()->detach();
         $group->delete();
-        toast('समूह प्रकार सफलतापूर्वक मेटाइयो', 'success');
+
+        toast('समूह सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
 }

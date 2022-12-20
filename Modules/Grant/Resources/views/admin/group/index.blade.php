@@ -38,9 +38,11 @@
                         <table class="table table-sm table-striped table-hover mt-3">
                             <thead>
                             <tr>
+                                <th>क्र.स</th>
                                 <th>समूह परिचय पत्र नं. </th>
                                 <th>समूहको नाम </th>
                                 <th>दर्ता मिति</th>
+                                <th>दर्ता भएको कार्यलय</th>
                                 <th>पाना/भ्याट</th>
                                 <th>Action</th>
                             </tr>
@@ -48,28 +50,30 @@
                             <tbody>
                             @forelse($groups as $group)
                                 <tr>
-                                    <th>{{$loop->unique_id}}</th>
+                                    <th>{{ $loop->iteration }}</th>
+                                    <th>{{$group->unique_id}}</th>
                                     <th>{{$group->name}}</th>
                                     <th>{{ $group->registration_date }}</th>
+                                    <th>{{ $group->registered_office }}</th>
                                     <th>{{ $group->vat_pan }}</th>
                                     <td>
-                                        <a href="{{route('admin.group.edit', $group)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                        <a href="{{route('admin.grant.group.edit', $group)}}"
+                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i>
                                         </a>
-                                        <form action="{{route('admin.group.destroy', $group)}}"
+                                        <form action="{{route('admin.grant.group.destroy', $group)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="7" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
