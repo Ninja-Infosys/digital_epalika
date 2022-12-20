@@ -34,9 +34,9 @@
                         @csrf
                         <fieldset>
                             <legend>
-                                <h3>समूहको विवरण</h3>
+                                <h4 class="text-primary">समूहको विवरण</h4>
                             </legend>
-                            <h5 class="text-success mt-1">नोट: कृपया समुहको विवरण भर्दा ध्यान दिएर भर्नु होला । </h5>
+                            <h5 class="mt-1 text-black">नोट: कृपया समुहको विवरण भर्दा ध्यान दिएर भर्नु होला । </h5>
                             <div class="row mt-2">
                                 <div class="col-md-6 mb-2">
                                     <label for="name" class="form-label">समूहको नाम *</label>
@@ -87,9 +87,9 @@
                         </fieldset>
                         <fieldset class="mt-3">
                             <legend>
-                                <h3>स्थानीय ठेगाना</h3>
+                                <h4 class="text-primary">स्थानीय ठेगाना</h4>
                             </legend>
-                            <h5 class="mt-1 text-success">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र
+                            <h5 class="mt-1 text-black">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र
                                 टोल छनौट गर्नुहोस् ।</h5>
                             <div class="row mt-2">
                                 @livewire('address')
@@ -116,9 +116,9 @@
 
                         <fieldset class="my-3">
                             <legend>
-                                <h3>संलग्न कृषकहरू</h3>
+                                <h4 class="text-primary">संलग्न कृषकहरू</h4>
                             </legend>
-                            <h5 class="mt-1 text-success">सहकारीमा संलग्न कृषकहरू छान्नुहोस् </h5>
+                            <h5 class="mt-1 text-black">सहकारीमा संलग्न कृषकहरू छान्नुहोस् </h5>
                             <div class="row mt-2">
                                 <div class="col-md-6 mb-2">
                                     <label for="farmers" class="fs-5">कृषकहरू <span
