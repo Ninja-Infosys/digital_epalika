@@ -16,7 +16,7 @@
        {{request()->is('admin/grant/grantee/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-file"></i>
-        <span> अनुदानग्राही हरु </span>
+        <span> अनुदानग्राहीहरु </span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -28,6 +28,13 @@
                 <li class="{{request()->is('admin/grant/grantee/farmer*') ? 'active' : ''}}">
                     <a href="{{route('admin.grant.farmer.index')}}">
                         <span> कृषक </span>
+                    </a>
+                </li>
+            @endcan
+            @can('cooperative_access')
+                <li class="{{request()->is('admin/grant/grantee/group*') ? 'active' : ''}}">
+                    <a href="{{route('admin.grant.cooperative.index')}}">
+                        <span> सहकारी </span>
                     </a>
                 </li>
             @endcan

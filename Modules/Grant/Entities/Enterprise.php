@@ -19,11 +19,11 @@ class Enterprise extends Model
 {
     use HasFactory,SoftDeletes,EventObserveTrait;
 
-   protected $dates = [
-       'created_at',
-       'updated_at',
-       'deleted_at'
-   ];
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     protected $fillable = [
         'unique_id',
