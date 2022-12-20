@@ -3,25 +3,6 @@
     <link href="{{asset('assets/backend/libs/hopscotch/css/hopscotch.min.css')}}" rel="stylesheet" type="text/css"/>
 @endpush
 @section('content')
-    <div class="row mt-2">
-        <div class="col-12">
-            <div class="page-title-box">
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('admin.dashboard') }}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
-                            </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="#">डिजिटल ई-पालिका</a>
-                        </li>
-                    </ol>
-                </div>
-                <h4 class="page-title">गृहपृष्ठ </h4>
-            </div>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-6 col-xl-2">
             <div class="widget-rounded-circle card-primary">
