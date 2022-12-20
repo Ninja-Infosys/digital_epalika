@@ -62,7 +62,7 @@ class Farmer extends Model
     {
         return !empty($this->attributes['photo']) ?
             Storage::disk('public')->url($this->attributes['photo'])
-            : asset('images/default.png');
+            : asset('images/user_icon.jpg');
     }
 
     public function setPhotoAttribute($value)
