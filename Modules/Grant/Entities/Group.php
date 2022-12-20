@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Group extends Model
 {
@@ -32,4 +36,40 @@ class Group extends Model
     'tole',
     'user_id',
    ];
+
+   public function province(): BelongsTo
+   {
+       return $this->belongsTo(Province::class);
+   }
+
+   public function district(): BelongsTo
+   {
+       return $this->belongsTo(District::class);
+   }
+
+   public function localBody(): BelongsTo
+   {
+       return $this->belongsTo(LocalBody::class);
+   }
+
+   public function user(): BelongsTo
+   {
+       return $this->belongsTo(User::class);
+   }
+
+   public function groupPersons(): HasMany
+   {
+       return $this->hasMany(GroupPerson::class);
+   }
+
+   public function farmers(): BelongsToMany
+   {
+       return $this->belongsToMany(Farmer::class);
+   }
+
+   public function grantDetails(): MorphMany
+   {
+       return $this->morphMany(GrantDetail::class, 'model');
+   }
 }
+
