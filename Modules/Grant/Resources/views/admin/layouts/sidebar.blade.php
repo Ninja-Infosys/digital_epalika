@@ -31,11 +31,13 @@
                     </a>
                 </li>
             @endcan
+            @can('cooperativeType_access')
             <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
-                <a href="#">
+                <a href="{{route('admin.grant.setting.cooperativeType.index')}}">
                     <span> सहकारीको प्रकार </span>
                 </a>
             </li>
+                @endcan
             @can('affiliation_access')
                 <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                     <a href="{{route('admin.grant.setting.affiliation.index')}}">
@@ -53,7 +55,7 @@
             @can('grantProgram_access')
                 <li class="{{request()->is('admin/grant/setting/infrastructure') ? 'active' : ''}}">
                     <a href="{{route('admin.grant.setting.grantProgram.index')}}">
-                        <span> कार्यक्रम बिषय </span>
+                        <span>अनुदान कार्यक्रम </span>
                     </a>
                 </li>
             @endcan
