@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{route('admin.grant.farmer.store')}}" method="post">
+                    <form action="{{route('admin.grant.farmer.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <fieldset>
@@ -81,6 +81,19 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
+                                    <label for="photo" class="form-label">फोटो</label>
+                                    <input
+                                        type="file"
+                                        name="photo"
+                                        value="{{old('photo')}}"
+                                        class="form-control @error('photo') is-invalid @enderror"
+                                        id="photo"
+                                    />
+                                    @error('photo')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
                                     <label for="phone_no" class="form-label">सम्पर्क नं. *</label>
                                     <input
                                         type="text"
@@ -97,8 +110,11 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="gender" class="form-label">लिंग *</label>
                                     <select id="gender" name="gender" class="form-control">
+                                        <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\Gender::cases() as $gender)
-                                            <option value="{{$gender->value}}">{{$gender->label()}}</option>
+                                            <option
+                                                {{$gender->value==old('gender') ? 'selected' : ''}}
+                                                value="{{$gender->value}}">{{$gender->label()}}</option>
                                         @endforeach
                                     </select>
                                     @error('gender')
@@ -108,8 +124,12 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="marital_status" class="form-label">बैबाहिक अवस्था *</label>
                                     <select id="marital_status" name="marital_status" class="form-control">
+                                        <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\MaritalStatusEnum::cases() as $marital_status)
-                                            <option value="{{$marital_status->value}}">{{$marital_status->label()}}</option>
+                                            <option
+                                                value="{{$marital_status->value}}" {{$marital_status->value==old('marital_status') ? 'selected' : ''}}>
+                                                {{$marital_status->label()}}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('marital_status')

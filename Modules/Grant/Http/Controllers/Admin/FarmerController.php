@@ -63,12 +63,20 @@ class FarmerController extends Controller
 
     public function edit(Farmer $farmer)
     {
-        return view('grant::edit');
+        $this->checkAuthorization('farmer_edit');
+
+        $farmer->load('cooperatives','groups','enterprises');
+
+        $cooperatives = Cooperative::latest()->get();
+        $groups = Group::latest()->get();
+        $enterprises = Enterprise::latest()->get();
+
+        return view('grant::admin.farmer.edit', compact('farmer', 'cooperatives', 'groups', 'enterprises'));
     }
 
     public function update(Request $request, Farmer $farmer)
     {
-        //
+
     }
 
     public function destroy(Farmer $farmer)
