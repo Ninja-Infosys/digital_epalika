@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Http\Controllers\Admin\DashboardController;
+use Modules\Grant\Http\Controllers\Admin\GroupController;
 use Modules\Grant\Http\Controllers\Admin\Setting\AffiliationController;
 use Modules\Grant\Http\Controllers\Admin\Setting\CooperativeTypeController;
 use Modules\Grant\Http\Controllers\Admin\Setting\EnterpriseTypeController;
@@ -20,3 +21,5 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('grantProgram', GrantProgramController::class);
     Route::resource('grantOffice', GrantOfficeController::class);
 });
+
+Route::resource('group', GroupController::class);
