@@ -9,6 +9,7 @@ use Modules\Grant\Entities\Group;
 use Modules\Grant\Http\Requests\Group\StoreGroupRequest;
 use Modules\Grant\Http\Requests\Group\UpdateGroupRequest;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Farmer;
 
 class GroupController extends Controller
@@ -40,9 +41,14 @@ class GroupController extends Controller
     {
         $this->checkAuthorization('group_create');
 
-        Group::create($request->validated());
         toast('समूह सफलतापूर्वक थपियो', 'success');
-        return back();
+        $group = DB::transaction(function () use ($request) {
+            $group = Group::create($request->validated() + $request->validated()['address']);
+
+            $group->farmers()->attach($request->validated()['farmers']);
+
+            return $group;
+        });
     }
 
     public function edit(Group $group)
@@ -57,6 +63,11 @@ class GroupController extends Controller
 
         $group->update($request->validated());
         toast('समूह सफलतापूर्वक थपियो', 'message');
+        DB::transaction(function () use ($request, $group) {
+            $group->update($request->validated() + $request->validated()['address']);
+
+            $group->farmers()->sync($request->validated()['farmers']);
+        });
         return redirect(route('admin.group.index'));
     }
 
