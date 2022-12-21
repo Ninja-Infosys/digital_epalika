@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> कृषक सम्पादन</h4>
+                        <h4 class="header-title">कृषक सम्पादन</h4>
                     </div>
                 </div>
                 <div class="card-body">
