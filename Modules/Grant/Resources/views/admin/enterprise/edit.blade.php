@@ -34,7 +34,7 @@
                         @csrf
                         <fieldset>
                             <legend>
-                                <h4 class="text-primary">निजि उधम/फर्मको विवरण</h4>
+                                <h4 class="text-info">निजि उधम/फर्मको विवरण</h4>
                             </legend>
                             <h5 class="mt-1 text-black">नोट: कृपया निजि उधम/फर्मको विवरण भर्दा ध्यान दिएर भर्नु होला । </h5>
                             <div class="row mt-2">
@@ -80,7 +80,7 @@
                         </fieldset>
                         <fieldset class="mt-3">
                             <legend>
-                                <h4 class="text-primary">स्थानीय ठेगाना</h4>
+                                <h4 class="text-info">स्थानीय ठेगाना</h4>
                             </legend>
                             <h5 class="mt-1 text-black">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र
                                 टोल छनौट गर्नुहोस् ।</h5>
@@ -114,7 +114,7 @@
 
                         <fieldset class="my-3">
                             <legend>
-                                <h4 class="text-primary">संलग्न कृषकहरू</h4>
+                                <h4 class="text-info">संलग्न कृषकहरू</h4>
                             </legend>
                             <h5 class="mt-1 text-black">निजि उधम/फर्ममा संलग्न कृषकहरू छान्नुहोस् </h5>
                             <div class="row mt-2">

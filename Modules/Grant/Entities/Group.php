@@ -2,6 +2,9 @@
 
 namespace Modules\Grant\Entities;
 
+use App\Models\Address\Province;
+use App\Models\Address\District;
+use App\Models\Address\LocalBody;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,9 +40,9 @@ class Group extends Model
     'user_id',
    ];
 
-   public function province(): BelongsTo
+   public function province()
    {
-       return $this->belongsTo(Province::class);
+    return $this->belongsTo(Province::class);
    }
 
    public function district(): BelongsTo

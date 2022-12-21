@@ -38,9 +38,7 @@ class CooperativeController extends Controller
         $this->checkAuthorization('cooperative_create');
 
         DB::transaction(function () use ($request) {
-            $cooperative = Cooperative::create($request->validated()+[
-                'user_id'=>auth()->user()->id
-                ]);
+            $cooperative = Cooperative::create($request->validated());
 
             $cooperative->farmers()->attach($request->validated('farmers'));
         });
@@ -49,10 +47,11 @@ class CooperativeController extends Controller
         return back();
     }
 
-    public function show($id)
+    public function show(Cooperative $cooperative)
     {
         $this->checkAuthorization('cooperative_access');
-        return view('grant::show');
+        $cooperative->load('province', 'district', 'localBody', 'farmers');
+        return view('grant::admin.cooperative.show', compact('cooperative'));
     }
 
     public function edit(Cooperative $cooperative)
@@ -65,13 +64,28 @@ class CooperativeController extends Controller
         return view('grant::admin.cooperative.edit', compact('cooperative','cooperativeTypes', 'affiliations', 'farmers'));
     }
 
-    public function update(UpdateCooperativeRequest $request, $id)
+    public function update(UpdateCooperativeRequest $request, Cooperative $cooperative)
     {
         $this->checkAuthorization('cooperative_edit');
+        DB::transaction(function () use ($request, $cooperative){
+            $cooperative->update($request->validated());
+
+            $cooperative->farmers()->sync($request->input('farmers'));
+        });
+
+        toast('सहकारी सफलतापूर्वक अद्यावधिक गरियो','success');
+        return redirect(route('admin.grant.cooperative.index'));
     }
 
-    public function destroy($id)
+    public function destroy(Cooperative $cooperative)
     {
         $this->checkAuthorization('cooperative_delete');
+
+        $cooperative->farmers()->detach();
+
+        $cooperative->delete();
+
+        toast('सहकारी सफलतापूर्वक हटाइयो','success');
+        return back();
     }
 }

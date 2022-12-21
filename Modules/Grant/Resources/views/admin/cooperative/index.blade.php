@@ -57,18 +57,24 @@
                                     <td>
                                         @can('cooperative_edit')
                                             <a href="{{route('admin.grant.cooperative.edit', $cooperative)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
+                                            @can('cooperative_access')
+                                                <a href="{{route('admin.grant.cooperative.show', $cooperative)}}"
+                                                   class="btn btn-xs btn-outline-primary" title="हेर्नुहोस्">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            @endcan
                                         @can('cooperative_delete')
                                             <form
                                                 action="{{route('admin.grant.cooperative.destroy', $cooperative)}}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

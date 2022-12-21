@@ -91,4 +91,13 @@ class EnterprisesController extends Controller
         toast('निजि उधम/फर्म सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
+
+    public function show(Enterprise $enterprise)
+    {
+        $this->checkAuthorization('enterprise_access');
+
+        $enterprise->load('province', 'district', 'localBody','enterpriseType', 'farmers');
+
+        return view('grant::admin.enterprise.show', compact('enterprise'));
+    }
 }
