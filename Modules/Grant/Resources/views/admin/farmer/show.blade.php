@@ -23,7 +23,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <img src="{{$farmer->photo_url}}" class="rounded-circle avatar img-thumbnail"
-                         alt="{{$farmer->name}}">
+                         alt="{{$farmer->name}}" style="object-fit: cover; height: 6rem; width: 6rem">
 
                     <h3 class="mt-3">{{$farmer->name}}</h3>
                     <h5 class="mb-0 text-dark">{{$farmer->unique_id}}</h5>
