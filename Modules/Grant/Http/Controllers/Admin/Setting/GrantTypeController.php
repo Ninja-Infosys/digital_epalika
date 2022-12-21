@@ -2,16 +2,14 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Modules\Grant\Entities\GrantType;
-use Modules\Grant\Http\Requests\GrantType\StoreGrantTypeRequest;
-use Modules\Grant\Http\Requests\GrantType\UpdateGrantTypeRequest;
+use Modules\Grant\Http\Requests\Setting\GrantType\StoreGrantTypeRequest;
+use Modules\Grant\Http\Requests\Setting\GrantType\UpdateGrantTypeRequest;
 
 class GrantTypeController extends Controller
 {

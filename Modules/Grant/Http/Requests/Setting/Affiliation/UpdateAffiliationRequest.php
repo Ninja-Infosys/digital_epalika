@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Grant\Http\Requests\Affiliation;
+namespace Modules\Grant\Http\Requests\Setting\Affiliation;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;

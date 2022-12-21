@@ -1,15 +1,16 @@
 <?php
 
-namespace Modules\Grant\Http\Requests\CooperativeType;
+namespace Modules\Grant\Http\Requests\Setting\CooperativeType;
+
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class StoreCooperativeTypeRequest extends FormRequest
+class UpdateCooperativeTypeRequest extends FormRequest
 {
     public function authorize():bool
     {
-        return Gate::allows('cooperativeType_create');
+        return Gate::allows('cooperativeType_edit');
     }
 
     public function rules():array

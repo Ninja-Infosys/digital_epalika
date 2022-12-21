@@ -2,17 +2,15 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Routing\Redirector;
 use Modules\Grant\Entities\Affiliation;
-use Modules\Grant\Http\Requests\Affiliation\StoreAffiliationRequest;
-use Modules\Grant\Http\Requests\Affiliation\UpdateAffiliationRequest;
+use Modules\Grant\Http\Requests\Setting\Affiliation\StoreAffiliationRequest;
+use Modules\Grant\Http\Requests\Setting\Affiliation\UpdateAffiliationRequest;
 
 class AffiliationController extends Controller
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Grant\Http\Requests\GrantType;
+namespace Modules\Grant\Http\Requests\Setting\GrantType;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
-class UpdateGrantTypeRequest extends FormRequest
+class StoreGrantTypeRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Gate::allows('grantType_edit');
+        return Gate::allows('grantType_create');
     }
 
     public function rules(): array

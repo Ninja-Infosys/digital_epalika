@@ -10,6 +10,14 @@
         <span>अनुदान विवरण</span>
     </a>
 </li>
+@can('grant_access')
+<li>
+    <a href="{{route('admin.grant.grant.index')}}">
+        <i class="fa fa-file-contract"></i>
+        <span>जारि अनुदान कार्यक्रम</span>
+    </a>
+</li>
+@endcan
 
 <li class="{{request()->is('admin/grant/grantee/*') ? 'active' : ''}}">
     <a href="#sidebarGrantee"

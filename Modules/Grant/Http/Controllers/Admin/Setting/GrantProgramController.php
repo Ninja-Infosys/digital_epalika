@@ -2,16 +2,14 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Modules\Grant\Entities\GrantProgram;
-use Modules\Grant\Http\Requests\GrantProgram\StoreGrantProgramRequest;
-use Modules\Grant\Http\Requests\GrantProgram\UpdateGrantProgramRequest;
+use Modules\Grant\Http\Requests\Setting\GrantProgram\StoreGrantProgramRequest;
+use Modules\Grant\Http\Requests\Setting\GrantProgram\UpdateGrantProgramRequest;
 
 class GrantProgramController extends Controller
 {

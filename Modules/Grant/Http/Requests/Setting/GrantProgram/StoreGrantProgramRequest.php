@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Grant\Http\Requests\GrantProgram;
+namespace Modules\Grant\Http\Requests\Setting\GrantProgram;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
