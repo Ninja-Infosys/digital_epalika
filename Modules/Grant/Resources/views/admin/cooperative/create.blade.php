@@ -37,106 +37,110 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <label for="name" class="form-label">सहकारी नाम</label>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            value="{{old('name')}}"
-                                            class="form-control @error('name') is-invalid @enderror"
-                                            id="name"
-                                            placeholder="सहकारी नाम"
-                                        />
-                                        @error('name')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
+                                <fieldset>
+                                    <legend><h3 class="text-primary"> सहकारीको विवरण </h3></legend>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="name" class="form-label">सहकारी नाम</label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value="{{old('name')}}"
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                id="name"
+                                                placeholder="सहकारी नाम"
+                                            />
+                                            @error('name')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="name" class="form-label">सहकारी प्रकार</label>
+                                            <select name="cooperative_type_id" id="cooperative_type_id" class="form-control @error('cooperative_type_id') is-invalid @enderror">
+                                                <option value="">सहकारी प्रकार छान्नुहोस्</option>
+                                                @foreach($cooperativeTypes as $cooperativeType)
+                                                    <option
+                                                        value="{{$cooperativeType->id}}">{{$cooperativeType->title}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('cooperative_type_id')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label for="name" class="form-label">सहकारी प्रकार</label>
-                                        <select name="cooperative_type_id" id="cooperative_type_id" class="form-control @error('cooperative_type_id') is-invalid @enderror">
-                                            <option value="">सहकारी प्रकार छान्नुहोस्</option>
-                                            @foreach($cooperativeTypes as $cooperativeType)
-                                                <option
-                                                    value="{{$cooperativeType->id}}">{{$cooperativeType->title}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('cooperative_type_id')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
+                                    <div class="row">
+                                        <div class="col-md-4 mb-2">
+                                            <label for="registration_no" class="form-label">दर्ता नं</label>
+                                            <input
+                                                type="text"
+                                                name="registration_no"
+                                                value="{{old('registration_no')}}"
+                                                class="form-control @error('registration_no') is-invalid @enderror"
+                                                id="registration_no"
+                                                placeholder="दर्ता नं"
+                                            />
+                                            @error('registration_no')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label for="registration_date" class="form-label">दर्ता मिति</label>
+                                            <input
+                                                type="date"
+                                                name="registration_date"
+                                                value="{{old('registration_date')}}"
+                                                class="form-control @error('registration_date') is-invalid @enderror"
+                                                id="registration_date"
+                                                placeholder="दर्ता मिति"
+                                            />
+                                            @error('registration_date')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label for="vat_pan" class="form-label">प्यान भ्याट</label>
+                                            <input
+                                                type="text"
+                                                name="vat_pan"
+                                                value="{{old('vat_pan')}}"
+                                                class="form-control @error('vat_pan') is-invalid @enderror"
+                                                id="vat_pan"
+                                                placeholder="प्यान भ्याट"
+                                            />
+                                            @error('vat_pan')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 mb-2">
-                                        <label for="registration_no" class="form-label">दर्ता नं</label>
-                                        <input
-                                            type="text"
-                                            name="registration_no"
-                                            value="{{old('registration_no')}}"
-                                            class="form-control @error('registration_no') is-invalid @enderror"
-                                            id="registration_no"
-                                            placeholder="दर्ता नं"
-                                        />
-                                        @error('registration_no')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label for="affiliation_id" class="form-label">आवध्ता </label>
+                                            <select name="affiliation_id" id="affiliation_id" class="form-control @error('affiliation_id') is-invalid @enderror">
+                                                <option value="">आवध्ता छान्नुहोस्</option>
+                                                @foreach($affiliations as $affiliation)
+                                                    <option
+                                                        value="{{$affiliation->id}}">{{$affiliation->title}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('affiliation_id')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label for="objective" class="form-label">उद्देश्य</label>
+                                            <textarea name="objective" id="objective" placeholder="objective.." cols="60" rows="3"></textarea>
+                                            @error('objective')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 mb-2">
-                                        <label for="registration_date" class="form-label">दर्ता मिति</label>
-                                        <input
-                                            type="date"
-                                            name="registration_date"
-                                            value="{{old('registration_date')}}"
-                                            class="form-control @error('registration_date') is-invalid @enderror"
-                                            id="registration_date"
-                                            placeholder="दर्ता मिति"
-                                        />
-                                        @error('registration_date')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-4 mb-2">
-                                        <label for="vat_pan" class="form-label">प्यान भ्याट</label>
-                                        <input
-                                            type="text"
-                                            name="vat_pan"
-                                            value="{{old('vat_pan')}}"
-                                            class="form-control @error('vat_pan') is-invalid @enderror"
-                                            id="vat_pan"
-                                            placeholder="प्यान भ्याट"
-                                        />
-                                        @error('vat_pan')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <label for="affiliation_id" class="form-label">आवध्ता </label>
-                                        <select name="affiliation_id" id="affiliation_id" class="form-control @error('affiliation_id') is-invalid @enderror">
-                                            <option value="">आवध्ता छान्नुहोस्</option>
-                                            @foreach($affiliations as $affiliation)
-                                                <option
-                                                    value="{{$affiliation->id}}">{{$affiliation->title}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('affiliation_id')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <label for="objective" class="form-label">उद्देश्य</label>
-                                        <textarea name="objective" id="objective" placeholder="objective.." cols="60" rows="3"></textarea>
-                                        @error('objective')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
+                                </fieldset>
                             </div>
                         </div>
                         <div class="row">
                             <fieldset>
                                 <legend><h3 class="text-primary"> स्थायी ठेगाना </h3></legend>
+                                <p class="text-info">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् ।</p>
                                 <livewire:address/>
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
@@ -171,11 +175,12 @@
                             </fieldset>
                         </div>
                         <hr class="dotted" style="border-top: 3px dotted #bbb;">
-                        <div class="row">
+                        <div class="row my-2">
                             <fieldset>
                                 <legend>
                                     <h3 class="text-primary">संलग्न कृषकहरू</h3>
                                 </legend>
+                                <p class="text-info">सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
                                 <div class="col-md-4 mb-2">
                                     <label for="farmers" class="form-label">
                                         कृषक</label>
