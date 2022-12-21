@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('unique_id')->comment('समूह आइडी')->nullable()->unique();
+            $table->string('unique_id')->comment('समूह आइडी')->unique();
             $table->string('name')->comment('नाम');
             $table->string('registration_date')->comment('दर्ता मिति');
             $table->string('registered_office')->comment('दर्ता भएको कार्यालय');

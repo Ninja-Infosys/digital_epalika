@@ -1,26 +1,23 @@
 <?php
 
-namespace Modules\Grant\Http\Requests\Group;
-
+namespace Modules\Grant\Http\Requests\Enterprises;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
-class UpdateGroupRequest extends FormRequest
+class StoreEnterprisesRequest extends FormRequest
 {
     public function authorize():bool
     {
-        return Gate::allows('group_edit');
+        return Gate::allows('enterprise_create');
     }
 
     public function rules():array
     {
         return [
+            'enterprise_type_id' => ['required', Rule::exists('enterprise_types', 'id')->withoutTrashed()],
             'name' => ['required', 'string', 'max:255'],
-            'registration_date' => ['required', 'date'],
-            'registered_office' => ['required'],
-            'monthly_meeting' => ['nullable'],
             'vat_pan' => ['nullable'],
             'province_id' => ['required', Rule::exists('provinces', 'id')->withoutTrashed()],
             'district_id' => ['required', Rule::exists('districts', 'id')->withoutTrashed()],
