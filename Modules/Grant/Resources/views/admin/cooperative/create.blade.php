@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 <fieldset>
-                                    <legend><h3 class="text-primary"> सहकारीको विवरण </h3></legend>
+                                    <legend><h4 class="text-info"> सहकारीको विवरण </h4></legend>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="name" class="form-label">सहकारी नाम</label>
@@ -84,14 +84,10 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4 mb-2">
-                                            <label for="registration_date" class="form-label">दर्ता मिति</label>
-                                            <input
-                                                type="date"
-                                                name="registration_date"
-                                                value="{{old('registration_date')}}"
-                                                class="form-control @error('registration_date') is-invalid @enderror"
-                                                id="registration_date"
-                                                placeholder="दर्ता मिति"
+                                            <x-date-input-component
+                                                nameNe="registration_date" labelNe="दर्ता मिति *"
+                                                nameEn="en_registration_date" labelEn="Registration Date"
+                                                :getTodayDate="false"
                                             />
                                             @error('registration_date')
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -139,8 +135,8 @@
                         </div>
                         <div class="row">
                             <fieldset>
-                                <legend><h3 class="text-primary"> स्थायी ठेगाना </h3></legend>
-                                <p class="text-info">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् ।</p>
+                                <legend><h4 class="text-info"> स्थायी ठेगाना </h4></legend>
+                                <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् ।</p>
                                 <livewire:address/>
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
@@ -178,9 +174,9 @@
                         <div class="row my-2">
                             <fieldset>
                                 <legend>
-                                    <h3 class="text-primary">संलग्न कृषकहरू</h3>
+                                    <h4 class="text-info">संलग्न कृषकहरू</h4>
                                 </legend>
-                                <p class="text-info">सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
+                                <p>सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
                                 <div class="col-md-4 mb-2">
                                     <label for="farmers" class="form-label">
                                         कृषक</label>

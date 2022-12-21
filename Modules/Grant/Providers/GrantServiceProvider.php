@@ -3,9 +3,11 @@
 namespace Modules\Grant\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Group;
+use Modules\Grant\Observers\CooperativeObserver;
 use Modules\Grant\Observers\EnterpriseObserver;
 use Modules\Grant\Observers\FarmerObserver;
 use Modules\Grant\Observers\GroupObserver;
@@ -36,6 +38,7 @@ class GrantServiceProvider extends ServiceProvider
 
         Farmer::observe(FarmerObserver::class);
         Group::observe(GroupObserver::class);
+        Cooperative::observe(CooperativeObserver::class);
         Enterprise::observe(EnterpriseObserver::class);
     }
 

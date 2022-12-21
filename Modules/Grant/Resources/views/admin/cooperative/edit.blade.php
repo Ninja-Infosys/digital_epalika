@@ -33,19 +33,20 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.grant.cooperative.store')}}" method="post">
+                    <form action="{{route('admin.grant.cooperative.update',$cooperative)}}" method="post">
                         @csrf
+                        @method('put')
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 <fieldset>
-                                    <legend><h3 class="text-primary"> सहकारीको विवरण </h3></legend>
+                                    <legend><h4 class="text-info"> सहकारीको विवरण </h4></legend>
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <label for="name" class="form-label">सहकारी नाम</label>
                                             <input
                                                 type="text"
                                                 name="name"
-                                                value="{{old('name')}}"
+                                                value="{{old('name',$cooperative->name)}}"
                                                 class="form-control @error('name') is-invalid @enderror"
                                                 id="name"
                                                 placeholder="सहकारी नाम"
@@ -60,6 +61,7 @@
                                                 <option value="">सहकारी प्रकार छान्नुहोस्</option>
                                                 @foreach($cooperativeTypes as $cooperativeType)
                                                     <option
+                                                        {{$cooperativeType->id==old('cooperative_type_id', $cooperative->cooperativeType->id) ? 'selected' : ''}}
                                                         value="{{$cooperativeType->id}}">{{$cooperativeType->title}}</option>
                                                 @endforeach
                                             </select>
@@ -74,7 +76,7 @@
                                             <input
                                                 type="text"
                                                 name="registration_no"
-                                                value="{{old('registration_no')}}"
+                                                value="{{old('registration_no', $cooperative->registration_no)}}"
                                                 class="form-control @error('registration_no') is-invalid @enderror"
                                                 id="registration_no"
                                                 placeholder="दर्ता नं"
@@ -84,14 +86,11 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4 mb-2">
-                                            <label for="registration_date" class="form-label">दर्ता मिति</label>
-                                            <input
-                                                type="date"
-                                                name="registration_date"
-                                                value="{{old('registration_date')}}"
-                                                class="form-control @error('registration_date') is-invalid @enderror"
-                                                id="registration_date"
-                                                placeholder="दर्ता मिति"
+                                            <x-date-input-component
+                                                nameNe="registration_date" labelNe="दर्ता मिति *"
+                                                nameEn="en_registration_date" labelEn="Dispatch Date"
+                                                :getTodayDate="false"
+                                                :editDateNe="$cooperative->registration_date"
                                             />
                                             @error('registration_date')
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -102,7 +101,7 @@
                                             <input
                                                 type="text"
                                                 name="vat_pan"
-                                                value="{{old('vat_pan')}}"
+                                                value="{{old('vat_pan',$cooperative->vat_pan)}}"
                                                 class="form-control @error('vat_pan') is-invalid @enderror"
                                                 id="vat_pan"
                                                 placeholder="प्यान भ्याट"
@@ -119,6 +118,7 @@
                                                 <option value="">आवध्ता छान्नुहोस्</option>
                                                 @foreach($affiliations as $affiliation)
                                                     <option
+                                                        {{$affiliation->id==old('affiliation_id', $cooperative->affiliation->id) ? 'selected' : ''}}
                                                         value="{{$affiliation->id}}">{{$affiliation->title}}</option>
                                                 @endforeach
                                             </select>
@@ -128,7 +128,7 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="objective" class="form-label">उद्देश्य</label>
-                                            <textarea name="objective" id="objective" placeholder="objective.." cols="60" rows="3"></textarea>
+                                            <textarea name="objective" id="objective" placeholder="objective.." cols="60" rows="3">{{old('objective', $cooperative->objective)}}</textarea>
                                             @error('objective')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
@@ -139,9 +139,14 @@
                         </div>
                         <div class="row">
                             <fieldset>
-                                <legend><h3 class="text-primary"> स्थायी ठेगाना </h3></legend>
-                                <p class="text-info">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् ।</p>
-                                <livewire:address/>
+                                <legend><h4 class="text-info"> स्थायी ठेगाना </h4></legend>
+                                <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् ।</p>
+                                @livewire('address', [
+                                'province_id' => $cooperative->province_id,
+                                'district_id' => $cooperative->district_id,
+                                'local_body_id' => $cooperative->local_body_id,
+                                'ward_no' => $cooperative->ward_no
+                                ])
                                 <div class="row">
                                     <div class="col-md-6 mb-2">
                                         <label for="village" class="form-label">गाउँ</label>
@@ -150,7 +155,7 @@
                                             name="village"
                                             id="village"
                                             class="form-control @error('village') is-invalid @enderror"
-                                            value="{{old('village')}}"
+                                            value="{{old('village', $cooperative->village)}}"
                                             placeholder="गाउँ"
                                         >
                                     </div>
@@ -164,7 +169,7 @@
                                             name="tole"
                                             id="tole"
                                             class="form-control @error('tole') is-invalid @enderror"
-                                            value="{{old('tole')}}"
+                                            value="{{old('tole', $cooperative->tole)}}"
                                             placeholder="टोल"
                                         >
                                     </div>
@@ -178,9 +183,9 @@
                         <div class="row my-2">
                             <fieldset>
                                 <legend>
-                                    <h3 class="text-primary">संलग्न कृषकहरू</h3>
+                                    <h4 class="text-info">संलग्न कृषकहरू</h4>
                                 </legend>
-                                <p class="text-info">सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
+                                <p>सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
                                 <div class="col-md-4 mb-2">
                                     <label for="farmers" class="form-label">
                                         कृषक</label>
@@ -188,7 +193,9 @@
                                             id="farmers" class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($farmers as $farmer)
-                                            <option value="{{$farmer->id}}">{{$farmer->name}}</option>
+                                            <option
+                                                {{ in_array($farmer->id, $cooperative->farmers->pluck('id')->toArray()) ? 'selected' : '' }}
+                                                value="{{$farmer->id}}">{{$farmer->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('farmers')

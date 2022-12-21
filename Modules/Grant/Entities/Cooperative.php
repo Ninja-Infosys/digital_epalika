@@ -46,7 +46,7 @@ class Cooperative extends Model
 
     public function cooperativeType(): BelongsTo
     {
-        return $this->belongsTo(Cooperative::class);
+        return $this->belongsTo(CooperativeType::class);
     }
 
     public function affiliation(): BelongsTo
