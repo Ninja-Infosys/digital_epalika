@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers\Admin\UserManagement;
 
-use App\Events\ActivityLogEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserManagement\Role\StoreRoleRequest;
 use App\Http\Requests\UserManagement\Role\UpdateRoleRequest;
 use App\Models\UserManagement\Permission;
 use App\Models\UserManagement\Role;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('role_access'),
-            403,
-            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_access');
 
         $roles = Role::all();
 
@@ -29,10 +24,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('role_create'),
-            403,
-            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_create');
 
         $permissionGroups = $this->permissionGroups();
 
@@ -41,35 +33,29 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        abort_if(Gate::denies('role_create'),
-            403,
-            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_create');
 
         DB::transaction(function () use ($request) {
             $role = Role::create($request->validated());
 
             $role->permissions()->attach($request->validated()['permissions']);
+
+            $this->permissionCacheClear();
         });
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 
     public function show(Role $role)
     {
-        abort_if(Gate::denies('role_access'),
-            403,
-            'तपाईंलाई भूमिका पहुँच गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_access');
     }
 
     public function edit(Role $role)
     {
-        abort_if(Gate::denies('role_edit'),
-            403,
-            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_edit');
 
         $role->load('permissions');
         $permissionGroups = $this->permissionGroups();
@@ -79,35 +65,36 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        abort_if(Gate::denies('role_edit'),
-            403,
-            'तपाईंलाई भूमिका अद्यावधिक गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('role_edit');
 
         DB::transaction(function () use ($request, $role) {
             $role->update($request->validated());
             $role->permissions()->sync($request->validated()['permissions']);
+
+            $this->permissionCacheClear();
         });
 
         toast('भूमिका सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return redirect(route('admin.userManagement.role.index'));
     }
 
     public function destroy(Role $role)
     {
-        abort_if(Gate::denies('role_delete'),
-            403,
-            'तपाईंलाई भूमिका मेटाउन अनुमति छैन'
-        );
+        $this->checkAuthorization('role_delete');
 
         if ($role->type == 'Super') {
             toast('super role मेटाउन सकिँदैन', 'error');
+
             return back();
         }
+        $this->permissionCacheClear();
+
         $role->permissions()->detach();
         $role->delete();
 
         toast('भूमिका सफलतापूर्वक मेटियो', 'success');
+
         return back();
     }
 
@@ -115,13 +102,25 @@ class RoleController extends Controller
     {
         return Permission::all()
             ->map(function ($permission) {
-                $array = explode("_", $permission->title);
+                $array = explode('_', $permission->title);
                 $last = array_pop($array);
+
                 return [
                     'id' => $permission->id,
                     'name' => Str::headline(implode(' ', $array)),
                     'title' => Str::headline($last),
                 ];
             })->groupBy('name');
+    }
+
+    /**
+     * @return void
+     */
+    public function permissionCacheClear(): void
+    {
+        if (Cache::has('permissions')) {
+            //
+            Cache::forget('permissions');
+        }
     }
 }

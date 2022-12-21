@@ -8,15 +8,15 @@ use Illuminate\Validation\Rule;
 
 class UpdateBusinessNature extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('businessNature_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'title'=>['required',Rule::unique('business_natures','title')->withoutTrashed()->ignore($this->businessNature)]
+            'title' => ['required', Rule::unique('business_natures', 'title')->withoutTrashed()->ignore($this->businessNature)],
         ];
     }
 }

@@ -2,11 +2,10 @@
 
 namespace Modules\EMap\Http\Livewire;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\EMap\Entities\Organization;
@@ -15,72 +14,31 @@ class OrganizationRegisterLivewire extends Component
 {
     use WithFileUploads;
 
-    public $level = 1;
-    public $maxLevel = 6;
-    public $progress = 0;
+    public int $currentStep = 1;
 
-    public $isOrganization = 1;
+    public float $progressPercentage = 0;
 
     public $districts = [];
+
     public $provinces = [];
 
-//    permanent address
-    public $permanentLocalBodies = [];
-    public $permanentWards = [];
-    public $permanentDistricts = [];
+    public array $address = [
 
-//    temporary address
-    public $temporaryLocalBodies = [];
-    public $temporaryWards = [];
-    public $temporaryDistricts = [];
+        'organizationProvince' => null,
+        'organizationDistrict' => null,
+        'organizationLocalBody' => null,
+        'organizationLocalBodies' => [],
+        'organizationWards' => [],
+        'organizationDistricts' => [],
+    ];
 
-//    organization address
-    public $organizationLocalBodies = [];
-    public $organizationWards = [];
-    public $organizationDistricts = [];
-
-    public function mount()
-    {
-        $this->districts = DB::table('districts')->selectRaw('id,district,province_id')->orderBy('province_id')->get();
-        $this->provinces = DB::table('provinces')->selectRaw('id,province')->get();
-    }
-
-    public $user = [
+    public array $user = [
         'name' => null,
         'email' => null,
-        'phone' => null
-    ];
-
-    public $userDetail = [
-        'name_ne' => null,
-        'name_en' => null,
-        'email' => null,
         'phone' => null,
-        'gender' => null,
-        'marital_status' => null,
-        'father_name' => null,
-        'grandfather_name' => null,
-        'pan_no' => null,
-        'nec_no' => null,
-        'nec_certificate' => null,
-        'citizenship_no' => null,
-        'citizenship_issued_district' => null,
-        'citizenship_issued_date' => null,
-        'citizenship_front' => null,
-        'citizenship_back' => null,
-        'permanent_province_id' => null,
-        'permanent_district_id' => null,
-        'permanent_local_body_id' => null,
-        'permanent_ward' => null,
-        'permanent_tole' => null,
-        'temporary_province_id' => null,
-        'temporary_district_id' => null,
-        'temporary_local_body_id' => null,
-        'temporary_ward' => null,
-        'temporary_tole' => null,
     ];
 
-    public $organizationDetail = [
+    public array $organizationDetail = [
         'org_name_ne' => null,
         'org_name_en' => null,
         'org_email' => null,
@@ -97,174 +55,160 @@ class OrganizationRegisterLivewire extends Component
         'tole' => null,
     ];
 
-    public $taxClearance = [
+    public array $taxClearance = [
         'document' => null,
         'year' => null,
     ];
 
-    public function incrementLevel(int $step)
-    {
-        if ($this->level <= $this->maxLevel) {
-            $this->level = $step;
+    protected array $firstStepValidations = [
+        'organizationDetail.org_name_ne' => ['required'],
+        'organizationDetail.org_name_en' => ['required'],
+        'organizationDetail.org_email' => ['required'],
+        'organizationDetail.org_contact' => ['required'],
+        'organizationDetail.org_registration_no' => ['required'],
+        'organizationDetail.org_pan_no' => ['required'],
+        'organizationDetail.province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
+        'organizationDetail.district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
+        'organizationDetail.local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
+        'organizationDetail.ward' => ['required'],
+        'organizationDetail.tole' => ['nullable'],
+    ];
 
-            $this->setProgressBar();
-        }
+    protected array $secondStepValidations = [
+        'organizationDetail.org_registration_document' => ['required', 'image', 'max:300'],
+        'organizationDetail.org_pan_document' => ['required', 'image', 'max:300'],
+        'organizationDetail.logo' => ['required', 'image', 'max:200'],
+        'taxClearance.document' => ['required', 'max:300'],
+        'taxClearance.year' => ['required'],
+    ];
 
-    }
-
-    public function decrementLevel(int $step)
-    {
-        if ($this->level >= 1) {
-            $this->level = $step;
-            $this->setProgressBar();
-        }
-    }
-
-    protected $baseRule = [
-        'userDetail.name_ne' => ['required'],
-        'userDetail.name_en' => ['required'],
-        'userDetail.email' => ['required', 'email'],
-        'userDetail.phone' => ['required'],
-        'userDetail.gender' => ['required'],
-        'userDetail.marital_status' => ['nullable'],
-        'userDetail.father_name' => ['required'],
-        'userDetail.grandfather_name' => ['required'],
-        'userDetail.pan_no' => ['nullable'],
-        'userDetail.nec_no' => ['nullable'],
-        'userDetail.nec_certificate' => ['nullable', 'image'],
-        'userDetail.citizenship_no' => ['required'],
-        'userDetail.citizenship_issued_district' => ['required', 'exists:districts,id,deleted_at,NULL'],
-        'userDetail.citizenship_issued_date' => ['required'],
-        'userDetail.citizenship_front' => ['required', 'image'],
-        'userDetail.citizenship_back' => ['nullable', 'image'],
-        'userDetail.permanent_province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
-        'userDetail.permanent_district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
-        'userDetail.permanent_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
-        'userDetail.permanent_ward' => ['required'],
-        'userDetail.permanent_tole' => ['nullable'],
-        'userDetail.temporary_province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
-        'userDetail.temporary_district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
-        'userDetail.temporary_local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
-        'userDetail.temporary_ward' => ['nullable'],
-        'userDetail.temporary_tole' => ['nullable'],
+    protected array $thirdStepValidations = [
         'user.name' => ['required'],
         'user.email' => ['required', 'email', 'unique:organizations,email'],
         'user.phone' => ['required', 'unique:organizations,phone'],
     ];
 
-    /**
-     * @return void
-     */
-    public function setProgressBar(): void
+    public function mount(): void
     {
-        $this->progress = number_format(($this->level / $this->maxLevel) * 100);
+        $this->districts = get_districts();
+        $this->provinces = get_provinces();
+    }
+
+    public function nextStep($step): void
+    {
+        $this->validate();
+        $this->currentStep = $step;
+        $this->calculateProgressPercentage();
+    }
+
+    public function backStep($step): void
+    {
+        $this->currentStep = $step;
+        $this->calculateProgressPercentage();
     }
 
     protected function rules(): array
     {
-        if ($this->isOrganization) {
-            return array_merge($this->baseRule, [
-                'organizationDetail.org_name_ne' => ['required'],
-                'organizationDetail.org_name_en' => ['required'],
-                'organizationDetail.org_email' => ['required'],
-                'organizationDetail.org_contact' => ['required'],
-                'organizationDetail.org_registration_no' => ['required'],
-                'organizationDetail.org_registration_document' => ['required', 'image'],
-                'organizationDetail.org_pan_no' => ['required'],
-                'organizationDetail.org_pan_document' => ['required', 'image'],
-                'organizationDetail.logo' => ['nullable', 'image'],
-                'organizationDetail.province_id' => ['required', 'exists:provinces,id,deleted_at,NULL'],
-                'organizationDetail.district_id' => ['required', 'exists:districts,id,deleted_at,NULL'],
-                'organizationDetail.local_body_id' => ['required', 'exists:local_bodies,id,deleted_at,NULL'],
-                'organizationDetail.ward' => ['required'],
-                'organizationDetail.tole' => ['nullable'],
-                'taxClearance.document' => ['required'],
-                'taxClearance.year' => ['nullable'],
-            ]);
-        } else {
-            return $this->baseRule;
-        }
-
+        return match ($this->currentStep) {
+            2 => $this->secondStepValidations,
+            3 => $this->thirdStepValidations,
+            default => $this->firstStepValidations,
+        };
     }
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
 
-    public function save()
+    public function submitFormData(): void
     {
         $this->validate();
         DB::transaction(function () {
             $DbUser = Organization::create($this->user);
-            $DbUser->userDetail()->create($this->userDetail);
-            if ($this->isOrganization) {
-                $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
-                $DbOrgDetail->taxClearances()->create($this->taxClearance);
-            }
+            $DbOrgDetail = $DbUser->organizationDetail()->create($this->organizationDetail);
+            $DbOrgDetail->taxClearances()->create($this->taxClearance);
 
             $this->resetForm();
         });
         $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
         ]);
     }
 
-    public function resetForm()
+    public function resetForm(): void
     {
-        $this->reset('userDetail', 'level', 'organizationDetail', 'taxClearance', 'isOrganization', 'maxLevel', 'level', 'progress');
-
+        $this->reset('currentStep', 'address', 'user', 'organizationDetail', 'taxClearance', 'progressPercentage');
     }
 
-    public function checkPermanentAddress()
+    public function checkOrganizationAddress(): void
     {
-        if (!empty($this->userDetail['permanent_province_id'])) {
-            $this->permanentDistricts = Province::with('districts')->findOrFail($this->userDetail['permanent_province_id'])->districts;
+        if (! empty($this->organizationDetail['province_id'])) {
+            $this->address['organizationDistricts'] = get_districts(province_ids: [$this->organizationDetail['province_id']]);
+            $this->address['organizationProvince'] = get_provinces(provinceId: $this->organizationDetail['province_id']);
         }
-        if (!empty($this->userDetail['permanent_district_id'])) {
-            $this->permanentLocalBodies = District::with('localBodies')->findOrFail($this->userDetail['permanent_district_id'])->localBodies;
+        if (! empty($this->organizationDetail['district_id'])) {
+            $this->address['organizationLocalBodies'] = get_local_bodies(district_ids: [$this->organizationDetail['district_id']]);
+            $this->address['organizationDistrict'] = get_districts(districtId: $this->organizationDetail['district_id']);
         }
-        if (!empty($this->userDetail['permanent_local_body_id'])) {
-            $this->permanentWards = LocalBody::findOrFail($this->userDetail['permanent_local_body_id'])->ward_no;
-        }
-    }
-
-    public function checkTemporaryAddress()
-    {
-        if (!empty($this->userDetail['temporary_province_id'])) {
-            $this->temporaryDistricts = Province::with('districts')->findOrFail($this->userDetail['temporary_province_id'])->districts;
-        }
-        if (!empty($this->userDetail['temporary_district_id'])) {
-            $this->temporaryLocalBodies = District::with('localBodies')->findOrFail($this->userDetail['temporary_district_id'])->localBodies;
-        }
-        if (!empty($this->userDetail['temporary_local_body_id'])) {
-            $this->temporaryWards = LocalBody::findOrFail($this->userDetail['temporary_local_body_id'])->ward_no;
+        if (! empty($this->organizationDetail['local_body_id'])) {
+            $this->address['organizationWards'] = get_local_bodies(localBodyId: $this->organizationDetail['local_body_id'])->ward_no;
+            $this->address['organizationLocalBody'] = $this->address['organizationLocalBodies']->firstWhere('id', $this->organizationDetail['local_body_id']);
         }
     }
 
-    public function checkOrganizationAddress()
+    public function render(): Factory|View|Application
     {
-        if (!empty($this->organizationDetail['province_id'])) {
-            $this->organizationDistricts = Province::with('districts')->findOrFail($this->organizationDetail['province_id'])->districts;
-        }
-        if (!empty($this->organizationDetail['district_id'])) {
-            $this->organizationLocalBodies = District::with('localBodies')->findOrFail($this->organizationDetail['district_id'])->localBodies;
-        }
-        if (!empty($this->organizationDetail['local_body_id'])) {
-            $this->organizationWards = LocalBody::findOrFail($this->organizationDetail['local_body_id'])->ward_no;
-        }
-    }
-
-    public function render()
-    {
-        if (!$this->isOrganization) {
-            $this->maxLevel = 4;
-        }
-        $this->checkPermanentAddress();
         $this->checkOrganizationAddress();
-        $this->checkTemporaryAddress();
+
+        if (! empty($this->userDetail['citizenship_issued_district'])) {
+            $this->address['citizenshipIssuedDistrict'] = get_districts(districtId: $this->userDetail['citizenship_issued_district']);
+        }
+
         return view('emap::livewire.organization-register-livewire');
+    }
+
+    private function calculateProgressPercentage()
+    {
+        $this->reset('progressPercentage');
+        $this->progressPercentage = $this->currentStep / 4 * 100;
+    }
+
+    public function messages(): array
+    {
+        return [
+
+            'organizationDetail.org_name_ne.required' => 'संस्थाको नाम नेपालीमा आवश्यक छ । ',
+            'organizationDetail.org_name_en.required' => 'संस्थाको नाम अंग्रेजीमा आवश्यक छ । ',
+            'organizationDetail.org_email.required' => 'संस्थाको इमेल आवश्यक छ । ',
+            'organizationDetail.org_contact.required' => 'संस्थाको सम्पर्क नं आवश्यक छ । ',
+            'organizationDetail.org_registration_no.required' => 'संस्था दर्ता भएको नं आवश्यक छ ।',
+            'organizationDetail.org_pan_no.required' => 'संस्थाको पाना नं आवश्यक छ । ',
+            'organizationDetail.province_id.required' => 'प्रदेश आवश्यक छ ।',
+            'organizationDetail.district_id.required' => 'जिल्ला आवश्यक छ ।',
+            'organizationDetail.local_body_id.required' => 'पालिका आवश्यक छ ।',
+            'organizationDetail.ward.required' => 'वडा नं आवश्यक छ ।',
+            'organizationDetail.org_registration_document.required' => 'संस्था दर्ता भएको कागजात आवश्यक छ ।',
+            'organizationDetail.org_registration_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
+            'organizationDetail.org_registration_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',
+            'organizationDetail.org_pan_document.required' => 'संस्थाको पाना नं को कागजात आवश्यक छ ।',
+            'organizationDetail.org_pan_document.max' => 'कागजात अधिकतम साइज ३०० केबी ।',
+            'organizationDetail.org_pan_document.image' => 'फाइल फोटोमा हुनुपर्छ ।',
+            'organizationDetail.logo.required' => 'संस्थाको लोगो आवश्यक छ ।',
+            'organizationDetail.logo.max' => 'कागजात अधिकतम साइज २०० केबी ।',
+            'organizationDetail.logo.image' => 'फाइल फोटोमा हुनुपर्छ ।',
+            'taxClearance.document.required' => 'संस्थाले कर तिरेको कागजात आवश्यक छ ।',
+            'taxClearance.document.max' => 'कागजात अधिकतम साइज २०० केबी ।',
+            'taxClearance.year.required' => 'संस्थाले कर तिरेको वर्ष आवश्यक छ ।',
+            'user.name.required' => 'प्रयोगकर्ताको नाम आवश्यक छ ।',
+            'user.name.unique' => 'यो संगठन पहिल्यै भई सकेको छ ।',
+            'user.email.required' => 'इमेल आवश्यक छ ।',
+            'user.email.unique' => 'यो इमेल पहिल्यै दर्ता भई सकेको छ ।',
+            'user.email.email' => 'इमेल मान्य छैन ।',
+            'user.phone.required' => 'सम्पर्क नं आवश्यक छ ।',
+            'user.phone.unique' => 'यो सम्पर्क नं पहिल्यै प्रयोग भई सकेको छ ।',
+        ];
     }
 }

@@ -3,53 +3,106 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ExecutiveMeeting\MeetingDetail;
-use App\Models\ExecutiveMeeting\MunicipalMeetingNotice;
-use App\Models\ExecutiveMeeting\WardMeetingNotice;
+use App\Models\ActivityLog;
+use App\Models\Settings\OfficeSetting;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Modules\Circular\Entities\Dispatch;
-use Modules\Circular\Entities\Registration;
-use Modules\DigitalBoard\Entities\Notice;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
+use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
-use Modules\GrievanceHandling\Entities\GrievanceType;
-use Modules\GrievanceHandling\Entities\GrievanceUser;
-use Nwidart\Modules\Facades\Module;
+use Modules\Plan\Entities\PlanArea;
+use Modules\Plan\Entities\Project;
+use Modules\Roaster\Entities\Training;
+use Schema;
 
 class DashboardController extends Controller
 {
     public function __invoke()
     {
+        $businessDetail_count = 0;
+        $training_count = 0;
+        $project_count = 0;
+        $map_count = 0;
+        $grievance_count = 0;
+        $planAreas = [
+            'labels' => [],
+            'dataSets' => [
+                [
+                    'data' => [],
+                ]
+            ]
+        ];
+
         $user_count = User::count();
-        $grievance_user_count = GrievanceUser::count();
-        $notice_count = Notice::where('type', 'Notice')->count();
-        $news_count = Notice::where('type', 'News')->count();
-        $registration_count = Registration::count();
-        $dispatch_count = Dispatch::count();
-        $unseen_grievance = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Unseen');
-        $unseen_grievances = $unseen_grievance->limit(5)->get();
-        $unseen_grievance_count = $unseen_grievance->count();
-        $replied_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Replied')->count();
-        $investigated_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Investigated')->count();
-        $closed_grievance_count = GrievanceDetail::whereNull('grievance_detail_id')->whereStatus('Closed')->count();
-        $ward_meetings_count = MeetingDetail::where('model_type', WardMeetingNotice::class)->count();
-        $municipal_meetings_count = MeetingDetail::where('model_type', MunicipalMeetingNotice::class)->count();
-        $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
+        $activityLogs = ActivityLog::with('user')
+            ->whereDate('created_at', today()->toDateString())
+            ->paginate(5);
+
+        if (Schema::hasTable('business_details')) {
+            $businessDetail_count = BusinessDetail::whereNotNull('registration_no')
+                ->count();
+        }
+
+        if (Schema::hasTable('trainings')) {
+            $training_count = Training::whereDate('closed_date', '<=', today()->toDateString())
+                ->count() ?? 0;
+        }
+
+        if (Schema::hasTable('projects')) {
+            $project_count = Project::count() ?? 0;
+        }
+
+        if (Schema::hasTable('map_applies')) {
+            $map_count = MapApply::count() ?? 0;
+        }
+
+        if (Schema::hasTable('grievance_details')) {
+            $grievance_count = GrievanceDetail::approved()->count() ?? 0;
+        }
+
+        if (Schema::hasTable('plan_areas')) {
+            $planAreas = $this->setPlanData();
+        }
+
 
         return view('admin.dashboard', compact(['user_count',
-            'grievance_user_count',
-            'notice_count',
-            'news_count',
-            'registration_count',
-            'dispatch_count',
-            'unseen_grievance_count',
-            'replied_grievance_count',
-            'investigated_grievance_count',
-            'closed_grievance_count',
-            'municipal_meetings_count',
-            'ward_meetings_count',
-            'grievanceTypes',
-            'unseen_grievances'
+            'businessDetail_count',
+            'planAreas',
+            'activityLogs',
+            'training_count',
+            'project_count',
+            'map_count',
+            'grievance_count'
         ]));
+    }
+
+    private function setPlanData(): array
+    {
+        $officeSetting = OfficeSetting::first();
+
+        $planAreas = PlanArea::withCount(['projects' => function ($query) use ($officeSetting) {
+            $query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
+        }])
+            ->with(['planAreas' => function ($query) use ($officeSetting) {
+                $query->withCount(['projects' => function ($sub_query) use ($officeSetting) {
+                    $sub_query->where('fiscal_year_id', $officeSetting->fiscal_year_id);
+                }]);
+            }])->whereNull('plan_area_id')->get()->map(function ($planArea) {
+                return [
+                    'area_name' => $planArea->area_name ?? '',
+                    'projects_count' => $planArea->projects_count + $planArea->planAreas->sum('projects_count')
+                ];
+            });
+
+
+        return [
+            'labels' => $planAreas->pluck('area_name')->toArray(),
+            'dataSets' => [
+                [
+                    'data' => $planAreas->pluck('projects_count')->toArray(),
+                    'label' => 'जम्मा',
+                    'fill' => 'false',
+                ],
+            ],
+        ];
     }
 }

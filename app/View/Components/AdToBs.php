@@ -12,6 +12,7 @@ class AdToBs extends Component
      * @return void
      */
     public $adDate;
+
     public $id;
 
     public function __construct($id, $adDate)

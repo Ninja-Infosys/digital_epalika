@@ -4,5 +4,13 @@
     "EMap": true,
     "HelpDesk": true,
     "GrievanceHandling": true,
-    "BusinessRegistration": true
+    "BusinessRegistration": true,
+    "ExecutiveMeeting": true,
+    "ListRegistration": true,
+    "Roaster": true,
+    "Grant": true,
+    "JudicialCommittee": true,
+    "TaskManagement": true,
+    "Recommendation": true,
+    "Plan": true
 }

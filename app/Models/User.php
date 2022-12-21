@@ -7,8 +7,8 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\UserManagement\Role;
 use App\Traits\EventObserveTrait;
+use App\Traits\LockableTrait;
 use App\Traits\QueryFilterTrait;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,25 +17,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
-    use HasProfilePhoto;
     use Notifiable;
-    use TwoFactorAuthenticatable;
     use SoftDeletes;
     use QueryFilterTrait;
     use EventObserveTrait;
+    use LockableTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -50,6 +47,7 @@ class User extends Authenticatable
         'district_id',
         'local_body_id',
         'ward_no',
+        'profile_photo_path',
     ];
 
     protected $hidden = [
@@ -63,9 +61,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($value)
+    public function setPasswordAttribute($value): void
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
     }
@@ -79,8 +77,8 @@ class User extends Authenticatable
 
     public function setProfilePhotoPathAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['profile_photo_path'] = $value->store('user/profile/' . Str::slug($this->attributes['name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['profile_photo_path'] = $value->store('user/profile/'.Str::slug($this->attributes['name'], '_'), 'public');
         }
     }
 
@@ -103,12 +101,12 @@ class User extends Authenticatable
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(__CLASS__);
     }
 
     public function users(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(__CLASS__);
     }
 
     public function role(): BelongsTo

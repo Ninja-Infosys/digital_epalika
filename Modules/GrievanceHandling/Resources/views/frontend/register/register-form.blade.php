@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="inner-section mt-lg-5 ">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row d-flex mt-5 ">
                 <div class="mx-auto">
                     <div class="breadcrumb d-flex">
@@ -46,6 +46,9 @@
             }
 
             .progressbar li a:hover {
+                text-decoration: none;
+            }
+            .progressbar li a {
                 text-decoration: none;
             }
 
@@ -93,8 +96,6 @@
                 display: none;
             }
         </style>
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/register.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
     @endpush
     @push('scripts')
         {{--listener for toastr--}}

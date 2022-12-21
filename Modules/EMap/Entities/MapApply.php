@@ -2,29 +2,40 @@
 
 namespace Modules\EMap\Entities;
 
+use App\Models\Otp;
+use App\Models\Settings\FiscalYear;
 use App\Models\Settings\Units\Unit;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Modules\EMap\Enums\ApplicationFormTypeEnum;
 use Modules\EMap\Enums\BuildingUsageEnum;
 use Modules\EMap\Enums\CategorizationEnum;
 use Modules\EMap\Enums\TypeOfConstructionWorkEnum;
+use Modules\EMap\Traits\EMapTemplateTrait;
 
 class MapApply extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
+    use EMapTemplateTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'sent_to_admin_at',
     ];
 
     protected $fillable = [
         'client_id',
+        'unique_id',
+        'fiscal_year_id',
         'registration_no',
         'registration_date',
         'construction_type',
@@ -37,14 +48,38 @@ class MapApply extends Model
         'length',
         'breadth',
         'height',
-        'organization_id'
+        'organization_id',
+        'consultant_signature',
+        'consultant_name',
+        'consultant_mobile_no',
+        'consultant_nec_no',
+        'sent_to_admin_at',
+        'application_type'
     ];
 
     protected $casts = [
         'construction_type' => TypeOfConstructionWorkEnum::class,
         'usage' => BuildingUsageEnum::class,
         'building_category' => CategorizationEnum::class,
+        'application_type'=>ApplicationFormTypeEnum::class
     ];
+
+    public function setConsultantSignatureAttribute($value): void
+    {
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['consultant_signature'] = $value->store('e_map/consultant/signature', 'public');
+        }
+    }
+
+    public function getConsultantSignatureUrlAttribute(): string
+    {
+        return Storage::disk('public')->url($this->attributes['consultant_signature']);
+    }
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
 
     public function client(): BelongsTo
     {
@@ -54,6 +89,11 @@ class MapApply extends Model
     public function structureType(): BelongsTo
     {
         return $this->belongsTo(StructureType::class);
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 
     public function unit(): BelongsTo
@@ -104,5 +144,40 @@ class MapApply extends Model
     public function buildingDetails(): HasMany
     {
         return $this->hasMany(BuildingDetail::class);
+    }
+
+    public function mapApplyApplications(): HasMany
+    {
+        return $this->hasMany(ApplyMapApplication::class);
+    }
+
+    public function applyMapNotices(): HasMany
+    {
+        return $this->hasMany(ApplyMapNotice::class);
+    }
+
+    public function mapRegistration(): HasOne
+    {
+        return $this->hasOne(MapRegistration::class);
+    }
+
+    public function otp(): MorphOne
+    {
+        return $this->morphOne(Otp::class, 'model')->latest();
+    }
+
+    public function scopeSentToAdmin($query)
+    {
+        return $query->whereNotNull('sent_to_admin_at');
+    }
+
+    public function scopeIsMapVerified($query, ApplicationFormTypeEnum $applicationFormTypeEnum)
+    {
+        return $query->where('application_type', $applicationFormTypeEnum->value);
+    }
+
+    public function scopeNotSentToAdmin($query)
+    {
+        return $query->whereNull('sent_to_admin_at');
     }
 }

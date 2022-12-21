@@ -1,20 +1,6 @@
 <?php
 
 return [
-    'applicant_types' => [
-        'व्यक्ति',
-        'संस्था',
-        'आपूर्तिकर्ता',
-        'निर्माण ब्यबसायी',
-        'परामर्शदाता',
-        'सेवा प्रदायक'
-    ],
-    'business_natures' => [
-        'मालसामान आपूर्ति',
-        'निर्माण कार्य',
-        'परामर्श सेवा',
-        'अन्य सेवा',
-    ],
     'meeting_types' => [
         'एकपटक' => 'Random',
         'साप्ताहिक' => 'Weekly',
@@ -30,21 +16,31 @@ return [
         'शुक्रबार' => 'Friday',
         'शनिबार' => 'Saturday',
     ],
-    'complaint_severity' => [
-        'साधारण' => 'Simple',
-        'प्राथमिकता' => 'Priority',
-        'उच्च प्राथमिकता' => 'High priority'
-    ],
-    'status' => [
-        'नहेरिएको' => 'Unseen',
-        'अनुसन्धान गरिदै' => 'Investigated',
-        'जवाफ दिनुभयो' => 'Replied',
-        'बन्द' => 'Closed'
-    ],
+    /* 'complaint_severity' => [
+         'साधारण' => 'Simple',
+         'प्राथमिकता' => 'Priority',
+         'उच्च प्राथमिकता' => 'High priority'
+     ],
+     'status' => [
+         'नहेरिएको' => 'Unseen',
+         'अनुसन्धान गरिदै' => 'Investigated',
+         'जवाफ दिनुभयो' => 'Replied',
+         'बन्द' => 'Closed'
+     ],*/
 
     'gender' => [
         'पूरुष' => 'Male',
         'महिला' => 'Female',
         'अन्य' => 'Other',
+    ],
+    'blood_groups' => [
+        'A+',
+        'A-',
+        'B+',
+        'B-',
+        'O+',
+        'O-',
+        'AB+',
+        'AB-',
     ],
 ];

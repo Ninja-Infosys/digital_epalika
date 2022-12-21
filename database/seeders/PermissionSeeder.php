@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserManagement\Permission;
-use App\Models\UserManagement\Role;
 use App\Traits\StorePermissionTrait;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
@@ -23,27 +20,10 @@ class PermissionSeeder extends Seeder
             'user_create',
             'user_edit',
             'user_delete',
-            'websiteAdmin_access',
             'fiscalYear_access',
             'fiscalYear_create',
             'fiscalYear_edit',
             'fiscalYear_delete',
-            'executiveCommittee_access',
-            'executiveCommittee_create',
-            'executiveCommittee_edit',
-            'executiveCommittee_delete',
-            'municipalMeeting_access',
-            'municipalMeeting_create',
-            'municipalMeeting_edit',
-            'municipalMeeting_delete',
-            'wardMeeting_access',
-            'wardMeeting_create',
-            'wardMeeting_edit',
-            'wardMeeting_delete',
-            'listRegistration_access',
-            'listRegistration_create',
-            'listRegistration_edit',
-            'listRegistration_delete',
             'unitType_access',
             'unitType_create',
             'unitType_edit',
@@ -56,6 +36,37 @@ class PermissionSeeder extends Seeder
             'unit_create',
             'unit_edit',
             'unit_delete',
+            'ethnicity_access',
+            'ethnicity_create',
+            'ethnicity_edit',
+            'ethnicity_delete',
+            'branch_access',
+            'branch_create',
+            'branch_edit',
+            'branch_delete',
+            'slider_access',
+            'slider_create',
+            'slider_edit',
+            'slider_delete',
+            'municipalDetail_access',
+            'municipalDetail_create',
+            'municipalDetail_edit',
+            'municipalDetail_delete',
+            'importantLink_access',
+            'importantLink_create',
+            'importantLink_edit',
+            'importantLink_delete',
+            'feature_access',
+            'sms_access',
+            'mail_access',
+            'officeSetting_access',
+            'officeSetting_edit',
+            'officeHeader_edit',
+            'officeHeader_delete',
+            'emergencyNumber_access',
+            'emergencyNumber_create',
+            'emergencyNumber_edit',
+            'emergencyNumber_delete',
         ];
 
         $this->storePermission($permissions);

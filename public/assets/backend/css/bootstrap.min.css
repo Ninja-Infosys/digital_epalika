@@ -39,6 +39,7 @@
     --ct-primary-rgb: 102, 88, 221;
     --ct-secondary-rgb: 108, 117, 125;
     --ct-success-rgb: 26, 188, 156;
+    --ct-main-rgb: 0, 71, 171;
     --ct-info-rgb: 67, 191, 229;
     --ct-warning-rgb: 247, 184, 75;
     --ct-danger-rgb: 241, 85, 108;
@@ -50,15 +51,15 @@
     --ct-black-rgb: 0, 0, 0;
     --ct-body-color-rgb: 108, 117, 125;
     --ct-body-bg-rgb: 245, 246, 248;
-    --ct-font-sans-serif: "Nunito", sans-serif;
+    --ct-font-sans-serif: 'Mukta', sans-serif;
     --ct-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --ct-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-    --ct-body-font-family: Nunito, sans-serif;
+    --ct-body-font-family: 'Mukta', sans-serif;
     --ct-body-font-size: 0.875rem;
     --ct-body-font-weight: 400;
     --ct-body-line-height: 1.5;
     --ct-body-color: #6c757d;
-    --ct-body-bg: #f5f6f8;
+    --ct-body-bg: #dfefff;
     --ct-border-width: 1px;
     --ct-border-style: solid;
     --ct-border-color: #dee2e6;
@@ -146,7 +147,7 @@ hr {
 }
 
 .h4, h4 {
-    font-size: 1.125rem
+    font-size: 16px
 }
 
 .h5, h5 {
@@ -6645,7 +6646,7 @@ textarea.form-control-lg {
     display: block;
     padding: var(--ct-tooltip-arrow-height);
     margin: var(--ct-tooltip-margin);
-    font-family: Nunito, sans-serif;
+    font-family: 'Mukta', sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -6758,7 +6759,7 @@ textarea.form-control-lg {
     z-index: var(--ct-popover-zindex);
     display: block;
     max-width: var(--ct-popover-max-width);
-    font-family: Nunito, sans-serif;
+    font-family: 'Mukta', sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -9718,7 +9719,7 @@ textarea.form-control-lg {
 
 .text-light {
     --ct-text-opacity: 1;
-    color: rgba(var(--ct-light-rgb), var(--ct-text-opacity)) !important
+    color: rgba(var(--ct-light-rgb), var(--ct-text-opacity))
 }
 
 .text-dark {
@@ -14424,3 +14425,30 @@ textarea.form-control-lg {
 }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
+ h5{
+    color: white;
+    margin: 2px 0;
+ }
+ .blink {
+    width: 220px;
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+  }
+  h4 span {
+    font-family: cursive;
+    color: #fff;
+    animation: blink 2s linear infinite;
+    font-size: 10px;
+  }
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: .5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

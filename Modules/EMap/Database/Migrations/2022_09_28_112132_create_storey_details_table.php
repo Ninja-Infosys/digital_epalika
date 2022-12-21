@@ -1,20 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class () extends Migration {
     public function up()
     {
         Schema::create('storey_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('map_apply_id')->constrained()->cascadeOnDelete();
-            $table->integer('storey')->default(0);
-            $table->double('area_of_proposed_construction', 12, 2)->default(0);
-            $table->double('area_of_former_construction', 12, 2)->default(0);
-            $table->double('total_area', 12, 2)->default(0);
-            $table->double('height', 12, 2)->default(0);
+            $table->foreignId('map_fee_id')->constrained()->cascadeOnDelete();
+            $table->double('area_of_proposed_construction', 12, 2)->default(0)->comment('प्रस्तावित निर्माण क्षेत्र');
+            $table->double('area_of_former_construction', 12, 2)->default(0)->comment('पूर्व निर्माण क्षेत्र');
+            $table->double('total_area', 12, 2)->default(0)->comment('कुल क्षेत्रफल');
+            $table->double('height', 12, 2)->default(0)->comment('उचाइ');
             $table->timestamps();
             $table->softDeletes();
         });

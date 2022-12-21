@@ -29,12 +29,11 @@ class CheckMenu extends Command
      */
     public function handle()
     {
-
         $this->info('Checking files...');
 
         $this->newLine(3);
 
-        $myfile = fopen("config/menus.php", 'wb') or die("Unable to open file!");
+        $myfile = fopen('config/menus.php', 'wb') or exit('Unable to open file!');
         fwrite($myfile, '<?php return [');
 
         $modules = Module::toCollection();
@@ -45,7 +44,6 @@ class CheckMenu extends Command
         $this->newLine();
 
         foreach ($modules as $module) {
-
             $this->writingIntoFile($module, $myfile);
 
             $bar->advance();
@@ -61,22 +59,21 @@ class CheckMenu extends Command
         $this->info('Done👍👍👍');
 
         return 0;
-
     }
 
     /**
-     * @param mixed $module
+     * @param  mixed  $module
      * @param $myfile
      * @return void
      */
     public function writingIntoFile(mixed $module, $myfile): void
     {
-        $file = $module->getName() . '/Config/menus.txt';
+        $file = $module->getName().'/Config/menus.txt';
         if (Storage::disk('module')->exists($file)) {
             $data = Storage::disk('module')->get($file);
             fwrite($myfile, $data);
 
-            $this->info('file written from module:' . $module->getName());
+            $this->info('file written from module:'.$module->getName());
         } else {
             $this->info('File does not exists. skipping module');
         }

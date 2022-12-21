@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Website\Slider;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UpdateSliderRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('slider_edit');
     }
 
     public function rules(): array
@@ -16,14 +17,14 @@ class UpdateSliderRequest extends FormRequest
         return [
             'title' => ['nullable', 'string', 'max:255'],
             'image' => ['nullable', 'image'],
-            'description' => ['nullable']
+            'description' => ['nullable'],
         ];
     }
 
     public function messages()
     {
         return [
-            'image.image' => 'फोटो फर्ममा हुनुपर्छ '
+            'image.image' => 'फोटो फर्ममा हुनुपर्छ ',
         ];
     }
 }

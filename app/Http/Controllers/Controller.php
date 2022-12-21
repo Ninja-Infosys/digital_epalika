@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Settings\OfficeSetting;
+use App\Traits\BaseControllerTrait;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Storage;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
+    use BaseControllerTrait;
 
     public function __construct()
     {
-        view()->share('officeSetting', OfficeSetting::first());
-    }
-
-    public function deleteFile($file_url)
-    {
-        if (Storage::disk('public')->exists($file_url)) {
-            Storage::disk('public')->delete($file_url);
-        }
+        $this->constructionMethod();
     }
 }

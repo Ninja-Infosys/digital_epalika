@@ -34,6 +34,7 @@
 
             .building-construction-application input[type="text"],
             .building-construction-application input[type="file"],
+            .building-construction-application input[type="number"],
             .building-construction-application select,
             .building-construction-application input[type="date"] {
                 border-bottom: dotted 3px black;
@@ -46,6 +47,7 @@
 
             td > input[type="text"],
             td > input[type="file"],
+            td > input[type="number"],
             td > select,
             td > input[type="date"] {
                 width: 100%;

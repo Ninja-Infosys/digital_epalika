@@ -1,395 +1,181 @@
 @extends('admin.layouts.master')
-
+@push('style')
+    <link href="{{asset('assets/backend/libs/hopscotch/css/hopscotch.min.css')}}" rel="stylesheet" type="text/css"/>
+@endpush
 @section('content')
     <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title">गृहपृष्ठ</h4>
-            </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-2">
-            <a href="{{route('admin.circular.registration.create')}}" class="btn btn-info w-100">दर्ता गर्नुहोस</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.circular.dispatch.create')}}" class="btn btn-primary w-100">चलानी गर्नुहोस</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.listRegistrations.listRegistration.create')}}" class="btn btn-secondary w-100">मौजुदा
-                सुची दर्ता</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.executiveMeeting.wardMeetingNotice.create')}}" class="btn btn-success  w-100">कार्यपालिका
-                बैठक पेश गर्नुहोस</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.grievanceHandling.grievanceDetail.index')}}"
-               class="btn btn-warning text-white w-100">गुनासो विवरण</a>
-        </div>
-        <div class="col-md-2">
-            <a href="{{route('admin.digitalBoard.notice.create','Notice')}}" class="btn btn-info w-100">सूचना
-                थप्नुहोस</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary">
+                <div class="card-body" style="padding: 10px 20px;">
                     <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-users fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$user_count}}
+                        <div class="col-md">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $user_count }}
+                                </span>
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा प्रयोगकर्ताहरु">
-                                    जम्मा प्रयोगकर्ताहरु
-                                </p>
                             </div>
+                            <p class="text my-1">प्रयोगकर्ताहरु</p>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $training_count }}
+                                </span>
+                                </h3>
+                            </div>
+                            <p class="text my-1">सम्पन्न तालिम</p>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num"
+                                                                   data-plugin="counterup">{{ $project_count }}</span>
+                                </h3>
+                            </div>
+                            <p class="text my-1">सम्झौता हुनबाँकि कार्यर्कमहरु</p>
+
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $map_count }}</span></h3>
+                            </div>
+                            <p class="text my-1">दर्ता/प्रमाणित घरनक्सा</p>
+
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $grievance_count }}
+                                </span></h3>
+                            </div>
+                            <p class="text my-1">दर्ता भएका गुनासोहरु</p>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+
+        <div class="col-md-6 col-xl-2">
+            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                <div class="card-body" style="padding: 10px 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="avatar-lg rounded-circle bg-light border">
+                                <h3 class="mt-1 text-center"><span class="num" data-plugin="counterup">
+                                    {{ $businessDetail_count }}
+                                </span></h3>
+                            </div>
+                            <p class="text my-1">दर्ता भएका व्यवसायहरु </p>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="header-title">
+                                प्रयोगकर्ता गतिविधिहरू
+                            </h4>
                         </div>
                     </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-user fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$grievance_user_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा गुनासो गर्ने प्रयोगकर्ताहरु">
-                                    जम्मा गुनासो गर्ने प्रयोगकर्ताहरु
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-clipboard fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$notice_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा सूचना">
-                                    जम्मा सूचना
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-newspaper fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$news_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा समाचार">
-                                    जम्मा समाचार
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-users fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$registration_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा दर्ता">
-                                    जम्मा दर्ता
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-user fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$dispatch_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा चलानी">
-                                    जम्मा चलानी
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-clipboard fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$unseen_grievance_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा नहेरिएको गुनासो">
-                                    जम्मा नहेरिएको गुनासो
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-newspaper fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$replied_grievance_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा रेपाई गुनासो">
-                                    जम्मा रेपाई गुनासो
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-clipboard fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$investigated_grievance_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा अनुसन्धानमा रहेको गुनासो">
-                                    जम्मा अनुसन्धानमा रहेको गुनासो
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-newspaper fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$closed_grievance_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title=" जम्मा बन्द गरिएको गुनासो">
-                                    जम्मा बन्द गरिएको गुनासो
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-newspaper fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$municipal_meetings_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title="जम्मा कार्यपालिका बैठकहरु">
-                                    जम्मा कार्यपालिका बैठकहरु
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <i class="fa fa-newspaper fa-4x"></i>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1">
-                                    {{$ward_meetings_count}}
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate" title=" जम्मा वडा समितिका बैठकहरु">
-                                    जम्मा वडा समितिका बैठकहरु
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 col-xl-4">
-            <div class="widget-rounded-circle card">
-                <div class="card-header">
-                    प्रकार अनुसार गुनासोको विवरण
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>क्र.सं</th>
-                                <th>प्रकार</th>
-                                <th>संख्या</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($grievanceTypes as $grievanceType)
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0 table-striped table-hover">
+                                <thead>
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$grievanceType->title}}</td>
-                                    <td>{{$grievanceType->grievance_details_count}}</td>
+                                    <th>क्र.स.</th>
+                                    <th>प्रयोगकर्ता नाम</th>
+                                    <th>गतिविधिको प्रकार</th>
+                                    <th>आईपी</th>
+                                    <th>मोडेल प्रकार</th>
                                 </tr>
-                            @endforeach
+                                </thead>
+                                <tbody>
+                                @forelse($activityLogs as $activity_log)
+                                    <tr>
+                                        <th scope="row">{{$loop->iteration}}</th>
+                                        <td>{{$activity_log->user->name??''}}</td>
+                                        <td>{{$activity_log->activity_type}}</td>
+                                        <td>{{$activity_log->ip}}</td>
+                                        <td>{{class_basename($activity_log->model_type)}}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="5">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
 
-                            </tbody>
-                        </table>
+                        </div>
+                        {{$activityLogs->onEachSide(config('app.pagination_count'))->links()}}
                     </div>
-
                 </div>
             </div>
-        </div>
-        <div class="col-md-12 col-xl-8">
-            <div class="widget-rounded-circle card">
-                <div class="card-header">
-                   गुनासोको विवरण
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <table class="table table-sm mb-0 table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>टोकन</th>
-                                <th>गुनासोको प्रकार</th>
-                                <th> गुनासोको शिर्षक</th>
-                                <th> गुनासो प्रकाशन मिति</th>
-                                <th> गुनासो गम्भीरता</th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($unseen_grievances as $grievanceDetail)
-                                <tr>
-                                    <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$grievanceDetail->token}}</td>
-                                    <td>{{$grievanceDetail->grievanceType->title??''}}</td>
-                                    <td>{{$grievanceDetail->subject}}</td>
-                                    <td>{{$grievanceDetail->created_at->toDateString()}}</td>
-                                    <td>
-                                        @switch($grievanceDetail->complaint_severity)
-                                            @case('High priority')
-                                                उच्च प्राथमिकता
-                                                @break
-                                            @case('Priority')
-                                                प्राथमिकता
-                                                @break
-                                            @default
-                                                साधारण
-                                        @endswitch
-                                    </td>
-
-                                    <td>
-                                        <a href="{{route('admin.grievanceHandling.grievanceDetail.show',$grievanceDetail)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="header-title">
+                                आर्थिक बर्ष {{$officeSetting->fiscalYear->title??''}} को क्षेत्र अनुसार रिपोर्ट
+                            </h4>
+                        </div>
                     </div>
+                    <div class="card-body">
+                        <x-charts.pie-chart-component
+                            id="bar-chart17"
+                            chartName=""
+                            :labels="$planAreas['labels']"
+                            :dataSets="$planAreas['dataSets']"
 
+                        />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script src="{{asset('assets/backend/libs/hopscotch/js/hopscotch.min.js')}}"></script>
+        <script src="{{asset('assets/backend/js/pages/dashboard.init.js')}}"></script>
+    @endpush
 @endsection

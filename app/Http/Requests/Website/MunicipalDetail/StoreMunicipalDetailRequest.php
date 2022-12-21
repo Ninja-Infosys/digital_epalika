@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Website\MunicipalDetail;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StoreMunicipalDetailRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('municipalDetail_create');
     }
 
     public function rules(): array
@@ -18,7 +19,7 @@ class StoreMunicipalDetailRequest extends FormRequest
             'icon' => ['required'],
             'count' => ['required'],
             'bg_color' => ['required'],
-            'position' => ['nullable', 'integer']
+            'position' => ['nullable', 'integer'],
         ];
     }
 
@@ -29,7 +30,7 @@ class StoreMunicipalDetailRequest extends FormRequest
             'icon.required' => 'आइकन अनिबार्य छ ',
             'count.required' => 'गणना अनिबार्य छ ',
             'bg_color.required' => 'कलर अनिबार्य छ ',
-            'position.integer' => 'स्थिति अङ्कमा हुनुपर्छ '
+            'position.integer' => 'स्थिति अङ्कमा हुनुपर्छ ',
         ];
     }
 }

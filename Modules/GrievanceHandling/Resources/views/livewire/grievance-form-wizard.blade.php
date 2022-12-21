@@ -9,7 +9,7 @@
                         चरण </a></li>
             </ul>
         </div>
-        <form wire:submit.prevent="submitForm" enctype="multipart/form-data">
+        <form wire:submit.prevent="submitForm">
             @switch($currentStep)
                 @case(2)
                     <div class="row">
@@ -177,7 +177,7 @@
                         </tr>
                         <tr>
                             <th>के तपाईले पासवोर्ड राख्नु भएको छ ?</th>
-                            <td>{{$form['is_password'] ? 'छ ': 'छैन '}}</td>
+                            <td>{{$is_password  ? 'छ ': 'छैन '}}</td>
                         </tr>
                         <tr>
                             <th> गुनासोको विवरण</th>
@@ -324,16 +324,16 @@
                                 </label>
                             </h5>
                             <div class="d-flex">
-                                @foreach(config('defaults.complaint_severity') as $key=>$severity)
+                                @foreach(\Modules\GrievanceHandling\Enums\GrievanceComplaintSeverity::cases() as $severity)
                                     <div class="form-check">
                                         <input type="radio"
                                                class="form-check-input"
                                                name="complaint_severity"
                                                wire:model="form.complaint_severity"
-                                               value="{{$severity}}"
-                                               id="complaint_severity{{$severity}}">
+                                               value="{{$severity->value}}"
+                                               id="complaint_severity{{$severity->name}}">
                                         <label class="form-check-label"
-                                               for="complaint_severity{{$severity}}">{{$key}} &nbsp;</label>
+                                               for="complaint_severity{{$severity->name}}">{{$severity->label()}} &nbsp;</label>
                                     </div>
                                 @endforeach
                             </div>

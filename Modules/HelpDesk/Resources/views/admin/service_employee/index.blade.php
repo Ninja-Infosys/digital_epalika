@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.helpDesk.branch.index')}}">हेल्प डेस्क </a>
+                            <a href="{{route('admin.branch.index')}}">हेल्प डेस्क </a>
                         </li>
                         <li class="breadcrumb-item active">सेवा</li>
                     </ol>

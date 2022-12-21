@@ -1,9 +1,33 @@
-CKEDITOR.ClassicEditor.create( document.querySelector( '.ckEditor' ),{
+CKEDITOR.ClassicEditor.create(document.querySelector('.ckEditor'), {
+    ckfinder:{
+        uploadUrl:'admin/file'
+    },
+    alignment: {
+        options: [
+            {name: 'left', className: 'my-align-left'},
+            {name: 'right', className: 'my-align-right'},
+            {name: 'center', className: 'my-center-right'}
+        ]
+    },
+    style: {
+        definitions: [
+            {
+                name: 'Article category',
+                element: 'h3',
+                classes: [ 'category' ]
+            },
+            {
+                name: 'Info box',
+                element: 'p',
+                classes: [ 'info-box' ]
+            },
+        ]
+    },
     toolbar: {
         items: [
-            'exportPDF','exportWord', '|',
+            'exportPDF', 'exportWord', '|',
             'findAndReplace', 'selectAll', '|',
-            'heading', '|',
+            'heading', 'alignment', 'style', '|',
             'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
             'bulletedList', 'numberedList', 'todoList', '|',
             'outdent', 'indent', '|',
@@ -11,10 +35,8 @@ CKEDITOR.ClassicEditor.create( document.querySelector( '.ckEditor' ),{
             '-',
             'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
             'alignment', '|',
-            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-            'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-            'textPartLanguage', '|',
-            'sourceEditing'
+            'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', '|',
+            'specialCharacters', 'horizontalLine', 'pageBreak',
         ],
         shouldNotGroupWhenFull: true
     },
@@ -30,13 +52,13 @@ CKEDITOR.ClassicEditor.create( document.querySelector( '.ckEditor' ),{
     // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
     heading: {
         options: [
-            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-            { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-            { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-            { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-            { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+            {model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph'},
+            {model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1'},
+            {model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2'},
+            {model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3'},
+            {model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4'},
+            {model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5'},
+            {model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6'}
         ]
     },
     // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
@@ -59,7 +81,7 @@ CKEDITOR.ClassicEditor.create( document.querySelector( '.ckEditor' ),{
     },
     // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
     fontSize: {
-        options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+        options: [10, 12, 14, 'default', 18, 20, 22],
         supportAllValues: true
     },
     // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
@@ -108,6 +130,9 @@ CKEDITOR.ClassicEditor.create( document.querySelector( '.ckEditor' ),{
             }
         ]
     },
+    'plugin': [
+        'Image', 'ImageResize'
+    ],
     // The "super-build" contains more premium features that require additional configuration, disable them below.
     // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
     removePlugins: [
@@ -137,7 +162,7 @@ CKEDITOR.ClassicEditor.create( document.querySelector( '.ckEditor' ),{
         // from a local file system (file://) - load this site via HTTP server if you enable MathType
         'MathType'
     ]
-} )
-    .catch( error => {
-        console.error( error );
-    } );
+})
+    .catch(error => {
+        console.error(error);
+    });

@@ -3,20 +3,20 @@
 namespace Modules\EMap\Entities;
 
 use App\Models\Address\District;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class HouseOwner extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -24,9 +24,13 @@ class HouseOwner extends Model
         'name',
         'phone',
         'father_name',
+        'grandfather_name',
         'citizenship_issue_district_id',
         'citizenship_no',
         'citizenship_issue_date',
+        'address',
+        'local_body',
+        'ward_no',
     ];
 
     public function mapApply(): BelongsTo

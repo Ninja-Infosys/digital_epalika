@@ -9,7 +9,7 @@ class DigitalBoardDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            DigitalBoardPermissionTableSeeder::class
+            DigitalBoardPermissionTableSeeder::class,
         ]);
     }
 }

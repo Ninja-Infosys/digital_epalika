@@ -3,6 +3,13 @@
     <section class="inner-section">
         <div class="container">
             <div class="row">
+                <div class="breadcrumb d-flex pt-2">
+                    <div class="breadcrumb-item">
+                        <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
+                        <i class="fa fa-angle-double-right"></i>
+                        <a class="ml-1 text-primary-500">गुनासो</a>
+                    </div>
+                </div>
                 <div class="col-md-6 mt-3">
                     <div class="row">
                         <div class="col-md-6 p-2">
@@ -10,11 +17,11 @@
                                 <div class="card-body">
                                     <h5 class="card-title mt-2 mb-3">गुनासो दर्ता</h5>
                                     <img class="icon" src="{{asset('assets/frontend/image/complain.png')}}" alt="">
-                                    <p class="card-text mt-2"><small>
+                                    <h6 class="card-text mt-2">
                                             नयाँ गुनासोको दर्ता गर्नुहोस् ।
-                                        </small></p>
+                                        </h6>
                                     <a href="{{route('grievanceHandling.grievance-register')}}" class="btn btn-primary">गुनासो
-                                        थप
+                                        दर्ता
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
@@ -25,7 +32,7 @@
                                 <div class="card-body">
                                     <h5 class="mt-2 mb-3 card-title">उजुरी/गुनासो नीति</h5>
                                     <img class="icon" src="{{asset('assets/frontend/image/insurance.png')}}" alt="">
-                                    <p class="card-text mt-2"><small>उजुरी/गुनासो समाधान नीति ।</small></p>
+                                    <h6 class="card-text mt-2">उजुरी/गुनासो समाधान नीति ।</h6>
                                     <a href="{{route('grievanceHandling.policy')}}" class="btn btn-primary"><span>नीतिहरु</span>
                                         <i class="fa fa-plus"></i>
                                     </a>
@@ -37,8 +44,8 @@
                                 <div class="card-body">
                                     <h5 class="mt-2 mb-3 card-title">गुनासो ट्र्याक</h5>
                                     <img class="icon" src="{{asset('assets/frontend/image/track.png')}}" alt="">
-                                    <p class="card-text mt-2"><small>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन ।</small>
-                                    </p>
+                                    <h6 class="card-text mt-2">गुनासो/उजुरीको स्थिती थाहा पाउन ।
+                                    </h6>
                                     <a href="{{route('grievanceHandling.track')}}" class="btn btn-primary"><span>गुनासो ट्र्याक</span>
                                         <i class="fa fa-plus"></i>
                                     </a>
@@ -50,8 +57,8 @@
                                 <div class="card-body">
                                     <h5 class="mt-2 mb-3 card-title">गुनासो लग इन</h5>
                                     <img class="icon" src="{{asset('assets/frontend/image/login.png')}}" alt="">
-                                    <p class="card-text mt-2"><small>तपाईंको गुनासो/उजुरीको स्थिती थाहा पाउन ।</small>
-                                    </p>
+                                    <h6 class="card-text mt-2"> गुनासो/उजुरी लग इन ।
+                                    </h6>
                                     <a href=""
                                        class="btn btn-primary"><span>लग इन</span>
                                         <i class="fa fa-plus"></i>
@@ -68,7 +75,7 @@
                                 <div class="card-body">
                                     <i class="fa fa-file-contract fs-3"></i>
                                     <h4 class="fw-bold mt-2">1</h4>
-                                    <p class="fw-semibold">कुल प्राप्त गुनासो</p>
+                                    <h6 class="fw-semibold">कुल प्राप्त गुनासो</h6>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +84,7 @@
                                 <div class="card-body">
                                     <i class="fa fa-file fs-3"></i>
                                     <h4 class="fw-bold mt-2">0</h4>
-                                    <p class="fw-semibold">कुल दर्ता गुनासो</p>
+                                    <h6 class="fw-semibold">कुल दर्ता गुनासो</h6>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +93,7 @@
                                 <div class="card-body">
                                     <i class="fa fa-check-double fs-3"></i>
                                     <h4 class="fw-bold mt-2">5</h4>
-                                    <p class="fw-semibold">फर्छ्यौट भएको</p>
+                                    <h6 class="fw-semibold">फर्छ्यौट भएको</h6>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +104,7 @@
                                 <div class="card-body">
                                     <i class="fa fa-search fs-3"></i>
                                     <h4 class="fw-bold mt-2">8</h4>
-                                    <p class="fw-semibold">अनुसन्धान गरिदै</p>
+                                    <h6 class="fw-semibold">अनुसन्धान गरिदै</h6>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +113,7 @@
                                 <div class="card-body">
                                     <i class="fa fa-eye fs-3"></i>
                                     <h4 class="fw-bold mt-2">9</h4>
-                                    <p class="fw-semibold">हेरिएको</p>
+                                    <h6 class="fw-semibold">हेरिएको</h6>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +122,7 @@
                                 <div class="card-body">
                                     <i class="fa fa-eye-slash fs-3"></i>
                                     <h4 class="fw-bold mt-2">0</h4>
-                                    <p class="fw-semibold">नहेरिएको</p>
+                                    <h6 class="fw-semibold">नहेरिएको</h6>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +131,7 @@
             </div>
             <div class="row mt-4">
                 <div class="col-md-5 card">
-                    <h4 class="fw-bold heading-line">गुनासो प्राप्त भएका गुनासो प्रकृतिहरु</h4>
+                    <h5 class="fw-semibold heading-line">गुनासो प्राप्त भएका गुनासो प्रकृतिहरु</h5>
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -144,7 +151,7 @@
                     </table>
                 </div>
                 <div class="card col-md-7 grievance-answer">
-                    <h4 class="fw-bold heading-line">सार्वजनिक गरिएका गुनासोहरु</h4>
+                    <h5 class="fw-semibold heading-line">सार्वजनिक गरिएका गुनासोहरु</h5>
                     <p>
                         @foreach($grievanceDetails as $grievanceDetail)
                         <button class="btn w-100" data-bs-toggle="collapse" data-bs-target="#collapse{{$loop->iteration}}"
@@ -167,9 +174,6 @@
             </div>
         </div>
     </section>
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/index.css')}}">
-    @endpush
 @endsection
 
 

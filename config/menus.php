@@ -1,39 +1,24 @@
-<?php return [
-    'circular' => ['title' => 'दर्ता/चलानी',
-        'submenu' => [
-            [
-                'title' => 'सेटिंग',
-                'url' => 'admin.digitalBoard.video.index',
-                'active-route' => 'admin.digitalBoard.video.*'
-            ],
-            [
-                'title' => 'सेटिंग',
-                'url' => 'admin.digitalBoard.notice.index',
-                'active-route' => 'admin.digitalBoard.notice.*'
-            ]
-        ],
-    ],
+<?php
 
-    'digital-board' => ['title' => 'डिजिटल बोर्ड',
-        'permission'=>'board',
-        'submenu' => [
-            [
-                'title' => 'सेटिंग',
-                'url' => 'admin.digitalBoard.video.index',
-                'active-route' => 'admin.digitalBoard.video.*',
-                'permission'=>'digitalBoard'
-            ],
-            [
-                'title' => 'सेटिंग',
-                'url' => 'admin.digitalBoard.notice.index',
-                'active-route' => 'admin.digitalBoard.notice.*'
-            ]
-        ],
+return [
+    'modules' => [
+        'digitalboard',
+        'circular',
+        'helpdesk',
+        'grievancehandling',
+        'emap',
+        'businessregistration',
+        'executivemeeting',
+        'listregistration',
+        'roaster',
+        'grant',
+        'judicialcommittee',
+        'taskmanagement',
+        'recommendation',
+        'plan'
     ],
-
-    'digital' => ['title' => 'डिजिटल',
-        'url' => 'admin.dashboard',
-        'submenu' => [
-        ],
+    'sidebars' => [
+        'website',
+        'setting',
     ],
 ];

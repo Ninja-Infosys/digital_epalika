@@ -15,27 +15,22 @@
             </a>
 
         </li>
+        @if(auth('organization')->user()->is_organization==1)
+        <li class="{{Route::is('organization.admin.clients.taxClearance.*') ? 'mm-active':''}}">
+            <a href="{{route('organization.admin.taxClearance.index')}}">
+                <img src="{{asset('assets/backend/emap/admin/img/menu-icon/6.svg')}}" alt="">
+                <span>कर चुक्ता</span>
+            </a>
+        </li>
+        @endif
 
-        <li class="{{Route::is('organization.admin.clients.client.*')?'mm-active':''}}">
-            <a href="{{route('organization.admin.clients.client.index')}}">
+        <li class="{{Route::is('organization.admin.mapApply.*')?'mm-active':''}}">
+            <a href="{{route('organization.admin.mapApply.index')}}">
 
                 <img src="{{asset('assets/backend/emap/admin/img/menu-icon/6.svg')}}" alt="">
-                <span>सेवाग्राही</span>
+                <span>नक्सा</span>
             </a>
 
         </li>
-
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="{{asset('assets/backend/emap/admin/img/menu-icon/2.svg')}}" alt="">
-                <span>Pages</span>
-            </a>
-            <ul>
-                <li><a href="/login">Login</a></li>
-                <li><a href="resister.html">Register</a></li>
-                <li><a href="forgot_pass.html">Forgot Password</a></li>
-            </ul>
-        </li>
-
     </ul>
 </nav>

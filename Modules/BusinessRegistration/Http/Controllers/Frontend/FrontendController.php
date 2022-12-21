@@ -2,30 +2,45 @@
 
 namespace Modules\BusinessRegistration\Http\Controllers\Frontend;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\BusinessRegistration\Entities\ProprietorDetail;
 
 class FrontendController extends Controller
 {
-
     public function business()
     {
         return view('businessregistration::frontend.index');
     }
 
+    public function printDetail(BusinessDetail $businessDetail)
+    {
+        $businessDetail->load(
+            'proprietorDetail.province',
+            'proprietorDetail.district',
+            'proprietorDetail.localBody',
+            'proprietorDetail',
+        );
+
+        return view('businessregistration::frontend.printDetail', compact('businessDetail'));
+    }
+
     public function printPdf(ProprietorDetail $proprietorDetail)
     {
-        $proprietorDetail->load('province','district','localBody','threeGenerationDetails',
-            'introboard', 'businessDetail.province','businessDetail.district',
+        $proprietorDetail->load(
+            'province',
+            'district',
+            'localBody',
+            'threeGenerationDetails',
+            'introboard',
+            'businessDetail.province',
+            'businessDetail.district',
             'businessDetail.localBody',
             'businessRegisteredFile',
             'businessDetail.partnerDetails',
             'businessDetail.registeredBusinesses'
         );
+
         return view('businessregistration::frontend.print', compact('proprietorDetail'));
     }
-
-
 }

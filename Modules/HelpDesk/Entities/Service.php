@@ -2,23 +2,24 @@
 
 namespace Modules\HelpDesk\Entities;
 
+use App\Models\Settings\Branch;
 use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class Service extends Model
 {
-    use HasFactory, SoftDeletes,EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -37,16 +38,16 @@ class Service extends Model
 
     public function serviceDocuments(): HasMany
     {
-        return $this->hasMany(ServiceDocument::class);
+        return $this->hasMany(ServiceDocument::class)->orderBy('position');
     }
 
     public function serviceProcesses(): HasMany
     {
-        return $this->hasMany(ServiceProcess::class);
+        return $this->hasMany(ServiceProcess::class)->orderBy('position');
     }
 
     public function serviceEmployees(): HasMany
     {
-        return $this->hasMany(ServiceEmployee::class);
+        return $this->hasMany(ServiceEmployee::class)->orderBy('position');
     }
 }

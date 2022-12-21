@@ -1,0 +1,215 @@
+<?php
+
+namespace Modules\BusinessRegistration\Http\Controllers\Admin;
+
+use App\Models\Settings\FiscalYear;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
+use Modules\BusinessRegistration\Entities\BusinessDetail;
+use Modules\BusinessRegistration\Entities\BusinessPurpose;
+use Modules\BusinessRegistration\Entities\InvestmentRevenue;
+use Modules\BusinessRegistration\Entities\ObjectTransaction;
+use Illuminate\Support\Facades\View;
+
+class ReportController extends Controller
+{
+    public function getRequiredData()
+    {
+        $fiscalYears = FiscalYear::get();
+        $businessPurposes = BusinessPurpose::get();
+        $objectTransactions = ObjectTransaction::get();
+        $investmentRevenues = InvestmentRevenue::get();
+        $businessYears = $this->setBusinessYear();
+        $investmentData = $this->setInvestmentData();
+        $employmentData = $this->setEmploymentData();
+        $introBoardData = $this->setIntroBoardData();
+        $columnData = $this->getColumns();
+
+        return view('businessregistration::admin.businessRegistrationReport.index', compact([
+            'fiscalYears',
+            'businessPurposes',
+            'objectTransactions',
+            'investmentRevenues',
+            'businessYears',
+            'investmentData',
+            'employmentData',
+            'introBoardData',
+            'columnData',
+        ]));
+    }
+
+    public function report(Request $request)
+    {
+        $request->validate([
+            'from_date' => ['nullable'],
+            'to_date' => ['nullable', 'after_or_equal:from_date'],
+            'columns' => ['nullable', 'array']
+        ]);
+
+        if (!empty($request->input('columns.business_details'))) {
+            $filteredColumns = $request->input('columns.business_details');
+        }
+
+        $businessDetails = BusinessDetail::with('proprietorDetail')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+            })
+            ->get();
+
+        return response()->json([
+            'view' => (string)View::make('businessregistration::admin.businessRegistrationReport.report_table', compact('businessDetails'))
+        ]);
+    }
+
+
+    private function filterRegistrationRenewal($businessDetails, $request)
+    {
+        if (!empty($request->input('registration_renewal'))) {
+            $businessDetails = $businessDetails->filter(function ($detail) use ($request) {
+                if (!empty($detail->proprietorDetail)) {
+                    $businessType = (int)$detail->proprietorDetail->business_type;
+                    return in_array($businessType, $request->input('registration_renewal'), true);
+                }
+                return false;
+            });
+        }
+        return $businessDetails;
+    }
+
+
+    private function setBusinessYear(): array
+    {
+        $years = [];
+        $minYear = Carbon::create(BusinessDetail::select('establish_year')->min('establish_year'));
+        $maxYear = Carbon::create(BusinessDetail::select('establish_year')->max('establish_year'));
+        $range = CarbonPeriod::create($minYear, '1 year', $maxYear);
+
+        foreach ($range as $year) {
+            $years[] = $year->year;
+        }
+        return $years;
+    }
+
+    private function setInvestmentData(): array
+    {
+        return [
+            'from' => 0,
+            'to' => (int)BusinessDetail::select('amount_cost')->max('amount_cost')
+        ];
+    }
+
+    private function setEmploymentData(): array
+    {
+        return [
+            'from' => 0,
+            'to' => (int)BusinessDetail::select('employment')->max('employment')
+        ];
+    }
+
+    private function setIntroBoardData(): array
+    {
+        return [
+            'from' => 0,
+            'to' => (int)BusinessDetail::select('square')->max('square'),
+        ];
+    }
+
+    private function getColumns(): Collection
+    {
+        $columnData = collect();
+
+        (new BusinessDetail())
+            ->ownAndRelatedModelsFillableColumns()
+            ->filter(function ($column) {
+                return array_keys($column, 'BusinessDetail')
+                    || array_keys($column, 'proprietorDetail')
+                    || array_keys($column, 'partnerDetails')
+                    || array_keys($column, 'businessPurposes')
+                    || array_keys($column, 'registeredBusinesses');
+            })
+            ->each(function ($column) use ($columnData) {
+                $columnData->push(collect($column)->put('columns', $column['columns']));
+            });
+        return $columnData;
+    }
+
+    public function filterDataFromUser($q, Request $request): void
+    {
+        $this->filterFromIntroBoard($request, $q);
+        $this->filterFromRegistrationDate($request, $q);
+
+        if (!empty($request->input('fiscal_year'))) {
+            $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
+        }
+
+        if (!empty($request->input('business_nature'))) {
+            $q->whereIn('business_nature', $request->input('business_nature'));
+        }
+
+        if (!empty($request->input('business_purpose'))) {
+            $q->whereIn('investment_revenue_id', $request->input('business_purpose'));
+        }
+
+        if (!empty($request->input('investment_revenue'))) {
+            $q->whereIn('investment_revenue_id', $request->input('investment_revenue'));
+        }
+
+        if (!empty($request->input('object_transaction'))) {
+            $q->whereIn('object_transaction_id', $request->input('object_transaction'));
+        }
+
+        if (!empty($request->input('investment.from'))) {
+            $q->where('amount_cost', '>=', (int)$request->input('investment.from'));
+        }
+
+        if (!empty($request->input('investment.to'))) {
+            $q->where('amount_cost', '<=', (int)$request->input('investment.to'));
+        }
+
+        if (!empty($request->input('employment.from'))) {
+            $q->where('employment', '>=', (int)$request->input('employment.from'));
+        }
+        if (!empty($request->input('employment.to'))) {
+            $q->where('employment', '<=', (int)$request->input('employment.to'));
+        }
+
+        if (!empty($request->input('business_year'))) {
+            $q->whereIn('establish_year', $request->input('business_year'));
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $q
+     * @return void
+     */
+    public function filterFromRegistrationDate(Request $request, $q): void
+    {
+        if (!empty($request->input('from_date'))) {
+            $q->whereDate('registration_date_ne', '>=', $request->input('from_date'));
+        }
+
+        if (!empty($request->input('to_date'))) {
+            $q->whereDate('registration_date_ne', '<=', $request->input('to_date'));
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $q
+     * @return void
+     */
+    public function filterFromIntroBoard(Request $request, $q): void
+    {
+        if (!empty($request->input('introBoard.from'))) {
+            $q->where('square', '>=', $request->input('introBoard.from'));
+        }
+
+        if (!empty($request->input('introBoard.to'))) {
+            $q->where('square', '<=', $request->input('introBoard.to'));
+        }
+    }
+}

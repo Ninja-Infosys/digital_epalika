@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -38,6 +37,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+@includeIf('inc.filter_form')
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
@@ -51,9 +51,8 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>
-                                       {{$fiscalYear->title}}
+                                        {{$fiscalYear->title}}
                                     </td>
-
                                     <td>
                                         @can('user_edit')
                                             <a href="{{route('admin.fiscalYear.edit',$fiscalYear)}}"
@@ -80,7 +79,12 @@
                             @endforelse
                             </tbody>
                         </table>
+
                     </div>
+                    <div class="mt-2">
+                        {{ $fiscalYears->links() }}
+                    </div>
+
                 </div>
             </div>
         </div>

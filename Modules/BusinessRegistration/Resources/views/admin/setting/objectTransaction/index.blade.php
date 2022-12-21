@@ -11,12 +11,13 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">व्यवसाय को प्रकृति </a>
+                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">व्यवसाय को
+                                प्रकृति </a>
                         </li>
-                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु  </li>
+                        <li class="breadcrumb-item active">कारोबार गर्ने वस्तु</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कारोबार गर्ने वस्तु  </h4>
+                <h4 class="page-title">कारोबार गर्ने वस्तु </h4>
             </div>
         </div>
     </div>
@@ -26,22 +27,26 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">कारोबार गर्ने वस्तु  सूची</h4>
+                        <h4 class="header-title">कारोबार गर्ने वस्तु सूची</h4>
 
+                        @can('objectTransaction_create')
                             <a href="{{route('admin.businessRegistration.setting.objectTransaction.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ वकारोबार गर्ने वस्तु  थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ वकारोबार गर्ने वस्तु थप्नुहोस्
                             </a>
+                        @endcan
 
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक </th>
+                                <th>कारोबार गर्ने वस्तुको वर्ग</th>
+                                <th>शिर्षक</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -49,19 +54,25 @@
                             @forelse($objectTransactions as $objectTransaction)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$objectTransaction->objectTransaction->title ?? ''}}</td>
                                     <td>{{$objectTransaction->title}}</td>
                                     <td>
-                                        <a href="{{route('admin.businessRegistration.setting.objectTransaction.edit',$objectTransaction)}}"
-                                           class="btn btn-xs btn-outline-warning">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
-                                        <form action="{{route('admin.businessRegistration.setting.objectTransaction.destroy',$objectTransaction)}}"
-                                              method="post">
+                                        @can('objectTransaction_edit')
+                                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.edit',$objectTransaction)}}"
+                                               class="btn btn-xs btn-outline-warning">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+                                        <form
+                                            action="{{route('admin.businessRegistration.setting.objectTransaction.destroy',$objectTransaction)}}"
+                                            method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
+                                            @can('objectTransaction_delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>
@@ -72,6 +83,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $objectTransactions->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

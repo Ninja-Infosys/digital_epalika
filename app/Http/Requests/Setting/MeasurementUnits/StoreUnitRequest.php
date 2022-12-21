@@ -28,7 +28,7 @@ class StoreUnitRequest extends FormRequest
         return [
             'measurement_unit_id.required' => 'एकाइ मापन आवश्यक छ',
             'title.required' => 'शिर्षक आबश्यक छ ',
-            'position.integer' => 'स्थिति अङ्क मा हुनुपर्छ '
+            'position.integer' => 'स्थिति अङ्क मा हुनुपर्छ ',
         ];
     }
 }

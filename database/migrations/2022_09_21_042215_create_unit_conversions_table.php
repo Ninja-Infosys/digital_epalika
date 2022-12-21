@@ -4,14 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class () extends Migration {
     public function up()
     {
         Schema::create('unit_conversions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('conversion_from')->constrained('units');
-            $table->foreignId('conversion_to')->constrained('units');
-            $table->string('rate')->default(1);
+            $table->foreignId('conversion_from')->comment('बाट रूपान्तरण')->constrained('units');
+            $table->foreignId('conversion_to')->comment('मा रूपान्तरण')->constrained('units');
+            $table->string('rate')->default(1)->comment('दर');
             $table->timestamps();
             $table->softDeletes();
         });

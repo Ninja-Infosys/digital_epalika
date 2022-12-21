@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Setting;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Setting\Designation\StoreDesignationRequest;
+use App\Http\Requests\Setting\Designation\UpdateDesignationRequest;
+use App\Models\Settings\Designation;
+
+class DesignationController extends Controller
+{
+    public function index()
+    {
+        $this->checkAuthorization('designation_access');
+        $designations = Designation::latest()->get();
+
+        return view('admin.setting.designation.index', compact('designations'));
+    }
+
+    public function create()
+    {
+        $this->checkAuthorization('designation_create');
+
+        return view('admin.setting.designation.create');
+    }
+
+    public function store(StoreDesignationRequest $request)
+    {
+        $this->checkAuthorization('designation_create');
+        $designation = Designation::create($request->validated());
+
+        toast('पदनाम सफलतापूर्वक थपियो!', 'success');
+
+        return redirect()->route('admin.designation.index');
+    }
+
+    public function edit(Designation $designation)
+    {
+        $this->checkAuthorization('designation_edit');
+
+        return view('admin.setting.designation.edit', compact('designation'));
+    }
+
+    public function update(UpdateDesignationRequest $request, Designation $designation)
+    {
+        $this->checkAuthorization('designation_edit');
+        $designation->update($request->validated());
+        toast('Designation Updated successfully!', 'success');
+
+        return redirect(route('admin.designation.index'));
+    }
+
+    public function destroy(Designation $designation)
+    {
+        $this->checkAuthorization('designation_delete');
+        $designation->delete();
+        toast('पदनाम सफलतापूर्वक मेटियो!', 'success');
+
+        return back();
+    }
+}

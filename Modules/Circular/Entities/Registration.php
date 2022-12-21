@@ -2,13 +2,12 @@
 
 namespace Modules\Circular\Entities;
 
-use App\Models\Address\District;
-use App\Models\Address\LocalBody;
-use App\Models\Address\Province;
 use App\Models\File;
+use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,22 +16,25 @@ use Illuminate\Support\Str;
 
 class Registration extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
+    use GetAllColumns;
 
     protected $dates = [
-        'registration_date',
-        'letter_date',
-        'date',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
+        'fiscal_year_id',
         'registration_no',
         'registration_date',
+        'en_registration_date',
         'letter_number',
         'letter_date',
+        'en_letter_date',
         'sender_name',
         'subject',
         'receiver_name',
@@ -44,14 +46,22 @@ class Registration extends Model
 
     public function getSignatureImageUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->attributes['signature_image']);
+        return
+            $this->attributes['signature_image']
+                ? Storage::disk('public')->url($this->attributes['signature_image'])
+                : '';
     }
 
     public function setSignatureImageAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['signature_image'] = $value->store('registration/' . Str::slug($this->attributes['receiver_name'], '_') . '/signature', 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['signature_image'] = $value->store('registration/'.Str::slug($this->attributes['receiver_name'], '_').'/signature', 'public');
         }
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
     }
 
     public function files(): MorphMany

@@ -18,5 +18,8 @@ Route::prefix('helpdesk')->group(function () {
 });
 
 Route::get('service/{service}', [FrontController::class, 'showServiceDetail'])->name('service.view');
-Route::view('/helpdesk', 'helpdesk::frontend.index')->name('helpdesk.helpdesk');
-Route::view('/service', 'helpdesk::frontend.services.service');
+
+Route::controller(FrontController::class)->group(function () {
+    Route::get('helpdesk', 'helpDesk')->name('helpdesk.helpdesk');
+    Route::get('service', 'service')->name('service');
+});

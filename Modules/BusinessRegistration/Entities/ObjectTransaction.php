@@ -2,34 +2,35 @@
 
 namespace Modules\BusinessRegistration\Entities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\EventObserveTrait;
 
 class ObjectTransaction extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
         'title',
+        'object_transaction_id',
     ];
 
-    public function objectTransactionSubCategories()
+    public function objectTransaction(): BelongsTo
     {
-        return $this->hasMany(ObjectTransactionSubCategory::class);
+        return $this->belongsTo(__CLASS__);
     }
-    public function businessDetails(): BelongsToMany
+
+    public function objectTransactions(): HasMany
     {
-        return $this->belongsToMany(BusinessDetail::class);
+        return $this->hasMany(__CLASS__);
     }
 }

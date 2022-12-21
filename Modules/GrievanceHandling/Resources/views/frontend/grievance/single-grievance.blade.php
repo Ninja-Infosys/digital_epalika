@@ -1,26 +1,26 @@
 @extends('frontend.layouts.master')
 @section('content')
     <section class="inner-section mt-lg-5 ">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row d-flex mt-5 ">
                 <div class="breadcrumb d-flex">
                     <div class="breadcrumb-item">
                         <a class="whitespace-nowrap text-primary-500" href="{{route('grievanceHandling.grievance')}}">गुनासो</a>
-                        <i class="fa fa-double-right ml-lg-1"></i><a class="ml-1 text-primary-500">नीति सुची</a>
+                        <i class="fa fa-angle-double-right ml-lg-1"></i><a class="ml-1 text-primary-500">गुनासो ट्रयाक</a>
                     </div>
                 </div>
                 <div class="row bg-card shadow rounded overflow-hidden">
                     <div class="d-flex justify-content-start">
                         <h4 class="text-center mt-5">गुनासो विषय: {{$grievanceDetail->subject}}</h4>
                     </div>
-                    <div class="col-md-7"><p>गुनासो प्रकार: {{$grievanceDetail->grievanceType->title??''}}</p></div>
-                    <div class="col-md-5"><p>सम्वन्धित शाखा: {{$grievanceDetail->grievanceOffice->title??''}}</p></div>
-                    <div>आवेदक नम्बर: {{$grievanceDetail->grievanceUser->phone??''}}</div>
+                    <div class="col-md-7"><h6>गुनासो प्रकार: {{$grievanceDetail->grievanceType->title??''}}</h6></div>
+                    <div class="col-md-5"><h6>सम्वन्धित शाखा: {{$grievanceDetail->grievanceOffice->title??''}}</h6></div>
+                    <div><h6>आवेदक नम्बर: {{$grievanceDetail->grievanceUser->phone??''}}</h6></div>
                     <div class=" row mt-4 border rounded mx-auto">
                         <div class=" single-grievance-details  d-flex px-3 py-2">
                             <img src="{{asset('assets/frontend/image/avatar.png')}}"
                                  class="img-fluid rounded-circle mt-1" alt="">
-                            <p>{{$grievanceDetail->description}}</p>
+                            <h6>{{$grievanceDetail->description}}</h6>
                         </div>
                         <hr>
                         <div class="row">
@@ -37,8 +37,8 @@
                     <div class="row mt-4 mb-2 border rounded mx-auto">
                         @foreach($grievanceDetail->grievanceDetails as $details)
                         <div class=" single-grievance-details px-3 pt-2 d-flex justify-content-end">
-                            <p>{{$details->description}}
-                            </p>
+                            <h6>{{$details->description}}
+                            </h6>
                             <img src="{{asset('assets/frontend/image/avatar.png')}}"
                                  class="img-fluid rounded-circle mt-1 rounded" alt="">
                         </div>
@@ -63,12 +63,7 @@
 {{--                        </form>--}}
 {{--                    </div>--}}
                 </div>
-
             </div>
         </div>
     </section>
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/grievance/policy.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
-    @endpush
 @endsection

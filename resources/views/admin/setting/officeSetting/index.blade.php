@@ -220,7 +220,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="introduction" class="form-label">परिचय </label>
                                     <textarea name="introduction" id="introduction" cols="30" placeholder="परिचय"
-                                              class="form-control summernote @error('introduction') is-invalid @enderror"
+                                              class="form-control ckEditor @error('introduction') is-invalid @enderror"
                                               rows="5">{{old('introduction',$officeSetting->introduction)}}</textarea>
                                     @error('introduction')
                                     <div class="invalid-feedback">{{$message}}</div>
@@ -276,19 +276,23 @@
                                             <td>{{$officeheader->position}}</td>
                                             <td>
 
-                                                <a href="{{route('admin.officeHeader.edit',$officeheader)}}"
-                                                   class="btn btn-xs btn-outline-primary">
-                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                                </a>
+                                                @can('officeHeader_edit')
+                                                    <a href="{{route('admin.officeHeader.edit',$officeheader)}}"
+                                                       class="btn btn-xs btn-outline-primary">
+                                                        <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                    </a>
+                                                @endcan
 
 
                                                 <form action="{{route('admin.officeHeader.destroy',$officeheader)}}"
                                                       method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                    </button>
+                                                    @can('officeHeader_delete')
+                                                        <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                            <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                        </button>
+                                                    @endcan
                                                 </form>
 
                                             </td>
@@ -306,4 +310,13 @@
             </div>
         </div>
     </div>
+
+    @push('style')
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">
+        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">
+    @endpush
+    @push('scripts')
+        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
+        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+    @endpush
 @endsection

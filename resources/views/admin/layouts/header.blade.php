@@ -1,48 +1,24 @@
 <div class="navbar-custom">
     <div class="container-fluid">
-
-
         <ul class="list-unstyled topnav-menu float-end mb-0">
-
-            <li class="nav-link">
-                <iframe class="text-white" scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0"
-                        allowtransparency="true"
-                        src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=ffffff&aj_time=yes&font_size=14&line_brake=1&api=392199m324"
-                        width="195" height="45"></iframe>
+            <li class="border rounded p-1 mt-3">
+                <h4 class="text-blue" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
-            <li class="nav-link">
-                <h4 class="text-white pt-3">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
-            </li>
-
             <li class="dropdown d-inline-block d-lg-none">
-                <a
-                    class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-haspopup="false"
-                    aria-expanded="false"
-                >
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
+                   data-bs-toggle="dropdown"
+                   href="#"
+                   role="button"
+                   aria-haspopup="false"
+                   aria-expanded="false">
                     <i class="fa fa-search noti-icon"></i>
                 </a>
-                <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-                    <form class="p-3">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Search ..."
-                            aria-label="Recipient's username"
-                        />
-                    </form>
-                </div>
             </li>
 
             <li class="dropdown d-none d-lg-inline-block">
-                <a
-                    class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
-                    data-toggle="fullscreen"
-                    href="#"
-                >
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
+                   data-toggle="fullscreen" id="full-tour"
+                   href="#">
                     <i class="fa fa-expand-arrows-alt noti-icon"></i>
                 </a>
             </li>
@@ -54,136 +30,137 @@
                     href="#"
                     role="button"
                     aria-haspopup="false"
-                    aria-expanded="false"
-                >
-                    <i class="fa fa-bell noti-icon"></i>
-                    <span class="badge bg-danger rounded-circle noti-icon-badge"
-                    >9</span
-                    >
+                    aria-expanded="false" id="noti-tour">
+                    <i @class([
+            'ring-bell'=>count(auth()->user()->unreadNotifications)>0,
+            'fa', 'fa-bell', 'noti-icon'
+            ])></i>
+                    @if(count(auth()->user()->unreadNotifications)>0)
+                        <span class="badge bg-danger rounded-circle noti-icon-badge">
+                        {{count(auth()->user()->unreadNotifications)}}</span>
+                    @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
                     <!-- item-->
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
-                    <span class="float-end">
-                      <a href="#" class="text-dark">
-                        <small>Clear All</small>
-                      </a> </span
-                    >Notification
-                        </h5>
+                            <span class="float-end">
+                      <a href="{{route('admin.notification.readAllNotification')}}" class="text-dark">
+                        <small>सबै खाली गर्नुहोस्</small>
+                      </a> </span>नोटिफिकेसन</h5>
                     </div>
 
                     <div class="noti-scroll" data-simplebar>
-                        <a
-                            href="javascript:void(0);"
-                            class="dropdown-item notify-item"
-                        >
-                            <div class="notify-icon bg-secondary">
-                                <i class="mdi mdi-heart"></i>
-                            </div>
-                            <p class="notify-details">
-                                Carlos Crouch liked
-                                <b>Admin</b>
-                                <small class="text-muted">13 days ago</small>
-                            </p>
-                        </a>
+                        @forelse (auth()->user()->unreadNotifications as $notification)
+                            <a
+                                href="{{ route('admin.notification.read',$notification) }}"
+                                class="dropdown-item notify-item"
+                            >
+                                <div class="notify-icon bg-secondary">
+                                    <i class="fa fa-heart"></i>
+                                </div>
+                                <p class="notify-details">
+                                    {{class_basename($notification->type)}}
+
+                                    <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
+                                </p>
+                            </a>
+                        @empty
+                            <h4 class="text-center">कुनै डाटा उपलब्ध छैन !</h4>
+                        @endforelse
                     </div>
 
                     <!-- All-->
-                    <a
-                        href="javascript:void(0);"
-                        class="dropdown-item text-center text-primary notify-item notify-all"
-                    >
-                        View all
+                    <a href="{{route('admin.notification')}}"
+                       class="dropdown-item text-center text-primary notify-item notify-all">
+                        सबै हेर्नुहोस्
                         <i class="fe-arrow-right"></i>
                     </a>
                 </div>
             </li>
 
             <li class="dropdown notification-list topbar-dropdown">
-                <a
-                    class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-haspopup="false"
-                    aria-expanded="false"
-                >
-                    <img
-                        src="{{auth()->user()->profile_photo_url}}"
-                        alt="user-image"
-                        class="rounded-circle"
-                    />
+                <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
+                   data-bs-toggle="dropdown"
+                   href="#"
+                   role="button"
+                   aria-haspopup="false"
+                   aria-expanded="false" id="profile-tour">
+                    <img src="{{auth()->user()->profile_photo_url ?? ''}}"
+                         alt="user-image"
+                         class="rounded-circle"/>
                     <span class="pro-user-name ms-1">
-                  {{auth()->user()->name}} <i class="fa fa-angle-down"></i>
+                  {{auth()->user()->name ?? ''}} <i class="fa fa-angle-down"></i>
                 </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown">
 
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="{{route('admin.profile')}}" class="dropdown-item notify-item">
                         <i class="fa fa-user"></i>
-                        <span>My Profile</span>
+                        <span>मेरो प्रोफाइल</span>
                     </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fa fa-cog"></i>
-                        <span>Settings</span>
-                    </a>
-
                     <a href="{{route('admin.activityLog.index')}}" class="dropdown-item notify-item">
                         <i class="fa fa-tasks"></i>
                         <span>गतिविधिहरू</span>
                     </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fa fa-lock"></i>
-                        <span>Lock Screen</span>
+                    <a href="{{route('admin.setting.dashboard')}}" class="dropdown-item notify-item">
+                        <i class="fa fa-spin fa-cog"></i>
+                        <span>सेटिङ</span>
                     </a>
-
+                    <a href="{{route('admin.website.dashboard')}}" class="dropdown-item notify-item">
+                        <i class="fa  fa-cogs"></i>
+                        <span>वेबसाइट सेटिङ</span>
+                    </a>
                     <div class="dropdown-divider"></div>
-
                     <form action="{{route('logout')}}" method="post">
                         @csrf
                         <button type="submit" class="dropdown-item notify-item">
                             <i class="fa fa-sign-out-alt"></i>
-                            <span>Logout</span>
+                            <span>बाहिर निस्कनु</span>
                         </button>
                     </form>
                 </div>
             </li>
         </ul>
         <!-- LOGO -->
-        <div class="logo-box">
-            <a href="{{route('admin.dashboard')}}" class="logo logo-light text-center">
-              <span class="logo-sm">
-                <img src="{{asset('images/np.png')}}" alt="" height="40"/>
-              </span>
+        <div class="logo-box dropdown notification-list topbar-dropdown">
+            <a class="logo logo-light text-center nav-link dropdown-toggle waves-effect waves-light"
+               data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" id="menu-tour">
                 <span class="logo-lg">
-                <img src="{{asset('images/np.png')}}" alt="" height="60"/>
+                    @if(in_array(Str::lower(Request::segment(2)),config('menus.modules')))
+                        <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                             height="40"/>
+                    @elseif(in_array(Str::lower(Request::segment(2)),config('menus.sidebars')))
+                        <img src="{{asset('assets/backend/images/modules_logo/'.Str::lower(Request::segment(2)).'.png')}}" alt=""
+                             height="40"/>
+                    @else
+                        <img src="{{asset('assets/backend/images/logo.png')}}" alt=""
+                             height="35"/>
+                    @endif
               </span>
             </a>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                @includeIf('admin.layouts.menu_list')
+            </div>
         </div>
 
         <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+
             <li>
                 <button class="button-menu-mobile waves-effect waves-light">
                     <i class="fa fa-bars"></i>
                 </button>
             </li>
-            <li>
-                <h3 class=" px-3" style="color: #d91212"><b>{{$officeSetting->localBody->local_body ?? ''}}</b></h3>
-                <h4 class=" px-3 text-white"><b>e-पालिका व्यवस्थापन प्रणाली</b></h4>
-            </li>
 
+            <li class="dropdown d-none d-lg-inline-block">
+                <h3 class="text-light fw-bold mt-3">
+                    {{$officeSetting->localBody->local_body ?? ''}}
+                </h3>
+            </li>
             <li>
-                <!-- Mobile menu toggle (Horizontal Layout)-->
-                <a
-                    class="navbar-toggle nav-link"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#topnav-menu-content"
-                >
+                <a class="navbar-toggle nav-link"
+                   data-bs-toggle="collapse"
+                   data-bs-target="#topnav-menu-content">
                     <div class="lines">
                         <span></span>
                         <span></span>
@@ -192,6 +169,7 @@
                 </a>
                 <!-- End mobile menu toggle-->
             </li>
+
         </ul>
         <div class="clearfix"></div>
     </div>

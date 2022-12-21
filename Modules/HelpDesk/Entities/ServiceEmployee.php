@@ -3,8 +3,8 @@
 namespace Modules\HelpDesk\Entities;
 
 use App\Traits\EventObserveTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -12,12 +12,14 @@ use Illuminate\Support\Str;
 
 class ServiceEmployee extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -27,7 +29,7 @@ class ServiceEmployee extends Model
         'email',
         'phone',
         'designation',
-        'position'
+        'position',
     ];
 
     public function getPhotoUrlAttribute(): string
@@ -35,10 +37,10 @@ class ServiceEmployee extends Model
         return $this->photo ? Storage::disk('public')->url($this->attributes['photo']) : asset('images/user_icon.jpg');
     }
 
-    public function setPhotoAttribute($value)
+    public function setPhotoAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['photo'] = $value->store('service/' . Str::slug($this->attributes['employee_name'], '_'), 'public');
+        if (! empty($value) && ! is_string($value)) {
+            $this->attributes['photo'] = $value->store('service/'.Str::slug($this->attributes['employee_name'], '_'), 'public');
         }
     }
 

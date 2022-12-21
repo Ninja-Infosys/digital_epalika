@@ -18,16 +18,18 @@ class StoreDispatchRequest extends FormRequest
         return [
             'dispatch_no' => ['required', Rule::unique('dispatches', 'dispatch_no')->withoutTrashed()],
             'dispatch_date' => ['required'],
+            'en_dispatch_date' => ['nullable', 'date'],
             'letter_number' => ['required'],
             'letter_date' => ['required'],
+            'en_letter_date' => ['nullable', 'date'],
             'subject' => ['required', 'max:255'],
             'receiver_name' => ['required', 'max:255'],
             'receiver_address' => ['required', 'max:255'],
             'receiver_contact' => ['required'],
             'receiver_signature' => ['nullable', 'image'],
             'remarks' => ['nullable'],
-            'documents' => ['required', 'array'],
-            'documents.*' => ['mimes:jpg,jpeg,png,pdf']
+            'documents' => ['nullable', 'array'],
+            'documents.*' => ['mimes:jpg,jpeg,png,pdf'],
         ];
     }
 
@@ -37,6 +39,8 @@ class StoreDispatchRequest extends FormRequest
             'dispatch_no.required' => 'चलानी न. अनिबार्य छ',
             'dispatch_no.unique' => 'चलानी न. पहिले नै लिइएको छ।',
             'dispatch_date.required' => 'चलानी मिति अनिबार्य छ ',
+            'en_dispatch_date.required' => 'चलानी मिति अनिबार्य छ ',
+            'en_dispatch_date.date' => 'कृपया मान्य मिति प्रविष्ट गर्नुहोस्',
             'letter_number.required' => 'पत्र संख्या अनिबार्य छ ',
             'letter_date.required' => 'पत्रको मिति अनिबार्य छ',
             'subject.required' => 'बिषय अनिबार्य छ ',

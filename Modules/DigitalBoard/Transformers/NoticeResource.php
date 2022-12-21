@@ -7,15 +7,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class NoticeResource extends JsonResource
 {
-
     public function toArray($request)
     {
         return [
             'id' => $this->id ?? '',
             'title' => $this->title ?? '',
-            'date' => $this->date->toDateString() ?? '',
+            'date' => $this->date ?? '',
             'description' => $this->description ?? '',
-            'files' => FileResource::collection($this->whenLoaded('files'))
+            'files' => FileResource::collection($this->whenLoaded('files')),
         ];
     }
 }

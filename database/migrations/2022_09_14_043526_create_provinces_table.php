@@ -4,13 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class () extends Migration {
     public function up()
     {
         Schema::create('provinces', function (Blueprint $table) {
             $table->id();
-            $table->string('province');
-            $table->string('province_en')->nullable();
+            $table->string('province')->comment('प्रदेश ');
+            $table->string('province_en')->nullable()->comment('प्रदेश en');
             $table->timestamps();
             $table->softDeletes();
         });

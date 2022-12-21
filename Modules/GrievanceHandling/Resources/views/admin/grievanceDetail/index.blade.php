@@ -31,7 +31,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -53,31 +54,10 @@
                                     <td>{{$grievanceDetail->subject}}</td>
                                     <td>{{$grievanceDetail->created_at->toDateString()}}</td>
                                     <td>
-                                        @switch($grievanceDetail->complaint_severity)
-                                            @case('High priority')
-                                                उच्च प्राथमिकता
-                                                @break
-                                            @case('Priority')
-                                                प्राथमिकता
-                                                @break
-                                            @default
-                                                साधारण
-                                        @endswitch
-                                        </td>
+                                        {{$grievanceDetail->complaint_severity->label()}}
+                                    </td>
                                     <td>
-                                        @switch($grievanceDetail->status)
-                                            @case('Replied')
-                                                जवाफ दिएको
-                                                @break
-                                            @case('Investigated')
-                                                अनुसन्धान
-                                                @break
-                                            @case('Closed')
-                                                बन्द गरिएको
-                                                @break
-                                            @default
-                                                नहेरेको
-                                        @endswitch
+                                        {{$grievanceDetail->status->label()}}
                                     </td>
                                     <td>
                                         <a href="{{route('admin.grievanceHandling.grievanceDetail.show',$grievanceDetail)}}"
@@ -93,6 +73,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $grievanceDetails->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

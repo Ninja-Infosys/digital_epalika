@@ -3,26 +3,21 @@
 namespace App\Http\Controllers\Admin\Setting\Units;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Setting\MeasurementUnits\StoreUnitConversionRequest;
 use App\Http\Requests\StoreExternalUnitConversionRequest;
 use App\Models\Settings\Units\Unit;
 use App\Models\Settings\Units\UnitConversion;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class ExternalUnitConversionController extends Controller
 {
     public function index(Unit $unit)
     {
-        abort_if(Gate::denies('unit_access'),
-            403,
-            'You are not allowed to digital board news access'
-        );
+        $this->checkAuthorization('unit_access');
 
         $conversionUnits = Unit::where('type_id', $unit->type_id)
             ->where('is_smallest', 1)
             ->get();
         $conversions = UnitConversion::where('conversion_from', $unit->id)->get();
+
         return view('admin.setting.units.unit.conversion.external.index', compact('unit', 'conversionUnits', 'conversions'));
     }
 
@@ -33,12 +28,13 @@ class ExternalUnitConversionController extends Controller
                 $conversionData->update(['rate' => $conversion['rate'] ?? '']);
             } else {
                 UnitConversion::create($conversion + [
-                        'conversion_from' => $unit->id,
-                    ]);
+                    'conversion_from' => $unit->id,
+                ]);
             }
         }
 
         toast('मापन एकाइ रुपान्तरण सफलतापूर्वक थपियो', 'success');
+
         return redirect(route('admin.units.unit.index'));
     }
 }

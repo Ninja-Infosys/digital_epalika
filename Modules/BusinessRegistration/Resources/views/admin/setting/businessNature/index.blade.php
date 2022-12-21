@@ -37,11 +37,12 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-2">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक </th>
+                                <th>शिर्षक. </th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -51,17 +52,21 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$businessNature->title}}</td>
                                     <td>
+                                        @can('businessNature_edit')
                                         <a href="{{route('admin.businessRegistration.setting.businessNature.edit',$businessNature)}}"
                                            class="btn btn-xs btn-outline-warning">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
+                                        @endcan
                                         <form action="{{route('admin.businessRegistration.setting.businessNature.destroy',$businessNature)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
+                                            @can('businessNature_delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
+                                            @endcan
                                         </form>
                                     </td>
                                 </tr>
@@ -72,6 +77,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $businessNatures->onEachSide(5)->links() }}
                     </div>
                 </div>
             </div>

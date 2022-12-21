@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\Gate;
 
 class UpdateNewsRequest extends FormRequest
 {
-    public function authorize():bool
+    public function authorize(): bool
     {
         return Gate::allows('digitalBoardNews_edit');
     }
 
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'title'=>['required','string','max:255'],
-            'date'=>['nullable'],
-            'description'=>['nullable'],
+            'title' => ['required', 'string', 'max:255'],
+            'date' => ['nullable'],
+            'description' => ['nullable'],
         ];
     }
 }

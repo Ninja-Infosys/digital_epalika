@@ -1,0 +1,80 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.plan.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">बजेट शिर्षकहरू</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">बजेट शिर्षकहरू</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">बजेट शिर्षक सम्पादन गर्नुहोस</h4>
+                        <a href="{{route('admin.plan.budgetHead.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> बजेट शिर्षकहरू
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="{{route('admin.plan.budgetHead.update',$budgetHead)}}" method="post">
+                        @csrf
+                        @method('put')
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <label for="budget_head_id" class="form-label">मुख्य बजेट शिर्षक</label>
+                                <select
+                                    name="budget_head_id"
+                                    class="form-control @error('budget_head_id') is-invalid @enderror"
+                                    id="budget_head_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($mainBudgetHeads as $mainBudgetHead)
+                                        <option {{$mainBudgetHead->id==old('budget_head_id', $budgetHead->budget_head_id) ? 'selected' : ''}}
+                                                value="{{$mainBudgetHead->id}}">
+                                            {{$mainBudgetHead->title}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('budget_head_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="title" class="form-label">शिर्षक *</label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value="{{old('title',$budgetHead->title)}}"
+                                    class="form-control @error('title') is-invalid @enderror"
+                                    id="title"
+                                    placeholder="बजेट शिर्षक"
+                                />
+                                @error('title')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

@@ -28,10 +28,15 @@
     />
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
-</head>
 
-<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpeg')}})">
-<div class="mt-5 mb-5">
+    @if(config('app.env') === 'production')
+        {!! ReCaptcha::htmlScriptTagJsApi() !!}
+    @endif
+</head>
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});
+height: 100vh;
+overflow: hidden">
+<div class="pt-4 pb-2">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-7">
@@ -43,13 +48,13 @@
                             </div>
                             <div class="title">
                                 <h4>
-                                    <b>{{$officeSetting->localBody->local_body??''}}</b> <br>
-                                    <span class="text-light">
+                                    <p class="fw-bold py-1 text-white">{{$officeSetting->localBody->local_body??''}}</p>
+                                    <span class="fw-semibold fs-5 text-white">
                                         {{$officeSetting->district->district??''}} <br>
                                         {{$officeSetting->province->province??''}}, नेपाल
                                     </span>
                                 </h4>
-                                <p>
+                                <p class="text-white pt-1 ">
                                     डिजिटल पालिका ब्यबस्थापन प्रणालि
                                     <br>
                                     (Digital Palika Management System)
@@ -59,11 +64,15 @@
                         <div class="col-md-7">
                             <div class="card">
                                 <div class="card-body">
-                                    <h2 class="text-center">Log In</h2>
+                                    <h2 class="text-center">
+                                        <i class="fa fa-user-lock"></i>
+                                    </h2>
                                     <form action="{{route('organization.login')}}" method="post">
                                         @csrf
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label">Email address</label>
+                                        <div class="mb-2">
+                                            <label for="email" class="form-label">प्रयोगकर्ता इमेल
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input
                                                 name="email"
                                                 class="form-control @error('email') is-invalid @enderror"
@@ -76,8 +85,11 @@
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="password" class="form-label">Password</label>
+                                        <div class="mb-2">
+                                            <label for="password" class="form-label">
+                                                पासवर्ड
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input
                                                 name="password"
                                                 class="form-control @error('password') is-invalid @enderror"
@@ -89,51 +101,61 @@
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
-                                        <div class="mb-3">
-                                            <div class="text-center">
-                                                <button class="btn login-btn" type="submit">
-                                                    साइन इन
-                                                </button>
+                                        @if(config('app.env') === 'production')
+                                            <div class="mb-2">
+                                                {!! htmlFormSnippet() !!}
+                                                @error('g-recaptcha-response')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
                                             </div>
+                                        @endif
+
+
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-success waves-effect waves-light">
+                                                <i class="fa fa-lock"></i>
+                                                लग - इन
+                                            </button>
+                                            <button type="reset" class="btn btn-danger waves-effect ms-3">
+                                                <i class="fa fa-times-circle"></i>
+                                                रिसेट
+                                            </button>
                                         </div>
                                     </form>
-                                    <div class="row technical-support">
-                                        <p>
-                                            <b>प्राविधिक सहायता कक्ष:</b>
-                                            <br>
-                                            सम्पर्क नम्बर: 081-520361/9858042433
-                                            <br>
-                                            इमेल: ninjainfosys@gmail.com
-                                        </p>
+                                    <div class="row mt-3">
+                                        <div class="col-12 text-center">
+                                            <p>
+                                                <a href="#" class="text-dark-50 ms-1"
+                                                >Forgot your password?</a
+                                                >
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col-12 text-center">
-                        <p>
-                            <a href="#" class="text-white-50 ms-1"
-                            >Forgot your password?</a
-                            >
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+    <div class="thought">
+        <h4 class="mb-1 text-dark fw-bold">प्राविधिक सहायता कक्ष</h4>
+        <p>
+            <i class="fa fa-phone-alt"></i> : 081-520361
+        </p>
+        <p class="text-center">
+            <i class="fa fa-envelope"></i> : ninjainfosys@gmail.com
+        </p>
+    </div>
 </div>
-
-<footer class="footer footer-alt">
-    2015 -
+<footer class="footer footer-alt bg-soft-main">
+    2022 -
     <script>
         document.write(new Date().getFullYear());
     </script>
-    &copy; Design & Developed By <a href="#" class="text-white-50">Ninja Infosys</a>
+    &copy; Design & Developed by <a href="#" class="text-white text-decoration-underline">NINJA INFOSYS</a>
 </footer>
-
 <!-- Vendor js -->
 <script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
 

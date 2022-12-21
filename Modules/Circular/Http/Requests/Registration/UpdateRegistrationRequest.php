@@ -18,17 +18,19 @@ class UpdateRegistrationRequest extends FormRequest
         return [
             'registration_no' => ['required', Rule::unique('registrations', 'registration_no')->withoutTrashed()->ignore($this->registration)],
             'registration_date' => ['required'],
+            'en_registration_date' => ['nullable', 'date'],
             'letter_number' => ['nullable'],
             'letter_date' => ['required'],
+            'en_letter_date' => ['nullable','date'],
             'sender_name' => ['required'],
             'subject' => ['required'],
             'receiver_name' => ['required'],
             'phone' => ['nullable'],
             'signature_image' => ['nullable', 'image'],
-            'date' => ['nullable'],
+            'date' => ['required'],
             'remarks' => ['nullable'],
             'documents' => ['nullable', 'array'],
-            'documents.*' => ['mimes:jpg,png,jpeg,pdf']
+            'documents.*' => ['mimes:jpg,png,jpeg,pdf'],
         ];
     }
 

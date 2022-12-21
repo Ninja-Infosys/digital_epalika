@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Storage;
 
 class Slider extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory;
+    use SoftDeletes;
+    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     protected $fillable = [
@@ -29,9 +31,9 @@ class Slider extends Model
         return Storage::disk('public')->url($this->attributes['image']);
     }
 
-    public function setImageAttribute($value)
+    public function setImageAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
+        if (! empty($value) && ! is_string($value)) {
             $this->attributes['image'] = $value->store('slider', 'public');
         }
     }

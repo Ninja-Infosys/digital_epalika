@@ -20,21 +20,24 @@ class StoreEmployeeRequest extends FormRequest
             'department' => ['nullable', 'string'],
             'designation' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:png,jpeg,jpg'],
-            'email' => ['nullable','email', Rule::unique('employees', 'email')->withoutTrashed()],
+            'email' => ['nullable', 'email', Rule::unique('employees', 'email')->withoutTrashed()],
             'phone' => ['nullable', Rule::unique('employees', 'phone')->withoutTrashed()],
             'position' => ['nullable', 'integer'],
             'status' => ['nullable', 'boolean'],
+            'is_employee' => ['required', 'boolean'],
+            'show_to_mobile_app' => ['required', 'boolean'],
+            'show_to_index' => ['required', 'boolean'],
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'=>'नाम अनिबार्य छ।',
-            'photo.mimes'=>'फोटो अनिबार्य jpg, jpeg, png मा छ। ',
-            'email.unique'=>'इमेल पहिले नै अवस्थित छ।',
-            'phone.unique'=>'फोन पहिले नै अवस्थित छ।',
-            'position.integer'=>'position पूर्णांक हुनुपर्छ'
+            'name.required' => 'नाम अनिबार्य छ।',
+            'photo.mimes' => 'फोटो अनिबार्य jpg, jpeg, png मा छ। ',
+            'email.unique' => 'इमेल पहिले नै अवस्थित छ।',
+            'phone.unique' => 'फोन पहिले नै अवस्थित छ।',
+            'position.integer' => 'position पूर्णांक हुनुपर्छ',
 
         ];
     }

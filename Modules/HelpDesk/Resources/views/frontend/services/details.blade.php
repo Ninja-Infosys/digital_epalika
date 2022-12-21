@@ -1,7 +1,14 @@
 @extends('helpdesk::layouts.master')
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row mt-5 justify-content-center">
+            <div class="breadcrumb d-flex">
+                <div class="breadcrumb-item">
+                    <a class="whitespace-nowrap text-primary-500" href="{{route('helpdesk.helpdesk')}}">हेल्प डेस्क</a>
+                    <i class="fa fa-angle-double-right"></i>
+                    <a class="ml-1 text-primary-500">सेवा</a>
+                </div>
+            </div>
             <div class="col-lg-12">
                 <div class="card border-info p-2">
                     <div class="text-center text-decoration-underline">
@@ -67,7 +74,6 @@
                                         data-target="#exampleModalCenter">
                                     छन्
                                 </button>
-
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

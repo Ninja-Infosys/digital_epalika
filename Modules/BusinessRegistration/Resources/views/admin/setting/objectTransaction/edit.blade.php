@@ -44,6 +44,20 @@
                             </legend>
                             <div class="row">
                                 <div class="col-md-12 mb-2">
+                                    <label for="object_transaction_id" class="form-label">कारोबार गर्ने वस्तुको
+                                        वर्ग</label>
+                                    <select name="object_transaction_id" id="object_transaction_id" class="form-control @error('object_transaction_id') is-invalid @enderror">
+                                        <option value="">कारोबार गर्ने वस्तुको वर्ग छान्नुहोस्</option>
+                                        @foreach($parentObjectTransactions as $parentObjectTransaction)
+                                            <option
+                                                value="{{$parentObjectTransaction->id}}" {{old('object_transaction_id', $objectTransaction->object_transaction_id) == $parentObjectTransaction->id ? 'selected':'' }}>{{$parentObjectTransaction->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('object_transaction_id')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-2">
                                     <label for="title" class="form-label">शिर्षक *</label>
                                     <input
                                         type="text"

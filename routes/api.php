@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\PublicApiController;
+use App\Http\Controllers\Admin\FileController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('login', [AuthController::class,'login'])->name('api.login');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('home',[PublicApiController::class,'home'])->name('home');
-Route::get('officeSetting',[PublicApiController::class,'officeSetting'])->name('officeSetting');
+Route::post('file/store-in-storage', [FileController::class, 'storeInStorage'])
+    ->name('file.store-in-storage');
+Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy')->names('api.file');

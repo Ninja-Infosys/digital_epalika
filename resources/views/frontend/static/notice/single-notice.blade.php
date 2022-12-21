@@ -2,16 +2,18 @@
 @section('content')
     <section class="view-notice">
         <div class="container">
-            <div class="breadcrumb-item">
-                <a class="whitespace-nowrap text-primary-500" href="{{url('')}}">सूचना</a>
-                <i class="fa fa-angle-double-right"></i>
-                <a class=" text-primary-500 text-center">सूचना</a>
+            <div class="breadcrumb d-flex">
+                <div class="breadcrumb-item">
+                    <a class="whitespace-nowrap text-primary-500" href="{{route('notice')}}">सूचना</a>
+                    <i class="fa fa-angle-double-right"></i>
+                    <a class=" text-primary-500 text-center">सूचना</a>
+                </div>
             </div>
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card-01 justify-content px-5 pt-5 pb-5">
                         <h3>{{$notice->title}}</h3>
-                        <small>- {{$notice->date->toDateString()??''}}</small>
+                        <small>- {{$notice->date}}</small>
                         <p>{!! $notice->description !!}</p>
                         <div class="col-lg-10">
                             <div class="row">
@@ -29,8 +31,4 @@
             </div>
         </div>
     </section>
-    @push('styles')
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/single-notice/single-notice.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/frontend/css/breadcrumb.css')}}">
-    @endpush
 @endsection

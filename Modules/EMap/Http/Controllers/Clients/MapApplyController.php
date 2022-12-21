@@ -2,44 +2,43 @@
 
 namespace Modules\EMap\Http\Controllers\Clients;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\EMap\Entities\Client;
+use App\Models\User;
+use App\Notifications\ApplyMapNoticeNotification;
+use App\Notifications\MapApplyNotification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use Modules\EMap\Entities\ApplyMapNotice;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
-use Modules\EMap\Entities\StructureType;
+use Modules\EMap\Enums\NoticeTypeEnum;
 
 class MapApplyController extends Controller
 {
-    public function index(Client $client)
+    public function index()
     {
-        return view('emap::index');
-    }
+        $mapApplies = MapApply::with('houseOwner')->where('organization_id', auth('organization')->user()->id)->get();
 
-    public function create(Client $client)
-    {
-        $mapSetting = MapSetting::first();
-        $structureTypes = StructureType::latest()->get();
-        return view('emap::organization.clients.map.create', compact('client', 'mapSetting', 'structureTypes'));
-    }
-
-    public function store(Request $request, Client $client)
-    {
-        dd($request->all());
+        return view('emap::organization.map-applies.index', compact('mapApplies'));
     }
 
     public function show(MapApply $mapApply)
     {
-        return view('emap::show');
+        $districts = get_districts();
+        $mapApply->load('fiscalYear', 'storeyDetails.mapFee', 'landDetail.unit', 'landOwner.citizenshipIssueDistrict', 'houseOwner.citizenshipIssueDistrict', 'fourForts', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
+
+        return view('emap::organization.map-applies.show', compact('mapApply', 'districts'));
     }
 
     public function edit(MapApply $mapApply)
     {
-        return view('emap::edit');
+        $mapSetting = MapSetting::first();
+
+        return view('emap::organization.map-applies.edit', compact('mapSetting', 'mapApply'));
     }
 
-    public function update(Request $request, Client $client, MapApply $mapApply)
+    public function update(Request $request, MapApply $mapApply)
     {
         //
     }
@@ -47,5 +46,97 @@ class MapApplyController extends Controller
     public function destroy(MapApply $mapApply)
     {
         //
+    }
+
+    public function mapFormInfo(MapApply $mapApply)
+    {
+        $mapApply->load('applyMapNotices:map_apply_id,file_type,sent_to_admin_at');
+        $fileTypes = $mapApply->applyMapNotices->pluck('file_type');
+
+        return view('emap::organization.map-applies.map_form_info', compact('mapApply', 'fileTypes'));
+    }
+
+    public function getTemplateData(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    {
+        $mapApply->load(['applyMapNotices' => function ($q) use ($noticeTypeEnum) {
+            $q->where('file_type', $noticeTypeEnum->value)->latest()->first();
+        }]);
+
+        return \view('emap::organization.map-applies.template_data', compact('mapApply', 'noticeTypeEnum'));
+    }
+
+    public function storeTemplateData(Request $request, MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    {
+        $request->validate([
+            'data' => ['required'],
+            'files' => ['nullable', 'array'],
+            'files.*' => ['mimes:jpg,png,jpeg,pdf'],
+        ]);
+
+        $mapApplyData = DB::transaction(function () use ($request, $mapApply, $noticeTypeEnum) {
+            $mapApplyData = ApplyMapNotice::updateOrCreate(
+                [
+                'map_apply_id' => $mapApply->id,
+                'file_type' => $noticeTypeEnum->value,
+            ],
+                [
+                    'data' => $request->input('data'),
+                ]
+            );
+
+            if (!$mapApplyData->wasChanged()) {
+                $mapApplyData->update([
+                    'sent_to_admin_at' => now()
+                ]);
+            }
+
+
+            if ($request->hasFile('files')) {
+                $this->uploadDocuments($request, $mapApplyData);
+            }
+
+            return $mapApplyData;
+        });
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($mapApplyData));
+
+        toast('फाईल सफलता पुर्बक थपियो', 'success');
+
+        return back();
+    }
+
+    private function uploadDocuments($request, $mapApplyData): void
+    {
+        foreach ($request->file('files') as $document) {
+            $mapApplyData->files()->create([
+                'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $document->getClientOriginalExtension(),
+                'file' => $document->store('emapTemplateFile', 'public'),
+            ]);
+        }
+    }
+
+    public function updateStatus(MapApply $mapApply)
+    {
+        $mapApply->update([
+           'sent_to_admin_at' => empty($mapApply->sent_to_admin_at) ? now() : null,
+        ]);
+
+        Notification::send(User::all(), new MapApplyNotification($mapApply));
+        toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function updateStatusOrganization(MapApply $mapApply, NoticeTypeEnum $noticeTypeEnum)
+    {
+        $data = ApplyMapNotice::where('map_apply_id', $mapApply->id)->where('file_type', $noticeTypeEnum->value)->first();
+        $data->update([
+            'sent_to_admin_at' => empty($data->sent_to_admin_at) ? now() : null
+        ]);
+
+        Notification::send(User::all(), new ApplyMapNoticeNotification($data));
+        toast('सफलता पुर्बक अद्यावधिक गरियो', 'success');
+
+        return back();
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Modules\HelpDesk\Http\Livewire;
 
+use App\Models\Settings\Branch;
 use Livewire\Component;
-use Modules\HelpDesk\Entities\Branch;
 use Modules\HelpDesk\Entities\Service;
 
 class HelpDeskLivewire extends Component
@@ -11,6 +11,8 @@ class HelpDeskLivewire extends Component
     public $branches = [];
 
     public $services = [];
+
+    public $indexToShow = 0;
 
     public function mount()
     {
@@ -22,7 +24,6 @@ class HelpDeskLivewire extends Component
     {
         $branch->load('services');
         $this->services = $branch->services;
-
     }
 
     public function resetService()

@@ -9,7 +9,7 @@ class HelpDeskDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            HelpDeskPermissionTableSeeder::class
+            HelpDeskPermissionTableSeeder::class,
         ]);
     }
 }

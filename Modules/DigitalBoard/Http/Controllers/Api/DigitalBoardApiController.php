@@ -2,22 +2,20 @@
 
 namespace Modules\DigitalBoard\Http\Controllers\Api;
 
-
+use App\Http\Controllers\Controller;
 use App\Models\OfficeHeader;
 use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\DigitalBoard\Entities\Video;
+use Modules\DigitalBoard\Transformers\api\v1\ServiceResource;
 use Modules\DigitalBoard\Transformers\EmployeeResource;
 use Modules\DigitalBoard\Transformers\NewsResource;
 use Modules\DigitalBoard\Transformers\NoticeResource;
 use Modules\DigitalBoard\Transformers\OfficeHeaderResource;
 use Modules\DigitalBoard\Transformers\OfficeSettingResource;
 use Modules\DigitalBoard\Transformers\VideoResource;
-
+use Modules\HelpDesk\Entities\Service;
 
 class DigitalBoardApiController extends Controller
 {
@@ -26,11 +24,15 @@ class DigitalBoardApiController extends Controller
         $notices = Notice::with('files')->where(['show_on_index' => 1, 'closed_at' => null])->orderBy('date', 'desc')->get();
         $employees = Employee::where('status', 1)->orderBy('position')->get();
         $videos = Video::latest()->get();
+        $services = Service::with('serviceDocuments', 'serviceProcesses', 'serviceEmployees')->latest()->get();
+
         return [
             'notices' => NoticeResource::collection($notices->where('type', 'Notice')),
             'newses' => NewsResource::collection($notices->where('type', 'News')),
             'videos' => VideoResource::collection($videos),
-            'employees' => EmployeeResource::collection($employees)
+            'employees' => EmployeeResource::collection($employees),
+            'services' => ServiceResource::collection($services),
+            'officeSettings'=>$this->officeSetting()
         ];
     }
 
@@ -38,6 +40,7 @@ class DigitalBoardApiController extends Controller
     {
         $officeSetting = OfficeSetting::first();
         $officeHeaders = OfficeHeader::orderBy('position')->get();
+
         return [
             'office_headers' => OfficeHeaderResource::collection($officeHeaders),
             'office_setting' => new OfficeSettingResource($officeSetting),

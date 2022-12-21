@@ -2,8 +2,8 @@
 
 namespace Modules\HelpDesk\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->group(module_path('HelpDesk', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
             ->prefix('admin/helpDesk')
             ->as('admin.helpDesk.')
             ->group(module_path('HelpDesk', '/Routes/admin.php'));
@@ -35,5 +35,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->group(module_path('HelpDesk', '/Routes/api.php'));
+        Route::prefix('api/v1/helpdesk')
+            ->middleware('api')
+            ->group(module_path('HelpDesk', '/Routes/api/v1/public_api.php'));
     }
 }

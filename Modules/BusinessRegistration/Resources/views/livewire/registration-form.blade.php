@@ -6,12 +6,11 @@
         'active'=>!($currentStep != 1),
         'success'=>$currentStep>1
 ])><a href="#step-1" type="button">प्रोपाईटरको
-                        बिवरण </a></li>
+                        विवरण </a></li>
                 <li @class([
         'active'=>!($currentStep != 2),
         'success'=>$currentStep>2
-])><a href="#step-2" type="button">ब्यावसाहिक
-                        बिवरण </a></li>
+])><a href="#step-2" type="button">व्यावसाहिक विवरण </a></li>
                 <li @class([
         'active'=>!($currentStep != 3),
         'success'=>$currentStep>3
@@ -36,13 +35,13 @@
                 @case(2)
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">ब्यावसाहिक बिवरण</h2>
+                            <h2 class="font-weight-bold text-center">व्यावसाहिक विवरण</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.business_detail_name" class="form-label">फर्म/कम्पनी/ब्यवसाय को
+                                        <label for="form.business_detail_name" class="form-label">फर्म/कम्पनी/व्यवसाय  को
                                             नाम
                                             नेपलीमा</label>
                                         <input
@@ -50,7 +49,7 @@
                                             class="form-control @error('form.business_detail_name') is-invalid @enderror"
                                             type="text"
                                             id="form.business_detail_name"
-                                            placeholder="फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा"
+                                            placeholder="फर्म/कम्पनी/व्यवसाय  को नाम नेपलीमा"
                                             wire:model="form.business_detail_name"
                                         />
                                         @error('form.business_detail_name')
@@ -58,7 +57,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.business_detail_name_en" class="form-label">फर्म/कम्पनी/ब्यवसाय
+                                        <label for="form.business_detail_name_en" class="form-label">फर्म/कम्पनी/व्यवसाय
                                             को नाम
                                             अंग्रेजीमा</label>
                                         <input
@@ -66,7 +65,7 @@
                                             class="form-control @error('form.business_detail_name_en') is-invalid @enderror"
                                             type="text"
                                             id="form.business_detail_name_en"
-                                            placeholder="फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा"
+                                            placeholder="फर्म/कम्पनी/व्यवसाय  को नाम अंग्रेजीमा"
                                             wire:model="form.business_detail_name_en"
                                         />
                                         @error('form.business_detail_name_en')
@@ -92,7 +91,7 @@
                                     @if($form['business_nature']==='partnership')
                                         <div class="card mt-3 mb-3">
                                             <div class="card-header">
-                                                <h2 class="font-weight-bold text-center">साझेदार हरुको बिवरण</h2>
+                                                <h2 class="font-weight-bold text-center">साझेदार हरुको विवरण</h2>
                                             </div>
                                             <div class="card-body">
                                                 <fieldset>
@@ -103,8 +102,8 @@
                                                             <tr>
                                                                 <th>साझेदार सँगको नाता</th>
                                                                 <th>साझेदार को नाम थर</th>
-                                                                <th>नागरिकता न</th>
-                                                                <th>सम्पर्क न</th>
+                                                                <th>नागरिकता नं</th>
+                                                                <th>सम्पर्क नं</th>
                                                                 <th>
                                                                     <button type="button"
                                                                             wire:click.prevent="partnerDetailIncrement"
@@ -138,7 +137,7 @@
                                                                     </td>
 
                                                                     <td>
-                                                                        <input type="text" placeholder="नागरिकता न"
+                                                                        <input type="text" placeholder="नागरिकता नं"
                                                                                wire:model="form.partnerDetails.{{$index}}.citizenship_no"
                                                                                class="form-control @error('form.partnerDetails.'.$index.'.citizenship_no') is-invalid @enderror">
                                                                         @error('form.partnerDetails.'.$index.'.citizenship_no')
@@ -146,7 +145,7 @@
                                                                         @enderror
                                                                     </td>
                                                                     <td>
-                                                                        <input type="text" placeholder="सम्पर्क न"
+                                                                        <input type="text" placeholder="सम्पर्क नं"
                                                                                wire:model="form.partnerDetails.{{$index}}.mobile_no"
                                                                                class="form-control @error('form.partnerDetails.'.$index.'.mobile_no') is-invalid @enderror">
                                                                         @error('form.partnerDetails.'.$index.'.mobile_no')
@@ -177,9 +176,9 @@
                                             साल</label>
                                         <input
                                             name="form.establish_year"
-                                            class="form-control @error('form.establish_year') is-invalid @enderror"
+                                            class="form-control  @error('form.establish_year') is-invalid @enderror"
                                             type="text"
-                                            id="form.establish_year"
+                                            id="form.establish_year" required
                                             placeholder="व्यवसाय स्थापना गरेको साल"
                                             wire:model="form.establish_year"
                                         />
@@ -218,43 +217,40 @@
                                     </div>
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.object_transaction_sub_category_id" class="form-label">कारोबार
+                                        <label for="form.object_transaction_id" class="form-label">कारोबार
                                             गर्ने वस्तु</label>
                                         <select
-                                            class="form-select @error('form.object_transaction_sub_category_id') is-invalid @enderror"
-                                            wire:model="form.object_transaction_sub_category_id"
-                                            id="form.object_transaction_sub_category_id">
+                                            class="form-select @error('form.object_transaction_id') is-invalid @enderror"
+                                            wire:model="form.object_transaction_id"
+                                            id="form.object_transaction_id">
                                             <option value="">--- कारोबार गर्ने वस्तु छान्नुहोस् ---</option>
                                             @foreach($objectTransactions as $objectTransaction)
                                                 <option value="{{$objectTransaction->id}}"
                                                         disabled>{{$objectTransaction->title}}
                                                 </option>
-                                                @foreach($objectTransaction->objectTransactionSubCategories as $object)
+                                                @foreach($objectTransaction->objectTransactions as $object)
                                                     <option value="{{$object->id}}">---{{$object->title}}</option>
                                                 @endforeach
                                             @endforeach
                                         </select>
-                                        @error('form.object_transaction_sub_category_id')
+                                        @error('form.object_transaction_id')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.price" class="form-label">बर्ग</label>
+                                        <label for="form.investment_revenue_id" class="form-label">पुँजीगत लगानी</label>
                                         <select
-                                            class="form-select @error('form.price') is-invalid @enderror"
-                                            wire:model="form.price"
-                                            id="form.price">
+                                            class="form-select @error('form.investment_revenue_id') is-invalid @enderror"
+                                            wire:model="form.investment_revenue_id"
+                                            id="form.investment_revenue_id">
                                             <option value="">छान्नुहोस्</option>
-                                            @if(!empty($prices))
+                                            @foreach($investmentRevenues as $investmentRevenue)
                                                 <option
-                                                    value="{{$prices->category_a ??''}}">{{$prices->category_a ??''}}</option>
-                                                <option
-                                                    value="{{$prices->category_b ??''}}">{{$prices->category_b ??''}}</option>
-                                                <option
-                                                    value="{{$prices->category_c ??''}}">{{$prices->category_c ??''}}</option>
-                                            @endif
+                                                    value="{{$investmentRevenue->id ??''}}">{{$investmentRevenue->title ??''}}(रु.{{$investmentRevenue->registration_amount ??0}})</option>
+
+                                            @endforeach
                                         </select>
-                                        @error('form.price')
+                                        @error('form.investment_revenue_id')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
@@ -373,13 +369,13 @@
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="form.house_owner_phone" class="form-label">घर धनिको मोबाइल
-                                                न </label>
+                                                नं </label>
                                             <input
                                                 name="form.house_owner_phone"
                                                 class="form-control @error('form.house_owner_phone') is-invalid @enderror"
                                                 type="text"
                                                 id="form.house_owner_phone"
-                                                placeholder="घर धनिको मोबाइल न"
+                                                placeholder="घर धनिको मोबाइल नं"
                                                 wire:model="form.house_owner_phone"
                                             />
                                             @error('form.house_owner_phone')
@@ -424,7 +420,7 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/ब्यबसाय को ठेगाना</h2>
+                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/व्यवसाय  को ठेगाना</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -680,11 +676,18 @@
 
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="form.citizen_ship" class="form-label">नागरिकता प्रमाणपत्रको
-                                            प्रतिलिपि-१</label>
-                                        <input type="file" class="form-control" id="form.citizen_ship"
-                                               wire:model="form.citizen_ship"/>
-                                        @error('form.citizen_ship')
+                                        <label for="form.citizenship_front" class="form-label"> नागरिकता अपलोड गर्नुहोस् (आगाडी)</label>
+                                        <input type="file" class="form-control" id="form.citizenship_front"
+                                               wire:model="form.citizenship_front"/>
+                                        @error('form.citizenship_front')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="form.citizenship_back" class="form-label"> नागरिकता अपलोड गर्नुहोस् (पछाडी)</label>
+                                        <input type="file" class="form-control" id="form.citizenship_back"
+                                               wire:model="form.citizenship_back"/>
+                                        @error('form.citizenship_back')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </div>
@@ -716,7 +719,7 @@
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <label for="form.thumb" class="form-label">औठाको छाप</label>
                                         <input type="file" class="form-control" id="form.thumb"
                                                wire:model="form.thumb"/>
@@ -755,7 +758,7 @@
                                         <input
                                             name="form.length"
                                             class="form-control @error('form.length') is-invalid @enderror"
-                                            type="text"
+                                            type="number"
                                             id="form.length"
                                             placeholder="लम्बाई"
                                             wire:model="form.length"
@@ -771,7 +774,7 @@
                                         <input
                                             name="form.width"
                                             class="form-control @error('form.width') is-invalid @enderror"
-                                            type="text"
+                                            type="number"
                                             id="form.width"
                                             placeholder="चौडाई"
                                             wire:model="form.width"
@@ -785,11 +788,11 @@
                                         <input
                                             name="form.square"
                                             class="form-control @error('form.square') is-invalid @enderror"
-                                            type="text"
+                                            type="number"
                                             id="form.square"
                                             placeholder="वर्गफिट"
                                             wire:model="form.square"
-                                        />
+                                         disabled />
                                         @error('form.square')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -825,65 +828,56 @@
                                     <tbody>
                                     <tr>
                                         <th>व्यवसायी नाम</th>
-                                        <td>{{$form['name']}}</td>
+                                        <td>{{$form['name'] ?? ''}}</td>
                                     </tr>
                                     <tr>
-                                        <th>फोन न</th>
-                                        <td>{{$form['phone']}}</td>
+                                        <th>फोन नं</th>
+                                        <td>{{$form['phone'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>लिङ्ग</th>
                                         <td>
 
-                                            @switch($form['gender'])
-                                                @case('Male')
-                                                    पुरुष
-                                                    @break
-                                                @case('Female')
-                                                    महिला
-                                                    @break
-                                                @default
-                                                    अन्य
-                                            @endswitch
+                                            {{!empty($form['gender']) ? \App\Enums\Gender::tryFrom($form['gender'])->label() :''}}
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <th> इमेल</th>
-                                        <td>{{$form['email']}}</td>
+                                        <td>{{$form['email'] ?? ''}}</td>
                                     </tr>
 
                                     <tr>
                                         <th> घर नम्बर</th>
-                                        <td>{{$form['house_no']}}</td>
+                                        <td>{{$form['house_no'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>
                                             व्यक्तिगत स्थाई लेखा नम्बर
                                         </th>
-                                        <td>{{$form['account_no']}}</td>
+                                        <td>{{$form['account_no'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> राष्ट्रियता परिचयपत्र नम्बर</th>
-                                        <td>{{$form['national_card_no']}}</td>
+                                        <td>{{$form['national_card_no'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> शैक्षिक योग्यता</th>
-                                        <td>{{$form['education_qualification']}}</td>
+                                        <td>{{$form['education_qualification'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> मुखय पेशा</th>
-                                        <td>{{$form['occupation']}}</td>
+                                        <td>{{$form['occupation'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> नागरिकता नम्बर</th>
-                                        <td>{{$form['citizenship_no']}}</td>
+                                        <td>{{$form['citizenship_no'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>
                                             जारी मिति
                                         </th>
-                                        <td>{{$form['issue_date']}}</td>
+                                        <td>{{$form['issue_date'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th> जारी जिल्ला</th>
@@ -903,16 +897,16 @@
                                     </tr>
                                     <tr>
                                         <th> वार्ड</th>
-                                        <td>{{$form['permanent_ward_no']}}</td>
+                                        <td>{{$form['permanent_ward_no'] ?? '' }}</td>
                                     </tr>
 
                                     <tr>
                                         <th> मार्ग</th>
-                                        <td>{{$form['permanent_way']}}</td>
+                                        <td>{{$form['permanent_way'] ?? '' }}</td>
                                     </tr>
                                     <tr>
                                         <th> गाउ/टोल</th>
-                                        <td>{{$form['permanent_tole']}}</td>
+                                        <td>{{$form['permanent_tole'] ?? '' }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -921,7 +915,9 @@
                     </div>
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="text-center font-weight-bold"> तिन पुस्ते बिवरण</h2>
+                            <h2 class="text-center font-weight-bold">
+                                तिन पुस्ते विवरण
+                            </h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -931,18 +927,18 @@
                                         <th>नाता</th>
                                         <th> नाम, थर</th>
                                         <th>नाम, थर(English)</th>
-                                        <th>नागरिकता न</th>
-                                        <th>सम्पर्क न</th>
+                                        <th>नागरिकता नं</th>
+                                        <th>सम्पर्क नं</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($form['threeGenerationDetails'] as $threeGenerationDetail)
                                         <tr>
-                                            <td>   {{$threeGenerationDetail['relation']}}</td>
-                                            <td>   {{$threeGenerationDetail['name']}}</td>
-                                            <td>   {{$threeGenerationDetail['name_en']}}</td>
-                                            <td>   {{$threeGenerationDetail['citizenship_no']}}</td>
-                                            <td>   {{$threeGenerationDetail['mobile_no']}}</td>
+                                            <td>   {{$threeGenerationDetail['relation'] ?? ''}}</td>
+                                            <td>   {{$threeGenerationDetail['name'] ?? ''}}</td>
+                                            <td>   {{$threeGenerationDetail['name_en'] ?? ''}}</td>
+                                            <td>   {{$threeGenerationDetail['citizenship_no'] ?? ''}}</td>
+                                            <td>   {{$threeGenerationDetail['mobile_no'] ?? ''}}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -953,31 +949,28 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="text-center font-weight-bold">ब्यावसाहिक बिवरण</h2>
+                            <h2 class="text-center font-weight-bold">
+                                व्यावसाहिक विवरण
+                            </h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
                                 <table class="table table-bordered">
                                     <tbody>
                                     <tr>
-                                        <th>फर्म/कम्पनी/ब्यवसाय को नाम नेपलीमा</th>
-                                        <td>{{$form['business_detail_name']}}</td>
+                                        <th>फर्म/कम्पनी/व्यवसाय को नाम नेपलीमा</th>
+                                        <td>{{$form['business_detail_name'] ?? ''}}</td>
                                     </tr>
                                     <tr>
-                                        <th>फर्म/कम्पनी/ब्यवसाय को नाम अंग्रेजीमा</th>
-                                        <td>{{$form['business_detail_name_en']}}</td>
+                                        <th>फर्म/कम्पनी/व्यवसाय को नाम अंग्रेजीमा</th>
+                                        <td>{{$form['business_detail_name_en'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>व्यवसायको प्रकृति</th>
                                         <td>
 
-                                            @switch($form['business_nature'])
-                                                @case('partnership')
-                                                    साझेदारी
-                                                    @break
-                                                @default
-                                                    एकल
-                                            @endswitch
+                                                {{!empty($form['business_nature']) ? \Modules\BusinessRegistration\Enums\BusinessNature::tryFrom($form['business_nature'])->label() :''}}
+
                                         </td>
                                     </tr>
 
@@ -988,19 +981,19 @@
 
                                     <tr>
                                         <th> व्यवसाय दर्ता मिति</th>
-                                        <td>{{$form['registration_date']}}</td>
+                                        <td>{{$form['registration_date'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>
 
                                             पान नम्बर
                                         </th>
-                                        <td>{{$form['pan_no']}}</td>
+                                        <td>{{$form['pan_no'] ?? ''}}</td>
                                     </tr>
 
                                     <tr>
                                         <th> लागत रकम रु</th>
-                                        <td>{{$form['amount_cost']}}</td>
+                                        <td>{{$form['amount_cost'] ?? ''}}</td>
                                     </tr>
                                     <tr>
                                         <th>
@@ -1037,7 +1030,7 @@
                     @if($form['business_nature']==='partnership')
                         <div class="card mt-3 mb-3">
                             <div class="card-header">
-                                <h2 class="font-weight-bold text-center">साझेदार हरुको बिवरण</h2>
+                                <h2 class="font-weight-bold text-center">साझेदार हरुको विवरण</h2>
                             </div>
                             <div class="card-body">
                                 <fieldset>
@@ -1047,27 +1040,27 @@
                                             <tr>
                                                 <th>साझेदार सँगको नाता</th>
                                                 <th>साझेदार को नाम थर</th>
-                                                <th>नागरिकता न</th>
-                                                <th>सम्पर्क न</th>
+                                                <th>नागरिकता नं</th>
+                                                <th>सम्पर्क नं</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($form['partnerDetails'] as $index=>$partnerDetail)
+                                            @foreach($form['partnerDetails'] as $partnerDetail)
                                                 <tr>
 
                                                     <td>
-                                                        {{$partnerDetail['relation']}}
+                                                        {{$partnerDetail['relation'] ?? ''}}
                                                     </td>
                                                     <td>
-                                                        {{$partnerDetail['name']}}
+                                                        {{$partnerDetail['name'] ?? ''}}
                                                     </td>
 
                                                     <td>
 
-                                                        {{$partnerDetail['citizenship_no']}}
+                                                        {{$partnerDetail['citizenship_no'] ?? ''}}
                                                     </td>
                                                     <td>
-                                                        {{$partnerDetail['mobile_no']}}
+                                                        {{$partnerDetail['mobile_no'] ?? ''}}
                                                     </td>
 
                                                 </tr>
@@ -1094,19 +1087,19 @@
                                             <tr>
                                                 <th>घर धनिको नाम थर</th>
                                                 <td>
-                                                    {{$form['house_owner_name']}}
+                                                    {{$form['house_owner_name'] ?? ''}}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>घर धनिको मोबाइल न</th>
+                                                <th>घर धनिको मोबाइल नं</th>
                                                 <td>
-                                                    {{$form['house_owner_phone']}}
+                                                    {{$form['house_owner_phone'] ?? ''}}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>ठेगाना</th>
                                                 <td>
-                                                    {{$form['house_owner_address']}}
+                                                    {{$form['house_owner_address'] ?? ''}}
                                                 </td>
                                             </tr>
 
@@ -1114,7 +1107,7 @@
                                                 <th> मासिक भाडा रु
                                                 </th>
                                                 <td>
-                                                    {{$form['house_owner_monthly_rent']}}
+                                                    {{$form['house_owner_monthly_rent'] ?? ''}}
                                                 </td>
                                             </tr>
 
@@ -1130,7 +1123,7 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/ब्यबसाय को ठेगाना</h2>
+                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/व्यवसाय को ठेगाना</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -1160,14 +1153,14 @@
                                             <th> वार्ड
                                             </th>
                                             <td>
-                                                {{$form['ward_no']}}
+                                                {{$form['ward_no'] ?? ''}}
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <th> मार्ग</th>
                                             <td>
-                                                {{$form['way']}}
+                                                {{$form['way'] ?? ''}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -1176,7 +1169,7 @@
                                                 गाउ/टोल
                                             </th>
                                             <td>
-                                                {{$form['tole']}}
+                                                {{$form['tole'] ?? ''}}
                                             </td>
                                         </tr>
 
@@ -1254,10 +1247,18 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>नागरिकता प्रमाणपत्रको प्रतिलिपि-१</th>
+                                        <th>नागरिकता अपलोड गर्नुहोस् (आगाडी)</th>
                                         <td>
-                                            @if(!empty($form['citizen_ship']))
-                                                <img src="{{$form['citizen_ship']->temporaryUrl()}}" alt="" height="60">
+                                            @if(!empty($form['citizenship_front']))
+                                                <img src="{{$form['citizenship_front']->temporaryUrl()}}" alt="" height="60">
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>नागरिकता अपलोड गर्नुहोस् (पछाडी)</th>
+                                        <td>
+                                            @if(!empty($form['citizenship_back']))
+                                                <img src="{{$form['citizenship_back']->temporaryUrl()}}" alt="" height="60">
                                             @endif
                                         </td>
                                     </tr>
@@ -1348,7 +1349,21 @@
                             </fieldset>
                         </div>
                     </div>
+                    <div class="d-flex mt-2">
+                        <div class="form-check">
+                            <input type="checkbox"
+                                   class="form-check-input"
+                                   wire:model="form.is_confirmed"
+                                   name="form.is_confirmed"
+                                   id="form.is_confirmed">
+                            <label class="form-check-label"
+                                   for="form.is_confirmed">माथिको बिवरण पुष्टि गर्नुहोस् &nbsp;</label>
+                        </div>
 
+                    </div>
+                    @error('form.is_confirmed')
+                    <p class="text-danger">{{$message}}</p>
+                    @enderror
 
                     <div style="display: flex;justify-content: space-between;">
                         <div class="mt-2">
@@ -1365,9 +1380,6 @@
                     </div>
 
                     @break
-
-
-
                 @default
                     <div class="card">
                         <div class="card-header">
@@ -1377,8 +1389,23 @@
                         <div class="card-body">
                             <fieldset>
                                 <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="form.business_type" class="form-label">व्यवसायी</label>
+                                        <select
+                                            class="form-select @error('form.business_type') is-invalid @enderror"
+                                            wire:model="form.business_type"
+                                            id="form.business_type">
+                                            <option value="">---छान्नुहोस् ---</option>
+                                            @foreach(\Modules\BusinessRegistration\Enums\BusinessTypeEnum::cases() as $key=>$businessTypeEnum)
+                                                <option value="{{$businessTypeEnum->value}}">{{$businessTypeEnum->label()}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('form.business_type')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.name" class="form-label">व्यवसायी नाम:</label>
+                                        <label for="form.name" class="form-label">व्यवसायी नाम</label>
                                         <input
                                             name="form.name"
                                             class="form-control @error('form.name') is-invalid @enderror"
@@ -1392,7 +1419,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.phone" class="form-label">फोन न:</label>
+                                        <label for="form.phone" class="form-label">फोन नं</label>
                                         <input
                                             name="form.phone"
                                             class="form-control @error('form.phone') is-invalid @enderror"
@@ -1422,7 +1449,7 @@
                                     </div>
 
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.email" class="form-label">इमेल:</label>
+                                        <label for="form.email" class="form-label">इमेल</label>
                                         <input
                                             name="form.email"
                                             class="form-control @error('form.email') is-invalid @enderror"
@@ -1501,13 +1528,13 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="occupation" class="form-label">मुखय पेशा</label>
+                                        <label for="occupation" class="form-label">मुख्य पेशा</label>
                                         <input
                                             name="form.occupation"
                                             class="form-control @error('form.occupation') is-invalid @enderror"
                                             type="text"
                                             id="form.occupation"
-                                            placeholder="मुखय पेशा"
+                                            placeholder="मुख्य पेशा"
                                             wire:model="form.occupation"
                                         />
                                         @error('form.occupation')
@@ -1515,7 +1542,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.citizenship_no" class="form-label">नागरिकता नम्बर: </label>
+                                        <label for="form.citizenship_no" class="form-label">नागरिकता नम्बर </label>
                                         <input
                                             name="form.citizenship_no"
                                             class="form-control @error('form.citizenship_no') is-invalid @enderror"
@@ -1529,7 +1556,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.issue_date" class="form-label">जारी मिति:</label>
+                                        <label for="form.issue_date" class="form-label">जारी मिति</label>
                                         <input
                                             name="form.issue_date"
                                             class="form-control @error('form.issue_date') is-invalid @enderror"
@@ -1673,7 +1700,7 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">तिन पुस्ते बिवरण</h2>
+                            <h2 class="font-weight-bold text-center">तिन पुस्ते विवरण</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -1683,8 +1710,8 @@
                                         <th>नाता</th>
                                         <th>नाम, थर</th>
                                         <th>नाम, थर( अंग्रेजीमा)</th>
-                                        <th>नागरिकता न</th>
-                                        <th>सम्पर्क न</th>
+                                        <th>नागरिकता नं</th>
+                                        <th>सम्पर्क नं</th>
                                         <th>
                                             <button type="button" wire:click.prevent="documentsArrayIncrement"
                                                     class="btn btn-primary">
@@ -1722,7 +1749,7 @@
                                                 @enderror
                                             </td>
                                             <td>
-                                                <input type="text" placeholder="नागरिकता न"
+                                                <input type="text" placeholder="नागरिकता नं"
                                                        wire:model="form.threeGenerationDetails.{{$index}}.citizenship_no"
                                                        class="form-control @error('form.threeGenerationDetails.'.$index.'.citizenship_no') is-invalid @enderror">
                                                 @error('form.threeGenerationDetails.'.$index.'.citizenship_no')
@@ -1730,7 +1757,7 @@
                                                 @enderror
                                             </td>
                                             <td>
-                                                <input type="text" placeholder="सम्पर्क न"
+                                                <input type="text" placeholder="सम्पर्क नं"
                                                        wire:model="form.threeGenerationDetails.{{$index}}.mobile_no"
                                                        class="form-control @error('form.threeGenerationDetails.'.$index.'.mobile_no') is-invalid @enderror">
                                                 @error('form.threeGenerationDetails.'.$index.'.mobile_no')

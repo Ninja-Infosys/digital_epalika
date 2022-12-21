@@ -1,0 +1,11 @@
+{
+    "name": "ExecutiveMeeting",
+    "alias": "executivemeeting",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ExecutiveMeeting\\Providers\\ExecutiveMeetingServiceProvider"
+    ],
+    "files": []
+}

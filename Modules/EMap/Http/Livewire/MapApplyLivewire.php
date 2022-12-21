@@ -2,17 +2,11 @@
 
 namespace Modules\EMap\Http\Livewire;
 
-use App\Models\Address\District;
-use App\Models\Settings\Units\MeasurementUnit;
-use App\Models\Settings\Units\Unit;
-use App\Models\Settings\Units\UnitConversion;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Modules\EMap\Entities\Client;
 use Modules\EMap\Entities\MapApply;
 use Modules\EMap\Entities\MapSetting;
-use Modules\EMap\Entities\StructureType;
 use Modules\EMap\Enums\BuildingDetailEnum;
 use Modules\EMap\Enums\DetailsRegardingCriteriaEnum;
 use Modules\EMap\Enums\FourSideParticularEnum;
@@ -22,105 +16,39 @@ class MapApplyLivewire extends Component
 {
     use WithFileUploads;
 
-    public Client $client;
-    public $structureTypes = [];
+    public MapApply $mapApply;
+
     public int $currentStep = 1;
-    public bool $open_structure_type = false;
-    public $allDistricts = [];
 
     //    conversion
     public $conversion_units = [];
 
     public $conversion = [];
+
     public MapSetting $setting;
 
-    public $conversion_id;
-
-    public $units = [];
-
-    public $convertedData = 0;
+    public object $officeSetting;
 
     public array $applyMap = [
-        'construction_type' => null,
-        'usage' => null,
-        'building_category' => null,
-        'structure_type_id' => null,
-        'structure_type' => null,
-        'current_storey' => null,
-        'area_of_plinth' => null,
-        'future_storey' => null,
-        'length' => null,
-        'breadth' => null,
-        'height' => null,
-        'storeyDetails' => []
-    ];
-
-    public array $landDescription = [
-        'land_use_area' => null,
-        'ward_no' => null,
-        'former_ward_no' => null,
-        'tole' => null,
-        'street_code_no' => null,
-        'plot_no' => null,
-        'unit_value' => 0,
-        'unit_id' => null,
-        'percentage_of_area_covered_by_building' => null,
-    ];
-
-    public array $landOwner = [
-        'land_owner_type' => null,
-        'name' => null,
-        'phone' => null,
-        'father_name' => null,
-        'citizenship_issue_district_id' => null,
-        'citizenship_no' => null,
-        'citizenship_issue_date' => null
-    ];
-
-    public array $houseOwner = [
-        'name' => null,
-        'phone' => null,
-        'father_name' => null,
-        'citizenship_issue_district_id' => null,
-        'citizenship_no' => null,
-        'citizenship_issue_date' => null
+        'consultant_signature' => null,
+        'consultant_name' => null,
+        'consultant_mobile_no' => null,
+        'consultant_nec_no' => null,
     ];
 
     public array $fourFortDetails = [];
 
     public array $designerDetails = [];
 
-    public array $applicantDetail = [
-        'applicant_type' => null,
-        'relation_with_owner' => null,
-        'name' => null,
-        'phone' => null,
-        'father_name' => null,
-        'citizenship_issue_district_id' => null,
-        'citizenship_no' => null,
-        'citizenship_issue_date' => null,
-        'application_date' => null,
-        'signature' => null
-    ];
-
     public array $criteriaDetails = [];
 
     public array $buildingDetails = [];
 
-    public function mount(Client $client)
+    public function mount(MapApply $mapApply): void
     {
         $this->setting = MapSetting::with('landMeasurement')->first();
 
-
-        if (empty($this->setting->land_measurement_id)) {
-            $this->redirect(route('emap.admin.setting.index'));
-        }
-
-        $this->conversion_units = MeasurementUnit::where('type_id', $this->setting->land_measurement_id)->get();
-
-        $this->client = $client;
-        $this->structureTypes = StructureType::latest()->get();
-        $this->allDistricts = District::all();
+        $this->mapApply = $mapApply;
 
         foreach (FourSideParticularEnum::cases() as $fourSide) {
             $this->fourFortDetails[] = [
@@ -131,184 +59,67 @@ class MapApplyLivewire extends Component
                 'north' => null,
             ];
         }
+
         foreach (PostsEnum::cases() as $designerDetail) {
             $this->designerDetails[] = [
                 'post' => $designerDetail->value,
                 'name' => null,
+                'father_name' => null,
+                'grandfather_name' => null,
+                'phone' => null,
+                'address' => null,
+                'local_body' => null,
+                'ward_no' => null,
                 'nec_council_no' => null,
                 'local_body_registration_no' => null,
                 'consulting_firm_name' => null,
             ];
         }
+
         foreach (DetailsRegardingCriteriaEnum::cases() as $criteriaDetail) {
             $this->criteriaDetails[] = [
                 'detail' => $criteriaDetail->value,
                 'according_to_criteria' => null,
                 'according_to_map' => null,
                 'compliance' => null,
-                'remarks' => $criteriaDetail->remarks()
+                'remarks' => $criteriaDetail->remarks(),
             ];
         }
 
-        foreach (BuildingDetailEnum::cases() as $buildingDetail) {
-            $this->buildingDetails[] = [
-                'detail' => $buildingDetail->value,
-                'description' => null,
-                'remarks' => null,
+        $this->buildingDetails =
+            [
+                [
+                    'detail' => BuildingDetailEnum::BUILDING_CATEGORY->value,
+                    'description' => $mapApply->building_category?->label(),
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::PLINTH_AREA->value,
+                    'description' => $mapApply->area_of_plinth ?? null,
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::LENGTH->value,
+                    'description' => $mapApply->length ?? '',
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::BREADTH->value,
+                    'description' => $mapApply->breadth ?? '',
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::STOREY_COUNT->value,
+                    'description' => $mapApply->current_storey ?? '',
+                    'remarks' => null,
+                ],
+                [
+                    'detail' => BuildingDetailEnum::HEIGHT->value,
+                    'description' => $mapApply->height ?? null,
+                    'remarks' => null,
+                ],
             ];
-        }
     }
-
-//    convert Functions
-    public function convert()
-    {
-        if (!empty($this->landDescription['unit_value']) > 0 && !empty($this->conversion_id)) {
-            $si_unit_value = $this->landDescription['unit_value'];
-
-            $rate = $this->conversionToSmallest();
-
-
-            $this->convertedData = $rate * $si_unit_value;
-            $data = [];
-            foreach ($this->units as $index => $unit) {
-                $data['data' . $index] = $this->conversionLogic($unit);
-            }
-            $this->conversion = $data;
-        }
-    }
-
-    public function conversionToSmallest(): float|int
-    {
-        $rate = 1;
-
-        if ($this->setting->standardLandMeasurement->is_smallest != 1) {
-            $getSmallerUnits = Unit::where('measurement_unit_id', $this->setting->standardLandMeasurement->measurement_unit_id)
-                ->where('position', '>=', $this->setting->standardLandMeasurement->position)
-                ->orderBy('position')
-                ->get();
-
-
-            foreach ($getSmallerUnits as $smallerUnit) {
-                $rate = $rate * $this->getRate($smallerUnit);
-            }
-            $id = $getSmallerUnits->last()->id;
-        } else {
-            $id = $this->setting->land_measurement_standard_id;
-        }
-        $minUnit = $this->units->where('is_smallest', 1)->first();
-
-        $conversionData = UnitConversion::where('conversion_to', $minUnit->id)
-            ->where('conversion_from', $id)
-            ->first();
-        return $rate / $conversionData->rate;
-    }
-
-    public function getRate(Unit $biggerUnit): float|int
-    {
-        $smallerUnit = Unit::where('position', $biggerUnit->position + 1)
-            ->whereMeasurementUnitId($biggerUnit->measurement_unit_id)
-            ->first();
-
-        if (!empty($smallerUnit)) {
-            $conversionRate = UnitConversion::where('conversion_to', $smallerUnit->id)
-                ->where('conversion_from', $biggerUnit->id)
-                ->first();
-
-            return $conversionRate->rate ?? 1;
-        } else {
-            return 1;
-        }
-    }
-
-    public function conversionLogic(Unit $unit): float|int
-    {
-        if ($unit->position - 1 > 0) {
-            $biggerUnit = Unit::where('position', $unit->position - 1)->first();
-            if (!empty($biggerUnit)) {
-                $conversionRate = UnitConversion::where('conversion_to', $biggerUnit->id)
-                    ->where('conversion_from', $unit->id)
-                    ->first();
-                if (!empty($conversionRate->rate)) {
-                    $totalData = $this->convertedData * $conversionRate->rate;
-                    $wholePart = floor($totalData);
-                    $fraction = $totalData - $wholePart;
-                    $this->convertedData = $wholePart;
-                    return ($fraction / $conversionRate->rate);
-                }
-                return 0;
-            }
-            return $this->convertedData;
-        }
-        return $this->convertedData;
-    }
-
-
-    public function addStoreyDetail()
-    {
-        $this->applyMap['storeyDetails'][] = [];
-    }
-
-    public function removeStoreyDetail($index): void
-    {
-        unset($this->applyMap['storeyDetails'][$index]);
-        $this->applyMap['storeyDetails'] = array_values($this->applyMap['storeyDetails']);
-    }
-
-    public function setStructureType()
-    {
-        $this->open_structure_type = !$this->open_structure_type;
-    }
-
-
-    protected array $applyMapValidations = [
-        'applyMap.construction_type' => ['required'],
-        'applyMap.usage' => ['required'],
-        'applyMap.building_category' => ['required'],
-        'applyMap.structure_type_id' => ['nullable', 'exists:structure_types,id'],
-        'applyMap.structure_type' => ['nullable'],
-        'applyMap.current_storey' => ['required'],
-        'applyMap.area_of_plinth' => ['required'],
-        'applyMap.future_storey' => ['required'],
-        'applyMap.length' => ['required', 'numeric'],
-        'applyMap.breadth' => ['required', 'numeric'],
-        'applyMap.height' => ['required', 'numeric'],
-        'applyMap.storeyDetails' => ['nullable', 'array'],
-        'applyMap.storeyDetails.*.storey' => ['required', 'integer'],
-        'applyMap.storeyDetails.*.area_of_proposed_construction' => ['required', 'numeric'],
-        'applyMap.storeyDetails.*.area_of_former_construction' => ['required', 'numeric'],
-        'applyMap.storeyDetails.*.total_area' => ['required', 'numeric'],
-        'applyMap.storeyDetails.*.height' => ['required', 'numeric'],
-    ];
-
-    protected array $landDescriptionValidations = [
-        'landDescription.land_use_area' => ['required', 'numeric'],
-        'landDescription.ward_no' => ['required', 'integer'],
-        'landDescription.former_ward_no' => ['required', 'integer'],
-        'landDescription.tole' => ['nullable'],
-        'landDescription.street_code_no' => ['nullable'],
-        'landDescription.plot_no' => ['required'],
-        'landDescription.unit_value' => ['nullable'],
-        'landDescription.percentage_of_area_covered_by_building' => ['required', 'numeric'],
-    ];
-
-    protected array $landOwnerValidations = [
-        'landOwner.land_owner_type' => ['required'],
-        'landOwner.name' => ['required'],
-        'landOwner.phone' => ['nullable'],
-        'landOwner.father_name' => ['required'],
-        'landOwner.citizenship_issue_district_id' => ['required', 'exists:districts,id'],
-        'landOwner.citizenship_no' => ['required'],
-        'landOwner.citizenship_issue_date' => ['required']
-    ];
-
-    protected array $houseOwnerValidations = [
-        'houseOwner.name' => ['required'],
-        'houseOwner.phone' => ['nullable'],
-        'houseOwner.father_name' => ['required'],
-        'houseOwner.citizenship_issue_district_id' => ['required', 'exists:districts,id'],
-        'houseOwner.citizenship_no' => ['required'],
-        'houseOwner.citizenship_issue_date' => ['required']
-    ];
 
     protected array $fourFortValidations = [
         'fourFortDetails' => ['required', 'array'],
@@ -322,23 +133,16 @@ class MapApplyLivewire extends Component
     protected array $designerDetailValidations = [
         'designerDetails' => ['required', 'array'],
         'designerDetails.*.name' => ['required'],
+        'designerDetails.*.father_name' => ['required'],
+        'designerDetails.*.grandfather_name' => ['required'],
+        'designerDetails.*.phone' => ['required'],
+        'designerDetails.*.address' => ['required'],
+        'designerDetails.*.local_body' => ['required'],
+        'designerDetails.*.ward_no' => ['required', 'integer'],
         'designerDetails.*.post' => ['required'],
         'designerDetails.*.nec_council_no' => ['required'],
         'designerDetails.*.local_body_registration_no' => ['required'],
         'designerDetails.*.consulting_firm_name' => ['required'],
-    ];
-
-    protected array $applicantDetailValidations = [
-        'applicantDetail.applicant_type' => ['required'],
-        'applicantDetail.relation_with_owner' => ['required'],
-        'applicantDetail.name' => ['required_if:applicantDetail.applicant_type,inheritance'],
-        'applicantDetail.phone' => ['required_if:applicantDetail.applicant_type,inheritance'],
-        'applicantDetail.father_name' => ['required_if:applicantDetail.applicant_type,inheritance'],
-        'applicantDetail.citizenship_issue_district_id' => ['required_if:applicantDetail.applicant_type,inheritance'],
-        'applicantDetail.citizenship_no' => ['required_if:applicantDetail.applicant_type,inheritance'],
-        'applicantDetail.citizenship_issue_date' => ['required_if:applicantDetail.applicant_type,inheritance'],
-        'applicantDetail.application_date' => ['nullable'],
-        'applicantDetail.signature' => ['required', 'image']
     ];
 
     protected array $criteriaDetailValidations = [
@@ -354,103 +158,95 @@ class MapApplyLivewire extends Component
         'buildingDetails' => ['required', 'array'],
         'buildingDetails.*.detail' => ['required'],
         'buildingDetails.*.description' => ['required'],
-        'buildingDetails.*.remarks' => ['required'],
+        'buildingDetails.*.remarks' => ['nullable'],
     ];
 
-    public function rules()
+    protected array $consultantDetailValidations = [
+        'applyMap.consultant_signature' => ['nullable', 'image'],
+        'applyMap.consultant_name' => ['required'],
+        'applyMap.consultant_mobile_no' => ['required'],
+        'applyMap.consultant_nec_no' => ['required'],
+    ];
+
+    public function rules(): array
     {
-        switch ($this->currentStep) {
-            case 1:
-                {
-                    return array_merge($this->applyMapValidations,
-                        $this->landDescriptionValidations,
-                        $this->landOwnerValidations,
-                        $this->fourFortValidations,
-                        $this->houseOwnerValidations,
-                        $this->designerDetailValidations,
-                        $this->applicantDetailValidations,
-                        $this->criteriaDetailValidations,
-                        $this->buildingDetailValidations
-                    );
-                }
-                break;
-            case 2:
-                {
-                    return $this->landDescriptionValidations;
-                }
-                break;
-            default:
-            {
-                return $this->applyMapValidations;
-            }
-        }
+        return array_merge(
+            $this->fourFortValidations,
+            $this->designerDetailValidations,
+            $this->criteriaDetailValidations,
+            $this->buildingDetailValidations,
+            $this->consultantDetailValidations
+        );
     }
 
-    public function updated($propertyName)
+    public function updated($propertyName): void
     {
         $this->validateOnly($propertyName);
     }
 
-    public function saveFormData()
+    public function saveFormData(): void
     {
         $this->validate();
 
         DB::transaction(function () {
-            $mapApply = $this->client->mapApplies()->create($this->applyMap);
-
-            foreach ($this->applyMap['storeyDetails'] as $storeyDetail) {
-                $mapApply->storeyDetails()->create($storeyDetail);
-            }
-
-            $mapApply->landDetail()->create($this->landDescription);
-
-            $mapApply->landOwner()->create($this->landOwner);
-
-            $mapApply->houseOwner()->create($this->houseOwner);
-
+            $this->mapApply->update($this->applyMap);
             foreach ($this->fourFortDetails as $fourFortDetail) {
-                $mapApply->fourForts()->create($fourFortDetail);
+                $this->mapApply->fourForts()->create($fourFortDetail);
             }
 
             foreach ($this->designerDetails as $designerDetail) {
-                $mapApply->designerDetails()->create($designerDetail);
+                $this->mapApply->designerDetails()->create($designerDetail);
             }
-            $mapApply->applicantDetail()->create($this->applicantDetail);
 
             foreach ($this->criteriaDetails as $criteriaDetail) {
-                $mapApply->criteriaDetails()->create($criteriaDetail);
+                $this->mapApply->criteriaDetails()->create($criteriaDetail);
             }
 
             foreach ($this->buildingDetails as $buildingDetail) {
-                $mapApply->buildingDetails()->create($buildingDetail);
+                $this->mapApply->buildingDetails()->create($buildingDetail);
             }
         });
 
-        $this->reset('mapApply', 'landDescription', 'landOwner', 'houseOwner', 'fourFortDetails', 'designerDetails', 'applicantDetail', 'criteriaDetails', 'buildingDetails');
+        $this->reset('fourFortDetails', 'designerDetails', 'criteriaDetails', 'buildingDetails');
 
         $this->dispatchBrowserEvent('alert_message', [
-            'type' => "success",
-            'title' => "धन्यबाद",
-            'text' => "तपाईको फारम सफलतापूर्वक दर्ता भयो",
+            'type' => 'success',
+            'title' => 'धन्यबाद',
+            'text' => 'तपाईको फारम सफलतापूर्वक दर्ता भयो',
         ]);
     }
 
     public function render()
     {
-        $this->convert();
-        if (!empty($this->conversion_id)) {
-            $this->units = Unit::where('measurement_unit_id', $this->conversion_id)->orderByDesc('position')->get();
-        }
-
-        if ($this->applicantDetail['applicant_type'] != 'inheritance') {
-            $this->applicantDetail['name'] = null;
-            $this->applicantDetail['phone'] = null;
-            $this->applicantDetail['father_name'] = null;
-            $this->applicantDetail['citizenship_issue_district_id'] = null;
-            $this->applicantDetail['citizenship_no'] = null;
-            $this->applicantDetail['citizenship_issue_date'] = null;
-        }
-
         return view('emap::livewire.map-apply-livewire');
+    }
+
+    public function messages(): array
+    {
+        return [
+            'fourFortDetails.required' => 'चार किल्लाको विवरण अनिवार्य छ|',
+            'fourFortDetails.*.east.required' => 'पूर्व दिशा अनिवार्य छ|',
+            'fourFortDetails.*.south.required' => 'दक्षिण दिशा अनिवार्य छ|',
+            'fourFortDetails.*.west.required' => 'पश्चिम दिशा अनिवार्य छ|',
+            'fourFortDetails.*.north.required' => 'उत्तर दिशा अनिवार्य छ|',
+            'designerDetails.required' => 'डिजाइनरको विवरण अनिवार्य छ|',
+            'designerDetails.*.name.required' => ' नाम अनिवार्य छ|',
+            'designerDetails.*.father_name.required' => 'बुबाको नाम अनिवार्य छ|',
+            'designerDetails.*.grand_father_name.required' => 'हजुरबुबाको नाम अनिवार्य छ|',
+            'designerDetails.*.phone.required' => ' फोन अनिवार्य छ|',
+            'designerDetails.*.address.required' => ' ठेगाना अनिवार्य छ|',
+            'designerDetails.*.local_body.required' => ' पालिका  अनिवार्य छ|',
+            'designerDetails.*.ward_no.required' => ' वडा नं.   अनिवार्य छ|',
+            'designerDetails.*.post.required' => 'पद अनिवार्य छ|',
+            'designerDetails.*.nec_council_no.required' => 'NEC Council No. अनिवार्य छ|',
+            'designerDetails.*.local_body_registration_no.required' => 'पालिकाको दर्ता नं अनिवार्य छ|',
+            'designerDetails.*.consulting_firm_name.required' => 'कन्सल्टिंग फर्म नाम अनिवार्य छ|',
+            'criteriaDetails.required' => 'मापदण्ड विवरण अनिवार्य छ|',
+            'criteriaDetails.*.according_to_criteria.required' => 'मापदण्ड अनुसार अनिवार्य छ|',
+            'criteriaDetails.*.according_to_map.required' => 'नक्सा अनुसार अनिवार्य छ|',
+            'criteriaDetails.*.compliance.required' => 'अनुपालन अनिवार्य छ|',
+            'buildingDetails.required' => 'भवन सम्बन्धि विवरण अनिवार्य छ|',
+            'buildingDetails.*.description.required' => 'विवरण अनिवार्य छ|',
+        ];
     }
 }

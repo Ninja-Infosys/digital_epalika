@@ -6,12 +6,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.helpDesk.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.helpDesk.branch.index')}}">हेल्प डेस्क </a>
                         </li>
                         <li class="breadcrumb-item active">सेवा</li>
                     </ol>
@@ -37,7 +34,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -86,6 +84,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $services->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/digitalboard', function (Request $request) 
     return $request->user();
 });
 
-Route::get('home',[DigitalBoardApiController::class,'home'])->name('home');
-Route::get('officeSetting',[DigitalBoardApiController::class,'officeSetting'])->name('officeSetting');
+Route::get('home', [DigitalBoardApiController::class, 'home'])->name('home');
+Route::get('officeSetting', [DigitalBoardApiController::class, 'officeSetting'])->name('officeSetting');

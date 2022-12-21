@@ -33,13 +33,20 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            Route::middleware('api')
+                ->prefix('api/v1')
+                ->group(base_path('routes/api/v1/public_api.php'));
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware(['web', 'auth:sanctum', 'checkRoleMiddleware', config('jetstream.auth_session'), 'verified'])
+            Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
                 ->prefix('admin')
                 ->as('admin.')->group(base_path('routes/admin.php'));
 
+            Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
+                ->prefix('file_manager')
+                ->as('file_manager.')->group(base_path('routes/file_manager.php'));
         });
     }
 
