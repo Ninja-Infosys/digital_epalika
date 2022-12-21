@@ -32,7 +32,7 @@
                 </li>
             @endcan
             @can('cooperative_access')
-                <li class="{{request()->is('admin/grant/grantee/group*') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/grant/grantee/cooperative*') ? 'active' : ''}}">
                     <a href="{{route('admin.grant.cooperative.index')}}">
                         <span> सहकारी </span>
                     </a>
@@ -46,8 +46,8 @@
                 </li>
             @endcan
                 @can('enterprise_access')
-                <li class="{{request()->is('admin/grant/grantee/group*') ? 'active' : ''}}">
-                    <a href="#">
+                <li class="{{request()->is('admin/grant/grantee/enterprise*') ? 'active' : ''}}">
+                    <a href="{{route('admin.grant.enterprise.index')}}">
                         <span> निजि उधम/फर्म </span>
                     </a>
                 </li>
