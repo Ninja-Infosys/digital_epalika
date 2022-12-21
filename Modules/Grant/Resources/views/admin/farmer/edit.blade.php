@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.grant.farmer.update', $farmer)}}" method="post"
+                    <form action="{{route('admin.grant.farmer.update',$farmer)}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -82,7 +82,6 @@
                                     <input
                                         type="file"
                                         name="photo"
-                                        value="{{old('photo', $farmer->photo)}}"
                                         class="form-control @error('photo') is-invalid @enderror"
                                         id="photo"
                                     />
@@ -269,6 +268,9 @@
                                     @error('cooperatives')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
+                                    @error('cooperatives.*')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="groups" class="form-label">
@@ -285,6 +287,9 @@
                                     @error('groups')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
+                                    @error('groups.*')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="enterprises" class="form-label">
@@ -299,6 +304,9 @@
                                         @endforeach
                                     </select>
                                     @error('enterprises')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                    @error('enterprises.*')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>

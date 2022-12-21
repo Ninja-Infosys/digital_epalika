@@ -55,26 +55,35 @@
                                     <td>{{$farmer->name}}</td>
 
                                     <td class="table-user"><img class="me-2 rounded-circle" src="{{$farmer->photo_url}}"
-                                             alt="{{$farmer->name}}"
-                                             >
+                                                                alt="{{$farmer->name}}"
+                                        >
                                     </td>
                                     <td>{{$farmer->father_name}}</td>
                                     <td>{{$farmer->citizenship_no}}</td>
                                     <td>{{$farmer->phone_no}}</td>
                                     <td>
-                                        <a href="{{route('admin.grant.farmer.edit', $farmer)}}"
-                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i>
+                                        <a href="{{route('admin.grant.farmer.show', $farmer)}}"
+                                           class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
+                                            <i class="fa fa-eye"></i>
                                         </a>
-                                        <form
-                                            action="{{route('admin.grant.farmer.destroy', $farmer)}}"
-                                            method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm"title=" मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
+                                        @can('farmer_edit')
+                                            <a href="{{route('admin.grant.farmer.edit', $farmer)}}"
+                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('farmer_delete')
+                                            <form
+                                                action="{{route('admin.grant.farmer.destroy', $farmer)}}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                        title=" मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty
