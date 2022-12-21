@@ -34,7 +34,7 @@
                         @csrf
                         <fieldset>
                             <legend>
-                                <h4 class="text-primary">समूहको विवरण</h4>
+                                <h4 class="text-info">समूहको विवरण</h4>
                             </legend>
                             <h5 class="mt-1 text-black">नोट: कृपया समुहको विवरण भर्दा ध्यान दिएर भर्नु होला । </h5>
                             <div class="row mt-2">
@@ -87,7 +87,7 @@
                         </fieldset>
                         <fieldset class="mt-3">
                             <legend>
-                                <h4 class="text-primary">स्थानीय ठेगाना</h4>
+                                <h4 class="text-info">स्थानीय ठेगाना</h4>
                             </legend>
                             <h5 class="mt-1 text-black">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र
                                 टोल छनौट गर्नुहोस् ।</h5>
@@ -116,9 +116,9 @@
 
                         <fieldset class="my-3">
                             <legend>
-                                <h4 class="text-primary">संलग्न कृषकहरू</h4>
+                                <h4 class="text-info">संलग्न कृषकहरू</h4>
                             </legend>
-                            <h5 class="mt-1 text-black">सहकारीमा संलग्न कृषकहरू छान्नुहोस् </h5>
+                            <h5 class="mt-1 text-black">समूहमा संलग्न कृषकहरू छान्नुहोस् </h5>
                             <div class="row mt-2">
                                 <div class="col-md-6 mb-2">
                                     <label for="farmers" class="fs-5">कृषकहरू <span

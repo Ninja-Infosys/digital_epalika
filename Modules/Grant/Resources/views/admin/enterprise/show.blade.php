@@ -23,27 +23,24 @@
             <div class="card text-center">
                 <div class="card-body">
                     <div class="text-start mt-3">
-                        <p class=" text-dark mb-2 font-16"><strong>समूहको नाम :</strong>
-                            <span class="ms-2 text-muted">{{ $group->name }}</span>
+                        <p class=" text-dark mb-2 font-16"><strong>नाम :</strong>
+                            <span class="ms-2 text-muted">{{ $enterprise->name }}</span>
                         </p>
-                        <p class="border-top border-1 text-dark mb-2 font-16"><strong>समूह परिचय पत्र नं :</strong>
-                            <span class="ms-2 text-muted">{{ $group->unique_id }}</span>
+                        <p class="border-top border-1 text-dark mb-2 font-16"><strong>उद्यम आईडी:</strong>
+                            <span class="ms-2 text-muted">{{ $enterprise->unique_id }}</span>
                         </p>
-                        <p class="border-top border-1 text-dark mb-2 font-16"><strong>दर्ता मिति :</strong> <span
-                                class="ms-2 text-muted">{{ $group->registration_date }}</span></p>
-
-                        <p class="border-top border-1 text-dark mb-2 font-16"><strong>दर्ता भएको कार्यलय :</strong> <span
-                                class="ms-2 text-muted">{{ $group->registered_office }}</span></p>
+                        <p class="border-top border-1 text-dark mb-2 font-16"><strong>उद्यमको प्रकार :</strong> <span
+                                class="ms-2 text-muted">{{ $enterprise->enterpriseType->title ?? '' }}</span></p>
 
                         <p class=" border-top border-1 text-dark mb-2 font-16"><strong>पाना/भ्याट :</strong> <span
-                                class="ms-2 text-muted">{{ $group->vat_pan }}</span></p>
+                                class="ms-2 text-muted">{{ $enterprise->vat_pan }}</span></p>
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>ठेगाना :</strong> <span
-                                class="ms-2 text-muted">{{ $group->province->province ?? '' }},
-                                {{ $group->district->district ?? '' }},
-                                {{ $group->localBody->local_body ?? '' }} -
-                                {{ $group->ward_no ?? '' }},
-                                {{ $group->village ?? '' }}
-                                {{ $group->tole ?? '' }}
+                                class="ms-2 text-muted">{{ $enterprise->province->province ?? '' }},
+                                {{ $enterprise->district->district ?? '' }},
+                                {{ $enterprise->localBody->local_body ?? '' }} -
+                                {{ $enterprise->ward_no ?? '' }},
+                                {{ $enterprise->village ?? '' }}
+                                {{ $enterprise->tole ?? '' }}
                             </span></p>
 
                     </div>
@@ -57,7 +54,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="text-dark font-19">सम्पर्क व्यक्तिहरू</h4>
-                            <p class="pt-1 font-16">समूहको सम्पर्क व्यक्तिहरू थप्नुहोस् ।</p>
+                            <p class="pt-1 font-16">उधमको सम्पर्क व्यक्तिहरू थप्नुहोस् ।</p>
                         </div>
                         <div class="card-btn pb-2">
                             <a href="#" class="btn btn-sm btn-outline-primary">विवरण हेर्नुहोस<i
@@ -69,7 +66,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="text-dark font-19">अनुदान विवरण</h4>
-                            <p class="pt-1 font-16">समूहको अनुदान विवरण थप्नुहोस् ।</p>
+                            <p class="pt-1 font-16">उधमको अनुदान विवरण थप्नुहोस् ।</p>
                         </div>
                         <div class="card-btn pb-2">
                             <a href="#" class="btn btn-sm btn-outline-primary">विवरण हेर्नुहोस<i
@@ -81,8 +78,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="text-dark font-19">संलग्न कृषक</h4>
-                             <p class="pt-1 font-16">समूहको संलग्न कृषक
-                            थप्नुहोस् ।</p>
+                            <p class="pt-1 font-16">उधमको संलग्न कृषक थप्नुहोस् ।</p>
                         </div>
                         <div class="card-btn pb-2">
                             <a href="#" class="btn btn-sm btn-outline-primary">विवरण हेर्नुहोस<i

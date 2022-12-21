@@ -35,8 +35,7 @@
                 <div class="card-body">
                     <form action="{{route('admin.grant.cooperative.store')}}" method="post">
                         @csrf
-                        <div class="row">
-                            <div class="col-md-12 mb-2">
+
                                 <fieldset>
                                     <legend><h4 class="text-info"> सहकारीको विवरण </h4></legend>
                                     <div class="row">
@@ -124,17 +123,16 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="objective" class="form-label">उद्देश्य</label>
-                                            <textarea name="objective" id="objective" placeholder="objective.." cols="60" rows="3"></textarea>
+                                            <textarea name="objective" id="objective" placeholder="objective.." cols="45" rows="5"></textarea>
                                             @error('objective')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
                                     </div>
                                 </fieldset>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <fieldset>
+
+
+                            <fieldset class="my-3">
                                 <legend><h4 class="text-info"> स्थायी ठेगाना </h4></legend>
                                 <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् ।</p>
                                 <livewire:address/>
@@ -169,9 +167,9 @@
                                     @enderror
                                 </div>
                             </fieldset>
-                        </div>
+
                         <hr class="dotted" style="border-top: 3px dotted #bbb;">
-                        <div class="row my-2">
+
                             <fieldset>
                                 <legend>
                                     <h4 class="text-info">संलग्न कृषकहरू</h4>
@@ -192,7 +190,7 @@
                                     @enderror
                                 </div>
                             </fieldset>
-                        </div>
+
 
                         <button type="submit" class="btn btn-primary">
                             Save

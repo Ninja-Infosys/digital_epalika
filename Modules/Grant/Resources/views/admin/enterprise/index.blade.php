@@ -53,6 +53,10 @@
                                     <th>{{$enterprise->name}}</th>
                                     <th>{{$enterprise->vat_pan}}</th>
                                     <td>
+                                        <a href="{{route('admin.grant.enterprise.show', $enterprise)}}"
+                                           class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                         <a href="{{route('admin.grant.enterprise.edit', $enterprise)}}"
                                            class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>

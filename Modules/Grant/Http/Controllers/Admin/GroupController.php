@@ -87,4 +87,13 @@ class GroupController extends Controller
         toast('समूह सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
+
+    public function show(Group $group)
+    {
+        $this->checkAuthorization('group_access');
+
+        $group->load('province', 'district', 'localBody', 'farmers');
+
+        return view('grant::admin.group.show', compact('group'));
+    }
 }
