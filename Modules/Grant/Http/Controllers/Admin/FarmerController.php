@@ -4,6 +4,7 @@ namespace Modules\Grant\Http\Controllers\Admin;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Group;
 use Modules\Grant\Http\Requests\Farmer\StoreFarmerRequest;
+use Modules\Grant\Http\Requests\Farmer\UpdateFarmerRequest;
 
 class FarmerController extends Controller
 {
@@ -55,12 +57,6 @@ class FarmerController extends Controller
         toast('कृषक सफलता पुर्वक थपियो !', 'success');
         return back();
     }
-
-    public function show(Farmer $farmer)
-    {
-        return view('grant::show');
-    }
-
     public function edit(Farmer $farmer)
     {
         $this->checkAuthorization('farmer_edit');
@@ -74,12 +70,21 @@ class FarmerController extends Controller
         return view('grant::admin.farmer.edit', compact('farmer', 'cooperatives', 'groups', 'enterprises'));
     }
 
-    public function update(Request $request, Farmer $farmer)
+    public function update(UpdateFarmerRequest $request, Farmer $farmer)
     {
+        DB::transaction(function () use ($request, $farmer) {
+            if ($request->hasFile('photo') && $farmer->photo) {
+                $this->deleteFile($farmer->photo);
+            }
+            $farmer->update($request->validated());
 
+            $farmer->groups()->sync($request->validated()['groups']);
+            $farmer->enterprises()->sync($request->validated()['enterprises']);
+            $farmer->cooperatives()->sync($request->validated()['cooperatives']);
+        });
     }
 
-    public function destroy(Farmer $farmer)
+    public function destroy(Farmer $farmer): RedirectResponse
     {
         $this->checkAuthorization('farmer_delete');
 
