@@ -137,6 +137,20 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
+                                    <label for="spouse_name" class="form-label">पति/पत्नी नाम</label>
+                                    <input
+                                        type="text"
+                                        name="spouse_name"
+                                        value="{{old('spouse_name')}}"
+                                        class="form-control @error('spouse_name') is-invalid @enderror"
+                                        id="spouse_name"
+                                        placeholder="पति/पत्नी नाम"
+                                    />
+                                    @error('spouse_name')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-2">
                                     <label for="father_name" class="form-label">बुवाको नाम थर *</label>
                                     <input
                                         type="text"
@@ -294,7 +308,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary mt-2">
                             Save
                         </button>
                     </form>
