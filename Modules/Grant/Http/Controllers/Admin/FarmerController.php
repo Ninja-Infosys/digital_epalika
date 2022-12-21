@@ -2,16 +2,20 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Group;
 use Modules\Grant\Http\Requests\Farmer\StoreFarmerRequest;
+use Modules\Grant\Http\Requests\Farmer\UpdateFarmerRequest;
 
 class FarmerController extends Controller
 {
@@ -58,20 +62,45 @@ class FarmerController extends Controller
 
     public function show(Farmer $farmer)
     {
-        return view('grant::show');
+        $this->checkAuthorization('farmer_access');
+
+        $farmer->load('province', 'district', 'localBody', 'groups', 'enterprises', 'cooperatives');
+
+        return view('grant::admin.farmer.show', compact('farmer'));
     }
 
     public function edit(Farmer $farmer)
     {
-        return view('grant::edit');
+        $this->checkAuthorization('farmer_edit');
+
+        $farmer->load('cooperatives', 'groups', 'enterprises');
+
+        $cooperatives = Cooperative::latest()->get();
+        $groups = Group::latest()->get();
+        $enterprises = Enterprise::latest()->get();
+
+        return view('grant::admin.farmer.edit', compact('farmer', 'cooperatives', 'groups', 'enterprises'));
     }
 
-    public function update(Request $request, Farmer $farmer)
+    public function update(UpdateFarmerRequest $request, Farmer $farmer): Redirector|Application|RedirectResponse
     {
-        //
+        $this->checkAuthorization('farmer_edit');
+
+        DB::transaction(function () use ($request, $farmer) {
+            if ($request->hasFile('photo') && $farmer->photo) {
+                $this->deleteFile($farmer->photo);
+            }
+            $farmer->update($request->validated());
+
+            $farmer->groups()->sync($request->input('groups'));
+            $farmer->enterprises()->sync($request->input('enterprises'));
+            $farmer->cooperatives()->sync($request->input('cooperatives'));
+        });
+        toast('कृषक सफलता पुर्वक सम्पादन गरियो ', 'success');
+        return redirect(route('admin.grant.farmer.index'));
     }
 
-    public function destroy(Farmer $farmer)
+    public function destroy(Farmer $farmer): RedirectResponse
     {
         $this->checkAuthorization('farmer_delete');
 

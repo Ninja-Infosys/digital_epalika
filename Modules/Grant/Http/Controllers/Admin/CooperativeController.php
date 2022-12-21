@@ -55,10 +55,14 @@ class CooperativeController extends Controller
         return view('grant::show');
     }
 
-    public function edit($id)
+    public function edit(Cooperative $cooperative)
     {
         $this->checkAuthorization('cooperative_edit');
-        return view('grant::edit');
+
+        $cooperativeTypes=CooperativeType::all();
+        $affiliations=Affiliation::all();
+        $farmers=Farmer::all();
+        return view('grant::admin.cooperative.edit', compact('cooperative','cooperativeTypes', 'affiliations', 'farmers'));
     }
 
     public function update(UpdateCooperativeRequest $request, $id)
