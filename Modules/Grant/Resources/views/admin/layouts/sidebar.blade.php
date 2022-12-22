@@ -4,16 +4,18 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+@can('grantDetail_access')
 <li>
-    <a href="#">
+    <a href="{{route('admin.grant.grantDetail.index')}}">
         <i class="fa fa-file-contract"></i>
         <span>अनुदान विवरण</span>
     </a>
 </li>
+@endcan
 @can('grant_access')
 <li>
     <a href="{{route('admin.grant.grant.index')}}">
-        <i class="fa fa-file-contract"></i>
+        <i class="fa fa-file"></i>
         <span>जारि अनुदान कार्यक्रम</span>
     </a>
 </li>
@@ -63,7 +65,12 @@
         </ul>
     </div>
 </li>
-
+<li>
+    <a href="#">
+        <i class="fa fa-file-contract"></i>
+        <span>रिपोर्ट</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/grant/setting/*') ? 'active' : ''}}">
     <a href="#sidebarGrantSetting"
        {{request()->is('admin/grant/setting/*') ? 'aria-expanded=true' : ''}}

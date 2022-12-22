@@ -23,10 +23,4 @@ class RecommendationFormData extends Model
         'update_times'
     ];
 
-    public static function bootObservable(): void
-    {
-        self::updating(function (Model $model) {
-            $model->update_times++;
-        });
-    }
 }

@@ -66,14 +66,20 @@
                                     <td>
                                         @can('recommendation_access')
                                             <a href="{{ route('admin.recommendation.recommendation.show', [$applicationTypeEnum, $recommendation]) }}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-eye"></i> भरेको फारम हेर्नुहोस
+                                               class="btn btn-xs btn-outline-primary" title="भरेको फारम हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('recommendation_edit')
                                             <a href="{{ route('admin.recommendation.recommendation.edit', [$applicationTypeEnum, $recommendation]) }}"
-                                               class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-pen"></i> फारम सम्पादन गर्नुहोस
+                                               class="btn btn-xs btn-outline-warning" title="फारम सम्पादन गर्नुहोस">
+                                                <i class="fa fa-pen"></i>
+                                            </a>
+                                        @endcan
+                                        @can('recommendation_access')
+                                            <a href="{{ route('admin.recommendation.recommendation.print',$recommendation) }}"
+                                               class="btn btn-xs btn-outline-warning" title="प्रिन्ट गर्नुहोस">
+                                                <i class="fa fa-print"></i>
                                             </a>
                                         @endcan
                                         @can('recommendation_delete')
@@ -82,8 +88,8 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

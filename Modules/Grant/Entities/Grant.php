@@ -37,13 +37,18 @@ class Grant extends Model
         'user_id',
     ];
 
-    protected function grantFor(): Attribute
-    {
-        return new Attribute(
-            get: fn($value) => explode(",",$value),
+    protected $appends = [
+        'grant_for_data'
+    ];
 
-            set: fn($value) => implode(",", $value),
-        );
+    function getGrantForDataAttribute(): array
+    {
+        return explode(',', $this->attributes['grant_for']);
+    }
+
+    public function setGrantForAttribute($value)
+    {
+        $this->attributes['grant_for'] = implode(',', $value);
     }
 
     public function grantProgram(): BelongsTo

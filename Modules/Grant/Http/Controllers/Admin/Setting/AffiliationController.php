@@ -33,7 +33,7 @@ class AffiliationController extends Controller
         $this->checkAuthorization('affiliation_create');
 
         Affiliation::create($request->validated());
-        toast('Affiliation Added Successfully !!', 'success');
+        toast('सहकारी आव्धता सफलता पुर्वक थपियो', 'success');
         return back();
 
     }
@@ -51,7 +51,7 @@ class AffiliationController extends Controller
         $this->checkAuthorization('affiliation_edit');
 
         $affiliation->update($request->validated());
-        toast('Affiliation Updated Successfully !!', 'message');
+        toast('सहकारी आव्धता सफलता पुर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.affiliation.index'));
 
     }
@@ -60,7 +60,7 @@ class AffiliationController extends Controller
     {
         $this->checkAuthorization('affiliation_delete');
         $affiliation->delete();
-        toast('Affiliation Deleted SuccessFully !!', 'success' );
+        toast('सहकारी आव्धता सफलता पुर्वक हटाइयो', 'success' );
         return back();
     }
 }

@@ -47,7 +47,7 @@ class CooperativeTypeController extends Controller
     {
         $this->checkAuthorization('cooperative_edit');
         $cooperativeType->update($request->validated());
-        toast('Cooperative Type updated Successfully', 'success');
+        toast('सहकारी प्रकार सफलता पूर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.cooperativeType.index'));
     }
 

@@ -39,8 +39,8 @@
                             </legend>
                             <h5 class="text-black mt-1">नोट: कृपया समुहको विवरण भर्दा ध्यान दिएर भर्नु होला । </h5>
                             <div class="row mt-2">
-                                <div class="col-md-6 mb-2">
-                                    <label for="name" class="form-label">समूहको नाम *</label>
+                                <div class="col-md-4 mb-2">
+                                    <label for="name" class="form-label">समूहको नाम <span class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{ old('name', $group->name) }}"
                                         class="form-control @error('name') is-invalid @enderror" id="name"
                                         placeholder="समूह नाम" />
@@ -48,8 +48,8 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="registered_office" class="form-label">दर्ता भएको कार्यालय *</label>
+                                <div class="col-md-4 mb-2">
+                                    <label for="registered_office" class="form-label">दर्ता भएको कार्यालय <span class="text-danger">*</span></label>
                                     <input type="text" name="registered_office"
                                         value="{{ old('registered_office', $group->registered_office) }}"
                                         class="form-control @error('registered_office') is-invalid @enderror"
@@ -58,10 +58,8 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4 mb-2">
-                                    <label for="monthly_meeting" class="form-label">मासिक वैठक हुने गते *</label>
+                                    <label for="monthly_meeting" class="form-label">मासिक वैठक हुने गते </label>
                                     <input type="text" name="monthly_meeting"
                                         value="{{ old('monthly_meeting', $group->monthly_meeting) }}"
                                         class="form-control @error('monthly_meeting') is-invalid @enderror"
@@ -79,7 +77,7 @@
                                     />
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="vat_pan" class="form-label">पाना/भ्याट *</label>
+                                    <label for="vat_pan" class="form-label">पाना/भ्याट </label>
                                     <input type="text" name="vat_pan" value="{{ old('vat_pan', $group->vat_pan) }}"
                                         class="form-control @error('vat_pan') is-invalid @enderror" id="vat_pan"
                                         placeholder="पाना/भ्याट" />
@@ -95,13 +93,13 @@
                             </legend>
                             <h5 class="mt-1 text-black">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र
                                 टोल छनौट गर्नुहोस् ।</h5>
-                            <div class="row mt-2">
-                                @livewire('address', [
-                                    'province_id' => $group->province_id,
-                                    'district_id' => $group->district_id,
-                                    'local_body_id' => $group->local_body_id,
-                                    'ward_no' => $group->ward_no
-                                ])
+                            @livewire('address', [
+                            'province_id' => $group->province_id,
+                            'district_id' => $group->district_id,
+                            'local_body_id' => $group->local_body_id,
+                            'ward_no' => $group->ward_no
+                            ])
+                            <div class="row ">
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label">गाउँ</label>
                                     <input type="text" name="village" value="{{ old('village', $group->village) }}"
@@ -123,14 +121,14 @@
                             </div>
                         </fieldset>
 
-                        <fieldset class="my-3">
+                        <fieldset class="my-2">
                             <legend>
                                 <h4 class="text-info">संलग्न कृषकहरू</h4>
                             </legend>
                             <h5 class="mt-1 text-black">समूहमा संलग्न कृषकहरू छान्नुहोस् </h5>
                             <div class="row mt-2">
                                 <div class="col-md-6 mb-2">
-                                    <label for="farmers" class="fs-5">कृषकहरू <span
+                                    <label for="farmers" class="fs-5">कृषकहरू<span
                                             class="text-danger">*</span></label>
                                     <select name="farmers[]" multiple data-toggle="select2" id="farmers"
                                         class="form-control">

@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदनाग्राही कृषकहरुको विवरण </h4>
+                        <h4 class="header-title"> कृषकहरुको विवरण </h4>
                         @can('farmer_access')
                             <a href="{{route('admin.grant.farmer.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -38,10 +38,11 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>कृषक परिचय पत्र नं.</th>
+                                <th>युनिक आईडी</th>
                                 <th>पुरा नाम</th>
                                 <th>फोटो</th>
                                 <th>बुबाको नाम</th>
+                                <th>कृषक परिचय पत्र नं.</th>
                                 <th>नागरिकता नं</th>
                                 <th>सम्पर्क नं.</th>
                                 <th>Action</th>
@@ -59,6 +60,7 @@
                                         >
                                     </td>
                                     <td>{{$farmer->father_name}}</td>
+                                    <td>{{$farmer->farmer_id_card_no}}</td>
                                     <td>{{$farmer->citizenship_no}}</td>
                                     <td>{{$farmer->phone_no}}</td>
                                     <td>

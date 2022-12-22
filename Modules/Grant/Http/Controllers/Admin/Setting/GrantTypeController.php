@@ -34,7 +34,7 @@ class GrantTypeController extends Controller
         $this->checkAuthorization('grantType_create');
 
         GrantType::create($request->validated());
-        toast('Grant Type Added Successfully', 'success');
+        toast('अनुदान प्रकार सफलता पुर्वक थपियो', 'success');
         return back();
 
     }
@@ -51,7 +51,7 @@ class GrantTypeController extends Controller
         $this->checkAuthorization('grantType_edit');
 
         $grantType->update($request->validated());
-        toast('Grant Type updated Successfully', 'success');
+        toast('अनुदान प्रकार सफलता पुर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.grantType.index'));
     }
 
@@ -60,7 +60,7 @@ class GrantTypeController extends Controller
         $this->checkAuthorization('grantType_delete');
         $grantType->delete();
 
-        toast('Grant Type deleted Successfully', 'success');
+        toast('अनुदान प्रकार सफलता पुर्वक हटाईयो', 'success');
         return back();
 
     }

@@ -7,6 +7,7 @@ use Modules\Grant\Http\Controllers\Admin\DashboardController;
 use Modules\Grant\Http\Controllers\Admin\EnterprisesController;
 use Modules\Grant\Http\Controllers\Admin\FarmerController;
 use Modules\Grant\Http\Controllers\Admin\GrantController;
+use Modules\Grant\Http\Controllers\Admin\GrantDetailController;
 use Modules\Grant\Http\Controllers\Admin\GroupController;
 use Modules\Grant\Http\Controllers\Admin\Setting\AffiliationController;
 use Modules\Grant\Http\Controllers\Admin\Setting\CooperativeTypeController;
@@ -34,3 +35,4 @@ Route::prefix('grantee')->group(function (){
 });
 
 Route::resource('grant', GrantController::class);
+Route::resource('grantDetail', GrantDetailController::class);

@@ -15,7 +15,7 @@ class CooperativeObserver
 
     public function creating(Cooperative $cooperative): void
     {
-        $cooperative->user_id= auth()->user()->id;
+        $cooperative->user_id= auth()->id();
         $cooperative->unique_id = $this->generateUniqueId($cooperative, 'cooperatives', 'CR');
     }
 

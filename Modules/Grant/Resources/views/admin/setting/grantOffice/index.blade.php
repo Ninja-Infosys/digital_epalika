@@ -40,7 +40,7 @@
                             <tr>
                                 <th>क्र.सं</th>
                                 <th>अनुदान कार्यालय</th>
-                                <th>#</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -51,8 +51,8 @@
                                     <td>
                                         @can('grantOffice_edit')
                                             <a href="{{route('admin.grant.setting.grantOffice.edit', $office)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('grantOffice_delete')
@@ -61,8 +61,8 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

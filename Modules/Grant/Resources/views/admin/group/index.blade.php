@@ -34,7 +34,6 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
                         <table class="table table-sm table-striped table-hover mt-3">
                             <thead>
                             <tr>
@@ -50,12 +49,12 @@
                             <tbody>
                             @forelse($groups as $group)
                                 <tr>
-                                    <th>{{ $loop->iteration }}</th>
-                                    <th>{{$group->unique_id}}</th>
-                                    <th>{{$group->name}}</th>
-                                    <th>{{ $group->registration_date }}</th>
-                                    <th>{{ $group->registered_office }}</th>
-                                    <th>{{ $group->vat_pan }}</th>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{$group->unique_id}}</td>
+                                    <td>{{$group->name}}</td>
+                                    <td>{{ $group->registration_date }}</td>
+                                    <td>{{ $group->registered_office }}</td>
+                                    <td>{{ $group->vat_pan }}</td>
                                     <td>
                                         <a href="{{route('admin.grant.group.show', $group)}}"
                                            class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">

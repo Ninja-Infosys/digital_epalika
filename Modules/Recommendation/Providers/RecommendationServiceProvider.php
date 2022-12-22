@@ -3,6 +3,8 @@
 namespace Modules\Recommendation\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Recommendation\Entities\RecommendationFormData;
+use Modules\Recommendation\Observers\RecommendationFormDataObserver;
 
 class RecommendationServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,7 @@ class RecommendationServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+//        RecommendationFormData::observe(RecommendationFormDataObserver::class);
     }
 
     /**
