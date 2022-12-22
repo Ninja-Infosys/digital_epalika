@@ -45,19 +45,19 @@
                             <tbody>
                             @forelse($cooperativeTypes as $cooperativeType)
                                 <tr>
-                                    <th>{{$loop->iteration}}</th>
-                                    <th>{{$cooperativeType->title}}</th>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$cooperativeType->title}}</td>
                                     <td>
                                         <a href="{{route('admin.grant.setting.cooperativeType.edit', $cooperativeType)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.grant.setting.cooperativeType.destroy', $cooperativeType)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>

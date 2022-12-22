@@ -2,10 +2,15 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\EnterpriseType;
@@ -19,7 +24,7 @@ class EnterprisesController extends Controller
     {
         $this->checkAuthorization('enterprise_access');
 
-        $enterprises = Enterprise::where(function (Builder $q) {
+        $enterprises = Enterprise::with('enterpriseType')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['enterprise_type_id', 'name', 'vat_pan'], request('search'));
             }
@@ -34,7 +39,7 @@ class EnterprisesController extends Controller
     {
         $this->checkAuthorization('enterprise_create');
 
-        $farmers = Farmer::latest()->get();
+        $farmers = Farmer::all();
         $enterpriseTypes=EnterpriseType::all();
 
         return view('grant::admin.enterprise.create', compact('farmers','enterpriseTypes'));
@@ -54,18 +59,19 @@ class EnterprisesController extends Controller
         return back();
     }
 
-    public function edit(Enterprise $enterprise)
+    public function edit(Enterprise $enterprise): Factory|View|Application
     {
         $this->checkAuthorization('enterprise_edit');
 
-        $farmers = Farmer::latest()->get();
-        $enterprise->load('farmers');
+        $enterprise->load('province', 'district', 'localBody');
         $enterpriseTypes=EnterpriseType::all();
+        $farmers=Farmer::all();
 
-        return view('grant::admin.enterprise.edit', compact('farmers','enterprise','enterpriseTypes'));
+
+        return view('grant::admin.enterprise.edit', compact('enterprise','enterpriseTypes', 'farmers'));
     }
 
-    public function update(UpdateEnterprisesRequest  $request, Enterprise $enterprise)
+    public function update(UpdateEnterprisesRequest  $request, Enterprise $enterprise): Redirector|Application|RedirectResponse
     {
         $this->checkAuthorization('enterprise_edit');
 

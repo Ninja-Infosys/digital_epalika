@@ -38,7 +38,7 @@
                             <div class="row">
                                 <div class="col-md-4 mb-2">
                                     <label for="fiscal_year_id" class="form-label">
-                                        आर्थिक बर्ष *
+                                        आर्थिक बर्ष <span class="text-danger">*</span>
                                     </label>
                                     <select name="fiscal_year_id"
                                             id="fiscal_year_id" class="form-select">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="grant_type_id" class="form-label">
-                                        अनुदानको प्रकार *
+                                        अनुदानको प्रकार <span class="text-danger">*</span>
                                     </label>
                                     <select name="grant_type_id"
                                             id="grant_type_id" class="form-select">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="grant_program_id" class="form-label">
-                                        कार्यक्रमको नाम *
+                                        कार्यक्रमको नाम <span class="text-danger">*</span>
                                     </label>
                                     <select name="grant_program_id"
                                             id="grant_program_id" class="form-select">
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="grant_office_id" class="form-label">
-                                        अनुदान दिने संस्था *
+                                        अनुदान दिने संस्था <span class="text-danger">*</span>
                                     </label>
                                     <select name="grant_office_id"
                                             id="grant_office_id" class="form-select">
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="branch_id" class="form-label">
-                                        शाखा *
+                                        शाखा <span class="text-danger">*</span>
                                     </label>
                                     <select
                                         name="branch_id"
@@ -140,7 +140,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="grant_amount" class="form-label">अनुदान रकम *</label>
+                                    <label for="grant_amount" class="form-label">अनुदान रकम <span class="text-danger">*</span></label>
                                     <input
                                         type="number"
                                         name="grant_amount"
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="grant_for" class="form-label">
-                                        अनुदानको लागि *
+                                        अनुदानको लागि <span class="text-danger">*</span>
                                     </label>
                                     <select name="grant_for[]" multiple data-toggle="select2"
                                             id="grant_for" class="form-control">

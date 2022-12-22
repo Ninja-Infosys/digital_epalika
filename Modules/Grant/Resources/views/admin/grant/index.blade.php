@@ -41,6 +41,7 @@
                                 <th>आ.व.</th>
                                 <th>अनुदान दिने सस्था</th>
                                 <th>अनुदानको कार्यक्रमको नाम</th>
+                                <th>अनुदानको प्रकार</th>
                                 <th>शाखा</th>
                                 <th>अनुदान रकम</th>
                                 <th>अनुदान लागि</th>
@@ -54,6 +55,7 @@
                                     <td>{{$grant->fiscalYear->title??''}}</td>
                                     <td>{{$grant->grantOffice->office_name??''}}</td>
                                     <td>{{$grant->grantProgram->name??''}}</td>
+                                    <td>{{$grant->grantType->title??''}}</td>
                                     <td>{{$grant->branch->branch_name??''}}</td>
                                     <td>{{$grant->grant_amount}}</td>
                                     <td>
@@ -66,10 +68,6 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.grant.grant.show', $grant)}}"
-                                           class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
                                         @can('grant_edit')
                                             <a href="{{route('admin.grant.grant.edit', $grant)}}"
                                                class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">

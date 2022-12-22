@@ -182,12 +182,13 @@
                                 <h4 class="text-info">संलग्न कृषकहरू</h4>
                             </legend>
                             <p>नोट: सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-8 mb-2">
                                 <label for="farmers" class="form-label">
                                     कृषक</label>
                                 <select name="farmers[]" multiple data-toggle="select2"
-                                        id="farmers" class="form-control">
-                                    <option disabled>--- छान्नुहोस् ---</option>
+                                        id="farmers" class="form-select">
+
+                                    <option value="" disabled>---कृषक छान्नुहोस् ---</option>
                                     @foreach($farmers as $farmer)
                                         <option value="{{$farmer->id}}">{{$farmer->name}}</option>
                                     @endforeach
@@ -199,7 +200,7 @@
                         </fieldset>
 
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary mt-2">
                             Save
                         </button>
                     </form>

@@ -61,7 +61,7 @@
                         </div>
                         <div class="card-btn pb-2">
                             <a href="#" class="btn btn-sm btn-outline-primary">विवरण हेर्नुहोस<i
-                                    class="fa fa-arrow-circle-right"></i></a>
+                                    class="fa fa-arrow-circle-right px-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="card-btn pb-2">
                             <a href="#" class="btn btn-sm btn-outline-primary">विवरण हेर्नुहोस<i
-                                    class="fa fa-arrow-circle-right"></i></a>
+                                    class="fa fa-arrow-circle-right px-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="card-btn pb-2">
                             <a href="#" class="btn btn-sm btn-outline-primary">विवरण हेर्नुहोस<i
-                                    class="fa fa-arrow-circle-right"></i></a>
+                                    class="fa fa-arrow-circle-right px-1"></i></a>
                         </div>
                     </div>
                 </div>

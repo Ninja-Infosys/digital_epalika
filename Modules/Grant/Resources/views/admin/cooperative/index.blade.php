@@ -40,7 +40,7 @@
                             <tr>
                                 <th>क्र.सं</th>
                                 <th>सहकारी परिचय पत्र नं.</th>
-                                <th>दर्ता मिति</th>
+                                <th>दर्ता नं</th>
                                 <th>सहकारीको नाम</th>
                                 <th>सहकारीको प्रकार</th>
                                 <th>पाना/भ्याट</th>
@@ -52,23 +52,23 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$cooperative->unique_id}}</td>
-                                    <td>{{$cooperative->registration_date}}</td>
+                                    <td>{{$cooperative->registration_no}}</td>
                                     <td>{{$cooperative->name}}</td>
                                     <td>{{$cooperative->cooperativeType->title??''}}</td>
                                     <td>{{$cooperative->vat_pan}}</td>
                                     <td>
-                                        @can('cooperative_edit')
-                                            <a href="{{route('admin.grant.cooperative.edit', $cooperative)}}"
-                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        @endcan
                                             @can('cooperative_access')
                                                 <a href="{{route('admin.grant.cooperative.show', $cooperative)}}"
                                                    class="btn btn-xs btn-outline-primary" title="हेर्नुहोस्">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             @endcan
+                                                @can('cooperative_edit')
+                                                    <a href="{{route('admin.grant.cooperative.edit', $cooperative)}}"
+                                                       class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                @endcan
                                         @can('cooperative_delete')
                                             <form
                                                 action="{{route('admin.grant.cooperative.destroy', $cooperative)}}"

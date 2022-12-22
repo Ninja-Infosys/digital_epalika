@@ -29,7 +29,7 @@ class EnterpriseTypeController extends Controller
         $this->checkAuthorization('enterpriseType_create');
 
         EnterpriseType::create($request->validated());
-        toast('उद्यम प्रकार सफलतापूर्वक भण्डारण गरियो', 'success');
+        toast('उद्यम प्रकार सफलतापूर्वक थपियो', 'success');
         return back();
 
     }
@@ -51,7 +51,7 @@ class EnterpriseTypeController extends Controller
 
         $enterpriseType->update($request->validated());
 
-        toast('उद्यम प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('उद्यम प्रकार सफलता पूर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.enterpriseType.index'));
     }
 
