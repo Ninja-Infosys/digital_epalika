@@ -45,19 +45,19 @@
                             <tbody>
                             @forelse($affiliations as $affiliation)
                                 <tr>
-                                    <th>{{$loop->iteration}}</th>
-                                    <th>{{$affiliation->name}}</th>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$affiliation->name}}</td>
                                     <td>
                                         <a href="{{route('admin.grant.setting.affiliation.edit', $affiliation)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.grant.setting.affiliation.destroy', $affiliation)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>

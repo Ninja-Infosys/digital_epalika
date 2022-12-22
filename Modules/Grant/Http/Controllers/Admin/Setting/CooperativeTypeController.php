@@ -2,16 +2,14 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Factory;
 use Illuminate\Console\Application;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Modules\Grant\Entities\CooperativeType;
-use Modules\Grant\Http\Requests\CooperativeType\StoreCooperativeTypeRequest;
-use Modules\Grant\Http\Requests\CooperativeType\UpdateCooperativeTypeRequest;
+use Modules\Grant\Http\Requests\Setting\CooperativeType\StoreCooperativeTypeRequest;
+use Modules\Grant\Http\Requests\Setting\CooperativeType\UpdateCooperativeTypeRequest;
 
 class CooperativeTypeController extends Controller
 {
@@ -49,7 +47,7 @@ class CooperativeTypeController extends Controller
     {
         $this->checkAuthorization('cooperative_edit');
         $cooperativeType->update($request->validated());
-        toast('Cooperative Type updated Successfully', 'success');
+        toast('सहकारी प्रकार सफलता पूर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.cooperativeType.index'));
     }
 

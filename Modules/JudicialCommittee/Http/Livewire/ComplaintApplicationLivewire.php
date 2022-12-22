@@ -9,6 +9,7 @@ use App\Models\Settings\OfficeSetting;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
+use Modules\JudicialCommittee\Entities\LawsuitNature;
 
 class ComplaintApplicationLivewire extends Component
 {
@@ -27,6 +28,7 @@ class ComplaintApplicationLivewire extends Component
     public $defendantLocalBodies = [];
 
     public $defendantWards = [];
+    public $lawsuitNatures = [];
 
     public array $form = [
         'complainant_province_id' => null,
@@ -47,7 +49,9 @@ class ComplaintApplicationLivewire extends Component
         'defendant_relationship' => null,
         'defendant_age' => null,
         'defendant_name' => null,
+        'lawsuit_nature_id' => null,
         'subject' => null,
+        'submission_no' => null,
         'complaint_detail' => null,
         'date' => null,
         'en_date' => null,
@@ -60,14 +64,12 @@ class ComplaintApplicationLivewire extends Component
     public function mount()
     {
         $this->provinces = Province::all();
+        $this->lawsuitNatures = LawsuitNature::all();
     }
 
-    protected function getListeners(): array
-    {
-        return ['postAdded' => 'incrementPostCount'];
-    }
+    protected $listeners = ['dateChanged'];
 
-    public function incrementPostCount($nepaliDate, $englishDate)
+    public function dateChanged($nepaliDate, $englishDate)
     {
         $this->form['date'] = $nepaliDate;
         $this->form['en_date'] = $englishDate;
@@ -92,7 +94,9 @@ class ComplaintApplicationLivewire extends Component
         'form.defendant_relationship' => ['required'],
         'form.defendant_age' => ['required', 'integer'],
         'form.defendant_name' => ['required', 'string', 'max:255'],
+        'form.lawsuit_nature_id' => ['required', 'exists:lawsuit_natures,id'],
         'form.subject' => ['required', 'string', 'max:255'],
+        'form.submission_no' => ['required', 'unique:complaint_applications,submission_no'],
         'form.complaint_detail' => ['required'],
         'form.date' => ['required'],
         'form.en_date' => ['required'],
@@ -115,32 +119,31 @@ class ComplaintApplicationLivewire extends Component
 
         $this->reset('form', 'complainantDistricts', 'complainantLocalBodies', 'complainantWards', 'defendantDistricts', 'defendantLocalBodies', 'defendantWards');
 
-        $this->dispatchBrowserEvent('alert_message', [
+        $this->dispatchBrowserEvent('toast_message', [
             'type' => 'success',
-            'title' => 'धन्यबाद',
-            'text' => 'उजुरी पत्र सफलतापूर्वक थपियो',
+            'title' => 'उजुरी पत्र सफलतापूर्वक थपियो'
         ]);
     }
 
     public function render()
     {
-        if (! empty($this->form['complainant_province_id'])) {
+        if (!empty($this->form['complainant_province_id'])) {
             $this->complainantDistricts = District::where('province_id', $this->form['complainant_province_id'])->get();
         }
-        if (! empty($this->form['complainant_district_id'])) {
+        if (!empty($this->form['complainant_district_id'])) {
             $this->complainantLocalBodies = LocalBody::where('district_id', $this->form['complainant_district_id'])->get();
         }
-        if (! empty($this->form['complainant_local_body_id'])) {
+        if (!empty($this->form['complainant_local_body_id'])) {
             $this->complainantWards = LocalBody::findOrFail($this->form['complainant_local_body_id'])->ward_no;
         }
 
-        if (! empty($this->form['defendant_province_id'])) {
+        if (!empty($this->form['defendant_province_id'])) {
             $this->defendantDistricts = District::where('province_id', $this->form['defendant_province_id'])->get();
         }
-        if (! empty($this->form['defendant_district_id'])) {
+        if (!empty($this->form['defendant_district_id'])) {
             $this->defendantLocalBodies = LocalBody::where('district_id', $this->form['defendant_district_id'])->get();
         }
-        if (! empty($this->form['defendant_local_body_id'])) {
+        if (!empty($this->form['defendant_local_body_id'])) {
             $this->defendantWards = LocalBody::findOrFail($this->form['defendant_local_body_id'])->ward_no;
         }
 
@@ -166,7 +169,10 @@ class ComplaintApplicationLivewire extends Component
             'form.defendant_relationship.required' => 'प्रतिवादीको सम्बन्ध अनिवार्य छ',
             'form.defendant_age.required' => 'प्रतिवादीको उमेर अनिवार्य छ',
             'form.defendant_name.required' => 'प्रतिवादीको नाम अनिवार्य छ',
+            'form.lawsuit_nature_id' => 'मुद्दा प्रकृति अनिवार्य छ',
             'form.subject.required' => 'विषय अनिवार्य छ',
+            'form.submission_no.required' => 'सबमिशन नम्बर अनिवार्य छ',
+            'form.submission_no.unique' => 'सबमिशन नम्बर पहिले नै अवस्थित छ',
             'form.complaint_detail.required' => 'उजुरी विवरण अनिवार्य छ',
             'form.date.required' => 'मिति अनिवार्य छ',
             'form.en_date.required' => 'मिति अनिवार्य छ',

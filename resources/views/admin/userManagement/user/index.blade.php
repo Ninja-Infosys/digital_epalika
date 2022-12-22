@@ -7,12 +7,9 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.userManagement.user.index')}}">प्रयोगकर्ता व्यवस्थापन</a>
                         </li>
                         <li class="breadcrumb-item active">प्रयोगकर्ता</li>
                     </ol>
@@ -71,8 +68,9 @@
                                     <td>
                                         @can('user_edit')
                                             <a href="{{route('admin.userManagement.user.edit',$user)}}"
+                                               title="सम्पादन गर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('user_delete')
@@ -80,8 +78,8 @@
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan

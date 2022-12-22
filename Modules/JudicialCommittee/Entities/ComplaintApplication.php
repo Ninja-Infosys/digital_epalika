@@ -20,7 +20,6 @@ class ComplaintApplication extends Model
     use EventObserveTrait;
 
     protected $dates = [
-        'en_date',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -30,6 +29,7 @@ class ComplaintApplication extends Model
         'fiscal_year_id',
         'submission_no',
         'registration_no',
+        'lawsuit_nature_id',
         'complainant_province_id',
         'complainant_district_id',
         'complainant_local_body_id',
@@ -58,11 +58,6 @@ class ComplaintApplication extends Model
         'applicant_signature',
     ];
 
-    public function fiscalYear(): BelongsTo
-    {
-        return $this->belongsTo(FiscalYear::class);
-    }
-
     public function getApplicantSignatureUrlAttribute(): string
     {
         return ! empty($this->attributes['applicant_signature'])
@@ -75,6 +70,16 @@ class ComplaintApplication extends Model
         if (! empty($value) && ! is_string($value)) {
             $this->attributes['applicant_signature'] = $value->store('judicial_committee/applicant_signature', 'public');
         }
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function lawsuitNature(): BelongsTo
+    {
+        return $this->belongsTo(LawsuitNature::class);
     }
 
     public function complainantProvince(): BelongsTo
