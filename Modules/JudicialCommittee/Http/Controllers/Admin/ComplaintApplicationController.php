@@ -3,7 +3,11 @@
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Arr;
+use Modules\Grant\Enums\GranteeEnum;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
+use Modules\JudicialCommittee\Entities\JudicialReceiptBill;
+use Modules\JudicialCommittee\Http\Requests\JudicialReceiptBillRequest;
 
 class ComplaintApplicationController extends Controller
 {
@@ -27,7 +31,9 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        return view('judicialcommittee::show');
+        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill');
+
+        return view('judicialcommittee::admin.complaint_application.show', compact('complaintApplication'));
     }
 
     public function edit(ComplaintApplication $complaintApplication)
@@ -49,5 +55,27 @@ class ComplaintApplicationController extends Controller
         toast('आवेदन सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
+    }
+
+    public function receiptBill(ComplaintApplication $complaintApplication)
+    {
+        $this->checkAuthorization('complaintApplication_create');
+        $complaintApplication->load('judicialReceiptBill');
+
+        return view('judicialcommittee::admin.complaint_application.receipt_bill', compact('complaintApplication'));
+    }
+
+    public function receiptBillStore(JudicialReceiptBillRequest $request, ComplaintApplication $complaintApplication)
+    {
+        $this->checkAuthorization('complaintApplication_create');
+
+        JudicialReceiptBill::updateOrCreate(
+            ['complaint_application_id' => $complaintApplication->id],
+            $request->validated()
+        );
+
+        toast('रसिद बिल सफलतापूर्वक थपियो', 'success');
+
+        return redirect(route('admin.judicialCommittee.complaintApplication.show', $complaintApplication));
     }
 }

@@ -7,10 +7,9 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialMemberController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\LawsuitNatureController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
-
-Route::get('judicialMember/{judicialMember}/updateStatus', [JudicialMemberController::class, 'updateStatus'])->name('judicialMember.updateStatus');
 Route::resource('judicialMember', JudicialMemberController::class);
-
+Route::get('complaintApplication/{complaintApplication}/receipt-bill',[ComplaintApplicationController::class,'receiptBill'])->name('complaintApplication.receipt-bill');
+Route::post('complaintApplication/{complaintApplication}/receipt-bill-store',[ComplaintApplicationController::class,'receiptBillStore'])->name('complaintApplication.receipt-bill-store');
 Route::resource('complaintApplication', ComplaintApplicationController::class);
 
 Route::prefix('setting')->group(function () {
