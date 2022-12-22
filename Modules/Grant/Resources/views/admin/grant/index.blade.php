@@ -58,7 +58,7 @@
                                     <td>{{$grant->grant_amount}}</td>
                                     <td>
                                         <ul>
-                                            @foreach($grant->grant_for as $grant_for)
+                                            @foreach($grant->grant_for_data as $grant_for)
                                                 <li>
                                                     {{\Modules\Grant\Enums\GranteeEnum::tryFrom($grant_for)->label()}}
                                                 </li>

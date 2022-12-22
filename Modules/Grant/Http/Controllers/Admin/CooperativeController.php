@@ -20,17 +20,21 @@ class CooperativeController extends Controller
     public function index()
     {
         $this->checkAuthorization('cooperative_access');
-        $cooperatives=Cooperative::all();
-        return view('grant::admin.cooperative.index',compact('cooperatives'));
+
+        $cooperatives = Cooperative::with('cooperativeType')->get();
+
+        return view('grant::admin.cooperative.index', compact('cooperatives'));
     }
 
     public function create()
     {
         $this->checkAuthorization('cooperative_create');
-        $cooperativeTypes=CooperativeType::all();
-        $affiliations=Affiliation::all();
-        $farmers=Farmer::all();
-        return view('grant::admin.cooperative.create',compact('affiliations', 'cooperativeTypes','farmers'));
+
+        $cooperativeTypes = CooperativeType::all();
+        $affiliations = Affiliation::all();
+        $farmers = Farmer::all();
+
+        return view('grant::admin.cooperative.create', compact('affiliations', 'cooperativeTypes', 'farmers'));
     }
 
     public function store(StoreCooperativeRequest $request)
@@ -40,10 +44,10 @@ class CooperativeController extends Controller
         DB::transaction(function () use ($request) {
             $cooperative = Cooperative::create($request->validated());
 
-            $cooperative->farmers()->attach($request->validated('farmers'));
+            $cooperative->farmers()->attach($request->input('farmers'));
         });
 
-        toast('सहकारी सफलतापूर्वक थपियो','success');
+        toast('सहकारी सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -58,22 +62,22 @@ class CooperativeController extends Controller
     {
         $this->checkAuthorization('cooperative_edit');
 
-        $cooperativeTypes=CooperativeType::all();
-        $affiliations=Affiliation::all();
-        $farmers=Farmer::all();
-        return view('grant::admin.cooperative.edit', compact('cooperative','cooperativeTypes', 'affiliations', 'farmers'));
+        $cooperativeTypes = CooperativeType::all();
+        $affiliations = Affiliation::all();
+        $farmers = Farmer::all();
+        return view('grant::admin.cooperative.edit', compact('cooperative', 'cooperativeTypes', 'affiliations', 'farmers'));
     }
 
     public function update(UpdateCooperativeRequest $request, Cooperative $cooperative)
     {
         $this->checkAuthorization('cooperative_edit');
-        DB::transaction(function () use ($request, $cooperative){
+        DB::transaction(function () use ($request, $cooperative) {
             $cooperative->update($request->validated());
 
             $cooperative->farmers()->sync($request->input('farmers'));
         });
 
-        toast('सहकारी सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('सहकारी सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.grant.cooperative.index'));
     }
 
@@ -85,7 +89,7 @@ class CooperativeController extends Controller
 
         $cooperative->delete();
 
-        toast('सहकारी सफलतापूर्वक हटाइयो','success');
+        toast('सहकारी सफलतापूर्वक हटाइयो', 'success');
         return back();
     }
 }

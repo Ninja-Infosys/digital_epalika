@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <label for="registration_no" class="form-label">दर्ता नं</label>
                                             <input
                                                 type="text"
@@ -85,7 +85,7 @@
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-md-4 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <x-date-input-component
                                                 nameNe="registration_date" labelNe="दर्ता मिति *"
                                                 nameEn="en_registration_date" labelEn="Dispatch Date"
@@ -96,7 +96,7 @@
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-md-4 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <label for="vat_pan" class="form-label">प्यान भ्याट</label>
                                             <input
                                                 type="text"
@@ -106,29 +106,30 @@
                                                 id="vat_pan"
                                                 placeholder="प्यान भ्याट"
                                             />
-                                            @error('vat_pan')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
                                         </div>
-                                    </div>
-                                    <div class="row">
+
                                         <div class="col-md-6 mb-2">
                                             <label for="affiliation_id" class="form-label">आवध्ता </label>
-                                            <select name="affiliation_id" id="affiliation_id" class="form-control @error('affiliation_id') is-invalid @enderror">
+                                            <select name="affiliation_id" id="affiliation_id"
+                                                    class="form-select @error('affiliation_id') is-invalid @enderror">
                                                 <option value="">आवध्ता छान्नुहोस्</option>
                                                 @foreach($affiliations as $affiliation)
                                                     <option
-                                                        {{$affiliation->id==old('affiliation_id', $cooperative->affiliation->id) ? 'selected' : ''}}
-                                                        value="{{$affiliation->id}}">{{$affiliation->title}}</option>
+                                                        {{$affiliation->id==old('affiliation_id',$cooperative->affiliation_id) ? 'selected' : ''}}
+                                                        value="{{$affiliation->id}}">
+                                                        {{$affiliation->name}}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('affiliation_id')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="col-md-12 mb-2">
                                             <label for="objective" class="form-label">उद्देश्य</label>
-                                            <textarea name="objective" id="objective" placeholder="objective.." cols="60" rows="3">{{old('objective', $cooperative->objective)}}</textarea>
+                                            <textarea name="objective" id="objective" class="form-control" placeholder="उद्देश्य"
+                                                      cols="45"
+                                                      rows="3">{{old('objective',$cooperative->objective)}}</textarea>
                                             @error('objective')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
@@ -179,7 +180,6 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <hr class="dotted" style="border-top: 3px dotted #bbb;">
                         <div class="row my-2">
                             <fieldset>
                                 <legend>

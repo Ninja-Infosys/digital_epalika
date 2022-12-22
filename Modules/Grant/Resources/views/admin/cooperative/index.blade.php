@@ -42,6 +42,7 @@
                                 <th>सहकारी परिचय पत्र नं.</th>
                                 <th>दर्ता मिति</th>
                                 <th>सहकारीको नाम</th>
+                                <th>सहकारीको प्रकार</th>
                                 <th>पाना/भ्याट</th>
                                 <th>#</th>
                             </tr>
@@ -53,6 +54,7 @@
                                     <td>{{$cooperative->unique_id}}</td>
                                     <td>{{$cooperative->registration_date}}</td>
                                     <td>{{$cooperative->name}}</td>
+                                    <td>{{$cooperative->cooperativeType->title??''}}</td>
                                     <td>{{$cooperative->vat_pan}}</td>
                                     <td>
                                         @can('cooperative_edit')

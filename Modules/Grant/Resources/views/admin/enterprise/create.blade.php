@@ -85,7 +85,11 @@
                             <h5 class="mt-1 text-black">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र
                                 टोल छनौट गर्नुहोस् ।</h5>
                             <div class="row mt-2">
-                                @livewire('address')
+                                @livewire('address', [
+                                'province_id' =>$officeSetting->province_id,
+                                'district_id' => $officeSetting->district_id,
+                                'local_body_id' => $officeSetting->local_body_id
+                                ])
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label">गाउँ</label>
                                     <input type="text" name="village" value="{{ old('village') }}"

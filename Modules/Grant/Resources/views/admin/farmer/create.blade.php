@@ -227,7 +227,11 @@
                             <legend><h4 class="text-info">स्थायी ठेगाना *</h4></legend>
                             <h6 class="py-2">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् । </h6>
                             <div class="row">
-                                @livewire('address')
+                                @livewire('address', [
+                                'province_id' =>$officeSetting->province_id,
+                                'district_id' => $officeSetting->district_id,
+                                'local_body_id' => $officeSetting->local_body_id
+                                ])
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label">
                                         गाउँ</label>
