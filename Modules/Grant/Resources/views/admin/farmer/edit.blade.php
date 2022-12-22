@@ -24,6 +24,9 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">कृषक सम्पादन</h4>
+                        <a href="{{route('admin.grant.farmer.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> कृषक सुची
+                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -223,13 +226,13 @@
                             <legend><h4 class="text-info">स्थायी ठेगाना *</h4></legend>
                             <h6 class="py-2">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट
                                 गर्नुहोस् । </h6>
+                            @livewire('address', [
+                            'province_id' => $farmer->province_id,
+                            'district_id' => $farmer->district_id,
+                            'local_body_id' => $farmer->local_body_id,
+                            'ward_no' => $farmer->ward_no
+                            ])
                             <div class="row">
-                                @livewire('address', [
-                                'province_id' => $farmer->province_id,
-                                'district_id' => $farmer->district_id,
-                                'local_body_id' => $farmer->local_body_id,
-                                'ward_no' => $farmer->ward_no
-                                ])
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label">
                                         गाउँ</label>

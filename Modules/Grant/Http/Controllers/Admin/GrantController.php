@@ -4,6 +4,8 @@ namespace Modules\Grant\Http\Controllers\Admin;
 
 use App\Models\Settings\FiscalYear;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Grant\Entities\Grant;
@@ -11,6 +13,7 @@ use Modules\Grant\Entities\GrantOffice;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Http\Requests\Grant\StoreGrantRequest;
+use Modules\Grant\Http\Requests\Grant\UpdateGrantRequest;
 use Modules\HelpDesk\Entities\Branch;
 
 class GrantController extends Controller
@@ -54,14 +57,25 @@ class GrantController extends Controller
         return view('grant::show');
     }
 
-    public function edit($id)
+    public function edit(Grant $grant): Factory|View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('grant::edit');
+        $this->checkAuthorization('grant_edit');
+
+        $fiscalYears = FiscalYear::all();
+        $grantTypes = GrantType::all();
+        $grantPrograms = GrantProgram::all();
+        $grantOffices = GrantOffice::all();
+        $branches = Branch::with('branches')->whereNull('branch_id')->get();
+
+        return view('grant::admin.grant.edit', compact('grant', 'fiscalYears', 'grantTypes','grantPrograms','grantOffices', 'branches'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateGrantRequest $request, Grant $grant)
     {
-        //
+        $this->checkAuthorization('grant_edit');
+        $grant->update($request->validated());
+        toast('अनुदान सफलता पुर्वक सम्पादन गरियो', 'success');
+        return redirect(route('admin.grant.grant.index'));
     }
 
     public function destroy($id)
