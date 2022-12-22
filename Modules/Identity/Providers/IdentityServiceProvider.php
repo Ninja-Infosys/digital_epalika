@@ -1,22 +1,21 @@
 <?php
 
-namespace Modules\Recommendation\Providers;
+namespace Modules\Identity\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Modules\Recommendation\Entities\RecommendationFormData;
-use Modules\Recommendation\Observers\RecommendationFormDataObserver;
+use Illuminate\Database\Eloquent\Factory;
 
-class RecommendationServiceProvider extends ServiceProvider
+class IdentityServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Recommendation';
+    protected $moduleName = 'Identity';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'recommendation';
+    protected $moduleNameLower = 'identity';
 
     /**
      * Boot the application events.
@@ -29,7 +28,6 @@ class RecommendationServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-//        RecommendationFormData::observe(RecommendationFormDataObserver::class);
     }
 
     /**
@@ -53,8 +51,7 @@ class RecommendationServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/config.php'),
-            $this->moduleNameLower
+            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
         );
     }
 

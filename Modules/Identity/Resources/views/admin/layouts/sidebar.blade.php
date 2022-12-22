@@ -1,0 +1,52 @@
+<li class="{{request()->is('admin/identity/dashboard') ? 'active' : ''}}">
+    <a href="{{route('identity.admin.dashboard')}}">
+        <i class="fa fa-home"></i>
+        <span> ड्यासबोर्ड</span>
+    </a>
+</li>
+{{--<li>--}}
+{{--    <a href="#">--}}
+{{--        <i class="fa fa-file-contract"></i>--}}
+{{--        <span>अनुदान विवरण</span>--}}
+{{--    </a>--}}
+{{--</li>--}}
+
+<li class="{{request()->is('admin/identity/setting*') ? 'active' : ''}}">
+    <a href="#sidebarIdentitySetting"
+       {{request()->is('admin/identity/setting*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
+        <span>सेटिङ</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/identity/setting*') ? 'show' : ''}}"
+         id="sidebarIdentitySetting">
+        <ul class="nav-second-level">
+            @can('relationship_access')
+                <li class="{{request()->is('admin/identity/setting/relationship') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.relationship.index')}}">
+                        <span> नाता</span>
+                    </a>
+                </li>
+            @endcan
+            @can('disabilityReason_access')
+                <li class="{{request()->is('admin/identity/setting/disabilityReason') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.disabilityReason.index')}}">
+                        <span> अपांगताको कारण</span>
+                    </a>
+                </li>
+            @endcan
+            @can('disabilityType_access')
+                <li class="{{request()->is('admin/identity/setting/disabilityType') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.disabilityType.index')}}">
+                        <span> अपांगताको प्रकार</span>
+                    </a>
+                </li>
+            @endcan
+
+        </ul>
+    </div>
+</li>
+

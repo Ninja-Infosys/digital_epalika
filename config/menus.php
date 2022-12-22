@@ -15,7 +15,8 @@ return [
         'judicialcommittee',
         'taskmanagement',
         'recommendation',
-        'plan'
+        'plan',
+        'identity'
     ],
     'sidebars' => [
         'website',
