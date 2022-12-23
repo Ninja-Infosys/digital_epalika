@@ -10,6 +10,7 @@ use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
@@ -110,5 +111,10 @@ class ComplaintApplication extends Model
     public function defendantLocalBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class, 'defendant_local_body_id');
+    }
+
+    public function judicialReceiptBill(): HasOne
+    {
+        return $this->hasOne(JudicialReceiptBill::class);
     }
 }

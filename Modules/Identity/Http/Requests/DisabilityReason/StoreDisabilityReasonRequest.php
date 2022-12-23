@@ -1,0 +1,21 @@
+<?php
+
+namespace Modules\Identity\Http\Requests\DisabilityReason;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+
+class StoreDisabilityReasonRequest extends FormRequest
+{
+    public function authorize():bool
+    {
+        return Gate::allows('disabilityReason_create');
+    }
+
+    public function rules():array
+    {
+        return [
+            'title'=>['required','string','max:255']
+        ];
+    }
+}

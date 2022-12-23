@@ -12,5 +12,7 @@
     "JudicialCommittee": true,
     "TaskManagement": true,
     "Recommendation": true,
-    "Plan": true
+    "Plan": true,
+    "Disability": true,
+    "Identity": true
 }
