@@ -1,0 +1,107 @@
+<?php
+
+namespace Modules\Grant\Http\Livewire;
+
+use App\Models\Settings\FiscalYear;
+use App\Models\Settings\OfficeSetting;
+use Livewire\Component;
+use Modules\Grant\Entities\Cooperative;
+use Modules\Grant\Entities\Enterprise;
+use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Entities\Grant;
+use Modules\Grant\Entities\GrantDetail;
+use Modules\Grant\Entities\GrantProgram;
+use Modules\Grant\Entities\GrantType;
+use Modules\Grant\Entities\Group;
+
+class GrantDetailLivewire extends Component
+{
+    public $grants = [];
+    public Grant $grant;
+
+    public $grantees = [];
+
+    public $fiscalYears = [];
+
+    public array $form = [
+        'grant_id' => null,
+        'model_type' => null,
+        'model_id' => null,
+        'personal_investment' => null,
+        'is_old' => 0,
+        'prev_fiscal_year_id' => null,
+        'investment_amount' => 0,
+        'remarks' => null,
+        'local_body_id' => null,
+        'ward_no' => null,
+        'village' => null,
+        'tole' => null,
+        'plot_no' => null,
+        'contact_person' => null,
+        'contact' => null,
+    ];
+
+    public function mount()
+    {
+        $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
+        $this->fiscalYears = FiscalYear::all();
+    }
+
+    protected array $rules = [
+        'form.grant_id' => ['required', 'exists:grants,id'],
+        'form.model_type' => ['required', 'in:farmer,cooperative,group,enterprise'],
+        'form.personal_investment' => ['required', 'numeric'],
+        'form.is_old' => ['nullable', 'boolean'],
+        'form.prev_fiscal_year_id' => ['required_if:form.is_old,1'],
+        'form.investment_amount' => ['required_if:form.is_old,1', 'numeric'],
+        'form.remarks' => ['nullable'],
+        'form.ward_no' => ['required', 'integer'],
+        'form.village' => ['nullable'],
+        'form.tole' => ['nullable'],
+        'form.plot_no' => ['nullable'],
+        'form.contact_person' => ['nullable'],
+        'form.contact' => ['nullable'],
+    ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
+    public function submitFormData()
+    {
+        GrantDetail::create($this->validate()['form'] + [
+                'local_body_id' => OfficeSetting::first()->local_body_id
+            ]);
+
+        $this->reset('form');
+
+        $this->dispatchBrowserEvent('toast_message', [
+            'type' => 'success',
+            'title' => 'अनुदान सफलतापूर्वक थपियो'
+        ]);
+    }
+
+    public function render()
+    {
+        if (!empty($this->form['grant_id'])) {
+            $this->grant = Grant::find($this->form['grant_id']);
+        }
+
+        if (!empty($this->form['model_type'])) {
+            $this->grantees = match ($this->form['model_type']) {
+                'cooperative' => Cooperative::all(),
+                'group' => Group::all(),
+                'enterprise' => Enterprise::all(),
+                default => Farmer::all(),
+            };
+        }
+
+        if ($this->form['is_old'] == 0) {
+            $this->form['prev_fiscal_year_id'] = null;
+            $this->form['investment_amount'] = 0;
+        }
+
+        return view('grant::livewire.grant-detail-livewire');
+    }
+}

@@ -31,10 +31,8 @@ class GrantDetailController extends Controller
         return view('grant::admin.grant_detail.create', compact('grantPrograms', 'grantTypes'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreGrantDetailRequest $request): RedirectResponse
     {
-
-        dd($request->all());
         $this->checkAuthorization('grantDetail_create');
 
         GrantDetail::create($request->validated());

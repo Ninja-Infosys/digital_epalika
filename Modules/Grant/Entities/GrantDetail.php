@@ -7,6 +7,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Modules\Grant\Enums\NewOrContinueEnum;
@@ -22,41 +23,35 @@ class GrantDetail extends Model
     ];
 
     protected $fillable = [
-        'grant_program_id',
-        'grant_type_id',
+        'grant_id',
+        'model',
+        'personal_investment',
+        'is_old',
+        'prev_fiscal_year_id',
+        'investment_amount',
+        'remarks',
         'local_body_id',
-        'is_new',
         'ward_no',
         'village',
         'tole',
-        'Unit_no',
-        'phone',
-        'investment',
-        'remarks'
+        'plot_no',
+        'contact_person',
+        'contact',
     ];
 
-    protected $casts = [
-        'is_new' => NewOrContinueEnum::class
-    ];
-
-    public function grantProgram(): BelongsTo
+    public function grant(): BelongsTo
     {
-        return $this->belongsTo(GrantProgram::class);
+        return $this->belongsTo(Grant::class);
     }
 
-    public function grantType(): BelongsTo
+    public function model(): MorphTo
     {
-        return $this->belongsTo(GrantType::class);
+        return $this->morphTo();
     }
 
     public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);
-    }
-
-    public function officeSetting(): BelongsTo
-    {
-       return $this->belongsTo(OfficeSetting::class);
     }
 
 }
