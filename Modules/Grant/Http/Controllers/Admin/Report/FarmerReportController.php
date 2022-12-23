@@ -8,7 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
+use Modules\Grant\Entities\Cooperative;
+use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Entities\Group;
 
 class FarmerReportController extends Controller
 {
@@ -16,8 +19,11 @@ class FarmerReportController extends Controller
     {
         $fiscalYears = FiscalYear::get();
         $columnData = $this->getColumns();
-
-        return view('farmer::admin.report.index', compact('fiscalYears', 'columnData'));
+        $cooperatives = Cooperative::latest()->get();
+        $groups = Group::latest()->get();
+        $enterprises = Enterprise::latest()->get();
+        return view('grant::admin.report.farmer.index', compact('fiscalYears', 'columnData',
+        'cooperatives','groups','enterprises'));
     }
 
     public function report(Request $request)
@@ -44,7 +50,7 @@ class FarmerReportController extends Controller
         (new Farmer())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
-                return array_keys($column, 'farmer');
+                return array_keys($column, 'Farmer');
             })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));

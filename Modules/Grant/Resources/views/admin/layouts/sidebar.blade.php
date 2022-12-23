@@ -65,12 +65,29 @@
         </ul>
     </div>
 </li>
-<li>
-    <a href="#">
-        <i class="fa fa-file-contract"></i>
+<li class="{{request()->is('admin/grant/report/*') ? 'active' : ''}}">
+    <a href="#sidebarGrantReport"
+       {{request()->is('admin/grant/report/*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
         <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
-</li>
+        <div class="collapse {{request()->is('admin/grant/report/*') ? 'show' : ''}}"
+             id="sidebarGrantReport">
+            <ul class="nav-second-level">
+                @can('farmerReport_access')
+                    <li class="{{request()->is('admin/grant/report/farmerReport') ? 'active' : ''}}">
+                        <a href="{{route('admin.grant.report.farmerReport.index')}}">
+                            <span> कृषक रिपोर्ट </span>
+                        </a>
+                    </li>
+                @endcan
+            </ul>
+        </div>
+    </li>
 <li class="{{request()->is('admin/grant/setting/*') ? 'active' : ''}}">
     <a href="#sidebarGrantSetting"
        {{request()->is('admin/grant/setting/*') ? 'aria-expanded=true' : ''}}

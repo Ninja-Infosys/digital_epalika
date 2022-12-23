@@ -38,8 +38,8 @@
                         <fieldset>
                             <legend><h4 class="text-info"> सहकारीको विवरण </h4></legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label for="name" class="form-label">सहकारी नाम</label>
+                                <div class="col-md-4">
+                                    <label for="name" class="form-label">सहकारी नाम <span class="text-danger">*</span></label>
                                     <input
                                         type="text"
                                         name="name"
@@ -52,8 +52,8 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="name" class="form-label">सहकारी प्रकार</label>
+                                <div class="col-md-4">
+                                    <label for="name" class="form-label">सहकारी प्रकार <span class="text-danger">*</span></label>
                                     <select name="cooperative_type_id" id="cooperative_type_id"
                                             class="form-control @error('cooperative_type_id') is-invalid @enderror">
                                         <option value="">सहकारी प्रकार छान्नुहोस्</option>
@@ -66,10 +66,8 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-4 mb-2">
-                                    <label for="registration_no" class="form-label">दर्ता नं</label>
+                                    <label for="registration_no" class="form-label">दर्ता नं<span class="text-danger">*</span></label>
                                     <input
                                         type="text"
                                         name="registration_no"
@@ -106,39 +104,38 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4">
                                     <label for="affiliation_id" class="form-label">आवध्ता </label>
                                     <select name="affiliation_id" id="affiliation_id"
                                             class="form-control @error('affiliation_id') is-invalid @enderror">
                                         <option value="">आवध्ता छान्नुहोस्</option>
                                         @foreach($affiliations as $affiliation)
                                             <option
-                                                value="{{$affiliation->id}}">{{$affiliation->title}}</option>
+                                                value="{{$affiliation->id}}">{{$affiliation->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('affiliation_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="objective" class="form-label">उद्देश्य</label>
+                                <div class="col-md-12 ">
+                                    <label for="objective" class="form-label">उद्देश्य<span class="text-danger">*</span></label>
                                     <textarea name="objective" id="objective" class="form-control" placeholder="objective.." cols="50"
-                                              rows="5"></textarea>
+                                              rows="4"></textarea>
                                     @error('objective')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
                             </div>
                         </fieldset>
-
-
                         <fieldset class="my-3">
                             <legend><h4 class="text-info"> स्थायी ठेगाना </h4></legend>
                             <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस्
-                                ।</p>
-                            <livewire:address/>
+                                ।</p>@livewire('address', [
+                            'province_id' =>$officeSetting->province_id,
+                            'district_id' => $officeSetting->district_id,
+                            'local_body_id' => $officeSetting->local_body_id
+                            ])
                             <div class="row">
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label">गाउँ</label>
@@ -170,19 +167,16 @@
                                 @enderror
                             </div>
                         </fieldset>
-
-                        <hr class="dotted" style="border-top: 3px dotted #bbb;">
-
                         <fieldset>
                             <legend>
                                 <h4 class="text-info">संलग्न कृषकहरू</h4>
                             </legend>
                             <p>सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-8 mb-2">
                                 <label for="farmers" class="form-label">
                                     कृषक</label>
                                 <select name="farmers[]" multiple data-toggle="select2"
-                                        id="farmers" class="form-control">
+                                        id="farmers" class="form-select">
                                     <option disabled>--- छान्नुहोस् ---</option>
                                     @foreach($farmers as $farmer)
                                         <option value="{{$farmer->id}}">{{$farmer->name}}</option>
