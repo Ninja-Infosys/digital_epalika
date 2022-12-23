@@ -131,7 +131,8 @@
                         <fieldset class="my-3">
                             <legend><h4 class="text-info"> स्थायी ठेगाना </h4></legend>
                             <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस्
-                                ।</p>@livewire('address', [
+                                ।</p>
+                            @livewire('address', [
                             'province_id' =>$officeSetting->province_id,
                             'district_id' => $officeSetting->district_id,
                             'local_body_id' => $officeSetting->local_body_id
@@ -187,7 +188,6 @@
                                 @enderror
                             </div>
                         </fieldset>
-
 
                         <button type="submit" class="btn btn-primary">
                             Save

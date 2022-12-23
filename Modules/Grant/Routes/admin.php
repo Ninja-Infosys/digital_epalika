@@ -38,6 +38,7 @@ Route::prefix('grantee')->group(function (){
 Route::resource('grant', GrantController::class);
 Route::resource('grantDetail', GrantDetailController::class);
 
-Route::prefix('report')->as('report.')->group(function (){
-   Route::resource('farmerReport', FarmerReportController::class);
+Route::controller(FarmerReportController::class)->prefix('report/farmer')->as('report.farmer.')->group(function (){
+    Route::get('/', 'index')->name('index');
+    Route::post('report-data', 'report')->name('report-data');
 });
