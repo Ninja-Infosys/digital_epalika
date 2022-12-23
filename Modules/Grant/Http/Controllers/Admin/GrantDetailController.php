@@ -4,6 +4,8 @@ namespace Modules\Grant\Http\Controllers\Admin;
 
 use App\Models\Settings\OfficeSetting;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Modules\Grant\Entities\GrantDetail;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
@@ -29,8 +31,10 @@ class GrantDetailController extends Controller
         return view('grant::admin.grant_detail.create', compact('grantPrograms', 'grantTypes'));
     }
 
-    public function store(StoreGrantDetailRequest $request)
+    public function store(Request $request): RedirectResponse
     {
+
+        dd($request->all());
         $this->checkAuthorization('grantDetail_create');
 
         GrantDetail::create($request->validated());

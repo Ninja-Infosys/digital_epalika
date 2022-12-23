@@ -118,11 +118,9 @@
 
                         <fieldset class="my-3">
                             <legend><h4 class="text-info">अनुदान स्थलको विवरण *</h4></legend>
-                            <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस्
-                                ।</p>
                             <div class="row">
                                 <input type="hidden" name="local_body_id" id="local_body_id"
-                                       value="{{$officeSetting->localBody}}">
+                                       value="{{$officeSetting->local_body_id}}">
                                 <div class="col-md-6 mb-2">
                                     <label for="ward_no" class="form-label">वडा नं.</label>
                                     <select
@@ -198,8 +196,6 @@
                                 </div>
                             </div>
                         </fieldset>
-
-
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>

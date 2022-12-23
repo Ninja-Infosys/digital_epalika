@@ -128,7 +128,6 @@
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 पेश गर्नुहोस्
                             </button>
-
                         </form>
                     </div>
                     <div id="report-table"></div>
