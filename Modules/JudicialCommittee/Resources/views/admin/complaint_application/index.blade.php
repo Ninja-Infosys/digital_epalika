@@ -40,6 +40,7 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>सबमिशन नं.</th>
+                                <th>दर्ता नं.</th>
                                 <th>निवेदकको पुरा नाम</th>
                                 <th>प्रतिवादीको पुरा नाम</th>
                                 <th>मिति</th>
@@ -53,6 +54,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$complaintApplication->submission_no}}</td>
+                                    <td>{{$complaintApplication->registration_no}}</td>
                                     <td>{{$complaintApplication->complainant_name}}</td>
                                     <td>{{$complaintApplication->defendant_name}}</td>
                                     <td>{{$complaintApplication->date}}</td>
@@ -90,7 +92,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="9" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

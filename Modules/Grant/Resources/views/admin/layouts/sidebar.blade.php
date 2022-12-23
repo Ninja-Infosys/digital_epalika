@@ -79,8 +79,8 @@
              id="sidebarGrantReport">
             <ul class="nav-second-level">
                 @can('farmerReport_access')
-                    <li class="{{request()->is('admin/grant/report/farmerReport') ? 'active' : ''}}">
-                        <a href="{{route('admin.grant.report.farmerReport.index')}}">
+                    <li class="{{request()->is('admin/grant/report/farmer') ? 'active' : ''}}">
+                        <a href="{{route('admin.grant.report.farmer.index')}}">
                             <span> कृषक रिपोर्ट </span>
                         </a>
                     </li>

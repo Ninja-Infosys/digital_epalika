@@ -52,7 +52,7 @@
                                            placeholder="युनिक आईडी">
                                 </div>
                                 <div class="col-md-3 mb-2">
-                                    <label for="gender" class="form-label">लिंग *</label>
+                                    <label for="gender" class="form-label">लिंग</label>
                                     <select id="gender" name="gender" class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\Gender::cases() as $gender)
@@ -63,7 +63,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
-                                    <label for="marital_status" class="form-label">बैबाहिक अवस्था *</label>
+                                    <label for="marital_status" class="form-label">बैबाहिक अवस्था </label>
                                     <select id="marital_status" name="marital_status" class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\MaritalStatusEnum::cases() as $marital_status)
@@ -76,7 +76,7 @@
                                 </div>
 
                                 <fieldset>
-                                    <legend><h4 class="text-info">संलग्नता ? *</h4></legend>
+                                    <legend><h4 class="text-info">संलग्नता ?</h4></legend>
                                     <h6 class="py-2"> नोट: कुनै समूह, सहकारी वा उद्यममा संलग्न भएमा ।</h6>
                                     <div class="row">
                                         <div class="col-md-4 mb-2">
@@ -177,7 +177,7 @@
                     e.preventDefault()
                     $.ajax({
                         type: "post",
-                        url: "{{route('admin.listRegistrations.report.report-data')}}",
+                        url: "{{route('admin.grant.report.farmer.report-data')}}",
                         data: new FormData(this),
                         processData: false,
                         contentType: false,

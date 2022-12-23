@@ -22,15 +22,14 @@ class FarmerReportController extends Controller
         $cooperatives = Cooperative::latest()->get();
         $groups = Group::latest()->get();
         $enterprises = Enterprise::latest()->get();
+
         return view('grant::admin.report.farmer.index', compact('fiscalYears', 'columnData',
-        'cooperatives','groups','enterprises'));
+            'cooperatives', 'groups', 'enterprises'));
     }
 
     public function report(Request $request)
     {
         $request->validate([
-            'from_date' => ['nullable'],
-            'to_date' => ['nullable', 'after_or_equal:from_date'],
             'columns' => ['nullable', 'array']
         ]);
 
@@ -39,7 +38,7 @@ class FarmerReportController extends Controller
         })->get();
 
         return response()->json([
-            'view' => (string)View::make('listregistration::admin.report.table_data', compact('farmers'))
+            'view' => (string)View::make('grant::admin.report.farmer.table_data', compact('farmers'))
         ]);
     }
 
@@ -62,23 +61,15 @@ class FarmerReportController extends Controller
     {
 
         if (!empty($request->input('ward_no'))) {
-            $q->whereDate('date', '>=', $request->input('ward_no'));
+            $q->whereIn('ward_no', $request->input('ward_no'));
         }
 
-        if (!empty($request->input('martial_status'))) {
-            $q->whereDate('date', '<=', $request->input('martial_status'));
+        if (!empty($request->input('gender'))) {
+            $q->where('gender', $request->input('gender'));
         }
 
-        if (!empty($request->input('citizenship_no'))) {
-            $q->where('registration_no', $request->input('citizenship_no'));
-        }
-
-        if (!empty($request->input('applicant_type'))) {
-            $q->whereIn('applicant_type', $request->input('applicant_type'));
-        }
-
-        if (!empty($request->input('business_nature'))) {
-            $q->whereIn('business_nature', $request->input('business_nature'));
+        if (!empty($request->input('marital_status'))) {
+            $q->where('marital_status', $request->input('marital_status'));
         }
     }
 }

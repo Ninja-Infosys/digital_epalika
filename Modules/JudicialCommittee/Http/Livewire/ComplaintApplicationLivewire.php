@@ -6,10 +6,12 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\LawsuitNature;
+use Modules\JudicialCommittee\Entities\RelatedMember;
 
 class ComplaintApplicationLivewire extends Component
 {
@@ -29,6 +31,8 @@ class ComplaintApplicationLivewire extends Component
 
     public $defendantWards = [];
     public $lawsuitNatures = [];
+
+    public ComplaintApplication $complaintApplication;
 
     public array $form = [
         'complainant_province_id' => null,
@@ -58,13 +62,17 @@ class ComplaintApplicationLivewire extends Component
         'applicant_name' => null,
         'applicant_phone' => null,
         'applicant_address' => null,
-        'applicant_signature' => null,
+        'applicant_signature_file' => null,
+        'relatedMembers' => []
     ];
 
-    public function mount()
+    public function mount($complaintApplication = null)
     {
         $this->provinces = Province::all();
         $this->lawsuitNatures = LawsuitNature::all();
+        if (!empty($complaintApplication)) {
+            $this->assignComplaintApplicationData($complaintApplication);
+        }
     }
 
     protected $listeners = ['dateChanged'];
@@ -75,7 +83,18 @@ class ComplaintApplicationLivewire extends Component
         $this->form['en_date'] = $englishDate;
     }
 
-    protected array $rules = [
+    public function rules(): array
+    {
+        return !empty($this->complaintApplication)
+            ? array_merge($this->validationRules, [
+                'form.submission_no' => ['required', 'unique:complaint_applications,submission_no,' . $this->complaintApplication->id]
+            ])
+            : array_merge($this->validationRules, [
+                'form.submission_no' => ['required', 'unique:complaint_applications,submission_no']
+            ]);
+    }
+
+    protected $validationRules = [
         'form.complainant_province_id' => ['required', 'exists:provinces,id'],
         'form.complainant_district_id' => ['required', 'exists:districts,id'],
         'form.complainant_local_body_id' => ['required', 'exists:local_bodies,id'],
@@ -96,14 +115,19 @@ class ComplaintApplicationLivewire extends Component
         'form.defendant_name' => ['required', 'string', 'max:255'],
         'form.lawsuit_nature_id' => ['required', 'exists:lawsuit_natures,id'],
         'form.subject' => ['required', 'string', 'max:255'],
-        'form.submission_no' => ['required', 'unique:complaint_applications,submission_no'],
         'form.complaint_detail' => ['required'],
         'form.date' => ['required'],
         'form.en_date' => ['required'],
         'form.applicant_name' => ['required', 'string', 'max:255'],
         'form.applicant_phone' => ['required'],
         'form.applicant_address' => ['nullable'],
-        'form.applicant_signature' => ['required', 'image'],
+        'form.applicant_signature_file' => ['nullable', 'image'],
+        'form.relatedMembers' => ['required', 'array'],
+        'form.relatedMembers.*.name' => ['required'],
+        'form.relatedMembers.*.phone' => ['required'],
+        'form.relatedMembers.*.email' => ['nullable', 'email'],
+        'form.relatedMembers.*.designation' => ['required'],
+        'form.relatedMembers.*.address' => ['nullable'],
     ];
 
     public function updated($propertyName): void
@@ -111,18 +135,76 @@ class ComplaintApplicationLivewire extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function addRelatedMembers()
+    {
+        $this->form['relatedMembers'][] = [];
+    }
+
+    public function removeRelatedMember($index)
+    {
+        if (!empty($this->form['relatedMembers'][$index]['id'])) {
+            RelatedMember::find($this->form['relatedMembers'][$index]['id'])->delete();
+        }
+        unset($this->form['relatedMembers'][$index]);
+        $this->form['relatedMembers'] = array_values($this->form['relatedMembers']);
+    }
+
     public function submitFormData()
     {
-        ComplaintApplication::create($this->validate()['form'] + [
-            'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-        ]);
+        $formData = $this->validate()['form'];
 
-        $this->reset('form', 'complainantDistricts', 'complainantLocalBodies', 'complainantWards', 'defendantDistricts', 'defendantLocalBodies', 'defendantWards');
+        DB::transaction(function () use ($formData) {
+            if (!empty($this->complaintApplication)) {
+                $complaintApplication = $this->complaintApplication;
+                $complaintApplication->update($formData);
+            } else {
+                $complaintApplication = ComplaintApplication::create($this->validate()['form'] + [
+                        'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                    ]);
+            }
+            foreach ($this->form['relatedMembers'] as $member) {
+                RelatedMember::updateOrCreate(
+                    ['complaint_application_id' => $complaintApplication->id, 'id' => $member['id'] ?? null],
+                    $member
+                );
+            }
+        });
 
-        $this->dispatchBrowserEvent('toast_message', [
-            'type' => 'success',
-            'title' => 'उजुरी पत्र सफलतापूर्वक थपियो'
-        ]);
+        if (!empty($this->complaintApplication)) {
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'उजुरी पत्र सफलतापूर्वक अद्यावधिक गरियो',
+            ]);
+
+            return redirect(route('admin.judicialCommittee.complaintApplication.index'));
+        } else {
+            $this->reset('form', 'complainantDistricts', 'complainantLocalBodies', 'complainantWards', 'defendantDistricts', 'defendantLocalBodies', 'defendantWards');
+
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'उजुरी पत्र सफलतापूर्वक थपियो'
+            ]);
+        }
+    }
+
+    private function assignComplaintApplicationData($complaintApplication)
+    {
+        $this->complaintApplication = $complaintApplication;
+        foreach ($this->form as $key => $data) {
+            if ($key != 'relatedMembers') {
+                $this->form[$key] = $complaintApplication[$key];
+            }
+        }
+        foreach ($complaintApplication->relatedMembers as $member) {
+            $this->form['relatedMembers'][] = [
+                'id' => $member->id ?? null,
+                'name' => $member->name ?? null,
+                'phone' => $member->phone ?? null,
+                'email' => $member->email ?? null,
+                'designation' => $member->designation ?? null,
+                'address' => $member->address ?? null
+            ];
+        }
     }
 
     public function render()
@@ -178,7 +260,10 @@ class ComplaintApplicationLivewire extends Component
             'form.en_date.required' => 'मिति अनिवार्य छ',
             'form.applicant_name.required' => 'आवेदकको नाम अनिवार्य छ',
             'form.applicant_phone.required' => 'आवेदकको फोन अनिवार्य छ',
-            'form.applicant_signature.required' => 'आवेदकको हस्ताक्षर अनिवार्य छ',
+            'form.relatedMembers.*.name.required' => ['नाम अनिवार्य छ'],
+            'form.relatedMembers.*.phone.required' => ['फोन अनिवार्य छ'],
+            'form.relatedMembers.*.email.email' => ['ईमेल मान्य छैन'],
+            'form.relatedMembers.*.designation.required' => ['पद आवश्यक छ'],
         ];
     }
 }

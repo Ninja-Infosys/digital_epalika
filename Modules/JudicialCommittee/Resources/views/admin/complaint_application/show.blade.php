@@ -50,6 +50,10 @@
                                 <td>{{$complaintApplication->submission_no}}</td>
                             </tr>
                             <tr>
+                                <th>दर्ता नं.</th>
+                                <td>{{$complaintApplication->registration_no}}</td>
+                            </tr>
+                            <tr>
                                 <th>निवेदकको पुरा नाम</th>
                                 <td>{{$complaintApplication->complainant_name}}</td>
                             </tr>
@@ -68,14 +72,60 @@
                             <tr>
                                 <th>मुद्दा प्रकृति</th>
                                 <td>
-                                    {{$complaintApplication->lawsuitNature->title??''}} ({{$complaintApplication->code}}
-                                    )
+                                    {{$complaintApplication->lawsuitNature->title??''}}
+                                    ({{$complaintApplication->lawsuitNature->code??''}})
                                 </td>
                             </tr>
                             </thead>
                             <tbody>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">सम्बन्धित सदस्यहरू</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                            <tr>
+                                <th>क्र.स.</th>
+                                <th>नाम</th>
+                                <th>फोन</th>
+                                <th>इमेल</th>
+                                <th>पद</th>
+                                <th>ठेगाना</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($complaintApplication->relatedMembers as $key=>$member)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$member->name}}</td>
+                                    <td>{{$member->phone}}</td>
+                                    <td>{{$member->email}}</td>
+                                    <td>{{$member->designation}}</td>
+                                    <td>{{$member->address}}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="text-center" colspan="6">
+                                        विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                                    </td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                        @error('form.relatedMembers')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
             </div>
