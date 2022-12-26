@@ -44,9 +44,9 @@
         <span>तारिख भरपाई</span>
     </a>
 </li>
-<li class="{{request()->is('admin/grant/setting/*') ? 'active' : ''}}">
-    <a href="#sidebarGrantSetting"
-       {{request()->is('admin/grant/setting/*') ? 'aria-expanded=true' : ''}}
+<li class="{{request()->is('admin/judicialcommittee/setting/*') ? 'active' : ''}}">
+    <a href="#sidebarJudicialCommitteeSetting"
+       {{request()->is('admin/judicialcommittee/setting/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span>सेटिङ</span>
@@ -54,13 +54,20 @@
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('admin/judicialCommittee/setting/*') ? 'show' : ''}}"
-         id="sidebarGrantSetting">
+    <div class="collapse {{request()->is('admin/judicialcommittee/setting/*') ? 'show' : ''}}"
+         id="sidebarJudicialCommitteeSetting">
         <ul class="nav-second-level">
             @can('lawsuitNature_access')
-                <li class="{{request()->is('admin/judicialCommittee/setting/lawsuitNature') ? 'active' : ''}}">
+                <li class="{{request()->is('admin/judicialcommittee/setting/lawsuitNature') ? 'active' : ''}}">
                     <a href="{{route('admin.judicialCommittee.lawsuitNature.index')}}">
                         <span>  मुद्दा प्रकृति </span>
+                    </a>
+                </li>
+            @endcan
+            @can('judicialCommitteeTemplate_access')
+                <li class="{{request()->is('admin/judicialcommittee/setting/judicialCommitteeTemplate') ? 'active' : ''}}">
+                    <a href="{{route('admin.judicialCommittee.judicialCommitteeTemplate.index')}}">
+                        <span> टेम्प्लेट </span>
                     </a>
                 </li>
             @endcan

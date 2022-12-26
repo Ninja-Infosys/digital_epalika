@@ -4,6 +4,7 @@ namespace Modules\Grant\Http\Controllers\Admin;
 
 use App\Models\Settings\OfficeSetting;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Grant\Entities\GrantDetail;
@@ -18,7 +19,16 @@ class GrantDetailController extends Controller
     {
         $this->checkAuthorization('grantDetail_access');
 
-        $grantDetails = GrantDetail::with('grant.grantProgram','grant.grantType','model','localBody')->latest()->get();
+        $grantDetails = GrantDetail::with('grant.grantProgram', 'grant.grantType', 'model', 'localBody')
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['contact'], request('search'));
+                    $q->orWhereHas('grant.grantProgram', function ($sub_q) {
+                        $sub_q->whereLike('name', request('search'));
+                    });
+                }
+            })
+            ->latest()->paginate(10);
 
         return view('grant::admin.grant_detail.index', compact('grantDetails'));
     }
@@ -35,7 +45,7 @@ class GrantDetailController extends Controller
     public function show(GrantDetail $grantDetail)
     {
         $this->checkAuthorization('grantDetail_access');
-        return view('grant::admin.grant_detail.show',compact('grantDetail'));
+        return view('grant::admin.grant_detail.show', compact('grantDetail'));
     }
 
     public function edit(GrantDetail $grantDetail)
@@ -53,7 +63,7 @@ class GrantDetailController extends Controller
 
         $grantDetail->delete();
 
-        toast('अनुदान विवरण सफलतापूर्वक मेटाइयो','success');
+        toast('अनुदान विवरण सफलतापूर्वक मेटाइयो', 'success');
         return back();
     }
 }
