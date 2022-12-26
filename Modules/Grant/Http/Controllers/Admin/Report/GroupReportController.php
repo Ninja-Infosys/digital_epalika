@@ -10,7 +10,7 @@ class GroupReportController extends Controller
 {
     public function index()
     {
-        return view('grant::index');
+        return view('grant::admin.report.group.index');
     }
 
     public function create()

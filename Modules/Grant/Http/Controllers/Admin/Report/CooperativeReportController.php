@@ -10,7 +10,7 @@ class CooperativeReportController extends Controller
 {
     public function index()
     {
-        return view('grant::index');
+        return view('grant::admin.report.cooperative.index');
     }
 
     public function create()
