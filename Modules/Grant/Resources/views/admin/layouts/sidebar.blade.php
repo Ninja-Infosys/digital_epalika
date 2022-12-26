@@ -7,7 +7,7 @@
 @can('grantDetail_access')
     <li>
         <a href="{{ route('admin.grant.grantDetail.index') }}">
-            <i class="fa fa-file-contract"></i>
+            <i class="fa fa-list-alt"></i>
             <span>अनुदान विवरण</span>
         </a>
     </li>
@@ -66,7 +66,7 @@
 <li class="{{ request()->is('admin/grant/report/*') ? 'active' : '' }}">
     <a href="#sidebarGrantReport" {{ request()->is('admin/grant/report/*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
-        <i class="fa fa-cogs"></i>
+        <i class="fa fa-file-contract"></i>
         <span>रिपोर्ट</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
