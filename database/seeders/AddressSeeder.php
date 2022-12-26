@@ -12,6 +12,6 @@ class AddressSeeder extends Seeder
 
     public function run()
     {
-        $this->storeSql(storage_path('app/sql/Address/address.sql'));
+        $this->storeSql(storage_path('sql/Address/address.sql'));
     }
 }

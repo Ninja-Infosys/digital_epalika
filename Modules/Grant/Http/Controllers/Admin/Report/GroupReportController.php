@@ -6,11 +6,11 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EnterpriseController extends Controller
+class GroupReportController extends Controller
 {
     public function index()
     {
-        return view('grant::admin.report.enterprise.index');
+        return view('grant::admin.report.group.index');
     }
 
     public function create()

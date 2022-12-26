@@ -6,11 +6,11 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CooperativeController extends Controller
+class EnterpriseReportController extends Controller
 {
     public function index()
     {
-        return view('grant::admin.report.cooperative.index');
+        return view('grant::admin.report.enterprise.index');
     }
 
     public function create()

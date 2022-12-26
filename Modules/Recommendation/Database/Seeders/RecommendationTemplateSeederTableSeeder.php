@@ -10,7 +10,7 @@ class RecommendationTemplateSeederTableSeeder extends Seeder
     use StoreSqlInDatabaseTrait;
     public function run()
     {
-        $this->storeSql(storage_path('app/sql/Recommendation/recommendation_templates.sql'));
+        $this->storeSql(storage_path('sql/Recommendation/recommendation_templates.sql'));
 
     }
 }

@@ -6,6 +6,7 @@ use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use App\Traits\GetAllColumns;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,74 +50,84 @@ class ListRegistration extends Model
         'date',
     ];
 
-    protected $casts = [
-        'applicant_type' => ApplicantCategoryEnum::class,
-        'business_nature' => BusinessNatureEnum::class
-    ];
+//    protected $casts = [
+//        'applicant_type' => ApplicantCategoryEnum::class,
+//        'business_nature' => BusinessNatureEnum::class
+//    ];
 
-    public function getApplicationPhotoUrlAttribute(): string
+    public function getApplicantTypeAttribute(): string
     {
-        return $this->attributes['application_photo'] ?
-            Storage::disk('public')->url($this->attributes['application_photo']) : '';
+        return ApplicantCategoryEnum::tryFrom($this->attributes['applicant_type'])->label();
     }
 
-    public function setApplicationPhotoAttribute($value)
+    public function getBusinessNatureAttribute(): string
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['application_photo'] = $value->store('list_registration/application', 'public');
-        }
+        return BusinessNatureEnum::tryFrom($this->attributes['business_nature'])->label();
     }
 
-    public function getRegistrationCertificateUrlAttribute(): string
+    protected function ApplicationPhoto(): Attribute
     {
-        return $this->attributes['registration_certificate'] ?
-            Storage::disk('public')->url($this->attributes['registration_certificate']) : '';
+        return Attribute::make(
+            get: fn($value) => $value ?
+                Storage::disk('public')->url($value)
+                : '',
+
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
+                : null
+        );
     }
 
-    public function setRegistrationCertificateAttribute($value)
+    protected function RegistrationCertificate(): Attribute
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['registration_certificate'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/registration_certificate', 'public');
-        }
+        return Attribute::make(
+            get: fn($value) => $value ?
+                Storage::disk('public')->url($value)
+                : '',
+
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
+                : null
+        );
     }
 
-    public function getPanPhotoUrlAttribute(): string
+    protected function PanPhoto(): Attribute
     {
-        return $this->attributes['pan_photo'] ?
-            Storage::disk('public')->url($this->attributes['pan_photo']) : '';
+        return Attribute::make(
+            get: fn($value) => $value ?
+                Storage::disk('public')->url($value)
+                : '',
+
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
+                : null
+        );
     }
 
-    public function setPanPhotoAttribute($value)
+    protected function TaxPaymentCertificate(): Attribute
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['pan_photo'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/pan_photo', 'public');
-        }
+        return Attribute::make(
+            get: fn($value) => $value ?
+                Storage::disk('public')->url($value)
+                : '',
+
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
+                : null
+        );
     }
 
-    public function getTaxPaymentCertificateUrlAttribute(): string
+    protected function LicensePhoto(): Attribute
     {
-        return $this->attributes['tax_payment_certificate'] ?
-            Storage::disk('public')->url($this->attributes['tax_payment_certificate']) : '';
-    }
+        return Attribute::make(
+            get: fn($value) => $value ?
+                Storage::disk('public')->url($value)
+                : '',
 
-    public function setTaxPaymentCertificateAttribute($value)
-    {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['tax_payment_certificate'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/tax_payment_certificate', 'public');
-        }
-    }
-
-    public function getLicensePhotoUrlAttribute(): string
-    {
-        return $this->attributes['license_photo'] ?
-            Storage::disk('public')->url($this->attributes['license_photo']) : '';
-    }
-
-    public function setLicensePhotoAttribute($value)
-    {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['license_photo'] = $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_') . '/license_photo', 'public');
-        }
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('list_registration/' . Str::slug($this->attributes['main_person'], '_'), 'public')
+                : null
+        );
     }
 
     public function fiscalYear(): BelongsTo
