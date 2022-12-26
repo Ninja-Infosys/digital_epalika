@@ -25,7 +25,6 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">अनुदान सूची</h4>
-
                         @can('grantDetail_create')
                             <a href="{{route('admin.grant.grantDetail.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -35,18 +34,19 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @includeIf('inc.filter_form')
                     <div class="table-responsive">
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>क्र.सं</th>
-                                <th>कार्यक्रम/क्रियाकलाप</th>
-                                <th>अनुदानग्राही नाम</th>
-                                <th> अनुदानग्राही लगानी</th>
-                                <th>नयाँ/निरन्तर</th>
-                                <th>गत वर्षको लगानी</th>
+                                <th class="text-center">क्र.सं</th>
+                                <th class="text-center">कार्यक्रम/क्रियाकलाप</th>
+                                <th class="text-center">अनुदानग्राही नाम</th>
+                                <th class="text-center"> अनुदानग्राही लगानी</th>
+                                <th class="text-center">नयाँ/निरन्तर</th>
+                                <th class="text-center">गत वर्षको लगानी</th>
                                 <th class="text-center">योजना स्थल</th>
-                                <th>सम्पर्क नम्बर</th>
+                                <th class="text-center">सम्पर्क नम्बर</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -55,11 +55,11 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
-                                    <td>{{$grantDetail->model->name ?? ''}}</td>
+                                    <td class="text-center">{{$grantDetail->model->name ?? ''}}</td>
                                     <td>{{$grantDetail->personal_investment}}</td>
                                     <td>{{$grantDetail->is_old ? 'निरन्तरता': 'नयाँ'}}</td>
                                     <td>{{$grantDetail->investment_amount}}</td>
-                                    <td>{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}}</td>
+                                    <td class="text-center">{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}}</td>
                                     <td>{{$grantDetail->contact}}</td>
                                     <td>
                                         @can('grantDetail_edit')
@@ -95,6 +95,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $grantDetails->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>
