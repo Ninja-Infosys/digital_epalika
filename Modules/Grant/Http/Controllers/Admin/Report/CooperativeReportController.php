@@ -5,41 +5,63 @@ namespace Modules\Grant\Http\Controllers\Admin\Report;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\View;
+use Modules\Grant\Entities\Affiliation;
+use Modules\Grant\Entities\Cooperative;
+use Modules\Grant\Entities\CooperativeType;
 
 class CooperativeReportController extends Controller
 {
     public function index()
     {
-        return view('grant::admin.report.cooperative.index');
+        $columnData = $this->getColumns();
+        $cooperativeTypes = CooperativeType::all();
+        $affiliations = Affiliation::all();
+        return view('grant::admin.report.cooperative.index',compact('columnData','cooperativeTypes','affiliations'));
     }
 
-    public function create()
+    public function report(Request $request)
     {
-        return view('grant::create');
+        $request->validate([
+            'columns' => ['nullable', 'array']
+        ]);
+
+        $cooperatives = Cooperative::where(function ($q) use ($request) {
+            $this->filterDataFromUser($q, $request);
+        })->get();
+
+        return response()->json([
+            'view' => (string)View::make('grant::admin.report.cooperative.table_data', compact('cooperatives'))
+        ]);
     }
 
-    public function store(Request $request)
+    private function getColumns(): Collection
     {
-        //
+        $columnData = collect();
+
+        (new Cooperative())
+            ->ownAndRelatedModelsFillableColumns()
+            ->filter(function ($column) {
+                return array_keys($column, 'Cooperative');
+            })
+            ->each(function ($column) use ($columnData) {
+                $columnData->push(collect($column)->put('columns', $column['columns']));
+            });
+        return $columnData;
     }
 
-    public function show($id)
+    public function filterDataFromUser($q, Request $request): void
     {
-        return view('grant::show');
-    }
 
-    public function edit($id)
-    {
-        return view('grant::edit');
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        if (!empty($request->input('ward_no'))) {
+            $q->whereIn('ward_no', $request->input('ward_no'));
+        }
+        if (!empty($request->input('cooperative_type_id'))) {
+            $q->whereIn('cooperative_type_id', $request->input('cooperative_type_id'));
+        }
+        if (!empty($request->input('affiliation_id'))) {
+            $q->whereIn('affiliation_id', $request->input('affiliation_id'));
+        }
     }
 }
