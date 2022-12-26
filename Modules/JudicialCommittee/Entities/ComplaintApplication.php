@@ -14,11 +14,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\JudicialCommittee\Traits\JudicialCommitteeTemplateTrait;
 
 class ComplaintApplication extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use JudicialCommitteeTemplateTrait;
     use EventObserveTrait;
 
     protected $dates = [

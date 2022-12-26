@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintApplicationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DashboardController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialCommitteeTemplateController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialMemberController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\LawsuitNatureController;
 
@@ -14,6 +15,7 @@ Route::resource('complaintApplication', ComplaintApplicationController::class);
 
 Route::prefix('setting')->group(function () {
     Route::resource('lawsuitNature', LawsuitNatureController::class);
+    Route::resource('judicialCommitteeTemplate', JudicialCommitteeTemplateController::class);
 });
 
 //static routes

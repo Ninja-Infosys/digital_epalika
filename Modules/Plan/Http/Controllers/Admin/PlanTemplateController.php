@@ -56,5 +56,11 @@ class PlanTemplateController extends Controller
     public function destroy(PlanTemplate $planTemplate)
     {
         $this->checkAuthorization('planTemplate_delete');
+
+        $planTemplate->delete();
+
+        toast('टेम्प्लेट सफलतापूर्वक मेटियो','success');
+
+        return back();
     }
 }
