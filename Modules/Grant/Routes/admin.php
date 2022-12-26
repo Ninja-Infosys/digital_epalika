@@ -9,8 +9,10 @@ use Modules\Grant\Http\Controllers\Admin\FarmerController;
 use Modules\Grant\Http\Controllers\Admin\GrantController;
 use Modules\Grant\Http\Controllers\Admin\GrantDetailController;
 use Modules\Grant\Http\Controllers\Admin\GroupController;
+use Modules\Grant\Http\Controllers\Admin\Report\EnterpriseReportController;
 use Modules\Grant\Http\Controllers\Admin\Report\FarmerReportController;
 use Modules\Grant\Http\Controllers\Admin\Report\GrantReportController;
+use Modules\Grant\Http\Controllers\Admin\Report\GroupReportController;
 use Modules\Grant\Http\Controllers\Admin\Setting\AffiliationController;
 use Modules\Grant\Http\Controllers\Admin\Setting\CooperativeTypeController;
 use Modules\Grant\Http\Controllers\Admin\Setting\EnterpriseTypeController;
@@ -49,7 +51,7 @@ Route::controller(GrantReportController::class)->prefix('report/grant')->as('rep
     Route::post('report-data', 'report')->name('report-data');
 });
 
-Route::controller(GroupReportController::class)->prefix('report/group')->as('report.group.')->group(function (){
+Route::controller(GroupReportControllerntroller::class)->prefix('report/group')->as('report.group.')->group(function (){
     Route::get('/', 'index')->name('index');
     Route::post('report-data', 'report')->name('report-data');
 });
