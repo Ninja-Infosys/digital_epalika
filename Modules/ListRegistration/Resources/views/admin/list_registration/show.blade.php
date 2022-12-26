@@ -170,11 +170,4 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <style>
-            tbody, td, tfoot, th, thead, tr {
-                font-family: Kalimati, serif;
-            }
-        </style>
-    @endpush
 @endsection

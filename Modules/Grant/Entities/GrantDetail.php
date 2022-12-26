@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
-use Modules\Grant\Enums\NewOrContinueEnum;
+use Modules\Grant\Enums\GranteeEnum;
 
 class GrantDetail extends Model
 {
@@ -24,7 +24,9 @@ class GrantDetail extends Model
 
     protected $fillable = [
         'grant_id',
-        'model',
+        'grant_for',
+        'model_type',
+        'model_id',
         'personal_investment',
         'is_old',
         'prev_fiscal_year_id',
@@ -37,6 +39,10 @@ class GrantDetail extends Model
         'plot_no',
         'contact_person',
         'contact',
+    ];
+
+    protected $casts = [
+        'grant_for' => GranteeEnum::class
     ];
 
     public function grant(): BelongsTo
