@@ -25,6 +25,7 @@ class GrantDetailLivewire extends Component
 
     public array $form = [
         'grant_id' => null,
+        'grant_for' => null,
         'model_type' => null,
         'model_id' => null,
         'personal_investment' => null,
@@ -32,7 +33,6 @@ class GrantDetailLivewire extends Component
         'prev_fiscal_year_id' => null,
         'investment_amount' => 0,
         'remarks' => null,
-        'local_body_id' => null,
         'ward_no' => null,
         'village' => null,
         'tole' => null,
@@ -49,7 +49,8 @@ class GrantDetailLivewire extends Component
 
     protected array $rules = [
         'form.grant_id' => ['required', 'exists:grants,id'],
-        'form.model_type' => ['required', 'in:farmer,cooperative,group,enterprise'],
+        'form.grant_for' => ['required', 'in:farmer,cooperative,group,enterprise'],
+        'form.model_id' => ['required'],
         'form.personal_investment' => ['required', 'numeric'],
         'form.is_old' => ['nullable', 'boolean'],
         'form.prev_fiscal_year_id' => ['required_if:form.is_old,1'],
@@ -70,7 +71,9 @@ class GrantDetailLivewire extends Component
 
     public function submitFormData()
     {
-        GrantDetail::create($this->validate()['form'] + [
+        $this->validate();
+
+        GrantDetail::create($this->form + [
                 'local_body_id' => OfficeSetting::first()->local_body_id
             ]);
 
@@ -88,13 +91,24 @@ class GrantDetailLivewire extends Component
             $this->grant = Grant::find($this->form['grant_id']);
         }
 
-        if (!empty($this->form['model_type'])) {
-            $this->grantees = match ($this->form['model_type']) {
-                'cooperative' => Cooperative::all(),
-                'group' => Group::all(),
-                'enterprise' => Enterprise::all(),
-                default => Farmer::all(),
-            };
+        if (!empty($this->form['grant_for'])) {
+            switch ($this->form['grant_for']) {
+                case 'cooperative':
+                    $this->grantees = Cooperative::all();
+                    $this->form['model_type'] = Cooperative::class;
+                    break;
+                case 'group':
+                    $this->grantees = Group::all();
+                    $this->form['model_type'] = Group::class;
+                    break;
+                case 'enterprise':
+                    $this->grantees = Enterprise::all();
+                    $this->form['model_type'] = Enterprise::class;
+                    break;
+                default :
+                    $this->grantees = Farmer::all();
+                    $this->form['model_type'] = Farmer::class;
+            }
         }
 
         if ($this->form['is_old'] == 0) {

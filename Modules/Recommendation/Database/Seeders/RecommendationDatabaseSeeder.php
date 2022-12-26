@@ -9,7 +9,9 @@ class RecommendationDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            RecommendationPermissionTableSeeder::class
+            RecommendationPermissionTableSeeder::class,
+            RecommendationFormBuilderSeederTableSeeder::class,
+            RecommendationTemplateSeederTableSeeder::class,
         ]);
     }
 }

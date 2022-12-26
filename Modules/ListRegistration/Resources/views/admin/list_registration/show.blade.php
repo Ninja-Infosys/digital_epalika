@@ -44,7 +44,7 @@
                                     </tr>
                                     <tr>
                                         <th>प्रकार</th>
-                                        <td>{{$listRegistration->applicant_type->label()}}</td>
+                                        <td>{{$listRegistration->applicant_type}}</td>
                                     </tr>
                                     <tr>
                                         <th>नाम.</th>
@@ -73,9 +73,9 @@
                                     <tr>
                                         <th>निवेदक /अनुसूची</th>
                                         <td>
-                                            <img src="{{$listRegistration->application_photo_url}}" alt=""
+                                            <img src="{{$listRegistration->application_photo}}" alt=""
                                                  height="60px;">
-                                            <a href="{{route('admin.file-url-download',['file_url'=>$listRegistration->application_photo])}}"
+                                            <a href="{{route('admin.file-url-download',['file_url'=>$listRegistration->getRawOriginal('application_photo')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i> डाउनलोड
                                             </a>
@@ -83,9 +83,9 @@
                                     </tr>
                                     <tr>
                                         <th>संस्था वा फार्म दर्ताको प्रमाण पत्र.</th>
-                                        <td><img src="{{$listRegistration->registration_certificate_url}}" alt=""
+                                        <td><img src="{{$listRegistration->registration_certificate}}" alt=""
                                                  height="60px;">
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->registration_certificate])}}"
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->getRawOriginal('registration_certificate')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i> डाउनलोड
                                             </a>
@@ -94,8 +94,8 @@
                                     <tr>
                                         <th>स्थायी लेखा नम्बर(PAN)</th>
                                         <td>
-                                            <img src="{{$listRegistration->pan_photo_url}}" alt="" height="60px;">
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->pan_photo])}}"
+                                            <img src="{{$listRegistration->pan_photo}}" alt="" height="60px;">
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->getRawOriginal('pan_photo')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i> डाउनलोड
                                             </a>
@@ -104,9 +104,9 @@
                                     <tr>
                                         <th>कर चुक्ता प्रमाण पत्र</th>
                                         <td>
-                                            <img src="{{$listRegistration->tax_payment_certificate_url}}" alt=""
+                                            <img src="{{$listRegistration->tax_payment_certificate}}" alt=""
                                                  height="60px;">
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->tax_payment_certificate])}}"
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->getRawOriginal('tax_payment_certificate')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i> डाउनलोड
                                             </a>
@@ -115,8 +115,8 @@
                                     <tr>
                                         <th>कुन खरिद को लागि सुची दर्ता हुन निबेदन दिने हो सो को लागि इजाजत पत्र</th>
                                         <td>
-                                            <img src="{{$listRegistration->license_photo_url}}" alt="" height="60px;">
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->license_photo])}}"
+                                            <img src="{{$listRegistration->license_photo}}" alt="" height="60px;">
+                                            <a href="{{route('admin.file-url-download', ['file_url'=>$listRegistration->getRawOriginal('license_photo')])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i> डाउनलोड
                                             </a>
@@ -170,11 +170,4 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <style>
-            tbody, td, tfoot, th, thead, tr {
-                font-family: Kalimati, serif;
-            }
-        </style>
-    @endpush
 @endsection

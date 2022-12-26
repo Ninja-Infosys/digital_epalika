@@ -26,10 +26,16 @@ class ReportController extends Controller
             'to_date' => ['nullable', 'after_or_equal:from_date'],
             'columns' => ['nullable', 'array']
         ]);
-
         $listRegistrations = ListRegistration::where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
-        })->get();
+        })
+            ->selectRaw(!empty($request->input('columns')['list_registrations'])
+                ? implode(',', $request->input('columns')['list_registrations'])
+                : '*'
+            )
+
+//            ->select('applicant_type_label as applicant_type')
+            ->get();
 
         return response()->json([
             'view' => (string)View::make('listregistration::admin.report.table_data', compact('listRegistrations'))

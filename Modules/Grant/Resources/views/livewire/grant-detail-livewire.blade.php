@@ -1,4 +1,4 @@
-<form wire:submit.prevent="">
+<form wire:submit.prevent="submitFormData">
     <fieldset>
         <legend><h4 class="text-info">अनुदान जारी </h4></legend>
         <div class="row">
@@ -18,9 +18,9 @@
                 @enderror
             </div>
             <div class="col-md-4 mb-2">
-                <label for="model_type" class="form-label">अनुदानग्राहीको प्रकार * </label>
-                <select wire:model="form.model_type" id="model_type"
-                        class="form-control @error('form.model_type') is-invalid @enderror">
+                <label for="grant_for" class="form-label">अनुदानग्राहीको प्रकार * </label>
+                <select wire:model="form.grant_for" id="grant_for"
+                        class="form-control @error('form.grant_for') is-invalid @enderror">
                     <option value="">अनुदानग्राहीको प्रकार छान्नुहोस्</option>
                     @foreach($grant->grant_for_data??collect() as $grant_for)
                         <option value="{{$grant_for}}">
@@ -28,7 +28,7 @@
                         </option>
                     @endforeach
                 </select>
-                @error('form.model_type')
+                @error('form.grant_for')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
@@ -36,7 +36,7 @@
                 <label for="model_id" class="form-label">अनुदानग्राही </label>
                 <select wire:model="form.model_id" id="model_id"
                         class="form-control @error('form.model_id') is-invalid @enderror">
-                    <option value="">अनुदानग्राही छान्नुहोस्</option>
+                    <option value="">--अनुदानग्राही छान्नुहोस्--</option>
                     @foreach($grantees as $grantee)
                         <option value="{{$grantee->id}}">
                             {{$grantee->name}}
@@ -49,16 +49,16 @@
             </div>
 
             <div class="col-md-4 mb-2">
-                <label for="investment" class="form-label">अनुदानग्राहीको लगानी *</label>
+                <label for="personal_investment" class="form-label">अनुदानग्राहीको लगानी *</label>
                 <input
                     type="number"
-                    wire:model="form.investment"
-                    value="{{old('form.investment')}}"
-                    class="form-control @error('form.investment') is-invalid @enderror"
-                    id="investment"
+                    wire:model="form.personal_investment"
+                    value="{{old('form.personal_investment')}}"
+                    class="form-control @error('form.personal_investment') is-invalid @enderror"
+                    id="personal_investment"
                     placeholder="अनुदानग्राहीको लगानी"
                 />
-                @error('form.investment')
+                @error('form.personal_investment')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
@@ -67,7 +67,7 @@
                     *</label>
                 <select wire:model="form.is_old" id="is_old"
                         class="form-control @error('form.is_old') is-invalid @enderror">
-                    <option value=""> छान्नुहोस्</option>
+                    <option value=""> --छान्नुहोस्--</option>
                     <option value="0"> नयाँ</option>
                     <option value="1"> निरन्तर</option>
                 </select>
@@ -80,7 +80,7 @@
                     <label for="prev_fiscal_year_id" class="form-label">पहिले पाएको आर्थिक बर्ष * </label>
                     <select wire:model="form.prev_fiscal_year_id" id="prev_fiscal_year_id"
                             class="form-control @error('form.prev_fiscal_year_id') is-invalid @enderror">
-                        <option value=""> छान्नुहोस्</option>
+                        <option value=""> --छान्नुहोस्--</option>
                         @foreach($fiscalYears as $fiscalYear)
                             <option value="{{$fiscalYear->id}}">
                                 {{$fiscalYear->title}}
@@ -119,7 +119,6 @@
         </div>
     </fieldset>
 
-
     <fieldset class="my-3">
         <legend><h4 class="text-info">अनुदान स्थलको विवरण *</h4></legend>
         <div class="row">
@@ -131,7 +130,7 @@
                     wire:model="form.ward_no"
                     class="form-select @error('form.ward_no') is-invalid @enderror"
                     id="ward_no">
-                    <option value="">वडा नं. छान्नुहोस्</option>
+                    <option value="">--वडा नं. छान्नुहोस्--</option>
                     @foreach($officeSetting->localBody->ward_no as $ward)
                         <option
                             {{old('form.word_no')}}
@@ -173,30 +172,44 @@
                 @enderror
             </div>
             <div class="col-md-6 mb-2">
-                <label for="unit_no" class="form-label">किता नं.</label>
+                <label for="plot_no" class="form-label">किता नं.</label>
                 <input
                     type="text"
-                    wire:model="form.unit_no"
-                    id="unit_no"
-                    class="form-control @error('form.unit_no') is-invalid @enderror"
-                    value="{{old('form.unit_no')}}"
+                    wire:model="form.plot_no"
+                    id="plot_no"
+                    class="form-control @error('form.plot_no') is-invalid @enderror"
+                    value="{{old('form.plot_no')}}"
                     placeholder="किता नं."
                 >
-                @error('form.unit_no')
+                @error('form.plot_no')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
             <div class="col-md-6 mb-2">
-                <label for="phone" class="form-label">सम्पर्क नम्बर *</label>
+                <label for="contact_person" class="form-label">सम्पर्क व्यक्ति </label>
                 <input
                     type="text"
-                    wire:model="form.phone"
-                    id="phone"
-                    class="form-control @error('form.phone') is-invalid @enderror"
-                    value="{{old('form.phone')}}"
+                    wire:model="form.contact_person"
+                    id="contact_person"
+                    class="form-control @error('form.contact_person') is-invalid @enderror"
+                    value="{{old('form.contact_person')}}"
+                    placeholder="सम्पर्क व्यक्ति "
+                >
+                @error('form.contact_person')
+                <div class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>
+            <div class="col-md-6 mb-2">
+                <label for="contact" class="form-label">सम्पर्क नम्बर </label>
+                <input
+                    type="text"
+                    wire:model="form.contact"
+                    id="contact"
+                    class="form-control @error('form.contact') is-invalid @enderror"
+                    value="{{old('form.contact')}}"
                     placeholder="सम्पर्क नम्बर "
                 >
-                @error('form.phone')
+                @error('form.contact')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
