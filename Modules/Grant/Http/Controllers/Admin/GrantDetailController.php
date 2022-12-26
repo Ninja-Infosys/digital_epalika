@@ -18,7 +18,8 @@ class GrantDetailController extends Controller
     {
         $this->checkAuthorization('grantDetail_access');
 
-        $grantDetails = GrantDetail::with('grantType', 'grantProgram', 'localBody')->latest()->get();
+        $grantDetails = GrantDetail::with('grant.grantProgram','grant.grantType','model','localBody')->latest()->get();
+
         return view('grant::admin.grant_detail.index', compact('grantDetails'));
     }
 
@@ -29,16 +30,6 @@ class GrantDetailController extends Controller
         $grantPrograms = GrantProgram::all();
         $grantTypes = GrantType::all();
         return view('grant::admin.grant_detail.create', compact('grantPrograms', 'grantTypes'));
-    }
-
-    public function store(StoreGrantDetailRequest $request): RedirectResponse
-    {
-        $this->checkAuthorization('grantDetail_create');
-
-        GrantDetail::create($request->validated());
-
-        toast('अनुदान विवरण सफलतापूर्वक थपियो','success');
-        return back();
     }
 
     public function show(GrantDetail $grantDetail)
@@ -54,17 +45,6 @@ class GrantDetailController extends Controller
         $grantPrograms = GrantProgram::all();
         $grantTypes = GrantType::all();
         return view('grant::admin.grant_detail.edit', compact('grantDetail', 'grantPrograms', 'grantTypes'));
-    }
-
-    public function update(UpdateGrantDetailRequest $request, GrantDetail $grantDetail)
-    {
-        $this->checkAuthorization('grantDetail_edit');
-
-        $grantDetail->update($request->validated());
-
-        toast('अनुदान विवरण सफलतापूर्वक अद्यावधिक गरियो','success');
-
-        return redirect(route('admin.grant.grantDetail.index'));
     }
 
     public function destroy(GrantDetail $grantDetail)

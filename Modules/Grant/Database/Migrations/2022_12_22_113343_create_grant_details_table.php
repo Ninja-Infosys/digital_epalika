@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('grant_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('grant_id')->comment('अनुदान')->constrained()->cascadeOnDelete();
+            $table->string('grant_for');
             $table->nullableMorphs('model');
             $table->double('personal_investment', 12, 2)->comment('व्यक्तिगत लगानी')->default(0);
             $table->boolean('is_old')->comment('पुरानो हो?')->default(0);

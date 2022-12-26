@@ -36,7 +36,7 @@ Route::prefix('grantee')->group(function (){
 });
 
 Route::resource('grant', GrantController::class);
-Route::resource('grantDetail', GrantDetailController::class);
+Route::resource('grantDetail', GrantDetailController::class)->except('store','update');
 
 Route::controller(FarmerReportController::class)->prefix('report/farmer')->as('report.farmer.')->group(function (){
     Route::get('/', 'index')->name('index');
