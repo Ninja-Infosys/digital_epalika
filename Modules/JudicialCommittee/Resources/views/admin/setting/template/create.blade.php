@@ -57,10 +57,10 @@
                                 <label for="type" class="form-label">टेम्प्लेट *</label>
                                 <select name="type" id="type" class="form-control">
                                     <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\Plan\Enums\ProjectOperatedThroughEnum::cases() as $operatedThrough)
-                                        <option {{old('type')==$operatedThrough->value ? 'selected':''}}
-                                                value="{{$operatedThrough->value}}">
-                                            {{$operatedThrough->label()}}
+                                    @foreach(\Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::cases() as $type)
+                                        <option {{old('type')==$type->value ? 'selected':''}}
+                                                value="{{$type->value}}">
+                                            {{$type->label()}}
                                         </option>
                                     @endforeach
                                 </select>

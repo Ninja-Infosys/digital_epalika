@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 
 class JudicialCommitteeTemplate extends Model
 {
@@ -21,5 +22,9 @@ class JudicialCommitteeTemplate extends Model
         'type',
         'title',
         'data',
+    ];
+
+    protected $casts = [
+        'type' => JudicialTemplateTypeEnum::class
     ];
 }
