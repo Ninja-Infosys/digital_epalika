@@ -69,11 +69,12 @@
 
                                 </div>
                             </fieldset>
+
+                            <button type="submit" id="submitFormBtn" class="btn btn-primary mt-1">
+                                पेश गर्नुहोस्
+                            </button>
+                        </form>
                     </div>
-                    <button type="submit" id="submitFormBtn" class="btn btn-primary mt-1">
-                        पेश गर्नुहोस्
-                    </button>
-                    </form>
                 </div>
                 <div id="report-table"></div>
             </div>
@@ -82,7 +83,7 @@
 
     @push('scripts')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 // x-csrf protection
                 $.ajaxSetup({
                     headers: {
@@ -90,25 +91,25 @@
                     }
                 });
 
-                $(document.body).delegate('#report-filter-form', 'submit', function (e) {
+                $(document.body).delegate('#report-filter-form', 'submit', function(e) {
                     e.preventDefault()
                     $.ajax({
                         type: "post",
-                        url: "{{route('admin.grant.report.group.report-data')}}",
+                        url: "{{ route('admin.grant.report.group.report-data') }}",
                         data: new FormData(this),
                         processData: false,
                         contentType: false,
-                        beforeSend: function () {
+                        beforeSend: function() {
                             $("#submitFormBtn").prop('disabled', true);
                             $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
                         },
-                        success: function (resp) {
+                        success: function(resp) {
                             $("#submitFormBtn").prop('disabled', false);
                             $("#collapseFilterForm").collapse('hide')
                             $("#submitFormBtn").html("पेश गर्नुहोस्");
                             $('#report-table').html(resp.view)
                         },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
                             $('#submitFormBtn').prop('disabled', false)
                             $("#submitFormBtn").html("पेश गर्नुहोस्");
                             toastMessage('error', XMLHttpRequest.responseJSON.message)

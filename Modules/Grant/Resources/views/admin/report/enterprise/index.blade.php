@@ -85,11 +85,11 @@
                                     </div>
                                 </fieldset>
                             </div>
+                            <button type="submit" id="submitFormBtn" class="btn btn-primary mt-1">
+                                पेश गर्नुहोस्
+                            </button>
                         </form>
                     </div>
-                    <button type="submit" id="submitFormBtn" class="btn btn-primary mt-1">
-                        पेश गर्नुहोस्
-                    </button>
                 </div>
                 <div id="report-table"></div>
             </div>
