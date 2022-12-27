@@ -34,9 +34,9 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    @includeIf('inc.filter_form')
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th class="text-center">क्र.सं</th>
