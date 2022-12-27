@@ -84,8 +84,12 @@ class GrantController extends Controller
         return redirect(route('admin.grant.grant.index'));
     }
 
-    public function destroy($id)
+    public function destroy(Grant $grant)
     {
-        //
+        $grant->delete();
+
+        toast('अनुदान सफलता पुर्वक हटाईयो !', 'success');
+
+        return back();
     }
 }
