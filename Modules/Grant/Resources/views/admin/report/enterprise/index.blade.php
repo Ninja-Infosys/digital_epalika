@@ -54,7 +54,7 @@
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach ($enterpriseTypes as $enterpriseType)
                                             <option value="{{ $enterpriseType->id }}"
-                                                {{ $enterpriseType->id == old('enterprise_type_id', $enterprise->enterprise_type_id) ? 'selected' : '' }}>
+                                                {{ $enterpriseType->id == old('enterprise_type_id', $enterpriseType->enterprise_type_id) ? 'selected' : '' }}>
                                                 {{ $enterpriseType->title }}
                                             </option>
                                         @endforeach
