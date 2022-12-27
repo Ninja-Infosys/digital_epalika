@@ -78,8 +78,8 @@ class Enterprise extends Model
     // {
     //     return $this->belongsTo(enterpriseType::class);
     // }
-    //    public function grantDetails(): MorphMany
-    //    {
-    //        return $this->morphMany(GrantDetail::class, 'model');
-    //    }
+       public function grantDetails(): MorphMany
+       {
+           return $this->morphMany(GrantDetail::class, 'model');
+       }
 }
