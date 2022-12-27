@@ -34,7 +34,6 @@
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm" style="">
                         <form id="report-filter-form"  method="POST">
-                            @csrf
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <label for="ward_no" class="form-label">
@@ -50,7 +49,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="fiscal_year_id" class="form-label">
                                         आर्थिक वर्ष</label>
-                                    <select name="fiscal_year_id" multiple data-toggle="select2" id="fiscal_year_id"
+                                    <select name="fiscal_year_id[]" multiple data-toggle="select2" id="fiscal_year_id"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($fiscalYears as $fiscalYear)
@@ -64,7 +63,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="grant_type_id" class="form-label">
                                         अनुदानको प्रकार</label>
-                                    <select name="grant_type_id" multiple data-toggle="select2" id="grant_type_id"
+                                    <select name="grant_type_id[]" multiple data-toggle="select2" id="grant_type_id"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($grantTypes as $grantType )
@@ -75,7 +74,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="grant_for" class="form-label">
                                         अनुदानग्राहीको प्रकार</label>
-                                    <select name="grant_for" multiple data-toggle="select2" id="grant_for"
+                                    <select name="grant_for[]" multiple data-toggle="select2" id="grant_for"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach(\Modules\Grant\Enums\GranteeEnum::cases() as $grant_for)
@@ -88,7 +87,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="is_new" class="form-label">
                                         नयाँ / निरन्तर</label>
-                                    <select name="is_old" multiple data-toggle="select2" id="is_old"
+                                    <select name="is_old[]" data-toggle="select2" id="is_old"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         <option value="0"> नयाँ</option>
@@ -98,7 +97,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="grant_program_id" class="form-label">
                                         अनुदान कार्यक्रमको नाम</label>
-                                    <select name="grant_program_id" multiple data-toggle="select2" id="grant_program_id"
+                                    <select name="grant_program_id[]" multiple data-toggle="select2" id="grant_program_id"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($grantPrograms as $grantProgram)
@@ -112,7 +111,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="grant_office_id" class="form-label">
                                         अनुदान दिने संस्था</label>
-                                    <select name="grant_office_id" multiple data-toggle="select2" id="grant_office_id"
+                                    <select name="grant_office_id[]" multiple data-toggle="select2" id="grant_office_id"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($grantOffices as $grantOffice)

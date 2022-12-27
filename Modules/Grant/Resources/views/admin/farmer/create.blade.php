@@ -127,7 +127,8 @@
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\MaritalStatusEnum::cases() as $marital_status)
                                             <option
-                                                value="{{$marital_status->value}}" {{$marital_status->value==old('marital_status') ? 'selected' : ''}}>
+                                                value="{{$marital_status->value}}"
+                                                {{$marital_status->value==old('marital_status') ? 'selected' : ''}} onclick="text({{$marital_status->value}})">
                                                 {{$marital_status->label()}}
                                             </option>
                                         @endforeach
@@ -136,7 +137,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-4 mb-2" id="spouse">
                                     <label for="spouse_name" class="form-label">पति/पत्नी नाम</label>
                                     <input
                                         type="text"
@@ -225,7 +226,8 @@
                         </fieldset>
                         <fieldset class="my-2">
                             <legend><h4 class="text-info">स्थायी ठेगाना *</h4></legend>
-                            <h6 class="py-2">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् । </h6>
+                            <h6 class="py-2">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट
+                                गर्नुहोस् । </h6>
                             @livewire('address', [
                             'province_id' =>$officeSetting->province_id,
                             'district_id' => $officeSetting->district_id,
@@ -320,6 +322,11 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+
+        </script>
+    @endpush
 @endsection
 
 
