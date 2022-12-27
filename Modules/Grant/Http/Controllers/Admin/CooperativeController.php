@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Affiliation;
 use Modules\Grant\Entities\Cooperative;
@@ -21,7 +22,12 @@ class CooperativeController extends Controller
     {
         $this->checkAuthorization('cooperative_access');
 
-        $cooperatives = Cooperative::with('cooperativeType')->get();
+        $cooperatives = Cooperative::with('cooperativeType')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['unique_id', 'registration_no', 'name', 'cooperativeType',], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
 
         return view('grant::admin.cooperative.index', compact('cooperatives'));
     }

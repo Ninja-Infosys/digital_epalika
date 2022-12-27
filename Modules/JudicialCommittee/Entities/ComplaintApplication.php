@@ -14,11 +14,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\JudicialCommittee\Traits\JudicialCommitteeTemplateTrait;
 
 class ComplaintApplication extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use JudicialCommitteeTemplateTrait;
     use EventObserveTrait;
 
     protected $dates = [
@@ -62,14 +64,14 @@ class ComplaintApplication extends Model
 
     public function getApplicantSignatureUrlAttribute(): string
     {
-        return ! empty($this->attributes['applicant_signature'])
+        return !empty($this->attributes['applicant_signature'])
             ? Storage::disk('public')->url($this->attributes['applicant_signature'])
             : '';
     }
 
     public function setApplicantSignatureAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['applicant_signature'] = $value->store('judicial_committee/applicant_signature', 'public');
         }
     }
@@ -122,5 +124,10 @@ class ComplaintApplication extends Model
     public function relatedMembers(): HasMany
     {
         return $this->hasMany(RelatedMember::class);
+    }
+
+    public function dateSheet(): HasOne
+    {
+        return $this->hasOne(DateSheet::class);
     }
 }

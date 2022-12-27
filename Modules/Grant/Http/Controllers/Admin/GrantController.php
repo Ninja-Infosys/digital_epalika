@@ -15,6 +15,7 @@ use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Http\Requests\Grant\StoreGrantRequest;
 use Modules\Grant\Http\Requests\Grant\UpdateGrantRequest;
 use Modules\HelpDesk\Entities\Branch;
+use Illuminate\Database\Eloquent\Builder;
 
 class GrantController extends Controller
 {
@@ -22,7 +23,12 @@ class GrantController extends Controller
     {
         $this->checkAuthorization('grant_access');
 
-        $grants = Grant::with('fiscalYear','grantType','branch', 'grantProgram', 'grantOffice')->latest()->get();
+        $grants = Grant::with('fiscalYear','grantType','branch', 'grantProgram', 'grantOffice')->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['fiscalYear', 'grantOffice', 'grantProgram', 'grantType',], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
 
         return view('grant::admin.grant.index', compact('grants'));
     }

@@ -36,6 +36,17 @@
                         <form id="report-filter-form" method="POST">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
+                                    <label for="ward_no" class="form-label">
+                                        वडा नं.</label>
+                                    <select name="ward_no[]" multiple data-toggle="select2" id="ward_no"
+                                        class="form-select">
+                                        <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach ($officeSetting->localBody->ward_no as $ward)
+                                            <option value="{{ $ward }}">{{ $ward }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
                                     <label for="fiscal_year_id" class="form-label">
                                         आर्थिक वर्ष</label>
                                     <select name="fiscal_year_id" multiple data-toggle="select2" id="fiscal_year_id"
@@ -71,8 +82,6 @@
 
                                     </select>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <label for="grant_program_id" class="form-label">
                                         अनुदान कार्यक्रमको नाम</label>
@@ -91,7 +100,6 @@
 
                                     </select>
                                 </div>
-                            </div>
 
                                 <fieldset>
                                     <legend class="font-16 text-info">
@@ -99,32 +107,36 @@
                                             Columns
                                         </strong>
                                     </legend>
-                                    {{-- <div class="row">
+                                    <div class="row">
                                         @foreach ($columnData as $columns)
                                             <div class="col-md-3 mb-2">
-                                                <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
-                                                <select name="columns[{{$columns['table_name']}}][]"
-                                                        id="column.{{$columns['table_name']}}" multiple
-                                                        data-toggle="select2"
-                                                        class="form-control">
+                                                <label
+                                                    for="column.{{ $columns['table_name'] }}">{{ $columns['name'] }}</label>
+                                                <select name="columns[{{ $columns['table_name'] }}][]"
+                                                    id="column.{{ $columns['table_name'] }}" multiple data-toggle="select2"
+                                                    class="form-control">
                                                     <option disabled>--- छान्नुहोस् ---</option>
-
+                                                    @foreach ($columns['columns'] as $column)
+                                                        <option value="{{ $column['column'] ?? '' }}">
+                                                            {{ $column['name'] ?? '' }}</option>
+                                                    @endforeach
                                                 </select>
 
                                             </div>
-                                        @endforeach --}}
+                                        @endforeach
 
+                                    </div>
+                                </fieldset>
                             </div>
-                            </fieldset>
+                            <button type="submit" id="submitFormBtn" class="btn btn-primary mt-1">
+                                पेश गर्नुहोस्
+                            </button>
+                        </form>
                     </div>
-                    <button type="submit" id="submitFormBtn" class="btn btn-primary mt-1">
-                        पेश गर्नुहोस्
-                    </button>
-                    </form>
                 </div>
                 <div id="report-table"></div>
             </div>
+
         </div>
-    </div>
     </div>
 @endsection

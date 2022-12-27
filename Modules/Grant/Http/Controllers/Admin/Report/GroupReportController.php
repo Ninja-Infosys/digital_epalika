@@ -2,25 +2,20 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Report;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Settings\FiscalYear;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
-use Modules\Grant\Entities\Farmer;
-use Modules\Grant\Entities\Grant;
+use Modules\Grant\Entities\Group;
 
-class GrantReportController extends Controller
+class GroupReportController extends Controller
 {
-    public function index(): Factory|\Illuminate\Contracts\View\View|Application
+    public function index()
     {
-        $fiscalYears = FiscalYear::get();
         $columnData = $this->getColumns();
 
-        return view('grant::admin.report.grant.index');
+        return view('grant::admin.report.group.index',compact('columnData'));
     }
 
     public function report(Request $request)
@@ -29,12 +24,12 @@ class GrantReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $grant = Grant::where(function ($q) use ($request) {
+        $groups = Group::where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
         return response()->json([
-            'view' => (string)View::make('grant::admin.report.grant.table_data', compact('grant'))
+            'view' => (string)View::make('grant::admin.report.group.table_data', compact('groups'))
         ]);
     }
 
@@ -42,10 +37,10 @@ class GrantReportController extends Controller
     {
         $columnData = collect();
 
-        (new Grant())
+        (new Group())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
-                return array_keys($column, 'Grant');
+                return array_keys($column, 'Group');
             })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
@@ -60,5 +55,4 @@ class GrantReportController extends Controller
             $q->whereIn('ward_no', $request->input('ward_no'));
         }
     }
-
 }

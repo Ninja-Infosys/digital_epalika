@@ -2,31 +2,23 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Report;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Settings\FiscalYear;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
+use Modules\Grant\Entities\Affiliation;
 use Modules\Grant\Entities\Cooperative;
-use Modules\Grant\Entities\Enterprise;
-use Modules\Grant\Entities\Farmer;
-use Modules\Grant\Entities\Group;
+use Modules\Grant\Entities\CooperativeType;
 
-class FarmerReportController extends Controller
+class CooperativeReportController extends Controller
 {
-    public function index(): Factory|\Illuminate\Contracts\View\View|Application
+    public function index()
     {
-        $fiscalYears = FiscalYear::get();
         $columnData = $this->getColumns();
-        $cooperatives = Cooperative::latest()->get();
-        $groups = Group::latest()->get();
-        $enterprises = Enterprise::latest()->get();
-
-        return view('grant::admin.report.farmer.index', compact('fiscalYears', 'columnData',
-            'cooperatives', 'groups', 'enterprises'));
+        $cooperativeTypes = CooperativeType::all();
+        $affiliations = Affiliation::all();
+        return view('grant::admin.report.cooperative.index',compact('columnData','cooperativeTypes','affiliations'));
     }
 
     public function report(Request $request)
@@ -35,12 +27,12 @@ class FarmerReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $farmers = Farmer::where(function ($q) use ($request) {
+        $cooperatives = Cooperative::where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 
         return response()->json([
-            'view' => (string)View::make('grant::admin.report.farmer.table_data', compact('farmers'))
+            'view' => (string)View::make('grant::admin.report.cooperative.table_data', compact('cooperatives'))
         ]);
     }
 
@@ -48,10 +40,10 @@ class FarmerReportController extends Controller
     {
         $columnData = collect();
 
-        (new Farmer())
+        (new Cooperative())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
-                return array_keys($column, 'Farmer');
+                return array_keys($column, 'Cooperative');
             })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
@@ -65,13 +57,11 @@ class FarmerReportController extends Controller
         if (!empty($request->input('ward_no'))) {
             $q->whereIn('ward_no', $request->input('ward_no'));
         }
-
-        if (!empty($request->input('gender'))) {
-            $q->where('gender', $request->input('gender'));
+        if (!empty($request->input('cooperative_type_id'))) {
+            $q->whereIn('cooperative_type_id', $request->input('cooperative_type_id'));
         }
-
-        if (!empty($request->input('marital_status'))) {
-            $q->where('marital_status', $request->input('marital_status'));
+        if (!empty($request->input('affiliation_id'))) {
+            $q->whereIn('affiliation_id', $request->input('affiliation_id'));
         }
     }
 }
