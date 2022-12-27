@@ -2,7 +2,9 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Report;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
@@ -13,11 +15,13 @@ use Modules\Grant\Entities\Grant;
 
 class GrantReportController extends Controller
 {
-    public function index()
+    public function index(): Factory|\Illuminate\Contracts\View\View|Application
     {
+        $fiscalYears = FiscalYear::get();
+        $columnData = $this->getColumns();
+
         return view('grant::admin.report.grant.index');
     }
-
 
     public function report(Request $request)
     {
