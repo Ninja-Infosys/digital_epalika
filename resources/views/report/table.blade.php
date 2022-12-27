@@ -4,7 +4,7 @@
             <thead>
             <tr>
                 <th>क्र.स</th>
-                @foreach(array_keys($lists->first()?->toArray()) as $key)
+                @foreach(getArrayKeys($lists->first()?->toArray()) as $key)
                     <th>
                         {{empty(config('table_header.'.Str::lower(Request::segment(2)).'.'.$key))
                                 ? $key

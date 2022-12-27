@@ -13,6 +13,13 @@ use Modules\JudicialCommittee\Http\Requests\JudicialReceiptBillRequest;
 
 class ComplaintApplicationController extends Controller
 {
+    public function registeredApplications()
+    {
+        $complaintApplications = ComplaintApplication::with('lawsuitNature')->whereHas('judicialReceiptBill')->orderByDesc('date')->get();
+
+        return view('judicialcommittee::admin.registered_application', compact('complaintApplications'));
+    }
+
     public function index()
     {
         $this->checkAuthorization('complaintApplication_access');
