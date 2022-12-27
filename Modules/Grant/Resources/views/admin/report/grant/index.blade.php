@@ -33,7 +33,8 @@
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm" style="">
-                        <form id="report-filter-form" method="POST">
+                        <form id="report-filter-form"  method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <label for="ward_no" class="form-label">
@@ -52,7 +53,12 @@
                                     <select name="fiscal_year_id" multiple data-toggle="select2" id="fiscal_year_id"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
-
+                                        @foreach($fiscalYears as $fiscalYear)
+                                            <option
+                                                value="{{$fiscalYear->id}}">
+                                                {{$fiscalYear->title}}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
@@ -61,7 +67,9 @@
                                     <select name="grant_type_id" multiple data-toggle="select2" id="grant_type_id"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
-
+                                        @foreach($grantTypes as $grantType )
+                                            <option value="{{$grantType->id}}">{{$grantType->title}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
@@ -70,16 +78,21 @@
                                     <select name="grant_for" multiple data-toggle="select2" id="grant_for"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
-
+                                        @foreach(\Modules\Grant\Enums\GranteeEnum::cases() as $grant_for)
+                                            <option value="{{$grant_for->value}}">
+                                                {{$grant_for->label()}}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label for="is_new" class="form-label">
                                         नयाँ / निरन्तर</label>
-                                    <select name="is_new" multiple data-toggle="select2" id="is_new"
+                                    <select name="is_old" multiple data-toggle="select2" id="is_old"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
-
+                                        <option value="0"> नयाँ</option>
+                                        <option value="1"> निरन्तर</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
@@ -88,6 +101,11 @@
                                     <select name="grant_program_id" multiple data-toggle="select2" id="grant_program_id"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($grantPrograms as $grantProgram)
+                                            <option value="{{$grantProgram->id}}">
+                                                {{$grantProgram->name}}
+                                            </option>
+                                        @endforeach
 
                                     </select>
                                 </div>
@@ -97,6 +115,11 @@
                                     <select name="grant_office_id" multiple data-toggle="select2" id="grant_office_id"
                                             class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
+                                        @foreach($grantOffices as $grantOffice)
+                                            <option value="{{$grantOffice->id}}" >
+                                                {{$grantOffice->office_name}}
+                                            </option>
+                                        @endforeach
 
                                     </select>
                                 </div>
@@ -124,7 +147,6 @@
 
                                             </div>
                                         @endforeach
-
                                     </div>
                                 </fieldset>
                             </div>
@@ -135,7 +157,58 @@
                     </div>
                     <div id="report-table"></div>
                 </div>
-
             </div>
         </div>
+
+        @push('scripts')
+            <script>
+                $(document).ready(function () {
+                    // x-csrf protection
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $(document.body).delegate('#report-filter-form', 'submit', function (e) {
+                        e.preventDefault()
+                        $.ajax({
+                            type: "post",
+                            url: "{{route('admin.grant.report.grant.report-data')}}",
+                            data: new FormData(this),
+                            processData: false,
+                            contentType: false,
+                            beforeSend: function () {
+                                $("#submitFormBtn").prop('disabled', true);
+                                $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
+                            },
+                            success: function (resp) {
+                                $("#submitFormBtn").prop('disabled', false);
+                                $("#collapseFilterForm").collapse('hide')
+                                $("#submitFormBtn").html("पेश गर्नुहोस्");
+                                $('#report-table').html(resp.view)
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                $('#submitFormBtn').prop('disabled', false)
+                                $("#submitFormBtn").html("पेश गर्नुहोस्");
+                                toastMessage('error', XMLHttpRequest.responseJSON.message)
+                            }
+                        });
+                    })
+
+                    function toastMessage(type, title) {
+                        swal.fire({
+                            title: title,
+                            toast: true,
+                            position: 'top-right',
+                            showConfirmButton: false,
+                            width: 450,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            icon: type,
+                        });
+                    }
+                });
+            </script>
+    @endpush
 @endsection
