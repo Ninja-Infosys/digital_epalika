@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Entities\GrantDetail;
+use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\Group;
 use Modules\Grant\Http\Requests\Farmer\StoreFarmerRequest;
 use Modules\Grant\Http\Requests\Farmer\UpdateFarmerRequest;
@@ -64,9 +66,10 @@ class FarmerController extends Controller
     {
         $this->checkAuthorization('farmer_access');
 
-        $farmer->load('province', 'district', 'localBody', 'groups', 'enterprises', 'cooperatives');
+        $farmer->load('province', 'district', 'localBody','grantDetails.grant.grantProgram','grantDetails.localBody');
+        $grantPrograms = GrantProgram::all();
 
-        return view('grant::admin.farmer.show', compact('farmer'));
+        return view('grant::admin.farmer.show', compact('farmer', 'grantPrograms'));
     }
 
     public function edit(Farmer $farmer)
