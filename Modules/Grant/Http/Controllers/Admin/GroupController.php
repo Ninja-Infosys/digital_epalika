@@ -11,6 +11,8 @@ use Modules\Grant\Http\Requests\Group\UpdateGroupRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Entities\GrantDetail;
+use Modules\Grant\Entities\GrantProgram;
 
 class GroupController extends Controller
 {
@@ -92,8 +94,9 @@ class GroupController extends Controller
     {
         $this->checkAuthorization('group_access');
 
-        $group->load('province', 'district', 'localBody', 'farmers');
+        $group->load('province', 'district', 'localBody', 'farmers','grantDetails.grant.grantProgram','grantDetails.localBody');
+        $grantPrograms = GrantProgram::all();
 
-        return view('grant::admin.group.show', compact('group'));
+        return view('grant::admin.group.show', compact('group', 'grantPrograms'));
     }
 }

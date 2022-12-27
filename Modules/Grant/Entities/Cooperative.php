@@ -85,8 +85,8 @@ class Cooperative extends Model
         return $this->belongsToMany(Farmer::class);
     }
 
-//    public function grantDetails(): MorphMany
-//    {
-//        return $this->morphMany(GrantDetail::class, 'model');
-//    }
+   public function grantDetails(): MorphMany
+   {
+       return $this->morphMany(GrantDetail::class, 'model');
+   }
 }

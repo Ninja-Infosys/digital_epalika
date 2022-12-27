@@ -87,6 +87,28 @@
                     </div>
                 </div>
             </div>
+            <table class="table table-striped" style=" border: 1px solid black;
+            border-collapse: collapse;">
+                <thead>
+                  <tr>
+                    <th scope="col">क्र.स</th>
+                    <th scope="col">कार्यक्रम/क्रियाकलाप</th>
+                    <th scope="col">अनुदानग्राही लगानी</th>
+                    <th scope="col">अनुदान स्थल</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($enterprise->grantDetails as $grantDetail)
+                  <tr>
+                    <td>{{ $loop->iteration }}</th>
+                    <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
+                    <td>{{$grantDetail->personal_investment}}</td>
+                    <td>{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}} {{$grantDetail->village}}, {{$grantDetail->tole}}</td>
+                  </tr>
+                  @endforeach
+                </tbody>
+            </table>
         </div>
+
     </div>
 @endsection

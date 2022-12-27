@@ -49,7 +49,7 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$judicialCommitteeTemplate->title}}</td>
-                                    <td>{{$judicialCommitteeTemplate->type}}</td>
+                                    <td>{{$judicialCommitteeTemplate->type->label()}}</td>
                                     <td>
                                         @can('judicialCommitteeTemplate_edit')
                                             <a href="{{route('admin.judicialCommittee.judicialCommitteeTemplate.edit',$judicialCommitteeTemplate)}}"

@@ -67,6 +67,10 @@ class PermissionSeeder extends Seeder
             'emergencyNumber_create',
             'emergencyNumber_edit',
             'emergencyNumber_delete',
+            'occupation_access',
+            'occupation_create',
+            'occupation_edit',
+            'occupation_delete',
         ];
 
         $this->storePermission($permissions);

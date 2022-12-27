@@ -6,8 +6,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
-use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
+use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 
 trait JudicialCommitteeTemplateTrait
 {
@@ -59,6 +59,16 @@ trait JudicialCommitteeTemplateTrait
                 'विवरण' => '[@complaint_detail]',
             ],
         ],
+        [
+            'title' => 'तारिख पर्चा विवरण',
+            'data' => [
+                'आवेदन वर्ष' => '[@dateSheet.year]',
+                'केस नाम' => '[@dateSheet.case_name]',
+                'हाजिर हुने मिति' => '[@dateSheet.appearance_date]',
+                'हाजिर हुने समय' => '[@dateSheet.appearance_time]',
+                'पेश मिति' => '[@dateSheet.submitted_date]'
+            ],
+        ],
     ];
 
     public function getTemplateDataAttribute(): Collection
@@ -73,13 +83,13 @@ trait JudicialCommitteeTemplateTrait
         });
     }
 
-    public function getSpecificTemplateData(NoticeTypeEnum $noticeTypeEnum): string
+    public function getSpecificTemplateData(JudicialTemplateTypeEnum $judicialTemplateTypeEnum): string
     {
-        $eMapTemplate = $this->getJudicialCommitteeTemplates();
-        $mapTemplate = $eMapTemplate->where('for', $noticeTypeEnum)->where('status', 1)->first();
+        $judicialCommitteeTemplates = $this->getJudicialCommitteeTemplates();
+        $judicialTemplate = $judicialCommitteeTemplates->where('type', $judicialTemplateTypeEnum)->first();
 
-        if ($mapTemplate) {
-            return $this->getData($mapTemplate->data);
+        if ($judicialTemplate) {
+            return $this->getData($judicialTemplate->data);
         }
 
         return '';
@@ -97,7 +107,7 @@ trait JudicialCommitteeTemplateTrait
         $replace = array_merge(
             $this->getComplaintApplicationReplacement(),
             $replace,
-            $this->getLandDetailReplacement()
+            $this->getDateSheetReplacement()
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
@@ -139,17 +149,14 @@ trait JudicialCommitteeTemplateTrait
         ];
     }
 
-    private function getLandDetailReplacement(): array
+    private function getDateSheetReplacement()
     {
         return [
-            '[@landDetail.land_use_area]' => $this->landDetail->land_use_area ?? '',
-            '[@landDetail.ward_no]' => $this->landDetail->ward_no ?? '',
-            '[@landDetail.former_ward_no]' => $this->landDetail->former_ward_no ?? '',
-            '[@landDetail.tole]' => $this->landDetail->tole ?? '',
-            '[@landDetail.street_code_no]' => $this->landDetail->street_code_no ?? '',
-            '[@landDetail.plot_no]' => $this->landDetail->plot_no ?? '',
-            '[@landDetail.area]' => $this->landDetail->area ?? '',
-            '[@landDetail.percentage_of_area_covered_by_building]' => $this->landDetail->percentage_of_area_covered_by_building ?? '',
+            '[@dateSheet.year]' => $this->dateSheet->year ?? '',
+            '[@dateSheet.case_name]' => $this->dateSheet->case_name ?? '',
+            '[@dateSheet.appearance_date]' => $this->dateSheet->appearance_date ?? '',
+            '[@dateSheet.appearance_time]' => $this->dateSheet->appearance_time ?? '',
+            '[@dateSheet.submitted_date]' => $this->dateSheet->submitted_date ?? ''
         ];
     }
 

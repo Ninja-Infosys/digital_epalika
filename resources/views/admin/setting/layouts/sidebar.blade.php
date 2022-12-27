@@ -23,6 +23,15 @@
     </li>
 @endcan
 
+@can('occupation_access')
+    <li class="{{request()->is('admin/setting/occupation/*') ? 'active' : ''}}">
+        <a href="{{route('admin.occupation.index')}}">
+            <i class="fa fa-user"></i>
+            <span> पेसा </span>
+        </a>
+    </li>
+@endcan
+
 @can('emergencyNumber_access')
     <li class="{{request()->is('admin/setting/fiscalYear/*') ? 'active' : ''}}">
         <a href="{{route('admin.emergencyNumber.index')}}">
