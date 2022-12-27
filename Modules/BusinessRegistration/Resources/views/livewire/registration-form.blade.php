@@ -41,7 +41,7 @@
                             <fieldset>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <label for="form.business_detail_name" class="form-label">फर्म/कम्पनी/व्यवसाय  को
+                                        <label for="form.business_detail_name" class="form-label">फर्म/कम्पनी/व्यवसाय को
                                             नाम
                                             नेपलीमा</label>
                                         <input
@@ -246,7 +246,9 @@
                                             <option value="">छान्नुहोस्</option>
                                             @foreach($investmentRevenues as $investmentRevenue)
                                                 <option
-                                                    value="{{$investmentRevenue->id ??''}}">{{$investmentRevenue->title ??''}}(रु.{{$investmentRevenue->registration_amount ??0}})</option>
+                                                    value="{{$investmentRevenue->id ??''}}">{{$investmentRevenue->title ??''}}
+                                                    (रु.{{$investmentRevenue->registration_amount ??0}})
+                                                </option>
 
                                             @endforeach
                                         </select>
@@ -420,7 +422,7 @@
 
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/व्यवसाय  को ठेगाना</h2>
+                            <h2 class="font-weight-bold text-center">फर्म / कम्पनी/व्यवसाय को ठेगाना</h2>
                         </div>
                         <div class="card-body">
                             <fieldset>
@@ -676,7 +678,8 @@
 
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="form.citizenship_front" class="form-label"> नागरिकता अपलोड गर्नुहोस् (आगाडी)</label>
+                                        <label for="form.citizenship_front" class="form-label"> नागरिकता अपलोड गर्नुहोस्
+                                            (आगाडी)</label>
                                         <input type="file" class="form-control" id="form.citizenship_front"
                                                wire:model="form.citizenship_front"/>
                                         @error('form.citizenship_front')
@@ -684,7 +687,8 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="form.citizenship_back" class="form-label"> नागरिकता अपलोड गर्नुहोस् (पछाडी)</label>
+                                        <label for="form.citizenship_back" class="form-label"> नागरिकता अपलोड गर्नुहोस्
+                                            (पछाडी)</label>
                                         <input type="file" class="form-control" id="form.citizenship_back"
                                                wire:model="form.citizenship_back"/>
                                         @error('form.citizenship_back')
@@ -792,7 +796,7 @@
                                             id="form.square"
                                             placeholder="वर्गफिट"
                                             wire:model="form.square"
-                                         disabled />
+                                            disabled/>
                                         @error('form.square')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -969,7 +973,7 @@
                                         <th>व्यवसायको प्रकृति</th>
                                         <td>
 
-                                                {{!empty($form['business_nature']) ? \Modules\BusinessRegistration\Enums\BusinessNature::tryFrom($form['business_nature'])->label() :''}}
+                                            {{!empty($form['business_nature']) ? \Modules\BusinessRegistration\Enums\BusinessNature::tryFrom($form['business_nature'])->label() :''}}
 
                                         </td>
                                     </tr>
@@ -1011,9 +1015,9 @@
                                         <td>
 
 
-                                                @foreach($dbBusinessPurposes as $dbBusinessPurpose)
-                                                    {{$dbBusinessPurpose->title}}{{!$loop->last ? ", ":''}}
-                                                @endforeach
+                                        @foreach($dbBusinessPurposes as $dbBusinessPurpose)
+                                            {{$dbBusinessPurpose->title}}{{!$loop->last ? ", ":''}}
+                                        @endforeach
 
                                     </tr>
                                     <tr>
@@ -1250,7 +1254,8 @@
                                         <th>नागरिकता अपलोड गर्नुहोस् (आगाडी)</th>
                                         <td>
                                             @if(!empty($form['citizenship_front']))
-                                                <img src="{{$form['citizenship_front']->temporaryUrl()}}" alt="" height="60">
+                                                <img src="{{$form['citizenship_front']->temporaryUrl()}}" alt=""
+                                                     height="60">
                                             @endif
                                         </td>
                                     </tr>
@@ -1258,7 +1263,8 @@
                                         <th>नागरिकता अपलोड गर्नुहोस् (पछाडी)</th>
                                         <td>
                                             @if(!empty($form['citizenship_back']))
-                                                <img src="{{$form['citizenship_back']->temporaryUrl()}}" alt="" height="60">
+                                                <img src="{{$form['citizenship_back']->temporaryUrl()}}" alt=""
+                                                     height="60">
                                             @endif
                                         </td>
                                     </tr>
@@ -1397,7 +1403,8 @@
                                             id="form.business_type">
                                             <option value="">---छान्नुहोस् ---</option>
                                             @foreach(\Modules\BusinessRegistration\Enums\BusinessTypeEnum::cases() as $key=>$businessTypeEnum)
-                                                <option value="{{$businessTypeEnum->value}}">{{$businessTypeEnum->label()}}</option>
+                                                <option
+                                                    value="{{$businessTypeEnum->value}}">{{$businessTypeEnum->label()}}</option>
                                             @endforeach
                                         </select>
                                         @error('form.business_type')
@@ -1518,8 +1525,9 @@
                                             wire:model="form.education_qualification">
                                             <option value="">---शैक्षिक योग्यता ----</option>
 
-                                          @foreach(\Modules\BusinessRegistration\Enums\Qualification::cases() as $qualification)
-                                            <option value="{{$qualification->value}}">{{$qualification->label()}}</option>
+                                            @foreach(\Modules\BusinessRegistration\Enums\Qualification::cases() as $qualification)
+                                                <option
+                                                    value="{{$qualification->value}}">{{$qualification->label()}}</option>
                                             @endforeach
 
                                         </select>
