@@ -38,29 +38,29 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="ward_no" class="form-label">
                                         वडा नं.</label>
-                                    <select name="ward_no[]" multiple data-toggle="select2"
-                                            id="ward_no" class="form-select">
+                                    <select name="ward_no[]" multiple data-toggle="select2" id="ward_no"
+                                        class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($officeSetting->localBody->ward_no as $ward )
-                                            <option value="{{$ward}}">{{$ward}}</option>
+                                        @foreach ($officeSetting->localBody->ward_no as $ward)
+                                            <option value="{{ $ward }}">{{ $ward }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label for="enterprise_type_id" class="form-label">
                                         उधमको प्रकार</label>
-                                    <select name="enterprise_type_id" multiple data-toggle="select2"
-                                            id="enterprise_type_id" class="form-select">
+                                    <select name="enterprise_type_id" multiple data-toggle="select2" id="enterprise_type_id"
+                                        class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach ($enterpriseTypes as $enterpriseType)
-                                        <option value="{{ $enterpriseType->id }}"
-                                            {{ $enterpriseType->id == old('enterprise_type_id',$enterprise->enterprise_type_id) ? 'selected' : '' }}>
-                                            {{ $enterpriseType->title }}
-                                        </option>
-                                    @endforeach
+                                            <option value="{{ $enterpriseType->id }}"
+                                                {{ $enterpriseType->id == old('enterprise_type_id', $enterprise->enterprise_type_id) ? 'selected' : '' }}>
+                                                {{ $enterpriseType->title }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
-                            </div>
+
 
                                 <fieldset>
                                     <legend class="font-16 text-info">
@@ -71,24 +71,25 @@
                                     <div class="row">
                                         @foreach ($columnData as $columns)
                                             <div class="col-md-3 mb-2">
-                                                <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
-                                                <select name="columns[{{$columns['table_name']}}][]"
-                                                        id="column.{{$columns['table_name']}}" multiple
-                                                        data-toggle="select2"
-                                                        class="form-control">
+                                                <label
+                                                    for="column.{{ $columns['table_name'] }}">{{ $columns['name'] }}</label>
+                                                <select name="columns[{{ $columns['table_name'] }}][]"
+                                                    id="column.{{ $columns['table_name'] }}" multiple data-toggle="select2"
+                                                    class="form-control">
                                                     <option disabled>--- छान्नुहोस् ---</option>
                                                 </select>
 
                                             </div>
                                         @endforeach
 
+                                    </div>
+                                </fieldset>
                             </div>
-                            </fieldset>
+                        </form>
                     </div>
                     <button type="submit" id="submitFormBtn" class="btn btn-primary mt-1">
                         पेश गर्नुहोस्
                     </button>
-                    </form>
                 </div>
                 <div id="report-table"></div>
             </div>
@@ -97,7 +98,7 @@
 
     @push('scripts')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 // x-csrf protection
                 $.ajaxSetup({
                     headers: {
@@ -105,25 +106,25 @@
                     }
                 });
 
-                $(document.body).delegate('#report-filter-form', 'submit', function (e) {
+                $(document.body).delegate('#report-filter-form', 'submit', function(e) {
                     e.preventDefault()
                     $.ajax({
                         type: "post",
-                        url: "{{route('admin.grant.report.enterprise.report-data')}}",
+                        url: "{{ route('admin.grant.report.enterprise.report-data') }}",
                         data: new FormData(this),
                         processData: false,
                         contentType: false,
-                        beforeSend: function () {
+                        beforeSend: function() {
                             $("#submitFormBtn").prop('disabled', true);
                             $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
                         },
-                        success: function (resp) {
+                        success: function(resp) {
                             $("#submitFormBtn").prop('disabled', false);
                             $("#collapseFilterForm").collapse('hide')
                             $("#submitFormBtn").html("पेश गर्नुहोस्");
                             $('#report-table').html(resp.view)
                         },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
                             $('#submitFormBtn').prop('disabled', false)
                             $("#submitFormBtn").html("पेश गर्नुहोस्");
                             toastMessage('error', XMLHttpRequest.responseJSON.message)
