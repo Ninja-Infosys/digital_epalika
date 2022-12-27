@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="row" xmlns:livewire="http://www.w3.org/1999/html">
+    <div class="row">
         <div class="col-12">
             <div class="page-title-box">
                 <div class="page-title-right">
@@ -91,7 +91,7 @@
                                         <option value="">नयाँ वा निरन्तरता छान्नुहोस्</option>
                                         @foreach(\Modules\Grant\Enums\NewOrContinueEnum::cases() as $type)
                                             <option
-                                                {{$type->value==old('is_new', $grantDetail->is_new) ? 'selected' : ''}}
+                                                {{$type->value==old('is_new', $grantDetail->is_new->value) ? 'selected' : ''}}
                                                 value="{{$type->value}}">{{$type->label()}}</option>
                                         @endforeach
                                     </select>
@@ -116,7 +116,6 @@
                             </div>
                         </fieldset>
 
-
                         <fieldset class="my-3">
                             <legend><h4 class="text-info">अनुदान स्थलको विवरण *</h4></legend>
                             <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस्
@@ -133,7 +132,7 @@
                                         <option value="">वडा नं. छान्नुहोस्</option>
                                         @foreach($officeSetting->localBody->ward_no as $ward)
                                             <option
-                                                {{$ward===old('ward_no', $grantDetail->ward_no) ? 'selected':''}}
+                                                {{$ward==old('ward_no', $officeSetting->ward_no) ? 'selected' : ''}}
                                                 value="{{$ward}}">
                                                 {{$ward}}
                                             </option>
@@ -178,7 +177,7 @@
                                         name="unit_no"
                                         id="unit_no"
                                         class="form-control @error('unit_no') is-invalid @enderror"
-                                        value="{{old('unit_no',$grantDetail->unit_no)}}"
+                                        value="{{old('unit_no',$grantDetail->Unit_no)}}"
                                         placeholder="किता नं."
                                     >
                                     @error('unit_no')

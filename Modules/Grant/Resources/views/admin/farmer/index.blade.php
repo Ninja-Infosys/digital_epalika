@@ -34,14 +34,13 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>युनिक आईडी</th>
                                 <th>पुरा नाम</th>
-                                <th>फोटो</th>
-                                <th>बुबाको नाम</th>
                                 <th>कृषक परिचय पत्र नं.</th>
                                 <th>नागरिकता नं</th>
                                 <th>सम्पर्क नं.</th>
@@ -54,12 +53,6 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$farmer->unique_id}}</td>
                                     <td>{{$farmer->name}}</td>
-
-                                    <td class="table-user"><img class="me-2 rounded-circle" src="{{$farmer->photo_url}}"
-                                                                alt="{{$farmer->name}}"
-                                        >
-                                    </td>
-                                    <td>{{$farmer->father_name}}</td>
                                     <td>{{$farmer->farmer_id_card_no}}</td>
                                     <td>{{$farmer->citizenship_no}}</td>
                                     <td>{{$farmer->phone_no}}</td>
@@ -95,6 +88,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $farmers->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

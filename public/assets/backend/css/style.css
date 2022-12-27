@@ -2,6 +2,9 @@
     font-family: Kalimati;
     src: url('../../fonts/Kalimati.otf');
 }
+tbody, td, tfoot, th, thead, tr {
+    font-family: Kalimati, serif;
+}
 .popup-modal{
     position: fixed;
     width: 500px;

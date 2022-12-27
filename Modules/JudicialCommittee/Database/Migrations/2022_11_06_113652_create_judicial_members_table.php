@@ -11,9 +11,9 @@ return new class () extends Migration {
             $table->id();
             $table->string('name')->comment('नाम');
             $table->string('phone')->nullable()->comment('फोन');
-            $table->string('email')->nullable()->comment('फोन');
-            $table->string('designation')->nullable();
-            $table->string('address')->nullable();
+            $table->string('email')->nullable()->comment('इमेल');
+            $table->string('designation')->nullable()->comment('पद');
+            $table->string('address')->nullable()->comment('ठेगाना');
             $table->integer('position')->comment('स्थान');
             $table->timestamps();
             $table->softDeletes();

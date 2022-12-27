@@ -20,10 +20,18 @@ class JudicialPermissionTableSeeder extends Seeder
             'judicialMember_create',
             'judicialMember_edit',
             'judicialMember_delete',
+            'judicialCommitteeTemplate_access',
+            'judicialCommitteeTemplate_create',
+            'judicialCommitteeTemplate_edit',
+            'judicialCommitteeTemplate_delete',
             'complaintApplication_access',
             'complaintApplication_create',
             'complaintApplication_edit',
             'complaintApplication_delete',
+            'dateSheet_access',
+            'dateSheet_create',
+            'dateSheet_edit',
+            'dateSheet_delete'
         ];
 
         $this->storePermission($permissions);

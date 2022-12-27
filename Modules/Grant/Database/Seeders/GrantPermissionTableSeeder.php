@@ -60,6 +60,11 @@ class GrantPermissionTableSeeder extends Seeder
             'grantDetail_create',
             'grantDetail_edit',
             'grantDetail_delete',
+            'farmerReport_access',
+            'grantReport_access',
+            'groupReport_access',
+            'enterpriseReport_access',
+            'cooperativeReport_access'
         ];
 
         $this->storePermission($permissions);

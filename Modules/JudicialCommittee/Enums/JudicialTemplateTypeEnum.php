@@ -1,11 +1,10 @@
 <?php
 
-namespace Modules\Grant\Enums;
+namespace Modules\JudicialCommittee\Enums;
 
-enum NewOrContinueEnum: string
+enum JudicialTemplateTypeEnum: string
 {
-    case NEW = 'new';
-    case CONTINUE = 'continue';
+    case DATE_SHEET = "date_sheet";
 
     public function label(): string
     {
@@ -15,8 +14,7 @@ enum NewOrContinueEnum: string
     public static function getLabel(self $value): string
     {
         return match ($value) {
-            self::NEW => 'नँया',
-            self::CONTINUE => 'निरन्तर',
+            self::DATE_SHEET => 'तारिख पर्चा',
         };
     }
 }

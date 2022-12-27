@@ -34,6 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        @includeIf('inc.filter_form')
                         <table class="table table-sm table-striped table-hover mt-1">
                             <thead>
                             <tr>
@@ -74,7 +75,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

@@ -5,10 +5,12 @@ namespace Modules\Grant\Entities;
 use App\Models\Address\Province;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Group extends Model
 {
-    use HasFactory,SoftDeletes,EventObserveTrait;
+    use HasFactory,SoftDeletes, EventObserveTrait, GetAllColumns;
 
    protected $dates = [
        'created_at',
@@ -60,10 +62,10 @@ class Group extends Model
        return $this->belongsTo(User::class);
    }
 
-   public function groupPersons(): HasMany
-   {
-       return $this->hasMany(GroupPerson::class);
-   }
+//    public function groupPersons(): HasMany
+//    {
+//        return $this->hasMany(GroupPerson::class);
+//    }
 
    public function farmers(): BelongsToMany
    {

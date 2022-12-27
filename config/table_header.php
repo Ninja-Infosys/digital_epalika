@@ -59,5 +59,24 @@ return [
         "gender" => "लिङ्ग",
         "education_qualification" => "शैक्षिक योग्यता",
         "occupation" => "मुख्य पेशा",
+    ],
+    'listregistration' => [
+        "registration_no" => "दर्ता नं",
+        "applicant_type" => "आवेदक प्रकार",
+        "name" => "नाम",
+        "address" => "ठेगाना",
+        "mailing_address" => "पत्राचार ठेगाना",
+        "main_person" => "मुख्य व्यक्ति",
+        "telephone" => "टेलिफोन",
+        "mobile_no" => "मोबाइल नम्बर",
+        "application_photo" => "आवेदन फोटो",
+        "registration_certificate" => "दर्ता प्रमाणपत्र",
+        "pan_photo" => "प्यान फोटो",
+        "tax_payment_certificate" => "कर भुक्तानी प्रमाणपत्र",
+        "license_photo" => "लाइसेन्स फोटो",
+        "business_nature" => "व्यापार प्रकृति",
+        "business_nature_description" => "व्यापार प्रकृति विवरण",
+        "date" => "मिति",
+        "title" => "आर्थिक वर्ष"
     ]
 ];

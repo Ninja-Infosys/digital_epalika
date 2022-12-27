@@ -7,7 +7,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grant.dashboard')}}">
+                            <a href="{{ route('admin.grant.dashboard') }}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -22,45 +22,45 @@
         <div class="col-lg-4 col-xl-4">
             <div class="card text-center">
                 <div class="card-body">
-                    <img src="{{$farmer->photo_url}}" class="rounded-circle avatar img-thumbnail"
-                         alt="{{$farmer->name}}" style="object-fit: cover; height: 6rem; width: 6rem">
+                    <img src="{{ $farmer->photo_url }}" class="rounded-circle avatar img-thumbnail"
+                        alt="{{ $farmer->name }}" style="object-fit: cover; height: 6rem; width: 6rem">
 
-                    <h3 class="mt-3">{{$farmer->name}}</h3>
-                    <h5 class="mb-0 text-dark">{{$farmer->unique_id}}</h5>
+                    <h3 class="mt-3">{{ $farmer->name }}</h3>
+                    <h5 class="mb-0 text-dark">{{ $farmer->unique_id }}</h5>
                     <hr class="border-top border-1">
                     <div class="text-start mt-3">
 
                         <p class=" text-dark mb-2 font-16"><strong>कृषक परिचय पत्र नं :</strong>
-                            <span class="ms-2 text-muted">{{$farmer->farmer_id_card_no}}</span>
+                            <span class="ms-2 text-muted">{{ $farmer->farmer_id_card_no }}</span>
                         </p>
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>सम्पर्क नम्बर :</strong> <span
-                                class="ms-2 text-muted">{{$farmer->phone_no}}</span></p>
+                                class="ms-2 text-muted">{{ $farmer->phone_no }}</span></p>
 
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>नागरिकता नं. :</strong> <span
-                                class="ms-2 text-muted">{{$farmer->citizenship_no}}</span></p>
+                                class="ms-2 text-muted">{{ $farmer->citizenship_no }}</span></p>
 
                         <p class=" border-top border-1 text-dark mb-2 font-16"><strong>लिङ्ग :</strong> <span
-                                class="ms-2 text-muted">{{$farmer->gender->label()}}</span></p>
+                                class="ms-2 text-muted">{{ $farmer->gender->label() }}</span></p>
 
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>वैवाहिक स्थिति :</strong> <span
-                                class="ms-2 text-muted">{{$farmer->marital_status->label()}}</span></p>
+                                class="ms-2 text-muted">{{ $farmer->marital_status->label() }}</span></p>
 
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>दम्पतिको नाम :</strong> <span
-                                class="ms-2 text-muted">{{$farmer->spouse_name}}</span></p>
+                                class="ms-2 text-muted">{{ $farmer->spouse_name }}</span></p>
 
                         <p class=" border-top border-1 text-dark mb-2 font-16"><strong>बुबाको नाम :</strong> <span
-                                class="ms-2 text-muted">{{$farmer->father_name}}</span></p>
+                                class="ms-2 text-muted">{{ $farmer->father_name }}</span></p>
 
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>बुबा/ससुराको नाम :</strong> <span
-                                class="ms-2 text-muted">{{$farmer->grandfather_name}}</span></p>
+                                class="ms-2 text-muted">{{ $farmer->grandfather_name }}</span></p>
 
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>ठेगाना :</strong> <span
-                                class="ms-2 text-muted">{{$farmer->province->province ??''}},
-                                {{$farmer->district->district ??''}},
-                                {{$farmer->localBody->local_body ??''}} -
-                                {{$farmer->ward_no ??''}},
-                                {{$farmer->village ??''}}
-                                {{$farmer->tole ??''}}
+                                class="ms-2 text-muted">{{ $farmer->province->province ?? '' }},
+                                {{ $farmer->district->district ?? '' }},
+                                {{ $farmer->localBody->local_body ?? '' }} -
+                                {{ $farmer->ward_no ?? '' }},
+                                {{ $farmer->village ?? '' }}
+                                {{ $farmer->tole ?? '' }}
                             </span></p>
 
                     </div>
@@ -70,53 +70,64 @@
         </div>
         <div class="col-lg-8 col-xl-8 ">
             <div class="row">
-            <div class="col-md-4 text-center px-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class=" text-dark font-19">अनुदान विवरण</h4>
-                        <p class=" pt-1 font-16">कृषकको अनुदान विवरण ।</p>
+                <div class="col-md-4 text-center px-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class=" text-dark font-19">आवद्ध सहकारी</h4>
+                            <p class=" pt-1 font-16">कृषकको आवद्ध सहकारी।</p>
+                        </div>
+                        <div class="card-btn pb-2">
+                            <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i
+                                    class="fa fa-arrow-circle-right"></i></a>
+                        </div>
                     </div>
-                    <div class="card-btn pb-2">
-                        <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="col-md-4 text-center px-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class=" text-dark font-19">आवद्ध उधम</h4>
+                            <p class=" pt-1 font-16">कृषकको आवद्ध उधम।</p>
+                        </div>
+                        <div class="card-btn pb-2">
+                            <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i
+                                    class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center px-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class=" text-dark font-19">आवद्ध समुह</h4>
+                            <p class=" pt-1 font-16">कृषकको आवद्ध समुह।</p>
+                        </div>
+                        <div class="card-btn pb-2">
+                            <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i
+                                    class="fa fa-arrow-circle-right"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 text-center px-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class=" text-dark font-19">आवद्ध सहकारी</h4>
-                        <p class=" pt-1 font-16">कृषकको आवद्ध सहकारी।</p>
-                    </div>
-                    <div class="card-btn pb-2">
-                        <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 text-center px-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class=" text-dark font-19">आवद्ध उधम</h4>
-                        <p class=" pt-1 font-16">कृषकको आवद्ध उधम।</p>
-                    </div>
-                    <div class="card-btn pb-2">
-                        <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 text-center px-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class=" text-dark font-19">आवद्ध समुह</h4>
-                        <p class=" pt-1 font-16">कृषकको आवद्ध समुह।</p>
-                    </div>
-                    <div class="card-btn pb-2">
-                        <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            </div>
+            <table class="table table-striped" style=" border: 1px solid black;
+            border-collapse: collapse;">
+                <thead>
+                  <tr>
+                    <th scope="col">क्र.स</th>
+                    <th scope="col">कार्यक्रम/क्रियाकलाप</th>
+                    <th scope="col">अनुदानग्राही लगानी</th>
+                    <th scope="col">अनुदान स्थल</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($farmer->grantDetails as $grantDetail)
+                  <tr>
+                    <td>{{ $loop->iteration }}</th>
+                    <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
+                    <td>{{$grantDetail->personal_investment}}</td>
+                    <td>{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}} {{$grantDetail->village}}, {{$grantDetail->tole}}</td>
+                  </tr>
+                  @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-    </div>
 @endsection
-

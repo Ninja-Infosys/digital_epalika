@@ -4,6 +4,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\FeatureActivation;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 if (!function_exists('get_setting')) {
@@ -27,7 +28,7 @@ if (!function_exists('get_provinces')) {
         });
 
         if ($provinceId !== null) {
-            $provinces=$provinces->where('id', $provinceId)->first();
+            $provinces = $provinces->where('id', $provinceId)->first();
         }
 
         return $provinces ?? [];
@@ -66,5 +67,37 @@ if (!function_exists('get_local_bodies')) {
             $allLocalBodies = $allLocalBodies->where('id', $localBodyId)->first();
         }
         return $allLocalBodies ?? [];
+    }
+}
+
+if (!function_exists('getArrayKeys')) {
+    function getArrayKeys($array = []): array
+    {
+
+        $keys = [];
+        foreach ($array as $key => $value) {
+            $keys[] = $key;
+            if (is_array($value)) {
+                $keys = array_merge($keys, getArrayKeys($value));
+            }
+        }
+
+        return array_unique($keys);
+    }
+}
+
+if (!function_exists('removeColumns')) {
+    function removeColumns($array, $excludeColumns): Collection
+    {
+        foreach ($array as &$element) {
+            if (is_array($element)) {
+                $element = removeColumns($element, $excludeColumns);
+            } else {
+                foreach ($excludeColumns as $column) {
+                    unset($element->$column);
+                }
+            }
+        }
+        return collect($array);
     }
 }

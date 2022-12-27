@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदान जारी सूची</h4>
+                        <h4 class="header-title">अनुदान सूची</h4>
                         @can('grantDetail_create')
                             <a href="{{route('admin.grant.grantDetail.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -35,34 +35,32 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
                             <thead>
                             <tr>
-                                <th>क्र.सं</th>
-                                <th>कार्यक्रम/क्रियाकलाप</th>
-                                <th>अनुदानग्राहीको प्रकार</th>
-                                <th>अनुदानग्राहीको लगानी</th>
-                                <th>किता नं.</th>
-                                <th>सम्पर्क नम्बर</th>
-                                <th>ठेगाना</th>
-                                <th>#</th>
+                                <th class="text-center">क्र.सं</th>
+                                <th class="text-center">कार्यक्रम/क्रियाकलाप</th>
+                                <th class="text-center">अनुदानग्राही नाम</th>
+                                <th class="text-center"> अनुदानग्राही लगानी</th>
+                                <th class="text-center">नयाँ/निरन्तर</th>
+                                <th class="text-center">गत वर्षको लगानी</th>
+                                <th class="text-center">योजना स्थल</th>
+                                <th class="text-center">सम्पर्क नम्बर</th>
+                                <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse($grantDetails as $grantDetail)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$grantDetail->grantProgram->name ?? ''}}</td>
-                                    <td>{{$grantDetail->grantType->title ?? ''}}</td>
-                                    <td>{{$grantDetail->investment}}</td>
-                                    <td>{{$grantDetail->unit_no}}</td>
-                                    <td>{{$grantDetail->phone}}</td>
-                                    <td>
-                                        <ul>
-                                            <li>{{$grantDetail->localBody->local_body ?? ''}}</li>
-                                            <li>{{$grantDetail->ward_no}}</li>
-                                        </ul>
-                                    </td>
+                                    <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
+                                    <td class="text-center">{{$grantDetail->model->name ?? ''}}</td>
+                                    <td>{{$grantDetail->personal_investment}}</td>
+                                    <td>{{$grantDetail->is_old ? 'निरन्तरता': 'नयाँ'}}</td>
+                                    <td>{{$grantDetail->investment_amount}}</td>
+                                    <td class="text-center">{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}}</td>
+                                    <td>{{$grantDetail->contact}}</td>
                                     <td>
                                         @can('grantDetail_edit')
                                             <a href="{{route('admin.grant.grantDetail.edit', $grantDetail)}}"
@@ -97,6 +95,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $grantDetails->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

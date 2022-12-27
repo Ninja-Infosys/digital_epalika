@@ -3,10 +3,23 @@
 namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Modules\Grant\Enums\GranteeEnum;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
+use Modules\JudicialCommittee\Entities\JudicialReceiptBill;
+use Modules\JudicialCommittee\Http\Requests\JudicialReceiptBillRequest;
 
 class ComplaintApplicationController extends Controller
 {
+    public function registeredApplications()
+    {
+        $complaintApplications = ComplaintApplication::with('lawsuitNature')->whereHas('judicialReceiptBill')->orderByDesc('date')->get();
+
+        return view('judicialcommittee::admin.registered_application', compact('complaintApplications'));
+    }
+
     public function index()
     {
         $this->checkAuthorization('complaintApplication_access');
@@ -27,27 +40,61 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        return view('judicialcommittee::show');
+        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers');
+
+        return view('judicialcommittee::admin.complaint_application.show', compact('complaintApplication'));
     }
 
     public function edit(ComplaintApplication $complaintApplication)
     {
         $this->checkAuthorization('complaintApplication_edit');
 
-        return view('judicialcommittee::edit');
+        $complaintApplication->load('relatedMembers');
+
+        return view('judicialcommittee::admin.complaint_application.edit', compact('complaintApplication'));
     }
 
     public function destroy(ComplaintApplication $complaintApplication)
     {
         $this->checkAuthorization('complaintApplication_delete');
+
         if ($complaintApplication->applicant_signature) {
             $this->deleteFile($complaintApplication->applicant_signature);
         }
 
+        $complaintApplication->relatedMembers()->delete();
         $complaintApplication->delete();
 
         toast('आवेदन सफलतापूर्वक मेटाइयो', 'success');
 
         return back();
+    }
+
+    public function receiptBill(ComplaintApplication $complaintApplication)
+    {
+        $this->checkAuthorization('complaintApplication_create');
+        $complaintApplication->load('judicialReceiptBill');
+
+        return view('judicialcommittee::admin.complaint_application.receipt_bill', compact('complaintApplication'));
+    }
+
+    public function receiptBillStore(JudicialReceiptBillRequest $request, ComplaintApplication $complaintApplication)
+    {
+        $this->checkAuthorization('complaintApplication_create');
+
+        $officeSetting = OfficeSetting::with('fiscalYear')->first();
+
+        JudicialReceiptBill::updateOrCreate(
+            ['complaint_application_id' => $complaintApplication->id],
+            $request->validated()
+        );
+
+        $complaintApplication->update([
+            'registration_no' => $officeSetting->fiscalYear->title . '-' . ($complaintApplication->lawsuitNature->code ?? '') . '-' . Str::padLeft($complaintApplication->id, 4, 0)
+        ]);
+
+        toast('रसिद बिल सफलतापूर्वक थपियो', 'success');
+
+        return redirect(route('admin.judicialCommittee.complaintApplication.show', $complaintApplication));
     }
 }
