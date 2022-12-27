@@ -87,6 +87,27 @@
                     </div>
                 </div>
             </div>
+            <table class="table table-striped table-border">
+                <thead>
+                  <tr>
+                    <th scope="col">क्र.स</th>
+                    <th scope="col">कार्यक्रम/क्रियाकलाप</th>
+                    <th scope="col">नयाँ/निरन्तर</th>
+                    <th scope="col">गत वर्षको लगानी</th>
+                    <th scope="col">अनुदान स्थल</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>1</th>
+                    <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>घफ्श</td>
+                  </tr>
+                </tbody>
+            </table>
         </div>
+
     </div>
 @endsection
