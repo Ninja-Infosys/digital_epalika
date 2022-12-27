@@ -55,10 +55,12 @@
                                             {{ $complaintApplication->lawsuitNature->title ?? '' }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.index', $complaintApplication) }}"
-                                                class="btn btn-sm btn-outline-primary">
-                                                <i class="fa fa-calendar-alt"> तारिख पर्चा </i>
-                                            </a>
+                                            @can('dateSheet_access')
+                                                <a href="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.index', $complaintApplication) }}"
+                                                    class="btn btn-sm btn-outline-primary">
+                                                    <i class="fa fa-calendar-alt"> तारिख पर्चा </i>
+                                                </a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty
