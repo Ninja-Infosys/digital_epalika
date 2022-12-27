@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\DateSheet;
+use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
+use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 use Modules\JudicialCommittee\Http\Requests\DateSheet\StoreDateSheetRequest;
 
 class DateSheetController extends Controller
@@ -17,6 +19,11 @@ class DateSheetController extends Controller
 
         if (!$complaintApplication->dateSheet) {
             return redirect(route('admin.judicialCommittee.complaintApplication.dateSheet.create', $complaintApplication));
+        }
+
+        if (JudicialCommitteeTemplate::where('type', JudicialTemplateTypeEnum::DATE_SHEET)->count() == 0) {
+            toast('टेम्प्लेट सेट गरिएको छैन', 'error');
+            return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
         }
 
 
