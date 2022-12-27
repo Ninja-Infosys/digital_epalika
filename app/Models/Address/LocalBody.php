@@ -26,6 +26,10 @@ class LocalBody extends Model
         'wards',
     ];
 
+    protected $appends = [
+      'ward_no'
+    ];
+
     public function district(): BelongsTo
     {
         return $this->belongsTo(District::class);

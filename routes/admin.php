@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Setting\EthnicityController;
 use App\Http\Controllers\Admin\Setting\FeatureActivationController;
 use App\Http\Controllers\Admin\Setting\FiscalYearController;
 use App\Http\Controllers\Admin\Setting\MailSettingController;
+use App\Http\Controllers\Admin\Setting\OccupationController;
 use App\Http\Controllers\Admin\Setting\OfficeSettingController;
 use App\Http\Controllers\Admin\Setting\SettingDashboardController;
 use App\Http\Controllers\Admin\Setting\SmsSettingController;
@@ -68,6 +69,7 @@ Route::prefix('setting')->group(function () {
     Route::post('send-test-mail', [MailSettingController::class, 'sendTestMail'])->name('send-test-mail');
 
 
+    Route::resource('occupation', OccupationController::class);
     Route::resource('ethnicity', EthnicityController::class);
     Route::resource('fiscalYear', FiscalYearController::class);
     Route::resource('emergencyNumber', EmergencyNumberController::class);

@@ -4,12 +4,28 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-{{--<li>--}}
-{{--    <a href="#">--}}
-{{--        <i class="fa fa-file-contract"></i>--}}
-{{--        <span>अनुदान विवरण</span>--}}
-{{--    </a>--}}
-{{--</li>--}}
+
+<li class="{{request()->is('admin/identity/disability*') ? 'active' : ''}}">
+    <a href="#sidebarDisabilityIdentityCard"
+       {{request()->is('admin/identity/disability*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
+        <i class="fa fa-cogs"></i>
+        <span>अनलाइन फारम</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
+    </a>
+    <div class="collapse {{request()->is('admin/identity/disability*') ? 'show' : ''}}"
+         id="sidebarDisabilityIdentityCard">
+        <ul class="nav-second-level">
+                <li class="{{request()->is('admin/identity/disability/disabilityIdentityCard') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.disabilityIdentityCard.index')}}">
+                        <span> अपाङ्गता परिचय पत्र</span>
+                    </a>
+                </li>
+        </ul>
+    </div>
+</li>
 
 <li class="{{request()->is('admin/identity/setting*') ? 'active' : ''}}">
     <a href="#sidebarIdentitySetting"
