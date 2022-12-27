@@ -5,6 +5,7 @@ namespace Modules\Grant\Entities;
 use App\Models\Settings\Branch;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +16,7 @@ use Modules\Grant\Enums\GranteeEnum;
 
 class Grant extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
 
     protected $dates = [
         'created_at',

@@ -57,13 +57,10 @@
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>कैफियत :</strong> <span
                                 class="ms-2 text-muted">{{$grantDetail->remarks}}
                             </span></p>
-
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 

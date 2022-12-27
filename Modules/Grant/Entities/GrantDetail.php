@@ -4,6 +4,7 @@ namespace Modules\Grant\Entities;
 
 use App\Models\Address\LocalBody;
 use App\Models\Settings\OfficeSetting;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +15,7 @@ use Modules\Grant\Enums\GranteeEnum;
 
 class GrantDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
 
     protected $dates = [
         'created_at',
