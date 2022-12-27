@@ -10,7 +10,7 @@ return new class () extends Migration {
         Schema::create('fiscal_years', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title')->nullable()->comment('शीर्षक');
+            $table->string('title')->nullable()->comment('आर्थिक वर्ष');
             $table->softDeletes();
         });
     }

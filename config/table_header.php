@@ -61,7 +61,6 @@ return [
         "occupation" => "मुख्य पेशा",
     ],
     'listregistration' => [
-        "fiscal_year_id" => "आर्थिक वर्ष",
         "registration_no" => "दर्ता नं",
         "applicant_type" => "आवेदक प्रकार",
         "name" => "नाम",
@@ -78,5 +77,6 @@ return [
         "business_nature" => "व्यापार प्रकृति",
         "business_nature_description" => "व्यापार प्रकृति विवरण",
         "date" => "मिति",
+        "title" => "आर्थिक वर्ष"
     ]
 ];

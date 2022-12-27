@@ -2,11 +2,13 @@
 
 namespace Modules\ListRegistration\Http\Controllers\Admin;
 
+use App\Exports\ReportExport;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\ListRegistration\Entities\ListRegistration;
 
 class ReportController extends Controller
@@ -26,19 +28,21 @@ class ReportController extends Controller
             'to_date' => ['nullable', 'after_or_equal:from_date'],
             'columns' => ['nullable', 'array']
         ]);
-        $listRegistrations = ListRegistration::where(function ($q) use ($request) {
+
+        $lists = ListRegistration::where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })
             ->selectRaw(!empty($request->input('columns')['list_registrations'])
-                ? implode(',', $request->input('columns')['list_registrations'])
-                : '*'
+                ? implode(',', ($request->input('columns')['list_registrations']))
+                : 'registration_no,applicant_type,name,address,mailing_address,main_person,telephone,mobile_no,business_nature,business_nature_description,date'
             )
-
-//            ->select('applicant_type_label as applicant_type')
             ->get();
 
+        $excelUrl = 'excel/' . date('Ymd') . '/' . time() . '.xlsx';
+        Excel::store(new ReportExport($lists), $excelUrl, 'public');
+
         return response()->json([
-            'view' => (string)View::make('listregistration::admin.report.table_data', compact('listRegistrations'))
+            'view' => (string)View::make('report.table', compact('lists', 'excelUrl'))
         ]);
     }
 
@@ -48,9 +52,9 @@ class ReportController extends Controller
 
         (new ListRegistration())
             ->ownAndRelatedModelsFillableColumns()
-            ->filter(function ($column) {
-                return array_keys($column, 'ListRegistration');
-            })
+//            ->filter(function ($column) {
+//                return array_keys($column, 'ListRegistration');
+//            })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
             });
