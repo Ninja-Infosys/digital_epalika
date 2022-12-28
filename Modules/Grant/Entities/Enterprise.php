@@ -74,10 +74,10 @@ class Enterprise extends Model
     {
         return $this->belongsToMany(Farmer::class);
     }
-    // public function enterpriseTypes(): BelongsTo
-    // {
-    //     return $this->belongsTo(enterpriseType::class);
-    // }
+     public function enterpriseTypes(): BelongsTo
+     {
+         return $this->belongsTo(enterpriseType::class);
+     }
        public function grantDetails(): MorphMany
        {
            return $this->morphMany(GrantDetail::class, 'model');
