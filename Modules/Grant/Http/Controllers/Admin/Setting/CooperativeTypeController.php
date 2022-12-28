@@ -10,13 +10,18 @@ use Illuminate\Http\RedirectResponse;
 use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Http\Requests\Setting\CooperativeType\StoreCooperativeTypeRequest;
 use Modules\Grant\Http\Requests\Setting\CooperativeType\UpdateCooperativeTypeRequest;
-
+use Illuminate\Database\Eloquent\Builder;
 class CooperativeTypeController extends Controller
 {
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('cooperativeType_access');
-       $cooperativeTypes = CooperativeType::latest()->get();
+       $cooperativeTypes = CooperativeType::where(function (Builder $q) {
+        if (!is_null(request('search'))) {
+            $q->whereLike(['title'], request('search'));
+        }
+    })
+        ->latest()->paginate(10);
         return view('grant::admin.setting.cooperativeType.index', compact('cooperativeTypes'));
     }
 

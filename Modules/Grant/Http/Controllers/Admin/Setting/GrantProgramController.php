@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Http\Requests\Setting\GrantProgram\StoreGrantProgramRequest;
@@ -16,7 +17,12 @@ class GrantProgramController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('grantProgram_access');
-        $grantPrograms = GrantProgram::latest()->get();
+        $grantPrograms = GrantProgram::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
         return view('grant::admin.setting.grantProgram.index', compact('grantPrograms'));
     }
 
