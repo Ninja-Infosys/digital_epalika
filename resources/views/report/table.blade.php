@@ -16,22 +16,14 @@
             </tr>
             </thead>
             <tbody>
+
+
             @forelse($lists as $list)
                 <tr>
-                    <th scope="row">{{$loop->iteration}}</th>
-                    @foreach($list->toArray() as $key=>$data)
-                        @if(is_array($data))
-                            @foreach($data as $d)
-                                @if(!is_array($d))
-                                    <td>
-                                        {{$d}}
-                                    </td>
-                                @endif
-                            @endforeach
-                        @else
-                            <td>{{$data}}</td>
-                        @endif
-                    @endforeach
+                    <th scope="row">{{ $loop->iteration }}</th>
+
+                    {{renderListData($list->toArray())}}
+
                 </tr>
             @empty
                 <tr>

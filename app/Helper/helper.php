@@ -104,3 +104,16 @@ if (!function_exists('removeColumns')) {
         return collect($array);
     }
 }
+
+if (!function_exists('renderListData')){
+    function renderListData($data): void
+    {
+        foreach($data as $value) {
+            if(is_array($value)) {
+                renderListData($value);
+            } else {
+                echo '<td>' . $value . '</td>';
+            }
+        }
+    }
+}
