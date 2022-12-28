@@ -23,7 +23,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <img src="{{ $farmer->photo_url }}" class="rounded-circle avatar img-thumbnail"
-                        alt="{{ $farmer->name }}" style="object-fit: cover; height: 6rem; width: 6rem">
+                         alt="{{ $farmer->name }}" style="object-fit: cover; height: 6rem; width: 6rem">
 
                     <h3 class="mt-3">{{ $farmer->name }}</h3>
                     <h5 class="mb-0 text-dark">{{ $farmer->unique_id }}</h5>
@@ -44,9 +44,12 @@
 
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>वैवाहिक स्थिति :</strong> <span
                                 class="ms-2 text-muted">{{ $farmer->marital_status->label() }}</span></p>
-
-                        <p class="border-top border-1 text-dark mb-2 font-16"><strong>दम्पतिको नाम :</strong> <span
-                                class="ms-2 text-muted">{{ $farmer->spouse_name }}</span></p>
+                        @if($farmer->marital_status==\App\Enums\MaritalStatusEnum::MARRIED)
+                            <p class="border-top border-1 text-dark mb-2 font-16"><strong>दम्पतिको नाम :</strong> <span
+                                    class="ms-2 text-muted">
+                                    {{ $farmer->spouse_name }}</span>
+                            </p>
+                        @endif
 
                         <p class=" border-top border-1 text-dark mb-2 font-16"><strong>बुबाको नाम :</strong> <span
                                 class="ms-2 text-muted">{{ $farmer->father_name }}</span></p>
@@ -110,22 +113,24 @@
             <table class="table table-striped" style=" border: 1px solid black;
             border-collapse: collapse;">
                 <thead>
-                  <tr>
+                <tr>
                     <th scope="col">क्र.स</th>
                     <th scope="col">कार्यक्रम/क्रियाकलाप</th>
                     <th scope="col">अनुदानग्राही लगानी</th>
                     <th scope="col">अनुदान स्थल</th>
-                  </tr>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach ($farmer->grantDetails as $grantDetail)
-                  <tr>
-                    <td>{{ $loop->iteration }}</th>
-                    <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
-                    <td>{{$grantDetail->personal_investment}}</td>
-                    <td>{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}} {{$grantDetail->village}}, {{$grantDetail->tole}}</td>
-                  </tr>
-                  @endforeach
+                @foreach ($farmer->grantDetails as $grantDetail)
+                    <tr>
+                        <td>
+                        {{ $loop->iteration }}</th>
+                        <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
+                        <td>{{$grantDetail->personal_investment}}</td>
+                        <td>{{$grantDetail->localBody->local_body ?? ''}}
+                            - {{$grantDetail->ward_no}} {{$grantDetail->village}}, {{$grantDetail->tole}}</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

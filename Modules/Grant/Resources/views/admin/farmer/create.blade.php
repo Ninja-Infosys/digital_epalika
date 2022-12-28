@@ -121,33 +121,19 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-4 mb-2" id="marital-status-div">
                                     <label for="marital_status" class="form-label">बैबाहिक अवस्था *</label>
                                     <select id="marital_status" name="marital_status" class="form-select">
                                         <option value="">-- छान्नुहोस् --</option>
                                         @foreach(\App\Enums\MaritalStatusEnum::cases() as $marital_status)
                                             <option
                                                 value="{{$marital_status->value}}"
-                                                {{$marital_status->value==old('marital_status') ? 'selected' : ''}} onclick="text({{$marital_status->value}})">
+                                                {{$marital_status->value==old('marital_status') ? 'selected' : ''}}>
                                                 {{$marital_status->label()}}
                                             </option>
                                         @endforeach
                                     </select>
                                     @error('marital_status')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-2" id="spouse">
-                                    <label for="spouse_name" class="form-label">पति/पत्नी नाम</label>
-                                    <input
-                                        type="text"
-                                        name="spouse_name"
-                                        value="{{old('spouse_name')}}"
-                                        class="form-control @error('spouse_name') is-invalid @enderror"
-                                        id="spouse_name"
-                                        placeholder="पति/पत्नी नाम"
-                                    />
-                                    @error('spouse_name')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -315,7 +301,7 @@
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">
-                            Save
+                            Submit
                         </button>
                     </form>
                 </div>
@@ -324,7 +310,29 @@
     </div>
     @push('scripts')
         <script>
+            $(document).ready(function () {
+                if ($('#marital_status').val() === 'married') {
+                    setStatus($('#marital_status').val())
+                }
+                $('#marital_status').on('change', function () {
+                    setStatus($(this).val())
+                });
 
+                function setStatus(status) {
+                    if (status === 'married') {
+                        $('#marital-status-div').after(spouseInput())
+                    } else {
+                        $('#marital-status-div').next().remove()
+                    }
+                }
+
+                function spouseInput() {
+                    return "<div class='col-md-4 mb-2'>" +
+                        "<label for='spouse_name' class='form-label'>पति/पत्नी नाम</label>" +
+                        "<input type='text' name='spouse_name' value='{{old('spouse_name')}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />"+
+                        "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
+                }
+            });
         </script>
     @endpush
 @endsection
