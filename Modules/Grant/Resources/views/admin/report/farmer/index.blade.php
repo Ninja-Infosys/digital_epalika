@@ -46,11 +46,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                <div class="col-md-3">
-                                    <label for="unique_id">युनिक आईडी</label>
-                                    <input type="text" id="unique_id" name="unique_id" class="form-control"
-                                           placeholder="युनिक आईडी">
-                                </div>
                                 <div class="col-md-3 mb-2">
                                     <label for="gender" class="form-label">लिंग</label>
                                     <select id="gender" name="gender" class="form-select">

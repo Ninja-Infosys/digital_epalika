@@ -66,10 +66,6 @@ class FarmerReportController extends Controller
             $q->whereIn('ward_no', $request->input('ward_no'));
         }
 
-        if (!empty($request->input('unique_id'))) {
-            $q->where('unique_id', $request->input('unique_id'));
-        }
-
         if (!empty($request->input('gender'))) {
             $q->where('gender', $request->input('gender'));
         }
