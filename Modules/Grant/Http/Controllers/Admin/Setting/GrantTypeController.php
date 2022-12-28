@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Http\Requests\Setting\GrantType\StoreGrantTypeRequest;
@@ -17,7 +18,12 @@ class GrantTypeController extends Controller
     {
         $this->checkAuthorization('grantType_access');
 
-        $grantTypes = GrantType::latest()->get();
+        $grantTypes = GrantType::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
 
         return view('grant::admin.setting.grantType.index', compact('grantTypes'));
     }

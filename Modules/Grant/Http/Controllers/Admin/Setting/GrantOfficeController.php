@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Routing\Redirector;
 use Modules\Grant\Entities\GrantOffice;
 use Modules\Grant\Http\Requests\Setting\GrantOffice\StoreGrantOfficeRequest;
@@ -20,7 +21,12 @@ class GrantOfficeController extends Controller
     {
         $this->checkAuthorization('grantOffice_access');
 
-        $offices=GrantOffice::all();
+        $offices=GrantOffice::all()->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['office_name'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);;
         return view('grant::admin.setting.grantOffice.index',compact('offices'));
     }
 
