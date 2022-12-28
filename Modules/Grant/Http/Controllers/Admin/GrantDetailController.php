@@ -19,10 +19,10 @@ class GrantDetailController extends Controller
     {
         $this->checkAuthorization('grantDetail_access');
 
-        $grantDetails = GrantDetail::with('grant.grantProgram', 'grant.grantType', 'model', 'localBody')
+        $grantDetails = GrantDetail::with('grant.fiscalYear','grant.grantProgram', 'grant.grantType', 'model', 'localBody')
             ->where(function (Builder $q) {
                 if (!is_null(request('search'))) {
-                    $q->whereLike(['contact'], request('search'));
+                    $q->whereLike('contact', request('search'));
                     $q->orWhereHas('grant.grantProgram', function ($sub_q) {
                         $sub_q->whereLike('name', request('search'));
                     });

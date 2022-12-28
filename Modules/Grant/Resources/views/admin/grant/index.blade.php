@@ -75,6 +75,12 @@
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
+                                            @can('grant_access')
+                                            <a href="{{route('admin.grant.grant.show', $grant)}}"
+                                               class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endcan
                                         @can('grant_delete')
                                             <form
                                                 action="{{route('admin.grant.grant.destroy', $grant)}}"

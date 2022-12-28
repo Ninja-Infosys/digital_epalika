@@ -37,3 +37,4 @@
 @if($excelUrl)
     <a href="{{route('admin.file-url-download',['file_url' => $excelUrl])}}">ExcelData</a>
 @endif
+

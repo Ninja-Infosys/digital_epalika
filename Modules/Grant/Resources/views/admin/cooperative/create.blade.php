@@ -86,9 +86,6 @@
                                         nameEn="en_registration_date" labelEn="Registration Date"
                                         :getTodayDate="false"
                                     />
-                                    @error('registration_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="vat_pan" class="form-label">प्यान भ्याट</label>
@@ -190,7 +187,7 @@
                         </fieldset>
 
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>
