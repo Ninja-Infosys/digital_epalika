@@ -139,7 +139,7 @@
                         </fieldset>
 
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>

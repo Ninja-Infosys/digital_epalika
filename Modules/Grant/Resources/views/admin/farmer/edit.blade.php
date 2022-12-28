@@ -318,7 +318,7 @@
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>

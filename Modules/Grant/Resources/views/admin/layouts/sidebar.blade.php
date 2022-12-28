@@ -24,7 +24,7 @@
 <li class="{{ request()->is('admin/grant/grantee/*') ? 'active' : '' }}">
     <a href="#sidebarGrantee" {{ request()->is('admin/grant/grantee/*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
-        <i class="fa fa-file"></i>
+        <i class="fa fa-user"></i>
         <span> अनुदानग्राहीहरु </span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
