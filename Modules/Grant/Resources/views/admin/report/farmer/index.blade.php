@@ -94,30 +94,30 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4 mb-2">
-                                            <label for="group" class="form-label">
+                                            <label for="groups" class="form-label">
                                                 समूह</label>
-                                            <select name="group[]" multiple data-toggle="select2"
-                                                    id="group" class="form-control">
+                                            <select name="groups[]" multiple data-toggle="select2"
+                                                    id="groups" class="form-control">
                                                 <option disabled>--- छान्नुहोस् ---</option>
                                                 @foreach($groups as $group)
                                                     <option value="{{$group->id}}">{{$group->name}}</option>
                                                 @endforeach
                                             </select>
-                                            @error('group')
+                                            @error('groups')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
                                         <div class="col-md-4 mb-2">
-                                            <label for="enterprise" class="form-label">
+                                            <label for="enterprises" class="form-label">
                                                 उद्यम</label>
-                                            <select name="enterprise[]" multiple data-toggle="select2"
-                                                    id="enterprise" class="form-control">
+                                            <select name="enterprises[]" multiple data-toggle="select2"
+                                                    id="enterprises" class="form-control">
                                                 <option disabled>--- छान्नुहोस् ---</option>
                                                 @foreach($enterprises as $enterprise)
                                                     <option value="{{$enterprise->id}}">{{$enterprise->name}}</option>
                                                 @endforeach
                                             </select>
-                                            @error('enterprise')
+                                            @error('enterprises')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
