@@ -49,14 +49,14 @@
             </div>
 
             <div class="col-md-4 mb-2">
-                <label for="grant_amount" class="form-label">अनुदान rakam *</label>
+                <label for="grant_amount" class="form-label">अनुदान रकम *</label>
                 <input
                     type="number"
                     wire:model="form.grant_amount"
                     value="{{old('form.grant_amount')}}"
                     class="form-control @error('form.grant_amount') is-invalid @enderror"
                     id="grant_amount"
-                    placeholder="अनुदान rakam"
+                    placeholder="अनुदान रकम"
                 />
                 @error('form.grant_amount')
                 <div class="invalid-feedback">{{$message}}</div>

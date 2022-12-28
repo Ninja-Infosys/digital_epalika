@@ -45,6 +45,7 @@ class GrantDetailController extends Controller
     public function show(GrantDetail $grantDetail)
     {
         $this->checkAuthorization('grantDetail_access');
+
         return view('grant::admin.grant_detail.show', compact('grantDetail'));
     }
 

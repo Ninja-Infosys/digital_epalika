@@ -29,7 +29,7 @@ class GrantDetailLivewire extends Component
         'model_type' => null,
         'model_id' => null,
         'personal_investment' => null,
-        'grant_amount' => null,
+        'grant_amount' => 0,
         'is_old' => 0,
         'prev_fiscal_year_id' => null,
         'investment_amount' => 0,
