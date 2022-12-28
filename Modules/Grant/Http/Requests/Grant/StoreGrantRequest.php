@@ -39,6 +39,7 @@ class StoreGrantRequest extends FormRequest
             'grant_program_id.required' => 'अनुदानको कार्यक्रमको नाम आवश्यक छ ।',
             'branch_id.required' => 'शाखा आवश्यक छ ।',
             'grant_amount.required' => 'अनुदानको रकम आवश्यक छ ।',
+            'grant_amount.numeric' => 'अनुदानको रकम नम्वरमा हुनुपर्छ।',
             'grant_for.required' => 'अनुदानग्राहीको प्रकार आवश्यक छ ।',
         ];
     }

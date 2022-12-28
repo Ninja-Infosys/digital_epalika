@@ -19,4 +19,11 @@ class UpdateCooperativeTypeRequest extends FormRequest
             'title'=>['required', 'string', 'max:255']
         ];
     }
+    public function messages()
+    {
+        return [
+            'title.required' => 'सहकारी प्रकार आवश्यक छ ।',
+
+        ];
+    }
 }
