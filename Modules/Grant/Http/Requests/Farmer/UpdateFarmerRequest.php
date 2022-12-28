@@ -25,7 +25,7 @@ class UpdateFarmerRequest extends FormRequest
             'photo' => ['nullable', 'image'],
             'gender' => ['required',new Enum(Gender::class)],
             'marital_status' => ['required',new Enum(MaritalStatusEnum::class) ],
-            'spouse_name' => ['nullable'],
+            'spouse_name' => ['required_if:marital_status,married'],
             'father_name' => ['required', 'string', 'max:255'],
             'grandfather_name' => ['required', 'string', 'max:255'],
             'citizenship_no' => ['required', Rule::unique('farmers', 'citizenship_no')->withoutTrashed()->ignore($this->farmer)],
