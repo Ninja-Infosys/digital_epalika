@@ -76,9 +76,10 @@ if (!function_exists('getArrayKeys')) {
 
         $keys = [];
         foreach ($array as $key => $value) {
-            $keys[] = $key;
             if (is_array($value)) {
                 $keys = array_merge($keys, getArrayKeys($value));
+            } else {
+                $keys[] = $key;
             }
         }
 
@@ -94,7 +95,9 @@ if (!function_exists('removeColumns')) {
                 $element = removeColumns($element, $excludeColumns);
             } else {
                 foreach ($excludeColumns as $column) {
-                    unset($element->$column);
+                    if (array_key_exists($column, $array)) {
+                        unset($array[$column]);
+                    }
                 }
             }
         }
