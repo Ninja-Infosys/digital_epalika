@@ -112,3 +112,4 @@ Route::prefix('website')->as('website.')->group(function () {
 
 //activity logs
 Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activityLog.index');
+
