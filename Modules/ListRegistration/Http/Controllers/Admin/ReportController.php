@@ -17,6 +17,7 @@ use Modules\ListRegistration\Entities\ListRegistration;
 class ReportController extends Controller
 {
     use ExcelTrait;
+
     public function index()
     {
         $fiscalYears = FiscalYear::get();
@@ -37,7 +38,7 @@ class ReportController extends Controller
         $lists = $this->getDataFromListRegistrations($request, $listRegistrationColumns);
 
         if (!empty($fiscalYearColumns)) {
-            $lists->load(['fiscalYear' => function($query) use($fiscalYearColumns) {
+            $lists->load(['fiscalYear' => function ($query) use ($fiscalYearColumns) {
                 $query->select($fiscalYearColumns);
             }]);
         }

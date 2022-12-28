@@ -40,6 +40,7 @@ class GrantDetail extends Model
         'plot_no',
         'contact_person',
         'contact',
+        'grant_amount'
     ];
 
     protected $casts = [

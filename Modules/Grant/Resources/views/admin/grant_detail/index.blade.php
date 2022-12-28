@@ -44,7 +44,6 @@
                                 <th class="text-center">अनुदानग्राही नाम</th>
                                 <th class="text-center"> अनुदानग्राही लगानी</th>
                                 <th class="text-center">नयाँ/निरन्तर</th>
-                                <th class="text-center">गत वर्षको लगानी</th>
                                 <th class="text-center">योजना स्थल</th>
                                 <th class="text-center">सम्पर्क नम्बर</th>
                                 <th class="text-center">Action</th>
@@ -54,11 +53,10 @@
                             @forelse($grantDetails as $grantDetail)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
+                                    <td>{{$grantDetail->grant->grantProgram->name??''}} ({{$grantDetail->grant->fiscalYear->title??''}})</td>
                                     <td class="text-center">{{$grantDetail->model->name ?? ''}}</td>
                                     <td>{{$grantDetail->personal_investment}}</td>
                                     <td>{{$grantDetail->is_old ? 'निरन्तरता': 'नयाँ'}}</td>
-                                    <td>{{$grantDetail->investment_amount}}</td>
                                     <td class="text-center">{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}}</td>
                                     <td>{{$grantDetail->contact}}</td>
                                     <td>
