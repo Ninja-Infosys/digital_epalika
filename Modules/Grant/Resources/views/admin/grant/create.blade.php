@@ -10,7 +10,7 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">अनुदान जारि गर्नुहोस्</li>
+                        <li class="breadcrumb-item active">अनुदान जारि</li>
                     </ol>
                 </div>
                 <h4 class="page-title"> अनुदान जारि गर्नुहोस्</h4>
