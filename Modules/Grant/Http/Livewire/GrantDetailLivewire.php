@@ -29,6 +29,7 @@ class GrantDetailLivewire extends Component
         'model_type' => null,
         'model_id' => null,
         'personal_investment' => null,
+        'grant_amount' => null,
         'is_old' => 0,
         'prev_fiscal_year_id' => null,
         'investment_amount' => 0,
@@ -89,6 +90,7 @@ class GrantDetailLivewire extends Component
     {
         if (!empty($this->form['grant_id'])) {
             $this->grant = Grant::find($this->form['grant_id']);
+            $this->form['grant_amount'] = $this->grant->grant_amount;
         }
 
         if (!empty($this->form['grant_for'])) {
