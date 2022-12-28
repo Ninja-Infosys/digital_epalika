@@ -118,19 +118,19 @@ class GrantDetailLivewire extends Component
 
         return view('grant::livewire.grant-detail-livewire');
     }
+
     public function messages(): array
     {
         return [
             'form.grant_id.required' => 'अनुदान कार्यक्रम/क्रियाकलाप आवश्यक छ ।',
             'form.grant_for.required' => 'अनुदानग्राहीको प्रकार आवश्यक छ।',
-            'form.model_id.required' =>'अनुदानग्राही नाम आवश्यक छ।',
+            'form.model_id.required' => 'अनुदानग्राही नाम आवश्यक छ।',
             'form.personal_investment.required' => 'अनुदानग्राहीको लगानी आवश्यक छ।',
             'form.personal_investment.numeric' => 'अनुदानग्राहीको लगानी नम्बरमा हुनुपर्छ ।',
             'form.prev_fiscal_year_id.required' => 'आर्थिक बर्ष आवश्यक छ।',
             'form.investment_amount.required' => 'लगानी आवश्यक छ।',
             'form.investment_amount.numeric' => 'लगानी नम्बरमा हुनुपर्छ ।',
             'form.ward_no.required' => 'वडा नं. आवश्यक छ।',
-            'form.ward_no.integer' => 'वडा नं. नम्बरमा हुनुपर्छ।',
         ];
-            }
+    }
 }
