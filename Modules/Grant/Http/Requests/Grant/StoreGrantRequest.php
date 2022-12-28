@@ -30,4 +30,16 @@ class StoreGrantRequest extends FormRequest
             'remarks' => ['nullable'],
         ];
     }
+    public function messages()
+    {
+        return [
+            'fiscal_year_id.required' => 'आर्थिक वर्ष आवश्यक छ ।',
+            'grant_type_id.required' => 'अनुदान प्रकार आवश्यक छ ।',
+            'grant_office_id.required' => 'अनुदान दिने सस्था आवश्यक छ ।',
+            'grant_program_id.required' => 'अनुदानको कार्यक्रमको नाम आवश्यक छ ।',
+            'branch_id.required' => 'शाखा आवश्यक छ ।',
+            'grant_amount.required' => 'अनुदानको रकम आवश्यक छ ।',
+            'grant_for.required' => 'अनुदानग्राहीको प्रकार आवश्यक छ ।',
+        ];
+    }
 }

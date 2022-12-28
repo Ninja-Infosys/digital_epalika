@@ -46,4 +46,22 @@ class UpdateFarmerRequest extends FormRequest
             'cooperatives.*' => [Rule::exists('cooperatives', 'id')->withoutTrashed()],
         ];
     }
+    public function messages()
+    {
+        return [
+            'first_name.required' => 'नाम आवश्यक छ ।',
+            'last_name.required' => 'थर आवश्यक छ ।',
+            'gender.required' => 'लिङ्ग आवश्यक छ ।',
+            'marital_status.required' => 'वैवाहिक स्थिति आवश्यक छ ।',
+            'spouse_name.required' => 'श्रीमान/श्रीमती को नाम आवश्यक छ ।',
+            'father_name.required' => 'वुवाको नाम आवश्यक छ ।',
+            'grandfather_name.required' => 'हजुरवुवाको नाम आवश्यक छ ।',
+            'citizenship_no.required' => 'नागरिता नं. आवश्यक छ ।',
+            'phone_no.required' => 'सम्पर्क नं. आवश्यक छ ।',
+            'province_id.required' => 'प्रदेश आवश्यक छ ।',
+            'district_id.required' => 'जिल्ला आवश्यक छ ।',
+            'local_body_required' => 'पालिका आवश्यक छ ।',
+            'ward_no.required' => 'वार्ड नं. आवश्यक छ ।'
+        ];
+    }
 }
