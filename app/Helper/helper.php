@@ -76,9 +76,10 @@ if (!function_exists('getArrayKeys')) {
 
         $keys = [];
         foreach ($array as $key => $value) {
-            $keys[] = $key;
             if (is_array($value)) {
                 $keys = array_merge($keys, getArrayKeys($value));
+            } else {
+                $keys[] = $key;
             }
         }
 
@@ -94,10 +95,25 @@ if (!function_exists('removeColumns')) {
                 $element = removeColumns($element, $excludeColumns);
             } else {
                 foreach ($excludeColumns as $column) {
-                    unset($element->$column);
+                    if (array_key_exists($column, $array)) {
+                        unset($array[$column]);
+                    }
                 }
             }
         }
         return collect($array);
+    }
+}
+
+if (!function_exists('renderListData')){
+    function renderListData($data): void
+    {
+        foreach($data as $value) {
+            if(is_array($value)) {
+                renderListData($value);
+            } else {
+                echo '<td>' . $value . '</td>';
+            }
+        }
     }
 }
