@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Http\Requests\Enterprises\StoreEnterprisesRequest;
 use Modules\Grant\Http\Requests\Enterprises\UpdateEnterprisesRequest;
 
@@ -102,8 +103,8 @@ class EnterprisesController extends Controller
     {
         $this->checkAuthorization('enterprise_access');
 
-        $enterprise->load('province', 'district', 'localBody','enterpriseType', 'farmers');
-
-        return view('grant::admin.enterprise.show', compact('enterprise'));
+        $enterprise->load('province', 'district', 'localBody','enterpriseType', 'farmers','grantDetails.grant.grantProgram','grantDetails.localBody');
+        $grantPrograms = GrantProgram::all();
+        return view('grant::admin.enterprise.show', compact('enterprise','grantPrograms'));
     }
 }

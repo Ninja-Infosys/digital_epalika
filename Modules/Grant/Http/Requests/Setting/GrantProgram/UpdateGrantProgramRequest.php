@@ -18,4 +18,10 @@ class UpdateGrantProgramRequest extends FormRequest
             'name'=>['required', 'string', 'max:255']
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'अनुदान कार्यक्रम आवश्यक छ'
+        ];
+    }
 }

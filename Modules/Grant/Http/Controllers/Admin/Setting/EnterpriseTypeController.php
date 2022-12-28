@@ -4,6 +4,7 @@ namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Http\Requests\Setting\EnterpriseType\StoreEnterpriseTypeRequest;
 use Modules\Grant\Http\Requests\Setting\EnterpriseType\UpdateEnterpriseTypeRequest;
@@ -14,7 +15,12 @@ class EnterpriseTypeController extends Controller
     {
         $this->checkAuthorization('enterpriseType_access');
 
-        $types = EnterpriseType::all();
+        $enterpriseTypes = EnterpriseType::all()->where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);;
         return view('grant::admin.setting.enterpriseType.index', compact('types'));
     }
 

@@ -34,7 +34,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -69,6 +70,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $grantPrograms->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

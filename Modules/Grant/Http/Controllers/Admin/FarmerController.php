@@ -2,6 +2,7 @@
 
 namespace Modules\Grant\Http\Controllers\Admin;
 
+use App\Enums\MaritalStatusEnum;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Builder;
@@ -66,7 +67,7 @@ class FarmerController extends Controller
     {
         $this->checkAuthorization('farmer_access');
 
-        $farmer->load('province', 'district', 'localBody','grantDetails.grant.grantProgram','grantDetails.localBody');
+        $farmer->load('province', 'district', 'localBody', 'grantDetails.grant.grantProgram', 'grantDetails.localBody');
         $grantPrograms = GrantProgram::all();
 
         return view('grant::admin.farmer.show', compact('farmer', 'grantPrograms'));
@@ -94,6 +95,9 @@ class FarmerController extends Controller
                 $this->deleteFile($farmer->photo);
             }
             $farmer->update($request->validated());
+            if ($farmer->marital_status == MaritalStatusEnum::UNMARRIED) {
+                $farmer->update(['spouse_name' => null]);
+            }
 
             $farmer->groups()->sync($request->input('groups'));
             $farmer->enterprises()->sync($request->input('enterprises'));

@@ -94,10 +94,9 @@ class GroupController extends Controller
     {
         $this->checkAuthorization('group_access');
 
-        $group->load('province', 'district', 'localBody', 'farmers');
+        $group->load('province', 'district', 'localBody', 'farmers','grantDetails.grant.grantProgram','grantDetails.localBody');
         $grantPrograms = GrantProgram::all();
-        $grantDetails = GrantDetail::with('grant.grantProgram', 'grant.grantType', 'model', 'localBody')->latest()->get();
 
-        return view('grant::admin.group.show', compact('group', 'grantPrograms', 'grantDetails'));
+        return view('grant::admin.group.show', compact('group', 'grantPrograms'));
     }
 }

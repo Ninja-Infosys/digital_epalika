@@ -98,7 +98,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($grantDetails as $grantDetail)
+                    @foreach ($enterprise->grantDetails as $grantDetail)
                   <tr>
                     <td>{{ $loop->iteration }}</th>
                     <td>{{$grantDetail->grant->grantProgram->name??''}}</td>

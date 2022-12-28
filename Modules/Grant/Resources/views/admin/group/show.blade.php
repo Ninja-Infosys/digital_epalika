@@ -102,7 +102,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($grantDetails as $grantDetail)
+                    @foreach ($group->grantDetails as $grantDetail)
                   <tr>
                     <td>{{ $loop->iteration }}</th>
                     <td>{{$grantDetail->grant->grantProgram->name??''}}</td>

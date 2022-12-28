@@ -120,7 +120,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-4 mb-2" id="marital-status-div">
                                     <label for="marital_status" class="form-label">बैबाहिक अवस्था *</label>
                                     <select id="marital_status" name="marital_status" class="form-control">
                                         <option value="">-- छान्नुहोस् --</option>
@@ -132,20 +132,6 @@
                                         @endforeach
                                     </select>
                                     @error('marital_status')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <label for="spouse_name" class="form-label">पति/पत्नी नाम</label>
-                                    <input
-                                        type="text"
-                                        name="spouse_name"
-                                        value="{{old('spouse_name', $farmer->spouse_name)}}"
-                                        class="form-control @error('spouse_name') is-invalid @enderror"
-                                        id="spouse_name"
-                                        placeholder="पति/पत्नी नाम"
-                                    />
-                                    @error('spouse_name')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -296,7 +282,8 @@
                                             id="groups" class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($groups as $group)
-                                            <option value="{{$group->id}}" {{in_array($group->id,$farmer->groups->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                            <option
+                                                value="{{$group->id}}" {{in_array($group->id,$farmer->groups->pluck('id')->toArray()) ? 'selected' : ''}}>
                                                 {{$group->name}}
                                             </option>
                                         @endforeach
@@ -315,7 +302,8 @@
                                             id="enterprises" class="form-control">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach($enterprises as $enterprise)
-                                            <option value="{{$enterprise->id}}" {{in_array($enterprise->id,$farmer->enterprises->pluck('id')->toArray()) ? 'selected' : ''}}>
+                                            <option
+                                                value="{{$enterprise->id}}" {{in_array($enterprise->id,$farmer->enterprises->pluck('id')->toArray()) ? 'selected' : ''}}>
                                                 {{$enterprise->name}}
                                             </option>
                                         @endforeach
@@ -330,13 +318,40 @@
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                if ($('#marital_status').val() === 'married') {
+                    setStatus($('#marital_status').val())
+                }
+                $('#marital_status').on('change', function () {
+                    setStatus($(this).val())
+                });
+
+                function setStatus(status) {
+                    if (status === 'married') {
+                        $('#marital-status-div').after(spouseInput())
+                    } else {
+                        $('#marital-status-div').next().remove()
+                    }
+                }
+
+                function spouseInput() {
+                    return "<div class='col-md-4 mb-2'>" +
+                        "<label for='spouse_name' class='form-label'>पति/पत्नी नाम</label>" +
+                        "<input type='text' name='spouse_name' value='{{old('spouse_name',$farmer->spouse_name)}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />" +
+                        "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
+                }
+            });
+        </script>
+    @endpush
 @endsection
 
 

@@ -25,7 +25,7 @@ class UpdateFarmerRequest extends FormRequest
             'photo' => ['nullable', 'image'],
             'gender' => ['required',new Enum(Gender::class)],
             'marital_status' => ['required',new Enum(MaritalStatusEnum::class) ],
-            'spouse_name' => ['nullable'],
+            'spouse_name' => ['required_if:marital_status,married'],
             'father_name' => ['required', 'string', 'max:255'],
             'grandfather_name' => ['required', 'string', 'max:255'],
             'citizenship_no' => ['required', Rule::unique('farmers', 'citizenship_no')->withoutTrashed()->ignore($this->farmer)],
@@ -44,6 +44,26 @@ class UpdateFarmerRequest extends FormRequest
             'enterprises.*' => [Rule::exists('enterprises', 'id')->withoutTrashed()],
             'cooperatives' => ['nullable', 'array'],
             'cooperatives.*' => [Rule::exists('cooperatives', 'id')->withoutTrashed()],
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'first_name.required' => 'नाम आवश्यक छ ।',
+            'last_name.required' => 'थर आवश्यक छ ।',
+            'gender.required' => 'लिङ्ग आवश्यक छ ।',
+            'marital_status.required' => 'वैवाहिक स्थिति आवश्यक छ ।',
+            'spouse_name.required' => 'श्रीमान/श्रीमती को नाम आवश्यक छ ।',
+            'father_name.required' => 'वुवाको नाम आवश्यक छ ।',
+            'grandfather_name.required' => 'हजुरवुवाको नाम आवश्यक छ ।',
+            'citizenship_no.required' => 'नागरिता नं. आवश्यक छ ।',
+            'phone_no.required' => 'सम्पर्क नं. आवश्यक छ ।',
+            'phone_no.regex' => 'सम्पर्क अंग्रेजी नं मा हुनुपर्छ।',
+            'phone_no.min' => 'सम्पर्क नं ९ अंक भन्दा धेरै हुनुपर्छ।',
+            'province_id.required' => 'प्रदेश आवश्यक छ ।',
+            'district_id.required' => 'जिल्ला आवश्यक छ ।',
+            'local_body_required' => 'पालिका आवश्यक छ ।',
+            'ward_no.required' => 'वार्ड नं. आवश्यक छ ।'
         ];
     }
 }

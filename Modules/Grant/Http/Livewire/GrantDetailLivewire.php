@@ -29,6 +29,7 @@ class GrantDetailLivewire extends Component
         'model_type' => null,
         'model_id' => null,
         'personal_investment' => null,
+        'grant_amount' => 0,
         'is_old' => 0,
         'prev_fiscal_year_id' => null,
         'investment_amount' => 0,
@@ -89,6 +90,7 @@ class GrantDetailLivewire extends Component
     {
         if (!empty($this->form['grant_id'])) {
             $this->grant = Grant::find($this->form['grant_id']);
+            $this->form['grant_amount'] = $this->grant->grant_amount;
         }
 
         if (!empty($this->form['grant_for'])) {
@@ -117,5 +119,20 @@ class GrantDetailLivewire extends Component
         }
 
         return view('grant::livewire.grant-detail-livewire');
+    }
+
+    public function messages(): array
+    {
+        return [
+            'form.grant_id.required' => 'अनुदान कार्यक्रम/क्रियाकलाप आवश्यक छ ।',
+            'form.grant_for.required' => 'अनुदानग्राहीको प्रकार आवश्यक छ।',
+            'form.model_id.required' => 'अनुदानग्राही नाम आवश्यक छ।',
+            'form.personal_investment.required' => 'अनुदानग्राहीको लगानी आवश्यक छ।',
+            'form.personal_investment.numeric' => 'अनुदानग्राहीको लगानी नम्बरमा हुनुपर्छ ।',
+            'form.prev_fiscal_year_id.required' => 'आर्थिक बर्ष आवश्यक छ।',
+            'form.investment_amount.required' => 'लगानी आवश्यक छ।',
+            'form.investment_amount.numeric' => 'लगानी नम्बरमा हुनुपर्छ ।',
+            'form.ward_no.required' => 'वडा नं. आवश्यक छ।',
+        ];
     }
 }

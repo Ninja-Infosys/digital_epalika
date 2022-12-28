@@ -13,6 +13,7 @@ use Modules\Grant\Entities\Affiliation;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Entities\Farmer;
+use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Http\Requests\Cooperative\StoreCooperativeRequest;
 use Modules\Grant\Http\Requests\Cooperative\UpdateCooperativeRequest;
 
@@ -60,8 +61,9 @@ class CooperativeController extends Controller
     public function show(Cooperative $cooperative)
     {
         $this->checkAuthorization('cooperative_access');
-        $cooperative->load('province', 'district', 'localBody', 'farmers');
-        return view('grant::admin.cooperative.show', compact('cooperative'));
+        $cooperative->load('province', 'district', 'localBody', 'farmers','grantDetails.grant.grantProgram','grantDetails.localBody');
+        $grantPrograms = GrantProgram::all();
+        return view('grant::admin.cooperative.show', compact('cooperative','grantPrograms'));
     }
 
     public function edit(Cooperative $cooperative)

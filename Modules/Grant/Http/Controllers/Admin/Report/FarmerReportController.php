@@ -73,5 +73,21 @@ class FarmerReportController extends Controller
         if (!empty($request->input('marital_status'))) {
             $q->where('marital_status', $request->input('marital_status'));
         }
+
+        if (!empty($request->input('cooperatives'))) {
+            $q->whereHas('cooperatives', function ($sub_q) use ($request) {
+                $sub_q->whereIn('cooperative_id', $request->input('cooperatives'));
+            });
+        }
+        if (!empty($request->input('groups'))) {
+            $q->whereHas('groups', function ($sub_q) use ($request) {
+                $sub_q->whereIn('group_id', $request->input('groups'));
+            });
+        }
+        if (!empty($request->input('enterprises'))) {
+            $q->whereHas('enterprises', function ($sub_q) use ($request) {
+                $sub_q->whereIn('enterprise_id', $request->input('enterprises'));
+            });
+        }
     }
 }
