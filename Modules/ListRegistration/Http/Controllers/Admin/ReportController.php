@@ -5,6 +5,7 @@ namespace Modules\ListRegistration\Http\Controllers\Admin;
 use App\Exports\ReportExport;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
+use App\Traits\ExcelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -15,6 +16,7 @@ use Modules\ListRegistration\Entities\ListRegistration;
 
 class ReportController extends Controller
 {
+    use ExcelTrait;
     public function index()
     {
         $fiscalYears = FiscalYear::get();
@@ -42,7 +44,7 @@ class ReportController extends Controller
 
         $lists = $this->excludeColumnsFromListRegistration($lists);
 
-        $excelUrl = $this->makeExcelFile($lists);
+        $excelUrl = $this->storeExcelFile($lists);
 
         return response()->json([
             'view' => (string)View::make('report.table', compact('lists', 'excelUrl'))
@@ -134,12 +136,4 @@ class ReportController extends Controller
                 return removeColumns($list->toArray(), ['id', 'created_at', 'updated_at', 'deleted_at', 'fiscal_year_id']);
             });
     }
-
-    private function makeExcelFile($lists): string
-    {
-        $excelUrl = 'excel/' . date('Ymd') . '/' . time() . '.xlsx';
-        Excel::store(new ReportExport($lists), $excelUrl, 'public');
-        return $excelUrl;
-    }
-
 }

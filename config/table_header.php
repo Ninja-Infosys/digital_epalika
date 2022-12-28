@@ -78,5 +78,27 @@ return [
         "business_nature_description" => "व्यापार प्रकृति विवरण",
         "date" => "मिति",
         "title" => "आर्थिक वर्ष"
+    ],
+    'circular' => [
+        "registration_no" => "दर्ता नं.",
+        "registration_date" => "दर्ता मिति वि.स.",
+        "en_registration_date" => "दर्ता मिति AD",
+        "letter_number" => "पत्र संख्या",
+        "en_letter_date" => "पत्र मिति AD",
+        "letter_date" => "पत्र मिति",
+        "sender_name" => "प्रेषकको नाम",
+        "subject" => "विषय",
+        "receiver_name" => "प्राप्तकर्ता नाम",
+        "phone" => "फोन",
+        "signature_image" => "हस्ताक्षर",
+        "date" => "मिति",
+        "remarks" => "टिप्पणीहरू",
+        "dispatch_no" => "चलानी नं.",
+        "dispatch_date" => "चलानी मिति",
+        "en_dispatch_date" => "चलानी मिति अंग्रेजी",
+        "receiver_address" => "प्राप्तकर्ता ठेगाना",
+        "receiver_contact" => "प्राप्तकर्ता सम्पर्क",
+        "receiver_signature" => "प्राप्तकर्ता हस्ताक्षर",
+        "title" => "आर्थिक वर्ष"
     ]
 ];
