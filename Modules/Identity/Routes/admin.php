@@ -18,3 +18,5 @@ Route::prefix('disability')->group(function (){
     Route::resource('disabilityIdentityCard', DisabilityIdentityCardController::class);
 });
 
+Route::view('test','identity::admin.test');
+

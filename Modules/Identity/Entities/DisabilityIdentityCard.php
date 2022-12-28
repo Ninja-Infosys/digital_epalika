@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Entities;
 
+use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
 
 class DisabilityIdentityCard extends Model
 {
@@ -24,6 +26,9 @@ class DisabilityIdentityCard extends Model
     ];
 
     protected $fillable = [
+        'is_necessary',
+        'material_name',
+        'identity_type',
         'temporary_tole',
         'permanent_tole',
         'photo',
@@ -85,6 +90,10 @@ class DisabilityIdentityCard extends Model
         'provide_detail_citizenship_no',
         'provide_detail_citizenship_no_date',
         'provide_detail_citizenship_no_place',
+    ];
+
+    protected $casts = [
+        'gender' => Gender::class
     ];
 
 
@@ -150,6 +159,11 @@ class DisabilityIdentityCard extends Model
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('disabilityIdentityCard', 'public');
         }
+    }
+
+    public function getPhotoUrlAttribute(): string
+    {
+       return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
     }
 
     public function setFingerLeftAttribute($value): void
