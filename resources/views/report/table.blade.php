@@ -20,7 +20,17 @@
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
                     @foreach($list->toArray() as $key=>$data)
-                        <td>{{$data}}</td>
+                        @if(is_array($data))
+                            @foreach($data as $d)
+                                @if(!is_array($d))
+                                    <td>
+                                        {{$d}}
+                                    </td>
+                                @endif
+                            @endforeach
+                        @else
+                            <td>{{$data}}</td>
+                        @endif
                     @endforeach
                 </tr>
             @empty
@@ -33,6 +43,5 @@
     @endif
 </div>
 @if($excelUrl)
-
     <a href="{{route('admin.file-url-download',['file_url' => $excelUrl])}}">ExcelData</a>
 @endif
