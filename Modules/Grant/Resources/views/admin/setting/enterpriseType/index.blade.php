@@ -45,7 +45,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($types as $type)
+                            @forelse($enterpriseTypes as $type)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$type->title}}</td>
