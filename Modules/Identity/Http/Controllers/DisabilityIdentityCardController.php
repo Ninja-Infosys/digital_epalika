@@ -11,7 +11,9 @@ class DisabilityIdentityCardController extends Controller
 {
     public function index()
     {
-        return view('identity::admin.disabilityIdentityCard.index');
+
+        $disabilityIdentityCards = DisabilityIdentityCard::latest()->paginate(10);
+        return view('identity::admin.disabilityIdentityCard.index',compact('disabilityIdentityCards'));
     }
 
     public function create()
@@ -31,7 +33,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        return view('identity::edit');
+        return view('identity::admin.disabilityIdentityCard.edit',compact('disabilityIdentityCard'));
     }
 
     public function update(Request $request, DisabilityIdentityCard $disabilityIdentityCard)

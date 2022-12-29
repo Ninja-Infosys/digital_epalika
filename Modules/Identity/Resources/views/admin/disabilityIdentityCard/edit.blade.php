@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">अपाङ्गता परिचय पत्र</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> अपाङ्गता परिचय पत्र</h4>
+                <h4 class="page-title"> अपाङ्गता परिचय पत्र सम्पादन गर्नुहोस् </h4>
             </div>
         </div>
     </div>
@@ -23,14 +23,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ अपाङ्गता परिचय पत्र थप्नुहोस्</h4>
+                        <h4 class="header-title"> अपाङ्गता परिचय पत्र सम्पादन गर्नुहोस्</h4>
                         <a href="{{route('identity.admin.disabilityIdentityCard.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> अपाङ्गता परिचय पत्र सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    @livewire('identity::disability-identity-card-livewire')
+                    @livewire('identity::disability-identity-card-livewire',['disabilityIdentityCard'=>$disabilityIdentityCard])
                 </div>
             </div>
         </div>
@@ -111,7 +111,6 @@
             }
         </style>
     @endpush
-
 @endsection
 
 
