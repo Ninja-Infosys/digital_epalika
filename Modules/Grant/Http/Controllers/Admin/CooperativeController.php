@@ -100,4 +100,12 @@ class CooperativeController extends Controller
         toast('सहकारी सफलतापूर्वक हटाइयो', 'success');
         return back();
     }
+    public function grantDetails(Cooperative $cooperative)
+    {
+        $this->checkAuthorization('cooperative_access');
+
+        $cooperative->load('grantDetails.grant.grantProgram');
+
+        return view('grant::admin.cooperative.grant_details', compact('cooperative'));
+    }
 }
