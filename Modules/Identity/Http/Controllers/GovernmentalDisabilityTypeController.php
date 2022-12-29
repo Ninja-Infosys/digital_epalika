@@ -17,13 +17,13 @@ class GovernmentalDisabilityTypeController extends Controller
     public function index()
     {
         $this->checkAuthorization('governmentalDisabilityType_access');
-        $governmentalDisabilityType = GovernmentalDisabilityType::where(function (Builder $q) {
+        $governmentalDisabilityTypes = GovernmentalDisabilityType::where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['type','card_color_id'], request('search'));
+                $q->whereLike(['title_en','title'], request('search'));
             }
         })
             ->latest()->paginate(10);
-        return view('identity::admin.setting.governmentalDisabilityType.index',compact('governmentalDisabilityType'));
+        return view('identity::admin.setting.governmentalDisabilityType.index',compact('governmentalDisabilityTypes'));
     }
 
     public function create()
@@ -49,16 +49,24 @@ class GovernmentalDisabilityTypeController extends Controller
 
     public function edit(GovernmentalDisabilityType $governmentalDisabilityType)
     {
-        return view('identity::edit');
+        $this->checkAuthorization('governmentalDisabilityType_edit');
+        $cardColors = CardColor::all();
+        return view('identity::admin.setting.governmentalDisabilityType.edit',compact('cardColors','governmentalDisabilityType'));
     }
 
     public function update(UpdateGovernmentalDisablityRequest $request, GovernmentalDisabilityType $governmentalDisabilityType)
     {
-        return view('identity::admin.setting.governmentalDisabilityType.edit');
+
+        $this->checkAuthorization('governmentalDisabilityType_edit');
+        $governmentalDisabilityType->update($request->validated());
+        return redirect(route('identity.admin.setting.governmentalDisabilityType.index'));
     }
 
     public function destroy(GovernmentalDisabilityType $governmentalDisabilityType)
     {
-        //
+
+        $this->checkAuthorization('governmentalDisabilityType_delete');
+        $governmentalDisabilityType->delete();
+        return back();
     }
 }

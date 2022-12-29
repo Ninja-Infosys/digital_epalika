@@ -18,6 +18,7 @@ use Livewire\WithFileUploads;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Entities\DisabilityType;
+use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\Relationship;
 
 class DisabilityIdentityCardLivewire extends Component
@@ -32,6 +33,7 @@ class DisabilityIdentityCardLivewire extends Component
 
     public $occupations = [];
     public $disabilityTypes = [];
+    public $governmentDisabilityTypes = [];
     public $disabilityReasons = [];
     public $ethnicities = [];
     public $provinces = [];
@@ -109,6 +111,7 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no' => null,
         'provide_detail_citizenship_no_date' => null,
         'provide_detail_citizenship_no_place' => null,
+        'govern_disability_type_id'=>null
     ];
 
 
@@ -141,6 +144,7 @@ class DisabilityIdentityCardLivewire extends Component
         $this->ethnicities = Ethnicity::all();
         $this->relations = Relationship::all();
         $this->disabilityTypes = DisabilityType::all();
+        $this->governmentDisabilityTypes = GovernmentalDisabilityType::all();
         $this->disabilityReasons = DisabilityReason::all();
         $this->occupations = Occupation::all();
 

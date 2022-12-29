@@ -65,13 +65,13 @@
 
                             <div class="col-md-12 mb-2">
                                 <div class="mb-3 xl:w-96">
-                                    <label for="color" id="cardColor">Card Color</label>
-                                    <select name="color" id="category"
+                                    <label for="color">Card Color</label>
+                                    <select name="color" id="color"
                                             class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none form-control"
                                             aria-label="Default select example">
                                         <option value="">Select Category</option>
                                         @foreach ($cardColors as $cardColor)
-                                            <option value="{{ $cardColor->color }}">
+                                            <option value="{{ $cardColor->color }}" {{old('color')==$cardColor->color ? 'selected':''}}>
                                                 {{ $cardColor->title }}
                                             </option>
                                         @endforeach
