@@ -9,8 +9,7 @@ class UpdateEmployeeSignatureRequest extends FormRequest
 {
     public function authorize():bool
     {
-//        return Gate::allows('employeeSignature_edit');
-        return true;
+        return Gate::allows('employeeSignature_edit');
     }
 
     public function rules():array

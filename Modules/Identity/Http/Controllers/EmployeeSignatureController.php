@@ -13,17 +13,20 @@ class EmployeeSignatureController extends Controller
 {
     public function index()
     {
+        $this->checkAuthorization('employeeSignature_access');
         $employeeSignatures = EmployeeSignature::latest()->paginate(10);
         return view('identity::admin.setting.employeeSignature.index', compact('employeeSignatures'));
     }
 
     public function create()
     {
+        $this->checkAuthorization('employeeSignature_create');
         return view('identity::admin.setting.employeeSignature.create');
     }
 
     public function store(StoreEmployeeSignatureRequest $request)
     {
+        $this->checkAuthorization('employeeSignature_create');
         EmployeeSignature::create($request->validated());
         toast('प्रसाशाक  सफलतापूर्वक थपियो', 'success');
         return back();
@@ -31,16 +34,20 @@ class EmployeeSignatureController extends Controller
 
     public function show(EmployeeSignature $employeeSignature)
     {
+        $this->checkAuthorization('employeeSignature_access');
         return view('identity::show');
     }
 
     public function edit(EmployeeSignature $employeeSignature)
     {
+        $this->checkAuthorization('employeeSignature_edit');
         return view('identity::admin.setting.employeeSignature.edit', compact('employeeSignature'));
     }
 
     public function update(UpdateEmployeeSignatureRequest $request, EmployeeSignature $employeeSignature)
     {
+
+        $this->checkAuthorization('employeeSignature_edit');
 
         if ($request->hasFile('stamp') && $employeeSignature->getRawOriginal('stamp')) {
             $this->deleteFile($employeeSignature->getRawOriginal('stamp'));
@@ -59,6 +66,8 @@ class EmployeeSignatureController extends Controller
 
     public function destroy(EmployeeSignature $employeeSignature)
     {
+
+        $this->checkAuthorization('employeeSignature_delete');
         if ($employeeSignature->getRawOriginal('stamp')) {
             $this->deleteFile($employeeSignature->getRawOriginal('stamp'));
         }

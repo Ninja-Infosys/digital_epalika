@@ -32,6 +32,10 @@ class IdentityPermissionTableSeeder extends Seeder
             'governmentalDisabilityType_create',
             'governmentalDisabilityType_edit',
             'governmentalDisabilityType_delete',
+            'employeeSignature_access',
+            'employeeSignature_create',
+            'employeeSignature_edit',
+            'employeeSignature_delete',
         ];
 
         $this->storePermission($permissions);

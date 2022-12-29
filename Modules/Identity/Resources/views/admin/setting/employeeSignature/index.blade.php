@@ -25,7 +25,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">प्रसाशाक सूची</h4>
-                        @can('relationship_create')
+                        @can('employeeSignature_create')
                             <a href="{{route('identity.admin.setting.employeeSignature.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
@@ -62,21 +62,25 @@
 
                                 <td>
 
-                                    <a href="{{route('identity.admin.setting.employeeSignature.edit', $employeeSignature)}}"
-                                       type="button" class="btn btn-xs btn-outline-primary">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
+                                    @can('employeeSignature_edit')
+                                        <a href="{{route('identity.admin.setting.employeeSignature.edit', $employeeSignature)}}"
+                                           type="button" class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    @endcan
 
-                                    <form
-                                        action="{{route('identity.admin.setting.employeeSignature.destroy',$employeeSignature)}}"
-                                        method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-xs btn-outline-danger show_confirm"
-                                                title="मेटाउनु होस्">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    @can('employeeSignature_delete')
+                                        <form
+                                            action="{{route('identity.admin.setting.employeeSignature.destroy',$employeeSignature)}}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                    title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
 
                                 </td>
                             </tr>

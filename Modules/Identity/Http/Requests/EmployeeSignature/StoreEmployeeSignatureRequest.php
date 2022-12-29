@@ -9,8 +9,7 @@ class StoreEmployeeSignatureRequest extends FormRequest
 {
     public function authorize(): bool
     {
-//        return Gate::allows('employeeSignature_create');
-        return true;
+        return Gate::allows('employeeSignature_create');
     }
 
     public function rules(): array
