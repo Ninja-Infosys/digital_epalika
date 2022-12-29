@@ -130,4 +130,14 @@ class ComplaintApplication extends Model
     {
         return $this->hasOne(DateSheet::class);
     }
+
+    public function defendantIssuedDeadline(): HasOne
+    {
+        return $this->hasOne(DefendantIssuedDeadline::class);
+    }
+
+    public function dateCompensation(): HasOne
+    {
+        return $this->hasOne(DateCompensation::class);
+    }
 }

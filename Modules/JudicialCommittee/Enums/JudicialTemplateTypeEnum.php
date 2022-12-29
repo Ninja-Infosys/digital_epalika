@@ -5,6 +5,8 @@ namespace Modules\JudicialCommittee\Enums;
 enum JudicialTemplateTypeEnum: string
 {
     case DATE_SHEET = "date_sheet";
+    case DEFENDANT_ISSUED_DEADLINE = "defendant_issued_deadline";
+    case DATE_COMPENSATION = "date_compensation";
 
     public function label(): string
     {
@@ -15,6 +17,8 @@ enum JudicialTemplateTypeEnum: string
     {
         return match ($value) {
             self::DATE_SHEET => 'तारिख पर्चा',
+            self::DEFENDANT_ISSUED_DEADLINE => 'प्रतिवादी म्याद जारी',
+            self::DATE_COMPENSATION => 'तारिख भरपाई'
         };
     }
 }

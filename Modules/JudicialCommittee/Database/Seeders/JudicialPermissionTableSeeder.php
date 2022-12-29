@@ -31,7 +31,15 @@ class JudicialPermissionTableSeeder extends Seeder
             'dateSheet_access',
             'dateSheet_create',
             'dateSheet_edit',
-            'dateSheet_delete'
+            'dateSheet_delete',
+            'defendantIssuedDeadline_access',
+            'defendantIssuedDeadline_create',
+            'defendantIssuedDeadline_edit',
+            'defendantIssuedDeadline_delete',
+            'dateCompensation_access',
+            'dateCompensation_create',
+            'dateCompensation_edit',
+            'dateCompensation_delete'
         ];
 
         $this->storePermission($permissions);
