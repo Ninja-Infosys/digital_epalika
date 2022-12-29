@@ -338,6 +338,7 @@ class DisabilityIdentityCardLivewire extends Component
             'title' => 'तपाइको अपाङ्गता परिचय पत्र दर्ता भयो'
         ]);
         $this->reset('form');
+        return back();
 
     }
 

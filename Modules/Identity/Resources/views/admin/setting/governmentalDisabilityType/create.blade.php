@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">सरकारी असक्षमता प्रकार</li>
+                        <li class="breadcrumb-item active">अपांगताको प्रकार</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> सरकारी असक्षमता प्रकार</h4>
+                <h4 class="page-title"> अपांगताको प्रकार</h4>
             </div>
         </div>
     </div>
@@ -23,14 +23,14 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ सरकारी असक्षमता प्रकार थप्नुहोस्</h4>
-                        <a href="{{route('identity.admin.setting.governmentalDisabilityType.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> सरकारी असक्षमता प्रकार सुची
+                        <h4 class="header-title">नयाँ अपांगताको प्रकार थप्नुहोस्</h4>
+                        <a href="{{route('identity.admin.setting.disabilityType.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> अपांगताको प्रकार सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('identity.admin.setting.governmentalDisabilityType.store')}}" method="post">
+                    <form action="{{route('identity.admin.setting.disabilityType.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">

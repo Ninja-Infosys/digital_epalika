@@ -5,6 +5,7 @@ namespace Modules\Identity\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 
 class DisabilityIdentityCardController extends Controller
@@ -43,6 +44,20 @@ class DisabilityIdentityCardController extends Controller
 
     public function destroy(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        //
+        $disabilityIdentityCard->delete();
+
+        return back();
+    }
+
+    public function print(DisabilityIdentityCard $disabilityIdentityCard)
+    {
+//        dd($disabilityIdentityCard->disabilityType->title);
+
+        $view = (string) View::make('identity::admin.disabilityIdentityCard.print', compact('disabilityIdentityCard'));
+
+        return response()->json([
+            'view' => $view,
+        ]);
+
     }
 }
