@@ -2,23 +2,27 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Modules\Grant\Entities\GrantProgram;
-use Modules\Grant\Http\Requests\GrantProgram\StoreGrantProgramRequest;
-use Modules\Grant\Http\Requests\GrantProgram\UpdateGrantProgramRequest;
+use Modules\Grant\Http\Requests\Setting\GrantProgram\StoreGrantProgramRequest;
+use Modules\Grant\Http\Requests\Setting\GrantProgram\UpdateGrantProgramRequest;
 
 class GrantProgramController extends Controller
 {
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('grantProgram_access');
-        $grantPrograms = GrantProgram::latest()->get();
+        $grantPrograms = GrantProgram::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
         return view('grant::admin.setting.grantProgram.index', compact('grantPrograms'));
     }
 
@@ -34,7 +38,7 @@ class GrantProgramController extends Controller
         $this->checkAuthorization('grantProgram_create');
 
         GrantProgram::create($request->validated());
-        toast('Grant Program Added Succesfully !!', 'success');
+        toast('अनुदान कार्यक्रम सफलता पुर्वक थपियो', 'success');
         return back();
     }
 
@@ -51,7 +55,7 @@ class GrantProgramController extends Controller
         $this->checkAuthorization('grantProgram_edit');
 
         $grantProgram->update($request->validated());
-        toast('Grant Program  updated Successfully', 'success');
+        toast('अनुदान कार्यक्रम सफलता पुर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.grantProgram.index'));
 
     }
@@ -60,7 +64,7 @@ class GrantProgramController extends Controller
     {
         $this->checkAuthorization('grantProgram_delete');
         $grantProgram->delete();
-        toast('Grant Program deleted Successfully', 'success');
+        toast('अनुदान कार्यक्रम सफलता पुर्वक हटाइयो', 'success');
         return back();
 
     }

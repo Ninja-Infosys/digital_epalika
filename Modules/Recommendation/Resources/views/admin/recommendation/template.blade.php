@@ -11,15 +11,15 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.recommendation.recommendation.create', $applicationTypeEnum) }}">
+                            <a href="{{ route('admin.recommendation.recommendation.create', $recommendation->application_type) }}">
                                 <i class="fa fa-home"></i> सिफारिस
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">{{ $applicationTypeEnum->label() }}</li>
+                        <li class="breadcrumb-item active">{{ $recommendation->application_type->label() }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{ $applicationTypeEnum->label() }}</h4>
+                <h4 class="page-title">{{ $recommendation->application_type->label() }}</h4>
             </div>
         </div>
     </div>
@@ -29,9 +29,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">{{ $applicationTypeEnum->label() }} सूची</h4>
+                        <h4 class="header-title">{{ $recommendation->application_type->label() }} सूची</h4>
                         @can('branch_create')
-                            <a href="{{ route('admin.recommendation.recommendation.create', $applicationTypeEnum) }}"
+                            <a href="{{ route('admin.recommendation.recommendation.create', $recommendation->application_type) }}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>

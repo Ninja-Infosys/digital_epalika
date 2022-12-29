@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('farmers', function (Blueprint $table) {
             $table->id();
-            $table->string('unique_id')->comment('कृषिक आइडी')->unique();
+            $table->string('unique_id')->comment('कृषक आइडी')->unique();
             $table->string('first_name')->comment('अगाडीको नाम');
             $table->string('middle_name')->comment('बिचको नाम')->nullable();
             $table->string('last_name')->comment('थर');

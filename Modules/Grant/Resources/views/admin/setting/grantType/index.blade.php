@@ -34,7 +34,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm table-striped table-hover mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
@@ -45,19 +46,19 @@
                             <tbody>
                             @forelse($grantTypes as $grantType)
                                 <tr>
-                                    <th>{{$loop->iteration}}</th>
-                                    <th>{{$grantType->title}}</th>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$grantType->title}}</td>
                                     <td>
                                         <a href="{{route('admin.grant.setting.grantType.edit', $grantType)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.grant.setting.grantType.destroy', $grantType)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
@@ -69,6 +70,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $grantTypes->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

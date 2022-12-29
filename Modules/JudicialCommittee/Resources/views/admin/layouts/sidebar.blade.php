@@ -1,70 +1,59 @@
-<li class="{{request()->is('admin/grant/dashboard') ? 'active' : ''}}">
-    <a href="{{route('admin.judicialCommittee.dashboard')}}">
+<li class="{{ request()->is('admin/grant/dashboard') ? 'active' : '' }}">
+    <a href="{{ route('admin.judicialCommittee.dashboard') }}">
         <i class="fa fa-home"></i>
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
 @can('judicialMember_access')
     <li>
-        <a href="{{route('admin.judicialCommittee.judicialMember.index')}}">
+        <a href="{{ route('admin.judicialCommittee.judicialMember.index') }}">
             <i class="fa fa-users"></i>
-            <span>न्यायिक समिति विवरण </span>
+            <span> न्यायिक सदस्य विवरण </span>
         </a>
     </li>
 @endcan
 @can('complaintApplication_access')
     <li>
-        <a href="{{route('admin.judicialCommittee.complaintApplication.index')}}">
+        <a href="{{ route('admin.judicialCommittee.complaintApplication.index') }}">
             <i class="fa fa-edit"></i>
             <span>निबेदन फारम</span>
         </a>
     </li>
+
+    <li>
+        <a href="{{ route('admin.judicialCommittee.registeredApplication') }}">
+            <i class="fa fa-file"></i>
+            <span>दर्ता भएका उजुरी</span>
+        </a>
+    </li>
 @endcan
-<li>
-    <a href="{{route('admin.judicialCommittee.nissaForm')}}">
-        <i class="fa fa-user"></i>
-        <span> निस्सा सनाखत </span>
-    </a>
-</li>
-<li>
-    <a href="{{route('admin.judicialCommittee.defendantContinuedTime')}}">
-        <i class="fa fa-user"></i>
-        <span>प्रतिवादी जारि म्याद  </span>
-    </a>
-</li>
-<li>
-    <a href="{{route('admin.judicialCommittee.stayDateForm')}}">
-        <i class="fa fa-user"></i>
-        <span>तारिख पर्चा  </span>
-    </a>
-</li>
-<li>
-    <a href="{{route('admin.judicialCommittee.stayDateCompensation')}}">
-        <i class="fa fa-user"></i>
-        <span>तारिख भरपाई</span>
-    </a>
-</li>
-<li class="{{request()->is('admin/grant/setting/*') ? 'active' : ''}}">
-    <a href="#sidebarGrantSetting"
-       {{request()->is('admin/grant/setting/*') ? 'aria-expanded=true' : ''}}
-       data-bs-toggle="collapse">
+<li class="{{ request()->is('admin/judicialcommittee/setting/*') ? 'active' : '' }}">
+    <a href="#sidebarJudicialCommitteeSetting"
+        {{ request()->is('admin/judicialcommittee/setting/*') ? 'aria-expanded=true' : '' }} data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
         <span>सेटिङ</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
     </a>
-    <div class="collapse {{request()->is('admin/judicialCommittee/setting/*') ? 'show' : ''}}"
-         id="sidebarGrantSetting">
+    <div class="collapse {{ request()->is('admin/judicialcommittee/setting/*') ? 'show' : '' }}"
+        id="sidebarJudicialCommitteeSetting">
         <ul class="nav-second-level">
             @can('lawsuitNature_access')
-                <li class="{{request()->is('admin/judicialCommittee/setting/lawsuitNature') ? 'active' : ''}}">
-                    <a href="{{route('admin.judicialCommittee.lawsuitNature.index')}}">
-                        <span>  मुद्दा प्रकृति </span>
+                <li class="{{ request()->is('admin/judicialcommittee/setting/lawsuitNature') ? 'active' : '' }}">
+                    <a href="{{ route('admin.judicialCommittee.lawsuitNature.index') }}">
+                        <span> मुद्दा प्रकृति </span>
+                    </a>
+                </li>
+            @endcan
+            @can('judicialCommitteeTemplate_access')
+                <li
+                    class="{{ request()->is('admin/judicialcommittee/setting/judicialCommitteeTemplate') ? 'active' : '' }}">
+                    <a href="{{ route('admin.judicialCommittee.judicialCommitteeTemplate.index') }}">
+                        <span> टेम्प्लेट </span>
                     </a>
                 </li>
             @endcan
         </ul>
     </div>
 </li>
-

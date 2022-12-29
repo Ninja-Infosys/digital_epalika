@@ -8,6 +8,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\User;
+use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,7 +22,7 @@ use Modules\EMap\Enums\RelationEnum;
 
 class Farmer extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait, GetAllColumns;
 
     protected $dates = [
         'created_at',
@@ -62,7 +63,7 @@ class Farmer extends Model
     {
         return !empty($this->attributes['photo']) ?
             Storage::disk('public')->url($this->attributes['photo'])
-            : asset('images/default.png');
+            : asset('images/user_icon.jpg');
     }
 
     public function setPhotoAttribute($value)
@@ -77,42 +78,6 @@ class Farmer extends Model
         return (!empty($this->attributes['first_name']) ? ($this->attributes['first_name'] ?? '') . " " : "")
             . (!empty($this->attributes['middle_name']) ? ($this->attributes['middle_name'] ?? '') . " " : "")
             . (!empty($this->attributes['last_name']) ? ($this->attributes['last_name'] ?? '') : "");
-    }
-
-    public function scopeFilter($query, $param = [])
-    {
-        //filter by user role
-        $this->filterByUserRole($query, $param);
-
-        //filter by address
-        $this->filterByAddress($query, $param);
-
-        if (!empty($param['gender'])) {
-            if (is_array($param['gender'])) {
-                $query->whereIn('gender', $param['gender']);
-            } else {
-                $query->where('gender', $param['gender']);
-            }
-        }
-
-        if (!empty($param['relationship_status'])) {
-            if (is_array($param['relationship_status'])) {
-                $query->whereIn('relationship_status', $param['relationship_status']);
-            } else {
-                $query->where('relationship_status', $param['relationship_status']);
-            }
-        }
-        if (!empty($param['search'])) {
-            $key = '%' . trim($param['search']) . '%';
-            $query->where('unique_id', 'like', $key)
-                ->orWhere('first_name', 'like', $key)
-                ->orWhere('middle_name', 'like', $key)
-                ->orWhere('last_name', 'like', $key)
-                ->orWhere('email', 'like', $key)
-                ->orWhere('phone', 'like', $key);
-        }
-
-        return $query;
     }
 
     public function province(): BelongsTo
@@ -150,9 +115,9 @@ class Farmer extends Model
         return $this->belongsToMany(Cooperative::class);
     }
 
-//    public function grantDetails(): MorphMany
-//    {
-//        return $this->morphMany(GrantDetail::class, 'model');
-//    }
+   public function grantDetails(): MorphMany
+   {
+       return $this->morphMany(GrantDetail::class, 'model');
+   }
 }
 

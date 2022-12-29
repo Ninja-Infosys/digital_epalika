@@ -13,6 +13,7 @@ use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Modules\Recommendation\Entities\FormBuilder;
 use Modules\Recommendation\Entities\Recommendation;
+use Modules\Recommendation\Http\Requests\StoreRecommendationFormRequest;
 use Modules\Recommendation\Http\Requests\StoreRecommendationRequest;
 use Modules\Recommendation\Http\Requests\UpdateRecommendationRequest;
 
@@ -32,7 +33,7 @@ class RecommendationController extends Controller
         $recommendations = Recommendation::with('fiscalYear')
             ->where('application_type', $applicationTypeEnum->value)
             ->latest('date_ne')
-            ->paginate(1);
+            ->paginate(10);
 
         return view('recommendation::admin.recommendation.index', compact('applicationTypeEnum', 'recommendations'));
     }
@@ -82,7 +83,7 @@ class RecommendationController extends Controller
 
         toast('फारम सफलतापूर्वक थपियो', 'success');
 
-        return redirect(route('admin.recommendation.recommendation.print', compact('recommendation')));
+        return redirect(route('admin.recommendation.recommendation.print', $recommendation));
     }
 
     public function show(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
@@ -111,7 +112,7 @@ class RecommendationController extends Controller
         return view('recommendation::admin.recommendation.edit', compact('applicationTypeEnum', 'recommendation', 'definition'));
     }
 
-    public function update(UpdateRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
+    public function update(UpdateRecommendationRequest $request, ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation): RedirectResponse
     {
         $this->checkAuthorization('recommendation_edit');
 
@@ -142,7 +143,7 @@ class RecommendationController extends Controller
         return back();
     }
 
-    public function destroy(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation)
+    public function destroy(ApplicationTypeEnum $applicationTypeEnum, Recommendation $recommendation): RedirectResponse
     {
         $this->checkAuthorization('recommendation_delete');
 
@@ -168,15 +169,15 @@ class RecommendationController extends Controller
     {
         $this->checkAuthorization('recommendation_access');
 
-        $resolvedData = $this->resolve($recommendation);
+        $recommendationData = $recommendation->load('recommendationDataForm');
 
-        $applicationTypeEnum = $recommendation->application_type;
+        $resolvedData = $recommendationData->recommendationDataForm->data ?? $this->resolve($recommendation);
 
-        return view('recommendation::admin.recommendation.template', compact('resolvedData', 'applicationTypeEnum', 'recommendation'));
+        return view('recommendation::admin.recommendation.template', compact('resolvedData', 'recommendation'));
 
     }
 
-    private function getData($data)
+    private function getData($data): array
     {
 
         $resolvedData = [];
@@ -192,10 +193,7 @@ class RecommendationController extends Controller
         return $resolvedData;
     }
 
-    /**
-     * @param Recommendation $recommendation
-     * @return string
-     */
+
     private function resolve(Recommendation $recommendation): string
     {
         $template = RecommendationTemplate::active()
@@ -209,13 +207,17 @@ class RecommendationController extends Controller
 
     public function formData(Request $request, Recommendation $recommendation)
     {
-//        dd($request->input('data'));
+
+        $data = $request->validate([
+            'data'=>'required'
+        ]);
         RecommendationFormData::updateOrCreate(
             [
                 'recommendation_id' => $recommendation->id,
             ],
             [
-                'data' => $request->input('data'),
+               'data' => $data['data'],
+                'update_times' =>  empty($recommendation->recommendationDataForm) ? 0 :$recommendation->recommendationDataForm->update_times+1
             ]
         );
         toast('डाटा सफलतापूर्वक थपियो', 'success');

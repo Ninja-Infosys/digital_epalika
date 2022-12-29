@@ -10,17 +10,20 @@ use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Modules\JudicialCommittee\Traits\JudicialCommitteeTemplateTrait;
 
 class ComplaintApplication extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use JudicialCommitteeTemplateTrait;
     use EventObserveTrait;
 
     protected $dates = [
-        'en_date',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -30,6 +33,7 @@ class ComplaintApplication extends Model
         'fiscal_year_id',
         'submission_no',
         'registration_no',
+        'lawsuit_nature_id',
         'complainant_province_id',
         'complainant_district_id',
         'complainant_local_body_id',
@@ -58,23 +62,28 @@ class ComplaintApplication extends Model
         'applicant_signature',
     ];
 
-    public function fiscalYear(): BelongsTo
-    {
-        return $this->belongsTo(FiscalYear::class);
-    }
-
     public function getApplicantSignatureUrlAttribute(): string
     {
-        return ! empty($this->attributes['applicant_signature'])
+        return !empty($this->attributes['applicant_signature'])
             ? Storage::disk('public')->url($this->attributes['applicant_signature'])
             : '';
     }
 
     public function setApplicantSignatureAttribute($value)
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['applicant_signature'] = $value->store('judicial_committee/applicant_signature', 'public');
         }
+    }
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
+
+    public function lawsuitNature(): BelongsTo
+    {
+        return $this->belongsTo(LawsuitNature::class);
     }
 
     public function complainantProvince(): BelongsTo
@@ -105,5 +114,20 @@ class ComplaintApplication extends Model
     public function defendantLocalBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class, 'defendant_local_body_id');
+    }
+
+    public function judicialReceiptBill(): HasOne
+    {
+        return $this->hasOne(JudicialReceiptBill::class);
+    }
+
+    public function relatedMembers(): HasMany
+    {
+        return $this->hasMany(RelatedMember::class);
+    }
+
+    public function dateSheet(): HasOne
+    {
+        return $this->hasOne(DateSheet::class);
     }
 }

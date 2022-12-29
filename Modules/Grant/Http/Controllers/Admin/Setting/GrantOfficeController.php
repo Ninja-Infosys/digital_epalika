@@ -2,30 +2,41 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Routing\Redirector;
 use Modules\Grant\Entities\GrantOffice;
 use Modules\Grant\Http\Requests\Setting\GrantOffice\StoreGrantOfficeRequest;
 use Modules\Grant\Http\Requests\Setting\GrantOffice\UpdateGrantOfficeRequest;
 
 class GrantOfficeController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         $this->checkAuthorization('grantOffice_access');
 
-        $offices=GrantOffice::all();
+        $offices=GrantOffice::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['office_name'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
         return view('grant::admin.setting.grantOffice.index',compact('offices'));
     }
 
-    public function create()
+    public function create(): Factory|View|Application
     {
         $this->checkAuthorization('grantOffice_create');
         return view('grant::admin.setting.grantOffice.create');
     }
 
-    public function store(StoreGrantOfficeRequest $request)
+    public function store(StoreGrantOfficeRequest $request): RedirectResponse
     {
         $this->checkAuthorization('grantOffice_create');
 
@@ -46,17 +57,17 @@ class GrantOfficeController extends Controller
         return view('grant::admin.setting.grantOffice.edit', compact('grantOffice'));
     }
 
-    public function update(UpdateGrantOfficeRequest $request, GrantOffice $grantOffice)
+    public function update(UpdateGrantOfficeRequest $request, GrantOffice $grantOffice): Redirector|Application|RedirectResponse
     {
         $this->checkAuthorization('grantOffice_edit');
 
         $grantOffice->update($request->validated());
 
-        toast('अनुदान कार्यालय सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('अनुदान कार्यालय सफलतापूर्वक सम्पादन गरियो','success');
         return redirect(route('admin.grant.setting.grantOffice.index'));
     }
 
-    public function destroy(GrantOffice $grantOffice)
+    public function destroy(GrantOffice $grantOffice): RedirectResponse
     {
         $this->checkAuthorization('grantOffice_delete');
 

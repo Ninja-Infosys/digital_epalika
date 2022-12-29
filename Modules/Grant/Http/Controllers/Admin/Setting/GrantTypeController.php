@@ -2,16 +2,15 @@
 
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Modules\Grant\Entities\GrantType;
-use Modules\Grant\Http\Requests\GrantType\StoreGrantTypeRequest;
-use Modules\Grant\Http\Requests\GrantType\UpdateGrantTypeRequest;
+use Modules\Grant\Http\Requests\Setting\GrantType\StoreGrantTypeRequest;
+use Modules\Grant\Http\Requests\Setting\GrantType\UpdateGrantTypeRequest;
 
 class GrantTypeController extends Controller
 {
@@ -19,7 +18,12 @@ class GrantTypeController extends Controller
     {
         $this->checkAuthorization('grantType_access');
 
-        $grantTypes = GrantType::latest()->get();
+        $grantTypes = GrantType::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);
 
         return view('grant::admin.setting.grantType.index', compact('grantTypes'));
     }
@@ -36,7 +40,7 @@ class GrantTypeController extends Controller
         $this->checkAuthorization('grantType_create');
 
         GrantType::create($request->validated());
-        toast('Grant Type Added Successfully', 'success');
+        toast('अनुदान प्रकार सफलता पुर्वक थपियो', 'success');
         return back();
 
     }
@@ -53,7 +57,7 @@ class GrantTypeController extends Controller
         $this->checkAuthorization('grantType_edit');
 
         $grantType->update($request->validated());
-        toast('Grant Type updated Successfully', 'success');
+        toast('अनुदान प्रकार सफलता पुर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.grantType.index'));
     }
 
@@ -62,7 +66,7 @@ class GrantTypeController extends Controller
         $this->checkAuthorization('grantType_delete');
         $grantType->delete();
 
-        toast('Grant Type deleted Successfully', 'success');
+        toast('अनुदान प्रकार सफलता पुर्वक हटाईयो', 'success');
         return back();
 
     }

@@ -68,7 +68,7 @@
                                         <option value="">छान्नुहोस्</option>
                                         @foreach(\Modules\ListRegistration\Enums\ApplicantCategoryEnum::cases() as $applicantType)
                                             <option
-                                                value="{{$applicantType->value}}" {{$applicantType->value==old('applicant_type',$listRegistration->applicant_type->value) ? 'selected' : ''}}>
+                                                value="{{$applicantType->value}}" {{$applicantType->value == old('applicant_type', $listRegistration->getRawOriginal('applicant_type')) ? 'selected' : ''}}>
                                                 {{$applicantType->label()}}
                                             </option>
                                         @endforeach
@@ -248,7 +248,7 @@
                                         <option value="">छान्नुहोस्</option>
                                         @foreach(\Modules\ListRegistration\Enums\BusinessNatureEnum::cases() as $business_nature)
                                             <option
-                                                value="{{$business_nature->value}}" {{$business_nature->value==old('business_nature',$listRegistration->business_nature->value) ? 'selected' : ''}}>
+                                                value="{{$business_nature->value}}" {{$business_nature->value==old('business_nature',$listRegistration->getRawOriginal('business_nature')) ? 'selected' : ''}}>
                                                 {{$business_nature->label()}}
                                             </option>
                                         @endforeach

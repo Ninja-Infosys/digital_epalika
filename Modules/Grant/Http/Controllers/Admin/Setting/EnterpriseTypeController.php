@@ -4,6 +4,7 @@ namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Http\Requests\Setting\EnterpriseType\StoreEnterpriseTypeRequest;
 use Modules\Grant\Http\Requests\Setting\EnterpriseType\UpdateEnterpriseTypeRequest;
@@ -14,8 +15,13 @@ class EnterpriseTypeController extends Controller
     {
         $this->checkAuthorization('enterpriseType_access');
 
-        $types = EnterpriseType::all();
-        return view('grant::admin.setting.enterpriseType.index', compact('types'));
+        $enterpriseTypes = EnterpriseType::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['title'], request('search'));
+            }
+        })
+            ->latest()->paginate(10);;
+        return view('grant::admin.setting.enterpriseType.index', compact('enterpriseTypes'));
     }
 
     public function create()
@@ -29,7 +35,7 @@ class EnterpriseTypeController extends Controller
         $this->checkAuthorization('enterpriseType_create');
 
         EnterpriseType::create($request->validated());
-        toast('उद्यम प्रकार सफलतापूर्वक भण्डारण गरियो', 'success');
+        toast('उद्यम प्रकार सफलतापूर्वक थपियो', 'success');
         return back();
 
     }
@@ -51,7 +57,7 @@ class EnterpriseTypeController extends Controller
 
         $enterpriseType->update($request->validated());
 
-        toast('उद्यम प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        toast('उद्यम प्रकार सफलता पूर्वक सम्पादन गरियो', 'success');
         return redirect(route('admin.grant.setting.enterpriseType.index'));
     }
 

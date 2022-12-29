@@ -35,12 +35,13 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        @includeIf('inc.filter_form')
                         <table class="table table-sm mb-0 table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.सं</th>
                                 <th>अनुदान कार्यालय</th>
-                                <th>#</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -51,8 +52,8 @@
                                     <td>
                                         @can('grantOffice_edit')
                                             <a href="{{route('admin.grant.setting.grantOffice.edit', $office)}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('grantOffice_delete')
@@ -61,8 +62,8 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         @endcan
@@ -75,6 +76,9 @@
                             @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $offices->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

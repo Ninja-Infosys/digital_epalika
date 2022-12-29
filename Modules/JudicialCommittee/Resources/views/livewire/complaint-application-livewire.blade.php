@@ -1,71 +1,70 @@
 <form wire:submit.prevent="submitFormData">
     <div class="row mb-2">
         <div class="col-md-12">
-        <fieldset class="mb-2">
-            <legend>
-                <h4 class="text-info">निवेदक को विवरण</h4>
-            </legend>
-            <div class="row">
-                <div class="col-md-4 mb-2">
-                    <label for="applicant_name" class="form-label"> नाम <span
-                            class="text-danger">*</span></label>
-                    <input
-                        type="text"
-                        wire:model="form.applicant_name"
-                        class="form-control"
-                        id="applicant_name"
-                        placeholder="निवेदक को नाम"
-                    />
-                    @error('form.applicant_name')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-2">
-                    <label for="applicant_phone" class="form-label"> फोन न:<span
-                            class="text-danger">*</span></label>
-                    <input
-                        type="text"
-                        wire:model="form.applicant_phone"
-                        class="form-control"
-                        id="applicant_name"
-                        placeholder="फोन न"
-                    />
-                    @error('form.applicant_phone')
+            <fieldset class="mb-2">
+                <legend>
+                    <h4 class="text-info">निवेदक को विवरण</h4>
+                </legend>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <label for="applicant_name" class="form-label"> नाम <span
+                                class="text-danger">*</span></label>
+                        <input
+                            type="text"
+                            wire:model="form.applicant_name"
+                            class="form-control"
+                            id="applicant_name"
+                            placeholder="निवेदक को नाम"
+                        />
+                        @error('form.applicant_name')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label for="applicant_phone" class="form-label"> फोन न:<span
+                                class="text-danger">*</span></label>
+                        <input
+                            type="text"
+                            wire:model="form.applicant_phone"
+                            class="form-control"
+                            id="applicant_name"
+                            placeholder="फोन न"
+                        />
+                        @error('form.applicant_phone')
 
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-4 mb-2">
-                    <label for="applicant_address" class="form-label">ठेगाना</label>
-                    <input
-                        type="text"
-                        wire:model="form.applicant_address"
-                        class="form-control"
-                        id="applicant_address"
-                        placeholder="ठेगाना"
-                    />
-                    @error('form.applicant_address')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label for="applicant_address" class="form-label">ठेगाना</label>
+                        <input
+                            type="text"
+                            wire:model="form.applicant_address"
+                            class="form-control"
+                            id="applicant_address"
+                            placeholder="ठेगाना"
+                        />
+                        @error('form.applicant_address')
 
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label for="applicant_signature_file" class="form-label">सहि<span
+                                class="text-danger">*</span></label>
+                        <input
+                            type="file"
+                            wire:model="form.applicant_signature_file"
+                            class="form-control"
+                            id="applicant_signature_file"
+                            placeholder="सहि"
+                        />
+                        @error('form.applicant_signature_file')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
                 </div>
-                <div class="col-md-4 mb-2">
-                    <label for="applicant_signature" class="form-label">सहि<span
-                            class="text-danger">*</span></label>
-                    <input
-                        type="file"
-                        wire:model="form.applicant_signature"
-                        class="form-control"
-                        id="applicant_signature"
-                        placeholder="सहि"
-                    />
-                    @error('form.applicant_signature')
-
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
-        </fieldset>
+            </fieldset>
         </div>
         <div class="col-md-12 mb-2">
             <fieldset class="mb-2">
@@ -89,7 +88,7 @@
                     <div class="col-md-4 mb-2">
                         <label for="complainant_age" class="form-label">उमेर <span class="text-danger">*</span></label>
                         <input
-                            type="text"
+                            type="number"
                             wire:model="form.complainant_age"
                             class="form-control"
                             id="complainant_age"
@@ -230,7 +229,7 @@
                     <div class="col-md-4 mb-2">
                         <label for="defendant_age" class="form-label">उमेर<span class="text-danger">*</span></label>
                         <input
-                            type="text"
+                            type="number"
                             wire:model="form.defendant_age"
                             class="form-control"
                             id="defendant_age"
@@ -351,65 +350,192 @@
                     </div>
                 </fieldset>
             </fieldset>
-
-            <div class="row pb-2">
-                <div class="col-md-6 mb-2">
-                    <label for="subject" class="form-label">विषय<span class="text-danger">*</span></label>
-                    <input
-                        type="text"
-                        wire:model="form.subject"
-                        class="form-control"
-                        id="subject"
-                        placeholder="उजुरी विषय"
-                    />
-                    @error('form.subject')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
+        </div>
+        <div class="col-md-12">
+            <fieldset class="mb-2">
+                <legend>
+                    <h4 class="text-info">उजुरी विवरण</h4>
+                </legend>
+                <div class="row pb-2">
+                    <div class="col-md-6 mb-2">
+                        <label for="lawsuit_nature_id" class="form-label">मुद्दा प्रकृति<span
+                                class="text-danger">*</span></label>
+                        <select
+                            wire:model="form.lawsuit_nature_id"
+                            class="form-select"
+                            id="lawsuit_nature_id">
+                            <option value="">--छान्नुहोस्--</option>
+                            @foreach($lawsuitNatures as $lawsuitNature)
+                                <option
+                                    value="{{$lawsuitNature->id}}" {{$lawsuitNature->id==old('lawsuit_nature_id') ? 'selected' : ''}}>
+                                    {{$lawsuitNature->title}} ({{$lawsuitNature->code}})
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('form.lawsuit_nature_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="subject" class="form-label">विषय<span class="text-danger">*</span></label>
+                        <input
+                            type="text"
+                            wire:model="form.subject"
+                            class="form-control"
+                            id="subject"
+                            placeholder="उजुरी विषय"
+                        />
+                        @error('form.subject')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <label for="submission_no" class="form-label">सबमिशन नम्बर<span
+                                class="text-danger">*</span></label>
+                        <input
+                            type="text"
+                            wire:model="form.submission_no"
+                            class="form-control"
+                            id="submission_no"
+                            placeholder="सबमिशन नम्बर"
+                        />
+                        @error('form.submission_no')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <label for="date" class="form-label">मिति<span class="text-danger">*</span></label>
+                        <input
+                            type="text"
+                            wire:model="form.date"
+                            class="form-control"
+                            id="date"
+                            placeholder="मिति"
+                        />
+                        @error('form.date')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="complaint_detail" class="form-label">उजुरी विवरण <span
+                                class="text-danger">*</span></label>
+                        <textarea id="complaint_detail"
+                                  wire:model="form.complaint_detail"
+                                  class="form-control @error('form.complaint_detail') is-invalid @enderror"
+                                  cols="100"
+                                  placeholder="विवरण"></textarea>
+                        @error('form.complaint_detail')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label for="complaint_detail" class="form-label">सम्बन्धित सदस्यहरू <span
+                                class="text-danger">*</span></label>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>क्र.स.</th>
+                                    <th>नाम</th>
+                                    <th>फोन</th>
+                                    <th>इमेल</th>
+                                    <th>पद</th>
+                                    <th>ठेगाना</th>
+                                    <th>
+                                        <button type="button" wire:click="addRelatedMembers"
+                                                class="btn btn-xs btn-outline-primary" title="नयाँ सदस्य थप्नुहोस्">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($form['relatedMembers'] as $key=>$member)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.relatedMembers.{{$key}}.name"
+                                                class="form-control form-control-sm"
+                                                placeholder="नाम"
+                                            />
+                                            @error("form.relatedMembers.$key.name")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.relatedMembers.{{$key}}.phone"
+                                                class="form-control form-control-sm"
+                                                placeholder="फोन"
+                                            />
+                                            @error("form.relatedMembers.$key.phone")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.relatedMembers.{{$key}}.email"
+                                                class="form-control form-control-sm"
+                                                placeholder="इमेल"
+                                            />
+                                            @error("form.relatedMembers.$key.email")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.relatedMembers.{{$key}}.designation"
+                                                class="form-control form-control-sm"
+                                                placeholder="पद"
+                                            />
+                                            @error("form.relatedMembers.$key.designation")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="text"
+                                                wire:model="form.relatedMembers.{{$key}}.address"
+                                                class="form-control form-control-sm"
+                                                placeholder="ठेगाना"
+                                            />
+                                            @error("form.relatedMembers.$key.address")
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </td>
+                                        <td>
+                                            <button type="button" wire:click="removeRelatedMember({{$key}})"
+                                                    class="btn btn-xs btn-outline-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="7">
+                                            विवरण थप्न प्लस बटन क्लिक गर्नुहोस्
+                                        </td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                            @error('form.relatedMembers')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3 mb-2">
-                    <label for="date" class="form-label">मिति<span class="text-danger">*</span></label>
-                    <input
-                        type="text"
-                        wire:model="form.date"
-                        class="form-control"
-                        id="date"
-                        placeholder="मिति"
-                    />
-                    @error('form.date')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-3 mb-2">
-                    <label for="en_date" class="form-label">मिति(AD) <span class="text-danger">*</span></label>
-                    <input
-                        type="date"
-                        wire:model="form.en_date"
-                        class="form-control"
-                        id="en_date"
-                        placeholder="Date"
-                    />
-                    @error('form.en_date')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-                <div class="col-md-auto">
-                    <label for="complaint_detail" class="form-label">उजुरी विवरण <span
-                            class="text-danger">*</span></label>
-                    <textarea id="complaint_detail"
-                              wire:model="form.complaint_detail"
-                              class="form-control @error('form.complaint_detail') is-invalid @enderror"
-                              cols="100"
-                              placeholder="विवरण"></textarea>
-                    @error('form.complaint_detail')
-                    <div class="invalid-feedback">{{$message}}</div>
-                    @enderror
-                </div>
-            </div>
+            </fieldset>
         </div>
         <div class="d-flex justify-content-between">
-       <button type="submit" class="btn btn-primary">
-           पेश गर्नुहोस्
-        </button>
+            <button type="submit" class="btn btn-primary">
+                पेश गर्नुहोस्
+            </button>
         </div>
     </div>
 </form>
@@ -432,23 +558,13 @@
                     let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
                     $("#en_date").val(formattedDate);
 
-                    Livewire.emit('postAdded', inputFieldDate, formattedDate);
+                    Livewire.emit('dateChanged', inputFieldDate, formattedDate);
                 }
             });
 
-            $("#en_date").change(function () {
-                let inputFieldDate = $("#en_date").val();
-                let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
-                let nepaliDate = NepaliFunctions.AD2BS(parsedDate.parsedDate)
-                let formattedDate = NepaliFunctions.ConvertDateFormat(nepaliDate, "YYYY-MM-DD")
-                $("#date").val(formattedDate);
-
-                Livewire.emit('postAdded', formattedDate, inputFieldDate);
-            })
-
             let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
             let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
-            Livewire.emit('postAdded', todayBsDate, todayAdDate);
+            Livewire.emit('dateChanged', todayBsDate, todayAdDate);
         });
     </script>
 @endpush

@@ -39,32 +39,42 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>निवेदकको पुरा नाम </th>
-                                <th>प्रतिवादीको पुरा नाम </th>
+                                <th>सबमिशन नं.</th>
+                                <th>दर्ता नं.</th>
+                                <th>निवेदकको पुरा नाम</th>
+                                <th>प्रतिवादीको पुरा नाम</th>
                                 <th>मिति</th>
                                 <th>विषय</th>
-                                <th>कार्य</th>
+                                <th>मुद्दा प्रकृति</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse($complaintApplications as $complaintApplication)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
+                                    <td>{{$complaintApplication->submission_no}}</td>
+                                    <td>{{$complaintApplication->registration_no}}</td>
                                     <td>{{$complaintApplication->complainant_name}}</td>
                                     <td>{{$complaintApplication->defendant_name}}</td>
                                     <td>{{$complaintApplication->date}}</td>
                                     <td>{{$complaintApplication->subject}}</td>
                                     <td>
-                                        @can('complaintApplication_edit')
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.edit',$complaintApplication)}}"
-                                               class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                        @endcan
-                                            @can('complaintApplication_access')
-                                            <a href="{{route('admin.judicialCommittee.applicationForm')}}"
+                                        {{$complaintApplication->lawsuitNature->title??''}}
+                                    </td>
+                                    <td>
+                                        @can('complaintApplication_access')
+                                            <a href="{{route('admin.judicialCommittee.complaintApplication.show',$complaintApplication)}}"
+                                               title="विवरण हेर्नुहोस्"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endcan
+                                        @can('complaintApplication_edit')
+                                            <a href="{{route('admin.judicialCommittee.complaintApplication.edit',$complaintApplication)}}"
+                                               title="सम्पादन गर्नुहोस्"
+                                               class="btn btn-xs btn-outline-warning">
+                                                <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('complaintApplication_delete')
@@ -73,7 +83,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
@@ -82,7 +92,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="9" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>

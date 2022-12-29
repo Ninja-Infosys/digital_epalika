@@ -51,9 +51,6 @@ class JudicialMemberController extends Controller
     {
         $this->checkAuthorization('judicialMember_edit');
 
-        if ($request->hasFile('photo') && $judicialMember->photo) {
-            $this->deleteFile($judicialMember->photo);
-        }
         $judicialMember->update($request->validated());
 
         toast('न्यायिक सदस्य सफलतापूर्वक अपडेट गरियो', 'success');
@@ -65,25 +62,9 @@ class JudicialMemberController extends Controller
     {
         $this->checkAuthorization('judicialMember_delete');
 
-        if ($judicialMember->photo) {
-            $this->deleteFile($judicialMember->photo);
-        }
         $judicialMember->delete();
 
         toast('न्यायिक सदस्य सफलतापूर्वक मेटाइयो', 'success');
-
-        return back();
-    }
-
-    public function updateStatus(JudicialMember $judicialMember)
-    {
-        $this->checkAuthorization('judicialMember_edit');
-
-        $judicialMember->update([
-            'status' => ! $judicialMember->status,
-        ]);
-
-        toast('नन्यायिक सदस्य सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
     }
