@@ -106,27 +106,37 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-striped" style=" border: 1px solid black;
-            border-collapse: collapse;">
-                <thead>
-                  <tr>
-                    <th scope="col">क्र.स</th>
-                    <th scope="col">कार्यक्रम/क्रियाकलाप</th>
-                    <th scope="col">अनुदानग्राही लगानी</th>
-                    <th scope="col">अनुदान स्थल</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    @foreach ($cooperative->grantDetails as $grantDetail)
-                  <tr>
-                    <td>{{ $loop->iteration }}</th>
-                    <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
-                    <td>{{$grantDetail->personal_investment}}</td>
-                    <td>{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}} {{$grantDetail->village}}, {{$grantDetail->tole}}</td>
-                  </tr>
-                  @endforeach
-                </tbody>
-            </table>
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title my-2">
+                            अनुदान लिएको तालिका
+                        </h4>
+                        <a href="{{route('admin.grant.cooperative.grantDetails', $cooperative)}}"
+                        <button type="button" class="btn btn-primary btn-sm" style="border-radius: 25px; padding:10px">View Detail</button></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm mt-3">
+                            <thead>
+                                <th scope="col">क्र.स</th>
+                                <th scope="col">कार्यक्रम/क्रियाकलाप</th>
+                                <th scope="col">अनुदानग्राही लगानी</th>
+                                <th scope="col">अनुदान स्थल</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($cooperative->grantDetails as $grantDetail)
+                              <tr>
+                                <td>{{ $loop->iteration }}</th>
+                                <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
+                                <td>{{$grantDetail->personal_investment}}</td>
+                                <td>{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}} {{$grantDetail->village}}, {{$grantDetail->tole}}</td>
+                              </tr>
+                              @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

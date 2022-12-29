@@ -53,20 +53,22 @@
                                     </td>
 
                                     <td>
-
-
                                         <a href="{{route('identity.admin.disabilityIdentityCard.edit',$disabilityIdentityCard)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('identity.admin.disabilityIdentityCard.destroy',$disabilityIdentityCard)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
+                                        <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">
+                                            <i class="fa fa-print"></i>
+
+                                        </a>
                                     </td>
                                 </tr>
                             @empty
@@ -84,6 +86,27 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            $(".printDetail").on("click",function(e){
+                $.ajax({
+                    method:"GET",
+                    url:$(this).attr("route_action"),
+                    success:function(resp){
+                        var print_area = window.open();
+                        print_area.document.write(resp.view);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    },error:function(){
+                        alert("Something Went Wrong");
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection
 
 

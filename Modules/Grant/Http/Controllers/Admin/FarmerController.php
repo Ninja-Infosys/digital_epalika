@@ -123,4 +123,13 @@ class FarmerController extends Controller
 
         return back();
     }
+    public function grantDetails(Farmer $farmer)
+    {
+        $this->checkAuthorization('farmer_access');
+
+        $farmer->load('grantDetails.grant.grantProgram');
+
+
+        return view('grant::admin.farmer.grant_details', compact('farmer'));
+    }
 }

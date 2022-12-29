@@ -99,4 +99,13 @@ class GroupController extends Controller
 
         return view('grant::admin.group.show', compact('group', 'grantPrograms'));
     }
+
+    public function grantDetails(Group $group)
+    {
+        $this->checkAuthorization('group_access');
+
+        $group->load('grantDetails.grant.grantProgram');
+
+        return view('grant::admin.group.grant_details', compact('group'));
+    }
 }

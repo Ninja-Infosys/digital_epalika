@@ -63,6 +63,8 @@ return new class extends Migration
             $table->longText('without_helping_task')->nullable();
             $table->string('main_training_name')->nullable();
             $table->foreignId('occupation_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('employee_signature_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('govern_disability_type_id')->nullable()->constrained('governmental_disability_types')->nullOnDelete()->onUpdate('no action');
             $table->string('provide_detail_full_name')->nullable();
             $table->string('provide_detail_address')->nullable();
             $table->string('provide_detail_phone_no')->nullable();
