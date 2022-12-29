@@ -162,7 +162,7 @@ class DisabilityIdentityCard extends Model
 
     public function governmentalDisabilityType(): BelongsTo
     {
-        return $this->belongsTo(GovernmentalDisabilityType::class);
+        return $this->belongsTo(GovernmentalDisabilityType::class,'govern_disability_type_id');
     }
 
 
