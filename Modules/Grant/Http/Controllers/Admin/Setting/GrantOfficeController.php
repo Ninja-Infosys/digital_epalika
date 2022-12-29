@@ -21,12 +21,12 @@ class GrantOfficeController extends Controller
     {
         $this->checkAuthorization('grantOffice_access');
 
-        $offices=GrantOffice::all()->where(function (Builder $q) {
+        $offices=GrantOffice::where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['office_name'], request('search'));
             }
         })
-            ->latest()->paginate(10);;
+            ->latest()->paginate(10);
         return view('grant::admin.setting.grantOffice.index',compact('offices'));
     }
 

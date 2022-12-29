@@ -72,7 +72,7 @@
                         </table>
                     </div>
                     <div class="mt-2">
-                        {{ $affilations->onEachSide(config('app.pagination_count'))->links() }}
+                        {{ $affiliations->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

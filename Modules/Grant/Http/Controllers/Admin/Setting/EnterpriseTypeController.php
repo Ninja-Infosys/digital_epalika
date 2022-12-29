@@ -15,13 +15,13 @@ class EnterpriseTypeController extends Controller
     {
         $this->checkAuthorization('enterpriseType_access');
 
-        $enterpriseTypes = EnterpriseType::all()->where(function (Builder $q) {
+        $enterpriseTypes = EnterpriseType::where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['title'], request('search'));
             }
         })
             ->latest()->paginate(10);;
-        return view('grant::admin.setting.enterpriseType.index', compact('types'));
+        return view('grant::admin.setting.enterpriseType.index', compact('enterpriseTypes'));
     }
 
     public function create()

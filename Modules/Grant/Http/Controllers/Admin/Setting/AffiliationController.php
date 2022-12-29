@@ -22,8 +22,7 @@ class AffiliationController extends Controller
             if (!is_null(request('search'))) {
                 $q->whereLike(['name'], request('search'));
             }
-        })
-            ->latest()->paginate(10);
+        })->latest()->paginate(10);
         return view('grant::admin.setting.affiliation.index', compact('affiliations'));
     }
 

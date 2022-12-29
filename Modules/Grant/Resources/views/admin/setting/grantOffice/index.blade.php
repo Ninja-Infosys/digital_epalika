@@ -78,7 +78,7 @@
                         </table>
                     </div>
                     <div class="mt-2">
-                        {{ $grantoffices->onEachSide(config('app.pagination_count'))->links() }}
+                        {{ $offices->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>
