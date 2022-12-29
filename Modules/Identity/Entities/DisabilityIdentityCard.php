@@ -187,7 +187,7 @@ class DisabilityIdentityCard extends Model
         }
     }
 
-    public function setCitizenshipPhotoCertificate($value): void
+    public function setCitizenshipPhotoCertificateAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_photo_certificate'] = $value->store('disabilityIdentityCard', 'public');
