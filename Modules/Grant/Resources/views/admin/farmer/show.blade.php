@@ -23,7 +23,7 @@
             <div class="card text-center">
                 <div class="card-body">
                     <img src="{{ $farmer->photo_url }}" class="rounded-circle avatar img-thumbnail"
-                         alt="{{ $farmer->name }}" style="object-fit: cover; height: 6rem; width: 6rem">
+                        alt="{{ $farmer->name }}" style="object-fit: cover; height: 6rem; width: 6rem">
 
                     <h3 class="mt-3">{{ $farmer->name }}</h3>
                     <h5 class="mb-0 text-dark">{{ $farmer->unique_id }}</h5>
@@ -44,7 +44,7 @@
 
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>वैवाहिक स्थिति :</strong> <span
                                 class="ms-2 text-muted">{{ $farmer->marital_status->label() }}</span></p>
-                        @if($farmer->marital_status==\App\Enums\MaritalStatusEnum::MARRIED)
+                        @if ($farmer->marital_status == \App\Enums\MaritalStatusEnum::MARRIED)
                             <p class="border-top border-1 text-dark mb-2 font-16"><strong>दम्पतिको नाम :</strong> <span
                                     class="ms-2 text-muted">
                                     {{ $farmer->spouse_name }}</span>
@@ -112,31 +112,37 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title my-2">
-                       अनुदान लिएको तालिका
-                    </h4>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title my-2">
+                            अनुदान लिएको तालिका
+                        </h4>
+                        <a href="{{ route('admin.grant.farmer.grantDetails', $farmer) }}"
+                        <button type="button" class="btn btn-primary btn-sm" style="border-radius: 25px; padding:10px">View
+                            Detail</button></a>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
+                        <table class="table table-bordered table-sm mt-3">
                             <thead>
-                            <tr>
-                                <th scope="col">क्र.स</th>
-                    <th scope="col">कार्यक्रम/क्रियाकलाप</th>
-                    <th scope="col">अनुदानग्राही लगानी</th>
-                    <th scope="col">अनुदान स्थल</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">क्र.स</th>
+                                    <th scope="col">कार्यक्रम/क्रियाकलाप</th>
+                                    <th scope="col">अनुदानग्राही लगानी</th>
+                                    <th scope="col">अनुदान स्थल</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach ($farmer->grantDetails as $grantDetail)
                                     <tr>
                                         <td>
-                                        {{ $loop->iteration }}</th>
-                                        <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
-                                        <td>{{$grantDetail->personal_investment}}</td>
-                                        <td>{{$grantDetail->localBody->local_body ?? ''}}
-                                            - {{$grantDetail->ward_no}} {{$grantDetail->village}}, {{$grantDetail->tole}}</td>
+                                            {{ $loop->iteration }}</th>
+                                        <td>{{ $grantDetail->grant->grantProgram->name ?? '' }}</td>
+                                        <td>{{ $grantDetail->personal_investment }}</td>
+                                        <td>{{ $grantDetail->localBody->local_body ?? '' }}
+                                            - {{ $grantDetail->ward_no }} {{ $grantDetail->village }},
+                                            {{ $grantDetail->tole }}</td>
                                     </tr>
                                 @endforeach
-                                </tbody>
+                            </tbody>
                         </table>
                     </div>
                 </div>

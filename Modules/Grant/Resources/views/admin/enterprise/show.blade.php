@@ -89,11 +89,15 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title my-2">
-                       अनुदान लिएको तालिका
-                    </h4>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title my-2">
+                            अनुदान लिएको तालिका
+                        </h4>
+                        <a href="{{route('admin.grant.enterprise.grantDetails', $enterprise)}}"
+                        <button type="button" class="btn btn-primary btn-sm" style="border-radius: 25px; padding:10px">View Detail</button></a>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
+                        <table class="table table-bordered table-sm mt-3">
                             <thead>
                                 <tr>
                                     <th scope="col">क्र.स</th>

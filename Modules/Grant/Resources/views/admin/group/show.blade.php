@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -81,8 +80,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="text-dark font-19">संलग्न कृषक</h4>
-                             <p class="pt-1 font-16">समूहको संलग्न कृषक
-                            थप्नुहोस् ।</p>
+                            <p class="pt-1 font-16">समूहको संलग्न कृषक
+                                थप्नुहोस् ।</p>
                         </div>
                         <div class="card-btn pb-2">
                             <a href="#" class="btn btn-sm btn-outline-primary">विवरण हेर्नुहोस<i
@@ -93,28 +92,33 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title my-2">
-                       अनुदान लिएको तालिका
-                    </h4>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title my-2">
+                            अनुदान लिएको तालिका
+                        </h4>
+                        <a href="{{ route('admin.grant.group.grantDetails', $group) }}"
+                        <button type="button" class="btn btn-primary btn-sm" style="border-radius: 25px; padding:10px">View Detail</button></a>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
+                        <table class="table table-bordered table-sm mt-3">
                             <thead>
                                 <tr>
                                     <th scope="col">क्र.स</th>
-                    <th scope="col">कार्यक्रम/क्रियाकलाप</th>
-                    <th scope="col">अनुदानग्राही लगानी</th>
-                    <th scope="col">अनुदान स्थल</th>
-                                  </tr>
+                                    <th scope="col">कार्यक्रम/क्रियाकलाप</th>
+                                    <th scope="col">अनुदानग्राही लगानी</th>
+                                    <th scope="col">अनुदान स्थल</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach ($group->grantDetails as $grantDetail)
-                              <tr>
-                                <td>{{ $loop->iteration }}</th>
-                                <td>{{$grantDetail->grant->grantProgram->name??''}}</td>
-                                <td>{{$grantDetail->personal_investment}}</td>
-                                <td>{{$grantDetail->localBody->local_body ?? ''}} - {{$grantDetail->ward_no}} {{$grantDetail->village}}, {{$grantDetail->tole}}</td>
-                              </tr>
-                              @endforeach
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</th>
+                                        <td>{{ $grantDetail->grant->grantProgram->name ?? '' }}</td>
+                                        <td>{{ $grantDetail->personal_investment }}</td>
+                                        <td>{{ $grantDetail->localBody->local_body ?? '' }} - {{ $grantDetail->ward_no }}
+                                            {{ $grantDetail->village }}, {{ $grantDetail->tole }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

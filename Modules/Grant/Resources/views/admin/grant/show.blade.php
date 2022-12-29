@@ -71,11 +71,15 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title my-2">
-                        अनुदान प्राप्तकर्ता
-                    </h4>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title my-2">
+                            अनुदान प्राप्तकर्ता
+                        </h4>
+                        <a href="{{route('admin.grant.grant.grantDetails',$grant)}}"
+                        <button type="button" class="btn btn-primary btn-sm" style="border-radius: 25px; padding:10px">View Detail</button></a>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
+                        <table class="table table-bordered table-sm mt-3">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

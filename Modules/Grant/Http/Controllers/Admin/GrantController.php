@@ -96,4 +96,12 @@ class GrantController extends Controller
 
         return back();
     }
+    public function grantDetails(Grant $grant)
+    {
+        $this->checkAuthorization('grant_access');
+
+        $grant->load('grantDetails.model');
+
+        return view('grant::admin.grant.grant_details', compact('grant'));
+    }
 }
