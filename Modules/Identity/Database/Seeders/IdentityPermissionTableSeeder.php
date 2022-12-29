@@ -24,6 +24,14 @@ class IdentityPermissionTableSeeder extends Seeder
             'relationship_create',
             'relationship_edit',
             'relationship_delete',
+            'cardColor_access',
+            'cardColor_create',
+            'cardColor_edit',
+            'cardColor_delete',
+            'governmentalDisabilityType_access',
+            'governmentalDisabilityType_create',
+            'governmentalDisabilityType_edit',
+            'governmentalDisabilityType_delete',
         ];
 
         $this->storePermission($permissions);
