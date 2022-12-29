@@ -32,7 +32,6 @@ class FarmerController extends Controller
             }
         })
             ->latest()->paginate(10);
-
         return view('grant::admin.farmer.index', compact('farmers'));
     }
 
