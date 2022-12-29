@@ -67,7 +67,7 @@
                     </table>
                 </div>
                 <div class="mt-2">
-{{--                    {{ $governmentalDisabilityType->onEachSide(config('app.pagination_count'))->links() }}--}}
+                    {{ $governmentalDisabilityType->onEachSide(config('app.pagination_count'))->links() }}
                 </div>
             </div>
         </div>
