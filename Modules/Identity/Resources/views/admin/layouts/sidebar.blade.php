@@ -76,6 +76,13 @@
                     </a>
                 </li>
             @endcan
+            @can('disabilityType_access')
+                <li class="{{request()->is('admin/identity/setting/employeeSignature') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.employeeSignature.index')}}">
+                        <span> हस्ताक्षर गर्ने व्यक्ति</span>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </div>

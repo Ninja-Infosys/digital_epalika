@@ -1,0 +1,29 @@
+<?php
+
+namespace Modules\Identity\Http\Requests\EmployeeSignature;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+
+class StoreEmployeeSignatureRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+//        return Gate::allows('employeeSignature_create');
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'name_en' => ['required', 'string', 'max:255'],
+            'designation_en' => ['required', 'string', 'max:255'],
+            'designation' => ['required', 'string', 'max:255'],
+            'pin' => ['required'],
+            'black_signature' => ['required', 'image'],
+            'red_signature' => ['required', 'image'],
+            'stamp' => ['required', 'image'],
+        ];
+    }
+}
