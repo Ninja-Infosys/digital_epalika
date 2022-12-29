@@ -41,23 +41,23 @@ class GovernmentalDisabilityTypeController extends Controller
         return back();
     }
 
-    public function show($id)
+    public function show(GovernmentalDisabilityType $governmentalDisabilityType)
     {
         $this->checkAuthorization('governmentalDisabilityType_access');
         return view('identity::show');
     }
 
-    public function edit($id)
+    public function edit(GovernmentalDisabilityType $governmentalDisabilityType)
     {
         return view('identity::edit');
     }
 
-    public function update(UpdateGovernmentalDisablityRequest $request, $id)
+    public function update(UpdateGovernmentalDisablityRequest $request, GovernmentalDisabilityType $governmentalDisabilityType)
     {
         return view('identity::admin.setting.governmentalDisabilityType.edit');
     }
 
-    public function destroy($id)
+    public function destroy(GovernmentalDisabilityType $governmentalDisabilityType)
     {
         //
     }
