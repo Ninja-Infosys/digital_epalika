@@ -19,7 +19,6 @@ class CardColor extends Model
 
     protected $fillable = [
         'title',
-        'title_en',
         'color'
     ];
 }

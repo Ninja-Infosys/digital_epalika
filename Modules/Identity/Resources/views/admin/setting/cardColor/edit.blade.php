@@ -49,20 +49,6 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12 mb-2">
-                                <label for="title_en" class="form-label">शिर्षक English *</label>
-                                <input
-                                    type="text"
-                                    name="title_en"
-                                    value="{{old('title_en',$cardColor->title_en)}}"
-                                    class="form-control @error('title_en') is-invalid @enderror"
-                                    id="title"
-                                    placeholder="शिर्षक in English"
-                                />
-                                @error('title_en')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
 
                             <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">कोड रङ *</label>

@@ -49,21 +49,6 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label for="title" class="form-label">शिर्षक in English *</label>
-                                    <input
-                                        type="text"
-                                        name="title_en"
-                                        value="{{old('title_en')}}"
-                                        class="form-control @error('title_en') is-invalid @enderror"
-                                        id="title_en"
-                                        placeholder="शिर्षक in English"
-                                    />
-                                    @error('title_en')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-
                             <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">कोड रङ *</label>
                                 <input

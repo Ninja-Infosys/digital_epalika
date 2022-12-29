@@ -16,7 +16,6 @@ class StoreCardColorRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'title_en'=>['required','string','max:255'],
             'color' => ['required', 'string', 'max:255']
         ];
     }
