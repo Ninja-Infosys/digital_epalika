@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-striped table-bordered">
+                        <table class="table table-sm mb-0 table-bordered">
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
@@ -39,7 +39,7 @@
                                     <th>मिति</th>
                                     <th>विषय</th>
                                     <th>मुद्दा प्रकृति</th>
-                                    <th>तारिख पर्चा</th>
+                                    <th class="text-center">#</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,13 +54,32 @@
                                         <td>
                                             {{ $complaintApplication->lawsuitNature->title ?? '' }}
                                         </td>
-                                        <td>
-                                            @can('dateSheet_access')
-                                                <a href="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.index', $complaintApplication) }}"
-                                                    class="btn btn-sm btn-outline-primary">
-                                                    <i class="fa fa-calendar-alt"> तारिख पर्चा </i>
-                                                </a>
-                                            @endcan
+                                        <td width="180" class="text-center">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton{{ $loop->iteration }}" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true">
+                                                    -- छान्नुहोस् -- <i class="fa fa-angle-down"></i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $loop->iteration }}">
+                                                    @can('dateSheet_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.index', $complaintApplication) }}" class="dropdown-item">
+                                                            <i class="fa fa-calendar-alt"> तारिख पर्चा </i>
+                                                        </a>
+                                                    @endcan
+                                                    @can('defendantIssuedDeadline_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.index', $complaintApplication) }}" class="dropdown-item">
+                                                            <i class="fa fa-calendar-alt"> प्रतिवादी म्याद जारी  </i>
+                                                        </a>
+                                                    @endcan
+                                                    @can('dateCompensation_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.index', $complaintApplication) }}" class="dropdown-item">
+                                                            <i class="fa fa-calendar-alt"> तारिख भरपाई </i>
+                                                        </a>
+                                                    @endcan
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 @empty

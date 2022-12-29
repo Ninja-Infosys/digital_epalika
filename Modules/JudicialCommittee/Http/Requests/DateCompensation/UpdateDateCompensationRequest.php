@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\JudicialCommittee\Http\Requests\DateSheet;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
+namespace Modules\JudicialCommittee\Http\Requests\DateCompensation;
 
-class UpdateDateSheetRequest extends FormRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateDateCompensationRequest extends FormRequest
 {
     public function authorize():bool
     {
-        return Gate::allows('dateSheet_edit');
+        return true;
     }
 
     public function rules():array
