@@ -116,23 +116,18 @@
                                         id="branch_id">
                                         <option value="">--- छान्नुहोस् ---</option>
                                         @foreach($branches as $branch)
-                                            @if(count($branch->branches)>0)
-                                                <optgroup label="{{$branch->branch_name}}">
-                                                    @foreach($branch->branches as $sub_branch)
-                                                        <option
-                                                            {{$sub_branch->id==old('branch_id', $grant->branch_id) ? 'selected' : ''}}
-                                                            value="{{$sub_branch->id}}">
-                                                            {{$sub_branch->branch_name}}
-                                                        </option>
-                                                    @endforeach
-                                                </optgroup>
-                                            @else
-                                                <option
-                                                    {{$branch->id==old('branch_id',$grant->branch_id) ? 'selected' : ''}}
+                                            <option class="fw-semibold text-dark"
+                                                    {{$branch->id==old('branch_id', $grant->branch_id) ? 'selected' : ''}}
                                                     value="{{$branch->id}}">
-                                                    {{$branch->branch_name}}
+                                                {{$branch->branch_name}}
+                                            </option>
+                                            @foreach($branch->branches as $sub_branch)
+                                                <option
+                                                    {{$sub_branch->id==old('branch_id', $grant->branch_id) ? 'selected' : ''}}
+                                                    value="{{$sub_branch->id}}">
+                                                    &nbsp;&nbsp;-&nbsp;{{$sub_branch->branch_name}}
                                                 </option>
-                                            @endif
+                                            @endforeach
                                         @endforeach
                                     </select>
                                     @error('branch_id')
@@ -192,7 +187,7 @@
                             </div>
                         </fieldset>
                         <button type="submit" class="btn btn-primary mt-2">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>

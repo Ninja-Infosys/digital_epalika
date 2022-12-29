@@ -3,6 +3,7 @@
 namespace Modules\Grant\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,7 +18,11 @@ class AffiliationController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('affiliation_access');
-        $affiliations = Affiliation::latest()->get();
+        $affiliations = Affiliation::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name'], request('search'));
+            }
+        })->latest()->paginate(10);
         return view('grant::admin.setting.affiliation.index', compact('affiliations'));
     }
 

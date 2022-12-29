@@ -23,7 +23,7 @@ class GrantController extends Controller
     {
         $this->checkAuthorization('grant_access');
 
-        $grants = Grant::with('fiscalYear','grantType','branch', 'grantProgram', 'grantOffice')->where(function (Builder $q) {
+        $grants = Grant::with('fiscalYear', 'grantType', 'branch', 'grantProgram', 'grantOffice')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['fiscalYear', 'grantOffice', 'grantProgram', 'grantType',], request('search'));
             }
@@ -58,9 +58,13 @@ class GrantController extends Controller
         return back();
     }
 
-    public function show($id)
+    public function show(Grant $grant)
     {
-        return view('grant::show');
+        $this->checkAuthorization('grant_access');
+
+        $grant->load('grantDetails.model');
+
+        return view('grant::admin.grant.show', compact('grant'));
     }
 
     public function edit(Grant $grant): Factory|View|\Illuminate\Contracts\Foundation\Application
@@ -73,7 +77,7 @@ class GrantController extends Controller
         $grantOffices = GrantOffice::all();
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
 
-        return view('grant::admin.grant.edit', compact('grant', 'fiscalYears', 'grantTypes','grantPrograms','grantOffices', 'branches'));
+        return view('grant::admin.grant.edit', compact('grant', 'fiscalYears', 'grantTypes', 'grantPrograms', 'grantOffices', 'branches'));
     }
 
     public function update(UpdateGrantRequest $request, Grant $grant)
@@ -91,5 +95,13 @@ class GrantController extends Controller
         toast('अनुदान सफलता पुर्वक हटाईयो !', 'success');
 
         return back();
+    }
+    public function grantDetails(Grant $grant)
+    {
+        $this->checkAuthorization('grant_access');
+
+        $grant->load('grantDetails.model');
+
+        return view('grant::admin.grant.grant_details', compact('grant'));
     }
 }

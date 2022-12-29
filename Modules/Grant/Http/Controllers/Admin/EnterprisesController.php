@@ -107,4 +107,11 @@ class EnterprisesController extends Controller
         $grantPrograms = GrantProgram::all();
         return view('grant::admin.enterprise.show', compact('enterprise','grantPrograms'));
     }
+    public function grantDetails(Enterprise $enterprise)
+    {
+        $this->checkAuthorization('enterprise_access');
+
+        $enterprise->load('province', 'district', 'localBody','enterpriseType', 'farmers','grantDetails.grant.grantProgram','grantDetails.localBody');
+        return view('grant::admin.enterprise.grant_details', compact('enterprise'));
+    }
 }

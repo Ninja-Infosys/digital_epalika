@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Entities;
 
+use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
 
 class DisabilityIdentityCard extends Model
 {
@@ -24,6 +26,9 @@ class DisabilityIdentityCard extends Model
     ];
 
     protected $fillable = [
+        'is_necessary',
+        'material_name',
+        'identity_type',
         'temporary_tole',
         'permanent_tole',
         'photo',
@@ -85,6 +90,12 @@ class DisabilityIdentityCard extends Model
         'provide_detail_citizenship_no',
         'provide_detail_citizenship_no_date',
         'provide_detail_citizenship_no_place',
+        'employee_signature_id',
+        'governmental_disability_type_id',
+    ];
+
+    protected $casts = [
+        'gender' => Gender::class
     ];
 
 
@@ -144,12 +155,27 @@ class DisabilityIdentityCard extends Model
         return $this->belongsTo(Occupation::class);
     }
 
+    public function employeeSignature(): BelongsTo
+    {
+        return $this->belongsTo(EmployeeSignature::class);
+    }
+
+    public function governmentalDisabilityType(): BelongsTo
+    {
+        return $this->belongsTo(GovernmentalDisabilityType::class,'govern_disability_type_id');
+    }
+
 
     public function setPhotoAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('disabilityIdentityCard', 'public');
         }
+    }
+
+    public function getPhotoUrlAttribute(): string
+    {
+        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
     }
 
     public function setFingerLeftAttribute($value): void
@@ -173,7 +199,7 @@ class DisabilityIdentityCard extends Model
         }
     }
 
-    public function setCitizenshipPhotoCertificate($value): void
+    public function setCitizenshipPhotoCertificateAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_photo_certificate'] = $value->store('disabilityIdentityCard', 'public');
@@ -184,8 +210,8 @@ class DisabilityIdentityCard extends Model
     {
 
         return Attribute::make(
-            get: static fn ($value) => explode(',',$value),
-            set: static fn ($value) => implode(',',$value),
+            get: static fn($value) => explode(',', $value),
+            set: static fn($value) => implode(',', $value),
         );
     }
 
@@ -193,8 +219,8 @@ class DisabilityIdentityCard extends Model
     {
 
         return Attribute::make(
-            get: static fn ($value) => explode(',',$value),
-            set: static fn ($value) => implode(',',$value),
+            get: static fn($value) => explode(',', $value),
+            set: static fn($value) => implode(',', $value),
         );
     }
 

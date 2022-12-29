@@ -116,13 +116,19 @@
                             <div class="row mt-2">
                                 <div class="col-md-6 mb-2">
                                     <label for="farmers" class="fs-5">कृषकहरू </label>
+                                    <div class="input-group">
                                     <select name="farmers[]" multiple data-toggle="select2" id="farmers"
-                                        class="form-control">
+                                        class="form-control" aria-describedby="button-farmer">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach ($farmers as $farmer)
                                             <option value="{{ $farmer->id }}">{{ $farmer->name }}</option>
                                         @endforeach
                                     </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-farmer"
+                                                title="उधम थप" data-bs-toggle="modal" data-bs-target="#farmer-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('farmers')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -131,11 +137,13 @@
                         </fieldset>
 
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>
             </div>
         </div>
+
+        @include('grant::admin.inc.farmer_form')
     </div>
 @endsection

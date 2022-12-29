@@ -32,4 +32,16 @@ class UpdateGroupRequest extends FormRequest
             'farmers.*' => [Rule::exists('farmers', 'id')->withoutTrashed()],
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'नाम आवश्यक छ ।',
+            'registration_date.required' => 'दर्ता मिति आवश्यक छ ।',
+            'registered_office.required' => 'दर्ता भएको संगठन आवश्यक छ ।',
+            'province_id.required' => 'प्रदेश आवश्यक छ ।',
+            'district_id.required' => 'जिल्ला आवश्यक छ ।',
+            'local_body_required' => 'पालिका आवश्यक छ ।',
+            'ward_no.required' => 'वार्ड नं. आवश्यक छ ।'
+        ];
+    }
 }

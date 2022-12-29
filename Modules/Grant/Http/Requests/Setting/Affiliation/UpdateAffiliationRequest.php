@@ -18,4 +18,11 @@ class UpdateAffiliationRequest extends FormRequest
             'name'=>['required', 'string', 'max:255']
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'आव्धता आवश्यक छ ।',
+
+        ];
+    }
 }

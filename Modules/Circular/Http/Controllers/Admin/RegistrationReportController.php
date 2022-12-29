@@ -3,6 +3,7 @@
 namespace Modules\Circular\Http\Controllers\Admin;
 
 use App\Models\Settings\FiscalYear;
+use App\Traits\ExcelTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
@@ -11,6 +12,8 @@ use Modules\Circular\Entities\Registration;
 
 class RegistrationReportController extends Controller
 {
+    use ExcelTrait;
+
     public function index()
     {
         $fiscalYears = FiscalYear::get();
@@ -29,13 +32,22 @@ class RegistrationReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $registrations = Registration::with('fiscalYear')->where(function ($q) use ($request) {
-            $this->filterDataFromUser($q, $request);
-        })
-            ->get();
+        list($registrationColumns, $fiscalYearColumns) = $this->resolveColumns($request);
+
+        $lists = $this->getDataFromRegistrations($request,$registrationColumns);
+
+        if (!empty($fiscalYearColumns)) {
+            $lists->load(['fiscalYear' => function ($query) use ($fiscalYearColumns) {
+                $query->select($fiscalYearColumns);
+            }]);
+        }
+
+        $lists = $this->excludeColumnsFromListRegistration($lists);
+
+        $excelUrl = $this->storeExcelFile($lists);
 
         return response()->json([
-            'view' => (string)View::make('circular::admin.report.registration.table_data', compact('registrations'))
+            'view' => (string)View::make('report.table', compact('lists', 'excelUrl'))
         ]);
     }
 
@@ -45,9 +57,9 @@ class RegistrationReportController extends Controller
 
         (new Registration())
             ->ownAndRelatedModelsFillableColumns()
-            ->filter(function ($column) {
-                return array_keys($column, 'Registration');
-            })
+//            ->filter(function ($column) {
+//                return array_keys($column, 'Registration');
+//            })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
             });
@@ -80,5 +92,56 @@ class RegistrationReportController extends Controller
         if (!empty($request->input('letter_number'))) {
             $q->where('letter_number', $request->input('letter_number'));
         }
+    }
+
+    private function resolveColumns(Request $request): array
+    {
+        $registrationColumns = [
+            'registration_no',
+            'registration_date',
+            'letter_number',
+            'letter_date',
+            'sender_name',
+            'subject',
+            'receiver_name',
+            'phone',
+            'date',
+            'remarks',
+
+        ];
+        $fiscalYearColumns = [];
+
+        if (!empty($request->input('columns'))) {
+            $registrationColumns = ['id'];
+            if (!empty($request->input('columns')['registrations'])) {
+                $registrationColumns = $request->input('columns')['registrations'];
+            }
+
+            if (!empty($request->input('columns')['fiscal_years'])) {
+                $registrationColumns[] = 'fiscal_year_id';
+
+                $fiscalYearColumns = $request->input('columns')['fiscal_years'];
+                $fiscalYearColumns[] = 'id';
+            }
+
+        }
+        return array($registrationColumns, $fiscalYearColumns);
+    }
+
+    private function getDataFromRegistrations(Request $request, mixed $registrationColumns)
+    {
+        return Registration::where(function ($q) use ($request) {
+            $this->filterDataFromUser($q, $request);
+        })
+            ->select($registrationColumns)
+            ->get();
+    }
+
+    private function excludeColumnsFromListRegistration($lists)
+    {
+        return $lists
+            ->map(function ($list) {
+                return removeColumns($list->toArray(), ['id', 'created_at', 'updated_at', 'deleted_at', 'fiscal_year_id']);
+            });
     }
 }

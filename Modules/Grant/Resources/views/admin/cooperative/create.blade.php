@@ -86,9 +86,6 @@
                                         nameEn="en_registration_date" labelEn="Registration Date"
                                         :getTodayDate="false"
                                     />
-                                    @error('registration_date')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="vat_pan" class="form-label">प्यान भ्याट</label>
@@ -173,16 +170,22 @@
                                 <h4 class="text-info">संलग्न कृषकहरू</h4>
                             </legend>
                             <p>सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
-                            <div class="col-md-8 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="farmers" class="form-label">
                                     कृषक</label>
+                                <div class="input-group">
                                 <select name="farmers[]" multiple data-toggle="select2"
-                                        id="farmers" class="form-select">
+                                        id="farmers" class="form-select" aria-describedby="button-farmer">
                                     <option disabled>--- छान्नुहोस् ---</option>
                                     @foreach($farmers as $farmer)
                                         <option value="{{$farmer->id}}">{{$farmer->name}}</option>
                                     @endforeach
                                 </select>
+                                    <button class="btn btn-sm btn-outline-primary" type="button"
+                                            id="button-farmer"
+                                            title="उधम थप" data-bs-toggle="modal" data-bs-target="#farmer-modal">
+                                        <i class="fa fa-plus"></i></button>
+                                </div>
                                 @error('farmers')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -190,11 +193,13 @@
                         </fieldset>
 
                         <button type="submit" class="btn btn-primary">
-                            Save
+                            पेश गर्नुहोस्
                         </button>
                     </form>
                 </div>
             </div>
         </div>
+
+        @include('grant::admin.inc.farmer_form')
     </div>
 @endsection

@@ -5,6 +5,7 @@ namespace Modules\ListRegistration\Http\Controllers\Admin;
 use App\Exports\ReportExport;
 use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
+use App\Traits\ExcelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -15,6 +16,8 @@ use Modules\ListRegistration\Entities\ListRegistration;
 
 class ReportController extends Controller
 {
+    use ExcelTrait;
+
     public function index()
     {
         $fiscalYears = FiscalYear::get();
@@ -32,20 +35,17 @@ class ReportController extends Controller
         ]);
 
         list($listRegistrationColumns, $fiscalYearColumns) = $this->resolveColumns($request);
-
         $lists = $this->getDataFromListRegistrations($request, $listRegistrationColumns);
 
         if (!empty($fiscalYearColumns)) {
-            $lists->load('fiscalYear:id,' . implode(',', $fiscalYearColumns))
-                ->loadCount('fiscalYear');
+            $lists->load(['fiscalYear' => function ($query) use ($fiscalYearColumns) {
+                $query->select($fiscalYearColumns);
+            }]);
         }
 
+        $lists = $this->excludeColumnsFromListRegistration($lists);
 
-        $this->excludeColumnsFromListRegistration($lists);
-
-//        die();
-        $excelUrl = $this->makeExcelFile($lists);
-
+        $excelUrl = $this->storeExcelFile($lists);
 
         return response()->json([
             'view' => (string)View::make('report.table', compact('lists', 'excelUrl'))
@@ -58,9 +58,9 @@ class ReportController extends Controller
 
         (new ListRegistration())
             ->ownAndRelatedModelsFillableColumns()
-            ->filter(function ($column) {
-                return array_keys($column, 'ListRegistration');
-            })
+//            ->filter(function ($column) {
+//                return array_keys($column, 'ListRegistration');
+//            })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
             });
@@ -104,15 +104,16 @@ class ReportController extends Controller
         $fiscalYearColumns = [];
 
         if (!empty($request->input('columns'))) {
+            $listRegistrationColumns = ['id'];
             if (!empty($request->input('columns')['list_registrations'])) {
                 $listRegistrationColumns = $request->input('columns')['list_registrations'];
-            } else {
-                $listRegistrationColumns = ['id'];
             }
 
             if (!empty($request->input('columns')['fiscal_years'])) {
                 $listRegistrationColumns[] = 'fiscal_year_id';
+
                 $fiscalYearColumns = $request->input('columns')['fiscal_years'];
+                $fiscalYearColumns[] = 'id';
             }
 
         }
@@ -129,20 +130,11 @@ class ReportController extends Controller
             ->get();
     }
 
-    private function excludeColumnsFromListRegistration($lists): void
+    private function excludeColumnsFromListRegistration($lists)
     {
-        $lists
+        return $lists
             ->map(function ($list) {
-                return removeColumns($list, ['id', 'created_at', 'updated_at', 'deleted_at', 'fiscal_year_id']);
+                return removeColumns($list->toArray(), ['id', 'created_at', 'updated_at', 'deleted_at', 'fiscal_year_id']);
             });
     }
-
-    private function makeExcelFile($lists): string
-    {
-        $excelUrl = 'excel/' . date('Ymd') . '/' . time() . '.xlsx';
-        Excel::store(new ReportExport($lists), $excelUrl, 'public');
-        return $excelUrl;
-    }
-
-
 }

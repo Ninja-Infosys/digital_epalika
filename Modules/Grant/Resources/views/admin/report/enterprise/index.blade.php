@@ -49,7 +49,7 @@
                                 <div class="col-md-3 mb-2">
                                     <label for="enterprise_type_id" class="form-label">
                                         उधमको प्रकार</label>
-                                    <select name="enterprise_type_id" multiple data-toggle="select2" id="enterprise_type_id"
+                                    <select name="enterprise_type_id[]" multiple data-toggle="select2" id="enterprise_type_id"
                                         class="form-select">
                                         <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach ($enterpriseTypes as $enterpriseType)

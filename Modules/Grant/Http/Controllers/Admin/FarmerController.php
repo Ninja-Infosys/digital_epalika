@@ -32,7 +32,6 @@ class FarmerController extends Controller
             }
         })
             ->latest()->paginate(10);
-
         return view('grant::admin.farmer.index', compact('farmers'));
     }
 
@@ -123,5 +122,14 @@ class FarmerController extends Controller
         toast('कृषक सफलता पुर्वक हटाईयो !', 'success');
 
         return back();
+    }
+    public function grantDetails(Farmer $farmer)
+    {
+        $this->checkAuthorization('farmer_access');
+
+        $farmer->load('grantDetails.grant.grantProgram');
+
+
+        return view('grant::admin.farmer.grant_details', compact('farmer'));
     }
 }

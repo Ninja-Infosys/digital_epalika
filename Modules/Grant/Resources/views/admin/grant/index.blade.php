@@ -44,8 +44,8 @@
                                 <th>अनुदानको कार्यक्रमको नाम</th>
                                 <th>अनुदानको प्रकार</th>
                                 <th>शाखा</th>
-                                <th>अनुदान रकम</th>
-                                <th>अनुदान लागि</th>
+                                <th>अनुदानको रकम</th>
+                                <th>अनुदानको लागि</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -73,6 +73,12 @@
                                             <a href="{{route('admin.grant.grant.edit', $grant)}}"
                                                class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                            @can('grant_access')
+                                            <a href="{{route('admin.grant.grant.show', $grant)}}"
+                                               class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('grant_delete')

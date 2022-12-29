@@ -39,11 +39,26 @@
                     <option value="">--अनुदानग्राही छान्नुहोस्--</option>
                     @foreach($grantees as $grantee)
                         <option value="{{$grantee->id}}">
-                            {{$grantee->name}}
+                            {{$grantee->name ?? ''}} ({{$grantee->unique_id ?? ''}})
                         </option>
                     @endforeach
                 </select>
                 @error('form.model_id')
+                <div class="invalid-feedback">{{$message}}</div>
+                @enderror
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <label for="grant_amount" class="form-label">अनुदान रकम *</label>
+                <input
+                    type="number"
+                    wire:model="form.grant_amount"
+                    value="{{old('form.grant_amount')}}"
+                    class="form-control @error('form.grant_amount') is-invalid @enderror"
+                    id="grant_amount"
+                    placeholder="अनुदान रकम"
+                />
+                @error('form.grant_amount')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>

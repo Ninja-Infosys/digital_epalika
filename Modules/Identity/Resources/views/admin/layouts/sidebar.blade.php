@@ -18,11 +18,11 @@
     <div class="collapse {{request()->is('admin/identity/disability*') ? 'show' : ''}}"
          id="sidebarDisabilityIdentityCard">
         <ul class="nav-second-level">
-                <li class="{{request()->is('admin/identity/disability/disabilityIdentityCard') ? 'active' : ''}}">
-                    <a href="{{route('identity.admin.disabilityIdentityCard.index')}}">
-                        <span> अपाङ्गता परिचय पत्र</span>
-                    </a>
-                </li>
+            <li class="{{request()->is('admin/identity/disability/disabilityIdentityCard') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.disabilityIdentityCard.index')}}">
+                    <span> अपाङ्गता परिचय पत्र</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
@@ -58,6 +58,28 @@
                 <li class="{{request()->is('admin/identity/setting/disabilityType') ? 'active' : ''}}">
                     <a href="{{route('identity.admin.setting.disabilityType.index')}}">
                         <span> अपांगताको प्रकार</span>
+                    </a>
+                </li>
+            @endcan
+            @can('cardColor_access')
+                <li class="{{request()->is('admin/identity/setting/cardColor') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.cardColor.index')}}">
+                        <span>कोड रङ</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('governmentalDisabilityType_access')
+                <li class="{{request()->is('admin/identity/setting/governmentalDisabilityType') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.governmentalDisabilityType.index')}}">
+                        <span>सरकारी असक्षमता प्रकार</span>
+                    </a>
+                </li>
+            @endcan
+            @can('employeeSignature_access')
+                <li class="{{request()->is('admin/identity/setting/employeeSignature') ? 'active' : ''}}">
+                    <a href="{{route('identity.admin.setting.employeeSignature.index')}}">
+                        <span> हस्ताक्षर गर्ने व्यक्ति</span>
                     </a>
                 </li>
             @endcan

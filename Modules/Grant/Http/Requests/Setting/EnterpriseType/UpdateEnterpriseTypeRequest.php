@@ -21,7 +21,7 @@ class UpdateEnterpriseTypeRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'शीर्षक आवश्यक छ'
+            'title.required' => 'उधम प्रकार आवश्यक छ ।'
         ];
     }
 }

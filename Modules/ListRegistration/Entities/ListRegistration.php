@@ -57,12 +57,12 @@ class ListRegistration extends Model
 
     public function getApplicantTypeAttribute(): string
     {
-        return ApplicantCategoryEnum::tryFrom($this->attributes['applicant_type'])->label();
+        return ApplicantCategoryEnum::tryFrom($this->attributes['applicant_type'])?->label();
     }
 
     public function getBusinessNatureAttribute(): string
     {
-        return BusinessNatureEnum::tryFrom($this->attributes['business_nature'])->label();
+        return BusinessNatureEnum::tryFrom($this->attributes['business_nature'])?->label();
     }
 
     protected function ApplicationPhoto(): Attribute

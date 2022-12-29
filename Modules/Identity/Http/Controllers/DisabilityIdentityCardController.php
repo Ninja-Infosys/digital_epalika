@@ -5,13 +5,16 @@ namespace Modules\Identity\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 
 class DisabilityIdentityCardController extends Controller
 {
     public function index()
     {
-        return view('identity::admin.disabilityIdentityCard.index');
+
+        $disabilityIdentityCards = DisabilityIdentityCard::latest()->paginate(10);
+        return view('identity::admin.disabilityIdentityCard.index',compact('disabilityIdentityCards'));
     }
 
     public function create()
@@ -31,7 +34,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        return view('identity::edit');
+        return view('identity::admin.disabilityIdentityCard.edit',compact('disabilityIdentityCard'));
     }
 
     public function update(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
@@ -41,6 +44,20 @@ class DisabilityIdentityCardController extends Controller
 
     public function destroy(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        //
+        $disabilityIdentityCard->delete();
+
+        return back();
+    }
+
+    public function print(DisabilityIdentityCard $disabilityIdentityCard)
+    {
+//        dd($disabilityIdentityCard->disabilityType->title);
+
+        $view = (string) View::make('identity::admin.disabilityIdentityCard.print', compact('disabilityIdentityCard'));
+
+        return response()->json([
+            'view' => $view,
+        ]);
+
     }
 }
