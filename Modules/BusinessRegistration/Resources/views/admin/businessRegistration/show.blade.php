@@ -79,7 +79,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th>लिङ्ग</th>
-                                                        <th>{{$businessDetail->proprietorDetail->gender?->label()??''}}</th>
+                                                        <th>{{ !empty($businessDetail->proprietorDetail->gender) ? $businessDetail->proprietorDetail->gender?->label()??'' :'' }}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>इमेल</th>
