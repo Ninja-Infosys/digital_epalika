@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">अनुदान विषय</li>
+                        <li class="breadcrumb-item active">अनुदान कार्यक्रम</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> विषयहरु</h4>
+                <h4 class="page-title"> अनुदान कार्यक्रमहरु</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ विषय थप्नुहोस्</h4>
+                        <h4 class="header-title">नयाँ अनुदान कार्यक्रम थप्नुहोस्</h4>
                         <a href="{{route('admin.grant.setting.grantProgram.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> विषय सुची
+                            <i class="fa fa-list"></i> कार्यक्रम सुची
                         </a>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <label for="name" class="form-label">विषय *</label>
+                                <label for="name" class="form-label">अनुदान कार्यक्रम <span class="text-danger">*</span></label>
                                 <input
                                     type="text"
                                     name="name"

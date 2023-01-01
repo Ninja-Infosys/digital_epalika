@@ -54,13 +54,24 @@ class FarmerController extends Controller
     {
         $this->checkAuthorization('farmer_create');
 
-        DB::transaction(function () use ($request) {
+        $farmer = DB::transaction(function () use ($request) {
             $farmer = Farmer::create($request->validated());
 
             $farmer->groups()->attach($request->input('groups'));
             $farmer->enterprises()->attach($request->input('enterprises'));
             $farmer->cooperatives()->attach($request->input('cooperatives'));
+
+            return $farmer;
         });
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => [
+                    'farmer_id' => $farmer->id,
+                    'farmer_name' => $farmer->name
+                ],
+                'message' => 'कृषक सफलता पुर्वक थपियो !'
+            ]);
+        }
 
         toast('कृषक सफलता पुर्वक थपियो !', 'success');
         return back();
