@@ -100,7 +100,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> शैक्षिक योग्यता</th>
-                                                        <th>{{$businessDetail->proprietorDetail->education_qualification?->label() ??''}}</th>
+                                                        <th>{{  !empty($businessDetail->proprietorDetail->education_qualification) ? $businessDetail->proprietorDetail->education_qualification?->label() ??'' :''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> मुख्य पेशा</th>
@@ -179,7 +179,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> पूजीको स्रोत</th>
-                                                        <th>{{$businessDetail->source_of_capital?->label()??''}}</th>
+                                                        <th>{{!empty($businessDetail->source_of_capital) ? $businessDetail->source_of_capital?->label()??'':''}}</th>
                                                     </tr>
 
 
