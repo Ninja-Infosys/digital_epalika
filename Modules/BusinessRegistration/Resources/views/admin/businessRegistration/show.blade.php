@@ -213,7 +213,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if($businessDetail->proprietorDetail->threeGenerationDetails->count() >0)
+                                @if(!empty($businessDetail->proprietorDetail->threeGenerationDetails) && $businessDetail->proprietorDetail->threeGenerationDetails->count() >0)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">
