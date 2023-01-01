@@ -13,11 +13,6 @@
         h4 {
             color: black;
         }
-
-        p{
-            line-height: 0.01;
-        }
-
         .student-character {
             padding: 15px;
             background-color: {{$disabilityIdentityCard->governmentalDisabilityType->color??''}};
@@ -46,15 +41,11 @@
             font-size: 15px;
             font-weight: bold;
             font-family: times;
-            /* text-transform: uppercase; */
             color: black;
             line-height: 1.9;
         }
 
-        .student-character .text-part p .span-style {
-            color: black;
-            border-bottom: 1px dashed #999;
-        }
+
 
         .student-character .bottom-part p {
             color: black;
@@ -97,7 +88,7 @@
             <h4 style="line-height: 0.01;">kolbang,Ilam</h4>
             <p>1 No. Province (Nepal)</p>
         </div>
-        <div style="display: flex; justify-content:space-between;">
+        <div style="display: flex; justify-content:space-between;margin-top: 5px;">
             <h2 class="heading">Disability Identity Card</h2>
             <img src="{{$disabilityIdentityCard->photo_url}}" alt="image"
                  style="height:110px;float:right;width:18%;border-radius:5px;">
@@ -105,18 +96,19 @@
         <h4><b>ID Card Number:</b></h4>
         <h4><b>ID Card Type:</b></h4>
         <div class="text-part">
-            <p>1) Full Name of Person : {{$disabilityIdentityCard->name_en ??''}}</p>
-            <p style="line-height: 0.01;">2)Address :
-                Province {{$disabilityIdentityCard->permanentProvince->province_en??''}}
-                District {{$disabilityIdentityCard->permanentDistrict->district_en??''}}Local
-{{--                Level{{$disabilityIdentityCard->permanentLocalBody->local_body_en??''}}</p>--}}
-            <p>3) Date of Birth: {{$disabilityIdentityCard->dob_ad ??''}} 4)Citizenship
-                Number {{$disabilityIdentityCard->citizenship_no??''}}</p>
-            <p>5)Sex: {{$disabilityIdentityCard->gender??''}} 6)Blood Group {{$disabilityIdentityCard->blood_group}}</p>
-            <p>7)Types of Disability On the basis of nature............................one the basis of Severity..............</p>
-            <p>8)Father / Mother or Guardian Name.........................................</p>
-            <p>9)Signature of ID Card Holder :.........................................</p>
-            <p>10)Approved By :</p>
+            <p style="line-height: 0.5;">1) Full Name of Person : <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->name_en ??''}}</span></p>
+            <p style="line-height: 0.5;">2)Address :
+                Province <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->permanentProvince->province_en??''}}</span>
+                District <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->permanentDistrict->district_en??''}}</span>
+                <span style="border-bottom:2px dotted">Local
+                    {{--                Level{{$disabilityIdentityCard->permanentLocalBody->local_body_en??''}}</p>--}}</span>
+            <p style="line-height: 0.5;">3) Date of Birth:<span style="border-bottom:2px dotted"> {{$disabilityIdentityCard->dob_ad ??''}} </span> 4)Citizenship
+                Number <span style="border-bottom:2px dotted"> {{$disabilityIdentityCard->citizenship_no??''}} </span></p>
+            <p style="line-height: 0.5;">5)Sex: <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->gender??''}}</span> 6)Blood Group <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->blood_group}}</span></p>
+            <p style="line-height: 0.5;">7)Types of Disability On the basis of nature............................one the basis of Severity..............</p>
+            <p style="line-height: 0.5;">8)Father / Mother or Guardian Name.........................................</p>
+            <p style="line-height: 0.5;">9)Signature of ID Card Holder :.........................................</p>
+            <p style="line-height: 0.5;">10)Approved By :</p>
         </div>
 
     </div>
