@@ -1029,6 +1029,23 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="form.employee_signature_id" class="form-label">
+                                    हस्ताक्षर </label>
+                                <select
+                                    class="form-select @error('form.employee_signature_id') is-invalid @enderror"
+                                    wire:model="form.employee_signature_id"
+                                    id="form.employee_signature_id">
+                                    <option value="">---हस्ताक्षर छान्नुहोस् ---</option>
+                                    @foreach($employee_signatures as $employee_signature)
+                                        <option
+                                            value="{{$employee_signature->id}}">{{$employee_signature->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('form.employee_signature_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
                     </fieldset>
 

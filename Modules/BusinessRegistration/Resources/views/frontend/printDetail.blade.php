@@ -66,7 +66,7 @@
                             <span>{{$businessDetail->proprietorDetail->phone}}</span>
                         </div>
                     </div>
-                    
+
                     <div class="row mt-1">
                         <div class="col-md-4">
                             <span class="fw-bold">व्यवसायीको इमेल ठेगाना:</span>

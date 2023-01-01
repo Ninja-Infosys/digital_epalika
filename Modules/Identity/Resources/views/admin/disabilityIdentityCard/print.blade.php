@@ -6,27 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$disabilityIdentityCard->name??''}} </title>
     <style>
-        table {
-            border-collapse: collapse;
-        }
 
+        .col-md-3{
+            float: left;
+            width: 25%;
+        }
         h4 {
             color: black;
         }
+
+        p {
+            line-height: 0.5;
+            font-size: 7px
+        }
+
+        p > span {
+            border-bottom: 1px dotted;
+        }
+
         .student-character {
             padding: 15px;
             background-color: {{$disabilityIdentityCard->governmentalDisabilityType->color??''}};
             border: 2px solid black;
             border-style: solid;
             border-radius: 8px;
-        }
-
-        .student-character .top-part {
-            text-align: center;
-        }
-
-        .student-character .top-part p {
-            color: black;
         }
 
         .student-character .top-part h2, .student-character .top-part h4 {
@@ -37,35 +40,6 @@
             margin-bottom: 4px;
         }
 
-        .student-character .text-part p {
-            font-size: 15px;
-            font-weight: bold;
-            font-family: times;
-            color: black;
-            line-height: 1.9;
-        }
-
-
-
-        .student-character .bottom-part p {
-            color: black;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 17px;
-            line-height: 1.6;
-
-        }
-
-        .student-character .bottom-part h4 {
-            text-align: center;
-            color: black;
-            font-family: 'Times New Roman', Times, serif;
-        }
-
-        .student-character .bottom-part h4 hr {
-            margin-bottom: 10px;
-            border-top: 1px solid #3f47c8;
-        }
-
         .heading {
             background-color: black;
             text-align: center;
@@ -73,44 +47,136 @@
             color: white;
             border-radius: 5px;
             margin-left: 70px;
-            height: 35px;
+            height: 10px;
         }
 
 
     </style>
 </head>
 <body>
+<div >
+    <div class="student-character" style="height: 204.48px;width: 324.48px;">
+        <div style="display: flex; justify-content:space-between;">
+            <div>
+                <img src="{{$officeSetting->logo_url}}" alt="" height="30">
+            </div>
+            <div>
+                @foreach($officeHeaders as $header)
+                    <p style="font-size: 10px;line-height: 0.2;text-align: center;">{{$header->title}}</p>
+                @endforeach
+            </div>
+            <div>
+                <img src="{{$disabilityIdentityCard->photo_url}}" alt="" height="30">
+            </div>
+        </div>
+        <div style="display: flex; justify-content:space-between;">
+            <h2 class="heading" style="font-size: 8px;">अपांगता परिचय पत्र</h2>
+        </div>
+        <p>परिचय पत्रको प्रकार:</p>
+        <p>प. प. नं.:</p>
+        <div>
+            <p>नाम थर : <span>{{$disabilityIdentityCard->name ??''}}</span></p>
+            <p>ठेगाना :
+                <span>{{$disabilityIdentityCard->permanentProvince->province??''}}</span>
+                <span>{{$disabilityIdentityCard->permanentDistrict->district??''}}</span>
+                <span>{{$disabilityIdentityCard->permanentLocalBody->local_body??''}} </span>
+            </p>
+            <p>लिङ्ग <span> {{$disabilityIdentityCard->gender->label() ??''}}</span></p>
+            <p>अपांगता प्रकृतिको आधारमा : <span> {{$disabilityIdentityCard->disabilityType->title??''}}</span>
+            </p>
+            <p>गम्भीरता :
+                <span> {{$disabilityIdentityCard->governmentalDisabilityType->title??''}}</span>
+            </p>
+            <p>बाबु आमा वा संरक्षकको नाम थर : <span> {{$disabilityIdentityCard->father_name??''}}</span></p>
+            <p>परिचय पत्र प्रमाणित गर्ने : <span> </span></p>
 
-<div style="height: 1000px;">
-    <div class="student-character">
-        <div class="top-part">
-            <h3>Rong Rural Municipality</h3>
-            <h4 style="line-height: 0.01;">kolbang,Ilam</h4>
-            <p>1 No. Province (Nepal)</p>
-        </div>
-        <div style="display: flex; justify-content:space-between;margin-top: 5px;">
-            <h2 class="heading">Disability Identity Card</h2>
-            <img src="{{$disabilityIdentityCard->photo_url}}" alt="image"
-                 style="height:110px;float:right;width:18%;border-radius:5px;">
-        </div>
-        <h4><b>ID Card Number:</b></h4>
-        <h4><b>ID Card Type:</b></h4>
-        <div class="text-part">
-            <p style="line-height: 0.5;">1) Full Name of Person : <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->name_en ??''}}</span></p>
-            <p style="line-height: 0.5;">2)Address :
-                Province <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->permanentProvince->province_en??''}}</span>
-                District <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->permanentDistrict->district_en??''}}</span>
-                <span style="border-bottom:2px dotted">Local
-                    {{--                Level{{$disabilityIdentityCard->permanentLocalBody->local_body_en??''}}</p>--}}</span>
-            <p style="line-height: 0.5;">3) Date of Birth:<span style="border-bottom:2px dotted"> {{$disabilityIdentityCard->dob_ad ??''}} </span> 4)Citizenship
-                Number <span style="border-bottom:2px dotted"> {{$disabilityIdentityCard->citizenship_no??''}} </span></p>
-            <p style="line-height: 0.5;">5)Sex: <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->gender??''}}</span> 6)Blood Group <span style="border-bottom:2px dotted">{{$disabilityIdentityCard->blood_group}}</span></p>
-            <p style="line-height: 0.5;">7)Types of Disability On the basis of nature............................one the basis of Severity..............</p>
-            <p style="line-height: 0.5;">8)Father / Mother or Guardian Name.........................................</p>
-            <p style="line-height: 0.5;">9)Signature of ID Card Holder :.........................................</p>
-            <p style="line-height: 0.5;">10)Approved By :</p>
-        </div>
+            <div>
+                <div class="col-md-3" style="font-size: 10px;">
+                    <span style="border-bottom: 1px dotted;">
+                        {{$disabilityIdentityCard->employeeSignature->name??''}}
+                    </span><br>
+                    <p>नाम</p></div>
+                <div class="col-md-3" style="font-size: 10px;">
+                    <span style="border-bottom: 1px dotted;">
+                        <img src="{{$disabilityIdentityCard->employeeSignature->red_signature??''}}" alt="{{$disabilityIdentityCard->name??''}}" height="20">
+                    </span><br>
+                    <p>हस्ताक्षर</p></div>
+                <div class="col-md-3" style="font-size: 10px;">
+                    <span style="border-bottom: 1px dotted;">
+                        {{$disabilityIdentityCard->employeeSignature->designation??''}}
+                    </span><br>
+                    <p>पद</p></div>
+                <div class="col-md-3" style="font-size: 10px;">
+                    <span style="border-bottom: 1px dotted;">
+                        {{today()->toDateString()}}
+                    </span><br>
+                    <p>जारि मिति</p></div>
+            </div>
 
+        </div>
+    </div>
+    <div class="student-character" style="height: 204.48px;width: 324.48px; margin-top: 5px;">
+        <div style="display: flex; justify-content:space-between;">
+            <div>
+                <img src="{{$officeSetting->logo_url}}" alt="" height="30">
+            </div>
+            <div>
+                @foreach($officeHeaders as $header)
+                    <p style="font-size: 10px;line-height: 0.2;text-align: center;">{{$header->title_en}}</p>
+                @endforeach
+            </div>
+            <div>
+                {!! QrCode::size(30)->generate($disabilityIdentityCard->name_en??''); !!}
+            </div>
+        </div>
+        <div style="display: flex; justify-content:space-between;">
+            <h2 class="heading" style="font-size: 8px;">Disability Identity Card</h2>
+        </div>
+        <p>ID Card Type:</p>
+        <p>Card No.:</p>
+        <div>
+            <p>Name of card holder: <span>{{$disabilityIdentityCard->name_en ??''}}</span></p>
+            <p>Address :
+                <span>{{$disabilityIdentityCard->permanentProvince->province_en??''}}</span>
+                <span>{{$disabilityIdentityCard->permanentDistrict->district_en??''}}</span>
+                <span>{{$disabilityIdentityCard->permanentLocalBody->local_body_en??''}} </span>
+            </p>
+            <p>Gender <span> {{$disabilityIdentityCard->gender ??''}}</span></p>
+            <p>Disability On the basis of nature : <span> {{$disabilityIdentityCard->disabilityType->title??''}}</span>
+            </p>
+            <p>On the basis of severity :
+                <span> {{$disabilityIdentityCard->governmentalDisabilityType->title_en??''}}</span>
+            </p>
+            <p>Father/Mother/Guardian : <span> {{$disabilityIdentityCard->father_name_en??''}}</span></p>
+            <p>ID Card Approved By : <span> </span></p>
+
+            <div>
+                <div class="col-md-3" style="font-size: 10px;">
+                    <span style="border-bottom: 1px dotted;">
+                        {{$disabilityIdentityCard->employeeSignature->name_en??''}}
+                    </span><br>
+                    <p>Name</p>
+                </div>
+                <div class="col-md-3" style="font-size: 10px;">
+                     <span style="border-bottom: 1px dotted;">
+                        <img src="{{$disabilityIdentityCard->employeeSignature->red_signature??''}}" alt="{{$disabilityIdentityCard->name??''}}" height="20">
+
+                    </span><br>
+                    <p>Signature</p>
+                </div>
+                <div class="col-md-3" style="font-size: 10px;">
+                     <span style="border-bottom: 1px dotted;">
+                        {{$disabilityIdentityCard->employeeSignature->designation_en??''}}
+                    </span><br>
+                    <p>Designation</p></div>
+                <div class="col-md-3" style="font-size: 10px;">
+                    <span style="border-bottom: 1px dotted;">
+                        {{today()->toDateString()}}
+                    </span><br>
+                    <p>Issue Date</p></div>
+            </div>
+
+        </div>
     </div>
 </div>
 

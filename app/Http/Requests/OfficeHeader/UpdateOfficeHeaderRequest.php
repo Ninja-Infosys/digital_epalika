@@ -15,6 +15,7 @@ class UpdateOfficeHeaderRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
+            'title_en' => ['required', 'string'],
             'font' => ['required'],
             'font_size' => ['required'],
             'position' => ['required', 'integer'],
