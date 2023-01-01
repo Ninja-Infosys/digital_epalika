@@ -18,7 +18,7 @@
                                     type="text"
                                     name="name"
                                     value="{{old('name')}}"
-                                    class="form-control @error('name') is-invalid @enderror"
+                                    class="form-control"
                                     id="name"
                                     placeholder="सहकारी नाम"
                                 />
@@ -29,7 +29,7 @@
                             <div class="col-md-6">
                                 <label for="name" class="form-label">सहकारी प्रकार <span class="text-danger">*</span></label>
                                 <select name="cooperative_type_id" id="cooperative_type_id"
-                                        class="form-control @error('cooperative_type_id') is-invalid @enderror">
+                                        class="form-control">
                                     <option value="">सहकारी प्रकार छान्नुहोस्</option>
                                     @foreach($cooperativeTypes as $cooperativeType)
                                         <option value="{{$cooperativeType->id}}">
@@ -48,7 +48,7 @@
                                     type="text"
                                     name="registration_no"
                                     value="{{old('registration_no')}}"
-                                    class="form-control @error('registration_no') is-invalid @enderror"
+                                    class="form-control"
                                     id="registration_no"
                                     placeholder="दर्ता नं"
                                 />
