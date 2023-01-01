@@ -35,7 +35,18 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="title_en.{{$index}}">शिर्षक (English) *</label>
+                                <input type="text" id="title_en.{{$index}}" name="officeHeaders[{{$index}}][title_en]"
+                                       placeholder="शिर्षक (English)" value="{{old('title_en')}}"
+                                       wire:model="officeHeaders.{{$index}}.title_en" class="form-control">
+                                @error("officeHeaders.$index.title_en")
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="font_color.{{$index}}">फन्ट रङ *</label>
                                 <input type="color" id="font_color.{{$index}}"
@@ -47,7 +58,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="font_size.{{$index}}">फन्ट साइज *</label>
                                 <input type="text" id="font_size.{{$index}}"

@@ -10,6 +10,7 @@ class OfficeHeader extends Component
     public $officeHeaders = [];
 
     public $title;
+    public $title_en;
 
     public $font_color;
 
@@ -26,6 +27,7 @@ class OfficeHeader extends Component
     protected $rules = [
 
         'officeHeaders.*.title' => ['required', 'string', 'max:255'],
+        'officeHeaders.*.title_en' => ['required', 'string', 'max:255'],
         'officeHeaders.*.font_color' => ['nullable'],
         'officeHeaders.*.font_size' => ['required', 'max:255'],
         'officeHeaders.*.position' => ['nullable', 'integer'],

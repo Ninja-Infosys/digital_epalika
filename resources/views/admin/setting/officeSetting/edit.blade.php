@@ -55,6 +55,20 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
+                                    <label for="title_en" class="form-label">शिर्षक(English) *</label>
+                                    <input
+                                        type="text"
+                                        name="title_en"
+                                        value="{{old('title_en',$officeHeader->title_en)}}"
+                                        class="form-control @error('title_en') is-invalid @enderror"
+                                        id="title_en"
+                                        placeholder="शिर्षक(English)"
+                                    />
+                                    @error('title_en')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
                                     <label for="font_color" class="form-label"> फन्ट रङ</label>
                                     <input
                                         type="color"

@@ -18,6 +18,7 @@ use Livewire\WithFileUploads;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\DisabilityReason;
 use Modules\Identity\Entities\DisabilityType;
+use Modules\Identity\Entities\EmployeeSignature;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\Relationship;
 
@@ -43,6 +44,8 @@ class DisabilityIdentityCardLivewire extends Component
     public $temporary_districts = [];
     public $temporary_localBodies = [];
     public $temporary_wards = [];
+
+    public $employee_signatures = [];
 
     public DisabilityIdentityCard $disabilityIdentityCard;
 
@@ -111,7 +114,8 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no' => null,
         'provide_detail_citizenship_no_date' => null,
         'provide_detail_citizenship_no_place' => null,
-        'govern_disability_type_id' => null
+        'govern_disability_type_id' => null,
+        'employee_signature_id' => null,
     ];
 
 
@@ -151,6 +155,7 @@ class DisabilityIdentityCardLivewire extends Component
         $this->governmentDisabilityTypes = GovernmentalDisabilityType::all();
         $this->disabilityReasons = DisabilityReason::all();
         $this->occupations = Occupation::all();
+        $this->employee_signatures = EmployeeSignature::all();
 
 
         if (!empty($disabilityIdentityCard)) {
@@ -290,6 +295,7 @@ class DisabilityIdentityCardLivewire extends Component
         'form.provide_detail_citizenship_no' => ['required'],
         'form.provide_detail_citizenship_no_date' => ['required'],
         'form.provide_detail_citizenship_no_place' => ['required', 'string', 'max:255'],
+        'form.employee_signature_id' => ['required', 'exists:employee_signatures,id']
     ];
 
     public function messages(): array
@@ -350,8 +356,6 @@ class DisabilityIdentityCardLivewire extends Component
             'form.supporting_material.required' => ['साहायक सामाग्री प्रयोग गर्ने आवश्यक छ'],
             'form.material_name.required' => ['सामाग्रीको नाम आवश्यक छ'],
             'form.helping_task.required' => ['कामको नाम आवश्यक छ'],
-            'form.helping_task.required' => ['कामको नाम आवश्यक छ'],
-            'form.without_helping_task.required' => ['कामको नाम आवश्यक छ'],
             'form.without_helping_task.required' => ['कामको नाम आवश्यक छ'],
             'form.main_training_name.required' => ['नाम आवश्यक छ'],
             'form.provide_detail_full_name.required' => ['नाम आवश्यक छ'],

@@ -14,7 +14,11 @@ class UpdateDateSheetRequest extends FormRequest
     public function rules():array
     {
         return [
-            //
+            'year' => ['required'],
+            'case_name' => ['required'],
+            'appearance_date' => ['required'],
+            'appearance_time' => ['required'],
+            'submitted_date' => ['required']
         ];
     }
 }

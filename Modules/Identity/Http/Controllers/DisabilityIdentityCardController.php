@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Http\Controllers;
 
+use App\Models\OfficeHeader;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,8 +54,10 @@ class DisabilityIdentityCardController extends Controller
     {
 
 
-        $disabilityIdentityCard->load('governmentalDisabilityType','permanentProvince','permanentDistrict','permanentLocalBody');
-        $view = (string) View::make('identity::admin.disabilityIdentityCard.print', compact('disabilityIdentityCard'));
+
+        $officeHeaders = OfficeHeader::get();
+        $disabilityIdentityCard->load('employeeSignature','disabilityType','governmentalDisabilityType','permanentProvince','permanentDistrict','permanentLocalBody');
+        $view = (string) View::make('identity::admin.disabilityIdentityCard.print', compact('disabilityIdentityCard','officeHeaders'));
 
         return response()->json([
             'view' => $view,
