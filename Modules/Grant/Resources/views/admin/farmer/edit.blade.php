@@ -178,7 +178,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="farmer_id_card_no" class="form-label">कृषक परिचयपत्र नं</label>
+                                    <label for="farmer_id_card_no" class="form-label">कृषक परिचयपत्र नं (कृषक सूचीकरण नम्बर)</label>
                                     <input
                                         type="text"
                                         name="farmer_id_card_no"
