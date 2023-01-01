@@ -111,32 +111,36 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no' => null,
         'provide_detail_citizenship_no_date' => null,
         'provide_detail_citizenship_no_place' => null,
-        'govern_disability_type_id'=>null
+        'govern_disability_type_id' => null
     ];
 
 
-    protected $listeners = ['dobChanged','dateChanged','birthRegistrationChanged','citizenshipNoChanged'];
+    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged'];
 
     public function dobChanged($nepaliDate, $englishDate): void
     {
         $this->form['dob_bs'] = $nepaliDate;
         $this->form['dob_ad'] = $englishDate;
     }
+
     public function dateChanged($nepaliDate, $englishDate): void
     {
         $this->form['date_bs'] = $nepaliDate;
         $this->form['date_ad'] = $englishDate;
     }
+
     public function birthRegistrationChanged($nepaliDate, $englishDate): void
     {
         $this->form['birth_registration_bs'] = $nepaliDate;
         $this->form['birth_registration_ad'] = $englishDate;
     }
+
     public function citizenshipNoChanged($nepaliDate, $englishDate): void
     {
         $this->form['citizenship_no_bs'] = $nepaliDate;
         $this->form['citizenship_no_ad'] = $englishDate;
     }
+
     public function mount($disabilityIdentityCard = null): void
     {
         $officeSetting = OfficeSetting::first();
@@ -287,6 +291,16 @@ class DisabilityIdentityCardLivewire extends Component
         'form.provide_detail_citizenship_no_date' => ['required'],
         'form.provide_detail_citizenship_no_place' => ['required', 'string', 'max:255'],
     ];
+
+    public function messages(): array
+    {
+        return [
+            'form.name.required' => ['नाम आवश्यक छ'],
+            'form.name_en.required' => ['नाम आवश्यक छ'],
+            'form.email.required' => ['नाम आवश्यक छ'],
+            'form.email.email' => ['नाम आवश्यक छ'],
+        ];
+    }
 
 
     public function rules(): array
