@@ -37,37 +37,37 @@
                         <tr>
                             <th scope="col">क्र.सं.</th>
                             <th scope="col">शिर्षक</th>
-                            <th scope="col">कोड रंग</th>
                             <th scope="col">#</th>
                         </tr>
                         </thead>
                         <tbody>
-{{--                        @forelse($disabilityTypes as $disabilityType)--}}
-{{--                            <tr>--}}
-{{--                                <td>{{$loop->iteration}}</td>--}}
-{{--                                <td>{{$disabilityType->title ?? ''}}</td>--}}
-{{--                                <td>--}}
-{{--                                    <a href="{{route('identity.admin.setting.disabilityType.edit', $disabilityType)}}"--}}
-{{--                                       type="button" class="btn btn-xs btn-outline-primary">--}}
-{{--                                        <i class="fa fa-edit"></i>--}}
-{{--                                    </a>--}}
-{{--                                    <form action="{{route('identity.admin.setting.disabilityType.destroy',$disabilityType)}}"--}}
-{{--                                          method="post">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('delete')--}}
-{{--                                        <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">--}}
-{{--                                            <i class="fa fa-trash"></i>--}}
-{{--                                        </button>--}}
-{{--                                    </form>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @empty--}}
-{{--                        @endforelse--}}
+                        @forelse($governmentalDisabilityTypes as $governmentalDisabilityType)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$governmentalDisabilityType->title ?? ''}}</td>
+                                <td>
+                                    <a href="{{route('identity.admin.setting.governmentalDisabilityType.edit', $governmentalDisabilityType)}}"
+                                       type="button" class="btn btn-xs btn-outline-primary">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <form action="{{route('identity.admin.setting.governmentalDisabilityType.destroy',$governmentalDisabilityType)}}"
+                                          method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
                 <div class="mt-2">
-                    {{ $governmentalDisabilityType->onEachSide(config('app.pagination_count'))->links() }}
+                    {{ $governmentalDisabilityTypes->onEachSide(config('app.pagination_count'))->links() }}
                 </div>
             </div>
         </div>

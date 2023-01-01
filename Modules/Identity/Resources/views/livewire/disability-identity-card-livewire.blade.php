@@ -217,22 +217,22 @@
                     <fieldset class="mt-3">
                         <legend>असक्तताको गम्भीरताका आधारमा अपाङ्गताको वर्गीकरण</legend>
                         <div class="row">
-{{--                            <div class="col-md-6 mb-3">--}}
-{{--                                <label for="form.disability_type_id" class="form-label">अपाङ्गताको प्रकार</label>--}}
-{{--                                <select--}}
-{{--                                    class="form-select @error('form.disability_type_id') is-invalid @enderror"--}}
-{{--                                    wire:model="form.disability_type_id"--}}
-{{--                                    id="form.disability_type_id">--}}
-{{--                                    <option value="">---अपाङ्गताको प्रकार छान्नुहोस् ---</option>--}}
-{{--                                    @foreach($disabilityTypes as $disabilityType)--}}
-{{--                                        <option--}}
-{{--                                            value="{{$disabilityType->id}}">{{$disabilityType->title}}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                                @error('form.disability_type_id')--}}
-{{--                                <div class="invalid-feedback ">{{$message}} </div>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
+                            <div class="col-md-6 mb-3">
+                                <label for="form.govern_disability_type_id" class="form-label">अपाङ्गताको प्रकार</label>
+                                <select
+                                    class="form-select @error('form.govern_disability_type_id') is-invalid @enderror"
+                                    wire:model="form.govern_disability_type_id"
+                                    id="form.govern_disability_type_id">
+                                    <option value="">---अपाङ्गताको प्रकार छान्नुहोस् ---</option>
+                                    @foreach($governmentDisabilityTypes as $governmentDisabilityType)
+                                        <option
+                                            value="{{$governmentDisabilityType->id}}">{{$governmentDisabilityType->title}}</option>
+                                    @endforeach
+                                </select>
+                                @error('form.govern_disability_type_id')
+                                <div class="invalid-feedback ">{{$message}} </div>
+                                @enderror
+                            </div>
                             <div class="col-md-6 mb-3">
                                 <label for="form.blood_group" class="form-label">रक्त समूह</label>
                                 <select

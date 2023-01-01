@@ -69,6 +69,22 @@ trait JudicialCommitteeTemplateTrait
                 'पेश मिति' => '[@dateSheet.submitted_date]'
             ],
         ],
+        [
+            'title' => 'प्रतिवादी म्याद जारी विवरण',
+            'data' => [
+                'सहभागी हुनुपर्ने दिन' => '[@defendantIssuedDeadline.day_to_attend]',
+                'पेश मिति' => '[@defendantIssuedDeadline.submitted_date]'
+            ],
+        ],
+        [
+            'title' => 'तारिख भरपाई विवरण',
+            'data' => [
+                'निर्णय हुने मिति' => '[@dateCompensation.decision_date]',
+                'निर्णय हुने विषय' => '[@dateCompensation.decision_subject]',
+                'निर्णय हुने समय' => '[@dateCompensation.decision_time]',
+                'पेश मिति' => '[@dateCompensation.submitted_date]'
+            ],
+        ],
     ];
 
     public function getTemplateDataAttribute(): Collection
@@ -107,7 +123,9 @@ trait JudicialCommitteeTemplateTrait
         $replace = array_merge(
             $this->getComplaintApplicationReplacement(),
             $replace,
-            $this->getDateSheetReplacement()
+            $this->getDateSheetReplacement(),
+            $this->getDefendantIssuedDeadlineReplacement(),
+            $this->getDateCompensationReplacement()
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
@@ -149,7 +167,7 @@ trait JudicialCommitteeTemplateTrait
         ];
     }
 
-    private function getDateSheetReplacement()
+    private function getDateSheetReplacement(): array
     {
         return [
             '[@dateSheet.year]' => $this->dateSheet->year ?? '',
@@ -157,6 +175,24 @@ trait JudicialCommitteeTemplateTrait
             '[@dateSheet.appearance_date]' => $this->dateSheet->appearance_date ?? '',
             '[@dateSheet.appearance_time]' => $this->dateSheet->appearance_time ?? '',
             '[@dateSheet.submitted_date]' => $this->dateSheet->submitted_date ?? ''
+        ];
+    }
+
+    private function getDefendantIssuedDeadlineReplacement(): array
+    {
+        return [
+            '[@defendantIssuedDeadline.day_to_attend]' => $this->defendantIssuedDeadline->day_to_attend ?? '',
+            '[@defendantIssuedDeadline.submitted_date]' => $this->defendantIssuedDeadline->submitted_date ?? ''
+        ];
+    }
+
+    private function getDateCompensationReplacement(): array
+    {
+        return [
+            '[@dateCompensation.decision_date]' => $this->dateCompensation->decision_date ?? '',
+            '[@dateCompensation.decision_subject]' => $this->dateCompensation->decision_subject ?? '',
+            '[@dateCompensation.decision_time]' => $this->dateCompensation->decision_time ?? '',
+            '[@dateCompensation.submitted_date]' => $this->dateCompensation->submitted_date ?? '',
         ];
     }
 

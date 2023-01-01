@@ -12,10 +12,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">तारिख पर्चा </li>
+                        <li class="breadcrumb-item active">तारिख भरपाई</li>
                     </ol>
                 </div>
-                <h4 class="page-title">तारिख पर्चा</h4>
+                <h4 class="page-title">तारिख भरपाई</h4>
             </div>
         </div>
     </div>
@@ -25,29 +25,29 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">तारिख पर्चा</h4>
+                        <h4 class="header-title">तारिख भरपाई</h4>
                         <div class="d-flex justify-content-between">
                             <button class="btn btn btn-sm btn-outline-primary" type="button"
-                                onclick="print('printDateSheet')">
+                                    onclick="print('printDateCompensation')">
                                 <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
                             </button>
-                            @can('dateSheet_edit')
-                                <a href="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.create', $complaintApplication) }}"
-                                    class="btn btn-sm btn-outline-warning mx-1">
+                            @can('dateCompensation_edit')
+                                <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.create', $complaintApplication) }}"
+                                   class="btn btn-sm btn-outline-warning mx-1">
                                     <i class="fa fa-edit"> सम्पादन गर्नुहोस्</i>
                                 </a>
                             @endcan
                             <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
-                                class="btn btn-sm btn-outline-primary">
+                               class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"> दर्ता भएका उजुरी</i>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="printDateSheet" class="ckEditor">
+                    <div id="printDateCompensation" class="ckEditor">
                         {!! $complaintApplication->getSpecificTemplateData(
-                            \Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DATE_SHEET,
+                            \Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DATE_COMPENSATION,
                         ) !!}
                     </div>
                 </div>

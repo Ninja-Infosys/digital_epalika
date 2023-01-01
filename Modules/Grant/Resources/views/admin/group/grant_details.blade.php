@@ -27,7 +27,7 @@
                         @can('group_access')
                             <a href="{{route('admin.grant.group.show', $group)}}"
                                class="btn btn-sm btn-outline-primary">
-                               <i class="fa fa-list"></i> समूह सुची
+                               <i class="fa fa-user"></i> समूह सुची
                             </a>
                         @endcan
                     </div>

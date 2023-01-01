@@ -39,7 +39,6 @@
                         <tr>
                             <th scope="col">क्र.सं.</th>
                             <th scope="col">शिर्षक</th>
-                            <th scope="col">शिर्षक English</th>
                             <th scope="col">कोड रङ</th>
                             <th scope="col">#</th>
                         </tr>
@@ -49,7 +48,6 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$cardColor->title ?? ''}}</td>
-                                <td>{{$cardColor->title_en ?? ''}}</td>
                                 <td>{{$cardColor->color ?? ''}}</td>
 
                                 <td>

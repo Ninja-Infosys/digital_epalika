@@ -1,0 +1,85 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.judicialCommittee.dashboard') }}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">तारिख भरपाई डाटा भर्नुहोस्</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">तारिख भरपाई</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">तारिख भरपाई डाटा भर्नुहोस्</h4>
+                        <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
+                           class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> दर्ता भएका उजुरी
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form
+                        action="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.store', $complaintApplication) }}"
+                        method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <x-date-input-component
+                                    nameNe="decision_date" labelNe="निर्णय हुने मिति *" nameEn="en_decision_date"
+                                    labelEn="Decision Date"
+                                    :editDateNe="$complaintApplication->dateCompensation->decision_date ?? ''"
+                                    :getTodayDate="false"/>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="decision_subject" class="form-label"> निर्णय हुने विषय <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" name="decision_subject" class="form-control"
+                                       value="{{ old('decision_subject', $complaintApplication->dateCompensation->decision_subject ?? '') }}"
+                                       id="decision_subject" placeholder="निर्णय हुने विषय"/>
+                                @error('decision_subject')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="decision_time" class="form-label"> निर्णय हुने समय  <span
+                                        class="text-danger">*</span></label>
+                                <input type="time" name="decision_time" class="form-control"
+                                       value="{{ old('decision_time', $complaintApplication->dateCompensation->decision_time ?? '') }}"
+                                       id="decision_time" placeholder="निर्णय हुने समय "/>
+                                @error('decision_time')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <x-date-input-component
+                                    nameNe="submitted_date" labelNe="पेश मिति *"
+                                    nameEn="en_submitted_date"
+                                    labelEn="Submitted Date"
+                                    :editDateNe="$complaintApplication->dateCompensation->submitted_date ?? ''"
+                                    :getTodayDate="!isset($complaintApplication->dateCompensation->submitted_date)"/>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">
+                                    पेश गर्नुहोस्
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
