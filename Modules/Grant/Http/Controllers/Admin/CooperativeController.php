@@ -48,11 +48,25 @@ class CooperativeController extends Controller
     {
         $this->checkAuthorization('cooperative_create');
 
-        DB::transaction(function () use ($request) {
-            $cooperative = Cooperative::create($request->validated());
+        $cooperative = DB::transaction(function () use ($request) {
+            $cooperative = Cooperative::create($request->validated() + [
+                    'registration_date' => $request->input('c_registration_date')
+                ]);
 
             $cooperative->farmers()->attach($request->input('farmers'));
+
+            return $cooperative;
         });
+
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => [
+                    'cooperative_id' => $cooperative->id,
+                    'cooperative_name' => $cooperative->name
+                ],
+                'message' => 'Cooperative Added Successfully'
+            ]);
+        }
 
         toast('सहकारी सफलतापूर्वक थपियो', 'success');
         return back();
@@ -61,9 +75,9 @@ class CooperativeController extends Controller
     public function show(Cooperative $cooperative)
     {
         $this->checkAuthorization('cooperative_access');
-        $cooperative->load('province', 'district', 'localBody', 'farmers','grantDetails.grant.grantProgram','grantDetails.localBody');
+        $cooperative->load('province', 'district', 'localBody', 'farmers', 'grantDetails.grant.grantProgram', 'grantDetails.localBody');
         $grantPrograms = GrantProgram::all();
-        return view('grant::admin.cooperative.show', compact('cooperative','grantPrograms'));
+        return view('grant::admin.cooperative.show', compact('cooperative', 'grantPrograms'));
     }
 
     public function edit(Cooperative $cooperative)
@@ -80,7 +94,9 @@ class CooperativeController extends Controller
     {
         $this->checkAuthorization('cooperative_edit');
         DB::transaction(function () use ($request, $cooperative) {
-            $cooperative->update($request->validated());
+            $cooperative->update($request->validated() + [
+                    'registration_date' => $request->input('c_registration_date')
+                ]);
 
             $cooperative->farmers()->sync($request->input('farmers'));
         });
@@ -100,6 +116,7 @@ class CooperativeController extends Controller
         toast('सहकारी सफलतापूर्वक हटाइयो', 'success');
         return back();
     }
+
     public function grantDetails(Cooperative $cooperative)
     {
         $this->checkAuthorization('cooperative_access');

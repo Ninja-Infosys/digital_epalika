@@ -18,7 +18,7 @@ class StoreGroupRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'registration_date' => ['required', 'date'],
+            'g_registration_date' => ['required', 'date'],
             'registered_office' => ['required'],
             'monthly_meeting' => ['nullable'],
             'vat_pan' => ['nullable'],

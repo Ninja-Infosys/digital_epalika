@@ -51,8 +51,9 @@ class DisabilityIdentityCardController extends Controller
 
     public function print(DisabilityIdentityCard $disabilityIdentityCard)
     {
-//        dd($disabilityIdentityCard->disabilityType->title);
 
+
+        $disabilityIdentityCard->load('governmentalDisabilityType','permanentProvince','permanentDistrict','permanentLocalBody');
         $view = (string) View::make('identity::admin.disabilityIdentityCard.print', compact('disabilityIdentityCard'));
 
         return response()->json([

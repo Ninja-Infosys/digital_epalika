@@ -7,7 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form id="farmer-form" enctype="multipart/form-data">
+                    @csrf
                     <fieldset>
                         <legend><h4 class="text-info"> कृषकको विवरण </h4></legend>
                         <div class="row">
@@ -17,7 +18,7 @@
                                     type="text"
                                     name="first_name"
                                     value="{{old('first_name')}}"
-                                    class="form-control @error('first_name') is-invalid @enderror"
+                                    class="form-control"
                                     id="first_name"
                                     placeholder="पहिलो नाम "
                                 />
@@ -31,7 +32,7 @@
                                     type="text"
                                     name="middle_name"
                                     value="{{old('middle_name')}}"
-                                    class="form-control @error('middle_name') is-invalid @enderror"
+                                    class="form-control"
                                     id="middle_name"
                                     placeholder="बीचको नाम"
                                 />
@@ -45,7 +46,7 @@
                                     type="text"
                                     name="last_name"
                                     value="{{old('last_name')}}"
-                                    class="form-control @error('last_name') is-invalid @enderror"
+                                    class="form-control"
                                     id="last_name"
                                     placeholder="थर"
                                 />
@@ -59,7 +60,7 @@
                                     type="text"
                                     name="phone_no"
                                     value="{{old('phone_no')}}"
-                                    class="form-control @error('phone_no') is-invalid @enderror"
+                                    class="form-control "
                                     id="phone_no"
                                     placeholder="सम्पर्क नं."
                                 />
@@ -103,13 +104,10 @@
                                     type="text"
                                     name="father_name"
                                     value="{{old('father_name')}}"
-                                    class="form-control @error('father_name') is-invalid @enderror"
-                                    id="phone_no"
+                                    class="form-control "
+                                    id="father_name"
                                     placeholder="बुवाको नाम थर"
                                 />
-                                @error('father_name')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="grandfather_name" class="form-label">बाजे/ससुराको नाम थर *</label>
@@ -117,13 +115,10 @@
                                     type="text"
                                     name="grandfather_name"
                                     value="{{old('grandfather_name')}}"
-                                    class="form-control @error('grandfather_name') is-invalid @enderror"
+                                    class="form-control "
                                     id="grandfather_name"
                                     placeholder="बाजे/ससुराको नाम थर "
                                 />
-                                @error('grandfather_name')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="citizenship_no" class="form-label">नागरिकता नं. *</label>
@@ -131,7 +126,7 @@
                                     type="text"
                                     name="citizenship_no"
                                     value="{{old('citizenship_no')}}"
-                                    class="form-control @error('citizenship_no') is-invalid @enderror"
+                                    class="form-control "
                                     id="citizenship_no"
                                     placeholder="नागरिकता नं."
                                 />
@@ -149,12 +144,83 @@
                         'local_body_id' => $officeSetting->local_body_id
                         ])
                     </fieldset>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
+                        <button type="submit" id="farmerSubmitBtn" class="btn btn-primary">पेश गर्नुहोस्</button>
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
-                <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
-            </div>
+
         </div>
     </div>
 </div>
+@push('scripts')
+    <script>
+
+        $(document).ready(function () {
+            if ($('#marital_status').val() === 'married') {
+                setStatus($('#marital_status').val())
+            }
+            $('#marital_status').on('change', function () {
+                setStatus($(this).val())
+            });
+
+            function setStatus(status) {
+                if (status === 'married') {
+                    $('#marital-status-div').after(spouseInput())
+                } else {
+                    $('#marital-status-div').next().remove()
+                }
+            }
+
+            function spouseInput() {
+                return "<div class='col-md-4 mb-2'>" +
+                    "<label for='spouse_name' class='form-label'>पति/पत्नी नाम</label>" +
+                    "<input type='text' name='spouse_name' value='{{old('spouse_name')}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />" +
+                    "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
+            }
+
+            //farmer form submit
+            $('#farmer-form').on('submit', function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: "post",
+                    url: "{{route('admin.grant.farmer.store')}}",
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        $("#farmerSubmitBtn").prop('disabled', true);
+                        $("#farmerSubmitBtn").html("<i class='fa fa-spinner fa-spin'></i>");
+                    },
+                    success: function (resp) {
+                        $("#farmerSubmitBtn").prop('disabled', false);
+                        $("#farmerSubmitBtn").html("पेश गर्नुहोस्");
+                        $('#farmers').append("<option value=" + resp.data.farmer_id + ">" + resp.data.farmer_name + "</option>")
+                        toastMessage('success', resp.message)
+                        $('#farmer-modal').modal('toggle')
+                        $('#farmer-form').trigger('reset')
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $('#farmerSubmitBtn').prop('disabled', false)
+                        $("#farmerSubmitBtn").html("पेश गर्नुहोस्");
+                        toastMessage('error', XMLHttpRequest.responseJSON.message)
+                    }
+                });
+            });
+
+            function toastMessage(type, title) {
+                swal.fire({
+                    title: title,
+                    toast: true,
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    width: 450,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    icon: type,
+                });
+            }
+        });
+    </script>
+@endpush

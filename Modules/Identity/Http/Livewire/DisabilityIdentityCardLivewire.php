@@ -111,32 +111,36 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no' => null,
         'provide_detail_citizenship_no_date' => null,
         'provide_detail_citizenship_no_place' => null,
-        'govern_disability_type_id'=>null
+        'govern_disability_type_id' => null
     ];
 
 
-    protected $listeners = ['dobChanged','dateChanged','birthRegistrationChanged','citizenshipNoChanged'];
+    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged'];
 
     public function dobChanged($nepaliDate, $englishDate): void
     {
         $this->form['dob_bs'] = $nepaliDate;
         $this->form['dob_ad'] = $englishDate;
     }
+
     public function dateChanged($nepaliDate, $englishDate): void
     {
         $this->form['date_bs'] = $nepaliDate;
         $this->form['date_ad'] = $englishDate;
     }
+
     public function birthRegistrationChanged($nepaliDate, $englishDate): void
     {
         $this->form['birth_registration_bs'] = $nepaliDate;
         $this->form['birth_registration_ad'] = $englishDate;
     }
+
     public function citizenshipNoChanged($nepaliDate, $englishDate): void
     {
         $this->form['citizenship_no_bs'] = $nepaliDate;
         $this->form['citizenship_no_ad'] = $englishDate;
     }
+
     public function mount($disabilityIdentityCard = null): void
     {
         $officeSetting = OfficeSetting::first();
@@ -288,6 +292,78 @@ class DisabilityIdentityCardLivewire extends Component
         'form.provide_detail_citizenship_no_place' => ['required', 'string', 'max:255'],
     ];
 
+    public function messages(): array
+    {
+        return [
+            'form.finger_print_type.required' => ['औलाको छाप आवश्यक छ'],
+            'form.name.required' => ['नाम आवश्यक छ'],
+            'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
+            'form.gender.required' => ['लिङ्ग आवश्यक छ'],
+            'form.ethnicity_id.required' => ['जातियता आवश्यक छ'],
+            'form.dob_bs.required' => ['जन्म मिति नेपालीमा आवश्यक छ'],
+            'form.dob_ad.required' => ['जन्म मिति अंग्रेजीमा आवश्यक छ'],
+            'form.permanent_province_id.required' => ['स्थायी प्रदेश आवश्यक छ'],
+            'form.permanent_district_id.required' => ['स्थायी जिल्ला आवश्यक छ'],
+            'form.permanent_local_body_id.required' => ['स्थायी पालिका आवश्यक छ'],
+            'form.permanent_ward.required' => ['स्थायी वार्ड आवश्यक छ'],
+            'form.permanent_tole.required' => ['स्थायी टोल आवश्यक छ'],
+            'form.temporary_province_id.required' => ['अस्थायी प्रदेश आवश्यक छ'],
+            'form.temporary_district_id.required' => ['अस्थायी जिल्ला आवश्यक छ'],
+            'form.temporary_local_body_id.required' => ['अस्थायी पालिका आवश्यक छ'],
+            'form.temporary_ward.required' => ['अस्थायी वार्ड आवश्यक छ'],
+            'form.temporary_tole.required' => ['अस्थायी टोल आवश्यक छ'],
+            'form.finger_left.required' => ['वायाँ औठाको छाप आवश्यक छ'],
+            'form.finger_right.required' => ['दायाँ औठाको छाप आवश्यक छ'],
+            'form.photo.required' => ['फोटो आवश्यक छ'],
+            'form.guardian_name.required' => ['अभिभावकको नाम आवश्यक छ'],
+            'form.guardian_name_en.required' => ['अभिभावकको नाम अंग्रेजीमा आवश्यक छ'],
+            'form.relationship_id.required' => ['सम्बन्ध आईडी आवश्यक छ'],
+            'form.phone.required' => ['सम्पर्क नं आवश्यक छ'],
+            'form.disability_type_id.required' => ['अपाङ्गताको प्रकार आवश्यक छ'],
+            'form.blood_group.required' => ['रक्त समूह आवश्यक छ'],
+            'form.disability_reason_id.required' => ['अपाङ्गताको कारण आवश्यक छ'],
+            'form.identity_type.required' => ['पहिचान प्रकार आवश्यक छ'],
+            'form.receiving_body.required' => ['कहाँ बाट आवश्यक छ'],
+            'form.card_no.required' => ['कार्ड नं आवश्यक छ'],
+            'form.date_bs.required' => ['मिति वि.स मा आवश्यक छ'],
+            'form.date_ad.required' => ['मिति ई.स मा आवश्यक छ'],
+            'form.father_name.required' => ['वुबाको नाम आवश्यक छ'],
+            'form.father_name_en.required' => ['वुबाको नाम अंग्रेजीमा आवश्यक छ'],
+            'form.grand_father_name.required' => ['हजुरवुबाको नाम आवश्यक छ'],
+            'form.grand_father_name_en.required' => ['हजुरवुबाको नाम अंग्रेजीमा आवश्यक छ'],
+            'form.mother_name.required' => ['आमाको नाम आवश्यक छ'],
+            'form.mother_name_en.required' => ['आमाको नाम अंग्रेजीमा आवश्यक छ'],
+            'form.birth_registration_no.required' => ['जन्म दर्ता आवश्यक छ'],
+            'form.birth_registration_place.required' => ['जन्मेको ठाउँ आवश्यक छ'],
+            'form.birth_registration_bs.required' => ['जन्म दर्ता वि.स. मा आवश्यक छ'],
+            'form.birth_registration_ad.required' => ['जन्म दर्ता ई.स. माआवश्यक छ'],
+            'form.citizenship_no.required' => ['नागरिकता नं आवश्यक छ'],
+            'form.citizenship_no_place.required' => ['नागरिकता पाएको स्थान आवश्यक छ'],
+            'form.citizenship_no_bs.required' => ['नागरिकता पाएको मिति (बि.स.)आवश्यक छ'],
+            'form.citizenship_no_ad.required' => ['नागरिकता पाएको मिति (ई.स.)आवश्यक छ'],
+            'form.citizenship_photo.required' => ['नागरिकताको फोटोकपी आवश्यक छ'],
+            'form.citizenship_photo_certificate.required' => ['जन्मदर्ताको फोटोकपी आवश्यक छ'],
+            'form.is_necessary.required' => ['आवश्यक छ'],
+            'form.material_description.required' => ['सामाग्री विवरण आवश्यक छ'],
+            'form.qualification.required' => ['पछिल्लो सैक्षिक योग्यता आवश्यक छ'],
+            'form.daily_activity.required' => ['दैनिक क्रियाकलाप गर्न आवश्यक छ'],
+            'form.supporting_material.required' => ['साहायक सामाग्री प्रयोग गर्ने आवश्यक छ'],
+            'form.material_name.required' => ['सामाग्रीको नाम आवश्यक छ'],
+            'form.helping_task.required' => ['कामको नाम आवश्यक छ'],
+            'form.helping_task.required' => ['कामको नाम आवश्यक छ'],
+            'form.without_helping_task.required' => ['कामको नाम आवश्यक छ'],
+            'form.without_helping_task.required' => ['कामको नाम आवश्यक छ'],
+            'form.main_training_name.required' => ['नाम आवश्यक छ'],
+            'form.provide_detail_full_name.required' => ['नाम आवश्यक छ'],
+            'form.provide_detail_address.required' => ['ठेगाना आवश्यक छ'],
+            'form.provide_detail_phone_no.required' => ['सम्पर्क नं. आवश्यक छ'],
+            'form.provide_detail_citizenship_no.required' => ['नागरिकता नं आवश्यक छ'],
+            'form.provide_detail_citizenship_no_date.required' => ['नागरिकता पाएको मिति आवश्यक छ'],
+            'form.provide_detail_citizenship_no_place.required' => ['नागरिकता पाएको स्थान आवश्यक छ'],
+
+        ];
+    }
+
 
     public function rules(): array
     {
@@ -303,7 +379,8 @@ class DisabilityIdentityCardLivewire extends Component
             8 => $this->eighthStepValidations,
             9 => $this->ninthStepValidations,
 
-            default => array_merge($this->firstStepValidations(),
+            default => array_merge(
+                $this->firstStepValidations(),
                 $this->secondStepValidations,
                 $this->thirdStepValidations,
                 $this->fourthStepValidations,
@@ -343,7 +420,6 @@ class DisabilityIdentityCardLivewire extends Component
         ]);
         $this->reset('form');
         return back();
-
     }
 
     public function helpingTaskIncrement(): void

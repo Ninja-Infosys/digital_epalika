@@ -50,12 +50,24 @@ class EnterprisesController extends Controller
     {
         $this->checkAuthorization('enterprise_create');
 
-        DB::transaction(function () use ($request) {
+        $enterprises=DB::transaction(function () use ($request) {
             $enterprise = Enterprise::create($request->validated());
 
             $enterprise->farmers()->attach($request->input('farmers'));
 
+            return $enterprise;
         });
+
+        if($request->ajax()){
+            return response()->json([
+                'data'=> [
+                    'enterprise_id'=> $enterprises->id,
+                    'enterprise_name'=> $enterprises->name
+                ],
+                'message'=> 'Enterprise Added successfully'
+            ]);
+        }
+
         toast('निजि उधम/फर्म सफलतापूर्वक थपियो', 'success');
         return back();
     }

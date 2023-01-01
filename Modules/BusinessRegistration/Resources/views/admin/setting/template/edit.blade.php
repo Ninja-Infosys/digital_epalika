@@ -60,7 +60,7 @@
 
                                 <div class="row">
 
-                                    @foreach( (new Modules\BusinessRegistration\Entities\ProprietorDetail)->getTemplateOptions() as $template)
+                                    @foreach( (new Modules\BusinessRegistration\Entities\BusinessDetail())->getTemplateOptions() as $template)
                                         <div class="col-md-12">
                                             <h6>{{$template['title'] ?? ''}}</h6>
                                         </div>

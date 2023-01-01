@@ -57,7 +57,8 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label for="name" class="form-label">सहकारी प्रकार</label>
-                                            <select name="cooperative_type_id" id="cooperative_type_id" class="form-control @error('cooperative_type_id') is-invalid @enderror">
+                                            <select name="cooperative_type_id" id="cooperative_type_id"
+                                                    class="form-control @error('cooperative_type_id') is-invalid @enderror">
                                                 <option value="">सहकारी प्रकार छान्नुहोस्</option>
                                                 @foreach($cooperativeTypes as $cooperativeType)
                                                     <option
@@ -87,8 +88,8 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <x-date-input-component
-                                                nameNe="registration_date" labelNe="दर्ता मिति *"
-                                                nameEn="en_registration_date" labelEn="Dispatch Date"
+                                                nameNe="c_registration_date" labelNe="दर्ता मिति *"
+                                                nameEn="en_c_registration_date" labelEn="Registration Date"
                                                 :getTodayDate="false"
                                                 :editDateNe="$cooperative->registration_date"
                                             />
@@ -127,7 +128,8 @@
                                         </div>
                                         <div class="col-md-12 mb-2">
                                             <label for="objective" class="form-label">उद्देश्य</label>
-                                            <textarea name="objective" id="objective" class="form-control" placeholder="उद्देश्य"
+                                            <textarea name="objective" id="objective" class="form-control"
+                                                      placeholder="उद्देश्य"
                                                       cols="45"
                                                       rows="3">{{old('objective',$cooperative->objective)}}</textarea>
                                             @error('objective')
@@ -141,7 +143,8 @@
                         <div class="row">
                             <fieldset>
                                 <legend><h4 class="text-info"> स्थायी ठेगाना </h4></legend>
-                                <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस् ।</p>
+                                <p>नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र टोल छनौट गर्नुहोस्
+                                    ।</p>
                                 @livewire('address', [
                                 'province_id' => $cooperative->province_id,
                                 'district_id' => $cooperative->district_id,
@@ -186,18 +189,25 @@
                                     <h4 class="text-info">संलग्न कृषकहरू</h4>
                                 </legend>
                                 <p>सहकारीमा संलग्न कृषकहरू छान्नुहोस् </p>
-                                <div class="col-md-8 mb-2">
+                                <div class="col-md-6 mb-2">
                                     <label for="farmers" class="form-label">
                                         कृषक</label>
-                                    <select name="farmers[]" multiple data-toggle="select2"
-                                            id="farmers" class="form-select">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($farmers as $farmer)
-                                            <option
-                                                {{ in_array($farmer->id, $cooperative->farmers->pluck('id')->toArray()) ? 'selected' : '' }}
-                                                value="{{$farmer->id}}">{{$farmer->name}}</option>
-                                        @endforeach
-                                    </select>
+
+                                    <div class="input-group">
+                                        <select name="farmers[]" multiple data-toggle="select2"
+                                                id="farmers" class="form-select">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($farmers as $farmer)
+                                                <option
+                                                    {{ in_array($farmer->id, $cooperative->farmers->pluck('id')->toArray()) ? 'selected' : '' }}
+                                                    value="{{$farmer->id}}">{{$farmer->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-farmer"
+                                                title="कृषक थप" data-bs-toggle="modal" data-bs-target="#farmer-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('farmers')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -213,4 +223,6 @@
             </div>
         </div>
     </div>
+
+    @include('grant::admin.inc.farmer_form')
 @endsection

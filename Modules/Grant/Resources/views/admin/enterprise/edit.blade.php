@@ -10,7 +10,7 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">निजि उधम/फर्म </li>
+                        <li class="breadcrumb-item active">निजि उधम/फर्म</li>
                     </ol>
                 </div>
                 <h4 class="page-title"> निजि उधम/फर्म सम्पादन</h4>
@@ -37,16 +37,17 @@
                             <legend>
                                 <h4 class="text-info">निजि उधम/फर्मको विवरण</h4>
                             </legend>
-                            <h5 class="mt-1 text-black">नोट: कृपया निजि उधम/फर्मको विवरण भर्दा ध्यान दिएर भर्नु होला । </h5>
+                            <h5 class="mt-1 text-black">नोट: कृपया निजि उधम/फर्मको विवरण भर्दा ध्यान दिएर भर्नु होला
+                                । </h5>
                             <div class="row mt-2">
                                 <div class="col-md-4 mb-2">
                                     <label for="name" class="form-label">निजि उधम/फर्मको नाम <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{ old('name', $enterprise->name) }}"
-                                        class="form-control @error('name') is-invalid @enderror" id="name"
-                                        placeholder="निजि उधम/फर्मको नाम" />
+                                           class="form-control @error('name') is-invalid @enderror" id="name"
+                                           placeholder="निजि उधम/फर्मको नाम"/>
                                     @error('name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
@@ -62,16 +63,16 @@
                                         @endforeach
                                     </select>
                                     @error('enterprise_type_id')
-                                        <p class="text-danger">{{ $message }}</p>
+                                    <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="vat_pan" class="form-label">प्यान/भ्याट </label>
                                     <input type="text" name="vat_pan" value="{{ old('vat_pan', $enterprise->vat_pan) }}"
-                                        class="form-control @error('vat_pan') is-invalid @enderror" id="vat_pan"
-                                        placeholder="प्यान/भ्याट" />
+                                           class="form-control @error('vat_pan') is-invalid @enderror" id="vat_pan"
+                                           placeholder="प्यान/भ्याट"/>
                                     @error('vat_pan')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -80,7 +81,8 @@
                             <legend>
                                 <h4 class="text-info">स्थानीय ठेगाना</h4>
                             </legend>
-                            <h5 class="mt-1 text-black">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ र
+                            <h5 class="mt-1 text-black">नोट: कृपया क्रमशः प्रदेश, जिल्ला, गा.पा./न.पा., वार्ड नं., गाउँ
+                                र
                                 टोल छनौट गर्नुहोस् ।</h5>
                             @livewire('address',[
                             'province_id' => $enterprise->province_id,
@@ -92,19 +94,19 @@
                                 <div class="col-md-6 mb-2">
                                     <label for="village" class="form-label">गाउँ</label>
                                     <input type="text" name="village" value="{{ old('village', $enterprise->village) }}"
-                                        class="form-control @error('village') is-invalid @enderror" id="village"
-                                        placeholder="गाउँ" />
+                                           class="form-control @error('village') is-invalid @enderror" id="village"
+                                           placeholder="गाउँ"/>
                                     @error('village')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="tole" class="form-label">टोल</label>
                                     <input type="text" name="tole" value="{{ old('tole', $enterprise->tole) }}"
-                                        class="form-control @error('tole') is-invalid @enderror" id="tole"
-                                        placeholder="टोल" />
+                                           class="form-control @error('tole') is-invalid @enderror" id="tole"
+                                           placeholder="टोल"/>
                                     @error('tole')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -115,19 +117,26 @@
                             </legend>
                             <h5 class="mt-1 text-black">निजि उधम/फर्ममा संलग्न कृषकहरू छान्नुहोस् </h5>
                             <div class="row mt-2">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="farmers" class="fs-5">कृषकहरू</label>
-                                    <select name="farmers[]" multiple data-toggle="select2" id="farmers"
-                                        class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach ($farmers as $farmer)
-                                            <option value="{{ $farmer->id }}"
-                                                {{ in_array($farmer->id, $enterprise->farmers->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                                {{ $farmer->name }}</option>
-                                        @endforeach
-                                    </select>
+
+                                    <div class="input-group">
+                                        <select name="farmers[]" multiple data-toggle="select2" id="farmers"
+                                                class="form-control">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach ($farmers as $farmer)
+                                                <option value="{{ $farmer->id }}"
+                                                    {{ in_array($farmer->id, $enterprise->farmers->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                                    {{ $farmer->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-farmer"
+                                                title="कृषक थप" data-bs-toggle="modal" data-bs-target="#farmer-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('farmers')
-                                        <p class="text-danger">{{ $message }}</p>
+                                    <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -140,4 +149,6 @@
             </div>
         </div>
     </div>
+
+    @include('grant::admin.inc.farmer_form')
 @endsection

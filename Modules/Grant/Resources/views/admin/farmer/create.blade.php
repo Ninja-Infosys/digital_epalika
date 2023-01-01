@@ -180,7 +180,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="farmer_id_card_no" class="form-label">कृषक परिचयपत्र नं</label>
+                                    <label for="farmer_id_card_no" class="form-label">कृषक परिचयपत्र नं (कृषक सूचीकरण नम्बर)</label>
                                     <input
                                         type="text"
                                         name="farmer_id_card_no"
@@ -282,8 +282,8 @@
                                     <label for="group" class="form-label">
                                         समूह</label>
                                     <div class="input-group">
-                                        <select name="group[]" multiple data-toggle="select2"
-                                                id="group" class="form-control" aria-describedby="button-group">
+                                        <select name="groups[]" multiple data-toggle="select2"
+                                                id="groups" class="form-control" aria-describedby="button-group">
                                             <option disabled>--- छान्नुहोस् ---</option>
                                             @foreach($groups as $group)
                                                 <option value="{{$group->id}}">{{$group->name}}</option>
@@ -301,8 +301,8 @@
                                     <label for="enterprise" class="form-label">
                                         उद्यम</label>
                                     <div class="input-group">
-                                        <select name="enterprise[]" multiple data-toggle="select2"
-                                                id="enterprise" class="form-control"
+                                        <select name="enterprises[]" multiple data-toggle="select2"
+                                                id="enterprises" class="form-control"
                                                 aria-describedby="button-enterprise">
                                             <option disabled>--- छान्नुहोस् ---</option>
                                             @foreach($enterprises as $enterprise)
@@ -311,10 +311,11 @@
                                         </select>
                                         <button class="btn btn-sm btn-outline-primary" type="button"
                                                 id="button-enterprise"
-                                                title="उधम थप" data-bs-toggle="modal" data-bs-target="#enterprise-modal">
+                                                title="उधम थप" data-bs-toggle="modal"
+                                                data-bs-target="#enterprise-modal">
                                             <i class="fa fa-plus"></i></button>
                                     </div>
-                                    @error('enterprise')
+                                    @error('enterprises')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -329,13 +330,13 @@
 
         </div>
     </div>
-{{--cooperative add modal--}}
+    {{--cooperative add modal--}}
     @include('grant::admin.inc.cooperative_form')
 
-{{--group add modal--}}
+    {{--group add modal--}}
     @include('grant::admin.inc.group_form')
 
-{{--enterprise add modal--}}
+    {{--enterprise add modal--}}
     @include('grant::admin.inc.enterprise_form')
 
     @push('scripts')
@@ -362,6 +363,7 @@
                         "<input type='text' name='spouse_name' value='{{old('spouse_name')}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />" +
                         "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
                 }
+
             });
         </script>
     @endpush
