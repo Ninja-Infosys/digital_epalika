@@ -79,7 +79,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th>लिङ्ग</th>
-                                                        <th>{{$businessDetail->proprietorDetail->gender->label()??''}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->gender?->label()??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>इमेल</th>
@@ -154,7 +154,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> व्यवसायको प्रकृति</th>
-                                                        <th>{{$businessDetail->business_nature->label()??''}}</th>
+                                                        <th>{{$businessDetail->business_nature?->label()??''}}</th>
                                                     </tr>
 
                                                     <tr>
