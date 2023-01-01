@@ -31,16 +31,17 @@
                 </div>
                 <div class="card-body">
                     <form
-                        action="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.store', $complaintApplication) }}"
+                        action="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.update', [$complaintApplication,$dateSheet]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <label for="year" class="form-label"> आवेदन वर्ष <span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="year" class="form-control"
-                                       value="{{ old('year')}}" id="year"
-                                       placeholder="आवेदन वर्ष" />
+                                       value="{{ old('year', $dateSheet->year) }}" id="year"
+                                       placeholder="आवेदन वर्ष"/>
                                 @error('year')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -49,7 +50,7 @@
                                 <label for="case_name" class="form-label"> केस नाम <span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="case_name" class="form-control"
-                                       value="{{ old('case_name') }}"
+                                       value="{{ old('case_name',$dateSheet->case_name) }}"
                                        id="case_name" placeholder="केस नाम"/>
                                 @error('case_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -57,15 +58,16 @@
                             </div>
                             <div class="col-md-6 mb-2">
                                 <x-date-input-component
-                                    nameNe="appearance_date" labelNe="हाजिर हुने मिति *"
-                                    nameEn="en_appearance_date" labelEn="Appearance Date"
+                                    nameNe="appearance_date" labelNe="हाजिर हुने मिति *" nameEn="en_appearance_date"
+                                    labelEn="Appearance Date"
+                                    :editDateNe="$dateSheet->appearance_date"
                                     :getTodayDate="false"/>
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="appearance_time" class="form-label"> हाजिर हुने समय <span
                                         class="text-danger">*</span></label>
                                 <input type="time" name="appearance_time" class="form-control"
-                                       value="{{ old('appearance_time') }}"
+                                       value="{{ old('appearance_time', $dateSheet->appearance_time) }}"
                                        id="appearance_time" placeholder="हाजिर हुने समय"/>
                                 @error('appearance_time')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -75,7 +77,9 @@
                                 <x-date-input-component
                                     nameNe="submitted_date" labelNe="पेश मिति *"
                                     nameEn="en_submitted_date"
-                                    labelEn="Submitted Date"/>
+                                    labelEn="Submitted Date"
+                                    :editDateNe="$dateSheet->submitted_date"
+                                    :getTodayDate="false"/>
                             </div>
 
                             <div class="d-flex justify-content-between">

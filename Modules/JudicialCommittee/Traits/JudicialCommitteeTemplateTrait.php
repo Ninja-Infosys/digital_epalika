@@ -6,6 +6,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
+use Modules\JudicialCommittee\Entities\DateSheet;
+use Modules\JudicialCommittee\Entities\DefendantIssuedDeadline;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 
@@ -110,6 +112,54 @@ trait JudicialCommitteeTemplateTrait
 
         return '';
     }
+    public function getDateSheetTemplate(DateSheet $dateSheet): string
+    {
+        $judicialCommitteeTemplates = $this->getJudicialCommitteeTemplates();
+        $judicialTemplate = $judicialCommitteeTemplates->where('type', JudicialTemplateTypeEnum::DATE_SHEET)->first();
+
+        if ($judicialTemplate) {
+            $replace = [];
+
+            $replace = array_merge(
+                $this->getComplaintApplicationReplacement(),
+                $replace,
+                [
+                    '[@dateSheet.year]' => $dateSheet->year ?? '',
+                    '[@dateSheet.case_name]' => $dateSheet->case_name ?? '',
+                    '[@dateSheet.appearance_date]' => $dateSheet->appearance_date ?? '',
+                    '[@dateSheet.appearance_time]' => $dateSheet->appearance_time ?? '',
+                    '[@dateSheet.submitted_date]' => $dateSheet->submitted_date ?? ''
+                ]
+            );
+
+            return Str::replace(array_keys($replace), $replace, $judicialTemplate->data);
+        }
+
+        return '';
+    }
+
+    public function getDefendantIssuedDeadlineTemplate(DefendantIssuedDeadline $defendantIssuedDeadline): string
+    {
+        $judicialCommitteeTemplates = $this->getJudicialCommitteeTemplates();
+        $judicialTemplate = $judicialCommitteeTemplates->where('type', JudicialTemplateTypeEnum::DEFENDANT_ISSUED_DEADLINE)->first();
+
+        if ($judicialTemplate) {
+            $replace = [];
+
+            $replace = array_merge(
+                $this->getComplaintApplicationReplacement(),
+                $replace,
+                [
+                    '[@defendantIssuedDeadline.day_to_attend]' => $defendantIssuedDeadline->day_to_attend ?? '',
+                    '[@defendantIssuedDeadline.submitted_date]' => $defendantIssuedDeadline->submitted_date ?? ''
+                ]
+            );
+
+            return Str::replace(array_keys($replace), $replace, $judicialTemplate->data);
+        }
+
+        return '';
+    }
 
     public function getTemplateOptions(): array
     {
@@ -123,8 +173,6 @@ trait JudicialCommitteeTemplateTrait
         $replace = array_merge(
             $this->getComplaintApplicationReplacement(),
             $replace,
-            $this->getDateSheetReplacement(),
-            $this->getDefendantIssuedDeadlineReplacement(),
             $this->getDateCompensationReplacement()
         );
 
@@ -175,14 +223,6 @@ trait JudicialCommitteeTemplateTrait
             '[@dateSheet.appearance_date]' => $this->dateSheet->appearance_date ?? '',
             '[@dateSheet.appearance_time]' => $this->dateSheet->appearance_time ?? '',
             '[@dateSheet.submitted_date]' => $this->dateSheet->submitted_date ?? ''
-        ];
-    }
-
-    private function getDefendantIssuedDeadlineReplacement(): array
-    {
-        return [
-            '[@defendantIssuedDeadline.day_to_attend]' => $this->defendantIssuedDeadline->day_to_attend ?? '',
-            '[@defendantIssuedDeadline.submitted_date]' => $this->defendantIssuedDeadline->submitted_date ?? ''
         ];
     }
 

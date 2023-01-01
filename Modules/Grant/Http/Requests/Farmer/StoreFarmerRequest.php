@@ -59,7 +59,7 @@ class StoreFarmerRequest extends FormRequest
             'citizenship_no.required' => 'नागरिता नं. आवश्यक छ ।',
             'phone_no.required' => 'सम्पर्क नं. आवश्यक छ ।',
             'phone_no.regex' => 'सम्पर्क अंग्रेजी नं मा हुनुपर्छ।',
-            'phone_no.min' => 'सम्पर्क नं ९ अंक भन्दा धेरै हुनुपर्छ।',
+            'phone_no.min' => 'सम्पर्क नं मान्य छैन।',
             'province_id.required' => 'प्रदेश आवश्यक छ ।',
             'district_id.required' => 'जिल्ला आवश्यक छ ।',
             'local_body_required' => 'पालिका आवश्यक छ ।',

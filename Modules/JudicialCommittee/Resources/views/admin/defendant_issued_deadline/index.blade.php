@@ -1,5 +1,4 @@
 @extends('admin.layouts.master')
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -7,7 +6,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.judicialCommittee.dashboard') }}">
+                            <a href="{{route('admin.judicialCommittee.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -25,45 +24,59 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">प्रतिवादी म्याद जारी</h4>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn btn-sm btn-outline-primary" type="button"
-                                onclick="print('printDefendantIssuedDeadline')">
-                                <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
-                            </button>
-                            @can('defendantIssuedDeadline_edit')
-                                <a href="{{ route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.create', $complaintApplication) }}"
-                                    class="btn btn-sm btn-outline-warning mx-1">
-                                    <i class="fa fa-edit"> सम्पादन गर्नुहोस्</i>
-                                </a>
-                            @endcan
-                            <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
-                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-list"> दर्ता भएका उजुरी</i>
+                        <h4 class="header-title">प्रतिवादी म्याद जारी सूची</h4>
+                        @can('defendantIssuedDeadline_create')
+                            <a href="{{route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.create',$complaintApplication)}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
-                        </div>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="printDefendantIssuedDeadline" class="ckEditor">
-                        {!! $complaintApplication->getSpecificTemplateData(
-                            \Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum::DEFENDANT_ISSUED_DEADLINE,
-                        ) !!}
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0 table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>सहभागी हुनुपर्ने दिन</th>
+                                <th>पेश मिति</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($complaintApplication->defendantIssuedDeadlines as $defendantIssuedDeadline)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$defendantIssuedDeadline->day_to_attend}}</td>
+                                    <td>{{$defendantIssuedDeadline->submitted_date}}</td>
+                                    <td>
+                                        @can('defendantIssuedDeadline_access')
+                                            <a href="{{route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.show',[$complaintApplication,$defendantIssuedDeadline])}}"
+                                               title="विवरण हेर्नुहोस्"
+                                               class="btn btn-xs btn-outline-primary">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endcan
+                                        @can('defendantIssuedDeadline_edit')
+                                            <a href="{{route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.edit',[$complaintApplication,$defendantIssuedDeadline])}}"
+                                               title="सम्पादन गर्नुहोस्"
+                                               class="btn btn-xs btn-outline-warning">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/ckeditor.js') }}"></script>
-        <script src="{{ asset('assets/backend/editor/ckEditor/js/print.js') }}"></script>
-
-
-        <script>
-            function print(editorName) {
-                const editor = CKEDITOR.instances[editorName];
-                editor.execCommand('print');
-            }
-        </script>
-    @endpush
 @endsection
