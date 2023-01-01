@@ -14,6 +14,10 @@
             color: black;
         }
 
+        p{
+            line-height: 0.01;
+        }
+
         .student-character {
             padding: 15px;
             background-color: {{$disabilityIdentityCard->governmentalDisabilityType->color??''}};

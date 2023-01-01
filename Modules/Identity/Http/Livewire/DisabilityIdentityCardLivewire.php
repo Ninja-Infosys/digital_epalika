@@ -296,6 +296,9 @@ class DisabilityIdentityCardLivewire extends Component
     {
         return [
             'form.name.required' => ['नाम आवश्यक छ'],
+            'form.name_en.required' => ['नाम आवश्यक छ'],
+            'form.email.required' => ['नाम आवश्यक छ'],
+            'form.email.email' => ['नाम आवश्यक छ'],
         ];
     }
 
