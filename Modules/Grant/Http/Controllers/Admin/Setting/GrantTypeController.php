@@ -39,7 +39,18 @@ class GrantTypeController extends Controller
     {
         $this->checkAuthorization('grantType_create');
 
-        GrantType::create($request->validated());
+        $grantType=GrantType::create($request->validated());
+
+        if($request->ajax()){
+            return response()->json([
+                'data'=> [
+                    'grantType_id'=> $grantType->id,
+                    'grantType_title'=> $grantType->title
+                ],
+            'message'=> 'अनुदान प्रकार सफलतापुर्बक थपियो'
+        ]);
+        }
+
         toast('अनुदान प्रकार सफलता पुर्वक थपियो', 'success');
         return back();
 
