@@ -295,10 +295,23 @@ class DisabilityIdentityCardLivewire extends Component
     public function messages(): array
     {
         return [
+            'form.finger_print_type.required' => ['औलाको छाप आवश्यक छ'],
             'form.name.required' => ['नाम आवश्यक छ'],
-            'form.name_en.required' => ['नाम आवश्यक छ'],
-            'form.email.required' => ['नाम आवश्यक छ'],
-            'form.email.email' => ['नाम आवश्यक छ'],
+            'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
+            'form.gender.required' => ['लिङ्ग आवश्यक छ'],
+            'form.ethnicity_id.required' => ['जातियता आवश्यक छ'],
+            'form.dob_bs.required' => ['जन्म मिति नेपालीमा आवश्यक छ'],
+            'form.dob_ad.required' => ['जन्म मिति अंग्रेजीमा आवश्यक छ'],
+            'form.permanent_province_id.required' => ['स्थायी प्रदेश आवश्यक छ'],
+            'form.permanent_district_id.required' => ['स्थायी जिल्ला आवश्यक छ'],
+            'form.permanent_local_body_id.required' => ['स्थायी पालिका आवश्यक छ'],
+            'form.permanent_ward.required' => ['स्थायी वार्ड आवश्यक छ'],
+            'form.permanent_tole.required' => ['स्थायी टोल आवश्यक छ'],
+            'form.temporary_province_id.required' => ['अस्थायी प्रदेश आवश्यक छ'],
+            'form.temporary_district_id.required' => ['अस्थायी जिल्ला आवश्यक छ'],
+            'form.temporary_local_body_id.required' => ['अस्थायी पालिका आवश्यक छ'],
+            'form.temporary_ward.required' => ['अस्थायी वार्ड आवश्यक छ'],
+            'form.temporary_tole.required' => ['अस्थायी टोल आवश्यक छ'],
         ];
     }
 
