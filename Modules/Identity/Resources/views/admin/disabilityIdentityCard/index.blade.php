@@ -65,10 +65,10 @@
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
-{{--                                        <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">--}}
-{{--                                            <i class="fa fa-print"></i>--}}
+                                        <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">
+                                            <i class="fa fa-print"></i>
 
-{{--                                        </a>--}}
+                                        </a>
                                     </td>
                                 </tr>
                             @empty
