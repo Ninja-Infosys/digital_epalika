@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Modules\Grant\Entities\Cooperative;
+use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\GrantDetail;
@@ -42,8 +43,9 @@ class FarmerController extends Controller
         $cooperatives = Cooperative::latest()->get();
         $groups = Group::latest()->get();
         $enterprises = Enterprise::latest()->get();
+        $cooperativeTypes=CooperativeType::all();
 
-        return view('grant::admin.farmer.create', compact('cooperatives', 'groups', 'enterprises'));
+        return view('grant::admin.farmer.create', compact('cooperatives', 'groups', 'enterprises','cooperativeTypes'));
     }
 
     public function store(StoreFarmerRequest $request)

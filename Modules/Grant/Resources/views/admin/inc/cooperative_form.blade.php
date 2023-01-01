@@ -7,7 +7,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form id="cooperative-form" enctype="multipart/form-data">
+                    @csrf
                     <fieldset>
                         <legend><h4 class="text-info"> सहकारीको विवरण </h4></legend>
                         <div class="row">
@@ -30,8 +31,11 @@
                                 <select name="cooperative_type_id" id="cooperative_type_id"
                                         class="form-control @error('cooperative_type_id') is-invalid @enderror">
                                     <option value="">सहकारी प्रकार छान्नुहोस्</option>
-                                        <option
-                                            value="">gddfghdf</option>
+                                    @foreach($cooperativeTypes as $cooperativeType)
+                                        <option value="{{$cooperativeType->id}}">
+                                            {{$cooperativeType->title}}
+                                        </option>
+                                    @endforeach
 
                                 </select>
                                 @error('cooperative_type_id')
@@ -70,11 +74,11 @@
                         'local_body_id' => $officeSetting->local_body_id
                         ])
                     </fieldset>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
+                        <button type="submit" id="cooperativeSubmitBtn" class="btn btn-primary">पेश गर्नुहोस्</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
-                <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
             </div>
         </div>
     </div>

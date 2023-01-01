@@ -87,8 +87,8 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <x-date-input-component
-                                                nameNe="registration_date" labelNe="दर्ता मिति *"
-                                                nameEn="en_registration_date" labelEn="Dispatch Date"
+                                                nameNe="c_registration_date" labelNe="दर्ता मिति *"
+                                                nameEn="en_c_registration_date" labelEn="Registration Date"
                                                 :getTodayDate="false"
                                                 :editDateNe="$cooperative->registration_date"
                                             />

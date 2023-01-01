@@ -59,7 +59,10 @@
                                         <option value="">सहकारी प्रकार छान्नुहोस्</option>
                                         @foreach($cooperativeTypes as $cooperativeType)
                                             <option
-                                                value="{{$cooperativeType->id}}">{{$cooperativeType->title}}</option>
+                                                {{$cooperativeType->id==old('cooperative_type_id') ? 'selected' : ''}}
+                                                value="{{$cooperativeType->id}}">
+                                                {{$cooperativeType->title}}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('cooperative_type_id')
@@ -82,8 +85,8 @@
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <x-date-input-component
-                                        nameNe="registration_date" labelNe="दर्ता मिति *"
-                                        nameEn="en_registration_date" labelEn="Registration Date"
+                                        nameNe="c_registration_date" labelNe="दर्ता मिति *"
+                                        nameEn="en_c_registration_date" labelEn="Registration Date"
                                         :getTodayDate="false"
                                     />
                                 </div>
@@ -108,7 +111,10 @@
                                         <option value="">आवध्ता छान्नुहोस्</option>
                                         @foreach($affiliations as $affiliation)
                                             <option
-                                                value="{{$affiliation->id}}">{{$affiliation->name}}</option>
+                                                {{$affiliation->id==old('affiliation_id') ? 'selected' : ''}}
+                                                value="{{$affiliation->id}}">
+                                                {{$affiliation->name}}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('affiliation_id')

@@ -311,7 +311,8 @@
                                         </select>
                                         <button class="btn btn-sm btn-outline-primary" type="button"
                                                 id="button-enterprise"
-                                                title="उधम थप" data-bs-toggle="modal" data-bs-target="#enterprise-modal">
+                                                title="उधम थप" data-bs-toggle="modal"
+                                                data-bs-target="#enterprise-modal">
                                             <i class="fa fa-plus"></i></button>
                                     </div>
                                     @error('enterprise')
@@ -329,13 +330,13 @@
 
         </div>
     </div>
-{{--cooperative add modal--}}
+    {{--cooperative add modal--}}
     @include('grant::admin.inc.cooperative_form')
 
-{{--group add modal--}}
+    {{--group add modal--}}
     @include('grant::admin.inc.group_form')
 
-{{--enterprise add modal--}}
+    {{--enterprise add modal--}}
     @include('grant::admin.inc.enterprise_form')
 
     @push('scripts')
@@ -361,6 +362,51 @@
                         "<label for='spouse_name' class='form-label'>पति/पत्नी नाम</label>" +
                         "<input type='text' name='spouse_name' value='{{old('spouse_name')}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />" +
                         "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
+                }
+
+                //cooperative form submit
+                $('#cooperative-form').on('submit', function (e) {
+                    e.preventDefault()
+                    $.ajax({
+                        type: "post",
+                        url: "{{route('admin.grant.cooperative.store')}}",
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+                            $("#cooperativeSubmitBtn").prop('disabled', true);
+                            $("#cooperativeSubmitBtn").html("<i class='fa fa-spinner fa-spin'></i>");
+                        },
+                        success: function (resp) {
+                            $("#cooperativeSubmitBtn").prop('disabled', false);
+                            $("#cooperativeSubmitBtn").html("पेश गर्नुहोस्");
+                            $('#cooperatives').append("<option value=" + resp.data.cooperative_id + ">" + resp.data.cooperative_name + "</option>")
+                            toastMessage('success', resp.message)
+                            $('#cooperative-modal').modal('toggle')
+                            $('#cooperative-form').trigger('reset')
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            $('#cooperativeSubmitBtn').prop('disabled', false)
+                            $("#cooperativeSubmitBtn").html("पेश गर्नुहोस्");
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
+                        }
+                    });
+                })
+
+                //group form
+
+
+                function toastMessage(type, title) {
+                    swal.fire({
+                        title: title,
+                        toast: true,
+                        position: 'top-right',
+                        showConfirmButton: false,
+                        width: 450,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        icon: type,
+                    });
                 }
             });
         </script>
