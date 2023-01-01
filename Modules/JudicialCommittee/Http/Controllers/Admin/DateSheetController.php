@@ -10,6 +10,7 @@ use Modules\JudicialCommittee\Entities\DateSheet;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
 use Modules\JudicialCommittee\Http\Requests\DateSheet\StoreDateSheetRequest;
+use Modules\JudicialCommittee\Http\Requests\DateSheet\UpdateDateSheetRequest;
 
 class DateSheetController extends Controller
 {
@@ -17,15 +18,7 @@ class DateSheetController extends Controller
     {
         $this->checkAuthorization('dateSheet_access');
 
-        if (!$complaintApplication->dateSheet) {
-            return redirect(route('admin.judicialCommittee.complaintApplication.dateSheet.create', $complaintApplication));
-        }
-
-        if (JudicialCommitteeTemplate::where('type', JudicialTemplateTypeEnum::DATE_SHEET)->count() == 0) {
-            toast('टेम्प्लेट सेट गरिएको छैन', 'error');
-            return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
-        }
-
+        $complaintApplication->load('dateSheets');
 
         return view('judicialcommittee::admin.date_sheet.index', compact('complaintApplication'));
     }
@@ -34,8 +27,6 @@ class DateSheetController extends Controller
     {
         $this->checkAuthorization('dateSheet_create');
 
-        $complaintApplication->load('dateSheet');
-
         return view('judicialcommittee::admin.date_sheet.create', compact('complaintApplication'));
     }
 
@@ -43,10 +34,7 @@ class DateSheetController extends Controller
     {
         $this->checkAuthorization('dateSheet_create');
 
-        DateSheet::updateOrCreate(
-            ['complaint_application_id' => $complaintApplication->id],
-            $request->validated()
-        );
+        $complaintApplication->dateSheets()->create($request->validated());
 
         toast('तारिख पर्चा सफलतापूर्वक पेश गरियो', 'success');
 
@@ -55,17 +43,26 @@ class DateSheetController extends Controller
 
     public function show(ComplaintApplication $complaintApplication, DateSheet $dateSheet)
     {
-        return view('judicialcommittee::show');
+        $this->checkAuthorization('dateSheet_access');
+
+        return view('judicialcommittee::admin.date_sheet.show',compact('complaintApplication','dateSheet'));
     }
 
     public function edit(ComplaintApplication $complaintApplication, DateSheet $dateSheet)
     {
-        return view('judicialcommittee::edit');
+        $this->checkAuthorization('dateSheet_edit');
+
+        return view('judicialcommittee::admin.date_sheet.edit',compact('complaintApplication','dateSheet'));
     }
 
-    public function update(Request $request, ComplaintApplication $complaintApplication, DateSheet $dateSheet)
+    public function update(UpdateDateSheetRequest $request, ComplaintApplication $complaintApplication, DateSheet $dateSheet)
     {
-        //
+        $this->checkAuthorization('dateSheet_edit');
+
+        $dateSheet->update($request->validated());
+
+        toast('तारिख पर्चा सफलतापूर्वक अद्यावधिक गरियो','success');
+        return redirect(route('admin.judicialCommittee.complaintApplication.dateSheet.index',$complaintApplication));
     }
 
     public function destroy(ComplaintApplication $complaintApplication, DateSheet $dateSheet)

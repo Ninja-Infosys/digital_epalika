@@ -126,14 +126,14 @@ class ComplaintApplication extends Model
         return $this->hasMany(RelatedMember::class);
     }
 
-    public function dateSheet(): HasOne
+    public function dateSheets(): HasMany
     {
-        return $this->hasOne(DateSheet::class);
+        return $this->hasMany(DateSheet::class);
     }
 
-    public function defendantIssuedDeadline(): HasOne
+    public function defendantIssuedDeadlines(): HasMany
     {
-        return $this->hasOne(DefendantIssuedDeadline::class);
+        return $this->hasMany(DefendantIssuedDeadline::class);
     }
 
     public function dateCompensation(): HasOne
