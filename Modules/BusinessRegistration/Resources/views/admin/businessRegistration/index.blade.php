@@ -62,7 +62,7 @@
                                     <td>{{$businessDetail->submission_no ?? ''}}</td>
                                     <td>{{$businessDetail->registration_no ?? ''}}</td>
                                     <td>{{$businessDetail->registration_date_ne ?? ''}}</td>
-                                    <td>{{$businessDetail->proprietorDetail->name}}</td>
+                                    <td>{{$businessDetail->proprietorDetail->name ??''}}</td>
                                     <td>
                                         <span>{{$businessDetail->proprietorDetail->localBody->local_body??''}}
                                 - {{$businessDetail->proprietorDetail->ward_no??''}} </span>

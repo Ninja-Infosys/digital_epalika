@@ -63,56 +63,56 @@
                                                     <thead>
                                                     <tr>
                                                         <th>व्यवसायीको नाम</th>
-                                                        <th>{{$businessDetail->proprietorDetail->name}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->name??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>फोन नं.</th>
-                                                        <th>{{$businessDetail->proprietorDetail->phone}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->phone??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>इमेल</th>
-                                                        <th>{{$businessDetail->proprietorDetail->email}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->email??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>नागरिकता नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>लिङ्ग</th>
-                                                        <th>{{$businessDetail->proprietorDetail->gender->label()}}</th>
+                                                        <th>{{ !empty($businessDetail->proprietorDetail->gender) ? $businessDetail->proprietorDetail->gender?->label()??'' :'' }}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>इमेल</th>
-                                                        <th>{{$businessDetail->proprietorDetail->email}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->email??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> घर नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->house_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->house_no??''}}</th>
                                                     </tr>
 
                                                     <tr>
                                                         <th> व्यक्तिगत स्थाई लेखा नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->account_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->account_no??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> राष्ट्रियता परिचयपत्र नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->national_card_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->national_card_no??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> शैक्षिक योग्यता</th>
-                                                        <th>{{$businessDetail->proprietorDetail->education_qualification?->label() ??''}}</th>
+                                                        <th>{{  !empty($businessDetail->proprietorDetail->education_qualification) ? $businessDetail->proprietorDetail->education_qualification?->label() ??'' :''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> मुख्य पेशा</th>
-                                                        <th>{{$businessDetail->proprietorDetail->occupation}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->occupation??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> नागरिकता नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> जारी मिति</th>
-                                                        <th>{{$businessDetail->proprietorDetail->issue_date}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->issue_date??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> जारी जिल्ला</th>
@@ -154,7 +154,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> व्यवसायको प्रकृति</th>
-                                                        <th>{{$businessDetail->business_nature->label()??''}}</th>
+                                                        <th>{{$businessDetail->business_nature?->label()??''}}</th>
                                                     </tr>
 
                                                     <tr>
@@ -179,7 +179,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> पूजीको स्रोत</th>
-                                                        <th>{{$businessDetail->source_of_capital?->label()??''}}</th>
+                                                        <th>{{!empty($businessDetail->source_of_capital) ? $businessDetail->source_of_capital?->label()??'':''}}</th>
                                                     </tr>
 
 
@@ -213,7 +213,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if($businessDetail->proprietorDetail->threeGenerationDetails->count() >0)
+                                @if(!empty($businessDetail->proprietorDetail->threeGenerationDetails) && $businessDetail->proprietorDetail->threeGenerationDetails->count() >0)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">
@@ -236,11 +236,11 @@
                                                         <tbody>
                                                         @foreach($businessDetail->proprietorDetail->threeGenerationDetails as $threeGenerationDetail)
                                                             <tr>
-                                                                <td>{{$threeGenerationDetail->relation}}</td>
-                                                                <td>{{$threeGenerationDetail->name}}</td>
-                                                                <td>{{$threeGenerationDetail->name_en}}</td>
-                                                                <td>{{$threeGenerationDetail->citizenship_no}}</td>
-                                                                <td>{{$threeGenerationDetail->mobile_no}}</td>
+                                                                <td>{{$threeGenerationDetail->relation??''}}</td>
+                                                                <td>{{$threeGenerationDetail->name??''}}</td>
+                                                                <td>{{$threeGenerationDetail->name_en??''}}</td>
+                                                                <td>{{$threeGenerationDetail->citizenship_no??''}}</td>
+                                                                <td>{{$threeGenerationDetail->mobile_no??''}}</td>
                                                             </tr>
                                                         @endforeach
                                                         </tbody>
@@ -462,7 +462,7 @@
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
                                             <p>आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको
-                                            करदाता प्रमाणपत्रको प्रतिलिपि</p>
+                                                करदाता प्रमाणपत्रको प्रतिलिपि</p>
                                             <a href="{{route('admin.file-url-download', ['file_url'=>$businessDetail->tax_pay_file])}}"
                                                class="btn btn-xs btn-outline-primary">
                                                 <i class="fa fa-download"></i>
