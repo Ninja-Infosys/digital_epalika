@@ -1,6 +1,6 @@
 <div class="modal fade" id="grantType-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="staticBackdropLabel">नयाँ कृषक थप्नुहोस् ।</h3>
@@ -81,7 +81,7 @@
                     success: function (resp) {
                         $("#grantTypeSubmitForm").prop('disabled', false);
                         $("#grantTypeSubmitForm").html("पेश गर्नुहोस्");
-                        $('#grant_type_id').append("<option value=" + resp.data.grantType_id + ">" + resp.data.grantType_name + "</option>")
+                        $('#grant_type_id').append("<option value=" + resp.data.id + ">" + resp.data.title + "</option>")
                         toastMessage('success', resp.message)
                         $('#grantType-modal').modal('toggle')
                         $('#grantType-form').trigger('reset')
