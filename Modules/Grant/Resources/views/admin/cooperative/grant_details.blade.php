@@ -28,7 +28,7 @@
                         @can('cooperative_create')
                             <a href="{{route('admin.grant.cooperative.show', $cooperative)}}"
                                class="btn btn-sm btn-outline-primary">
-                               <i class="fa fa-list"></i> प्रोफाइल
+                               <i class="fa fa-user"></i> प्रोफाइल
                             </a>
                         @endcan
                     </div>

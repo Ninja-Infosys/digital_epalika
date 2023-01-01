@@ -26,7 +26,7 @@
                         <h4 class="header-title">अनुदान प्राप्तकर्ता</h4>
                         @can('grant_create')
                             <a href="{{route('admin.grant.grant.show',$grant)}}" class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-list"></i> प्रोफाइल
+                                <i class="fa fa-user"></i> प्रोफाइल
                             </a>
                         @endcan
                     </div>
