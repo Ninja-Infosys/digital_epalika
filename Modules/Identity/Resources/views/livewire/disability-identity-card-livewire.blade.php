@@ -730,8 +730,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="form.supporting_material" class="form-label"> साहायक सामाग्री प्रयोग
-                                    गर्ने </label>
+                                <label for="form.supporting_material" class="form-label"> साहायक सामाग्री प्रयोग गर्ने </label>
                                 <select
                                     class="form-select @error('form.supporting_material') is-invalid @enderror"
                                     wire:model="form.supporting_material"
