@@ -52,10 +52,58 @@
                     </fieldset>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
-                        <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
+                        <button type="submit" id="groupSubmitForm" class="btn btn-primary">पेश गर्नुहोस्</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        $(document).ready(function (){
+            //group form
+            $('#group-form').on('submit', function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: "post",
+                    url: "{{route('admin.grant.group.store')}}",
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        $("#groupSubmitForm").prop('disabled', true);
+                        $("#groupSubmitForm").html("<i class='fa fa-spinner fa-spin'></i>");
+                    },
+                    success: function (resp) {
+                        $("#groupSubmitForm").prop('disabled', false);
+                        $("#groupSubmitForm").html("पेश गर्नुहोस्");
+                        $('#groups').append("<option value=" + resp.data.group_id + ">" + resp.data.group_name + "</option>")
+                        toastMessage('success', resp.message)
+                        $('#group-modal').modal('toggle')
+                        $('#group-form').trigger('reset')
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $('#groupSubmitForm').prop('disabled', false)
+                        $("#groupSubmitForm").html("पेश गर्नुहोस्");
+                        toastMessage('error', XMLHttpRequest.responseJSON.message)
+                    }
+                });
+            })
+
+            function toastMessage(type, title) {
+                swal.fire({
+                    title: title,
+                    toast: true,
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    width: 450,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    icon: type,
+                });
+            }
+        })
+    </script>
+@endpush

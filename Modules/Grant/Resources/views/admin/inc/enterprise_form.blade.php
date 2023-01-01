@@ -8,7 +8,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form id="enterprise-form" enctype="multipart/form-data">
+                    @csrf
                     <fieldset>
                         <legend><h4 class="text-info"> उधम/फर्मको विवरण </h4></legend>
                         <div class="row">
@@ -27,10 +28,12 @@
                                         class="text-danger">*</span></label>
                                 <select name="enterprise_type_id" id="enterprise_type_id" class="form-select">
                                     <option value="">--- छान्नुहोस् ---</option>
-
-                                    <option value="">
-                                        dfg
-                                    </option>
+                                    @foreach($enterpriseTypes as $type)
+                                        <option
+                                            {{$type->id == old('enterprise_type_id')}}
+                                            value="{{$type->id}}"
+                                        >{{$type->title}}</option>
+                                    @endforeach
                                 </select>
                                 @error('enterprise_type_id')
                                 <p class="text-danger">{{ $message }}</p>
@@ -46,12 +49,61 @@
                         'local_body_id' => $officeSetting->local_body_id
                         ])
                     </fieldset>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
+                        <button type="submit" id="enterpriseSubmitForm" class="btn btn-primary">पेश गर्नुहोस्</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
-                <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
             </div>
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        $(document).ready(function (){
+            //enterprise form
+            $('#enterprise-form').on('submit', function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: "post",
+                    url: "{{route('admin.grant.enterprise.store')}}",
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        $("#enterpriseSubmitForm").prop('disabled', true);
+                        $("#enterpriseSubmitForm").html("<i class='fa fa-spinner fa-spin'></i>");
+                    },
+                    success: function (resp) {
+                        $("#enterpriseSubmitForm").prop('disabled', false);
+                        $("#enterpriseSubmitForm").html("पेश गर्नुहोस्");
+                        $('#enterprises').append("<option value=" + resp.data.enterprise_id + ">" + resp.data.enterprise_name + "</option>")
+                        toastMessage('success', resp.message)
+                        $('#enterprise-modal').modal('toggle')
+                        $('#enterprise-form').trigger('reset')
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $('#enterpriseSubmitForm').prop('disabled', false)
+                        $("#enterpriseSubmitForm").html("पेश गर्नुहोस्");
+                        toastMessage('error', XMLHttpRequest.responseJSON.message)
+                    }
+                });
+            })
+
+
+            function toastMessage(type, title) {
+                swal.fire({
+                    title: title,
+                    toast: true,
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    width: 450,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    icon: type,
+                });
+            }
+        })
+    </script>
+@endpush

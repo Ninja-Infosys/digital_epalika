@@ -282,8 +282,8 @@
                                     <label for="group" class="form-label">
                                         समूह</label>
                                     <div class="input-group">
-                                        <select name="group[]" multiple data-toggle="select2"
-                                                id="group" class="form-control" aria-describedby="button-group">
+                                        <select name="groups[]" multiple data-toggle="select2"
+                                                id="groups" class="form-control" aria-describedby="button-group">
                                             <option disabled>--- छान्नुहोस् ---</option>
                                             @foreach($groups as $group)
                                                 <option value="{{$group->id}}">{{$group->name}}</option>
@@ -301,8 +301,8 @@
                                     <label for="enterprise" class="form-label">
                                         उद्यम</label>
                                     <div class="input-group">
-                                        <select name="enterprise[]" multiple data-toggle="select2"
-                                                id="enterprise" class="form-control"
+                                        <select name="enterprises[]" multiple data-toggle="select2"
+                                                id="enterprises" class="form-control"
                                                 aria-describedby="button-enterprise">
                                             <option disabled>--- छान्नुहोस् ---</option>
                                             @foreach($enterprises as $enterprise)
@@ -315,7 +315,7 @@
                                                 data-bs-target="#enterprise-modal">
                                             <i class="fa fa-plus"></i></button>
                                     </div>
-                                    @error('enterprise')
+                                    @error('enterprises')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
@@ -364,54 +364,6 @@
                         "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
                 }
 
-                //cooperative form submit
-                $('#cooperative-form').on('submit', function (e) {
-                    e.preventDefault()
-                    alert('hello')
-                    {{--$.ajax({--}}
-                    {{--    type: "post",--}}
-                    {{--    url: "{{route('admin.grant.cooperative.store')}}",--}}
-                    {{--    data: new FormData(this),--}}
-                    {{--    processData: false,--}}
-                    {{--    contentType: false,--}}
-                    {{--    beforeSend: function () {--}}
-                    {{--        $("#cooperativeSubmitBtn").prop('disabled', true);--}}
-                    {{--        $("#cooperativeSubmitBtn").html("<i class='fa fa-spinner fa-spin'></i>");--}}
-                    {{--    },--}}
-                    {{--    success: function (resp) {--}}
-                    {{--        $("#cooperativeSubmitBtn").prop('disabled', false);--}}
-                    {{--        $("#cooperativeSubmitBtn").html("पेश गर्नुहोस्");--}}
-                    {{--        $('#cooperatives').append("<option value=" + resp.data.cooperative_id + ">" + resp.data.cooperative_name + "</option>")--}}
-                    {{--        toastMessage('success', resp.message)--}}
-                    {{--        $('#cooperative-modal').modal('toggle')--}}
-                    {{--        $('#cooperative-form').trigger('reset')--}}
-                    {{--    },--}}
-                    {{--    error: function (XMLHttpRequest, textStatus, errorThrown) {--}}
-                    {{--        $('#cooperativeSubmitBtn').prop('disabled', false)--}}
-                    {{--        $("#cooperativeSubmitBtn").html("पेश गर्नुहोस्");--}}
-                    {{--        toastMessage('error', XMLHttpRequest.responseJSON.message)--}}
-                    {{--    }--}}
-                    {{--});--}}
-                })
-
-                //group form
-                $('#group-form').on('submit', function (e) {
-                    e.preventDefault()
-                    alert('hello')
-                })
-
-                function toastMessage(type, title) {
-                    swal.fire({
-                        title: title,
-                        toast: true,
-                        position: 'top-right',
-                        showConfirmButton: false,
-                        width: 450,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        icon: type,
-                    });
-                }
             });
         </script>
     @endpush

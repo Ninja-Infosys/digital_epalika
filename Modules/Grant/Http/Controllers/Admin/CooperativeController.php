@@ -64,7 +64,7 @@ class CooperativeController extends Controller
                     'cooperative_id' => $cooperative->id,
                     'cooperative_name' => $cooperative->name
                 ],
-                'message' => 'Cooperative Added Successfuly'
+                'message' => 'Cooperative Added Successfully'
             ]);
         }
 
