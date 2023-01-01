@@ -18,7 +18,7 @@ class CardColorController extends Controller
 
         $cardColors = CardColor::where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['title','title_en'], request('search'));
+                $q->whereLike(['title'], request('search'));
             }
         })
             ->latest()->paginate(10);;

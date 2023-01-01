@@ -15,8 +15,9 @@ class StoreGovernmentalDisablityRequest extends FormRequest
     public function rules():array
     {
         return [
-            'type' => ['required','string','max:255'],
-            'code_color_id'=>['required','string','max:255']
+            'title' => ['required','string','max:255'],
+            'title_en' => ['required','string','max:255'],
+            'color'=>['required','string','max:255']
         ];
     }
 }

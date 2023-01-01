@@ -256,16 +256,24 @@
                             <legend><h4 class="text-info">संलग्नता ? *</h4></legend>
                             <h6 class="py-2"> नोट: कुनै समूह, सहकारी वा उद्यममा संलग्न भएमा ।</h6>
                             <div class="row">
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-4  mb-2">
                                     <label for="cooperatives" class="form-label">
                                         सहकारी</label>
-                                    <select name="cooperatives[]" multiple data-toggle="select2"
-                                            id="cooperatives" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($cooperatives as $cooperative)
-                                            <option value="{{$cooperative->id}}">{{$cooperative->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="input-group">
+                                        <select name="cooperatives[]" multiple data-toggle="select2"
+                                                id="cooperatives" class="form-select"
+                                                aria-describedby="button-cooperatives">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($cooperatives as $cooperative)
+                                                <option value="{{$cooperative->id}}">{{$cooperative->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-cooperatives"
+                                                title="सहकारी थप" data-bs-toggle="modal"
+                                                data-bs-target="#cooperative-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('cooperatives')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -273,13 +281,18 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="group" class="form-label">
                                         समूह</label>
-                                    <select name="group[]" multiple data-toggle="select2"
-                                            id="group" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($groups as $group)
-                                            <option value="{{$group->id}}">{{$group->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="input-group">
+                                        <select name="group[]" multiple data-toggle="select2"
+                                                id="group" class="form-control" aria-describedby="button-group">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($groups as $group)
+                                                <option value="{{$group->id}}">{{$group->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button" id="button-group"
+                                                title="समुह थप" data-bs-toggle="modal" data-bs-target="#group-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('group')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -287,13 +300,20 @@
                                 <div class="col-md-4 mb-2">
                                     <label for="enterprise" class="form-label">
                                         उद्यम</label>
-                                    <select name="enterprise[]" multiple data-toggle="select2"
-                                            id="enterprise" class="form-control">
-                                        <option disabled>--- छान्नुहोस् ---</option>
-                                        @foreach($enterprises as $enterprise)
-                                            <option value="{{$enterprise->id}}">{{$enterprise->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="input-group">
+                                        <select name="enterprise[]" multiple data-toggle="select2"
+                                                id="enterprise" class="form-control"
+                                                aria-describedby="button-enterprise">
+                                            <option disabled>--- छान्नुहोस् ---</option>
+                                            @foreach($enterprises as $enterprise)
+                                                <option value="{{$enterprise->id}}">{{$enterprise->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-enterprise"
+                                                title="उधम थप" data-bs-toggle="modal" data-bs-target="#enterprise-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('enterprise')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -306,8 +326,18 @@
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
+{{--cooperative add modal--}}
+    @include('grant::admin.inc.cooperative_form')
+
+{{--group add modal--}}
+    @include('grant::admin.inc.group_form')
+
+{{--enterprise add modal--}}
+    @include('grant::admin.inc.enterprise_form')
+
     @push('scripts')
         <script>
             $(document).ready(function () {
@@ -329,11 +359,14 @@
                 function spouseInput() {
                     return "<div class='col-md-4 mb-2'>" +
                         "<label for='spouse_name' class='form-label'>पति/पत्नी नाम</label>" +
-                        "<input type='text' name='spouse_name' value='{{old('spouse_name')}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />"+
+                        "<input type='text' name='spouse_name' value='{{old('spouse_name')}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />" +
                         "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
                 }
             });
         </script>
+    @endpush
+    @push('style')
+
     @endpush
 @endsection
 

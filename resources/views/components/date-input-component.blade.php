@@ -35,6 +35,7 @@
                 $("#{{$nameNe}}").nepaliDatePicker({
                     ndpYear: true,
                     ndpMonth: true,
+                    container:"{{$container}}",
                     onChange: function () {
                         let parsedDate = NepaliFunctions.ParseDate($("#{{$nameNe}}").val());
                         let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)

@@ -24,13 +24,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ अपांगताको प्रकार थप्नुहोस्</h4>
-                        <a href="{{route('identity.admin.setting.disabilityType.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('identity.admin.setting.governmentalDisabilityType.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> अपांगताको प्रकार सुची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('identity.admin.setting.disabilityType.store')}}" method="post">
+                    <form action="{{route('identity.admin.setting.governmentalDisabilityType.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-2">
@@ -47,7 +48,39 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="title_en" class="form-label">शिर्षक (English) *</label>
+                                <input
+                                    type="text"
+                                    name="title_en"
+                                    value="{{old('title_en')}}"
+                                    class="form-control @error('title_en') is-invalid @enderror"
+                                    id="title_en"
+                                    placeholder="शिर्षक (English)"
+                                />
+                                @error('title_en')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
 
+                            <div class="col-md-12 mb-2">
+                                <div class="mb-3 xl:w-96">
+                                    <label for="color">Card Color</label>
+                                    <select name="color" id="color"
+                                            class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none form-control"
+                                            aria-label="Default select example">
+                                        <option value="">Select Category</option>
+                                        @foreach ($cardColors as $cardColor)
+                                            <option value="{{ $cardColor->color }}" {{old('color')==$cardColor->color ? 'selected':''}}>
+                                                {{ $cardColor->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('color')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">

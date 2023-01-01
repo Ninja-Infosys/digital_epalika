@@ -10,8 +10,9 @@ return new class extends Migration
     {
         Schema::create('governmental_disability_types', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->foreignId('card_color_id')->constrained();
+            $table->string('title');
+            $table->string('title_en');
+            $table->string('color');
             $table->timestamps();
             $table->softDeletes();
         });

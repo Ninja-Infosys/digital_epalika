@@ -15,9 +15,9 @@ class JudicialCommitteeTemplateController extends Controller
     {
         $this->checkAuthorization('judicialCommitteeTemplate_access');
 
-        $judicialCommitteeTemplates=JudicialCommitteeTemplate::all();
+        $judicialCommitteeTemplates = JudicialCommitteeTemplate::all();
 
-        return view('judicialcommittee::admin.setting.template.index',compact('judicialCommitteeTemplates'));
+        return view('judicialcommittee::admin.setting.template.index', compact('judicialCommitteeTemplates'));
     }
 
     public function create()
@@ -48,7 +48,7 @@ class JudicialCommitteeTemplateController extends Controller
     {
         $this->checkAuthorization('judicialCommitteeTemplate_edit');
 
-        return view('judicialcommittee::admin.setting.template.edit',compact('judicialCommitteeTemplate'));
+        return view('judicialcommittee::admin.setting.template.edit', compact('judicialCommitteeTemplate'));
     }
 
     public function update(UpdateJudicialCommitteeTemplateRequest $request, JudicialCommitteeTemplate $judicialCommitteeTemplate)
@@ -67,7 +67,7 @@ class JudicialCommitteeTemplateController extends Controller
 
         $judicialCommitteeTemplate->delete();
 
-        toast('टेम्प्लेट सफलतापूर्वक मेटियो','success');
+        toast('टेम्प्लेट सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 }
