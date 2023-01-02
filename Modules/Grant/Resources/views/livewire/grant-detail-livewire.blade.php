@@ -34,6 +34,7 @@
             </div>
             <div class="col-md-4 mb-2">
                 <label for="model_id" class="form-label">अनुदानग्राही </label>
+                <div class="input-group">
                 <select wire:model="form.model_id" id="model_id"
                         class="form-control @error('form.model_id') is-invalid @enderror">
                     <option value="">--अनुदानग्राही छान्नुहोस्--</option>
@@ -43,6 +44,12 @@
                         </option>
                     @endforeach
                 </select>
+                <button class="btn btn-sm btn-outline-primary" type="button"
+                        id="button-enterprise"
+                        title="उधम थप" data-bs-toggle="modal"
+                        data-bs-target="#enterprise-modal">
+                    <i class="fa fa-plus"></i></button>
+            </div>
                 @error('form.model_id')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror

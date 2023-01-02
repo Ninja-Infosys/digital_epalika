@@ -98,6 +98,7 @@ class GrantDetailLivewire extends Component
                 case 'cooperative':
                     $this->grantees = Cooperative::all();
                     $this->form['model_type'] = Cooperative::class;
+
                     break;
                 case 'group':
                     $this->grantees = Group::all();
