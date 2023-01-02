@@ -60,7 +60,6 @@ class FarmerController extends Controller
             $farmer->groups()->attach($request->input('groups'));
             $farmer->enterprises()->attach($request->input('enterprises'));
             $farmer->cooperatives()->attach($request->input('cooperatives'));
-
             return $farmer;
         });
         if ($request->ajax()) {

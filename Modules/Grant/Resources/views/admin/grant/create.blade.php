@@ -95,7 +95,7 @@
                                     </select>
                                     <button class="btn btn-sm btn-outline-primary" type="button"
                                             id="button-enterprise"
-                                            title="अनुदानको प्रकार थप" data-bs-toggle="modal"
+                                            title="अनुदान कार्यक्रम थप" data-bs-toggle="modal"
                                             data-bs-target="#grantProgram-modal">
                                         <i class="fa fa-plus"></i></button>
                                 </div>
