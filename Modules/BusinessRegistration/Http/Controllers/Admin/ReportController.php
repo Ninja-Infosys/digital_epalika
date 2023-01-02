@@ -60,7 +60,7 @@ class ReportController extends Controller
         $excelUrl = $this->storeExcelFile($lists);
 
         return response()->json([
-            'lists' => BusinessDetailResource::collection($lists),
+            'data' => BusinessDetailResource::collection($lists),
             'excelUrl' => $excelUrl
         ]);
     }
