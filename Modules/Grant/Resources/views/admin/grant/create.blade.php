@@ -190,7 +190,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="remarks" class="form-label">कैफियत</label>
                                     <input
                                         type="text"

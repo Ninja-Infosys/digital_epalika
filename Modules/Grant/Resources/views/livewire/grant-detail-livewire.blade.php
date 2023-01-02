@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-md-4 mb-2">
                 <label for="grant_id" class="form-label">कार्यक्रम/क्रियाकलाप * </label>
+
                 <select wire:model="form.grant_id" id="grant_id"
                         class="form-control @error('form.grant_id') is-invalid @enderror">
                     <option value="">कार्यक्रम/क्रियाकलाप छान्नुहोस्</option>
@@ -34,6 +35,7 @@
             </div>
             <div class="col-md-4 mb-2">
                 <label for="model_id" class="form-label">अनुदानग्राही </label>
+                <div class="input-group">
                 <select wire:model="form.model_id" id="model_id"
                         class="form-control @error('form.model_id') is-invalid @enderror">
                     <option value="">--अनुदानग्राही छान्नुहोस्--</option>
@@ -43,6 +45,12 @@
                         </option>
                     @endforeach
                 </select>
+                <button class="btn btn-sm btn-outline-primary" type="button"
+                        id="button-popup-modal"
+                        title="उधम थप" data-bs-toggle="modal"
+                        data-bs-target="#modal">
+                    <i class="fa fa-plus"></i></button>
+            </div>
                 @error('form.model_id')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
@@ -91,7 +99,7 @@
                 @enderror
             </div>
             @if($form['is_old']==1)
-                <div class="col-md-4 mb-2">
+                <div class="col-md-6 mb-2">
                     <label for="prev_fiscal_year_id" class="form-label">पहिले पाएको आर्थिक बर्ष * </label>
                     <select wire:model="form.prev_fiscal_year_id" id="prev_fiscal_year_id"
                             class="form-control @error('form.prev_fiscal_year_id') is-invalid @enderror">
@@ -106,7 +114,7 @@
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-4 mb-2">
+                <div class="col-md-6 mb-2">
                     <label for="investment_amount" class="form-label"> लगानी *</label>
                     <input
                         type="number"
@@ -120,13 +128,13 @@
                     @enderror
                 </div>
             @endif
-            <div class="col-md-6 mb-2">
+            <div class="col-md-12 mb-2">
                 <label for="remarks" class="form-label">कैफियत</label>
                 <textarea
                     wire:model="form.remarks"
                     class="form-control @error('form.remarks') is-invalid @enderror"
                     placeholder="कैफियत"
-                    id="remarks" cols="30" rows="3"></textarea>
+                    id="remarks" cols="30" rows="2"></textarea>
                 @error('form.remarks')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
@@ -236,3 +244,6 @@
         </button>
     </div>
 </form>
+@include('grant::admin.inc.farmer_form')
+@include('grant::admin.inc.group_form')
+@include('grant::admin.inc.cooperative_form')
