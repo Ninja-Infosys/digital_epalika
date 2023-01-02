@@ -46,9 +46,9 @@
                     @endforeach
                 </select>
                 <button class="btn btn-sm btn-outline-primary" type="button"
-                        id="button-enterprise"
+                        id="button-popup-modal"
                         title="उधम थप" data-bs-toggle="modal"
-                        data-bs-target="#enterprise-modal">
+                        data-bs-target="#modal">
                     <i class="fa fa-plus"></i></button>
             </div>
                 @error('form.model_id')
