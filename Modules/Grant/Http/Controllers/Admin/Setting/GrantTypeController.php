@@ -44,8 +44,8 @@ class GrantTypeController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'data' => [
-                    'grantProgram_id' => $grantType->id,
-                    'grantProgram_name' => $grantType->name
+                    'id' => $grantType->id,
+                    'title' => $grantType->title
                 ],
                 'message' => 'अनुदान प्रकार सफलता पुर्वक थपियो'
             ]);

@@ -13,7 +13,8 @@ use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Http\Requests\GrantDetail\StoreGrantDetailRequest;
 use Modules\Grant\Http\Requests\GrantDetail\UpdateGrantDetailRequest;
 
-class GrantDetailController extends Controller
+class
+GrantDetailController extends Controller
 {
     public function index()
     {
