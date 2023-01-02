@@ -42,8 +42,8 @@ class GrantProgramController extends Controller
         if ($request->ajax()){
             return response()->json([
                 'data'=> [
-                    'id'=>$grantProgram->id,
-                    'name'=>$grantProgram->name
+                    'grantProgram_id'=>$grantProgram->id,
+                    'grantProgram_name'=>$grantProgram->name
                 ],
                 'message'=> 'अनुदान कार्यक्रम सफलता पुर्वक थपियो'
             ]);

@@ -3,14 +3,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="staticBackdropLabel">नयाँ कृषक थप्नुहोस् ।</h3>
+                <h3 class="modal-title" id="staticBackdropLabel">नयाँ अनुदान प्रकार थप्नुहोस् ।</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="grantType-form" enctype="multipart/form-data">
                     @csrf
-                    <fieldset>
-                        <legend><h4 class="text-info"> कृषकको विवरण </h4></legend>
                         <div class="row">
                             <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">अनुदान प्रकार *</label>
@@ -28,7 +26,6 @@
                             </div>
 
                         </div>
-                    </fieldset>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">रद्द गर्नुहोस्</button>
                         <button type="submit" id="grantTypeSubmitForm" class="btn btn-primary">पेश गर्नुहोस्</button>
