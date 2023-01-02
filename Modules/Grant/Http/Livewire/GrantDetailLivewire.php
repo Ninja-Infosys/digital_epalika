@@ -10,9 +10,11 @@ use Modules\Grant\Entities\Enterprise;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantDetail;
+use Modules\Grant\Entities\GrantOffice;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Entities\Group;
+use Modules\HelpDesk\Entities\Branch;
 
 class GrantDetailLivewire extends Component
 {
@@ -22,6 +24,14 @@ class GrantDetailLivewire extends Component
     public $grantees = [];
 
     public $fiscalYears = [];
+
+    public $grantTypes= [];
+
+    public $grantPrograms= [];
+
+    public $grantOffices= [];
+
+    public $branches = [];
 
     public array $form = [
         'grant_id' => null,
@@ -46,6 +56,10 @@ class GrantDetailLivewire extends Component
     {
         $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
+        $this->grantTypes = GrantType::all();
+        $this->grantPrograms= GrantProgram::all();
+        $this->grantOffices= GrantOffice::all();
+        $this->branches= Branch::all();
     }
 
     protected array $rules = [
