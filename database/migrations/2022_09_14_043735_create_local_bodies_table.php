@@ -9,10 +9,10 @@ return new class () extends Migration {
     {
         Schema::create('local_bodies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('district_id')->comment('जिल्ला आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('district_id')->constrained()->cascadeOnDelete();
             $table->string('local_body')->comment('स्थानीय निकाय');
-            $table->string('local_body_en')->nullable()->comment('स्थानीय निकाय en');
-            $table->integer('wards')->comment('वार्ड');
+            $table->string('local_body_en')->nullable()->comment('स्थानीय निकाय (अंग्रेजीमा)');
+            $table->integer('wards');
             $table->timestamps();
             $table->softDeletes();
         });

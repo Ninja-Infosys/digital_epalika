@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'businessRegistration' => [
+    'businessregistration' => [
         "business_type" => "निवेदनको प्रकार",
         "business_detail_name" => "व्यवसाय विवरण नाम (नेपाली)",
         "submission_no" => "सबमिशन नम्बर",
@@ -45,6 +45,13 @@ return [
         "title" => "शिर्षक",
         "registration_amount" => "दर्ता शुल्क",
         "renew_amount" => "नवीकरण शुल्क",
+        "province" => "प्रदेश ",
+        "province_en" => "प्रदेश en",
+        "district" => "जिल्ला",
+        "district_en" => "जिल्ला en",
+        "local_body" => "स्थानीय निकाय",
+        "local_body_en" => "स्थानीय निकाय en",
+        "wards" => "वार्ड",
         "relation" => "नाता",
         "name" => "नाम",
         "citizenship_no" => "नागरिकता नम्बर",
