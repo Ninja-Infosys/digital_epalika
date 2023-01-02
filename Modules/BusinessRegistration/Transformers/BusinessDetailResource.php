@@ -27,10 +27,10 @@ class BusinessDetailResource extends JsonResource
             $address .= ", " . $this->province->province;
         }
         return [
-            'व्यवसायको प्रकार' => $this->business_type ?? '',
-            'व्यवसायको प्रकृति' => $this->business_nature ?? '',
+            'व्यवसायको प्रकार' => $this->business_type ?? 'private business',
+            'व्यवसायको प्रकृति' => $this->business_nature ?? 'private',
 //            'प्रोपाईटरको विवरण' => $this->whenLoaded('proprietorDetail') ?? '',
-            'व्यवसायको नाम' => $this->business_detail_name ?? '',
+            'व्यवसायको नाम' => $this->business_detail_name ?? 'data of test',
             'व्यवसायको नाम (अंग्रेजीमा)' => $this->business_detail_name_en ?? '',
             'ठेगाना' => $address ?? '',
 //            'लगानी राजस्व' => $this->whenLoaded('investmentRevenue') ?? '',
