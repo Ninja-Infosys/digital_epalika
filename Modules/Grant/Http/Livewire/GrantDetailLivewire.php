@@ -8,6 +8,7 @@ use Livewire\Component;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Entities\Enterprise;
+use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantDetail;
@@ -27,6 +28,8 @@ class GrantDetailLivewire extends Component
     public $fiscalYears = [];
 
     public $cooperativeTypes = [];
+
+    public $enterpriseTypes= [];
 
     public array $form = [
         'grant_id' => null,
@@ -54,6 +57,7 @@ class GrantDetailLivewire extends Component
         $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
         $this->cooperativeTypes = CooperativeType::all();
+        $this->enterpriseTypes = EnterpriseType::all();
     }
 
     protected array $rules = [
