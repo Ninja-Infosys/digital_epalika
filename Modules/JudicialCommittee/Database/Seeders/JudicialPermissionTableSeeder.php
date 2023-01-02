@@ -39,7 +39,11 @@ class JudicialPermissionTableSeeder extends Seeder
             'dateCompensation_access',
             'dateCompensation_create',
             'dateCompensation_edit',
-            'dateCompensation_delete'
+            'dateCompensation_delete',
+            'writtenAnswer_access',
+            'writtenAnswer_create',
+            'writtenAnswer_edit',
+            'writtenAnswer_delete',
         ];
 
         $this->storePermission($permissions);

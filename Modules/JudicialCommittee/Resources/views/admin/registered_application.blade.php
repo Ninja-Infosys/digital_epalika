@@ -77,6 +77,11 @@
                                                             <i class="fa fa-calendar-alt"> तारिख भरपाई </i>
                                                         </a>
                                                     @endcan
+                                                    @can('writtenAnswer_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.writtenAnswer.index', $complaintApplication) }}" class="dropdown-item">
+                                                            <i class="fa fa-calendar-alt"> लिखित जवाफ </i>
+                                                        </a>
+                                                    @endcan
                                                 </div>
                                             </div>
 
