@@ -200,6 +200,8 @@
                         toastMessage('success', resp.message)
                         $('#farmer-modal').modal('toggle')
                         $('#farmer-form').trigger('reset')
+                        //for grant detail livewire
+                        Livewire.emit('fetchGranteesData');
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         $('#farmerSubmitBtn').prop('disabled', false)

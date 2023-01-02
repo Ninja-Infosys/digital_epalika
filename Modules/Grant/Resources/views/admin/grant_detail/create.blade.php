@@ -38,19 +38,4 @@
             </div>
         </div>
     </div>
-
-    @push('scripts')
-        <script>
-            $(document).ready(function (){
-                $("#grant_for").on('change', function (){
-                    // alert($(this).val())
-                    let modal_id= $(this).val();
-                    switch (modal_id){
-                        case 'farmer':
-                    }
-                })
-
-            });
-        </script>
-    @endpush
 @endsection
