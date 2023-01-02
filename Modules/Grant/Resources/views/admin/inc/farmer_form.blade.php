@@ -108,6 +108,9 @@
                                     id="father_name"
                                     placeholder="बुवाको नाम थर"
                                 />
+                                @error('father_name')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="grandfather_name" class="form-label">बाजे/ससुराको नाम थर *</label>
@@ -200,6 +203,8 @@
                         toastMessage('success', resp.message)
                         $('#farmer-modal').modal('toggle')
                         $('#farmer-form').trigger('reset')
+                        //for grant detail livewire
+                        Livewire.emit('fetchGranteesData');
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         $('#farmerSubmitBtn').prop('disabled', false)

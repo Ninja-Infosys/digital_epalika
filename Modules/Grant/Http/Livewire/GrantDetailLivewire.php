@@ -6,7 +6,9 @@ use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
 use Livewire\Component;
 use Modules\Grant\Entities\Cooperative;
+use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Entities\Enterprise;
+use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantDetail;
@@ -25,9 +27,9 @@ class GrantDetailLivewire extends Component
 
     public $fiscalYears = [];
 
-    public $cooperativeTypes=[];
+    public $cooperativeTypes = [];
 
-
+    public $enterpriseTypes= [];
 
     public array $form = [
         'grant_id' => null,
@@ -48,10 +50,14 @@ class GrantDetailLivewire extends Component
         'contact' => null,
     ];
 
+    protected $listeners = ['fetchGranteesData'];
+
     public function mount()
     {
         $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
+        $this->cooperativeTypes = CooperativeType::all();
+        $this->enterpriseTypes = EnterpriseType::all();
     }
 
     protected array $rules = [
@@ -92,13 +98,8 @@ class GrantDetailLivewire extends Component
         ]);
     }
 
-    public function render()
+    function fetchGranteesData()
     {
-        if (!empty($this->form['grant_id'])) {
-            $this->grant = Grant::find($this->form['grant_id']);
-            $this->form['grant_amount'] = $this->grant->grant_amount;
-        }
-
         if (!empty($this->form['grant_for'])) {
             switch ($this->form['grant_for']) {
                 case 'cooperative':
@@ -118,6 +119,16 @@ class GrantDetailLivewire extends Component
                     $this->form['model_type'] = Farmer::class;
             }
         }
+    }
+
+    public function render()
+    {
+        if (!empty($this->form['grant_id'])) {
+            $this->grant = Grant::find($this->form['grant_id']);
+            $this->form['grant_amount'] = $this->grant->grant_amount;
+        }
+
+        $this->fetchGranteesData();
 
         if ($this->form['is_old'] == 0) {
             $this->form['prev_fiscal_year_id'] = null;

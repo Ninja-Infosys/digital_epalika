@@ -45,10 +45,9 @@
                         </option>
                     @endforeach
                 </select>
-                <button class="btn btn-sm btn-outline-primary" type="button"
-                        id="button-popup-modal"
-                        title="उधम थप" data-bs-toggle="modal"
-                        data-bs-target="#modal">
+                <button wire:ignore class="btn btn-sm btn-outline-primary" type="button"
+                        id="form-popup-button"
+                        title="उधम थप" data-bs-toggle="modal">
                     <i class="fa fa-plus"></i></button>
             </div>
                 @error('form.model_id')
@@ -156,7 +155,6 @@
                     <option value="">--वडा नं. छान्नुहोस्--</option>
                     @foreach($officeSetting->localBody->ward_no as $ward)
                         <option
-                            {{old('form.word_no')}}
                             value="{{$ward}}">
                             {{$ward}}
                         </option>
@@ -247,3 +245,36 @@
 @include('grant::admin.inc.farmer_form')
 @include('grant::admin.inc.group_form')
 @include('grant::admin.inc.cooperative_form')
+@include('grant::admin.inc.enterprise_form')
+
+@once
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                $("#grant_for").on('change', function () {
+                    setTargetForm($(this).val())
+                })
+
+                function setTargetForm(grant_for) {
+                    switch (grant_for) {
+                        case 'cooperative':
+                            setButtonAttribute('cooperative-modal')
+                            break;
+                        case 'group':
+                            setButtonAttribute('group-modal')
+                            break;
+                        case 'enterprise':
+                            setButtonAttribute('enterprise-modal')
+                            break;
+                        default:
+                            setButtonAttribute('farmer-modal')
+                    }
+                }
+
+                function setButtonAttribute(attrVal){
+                    $('#form-popup-button').attr('data-bs-target', '#'+attrVal)
+                }
+            });
+        </script>
+    @endpush
+@endonce

@@ -144,7 +144,7 @@
                                         name="father_name"
                                         value="{{old('father_name')}}"
                                         class="form-control @error('father_name') is-invalid @enderror"
-                                        id="phone_no"
+                                        id="father_name"
                                         placeholder="बुवाको नाम थर"
                                     />
                                     @error('father_name')
@@ -352,8 +352,6 @@
                 function setStatus(status) {
                     if (status === 'married') {
                         $('#marital-status-div').after(spouseInput())
-                    } else {
-                        $('#marital-status-div').next().remove()
                     }
                 }
 

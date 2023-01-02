@@ -109,6 +109,8 @@
                         toastMessage('success', resp.message)
                         $('#cooperative-modal').modal('toggle')
                         $('#cooperative-form').trigger('reset')
+                        //for grant detail livewire
+                        Livewire.emit('fetchGranteesData');
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         $('#cooperativeSubmitBtn').prop('disabled', false)
