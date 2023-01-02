@@ -1,51 +1,51 @@
-function createTable(headerData,bodyData) {
+function createTable(headerData, bodyData) {
     // Get the reference for the body
     const tableDiv = document.getElementById("report-table");
 
-if (bodyData.length > 0) {
+    if (bodyData.length > 0) {
 
-    // creates a <table> element
-    const tbl = document.createElement("table");
-    tbl.className = "table table-hover table-striped table-bordered table-responsive";
+        // creates a <table> element
+        const tbl = document.createElement("table");
+        tbl.className = "table table-hover table-striped table-bordered table-responsive";
 
-    const thead = document.createElement("thead");
-    const header = document.createElement("tr");
-    headerData.forEach(element => {
-        const headerCell = document.createElement("th");
-        const cellHeader = document.createTextNode(element);
-        headerCell.appendChild(cellHeader);
-        header.appendChild(headerCell);
-    });
-    thead.appendChild(header);
-    tbl.appendChild(thead)
+        const thead = document.createElement("thead");
+        const header = document.createElement("tr");
+        headerData.forEach(element => {
+            const headerCell = document.createElement("th");
+            const cellHeader = document.createTextNode(element);
+            headerCell.appendChild(cellHeader);
+            header.appendChild(headerCell);
+        });
+        thead.appendChild(header);
+        tbl.appendChild(thead)
 
-    const tbody = document.createElement("tbody");
-    // creating rows
-    bodyData.forEach(data => {
-        const row = document.createElement("tr");
-        data.forEach(element => {
-            const cell = document.createElement("td");
-            const cellText = document.createTextNode(element);
-            cell.appendChild(cellText);
-            row.appendChild(cell);
+        const tbody = document.createElement("tbody");
+        // creating rows
+        bodyData.forEach(data => {
+            const row = document.createElement("tr");
+            data.forEach(element => {
+                const cell = document.createElement("td");
+                const cellText = document.createTextNode(element);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+            });
+
+            // add the row to the end of the table body
+            tbody.appendChild(row);
+            tbl.appendChild(tbody);
         });
 
-        // add the row to the end of the table body
-        tbody.appendChild(row);
-        tbl.appendChild(tbody);
-    });
+        // put the <table> in the <body>
+        tableDiv.appendChild(tbl);
+        return tableDiv;
 
-    // put the <table> in the <body>
-    tableDiv.appendChild(tbl);
-    return tableDiv;
-
-} else {
-    const noData = document.createElement("h3");
-    noData.className = "text-center";
-    noData.innerHTML = "No Data Found";
-    tableDiv.appendChild(noData);
-    return tableDiv;
-}
+    } else {
+        const noData = document.createElement("h3");
+        noData.className = "text-center";
+        noData.innerHTML = "No Data Found";
+        tableDiv.appendChild(noData);
+        return tableDiv;
+    }
 
 }
 
@@ -86,23 +86,22 @@ $(document).ready(function () {
         });
     })
 
-    function assignResponseData(data)
-    {
-        let headerData=[];
-        let bodyData=[];
-        Object.keys(data[0]).forEach(key=>{
-            if(data[0][key]!=='' || null){
+    function assignResponseData(data) {
+        let headerData = [];
+        let bodyData = [];
+        Object.keys(data[0] ?? {}).forEach(key => {
+            if (data[0][key] !== '' || null) {
                 headerData.push(key)
             }
         })
-        data.forEach((value,index)=>{
-            let tempData=[]
-            headerData.forEach((head=>{
+        data.forEach((value, index) => {
+            let tempData = []
+            headerData.forEach((head => {
                 tempData.push(data[index][head])
             }))
             bodyData.push(tempData)
         })
-        createTable(headerData,bodyData)
+        createTable(headerData, bodyData)
     }
 
     function toastMessage(type, title) {
