@@ -172,12 +172,12 @@
                 if (status === 'married') {
                     $('#marital-status-div').after(spouseInput())
                 } else {
-                    $('#marital-status-div').next().remove()
+                    $('.spouse').remove()
                 }
             }
 
             function spouseInput() {
-                return "<div class='col-md-4 mb-2'>" +
+                return "<div class='spouse col-md-4 mb-2'>" +
                     "<label for='spouse_name' class='form-label'>पति/पत्नी नाम</label>" +
                     "<input type='text' name='spouse_name' value='{{old('spouse_name')}}' class='form-control' id='spouse_name' placeholder='पति/पत्नी नाम' />" +
                     "@error('spouse_name') <div class='invalid-feedback'>{{$message}}</div> @enderror </div>"
