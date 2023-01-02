@@ -41,12 +41,12 @@ trait GetAllColumns
             ->filter(function (ReflectionMethod $reflectionMethod) {
                 return in_array($reflectionMethod->getReturnType(), [
                     Relations\BelongsTo::class,
-                    Relations\BelongsToMany::class,
-                    Relations\HasMany::class,
-                    Relations\HasManyThrough::class,
-                    Relations\HasOne::class,
-                    Relations\HasOneThrough::class,
-                    Relations\Relation::class,
+//                    Relations\BelongsToMany::class,
+//                    Relations\HasMany::class,
+//                    Relations\HasManyThrough::class,
+//                    Relations\HasOne::class,
+//                    Relations\HasOneThrough::class,
+//                    Relations\Relation::class,
                 ]);
             })
             ->map(function (ReflectionMethod $reflectionMethod) {
