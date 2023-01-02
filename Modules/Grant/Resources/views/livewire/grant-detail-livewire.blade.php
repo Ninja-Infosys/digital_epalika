@@ -244,3 +244,6 @@
         </button>
     </div>
 </form>
+@include('grant::admin.inc.farmer_form')
+@include('grant::admin.inc.group_form')
+@include('grant::admin.inc.cooperative_form')

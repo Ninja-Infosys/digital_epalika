@@ -25,13 +25,9 @@ class GrantDetailLivewire extends Component
 
     public $fiscalYears = [];
 
-    public $grantTypes= [];
+    public $cooperativeTypes=[];
 
-    public $grantPrograms= [];
 
-    public $grantOffices= [];
-
-    public $branches = [];
 
     public array $form = [
         'grant_id' => null,
@@ -56,10 +52,6 @@ class GrantDetailLivewire extends Component
     {
         $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
-        $this->grantTypes = GrantType::all();
-        $this->grantPrograms= GrantProgram::all();
-        $this->grantOffices= GrantOffice::all();
-        $this->branches= Branch::all();
     }
 
     protected array $rules = [
@@ -112,7 +104,6 @@ class GrantDetailLivewire extends Component
                 case 'cooperative':
                     $this->grantees = Cooperative::all();
                     $this->form['model_type'] = Cooperative::class;
-
                     break;
                 case 'group':
                     $this->grantees = Group::all();
