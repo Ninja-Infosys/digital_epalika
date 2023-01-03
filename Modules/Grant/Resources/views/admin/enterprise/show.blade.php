@@ -91,10 +91,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title my-2">
-                            अनुदान लिएको तालिका
+                            अनुदानग्राही तालिका
                         </h4>
                         <a href="{{route('admin.grant.enterprise.grantDetails', $enterprise)}}"
-                        <button type="button" class="btn btn-primary btn-sm" style="border-radius: 25px; padding:10px">View Detail</button></a>
+                         class="btn btn-outline-primary btn-sm" style="border-radius: 25px; padding:10px">विवरण हेर्नुहोस</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-sm mt-3">

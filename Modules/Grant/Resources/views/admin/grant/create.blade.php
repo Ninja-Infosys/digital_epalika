@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ अनुदान थप्नुहोस्</h4>
+                        <h4 class="header-title">नयाँ अनुदान कार्यक्रम थप्नुहोस्</h4>
                         <a href="{{route('admin.grant.grant.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> अनुदान सुची
                         </a>
@@ -192,14 +192,14 @@
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label for="remarks" class="form-label">कैफियत</label>
-                                    <input
+                                    <textarea
                                         type="text"
                                         name="remarks"
                                         value="{{old('remarks')}}"
                                         class="form-control @error('remarks') is-invalid @enderror"
-                                        id="remarks"
+                                        id="remarks" rows="2"
                                         placeholder="कैफियत"
-                                    />
+                                    ></textarea>
                                     @error('remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

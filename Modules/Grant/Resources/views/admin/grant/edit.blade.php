@@ -194,16 +194,15 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="remarks" class="form-label">कैफियत</label>
-                                    <input
+                                    <textarea
                                         type="text"
                                         name="remarks"
-                                        value="{{old('remarks',$grant->remarks)}}"
                                         class="form-control @error('remarks') is-invalid @enderror"
-                                        id="remarks"
+                                        id="remarks" rows="2"
                                         placeholder="कैफियत"
-                                    />
+                                    >{{$grant->remarks}}</textarea>
                                     @error('remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
