@@ -184,7 +184,7 @@
                                         id="farmers" class="form-select" aria-describedby="button-farmer">
                                     <option disabled>--- छान्नुहोस् ---</option>
                                     @foreach($farmers as $farmer)
-                                        <option value="{{$farmer->id}}">{{$farmer->name}}</option>
+                                        <option value="{{$farmer->id}}">{{$farmer->name}} ({{$farmer->unique_id}})</option>
                                     @endforeach
                                 </select>
                                     <button class="btn btn-sm btn-outline-primary" type="button"

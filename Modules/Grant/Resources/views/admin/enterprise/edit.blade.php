@@ -127,7 +127,7 @@
                                             @foreach ($farmers as $farmer)
                                                 <option value="{{ $farmer->id }}"
                                                     {{ in_array($farmer->id, $enterprise->farmers->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                                    {{ $farmer->name }}</option>
+                                                    {{ $farmer->name }} ({{$farmer->unique_id}})</option>
                                             @endforeach
                                         </select>
                                         <button class="btn btn-sm btn-outline-primary" type="button"
