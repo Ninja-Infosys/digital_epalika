@@ -4,6 +4,7 @@ namespace Modules\Grant\Http\Livewire;
 
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\CooperativeType;
@@ -31,7 +32,7 @@ class GrantDetailLivewire extends Component
 
     public $enterpriseTypes = [];
 
-    public object $grantDetail;
+    public GrantDetail $grantDetail;
 
     public array $form = [
         'grant_id' => null,
@@ -63,9 +64,10 @@ class GrantDetailLivewire extends Component
 
         if (!empty($grantDetail)) {
             $this->grantDetail = $grantDetail;
-            foreach ($this->form as $key => $data) {
+            foreach (Arr::except($this->form,['grant_for','model_type']) as $key => $data) {
                 $this->form[$key] = $grantDetail[$key];
             }
+            $this->form['grant_for']=$grantDetail->grant_for->value;
         }
     }
 
@@ -96,7 +98,7 @@ class GrantDetailLivewire extends Component
         $this->validate();
 
         if (!empty($this->grantDetail)) {
-            $this->grantDetail->update($this->validate()['form']);
+            $this->grantDetail->update($this->form);
 
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
