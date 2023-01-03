@@ -29,7 +29,9 @@ class GrantDetailLivewire extends Component
 
     public $cooperativeTypes = [];
 
-    public $enterpriseTypes= [];
+    public $enterpriseTypes = [];
+
+    public object $grantDetail;
 
     public array $form = [
         'grant_id' => null,
@@ -52,12 +54,19 @@ class GrantDetailLivewire extends Component
 
     protected $listeners = ['fetchGranteesData'];
 
-    public function mount()
+    public function mount($grantDetail = null)
     {
         $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
         $this->cooperativeTypes = CooperativeType::all();
         $this->enterpriseTypes = EnterpriseType::all();
+
+        if (!empty($grantDetail)) {
+            $this->grantDetail = $grantDetail;
+            foreach ($this->form as $key => $data) {
+                $this->form[$key] = $grantDetail[$key];
+            }
+        }
     }
 
     protected array $rules = [
@@ -86,16 +95,28 @@ class GrantDetailLivewire extends Component
     {
         $this->validate();
 
-        GrantDetail::create($this->form + [
-                'local_body_id' => OfficeSetting::first()->local_body_id
+        if (!empty($this->grantDetail)) {
+            $this->grantDetail->update($this->validate()['form']);
+
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अनुदान सफलतापूर्वक सम्पादन गरियो'
             ]);
 
-        $this->reset('form');
+            return redirect(route('admin.grant.grantDetail.index'));
+        } else {
+            GrantDetail::create($this->form + [
+                    'local_body_id' => OfficeSetting::first()->local_body_id
+                ]);
 
-        $this->dispatchBrowserEvent('toast_message', [
-            'type' => 'success',
-            'title' => 'अनुदान सफलतापूर्वक थपियो'
-        ]);
+            $this->reset('form');
+
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अनुदान सफलतापूर्वक थपियो'
+            ]);
+        }
+
     }
 
     function fetchGranteesData()
