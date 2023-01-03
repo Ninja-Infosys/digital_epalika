@@ -394,7 +394,6 @@ class RegistrationForm extends Component
             ]);
 
 
-
             $businessDetail->businessPurposes()->attach($this->form['purpose'] ?? null);
 
             foreach ($this->form['threeGenerationDetails'] as $threeGenerationDetail) {
@@ -534,6 +533,21 @@ class RegistrationForm extends Component
             $this->form['square'] = $this->form['length'] * $this->form['width'];
         } else {
             $this->form['square'] = '';
+        }
+
+        if ($this->form['is_rent'] == '0') {
+            $this->form['house_owner_name'] = null;
+            $this->form['house_owner_phone'] = null;
+            $this->form['house_owner_address'] = null;
+            $this->form['house_owner_monthly_rent'] = null;
+        }
+
+        if ($this->form['is_registered'] == '0') {
+            $this->form['registeredBusinesses'] = [];
+        }
+
+        if ($this->form['business_nature'] == 'single') {
+            $this->form['partnerDetails'] = [];
         }
 
         return view('businessregistration::livewire.registration-form');
