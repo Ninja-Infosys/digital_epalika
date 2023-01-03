@@ -44,10 +44,10 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($complaintApplication->writtenAnswers as $dateSheet)
+                            @forelse($complaintApplication->writtenAnswers as $writtenAnswer)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$dateSheet->submitted_date}}</td>
+                                    <td>{{$writtenAnswer->submitted_date}}</td>
                                     <td>
                                         @can('writtenAnswer_access')
                                             <a href="{{route('admin.judicialCommittee.complaintApplication.writtenAnswer.show',[$complaintApplication,$writtenAnswer])}}"
