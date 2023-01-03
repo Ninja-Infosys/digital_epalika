@@ -19,14 +19,14 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-2">
                     <div class="widget-rounded-circle card-primary">
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
                                 <div class="col">
                                     <div class="avatar-lg rounded-circle bg-light border">
                                         <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            2
+                                            {{count(\Modules\Grant\Entities\Farmer::all())}}
                                         </span>
                                             </h3>
                                     </div>
@@ -37,14 +37,14 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-2">
                     <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
                                 <div class="col">
                                     <div class="avatar-lg rounded-circle bg-light border">
                                         <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            3
+                                            {{count(\Modules\Grant\Entities\Cooperative::all())}}
                                        </span>
                                            </h3>
                                     </div>
@@ -55,13 +55,15 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-2">
                     <div class="widget-rounded-circle card-primary" >
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
                                 <div class="col">
                                     <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">4</span></h3>
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                                {{count(\Modules\Grant\Entities\Group::all())}}
+                                            </span></h3>
                                     </div>
                                     <p class="text my-1">जम्मा समूहहरु</p>
                                 </div>
@@ -69,13 +71,15 @@
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-2">
                     <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
                                 <div class="col">
                                     <div class="avatar-lg rounded-circle bg-light border">
-                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">3</span></h3>
+                                        <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                                {{count(\Modules\Grant\Entities\Enterprise::all())}}
+                                            </span></h3>
                                     </div>
                                     <p class="text my-1">जम्मा उद्यमहरु</p>
                                 </div>
@@ -83,7 +87,7 @@
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-2">
                     <div class="widget-rounded-circle card-primary" >
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
@@ -91,7 +95,7 @@
                                     <div class="avatar-lg rounded-circle bg-light border">
                                         <h3 class="mt-1 text-center">
                                             <span data-plugin="counterup">
-                                                3
+                                                {{count(\Modules\Grant\Entities\Grant::all())}}
                                             </span></h3>
                                     </div>
                                     <p class="text my-1">जारी भएका अनुदान</p>
@@ -100,7 +104,7 @@
                         </div>
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
-                <div class="col-md-6 col-xl-3">
+                <div class="col-md-2">
                     <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
@@ -108,7 +112,7 @@
                                     <div class="avatar-lg rounded-circle bg-light border">
                                         <h3 class="mt-1 text-center">
                                             <span data-plugin="counterup">
-                                                ६
+                                                {{count(\Modules\Grant\Entities\GrantProgram::all())}}
                                             </span></h3>
                                     </div>
                                     <p class="text my-1">जम्मा अनुदान कार्यक्रम</p>

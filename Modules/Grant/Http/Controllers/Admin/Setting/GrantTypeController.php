@@ -35,20 +35,20 @@ class GrantTypeController extends Controller
         return view('grant::admin.setting.grantType.create');
     }
 
-    public function store(StoreGrantTypeRequest $request): RedirectResponse
+    public function store(StoreGrantTypeRequest $request)
     {
         $this->checkAuthorization('grantType_create');
 
-        $grantType=GrantType::create($request->validated());
+        $grantType = GrantType::create($request->validated());
 
-        if($request->ajax()){
+        if ($request->ajax()) {
             return response()->json([
-                'data'=> [
-                    'grantType_id'=> $grantType->id,
-                    'grantType_title'=> $grantType->title
+                'data' => [
+                    'id' => $grantType->id,
+                    'title' => $grantType->title
                 ],
-            'message'=> 'अनुदान प्रकार सफलतापुर्बक थपियो'
-        ]);
+                'message' => 'अनुदान प्रकार सफलता पुर्वक थपियो'
+            ]);
         }
 
         toast('अनुदान प्रकार सफलता पुर्वक थपियो', 'success');
@@ -60,7 +60,7 @@ class GrantTypeController extends Controller
     {
         $this->checkAuthorization('grantType_edit');
 
-        return view('grant::admin.setting.grantType.edit',compact('grantType'));
+        return view('grant::admin.setting.grantType.edit', compact('grantType'));
     }
 
     public function update(UpdateGrantTypeRequest $request, GrantType $grantType)

@@ -1,6 +1,6 @@
 <div class="modal fade" id="grantProgram-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="staticBackdropLabel">अनुदान कार्यक्रम थप्नुहोस् ।</h3>

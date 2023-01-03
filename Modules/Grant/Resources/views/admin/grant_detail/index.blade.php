@@ -11,11 +11,11 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grant.grantDetail.index')}}">अनुदान जारी</a>
+                            <a href="{{route('admin.grant.grantDetail.index')}}">अनुदान विवरण</a>
                         </li>
                     </ol>
                 </div>
-                <h4 class="page-title">अनुदान जारी</h4>
+                <h4 class="page-title">अनुदान विवरण</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदान सूची</h4>
+                        <h4 class="header-title">अनुदान विवरण सूची</h4>
                         @can('grantDetail_create')
                             <a href="{{route('admin.grant.grantDetail.create')}}"
                                class="btn btn-sm btn-outline-primary">

@@ -38,6 +38,7 @@ class WardCommittee extends Model
         'village',
         'tole',
         'position',
+        'committee_ward'
     ];
 
     public function getPhotoUrlAttribute(): string

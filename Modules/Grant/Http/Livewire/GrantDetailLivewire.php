@@ -4,15 +4,20 @@ namespace Modules\Grant\Http\Livewire;
 
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 use Modules\Grant\Entities\Cooperative;
+use Modules\Grant\Entities\CooperativeType;
 use Modules\Grant\Entities\Enterprise;
+use Modules\Grant\Entities\EnterpriseType;
 use Modules\Grant\Entities\Farmer;
 use Modules\Grant\Entities\Grant;
 use Modules\Grant\Entities\GrantDetail;
+use Modules\Grant\Entities\GrantOffice;
 use Modules\Grant\Entities\GrantProgram;
 use Modules\Grant\Entities\GrantType;
 use Modules\Grant\Entities\Group;
+use Modules\HelpDesk\Entities\Branch;
 
 class GrantDetailLivewire extends Component
 {
@@ -22,6 +27,12 @@ class GrantDetailLivewire extends Component
     public $grantees = [];
 
     public $fiscalYears = [];
+
+    public $cooperativeTypes = [];
+
+    public $enterpriseTypes = [];
+
+    public GrantDetail $grantDetail;
 
     public array $form = [
         'grant_id' => null,
@@ -42,10 +53,22 @@ class GrantDetailLivewire extends Component
         'contact' => null,
     ];
 
-    public function mount()
+    protected $listeners = ['fetchGranteesData'];
+
+    public function mount($grantDetail = null)
     {
         $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
+        $this->cooperativeTypes = CooperativeType::all();
+        $this->enterpriseTypes = EnterpriseType::all();
+
+        if (!empty($grantDetail)) {
+            $this->grantDetail = $grantDetail;
+            foreach (Arr::except($this->form,['grant_for','model_type']) as $key => $data) {
+                $this->form[$key] = $grantDetail[$key];
+            }
+            $this->form['grant_for']=$grantDetail->grant_for->value;
+        }
     }
 
     protected array $rules = [
@@ -74,25 +97,32 @@ class GrantDetailLivewire extends Component
     {
         $this->validate();
 
-        GrantDetail::create($this->form + [
-                'local_body_id' => OfficeSetting::first()->local_body_id
+        if (!empty($this->grantDetail)) {
+            $this->grantDetail->update($this->form);
+
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अनुदान सफलतापूर्वक सम्पादन गरियो'
             ]);
 
-        $this->reset('form');
+            return redirect(route('admin.grant.grantDetail.index'));
+        } else {
+            GrantDetail::create($this->form + [
+                    'local_body_id' => OfficeSetting::first()->local_body_id
+                ]);
 
-        $this->dispatchBrowserEvent('toast_message', [
-            'type' => 'success',
-            'title' => 'अनुदान सफलतापूर्वक थपियो'
-        ]);
-    }
+            $this->reset('form');
 
-    public function render()
-    {
-        if (!empty($this->form['grant_id'])) {
-            $this->grant = Grant::find($this->form['grant_id']);
-            $this->form['grant_amount'] = $this->grant->grant_amount;
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अनुदान सफलतापूर्वक थपियो'
+            ]);
         }
 
+    }
+
+    function fetchGranteesData()
+    {
         if (!empty($this->form['grant_for'])) {
             switch ($this->form['grant_for']) {
                 case 'cooperative':
@@ -112,6 +142,16 @@ class GrantDetailLivewire extends Component
                     $this->form['model_type'] = Farmer::class;
             }
         }
+    }
+
+    public function render()
+    {
+        if (!empty($this->form['grant_id'])) {
+            $this->grant = Grant::find($this->form['grant_id']);
+            $this->form['grant_amount'] = $this->grant->grant_amount;
+        }
+
+        $this->fetchGranteesData();
 
         if ($this->form['is_old'] == 0) {
             $this->form['prev_fiscal_year_id'] = null;

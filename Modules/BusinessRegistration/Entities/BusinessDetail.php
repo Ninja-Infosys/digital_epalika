@@ -7,6 +7,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use App\Traits\GetAllColumns;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\BusinessRegistration\Enums\BusinessNature;
+use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 use Modules\BusinessRegistration\Enums\SourceOfCapital;
 use Modules\BusinessRegistration\Traits\BusinessDetailTemplateTrait;
 
@@ -84,11 +86,24 @@ class BusinessDetail extends Model
         'object_transaction_id'
     ];
 
-    protected $casts = [
-        'business_nature' => BusinessNature::class,
-        'source_of_capital' => SourceOfCapital::class,
+//    protected $casts = [
+//        'business_nature' => BusinessNature::class,
+//        'source_of_capital' => SourceOfCapital::class,
+//
+//    ];
 
-    ];
+    public function BusinessNature(): Attribute
+    {
+        return Attribute::get(fn($value) => BusinessNature::tryFrom($value)?->label() ?? null);
+    }
+    public function SourceOfCapital(): Attribute
+    {
+        return Attribute::get(fn($value) =>  SourceOfCapital::tryFrom($value)?->label() ?? null);
+    }
+    public function BusinessType(): Attribute
+    {
+        return Attribute::get(fn($value) =>  BusinessTypeEnum::tryFrom($value)?->label() ?? null);
+    }
 
     public function fiscalYear(): BelongsTo
     {
@@ -148,10 +163,11 @@ class BusinessDetail extends Model
 
     public function setPhotoAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('business_registered/', 'public');
         }
     }
+
     public function setSquareAttribute($value): void
     {
         $this->attributes['square'] = $this->attributes['length'] * $this->attributes['width'];
@@ -164,7 +180,7 @@ class BusinessDetail extends Model
 
     public function setCitizenshipFrontAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_front'] = $value->store('business_registered/', 'public');
         }
     }
@@ -176,7 +192,7 @@ class BusinessDetail extends Model
 
     public function setCitizenshipBackAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['citizenship_back'] = $value->store('business_registered/', 'public');
         }
     }
@@ -188,7 +204,7 @@ class BusinessDetail extends Model
 
     public function setCompanyRegistrationAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['company_registration'] = $value->store('business_registered/', 'public');
         }
     }
@@ -200,7 +216,7 @@ class BusinessDetail extends Model
 
     public function setTaxPayFileAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['tax_pay_file'] = $value->store('business_registered/', 'public');
         }
     }
@@ -212,7 +228,7 @@ class BusinessDetail extends Model
 
     public function setPropertyAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['property'] = $value->store('business_registered/', 'public');
         }
     }
@@ -224,7 +240,7 @@ class BusinessDetail extends Model
 
     public function setSignatureAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['signature'] = $value->store('business_registered/', 'public');
         }
     }
@@ -236,7 +252,7 @@ class BusinessDetail extends Model
 
     public function setThumbAttribute($value): void
     {
-        if (! empty($value) && ! is_string($value)) {
+        if (!empty($value) && !is_string($value)) {
             $this->attributes['thumb'] = $value->store('business_registered/', 'public');
         }
     }

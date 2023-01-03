@@ -15,7 +15,7 @@
 @can('grant_access')
     <li>
         <a href="{{ route('admin.grant.grant.index') }}">
-            <i class="fa fa-file"></i>
+            <i class="fa fa-check-square"></i>
             <span>जारि अनुदान कार्यक्रम</span>
         </a>
     </li>
@@ -138,7 +138,8 @@
                 </li>
             @endcan
             @can('affiliation_access')
-                <li class="{{ request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
+                <li class="{{
+    request()->is('admin/grant/setting/infrastructure') ? 'active' : '' }}">
                     <a href="{{ route('admin.grant.setting.affiliation.index') }}">
                         <span> सहकारीको आवध्ता </span>
                     </a>

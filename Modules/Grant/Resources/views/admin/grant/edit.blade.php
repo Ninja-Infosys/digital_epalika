@@ -58,6 +58,7 @@
                                     <label for="grant_type_id" class="form-label">
                                         अनुदानको प्रकार <span class="text-danger">*</span>
                                     </label>
+                                    <div class="input-group">
                                     <select name="grant_type_id"
                                             id="grant_type_id" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
@@ -68,6 +69,12 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-enterprise"
+                                                title="अनुदानको प्रकार थप" data-bs-toggle="modal"
+                                                data-bs-target="#grantType-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('grant_type_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -76,6 +83,7 @@
                                     <label for="grant_program_id" class="form-label">
                                         कार्यक्रमको नाम <span class="text-danger">*</span>
                                     </label>
+                                    <div class="input-group">
                                     <select name="grant_program_id"
                                             id="grant_program_id" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
@@ -85,6 +93,13 @@
                                             </option>
                                         @endforeach
                                     </select>
+
+                                        <button class="btn btn-sm btn-outline-primary" type="button"
+                                                id="button-enterprise"
+                                                title="अनुदान कार्यक्रम थप" data-bs-toggle="modal"
+                                                data-bs-target="#grantProgram-modal">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
                                     @error('grant_program_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -93,6 +108,8 @@
                                     <label for="grant_office_id" class="form-label">
                                         अनुदान दिने संस्था <span class="text-danger">*</span>
                                     </label>
+
+                                    <div class="input-group">
                                     <select name="grant_office_id"
                                             id="grant_office_id" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
@@ -102,6 +119,13 @@
                                             </option>
                                         @endforeach
                                     </select>
+
+                                    <button class="btn btn-sm btn-outline-primary" type="button"
+                                            id="button-enterprise"
+                                            title="संस्था थप" data-bs-toggle="modal"
+                                            data-bs-target="#grantOffice-modal">
+                                        <i class="fa fa-plus"></i></button>
+                                </div>
                                     @error('grant_office_id')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -170,16 +194,15 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-4 mb-2">
+                                <div class="col-md-12 mb-2">
                                     <label for="remarks" class="form-label">कैफियत</label>
-                                    <input
+                                    <textarea
                                         type="text"
                                         name="remarks"
-                                        value="{{old('remarks',$grant->remarks)}}"
                                         class="form-control @error('remarks') is-invalid @enderror"
-                                        id="remarks"
+                                        id="remarks" rows="2"
                                         placeholder="कैफियत"
-                                    />
+                                    >{{$grant->remarks}}</textarea>
                                     @error('remarks')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -194,6 +217,10 @@
             </div>
         </div>
     </div>
+
+    @include('grant::admin.inc.grantOffice_form')
+    @include('grant::admin.inc.grantProgram_form')
+    @include('grant::admin.inc.grantType_form')
 @endsection
 
 

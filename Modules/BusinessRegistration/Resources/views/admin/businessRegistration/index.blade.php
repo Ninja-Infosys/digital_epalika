@@ -74,7 +74,7 @@
                                         <span>{{$businessDetail->localBody->local_body??''}}
                                 - {{$businessDetail->ward_no??''}} </span>
                                     </td>
-                                    <td>{{$businessDetail?->business_nature?->label() ?? ''}}</td>
+                                    <td>{{$businessDetail?->business_nature ?? ''}}</td>
                                     <td>{{$businessDetail->amount_cost ?? ''}}</td>
                                     <td>
                                         @can('businessRegistration_access')

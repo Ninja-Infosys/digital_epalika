@@ -140,4 +140,9 @@ class ComplaintApplication extends Model
     {
         return $this->hasOne(DateCompensation::class);
     }
+
+    public function writtenAnswers(): HasMany
+    {
+        return $this->hasMany(WrittenAnswer::class);
+    }
 }

@@ -36,11 +36,21 @@ class GrantOfficeController extends Controller
         return view('grant::admin.setting.grantOffice.create');
     }
 
-    public function store(StoreGrantOfficeRequest $request): RedirectResponse
+    public function store(StoreGrantOfficeRequest $request)
     {
         $this->checkAuthorization('grantOffice_create');
 
-        GrantOffice::create($request->validated());
+        $grantOffice=GrantOffice::create($request->validated());
+
+        if ($request->ajax()){
+            return response()->json([
+                'data'=> [
+                    'grantOffice_id'=>$grantOffice->id,
+                    'grantOffice_name'=> $grantOffice->office_name
+                ],
+                'message'=>'अनुदान कार्यालय सफलतापूर्वक थपियो'
+            ]);
+        }
 
         toast('अनुदान कार्यालय सफलतापूर्वक थपियो','success');
         return back();

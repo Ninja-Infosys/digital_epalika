@@ -33,11 +33,22 @@ class GrantProgramController extends Controller
         return view('grant::admin.setting.grantProgram.create');
     }
 
-    public function store(StoreGrantProgramRequest $request): RedirectResponse
+    public function store(StoreGrantProgramRequest $request)
     {
         $this->checkAuthorization('grantProgram_create');
 
-        GrantProgram::create($request->validated());
+        $grantProgram=GrantProgram::create($request->validated());
+
+        if ($request->ajax()){
+            return response()->json([
+                'data'=> [
+                    'grantProgram_id'=>$grantProgram->id,
+                    'grantProgram_name'=>$grantProgram->name
+                ],
+                'message'=> 'अनुदान कार्यक्रम सफलता पुर्वक थपियो'
+            ]);
+        }
+
         toast('अनुदान कार्यक्रम सफलता पुर्वक थपियो', 'success');
         return back();
     }

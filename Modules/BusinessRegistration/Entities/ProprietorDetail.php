@@ -6,6 +6,7 @@ use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +19,6 @@ class ProprietorDetail extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
 
 
     protected $dates = [
@@ -49,11 +49,15 @@ class ProprietorDetail extends Model
         'occupation',
     ];
 
-    protected $casts = [
-        'gender' => Gender::class,
-        'education_qualification' => Qualification::class,
-        'business_type' => BusinessTypeEnum::class
-    ];
+    public function Gender(): Attribute
+    {
+        return Attribute::get(fn($value) => Gender::tryFrom($value)?->label() ?? null);
+    }
+
+    public function EducationQualification(): Attribute
+    {
+        return Attribute::get(fn($value) => Qualification::tryFrom($value)?->label() ?? null);
+    }
 
     public function province(): BelongsTo
     {

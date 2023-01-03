@@ -75,11 +75,11 @@
                                                     </tr>
                                                     <tr>
                                                         <th>नागरिकता नम्बर</th>
-                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no??''}}</th>
+                                                        <th>{{$businessDetail->proprietorDetail->citizenship_no ?? ''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>लिङ्ग</th>
-                                                        <th>{{ !empty($businessDetail->proprietorDetail->gender) ? $businessDetail->proprietorDetail->gender?->label()??'' :'' }}</th>
+                                                        <th>{{  $businessDetail->proprietorDetail->gender ?? ''  }}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>इमेल</th>
@@ -100,7 +100,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> शैक्षिक योग्यता</th>
-                                                        <th>{{  !empty($businessDetail->proprietorDetail->education_qualification) ? $businessDetail->proprietorDetail->education_qualification?->label() ??'' :''}}</th>
+                                                        <th>{{   $businessDetail->proprietorDetail->education_qualification}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> मुख्य पेशा</th>
@@ -154,7 +154,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> व्यवसायको प्रकृति</th>
-                                                        <th>{{$businessDetail->business_nature?->label()??''}}</th>
+                                                        <th>{{$businessDetail->business_nature??''}}</th>
                                                     </tr>
 
                                                     <tr>
@@ -179,7 +179,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> पूजीको स्रोत</th>
-                                                        <th>{{!empty($businessDetail->source_of_capital) ? $businessDetail->source_of_capital?->label()??'':''}}</th>
+                                                        <th>{{ $businessDetail->source_of_capital ?? ''}}</th>
                                                     </tr>
 
 
@@ -285,7 +285,7 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if($businessDetail->business_nature->value == \Modules\BusinessRegistration\Enums\BusinessNature::PARTNERSHIP->value)
+                                @if(Modules\BusinessRegistration\Enums\BusinessNature::tryFrom($businessDetail->getRawOriginal('business_nature'))->value == \Modules\BusinessRegistration\Enums\BusinessNature::PARTNERSHIP->value)
                                     <div class="col-md-6">
                                         <div class="card mt-3">
                                             <div class="card-header">

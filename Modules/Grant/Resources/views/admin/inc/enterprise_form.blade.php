@@ -82,6 +82,8 @@
                         toastMessage('success', resp.message)
                         $('#enterprise-modal').modal('toggle')
                         $('#enterprise-form').trigger('reset')
+                        //for grant detail livewire
+                        Livewire.emit('fetchGranteesData');
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         $('#enterpriseSubmitForm').prop('disabled', false)
