@@ -10,7 +10,7 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">तारिख पर्चा डाटा भर्नुहोस्</li>
+                        <li class="breadcrumb-item active">तारिख पर्चा थप्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">तारिख पर्चा</h4>
@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">तारिख पर्चा डाटा भर्नुहोस्</h4>
+                        <h4 class="header-title">तारिख पर्चा थप्नुहोस्</h4>
                         <a href="{{ route('admin.judicialCommittee.registeredApplication') }}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> दर्ता भएका उजुरी
