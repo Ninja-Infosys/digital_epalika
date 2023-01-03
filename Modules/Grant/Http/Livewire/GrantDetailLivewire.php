@@ -4,6 +4,7 @@ namespace Modules\Grant\Http\Livewire;
 
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 use Modules\Grant\Entities\Cooperative;
 use Modules\Grant\Entities\CooperativeType;
@@ -29,7 +30,9 @@ class GrantDetailLivewire extends Component
 
     public $cooperativeTypes = [];
 
-    public $enterpriseTypes= [];
+    public $enterpriseTypes = [];
+
+    public GrantDetail $grantDetail;
 
     public array $form = [
         'grant_id' => null,
@@ -52,12 +55,20 @@ class GrantDetailLivewire extends Component
 
     protected $listeners = ['fetchGranteesData'];
 
-    public function mount()
+    public function mount($grantDetail = null)
     {
         $this->grants = Grant::with('fiscalYear', 'grantProgram')->latest()->get();
         $this->fiscalYears = FiscalYear::all();
         $this->cooperativeTypes = CooperativeType::all();
         $this->enterpriseTypes = EnterpriseType::all();
+
+        if (!empty($grantDetail)) {
+            $this->grantDetail = $grantDetail;
+            foreach (Arr::except($this->form,['grant_for','model_type']) as $key => $data) {
+                $this->form[$key] = $grantDetail[$key];
+            }
+            $this->form['grant_for']=$grantDetail->grant_for->value;
+        }
     }
 
     protected array $rules = [
@@ -86,16 +97,28 @@ class GrantDetailLivewire extends Component
     {
         $this->validate();
 
-        GrantDetail::create($this->form + [
-                'local_body_id' => OfficeSetting::first()->local_body_id
+        if (!empty($this->grantDetail)) {
+            $this->grantDetail->update($this->form);
+
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अनुदान सफलतापूर्वक सम्पादन गरियो'
             ]);
 
-        $this->reset('form');
+            return redirect(route('admin.grant.grantDetail.index'));
+        } else {
+            GrantDetail::create($this->form + [
+                    'local_body_id' => OfficeSetting::first()->local_body_id
+                ]);
 
-        $this->dispatchBrowserEvent('toast_message', [
-            'type' => 'success',
-            'title' => 'अनुदान सफलतापूर्वक थपियो'
-        ]);
+            $this->reset('form');
+
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => 'अनुदान सफलतापूर्वक थपियो'
+            ]);
+        }
+
     }
 
     function fetchGranteesData()

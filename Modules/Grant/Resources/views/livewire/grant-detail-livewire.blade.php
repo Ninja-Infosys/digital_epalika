@@ -47,7 +47,7 @@
                 </select>
                 <button wire:ignore class="btn btn-sm btn-outline-primary" type="button"
                         id="form-popup-button"
-                        title="उधम थप" data-bs-toggle="modal">
+                        data-bs-toggle="modal">
                     <i class="fa fa-plus"></i></button>
             </div>
                 @error('form.model_id')
@@ -251,6 +251,7 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
+                setTargetForm($('#grant_for').val())
                 $("#grant_for").on('change', function () {
                     setTargetForm($(this).val())
                 })
