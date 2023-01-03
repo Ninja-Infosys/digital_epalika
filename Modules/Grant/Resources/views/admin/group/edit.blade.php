@@ -140,7 +140,7 @@
                                             @foreach ($farmers as $farmer)
                                                 <option value="{{ $farmer->id }}"
                                                     {{ in_array($farmer->id, $group->farmers->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                                    {{ $farmer->name }}
+                                                    {{ $farmer->name }} ({{$farmer->unique_id}})
                                                 </option>
                                             @endforeach
                                         </select>
