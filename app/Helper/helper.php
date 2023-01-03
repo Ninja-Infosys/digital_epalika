@@ -105,15 +105,61 @@ if (!function_exists('removeColumns')) {
     }
 }
 
-if (!function_exists('renderListData')){
+if (!function_exists('renderListData')) {
     function renderListData($data): void
     {
-        foreach($data as $value) {
-            if(is_array($value)) {
+        foreach ($data as $value) {
+            if (is_array($value)) {
                 renderListData($value);
             } else {
                 echo '<td>' . $value . '</td>';
             }
         }
+    }
+}
+
+if (!function_exists('getFileType')) {
+    function getFileType($base64String): string
+    {
+// Get the start position of the file type string (e.g., "data:image/png;base64,")
+        $startPos = strpos($base64String, ':') + 1;
+
+// Get the end position of the file type string
+        $endPos = strpos($base64String, ';');
+
+// Extract the file type string
+        return substr($base64String, $startPos, $endPos - $startPos); // Outputs "image/png"
+    }
+}
+
+if (!function_exists('base64ToFile')) {
+    function base64ToFile($base64String, $fileType): string
+    {
+        $randomString = Str::random(32);
+
+        // Get the file extension from the file type
+        $extension = explode('/', $fileType)[1];
+
+        // Construct the file name
+        $fileName = "images/{$randomString}.{$extension}";
+
+        // Decode the base64 string
+        $data = base64_decode($base64String);
+
+        // Use the Storage facade to write the file to the public folder
+        Storage::put($fileName, $data);
+
+        // Return the file name
+        return $fileName;
+    }
+}
+if (!function_exists('isBase64')) {
+    function isBase64($string): bool
+    {
+        $bool = false;
+        if (str_contains($string, 'data:')) {
+            $bool = true;
+        }
+        return $bool;
     }
 }

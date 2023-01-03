@@ -8,11 +8,13 @@ use App\Models\Address\Province;
 use App\Models\Ethnicity;
 use App\Models\Occupation;
 use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Identity\Entities\DisabilityIdentityCard;
@@ -21,17 +23,17 @@ use Modules\Identity\Entities\DisabilityType;
 use Modules\Identity\Entities\EmployeeSignature;
 use Modules\Identity\Entities\GovernmentalDisabilityType;
 use Modules\Identity\Entities\Relationship;
+use Modules\Identity\Enums\ReceivingBodyEnum;
 
 class DisabilityIdentityCardLivewire extends Component
 {
 
     use WithFileUploads;
+    use NepaliDateConverter;
 
     public int $currentStep = 1;
 
-
     public $relations = [];
-
     public $occupations = [];
     public $disabilityTypes = [];
     public $governmentDisabilityTypes = [];
@@ -44,7 +46,6 @@ class DisabilityIdentityCardLivewire extends Component
     public $temporary_districts = [];
     public $temporary_localBodies = [];
     public $temporary_wards = [];
-
     public $employee_signatures = [];
 
     public DisabilityIdentityCard $disabilityIdentityCard;
@@ -81,7 +82,6 @@ class DisabilityIdentityCardLivewire extends Component
         'blood_group' => null,
         'disability_reason_id' => null,
         'receiving_body' => null,
-        'card_no' => null,
         'date_bs' => null,
         'date_ad' => null,
         'father_name' => null,
@@ -116,11 +116,16 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no_place' => null,
         'govern_disability_type_id' => null,
         'employee_signature_id' => null,
+        'card_no'=>null
     ];
 
 
-    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged'];
+    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged','photoUpdated'];
 
+    public function photoUpdated($base64String): void
+    {
+        $this->form['photo'] = $base64String;
+    }
     public function dobChanged($nepaliDate, $englishDate): void
     {
         $this->form['dob_bs'] = $nepaliDate;
@@ -212,12 +217,12 @@ class DisabilityIdentityCardLivewire extends Component
             ? array_merge($this->identityDetailValidations, [
                 'form.finger_left' => ['nullable', 'image'],
                 'form.finger_right' => ['nullable', 'image'],
-                'form.photo' => ['nullable', 'image'],
+                'form.photo' => ['nullable'],
             ])
             : array_merge($this->identityDetailValidations, [
                 'form.finger_left' => ['required_if:form.finger_print_type,==,legs,finger'],
                 'form.finger_right' => ['required_if:form.finger_print_type,==,legs,finger'],
-                'form.photo' => ['required', 'image'],
+                'form.photo' => ['required'],
             ]);
     }
 
@@ -235,7 +240,6 @@ class DisabilityIdentityCardLivewire extends Component
     protected array $fourthStepValidations = [
         'form.identity_type' => ['required'],
         'form.receiving_body' => ['required_if:form.identity_type,==,receive'],
-        'form.card_no' => ['required_if:form.identity_type,==,receive'],
         'form.date_bs' => ['required_if:form.identity_type,==,receive'],
         'form.date_ad' => ['required_if:form.identity_type,==,receive'],
         'form.father_name' => ['required', 'string', 'max:255'],
@@ -330,7 +334,6 @@ class DisabilityIdentityCardLivewire extends Component
             'form.disability_reason_id.required' => ['अपाङ्गताको कारण आवश्यक छ'],
             'form.identity_type.required' => ['पहिचान प्रकार आवश्यक छ'],
             'form.receiving_body.required' => ['कहाँ बाट आवश्यक छ'],
-            'form.card_no.required' => ['कार्ड नं आवश्यक छ'],
             'form.date_bs.required' => ['मिति वि.स मा आवश्यक छ'],
             'form.date_ad.required' => ['मिति ई.स मा आवश्यक छ'],
             'form.father_name.required' => ['वुबाको नाम आवश्यक छ'],
@@ -417,6 +420,7 @@ class DisabilityIdentityCardLivewire extends Component
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
         }
 
+
         DisabilityIdentityCard::create($this->form);
         $this->dispatchBrowserEvent('toast_message', [
             'type' => 'success',
@@ -480,10 +484,10 @@ class DisabilityIdentityCardLivewire extends Component
         }
 
         if ($this->form['identity_type'] == 'not_receive') {
-            $this->form['receiving_body'] = null;
-            $this->form['card_no'] = null;
-            $this->form['date_bs'] = null;
-            $this->form['date_ad'] = null;
+            $this->form['card_no'] =  DB::table('disability_identity_cards')->max('id') + 1;
+            $this->form['receiving_body'] = ReceivingBodyEnum::LOCAL_BODY->value;
+            $this->form['date_bs'] = $this->get_today_nepali_date();
+            $this->form['date_ad'] = today()->toDateString();
         }
 
         return view('identity::livewire.disability-identity-card-livewire');

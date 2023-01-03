@@ -4,6 +4,8 @@ namespace Modules\Identity\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rules\Enum;
+use Modules\Identity\Enums\CategoryTypeEnum;
 
 class StoreGovernmentalDisablityRequest extends FormRequest
 {
@@ -17,7 +19,8 @@ class StoreGovernmentalDisablityRequest extends FormRequest
         return [
             'title' => ['required','string','max:255'],
             'title_en' => ['required','string','max:255'],
-            'color'=>['required','string','max:255']
+            'color'=>['required','string','max:255'],
+            'category'=>['required',new Enum(CategoryTypeEnum::class)],
         ];
     }
 }

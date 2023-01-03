@@ -34,7 +34,7 @@
                     <form action="{{route('identity.admin.setting.governmentalDisabilityType.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
@@ -48,7 +48,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title_en" class="form-label">शिर्षक (English) *</label>
                                 <input
                                     type="text"
@@ -63,7 +63,26 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
+                                <div class="mb-3 xl:w-96">
+                                    <label for="category">Category</label>
+                                    <select name="category" id="category"
+                                            class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none form-control"
+                                            aria-label="Default select example">
+                                        <option value="">Select Category</option>
+                                        @foreach (\Modules\Identity\Enums\CategoryTypeEnum::cases() as $category)
+                                            <option value="{{ $category->value }}" {{old('category')==$category->value ? 'selected':''}}>
+                                                {{ $category->label() }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('category')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-2">
                                 <div class="mb-3 xl:w-96">
                                     <label for="color">Card Color</label>
                                     <select name="color" id="color"

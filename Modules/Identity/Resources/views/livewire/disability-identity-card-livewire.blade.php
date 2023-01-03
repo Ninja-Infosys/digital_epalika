@@ -32,6 +32,7 @@
         .progressbar li a {
             text-decoration: none;
         }
+
         .progressbar li:before {
             content: counter(step);
             counter-increment: step;
@@ -50,6 +51,7 @@
             background: #5ed00f;
             color: white;
         }
+
         /*progressbar connectors*/
         .progressbar li:after {
             content: '';
@@ -82,7 +84,7 @@
     </style>
     <div class="text-center">
         <ul class="progressbar d-flex justify-content-between">
-                            <li @class([
+            <li @class([
                     'active'=>!($currentStep != 1),
                     'success'=>$currentStep>1
             ])><a href="#step-1" type="button"></a></li>
@@ -99,32 +101,32 @@
                     'active'=>!($currentStep != 4),
                     'success'=>$currentStep>4
             ])><a href="#step-4" type="button">
-                   </a></li>
+                </a></li>
             <li @class([
                     'active'=>!($currentStep != 5),
                     'success'=>$currentStep>5
             ])><a href="#step-5" type="button">
-                    </a></li>
+                </a></li>
             <li @class([
                     'active'=>!($currentStep != 6),
                     'success'=>$currentStep>6
             ])><a href="#step-6" type="button">
-                    </a></li>
+                </a></li>
             <li @class([
                     'active'=>!($currentStep != 7),
                     'success'=>$currentStep>7
             ])><a href="#step-7" type="button">
-                    </a></li>
+                </a></li>
             <li @class([
                     'active'=>!($currentStep != 8),
                     'success'=>$currentStep>8
             ])><a href="#step-8" type="button">
-                    </a></li>
+                </a></li>
             <li @class([
                     'active'=>!($currentStep != 9),
                     'success'=>$currentStep>9
             ])><a href="#step-9" type="button">
-                    </a></li>
+                </a></li>
 
 
         </ul>
@@ -329,16 +331,18 @@
                             @if($form['identity_type']==='receive')
                                 <div class="col-md-4 mb-3">
                                     <label for="form.receiving_body" class="form-label">कहाँ बाट</label>
-                                    <input
-                                        name="form.receiving_body"
-                                        class="form-control  @error('form.receiving_body') is-invalid @enderror"
-                                        type="text"
-                                        id="form.receiving_body"
-                                        placeholder="कहाँ बाट"
+                                    <select
+                                        class="form-select @error('form.receiving_body') is-invalid @enderror"
                                         wire:model="form.receiving_body"
-                                    />
+                                        id="form.receiving_body">
+                                        <option value="">---छान्नुहोस् ---</option>
+                                        @foreach(\Modules\Identity\Enums\ReceivingBodyEnum::cases() as $receivingBody)
+                                            <option
+                                                value="{{$receivingBody->value}}">{{$receivingBody->label()}}</option>
+                                        @endforeach
+                                    </select>
                                     @error('form.receiving_body')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                    <div class="invalid-feedback ">{{$message}} </div>
                                     @enderror
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -730,7 +734,8 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="form.supporting_material" class="form-label"> साहायक सामाग्री प्रयोग गर्ने </label>
+                                <label for="form.supporting_material" class="form-label"> साहायक सामाग्री प्रयोग
+                                    गर्ने </label>
                                 <select
                                     class="form-select @error('form.supporting_material') is-invalid @enderror"
                                     wire:model="form.supporting_material"
@@ -1071,6 +1076,7 @@
                                 <label for="form.photo" class="form-label">फोटो</label>
                                 <input
                                     name="form.photo"
+                                    accept="image/*"
                                     class="form-control @error('form.photo') is-invalid @enderror"
                                     type="file"
                                     id="form.photo"
@@ -1079,6 +1085,12 @@
                                 @error('form.photo')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
+                                <button onclick="loadImage()" type="button">Camera</button>
+                                <button onclick="captureImage()" type="button">Capture Image</button>
+                                <button onclick="stopCamera()" type="button">Stop Camera</button>
+                                <video id="video" width="200" height="200"  autoplay></video>
+                                <canvas id="canvas" width="200" height="200"></canvas>
+
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="form.finger_print_type" class="form-label">छाप</label>
@@ -1420,7 +1432,7 @@
                         Livewire.emit('dobChanged', inputFieldDate, formattedDate);
                     }
                 });
-                if($('#date_bs').length){
+                if ($('#date_bs').length) {
                     $("#date_bs").nepaliDatePicker({
                         ndpYear: true,
                         ndpMonth: true,
@@ -1441,6 +1453,79 @@
                 // Livewire.emit('fromDateChanged', todayBsDate, todayAdDate);
                 // Livewire.emit('toDateChanged', todayBsDate, todayAdDate);
             });
+
+            function captureImage() {
+                // Get the video element that will display the webcam feed
+                const video = document.getElementById('video');
+
+// Get the canvas element that we will use to capture the image
+                const canvas = document.getElementById('canvas');
+                const context = canvas.getContext('2d');
+
+// Prompt the user for permission to use their webcam
+                navigator.mediaDevices.getUserMedia({video: true})
+                    .then(function (stream) {
+                        // Set the source of the video element to the webcam stream
+                        video.srcObject = stream;
+
+                        // Wait for the video to load
+                        video.onloadedmetadata = function () {
+                            // Draw the video frame to the canvas
+                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                            // Get the file type (e.g., image/png)
+                            const fileType = 'image/png';
+
+// Convert the canvas image to a data URL
+                            const file = canvas.toDataURL(fileType);
+
+
+                            Livewire.emit('photoUpdated', file)
+                        };
+                    });
+            }
+
+
+            function loadImage() {
+                // Get the video element that will display the webcam feed
+                const video = document.getElementById('video');
+
+
+// Prompt the user for permission to use their webcam
+                navigator.mediaDevices.getUserMedia({video: true})
+                    .then(function (stream) {
+                        // Set the source of the video element to the webcam stream
+                        video.srcObject = stream;
+
+                        // Wait for the video to load
+                        video.onloadedmetadata = function () {
+                            // Draw the video frame to the canvas
+                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+
+                            // You can now use the image data URL to display the image on the page or save it to a file, etc.
+                        };
+                    });
+
+            }
+            function stopCamera() {
+                const video = document.getElementById('video');
+
+// Prompt the user for permission to use their webcam
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        // Set the source of the video element to the webcam stream
+                        video.srcObject = stream;
+
+                        // Wait for the video to load
+                        video.onloadedmetadata = function() {
+                            // Stop the webcam stream
+                            stream.getVideoTracks()[0].stop();
+                        };
+                    });
+
+            }
+
         </script>
     @endpush
 @endonce

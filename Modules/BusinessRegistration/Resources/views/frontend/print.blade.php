@@ -293,7 +293,7 @@
                         <br>
                         घ) आन्तरिक राजस्व कार्यालयमा आघिल्लो आ.व सम्मको करतिरेको करदाता प्रमाणपत्रको
                         प्रतिलिपि
-                        <i class="{{ !empty($proprietorDetail->businessRegisteredFile->tax_pay_file) ? 'fa fa-check' : '' }}"
+                        <i class="{{ !empty($proprietorDetail->businessRegisteredFile->tax_pay_file) ? 'fa fa-check' : 'fa fa-check' }}"
                             aria-hidden="true"></i>
                         <br>
 
