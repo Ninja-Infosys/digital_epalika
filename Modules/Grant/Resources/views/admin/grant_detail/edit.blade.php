@@ -11,9 +11,9 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.grant.grantDetail.index')}}">अनुदान जारी</a>
+                            <a href="{{route('admin.grant.grantDetail.index')}}">अनुदान विवरण</a>
                         </li>
-                        <li class="breadcrumb-item active">अनुदान जारी सम्पादन</li>
+                        <li class="breadcrumb-item active">अनुदान सम्पादन</li>
                     </ol>
                 </div>
                 <h4 class="page-title">अनुदान जारी सम्पादन</h4>
