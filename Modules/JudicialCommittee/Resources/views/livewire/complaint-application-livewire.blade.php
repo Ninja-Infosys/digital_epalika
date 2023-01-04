@@ -357,7 +357,7 @@
                     <h4 class="text-info">उजुरी विवरण</h4>
                 </legend>
                 <div class="row pb-2">
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-3 mb-2">
                         <label for="lawsuit_nature_id" class="form-label">मुद्दा प्रकृति<span
                                 class="text-danger">*</span></label>
                         <select
@@ -386,20 +386,6 @@
                             placeholder="उजुरी विषय"
                         />
                         @error('form.subject')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <label for="submission_no" class="form-label">सबमिशन नम्बर<span
-                                class="text-danger">*</span></label>
-                        <input
-                            type="text"
-                            wire:model="form.submission_no"
-                            class="form-control"
-                            id="submission_no"
-                            placeholder="सबमिशन नम्बर"
-                        />
-                        @error('form.submission_no')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -562,9 +548,11 @@
                 }
             });
 
+            @if(!$complaintApplication)
             let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
             let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
             Livewire.emit('dateChanged', todayBsDate, todayAdDate);
+            @endif
         });
     </script>
 @endpush

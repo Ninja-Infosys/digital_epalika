@@ -62,6 +62,11 @@
                                                     -- छान्नुहोस् -- <i class="fa fa-angle-down"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $loop->iteration }}">
+                                                    @can('judicialReceiptBill_access')
+                                                        <a href="{{ route('admin.judicialCommittee.complaintApplication.judicialReceiptBill.index', $complaintApplication) }}" class="dropdown-item">
+                                                            <i class="fa fa-cash-register"> निस्सा सनाखत  </i>
+                                                        </a>
+                                                    @endcan
                                                     @can('dateSheet_access')
                                                         <a href="{{ route('admin.judicialCommittee.complaintApplication.dateSheet.index', $complaintApplication) }}" class="dropdown-item">
                                                             <i class="fa fa-calendar-alt"> तारिख पर्चा </i>

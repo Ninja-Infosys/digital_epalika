@@ -1,76 +1,130 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="row mt-2">
+    <div class="row">
         <div class="col-md-3">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            2
-                                        </span>
+                                <h3 class="mt-1 text-center">
+                                    <span data-plugin="counterup">
+                                        12
+                                    </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">उजुरी</p>
+                            <p class="text my-1">जम्मा निवेदनहरु</p>
                         </div>
-                    </div> <!-- end row-->
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
+            </div>
+        </div>
         <div class="col-md-3">
             <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            3
-                                       </span>
+                                <h3 class="mt-1 text-center">
+                                    <span data-plugin="counterup">
+                                        16
+                                   </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">दर्ता उजुरी</p>
+                            <p class="text my-1">दर्ता भएका निवेदनहरु</p>
                         </div>
-                    </div> <!-- end row-->
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
+            </div>
+        </div>
         <div class="col-md-3">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            4
-                                       </span>
+                                <h3 class="mt-1 text-center">
+                                    <span data-plugin="counterup">
+                                        7
+                                    </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">नहेरीयको</p>
+                            <p class="text my-1">सम्पन्न योजनाहरू</p>
                         </div>
-                    </div> <!-- end row-->
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
+            </div>
+        </div>
         <div class="col-md-3">
-            <div class="widget-rounded-circle card-primary"  style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            3
-                                       </span>
+                                <h3 class="mt-1 text-center">
+                                    <span data-plugin="counterup">
+                                        16
+                                   </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">छिनोफानो भैसकेको</p>
+                            <p class="text my-1">चालू आर्थिक वर्षका निवेदनहरु</p>
                         </div>
-                    </div> <!-- end row-->
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
+            </div>
+        </div>
     </div>
+{{--    <div class="row mt-2">--}}
+{{--        <div class="col-lg-6">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-body">--}}
+{{--                    <x-charts.pie-chart-component--}}
+{{--                        id="budget-head-wise-chart"--}}
+{{--                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु"--}}
+{{--                        :labels="$budgetHeadWiseProjects['labels']"--}}
+{{--                        :dataSets="$budgetHeadWiseProjects['dataSets']"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <div class="col-lg-6">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-body">--}}
+{{--                    <x-charts.pie-chart-component--}}
+{{--                        id="plan-level-wise-chart"--}}
+{{--                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) योजना स्तर अनुसारका योजनाहरु"--}}
+{{--                        :labels="$planLevelWiseProjects['labels']"--}}
+{{--                        :dataSets="$planLevelWiseProjects['dataSets']"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        <div class="col-lg-12">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-body">--}}
+{{--                    <x-charts.bar-chart-component--}}
+{{--                        id="area-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु"--}}
+{{--                        :labels="$planAreaWiseProjects['labels']"--}}
+{{--                        :dataSets="$planAreaWiseProjects['dataSets']"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        <div class="col-lg-12">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-body">--}}
+{{--                    <x-charts.bar-chart-component--}}
+{{--                        id="ward-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"--}}
+{{--                        :labels="$wardWiseProjects['labels']"--}}
+{{--                        :dataSets="$wardWiseProjects['dataSets']"--}}
+{{--                        :displayLegend="false"--}}
+{{--                    />--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 @endsection

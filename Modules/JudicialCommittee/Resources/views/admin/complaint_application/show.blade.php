@@ -30,7 +30,7 @@
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-list"></i> निवेदन फारम सूची
                             </a>
-                            <a href="{{route('admin.judicialCommittee.complaintApplication.receipt-bill',$complaintApplication)}}"
+                            <a href="{{route('admin.judicialCommittee.complaintApplication.judicialReceiptBill.create',$complaintApplication)}}"
                                class="btn btn-sm btn-outline-primary mx-1">
                                 @if(!$complaintApplication->judicialReceiptBill)
                                     <i class="fa fa-plus-circle"> भुक्तानी गर्नुहोस्</i>
