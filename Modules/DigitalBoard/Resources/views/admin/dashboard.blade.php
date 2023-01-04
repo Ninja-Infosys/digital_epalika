@@ -19,7 +19,7 @@
                 <h4 class="page-title">गृहपृष्ठ </h4>
             </div>
             <div class="row">
-                <div class="col-md-6 col-xl-2">
+                <div class="col-md-3 col-xl-3">
                     <div class="widget-rounded-circle card-primary">
                         <div class="card-body">
                             <div class="row">
@@ -37,7 +37,7 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-2">
+                <div class="col-md-3 col-xl-3">
                     <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                         <div class="card-body">
                             <div class="row">
@@ -55,7 +55,7 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-2">
+                <div class="col-md-3 col-xl-3">
                     <div class="widget-rounded-circle card-primary">
                         <div class="card-body">
                             <div class="row">
@@ -72,7 +72,7 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
 
-                <div class="col-md-6 col-xl-2">
+                <div class="col-md-3 col-xl-3">
                     <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
                         <div class="card-body">
                             <div class="row">

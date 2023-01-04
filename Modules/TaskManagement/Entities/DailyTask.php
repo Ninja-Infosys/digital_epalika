@@ -21,7 +21,6 @@ class DailyTask extends Model
     use GetAllColumns;
 
     protected $dates = [
-        'en_date',
         'created_at',
         'updated_at',
         'deleted_at',
