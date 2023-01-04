@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('disability_identity_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('photo');
+            $table->longText('photo');
             $table->string('finger_print_type')->nullable();
             $table->string('finger_left')->nullable();
             $table->string('finger_right')->nullable();

@@ -92,6 +92,7 @@ class DisabilityIdentityCard extends Model
         'provide_detail_citizenship_no_place',
         'employee_signature_id',
         'governmental_disability_type_id',
+        'card_no'
     ];
 
     protected $casts = [
@@ -162,7 +163,7 @@ class DisabilityIdentityCard extends Model
 
     public function governmentalDisabilityType(): BelongsTo
     {
-        return $this->belongsTo(GovernmentalDisabilityType::class,'govern_disability_type_id');
+        return $this->belongsTo(GovernmentalDisabilityType::class, 'govern_disability_type_id');
     }
 
 
@@ -170,12 +171,21 @@ class DisabilityIdentityCard extends Model
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('disabilityIdentityCard', 'public');
+        } else {
+            $this->attributes['photo'] = $value;
         }
     }
 
     public function getPhotoUrlAttribute(): string
     {
-        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
+
+        if ($this->attributes['photo']) {
+            return !isBase64($this->attributes['photo'])
+                ? Storage::disk('public')->url($this->attributes['photo'])
+                : $this->attributes['photo'];
+        } else {
+            return '';
+        }
     }
 
     public function setFingerLeftAttribute($value): void
@@ -185,11 +195,26 @@ class DisabilityIdentityCard extends Model
         }
     }
 
+    public function getFingerLeftUrlAttribute(): string
+    {
+
+        return $this->attributes['finger_left'] ? Storage::disk('public')->url($this->attributes['finger_left']) : '';
+
+    }
+
     public function setFingerRightAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['finger_right'] = $value->store('disabilityIdentityCard', 'public');
         }
+    }
+
+
+    public function getFingerRightUrlAttribute(): string
+    {
+
+        return $this->attributes['finger_right'] ? Storage::disk('public')->url($this->attributes['finger_right']) : '';
+
     }
 
     public function setCitizenshipPhotoAttribute($value): void

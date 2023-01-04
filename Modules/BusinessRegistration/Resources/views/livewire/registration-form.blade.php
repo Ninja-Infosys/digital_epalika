@@ -293,7 +293,7 @@
                                             class="form-select @error('form.purpose') is-invalid @enderror"
                                             wire:model="form.purpose"
                                             id="form.purpose" multiple>
-                                            <option value="">--- उदेश्य छान्नुहोस् ---</option>
+                                            <option value="" disabled>--- उदेश्य छान्नुहोस् ---</option>
                                             @foreach($businessPurposes as $businessPurpose)
                                                 <option
                                                     value="{{$businessPurpose->id}}">{{$businessPurpose->title}}</option>

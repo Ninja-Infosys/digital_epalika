@@ -115,23 +115,23 @@
                     <span class="fw-bold">कृपया यस आवेदनको साथमा तल उल्लेखित कागजातहरू बोक्नुहोस्। </span><br>
                     <span>१. व्यवसायीको पासपोर्ट साइजको
                                             फोटो  <i
-                            class="fa {{!empty($businessDetail->photo ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->photo ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
                     <span>२. नागरिकता अपलोड गर्नुहोस् (आगाडी)  <i
-                            class="fa {{!empty($businessDetail->citizenship_front ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->citizenship_front ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
                     <span>३. नागरिकता अपलोड गर्नुहोस् (पछाडी)  <i
-                            class="fa {{!empty($businessDetail->citizenship_back ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->citizenship_back ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
                     <span>४. फार्म कम्पनी भयमा
                                             दर्ता, इजाजत
                                             प्रमाणपत्र  <i
-                            class="fa {{!empty($businessDetail->company_registration ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->company_registration ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
                     <span>५.आन्तरिक राजस्व कार्यालयमा
                                             आघिल्लो आ.व
                                             सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि  <i
-                            class="fa {{!empty($businessDetail->tax_pay_file ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->tax_pay_file ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
                     <span>६. हस्ताक्षर <i
-                            class="fa {{!empty($businessDetail->signature ??'') ? 'fa-check':''}}"></i> </span><br>
+                            class="fa {{!empty($businessDetail->signature ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
                     <span>७. औठाको छाप <i
-                            class="fa {{!empty($businessDetail->thumb ??'') ? 'fa-check':''}}"></i>  </span>
+                            class="fa {{!empty($businessDetail->thumb ??'') ? 'fa-check':'fa-times'}}"></i>  </span>
                 </div>
             </div>
         </div>
