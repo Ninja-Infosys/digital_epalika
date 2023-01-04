@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body">
                     <form
-                        action="{{route('admin.judicialCommittee.complaintApplication.receipt-bill-store',$complaintApplication)}}"
+                        action="{{route('admin.judicialCommittee.complaintApplication.judicialReceiptBill.store',$complaintApplication)}}"
                         method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">

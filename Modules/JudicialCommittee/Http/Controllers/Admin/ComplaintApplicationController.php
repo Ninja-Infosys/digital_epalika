@@ -69,32 +69,4 @@ class ComplaintApplicationController extends Controller
 
         return back();
     }
-
-    public function receiptBill(ComplaintApplication $complaintApplication)
-    {
-        $this->checkAuthorization('complaintApplication_create');
-        $complaintApplication->load('judicialReceiptBill');
-
-        return view('judicialcommittee::admin.complaint_application.receipt_bill', compact('complaintApplication'));
-    }
-
-    public function receiptBillStore(JudicialReceiptBillRequest $request, ComplaintApplication $complaintApplication)
-    {
-        $this->checkAuthorization('complaintApplication_create');
-
-        $officeSetting = OfficeSetting::with('fiscalYear')->first();
-
-        JudicialReceiptBill::updateOrCreate(
-            ['complaint_application_id' => $complaintApplication->id],
-            $request->validated()
-        );
-
-        $complaintApplication->update([
-            'registration_no' => $officeSetting->fiscalYear->title . '-' . ($complaintApplication->lawsuitNature->code ?? '') . '-' . Str::padLeft($complaintApplication->id, 4, 0)
-        ]);
-
-        toast('रसिद बिल सफलतापूर्वक थपियो', 'success');
-
-        return redirect(route('admin.judicialCommittee.complaintApplication.show', $complaintApplication));
-    }
 }

@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">अपाङ्गता परिचय पत्र</li>
+                        <li class="breadcrumb-item active"> जेष्ठ नागरिक</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> अपाङ्गता परिचय पत्र</h4>
+                <h4 class="page-title"> जेष्ठ नागरिक</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ अपाङ्गता परिचय पत्र थप्नुहोस्</h4>
-                        <a href="{{route('identity.admin.disabilityIdentityCard.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> अपाङ्गता परिचय पत्र सुची
+                        <h4 class="header-title">नयाँ जेष्ठ नागरिक थप्नुहोस्</h4>
+                        <a href="{{route('identity.admin.seniorCitizenDetail.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> जेष्ठ नागरिक सुची
                         </a>
                     </div>
                 </div>
