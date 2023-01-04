@@ -22,6 +22,10 @@
                 <a href="{{route('identity.admin.disabilityIdentityCard.index')}}">
                     <span> अपाङ्गता परिचय पत्र</span>
                 </a>
+            </li><li class="{{request()->is('admin/identity/seniorCitizen/seniorCitizenDetail') ? 'active' : ''}}">
+                <a href="{{route('identity.admin.seniorCitizenDetail.index')}}">
+                    <span> जेष्ठ नागरिक </span>
+                </a>
             </li>
         </ul>
     </div>

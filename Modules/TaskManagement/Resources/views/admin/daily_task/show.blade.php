@@ -20,69 +20,71 @@
 
 
     <div class="row">
-        <div class="col-sm" style="text-align: end">
-            <button class="btn btn-sm btn-info"
-                    onclick="printJS({
-                    printable: 'printData',
-                    targetStyles: ['*'],
-                    ignoreElements:['ignore-header'],
-                    type: 'html'
-                    })">
-                <i class="fa fa-print"></i> Print
-            </button>
-        </div>
         <div class="col-md-12 mt-2">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">दैनिक कार्य विवरण</h4>
-                        <a href="{{route('admin.taskManagement.dailyTask.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> दैनिक कार्य सूची
-                        </a>
+                        <div>
+                            <button class="btn btn-sm btn-info"
+                                    onclick="printJS({
+                    printable: 'printData',
+                    targetStyles: ['*'],
+                    ignoreElements:['ignore-header'],
+                    type: 'html'
+                    })">
+                                <i class="fa fa-print"></i> Print
+                            </button>
+                            <a href="{{route('admin.taskManagement.dailyTask.index')}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-list"></i> दैनिक कार्य सूची
+                            </a>
+                        </div>
 
                     </div>
                 </div>
                 <div class="card-body" id="printData">
                     <div class="table-responsive">
                         <div>
-                        <table class="table table-sm mb-0 table-striped table-hover">
+                            <table class="table table-sm mb-0 table-striped table-hover">
 
-                            <tbody>
-                            <tr>
-                                <th>मिति</th>
-                                <td>{{$dailyTask->date}}</td>
-                            </tr>
-                            <tr>
-                                <th>आर्थिक वर्ष</th>
-                                <td>{{$dailyTask->fiscalYear->title ?? ''}}</td>
-                            </tr>
-                            <tr>
-                                <th>शाखा</th>
-                                <td>{{$dailyTask->branch->branch_name ?? ''}}</td>
-                            </tr>
-                            <tr>
-                                <th>मुख्य कार्य</th>
-                                <td>{{$dailyTask->taskCategory->title ?? ''}}</td>
-                            </tr>
-                            <tr>
-                                <th>कार्य</th>
-                                <td>{{$dailyTask->taskDivision->title ?? ''}}</td>
-                            </tr>
-                            <tr>
-                                <th>कैफियत</th>
-                                <td>{{$dailyTask->remarks}}</td>
-                            </tr>
-                            <tr>
-                            </tbody>
-                        </table>
+                                <tbody>
+                                <tr>
+                                    <th>मिति</th>
+                                    <td>{{$dailyTask->date}}</td>
+                                </tr>
+                                <tr>
+                                    <th>आर्थिक वर्ष</th>
+                                    <td>{{$dailyTask->fiscalYear->title ?? ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th>शाखा</th>
+                                    <td>{{$dailyTask->branch->branch_name ?? ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th>मुख्य कार्य</th>
+                                    <td>{{$dailyTask->taskCategory->title ?? ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th>कार्य</th>
+                                    <td>{{$dailyTask->taskDivision->title ?? ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th>कैफियत</th>
+                                    <td>{{$dailyTask->remarks}}</td>
+                                </tr>
+                                <tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
                     <div class="row">
                         @foreach($dailyTask->files as $document)
                             <div class="col-md-4 mb-3">
                                 <div class="card">
-                                    <div class="card-header" id="ignore-header" >
-                                        <form class="d-flex justify-content-between" action="{{route('admin.file.destroy',$document)}}"
+                                    <div class="card-header" id="ignore-header">
+                                        <form class="d-flex justify-content-between"
+                                              action="{{route('admin.file.destroy',$document)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')

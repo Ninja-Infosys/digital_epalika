@@ -54,7 +54,7 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-6 mb-2">
             <label for="branch_id" class="form-label">कार्य क्षेत्र *</label>
             <select
                 wire:model="form.task_division_id"
@@ -71,7 +71,7 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-6 mb-2">
             <label for="documents" class="form-label">कागजातहरू (Multiple)</label>
             <input type="file" wire:model="form.documents" id="documents" multiple class="form-control">
             @error('form.documents')
@@ -81,9 +81,9 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-4 mb-2">
+        <div class="col-md-12 mb-2">
             <label for="remarks" class="form-label">कैफियत</label>
-            <textarea class="form-control" wire:model="form.remarks" id="remarks" rows="5"></textarea>
+            <textarea class="form-control" wire:model="form.remarks" id="remarks" rows="2"></textarea>
             @error('form.remarks')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror

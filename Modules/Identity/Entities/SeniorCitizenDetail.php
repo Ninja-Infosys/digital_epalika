@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Entities;
 
+use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
@@ -62,6 +63,10 @@ class SeniorCitizenDetail extends Model
         'employee_signature_id',
     ];
 
+    protected $casts = [
+        'gender'=>Gender::class
+    ];
+
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
@@ -89,4 +94,9 @@ class SeniorCitizenDetail extends Model
             set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('seniorCitizenship', 'public') : null,
         );
     }
+
+//    public function getGenderAttribute(): ?string
+//    {
+//        return Gender::tryFrom($this->attributes['gender'])?->label();
+//    }
 }
