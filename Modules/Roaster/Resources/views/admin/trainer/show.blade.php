@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <img src="{{$trainer->photoUrl ?? ''}}" alt="{{$trainer->name ?? ''}}"
                          class="rounded-circle avatar-lg img-thumbnail">
-                    <h4 class="mb-0">{{$trainer->name ?? ''}}</h4>
+                    <h3 class="mb-0">{{$trainer->name ?? ''}}</h3>
                     <p class="text-secondary mb-1"> {{$trainer->designation->title ?? ''}}
                         ({{$trainer->level ?? ''}})</p>
                 </div>

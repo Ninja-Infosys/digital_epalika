@@ -126,7 +126,7 @@
                                 <div class="col-md-4 border" id="yojana">
                                     <a href="#">
                                         <div class="p-2 center">
-                                            <img src="{{asset('assets/backend/images/modules/yojana.png')}}"
+                                            <img src="{{asset('assets/backend/images/modules/plan.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">योजना व्यवस्थापन</h4>
                                         </div>
@@ -135,7 +135,7 @@
                                 <div class="col-md-4 border" id="talim">
                                     <a href="#">
                                         <div class="p-2 center">
-                                            <img src="{{asset('assets/backend/images/modules/talim.png')}}"
+                                            <img src="{{asset('assets/backend/images/modules/roaster.png')}}"
                                                  height="50" width="50">
                                             <h4 class="p-1">तालिम व्यवस्थापन</h4>
                                         </div>

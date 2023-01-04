@@ -95,7 +95,7 @@
                                     <div class="avatar-lg rounded-circle bg-light border">
                                         <h3 class="mt-1 text-center">
                                             <span data-plugin="counterup">
-                                                {{count(\Modules\Grant\Entities\Grant::all())}}
+                                                {{count(\Modules\Grant\Entities\GrantDetail::all())}}
                                             </span></h3>
                                     </div>
                                     <p class="text my-1">जारी भएका अनुदान</p>
@@ -112,7 +112,7 @@
                                     <div class="avatar-lg rounded-circle bg-light border">
                                         <h3 class="mt-1 text-center">
                                             <span data-plugin="counterup">
-                                                {{count(\Modules\Grant\Entities\GrantProgram::all())}}
+                                                {{count(\Modules\Grant\Entities\Grant::all())}}
                                             </span></h3>
                                     </div>
                                     <p class="text my-1">जम्मा अनुदान कार्यक्रम</p>
