@@ -37,7 +37,7 @@ class GovernmentalDisabilityTypeController extends Controller
     {
         $this->checkAuthorization('governmentalDisabilityType_create');
         GovernmentalDisabilityType::create($request->validated());
-        toast('governmental Disability Type सफलतापूर्वक थपियो', 'success');
+        toast('अपांगताको प्रकार सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -59,6 +59,7 @@ class GovernmentalDisabilityTypeController extends Controller
 
         $this->checkAuthorization('governmentalDisabilityType_edit');
         $governmentalDisabilityType->update($request->validated());
+        toast('अपांगताको प्रकार सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('identity.admin.setting.governmentalDisabilityType.index'));
     }
 
@@ -67,6 +68,7 @@ class GovernmentalDisabilityTypeController extends Controller
 
         $this->checkAuthorization('governmentalDisabilityType_delete');
         $governmentalDisabilityType->delete();
+        toast('अपांगताको प्रकार सफलतापूर्वक मेटियो', 'success');
         return back();
     }
 }

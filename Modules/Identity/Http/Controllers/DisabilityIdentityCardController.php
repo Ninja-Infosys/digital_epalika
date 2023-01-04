@@ -13,11 +13,12 @@ use Modules\Identity\Entities\DisabilityIdentityCard;
 class DisabilityIdentityCardController extends Controller
 {
     use NepaliDateConverter;
+
     public function index()
     {
 
         $disabilityIdentityCards = DisabilityIdentityCard::latest()->paginate(10);
-        return view('identity::admin.disabilityIdentityCard.index',compact('disabilityIdentityCards'));
+        return view('identity::admin.disabilityIdentityCard.index', compact('disabilityIdentityCards'));
     }
 
     public function create()
@@ -37,7 +38,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        return view('identity::admin.disabilityIdentityCard.edit',compact('disabilityIdentityCard'));
+        return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard'));
     }
 
     public function update(Request $request, DisabilityIdentityCard $disabilityIdentityCard)
@@ -56,11 +57,10 @@ class DisabilityIdentityCardController extends Controller
     {
 
 
-
         $officeHeaders = OfficeHeader::get();
-         $todayDate= $this->get_today_nepali_date();
-        $disabilityIdentityCard->load('employeeSignature','disabilityType','governmentalDisabilityType','permanentProvince','permanentDistrict','permanentLocalBody');
-        $view = (string) View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate','disabilityIdentityCard','officeHeaders'));
+        $todayDate = $this->get_today_nepali_date();
+        $disabilityIdentityCard->load('employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
+        $view = (string)View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
 
         return response()->json([
             'view' => $view,

@@ -116,16 +116,17 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no_place' => null,
         'govern_disability_type_id' => null,
         'employee_signature_id' => null,
-        'card_no'=>null
+        'card_no' => null
     ];
 
 
-    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged','photoUpdated'];
+    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged', 'photoUpdated'];
 
     public function photoUpdated($base64String): void
     {
         $this->form['photo'] = $base64String;
     }
+
     public function dobChanged($nepaliDate, $englishDate): void
     {
         $this->form['dob_bs'] = $nepaliDate;
@@ -412,7 +413,7 @@ class DisabilityIdentityCardLivewire extends Component
         $this->validate();
 
         if (!empty($this->disabilityIdentityCard)) {
-            $this->disabilityIdentityCard->update($this->form);
+            $this->disabilityIdentityCard->update($this->validate()['form']);
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
                 'title' => 'अपाङ्गता परिचय पत्र सफलतापुर्बक अध्याबधिक भयो'
@@ -439,6 +440,11 @@ class DisabilityIdentityCardLivewire extends Component
     {
         unset($this->form['helping_task'][$index]);
         $this->form['helping_task'] = array_values($this->form['helping_task']);
+        if (!empty($this->disabilityIdentityCard)) {
+            $this->disabilityIdentityCard->update([
+                'helping_task' => $this->form['helping_task']
+            ]);
+        }
     }
 
     public function withoutHelpingTaskIncrement(): void
@@ -450,6 +456,11 @@ class DisabilityIdentityCardLivewire extends Component
     {
         unset($this->form['without_helping_task'][$index]);
         $this->form['without_helping_task'] = array_values($this->form['without_helping_task']);
+        if (!empty($this->disabilityIdentityCard)) {
+            $this->disabilityIdentityCard->update([
+                'without_helping_task' => $this->form['without_helping_task']
+            ]);
+        }
     }
 
     public function render(): Factory|View|Application
@@ -484,7 +495,7 @@ class DisabilityIdentityCardLivewire extends Component
         }
 
         if ($this->form['identity_type'] == 'not_receive') {
-            $this->form['card_no'] =  DB::table('disability_identity_cards')->max('id') + 1;
+            $this->form['card_no'] = DB::table('disability_identity_cards')->max('id') + 1;
             $this->form['receiving_body'] = ReceivingBodyEnum::LOCAL_BODY->value;
             $this->form['date_bs'] = $this->get_today_nepali_date();
             $this->form['date_ad'] = today()->toDateString();

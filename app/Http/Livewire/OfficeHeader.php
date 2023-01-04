@@ -13,6 +13,7 @@ class OfficeHeader extends Component
     public $title_en;
 
     public $font_color;
+    public $card_font;
 
     public $font_size;
 
@@ -29,6 +30,7 @@ class OfficeHeader extends Component
         'officeHeaders.*.title' => ['required', 'string', 'max:255'],
         'officeHeaders.*.title_en' => ['required', 'string', 'max:255'],
         'officeHeaders.*.font_color' => ['nullable'],
+        'officeHeaders.*.card_font' => ['nullable'],
         'officeHeaders.*.font_size' => ['required', 'max:255'],
         'officeHeaders.*.position' => ['nullable', 'integer'],
         'officeHeaders.*.font' => ['required'],

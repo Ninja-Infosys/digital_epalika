@@ -87,7 +87,7 @@
             </div>
             <div>
                 @foreach($officeHeaders as $header)
-                    <p style="font-size: 10px;line-height: 0.2;text-align: center;">{{$header->title}}</p>
+                    <p style="font-size: {{$header->card_font}}rem;line-height: 0.2;text-align: center;">{{$header->title}}</p>
                 @endforeach
             </div>
             <div>
@@ -150,7 +150,7 @@
             </div>
             <div>
                 @foreach($officeHeaders as $header)
-                    <p style="font-size: 10px;line-height: 0.2;text-align: center;">{{$header->title_en}}</p>
+                    <p style="font-size: {{$header->card_font}}rem;line-height: 0.2;text-align: center;">{{$header->title_en}}</p>
                 @endforeach
             </div>
             <div>

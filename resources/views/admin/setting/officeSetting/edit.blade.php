@@ -97,6 +97,21 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+
+                                <div class="col-md-6 mb-2">
+                                    <label for="card_font" class="form-label">कार्ड फन्ट साइज </label>
+                                    <input
+                                        type="text"
+                                        name="card_font"
+                                        value="{{old('card_font',$officeHeader->card_font)}}"
+                                        class="form-control @error('card_font') is-invalid @enderror"
+                                        id="card_font"
+                                        placeholder="कार्ड फन्ट साइज"
+                                    />
+                                    @error('card_font')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                                 <div class="col-md-6 mb-2">
                                     <label for="font" class="form-label">फन्ट </label>
                                     <input

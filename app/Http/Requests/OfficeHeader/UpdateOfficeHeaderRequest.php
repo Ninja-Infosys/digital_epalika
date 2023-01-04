@@ -20,6 +20,7 @@ class UpdateOfficeHeaderRequest extends FormRequest
             'font_size' => ['required'],
             'position' => ['required', 'integer'],
             'font_color' => ['nullable'],
+            'card_font' => ['nullable'],
         ];
     }
 }

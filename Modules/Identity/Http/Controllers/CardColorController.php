@@ -36,7 +36,7 @@ class CardColorController extends Controller
     {
         $this->checkAuthorization('cardColor_create');
         CardColor::create($request->validated());
-        toast('card Color Added', 'success');
+        toast('रंग  सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -56,7 +56,7 @@ class CardColorController extends Controller
     {
         $this->checkAuthorization('cardColor_edit');
         $cardColor->update($request->validated());
-        toast('card Color Updated Successfully', 'success');
+        toast('रंग सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('identity.admin.setting.cardColor.index'));
     }
 
@@ -64,7 +64,7 @@ class CardColorController extends Controller
     {
         $this->checkAuthorization('cardColor_delete');
         $cardColor->delete();
-        toast('card Color Deleted Successfully','success');
+        toast('रंग सफलतापूर्वक मेटियो', 'success');
         return back();
 
     }

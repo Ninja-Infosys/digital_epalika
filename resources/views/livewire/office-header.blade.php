@@ -70,9 +70,21 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="card_font.{{$index}}">कार्ड फन्ट साइज *</label>
+                                <input type="text" id="card_font.{{$index}}"
+                                       name="officeHeaders[{{$index}}][card_font]"
+                                       placeholder="कार्ड फन्ट साइज" value="{{old('card_font')}}"
+                                       wire:model="officeHeaders.{{$index}}.card_font" class="form-control">
+                                @error("officeHeaders.$index.card_font")
+                                <p class="text-danger">{{$message}}</p>
+                                @enderror
+                            </div>
+                        </div>
 
 
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="font.{{$index}}">फन्ट *</label>
                                 <input type="text" id="font.{{$index}}"
@@ -98,7 +110,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-1">
+                        <div class="col-md-1 mt-1">
                             <div class="form-group">
                                 <button class="btn btn-danger btn-sm"
                                         wire:click.prevent="removeOfficeHeader({{$index}})">
