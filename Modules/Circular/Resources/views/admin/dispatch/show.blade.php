@@ -36,12 +36,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">चलानी पत्र सूची</h4>
+                        <h4 class="header-title">चलानी पत्र विवरण</h4>
 
                         <a href="{{route('admin.circular.dispatch.index')}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> चलानी पत्र सूची
                         </a>
-
                     </div>
                 </div>
                 <div class="card-body">
