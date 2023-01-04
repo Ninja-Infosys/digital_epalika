@@ -33,7 +33,7 @@
                     <form action="{{route('identity.admin.setting.disabilityType.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
@@ -44,6 +44,20 @@
                                     placeholder="शिर्षक"
                                 />
                                 @error('title')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="title_en" class="form-label">शिर्षक (English) *</label>
+                                <input
+                                    type="text"
+                                    name="title_en"
+                                    value="{{old('title_en')}}"
+                                    class="form-control @error('title_en') is-invalid @enderror"
+                                    id="title_en"
+                                    placeholder="शिर्षक (English)"
+                                />
+                                @error('title_en')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

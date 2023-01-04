@@ -3,6 +3,7 @@
 namespace Modules\Identity\Http\Controllers;
 
 use App\Models\OfficeHeader;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,7 @@ use Modules\Identity\Entities\DisabilityIdentityCard;
 
 class DisabilityIdentityCardController extends Controller
 {
+    use NepaliDateConverter;
     public function index()
     {
 
@@ -56,8 +58,9 @@ class DisabilityIdentityCardController extends Controller
 
 
         $officeHeaders = OfficeHeader::get();
+         $todayDate= $this->get_today_nepali_date();
         $disabilityIdentityCard->load('employeeSignature','disabilityType','governmentalDisabilityType','permanentProvince','permanentDistrict','permanentLocalBody');
-        $view = (string) View::make('identity::admin.disabilityIdentityCard.print', compact('disabilityIdentityCard','officeHeaders'));
+        $view = (string) View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate','disabilityIdentityCard','officeHeaders'));
 
         return response()->json([
             'view' => $view,

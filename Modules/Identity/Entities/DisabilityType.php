@@ -18,6 +18,7 @@ class DisabilityType extends Model
     ];
 
     protected $fillable = [
-        'title'
+        'title',
+        'title_en'
     ];
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Modules\Identity\Enums\CategoryTypeEnum;
 
 class GovernmentalDisabilityType extends Model
 {
@@ -21,5 +22,11 @@ class GovernmentalDisabilityType extends Model
         'title',
         'title_en',
         'color',
+        'category'
     ];
+
+    protected $casts = [
+        'category' => CategoryTypeEnum::class
+    ];
+
 }
