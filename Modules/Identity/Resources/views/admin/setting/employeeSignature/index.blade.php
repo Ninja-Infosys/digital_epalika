@@ -42,6 +42,7 @@
                             <th scope="col">पद</th>
                             <th scope="col">रातो हस्ताक्षर</th>
                             <th scope="col">कालो हस्ताक्षर</th>
+                            <th scope="col">स्थिति</th>
                             <th scope="col">#</th>
                         </tr>
                         </thead>
@@ -59,7 +60,19 @@
                                     <img src="{{$employeeSignature->black_signature}}"
                                          alt="{{$employeeSignature->name}}" height="60">
                                 </td>
-
+                                <td>
+                                    <form
+                                        action="{{route('identity.admin.setting.employeeSignature.updateStatus',$employeeSignature)}}"
+                                        method="post">
+                                        @csrf
+                                        @method('put')
+                                        <button
+                                            class="btn btn-xs btn-outline-{{$employeeSignature->status==1 ? 'primary':'danger'}}"
+                                        >
+                                            <i class="fa {{$employeeSignature->status==1 ? 'fa-check':'fa-times'}}"></i>
+                                        </button>
+                                    </form>
+                                </td>
                                 <td>
 
                                     @can('employeeSignature_edit')

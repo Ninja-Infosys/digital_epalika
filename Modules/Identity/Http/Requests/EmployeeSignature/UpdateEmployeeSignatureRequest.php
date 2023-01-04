@@ -23,6 +23,7 @@ class UpdateEmployeeSignatureRequest extends FormRequest
             'black_signature' => ['nullable', 'image'],
             'red_signature' => ['nullable', 'image'],
             'stamp' => ['nullable', 'image'],
+            'status'=>['nullable','boolean']
         ];
     }
 }

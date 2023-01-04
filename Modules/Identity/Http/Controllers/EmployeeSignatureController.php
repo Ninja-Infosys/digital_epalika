@@ -81,4 +81,13 @@ class EmployeeSignatureController extends Controller
         toast('प्रसाशाक सफलतापूर्वक मेटियो', 'success');
         return back();
     }
+
+    public function updateStatus(EmployeeSignature $employeeSignature)
+    {
+        $employeeSignature->update([
+            'status' => !$employeeSignature->status
+        ]);
+        toast('प्रसाशाक स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
 }

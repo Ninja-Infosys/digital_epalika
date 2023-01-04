@@ -41,8 +41,9 @@ class SeniorCitizenDetailController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(SeniorCitizenDetail $seniorCitizenDetail)
     {
-        //
+        $seniorCitizenDetail->delete();
+        return back();
     }
 }
