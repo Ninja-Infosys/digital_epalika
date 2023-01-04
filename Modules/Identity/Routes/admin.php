@@ -9,6 +9,7 @@ use Modules\Identity\Http\Controllers\DisabilityTypeController;
 use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\EmployeeSignatureController;
 use Modules\Identity\Http\Controllers\RelationshipController;
+use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -26,5 +27,8 @@ Route::prefix('disability')->group(function (){
     Route::resource('disabilityIdentityCard', DisabilityIdentityCardController::class);
 });
 
+Route::prefix('seniorCitizen')->group(function (){
+   Route::resource('seniorCitizenDetail', SeniorCitizenDetailController::class);
+});
 Route::view('test','identity::admin.test');
 
