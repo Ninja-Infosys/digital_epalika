@@ -91,7 +91,7 @@ class DisabilityIdentityCard extends Model
         'provide_detail_citizenship_no_date',
         'provide_detail_citizenship_no_place',
         'employee_signature_id',
-        'governmental_disability_type_id',
+        'govern_disability_type_id',
         'card_no'
     ];
 
@@ -171,7 +171,7 @@ class DisabilityIdentityCard extends Model
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('disabilityIdentityCard', 'public');
-        } else {
+        } elseif(!empty($value)) {
             $this->attributes['photo'] = $value;
         }
     }

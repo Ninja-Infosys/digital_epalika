@@ -614,6 +614,7 @@
                                     id="form.citizenship_photo"
                                     wire:model="form.citizenship_photo"
                                 />
+                                <div wire:loading wire:target="form.citizenship_photo">Uploading...</div>
                                 @error('form.citizenship_photo')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -628,6 +629,7 @@
                                     id="form.citizenship_photo_certificate"
                                     wire:model="form.citizenship_photo_certificate"
                                 />
+                                <div wire:loading wire:target="form.citizenship_photo_certificate">Uploading...</div>
                                 @error('form.citizenship_photo_certificate')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -1082,6 +1084,7 @@
                                     id="form.photo"
                                     wire:model="form.photo"
                                 />
+                                <div wire:loading wire:target="form.photo">Uploading...</div>
                                 @error('form.photo')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -1118,6 +1121,7 @@
                                         id="form.finger_left"
                                         wire:model="form.finger_left"
                                     />
+                                    <div wire:loading wire:target="form.finger_left">Uploading...</div>
                                     @error('form.finger_left')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
@@ -1131,6 +1135,7 @@
                                         id="form.finger_right"
                                         wire:model="form.finger_right"
                                     />
+                                    <div wire:loading wire:target="form.finger_right">Uploading...</div>
                                     @error('form.finger_right')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror

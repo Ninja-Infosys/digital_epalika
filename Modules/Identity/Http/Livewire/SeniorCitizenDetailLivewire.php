@@ -66,6 +66,16 @@ class SeniorCitizenDetailLivewire extends Component
         'medicine_name' => null,
         'employee_signature_id' => null,
     ];
+    protected $listeners = ['dobChanged','issueDateChanged'];
+
+    public function dobChanged($nepaliDate): void
+    {
+        $this->form['dob_bs'] = $nepaliDate;
+    }
+    public function issueDateChanged($nepaliDate): void
+    {
+        $this->form['issue_date_bs'] = $nepaliDate;
+    }
 
     public function mount($seniorCitizenDetail = null): void
     {
