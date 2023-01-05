@@ -17,6 +17,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('relationship', RelationshipController::class);
     Route::resource('disabilityReason', DisabilityReasonController::class);
     Route::resource('disabilityType', DisabilityTypeController::class);
+    Route::put('employeeSignature/{employeeSignature}/updateStatus',[EmployeeSignatureController::class,'updateStatus'])->name('employeeSignature.updateStatus');
     Route::resource('employeeSignature', EmployeeSignatureController::class);
     Route::resource('cardColor', CardColorController::class);
     Route::resource('governmentalDisabilityType', GovernmentalDisabilityTypeController::class);

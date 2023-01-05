@@ -181,21 +181,6 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.spouse" class="form-label">पति/पत्नीको नाम (English)<span
-                                class="text-danger">*</span></label>
-                        <input
-                            name="form.spouse"
-                            class="form-control  @error('form.spouse') is-invalid @enderror"
-                            type="text"
-                            id="form.spouse"
-                            placeholder="पति/पत्नीको नाम (English)"
-                            wire:model="form.spouse"
-                        />
-                        @error('form.spouse')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4 mb-3">
                         <label for="form.spouse_en" class="form-label">पति/पत्नीको नाम (English)<span
                                 class="text-danger">*</span></label>
                         <input

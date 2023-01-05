@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('black_signature')->nullable();
             $table->string('red_signature')->nullable();
             $table->string('stamp')->nullable();
+            $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

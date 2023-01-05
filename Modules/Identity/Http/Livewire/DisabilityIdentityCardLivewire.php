@@ -161,7 +161,7 @@ class DisabilityIdentityCardLivewire extends Component
         $this->governmentDisabilityTypes = GovernmentalDisabilityType::all();
         $this->disabilityReasons = DisabilityReason::all();
         $this->occupations = Occupation::all();
-        $this->employee_signatures = EmployeeSignature::all();
+        $this->employee_signatures = EmployeeSignature::Status()->get();
 
 
         if (!empty($disabilityIdentityCard)) {
