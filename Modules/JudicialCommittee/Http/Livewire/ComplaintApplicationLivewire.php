@@ -7,6 +7,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
@@ -32,6 +33,8 @@ class ComplaintApplicationLivewire extends Component
     public $defendantWards = [];
     public $lawsuitNatures = [];
 
+    public OfficeSetting $officeSetting;
+
     public ComplaintApplication $complaintApplication;
 
     public array $form = [
@@ -55,7 +58,6 @@ class ComplaintApplicationLivewire extends Component
         'defendant_name' => null,
         'lawsuit_nature_id' => null,
         'subject' => null,
-        'submission_no' => null,
         'complaint_detail' => null,
         'date' => null,
         'en_date' => null,
@@ -70,9 +72,22 @@ class ComplaintApplicationLivewire extends Component
     {
         $this->provinces = Province::all();
         $this->lawsuitNatures = LawsuitNature::all();
+        $this->officeSetting = OfficeSetting::with('fiscalYear')->first();
         if (!empty($complaintApplication)) {
             $this->assignComplaintApplicationData($complaintApplication);
+        } else {
+            $this->setDefaultAddress();
         }
+    }
+
+    private function setDefaultAddress()
+    {
+        $this->form['complainant_province_id'] = $this->officeSetting->province_id;
+        $this->form['complainant_district_id'] = $this->officeSetting->district_id;
+        $this->form['complainant_local_body_id'] = $this->officeSetting->local_body_id;
+        $this->form['defendant_province_id'] = $this->officeSetting->province_id;
+        $this->form['defendant_district_id'] = $this->officeSetting->district_id;
+        $this->form['defendant_local_body_id'] = $this->officeSetting->local_body_id;
     }
 
     protected $listeners = ['dateChanged'];
@@ -83,18 +98,7 @@ class ComplaintApplicationLivewire extends Component
         $this->form['en_date'] = $englishDate;
     }
 
-    public function rules(): array
-    {
-        return !empty($this->complaintApplication)
-            ? array_merge($this->validationRules, [
-                'form.submission_no' => ['required', 'unique:complaint_applications,submission_no,' . $this->complaintApplication->id]
-            ])
-            : array_merge($this->validationRules, [
-                'form.submission_no' => ['required', 'unique:complaint_applications,submission_no']
-            ]);
-    }
-
-    protected $validationRules = [
+    protected $rules = [
         'form.complainant_province_id' => ['required', 'exists:provinces,id'],
         'form.complainant_district_id' => ['required', 'exists:districts,id'],
         'form.complainant_local_body_id' => ['required', 'exists:local_bodies,id'],
@@ -159,7 +163,8 @@ class ComplaintApplicationLivewire extends Component
                 $complaintApplication->update($formData);
             } else {
                 $complaintApplication = ComplaintApplication::create($this->validate()['form'] + [
-                        'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                        'fiscal_year_id' => $this->officeSetting->fiscal_year_id,
+                        'submission_no' => $this->officeSetting->fiscalYear->title . '-' . Str::padLeft(ComplaintApplication::max('id') + 1, 4, 0)
                     ]);
             }
             foreach ($this->form['relatedMembers'] as $member) {
@@ -253,8 +258,6 @@ class ComplaintApplicationLivewire extends Component
             'form.defendant_name.required' => 'प्रतिवादीको नाम अनिवार्य छ',
             'form.lawsuit_nature_id' => 'मुद्दा प्रकृति अनिवार्य छ',
             'form.subject.required' => 'विषय अनिवार्य छ',
-            'form.submission_no.required' => 'सबमिशन नम्बर अनिवार्य छ',
-            'form.submission_no.unique' => 'सबमिशन नम्बर पहिले नै अवस्थित छ',
             'form.complaint_detail.required' => 'उजुरी विवरण अनिवार्य छ',
             'form.date.required' => 'मिति अनिवार्य छ',
             'form.en_date.required' => 'मिति अनिवार्य छ',

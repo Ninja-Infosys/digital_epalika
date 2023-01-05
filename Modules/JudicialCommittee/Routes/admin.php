@@ -9,15 +9,15 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\DateSheetController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DefendantIssuedDeadlineController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialCommitteeTemplateController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialMemberController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialReceiptBillController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\LawsuitNatureController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\WrittenAnswerController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::resource('judicialMember', JudicialMemberController::class);
-Route::get('complaintApplication/{complaintApplication}/receipt-bill', [ComplaintApplicationController::class, 'receiptBill'])->name('complaintApplication.receipt-bill');
-Route::post('complaintApplication/{complaintApplication}/receipt-bill-store', [ComplaintApplicationController::class, 'receiptBillStore'])->name('complaintApplication.receipt-bill-store');
 Route::get('complaintApplication/registered', [ComplaintApplicationController::class, 'registeredApplications'])->name('registeredApplication');
 Route::resource('complaintApplication', ComplaintApplicationController::class);
+Route::resource('complaintApplication/{complaintApplication}/judicialReceiptBill', JudicialReceiptBillController::class)->names('complaintApplication.judicialReceiptBill');
 Route::resource('complaintApplication/{complaintApplication}/dateSheet', DateSheetController::class)->names('complaintApplication.dateSheet');
 Route::resource('complaintApplication/{complaintApplication}/defendantIssuedDeadline', DefendantIssuedDeadlineController::class)->names('complaintApplication.defendantIssuedDeadline');
 Route::resource('complaintApplication/{complaintApplication}/dateCompensation', DateCompensationController::class)->names('complaintApplication.dateCompensation');

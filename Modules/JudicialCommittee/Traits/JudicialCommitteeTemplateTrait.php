@@ -62,6 +62,15 @@ trait JudicialCommitteeTemplateTrait
             ],
         ],
         [
+            'title' => 'दर्ता दस्तुर विवरण',
+            'data' => [
+                'बिल नम्बर' => '[@judicialReceiptBill.bill_no]',
+                'प्रवेश गर्ने व्यक्ति' => '[@judicialReceiptBill.entry_person]',
+                'रकम' => '[@judicialReceiptBill.amount]',
+                'बिल मिति' => '[@judicialReceiptBill.bill_date]'
+            ],
+        ],
+        [
             'title' => 'तारिख पर्चा विवरण',
             'data' => [
                 'आवेदन वर्ष' => '[@dateSheet.year]',
@@ -112,6 +121,7 @@ trait JudicialCommitteeTemplateTrait
 
         return '';
     }
+
     public function getDateSheetTemplate(DateSheet $dateSheet): string
     {
         $judicialCommitteeTemplates = $this->getJudicialCommitteeTemplates();
@@ -173,7 +183,8 @@ trait JudicialCommitteeTemplateTrait
         $replace = array_merge(
             $this->getComplaintApplicationReplacement(),
             $replace,
-            $this->getDateCompensationReplacement()
+            $this->getDateCompensationReplacement(),
+            $this->getJudicialReceiptBillReplacement()
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
@@ -212,6 +223,16 @@ trait JudicialCommitteeTemplateTrait
             '[@subject]' => $this->subject ?? '',
             '[@date]' => $this->date ?? '',
             '[@complaint_detail]' => $this->complaint_detail ?? '',
+        ];
+    }
+
+    private function getJudicialReceiptBillReplacement(): array
+    {
+        return [
+            '[@judicialReceiptBill.bill_no]' => $this->judicialReceiptBill->bill_no ?? '',
+            '[@judicialReceiptBill.entry_person]' => $this->judicialReceiptBill->entry_person ?? '',
+            '[@judicialReceiptBill.amount]' => $this->judicialReceiptBill->amount ?? '',
+            '[@judicialReceiptBill.bill_date]' => $this->judicialReceiptBill->bill_date ?? '',
         ];
     }
 
