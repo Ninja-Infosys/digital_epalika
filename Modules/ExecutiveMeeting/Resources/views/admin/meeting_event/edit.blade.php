@@ -60,7 +60,7 @@
                                     nameEn="en_start_date" labelEn="Start Date"
                                     :getTodayDate="false"
                                     :editDateNe="$meetingEvent->start_date"
-                                    :editDateEn="$meetingEvent->en_start_date?->toDateString()"
+                                    :editDateEn="$meetingEvent->en_start_date"
                                 />
                             </div>
                             <div class="col-md-6 mb-2">
@@ -69,7 +69,7 @@
                                     nameEn="en_end_date" labelEn="End Date"
                                     :getTodayDate="false"
                                     :editDateNe="$meetingEvent->end_date"
-                                    :editDateEn="$meetingEvent->en_end_date?->toDateString()"
+                                    :editDateEn="$meetingEvent->en_end_date"
                                 />
                             </div>
                             <div class="col-md-12 mb-2">

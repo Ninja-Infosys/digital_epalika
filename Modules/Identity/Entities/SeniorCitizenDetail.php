@@ -67,6 +67,12 @@ class SeniorCitizenDetail extends Model
         'gender' => Gender::class
     ];
 
+
+    public function getAddressAttribute(): string
+    {
+        return "Address";
+    }
+
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
