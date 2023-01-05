@@ -64,7 +64,7 @@ class SeniorCitizenDetail extends Model
     ];
 
     protected $casts = [
-        'gender'=>Gender::class
+        'gender' => Gender::class
     ];
 
     public function province(): BelongsTo
@@ -95,8 +95,21 @@ class SeniorCitizenDetail extends Model
         );
     }
 
-//    public function getGenderAttribute(): ?string
-//    {
-//        return Gender::tryFrom($this->attributes['gender'])?->label();
-//    }
+    protected function LeftFinger(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('seniorCitizenship', 'public') : null,
+        );
+    }
+
+    protected function RightFinger(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value) => $value ? Storage::disk('public')->url($value) : '',
+            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('seniorCitizenship', 'public') : null,
+        );
+    }
+
+
 }

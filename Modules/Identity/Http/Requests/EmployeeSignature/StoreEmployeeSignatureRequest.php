@@ -23,6 +23,7 @@ class StoreEmployeeSignatureRequest extends FormRequest
             'black_signature' => ['required', 'image'],
             'red_signature' => ['required', 'image'],
             'stamp' => ['required', 'image'],
+            'status'=>['nullable','boolean']
         ];
     }
 }

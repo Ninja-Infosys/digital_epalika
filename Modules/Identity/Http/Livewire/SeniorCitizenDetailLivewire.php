@@ -9,6 +9,9 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Identity\Entities\EmployeeSignature;
@@ -67,74 +70,100 @@ class SeniorCitizenDetailLivewire extends Component
     public function mount($seniorCitizenDetail = null): void
     {
         $officeSetting = OfficeSetting::first();
-        $this->employeeSignatures = EmployeeSignature::all();
+        $this->employeeSignatures = EmployeeSignature::Status()->get();
         $this->provinces = Province::all();
 
         if (!empty($seniorCitizenDetail)) {
             $this->seniorCitizenDetail = $seniorCitizenDetail;
-            foreach ($this->form as $key => $data) {
-                if (!in_array($key, ['photo', 'left_finger', 'right_finger'])) {
-                    $this->form[$key] = $seniorCitizenDetail[$key];
-                }
+            foreach (Arr::except($this->form, ['photo', 'left_finger', 'right_finger']) as $key => $data) {
+                $this->form[$key] = $seniorCitizenDetail[$key];
             }
+        } else {
+            $this->form['province_id'] = $officeSetting->province_id;
+            $this->form['district_id'] = $officeSetting->district_id;
+            $this->form['local_body_id'] = $officeSetting->local_body_id;
         }
     }
 
-    protected
-    array $rules = [
+    public function rules()
+    {
+        return !empty($this->seniorCitizenDetail)
+            ? array_merge($this->validationRules, [
+                'form.photo' => ['nullable', 'image'],
+                'form.left_finger' => ['nullable', 'image'],
+                'form.right_finger' => ['nullable', 'image'],
+            ])
+            : array_merge($this->validationRules, [
+                'form.photo' => ['required', 'image'],
+                'form.left_finger' => ['required', 'image'],
+                'form.right_finger' => ['required', 'image'],
+            ]);
+    }
 
-        'form.photo' => ['required'],
-        'form.left_finger' => ['required'],
-        'form.right_finger' => ['required'],
-        'form.name' => ['required'],
-        'form.name_en' => ['required'],
+    protected array $validationRules = [
+        'form.name' => ['required', 'string', 'max:255'],
+        'form.name_en' => ['required', 'string', 'max:255'],
         'form.dob_bs' => ['required'],
         'form.card_no' => ['required'],
         'form.gender' => ['required'],
         'form.citizenship_no' => ['required'],
         'form.issue_date_bs' => ['required'],
-        'form.spouse' => ['required'],
-        'form.spouse_en' => ['required'],
+        'form.spouse' => ['required', 'string', 'max:255'],
+        'form.spouse_en' => ['required', 'string', 'max:255'],
         'form.blood_group' => ['required'],
-        'form.father_name' => ['required'],
-        'form.father_name_en' => ['required'],
-        'form.mother_name_en' => ['required'],
-        'form.mother_name' => ['required'],
-        'form.province_id' => ['required'],
-        'form.district_id' => ['required'],
-        'form.local_body_id' => ['required'],
-        'form.ward_no' => ['required'],
+        'form.father_name' => ['required', 'string', 'max:255'],
+        'form.father_name_en' => ['required', 'string', 'max:255'],
+        'form.mother_name_en' => ['required', 'string', 'max:255'],
+        'form.mother_name' => ['required', 'string', 'max:255'],
+        'form.province_id' => ['required', 'exists:provinces,id'],
+        'form.district_id' => ['required', 'exists:districts,id'],
+        'form.local_body_id' => ['required', 'exists:local_bodies,id'],
+        'form.ward_no' => ['required', 'integer'],
         'form.tole' => ['required'],
-        'form.patrons_name' => ['required'],
-        'form.patrons_name_en' => ['required'],
-        'form.patrons_name_address' => ['required'],
-        'form.contact_person_name' => ['required'],
-        'form.contact_person_name_en' => ['required'],
+        'form.patrons_name' => ['required', 'string', 'max:255'],
+        'form.patrons_name_en' => ['required', 'string', 'max:255'],
+        'form.patrons_name_address' => ['required', 'string', 'max:255'],
+        'form.contact_person_name' => ['required', 'string', 'max:255'],
+        'form.contact_person_name_en' => ['required', 'string', 'max:255'],
         'form.contact_person_phone' => ['required'],
-        'form.contact_person_address' => ['required'],
-        'form.is_disease' => ['required'],
-        'form.disease_name' => ['required'],
+        'form.contact_person_address' => ['required', 'string', 'max:255'],
+        'form.is_disease' => ['required', 'boolean'],
+        'form.disease_name' => ['required_if:form.is_disease,==,1'],
         'form.description' => ['required'],
         'form.description_en' => ['required'],
-        'form.is_medicine' => ['required'],
-        'form.medicine_name' => ['required'],
-        'form.employee_signature_id' => ['required'],
-
+        'form.is_medicine' => ['required', 'boolean'],
+        'form.medicine_name' => ['required_if:form.is_medicine,==,1'],
+        'form.employee_signature_id' => ['required', 'exists:employee_signatures,id'],
     ];
 
 
-    public
-    function updated($propertyName)
+    public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
 
-    public
-    function saveForm()
+    public function saveForm(): Redirector|RedirectResponse|Application
     {
+
         $this->validate()['form'];
+
+
+        if (!empty($this->seniorCitizenDetail)) {
+            $this->seniorCitizenDetail->update($this->validate()['form']);
+            $this->dispatchBrowserEvent('toast_message', [
+                'type' => 'success',
+                'title' => ' जेस्ठ नागरिक विवरण सफलतापुर्बक अध्याबधिक भयो'
+            ]);
+            return redirect(route('identity.admin.seniorCitizenDetail.index'));
+        }
+
         SeniorCitizenDetail::create($this->validate()['form']);
-        dd('dd');
+        $this->dispatchBrowserEvent('toast_message', [
+            'type' => 'success',
+            'title' => 'तपाइको  जेस्ठ नागरिक विवरण  दर्ता भयो'
+        ]);
+        $this->reset('form');
+        return back();
     }
 
     public

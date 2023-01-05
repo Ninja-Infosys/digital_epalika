@@ -29,6 +29,7 @@ class EmployeeSignature extends Model
         'black_signature',
         'red_signature',
         'stamp',
+        'status'
     ];
 
 
@@ -69,5 +70,10 @@ class EmployeeSignature extends Model
                 ? $value->store('employeeSignature/' . Str::slug($this->attributes['name_en'], '_'), 'public')
                 : null
         );
+    }
+
+    public function scopeStatus($query)
+    {
+        return $query->where('status',1);
     }
 }

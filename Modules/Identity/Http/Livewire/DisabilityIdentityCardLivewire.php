@@ -114,7 +114,7 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no' => null,
         'provide_detail_citizenship_no_date' => null,
         'provide_detail_citizenship_no_place' => null,
-        'govern_disability_type_id' => null,
+            'govern_disability_type_id' => null,
         'employee_signature_id' => null,
         'card_no' => null
     ];
@@ -161,7 +161,7 @@ class DisabilityIdentityCardLivewire extends Component
         $this->governmentDisabilityTypes = GovernmentalDisabilityType::all();
         $this->disabilityReasons = DisabilityReason::all();
         $this->occupations = Occupation::all();
-        $this->employee_signatures = EmployeeSignature::all();
+        $this->employee_signatures = EmployeeSignature::Status()->get();
 
 
         if (!empty($disabilityIdentityCard)) {
@@ -237,6 +237,7 @@ class DisabilityIdentityCardLivewire extends Component
         'form.disability_type_id' => ['required', 'exists:disability_types,id'],
         'form.blood_group' => ['required'],
         'form.disability_reason_id' => ['required', 'exists:disability_reasons,id'],
+        'form.govern_disability_type_id' => ['required', 'exists:governmental_disability_types,id'],
     ];
     protected array $fourthStepValidations = [
         'form.identity_type' => ['required'],
@@ -413,7 +414,7 @@ class DisabilityIdentityCardLivewire extends Component
         $this->validate();
 
         if (!empty($this->disabilityIdentityCard)) {
-            $this->disabilityIdentityCard->update($this->validate()['form']);
+            $this->disabilityIdentityCard->update($this->form);
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
                 'title' => 'अपाङ्गता परिचय पत्र सफलतापुर्बक अध्याबधिक भयो'
