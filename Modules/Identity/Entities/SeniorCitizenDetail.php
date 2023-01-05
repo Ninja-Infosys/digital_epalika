@@ -87,29 +87,40 @@ class SeniorCitizenDetail extends Model
         return $this->belongsTo(EmployeeSignature::class);
     }
 
-    protected function Photo(): Attribute
+    public function setPhotoAttribute($value)
     {
-        return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) : '',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('seniorCitizenship', 'public') : null,
-        );
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['photo'] = $value->store('seniorCitizenship', 'public');
+        }
     }
 
-    protected function LeftFinger(): Attribute
+    public function getPhotoAttribute(): string
     {
-        return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) : '',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('seniorCitizenship', 'public') : null,
-        );
+        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
     }
 
-    protected function RightFinger(): Attribute
+    public function setLeftFingerAttribute($value)
     {
-        return Attribute::make(
-            get: static fn($value) => $value ? Storage::disk('public')->url($value) : '',
-            set: static fn($value) => (!empty($value) && !is_string($value)) ? $value->store('seniorCitizenship', 'public') : null,
-        );
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['left_finger'] = $value->store('seniorCitizenship', 'public');
+        }
     }
 
+    public function getLeftFingerAttribute(): string
+    {
+        return $this->attributes['left_finger'] ? Storage::disk('public')->url($this->attributes['left_finger']) : '';
+    }
+
+    public function setRightFingerAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['right_finger'] = $value->store('seniorCitizenship', 'public');
+        }
+    }
+
+    public function getRightFingerAttribute(): string
+    {
+        return $this->attributes['right_finger'] ? Storage::disk('public')->url($this->attributes['right_finger']) : '';
+    }
 
 }
