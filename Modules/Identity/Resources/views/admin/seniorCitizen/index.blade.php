@@ -39,6 +39,7 @@
                                 <th>कार्ड नं.</th>
                                 <th>नाम</th>
                                 <th>लिङ्ग</th>
+                                <th>नागरिकता नं.</th>
                                 <th> फोटो</th>
                                 <th>#</th>
                             </tr>
@@ -52,6 +53,7 @@
                                     <td>
                                         {{$seniorCitizenDetail->gender?->label()??''}}
                                     </td>
+                                    <td>{{$seniorCitizenDetail->citizenship_no}}</td>
                                     <td>
                                         <img src="{{$seniorCitizenDetail->photo}}" alt="{{$seniorCitizenDetail->name??''}}" height="60">
                                     </td>
@@ -60,6 +62,10 @@
                                         <a href="{{route('identity.admin.seniorCitizenDetail.edit',$seniorCitizenDetail)}}"
                                            class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{route('identity.admin.seniorCitizenDetail.show',$seniorCitizenDetail)}}"
+                                               class="btn btn-xs btn-outline-primary" title="हेर्नुहोस्">
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <form action="{{route('identity.admin.seniorCitizenDetail.destroy',$seniorCitizenDetail)}}"
                                               method="post">
