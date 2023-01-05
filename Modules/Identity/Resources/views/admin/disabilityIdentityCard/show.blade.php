@@ -62,7 +62,7 @@
                                 लिंग : {{$disabilityIdentityCard->gender?->label()?? ""}}
                             </td>
                             <td>
-                                रक्त समुह : {{$disabilityIdentityCard->blood_group}}
+                                रक्त समुह : {{$disabilityIdentityCard->blood_group?->label()?? ""}}
                             </td>
                             <td rowspan="3">
                                 <h4 class="font-15 text-center pb-2 text-decoration-underline">
@@ -78,10 +78,10 @@
                                     <div class="d-flex justify-content-between">
                                         <img src="{{$disabilityIdentityCard->right_finger}}"
                                              alt="{{$disabilityIdentityCard->name}}"
-                                             style="object-fit: cover; height: 4rem; width: 4rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                             style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
                                         <img src="{{$disabilityIdentityCard->left_finger}}"
                                              alt="{{$disabilityIdentityCard->name}}"
-                                             style="object-fit: cover; height: 4rem; width: 4rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                             style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
                                     </div>
                                 @endif
                             </td>
@@ -139,6 +139,9 @@
                         <tr>
                             <td>दैनिक क्रियाकलाप गर्न : {{$disabilityIdentityCard->daily_activity ==1 ? 'सक्ने' : 'नसक्ने'}}</td>
                             <td>सहयोग सामग्री प्रयोग गर्ने : {{$disabilityIdentityCard->supporting_material ==1 ? 'गरेको' : 'नगरेको'}}</td>
+                            @if($disabilityIdentityCard->supporting_material==1)
+                            <td>सहयोग सामग्री : {{$disabilityIdentityCard->material_name}}</td>
+                            @endif
                         </tr>
                         </tbody>
                     </table>

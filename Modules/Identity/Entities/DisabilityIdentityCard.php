@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Entities;
 
+use App\Enums\BloodGroupEnum;
 use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
@@ -99,6 +100,7 @@ class DisabilityIdentityCard extends Model
     protected $casts = [
         'gender' => Gender::class,
         'qualification'=> Qualification::class,
+        'blood_group'=> BloodGroupEnum::class,
     ];
 
 
