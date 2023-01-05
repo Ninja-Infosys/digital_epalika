@@ -161,8 +161,8 @@ class SeniorCitizenDetailLivewire extends Component
 
         $this->validate()['form'];
 
-
         if (!empty($this->seniorCitizenDetail)) {
+
             $this->seniorCitizenDetail->update($this->validate()['form']);
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',

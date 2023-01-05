@@ -412,7 +412,6 @@ class DisabilityIdentityCardLivewire extends Component
     public function saveForm(): RedirectResponse|Application|Redirector
     {
         $this->validate();
-
         if (!empty($this->disabilityIdentityCard)) {
             $this->disabilityIdentityCard->update($this->form);
             $this->dispatchBrowserEvent('toast_message', [
@@ -421,8 +420,6 @@ class DisabilityIdentityCardLivewire extends Component
             ]);
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
         }
-
-
         DisabilityIdentityCard::create($this->form);
         $this->dispatchBrowserEvent('toast_message', [
             'type' => 'success',

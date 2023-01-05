@@ -171,7 +171,7 @@ class DisabilityIdentityCard extends Model
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('disabilityIdentityCard', 'public');
-        } elseif(!empty($value)) {
+        } elseif (!empty($value)) {
             $this->attributes['photo'] = $value;
         }
     }
@@ -190,8 +190,12 @@ class DisabilityIdentityCard extends Model
 
     public function setFingerLeftAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['finger_left'] = $value->store('disabilityIdentityCard', 'public');
+        if ($this->attributes['finger_print_type'] == 'none') {
+            $this->attributes['finger_left'] = null;
+        } else {
+            if (!empty($value) && !is_string($value)) {
+                $this->attributes['finger_left'] = $value->store('disabilityIdentityCard', 'public');
+            }
         }
     }
 
@@ -204,8 +208,13 @@ class DisabilityIdentityCard extends Model
 
     public function setFingerRightAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['finger_right'] = $value->store('disabilityIdentityCard', 'public');
+
+        if ($this->attributes['finger_print_type'] == 'none') {
+            $this->attributes['finger_right'] = null;
+        } else {
+            if (!empty($value) && !is_string($value)) {
+                $this->attributes['finger_right'] = $value->store('disabilityIdentityCard', 'public');
+            }
         }
     }
 
