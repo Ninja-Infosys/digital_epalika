@@ -9,7 +9,7 @@
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center">
                                     <span data-plugin="counterup">
-                                        12
+                                        {{$totalApplicationsCount}}
                                     </span>
                                 </h3>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center">
                                     <span data-plugin="counterup">
-                                        16
+                                        {{$registeredApplicationsCount}}
                                    </span>
                                 </h3>
                             </div>
@@ -45,11 +45,11 @@
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center">
                                     <span data-plugin="counterup">
-                                        7
+                                        {{$currentYearApplicationsCount}}
                                     </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">सम्पन्न योजनाहरू</p>
+                            <p class="text my-1">चालू आर्थिक वर्षका निवेदनहरु</p>
                         </div>
                     </div>
                 </div>
@@ -63,11 +63,11 @@
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center">
                                     <span data-plugin="counterup">
-                                        16
+                                        {{$currentMonthApplicationsCount}}
                                    </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">चालू आर्थिक वर्षका निवेदनहरु</p>
+                            <p class="text my-1">हालको महिनाका निवेदनहरु</p>
                         </div>
                     </div>
                 </div>
@@ -100,31 +100,17 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </div>--}}
-{{--    <div class="row">--}}
-{{--        <div class="col-lg-12">--}}
-{{--            <div class="card">--}}
-{{--                <div class="card-body">--}}
-{{--                    <x-charts.bar-chart-component--}}
-{{--                        id="area-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका योजनाको क्षेत्रअनुसारका सम्पूर्ण योजनाहरु"--}}
-{{--                        :labels="$planAreaWiseProjects['labels']"--}}
-{{--                        :dataSets="$planAreaWiseProjects['dataSets']"--}}
-{{--                    />--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <div class="row">--}}
-{{--        <div class="col-lg-12">--}}
-{{--            <div class="card">--}}
-{{--                <div class="card-body">--}}
-{{--                    <x-charts.bar-chart-component--}}
-{{--                        id="ward-wise-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका वडा अनुसार योजनाहरुको विवरण"--}}
-{{--                        :labels="$wardWiseProjects['labels']"--}}
-{{--                        :dataSets="$wardWiseProjects['dataSets']"--}}
-{{--                        :displayLegend="false"--}}
-{{--                    />--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    <div class="row mt-2">
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component
+                        id="monthly-applications-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका मासिक निवेदनहरु"
+                        :labels="$monthlyApplications['labels']"
+                        :dataSets="$monthlyApplications['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

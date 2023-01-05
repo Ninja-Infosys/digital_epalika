@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\FiscalYear;
 use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
+use Illuminate\Support\Collection;
 use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 
@@ -13,21 +14,33 @@ class DashboardController extends Controller
 {
     use NepaliDateConverter;
 
+    protected Collection $currentYearRegistrations;
+    protected Collection $currentYearDispatches;
+    protected OfficeSetting $officeSetting;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->officeSetting = OfficeSetting::first();
+        $this->currentYearRegistrations = Registration::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
+        $this->currentYearDispatches = Dispatch::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
+    }
+
     public function __invoke()
     {
         $nepali_date = $this->get_nepali_date(now()->format('Y'), now()->format('m'), now()->format('d'));
 
-        $officeSetting = OfficeSetting::first();
         $total_registrations = Registration::count();
-        $yearly_registrations = Registration::where('fiscal_year_id', $officeSetting->fiscal_year_id)->count();
-        $monthly_registrations = Registration::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('registration_date', $nepali_date['m'])->count();
+        $yearly_registrations = $this->currentYearRegistrations->count();
+        $monthly_registrations = $this->currentYearRegistrations->where('registration_month', $nepali_date['m'])->count();
         $total_dispatches = Dispatch::count();
-        $yearly_dispatches = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->count();
-        $monthly_dispatches = Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)->whereMonth('dispatch_date', $nepali_date['m'])->count();
+        $yearly_dispatches = $this->currentYearDispatches->count();
+        $monthly_dispatches = $this->currentYearDispatches->where('dispatch_month', $nepali_date['m'])->count();
 
         $registrationChartData = $this->getTotalRegistrationAndDispatchData();
 
-        $registrationYearlyChartData = $this->getCurrentFyMonthlyRegistrationAndDispatch($officeSetting);
+        $registrationYearlyChartData = $this->getCurrentFyMonthlyRegistrationAndDispatch();
 
         return view(
             'circular::admin.dashboard',
@@ -68,37 +81,14 @@ class DashboardController extends Controller
         ];
     }
 
-    /**
-     * @param OfficeSetting $officeSetting
-     * @return array
-     */
-    public function getCurrentFyMonthlyRegistrationAndDispatch(OfficeSetting $officeSetting): array
+    public function getCurrentFyMonthlyRegistrationAndDispatch(): array
     {
         $monthlyRegistrations = [];
-        $registrations = Registration::where('fiscal_year_id', $officeSetting->fiscal_year_id)
-            ->get()
-            ->map(function ($registration) {
-                return [
-                    'month' => explode('-', $registration->registration_date)[1] ?? ''
-                ];
-            });
-
-        foreach ($this->month_name as $key => $month) {
-            $monthlyRegistrations[] = $registrations->where('month', ($key + 1))->count();
-        }
-
         $monthlyDispatches = [];
-        $dispatches=Dispatch::where('fiscal_year_id', $officeSetting->fiscal_year_id)
-            ->get()
-            ->map(function ($dispatch) {
-                return [
-                    'month' => explode('-', $dispatch->dispatch_date)[1] ?? ''
-                ];
-            });
 
         foreach ($this->month_name as $key => $month) {
-            $monthlyDispatches[] = $dispatches->where('month', ($key + 1))->count();
-            ;
+            $monthlyRegistrations[] = $this->currentYearRegistrations->where('registration_month', ($key + 1))->count();
+            $monthlyDispatches[] = $this->currentYearDispatches->where('dispatch_month', ($key + 1))->count();
         }
 
         return [

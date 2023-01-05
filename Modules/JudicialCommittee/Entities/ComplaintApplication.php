@@ -62,6 +62,12 @@ class ComplaintApplication extends Model
         'applicant_signature',
     ];
 
+    protected $appends=[
+        'month',
+        'en_month',
+        'is_registered'
+    ];
+
     public function getApplicantSignatureUrlAttribute(): string
     {
         return !empty($this->attributes['applicant_signature'])
@@ -74,6 +80,21 @@ class ComplaintApplication extends Model
         if (!empty($value) && !is_string($value)) {
             $this->attributes['applicant_signature'] = $value->store('judicial_committee/applicant_signature', 'public');
         }
+    }
+
+    public function getMonthAttribute(): string
+    {
+        return explode('-', $this->date)[1] ?? '';
+    }
+
+    public function getEnMonthAttribute(): string
+    {
+        return explode('-', $this->en_date)[1] ?? '';
+    }
+
+    public function getIsRegisteredAttribute(): bool
+    {
+        return (bool)$this->judicialReceiptBill()->count();
     }
 
     public function fiscalYear(): BelongsTo
