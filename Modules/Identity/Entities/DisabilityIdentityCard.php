@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
+use Modules\BusinessRegistration\Enums\Qualification;
 
 class DisabilityIdentityCard extends Model
 {
@@ -96,7 +97,8 @@ class DisabilityIdentityCard extends Model
     ];
 
     protected $casts = [
-        'gender' => Gender::class
+        'gender' => Gender::class,
+        'qualification'=> Qualification::class,
     ];
 
 
@@ -247,6 +249,27 @@ class DisabilityIdentityCard extends Model
             get: static fn($value) => explode(',', $value),
             set: static fn($value) => implode(',', $value),
         );
+    }
+
+    public function getRightFingerAttribute()
+    {
+        if ($this->attributes['finger_right']) {
+            return !empty($this->attributes['finger_right'])
+                ? Storage::disk('public')->url($this->attributes['finger_right'])
+                : $this->attributes['finger_right'];
+        } else {
+            return '';
+        }
+    }
+    public function getLeftFingerAttribute()
+    {
+        if ($this->attributes['finger_left']) {
+            return !empty($this->attributes['finger_left'])
+                ? Storage::disk('public')->url($this->attributes['finger_left'])
+                : $this->attributes['finger_left'];
+        } else {
+            return '';
+        }
     }
 
 

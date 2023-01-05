@@ -53,6 +53,10 @@
                                     </td>
 
                                     <td>
+                                        <a href="{{route('identity.admin.disabilityIdentityCard.show',$disabilityIdentityCard)}}"
+                                           class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                         <a href="{{route('identity.admin.disabilityIdentityCard.edit',$disabilityIdentityCard)}}"
                                            class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
