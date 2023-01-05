@@ -66,7 +66,7 @@ class SeniorCitizenDetailLivewire extends Component
         'medicine_name' => null,
         'employee_signature_id' => null,
     ];
-    protected $listeners = ['dobChanged','issueDateChanged'];
+    protected $listeners = ['dobChanged','issueDateChanged','photoUpdated'];
 
     public function dobChanged($nepaliDate): void
     {
@@ -77,6 +77,10 @@ class SeniorCitizenDetailLivewire extends Component
         $this->form['issue_date_bs'] = $nepaliDate;
     }
 
+    public function photoUpdated($base64String): void
+    {
+        $this->form['photo'] = $base64String;
+    }
     public function mount($seniorCitizenDetail = null): void
     {
         $officeSetting = OfficeSetting::first();
@@ -99,12 +103,12 @@ class SeniorCitizenDetailLivewire extends Component
     {
         return !empty($this->seniorCitizenDetail)
             ? array_merge($this->validationRules, [
-                'form.photo' => ['nullable', 'image'],
+                'form.photo' => ['nullable'],
                 'form.left_finger' => ['nullable', 'image'],
                 'form.right_finger' => ['nullable', 'image'],
             ])
             : array_merge($this->validationRules, [
-                'form.photo' => ['required', 'image'],
+                'form.photo' => ['required'],
                 'form.left_finger' => ['required', 'image'],
                 'form.right_finger' => ['required', 'image'],
             ]);

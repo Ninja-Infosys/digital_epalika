@@ -114,7 +114,7 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no' => null,
         'provide_detail_citizenship_no_date' => null,
         'provide_detail_citizenship_no_place' => null,
-            'govern_disability_type_id' => null,
+        'govern_disability_type_id' => null,
         'employee_signature_id' => null,
         'card_no' => null
     ];

@@ -87,16 +87,25 @@ class SeniorCitizenDetail extends Model
         return $this->belongsTo(EmployeeSignature::class);
     }
 
-    public function setPhotoAttribute($value)
+    public function setPhotoAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('seniorCitizenship', 'public');
+        } elseif(!empty($value)) {
+            $this->attributes['photo'] = $value;
         }
     }
 
     public function getPhotoAttribute(): string
     {
-        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
+
+        if ($this->attributes['photo']) {
+            return !isBase64($this->attributes['photo'])
+                ? Storage::disk('public')->url($this->attributes['photo'])
+                : $this->attributes['photo'];
+        } else {
+            return '';
+        }
     }
 
     public function setLeftFingerAttribute($value)

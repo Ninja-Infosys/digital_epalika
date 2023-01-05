@@ -25,6 +25,7 @@
                             name="form.photo"
                             class="form-control  @error('form.photo') is-invalid @enderror"
                             type="file"
+                            accept="image/*"
                             id="form.photo"
                             wire:model="form.photo"
                         />
@@ -32,6 +33,11 @@
                         @error('form.photo')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
+                        <button onclick="loadImage()" type="button">Camera</button>
+                        <button onclick="captureImage()" type="button">Capture Image</button>
+                        <button onclick="stopCamera()" type="button">Stop Camera</button>
+                        <video id="video" width="200" height="200"  autoplay></video>
+                        <canvas id="canvas" width="200" height="200"></canvas>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="form.left_finger" class="form-label">औठा छाप बाँया</label>
