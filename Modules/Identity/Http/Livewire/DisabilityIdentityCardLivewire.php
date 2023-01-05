@@ -114,7 +114,7 @@ class DisabilityIdentityCardLivewire extends Component
         'provide_detail_citizenship_no' => null,
         'provide_detail_citizenship_no_date' => null,
         'provide_detail_citizenship_no_place' => null,
-        'govern_disability_type_id' => null,
+            'govern_disability_type_id' => null,
         'employee_signature_id' => null,
         'card_no' => null
     ];
@@ -218,12 +218,12 @@ class DisabilityIdentityCardLivewire extends Component
             ? array_merge($this->identityDetailValidations, [
                 'form.finger_left' => ['nullable', 'image'],
                 'form.finger_right' => ['nullable', 'image'],
-                'form.photo' => ['nullable'],
+                'form.photo' => ['nullable','image'],
             ])
             : array_merge($this->identityDetailValidations, [
                 'form.finger_left' => ['required_if:form.finger_print_type,==,legs,finger'],
                 'form.finger_right' => ['required_if:form.finger_print_type,==,legs,finger'],
-                'form.photo' => ['required'],
+                'form.photo' => ['required','image'],
             ]);
     }
 
@@ -237,6 +237,7 @@ class DisabilityIdentityCardLivewire extends Component
         'form.disability_type_id' => ['required', 'exists:disability_types,id'],
         'form.blood_group' => ['required'],
         'form.disability_reason_id' => ['required', 'exists:disability_reasons,id'],
+        'form.govern_disability_type_id' => ['required', 'exists:governmental_disability_types,id'],
     ];
     protected array $fourthStepValidations = [
         'form.identity_type' => ['required'],
@@ -411,6 +412,7 @@ class DisabilityIdentityCardLivewire extends Component
     public function saveForm(): RedirectResponse|Application|Redirector
     {
         $this->validate();
+//        dd($this->form['govern_disability_type_id']);
 
         if (!empty($this->disabilityIdentityCard)) {
             $this->disabilityIdentityCard->update($this->form);
