@@ -28,6 +28,7 @@
                             id="form.photo"
                             wire:model="form.photo"
                         />
+                        <div wire:loading wire:target="form.photo">Uploading...</div>
                         @error('form.photo')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -41,6 +42,7 @@
                             id="form.left_finger"
                             wire:model="form.left_finger"
                         />
+                        <div wire:loading wire:target="form.left_finger">Uploading...</div>
                         @error('form.left_finger')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -54,6 +56,7 @@
                             id="form.right_finger"
                             wire:model="form.right_finger"
                         />
+                        <div wire:loading wire:target="form.right_finger">Uploading...</div>
                         @error('form.right_finger')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror

@@ -413,7 +413,7 @@ class DisabilityIdentityCardLivewire extends Component
         $this->validate();
 
         if (!empty($this->disabilityIdentityCard)) {
-            $this->disabilityIdentityCard->update($this->validate()['form']);
+            $this->disabilityIdentityCard->update($this->form);
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
                 'title' => 'अपाङ्गता परिचय पत्र सफलतापुर्बक अध्याबधिक भयो'
