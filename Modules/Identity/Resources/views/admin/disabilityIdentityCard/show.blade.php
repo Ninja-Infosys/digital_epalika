@@ -68,7 +68,7 @@
                                 <h4 class="font-15 text-center pb-2 text-decoration-underline">
                                     @if($disabilityIdentityCard->finger_print_type === 'finger')
                                         हातको छाप :
-                                    @elseif($disabilityIdentityCard->finger_print_type === 'leg')
+                                    @elseif($disabilityIdentityCard->finger_print_type === 'legs')
                                         खुट्टाको छाप :
                                     @else
                                         औलाको छाप :<br> <br>दुवै हात खुट्टा नभयको
