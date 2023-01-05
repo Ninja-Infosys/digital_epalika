@@ -218,12 +218,12 @@ class DisabilityIdentityCardLivewire extends Component
             ? array_merge($this->identityDetailValidations, [
                 'form.finger_left' => ['nullable', 'image'],
                 'form.finger_right' => ['nullable', 'image'],
-                'form.photo' => ['nullable','image'],
+                'form.photo' => ['nullable'],
             ])
             : array_merge($this->identityDetailValidations, [
                 'form.finger_left' => ['required_if:form.finger_print_type,==,legs,finger'],
                 'form.finger_right' => ['required_if:form.finger_print_type,==,legs,finger'],
-                'form.photo' => ['required','image'],
+                'form.photo' => ['required'],
             ]);
     }
 
@@ -412,7 +412,6 @@ class DisabilityIdentityCardLivewire extends Component
     public function saveForm(): RedirectResponse|Application|Redirector
     {
         $this->validate();
-//        dd($this->form['govern_disability_type_id']);
 
         if (!empty($this->disabilityIdentityCard)) {
             $this->disabilityIdentityCard->update($this->form);
