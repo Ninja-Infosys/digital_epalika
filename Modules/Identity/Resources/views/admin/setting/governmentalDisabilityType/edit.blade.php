@@ -72,7 +72,7 @@
                                             aria-label="Default select example">
                                         <option value="">Select Category</option>
                                         @foreach (\Modules\Identity\Enums\CategoryTypeEnum::cases() as $category)
-                                            <option value="{{ $category->value }}" {{old('category',$category->value)== $governmentalDisabilityType->category ? 'selected':''}}>
+                                            <option value="{{ $category->value }}" {{old('category',$category->value)== $governmentalDisabilityType->category->value ? 'selected':''}}>
                                                 {{ $category->label() }}
                                             </option>
                                         @endforeach
