@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Entities;
 
+use App\Enums\BloodGroupEnum;
 use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
+use Modules\BusinessRegistration\Enums\Qualification;
 
 class DisabilityIdentityCard extends Model
 {
@@ -96,7 +98,9 @@ class DisabilityIdentityCard extends Model
     ];
 
     protected $casts = [
-        'gender' => Gender::class
+        'gender' => Gender::class,
+        'qualification'=> Qualification::class,
+        'blood_group'=> BloodGroupEnum::class,
     ];
 
 
@@ -171,7 +175,7 @@ class DisabilityIdentityCard extends Model
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('disabilityIdentityCard', 'public');
-        } elseif(!empty($value)) {
+        } elseif (!empty($value)) {
             $this->attributes['photo'] = $value;
         }
     }
@@ -190,8 +194,12 @@ class DisabilityIdentityCard extends Model
 
     public function setFingerLeftAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['finger_left'] = $value->store('disabilityIdentityCard', 'public');
+        if ($this->attributes['finger_print_type'] == 'none') {
+            $this->attributes['finger_left'] = null;
+        } else {
+            if (!empty($value) && !is_string($value)) {
+                $this->attributes['finger_left'] = $value->store('disabilityIdentityCard', 'public');
+            }
         }
     }
 
@@ -204,8 +212,13 @@ class DisabilityIdentityCard extends Model
 
     public function setFingerRightAttribute($value): void
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['finger_right'] = $value->store('disabilityIdentityCard', 'public');
+
+        if ($this->attributes['finger_print_type'] == 'none') {
+            $this->attributes['finger_right'] = null;
+        } else {
+            if (!empty($value) && !is_string($value)) {
+                $this->attributes['finger_right'] = $value->store('disabilityIdentityCard', 'public');
+            }
         }
     }
 
@@ -247,6 +260,27 @@ class DisabilityIdentityCard extends Model
             get: static fn($value) => explode(',', $value),
             set: static fn($value) => implode(',', $value),
         );
+    }
+
+    public function getRightFingerAttribute()
+    {
+        if ($this->attributes['finger_right']) {
+            return !empty($this->attributes['finger_right'])
+                ? Storage::disk('public')->url($this->attributes['finger_right'])
+                : $this->attributes['finger_right'];
+        } else {
+            return '';
+        }
+    }
+    public function getLeftFingerAttribute()
+    {
+        if ($this->attributes['finger_left']) {
+            return !empty($this->attributes['finger_left'])
+                ? Storage::disk('public')->url($this->attributes['finger_left'])
+                : $this->attributes['finger_left'];
+        } else {
+            return '';
+        }
     }
 
 

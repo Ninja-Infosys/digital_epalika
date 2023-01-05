@@ -26,9 +26,9 @@ class SeniorCitizenDetailController extends Controller
 
     }
 
-    public function show($id)
+    public function show(SeniorCitizenDetail $seniorCitizenDetail)
     {
-        return view('identity::show');
+        return view('identity::admin.seniorCitizen.show', compact('seniorCitizenDetail'));
     }
 
     public function edit(SeniorCitizenDetail $seniorCitizenDetail)

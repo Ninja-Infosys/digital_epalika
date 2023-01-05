@@ -33,7 +33,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function show(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        return view('identity::show');
+        return view('identity::admin.disabilityIdentityCard.show', compact('disabilityIdentityCard'));
     }
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)

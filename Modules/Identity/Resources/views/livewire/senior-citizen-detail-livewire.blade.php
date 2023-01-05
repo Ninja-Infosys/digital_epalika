@@ -25,6 +25,7 @@
                             name="form.photo"
                             class="form-control  @error('form.photo') is-invalid @enderror"
                             type="file"
+                            accept="image/*"
                             id="form.photo"
                             wire:model="form.photo"
                         />
@@ -32,6 +33,11 @@
                         @error('form.photo')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
+                        <button onclick="loadImage()" type="button">Camera</button>
+                        <button onclick="captureImage()" type="button">Capture Image</button>
+                        <button onclick="stopCamera()" type="button">Stop Camera</button>
+                        <video id="video" width="200" height="200"  autoplay></video>
+                        <canvas id="canvas" width="200" height="200"></canvas>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="form.left_finger" class="form-label">औठा छाप बाँया</label>
@@ -97,12 +103,13 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.dob_bs" class="form-label">जन्म मिति (वि.स.)<span class="text-danger">*</span></label>
+                        <label for="dob_bs" class="form-label">जन्म मिति (वि.स.)<span class="text-danger">*</span></label>
                         <input
                             name="form.dob_bs"
                             class="form-control  @error('form.dob_bs') is-invalid @enderror"
                             type="text"
-                            id="form.dob_bs"
+                            placeholder="जन्म मिति (वि.स.)"
+                            id="dob_bs"
                             wire:model="form.dob_bs"
                         />
                         @error('form.dob_bs')
@@ -154,13 +161,13 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.issue_date_bs" class="form-label">जारी मिति (वि.स.)<span
+                        <label for="issue_date_bs" class="form-label">जारी मिति (वि.स.)<span
                                 class="text-danger">*</span></label>
                         <input
                             name="form.issue_date_bs"
                             class="form-control  @error('form.issue_date_bs') is-invalid @enderror"
                             type="text"
-                            id="form.issue_date_bs"
+                            id="issue_date_bs"
                             placeholder="जारी मिति (वि.स.)"
                             wire:model="form.issue_date_bs"
                         />
@@ -633,28 +640,19 @@
                     onChange: function () {
                         let inputFieldDate = $("#dob_bs").val();
                         let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
-                        let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
-                        let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
-                        $("#dob_ad").val(formattedDate);
-
-                        Livewire.emit('dobChanged', inputFieldDate, formattedDate);
+                        Livewire.emit('dobChanged', inputFieldDate);
                     }
                 });
-                if ($('#date_bs').length) {
-                    $("#date_bs").nepaliDatePicker({
-                        ndpYear: true,
-                        ndpMonth: true,
-                        onChange: function () {
-                            let inputFieldDate = $("#date_bs").val();
-                            let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
-                            let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
-                            let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
-                            $("#date_ad").val(formattedDate);
+                $("#issue_date_bs").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    onChange: function () {
+                        let inputFieldDate = $("#issue_date_bs").val();
+                        let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                        Livewire.emit('issueDateChanged', inputFieldDate);
+                    }
+                });
 
-                            Livewire.emit('dateChanged', inputFieldDate, formattedDate);
-                        }
-                    });
-                }
 
                 // let todayBsDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
                 // let todayAdDate = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentAdDate(), "YYYY-MM-DD")
