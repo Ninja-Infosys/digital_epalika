@@ -9,7 +9,7 @@
                                 <div class="col-md-4">
                                     <img src="{{ $employee->photo_url }}" class="img-fluid rounded-start"
                                         alt="{{ $employee->name }}"
-                                        style="object-fit: contain; height: 7.7rem; width: 70%;">
+                                        style="object-fit: cover; height: 8.2rem;">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body mt-1">
