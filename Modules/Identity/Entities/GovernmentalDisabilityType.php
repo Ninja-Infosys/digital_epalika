@@ -22,7 +22,8 @@ class GovernmentalDisabilityType extends Model
         'title',
         'title_en',
         'color',
-        'category'
+        'category',
+        'position'
     ];
 
     protected $casts = [

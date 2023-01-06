@@ -20,6 +20,7 @@ class StoreGovernmentalDisablityRequest extends FormRequest
             'title' => ['required','string','max:255'],
             'title_en' => ['required','string','max:255'],
             'color'=>['required','string','max:255'],
+            'position'=>['nullable','integer'],
             'category'=>['required',new Enum(CategoryTypeEnum::class)],
         ];
     }
