@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
 use Modules\BusinessRegistration\Enums\Qualification;
+use Modules\Identity\Enums\ReceivingBodyEnum;
 
 class DisabilityIdentityCard extends Model
 {
@@ -101,6 +102,8 @@ class DisabilityIdentityCard extends Model
         'gender' => Gender::class,
         'qualification'=> Qualification::class,
         'blood_group'=> BloodGroupEnum::class,
+        'receiving_body'=> ReceivingBodyEnum::class,
+
     ];
 
 
@@ -230,6 +233,11 @@ class DisabilityIdentityCard extends Model
 
     }
 
+    public function getCitizenshipPhotoUrlAttribute(): string
+    {
+        return $this->attributes['citizenship_photo'] ? Storage::disk('public')->url($this->attributes['citizenship_photo']) : '';
+
+    }
     public function setCitizenshipPhotoAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
@@ -237,6 +245,11 @@ class DisabilityIdentityCard extends Model
         }
     }
 
+    public function getCitizenshipPhotoCertificateUrlAttribute(): string
+    {
+        return $this->attributes['citizenship_photo_certificate'] ? Storage::disk('public')->url($this->attributes['citizenship_photo_certificate']) : '';
+
+    }
     public function setCitizenshipPhotoCertificateAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
