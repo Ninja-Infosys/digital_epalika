@@ -110,7 +110,7 @@
                         </tr>
                         <tr>
                             <td>हजुरबावुको नाम: {{$disabilityIdentityCard->grand_father_name}}</td>
-                            <td>रक्त समुह : {{$disabilityIdentityCard->blood_group}}</td>
+                            <td></td>
                             <td>पछिल्लो सैक्षिक योग्यता : {{$disabilityIdentityCard->qualification?->label()?? ""}}</td>
                         </tr>
                         <tr>

@@ -64,8 +64,7 @@ class ComplaintApplication extends Model
 
     protected $appends=[
         'month',
-        'en_month',
-        'is_registered'
+        'en_month'
     ];
 
     public function getApplicantSignatureUrlAttribute(): string
@@ -90,11 +89,6 @@ class ComplaintApplication extends Model
     public function getEnMonthAttribute(): string
     {
         return explode('-', $this->en_date)[1] ?? '';
-    }
-
-    public function getIsRegisteredAttribute(): bool
-    {
-        return (bool)$this->judicialReceiptBill()->count();
     }
 
     public function fiscalYear(): BelongsTo
