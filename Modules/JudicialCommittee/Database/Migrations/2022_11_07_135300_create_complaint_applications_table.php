@@ -35,10 +35,10 @@ return new class () extends Migration {
             $table->string('complaint_detail')->nullable()->comment('विवरण');
             $table->string('date')->nullable()->comment('मिति');
             $table->date('en_date')->nullable()->comment('मिति अंग्रेजी');
-            $table->string('applicant_name')->nullable()->comment('आवेदकको नाम');
-            $table->string('applicant_phone')->nullable()->comment('आवेदक फोन');
-            $table->string('applicant_address')->nullable()->comment('आवेदक ठेगाना');
-            $table->string('applicant_signature')->nullable()->comment('आवेदकको हस्ताक्षर');
+            $table->string('applicant_name')->nullable()->comment('निवेदकको नाम');
+            $table->string('applicant_phone')->nullable()->comment('निवेदकको फोन');
+            $table->string('applicant_address')->nullable()->comment('निवेदकको ठेगाना');
+            $table->string('applicant_signature')->nullable()->comment('निवेदकको हस्ताक्षर');
             $table->timestamps();
             $table->softDeletes();
         });

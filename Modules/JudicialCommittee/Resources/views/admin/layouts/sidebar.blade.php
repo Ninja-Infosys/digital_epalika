@@ -27,6 +27,12 @@
         </a>
     </li>
 @endcan
+<li>
+    <a href="{{ route('admin.judicialCommittee.report.index') }}">
+        <i class="fa fa-file"></i>
+        <span>रिपोर्ट</span>
+    </a>
+</li>
 <li class="{{ request()->is('admin/judicialcommittee/setting/*') ? 'active' : '' }}">
     <a href="#sidebarJudicialCommitteeSetting"
         {{ request()->is('admin/judicialcommittee/setting/*') ? 'aria-expanded=true' : '' }} data-bs-toggle="collapse">
