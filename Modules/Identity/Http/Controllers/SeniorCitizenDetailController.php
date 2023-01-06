@@ -33,6 +33,8 @@ class SeniorCitizenDetailController extends Controller
 
     public function edit(SeniorCitizenDetail $seniorCitizenDetail)
     {
+        $seniorCitizenDetail->load('province','district','localBody');
+
         return view('identity::admin.seniorCitizen.edit', compact('seniorCitizenDetail'));
     }
 
