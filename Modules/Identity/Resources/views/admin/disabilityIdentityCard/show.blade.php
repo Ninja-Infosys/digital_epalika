@@ -46,7 +46,7 @@
                             <td rowspan="2" class="text-center ">
                                 <img src="{{$disabilityIdentityCard->photo_url}}"
                                      alt="{{$disabilityIdentityCard->name}}"
-                                     style="object-fit: cover; height: 5rem; width: 5rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                     style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
                             </td>
                         </tr>
                         <tr>
@@ -142,6 +142,12 @@
                             @if($disabilityIdentityCard->supporting_material==1)
                             <td>सहयोग सामग्री : {{$disabilityIdentityCard->material_name}}</td>
                             @endif
+                        </tr>
+                        <tr>
+                            <td>अन्य व्यक्तिको सहयोग लिनु पर्ने काम :   @foreach($disabilityIdentityCard->helping_task as $task)
+                                     {{$task}}{{$loop->last ? '':','}}
+                                @endforeach</td>
+
                         </tr>
                         </tbody>
                     </table>
