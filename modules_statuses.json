@@ -14,5 +14,6 @@
     "Recommendation": true,
     "Plan": true,
     "Disability": true,
-    "Identity": true
+    "Identity": true,
+    "OrganizationRegistration": true
 }
