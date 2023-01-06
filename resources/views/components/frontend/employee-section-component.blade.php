@@ -2,9 +2,9 @@
     <div class="carousel-inner">
         @foreach ($employees->chunk(3) as $empChunk)
             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                <div class="employee" >
+                <div class="employee">
                     @foreach ($empChunk as $employee)
-                        <div class="card mb-3 mt-4" style="background-color: #0DCAF0;">
+                        <div class="card-img mb-3 mt-4" style="background-color: #0DCAF0;">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <img src="{{ $employee->photo_url }}" class="img-fluid rounded-start"
