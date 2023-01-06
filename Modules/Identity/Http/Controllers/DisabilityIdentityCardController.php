@@ -33,7 +33,11 @@ class DisabilityIdentityCardController extends Controller
 
     public function show(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        return view('identity::admin.disabilityIdentityCard.show', compact('disabilityIdentityCard'));
+
+        $officeHeaders = OfficeHeader::get();
+        $todayDate = $this->get_today_nepali_date();
+        $disabilityIdentityCard->load('employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
+        return view('identity::admin.disabilityIdentityCard.show', compact('disabilityIdentityCard','officeHeaders','todayDate'));
     }
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)

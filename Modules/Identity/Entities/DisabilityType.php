@@ -4,6 +4,7 @@ namespace Modules\Identity\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -21,4 +22,9 @@ class DisabilityType extends Model
         'title',
         'title_en'
     ];
+
+    public function disabilityIdentityCards(): HasMany
+    {
+        return $this->hasMany(DisabilityIdentityCard::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Modules\Identity\Entities;
 
+use App\Enums\BloodGroupEnum;
 use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
@@ -64,7 +65,8 @@ class SeniorCitizenDetail extends Model
     ];
 
     protected $casts = [
-        'gender' => Gender::class
+        'gender' => Gender::class,
+        'blood_group'=> BloodGroupEnum::class,
     ];
 
 
