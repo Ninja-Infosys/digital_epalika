@@ -30,6 +30,12 @@
         </ul>
     </div>
 </li>
+<li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
+    <a href="{{route('identity.admin.disabilityIdentityCardReport')}}">
+        <i class="fa fa-file"></i>
+        <span> अपाङ्गता परिचयपत्र रिपोर्ट</span>
+    </a>
+</li>
 
 <li class="{{request()->is('admin/identity/setting*') ? 'active' : ''}}">
     <a href="#sidebarIdentitySetting"
