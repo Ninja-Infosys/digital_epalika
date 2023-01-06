@@ -35,6 +35,11 @@ body {
     display: block;
 }
 
+.card-img img {
+    object-fit: contain;
+    width: 100%;
+}
+
 .list {
     padding-left: 0;
     list-style: none;
