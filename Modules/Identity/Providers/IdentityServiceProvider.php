@@ -4,6 +4,8 @@ namespace Modules\Identity\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Identity\Entities\GovernmentalDisabilityType;
+use Modules\Identity\Observers\GovernmentalTypeObserver;
 
 class IdentityServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,8 @@ class IdentityServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        GovernmentalDisabilityType::observe(GovernmentalTypeObserver::class);
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();

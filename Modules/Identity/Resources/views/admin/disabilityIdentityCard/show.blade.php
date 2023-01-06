@@ -41,7 +41,7 @@
                                 अपाङ्गता परिचयपत्र नं. : {{$disabilityIdentityCard->card_no}}
                             </td>
                             <td>
-                                परिचयपत्रको प्रकार :
+                                परिचयपत्रको प्रकार : {{$disabilityIdentityCard->governmentalDisabilityType?->category->label()??''}}
                             </td>
                             <td rowspan="3" class="text-center ">
                                 <img src="{{$disabilityIdentityCard->photo_url}}"

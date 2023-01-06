@@ -100,6 +100,20 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="position" class="form-label">स्थिति *</label>
+                                <input
+                                    type="number"
+                                    name="position"
+                                    value="{{old('position')}}"
+                                    class="form-control @error('position') is-invalid @enderror"
+                                    id="position"
+                                    placeholder="स्थिति"
+                                />
+                                @error('title_en')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">
