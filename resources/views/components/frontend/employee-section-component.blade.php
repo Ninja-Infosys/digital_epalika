@@ -4,12 +4,12 @@
             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                 <div class="employee" style="max-width: 700px; height:30rem;">
                     @foreach ($empChunk as $employee)
-                        <div class="card mb-3 mt-4" style="max-width: 700px; height:26%; background-color: #0DCAF0;">
+                        <div class="card mb-3 mt-4" style="max-width: 700px; height:27%; background-color: #0DCAF0;">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <img src="{{ $employee->photo_url }}" class="img-fluid rounded-start"
                                         alt="{{ $employee->name }}"
-                                        style="object-fit: cover; height: 7.8rem;">
+                                        style="object-fit: contain; height: 7.7rem; width:70%">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body mt-1">
