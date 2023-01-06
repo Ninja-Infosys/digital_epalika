@@ -11,6 +11,7 @@ use Modules\Circular\Entities\Dispatch;
 use Modules\Circular\Entities\Registration;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\EMap\Entities\MapApply;
+use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\TaskManagement\Entities\DailyTask;
 
 class FiscalYear extends Model
@@ -52,5 +53,10 @@ class FiscalYear extends Model
     public function mapApplies(): HasMany
     {
         return $this->hasMany(MapApply::class);
+    }
+
+    public function complaintApplications(): HasMany
+    {
+        return $this->hasMany(ComplaintApplication::class);
     }
 }

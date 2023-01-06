@@ -74,40 +74,52 @@
             </div>
         </div>
     </div>
-{{--    <div class="row mt-2">--}}
-{{--        <div class="col-lg-6">--}}
-{{--            <div class="card">--}}
-{{--                <div class="card-body">--}}
-{{--                    <x-charts.pie-chart-component--}}
-{{--                        id="budget-head-wise-chart"--}}
-{{--                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) बजेट शिर्षक अनुसारका सम्पूर्ण योजनाहरु"--}}
-{{--                        :labels="$budgetHeadWiseProjects['labels']"--}}
-{{--                        :dataSets="$budgetHeadWiseProjects['dataSets']"--}}
-{{--                    />--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="col-lg-6">--}}
-{{--            <div class="card">--}}
-{{--                <div class="card-body">--}}
-{{--                    <x-charts.pie-chart-component--}}
-{{--                        id="plan-level-wise-chart"--}}
-{{--                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) योजना स्तर अनुसारका योजनाहरु"--}}
-{{--                        :labels="$planLevelWiseProjects['labels']"--}}
-{{--                        :dataSets="$planLevelWiseProjects['dataSets']"--}}
-{{--                    />--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
     <div class="row mt-2">
-        <div class="col-lg-7">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <x-charts.bar-chart-component
+                        chart-type="line"
                         id="monthly-applications-chart" chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका मासिक निवेदनहरु"
                         :labels="$monthlyApplications['labels']"
                         :dataSets="$monthlyApplications['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.pie-chart-component
+                        id="lawsuit-nature-wise-chart"
+                        chartName="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका मुद्दा प्रकृति अनुसारका निवेदनहरु"
+                        :labels="$lawsuitNatureWiseApplications['labels']"
+                        :dataSets="$lawsuitNatureWiseApplications['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component
+                        id="fiscal-year-applications-chart" chartTitle="आर्थिक वर्ष अनुसारका निवेदनहरु"
+                        :labels="$fiscalYearWiseApplications['labels']"
+                        :dataSets="$fiscalYearWiseApplications['dataSets']"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <x-charts.bar-chart-component
+                        id="lawsuit-nature-wise-applications-data"
+                        chartTitle="चालु आर्थिक({{ $officeSetting->fiscalYear->title ?? '' }}) वर्षका मुद्दा प्रकृति (निवेदन स्थिति) अनुसारका निवेदनहरु"
+                        :labels="$lawsuitNatureWiseApplicationsData['labels']"
+                        :dataSets="$lawsuitNatureWiseApplicationsData['dataSets']"
                     />
                 </div>
             </div>
