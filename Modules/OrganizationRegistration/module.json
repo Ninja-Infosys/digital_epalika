@@ -1,0 +1,11 @@
+{
+    "name": "OrganizationRegistration",
+    "alias": "organizationregistration",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\OrganizationRegistration\\Providers\\OrganizationRegistrationServiceProvider"
+    ],
+    "files": []
+}

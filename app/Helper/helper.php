@@ -36,8 +36,10 @@ if (!function_exists('get_provinces')) {
 }
 
 if (!function_exists('get_districts')) {
-    function get_districts(array $province_ids = [], int $districtId = null)
+    function get_districts($province_ids=[], int $districtId = null)
     {
+        $province_ids = is_array($province_ids) ? $province_ids : [$province_ids];
+
         $allDistricts = Cache::rememberForever('allDistricts', function () {
             return District::orderBy('province_id')->get();
         });
@@ -54,8 +56,9 @@ if (!function_exists('get_districts')) {
 }
 
 if (!function_exists('get_local_bodies')) {
-    function get_local_bodies(array $district_ids = [], int $localBodyId = null)
+    function get_local_bodies($district_ids = [], int $localBodyId = null)
     {
+        $district_ids = is_array($district_ids) ? $district_ids : [$district_ids];
         $allLocalBodies = Cache::rememberForever('localBodies', function () {
             return LocalBody::all();
         });

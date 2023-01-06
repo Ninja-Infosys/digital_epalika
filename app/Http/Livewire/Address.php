@@ -27,9 +27,9 @@ class Address extends Component
 
     public function mount($address = null)
     {
-        $this->provinces = Province::all();
+        $this->provinces = get_provinces();
 
-        if (! empty($address)) {
+        if (!empty($address)) {
             $this->province_id = $address['province_id'] ?? '';
             $this->district_id = $address['district_id'] ?? '';
             $this->local_body_id = $address['local_body_id'] ?? '';
@@ -39,14 +39,14 @@ class Address extends Component
 
     public function render()
     {
-        if (! empty($this->province_id)) {
-            $this->districts = Province::with('districts')->findOrFail($this->province_id)->districts;
+        if (!empty($this->province_id)) {
+            $this->districts = get_districts($this->province_id);
         }
-        if (! empty($this->district_id)) {
-            $this->localBodies = District::with('localBodies')->findOrFail($this->district_id)->localBodies;
+        if (!empty($this->district_id)) {
+            $this->localBodies = get_local_bodies($this->district_id);
         }
-        if (! empty($this->local_body_id)) {
-            $this->wards = LocalBody::findOrFail($this->local_body_id)->wards;
+        if (!empty($this->local_body_id)) {
+            $this->wards = get_local_bodies(localBodyId: $this->local_body_id)->wards;
         }
 
         return view('livewire.address');

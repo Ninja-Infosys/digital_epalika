@@ -16,7 +16,8 @@ return [
         'taskmanagement',
         'recommendation',
         'plan',
-        'identity'
+        'identity',
+        'organizationregistration',
     ],
     'sidebars' => [
         'website',
