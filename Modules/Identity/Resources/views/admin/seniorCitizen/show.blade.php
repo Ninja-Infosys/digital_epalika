@@ -76,7 +76,6 @@
                                         <img src="{{$seniorCitizenDetail->right_finger}}"
                                              alt="{{$seniorCitizenDetail->name}}"
                                              style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
-                                             
                                         <img src="{{$seniorCitizenDetail->left_finger}}"
                                              alt="{{$seniorCitizenDetail->name}}"
                                              style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
