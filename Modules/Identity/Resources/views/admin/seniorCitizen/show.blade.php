@@ -42,7 +42,7 @@
                                 नाम, थर : {{ $seniorCitizenDetail->name }}
                             </td>
                             <td>
-                                नाम, थर : {{ $seniorCitizenDetail->name_en }}
+                                नाम, थर (English) : {{ $seniorCitizenDetail->name_en }}
                             </td>
                             <td rowspan="2" class="text-center ">
                                 <img src="{{ $seniorCitizenDetail->photo }}"
@@ -96,22 +96,22 @@
                         </tr>
                         <tr>
                             <td>पति/पत्नीको नाम : {{$seniorCitizenDetail->spouse}}</td>
-                            <td>पति/पत्नीको नाम (en) : {{$seniorCitizenDetail->spouse_en}}</td>
+                            <td>पति/पत्नीको नाम (English) : {{$seniorCitizenDetail->spouse_en}}</td>
                         </tr>
                            <tr>
                             <td>बावुको नाम: {{$seniorCitizenDetail->father_name}}</td>
-                            <td>बावुको नाम (en): {{$seniorCitizenDetail->father_name_en}}</td>
+                            <td>बावुको नाम (English): {{$seniorCitizenDetail->father_name_en}}</td>
                            </tr>
                         <tr>
                             <td>आमाको नाम : {{$seniorCitizenDetail->mother_name}}</td>
-                            <td>आमाको नाम (en) : {{$seniorCitizenDetail->mother_name_en}}</td>
+                            <td>आमाको नाम (English) : {{$seniorCitizenDetail->mother_name_en}}</td>
                         </tr>
                         <tr>
                             <th colspan="3">संरक्षकको विवरण:</th>
                         </tr>
                         <tr>
                             <td>संरक्षकको नाम : {{$seniorCitizenDetail->patrons_name}}</td>
-                            <td>संरक्षकको नाम (en) : {{$seniorCitizenDetail->patrons_name_en}}</td>
+                            <td>संरक्षकको नाम (English) : {{$seniorCitizenDetail->patrons_name_en}}</td>
                         </tr>
                         <tr>
                             <td>ठेगाना :{{$seniorCitizenDetail->patrons_name_address}}</td>
@@ -122,7 +122,7 @@
                         </tr>
                         <tr>
                             <td>सम्पर्क व्यक्तिको नाम : {{$seniorCitizenDetail->contact_person_name}}</td>
-                            <td>सम्पर्क व्यक्तिको नाम (en) : {{$seniorCitizenDetail->contact_person_name_en}}</td>
+                            <td>सम्पर्क व्यक्तिको नाम (English) : {{$seniorCitizenDetail->contact_person_name_en}}</td>
                         </tr>
                         <tr>
                             <td>सम्पर्क नं. : {{$seniorCitizenDetail->contact_person_phone}}</td>
