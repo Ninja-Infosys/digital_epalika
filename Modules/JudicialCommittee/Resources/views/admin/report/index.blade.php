@@ -133,7 +133,7 @@
 
                         </form>
                     </div>
-                    <div id="report-table"></div>
+                    <div id="report-table" class="table-responsive"></div>
                 </div>
             </div>
         </div>

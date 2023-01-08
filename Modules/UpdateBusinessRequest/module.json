@@ -1,0 +1,11 @@
+{
+    "name": "UpdateBusinessRequest",
+    "alias": "updatebusinessrequest",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\UpdateBusinessRequest\\Providers\\UpdateBusinessRequestServiceProvider"
+    ],
+    "files": []
+}

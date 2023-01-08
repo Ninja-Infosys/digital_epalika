@@ -225,15 +225,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 pt-5  ">
-                            <div class="card px-3 py-2 mx-1 card-rounded"
+                            <div class="card px-3 py-2 mx-4 card-rounded"
                                  style="background-color: {{$disabilityIdentityCard->governmentalDisabilityType->color??''}};">
                                 <div class="office-header d-flex justify-content-between">
                                     <div>
-                                        <img src="{{$officeSetting->logo_url}}" alt="" height="50">
+                                        <img src="{{$officeSetting->logo_url}}" alt="" height="40">
                                     </div>
-                                    <div class="d-flex justify-content-center">
+                                    <div class="">
                                         @foreach($officeHeaders as $header)
-                                            <p style="font-size: {{$header->card_font}}rem;color:{{$header->font_color}};text-align: center;">{{$header->title}}</p>
+                                            <p style="font-size: {{$header->card_font}}rem;color:{{$header->font_color}};text-align: center;">{{$header->title}}                                </p>
                                         @endforeach
                                     </div>
                                     <div>
@@ -241,12 +241,12 @@
                                         <img src="{{$disabilityIdentityCard->employeeSignature->red_signature??''}}"
                                              alt="" height="30" id="signature_image"
                                              style="z-index: 5;margin-right: -20px;margin-top:30px;transform: rotate(-10deg);"/>
-                                        <img src="{{$disabilityIdentityCard->photo_url}}" alt="" height="60">
+                                        <img src="{{$disabilityIdentityCard->photo_url}}" alt="" height="40">
                                     </div>
                                 </div>
 
                                 <div class="identity text-center card-font-color">
-                                    <p class="font-16 ">अपांगता परिचय पत्र</p>
+                                    <p class="font-12 ">अपांगता परिचय पत्र</p>
                                 </div>
                                 <div class="card-font-color">
                                     <p>परिचय पत्रको
@@ -280,7 +280,7 @@
                                         <p>नाम</p>
                                     </div>
                                     <div class="col-md-4 card-font-color text-center">
-                                        <span style="border-bottom: 0.122rem dotted #0b0b0b;"><img
+                                        <span style="border-bottom: 0.122rem dotted #0b0b0b;position: relative;"><img style="position: absolute;"
                                                 src="{{$disabilityIdentityCard->employeeSignature->red_signature??''}}"
                                                 alt="{{$disabilityIdentityCard->name??''}}" height="30"
                                                 class="signature">
@@ -298,28 +298,25 @@
 
 
                         <div class="col-md-6 pt-5  ">
-                            <div class="card px-3 py-2 mx-1 card-rounded"
+                            <div class="card px-3 py-2 mx-3 card-rounded"
                                  style="background-color: {{$disabilityIdentityCard->governmentalDisabilityType->color??''}};">
                                 <div class="office-header d-flex justify-content-between">
                                     <div>
-                                        <img src="{{$officeSetting->logo_url}}" alt="" height="50">
+                                        <img src="{{$officeSetting->logo_url}}" alt="" height="40">
                                     </div>
-                                    <div class="d-flex justify-content-center">
+                                    <div class="">
                                         @foreach($officeHeaders as $header)
                                             <p style="font-size: {{$header->card_font}}rem;color:{{$header->font_color}};text-align: center;">{{$header->title_en}}</p>
                                         @endforeach
                                     </div>
                                     <div>
 
-                                        <img src="{{$disabilityIdentityCard->employeeSignature->red_signature??''}}"
-                                             alt="" height="30" id="signature_image"
-                                             style="z-index: 5;margin-right: -20px;margin-top:30px;transform: rotate(-10deg);"/>
-                                        <img src="{{$disabilityIdentityCard->photo_url}}" alt="" height="60">
+                                        {!! QrCode::size(40)->generate($disabilityIdentityCard->name_en??''); !!}
                                     </div>
                                 </div>
 
                                 <div class="identity text-center card-font-color">
-                                    <p class="font-16 ">Disability Identity Card</p>
+                                    <p class="font-12 ">Disability Identity Card</p>
                                 </div>
                                 <div class="card-font-color">
                                     <p>ID Card Type
@@ -373,7 +370,7 @@
                                         <p>Name</p>
                                     </div>
                                     <div class="col-md-4 card-font-color text-center">
-                                        <span style="border-bottom: 0.122rem dotted #0b0b0b;"><img
+                                        <span style="border-bottom: 0.122rem dotted #0b0b0b;"><img style="position: absolute;"
                                                 src="{{$disabilityIdentityCard->employeeSignature->red_signature??''}}"
                                                 alt="{{$disabilityIdentityCard->name??''}}" height="30"
                                                 class="signature">
@@ -452,10 +449,20 @@
         <style>
             .card-font-color > p {
                 color: #0b0b0b;
+                font-size: 12px;
             }
 
             .card-font-color > span {
                 color: #0b0b0b;
+            }
+            .identity>p{
+                background-color: black;
+                text-align: center;
+                width: 70%;
+                color: white;
+                border-radius: 5px;
+                margin-left: 70px;
+                height: 15px;
             }
         </style>
     @endpush
