@@ -33,4 +33,6 @@ class FingerPrint extends Model
     {
        return $this->morphTo();
     }
+
+
 }

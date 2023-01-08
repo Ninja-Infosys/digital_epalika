@@ -84,18 +84,14 @@
                                 </h4>
                                 @if($disabilityIdentityCard->finger_print_type !== 'none')
                                     <div class="d-flex justify-content-between ">
-                                        <div class="col text-center">
-                                            <img src="{{$disabilityIdentityCard->right_finger}}"
-                                                 alt="{{$disabilityIdentityCard->name}}"
-                                                 style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
-                                            <p>दाँया</p>
-                                        </div>
-                                        <div class="col text-center">
-                                            <img src="{{$disabilityIdentityCard->left_finger}}"
-                                                 alt="{{$disabilityIdentityCard->name}}"
-                                                 style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
-                                            <p>बाँया</p>
-                                        </div>
+                                        @foreach($disabilityIdentityCard->fingerPrints as $file)
+                                            <div class="col text-center">
+                                                <img src="{{$file->finger_image}}"
+                                                     alt=""
+                                                     style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                                <p> {{$file->finger=='left' ? 'बाँया':'दाँया'}}  </p>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 @endif
                             </td>

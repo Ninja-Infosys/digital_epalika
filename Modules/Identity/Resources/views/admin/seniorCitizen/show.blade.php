@@ -82,12 +82,11 @@
                                 </h4>
                                 @if($seniorCitizenDetail->finger_print_type !== 'none')
                                     <div class="d-flex justify-content-between">
-                                        <img src="{{$seniorCitizenDetail->right_finger}}"
-                                             alt="{{$seniorCitizenDetail->name}}"
-                                             style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
-                                        <img src="{{$seniorCitizenDetail->left_finger}}"
-                                             alt="{{$seniorCitizenDetail->name}}"
-                                             style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                        @foreach($seniorCitizenDetail->fingerPrints as $file)
+                                            <img src="{{$file->finger_image}}"
+                                                 alt=""
+                                                 style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                        @endforeach
                                     </div>
                                 @endif
                             </td>

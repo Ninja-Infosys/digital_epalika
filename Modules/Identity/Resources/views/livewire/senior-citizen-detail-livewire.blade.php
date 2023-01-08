@@ -75,35 +75,6 @@
                                 @enderror
                         </div>
                     </div>
-{{--                    <div class="col-md-4 mb-3">--}}
-{{--                        <label for="form.left_finger" class="form-label">औठा छाप बाँया</label>--}}
-{{--                        <input--}}
-{{--                            name="form.left_finger"--}}
-{{--                            class="form-control  @error('form.left_finger') is-invalid @enderror"--}}
-{{--                            type="file"--}}
-{{--                            id="form.left_finger"--}}
-{{--                            wire:model="form.left_finger"--}}
-{{--                        />--}}
-{{--                        <div wire:loading wire:target="form.left_finger">Uploading...</div>--}}
-{{--                        @error('form.left_finger')--}}
-{{--                        <div class="invalid-feedback">{{$message}}</div>--}}
-{{--                        @enderror--}}
-{{--                    </div>--}}
-{{--                    <div class="col-md-4 mb-3">--}}
-{{--                        <label for="form.right_finger" class="form-label">औठा छाप दाँया</label>--}}
-{{--                        <input--}}
-{{--                            name="form.right_finger"--}}
-{{--                            class="form-control  @error('form.right_finger') is-invalid @enderror"--}}
-{{--                            type="file"--}}
-{{--                            id="form.right_finger"--}}
-{{--                            wire:model="form.right_finger"--}}
-{{--                        />--}}
-{{--                        <div wire:loading wire:target="form.right_finger">Uploading...</div>--}}
-{{--                        @error('form.right_finger')--}}
-{{--                        <div class="invalid-feedback">{{$message}}</div>--}}
-{{--                        @enderror--}}
-{{--                    </div>--}}
-
                 </div>
             </fieldset>
             <fieldset class="mt-3">

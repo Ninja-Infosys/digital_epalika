@@ -28,6 +28,7 @@ class SeniorCitizenDetailController extends Controller
 
     public function show(SeniorCitizenDetail $seniorCitizenDetail)
     {
+        $seniorCitizenDetail->load('fingerPrints');
         return view('identity::admin.seniorCitizen.show', compact('seniorCitizenDetail'));
     }
 

@@ -12,6 +12,7 @@ use App\Models\Occupation;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
@@ -171,6 +172,11 @@ class DisabilityIdentityCard extends Model
     public function governmentalDisabilityType(): BelongsTo
     {
         return $this->belongsTo(GovernmentalDisabilityType::class, 'govern_disability_type_id');
+    }
+
+    public function fingerPrints(): MorphMany
+    {
+        return $this->morphMany(FingerPrint::class,'model');
     }
 
 
