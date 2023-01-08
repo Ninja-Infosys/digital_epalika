@@ -55,7 +55,7 @@
                                     </td>
                                     <td>{{$seniorCitizenDetail->citizenship_no}}</td>
                                     <td>
-                                        <img src="{{$seniorCitizenDetail->photo}}" alt="{{$seniorCitizenDetail->name??''}}" height="60">
+                                        <img src="{{$seniorCitizenDetail->photo}}" alt="{{$seniorCitizenDetail->name??''}}" class="rounded-circle avatar avatar-md" style="width: 4rem; height: 4rem;">
                                     </td>
 
                                     <td>

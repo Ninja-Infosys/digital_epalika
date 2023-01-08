@@ -13,6 +13,7 @@ use Modules\BusinessRegistration\Entities\BusinessNature;
 use Modules\BusinessRegistration\Entities\ObjectTransaction;
 use Modules\OrganizationRegistration\Entities\Business;
 use Modules\OrganizationRegistration\Http\Requests\StoreBusinessRequest;
+use Modules\OrganizationRegistration\Http\Requests\UpdateBusinessRequest;
 
 class BusinessController extends Controller
 {
@@ -49,6 +50,8 @@ class BusinessController extends Controller
                 'fiscal_year_id' => $fiscal_year,
                 'registration_no' => $registrationNo,
             ]);
+
+        toast('ब्यबसाय सफलता पुर्बक थपियो', 'success');
         return redirect()->route('admin.organizationRegistration.business.index');
     }
 
@@ -59,16 +62,39 @@ class BusinessController extends Controller
 
     public function edit(Business $business)
     {
-        return view('organizationregistration::admin.business.edit');
+        $districts = get_districts();
+        $businessNatures = BusinessNature::all();
+        $objectTransactions = ObjectTransaction::with('objectTransactions')->get();
+        return view('organizationregistration::admin.business.edit', compact('business', 'districts', 'businessNatures', 'objectTransactions'));
     }
 
-    public function update(Request $request, Business $business)
+    public function update(UpdateBusinessRequest $request, Business $business)
     {
-        //
+        if ($request->hasFile('owner_photo')) {
+            $this->deleteFile($business->owner_photo);
+        }
+        $business->update($request->validated());
+
+        toast('ब्यबसाय सफलतापुर्बक सम्पादन गरियो', 'success');
+        return redirect()->route('admin.organizationRegistration.business.index');
     }
 
     public function destroy(Business $business)
     {
-        //
+        $business->delete();
+
+        toast('ब्यबसाय सफलता पुर्बक हटाइयो', 'success');
+        return back();
+    }
+
+    public function updateStatus(Business $business)
+    {
+        $business->update([
+            'is_active' => !$business->is_active
+        ]);
+
+        toast('ब्यबसाय सफलता पुर्बक सम्पादन गरियो', 'success');
+        return back();
+
     }
 }

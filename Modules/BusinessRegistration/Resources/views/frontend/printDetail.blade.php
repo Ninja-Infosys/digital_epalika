@@ -91,7 +91,7 @@
                             <span class="fw-bold">व्यवसायको विवरण/प्रकृति:</span>
                         </div>
                         <div class="col-md-6">
-                            <span>{{$businessDetail->business_nature->label() ??''}}</span>
+                            <span>{{$businessDetail->business_nature?->label() ??''}}</span>
                         </div>
                     </div>
                     <div class="row mt-1">
