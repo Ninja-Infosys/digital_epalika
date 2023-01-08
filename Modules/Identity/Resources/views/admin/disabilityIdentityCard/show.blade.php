@@ -20,20 +20,20 @@
 
     <div class="row">
         <div class="col-md-12">
+            <button class="btn btn-sm btn-info"
+                    onclick="printJS({
+                    printable: 'printData',
+                    targetStyles: ['*'],
+                    ignoreElements:['ignore-header'],
+                    type: 'html'
+                    })">
+                <i class="fa fa-print"></i> Print
+            </button>
             <div class="card">
                 <div class="card-title border-bottom py-2 px-2 d-flex justify-content-between">
                     <h4 class="font-18 ">श्री {{$disabilityIdentityCard->name}} को व्यतिगत विवरण</h4>
-                    <div>
-                    </div>
-                    <a href="javascript:void(0)"
-                       route_action=""
-                       class="btn btn-xs btn-outline-warning printDetail">
-                        <i class="fa fa-print">Print</i>
-                    </a>
                 </div>
-
-                <div class="profile-table px-1">
-
+                <div class="profile-table px-1"  id="printData">
                     <table class="table  table-bordered table-hover table-responsive">
                         <tbody>
                         <tr>
@@ -41,7 +41,8 @@
                                 अपाङ्गता परिचयपत्र नं. : {{$disabilityIdentityCard->card_no}}
                             </td>
                             <td>
-                                परिचयपत्रको प्रकार : {{$disabilityIdentityCard->governmentalDisabilityType?->category->label()??''}}
+                                परिचयपत्रको प्रकार
+                                : {{$disabilityIdentityCard->governmentalDisabilityType?->category->label()??''}}
                             </td>
                             <td rowspan="3" class="text-center ">
                                 <img src="{{$disabilityIdentityCard->photo_url}}"
@@ -79,15 +80,15 @@
                                 @if($disabilityIdentityCard->finger_print_type !== 'none')
                                     <div class="d-flex justify-content-between ">
                                         <div class="col text-center">
-                                        <img src="{{$disabilityIdentityCard->right_finger}}"
-                                             alt="{{$disabilityIdentityCard->name}}"
-                                             style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                            <img src="{{$disabilityIdentityCard->right_finger}}"
+                                                 alt="{{$disabilityIdentityCard->name}}"
+                                                 style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
                                             <p>दाँया</p>
                                         </div>
                                         <div class="col text-center">
                                             <img src="{{$disabilityIdentityCard->left_finger}}"
-                                             alt="{{$disabilityIdentityCard->name}}"
-                                             style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                                 alt="{{$disabilityIdentityCard->name}}"
+                                                 style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
                                             <p>बाँया</p>
                                         </div>
                                     </div>
@@ -404,8 +405,9 @@
                                     </a>
                                 </div>
                                 <div class="card-body">
-                                        <img src="{{$disabilityIdentityCard->citizenship_photo_url?? ""}}" class="card-image" alt="Image"
-                                             width="60%" style="object-fit: cover;">
+                                    <img src="{{$disabilityIdentityCard->citizenship_photo_url?? ""}}"
+                                         class="card-image" alt="Image"
+                                         width="60%" style="object-fit: cover;">
                                 </div>
                             </div>
                         </div>
@@ -417,46 +419,47 @@
                                     </a>
                                 </div>
                                 <div class="card-body">
-                                        <img src="{{$disabilityIdentityCard->citizenship_photo_certificate_url?? ""}}" class="card-image" alt="Image"
-                                              width="60%" style="object-fit: cover;">
+                                    <img src="{{$disabilityIdentityCard->citizenship_photo_certificate_url?? ""}}"
+                                         class="card-image" alt="Image"
+                                         width="60%" style="object-fit: cover;">
                                 </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @push('scripts')
-            <script>
-                $(".printDetail").on("click", function (e) {
-                    $.ajax({
-                        method: "GET",
-                        url: $(this).attr("route_action"),
-                        success: function (resp) {
-                            var print_area = window.open();
-                            print_area.document.write(resp.view);
-                            print_area.document.close();
-                            print_area.focus();
-                            print_area.print();
-                            print_area.close();
-                        }, error: function () {
-                            alert("Something Went Wrong");
-                        }
-                    });
+    </div>
+    @push('scripts')
+        <script>
+            $(".printDetail").on("click", function (e) {
+                $.ajax({
+                    method: "GET",
+                    url: $(this).attr("route_action"),
+                    success: function (resp) {
+                        var print_area = window.open();
+                        print_area.document.write(resp.view);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    }, error: function () {
+                        alert("Something Went Wrong");
+                    }
                 });
-            </script>
-        @endpush
-        @push('style')
-            <style>
-                .card-font-color > p {
-                    color: #0b0b0b;
-                }
+            });
+        </script>
+    @endpush
+    @push('style')
+        <style>
+            .card-font-color > p {
+                color: #0b0b0b;
+            }
 
-                .card-font-color > span {
-                    color: #0b0b0b;
-                }
-            </style>
+            .card-font-color > span {
+                color: #0b0b0b;
+            }
+        </style>
     @endpush
 @endsection
 
