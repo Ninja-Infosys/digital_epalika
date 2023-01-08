@@ -22,19 +22,24 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-title border-bottom py-2 px-2 d-flex justify-content-between">
-                    <h4 class="font-18 ">श्री {{$seniorCitizenDetail->name}} को व्यतिगत विवरण</h4>
-                    <div>
+                <div class="card-header px-2 py-1">
+                    <div class="card-title border-bottom px-1 d-flex justify-content-between">
+                        <h4 class="font-18 ">श्री {{$seniorCitizenDetail->name}} को व्यतिगत विवरण</h4>
+                        <div>
+                            <button class="btn btn-sm btn-info"
+                                    onclick="printJS({
+                    printable: 'printData',
+                    targetStyles: ['*'],
+                    ignoreElements:['ignore-header'],
+                    type: 'html'
+                    })">
+                                <i class="fa fa-print"></i> Print
+                            </button>
+                        </div>
+
                     </div>
-                    <a href="javascript:void(0)"
-                       route_action=""
-                       class="btn btn-xs btn-outline-warning printDetail">
-                        <i class="fa fa-print">Print</i>
-                    </a>
                 </div>
-
-                <div class="profile-table px-1">
-
+                <div class="profile-table px-1" id="printData">
                     <table class="table  table-bordered table-hover table-responsive">
                         <tbody>
                         <tr>
@@ -77,12 +82,12 @@
                                 </h4>
                                 @if($seniorCitizenDetail->finger_print_type !== 'none')
                                     <div class="d-flex justify-content-between">
-                                        <img src="{{$seniorCitizenDetail->right_finger}}"
-                                             alt="{{$seniorCitizenDetail->name}}"
-                                             style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
-                                        <img src="{{$seniorCitizenDetail->left_finger}}"
-                                             alt="{{$seniorCitizenDetail->name}}"
-                                             style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                        @foreach($seniorCitizenDetail->fingerPrints as $file)
+                                            <img src="{{$file->finger_image}}"
+                                                 alt=""
+                                                 style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                                 <p> {{$file->finger=='left' ? 'बाँया':'दाँया'}}</p>
+                                        @endforeach
                                     </div>
                                 @endif
                             </td>

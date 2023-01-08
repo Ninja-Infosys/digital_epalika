@@ -1091,7 +1091,7 @@
                                 <button onclick="loadImage()" type="button">Camera</button>
                                 <button onclick="captureImage()" type="button">Capture Image</button>
                                 <button onclick="stopCamera()" type="button">Stop Camera</button>
-                                <video id="video" width="200" height="200"  autoplay></video>
+                                <video id="video" width="200" height="200" autoplay></video>
                                 <canvas id="canvas" width="200" height="200"></canvas>
 
                             </div>
@@ -1112,35 +1112,54 @@
                                 @enderror
                             </div>
                             @if($form['finger_print_type'] === 'legs' || $form['finger_print_type'] === 'finger')
-                                <div class="col-md-4 mb-3">
-                                    <label for="form.finger_left" class="form-label">बाँया</label>
-                                    <input
-                                        name="form.photo"
-                                        class="form-control @error('form.finger_left') is-invalid @enderror"
-                                        type="file"
-                                        id="form.finger_left"
-                                        wire:model="form.finger_left"
-                                    />
-                                    <div wire:loading wire:target="form.finger_left">Uploading...</div>
-                                    @error('form.finger_left')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        @if ( !empty($form['right_finger']['image']))
+                                            <img src="{{ $form['right_finger']['image'] }}" id="finger-print-right"
+                                                 alt="Right"
+                                                 height="80" width="80">
+                                        @endif
+                                        <div class="card-body text-center">
+                                            <div class="clearfix mb-3"><span
+                                                    class="badge rounded-pill bg-info">दाहिने</span>
+                                            </div>
+                                            <div class="text-center">
+                                                <button onclick="return captureRight();" class="btn btn-primary">
+                                                    Capture
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @error('form.right_finger')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="form.finger_right" class="form-label">दायाँ</label>
-                                    <input
-                                        name="form.finger_right"
-                                        class="form-control @error('form.finger_right') is-invalid @enderror"
-                                        type="file"
-                                        id="form.finger_right"
-                                        wire:model="form.finger_right"
-                                    />
-                                    <div wire:loading wire:target="form.finger_right">Uploading...</div>
-                                    @error('form.finger_right')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        @if ( !empty($form['left_finger']['image']))
+                                            <img src="{{ $form['left_finger']['image'] }}" id="finger-print-left"
+                                                 alt="Left"
+                                                 height="80" width="60">
+                                        @endif
+                                        <div class="card-body text-center">
+                                            <div class="clearfix mb-3"><span
+                                                    class="badge rounded-pill bg-info">बायाँ</span>
+                                            </div>
+                                            <div class="text-center">
+                                                <button onclick="return captureLeft();" class="btn btn-primary">
+                                                    Capture
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @error('form.left_finger')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+
                                 </div>
+
                             @endif
+
                             <div class="col-md-4 mb-3">
                                 <label for="form.name" class="form-label">पुरा नाम नेपालीमा</label>
                                 <input
@@ -1513,17 +1532,18 @@
                     });
 
             }
+
             function stopCamera() {
                 const video = document.getElementById('video');
 
 // Prompt the user for permission to use their webcam
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function(stream) {
+                navigator.mediaDevices.getUserMedia({video: true})
+                    .then(function (stream) {
                         // Set the source of the video element to the webcam stream
                         video.srcObject = stream;
 
                         // Wait for the video to load
-                        video.onloadedmetadata = function() {
+                        video.onloadedmetadata = function () {
                             // Stop the webcam stream
                             stream.getVideoTracks()[0].stop();
                         };
@@ -1532,6 +1552,10 @@
             }
 
         </script>
+        <script src="{{ asset('assets/backend/finger/js/jquery-1.11.2.min.js') }}" defer></script>
+        <script src="{{ asset('assets/backend/finger/js/msf100.min.js') }}" defer></script>
+        <script src="{{ asset('assets/backend/finger/js/msfDevice.js') }}" defer></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @endpush
 @endonce
 

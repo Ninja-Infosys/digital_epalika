@@ -120,7 +120,34 @@ class DisabilityIdentityCardLivewire extends Component
     ];
 
 
-    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged', 'photoUpdated'];
+    protected $listeners = ['dobChanged', 'dateChanged', 'birthRegistrationChanged', 'citizenshipNoChanged', 'photoUpdated', 'setRight' => 'setRightThumb',
+        'setLeft' => 'setLeftThumb',];
+
+    public function setRightThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
+    {
+        $this->form['right_finger'] = [
+            'id' => $this->right['id'] ?? null,
+            'image' => $image,
+            'isoTemplate' => $isoTemplate,
+            'ansiTemplate' => $ansiTemplate,
+            'isoImage' => $isoImage,
+            'quality' => $quality,
+        ];
+    }
+
+    public function setLeftThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
+    {
+        $this->form['left_finger'] = [
+            'id' => $this->left['id'] ?? null,
+            'image' => $image,
+            'isoTemplate' => $isoTemplate,
+            'ansiTemplate' => $ansiTemplate,
+            'isoImage' => $isoImage,
+            'quality' => $quality,
+        ];
+
+
+    }
 
     public function photoUpdated($base64String): void
     {
@@ -221,8 +248,9 @@ class DisabilityIdentityCardLivewire extends Component
                 'form.photo' => ['nullable'],
             ])
             : array_merge($this->identityDetailValidations, [
-                'form.finger_left' => ['required_if:form.finger_print_type,==,legs,finger'],
-                'form.finger_right' => ['required_if:form.finger_print_type,==,legs,finger'],
+                'form.finger_left' => ['nullable'],
+                'form.finger_right' => ['nullable'],
+//                'form.finger_right' => ['required_if:form.finger_print_type,==,legs,finger'],
                 'form.photo' => ['required'],
             ]);
     }
@@ -420,7 +448,30 @@ class DisabilityIdentityCardLivewire extends Component
             ]);
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
         }
-        DisabilityIdentityCard::create($this->form);
+        DB::transaction(function () {
+            $disabilityIdentityCard = DisabilityIdentityCard::create($this->form);
+
+            $disabilityIdentityCard->fingerPrints()->create([
+                'finger_image' => $this->form['left_finger']['image'],
+                'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                'iso_image' => $this->form['left_finger']['isoImage'],
+                'finger' => 'left',
+                'quality' => $this->form['left_finger']['quality'],
+                'user_id' => auth()->id(),
+            ]);
+            $disabilityIdentityCard->fingerPrints()->create([
+                'finger_image' => $this->form['right_finger']['image'],
+                'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                'iso_image' => $this->form['right_finger']['isoImage'],
+                'finger' => 'right',
+                'quality' => $this->form['right_finger']['quality'],
+                'user_id' => auth()->id(),
+            ]);
+
+        });
+
         $this->dispatchBrowserEvent('toast_message', [
             'type' => 'success',
             'title' => 'तपाइको अपाङ्गता परिचय पत्र दर्ता भयो'
@@ -488,8 +539,8 @@ class DisabilityIdentityCardLivewire extends Component
         }
 
         if ($this->form['finger_print_type'] == 'none') {
-            $this->form['finger_left'] = null;
-            $this->form['finger_right'] = null;
+            $this->form['finger_left'] = [];
+            $this->form['finger_right'] = [];
         }
 
         if ($this->form['identity_type'] == 'not_receive') {

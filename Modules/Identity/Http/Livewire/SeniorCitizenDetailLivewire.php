@@ -6,12 +6,14 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
+
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Identity\Entities\EmployeeSignature;
@@ -66,7 +68,34 @@ class SeniorCitizenDetailLivewire extends Component
         'medicine_name' => null,
         'employee_signature_id' => null,
     ];
-    protected $listeners = ['dobChanged','issueDateChanged','photoUpdated'];
+    protected $listeners = ['dobChanged','issueDateChanged','photoUpdated', 'setRight' => 'setRightThumb',
+        'setLeft' => 'setLeftThumb',];
+
+    public function setRightThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
+    {
+        $this->form['right_finger'] = [
+            'id' => $this->right['id'] ?? null,
+            'image' => $image,
+            'isoTemplate' => $isoTemplate,
+            'ansiTemplate' => $ansiTemplate,
+            'isoImage' => $isoImage,
+            'quality' => $quality,
+        ];
+    }
+
+    public function setLeftThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
+    {
+        $this->form['left_finger'] = [
+            'id' => $this->left['id'] ?? null,
+            'image' => $image,
+            'isoTemplate' => $isoTemplate,
+            'ansiTemplate' => $ansiTemplate,
+            'isoImage' => $isoImage,
+            'quality' => $quality,
+        ];
+
+
+    }
 
     public function dobChanged($nepaliDate): void
     {
@@ -99,7 +128,7 @@ class SeniorCitizenDetailLivewire extends Component
         }
     }
 
-    public function rules()
+    public function rules(): array
     {
         return !empty($this->seniorCitizenDetail)
             ? array_merge($this->validationRules, [
@@ -109,8 +138,8 @@ class SeniorCitizenDetailLivewire extends Component
             ])
             : array_merge($this->validationRules, [
                 'form.photo' => ['required'],
-                'form.left_finger' => ['required', 'image'],
-                'form.right_finger' => ['required', 'image'],
+                'form.left_finger' => ['required'],
+                'form.right_finger' => ['required'],
             ]);
     }
 
@@ -160,9 +189,7 @@ class SeniorCitizenDetailLivewire extends Component
     {
 
         $this->validate()['form'];
-
         if (!empty($this->seniorCitizenDetail)) {
-
             $this->seniorCitizenDetail->update($this->validate()['form']);
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
@@ -171,7 +198,29 @@ class SeniorCitizenDetailLivewire extends Component
             return redirect(route('identity.admin.seniorCitizenDetail.index'));
         }
 
-        SeniorCitizenDetail::create($this->validate()['form']);
+        DB::transaction(function () {
+            $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form']);
+            $seniorCitizenDetail->fingerPrints()->create([
+                'finger_image' => $this->form['left_finger']['image'],
+                'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                'iso_image' => $this->form['left_finger']['isoImage'],
+                'finger' => 'left',
+                'quality' => $this->form['left_finger']['quality'],
+                'user_id' => auth()->id(),
+            ]);
+            $seniorCitizenDetail->fingerPrints()->create([
+                'finger_image' => $this->form['right_finger']['image'],
+                'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                'iso_image' => $this->form['right_finger']['isoImage'],
+                'finger' => 'right',
+                'quality' => $this->form['right_finger']['quality'],
+                'user_id' => auth()->id(),
+            ]);
+
+        });
+
         $this->dispatchBrowserEvent('toast_message', [
             'type' => 'success',
             'title' => 'तपाइको  जेस्ठ नागरिक विवरण  दर्ता भयो'
@@ -198,6 +247,7 @@ class SeniorCitizenDetailLivewire extends Component
         if ($this->form['is_medicine'] == '0') {
             $this->form['medicine_name'] = null;
         }
+
         return view('identity::livewire.senior-citizen-detail-livewire');
     }
 }
