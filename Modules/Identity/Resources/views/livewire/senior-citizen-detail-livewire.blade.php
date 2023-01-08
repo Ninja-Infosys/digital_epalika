@@ -39,34 +39,70 @@
                         <video id="video" width="200" height="200"  autoplay></video>
                         <canvas id="canvas" width="200" height="200"></canvas>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.left_finger" class="form-label">औठा छाप बाँया</label>
-                        <input
-                            name="form.left_finger"
-                            class="form-control  @error('form.left_finger') is-invalid @enderror"
-                            type="file"
-                            id="form.left_finger"
-                            wire:model="form.left_finger"
-                        />
-                        <div wire:loading wire:target="form.left_finger">Uploading...</div>
-                        @error('form.left_finger')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
+                    <div class="col-md-4">
+                        <div class="card">
+                            @if ( !empty($form['right_finger']['image']))
+                                <img src="{{ $form['right_finger']['image'] }}" id="finger-print-right" alt="Right"
+                                      height="80" width="80">
+                            @endif
+                            <div class="card-body text-center">
+                                <div class="clearfix mb-3"> <span class="badge rounded-pill bg-info">दाहिने</span>
+                                </div>
+                                <div class="text-center">
+                                    <button onclick="return captureRight();" class="btn btn-primary">Capture</button>
+                                </div>
+                            </div>
+                                @error('form.right_finger')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                        </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.right_finger" class="form-label">औठा छाप दाँया</label>
-                        <input
-                            name="form.right_finger"
-                            class="form-control  @error('form.right_finger') is-invalid @enderror"
-                            type="file"
-                            id="form.right_finger"
-                            wire:model="form.right_finger"
-                        />
-                        <div wire:loading wire:target="form.right_finger">Uploading...</div>
-                        @error('form.right_finger')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
+                    <div class="col-md-4">
+                        <div class="card">
+                            @if ( !empty($form['left_finger']['image']))
+                                <img src="{{ $form['left_finger']['image'] }}" id="finger-print-left" alt="Left"
+                                      height="80" width="60">
+                            @endif
+                            <div class="card-body text-center">
+                                <div class="clearfix mb-3"> <span class="badge rounded-pill bg-info">बायाँ</span>
+                                </div>
+                                <div class="text-center">
+                                    <button onclick="return captureLeft();" class="btn btn-primary">Capture</button>
+                                </div>
+                            </div>
+                                @error('form.left_finger')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                        </div>
                     </div>
+{{--                    <div class="col-md-4 mb-3">--}}
+{{--                        <label for="form.left_finger" class="form-label">औठा छाप बाँया</label>--}}
+{{--                        <input--}}
+{{--                            name="form.left_finger"--}}
+{{--                            class="form-control  @error('form.left_finger') is-invalid @enderror"--}}
+{{--                            type="file"--}}
+{{--                            id="form.left_finger"--}}
+{{--                            wire:model="form.left_finger"--}}
+{{--                        />--}}
+{{--                        <div wire:loading wire:target="form.left_finger">Uploading...</div>--}}
+{{--                        @error('form.left_finger')--}}
+{{--                        <div class="invalid-feedback">{{$message}}</div>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-4 mb-3">--}}
+{{--                        <label for="form.right_finger" class="form-label">औठा छाप दाँया</label>--}}
+{{--                        <input--}}
+{{--                            name="form.right_finger"--}}
+{{--                            class="form-control  @error('form.right_finger') is-invalid @enderror"--}}
+{{--                            type="file"--}}
+{{--                            id="form.right_finger"--}}
+{{--                            wire:model="form.right_finger"--}}
+{{--                        />--}}
+{{--                        <div wire:loading wire:target="form.right_finger">Uploading...</div>--}}
+{{--                        @error('form.right_finger')--}}
+{{--                        <div class="invalid-feedback">{{$message}}</div>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
 
                 </div>
             </fieldset>
@@ -734,6 +770,11 @@
             }
 
         </script>
+        <script src="{{ asset('assets/backend/finger/js/jquery-1.11.2.min.js') }}" defer></script>
+        <script src="{{ asset('assets/backend/finger/js/msf100.min.js') }}" defer></script>
+        <script src="{{ asset('assets/backend/finger/js/msfDevice.js') }}" defer></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     @endpush
 @endonce
 

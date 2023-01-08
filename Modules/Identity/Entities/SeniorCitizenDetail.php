@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
@@ -93,11 +94,16 @@ class SeniorCitizenDetail extends Model
         return $this->belongsTo(EmployeeSignature::class);
     }
 
+    public function fingerPrints(): MorphMany
+    {
+        return $this->morphMany(FingerPrint::class,'model');
+    }
+
     public function setPhotoAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
             $this->attributes['photo'] = $value->store('seniorCitizenship', 'public');
-        } elseif(!empty($value)) {
+        } elseif (!empty($value)) {
             $this->attributes['photo'] = $value;
         }
     }
@@ -116,8 +122,8 @@ class SeniorCitizenDetail extends Model
 
     public function setLeftFingerAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['left_finger'] = $value->store('seniorCitizenship', 'public');
+        if (!empty($value)) {
+            $this->attributes['left_finger'] = implode('',$value);
         }
     }
 
@@ -128,8 +134,8 @@ class SeniorCitizenDetail extends Model
 
     public function setRightFingerAttribute($value)
     {
-        if (!empty($value) && !is_string($value)) {
-            $this->attributes['right_finger'] = $value->store('seniorCitizenship', 'public');
+        if (!empty($value)) {
+            $this->attributes['right_finger'] = implode('',$value);
         }
     }
 
