@@ -1088,9 +1088,9 @@
                                 @error('form.photo')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                                <button onclick="loadImage()" type="button">Camera</button>
-                                <button onclick="captureImage()" type="button">Capture Image</button>
-                                <button onclick="stopCamera()" type="button">Stop Camera</button>
+                                <button class="mt-1" onclick="loadImage()" type="button">Camera</button>
+                                <button class="mt-1" onclick="captureImage()" type="button">Capture Image</button>
+                                <button class="mt-1" onclick="stopCamera()" type="button">Stop Camera</button>
                                 <video id="video" width="200" height="200" autoplay></video>
                                 <canvas id="canvas" width="200" height="200"></canvas>
 
@@ -1117,7 +1117,7 @@
                                         @if ( !empty($form['right_finger']['image']))
                                             <img src="{{ $form['right_finger']['image'] }}" id="finger-print-right"
                                                  alt="Right"
-                                                 height="80" width="80">
+                                                 height="100" width="100" style="margin: 20px auto">
                                         @endif
                                         <div class="card-body text-center">
                                             <div class="clearfix mb-3"><span
@@ -1139,7 +1139,7 @@
                                         @if ( !empty($form['left_finger']['image']))
                                             <img src="{{ $form['left_finger']['image'] }}" id="finger-print-left"
                                                  alt="Left"
-                                                 height="80" width="60">
+                                                 height="100" width="100" style="margin: 20px auto">
                                         @endif
                                         <div class="card-body text-center">
                                             <div class="clearfix mb-3"><span
