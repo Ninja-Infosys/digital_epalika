@@ -17,7 +17,7 @@ class DisabilityIdentityCardController extends Controller
     public function index()
     {
 
-        $disabilityIdentityCards = DisabilityIdentityCard::latest()->paginate(10);
+        $disabilityIdentityCards = DisabilityIdentityCard::with('governmentalDisabilityType')->latest()->paginate(10);
         return view('identity::admin.disabilityIdentityCard.index', compact('disabilityIdentityCards'));
     }
 
