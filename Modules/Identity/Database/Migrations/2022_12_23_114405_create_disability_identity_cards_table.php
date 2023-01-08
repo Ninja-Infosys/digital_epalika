@@ -12,8 +12,6 @@ return new class extends Migration
             $table->id();
             $table->longText('photo');
             $table->string('finger_print_type')->nullable();
-            $table->string('finger_left')->nullable();
-            $table->string('finger_right')->nullable();
             $table->string('name');
             $table->string('name_en');
             $table->string('gender');

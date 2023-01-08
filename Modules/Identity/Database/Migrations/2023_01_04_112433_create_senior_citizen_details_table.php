@@ -11,8 +11,6 @@ return new class extends Migration
         Schema::create('senior_citizen_details', function (Blueprint $table) {
             $table->id();
             $table->longText('photo')->nullable();
-            $table->string('left_finger')->nullable();
-            $table->string('right_finger')->nullable();
             $table->string('name')->nullable();
             $table->string('name_en')->nullable();
             $table->string('dob_bs')->nullable();
