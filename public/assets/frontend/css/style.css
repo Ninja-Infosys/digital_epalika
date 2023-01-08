@@ -40,8 +40,7 @@ body {
 
 .card-img img {
     object-fit: cover;
-    height: 9.95rem;
-    width: 100%;
+    width: 90%;
 }
 
 .list {
@@ -319,6 +318,10 @@ body {
 .org-location .card-body p {
     font-size: 1.255rem;
     color: var(--mainColor);
+}
+
+.body{
+    padding: 0rem 1rem;
 }
 
 /*marquee css*/

@@ -11,7 +11,7 @@
                                         alt="{{ $employee->name }}">
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body mt-2">
+                                    <div class="body mt-2">
                                         <h5 class="card-title" style="font-size: 22px; color:black">
                                             <b>{{ $employee->name }}</b>
                                         </h5>
