@@ -86,6 +86,7 @@
                                             <img src="{{$file->finger_image}}"
                                                  alt=""
                                                  style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
+                                                 <p> {{$file->finger=='left' ? 'बाँया':'दाँया'}}</p>
                                         @endforeach
                                     </div>
                                 @endif
