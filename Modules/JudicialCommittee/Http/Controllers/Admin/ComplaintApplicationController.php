@@ -4,6 +4,7 @@ namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Modules\Grant\Enums\GranteeEnum;
@@ -15,7 +16,12 @@ class ComplaintApplicationController extends Controller
 {
     public function registeredApplications()
     {
-        $complaintApplications = ComplaintApplication::with('lawsuitNature')->whereHas('judicialReceiptBill')->orderByDesc('date')->get();
+        $complaintApplications = ComplaintApplication::with('lawsuitNature')->whereHas('judicialReceiptBill')
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['submission_no', 'registration_no', 'subject', 'date'], request('search'));
+                }
+            })->orderByDesc('date')->paginate(10);
 
         return view('judicialcommittee::admin.registered_application', compact('complaintApplications'));
     }
@@ -24,7 +30,12 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        $complaintApplications = ComplaintApplication::with('lawsuitNature')->orderByDesc('date')->get();
+        $complaintApplications = ComplaintApplication::with('lawsuitNature')
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['submission_no', 'registration_no', 'subject', 'date'], request('search'));
+                }
+            })->orderByDesc('date')->paginate(10);
 
         return view('judicialcommittee::admin.complaint_application.index', compact('complaintApplications'));
     }

@@ -55,10 +55,7 @@ class ReportController extends Controller
         $this->getLocalBodyRelationData($localBodyColumns, $lists);
         $this->getObjectTransactionRelationData($objectTransactionColumns, $lists);
 
-        $lists = $this->excludeColumnsFromListRegistration($lists);
-
         $excelUrl = $this->storeExcelFile($lists);
-
         return response()->json([
             'data' => BusinessDetailResource::collection($lists),
             'excelUrl' => $excelUrl

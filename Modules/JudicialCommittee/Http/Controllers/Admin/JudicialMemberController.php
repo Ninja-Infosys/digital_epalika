@@ -4,6 +4,7 @@ namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings\Designation;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\JudicialCommittee\Entities\JudicialMember;
 use Modules\JudicialCommittee\Http\Requests\JudicialMember\StoreJudicialMemberRequest;
 use Modules\JudicialCommittee\Http\Requests\JudicialMember\UpdateJudicialMemberRequest;
@@ -14,7 +15,11 @@ class JudicialMemberController extends Controller
     {
         $this->checkAuthorization('judicialMember_access');
 
-        $judicialMembers = JudicialMember::orderBy('position')->get();
+        $judicialMembers = JudicialMember::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['name', 'phone', 'email', 'designation'], request('search'));
+            }
+        })->orderBy('position')->paginate(10);
 
         return view('judicialcommittee::admin.judicial_member.index', compact('judicialMembers'));
     }

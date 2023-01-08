@@ -11,6 +11,7 @@ use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialCommitteeTemplateCo
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialMemberController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\JudicialReceiptBillController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\LawsuitNatureController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\ReportController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\WrittenAnswerController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -26,4 +27,9 @@ Route::resource('complaintApplication/{complaintApplication}/writtenAnswer', Wri
 Route::prefix('setting')->group(function () {
     Route::resource('lawsuitNature', LawsuitNatureController::class);
     Route::resource('judicialCommitteeTemplate', JudicialCommitteeTemplateController::class);
+});
+
+Route::controller(ReportController::class)->prefix('reports')->as('report.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('report-data', 'report')->name('report-data');
 });

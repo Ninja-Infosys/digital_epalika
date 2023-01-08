@@ -96,13 +96,15 @@ class BusinessDetail extends Model
     {
         return Attribute::get(fn($value) => BusinessNature::tryFrom($value)?->label() ?? null);
     }
+
     public function SourceOfCapital(): Attribute
     {
-        return Attribute::get(fn($value) =>  SourceOfCapital::tryFrom($value)?->label() ?? null);
+        return Attribute::get(fn($value) => SourceOfCapital::tryFrom($value)?->label() ?? null);
     }
+
     public function BusinessType(): Attribute
     {
-        return Attribute::get(fn($value) =>  BusinessTypeEnum::tryFrom($value)?->label() ?? null);
+        return Attribute::get(fn($value) => BusinessTypeEnum::tryFrom($value)?->label() ?? null);
     }
 
     public function fiscalYear(): BelongsTo
@@ -175,7 +177,7 @@ class BusinessDetail extends Model
 
     public function getPhotoUrlAttribute(): string
     {
-        return $this->attributes['photo'] ? Storage::disk('public')->url($this->attributes['photo']) : '';
+        return !empty($this->attributes['photo']) ? Storage::disk('public')->url($this->attributes['photo']) : '';
     }
 
     public function setCitizenshipFrontAttribute($value): void
@@ -187,7 +189,7 @@ class BusinessDetail extends Model
 
     public function getCitizenshipFrontUrlAttribute(): string
     {
-        return $this->attributes['citizenship_front'] ? Storage::disk('public')->url($this->attributes['citizenship_front']) : '';
+        return !empty($this->attributes['citizenship_front']) ? Storage::disk('public')->url($this->attributes['citizenship_front']) : '';
     }
 
     public function setCitizenshipBackAttribute($value): void
@@ -199,7 +201,7 @@ class BusinessDetail extends Model
 
     public function getCitizenshipBackUrlAttribute(): string
     {
-        return $this->attributes['citizenship_back'] ? Storage::disk('public')->url($this->attributes['citizenship_back']) : '';
+        return !empty($this->attributes['citizenship_back']) ? Storage::disk('public')->url($this->attributes['citizenship_back']) : '';
     }
 
     public function setCompanyRegistrationAttribute($value): void
@@ -211,7 +213,7 @@ class BusinessDetail extends Model
 
     public function getCompanyRegistrationUrlAttribute(): string
     {
-        return $this->attributes['company_registration'] ? Storage::disk('public')->url($this->attributes['company_registration']) : '';
+        return !empty($this->attributes['company_registration']) ? Storage::disk('public')->url($this->attributes['company_registration']) : '';
     }
 
     public function setTaxPayFileAttribute($value): void
@@ -223,7 +225,7 @@ class BusinessDetail extends Model
 
     public function getTaxPayFileUrlAttribute(): string
     {
-        return $this->attributes['tax_pay_file'] ? Storage::disk('public')->url($this->attributes['tax_pay_file']) : '';
+        return !empty($this->attributes['tax_pay_file']) ? Storage::disk('public')->url($this->attributes['tax_pay_file']) : '';
     }
 
     public function setPropertyAttribute($value): void
@@ -235,7 +237,7 @@ class BusinessDetail extends Model
 
     public function getPropertyUrlAttribute(): string
     {
-        return $this->attributes['property'] ? Storage::disk('public')->url($this->attributes['property']) : '';
+        return !empty($this->attributes['property']) ? Storage::disk('public')->url($this->attributes['property']) : '';
     }
 
     public function setSignatureAttribute($value): void
@@ -247,7 +249,7 @@ class BusinessDetail extends Model
 
     public function getSignatureUrlAttribute(): string
     {
-        return $this->attributes['signature'] ? Storage::disk('public')->url($this->attributes['signature']) : '';
+        return !empty($this->attributes['signature']) ? Storage::disk('public')->url($this->attributes['signature']) : '';
     }
 
     public function setThumbAttribute($value): void
@@ -259,7 +261,7 @@ class BusinessDetail extends Model
 
     public function getThumbUrlAttribute(): string
     {
-        return $this->attributes['thumb'] ? Storage::disk('public')->url($this->attributes['thumb']) : '';
+        return !empty($this->attributes['thumb']) ? Storage::disk('public')->url($this->attributes['thumb']) : '';
     }
 
     public function getTotalAmountAttribute()

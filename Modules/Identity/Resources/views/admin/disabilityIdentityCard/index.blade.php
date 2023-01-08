@@ -36,9 +36,12 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                <th>अपाङ्गता परिचयपत्र नं.</th>
+                                <th>परिचयपत्रको प्रकार</th>
                                 <th>नाम</th>
                                 <th>लिङ्ग</th>
                                 <th> फोटो</th>
+                                <th>नागरिकता नं.</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -46,10 +49,15 @@
                             @forelse($disabilityIdentityCards as $disabilityIdentityCard)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
+                                    <td>{{$disabilityIdentityCard->card_no}}</td>
+                                    <td>{{$disabilityIdentityCard->governmentalDisabilityType?->category->label()??''}}</td>
                                     <td>{{$disabilityIdentityCard->name}}</td>
                                     <td>{{$disabilityIdentityCard->gender->label()??''}}</td>
                                     <td>
                                         <img src="{{$disabilityIdentityCard->photo_url}}" alt="{{$disabilityIdentityCard->name??''}}" height="60">
+                                    </td>
+                                    <td>
+                                        {{$disabilityIdentityCard->citizenship_no}}
                                     </td>
 
                                     <td>

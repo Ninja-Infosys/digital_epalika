@@ -29,7 +29,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm mb-0 table-bordered">
+                        @includeIf('inc.filter_form')
+                        <table class="table table-sm mb-0 mt-3 table-bordered">
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
@@ -99,6 +100,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-2">
+                        {{ $complaintApplications->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
                 </div>
             </div>

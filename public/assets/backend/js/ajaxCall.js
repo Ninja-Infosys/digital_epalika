@@ -2,6 +2,9 @@ function createTable(headerData, bodyData) {
     // Get the reference for the body
     const tableDiv = document.getElementById("report-table");
 
+    // remove all data from tableDiv
+    tableDiv.innerHTML = "";
+
     if (bodyData.length > 0) {
 
         // creates a <table> element
