@@ -48,6 +48,10 @@ class JudicialPermissionTableSeeder extends Seeder
             'writtenAnswer_create',
             'writtenAnswer_edit',
             'writtenAnswer_delete',
+            'complaintDecision_access',
+            'complaintDecision_create',
+            'complaintDecision_edit',
+            'complaintDecision_delete',
         ];
 
         $this->storePermission($permissions);
