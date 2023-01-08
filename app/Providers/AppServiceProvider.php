@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\PageRenderMiddleware;
 use App\Models\FeatureActivation;
 use App\Models\OfficeHeader;
 use App\Models\Settings\Units\Unit;
@@ -39,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
         JsonResource::withoutWrapping();
 
         $this->defineMacro();
+
+        $this->app->singleton(PageRenderMiddleware::class);
     }
 
     /**
