@@ -37,8 +37,6 @@ class DisabilityIdentityCard extends Model
         'permanent_tole',
         'photo',
         'finger_print_type',
-        'finger_left',
-        'finger_right',
         'name',
         'name_en',
         'gender',
@@ -101,9 +99,9 @@ class DisabilityIdentityCard extends Model
 
     protected $casts = [
         'gender' => Gender::class,
-        'qualification'=> Qualification::class,
-        'blood_group'=> BloodGroupEnum::class,
-        'receiving_body'=> ReceivingBodyEnum::class,
+        'qualification' => Qualification::class,
+        'blood_group' => BloodGroupEnum::class,
+        'receiving_body' => ReceivingBodyEnum::class,
 
     ];
 
@@ -176,7 +174,7 @@ class DisabilityIdentityCard extends Model
 
     public function fingerPrints(): MorphMany
     {
-        return $this->morphMany(FingerPrint::class,'model');
+        return $this->morphMany(FingerPrint::class, 'model');
     }
 
 
@@ -201,49 +199,13 @@ class DisabilityIdentityCard extends Model
         }
     }
 
-    public function setFingerLeftAttribute($value): void
-    {
-        if ($this->attributes['finger_print_type'] == 'none') {
-            $this->attributes['finger_left'] = null;
-        } else {
-            if (!empty($value) && !is_string($value)) {
-                $this->attributes['finger_left'] = $value->store('disabilityIdentityCard', 'public');
-            }
-        }
-    }
-
-    public function getFingerLeftUrlAttribute(): string
-    {
-
-        return $this->attributes['finger_left'] ? Storage::disk('public')->url($this->attributes['finger_left']) : '';
-
-    }
-
-    public function setFingerRightAttribute($value): void
-    {
-
-        if ($this->attributes['finger_print_type'] == 'none') {
-            $this->attributes['finger_right'] = null;
-        } else {
-            if (!empty($value) && !is_string($value)) {
-                $this->attributes['finger_right'] = $value->store('disabilityIdentityCard', 'public');
-            }
-        }
-    }
-
-
-    public function getFingerRightUrlAttribute(): string
-    {
-
-        return $this->attributes['finger_right'] ? Storage::disk('public')->url($this->attributes['finger_right']) : '';
-
-    }
 
     public function getCitizenshipPhotoUrlAttribute(): string
     {
         return $this->attributes['citizenship_photo'] ? Storage::disk('public')->url($this->attributes['citizenship_photo']) : '';
 
     }
+
     public function setCitizenshipPhotoAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
@@ -256,6 +218,7 @@ class DisabilityIdentityCard extends Model
         return $this->attributes['citizenship_photo_certificate'] ? Storage::disk('public')->url($this->attributes['citizenship_photo_certificate']) : '';
 
     }
+
     public function setCitizenshipPhotoCertificateAttribute($value): void
     {
         if (!empty($value) && !is_string($value)) {
@@ -291,6 +254,7 @@ class DisabilityIdentityCard extends Model
             return '';
         }
     }
+
     public function getLeftFingerAttribute()
     {
         if ($this->attributes['finger_left']) {
