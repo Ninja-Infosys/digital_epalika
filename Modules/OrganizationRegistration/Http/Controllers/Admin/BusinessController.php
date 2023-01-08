@@ -3,6 +3,7 @@
 namespace Modules\OrganizationRegistration\Http\Controllers\Admin;
 
 use App\Models\Address\District;
+use App\Models\Settings\OfficeSetting;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,12 +33,22 @@ class BusinessController extends Controller
         $businessNatures = BusinessNature::all();
         $objectTransactions = ObjectTransaction::with('objectTransactions')->get();
 
-        return view('organizationregistration::admin.business.create', compact('businessNatures', 'objectTransactions','districts'));
+        return view('organizationregistration::admin.business.create', compact('businessNatures', 'objectTransactions', 'districts'));
     }
 
     public function store(StoreBusinessRequest $request)
     {
-        $business = Business::create($request->validated());
+
+        $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;
+
+        $registrationNo = Business::whereFiscalYearId($fiscal_year)
+                ->max('registration_no') + 1;
+
+
+        $business = Business::create($request->validated() + [
+                'fiscal_year_id' => $fiscal_year,
+                'registration_no' => $registrationNo,
+            ]);
         return redirect()->route('admin.organizationRegistration.business.index');
     }
 
