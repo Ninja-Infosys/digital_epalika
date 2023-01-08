@@ -28,8 +28,6 @@ class SeniorCitizenDetail extends Model
 
     protected $fillable = [
         'photo',
-        'left_finger',
-        'right_finger',
         'name',
         'name_en',
         'dob_bs',
@@ -69,12 +67,6 @@ class SeniorCitizenDetail extends Model
         'gender' => Gender::class,
         'blood_group'=> BloodGroupEnum::class,
     ];
-
-
-    public function getAddressAttribute(): string
-    {
-        return "Address";
-    }
 
     public function province(): BelongsTo
     {
@@ -121,29 +113,4 @@ class SeniorCitizenDetail extends Model
             return '';
         }
     }
-
-    public function setLeftFingerAttribute($value)
-    {
-        if (!empty($value)) {
-            $this->attributes['left_finger'] = implode('',$value);
-        }
-    }
-
-    public function getLeftFingerAttribute(): string
-    {
-        return $this->attributes['left_finger'] ? Storage::disk('public')->url($this->attributes['left_finger']) : '';
-    }
-
-    public function setRightFingerAttribute($value)
-    {
-        if (!empty($value)) {
-            $this->attributes['right_finger'] = implode('',$value);
-        }
-    }
-
-    public function getRightFingerAttribute(): string
-    {
-        return $this->attributes['right_finger'] ? Storage::disk('public')->url($this->attributes['right_finger']) : '';
-    }
-
 }

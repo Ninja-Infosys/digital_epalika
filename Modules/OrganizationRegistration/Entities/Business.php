@@ -9,6 +9,7 @@ use App\Models\Settings\FiscalYear;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 use Illuminate\Support\Facades\Storage;
@@ -101,5 +102,10 @@ class Business extends Model
     public function getOwnerPhotoUrlAttribute(): string
     {
         return !empty($this->attributes['owner_photo']) ? Storage::disk('public')->url($this->attributes['owner_photo']) : '';
+    }
+
+    public function businessRenews(): HasMany
+    {
+        return $this->hasMany(BusinessRenew::class);
     }
 }
