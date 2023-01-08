@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Identity\Entities\EmployeeSignature;
+use Modules\Identity\Entities\FingerPrint;
 use Modules\Identity\Entities\SeniorCitizenDetail;
 
 class SeniorCitizenDetailLivewire extends Component
@@ -68,13 +69,55 @@ class SeniorCitizenDetailLivewire extends Component
         'medicine_name' => null,
         'employee_signature_id' => null,
     ];
+
+    public function mount($seniorCitizenDetail = null): void
+    {
+        $officeSetting = OfficeSetting::first();
+        $this->employeeSignatures = EmployeeSignature::Status()->get();
+        $this->provinces = Province::all();
+
+        if (!empty($seniorCitizenDetail)) {
+            $this->seniorCitizenDetail = $seniorCitizenDetail;
+            foreach (Arr::except($this->form, ['photo', 'left_finger', 'right_finger']) as $key => $data) {
+                $this->form[$key] = $seniorCitizenDetail[$key];
+            }
+
+            if ($seniorCitizenDetail->fingerprints->count() > 0) {
+                if (!empty($rightFinger = $seniorCitizenDetail->fingerprints->where('finger', 'right')->first())) {
+                    $this->form['right_finger'] = [
+                        'id' => $rightFinger->id,
+                        'image' => $rightFinger->finger_image,
+                        'isoTemplate' => $rightFinger->iso_temp,
+                        'ansiTemplate' => $rightFinger->ansi_temp,
+                        'isoImage' => $rightFinger->iso_image,
+                        'quality' => $rightFinger->quality
+                    ];
+                }
+                if (!empty($leftFinger = $seniorCitizenDetail->fingerprints->where('finger', 'left')->first())) {
+                    $this->form['left_finger'] = [
+                        'id' => $leftFinger->id,
+                        'image' => $leftFinger->finger_image,
+                        'isoTemplate' => $leftFinger->iso_temp,
+                        'ansiTemplate' => $leftFinger->ansi_temp,
+                        'isoImage' => $leftFinger->iso_image,
+                        'quality' => $leftFinger->quality
+                    ];
+                }
+            }
+        } else {
+            $this->form['province_id'] = $officeSetting->province_id;
+            $this->form['district_id'] = $officeSetting->district_id;
+            $this->form['local_body_id'] = $officeSetting->local_body_id;
+        }
+    }
+
     protected $listeners = ['dobChanged','issueDateChanged','photoUpdated', 'setRight' => 'setRightThumb',
         'setLeft' => 'setLeftThumb',];
 
     public function setRightThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
     {
         $this->form['right_finger'] = [
-            'id' => $this->right['id'] ?? null,
+            'id' => $this->form['right_finger']['id'] ?? null,
             'image' => $image,
             'isoTemplate' => $isoTemplate,
             'ansiTemplate' => $ansiTemplate,
@@ -86,7 +129,7 @@ class SeniorCitizenDetailLivewire extends Component
     public function setLeftThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
     {
         $this->form['left_finger'] = [
-            'id' => $this->left['id'] ?? null,
+            'id' => $this->form['left_finger']['id'] ?? null,
             'image' => $image,
             'isoTemplate' => $isoTemplate,
             'ansiTemplate' => $ansiTemplate,
@@ -110,31 +153,14 @@ class SeniorCitizenDetailLivewire extends Component
     {
         $this->form['photo'] = $base64String;
     }
-    public function mount($seniorCitizenDetail = null): void
-    {
-        $officeSetting = OfficeSetting::first();
-        $this->employeeSignatures = EmployeeSignature::Status()->get();
-        $this->provinces = Province::all();
-
-        if (!empty($seniorCitizenDetail)) {
-            $this->seniorCitizenDetail = $seniorCitizenDetail;
-            foreach (Arr::except($this->form, ['photo', 'left_finger', 'right_finger']) as $key => $data) {
-                $this->form[$key] = $seniorCitizenDetail[$key];
-            }
-        } else {
-            $this->form['province_id'] = $officeSetting->province_id;
-            $this->form['district_id'] = $officeSetting->district_id;
-            $this->form['local_body_id'] = $officeSetting->local_body_id;
-        }
-    }
 
     public function rules(): array
     {
         return !empty($this->seniorCitizenDetail)
             ? array_merge($this->validationRules, [
                 'form.photo' => ['nullable'],
-                'form.left_finger' => ['nullable', 'image'],
-                'form.right_finger' => ['nullable', 'image'],
+                'form.left_finger' => ['nullable'],
+                'form.right_finger' => ['nullable'],
             ])
             : array_merge($this->validationRules, [
                 'form.photo' => ['required'],
@@ -191,6 +217,24 @@ class SeniorCitizenDetailLivewire extends Component
         $this->validate()['form'];
         if (!empty($this->seniorCitizenDetail)) {
             $this->seniorCitizenDetail->update($this->validate()['form']);
+            if (!empty($this->form['left_finger']['id'])) {
+                Fingerprint::find($this->form['left_finger']['id'])->update([
+                    'finger_image' => $this->form['left_finger']['image'],
+                    'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                    'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                    'iso_image' => $this->form['left_finger']['isoImage'],
+                    'quality' => $this->form['left_finger']['quality'],
+                ]);
+            }
+            if (!empty($this->form['right_finger']['id'] )) {
+                Fingerprint::find($this->form['right_finger']['id'])->update([
+                    'finger_image' => $this->form['right_finger']['image'],
+                    'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                    'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                    'iso_image' => $this->form['right_finger']['isoImage'],
+                    'quality' => $this->form['right_finger']['quality'],
+                ]);
+            }
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
                 'title' => ' जेस्ठ नागरिक विवरण सफलतापुर्बक अध्याबधिक भयो'

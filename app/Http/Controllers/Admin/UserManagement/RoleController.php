@@ -118,9 +118,9 @@ class RoleController extends Controller
      */
     public function permissionCacheClear(): void
     {
-        if (Cache::has('permissions')) {
+        if (Cache::has(md5('permissions-' . auth()->id()))) {
             //
-            Cache::forget('permissions');
+            Cache::forget(md5('permissions-' . auth()->id()));
         }
     }
 }
