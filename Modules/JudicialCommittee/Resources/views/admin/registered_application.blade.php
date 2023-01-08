@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="">
                         @includeIf('inc.filter_form')
                         <table class="table table-sm mb-0 mt-3 table-bordered">
                             <thead>
