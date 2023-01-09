@@ -60,24 +60,28 @@
                                     <td>{{$business->registration_date}}</td>
                                     <td>{{$business->address}}</td>
                                     <td>{{$business->owner_name}}</td>
-                                    <td>{{$business->is_active}}</td>
                                     <td>
-                                        @can('business_edit')
-                                            <a href="{{route('admin.organizationRegistration.business.edit',$business)}}"
-                                               class="btn btn-xs btn-outline-warning">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                        @endcan
+                                        <a href="{{route('admin.organizationRegistration.business.updateStatus',$business)}}">
+                                            <i class="fa fa-2x {{$business->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'}}"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.organizationRegistration.business.businessRenew.index',$business)}}"
+                                           class="btn btn-xs btn-outline-primary">
+                                            <i class="fa fa-history" aria-hidden="true"></i> नबिकरण गर्नुहोस्
+                                        </a>
+                                        <a href="{{route('admin.organizationRegistration.business.edit',$business)}}"
+                                           class="btn btn-xs btn-outline-warning">
+                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                        </a>
                                         <form
-                                            action="{{route('admin.organizationRegistration.business.edit',$business)}}"
+                                            action="{{route('admin.organizationRegistration.business.destroy',$business)}}"
                                             method="post">
                                             @csrf
                                             @method('delete')
-                                            @can('business_delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            @endcan
+                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

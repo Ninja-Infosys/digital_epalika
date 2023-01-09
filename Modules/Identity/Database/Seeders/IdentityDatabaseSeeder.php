@@ -9,7 +9,12 @@ class IdentityDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-           IdentityPermissionTableSeeder::class
+           IdentityPermissionTableSeeder::class,
+            RelationshipTableSeeder::class,
+            DisabilityReasonTableSeeder::class,
+            DisabilityTypeTableSeeder::class,
+            CardColorTableSeeder::class,
+            GovernmentalDisabilityTypeTableSeeder::class,
         ]);
     }
 }

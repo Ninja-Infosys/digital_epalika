@@ -111,7 +111,7 @@ class SeniorCitizenDetailLivewire extends Component
         }
     }
 
-    protected $listeners = ['dobChanged','issueDateChanged','photoUpdated', 'setRight' => 'setRightThumb',
+    protected $listeners = ['dobChanged', 'issueDateChanged', 'photoUpdated', 'setRight' => 'setRightThumb',
         'setLeft' => 'setLeftThumb',];
 
     public function setRightThumb($image, $isoTemplate, $ansiTemplate, $isoImage, $quality)
@@ -144,6 +144,7 @@ class SeniorCitizenDetailLivewire extends Component
     {
         $this->form['dob_bs'] = $nepaliDate;
     }
+
     public function issueDateChanged($nepaliDate): void
     {
         $this->form['issue_date_bs'] = $nepaliDate;
@@ -206,6 +207,50 @@ class SeniorCitizenDetailLivewire extends Component
     ];
 
 
+    public function messages(): array
+    {
+        return [
+            'form.photo.required'=>['फोटो आवश्यक छ'],
+            'form.left_finger.required'=>['बायाँ छाप आवश्यक छ'],
+            'form.right_finger.required'=>['दाहिने छाप आवश्यक छ'],
+            'form.name.required' => ['नाम आवश्यक छ'],
+            'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
+            'form.dob_bs.required' => ['जन्म मिति नेपालीमा आवश्यक छ'],
+            'form.card_no.required' => ['कार्ड न. आवश्यक छ'],
+            'form.gender.required' => ['लिङ्ग आवश्यक छ'],
+            'form.citizenship_no.required' => ['नागरिकता नं आवश्यक छ'],
+            'form.issue_date_bs.required' => ['जारी मिति (वि.स.) आवश्यक छ'],
+            'form.spouse.required' => ['पति/पत्नीको नाम आवश्यक छ'],
+            'form.spouse_en.required' => ['पति/पत्नीको अंग्रेजीमा नाम आवश्यक छ'],
+            'form.blood_group.required' => ['रक्त समूह आवश्यक छ'],
+            'form.father_name.required' => ['बुवाको नाम आवश्यक छ'],
+            'form.father_name_en.required' => ['बुवाको अंग्रेजीमा नाम आवश्यक छ'],
+            'form.mother_name.required' => ['आमाको नाम आवश्यक छ'],
+            'form.mother_name_en.required' => ['आमाको अंग्रेजीमा नाम आवश्यक छ'],
+            'form.province_id.required' => ['प्रदेश आवश्यक छ'],
+            'form.district_id.required' => ['जिल्ला आवश्यक छ'],
+            'form.local_body_id.required' => ['पालिका आवश्यक छ'],
+            'form.ward_no.required' => ['वडा नं. आवश्यक छ'],
+            'form.tole.required' => ['टोल आवश्यक छ'],
+            'form.patrons_name.required' => ['संरक्षकको नाम आवश्यक छ'],
+            'form.patrons_name_en.required' => ['संरक्षकको अंग्रेजीमा नाम आवश्यक छ'],
+            'form.patrons_name_address.required' => ['संरक्षकको ठेगाना आवश्यक छ'],
+            'form.contact_person_name.required' => ['सम्पर्क व्यक्तिको नाम आवश्यक छ'],
+            'form.contact_person_name_en.required' => ['सम्पर्क व्यक्तिको अंग्रेजीमा नाम आवश्यक छ'],
+            'form.contact_person_phone.required' => ['सम्पर्क न. आवश्यक छ'],
+            'form.contact_person_address.required' => ['ठेगाना आवश्यक छ'],
+            'form.is_disease.required' => ['रोगको नाम आवश्यक छ'],
+            'form.disease_name.required_if' => ['रोगको नाम आवश्यक छ'],
+            'form.description.required' => ['हेरचाह केन्द्रको विवरण आवश्यक छ'],
+            'form.description_en.required' => ['हेरचाह केन्द्रको विवरण अंग्रेजीमा आवश्यक छ'],
+            'form.is_medicine.required' => ['आवश्यक छ'],
+            'form.medicine_name.required_if' => ['औषधिको नाम आवश्यक छ'],
+            'form.employee_signature_id.required' => ['हस्ताक्षर आवश्यक छ'],
+        ];
+
+    }
+
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -226,7 +271,7 @@ class SeniorCitizenDetailLivewire extends Component
                     'quality' => $this->form['left_finger']['quality'],
                 ]);
             }
-            if (!empty($this->form['right_finger']['id'] )) {
+            if (!empty($this->form['right_finger']['id'])) {
                 Fingerprint::find($this->form['right_finger']['id'])->update([
                     'finger_image' => $this->form['right_finger']['image'],
                     'iso_temp' => $this->form['right_finger']['isoTemplate'],

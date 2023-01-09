@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintApplicationController;
+use Modules\JudicialCommittee\Http\Controllers\Admin\ComplaintDecisionController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DashboardController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DateCompensationController;
 use Modules\JudicialCommittee\Http\Controllers\Admin\DateSheetController;
@@ -23,6 +24,7 @@ Route::resource('complaintApplication/{complaintApplication}/dateSheet', DateShe
 Route::resource('complaintApplication/{complaintApplication}/defendantIssuedDeadline', DefendantIssuedDeadlineController::class)->names('complaintApplication.defendantIssuedDeadline');
 Route::resource('complaintApplication/{complaintApplication}/dateCompensation', DateCompensationController::class)->names('complaintApplication.dateCompensation');
 Route::resource('complaintApplication/{complaintApplication}/writtenAnswer', WrittenAnswerController::class)->names('complaintApplication.writtenAnswer');
+Route::resource('complaintApplication/{complaintApplication}/complaintDecision', ComplaintDecisionController::class)->names('complaintApplication.complaintDecision');
 
 Route::prefix('setting')->group(function () {
     Route::resource('lawsuitNature', LawsuitNatureController::class);

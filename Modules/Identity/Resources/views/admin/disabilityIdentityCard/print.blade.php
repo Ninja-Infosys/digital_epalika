@@ -30,7 +30,6 @@
             padding: 15px;
             background-color: {{$disabilityIdentityCard->governmentalDisabilityType->color??''}};
             border: 1px solid black;
-            border-style: solid;
             border-radius: 8px;
         }
         .header > .office_header{
@@ -87,7 +86,7 @@
             </div>
             <div>
                 @foreach($officeHeaders as $header)
-                    <p style="font-size: {{$header->card_font}}rem;line-height: 0.2;text-align: center;">{{$header->title}}</p>
+                    <p style="font-size: {{$header->card_font}}rem;font-weight:{{$header->font}};color:{{$header->font_color}};line-height: 0.2;text-align: center;">{{$header->title}}</p>
                 @endforeach
             </div>
             <div>
@@ -150,7 +149,7 @@
             </div>
             <div>
                 @foreach($officeHeaders as $header)
-                    <p style="font-size: {{$header->card_font}}rem;line-height: 0.2;text-align: center;">{{$header->title_en}}</p>
+                    <p style="font-size: {{$header->card_font}}rem;font-weight:{{$header->font}};color:{{$header->font_color}};line-height: 0.2;text-align: center;">{{$header->title_en}}</p>
                 @endforeach
             </div>
             <div>
