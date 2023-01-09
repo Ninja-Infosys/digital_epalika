@@ -36,9 +36,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body" id="printData">
+                <div class="card-body" >
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered table-hover">
+                        <table id="printData" class="table table-sm table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th rowspan="3" class="align-middle">क्रम संख्या</th>
@@ -94,15 +94,6 @@
             </div>
         </div>
     </div>
-    @push('style')
-        <style>
-            @media print {
-                .table-responsive{
-                    overflow-x: visible !important;
-                }
-            }
-        </style>
-    @endpush
 @endsection
 
 

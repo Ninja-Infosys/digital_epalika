@@ -100,7 +100,7 @@
                                             @foreach($businessNatures as $businessNature)
                                                 <option
                                                     value="{{$businessNature->id}}"{{$businessNature->id == old('business_nature_id',$business->business_nature_id)?'selected':''}}
-                                                    >{{$businessNature->title}}</option>
+                                                >{{$businessNature->title}}</option>
                                             @endforeach
                                         </select>
                                         @error('business_nature_id')
@@ -117,7 +117,7 @@
                                             @foreach($objectTransactions as $objectTransaction)
                                                 <option value="{{$objectTransaction->id}}"
                                                     {{$objectTransaction->objectTransactions->isNotEmpty() ? 'disabled' : ''}} {{$objectTransaction->id==old('object_transaction_id',$business->object_transaction_id)?'selected':''}}
-                                                    >{{$objectTransaction->title}}
+                                                >{{$objectTransaction->title}}
                                                 </option>
                                                 @foreach($objectTransaction->objectTransactions as $object)
                                                     <option value="{{$object->id}}" {{$object->id==old('object_transaction_id',$business->object_transaction_id)?'selected':''}}
@@ -286,7 +286,7 @@
                                             <option disabled="" {{empty(old('citizenship_issue_district_id',$business->citizenship_issue_district_id)) ? 'selected':''}} value="">जिल्ला</option>
                                             @foreach($districts as $district)
                                                 <option value="{{$district->id}}"
-                                                        {{$district->id===old('citizenship_issue_district_id',$business->citizenship_issue_district_id)?'selected':''}}
+                                                    {{$district->id===old('citizenship_issue_district_id',$business->citizenship_issue_district_id)?'selected':''}}
                                                 >
                                                     {{$district->district}}
                                                 </option>
