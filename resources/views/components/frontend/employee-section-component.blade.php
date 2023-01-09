@@ -42,8 +42,11 @@
                 padding-right: calc(var(--bs-gutter-x) * .5);
                 padding-left: calc(var(--bs-gutter-x) * .5);
                 margin-top: var(--bs-gutter-y);
-                width: 40%
+                width: 50%
 
+            }
+            .employee{
+                margin: 20px;
             }
         }
     </style>

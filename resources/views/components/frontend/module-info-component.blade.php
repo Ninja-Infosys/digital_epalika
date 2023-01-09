@@ -96,3 +96,10 @@
     </div>
         @endif
 </div>
+@push('styles')
+    <style>
+        .info-card{
+            margin: 4vh 50px;
+        }
+    </style>
+@endpush
