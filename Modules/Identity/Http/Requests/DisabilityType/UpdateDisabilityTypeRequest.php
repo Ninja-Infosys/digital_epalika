@@ -19,4 +19,11 @@ class UpdateDisabilityTypeRequest extends FormRequest
             'title_en'=>['required','string','max:255'],
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'title.required' => ['शिर्षक आवश्यक छ'],
+            'title_en.required' => ['शिर्षक अंग्रेजीमा आवश्यक छ'],
+        ];
+    }
 }

@@ -18,4 +18,11 @@ class UpdateOccupationRequest extends FormRequest
             'title'=>['required','string','max:255']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'पेसा आवश्यक छ',
+        ];
+    }
 }

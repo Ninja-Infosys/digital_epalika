@@ -18,4 +18,10 @@ class StoreDisabilityReasonRequest extends FormRequest
             'title'=>['required','string','max:255']
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'title.required' => ['शिर्षक आवश्यक छ'],
+        ];
+    }
 }

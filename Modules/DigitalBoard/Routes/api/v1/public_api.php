@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Modules\DigitalBoard\Http\Controllers\Api\v1\PublicApiController;
 
 Route::get('employee', [PublicApiController::class, 'employee'])->name('api-public.employee');
