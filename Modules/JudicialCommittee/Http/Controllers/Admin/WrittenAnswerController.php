@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\WrittenAnswer;
+use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\WrittenAnswer\StoreWrittenAnswerRequest;
 use Modules\JudicialCommittee\Http\Requests\WrittenAnswer\UpdateWrittenAnswerRequest;
 
@@ -33,8 +34,9 @@ class WrittenAnswerController extends Controller
         $this->checkAuthorization('writtenAnswer_create');
 
         $writtenAnswer = $complaintApplication->writtenAnswers()->create($request->validated());
-
         $this->uploadFiles($request, $writtenAnswer);
+
+        event(new ComplaintLogEvent($complaintApplication->id, WrittenAnswer::class, $writtenAnswer->id, 'लिखित जवाफ', "मिति $writtenAnswer->submitted_date गते लिखित जवाफ पेश गरियो।"));
 
         toast('लिखित जवाफ सफलतापूर्वक थपियो', 'success');
 

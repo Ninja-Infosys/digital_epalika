@@ -167,4 +167,9 @@ class ComplaintApplication extends Model
     {
         return $this->hasOne(ComplaintDecision::class);
     }
+
+    public function complaintLogs(): HasMany
+    {
+        return $this->hasMany(ComplaintLog::class);
+    }
 }

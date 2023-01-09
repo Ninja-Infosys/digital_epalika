@@ -5,10 +5,12 @@ namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\ComplaintDecision;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
+use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\ComplaintDecision\StoreComplaintDecisionRequest;
 
 class ComplaintDecisionController extends Controller
@@ -37,14 +39,20 @@ class ComplaintDecisionController extends Controller
     {
         $this->checkAuthorization('complaintDecision_create');
 
-        \DB::transaction(function () use ($request, $complaintApplication) {
+        $complaintDecision = DB::transaction(function () use ($request, $complaintApplication) {
             $complaintDecision = ComplaintDecision::updateOrCreate(
                 ['complaint_application_id' => $complaintApplication->id],
                 $request->validated()
             );
 
             $this->uploadFiles($request, $complaintDecision);
+
+            return $complaintDecision;
         });
+
+        if ($complaintDecision->wasRecentlyCreated) {
+            event(new ComplaintLogEvent($complaintApplication->id, ComplaintDecision::class, $complaintDecision->id, 'निर्णय', "मिति $complaintDecision->submitted_date गते निर्णय पेश गरियो।"));
+        }
 
         toast('निर्णय सफलतापूर्वक पेश गरियो', 'success');
 

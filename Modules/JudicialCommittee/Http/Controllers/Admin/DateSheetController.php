@@ -9,6 +9,7 @@ use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\DateSheet;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
+use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\DateSheet\StoreDateSheetRequest;
 use Modules\JudicialCommittee\Http\Requests\DateSheet\UpdateDateSheetRequest;
 
@@ -34,7 +35,9 @@ class DateSheetController extends Controller
     {
         $this->checkAuthorization('dateSheet_create');
 
-        $complaintApplication->dateSheets()->create($request->validated());
+        $dateSheet = $complaintApplication->dateSheets()->create($request->validated());
+
+        event(new ComplaintLogEvent($complaintApplication->id, DateSheet::class, $dateSheet->id, 'तारिख पर्चा', "$dateSheet->appearance_date गते समय $dateSheet->appearance_time को लागि तारिख पर्चा थपियो"));
 
         toast('तारिख पर्चा सफलतापूर्वक पेश गरियो', 'success');
 
@@ -45,14 +48,14 @@ class DateSheetController extends Controller
     {
         $this->checkAuthorization('dateSheet_access');
 
-        return view('judicialcommittee::admin.date_sheet.show',compact('complaintApplication','dateSheet'));
+        return view('judicialcommittee::admin.date_sheet.show', compact('complaintApplication', 'dateSheet'));
     }
 
     public function edit(ComplaintApplication $complaintApplication, DateSheet $dateSheet)
     {
         $this->checkAuthorization('dateSheet_edit');
 
-        return view('judicialcommittee::admin.date_sheet.edit',compact('complaintApplication','dateSheet'));
+        return view('judicialcommittee::admin.date_sheet.edit', compact('complaintApplication', 'dateSheet'));
     }
 
     public function update(UpdateDateSheetRequest $request, ComplaintApplication $complaintApplication, DateSheet $dateSheet)
@@ -61,8 +64,8 @@ class DateSheetController extends Controller
 
         $dateSheet->update($request->validated());
 
-        toast('तारिख पर्चा सफलतापूर्वक अद्यावधिक गरियो','success');
-        return redirect(route('admin.judicialCommittee.complaintApplication.dateSheet.index',$complaintApplication));
+        toast('तारिख पर्चा सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return redirect(route('admin.judicialCommittee.complaintApplication.dateSheet.index', $complaintApplication));
     }
 
     public function destroy(ComplaintApplication $complaintApplication, DateSheet $dateSheet)
