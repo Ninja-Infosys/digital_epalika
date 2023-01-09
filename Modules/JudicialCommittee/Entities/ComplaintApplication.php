@@ -162,4 +162,9 @@ class ComplaintApplication extends Model
     {
         return $this->hasMany(WrittenAnswer::class);
     }
+
+    public function complaintDecision(): HasOne
+    {
+        return $this->hasOne(ComplaintDecision::class);
+    }
 }

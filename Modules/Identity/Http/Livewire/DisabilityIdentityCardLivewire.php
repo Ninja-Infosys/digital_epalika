@@ -362,6 +362,8 @@ class DisabilityIdentityCardLivewire extends Component
     {
         return [
             'form.finger_print_type.required' => ['औलाको छाप आवश्यक छ'],
+            'form.left_finger.required_if' => ['बायाँ औंला आवश्यक छ'],
+            'form.right_finger.required_if' => ['दाहिने औंला आवश्यक छ'],
             'form.name.required' => ['नाम आवश्यक छ'],
             'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
             'form.gender.required' => ['लिङ्ग आवश्यक छ'],

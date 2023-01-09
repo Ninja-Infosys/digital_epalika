@@ -15,5 +15,7 @@
     "Plan": true,
     "Disability": true,
     "Identity": true,
-    "OrganizationRegistration": true
+    "OrganizationRegistration": true,
+    "Request": true,
+    "UpdateBusinessRequest": true
 }

@@ -24,9 +24,15 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> अपाङ्गता परिचय पत्र सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('identity.admin.disabilityIdentityCard.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> अपाङ्गता परिचय पत्र सुची
-                        </a>
+                        <div>
+                            <a href="{{route('identity.admin.disabilityIdentityCard.index')}}" class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-list"></i> अपाङ्गता परिचय पत्र सुची
+                            </a>
+                            <a href="https://localhost:8003/mfs100" target="_blank" class="btn btn-sm btn-outline-primary">
+                                Run MFS 100
+                            </a>
+                        </div>
+
                     </div>
                 </div>
                 <div class="card-body">

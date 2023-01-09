@@ -24,9 +24,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ जेष्ठ नागरिक थप्नुहोस्</h4>
-                        <a href="{{route('identity.admin.seniorCitizenDetail.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> जेष्ठ नागरिक सुची
-                        </a>
+                        <div>
+                            <a href="{{route('identity.admin.seniorCitizenDetail.index')}}" class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-list"></i> जेष्ठ नागरिक सुची
+                            </a>
+                            <a href="https://localhost:8003/mfs100" target="_blank" class="btn btn-sm btn-outline-primary">
+                                Run MFS 100
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">

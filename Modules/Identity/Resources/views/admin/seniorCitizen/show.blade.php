@@ -76,13 +76,13 @@
                                     <h4 class="font-15 text-center pb-2 text-decoration-underline">
                                             हातको छाप :
                                     </h4>
-                                 
+
                                         <div class="d-flex justify-content-between">
                                             @foreach ($seniorCitizenDetail->fingerPrints as $file)
                                                 <div class="col text center">
                                                     <img src="{{ $file->finger_image }}" alt=""
                                                         style="object-fit: cover; height: 6rem; width: 6rem; border: 1px solid var(--primary); border-radius: 10px;">
-                                                    <p> {{ $file->finger == 'left' ? 'बाँया' : 'दाँया' }}</p>
+                                                    <p class="text-black"> {{ $file->finger == 'left' ? 'बाँया' : 'दाँया' }}</p>
                                                 </div>
                                             @endforeach
                                         </div>
