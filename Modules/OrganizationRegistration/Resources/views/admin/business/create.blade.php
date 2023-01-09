@@ -183,11 +183,11 @@
                             </legend>
                             <div class="row">
                                 @livewire('address',['address' => [
-                                          'province_id' => $officeSetting->province_id ?? null,
-                                          'district_id' => $officeSetting->district_id ?? null,
-                                          'local_body_id' => $officeSetting->local_body_id ?? null,
-                                          'ward_no' => $officeSetting->ward_no ?? null,
-                                      ]])
+                                'province_id' => $officeSetting->province_id ?? null,
+                                'district_id' => $officeSetting->district_id ?? null,
+                                'local_body_id' => $officeSetting->local_body_id ?? null,
+                                'ward_no' => $officeSetting->ward_no ?? null,
+                                ]])
 
                                 <div class="col-md-4">
                                     <div class="form-group">
