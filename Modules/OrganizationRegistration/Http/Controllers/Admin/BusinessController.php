@@ -57,7 +57,7 @@ class BusinessController extends Controller
 
     public function show(Business $business)
     {
-        return view('organizationregistration::admin.business.show');
+        return view('organizationregistration::admin.business.show',compact('business'));
     }
 
     public function edit(Business $business)
