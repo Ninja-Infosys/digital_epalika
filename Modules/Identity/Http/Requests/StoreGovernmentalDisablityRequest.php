@@ -24,4 +24,15 @@ class StoreGovernmentalDisablityRequest extends FormRequest
             'category'=>['required',new Enum(CategoryTypeEnum::class)],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => ['शिर्षक आवश्यक छ'],
+            'title_en.required' => ['शिर्षक अंग्रेजीमा आवश्यक छ'],
+            'color.required' => ['कोड रङ आवश्यक छ'],
+            'position.required' => ['स्थिति आवश्यक छ'],
+            'category.required' => ['वर्ग आवश्यक छ'],
+        ];
+    }
 }

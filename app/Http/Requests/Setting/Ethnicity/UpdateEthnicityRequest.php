@@ -17,4 +17,10 @@ class UpdateEthnicityRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'title.required' => ['जातियता आवश्यक छ'],
+        ];
+    }
 }

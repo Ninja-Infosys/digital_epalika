@@ -19,4 +19,12 @@ class UpdateCardColorRequest extends FormRequest
             'color' => ['required', 'string', 'max:255']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => ['शिर्षक आवश्यक छ'],
+            'color.required' => ['कोड रङ आवश्यक छ'],
+        ];
+    }
 }

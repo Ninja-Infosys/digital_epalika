@@ -26,6 +26,7 @@ class StoreUnitRequest extends FormRequest
     public function messages()
     {
         return [
+            'type_id.required' => 'मापन एकाइ प्रकार अनिवार्य छ',
             'measurement_unit_id.required' => 'एकाइ मापन आवश्यक छ',
             'title.required' => 'शिर्षक आबश्यक छ ',
             'position.integer' => 'स्थिति अङ्क मा हुनुपर्छ ',
