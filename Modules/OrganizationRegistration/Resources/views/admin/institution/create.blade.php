@@ -61,14 +61,14 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row">
+                            </div>
                                     @livewire('address',['address' => [
                                     'province_id' => $officeSetting->province_id ?? null,
                                     'district_id' => $officeSetting->district_id ?? null,
                                     'local_body_id' => $officeSetting->local_body_id ?? null,
                                     'ward_no' => $officeSetting->ward_no ?? null,
                                     ]])
-                                </div>
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="institution_address">संस्थाको ठेगाना</label>
@@ -189,7 +189,83 @@
 
                             </div>
                         </fieldset>
-                        <fieldset>
+                        <fieldset class="border p-2 mb-2">
+                            <legend class="font-16 text-info">
+                                <strong>संस्थाको कागजातहरू</strong>
+                            </legend>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="minute">माइनुट (Minute) अपलोड गर्नुहोस<sup
+                                                class="text-danger">*required</sup></label>
+                                        <input type="file" class="form-control" name="minute"
+                                               id="minute"
+                                               >
+                                        @error('minute')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="application">निवेदन अपलोड गर्नुहोस<sup
+                                                class="text-danger">*required</sup></label>
+                                        <input type="file" class="form-control" name="application"
+                                               id="application"
+                                               >
+                                        @error('application')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Legislation">विधान अपलोड गर्नुहोस<sup
+                                                class="text-danger">*required</sup></label>
+                                        <input type="file" class="form-control" name="Legislation"
+                                               id="Legislation"
+                                        >
+                                        @error('Legislation')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Ward_recommendation">वार्डको सिफारिस<sup
+                                                class="text-danger">*required</sup></label>
+                                        <input type="file" class="form-control" name="Ward_recommendation"
+                                               id="Ward_recommendation"
+                                        >
+                                        @error('Ward_recommendation')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="stamp">संस्थाको छाप <sup
+                                                class="text-danger">*required</sup></label>
+                                        <input type="file" class="form-control" name="stamp"
+                                               id="stamp"
+                                        >
+                                        @error('stamp')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <fieldset class="border p-2 mb-2">
+                                <legend class="font-16 text-info">
+                                    <strong>संस्थाको संचालक पदाधिकारीको विवरण</strong>
+                                </legend>
+                                @livewire('organizationregistration::institution-livewire')
+                            </fieldset>
+                        </div>
+
+                        <fieldset class="border p-2 mb-2">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
