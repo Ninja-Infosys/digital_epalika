@@ -101,6 +101,10 @@
                                                         <i class="fa fa-file-alt"> निर्णयहरु </i>
                                                     </a>
                                                 @endcan
+                                                <a href="{{ route('admin.judicialCommittee.complaintApplication.complaintLog.index', $complaintApplication) }}"
+                                                   class="dropdown-item">
+                                                    <i class="fa fa-tasks"> गतिविधिहरु </i>
+                                                </a>
                                             </div>
                                         </div>
 

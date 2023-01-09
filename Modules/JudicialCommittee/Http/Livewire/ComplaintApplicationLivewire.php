@@ -13,6 +13,7 @@ use Livewire\WithFileUploads;
 use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\LawsuitNature;
 use Modules\JudicialCommittee\Entities\RelatedMember;
+use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 
 class ComplaintApplicationLivewire extends Component
 {
@@ -166,6 +167,8 @@ class ComplaintApplicationLivewire extends Component
                         'fiscal_year_id' => $this->officeSetting->fiscal_year_id,
                         'submission_no' => $this->officeSetting->fiscalYear->title . '-' . Str::padLeft(ComplaintApplication::max('id') + 1, 4, 0)
                     ]);
+                //complaint log event
+                event(new ComplaintLogEvent($complaintApplication->id,ComplaintApplication::class,$complaintApplication->id,'निवेदन दर्ता',"$complaintApplication->date गते निवेदन दर्ता गरियो"));
             }
             foreach ($this->form['relatedMembers'] as $member) {
                 RelatedMember::updateOrCreate(
