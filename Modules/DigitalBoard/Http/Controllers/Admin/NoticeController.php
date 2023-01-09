@@ -75,6 +75,7 @@ class NoticeController extends Controller
             ]);
         }
 
+
         DB::transaction(function () use ($request, $type, $data) {
             $officeSetting = OfficeSetting::first();
             $notice = Notice::create($data + [
@@ -87,6 +88,7 @@ class NoticeController extends Controller
                 $this->fileUpload($notice, $request);
             }
         });
+
         toast($type === 'News' ? 'समाचार सफलतापूर्वक थपियो' : 'सूचना सफलतापूर्वक थपियो', 'success');
 
         return back();

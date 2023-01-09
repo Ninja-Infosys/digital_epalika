@@ -6,11 +6,11 @@
                     @foreach ($empChunk as $employee)
                         <div class="card-img mb-3 mt-4" style="background-color: #0DCAF0;">
                             <div class="row g-0">
-                                <div class="col-md-4">
+                                <div class="col-md-4 employee-card ">
                                     <img src="{{ $employee->photo_url }}" class="img-fluid rounded-start"
                                         alt="{{ $employee->name }}">
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-8 employee-card ">
                                     <div class="body mt-2">
                                         <h5 class="card-title" style="font-size: 22px; color:black">
                                             <b>{{ $employee->name }}</b>
@@ -29,3 +29,25 @@
         @endforeach
     </div>
 </div>
+@push('styles')
+    <style>
+        @media screen and (max-width: 768px) {
+            .card-img img {
+                width: 70%;
+            }
+
+            .employee-card {
+                display:flex;
+                max-width: 100%;
+                padding-right: calc(var(--bs-gutter-x) * .5);
+                padding-left: calc(var(--bs-gutter-x) * .5);
+                margin-top: var(--bs-gutter-y);
+                width: 50%
+
+            }
+            .employee{
+                margin: 20px;
+            }
+        }
+    </style>
+@endpush

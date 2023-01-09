@@ -24,6 +24,7 @@ class StoreSliderRequest extends FormRequest
     public function messages()
     {
         return [
+            'image.required' => 'फोटो आवश्यक छ ',
             'image.image' => 'फोटो फर्ममा हुनुपर्छ ',
         ];
     }

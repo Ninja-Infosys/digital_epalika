@@ -16,4 +16,5 @@
         {{-- Laravel Mix - JS File --}}
         {{-- <script src="{{ mix('js/identity.js') }}"></script> --}}
     </body>
+    <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 </html>

@@ -20,15 +20,25 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card" >
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title"> अपाङ्गता परिचयपत्र रिपोर्ट</h4>
+                        <div>
+                            <button class="btn btn-sm btn-info" onclick="printJS({
+                            printable: 'printData',
+                            targetStyles: ['*'],
+                            ignoreElements:['ignore-header'],
+                            type: 'html'
+                            })">
+                                <i class="fa fa-print"></i> Print
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" >
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered table-hover">
+                        <table id="printData" class="table table-sm table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th rowspan="3" class="align-middle">क्रम संख्या</th>

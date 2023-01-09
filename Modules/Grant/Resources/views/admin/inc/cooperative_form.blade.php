@@ -108,6 +108,8 @@
                         $('#cooperatives').append("<option value=" + resp.data.cooperative_id + ">" + resp.data.cooperative_name + "</option>")
                         toastMessage('success', resp.message)
                         $('#cooperative-modal').modal('toggle')
+
+
                         $('#cooperative-form').trigger('reset')
                         //for grant detail livewire
                         Livewire.emit('fetchGranteesData');

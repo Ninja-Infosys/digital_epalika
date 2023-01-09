@@ -27,12 +27,10 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">व्यवसायहरूको सूची</h4>
-                        @can('businessNature_create')
                             <a href="{{route('admin.organizationRegistration.business.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ व्यवसाय थप्नुहोस्
                             </a>
-                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
@@ -67,20 +65,24 @@
                                     </td>
                                     <td>
                                         <a href="{{route('admin.organizationRegistration.business.businessRenew.index',$business)}}"
-                                           class="btn btn-xs btn-outline-primary">
-                                            <i class="fa fa-history" aria-hidden="true"></i> नबिकरण गर्नुहोस्
+                                           class="btn btn-xs btn-outline-primary" title="नबिकरण गर्नुहोस्">
+                                            <i class="fa fa-history" aria-hidden="true"></i> 
                                         </a>
                                         <a href="{{route('admin.organizationRegistration.business.edit',$business)}}"
-                                           class="btn btn-xs btn-outline-warning">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                           class="btn btn-xs btn-outline-warning" title="सम्पादन गर्नुहोस्">
+                                            <i class="fa fa-edit"></i> 
+                                        </a>
+                                        <a href="{{route('admin.organizationRegistration.business.show',$business)}}"
+                                           class="btn btn-xs btn-outline-warning" title="हेर्नुहोस्">
+                                            <i class="fa fa-eye"></i> 
                                         </a>
                                         <form
                                             action="{{route('admin.organizationRegistration.business.destroy',$business)}}"
                                             method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
+                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <i class="fa fa-trash"></i> 
                                             </button>
                                         </form>
                                     </td>
