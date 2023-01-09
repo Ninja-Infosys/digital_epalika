@@ -210,6 +210,9 @@ class SeniorCitizenDetailLivewire extends Component
     public function messages(): array
     {
         return [
+            'form.photo.required'=>['फोटो आवश्यक छ'],
+            'form.left_finger.required'=>['बायाँ छाप आवश्यक छ'],
+            'form.right_finger.required'=>['दाहिने छाप आवश्यक छ'],
             'form.name.required' => ['नाम आवश्यक छ'],
             'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
             'form.dob_bs.required' => ['जन्म मिति नेपालीमा आवश्यक छ'],
@@ -237,7 +240,7 @@ class SeniorCitizenDetailLivewire extends Component
             'form.contact_person_phone.required' => ['सम्पर्क न. आवश्यक छ'],
             'form.contact_person_address.required' => ['ठेगाना आवश्यक छ'],
             'form.is_disease.required' => ['रोगको नाम आवश्यक छ'],
-            'form.disease_name.required_if' => ['रोगको अंग्रेजीमा नाम आवश्यक छ'],
+            'form.disease_name.required_if' => ['रोगको नाम आवश्यक छ'],
             'form.description.required' => ['हेरचाह केन्द्रको विवरण आवश्यक छ'],
             'form.description_en.required' => ['हेरचाह केन्द्रको विवरण अंग्रेजीमा आवश्यक छ'],
             'form.is_medicine.required' => ['आवश्यक छ'],
