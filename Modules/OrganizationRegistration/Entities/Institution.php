@@ -18,6 +18,6 @@ class Institution extends Model
    ];
 
    protected $fillable = [
-
+       'name'
    ];
 }
