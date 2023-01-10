@@ -8,6 +8,8 @@ class OrganizationRegistrationDatabaseSeeder extends Seeder
 {
     public function run()
     {
-
+        $this->call([
+            BusinessRegistrationPermissionTableSeeder::class
+        ]);
     }
 }
