@@ -1091,9 +1091,10 @@
                                 <button class="mt-1" onclick="loadImage()" type="button">Camera</button>
                                 <button class="mt-1" onclick="captureImage()" type="button">Capture Image</button>
                                 <button class="mt-1" onclick="stopCamera()" type="button">Stop Camera</button>
-                                <video id="video" width="200" height="200" autoplay></video>
-                                <canvas id="canvas" width="200" height="200"></canvas>
-
+                                <div class="d-flex justify-content-between">
+                                    <video id="video" width="200" height="200" autoplay></video>
+                                    <canvas id="canvas" width="200" height="200"></canvas>
+                                </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="form.finger_print_type" class="form-label">छाप</label>
@@ -1513,9 +1514,12 @@
             function loadImage() {
                 // Get the video element that will display the webcam feed
                 const video = document.getElementById('video');
+                // Get the canvas element that will display the video frame
+                const canvas = document.getElementById('canvas');
+                // Get the 2D context of the canvas
+                const context = canvas.getContext('2d');
 
-
-// Prompt the user for permission to use their webcam
+                // Prompt the user for permission to use their webcam
                 navigator.mediaDevices.getUserMedia({video: true})
                     .then(function (stream) {
                         // Set the source of the video element to the webcam stream
@@ -1523,15 +1527,22 @@
 
                         // Wait for the video to load
                         video.onloadedmetadata = function () {
+                            // Calculate the aspect ratio of the video
+                            const aspectRatio = video.videoWidth / video.videoHeight;
+
+                            // Set the width and height of the canvas to match the aspect ratio of the video
+                            canvas.width = canvas.height * aspectRatio;
+                            canvas.height = canvas.width / aspectRatio;
+
+                            console.log(aspectRatio);
                             // Draw the video frame to the canvas
                             context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
 
                             // You can now use the image data URL to display the image on the page or save it to a file, etc.
                         };
                     });
-
             }
+
 
             function stopCamera() {
                 const video = document.getElementById('video');

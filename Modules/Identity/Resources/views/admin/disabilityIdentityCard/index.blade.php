@@ -61,14 +61,18 @@
                                     </td>
 
                                     <td>
+                                        @if($disabilityIdentityCard->can_edit_delete)
                                         <a href="{{route('identity.admin.disabilityIdentityCard.show',$disabilityIdentityCard)}}"
                                            class="btn btn-xs btn-outline-primary" title="विवरण हेर्नुहोस">
                                             <i class="fa fa-eye"></i>
                                         </a>
+
                                         <a href="{{route('identity.admin.disabilityIdentityCard.edit',$disabilityIdentityCard)}}"
                                            class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
+
+
                                         <form action="{{route('identity.admin.disabilityIdentityCard.destroy',$disabilityIdentityCard)}}"
                                               method="post">
                                             @csrf
@@ -77,6 +81,7 @@
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
+                                        @endif
                                         <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">
                                             <i class="fa fa-print"></i>
 

@@ -9,6 +9,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Ethnicity;
 use App\Models\Occupation;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -94,7 +95,8 @@ class DisabilityIdentityCard extends Model
         'provide_detail_citizenship_no_place',
         'employee_signature_id',
         'govern_disability_type_id',
-        'card_no'
+        'card_no',
+        'user_id'
     ];
 
     protected $casts = [
@@ -177,6 +179,10 @@ class DisabilityIdentityCard extends Model
         return $this->morphMany(FingerPrint::class, 'model');
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function setPhotoAttribute($value): void
     {
@@ -264,6 +270,21 @@ class DisabilityIdentityCard extends Model
         } else {
             return '';
         }
+    }
+
+    public function getCanEditDeleteAttribute(): bool
+    {
+        return (auth()->user()->role->type === 'Super' || auth()->id()==$this->user_id);
+    }
+
+    public function scopeFilterData($query)
+    {
+        if (auth()->user()->role->type !== 'Super') {
+            $query->where('user_id', auth()->id());
+            $query->orWhere('permanent_ward', auth()->user()->ward_no);
+        }
+        return $query;
+
     }
 
 

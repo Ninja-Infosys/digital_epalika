@@ -16,8 +16,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function index()
     {
-
-        $disabilityIdentityCards = DisabilityIdentityCard::with('governmentalDisabilityType')->latest()->paginate(10);
+        $disabilityIdentityCards = DisabilityIdentityCard::with('governmentalDisabilityType')->filterData()->latest()->paginate(10);
         return view('identity::admin.disabilityIdentityCard.index', compact('disabilityIdentityCards'));
     }
 
@@ -33,7 +32,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function show(DisabilityIdentityCard $disabilityIdentityCard)
     {
-
+        $this->authorize('view',$disabilityIdentityCard);
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
@@ -42,6 +41,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
+        $this->authorize('update',$disabilityIdentityCard);
         return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard'));
     }
 
@@ -52,6 +52,7 @@ class DisabilityIdentityCardController extends Controller
 
     public function destroy(DisabilityIdentityCard $disabilityIdentityCard)
     {
+        $this->authorize('delete',$disabilityIdentityCard);
         $disabilityIdentityCard->delete();
 
         return back();
@@ -59,8 +60,6 @@ class DisabilityIdentityCardController extends Controller
 
     public function print(DisabilityIdentityCard $disabilityIdentityCard)
     {
-
-
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         $disabilityIdentityCard->load('employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
@@ -71,4 +70,7 @@ class DisabilityIdentityCardController extends Controller
         ]);
 
     }
+
+
+
 }
