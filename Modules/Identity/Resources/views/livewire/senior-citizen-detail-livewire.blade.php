@@ -20,59 +20,92 @@
                 <legend>जेस्ठ नागरिक विवरण</legend>
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label for="form.photo" class="form-label">फोटो</label>
-                        <input
-                            name="form.photo"
-                            class="form-control  @error('form.photo') is-invalid @enderror"
-                            type="file"
-                            accept="image/*"
-                            id="form.photo"
-                            wire:model="form.photo"
-                        />
-                        <div wire:loading wire:target="form.photo">Uploading...</div>
-                        @error('form.photo')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                        <button class="mt-1" onclick="loadImage()" type="button">Camera</button>
-                        <button class="mt-1" onclick="captureImage()" type="button">Capture Image</button>
-                        <button class="mt-1" onclick="stopCamera()" type="button">Stop Camera</button>
-                        <video id="video" width="200" height="200"  autoplay></video>
-                        <canvas id="canvas" width="200" height="200"></canvas>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active"  id="nav-profile-tab"
+                                        data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab"
+                                        aria-controls="nav-profile" aria-selected="false">Camera
+                                </button>
+                                <button class="nav-link"  id="nav-home-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                        aria-selected="true">Browse
+                                </button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+
+                                <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
+                                     aria-labelledby="nav-profile-tab">
+                                    <div class="d-flex justify-content-between">
+                                        <video id="video" width="150" height="150"  autoplay></video>
+                                        <canvas id="canvas"  width="150" style="border-radius: 5px;" height="150"></canvas>
+                                    </div>
+                                    <button class="btn btn-warning btn-sm mt-1" onclick="loadImage()" type="button">
+                                        Camera
+                                    </button>
+                                    <button class="btn btn-primary btn-sm mt-1" onclick="captureImage()" type="button">
+                                        Capture Image
+                                    </button>
+                                    <button class="btn btn-danger btn-sm mt-1" onclick="stopCamera()" type="button">Stop
+                                        Camera
+                                    </button>
+                                </div>
+
+                                <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <label for="form.photo" class="form-label">फोटो</label>
+                                    <input
+                                        name="form.photo"
+                                        class="form-control  @error('form.photo') is-invalid @enderror"
+                                        type="file"
+                                        accept="image/*"
+                                        id="form.photo"
+                                        wire:model="form.photo"
+                                    />
+                                    <div wire:loading wire:target="form.photo">Uploading...</div>
+                                    @error('form.photo')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+
+
+                        </div>
+
+
                     </div>
                     <div class="col-md-4">
                         <div class="card">
                             @if ( !empty($form['right_finger']['image']))
                                 <img src="{{ $form['right_finger']['image'] }}" id="finger-print-right" alt="Right"
-                                height="100" width="100" style="margin: 20px auto">
+                                     height="100" width="100" style="margin: 20px auto">
                             @endif
                             <div class="card-body text-center">
-                                <div class="clearfix mb-3"> <span class="badge rounded-pill bg-info">दाहिने</span>
+                                <div class="clearfix mb-3"><span class="badge rounded-pill bg-info">दाहिने</span>
                                 </div>
                                 <div class="text-center">
                                     <button onclick="return captureRight();" class="btn btn-primary">Capture</button>
                                 </div>
                             </div>
-                                @error('form.right_finger')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                            @error('form.right_finger')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card">
                             @if ( !empty($form['left_finger']['image']))
                                 <img src="{{ $form['left_finger']['image'] }}" id="finger-print-left" alt="Left"
-                                height="100" width="100" style="margin: 20px auto">
+                                     height="100" width="100" style="margin: 20px auto">
                             @endif
                             <div class="card-body text-center">
-                                <div class="clearfix mb-3"> <span class="badge rounded-pill bg-info">बायाँ</span>
+                                <div class="clearfix mb-3"><span class="badge rounded-pill bg-info">बायाँ</span>
                                 </div>
                                 <div class="text-center">
                                     <button onclick="return captureLeft();" class="btn btn-primary">Capture</button>
                                 </div>
                             </div>
-                                @error('form.left_finger')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                            @error('form.left_finger')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -110,7 +143,8 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="dob_bs" class="form-label">जन्म मिति (वि.स.)<span class="text-danger">*</span></label>
+                        <label for="dob_bs" class="form-label">जन्म मिति (वि.स.)<span
+                                class="text-danger">*</span></label>
                         <input
                             name="form.dob_bs"
                             class="form-control  @error('form.dob_bs') is-invalid @enderror"
@@ -512,7 +546,7 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" value="0" type="radio" wire:model="form.is_disease"
-                                   name="form.is_disease" id="is_disease2" >
+                                   name="form.is_disease" id="is_disease2">
                             <label class="form-check-label" for="is_disease2">
                                 छैन।
                             </label>
@@ -584,7 +618,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="form.is_medicine" value="0"
                                    wire:model="form.is_medicine" id="medicine2"
-                                   >
+                            >
                             <label class="form-check-label" for="medicine2">
                                 छैन।
                             </label>

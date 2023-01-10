@@ -119,6 +119,7 @@ class DisabilityIdentityCardLivewire extends Component
         'employee_signature_id' => null,
         'card_no' => null
     ];
+
     public function mount($disabilityIdentityCard = null): void
     {
         $officeSetting = OfficeSetting::first();
@@ -135,7 +136,7 @@ class DisabilityIdentityCardLivewire extends Component
         if (!empty($disabilityIdentityCard)) {
             $this->disabilityIdentityCard = $disabilityIdentityCard;
             foreach ($this->form as $key => $data) {
-                if (!in_array($key, [ 'photo', 'citizenship_photo', 'citizenship_photo_certificate'])) {
+                if (!in_array($key, ['photo', 'citizenship_photo', 'citizenship_photo_certificate'])) {
                     $this->form[$key] = $disabilityIdentityCard[$key];
                 }
             }
@@ -232,7 +233,6 @@ class DisabilityIdentityCardLivewire extends Component
         $this->form['citizenship_no_bs'] = $nepaliDate;
         $this->form['citizenship_no_ad'] = $englishDate;
     }
-
 
 
     public function nextStep($step): void
@@ -470,23 +470,25 @@ class DisabilityIdentityCardLivewire extends Component
         $this->validate();
         if (!empty($this->disabilityIdentityCard)) {
             $this->disabilityIdentityCard->update($this->form);
-            if (!empty($this->form['left_finger']['id'])) {
-                Fingerprint::find($this->form['left_finger']['id'])->update([
-                    'finger_image' => $this->form['left_finger']['image'],
-                    'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                    'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                    'iso_image' => $this->form['left_finger']['isoImage'],
-                    'quality' => $this->form['left_finger']['quality'],
-                ]);
-            }
-            if (!empty($this->form['right_finger']['id'] )) {
-                Fingerprint::find($this->form['right_finger']['id'])->update([
-                    'finger_image' => $this->form['right_finger']['image'],
-                    'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                    'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                    'iso_image' => $this->form['right_finger']['isoImage'],
-                    'quality' => $this->form['right_finger']['quality'],
-                ]);
+            if ($this->form['finger_print_type'] !== 'none') {
+                if (!empty($this->form['left_finger']['id'])) {
+                    Fingerprint::find($this->form['left_finger']['id'])->update([
+                        'finger_image' => $this->form['left_finger']['image'],
+                        'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                        'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                        'iso_image' => $this->form['left_finger']['isoImage'],
+                        'quality' => $this->form['left_finger']['quality'],
+                    ]);
+                }
+                if (!empty($this->form['right_finger']['id'])) {
+                    Fingerprint::find($this->form['right_finger']['id'])->update([
+                        'finger_image' => $this->form['right_finger']['image'],
+                        'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                        'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                        'iso_image' => $this->form['right_finger']['isoImage'],
+                        'quality' => $this->form['right_finger']['quality'],
+                    ]);
+                }
             }
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
@@ -495,25 +497,29 @@ class DisabilityIdentityCardLivewire extends Component
             return redirect(route('identity.admin.disabilityIdentityCard.index'));
         }
         DB::transaction(function () {
-            $disabilityIdentityCard = DisabilityIdentityCard::create($this->form);
-            $disabilityIdentityCard->fingerPrints()->create([
-                'finger_image' => $this->form['left_finger']['image'],
-                'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                'iso_image' => $this->form['left_finger']['isoImage'],
-                'finger' => 'left',
-                'quality' => $this->form['left_finger']['quality'],
-                'user_id' => auth()->id(),
-            ]);
-            $disabilityIdentityCard->fingerPrints()->create([
-                'finger_image' => $this->form['right_finger']['image'],
-                'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                'iso_image' => $this->form['right_finger']['isoImage'],
-                'finger' => 'right',
-                'quality' => $this->form['right_finger']['quality'],
-                'user_id' => auth()->id(),
-            ]);
+            $disabilityIdentityCard = DisabilityIdentityCard::create($this->form + [
+                    'user_id' => auth()->id()
+                ]);
+            if ($this->form['finger_print_type'] !== 'none') {
+                $disabilityIdentityCard->fingerPrints()->create([
+                    'finger_image' => $this->form['left_finger']['image'],
+                    'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                    'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                    'iso_image' => $this->form['left_finger']['isoImage'],
+                    'finger' => 'left',
+                    'quality' => $this->form['left_finger']['quality'],
+                    'user_id' => auth()->id(),
+                ]);
+                $disabilityIdentityCard->fingerPrints()->create([
+                    'finger_image' => $this->form['right_finger']['image'],
+                    'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                    'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                    'iso_image' => $this->form['right_finger']['isoImage'],
+                    'finger' => 'right',
+                    'quality' => $this->form['right_finger']['quality'],
+                    'user_id' => auth()->id(),
+                ]);
+            }
 
         });
 
