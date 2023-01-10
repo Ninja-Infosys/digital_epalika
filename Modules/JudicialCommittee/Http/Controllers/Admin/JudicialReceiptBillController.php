@@ -11,6 +11,7 @@ use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Entities\JudicialReceiptBill;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
+use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\JudicialReceiptBillRequest;
 
 class JudicialReceiptBillController extends Controller
@@ -49,6 +50,7 @@ class JudicialReceiptBillController extends Controller
             $complaintApplication->update([
                 'registration_no' => $officeSetting->fiscalYear->title . '-' . ($complaintApplication->lawsuitNature->code ?? '') . '-' . Str::padLeft($complaintApplication->id, 4, 0)
             ]);
+            event(new ComplaintLogEvent($complaintApplication->id,JudicialReceiptBill::class,$judicialReceiptBill->id,'दर्ता शुल्क तिरेको',"$judicialReceiptBill->bill_date बिल मितिमा निवेदन दर्ता को लागि दर्ता शुल्क तिरेको"));
         }
 
         toast('दर्ता दस्तुर विवरण सफलतापूर्वक अद्यावधिक गरियो', 'success');

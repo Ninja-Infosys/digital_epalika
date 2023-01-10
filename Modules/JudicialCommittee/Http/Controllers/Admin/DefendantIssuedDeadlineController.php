@@ -9,6 +9,7 @@ use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\DefendantIssuedDeadline;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
+use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\DefendantIssuedDeadline\StoreDefendantIssuedDeadlineRequest;
 use Modules\JudicialCommittee\Http\Requests\DefendantIssuedDeadline\UpdateDefendantIssuedDeadlineRequest;
 
@@ -32,7 +33,9 @@ class DefendantIssuedDeadlineController extends Controller
     {
         $this->checkAuthorization('defendantIssuedDeadline_create');
 
-        $complaintApplication->defendantIssuedDeadlines()->create($request->validated());
+        $defendantIssuedDeadline=$complaintApplication->defendantIssuedDeadlines()->create($request->validated());
+
+        event(new ComplaintLogEvent($complaintApplication->id, DefendantIssuedDeadline::class, $defendantIssuedDeadline->id, 'प्रतिवादी म्याद जारी', "$defendantIssuedDeadline->day_to_attend दिन भित्रमा न्यायिक समिति समक्ष हाजिर हुन आउनुहोला भनेर प्रतिवादी म्याद जारी गरियो।"));
 
         toast('प्रतिवादी म्याद जारी सफलतापूर्वक पेश गरियो', 'success');
 

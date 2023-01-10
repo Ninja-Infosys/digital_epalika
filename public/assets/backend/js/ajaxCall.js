@@ -9,7 +9,7 @@ function createTable(headerData, bodyData) {
 
         // creates a <table> element
         const tbl = document.createElement("table");
-        tbl.className = "table table-hover table-striped table-bordered table-responsive";
+        tbl.className = "table table-sm table-hover table-striped table-bordered table-responsive";
 
         const thead = document.createElement("thead");
         const header = document.createElement("tr");

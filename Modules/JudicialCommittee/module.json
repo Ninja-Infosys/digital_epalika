@@ -5,7 +5,8 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\JudicialCommittee\\Providers\\JudicialCommitteeServiceProvider"
+        "Modules\\JudicialCommittee\\Providers\\JudicialCommitteeServiceProvider",
+        "Modules\\JudicialCommittee\\Providers\\JudicialCommitteeEventServiceProvider"
     ],
     "files": []
 }

@@ -9,6 +9,7 @@ use Modules\JudicialCommittee\Entities\ComplaintApplication;
 use Modules\JudicialCommittee\Entities\DateCompensation;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Enums\JudicialTemplateTypeEnum;
+use Modules\JudicialCommittee\Events\ComplaintLogEvent;
 use Modules\JudicialCommittee\Http\Requests\DateCompensation\StoreDateCompensationRequest;
 
 class DateCompensationController extends Controller
@@ -42,10 +43,14 @@ class DateCompensationController extends Controller
     {
         $this->checkAuthorization('dateCompensation_create');
 
-        DateCompensation::updateOrCreate(
+        $dateCompensation=DateCompensation::updateOrCreate(
             ['complaint_application_id' => $complaintApplication->id],
             $request->validated()
         );
+
+        if($dateCompensation->wasRecentlyCreated){
+            event(new ComplaintLogEvent($complaintApplication->id, DateCompensation::class, $dateCompensation->id, 'तारिख भरपाई', "मिति $dateCompensation->decision_date गते समय $dateCompensation->decision_time मा $dateCompensation->decision_subject विषयमा निर्णय हुने छ भनेर तारिख भरपाई गरियो।"));
+        }
 
         toast('तारिख भरपाई सफलतापूर्वक पेश गरियो', 'success');
 
