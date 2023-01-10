@@ -119,23 +119,24 @@ class DisabilityIdentityCardLivewire extends Component
         'employee_signature_id' => null,
         'card_no' => null
     ];
+
     public function mount($disabilityIdentityCard = null): void
     {
         $officeSetting = OfficeSetting::first();
-        $this->provinces = Province::all();
+        $this->provinces = get_provinces();
         $this->ethnicities = Ethnicity::all();
         $this->relations = Relationship::all();
         $this->disabilityTypes = DisabilityType::all();
         $this->governmentDisabilityTypes = GovernmentalDisabilityType::all();
         $this->disabilityReasons = DisabilityReason::all();
         $this->occupations = Occupation::all();
-        $this->employee_signatures = EmployeeSignature::Status()->get();
+        $this->employee_signatures = EmployeeSignature::status()->get();
 
 
         if (!empty($disabilityIdentityCard)) {
             $this->disabilityIdentityCard = $disabilityIdentityCard;
             foreach ($this->form as $key => $data) {
-                if (!in_array($key, [ 'photo', 'citizenship_photo', 'citizenship_photo_certificate'])) {
+                if (!in_array($key, ['photo', 'citizenship_photo', 'citizenship_photo_certificate'])) {
                     $this->form[$key] = $disabilityIdentityCard[$key];
                 }
             }
@@ -232,7 +233,6 @@ class DisabilityIdentityCardLivewire extends Component
         $this->form['citizenship_no_bs'] = $nepaliDate;
         $this->form['citizenship_no_ad'] = $englishDate;
     }
-
 
 
     public function nextStep($step): void
@@ -470,23 +470,33 @@ class DisabilityIdentityCardLivewire extends Component
         $this->validate();
         if (!empty($this->disabilityIdentityCard)) {
             $this->disabilityIdentityCard->update($this->form);
-            if (!empty($this->form['left_finger']['id'])) {
-                Fingerprint::find($this->form['left_finger']['id'])->update([
-                    'finger_image' => $this->form['left_finger']['image'],
-                    'iso_temp' => $this->form['left_finger']['isoTemplate'],
-                    'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
-                    'iso_image' => $this->form['left_finger']['isoImage'],
-                    'quality' => $this->form['left_finger']['quality'],
-                ]);
-            }
-            if (!empty($this->form['right_finger']['id'] )) {
-                Fingerprint::find($this->form['right_finger']['id'])->update([
-                    'finger_image' => $this->form['right_finger']['image'],
-                    'iso_temp' => $this->form['right_finger']['isoTemplate'],
-                    'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
-                    'iso_image' => $this->form['right_finger']['isoImage'],
-                    'quality' => $this->form['right_finger']['quality'],
-                ]);
+            if ($this->form['finger_print_type'] !== 'none') {
+                if (!empty($this->form['left_finger']['id'])) {
+                    $this->disabilityIdentityCard
+                        ->fingerPrints
+                        ->where('id', $this->form['left_finger']['id'])
+                        ->first()
+                        ?->update([
+                            'finger_image' => $this->form['left_finger']['image'],
+                            'iso_temp' => $this->form['left_finger']['isoTemplate'],
+                            'ansi_temp' => $this->form['left_finger']['ansiTemplate'],
+                            'iso_image' => $this->form['left_finger']['isoImage'],
+                            'quality' => $this->form['left_finger']['quality'],
+                        ]);
+                }
+                if (!empty($this->form['right_finger']['id'])) {
+                    $this->disabilityIdentityCard
+                        ->fingerPrints
+                        ->where('id', $this->form['right_finger']['id'])
+                        ->first()
+                        ?->update([
+                            'finger_image' => $this->form['right_finger']['image'],
+                            'iso_temp' => $this->form['right_finger']['isoTemplate'],
+                            'ansi_temp' => $this->form['right_finger']['ansiTemplate'],
+                            'iso_image' => $this->form['right_finger']['isoImage'],
+                            'quality' => $this->form['right_finger']['quality'],
+                        ]);
+                }
             }
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
@@ -560,23 +570,23 @@ class DisabilityIdentityCardLivewire extends Component
     public function render(): Factory|View|Application
     {
         if (!empty($this->form['permanent_province_id'])) {
-            $this->permanent_districts = Province::with('districts')->findOrFail($this->form['permanent_province_id'])->districts;
+            $this->permanent_districts = get_districts($this->form['permanent_province_id']);
         }
         if (!empty($this->form['permanent_district_id'])) {
-            $this->permanent_localBodies = District::with('localBodies')->findOrFail($this->form['permanent_district_id'])->localBodies;
+            $this->permanent_localBodies = get_local_bodies($this->form['permanent_district_id']);
         }
         if (!empty($this->form['permanent_local_body_id'])) {
-            $this->permanent_wards = LocalBody::findOrFail($this->form['permanent_local_body_id'])->ward_no;
+            $this->permanent_wards = get_local_bodies(localBodyId: $this->form['permanent_local_body_id'])->ward_no;
         }
 
         if (!empty($this->form['temporary_province_id'])) {
-            $this->temporary_districts = Province::with('districts')->findOrFail($this->form['temporary_province_id'])->districts;
+            $this->temporary_districts = get_districts($this->form['temporary_province_id']);
         }
         if (!empty($this->form['temporary_district_id'])) {
-            $this->temporary_localBodies = District::with('localBodies')->findOrFail($this->form['temporary_district_id'])->localBodies;
+            $this->temporary_localBodies = get_local_bodies($this->form['temporary_district_id']);
         }
         if (!empty($this->form['temporary_local_body_id'])) {
-            $this->temporary_wards = LocalBody::findOrFail($this->form['temporary_local_body_id'])->ward_no;
+            $this->temporary_wards = get_local_bodies(localBodyId: $this->form['temporary_local_body_id'])->ward_no;
         }
 
         if ($this->form['is_necessary'] == 0) {
