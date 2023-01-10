@@ -2551,6 +2551,19 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
 .logo-dark {
     display: none
 }
+@media(max-width:768px) 
+{
+    .logo-box {
+        width: 29% !important;
+        padding-right:0 !important;
+      } 
+      .logo-box {
+        height: 80px;
+        float: left;
+        transition: all .1s ease-out;
+        background-color: #0047AB;
+      }
+}
 
 .navbar-custom {
     background-color: #E8E9EB;
@@ -2774,12 +2787,6 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
     content: "\e88d"
 }
 
-@media (max-width: 991.98px) {
-    .logo-box {
-        width: 70px !important;
-        padding-right: 0 !important
-    }
-}
 
 @media (max-width: 600px) {
     .navbar-custom .dropdown {

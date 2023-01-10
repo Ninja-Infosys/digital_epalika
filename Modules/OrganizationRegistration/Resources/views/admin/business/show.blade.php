@@ -21,8 +21,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4" style="margin-left: 350px">
+        <div class="col-md-12" >
             <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">प्रोफाइल</h4>
+                            <a href="{{route('admin.organizationRegistration.business.index')}}"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-user"></i>व्यवसाय तालिका
+                            </a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="text-start mt-3">
                         <img src="{{ asset('assets/backend/images/users/user-1.jpg') }}"
@@ -30,7 +39,7 @@
                             style="object-fit: cover; height: 6rem; width: 6rem ">
                         <h3 class="mt-3 text-center">{{ $business->name }}</h3>
                         <hr class="border-top border-1">
-                        <div class="text-start mt-3">
+                        <div class="text-start mt-3"style="margin-left: 350px">
                             <p class="border-bottom border-1 text-dark mb-2 font-16"><strong>दर्ता नं :</strong>
                                 <span class="ms-2 text-muted">{{ $business->registration_no }}</span>
                             </p>
