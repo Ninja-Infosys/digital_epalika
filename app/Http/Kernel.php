@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\AuthLock;
+use App\Http\Middleware\CheckPinMiddleware;
 use App\Http\Middleware\CheckRoleMiddleware;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\PageRenderMiddleware;
@@ -93,5 +94,6 @@ class Kernel extends HttpKernel
         'password.check' => CheckOrganizationPassword::class,
         'auth.lock' => AuthLock::class,
         'pageRender' => PageRenderMiddleware::class,
+        'checkPinMiddleware'=>CheckPinMiddleware::class
     ];
 }
