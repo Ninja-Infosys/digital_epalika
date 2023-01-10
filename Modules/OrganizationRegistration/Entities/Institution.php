@@ -4,6 +4,7 @@ namespace Modules\OrganizationRegistration\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
 
@@ -51,4 +52,9 @@ class Institution extends Model
         'supervisor_person_designation',
         'approval_person_designation',
     ];
+
+    public function institutionOfficers(): HasMany
+    {
+        return $this->hasMany(InstitutionOfficer::class);
+    }
 }
