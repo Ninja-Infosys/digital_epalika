@@ -49,59 +49,38 @@ class ReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        list($complaintApplicationColumns, $fiscalYearColumns, $provinceColumns, $districtColumns, $localBodyColumns,) = $this->resolveColumns($request);
+        if (empty($request->input('columns')['complaint_applications'])) {
+            $request->request->add(
+                ['columns' =>
+                    [
+                        'complaint_applications' => ['submission_no', 'registration_no', 'date', 'subject', 'lawsuit_nature_id']
+                    ]
+                ]
+            );
+        }
 
-        $lists = $this->getDataFromComplaintApplications($request, $complaintApplicationColumns);
-
-        $this->getFiscalYearRelationData($fiscalYearColumns, $lists);
-        $this->getProvinceRelationData($provinceColumns, $lists);
-        $this->getDistrictRelationData($districtColumns, $lists);
-        $this->getLocalBodyRelationData($localBodyColumns, $lists);
-
-        $excelUrl = $this->storeExcelFile($lists);
+        $complaintApplications = ComplaintApplication::with($this->relations)
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+            })
+            ->get();
 
         return response()->json([
-            'data' => ComplaintApplicationResource::collection($lists),
-            'excelUrl' => $excelUrl
+            'data' => ComplaintApplicationResource::collection($complaintApplications),
+            //'excelUrl' => $excelUrl
         ]);
     }
 
-    private function getFiscalYearRelationData($fiscalYearColumns, $lists): void
-    {
-        if (!empty($fiscalYearColumns)) {
-            $lists->load(['fiscalYear' => function ($query) use ($fiscalYearColumns) {
-                $query->select($fiscalYearColumns);
-            }]);
-        }
-    }
-
-    private function getProvinceRelationData($provinceColumns, $lists): void
-    {
-        if (!empty($provinceColumns)) {
-            $lists->load(['province' => function ($query) use ($provinceColumns) {
-                $query->select($provinceColumns);
-            }]);
-        }
-    }
-
-    private function getDistrictRelationData($districtColumns, $lists): void
-    {
-        if (!empty($districtColumns)) {
-            $lists->load(['district' => function ($query) use ($districtColumns) {
-                $query->select($districtColumns);
-            }]);
-        }
-    }
-
-
-    private function getLocalBodyRelationData($localBodyColumns, $lists): void
-    {
-        if (!empty($localBodyColumns)) {
-            $lists->load(['localBody' => function ($query) use ($localBodyColumns) {
-                $query->select($localBodyColumns);
-            }]);
-        }
-    }
+    private array $relations = [
+        'fiscalYear',
+        'lawsuitNature',
+        'complainantProvince',
+        'complainantDistrict',
+        'complainantLocalBody',
+        'defendantProvince',
+        'defendantDistrict',
+        'defendantLocalBody'
+    ];
 
     private function filterDataFromUser($q, Request $request): void
     {
@@ -120,46 +99,5 @@ class ReportController extends Controller
         if (!empty($request->input('to_date'))) {
             $q->whereDate('date', '<=', $request->input('to_date'));
         }
-    }
-
-    private function resolveColumns(Request $request): array
-    {
-        $complaintApplicationColumns = ['submission_no', 'registration_no','date','applicant_name'];
-        $fiscalYearColumns = [];
-        $provinceColumns = [];
-        $districtColumns = [];
-        $localBodyColumns = [];
-
-        if (!empty($request->input('columns'))) {
-            if (!empty($request->input('columns')['complaint_applications'])) {
-                $complaintApplicationColumns = $request->input('columns')['complaint_applications'];
-                $complaintApplicationColumns[] = 'id';
-            }
-
-            if (!empty($request->input('columns')['fiscal_years'])) {
-                $complaintApplicationColumns[] = 'fiscal_year_id';
-                $fiscalYearColumns = $request->input('columns')['fiscal_years'];
-                $fiscalYearColumns[] = 'id';
-            }
-        }
-        return array($complaintApplicationColumns, $fiscalYearColumns, $provinceColumns, $districtColumns, $localBodyColumns);
-    }
-
-    private function getDataFromComplaintApplications(Request $request, mixed $complaintApplicationColumns)
-    {
-        return ComplaintApplication::where(function ($q) use ($request) {
-            $this->filterDataFromUser($q, $request);
-        })
-            ->select($complaintApplicationColumns)
-            ->get();
-
-    }
-
-    private function excludeColumnsFromComplaintApplications($lists)
-    {
-        return $lists
-            ->map(function ($list) {
-                return removeColumns($list->toArray(), ['id','created_at', 'updated_at', 'deleted_at', 'fiscal_year_id', 'lawsuit_nature_id']);
-            });
     }
 }

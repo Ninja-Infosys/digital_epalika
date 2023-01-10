@@ -44,40 +44,85 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-sm mb-0 table-striped table-bordered">
-                            <thead>
+                            <tbody>
                             <tr>
-                                <th>सबमिशन नं.</th>
-                                <td>{{$complaintApplication->submission_no}}</td>
-                            </tr>
-                            <tr>
-                                <th>दर्ता नं.</th>
-                                <td>{{$complaintApplication->registration_no}}</td>
-                            </tr>
-                            <tr>
-                                <th>निवेदकको पुरा नाम</th>
-                                <td>{{$complaintApplication->complainant_name}}</td>
-                            </tr>
-                            <tr>
-                                <th>प्रतिवादीको पुरा नाम</th>
-                                <td>{{$complaintApplication->defendant_name}}</td>
-                            </tr>
-                            <tr>
-                                <th>मिति</th>
-                                <td>{{$complaintApplication->date}}</td>
-                            </tr>
-                            <tr>
-                                <th>विषय</th>
-                                <td>{{$complaintApplication->subject}}</td>
-                            </tr>
-                            <tr>
-                                <th>मुद्दा प्रकृति</th>
                                 <td>
+                                    <span class="fw-bold">निवेदकको पुरा नाम : </span> {{$complaintApplication->applicant_name}}
+                                </td>
+                                <td>
+                                    <span class="fw-bold">निवेदकको फोन : </span> {{$complaintApplication->applicant_phone}}
+                                </td>
+                                <td rowspan="4" class="text-center">
+                                    <span class="fw-bold pb-2">निवेदकको सहि : </span> <br>
+                                    <img src="{{$complaintApplication->applicant_signature}}" height="80" width="80" alt="Signature">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="fw-bold">निवेदकको ठेगाना : </span> {{$complaintApplication->applicant_address}}
+                                </td>
+                                <td>
+                                    <span class="fw-bold">सबमिशन नं. : </span> {{$complaintApplication->submission_no}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="fw-bold">दर्ता नं. : </span> {{$complaintApplication->registration_no}}
+                                </td>
+                                <td>
+                                    <span class="fw-bold">मिति : </span> {{$complaintApplication->date}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="fw-bold">विषय : </span> {{$complaintApplication->subject}}
+                                </td>
+                                <td>
+                                    <span class="fw-bold">मुद्दा प्रकृति : </span>
                                     {{$complaintApplication->lawsuitNature->title??''}}
                                     ({{$complaintApplication->lawsuitNature->code??''}})
                                 </td>
                             </tr>
-                            </thead>
-                            <tbody>
+                            <tr>
+                                <td>
+                                    <span class="fw-bold">वादीको नाम : </span> {{$complaintApplication->complainant_name}}
+                                </td>
+                                <td>
+                                    <span class="fw-bold">वादीको उमेर : </span> {{$complaintApplication->complainant_age}}
+                                </td>
+                                <td>
+                                    <span class="fw-bold">वादीको अभिभावकको नाम : </span> {{$complaintApplication->complainant_guardian_name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="fw-bold">वादीको नाता : </span> {{$complaintApplication->complainant_relationship}}
+                                </td>
+                                <td colspan="2">
+                                    <span class="fw-bold">वादीको ठेगाना : </span>
+                                    {{$complaintApplication->complainantLocalBody->local_body??''}}-{{$complaintApplication->complainant_ward_no}},{{$complaintApplication->complainant_tole}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="fw-bold">प्रतिवादीको नाम : </span> {{$complaintApplication->defendant_name}}
+                                </td>
+                                <td>
+                                    <span class="fw-bold">प्रतिवादीको उमेर : </span> {{$complaintApplication->defendant_age}}
+                                </td>
+                                <td>
+                                    <span class="fw-bold">प्रतिवादीको अभिभावकको नाम : </span> {{$complaintApplication->defendant_guardian_name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="fw-bold">प्रतिवादीको नाता : </span> {{$complaintApplication->defendant_relationship}}
+                                </td>
+                                <td colspan="2">
+                                    <span class="fw-bold">प्रतिवादीको ठेगाना : </span>
+                                    {{$complaintApplication->defendantLocalBody->local_body??''}}-{{$complaintApplication->defendant_ward_no}},{{$complaintApplication->defendant_tole}}
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

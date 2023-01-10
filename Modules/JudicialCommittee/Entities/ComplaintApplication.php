@@ -8,6 +8,7 @@ use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use App\Traits\EventObserveTrait;
 use App\Traits\GetAllColumns;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -69,7 +70,7 @@ class ComplaintApplication extends Model
         'en_month'
     ];
 
-    public function getApplicantSignatureUrlAttribute(): string
+    public function getApplicantSignatureAttribute(): string
     {
         return !empty($this->attributes['applicant_signature'])
             ? Storage::disk('public')->url($this->attributes['applicant_signature'])

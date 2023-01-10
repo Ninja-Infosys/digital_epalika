@@ -50,16 +50,15 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-2">
-                        <label for="applicant_signature_file" class="form-label">सहि<span
-                                class="text-danger">*</span></label>
+                        <label for="applicant_signature" class="form-label">सहि</label>
                         <input
                             type="file"
-                            wire:model="form.applicant_signature_file"
+                            wire:model="form.applicant_signature"
                             class="form-control"
-                            id="applicant_signature_file"
+                            id="applicant_signature"
                             placeholder="सहि"
                         />
-                        @error('form.applicant_signature_file')
+                        @error('form.applicant_signature')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>

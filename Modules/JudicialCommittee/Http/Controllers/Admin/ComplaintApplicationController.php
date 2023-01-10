@@ -51,7 +51,7 @@ class ComplaintApplicationController extends Controller
     {
         $this->checkAuthorization('complaintApplication_access');
 
-        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers');
+        $complaintApplication->load('lawsuitNature', 'judicialReceiptBill', 'relatedMembers', 'complainantProvince', 'complainantDistrict', 'complainantLocalBody', 'defendantProvince', 'defendantDistrict', 'defendantLocalBody');
 
         return view('judicialcommittee::admin.complaint_application.show', compact('complaintApplication'));
     }
@@ -74,6 +74,9 @@ class ComplaintApplicationController extends Controller
         }
 
         $complaintApplication->relatedMembers()->delete();
+        if ($signature = $complaintApplication->getRawOriginal('applicant_signature')) {
+            $this->deleteFile($signature);
+        }
         $complaintApplication->delete();
 
         toast('आवेदन सफलतापूर्वक मेटाइयो', 'success');

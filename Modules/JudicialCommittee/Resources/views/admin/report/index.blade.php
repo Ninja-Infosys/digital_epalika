@@ -107,7 +107,7 @@
                                 </legend>
                                 <div class="row">
                                     @foreach($columnData as $columns)
-                                        <div class="col-md-3 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <label for="column.{{$columns['table_name']}}">{{$columns['name']}}</label>
                                             <select name="columns[{{$columns['table_name']}}][]"
                                                     id="column.{{$columns['table_name']}}" multiple

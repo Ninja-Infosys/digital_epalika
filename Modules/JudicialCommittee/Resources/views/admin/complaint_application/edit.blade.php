@@ -25,7 +25,7 @@
                         <h4 class="header-title">निवेदन विवरण भर्नुहोस्</h4>
                         <a href="{{route('admin.judicialCommittee.complaintApplication.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list px-1"></i> उजुरी फारम सूची
+                            <i class="fa fa-list px-1"></i> निवेदन सूची
                         </a>
                     </div>
                 </div>
