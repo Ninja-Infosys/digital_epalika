@@ -9,7 +9,7 @@
         @endif
     @endforeach
 </div> --}}
-<div class="d-flex justify-content-between mb-2">
+<div class="d-flex justify-content-between mb-2 px-4">
     <div class="main-heading text-center">
         @foreach ($headers as $header)
             <span
@@ -52,7 +52,7 @@
 
 <div class="date-responsive d-flex justify-content-between">
     <div class="col" style="font-size: 12px">
-        <i class="fa fa-calendar "></i>
+        <i class="fa fa-calendar"></i>
         <x-convert-to-unicode number="{{$year}}" id="today_year"></x-convert-to-unicode>
         {{$year}}
         {{$month}}
@@ -74,7 +74,7 @@
     <div class="col">
         <p style="font-size: 12px;color:black;">
             <i
-                class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}bijaygamuwathru@gmail.com
+                class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}khajura@gmail.com
         </p>
     </div>
 </div>
