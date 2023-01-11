@@ -12,7 +12,7 @@ use Modules\OrganizationRegistration\Entities\Institution;
 
 class InstitutionLivewire extends Component
 {
-    use WithFileUploads;
+//    use WithFileUploads;
 
     public $provinces = [];
 

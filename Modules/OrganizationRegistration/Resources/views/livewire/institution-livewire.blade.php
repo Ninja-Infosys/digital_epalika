@@ -314,7 +314,7 @@
                     <label for="application">निवेदन अपलोड गर्नुहोस*</label>
                     <input type="file"
                            wire:model="form.application"
-                           class="form-control"
+                           class="form-control @error('form.application') is-invalid @enderror"
                            name="application"
                            id="application"
                     >
