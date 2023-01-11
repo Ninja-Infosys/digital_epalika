@@ -1091,9 +1091,10 @@
                                 <button class="mt-1" onclick="loadImage()" type="button">Camera</button>
                                 <button class="mt-1" onclick="captureImage()" type="button">Capture Image</button>
                                 <button class="mt-1" onclick="stopCamera()" type="button">Stop Camera</button>
-                                <video id="video" width="200" height="200" autoplay></video>
-                                <canvas id="canvas" width="200" height="200"></canvas>
-
+                                <div class="d-flex justify-content-between">
+                                    <video id="video" width="200" height="200" autoplay></video>
+                                    <canvas id="canvas" width="200" height="200"></canvas>
+                                </div>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="form.finger_print_type" class="form-label">छाप</label>

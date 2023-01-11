@@ -6,6 +6,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\OfficeSetting;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -65,7 +66,7 @@ class ComplaintApplicationLivewire extends Component
         'applicant_name' => null,
         'applicant_phone' => null,
         'applicant_address' => null,
-        'applicant_signature_file' => null,
+        'applicant_signature' => null,
         'relatedMembers' => []
     ];
 
@@ -126,7 +127,7 @@ class ComplaintApplicationLivewire extends Component
         'form.applicant_name' => ['required', 'string', 'max:255'],
         'form.applicant_phone' => ['required'],
         'form.applicant_address' => ['nullable'],
-        'form.applicant_signature_file' => ['nullable', 'image'],
+        'form.applicant_signature' => ['nullable', 'image'],
         'form.relatedMembers' => ['required', 'array'],
         'form.relatedMembers.*.name' => ['required'],
         'form.relatedMembers.*.phone' => ['required'],
@@ -168,7 +169,7 @@ class ComplaintApplicationLivewire extends Component
                         'submission_no' => $this->officeSetting->fiscalYear->title . '-' . Str::padLeft(ComplaintApplication::max('id') + 1, 4, 0)
                     ]);
                 //complaint log event
-                event(new ComplaintLogEvent($complaintApplication->id,ComplaintApplication::class,$complaintApplication->id,'निवेदन दर्ता',"$complaintApplication->date गते निवेदन दर्ता गरियो"));
+                event(new ComplaintLogEvent($complaintApplication->id, ComplaintApplication::class, $complaintApplication->id, 'निवेदन दर्ता', "$complaintApplication->date गते निवेदन दर्ता गरियो"));
             }
             foreach ($this->form['relatedMembers'] as $member) {
                 RelatedMember::updateOrCreate(
@@ -198,10 +199,8 @@ class ComplaintApplicationLivewire extends Component
     private function assignComplaintApplicationData($complaintApplication)
     {
         $this->complaintApplication = $complaintApplication;
-        foreach ($this->form as $key => $data) {
-            if ($key != 'relatedMembers') {
-                $this->form[$key] = $complaintApplication[$key];
-            }
+        foreach (Arr::except($this->form, ['relatedMembers','applicant_signature']) as $key => $data) {
+            $this->form[$key] = $complaintApplication[$key];
         }
         foreach ($complaintApplication->relatedMembers as $member) {
             $this->form['relatedMembers'][] = [

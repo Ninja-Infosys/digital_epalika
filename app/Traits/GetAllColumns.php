@@ -40,7 +40,7 @@ trait GetAllColumns
         return collect($ref->getMethods())
             ->filter(function (ReflectionMethod $reflectionMethod) {
                 return in_array($reflectionMethod->getReturnType(), [
-                    Relations\BelongsTo::class,
+                    //Relations\BelongsTo::class,
 //                    Relations\BelongsToMany::class,
 //                    Relations\HasMany::class,
 //                    Relations\HasManyThrough::class,

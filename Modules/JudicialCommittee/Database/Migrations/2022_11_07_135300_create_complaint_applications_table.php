@@ -33,8 +33,8 @@ return new class () extends Migration {
             $table->string('defendant_name')->nullable()->comment('प्रतिवादीको नाम');
             $table->string('subject')->comment('विषय');
             $table->string('complaint_detail')->nullable()->comment('विवरण');
-            $table->string('date')->nullable()->comment('मिति');
-            $table->date('en_date')->nullable()->comment('मिति अंग्रेजी');
+            $table->string('date')->nullable()->comment('मिति बि.सं.');
+            $table->date('en_date')->nullable()->comment('मिति इ.सं.');
             $table->string('applicant_name')->nullable()->comment('निवेदकको नाम');
             $table->string('applicant_phone')->nullable()->comment('निवेदकको फोन');
             $table->string('applicant_address')->nullable()->comment('निवेदकको ठेगाना');

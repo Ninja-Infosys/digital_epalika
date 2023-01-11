@@ -5,7 +5,9 @@ namespace Modules\OrganizationRegistration\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\OrganizationRegistration\Entities\Business;
+use Modules\OrganizationRegistration\Entities\Institution;
 use Modules\OrganizationRegistration\Observers\BusinessObserver;
+use Modules\OrganizationRegistration\Observers\InstitutionObserver;
 
 class OrganizationRegistrationServiceProvider extends ServiceProvider
 {
@@ -121,5 +123,6 @@ class OrganizationRegistrationServiceProvider extends ServiceProvider
     public function getObserve(): void
     {
         Business::observe(BusinessObserver::class);
+        Institution::observe(InstitutionObserver::class);
     }
 }

@@ -72,6 +72,7 @@ class SeniorCitizenDetailLivewire extends Component
 
     public function mount($seniorCitizenDetail = null): void
     {
+
         $officeSetting = OfficeSetting::first();
         $this->employeeSignatures = EmployeeSignature::Status()->get();
         $this->provinces = Province::all();
@@ -288,7 +289,9 @@ class SeniorCitizenDetailLivewire extends Component
         }
 
         DB::transaction(function () {
-            $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form']);
+            $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form'] +[
+                    'user_id' => auth()->id()
+                ]);
             $seniorCitizenDetail->fingerPrints()->create([
                 'finger_image' => $this->form['left_finger']['image'],
                 'iso_temp' => $this->form['left_finger']['isoTemplate'],
@@ -310,7 +313,7 @@ class SeniorCitizenDetailLivewire extends Component
 
         });
 
-        $this->dispatchBrowserEvent('toast_message', [
+        $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'तपाइको  जेस्ठ नागरिक विवरण  दर्ता भयो'
         ]);

@@ -11,7 +11,7 @@ class SeniorCitizenDetailController extends Controller
 {
     public function index()
     {
-        $seniorCitizenDetails = SeniorCitizenDetail::all();
+        $seniorCitizenDetails = SeniorCitizenDetail::filterData()->get();
         return view('identity::admin.seniorCitizen.index',compact('seniorCitizenDetails'));
     }
 
@@ -28,12 +28,14 @@ class SeniorCitizenDetailController extends Controller
 
     public function show(SeniorCitizenDetail $seniorCitizenDetail)
     {
+        $this->authorize('view',$seniorCitizenDetail);
         $seniorCitizenDetail->load('fingerPrints');
         return view('identity::admin.seniorCitizen.show', compact('seniorCitizenDetail'));
     }
 
     public function edit(SeniorCitizenDetail $seniorCitizenDetail)
     {
+        $this->authorize('update',$seniorCitizenDetail);
         $seniorCitizenDetail->load('province','district','localBody');
 
         return view('identity::admin.seniorCitizen.edit', compact('seniorCitizenDetail'));
@@ -46,6 +48,7 @@ class SeniorCitizenDetailController extends Controller
 
     public function destroy(SeniorCitizenDetail $seniorCitizenDetail)
     {
+        $this->authorize('delete',$seniorCitizenDetail);
         $seniorCitizenDetail->delete();
         return back();
     }

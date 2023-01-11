@@ -7,6 +7,7 @@ use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -61,6 +62,7 @@ class SeniorCitizenDetail extends Model
         'is_medicine',
         'medicine_name',
         'employee_signature_id',
+        'user_id'
     ];
 
     protected $casts = [
@@ -88,6 +90,11 @@ class SeniorCitizenDetail extends Model
         return $this->belongsTo(EmployeeSignature::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function fingerPrints(): MorphMany
     {
         return $this->morphMany(FingerPrint::class,'model');
@@ -112,5 +119,18 @@ class SeniorCitizenDetail extends Model
         } else {
             return '';
         }
+    }
+    public function getCanEditDeleteAttribute(): bool
+    {
+        return (auth()->user()->role->type === 'Super' || auth()->id()==$this->user_id);
+    }
+    public function scopeFilterData($query)
+    {
+        if (auth()->user()->role->type !== 'Super') {
+            $query->where('user_id', auth()->id());
+            $query->orWhere('ward_no', auth()->user()->ward_no);
+        }
+        return $query;
+
     }
 }

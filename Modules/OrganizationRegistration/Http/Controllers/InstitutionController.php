@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\OrganizationRegistration\Entities\Institution;
+use Modules\OrganizationRegistration\Http\Requests\Institution\StoreInstitutionRequest;
+use Modules\OrganizationRegistration\Http\Requests\Institution\UpdateInstitutionRequest;
 
 class InstitutionController extends Controller
 {
@@ -22,7 +24,11 @@ class InstitutionController extends Controller
 
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+        Institution::create($request->validated());
+
+        toast('','success');
+        return back();
     }
 
     public function show(Institution $institution)
@@ -35,7 +41,7 @@ class InstitutionController extends Controller
         return view('organizationregistration::admin.institution.edit');
     }
 
-    public function update(Request $request, Institution $institution)
+    public function update(UpdateInstitutionRequest $request, Institution $institution)
     {
         //
     }

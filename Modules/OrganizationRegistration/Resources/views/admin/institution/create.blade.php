@@ -45,14 +45,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <x-date-input-component
-                                        nameNe="registration_date" labelNe="दर्ता मिति:  *"
-                                        nameEn="registration_date_en" labelEn="Registration Date:"
+                                        nameNe="officer_citizenship_issue_date" labelNe="ना.जारी मिति:  *"
+                                        nameEn="officer_citizenship_issue_date_en" labelEn="Citizenship Issued Date:"
                                     />
 
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name">संस्थाको नाम <sup class="text-danger">*required</sup></label>
+                                        <label for="name">संस्थाको नाम *</label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                required="" name="name" id="name"
                                                value="{{old('name')}}" placeholder="संस्थाको नाम">
@@ -69,7 +69,7 @@
                                     'ward_no' => $officeSetting->ward_no ?? null,
                                     ]])
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="institution_address">संस्थाको ठेगाना</label>
                                         <input type="text" class="form-control" name="institution_address"
@@ -80,7 +80,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="contact_no">संस्थाको सम्पर्क नं. <sup
                                                 class="text-danger">*required</sup> </label>
@@ -91,9 +91,9 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
-                                        <label for="email">संस्थाको इमेल <sup class="text-danger">*required</sup>
+                                        <label for="email">संस्थाको इमेल
                                         </label>
                                         <input type="email" class="form-control" name="email" id="email"
                                                value="{{old('email')}}" placeholder="संस्थाको इमेल">
@@ -102,17 +102,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="email">जिल्ला प्रशासन कार्यालय दर्ता नं. </label>
-                                        <input type="email" class="form-control" name="email" id="email"
-                                               value="{{old('email')}}" placeholder="संस्थाको इमेल">
-                                        @error('email')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="dao_registration_no">जिल्ला प्रशासन कार्यालय दर्ता नं. </label>
                                         <input type="number" class="form-control" name="dao_registration_no"
@@ -124,7 +114,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <x-date-input-component
                                         nameNe="dao_registration_date" labelNe="जिल्ला प्रशासन कार्यालय दर्ता मिति:  *"
                                         nameEn="dao_registration_date_en"
@@ -132,7 +122,7 @@
                                     />
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="swc_registration_no">समाज कल्याण परिषद् दर्ता नं. </label>
                                         <input type="number" class="form-control" name="swc_registration_no"
@@ -144,7 +134,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <x-date-input-component
                                         nameNe="swc_registration_date" labelNe="समाज कल्याण परिषद् दर्ता मिति:  *"
                                         nameEn="swc_registration_date_en"
@@ -152,7 +142,7 @@
                                     ></x-date-input-component>
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="pan_vat">आन्तरिक राजस्व कार्यालय PAN/VAT नं. </label>
                                         <input type="text" class="form-control" name="pan_vat"
@@ -164,7 +154,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-2">
                                     <div class="form-group">
                                         <label for="objective">संस्थाको मुख्य उद्देश्य<sup
                                                 class="text-danger">*required</sup> </label>
@@ -175,7 +165,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-2">
                                     <div class="form-group">
                                         <label for="area">संस्थाको कार्य क्षेत्र <sup
                                                 class="text-danger">*required</sup></label>
@@ -194,7 +184,7 @@
                                 <strong>संस्थाको कागजातहरू</strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="minute">माइनुट (Minute) अपलोड गर्नुहोस<sup
                                                 class="text-danger">*required</sup></label>
@@ -206,7 +196,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="application">निवेदन अपलोड गर्नुहोस<sup
                                                 class="text-danger">*required</sup></label>
@@ -218,7 +208,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="Legislation">विधान अपलोड गर्नुहोस<sup
                                                 class="text-danger">*required</sup></label>
@@ -230,7 +220,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="Ward_recommendation">वार्डको सिफारिस<sup
                                                 class="text-danger">*required</sup></label>
@@ -242,7 +232,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="stamp">संस्थाको छाप <sup
                                                 class="text-danger">*required</sup></label>
@@ -279,7 +269,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="supervisor_person">निरीक्षक गर्ने <sup
                                                 class="text-danger">*required</sup></label>
@@ -291,7 +281,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="approval_person">प्रमाणित गर्ने <sup
                                                 class="text-danger">*required</sup></label>
@@ -303,7 +293,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="proposed_person_designation">प्रस्तावित गर्नेको पद <sup class="text-danger">*required</sup></label>
                                         <input type="text" class="form-control" name="proposed_person_designation"
@@ -314,7 +304,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="supervisor_person_designation">निरीक्षण गर्नेको पद <sup class="text-danger">*required</sup></label>
                                         <input type="text" class="form-control" name="supervisor_person_designation"
@@ -325,7 +315,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 mb-2">
                                     <div class="form-group">
                                         <label for="approval_person_designation">प्रमाणित गर्नेको पद <sup class="text-danger">*required</sup></label>
                                         <input type="text" class="form-control" name="approval_person_designation"

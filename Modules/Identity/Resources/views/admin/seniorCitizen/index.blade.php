@@ -59,6 +59,7 @@
                                     </td>
 
                                     <td>
+                                        @if($seniorCitizenDetail->can_edit_delete)
                                         <a href="{{route('identity.admin.seniorCitizenDetail.edit',$seniorCitizenDetail)}}"
                                            class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
@@ -75,10 +76,7 @@
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
-{{--                                        <a href="javascript:void(0)"  route_action="{{route('identity.admin.disabilityIdentityCard.print',$disabilityIdentityCard)}}" class="btn btn-xs btn-outline-warning printDetail">--}}
-{{--                                            <i class="fa fa-print"></i>--}}
-
-{{--                                        </a>--}}
+                                        @endif
                                     </td>
                                 </tr>
                             @empty
