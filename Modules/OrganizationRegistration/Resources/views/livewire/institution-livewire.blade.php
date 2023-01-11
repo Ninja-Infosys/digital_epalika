@@ -42,7 +42,7 @@
                 @enderror
             </div>
             <div class="col-md-4 md-2">
-                <label for="" class="registration_date">दर्ता मिति:  *</label>
+                <label for="" class="registration_date">दर्ता मिति: *</label>
                 <input type="text"
                        name="institutionOfficers[{{$index}}][registration_date]"
                        wire:model="form.{{$index}}.registration_date"
@@ -56,7 +56,7 @@
 
             </div>
             <div class="col-md-4 md-2">
-                <label for="" class="registration_date_en">दर्ता मिति:  *</label>
+                <label for="" class="registration_date_en">दर्ता मिति: *</label>
                 <input type="text"
                        name="institutionOfficers[{{$index}}][registration_date_en]"
                        wire:model="form.{{$index}}.registration_date_en"
@@ -104,7 +104,7 @@
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
-            <div class="col-md-8">
+            <div class="col-md-11 ">
                 <div class="row">
                     <div class="col-md-4 mb-2">
                         <label for="form.{{$index}}.officer_photo" class="form-label">फोटो :</label>
@@ -129,29 +129,36 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <label for="form.{{$index}}.officer_citizenship_behind" class="form-label">नागरिकता (पछाडी)
-                            :</label>
-                        <input type="file"
-                               name="institutionOfficers[{{$index}}][officer_citizenship_behind]"
-                               wire:model="form.{{$index}}.officer_citizenship_behind"
-                               class="form-control @error('officer_designation') is-invalid @enderror"
-                               id="form.{{$index}}.officer_citizenship_behind">
-                        @error('form.{{$index}}.officer_citizenship_behind')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
+                    <div class="col-md-4 mb-2 ">
+                        <div class="">
+                            <label for="form.{{$index}}.officer_citizenship_behind" class="form-label">नागरिकता (पछाडी)
+                                :</label>
+                            <input type="file"
+                                   name="institutionOfficers[{{$index}}][officer_citizenship_behind]"
+                                   wire:model="form.{{$index}}.officer_citizenship_behind"
+                                   class="form-control @error('officer_designation') is-invalid @enderror"
+                                   id="form.{{$index}}.officer_citizenship_behind">
+                            @error('form.{{$index}}.officer_citizenship_behind')
+                            <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
+                        </div>
                     </div>
+
                 </div>
             </div>
-            <div class="col-md-1 mb-2">
+            <div class="col-md-1">
                 @if($index > 2)
                     <button type="button"
-                            class="btn btn-danger btn-sm remove-button"
-                            wire:click.prevent="removeOfficer({{$index}})">X</button>
+                            class="mt-3 btn btn-danger btn-sm remove-button"
+                            wire:click.prevent="removeOfficer({{$index}})">X
+                    </button>
                 @endif
             </div>
         </div>
         <hr>
     @endforeach
-    <button type="button" class="btn btn-success btn-sm remove-button" wire:click.prevent="addOfficer()">नँया संचालक पदाधिकारी</button>
+    <button type="button" class="btn btn-success btn-sm remove-button" wire:click.prevent="addOfficer()">नँया
+        संचालक पदाधिकारी
+    </button>
 </div>
+
