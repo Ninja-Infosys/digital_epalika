@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Institution extends Model
 {
@@ -52,6 +54,20 @@ class Institution extends Model
         'supervisor_person_designation',
         'approval_person_designation',
     ];
+
+    public function getPhotoUrlAttribute(): string
+    {
+        return !empty($this->attributes['']) ?
+            Storage::disk('public')->url($this->attributes['minute'])
+            : '';
+    }
+
+    public function setPhotoAttribute($value)
+    {
+        if (!empty($value) && !is_string($value)) {
+            $this->attributes['minute'] = $value->store('Institution/' . Str::slug($this->attributes['name'], '_') . 'photo', 'public');
+        }
+    }
 
     public function institutionOfficers(): HasMany
     {
