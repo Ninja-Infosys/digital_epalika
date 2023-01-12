@@ -35,8 +35,8 @@ return new class extends Migration
             //Institutional documents
             $table->string('minute')->comment('माइनुट');
             $table->string('application')->comment('निवेदन');
-            $table->string('Legislation')->comment('विधान');
-            $table->string('Ward_recommendation')->comment('वार्डको सिफारिस');
+            $table->string('legislation')->comment('विधान');
+            $table->string('ward_recommendation')->comment('वार्डको सिफारिस');
             $table->string('stamp')->comment('संस्थाको छाप');
 
 
