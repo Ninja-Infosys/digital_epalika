@@ -9,8 +9,8 @@
         @endif
     @endforeach
 </div> --}}
-<div class="d-flex justify-content-between mb-2">
-    <div class="main-heading ">
+<div class="d-flex justify-content-between mb-2 px-4">
+    <div class="main-heading text-center">
         @foreach ($headers as $header)
             <span
                 style="color: {{$header->font_color??'red'}}; font-size: {{$header->font_size??1}}rem; font-weight: {{$header->font??'normal'}};">
@@ -21,7 +21,7 @@
             @endif
         @endforeach
     </div>
-    <div>
+    <div class="main-date">
         <h6>
             <b>
                 <i class="fa fa-calendar"></i>
@@ -42,15 +42,50 @@
             <p style="font-size: 18px;color:black; padding: 0 5px"><i
                     class="fa-solid fa-phone"></i> {{$officeSetting->phone??''}}<br>
                 <i
-                    class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}</p>
-            <p style="font-size: 18px;color:black"></p>
+                    class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}
+            </p>
+
         </div>
 
+    </div>
+</div>
+
+<div class="date-responsive d-flex justify-content-between">
+    <div class="col" style="font-size: 12px">
+        <i class="fa fa-calendar"></i>
+        <x-convert-to-unicode number="{{$year}}" id="today_year"></x-convert-to-unicode>
+        {{$year}}
+        {{$month}}
+        <x-convert-to-unicode number="{{$month}}" id="today_day"></x-convert-to-unicode>
+        {{$day}}
+    </div>
+    <div class="col" style="font-size: 12px">
+        <i class="fa fa-clock "></i><span id="clock-container1" class="px-1"></span>
+
+    </div>
+
+</div>
+<div class="date-responsive d-flex justify-content-between">
+    <div class="col">
+        <p style="font-size: 12px;color:black; "><i
+                class="fa-solid fa-phone"></i> {{$officeSetting->phone??''}}9864742149</p>
+
+    </div>
+    <div class="col">
+        <p style="font-size: 12px;color:black;">
+            <i
+                class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}khajura@gmail.com
+        </p>
     </div>
 </div>
 @push('styles')
     <style>
         #clock-container {
+            font-size: 40px;
+            font-family: sans-serif;
+            color: #333;
+        }
+        #clock-container1 {
             font-size: 40px;
             font-family: sans-serif;
             color: #333;
@@ -94,6 +129,11 @@
 // create digital clock HTML
 // add the digital clock to the page
             document.getElementById("clock-container").innerHTML = ampm + " " +
+                NepaliFunctions.ConvertToUnicode(hours) + ":" +
+                NepaliFunctions.ConvertToUnicode(minutes) + ":" +
+                NepaliFunctions.ConvertToUnicode(seconds);
+
+            document.getElementById("clock-container1").innerHTML = ampm + " " +
                 NepaliFunctions.ConvertToUnicode(hours) + ":" +
                 NepaliFunctions.ConvertToUnicode(minutes) + ":" +
                 NepaliFunctions.ConvertToUnicode(seconds);

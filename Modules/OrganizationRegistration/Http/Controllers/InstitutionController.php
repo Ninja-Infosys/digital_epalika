@@ -22,12 +22,11 @@ class InstitutionController extends Controller
         return view('organizationregistration::admin.institution.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreInstitutionRequest $request)
     {
-        dd($request->all());
         Institution::create($request->validated());
 
-        toast('','success');
+        toast('संस्था सफलता पुर्बक थपियो','success');
         return back();
     }
 

@@ -40,7 +40,7 @@ body {
 
 .card-img img {
     object-fit: cover;
-    width: 90%;
+   width: 80%;
 }
 
 .list {
@@ -564,13 +564,28 @@ select {
 .logo {
     height: 120px;
 }
-
+@media (max-width: 768px) {
+    .main-logo .logo{
+        height: 5rem;
+        width: 5rem;
+        padding-top: 20px;
+    }
+}
 .logo-nep {
     height: 120px;
     width: 100px;
     margin-left: 200px;
 }
-
+@media (max-width: 768px) {
+    .main-date{
+        display: none;
+    }
+}
+@media (min-width:768px) {
+    .date-responsive{
+        visibility: hidden;
+    }
+}
 .textbox-01 {
     color: white;
     margin-top: 2px;
@@ -998,7 +1013,6 @@ p {
     color: white;
     font-weight: bold;
 }
-
 .breadcrumb .breadcrumb-item {
     padding: 5px 5px 5px 20px;
 }
@@ -1250,4 +1264,14 @@ h6,
 
 .mid {
     margin: 0 -40px;
+}
+@media(max-width: 768px){
+    .vertical-scroll {
+        width: 90%;
+        height: 55vh;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        box-sizing: border-box;
+      }
 }

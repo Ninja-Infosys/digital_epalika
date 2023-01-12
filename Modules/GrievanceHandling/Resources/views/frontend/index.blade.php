@@ -6,7 +6,7 @@
                 <div class="breadcrumb d-flex pt-2">
                     <div class="breadcrumb-item">
                         <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
-                        <i class="fa fa-angle-double-right"></i>
+                        <i class="fa fa-angle-double-right text-light"></i>
                         <a class="ml-1 text-primary-500">गुनासो</a>
                     </div>
                 </div>
