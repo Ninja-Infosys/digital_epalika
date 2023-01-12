@@ -42,7 +42,7 @@ trait GetAllColumns
                 return in_array($reflectionMethod->getReturnType(), [
                     //Relations\BelongsTo::class,
 //                    Relations\BelongsToMany::class,
-//                    Relations\HasMany::class,
+                    Relations\HasMany::class,
 //                    Relations\HasManyThrough::class,
 //                    Relations\HasOne::class,
 //                    Relations\HasOneThrough::class,

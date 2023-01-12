@@ -37,6 +37,8 @@ class ComplaintApplicationResource extends JsonResource
             'मिति बि.सं.' => $this->when(in_array('date', $complaint_applications), $this->date ?? ''),
             'मिति इ.सं.' => $this->when(in_array('en_date', $complaint_applications), $this->en_date ?? ''),
             'निवेदकको हस्ताक्षर' => $this->when(in_array('applicant_signature', $complaint_applications), $this->applicant_signature ?? ''),
+            'सम्बन्धित सदस्यहरू' => RelatedMemberResource::collection($this->whenLoaded('relatedMembers')),
+            'तारिख पर्चा विवरण' => DateSheetResource::collection($this->whenLoaded('dateSheets')),
         ];
     }
 
