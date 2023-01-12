@@ -49,7 +49,6 @@ function createTable(headerData, bodyData) {
             }, 0);
             data.forEach(sub_data => {
                 if (Array.isArray(sub_data) && sub_data.length) {
-                    rowSpan = sub_data.length
                     sub_data[0].forEach(next_sub_data => {
                         appendCellData(row, next_sub_data)
                     })
@@ -57,8 +56,14 @@ function createTable(headerData, bodyData) {
                         sub_data.slice(1).forEach(next_sub_data => {
                             const sub_row = document.createElement("tr");
                             if (Array.isArray(next_sub_data)) {
+                                let subRowspan=0
+                                console.log(sub_data.length,sub_data.length<rowSpan)
+                                if(sub_data.length<rowSpan){
+                                     subRowspan=rowSpan-(sub_data.length-1)
+                                    console.log(subRowspan)
+                                }
                                 next_sub_data.forEach(el => {
-                                    appendCellData(sub_row, el)
+                                    appendCellData(sub_row, el,subRowspan)
                                 })
                             }
                             tbody.appendChild(sub_row)
