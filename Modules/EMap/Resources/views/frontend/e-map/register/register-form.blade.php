@@ -6,7 +6,7 @@
                     <div class="breadcrumb d-flex">
                         <div>
                             <a class="whitespace-nowrap text-primary-500" href="{{url('e-map')}}">ई-नक्सा</a>
-                            <i class="fa fa-angle-double-right"></i>
+                            <i class="fa fa-angle-double-right text-light"></i>
                             <a class=" text-primary-500">नक्सा दर्ता</a>
                         </div>
                     </div>

@@ -6,11 +6,11 @@
                 <div class="breadcrumb d-flex">
                     <div class="breadcrumb-item">
                         <a class="whitespace-nowrap text-primary-500" href="{{url('e-map')}}">ई-नक्सा</a>
-                        <i class="fa fa-angle-double-right text-white"></i>
+                        <i class="fa fa-angle-double-right text-white text-light"></i>
                         <a href="{{route('mapTrack')}}" class=" text-primary-500 text-center">नक्सा ट्रयाक</a>
-                        <i class="fa fa-angle-double-right text-white"></i>
+                        <i class="fa fa-angle-double-right text-white text-light"></i>
                         <a href="{{route('formDetails')}}" class=" text-primary-500 text-center">नक्सा विवरण</a>
-                        <i class="fa fa-angle-double-right text-white"></i>
+                        <i class="fa fa-angle-double-right text-white text-light"></i>
                         <a class=" text-primary-500 text-center">विवरण भर्नुहोस्</a>
                     </div>
                 </div>
