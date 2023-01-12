@@ -32,9 +32,9 @@
 @push('styles')
     <style>
         @media screen and (max-width: 768px) {
-            .card-img img {
+            /* .card-img img {
                 width: 70%;
-            }
+            } */
 
             .employee-card {
                 display:flex;
