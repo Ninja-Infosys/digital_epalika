@@ -78,15 +78,7 @@ function createTable(headerData, bodyData) {
             tbl.appendChild(tbody);
         });
 
-        function appendCellData(target_element, data, rowSpan = 0) {
-            const cell = document.createElement("td");
-            if (rowSpan > 0) {
-                cell.rowSpan = rowSpan
-            }
-            const cellText = document.createTextNode(data);
-            cell.appendChild(cellText);
-            target_element.appendChild(cell);
-        }
+
 
         // put the <table> in the <body>
         tableDiv.appendChild(tbl);
@@ -101,7 +93,15 @@ function createTable(headerData, bodyData) {
     }
 
 }
-
+function appendCellData(target_element, data, rowSpan = 0) {
+    const cell = document.createElement("td");
+    if (rowSpan > 0) {
+        cell.rowSpan = rowSpan
+    }
+    const cellText = document.createTextNode(data);
+    cell.appendChild(cellText);
+    target_element.appendChild(cell);
+}
 // make ajax call from the form with report-filter-form id and data-url attribute for url in js
 $(document).ready(function () {
     // x-csrf protection
