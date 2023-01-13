@@ -47,6 +47,7 @@ function createTable(headerData, bodyData) {
             rowSpan = arrayData.reduce((max, arr) => {
                 return Math.max(max, arr.length);
             }, 0);
+
             data.forEach(sub_data => {
                 if (Array.isArray(sub_data) && sub_data.length) {
                     sub_data[0].forEach(next_sub_data => {
@@ -55,16 +56,13 @@ function createTable(headerData, bodyData) {
                     if (sub_data.slice(1).length) {
                         sub_data.slice(1).forEach(next_sub_data => {
                             const sub_row = document.createElement("tr");
-                            if (Array.isArray(next_sub_data)) {
-                                let subRowspan=0
-                                console.log(sub_data.length,sub_data.length<rowSpan)
-                                if(sub_data.length<rowSpan){
-                                     subRowspan=rowSpan-(sub_data.length-1)
-                                    console.log(subRowspan)
-                                }
+                            if (Array.isArray(next_sub_data) && next_sub_data.length) {
                                 next_sub_data.forEach(el => {
-                                    appendCellData(sub_row, el,subRowspan)
+                                    console.log(el)
+                                    appendCellData(sub_row, el)
                                 })
+                            }else{
+                                appendCellData(sub_row)
                             }
                             tbody.appendChild(sub_row)
                         })
@@ -77,8 +75,6 @@ function createTable(headerData, bodyData) {
             //add the row to the end of the table body
             tbl.appendChild(tbody);
         });
-
-
 
         // put the <table> in the <body>
         tableDiv.appendChild(tbl);
@@ -93,7 +89,8 @@ function createTable(headerData, bodyData) {
     }
 
 }
-function appendCellData(target_element, data, rowSpan = 0) {
+
+function appendCellData(target_element, data='', rowSpan = 0) {
     const cell = document.createElement("td");
     if (rowSpan > 0) {
         cell.rowSpan = rowSpan
@@ -102,6 +99,7 @@ function appendCellData(target_element, data, rowSpan = 0) {
     cell.appendChild(cellText);
     target_element.appendChild(cell);
 }
+
 // make ajax call from the form with report-filter-form id and data-url attribute for url in js
 $(document).ready(function () {
     // x-csrf protection
