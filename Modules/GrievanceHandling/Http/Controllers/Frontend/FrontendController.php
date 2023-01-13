@@ -9,9 +9,35 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
 use Modules\GrievanceHandling\Entities\GrievanceType;
+use Modules\GrievanceHandling\Enums\GrievanceStatus;
 
 class FrontendController extends Controller
 {
+    public function grievanceHandling(): Factory|View|Application
+    {
+        $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
+        $grievanceDetails = GrievanceDetail::whereNull('grievance_detail_id')->public()->get();
+
+        $grievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->count();
+        $registeredGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->approved()->count();
+        $closedGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', GrievanceStatus::CLOSED->value)->count();
+        $investigatedGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', GrievanceStatus::INVESTIGATED->value)->count();
+        $seenGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', '!=', GrievanceStatus::UNSEEN->value)->count();
+        $unseenGrievanceCount = GrievanceDetail::whereNull('grievance_detail_id')->where('status', GrievanceStatus::UNSEEN->value)->count();
+
+        return view('grievancehandling::frontend.index', compact(
+            'grievanceTypes',
+            'grievanceDetails',
+                'grievanceCount',
+                'registeredGrievanceCount',
+                'closedGrievanceCount',
+                'investigatedGrievanceCount',
+                'seenGrievanceCount',
+                'unseenGrievanceCount'
+            )
+        );
+    }
+
     public function singleGrievance(Request $request)
     {
         $request->validate([
@@ -32,14 +58,6 @@ class FrontendController extends Controller
         }
         toast('तपाइले उपलब्ध गराएको विवरण मिलेन', 'error');
         return back();
-    }
-
-    public function grievanceHandling(): Factory|View|Application
-    {
-        $grievanceTypes = GrievanceType::withCount('grievanceDetails')->latest()->get();
-        $grievanceDetails = GrievanceDetail::whereNull('grievance_detail_id')->public()->get();
-
-        return view('grievancehandling::frontend.index', compact('grievanceTypes', 'grievanceDetails'));
     }
 
     public function policy()
