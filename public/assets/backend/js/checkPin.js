@@ -7,7 +7,8 @@ $(document).ready(function(){
     });
     $(document.body).delegate('#pinData', 'submit',function(e){
         e.preventDefault();
-        var pin = $("input[name=pin]").val();
+        const pin = $("input[name=pin]").val();
+        const submitButton = $("#submitBtn");
         const url = $(this).attr('data');
         $.ajax({
             url:url,
@@ -16,8 +17,8 @@ $(document).ready(function(){
                 pin:pin,
             },
             beforeSend: function() {
-                $("#submitBtn").attr('disabled', true);
-                $("#submitBtn").html("<i class='fa fa-spinner fa-spin'></i> loading");
+                submitButton.attr('disabled', true);
+                submitButton.html("<i class='fa fa-spinner fa-spin'></i> loading");
             },
             success:function(response){
                 swal.fire({
@@ -34,8 +35,8 @@ $(document).ready(function(){
 
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                $("#submitBtn").attr('disabled', false);
-                $("#submitBtn").html("पेश गर्नुहोस्");
+                submitButton.attr('disabled', false);
+                submitButton.html("पेश गर्नुहोस्");
                 $("#error_message").html(XMLHttpRequest.responseJSON.message);
             },
         });
