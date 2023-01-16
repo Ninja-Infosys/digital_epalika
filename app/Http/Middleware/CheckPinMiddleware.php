@@ -9,13 +9,13 @@ class CheckPinMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-//        if (auth()->check()
-//            && ! auth()->user()->pin
-//            && ! $request->is('organization/password/create')
-//            && ! $request->is('organization/password/store')
-//        ) {
-//            return redirect()->route('organization.password.create');
-//        }
+        if (auth()->check()
+            && !auth()->user()->pin
+            && ! $request->routeIs('admin.pin.create')
+            && ! $request->routeIs('admin.pin.store')
+        ) {
+            return redirect()->route('admin.pin.create');
+        }
 
         return $next($request);
     }

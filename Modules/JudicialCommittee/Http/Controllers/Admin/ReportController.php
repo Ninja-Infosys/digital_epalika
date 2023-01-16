@@ -49,7 +49,7 @@ class ReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        if (empty($request->input('columns')['complaint_applications'])) {
+        if (empty($request->input('columns'))) {
             $request->request->add(
                 ['columns' =>
                     [
@@ -64,6 +64,12 @@ class ReportController extends Controller
                 $this->filterDataFromUser($q, $request);
             })
             ->get();
+        if (!empty($request->input('columns')['related_members'])) {
+            $complaintApplications->load('relatedMembers');
+        }
+        if (!empty($request->input('columns')['date_sheets'])) {
+            $complaintApplications->load('dateSheets');
+        }
 
         return response()->json([
             'data' => ComplaintApplicationResource::collection($complaintApplications),

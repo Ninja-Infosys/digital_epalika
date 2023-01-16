@@ -13,66 +13,28 @@ function createTable(headerData, bodyData) {
 
         const thead = document.createElement("thead");
         const header = document.createElement("tr");
-        const second_header = document.createElement("tr");
         headerData.forEach(element => {
             const headerCell = document.createElement("th");
-            if (element.children.length) {
-                headerCell.colSpan = element.children.length
-            }
-            if (headerData.some(data => data.children.length) && !element.children.length) {
-                headerCell.rowSpan = 2
-            }
-            const cellHeader = document.createTextNode(element.title);
+            const cellHeader = document.createTextNode(element);
             headerCell.appendChild(cellHeader);
             header.appendChild(headerCell);
-            element.children.forEach(sub_element => {
-                const sub_headerCell = document.createElement("th");
-                const sub_cellHeader = document.createTextNode(sub_element);
-                sub_headerCell.appendChild(sub_cellHeader);
-                second_header.appendChild(sub_headerCell);
-            })
         });
         thead.appendChild(header);
-        tbl.appendChild(thead)
-
-        thead.appendChild(second_header);
         tbl.appendChild(thead)
 
         const tbody = document.createElement("tbody");
         // creating rows
         bodyData.forEach(data => {
             const row = document.createElement("tr");
-            let rowSpan = 0
-            const arrayData = data.filter(sub => Array.isArray(sub) && sub.length)
-            rowSpan = arrayData.reduce((max, arr) => {
-                return Math.max(max, arr.length);
-            }, 0);
+            data.forEach(element => {
+                const cell = document.createElement("td");
+                const cellText = document.createTextNode(element);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+            });
 
-            data.forEach(sub_data => {
-                if (Array.isArray(sub_data) && sub_data.length) {
-                    sub_data[0].forEach(next_sub_data => {
-                        appendCellData(row, next_sub_data)
-                    })
-                    if (sub_data.slice(1).length) {
-                        sub_data.slice(1).forEach(next_sub_data => {
-                            const sub_row = document.createElement("tr");
-                            if (Array.isArray(next_sub_data) && next_sub_data.length) {
-                                next_sub_data.forEach(el => {
-                                    console.log(el)
-                                    appendCellData(sub_row, el)
-                                })
-                            }else{
-                                appendCellData(sub_row)
-                            }
-                            tbody.appendChild(sub_row)
-                        })
-                    }
-                } else {
-                    appendCellData(row, sub_data, rowSpan)
-                    tbody.appendChild(row);
-                }
-            })
-            //add the row to the end of the table body
+            // add the row to the end of the table body
+            tbody.appendChild(row);
             tbl.appendChild(tbody);
         });
 
@@ -88,16 +50,6 @@ function createTable(headerData, bodyData) {
         return tableDiv;
     }
 
-}
-
-function appendCellData(target_element, data='', rowSpan = 0) {
-    const cell = document.createElement("td");
-    if (rowSpan > 0) {
-        cell.rowSpan = rowSpan
-    }
-    const cellText = document.createTextNode(data);
-    cell.appendChild(cellText);
-    target_element.appendChild(cell);
 }
 
 // make ajax call from the form with report-filter-form id and data-url attribute for url in js
@@ -141,32 +93,15 @@ $(document).ready(function () {
         let headerData = [];
         let bodyData = [];
         Object.keys(data[0] ?? {}).forEach(key => {
-            headerData.push({
-                title: key,
-                children: data[0][key] instanceof Array && data[0][key].length ? Object.keys(data[0][key][0]) : []
-            })
+            headerData.push(key)
         })
         data.forEach((value, index) => {
             let tempData = []
             headerData.forEach((head => {
-                if (data[index][head.title] instanceof Array) {
-                    let mainChildArray = []
-                    data[index][head.title].forEach(sub_data => {
-                        let childArray = []
-                        Object.values(sub_data).forEach(sub_value => {
-                            childArray.push(sub_value)
-                        })
-                        mainChildArray.push(childArray)
-                    })
-                    tempData.push(mainChildArray)
-                } else {
-                    tempData.push(data[index][head.title])
-                }
+                tempData.push(data[index][head])
             }))
             bodyData.push(tempData)
         })
-        //console.log(headerData)
-        console.log(bodyData)
         createTable(headerData, bodyData)
     }
 

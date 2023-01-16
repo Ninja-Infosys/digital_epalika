@@ -28,6 +28,7 @@ class SeniorCitizenDetailLivewire extends Component
     public $districts = [];
     public $localBodies = [];
     public $wards = '';
+
     public $employeeSignatures = [];
 
     public SeniorCitizenDetail $seniorCitizenDetail;
@@ -68,7 +69,11 @@ class SeniorCitizenDetailLivewire extends Component
         'is_medicine' => 0,
         'medicine_name' => null,
         'employee_signature_id' => null,
+
     ];
+
+
+
 
     public function mount($seniorCitizenDetail = null): void
     {
@@ -211,9 +216,9 @@ class SeniorCitizenDetailLivewire extends Component
     public function messages(): array
     {
         return [
-            'form.photo.required'=>['फोटो आवश्यक छ'],
-            'form.left_finger.required'=>['बायाँ छाप आवश्यक छ'],
-            'form.right_finger.required'=>['दाहिने छाप आवश्यक छ'],
+            'form.photo.required' => ['फोटो आवश्यक छ'],
+            'form.left_finger.required' => ['बायाँ छाप आवश्यक छ'],
+            'form.right_finger.required' => ['दाहिने छाप आवश्यक छ'],
             'form.name.required' => ['नाम आवश्यक छ'],
             'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
             'form.dob_bs.required' => ['जन्म मिति नेपालीमा आवश्यक छ'],
@@ -289,7 +294,7 @@ class SeniorCitizenDetailLivewire extends Component
         }
 
         DB::transaction(function () {
-            $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form'] +[
+            $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form'] + [
                     'user_id' => auth()->id()
                 ]);
             $seniorCitizenDetail->fingerPrints()->create([
@@ -339,6 +344,7 @@ class SeniorCitizenDetailLivewire extends Component
         if ($this->form['is_medicine'] == '0') {
             $this->form['medicine_name'] = null;
         }
+
 
         return view('identity::livewire.senior-citizen-detail-livewire');
     }

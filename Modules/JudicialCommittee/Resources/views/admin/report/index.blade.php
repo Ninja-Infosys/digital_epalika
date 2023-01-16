@@ -25,14 +25,17 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">न्यायिक समिति रिपोर्ट</h4>
 
-                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false" aria-controls="collapseExample">
+                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                aria-controls="collapseExample">
                             <i class="fa fa-filter"></i>
                         </button>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm">
-                        <form id="report-filter-form" method="POST"  data-bs-url="{{route('admin.judicialCommittee.report.report-data')}}">
+                        <form id="report-filter-form" method="POST"
+                              data-bs-url="{{route('admin.judicialCommittee.report.report-data')}}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <fieldset class="border p-2 mb-2">
@@ -70,7 +73,8 @@
                                                         id="fiscal_year" class="form-control">
                                                     <option disabled>--- छान्नुहोस् ---</option>
                                                     @foreach($fiscalYears as $fiscalYear)
-                                                        <option value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
+                                                        <option
+                                                            value="{{$fiscalYear->id}}">{{$fiscalYear->title}}</option>
                                                     @endforeach
                                                 </select>
 
@@ -90,7 +94,8 @@
                                                         id="lawsuit_nature_id" class="form-control">
                                                     <option disabled>--- छान्नुहोस् ---</option>
                                                     @foreach($lawsuitNatures as $lawsuitNature)
-                                                        <option value="{{$lawsuitNature->id}}">{{$lawsuitNature->title}}</option>
+                                                        <option
+                                                            value="{{$lawsuitNature->id}}">{{$lawsuitNature->title}}</option>
                                                     @endforeach
                                                 </select>
 
@@ -134,6 +139,62 @@
                         </form>
                     </div>
                     <div id="report-table" class="table-responsive"></div>
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th rowspan="2">आर्थिक बर्ष</th>
+                            <th colspan="2">सम्बन्धित सदस्यहरू</th>
+                            <th colspan="2">तारिख पर्चा विवरण</th>
+                        </tr>
+                        <tr>
+                            <th>नाम</th>
+                            <th>फोन</th>
+                            <th>आवेदन वर्ष</th>
+                            <th>हाजिर हुने मिति</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td rowspan="3">2079</td>
+                            <td>Mina Bk</td>
+                            <td>98767987687</td>
+                            <td>2079</td>
+                            <td>2079-10-26</td>
+                        </tr>
+                        <tr>
+                            <td>Shalendra Hamal</td>
+                            <td>9879878787</td>
+                            <td>2079</td>
+                            <td>2079-12-15</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>2079</td>
+                            <td>2079-12-15</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">2079</td>
+                            <td>Ramlal Shahu</td>
+                            <td>979876765</td>
+                            <td>2079</td>
+                            <td>2079-09-30</td>
+                        </tr>
+                        <tr>
+                            <td>Megaram Bhandari</td>
+                            <td>9709876765</td>
+                            <td>2079</td>
+                            <td>2079-09-30</td>
+                        </tr>
+                        <tr>
+                            <td>Rajan Siwakoti</td>
+                            <td>9790976545</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

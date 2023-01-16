@@ -6,7 +6,7 @@
                 <div class="breadcrumb d-flex pt-2">
                     <div class="breadcrumb-item">
                         <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
-                        <i class="fa fa-angle-double-right"></i>
+                        <i class="fa fa-angle-double-right text-light"></i>
                         <a class="ml-1 text-primary-500">गुनासो</a>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                             <div class="card bg-success text-light text-center">
                                 <div class="card-body">
                                     <i class="fa fa-file-contract fs-3"></i>
-                                    <h4 class="fw-bold mt-2">1</h4>
+                                    <h4 class="fw-bold mt-2">{{$grievanceCount}}</h4>
                                     <h6 class="fw-semibold">कुल प्राप्त गुनासो</h6>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                             <div class="card bg-primary text-light text-center">
                                 <div class="card-body">
                                     <i class="fa fa-file fs-3"></i>
-                                    <h4 class="fw-bold mt-2">0</h4>
+                                    <h4 class="fw-bold mt-2">{{$registeredGrievanceCount}}</h4>
                                     <h6 class="fw-semibold">कुल दर्ता गुनासो</h6>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                             <div class="card bg-info text-light text-center">
                                 <div class="card-body">
                                     <i class="fa fa-check-double fs-3"></i>
-                                    <h4 class="fw-bold mt-2">5</h4>
+                                    <h4 class="fw-bold mt-2">{{$closedGrievanceCount}}</h4>
                                     <h6 class="fw-semibold">फर्छ्यौट भएको</h6>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                             <div class="card bg-warning text-light text-center">
                                 <div class="card-body">
                                     <i class="fa fa-search fs-3"></i>
-                                    <h4 class="fw-bold mt-2">8</h4>
+                                    <h4 class="fw-bold mt-2">{{$investigatedGrievanceCount}}</h4>
                                     <h6 class="fw-semibold">अनुसन्धान गरिदै</h6>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                             <div class="card bg-danger text-light text-center">
                                 <div class="card-body">
                                     <i class="fa fa-eye fs-3"></i>
-                                    <h4 class="fw-bold mt-2">9</h4>
+                                    <h4 class="fw-bold mt-2">{{$seenGrievanceCount}}</h4>
                                     <h6 class="fw-semibold">हेरिएको</h6>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                             <div class="card bg-dark text-light text-center">
                                 <div class="card-body">
                                     <i class="fa fa-eye-slash fs-3"></i>
-                                    <h4 class="fw-bold mt-2">0</h4>
+                                    <h4 class="fw-bold mt-2">{{$unseenGrievanceCount}}</h4>
                                     <h6 class="fw-semibold">नहेरिएको</h6>
                                 </div>
                             </div>

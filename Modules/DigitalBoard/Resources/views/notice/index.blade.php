@@ -79,7 +79,7 @@
 
                                         </a>
                                         <a href="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
-                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                           class="btn btn-xs btn-outline-primary confirm_pin" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.digitalBoard.notice.destroy',[$type,$notice])}}"
@@ -107,4 +107,10 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+
+        </script>
+    @endpush
 @endsection
