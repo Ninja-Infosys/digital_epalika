@@ -43,6 +43,7 @@ class PinController extends Controller
             'pin'=>['required','integer']
         ]);
         return Hash::check($request->input('pin'),auth()->user()->pin);
+
     }
 
 

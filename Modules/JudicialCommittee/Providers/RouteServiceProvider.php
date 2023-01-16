@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('judicialCommittee.')
             ->group(module_path('JudicialCommittee', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
             ->prefix('admin/judicialcommittee')
             ->as('admin.judicialCommittee.')
             ->group(module_path('JudicialCommittee', '/Routes/admin.php'));

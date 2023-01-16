@@ -42,6 +42,7 @@ class DisabilityIdentityCardController extends Controller
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('update',$disabilityIdentityCard);
+        $disabilityIdentityCard->load('fingerprints');
         return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard'));
     }
 

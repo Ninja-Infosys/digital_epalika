@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             ->as('grievanceHandling.')
             ->group(module_path('GrievanceHandling', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
             ->prefix('admin/grievanceHandling')
             ->as('admin.grievanceHandling.')
             ->group(module_path('GrievanceHandling', '/Routes/admin.php'));

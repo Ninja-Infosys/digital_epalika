@@ -30,7 +30,6 @@ class DynamicFormsStorageController extends Controller
      * @param string $fileKey The file key (S3 object key or file name)
      * @param Request $request The full Request object
      *
-     * @throws AuthorizationException
      */
     protected function authorizeFileAction(string $action, string $fileKey, Request $request, string $backend): void
     {

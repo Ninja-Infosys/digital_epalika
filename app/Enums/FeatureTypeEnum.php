@@ -6,6 +6,7 @@ enum FeatureTypeEnum: string
 {
     case SMS = 'sms';
     case MAIL = 'mail';
+    case PIN = 'pin';
 
     public function unique(): bool
     {
@@ -15,7 +16,7 @@ enum FeatureTypeEnum: string
     public static function getUnique(self $value): bool
     {
         return match ($value) {
-            self::SMS, self::MAIL => true,
+            self::SMS, self::MAIL, self::PIN => true
         };
     }
 
@@ -29,6 +30,7 @@ enum FeatureTypeEnum: string
         return match ($value) {
             self::SMS => 'एस.एम.एस',
             self::MAIL => 'ई-मेल',
+            self::PIN => 'पिन',
         };
     }
 
@@ -42,6 +44,7 @@ enum FeatureTypeEnum: string
         return match ($value) {
             self::SMS => route('admin.sms-setting'),
             self::MAIL => route('admin.mail-setting'),
+            self::PIN => '',
         };
     }
 }

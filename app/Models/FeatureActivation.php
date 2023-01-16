@@ -12,7 +12,6 @@ class FeatureActivation extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use EventObserveTrait;
 
     protected $dates = [
         'created_at',
@@ -25,6 +24,7 @@ class FeatureActivation extends Model
         'feature_name_en',
         'feature_status',
         'feature_type',
+        'feature_description',
     ];
 
     protected $casts = [

@@ -59,20 +59,20 @@
                                     <td>{{$employee->designation}}</td>
                                     <td>{{$employee->position}}</td>
                                     <td>
-                                        <a href="{{route('admin.digitalBoard.employee.updateEmployeeStatus',$employee)}}"
-                                           class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}}" title="स्थिति">
+                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.employee.updateEmployeeStatus',$employee)}}"
+                                           class="btn btn-xs btn-outline-{{$employee->status==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}" title="स्थिति">
                                             <i class="fa  {{$employee->status==1 ?' fa-check':'fa-window-close'}}"></i>
 
                                         </a>
-                                        <a href="{{route('admin.digitalBoard.employee.edit',$employee)}}"
-                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.employee.edit',$employee)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.digitalBoard.employee.destroy',$employee)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}" title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>

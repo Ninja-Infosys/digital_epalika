@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Models\FeatureActivation;
+use Illuminate\Support\Facades\DB;
 
 class FeatureActivationController extends Controller
 {
@@ -22,15 +23,20 @@ class FeatureActivationController extends Controller
     {
         $this->checkAuthorization('feature_access');
 
-        FeatureActivation::where('feature_type', $featureActivation->feature_type)
-            ->where('id', '!=', $featureActivation->id)
-            ->update([
-                'feature_status' => 0
+        DB::transaction(function () use ($featureActivation){
+            FeatureActivation::where('feature_type', $featureActivation->feature_type)
+                ->where('id', '!=', $featureActivation->id)
+                ->update([
+                    'feature_status' => 0
+                ]);
+
+            $featureActivation->update([
+                'feature_status' => !$featureActivation->feature_status
             ]);
 
-        $featureActivation->update([
-            'feature_status' => !$featureActivation->feature_status
-        ]);
+            \Cache::forget('settings');
+        });
+
         toast('Featured Updated Successfully', 'success');
         return back();
     }
