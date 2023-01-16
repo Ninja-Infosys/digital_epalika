@@ -78,7 +78,7 @@
 
 
                                         </a>
-                                        <a href="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
+                                        <a data-pin-url="{{route('admin.pin.check-pin')}}" data-url="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
@@ -107,4 +107,10 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+
+        </script>
+    @endpush
 @endsection

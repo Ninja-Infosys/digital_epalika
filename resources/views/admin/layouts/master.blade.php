@@ -88,29 +88,7 @@
 
 <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
-<script>
-    $('.show_confirm').click(function (event) {
-        const form = $(this).closest("form");
-        event.preventDefault();
 
-        swal.fire({
-
-            title: "के तपाइँ मेटाउन निश्चित हुनुहुन्छ ?",
-            text: "यदि तपाईंले यसलाई मेटाउनुभयो भने, यो सदाको लागि हट्नेछ।",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: 'red',
-            confirmButtonText: "Delete",
-            dangerMode: true,
-
-        })
-            .then((willDelete) => {
-                if (willDelete.isConfirmed) {
-                    form.submit();
-                }
-            });
-    });
-</script>
 
 <script src="{{asset('assets/backend/js/pages/form-advanced.init.js')}}"></script>
 @include('sweetalert::alert')
@@ -118,38 +96,9 @@
 @stack('scripts')
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 @livewireScripts
-{{--listener for livewire alert message--}}
 
-<script>
-    window.addEventListener('alert_message', event => {
-        swal.fire({
-            title: event.detail.title,
-            text: event.detail.text,
-            icon: event.detail.type,
-        });
-    });
-    window.addEventListener('toast_message', event => {
-        swal.fire({
-            title: event.detail.title,
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            width: 400,
-            timer: 3000,
-            timerProgressBar: true,
-            icon: event.detail.type,
-        });
-    });
-</script>
+<script src="{{asset('assets/backend/js/sweetAlertInit.min.js')}}">
 
-<script>
-    $(document).ready(function () {
-        //submit form if any of the input with class filter-form's focus is removed
-
-        $('.filter-form').focusout(function () {
-            $(this).closest('form').submit();
-        });
-    });
 </script>
 </body>
 </html>

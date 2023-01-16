@@ -101,7 +101,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
-                        @can('eMapTemplate_create')
+                        @can('recommendationTemplate_create')
                             <a href="{{route('admin.recommendation.setting.recommendationTemplate.create',$applicationTypeEnum)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
