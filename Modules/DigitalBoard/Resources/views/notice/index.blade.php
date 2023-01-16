@@ -78,8 +78,8 @@
 
 
                                         </a>
-                                        <a data-pin-url="{{route('admin.pin.check-pin')}}" data-url="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
-                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                        <a href="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
+                                           class="btn btn-xs btn-outline-primary confirm_pin" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.digitalBoard.notice.destroy',[$type,$notice])}}"
