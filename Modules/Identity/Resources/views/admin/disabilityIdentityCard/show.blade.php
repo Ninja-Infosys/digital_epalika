@@ -351,14 +351,19 @@
                                         </div>
                                         <div class="col-md-4 d-flex justify-content-between">
                                             <div class="text-center card-font-color">
-                                                <img src="{{$disabilityIdentityCard->finger_left_url}}" alt=""
-                                                     height="48"><br>
-                                                <p>Left</p>
+                                                @foreach($disabilityIdentityCard->fingerPrints->where('finger','left') as $fingerPrint)
+                                                    <img src="{{$fingerPrint->finger_image}}" alt=""
+                                                         height="48"><br>
+                                                    <p>Left</p>
+                                                @endforeach
+
                                             </div>
                                             <div class="text-center card-font-color">
-                                                <img src="{{$disabilityIdentityCard->finger_right_url}}" alt=""
-                                                     height="48">
-                                                <p>Right</p>
+                                                @foreach($disabilityIdentityCard->fingerPrints->where('finger','right') as $fingerPrint)
+                                                    <img src="{{$fingerPrint->finger_image}}" alt=""
+                                                         height="48"><br>
+                                                    <p>Right</p>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
