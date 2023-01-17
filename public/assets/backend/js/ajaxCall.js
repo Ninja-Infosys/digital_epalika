@@ -39,8 +39,47 @@ function createTable(headerData, bodyData) {
         tbl.appendChild(thead)
 
         const tbody = document.createElement("tbody");
-        // creating rows
-        bodyData.forEach(data => {
+
+        let convertedBodyData = bodyData.map(body => {
+            let body_data = []
+            let rowSpan = 0
+            const arrayData = body.filter(sub => Array.isArray(sub))
+            rowSpan = arrayData.reduce((max, arr) => {
+                return Math.max(max, arr.length);
+            }, 0);
+            body.forEach((data) => {
+                if (Array.isArray(data)) {
+                    let dataArr = []
+                    for (let i = 0; i < rowSpan; i++) {
+                        let firstElements = arrayData.map(innerArr => innerArr[i] ?? []);
+                        const colSpan = firstElements.reduce((max,arr)=>{
+                            return Math.max(max,arr.length)
+                        },0)
+                        let elmArray=[]
+                        firstElements.forEach(el=>{
+                            let elArray=[]
+                            for (let j=0;j<colSpan;j++){
+                                elArray.push(el[j]??'')
+                            }
+                            elmArray.push(elArray)
+                        })
+                        console.log(firstElements,colSpan)
+                        dataArr.push(elmArray)
+                    }
+                    let checkArrayExists = body_data.filter(b => Array.isArray(b) && b.length)
+
+                    if (!checkArrayExists.length) {
+                        body_data.push(dataArr)
+                    }
+                } else {
+                    body_data.push(data)
+                }
+            })
+            return body_data
+        })
+        console.log(convertedBodyData)
+
+        convertedBodyData.forEach(data => {
             const row = document.createElement("tr");
             let rowSpan = 0
             const arrayData = data.filter(sub => Array.isArray(sub) && sub.length)
@@ -51,17 +90,28 @@ function createTable(headerData, bodyData) {
             data.forEach(sub_data => {
                 if (Array.isArray(sub_data) && sub_data.length) {
                     sub_data[0].forEach(next_sub_data => {
-                        appendCellData(row, next_sub_data)
+                        if (Array.isArray(next_sub_data)) {
+                            next_sub_data.forEach(el => {
+                                appendCellData(row, el)
+                            })
+                        } else {
+                            appendCellData(row, next_sub_data)
+                        }
                     })
                     if (sub_data.slice(1).length) {
                         sub_data.slice(1).forEach(next_sub_data => {
                             const sub_row = document.createElement("tr");
-                            if (Array.isArray(next_sub_data) && next_sub_data.length) {
+                            if (Array.isArray(next_sub_data)) {
                                 next_sub_data.forEach(el => {
-                                    console.log(el)
-                                    appendCellData(sub_row, el)
+                                    if (Array.isArray(el)) {
+                                        el.forEach(sub_el => {
+                                            appendCellData(sub_row, sub_el)
+                                        })
+                                    } else {
+                                        appendCellData(sub_row, el)
+                                    }
                                 })
-                            }else{
+                            } else {
                                 appendCellData(sub_row)
                             }
                             tbody.appendChild(sub_row)
@@ -90,7 +140,7 @@ function createTable(headerData, bodyData) {
 
 }
 
-function appendCellData(target_element, data='', rowSpan = 0) {
+function appendCellData(target_element, data = '', rowSpan = 0) {
     const cell = document.createElement("td");
     if (rowSpan > 0) {
         cell.rowSpan = rowSpan
