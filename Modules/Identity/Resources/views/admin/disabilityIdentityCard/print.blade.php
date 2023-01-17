@@ -75,6 +75,11 @@
     margin-top: -10px;
     transform: rotate(-10deg);
 }
+        @media print {
+            .break-page {
+                page-break-after: always !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -142,6 +147,7 @@
 
         </div>
     </div>
+    <div class="break-page"></div>
     <div class="header" style="height: 204.48px;width: 324.48px; margin-top: 5px;">
         <div class="office_header">
             <div>
