@@ -182,12 +182,16 @@
                 </div>
                 <div style="display:flex;justify-content: space-between;margin-bottom: 0;">
                     <div>
-                        <img src="{{$disabilityIdentityCard->finger_left_url}}" alt="" height="20"><br>
-                        <p style="margin-top: 0;">Left</p>
+                        @foreach($disabilityIdentityCard->fingerPrints->where('finger','left') as $fingerPrint)
+                            <img src="{{$fingerPrint->finger_image}}" alt="" height="20"><br>
+                        <p style="margin-top: 0;">बाँया </p>
+                        @endforeach
                     </div>
                     <div>
-                        <img src="{{$disabilityIdentityCard->finger_right_url}}" alt="" height="20">
-                        <p style="margin-top: 0;">Right</p>
+                        @foreach($disabilityIdentityCard->fingerPrints->where('finger','right') as $fingerPrint)
+                            <img src="{{$fingerPrint->finger_image}}" alt="" height="20"><br>
+                            <p style="margin-top: 0;">दाँया </p>
+                        @endforeach
                     </div>
                 </div>
             </div>

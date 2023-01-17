@@ -88,9 +88,12 @@ class RecommendationTemplateController extends Controller
             $recommendationTemplate->update([
                 'status' => 1
             ]);
-            RecommendationTemplate::whereNot('id', $recommendationTemplate->id)->where('application_type', $applicationTypeEnum->value)->where('status', 1)->update([
-                'status' => 0
-            ]);
+            RecommendationTemplate::whereNot('id', $recommendationTemplate->id)
+                ->where('application_type', $applicationTypeEnum->value)
+                ->where('status', 1)
+                ->update([
+                    'status' => 0
+                ]);
         });
 
         toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
