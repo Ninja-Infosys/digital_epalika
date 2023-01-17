@@ -42,29 +42,34 @@ function createTable(headerData, bodyData) {
 
         let convertedBodyData = bodyData.map(body => {
             let body_data = []
-            let rowSpan = 0
             const arrayData = body.filter(sub => Array.isArray(sub))
-            rowSpan = arrayData.reduce((max, arr) => {
+            let rowSpan = arrayData.reduce((max, arr) => {
                 return Math.max(max, arr.length);
             }, 0);
+            console.log(arrayData)
             body.forEach((data) => {
-                if (Array.isArray(data)) {
+                if (Array.isArray(data) && data.length) {
                     let dataArr = []
                     for (let i = 0; i < rowSpan; i++) {
-                        let firstElements = arrayData.map(innerArr => innerArr[i] ?? []);
-                        const colSpan = firstElements.reduce((max,arr)=>{
-                            return Math.max(max,arr.length)
-                        },0)
-                        let elmArray=[]
-                        firstElements.forEach(el=>{
-                            let elArray=[]
-                            for (let j=0;j<colSpan;j++){
-                                elArray.push(el[j]??'')
+                        let firstElements = arrayData.map(function (innerArr) {
+                            if (innerArr.length > 0) {
+                                if (innerArr[i]) {
+                                    return innerArr[i]
+                                } else {
+                                    const tempArr = [];
+                                    let length=innerArr.pop().length
+                                    for (let j = 0; j < length; j++) {
+                                        tempArr.push("")
+                                    }
+                                    //console.log(tempArr,innerArr.pop())
+                                    return tempArr
+                                }
+                            } else {
+                                //console.log(innerArr)
+                                return "";
                             }
-                            elmArray.push(elArray)
-                        })
-                        console.log(firstElements,colSpan)
-                        dataArr.push(elmArray)
+                        });
+                        dataArr.push(firstElements)
                     }
                     let checkArrayExists = body_data.filter(b => Array.isArray(b) && b.length)
 
@@ -77,7 +82,7 @@ function createTable(headerData, bodyData) {
             })
             return body_data
         })
-        console.log(convertedBodyData)
+        //console.log(convertedBodyData)
 
         convertedBodyData.forEach(data => {
             const row = document.createElement("tr");
@@ -140,10 +145,13 @@ function createTable(headerData, bodyData) {
 
 }
 
-function appendCellData(target_element, data = '', rowSpan = 0) {
+function appendCellData(target_element, data = '', rowSpan = 0, colSpan = 0) {
     const cell = document.createElement("td");
     if (rowSpan > 0) {
         cell.rowSpan = rowSpan
+    }
+    if (colSpan > 0) {
+        cell.colSpan = colSpan
     }
     const cellText = document.createTextNode(data);
     cell.appendChild(cellText);

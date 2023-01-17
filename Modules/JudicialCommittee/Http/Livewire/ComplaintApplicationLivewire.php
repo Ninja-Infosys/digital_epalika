@@ -128,7 +128,7 @@ class ComplaintApplicationLivewire extends Component
         'form.applicant_phone' => ['required'],
         'form.applicant_address' => ['nullable'],
         'form.applicant_signature' => ['nullable', 'image'],
-        'form.relatedMembers' => ['required', 'array'],
+        'form.relatedMembers' => ['nullable', 'array'],
         'form.relatedMembers.*.name' => ['required'],
         'form.relatedMembers.*.phone' => ['required'],
         'form.relatedMembers.*.email' => ['nullable', 'email'],

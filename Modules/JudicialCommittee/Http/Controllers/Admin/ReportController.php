@@ -70,6 +70,9 @@ class ReportController extends Controller
         if (!empty($request->input('columns')['date_sheets'])) {
             $complaintApplications->load('dateSheets');
         }
+        if (!empty($request->input('columns')['defendant_issued_deadlines'])) {
+            $complaintApplications->load('defendantIssuedDeadlines');
+        }
 
         return response()->json([
             'data' => ComplaintApplicationResource::collection($complaintApplications),
