@@ -11,6 +11,81 @@
         <div class="text-center mt-5 text-decoration-underline m-4">
             <h5 class="fw-bold">तपशिल सेवा लिन सम्बन्धित ठाउँमा click गर्नुहोस्</h5>
         </div>
-        <livewire:helpdesk::help-desk-livewire/>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="card border-info p-2">
+                    <div class="text-center">
+                        <h5 class="fw-bold">शाखाहरु</h5>
+                    </div>
+                    @foreach($branches as $branch)
+                        <p class="branch-title">
+                            <button
+                                class="btn fs-5 w-100 d-flex justify-items-start {{count($branch->branches) !== 0 ? '':'load_data'}}"
+                                type="button"
+                                data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="false"
+                                data-bs-url="{{route('getServices',$branch)}}">
+                                {{$branch->branch_name}}
+                            </button>
+                        </p>
+                        @if(count($branch->branches)!==0)
+                            <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
+                                <div class="card-body sub-branch">
+                                    <ul class="list-group">
+                                        @foreach($branch->branches as $subBranch)
+                                            <li class="list-group-item d-flex justify-content-between fs-5 load_data"
+                                                data-bs-url="{{route('getServices',$subBranch)}}">
+                                                {{$subBranch->branch_name}}
+                                                <i class="fs-5 pt-1 fa-solid fa-angles-right"></i>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card branch-service border-info p-2">
+                    <div class="text-center">
+                        <h6 class="fw-bold fs-5">सेवाहरु</h6>
+                    </div>
+                    <ul class="list-group" id="data">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
+    @push('scripts')
+        <script>
+            // on click .load_data send the ajax request to get the services and display in li inside #data
+            $('.load_data').click(function () {
+                let url = $(this).data('bs-url');
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (data) {
+                        const printTo = $('#data');
+                        // print data which is in array in #data
+                        data.forEach(function (item) {
+                            // clear #data
+                            printTo.empty();
+                            // pass item.id from js object to the route() in blade
+
+                            let url = "{{route('service.view', ":id")}}".replace(':id', item.id);
+                            printTo.append(`<a href="` + url + `">
+                                <li class="list-group-item text-white rounded mb-2 fs-5 d-flex d-flex">
+                                    <i class="fa fa-check-double m-lg-1"></i>` + item.service_name + `
+                            </li>
+                        </a>`)
+                        });
+                    }
+                });
+            });
+        </script>
+
+    @endpush
 @endsection

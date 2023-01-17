@@ -69,6 +69,13 @@ class User extends Authenticatable
         }
     }
 
+    public function setPinAttribute($value): void
+    {
+        if (! empty($value)) {
+            $this->attributes['pin'] = bcrypt($value);
+        }
+    }
+
     public function getProfilePhotoUrlAttribute(): string
     {
         return $this->attributes['profile_photo_path']

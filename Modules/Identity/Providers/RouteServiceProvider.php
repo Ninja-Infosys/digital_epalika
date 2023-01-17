@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->group(module_path('Identity', '/Routes/web.php'));
 
-        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware'])
+        Route::middleware(['web', 'auth.lock', 'auth:sanctum', 'checkRoleMiddleware','checkPinMiddleware'])
             ->prefix('admin/identity')
             ->as('identity.admin.')
             ->group(module_path('Identity', '/Routes/admin.php'));

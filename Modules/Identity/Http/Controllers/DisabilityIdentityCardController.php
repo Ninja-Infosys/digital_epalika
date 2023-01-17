@@ -42,6 +42,7 @@ class DisabilityIdentityCardController extends Controller
     public function edit(DisabilityIdentityCard $disabilityIdentityCard)
     {
         $this->authorize('update',$disabilityIdentityCard);
+        $disabilityIdentityCard->load('fingerprints');
         return view('identity::admin.disabilityIdentityCard.edit', compact('disabilityIdentityCard'));
     }
 
@@ -62,7 +63,7 @@ class DisabilityIdentityCardController extends Controller
     {
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
-        $disabilityIdentityCard->load('employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
+        $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
         $view = (string)View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
 
         return response()->json([

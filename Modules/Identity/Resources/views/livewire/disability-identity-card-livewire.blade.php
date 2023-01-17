@@ -1074,7 +1074,7 @@
                     <fieldset>
                         <legend>अपाङ्गता भएको व्यक्तिको विवरण</legend>
                         <div class="row">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="form.photo" class="form-label">फोटो</label>
                                 <input
                                     name="form.photo"
@@ -1096,7 +1096,7 @@
                                     <canvas id="canvas" width="200" height="200"></canvas>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="form.finger_print_type" class="form-label">छाप</label>
                                 <select
                                     class="form-select @error('form.finger_print_type') is-invalid @enderror"
@@ -1113,7 +1113,7 @@
                                 @enderror
                             </div>
                             @if($form['finger_print_type'] === 'legs' || $form['finger_print_type'] === 'finger')
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="card">
                                         @if ( !empty($form['right_finger']['image']))
                                             <img src="{{ $form['right_finger']['image'] }}" id="finger-print-right"
@@ -1135,7 +1135,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="card">
                                         @if ( !empty($form['left_finger']['image']))
                                             <img src="{{ $form['left_finger']['image'] }}" id="finger-print-left"

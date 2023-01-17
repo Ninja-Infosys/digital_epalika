@@ -40,8 +40,7 @@
                             </a>
 
                         </div>
-                        <p class="px-2">यो सुविधा सक्षम गर्नको लागि तपाईंले स्ट्राइपलाई सही रूपमा कन्फिगर गर्न आवश्यक
-                            छ।</p>
+                        <p class="px-2">{{$data->feature_description}}</p>
                         <p class="px-2 text-center my-2"><a href="{{$data->feature_type->settingUrl()}}">Click Here</a>
                         </p>
 
