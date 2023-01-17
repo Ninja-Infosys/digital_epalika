@@ -139,62 +139,6 @@
                         </form>
                     </div>
                     <div id="report-table" class="table-responsive"></div>
-
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th rowspan="2">आर्थिक बर्ष</th>
-                            <th colspan="2">सम्बन्धित सदस्यहरू</th>
-                            <th colspan="2">तारिख पर्चा विवरण</th>
-                        </tr>
-                        <tr>
-                            <th>नाम</th>
-                            <th>फोन</th>
-                            <th>आवेदन वर्ष</th>
-                            <th>हाजिर हुने मिति</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td rowspan="3">2079</td>
-                            <td>Mina Bk</td>
-                            <td>98767987687</td>
-                            <td>2079</td>
-                            <td>2079-10-26</td>
-                        </tr>
-                        <tr>
-                            <td>Shalendra Hamal</td>
-                            <td>9879878787</td>
-                            <td>2079</td>
-                            <td>2079-12-15</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>2079</td>
-                            <td>2079-12-15</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3">2079</td>
-                            <td>Ramlal Shahu</td>
-                            <td>979876765</td>
-                            <td>2079</td>
-                            <td>2079-09-30</td>
-                        </tr>
-                        <tr>
-                            <td>Megaram Bhandari</td>
-                            <td>9709876765</td>
-                            <td>2079</td>
-                            <td>2079-09-30</td>
-                        </tr>
-                        <tr>
-                            <td>Rajan Siwakoti</td>
-                            <td>9790976545</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
