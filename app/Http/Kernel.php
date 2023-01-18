@@ -29,6 +29,7 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use JackWH\LaravelNewRelic\Middleware\NewRelicMiddleware;
 use Modules\EMap\Http\Middleware\CheckOrganizationPassword;
 
 class Kernel extends HttpKernel
@@ -48,6 +49,7 @@ class Kernel extends HttpKernel
         ValidatePostSize::class,
         TrimStrings::class,
         ConvertEmptyStringsToNull::class,
+        NewRelicMiddleware::class,
     ];
 
     /**
