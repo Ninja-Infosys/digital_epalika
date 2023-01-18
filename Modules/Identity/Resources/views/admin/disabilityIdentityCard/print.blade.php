@@ -8,6 +8,9 @@
 
     <style>
 
+        body{
+            visibility: hidden;
+        }
         .col-md-3 {
             float: left;
             width: 25%;
@@ -27,6 +30,7 @@
         }
 
         .header {
+            visibility: visible;
             padding: 15px;
             background-color: {{$disabilityIdentityCard->governmentalDisabilityType->color??''}};
             border: 1px solid black;
@@ -79,6 +83,11 @@
             .break-page {
                 page-break-after: always !important;
             }
+
+        }
+        @page {
+            size: landscape;
+            margin: 0;
         }
     </style>
 </head>

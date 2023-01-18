@@ -21,6 +21,9 @@ class UpdateGovernmentalDisablityRequest extends FormRequest
             'title_en' => ['required', 'string', 'max:255'],
             'color' => ['required', 'string', 'max:255'],
             'position'=>['nullable','integer'],
+            'header_color'=>['nullable'],
+            'font_color'=>['nullable'],
+            'raven_background'=>['nullable'],
             'category' => ['required', new Enum(CategoryTypeEnum::class)],
         ];
     }

@@ -53,7 +53,7 @@
                                     <td>
                                         @can('formBuilder_access')
                                         <a href="{{route('admin.recommendation.setting.formBuilder.updateStatus',[$applicationTypeEnum,$formBuilder])}}">
-                                            <i class="fa fa-2x  {{$formBuilder->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                            <i class="fa fa-2x  {{$formBuilder->status ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                         </a>
                                         @endcan
                                     </td>
@@ -131,7 +131,7 @@
                                     <td>
                                         @can('recommendationTemplate_access')
                                             <a href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$applicationTypeEnum,$recommendationTemplate])}}">
-                                                <i class="fa fa-2x  {{$recommendationTemplate->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                                <i class="fa fa-2x  {{$recommendationTemplate->status  ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
