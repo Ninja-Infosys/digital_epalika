@@ -19,7 +19,7 @@ class RecommendationTemplateController extends Controller
 
         $recommendationTemplates = RecommendationTemplate::latest()->get();
 
-        return view('recommendation::admin.setting.recommendationTemplate.index', compact('recommendationTemplates'));
+        return view('recommendation::admin.setting.recommendationTemplate.index', compact('recommendationTemplates','applicationTypeEnum'));
     }
 
     public function create(ApplicationTypeEnum $applicationTypeEnum)
