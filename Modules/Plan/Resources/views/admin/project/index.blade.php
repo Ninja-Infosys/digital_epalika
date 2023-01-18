@@ -44,7 +44,6 @@
                                 <th>आयोजनाको नाम</th>
                                 <th> सुरु हुने मिति</th>
                                 <th>सम्पन्‍न हुने मिति</th>
-                                <th>वडा नं.</th>
                                 <th>विनियोजन रकम</th>
                                 <th>आयोजनाको अवस्था</th>
                                 <th>#</th>
@@ -58,7 +57,6 @@
                                     <td>{{$project->project_name}}</td>
                                     <td>{{$project->project_start_date}}</td>
                                     <td>{{$project->project_completion_date}}</td>
-                                    <td>{{$project->ward_no}}</td>
                                     <td>{{$project->allocated_amount}}</td>
                                     <td>{{$project->project_status->label()}}</td>
                                     <td>

@@ -16,7 +16,6 @@ class StoreProjectDocumentRequest extends FormRequest
     {
         return [
             'document_name' => ['required', Rule::unique('project_documents', 'document_name')->withoutTrashed()],
-            'document_type' => ['nullable'],
             'data' => ['required']
         ];
     }

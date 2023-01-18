@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->string('project_start_date')->nullable()->comment('कार्यक्रम सुरु मिति');
             $table->string('project_completion_date')->nullable()->comment('कार्यक्रम पूरा हुने समय');
             $table->foreignId('plan_level_id')->nullable()->comment('योजना स्तर')->constrained()->nullOnDelete();
-            $table->integer('ward_no')->nullable()->comment('वार्ड नं');
+            $table->string('ward_no')->nullable()->comment('वार्ड नं');
             $table->foreignId('budget_source_id')->nullable()->comment('बजेट स्रोत')->constrained()->nullOnDelete();
             $table->foreignId('budget_head_id')->nullable()->comment('बजेट शीर्षक')->constrained()->nullOnDelete();
             $table->double('allocated_amount', 12, 2)->default(0)->comment('विनियोजित रकम');
