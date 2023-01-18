@@ -140,7 +140,7 @@
                     <div class="border-bottom py-2 px-2 d-flex justify-content-between">
                         <h4 class="font-18">जेष्ठ नागरिक </h4>
                         <a href="javascript:void(0)"
-                           route_action=""
+                           route_action="{{route('identity.admin.seniorCitizenDetail.print',$seniorCitizenDetail)}}"
                            class="btn btn-xs btn-outline-warning printDetail">
                             <i class="fa fa-print">Print</i>
 
@@ -326,6 +326,26 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            $(".printDetail").on("click", function (e) {
+                $.ajax({
+                    method: "GET",
+                    url: $(this).attr("route_action"),
+                    success: function (resp) {
+                        var print_area = window.open();
+                        print_area.document.write(resp.view);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    }, error: function () {
+                        alert("Something Went Wrong");
+                    }
+                });
+            });
+        </script>
+    @endpush
     @push('style')
         <style>
             .card-font-color > p {

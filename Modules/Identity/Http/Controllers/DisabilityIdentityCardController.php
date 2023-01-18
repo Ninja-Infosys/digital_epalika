@@ -65,7 +65,6 @@ class DisabilityIdentityCardController extends Controller
         $todayDate = $this->get_today_nepali_date();
         $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
         $view = (string)View::make('identity::admin.disabilityIdentityCard.print', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
-
         return response()->json([
             'view' => $view,
         ]);
