@@ -53,5 +53,6 @@
     });
 </script>
 @include('sweetalert::alert')
+<script src="{{asset('js/newRelic.min.js')}}"></script>
 </body>
 </html>

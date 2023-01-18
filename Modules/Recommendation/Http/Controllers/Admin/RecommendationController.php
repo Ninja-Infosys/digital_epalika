@@ -199,7 +199,6 @@ class RecommendationController extends Controller
         $template = RecommendationTemplate::active()
             ->where('application_type', $recommendation->application_type->value)
             ->first();
-
         $data = collect(json_decode($recommendation->data));
         $replace = $this->getData($data);
         return Str::replace(array_keys($replace), $replace, $template->data);
@@ -209,15 +208,15 @@ class RecommendationController extends Controller
     {
 
         $data = $request->validate([
-            'data'=>'required'
+            'data' => 'required'
         ]);
         RecommendationFormData::updateOrCreate(
             [
                 'recommendation_id' => $recommendation->id,
             ],
             [
-               'data' => $data['data'],
-                'update_times' =>  empty($recommendation->recommendationDataForm) ? 0 :$recommendation->recommendationDataForm->update_times+1
+                'data' => $data['data'],
+                'update_times' => empty($recommendation->recommendationDataForm) ? 0 : $recommendation->recommendationDataForm->update_times + 1
             ]
         );
         toast('डाटा सफलतापूर्वक थपियो', 'success');

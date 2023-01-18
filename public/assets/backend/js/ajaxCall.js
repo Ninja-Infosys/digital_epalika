@@ -56,7 +56,10 @@ function createTable(headerData, bodyData) {
                                     return innerArr[i]
                                 } else {
                                     const tempArr = [];
-                                    let length=innerArr.pop().length
+                                    // get only first element in innerArr
+
+
+                                    let length=innerArr.shift().length
                                     for (let j = 0; j < length; j++) {
                                         tempArr.push("")
                                     }
@@ -203,6 +206,7 @@ $(document).ready(function () {
                 children: data[0][key] instanceof Array && data[0][key].length ? Object.keys(data[0][key][0]) : []
             })
         })
+
         data.forEach((value, index) => {
             let tempData = []
             headerData.forEach((head => {
@@ -223,7 +227,7 @@ $(document).ready(function () {
             bodyData.push(tempData)
         })
         //console.log(headerData)
-        console.log(bodyData)
+        // console.log(bodyData)
         createTable(headerData, bodyData)
     }
 

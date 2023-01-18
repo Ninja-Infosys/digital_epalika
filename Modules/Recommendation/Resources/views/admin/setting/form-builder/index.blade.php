@@ -53,7 +53,7 @@
                                     <td>
                                         @can('formBuilder_access')
                                         <a href="{{route('admin.recommendation.setting.formBuilder.updateStatus',[$applicationTypeEnum,$formBuilder])}}">
-                                            <i class="fa fa-2x  {{$formBuilder->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                            <i class="fa fa-2x  {{$formBuilder->status ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                         </a>
                                         @endcan
                                     </td>
@@ -80,7 +80,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                @if($formBuilder->status===0)
+                                                @if(!$formBuilder->status)
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
@@ -131,7 +131,7 @@
                                     <td>
                                         @can('recommendationTemplate_access')
                                             <a href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$applicationTypeEnum,$recommendationTemplate])}}">
-                                                <i class="fa fa-2x  {{$recommendationTemplate->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                                <i class="fa fa-2x  {{$recommendationTemplate->status  ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>
@@ -151,7 +151,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                @if($recommendationTemplate->status===0)
+                                                @if(!$recommendationTemplate->status)
                                                     @can('recommendationTemplate_delete')
                                                     <button class="btn btn-xs btn-outline-danger show_confirm">
                                                         <i class="fa fa-trash"></i>

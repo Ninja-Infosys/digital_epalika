@@ -27,15 +27,14 @@
                         <div>
                             <button class="btn btn-sm btn-info"
                                     onclick="printJS({
-                    printable: 'printData',
-                    targetStyles: ['*'],
-                    ignoreElements:['ignore-header'],
-                    type: 'html'
-                    })">
+                                    printable: 'printData',
+                                    targetStyles: ['*'],
+                                    ignoreElements:['ignore-header'],
+                                    type: 'html'
+                                    })">
                                 <i class="fa fa-print"></i> Print
                             </button>
                         </div>
-
                     </div>
                 </div>
                 <div class="profile-table"  id="printData">
@@ -101,8 +100,6 @@
                                 रक्त समुह : {{$disabilityIdentityCard->blood_group?->label()?? ""}}
                             </td>
                             <td>जातियता : {{$disabilityIdentityCard->ethnicity->title ?? ""}}</td>
-
-
                         </tr>
                         <tr>
                             <td>
@@ -115,8 +112,6 @@
                                 -{{$disabilityIdentityCard->temporary_ward}}
                                 , {{$disabilityIdentityCard->temporary_tole}}
                             </td>
-
-
                         </tr>
                         <tr>
                             <td>नागरिकता नं. : {{$disabilityIdentityCard->citizenship_no}}</td>
@@ -124,7 +119,6 @@
                             <td>नागरिकता पाएको मिति : {{$disabilityIdentityCard->citizenship_no_bs}}</td>
                         </tr>
                         <tr>
-
                             <td>पेशा : {{$disabilityIdentityCard->occupation->title?? ""}}</td>
                             <td>बावुको नाम: {{$disabilityIdentityCard->father_name}}</td>
                             <td>आमाको नाम : {{$disabilityIdentityCard->mother_name}}</td>
@@ -142,7 +136,6 @@
                             <td>नाता : {{$disabilityIdentityCard->relationship->title?? ""}}</td>
                             <td>सम्पर्क नं. :{{$disabilityIdentityCard->phone}}</td>
                         </tr>
-
                         <tr>
                             <th colspan="3">अपाङ्गताको किसिम :</th>
                         </tr>
@@ -210,9 +203,7 @@
                         </tr>
                         </tbody>
                     </table>
-
                 </div>
-
                 <div class="identity-card">
                     <div class="border-bottom py-2 px-2 d-flex justify-content-between">
                         <h4 class="font-18">अपाङ्गता परिचयपत्र</h4>

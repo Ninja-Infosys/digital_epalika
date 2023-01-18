@@ -174,6 +174,7 @@
             </div>
         </div>
     </div>
+    @if(\Illuminate\Support\Facades\App::environment('production'))
     <div class="modal fade" id="info-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="info-modal" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-centered">
@@ -190,13 +191,18 @@
             </div>
         </div>
     </div>
+    @endif
     @push('scripts')
         <script src="{{asset('assets/backend/libs/hopscotch/js/hopscotch.min.js')}}"></script>
-        <script src="{{asset('assets/backend/js/pages/dashboard.init.js')}}"></script>
-        <script>
-            $(document).ready(function (){
-                $('#info-modal').modal('show');
-            })
-        </script>
+        @if(app()->environment('production'))
+            <script src="{{asset('assets/backend/js/pages/dashboard.init.js')}}"></script>
+            <script>
+                $(document).ready(function (){
+                    $('#info-modal').modal('show');
+                })
+            </script>
+
+        @endif
+
     @endpush
 @endsection

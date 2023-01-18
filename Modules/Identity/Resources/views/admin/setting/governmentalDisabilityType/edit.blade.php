@@ -92,7 +92,7 @@
                                         <option value="">Select Category</option>
                                         @foreach ($cardColors as $cardColor)
                                             <option value="{{ $cardColor->color }}" {{old('color',$cardColor->color)==$governmentalDisabilityType->color ? 'selected':''}}>
-                                                {{ $cardColor->title }}
+                                                {{ $cardColor->title }} ({{$governmentalDisabilityType->color}})
                                             </option>
                                         @endforeach
                                     </select>
@@ -100,6 +100,49 @@
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="header_color" class="form-label">हेडर रंग*</label>
+                                <input
+                                    type="color"
+                                    name="header_color"
+                                    value="{{old('header_color',$governmentalDisabilityType->header_color)}}"
+                                    class="form-control @error('header_color') is-invalid @enderror"
+                                    id="header_color"
+                                    placeholder="हेडर रंग"
+                                />
+                                @error('header_color')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="font_color" class="form-label">फन्ट रंग *</label>
+                                <input
+                                    type="color"
+                                    name="font_color"
+                                    value="{{old('font_color',$governmentalDisabilityType->font_color)}}"
+                                    class="form-control @error('font_color') is-invalid @enderror"
+                                    id="font_color"
+                                    placeholder="फन्ट रंग"
+                                />
+                                @error('font_color')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 mb-2">
+                                <label for="raven_background" class="form-label">Background रंग *</label>
+                                <input
+                                    type="color"
+                                    name="raven_background"
+                                    value="{{old('raven_background',$governmentalDisabilityType->raven_background)}}"
+                                    class="form-control @error('raven_background') is-invalid @enderror"
+                                    id="raven_background"
+                                    placeholder="Background रंग"
+                                />
+                                @error('raven_background')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6 mb-2">
                                 <label for="position" class="form-label">स्थिति *</label>
@@ -111,7 +154,7 @@
                                     id="position"
                                     placeholder="स्थिति"
                                 />
-                                @error('title_en')
+                                @error('position')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>

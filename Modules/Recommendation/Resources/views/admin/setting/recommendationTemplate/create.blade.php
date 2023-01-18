@@ -11,7 +11,7 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.index',$applicationTypeEnum)}}">
+                            <a href="{{route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum)}}">
                                 टेम्प्लेट
                             </a>
                         </li>
@@ -29,7 +29,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">{{$applicationTypeEnum->label()}} टेम्प्लेट थप्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.setting.recommendationTemplate.index',$applicationTypeEnum)}}"
+                        <a href="{{route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum)}}"
                            class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> {{$applicationTypeEnum->label()}} टेम्प्लेट सूची
                         </a>
