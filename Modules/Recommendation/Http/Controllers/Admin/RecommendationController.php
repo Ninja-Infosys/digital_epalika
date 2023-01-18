@@ -199,11 +199,6 @@ class RecommendationController extends Controller
         $template = RecommendationTemplate::active()
             ->where('application_type', $recommendation->application_type->value)
             ->first();
-        if (empty($template)) {
-            toast('Please Active template first', 'error');
-            return back();
-        }
-
         $data = collect(json_decode($recommendation->data));
         $replace = $this->getData($data);
         return Str::replace(array_keys($replace), $replace, $template->data);
