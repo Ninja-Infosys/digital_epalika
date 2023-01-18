@@ -64,7 +64,6 @@ class DashboardController extends Controller
             $planAreas = $this->setPlanData();
         }
 
-        Log::info('New user created');
         return view('admin.dashboard', compact(['user_count',
             'businessDetail_count',
             'planAreas',

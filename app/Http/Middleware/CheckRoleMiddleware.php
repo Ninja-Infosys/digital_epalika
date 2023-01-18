@@ -33,7 +33,6 @@ class CheckRoleMiddleware
 
     public function getCacheKey(): string
     {
-        info(md5('permissions-' . auth()->id()));
         return md5('permissions-' . auth()->id());
     }
 }
