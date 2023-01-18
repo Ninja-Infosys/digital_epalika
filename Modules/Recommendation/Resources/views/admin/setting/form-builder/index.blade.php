@@ -80,7 +80,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                @if($formBuilder->status)
+                                                @if(!$formBuilder->status)
                                                 <button class="btn btn-xs btn-outline-danger show_confirm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
@@ -151,7 +151,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                @if($recommendationTemplate->status)
+                                                @if(!$recommendationTemplate->status)
                                                     @can('recommendationTemplate_delete')
                                                     <button class="btn btn-xs btn-outline-danger show_confirm">
                                                         <i class="fa fa-trash"></i>
