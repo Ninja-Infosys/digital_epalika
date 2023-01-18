@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('plan_templates', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->comment('प्रकार');
+            $table->string('type')->nullable()->comment('प्रकार');
             $table->string('title')->comment('शीर्षक');
             $table->longText('data')->comment('डाटा');
             $table->timestamps();

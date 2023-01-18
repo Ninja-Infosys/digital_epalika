@@ -5,6 +5,7 @@ namespace Modules\Plan\Entities;
 use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\GetAllColumns;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -60,6 +61,14 @@ class Project extends Model
         'project_status' => ProjectStatusEnum::class,
         'operated_through' => ProjectOperatedThroughEnum::class
     ];
+
+    protected function wardNo(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => explode(",", $value),
+            set: fn($value) => implode(",", $value),
+        );
+    }
 
     public function fiscalYear(): BelongsTo
     {
