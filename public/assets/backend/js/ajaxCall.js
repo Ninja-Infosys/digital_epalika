@@ -46,7 +46,6 @@ function createTable(headerData, bodyData) {
             let rowSpan = arrayData.reduce((max, arr) => {
                 return Math.max(max, arr.length);
             }, 0);
-            console.log(arrayData)
             body.forEach((data) => {
                 if (Array.isArray(data) && data.length) {
                     let dataArr = []
