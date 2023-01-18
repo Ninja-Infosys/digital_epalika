@@ -23,11 +23,15 @@ class GovernmentalDisabilityType extends Model
         'title_en',
         'color',
         'category',
-        'position'
+        'position',
+        'header_color',
+        'font_color',
+        'raven_background',
     ];
 
     protected $casts = [
         'category' => CategoryTypeEnum::class
     ];
+
 
 }
