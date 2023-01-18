@@ -27,11 +27,11 @@
                         <div>
                             <button class="btn btn-sm btn-info"
                                     onclick="printJS({
-                    printable: 'printData',
-                    targetStyles: ['*'],
-                    ignoreElements:['ignore-header'],
-                    type: 'html'
-                    })">
+                                    printable: 'printData',
+                                    targetStyles: ['*'],
+                                    ignoreElements:['ignore-header'],
+                                    type: 'html'
+                                    })">
                                 <i class="fa fa-print"></i> Print
                             </button>
                         </div>
@@ -160,14 +160,12 @@
                                         @endforeach
                                     </div>
                                     <div>
-
                                         <img src=""
                                              alt="" height="30" id="signature_image"
                                              style="z-index: 5;margin-right: -20px;margin-top:30px;transform: rotate(-10deg);"/>
                                         <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
                                     </div>
                                 </div>
-
                                 <div class="identity text-center card-font-color">
                                     <p class="font-12 mb-2">जेष्ठ नागरिक परिचय पत्र</p>
                                 </div>
@@ -226,22 +224,17 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="col-md-6 pt-5  ">
                             <div class="card px-3 py-2 mx-3 card-rounded"
                                  style="background-color: yellow;">
                                 <div class="office-header d-flex justify-content-between">
                                     <div>
-
                                         <img src="{{$officeSetting->logo_url}}" alt="" height="40">
-
                                     </div>
                                     <div>
                                         @foreach($officeHeaders as $header)
                                             <p style="font-size: {{$header->card_font}}rem;color:{{$header->font_color}};text-align: center;">{{$header->title_en}}</p>
                                         @endforeach
-
                                     </div>
                                     <div>
                                         <img src=""
@@ -273,10 +266,7 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="card-font-color">
-
-
                                     <div class="row">
                                         <div class="col-md-8 card-font-color">
                                             <p>Disease : <span>{{$seniorCitizenDetail->is_disease==1 ? 'Yes':'No'}}</span></p>
