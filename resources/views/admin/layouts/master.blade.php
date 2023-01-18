@@ -97,11 +97,10 @@
 <script src="{{asset('assets/backend/js/app.min.js')}}"></script>
 @livewireScripts
 <script>
-    var validationUrl = '{{ route("admin.pin.check-pin") }}';
+    const validationUrl = '{{ route("admin.pin.check-pin") }}';
 </script>
 
-<script src="{{asset('assets/backend/js/sweetAlertInit.min.js')}}">
-
-</script>
+<script src="{{asset('assets/backend/js/sweetAlertInit.min.js')}}"></script>
+<script src="{{asset('js/newRelic.min.js')}}"></script>
 </body>
 </html>

@@ -49,6 +49,7 @@
         window.close()
     };
 </script>
+    <script src="{{asset('js/newRelic.min.js')}}"></script>
 </body>
 
 </html>
