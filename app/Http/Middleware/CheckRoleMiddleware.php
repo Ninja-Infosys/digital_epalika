@@ -14,12 +14,10 @@ class CheckRoleMiddleware
         if (!empty($request->user()->role)) {
             if (Cache::has($this->getCacheKey())) {
                 $permissions = Cache::get($this->getCacheKey());
-                 info('cache'.$permissions);
             } else {
                 $permissions = Cache::remember($this->getCacheKey(), 12 * 60 * 60, function () use ($request) {
                     return $request->user()->role->permissions->pluck('title');
                 });
-                 info('db'.$permissions);
             }
 
 
