@@ -20,22 +20,28 @@
                     @foreach($branches as $branch)
                         <p class="branch-title">
                             <button
-                                class="btn fs-5 w-100 d-flex justify-items-start {{count($branch->branches) !== 0 ? '':'load_data'}}"
+                                class="btn fs-5 w-100 d-flex justify-content-between {{count($branch->branches) !== 0 ? '':'load_data'}}"
                                 type="button"
                                 data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="false"
                                 data-bs-url="{{route('getServices',$branch)}}">
                                 {{$branch->branch_name}}
+                                @if(count($branch->branches)!==0)
+                                    <i class="fs-5 pt-1 fa-solid fa-angles-down"></i>
+                                @endif
                             </button>
                         </p>
                         @if(count($branch->branches)!==0)
                             <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
-                                <div class="card-body sub-branch">
+                                <div class="sub-branch">
                                     <ul class="list-group">
                                         @foreach($branch->branches as $subBranch)
-                                            <li class="list-group-item d-flex justify-content-between fs-5 load_data"
+                                            <li class="list-group-item mb-2 d-flex justify-content-between load_data"
                                                 data-bs-url="{{route('getServices',$subBranch)}}">
-                                                {{$subBranch->branch_name}}
-                                                <i class="fs-5 pt-1 fa-solid fa-angles-right"></i>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <i class="fa fa-angles-right"></i> {{$subBranch->branch_name}}
+                                                </div>
+                                                <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
+                                                </button>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -77,8 +83,10 @@
 
                             let url = "{{route('service.view', ":id")}}".replace(':id', item.id);
                             printTo.append(`<a href="` + url + `">
-                                <li class="list-group-item text-white rounded mb-2 fs-5 d-flex d-flex">
-                                    <i class="fa fa-check-double m-lg-1"></i>` + item.service_name + `
+                                <li class="p-2 bg-success text-white rounded mb-2 ps-4 d-flex justify-content-between">
+<div class="d-flex align-items-center gap-2">
+                                                    <i class="fa fa-angles-right"></i> ` + item.service_name + `
+                            </div> <button class="btn btn-info btn-sm text-white">विवरण हेर्नुहोस्</button>
                             </li>
                         </a>`)
                         });
