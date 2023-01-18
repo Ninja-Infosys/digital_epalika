@@ -260,8 +260,6 @@ body {
 
 .button .btn:hover {
     background-color: var(--mainColor);
-    transition: .7s;
-    transform: translateY(-5px);
 }
 
 /*------home--------csss---------*/
@@ -1076,13 +1074,6 @@ p {
     width: 100%;
 }
 
-.card a:hover {
-    background-color: var(--redColor);
-    color: var(--whiteColor);
-    transition: .9s;
-    transform: translateY(-10px);
-}
-
 /*-----------------------helpdesk-----------------------*/
 .branch-title .btn {
     color: var(--whiteColor);
@@ -1090,7 +1081,6 @@ p {
 }
 
 .branch-title .btn:hover {
-    transform: translateX(5px);
     color: var(--whiteColor);
 }
 
@@ -1101,7 +1091,7 @@ p {
 }
 
 .sub-branch ul li:hover {
-    transform: translateX(5px);
+    opacity: 0.8;
 }
 
 .branch-service ul a li {

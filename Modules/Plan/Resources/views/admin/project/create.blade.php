@@ -157,13 +157,13 @@
                             <div class="col-md-4 mb-2">
                                 <label for="ward_no" class="form-label"> वडा नं.</label>
                                 <select
-                                    name="ward_no"
+                                    name="ward_no[]"
                                     class="form-control @error('ward_no') is-invalid @enderror"
+                                    multiple
                                     id="ward_no" data-toggle="select2" data-width="100%">
-                                    <option value="">--- छान्नुहोस् ---</option>
+                                    <option disabled>--- छान्नुहोस् ---</option>
                                     @foreach($officeSetting->localBody->ward_no as $ward)
                                         <option
-                                            {{old('ward_no')==$ward ? 'selected' : ''}}
                                             value="{{$ward}}">
                                             {{$ward}}
                                         </option>
