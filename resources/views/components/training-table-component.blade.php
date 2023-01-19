@@ -31,30 +31,30 @@
                 </td>
                 <td>
                     @can('training_access')
-                    <a href="{{route('admin.roaster.training.show', $training)}}" class="btn btn-xs btn-outline-info"
+                    <a data-bs-type="edit" href="{{route('admin.roaster.training.show', $training)}}" class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}"
                        data-toggle="tooltip" data-placement="top"
                        title="{{$training->training_trainees_count}} Trainees Detail">
                         <i class="fa fa-users"></i>
                     </a>
                     @endcan
                         @can('training_edit')
-                    <a href="{{route('admin.roaster.training.edit', $training)}}"
-                       type="button" class="btn btn-xs btn-outline-primary" data-toggle="tooltip" data-placement="top"
+                    <a data-bs-type="edit" href="{{route('admin.roaster.training.edit', $training)}}"
+                       type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" data-toggle="tooltip" data-placement="top"
                        title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>
                         @endcan
                         @can('training_access')
-                    <a href="{{route('admin.roaster.training.report', $training)}}"
-                       type="button" class="btn btn-xs btn-outline-success" data-toggle="tooltip" data-placement="top"
+                    <a data-bs-type="edit" href="{{route('admin.roaster.training.report', $training)}}"
+                       type="button" class="btn btn-xs btn-outline-success {{get_setting('Pin')?'confirm_pin':''}}" data-toggle="tooltip" data-placement="top"
                        title="View Report">
                         <i class="fa fa-file"></i>
                     </a>
 
                         @endcan
                         @can('training_access')
-                    <a href="{{route('admin.roaster.training.excelReport', $training)}}"
-                       type="button" class="btn btn-xs btn-outline-success" data-toggle="tooltip" data-placement="top"
+                    <a data-bs-type="edit" href="{{route('admin.roaster.training.excelReport', $training)}}"
+                       type="button" class="btn btn-xs btn-outline-success {{get_setting('Pin')?'confirm_pin':''}}" data-toggle="tooltip" data-placement="top"
                        title="View Report">
                         <i class="fa fa-file-excel"></i>
                     </a>
@@ -72,7 +72,7 @@
                           method="post">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="show_confirm btn btn-xs btn-outline-danger"
+                        <button data-bs-type="delete" type="submit" class="show_confirm btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                 data-toggle="tooltip" data-placement="top"
                                 title="Delete">
                             <i class="fa fa-trash"></i>
