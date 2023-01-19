@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\Settings\OfficeSetting;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Modules\BusinessRegistration\Entities\BusinessDetail;
 use Modules\EMap\Entities\MapApply;
 use Modules\GrievanceHandling\Entities\GrievanceDetail;
@@ -62,7 +63,6 @@ class DashboardController extends Controller
         if (Schema::hasTable('plan_areas')) {
             $planAreas = $this->setPlanData();
         }
-
 
         return view('admin.dashboard', compact(['user_count',
             'businessDetail_count',

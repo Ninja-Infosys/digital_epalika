@@ -50,30 +50,30 @@
                                     <td>{{$organization->organizationDetail->org_name_ne ?? ''}}</td>
                                     <td>
                                         @can('organization_edit')
-                                            <a href="{{route('emap.admin.organization.update-login-status',$organization)}}"
-                                               class="btn btn-xs btn-outline-{{$organization->is_active==1 ?'primary':'danger'}}"
+                                            <a data-bs-type="edit" href="{{route('emap.admin.organization.update-login-status',$organization)}}"
+                                               class="btn btn-xs btn-outline-{{$organization->is_active==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin':''}}"
                                                title="लग इन {{$organization->is_active==1 ?'गर्न मिल्छ':'गर्न मिल्दैन'}}">
                                                 <i class="fa  {{$organization->is_active==1 ?' fa-check':'fa-window-close'}}"></i>
                                             </a>
                                         @endcan
                                         @can('organization_access')
-                                            <a href="{{route('emap.admin.organization.show',$organization)}}"
-                                               title="हेर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{route('emap.admin.organization.show',$organization)}}"
+                                               title="हेर्नुहोस्" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('organization_edit')
-                                            <a href="{{route('emap.admin.organization.edit',$organization)}}"
-                                               title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{route('emap.admin.organization.edit',$organization)}}"
+                                               title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('organization_delete')
-                                            <form action="{{route('emap.admin.organization.destroy',$organization)}}"
+                                            <form data-bs-type="delete" action="{{route('emap.admin.organization.destroy',$organization)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                <button class="btn btn-xs btn-outline-danger show_confirm {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>

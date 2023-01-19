@@ -6,6 +6,7 @@ use App\Models\OfficeHeader;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
 use Modules\Identity\Entities\SeniorCitizenDetail;
 
@@ -56,5 +57,18 @@ class SeniorCitizenDetailController extends Controller
         $this->authorize('delete',$seniorCitizenDetail);
         $seniorCitizenDetail->delete();
         return back();
+    }
+
+    public function print(SeniorCitizenDetail $seniorCitizenDetail)
+    {
+
+        $officeHeaders = OfficeHeader::get();
+        $todayDate = $this->get_today_nepali_date();
+        $seniorCitizenDetail->load('fingerPrints','employeeSignature','province','district','localBody');
+        $view = (string)View::make('identity::admin.seniorCitizen.print', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
+
+        return response()->json([
+            'view' => $view,
+        ]);
     }
 }

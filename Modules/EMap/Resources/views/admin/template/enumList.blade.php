@@ -47,8 +47,8 @@
                                     <td>{{$noticeTypeEnum->label() ??''}}</td>
                                     <td>
                                         @can('eMapTemplate_edit')
-                                            <a href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
-                                               class="btn btn-xs btn-outline-warning">
+                                            <a data-bs-type="edit" href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Put')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan

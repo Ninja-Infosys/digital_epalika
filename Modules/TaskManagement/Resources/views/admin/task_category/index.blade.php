@@ -52,16 +52,16 @@
                                     {{\Illuminate\Support\Str::words($taskCategory->title,10)}}
                                 </td>
                                 <td>
-                                        <a href="{{route('admin.taskManagement.taskCategory.edit',$taskCategory)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.taskManagement.taskCategory.edit',$taskCategory)}}"
                                            title="सम्पादन गर्नुहोस्"
-                                           class="btn btn-xs btn-outline-primary">
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.taskManagement.taskCategory.destroy',$taskCategory)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>

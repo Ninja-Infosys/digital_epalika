@@ -57,16 +57,16 @@
                                     <td>{{$listRegistration->date}}</td>
                                     <td>
                                         @can('listRegistration_access')
-                                            <a href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.listRegistrations.listRegistration.show', $listRegistration)}}"
                                                title="थप हेर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin'?'confirm_pin':'')}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('listRegistration_edit')
-                                            <a href="{{route('admin.listRegistrations.listRegistration.edit',$listRegistration)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.listRegistrations.listRegistration.edit',$listRegistration)}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin': ''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -75,7 +75,7 @@
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin'?'confirm_pin':'show_confirm')}}" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

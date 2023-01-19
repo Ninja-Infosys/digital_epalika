@@ -43,10 +43,10 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक </th>
-                                <th>मिति </th>
-                                <th>होम पेजमा  देखाउनु होस् </th>
-                                <th>स्थिति </th>
+                                <th>शिर्षक</th>
+                                <th>मिति</th>
+                                <th>होम पेजमा देखाउनु होस्</th>
+                                <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -57,14 +57,16 @@
                                     <td>{{$notice->title}}</td>
                                     <td>{{$notice->date}}</td>
                                     <td>
-                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.notice.updateShowOnIndex',[$type,$notice])}}"
+                                        <a data-bs-type="edit"
+                                           href="{{route('admin.digitalBoard.notice.updateShowOnIndex',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-{{$notice->show_on_index==1 ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}">
                                             <i class="fa  {{$notice->show_on_index==1 ?' fa-check':'fa-window-close'}}"></i>
 
                                         </a>
                                     </td>
                                     <td>
-                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.notice.updateClosedDate',[$type,$notice])}}"
+                                        <a data-bs-type="edit"
+                                           href="{{route('admin.digitalBoard.notice.updateClosedDate',[$type,$notice])}}"
                                            class="btn btn-xs btn-outline-{{$notice->closed_at==null ?'primary':'danger'}} {{get_setting('Pin')?'confirm_pin' : ''}}">
                                             <i class="fa  {{$notice->closed_at==null ?' fa-check':'fa-window-close'}}"></i>
 
@@ -72,21 +74,27 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.notice.show',[$type,$notice])}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="विवरण हेर्नुहोस्">
+                                        <a data-bs-type="edit"
+                                           href="{{route('admin.digitalBoard.notice.show',[$type,$notice])}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}"
+                                           title="विवरण हेर्नुहोस्">
                                             <i class="fa fa-eye"></i>
 
 
                                         </a>
-                                        <a data-bs-type="edit" href="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}" title="सम्पादन गर्नुहोस्">
+                                        <a data-bs-type="edit"
+                                           href="{{route('admin.digitalBoard.notice.edit',[$type,$notice])}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin' : ''}}"
+                                           title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.digitalBoard.notice.destroy',[$type,$notice])}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}" data-bs-type="delete" title="मेटाउनु होस्">
+                                            <button
+                                                class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}"
+                                                data-bs-type="delete" title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -107,6 +115,5 @@
             </div>
         </div>
     </div>
-
 
 @endsection

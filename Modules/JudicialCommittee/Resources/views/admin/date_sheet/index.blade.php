@@ -54,16 +54,16 @@
                                     <td>{{$dateSheet->submitted_date}}</td>
                                     <td>
                                         @can('dateSheet_access')
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.dateSheet.show',[$complaintApplication,$dateSheet])}}"
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.dateSheet.show',[$complaintApplication,$dateSheet])}}"
                                                title="विवरण हेर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('dateSheet_edit')
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.dateSheet.edit',[$complaintApplication,$dateSheet])}}"
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.dateSheet.edit',[$complaintApplication,$dateSheet])}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-warning">
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

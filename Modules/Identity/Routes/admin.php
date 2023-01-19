@@ -30,6 +30,7 @@ Route::prefix('disability')->group(function () {
 });
 
 Route::prefix('seniorCitizen')->group(function () {
+    Route::get('seniorCitizenDetail/{seniorCitizenDetail}/print',[SeniorCitizenDetailController::class,'print'])->name('seniorCitizenDetail.print');
     Route::resource('seniorCitizenDetail', SeniorCitizenDetailController::class);
 });
 

@@ -49,6 +49,8 @@ class ProprietorDetail extends Model
         'occupation',
     ];
 
+
+
     public function Gender(): Attribute
     {
         return Attribute::get(fn($value) => Gender::tryFrom($value)?->label() ?? null);
