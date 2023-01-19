@@ -1,163 +1,151 @@
-function createTable(headerData, bodyData) {
-    // Get the reference for the body
-    const tableDiv = document.getElementById("report-table");
 
-    // remove all data from tableDiv
+function createTable(headerData, bodyData) {
+    const tableDiv = document.getElementById("report-table");
     tableDiv.innerHTML = "";
 
-    if (bodyData.length > 0) {
+    const table = document.createElement("table");
+    table.className = "table table-bordered table-striped table-condensed";
 
-        // creates a <table> element
-        const tbl = document.createElement("table");
-        tbl.className = "table table-sm table-hover table-striped table-bordered table-responsive";
+    const thead = document.createElement("thead");
+    const tBody = document.createElement("tbody");
 
-        const thead = document.createElement("thead");
-        const header = document.createElement("tr");
-        const second_header = document.createElement("tr");
-        headerData.forEach(element => {
-            const headerCell = document.createElement("th");
-            if (element.children.length) {
-                headerCell.colSpan = element.children.length
-            }
-            if (headerData.some(data => data.children.length) && !element.children.length) {
-                headerCell.rowSpan = 2
-            }
-            const cellHeader = document.createTextNode(element.title);
-            headerCell.appendChild(cellHeader);
-            header.appendChild(headerCell);
-            element.children.forEach(sub_element => {
-                const sub_headerCell = document.createElement("th");
-                const sub_cellHeader = document.createTextNode(sub_element);
-                sub_headerCell.appendChild(sub_cellHeader);
-                second_header.appendChild(sub_headerCell);
-            })
-        });
-        thead.appendChild(header);
-        tbl.appendChild(thead)
+    const header = document.createElement("tr");
+    const SnCell = document.createElement("th");
+    header.appendChild(SnCell);
+    headerData.forEach((element) => {
+        const headerCell = document.createElement("th");
+        const cellHeader = document.createTextNode(element);
+        headerCell.appendChild(cellHeader);
+        header.appendChild(headerCell);
+    });
 
-        thead.appendChild(second_header);
-        tbl.appendChild(thead)
+    const headerLength = headerData.length;
+    thead.appendChild(header);
+    table.appendChild(thead);
 
-        const tbody = document.createElement("tbody");
+    bodyData.forEach((element, key) => {
 
-        let convertedBodyData = bodyData.map(body => {
-            let body_data = []
-            const arrayData = body.filter(sub => Array.isArray(sub))
-            let rowSpan = arrayData.reduce((max, arr) => {
-                return Math.max(max, arr.length);
-            }, 0);
-            body.forEach((data) => {
-                if (Array.isArray(data) && data.length) {
-                    let dataArr = []
-                    for (let i = 0; i < rowSpan; i++) {
-                        let firstElements = arrayData.map(function (innerArr) {
-                            if (innerArr.length > 0) {
-                                if (innerArr[i]) {
-                                    return innerArr[i]
-                                } else {
-                                    const tempArr = [];
-                                    // get only first element in innerArr
+        const row = document.createElement("tr");
 
+        const cell = document.createElement("td");
 
-                                    let length=innerArr.shift().length
-                                    for (let j = 0; j < length; j++) {
-                                        tempArr.push("")
-                                    }
-                                    //console.log(tempArr,innerArr.pop())
-                                    return tempArr
-                                }
-                            } else {
-                                //console.log(innerArr)
-                                return "";
-                            }
+        cell.innerHTML =
+            `<span class="fa fa-chevron-right fa-fw" data-bs-table-id="tr-detail` +
+            key +
+            `"></span>`;
+
+        row.appendChild(cell);
+        table.appendChild(row);
+        const childRow = document.createElement("tr");
+        // hidden
+// if (Object.values(element).some(Array.isArray)) {
+    childRow.className = " tr-detail" + key;
+    childRow.id = "tr-detail" + key;
+    const SnTd = document.createElement("td");
+    childRow.appendChild(SnTd);
+
+    const DataTd = document.createElement("td");
+    DataTd.colSpan = headerLength;
+
+    const DivElement = document.createElement("div");
+    DivElement.className = "detail-content";
+
+    const UlElement = document.createElement("ul");
+// }
+        Object.entries(element).forEach((value, index) => {
+            if (value[1] instanceof Array) {
+                const LiElement = document.createElement("li");
+
+                const EmptyDivElement = document.createElement("div");
+                EmptyDivElement.className = "detail";
+                LiElement.appendChild(EmptyDivElement);
+
+                const DetailMainDivElement = document.createElement("div");
+                DetailMainDivElement.className = "detail detail-main";
+
+                const FieldSetElement = document.createElement("fieldset");
+                const LegendElement = document.createElement("legend");
+                const SpanElement = document.createElement("span");
+                SpanElement.className = "bg-primary rounded px-1 text-white";
+                SpanElement.innerHTML = value[0];
+                LegendElement.appendChild(SpanElement);
+                FieldSetElement.appendChild(LegendElement);
+
+                const tableDataDiv = document.createElement("div");
+                tableDataDiv.innerHTML = "";
+                if (value[1].length > 0) {
+                    const childTable = document.createElement("table");
+                    childTable.className = "table table-bordered table-striped table-condensed";
+                    const childThead = document.createElement("thead");
+                    const childBody = document.createElement("tbody");
+                    const childHeader = document.createElement("tr");
+                    const childHeaderSnCell = document.createElement("th");
+                    childHeaderSnCell.innerHTML = "क्र.सं";
+                    childHeader.appendChild(childHeaderSnCell);
+                    Object.keys(value[1][0]).forEach((element) => {
+                        const childHeaderCell = document.createElement("th");
+                        const cellHeader = document.createTextNode(element);
+                        childHeaderCell.appendChild(cellHeader);
+                        childHeader.appendChild(childHeaderCell);
+                    });
+                    childThead.appendChild(childHeader);
+                    childTable.appendChild(childThead);
+
+                    Object.values(value[1]).forEach((element, key) => {
+                        const childRow = document.createElement("tr");
+
+                        const childSnDataCell = document.createElement("td");
+                        childSnDataCell.innerHTML = key + 1;
+                        childRow.appendChild(childSnDataCell);
+                        Object.values(element).forEach((value, index) => {
+                            const childDataCell = document.createElement("td");
+                            const cellData = document.createTextNode(value);
+                            childDataCell.appendChild(cellData);
+                            childRow.appendChild(childDataCell);
                         });
-                        dataArr.push(firstElements)
-                    }
-                    let checkArrayExists = body_data.filter(b => Array.isArray(b) && b.length)
+                        childBody.appendChild(childRow);
+                        childTable.appendChild(childBody);
+                    });
 
-                    if (!checkArrayExists.length) {
-                        body_data.push(dataArr)
-                    }
+                    tableDataDiv.appendChild(childTable);
                 } else {
-                    body_data.push(data)
+                    tableDataDiv.innerHTML = "No Data Found";
                 }
-            })
-            return body_data
-        })
-        //console.log(convertedBodyData)
-
-        convertedBodyData.forEach(data => {
-            const row = document.createElement("tr");
-            let rowSpan = 0
-            const arrayData = data.filter(sub => Array.isArray(sub) && sub.length)
-            rowSpan = arrayData.reduce((max, arr) => {
-                return Math.max(max, arr.length);
-            }, 0);
-
-            data.forEach(sub_data => {
-                if (Array.isArray(sub_data) && sub_data.length) {
-                    sub_data[0].forEach(next_sub_data => {
-                        if (Array.isArray(next_sub_data)) {
-                            next_sub_data.forEach(el => {
-                                appendCellData(row, el)
-                            })
-                        } else {
-                            appendCellData(row, next_sub_data)
-                        }
-                    })
-                    if (sub_data.slice(1).length) {
-                        sub_data.slice(1).forEach(next_sub_data => {
-                            const sub_row = document.createElement("tr");
-                            if (Array.isArray(next_sub_data)) {
-                                next_sub_data.forEach(el => {
-                                    if (Array.isArray(el)) {
-                                        el.forEach(sub_el => {
-                                            appendCellData(sub_row, sub_el)
-                                        })
-                                    } else {
-                                        appendCellData(sub_row, el)
-                                    }
-                                })
-                            } else {
-                                appendCellData(sub_row)
-                            }
-                            tbody.appendChild(sub_row)
-                        })
-                    }
-                } else {
-                    appendCellData(row, sub_data, rowSpan)
-                    tbody.appendChild(row);
-                }
-            })
-            //add the row to the end of the table body
-            tbl.appendChild(tbody);
+                FieldSetElement.appendChild(tableDataDiv);
+                DetailMainDivElement.appendChild(FieldSetElement);
+                LiElement.appendChild(DetailMainDivElement);
+                UlElement.appendChild(LiElement);
+            } else {
+                const dataCell = document.createElement("td");
+                const cellData = document.createTextNode(value[1]);
+                dataCell.appendChild(cellData);
+                row.appendChild(dataCell);
+            }
         });
-
-        // put the <table> in the <body>
-        tableDiv.appendChild(tbl);
-        return tableDiv;
-
-    } else {
-        const noData = document.createElement("h3");
-        noData.className = "text-center";
-        noData.innerHTML = "No Data Found";
-        tableDiv.appendChild(noData);
-        return tableDiv;
-    }
-
+        tBody.appendChild(row);
+        // if (Object.values(element).some(Array.isArray)) {
+            DivElement.appendChild(UlElement);
+            DataTd.appendChild(DivElement);
+            childRow.appendChild(DataTd);
+        // }
+        tBody.appendChild(childRow);
+    });
+table.appendChild(tBody);
+    tableDiv.appendChild(table);
+    return tableDiv;
 }
 
-function appendCellData(target_element, data = '', rowSpan = 0, colSpan = 0) {
-    const cell = document.createElement("td");
-    if (rowSpan > 0) {
-        cell.rowSpan = rowSpan
-    }
-    if (colSpan > 0) {
-        cell.colSpan = colSpan
-    }
-    const cellText = document.createTextNode(data);
-    cell.appendChild(cellText);
-    target_element.appendChild(cell);
+function getHeader(data) {
+    let headerData = [];
+
+    Object.keys(data[0] ?? {}).forEach((key) => {
+        if (!Array.isArray(data[0][key])) {
+
+            headerData.push(key);
+        }
+    });
+
+    return headerData;
 }
 
 // make ajax call from the form with report-filter-form id and data-url attribute for url in js
@@ -173,6 +161,8 @@ $(document).ready(function () {
         e.preventDefault()
         // get attribute data-bs-url from form and assign it to const variable url
         const url = $(this).attr('data-bs-url');
+        const submitFormBtn = $("#submitFormBtn");
+        const collapseFilterForm = $("#collapseFilterForm");
         $.ajax({
             type: "post",
             url: url,
@@ -180,56 +170,24 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             beforeSend: function () {
-                $("#submitFormBtn").prop('disabled', true);
-                $("#submitFormBtn").html("<i class='fa fa-spinner fa-spin'></i>");
+                submitFormBtn.prop('disabled', true);
+                submitFormBtn.html("<i class='fa fa-spinner fa-spin'></i>");
             },
             success: function (resp) {
-                $("#submitFormBtn").prop('disabled', false);
-                $("#collapseFilterForm").collapse('hide')
-                $("#submitFormBtn").html("पेश गर्नुहोस्");
-                assignResponseData(resp.data)
+                submitFormBtn.prop('disabled', false);
+                collapseFilterForm.collapse('hide')
+                submitFormBtn.html("पेश गर्नुहोस्");
+                console.log(resp.data);
+                const headerData = getHeader(resp.data);
+                createTable(headerData, resp.data)
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                $('#submitFormBtn').prop('disabled', false)
-                $("#submitFormBtn").html("पेश गर्नुहोस्");
+                submitFormBtn.prop('disabled', false)
+                submitFormBtn.html("पेश गर्नुहोस्");
                 toastMessage('error', XMLHttpRequest.responseJSON.message)
             }
         });
     })
-
-    function assignResponseData(data) {
-        let headerData = [];
-        let bodyData = [];
-        Object.keys(data[0] ?? {}).forEach(key => {
-            headerData.push({
-                title: key,
-                children: data[0][key] instanceof Array && data[0][key].length ? Object.keys(data[0][key][0]) : []
-            })
-        })
-
-        data.forEach((value, index) => {
-            let tempData = []
-            headerData.forEach((head => {
-                if (data[index][head.title] instanceof Array) {
-                    let mainChildArray = []
-                    data[index][head.title].forEach(sub_data => {
-                        let childArray = []
-                        Object.values(sub_data).forEach(sub_value => {
-                            childArray.push(sub_value)
-                        })
-                        mainChildArray.push(childArray)
-                    })
-                    tempData.push(mainChildArray)
-                } else {
-                    tempData.push(data[index][head.title])
-                }
-            }))
-            bodyData.push(tempData)
-        })
-        //console.log(headerData)
-        // console.log(bodyData)
-        createTable(headerData, bodyData)
-    }
 
     function toastMessage(type, title) {
         swal.fire({
@@ -244,3 +202,4 @@ $(document).ready(function () {
         });
     }
 });
+
