@@ -11,6 +11,7 @@ function createTable(headerData, bodyData) {
 
     const header = document.createElement("tr");
     const SnCell = document.createElement("th");
+    SnCell.innerHTML = "क्र.सं.";
     header.appendChild(SnCell);
     headerData.forEach((element) => {
         const headerCell = document.createElement("th");
@@ -29,10 +30,7 @@ function createTable(headerData, bodyData) {
 
         const cell = document.createElement("td");
 
-        cell.innerHTML =
-            `<span class="fa fa-chevron-right fa-fw" data-bs-table-id="tr-detail` +
-            key +
-            `"></span>`;
+        cell.innerHTML =key+1;
 
         row.appendChild(cell);
         table.appendChild(row);

@@ -8,7 +8,7 @@ class ComplaintApplicationResource extends JsonResource
 {
     public function toArray($request): array
     {
-        $complaint_applications = $request->input('columns')['complaint_applications'];
+        $complaint_applications = $request->input('columns')['complaint_applications'] ?? [];
 
         return [
             'आर्थिक बर्ष' => $this->when(in_array('fiscal_year_id', $complaint_applications), $this->fiscalYear->title ?? ''),
