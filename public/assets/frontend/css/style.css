@@ -1196,3 +1196,6 @@ h6,
 .emp-section .emp-card:nth-child(2){
     margin: 20px 0 20px 0;
 }
+.emp-card{
+    background: #f2f2f2;
+}
