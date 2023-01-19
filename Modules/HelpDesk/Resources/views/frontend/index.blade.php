@@ -18,7 +18,7 @@
                         <h5 class="fw-bold">शाखाहरु</h5>
                     </div>
                     @foreach($branches as $branch)
-                        <p class="branch-title">
+                        <div class="branch-title mb-2">
                             <button
                                 class="btn fs-5 w-100 d-flex justify-content-between {{count($branch->branches) !== 0 ? '':'load_data'}}"
                                 type="button"
@@ -29,13 +29,13 @@
                                     <i class="fs-5 pt-1 fa-solid fa-angles-down"></i>
                                 @endif
                             </button>
-                        </p>
+                        </div>
                         @if(count($branch->branches)!==0)
                             <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
-                                <div class="sub-branch">
+                                <div class="sub-branch ms-4">
                                     <ul class="list-group">
                                         @foreach($branch->branches as $subBranch)
-                                            <li class="list-group-item mb-2 d-flex justify-content-between load_data"
+                                            <li class="list-group-item my-2 d-flex justify-content-between load_data"
                                                 data-bs-url="{{route('getServices',$subBranch)}}">
                                                 <div class="d-flex align-items-center gap-2">
                                                     <i class="fa fa-angles-right"></i> {{$subBranch->branch_name}}
