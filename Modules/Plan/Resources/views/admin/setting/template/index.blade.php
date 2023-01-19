@@ -30,7 +30,6 @@
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
                             </a>
                         @endcan
-
                     </div>
                 </div>
                 <div class="card-body">
@@ -49,7 +48,7 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$planTemplate->title}}</td>
-                                    <td>{{$planTemplate->type}}</td>
+                                    <td>{{$planTemplate->type?->label()}}</td>
                                     <td>
                                         @can('planTemplate_edit')
                                             <a href="{{route('admin.plan.planTemplate.edit',$planTemplate)}}"
