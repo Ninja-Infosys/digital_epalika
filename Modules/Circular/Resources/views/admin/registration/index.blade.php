@@ -59,15 +59,16 @@
                                     <td>{{$registration->receiver_name}}</td>
                                     <td>{{$registration->subject}}</td>
                                     <td>
-                                        <a href="{{route('admin.circular.registration.show',$registration)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.circular.registration.show',$registration)}}"
                                            title="थप हेर्नुहोस्"
-                                           class="btn btn-xs btn-outline-primary">
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin') ? 'confirm_pin':''}}">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         @can('registration_edit')
-                                            <a href="{{route('admin.circular.registration.edit',$registration)}}"
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.circular.registration.edit',$registration)}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin') ? 'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -77,7 +78,8 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}"
+                                                <button type="submit" data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin' : 'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>

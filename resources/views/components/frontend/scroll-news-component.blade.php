@@ -1,23 +1,17 @@
-<div>
-{{--    <section class="newsbar-section mt-2">--}}
-{{--        <div class="container-fluid">--}}
-            <div class="newsbar-container">
-                <div class="flex-shrink-0 newsbar-title pr-lg-3">समाचार</div>
+ <div class="newsbar-container">
+                <div class="flex-shrink-0 newsbar-title">समाचार</div>
                 <div class="d-block jctkr-wrapper jctkr-initialized">
-                    <ul class="marquee-list">
+                    <div class="marquee-list">
                         <marquee onmouseover="stop()" onmouseout="start()">
                             @foreach($scrollNews as $news)
-                                <li>
+                                <span>
                                     <a href="#">
                                         {{Str::words($news->title,12)}} <small>({{$news->date}})</small>
                                         <span class="type">नयाँ</span>
                                     </a>
-                                </li>
+                                </span>
                             @endforeach
                         </marquee>
-                    </ul>
+                    </div>
                 </div>
             </div>
-{{--        </div>--}}
-{{--    </section>--}}
-</div>

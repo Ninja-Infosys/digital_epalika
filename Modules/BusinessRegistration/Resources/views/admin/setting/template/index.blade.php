@@ -67,8 +67,8 @@
                                     </td>
                                     <td>
                                         @can('businessRegistrationTemplate_edit')
-                                            <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.edit',[$templateTypeEnum,$businessRegistrationTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning">
+                                            <a data-bs-type="edit" href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.edit',[$templateTypeEnum,$businessRegistrationTemplate])}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
@@ -79,7 +79,7 @@
                                                 @method('delete')
                                                 @can('businessRegistrationTemplate_delete')
                                                     @if($businessRegistrationTemplate->status==0)
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                         <i class="fa fa-trash"></i> मेटाउनु होस्
                                                     </button>
                                                     @endif

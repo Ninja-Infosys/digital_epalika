@@ -3,6 +3,7 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Http\Requests\Template\StorePlanTemplateRequest;
 use Modules\Plan\Http\Requests\Template\UpdatePlanTemplateRequest;
@@ -35,6 +36,17 @@ class PlanTemplateController extends Controller
         return back();
     }
 
+    public function show(Request $request, PlanTemplate $planTemplate)
+    {
+        $this->checkAuthorization('planTemplate_access');
+
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => $planTemplate
+            ]);
+        }
+    }
+
     public function edit(PlanTemplate $planTemplate)
     {
         $this->checkAuthorization('planTemplate_edit');
@@ -59,7 +71,7 @@ class PlanTemplateController extends Controller
 
         $planTemplate->delete();
 
-        toast('टेम्प्लेट सफलतापूर्वक मेटियो','success');
+        toast('टेम्प्लेट सफलतापूर्वक मेटियो', 'success');
 
         return back();
     }

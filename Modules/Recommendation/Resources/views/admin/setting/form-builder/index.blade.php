@@ -63,14 +63,14 @@
                                     <td>
 
                                         @can('formBuilder_access')
-                                            <a href="{{ route('admin.recommendation.setting.formBuilder.show', [$applicationTypeEnum,$formBuilder]) }}"
-                                               class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{ route('admin.recommendation.setting.formBuilder.show', [$applicationTypeEnum,$formBuilder]) }}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('formBuilder_edit')
-                                            <a href="{{ route('admin.recommendation.setting.formBuilder.edit', [$applicationTypeEnum,$formBuilder]) }}"
-                                               class="btn btn-xs btn-outline-info">
+                                            <a data-bs-type="edit" href="{{ route('admin.recommendation.setting.formBuilder.edit', [$applicationTypeEnum,$formBuilder]) }}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -81,7 +81,7 @@
                                                 @csrf
                                                 @method('delete')
                                                 @if(!$formBuilder->status)
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                                 @endif
@@ -130,8 +130,8 @@
                                     <td>{{$recommendationTemplate->application_type->label() ??''}}</td>
                                     <td>
                                         @can('recommendationTemplate_access')
-                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$applicationTypeEnum,$recommendationTemplate])}}">
-                                                <i class="fa fa-2x  {{$recommendationTemplate->status  ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                            <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationTemplate.updateStatus',[$applicationTypeEnum,$recommendationTemplate])}}">
+                                                <i class="fa fa-2x  {{$recommendationTemplate->status  ? 'fa-toggle-on':'fa-toggle-off'}} {{get_setting('Pin')?'confirm_pin':''}}"></i>
                                             </a>
                                         @endcan
                                     </td>
@@ -140,8 +140,8 @@
                                     </td>
                                     <td>
                                         @can('recommendationTemplate_edit')
-                                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning">
+                                            <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -153,7 +153,7 @@
                                                 @method('delete')
                                                 @if(!$recommendationTemplate->status)
                                                     @can('recommendationTemplate_delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                     @endcan

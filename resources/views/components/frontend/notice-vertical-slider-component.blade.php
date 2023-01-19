@@ -1,5 +1,4 @@
-<div class="mt-4">
-    <div class="vertical-scroll shadow">
+ <div class="vertical-scroll">
         <div class="move">
             @foreach($notices as $notice)
                 <h6 class="p-2 text-white mt-2" style="background-color: var(--mainColor)">{{$notice->title}} [{{$notice->date}}]</h6>
@@ -11,4 +10,3 @@
             @endforeach
         </div>
     </div>
-</div>

@@ -1,12 +1,10 @@
 @extends('frontend.layouts.master')
 @section('content')
-    <main class="container-fluid">
+    <main>
         <section class="news-section">
             <x-frontend.scroll-news-component />
         </section>
-    </main>
-    <div class="container" style="color: #E2DFDF">
-        <section class="mid">
+        <section class="notice mt-3">
             <div class="row">
                 <div class="col-md-8">
                     <x-frontend.notice-vertical-slider-component />
@@ -16,7 +14,7 @@
                 </div>
             </div>
         </section>
-        <section class="mid mb-4">
+        <section class="help mt-3">
             <div class="row">
                 <div class="col-md-8">
                     <x-frontend.digital-board-video-component />
@@ -26,14 +24,8 @@
                 </div>
             </div>
         </section>
-    </div>
-    <div class="container" style="color: #E2DFDF">
-        <section class="mid mb-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <x-frontend.module-info-component />
-                </div>
-            </div>
+        <section class="modules mt-3">
+            <x-frontend.module-info-component />
         </section>
-    </div>
+    </main>
 @endsection

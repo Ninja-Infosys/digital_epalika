@@ -32,8 +32,8 @@
                                 <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
                             </button>
                             @can('dateCompensation_edit')
-                                <a href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.create', $complaintApplication) }}"
-                                   class="btn btn-sm btn-outline-warning mx-1">
+                                <a data-bs-type="edit" href="{{ route('admin.judicialCommittee.complaintApplication.dateCompensation.create', $complaintApplication) }}"
+                                   class="btn btn-sm btn-outline-warning mx-1 {{get_setting('Pin')?'confirm_pin':''}}">
                                     <i class="fa fa-edit"> सम्पादन गर्नुहोस्</i>
                                 </a>
                             @endcan

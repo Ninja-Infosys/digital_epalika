@@ -60,8 +60,8 @@
 
                                     <td width="90">
                                         @can($event_for . 'MeetingEvent_edit')
-                                            <a href="{{ route('admin.executiveMeeting.meetingEvent.edit', [$event_for, $meetingEvent]) }}"
-                                                title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{ route('admin.executiveMeeting.meetingEvent.edit', [$event_for, $meetingEvent]) }}"
+                                                title="सम्पादन गर्नुहोस्" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -71,7 +71,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-xs btn-outline-danger show_confirm"
+                                                <button data-bs-type='delete' type="submit" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                     title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>

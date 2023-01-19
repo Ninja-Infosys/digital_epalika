@@ -2,25 +2,16 @@
     <div class="carousel-inner">
         @foreach ($employees->chunk(3) as $empChunk)
             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                <div class="employee">
+                <div class="emp-section">
                     @foreach ($empChunk as $employee)
-                        <div class="card-img mb-3 mt-4" style="background-color: #0DCAF0;">
-                            <div class="row g-0">
-                                <div class="col-md-4 employee-card ">
-                                    <img src="{{ $employee->photo_url }}" class="img-fluid rounded-start"
-                                        alt="{{ $employee->name }}">
-                                </div>
-                                <div class="col-md-8 employee-card ">
-                                    <div class="body mt-2">
-                                        <h5 class="card-title" style="font-size: 22px; color:black">
-                                            <b>{{ $employee->name }}</b>
-                                        </h5>
-                                        <p class="card-text" style="color: #0047AB; font-size: 18px">
-                                            {{ $employee->designation }}</p>
-                                        <p style="font-size: 18px;color:black"><i
-                                                class="fa-solid fa-phone"></i>{{ $employee->phone }}</p>
-                                    </div>
-                                </div>
+                        <div class="emp-card d-flex align-items-center p-1 rounded border">
+                            <div class="flex-shrink-0">
+                                <img src="{{ $employee->photo_url }}" class="rounded" alt="{{ $employee->name }}" height="120">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>{{ $employee->name }}</h5>
+                                <h6 class="text-muted">{{ $employee->designation }}</h6>
+                                <h6 class="text-muted"><i class="fa-solid fa-phone"></i> {{ $employee->phone }}</h6>
                             </div>
                         </div>
                     @endforeach
@@ -29,25 +20,3 @@
         @endforeach
     </div>
 </div>
-@push('styles')
-    <style>
-        @media screen and (max-width: 768px) {
-            /* .card-img img {
-                width: 70%;
-            } */
-
-            .employee-card {
-                display:flex;
-                max-width: 100%;
-                padding-right: calc(var(--bs-gutter-x) * .5);
-                padding-left: calc(var(--bs-gutter-x) * .5);
-                margin-top: var(--bs-gutter-y);
-                width: 50%
-
-            }
-            .employee{
-                margin: 20px;
-            }
-        }
-    </style>
-@endpush

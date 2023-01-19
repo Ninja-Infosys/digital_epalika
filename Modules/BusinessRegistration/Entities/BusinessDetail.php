@@ -86,11 +86,6 @@ class BusinessDetail extends Model
         'object_transaction_id'
     ];
 
-    protected $casts = [
-        'business_nature' => BusinessNature::class,
-        'source_of_capital' => SourceOfCapital::class,
-
-    ];
 
     public function BusinessNature(): Attribute
     {

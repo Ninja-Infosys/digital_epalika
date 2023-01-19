@@ -27,7 +27,7 @@ Route::prefix('setting')->group(function () {
     Route::get('budgetSubHead', [BudgetHeadController::class,'budgetSubHead'])->name('budgetSubHead');
     Route::resource('budgetHead', BudgetHeadController::class)->except('show');
     Route::resource('budgetSource', BudgetSourceController::class)->except('show');
-    Route::resource('planTemplate', PlanTemplateController::class)->except('show');
+    Route::resource('planTemplate', PlanTemplateController::class);
 });
 
 //report

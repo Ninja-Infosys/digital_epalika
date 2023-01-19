@@ -100,7 +100,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> शैक्षिक योग्यता</th>
-                                                        <th>{{   $businessDetail->proprietorDetail->education_qualification}}</th>
+                                                        <th>{{   $businessDetail->proprietorDetail->education_qualification??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> मुख्य पेशा</th>

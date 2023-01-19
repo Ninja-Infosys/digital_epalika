@@ -46,15 +46,15 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$governmentalDisabilityType->title ?? ''}}</td>
                                 <td>
-                                    <a href="{{route('identity.admin.setting.governmentalDisabilityType.edit', $governmentalDisabilityType)}}"
-                                       type="button" class="btn btn-xs btn-outline-primary">
+                                    <a data-bs-type="edit" href="{{route('identity.admin.setting.governmentalDisabilityType.edit', $governmentalDisabilityType)}}"
+                                       type="button" class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <form action="{{route('identity.admin.setting.governmentalDisabilityType.destroy',$governmentalDisabilityType)}}"
                                           method="post">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
