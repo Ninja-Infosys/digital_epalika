@@ -19,7 +19,12 @@ body {
     font-family: 'Mukta', sans-serif !important;
     font-size: var(--fontSize);
 }
-
+p{
+    margin-bottom: 0 !important;
+}
+.bg-main{
+    background-color: var(--mainColor);
+}
 .main-heading {
     font-family: 'Noto Sans Devanagari', sans-serif;
     color: #E30814;
@@ -334,10 +339,7 @@ body {
     color: var(--whiteColor);
     background-color: #53afe6;
     font-size: 1.4rem;
-    font-weight: 600;
-    padding: .2rem 3rem .2rem 3rem;
-    -webkit-clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%);
-    /* clip-path: polygon(0 0,88% 0,100% 50%,88% 100%,0 100%); */
+    padding: .3rem;
 }
 
 .marquee-list span.type {
@@ -354,20 +356,16 @@ body {
 
 .marquee-list a {
     color: #fff !important;
-    font-size: 1.3rem;
-    font-weight: 500;
     text-decoration: none;
 }
 
 .marquee-list a:hover {
-    color: #ffff !important
+    color: var(--redColor) !important
 }
 
 .jctkr-wrapper {
     display: inline-block;
-    position: relative;
     width: 100%;
-    height: 18px;
     vertical-align: middle;
 
 }
@@ -424,8 +422,7 @@ body {
 }
 
 .vertical-scroll {
-    width: 90%;
-    height: 76vh;
+    height: 62vh;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
@@ -437,7 +434,6 @@ body {
 }
 
 .move {
-    top: 45vh;
     position: relative;
     box-sizing: border-box;
     animation: marquee 50s linear infinite;
@@ -493,9 +489,7 @@ body {
 }
 
 video {
-    width: 90%;
-    margin: 0 40px;
-
+    width: 100%;
 }
 
 .scrollbar {
@@ -528,22 +522,13 @@ video {
 
 .info-card {
     background-color: #0DCAF0;
-    text-align: center;
-    margin: 4vh;
-    width: 80%;
-    float: right;
-
+    margin-bottom: 20px;
 }
 
 .info-card a {
     text-decoration: none;
-    font-size: 1.5rem;
+    color: var(--blackColor);
 }
-
-.info-card h4 {
-    color: black;
-}
-
 /*topbar css*/
 .top-bar {
     background-color: #fff;
@@ -561,29 +546,17 @@ select {
 }
 
 .logo {
-    height: 120px;
+    height: 100px;
 }
 @media (max-width: 768px) {
     .main-logo .logo{
         height: 5rem;
         width: 5rem;
-        padding-top: 20px;
+        padding-top: 5px;
     }
 }
 .logo-nep {
-    height: 120px;
-    width: 100px;
-    margin-left: 200px;
-}
-@media (max-width: 768px) {
-    .main-date{
-        display: none;
-    }
-}
-@media (min-width:768px) {
-    .date-responsive{
-        visibility: hidden;
-    }
+    height: 100px;
 }
 .textbox-01 {
     color: white;
@@ -999,9 +972,8 @@ p {
 }
 
 .title {
-    color: blue;
+    color: var(--mainColor);
     font-size: 20px;
-    font-weight: 800px;
 }
 
 
@@ -1221,48 +1193,6 @@ h6,
     background-color: rgba(0, 0, 0, 0.2);
     opacity: 0.5;
 }
-
-/* @media  (max-width: 600px) and  (min-width: 300px) {
-    .card-body {
-        flex: 1 1 auto;
-        padding: 2rem 2rem;
-      }
-} */
-
-
-.employee {
-
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border-radius: .25rem;
-}
-
-@media (max-width: 600px) and (min-width: 300px) {
-    video {
-        width: 100% !important;
-        margin: 0;
-    }
-
-    .mid {
-        margin: 0 !important;
-    }
-}
-
-.mid {
-    margin: 0 -40px;
-}
-@media(max-width: 768px){
-    .vertical-scroll {
-        width: 90%;
-        height: 55vh;
-        margin: 0 auto;
-        overflow: hidden;
-        position: relative;
-        box-sizing: border-box;
-      }
+.emp-section .emp-card:nth-child(2){
+    margin: 20px 0 20px 0;
 }
