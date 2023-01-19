@@ -54,8 +54,8 @@
                                     <td>{{$businessPurpose->title}}</td>
                                     <td>
                                         @can('businessPurpose_edit')
-                                            <a href="{{route('admin.businessRegistration.setting.businessPurpose.edit',$businessPurpose)}}"
-                                               class="btn btn-xs btn-outline-warning">
+                                            <a data-bs-type="edit" href="{{route('admin.businessRegistration.setting.businessPurpose.edit',$businessPurpose)}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
@@ -66,7 +66,7 @@
                                             @csrf
                                             @method('delete')
                                             @can('businessPurpose_delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                     <i class="fa fa-trash"></i> मेटाउनु होस्
                                                 </button>
                                             @endcan

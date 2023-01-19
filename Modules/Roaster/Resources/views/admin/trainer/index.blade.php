@@ -75,14 +75,14 @@
 
                                     <td>
                                         @can('trainer_access')
-                                            <a href="{{route('admin.roaster.trainer.show', $trainer)}}"
-                                               class="btn btn-xs btn-outline-info">
+                                            <a data-bs-type="edit" href="{{route('admin.roaster.trainer.show', $trainer)}}"
+                                               class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                             @can('trainer_edit')
-                                            <a href="{{route('admin.roaster.trainer.edit', $trainer)}}"
-                                               class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{route('admin.roaster.trainer.edit', $trainer)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

@@ -55,8 +55,8 @@
                                             </td>
                                         @endforeach
                                         <td>
-                                            <a href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,'#'.\Illuminate\Support\Str::limit($noticeTypeEnum->value,10,'mmm')])}}"
-                                               type="button" class="btn btn-info btn-sm text-white">
+                                            <a data-bs-type="edit" href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,'#'.\Illuminate\Support\Str::limit($noticeTypeEnum->value,10,'mmm')])}}"
+                                               type="button" class="btn btn-info btn-sm text-white {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         </td>
@@ -76,8 +76,8 @@
                                         </td>
                                     @endforeach
                                     <td>
-                                        <a href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,'#'.\Illuminate\Support\Str::limit($noticeTypeEnum->value,10,'mmm')])}}"
-                                           type="button" class="btn btn-info btn-sm text-white">
+                                        <a data-bs-type="edit" href="{{route('emap.admin.map.mapApply.show', [$mapApply,$applicationFormTypeEnum,'#'.\Illuminate\Support\Str::limit($noticeTypeEnum->value,10,'mmm')])}}"
+                                           type="button" class="btn btn-info btn-sm text-white {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </td>

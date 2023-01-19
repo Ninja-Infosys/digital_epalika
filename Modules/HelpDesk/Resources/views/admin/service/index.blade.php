@@ -59,19 +59,19 @@
                                            class="btn btn-xs btn-outline-primary">
                                             <i class="fa fa-plus-circle"></i> कर्मचारी
                                         </a>
-                                        <a href="{{route('admin.helpDesk.service.show',$service)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.helpDesk.service.show',$service)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-eye"></i> थप हेर्नुहोस्
                                         </a>
-                                        <a href="{{route('admin.helpDesk.service.edit',$service)}}"
-                                           class="btn btn-xs btn-outline-warning">
+                                        <a data-bs-type="edit" href="{{route('admin.helpDesk.service.edit',$service)}}"
+                                           class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <form action="{{route('admin.helpDesk.service.destroy',$service)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger  {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
