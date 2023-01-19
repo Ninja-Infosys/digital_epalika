@@ -167,8 +167,8 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$document->document_name}}</td>
                                     <td>
-                                        <a href="{{route('admin.plan.project.projectDocument.edit',[$project,$document])}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.plan.project.projectDocument.edit',[$project,$document])}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         @can('projectDocument_delete')
@@ -176,7 +176,7 @@
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

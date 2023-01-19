@@ -59,9 +59,9 @@
                                     <td>{{$judicialMember->address}}</td>
                                     <td>
                                         @can('judicialMember_edit')
-                                            <a href="{{route('admin.judicialCommittee.judicialMember.edit',$judicialMember)}}"
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.judicialMember.edit',$judicialMember)}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -71,7 +71,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

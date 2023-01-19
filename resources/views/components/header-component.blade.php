@@ -1,98 +1,22 @@
-{{-- <div class="text-center main-heading">
-    @foreach ($headers as $header)
-        <span
-            style="color: {{$header->font_color??'red'}}; font-size: {{$header->font_size??1}}rem; font-weight: {{$header->font??'normal'}};">
-            {{$header->title??''}}
-        </span>
-        @if (!$loop->last)
-            <br>
-        @endif
-    @endforeach
-</div> --}}
-<div class="d-flex justify-content-between mb-2 px-4">
+<div class="d-flex gap-4">
     <div class="main-heading text-center">
         @foreach ($headers as $header)
-            <span
-                style="color: {{$header->font_color??'red'}}; font-size: {{$header->font_size??1}}rem; font-weight: {{$header->font??'normal'}};">
+            <div style="color: {{$header->font_color??'red'}}; font-size: {{$header->font_size??1}}rem; font-weight: {{$header->font??'normal'}};">
             {{$header->title??''}}
-        </span>
-            @if (!$loop->last)
-                <br>
-            @endif
+        </div>
         @endforeach
     </div>
-    <div class="main-date">
-        <h6>
-            <b>
-                <i class="fa fa-calendar"></i>
-                <x-convert-to-unicode number="{{$year}}" id="today_year"/>
+    <div class="main-date d-none d-lg-block">
+        <h6><i class="fa fa-calendar"></i>
+                <x-convert-to-unicode number="{{$year}}" id="today_year"></x-convert-to-unicode>
                 {{$month}}
-                <x-convert-to-unicode number="{{$day}}" id="today_day"/>
-            </b><br>
-            {{-- <p class=" mt-2 text-underline">English | नेपाली</p> --}}
+                <x-convert-to-unicode number="{{$day}}" id="today_day"></x-convert-to-unicode>
         </h6>
-        <h6>
-            <i class="fa fa-clock"></i>
-            <span id="clock-container">
-
-            </span><br>
-            {{-- <p class=" mt-2 text-underline">English | नेपाली</p> --}}
-        </h6>
-        <div class="icon mt-4">
-            <p style="font-size: 18px;color:black; padding: 0 5px"><i
-                    class="fa-solid fa-phone"></i> {{$officeSetting->phone??''}}<br>
-                <i
-                    class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}
-            </p>
-
-        </div>
-
+        <h6><i class="fa fa-clock"></i> <span id="clock-container"></span></h6>
+        <h6><i class="fa-solid fa-phone"></i> {{$officeSetting->phone??''}}</h6>
+        <h6><i class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}</h6>
     </div>
 </div>
-
-<div class="date-responsive d-flex justify-content-between">
-    <div class="col" style="font-size: 12px">
-        <i class="fa fa-calendar"></i>
-        <x-convert-to-unicode number="{{$year}}" id="today_year"></x-convert-to-unicode>
-        {{$year}}
-        {{$month}}
-        <x-convert-to-unicode number="{{$month}}" id="today_day"></x-convert-to-unicode>
-        {{$day}}
-    </div>
-    <div class="col" style="font-size: 12px">
-        <i class="fa fa-clock "></i><span id="clock-container1" class="px-1"></span>
-
-    </div>
-
-</div>
-<div class="date-responsive d-flex justify-content-between">
-    <div class="col">
-        <p style="font-size: 12px;color:black; "><i
-                class="fa-solid fa-phone"></i> {{$officeSetting->phone??''}}9864742149</p>
-
-    </div>
-    <div class="col">
-        <p style="font-size: 12px;color:black;">
-            <i
-                class="fa-solid fa-envelope"></i> {{$officeSetting->email??''}}khajura@gmail.com
-        </p>
-    </div>
-</div>
-@push('styles')
-    <style>
-        #clock-container {
-            font-size: 40px;
-            font-family: sans-serif;
-            color: #333;
-        }
-        #clock-container1 {
-            font-size: 40px;
-            font-family: sans-serif;
-            color: #333;
-        }
-
-    </style>
-@endpush
 @once
     @push('scripts')
         <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
@@ -101,15 +25,10 @@
 @push('scripts')
     <script>
         function makeDigitalClock() {
-// get current time
             const currentTime = new Date();
-
-// extract hours, minutes, and seconds from the current time
             let hours = currentTime.getHours();
             let minutes = currentTime.getMinutes();
             let seconds = currentTime.getSeconds();
-
-// convert hours to 12-hour format and add AM or PM
             let ampm = "विहानको";
             if (hours > 12) {
                 hours = hours - 12;
@@ -117,31 +36,18 @@
             } else if (hours === 0) {
                 hours = 12;
             }
-
-// add leading zeros to minutes and seconds if necessary
             if (minutes < 10) {
                 minutes = "0" + minutes;
             }
             if (seconds < 10) {
                 seconds = "0" + seconds;
             }
-
-// create digital clock HTML
-// add the digital clock to the page
             document.getElementById("clock-container").innerHTML = ampm + " " +
                 NepaliFunctions.ConvertToUnicode(hours) + ":" +
                 NepaliFunctions.ConvertToUnicode(minutes) + ":" +
                 NepaliFunctions.ConvertToUnicode(seconds);
-
-            document.getElementById("clock-container1").innerHTML = ampm + " " +
-                NepaliFunctions.ConvertToUnicode(hours) + ":" +
-                NepaliFunctions.ConvertToUnicode(minutes) + ":" +
-                NepaliFunctions.ConvertToUnicode(seconds);
-
-
         }
 
-        // call the makeDigitalClock function every second
         setInterval(makeDigitalClock, 1000);
     </script>
 @endpush

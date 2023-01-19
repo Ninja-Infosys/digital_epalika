@@ -52,16 +52,16 @@
                                     <td>{{$defendantIssuedDeadline->submitted_date}}</td>
                                     <td>
                                         @can('defendantIssuedDeadline_access')
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.show',[$complaintApplication,$defendantIssuedDeadline])}}"
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.show',[$complaintApplication,$defendantIssuedDeadline])}}"
                                                title="विवरण हेर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('defendantIssuedDeadline_edit')
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.edit',[$complaintApplication,$defendantIssuedDeadline])}}"
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.defendantIssuedDeadline.edit',[$complaintApplication,$defendantIssuedDeadline])}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-warning">
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

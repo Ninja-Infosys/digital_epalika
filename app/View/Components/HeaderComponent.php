@@ -25,9 +25,10 @@ class HeaderComponent extends Component
     {
         $this->headers = OfficeHeader::orderBy('position')->get();
         $nepaliDate = $this->get_nepali_date(date('Y'), date('m'), date('d'));
+//        dd($nepaliDate);
         $this->year = Str::padLeft($nepaliDate['y'], 4, 0);
         $this->day = Str::padLeft($nepaliDate['d'], 2, 0);
-        $this->month = Str::padLeft($nepaliDate['M'], 2, 0);
+        $this->month = $nepaliDate['M'];
     }
 
     public function render()

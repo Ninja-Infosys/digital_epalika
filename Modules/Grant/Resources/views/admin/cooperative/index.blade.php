@@ -59,14 +59,14 @@
                                     <td>{{$cooperative->vat_pan}}</td>
                                     <td>
                                             @can('cooperative_access')
-                                                <a href="{{route('admin.grant.cooperative.show', $cooperative)}}"
-                                                   class="btn btn-xs btn-outline-primary" title="हेर्नुहोस्">
+                                                <a data-bs-type="edit" href="{{route('admin.grant.cooperative.show', $cooperative)}}"
+                                                   class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="हेर्नुहोस्">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             @endcan
                                                 @can('cooperative_edit')
-                                                    <a href="{{route('admin.grant.cooperative.edit', $cooperative)}}"
-                                                       class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                                    <a data-bs-type="edit" href="{{route('admin.grant.cooperative.edit', $cooperative)}}"
+                                                       class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan
@@ -76,7 +76,7 @@
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>

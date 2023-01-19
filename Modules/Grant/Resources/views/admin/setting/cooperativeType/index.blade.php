@@ -49,15 +49,15 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$cooperativeType->title}}</td>
                                     <td>
-                                        <a href="{{route('admin.grant.setting.cooperativeType.edit', $cooperativeType)}}"
-                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                        <a data-bs-type="edit" href="{{route('admin.grant.setting.cooperativeType.edit', $cooperativeType)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.grant.setting.cooperativeType.destroy', $cooperativeType)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}" title="मेटाउनु होस्">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>

@@ -52,8 +52,8 @@
                                     <td></td>
                                     <td>
                                         @can('branch_edit')
-                                            <a href="{{route('admin.branch.edit',$branch)}}"
-                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                            <a data-bs-type="edit" href="{{route('admin.branch.edit',$branch)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -62,7 +62,7 @@
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                         title="मेटाउनु होस्">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
@@ -80,9 +80,9 @@
                                         <td>{{$subBranch->branch->branch_name??''}}</td>
                                         <td>
                                             @can('branch_edit')
-                                                <a href="{{route('admin.branch.edit',$subBranch)}}"
+                                                <a data-bs-type="edit" href="{{route('admin.branch.edit',$subBranch)}}"
                                                    title="सम्पादन गर्नुहोस्"
-                                                   class="btn btn-xs btn-outline-primary">
+                                                   class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                             @endcan
@@ -91,7 +91,7 @@
                                                       method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                    <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}"
                                                             title="मेटाउनु होस्">
                                                         <i class="fa fa-trash"></i>
                                                     </button>

@@ -51,8 +51,8 @@
                                     <td>{{$planTemplate->type?->label()}}</td>
                                     <td>
                                         @can('planTemplate_edit')
-                                            <a href="{{route('admin.plan.planTemplate.edit',$planTemplate)}}"
-                                               class="btn btn-xs btn-outline-warning">
+                                            <a data-bs-type="edit" href="{{route('admin.plan.planTemplate.edit',$planTemplate)}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan

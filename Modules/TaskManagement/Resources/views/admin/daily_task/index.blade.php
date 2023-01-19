@@ -60,19 +60,19 @@
                                     </td>
                                     <td>{{$dailyTask->remarks}}</td>
                                     <td width="140">
-                                        <a href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
-                                           class="btn btn-xs btn-outline-info">
+                                        <a data-bs-type="edit" href="{{route('admin.taskManagement.dailyTask.show',$dailyTask)}}"
+                                           class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        <a href="{{route('admin.taskManagement.dailyTask.edit',$dailyTask)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.taskManagement.dailyTask.edit',$dailyTask)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form action="{{route('admin.taskManagement.dailyTask.destroy',$dailyTask)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger show_confirm {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>

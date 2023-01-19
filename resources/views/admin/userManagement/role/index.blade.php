@@ -52,15 +52,15 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$role->title}}</td>
                                     <td>
-                                            <a href="{{route('admin.userManagement.role.edit',$role)}}"
-                                               class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{route('admin.userManagement.role.edit',$role)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                             <form action="{{route('admin.userManagement.role.destroy',$role)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                     <i class="fa fa-trash"></i> मेटाउनु होस्
                                                 </button>
                                             </form>

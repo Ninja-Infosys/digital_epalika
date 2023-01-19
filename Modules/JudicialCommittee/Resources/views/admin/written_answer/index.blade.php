@@ -50,16 +50,16 @@
                                     <td>{{$writtenAnswer->submitted_date}}</td>
                                     <td>
                                         @can('writtenAnswer_access')
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.writtenAnswer.show',[$complaintApplication,$writtenAnswer])}}"
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.writtenAnswer.show',[$complaintApplication,$writtenAnswer])}}"
                                                title="विवरण हेर्नुहोस्"
-                                               class="btn btn-xs btn-outline-primary">
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('writtenAnswer_edit')
-                                            <a href="{{route('admin.judicialCommittee.complaintApplication.writtenAnswer.edit',[$complaintApplication,$writtenAnswer])}}"
+                                            <a data-bs-type="edit" href="{{route('admin.judicialCommittee.complaintApplication.writtenAnswer.edit',[$complaintApplication,$writtenAnswer])}}"
                                                title="सम्पादन गर्नुहोस्"
-                                               class="btn btn-xs btn-outline-warning">
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

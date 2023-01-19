@@ -49,15 +49,15 @@
                                     <th>{{$loop->iteration}}</th>
                                     <th>{{$planLevel->level_name}}</th>
                                     <td>
-                                        <a href="{{route('admin.plan.planLevel.edit',$planLevel)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.plan.planLevel.edit',$planLevel)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
                                         <form action="{{route('admin.plan.planLevel.destroy',$planLevel)}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
+                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                 <i class="fa fa-trash"></i> मेटाउनु होस्
                                             </button>
                                         </form>
@@ -71,15 +71,15 @@
                                         </td>
                                         <td>{{$planSubLevel->level_name}}</td>
                                         <td>
-                                            <a href="{{route('admin.plan.planLevel.edit',$planSubLevel)}}"
-                                               class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{route('admin.plan.planLevel.edit',$planSubLevel)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                             <form action="{{route('admin.plan.planLevel.destroy',$planSubLevel)}}"
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                     <i class="fa fa-trash"></i> मेटाउनु होस्
                                                 </button>
                                             </form>

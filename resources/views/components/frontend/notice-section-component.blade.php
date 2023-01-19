@@ -2,83 +2,67 @@
     <div class="carousel-inner">
         @foreach($services as $key=>$service)
             <div class="carousel-item {{$key==0 ? 'active':''}}">
-                <div class="section-header mt-5">
-                    <h3 class="section-title" style="color: #0DCAF0">सेवाहरु</h3>
+                <div class="section-header">
+                    <h3 class="section-title text-info">सेवाहरु</h3>
                 </div>
-                <div class="d-flex justify-content-space bg-info">
-                    <div class="col-md-2 px-2"
-                         style="background-color: #0047AB;
-                            padding: 10px;
-                              padding-right: 10px;
-                              padding-left: 10px;">
-                        <img src="{{ asset('assets/frontend/image/help-desk1.png') }}" width="40" height="40">
-                    </div>
-                    <div class="col-md-6 mt-3 px-3">
-                        <p class="text-white" style="font-size: 15px">{{$service->service_name}}</p>
-                    </div>
+                <div class="d-flex bg-info align-items-center gap-2 rounded">
+                        <img class="p-2 rounded bg-main" src="{{ asset('assets/frontend/image/help-desk1.png') }}" width="40" height="40"/>
+                        <h4 class="text-white pt-1">{{$service->service_name}}</h4>
                 </div>
-                <div class="scroll shadow">
-                    <div class="doc">
-                        <div class="title" style="color: #0047AB; font-size: 20px; padding: 0 15px;">
-                            <i class="fa-solid fa-clock fa-xl" style="color: #0047AB; margin: 0 10px"></i>अनुमति लग्ने
-                            समय
-                            <p style="color: #828282; padding: 0 50px; font-size: 15px">{{$service->time_taken}}</p>
+                <div class="scroll">
+                    <div class="doc pt-2">
+                        <div class="d-flex gap-3 align-items-center">
+                            <i class="fa-solid fa-clock fa-xl title"></i>
+                            <div class="title">
+                                अनुमति लग्ने समय <h6 class="mt-1">{{$service->time_taken}}</h6>
+                            </div>
                         </div>
-
-                        <div class="title" style="color: #0047AB; font-size: 20px; padding: 0 15px;">
-                            <i class="fa-solid fa-user fa-xl" style="color: #0047AB; margin: 0 10px"></i>जिम्मेवार
-                            अधिकारी
-                            <p style="color: #828282; padding: 0 50px; font-size: 15px">{{$service->responsible_officer}}
-                            </p>
+                        <hr>
+                        <div class="d-flex gap-3 align-items-center">
+                            <i class="fa-solid fa-user fa-xl title"></i>
+                            <div class="title">
+                                जिम्मेवार अधिकारी <h6 class="mt-1">{{$service->responsible_officer}}</h6>
+                            </div>
                         </div>
-
-                        <div class="title" style="color: #0047AB; font-size: 20px; padding: 0 15px;">
-                            <i class="fa-solid fa-file-contract fa-xl" style="color: #0047AB; margin: 0 10px"></i>आवश्यक
-                            कागजातहरु
-                            @foreach($service->serviceDocuments as $document)
-                            <p style="color: #828282; padding: 0 50px; font-size: 15px">  {{$document->description}} {{ !$loop->last ? ',':''}}
-                                </p>
-                            @endforeach
-
+                        <hr>
+                        <div class="d-flex gap-3 align-items-center">
+                            <i class="fa-solid fa-file-contract fa-xl title"></i>
+                            <div class="title">
+                                आवश्यक कागजातहरु
+                                @foreach($service->serviceDocuments as $document)
+                                <h6 class="mt-1"> {{$loop->iteration}}. {{$document->description}} {{ !$loop->last ? ',':''}}</h6>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
-
     </div>
-    {{-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button> --}}
 </div>
 
 @push('styles')
-    <style>
-        .doc {
-            top: 45vh;
-            position: relative;
-            box-sizing: border-box;
-            animation: marquee 50s linear infinite;
-            margin: 0 auto;
-            text-align: left !important;
-            color: var(--mainColor);
-        }
+{{--    <style>--}}
+{{--        .doc {--}}
+{{--            top: 45vh;--}}
+{{--            position: relative;--}}
+{{--            box-sizing: border-box;--}}
+{{--            animation: marquee 50s linear infinite;--}}
+{{--            margin: 0 auto;--}}
+{{--            text-align: left !important;--}}
+{{--            color: var(--mainColor);--}}
+{{--        }--}}
 
-        .scroll {
-            border-radius: 5px;
-            width: 100%;
-            height: 38vh;
+{{--        .scroll {--}}
+{{--            border-radius: 5px;--}}
+{{--            width: 100%;--}}
+{{--            height: 38vh;--}}
 
-            overflow: hidden;
-            position: relative;
-            box-sizing: border-box;
-        }
-        }
-    </style>
+{{--            overflow: hidden;--}}
+{{--            position: relative;--}}
+{{--            box-sizing: border-box;--}}
+{{--        }--}}
+{{--        }--}}
+{{--    </style>--}}
 @endpush
 
