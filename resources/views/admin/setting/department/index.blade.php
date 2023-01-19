@@ -51,8 +51,8 @@
                                     <td>{{$department->title}}</td>
                                     <td>
                                         @can('department_edit')
-                                            <a href="{{route('admin.department.edit', $department)}}"
-                                               class="btn btn-xs btn-outline-primary">
+                                            <a data-bs-type="edit" href="{{route('admin.department.edit', $department)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
@@ -61,7 +61,7 @@
                                                   method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-xs btn-outline-danger show_confirm">
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
                                                     <i class="fa fa-trash"></i> मेटाउनु होस्
                                                 </button>
                                             </form>

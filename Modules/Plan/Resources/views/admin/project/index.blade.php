@@ -60,8 +60,8 @@
                                     <td>{{$project->allocated_amount}}</td>
                                     <td>{{$project->project_status->label()}}</td>
                                     <td>
-                                        <a href="{{route('admin.plan.project.show',$project)}}"
-                                           class="btn btn-xs btn-outline-primary">
+                                        <a data-bs-type="edit" href="{{route('admin.plan.project.show',$project)}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-eye"> विवरण हेर्नुहोस्</i>
                                         </a>
                                     </td>

@@ -33,7 +33,7 @@
                     <form action="{{route('admin.plan.project.projectDocument.store',$project)}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="document_name" class="form-label">कागजात नाम *</label>
                                 <input
                                     type="text"
@@ -46,6 +46,17 @@
                                 @error('document_name')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="plan_template_id" class="form-label">कागजात प्रकार</label>
+                                <select name="plan_template_id" class="form-select" id="plan_template_id">
+                                    <option value=""> कागजात प्रकार छान्नुहोस्</option>
+                                    @foreach($planTemplates as $planTemplate)
+                                    <option value="{{route('admin.plan.planTemplate.show',$planTemplate)}}">
+                                        {{$planTemplate->title}}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>
@@ -74,5 +85,22 @@
         @push('scripts')
             <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>
             <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>
+
+            <script>
+                $(document).ready(function (){
+                    $('#plan_template_id').on('change',function (){
+                        $.ajax({
+                            type:'GET',
+                            url:$(this).val(),
+                            success:function (resp){
+                                CKEDITOR.instances.data.setData(resp.data.data);
+                            },
+                            error:function (){
+                                alert('Something Went Wrong')
+                            }
+                        })
+                    })
+                })
+            </script>
         @endpush
 @endsection
