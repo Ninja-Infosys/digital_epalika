@@ -79,7 +79,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th>लिङ्ग</th>
-                                                        <th>{{  $businessDetail->proprietorDetail->gender ?? ''  }}</th>
+                                                        <th>{{  $businessDetail->proprietorDetail->gender?->label() ?? ''  }}</th>
                                                     </tr>
                                                     <tr>
                                                         <th>इमेल</th>
@@ -100,7 +100,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th> शैक्षिक योग्यता</th>
-                                                        <th>{{   $businessDetail->proprietorDetail->education_qualification}}</th>
+                                                        <th>{{   $businessDetail->proprietorDetail->education_qualification?->label()??''}}</th>
                                                     </tr>
                                                     <tr>
                                                         <th> मुख्य पेशा</th>

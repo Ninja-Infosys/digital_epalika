@@ -49,6 +49,12 @@ class ProprietorDetail extends Model
         'occupation',
     ];
 
+    protected $casts = [
+        'education_qualification' => Qualification::class,
+        'gender' => Gender::class,
+
+    ];
+
     public function Gender(): Attribute
     {
         return Attribute::get(fn($value) => Gender::tryFrom($value)?->label() ?? null);

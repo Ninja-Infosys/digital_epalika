@@ -12,12 +12,9 @@
                         }}
                     </th>
                 @endforeach
-
             </tr>
             </thead>
             <tbody>
-
-
             @forelse($lists as $list)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
