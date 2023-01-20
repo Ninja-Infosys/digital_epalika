@@ -252,13 +252,6 @@ p{
     font-size: 1.155rem;
 }
 
-/*gallery slider*/
-.card img {
-    object-fit: contain;
-    height: 12rem;
-    width: 100%;
-}
-
 .button .btn {
     background-color: var(--secondaryColor);
 }

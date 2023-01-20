@@ -37,37 +37,11 @@
                 </div>
             </div>
             <div class="my-3">
-                <div class="row mx-n1 g-0">
-                    <div class="border-bottom d-flex justify-content-between">
-                        <p class="text-primary fw-semibold fs-5">आर्थिक वर्ष : 2079</p>
-                        {{getAllFilesAndFolders('registration')}}
-                    </div>
-                    <div class="col-xl-4 col-lg-6">
-                        <div class="card m-1 shadow border rounded" data-bs-toggle="tooltip" data-bs-placement="top"
-                             title="फाईल को शिर्षक फाईल को शिर्षक फाईल फाईल को शिर्षक फाईल को शिर्षक फाईल">
-                            <div class="p-2">
-                                <div class="row align-items-center">
-                                    <div class="col-auto pe-0">
-                                        <div class="avatar-sm">
-                                           <span class="avatar-title text-primary rounded">
-                                                <i class="fa fa-file-pdf fs-1"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col text-muted fw-bold text-truncate">
-                                        <p class="text-muted fw-bold">दर्ता न:२३०७६५४६</p>
-                                        फाईल को शिर्षक फाईल को शिर्षक फाईल
-                                    </div>
-                                    <div class="col d-flex justify-content-between">
-                                        <p class="mb-0 font-13">2.3 MB</p>
-                                        <button class="btn btn-sm btn-primary">
-                                            <i class="fa fa-download text-white"></i></button>
-                                    </div>
-                                </div> <!-- end row -->
-                            </div> <!-- end .p-2-->
-                        </div> <!-- end col -->
-                    </div> <!-- end col-->
-                </div> <!-- end row-->
+
+                @foreach(getAllFilesAndFolders('registration') as $file)
+                    @include('admin.inc.file', ['file' => $file])
+                @endforeach
+
             </div> <!-- end .mt-3-->
 
         </div>

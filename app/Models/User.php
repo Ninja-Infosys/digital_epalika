@@ -18,6 +18,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Laravolt\Avatar\Avatar;
 
 class User extends Authenticatable
 {
@@ -107,5 +108,10 @@ class User extends Authenticatable
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+    public function getAvatarAttribute(): string
+    {
+        $name = $this->attributes['name'] ?? 'User';
+        return (new Avatar)->create($name)->toBase64();
     }
 }

@@ -167,17 +167,98 @@ if (!function_exists('isBase64')) {
     }
 }
 if (!function_exists('getAllFilesAndFolders')) {
-    function getAllFilesAndFolders(string $folder): array
+    function getAllFilesAndFolders(string $folder)
     {
-$directories = Storage::disk('public')->directories($folder);
-        $file_array = array();
-        foreach ($directories as $directory){
-            $files = Storage::disk('public')->files($directory);
-            dd($directory);
-            $file_array[$directory] = $files;
+        if (Storage::disk('public')->exists($folder)) {
+            $directories = Storage::disk('public')->allFiles($folder);
+            $processedData = collect($directories)->map(function ($item) {
+                return explode('/', $item);
+            });
+            return convertPathsToTree($processedData);
         }
-
-        dd($file_array);
-
+        return [];
     }
 }
+if (!function_exists('convertPathsToTree')) {
+    function convertPathsToTree($paths, $separator = '/', $parent = null)
+    {
+        return $paths
+            ->groupBy(function ($parts) {
+                return $parts[0];
+            })->map(function ($parts, $key) use ($separator, $parent) {
+                $childrenPaths = $parts->map(function ($parts) {
+                    return array_slice($parts, 1);
+                })->filter();
+
+                $path = $parent . $key;
+
+                $response = [
+                    'label' => (string)$key,
+                    'path' => $path,
+                ];
+
+                if ($isFile = File::isFile(public_path('storage/' . $path))) {
+                    $response['isFile'] = $isFile;
+                    $response['detail'] = [
+                        'size' => convert_to_highest_unit(File::size(public_path('storage/' . $path))),
+                        'icon' => getFileIconClass(File::mimeType(public_path('storage/' . $path))),
+                        'extension' => File::extension(public_path('storage/' . $path)),
+                        'name' => File::name(public_path('storage/' . $path)),
+                    ];
+                } else {
+                    $response['isFile'] = false;
+                    $response['children'] = convertPathsToTree(
+                        $childrenPaths,
+                        $separator,
+                        $path . $separator
+                    );
+                }
+
+                return $response;
+            })->values();
+    }
+}
+
+if (!function_exists('convert_to_highest_unit')) {
+    function convert_to_highest_unit($bytes): string
+    {
+        if ($bytes >= 1073741824) {
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        } elseif ($bytes >= 1048576) {
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        } elseif ($bytes >= 1024) {
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
+        } elseif ($bytes >= 1) {
+            $bytes = $bytes . ' bytes';
+        } else {
+            $bytes = '0 bytes';
+        }
+        return $bytes;
+    }
+}
+
+
+if (!function_exists('getFileIconClass')) {
+    function getFileIconClass(string $mime): string
+    {
+        return match ($mime) {
+            'application/pdf' => 'fa-file-pdf',
+            'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'fa-file-word',
+            'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'fa-file-excel',
+            'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'fa-file-powerpoint',
+            'application/zip', 'application/x-rar-compressed' => 'fa-file-archive',
+            'image/jpeg', 'image/png', 'image/gif' => 'fa-file-image',
+            'audio/mpeg', 'audio/x-wav' => 'fa-file-audio',
+            'video/mp4', 'video/x-msvideo' => 'fa-file-video',
+            default => 'fa-file',
+        };
+    }
+}
+
+
+
+
+
+
+
+
