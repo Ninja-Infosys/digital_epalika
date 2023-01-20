@@ -65,13 +65,21 @@
                                      aria-labelledby="branch{{$loop->iteration}}" data-bs-parent="#branches">
                                     <div class="accordion-body">
                                         <ul class="list-group">
-                                            @foreach($branch->branches as $subBranch)
-                                            <li class="list-group-item d-flex justify-content-between align-items-center load_data"
-                                                data-bs-url="{{route('getServices',$subBranch)}}">
-                                                <h6>{{$loop->iteration}}. {{$subBranch->branch_name}}</h6>
-                                                <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्</button>
-                                            </li>
-                                            @endforeach
+                                            @forelse($branch->branches as $subBranch)
+                                                <li class="list-group-item d-flex justify-content-between align-items-center load_data"
+                                                    data-bs-url="{{route('getServices',$subBranch)}}">
+                                                    <h6>{{$loop->iteration}}. {{$subBranch->branch_name}}</h6>
+                                                    <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
+                                                    </button>
+                                                </li>
+                                            @empty
+                                                <li class="list-group-item d-flex justify-content-between align-items-center load_data"
+                                                    data-bs-url="{{route('getServices',$branch)}}">
+                                                    <h6> {{$branch->branch_name}}</h6>
+                                                    <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
+                                                    </button>
+                                                </li>
+                                            @endforelse
                                         </ul>
                                     </div>
                                 </div>
@@ -94,11 +102,16 @@
     </div>
     @push('scripts')
         <script>
-            $( document ).ready(function() {
-                console.log( "ready!" );
+            $(document).ready(function () {
+                ajaxCall('{{route('getServices')}}');
             });
             $('.load_data').click(function () {
                 let url = $(this).data('bs-url');
+                ajaxCall(url);
+            });
+
+            function ajaxCall(url) {
+
                 $.ajax({
                     url: url,
                     type: 'GET',
@@ -109,12 +122,12 @@
                             let url = "{{route('service.view', ":id")}}".replace(':id', item.id);
                             printTo.append(`<li class="list-group-item d-flex justify-content-between align-items-center">
                                    <h6>1. ` + item.service_name + `</h6>
-                                 <a class="btn btn-info btn-sm text-white" href="`+ url +`">सेवाहरु हेर्नुहोस्</a>
+                                 <a class="btn btn-info btn-sm text-white" href="` + url + `">सेवाहरु हेर्नुहोस्</a>
                             </li>`)
                         });
                     }
                 });
-            });
+            }
         </script>
 
     @endpush
