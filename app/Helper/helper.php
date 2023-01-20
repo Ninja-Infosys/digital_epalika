@@ -176,7 +176,7 @@ if (!function_exists('getAllFilesAndFolders')) {
             });
             return convertPathsToTree($processedData);
         }
-
+        return [];
     }
 }
 if (!function_exists('convertPathsToTree')) {
