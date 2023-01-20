@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravolt\Avatar\Avatar;
 
 class GrievanceUser extends Model
 {
@@ -31,6 +32,12 @@ class GrievanceUser extends Model
         if (! empty($value)) {
             $this->attributes['password'] = bcrypt($value);
         }
+    }
+
+    public function getAvatarAttribute(): string
+    {
+        $name = $this->attributes['name'] ?? 'User';
+        return (new Avatar)->create($name)->toBase64();
     }
 
     public function grievanceDetails(): HasMany
