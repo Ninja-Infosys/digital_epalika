@@ -21,6 +21,7 @@ class StoreMeetingEventRequest extends FormRequest
             'end_date' => ['required'],
             'en_end_date' => ['nullable', 'date'],
             'url' => ['nullable'],
+            'committee_ward'=>['nullable','array'],
             'recurrence_end_date' => ['nullable'],
             'en_recurrence_end_date' => ['nullable', 'date'],
             'description' => ['required'],

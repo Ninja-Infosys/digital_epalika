@@ -28,13 +28,15 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ वडा समिति थप्नुहोस्</h4>
-                        <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.executiveMeeting.wardCommittee.index')}}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> वडा समिति बिवरण
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.executiveMeeting.wardCommittee.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('admin.executiveMeeting.wardCommittee.store')}}" method="post"
+                          enctype="multipart/form-data">
                         @csrf
 
                         <fieldset class="border p-2 mb-2">
@@ -42,8 +44,8 @@
                                 <strong>व्यक्तिगत विवरण </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label for="name" class="form-label">नाम  *</label>
+                                <div class="col-md-4 mb-2">
+                                    <label for="name" class="form-label">नाम *</label>
                                     <input
                                         type="text"
                                         name="name"
@@ -56,8 +58,37 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                               @if(auth()->user()->role->type === 'Super')
+                                    <div class="col-md-4 mb-2">
+                                        <label for="committee_ward" class="form-label"> कार्यस्थल वडा नं.</label>
+                                        <select name="committee_ward" id="committee_ward"
+                                                class="form-select @error('designation') is-invalid @enderror">
+                                            <option>--छान्नुहोस्--</option>
+                                            @foreach($officeSetting->localBody->ward_no as $ward)
+                                                <option
+                                                    value="{{$ward}}" {{ old('committee_ward') == $ward ?'selected':''}}>{{$ward}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('committee_ward')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                               @endif
+
+                                <div class="{{auth()->user()->role->type === 'Super' ? 'col-md-4':'col-md-8'}} mb-2">
+                                    <label for="photo" class="form-label">फोटो </label>
+                                    <input
+                                        type="file"
+                                        name="photo"
+                                        class="form-control @error('photo') is-invalid @enderror"
+                                        id="photo"
+                                    />
+                                    @error('photo')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="designation" class="form-label">पद  *</label>
+                                    <label for="designation" class="form-label">पद *</label>
                                     <input
                                         type="text"
                                         name="designation"
@@ -70,23 +101,9 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-6 mb-2">
-
-                                    <label for="photo" class="form-label">फोटो </label>
-                                    <input
-                                        type="file"
-                                        name="photo"
-
-                                        class="form-control @error('photo') is-invalid @enderror"
-                                        id="photo"
-
-                                    />
-                                    @error('photo')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="email" class="form-label">इमेल  </label>
+                                    <label for="email" class="form-label">इमेल </label>
                                     <input
                                         type="text"
                                         name="email"
@@ -100,7 +117,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="phone" class="form-label">फोन नम्बर *  </label>
+                                    <label for="phone" class="form-label">फोन नम्बर * </label>
                                     <input
                                         type="text"
                                         name="phone"
@@ -114,14 +131,14 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="position" class="form-label">स्थान  </label>
+                                    <label for="position" class="form-label">मर्यादाक्रम </label>
                                     <input
                                         type="number"
                                         name="position"
                                         value="{{old('position')}}"
                                         class="form-control @error('position') is-invalid @enderror"
                                         id="position"
-                                        placeholder="स्थान"
+                                        placeholder="मर्यादाक्रम"
                                     />
                                     @error('position')
                                     <div class="invalid-feedback">{{$message}}</div>
