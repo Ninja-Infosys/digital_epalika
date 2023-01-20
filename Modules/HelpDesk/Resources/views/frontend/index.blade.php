@@ -81,8 +81,22 @@
     </div>
     @push('scripts')
         <script>
+            let inactivityTime = function() {
+                let time;
+                window.onload = resetTimer;
+                document.onmousemove = resetTimer;
+                document.onkeypress = resetTimer;
+                function resetData() {
+                    ajaxCall('{{route('getServices')}}');
+                }
+                function resetTimer() {
+                    clearTimeout(time);
+                    time = setTimeout(resetData, 2000)
+                }
+            };
             $(document).ready(function () {
                 ajaxCall('{{route('getServices')}}');
+                inactivityTime();
             });
             $('.load_data').click(function () {
                 let url = $(this).data('bs-url');
