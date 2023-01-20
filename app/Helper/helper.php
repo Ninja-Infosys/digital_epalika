@@ -169,8 +169,14 @@ if (!function_exists('isBase64')) {
 if (!function_exists('getAllFilesAndFolders')) {
     function getAllFilesAndFolders(string $folder): array
     {
-        $files = Storage::disk('public')->directories('directory_name');
-dd($files);
+        $files = Storage::disk('public')->allFiles($folder);
+
+        $result = array();
+        foreach($files as $file) {
+            $result[] = explode('/', $file);
+        }
+
+        dd($result);
         return $files;
     }
 }

@@ -16,9 +16,8 @@ class FrontController extends Controller
     public function helpDesk()
     {
         $branches = Branch::with('branches')->whereNull('branch_id')->get();
-        $services = Service::whereNull('branch_id')->get();
 
-        return view('helpdesk::frontend.index', compact('branches', 'services'));
+        return view('helpdesk::frontend.index', compact('branches'));
     }
 
     public function service()
