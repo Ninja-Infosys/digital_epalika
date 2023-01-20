@@ -1,55 +1,29 @@
 @extends('frontend.layouts.master')
 @section('content')
     <div class="content-section">
-        <div class="breadcrumb d-flex">
+        <div class="breadcrumb mt-3 d-flex">
             <div class="breadcrumb-item">
                 <a class="whitespace-nowrap text-primary-500" href="{{route('welcome')}}">ई-पालिका</a>
                 <i class="fa fa-angle-double-right text-light"></i>
                 <a class="ml-1 text-primary-500">हेल्प डेस्क </a>
             </div>
         </div>
-        <div class="text-center mt-5 text-decoration-underline m-4">
-            <h5 class="fw-bold">तपशिल सेवा लिन सम्बन्धित ठाउँमा click गर्नुहोस्</h5>
+        <div class="text-center mt-2 text-decoration-underline">
+            <h5 class="fw-bold">सेवाहरु हेर्न सम्बन्धित शाखामा क्लिक गर्नुहोस्</h5>
         </div>
-        <div class="row mt-5">
+        <div class="row mt-3">
             <div class="col-md-6">
-                <div class="card border-info p-2">
-                    <div class="text-center">
+                <div class="card border-info">
+                    <div class="card-header">
+                    <div class="text-center position-relative">
                         <h5 class="fw-bold">शाखाहरु</h5>
+                        <button class="btn btn-primary btn-sm float-end position-absolute top-0 end-0 resetBtn" title="Reset">
+                            <i class="fa fa-refresh"></i>
+                        </button>
                     </div>
-                    {{--   @foreach($branches as $branch)
-                           <div class="branch-title mb-2">
-                               <button
-                                   class="btn fs-5 w-100 d-flex justify-content-between {{count($branch->branches) !== 0 ? '':'load_data'}}"
-                                   type="button"
-                                   data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="false"
-                                   data-bs-url="{{route('getServices',$branch)}}">
-                                   {{$branch->branch_name}}
-                                   @if(count($branch->branches)!==0)
-                                       <i class="fs-5 pt-1 fa-solid fa-angles-down"></i>
-                                   @endif
-                               </button>
-                           </div>
-                           @if(count($branch->branches)!==0)
-                               <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
-                                   <div class="sub-branch ms-4">
-                                       <ul class="list-group">
-                                           @foreach($branch->branches as $subBranch)
-                                               <li class="list-group-item my-2 d-flex justify-content-between load_data"
-                                                   data-bs-url="{{route('getServices',$subBranch)}}">
-                                                   <div class="d-flex align-items-center gap-2">
-                                                       <i class="fa fa-angles-right"></i> {{$subBranch->branch_name}}
-                                                   </div>
-                                                   <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
-                                                   </button>
-                                               </li>
-                                           @endforeach
-                                       </ul>
-                                   </div>
-                               </div>
-                           @endif
-                       @endforeach--}}
-                    <div class="accordion" id="branches">
+                    </div>
+                    <div class="card-body">
+                    <div class="accordion mt-2" id="branches">
                         @foreach($branches as $branch)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="branch{{$loop->iteration}}">
@@ -64,30 +38,42 @@
                                      class="accordion-collapse collapse {{$loop->first ? 'show' :''}}"
                                      aria-labelledby="branch{{$loop->iteration}}" data-bs-parent="#branches">
                                     <div class="accordion-body">
-                                        <strong>This is the first item's accordion body.</strong> It is shown by
-                                        default, until the collapse plugin adds the appropriate classes that we use to
-                                        style each element. These classes control the overall appearance, as well as the
-                                        showing and hiding via CSS transitions. You can modify any of this with custom
-                                        CSS or overriding our default variables. It's also worth noting that just about
-                                        any HTML can go within the <code>.accordion-body</code>, though the transition
-                                        does limit overflow.
+                                        <ul class="list-group">
+                                            @forelse($branch->branches as $subBranch)
+                                                <li class="list-group-item d-flex justify-content-between align-items-center load_data"
+                                                    data-bs-url="{{route('getServices',$subBranch)}}">
+                                                    <h6>{{$loop->iteration}}. {{$subBranch->branch_name}}</h6>
+                                                    <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
+                                                    </button>
+                                                </li>
+                                            @empty
+                                                <li class="list-group-item d-flex justify-content-between align-items-center load_data"
+                                                    data-bs-url="{{route('getServices',$branch)}}">
+                                                    <h6> {{$branch->branch_name}}</h6>
+                                                    <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
+                                                    </button>
+                                                </li>
+                                            @endforelse
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card branch-service border-info p-2">
-                    <div class="text-center">
-                        <h6 class="fw-bold fs-5">सेवाहरु</h6>
+                <div class="card border-info">
+                    <div class="card-header">
+                        <div class="text-center">
+                            <h6 class="fw-bold fs-5">सेवाहरु</h6>
+                        </div>
                     </div>
-                    <ul class="list-group" id="data">
-                        @foreach($services as $service)
-
-                        @endforeach
-                    </ul>
+                    <div class="card-body">
+                        <ul class="list-group" id="data">
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,32 +81,48 @@
     </div>
     @push('scripts')
         <script>
-            // on click .load_data send the ajax request to get the services and display in li inside #data
+            let inactivityTime = function() {
+                let time;
+                window.onload = resetTimer;
+                document.onmousemove = resetTimer;
+                document.onkeypress = resetTimer;
+                function resetData() {
+                    ajaxCall('{{route('getServices')}}');
+                }
+                function resetTimer() {
+                    clearTimeout(time);
+                    time = setTimeout(resetData, 1000*60*5)
+                }
+            };
+            $(document).ready(function () {
+                ajaxCall('{{route('getServices')}}');
+                inactivityTime();
+            });
             $('.load_data').click(function () {
                 let url = $(this).data('bs-url');
+                ajaxCall(url);
+            });
+            $('.resetBtn').click(function () {
+                ajaxCall('{{route('getServices')}}');
+            });
+            function ajaxCall(url) {
                 $.ajax({
                     url: url,
                     type: 'GET',
                     success: function (data) {
                         const printTo = $('#data');
-                        // print data which is in array in #data
-                        data.forEach(function (item) {
-                            // clear #data
-                            printTo.empty();
-                            // pass item.id from js object to the route() in blade
-
+                        printTo.empty();
+                        data.forEach(function (item, key) {
+                            let sn = key+1;
                             let url = "{{route('service.view', ":id")}}".replace(':id', item.id);
-                            printTo.append(`<a href="` + url + `">
-                                <li class="p-2 bg-success text-white rounded mb-2 ps-4 d-flex justify-content-between">
-<div class="d-flex align-items-center gap-2">
-                                                    <i class="fa fa-angles-right"></i> ` + item.service_name + `
-                            </div> <button class="btn btn-info btn-sm text-white">विवरण हेर्नुहोस्</button>
-                            </li>
-                        </a>`)
+                            printTo.append(`<li class="list-group-item d-flex justify-content-between align-items-center">
+                                   <h6>`+sn+`. ` + item.service_name + `</h6>
+                                 <a class="btn btn-info btn-sm text-white" href="` + url + `">सेवाहरु हेर्नुहोस्</a>
+                            </li>`)
                         });
                     }
                 });
-            });
+            }
         </script>
 
     @endpush

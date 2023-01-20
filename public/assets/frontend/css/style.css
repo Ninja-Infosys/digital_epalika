@@ -463,6 +463,7 @@ p{
 }
 
 .footer {
+    margin-top: 1rem;
     bottom: 0;
     padding: 10px 15px 5px;
     right: 0;
@@ -684,24 +685,6 @@ a {
     color: var(--whiteColor);
 }
 
-/*-------------------modal right-----------*/
-@media(min-width: 576px) {
-    .modal-dialog {
-        margin: 0 !important;
-        padding-right: 5px;
-        max-width: 700px !important;
-    }
-}
-
-.modal-dialog {
-    position: fixed;
-    top: 8%;
-    right: 3px;
-    left: 48%;
-    transition: 0.5s;
-    border-radius: 1%;
-    height: 92%;
-}
 
 .top-menu {
     background: linear-gradient(90deg, rgb(243 243 243) 0%, rgb(247 243 243) 35%, rgb(227 228 247) 100%);

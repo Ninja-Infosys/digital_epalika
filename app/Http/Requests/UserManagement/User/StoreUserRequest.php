@@ -21,14 +21,11 @@ class StoreUserRequest extends FormRequest
             'phone' => ['nullable', 'numeric', Rule::unique('users', 'phone')->withoutTrashed()],
             'role_id' => ['required', Rule::exists('roles', 'id')->withoutTrashed()],
             'password' => ['required', 'confirmed', 'min:7'],
-            'province_id' => ['nullable', Rule::exists('provinces', 'id')],
-            'district_id' => ['nullable', Rule::exists('districts', 'id')],
-            'local_body_id' => ['nullable', Rule::exists('local_bodies', 'id')],
             'ward_no' => ['nullable', 'integer'],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'नाम अनिबार्य छ।',

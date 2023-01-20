@@ -43,9 +43,6 @@ class User extends Authenticatable
         'role_id',
         'is_active',
         'password',
-        'province_id',
-        'district_id',
-        'local_body_id',
         'ward_no',
         'profile_photo_path',
         'pin',
@@ -90,16 +87,6 @@ class User extends Authenticatable
         }
     }
 
-    public function getAddressAttribute(): array
-    {
-        return [
-            'province_id' => $this->attributes['province_id'],
-            'district_id' => $this->attributes['district_id'],
-            'local_body_id' => $this->attributes['local_body_id'],
-            'ward_no' => $this->attributes['ward_no'],
-        ];
-    }
-
     public function scopeFilter($query, $param = [])
     {
         $this->filterByUserRole($query, $param);
@@ -120,20 +107,5 @@ class User extends Authenticatable
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
-    }
-
-    public function province(): BelongsTo
-    {
-        return $this->belongsTo(Province::class);
-    }
-
-    public function district(): BelongsTo
-    {
-        return $this->belongsTo(District::class);
-    }
-
-    public function localBody(): BelongsTo
-    {
-        return $this->belongsTo(LocalBody::class);
     }
 }
