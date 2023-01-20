@@ -91,7 +91,7 @@
                 }
                 function resetTimer() {
                     clearTimeout(time);
-                    time = setTimeout(resetData, 2000)
+                    time = setTimeout(resetData, 1000*60*5)
                 }
             };
             $(document).ready(function () {
@@ -111,11 +111,12 @@
                     type: 'GET',
                     success: function (data) {
                         const printTo = $('#data');
-                        data.forEach(function (item) {
-                            printTo.empty();
+                        printTo.empty();
+                        data.forEach(function (item, key) {
+                            let sn = key+1;
                             let url = "{{route('service.view', ":id")}}".replace(':id', item.id);
                             printTo.append(`<li class="list-group-item d-flex justify-content-between align-items-center">
-                                   <h6>1. ` + item.service_name + `</h6>
+                                   <h6>`+sn+`. ` + item.service_name + `</h6>
                                  <a class="btn btn-info btn-sm text-white" href="` + url + `">सेवाहरु हेर्नुहोस्</a>
                             </li>`)
                         });
