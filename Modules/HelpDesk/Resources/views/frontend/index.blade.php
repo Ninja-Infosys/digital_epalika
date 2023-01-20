@@ -13,43 +13,17 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-6">
-                <div class="card border-info p-2">
-                    <div class="text-center">
+                <div class="card border-info">
+                    <div class="card-header">
+                    <div class="text-center position-relative">
                         <h5 class="fw-bold">शाखाहरु</h5>
+                        <button class="btn btn-primary btn-sm float-end position-absolute top-0 end-0 resetBtn">
+                            <i class="fa fa-refresh"></i>
+                        </button>
                     </div>
-                    {{--   @foreach($branches as $branch)
-                           <div class="branch-title mb-2">
-                               <button
-                                   class="btn fs-5 w-100 d-flex justify-content-between {{count($branch->branches) !== 0 ? '':'load_data'}}"
-                                   type="button"
-                                   data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="false"
-                                   data-bs-url="{{route('getServices',$branch)}}">
-                                   {{$branch->branch_name}}
-                                   @if(count($branch->branches)!==0)
-                                       <i class="fs-5 pt-1 fa-solid fa-angles-down"></i>
-                                   @endif
-                               </button>
-                           </div>
-                           @if(count($branch->branches)!==0)
-                               <div class="collapse {{$loop->first ? 'show' :''}}" id="collapse{{$loop->iteration}}">
-                                   <div class="sub-branch ms-4">
-                                       <ul class="list-group">
-                                           @foreach($branch->branches as $subBranch)
-                                               <li class="list-group-item my-2 d-flex justify-content-between load_data"
-                                                   data-bs-url="{{route('getServices',$subBranch)}}">
-                                                   <div class="d-flex align-items-center gap-2">
-                                                       <i class="fa fa-angles-right"></i> {{$subBranch->branch_name}}
-                                                   </div>
-                                                   <button class="btn btn-info btn-sm text-white">सेवाहरु हेर्नुहोस्
-                                                   </button>
-                                               </li>
-                                           @endforeach
-                                       </ul>
-                                   </div>
-                               </div>
-                           @endif
-                       @endforeach--}}
-                    <div class="accordion" id="branches">
+                    </div>
+                    <div class="card-body">
+                    <div class="accordion mt-2" id="branches">
                         @foreach($branches as $branch)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="branch{{$loop->iteration}}">
@@ -86,15 +60,20 @@
                             </div>
                         @endforeach
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card branch-service border-info p-2">
-                    <div class="text-center">
-                        <h6 class="fw-bold fs-5">सेवाहरु</h6>
+                <div class="card border-info">
+                    <div class="card-header">
+                        <div class="text-center">
+                            <h6 class="fw-bold fs-5">सेवाहरु</h6>
+                        </div>
                     </div>
-                    <ul class="list-group" id="data">
-                    </ul>
+                    <div class="card-body">
+                        <ul class="list-group" id="data">
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,9 +88,10 @@
                 let url = $(this).data('bs-url');
                 ajaxCall(url);
             });
-
+            $('.resetBtn').click(function () {
+                ajaxCall('{{route('getServices')}}');
+            });
             function ajaxCall(url) {
-
                 $.ajax({
                     url: url,
                     type: 'GET',
