@@ -91,7 +91,7 @@
                 }
                 function resetTimer() {
                     clearTimeout(time);
-                    time = setTimeout(resetData, 2000)
+                    time = setTimeout(resetData, 1000*60*5)
                 }
             };
             $(document).ready(function () {
