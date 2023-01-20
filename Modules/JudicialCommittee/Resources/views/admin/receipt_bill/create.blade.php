@@ -51,7 +51,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="entry_person" class="form-label"> प्रवेश गर्ने व्यक्ति <span
+                                <label for="entry_person" class="form-label"> रुजु गर्ने व्यक्ति <span
                                         class="text-danger">*</span></label>
                                 <input
                                     type="text"

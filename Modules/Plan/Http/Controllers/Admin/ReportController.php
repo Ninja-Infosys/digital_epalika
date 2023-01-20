@@ -12,6 +12,7 @@ use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
+use Modules\Plan\Transformers\ProjectResource;
 
 class ReportController extends Controller
 {
@@ -35,13 +36,30 @@ class ReportController extends Controller
             'columns' => ['nullable', 'array']
         ]);
 
-        $projects = Project::with('budgetHead', 'budgetSource', 'planArea')->where(function ($q) use ($request) {
+        if (empty($request->input('columns'))) {
+            $request->request->add(
+                ['columns' =>
+                    [
+                        'projects' => ['registration_no', 'project_name', 'project_start_date', 'project_completion_date','allocated_amount']
+                    ]
+                ]
+            );
+        }
+
+        $projects = Project::with('fiscalYear','budgetHead', 'budgetSource', 'planArea')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
-        })
-            ->get();
+        })->get();
+
+        if (!empty($request->input('columns')['project_grant_details'])) {
+            $projects->load('projectGrantDetails');
+        }
+
+        if (!empty($request->input('columns')['benefited_member_details'])) {
+            $projects->load('benefitedMemberDetails');
+        }
 
         return response()->json([
-            'view' => (string)View::make('plan::admin.report.report_table', compact('projects'))
+            'data' => ProjectResource::collection($projects)
         ]);
     }
 
@@ -49,13 +67,10 @@ class ReportController extends Controller
     {
         $columnData = collect();
 
-        (new Project())
+        (new project())
             ->ownAndRelatedModelsFillableColumns()
             ->filter(function ($column) {
-                return array_keys($column, 'Project')
-                    || array_keys($column, 'projectCostDetail')
-                    || array_keys($column, 'projectMaintenanceArrangement')
-                    || array_keys($column, 'consumerCommittee');
+                return !array_keys($column, 'printedData');
             })
             ->each(function ($column) use ($columnData) {
                 $columnData->push(collect($column)->put('columns', $column['columns']));
