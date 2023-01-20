@@ -5,65 +5,136 @@
             <div class="row d-flex mt-5 ">
                 <div class="breadcrumb d-flex">
                     <div class="breadcrumb-item">
-                        <a class="whitespace-nowrap text-primary-500" href="{{route('grievanceHandling.grievance')}}">गुनासो</a>
-                        <i class="fa fa-angle-double-right ml-lg-1 text-light"></i><a class="ml-1 text-primary-500">गुनासो ट्रयाक</a>
+                        <a class="whitespace-nowrap text-primary-500"
+                           href="{{ route('grievanceHandling.grievance') }}">गुनासो</a>
+                        <i class="fa fa-angle-double-right ml-lg-1 text-light"></i><a class="ml-1 text-primary-500">गुनासो
+                            ट्रयाक</a>
                     </div>
                 </div>
-                <div class="row bg-card shadow rounded overflow-hidden">
-                    <div class="d-flex justify-content-start">
-                        <h4 class="text-center mt-5">गुनासो विषय: {{$grievanceDetail->subject}}</h4>
-                    </div>
-                    <div class="col-md-7"><h6>गुनासो प्रकार: {{$grievanceDetail->grievanceType->title??''}}</h6></div>
-                    <div class="col-md-5"><h6>सम्वन्धित शाखा: {{$grievanceDetail->grievanceOffice->title??''}}</h6></div>
-                    <div><h6>आवेदक नम्बर: {{$grievanceDetail->grievanceUser->phone??''}}</h6></div>
-                    <div class=" row mt-4 border rounded mx-auto">
-                        <div class=" single-grievance-details  d-flex px-3 py-2">
-                            <img src="{{asset('assets/frontend/image/avatar.png')}}"
-                                 class="img-fluid rounded-circle mt-1" alt="">
-                            <h6>{{$grievanceDetail->description}}</h6>
-                        </div>
-                        <hr>
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-8 border shadow p-4 rounded border overflow-hidden">
+                        <h5>गुनासोको विषय: {{ $grievanceDetail->subject }}</h5>
                         <div class="row">
-                            @foreach($grievanceDetail->files as $file)
-                            <div class="col-md-3 grievance-doc-img">
-
-                                <img src="{{$file->file_url}}" class="img-fluid rounded mb-2"
-                                     alt="">
-
+                            <div class="col-md-6">
+                                <h6>आवेदकको नाम: {{ $grievanceDetail->grievanceUser->name ?? '' }}</h6>
+                                <h6>आवेदकको नम्बर: {{ $grievanceDetail->grievanceUser->phone ?? '' }}</h6>
+                                <h6>टोकन नम्बर: {{ $grievanceDetail->token ?? '' }}</h6>
                             </div>
-                            @endforeach
+                            <div class="col-md-6">
+                                <h6 class="text-end">गुनासोको प्रकार: {{ $grievanceDetail->grievanceType->title ?? '' }}</h6>
+                                <h6 class="text-end">सम्वन्धित शाखा: {{ $grievanceDetail->grievanceOffice->title ?? '' }}</h6>
+                                <h6 class="text-end">गुनासोको स्थिति: <span class="px-2 text-white rounded {{ $grievanceDetail->status->color() ?? '' }}">{{ $grievanceDetail->status->label() ?? '' }}</span></h6>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                        <div class="grievanceChat mt-2 border rounded px-2 h-50 overflow-auto">
+                            <div id="chat">
+                                <div class="my-2 p-2">
+                                    <div class="border rounded p-2">
+                                        <div class="d-flex justify-content-end my-3 border p-2 rounded">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <img class="order-2"
+                                                     src="{{$grievanceDetail->grievanceUser->avatar ?? ''}}"
+                                                     alt="avatar 1" height="50">
+                                                <div class="order-1">
+                                                    <p class="small">{{$grievanceDetail->grievanceUser->name ?? ''}}</p>
+                                                    <p class="small text-muted">{{$grievanceDetail->created_at?->calendar()}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-end">
+                                            <h6 class="p-2 me-3 mb-1 rounded bg-light">
+                                                {{ $grievanceDetail->description }}</h6>
+                                            @foreach ($grievanceDetail->files as $file)
+                                                <a class="me-3 btn btn-primary btn-sm" href="{{$file->file_url}}"
+                                                   download="{{$file->file_url}}">
+                                                    {{$file->file_name}} <i class="fa fa-download"></i>
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    @foreach($grievanceDetail->grievanceDetails as $detail)
+                                        @if(!empty($detail->user_id))
+                                            <div class="border rounded p-2">
+                                                <div class="d-flex justify-content-start my-3 border p-2 rounded">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <img class="order-1"
+                                                             src="{{$detail->user->avatar ?? ''}}"
+                                                             alt="avatar 1" height="50">
+                                                        <div class="order-2">
+                                                            <p class="small">{{$detail->user->name ?? ''}}</p>
+                                                            <p class="small text-muted">{{$detail->created_at?->calendar()}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-column align-items-start">
+                                                    <h6 class="p-2 ms-3 mb-1 rounded bg-light">
+                                                        {{ $detail->description }}</h6>
+                                                    @foreach ($detail->files as $detailFile)
+                                                        <a class="me-3 btn btn-primary btn-sm"
+                                                           href="{{$detailFile->file_url}}"
+                                                           download="{{$detailFile->file_url}}">
+                                                            {{$detailFile->file_name}} <i class="fa fa-download"></i>
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="border rounded p-2">
+                                                <div class="d-flex justify-content-end my-3 border p-2 rounded">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <img class="order-2"
+                                                             src="{{$detail->grievanceUser->avatar ?? ''}}"
+                                                             alt="avatar 1" height="50">
+                                                        <div class="order-1">
+                                                            <p class="small">{{$detail->grievanceUser->name ?? ''}}</p>
+                                                            <p class="small text-muted">{{$detail->created_at?->calendar()}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-column align-items-end">
+                                                    <h6 class="p-2 me-3 mb-1 rounded bg-light">
+                                                        {{ $detail->description }}</h6>
+                                                    @foreach ($detail->files as $detailFile)
+                                                        <a class="me-3 btn btn-primary btn-sm"
+                                                           href="{{$detailFile->file_url}}"
+                                                           download="{{$detailFile->file_url}}">
+                                                            {{$detailFile->file_name}} <i class="fa fa-download"></i>
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if(!$loop->last)
+                                            <hr>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+{{--                            <div class="d-flex justify-content-start align-items-center my-4 p-2">--}}
+{{--                                <input type="text" class="form-control flex-shrink-1" id="exampleFormControlInput3"--}}
+{{--                                       placeholder="Type message">--}}
+{{--                                <div class="flex-shrink-0">--}}
+{{--                                    <a class="ms-1 text-muted" href="#"><i class="fas fa-paperclip"></i></a>--}}
+{{--                                    <a class="ms-3 link-info" href="#"><i class="fas fa-paper-plane"></i></a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
-                    <div class="row mt-4 mb-2 border rounded mx-auto">
-                        @foreach($grievanceDetail->grievanceDetails as $details)
-                        <div class=" single-grievance-details px-3 pt-2 d-flex justify-content-end">
-                            <h6>{{$details->description}}
-                            </h6>
-                            <img src="{{asset('assets/frontend/image/avatar.png')}}"
-                                 class="img-fluid rounded-circle mt-1 rounded" alt="">
-                        </div>
-                        <hr>
-                        <div class=" row container-fluid">
-                            @foreach($details->files as $detailFile)
-                            <div class="col-md-3 grievance-doc-img">
-
-                                <img src="{{$detailFile->file_url}}" class="img-fluid rounded mb-2"
-                                     alt="">
-
-                            </div>
-                            @endforeach
-                                <hr>
-                        </div>
-                        @endforeach
-                    </div>
-{{--                    <div class="reply mx-auto mt-5">--}}
-{{--                        <form action="" class="mb-3">--}}
-{{--                            <h5>टिप्पणी छोड्नुहोस</h5>--}}
-{{--                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
                 </div>
             </div>
         </div>
     </section>
+    @push('scripts')
+    <script>
+        $(document).ready(function () {
+            const ChatDiv = $('.grievanceChat');
+            const height = ChatDiv[0].scrollHeight;
+            ChatDiv.scrollTop(height);
+        });
+    </script>
+    @endpush
 @endsection
+

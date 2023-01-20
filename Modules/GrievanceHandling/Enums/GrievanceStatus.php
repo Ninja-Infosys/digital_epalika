@@ -23,4 +23,18 @@ enum GrievanceStatus: string
             self::CLOSED => 'बन्द',
         };
     }
+    public function color(): string
+    {
+        return self::getColor($this);
+    }
+
+    public static function getColor(self $value): string
+    {
+        return match ($value) {
+            self::UNSEEN => 'bg-danger',
+            self::INVESTIGATED => 'bg-info text-white',
+            self::REPLIED => 'bg-success',
+            self::CLOSED => 'bg-secondary',
+        };
+    }
 }
