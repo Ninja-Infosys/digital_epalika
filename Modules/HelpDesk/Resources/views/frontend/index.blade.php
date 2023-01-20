@@ -111,8 +111,8 @@
                     type: 'GET',
                     success: function (data) {
                         const printTo = $('#data');
+                        printTo.empty();
                         data.forEach(function (item) {
-                            printTo.empty();
                             let url = "{{route('service.view', ":id")}}".replace(':id', item.id);
                             printTo.append(`<li class="list-group-item d-flex justify-content-between align-items-center">
                                    <h6>1. ` + item.service_name + `</h6>
