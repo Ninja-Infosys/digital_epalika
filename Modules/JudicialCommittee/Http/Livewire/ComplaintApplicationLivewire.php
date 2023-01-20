@@ -188,7 +188,7 @@ class ComplaintApplicationLivewire extends Component
             return redirect(route('admin.judicialCommittee.complaintApplication.index'));
         } else {
             $this->reset('form', 'complainantDistricts', 'complainantLocalBodies', 'complainantWards', 'defendantDistricts', 'defendantLocalBodies', 'defendantWards');
-
+            $this->setDefaultAddress();
             $this->dispatchBrowserEvent('toast_message', [
                 'type' => 'success',
                 'title' => 'उजुरी पत्र सफलतापूर्वक थपियो'
