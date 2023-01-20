@@ -45,8 +45,8 @@
                                 <th>नाम</th>
                                 <th>फोटो</th>
                                 <th>पद</th>
-                                <th>फोन नम्बर </th>
-                                <th>इमेल </th>
+                                <th>फोन नम्बर</th>
+                                <th>इमेल</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -56,28 +56,36 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$municipalCommittee->name}}</td>
                                     <td class="table-user">
-                                        <img src="{{$municipalCommittee->photo_url}}" class="me-2 rounded-circle" alt="">
+                                        <img src="{{$municipalCommittee->photo_url}}" class="me-2 rounded-circle"
+                                             alt="">
                                     </td>
                                     <td>{{$municipalCommittee->designation}}</td>
                                     <td>{{$municipalCommittee->phone}}</td>
                                     <td>{{$municipalCommittee->email}}</td>
 
                                     <td>
-                                        @can('executiveCommittee_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.executiveMeeting.municipalCommittee.edit',$municipalCommittee)}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
+                                        @can('update',$municipalCommittee)
+                                            @can('executiveCommittee_edit')
+                                                <a data-bs-type="edit"
+                                                   href="{{route('admin.executiveMeeting.municipalCommittee.edit',$municipalCommittee)}}"
+                                                   class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                    <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                                </a>
+                                            @endcan
                                         @endcan
-                                        @can('executiveCommittee_delete')
-                                            <form action="{{route('admin.executiveMeeting.municipalCommittee.destroy',$municipalCommittee)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
+                                        @can('delete',$municipalCommittee)
+                                            @can('executiveCommittee_delete')
+                                                <form
+                                                    action="{{route('admin.executiveMeeting.municipalCommittee.destroy',$municipalCommittee)}}"
+                                                    method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button data-bs-type="delete"
+                                                            class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                        <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         @endcan
                                     </td>
                                 </tr>

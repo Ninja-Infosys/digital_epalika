@@ -18,6 +18,7 @@ class UpdateMeetingEventRequest extends FormRequest
             'start_date' => ['required'],
             'en_start_date' => ['nullable', 'date'],
             'end_date' => ['required'],
+            'committee_ward'=>['nullable','array'],
             'en_end_date' => ['nullable', 'date'],
             'url' => ['nullable'],
             'recurrence_end_date' => ['nullable'],

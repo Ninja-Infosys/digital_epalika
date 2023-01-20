@@ -284,8 +284,6 @@ class DisabilityIdentityCard extends Model
             $query->orWhere('permanent_ward', auth()->user()->ward_no);
         }
         return $query;
-
     }
-
 
 }
