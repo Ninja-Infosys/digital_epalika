@@ -17,7 +17,7 @@
                     <div class="card-header">
                     <div class="text-center position-relative">
                         <h5 class="fw-bold">शाखाहरु</h5>
-                        <button class="btn btn-primary btn-sm float-end position-absolute top-0 end-0 resetBtn">
+                        <button class="btn btn-primary btn-sm float-end position-absolute top-0 end-0 resetBtn" title="Reset">
                             <i class="fa fa-refresh"></i>
                         </button>
                     </div>
