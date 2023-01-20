@@ -40,6 +40,7 @@
                 <div class="row mx-n1 g-0">
                     <div class="border-bottom d-flex justify-content-between">
                         <p class="text-primary fw-semibold fs-5">आर्थिक वर्ष : 2079</p>
+                        {{getAllFilesAndFolders('registration')}}
                     </div>
                     <div class="col-xl-4 col-lg-6">
                         <div class="card m-1 shadow border rounded" data-bs-toggle="tooltip" data-bs-placement="top"

@@ -1,4 +1,4 @@
-@extends('helpdesk::layouts.master')
+@extends('frontend.layouts.master')
 @section('content')
     <div class="content-section">
         <div class="breadcrumb d-flex">

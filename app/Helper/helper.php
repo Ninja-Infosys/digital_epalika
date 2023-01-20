@@ -36,7 +36,7 @@ if (!function_exists('get_provinces')) {
 }
 
 if (!function_exists('get_districts')) {
-    function get_districts($province_ids=[], int $districtId = null)
+    function get_districts($province_ids = [], int $districtId = null)
     {
         $province_ids = is_array($province_ids) ? $province_ids : [$province_ids];
 
@@ -164,5 +164,13 @@ if (!function_exists('isBase64')) {
             $bool = true;
         }
         return $bool;
+    }
+}
+if (!function_exists('getAllFilesAndFolders')) {
+    function getAllFilesAndFolders(string $folder): array
+    {
+        $files = Storage::disk('public')->directories('directory_name');
+dd($files);
+        return $files;
     }
 }
