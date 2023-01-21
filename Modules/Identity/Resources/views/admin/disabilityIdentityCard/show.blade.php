@@ -302,7 +302,7 @@
                                     </div>
                                     <div>
 
-                                        {!! QrCode::size(40)->generate($disabilityIdentityCard->name_en??''); !!}
+                                        {!! QrCode::size(60)->generate(route('disabilityIdentityCard.qrcode',$disabilityIdentityCard)); !!}
                                     </div>
                                 </div>
 

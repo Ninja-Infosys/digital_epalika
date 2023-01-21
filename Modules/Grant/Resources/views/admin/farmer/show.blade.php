@@ -11,10 +11,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">कृषक</li>
+                        <li class="breadcrumb-item active">कृषक/व्यक्ति</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कृषक प्रोफाइल </h4>
+                <h4 class="page-title">कृषक/व्यक्ति प्रोफाइल </h4>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
                     <hr class="border-top border-1">
                     <div class="text-start mt-3">
 
-                        <p class=" text-dark mb-2 font-16"><strong>कृषक परिचय पत्र नं :</strong>
+                        <p class=" text-dark mb-2 font-16"><strong>कृषक/व्यक्ति परिचय पत्र नं :</strong>
                             <span class="ms-2 text-muted">{{ $farmer->farmer_id_card_no }}</span>
                         </p>
                         <p class="border-top border-1 text-dark mb-2 font-16"><strong>सम्पर्क नम्बर :</strong> <span
@@ -77,7 +77,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class=" text-dark font-19">आवद्ध सहकारी</h4>
-                            <p class=" pt-1 font-16">कृषकको आवद्ध सहकारी।</p>
+                            <p class=" pt-1 font-16">कृषक/व्यक्तिको आवद्ध सहकारी।</p>
                         </div>
                         <div class="card-btn pb-2">
                             <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i
@@ -89,7 +89,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class=" text-dark font-19">आवद्ध उधम</h4>
-                            <p class=" pt-1 font-16">कृषकको आवद्ध उधम।</p>
+                            <p class=" pt-1 font-16">कृषक/व्यक्तिको आवद्ध उधम।</p>
                         </div>
                         <div class="card-btn pb-2">
                             <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i
@@ -101,7 +101,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class=" text-dark font-19">आवद्ध समुह</h4>
-                            <p class=" pt-1 font-16">कृषकको आवद्ध समुह।</p>
+                            <p class=" pt-1 font-16">कृषक/व्यक्तिको आवद्ध समुह।</p>
                         </div>
                         <div class="card-btn pb-2">
                             <a href="" class="btn btn-sm btn-outline-primary "> विवरण हेर्नुहोस <i

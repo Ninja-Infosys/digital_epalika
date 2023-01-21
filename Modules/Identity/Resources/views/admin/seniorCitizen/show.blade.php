@@ -148,8 +148,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 pt-5  ">
-                            <div class="card px-3 py-2 mx-4 card-rounded"
-                                 style="background-color: yellow;">
+                            <div class="card px-3 py-2 mx-4 card-rounded">
                                 <div class="office-header d-flex justify-content-between">
                                     <div>
                                         <img src="{{$officeSetting->logo_url}}" alt="" height="40">
@@ -172,7 +171,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="card-font-color">
-                                            <p>आईडी कार्ड नं:</p>
+                                            <p>आईडी कार्ड नं: {{$seniorCitizenDetail->card_no}}</p>
                                             <p>व्यक्तिको पुरा नाम: {{$seniorCitizenDetail->name}}</p>
                                         </div>
                                         <div class="card-font-color">
@@ -196,7 +195,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center mb-2">
-                                    {!! QrCode::size(60)->generate($seniorCitizenDetail->name??''); !!}
+                                    {!! QrCode::size(60)->generate(route('seniorCitizenshipDetail.qrcode',$seniorCitizenDetail)); !!}
                                 </div>
                                 <div class="row footer-part">
                                     <div class="col-md-4 card-font-color text-center">
@@ -225,8 +224,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 pt-5  ">
-                            <div class="card px-3 py-2 mx-3 card-rounded"
-                                 style="background-color: yellow;">
+                            <div class="card px-3 py-2 mx-3 card-rounded">
                                 <div class="office-header d-flex justify-content-between">
                                     <div>
                                         <img src="{{$officeSetting->logo_url}}" alt="" height="40">
@@ -250,7 +248,7 @@
                                     <div class="col-md-6">
                                         <div class="card-font-color">
                                             <p>ID Card No
-                                                : </p>
+                                                : {{$seniorCitizenDetail->card_no}}</p>
                                             <p>Full Name : {{$seniorCitizenDetail->name_en}}</p>
                                             <p>Citizenship No: {{$seniorCitizenDetail->citizenship_no}}<span></span></p>
                                         </div>
@@ -298,7 +296,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="d-flex justify-content-center">
-                                            {!! QrCode::size(60)->generate($seniorCitizenDetail->name??''); !!}
+                                            {!! QrCode::size(60)->generate(route('seniorCitizenshipDetail.qrcode',$seniorCitizenDetail)); !!}
                                         </div>
                                     </div>
                                 </div>
