@@ -1,4 +1,4 @@
-<div class="row">
+{{--<div class="row">--}}
     @if($file['isFile'])
         <div class="col-xl-4 col-lg-6">
             <div class="card m-1 shadow-none border">
@@ -20,7 +20,9 @@
             </div> <!-- end col -->
         </div> <!-- end col-->
     @else
-        <h5 class="mb-2">{{collect($file)->has('label') ? \Illuminate\Support\Str::upper($file['label']) : ''}}</h5>
+        <div class="row">
+            <h5 class="mb-2 ms-2">{{collect($file)->has('label') ? \Illuminate\Support\Str::upper($file['label']) : ''}}</h5>
+        </div>
     @endif
     @if(collect($file)->has('children'))
         {{--        has Child--}}
@@ -28,4 +30,4 @@
             @include('admin.inc.file', ['file' => $child])
         @endforeach
     @endif
-</div> <!-- end row-->
+{{--</div> <!-- end row-->--}}

@@ -20,22 +20,30 @@
             </div>
         </div>
         <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <form>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="फाईल खोज्नुहोस्...">
-                    </div>
-                </form>
-            </div>
-            <div class="card-body">
-                <h4 class="mb-2">Quick Access</h4>
-                @foreach(getAllFilesAndFolders('registration') as $file)
-                    @include('admin.inc.file', ['file' => $file])
-                @endforeach
-            </div> <!-- end .mt-3-->
+            <div class="card">
+                <div class="card-header">
+                    <form>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="फाईल खोज्नुहोस्...">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body">
 
-        </div>
+                    @foreach(getAllFilesAndFolders('registration') as $file)
+                        <h4 class="mb-2">{{collect($file)->has('label') ? \Illuminate\Support\Str::upper($file['label']) : ''}}</h4>
+                        @if(collect($file)->has('children'))
+                            <div class="row">
+                                @foreach($file['children'] as $child)
+                                    @include('admin.inc.file', ['file' => $child])
+                                @endforeach
+                            </div>
+                        @endif
+                    @endforeach
+
+                </div> <!-- end .mt-3-->
+
+            </div>
         </div>
     </div>
 @endsection
