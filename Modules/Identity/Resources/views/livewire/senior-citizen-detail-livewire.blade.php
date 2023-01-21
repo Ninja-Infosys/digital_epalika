@@ -158,21 +158,6 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.card_no" class="form-label">कार्ड न.<span class="text-danger">*</span></label>
-                        <input
-                            name="form.card_no"
-                            class="form-control  @error('form.card_no') is-invalid @enderror"
-                            type="text"
-                            id="form.card_no"
-                            placeholder="कार्ड न."
-                            wire:model="form.card_no"
-                        />
-                        @error('form.card_no')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-4 mb-3">
                         <label for="form.gender" class="form-label">लिङ्ग <span class="text-danger">*</span></label>
                         <select
                             class="form-select @error('form.gender') is-invalid @enderror"
@@ -247,8 +232,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.blood_group" class="form-label">रक्त समूह <span
-                                class="text-danger">*</span></label>
+                        <label for="form.blood_group" class="form-label">रक्त समूह </label>
                         <select
                             class="form-select @error('form.blood_group') is-invalid @enderror"
                             wire:model="form.blood_group"
@@ -263,8 +247,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.father_name" class="form-label">बुवाको नाम<span
-                                class="text-danger">*</span></label>
+                        <label for="form.father_name" class="form-label">बुवाको नाम</label>
                         <input
                             name="form.father_name"
                             class="form-control  @error('form.father_name') is-invalid @enderror"
@@ -278,8 +261,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.father_name_en" class="form-label">बुवाको नाम ( English)<span
-                                class="text-danger">*</span></label>
+                        <label for="form.father_name_en" class="form-label">बुवाको नाम ( English)</label>
                         <input
                             name="form.father_name_en"
                             class="form-control  @error('form.father_name_en') is-invalid @enderror"
@@ -293,8 +275,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.mother_name" class="form-label">आमाको नाम<span
-                                class="text-danger">*</span></label>
+                        <label for="form.mother_name" class="form-label">आमाको नाम</label>
                         <input
                             name="form.mother_name"
                             class="form-control  @error('form.mother_name') is-invalid @enderror"
@@ -308,7 +289,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.mother_name" class="form-label">आमाको नाम ( English )<span class="text-danger">*</span></label>
+                        <label for="form.mother_name" class="form-label">आमाको नाम ( English )</label>
                         <input
                             name="form.mother_name_en"
                             class="form-control  @error('form.mother_name_en') is-invalid @enderror"
@@ -501,8 +482,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_phone" class="form-label">सम्पर्क न. <span
-                                class="text-danger">*</span> </label>
+                        <label for="form.contact_person_phone" class="form-label">सम्पर्क न.  </label>
                         <input
                             name="form.contact_person_phone"
                             class="form-control  @error('form.contact_person_phone') is-invalid @enderror"

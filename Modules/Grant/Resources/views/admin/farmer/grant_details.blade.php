@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">कृषक</li>
+                        <li class="breadcrumb-item active">कृषक/व्यक्ति</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कृषकहरु</h4>
+                <h4 class="page-title">कृषक/व्यक्तिहरु</h4>
             </div>
         </div>
     </div>

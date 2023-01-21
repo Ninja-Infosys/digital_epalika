@@ -189,7 +189,7 @@
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/identity.png')}}"
                              height="50" width="50" alt="">
-                        <h5 class="p-1">अपाङ्गता </h5>
+                        <h5 class="p-1">परिचयपत्र </h5>
                     </div>
                 </a>
             </div>
