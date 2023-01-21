@@ -8,6 +8,7 @@ use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\User;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SeniorCitizenDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait, NepaliDateConverter;
 
     protected $dates = [
         'created_at',
@@ -67,7 +68,7 @@ class SeniorCitizenDetail extends Model
 
     protected $casts = [
         'gender' => Gender::class,
-        'blood_group'=> BloodGroupEnum::class,
+        'blood_group' => BloodGroupEnum::class,
     ];
 
     public function province(): BelongsTo
@@ -97,7 +98,7 @@ class SeniorCitizenDetail extends Model
 
     public function fingerPrints(): MorphMany
     {
-        return $this->morphMany(FingerPrint::class,'model');
+        return $this->morphMany(FingerPrint::class, 'model');
     }
 
     public function setPhotoAttribute($value): void
@@ -120,10 +121,17 @@ class SeniorCitizenDetail extends Model
             return '';
         }
     }
+
     public function getCanEditDeleteAttribute(): bool
     {
-        return (auth()->user()->role->type === 'Super' || auth()->id()==$this->user_id);
+        return (auth()->user()->role->type === 'Super' || auth()->id() == $this->user_id);
     }
+
+    public function getAgeAttribute()
+    {
+
+    }
+
     public function scopeFilterData($query)
     {
         if (auth()->user()->role->type !== 'Super') {

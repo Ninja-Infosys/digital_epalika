@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OfficeHeader;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
+use Modules\Identity\Entities\SeniorCitizenDetail;
 
 class FrontController extends Controller
 {
@@ -117,5 +121,17 @@ class FrontController extends Controller
     public function service_details(): void
     {
 //        return view('frontend.static.chat.service');
+    }
+
+    public function seniorCitizenshipDetailQrcode(SeniorCitizenDetail $seniorCitizenDetail)
+    {
+        $officeHeaders = OfficeHeader::get();
+        $todayDate = $this->get_today_nepali_date();
+        $seniorCitizenDetail->load('fingerPrints','employeeSignature','province','district','localBody');
+        $view = (string)View::make('identity::admin.seniorCitizen.print', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
+
+        return response()->json([
+            'view' => $view,
+        ]);
     }
 }

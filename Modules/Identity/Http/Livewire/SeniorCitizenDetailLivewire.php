@@ -39,7 +39,6 @@ class SeniorCitizenDetailLivewire extends Component
         'name' => null,
         'name_en' => null,
         'dob_bs' => null,
-        'card_no' => null,
         'gender' => null,
         'citizenship_no' => null,
         'issue_date_bs' => null,
@@ -71,8 +70,6 @@ class SeniorCitizenDetailLivewire extends Component
         'employee_signature_id' => null,
 
     ];
-
-
 
 
     public function mount($seniorCitizenDetail = null): void
@@ -180,17 +177,16 @@ class SeniorCitizenDetailLivewire extends Component
         'form.name' => ['required', 'string', 'max:255'],
         'form.name_en' => ['required', 'string', 'max:255'],
         'form.dob_bs' => ['required'],
-        'form.card_no' => ['required'],
         'form.gender' => ['required'],
         'form.citizenship_no' => ['required'],
         'form.issue_date_bs' => ['required'],
         'form.spouse' => ['required', 'string', 'max:255'],
         'form.spouse_en' => ['required', 'string', 'max:255'],
         'form.blood_group' => ['required'],
-        'form.father_name' => ['required', 'string', 'max:255'],
-        'form.father_name_en' => ['required', 'string', 'max:255'],
-        'form.mother_name_en' => ['required', 'string', 'max:255'],
-        'form.mother_name' => ['required', 'string', 'max:255'],
+        'form.father_name' => ['nullable', 'string', 'max:255'],
+        'form.father_name_en' => ['nullable', 'string', 'max:255'],
+        'form.mother_name_en' => ['nullable', 'string', 'max:255'],
+        'form.mother_name' => ['nullable', 'string', 'max:255'],
         'form.province_id' => ['required', 'exists:provinces,id'],
         'form.district_id' => ['required', 'exists:districts,id'],
         'form.local_body_id' => ['required', 'exists:local_bodies,id'],
@@ -201,12 +197,12 @@ class SeniorCitizenDetailLivewire extends Component
         'form.patrons_name_address' => ['required', 'string', 'max:255'],
         'form.contact_person_name' => ['required', 'string', 'max:255'],
         'form.contact_person_name_en' => ['required', 'string', 'max:255'],
-        'form.contact_person_phone' => ['required'],
+        'form.contact_person_phone' => ['nullable'],
         'form.contact_person_address' => ['required', 'string', 'max:255'],
         'form.is_disease' => ['required', 'boolean'],
         'form.disease_name' => ['required_if:form.is_disease,==,1'],
-        'form.description' => ['required'],
-        'form.description_en' => ['required'],
+        'form.description' => ['nullable'],
+        'form.description_en' => ['nullable'],
         'form.is_medicine' => ['required', 'boolean'],
         'form.medicine_name' => ['required_if:form.is_medicine,==,1'],
         'form.employee_signature_id' => ['required', 'exists:employee_signatures,id'],
@@ -222,7 +218,6 @@ class SeniorCitizenDetailLivewire extends Component
             'form.name.required' => ['नाम आवश्यक छ'],
             'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
             'form.dob_bs.required' => ['जन्म मिति नेपालीमा आवश्यक छ'],
-            'form.card_no.required' => ['कार्ड न. आवश्यक छ'],
             'form.gender.required' => ['लिङ्ग आवश्यक छ'],
             'form.citizenship_no.required' => ['नागरिकता नं आवश्यक छ'],
             'form.issue_date_bs.required' => ['जारी मिति (वि.स.) आवश्यक छ'],
@@ -292,10 +287,10 @@ class SeniorCitizenDetailLivewire extends Component
             ]);
             return redirect(route('identity.admin.seniorCitizenDetail.index'));
         }
-
         DB::transaction(function () {
             $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form'] + [
-                    'user_id' => auth()->id()
+                    'user_id' => auth()->id(),
+                    'card_no' => DB::table('senior_citizen_details')->max('id') + 1,
                 ]);
             $seniorCitizenDetail->fingerPrints()->create([
                 'finger_image' => $this->form['left_finger']['image'],
@@ -317,7 +312,6 @@ class SeniorCitizenDetailLivewire extends Component
             ]);
 
         });
-
         $this->dispatchBrowserEvent('alert_message', [
             'type' => 'success',
             'title' => 'तपाइको  जेस्ठ नागरिक विवरण  दर्ता भयो'

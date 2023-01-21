@@ -55,27 +55,38 @@
                                     </td>
                                     <td>{{$seniorCitizenDetail->citizenship_no}}</td>
                                     <td>
-                                        <img src="{{$seniorCitizenDetail->photo}}" alt="{{$seniorCitizenDetail->name??''}}" class="rounded-circle avatar avatar-md" style="width: 4rem; height: 4rem;">
+                                        <img src="{{$seniorCitizenDetail->photo}}"
+                                             alt="{{$seniorCitizenDetail->name??''}}"
+                                             class="rounded-circle avatar avatar-md" style="width: 4rem; height: 4rem;">
                                     </td>
 
                                     <td>
                                         @if($seniorCitizenDetail->can_edit_delete)
-                                        <a href="{{route('identity.admin.seniorCitizenDetail.edit',$seniorCitizenDetail)}}"
-                                           class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a href="{{route('identity.admin.seniorCitizenDetail.show',$seniorCitizenDetail)}}"
+                                            <a href="{{route('identity.admin.seniorCitizenDetail.edit',$seniorCitizenDetail)}}"
+                                               class="btn btn-xs btn-outline-primary" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="{{route('identity.admin.seniorCitizenDetail.show',$seniorCitizenDetail)}}"
                                                class="btn btn-xs btn-outline-primary" title="हेर्नुहोस्">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                        <form action="{{route('identity.admin.seniorCitizenDetail.destroy',$seniorCitizenDetail)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="javascript:void(0)"
+                                               route_action="{{route('identity.admin.seniorCitizenDetail.print',$seniorCitizenDetail)}}"
+                                               class="btn btn-xs btn-outline-warning printDetail">
+                                                <i class="fa fa-print"></i>
+
+                                            </a>
+                                            <form
+                                                action="{{route('identity.admin.seniorCitizenDetail.destroy',$seniorCitizenDetail)}}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-xs btn-outline-danger show_confirm"
+                                                        title="मेटाउनु होस्">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+
                                         @endif
                                     </td>
                                 </tr>
@@ -88,7 +99,7 @@
                         </table>
                     </div>
                     <div class="mt-2">
-{{--                        {{ $seniorCitizenDetails->onEachSide(config('app.pagination_count'))->links() }}--}}
+                        {{--                        {{ $seniorCitizenDetails->onEachSide(config('app.pagination_count'))->links() }}--}}
                     </div>
                 </div>
             </div>
@@ -97,18 +108,18 @@
 
     @push('scripts')
         <script>
-            $(".printDetail").on("click",function(e){
+            $(".printDetail").on("click", function (e) {
                 $.ajax({
-                    method:"GET",
-                    url:$(this).attr("route_action"),
-                    success:function(resp){
+                    method: "GET",
+                    url: $(this).attr("route_action"),
+                    success: function (resp) {
                         var print_area = window.open();
                         print_area.document.write(resp.view);
                         print_area.document.close();
                         print_area.focus();
                         print_area.print();
                         print_area.close();
-                    },error:function(){
+                    }, error: function () {
                         alert("Something Went Wrong");
                     }
                 });

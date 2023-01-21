@@ -48,7 +48,6 @@
         .header {
             visibility: visible;
             padding: 15px;
-            background-color: yellow;
             border: 1px solid black;
             border-radius: 8px;
         }
@@ -143,7 +142,7 @@
         </div>
         <div class="row">
             <div class="col-md-9">
-                <p>आईडी कार्ड नं: <span></span></p>
+                <p>आईडी कार्ड नं: {{$seniorCitizenDetail->card_no}}<span></span></p>
                 <p>व्यक्तिको पुरा नाम: <span>{{$seniorCitizenDetail->name}}</span></p>
                 <p>नागरिकता नं : <span>{{$seniorCitizenDetail->citizenship_no}}</span></p>
                 <p>रोग : <span>{{$seniorCitizenDetail->is_disease==1 ? 'छ':'छैन'}}</span></p>
@@ -202,7 +201,7 @@
             <div class="row">
                 <div class="col-md-9">
                     <p>ID Card No
-                        : </p>
+                        : {{$seniorCitizenDetail->card_no}}</p>
                     <p>Full Name : {{$seniorCitizenDetail->name_en}}</p>
                     <p>Citizenship No: {{$seniorCitizenDetail->citizenship_no}}<span></span></p>
                     <p>Disease : <span>{{$seniorCitizenDetail->is_disease==1 ? 'Yes':'No'}}</span></p>
