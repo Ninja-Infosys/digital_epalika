@@ -71,6 +71,4 @@ class DisabilityIdentityCardController extends Controller
 
     }
 
-
-
 }

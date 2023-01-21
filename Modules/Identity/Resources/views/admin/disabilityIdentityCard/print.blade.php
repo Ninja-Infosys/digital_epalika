@@ -100,11 +100,11 @@
             </div>
             <div>
                 @foreach($officeHeaders as $header)
-                    <p style="font-size: {{$header->card_font}}rem;font-weight:{{$header->font}};color:{{$header->font_color}};line-height: 0.2;text-align: center;">{{$header->title}}</p>
+                    <p style="font-size: {{$header->card_font}}rem;font-weight:{{$header->font}};color:{{$disabilityIdentityCard->governmentalDisabilityType->header_color??''}};line-height: 0.2;text-align: center;">{{$header->title}}</p>
                 @endforeach
             </div>
             <div>
-                <img src="{{$disabilityIdentityCard->photo_url}}" alt="" height="40">
+                <img src="{{$disabilityIdentityCard->photo_url}}" alt="{{$disabilityIdentityCard->name_en}}" height="40">
                 <img src="{{$disabilityIdentityCard->employeeSignature->red_signature??''}}" alt="" height="20" id="signature_image" />
             </div>
 
@@ -168,7 +168,7 @@
                 @endforeach
             </div>
             <div>
-                {!! QrCode::size(60)->generate(route('disabilityIdentityCard.qrcode',$disabilityIdentityCard)); !!}
+                {!! QrCode::size(45)->generate(route('disabilityIdentityCard.qrcode',$disabilityIdentityCard)); !!}
             </div>
         </div>
         <div class="identity">

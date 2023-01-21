@@ -224,7 +224,7 @@
                                     </div>
                                     <div class="">
                                         @foreach($officeHeaders as $header)
-                                            <p style="font-size: {{$header->card_font}}rem;color:{{$header->font_color}};text-align: center;">{{$header->title}}                                </p>
+                                            <p style="font-size: {{$header->card_font}}rem;color:{{$disabilityIdentityCard->governmentalDisabilityType->header_color??''}};text-align: center;">{{$header->title}}                                </p>
                                         @endforeach
                                     </div>
                                     <div>
@@ -297,11 +297,10 @@
                                     </div>
                                     <div class="">
                                         @foreach($officeHeaders as $header)
-                                            <p style="font-size: {{$header->card_font}}rem;color:{{$header->font_color}};text-align: center;">{{$header->title_en}}</p>
+                                            <p style="font-size: {{$header->card_font}}rem;color:{{$disabilityIdentityCard->governmentalDisabilityType->header_color??''}};text-align: center;">{{$header->title_en}}</p>
                                         @endforeach
                                     </div>
                                     <div>
-
                                         {!! QrCode::size(60)->generate(route('disabilityIdentityCard.qrcode',$disabilityIdentityCard)); !!}
                                     </div>
                                 </div>
