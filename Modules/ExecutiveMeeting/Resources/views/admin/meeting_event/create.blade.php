@@ -40,7 +40,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-2">
-                                <label for="event_name" class="form-label">नाम *</label>
+                                <label for="event_name" class="form-label">बैठकको शिर्षक *</label>
                                 <input
                                     type="text"
                                     name="event_name"
@@ -112,7 +112,7 @@
                                 />
                             </div>
                             <div class="col-md-12 mb-2">
-                                <label for="description" class="form-label">विवरण *</label>
+                                <label for="description" class="form-label">सन्देश *</label>
                                 <textarea
                                     name="description"
                                     id="description"

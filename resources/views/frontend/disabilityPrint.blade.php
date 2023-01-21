@@ -69,16 +69,16 @@
             font-size: 8px !important;
         }
 
-#signature_image{
-    z-index: 5;
-    margin-left: -60px;
-    transform: rotate(-10deg);
-}
-.signature{
-    z-index: 5;
-    margin-top: -10px;
-    transform: rotate(-10deg);
-}
+        #signature_image{
+            z-index: 5;
+            margin-left: -60px;
+            transform: rotate(-10deg);
+        }
+        .signature{
+            z-index: 5;
+            margin-top: -10px;
+            transform: rotate(-10deg);
+        }
         @media print {
             .break-page {
                 page-break-after: always !important;
@@ -152,92 +152,6 @@
                         {{$todayDate}}
                     </span><br>
                     <p>जारि मिति</p></div>
-            </div>
-
-        </div>
-    </div>
-    <div class="break-page"></div>
-    <div class="header" style="height: 204.48px;width: 324.48px; margin-top: 5px;">
-        <div class="office_header">
-            <div>
-                <img src="{{$officeSetting->logo_url}}" alt="" height="30">
-            </div>
-            <div>
-                @foreach($officeHeaders as $header)
-                    <p style="font-size: {{$header->card_font}}rem;font-weight:{{$header->font}};color:{{$header->font_color}};line-height: 0.2;text-align: center;">{{$header->title_en}}</p>
-                @endforeach
-            </div>
-            <div>
-                {!! QrCode::size(60)->generate(route('disabilityIdentityCard.qrcode',$disabilityIdentityCard)); !!}
-            </div>
-        </div>
-        <div class="identity">
-            <h2 class="heading">Disability Identity Card</h2>
-        </div>
-        <p>ID Card Type: {{$disabilityIdentityCard->governmentalDisabilityType?->category??''}}</p>
-        <p>Card No.: {{$disabilityIdentityCard->card_no}}</p>
-        <div>
-            <p>Name of card holder: <span>{{$disabilityIdentityCard->name_en ??''}}</span></p>
-            <p>Address :
-                <span>{{$disabilityIdentityCard->permanentProvince->province_en??''}}</span>
-                <span>{{$disabilityIdentityCard->permanentDistrict->district_en??''}}</span>
-                <span>{{$disabilityIdentityCard->permanentLocalBody->local_body_en??''}} </span>
-            </p>
-            <p style="margin-bottom: 0;">Gender : <span> {{$disabilityIdentityCard->gender ??''}}</span></p>
-
-
-            <div class="middle-part">
-                <div>
-                    <p style="margin-bottom: 0;">Disability On the basis of nature :
-                        <span> {{$disabilityIdentityCard->disabilityType->title_en??''}}</span>
-                    </p>
-                    <p style="margin-bottom: 0;">On the basis of severity :
-                        <span> {{$disabilityIdentityCard->governmentalDisabilityType->title_en??''}}</span>
-                    </p>
-                </div>
-                <div style="display:flex;justify-content: space-between;margin-bottom: 0;">
-                    <div>
-                        @foreach($disabilityIdentityCard->fingerPrints->where('finger','left') as $fingerPrint)
-                            <img src="{{$fingerPrint->finger_image}}" alt="" height="20"><br>
-                        <p style="margin-top: 0;">बाँया </p>
-                        @endforeach
-                    </div>
-                    <div>
-                        @foreach($disabilityIdentityCard->fingerPrints->where('finger','right') as $fingerPrint)
-                            <img src="{{$fingerPrint->finger_image}}" alt="" height="20"><br>
-                            <p style="margin-top: 0;">दाँया </p>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <p style="margin-top: 0;">Father/Mother/Guardian : <span> {{$disabilityIdentityCard->father_name_en??''}}</span></p>
-            <p>ID Card Approved By : <span> </span></p>
-
-            <div class="footer-part">
-                <div class="col-md-3" >
-                    <span>
-                        {{$disabilityIdentityCard->employeeSignature->name_en??''}}
-                    </span><br>
-                    <p>Name</p>
-                </div>
-                <div class="col-md-3" >
-                     <span >
-                        <img src="{{$disabilityIdentityCard->employeeSignature->red_signature??''}}"
-                             alt="{{$disabilityIdentityCard->name??''}}" height="20" class="signature">
-
-                    </span><br>
-                    <p>Signature</p>
-                </div>
-                <div class="col-md-3" >
-                     <span >
-                        {{$disabilityIdentityCard->employeeSignature->designation_en??''}}
-                    </span><br>
-                    <p>Designation</p></div>
-                <div class="col-md-3" >
-                    <span >
-                        {{today()->toDateString()}}
-                    </span><br>
-                    <p>Issue Date</p></div>
             </div>
 
         </div>
