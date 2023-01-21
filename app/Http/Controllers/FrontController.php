@@ -132,10 +132,8 @@ class FrontController extends Controller
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
 
-        $view = (string)View::make('identity::admin.seniorCitizen.print', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
+        return view('identity::admin.seniorCitizen.print', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
 
-        return response()->json([
-            'view' => $view,
-        ]);
+
     }
 }
