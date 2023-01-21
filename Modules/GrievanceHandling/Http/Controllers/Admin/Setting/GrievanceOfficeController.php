@@ -3,6 +3,7 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\GrievanceHandling\Entities\GrievanceOffice;
 use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\StoreGrievanceOfficeRequest;
 use Modules\GrievanceHandling\Http\Requests\GrievanceOffice\UpdateGrievanceOfficeRequest;
@@ -12,7 +13,12 @@ class GrievanceOfficeController extends Controller
     public function index()
     {
         $this->checkAuthorization('grievanceOffice_access');
-        $grievanceOffices = GrievanceOffice::latest()->get();
+
+         $grievanceOffices = GrievanceOffice::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['grievanceOffice'], request('search'));
+            }
+        })->latest()->paginate(10);
 
         return view('grievancehandling::admin.setting.grievance_office.index', compact('grievanceOffices'));
     }
