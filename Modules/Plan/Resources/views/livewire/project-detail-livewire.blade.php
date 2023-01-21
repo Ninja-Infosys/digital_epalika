@@ -134,6 +134,7 @@
             <select
                 wire:model="form.ward_no"
                 class="form-select @error('form.ward_no') is-invalid @enderror"
+                multiple
                 id="ward_no">
                 <option value="">--- छान्नुहोस् ---</option>
                 @foreach($officeSetting->localBody->ward_no as $ward)

@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">कृषक थप</li>
+                        <li class="breadcrumb-item active">कृषक/व्यक्ति थप</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> कृषकहरु</h4>
+                <h4 class="page-title"> कृषक/व्यक्तिहरु</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ कृषक थप्नुहोस्</h4>
+                        <h4 class="header-title">नयाँ कृषक/व्यक्ति थप्नुहोस्</h4>
                         <a href="{{route('admin.grant.farmer.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> कृषक सुची
+                            <i class="fa fa-list"></i> कृषक/व्यक्ति सुची
                         </a>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                         @csrf
 
                         <fieldset>
-                            <legend><h4 class="text-info">कृषक विवरण</h4></legend>
-                            <h6 class="py-2">नोट: कृपया कृषकको विवरण भर्दा ध्यान दिएर भर्नु होला । </h6>
+                            <legend><h4 class="text-info">कृषक/व्यक्ति विवरण</h4></legend>
+                            <h6 class="py-2">नोट: कृपया कृषक/व्यक्तिको विवरण भर्दा ध्यान दिएर भर्नु होला । </h6>
                             <div class="row">
                                 <div class="col-md-4 mb-2">
                                     <label for="first_name" class="form-label">पहिलो नाम *</label>

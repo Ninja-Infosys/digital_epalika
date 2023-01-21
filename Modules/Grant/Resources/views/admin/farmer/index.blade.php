@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">कृषक</li>
                     </ol>
                 </div>
-                <h4 class="page-title">कृषकहरु</h4>
+                <h4 class="page-title">कृषक/व्यक्तिहरु</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title"> कृषकहरुको विवरण </h4>
+                        <h4 class="header-title"> कृषक/व्यक्तिहरुको विवरण </h4>
                         @can('farmer_access')
                             <a href="{{route('admin.grant.farmer.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -39,7 +39,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>कृषक परिचय पत्र नं.</th>
+                                <th>परिचय पत्र नं.</th>
                                 <th>पुरा नाम</th>
                                 <th>कृषक सूचीकरण नं</th>
                                 <th>नागरिकता नं</th>
