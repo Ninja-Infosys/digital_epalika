@@ -2,17 +2,18 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
-use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectAgreementTerm;
+use Modules\Plan\Http\Requests\Project\StoreProjectRequest;
+use Modules\Plan\Http\Requests\Project\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -64,26 +65,39 @@ class ProjectController extends Controller
         return view('plan::admin.project.show', compact('project'));
     }
 
+    public function edit(Project $project)
+    {
+        $this->checkAuthorization('project_edit');
+
+        $planAreas = PlanArea::with('planAreas')->whereNull('plan_area_id')->get();
+        $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
+        $budgetSources = BudgetSource::all();
+        $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+
+        return view('plan::admin.project.edit',compact('project','planAreas','planLevels','budgetSources','budgetHeads'));
+    }
+
+    public function update(UpdateProjectRequest $request,Project $project)
+    {
+        $this->checkAuthorization('project_edit');
+
+        $project->update($request->validated());
+
+        toast('परियोजना सफलतापूर्वक अद्यावधिक गरियो','success');
+
+        return redirect(route('admin.plan.project.index'));
+    }
+
     public function destroy(Project $project)
     {
         $this->checkAuthorization('project_delete');
     }
 
-    public function saveProjectAgreementTerm(Request $request, Project $project)
+    public function fileList(Project $project)
     {
-        $request->validate([
-            'data' => ['required']
-        ]);
+        $project->load('files');
 
-        ProjectAgreementTerm::updateOrCreate(
-            ['project_id' => $project->id],
-            [
-                'data' => $request->input('data')
-            ]
-        );
-
-        toast('सम्झौता शर्त सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return back();
+        return view('plan::admin.project.file_list',compact('project'));
     }
 
     public function uploadFilePage(Project $project)
@@ -105,6 +119,6 @@ class ProjectController extends Controller
         ]);
 
         toast('फाइल सफलतापूर्वक अपलोड गरियो', 'success');
-        return back();
+        return redirect(route('admin.plan.project.index'));
     }
 }

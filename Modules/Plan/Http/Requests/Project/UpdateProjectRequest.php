@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Project;
+namespace Modules\Plan\Http\Requests\Project;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
+use Modules\Plan\Enums\ProjectOperatedThroughEnum;
+use Modules\Plan\Enums\ProjectStatusEnum;
 
-class StoreProjectRequest extends FormRequest
+class UpdateProjectRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,10 +18,10 @@ class StoreProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'registration_no' => ['required', Rule::unique('projects', 'registration_no')->withoutTrashed()],
+            'registration_no' => ['required', Rule::unique('projects', 'registration_no')->withoutTrashed()->ignore($this->project)],
             'project_name' => ['required'],
             'plan_area_id' => ['required', Rule::exists('plan_areas', 'id')->withoutTrashed()],
-            'project_status' => ['required'],
+            'project_status' => ['required', new Enum(ProjectStatusEnum::class)],
             'project_start_date' => ['nullable'],
             'project_completion_date' => ['nullable', 'after:project_start_date'],
             'plan_level_id' => ['required', Rule::exists('plan_levels', 'id')->withoutTrashed()],
@@ -29,7 +32,13 @@ class StoreProjectRequest extends FormRequest
             'allocated_amount' => ['nullable', 'numeric'],
             'project_venue' => ['nullable'],
             'purpose' => ['nullable'],
-            'operated_through' => ['nullable'],
+            'operated_through' => ['nullable', new Enum(ProjectOperatedThroughEnum::class)],
+            'is_deadline_extended' => ['nullable', 'boolean'],
+            'extended_date' => ['required_if:is_deadline_extended,1'],
+            'progress_spent_amount' => ['nullable', 'numeric'],
+            'physical_progress_target' => ['nullable', 'numeric'],
+            'physical_progress_completed' => ['nullable', 'numeric'],
+            'physical_progress_unit' => ['nullable']
         ];
     }
 }
