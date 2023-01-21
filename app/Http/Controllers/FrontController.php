@@ -6,6 +6,7 @@ use App\Models\OfficeHeader;
 use App\Models\Website\ImportantLink;
 use App\Models\Website\MunicipalDetail;
 use App\Models\Website\Slider;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Modules\DigitalBoard\Entities\Employee;
@@ -15,6 +16,7 @@ use Modules\Identity\Entities\SeniorCitizenDetail;
 
 class FrontController extends Controller
 {
+    use NepaliDateConverter;
     public function __construct()
     {
         parent::__construct();
