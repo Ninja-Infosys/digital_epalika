@@ -189,7 +189,7 @@
                     @endforeach
                 </div>
                 <div>
-                    {{QrCode::size(30)->generate($seniorCitizenDetail->name_en??'')}}
+                    {!! QrCode::size(60)->generate(route('seniorCitizenshipDetail.qrcode',$seniorCitizenDetail)); !!}
                     <img src="" alt="" height="20" id="signature_image"/>
                 </div>
             </div>
