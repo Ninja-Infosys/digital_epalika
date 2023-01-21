@@ -17,6 +17,7 @@ use Modules\Identity\Entities\SeniorCitizenDetail;
 class FrontController extends Controller
 {
     use NepaliDateConverter;
+
     public function __construct()
     {
         parent::__construct();
@@ -125,12 +126,12 @@ class FrontController extends Controller
 //        return view('frontend.static.chat.service');
     }
 
-    public function seniorCitizenshipDetailQrcode(SeniorCitizenDetail $seniorCitizenDetail)
+    public function seniorCitizenshipDetailQrcode($id)
     {
+        $seniorCitizenDetail = SeniorCitizenDetail::with('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody')->findOrfail($id);
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
-        $seniorCitizenDetail->load('fingerPrints','employeeSignature','province','district','localBody');
-        dd($seniorCitizenDetail);
+
         $view = (string)View::make('identity::admin.seniorCitizen.print', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
 
         return response()->json([
