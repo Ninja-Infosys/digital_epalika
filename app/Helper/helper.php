@@ -166,15 +166,33 @@ if (!function_exists('isBase64')) {
         return $bool;
     }
 }
-if (!function_exists('getAllFilesAndFolders')) {
-    function getAllFilesAndFolders(string $folder)
+if (!function_exists('getAllForSideBarFolders')) {
+    function getAllForSideBarFolders(string $folder)
     {
         if (Storage::disk('public')->exists($folder)) {
-            $directories = Storage::disk('public')->allFiles($folder);
-            $processedData = collect($directories)->map(function ($item) {
+            $directories = collect(Storage::disk('public')->directories($folder, true))->map(function ($item) {
                 return explode('/', $item);
             });
-            return convertPathsToTree($processedData);
+            return convertPathsToTree($directories);
+        }
+        return [];
+    }
+}
+if (!function_exists('getAllFilesAndFolder')) {
+    function getAllFilesAndFolder(string $folder)
+    {
+        if (Storage::disk('public')->exists($folder)) {
+            $directories = collect(Storage::disk('public')->directories($folder))->map(function ($item) {
+                return explode('/', $item);
+            });
+            $files =  collect(Storage::disk('public')->files($folder))->map(function ($item) {
+                return explode('/', $item);
+            });
+
+            return [
+                'directories' => convertPathsToTree($directories),
+                'files' => convertPathsToTree($files)
+            ];
         }
         return [];
     }

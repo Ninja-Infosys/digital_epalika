@@ -95,4 +95,9 @@ class FileController extends Controller
             return back();
         }
     }
+
+    public function getFileManager($folder)
+    {
+        return getAllFilesAndFolder($folder);
+    }
 }
