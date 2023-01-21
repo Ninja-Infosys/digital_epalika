@@ -129,7 +129,6 @@
                 @endforeach
             </div>
             <div>
-
                 <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
                 <img src="" alt="" height="20" id="signature_image"/>
             </div>
@@ -155,7 +154,7 @@
             <div class="col-md-3">
                 <p>लिङ्ग: {{$seniorCitizenDetail->gender->label()??''}}</p>
                 <p>रक्त समूह: {{$seniorCitizenDetail->blood_group->label()??''}}</p>
-                <p>उमेर: </p>
+                <p>उमेर: {{$seniorCitizenDetail->age}}</p>
             </div>
         </div>
         <table style="width: 100%;">
