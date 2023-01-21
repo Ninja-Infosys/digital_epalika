@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <div class="col-md-8 border shadow p-4 rounded border overflow-hidden">
+                    <div class="col-md-8 border shadow p-4 rounded  overflow-hidden">
                         <h5>गुनासोको विषय: {{ $grievanceDetail->subject }}</h5>
                         <div class="row">
                             <div class="col-md-6">

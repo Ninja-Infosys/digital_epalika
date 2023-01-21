@@ -19,31 +19,31 @@
                 <h4 class="page-title">दर्ता फाईल</h4>
             </div>
         </div>
-        <div class="card">
-            <div class="d-md-flex justify-content-between ">
-                <form class="search-bar pt-2">
-                    <div class="position-relative">
-                        <input type="text" class="form-control form-control-light" placeholder="फाईल खोज्नुहोस्...">
-                        <span class="mdi mdi-magnify"></span>
-                    </div>
-                </form>
-                <div class="pt-2 mt-md-0">
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list"></i>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list-alt"></i>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-info"></i>
-                    </button>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <form>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="फाईल खोज्नुहोस्...">
+                        </div>
+                    </form>
                 </div>
+                <div class="card-body">
+
+                    @foreach(getAllFilesAndFolders('registration') as $file)
+                        <h4 class="mb-2">{{collect($file)->has('label') ? \Illuminate\Support\Str::upper($file['label']) : ''}}</h4>
+                        @if(collect($file)->has('children'))
+                            <div class="row">
+                                @foreach($file['children'] as $child)
+                                    @include('admin.inc.file', ['file' => $child])
+                                @endforeach
+                            </div>
+                        @endif
+                    @endforeach
+
+                </div> <!-- end .mt-3-->
+
             </div>
-            <div class="my-3">
-
-                @foreach(getAllFilesAndFolders('registration') as $file)
-                    @include('admin.inc.file', ['file' => $file])
-                @endforeach
-
-            </div> <!-- end .mt-3-->
-
         </div>
     </div>
 @endsection
