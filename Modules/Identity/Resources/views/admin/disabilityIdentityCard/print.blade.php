@@ -168,7 +168,7 @@
                 @endforeach
             </div>
             <div>
-                {!! QrCode::size(30)->generate($disabilityIdentityCard->name_en??''); !!}
+                {!! QrCode::size(60)->generate(route('disabilityIdentityCard.qrcode',$disabilityIdentityCard)); !!}
             </div>
         </div>
         <div class="identity">
