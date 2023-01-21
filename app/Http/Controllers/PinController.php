@@ -21,18 +21,18 @@ class PinController extends Controller
             ]);
             return response()->json([
                 'success' => true,
-                'message' => 'Pin set successfully'
+                'message' => 'कोड सफलतापूर्वक सेट गरियो'
             ]);
         } else {
             if (Hash::check($request->input('pin'),auth()->user()->pin)) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Pin updated successfully'
+                    'message' => 'कोड सफलतापूर्वक अपडेट गरियो'
                 ]);
             }
             return response()->json([
                 'success' => false,
-                'message' => 'Pin does not match'
+                'message' => 'कोड मिलेन'
             ]);
         }
     }

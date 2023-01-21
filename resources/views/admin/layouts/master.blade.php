@@ -35,8 +35,6 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/backend/css/nepali.datepicker.v3.7.min.css')}}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
     @stack('style')
     @livewireStyles
@@ -64,11 +62,7 @@
         <!-- Footer Start -->
         <footer class="footer">
             <div class="container-fluid text-center">
-                <script>
-                    const date = new Date.getFullYear();
-                    document.write(date);
-                </script>
-                &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
+                {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
             </div>
         </footer>
         @include('inc.floating-menu')
@@ -88,8 +82,6 @@
 
 <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
-
-
 <script src="{{asset('assets/backend/js/pages/form-advanced.init.js')}}"></script>
 @include('sweetalert::alert')
 
