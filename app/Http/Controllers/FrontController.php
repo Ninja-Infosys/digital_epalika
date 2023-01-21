@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\View;
 use Modules\DigitalBoard\Entities\Employee;
 use Modules\DigitalBoard\Entities\Notice;
 use Modules\ExecutiveMeeting\Entities\MeetingDecision;
+use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\SeniorCitizenDetail;
 
 class FrontController extends Controller
@@ -128,12 +129,20 @@ class FrontController extends Controller
 
     public function seniorCitizenshipDetailQrcode($id)
     {
-        $seniorCitizenDetail = SeniorCitizenDetail::with('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody')->findOrfail($id);
+        $seniorCitizenDetail = SeniorCitizenDetail::with('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody')->findOrFail($id);
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
 
-        return view('frontend.print', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
+        return view('frontend.seniorCitizenprint', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
 
+    }
+
+    public function disabilityIdentityCardQrcode($id)
+    {
+        $disabilityIdentityCard = DisabilityIdentityCard::with('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody')->findOrFail($id);
+        $officeHeaders = OfficeHeader::get();
+        $todayDate = $this->get_today_nepali_date();
+        return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));
 
     }
 }
