@@ -7,13 +7,13 @@
 <li class="{{request()->is('admin/organizationRegistration/business*') ? 'active' : ''}}">
     <a href="{{route('admin.organizationRegistration.institution.index')}}">
         <i class="fa fa-building"></i>
-        <span> दर्ता भएका संस्था</span>
+        <span>संस्था दर्ता</span>
     </a>
 </li>
 <li class="{{request()->is('admin/organizationRegistration/business*') ? 'active' : ''}}">
     <a href="{{route('admin.organizationRegistration.business.index')}}">
         <i class="fa fa-building"></i>
-        <span> दर्ता भएका व्यवसाय</span>
+        <span>व्यवसाय/उद्योग दर्ता</span>
     </a>
 </li>
 

@@ -12,12 +12,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.organizationRegistration.business.index')}}">व्यवसायहरू</a>
+                            <a href="{{route('admin.organizationRegistration.business.index')}}">व्यवसाय/उद्योग/उद्योगहरू</a>
                         </li>
-                        <li class="breadcrumb-item active">व्यवसाय सम्पादन गर्नुहोस</li>
+                        <li class="breadcrumb-item active">व्यवसाय/उद्योग/उद्योग सम्पादन गर्नुहोस</li>
                     </ol>
                 </div>
-                <h4 class="page-title">व्यवसाय सम्पादन गर्नुहोस</h4>
+                <h4 class="page-title">व्यवसाय/उद्योग सम्पादन गर्नुहोस</h4>
             </div>
         </div>
     </div>
@@ -27,10 +27,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसाय सम्पादन गर्नुहोस</h4>
+                        <h4 class="header-title">व्यवसाय/उद्योग सम्पादन गर्नुहोस</h4>
                         <a href="{{route('admin.organizationRegistration.business.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> व्यवसायको सूची
+                            <i class="fa fa-list"></i> व्यवसाय/उद्योगको सूची
                         </a>
                     </div>
                 </div>
@@ -66,15 +66,15 @@
                         </div>
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong>व्यवसायको जानकारी</strong>
+                                <strong>व्यवसाय/उद्योगको जानकारी</strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="name">व्यवसायको नाम <sup class="text-danger">*required</sup></label>
+                                        <label for="name">व्यवसाय/उद्योगको नाम <sup class="text-danger">*required</sup></label>
                                         <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                required="" name="name" id="name"
-                                               value="{{old('name',$business->name)}}" placeholder="व्यवसायको नाम">
+                                               value="{{old('name',$business->name)}}" placeholder="व्यवसाय/उद्योगको नाम">
                                         @error('name')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <x-date-input-component
-                                        nameNe="business_start_date" labelNe="व्यवसाय सुरु मिति:  *"
+                                        nameNe="business_start_date" labelNe="व्यवसाय/उद्योग सुरु मिति:  *"
                                         nameEn="business_start_date_en" labelEn="Business Start Date:"
                                         :getTodayDate="false"
                                         :editDateNe="$business->business_start_date"
@@ -133,9 +133,9 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="house_number">व्यवसायको घर नं </label>
+                                        <label for="house_number">व्यवसाय/उद्योगको घर नं </label>
                                         <input type="text" class="form-control" name="house_number" id="house_number"
-                                               value="{{old('house_number',$business->house_number)}}" placeholder="व्यवसायको घर नं">
+                                               value="{{old('house_number',$business->house_number)}}" placeholder="व्यवसाय/उद्योगको घर नं">
                                         @error('house_number')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
@@ -201,10 +201,10 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="address">व्यवसायको ठेगाना <sup
+                                        <label for="address">व्यवसाय/उद्योगको ठेगाना <sup
                                                 class="text-danger">*required</sup></label>
                                         <input type="text" class="form-control" required="" name="address" id="address"
-                                               value="{{old('address',$business->address)}}" placeholder="व्यवसायको ठेगाना">
+                                               value="{{old('address',$business->address)}}" placeholder="व्यवसाय/उद्योगको ठेगाना">
                                         @error('address')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
@@ -213,9 +213,9 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="tole">व्यवसायको टोल <sup class="text-danger">*required</sup></label>
+                                        <label for="tole">व्यवसाय/उद्योगको टोल <sup class="text-danger">*required</sup></label>
                                         <input type="text" class="form-control" required="" name="tole" id="tole"
-                                               value="{{old('tole',$business->tole)}}" placeholder="व्यवसायको टोल">
+                                               value="{{old('tole',$business->tole)}}" placeholder="व्यवसाय/उद्योगको टोल">
                                         @error('tole')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
@@ -223,9 +223,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="street_name">व्यवसायको बाटोको नाम</label>
+                                        <label for="street_name">व्यवसाय/उद्योगको बाटोको नाम</label>
                                         <input type="text" class="form-control" name="street_name" id="street_name"
-                                               value="{{old('street_name',$business->street_name)}}" placeholder="व्यवसायको बाटोको नाम">
+                                               value="{{old('street_name',$business->street_name)}}" placeholder="व्यवसाय/उद्योगको बाटोको नाम">
                                         @error('street_name')
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
@@ -236,15 +236,15 @@
                         </fieldset>
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">
-                                <strong>व्यवसायीको जानकारी</strong>
+                                <strong>व्यवसायी/उद्योगीको जानकारी</strong>
                             </legend>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="owner_name">व्यवसायीको नाम <sup
+                                        <label for="owner_name">व्यवसायी/उद्योगीको नाम <sup
                                                 class="text-danger">*required</sup></label>
                                         <input type="text" class="form-control" required="" name="owner_name"
-                                               id="owner_name" value="{{old('owner_name',$business->owner_name)}}" placeholder="मालिक नाम">
+                                               id="owner_name" value="{{old('owner_name',$business->owner_name)}}" placeholder="व्यवसायी/उद्योगीको नाम">
                                     </div>
                                     @error('owner_name')
                                     <div class="invalid-feedback">
@@ -301,11 +301,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="business_rent_owner">व्यवसाय रहने घर /जग्गाधनिको नाम <sup
+                                        <label for="business_rent_owner">व्यवसाय/उद्योग रहने घर /जग्गाधनिको नाम <sup
                                                 class="text-danger">*required</sup></label>
                                         <input type="text" class="form-control" required="" name="business_rent_owner"
                                                id="business_rent_owner" value="{{old('business_rent_owner',$business->business_rent_owner)}}"
-                                               placeholder="व्यवसाय रहने घर /जग्गाधनिको नाम ">
+                                               placeholder="व्यवसाय/उद्योग रहने घर /जग्गाधनिको नाम ">
                                     </div>
                                     @error('business_rent_owner')
                                     <div class="invalid-feedback">
@@ -315,7 +315,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="owner_photo">व्यवसायीको फोटो: <sup
+                                        <label for="owner_photo">व्यवसायी/उद्योगीको फोटो: <sup
                                                 class="text-danger">*required</sup> </label><br>
                                         <div class="input-group">
                                             <div class="custom-file">

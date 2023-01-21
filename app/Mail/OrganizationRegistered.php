@@ -18,9 +18,7 @@ class OrganizationRegistered extends Mailable
      * @return void
      */
     public function __construct(public Organization $organization, public $url)
-    {
-        info($this->organization);
-    }
+    {}
 
     /**
      * Build the message.
