@@ -19,28 +19,60 @@
                 <h4 class="page-title">चलानी फाईल</h4>
             </div>
         </div>
-        <div class="card">
-            <div class="d-md-flex justify-content-between ">
-                <form class="search-bar pt-2">
-                    <div class="position-relative">
-                        <input type="text" class="form-control form-control-light" placeholder="फाईल खोज्नुहोस्...">
-                        <span class="mdi mdi-magnify"></span>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="inbox-leftbar">
+                        <div class="d-block mb-2">
+                            <h5 class="font-16">Dispatch</h5>
+                        </div>
+                        <div class="mail-list">
+                            <a href="#" class="list-group-item border-0"><i class="fa fa-folder font-18 align-middle me-2"></i>Test 1</a>
+                            <a href="#" class="list-group-item border-0"><i class="fa fa-folder font-18 align-middle me-2"></i>Test 2</a>
+                        </div>
                     </div>
-                </form>
-                <div class="pt-2 mt-md-0">
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list"></i>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list-alt"></i>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-info"></i>
-                    </button>
+                    <div class="inbox-rightbar">
+                        <div class="d-md-flex justify-content-between align-items-center">
+                            <form class="search-bar">
+                                <div class="position-relative">
+                                    <input type="text" class="form-control form-control-light" placeholder="Search files...">
+                                    <span class="mdi mdi-magnify"></span>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="mt-3">
+                            <h5 class="mb-2">Quick Access</h5>
+                            <div class="row mx-n1 g-0">
+                                <div class="col-md-6">
+                                    <div class="card m-1 shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center justify-content-between">
+                                                <div class="col-auto pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i class="fa fa-file-pdf font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col text-truncate">
+                                                    <a href="javascript:void(0);" class="text-muted fw-bold">Ubold-sketch-design.zip</a>
+                                                    <p class="mb-0 font-13">2.3 MB</p>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button type="button" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fa fa-download"></i></button>
+                                                </div>
+                                            </div> <!-- end row -->
+                                        </div> <!-- end .p-2-->
+                                    </div> <!-- end col -->
+                                </div> <!-- end col-->
+                            </div> <!-- end row-->
+                        </div> <!-- end .mt-3-->
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-            </div>
-            <div class="mt-3">
-                @foreach(getAllFilesAndFolders('dispatch') as $file)
-                    @include('admin.inc.file', ['file' => $file])
-                @endforeach
-            </div> <!-- end .mt-3-->
+            </div> <!-- end card -->
+
         </div>
     </div>
 @endsection
