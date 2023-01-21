@@ -1,42 +1,33 @@
-<div class="row mx-n1 g-0">
+{{--<div class="row">--}}
     @if($file['isFile'])
         <div class="col-xl-4 col-lg-6">
-            <div class="card m-1 shadow border rounded" data-bs-toggle="tooltip" data-bs-placement="top"
-                 title="{{collect($file)->has('label') ? $file['label'] : ''}}">
+            <div class="card m-1 shadow-none border">
                 <div class="p-2">
                     <div class="row align-items-center">
                         <div class="col-auto pe-0">
                             <div class="avatar-sm">
-                                          <span class="avatar-title text-primary rounded">
-                                               <i class="fa {{collect($file)->has('detail') ? $file['detail']['icon'] : ''}} fs-1"></i>
-                                           </span>
+                                <span class="avatar-title bg-light text-secondary rounded">
+                                    <i class="fa {{collect($file)->has('detail') ? $file['detail']['icon'] : ''}} font-18"></i>
+                                </span>
                             </div>
                         </div>
-                        <div class="col text-muted fw-bold text-truncate">
-                            {{collect($file)->has('label') ? $file['label'] : ''}}
-                        </div>
-                        <div class="col d-flex justify-content-between">
+                        <div class="col text-truncate">
+                            <a class="text-muted fw-bold"> {{collect($file)->has('label') ? $file['label'] : ''}}</a>
                             <p class="mb-0 font-13">{{collect($file)->has('detail') ? $file['detail']['size'] : ''}}</p>
-                            <a href="{{route('admin.file-url-download',['file_url'=>$file['path']])}}"
-                               class="btn btn-sm btn-primary">
-                                <i class="fa fa-download text-white"></i>
-                            </a>
                         </div>
                     </div> <!-- end row -->
                 </div> <!-- end .p-2-->
             </div> <!-- end col -->
         </div> <!-- end col-->
     @else
-        <div class="border-bottom d-flex justify-content-between">
-            <p class="text-primary fw-semibold fs-5">{{collect($file)->has('label') ? \Illuminate\Support\Str::upper($file['label']) : ''}}</p>
-
+        <div class="row">
+            <h5 class="mb-2 ms-2">{{collect($file)->has('label') ? \Illuminate\Support\Str::upper($file['label']) : ''}}</h5>
         </div>
     @endif
-
     @if(collect($file)->has('children'))
         {{--        has Child--}}
         @foreach($file['children'] as $child)
             @include('admin.inc.file', ['file' => $child])
         @endforeach
     @endif
-</div> <!-- end row-->
+{{--</div> <!-- end row-->--}}

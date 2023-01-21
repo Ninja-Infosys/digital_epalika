@@ -1,14 +1,10 @@
 <?php
 
-namespace Modules\OrganizationRegistration\Http\Controllers;
+namespace Modules\OrganizationRegistration\Http\Controllers\Admin;
 
-use App\Models\Settings\FiscalYear;
-use App\Models\Settings\OfficeSetting;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\Grant\Entities\Farmer;
+use App\Models\Settings\FiscalYear;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\OrganizationRegistration\Entities\Business;
 use Modules\OrganizationRegistration\Entities\BusinessRenew;
 use Modules\OrganizationRegistration\Http\Requests\BusinessRenew\StoreBusinessRenewRequest;

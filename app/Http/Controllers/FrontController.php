@@ -127,19 +127,19 @@ class FrontController extends Controller
 //        return view('frontend.static.chat.service');
     }
 
-    public function seniorCitizenshipDetailQrcode($id)
+    public function seniorCitizenDetailQrcode(SeniorCitizenDetail $seniorCitizenDetail)
     {
-        $seniorCitizenDetail = SeniorCitizenDetail::with('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody')->findOrFail($id);
+
+        $seniorCitizenDetail->load('fingerPrints', 'employeeSignature', 'province', 'district', 'localBody');
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
-
         return view('frontend.seniorCitizenprint', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
 
     }
 
-    public function disabilityIdentityCardQrcode($id)
+    public function disabilityIdentityCardQrcode(DisabilityIdentityCard $disabilityIdentityCard)
     {
-        $disabilityIdentityCard = DisabilityIdentityCard::with('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody')->findOrFail($id);
+        $disabilityIdentityCard->load('fingerPrints','employeeSignature', 'disabilityType', 'governmentalDisabilityType', 'permanentProvince', 'permanentDistrict', 'permanentLocalBody');
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         return view('frontend.disabilityPrint', compact('todayDate', 'disabilityIdentityCard', 'officeHeaders'));

@@ -3,7 +3,7 @@
     <div class="row mt-2">
         <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -20,8 +20,8 @@
         </div>
 
         <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -39,7 +39,7 @@
 
         <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -56,8 +56,8 @@
         </div>
 
         <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">

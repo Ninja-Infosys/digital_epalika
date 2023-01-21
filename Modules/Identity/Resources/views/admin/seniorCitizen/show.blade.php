@@ -159,8 +159,8 @@
                                         @endforeach
                                     </div>
                                     <div>
-                                        <img src=""
-                                             alt="" height="30" id="signature_image"
+                                        <img src="{{$seniorCitizenDetail->employeeSignature->red_signature}}"
+                                             alt="{{$seniorCitizenDetail->name_en}}" height="30" id="signature_image"
                                              style="z-index: 5;margin-right: -20px;margin-top:30px;transform: rotate(-10deg);"/>
                                         <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
                                     </div>
@@ -190,12 +190,12 @@
                                         <div class="card-font-color">
                                             <p>लिङ्ग: {{$seniorCitizenDetail->gender->label()??''}}</p>
                                             <p>रक्त समूह: {{$seniorCitizenDetail->blood_group->label()??''}}</p>
-                                            <p>उमेर: </p>
+                                            <p>उमेर: {{$seniorCitizenDetail->age}}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-center mb-2">
-                                    {!! QrCode::size(60)->generate(route('seniorCitizenshipDetail.qrcode',$seniorCitizenDetail)); !!}
+                                    {!! QrCode::size(60)->generate(route('seniorCitizenDetail.qrcode',$seniorCitizenDetail)); !!}
                                 </div>
                                 <div class="row footer-part">
                                     <div class="col-md-4 card-font-color text-center">
@@ -235,8 +235,8 @@
                                         @endforeach
                                     </div>
                                     <div>
-                                        <img src=""
-                                             alt="" height="30" id="signature_image"
+                                        <img src="{{$seniorCitizenDetail->employeeSignature->red_signature}}"
+                                             alt="{{$seniorCitizenDetail->name_en}}" height="30" id="signature_image"
                                              style="z-index: 5;margin-right: -20px;margin-top:30px;transform: rotate(-10deg);"/>
                                         <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
                                     </div>
@@ -260,7 +260,7 @@
                                             <p>Blood Group : {{$seniorCitizenDetail->blood_group->label()??''}}
                                             </p>
                                             <p>Age
-                                                : </p>
+                                                :  {{$seniorCitizenDetail->age}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +296,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="d-flex justify-content-center">
-                                            {!! QrCode::size(60)->generate(route('seniorCitizenshipDetail.qrcode',$seniorCitizenDetail)); !!}
+                                            {!! QrCode::size(60)->generate(route('seniorCitizenDetail.qrcode',$seniorCitizenDetail)); !!}
                                         </div>
                                     </div>
                                 </div>
