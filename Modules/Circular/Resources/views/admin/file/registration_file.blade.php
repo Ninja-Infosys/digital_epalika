@@ -19,31 +19,23 @@
                 <h4 class="page-title">दर्ता फाईल</h4>
             </div>
         </div>
+        <div class="col-md-12">
         <div class="card">
-            <div class="d-md-flex justify-content-between ">
-                <form class="search-bar pt-2">
-                    <div class="position-relative">
-                        <input type="text" class="form-control form-control-light" placeholder="फाईल खोज्नुहोस्...">
-                        <span class="mdi mdi-magnify"></span>
+            <div class="card-header">
+                <form>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="फाईल खोज्नुहोस्...">
                     </div>
                 </form>
-                <div class="pt-2 mt-md-0">
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list"></i>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-list-alt"></i>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-white border-white"><i class="fa fa-info"></i>
-                    </button>
-                </div>
             </div>
-            <div class="my-3">
-
+            <div class="card-body">
+                <h4 class="mb-2">Quick Access</h4>
                 @foreach(getAllFilesAndFolders('registration') as $file)
                     @include('admin.inc.file', ['file' => $file])
                 @endforeach
-
             </div> <!-- end .mt-3-->
 
+        </div>
         </div>
     </div>
 @endsection
