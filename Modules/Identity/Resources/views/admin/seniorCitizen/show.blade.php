@@ -296,7 +296,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="d-flex justify-content-center">
-                                            {!! QrCode::size(60)->generate($seniorCitizenDetail->name??''); !!}
+                                            {!! QrCode::size(60)->generate($seniorCitizenDetail->name_en??''); !!}
                                         </div>
                                     </div>
                                 </div>
