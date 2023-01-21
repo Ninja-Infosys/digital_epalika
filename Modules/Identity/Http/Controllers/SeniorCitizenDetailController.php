@@ -65,7 +65,6 @@ class SeniorCitizenDetailController extends Controller
         $officeHeaders = OfficeHeader::get();
         $todayDate = $this->get_today_nepali_date();
         $seniorCitizenDetail->load('fingerPrints','employeeSignature','province','district','localBody');
-        dd($seniorCitizenDetail);
         $view = (string)View::make('identity::admin.seniorCitizen.print', compact('todayDate', 'seniorCitizenDetail', 'officeHeaders'));
 
         return response()->json([
