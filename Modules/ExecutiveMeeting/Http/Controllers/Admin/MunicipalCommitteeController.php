@@ -15,13 +15,13 @@ class MunicipalCommitteeController extends Controller
     {
         $this->checkAuthorization('executiveMunicipalCommittee_access');
 
-        $municipalCommittees = MunicipalCommittee::with('province', 'district', 'localBody')->orderBy('position')
-        ->where(function (Builder $q) {
-            if (!is_null(request('search'))) {
-                $q->whereLike(['name','phone','email'], request('search'));
-            }
-        })
-        ->latest()->paginate(10);
+        $municipalCommittees = MunicipalCommittee::filterData()->with('province', 'district', 'localBody')->orderBy('position')
+            ->where(function (Builder $q) {
+                if (!is_null(request('search'))) {
+                    $q->whereLike(['name', 'phone', 'email'], request('search'));
+                }
+            })
+            ->latest()->paginate(10);
 
 
         return view('executivemeeting::admin.municipal_committee.index', compact('municipalCommittees'));
@@ -38,7 +38,9 @@ class MunicipalCommitteeController extends Controller
     public function store(StoreMunicipalCommitteeRequest $request)
     {
         $this->checkAuthorization('executiveMunicipalCommittee_create');
-        MunicipalCommittee::create($request->validated());
+        MunicipalCommittee::create($request->validated() + [
+                'user_id' => auth()->id()
+            ]);
 
         toast('पालिका समिति  सफलतापूर्वक थपियो', 'success');
 
@@ -54,7 +56,7 @@ class MunicipalCommitteeController extends Controller
     public function edit(MunicipalCommittee $municipalCommittee)
     {
         $this->checkAuthorization('executiveMunicipalCommittee_edit');
-
+        $this->authorize('update',$municipalCommittee);
         return view('executivemeeting::admin.municipal_committee.edit', compact('municipalCommittee'));
     }
 
@@ -76,6 +78,7 @@ class MunicipalCommitteeController extends Controller
     {
         $this->checkAuthorization('executiveMunicipalCommittee_delete');
 
+        $this->authorize('delete',$municipalCommittee);
         if ($municipalCommittee->photo) {
             $this->deleteFile($municipalCommittee->photo);
         }

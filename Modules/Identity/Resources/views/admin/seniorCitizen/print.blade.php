@@ -16,6 +16,7 @@
             float: left;
             width: 25%;
         }
+
         .col-md-9 {
             float: left;
             width: 75%;
@@ -112,7 +113,7 @@
 
         @page {
             size: landscape;
-            margin: 0;
+
         }
     </style>
 </head>
@@ -129,6 +130,7 @@
                 @endforeach
             </div>
             <div>
+
                 <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
                 <img src="" alt="" height="20" id="signature_image"/>
             </div>
@@ -145,7 +147,8 @@
                 <p>व्यक्तिको पुरा नाम: <span>{{$seniorCitizenDetail->name}}</span></p>
                 <p>नागरिकता नं : <span>{{$seniorCitizenDetail->citizenship_no}}</span></p>
                 <p>रोग : <span>{{$seniorCitizenDetail->is_disease==1 ? 'छ':'छैन'}}</span></p>
-                <p>ठेगाना :<span>{{$seniorCitizenDetail->localBody->local_body??''}},{{$seniorCitizenDetail->district->district??''}},{{$seniorCitizenDetail->province->province??''}}</span></p>
+                <p>ठेगाना :<span>{{$seniorCitizenDetail->localBody->local_body??''}},{{$seniorCitizenDetail->district->district??''}},{{$seniorCitizenDetail->province->province??''}}</span>
+                </p>
                 <p>पति,पत्नीको नाम :
                     <span>{{$seniorCitizenDetail->spouse}} </span>
                 </p>
@@ -156,28 +159,25 @@
                 <p>उमेर: </p>
             </div>
         </div>
-
-        <div class="col-md-9">
-            <div style="display: flex;justify-content: center;">
-               <div>{!! QrCode::size(30)->generate($seniorCitizenDetail->name_en??''); !!}</div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                    <span>
-                    </span><br>
-                <p>नाम</p></div>
-            <div class="col-md-3">
-                    <span>
-                        <img src="" height="20" class="signature"/>
-                    </span><br>
-                <p>हस्ताक्षर</p></div>
-            <div class="col-md-3">
-                    <span>
-
-                    </span><br>
-                <p>पद</p></div>
-        </div>
+        <table style="width: 100%;">
+            <tr style="font-size: 10px;">
+                <th>
+                    <span style="border-bottom: dashed 1px"></span>
+                    <br>
+                    नाम
+                </th>
+                <th>
+                    <span style="border-bottom: dashed 1px"></span>
+                    <br>
+                    हस्ताक्षर
+                </th>
+                <th>
+                    <span style="border-bottom: dashed 1px"></span>
+                    <br>
+                    पद
+                </th>
+            </tr>
+        </table>
         <div class="break-page"></div>
         <div class="header" style="height: 204.48px;width: 324.48px; margin-top: 5px;">
             <div class="office_header">
@@ -190,7 +190,7 @@
                     @endforeach
                 </div>
                 <div>
-                    <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
+                    {{QrCode::size(30)->generate($seniorCitizenDetail->name_en??'')}}
                     <img src="" alt="" height="20" id="signature_image"/>
                 </div>
             </div>
@@ -221,8 +221,11 @@
                         : </p>
                 </div>
             </div>
-            <div class="row">
-                <div style="display:flex;justify-content: space-between;margin-bottom: 0;">
+            <div class="row" style="margin-top: 2px;">
+                <div class="col-md-6" style="display: flex;justify-content: center;">
+                    <h2></h2>
+                </div>
+                <div class="col-md-6" style="display: flex;justify-content: space-evenly;">
                     <div>
                         @foreach($seniorCitizenDetail->fingerPrints->where('finger','left') as $fingerPrint)
                             <img src="{{$fingerPrint->finger_image}}" alt="" height="20"><br>
@@ -237,31 +240,28 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-part">
-                <div class="col-md-4">
-                    <span>
 
-                    </span><br>
-                    <p>Name</p>
-                </div>
-                <div class="col-md-4">
-                     <span>
-                        <img src=""
-                             alt="" height="20" class="signature">
-
-                    </span><br>
-                    <p>Signature</p>
-                </div>
-                <div class="col-md-4">
-                     <span>
-
-                    </span><br>
-                    <p>Designation</p></div>
-
-            </div>
-
+            <table style="width: 100%;">
+                <tr style="font-size: 10px;">
+                    <th>
+                        <span style="border-bottom: dashed 1px"></span>
+                        <br>
+                        Name
+                    </th>
+                    <th>
+                        <span style="border-bottom: dashed 1px"></span>
+                        <br>
+                        Signature
+                    </th>
+                    <th>
+                        <span style="border-bottom: dashed 1px"></span>
+                        <br>
+                        Designation
+                    </th>
+                </tr>
+            </table>
         </div>
     </div>
-
+</div>
 </body>
 </html>

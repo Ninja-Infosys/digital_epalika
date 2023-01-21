@@ -5,6 +5,7 @@ namespace Modules\ExecutiveMeeting\Entities;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\User;
 use App\Traits\EventObserveTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,6 +29,7 @@ class WardCommittee extends Model
     protected $fillable = [
         'name',
         'designation',
+        'committee_ward',
         'phone',
         'photo',
         'email',
@@ -38,7 +40,8 @@ class WardCommittee extends Model
         'village',
         'tole',
         'position',
-        'committee_ward'
+        'committee_ward',
+        'user_id',
     ];
 
     public function getPhotoUrlAttribute(): string
@@ -78,5 +81,19 @@ class WardCommittee extends Model
     public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function scopeFilterData($query)
+    {
+        if (auth()->user()->role->type !== 'Super') {
+            $query->where('user_id', auth()->id());
+            $query->orWhere('committee_ward', auth()->user()->ward_no);
+        }
+        return $query;
     }
 }
