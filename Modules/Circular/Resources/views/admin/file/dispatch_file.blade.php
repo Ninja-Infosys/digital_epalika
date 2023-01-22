@@ -28,31 +28,9 @@
                         </div>
                         <div class="custom-list">
                             <ul class="file-list">
-                                <li class="list-item">
-                                    <div class="file-handle">
-                                        <i class="fa fa-folder font-18 align-middle me-2"></i>  Choose a smartwatch
-                                    </div>
-                                </li>
-                                <li class="list-item">
-                                    <button class="btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">+</button>
-                                    <div class="file-handle">
-                                        Test File name
-                                    </div>
-                                    <ul class="file-list collapse" id="collapseExample">
-                                        <li class="list-item">
-                                            <div class="file-handle text-truncate">
-                                                <i class="fa fa-folder font-18 align-middle me-2"></i> Coffee with the team
-                                            </div>
-                                            <div class="file-handle text-truncate">
-                                                <i class="fa fa-folder font-18 align-middle me-2"></i> Coffee with the team
-                                            </div>
-                                            <div class="file-handle text-truncate">
-                                                <i class="fa fa-folder font-18 align-middle me-2"></i> Coffee with the team
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-
+                                @foreach(getAllForSideBarFolders('registration') as $folder)
+                                    @include('inc.sideFolders',['folder'=>$folder])
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -60,7 +38,8 @@
                         <div class="d-md-flex justify-content-between align-items-center">
                             <form class="search-bar">
                                 <div class="position-relative">
-                                    <input type="text" class="form-control form-control-light" placeholder="Search files...">
+                                    <input type="text" class="form-control form-control-light"
+                                           placeholder="Search files...">
                                     <span class="mdi mdi-magnify"></span>
                                 </div>
                             </form>
@@ -85,7 +64,9 @@
                                                     <p class="mb-0 font-13">2.3 MB</p>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <button type="button" class="btn btn-blue btn-sm waves-effect waves-light"><i class="fa fa-download"></i></button>
+                                                    <button type="button"
+                                                            class="btn btn-blue btn-sm waves-effect waves-light"><i
+                                                            class="fa fa-download"></i></button>
                                                 </div>
                                             </div> <!-- end row -->
                                         </div> <!-- end .p-2-->
