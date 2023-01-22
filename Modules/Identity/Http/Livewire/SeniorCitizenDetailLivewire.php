@@ -68,6 +68,7 @@ class SeniorCitizenDetailLivewire extends Component
         'is_medicine' => 0,
         'medicine_name' => null,
         'employee_signature_id' => null,
+        'dob_ad' => null,
 
     ];
 
@@ -143,9 +144,10 @@ class SeniorCitizenDetailLivewire extends Component
 
     }
 
-    public function dobChanged($nepaliDate): void
+    public function dobChanged($nepaliDate, $englishDate)
     {
         $this->form['dob_bs'] = $nepaliDate;
+        $this->form['dob_ad'] = $englishDate;
     }
 
     public function issueDateChanged($nepaliDate): void
@@ -175,6 +177,7 @@ class SeniorCitizenDetailLivewire extends Component
 
     protected array $validationRules = [
         'form.name' => ['required', 'string', 'max:255'],
+        'form.dob_ad' => ['required'],
         'form.name_en' => ['required', 'string', 'max:255'],
         'form.dob_bs' => ['required'],
         'form.gender' => ['required'],

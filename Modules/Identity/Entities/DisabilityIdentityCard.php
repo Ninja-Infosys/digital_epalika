@@ -96,7 +96,8 @@ class DisabilityIdentityCard extends Model
         'employee_signature_id',
         'govern_disability_type_id',
         'card_no',
-        'user_id'
+        'user_id',
+        'is_citizenship',
     ];
 
     protected $casts = [

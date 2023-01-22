@@ -27,7 +27,7 @@ return new class () extends Migration {
             $table->string('operated_through')->comment('मार्फत सञ्चालन');
             $table->boolean('is_deadline_extended')->default(0)->comment('म्याद थपिएको');
             $table->string('extended_date')->nullable()->comment('विस्तारित मिति');
-            $table->double('progress_spent_amount', 12, 2)->default(0)->comment('प्रगति खर्च रकम');
+            $table->double('progress_spent_amount', 12, 2)->default(0)->comment('वित्तीय प्रगति खर्च रकम');
             $table->double('physical_progress_target', 12, 2)->default(0)->comment('भौतिक प्रगति लक्ष्य परिमाण');
             $table->double('physical_progress_completed', 12, 2)->default(0)->comment('भौतिक प्रगति सम्पन्न परिमाण');
             $table->string('physical_progress_unit')->nullable()->comment('भौतिक प्रगति एकाइ');

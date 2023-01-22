@@ -8,6 +8,17 @@
 
     <style>
 
+        .container {
+            text-align: center;
+        }
+        .footer-text {
+            display: inline-flex;
+            padding: 3px;
+            border-radius: 5px;
+            font-size: 8px;
+            background-color: red;
+            color: #fff;
+        }
         body {
             visibility: hidden;
         }
@@ -129,9 +140,8 @@
                 @endforeach
             </div>
             <div>
-
-                <img src="{{$seniorCitizenDetail->photo}}" alt="" height="40">
-                <img src="" alt="" height="20" id="signature_image"/>
+                <img src="{{$seniorCitizenDetail->employeeSignature->red_signature}}" alt="{{$seniorCitizenDetail->name_en}}" height="20" id="signature_image"/>
+                <img src="{{$seniorCitizenDetail->photo}}" alt="{{$seniorCitizenDetail->name_en}}" height="40">
             </div>
 
         </div>
@@ -155,28 +165,44 @@
             <div class="col-md-3">
                 <p>लिङ्ग: {{$seniorCitizenDetail->gender->label()??''}}</p>
                 <p>रक्त समूह: {{$seniorCitizenDetail->blood_group->label()??''}}</p>
-                <p>उमेर: </p>
+                <p>उमेर: {{$seniorCitizenDetail->age}}</p>
             </div>
         </div>
         <table style="width: 100%;">
-            <tr style="font-size: 10px;">
+            <tr style="font-size: 5px;">
                 <th>
-                    <span style="border-bottom: dashed 1px"></span>
+                    <span style="border-bottom: dashed 1px">
+                        {{$seniorCitizenDetail->employeeSignature->name}}
+                    </span>
                     <br>
                     नाम
                 </th>
                 <th>
-                    <span style="border-bottom: dashed 1px"></span>
+                    <span>
+                         <img
+                             src="{{$seniorCitizenDetail->employeeSignature->red_signature??''}}"
+                             alt="" height="30"
+                             class="signature">
+                    </span>
                     <br>
                     हस्ताक्षर
                 </th>
                 <th>
-                    <span style="border-bottom: dashed 1px"></span>
+                    <span style="border-bottom: dashed 1px"> {{$seniorCitizenDetail->employeeSignature->designation}}</span>
                     <br>
                     पद
                 </th>
             </tr>
         </table>
+        <div class="container">
+            <div class="row">
+                <p class="footer-text">
+                        यो परिचय पत्र कसैले पाएमा नजिकको प्रहरी कार्यालयमा वा स्थानीय निकायमा बुझाई दिनुहोला ।
+
+                </p>
+            </div>
+        </div>
+
         <div class="break-page"></div>
         <div class="header" style="height: 204.48px;width: 324.48px; margin-top: 5px;">
             <div class="office_header">
@@ -189,7 +215,7 @@
                     @endforeach
                 </div>
                 <div>
-                    {!! QrCode::size(60)->generate(route('seniorCitizenshipDetail.qrcode',$seniorCitizenDetail)); !!}
+                    {!! QrCode::size(45)->generate(route('seniorCitizenDetail.qrcode',$seniorCitizenDetail)); !!}
                     <img src="" alt="" height="20" id="signature_image"/>
                 </div>
             </div>
@@ -217,7 +243,7 @@
                     <p>Blood Group : {{$seniorCitizenDetail->blood_group->label()??''}}
                     </p>
                     <p>Age
-                        : </p>
+                        : {{$seniorCitizenDetail->age}}</p>
                 </div>
             </div>
             <div class="row" style="margin-top: 2px;">
@@ -241,19 +267,24 @@
             </div>
 
             <table style="width: 100%;">
-                <tr style="font-size: 10px;">
+                <tr style="font-size: 5px;">
                     <th>
-                        <span style="border-bottom: dashed 1px"></span>
+                        <span style="border-bottom: dashed 1px"> {{$seniorCitizenDetail->employeeSignature->name_en}}</span>
                         <br>
                         Name
                     </th>
                     <th>
-                        <span style="border-bottom: dashed 1px"></span>
+                        <span style="border-bottom: dashed 1px">
+                            <img
+                                src="{{$seniorCitizenDetail->employeeSignature->red_signature??''}}"
+                                alt="" height="30"
+                                class="signature">
+                        </span>
                         <br>
                         Signature
                     </th>
                     <th>
-                        <span style="border-bottom: dashed 1px"></span>
+                        <span style="border-bottom: dashed 1px">{{$seniorCitizenDetail->employeeSignature->designation_en}}</span>
                         <br>
                         Designation
                     </th>

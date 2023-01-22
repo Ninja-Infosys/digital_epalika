@@ -9,6 +9,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\User;
 use App\Traits\NepaliDateConverter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,6 +34,7 @@ class SeniorCitizenDetail extends Model
         'name',
         'name_en',
         'dob_bs',
+        'dob_ad',
         'card_no',
         'gender',
         'citizenship_no',
@@ -127,10 +129,6 @@ class SeniorCitizenDetail extends Model
         return (auth()->user()->role->type === 'Super' || auth()->id() == $this->user_id);
     }
 
-    public function getAgeAttribute()
-    {
-
-    }
 
     public function scopeFilterData($query)
     {
@@ -140,5 +138,10 @@ class SeniorCitizenDetail extends Model
         }
         return $query;
 
+    }
+
+    public function getAgeAttribute(): int
+    {
+        return Carbon::parse($this->attributes['dob_ad'])->age;
     }
 }

@@ -34,46 +34,91 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm table-striped table-hover">
-                            <thead>
+                    @includeIf('inc.filter_form')
+                    <table class="table table-sm table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>क्र.स</th>
+                            <th>दर्ता नं.</th>
+                            <th>आयोजनाको नाम</th>
+                            <th> सुरु हुने मिति</th>
+                            <th>सम्पन्‍न हुने मिति</th>
+                            <th>विनियोजन रकम</th>
+                            <th>आयोजनाको अवस्था</th>
+                            <th>#</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($projects as $project)
                             <tr>
-                                <th>क्र.स</th>
-                                <th>दर्ता नं.</th>
-                                <th>आयोजनाको नाम</th>
-                                <th> सुरु हुने मिति</th>
-                                <th>सम्पन्‍न हुने मिति</th>
-                                <th>विनियोजन रकम</th>
-                                <th>आयोजनाको अवस्था</th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($projects as $project)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$project->registration_no}}</td>
-                                    <td>{{$project->project_name}}</td>
-                                    <td>{{$project->project_start_date}}</td>
-                                    <td>{{$project->project_completion_date}}</td>
-                                    <td>{{$project->allocated_amount}}</td>
-                                    <td>{{$project->project_status->label()}}</td>
-                                    <td>
-                                        <a data-bs-type="edit" href="{{route('admin.plan.project.show',$project)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-eye"> विवरण हेर्नुहोस्</i>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$project->registration_no}}</td>
+                                <td>{{$project->project_name}}</td>
+                                <td>{{$project->project_start_date}}</td>
+                                <td>{{$project->project_completion_date}}</td>
+                                <td>{{$project->allocated_amount}}</td>
+                                <td>{{$project->project_status->label()}}</td>
+                                <td>
+                                    <div class="btn-group dropdown mb-2">
+                                        <a href="{{route('admin.plan.project.show',$project)}}"
+                                           class="btn btn-sm btn-primary">
+                                            <i class="fa fa-eye"> विवरण </i>
                                         </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
-                    </div>
+                                        <button type="button"
+                                                class="btn btn-sm btn-info dropdown-toggle dropdown-toggle-split"
+                                                data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                            <i class="fa fa-angle-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu" style="">
+                                            <a class="dropdown-item"
+                                               href="{{route('admin.plan.project.edit',$project)}}">
+                                                <i class="fa fa-edit"> सम्पादन गर्नुहोस्</i>
+                                            </a>
+                                            <a class="dropdown-item"
+                                               href="{{route('admin.plan.project.projectCostDetail.index',$project)}}">
+                                                <i class="fa fa-list"> आयोजनाको लागत सम्वन्धि विवरण</i>
+                                            </a>
+                                            @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.projectBidDetail.index',$project)}}">
+                                                    <i class="fa fa-list"> बोलपत्र सम्वन्धि विवरण </i>
+                                                </a>
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
+                                                    <i class="fa fa-money-bill">  मोविलाईजेशन पेश्की/रनिङ विल विवरण </i>
+                                                </a>
+                                            @else
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.consumerCommittee.index',$project)}}">
+                                                    <i class="fa fa-list"> उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको विवरण </i>
+                                                </a>
+                                            @endif
+                                            <a class="dropdown-item"
+                                               href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
+                                                <i class="fa fa-file-alt"> सम्झौताको शर्तहरु </i>
+                                            </a>
+                                            @can('projectDocument_access')
+                                            <a class="dropdown-item"
+                                               href="{{route('admin.plan.project.projectDocument.index',$project)}}">
+                                                <i class="fa fa-file-alt"> सम्बन्धित कागजातहरू </i>
+                                            </a>
+                                            @endcan
+                                            <a class="dropdown-item"
+                                               href="{{route('admin.plan.project.fileList',$project)}}">
+                                                <i class="fa fa-file"> आयोजनासँग सम्बन्धित अन्य कागजातहरु  </i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
                     <div class="mt-2">
                         {{ $projects->onEachSide(config('app.pagination_count'))->links() }}
                     </div>
