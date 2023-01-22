@@ -26,9 +26,31 @@
                         <div class="d-block mb-2">
                             <h5 class="font-16">Dispatch</h5>
                         </div>
-                        <div class="mail-list">
-                            <a href="#" class="list-group-item border-0"><i class="fa fa-folder font-18 align-middle me-2"></i>Test 1</a>
-                            <a href="#" class="list-group-item border-0"><i class="fa fa-folder font-18 align-middle me-2"></i>Test 2</a>
+                        <div class="custom-list">
+                            <ul class="file-list">
+                                <li class="list-item">
+                                    <div class="file-handle">
+                                        <i class="fa fa-folder font-18 align-middle me-2"></i>  Choose a smartwatch
+                                    </div>
+                                </li>
+                                <li class="list-item">
+                                    <button class="btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">+</button>
+                                    <div class="file-handle">
+                                        Send design for review
+                                    </div>
+                                    <ul class="file-list collapse" id="collapseExample">
+                                        <li class="list-item">
+                                            <div class="file-handle text-truncate">
+                                                <i class="fa fa-folder font-18 align-middle me-2"></i> Coffee with the team
+                                            </div>
+                                            <div class="file-handle text-truncate">
+                                                <i class="fa fa-folder font-18 align-middle me-2"></i> Coffee with the team
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
                     <div class="inbox-rightbar">
@@ -75,4 +97,9 @@
 
         </div>
     </div>
+    @push('scripts')
+        <script>
+
+        </script>
+    @endpush
 @endsection
