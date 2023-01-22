@@ -84,8 +84,27 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
-                console.log("ready!");
+                ajaxCall("{{route('admin.file.get-file-manager',['folder'=>'registration'])}}");
             });
+
+            $(".file-handle").click(function () {
+                // get data from data-bs-folder
+                let folder = $(this).data('bs-folder');
+
+                let url = "{{route('admin.file.get-file-manager',['folder'=>'folder_path'])}}";
+
+                ajaxCall(url.replace('folder_path', folder));
+            });
+
+            function ajaxCall(url) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (data) {
+                        console.log(data)
+                    }
+                });
+            }
         </script>
     @endpush
 @endsection
