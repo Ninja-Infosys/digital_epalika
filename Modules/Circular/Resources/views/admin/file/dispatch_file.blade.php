@@ -83,7 +83,9 @@
     </div>
     @push('scripts')
         <script>
-
+            $(document).ready(function () {
+                console.log("ready!");
+            });
         </script>
     @endpush
 @endsection

@@ -18,10 +18,4 @@
         </div>
     @endif
 </li>
-@push('scripts')
-<script>
-    $( document ).ready(function() {
-        console.log( "ready!" );
-    });
-</script>
-@endpush
+
