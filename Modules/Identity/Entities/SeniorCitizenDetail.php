@@ -7,6 +7,7 @@ use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\Settings\FiscalYear;
 use App\Models\User;
 use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
@@ -65,7 +66,8 @@ class SeniorCitizenDetail extends Model
         'is_medicine',
         'medicine_name',
         'employee_signature_id',
-        'user_id'
+        'user_id',
+        'fiscal_year_id'
     ];
 
     protected $casts = [
@@ -73,6 +75,11 @@ class SeniorCitizenDetail extends Model
         'blood_group' => BloodGroupEnum::class,
     ];
 
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);

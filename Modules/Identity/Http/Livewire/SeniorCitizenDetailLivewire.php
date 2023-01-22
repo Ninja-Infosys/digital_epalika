@@ -293,6 +293,7 @@ class SeniorCitizenDetailLivewire extends Component
         DB::transaction(function () {
             $seniorCitizenDetail = SeniorCitizenDetail::create($this->validate()['form'] + [
                     'user_id' => auth()->id(),
+                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
                     'card_no' => DB::table('senior_citizen_details')->max('id') + 1,
                 ]);
             $seniorCitizenDetail->fingerPrints()->create([
@@ -315,7 +316,7 @@ class SeniorCitizenDetailLivewire extends Component
             ]);
 
         });
-        $this->dispatchBrowserEvent('alert_message', [
+        $this->dispatchBrowserEvent('toast_message', [
             'type' => 'success',
             'title' => 'तपाइको  जेस्ठ नागरिक विवरण  दर्ता भयो'
         ]);
