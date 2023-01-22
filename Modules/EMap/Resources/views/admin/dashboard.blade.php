@@ -1,4 +1,4 @@
-secondary@extends('admin.layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
     <div class="row mt-2">
