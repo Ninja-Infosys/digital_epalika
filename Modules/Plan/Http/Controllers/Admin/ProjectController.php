@@ -60,7 +60,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectCostDetail', 'projectGrantDetails', 'projectAgreementTerm', 'projectDocuments', 'files');
+        $project->load('planArea','planLevel','budgetSource','budgetHead','projectCostDetail', 'projectGrantDetails', 'projectAgreementTerm', 'projectDocuments', 'files');
 
         return view('plan::admin.project.show', compact('project'));
     }

@@ -32,9 +32,27 @@
                             <i class="fa fa-print"> Print</i>
                         </button>
                     </div>
-                    <div class="p-3">
-                        <h4>नाम: {{$project->project_name}}</h4>
-                        <h4>योजनाको स्तर: {{$project->planLevel->level_name??''}}</h4>
+                    <div class="p-2">
+                        <h5>नाम : {{$project->project_name}}</h5>
+                        <h5>योजना उपस्तर : {{$project->planLevel->level_name??''}}</h5>
+                        <h5>योजनाको उपक्षेत्र : {{$project->planArea->area_name??''}}</h5>
+                        <h5>संचालन हुने वडा नं : {{implode(',',$project->ward_no)}}</h5>
+                        <h5>बजेट उप-शीर्षक : {{$project->budgetHead->title??''}}</h5>
+                        <h5>बजेटको श्रोत : {{$project->budgetSource->source_name??''}}</h5>
+                        <h5>विनियोजित रकम रु. : {{$project->allocated_amount}}</h5>
+                        <h5>आयोजना स्थल : {{$project->project_venue}}</h5>
+                        <h5>मूल्याङ्कन रकम रु. : {{$project->evaluation_amount}}</h5>
+                        <h5>उद्देश्य : {{$project->purpose}}</h5>
+                        <h5>आयोजना अवस्था : {{$project->project_status?->label()}}</h5>
+                        <h5>आयोजना सुरु हुने मिति : {{$project->project_start_date}}</h5>
+                        <h5>आयोजना सम्पन्‍न हुने मिति : {{$project->project_completion_date}}</h5>
+                        @if($project->is_deadline_extended)
+                            <h5>आयोजनाको म्याद थप मिति : {{$project->extended_date}}</h5>
+                        @endif
+                        <h5>वित्तीय प्रगति खर्च रकम रु. : {{$project->progress_spent_amount}}</h5>
+                        <h5>भौतिक प्रगति लक्ष्य : {{$project->physical_progress_target}}</h5>
+                        <h5>भौतिक प्रगति सम्पन्न : {{$project->physical_progress_completed}}</h5>
+                        <h5>भौतिक प्रगति एकाइ : {{$project->physical_progress_unit}}</h5>
                     </div>
                 </div>
             </div>
@@ -122,7 +140,8 @@
                     <h4 class="header-title">
                         ५. सम्बन्धित कागजातहरू
                     </h4>
-                    <a href="{{route('admin.plan.project.projectDocument.create',$project)}}" class="btn btn-sm btn-outline-primary">
+                    <a href="{{route('admin.plan.project.projectDocument.create',$project)}}"
+                       class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-plus-circle"> नयाँ कागजात थप्नुहोस्</i>
                     </a>
                 </div>
@@ -140,7 +159,8 @@
                     <h4 class="header-title">
                         ६. आयोजनासँग सम्बन्धित अन्य कागजातहरु
                     </h4>
-                    <a href="{{route('admin.plan.project.uploadFilePage',$project)}}" class="btn btn-sm btn-outline-primary">
+                    <a href="{{route('admin.plan.project.uploadFilePage',$project)}}"
+                       class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
                     </a>
                 </div>
@@ -150,7 +170,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>फाइल नाम </th>
+                                <th>फाइल नाम</th>
                                 <th>#</th>
                             </tr>
                             </thead>
