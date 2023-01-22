@@ -184,9 +184,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p style="font-size: 16px;font-weight: bold">
+                    <h6>
                         यो डिजिटल ई-पालिकाको डेमो भर्जन हो। पालिकामा उक्त  प्रणाली सुचारु भइसकेपछि थप अन्य फिचर देख्न पाउनुहुनेछ। धन्यबाद।
-                    </p>
+                    </h6>
                 </div>
             </div>
         </div>
