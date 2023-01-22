@@ -13,17 +13,17 @@ use Modules\Plan\Enums\GrantSourceEnum;
 class ProjectCostDetailLivewire extends Component
 {
     public array $form = [
-        'estimated_total_cost' => null,
-        'federal_invest' => null,
-        'province_invest' => null,
-        'local_level_invest' => null,
-        'consumer_committee_invest' => null,
-        'ngo_invest' => null,
-        'foreign_donor_invest' => null,
-        'others_invest' => null,
-        'estimated_cost_excluding_vat' => null,
-        'benefited_organization' => null,
-        'others_benefited' => null,
+        'estimated_total_cost' => 0,
+        'federal_invest' => 0,
+        'province_invest' => 0,
+        'local_level_invest' => 0,
+        'consumer_committee_invest' => 0,
+        'ngo_invest' => 0,
+        'foreign_donor_invest' => 0,
+        'others_invest' => 0,
+        'estimated_cost_excluding_vat' => 0,
+        'benefited_organization' => 0,
+        'others_benefited' => 0,
         'projectGrantDetails' => [],
         'benefitedMemberDetails' => []
     ];
