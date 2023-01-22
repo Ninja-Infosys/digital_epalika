@@ -1111,9 +1111,9 @@
                                 @error('form.photo')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                                <button class="mt-1" onclick="loadImage()" type="button">Camera</button>
-                                <button class="mt-1" onclick="captureImage()" type="button">Capture Image</button>
-                                <button class="mt-1" onclick="stopCamera()" type="button">Stop Camera</button>
+                                <button class="mt-1 btn btn-primary btn-sm" onclick="loadImage()" type="button">Camera</button>
+                                <button class="mt-1 btn btn-info btn-sm" onclick="captureImage()" type="button">Capture Image</button>
+                                <button  class="mt-1 btn btn-danger btn-sm" onclick="stopCamera()" type="button">Stop Camera</button>
                                 <div class="d-flex justify-content-between">
                                     <video id="video" width="200" height="200" autoplay></video>
                                     <canvas id="canvas" width="200" height="200"></canvas>
