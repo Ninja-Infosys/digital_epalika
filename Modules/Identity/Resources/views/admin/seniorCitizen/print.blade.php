@@ -193,7 +193,6 @@
                     पद
                 </th>
             </tr>
-
         </table>
         <div class="container">
             <div class="row">
