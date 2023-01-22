@@ -1,7 +1,7 @@
 <div class="floating-container">
     <div class="floating-button">
         <a href="{{route('admin.dashboard')}}">
-            <i class="fa fa-home" style="color: white"></i>
+            <i class="fa fa-home"></i>
         </a>
     </div>
     @if(array_key_exists(Str::lower(Request::segment(2)),config('floating-menu')))
