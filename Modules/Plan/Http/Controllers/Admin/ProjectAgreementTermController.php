@@ -5,6 +5,7 @@ namespace Modules\Plan\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectAgreementTerm;
 
@@ -19,7 +20,10 @@ class ProjectAgreementTermController extends Controller
     {
         $project->load('projectAgreementTerm');
 
-        return view('plan::admin.project_agreement_term.create',compact('project'));
+        $agreementTermTemplate=(String)View::make('plan::admin.setting.template.agreement_term_template');
+        $project->load('projectAgreementTerm');
+
+        return view('plan::admin.project_agreement_term.create',compact('project','agreementTermTemplate'));
     }
 
     public function store(Request $request,Project $project)
