@@ -93,6 +93,10 @@
                                                    href="{{route('admin.plan.project.consumerCommittee.index',$project)}}">
                                                     <i class="fa fa-list"> उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको विवरण </i>
                                                 </a>
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
+                                                    <i class="fa fa-list"> किस्ता/पेश्की विवरण </i>
+                                                </a>
                                             @endif
                                             <a class="dropdown-item"
                                                href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
