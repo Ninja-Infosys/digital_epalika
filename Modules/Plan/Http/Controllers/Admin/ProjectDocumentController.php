@@ -15,7 +15,9 @@ class ProjectDocumentController extends Controller
     {
         $this->checkAuthorization('projectDocument_access');
 
-        return view('plan::index');
+        $project->load('projectDocuments');
+
+        return view('plan::admin.project_document.index',compact('project'));
     }
 
     public function create(Project $project)
@@ -34,7 +36,7 @@ class ProjectDocumentController extends Controller
         $project->projectDocuments()->create($request->validated());
 
         toast('कागजात सफलतापूर्वक थपियो', 'success');
-        return redirect(route('admin.plan.project.show', $project));
+        return redirect(route('admin.plan.project.projectDocument.index', $project));
     }
 
     public function edit(Project $project, ProjectDocument $projectDocument)
@@ -52,7 +54,7 @@ class ProjectDocumentController extends Controller
 
         toast('कागजात सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.plan.project.show', $project));
+        return redirect(route('admin.plan.project.projectDocument.index', $project));
     }
 
     public function destroy(Project $project, ProjectDocument $projectDocument)

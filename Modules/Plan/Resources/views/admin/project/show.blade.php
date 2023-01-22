@@ -25,24 +25,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <h4 class="header-title">१) आयोजनाको विवरण</h4>
-                </div>
                 <div class="card-body">
-                    @livewire('plan::project-detail-livewire',['project'=>$project])
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="header-title">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
-                </div>
-                <div class="card-body">
-                    @livewire('plan::project-cost-detail-livewire',['project_id'=>$project->id])
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">१) आयोजनाको विवरण</h4>
+                        <button class="btn btn-sm btn-primary">
+                            <i class="fa fa-print"> Print</i>
+                        </button>
+                    </div>
+                    <div class="p-3">
+                        <h4>नाम: {{$project->project_name}}</h4>
+                        <h4>योजनाको स्तर: {{$project->planLevel->level_name??''}}</h4>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,7 +50,7 @@
                         </h4>
                     </div>
                     <div class="card-body">
-                        @livewire('plan::bid-detail-livewire',['project'=>$project])
+
                     </div>
                 </div>
             </div>
@@ -70,7 +63,7 @@
                         <h4 class="header-title">३. उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको विवरण</h4>
                     </div>
                     <div class="card-body">
-                        @livewire('plan::consumer-committee-livewire',['project'=>$project])
+
                     </div>
                 </div>
             </div>
@@ -115,25 +108,7 @@
                         <h4 class="header-title">६. सम्झौताको शर्तहरु</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('admin.plan.save-project-agreement-term',$project)}}" method="post">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-12 mb-2">
-                                    <label for="data" class="form-label">डाटा *</label>
-                                    <textarea name="data"
-                                              id="data"
-                                              cols="30" rows="10"
-                                              class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',$project->projectAgreementTerm->data??'')}}</textarea>
-                                    @error('data')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                            </div>
 
-                            <button type="submit" class="btn btn-primary">
-                                Save
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -152,45 +127,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>कागजातको नाम </th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($project->projectDocuments as $document)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{$document->document_name}}</td>
-                                    <td>
-                                        <a data-bs-type="edit" href="{{route('admin.plan.project.projectDocument.edit',[$project,$document])}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        @can('projectDocument_delete')
-                                            <form action="{{route('admin.plan.project.projectDocument.destroy',[$project,$document])}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        @endcan
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -250,12 +187,4 @@
         </div>
     </div>
 
-{{--    @push('style')--}}
-{{--        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/editor.css')}}">--}}
-{{--        <link rel="stylesheet" href="{{asset('assets/backend/editor/ckEditor/css/neo.css')}}">--}}
-{{--    @endpush--}}
-{{--    @push('scripts')--}}
-{{--        <script src="{{asset('assets/backend/editor/ckEditor/js/ckeditor.js')}}"></script>--}}
-{{--        <script src="{{asset('assets/backend/editor/ckEditor/js/editor.js')}}"></script>--}}
-{{--    @endpush--}}
 @endsection

@@ -1,0 +1,61 @@
+<?php
+
+namespace Modules\Plan\Http\Controllers\Admin;
+
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Modules\Plan\Entities\Project;
+use Modules\Plan\Entities\ProjectAgreementTerm;
+
+class ProjectAgreementTermController extends Controller
+{
+    public function index(Project $project)
+    {
+        return view('plan::index');
+    }
+
+    public function create(Project $project)
+    {
+        $project->load('projectAgreementTerm');
+
+        return view('plan::admin.project_agreement_term.create',compact('project'));
+    }
+
+    public function store(Request $request,Project $project)
+    {
+        $request->validate([
+            'data' => ['required']
+        ]);
+
+        ProjectAgreementTerm::updateOrCreate(
+            ['project_id' => $project->id],
+            [
+                'data' => $request->input('data')
+            ]
+        );
+
+        toast('सम्झौता शर्त सफलतापूर्वक अद्यावधिक गरियो', 'success');
+        return back();
+    }
+
+    public function show($id)
+    {
+        return view('plan::show');
+    }
+
+    public function edit($id)
+    {
+        return view('plan::edit');
+    }
+
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    public function destroy($id)
+    {
+        //
+    }
+}
