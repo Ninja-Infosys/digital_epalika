@@ -45,8 +45,8 @@
                             </form>
                         </div>
 
-                        <div class="mt-3">
-                            <h5 class="mb-2">Quick Access</h5>
+                        <div class="mt-3" id="file-data">
+
                             <div class="row mx-n1 g-0">
                                 <div class="col-md-6">
                                     <div class="card m-1 shadow-none border">
@@ -84,8 +84,32 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
-                console.log("ready!");
+                ajaxCall("{{route('admin.file.get-file-manager',['folder'=>'registration'])}}");
             });
+
+            $(".file-handle").click(function () {
+                // get data from data-bs-folder
+                let folder = $(this).data('bs-folder');
+
+                let url = "{{route('admin.file.get-file-manager',['folder'=>'folder_path'])}}";
+
+                ajaxCall(url.replace('folder_path', folder));
+            });
+
+            function ajaxCall(url) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (data) {
+                        const printTo = $('#file-data')
+                        printTo.empty();
+                        data.directories.forEach(function (item, key) {
+                            printTo.append(`<h5 class="mb-2 text-capitalize">` + item.label + `</h5>`)
+                        });
+                        console.log(data.directories)
+                    }
+                });
+            }
         </script>
     @endpush
 @endsection

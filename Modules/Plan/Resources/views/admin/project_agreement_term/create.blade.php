@@ -38,7 +38,7 @@
                                 <textarea name="data"
                                           id="data"
                                           cols="30" rows="10"
-                                          class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',$project->projectAgreementTerm->data??'')}}</textarea>
+                                          class="form-control ckEditor @error('data') is-invalid @enderror">{{old('data',$project->projectAgreementTerm->data??$agreementTermTemplate)}}</textarea>
                                 @error('data')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror

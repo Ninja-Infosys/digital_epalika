@@ -101,7 +101,7 @@ Route::prefix('setting')->group(function () {
 //file
 Route::get('file/{file}/download', [FileController::class, 'download'])->name('file.download');
 Route::get('file-download', [FileController::class, 'downloadFile'])->name('file-url-download');
-Route::get('file-manager/{folder}', [FileController::class, 'getFileManager'])->name('file.get-file-manager');
+Route::get('file-manager', [FileController::class, 'getFileManager'])->name('file.get-file-manager');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
 // website admin routes
