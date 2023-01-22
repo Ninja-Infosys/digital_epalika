@@ -9730,6 +9730,7 @@ table[data-toggle=table] {
     bottom: 0;
     right: 0;
     margin: 35px 25px;
+    width: 100px;
 }
 
 .floating-container:hover {
@@ -9738,10 +9739,6 @@ table[data-toggle=table] {
 
 .floating-container:hover .floating-button {
     box-shadow: 0 10px 25px rgba(44, 179, 240, 0.6);
-    -webkit-transform: translatey(5px);
-    transform: translatey(5px);
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
 }
 
 .floating-container:hover .element-container .float-element:nth-child(1) {
@@ -9769,17 +9766,17 @@ table[data-toggle=table] {
     left: 0;
     right: 0;
     margin: auto;
-    color: var(--whiteColor);
+    color: #ffffff;
     line-height: 50px;
     text-align: center;
     font-size: 25px;
     z-index: 100;
     box-shadow: 0 10px 25px -5px rgba(44, 179, 240, 0.6);
     cursor: pointer;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
 }
-
+.floating-button i{
+    color: #fff;
+}
 .floating-container .float-element {
     position: relative;
     background-color: var(--secondary);
@@ -9793,8 +9790,6 @@ table[data-toggle=table] {
     line-height: 40px;
     z-index: 0;
     opacity: 0;
-    -webkit-transform: translateY(100px);
-    transform: translateY(100px);
 }
 /*file management list ui*/
 .custom-list .file-list{
@@ -9802,6 +9797,7 @@ table[data-toggle=table] {
     padding-left: 0 !important;
 }
 .file-list .list-item .file-handle {
+    cursor: pointer;
     border: none;
     padding: 10px;
     height: auto;
@@ -9843,4 +9839,7 @@ table[data-toggle=table] {
 }
 .list-item .list-item {
     padding-left: 30px;
+}
+.file-list .list-item .file-handle:hover {
+    color: #6658dd;
 }
