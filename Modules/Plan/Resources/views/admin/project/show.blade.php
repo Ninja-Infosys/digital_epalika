@@ -110,7 +110,7 @@
     @else
         <div class="row">
             <div class="col-md-12">
-                @livewire('plan::installment-detail-livewire',['project'=>$project])
+                किस्ता/पेश्की विवरण
             </div>
         </div>
     @endif

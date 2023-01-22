@@ -115,7 +115,8 @@
                                 <x-date-input-component
                                     nameNe="project_start_date" labelNe="आयोजना सुरु हुने मिति "
                                     nameEn="en_project_start_date" labelEn="Start Date"
-                                    :getTodayDate="false"></x-date-input-component>
+                                    :getTodayDate="false"
+                                />
                             </div>
                             <div class="col-md-4 mb-2">
                                 <x-date-input-component

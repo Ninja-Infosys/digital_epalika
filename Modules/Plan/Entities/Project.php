@@ -154,4 +154,9 @@ class Project extends Model
     {
         return $this->hasMany(ProjectBill::class);
     }
+
+    public function consumerCommitteeTransactions(): HasMany
+    {
+        return $this->hasMany(ConsumerCommitteeTransaction::class);
+    }
 }
