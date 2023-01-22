@@ -45,8 +45,8 @@
                             </form>
                         </div>
 
-                        <div class="mt-3">
-                            <h5 class="mb-2">Quick Access</h5>
+                        <div class="mt-3" id="file-data">
+
                             <div class="row mx-n1 g-0">
                                 <div class="col-md-6">
                                     <div class="card m-1 shadow-none border">
@@ -101,7 +101,12 @@
                     url: url,
                     type: 'GET',
                     success: function (data) {
-                        console.log(data)
+                        const printTo = $('#file-data')
+                        printTo.empty();
+                        data.directories.forEach(function (item, key) {
+                            printTo.append(`<h5 class="mb-2 text-capitalize">` + item.label + `</h5>`)
+                        });
+                        console.log(data.directories)
                     }
                 });
             }
