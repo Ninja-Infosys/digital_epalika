@@ -36,10 +36,13 @@
                                 <li class="list-item">
                                     <button class="btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">+</button>
                                     <div class="file-handle">
-                                        Send design for review
+                                        Test File name
                                     </div>
                                     <ul class="file-list collapse" id="collapseExample">
                                         <li class="list-item">
+                                            <div class="file-handle text-truncate">
+                                                <i class="fa fa-folder font-18 align-middle me-2"></i> Coffee with the team
+                                            </div>
                                             <div class="file-handle text-truncate">
                                                 <i class="fa fa-folder font-18 align-middle me-2"></i> Coffee with the team
                                             </div>
