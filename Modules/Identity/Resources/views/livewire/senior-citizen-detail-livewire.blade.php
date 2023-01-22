@@ -206,7 +206,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.blood_group" class="form-label">रक्त समूह </label>
+                        <label for="form.blood_group" class="form-label">रक्त समूह <span class="text-danger">*</span></label>
                         <select
                             class="form-select @error('form.blood_group') is-invalid @enderror"
                             wire:model="form.blood_group"
