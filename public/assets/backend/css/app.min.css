@@ -9797,6 +9797,7 @@ table[data-toggle=table] {
     padding-left: 0 !important;
 }
 .file-list .list-item .file-handle {
+    cursor: pointer;
     border: none;
     padding: 10px;
     height: auto;
@@ -9838,4 +9839,7 @@ table[data-toggle=table] {
 }
 .list-item .list-item {
     padding-left: 30px;
+}
+.file-list .list-item .file-handle:hover {
+    color: #6658dd;
 }
