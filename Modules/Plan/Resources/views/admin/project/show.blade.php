@@ -58,6 +58,20 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
+                    </div>
+                    <div class="p-2">
+                        <h5>क) लागत अनुमान रु: {{$project->projectCostDetail->estimated_total_cost??''}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
         <div class="row">
             <div class="col-md-12">
