@@ -2,8 +2,10 @@
 
 namespace Modules\ExecutiveMeeting\Entities;
 
+use App\Models\User;
 use App\Traits\EventObserveTrait;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,12 +32,14 @@ class MeetingEvent extends Model
         'start_date',
         'en_start_date',
         'end_date',
+        'committee_ward',
         'en_end_date',
         'event_for',
         'url',
         'recurrence_end_date',
         'en_recurrence_end_date',
         'description',
+        'user_id'
     ];
 
     protected $casts = [
@@ -52,10 +56,32 @@ class MeetingEvent extends Model
         return $this->hasMany(__CLASS__);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     public function getMessageDateAttribute(): string
     {
         return Carbon::parse($this->attributes['en_start_date'])
             ->subDay()
             ->toDateString();
     }
+
+    protected function CommitteeWard(): Attribute
+    {
+        return Attribute::make(
+            get: static fn($value) => explode(',', $value),
+            set: static fn($value) => implode(',', $value),
+        );
+    }
+
+    public function scopeFilterData($query)
+    {
+        if (auth()->user()->role->type !== 'Super') {
+            $query->where('user_id', auth()->id());
+            $query->orWhere('permanent_ward', auth()->user()->ward_no);
+        }
+        return $query;
+    }
+
 }

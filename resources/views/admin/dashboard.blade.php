@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-6 col-xl-2">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -23,8 +23,8 @@
         </div> <!-- end col-->
 
         <div class="col-md-6 col-xl-2">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -42,7 +42,7 @@
 
         <div class="col-md-6 col-xl-2">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -59,8 +59,8 @@
         </div> <!-- end col-->
 
         <div class="col-md-6 col-xl-2">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -77,7 +77,7 @@
 
         <div class="col-md-6 col-xl-2">
             <div class="widget-rounded-circle card-primary">
-                <div class="card-body" style="padding: 10px 20px;">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -93,8 +93,8 @@
         </div> <!-- end col-->
 
         <div class="col-md-6 col-xl-2">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
-                <div class="card-body" style="padding: 10px 20px;">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
@@ -184,9 +184,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p style="font-size: 16px;font-weight: bold">
+                    <h6>
                         यो डिजिटल ई-पालिकाको डेमो भर्जन हो। पालिकामा उक्त  प्रणाली सुचारु भइसकेपछि थप अन्य फिचर देख्न पाउनुहुनेछ। धन्यबाद।
-                    </p>
+                    </h6>
                 </div>
             </div>
         </div>

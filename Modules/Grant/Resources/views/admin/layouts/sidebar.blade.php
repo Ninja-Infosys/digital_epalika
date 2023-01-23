@@ -4,22 +4,6 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
-@can('grantDetail_access')
-    <li>
-        <a href="{{ route('admin.grant.grantDetail.index') }}">
-            <i class="fa fa-list-alt"></i>
-            <span>अनुदान विवरण</span>
-        </a>
-    </li>
-@endcan
-@can('grant_access')
-    <li>
-        <a href="{{ route('admin.grant.grant.index') }}">
-            <i class="fa fa-check-square"></i>
-            <span>जारि अनुदान कार्यक्रम</span>
-        </a>
-    </li>
-@endcan
 
 <li class="{{ request()->is('admin/grant/grantee/*') ? 'active' : '' }}">
     <a href="#sidebarGrantee" {{ request()->is('admin/grant/grantee/*') ? 'aria-expanded=true' : '' }}
@@ -35,7 +19,7 @@
             @can('farmer_access')
                 <li class="{{ request()->is('admin/grant/grantee/farmer*') ? 'active' : '' }}">
                     <a href="{{ route('admin.grant.farmer.index') }}">
-                        <span> कृषक </span>
+                        <span> कृषक/व्यक्ति </span>
                     </a>
                 </li>
             @endcan
@@ -63,6 +47,25 @@
         </ul>
     </div>
 </li>
+
+@can('grant_access')
+    <li>
+        <a href="{{ route('admin.grant.grant.index') }}">
+            <i class="fa fa-check-square"></i>
+            <span>कार्यक्रम/क्रियाकलापहरु</span>
+        </a>
+    </li>
+@endcan
+
+@can('grantDetail_access')
+    <li>
+        <a href="{{ route('admin.grant.grantDetail.index') }}">
+            <i class="fa fa-list-alt"></i>
+            <span>अनुदान जारी</span>
+        </a>
+    </li>
+@endcan
+
 <li class="{{ request()->is('admin/grant/report/*') ? 'active' : '' }}">
     <a href="#sidebarGrantReport" {{ request()->is('admin/grant/report/*') ? 'aria-expanded=true' : '' }}
         data-bs-toggle="collapse">
@@ -77,7 +80,7 @@
             @can('farmerReport_access')
                 <li class="{{ request()->is('admin/grant/report/farmer') ? 'active' : '' }}">
                     <a href="{{ route('admin.grant.report.farmer.index') }}">
-                        <span> कृषक रिपोर्ट </span>
+                        <span> कृषक/व्यक्ति रिपोर्ट </span>
                     </a>
                 </li>
             @endcan

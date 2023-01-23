@@ -9,8 +9,8 @@
     <a href="#sidebarDisabilityIdentityCard"
        {{request()->is('admin/identity/disability*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
-        <i class="fa fa-cogs"></i>
-        <span>अनलाइन फारम</span>
+        <i class="fa fa-file"></i>
+        <span>निवेदन</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -34,6 +34,12 @@
     <a href="{{route('identity.admin.disabilityIdentityCardReport')}}">
         <i class="fa fa-file"></i>
         <span> अपाङ्गता परिचयपत्र रिपोर्ट</span>
+    </a>
+</li>
+<li class="{{request()->is('admin/identity/reports') ? 'active' : ''}}">
+    <a href="{{route('identity.admin.disabilityIdentityCardReport')}}">
+        <i class="fa fa-file"></i>
+        <span>जेष्ठ नागरिक  रिपोर्ट</span>
     </a>
 </li>
 

@@ -54,13 +54,13 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="type" class="form-label">टेम्प्लेट *</label>
+                                <label for="type" class="form-label">टेम्प्लेट</label>
                                 <select name="type" id="type" class="form-control">
                                     <option value="">छान्नुहोस्</option>
-                                    @foreach(\Modules\Plan\Enums\ProjectOperatedThroughEnum::cases() as $operatedThrough)
-                                        <option {{old('type')==$operatedThrough->value ? 'selected':''}}
-                                                value="{{$operatedThrough->value}}">
-                                            {{$operatedThrough->label()}}
+                                    @foreach(\Modules\Plan\Enums\PlanTemplateTypeEnum::cases() as $templateType)
+                                        <option {{old('type')==$templateType->value ? 'selected':''}}
+                                                value="{{$templateType->value}}">
+                                            {{$templateType->label()}}
                                         </option>
                                     @endforeach
                                 </select>

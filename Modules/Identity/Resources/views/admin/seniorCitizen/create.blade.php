@@ -116,6 +116,22 @@
             }
         </style>
     @endpush
+    @push('scripts')
+        <script>
+            window.addEventListener('toast_message', event => {
+                swal.fire({
+                    title: event.detail.title,
+                    toast: true,
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    width: 400,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    icon: event.detail.type,
+                });
+            });
+        </script>
+    @endpush
 
 @endsection
 

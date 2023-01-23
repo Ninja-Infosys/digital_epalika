@@ -7,7 +7,7 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
+                            <a href="{{route('admin.setting.dashboard')}}">
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
@@ -69,7 +69,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="phone" class="form-label">फोन नम्बर  *</label>
                                     <input
                                         type="text"
@@ -83,7 +83,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="role_id" class="form-label">भूमिका *</label>
                                     <select name="role_id"
                                             class="form-select @error('role_id') is-invalid @enderror"
@@ -99,13 +99,23 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
+                                <div class="col-md-4 mb-2">
+                                    <label for="ward_no" class="form-label">वडा नं.</label>
+                                    <select name="ward_no"
+                                            class="form-select @error('ward_no') is-invalid @enderror"
+                                            id="ward_no">
+                                        <option value="">वडा छान्नुहोस्</option>
+                                        @foreach($officeSetting->localBody->ward_no as $ward)
+                                            <option value="{{$ward}}" {{$ward==old('ward_no') ? 'selected' : ''}}>
+                                                {{$ward}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('ward_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
                             </div>
-                        </fieldset>
-                        <fieldset class="border p-2 mb-2">
-                            <legend class="font-16 text-info">
-                                <strong>ठेगाना</strong>
-                            </legend>
-                            @livewire('address')
                         </fieldset>
                         <fieldset class="border p-2 mb-2">
                             <legend class="font-16 text-info">

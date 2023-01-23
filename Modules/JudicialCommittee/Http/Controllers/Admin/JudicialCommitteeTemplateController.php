@@ -5,6 +5,7 @@ namespace Modules\JudicialCommittee\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Modules\JudicialCommittee\Entities\JudicialCommitteeTemplate;
 use Modules\JudicialCommittee\Http\Requests\Template\StoreJudicialCommitteeTemplateRequest;
 use Modules\JudicialCommittee\Http\Requests\Template\UpdateJudicialCommitteeTemplateRequest;
@@ -32,6 +33,7 @@ class JudicialCommitteeTemplateController extends Controller
         $this->checkAuthorization('judicialCommitteeTemplate_create');
 
         JudicialCommitteeTemplate::create($request->validated());
+        Cache::forget('judicialCommitteeTemplates');
 
         toast('टेम्प्लेट सफलतापूर्वक थपियो', 'success');
         return back();
@@ -57,6 +59,8 @@ class JudicialCommitteeTemplateController extends Controller
 
         $judicialCommitteeTemplate->update($request->validated());
 
+        Cache::forget('judicialCommitteeTemplates');
+
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.judicialCommittee.judicialCommitteeTemplate.index'));
     }
@@ -66,6 +70,7 @@ class JudicialCommitteeTemplateController extends Controller
         $this->checkAuthorization('judicialCommitteeTemplate_delete');
 
         $judicialCommitteeTemplate->delete();
+        Cache::forget('judicialCommitteeTemplates');
 
         toast('टेम्प्लेट सफलतापूर्वक मेटियो', 'success');
         return back();

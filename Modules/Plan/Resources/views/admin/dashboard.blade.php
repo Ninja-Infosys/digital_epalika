@@ -20,7 +20,7 @@
             </div> <!-- end widget-rounded-circle-->
         </div>
         <div class="col-md-4">
-            <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+            <div class="widget-rounded-circle card-secondary">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">

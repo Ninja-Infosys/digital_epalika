@@ -13,11 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        abort_if(
-            Gate::denies('user_access'),
-            403,
-            'तपाईंलाई प्रयोगकर्ता पहुँच गर्न अनुमति छैन'
-        );
+        $this->checkAuthorization('user_access');
 
         $users = User::with('role')->whereNot('id', auth()->id())->filter()->get();
 

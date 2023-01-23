@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm">
-                        <form id="report-filter-form" method="POST"
+                        <form id="report-filter-form"
                               data-bs-url="{{route('admin.judicialCommittee.report.report-data')}}">
                             <div class="row">
                                 <div class="col-md-6">
@@ -131,7 +131,6 @@
                                 </div>
                             </fieldset>
 
-
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 पेश गर्नुहोस्
                             </button>
@@ -143,9 +142,11 @@
             </div>
         </div>
     </div>
+    @push('style')
+        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
+    @endpush
 
     @push('scripts')
-        <script src="{{asset('assets/backend/js/nepali.datepicker.v3.7.min.js')}}"></script>
         <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
     @endpush
 @endsection

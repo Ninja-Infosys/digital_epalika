@@ -11,12 +11,12 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.organizationRegistration.business.index')}}">व्यवसायहरू</a>
+                            <a href="{{route('admin.organizationRegistration.business.index')}}">व्यवसाय/उद्योगहरू</a>
                         </li>
-                        <li class="breadcrumb-item active">सबै दर्ता भएका व्यवसायहरू</li>
+                        <li class="breadcrumb-item active">दर्ता भएका व्यवसाय/उद्योगहरू</li>
                     </ol>
                 </div>
-                <h4 class="page-title">वसबै दर्ता भएका व्यवसायहरू </h4>
+                <h4 class="page-title">दर्ता भएका व्यवसाय/उद्योगहरू </h4>
             </div>
         </div>
     </div>
@@ -26,10 +26,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">व्यवसायहरूको सूची</h4>
+                        <h4 class="header-title">व्यवसाय/उद्योगहरूको सूची</h4>
                             <a href="{{route('admin.organizationRegistration.business.create')}}"
                                class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ व्यवसाय थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ व्यवसाय/उद्योग थप्नुहोस्
                             </a>
                     </div>
                 </div>
@@ -40,11 +40,11 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>व्यवसायको नाम:</th>
+                                <th>व्यवसाय/उद्योगको नाम:</th>
                                 <th>दर्ता नं:</th>
                                 <th>दर्ता मिति:</th>
                                 <th>ठेगाना:</th>
-                                <th>व्यवसायीको नाम:</th>
+                                <th>व्यवसाय/उद्योगीको नाम:</th>
                                 <th>Status</th>
                                 <th>#</th>
                             </tr>
@@ -66,15 +66,15 @@
                                     <td>
                                         <a href="{{route('admin.organizationRegistration.business.businessRenew.index',$business)}}"
                                            class="btn btn-xs btn-outline-primary" title="नबिकरण गर्नुहोस्">
-                                            <i class="fa fa-history" aria-hidden="true"></i> 
+                                            <i class="fa fa-history" aria-hidden="true"></i>
                                         </a>
                                         <a href="{{route('admin.organizationRegistration.business.edit',$business)}}"
                                            class="btn btn-xs btn-outline-warning" title="सम्पादन गर्नुहोस्">
-                                            <i class="fa fa-edit"></i> 
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         <a href="{{route('admin.organizationRegistration.business.show',$business)}}"
                                            class="btn btn-xs btn-outline-warning" title="हेर्नुहोस्">
-                                            <i class="fa fa-eye"></i> 
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <form
                                             action="{{route('admin.organizationRegistration.business.destroy',$business)}}"
@@ -82,7 +82,7 @@
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-xs btn-outline-danger show_confirm" title="मेटाउनु होस्">
-                                                <i class="fa fa-trash"></i> 
+                                                <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>

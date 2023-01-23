@@ -54,6 +54,24 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+
+                            <div class="col-md-6 mb-2">
+                                <label for="committee_ward" class="form-label"> वार्ड *</label>
+                                <select
+                                    name="committee_ward[]"
+                                    class="form-control @error('committee_ward') is-invalid @enderror"
+                                    data-toggle="select2"
+                                    id="committee_ward" multiple>
+                                    <option disabled>-- छान्नुहोस् ---</option>
+                                    @foreach($officeSetting->localBody->ward_no as $ward)
+                                        <option value="{{$ward}}" {{in_array($ward,$meetingEvent->committee_ward) ? 'selected' : ''}}>{{$ward}}</option>
+                                    @endforeach
+
+                                </select>
+                                @error('committee_ward')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                             <div class="col-md-6 mb-2">
                                 <x-date-input-component
                                     nameNe="start_date" labelNe="सुरू मिति *"

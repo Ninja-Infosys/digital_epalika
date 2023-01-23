@@ -19,10 +19,10 @@ class RegistrationController extends Controller
 
         $registrations = Registration::where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['registration_no','letter_number','sender_name','subject',], request('search'));
+                $q->whereLike(['registration_no', 'letter_number', 'sender_name', 'subject',], request('search'));
             }
         })
-        ->latest()->paginate(10);
+            ->latest()->paginate(10);
 
 
         return view('circular::admin.registration.index', compact('registrations'));
@@ -31,7 +31,7 @@ class RegistrationController extends Controller
     public function create()
     {
         $this->checkAuthorization('registration_create');
-        $registration_no = 'R-'.Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
+        $registration_no = 'R-' . Str::padLeft(DB::table('registrations')->max('id') + 1, 2, 0);
 
         return view('circular::admin.registration.create', compact('registration_no'));
     }
@@ -42,8 +42,8 @@ class RegistrationController extends Controller
 
         DB::transaction(function () use ($request) {
             $registration = Registration::create($request->validated() + [
-                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
-            ]);
+                    'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id,
+                ]);
 
             $this->uploadDocuments($request, $registration);
         });
@@ -117,7 +117,7 @@ class RegistrationController extends Controller
             $registration->files()->create([
                 'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $document->getClientOriginalExtension(),
-                'file' => $document->store('registration/'.Str::slug($registration->receiver_name, '_').'/documents', 'public'),
+                'file' => $document->store('Registration/' . Str::slug($registration->registration_no ?? $registration->receiver_name, '_'), 'public'),
             ]);
         }
     }

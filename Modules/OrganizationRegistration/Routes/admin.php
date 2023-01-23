@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\OrganizationRegistration\Http\Controllers\Admin\BusinessController;
+use Modules\OrganizationRegistration\Http\Controllers\Admin\BusinessRenewController;
 use Modules\OrganizationRegistration\Http\Controllers\Admin\DashboardController;
-use Modules\OrganizationRegistration\Http\Controllers\BusinessRenewController;
 use Modules\OrganizationRegistration\Http\Controllers\InstitutionController;
 
 

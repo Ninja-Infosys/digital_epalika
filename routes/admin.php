@@ -78,7 +78,7 @@ Route::prefix('setting')->group(function () {
     Route::resource('department', DepartmentController::class);
     Route::resource('designation', DesignationController::class);
 
-    Route::get('subBranch', [BranchController::class,'subBranch'])->name('subBranch');
+    Route::get('subBranch', [BranchController::class, 'subBranch'])->name('subBranch');
     Route::resource('branch', BranchController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
@@ -99,8 +99,9 @@ Route::prefix('setting')->group(function () {
 });
 
 //file
-Route::get('file/{file}/download', [FileController::class,'download'])->name('file.download');
-Route::get('file-download', [FileController::class,'downloadFile'])->name('file-url-download');
+Route::get('file/{file}/download', [FileController::class, 'download'])->name('file.download');
+Route::get('file-download', [FileController::class, 'downloadFile'])->name('file-url-download');
+Route::get('file-manager', [FileController::class, 'getFileManager'])->name('file.get-file-manager');
 Route::resource('file', FileController::class)->only('show', 'index', 'store', 'destroy');
 
 // website admin routes
@@ -116,5 +117,5 @@ Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activi
 
 //check pin
 
-Route::post('pin/checkPin',[PinController::class,'checkPin'])->name('pin.check-pin');
+Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
 Route::resource('pin', PinController::class);

@@ -23,7 +23,7 @@
                 </div> <!-- end col-->
 
                 <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                    <div class="widget-rounded-circle card-secondary">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -58,7 +58,7 @@
                 </div> <!-- end col-->
 
                 <div class="col-md-6 col-xl-3">
-                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                    <div class="widget-rounded-circle card-secondary">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">

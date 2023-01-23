@@ -19,60 +19,34 @@
             <fieldset class="mt-3">
                 <legend>जेस्ठ नागरिक विवरण</legend>
                 <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active"  id="nav-profile-tab"
-                                        data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab"
-                                        aria-controls="nav-profile" aria-selected="false">Camera
-                                </button>
-                                <button class="nav-link"  id="nav-home-tab" data-bs-toggle="tab"
-                                        data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                                        aria-selected="true">Browse
-                                </button>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-
-                                <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
-                                     aria-labelledby="nav-profile-tab">
-                                    <div class="d-flex justify-content-between">
-                                        <video id="video" width="150" height="150"  autoplay></video>
-                                        <canvas id="canvas"  width="150" style="border-radius: 5px;" height="150"></canvas>
-                                    </div>
-                                    <button class="btn btn-warning btn-sm mt-1" onclick="loadImage()" type="button">
-                                        Camera
-                                    </button>
-                                    <button class="btn btn-primary btn-sm mt-1" onclick="captureImage()" type="button">
-                                        Capture Image
-                                    </button>
-                                    <button class="btn btn-danger btn-sm mt-1" onclick="stopCamera()" type="button">Stop
-                                        Camera
-                                    </button>
-                                </div>
-
-                                <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                    <label for="form.photo" class="form-label">फोटो</label>
-                                    <input
-                                        name="form.photo"
-                                        class="form-control  @error('form.photo') is-invalid @enderror"
-                                        type="file"
-                                        accept="image/*"
-                                        id="form.photo"
-                                        wire:model="form.photo"
-                                    />
-                                    <div wire:loading wire:target="form.photo">Uploading...</div>
-                                    @error('form.photo')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
 
 
+                    <div class="col-md-6 mb-3">
+                        <label for="form.photo" class="form-label">फोटो</label>
+                        <input
+                            name="form.photo"
+                            accept="image/*"
+                            class="form-control @error('form.photo') is-invalid @enderror"
+                            type="file"
+                            id="form.photo"
+                            wire:model="form.photo"
+                        />
+                        <div wire:loading wire:target="form.photo">Uploading...</div>
+                        @error('form.photo')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                        <button class="mt-1 btn btn-primary btn-sm" onclick="loadImage()" type="button">Camera</button>
+                        <button class="mt-1 btn btn-info btn-sm" onclick="captureImage()" type="button">Capture Image</button>
+                        <button  class="mt-1 btn btn-danger btn-sm" onclick="stopCamera()" type="button">Stop Camera</button>
+                        <div class="d-flex justify-content-between">
+                            <video id="video" width="200" height="200" autoplay></video>
+                            <canvas id="canvas" width="200" height="200"></canvas>
                         </div>
-
+                    </div>
+                    <div class="col-md-6">
 
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card">
                             @if ( !empty($form['right_finger']['image']))
                                 <img src="{{ $form['right_finger']['image'] }}" id="finger-print-right" alt="Right"
@@ -90,7 +64,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card">
                             @if ( !empty($form['left_finger']['image']))
                                 <img src="{{ $form['left_finger']['image'] }}" id="finger-print-left" alt="Left"
@@ -157,21 +131,6 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="form.card_no" class="form-label">कार्ड न.<span class="text-danger">*</span></label>
-                        <input
-                            name="form.card_no"
-                            class="form-control  @error('form.card_no') is-invalid @enderror"
-                            type="text"
-                            id="form.card_no"
-                            placeholder="कार्ड न."
-                            wire:model="form.card_no"
-                        />
-                        @error('form.card_no')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
                     <div class="col-md-4 mb-3">
                         <label for="form.gender" class="form-label">लिङ्ग <span class="text-danger">*</span></label>
                         <select
@@ -247,8 +206,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.blood_group" class="form-label">रक्त समूह <span
-                                class="text-danger">*</span></label>
+                        <label for="form.blood_group" class="form-label">रक्त समूह <span class="text-danger">*</span></label>
                         <select
                             class="form-select @error('form.blood_group') is-invalid @enderror"
                             wire:model="form.blood_group"
@@ -263,8 +221,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.father_name" class="form-label">बुवाको नाम<span
-                                class="text-danger">*</span></label>
+                        <label for="form.father_name" class="form-label">बुवाको नाम</label>
                         <input
                             name="form.father_name"
                             class="form-control  @error('form.father_name') is-invalid @enderror"
@@ -278,8 +235,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.father_name_en" class="form-label">बुवाको नाम ( English)<span
-                                class="text-danger">*</span></label>
+                        <label for="form.father_name_en" class="form-label">बुवाको नाम ( English)</label>
                         <input
                             name="form.father_name_en"
                             class="form-control  @error('form.father_name_en') is-invalid @enderror"
@@ -293,8 +249,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.mother_name" class="form-label">आमाको नाम<span
-                                class="text-danger">*</span></label>
+                        <label for="form.mother_name" class="form-label">आमाको नाम</label>
                         <input
                             name="form.mother_name"
                             class="form-control  @error('form.mother_name') is-invalid @enderror"
@@ -308,7 +263,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.mother_name" class="form-label">आमाको नाम ( English )<span class="text-danger">*</span></label>
+                        <label for="form.mother_name" class="form-label">आमाको नाम ( English )</label>
                         <input
                             name="form.mother_name_en"
                             class="form-control  @error('form.mother_name_en') is-invalid @enderror"
@@ -501,8 +456,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="form.contact_person_phone" class="form-label">सम्पर्क न. <span
-                                class="text-danger">*</span> </label>
+                        <label for="form.contact_person_phone" class="form-label">सम्पर्क न.  </label>
                         <input
                             name="form.contact_person_phone"
                             class="form-control  @error('form.contact_person_phone') is-invalid @enderror"
@@ -681,7 +635,9 @@
                     onChange: function () {
                         let inputFieldDate = $("#dob_bs").val();
                         let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
-                        Livewire.emit('dobChanged', inputFieldDate);
+                        let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                        let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                        Livewire.emit('dobChanged', inputFieldDate ,formattedDate);
                     }
                 });
                 $("#issue_date_bs").nepaliDatePicker({

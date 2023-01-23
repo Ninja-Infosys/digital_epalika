@@ -95,4 +95,17 @@ class FileController extends Controller
             return back();
         }
     }
+
+    public function getFileManager()
+    {
+        $folder = request()->folder;
+        if (!empty($folder)) {
+            return getAllFilesAndFolder($folder);
+        } else {
+            return [
+                'directories' => [],
+                'files' => [],
+            ];
+        }
+    }
 }

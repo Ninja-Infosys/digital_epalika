@@ -1,0 +1,415 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.plan.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">योजनाहरु</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">योजनाहरु</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4 class="header-title">आयोजनाको विवरण सम्पादन गर्नुहोस </h4>
+                        <a href="{{route('admin.plan.project.index')}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> योजना/कार्यक्रम हरू
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="{{route('admin.plan.project.update',$project)}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <h4 class="header-title border-bottom mb-2">आयोजनाको विवरण</h4>
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <label for="project_name" class="form-label">योजना/कार्यक्रमको नाम *</label>
+                                <input
+                                    type="text"
+                                    name="project_name"
+                                    value="{{old('project_name',$project->project_name)}}"
+                                    class="form-control @error('project_name') is-invalid @enderror"
+                                    id="project_name"
+                                    placeholder="योजना/कार्यक्रमको नाम"
+                                />
+                                @error('project_name')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="registration_no" class="form-label">दर्ता नं. *</label>
+                                <input
+                                    type="text"
+                                    name="registration_no"
+                                    value="{{old('registration_no',$project->registration_no)}}"
+                                    class="form-control @error('registration_no') is-invalid @enderror"
+                                    id="registration_no"
+                                    placeholder="दर्ता नं."
+                                />
+                                @error('registration_no')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="plan_area_id" class="form-label">योजनाको क्षेत्र *</label>
+                                <select
+                                    name="plan_area_id"
+                                    class="form-control @error('plan_area_id') is-invalid @enderror"
+                                    id="plan_area_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($planAreas as $planArea)
+                                        @if(count($planArea->planAreas)>0)
+                                            <optgroup label="{{$planArea->area_name}}">
+                                                @foreach($planArea->planAreas as $plan_sub_area)
+                                                    <option
+                                                        {{old('plan_area_id',$project->plan_area_id)==$plan_sub_area->id ? 'selected' : ''}}
+                                                        value="{{$plan_sub_area->id}}">
+                                                        {{$plan_sub_area->area_name}}
+                                                    </option>
+                                                @endforeach
+                                            </optgroup>
+                                        @else
+                                            <option
+                                                {{old('plan_area_id',$project->plan_area_id)==$planArea->id ? 'selected' : ''}}
+                                                value="{{$planArea->id}}">
+                                                {{$planArea->area_name}}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('plan_area_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="project_status" class="form-label">योजनाको अबस्था *</label>
+                                <select
+                                    name="project_status"
+                                    class="form-control @error('project_status') is-invalid @enderror"
+                                    id="project_status" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach(\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
+                                        <option
+                                            {{old('project_status',$project->project_status->value)==$projectStatus->value ? 'selected' : ''}}
+                                            value="{{$projectStatus->value}}">
+                                            {{$projectStatus->label()}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('project_status')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <x-date-input-component
+                                    nameNe="project_start_date" labelNe="आयोजना सुरु हुने मिति "
+                                    nameEn="en_project_start_date" labelEn="Start Date"
+                                    :getTodayDate="false"
+                                    :editDateNe="$project->project_start_date"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <x-date-input-component
+                                    nameNe="project_completion_date" labelNe="आयोजना सम्पन्न हुने मिति"
+                                    nameEn="en_project_completion_date" labelEn="Completion Date"
+                                    :getTodayDate="false"
+                                    :editDateNe="$project->project_completion_date"
+                                />
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="plan_level_id" class="form-label">योजनाको स्तर *</label>
+                                <select
+                                    name="plan_level_id"
+                                    class="form-control @error('plan_level_id') is-invalid @enderror"
+                                    id="plan_level_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($planLevels as $planLevel)
+                                        @if(count($planLevel->planLevels)>0)
+                                            <optgroup label="{{$planLevel->level_name}}">
+                                                @foreach($planLevel->planLevels as $plan_sub_level)
+                                                    <option
+                                                        {{old('plan_level_id',$project->plan_level_id)==$plan_sub_level->id ? 'selected' : ''}}
+                                                        value="{{$plan_sub_level->id}}">
+                                                        {{$plan_sub_level->level_name}}
+                                                    </option>
+                                                @endforeach
+                                            </optgroup>
+                                        @else
+                                            <option
+                                                {{old('plan_level_id',$project->plan_level_id)==$planLevel->id ? 'selected' : ''}}
+                                                value="{{$planLevel->id}}">
+                                                {{$planLevel->level_name}}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('plan_level_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="ward_no" class="form-label"> वडा नं.</label>
+                                <select
+                                    name="ward_no[]"
+                                    class="form-control @error('ward_no') is-invalid @enderror"
+                                    multiple
+                                    id="ward_no" data-toggle="select2" data-width="100%">
+                                    <option disabled>--- छान्नुहोस् ---</option>
+                                    @foreach($officeSetting->localBody->ward_no as $ward)
+                                        <option
+                                            {{in_array($ward,$project->ward_no) ? 'selected' : ''}}
+                                            value="{{$ward}}">
+                                            {{$ward}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('ward_no')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="budget_source_id" class="form-label"> बजेटको श्रोत *</label>
+                                <select
+                                    name="budget_source_id"
+                                    class="form-control @error('budget_source_id') is-invalid @enderror"
+                                    id="budget_source_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($budgetSources as $budgetSource)
+                                        <option
+                                            {{old('budget_source_id',$project->budget_source_id)==$budgetSource->id ? 'selected' : ''}}
+                                            value="{{$budgetSource->id}}">
+                                            {{$budgetSource->source_name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('budget_source_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="budget_head_id" class="form-label">बजेट शिर्षक *</label>
+                                <select
+                                    name="budget_head_id"
+                                    class="form-control @error('budget_head_id') is-invalid @enderror"
+                                    id="budget_head_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($budgetHeads as $budgetHead)
+                                        @if(count($budgetHead->budgetHeads)>0)
+                                            <optgroup label="{{$budgetHead->title}}">
+                                                @foreach($budgetHead->budgetHeads as $budget_sub_head)
+                                                    <option
+                                                        {{old('budget_head_id',$project->budget_head_id)==$budget_sub_head->id ? 'selected' : ''}}
+                                                        value="{{$budget_sub_head->id}}">
+                                                        {{$budget_sub_head->title}}
+                                                    </option>
+                                                @endforeach
+                                            </optgroup>
+                                        @else
+                                            <option
+                                                {{old('budget_head_id',$project->budget_head_id)==$budgetHead->id ? 'selected' : ''}}
+                                                value="{{$budgetHead->id}}">
+                                                {{$budgetHead->title}}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('budget_head_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="allocated_amount" class="form-label">विनियोजित रकम </label>
+                                <input
+                                    type="number"
+                                    name="allocated_amount"
+                                    value="{{old('allocated_amount',$project->allocated_amount)}}"
+                                    class="form-control @error('allocated_amount') is-invalid @enderror"
+                                    id="allocated_amount"
+                                    placeholder="विनियोजित रकम"
+                                />
+                                @error('allocated_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="project_venue" class="form-label">आयोजना स्थल </label>
+                                <input
+                                    type="text"
+                                    name="project_venue"
+                                    value="{{old('project_venue',$project->project_venue)}}"
+                                    class="form-control @error('project_venue') is-invalid @enderror"
+                                    id="project_venue"
+                                    placeholder="आयोजना स्थल"
+                                />
+                                @error('project_venue')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="purpose" class="form-label">उद्देश्य</label>
+                                <input
+                                    type="text"
+                                    name="purpose"
+                                    value="{{old('purpose',$project->purpose)}}"
+                                    class="form-control @error('purpose') is-invalid @enderror"
+                                    id="purpose"
+                                    placeholder="उद्देश्य"
+                                />
+                                @error('purpose')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="operated_through" class="form-label">खरिद बिधि *</label>
+                                <select
+                                    name="operated_through"
+                                    class="form-control @error('operated_through') is-invalid @enderror"
+                                    id="operated_through" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach(\Modules\Plan\Enums\ProjectOperatedThroughEnum::cases() as $operatedThrough)
+                                        <option
+                                            {{old('operated_through',$project->operated_through->value)==$operatedThrough->value ? 'selected' : ''}}
+                                            value="{{$operatedThrough->value}}">
+                                            {{$operatedThrough->label()}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('operated_through')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="is_deadline_extended" class="form-label">आयोजनाको म्याद थप भएको ?</label>
+                                <select
+                                    name="is_deadline_extended"
+                                    class="form-select @error('is_deadline_extended') is-invalid @enderror"
+                                    id="is_deadline_extended">
+                                    <option value="0">
+                                        नभएको
+                                    </option>
+                                    <option {{old('is_deadline_extended',$project->is_deadline_extended)=="1" ? 'selected' : ''}} value="1">
+                                        भएको
+                                    </option>
+                                </select>
+                                @error('is_deadline_extended')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2" id="extended_date_div">
+                                <x-date-input-component
+                                    nameNe="extended_date" labelNe="म्याद थप मिति"
+                                    nameEn="en_extended_date" labelEn="Extended Date"
+                                    :getTodayDate="false"
+                                    :editDateNe="$project->extended_date"
+                                />
+                            </div>
+                        </div>
+                        <h4 class="header-title border-bottom mb-2">भौतिक तथा वित्तीय प्रगतिको विवरण</h4>
+                        <div class="row">
+                            <div class="col-md-3 mb-2">
+                                <label for="progress_spent_amount" class="form-label">वित्तीय प्रगति खर्च रकम </label>
+                                <input
+                                    type="number"
+                                    name="progress_spent_amount"
+                                    value="{{old('progress_spent_amount',$project->progress_spent_amount)}}"
+                                    class="form-control @error('progress_spent_amount') is-invalid @enderror"
+                                    id="progress_spent_amount"
+                                    placeholder="वित्तीय प्रगति खर्च रकम"
+                                />
+                                @error('progress_spent_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="physical_progress_target" class="form-label">भौतिक प्रगति लक्ष्य परिमाण</label>
+                                <input
+                                    type="number"
+                                    name="physical_progress_target"
+                                    value="{{old('physical_progress_target',$project->physical_progress_target)}}"
+                                    class="form-control @error('physical_progress_target') is-invalid @enderror"
+                                    id="physical_progress_target"
+                                    placeholder="भौतिक प्रगति लक्ष्य परिमाण"
+                                />
+                                @error('physical_progress_target')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="physical_progress_completed" class="form-label">भौतिक प्रगति सम्पन्न परिमाण </label>
+                                <input
+                                    type="number"
+                                    name="physical_progress_completed"
+                                    value="{{old('physical_progress_completed',$project->physical_progress_completed)}}"
+                                    class="form-control @error('physical_progress_completed') is-invalid @enderror"
+                                    id="physical_progress_completed"
+                                    placeholder="भौतिक प्रगति सम्पन्न परिमाण"
+                                />
+                                @error('physical_progress_completed')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
+                                <label for="physical_progress_unit" class="form-label">भौतिक प्रगति एकाइ</label>
+                                <input
+                                    type="text"
+                                    name="physical_progress_unit"
+                                    value="{{old('physical_progress_unit',$project->physical_progress_unit)}}"
+                                    class="form-control @error('physical_progress_unit') is-invalid @enderror"
+                                    id="physical_progress_unit"
+                                    placeholder="भौतिक प्रगति एकाइ"
+                                />
+                                @error('physical_progress_unit')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @push('scripts')
+        <script>
+            $(document).ready(function (){
+                if($('#is_deadline_extended').val()=="1"){
+                    showExtendedData()
+                }else{
+                    removeExtendedData()
+                }
+
+                $("#is_deadline_extended").on("change",function (){
+                    if($('#is_deadline_extended').val()=="1"){
+                        showExtendedData()
+                    }else{
+                        removeExtendedData()
+                    }
+                })
+
+                function removeExtendedData(){
+                    $("#extended_date_div").addClass('d-none')
+                    $("#extended_date").val('')
+                }
+
+                function showExtendedData(){
+                    $("#extended_date_div").removeClass('d-none')
+                }
+            })
+        </script>
+    @endpush
+@endsection

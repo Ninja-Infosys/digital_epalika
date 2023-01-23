@@ -52,6 +52,7 @@ class DisabilityIdentityCardLivewire extends Component
     public DisabilityIdentityCard $disabilityIdentityCard;
 
     public array $form = [
+        'is_citizenship'=>null,
         'material_name' => null,
         'is_necessary' => null,
         'identity_type' => null,
@@ -306,14 +307,15 @@ class DisabilityIdentityCardLivewire extends Component
     ];
 
     protected array $disclosureStatementRules = [
-        'form.birth_registration_no' => ['required'],
-        'form.birth_registration_place' => ['required'],
-        'form.birth_registration_bs' => ['required'],
-        'form.birth_registration_ad' => ['required'],
-        'form.citizenship_no' => ['required'],
-        'form.citizenship_no_place' => ['required'],
-        'form.citizenship_no_bs' => ['required'],
-        'form.citizenship_no_ad' => ['required']
+        'form.is_citizenship' => ['required'],
+        'form.birth_registration_no' => ['required_if:form.is_citizenship,==,birth_registration'],
+        'form.birth_registration_place' => ['required_if:form.is_citizenship,==,birth_registration'],
+        'form.birth_registration_bs' => ['required_if:form.is_citizenship,==,birth_registration'],
+        'form.birth_registration_ad' => ['required_if:form.is_citizenship,==,birth_registration'],
+        'form.citizenship_no' => ['required_if:form.is_citizenship,==,citizenship'],
+        'form.citizenship_no_place' => ['required_if:form.is_citizenship,==,citizenship'],
+        'form.citizenship_no_bs' => ['required_if:form.is_citizenship,==,citizenship'],
+        'form.citizenship_no_ad' => ['required_if:form.is_citizenship,==,citizenship']
     ];
 
     protected function fifthStepValidations(): array
@@ -324,8 +326,8 @@ class DisabilityIdentityCardLivewire extends Component
                 'form.citizenship_photo_certificate' => ['nullable', 'image']
             ])
             : array_merge($this->disclosureStatementRules, [
-                'form.citizenship_photo' => ['required', 'image'],
-                'form.citizenship_photo_certificate' => ['required', 'image']
+                'form.citizenship_photo' => ['nullable', 'image'],
+                'form.citizenship_photo_certificate' => ['nullable', 'image']
             ]);
     }
 
@@ -335,25 +337,25 @@ class DisabilityIdentityCardLivewire extends Component
         'form.qualification' => ['required'],
         'form.daily_activity' => ['required'],
         'form.supporting_material' => ['required'],
-        'form.material_name' => ['required', 'string', 'max:255'],
+        'form.material_name' => ['required_if:form.supporting_material,==,1'],
     ];
     protected array $seventhStepValidations = [
-        'form.helping_task' => ['required', 'array'],
-        'form.helping_task.*' => ['required'],
-        'form.without_helping_task' => ['required', 'array'],
-        'form.without_helping_task.*' => ['required'],
+        'form.helping_task' => ['nullable', 'array'],
+        'form.helping_task.*' => ['nullable'],
+        'form.without_helping_task' => ['nullable', 'array'],
+        'form.without_helping_task.*' => ['nullable'],
     ];
     protected array $eighthStepValidations = [
-        'form.main_training_name' => ['required', 'string'],
+        'form.main_training_name' => ['nullable', 'string'],
         'form.occupation_id' => ['nullable', 'exists:occupations,id'],
     ];
     protected array $ninthStepValidations = [
         'form.provide_detail_full_name' => ['required', 'string', 'max:255'],
         'form.provide_detail_address' => ['required', 'string', 'max:255'],
-        'form.provide_detail_phone_no' => ['required'],
-        'form.provide_detail_citizenship_no' => ['required'],
-        'form.provide_detail_citizenship_no_date' => ['required'],
-        'form.provide_detail_citizenship_no_place' => ['required', 'string', 'max:255'],
+        'form.provide_detail_phone_no' => ['nullable'],
+        'form.provide_detail_citizenship_no' => ['nullable'],
+        'form.provide_detail_citizenship_no_date' => ['nullable'],
+        'form.provide_detail_citizenship_no_place' => ['nullable', 'string', 'max:255'],
         'form.employee_signature_id' => ['required', 'exists:employee_signatures,id']
     ];
 
@@ -364,6 +366,8 @@ class DisabilityIdentityCardLivewire extends Component
             'form.left_finger.required_if' => ['बायाँ औंला आवश्यक छ'],
             'form.right_finger.required_if' => ['दाहिने औंला आवश्यक छ'],
             'form.name.required' => ['नाम आवश्यक छ'],
+            'form.is_citizenship.required' => ['आवश्यक छ'],
+            'form.govern_disability_type_id.required' => ['आवश्यक छ'],
             'form.name_en.required' => ['अंग्रेजीमा नाम आवश्यक छ'],
             'form.gender.required' => ['लिङ्ग आवश्यक छ'],
             'form.ethnicity_id.required' => ['जातियता आवश्यक छ'],
@@ -399,14 +403,14 @@ class DisabilityIdentityCardLivewire extends Component
             'form.grand_father_name_en.required' => ['हजुरवुबाको नाम अंग्रेजीमा आवश्यक छ'],
             'form.mother_name.required' => ['आमाको नाम आवश्यक छ'],
             'form.mother_name_en.required' => ['आमाको नाम अंग्रेजीमा आवश्यक छ'],
-            'form.birth_registration_no.required' => ['जन्म दर्ता आवश्यक छ'],
-            'form.birth_registration_place.required' => ['जन्मेको ठाउँ आवश्यक छ'],
-            'form.birth_registration_bs.required' => ['जन्म दर्ता वि.स. मा आवश्यक छ'],
-            'form.birth_registration_ad.required' => ['जन्म दर्ता ई.स. माआवश्यक छ'],
-            'form.citizenship_no.required' => ['नागरिकता नं आवश्यक छ'],
-            'form.citizenship_no_place.required' => ['नागरिकता पाएको स्थान आवश्यक छ'],
-            'form.citizenship_no_bs.required' => ['नागरिकता पाएको मिति (बि.स.)आवश्यक छ'],
-            'form.citizenship_no_ad.required' => ['नागरिकता पाएको मिति (ई.स.)आवश्यक छ'],
+            'form.birth_registration_no.required_if' => ['जन्म दर्ता आवश्यक छ'],
+            'form.birth_registration_place.required_if' => ['जन्मेको ठाउँ आवश्यक छ'],
+            'form.birth_registration_bs.required_if' => ['जन्म दर्ता वि.स. मा आवश्यक छ'],
+            'form.birth_registration_ad.required_if' => ['जन्म दर्ता ई.स. माआवश्यक छ'],
+            'form.citizenship_no.required_if' => ['नागरिकता नं आवश्यक छ'],
+            'form.citizenship_no_place.required_if' => ['नागरिकता पाएको स्थान आवश्यक छ'],
+            'form.citizenship_no_bs.required_if' => ['नागरिकता पाएको मिति (बि.स.)आवश्यक छ'],
+            'form.citizenship_no_ad.required_if' => ['नागरिकता पाएको मिति (ई.स.)आवश्यक छ'],
             'form.citizenship_photo.required' => ['नागरिकताको फोटोकपी आवश्यक छ'],
             'form.citizenship_photo_certificate.required' => ['जन्मदर्ताको फोटोकपी आवश्यक छ'],
             'form.is_necessary.required' => ['आवश्यक छ'],
@@ -414,7 +418,7 @@ class DisabilityIdentityCardLivewire extends Component
             'form.qualification.required' => ['पछिल्लो सैक्षिक योग्यता आवश्यक छ'],
             'form.daily_activity.required' => ['दैनिक क्रियाकलाप गर्न आवश्यक छ'],
             'form.supporting_material.required' => ['साहायक सामाग्री प्रयोग गर्ने आवश्यक छ'],
-            'form.material_name.required' => ['सामाग्रीको नाम आवश्यक छ'],
+            'form.material_name.required_if' => ['सामाग्रीको नाम आवश्यक छ'],
             'form.helping_task.required' => ['कामको नाम आवश्यक छ'],
             'form.without_helping_task.required' => ['कामको नाम आवश्यक छ'],
             'form.main_training_name.required' => ['नाम आवश्यक छ'],

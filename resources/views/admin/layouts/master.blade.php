@@ -4,10 +4,7 @@
     <meta charset="utf-8"/>
     <title>{{config('app.name','Digital E-Palika')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta
-        content="A complete solution for a digital palika."
-        name="description"
-    />
+    <meta content="A complete solution for a digital palika." name="description"/>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta content="Ninja Infosys" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -17,17 +14,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/backend/print/print.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/css/style.css')}}">
     <!-- App css -->
-    <link
-        href="{{asset('assets/backend/css/app.min.css')}}"
-        rel="stylesheet"
-        type="text/css"
-        id="app-style"
-    />
-
-    <link
-        href="{{asset('assets/backend/css/bootstrap.min.css')}}"
-        rel="stylesheet"
-        type="text/css"/>
+    <link href="{{asset('assets/backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
+    <link href="{{asset('assets/backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 
     <!-- icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -35,8 +23,6 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/sweetalert2.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/backend/css/nepali.datepicker.v3.7.min.css')}}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
     @stack('style')
     @livewireStyles
@@ -58,20 +44,15 @@
                 @yield('content')
             </div>
             <!-- container -->
+            @include('inc.floating-menu')
         </div>
         <!-- content -->
-
         <!-- Footer Start -->
         <footer class="footer">
             <div class="container-fluid text-center">
-                <script>
-                    const date = new Date.getFullYear();
-                    document.write(date);
-                </script>
-                &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
+                {{date('Y')}} &copy; Design & Developed by <a href="https://ninjainfosys.com">NINJA INFOSYS</a>
             </div>
         </footer>
-        @include('inc.floating-menu')
         <!-- end Footer -->
     </div>
 </div>
@@ -88,8 +69,6 @@
 
 <script src="{{asset('assets/backend/print/print.min.js')}}"></script>
 <script src="{{asset('assets/backend/js/sweetalert2.min.js')}}"></script>
-
-
 <script src="{{asset('assets/backend/js/pages/form-advanced.init.js')}}"></script>
 @include('sweetalert::alert')
 

@@ -3,8 +3,6 @@
 namespace Modules\Identity\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Modules\EMap\Entities\Client;
-use Modules\EMap\Policies\ClientPolicy;
 use Modules\Identity\Entities\DisabilityIdentityCard;
 use Modules\Identity\Entities\SeniorCitizenDetail;
 use Modules\Identity\Policies\DisabilityIdentityCardPolicy;

@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+secondary@extends('admin.layouts.master')
 @section('content')
     <div class="row mt-2">
         <div class="col-12">
@@ -38,7 +38,7 @@
                 </div> <!-- end col-->
 
                 <div class="col-md-2">
-                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                    <div class="widget-rounded-circle card-secondary">
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
                                 <div class="col">
@@ -72,7 +72,7 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
                 <div class="col-md-2">
-                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                    <div class="widget-rounded-circle card-secondary">
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
                                 <div class="col">
@@ -105,7 +105,7 @@
                     </div> <!-- end widget-rounded-circle-->
                 </div> <!-- end col-->
                 <div class="col-md-2">
-                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                    <div class="widget-rounded-circle card-secondary">
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
                                 <div class="col">

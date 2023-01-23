@@ -493,147 +493,168 @@
                         <legend>परिचय खुलाउने विवरण</legend>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label for="form.birth_registration_no" class="form-label"> जन्म दर्ता नं. </label>
-                                <input
-                                    name="form.birth_registration_no"
-                                    class="form-control  @error('form.birth_registration_no') is-invalid @enderror"
-                                    type="text"
-                                    id="form.birth_registration_no"
-                                    placeholder=" जन्म दर्ता नं. "
-                                    wire:model="form.birth_registration_no"
-                                />
-                                @error('form.birth_registration_no')
+                                <label for="form.is_citizenship" class="form-label"> नागरिकता/जन्म दर्ता नं. </label>
+                                <select
+                                    class="form-select @error('form.is_citizenship') is-invalid @enderror"
+                                    wire:model="form.is_citizenship"
+                                    id="form.is_citizenship">
+                                    <option value="">---छान्नुहोस् ---</option>
+                                    <option value="citizenship">नागरिकता</option>
+                                    <option value="birth_registration">जन्म दर्ता</option>
+                                </select>
+                                @error('form.is_citizenship')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="form.birth_registration_place" class="form-label"> जन्म दर्ता पाएको
-                                    स्थान </label>
-                                <input
-                                    name="form.birth_registration_place"
-                                    class="form-control  @error('form.birth_registration_place') is-invalid @enderror"
-                                    type="text"
-                                    id="form.birth_registration_place"
-                                    placeholder=" जन्म दर्ता पाएको स्थान "
-                                    wire:model="form.birth_registration_place"
-                                />
-                                @error('form.birth_registration_place')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="birth_registration_bs" class="form-label"> जन्म दर्ता पाएको मिति
-                                    (बि.स.) </label>
-                                <input
-                                    class="form-control  @error('form.birth_registration_bs') is-invalid @enderror"
-                                    type="text"
-                                    id="birth_registration_bs"
-                                    placeholder="जन्म दर्ता पाएको मिति (बि.स.)"
-                                    wire:model="form.birth_registration_bs"
-                                />
-                                @error('form.birth_registration_bs')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="birth_registration_ad" class="form-label"> जन्म दर्ता पाएको मिति
-                                    (ई.स.) </label>
-                                <input
-                                    class="form-control  @error('form.birth_registration_ad') is-invalid @enderror"
-                                    type="text"
-                                    id="birth_registration_ad"
-                                    placeholder="जन्म दर्ता पाएको मिति (बि.स.)"
-                                    wire:model="form.birth_registration_ad"
-                                />
-                                @error('form.birth_registration_ad')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="form.citizenship_no" class="form-label"> नागरिकता नं. </label>
-                                <input
-                                    name="form.citizenship_no"
-                                    class="form-control  @error('form.citizenship_no') is-invalid @enderror"
-                                    type="text"
-                                    id="form.citizenship_no"
-                                    placeholder="नागरिकता नं."
-                                    wire:model="form.citizenship_no"
-                                />
-                                @error('form.citizenship_no')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="form.citizenship_no_place" class="form-label"> नागरिकता पाएको स्थान </label>
-                                <input
-                                    name="form.citizenship_no_place"
-                                    class="form-control  @error('form.citizenship_no_place') is-invalid @enderror"
-                                    type="text"
-                                    id="form.citizenship_no_place"
-                                    placeholder="नागरिकता पाएको स्थान"
-                                    wire:model="form.citizenship_no_place"
-                                />
-                                @error('form.citizenship_no_place')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="citizenship_no_bs" class="form-label"> नागरिकता पाएको मिति
-                                    (बि.स.) </label>
-                                <input
-                                    class="form-control  @error('form.citizenship_no_bs') is-invalid @enderror"
-                                    type="text"
-                                    id="citizenship_no_bs"
-                                    placeholder="नागरिकता पाएको मिति (बि.स.)"
-                                    wire:model="form.citizenship_no_bs"
-                                />
-                                @error('form.citizenship_no_bs')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="citizenship_no_ad" class="form-label"> नागरिकता पाएको मिति
-                                    (ई.स.) </label>
-                                <input
-                                    class="form-control  @error('form.citizenship_no_ad') is-invalid @enderror"
-                                    type="text"
-                                    id="citizenship_no_ad"
-                                    placeholder="नागरिकता पाएको मिति (ई.स.)"
-                                    wire:model="form.citizenship_no_ad"
-                                />
-                                @error('form.citizenship_no_ad')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="form.citizenship_photo" class="form-label"> नागरिकताको फोटोकपी </label>
-                                <input
-                                    name="form.citizenship_photo"
-                                    class="form-control  @error('form.citizenship_photo') is-invalid @enderror"
-                                    type="file"
-                                    id="form.citizenship_photo"
-                                    wire:model="form.citizenship_photo"
-                                />
-                                <div wire:loading wire:target="form.citizenship_photo">Uploading...</div>
-                                @error('form.citizenship_photo')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="form.citizenship_photo_certificate" class="form-label"> जन्मदर्ताको
-                                    फोटोकपी </label>
-                                <input
-                                    name="form.citizenship_photo_certificate"
-                                    class="form-control  @error('form.citizenship_photo_certificate') is-invalid @enderror"
-                                    type="file"
-                                    id="form.citizenship_photo_certificate"
-                                    wire:model="form.citizenship_photo_certificate"
-                                />
-                                <div wire:loading wire:target="form.citizenship_photo_certificate">Uploading...</div>
-                                @error('form.citizenship_photo_certificate')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
+                            @if($form['is_citizenship']=='birth_registration')
+                                <div class="col-md-4 mb-3">
+                                    <label for="form.birth_registration_no" class="form-label"> जन्म दर्ता नं. </label>
+                                    <input
+                                        name="form.birth_registration_no"
+                                        class="form-control  @error('form.birth_registration_no') is-invalid @enderror"
+                                        type="text"
+                                        id="form.birth_registration_no"
+                                        placeholder=" जन्म दर्ता नं. "
+                                        wire:model="form.birth_registration_no"
+                                    />
+                                    @error('form.birth_registration_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="form.birth_registration_place" class="form-label"> जन्म दर्ता पाएको
+                                        स्थान </label>
+                                    <input
+                                        name="form.birth_registration_place"
+                                        class="form-control  @error('form.birth_registration_place') is-invalid @enderror"
+                                        type="text"
+                                        id="form.birth_registration_place"
+                                        placeholder=" जन्म दर्ता पाएको स्थान "
+                                        wire:model="form.birth_registration_place"
+                                    />
+                                    @error('form.birth_registration_place')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="birth_registration_bs" class="form-label"> जन्म दर्ता पाएको मिति
+                                        (बि.स.) </label>
+                                    <input
+                                        class="form-control  @error('form.birth_registration_bs') is-invalid @enderror"
+                                        type="text"
+                                        id="birth_registration_bs"
+                                        placeholder="जन्म दर्ता पाएको मिति (बि.स.)"
+                                        wire:model="form.birth_registration_bs"
+                                    />
+                                    @error('form.birth_registration_bs')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="birth_registration_ad" class="form-label"> जन्म दर्ता पाएको मिति
+                                        (ई.स.) </label>
+                                    <input
+                                        class="form-control  @error('form.birth_registration_ad') is-invalid @enderror"
+                                        type="text"
+                                        id="birth_registration_ad"
+                                        placeholder="जन्म दर्ता पाएको मिति (बि.स.)"
+                                        wire:model="form.birth_registration_ad"
+                                    />
+                                    @error('form.birth_registration_ad')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="form.citizenship_photo_certificate" class="form-label"> जन्मदर्ताको
+                                        फोटोकपी </label>
+                                    <input
+                                        name="form.citizenship_photo_certificate"
+                                        class="form-control  @error('form.citizenship_photo_certificate') is-invalid @enderror"
+                                        type="file"
+                                        id="form.citizenship_photo_certificate"
+                                        wire:model="form.citizenship_photo_certificate"
+                                    />
+                                    <div wire:loading wire:target="form.citizenship_photo_certificate">Uploading...
+                                    </div>
+                                    @error('form.citizenship_photo_certificate')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                            @endif
+                            @if($form['is_citizenship']=='citizenship')
+                                <div class="col-md-4 mb-3">
+                                    <label for="form.citizenship_no" class="form-label"> नागरिकता नं. </label>
+                                    <input
+                                        name="form.citizenship_no"
+                                        class="form-control  @error('form.citizenship_no') is-invalid @enderror"
+                                        type="text"
+                                        id="form.citizenship_no"
+                                        placeholder="नागरिकता नं."
+                                        wire:model="form.citizenship_no"
+                                    />
+                                    @error('form.citizenship_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="form.citizenship_no_place" class="form-label"> नागरिकता पाएको
+                                        स्थान </label>
+                                    <input
+                                        name="form.citizenship_no_place"
+                                        class="form-control  @error('form.citizenship_no_place') is-invalid @enderror"
+                                        type="text"
+                                        id="form.citizenship_no_place"
+                                        placeholder="नागरिकता पाएको स्थान"
+                                        wire:model="form.citizenship_no_place"
+                                    />
+                                    @error('form.citizenship_no_place')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="citizenship_no_bs" class="form-label"> नागरिकता पाएको मिति
+                                        (बि.स.) </label>
+                                    <input
+                                        class="form-control  @error('form.citizenship_no_bs') is-invalid @enderror"
+                                        type="text"
+                                        id="citizenship_no_bs"
+                                        placeholder="नागरिकता पाएको मिति (बि.स.)"
+                                        wire:model="form.citizenship_no_bs"
+                                    />
+                                    @error('form.citizenship_no_bs')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="citizenship_no_ad" class="form-label"> नागरिकता पाएको मिति
+                                        (ई.स.) </label>
+                                    <input
+                                        class="form-control  @error('form.citizenship_no_ad') is-invalid @enderror"
+                                        type="text"
+                                        id="citizenship_no_ad"
+                                        placeholder="नागरिकता पाएको मिति (ई.स.)"
+                                        wire:model="form.citizenship_no_ad"
+                                    />
+                                    @error('form.citizenship_no_ad')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="form.citizenship_photo" class="form-label"> नागरिकताको फोटोकपी </label>
+                                    <input
+                                        name="form.citizenship_photo"
+                                        class="form-control  @error('form.citizenship_photo') is-invalid @enderror"
+                                        type="file"
+                                        id="form.citizenship_photo"
+                                        wire:model="form.citizenship_photo"
+                                    />
+                                    <div wire:loading wire:target="form.citizenship_photo">Uploading...</div>
+                                    @error('form.citizenship_photo')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                            @endif
+
                         </div>
                     </fieldset>
 
@@ -751,30 +772,25 @@
                                 <div class="invalid-feedback ">{{$message}} </div>
                                 @enderror
                             </div>
+                            @if($form['supporting_material']==1)
+                                <div class="col-md-12 mb-3">
+                                    <label for="form.material_name" class="form-label"> सामाग्रीको नाम </label>
+                                    <input
+                                        name="form.material_name"
+                                        class="form-control  @error('form.material_name') is-invalid @enderror"
+                                        type="text"
+                                        id="form.material_name"
+                                        placeholder="  सामाग्रीको नाम  "
+                                        wire:model="form.material_name"
+                                    />
+                                    @error('form.material_name')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                            @endif
 
                         </div>
                     </fieldset>
-                    <fieldset class="mt-3">
-                        <legend>सहायक सामग्री प्रयोग गर्ने गरेको भए सामाग्रीको नाम</legend>
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <label for="form.material_name" class="form-label"> सामाग्रीको नाम </label>
-                                <input
-                                    name="form.material_name"
-                                    class="form-control  @error('form.material_name') is-invalid @enderror"
-                                    type="text"
-                                    id="form.material_name"
-                                    placeholder="  सामाग्रीको नाम  "
-                                    wire:model="form.material_name"
-                                />
-                                @error('form.material_name')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                        </div>
-                    </fieldset>
-
                     <div style="display: flex;justify-content: space-between;">
                         <div class="mt-2">
                             <button type="button" wire:click.prevent="backStep(5)" class="btn btn-primary"><i
@@ -1036,6 +1052,13 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="mt-3">
+                        <legend>हस्ताक्षर गर्ने अधिकारी</legend>
+                        <div class="row">
+                            <div class="col-md-4 mb-3"></div>
+                            <div class="col-md-4 mb-3"></div>
                             <div class="col-md-4 mb-3">
                                 <label for="form.employee_signature_id" class="form-label">
                                     हस्ताक्षर </label>
@@ -1088,9 +1111,9 @@
                                 @error('form.photo')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                                <button class="mt-1" onclick="loadImage()" type="button">Camera</button>
-                                <button class="mt-1" onclick="captureImage()" type="button">Capture Image</button>
-                                <button class="mt-1" onclick="stopCamera()" type="button">Stop Camera</button>
+                                <button class="mt-1 btn btn-primary btn-sm" onclick="loadImage()" type="button">Camera</button>
+                                <button class="mt-1 btn btn-info btn-sm" onclick="captureImage()" type="button">Capture Image</button>
+                                <button  class="mt-1 btn btn-danger btn-sm" onclick="stopCamera()" type="button">Stop Camera</button>
                                 <div class="d-flex justify-content-between">
                                     <video id="video" width="200" height="200" autoplay></video>
                                     <canvas id="canvas" width="200" height="200"></canvas>
@@ -1178,13 +1201,13 @@
 
                             <div class="col-md-4 mb-3">
 
-                                <label for="form.name_en" class="form-label">पुरा नाम नेपालीमा (English)</label>
+                                <label for="form.name_en" class="form-label">पुरा नाम (English)</label>
                                 <input
                                     name="form.name_en"
                                     class="form-control @error('form.name_en') is-invalid @enderror"
                                     type="text"
                                     id="form.name_en"
-                                    placeholder="पुरा नाम नेपालीमा (English)"
+                                    placeholder="पुरा नाम (English)"
                                     wire:model="form.name_en"
                                 />
                                 @error('form.name_en')

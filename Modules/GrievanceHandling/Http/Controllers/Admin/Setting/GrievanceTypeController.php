@@ -3,6 +3,7 @@
 namespace Modules\GrievanceHandling\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\GrievanceHandling\Entities\GrievanceType;
 use Modules\GrievanceHandling\Http\Requests\GrievanceType\StoreGrievanceTypeRequest;
 use Modules\GrievanceHandling\Http\Requests\GrievanceType\UpdateGrievanceTypeRequest;
@@ -13,7 +14,11 @@ class GrievanceTypeController extends Controller
     {
         $this->checkAuthorization('grievanceType_access');
 
-        $grievance_types = GrievanceType::latest()->get();
+        $grievance_types = GrievanceType::where(function (Builder $q) {
+            if (!is_null(request('search'))) {
+                $q->whereLike(['grievanceOffice'], request('search'));
+            }
+        })->latest()->paginate(10);
 
         return view('grievancehandling::admin.setting.grievance_type.index', compact('grievance_types'));
     }

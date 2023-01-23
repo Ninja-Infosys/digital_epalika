@@ -36,7 +36,7 @@ if (!function_exists('get_provinces')) {
 }
 
 if (!function_exists('get_districts')) {
-    function get_districts($province_ids=[], int $districtId = null)
+    function get_districts($province_ids = [], int $districtId = null)
     {
         $province_ids = is_array($province_ids) ? $province_ids : [$province_ids];
 
@@ -166,3 +166,117 @@ if (!function_exists('isBase64')) {
         return $bool;
     }
 }
+if (!function_exists('getAllForSideBarFolders')) {
+    function getAllForSideBarFolders(string $folder)
+    {
+        if (Storage::disk('public')->exists($folder)) {
+            $directories = collect(Storage::disk('public')->directories($folder, true))->map(function ($item) {
+                return explode('/', $item);
+            });
+            return convertPathsToTree($directories);
+        }
+        return [];
+    }
+}
+if (!function_exists('getAllFilesAndFolder')) {
+    function getAllFilesAndFolder(string $folder)
+    {
+        if (Storage::disk('public')->exists($folder)) {
+            $directories = collect(Storage::disk('public')->directories($folder))->map(function ($item) {
+                return explode('/', $item);
+            });
+            $files =  collect(Storage::disk('public')->files($folder))->map(function ($item) {
+                return explode('/', $item);
+            });
+
+            return [
+                'directories' => convertPathsToTree($directories),
+                'files' => convertPathsToTree($files)
+            ];
+        }
+        return [];
+    }
+}
+if (!function_exists('convertPathsToTree')) {
+    function convertPathsToTree($paths, $separator = '/', $parent = null)
+    {
+        return $paths
+            ->groupBy(function ($parts) {
+                return $parts[0];
+            })->map(function ($parts, $key) use ($separator, $parent) {
+                $childrenPaths = $parts->map(function ($parts) {
+                    return array_slice($parts, 1);
+                })->filter();
+
+                $path = $parent . $key;
+
+                $response = [
+                    'label' => (string)$key,
+                    'path' => $path,
+                ];
+
+                if ($isFile = File::isFile(public_path('storage/' . $path))) {
+                    $response['isFile'] = $isFile;
+                    $response['detail'] = [
+                        'size' => convert_to_highest_unit(File::size(public_path('storage/' . $path))),
+                        'icon' => getFileIconClass(File::mimeType(public_path('storage/' . $path))),
+                        'extension' => File::extension(public_path('storage/' . $path)),
+                        'name' => File::name(public_path('storage/' . $path)),
+                    ];
+                } else {
+                    $response['isFile'] = false;
+                    $response['children'] = convertPathsToTree(
+                        $childrenPaths,
+                        $separator,
+                        $path . $separator
+                    );
+                }
+
+                return $response;
+            })->values();
+    }
+}
+
+if (!function_exists('convert_to_highest_unit')) {
+    function convert_to_highest_unit($bytes): string
+    {
+        if ($bytes >= 1073741824) {
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        } elseif ($bytes >= 1048576) {
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        } elseif ($bytes >= 1024) {
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
+        } elseif ($bytes >= 1) {
+            $bytes = $bytes . ' bytes';
+        } else {
+            $bytes = '0 bytes';
+        }
+        return $bytes;
+    }
+}
+
+
+if (!function_exists('getFileIconClass')) {
+    function getFileIconClass(string $mime): string
+    {
+        return match ($mime) {
+            'application/pdf' => 'fa-file-pdf',
+            'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'fa-file-word',
+            'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'fa-file-excel',
+            'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'fa-file-powerpoint',
+            'application/zip', 'application/x-rar-compressed' => 'fa-file-archive',
+            'image/jpeg', 'image/png', 'image/gif' => 'fa-file-image',
+            'audio/mpeg', 'audio/x-wav' => 'fa-file-audio',
+            'video/mp4', 'video/x-msvideo' => 'fa-file-video',
+            default => 'fa-file',
+        };
+    }
+}
+
+
+
+
+
+
+
+

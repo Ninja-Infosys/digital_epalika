@@ -7,7 +7,10 @@ use App\Enums\Gender;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\Settings\FiscalYear;
 use App\Models\User;
+use App\Traits\NepaliDateConverter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +22,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SeniorCitizenDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait;
+    use HasFactory, SoftDeletes, EventObserveTrait, NepaliDateConverter;
 
     protected $dates = [
         'created_at',
@@ -32,6 +35,7 @@ class SeniorCitizenDetail extends Model
         'name',
         'name_en',
         'dob_bs',
+        'dob_ad',
         'card_no',
         'gender',
         'citizenship_no',
@@ -62,14 +66,20 @@ class SeniorCitizenDetail extends Model
         'is_medicine',
         'medicine_name',
         'employee_signature_id',
-        'user_id'
+        'user_id',
+        'fiscal_year_id'
     ];
 
     protected $casts = [
         'gender' => Gender::class,
-        'blood_group'=> BloodGroupEnum::class,
+        'blood_group' => BloodGroupEnum::class,
     ];
 
+
+    public function fiscalYear(): BelongsTo
+    {
+        return $this->belongsTo(FiscalYear::class);
+    }
     public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
@@ -97,7 +107,7 @@ class SeniorCitizenDetail extends Model
 
     public function fingerPrints(): MorphMany
     {
-        return $this->morphMany(FingerPrint::class,'model');
+        return $this->morphMany(FingerPrint::class, 'model');
     }
 
     public function setPhotoAttribute($value): void
@@ -120,10 +130,13 @@ class SeniorCitizenDetail extends Model
             return '';
         }
     }
+
     public function getCanEditDeleteAttribute(): bool
     {
-        return (auth()->user()->role->type === 'Super' || auth()->id()==$this->user_id);
+        return (auth()->user()->role->type === 'Super' || auth()->id() == $this->user_id);
     }
+
+
     public function scopeFilterData($query)
     {
         if (auth()->user()->role->type !== 'Super') {
@@ -132,5 +145,10 @@ class SeniorCitizenDetail extends Model
         }
         return $query;
 
+    }
+
+    public function getAgeAttribute(): int
+    {
+        return Carbon::parse($this->attributes['dob_ad'])->age;
     }
 }

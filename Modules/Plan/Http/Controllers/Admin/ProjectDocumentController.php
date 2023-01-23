@@ -3,6 +3,7 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectDocument;
 use Modules\Plan\Http\Requests\ProjectDocument\StoreProjectDocumentRequest;
@@ -14,14 +15,18 @@ class ProjectDocumentController extends Controller
     {
         $this->checkAuthorization('projectDocument_access');
 
-        return view('plan::index');
+        $project->load('projectDocuments');
+
+        return view('plan::admin.project_document.index',compact('project'));
     }
 
     public function create(Project $project)
     {
         $this->checkAuthorization('projectDocument_create');
 
-        return view('plan::admin.project_document.create', compact('project'));
+        $planTemplates = PlanTemplate::whereNull('type')->get();
+
+        return view('plan::admin.project_document.create', compact('project', 'planTemplates'));
     }
 
     public function store(StoreProjectDocumentRequest $request, Project $project)
@@ -31,7 +36,7 @@ class ProjectDocumentController extends Controller
         $project->projectDocuments()->create($request->validated());
 
         toast('कागजात सफलतापूर्वक थपियो', 'success');
-        return back();
+        return redirect(route('admin.plan.project.projectDocument.index', $project));
     }
 
     public function edit(Project $project, ProjectDocument $projectDocument)
@@ -49,7 +54,7 @@ class ProjectDocumentController extends Controller
 
         toast('कागजात सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
-        return redirect(route('admin.plan.project.show', $project));
+        return redirect(route('admin.plan.project.projectDocument.index', $project));
     }
 
     public function destroy(Project $project, ProjectDocument $projectDocument)

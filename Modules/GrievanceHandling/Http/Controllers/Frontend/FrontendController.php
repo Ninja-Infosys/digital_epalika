@@ -45,7 +45,7 @@ class FrontendController extends Controller
             'phone' => ['required'],
         ]);
 
-        $grievanceDetail = GrievanceDetail::with('grievanceDetails.files', 'files', 'grievanceType', 'grievanceOffice')
+        $grievanceDetail = GrievanceDetail::with('grievanceDetails.files', 'grievanceDetails.user','grievanceDetails.grievanceUser', 'files', 'grievanceType', 'grievanceOffice')
             ->whereNull('grievance_detail_id')
             ->whereHas('grievanceUser', function ($query) use ($request) {
                 $query->where('phone', $request->input('phone'));
