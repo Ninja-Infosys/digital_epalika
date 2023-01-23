@@ -36,7 +36,7 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक </th>
+                                <th>शिर्षक</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -47,8 +47,9 @@
                                     <td>{{$noticeTypeEnum->label() ??''}}</td>
                                     <td>
                                         @can('eMapTemplate_edit')
-                                            <a data-bs-type="edit" href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
-                                               class="btn btn-xs btn-outline-warning {{get_setting('Put')?'confirm_pin':'show_confirm'}}">
+                                            <a data-bs-type="edit"
+                                               href="{{route('emap.admin.eMapTemplate.index',$noticeTypeEnum)}}"
+                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan

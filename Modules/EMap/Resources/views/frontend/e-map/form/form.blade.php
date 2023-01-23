@@ -13,9 +13,7 @@
                 <h4 class="fw-semibold text-center">नक्सा दरखास्त फारम</h4>
                 <div class="row justify-content-center">
                         <div class="card mb_30 p-3">
-
                                 <livewire:emap::map-application-form/>
-
                         </div>
                 </div>
                 @push('scripts')
