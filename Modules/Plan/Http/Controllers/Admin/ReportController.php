@@ -46,7 +46,7 @@ class ReportController extends Controller
             );
         }
 
-        $projects = Project::with('fiscalYear','budgetHead', 'budgetSource', 'planArea')->where(function ($q) use ($request) {
+        $projects = Project::with('fiscalYear','budgetHead', 'budgetSource', 'planArea','planLevel')->where(function ($q) use ($request) {
             $this->filterDataFromUser($q, $request);
         })->get();
 

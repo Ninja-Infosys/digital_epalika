@@ -37,7 +37,7 @@
                             <h5>नाम : {{$project->consumerCommittee->name??''}}</h5>
                             <h5>ठेगाना : {{$project->consumerCommittee->address??''}}</h5>
                             <h5>अध्यक्षको नाम
-                                : {{$project->consumerCommittee->consumerCommitteeOfficials->where('post',\Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)->first()->name??''}}</h5>
+                                : {{$project->consumerCommittee?->consumerCommitteeOfficials->where('post',\Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)->first()->name??''}}</h5>
                         </div>
                     @endif
                     <div class="d-flex justify-content-between">
@@ -190,7 +190,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($project->consumerCommittee->consumerCommitteeOfficials as $consumerCommitteeOfficial)
+                            @foreach($project->consumerCommittee?->consumerCommitteeOfficials??collect() as $consumerCommitteeOfficial)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$consumerCommitteeOfficial->post?->label()??''}}</td>
