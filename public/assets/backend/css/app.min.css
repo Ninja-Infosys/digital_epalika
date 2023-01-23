@@ -1873,7 +1873,7 @@ body {
     position: fixed;
     -webkit-transition: all .1s ease-out;
     transition: all .1s ease-out;
-    top: 80px;
+    top: 60px;
     -webkit-box-shadow: var(--ct-box-shadow);
     box-shadow: var(--ct-box-shadow)
 }
@@ -2533,7 +2533,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
 }
 
 .logo-box {
-    height: 85px;
+    height: 60px;
     width: 240px;
     float: left;
     -webkit-transition: all .1s ease-out;
@@ -2542,7 +2542,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
 }
 
 .logo-box .logo {
-    line-height: 70px
+    line-height: 60px
 }
 
 .logo-light {
@@ -2574,7 +2574,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
     position: fixed;
     left: 0;
     right: 0;
-    height: 80px;
+    height: 60px;
     z-index: 1001
 }
 
@@ -2597,7 +2597,7 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
     color: var(--primary);
     min-width: 32px;
     display: block;
-    line-height: 80px;
+    line-height: 60px;
     text-align: center;
     max-height: 80px
 }
@@ -2678,8 +2678,8 @@ body[data-leftbar-color=brand]:not([data-layout-mode=detached]) .logo-box .logo-
     border: none;
     color: #0047AB;
     display: inline-block;
-    height: 70px;
-    line-height: 70px;
+    height: 60px;
+    line-height: 60px;
     width: 60px;
     background-color: transparent;
     font-size: 24px;
@@ -9842,4 +9842,7 @@ table[data-toggle=table] {
 }
 .file-list .list-item .file-handle:hover {
     color: #6658dd;
+}
+.top-heading{
+    line-height: 60px;
 }
