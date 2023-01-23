@@ -105,7 +105,7 @@
                             </ul>
                         </h5>
                         <h5>घ) बस्तुगत अनुदानको विवरण: </h5>
-                        <table class="table table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead>
                             <tr>
                                 <td>उपलब्ध गराउने स्रोत/निकाय</td>
@@ -117,7 +117,7 @@
                             <tbody>
                             @forelse($project->projectGrantDetails as $projectGrantDetail)
                                 <tr>
-                                    <td>{{$projectGrantDetail->grant_source}}</td>
+                                    <td>{{$projectGrantDetail->grant_source?->label()}}</td>
                                     <td>{{$projectGrantDetail->asset_name}}</td>
                                     <td>{{$projectGrantDetail->quantity}}</td>
                                     <td>{{$projectGrantDetail->asset_unit}}</td>
@@ -134,13 +134,13 @@
                             <li>संगठित संस्था: {{$project->projectCostDetail->benefited_organization??''}}</li>
                             <li>अन्य: {{$project->projectCostDetail->others_benefited??''}}</li>
                         </ul>
-                        <table class="table table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead class="align-middle">
                             <tr>
                                 <td rowspan="2">वडा नं.</td>
                                 <td rowspan="2">गाँउ बस्ति</td>
-                                <td colspan="3" class="align-middle">घरधुरी संख्या</td>
-                                <td colspan="3" class="align-middle">जनसंख्या</td>
+                                <td colspan="3" class="align-middle text-center">घरधुरी संख्या</td>
+                                <td colspan="3" class="align-middle text-center">जनसंख्या</td>
 
                             </tr>
                             <tr>
@@ -156,13 +156,13 @@
                             @forelse($project->benefitedMemberDetails as $benefitedMemberDetail)
                                 <tr>
                                     <td>{{$benefitedMemberDetail->ward_no}}</td>
-                                    <td>{{$projectGrantDetail->village}}</td>
-                                    <td>{{$projectGrantDetail->dalit_backward_no}}</td>
-                                    <td>{{$projectGrantDetail->other_households_no}}</td>
-                                    <td>{{$projectGrantDetail->total_household}}</td>
-                                    <td>{{$projectGrantDetail->no_of_male}}</td>
-                                    <td>{{$projectGrantDetail->no_of_female}}</td>
-                                    <td>{{$projectGrantDetail->total_population}}</td>
+                                    <td>{{$benefitedMemberDetail->village}}</td>
+                                    <td>{{$benefitedMemberDetail->dalit_backward_no}}</td>
+                                    <td>{{$benefitedMemberDetail->other_households_no}}</td>
+                                    <td>{{$benefitedMemberDetail->total_household}}</td>
+                                    <td>{{$benefitedMemberDetail->no_of_male}}</td>
+                                    <td>{{$benefitedMemberDetail->no_of_female}}</td>
+                                    <td>{{$benefitedMemberDetail->total_population}}</td>
                                 </tr>
                             @empty
                                 <tr>
@@ -189,7 +189,7 @@
                             <h5>क) गठन भएको मिति:-</h5>
                             <h5>ख) पदाधिकारीको नाम र ठेगाना (नागरिकता प्रमाणपत्र नम्बर र जिल्ला)</h5>
                         </div>
-                        <table class="table table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead>
                             <tr>
                                 <td>क्र.सं.</td>
@@ -317,7 +317,7 @@
                         <div class="d-flex justify-content-between">
                             <h4 class="header-title">४) मोविलाईजेशन पेश्की/रनिङ विल विवरण </h4>
                         </div>
-                        <table class="table table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead>
                             <tr>
                                 <td>क्र.सं.</td>
@@ -430,7 +430,7 @@
                     <h4 class="header-title">
                         ७). सम्बन्धित कागजातहरू
                     </h4>
-                    <table class="table table-bordered">
+                    <table class="table table-sm table-bordered">
                         <thead>
                         <tr>
                             <th>क्र. सं.</th>
@@ -445,7 +445,7 @@
                                 <td>{{$projectDocument->document_name}}</td>
                                 <td>
                                     <a href="">
-                                        <i class="fa fa-print"></i>
+                                        <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
                                     </a>
                                 </td>
                             </tr>
