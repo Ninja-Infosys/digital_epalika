@@ -46,33 +46,6 @@
                         </div>
 
                         <div class="mt-3" id="file-data">
-
-                            <div class="row mx-n1 g-0">
-                                <div class="col-md-6">
-                                    <div class="card m-1 shadow-none border">
-                                        <div class="p-2">
-                                            <div class="row align-items-center justify-content-between">
-                                                <div class="col-auto pe-0">
-                                                    <div class="avatar-sm">
-                                                        <span class="avatar-title bg-light text-secondary rounded">
-                                                            <i class="fa fa-file-pdf font-18"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="col text-truncate">
-                                                    <a href="javascript:void(0);" class="text-muted fw-bold">Ubold-sketch-design.zip</a>
-                                                    <p class="mb-0 font-13">2.3 MB</p>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="button"
-                                                            class="btn btn-blue btn-sm waves-effect waves-light"><i
-                                                            class="fa fa-download"></i></button>
-                                                </div>
-                                            </div> <!-- end row -->
-                                        </div> <!-- end .p-2-->
-                                    </div> <!-- end col -->
-                                </div> <!-- end col-->
-                            </div> <!-- end row-->
                         </div> <!-- end .mt-3-->
                     </div>
                     <div class="clearfix"></div>
@@ -103,8 +76,36 @@
                     success: function (data) {
                         const printTo = $('#file-data')
                         printTo.empty();
-                        data.directories.forEach(function (item, key) {
-                            printTo.append(`<h5 class="mb-2 text-capitalize">` + item.label + `</h5>`)
+                        data.directories.forEach(function (item) {
+                            item.children.forEach(function (child){
+                                printTo.append(`<h5 class="mb-2 text-capitalize">` + child.label + `</h5>
+                            <div class="row mx-n1 g-0">
+                                <div class="col-md-6">
+                                    <div class="card m-1 shadow-none border">
+                                        <div class="p-2">
+                                            <div class="row align-items-center justify-content-between">
+                                                <div class="col-auto pe-0">
+                                                    <div class="avatar-sm">
+                                                        <span class="avatar-title bg-light text-secondary rounded">
+                                                            <i class="fa fa-file-pdf font-18"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col text-truncate">
+                                                    <a href="javascript:void(0);" class="text-muted fw-bold">Ubold-sketch-design.zip</a>
+                                                    <p class="mb-0 font-13">2.3 MB</p>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button type="button"
+                                                            class="btn btn-blue btn-sm waves-effect waves-light"><i
+                                                            class="fa fa-download"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> `)
+                            })
                         });
                         console.log(data.directories)
                     }
