@@ -2,7 +2,7 @@
       class="building-construction-application needs-validation">
     @csrf
     <div class="row mb-3">
-        <div class="col-md-3 mb-3">
+        <div class="col-md-3">
             <label for="organization_id" class="form-label fw-bold">संस्था <span class="text-danger">*</span></label>
             <select wire:model="applyMap.organization_id" id="organization_id"
                     name="organization_id" class="form-select form-select-sm" required>
@@ -16,7 +16,7 @@
             <div class="text-danger">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-3 mb-3">
+        <div class="col-md-3">
             <label for="application_type" class="form-label fw-bold"> नक्सा <span class="text-danger">*</span></label>
             <select wire:model="applyMap.application_type" id="organization_id"
                     name="application_type" class="form-select form-select-sm" required>
