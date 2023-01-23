@@ -444,9 +444,9 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$projectDocument->document_name}}</td>
                                 <td>
-                                    <a href="">
+                                    <button type="button" class="btn btn-sm btn-outline-primary">
                                         <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         @empty
@@ -466,7 +466,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">
-                        ८). आयोजनासँग सम्बन्धित अन्य कागजातहरु
+                        ८). योजना संग सम्बन्धित फोटो/फाईलहरू
                     </h4>
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-hover">
