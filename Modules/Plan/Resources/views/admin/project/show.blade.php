@@ -466,7 +466,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">
-                        ८). आयोजनासँग सम्बन्धित अन्य कागजातहरु
+                        ८). योजना संग सम्बन्धित फोटो/फाईलहरू
                     </h4>
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered table-hover">

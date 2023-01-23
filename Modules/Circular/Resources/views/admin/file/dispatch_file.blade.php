@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> `)
+                            </div>`)
                             })
                         });
                         console.log(data.directories)

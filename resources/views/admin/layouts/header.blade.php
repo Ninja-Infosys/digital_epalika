@@ -1,8 +1,8 @@
 <div class="navbar-custom">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
-            <li class="border rounded p-1 mt-3">
-                <h4 class="text-blue" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
+            <li>
+                <h4 class="text-light top-heading mb-0" id="fiscalyear-tour">आर्थिक वर्ष: {{$officeSetting->fiscalYear->title??''}}</h4>
             </li>
             <li class="dropdown d-inline-block d-lg-none">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light"
@@ -152,8 +152,8 @@
                 </button>
             </li>
 
-            <li class="dropdown d-none d-lg-inline-block">
-                <h3 class="text-light fw-bold mt-3">
+            <li>
+                <h3 class="top-heading text-light fw-bold">
                     {{$officeSetting->localBody->local_body ?? ''}}
                 </h3>
             </li>
@@ -167,10 +167,7 @@
                         <span></span>
                     </div>
                 </a>
-                <!-- End mobile menu toggle-->
             </li>
-
         </ul>
-        <div class="clearfix"></div>
     </div>
 </div>
