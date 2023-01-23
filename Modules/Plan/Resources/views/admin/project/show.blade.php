@@ -32,28 +32,26 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">१) सम्झौता गर्ने पक्ष र आयोजना</h4>
-                    </div>
-                    @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
-                        <div class="p-2">
-                            <h4>क) उपभोक्त्ता समितिको विवरण</h4>
-                        </div>
-                        <div class="p-3">
-                            <h5>नाम : {{$project->consumerCommittee->name??''}}</h5>
-                            <h5>ठेगाना : {{$project->consumerCommittee->address??''}}</h5>
-                            <h5>अध्यक्षको नाम
-                                : {{$project->consumerCommittee?->consumerCommitteeOfficials->where('post',\Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)->first()->name??''}}</h5>
-                        </div>
-                    @endif
-                    <div class="d-flex justify-content-between">
-                        <div class="p-2">
-                            <h4>ख) आयोजनाको विवरण</h4>
-                        </div>
-                        <button class="btn btn-sm btn-primary">
+                        <h4 class="header-title fw-bold">
+                            {{$project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID ? '१) आयोजनाको विवरण' : '१) सम्झौता गर्ने पक्ष र आयोजना'}}
+                        </h4>
+                        <button class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-print"> Print</i>
                         </button>
                     </div>
-                    <div class="p-3">
+                    @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
+                        <h4>क) उपभोक्त्ता समितिको विवरण</h4>
+                        <div class="mx-3">
+                            <h5>नाम : {{$project->consumerCommittee->name??''}}</h5>
+                            <h5>ठेगाना : {{$project->consumerCommittee->address??''}}</h5>
+                            <h5>
+                                अध्यक्षको नाम
+                                : {{$project->consumerCommittee?->consumerCommitteeOfficials->where('post',\Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)->first()->name??''}}
+                            </h5>
+                        </div>
+                        <h4>ख) आयोजनाको विवरण</h4>
+                    @endif
+                    <div class="mx-3">
                         <h5>नाम : {{$project->project_name}}</h5>
                         <h5>योजना उपस्तर : {{$project->planLevel->level_name??''}}</h5>
                         <h5>योजनाको उपक्षेत्र : {{$project->planArea->area_name??''}}</h5>
@@ -84,7 +82,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
+                        <h4 class="header-title fw-bold">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
                     </div>
                     <div class="p-2">
                         <h5>क) लागत अनुमान रु: {{$project->projectCostDetail->estimated_total_cost??''}}</h5>
@@ -182,8 +180,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h4 class="header-title"> ३. उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको
-                                विवरण</h4>
+                            <h4 class="header-title fw-bold">
+                                ३. उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको
+                                विवरण
+                            </h4>
                         </div>
                         <div class="p-2">
                             <h5>क) गठन भएको मिति:-</h5>
@@ -228,7 +228,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h4 class="header-title"> ३. बोलपत्र सम्वन्धि विवरण</h4>
+                            <h4 class="header-title fw-bold">
+                                ३. बोलपत्र सम्वन्धि विवरण
+                            </h4>
                         </div>
                         <div class="p-2">
                             <h5>क) कार्यालयको स्वीकृत विभागिय लागत अनुमान
@@ -315,7 +317,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h4 class="header-title">४) मोविलाईजेशन पेश्की/रनिङ विल विवरण </h4>
+                            <h4 class="header-title fw-bold">
+                                ४) मोविलाईजेशन पेश्की/रनिङ विल विवरण
+                            </h4>
                         </div>
                         <table class="table table-sm table-bordered">
                             <thead>
@@ -353,7 +357,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h4 class="header-title">४) किस्ता/पेश्की विवरण </h4>
+                            <h4 class="header-title fw-bold">
+                                ४) किस्ता/पेश्की विवरण
+                            </h4>
                         </div>
                         <table class="table table-bordered">
                             <thead>
@@ -392,7 +398,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">५). आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था</h4>
+                        <h4 class="header-title fw-bold">
+                            ५). आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था
+                        </h4>
                         <div class="p-2">
                             <h5>क) आयोजना मर्मत संम्भारको जिम्मा लिने समिति संस्थाको नाम:</h5>
                             <h5>ख) मर्मत संम्भारको सम्भावित स्रोत (छ छैन खुलाउने):
@@ -415,7 +423,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">६). सम्झौताको शर्तहरु</h4>
+                    <h4 class="header-title fw-bold">६). सम्झौताको शर्तहरु</h4>
                     <div class="p-2">
                         {!! $project->projectAgreementTerm->data??'' !!}
                     </div>
@@ -427,7 +435,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">
+                    <h4 class="header-title fw-bold">
                         ७). सम्बन्धित कागजातहरू
                     </h4>
                     <table class="table table-sm table-bordered">
@@ -465,7 +473,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">
+                    <h4 class="header-title fw-bold">
                         ८). योजना संग सम्बन्धित फोटो/फाईलहरू
                     </h4>
                     <div class="table-responsive">
