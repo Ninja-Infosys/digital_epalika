@@ -55,7 +55,48 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
+                            <div class="col-md-4 mb-2">
+                                <label for="title" class="form-label">मापन एकाइ (English) *</label>
+                                <input
+                                    type="text"
+                                    name="title_en"
+                                    value="{{old('title_en', $unit->title_en)}}"
+                                    class="form-control @error('title_en') is-invalid @enderror"
+                                    id="title_en"
+                                    placeholder="मापन एकाइ (English)"
+                                />
+                                @error('title_en')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="notation" class="form-label">Notation *</label>
+                                <input
+                                    type="text"
+                                    name="notation"
+                                    value="{{old('notation', $unit->notation)}}"
+                                    class="form-control @error('notation') is-invalid @enderror"
+                                    id="title"
+                                    placeholder="Notation"
+                                />
+                                @error('notation')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="notation_ne" class="form-label">नोटेशन *</label>
+                                <input
+                                    type="text"
+                                    name="notation_ne"
+                                    value="{{old('notation_ne', $unit->notation_ne)}}"
+                                    class="form-control @error('notation_ne') is-invalid @enderror"
+                                    id="notation_ne"
+                                    placeholder="नोटेशन"
+                                />
+                                @error('notation_ne')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                             <div class="col-md-4 mb-2">
                                 <label for="position" class="form-label">Position *</label>
                                 <input
