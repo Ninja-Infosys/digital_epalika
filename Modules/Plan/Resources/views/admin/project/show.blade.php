@@ -444,9 +444,9 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$projectDocument->document_name}}</td>
                                 <td>
-                                    <a href="">
+                                    <button type="button" class="btn btn-sm btn-outline-primary">
                                         <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         @empty

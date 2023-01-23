@@ -15,6 +15,7 @@ enum PlanTemplateTypeEnum: string
     case PLAN_MONITORING_REPORT = "plan_monitoring_report";
     case PLAN_SUPERVISION_MONITORING_REPORT = "plan_supervision_monitoring_report";
     case SAMPLE_MANDATE = "sample_mandate";
+    case PROJECT_AGREEMENT_FORM = "project_agreement_form";
 
     public function label(): string
     {
@@ -35,6 +36,7 @@ enum PlanTemplateTypeEnum: string
             self::PLAN_MONITORING_REPORT => 'योजना अनुगमन प्रतिवेदन',
             self::PLAN_SUPERVISION_MONITORING_REPORT => 'योजना सुपरीवेक्षण तथा अनुगमन प्रतिवेदन',
             self::SAMPLE_MANDATE => 'नमुना कार्यादेश',
+            self::PROJECT_AGREEMENT_FORM => 'योजना सम्झौता फारम'
         };
     }
 }
