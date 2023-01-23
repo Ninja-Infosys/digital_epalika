@@ -18,6 +18,9 @@ class StoreUnitRequest extends FormRequest
             'type_id' => ['required', Rule::exists('types', 'id')->withoutTrashed()],
             'measurement_unit_id' => ['required', Rule::exists('measurement_units', 'id')->withoutTrashed()],
             'title' => ['required'],
+            'title_en' => ['required'],
+            'notation' => ['required'],
+            'notation_ne' => ['required'],
             'position' => ['nullable', 'integer'],
             'is_smallest' => ['nullable', 'boolean'],
         ];
