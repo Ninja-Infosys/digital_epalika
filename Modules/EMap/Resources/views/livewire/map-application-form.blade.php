@@ -557,9 +557,9 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend><h5>७. निवेदकको विवरण</h5></legend>
+        <legend><h5>५. निवेदकको विवरण</h5></legend>
         <div class="mb-3">
-            <label class="form-label fw-bold">७.१ निवेदकको प्रकार </label>
+            <label class="form-label fw-bold">५.१ निवेदकको प्रकार </label>
             <div class="col">
                 @foreach(\Modules\EMap\Enums\ApplicantTypeEnum::cases() as $applicantType)
                     <div class="form-check form-check-inline">
@@ -576,7 +576,7 @@
             </div>
         </div>
         <div class="mb-3">
-            <label class="form-label fw-bold">७.२ घरधनी सँगको सम्बन्ध</label>
+            <label class="form-label fw-bold">५.२ घरधनी सँगको सम्बन्ध</label>
             <div class="col">
                 @foreach(\Modules\EMap\Enums\RelationEnum::cases() as $relation)
                     <div class="form-check form-check-inline">
