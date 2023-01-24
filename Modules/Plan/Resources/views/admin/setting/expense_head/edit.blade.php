@@ -12,13 +12,13 @@
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{{ route('admin.plan.expenseHead.index') }}">
-                                खर्च शिर्सक
+                                खर्च शीर्षक
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">खर्च शिर्सक थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">खर्च शीर्षक थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">खर्च शिर्सक</h4>
+                <h4 class="page-title">खर्च शीर्षक</h4>
             </div>
         </div>
     </div>
@@ -28,9 +28,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">खर्च शिर्सक थप्नुहोस्</h4>
+                        <h4 class="header-title">खर्च शीर्षक थप्नुहोस्</h4>
                         <a href="{{ route('admin.plan.expenseHead.index') }}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> खर्च शिर्सक शिर्सक
+                            <i class="fa fa-list"></i> खर्च शीर्षक
                         </a>
                     </div>
                 </div>

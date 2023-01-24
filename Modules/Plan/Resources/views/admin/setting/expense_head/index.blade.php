@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">खर्च शिर्सक सुची </li>
+                        <li class="breadcrumb-item active">खर्च शीर्षक सुची </li>
                     </ol>
                 </div>
-                <h4 class="page-title">खर्च शिर्सक</h4>
+                <h4 class="page-title">खर्च शीर्षक</h4>
             </div>
         </div>
     </div>
@@ -23,10 +23,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">खर्च शिर्सक  सूची</h4>
+                        <h4 class="header-title">खर्च शीर्षक  सूची</h4>
                         @can('expenseHead_create')
                             <a href="{{ route('admin.plan.expenseHead.create') }}" class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ खर्च शिर्सक थप्नुहोस्
+                                <i class="fa fa-plus-circle"></i> नयाँ खर्च शीर्षक थप्नुहोस्
                             </a>
                         @endcan
                     </div>
