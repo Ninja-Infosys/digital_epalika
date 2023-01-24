@@ -5,43 +5,55 @@ namespace Modules\Plan\Http\Controllers\Admin\Setting;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Validated;
+use Modules\Grant\Entities\GrantDetail;
+use Modules\Plan\Entities\GrantCategory;
 
 class GrantCategoryController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('grantCategory_access');
-
-        return view('plan::index');
+        $grantCategorys = GrantCategory::all();
+        return view('plan::admin.setting.category_type.index',compact('grantCategorys'));
     }
 
     public function create()
     {
-        return view('plan::create');
+        $this->checkAuthorization('grantCategory_create');
+        return view('plan::admin.setting.category_type.create');
     }
 
     public function store(Request $request)
     {
-        //
+    $this->checkAuthorization('grantCategory_create');
+     GrantCategory::create($request->validate([
+        'title'=>'required','string','max:255',
+     ]));
+     return redirect(route('admin.plan.grantCategory.index'));
     }
 
-    public function show($id)
+    public function edit(GrantCategory $grantCategory)
     {
-        return view('plan::show');
+        $this->checkAuthorization('grantCategory_edit');
+        return view('plan::admin.setting.category_type.edit',compact('grantCategory'));
     }
 
-    public function edit($id)
+    public function update(Request $request,GrantCategory $grantCategory)
     {
-        return view('plan::edit');
+        $this->checkAuthorization('grantCategory_edit');
+        $grantCategory->update($request->validate([
+            'title'=>'nullable','string','max:255',
+        ]));
+
+        return redirect(route('admin.plan.grantCategory.index'));
     }
 
-    public function update(Request $request, $id)
+    public function destroy(GrantCategory $grantCategory)
     {
-        //
-    }
+        $this->checkAuthorization('grantCategory_delete');
+        $grantCategory->delete();
+        return redirect(route('admin.plan.grantCategory.index'));
 
-    public function destroy($id)
-    {
-        //
     }
 }

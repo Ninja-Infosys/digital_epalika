@@ -77,6 +77,14 @@
                     </a>
                 </li>
             @endcan
+
+            @can('planTemplate_access')
+                <li class="{{request()->is('admin/plan/setting/grantCategory') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.grantCategory.index')}}">
+                        <span> अनुदान प्रकार </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>
