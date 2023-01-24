@@ -69,6 +69,14 @@
                     </a>
                 </li>
             @endcan
+
+            @can('planTemplate_access')
+                <li class="{{request()->is('admin/plan/setting/expenseHead') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.expenseHead.index')}}">
+                        <span> खर्च शीर्षक </span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </li>

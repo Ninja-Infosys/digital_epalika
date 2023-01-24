@@ -13,6 +13,8 @@ use Modules\Plan\Http\Controllers\Admin\ProjectDocumentController;
 use Modules\Plan\Http\Controllers\Admin\ReportController;
 use Modules\Plan\Http\Controllers\Admin\Setting\BudgetHeadController;
 use Modules\Plan\Http\Controllers\Admin\Setting\BudgetSourceController;
+use Modules\Plan\Http\Controllers\Admin\Setting\ExpenseHeadController;
+use Modules\Plan\Http\Controllers\Admin\Setting\GrantCategoryController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanAreaController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanTemplateController;
@@ -40,6 +42,8 @@ Route::prefix('setting')->group(function () {
     Route::resource('budgetHead', BudgetHeadController::class)->except('show');
     Route::resource('budgetSource', BudgetSourceController::class)->except('show');
     Route::resource('planTemplate', PlanTemplateController::class);
+    Route::resource('expenseHead', ExpenseHeadController::class);
+    Route::resource('grantCategory', GrantCategoryController::class);
 });
 
 //report
