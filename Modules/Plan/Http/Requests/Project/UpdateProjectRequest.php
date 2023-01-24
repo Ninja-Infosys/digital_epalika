@@ -35,10 +35,12 @@ class UpdateProjectRequest extends FormRequest
             'operated_through' => ['nullable', new Enum(ProjectOperatedThroughEnum::class)],
             'is_deadline_extended' => ['nullable', 'boolean'],
             'extended_date' => ['required_if:is_deadline_extended,1'],
-            'progress_spent_amount' => ['nullable', 'numeric'],
-            'physical_progress_target' => ['nullable', 'numeric'],
-            'physical_progress_completed' => ['nullable', 'numeric'],
-            'physical_progress_unit' => ['nullable']
+            'first_quarterly_amount' => ['nullable', 'numeric'],
+            'first_quarterly_goal' => ['nullable', 'numeric'],
+            'second_quarterly_amount' => ['nullable', 'numeric'],
+            'second_quarterly_goal' => ['nullable', 'numeric'],
+            'third_quarterly_amount' => ['nullable', 'numeric'],
+            'third_quarterly_goal' => ['nullable', 'numeric'],
         ];
     }
 }

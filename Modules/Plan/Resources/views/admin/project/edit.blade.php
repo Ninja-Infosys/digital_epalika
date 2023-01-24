@@ -290,6 +290,104 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="allocated_amount" class="form-label">योजना स्वीकृत रकम</label>
+                                <input
+                                    type="number"
+                                    name="allocated_amount"
+                                    value="{{old('allocated_amount', $project->allocated_amount)}}"
+                                    class="form-control @error('allocated_amount') is-invalid @enderror"
+                                    id="allocated_amount"
+                                    placeholder="योजना स्वीकृत रकम"
+                                />
+                                @error('allocated_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="first_quarterly_amount" class="form-label">पहिलो चौमासिक रकम</label>
+                                <input
+                                    type="number"
+                                    name="first_quarterly_amount"
+                                    value="{{old('first_quarterly_amount', $project->first_quarterly_amount)}}"
+                                    class="form-control @error('first_quarterly_amount') is-invalid @enderror"
+                                    id="first_quarterly_amount"
+                                    placeholder="पहिलो चौमासिक रकम"
+                                />
+                                @error('first_quarterly_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="first_quarterly_goal" class="form-label">पहिलो चौमासिक लक्ष्य</label>
+                                <input
+                                    type="number"
+                                    name="first_quarterly_goal"
+                                    value="{{old('first_quarterly_goal', $project->first_quarterly_goal)}}"
+                                    class="form-control @error('first_quarterly_goal') is-invalid @enderror"
+                                    id="first_quarterly_goal"
+                                    placeholder="पहिलो चौमासिक लक्ष्य"
+                                />
+                                @error('first_quarterly_goal')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="second_quarterly_amount" class="form-label">दोश्रो चौमासिक रकम</label>
+                                <input
+                                    type="number"
+                                    name="second_quarterly_amount"
+                                    value="{{old('second_quarterly_amount', $project->second_quarterly_amount)}}"
+                                    class="form-control @error('second_quarterly_amount') is-invalid @enderror"
+                                    id="second_quarterly_amount"
+                                    placeholder="दोश्रो चौमासिक रकम"
+                                />
+                                @error('second_quarterly_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="second_quarterly_goal" class="form-label">दोश्रो चौमासिक लक्ष्य</label>
+                                <input
+                                    type="number"
+                                    name="second_quarterly_goal"
+                                    value="{{old('second_quarterly_goal', $project->second_quarterly_goal)}}"
+                                    class="form-control @error('second_quarterly_goal') is-invalid @enderror"
+                                    id="second_quarterly_goal"
+                                    placeholder="दोश्रो चौमासिक लक्ष्य"
+                                />
+                                @error('second_quarterly_goal')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="third_quarterly_amount" class="form-label">तेश्रो चौमासिक रकम</label>
+                                <input
+                                    type="number"
+                                    name="third_quarterly_amount"
+                                    value="{{old('third_quarterly_amount', $project->third_quarterly_amount)}}"
+                                    class="form-control @error('third_quarterly_amount') is-invalid @enderror"
+                                    id="third_quarterly_amount"
+                                    placeholder="तेश्रो चौमासिक रकम"
+                                />
+                                @error('third_quarterly_amount')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="third_quarterly_goal" class="form-label">तेश्रो चौमासिक लक्ष्य</label>
+                                <input
+                                    type="number"
+                                    name="third_quarterly_goal"
+                                    value="{{old('third_quarterly_goal', $project->third_quarterly_goal)}}"
+                                    class="form-control @error('third_quarterly_goal') is-invalid @enderror"
+                                    id="third_quarterly_goal"
+                                    placeholder="तेश्रो चौमासिक लक्ष्य"
+                                />
+                                @error('third_quarterly_goal')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                             <div class="col-md-3 mb-2">
                                 <label for="is_deadline_extended" class="form-label">आयोजनाको म्याद थप भएको ?</label>
                                 <select
@@ -299,7 +397,8 @@
                                     <option value="0">
                                         नभएको
                                     </option>
-                                    <option {{old('is_deadline_extended',$project->is_deadline_extended)=="1" ? 'selected' : ''}} value="1">
+                                    <option
+                                        {{old('is_deadline_extended',$project->is_deadline_extended)=="1" ? 'selected' : ''}} value="1">
                                         भएको
                                     </option>
                                 </select>
@@ -316,65 +415,6 @@
                                 />
                             </div>
                         </div>
-                        <h4 class="header-title border-bottom mb-2">भौतिक तथा वित्तीय प्रगतिको विवरण</h4>
-                        <div class="row">
-                            <div class="col-md-3 mb-2">
-                                <label for="progress_spent_amount" class="form-label">वित्तीय प्रगति खर्च रकम </label>
-                                <input
-                                    type="number"
-                                    name="progress_spent_amount"
-                                    value="{{old('progress_spent_amount',$project->progress_spent_amount)}}"
-                                    class="form-control @error('progress_spent_amount') is-invalid @enderror"
-                                    id="progress_spent_amount"
-                                    placeholder="वित्तीय प्रगति खर्च रकम"
-                                />
-                                @error('progress_spent_amount')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <label for="physical_progress_target" class="form-label">भौतिक प्रगति लक्ष्य परिमाण</label>
-                                <input
-                                    type="number"
-                                    name="physical_progress_target"
-                                    value="{{old('physical_progress_target',$project->physical_progress_target)}}"
-                                    class="form-control @error('physical_progress_target') is-invalid @enderror"
-                                    id="physical_progress_target"
-                                    placeholder="भौतिक प्रगति लक्ष्य परिमाण"
-                                />
-                                @error('physical_progress_target')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <label for="physical_progress_completed" class="form-label">भौतिक प्रगति सम्पन्न परिमाण </label>
-                                <input
-                                    type="number"
-                                    name="physical_progress_completed"
-                                    value="{{old('physical_progress_completed',$project->physical_progress_completed)}}"
-                                    class="form-control @error('physical_progress_completed') is-invalid @enderror"
-                                    id="physical_progress_completed"
-                                    placeholder="भौतिक प्रगति सम्पन्न परिमाण"
-                                />
-                                @error('physical_progress_completed')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <label for="physical_progress_unit" class="form-label">भौतिक प्रगति एकाइ</label>
-                                <input
-                                    type="text"
-                                    name="physical_progress_unit"
-                                    value="{{old('physical_progress_unit',$project->physical_progress_unit)}}"
-                                    class="form-control @error('physical_progress_unit') is-invalid @enderror"
-                                    id="physical_progress_unit"
-                                    placeholder="भौतिक प्रगति एकाइ"
-                                />
-                                @error('physical_progress_unit')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
 
                         <button type="submit" class="btn btn-primary">
                             Save
@@ -386,27 +426,27 @@
     </div>
     @push('scripts')
         <script>
-            $(document).ready(function (){
-                if($('#is_deadline_extended').val()=="1"){
+            $(document).ready(function () {
+                if ($('#is_deadline_extended').val() == "1") {
                     showExtendedData()
-                }else{
+                } else {
                     removeExtendedData()
                 }
 
-                $("#is_deadline_extended").on("change",function (){
-                    if($('#is_deadline_extended').val()=="1"){
+                $("#is_deadline_extended").on("change", function () {
+                    if ($('#is_deadline_extended').val() == "1") {
                         showExtendedData()
-                    }else{
+                    } else {
                         removeExtendedData()
                     }
                 })
 
-                function removeExtendedData(){
+                function removeExtendedData() {
                     $("#extended_date_div").addClass('d-none')
                     $("#extended_date").val('')
                 }
 
-                function showExtendedData(){
+                function showExtendedData() {
                     $("#extended_date_div").removeClass('d-none')
                 }
             })

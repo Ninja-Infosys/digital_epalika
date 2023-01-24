@@ -25,7 +25,11 @@ class ProjectCostDetailLivewire extends Component
         'benefited_organization' => 0,
         'others_benefited' => 0,
         'projectGrantDetails' => [],
-        'benefitedMemberDetails' => []
+        'benefitedMemberDetails' => [],
+        'progress_spent_amount' => 0,
+        'physical_progress_target' => 0,
+        'physical_progress_completed' => 0,
+        'physical_progress_unit' => '',
     ];
 
     public object $project;
@@ -62,6 +66,10 @@ class ProjectCostDetailLivewire extends Component
             'form.benefitedMemberDetails.*.other_households_no' => ['required', 'integer'],
             'form.benefitedMemberDetails.*.no_of_male' => ['required', 'integer'],
             'form.benefitedMemberDetails.*.no_of_female' => ['required', 'integer'],
+            'form.progress_spent_amount' => ['nullable', 'numeric'],
+            'form.physical_progress_target' => ['nullable', 'numeric'],
+            'form.physical_progress_completed' => ['nullable', 'numeric'],
+            'form.physical_progress_unit' => ['nullable']
         ];
     }
 
@@ -101,14 +109,23 @@ class ProjectCostDetailLivewire extends Component
     private function assignProjectData($project_id)
     {
         $project = Project::with('projectCostDetail', 'projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
+
         $this->project = $project;
-        if ($projectCostDetail = $project->projectCostDetail) {
-            foreach ($this->form as $key => $data) {
-                if ($key != 'projectGrantDetails' && $key != 'benefitedMemberDetails') {
-                    $this->form[$key] = $projectCostDetail[$key];
-                }
-            }
-        }
+
+        $this->form['estimated_total_cost'] = $project->estimated_total_cost;
+        $this->form['agencies_grants'] = $project->agencies_grants;
+        $this->form['share_amount'] = $project->share_amount;
+        $this->form['committee_share_amount'] = $project->committee_share_amount;
+        $this->form['contingency_amount'] = $project->contingency_amount;
+        $this->form['labor_amount'] = $project->labor_amount;
+        $this->form['benefited_organization'] = $project->benefited_organization;
+        $this->form['others_benefited'] = $project->others_benefited;
+        $this->form['progress_spent_amount'] = $project->progress_spent_amount;
+        $this->form['physical_progress_target'] = $project->physical_progress_target;
+        $this->form['physical_progress_completed'] = $project->physical_progress_completed;
+        $this->form['physical_progress_unit'] = $project->physical_progress_unit;
+
+
         foreach ($project->projectGrantDetails as $projectGrantDetail) {
             $this->form['projectGrantDetails'][] = [
                 'id' => $projectGrantDetail->id ?? null,
@@ -133,7 +150,14 @@ class ProjectCostDetailLivewire extends Component
 
     public function submitFormData()
     {
+
         $formData = $this->validate()['form'];
+        $this->project->update([
+            'progress_spent_amount' => $formData['progress_spent_amount'] ?? 0,
+            'physical_progress_target' => $formData['physical_progress_target'] ?? 0,
+            'physical_progress_completed' => $formData['physical_progress_completed'] ?? 0,
+            'physical_progress_unit' => $formData['physical_progress_unit'] ?? null,
+        ]);
 
         ProjectCostDetail::updateOrCreate(
             ['project_id' => $this->project->id],

@@ -5,61 +5,43 @@ namespace Modules\Plan\Http\Controllers\Admin\Setting;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Modules\Plan\Entities\GrantCategory;
 
 class GrantCategoryController extends Controller
 {
     public function index()
     {
         $this->checkAuthorization('grantCategory_access');
-        $grantCategorys = GrantCategory::all();
-        return view('plan::admin.setting.grant_category.index',compact('grantCategorys'));
 
+        return view('plan::index');
     }
 
     public function create()
     {
-        return view('plan::admin.setting.grant_category.create');
+        return view('plan::create');
     }
 
     public function store(Request $request)
     {
-        $this->checkAuthorization('grantCategory_create');
-
-        GrantCategory::create($request->validate([
-            'title'=>'required','string','max:255'
-        ]));
-        toast('अनुदान प्रकार सफलतापूर्वक थपियो', 'success');
-        return redirect(route('admin.plan.grantCategory.index'));
-
+        //
     }
 
-    public function edit(GrantCategory $grantCategory)
+    public function show($id)
     {
-        $this->checkAuthorization('grantCategory_edit');
-
-        return view('plan::admin.setting.grant_category.edit',compact('grantCategory'));
+        return view('plan::show');
     }
 
-    public function update(Request $request, GrantCategory $grantCategory)
+    public function edit($id)
     {
-        $this->checkAuthorization('grantCategory_edit');
-
-        $grantCategory->update($request->validate([
-            'title'=>'required','string','max:255'
-        ]));
-        toast('अनुदान प्रकार सफलतापूर्वक सम्पादन गरियो', 'success');
-
-        return redirect(route('admin.plan.grantCategory.index'));
-
+        return view('plan::edit');
     }
 
-    public function destroy(GrantCategory $grantCategory)
+    public function update(Request $request, $id)
     {
-        $this->checkAuthorization('grantCategory_delete');
+        //
+    }
 
-        $grantCategory->delete();
-        toast('अनुदान प्रकार सफलतापूर्वक मेटियो', 'success');
-        return redirect(route('admin.plan.grantCategory.index'));
+    public function destroy($id)
+    {
+        //
     }
 }

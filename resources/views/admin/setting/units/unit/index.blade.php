@@ -64,14 +64,14 @@
                                     </td>
                                     <td>
                                         @if($unit->is_smallest)
-                                            <a data-bs-type="edit" href="{{route('admin.units.unit.external-unit-conversion.index',$unit)}}"
-                                               class="btn btn-xs btn-outline-warning {{get_seting('Pin')?'confirm_pin':''}}">
+                                            <a href="{{route('admin.units.unit.external-unit-conversion.index',$unit)}}"
+                                               class="btn btn-xs btn-outline-warning">
                                                 <i class="fa fa-exchange-alt"></i> बाह्य रूपान्तरण
                                             </a>
                                         @endif
 
-                                        <a data-bs-type="edit" href="{{route('admin.units.unit.internal-unit-conversion.index',$unit)}}"
-                                           class="btn btn-xs btn-outline-info {{get_setting('Pin')?'confirm_pin':''}}">
+                                        <a href="{{route('admin.units.unit.internal-unit-conversion.index',$unit)}}"
+                                           class="btn btn-xs btn-outline-info">
                                             <i class="fa fa-exchange-alt"></i> आन्तरिक रूपान्तरण
                                         </a>
                                         @can('unit_edit')
