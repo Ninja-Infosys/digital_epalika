@@ -1,4 +1,64 @@
 <form wire:submit.prevent="submitFormData">
+    <h4 class="header-title border-bottom mb-2">भौतिक तथा वित्तीय प्रगतिको विवरण</h4>
+    <div class="row">
+        <div class="col-md-3 mb-2">
+            <label for="progress_spent_amount" class="form-label">वित्तीय प्रगति खर्च रकम </label>
+            <input
+                type="number"
+                name="progress_spent_amount"
+                wire:model="form.progress_spent_amount"
+                class="form-control @error('progress_spent_amount') is-invalid @enderror"
+                id="progress_spent_amount"
+                placeholder="वित्तीय प्रगति खर्च रकम"
+            />
+            @error('progress_spent_amount')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="col-md-3 mb-2">
+            <label for="physical_progress_target" class="form-label">भौतिक प्रगति लक्ष्य परिमाण</label>
+            <input
+                type="number"
+                name="physical_progress_target"
+                wire:model="form.physical_progress_target"
+                class="form-control @error('physical_progress_target') is-invalid @enderror"
+                id="physical_progress_target"
+                placeholder="भौतिक प्रगति लक्ष्य परिमाण"
+            />
+            @error('physical_progress_target')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="col-md-3 mb-2">
+            <label for="physical_progress_completed" class="form-label">भौतिक प्रगति सम्पन्न परिमाण </label>
+            <input
+                type="number"
+                name="physical_progress_completed"
+                wire:model="form.physical_progress_completed"
+                class="form-control @error('physical_progress_completed') is-invalid @enderror"
+                id="physical_progress_completed"
+                placeholder="भौतिक प्रगति सम्पन्न परिमाण"
+            />
+            @error('physical_progress_completed')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="col-md-3 mb-2">
+            <label for="physical_progress_unit" class="form-label">भौतिक प्रगति एकाइ</label>
+            <input
+                type="text"
+                name="physical_progress_unit"
+                wire:model="form.physical_progress_unit"
+                class="form-control @error('physical_progress_unit') is-invalid @enderror"
+                id="physical_progress_unit"
+                placeholder="भौतिक प्रगति एकाइ"
+            />
+            @error('physical_progress_unit')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+    </div>
+
     <h4 class="header-title border-bottom mb-2">लागत व्यहोर्ने स्रोतहरु</h4>
     <div class="row">
         <div class="col-md-3 mb-2">

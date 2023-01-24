@@ -54,7 +54,21 @@ class Project extends Model
         'progress_spent_amount',
         'physical_progress_target',
         'physical_progress_completed',
-        'physical_progress_unit'
+        'physical_progress_unit',
+        'first_quarterly_amount',
+        'first_quarterly_goal',
+        'second_quarterly_amount',
+        'second_quarterly_goal',
+        'third_quarterly_amount',
+        'third_quarterly_goal',
+        'estimated_total_cost',
+        'agencies_grants',
+        'share_amount',
+        'committee_share_amount',
+        'contingency_amount',
+        'labor_amount',
+        'benefited_organization',
+        'others_benefited'
     ];
 
     protected $casts = [
