@@ -402,10 +402,10 @@
                             ५). आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था
                         </h4>
                         <div class="p-2">
-                            <h5>क) आयोजना मर्मत संम्भारको जिम्मा लिने समिति संस्थाको नाम:</h5>
+                            <h5>क) आयोजना मर्मत संम्भारको जिम्मा लिने समिति संस्थाको नाम: {{$project->projectMaintenanceArrangement->office_name??''}}</h5>
                             <h5>ख) मर्मत संम्भारको सम्भावित स्रोत (छ छैन खुलाउने):
                                 <ul>
-                                    <li>जनश्रमदान: {{$project->projectMaintenanceArrangement->office_name??''}}</li>
+                                    <li>जनश्रमदान: {{$project->projectMaintenanceArrangement->public_service??''}}</li>
                                     <li>सेवा शुल्क: {{$project->projectMaintenanceArrangement->service_fee??''}}</li>
                                     <li>दस्तुर,
                                         चन्दाबाट: {{$project->projectMaintenanceArrangement->from_fee_donation??''}}</li>

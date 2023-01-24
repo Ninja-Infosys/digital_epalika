@@ -10,6 +10,7 @@ use Modules\Plan\Http\Controllers\Admin\ProjectBidSubmissionController;
 use Modules\Plan\Http\Controllers\Admin\ProjectController;
 use Modules\Plan\Http\Controllers\Admin\ProjectCostDetailController;
 use Modules\Plan\Http\Controllers\Admin\ProjectDocumentController;
+use Modules\Plan\Http\Controllers\Admin\ProjectMaintenanceArrangementController;
 use Modules\Plan\Http\Controllers\Admin\ReportController;
 use Modules\Plan\Http\Controllers\Admin\Setting\BudgetHeadController;
 use Modules\Plan\Http\Controllers\Admin\Setting\BudgetSourceController;
@@ -32,6 +33,7 @@ Route::resource('project/{project}/consumerCommittee', ConsumerCommitteeControll
 Route::resource('project/{project}/projectAgreementTerm', ProjectAgreementTermController::class)->names('project.projectAgreementTerm');
 Route::resource('project/{project}/projectBidSubmission', ProjectBidSubmissionController::class)->names('project.projectBidSubmission');
 Route::resource('project/{project}/consumerCommitteeTransaction', ConsumerCommitteeTransactionController::class)->names('project.consumerCommitteeTransaction');
+Route::resource('project/{project}/projectMaintenanceArrangement', ProjectMaintenanceArrangementController::class)->names('project.projectMaintenanceArrangement');
 
 Route::prefix('setting')->group(function () {
     Route::get('planSubArea', [PlanAreaController::class, 'planSubArea'])->name('planSubArea');

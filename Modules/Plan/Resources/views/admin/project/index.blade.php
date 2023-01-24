@@ -97,6 +97,10 @@
                                                    href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
                                                     <i class="fa fa-list"> किस्ता/पेश्की विवरण </i>
                                                 </a>
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">
+                                                    <i class="fa fa-list"> आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था </i>
+                                                </a>
                                             @endif
                                             <a class="dropdown-item"
                                                href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
