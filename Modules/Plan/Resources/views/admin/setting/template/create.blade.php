@@ -39,7 +39,7 @@
                     <form action="{{route('admin.plan.planTemplate.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input
                                     type="text"
@@ -53,7 +53,22 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
+                                <label for="template_for" class="form-label">उपभोक्ता समिति/बोलपत्र(टेन्डर) को लागि</label>
+                                <select name="template_for" id="type" class="form-control">
+                                    <option value="">छान्नुहोस्</option>
+                                    @foreach(\Modules\Plan\Enums\ProjectOperatedThroughEnum::cases() as $operatedThroughEnum)
+                                        <option {{old('template_for')==$operatedThroughEnum->value ? 'selected':''}}
+                                                value="{{$operatedThroughEnum->value}}">
+                                            {{$operatedThroughEnum->label()}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('template_for')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
                                 <label for="type" class="form-label">टेम्प्लेट</label>
                                 <select name="type" id="type" class="form-control">
                                     <option value="">छान्नुहोस्</option>

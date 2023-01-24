@@ -1,7 +1,8 @@
 <div class="default-terms">
-    <p>उपभोक्ता समितिको जिम्मेवारी तथा पालना गरिने शर्तहरु:</p>
+    <p>................. पालिका आ.व. ................ को स्वीकृत वार्षिक कार्यक्रम/आयोजन अन्तर्गत ............... संचालनका लागि सम्झौता गर्ने संस्थाको नाम, ठेगाना (यस पछि प्रथम पक्ष भनिने) र  सम्झौता गर्ने संस्थाको नाम, ठेगाना (यस पछि दोस्रो पक्ष भनिने) बीच मिति .................. गते तपसिलका शर्तनामाको अधिनमा रही कार्यक्रम/आयोजना संचालन गर्न द्दिपक्षिय सम्झौता गरी दियौं/लियौं ।</p>
+    <p><b>जिम्मेवारी तथा पालना गरिने शर्तहरु:</b></p>
 
-    <p>१. आयोजना मिति .................. देखि शुरु गरी मिति .................. सम्ममा पुरा गर्नु पर्नेछ।</p>
+    <p>१. आयोजना मिति .................. देखि शुरु गरी मिति .................. सम्ममा पुरा गर्नु पर्नेछ ।</p>
 
     <p>२. प्राप्त रकम तथा निर्माण समाग्री सम्वन्धित आयोजनाको उद्धेश्यका लागि मात्र प्रयोग गर्नुपर्नेछ।</p>
 
@@ -90,7 +91,7 @@
 
     <div class="flex-container mt-5" style="display:flex">
         <div class="item-auto"
-            style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
+             style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
                 style="font-size:14px"><u><strong>उपभोक्त्ता समिति/समुहको तर्फबाट:</strong></u><br />
                 नाम थर :- .......................<br />
                 पद :- ........................<br />
@@ -102,11 +103,11 @@
         </div>
 
         <div class="item-auto"
-            style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center">
+             style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center">
             &nbsp;</div>
 
         <div class="item-auto"
-            style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
+             style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
                 style="font-size:14px"><u><strong>कार्यालयको तर्फबाट</strong></u><br />
                 नाम :- .......................<br />
                 पद :- .........................<br />
@@ -120,7 +121,7 @@
 
     <div class="flex-container mt-5" style="display:flex">
         <div class="item-auto"
-            style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
+             style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
                 style="font-size:14px"><u><strong>रोहबर:</strong></u><br />
                 नाम थर :- .......................<br />
                 पद :- ........................<br />
@@ -132,7 +133,7 @@
         </div>
 
         <div class="item-auto"
-            style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
+             style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
                 style="font-size:14px"><u><strong>रोहबर:</strong></u><br />
                 नाम थर :- .......................<br />
                 पद :- ........................<br />
@@ -143,7 +144,7 @@
 
         </div>
         <div class="item-auto"
-            style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
+             style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
                 style="font-size:14px"><u><strong>रोहबर:</strong></u><br />
                 नाम थर :- .......................<br />
                 पद :- ........................<br />
@@ -155,7 +156,7 @@
         </div>
 
         <div class="item-auto"
-            style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
+             style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
                 style="font-size:14px"><u><strong>रोहबर : </strong></u><br />
                 नाम :- .......................<br />
                 पद :- .........................<br />
