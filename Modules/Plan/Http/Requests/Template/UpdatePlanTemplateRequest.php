@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
+use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 
 class UpdatePlanTemplateRequest extends FormRequest
 {
@@ -18,6 +19,7 @@ class UpdatePlanTemplateRequest extends FormRequest
     {
         return [
             'type' => ['nullable',new Enum(PlanTemplateTypeEnum::class)],
+            'template_for' => ['nullable', new Enum(ProjectOperatedThroughEnum::class)],
             'title' => ['required', Rule::unique('plan_templates', 'title')->withoutTrashed()->ignore($this->planTemplate)],
             'data' => ['required']
         ];
