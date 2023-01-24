@@ -45,6 +45,8 @@ class PlanTemplateController extends Controller
                 'data' => $planTemplate
             ]);
         }
+
+        return view('plan::plan_template.show');
     }
 
     public function edit(PlanTemplate $planTemplate)

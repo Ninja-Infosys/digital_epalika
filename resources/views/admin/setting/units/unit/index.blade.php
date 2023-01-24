@@ -45,6 +45,7 @@
                                 <th>प्रकार</th>
                                 <th>मापन एकाइ विविधता</th>
                                 <th>मापन एकाइ</th>
+                                <th>नोटेशन</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -56,7 +57,7 @@
                                         {{$unit->measurementUnit->type->title ?? ''}}
                                     </td>
                                     <td>
-                                        {{$unit->measurementUnit->title ?? ''}}
+                                        {{$unit->measurementUnit->title ?? ''}}( {{$unit->measurementUnit->title_en ?? ''}})
                                     </td>
                                     <td>
                                         {{$unit->title ?? ''}}

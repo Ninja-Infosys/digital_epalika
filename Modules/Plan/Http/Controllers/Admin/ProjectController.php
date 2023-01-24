@@ -60,7 +60,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('planArea','planLevel','consumerCommittee.consumerCommitteeOfficials','budgetSource','budgetHead','projectCostDetail', 'projectGrantDetails','benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files','consumerCommitteeTransactions');
+        $project->load('projectBidDetail','projectAgreementTerm','projectMaintenanceArrangement','projectBidSubmissions','planArea','planLevel','consumerCommittee.consumerCommitteeOfficials','budgetSource','budgetHead','projectCostDetail', 'projectGrantDetails','benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files','consumerCommitteeTransactions');
 
         return view('plan::admin.project.show', compact('project'));
     }
@@ -119,6 +119,7 @@ class ProjectController extends Controller
         ]);
 
         toast('फाइल सफलतापूर्वक अपलोड गरियो', 'success');
-        return redirect(route('admin.plan.project.index'));
+
+        return redirect(route('admin.plan.project.fileList',$project));
     }
 }

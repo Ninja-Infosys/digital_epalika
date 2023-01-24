@@ -110,7 +110,7 @@
                                             @endcan
                                             <a class="dropdown-item"
                                                href="{{route('admin.plan.project.fileList',$project)}}">
-                                                <i class="fa fa-file"> आयोजनासँग सम्बन्धित अन्य कागजातहरु  </i>
+                                                <i class="fa fa-file"> योजना संग सम्बन्धित फोटो/फाईलहरू </i>
                                             </a>
                                         </div>
                                     </div>

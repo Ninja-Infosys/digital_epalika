@@ -15,7 +15,7 @@ class UpdateProjectDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'document_name' => ['required', Rule::unique('project_documents', 'document_name')->withoutTrashed()->ignore($this->projectDocument)],
+            'document_name' => ['required'],
             'data' => ['required']
         ];
     }
