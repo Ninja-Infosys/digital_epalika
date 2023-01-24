@@ -29,10 +29,10 @@ class ExpenseHeadController extends Controller
 
         ExpenseHead::create($request->validate(
             ['title' => ['required', 'string']],
-            ['title.required' => 'खर्च शिर्सक आवसेक छ']
+            ['title.required' => 'खर्च शीर्षक आवसेक छ']
         ));
 
-        toast('खर्च शिर्सक सफलतापूर्वक थपियो', 'success');
+        toast('खर्च शीर्षक सफलतापूर्वक थपियो', 'success');
         return redirect()->route('admin.plan.expenseHead.index');
     }
 
@@ -48,10 +48,10 @@ class ExpenseHeadController extends Controller
 
         $expenseHead->update($request->validate(
             ['title' => ['required', 'string']],
-            ['title.required' => 'खर्च शिर्सक आवसेक छ']
+            ['title.required' => 'खर्च शीर्षक आवसेक छ']
         ));
 
-        toast('खर्च शिर्सक सफलतापूर्वक सम्पादन गरियो', 'success');
+        toast('खर्च शीर्षक सफलतापूर्वक सम्पादन गरियो', 'success');
         return redirect()->route('admin.plan.expenseHead.index');
     }
 
@@ -59,7 +59,7 @@ class ExpenseHeadController extends Controller
     {
         $this->checkAuthorization('expenseHead_delete');
         $expenseHead->delete();
-        toast('खर्च शिर्सक सफलतापूर्वक हटाइयो', 'success');
+        toast('खर्च शीर्षक सफलतापूर्वक हटाइयो', 'success');
         return redirect()->route('admin.plan.expenseHead.index');
     }
 }
