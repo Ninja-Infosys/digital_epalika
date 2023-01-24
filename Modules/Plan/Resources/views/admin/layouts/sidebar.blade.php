@@ -70,10 +70,10 @@
                 </li>
             @endcan
 
-            @can('grantCategory_access')
-                <li class="{{request()->is('admin/plan/setting/grantCategory') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.grantCategory.index')}}">
-                        <span> अनुदान प्रकार </span>
+            @can('planTemplate_access')
+                <li class="{{request()->is('admin/plan/setting/expenseHead') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.expenseHead.index')}}">
+                        <span> खर्च </span>
                     </a>
                 </li>
             @endcan
