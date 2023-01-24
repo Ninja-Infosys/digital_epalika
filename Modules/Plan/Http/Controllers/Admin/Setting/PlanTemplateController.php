@@ -33,6 +33,7 @@ class PlanTemplateController extends Controller
         PlanTemplate::create($request->validated());
 
         toast('टेम्प्लेट सफलतापूर्वक थपियो', 'success');
+
         return back();
     }
 
