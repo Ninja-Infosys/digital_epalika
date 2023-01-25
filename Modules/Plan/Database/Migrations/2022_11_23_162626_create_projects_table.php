@@ -31,7 +31,6 @@ return new class () extends Migration {
             $table->double('physical_progress_target', 12, 2)->default(0)->comment('भौतिक प्रगति लक्ष्य परिमाण');
             $table->double('physical_progress_completed', 12, 2)->default(0)->comment('भौतिक प्रगति सम्पन्न परिमाण');
             $table->string('physical_progress_unit')->nullable()->comment('भौतिक प्रगति एकाइ');
-
             $table->timestamps();
             $table->softDeletes();
         });
