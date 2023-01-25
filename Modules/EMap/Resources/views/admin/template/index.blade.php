@@ -58,7 +58,7 @@
                                     <td>
                                         @can('eMapTemplate_access')
                                             <a href="{{route('emap.admin.eMapTemplate.updateStatus',[$noticeTypeEnum,$eMapTemplate])}}">
-                                                <i class="fa fa-2x  {{$eMapTemplate->status === 1 ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
+                                                <i class="fa fa-2x  {{$eMapTemplate->status ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
                                             </a>
                                         @endcan
                                     </td>

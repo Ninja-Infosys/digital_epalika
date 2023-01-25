@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <h4 class="header-title border-bottom mb-2">लागत व्यहोर्ने स्रोतहरु</h4>
+    <h4 class="header-title border-bottom mb-2">योजनाको लागत विवरण</h4>
     <div class="row">
         <div class="col-md-3 mb-2">
             <label for="estimated_total_cost" class="form-label">अनुमानित लागत *</label>

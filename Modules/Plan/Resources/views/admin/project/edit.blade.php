@@ -257,7 +257,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-3 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="purpose" class="form-label">उद्देश्य</label>
                                 <input
                                     type="text"
@@ -271,7 +271,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-3 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="operated_through" class="form-label">खरिद बिधि *</label>
                                 <select
                                     name="operated_through"
@@ -388,7 +388,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-3 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="is_deadline_extended" class="form-label">आयोजनाको म्याद थप भएको ?</label>
                                 <select
                                     name="is_deadline_extended"
@@ -406,7 +406,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-3 mb-2" id="extended_date_div">
+                            <div class="col-md-4 mb-2" id="extended_date_div">
                                 <x-date-input-component
                                     nameNe="extended_date" labelNe="म्याद थप मिति"
                                     nameEn="en_extended_date" labelEn="Extended Date"
