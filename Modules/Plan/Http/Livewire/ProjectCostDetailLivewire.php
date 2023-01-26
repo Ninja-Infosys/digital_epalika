@@ -117,6 +117,7 @@ class ProjectCostDetailLivewire extends Component
         $this->form['committee_share_amount'] = $project->committee_share_amount ?? 0;
         $this->form['contingency_amount'] = $project->contingency_amount ?? 0;
         $this->form['contingency_percent'] = round($project->contingency_amount * 100 / $this->totalAmountForContingency(), 2);
+        $this->form['other_taxes']=$project->other_taxes??0;
         $this->form['labor_amount'] = $project->labor_amount ?? 0;
         $this->form['benefited_organization'] = $project->benefited_organization ?? 0;
         $this->form['others_benefited'] = $project->others_benefited ?? 0;
