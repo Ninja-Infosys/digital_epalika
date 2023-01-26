@@ -25,6 +25,7 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::get('project/{project}/file-list', [ProjectController::class, 'fileList'])->name('project.fileList');
 Route::get('project{project}/upload-file', [ProjectController::class, 'uploadFilePage'])->name('project.uploadFilePage');
 Route::post('project/{project}/upload-file', [ProjectController::class, 'uploadFile'])->name('project.uploadFile');
+Route::get('project/{project}/print',[ProjectController::class,'print'])->name('project.print');
 Route::resource('project', ProjectController::class);
 Route::resource('project/{project}/projectCostDetail', ProjectCostDetailController::class)->names('project.projectCostDetail')->only('index');
 Route::resource('project/{project}/projectDocument', ProjectDocumentController::class)->names('project.projectDocument');

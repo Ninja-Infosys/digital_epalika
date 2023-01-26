@@ -35,9 +35,12 @@
                         <h4 class="header-title fw-bold">
                             {{$project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID ? '१) आयोजनाको विवरण' : '१) सम्झौता गर्ने पक्ष र आयोजना'}}
                         </h4>
-                        <button class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-print"> Print</i>
-                        </button>
+                        <a href="javascript:void(0)"
+                           route_action_url="{{route('admin.plan.project.print',$project)}}"
+                           class="btn btn-xs btn-outline-warning printProjectDetail">
+                            <i class="fa fa-print"></i>  प्रिन्ट गर्नुहोस
+
+                        </a>
                     </div>
                     @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                         <h4>क) उपभोक्त्ता समितिको विवरण</h4>
@@ -452,9 +455,13 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$projectDocument->document_name}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-outline-primary">
-                                        <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
-                                    </button>
+
+                                    <a href="javascript:void(0)"
+                                       route_action="{{route('admin.plan.project.projectDocument.show',[$project,$projectDocument])}}"
+                                       class="btn btn-xs btn-outline-warning printDetail">
+                                        <i class="fa fa-print"></i>  प्रिन्ट गर्नुहोस
+
+                                    </a>
                                 </td>
                             </tr>
                         @empty
@@ -506,5 +513,41 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            $(".printDetail").on("click", function (e) {
+                $.ajax({
+                    method: "GET",
+                    url: $(this).attr("route_action"),
+                    success: function (resp) {
+                        var print_area = window.open();
+                        print_area.document.write(resp.data.data);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    }, error: function () {
+                        alert("Something Went Wrong");
+                    }
+                });
+            });
+            $(".printProjectDetail").on("click", function (e) {
+                $.ajax({
+                    method: "GET",
+                    url: $(this).attr("route_action_url"),
+                    success: function (resp) {
+                        var print_area = window.open();
+                        print_area.document.write(resp.data);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    }, error: function () {
+                        alert("Something Went Wrong");
+                    }
+                });
+            });
+        </script>
+    @endpush
 
 @endsection

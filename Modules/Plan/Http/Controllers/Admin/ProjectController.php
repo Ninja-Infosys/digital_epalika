@@ -12,6 +12,9 @@ use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectAgreementTerm;
+use Modules\Plan\Entities\ProjectDocument;
+use Modules\Plan\Enums\PlanTemplateTypeEnum;
+use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Http\Requests\Project\StoreProjectRequest;
 use Modules\Plan\Http\Requests\Project\UpdateProjectRequest;
 
@@ -60,7 +63,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectBidDetail','projectAgreementTerm','projectMaintenanceArrangement','projectBidSubmissions','planArea','planLevel','consumerCommittee.consumerCommitteeOfficials','budgetSource','budgetHead','projectCostDetail', 'projectGrantDetails','benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files','consumerCommitteeTransactions');
+        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectCostDetail', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions');
 
         return view('plan::admin.project.show', compact('project'));
     }
@@ -74,16 +77,16 @@ class ProjectController extends Controller
         $budgetSources = BudgetSource::all();
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
 
-        return view('plan::admin.project.edit',compact('project','planAreas','planLevels','budgetSources','budgetHeads'));
+        return view('plan::admin.project.edit', compact('project', 'planAreas', 'planLevels', 'budgetSources', 'budgetHeads'));
     }
 
-    public function update(UpdateProjectRequest $request,Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
         $this->checkAuthorization('project_edit');
 
         $project->update($request->validated());
 
-        toast('परियोजना सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('परियोजना सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return redirect(route('admin.plan.project.index'));
     }
@@ -97,7 +100,7 @@ class ProjectController extends Controller
     {
         $project->load('files');
 
-        return view('plan::admin.project.file_list',compact('project'));
+        return view('plan::admin.project.file_list', compact('project'));
     }
 
     public function uploadFilePage(Project $project)
@@ -120,6 +123,16 @@ class ProjectController extends Controller
 
         toast('फाइल सफलतापूर्वक अपलोड गरियो', 'success');
 
-        return redirect(route('admin.plan.project.fileList',$project));
+        return redirect(route('admin.plan.project.fileList', $project));
     }
+
+    public function print(Request $request, Project $project)
+    {
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => $project->getSpecificTemplateData(PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM)
+            ]);
+        }
+    }
+
 }

@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 use Modules\EMap\Entities\EMapTemplate;
 use Modules\EMap\Enums\NoticeTypeEnum;
 use Modules\EMap\Enums\PostsEnum;
+use Modules\Plan\Entities\PlanTemplate;
+use Modules\Plan\Enums\PlanTemplateTypeEnum;
 
 trait PlanTemplateTrait
 {
@@ -120,23 +122,27 @@ trait PlanTemplateTrait
 
     public function getTemplateDataAttribute(): Collection
     {
-        return $this->getEmapTemplates()->map(function ($applicationTemplate) {
-            $data = $this->getData($applicationTemplate->data);
+        return $this->getPlanTemplates()->map(function ($planTemplate) {
+            $data = $this->getData($planTemplate->data);
 
             return [
-                'for' => $applicationTemplate->for,
+                'type' => $planTemplate->type,
                 'data' => $data,
             ];
         });
     }
 
-    public function getSpecificTemplateData(NoticeTypeEnum $noticeTypeEnum): string
+    public function getSpecificTemplateData(PlanTemplateTypeEnum $planTemplateTypeEnum): string
     {
-        $eMapTemplate = $this->getEmapTemplates();
-        $mapTemplate = $eMapTemplate->where('for', $noticeTypeEnum)->where('status', 1)->first();
+        $planTemplates = $this->getPlanTemplates();
+        $planTemplate = $planTemplates->where('type', $planTemplateTypeEnum);
+        if (!empty($this->operated_through)) {
+            $planTemplate = $planTemplate->where('template_for', $this->operated_through);
+        }
+        $planTemplate = $planTemplate->first();
 
-        if ($mapTemplate) {
-            return $this->getData($mapTemplate->data);
+        if ($planTemplate) {
+            return $this->getData($planTemplate->data);
         }
 
         return '';
@@ -152,188 +158,154 @@ trait PlanTemplateTrait
         $replace = [];
 
         $replace = array_merge(
-            $this->getMapApplyReplacement(),
-            $replace,
-            $this->getLandDetailReplacement(),
-            $this->getLandOwnerReplacement(),
-            $this->getHouseOwnerReplacement(),
-            $this->getFourFortsReplacement(),
-            $this->getApplicantDetailReplacement(),
-            $this->getCriteriaDetailsReplacement(),
-            $this->getBuildingDetailsReplacement(),
-            $this->getDesignerDetailsReplacement(),
-            $this->getSupervisorDetailsReplacement(),
-            $this->getContractorDetailsReplacement()
+            $this->getProjectReplacement(),
+            $this->getProjectCostDetailReplacement(),
+            $replace
         );
 
         return Str::replace(array_keys($replace), $replace, $data);
     }
 
-    private function getMapApplyReplacement(): array
+    public function getProjectReplacement(): array
     {
         return [
+            '[@project_name]' => $this->project_name ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
-            '[@registration_date]' => $this->registration_date ?? '',
-            '[@construction_type]' => $this->construction_type?->label() ?? '',
-            '[@usage]' => $this->usage?->label() ?? '',
-            '[@building_category]' => $this->building_category?->label() ?? '',
-            '[@structureType]' => $this->structureType->title ?? '',
-            '[@current_storey]' => $this->current_storey ?? '',
-            '[@future_storey]' => $this->future_storey ?? '',
-            '[@area_of_plinth]' => $this->area_of_plinth ?? '',
-            '[@length]' => $this->length ?? '',
-            '[@breadth]' => $this->breadth ?? '',
-            '[@height]' => $this->height ?? '',
+            '[@plan_area]' => $this->planArea->area_name ?? '',
+            '[@project_status]' => $this->project_status?->label() ?? '',
+            '[@project_start_date]' => $this->project_start_date ?? '',
+            '[@project_completion_date]' => $this->project_completion_date ?? '',
+            '[@plan_level]' => $this->planLevel->level_name ?? '',
+            '[@ward_no]' => $this->ward_no ?? '',
+            '[@budget_source]' => $this->budgetSource->source_name ?? '',
+            '[@budget_head]' => $this->budgetHead->title ?? '',
+            '[@allocated_amount]' => $this->allocated_amount ?? '',
+            '[@project_venue]' => $this->project_venue ?? '',
+            '[@purpose]' => $this->purpose ?? '',
+            '[@operated_through]' => $this->operated_through ?? '',
+            '[@extended_date]' => $this->extended_date ?? '',
+            '[@progress_spent_amount]' => $this->progress_spent_amount ?? '',
+            '[@physical_progress_target]' => $this->physical_progress_target ?? '',
+            '[@physical_progress_completed]' => $this->physical_progress_completed ?? '',
+            '[@physical_progress_unit]' => $this->physical_progress_unit ?? '',
         ];
     }
 
-    private function getLandDetailReplacement(): array
+    public function getProjectCostDetailReplacement(): array
     {
         return [
-            '[@landDetail.land_use_area]' => $this->landDetail->land_use_area ?? '',
-            '[@landDetail.ward_no]' => $this->landDetail->ward_no ?? '',
-            '[@landDetail.former_ward_no]' => $this->landDetail->former_ward_no ?? '',
-            '[@landDetail.tole]' => $this->landDetail->tole ?? '',
-            '[@landDetail.street_code_no]' => $this->landDetail->street_code_no ?? '',
-            '[@landDetail.plot_no]' => $this->landDetail->plot_no ?? '',
-            '[@landDetail.area]' => $this->landDetail->area ?? '',
-            '[@landDetail.percentage_of_area_covered_by_building]' => $this->landDetail->percentage_of_area_covered_by_building ?? '',
-        ];
+            '[@projectCostDetail.estimated_total_cost]' => $this->projectCostDetail->estimated_total_cost ?? '',
+            '[@projectCostDetail.federal_invest]' => $this->projectCostDetail->federal_invest ?? '',
+            '[@projectCostDetail.province_invest]' => $this->projectCostDetail->province_invest ?? '',
+            '[@projectCostDetail.local_level_invest]' => $this->projectCostDetail->local_level_invest ?? '',
+            '[@projectCostDetail.consumer_committee_invest]' => $this->projectCostDetail->consumer_committee_invest ?? '',
+            '[@projectCostDetail.ngo_invest]' => $this->projectCostDetail->ngo_invest ?? '',
+            '[@projectCostDetail.foreign_donor_invest]' => $this->projectCostDetail->foreign_donor_invest ?? '',
+            '[@projectCostDetail.others_invest]' => $this->projectCostDetail->others_invest ?? '',
+            '[@projectCostDetail.estimated_cost_excluding_vat]' => $this->projectCostDetail->estimated_cost_excluding_vat ?? '',
+            '[@projectCostDetail.benefited_organization]' => $this->projectCostDetail->benefited_organization??'',
+            '[@projectCostDetail.others_benefited]' => $this->projectCostDetail->others_benefited ?? '',
+         ];
     }
+//
+//    private function getMapApplyReplacement(): array
+//    {
+//        return [
+//            '[@registration_no]' => $this->registration_no ?? '',
+//            '[@registration_date]' => $this->registration_date ?? '',
+//            '[@construction_type]' => $this->construction_type?->label() ?? '',
+//            '[@usage]' => $this->usage?->label() ?? '',
+//            '[@building_category]' => $this->building_category?->label() ?? '',
+//            '[@structureType]' => $this->structureType->title ?? '',
+//            '[@current_storey]' => $this->current_storey ?? '',
+//            '[@future_storey]' => $this->future_storey ?? '',
+//            '[@area_of_plinth]' => $this->area_of_plinth ?? '',
+//            '[@length]' => $this->length ?? '',
+//            '[@breadth]' => $this->breadth ?? '',
+//            '[@height]' => $this->height ?? '',
+//        ];
+//    }
+//
+//    private function getLandDetailReplacement(): array
+//    {
+//        return [
+//            '[@landDetail.land_use_area]' => $this->landDetail->land_use_area ?? '',
+//            '[@landDetail.ward_no]' => $this->landDetail->ward_no ?? '',
+//            '[@landDetail.former_ward_no]' => $this->landDetail->former_ward_no ?? '',
+//            '[@landDetail.tole]' => $this->landDetail->tole ?? '',
+//            '[@landDetail.street_code_no]' => $this->landDetail->street_code_no ?? '',
+//            '[@landDetail.plot_no]' => $this->landDetail->plot_no ?? '',
+//            '[@landDetail.area]' => $this->landDetail->area ?? '',
+//            '[@landDetail.percentage_of_area_covered_by_building]' => $this->landDetail->percentage_of_area_covered_by_building ?? '',
+//        ];
+//    }
+//
+//    private function getLandOwnerReplacement(): array
+//    {
+//        return [
+//            '[@landOwner.land_owner_type]' => $this->landOwner->land_owner_type->label() ?? '',
+//            '[@landOwner.name]' => $this->landOwner->name ?? '',
+//            '[@landOwner.phone]' => $this->landOwner->phone ?? '',
+//            '[@landOwner.father_name]' => $this->landOwner->father_name ?? '',
+//            '[@landOwner.grandfather_name]' => $this->landOwner->grandfather_name ?? '',
+//            '[@landOwner.citizenship_issue_district]' => $this->landOwner->citizenshipIssueDistrict->district ?? '',
+//            '[@landOwner.citizenship_no]' => $this->landOwner->citizenship_no ?? '',
+//            '[@landOwner.citizenship_issue_date]' => $this->landOwner->citizenship_issue_date ?? '',
+//            '[@landOwner.address]' => $this->landOwner->address ?? '',
+//            '[@landOwner.local_body]' => $this->landOwner->local_body ?? '',
+//            '[@landOwner.ward_no]' => $this->landOwner->ward_no ?? '',
+//        ];
+//    }
+//
+//    private function getHouseOwnerReplacement(): array
+//    {
+//        return [
+//            '[@houseOwner.name]' => $this->houseOwner->name ?? '',
+//            '[@houseOwner.phone]' => $this->houseOwner->phone ?? '',
+//            '[@houseOwner.father_name]' => $this->houseOwner->father_name ?? '',
+//            '[@houseOwner.grandfather_name]' => $this->houseOwner->grandfather_name ?? '',
+//            '[@houseOwner.citizenship_issue_district]' => $this->houseOwner->citizenshipIssueDistrict->district ?? '',
+//            '[@houseOwner.citizenship_no]' => $this->houseOwner->citizenship_no ?? '',
+//            '[@houseOwner.citizenship_issue_date]' => $this->houseOwner->citizenship_issue_date ?? '',
+//            '[@houseOwner.address]' => $this->houseOwner->address ?? '',
+//            '[@houseOwner.local_body]' => $this->houseOwner->local_body ?? '',
+//            '[@houseOwner.ward_no]' => $this->houseOwner->ward_no ?? '',
+//        ];
+//    }
+//
+//    private function getFourFortsReplacement(): array
+//    {
+//        return [
+//            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
+//                'fourForts' => $this->fourForts,
+//            ]),
+//        ];
+//    }
 
-    private function getLandOwnerReplacement(): array
-    {
-        return [
-            '[@landOwner.land_owner_type]' => $this->landOwner->land_owner_type->label() ?? '',
-            '[@landOwner.name]' => $this->landOwner->name ?? '',
-            '[@landOwner.phone]' => $this->landOwner->phone ?? '',
-            '[@landOwner.father_name]' => $this->landOwner->father_name ?? '',
-            '[@landOwner.grandfather_name]' => $this->landOwner->grandfather_name ?? '',
-            '[@landOwner.citizenship_issue_district]' => $this->landOwner->citizenshipIssueDistrict->district ?? '',
-            '[@landOwner.citizenship_no]' => $this->landOwner->citizenship_no ?? '',
-            '[@landOwner.citizenship_issue_date]' => $this->landOwner->citizenship_issue_date ?? '',
-            '[@landOwner.address]' => $this->landOwner->address ?? '',
-            '[@landOwner.local_body]' => $this->landOwner->local_body ?? '',
-            '[@landOwner.ward_no]' => $this->landOwner->ward_no ?? '',
-        ];
-    }
-
-    private function getHouseOwnerReplacement(): array
-    {
-        return [
-            '[@houseOwner.name]' => $this->houseOwner->name ?? '',
-            '[@houseOwner.phone]' => $this->houseOwner->phone ?? '',
-            '[@houseOwner.father_name]' => $this->houseOwner->father_name ?? '',
-            '[@houseOwner.grandfather_name]' => $this->houseOwner->grandfather_name ?? '',
-            '[@houseOwner.citizenship_issue_district]' => $this->houseOwner->citizenshipIssueDistrict->district ?? '',
-            '[@houseOwner.citizenship_no]' => $this->houseOwner->citizenship_no ?? '',
-            '[@houseOwner.citizenship_issue_date]' => $this->houseOwner->citizenship_issue_date ?? '',
-            '[@houseOwner.address]' => $this->houseOwner->address ?? '',
-            '[@houseOwner.local_body]' => $this->houseOwner->local_body ?? '',
-            '[@houseOwner.ward_no]' => $this->houseOwner->ward_no ?? '',
-        ];
-    }
-
-    private function getFourFortsReplacement(): array
-    {
-        return [
-            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
-                'fourForts' => $this->fourForts,
-            ]),
-        ];
-    }
-
-    private function getDesignerDetailsReplacement(): array
-    {
-        $designerDetail = $this->designerDetails->where('post', PostsEnum::DESIGNER)->first();
-
-        return [
-            '[@designerDetail.name]' => $designerDetail->name ?? '',
-            '[@designerDetail.father_name]' => $designerDetail->father_name ?? '',
-            '[@designerDetail.phone]' => $designerDetail->name ?? '',
-            '[@designerDetail.address]' => $designerDetail->address ?? '',
-            '[@designerDetail.local_body]' => $designerDetail->local_body ?? '',
-            '[@designerDetail.ward_no]' => $designerDetail->ward_no ?? '',
-            '[@designerDetail.nec_council_no]' => $designerDetail->nec_council_no ?? '',
-            '[@designerDetail.local_body_registration_no]' => $designerDetail->local_body_registration_no ?? '',
-            '[@designerDetail.consulting_firm_name]' => $designerDetail->consulting_firm_name ?? '',
-        ];
-    }
-
-    private function getSupervisorDetailsReplacement(): array
-    {
-        $supervisorDetail = $this->designerDetails->where('post', PostsEnum::SUPERVISOR)->first();
-
-        return [
-            '[@supervisorDetail.name]' => $supervisorDetail->name ?? '',
-            '[@supervisorDetail.father_name]' => $supervisorDetail->father_name ?? '',
-            '[@supervisorDetail.phone]' => $supervisorDetail->name ?? '',
-            '[@supervisorDetail.address]' => $supervisorDetail->address ?? '',
-            '[@supervisorDetail.local_body]' => $supervisorDetail->local_body ?? '',
-            '[@supervisorDetail.ward_no]' => $supervisorDetail->ward_no ?? '',
-            '[@supervisorDetail.nec_council_no]' => $supervisorDetail->nec_council_no ?? '',
-            '[@supervisorDetail.local_body_registration_no]' => $supervisorDetail->local_body_registration_no ?? '',
-            '[@supervisorDetail.consulting_firm_name]' => $supervisorDetail->consulting_firm_name ?? '',
-        ];
-    }
-
-    private function getContractorDetailsReplacement(): array
-    {
-        $contractorDetail = $this->designerDetails->where('post', PostsEnum::CONTRACTOR)->first();
-
-        return [
-            '[@contractorDetail.name]' => $contractorDetail->name ?? '',
-            '[@contractorDetail.father_name]' => $contractorDetail->father_name ?? '',
-            '[@contractorDetail.phone]' => $contractorDetail->name ?? '',
-            '[@contractorDetail.address]' => $contractorDetail->address ?? '',
-            '[@contractorDetail.local_body]' => $contractorDetail->local_body ?? '',
-            '[@contractorDetail.ward_no]' => $contractorDetail->ward_no ?? '',
-            '[@contractorDetail.nec_council_no]' => $contractorDetail->nec_council_no ?? '',
-            '[@contractorDetail.local_body_registration_no]' => $contractorDetail->local_body_registration_no ?? '',
-            '[@contractorDetail.consulting_firm_name]' => $contractorDetail->consulting_firm_name ?? '',
-        ];
-    }
-
-    private function getApplicantDetailReplacement(): array
-    {
-        return [
-            '[@applicantDetail.applicant_type]' => $this->applicantDetail->applicant_type->label() ?? '',
-            '[@applicantDetail.relation_with_owner]' => $this->applicantDetail->relation_with_owner->label() ?? '',
-            '[@applicantDetail.name]' => $this->applicantDetail->name ?? '',
-            '[@applicantDetail.phone]' => $this->applicantDetail->phone ?? '',
-            '[@applicantDetail.father_name]' => $this->applicantDetail->father_name ?? '',
-            '[@applicantDetail.citizenship_issue_district]' => $this->applicantDetail->citizenshipIssueDistrict->district ?? '',
-            '[@applicantDetail.citizenship_no]' => $this->applicantDetail->citizenship_no ?? '',
-            '[@applicantDetail.citizenship_issue_date]' => $this->applicantDetail->citizenship_issue_date ?? '',
-            '[@applicantDetail.signature_url]' => $this->applicantDetail->signature_url ?? '',
-        ];
-    }
-
-    private function getCriteriaDetailsReplacement(): array
-    {
-        return [
-            '[@criteriaDetails]' => (string)View::make('emap::inc.criteria_details', [
-                'criteriaDetails' => $this->criteriaDetails,
-            ]),
-        ];
-    }
-
-    private function getBuildingDetailsReplacement(): array
-    {
-        return [
-            '[@buildingDetails]' => (string)View::make('emap::inc.building_details', [
-                'buildingDetails' => $this->buildingDetails,
-            ]),
-        ];
-    }
+//    private function getDesignerDetailsReplacement(): array
+//    {
+//        $designerDetail = $this->designerDetails->where('post', PostsEnum::DESIGNER)->first();
+//
+//        return [
+//            '[@designerDetail.name]' => $designerDetail->name ?? '',
+//            '[@designerDetail.father_name]' => $designerDetail->father_name ?? '',
+//            '[@designerDetail.phone]' => $designerDetail->name ?? '',
+//            '[@designerDetail.address]' => $designerDetail->address ?? '',
+//            '[@designerDetail.local_body]' => $designerDetail->local_body ?? '',
+//            '[@designerDetail.ward_no]' => $designerDetail->ward_no ?? '',
+//            '[@designerDetail.nec_council_no]' => $designerDetail->nec_council_no ?? '',
+//            '[@designerDetail.local_body_registration_no]' => $designerDetail->local_body_registration_no ?? '',
+//            '[@designerDetail.consulting_firm_name]' => $designerDetail->consulting_firm_name ?? '',
+//        ];
+//    }
 
     /**
      * @return mixed
      */
-    public function getEmapTemplates(): mixed
+    public function getPlanTemplates(): mixed
     {
-        return Cache::rememberForever('eMapTemplates', function () {
-            return EMapTemplate::all();
+        return Cache::rememberForever('plan_templates', function () {
+            return PlanTemplate::all();
         });
     }
 }
