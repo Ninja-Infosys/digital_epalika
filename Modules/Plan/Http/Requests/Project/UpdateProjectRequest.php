@@ -20,6 +20,8 @@ class UpdateProjectRequest extends FormRequest
         return [
             'registration_no' => ['required', Rule::unique('projects', 'registration_no')->withoutTrashed()->ignore($this->project)],
             'project_name' => ['required'],
+            'grant_category_id' => ['required', Rule::exists('grant_categories', 'id')->withoutTrashed()],
+            'expense_head_id' => ['required', Rule::exists('expense_heads', 'id')->withoutTrashed()],
             'plan_area_id' => ['required', Rule::exists('plan_areas', 'id')->withoutTrashed()],
             'project_status' => ['required', new Enum(ProjectStatusEnum::class)],
             'project_start_date' => ['nullable'],

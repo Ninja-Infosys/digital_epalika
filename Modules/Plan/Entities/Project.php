@@ -150,11 +150,6 @@ class Project extends Model
         return $this->belongsTo(BudgetHead::class);
     }
 
-    public function projectCostDetail(): HasOne
-    {
-        return $this->hasOne(ProjectCostDetail::class);
-    }
-
     public function projectGrantDetails(): HasMany
     {
         return $this->hasMany(ProjectGrantDetail::class);

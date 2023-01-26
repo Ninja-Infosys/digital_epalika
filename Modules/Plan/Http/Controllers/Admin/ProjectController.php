@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Entities\BudgetSource;
+use Modules\Plan\Entities\ExpenseHead;
+use Modules\Plan\Entities\GrantCategory;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
@@ -43,8 +45,10 @@ class ProjectController extends Controller
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
         $budgetSources = BudgetSource::all();
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+        $grantCategories = GrantCategory::all();
+        $expenseHeads = ExpenseHead::all();
 
-        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads'));
+        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads'));
     }
 
     public function store(StoreProjectRequest $request)
@@ -63,7 +67,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectCostDetail', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions');
+        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions');
 
         return view('plan::admin.project.show', compact('project'));
     }
@@ -76,8 +80,10 @@ class ProjectController extends Controller
         $planLevels = PlanLevel::with('planLevels')->whereNull('plan_level_id')->get();
         $budgetSources = BudgetSource::all();
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+        $grantCategories = GrantCategory::all();
+        $expenseHeads = ExpenseHead::all();
 
-        return view('plan::admin.project.edit', compact('project', 'planAreas', 'planLevels', 'budgetSources', 'budgetHeads'));
+        return view('plan::admin.project.edit', compact('project', 'planAreas', 'planLevels', 'budgetSources', 'budgetHeads','grantCategories','expenseHeads'));
     }
 
     public function update(UpdateProjectRequest $request, Project $project)

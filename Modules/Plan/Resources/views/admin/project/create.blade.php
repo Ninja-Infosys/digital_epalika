@@ -62,6 +62,44 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
+                                <label for="grant_category_id" class="form-label">अनुदान किसिम *</label>
+                                <select
+                                    name="grant_category_id"
+                                    class="form-control @error('grant_category_id') is-invalid @enderror"
+                                    id="grant_category_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($grantCategories as $grantCategory)
+                                        <option
+                                            {{old('grant_category_id')==$grantCategory->id ? 'selected' : ''}}
+                                            value="{{$grantCategory->id}}">
+                                            {{$grantCategory->title}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('grant_category_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="expense_head_id" class="form-label">खर्चको किसिम *</label>
+                                <select
+                                    name="expense_head_id"
+                                    class="form-control @error('expense_head_id') is-invalid @enderror"
+                                    id="expense_head_id" data-toggle="select2" data-width="100%">
+                                    <option value="">--- छान्नुहोस् ---</option>
+                                    @foreach($expenseHeads as $expenseHead)
+                                        <option
+                                            {{old('expense_head_id')==$expenseHead->id ? 'selected' : ''}}
+                                            value="{{$expenseHead->id}}">
+                                            {{$expenseHead->title}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('expense_head_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
                                 <label for="plan_area_id" class="form-label">योजनाको क्षेत्र *</label>
                                 <select
                                     name="plan_area_id"

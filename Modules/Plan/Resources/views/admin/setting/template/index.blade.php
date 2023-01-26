@@ -40,6 +40,7 @@
                                 <th>क्र.स</th>
                                 <th>शिर्षक </th>
                                 <th>बर्ग</th>
+                                <th>उपभोक्ता समिति/बोलपत्र</th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -49,6 +50,7 @@
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$planTemplate->title}}</td>
                                     <td>{{$planTemplate->type?->label()}}</td>
+                                    <td>{{$planTemplate->template_for?->label()??'उपभोक्ता समिति बोलपत्र (दुबै)'}}</td>
                                     <td>
                                         @can('planTemplate_edit')
                                             <a data-bs-type="edit" href="{{route('admin.plan.planTemplate.edit',$planTemplate)}}"

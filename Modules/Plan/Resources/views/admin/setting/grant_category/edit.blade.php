@@ -15,7 +15,7 @@
                                 अनुदान प्रकार
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">अनुदान प्रकार थप्नुहोस्</li>
+                        <li class="breadcrumb-item active">अनुदान प्रकार सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
                 <h4 class="page-title">अनुदान प्रकार</h4>
@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदान प्रकार थप्नुहोस्</h4>
+                        <h4 class="header-title">अनुदान प्रकार सम्पादन गर्नुहोस्</h4>
                         <a href="{{ route('admin.plan.grantCategory.index') }}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> अनुदान प्रकार सूची
                         </a>
@@ -39,7 +39,7 @@
                         @csrf
                         @method('put')
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input type="text" name="title" value="{{ old('title',$grantCategory->title) }}"
                                     class="form-control @error('title') is-invalid @enderror" id="title"

@@ -44,23 +44,29 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($grantCategorys as $key=>$grantCategory)
+                            @forelse($grantCategories as $key=>$grantCategory)
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <th>{{$grantCategory->title}}</th>
+                                    <td>{{$grantCategory->title}}</td>
                                     <td>
-                                        <a data-bs-type="edit" href="{{route('admin.plan.grantCategory.edit',$grantCategory)}}"
-                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                            <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                        </a>
-                                        <form action="{{route('admin.plan.grantCategory.destroy',$grantCategory)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                <i class="fa fa-trash"></i> मेटाउनु होस्
-                                            </button>
-                                        </form>
+                                        @can('grantCategory_edit')
+                                            <a data-bs-type="edit"
+                                               href="{{route('admin.plan.grantCategory.edit',$grantCategory)}}"
+                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                            </a>
+                                        @endcan
+                                        @can('grantCategory_delete')
+                                            <form action="{{route('admin.plan.grantCategory.destroy',$grantCategory)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @empty

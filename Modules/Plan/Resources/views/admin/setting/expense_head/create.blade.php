@@ -38,7 +38,7 @@
                     <form action="{{ route('admin.plan.expenseHead.store') }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input type="text" name="title" value="{{ old('title') }}"
                                     class="form-control @error('title') is-invalid @enderror" id="title"
