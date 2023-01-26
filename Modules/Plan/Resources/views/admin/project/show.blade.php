@@ -37,7 +37,7 @@
                         </h4>
                         <a href="javascript:void(0)"
                            route_action_url="{{route('admin.plan.project.print',$project)}}"
-                           class="btn btn-xs btn-outline-warning printProjectDetail">
+                           class="btn btn-xs btn-outline-primary printProjectDetail">
                             <i class="fa fa-print"></i>  प्रिन्ट गर्नुहोस
 
                         </a>

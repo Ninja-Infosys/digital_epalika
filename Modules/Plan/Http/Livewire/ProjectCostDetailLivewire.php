@@ -107,7 +107,7 @@ class ProjectCostDetailLivewire extends Component
 
     private function assignProjectData($project_id)
     {
-        $project = Project::with('projectCostDetail', 'projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
+        $project = Project::with('projectGrantDetails', 'benefitedMemberDetails')->find($project_id);
 
         $this->project = $project;
 

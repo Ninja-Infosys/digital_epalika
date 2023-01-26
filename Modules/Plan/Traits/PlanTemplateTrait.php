@@ -20,6 +20,8 @@ trait PlanTemplateTrait
             'data' => [
                 'योजना/कार्यक्रमको नाम' => '[@project_name]',
                 'दर्ता नं.' => '[@registration_no]',
+                'खर्चको किसिम' => '[@expense_head]',
+                'अनुदान किसिम' => '[@grant_category]',
                 'योजनाको क्षेत्र' => '[@plan_area]',
                 'योजनाको अबस्था' => '[@project_status]',
                 'आयोजना सुरु हुने मिति' => '[@project_start_date]',
@@ -42,18 +44,20 @@ trait PlanTemplateTrait
         [
             'title' => 'आयोजनाको लागत सम्वन्धि विवरण',
             'data' => [
-                'अनुमानित लागत' => '[@projectCostDetail.estimated_total_cost]',
-                'सघंबाट' => '[@projectCostDetail.federal_invest]',
-                'प्रदेशबाट' => '[@projectCostDetail.province_invest]',
-                'स्थानीय तह/कार्यालय बाट' => '[@projectCostDetail.local_level_invest]',
-                'जन श्रमदान/उपभोक्ता समिति बाट' => '[@projectCostDetail.consumer_committee_invest]',
-                'गैरसरकारी सघंसंस्थाबाट' => '[@projectCostDetail.ngo_invest]',
-                'विदेशी दात्री सघंसंस्थाबाट' => '[@projectCostDetail.foreign_donor_invest]',
-                'अन्य लगानी' => '[@projectCostDetail.others_invest]',
-                'लागत अनुमान (भ्याट, ओभर हेड, कन्टिन्जेन्सी बाहेक)' => '[@projectCostDetail.estimated_cost_excluding_vat]',
+                'आयोजनाको अनुमान लागत रु' => '[@total_cost_estimate_amount]',
+                'कार्यालयबाट स्वीकृत रकम ' => '[@allocated_amount]',
+                'अन्य निकायबाट प्राप्त रकम' => '[@agencies_grants]',
+                'अन्य साझेदारी रकम' => '[@share_amount]',
+                'समितिबाट नगद साझेदारी रकम' => '[@committee_share_amount]',
+                'कन्टिजेन्सी सहितको कुल रकम' => '[@total_amount_for_contingency]',
+                'कन्टिजेन्सी कट्टी रकम' => '[@contingency_amount]',
+                'कन्टिजेन्सी %' => '[@contingency_percent]',
+                'अन्य करकट्टी रकम' => '[@other_taxes]',
+                'योजना सम्झौता रकम' => '[@project_contract_amount]',
+                'समितिबाट जनश्रमदान रकम' => '[@labor_amount]',
                 'बस्तुगत अनुदान सम्बन्धी विवरण' => '[@projectGrantDetails]',
-                'संगठित संस्था' => '[@projectCostDetail.benefited_organization]',
-                'अन्य' => '[@projectCostDetail.others_benefited]',
+                'लाभान्वित संस्था' => '[@benefited_organization]',
+                'अन्य लाभान्वित' => '[@others_benefited]',
                 'योजनाबाट प्रत्यक्ष रुपमा लाभान्वित हुने घरधुरी तथा जनसंख्याको विवरण' => '[@benefitedMemberDetails]',
             ],
         ],
@@ -71,6 +75,7 @@ trait PlanTemplateTrait
                 'सदस्य संख्या' => '[@consumerCommittee.member_number]',
                 'आयोजना संचालन सम्बन्धी अनुभव' => '[@consumerCommittee.experience_in_project]',
                 'उपभोक्ता समिति सदस्य विवरण' => '[@consumerCommittee.consumerCommitteeOfficials]',
+                'अध्यक्षको नाम' => '[@consumerCommittee.chairman]',
             ],
         ],
         [
@@ -115,17 +120,17 @@ trait PlanTemplateTrait
         [
             'title' => 'आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था',
             'data' => [
-                'जिम्मा लिने समिती संस्थाको नाम' => '[@projectMaintenanceArrangement.office_name',
-                'जनश्रमदान' => '[@projectMaintenanceArrangement.public_service',
-                'सेवा शुल्क' => '[@projectMaintenanceArrangement.service_fee',
-                'दस्तुर, चन्दाबाट' => '[@projectMaintenanceArrangement.from_fee_donation',
-                'अन्य केहि भए' => '[@projectMaintenanceArrangement.others'
+                'जिम्मा लिने समिती संस्थाको नाम' => '[@projectMaintenanceArrangement.office_name]',
+                'जनश्रमदान' => '[@projectMaintenanceArrangement.public_service]',
+                'सेवा शुल्क' => '[@projectMaintenanceArrangement.service_fee]',
+                'दस्तुर, चन्दाबाट' => '[@projectMaintenanceArrangement.from_fee_donation]',
+                'अन्य केहि भए' => '[@projectMaintenanceArrangement.others]'
             ],
         ],
         [
-            'title'=>'सम्झौताको शर्तहरु',
-            'data'=>[
-                'डाटा'=>'[@projectAgreementTerm.data]'
+            'title' => 'सम्झौताको शर्तहरु',
+            'data' => [
+                'डाटा' => '[@projectAgreementTerm.data]'
             ],
         ]
     ];
@@ -169,7 +174,6 @@ trait PlanTemplateTrait
 
         $replace = array_merge(
             $this->getProjectReplacement(),
-            $this->getProjectCostDetailReplacement(),
             $this->getConsumerCommitteeReplacement(),
             $this->getProjectBidDetailReplacement(),
             $this->getProjectMaintenanceArrangementReplacement(),
@@ -185,6 +189,8 @@ trait PlanTemplateTrait
         return [
             '[@project_name]' => $this->project_name ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
+            '[@expense_head]' => $this->expenseHead->title ?? '',
+            '[@grant_category]' => $this->grantCategory->title ?? '',
             '[@plan_area]' => $this->planArea->area_name ?? '',
             '[@project_status]' => $this->project_status?->label() ?? '',
             '[@project_start_date]' => $this->project_start_date ?? '',
@@ -202,23 +208,21 @@ trait PlanTemplateTrait
             '[@physical_progress_target]' => $this->physical_progress_target ?? '',
             '[@physical_progress_completed]' => $this->physical_progress_completed ?? '',
             '[@physical_progress_unit]' => $this->physical_progress_unit ?? '',
-        ];
-    }
+            '[@total_cost_estimate_amount]' => $this->total_cost_estimate_amount ?? 0,
+            '[@agencies_grants]' => $this->agencies_grants ?? 0,
+            '[@share_amount]' => $this->share_amount ?? 0,
+            '[@committee_share_amount]' => $this->committee_share_amount ?? 0,
+            '[@total_amount_for_contingency]' => $this->total_amount_for_contingency ?? 0,
+            '[@contingency_amount]' => $this->contingency_amount ?? 0,
+            '[@contingency_percent]' => $this->contingency_percent ?? 0,
+            '[@other_taxes]' => $this->other_taxes ?? 0,
+            '[@project_contract_amount]' => $this->project_contract_amount ?? 0,
+            '[@labor_amount]' => $this->labor_amount ?? 0,
+            '[@projectGrantDetails]' => $this->projectGrantDetails ?? 0,
+            '[@benefited_organization]' => $this->benefited_organization ?? 0,
+            '[@others_benefited]' => $this->others_benefited ?? 0,
+            '[@benefitedMemberDetails]' => $this->benefitedMemberDetails ?? 0,
 
-    public function getProjectCostDetailReplacement(): array
-    {
-        return [
-            '[@projectCostDetail.estimated_total_cost]' => $this->projectCostDetail->estimated_total_cost ?? '',
-            '[@projectCostDetail.federal_invest]' => $this->projectCostDetail->federal_invest ?? '',
-            '[@projectCostDetail.province_invest]' => $this->projectCostDetail->province_invest ?? '',
-            '[@projectCostDetail.local_level_invest]' => $this->projectCostDetail->local_level_invest ?? '',
-            '[@projectCostDetail.consumer_committee_invest]' => $this->projectCostDetail->consumer_committee_invest ?? '',
-            '[@projectCostDetail.ngo_invest]' => $this->projectCostDetail->ngo_invest ?? '',
-            '[@projectCostDetail.foreign_donor_invest]' => $this->projectCostDetail->foreign_donor_invest ?? '',
-            '[@projectCostDetail.others_invest]' => $this->projectCostDetail->others_invest ?? '',
-            '[@projectCostDetail.estimated_cost_excluding_vat]' => $this->projectCostDetail->estimated_cost_excluding_vat ?? '',
-            '[@projectCostDetail.benefited_organization]' => $this->projectCostDetail->benefited_organization ?? '',
-            '[@projectCostDetail.others_benefited]' => $this->projectCostDetail->others_benefited ?? '',
         ];
     }
 
@@ -235,7 +239,11 @@ trait PlanTemplateTrait
             '[@consumerCommittee.beneficiary_no]' => $this->consumerCommittee->beneficiary_no ?? '',
             '[@consumerCommittee.member_number]' => $this->consumerCommittee->member_number ?? '',
             '[@consumerCommittee.experience_in_project]' => $this->consumerCommittee->experience_in_project ?? '',
-            '[@consumerCommittee.consumerCommitteeOfficials]' => $this->consumerCommittee->consumerCommitteeOfficials ?? '',
+            '[@consumerCommittee.chairman]'=>$this->consumerCommittee?->consumerCommitteeOfficials->where('post',\Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)?->first()->name??'',
+            '[@consumerCommittee.consumerCommitteeOfficials]' => (String)View::make('plan::admin.template_table.consumerCommitteeOfficials',[
+                'consumerCommitteeMembers'=>$this->consumerCommittee->consumerCommitteeOfficials ?? collect()
+            ]),
+
         ];
     }
 
@@ -290,6 +298,7 @@ trait PlanTemplateTrait
             '[@projectAgreementTerm.data]' => $this->projectAgreementTerm->data ?? '',
         ];
     }
+
     public function getPlanTemplates(): mixed
     {
         return Cache::rememberForever('plan_templates', function () {
