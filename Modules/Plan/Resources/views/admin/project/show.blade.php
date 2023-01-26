@@ -88,23 +88,58 @@
                         <h4 class="header-title fw-bold">२. आयोजनाको लागत सम्वन्धि विवरण</h4>
                     </div>
                     <div class="p-2">
-                        <h5>क) लागत अनुमान रु: {{$project->projectCostDetail->estimated_total_cost??''}}</h5>
-                        <h5>ख) लागत अनुमान (भ्याट, ओभर हेड, कन्टिन्जेन्सी
-                            बाहेक): {{$project->projectCostDetail->estimated_cost_excluding_vat??''}}</h5>
-                        <h5>ग) लागत व्यहोर्ने स्रोतहरु:
-                            <ul>
-                                <li>सघंबाट: {{$project->projectCostDetail->federal_invest??''}}</li>
-                                <li>प्रदेशबाट: {{$project->projectCostDetail->province_invest??''}}</li>
-                                <li>स्थानीय तह／कार्यालय
-                                    बाट: {{$project->projectCostDetail->local_level_invest??''}}</li>
-                                <li>जन श्रमदान／उपभोक्ता समिति
-                                    बाट: {{$project->projectCostDetail->consumer_committee_invest??''}}</li>
-                                <li>गैरसरकारी सघंसंस्थाबाट: {{$project->projectCostDetail->ngo_invest??''}}</li>
-                                <li>विदेशी दात्री
-                                    सघंसंस्थाबाट: {{$project->projectCostDetail->foreign_donor_invest??''}}</li>
-                                <li>अन्य: {{$project->projectCostDetail->others_invest??''}}</li>
-                            </ul>
-                        </h5>
+                        <h5>क) आयोजनाको अनुमान लागत रु: {{$project->total_cost_estimate_amount}}</h5>
+                        <h5 class="fw-bold">ख) लागत व्यहोर्ने स्रोतहरु:</h5>
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                            <tr>
+                                <th>विवरण</th>
+                                <th>रकम</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>कार्यालयबाट स्वीकृत रकम </td>
+                                <td>रू. {{$project->allocated_amount}}</td>
+                            </tr>
+                            <tr>
+                                <td>अन्य निकायबाट प्राप्त रकम</td>
+                                <td>रू. {{$project->agencies_grants}}</td>
+                            </tr>
+                            <tr>
+                                <td>अन्य साझेदारी रकम</td>
+                                <td>रू. {{$project->share_amount}}</td>
+                            </tr>
+                            <tr>
+                                <td>समितिबाट नगद साझेदारी रकम</td>
+                                <td>रू. {{$project->committee_share_amount}}</td>
+                            </tr>
+                            <tr>
+                                <td>कन्टिजेन्सी सहितको कुल रकम</td>
+                                <td>रू. {{$project->total_amount_for_contingency}}</td>
+                            </tr>
+                            <tr>
+                                <td>कन्टिजेन्सी कट्टी रकम</td>
+                                <td>रू. {{$project->contingency_amount}} ({{$project->contingency_percent}} %)</td>
+                            </tr>
+                            <tr>
+                                <td>अन्य करकट्टी रकम</td>
+                                <td>रू. {{$project->other_taxes}}</td>
+                            </tr>
+                            <tr>
+                                <td>योजना सम्झौता रकम</td>
+                                <td>रू. {{$project->project_contract_amount}}</td>
+                            </tr>
+                            <tr>
+                                <td>समितिबाट जनश्रमदान रकम</td>
+                                <td>रू. {{$project->labor_amount}}</td>
+                            </tr>
+                            <tr>
+                                <th>कुल लागत अनुमान रकम</th>
+                                <th>रू. {{$project->total_cost_estimate_amount}}</th>
+                            </tr>
+                            </tbody>
+                        </table>
                         <h5>घ) बस्तुगत अनुदानको विवरण: </h5>
                         <table class="table table-sm table-bordered">
                             <thead>

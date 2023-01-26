@@ -79,7 +79,32 @@ class Project extends Model
         'operated_through' => ProjectOperatedThroughEnum::class
     ];
 
+    protected $appends = [
+        'total_amount_for_contingency',
+        'contingency_percent',
+        'project_contract_amount',
+        'total_cost_estimate_amount'
+    ];
 
+    public function getTotalAmountForContingencyAttribute()
+    {
+        return $this->allocated_amount + $this->agencies_grants + $this->share_amount + $this->committee_share_amount;
+    }
+
+    public function getContingencyPercentAttribute(): float
+    {
+        return round($this->contingency_amount * 100 / $this->total_amount_for_contingency, 2);
+    }
+
+    public function getProjectContractAmountAttribute()
+    {
+        return $this->total_amount_for_contingency - $this->contingency_amount - $this->other_taxes;
+    }
+
+    public function getTotalCostEstimateAmountAttribute()
+    {
+        return $this->project_contract_amount + $this->labor_amount;
+    }
 
     protected function wardNo(): Attribute
     {
