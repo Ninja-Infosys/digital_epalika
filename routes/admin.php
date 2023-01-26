@@ -118,4 +118,5 @@ Route::get('activityLog', [ActivityLogController::class, 'index'])->name('activi
 //check pin
 
 Route::post('pin/checkPin', [PinController::class, 'checkPin'])->name('pin.check-pin');
+Route::post('ckeditor-file-upload', [PinController::class, 'fileUpload']);
 Route::resource('pin', PinController::class);

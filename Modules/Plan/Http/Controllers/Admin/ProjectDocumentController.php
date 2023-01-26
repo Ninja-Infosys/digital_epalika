@@ -3,6 +3,7 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectDocument;
@@ -37,6 +38,16 @@ class ProjectDocumentController extends Controller
 
         toast('कागजात सफलतापूर्वक थपियो', 'success');
         return redirect(route('admin.plan.project.projectDocument.index', $project));
+    }
+
+    public function show(Request $request, Project $project,ProjectDocument $projectDocument)
+    {
+        if($request->ajax())
+        {
+            return response()->json([
+                'data'=>$projectDocument
+            ]);
+        }
     }
 
     public function edit(Project $project, ProjectDocument $projectDocument)

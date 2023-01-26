@@ -159,7 +159,6 @@ class FrontendController extends Controller
             $q->where('otp', $request->input('otp'));
         }]);
 
-        info($checkedMapApply->otp->is_expired);
 
         return $checkedMapApply !== null && !$checkedMapApply->otp->is_expired;
     }

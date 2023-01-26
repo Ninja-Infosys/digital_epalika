@@ -79,6 +79,8 @@ class Project extends Model
         'operated_through' => ProjectOperatedThroughEnum::class
     ];
 
+
+
     protected function wardNo(): Attribute
     {
         return Attribute::make(
@@ -86,6 +88,7 @@ class Project extends Model
             set: fn($value) => implode(",", $value),
         );
     }
+
 
     public function fiscalYear(): BelongsTo
     {
