@@ -13,8 +13,6 @@ use Modules\Plan\Entities\GrantCategory;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
-use Modules\Plan\Entities\ProjectAgreementTerm;
-use Modules\Plan\Entities\ProjectDocument;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
 use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Http\Requests\Project\StoreProjectRequest;

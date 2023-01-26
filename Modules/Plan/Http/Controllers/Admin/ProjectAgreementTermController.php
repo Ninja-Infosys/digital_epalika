@@ -20,7 +20,7 @@ class ProjectAgreementTermController extends Controller
     {
         $project->load('projectAgreementTerm');
 
-        $agreementTermTemplate=(String)View::make('plan::admin.setting.template.agreement_term_template');
+        $agreementTermTemplate=(String)View::make('plan::admin.setting.template.agreement_term_template',compact('project'));
         $project->load('projectAgreementTerm');
 
         return view('plan::admin.project_agreement_term.create',compact('project','agreementTermTemplate'));
