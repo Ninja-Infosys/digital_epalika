@@ -113,11 +113,21 @@ trait PlanTemplateTrait
             ],
         ],
         [
-            'title' => 'मोविलाईजेशन पेश्की/रनिङ विल विवरण',
+            'title' => 'आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था',
             'data' => [
-                'विवरण' => '[@projectBidSubmissions]',
+                'जिम्मा लिने समिती संस्थाको नाम' => '[@projectMaintenanceArrangement.office_name',
+                'जनश्रमदान' => '[@projectMaintenanceArrangement.public_service',
+                'सेवा शुल्क' => '[@projectMaintenanceArrangement.service_fee',
+                'दस्तुर, चन्दाबाट' => '[@projectMaintenanceArrangement.from_fee_donation',
+                'अन्य केहि भए' => '[@projectMaintenanceArrangement.others'
             ],
         ],
+        [
+            'title'=>'सम्झौताको शर्तहरु',
+            'data'=>[
+                'डाटा'=>'[@projectAgreementTerm.data]'
+            ],
+        ]
     ];
 
     public function getTemplateDataAttribute(): Collection
@@ -160,6 +170,10 @@ trait PlanTemplateTrait
         $replace = array_merge(
             $this->getProjectReplacement(),
             $this->getProjectCostDetailReplacement(),
+            $this->getConsumerCommitteeReplacement(),
+            $this->getProjectBidDetailReplacement(),
+            $this->getProjectMaintenanceArrangementReplacement(),
+            $this->getProjectAgreementTermReplacement(),
             $replace
         );
 
@@ -176,13 +190,13 @@ trait PlanTemplateTrait
             '[@project_start_date]' => $this->project_start_date ?? '',
             '[@project_completion_date]' => $this->project_completion_date ?? '',
             '[@plan_level]' => $this->planLevel->level_name ?? '',
-            '[@ward_no]' => $this->ward_no ?? '',
+            '[@ward_no]' => implode(',', $this->ward_no ?? ''),
             '[@budget_source]' => $this->budgetSource->source_name ?? '',
             '[@budget_head]' => $this->budgetHead->title ?? '',
             '[@allocated_amount]' => $this->allocated_amount ?? '',
             '[@project_venue]' => $this->project_venue ?? '',
             '[@purpose]' => $this->purpose ?? '',
-            '[@operated_through]' => $this->operated_through ?? '',
+            '[@operated_through]' => $this->operated_through?->label() ?? '',
             '[@extended_date]' => $this->extended_date ?? '',
             '[@progress_spent_amount]' => $this->progress_spent_amount ?? '',
             '[@physical_progress_target]' => $this->physical_progress_target ?? '',
@@ -203,105 +217,79 @@ trait PlanTemplateTrait
             '[@projectCostDetail.foreign_donor_invest]' => $this->projectCostDetail->foreign_donor_invest ?? '',
             '[@projectCostDetail.others_invest]' => $this->projectCostDetail->others_invest ?? '',
             '[@projectCostDetail.estimated_cost_excluding_vat]' => $this->projectCostDetail->estimated_cost_excluding_vat ?? '',
-            '[@projectCostDetail.benefited_organization]' => $this->projectCostDetail->benefited_organization??'',
+            '[@projectCostDetail.benefited_organization]' => $this->projectCostDetail->benefited_organization ?? '',
             '[@projectCostDetail.others_benefited]' => $this->projectCostDetail->others_benefited ?? '',
-         ];
+        ];
     }
-//
-//    private function getMapApplyReplacement(): array
-//    {
-//        return [
-//            '[@registration_no]' => $this->registration_no ?? '',
-//            '[@registration_date]' => $this->registration_date ?? '',
-//            '[@construction_type]' => $this->construction_type?->label() ?? '',
-//            '[@usage]' => $this->usage?->label() ?? '',
-//            '[@building_category]' => $this->building_category?->label() ?? '',
-//            '[@structureType]' => $this->structureType->title ?? '',
-//            '[@current_storey]' => $this->current_storey ?? '',
-//            '[@future_storey]' => $this->future_storey ?? '',
-//            '[@area_of_plinth]' => $this->area_of_plinth ?? '',
-//            '[@length]' => $this->length ?? '',
-//            '[@breadth]' => $this->breadth ?? '',
-//            '[@height]' => $this->height ?? '',
-//        ];
-//    }
-//
-//    private function getLandDetailReplacement(): array
-//    {
-//        return [
-//            '[@landDetail.land_use_area]' => $this->landDetail->land_use_area ?? '',
-//            '[@landDetail.ward_no]' => $this->landDetail->ward_no ?? '',
-//            '[@landDetail.former_ward_no]' => $this->landDetail->former_ward_no ?? '',
-//            '[@landDetail.tole]' => $this->landDetail->tole ?? '',
-//            '[@landDetail.street_code_no]' => $this->landDetail->street_code_no ?? '',
-//            '[@landDetail.plot_no]' => $this->landDetail->plot_no ?? '',
-//            '[@landDetail.area]' => $this->landDetail->area ?? '',
-//            '[@landDetail.percentage_of_area_covered_by_building]' => $this->landDetail->percentage_of_area_covered_by_building ?? '',
-//        ];
-//    }
-//
-//    private function getLandOwnerReplacement(): array
-//    {
-//        return [
-//            '[@landOwner.land_owner_type]' => $this->landOwner->land_owner_type->label() ?? '',
-//            '[@landOwner.name]' => $this->landOwner->name ?? '',
-//            '[@landOwner.phone]' => $this->landOwner->phone ?? '',
-//            '[@landOwner.father_name]' => $this->landOwner->father_name ?? '',
-//            '[@landOwner.grandfather_name]' => $this->landOwner->grandfather_name ?? '',
-//            '[@landOwner.citizenship_issue_district]' => $this->landOwner->citizenshipIssueDistrict->district ?? '',
-//            '[@landOwner.citizenship_no]' => $this->landOwner->citizenship_no ?? '',
-//            '[@landOwner.citizenship_issue_date]' => $this->landOwner->citizenship_issue_date ?? '',
-//            '[@landOwner.address]' => $this->landOwner->address ?? '',
-//            '[@landOwner.local_body]' => $this->landOwner->local_body ?? '',
-//            '[@landOwner.ward_no]' => $this->landOwner->ward_no ?? '',
-//        ];
-//    }
-//
-//    private function getHouseOwnerReplacement(): array
-//    {
-//        return [
-//            '[@houseOwner.name]' => $this->houseOwner->name ?? '',
-//            '[@houseOwner.phone]' => $this->houseOwner->phone ?? '',
-//            '[@houseOwner.father_name]' => $this->houseOwner->father_name ?? '',
-//            '[@houseOwner.grandfather_name]' => $this->houseOwner->grandfather_name ?? '',
-//            '[@houseOwner.citizenship_issue_district]' => $this->houseOwner->citizenshipIssueDistrict->district ?? '',
-//            '[@houseOwner.citizenship_no]' => $this->houseOwner->citizenship_no ?? '',
-//            '[@houseOwner.citizenship_issue_date]' => $this->houseOwner->citizenship_issue_date ?? '',
-//            '[@houseOwner.address]' => $this->houseOwner->address ?? '',
-//            '[@houseOwner.local_body]' => $this->houseOwner->local_body ?? '',
-//            '[@houseOwner.ward_no]' => $this->houseOwner->ward_no ?? '',
-//        ];
-//    }
-//
-//    private function getFourFortsReplacement(): array
-//    {
-//        return [
-//            '[@fourForts]' => (string)View::make('emap::inc.four_forts_table', [
-//                'fourForts' => $this->fourForts,
-//            ]),
-//        ];
-//    }
 
-//    private function getDesignerDetailsReplacement(): array
-//    {
-//        $designerDetail = $this->designerDetails->where('post', PostsEnum::DESIGNER)->first();
-//
-//        return [
-//            '[@designerDetail.name]' => $designerDetail->name ?? '',
-//            '[@designerDetail.father_name]' => $designerDetail->father_name ?? '',
-//            '[@designerDetail.phone]' => $designerDetail->name ?? '',
-//            '[@designerDetail.address]' => $designerDetail->address ?? '',
-//            '[@designerDetail.local_body]' => $designerDetail->local_body ?? '',
-//            '[@designerDetail.ward_no]' => $designerDetail->ward_no ?? '',
-//            '[@designerDetail.nec_council_no]' => $designerDetail->nec_council_no ?? '',
-//            '[@designerDetail.local_body_registration_no]' => $designerDetail->local_body_registration_no ?? '',
-//            '[@designerDetail.consulting_firm_name]' => $designerDetail->consulting_firm_name ?? '',
-//        ];
-//    }
+    public function getConsumerCommitteeReplacement(): array
+    {
+        return [
+            '[@consumerCommittee.name]' => $this->consumerCommittee->name ?? '',
+            '[@consumerCommittee.address]' => $this->consumerCommittee->address ?? '',
+            '[@consumerCommittee.phone]' => $this->consumerCommittee->phone ?? '',
+            '[@consumerCommittee.formation_date]' => $this->consumerCommittee->formation_date ?? '',
+            '[@consumerCommittee.committee_registration_date]' => $this->consumerCommittee->committee_registration_date ?? '',
+            '[@consumerCommittee.meeting_date]' => $this->consumerCommittee->meeting_date ?? '',
+            '[@consumerCommittee.registration_no]' => $this->consumerCommittee->registration_no ?? '',
+            '[@consumerCommittee.beneficiary_no]' => $this->consumerCommittee->beneficiary_no ?? '',
+            '[@consumerCommittee.member_number]' => $this->consumerCommittee->member_number ?? '',
+            '[@consumerCommittee.experience_in_project]' => $this->consumerCommittee->experience_in_project ?? '',
+            '[@consumerCommittee.consumerCommitteeOfficials]' => $this->consumerCommittee->consumerCommitteeOfficials ?? '',
+        ];
+    }
 
-    /**
-     * @return mixed
-     */
+    public function getProjectBidDetailReplacement(): array
+    {
+        return [
+            '[@projectBidDetail.cost_estimation]' => $this->projectBidDetail->cost_estimation ?? '',
+            '[@projectBidDetail.notice_published_date]' => $this->projectBidDetail->notice_published_date ?? '',
+            '[@projectBidDetail.newspaper_name]' => $this->projectBidDetail->newspaper_name ?? '',
+            '[@projectBidDetail.contract_evaluation_decision_date]' => $this->projectBidDetail->contract_evaluation_decision_date ?? '',
+            '[@projectBidDetail.intent_notice_publish_date]' => $this->projectBidDetail->intent_notice_publish_date ?? '',
+            '[@projectBidDetail.contract_newspaper_name]' => $this->projectBidDetail->contract_newspaper_name ?? '',
+            '[@projectBidDetail.contract_acceptance_decision_date]' => $this->projectBidDetail->contract_acceptance_decision_date ?? '',
+            '[@projectBidDetail.contract_percentage]' => $this->projectBidDetail->contract_percentage ?? '',
+            '[@projectBidDetail.contractor_name]' => $this->projectBidDetail->contractor_name ?? '',
+            '[@projectBidDetail.contractor_address]' => $this->projectBidDetail->contractor_address ?? '',
+            '[@projectBidDetail.contractor_phone]' => $this->projectBidDetail->contractor_phone ?? '',
+            '[@projectBidDetail.confession_number]' => $this->projectBidDetail->confession_number ?? '',
+            '[@projectBidDetail.contract_agreement_date]' => $this->projectBidDetail->contract_agreement_date ?? '',
+            '[@projectBidDetail.contract_assigned_date]' => $this->projectBidDetail->contract_assigned_date ?? '',
+            '[@projectBidDetail.bid_bond_amount]' => $this->projectBidDetail->bid_bond_amount ?? '',
+            '[@projectBidDetail.bid_bond_no]' => $this->projectBidDetail->bid_bond_no ?? '',
+            '[@projectBidDetail.bid_bond_bank_name]' => $this->projectBidDetail->bid_bond_bank_name ?? '',
+            '[@projectBidDetail.bid_bond_issue_date]' => $this->projectBidDetail->bid_bond_issue_date ?? '',
+            '[@projectBidDetail.bid_bond_expiry_date]' => $this->projectBidDetail->bid_bond_expiry_date ?? '',
+            '[@projectBidDetail.performance_bond_no]' => $this->projectBidDetail->performance_bond_no ?? '',
+            '[@projectBidDetail.performance_bond_amount]' => $this->projectBidDetail->performance_bond_amount ?? '',
+            '[@projectBidDetail.performance_bond_bank]' => $this->projectBidDetail->performance_bond_bank ?? '',
+            '[@projectBidDetail.performance_bond_issue_date]' => $this->projectBidDetail->performance_bond_issue_date ?? '',
+            '[@projectBidDetail.performance_bond_expiry_date]' => $this->projectBidDetail->performance_bond_expiry_date ?? '',
+            '[@projectBidDetail.performance_bond_extended_date]' => $this->projectBidDetail->performance_bond_extended_date ?? '',
+            '[@projectBidDetail.insurance_issue_date]' => $this->projectBidDetail->insurance_issue_date ?? '',
+            '[@projectBidDetail.insurance_expiry_date]' => $this->projectBidDetail->insurance_expiry_date ?? '',
+            '[@projectBidDetail.insurance_extended_date]' => $this->projectBidDetail->insurance_extended_date ?? '',
+        ];
+    }
+
+    public function getProjectMaintenanceArrangementReplacement(): array
+    {
+        return [
+            '[@projectMaintenanceArrangement.office_name]' => $this->projectMaintenanceArrangement->office_name ?? '',
+            '[@projectMaintenanceArrangement.public_service]' => $this->projectMaintenanceArrangement->public_service ?? '',
+            '[@projectMaintenanceArrangement.service_fee]' => $this->projectMaintenanceArrangement->service_fee ?? '',
+            '[@projectMaintenanceArrangement.from_fee_donation]' => $this->projectMaintenanceArrangement->from_fee_donation ?? '',
+            '[@projectMaintenanceArrangement.others]' => $this->projectMaintenanceArrangement->others ?? '',
+        ];
+    }
+
+    public function getProjectAgreementTermReplacement(): array
+    {
+        return [
+            '[@projectAgreementTerm.data]' => $this->projectAgreementTerm->data ?? '',
+        ];
+    }
     public function getPlanTemplates(): mixed
     {
         return Cache::rememberForever('plan_templates', function () {
