@@ -62,120 +62,152 @@
     <h4 class="header-title border-bottom mb-2">योजनाको लागत विवरण</h4>
     <div class="row">
         <div class="col-md-3 mb-2">
-            <label for="estimated_total_cost" class="form-label">अनुमानित लागत *</label>
+            <label for="office_grant" class="form-label">कार्यालयबाट अनुदान रकम *</label>
             <input
                 type="number"
-                wire:model="form.estimated_total_cost"
-                class="form-control @error('form.estimated_total_cost') is-invalid @enderror"
-                id="estimated_total_cost"
-                placeholder="अनुमानित लागत"
+                wire:model="form.office_grant"
+                readonly
+                class="form-control @error('form.office_grant') is-invalid @enderror"
+                id="office_grant"
+                placeholder="कार्यालयबाट अनुदान रकम"
             />
-            @error('form.estimated_total_cost')
+            @error('form.office_grant')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="federal_invest" class="form-label">सघंबाट</label>
+            <label for="agencies_grants" class="form-label">अन्य निकायबाट प्राप्त अनुदान</label>
             <input
                 type="number"
-                wire:model="form.federal_invest"
-                class="form-control @error('form.federal_invest') is-invalid @enderror"
-                id="federal_invest"
-                placeholder="सघंबाट"
+                wire:model="form.agencies_grants"
+                class="form-control @error('form.agencies_grants') is-invalid @enderror"
+                id="agencies_grants"
+                placeholder="अन्य निकायबाट प्राप्त अनुदान"
             />
-            @error('form.federal_invest')
+            @error('form.agencies_grants')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="province_invest" class="form-label">प्रदेशबाट</label>
+            <label for="share_amount" class="form-label">अन्य साझेदारी रकम</label>
             <input
                 type="number"
-                wire:model="form.province_invest"
-                class="form-control @error('form.province_invest') is-invalid @enderror"
-                id="province_invest"
-                placeholder="प्रदेशबाट"
+                wire:model="form.share_amount"
+                class="form-control @error('form.share_amount') is-invalid @enderror"
+                id="share_amount"
+                placeholder="अन्य साझेदारी रकम"
             />
-            @error('form.province_invest')
+            @error('form.share_amount')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="local_level_invest" class="form-label">स्थानीय तह／कार्यालय बाट</label>
+            <label for="committee_share_amount" class="form-label">समितिबाट नगद साझेदारी रकम</label>
             <input
                 type="number"
-                wire:model="form.local_level_invest"
-                class="form-control @error('form.local_level_invest') is-invalid @enderror"
-                id="local_level_invest"
-                placeholder="स्थानीय तह／कार्यालय बाट"
+                wire:model="form.committee_share_amount"
+                class="form-control @error('form.committee_share_amount') is-invalid @enderror"
+                id="committee_share_amount"
+                placeholder="समितिबाट नगद साझेदारी रकम"
             />
-            @error('form.local_level_invest')
+            @error('form.committee_share_amount')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="consumer_committee_invest" class="form-label">जन श्रमदान／उपभोक्ता समिति बाट</label>
+            <label for="total_amount_for_contingency" class="form-label">कन्टिजेन्सी सहितको कुल रकम</label>
             <input
                 type="number"
-                wire:model="form.consumer_committee_invest"
-                class="form-control @error('form.consumer_committee_invest') is-invalid @enderror"
-                id="consumer_committee_invest"
-                placeholder="जन श्रमदान／उपभोक्ता समिति बाट"
+                wire:model="form.total_amount_for_contingency"
+                readonly
+                class="form-control @error('form.total_amount_for_contingency') is-invalid @enderror"
+                id="total_amount_for_contingency"
+                placeholder="कन्टिजेन्सी सहितको कुल रकम"
             />
-            @error('form.consumer_committee_invest')
+            @error('form.total_amount_for_contingency')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="ngo_invest" class="form-label">गैरसरकारी सघंसंस्थाबाट</label>
+            <label for="contingency_percent" class="form-label">कन्टिजेन्सी कट्टी % </label>
             <input
                 type="number"
-                wire:model="form.ngo_invest"
-                class="form-control @error('form.ngo_invest') is-invalid @enderror"
-                id="ngo_invest"
-                placeholder="गैरसरकारी सघंसंस्थाबाट"
+                wire:model="form.contingency_percent"
+                class="form-control @error('form.contingency_percent') is-invalid @enderror"
+                step="any"
+                id="contingency_percent"
+                max="100"
+                placeholder="कन्टिजेन्सी कट्टी %"
             />
-            @error('form.ngo_invest')
+            @error('form.contingency_percent')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="foreign_donor_invest" class="form-label">विदेशी दात्री सघंसंस्थाबाट</label>
+            <label for="contingency_amount" class="form-label">कन्टिजेन्सी कट्टी रकम</label>
             <input
                 type="number"
-                wire:model="form.foreign_donor_invest"
-                class="form-control @error('form.foreign_donor_invest') is-invalid @enderror"
-                id="foreign_donor_invest"
-                placeholder="विदेशी दात्री सघंसंस्थाबाट"
+                wire:model="form.contingency_amount"
+                readonly
+                class="form-control @error('form.contingency_amount') is-invalid @enderror"
+                id="contingency_amount"
+                placeholder="कन्टिजेन्सी कट्टी रकम"
             />
-            @error('form.foreign_donor_invest')
+            @error('form.contingency_amount')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
         <div class="col-md-3 mb-2">
-            <label for="others_invest" class="form-label">अन्य</label>
+            <label for="other_taxes" class="form-label">अन्य करकट्टी रकम</label>
             <input
                 type="number"
-                wire:model="form.others_invest"
-                class="form-control @error('form.others_invest') is-invalid @enderror"
-                id="others_invest"
-                placeholder="अन्य"
+                wire:model="form.other_taxes"
+                class="form-control @error('form.other_taxes') is-invalid @enderror"
+                id="other_taxes"
+                placeholder="अन्य करकट्टी रकम"
             />
-            @error('form.others_invest')
+            @error('form.other_taxes')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
-        <div class="col-md-12 mb-2">
-            <label for="estimated_cost_excluding_vat" class="form-label">लागत अनुमान (भ्याट, ओभर हेड, कन्टिन्जेन्सी
-                बाहेक)</label>
+        <div class="col-md-3 mb-2">
+            <label for="project_contract_amount" class="form-label">योजना सम्झौता रकम </label>
             <input
                 type="number"
-                wire:model="form.estimated_cost_excluding_vat"
-                class="form-control @error('form.estimated_cost_excluding_vat') is-invalid @enderror"
-                id="estimated_cost_excluding_vat"
-                placeholder="लागत अनुमान (भ्याट, ओभर हेड, कन्टिन्जेन्सी बाहेक)"
+                wire:model="form.project_contract_amount"
+                readonly
+                class="form-control @error('form.project_contract_amount') is-invalid @enderror"
+                id="project_contract_amount"
+                placeholder=" योजना सम्झौता रकम "
             />
-            @error('form.estimated_cost_excluding_vat')
+            @error('form.project_contract_amount')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="col-md-3 mb-2">
+            <label for="labor_amount" class="form-label">समितिबाट जनश्रमदान रकम </label>
+            <input
+                type="number"
+                wire:model="form.labor_amount"
+                class="form-control @error('form.labor_amount') is-invalid @enderror"
+                id="labor_amount"
+                placeholder="समितिबाट जनश्रमदान रकम"
+            />
+            @error('form.labor_amount')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="col-md-3 mb-2">
+            <label for="total_cost_estimate_amount" class="form-label">कुल लागत अनुमान रकम </label>
+            <input
+                type="number"
+                wire:model="form.total_cost_estimate_amount"
+                readonly
+                class="form-control @error('form.total_cost_estimate_amount') is-invalid @enderror"
+                id="total_cost_estimate_amount"
+                placeholder="कुल लागत अनुमान रकम"
+            />
+            @error('form.total_cost_estimate_amount')
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>

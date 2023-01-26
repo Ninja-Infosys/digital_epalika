@@ -36,6 +36,8 @@ class Project extends Model
         'registration_no',
         'fiscal_year_id',
         'project_name',
+        'grant_category_id',
+        'expense_head_id',
         'plan_area_id',
         'project_status',
         'project_start_date',
@@ -66,6 +68,7 @@ class Project extends Model
         'share_amount',
         'committee_share_amount',
         'contingency_amount',
+        'other_taxes',
         'labor_amount',
         'benefited_organization',
         'others_benefited'
@@ -76,6 +79,8 @@ class Project extends Model
         'operated_through' => ProjectOperatedThroughEnum::class
     ];
 
+
+
     protected function wardNo(): Attribute
     {
         return Attribute::make(
@@ -83,6 +88,7 @@ class Project extends Model
             set: fn($value) => implode(",", $value),
         );
     }
+
 
     public function fiscalYear(): BelongsTo
     {
@@ -92,6 +98,16 @@ class Project extends Model
     public function planArea(): BelongsTo
     {
         return $this->belongsTo(PlanArea::class);
+    }
+
+    public function grantCategory(): BelongsTo
+    {
+        return $this->belongsTo(GrantCategory::class);
+    }
+
+    public function expenseHead(): BelongsTo
+    {
+        return $this->belongsTo(ExpenseHead::class);
     }
 
     public function planLevel(): BelongsTo
