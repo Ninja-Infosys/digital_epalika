@@ -15,6 +15,7 @@ function createTable(headerData, bodyData) {
     header.appendChild(SnCell);
     headerData.forEach((element) => {
         const headerCell = document.createElement("th");
+        headerCell.className='text-nowrap'
         const cellHeader = document.createTextNode(element);
         headerCell.appendChild(cellHeader);
         header.appendChild(headerCell);

@@ -27,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('disability_identity_cards', function (Blueprint $table) {
-        $table->dropColumn('user_id');
+        $table->dropConstrainedForeignId('user_id');
         });
     }
 };

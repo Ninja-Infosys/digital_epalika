@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('senior_citizen_details', function (Blueprint $table) {
-            $table->string('dob_ad')->nullable();
+            $table->string('dob_ad')->nullable()->comment('जन्म मिति (ई.स.)');
         });
     }
 

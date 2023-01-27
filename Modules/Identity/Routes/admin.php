@@ -11,6 +11,7 @@ use Modules\Identity\Http\Controllers\GovernmentalDisabilityTypeController;
 use Modules\Identity\Http\Controllers\EmployeeSignatureController;
 use Modules\Identity\Http\Controllers\RelationshipController;
 use Modules\Identity\Http\Controllers\SeniorCitizenDetailController;
+use Modules\Identity\Http\Controllers\SeniorCitizenDetailReportController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -32,6 +33,11 @@ Route::prefix('disability')->group(function () {
 Route::prefix('seniorCitizen')->group(function () {
     Route::get('seniorCitizenDetail/{seniorCitizenDetail}/print',[SeniorCitizenDetailController::class,'print'])->name('seniorCitizenDetail.print');
     Route::resource('seniorCitizenDetail', SeniorCitizenDetailController::class);
+});
+
+Route::prefix('seniorCitizenReport')->group(function (){
+Route::get('seniorCitizenReport', [SeniorCitizenDetailReportController::class,'index'])->name('seniorCitizenReport.index');
+Route::post('seniorCitizenReport/reportData', [SeniorCitizenDetailReportController::class,'report'])->name('seniorCitizenReport.report');
 });
 
 Route::prefix('reports')->group(function () {

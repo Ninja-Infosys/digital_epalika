@@ -71,4 +71,5 @@ class SeniorCitizenDetailController extends Controller
             'view' => $view,
         ]);
     }
+
 }
