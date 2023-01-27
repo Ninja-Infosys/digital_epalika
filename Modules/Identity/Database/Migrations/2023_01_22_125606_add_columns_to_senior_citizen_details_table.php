@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('senior_citizen_details', function (Blueprint $table) {
-            $table->foreignId('fiscal_year_id')->nullable()->constrained()->nullOnDelete()->onUpdate('no action');
+            $table->foreignId('fiscal_year_id')->nullable()->comment('आर्थिक बर्ष')->constrained()->nullOnDelete()->onUpdate('no action');
         });
     }
 

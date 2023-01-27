@@ -9,6 +9,7 @@ use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
 use App\Models\Settings\FiscalYear;
 use App\Models\User;
+use App\Traits\GetAllColumns;
 use App\Traits\NepaliDateConverter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SeniorCitizenDetail extends Model
 {
-    use HasFactory, SoftDeletes, EventObserveTrait, NepaliDateConverter;
+    use HasFactory, SoftDeletes, EventObserveTrait, NepaliDateConverter,GetAllColumns;
 
     protected $dates = [
         'created_at',
