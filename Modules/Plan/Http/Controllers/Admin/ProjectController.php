@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\ExpenseHead;
@@ -65,7 +66,13 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions');
+        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions','technicalCostEstimates');
+
+        if(request()->ajax()){
+            return response()->json([
+                'view'=>(String)View::make('plan::admin.project.detail',compact('project'))
+            ]);
+        }
 
         return view('plan::admin.project.show', compact('project'));
     }
