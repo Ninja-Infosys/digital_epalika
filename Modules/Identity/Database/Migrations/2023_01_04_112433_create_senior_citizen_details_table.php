@@ -13,7 +13,7 @@ return new class extends Migration
             $table->longText('photo')->nullable();
             $table->string('name')->nullable()->comment('नाम');
             $table->string('name_en')->nullable()->comment('नाम अग्रेजीमा');
-            $table->string('dob_bs')->nullable()->comment('जन्म मिति');
+            $table->string('dob_bs')->nullable()->comment('जन्म मिति (वि.स.)');
             $table->string('card_no')->nullable()->comment('कार्ड नं.');
             $table->string('gender')->comment('लिङ्ग');
             $table->string('citizenship_no')->nullable()->comment('नागरिता नं.');
