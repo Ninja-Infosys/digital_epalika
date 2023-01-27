@@ -218,11 +218,14 @@ trait PlanTemplateTrait
             '[@other_taxes]' => $this->other_taxes ?? 0,
             '[@project_contract_amount]' => $this->project_contract_amount ?? 0,
             '[@labor_amount]' => $this->labor_amount ?? 0,
-            '[@projectGrantDetails]' => $this->projectGrantDetails ?? 0,
+            '[@projectGrantDetails]' => (string)View::make('plan::admin.template_table.project_grant_details', [
+                'projectGrantDetails' => $this->projectGrantDetails
+            ]),
             '[@benefited_organization]' => $this->benefited_organization ?? 0,
             '[@others_benefited]' => $this->others_benefited ?? 0,
-            '[@benefitedMemberDetails]' => $this->benefitedMemberDetails ?? 0,
-
+            '[@benefitedMemberDetails]' => (string)View::make('plan::admin.template_table.benefited_member_details', [
+                'benefitedMemberDetails' => $this->benefitedMemberDetails
+            ]),
         ];
     }
 
@@ -239,9 +242,9 @@ trait PlanTemplateTrait
             '[@consumerCommittee.beneficiary_no]' => $this->consumerCommittee->beneficiary_no ?? '',
             '[@consumerCommittee.member_number]' => $this->consumerCommittee->member_number ?? '',
             '[@consumerCommittee.experience_in_project]' => $this->consumerCommittee->experience_in_project ?? '',
-            '[@consumerCommittee.chairman]'=>$this->consumerCommittee?->consumerCommitteeOfficials->where('post',\Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)?->first()->name??'',
-            '[@consumerCommittee.consumerCommitteeOfficials]' => (String)View::make('plan::admin.template_table.consumerCommitteeOfficials',[
-                'consumerCommitteeMembers'=>$this->consumerCommittee->consumerCommitteeOfficials ?? collect()
+            '[@consumerCommittee.chairman]' => $this->consumerCommittee?->consumerCommitteeOfficials->where('post', \Modules\Plan\Enums\ConsumerCommitteePostEnum::CHAIRMAN)?->first()->name ?? '',
+            '[@consumerCommittee.consumerCommitteeOfficials]' => (string)View::make('plan::admin.template_table.consumerCommitteeOfficials', [
+                'consumerCommitteeMembers' => $this->consumerCommittee->consumerCommitteeOfficials ?? collect()
             ]),
 
         ];

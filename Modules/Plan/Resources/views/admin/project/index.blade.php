@@ -79,6 +79,12 @@
                                                href="{{route('admin.plan.project.projectCostDetail.index',$project)}}">
                                                 <i class="fa fa-list"> आयोजनाको लागत सम्वन्धि विवरण</i>
                                             </a>
+                                            @can('technicalCostEstimate_access')
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.technicalCostEstimate.index',$project)}}">
+                                                    <i class="fa fa-check"> प्राविधिक लागत अनुमान</i>
+                                                </a>
+                                            @endcan
                                             @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.projectBidDetail.index',$project)}}">
@@ -86,12 +92,13 @@
                                                 </a>
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
-                                                    <i class="fa fa-money-bill">  मोविलाईजेशन पेश्की/रनिङ विल विवरण </i>
+                                                    <i class="fa fa-money-bill"> मोविलाईजेशन पेश्की/रनिङ विल विवरण </i>
                                                 </a>
                                             @else
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.consumerCommittee.index',$project)}}">
-                                                    <i class="fa fa-list"> उपभोक्ता समिति/समुदायमा आधारित संस्था/गैरसरकारी संस्थाको विवरण </i>
+                                                    <i class="fa fa-list"> उपभोक्ता समिति/समुदायमा आधारित
+                                                        संस्था/गैरसरकारी संस्थाको विवरण </i>
                                                 </a>
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
@@ -107,10 +114,10 @@
                                                 <i class="fa fa-file-alt"> सम्झौताको शर्तहरु </i>
                                             </a>
                                             @can('projectDocument_access')
-                                            <a class="dropdown-item"
-                                               href="{{route('admin.plan.project.projectDocument.index',$project)}}">
-                                                <i class="fa fa-file-alt"> सम्बन्धित कागजातहरू </i>
-                                            </a>
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.projectDocument.index',$project)}}">
+                                                    <i class="fa fa-file-alt"> सम्बन्धित कागजातहरू </i>
+                                                </a>
                                             @endcan
                                             <a class="dropdown-item"
                                                href="{{route('admin.plan.project.fileList',$project)}}">

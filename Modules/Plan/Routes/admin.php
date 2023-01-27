@@ -19,6 +19,7 @@ use Modules\Plan\Http\Controllers\Admin\Setting\GrantCategoryController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanAreaController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanLevelController;
 use Modules\Plan\Http\Controllers\Admin\Setting\PlanTemplateController;
+use Modules\Plan\Http\Controllers\Admin\TechnicalCostEstimateController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
 
@@ -35,6 +36,7 @@ Route::resource('project/{project}/projectAgreementTerm', ProjectAgreementTermCo
 Route::resource('project/{project}/projectBidSubmission', ProjectBidSubmissionController::class)->names('project.projectBidSubmission');
 Route::resource('project/{project}/consumerCommitteeTransaction', ConsumerCommitteeTransactionController::class)->names('project.consumerCommitteeTransaction');
 Route::resource('project/{project}/projectMaintenanceArrangement', ProjectMaintenanceArrangementController::class)->names('project.projectMaintenanceArrangement');
+Route::resource('project/{project}/technicalCostEstimate', TechnicalCostEstimateController::class)->names('project.technicalCostEstimate');
 
 Route::prefix('setting')->group(function () {
     Route::get('planSubArea', [PlanAreaController::class, 'planSubArea'])->name('planSubArea');

@@ -1,0 +1,102 @@
+@extends('admin.layouts.master')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.plan.dashboard')}}">
+                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{route('admin.plan.project.index')}}">
+                                योजनाहरु
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">प्राविधिक लागत अनुमान</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">प्राविधिक लागत अनुमान</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h4 class="header-title">
+                       {{$project->project_name}}को प्राविधिक लागत अनुमान
+                    </h4>
+                    <a href="{{route('admin.plan.project.technicalCostEstimate.create',$project)}}"
+                       class="btn btn-sm btn-outline-primary">
+                        <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>क्र.स</th>
+                                <th>विवरण</th>
+                                <th>संख्या</th>
+                                <th>लम्बाई</th>
+                                <th>चौडाई</th>
+                                <th>उचाइ</th>
+                                <th>परिमाण</th>
+                                <th>इकाई</th>
+                                <th>दर</th>
+                                <th>रकम</th>
+                                <th>#</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @forelse($project->technicalCostEstimates as $technicalCostEstimate)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$technicalCostEstimate->detail}}</td>
+                                    <td>{{$technicalCostEstimate->number}}</td>
+                                    <td>{{$technicalCostEstimate->length}}</td>
+                                    <td>{{$technicalCostEstimate->breadth}}</td>
+                                    <td>{{$technicalCostEstimate->height}}</td>
+                                    <td>{{$technicalCostEstimate->amount}}</td>
+                                    <td>{{$technicalCostEstimate->unit}}</td>
+                                    <td>{{$technicalCostEstimate->rate}}</td>
+                                    <td>{{$technicalCostEstimate->amount}}</td>
+                                    <td>
+                                        @can('technicalCostEstimate_edit')
+                                        <a data-bs-type="edit"
+                                           href="{{route('admin.plan.project.technicalCostEstimate.edit',[$project,$technicalCostEstimate])}}"
+                                           class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        @endcan
+                                        @can('technicalCostEstimate_delete')
+                                            <form
+                                                action="{{route('admin.plan.project.technicalCostEstimate.destroy',[$project,$technicalCostEstimate])}}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button data-bs-type="delete"
+                                                        class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="11" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

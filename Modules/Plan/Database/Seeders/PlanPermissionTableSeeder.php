@@ -48,6 +48,10 @@ class PlanPermissionTableSeeder extends Seeder
             'projectDocument_create',
             'projectDocument_edit',
             'projectDocument_delete',
+            'technicalCostEstimate_access',
+            'technicalCostEstimate_create',
+            'technicalCostEstimate_edit',
+            'technicalCostEstimate_delete',
         ];
 
         $this->storePermission($permissions);

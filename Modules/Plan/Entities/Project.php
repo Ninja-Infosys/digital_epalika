@@ -209,4 +209,9 @@ class Project extends Model
     {
         return $this->hasMany(ConsumerCommitteeTransaction::class);
     }
+
+    public function technicalCostEstimates(): HasMany
+    {
+        return $this->hasMany(TechnicalCostEstimate::class);
+    }
 }
