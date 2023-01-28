@@ -1431,8 +1431,8 @@ input.form-control[type=color], input.form-control[type=range] {
 }
 
 .modal-full-width {
-    width: 95%;
-    max-width: none
+    width: 95% !important;
+    max-width: none !important;
 }
 
 .modal-top {

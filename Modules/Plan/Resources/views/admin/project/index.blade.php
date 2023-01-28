@@ -52,8 +52,16 @@
                         @forelse($projects as $project)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$project->registration_no}}</td>
-                                <td>{{$project->project_name}}</td>
+                                <td>
+                                    <a class="projectShowBtn" action-url="{{route('admin.plan.project.show',$project)}}" href="javascript:void(0)">
+                                        {{$project->registration_no}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="projectShowBtn" action-url="{{route('admin.plan.project.show',$project)}}" href="javascript:void(0)">
+                                        {{$project->project_name}}
+                                    </a>
+                                </td>
                                 <td>{{$project->project_start_date}}</td>
                                 <td>{{$project->project_completion_date}}</td>
                                 <td>{{$project->allocated_amount}}</td>
@@ -141,4 +149,31 @@
             </div>
         </div>
     </div>
+    <div id="project-info-modal" class="modal fade" tabindex="-1" aria-labelledby="fullWidthModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-full-width">
+            <div class="modal-content" id="project-data">
+
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function (){
+                $('.projectShowBtn').on('click',function (e){
+                    e.preventDefault()
+                    $.ajax({
+                        method: "GET",
+                        url: $(this).attr("action-url"),
+                        success: function (resp) {
+                            $('#project-info-modal').modal('toggle')
+                            $('#project-data').html(resp.view)
+                        }, error: function () {
+                            alert("Something Went Wrong");
+                        }
+                    });
+                })
+            })
+        </script>
+    @endpush
 @endsection
