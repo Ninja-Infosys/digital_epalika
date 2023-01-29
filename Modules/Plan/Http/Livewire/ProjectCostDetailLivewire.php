@@ -117,7 +117,7 @@ class ProjectCostDetailLivewire extends Component
         $this->form['committee_share_amount'] = $project->committee_share_amount ?? 0;
         $this->form['contingency_amount'] = $project->contingency_amount ?? 0;
         $this->form['contingency_percent'] = round($project->contingency_amount * 100 / $this->totalAmountForContingency(), 2);
-        $this->form['other_taxes']=$project->other_taxes??0;
+        $this->form['other_taxes'] = $project->other_taxes ?? 0;
         $this->form['labor_amount'] = $project->labor_amount ?? 0;
         $this->form['benefited_organization'] = $project->benefited_organization ?? 0;
         $this->form['others_benefited'] = $project->others_benefited ?? 0;
@@ -151,21 +151,20 @@ class ProjectCostDetailLivewire extends Component
 
     public function submitFormData()
     {
-
         $formData = $this->validate()['form'];
         $this->project->update([
-            'progress_spent_amount' => $formData['progress_spent_amount'] ?? 0,
-            'physical_progress_target' => $formData['physical_progress_target'] ?? 0,
-            'physical_progress_completed' => $formData['physical_progress_completed'] ?? 0,
+            'progress_spent_amount' => $formData['progress_spent_amount'] ?: 0,
+            'physical_progress_target' => $formData['physical_progress_target'] ?: 0,
+            'physical_progress_completed' => $formData['physical_progress_completed'] ?: 0,
             'physical_progress_unit' => $formData['physical_progress_unit'] ?? null,
-            'agencies_grants' => $formData['agencies_grants'] ?? 0,
-            'share_amount' => $formData['share_amount'] ?? 0,
-            'committee_share_amount' => $formData['committee_share_amount'] ?? 0,
-            'contingency_amount' => $formData['contingency_amount'] ?? 0,
-            'other_taxes' => $formData['other_taxes'] ?? 0,
-            'labor_amount' => $formData['labor_amount'] ?? 0,
-            'benefited_organization' => $formData['benefited_organization'] ?? 0,
-            'others_benefited' => $formData['others_benefited'] ?? 0
+            'agencies_grants' => $formData['agencies_grants'] ?: 0,
+            'share_amount' => $formData['share_amount'] ?: 0,
+            'committee_share_amount' => $formData['committee_share_amount'] ?: 0,
+            'contingency_amount' => $formData['contingency_amount'] ?: 0,
+            'other_taxes' => $formData['other_taxes'] ?: 0,
+            'labor_amount' => $formData['labor_amount'] ?: 0,
+            'benefited_organization' => $formData['benefited_organization'] ?: 0,
+            'others_benefited' => $formData['others_benefited'] ?: 0
         ]);
 
         foreach ($this->form['projectGrantDetails'] as $projectGrantDetail) {
@@ -194,14 +193,26 @@ class ProjectCostDetailLivewire extends Component
     private function assignCalculatedAmount()
     {
         $this->form['total_amount_for_contingency'] = $this->totalAmountForContingency();
-        $this->form['contingency_amount'] = $this->form['total_amount_for_contingency'] * $this->form['contingency_percent'] / 100;
-        $this->form['project_contract_amount'] = $this->form['total_amount_for_contingency'] - $this->form['contingency_amount'] - $this->form['other_taxes'];
-        $this->form['total_cost_estimate_amount'] = $this->form['project_contract_amount'] + $this->form['labor_amount'];
+        $this->form['contingency_amount'] = ($this->form['total_amount_for_contingency'] ?? 0) * ($this->form['contingency_percent'] ?? 0) / 100;
+        $this->form['project_contract_amount'] = ($this->form['total_amount_for_contingency'] ?? 0) - ($this->form['contingency_amount'] ?? 0) - ($this->form['other_taxes'] ?? 0);
+        $this->form['total_cost_estimate_amount'] = ($this->form['project_contract_amount'] ?? 0) + ($this->form['labor_amount'] ?? 0);
     }
 
-    private function totalAmountForContingency()
+    private function totalAmountForContingency(): float|int
     {
-        return $this->form['office_grant'] + $this->form['agencies_grants'] + $this->form['share_amount'] + $this->form['committee_share_amount'];
+        return ((double)$this->form['office_grant'] ?? 0) + ((double)$this->form['agencies_grants'] ?? 0) + ((double)$this->form['share_amount'] ?? 0) + ((double)$this->form['committee_share_amount'] ?? 0);
+    }
+
+    public function messages(): array
+    {
+        return [
+            'form.benefitedMemberDetails.*.ward_no.required' => 'वडा नं. आबश्यक छ',
+            'form.benefitedMemberDetails.*.village.required' => 'गाँउ बस्ति आबश्यक छ',
+            'form.benefitedMemberDetails.*.dalit_backward_no.required' => 'दलित/पिछडिएका संख्या आबश्यक छ',
+            'form.benefitedMemberDetails.*.other_households_no.required' => 'अन्य घरधुरी संख्या आबश्यक छ',
+            'form.benefitedMemberDetails.*.no_of_female.required' => 'महिला संख्या आबश्यक छ',
+            'form.benefitedMemberDetails.*.no_of_male.required' => 'पुरुष संख्या आबश्यक छ',
+        ];
     }
 
     public function render()

@@ -38,7 +38,7 @@
                         <a href="javascript:void(0)"
                            route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM])}}"
                            class="btn btn-sm btn-outline-primary printProjectAgreementForm">
-                            <i class="fa fa-print"></i>  प्रिन्ट गर्नुहोस
+                            <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
 
                         </a>
                     </div>
@@ -99,7 +99,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>कार्यालयबाट स्वीकृत रकम </td>
+                                <td>कार्यालयबाट स्वीकृत रकम</td>
                                 <td>रू. {{$project->allocated_amount}}</td>
                             </tr>
                             <tr>
@@ -167,8 +167,8 @@
                         </table>
                         <h5>ङ) आयोजनाबाट लाभान्वित हुने: </h5>
                         <ul>
-                            <li>संगठित संस्था: {{$project->projectCostDetail->benefited_organization??''}}</li>
-                            <li>अन्य: {{$project->projectCostDetail->others_benefited??''}}</li>
+                            <li>संगठित संस्था: {{$project->benefited_organization??''}}</li>
+                            <li>अन्य: {{$project->others_benefited??''}}</li>
                         </ul>
                         <table class="table table-sm table-bordered">
                             <thead class="align-middle">
@@ -224,7 +224,7 @@
                             </h4>
                         </div>
                         <div class="p-2">
-                            <h5>क) गठन भएको मिति:-</h5>
+                            <h5>क) गठन भएको मिति:- {{$project->consumerCommittee->formation_date??''}}</h5>
                             <h5>ख) पदाधिकारीको नाम र ठेगाना (नागरिकता प्रमाणपत्र नम्बर र जिल्ला)</h5>
                         </div>
                         <table class="table table-sm table-bordered">
@@ -255,7 +255,9 @@
                             @endforeach
                             </tbody>
                         </table>
-                        <h5> ग) गठन गर्दा उपस्थित लाभान्वितको संख्या: -</h5>
+                        <h5> ग) गठन गर्दा उपस्थित लाभान्वितको
+                            संख्या: {{$project->consumerCommittee->beneficiary_no??''}}-
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -275,7 +277,7 @@
                                 : {{$project->projectBidDetail->cost_estimation??''}}</h5>
                             <h5>ख)
                                 <ul>
-                                    <li>१.बोलपत्र नं. : </li>
+                                    <li>१.बोलपत्र नं. :</li>
                                     <li>२.बोलपत्रको सुचना प्रकाशित मिति
                                         : {{$project->projectBidDetail->notice_published_date??''}}</li>
                                     <li>३.पत्रिकाको नाम
@@ -284,11 +286,15 @@
                             </h5>
                             <h5>ग) ठेक्का विवरण
                                 <ul>
-                                    <li>ठेक्का मुल्यांकनको निर्णय मिति : {{$project->projectBidDetail->contract_evaluation_decision_date??''}}</li>
-                                    <li>आशयको सुचना प्रकाशित मिति : {{$project->projectBidDetail->intent_notice_publish_date??''}}</li>
+                                    <li>ठेक्का मुल्यांकनको निर्णय मिति
+                                        : {{$project->projectBidDetail->contract_evaluation_decision_date??''}}</li>
+                                    <li>आशयको सुचना प्रकाशित मिति
+                                        : {{$project->projectBidDetail->intent_notice_publish_date??''}}</li>
                                     <li>पत्रिकाको नाम : {{$project->projectBidDetail->contract_newspaper_name??''}}</li>
-                                    <li>ठेक्का स्वीकृतीको निर्णय मिति : {{$project->projectBidDetail->contract_acceptance_decision_date??''}}</li>
-                                    <li>ठेक्का विलो प्रतिशत : {{$project->projectBidDetail->contract_percentage??''}}</li>
+                                    <li>ठेक्का स्वीकृतीको निर्णय मिति
+                                        : {{$project->projectBidDetail->contract_acceptance_decision_date??''}}</li>
+                                    <li>ठेक्का विलो प्रतिशत
+                                        : {{$project->projectBidDetail->contract_percentage??''}}</li>
                                 </ul>
                             </h5>
                             <h5>घ)
@@ -309,27 +315,35 @@
                                     <li>२.विडवण्ड रकम : {{$project->projectBidDetail->bid_bond_amount??''}}</li>
                                     <li>३.बैंकको नाम : {{$project->projectBidDetail->bid_bond_bank_name??''}}</li>
                                     <li>४.जारी मिति : {{$project->projectBidDetail->bid_bond_issue_date??''}}</li>
-                                    <li>५.म्याद सकिने मिति : {{$project->projectBidDetail->bid_bond_expiry_date??''}}</li>
+                                    <li>५.म्याद सकिने मिति
+                                        : {{$project->projectBidDetail->bid_bond_expiry_date??''}}</li>
                                 </ul>
                             </h5>
                             <h5>
                                 ज) परफरमेन्स वण्ड विवरण
                                 <ul>
-                                    <li>१.परफरमेन्स वण्ड नं. : {{$project->projectBidDetail->performance_bond_no??''}}</li>
+                                    <li>१.परफरमेन्स वण्ड नं.
+                                        : {{$project->projectBidDetail->performance_bond_no??''}}</li>
 
-                                    <li>२.परफरमेन्स वण्ड रकम : {{$project->projectBidDetail->performance_bond_amount??''}}</li>
+                                    <li>२.परफरमेन्स वण्ड रकम
+                                        : {{$project->projectBidDetail->performance_bond_amount??''}}</li>
 
                                     <li>३.बैंकको नाम : {{$project->projectBidDetail->performance_bond_bank??''}}</li>
-                                    <li>४.जारी मिति : {{$project->projectBidDetail->performance_bond_issue_date??''}}</li>
-                                    <li>५.म्याद सकिने मिति : {{$project->projectBidDetail->performance_bond_expiry_date??''}}</li>
+                                    <li>४.जारी मिति
+                                        : {{$project->projectBidDetail->performance_bond_issue_date??''}}</li>
+                                    <li>५.म्याद सकिने मिति
+                                        : {{$project->projectBidDetail->performance_bond_expiry_date??''}}</li>
 
-                                    <li>५.म्याद थपको मिति : {{$project->projectBidDetail->performance_bond_extended_date??''}}</li>
+                                    <li>५.म्याद थपको मिति
+                                        : {{$project->projectBidDetail->performance_bond_extended_date??''}}</li>
                                 </ul>
                             </h5>
                             <h5>झ)
                                 <ul>
-                                    <li>१.ठेक्का सम्झौता मिति : {{$project->projectBidDetail->contract_agreement_date??''}}</li>
-                                    <li>२.कार्यादेशको मिति : {{$project->projectBidDetail->contract_assigned_date??''}}</li>
+                                    <li>१.ठेक्का सम्झौता मिति
+                                        : {{$project->projectBidDetail->contract_agreement_date??''}}</li>
+                                    <li>२.कार्यादेशको मिति
+                                        : {{$project->projectBidDetail->contract_assigned_date??''}}</li>
                                 </ul>
                             </h5>
                             <h5>ञ) इन्स्योरेन्स विवरण
@@ -340,7 +354,8 @@
                                     <li>२. सकिने मिति : {{$project->projectBidDetail->insurance_expiry_date??''}}
 
                                     </li>
-                                    <li>३. म्याद थप हुने मिति : {{$project->projectBidDetail->insurance_extended_date??''}}</li>
+                                    <li>३. म्याद थप हुने मिति
+                                        : {{$project->projectBidDetail->insurance_extended_date??''}}</li>
                                 </ul>
                             </h5>
                         </div>
@@ -399,7 +414,7 @@
                                 ४) किस्ता/पेश्की विवरण
                             </h4>
                         </div>
-                        <table class="table table-bordered">
+                        <table class="table table-sm table-bordered">
                             <thead>
                             <tr>
                                 <td>क्र.सं.</td>
@@ -440,7 +455,8 @@
                             ५). आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था
                         </h4>
                         <div class="p-2">
-                            <h5>क) आयोजना मर्मत संम्भारको जिम्मा लिने समिति संस्थाको नाम: {{$project->projectMaintenanceArrangement->office_name??''}}</h5>
+                            <h5>क) आयोजना मर्मत संम्भारको जिम्मा लिने समिति संस्थाको
+                                नाम: {{$project->projectMaintenanceArrangement->office_name??''}}</h5>
                             <h5>ख) मर्मत संम्भारको सम्भावित स्रोत (छ छैन खुलाउने):
                                 <ul>
                                     <li>जनश्रमदान: {{$project->projectMaintenanceArrangement->public_service??''}}</li>
@@ -494,7 +510,7 @@
                                     <a href="javascript:void(0)"
                                        route_action="{{route('admin.plan.project.projectDocument.show',[$project,$projectDocument])}}"
                                        class="btn btn-sm btn-outline-primary printProjectDocument">
-                                        <i class="fa fa-print"></i>  प्रिन्ट गर्नुहोस
+                                        <i class="fa fa-print"></i> प्रिन्ट गर्नुहोस
 
                                     </a>
                                 </td>

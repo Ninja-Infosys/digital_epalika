@@ -405,7 +405,7 @@
                     </td>
                     @enderror
                     <td>
-                        {{($form['benefitedMemberDetails'][$key]['dalit_backward_no']??0)+($form['benefitedMemberDetails'][$key]['other_households_no']??0)}}
+                        {{((double)$form['benefitedMemberDetails'][$key]['dalit_backward_no']??0)+((double)$form['benefitedMemberDetails'][$key]['other_households_no']??0)}}
                     </td>
                     <td width="90">
                         <input
@@ -430,7 +430,7 @@
                         @enderror
                     </td>
                     <td>
-                        {{($form['benefitedMemberDetails'][$key]['no_of_female']??0)+($form['benefitedMemberDetails'][$key]['no_of_male']??0)}}
+                        {{((double)$form['benefitedMemberDetails'][$key]['no_of_female']??0)+((double)$form['benefitedMemberDetails'][$key]['no_of_male']??0)}}
                     </td>
                     <td>
                         <button type="button" wire:click="removeBenefitedMemberDetails({{$key}})"

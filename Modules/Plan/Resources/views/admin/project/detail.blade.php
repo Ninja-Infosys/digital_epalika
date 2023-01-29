@@ -246,8 +246,8 @@
                 </table>
                 <h5>ङ) आयोजनाबाट लाभान्वित हुने: </h5>
                 <ul>
-                    <li>संगठित संस्था: {{$project->projectCostDetail->benefited_organization??''}}</li>
-                    <li>अन्य: {{$project->projectCostDetail->others_benefited??''}}</li>
+                    <li>संगठित संस्था: {{$project->benefited_organization}}</li>
+                    <li>अन्य: {{$project->others_benefited??''}}</li>
                 </ul>
                 <table class="table table-sm table-bordered">
                     <thead class="align-middle">
