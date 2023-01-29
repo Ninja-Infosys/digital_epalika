@@ -137,11 +137,11 @@ class ProjectController extends Controller
         return redirect(route('admin.plan.project.fileList', $project));
     }
 
-    public function print(Request $request, Project $project)
+    public function print(Request $request, Project $project,PlanTemplateTypeEnum $planTemplateTypeEnum)
     {
         if ($request->ajax()) {
             return response()->json([
-                'data' => $project->getSpecificTemplateData(PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM)
+                'data' => $project->getSpecificTemplateData($planTemplateTypeEnum)
             ]);
         }
     }

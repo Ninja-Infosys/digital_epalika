@@ -126,7 +126,7 @@
                 </table>
                 <div class="row bg-soft-secondary p-2 m-1">
                     <div class="col-md-3">
-                        <a href="javascript:void(0)">
+                        <a href="javascript:void(0)" route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM])}}" id="printProjectAgreementForm">
                             <i class="fa fa-print"> योजना सम्झौता आदेश</i>
                         </a>
                     </div>
@@ -325,3 +325,22 @@
         </div>
     </div>
 </div>
+
+    <script>
+        $("#printProjectAgreementForm").on("click", function (e) {
+            $.ajax({
+                method: "GET",
+                url: $(this).attr("route_action_url"),
+                success: function (resp) {
+                    let print_area = window.open();
+                    print_area.document.write(resp.data);
+                    print_area.document.close();
+                    print_area.focus();
+                    print_area.print();
+                    print_area.close();
+                }, error: function () {
+                    alert("Something Went Wrong");
+                }
+            });
+        });
+    </script>

@@ -36,8 +36,8 @@
                             {{$project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID ? '१) आयोजनाको विवरण' : '१) सम्झौता गर्ने पक्ष र आयोजना'}}
                         </h4>
                         <a href="javascript:void(0)"
-                           route_action_url="{{route('admin.plan.project.print',$project)}}"
-                           class="btn btn-xs btn-outline-primary printProjectDetail">
+                           route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM])}}"
+                           class="btn btn-sm btn-outline-primary printProjectAgreementForm">
                             <i class="fa fa-print"></i>  प्रिन्ट गर्नुहोस
 
                         </a>
@@ -493,7 +493,7 @@
 
                                     <a href="javascript:void(0)"
                                        route_action="{{route('admin.plan.project.projectDocument.show',[$project,$projectDocument])}}"
-                                       class="btn btn-xs btn-outline-warning printDetail">
+                                       class="btn btn-sm btn-outline-primary printProjectDocument">
                                         <i class="fa fa-print"></i>  प्रिन्ट गर्नुहोस
 
                                     </a>
@@ -550,12 +550,12 @@
     </div>
     @push('scripts')
         <script>
-            $(".printDetail").on("click", function (e) {
+            $(".printProjectDocument").on("click", function (e) {
                 $.ajax({
                     method: "GET",
                     url: $(this).attr("route_action"),
                     success: function (resp) {
-                        var print_area = window.open();
+                        let print_area = window.open();
                         print_area.document.write(resp.data.data);
                         print_area.document.close();
                         print_area.focus();
@@ -566,12 +566,12 @@
                     }
                 });
             });
-            $(".printProjectDetail").on("click", function (e) {
+            $(".printProjectAgreementForm").on("click", function (e) {
                 $.ajax({
                     method: "GET",
                     url: $(this).attr("route_action_url"),
                     success: function (resp) {
-                        var print_area = window.open();
+                        let print_area = window.open();
                         print_area.document.write(resp.data);
                         print_area.document.close();
                         print_area.focus();
@@ -584,5 +584,4 @@
             });
         </script>
     @endpush
-
 @endsection
