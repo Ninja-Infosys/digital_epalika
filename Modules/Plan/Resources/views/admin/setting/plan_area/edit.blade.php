@@ -24,16 +24,17 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">योजना क्षेत्र सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.plan.planArea.index')}}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{route('admin.plan.planArea.index',$type)}}" class="btn btn-sm btn-outline-primary">
                             <i class="fa fa-list"></i> योजना क्षेत्रहरु
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.plan.planArea.update',$planArea)}}" method="post">
+                    <form action="{{route('admin.plan.planArea.update',[$type,$planArea])}}" method="post">
                         @csrf
                         @method('put')
                         <div class="row">
+                            @if($type=='planAreaSubCategory')
                             <div class="col-md-12 mb-2">
                                 <label for="plan_area_id" class="form-label">मुख्य योजना क्षेत्र</label>
                                 <select
@@ -52,6 +53,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            @endif
                             <div class="col-md-12 mb-2">
                                 <label for="area_name" class="form-label">क्षेत्र को नाम *</label>
                                 <input

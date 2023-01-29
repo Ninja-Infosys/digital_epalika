@@ -26,7 +26,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">योजना क्षेत्र सूची</h4>
                         @can('planArea_create')
-                            <a href="{{route('admin.plan.planArea.create')}}"
+                            <a href="{{route('admin.plan.planArea.create',$type)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -39,6 +39,9 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                @if($type=='planAreaSubCategory')
+                                    <th>योजनाको उपक्षेत्र</td>
+                                @endif
                                 <th>योजनाको क्षेत्र</th>
                                 <th>#</th>
                             </tr>
@@ -46,14 +49,17 @@
                             <tbody>
                             @forelse($planAreas as $key=>$planArea)
                                 <tr>
-                                    <th>{{$loop->iteration}}</th>
-                                    <th>{{$planArea->area_name}}</th>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td> {{$planArea->area_name}} </td>
+                                    @if($type=='planAreaSubCategory')
+                                    <td>{{$planArea->planArea->area_name}}</td>
+                                    @endif
                                     <td>
-                                        <a data-bs-type="edit" href="{{route('admin.plan.planArea.edit',$planArea)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.plan.planArea.edit',[$type,$planArea])}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.plan.planArea.destroy',$planArea)}}"
+                                        <form action="{{route('admin.plan.planArea.destroy',[$type,$planArea])}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
@@ -63,29 +69,6 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @foreach($planArea->planAreas as $planSubArea)
-                                    <tr>
-                                        <td>
-                                            {{$key+1}}.
-                                            {{$loop->iteration}}
-                                        </td>
-                                        <td>{{$planSubArea->area_name}}</td>
-                                        <td>
-                                            <a data-bs-type="edit" href="{{route('admin.plan.planArea.edit',$planSubArea)}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                            <form action="{{route('admin.plan.planArea.destroy',$planSubArea)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
                             @empty
                                 <tr>
                                     <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
