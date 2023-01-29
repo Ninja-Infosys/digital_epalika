@@ -34,7 +34,8 @@
                 </div>
                 <div class="card-body">
                     <div class="collapse show mb-2" id="collapseFilterForm">
-                        <form id="report-filter-form" data-bs-url="{{route('admin.plan.report.report-data')}}">
+                        <form id="report-filter-form"
+                              data-bs-url="{{route('admin.plan.report.get-annual-progress-report')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
@@ -139,9 +140,9 @@
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label for="project_status">योजनाको अवस्था</label>
-                                    <select name="project_status"
-                                            id="project_status" class="form-select">
-                                        <option value="">--- छान्नुहोस् ---</option>
+                                    <select name="project_status[]" multiple data-toggle="select2"
+                                            id="project_status" class="form-control">
+                                        <option disabled>--- छान्नुहोस् ---</option>
                                         @foreach(\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
                                             <option
                                                 value="{{$projectStatus->value}}">{{$projectStatus->label()}}</option>
@@ -149,6 +150,7 @@
                                     </select>
 
                                 </div>
+
                             </div>
 
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
@@ -164,7 +166,8 @@
                     <div id="report-table" class="table-responsive">
                         <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
                             <span class="main-logo">
-                                <img alt="nepal-government-logo" class="logo img-responsive center-block d-block mx-auto"
+                                <img alt="nepal-government-logo"
+                                     class="logo img-responsive center-block d-block mx-auto"
                                      src="{{ asset('assets/frontend/image/logo.png') }}"/>
                             </span>
                             <x-header-component :has-clock="false"/>
@@ -224,15 +227,77 @@
         <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
     @endpush
     @push('scripts')
-        <script src="{{asset('assets/backend/js/ajaxCall.js')}}"></script>
         <script>
             $(document).ready(function () {
+                function createTable(data) {
+                    const div = document.getElementById('report-table');
+                    // select table inside div
+                    const table = div.querySelector('table');
+                    // create tbody
+                    // delete tbody tag if exists
+                    if (table.querySelector('tbody')) {
+                        table.querySelector('tbody').remove();
+                    }
+
+                    const tbody = document.createElement('tbody');
+
+                    data.forEach(function (item) {
+                        // create row
+                        const tr = document.createElement('tr');
+                        // create cell
+                        Object.values(item).forEach(data => {
+                            const td = document.createElement('td');
+                            // set cell content
+                            td.innerHTML = data;
+                            // append cell to row
+                            tr.appendChild(td);
+                        });
+
+                        // append row to tbody
+                        tbody.appendChild(tr);
+                    });
+
+                    table.appendChild(tbody);
+                }
+
                 // x-csrf protection
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
+                $(document.body).delegate('#report-filter-form', 'submit', function (e) {
+                    e.preventDefault()
+                    // get attribute data-bs-url from form and assign it to const variable url
+                    const url = $(this).attr('data-bs-url');
+                    const submitFormBtn = $("#submitFormBtn");
+                    const collapseFilterForm = $("#collapseFilterForm");
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: new FormData(this),
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+                            submitFormBtn.prop('disabled', true);
+                            submitFormBtn.html("<i class='fa fa-spinner fa-spin'></i>");
+                        },
+                        success: function (resp) {
+                            submitFormBtn.prop('disabled', false);
+                            collapseFilterForm.collapse('hide')
+                            submitFormBtn.html("पेश गर्नुहोस्");
+                            createTable(resp.data)
+
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            submitFormBtn.prop('disabled', false)
+                            submitFormBtn.html("पेश गर्नुहोस्");
+                            toastMessage('error', XMLHttpRequest.responseJSON.message)
+                        }
+                    });
+                })
+
 
                 $(document.body).delegate('#plan_area_id', 'change', function (e) {
                     let plan_area_id = $('#plan_area_id').val()
@@ -309,7 +374,8 @@
                         icon: type,
                     });
                 }
-            });
+            })
+            ;
         </script>
     @endpush
 @endsection

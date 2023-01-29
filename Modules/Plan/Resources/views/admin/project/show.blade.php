@@ -391,7 +391,7 @@
                                     <td>{{$projectBidSubmission->submission_type?->label()??''}}</td>
                                     <td>{{$projectBidSubmission->submission_no}}</td>
                                     <td>{{$projectBidSubmission->date}}</td>
-                                    <td>{{$projectBidSubmission->amount}}</td>
+                                    <td>रू. {{$projectBidSubmission->amount}}</td>
                                 </tr>
                             @empty
                                 <tr>

@@ -76,7 +76,12 @@ class Project extends Model
 
     protected $casts = [
         'project_status' => ProjectStatusEnum::class,
-        'operated_through' => ProjectOperatedThroughEnum::class
+        'operated_through' => ProjectOperatedThroughEnum::class,
+        'allocated_amount' => 'int',
+        'agencies_grants' => 'int',
+        'share_amount' => 'int',
+        'committee_share_amount' => 'int',
+
     ];
 
     protected $appends = [
@@ -86,9 +91,9 @@ class Project extends Model
         'total_cost_estimate_amount'
     ];
 
-    public function getTotalAmountForContingencyAttribute()
+    public function getTotalAmountForContingencyAttribute(): float
     {
-        return $this->allocated_amount + $this->agencies_grants + $this->share_amount + $this->committee_share_amount;
+        return round($this->allocated_amount + $this->agencies_grants + $this->share_amount + $this->committee_share_amount, 2);
     }
 
     public function getContingencyPercentAttribute(): float
@@ -96,14 +101,14 @@ class Project extends Model
         return round($this->contingency_amount * 100 / $this->total_amount_for_contingency, 2);
     }
 
-    public function getProjectContractAmountAttribute()
+    public function getProjectContractAmountAttribute(): float
     {
-        return $this->total_amount_for_contingency - $this->contingency_amount - $this->other_taxes;
+        return round($this->total_amount_for_contingency - $this->contingency_amount - $this->other_taxes, 2);
     }
 
-    public function getTotalCostEstimateAmountAttribute()
+    public function getTotalCostEstimateAmountAttribute(): float
     {
-        return $this->project_contract_amount + $this->labor_amount;
+        return round($this->project_contract_amount + $this->labor_amount, 2);
     }
 
     protected function wardNo(): Attribute

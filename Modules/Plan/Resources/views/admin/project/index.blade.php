@@ -100,7 +100,7 @@
                                                 </a>
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
-                                                    <i class="fa fa-money-bill"> मोविलाईजेशन पेश्की/रनिङ विल विवरण </i>
+                                                    <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
                                                 </a>
                                             @else
                                                 <a class="dropdown-item"
@@ -110,7 +110,7 @@
                                                 </a>
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
-                                                    <i class="fa fa-list"> किस्ता/पेश्की विवरण </i>
+                                                    <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
                                                 </a>
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">

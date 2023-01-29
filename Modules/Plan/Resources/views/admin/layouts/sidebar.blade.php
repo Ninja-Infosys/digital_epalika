@@ -28,7 +28,7 @@
         <ul class="nav-second-level">
             <li class="{{request()->is('admin/plan/report') ? 'active' : ''}}">
                 <a href="{{route('admin.plan.report.index')}}">
-                    <span> रिपोर्ट </span>
+                    <span>प्रतिवेदनहरु</span>
                 </a>
             </li>
             <li class="{{request()->is('admin/plan/report/annual-progress-report') ? 'active' : ''}}">

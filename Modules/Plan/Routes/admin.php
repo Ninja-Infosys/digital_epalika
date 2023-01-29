@@ -56,4 +56,5 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::get('/', 'index')->name('index');
     Route::get('annual-progress-report', 'annualProgressReport')->name('annual-progress-report');
     Route::post('report-data', 'report')->name('report-data');
+    Route::post('annual-progress-report', 'getAnnualProgressReport')->name('get-annual-progress-report');
 });
