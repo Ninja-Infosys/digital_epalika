@@ -9,7 +9,8 @@ class PlanDatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            PlanPermissionTableSeeder::class
+            PlanPermissionTableSeeder::class,
+            PlanTemplateTableSeeder::class
         ]);
     }
 }

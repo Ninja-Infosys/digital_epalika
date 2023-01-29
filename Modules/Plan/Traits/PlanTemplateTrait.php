@@ -2,6 +2,8 @@
 
 namespace Modules\Plan\Traits;
 
+use App\Models\Settings\OfficeSetting;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -14,10 +16,13 @@ use Modules\Plan\Enums\PlanTemplateTypeEnum;
 
 trait PlanTemplateTrait
 {
+    use NepaliDateConverter;
     private array $template = [
         [
             'title' => 'आयोजनाको विवरण',
             'data' => [
+                'मिति' => '[@date]',
+                'आर्थिक बर्ष' => '[@fiscalYear]',
                 'योजना/कार्यक्रमको नाम' => '[@project_name]',
                 'दर्ता नं.' => '[@registration_no]',
                 'खर्चको किसिम' => '[@expense_head]',
@@ -186,7 +191,10 @@ trait PlanTemplateTrait
 
     public function getProjectReplacement(): array
     {
+
         return [
+            '[@date]'=>$this->get_today_nepali_date(),
+            '[@fiscalYear]' => $this->fiscalYear->title ?? '',
             '[@project_name]' => $this->project_name ?? '',
             '[@registration_no]' => $this->registration_no ?? '',
             '[@expense_head]' => $this->expenseHead->title ?? '',
