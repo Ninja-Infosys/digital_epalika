@@ -135,7 +135,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="row bg-soft-secondary p-2 m-1">
+                <div class="row bg-soft-secondary g-2 p-2 m-1">
                     <div class="col-md-3">
                         <a href="javascript:void(0)"
                            route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM])}}"
