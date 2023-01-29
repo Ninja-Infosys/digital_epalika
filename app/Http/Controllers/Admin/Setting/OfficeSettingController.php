@@ -10,6 +10,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 
 class OfficeSettingController extends Controller
@@ -65,6 +66,8 @@ class OfficeSettingController extends Controller
             $this->deleteFile($officeSetting->background_image);
         }
         $officeSetting->update($validationData);
+
+        Cache::forget('office_setting');
 
         toast('कार्यालय सेटिङ सफलतापूर्वक अद्यावधिक गरियो', 'success');
 

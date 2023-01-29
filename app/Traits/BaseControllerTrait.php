@@ -11,7 +11,7 @@ trait BaseControllerTrait
 {
     public function constructionMethod(): void
     {
-        view()->share('officeSetting', OfficeSetting::with('fiscalYear', 'province', 'district', 'localBody')->first());
+        view()->share('officeSetting', \officeSetting());
     }
 
     /**

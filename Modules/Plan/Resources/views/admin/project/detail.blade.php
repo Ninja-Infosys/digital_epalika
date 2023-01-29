@@ -133,17 +133,19 @@
                     <div class="col-md-3">
                         <a href="javascript:void(0)"
                            route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM])}}"
-                           id="printProjectAgreementForm">
+                           class="printBtn">
                             <i class="fa fa-print"> योजना सम्झौता आदेश</i>
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="javascript:void(0)">
+                        <a href="javascript:void(0)" route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::MANDATE])}}"
+                           class="printBtn">
                             <i class="fa fa-print"> सम्झौताको कार्यदेश</i>
                         </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="javascript:void(0)">
+                        <a href="javascript:void(0)" route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::REGARDING_PLANNING_AGREEMENT_PROVIDING_SUBMISSIONS])}}"
+                           class="printBtn">
                             <i class="fa fa-print"> टिप्पणी र आदेश ( प्रथम किस्ता )</i>
                         </a>
                     </div>
@@ -160,6 +162,41 @@
                     <div class="col-md-3">
                         <a href="javascript:void(0)">
                             <i class="fa fa-print"> पेश्की/भुक्तानी ( प्रथम किस्ता )</i>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-print"> होडिंग बोर्ड</i>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-print"> अनुगमन प्रतिवेदन</i>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-print"> कबुलियतनामा</i>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-print"> बैंक खाता खोल्ने सम्बन्धमा</i>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-print"> बैंक खाता संचालक परिवर्तन</i>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-print"> बैंक खाता बन्द</i>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="javascript:void(0)">
+                            <i class="fa fa-print">दर्ता प्रमाण पत्र</i>
                         </a>
                     </div>
                 </div>
@@ -464,7 +501,7 @@
 </div>
 
 <script>
-    $("#printProjectAgreementForm").on("click", function (e) {
+    $(".printBtn").on("click", function (e) {
         $.ajax({
             method: "GET",
             url: $(this).attr("route_action_url"),

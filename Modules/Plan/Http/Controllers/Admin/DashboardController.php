@@ -14,14 +14,12 @@ use Modules\Plan\Enums\ProjectStatusEnum;
 class DashboardController extends Controller
 {
     protected Collection $projects;
-    protected OfficeSetting $officeSetting;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->officeSetting = OfficeSetting::with('localBody')->first();
-        $this->projects = Project::where('fiscal_year_id', $this->officeSetting->fiscal_year_id)->get();
+        $this->projects = Project::where('fiscal_year_id', \officeSetting()->fiscal_year_id)->get();
     }
 
     public function __invoke()
@@ -51,7 +49,7 @@ class DashboardController extends Controller
     {
         $wardsData = collect();
 
-        foreach ($this->officeSetting->localBody->ward_no as $ward) {
+        foreach (\officeSetting()->localBody->ward_no as $ward) {
             $wardsData->push([
                 'ward_no' => "वार्ड नं. $ward",
                 'projects_count' => $this
@@ -78,11 +76,11 @@ class DashboardController extends Controller
     private function getPlanAreaWiseProjects()
     {
         $planAreas = PlanArea::withCount(['projects' => function ($query) {
-            $query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+            $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
         }])
             ->with(['planAreas' => function ($query) {
                 $query->withCount(['projects' => function ($sub_query) {
-                    $sub_query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+                    $sub_query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
                 }]);
             }])->whereNull('plan_area_id')->get()->map(function ($planArea) {
                 return [
@@ -117,11 +115,11 @@ class DashboardController extends Controller
     private function getBudgetHeadWiseProjects()
     {
         $budgetHeads = BudgetHead::withCount(['projects' => function ($query) {
-            $query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+            $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
         }])
             ->with(['budgetHeads' => function ($query) {
                 $query->withCount(['projects' => function ($sub_query) {
-                    $sub_query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+                    $sub_query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
                 }]);
             }])->whereNull('budget_head_id')->get()->map(function ($budgetHead) {
                 return [
@@ -146,11 +144,11 @@ class DashboardController extends Controller
     private function getPlanLevelWiseProjects()
     {
         $planLevels = PlanLevel::withCount(['projects' => function ($query) {
-            $query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+            $query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
         }])
             ->with(['planLevels' => function ($query) {
                 $query->withCount(['projects' => function ($sub_query) {
-                    $sub_query->where('fiscal_year_id', $this->officeSetting->fiscal_year_id);
+                    $sub_query->where('fiscal_year_id', \officeSetting()->fiscal_year_id);
                 }]);
             }])->whereNull('plan_level_id')->get()->map(function ($planLevel) {
                 return [

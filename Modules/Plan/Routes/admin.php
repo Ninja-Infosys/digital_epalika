@@ -54,5 +54,6 @@ Route::prefix('setting')->group(function () {
 //report
 Route::controller(ReportController::class)->prefix('report')->as('report.')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('annual-progress-report', 'annualProgressReport')->name('annual-progress-report');
     Route::post('report-data', 'report')->name('report-data');
 });

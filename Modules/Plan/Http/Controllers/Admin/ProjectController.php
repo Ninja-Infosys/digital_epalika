@@ -55,7 +55,7 @@ class ProjectController extends Controller
         $this->checkAuthorization('project_create');
 
         Project::create($request->validated() + [
-                'fiscal_year_id' => OfficeSetting::first()->fiscal_year_id
+                'fiscal_year_id' => \officeSetting()->fiscal_year_id
             ]);
 
         toast('योजना/कार्यक्रम सफलतापूर्वक थपियो', 'success');

@@ -112,4 +112,15 @@ class ReportController extends Controller
             $q->where('project_status', $request->input('project_status'));
         }
     }
+
+    public function annualProgressReport()
+    {
+        $fiscalYears = FiscalYear::get();
+        $planAreas = PlanArea::whereNull('plan_area_id')->get();
+        $planLevels = PlanLevel::whereNull('plan_level_id')->get();
+        $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+        $budgetSources = BudgetSource::all();
+
+        return view('plan::admin.report.annual-progress-report', compact('fiscalYears', 'planAreas', 'planLevels', 'budgetHeads', 'budgetSources'));
+    }
 }
