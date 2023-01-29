@@ -14,10 +14,30 @@
 @endcan
 
 <li class="{{request()->is('admin/plan/report*') ? 'active' : ''}}">
-    <a href="{{route('admin.plan.report.index')}}">
+    <a href="#sidebarPlanReport"
+       {{request()->is('admin/plan/report*') ? 'aria-expanded=true' : ''}}
+       data-bs-toggle="collapse">
         <i class="fa fa-file"></i>
-        <span> रिपोर्ट</span>
+        <span>रिपोर्ट</span>
+        <span class="menu-arrow">
+            <i class="fas fa-angle-right"></i>
+        </span>
     </a>
+    <div class="collapse {{request()->is('admin/plan/report*') ? 'show' : ''}}"
+         id="sidebarPlanReport">
+        <ul class="nav-second-level">
+            <li class="{{request()->is('admin/plan/report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.index')}}">
+                    <span> रिपोर्ट </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/annual-progress-report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.annual-progress-report')}}">
+                    <span>वार्षिक प्रगति प्रतिवेदन</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </li>
 
 <li class="{{request()->is('admin/plan/setting/*') ? 'active' : ''}}">
