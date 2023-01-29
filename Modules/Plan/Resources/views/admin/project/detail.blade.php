@@ -7,22 +7,26 @@
 <div class="modal-body">
     <ul class="nav nav-pills navtab-bg nav-justified" role="tablist">
         <li class="nav-item" role="presentation">
-            <a href="#project-detail" data-bs-toggle="tab" aria-expanded="true" class="nav-link active" aria-selected="true" role="tab">
+            <a href="#project-detail" data-bs-toggle="tab" aria-expanded="true" class="nav-link active"
+               aria-selected="true" role="tab">
                 योजनाको विवरण
             </a>
         </li>
         <li class="nav-item" role="presentation">
-            <a href="#project-cost-detail" data-bs-toggle="tab" aria-expanded="false" class="nav-link" aria-selected="false" tabindex="-1" role="tab">
+            <a href="#project-cost-detail" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
+               aria-selected="false" tabindex="-1" role="tab">
                 योजनाको कुल लागतको अनुमान
             </a>
         </li>
         <li class="nav-item" role="presentation">
-            <a href="#profile1" data-bs-toggle="tab" aria-expanded="false" class="nav-link" aria-selected="false" tabindex="-1" role="tab">
-                योजना  संचालन गर्ने संस्था/समिति
+            <a href="#profile1" data-bs-toggle="tab" aria-expanded="false" class="nav-link" aria-selected="false"
+               tabindex="-1" role="tab">
+                योजना संचालन गर्ने संस्था/समिति
             </a>
         </li>
         <li class="nav-item" role="presentation">
-            <a href="#technical-cost-estimate" data-bs-toggle="tab" aria-expanded="false" class="nav-link" aria-selected="false" tabindex="-1" role="tab">
+            <a href="#technical-cost-estimate" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
+               aria-selected="false" tabindex="-1" role="tab">
                 प्राविधिक अनुमान तथा मूल्याङ्कन
             </a>
         </li>
@@ -114,7 +118,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <b class="text-primary">आयोजना सम्पन्‍न हुने मिति : </b> {{$project->project_completion_date}}
+                            <b class="text-primary">आयोजना सम्पन्‍न हुने मिति
+                                : </b> {{$project->project_completion_date}}
                         </td>
                         @if($project->is_deadline_extended)
                             <td>
@@ -126,7 +131,9 @@
                 </table>
                 <div class="row bg-soft-secondary p-2 m-1">
                     <div class="col-md-3">
-                        <a href="javascript:void(0)" route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM])}}" id="printProjectAgreementForm">
+                        <a href="javascript:void(0)"
+                           route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM])}}"
+                           id="printProjectAgreementForm">
                             <i class="fa fa-print"> योजना सम्झौता आदेश</i>
                         </a>
                     </div>
@@ -137,22 +144,22 @@
                     </div>
                     <div class="col-md-3">
                         <a href="javascript:void(0)">
-                            <i class="fa fa-print"> टिप्पणी र आदेश ( प्रथम किस्ता  )</i>
+                            <i class="fa fa-print"> टिप्पणी र आदेश ( प्रथम किस्ता )</i>
                         </a>
                     </div>
                     <div class="col-md-3">
                         <a href="javascript:void(0)">
-                            <i class="fa fa-print"> टिप्पणी र आदेश ( दोस्रो किस्ता  )</i>
+                            <i class="fa fa-print"> टिप्पणी र आदेश ( दोस्रो किस्ता )</i>
                         </a>
                     </div>
                     <div class="col-md-3">
                         <a href="javascript:void(0)">
-                            <i class="fa fa-print"> टिप्पणी र आदेश ( अन्तिम किस्ता  )</i>
+                            <i class="fa fa-print"> टिप्पणी र आदेश ( अन्तिम किस्ता )</i>
                         </a>
                     </div>
                     <div class="col-md-3">
                         <a href="javascript:void(0)">
-                            <i class="fa fa-print"> पेश्की/भुक्तानी ( प्रथम किस्ता  )</i>
+                            <i class="fa fa-print"> पेश्की/भुक्तानी ( प्रथम किस्ता )</i>
                         </a>
                     </div>
                 </div>
@@ -171,7 +178,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>कार्यालयबाट स्वीकृत रकम </td>
+                        <td>कार्यालयबाट स्वीकृत रकम</td>
                         <td>रू. {{$project->allocated_amount}}</td>
                     </tr>
                     <tr>
@@ -326,21 +333,21 @@
     </div>
 </div>
 
-    <script>
-        $("#printProjectAgreementForm").on("click", function (e) {
-            $.ajax({
-                method: "GET",
-                url: $(this).attr("route_action_url"),
-                success: function (resp) {
-                    let print_area = window.open();
-                    print_area.document.write(resp.data);
-                    print_area.document.close();
-                    print_area.focus();
-                    print_area.print();
-                    print_area.close();
-                }, error: function () {
-                    alert("Something Went Wrong");
-                }
-            });
+<script>
+    $("#printProjectAgreementForm").on("click", function (e) {
+        $.ajax({
+            method: "GET",
+            url: $(this).attr("route_action_url"),
+            success: function (resp) {
+                let print_area = window.open();
+                print_area.document.write(resp.data);
+                print_area.document.close();
+                print_area.focus();
+                print_area.print();
+                print_area.close();
+            }, error: function () {
+                alert("Something Went Wrong");
+            }
         });
-    </script>
+    });
+</script>
