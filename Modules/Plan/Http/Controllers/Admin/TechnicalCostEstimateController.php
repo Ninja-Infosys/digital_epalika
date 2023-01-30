@@ -16,8 +16,6 @@ class TechnicalCostEstimateController extends Controller
     {
         $this->checkAuthorization('technicalCostEstimate_access');
 
-        $project->load('technicalCostEstimates');
-
         return view('plan::admin.technical_cost_estimate.index', compact('project'));
     }
 

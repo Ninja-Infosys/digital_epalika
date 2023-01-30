@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">योजनाहरु</li>
+                        <li class="breadcrumb-item active">योजना/कार्यक्रमहरु</li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजनाहरु</h4>
+                <h4 class="page-title">योजना/कार्यक्रमहरु</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजनाहरु</h4>
+                        <h4 class="header-title">योजना/कार्यक्रमहरु</h4>
                         @can('project_create')
                             <a href="{{route('admin.plan.project.create')}}"
                                class="btn btn-sm btn-outline-primary">
@@ -35,15 +35,16 @@
                 </div>
                 <div class="card-body">
                     @includeIf('inc.filter_form')
-                    <table class="table table-sm table-striped table-hover">
+                    <table class="table table-bordered table-sm table-striped mt-2 table-hover">
                         <thead>
                         <tr>
                             <th>क्र.स</th>
                             <th>दर्ता नं.</th>
-                            <th>आयोजनाको नाम</th>
-                            <th> सुरु हुने मिति</th>
-                            <th>सम्पन्‍न हुने मिति</th>
-                            <th>विनियोजन रकम</th>
+                            <th class="text-nowrap">आयोजना/कार्यक्रमको नाम</th>
+                            <th class="text-nowrap">योजना उपक्षेत्र</th>
+                            <th>सुरु हुने मिति</th>
+                            <th>वडा नं.</th>
+                            <th>स्वीकृत रकम</th>
                             <th>आयोजनाको अवस्था</th>
                             <th>#</th>
                         </tr>
@@ -62,9 +63,10 @@
                                         {{$project->project_name}}
                                     </a>
                                 </td>
+                                <td>{{$project->planArea->area_name??''}}</td>
                                 <td>{{$project->project_start_date}}</td>
-                                <td>{{$project->project_completion_date}}</td>
-                                <td>{{$project->allocated_amount}}</td>
+                                <td>{{implode(',',$project->ward_no)}}</td>
+                                <td>रू. {{$project->allocated_amount}}</td>
                                 <td>{{$project->project_status->label()}}</td>
                                 <td>
                                     <div class="btn-group dropdown mb-2">
