@@ -45,11 +45,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($recommendationCategories as $recommendationCategorie)
+                                @foreach ($recommendationCategories as $recommendationCategory)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            {{ $recommendationCategorie->title ?? '' }}
+                                            {{ $recommendationCategory->title ?? '' }}
                                         </td>
                                         <td>
                                             {{-- <a href="{{route('admin.recommendation.setting.recommendationcategory.updateStatus',[$applicationTypeEnum,$formBuilder])}}">
@@ -58,7 +58,7 @@
                                         </td>
                                         <td>
                                             <a data-bs-type="edit"
-                                                href="{{ route('admin.recommendation.setting.recommendationCategory.edit',$recommendationCategorie) }}"
+                                                href="{{ route('admin.recommendation.setting.recommendationCategory.edit', [$type,$recommendationCategory]) }}"
                                                 class="btn btn-xs btn-outline-warning"
                                                 title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>

@@ -48,14 +48,14 @@ class RecommendationCategoryController extends Controller
 
     public function edit($type,RecommendationCategory $recommendationCategory)
     {
-        return view('recommendation::admin.setting.recommendationcategory.edit');
+        return view('recommendation::admin.setting.recommendationcategory.edit', compact('type','recommendationCategory'));
     }
 
     public function update(UpdateRecommendationCategoryRequest $request, $type,RecommendationCategory $recommendationCategory)
     {
         $recommendationCategory->update($request->validated());
         toast('सिफारिस सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect()->route('recommendation::admin.setting.recommendationcategory.index');
+        return redirect()->route('recommendation::admin.setting.recommendationcategory.index', compact('type','recommendationCategory'));
     }
 
     public function destroy($type,RecommendationCategory $recommendationCategory)

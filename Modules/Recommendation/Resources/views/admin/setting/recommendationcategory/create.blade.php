@@ -37,14 +37,14 @@
                     <form action="{{ route('admin.recommendation.setting.recommendationCategory.store', $type) }}"
                         method="post">
                         @csrf
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <label for="recommendation_category_id">सिफारिस प्रकार आ.डी</label>
                                 <select id="recommendation_category_id" class="form-control">
                                     <option selected>Choose...</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input type="text" name="title" value="{{ old('title') }}"
                                     class="form-control @error('title') is-invalid @enderror" id="name"
