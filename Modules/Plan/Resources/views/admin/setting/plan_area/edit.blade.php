@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">योजना क्षेत्रहरु</li>
+                        <li class="breadcrumb-item active">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजना क्षेत्रहरु</h4>
+                <h4 class="page-title">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजना क्षेत्र सम्पादन गर्नुहोस्</h4>
+                        <h4 class="header-title">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्र':'क्षेत्र'}} सम्पादन गर्नुहोस्</h4>
                         <a href="{{route('admin.plan.planArea.index',$type)}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> योजना क्षेत्रहरु
+                            <i class="fa fa-list"></i> योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}
                         </a>
                     </div>
                 </div>

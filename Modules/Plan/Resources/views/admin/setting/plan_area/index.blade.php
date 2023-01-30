@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">योजना क्षेत्रहरु</li>
+                        <li class="breadcrumb-item active">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजना क्षेत्रहरु</h4>
+                <h4 class="page-title">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्रहरु':'क्षेत्रहरु'}}</h4>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजना क्षेत्र सूची</h4>
+                        <h4 class="header-title">योजना {{$type=='planAreaSubCategory' ? 'उपक्षेत्र':'क्षेत्र'}} सूची</h4>
                         @can('planArea_create')
                             <a href="{{route('admin.plan.planArea.create',$type)}}"
                                class="btn btn-sm btn-outline-primary">
@@ -52,7 +52,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td> {{$planArea->area_name}} </td>
                                     @if($type=='planAreaSubCategory')
-                                    <td>{{$planArea->planArea->area_name}}</td>
+                                    <td>{{$planArea->planArea->area_name ??''}}</td>
                                     @endif
                                     <td>
                                         <a data-bs-type="edit" href="{{route('admin.plan.planArea.edit',[$type,$planArea])}}"

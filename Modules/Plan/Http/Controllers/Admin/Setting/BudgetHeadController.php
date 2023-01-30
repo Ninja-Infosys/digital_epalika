@@ -10,13 +10,19 @@ use Modules\Plan\Http\Requests\BudgetHead\UpdateBudgetHeadRequest;
 
 class BudgetHeadController extends Controller
 {
-    public function index()
+    public function index($type)
     {
         $this->checkAuthorization('budgetHead_access');
 
-        $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
+        $budgetHeads = BudgetHead::with('budgetHeads')->where(function ($query) use ($type){
+            if ($type == 'budgetSubHead') {
+                $query->whereNotNull('budget_head_id');
+            }else{
+                $query->whereNull('budget_head_id');
+            }
+        })->get();
 
-        return view('plan::admin.setting.budget_head.index', compact('budgetHeads'));
+        return view('plan::admin.setting.budget_head.index', compact('budgetHeads','type'));
     }
 
     public function budgetSubHead(Request $request)
@@ -30,16 +36,16 @@ class BudgetHeadController extends Controller
         ]);
     }
 
-    public function create()
+    public function create($type)
     {
         $this->checkAuthorization('budgetHead_create');
 
         $mainBudgetHeads = BudgetHead::whereNull('budget_head_id')->get();
 
-        return view('plan::admin.setting.budget_head.create', compact('mainBudgetHeads'));
+        return view('plan::admin.setting.budget_head.create', compact('mainBudgetHeads','type'));
     }
 
-    public function store(StoreBudgetHeadRequest $request)
+    public function store(StoreBudgetHeadRequest $request,$type)
     {
         $this->checkAuthorization('budgetHead_create');
         BudgetHead::create($request->validated());
@@ -48,26 +54,26 @@ class BudgetHeadController extends Controller
         return back();
     }
 
-    public function edit(BudgetHead $budgetHead)
+    public function edit($type,BudgetHead $budgetHead)
     {
         $this->checkAuthorization('budgetHead_edit');
 
         $mainBudgetHeads = BudgetHead::whereNull('budget_head_id')->get();
 
-        return view('plan::admin.setting.budget_head.edit', compact('budgetHead', 'mainBudgetHeads'));
+        return view('plan::admin.setting.budget_head.edit', compact('budgetHead', 'mainBudgetHeads','type'));
     }
 
-    public function update(UpdateBudgetHeadRequest $request, BudgetHead $budgetHead)
+    public function update(UpdateBudgetHeadRequest $request, $type,BudgetHead $budgetHead)
     {
         $this->checkAuthorization('budgetHead_edit');
 
         $budgetHead->update($request->validated());
 
         toast('बजेट शिर्षक सफलतापूर्वक सम्पादन गरियो', 'success');
-        return redirect(route('admin.plan.budgetHead.index'));
+        return redirect(route('admin.plan.budgetHead.index',$type));
     }
 
-    public function destroy(BudgetHead $budgetHead)
+    public function destroy($type,BudgetHead $budgetHead)
     {
         $this->checkAuthorization('budgetHead_delete');
         $budgetHead->budgetHeads()->delete();
