@@ -25,7 +25,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $projects = Project::where(function (Builder $q) {
+        $projects = Project::with('planArea')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['registration_no', 'project_name', 'ward_no'], request('search'));
             }

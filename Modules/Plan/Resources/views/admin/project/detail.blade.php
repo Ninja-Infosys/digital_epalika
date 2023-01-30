@@ -553,7 +553,7 @@
                                 <td>{{$technicalCostEstimate->length}}</td>
                                 <td>{{$technicalCostEstimate->breadth}}</td>
                                 <td>{{$technicalCostEstimate->height}}</td>
-                                <td>{{$technicalCostEstimate->amount}}</td>
+                                <td>{{$technicalCostEstimate->quantity}}</td>
                                 <td>{{$technicalCostEstimate->unit}}</td>
                                 <td>{{$technicalCostEstimate->rate}}</td>
                                 <td>{{$technicalCostEstimate->amount}}</td>
@@ -564,6 +564,12 @@
                             </tr>
                         @endforelse
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th colspan="8">जम्मा रकम</th>
+                            <td colspan="2">रू. {{$project->technicalCostEstimates->sum('amount')}}</td>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
