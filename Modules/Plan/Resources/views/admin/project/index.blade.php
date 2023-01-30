@@ -21,16 +21,90 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="collapse mb-2" id="collapseFilterForm">
+                <div class="card" >
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="from_date" labelNe="मिति देखि"
+                                        nameEn="en_from_date" labelEn="From Date"
+                                        :get-today-date="false"
+                                    />
+                                </div>
+                                <div class="col-md-3">
+                                    <x-date-input-component
+                                        nameNe="to_date" labelNe="मिति सम्म"
+                                        nameEn="en_to_date" labelEn="To Date"
+                                        :get-today-date="false"
+                                    />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="project_status">योजनाको अवस्था</label>
+                                    <select name="project_status"
+                                            id="project_status" class="form-select">
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach(\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
+                                            <option
+                                                {{$projectStatus->value==request('project_status') ? 'selected' : ''}}
+                                                value="{{$projectStatus->value}}">{{$projectStatus->label()}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="grant_category_id">अनुदान किसिम</label>
+                                    <select name="grant_category_id"
+                                            id="grant_category_id" class="form-select">
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach($grantCategories as $grantCategory)
+                                            <option
+                                                {{$grantCategory->id==request('grant_category_id') ? 'selected' : ''}}
+                                                value="{{$grantCategory->id}}">{{$grantCategory->title}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="budget_">बजेट श्रोत</label>
+                                    <select name="grant_category_id"
+                                            id="grant_category_id" class="form-select">
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach($grantCategories as $grantCategory)
+                                            <option
+                                                {{$grantCategory->id==request('grant_category_id') ? 'selected' : ''}}
+                                                value="{{$grantCategory->id}}">{{$grantCategory->title}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                <i class="fa fa-search"> पेश गर्नुहोस्</i>
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">योजना/कार्यक्रमहरु</h4>
-                        @can('project_create')
-                            <a href="{{route('admin.plan.project.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
+                            </button>
+                            @can('project_create')
+                                <a href="{{route('admin.plan.project.create')}}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
+                                </a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -54,12 +128,14 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>
-                                    <a class="projectShowBtn" action-url="{{route('admin.plan.project.show',$project)}}" href="javascript:void(0)">
+                                    <a class="projectShowBtn" action-url="{{route('admin.plan.project.show',$project)}}"
+                                       href="javascript:void(0)">
                                         {{$project->registration_no}}
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="projectShowBtn" action-url="{{route('admin.plan.project.show',$project)}}" href="javascript:void(0)">
+                                    <a class="projectShowBtn" action-url="{{route('admin.plan.project.show',$project)}}"
+                                       href="javascript:void(0)">
                                         {{$project->project_name}}
                                     </a>
                                 </td>
@@ -151,7 +227,8 @@
             </div>
         </div>
     </div>
-    <div id="project-info-modal" class="modal fade" tabindex="-1" aria-labelledby="fullWidthModalLabel" style="display: none;" aria-hidden="true">
+    <div id="project-info-modal" class="modal fade" tabindex="-1" aria-labelledby="fullWidthModalLabel"
+         style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-full-width">
             <div class="modal-content" id="project-data">
 
@@ -161,8 +238,8 @@
 
     @push('scripts')
         <script>
-            $(document).ready(function (){
-                $('.projectShowBtn').on('click',function (e){
+            $(document).ready(function () {
+                $('.projectShowBtn').on('click', function (e) {
                     e.preventDefault()
                     $.ajax({
                         method: "GET",

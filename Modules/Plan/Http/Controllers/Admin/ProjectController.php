@@ -7,6 +7,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\ExpenseHead;
@@ -27,13 +28,28 @@ class ProjectController extends Controller
 
         $projects = Project::with('planArea')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['registration_no', 'project_name', 'ward_no'], request('search'));
+                $q->whereLike(['registration_no', 'project_name'], request('search'));
             }
+            if (!empty(request('from_date'))) {
+                $q->whereDate('project_start_date', '>=', request('from_date'));
+            }
+            if (!empty(request('to_date'))) {
+                $q->whereDate('project_start_date', '<=', request('to_date'));
+            }
+            if (!empty(request('project_status'))) {
+                $q->where('project_status', request('project_status'));
+            }
+            if (!empty(request('grant_category_id'))) {
+                $q->where('grant_category_id', request('grant_category_id'));
+            }
+
         })
             ->latest()->paginate(10);
+        $budgetSources=BudgetSource::all();
+        $grantCategories=GrantCategory::all();
 
 
-        return view('plan::admin.project.index', compact('projects'));
+        return view('plan::admin.project.index', compact('projects','budgetSources','grantCategories'));
     }
 
     public function create()
@@ -46,8 +62,9 @@ class ProjectController extends Controller
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
         $grantCategories = GrantCategory::all();
         $expenseHeads = ExpenseHead::all();
+        $registration_no="PP-".(\officeSetting()->fiscalYear->title??'').'-'.Str::padLeft(Project::max('id')+1,3,0);
 
-        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads'));
+        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads','registration_no'));
     }
 
     public function store(StoreProjectRequest $request)

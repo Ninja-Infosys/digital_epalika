@@ -81,7 +81,7 @@ class ReportController extends Controller
         return $columnData;
     }
 
-    public function filterDataFromUser($q, Request $request): void
+    private function filterDataFromUser($q, Request $request): void
     {
         if (!empty($request->input('fiscal_year'))) {
             $q->whereIn('fiscal_year_id', $request->input('fiscal_year'));
