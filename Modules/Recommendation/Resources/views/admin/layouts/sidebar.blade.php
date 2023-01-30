@@ -16,7 +16,7 @@
        {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cog"></i>
-        <span>सेटिंग</span>
+        <span>आधारभूत सेटिंग</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -25,14 +25,24 @@
         class="collapse {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'show' : ''}}"
         id="setting">
         <ul class="nav-second-level">
-{{--            @can('applicationFormSetting_access')--}}
 
+            <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
+                <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationCategory')}}">
+                    <span>सिफारिस</span>
+                </a>
+            </li>
+
+            <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
+                <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
+                    <span>सिफारिस1</span>
+                </a>
+            </li>
                 <li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
                     <a href="{{route('admin.recommendation.setting.showApplicationList')}}">
                         <span>निवेदन फारम सेटिंग</span>
                     </a>
                 </li>
-{{--            @endcan--}}
+
         </ul>
     </div>
 </li>
