@@ -5,6 +5,7 @@ use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
+use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
 use Modules\Recommendation\Http\Controllers\ShowApplicationListController;
 
 Route::get('dashboard', DashboardController::class)->name('dashboard');
@@ -57,6 +58,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('{applicationTypeEnum}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
     Route::resource('{applicationTypeEnum}/recommendationTemplate', RecommendationTemplateController::class)->names('recommendationTemplate');
     Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
+    Route::resource('{type}/recommendationCategory',RecommendationCategoryController::class);
 });
 
 Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');
