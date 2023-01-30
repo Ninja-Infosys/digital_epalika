@@ -205,11 +205,6 @@ class Project extends Model
         return $this->morphMany(File::class, 'model');
     }
 
-    public function projectBills(): HasMany
-    {
-        return $this->hasMany(ProjectBill::class);
-    }
-
     public function consumerCommitteeTransactions(): HasMany
     {
         return $this->hasMany(ConsumerCommitteeTransaction::class);

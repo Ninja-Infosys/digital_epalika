@@ -7,6 +7,7 @@ use App\Models\Settings\OfficeSetting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Modules\Plan\Entities\BudgetHead;
 use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\ExpenseHead;
@@ -27,13 +28,35 @@ class ProjectController extends Controller
 
         $projects = Project::with('planArea')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
-                $q->whereLike(['registration_no', 'project_name', 'ward_no'], request('search'));
+                $q->whereLike(['registration_no', 'project_name'], request('search'));
             }
+            if (!empty(request('from_date'))) {
+                $q->whereDate('project_start_date', '>=', request('from_date'));
+            }
+            if (!empty(request('to_date'))) {
+                $q->whereDate('project_start_date', '<=', request('to_date'));
+            }
+            if (!empty(request('project_status'))) {
+                $q->where('project_status', request('project_status'));
+            }
+            if (!empty(request('grant_category_id'))) {
+                $q->where('grant_category_id', request('grant_category_id'));
+            }
+            if (!empty(request('budget_source_id'))) {
+                $q->where('budget_source_id', request('budget_source_id'));
+            }
+            if (!empty(request('expense_head_id'))) {
+                $q->where('expense_head_id', request('expense_head_id'));
+            }
+
         })
             ->latest()->paginate(10);
+        $budgetSources = BudgetSource::all();
+        $grantCategories = GrantCategory::all();
+        $expenseHeads = ExpenseHead::all();
 
 
-        return view('plan::admin.project.index', compact('projects'));
+        return view('plan::admin.project.index', compact('projects', 'budgetSources', 'grantCategories', 'expenseHeads'));
     }
 
     public function create()
@@ -46,8 +69,9 @@ class ProjectController extends Controller
         $budgetHeads = BudgetHead::with('budgetHeads')->whereNull('budget_head_id')->get();
         $grantCategories = GrantCategory::all();
         $expenseHeads = ExpenseHead::all();
+        $registration_no = "PP-" . (\officeSetting()->fiscalYear->title ?? '') . '-' . Str::padLeft(Project::max('id') + 1, 3, 0);
 
-        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads'));
+        return view('plan::admin.project.create', compact('planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads', 'registration_no'));
     }
 
     public function store(StoreProjectRequest $request)
@@ -66,11 +90,11 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions','technicalCostEstimates');
+        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions', 'technicalCostEstimates');
 
-        if(request()->ajax()){
+        if (request()->ajax()) {
             return response()->json([
-                'view'=>(String)View::make('plan::admin.project.detail',compact('project'))
+                'view' => (string)View::make('plan::admin.project.detail', compact('project'))
             ]);
         }
 
@@ -88,7 +112,7 @@ class ProjectController extends Controller
         $grantCategories = GrantCategory::all();
         $expenseHeads = ExpenseHead::all();
 
-        return view('plan::admin.project.edit', compact('project', 'planAreas', 'planLevels', 'budgetSources', 'budgetHeads','grantCategories','expenseHeads'));
+        return view('plan::admin.project.edit', compact('project', 'planAreas', 'planLevels', 'budgetSources', 'budgetHeads', 'grantCategories', 'expenseHeads'));
     }
 
     public function update(UpdateProjectRequest $request, Project $project)
@@ -137,7 +161,7 @@ class ProjectController extends Controller
         return redirect(route('admin.plan.project.fileList', $project));
     }
 
-    public function print(Request $request, Project $project,PlanTemplateTypeEnum $planTemplateTypeEnum)
+    public function print(Request $request, Project $project, PlanTemplateTypeEnum $planTemplateTypeEnum)
     {
         if ($request->ajax()) {
             return response()->json([
