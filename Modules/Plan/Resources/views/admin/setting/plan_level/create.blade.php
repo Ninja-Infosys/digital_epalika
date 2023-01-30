@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">योजना स्तरहरू</li>
+                        <li class="breadcrumb-item active">योजना {{$type=='planSubLevel' ? 'उपस्तरहरु':'स्तरहरू'}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">योजना स्तरहरू</h4>
+                <h4 class="page-title">योजना {{$type=='planSubLevel' ? 'उपस्तरहरु':'स्तरहरू'}}</h4>
             </div>
         </div>
     </div>
@@ -23,16 +23,17 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नयाँ स्तर थप्नुहोस्</h4>
-                        <a href="{{route('admin.plan.planLevel.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> योजना स्तरहरू
+                        <h4 class="header-title">नयाँ {{$type=='planSubLevel' ? 'उपस्तर':'स्तर'}} थप्नुहोस्</h4>
+                        <a href="{{route('admin.plan.planLevel.index',$type)}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> योजना {{$type=='planSubLevel' ? 'उपस्तरहरु':'स्तरहरू'}}
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.plan.planLevel.store')}}" method="post">
+                    <form action="{{route('admin.plan.planLevel.store',$type)}}" method="post">
                         @csrf
                         <div class="row">
+                            @if($type=='planSubLevel')
                             <div class="col-md-12 mb-2">
                                 <label for="plan_level_id" class="form-label">मुख्य योजना स्तर</label>
                                 <select
@@ -51,6 +52,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            @endif
                             <div class="col-md-12 mb-2">
                                 <label for="level_name" class="form-label">स्तरको नाम *</label>
                                 <input

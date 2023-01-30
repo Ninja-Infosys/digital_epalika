@@ -10,16 +10,21 @@ use Modules\Plan\Http\Requests\PlanArea\UpdatePlanAreaRequest;
 
 class PlanAreaController extends Controller
 {
-    public function index()
+    public function index($type)
     {
         $this->checkAuthorization('planArea_access');
+        $planAreas = PlanArea::with('planArea')->where(function ($query) use ($type) {
+            if ($type == 'planAreaSubCategory') {
+                $query->whereNotNull('plan_area_id');
+            }else{
+                $query->whereNull('plan_area_id');
+            }
+        })->get();
 
-        $planAreas = PlanArea::with('planAreas')->whereNull('plan_area_id')->get();
-
-        return view('plan::admin.setting.plan_area.index', compact('planAreas'));
+        return view('plan::admin.setting.plan_area.index', compact('planAreas', 'type'));
     }
 
-    public function planSubArea(Request $request)
+    public function planSubArea(Request $request, $type)
     {
         $this->checkAuthorization('planArea_access');
 
@@ -32,16 +37,16 @@ class PlanAreaController extends Controller
         ]);
     }
 
-    public function create()
+    public function create($type)
     {
         $this->checkAuthorization('planArea_create');
 
         $mainPlanAreas = PlanArea::whereNull('plan_area_id')->get();
 
-        return view('plan::admin.setting.plan_area.create', compact('mainPlanAreas'));
+        return view('plan::admin.setting.plan_area.create', compact('mainPlanAreas', 'type'));
     }
 
-    public function store(StorePlanAreaRequest $request)
+    public function store(StorePlanAreaRequest $request, $type)
     {
         $this->checkAuthorization('planArea_create');
 
@@ -52,16 +57,16 @@ class PlanAreaController extends Controller
         return back();
     }
 
-    public function edit(PlanArea $planArea)
+    public function edit($type, PlanArea $planArea)
     {
         $this->checkAuthorization('planArea_edit');
 
         $mainPlanAreas = PlanArea::whereNull('plan_area_id')->get();
 
-        return view('plan::admin.setting.plan_area.edit', compact('planArea', 'mainPlanAreas'));
+        return view('plan::admin.setting.plan_area.edit', compact('planArea', 'mainPlanAreas', 'type'));
     }
 
-    public function update(UpdatePlanAreaRequest $request, PlanArea $planArea)
+    public function update(UpdatePlanAreaRequest $request, $type, PlanArea $planArea)
     {
         $this->checkAuthorization('planArea_edit');
 
@@ -71,10 +76,9 @@ class PlanAreaController extends Controller
         return redirect(route('admin.plan.planArea.index'));
     }
 
-    public function destroy(PlanArea $planArea)
+    public function destroy($type, PlanArea $planArea)
     {
         $this->checkAuthorization('planArea_delete');
-
         $planArea->planAreas()->delete();
         $planArea->delete();
 

@@ -23,9 +23,9 @@
             <div class="card text-center">
                 <div class="card-body">
                     <img src="{{$organization->profile_photo_url}}" class="rounded-circle avatar-lg img-thumbnail"
-                         alt="profile-image">
+                         alt="profile-image" style="width: 100px; height: 100px">
 
-                    <h4 class="mb-0">{{$organization->name}}</h4>
+                    <h4 class="mt-2 text-black">{{$organization->name}}</h4>
                     {{--                    <p class="text-muted">@webdesigner</p>--}}
                     <a href="{{route('emap.admin.organization.update-login-status',$organization)}}"
                        class="btn btn-{{$organization->is_active==1 ?'success':'danger'}} btn-xs waves-effect mb-2 waves-light"
@@ -36,13 +36,13 @@
 
                     <div class="text-start mt-3">
 
-                        <p class="text-muted mb-2 font-13"><strong>नाम :</strong> <span
+                        <p class="text-muted mb-2 font-15"><strong>नाम :</strong> <span
                                 class="ms-2">{{$organization->name}}</span>
                         </p>
-                        <p class="text-muted mb-2 font-13"><strong>इमेल :</strong><span
+                        <p class="text-muted mb-2 font-15"><strong>इमेल :</strong><span
                                 class="ms-2">{{$organization->email}}</span></p>
 
-                        <p class="text-muted mb-2 font-13"><strong>फोन :</strong> <span
+                        <p class="text-muted mb-2 font-15"><strong>फोन :</strong> <span
                                 class="ms-2">{{$organization->phone}}</span></p>
 
                     </div>

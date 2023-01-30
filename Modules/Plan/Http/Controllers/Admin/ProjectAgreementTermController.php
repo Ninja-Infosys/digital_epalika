@@ -2,6 +2,7 @@
 
 namespace Modules\Plan\Http\Controllers\Admin;
 
+use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,7 @@ use Modules\Plan\Entities\ProjectAgreementTerm;
 
 class ProjectAgreementTermController extends Controller
 {
+    use NepaliDateConverter;
     public function index(Project $project)
     {
         return view('plan::index');
@@ -20,7 +22,8 @@ class ProjectAgreementTermController extends Controller
     {
         $project->load('projectAgreementTerm');
 
-        $agreementTermTemplate=(String)View::make('plan::admin.setting.template.agreement_term_template',compact('project'));
+        $today_date=$this->get_today_nepali_date();
+        $agreementTermTemplate=(String)View::make('plan::admin.setting.template.agreement_term_template',compact('project','today_date'));
         $project->load('projectAgreementTerm');
 
         return view('plan::admin.project_agreement_term.create',compact('project','agreementTermTemplate'));

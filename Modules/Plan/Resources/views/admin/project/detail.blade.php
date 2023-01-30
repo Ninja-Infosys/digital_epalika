@@ -25,6 +25,12 @@
             </a>
         </li>
         <li class="nav-item" role="presentation">
+            <a href="#financial-transactions" data-bs-toggle="tab" aria-expanded="false" class="nav-link" aria-selected="false"
+               tabindex="-1" role="tab">
+                आर्थिक कारोबारको विवरण
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
             <a href="#technical-cost-estimate" data-bs-toggle="tab" aria-expanded="false" class="nav-link"
                aria-selected="false" tabindex="-1" role="tab">
                 प्राविधिक अनुमान तथा मूल्याङ्कन
@@ -129,7 +135,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <div class="row bg-soft-secondary p-2 m-1">
+                <div class="row bg-soft-secondary g-2 p-2 m-1">
                     <div class="col-md-3">
                         <a href="javascript:void(0)"
                            route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::PROJECT_AGREEMENT_FORM])}}"
@@ -452,6 +458,71 @@
                             </ul>
                         </h5>
                     </div>
+                @endif
+            </div>
+        </div>
+        <div class="tab-pane" id="financial-transactions" role="tabpanel">
+            <div class="p-2 border border-info">
+                @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                        <tr>
+                            <th>क्र.सं.</th>
+                            <th>बिल/पेश्कीको प्रकार</th>
+                            <th>बिल/पेश्कीको क्रम</th>
+                            <th>मिति</th>
+                            <th>रकम</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($project->projectBidSubmissions as $projectBidSubmission)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$projectBidSubmission->submission_type?->label()??''}}</td>
+                                <td>{{$projectBidSubmission->submission_no}}</td>
+                                <td>{{$projectBidSubmission->date}}</td>
+                                <td>रू. {{$projectBidSubmission->amount}}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th class="text-center" colspan="4">जम्मा रकम</th>
+                            <td>रू. {{$project->projectBidSubmissions->sum('amount')}}</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                @else
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                        <tr>
+                            <th>क्र.सं.</th>
+                            <th>प्रकार</th>
+                            <th>मिति</th>
+                            <th>रकम</th>
+                            <th>कैफियत</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($project->consumerCommitteeTransactions as $consumerCommitteeOfficial)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$consumerCommitteeOfficial->type?->label()??''}}</td>
+                                <td>{{$consumerCommitteeOfficial->date}}</td>
+                                <td>{{$consumerCommitteeOfficial->amount}}</td>
+                                <td>{{$consumerCommitteeOfficial->remarks}}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
                 @endif
             </div>
         </div>

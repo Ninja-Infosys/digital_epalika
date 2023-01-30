@@ -45,7 +45,7 @@
        {{request()->is('admin/plan/setting/*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-cogs"></i>
-        <span>सेटिङ</span>
+        <span>  आधारभूत सेटिङ</span>
         <span class="menu-arrow">
             <i class="fas fa-angle-right"></i>
         </span>
@@ -55,22 +55,43 @@
         <ul class="nav-second-level">
             @can('planArea_access')
                 <li class="{{request()->is('admin/plan/setting/planArea') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.planArea.index')}}">
-                        <span>  योजना क्षेत्र/उप-क्षेत्र  </span>
+                    <a href="{{route('admin.plan.planArea.index','planAreaCategory')}}">
+                        <span>  योजना क्षेत्र  </span>
+                    </a>
+                </li>
+            @endcan
+            @can('planArea_access')
+                <li class="{{request()->is('admin/plan/setting/planArea') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planArea.index','planAreaSubCategory')}}">
+                        <span>  योजना उप-क्षेत्र  </span>
                     </a>
                 </li>
             @endcan
             @can('planLevel_access')
                 <li class="{{request()->is('admin/plan/setting/planLevel') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.planLevel.index')}}">
-                        <span> योजना स्तर/उप-स्तरहरु </span>
+                    <a href="{{route('admin.plan.planLevel.index','planLevel')}}">
+                        <span> योजना स्तरहरु </span>
+                    </a>
+                </li>
+            @endcan
+            @can('planLevel_access')
+                <li class="{{request()->is('admin/plan/setting/planLevel') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.planLevel.index','planSubLevel')}}">
+                        <span> योजना उप-स्तरहरु </span>
                     </a>
                 </li>
             @endcan
             @can('budgetHead_access')
                 <li class="{{request()->is('admin/plan/setting/budgetHead') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.budgetHead.index')}}">
-                        <span> बजेट शिर्षक/उप-शिर्षक </span>
+                    <a href="{{route('admin.plan.budgetHead.index','budgetHead')}}">
+                        <span> बजेट शिर्षक </span>
+                    </a>
+                </li>
+            @endcan
+            @can('budgetHead_access')
+                <li class="{{request()->is('admin/plan/setting/budgetHead') ? 'active' : ''}}">
+                    <a href="{{route('admin.plan.budgetHead.index','budgetSubHead')}}">
+                        <span> बजेट उप-शिर्षक </span>
                     </a>
                 </li>
             @endcan
@@ -82,13 +103,6 @@
                 </li>
             @endcan
 
-            @can('planTemplate_access')
-                <li class="{{request()->is('admin/plan/setting/planTemplate') ? 'active' : ''}}">
-                    <a href="{{route('admin.plan.planTemplate.index')}}">
-                        <span> टेम्प्लेट </span>
-                    </a>
-                </li>
-            @endcan
 
             @can('planTemplate_access')
                 <li class="{{request()->is('admin/plan/setting/expenseHead') ? 'active' : ''}}">
@@ -105,6 +119,14 @@
                     </a>
                 </li>
             @endcan
+                @can('planTemplate_access')
+                    <li class="{{request()->is('admin/plan/setting/planTemplate') ? 'active' : ''}}">
+                        <a href="{{route('admin.plan.planTemplate.index')}}">
+                            <span> टेम्प्लेट </span>
+                        </a>
+                    </li>
+                @endcan
+
         </ul>
     </div>
 </li>

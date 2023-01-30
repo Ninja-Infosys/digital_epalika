@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">बजेट शिर्षकहरू</li>
+                        <li class="breadcrumb-item active">बजेट {{$type=='budgetSubHead' ? 'उप-शिर्षकहरु':'शिर्षकहरु'}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">बजेट शिर्षकहरू</h4>
+                <h4 class="page-title">बजेट {{$type=='budgetSubHead' ? 'उप-शिर्षकहरु':'शिर्षकहरु'}}</h4>
             </div>
         </div>
     </div>
@@ -23,17 +23,18 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">बजेट शिर्षक सम्पादन गर्नुहोस</h4>
-                        <a href="{{route('admin.plan.budgetHead.index')}}" class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> बजेट शिर्षकहरू
+                        <h4 class="header-title">बजेट {{$type=='budgetSubHead' ? 'उप-शिर्षक':'शिर्षक'}} सम्पादन गर्नुहोस</h4>
+                        <a href="{{route('admin.plan.budgetHead.index',$type)}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-list"></i> बजेट {{$type=='budgetSubHead' ? 'उप-शिर्षकहरु':'शिर्षकहरु'}}
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.plan.budgetHead.update',$budgetHead)}}" method="post">
+                    <form action="{{route('admin.plan.budgetHead.update',[$type,$budgetHead])}}" method="post">
                         @csrf
                         @method('put')
                         <div class="row">
+                            @if($type == 'budgetSubHead')
                             <div class="col-md-12 mb-2">
                                 <label for="budget_head_id" class="form-label">मुख्य बजेट शिर्षक</label>
                                 <select
@@ -52,6 +53,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            @endif
                             <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input

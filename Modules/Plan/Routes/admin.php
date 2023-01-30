@@ -40,11 +40,11 @@ Route::resource('project/{project}/technicalCostEstimate', TechnicalCostEstimate
 
 Route::prefix('setting')->group(function () {
     Route::get('planSubArea', [PlanAreaController::class, 'planSubArea'])->name('planSubArea');
-    Route::resource('planArea', PlanAreaController::class)->except('show');
+    Route::resource('{type}/planArea', PlanAreaController::class)->except('show');
     Route::get('planSubLevel', [PlanLevelController::class, 'planSubLevel'])->name('planSubLevel');
-    Route::resource('planLevel', PlanLevelController::class)->except('show');
+    Route::resource('{type}/planLevel', PlanLevelController::class)->except('show');
     Route::get('budgetSubHead', [BudgetHeadController::class, 'budgetSubHead'])->name('budgetSubHead');
-    Route::resource('budgetHead', BudgetHeadController::class)->except('show');
+    Route::resource('{type}/budgetHead', BudgetHeadController::class)->except('show');
     Route::resource('budgetSource', BudgetSourceController::class)->except('show');
     Route::resource('planTemplate', PlanTemplateController::class);
     Route::resource('expenseHead', ExpenseHeadController::class);

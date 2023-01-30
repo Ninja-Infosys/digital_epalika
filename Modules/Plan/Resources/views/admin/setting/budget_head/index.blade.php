@@ -11,10 +11,10 @@
                             </a>
                         </li>
 
-                        <li class="breadcrumb-item active">बजेट शिर्षकहरू</li>
+                        <li class="breadcrumb-item active">बजेट {{$type=='budgetSubHead' ? 'उप-शिर्षकहरु':'शिर्षकहरु'}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">बजेट शिर्षकहरू</h4>
+                <h4 class="page-title">बजेट {{$type=='budgetSubHead' ? 'उप-शिर्षकहरु':'शिर्षकहरु'}}</h4>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">बजेट शिर्षक सूची</h4>
+                        <h4 class="header-title">बजेट {{$type=='budgetSubHead' ? 'उप-शिर्षक':'शिर्षक'}} सूची</h4>
                         @can('budgetHead_create')
-                            <a href="{{route('admin.plan.budgetHead.create')}}"
+                            <a href="{{route('admin.plan.budgetHead.create',$type)}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -39,6 +39,9 @@
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
+                                @if($type=='budgetSubHead')
+                                    <th>बजेट उप-शिर्षक</th>
+                                @endif
                                 <th>बजेट शिर्षक</th>
                                 <th>#</th>
                             </tr>
@@ -46,14 +49,17 @@
                             <tbody>
                             @forelse($budgetHeads as $key=>$budgetHead)
                                 <tr>
-                                    <th>{{$loop->iteration}}</th>
-                                    <th>{{$budgetHead->title}}</th>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$budgetHead->title}}</td>
+                                    @if($type=='budgetSubHead')
+                                    <td>{{$budgetHead->budgetHead->title ??''}}</td>
+                                    @endif
                                     <td>
-                                        <a data-bs-type="edit" href="{{route('admin.plan.budgetHead.edit',$budgetHead)}}"
+                                        <a data-bs-type="edit" href="{{route('admin.plan.budgetHead.edit',[$type,$budgetHead])}}"
                                            class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                             <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                         </a>
-                                        <form action="{{route('admin.plan.budgetHead.destroy',$budgetHead)}}"
+                                        <form action="{{route('admin.plan.budgetHead.destroy',[$type,$budgetHead])}}"
                                               method="post">
                                             @csrf
                                             @method('delete')
@@ -63,29 +69,7 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @foreach($budgetHead->budgetHeads as $budgetSubHead)
-                                    <tr>
-                                        <td>
-                                            {{$key+1}}.
-                                            {{$loop->iteration}}
-                                        </td>
-                                        <td>{{$budgetSubHead->title}}</td>
-                                        <td>
-                                            <a data-bs-type="edit" href="{{route('admin.plan.budgetHead.edit',$budgetSubHead)}}"
-                                               class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
-                                            </a>
-                                            <form action="{{route('admin.plan.budgetHead.destroy',$budgetSubHead)}}"
-                                                  method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger {{get_setting('Pin')?'confirm_pin':'show_confirm'}}">
-                                                    <i class="fa fa-trash"></i> मेटाउनु होस्
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
+
                             @empty
                                 <tr>
                                     <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
