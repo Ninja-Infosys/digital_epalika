@@ -17,9 +17,7 @@ Route::get('dashboard', DashboardController::class)->name('dashboard');
 Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('businessNature', BusinessNatureController::class);
     Route::resource('objectTransaction', ObjectTransactionController::class);
-    Route::resource('objectTransactionSubCategory', ObjectTransactionSubCategoryController::class);
-    Route::resource('investmentRevenue', InvestmentRevenueController::class);
-    Route::resource('businessPurpose', BusinessPurposeController::class);
+
     Route::post('businessRegistrationTemplate/staticTemplate', [BusinessRegistrationTemplateController::class,'getStaticTemplate'])->name('get-static-template');
     Route::get('businessRegistrationTemplate/EnumList', [BusinessRegistrationTemplateController::class,'enumList'])->name('businessRegistrationTemplate.enumList');
     Route::get('{templateTypeEnum}/businessRegistrationTemplate/{businessRegistrationTemplate}/updateStatus', [BusinessRegistrationTemplateController::class,'updateStatus'])->name('businessRegistrationTemplate.updateStatus');

@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     public function up()
     {
-        Schema::create('proprietor_details', function (Blueprint $table) {
+        Schema::create('partners', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_detail_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('name')->comment('नाम');
+            $table->string('name_en')->comment('नाम');
             $table->string('citizenship_no')->comment('नागरिकता नम्बर');
             $table->string('issue_date')->comment('जारि मिति');
             $table->foreignId('issue_district_id')->nullable()->constrained('districts')->nullOnDelete()->onUpdate('no action');
@@ -28,6 +29,13 @@ return new class () extends Migration {
             $table->string('gender')->nullable()->comment('लिङ्ग');
             $table->string('education_qualification')->nullable()->comment('शैक्षिक योग्यता');
             $table->string('occupation')->nullable()->comment('मुख्य पेशा');
+            $table->string('father_name')->nullable()->comment('बुबाको नाम');
+            $table->string('grandfather_name')->nullable()->comment('हजुरबुबाको नाम');
+            $table->string('photo')->nullable()->comment('पासपोर्ट साइजको फोटो');
+            $table->string('signature')->nullable()->comment('हस्ताक्षर');
+            $table->string('citizenship_front')->nullable()->comment('नागरिकता अपलोड गर्नुहोस् (आगाडी)');
+            $table->string('citizenship_back')->nullable()->comment('नागरिकता अपलोड गर्नुहोस् (पछाडी)');
+            $table->integer('position');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +43,6 @@ return new class () extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists('proprietor_details');
+        Schema::dropIfExists('partners');
     }
 };

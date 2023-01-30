@@ -41,13 +41,7 @@
                     </a>
                 </li>
             @endcan
-            @can('businessPurpose_access')
-                <li class="{{request()->is('admin/businessRegistration/setting/businessPurpose/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.businessRegistration.setting.businessPurpose.index')}}">
-                        <span>  उदेश्य </span>
-                    </a>
-                </li>
-            @endcan
+
             @can('objectTransaction_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/objectTransaction/*') ? 'active' : ''}}">
                     <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">
@@ -55,20 +49,7 @@
                     </a>
                 </li>
             @endcan
-            @can('investmentRevenue_access')
-                <li class="{{request()->is('admin/businessRegistration/setting/investmentRevenue/*') ? 'active' : ''}}">
-                    <a href="{{route('admin.businessRegistration.setting.investmentRevenue.index')}}">
-                        <span>पुँजीगत लगानी र राजस्वो</span>
-                    </a>
-                </li>
-            @endcan
-            {{--            @can('businessRegistrationTemplate_access')--}}
-            {{--                <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">--}}
-            {{--                    <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.index')}}">--}}
-            {{--                        <span>टेम्प्लेट</span>--}}
-            {{--                    </a>--}}
-            {{--                </li>--}}
-            {{--            @endcan--}}
+
             @can('businessRegistrationTemplate_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/businessRegistrationTemplate/*') ? 'active' : ''}}">
                     <a href="{{route('admin.businessRegistration.setting.businessRegistrationTemplate.enumList')}}">
