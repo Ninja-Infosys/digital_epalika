@@ -29,15 +29,15 @@
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
                                         nameNe="from_date" labelNe="मिति देखि"
-                                        nameEn="en_from_date" labelEn="From Date"
                                         :get-today-date="false"
+                                        :edit-date-ne="request('from_date')"
                                     />
                                 </div>
                                 <div class="col-md-3">
                                     <x-date-input-component
                                         nameNe="to_date" labelNe="मिति सम्म"
-                                        nameEn="en_to_date" labelEn="To Date"
                                         :get-today-date="false"
+                                        :edit-date-ne="request('to_date')"
                                     />
                                 </div>
                                 <div class="col-md-3 mb-2">
@@ -66,14 +66,27 @@
                                     </select>
                                 </div>
                                 <div class="col-md-3 mb-2">
-                                    <label for="budget_">बजेट श्रोत</label>
-                                    <select name="grant_category_id"
-                                            id="grant_category_id" class="form-select">
+                                    <label for="budget_source_id">बजेट श्रोत</label>
+                                    <select name="budget_source_id"
+                                            id="budget_source_id" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        @foreach($grantCategories as $grantCategory)
+                                        @foreach($budgetSources as $budgetSource)
                                             <option
-                                                {{$grantCategory->id==request('grant_category_id') ? 'selected' : ''}}
-                                                value="{{$grantCategory->id}}">{{$grantCategory->title}}
+                                                {{$budgetSource->id==request('budget_source_id') ? 'selected' : ''}}
+                                                value="{{$budgetSource->id}}">{{$budgetSource->source_name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="expense_head_id">खर्च शिर्षक</label>
+                                    <select name="expense_head_id"
+                                            id="expense_head_id" class="form-select">
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        @foreach($expenseHeads as $expenseHead)
+                                            <option
+                                                {{$expenseHead->id==request('expense_head_id') ? 'selected' : ''}}
+                                                value="{{$expenseHead->id}}">{{$expenseHead->title}}
                                             </option>
                                         @endforeach
                                     </select>
