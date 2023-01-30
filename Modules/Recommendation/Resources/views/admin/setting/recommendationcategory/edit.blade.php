@@ -38,15 +38,21 @@
                         method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6">
-                                <label for="recommendation_category_id">सिफारिस प्रकार आ.डी</label>
-                                <select id="recommendation_category_id" class="form-control">
-                                    <option selected>Choose...</option>
+                            @if($type=='recommendationSubCategory')
+                            <div class="col-md-12">
+                                <label for="recommendation_category_id">सिफारिसको प्रकार छान्नुहोस्</label>
+                                <select id="recommendation_category_id" name="recommendation_category_id" class="form-control">
+                                    <option>छान्नुहोस्</option>
+                                    @foreach ($recommendationCategories as $recommendationCategoryData )
+                                    <option value="{{ $recommendationCategoryData->id }}" {{ old('recommendation_category_id',$recommendationCategory->recommendation_category_id) == $recommendationCategoryData->id ? 'selected':''}}>{{ $recommendationCategoryData->title }}</option> 
+                                    @endforeach
+                                    
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-2">
+                            @endif
+                            <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
-                                <input type="text" name="title" value="{{ old('title') }}"
+                                <input type="text" name="title" value="{{ old('title',$recommendationCategory->title) }}"
                                     class="form-control @error('title') is-invalid @enderror" id="name"
                                     placeholder="शिर्षक" />
                                 @error('title')

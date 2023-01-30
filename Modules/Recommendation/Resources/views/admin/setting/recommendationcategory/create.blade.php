@@ -38,13 +38,19 @@
                         method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-6">
+                            @if($type=='recommendationSubCategory')
+                            <div class="col-md-12">
                                 <label for="recommendation_category_id">सिफारिस प्रकार आ.डी</label>
-                                <select id="recommendation_category_id" class="form-control">
-                                    <option selected>Choose...</option>
+                                <select id="recommendation_category_id" name="recommendation_category_id" class="form-control">
+                                    <option>Choose...</option>
+                                    @foreach ($recommendationCategories as $recommendationCategory )
+                                    <option value="{{ $recommendationCategory->id }}">{{ $recommendationCategory->title }}</option> 
+                                    @endforeach
+                                    
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-2">
+                            @endif
+                            <div class="col-md-12 mb-2">
                                 <label for="title" class="form-label">शिर्षक *</label>
                                 <input type="text" name="title" value="{{ old('title') }}"
                                     class="form-control @error('title') is-invalid @enderror" id="name"

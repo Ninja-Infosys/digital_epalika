@@ -28,12 +28,13 @@ class RecommendationCategoryController extends Controller
 
     public function create($type)
     {
-        $recommendationCategories = RecommendationCategory::whereNotNull('recommendation_category_id')->get();
-        return view('recommendation::admin.setting.recommendationcategory.create',compact('type'));
+        $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
+        return view('recommendation::admin.setting.recommendationcategory.create',compact('type','recommendationCategories'));
     }
 
     public function store(StoreRecommendationCategoryRequest $request,$type)
     {
+        
         RecommendationCategory::create($request->validated()+[
             'user_id'=>auth()->id()
         ]);
@@ -48,7 +49,8 @@ class RecommendationCategoryController extends Controller
 
     public function edit($type,RecommendationCategory $recommendationCategory)
     {
-        return view('recommendation::admin.setting.recommendationcategory.edit', compact('type','recommendationCategory'));
+        $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
+        return view('recommendation::admin.setting.recommendationcategory.edit', compact('type','recommendationCategory','recommendationCategories'));
     }
 
     public function update(UpdateRecommendationCategoryRequest $request, $type,RecommendationCategory $recommendationCategory)

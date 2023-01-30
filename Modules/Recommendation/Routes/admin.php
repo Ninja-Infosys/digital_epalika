@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Recommendation\Entities\PersonalDetail;
 use Modules\Recommendation\Http\Controllers\Admin\DashboardController;
 use Modules\Recommendation\Http\Controllers\Admin\FormBuilderController;
+use Modules\Recommendation\Http\Controllers\admin\PersonalDetailController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationController;
 use Modules\Recommendation\Http\Controllers\Admin\RecommendationTemplateController;
 use Modules\Recommendation\Http\Controllers\RecommendationCategoryController;
@@ -59,6 +61,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::resource('{applicationTypeEnum}/recommendationTemplate', RecommendationTemplateController::class)->names('recommendationTemplate');
     Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
     Route::resource('{type}/recommendationCategory',RecommendationCategoryController::class);
+    Route::resource('personalDetail', PersonalDetailController::class);
 });
 
 Route::get('application/list', [RecommendationController::class, 'getApplicationList'])->name('recommendation.list');
