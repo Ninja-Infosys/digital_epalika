@@ -8,20 +8,6 @@
     </a>
     <div class="{{request()->is('businessRegistration/admin/*') ?'':'collapse'}}" id="sidebarBusinessRegistration">
         <ul class="nav-second-level">
-
-{{--                <li class="{{request()->routeIs('admin.circular.registration.index') ? 'active' : ''}}">--}}
-{{--                    <a href="{{route('admin.circular.registration.index')}}">--}}
-{{--                        <span> दर्ता प्रणाली   </span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-
-
-{{--                <li>--}}
-{{--                    <a href="{{route('admin.circular.dispatch.index')}}">--}}
-{{--                        <span> चलानी प्रणाली </span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-
             <li>
                 <a href="#sidebarBusinessRegistrationSetting" data-bs-toggle="collapse">
                     <span>सेटिङ</span>
@@ -32,30 +18,17 @@
                 <div class="collapse" id="sidebarBusinessRegistrationSetting">
                     <ul class="nav-second-level">
 
-                            <li class="{{request()->routeIs('admin.businessRegistration.setting.businessNature.index') ? 'active' : ''}}">
-                                <a href="{{route('admin.businessRegistration.setting.businessNature.index')}}">
-                                    <span>  व्यवसाय को प्रकृति </span>
-                                </a>
-                            </li>
-                        <li class="{{request()->routeIs('admin.businessRegistration.setting.businessPurpose.index') ? 'active' : ''}}">
-                            <a href="{{route('admin.businessRegistration.setting.businessPurpose.index')}}">
-                                <span>  उदेश्य </span>
+                        <li class="{{request()->routeIs('admin.businessRegistration.setting.businessNature.index') ? 'active' : ''}}">
+                            <a href="{{route('admin.businessRegistration.setting.businessNature.index')}}">
+                                <span>  व्यवसाय को प्रकृति </span>
                             </a>
                         </li>
 
-
-                            <li class="{{request()->routeIs('admin.businessRegistration.setting.objectTransaction.index') ? 'active' : ''}}">
-                                <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">
-                                    <span>कारोबार गर्ने वस्तु</span>
-                                </a>
-                            </li>
-
-                        <li class="{{request()->routeIs('admin.businessRegistration.setting.objectTransactionSubCategory.index') ? 'active' : ''}}">
-                            <a href="{{route('admin.businessRegistration.setting.objectTransactionSubCategory.index')}}">
-                                <span>कारोबार गर्ने वस्तु Sub Category</span>
+                        <li class="{{request()->routeIs('admin.businessRegistration.setting.objectTransaction.index') ? 'active' : ''}}">
+                            <a href="{{route('admin.businessRegistration.setting.objectTransaction.index')}}">
+                                <span>कारोबार गर्ने वस्तु</span>
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </li>

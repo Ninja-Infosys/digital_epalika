@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 use Modules\BusinessRegistration\Enums\Qualification;
 
-class ProprietorDetail extends Model
+class Partner extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -30,6 +32,7 @@ class ProprietorDetail extends Model
     protected $fillable = [
         'business_detail_id',
         'name',
+        'name_en',
         'citizenship_no',
         'issue_date',
         'issue_district_id',
@@ -47,9 +50,28 @@ class ProprietorDetail extends Model
         'gender',
         'education_qualification',
         'occupation',
+        'father_name',
+        'grandfather_name',
+        'photo',
+        'signature',
+        'citizenship_front',
+        'citizenship_back',
     ];
 
+    public function photo(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Storage::url($value),
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('business_registration/' . Str::slug($this->getBusinessName()) . '/' . Str::slug($this->attributes['name_ne']), 'public')
+                : null
+        );
+    }
 
+    public function getBusinessName()
+    {
+        return $this->businessDetail->name_en ?? '';
+    }
 
     public function Gender(): Attribute
     {
@@ -79,11 +101,6 @@ class ProprietorDetail extends Model
     public function localBody(): BelongsTo
     {
         return $this->belongsTo(LocalBody::class);
-    }
-
-    public function threeGenerationDetails(): HasMany
-    {
-        return $this->hasMany(ThreeGenerationDetail::class);
     }
 
     public function businessDetail(): BelongsTo
