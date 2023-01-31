@@ -26,9 +26,9 @@ class PersonalDetail extends Model
     'is_minor',
     'citizenship_no',
     'gender',
-    'permanent_province_id',
-    'permanent_district_id',
-    'permanent_local_body_id',
+    'province_id',
+    'district_id',
+    'local_body_id',
     'ward_no',
     'tole'
    ];

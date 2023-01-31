@@ -13,51 +13,47 @@ use Modules\Recommendation\Http\Requests\Template\UpdateRecommendationTemplateRe
 
 class RecommendationTemplateController extends Controller
 {
-    public function index(ApplicationTypeEnum $applicationTypeEnum)
+    public function index()
     {
         $this->checkAuthorization('recommendationTemplate_access');
 
         $recommendationTemplates = RecommendationTemplate::latest()->get();
 
-        return view('recommendation::admin.setting.recommendationTemplate.index', compact('recommendationTemplates','applicationTypeEnum'));
+        return view('recommendation::admin.setting.recommendationTemplate.index', compact('recommendationTemplates'));
     }
 
-    public function create(ApplicationTypeEnum $applicationTypeEnum)
+    public function create()
     {
         $this->checkAuthorization('recommendationTemplate_create');
-
-        $formFields = $this->getFormFields($applicationTypeEnum);
-        return view('recommendation::admin.setting.recommendationTemplate.create', compact('applicationTypeEnum', 'formFields'));
+        return view('recommendation::admin.setting.recommendationTemplate.create');
     }
 
-    public function store(StoreRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum)
+    public function store(StoreRecommendationTemplateRequest $request)
     {
         $this->checkAuthorization('recommendationTemplate_create');
 
         RecommendationTemplate::create($request->validated() + [
-                'application_type' => $applicationTypeEnum->value,
-                'status' => RecommendationTemplate::where('application_type', $applicationTypeEnum->value)
-                    ->where('status', 1)
-                    ->count() === 0 ? '1' : '0'
+                'user_id'=>auth()->id(),
+                'is_active' => RecommendationTemplate::where('is_active', 1)->count() === 0 ? '1' : '0'
             ]);
         toast('टेम्प्लेट सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
-    public function show(ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
+    public function show(RecommendationTemplate $recommendationTemplate)
     {
-        return view('recommendation::show', compact('applicationTypeEnum', 'recommendationTemplate'));
+        return view('recommendation::show', compact('recommendationTemplate'));
     }
 
-    public function edit(ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
+    public function edit(RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_edit');
 
-        $formFields = $this->getFormFields($applicationTypeEnum);
-        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate', 'applicationTypeEnum', 'formFields'));
+    
+        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate'));
     }
 
-    public function update(UpdateRecommendationTemplateRequest $request, ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
+    public function update(UpdateRecommendationTemplateRequest $request, RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_edit');
 
@@ -67,10 +63,10 @@ class RecommendationTemplateController extends Controller
         return back();
     }
 
-    public function destroy(ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
+    public function destroy( RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_delete');
-        if ($recommendationTemplate->status == 1) {
+        if ($recommendationTemplate->is_active == 1) {
             toast('Error while deleting file', 'error');
 
             return back();
@@ -81,18 +77,17 @@ class RecommendationTemplateController extends Controller
         return back();
     }
 
-    public function updateStatus(ApplicationTypeEnum $applicationTypeEnum, RecommendationTemplate $recommendationTemplate)
+    public function updateStatus( RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_access');
-        DB::transaction(function () use ($applicationTypeEnum, $recommendationTemplate) {
+        DB::transaction(function () use ($recommendationTemplate) {
             $recommendationTemplate->update([
-                'status' => 1
+                'is_active' => 1
             ]);
             RecommendationTemplate::whereNot('id', $recommendationTemplate->id)
-                ->where('application_type', $applicationTypeEnum->value)
-                ->where('status', 1)
+                ->where('is_active', 1)
                 ->update([
-                    'status' => 0
+                    'is_active' => 0
                 ]);
         });
 
@@ -101,22 +96,5 @@ class RecommendationTemplateController extends Controller
         return back();
     }
 
-    public function getFormFields(ApplicationTypeEnum $applicationTypeEnum): Collection
-    {
-        $formBuilder = FormBuilder::active()
-            ->where('application_type', $applicationTypeEnum->value)
-            ->first();
 
-        $form = json_decode($formBuilder?->form)?->components;
-
-        return collect($form)
-            ->map(function ($item) {
-                return [
-                    'name' => $item->label,
-                    'placeholder' => $item->placeholder ?? '',
-                    'value' => "@[$item->key]",
-                ];
-            })
-            ->slice(0, -1);
-    }
 }

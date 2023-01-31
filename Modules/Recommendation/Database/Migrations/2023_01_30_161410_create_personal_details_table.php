@@ -17,9 +17,9 @@ return new class extends Migration
             $table->boolean('is_minor')->default(0);
             $table->string('gender')->default('male');
             $table->string('citizenship_no')->nullable()->comment('नागरिकता नं');
-            $table->foreignId('permanent_province_id')->nullable()->constrained('provinces');
-            $table->foreignId('permanent_district_id')->nullable()->constrained('districts');
-            $table->foreignId('permanent_local_body_id')->nullable()->constrained('local_bodies');
+            $table->foreignId('province_id')->nullable()->constrained('provinces');
+            $table->foreignId('district_id')->nullable()->constrained('districts');
+            $table->foreignId('local_body_id')->nullable()->constrained('local_bodies');
             $table->integer('ward_no')->nullable()->comment('वार्ड नं');
             $table->string('tole')->nullable()->comment('टोल');
             $table->timestamps();

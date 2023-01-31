@@ -1,4 +1,4 @@
-<div class="background" style="background-image: url('{{$officeSetting->background_image_url}}')">
+<div class="background" style="background-image: url('{{$officeSetting->background_image_url??''}}')">
     <div class="container-fluid d-lg-flex justify-content-between align-items-center">
             <a href="{{route('welcome')}}" class="main-logo">
                 <img alt="nepal-government-logo" class="logo img-responsive center-block d-block mx-auto"
