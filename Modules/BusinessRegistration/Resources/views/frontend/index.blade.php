@@ -1,127 +1,80 @@
-@extends('frontend.layouts.master')
-@section('content')
-    <section class="inner-section mt-lg-5 ">
-        <div class="container">
-            <div class="row d-flex mt-5 ">
-                <div class="mx-auto">
-                    <div class="breadcrumb d-flex">
-                        <div class="breadcrumb-item">
-                            <a class="whitespace-nowrap text-primary-500"
-                               href="{{route('welcome')}}">ई-पालिका</a>
-                            <i class="fa fa-angle-double-right ml-lg-1 text-light"></i>
-                            <a class="ml-1 text-primary-500">व्यवसाय दर्ता</a>
-                        </div>
-                    </div>
-                    <h4 class="text-center">व्यवसाय दर्ता फारम</h4>
-                    <livewire:businessregistration::registration-form />
-{{--                    <button class="btn btn-primary float-right" id="printBtn1" >--}}
-{{--                        <i class="fa fa-print"></i> Print--}}
-{{--                    </button>--}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Register | {{config('app.name')}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta
+        content="B-Palika System"
+        name="description"
+    />
+    <meta content="Coderthemes" name="author"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{asset('images/np.png')}}"/>
 
-{{--                    @push('scripts')--}}
-{{--                        <script>--}}
-{{--                            $("#printBtn1").click(function(e){--}}
-{{--                                var print_area = window.open();--}}
-{{--                                print_area.document.write(document.getElementsByClassName('printSection')[0].innerHTML);--}}
-{{--                                print_area.document.close();--}}
-{{--                                print_area.focus();--}}
-{{--                                print_area.print();--}}
-{{--                                print_area.close();--}}
+    <!-- Bootstrap css -->
+    <link
+        href="{{asset('assets/backend/css/bootstrap.min.css')}}"
+        rel="stylesheet"
+        type="text/css"
 
-{{--                            });--}}
-{{--                        </script>--}}
+    />
+    <!-- App css -->
+    <link
+        href="{{asset('assets/backend/css/app.min.css')}}"
+        rel="stylesheet"
+        type="text/css"
+        id="app-style"
+    />
+    <!-- icons -->
+    <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/sweetalert2.min.css')}}">
+    @livewireStyles
+</head>
 
-{{--                    @endpush--}}
+<body class="auth-page" style="background-image: url({{asset('images/mountain_photo.jpg')}});">
+<div class="container-fluid">
+    <div class="card rounded mt-2">
+        <div class="col-md-12 system_info p-1">
+            <div class="logo">
+                <img src="{{asset('images/np.png')}}" height="60" alt="Logo">
+            </div>
+            <div class="title">
+                <div class="m-2">
+                    <h4 class="text-white">डिजिटल ई-पालिका</h4>
+                    <h5 class="text-white pt-1">ई-नक्सा पास</h5>
+                    <h5 class="text-center text-decoration-underline
+                                                mt-1 text-white">ई-नक्सा पास सेवा प्रदान गर्नको लागि तलको फारम भरि
+                        सुचिकृतको लागि पठाउनुहोस् ।</h5>
                 </div>
             </div>
         </div>
-    </section>
+        <livewire:businessregistration::registration-form />
+    </div>
+</div>
+<!-- Vendor js -->
+<script src="{{asset('assets/backend/js/vendor.min.js')}}"></script>
 
-    @push('styles')
-        <style>
+<!-- App js -->
+<script src="{{asset('assets/backend/js/app.min.js')}}"></script>
+<script src="{{asset('assets/backend/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
 
-            /*progressbar*/
-            .progressbar {
-                overflow: hidden;
-                /*CSS counters to number the steps*/
-                counter-reset: step;
-                width: 60%;
-                margin: 0 auto 30px;
-            }
+<!-- Init js-->
+<script src="{{asset('assets/backend/js/pages/form-wizard.init.js')}}"></script>
+<script src="{{asset('assets/frontend/js/sweetalert2.min.js')}}"></script>
 
-            .progressbar li {
-                list-style-type: none;
-                color: white;
-                text-transform: uppercase;
-                font-size: 18px;
-                width: 25%;
-                float: left;
-                position: relative;
-                text-decoration: none;
-            }
+@livewireScripts
 
-            .progressbar li a {
-                text-decoration: none;
-            }
-            .progressbar li:before {
-                content: counter(step);
-                counter-increment: step;
-                width: 50px;
-                line-height: 50px;
-                display: block;
-                font-size: 18px;
-                font-weight: bold;
-                color: #333;
-                background: #eeeeee;
-                border-radius: 50%;
-                margin: 0 auto 5px auto;
-            }
-
-            .progressbar .success:before {
-                background: #5ed00f;
-                color: white;
-            }
-            /*progressbar connectors*/
-            .progressbar li:after {
-                content: '';
-                width: 100%;
-                height: 2px;
-                background: white;
-                position: absolute;
-                left: -50%;
-                top: 9px;
-                z-index: -1;
-                /*put it behind the numbers*/
-            }
-
-            .progressbar li:first-child:after {
-                /*connector not needed before the first step*/
-                content: none;
-            }
-
-            /*marking active/completed steps green*/
-            /*The number of the step and the connector before it = green*/
-            .progressbar li.active:before,
-            .progressbar li.active:after {
-                background: rgb(255, 99, 71);
-                color: white;
-            }
-
-            .displayNone {
-                display: none;
-            }
-        </style>
-    @endpush
-    @push('scripts')
-        {{--listener for toastr--}}
-        <script>
-            window.addEventListener('alert_message', event => {
-                swal.fire({
-                    title: event.detail.title,
-                    text: event.detail.text,
-                    icon: event.detail.type,
-                });
-            });
-        </script>
-    @endpush
-@endsection
+{{--listener for toastr--}}
+<script>
+    window.addEventListener('alert_message', event => {
+        swal.fire({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type,
+        });
+    });
+</script>
+</body>
+</html>
