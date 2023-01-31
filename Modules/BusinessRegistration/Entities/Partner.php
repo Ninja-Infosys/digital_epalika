@@ -56,6 +56,7 @@ class Partner extends Model
         'signature',
         'citizenship_front',
         'citizenship_back',
+        'position',
     ];
 
     public function photo(): Attribute
@@ -63,15 +64,39 @@ class Partner extends Model
         return Attribute::make(
             get: fn($value) => Storage::url($value),
             set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->getBusinessName()) . '/' . Str::slug($this->attributes['name_ne']), 'public')
+                ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
                 : null
         );
     }
 
-    public function getBusinessName()
+    public function signature(): Attribute
     {
-        return $this->businessDetail->name_en ?? '';
+        return Attribute::make(
+            get: fn($value) => Storage::url($value),
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
+                : null
+        );
     }
+    public function citizenshipFront(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Storage::url($value),
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
+                : null
+        );
+    }
+    public function citizenshipBack(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Storage::url($value),
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('partner/' . Str::slug($this->attributes['name_en']), 'public')
+                : null
+        );
+    }
+
 
     public function Gender(): Attribute
     {
