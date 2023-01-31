@@ -93,7 +93,8 @@
                             type:'GET',
                             url:$(this).val(),
                             success:function (resp){
-                                CKEDITOR.instances.data.setData(resp.data.data);
+                                CKEDITOR.instances.data.setData(resp.data);
+                                console.log(resp.data)
                             },
                             error:function (){
                                 alert('Something Went Wrong')
