@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('reg_no')->nullable()->comment('दर्ता नम्बर');
             $table->string('name')->nullable()->comment('नाम');
             $table->string('phone_no')->nullable()->comment('सम्पर्क नं');
+            $table->boolean('is_minor')->default(0);
             $table->string('gender')->default('male');
             $table->string('citizenship_no')->nullable()->comment('नागरिकता नं');
             $table->foreignId('permanent_province_id')->nullable()->constrained('provinces');

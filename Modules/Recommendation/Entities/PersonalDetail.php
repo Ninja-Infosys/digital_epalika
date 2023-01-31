@@ -9,6 +9,7 @@ use App\Traits\EventObserveTrait;
 
 class PersonalDetail extends Model
 {
+ 
     use HasFactory,SoftDeletes,EventObserveTrait;
 
    protected $dates = [

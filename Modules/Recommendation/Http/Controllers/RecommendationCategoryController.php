@@ -57,13 +57,13 @@ class RecommendationCategoryController extends Controller
     {
         $recommendationCategory->update($request->validated());
         toast('सिफारिस सफलतापूर्वक अद्यावधिक गरियो', 'success');
-        return redirect()->route('recommendation::admin.setting.recommendationcategory.index', compact('type','recommendationCategory'));
+        return back();
     }
 
     public function destroy($type,RecommendationCategory $recommendationCategory)
     {
         $recommendationCategory->delete();
         toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
-        return redirect()->route('recommendation::admin.setting.recommendationcategory.index');
+        return back();
     }
 }

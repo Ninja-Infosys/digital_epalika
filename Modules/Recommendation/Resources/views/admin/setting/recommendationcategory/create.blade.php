@@ -42,7 +42,7 @@
                             <div class="col-md-12">
                                 <label for="recommendation_category_id">सिफारिस प्रकार आ.डी</label>
                                 <select id="recommendation_category_id" name="recommendation_category_id" class="form-control">
-                                    <option>Choose...</option>
+                                    <option>छान्नुहोस्</option>
                                     @foreach ($recommendationCategories as $recommendationCategory )
                                     <option value="{{ $recommendationCategory->id }}">{{ $recommendationCategory->title }}</option> 
                                     @endforeach

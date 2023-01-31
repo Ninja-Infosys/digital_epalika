@@ -34,9 +34,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.recommendation.setting.recommendationCategory.update', [$recommendationCategory, $type]) }}"
-                        method="post">
+                    <form action="{{ route('admin.recommendation.setting.recommendationCategory.update', [ $type, $recommendationCategory]) }}"
+                        method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div class="row">
                             @if($type=='recommendationSubCategory')
                             <div class="col-md-12">

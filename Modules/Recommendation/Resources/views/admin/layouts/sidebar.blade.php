@@ -4,13 +4,18 @@
         <span> ड्यासबोर्ड</span>
     </a>
 </li>
+<li class="{{request()->is('admin/recommendation/setting/personalDetail*') ? 'active' : ''}}">
+    <a href="{{route('admin.recommendation.setting.personalDetail.index')}}">
+        <i class="fa fa-user"></i>
+        <span>व्यक्तिगत विवरण</span>
+    </a>
+</li>
 <li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
     <a href="{{route('admin.recommendation.recommendation.list')}}">
         <i class="fa fa-thumbs-up"></i>
         <span>सिफारिस</span>
     </a>
 </li>
-
 <li class="{{request()->is('admin/setting*') ? 'active' : ''}}">
     <a href="#setting"
        {{request()->is('admin/setting*') || request()->is('admin/setting*') ? 'aria-expanded=true' : ''}}
@@ -37,6 +42,7 @@
                     <span>सिफारिस उप श्रेणी</span>
                 </a>
             </li>
+           
                 <li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
                     <a href="{{route('admin.recommendation.setting.showApplicationList')}}">
                         <span>निवेदन फारम सेटिंग</span>

@@ -71,6 +71,17 @@
                                                 title="फारम सम्पादन गर्नुहोस">
                                                 <i class="fa fa-pen"></i>
                                             </a>
+                                            <form
+                                                action="{{ route('admin.recommendation.setting.recommendationCategory.destroy', [$type,$recommendationCategory]) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('delete')
+                                                @if(!$recommendationCategory->status)
+                                                <button data-bs-type="delete" class="btn btn-xs btn-outline-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                                @endif
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
