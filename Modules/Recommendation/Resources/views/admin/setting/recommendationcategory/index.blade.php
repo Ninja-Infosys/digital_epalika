@@ -39,7 +39,10 @@
                             <thead>
                                 <tr>
                                     <th>क्र.स</th>
-                                    <th>नाम</th>
+                                    @if($type=='recommendationSubCategory')
+                                    <th>सिफारिस उप श्रेणी</th>
+                                    @endif
+                                    <th>सिफारिस</th>
                                     <th>स्थिति</th>
                                     <th>#</th>
                                 </tr>
@@ -51,10 +54,15 @@
                                         <td>
                                             {{ $recommendationCategory->title ?? '' }}
                                         </td>
+                                        @if($type=='recommendationSubCategory')
                                         <td>
-                                            {{-- <a href="{{route('admin.recommendation.setting.recommendationcategory.updateStatus',[$applicationTypeEnum,$formBuilder])}}">
-                                                <i class="fa fa-2x  {{$formBuilder->status ? 'fa-toggle-on':'fa-toggle-off'}}"></i>
-                                            </a> --}}
+                                            {{ $recommendationCategory->recommendationCategory->title ?? '' }}
+                                        </td>
+                                        @endif
+                                        <td>
+                                            <a href="{{route('admin.recommendation.setting.recommendationCategory.edit',[$type,$recommendationCategory])}}">
+                                                <i class="fa fa-2x  fa-toggle-off"></i>
+                                            </a>
                                         </td>
                                         <td>
                                             <a data-bs-type="edit"

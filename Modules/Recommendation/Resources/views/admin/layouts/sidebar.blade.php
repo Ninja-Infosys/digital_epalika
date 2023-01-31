@@ -34,7 +34,7 @@
 
             <li class="{{request()->is('admin/recommendation/setting/recommendationCategory*') ? 'active' : ''}}">
                 <a href="{{route('admin.recommendation.setting.recommendationCategory.index','recommendationSubCategory')}}">
-                    <span>सिफारिस1</span>
+                    <span>सिफारिस उप श्रेणी</span>
                 </a>
             </li>
                 <li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
