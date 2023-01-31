@@ -24,7 +24,7 @@ return new class () extends Migration {
             $table->string('project_venue')->nullable()->comment('कार्यक्रम स्थल');
             $table->double('evaluation_amount', 12, 2)->default(0)->comment('मूल्याङ्कन रकम');
             $table->string('purpose')->nullable()->comment('उद्देश्य');
-            $table->string('operated_through')->comment('मार्फत सञ्चालन');
+            $table->string('operated_through')->nullable()->comment('मार्फत सञ्चालन');
             $table->boolean('is_deadline_extended')->default(0)->comment('म्याद थपिएको');
             $table->string('extended_date')->nullable()->comment('विस्तारित मिति');
             $table->double('progress_spent_amount', 12, 2)->default(0)->comment('वित्तीय प्रगति खर्च रकम');

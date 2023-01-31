@@ -51,6 +51,8 @@ class Project extends Model
         'evaluation_amount',
         'purpose',
         'operated_through',
+        'is_contracted',
+        'contract_date',
         'is_deadline_extended',
         'extended_date',
         'progress_spent_amount',

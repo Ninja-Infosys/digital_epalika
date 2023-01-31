@@ -24,8 +24,6 @@ class UpdateProjectRequest extends FormRequest
             'expense_head_id' => ['required', Rule::exists('expense_heads', 'id')->withoutTrashed()],
             'plan_area_id' => ['required', Rule::exists('plan_areas', 'id')->withoutTrashed()],
             'project_status' => ['required', new Enum(ProjectStatusEnum::class)],
-            'project_start_date' => ['nullable'],
-            'project_completion_date' => ['nullable', 'after:project_start_date'],
             'plan_level_id' => ['required', Rule::exists('plan_levels', 'id')->withoutTrashed()],
             'ward_no' => ['nullable', 'array'],
             'ward_no.*' => ['integer'],
