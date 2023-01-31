@@ -52,7 +52,7 @@
                                 <select name="plan_template_id" class="form-select" id="plan_template_id">
                                     <option value=""> कागजात प्रकार छान्नुहोस्</option>
                                     @foreach($planTemplates as $planTemplate)
-                                    <option value="{{route('admin.plan.planTemplate.show',$planTemplate)}}">
+                                    <option value="{{route('admin.plan.project.templateData',[$project,$planTemplate])}}">
                                         {{$planTemplate->title}}
                                     </option>
                                     @endforeach

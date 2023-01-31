@@ -14,6 +14,7 @@ use Modules\Plan\Entities\ExpenseHead;
 use Modules\Plan\Entities\GrantCategory;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
+use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
 use Modules\Plan\Enums\ProjectOperatedThroughEnum;
@@ -171,6 +172,15 @@ class ProjectController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'data' => $project->getSpecificTemplateData($planTemplateTypeEnum)
+            ]);
+        }
+    }
+
+    public function templateData(Request $request,Project $project,PlanTemplate $planTemplate)
+    {
+        if($request->ajax()){
+            return response()->json([
+                'data'=>$project->getPlanTemplateData($planTemplate)
             ]);
         }
     }
