@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Modules\BusinessRegistration\Enums\BusinessNature;
 use Modules\BusinessRegistration\Enums\BusinessTypeEnum;
 use Modules\BusinessRegistration\Enums\SourceOfCapital;
 use Modules\BusinessRegistration\Traits\BusinessDetailTemplateTrait;
@@ -96,10 +95,12 @@ class BusinessDetail extends Model
         return $this->belongsTo(LocalBody::class);
     }
 
-    public function BusinessNature(): Attribute
+    public function businessNature(): BelongsTo
     {
-        return Attribute::get(fn($value) => BusinessNature::tryFrom($value)?->label() ?? null);
+        return $this->belongsTo(BusinessNature::class);
     }
+
+
 
     public function objectTransaction(): BelongsTo
     {
@@ -129,7 +130,7 @@ class BusinessDetail extends Model
 
     public function partners(): HasMany
     {
-        return $this->hasMany(Partner::class);
+        return $this->hasMany(Partner::class)->orderBy('position');
     }
 
     public function rentAgreement(): Attribute
@@ -161,7 +162,6 @@ class BusinessDetail extends Model
                 : null
         );
     }
-
 
 
     public function embassyDocument(): Attribute

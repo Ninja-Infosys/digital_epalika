@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-8 text-center">
                         <div class="col-md-8 text-center">
-                            <x-header-component/>
+                            <x-header-component :has-clock="false"/>
                         </div>
                     </div>
                     <div
@@ -50,89 +50,88 @@
                             <span>{{$businessDetail->submission_no??''}}</span>
                         </div>
                     </div>
-{{--                    <div class="row mt-1">--}}
-{{--                        <div class="col-md-4">--}}
-{{--                            <span class="fw-bold">व्यवसायीको नाम, थर:</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <span>{{$businessDetail->proprietorDetail->name}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="row mt-1">--}}
-{{--                        <div class="col-md-4">--}}
-{{--                            <span class="fw-bold">व्यवसायीको सम्पर्क नं.:</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <span>{{$businessDetail->proprietorDetail->phone}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    <div class="row mt-1">
+                        <div class="col-md-4">
+                            <span class="fw-bold">व्यवसायीको नाम, थर:</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>{{$businessDetail->partners->first()?->name ??''}}</span>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-4">
+                            <span class="fw-bold">व्यवसायीको सम्पर्क नं.:</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>{{$businessDetail->partners->first()?->phone ??''}}</span>
+                        </div>
+                    </div>
 
-{{--                    <div class="row mt-1">--}}
-{{--                        <div class="col-md-4">--}}
-{{--                            <span class="fw-bold">व्यवसायीको इमेल ठेगाना:</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <span>{{$businessDetail->proprietorDetail->email}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="row mt-1">--}}
-{{--                        <div class="col-md-4">--}}
-{{--                            <span class="fw-bold">व्यवसायीको ठेगाना:</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <span>{{$businessDetail->proprietorDetail->localBody->local_body??''}}--}}
-{{--                                - {{$businessDetail->proprietorDetail->businessDetail->ward_no??''}}--}}
-{{--                                , {{$businessDetail->proprietorDetail->district->district??''}}--}}
-{{--                                , {{$businessDetail->proprietorDetail->province->province??''}}, </span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="row mt-1">--}}
-{{--                        <div class="col-md-4">--}}
-{{--                            <span class="fw-bold">व्यवसायको विवरण/प्रकृति:</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <span>{{$businessDetail->business_nature}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="row mt-1">--}}
-{{--                        <div class="col-md-4">--}}
-{{--                            <span class="fw-bold">व्यवसायको नाम:</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <span>{{$businessDetail->business_detail_name ??''}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="row mt-1">--}}
-{{--                        <div class="col-md-4">--}}
-{{--                            <span class="fw-bold">पूँजी लगानी रु.: </span>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-6">--}}
-{{--                            <span>{{$businessDetail->amount_cost??''}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="note mt-2">--}}
-{{--                    <span class="fw-bold">कृपया यस आवेदनको साथमा तल उल्लेखित कागजातहरू बोक्नुहोस्। </span><br>--}}
-{{--                    <span>१. व्यवसायीको पासपोर्ट साइजको--}}
-{{--                                            फोटो  <i--}}
-{{--                            class="fa {{!empty($businessDetail->photo ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>--}}
-{{--                    <span>२. नागरिकता अपलोड गर्नुहोस् (आगाडी)  <i--}}
-{{--                            class="fa {{!empty($businessDetail->citizenship_front ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>--}}
-{{--                    <span>३. नागरिकता अपलोड गर्नुहोस् (पछाडी)  <i--}}
-{{--                            class="fa {{!empty($businessDetail->citizenship_back ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>--}}
-{{--                    <span>४. फार्म कम्पनी भयमा--}}
-{{--                                            दर्ता, इजाजत--}}
-{{--                                            प्रमाणपत्र  <i--}}
-{{--                            class="fa {{!empty($businessDetail->company_registration ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>--}}
-{{--                    <span>५.आन्तरिक राजस्व कार्यालयमा--}}
-{{--                                            आघिल्लो आ.व--}}
-{{--                                            सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि  <i--}}
-{{--                            class="fa {{!empty($businessDetail->tax_pay_file ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>--}}
-{{--                    <span>६. हस्ताक्षर <i--}}
-{{--                            class="fa {{!empty($businessDetail->signature ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>--}}
-{{--                    <span>७. औठाको छाप <i--}}
-{{--                            class="fa {{!empty($businessDetail->thumb ??'') ? 'fa-check':'fa-times'}}"></i>  </span>--}}
-{{--                </div>--}}
+                    <div class="row mt-1">
+                        <div class="col-md-4">
+                            <span class="fw-bold">व्यवसायीको इमेल ठेगाना:</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>{{$businessDetail->partners->first()?->email ??''}}</span>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-4">
+                            <span class="fw-bold">व्यवसायीको ठेगाना:</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>{{$businessDetail->partners->first()?->localBody->local_body??''}}
+                                - {{$businessDetail->partners->first()?->businessDetail->ward_no??''}}
+                                , {{$businessDetail->partners->first()?->district->district??''}}
+                                , {{$businessDetail->partners->first()?->province->province??''}}, </span>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-4">
+                            <span class="fw-bold">व्यवसायको विवरण/प्रकृति:</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>{{$businessDetail->businessNature->title??''}}</span>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-4">
+                            <span class="fw-bold">व्यवसायको नाम:</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>{{$businessDetail->name ??''}}</span>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-md-4">
+                            <span class="fw-bold">पूँजी लगानी रु.: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span>{{$businessDetail->investment??''}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="note mt-2">
+                    <span class="fw-bold">कृपया यस आवेदनको साथमा तल उल्लेखित कागजातहरू बोक्नुहोस्। </span><br>
+                    <span>१. व्यवसायीको पासपोर्ट साइजको
+                                            फोटो  <i
+                            class="fa {{!empty($businessDetail->partners->first()?->photo ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
+                    <span>२. नागरिकता अपलोड गर्नुहोस् (आगाडी)  <i
+                            class="fa {{!empty($businessDetail->partners->first()?->citizenship_front ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
+                    <span>३. नागरिकता अपलोड गर्नुहोस् (पछाडी)  <i
+                            class="fa {{!empty($businessDetail->partners->first()?->citizenship_back ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
+                    <span>४. फार्म कम्पनी भयमा
+                                            दर्ता, इजाजत
+                                            प्रमाणपत्र  <i
+                            class="fa {{!empty($businessDetail->registration_document ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
+                    <span>५.आन्तरिक राजस्व कार्यालयमा
+                                            आघिल्लो आ.व
+                                            सम्मको करतिरेको करदाता प्रमाणपत्रको प्रतिलिपि  <i
+                            class="fa {{!empty($businessDetail->tax_document ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
+                    <span>६. हस्ताक्षर <i
+                            class="fa {{!empty($businessDetail->partners->first()?->signature ??'') ? 'fa-check':'fa-times'}}"></i> </span><br>
+
+                </div>
             </div>
         </div>
     </div>
