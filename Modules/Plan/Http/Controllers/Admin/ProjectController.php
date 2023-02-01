@@ -153,14 +153,17 @@ class ProjectController extends Controller
     {
         $formData = $request->validate([
             'file_name' => ['nullable'],
-            'file' => ['required', 'file']
+            'files' => ['required', 'array'],
+            'file.*' => ['mimes:jpg,png,jpeg,pdf']
         ]);
 
-        $project->files()->create([
-            'file_name' => $formData['file_name'] ?? pathinfo($formData['file']->getClientOriginalName(), PATHINFO_FILENAME),
-            'extension' => $formData['file']->getClientOriginalExtension(),
-            'file' => $formData['file']->store('project_files', 'public')
-        ]);
+        foreach ($request->file('files') as $file) {
+            $project->files()->create([
+                'file_name' => $formData['file_name'] ?: pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $file->getClientOriginalExtension(),
+                'file' => $file->store('plan/project_files', 'public')
+            ]);
+        }
 
         toast('फाइल सफलतापूर्वक अपलोड गरियो', 'success');
 
@@ -176,11 +179,11 @@ class ProjectController extends Controller
         }
     }
 
-    public function templateData(Request $request,Project $project,PlanTemplate $planTemplate)
+    public function templateData(Request $request, Project $project, PlanTemplate $planTemplate)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             return response()->json([
-                'data'=>$project->getPlanTemplateData($planTemplate)
+                'data' => $project->getPlanTemplateData($planTemplate)
             ]);
         }
     }
