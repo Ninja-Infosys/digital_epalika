@@ -65,6 +65,9 @@
                                             </a>
                                         </td>
                                         <td>
+                                            <a class="btn btn-xs btn-outline-warning" href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type,$recommendationCategory]) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                             <a data-bs-type="edit"
                                                 href="{{ route('admin.recommendation.setting.recommendationCategory.edit', [$type,$recommendationCategory]) }}"
                                                 class="btn btn-xs btn-outline-warning"
