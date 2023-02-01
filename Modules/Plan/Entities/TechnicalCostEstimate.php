@@ -2,6 +2,7 @@
 
 namespace Modules\Plan\Entities;
 
+use App\Models\Settings\Units\Unit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,12 +22,8 @@ class TechnicalCostEstimate extends Model
     protected $fillable = [
         'project_id',
         'detail',
-        'number',
-        'length',
-        'breadth',
-        'height',
         'quantity',
-        'unit',
+        'unit_id',
         'rate'
     ];
 
@@ -37,6 +34,11 @@ class TechnicalCostEstimate extends Model
     public function getAmountAttribute(): float|int
     {
         return $this->quantity * $this->rate;
+    }
+
+    public function unit(): BelongsTo
+    {
+        return $this->belongsTo(Unit::class);
     }
 
     public function project(): BelongsTo

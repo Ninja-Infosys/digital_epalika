@@ -22,7 +22,7 @@ class RecommendationTemplate extends Model
 
     protected $fillable = [
         'user_id',
-        'recommnedation_category_id',
+        'recommendation_category_id',
         'is_active',
         'data',
         'title'

@@ -96,8 +96,10 @@
                                     <select name="is_contracted"
                                             id="is_contracted" class="form-select">
                                         <option value="">--- छान्नुहोस् ---</option>
-                                        <option value="1" {{request('is_contracted')==1 ? 'selected' : ''}}>भएको</option>
-                                        <option value="0" {{request('is_contracted')==0 ? 'selected' : ''}}>नभएको</option>
+                                        <option value="1" {{request('is_contracted')==1 ? 'selected' : ''}}>भएको
+                                        </option>
+                                        <option value="0" {{request('is_contracted')==0 ? 'selected' : ''}}>नभएको
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -194,18 +196,7 @@
                                                     <i class="fa fa-check"> प्राविधिक लागत अनुमान</i>
                                                 </a>
                                             @endcan
-                                            @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.projectBidDetail.index',$project)}}">
-                                                    <i class="fa fa-list"> योजना सम्झौता </i>
-                                                </a>
-                                                @if($project->is_contracted)
-                                                    <a class="dropdown-item"
-                                                       href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
-                                                        <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
-                                                    </a>
-                                                @endif
-                                            @else
+                                            @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.consumerCommittee.index',$project)}}">
                                                     <i class="fa fa-list"> योजना सम्झौता</i>
@@ -219,6 +210,17 @@
                                                        href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">
                                                         <i class="fa fa-list"> आयोजना मर्मत संम्भार सम्बन्धी
                                                             व्यवस्था </i>
+                                                    </a>
+                                                @endif
+                                            @else
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.projectBidDetail.index',$project)}}">
+                                                    <i class="fa fa-list"> योजना सम्झौता </i>
+                                                </a>
+                                                @if($project->is_contracted)
+                                                    <a class="dropdown-item"
+                                                       href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
+                                                        <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
                                                     </a>
                                                 @endif
                                             @endif

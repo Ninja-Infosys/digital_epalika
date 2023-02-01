@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class RecommendationCategory extends Model
 {
@@ -37,5 +38,9 @@ class RecommendationCategory extends Model
    public function user()
    {
     return $this->belongsTo(RecommendationCategory::class);
+   }
+
+   public function recommendationTemplates(){
+    return $this->hasMany(RecommendationTemplate::class);
    }
 }

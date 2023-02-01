@@ -16,10 +16,10 @@
                                 योजनाहरु
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> मोविलाईजेशन पेश्की/रनिङ विल विवरण </li>
+                        <li class="breadcrumb-item active"> आर्थिक कारोबारको विवरण </li>
                     </ol>
                 </div>
-                <h4 class="page-title">मोविलाईजेशन पेश्की/रनिङ विल विवरण </h4>
+                <h4 class="page-title">आर्थिक कारोबारको विवरण </h4>
             </div>
         </div>
     </div>

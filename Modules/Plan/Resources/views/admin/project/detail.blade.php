@@ -409,7 +409,34 @@
         </div>
         <div class="tab-pane" id="financial-transactions" role="tabpanel">
             <div class="p-2 border border-info">
-                @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
+                @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                        <tr>
+                            <th>क्र.सं.</th>
+                            <th>प्रकार</th>
+                            <th>मिति</th>
+                            <th>रकम</th>
+                            <th>कैफियत</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @forelse($project->consumerCommitteeTransactions as $consumerCommitteeOfficial)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$consumerCommitteeOfficial->type?->label()??''}}</td>
+                                <td>{{$consumerCommitteeOfficial->date}}</td>
+                                <td>{{$consumerCommitteeOfficial->amount}}</td>
+                                <td>{{$consumerCommitteeOfficial->remarks}}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                            </tr>
+                        @endforelse
+                        </tbody>
+                    </table>
+                @else
                     <table class="table table-sm table-bordered">
                         <thead>
                         <tr>
@@ -442,33 +469,6 @@
                         </tr>
                         </tfoot>
                     </table>
-                @else
-                    <table class="table table-sm table-bordered">
-                        <thead>
-                        <tr>
-                            <th>क्र.सं.</th>
-                            <th>प्रकार</th>
-                            <th>मिति</th>
-                            <th>रकम</th>
-                            <th>कैफियत</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @forelse($project->consumerCommitteeTransactions as $consumerCommitteeOfficial)
-                            <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>{{$consumerCommitteeOfficial->type?->label()??''}}</td>
-                                <td>{{$consumerCommitteeOfficial->date}}</td>
-                                <td>{{$consumerCommitteeOfficial->amount}}</td>
-                                <td>{{$consumerCommitteeOfficial->remarks}}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                            </tr>
-                        @endforelse
-                        </tbody>
-                    </table>
                 @endif
             </div>
         </div>
@@ -480,10 +480,6 @@
                         <tr>
                             <th>क्र.स</th>
                             <th>विवरण</th>
-                            <th>संख्या</th>
-                            <th>लम्बाई</th>
-                            <th>चौडाई</th>
-                            <th>उचाइ</th>
                             <th>परिमाण</th>
                             <th>इकाई</th>
                             <th>दर</th>
@@ -495,24 +491,20 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$technicalCostEstimate->detail}}</td>
-                                <td>{{$technicalCostEstimate->number}}</td>
-                                <td>{{$technicalCostEstimate->length}}</td>
-                                <td>{{$technicalCostEstimate->breadth}}</td>
-                                <td>{{$technicalCostEstimate->height}}</td>
                                 <td>{{$technicalCostEstimate->quantity}}</td>
-                                <td>{{$technicalCostEstimate->unit}}</td>
+                                <td>{{$technicalCostEstimate->unit->title??''}}</td>
                                 <td>{{$technicalCostEstimate->rate}}</td>
                                 <td>{{$technicalCostEstimate->amount}}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="10" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                <td colspan="6" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                             </tr>
                         @endforelse
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th colspan="8">जम्मा रकम</th>
+                            <th colspan="4">जम्मा रकम</th>
                             <td colspan="2">रू. {{$project->technicalCostEstimates->sum('amount')}}</td>
                         </tr>
                         </tfoot>

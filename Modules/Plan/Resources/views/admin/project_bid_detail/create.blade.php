@@ -198,155 +198,158 @@
                             </div>
                         </div>
 
-                        <h4 class="header-title border-bottom mb-2">विडवण्ड/परफरमेन्स विवरण</h4>
-                        <div class="row">
-                            <div class="col-md-3 mb-2">
-                                <label for="bid_bond_amount" class="form-label">विडवण्ड रकम</label>
-                                <input
-                                    type="number"
-                                    name="bid_bond_amount"
-                                    value="{{old('bid_bond_amount',$project->projectBidDetail->bid_bond_amount??0)}}"
-                                    class="form-control @error('bid_bond_amount') is-invalid @enderror"
-                                    id="bid_bond_amount"
-                                    placeholder="विडवण्ड रकम"
-                                />
-                                @error('bid_bond_amount')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                        @if($project->operated_through==\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
+                            <h4 class="header-title border-bottom mb-2">विडवण्ड/परफरमेन्स विवरण</h4>
+                            <div class="row">
+                                <div class="col-md-3 mb-2">
+                                    <label for="bid_bond_amount" class="form-label">विडवण्ड रकम</label>
+                                    <input
+                                        type="number"
+                                        name="bid_bond_amount"
+                                        value="{{old('bid_bond_amount',$project->projectBidDetail->bid_bond_amount??0)}}"
+                                        class="form-control @error('bid_bond_amount') is-invalid @enderror"
+                                        id="bid_bond_amount"
+                                        placeholder="विडवण्ड रकम"
+                                    />
+                                    @error('bid_bond_amount')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="bid_bond_no" class="form-label">विडवण्ड नं.</label>
+                                    <input
+                                        type="number"
+                                        name="bid_bond_no"
+                                        value="{{old('bid_bond_no',$project->projectBidDetail->bid_bond_no??0)}}"
+                                        class="form-control @error('bid_bond_no') is-invalid @enderror"
+                                        id="bid_bond_no"
+                                        placeholder="विडवण्ड नं."
+                                    />
+                                    @error('bid_bond_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="bid_bond_bank_name" class="form-label">विडवण्ड बैंकको नाम</label>
+                                    <input
+                                        type="text"
+                                        name="bid_bond_bank_name"
+                                        value="{{old('bid_bond_bank_name',$project->projectBidDetail->bid_bond_bank_name??'')}}"
+                                        class="form-control @error('bid_bond_bank_name') is-invalid @enderror"
+                                        id="bid_bond_bank_name"
+                                        placeholder="विडवण्ड बैंकको नाम"
+                                    />
+                                    @error('bid_bond_bank_name')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="bid_bond_issue_date" labelNe="विडवण्ड जारी मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->projectBidDetail->bid_bond_issue_date??''"
+                                    />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="bid_bond_expiry_date" labelNe="विडवण्ड म्याद सकिने मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->projectBidDetail->bid_bond_expiry_date??''"
+                                    />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="performance_bond_no" class="form-label">परफरमेन्स वण्ड नं.</label>
+                                    <input
+                                        type="number"
+                                        name="performance_bond_no"
+                                        value="{{old('performance_bond_no',$project->projectBidDetail->performance_bond_no??0)}}"
+                                        class="form-control @error('performance_bond_no') is-invalid @enderror"
+                                        id="performance_bond_no"
+                                        placeholder="परफरमेन्स वण्ड नं."
+                                    />
+                                    @error('performance_bond_no')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="performance_bond_amount" class="form-label">परफरमेन्स वण्ड रकम</label>
+                                    <input
+                                        type="number"
+                                        name="performance_bond_amount"
+                                        value="{{old('performance_bond_amount',$project->projectBidDetail->performance_bond_amount??0)}}"
+                                        class="form-control @error('performance_bond_amount') is-invalid @enderror"
+                                        id="performance_bond_amount"
+                                        placeholder="परफरमेन्स वण्ड रकम"
+                                    />
+                                    @error('performance_bond_amount')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="performance_bond_bank" class="form-label">परफरमेन्स वण्ड बैंकको
+                                        नाम</label>
+                                    <input
+                                        type="text"
+                                        name="performance_bond_bank"
+                                        value="{{old('performance_bond_bank',$project->projectBidDetail->performance_bond_bank??'')}}"
+                                        class="form-control @error('performance_bond_bank') is-invalid @enderror"
+                                        id="performance_bond_bank"
+                                        placeholder="परफरमेन्स वण्ड बैंकको नाम"
+                                    />
+                                    @error('performance_bond_bank')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="performance_bond_issue_date" labelNe="परफरमेन्स वण्ड जारी मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->projectBidDetail->performance_bond_issue_date??''"
+                                    />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="performance_bond_expiry_date" labelNe="परफरमेन्स वण्ड म्याद सकिने मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->projectBidDetail->performance_bond_expiry_date??''"
+                                    />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="performance_bond_extended_date" labelNe="परफरमेन्स वण्ड म्याद थपको मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->projectBidDetail->performance_bond_extended_date??''"
+                                    />
+                                </div>
                             </div>
-                            <div class="col-md-3 mb-2">
-                                <label for="bid_bond_no" class="form-label">विडवण्ड नं.</label>
-                                <input
-                                    type="number"
-                                    name="bid_bond_no"
-                                    value="{{old('bid_bond_no',$project->projectBidDetail->bid_bond_no??0)}}"
-                                    class="form-control @error('bid_bond_no') is-invalid @enderror"
-                                    id="bid_bond_no"
-                                    placeholder="विडवण्ड नं."
-                                />
-                                @error('bid_bond_no')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <label for="bid_bond_bank_name" class="form-label">विडवण्ड बैंकको नाम</label>
-                                <input
-                                    type="text"
-                                    name="bid_bond_bank_name"
-                                    value="{{old('bid_bond_bank_name',$project->projectBidDetail->bid_bond_bank_name??'')}}"
-                                    class="form-control @error('bid_bond_bank_name') is-invalid @enderror"
-                                    id="bid_bond_bank_name"
-                                    placeholder="विडवण्ड बैंकको नाम"
-                                />
-                                @error('bid_bond_bank_name')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <x-date-input-component
-                                    nameNe="bid_bond_issue_date" labelNe="विडवण्ड जारी मिति"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->projectBidDetail->bid_bond_issue_date??''"
-                                />
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <x-date-input-component
-                                    nameNe="bid_bond_expiry_date" labelNe="विडवण्ड म्याद सकिने मिति"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->projectBidDetail->bid_bond_expiry_date??''"
-                                />
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <label for="performance_bond_no" class="form-label">परफरमेन्स वण्ड नं.</label>
-                                <input
-                                    type="number"
-                                    name="performance_bond_no"
-                                    value="{{old('performance_bond_no',$project->projectBidDetail->performance_bond_no??0)}}"
-                                    class="form-control @error('performance_bond_no') is-invalid @enderror"
-                                    id="performance_bond_no"
-                                    placeholder="परफरमेन्स वण्ड नं."
-                                />
-                                @error('performance_bond_no')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <label for="performance_bond_amount" class="form-label">परफरमेन्स वण्ड रकम</label>
-                                <input
-                                    type="number"
-                                    name="performance_bond_amount"
-                                    value="{{old('performance_bond_amount',$project->projectBidDetail->performance_bond_amount??0)}}"
-                                    class="form-control @error('performance_bond_amount') is-invalid @enderror"
-                                    id="performance_bond_amount"
-                                    placeholder="परफरमेन्स वण्ड रकम"
-                                />
-                                @error('performance_bond_amount')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <label for="performance_bond_bank" class="form-label">परफरमेन्स वण्ड बैंकको नाम</label>
-                                <input
-                                    type="text"
-                                    name="performance_bond_bank"
-                                    value="{{old('performance_bond_bank',$project->projectBidDetail->performance_bond_bank??'')}}"
-                                    class="form-control @error('performance_bond_bank') is-invalid @enderror"
-                                    id="performance_bond_bank"
-                                    placeholder="परफरमेन्स वण्ड बैंकको नाम"
-                                />
-                                @error('performance_bond_bank')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <x-date-input-component
-                                    nameNe="performance_bond_issue_date" labelNe="परफरमेन्स वण्ड जारी मिति"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->projectBidDetail->performance_bond_issue_date??''"
-                                />
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <x-date-input-component
-                                    nameNe="performance_bond_expiry_date" labelNe="परफरमेन्स वण्ड म्याद सकिने मिति"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->projectBidDetail->performance_bond_expiry_date??''"
-                                />
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <x-date-input-component
-                                    nameNe="performance_bond_extended_date" labelNe="परफरमेन्स वण्ड म्याद थपको मिति"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->projectBidDetail->performance_bond_extended_date??''"
-                                />
-                            </div>
-                        </div>
 
-                        <h4 class="header-title border-bottom mb-2">
-                            इन्स्योरेन्स विवरण
-                        </h4>
-                        <div class="row">
-                            <div class="col-md-3 mb-2">
-                                <x-date-input-component
-                                    nameNe="insurance_issue_date" labelNe="इन्स्योरेन्स जारी मिति"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->projectBidDetail->insurance_issue_date??''"
-                                />
+                            <h4 class="header-title border-bottom mb-2">
+                                इन्स्योरेन्स विवरण
+                            </h4>
+                            <div class="row">
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="insurance_issue_date" labelNe="इन्स्योरेन्स जारी मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->projectBidDetail->insurance_issue_date??''"
+                                    />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="insurance_expiry_date" labelNe="इन्स्योरेन्स सकिने मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->projectBidDetail->insurance_expiry_date??''"
+                                    />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <x-date-input-component
+                                        nameNe="insurance_extended_date" labelNe="इन्स्योरेन्स म्याद थप हुने मिति"
+                                        :getTodayDate="false"
+                                        :editDateNe="$project->projectBidDetail->insurance_extended_date??''"
+                                    />
+                                </div>
                             </div>
-                            <div class="col-md-3 mb-2">
-                                <x-date-input-component
-                                    nameNe="insurance_expiry_date" labelNe="इन्स्योरेन्स सकिने मिति"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->projectBidDetail->insurance_expiry_date??''"
-                                />
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <x-date-input-component
-                                    nameNe="insurance_extended_date" labelNe="इन्स्योरेन्स म्याद थप हुने मिति"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->projectBidDetail->insurance_extended_date??''"
-                                />
-                            </div>
-                        </div>
+                        @endif
 
                         <h4 class="header-title border-bottom mb-2">
                             योजना सम्झौता विवरण
