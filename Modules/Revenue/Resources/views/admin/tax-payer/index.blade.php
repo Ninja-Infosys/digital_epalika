@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">राजस्वको वर्ग</li>
+                        <li class="breadcrumb-item active">करदाता</li>
                     </ol>
                 </div>
-                <h4 class="page-title">राजस्वको वर्ग</h4>
+                <h4 class="page-title">करदाता</h4>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">राजस्वको वर्ग सूची</h4>
+                        <h4 class="header-title">करदाता सूची</h4>
                         @can('revenueCategory_create')
-                            <a href="{{route('admin.revenue.setting.revenue-category.create')}}"
+                            <a href="{{route('admin.revenue.taxPayer.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
                             </a>
@@ -34,32 +34,47 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        @includeIf('inc.filter_form')
                         <table class="table table-sm table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
-                                <th>शिर्षक</th>
-                                <th>वर्ग</th>
+                                <th>दर्ता नम्बर</th>
+                                <th>नाम</th>
+                                <th>फोन</th>
+                                <th>नागरिकता नं</th>
+                                <th>वार्ड</th>
+                                <th>स्थिति</th>
                                 <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($revenueCategories as $key=>$revenueCategory)
+                            @forelse($taxPayers as $key=>$taxPayer)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$revenueCategory->title}}</td>
-                                    <td>{{$revenueCategory->revenueCategory->title ??''}}</td>
+                                    <td>{{$taxPayer->registration_no}}</td>
+                                    <td>{{$taxPayer->name}}</td>
+                                    <td>{{$taxPayer->phone}}</td>
+                                    <td>{{$taxPayer->citizenship_no}}</td>
+                                    <td>{{$taxPayer->ward}}</td>
                                     <td>
-                                        @can('revenueCategory_edit')
+                                        @if($taxPayer->is_active == 1)
+                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}" class="bg-success text-white rounded p-1">सक्रिय</a>
+                                        @else
+                                            <a href="{{route('admin.revenue.taxPayer.update-status', $taxPayer)}}" class="bg-danger text-white rounded p-1">निष्क्रिय</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @can('taxPayerType_edit')
                                             <a data-bs-type="edit"
-                                               href="{{route('admin.revenue.setting.revenue-category.edit',[$revenueCategory])}}"
+                                               href="{{route('admin.revenue.taxPayer.edit',[$taxPayer])}}"
                                                class="btn btn-xs btn-outline-primary {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>
                                         @endcan
-                                        @can('revenueCategory_delete')
+                                        @can('taxPayerType_delete')
                                             <form
-                                                action="{{route('admin.revenue.setting.revenue-category.destroy',[$revenueCategory])}}"
+                                                action="{{route('admin.revenue.taxPayer.destroy',[$taxPayer])}}"
                                                 method="post">
                                                 @csrf
                                                 @method('delete')
@@ -74,11 +89,12 @@
 
                             @empty
                                 <tr>
-                                    <td colspan="4" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                    <td colspan="8" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
                                 </tr>
                             @endforelse
                             </tbody>
                         </table>
+                        {{$taxPayers->links()}}
                     </div>
                 </div>
             </div>

@@ -52,14 +52,18 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="file" class="form-label">फाइल * </label>
+                                <label for="files" class="form-label">फाइल (Multiple) * </label>
                                 <input
                                     type="file"
-                                    name="file"
-                                    class="form-control @error('file') is-invalid @enderror"
-                                    id="file"
+                                    name="files[]"
+                                    multiple
+                                    class="form-control @error('files') is-invalid @enderror"
+                                    id="files"
                                 />
-                                @error('file')
+                                @error('files')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                                @error('files.*')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
