@@ -3,33 +3,33 @@
            id="offcanvasExampleLabel">
             <h4>डिजिटल ई-पालिका</h4>
         </a>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
-    </div>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+</div>
 
-    <div class="offcanvas-body">
-        <div class="row">
+<div class="offcanvas-body">
+    <div class="row">
+        <div class="col-md-3 border">
+            <a href="{{route('admin.digitalBoard.dashboard')}}">
+                <div class="p-2 text-center">
+                    <img src="{{asset('assets/backend/images/modules/digitalboard.png')}}"
+                         height="50" width="50">
+                    <h5 class="p-1 text-white">नागरिक वडापत्र</h5>
+                </div>
+            </a>
+        </div>
+        @if(Route::has('admin.circular.dashboard'))
             <div class="col-md-3 border">
-                <a href="{{route('admin.digitalBoard.dashboard')}}">
+                <a href="{{route('admin.circular.dashboard')}}">
                     <div class="p-2 text-center">
-                        <img src="{{asset('assets/backend/images/modules/digitalboard.png')}}"
+                        <img src="{{asset('assets/backend/images/modules/circular.png')}}"
                              height="50" width="50">
-                        <h5 class="p-1 text-white">नागरिक वडापत्र</h5>
+                        <h5 class="p-1 text-white">दर्ता चलानी प्रणाली</h5>
                     </div>
                 </a>
             </div>
-            @if(Route::has('admin.circular.dashboard'))
-                <div class="col-md-3 border">
-                    <a href="{{route('admin.circular.dashboard')}}">
-                        <div class="p-2 text-center">
-                            <img src="{{asset('assets/backend/images/modules/circular.png')}}"
-                                 height="50" width="50">
-                            <h5 class="p-1 text-white">दर्ता चलानी प्रणाली</h5>
-                        </div>
-                    </a>
-                </div>
-            @endif
-            @if(Route::has('admin.listRegistrations.dashboard'))
+        @endif
+        @if(Route::has('admin.listRegistrations.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.listRegistrations.dashboard')}}">
                     <div class="p-2 text-center">
@@ -39,8 +39,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.helpDesk.dashboard'))
+        @endif
+        @if(Route::has('admin.helpDesk.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.helpDesk.dashboard')}}">
                     <div class="p-2 text-center">
@@ -50,8 +50,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.grievanceHandling.dashboard'))
+        @endif
+        @if(Route::has('admin.grievanceHandling.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.grievanceHandling.dashboard')}}">
                     <div class="p-2 text-center">
@@ -61,8 +61,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.executiveMeeting.dashboard'))
+        @endif
+        @if(Route::has('admin.executiveMeeting.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.executiveMeeting.dashboard')}}">
                     <div class="p-2 text-center">
@@ -72,8 +72,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('emap.admin.dashboard'))
+        @endif
+        @if(Route::has('emap.admin.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('emap.admin.dashboard')}}">
                     <div class="p-2 text-center">
@@ -83,8 +83,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.businessRegistration.dashboard'))
+        @endif
+        @if(Route::has('admin.businessRegistration.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.businessRegistration.dashboard')}}">
                     <div class="p-2 text-center">
@@ -94,8 +94,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.recommendation.dashboard'))
+        @endif
+        @if(Route::has('admin.recommendation.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.recommendation.dashboard')}}">
                     <div class="p-2 text-center">
@@ -105,8 +105,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.employee.dashboard'))
+        @endif
+        @if(Route::has('admin.employee.dashboard'))
             <div class="col-md-3 border disable_menu">
                 <a href="#">
                     <div class="p-2 text-center">
@@ -116,8 +116,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.taskManagement.dashboard'))
+        @endif
+        @if(Route::has('admin.taskManagement.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.taskManagement.dashboard')}}">
                     <div class="p-2 text-center">
@@ -127,8 +127,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.roaster.dashboard'))
+        @endif
+        @if(Route::has('admin.roaster.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.roaster.dashboard')}}">
                     <div class="p-2 text-center">
@@ -138,8 +138,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.judicialCommittee.dashboard'))
+        @endif
+        @if(Route::has('admin.judicialCommittee.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.judicialCommittee.dashboard')}}">
                     <div class="p-2 text-center">
@@ -149,8 +149,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.plan.dashboard'))
+        @endif
+        @if(Route::has('admin.plan.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.plan.dashboard')}}">
                     <div class="p-2 text-center">
@@ -160,8 +160,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.grant.dashboard'))
+        @endif
+        @if(Route::has('admin.grant.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('admin.grant.dashboard')}}">
                     <div class="p-2 text-center">
@@ -171,10 +171,10 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('admin.payment.dashboard'))
-            <div class="col-md-3 border disable_menu">
-                <a href="#">
+        @endif
+        @if(Route::has('admin.revenue.dashboard'))
+            <div class="col-md-3 border">
+                <a href="{{route('admin.revenue.dashboard')}}">
                     <div class="p-2 text-center">
                         <img src="{{asset('assets/backend/images/modules/rajashow.png')}}"
                              height="50" width="50" alt="">
@@ -182,8 +182,8 @@
                     </div>
                 </a>
             </div>
-            @endif
-            @if(Route::has('identity.admin.dashboard'))
+        @endif
+        @if(Route::has('identity.admin.dashboard'))
             <div class="col-md-3 border">
                 <a href="{{route('identity.admin.dashboard')}}">
                     <div class="p-2 text-center">
@@ -193,18 +193,18 @@
                     </div>
                 </a>
             </div>
-            @endif
+        @endif
 
-            @if(Route::has('admin.organizationRegistration.dashboard'))
-                <div class="col-md-3 border">
-                    <a href="{{route('admin.organizationRegistration.dashboard')}}">
-                        <div class="p-2 text-center">
-                            <img src="{{asset('assets/backend/images/modules/businessregistration.png')}}"
-                                 height="50" width="50" alt="">
-                            <h5 class="p-1 text-white">व्यवसाय दर्ता</h5>
-                        </div>
-                    </a>
-                </div>
-            @endif
+        @if(Route::has('admin.organizationRegistration.dashboard'))
+            <div class="col-md-3 border">
+                <a href="{{route('admin.organizationRegistration.dashboard')}}">
+                    <div class="p-2 text-center">
+                        <img src="{{asset('assets/backend/images/modules/businessregistration.png')}}"
+                             height="50" width="50" alt="">
+                        <h5 class="p-1 text-white">व्यवसाय दर्ता</h5>
+                    </div>
+                </a>
+            </div>
+        @endif
         </div>
     </div>
