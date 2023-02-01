@@ -10,6 +10,7 @@ use Modules\Plan\Entities\ConsumerCommittee;
 use Modules\Plan\Entities\ConsumerCommitteeOfficial;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Enums\ConsumerCommitteePostEnum;
+use Modules\Plan\Enums\ProjectStatusEnum;
 
 class ConsumerCommitteeLivewire extends Component
 {
@@ -129,7 +130,7 @@ class ConsumerCommitteeLivewire extends Component
             'form.consumerCommitteeOfficials.*.citizenship_no' => ['nullable'],
             'form.contract_date' => ['required'],
             'form.project_start_date' => ['required'],
-            'form.project_completion_date' => ['required','after:form.project_start_date'],
+            'form.project_completion_date' => ['required', 'after:form.project_start_date'],
         ];
     }
 
@@ -154,6 +155,7 @@ class ConsumerCommitteeLivewire extends Component
         DB::transaction(function () use ($formData) {
             $this->project->update([
                 'is_contracted' => 1,
+                'project_status' => ProjectStatusEnum::IN_PROGRESS,
                 'contract_date' => $formData['contract_date'],
                 'project_start_date' => $formData['project_start_date'],
                 'project_completion_date' => $formData['project_completion_date']

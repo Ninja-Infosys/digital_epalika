@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\ProjectBidDetail;
+use Modules\Plan\Enums\ProjectStatusEnum;
 
 class ProjectBidDetailController extends Controller
 {
@@ -67,6 +68,7 @@ class ProjectBidDetailController extends Controller
 
             $project->update([
                 'is_contracted' => 1,
+                'project_status' => ProjectStatusEnum::IN_PROGRESS,
                 'contract_date' => $validated['contract_date'] ?? null,
                 'project_start_date' => $validated['project_start_date'] ?? null,
                 'project_completion_date' => $validated['project_completion_date'] ?? null,

@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h4 class="header-title">
-            ४. मोविलाईजेशन पेश्की/रनिङ विल विवरण
+            आर्थिक कारोबारको विवरण
         </h4>
         <button type="button" wire:click="create" class="btn btn-xs btn-outline-primary">
             <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
@@ -12,20 +12,42 @@
             <table class="table table-sm table-bordered">
                 <thead>
                 <tr>
-                    <th>बिल/पेश्कीको प्रकार</th>
-                    <th>बिल/पेश्कीको क्रम</th>
+                    <th>क्र.स</th>
                     <th>मिति</th>
-                    <th> रकम</th>
-                    <th> #</th>
+                    <th>शीर्षक</th>
+                    <th>बिल/पेश्कीको क्रम</th>
+                    <th>योजना स्वीकृत रकम</th>
+                    <th>खर्च रकम</th>
+                    <th>बाँकी रकम</th>
+                    <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>- -</td>
+                    <td>- -</td>
+                    <td>रू. {{$project->allocated_amount}}</td>
+                    <td>- -</td>
+                    <td>रू. {{$project->allocated_amount}}</td>
+                    <td>- -</td>
+                </tr>
+                @php
+                    $balance=$project->allocated_amount;
+                @endphp
                 @forelse($project->projectBidSubmissions as $key=>$projectBidSubmission)
+                    @php
+                        $balance-=$projectBidSubmission->amount;
+                    @endphp
                     <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$projectBidSubmission->date}}</td>
                         <td>{{$projectBidSubmission->submission_type->label()}}</td>
                         <td>{{$projectBidSubmission->submission_no}}</td>
-                        <td>{{$projectBidSubmission->date}}</td>
-                        <td>{{$projectBidSubmission->amount}}</td>
+                        <td>- -</td>
+                        <td>रू. {{$projectBidSubmission->amount}}</td>
+                        <td>रू. {{$balance}}</td>
                         <td>
                             <button type="button" wire:click="edit({{$projectBidSubmission->id}})"
                                     class="btn btn-xs btn-outline-primary">
@@ -39,12 +61,21 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-center" colspan="5">
+                        <td class="text-center" colspan="8">
                             तालिकामा कुनै डाटा उपलब्ध छैन !!!
                         </td>
                     </tr>
                 @endforelse
                 </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="4" class="text-center">जम्मा</th>
+                    <td>रू. {{$project->allocated_amount}}</td>
+                    <td>रू. {{$project->projectBidSubmissions->sum('amount')}}</td>
+                    <td>
+                        रू. {{$project->allocated_amount-$project->projectBidSubmissions->sum('amount')}}</td>
+                    <td></td>
+                </tr>
             </table>
         </div>
         <div class="modal fade show {{!$createModalOpened ? 'd-none' : ''}}" id="bs-example-modal-lg" tabindex="-1"

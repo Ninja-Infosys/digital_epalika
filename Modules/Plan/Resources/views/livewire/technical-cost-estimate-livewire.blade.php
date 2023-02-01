@@ -4,16 +4,12 @@
             <thead>
             <tr>
                 <th>क्र.स</th>
-                <th style="min-width: 200px">विवरण</th>
-                <th>संख्या</th>
-                <th>लम्बाई</th>
-                <th>चौडाई</th>
-                <th>उचाइ</th>
+                <th style="min-width: 220px">विवरण</th>
                 <th>परिमाण</th>
-                <th>इकाई</th>
+                <th style="min-width: 90px">इकाई</th>
                 <th>दर</th>
-                <th>रकम</th>
-                <th class="p-0 align-middle">
+                <th class="text-center" style="min-width: 90px">रकम</th>
+                <th>
                     <button type="button" wire:click="addTechnicalCostEstimates" class="btn btn-xs btn-outline-primary">
                         <i class="fa fa-plus-circle"></i>
                     </button>
@@ -24,7 +20,7 @@
             @forelse($technicalCostEstimates as $key=>$technicalCostEstimate)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td class="p-0">
+                    <td>
                         <input
                             type="text"
                             wire:model="technicalCostEstimates.{{$key}}.detail"
@@ -32,39 +28,7 @@
                             placeholder="विवरण"
                         />
                     </td>
-                    <td class="p-0">
-                        <input
-                            type="number"
-                            wire:model="technicalCostEstimates.{{$key}}.number"
-                            class="form-control form-control-sm"
-                            placeholder="संख्या"
-                        />
-                    </td>
-                    <td class="p-0">
-                        <input
-                            type="number"
-                            wire:model="technicalCostEstimates.{{$key}}.length"
-                            class="form-control form-control-sm"
-                            placeholder="लम्बाई"
-                        />
-                    </td>
-                    <td class="p-0">
-                        <input
-                            type="number"
-                            wire:model="technicalCostEstimates.{{$key}}.breadth"
-                            class="form-control form-control-sm"
-                            placeholder="चौडाई"
-                        />
-                    </td>
-                    <td class="p-0">
-                        <input
-                            type="number"
-                            wire:model="technicalCostEstimates.{{$key}}.height"
-                            class="form-control form-control-sm"
-                            placeholder="ऊचाई"
-                        />
-                    </td>
-                    <td class="p-0">
+                    <td>
                         <input
                             type="number"
                             wire:model="technicalCostEstimates.{{$key}}.quantity"
@@ -72,15 +36,19 @@
                             placeholder="परिमाण *"
                         />
                     </td>
-                    <td class="p-0">
-                        <input
-                            type="text"
-                            wire:model="technicalCostEstimates.{{$key}}.unit"
-                            class="form-control form-control-sm"
-                            placeholder="इकाइ"
-                        />
+                    <td>
+                        <select
+                            wire:model="technicalCostEstimates.{{$key}}.unit_id"
+                            class="form-select form-select-sm">
+                            <option value="">-- छान्नुहोस् --</option>
+                            @foreach($units as $unit)
+                                <option value="{{$unit->id}}">
+                                    {{$unit->title}}
+                                </option>
+                            @endforeach
+                        </select>
                     </td>
-                    <td class="p-0">
+                    <td>
                         <input
                             type="number"
                             wire:model="technicalCostEstimates.{{$key}}.rate"
@@ -88,10 +56,10 @@
                             placeholder="दर *"
                         />
                     </td>
-                    <td class="p-0 align-middle">
+                    <td class="text-center">
                         {{(double)($technicalCostEstimate['quantity']??0)*(double)($technicalCostEstimate['rate']??0)}}
                     </td>
-                    <td class="p-0 align-middle">
+                    <td>
                         <button type="button" wire:click="removeTechnicalCostEstimate({{$key}})"
                                 class="btn btn-xs btn-outline-danger">
                             <i class="fa fa-trash"></i>
@@ -108,8 +76,8 @@
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="8">जम्मा रकम</th>
-                <td colspan="3">रू. {{$project->technicalCostEstimates->sum('amount')}}</td>
+                <th colspan="5">जम्मा रकम</th>
+                <td colspan="2">रू. {{$project->technicalCostEstimates->sum('amount')}}</td>
             </tr>
             </tfoot>
         </table>
