@@ -18,6 +18,7 @@ return [
         'plan',
         'identity',
         'organizationregistration',
+        'revenue',
     ],
     'sidebars' => [
         'website',

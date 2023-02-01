@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="header-title">
-                        ३. बोलपत्र सम्वन्धि विवरण
+                         बोलपत्र सम्वन्धि विवरण
                     </h4>
                     <a href="{{route('admin.plan.project.index')}}" class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-list"></i> योजना/कार्यक्रम हरू

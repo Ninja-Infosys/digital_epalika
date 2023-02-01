@@ -152,6 +152,11 @@ trait PlanTemplateTrait
         });
     }
 
+    public function getPlanTemplateData(PlanTemplate $planTemplate): string
+    {
+        return $this->getData($planTemplate->data);
+    }
+
     public function getSpecificTemplateData(PlanTemplateTypeEnum $planTemplateTypeEnum): string
     {
         $planTemplates = $this->getPlanTemplates();

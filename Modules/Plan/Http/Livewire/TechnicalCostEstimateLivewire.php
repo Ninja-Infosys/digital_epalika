@@ -2,6 +2,8 @@
 
 namespace Modules\Plan\Http\Livewire;
 
+use App\Models\Settings\Units\Unit;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Entities\TechnicalCostEstimate;
@@ -11,9 +13,11 @@ class TechnicalCostEstimateLivewire extends Component
     public Project $project;
 
     public array $technicalCostEstimates = [];
+    public Collection $units;
 
     public function mount(Project $project)
     {
+        $this->units = Unit::orderBy('position')->get();
         $this->assignTechnicalCostEstimateData($project);
     }
 
@@ -39,12 +43,8 @@ class TechnicalCostEstimateLivewire extends Component
             $this->technicalCostEstimates[] = [
                 'id' => $technicalCostEstimate->id ?? null,
                 'detail' => $technicalCostEstimate->detail ?? null,
-                'number' => $technicalCostEstimate->number ?? 0,
-                'length' => $technicalCostEstimate->length ?? 0,
-                'breadth' => $technicalCostEstimate->breadth ?? 0,
-                'height' => $technicalCostEstimate->height ?? 0,
                 'quantity' => $technicalCostEstimate->quantity ?? 0,
-                'unit' => $technicalCostEstimate->unit ?? null,
+                'unit_id' => $technicalCostEstimate->unit_id ?? null,
                 'rate' => $technicalCostEstimate->rate ?? 0
             ];
         }
@@ -54,12 +54,8 @@ class TechnicalCostEstimateLivewire extends Component
     {
         return [
             'technicalCostEstimates.*.detail' => ['required', 'string', 'max:255'],
-            'technicalCostEstimates.*.number' => ['nullable', 'numeric'],
-            'technicalCostEstimates.*.length' => ['nullable', 'numeric'],
-            'technicalCostEstimates.*.breadth' => ['nullable', 'numeric'],
-            'technicalCostEstimates.*.height' => ['nullable', 'numeric'],
             'technicalCostEstimates.*.quantity' => ['required', 'numeric'],
-            'technicalCostEstimates.*.unit' => ['required', 'string', 'max:255'],
+            'technicalCostEstimates.*.unit_id' => ['required', 'exists:units,id'],
             'technicalCostEstimates.*.rate' => ['required', 'numeric']
         ];
     }
@@ -83,7 +79,7 @@ class TechnicalCostEstimateLivewire extends Component
                     'breadth' => !empty($technicalCostEstimate['breadth']) ? $technicalCostEstimate['breadth'] : 0,
                     'height' => !empty($technicalCostEstimate['height']) ? $technicalCostEstimate['height'] : 0,
                     'quantity' => !empty($technicalCostEstimate['quantity']) ? $technicalCostEstimate['quantity'] : 0,
-                    'unit' => !empty($technicalCostEstimate['unit']) ? $technicalCostEstimate['unit'] : null,
+                    'unit_id' => !empty($technicalCostEstimate['unit_id']) ? $technicalCostEstimate['unit_id'] : null,
                     'rate' => !empty($technicalCostEstimate['rate']) ? $technicalCostEstimate['rate'] : 0
                 ]
             );
@@ -103,7 +99,7 @@ class TechnicalCostEstimateLivewire extends Component
         return [
             'technicalCostEstimates.*.detail.required' => 'विवरण आवश्यक छ',
             'technicalCostEstimates.*.quantity.required' => 'परिमाण आवश्यक छ',
-            'technicalCostEstimates.*.unit.required' => 'इकाई आवश्यक छ',
+            'technicalCostEstimates.*.unit_id.required' => 'इकाई आवश्यक छ',
             'technicalCostEstimates.*.rate.required' => 'दर आवश्यक छ'
         ];
     }
