@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Modules\Recommendation\Entities\FormBuilder;
+use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Enums\ApplicationTypeEnum;
 use Modules\Recommendation\Http\Requests\Template\StoreRecommendationTemplateRequest;
@@ -13,57 +14,59 @@ use Modules\Recommendation\Http\Requests\Template\UpdateRecommendationTemplateRe
 
 class RecommendationTemplateController extends Controller
 {
-    public function index()
+    public function index($type,RecommendationCategory $recommendationCategory)
     {
         $this->checkAuthorization('recommendationTemplate_access');
 
-        $recommendationTemplates = RecommendationTemplate::latest()->get();
-
-        return view('recommendation::admin.setting.recommendationTemplate.index', compact('recommendationTemplates'));
+        $recommendationTemplates = RecommendationTemplate::where('recommendation_category_id',$recommendationCategory->id)->latest()->get();
+        return view('recommendation::admin.setting.recommendationTemplate.index', compact('type','recommendationTemplates','recommendationCategory'));
     }
 
-    public function create()
+    public function create($type,RecommendationCategory $recommendationCategory)
     {
+    
         $this->checkAuthorization('recommendationTemplate_create');
-        return view('recommendation::admin.setting.recommendationTemplate.create');
+        return view('recommendation::admin.setting.recommendationTemplate.create',compact('type','recommendationCategory'));
     }
 
-    public function store(StoreRecommendationTemplateRequest $request)
+    public function store(StoreRecommendationTemplateRequest $request,$type,RecommendationCategory $recommendationCategory)
     {
+       
         $this->checkAuthorization('recommendationTemplate_create');
-
         RecommendationTemplate::create($request->validated() + [
                 'user_id'=>auth()->id(),
+                'recommendation_category_id' => $recommendationCategory->id,
                 'is_active' => RecommendationTemplate::where('is_active', 1)->count() === 0 ? '1' : '0'
             ]);
         toast('टेम्प्लेट सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
-    public function show(RecommendationTemplate $recommendationTemplate)
+    public function show($type,RecommendationCategory $recommendationCategory,RecommendationTemplate $recommendationTemplate)
     {
-        return view('recommendation::show', compact('recommendationTemplate'));
+        return view('recommendation::show', compact('recommendationTemplate','recommendationCategory','type'));
     }
 
-    public function edit(RecommendationTemplate $recommendationTemplate)
+    public function edit($type,RecommendationCategory $recommendationCategory,RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_edit');
 
     
-        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('recommendationTemplate'));
+        return view('recommendation::admin.setting.recommendationTemplate.edit', compact('type','recommendationTemplate','recommendationCategory'));
     }
 
-    public function update(UpdateRecommendationTemplateRequest $request, RecommendationTemplate $recommendationTemplate)
+    public function update(UpdateRecommendationTemplateRequest $request, $type,RecommendationCategory $recommendationCategory,RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_edit');
 
         $recommendationTemplate->update($request->validated());
+        $recommendationCategory->update($request->validated());
         toast('टेम्प्लेट सफलतापूर्वक अद्यावधिक गरियो', 'success');
 
         return back();
     }
 
-    public function destroy( RecommendationTemplate $recommendationTemplate)
+    public function destroy( $type,RecommendationCategory $recommendationCategory,RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_delete');
         if ($recommendationTemplate->is_active == 1) {
@@ -77,7 +80,7 @@ class RecommendationTemplateController extends Controller
         return back();
     }
 
-    public function updateStatus( RecommendationTemplate $recommendationTemplate)
+    public function updateStatus($type, RecommendationTemplate $recommendationTemplate)
     {
         $this->checkAuthorization('recommendationTemplate_access');
         DB::transaction(function () use ($recommendationTemplate) {

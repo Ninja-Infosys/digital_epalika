@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Recommendation\Entities\RecommendationCategory;
+use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Http\Requests\RecommendationCategory\StoreRecommendationCategoryRequest;
 use Modules\Recommendation\Http\Requests\RecommendationCategory\UpdateRecommendationCategoryRequest;
 
@@ -14,7 +15,6 @@ class RecommendationCategoryController extends Controller
     public function index($type)
     {
         $recommendationCategories  = RecommendationCategory::with('recommendationCategory')->where(function($query) use($type){
-
             if($type=='recommendationSubCategory')
             {
                 $query->whereNotNull('recommendation_category_id');
@@ -23,6 +23,7 @@ class RecommendationCategoryController extends Controller
                 $query->whereNull('recommendation_category_id');
             }
         })->get();
+       
         return view('recommendation::admin.setting.recommendationcategory.index',compact('recommendationCategories', 'type'));
     }
 
@@ -44,10 +45,11 @@ class RecommendationCategoryController extends Controller
 
     public function show($type,RecommendationCategory $recommendationCategory)
     {
-        return view('recommendation::show');
+        $recommendationCategory->load('recommendationTemplates');
+        return view('recommendation::admin.setting.recommendationcategory.show',compact('recommendationCategory','type'));
     }
 
-    public function edit($type,RecommendationCategory $recommendationCategory)
+    public function edit($type,RecommendationCategory $recommendationCategory,)
     {
         $recommendationCategories = RecommendationCategory::whereNull('recommendation_category_id')->get();
         return view('recommendation::admin.setting.recommendationcategory.edit', compact('type','recommendationCategory','recommendationCategories'));

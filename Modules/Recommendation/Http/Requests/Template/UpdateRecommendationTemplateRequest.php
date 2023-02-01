@@ -14,10 +14,8 @@ class UpdateRecommendationTemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recommendation_category_id' => ['required'],
             'data' => ['required'],
             'title' => ['required','string'],
-            'is_active'=>['nullable','boolean']
         ];
     }
 }

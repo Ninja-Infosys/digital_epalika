@@ -56,9 +56,10 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('{applicationTypeEnum}/formBuilder/{formBuilder}/updateStatus', [FormBuilderController::class, 'updateStatus'])->name('formBuilder.updateStatus');
     Route::resource('{applicationTypeEnum}/formBuilder', FormBuilderController::class)->names('formBuilder');
     Route::get('{applicationTypeEnum}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
-    Route::resource('recommendationTemplate', RecommendationTemplateController::class);
+   
     // Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
     Route::resource('{type}/recommendationCategory',RecommendationCategoryController::class);
+    Route::resource('{type}/recommendationCategory.recommendationTemplate', RecommendationTemplateController::class);
     Route::resource('personalDetail', PersonalDetailController::class);
     
 });
