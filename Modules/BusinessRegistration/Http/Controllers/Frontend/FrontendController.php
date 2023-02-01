@@ -15,12 +15,7 @@ class FrontendController extends Controller
 
     public function printDetail(BusinessDetail $businessDetail)
     {
-        $businessDetail->load(
-            'proprietorDetail.province',
-            'proprietorDetail.district',
-            'proprietorDetail.localBody',
-            'proprietorDetail',
-        );
+        $businessDetail->load('partners');
 
         return view('businessregistration::frontend.printDetail', compact('businessDetail'));
     }

@@ -143,68 +143,14 @@
                             <i class="fa fa-print"> योजना सम्झौता आदेश</i>
                         </a>
                     </div>
+                    @foreach($project->projectDocuments as $projectDocument)
                     <div class="col-md-3">
-                        <a href="javascript:void(0)" route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::MANDATE])}}"
+                        <a href="javascript:void(0)" route_action_url="{{route('admin.plan.project.projectDocument.show',[$project,$projectDocument])}}"
                            class="printBtn">
-                            <i class="fa fa-print"> सम्झौताको कार्यदेश</i>
+                            <i class="fa fa-print"> {{$projectDocument->document_name}}</i>
                         </a>
                     </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)" route_action_url="{{route('admin.plan.project.print',[$project,\Modules\Plan\Enums\PlanTemplateTypeEnum::REGARDING_PLANNING_AGREEMENT_PROVIDING_SUBMISSIONS])}}"
-                           class="printBtn">
-                            <i class="fa fa-print"> टिप्पणी र आदेश ( प्रथम किस्ता )</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> टिप्पणी र आदेश ( दोस्रो किस्ता )</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> टिप्पणी र आदेश ( अन्तिम किस्ता )</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> पेश्की/भुक्तानी ( प्रथम किस्ता )</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> होडिंग बोर्ड</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> अनुगमन प्रतिवेदन</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> कबुलियतनामा</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> बैंक खाता खोल्ने सम्बन्धमा</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> बैंक खाता संचालक परिवर्तन</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print"> बैंक खाता बन्द</i>
-                        </a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-print">दर्ता प्रमाण पत्र</i>
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -553,7 +499,7 @@
                                 <td>{{$technicalCostEstimate->length}}</td>
                                 <td>{{$technicalCostEstimate->breadth}}</td>
                                 <td>{{$technicalCostEstimate->height}}</td>
-                                <td>{{$technicalCostEstimate->amount}}</td>
+                                <td>{{$technicalCostEstimate->quantity}}</td>
                                 <td>{{$technicalCostEstimate->unit}}</td>
                                 <td>{{$technicalCostEstimate->rate}}</td>
                                 <td>{{$technicalCostEstimate->amount}}</td>
@@ -564,6 +510,12 @@
                             </tr>
                         @endforelse
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th colspan="8">जम्मा रकम</th>
+                            <td colspan="2">रू. {{$project->technicalCostEstimates->sum('amount')}}</td>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

@@ -52,7 +52,7 @@
                                 <input
                                     type="text"
                                     name="registration_no"
-                                    value="{{old('registration_no')}}"
+                                    value="{{old('registration_no',$registration_no)}}"
                                     class="form-control @error('registration_no') is-invalid @enderror"
                                     id="registration_no"
                                     placeholder="दर्ता नं."
@@ -129,39 +129,6 @@
                                 @error('plan_area_id')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="project_status" class="form-label">योजनाको अबस्था *</label>
-                                <select
-                                    name="project_status"
-                                    class="form-control @error('project_status') is-invalid @enderror"
-                                    id="project_status" data-toggle="select2" data-width="100%">
-                                    <option value="">--- छान्नुहोस् ---</option>
-                                    @foreach(\Modules\Plan\Enums\ProjectStatusEnum::cases() as $projectStatus)
-                                        <option
-                                            {{old('project_status')==$projectStatus->value ? 'selected' : ''}}
-                                            value="{{$projectStatus->value}}">
-                                            {{$projectStatus->label()}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('project_status')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <x-date-input-component
-                                    nameNe="project_start_date" labelNe="आयोजना सुरु हुने मिति "
-                                    nameEn="en_project_start_date" labelEn="Start Date"
-                                    :getTodayDate="false"
-                                />
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <x-date-input-component
-                                    nameNe="project_completion_date" labelNe="आयोजना सम्पन्न हुने मिति"
-                                    nameEn="en_project_completion_date" labelEn="Completion Date"
-                                    :getTodayDate="false"
-                                />
                             </div>
                             <div class="col-md-4 mb-2">
                                 <label for="plan_level_id" class="form-label">योजनाको स्तर *</label>

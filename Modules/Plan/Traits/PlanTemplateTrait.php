@@ -100,8 +100,8 @@ trait PlanTemplateTrait
                 'ठेक्का पत्रिकाको नाम' => '[@projectBidDetail.contract_newspaper_name]',
                 'ठेक्का स्वीकृतीको निर्णय मिति' => '[@projectBidDetail.contract_acceptance_decision_date]',
                 'ठेक्का विलो प्रतिशत' => '[@projectBidDetail.contract_percentage]',
-                'ठेकेदारको नाम' => '[@projectBidDetail.contractor_name]',
-                'ठेकेदारको ठेगाना' => '[@projectBidDetail.contractor_address]',
+                'कम्पनीको नाम' => '[@projectBidDetail.contractor_name]',
+                'कम्पनीको ठेगाना' => '[@projectBidDetail.contractor_address]',
                 'सम्पर्क नम्बर' => '[@projectBidDetail.contractor_phone]',
                 'कबोल अंक' => '[@projectBidDetail.confession_number]',
                 'ठेक्का सम्झौता मिति' => '[@projectBidDetail.contract_agreement_date]',
@@ -150,6 +150,11 @@ trait PlanTemplateTrait
                 'data' => $data,
             ];
         });
+    }
+
+    public function getPlanTemplateData(PlanTemplate $planTemplate): string
+    {
+        return $this->getData($planTemplate->data);
     }
 
     public function getSpecificTemplateData(PlanTemplateTypeEnum $planTemplateTypeEnum): string

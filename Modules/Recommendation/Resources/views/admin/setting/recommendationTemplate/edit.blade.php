@@ -11,14 +11,14 @@
                             </a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum)}}">
+                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.index')}}">
                                 टेम्प्लेट
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">{{$applicationTypeEnum->label()}} विवरण सम्पादन गर्नुहोस्</li>
+                        <li class="breadcrumb-item active"> विवरण सम्पादन गर्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{$applicationTypeEnum->label()}}टेम्प्लेट</h4>
+                <h4 class="page-title">टेम्प्लेट</h4>
             </div>
         </div>
     </div>
@@ -28,15 +28,15 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">{{$applicationTypeEnum->label()}} टेम्प्लेट विवरण सम्पादन गर्नुहोस्</h4>
-                        <a href="{{route('admin.recommendation.setting.formBuilder.index',$applicationTypeEnum)}}"
+                        <h4 class="header-title"> टेम्प्लेट विवरण सम्पादन गर्नुहोस्</h4>
+                        <a href="{{route('admin.recommendation.setting.recommendationTemplate.index',$recommendationTemplate)}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i>{{$applicationTypeEnum->label()}} टेम्प्लेट सूची
+                            <i class="fa fa-list"></i> टेम्प्लेट सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.recommendation.setting.recommendationTemplate.update',[$applicationTypeEnum, $recommendationTemplate])}}"
+                    <form action="{{route('admin.recommendation.setting.recommendationTemplate.update',[$recommendationTemplate])}}"
                           method="post"
                           enctype="multipart/form-data">
                         @csrf
@@ -55,20 +55,6 @@
                                 @error('title')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                            </div>
-                            <div class="row">
-
-                                <div class="col-md-12 mt-1">
-                                    <h6>फारम फिल्ड</h6>
-                                </div>
-                                <div class="col-md-12">
-                                    @foreach($formFields as $formField)
-                                        <a style="cursor: pointer" class="badge badge-outline-primary text-primary"
-                                           onclick="copyText('{{$formField['value'] ?? ''}}')">
-                                            {{$formField['name'] ?? ''}} {{!empty($formField['placeholder']) ? "(".$formField['placeholder'].")" : ''}}
-                                        </a>
-                                    @endforeach
-                                </div>
                             </div>
                             <div class="col-md-12 mb-2">
                                 <label for="data" class="form-label">डाटा *</label>

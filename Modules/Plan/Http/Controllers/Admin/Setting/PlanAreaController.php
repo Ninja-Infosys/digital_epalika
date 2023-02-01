@@ -13,10 +13,11 @@ class PlanAreaController extends Controller
     public function index($type)
     {
         $this->checkAuthorization('planArea_access');
+
         $planAreas = PlanArea::with('planArea')->where(function ($query) use ($type) {
             if ($type == 'planAreaSubCategory') {
                 $query->whereNotNull('plan_area_id');
-            }else{
+            } else {
                 $query->whereNull('plan_area_id');
             }
         })->get();
@@ -73,7 +74,7 @@ class PlanAreaController extends Controller
         $planArea->update($request->validated());
 
         toast('योजना क्षेत्र सफलतापूर्वक अपडेट गरियो', 'success');
-        return redirect(route('admin.plan.planArea.index'));
+        return redirect(route('admin.plan.planArea.index', $type));
     }
 
     public function destroy($type, PlanArea $planArea)

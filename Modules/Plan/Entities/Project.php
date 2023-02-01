@@ -51,6 +51,8 @@ class Project extends Model
         'evaluation_amount',
         'purpose',
         'operated_through',
+        'is_contracted',
+        'contract_date',
         'is_deadline_extended',
         'extended_date',
         'progress_spent_amount',
@@ -203,11 +205,6 @@ class Project extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'model');
-    }
-
-    public function projectBills(): HasMany
-    {
-        return $this->hasMany(ProjectBill::class);
     }
 
     public function consumerCommitteeTransactions(): HasMany

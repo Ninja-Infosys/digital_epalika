@@ -279,6 +279,48 @@
         </table>
     </div>
 
+    <div class="row">
+        <div class="col-md-4 mb-2">
+            <label for="contract_date" class="form-label">सम्झौता मिति *</label>
+            <input
+                type="text"
+                wire:model="form.contract_date"
+                class="form-control @error('form.contract_date') is-invalid @enderror"
+                id="contract_date"
+                placeholder="सम्झौता मिति"
+            />
+            @error('form.contract_date')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="col-md-4 mb-2">
+            <label for="project_start_date" class="form-label">आयोजना सुरु हुने मिति *</label>
+            <input
+                type="text"
+                wire:model="form.project_start_date"
+                class="form-control @error('form.project_start_date') is-invalid @enderror"
+                id="project_start_date"
+                placeholder="आयोजना सुरु हुने मिति"
+            />
+            @error('form.project_start_date')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="col-md-4 mb-2">
+            <label for="project_completion_date" class="form-label">आयोजना सम्पन्न हुने मिति *</label>
+            <input
+                type="text"
+                wire:model="form.project_completion_date"
+                class="form-control @error('form.project_completion_date') is-invalid @enderror"
+                id="project_completion_date"
+                placeholder="आयोजना सुरु हुने मिति"
+            />
+            @error('form.project_completion_date')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">
         Save
     </button>
@@ -328,6 +370,45 @@
                         //$("#en_to_date").val(formattedDate);
 
                         Livewire.emit('meetingDateChanged', inputFieldDate, formattedDate);
+                    }
+                });
+                $("#contract_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    onChange: function () {
+                        let inputFieldDate = $("#contract_date").val();
+                        let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                        let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                        let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                        //$("#en_to_date").val(formattedDate);
+
+                        Livewire.emit('contractDateChanged', inputFieldDate, formattedDate);
+                    }
+                });
+                $("#project_start_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    onChange: function () {
+                        let inputFieldDate = $("#project_start_date").val();
+                        let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                        let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                        let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                        //$("#en_to_date").val(formattedDate);
+
+                        Livewire.emit('projectStartDateChanged', inputFieldDate, formattedDate);
+                    }
+                });
+                $("#project_completion_date").nepaliDatePicker({
+                    ndpYear: true,
+                    ndpMonth: true,
+                    onChange: function () {
+                        let inputFieldDate = $("#project_completion_date").val();
+                        let parsedDate = NepaliFunctions.ParseDate(inputFieldDate);
+                        let englishDate = NepaliFunctions.BS2AD(parsedDate.parsedDate)
+                        let formattedDate = NepaliFunctions.ConvertDateFormat(englishDate, "YYYY-MM-DD")
+                        //$("#en_to_date").val(formattedDate);
+
+                        Livewire.emit('projectCompletionDateChanged', inputFieldDate, formattedDate);
                     }
                 });
             });

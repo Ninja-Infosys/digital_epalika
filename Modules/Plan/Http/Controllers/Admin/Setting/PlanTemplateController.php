@@ -44,12 +44,6 @@ class PlanTemplateController extends Controller
     {
         $this->checkAuthorization('planTemplate_access');
 
-        if ($request->ajax()) {
-            return response()->json([
-                'data' => $planTemplate
-            ]);
-        }
-
         return view('plan::plan_template.show');
     }
 

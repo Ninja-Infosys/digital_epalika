@@ -151,22 +151,6 @@
                                 @enderror
                             </div>
                             <div class="col-md-4 mb-2">
-                                <x-date-input-component
-                                    nameNe="project_start_date" labelNe="आयोजना सुरु हुने मिति "
-                                    nameEn="en_project_start_date" labelEn="Start Date"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->project_start_date"
-                                />
-                            </div>
-                            <div class="col-md-4 mb-2">
-                                <x-date-input-component
-                                    nameNe="project_completion_date" labelNe="आयोजना सम्पन्न हुने मिति"
-                                    nameEn="en_project_completion_date" labelEn="Completion Date"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->project_completion_date"
-                                />
-                            </div>
-                            <div class="col-md-4 mb-2">
                                 <label for="plan_level_id" class="form-label">योजनाको स्तर *</label>
                                 <select
                                     name="plan_level_id"

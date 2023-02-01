@@ -8,7 +8,7 @@
     <li class="{{request()->is('admin/plan/project') ? 'active' : ''}}">
         <a href="{{route('admin.plan.project.index')}}">
             <i class="fa fa-list"></i>
-            <span> योजना/आयोजना दर्ता </span>
+            <span> योजना/कार्यक्रमहरु </span>
         </a>
     </li>
 @endcan

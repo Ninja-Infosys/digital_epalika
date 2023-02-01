@@ -28,7 +28,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">टेम्प्लेट सूची</h4>
                         @can('eMapTemplate_create')
-                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.create',$applicationTypeEnum)}}"
+                            <a href="{{route('admin.recommendation.setting.recommendationTemplate.create')}}"
                                class="btn btn-sm btn-outline-primary">
                                 <i class="fa fa-plus-circle"></i> नयाँ टेम्प्लेट थप्नुहोस्
                             </a>
@@ -43,7 +43,7 @@
                             <tr>
                                 <th>क्र.स</th>
                                 <th>शिर्षक </th>
-                                <th>बर्ग</th>
+                               
                                 <th>स्थिति</th>
                                 <th>Date</th>
                                 <th>#</th>
@@ -54,18 +54,18 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$recommendationTemplate->title}}</td>
-                                    <td>{{$recommendationTemplate->for->label() ??''}}</td>
+                                   
                                     <td>
                                         <a href="">
                                             <i class="fa fa-2x fa-toggle-on"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <x-ad-to-bs id="fb_{{$loop->iteration}}" adDate="{{$formBuilder->created_at->toDateString()}}" />
+                                        <x-ad-to-bs id="fb_{{$loop->iteration}}" adDate="{{$recommendationTemplate->created_at->toDateString()}}" />
                                     </td>
                                     <td>
                                         @can('recommendationTemplate_edit')
-                                            <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $applicationTypeEnum,$recommendationTemplate])}}"
+                                            <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationTemplate.edit',[ $recommendationTemplate])}}"
                                                class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
                                                 <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
                                             </a>

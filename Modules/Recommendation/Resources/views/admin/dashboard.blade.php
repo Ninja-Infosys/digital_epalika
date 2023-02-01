@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-2">
-                    <div class="widget-rounded-circle card-primary" style="background-color: #0047AB">
+                    <div class="widget-rounded-circle card-secondary">
                         <div class="card-body" style="padding: 10px 20px;">
                             <div class="row">
                                 <div class="col">

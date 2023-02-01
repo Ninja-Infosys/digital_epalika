@@ -2,6 +2,8 @@
 
 namespace Modules\Plan\Http\Livewire;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Component;
 use Modules\Plan\Entities\ConsumerCommittee;
@@ -24,10 +26,13 @@ class ConsumerCommitteeLivewire extends Component
         'beneficiary_no' => null,
         'member_number' => null,
         'experience_in_project' => null,
-        'consumerCommitteeOfficials' => []
+        'consumerCommitteeOfficials' => [],
+        'contract_date' => null,
+        'project_start_date' => null,
+        'project_completion_date' => null,
     ];
 
-    protected $listeners = ['formationDateChanged', 'committeeRegistrationDateChanged', 'meetingDateChanged'];
+    protected $listeners = ['formationDateChanged', 'committeeRegistrationDateChanged', 'meetingDateChanged', 'contractDateChanged', 'projectStartDateChanged', 'projectCompletionDateChanged'];
 
     public function mount(Project $project)
     {
@@ -49,6 +54,21 @@ class ConsumerCommitteeLivewire extends Component
         $this->form['meeting_date'] = $nepaliDate;
     }
 
+    public function contractDateChanged($nepaliDate, $englishDate)
+    {
+        $this->form['contract_date'] = $nepaliDate;
+    }
+
+    public function projectStartDateChanged($nepaliDate, $englishDate)
+    {
+        $this->form['project_start_date'] = $nepaliDate;
+    }
+
+    public function projectCompletionDateChanged($nepaliDate, $englishDate)
+    {
+        $this->form['project_completion_date'] = $nepaliDate;
+    }
+
     public function removeConsumerCommitteeOfficials($index)
     {
         if (!empty($this->form['consumerCommitteeOfficials'][$index]['id'])) {
@@ -60,12 +80,14 @@ class ConsumerCommitteeLivewire extends Component
 
     private function assignConsumerCommitteeData($project)
     {
+        $this->form['contract_date'] = $project->contract_date;
+        $this->form['project_start_date'] = $project->project_start_date;
+        $this->form['project_completion_date'] = $project->project_completion_date;
+
         $this->project = $project->load('consumerCommittee.consumerCommitteeOfficials');
         if ($consumerCommittee = $project->consumerCommittee) {
-            foreach ($this->form as $key => $data) {
-                if ($key != 'consumerCommitteeOfficials') {
-                    $this->form[$key] = $consumerCommittee[$key];
-                }
+            foreach (Arr::except($this->form, ['consumerCommitteeOfficials', 'contract_date', 'project_start_date', 'project_completion_date']) as $key => $data) {
+                $this->form[$key] = $consumerCommittee[$key];
             }
         }
         foreach (($consumerCommittee->consumerCommitteeOfficials ?? collect()) as $consumerCommitteeOfficial) {
@@ -105,6 +127,9 @@ class ConsumerCommitteeLivewire extends Component
             'form.consumerCommitteeOfficials.*.gender' => ['nullable'],
             'form.consumerCommitteeOfficials.*.phone' => ['nullable'],
             'form.consumerCommitteeOfficials.*.citizenship_no' => ['nullable'],
+            'form.contract_date' => ['required'],
+            'form.project_start_date' => ['required'],
+            'form.project_completion_date' => ['required','after:form.project_start_date'],
         ];
     }
 
@@ -126,28 +151,37 @@ class ConsumerCommitteeLivewire extends Component
     {
         $formData = $this->validate()['form'];
 
-        $consumerCommittee = ConsumerCommittee::updateOrCreate(
-            ['project_id' => $this->project->id],
-            [
-                'name' => $formData['name'],
-                'address' => $formData['address'],
-                'phone' => $formData['phone'],
-                'formation_date' => $formData['formation_date'],
-                'committee_registration_date' => $formData['committee_registration_date'],
-                'meeting_date' => $formData['meeting_date'],
-                'registration_no' => $formData['registration_no'],
-                'beneficiary_no' => $formData['beneficiary_no'],
-                'member_number' => $formData['member_number'],
-                'experience_in_project' => $formData['experience_in_project']
-            ]
-        );
+        DB::transaction(function () use ($formData) {
+            $this->project->update([
+                'is_contracted' => 1,
+                'contract_date' => $formData['contract_date'],
+                'project_start_date' => $formData['project_start_date'],
+                'project_completion_date' => $formData['project_completion_date']
+            ]);
 
-        foreach ($this->form['consumerCommitteeOfficials'] as $consumerCommitteeOfficial) {
-            ConsumerCommitteeOfficial::updateOrCreate(
-                ['consumer_committee_id' => $consumerCommittee->id, 'id' => $consumerCommitteeOfficial['id'] ?? null],
-                $consumerCommitteeOfficial
+            $consumerCommittee = ConsumerCommittee::updateOrCreate(
+                ['project_id' => $this->project->id],
+                [
+                    'name' => $formData['name'],
+                    'address' => $formData['address'],
+                    'phone' => $formData['phone'],
+                    'formation_date' => $formData['formation_date'],
+                    'committee_registration_date' => $formData['committee_registration_date'],
+                    'meeting_date' => $formData['meeting_date'],
+                    'registration_no' => $formData['registration_no'],
+                    'beneficiary_no' => $formData['beneficiary_no'],
+                    'member_number' => $formData['member_number'],
+                    'experience_in_project' => $formData['experience_in_project']
+                ]
             );
-        }
+
+            foreach ($this->form['consumerCommitteeOfficials'] as $consumerCommitteeOfficial) {
+                ConsumerCommitteeOfficial::updateOrCreate(
+                    ['consumer_committee_id' => $consumerCommittee->id, 'id' => $consumerCommitteeOfficial['id'] ?? null],
+                    $consumerCommitteeOfficial
+                );
+            }
+        });
 
         $this->reset('form');
         $this->assignConsumerCommitteeData($this->project);

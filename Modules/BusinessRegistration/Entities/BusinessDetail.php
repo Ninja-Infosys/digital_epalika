@@ -51,12 +51,12 @@ class BusinessDetail extends Model
         'object_transaction_id',
         'working_capital',
         'fixed_capital',
+        'investment',
         'is_rent',
         'house_owner_name',
         'house_owner_phone',
         'house_owner_address',
         'house_owner_monthly_rent',
-        'investment',
         'length',
         'width',
         'application_date',
@@ -141,6 +141,7 @@ class BusinessDetail extends Model
                 : null
         );
     }
+
     public function landOwnershipCertificate(): Attribute
     {
         return Attribute::make(
@@ -150,6 +151,7 @@ class BusinessDetail extends Model
                 : null
         );
     }
+
     public function wardRecommendation(): Attribute
     {
         return Attribute::make(
@@ -159,24 +161,9 @@ class BusinessDetail extends Model
                 : null
         );
     }
-    public function citizenshipFront(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
-                : null
-        );
-    }
-    public function citizenshipBack(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Storage::url($value),
-            set: fn($value) => (!empty($value) && !is_string($value))
-                ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
-                : null
-        );
-    }
+
+
+
     public function embassyDocument(): Attribute
     {
         return Attribute::make(
@@ -186,6 +173,7 @@ class BusinessDetail extends Model
                 : null
         );
     }
+
     public function registrationDocument(): Attribute
     {
         return Attribute::make(
@@ -195,6 +183,7 @@ class BusinessDetail extends Model
                 : null
         );
     }
+
     public function license(): Attribute
     {
         return Attribute::make(
@@ -204,6 +193,7 @@ class BusinessDetail extends Model
                 : null
         );
     }
+
     public function taxDocument(): Attribute
     {
         return Attribute::make(

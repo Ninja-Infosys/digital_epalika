@@ -572,7 +572,7 @@
                     url: $(this).attr("route_action"),
                     success: function (resp) {
                         let print_area = window.open();
-                        print_area.document.write(resp.data.data);
+                        print_area.document.write(resp.data);
                         print_area.document.close();
                         print_area.focus();
                         print_area.print();

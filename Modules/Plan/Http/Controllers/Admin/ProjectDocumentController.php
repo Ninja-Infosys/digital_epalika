@@ -18,14 +18,17 @@ class ProjectDocumentController extends Controller
 
         $project->load('projectDocuments');
 
-        return view('plan::admin.project_document.index',compact('project'));
+        return view('plan::admin.project_document.index', compact('project'));
     }
 
     public function create(Project $project)
     {
         $this->checkAuthorization('projectDocument_create');
 
-        $planTemplates = PlanTemplate::whereNull('type')->get();
+        $planTemplates = PlanTemplate::where(function ($query) use ($project) {
+            $query->whereNull('template_for');
+            $query->orWhere('template_for', $project->operated_through);
+        })->get();
 
         return view('plan::admin.project_document.create', compact('project', 'planTemplates'));
     }
@@ -40,12 +43,11 @@ class ProjectDocumentController extends Controller
         return redirect(route('admin.plan.project.projectDocument.index', $project));
     }
 
-    public function show(Request $request, Project $project,ProjectDocument $projectDocument)
+    public function show(Request $request, Project $project, ProjectDocument $projectDocument)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             return response()->json([
-                'data'=>$projectDocument
+                'data' => $projectDocument->data
             ]);
         }
     }

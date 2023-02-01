@@ -1,8 +1,15 @@
 <div class="default-terms">
-    <p> {{$officeSetting->localBody->local_body??''}} आ.व. {{$officeSetting->fiscalYear->title??''}} को स्वीकृत वार्षिक कार्यक्रम/आयोजना अन्तर्गत {{$project->project_name}} संचालनका लागि सम्झौता गर्ने संस्थाको नाम, ठेगाना (यस पछि प्रथम पक्ष भनिने) र  सम्झौता गर्ने संस्थाको नाम, ठेगाना (यस पछि दोस्रो पक्ष भनिने) बीच मिति {{$today_date}} गते तपसिलका शर्तनामाको अधिनमा रही कार्यक्रम/आयोजना संचालन गर्न द्दिपक्षिय सम्झौता गरी दियौं/लियौं ।</p>
+    <p> {{$officeSetting->localBody->local_body??''}} आ.व. {{$officeSetting->fiscalYear->title??''}} को स्वीकृत वार्षिक
+        कार्यक्रम/आयोजना अन्तर्गत {{$project->project_name}} संचालनका लागि {{$officeSetting->name}}
+        , {{$officeSetting->site_address}} (यस पछि प्रथम पक्ष भनिने)
+        र {{$project->operated_through==\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID ? ($project->projectBidDetail->contractor_name??'').', '. ($project->projectBidDetail->contractor_address??'') : ($project->consumerCommittee->name??'').', '. ($project->consumerCommittee->address??'')}}
+        (यस पछि दोस्रो पक्ष
+        भनिने) बीच मिति {{$today_date}} गते तपसिलका शर्तनामाको अधिनमा रही कार्यक्रम/आयोजना संचालन गर्न द्दिपक्षिय
+        सम्झौता गरी दियौं/लियौं ।</p>
     <p><b>जिम्मेवारी तथा पालना गरिने शर्तहरु:</b></p>
 
-    <p>१. आयोजना मिति {{$project->project_start_date}} देखि शुरु गरी मिति {{$project->project_completion_date}} सम्ममा पुरा गर्नु पर्नेछ ।</p>
+    <p>१. आयोजना मिति {{$project->project_start_date}} देखि शुरु गरी मिति {{$project->project_completion_date}} सम्ममा
+        पुरा गर्नु पर्नेछ ।</p>
 
     <p>२. प्राप्त रकम तथा निर्माण समाग्री सम्वन्धित आयोजनाको उद्धेश्यका लागि मात्र प्रयोग गर्नुपर्नेछ।</p>
 
@@ -92,28 +99,29 @@
     <div class="flex-container mt-5" style="display:flex">
         <div class="item-auto"
              style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
-                style="font-size:14px"><u><strong>उपभोक्त्ता समिति/समुहको तर्फबाट:</strong></u><br />
-                नाम थर :- .......................<br />
-                पद :- ........................<br />
+                style="font-size:14px"><u><strong> {{$project->operated_through==\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID ? 'कम्पनीको' : 'उपभोक्त्ता समिति/समुहको'}} तर्फबाट:</strong></u><br/>
+                नाम थर :- .......................<br/>
+                पद :- ........................<br/>
                 ठेगाना :- ......................<br>
                 सम्पर्क नं :- ...................<br>
-                मिति :- .......................<br />
+                मिति :- .......................<br/>
                 दस्तखत :- .................</span>
             <p><strong>उपभोक्ता समितिको छाप</strong></p>
         </div>
 
         <div class="item-auto"
              style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem; text-align:center">
-            &nbsp;</div>
+            &nbsp;
+        </div>
 
         <div class="item-auto"
              style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
-                style="font-size:14px"><u><strong>कार्यालयको तर्फबाट</strong></u><br />
-                नाम :- .......................<br />
-                पद :- .........................<br />
+                style="font-size:14px"><u><strong>कार्यालयको तर्फबाट</strong></u><br/>
+                नाम :- .......................<br/>
+                पद :- .........................<br/>
                 ठेगाना :- ......................<br>
                 सम्पर्क नं :- ...................<br>
-                मिति :- .......................<br />
+                मिति :- .......................<br/>
                 दस्तखत :- ................</span>
             <p><strong>कार्यालयको छाप</strong></p>
         </div>
@@ -122,47 +130,47 @@
     <div class="flex-container mt-5" style="display:flex">
         <div class="item-auto"
              style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
-                style="font-size:14px"><u><strong>रोहबर:</strong></u><br />
-                नाम थर :- .......................<br />
-                पद :- ........................<br />
+                style="font-size:14px"><u><strong>रोहबर:</strong></u><br/>
+                नाम थर :- .......................<br/>
+                पद :- ........................<br/>
                 ठेगाना :- ......................<br>
                 सम्पर्क नं :- ...................<br>
-                मिति :- .......................<br />
+                मिति :- .......................<br/>
                 दस्तखत :- .................</span>
 
         </div>
 
         <div class="item-auto"
              style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
-                style="font-size:14px"><u><strong>रोहबर:</strong></u><br />
-                नाम थर :- .......................<br />
-                पद :- ........................<br />
+                style="font-size:14px"><u><strong>रोहबर:</strong></u><br/>
+                नाम थर :- .......................<br/>
+                पद :- ........................<br/>
                 ठेगाना :- ......................<br>
                 सम्पर्क नं :- ...................<br>
-                मिति :- .......................<br />
+                मिति :- .......................<br/>
                 दस्तखत :- .................</span>
 
         </div>
         <div class="item-auto"
              style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
-                style="font-size:14px"><u><strong>रोहबर:</strong></u><br />
-                नाम थर :- .......................<br />
-                पद :- ........................<br />
+                style="font-size:14px"><u><strong>रोहबर:</strong></u><br/>
+                नाम थर :- .......................<br/>
+                पद :- ........................<br/>
                 ठेगाना :- ......................<br>
                 सम्पर्क नं :- ...................<br>
-                मिति :- .......................<br />
+                मिति :- .......................<br/>
                 दस्तखत :- .................</span>
 
         </div>
 
         <div class="item-auto"
              style="flex:1 1 auto; margin-bottom:4rem; margin-left:4rem; margin-right:4rem; margin-top:4rem"><span
-                style="font-size:14px"><u><strong>रोहबर : </strong></u><br />
-                नाम :- .......................<br />
-                पद :- .........................<br />
+                style="font-size:14px"><u><strong>रोहबर : </strong></u><br/>
+                नाम :- .......................<br/>
+                पद :- .........................<br/>
                 ठेगाना :- ......................<br>
                 सम्पर्क नं :- ...................<br>
-                मिति :- .......................<br />
+                मिति :- .......................<br/>
                 दस्तखत :- ................</span>
 
         </div>
