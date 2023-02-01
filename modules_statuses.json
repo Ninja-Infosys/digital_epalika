@@ -17,5 +17,6 @@
     "Identity": true,
     "OrganizationRegistration": false,
     "Request": true,
-    "UpdateBusinessRequest": true
+    "UpdateBusinessRequest": true,
+    "Revenue": true
 }
