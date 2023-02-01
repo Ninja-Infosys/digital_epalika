@@ -43,7 +43,7 @@ class PersonalDetailController extends Controller
     {
         $personalDetail->update($request->validated());
         toast('व्यक्तिगत विवरण सफलतापूर्वक गरियो','success');
-        return redirect()->route('admin.recommendation.setting.personalDetail.index', compact('personalDetail'));
+        return back();
     }
 
     public function destroy(PersonalDetail $personalDetail)

@@ -15,8 +15,7 @@ class StoreRecommendationCategoryRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'recommendation_category_id' => ['nullable'],
-            'is_active' => ['nullable', 'boolean'],
+            'recommendation_category_id' => ['required'],
         ];
     }
 }

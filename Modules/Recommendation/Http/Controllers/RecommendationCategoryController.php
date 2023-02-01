@@ -5,6 +5,7 @@ namespace Modules\Recommendation\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Modules\Recommendation\Entities\RecommendationCategory;
 use Modules\Recommendation\Entities\RecommendationTemplate;
 use Modules\Recommendation\Http\Requests\RecommendationCategory\StoreRecommendationCategoryRequest;
@@ -37,7 +38,9 @@ class RecommendationCategoryController extends Controller
     {
         
         RecommendationCategory::create($request->validated()+[
-            'user_id'=>auth()->id()
+            'user_id'=>auth()->id(),
+            'is_active' => RecommendationCategory::where('recommendation_category_id', $request->input('recommendation_category_id')
+            )->where('is_active', 1)->count() === 0 ? '1' : '0'
         ]);
         toast('सिफारिस सफलतापूर्वक थपियो', 'success');
         return back();
@@ -64,8 +67,24 @@ class RecommendationCategoryController extends Controller
 
     public function destroy($type,RecommendationCategory $recommendationCategory)
     {
+        if ($recommendationCategory->is_active == 1) {
+            toast('Error while deleting file', 'error');
+
+            return back();
+        }
         $recommendationCategory->delete();
         toast('सिफारिस सफलतापूर्वक मेटियो', 'success');
+        return back();
+    }
+    public function updateStatus($type, RecommendationCategory $recommendationCategory)
+    {
+    
+        $recommendationCategory->update([
+            'is_active'=>!$recommendationCategory->is_active
+        ]);
+
+        toast('टेम्प्लेट स्थिति सफलतापूर्वक अद्यावधिक गरियो', 'success');
+
         return back();
     }
 }

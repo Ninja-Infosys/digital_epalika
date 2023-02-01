@@ -67,17 +67,17 @@
                                     <td>
                                         @can('recommendationTemplate_edit')
                                             <a data-bs-type="edit" href="{{route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.edit',[$type,$recommendationCategory,$recommendationTemplate])}}"
-                                               class="btn btn-xs btn-outline-warning {{get_setting('Pin')?'confirm_pin':''}}">
-                                                <i class="fa fa-edit"></i> सम्पादन गर्नुहोस्
+                                               class="btn btn-xs btn-outline-warning{{get_setting('Pin')?'confirm_pin':''}}" title="सम्पादन गर्नुहोस्">
+                                                <i class="fa fa-edit"></i> 
                                             </a>
                                         @endcan
                                         <form
-                                        action="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.destroy', [$type,$recommendationCategory]) }}"
+                                        action="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.destroy', [$type,$recommendationCategory,$recommendationTemplate]) }}"
                                         method="post">
                                         @csrf
                                         @method('delete')
                                         @if(!$recommendationCategory->status)
-                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger">
+                                        <button data-bs-type="delete" class="btn btn-xs btn-outline-danger" title="मेटाउनु होस्">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                         @endif

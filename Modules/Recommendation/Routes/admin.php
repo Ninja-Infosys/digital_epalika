@@ -58,6 +58,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
     Route::get('{applicationTypeEnum}/recommendationTemplate/{recommendationTemplate}/updateStatus', [RecommendationTemplateController::class, 'updateStatus'])->name('recommendationTemplate.updateStatus');
    
     // Route::get('showApplicationList', ShowApplicationListController::class)->name('showApplicationList');
+    Route::get('{type}/recommendationCategory/{recommendationCategory}/updatestatus', [RecommendationCategoryController::class,'updatestatus'])->name('recommendationCategory.updatestatus');
     Route::resource('{type}/recommendationCategory',RecommendationCategoryController::class);
     Route::resource('{type}/recommendationCategory.recommendationTemplate', RecommendationTemplateController::class);
     Route::resource('personalDetail', PersonalDetailController::class);
