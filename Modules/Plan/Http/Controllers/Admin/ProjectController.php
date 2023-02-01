@@ -14,9 +14,11 @@ use Modules\Plan\Entities\ExpenseHead;
 use Modules\Plan\Entities\GrantCategory;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
+use Modules\Plan\Entities\PlanTemplate;
 use Modules\Plan\Entities\Project;
 use Modules\Plan\Enums\PlanTemplateTypeEnum;
 use Modules\Plan\Enums\ProjectOperatedThroughEnum;
+use Modules\Plan\Enums\ProjectStatusEnum;
 use Modules\Plan\Http\Requests\Project\StoreProjectRequest;
 use Modules\Plan\Http\Requests\Project\UpdateProjectRequest;
 
@@ -47,6 +49,9 @@ class ProjectController extends Controller
             }
             if (!empty(request('expense_head_id'))) {
                 $q->where('expense_head_id', request('expense_head_id'));
+            }
+            if (!is_null(request('is_contracted'))) {
+                $q->where('is_contracted', request('is_contracted'));
             }
 
         })
@@ -79,7 +84,8 @@ class ProjectController extends Controller
         $this->checkAuthorization('project_create');
 
         Project::create($request->validated() + [
-                'fiscal_year_id' => \officeSetting()->fiscal_year_id
+                'fiscal_year_id' => \officeSetting()->fiscal_year_id,
+                'project_status' => ProjectStatusEnum::NOT_STARTED
             ]);
 
         toast('योजना/कार्यक्रम सफलतापूर्वक थपियो', 'success');
@@ -90,7 +96,7 @@ class ProjectController extends Controller
     {
         $this->checkAuthorization('project_access');
 
-        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions', 'technicalCostEstimates');
+        $project->load('projectBidDetail', 'projectAgreementTerm', 'projectMaintenanceArrangement', 'projectBidSubmissions', 'planArea', 'planLevel', 'consumerCommittee.consumerCommitteeOfficials', 'budgetSource', 'budgetHead', 'projectGrantDetails', 'benefitedMemberDetails', 'projectAgreementTerm', 'projectDocuments', 'files', 'consumerCommitteeTransactions', 'technicalCostEstimates.unit');
 
         if (request()->ajax()) {
             return response()->json([
@@ -147,14 +153,17 @@ class ProjectController extends Controller
     {
         $formData = $request->validate([
             'file_name' => ['nullable'],
-            'file' => ['required', 'file']
+            'files' => ['required', 'array'],
+            'file.*' => ['mimes:jpg,png,jpeg,pdf']
         ]);
 
-        $project->files()->create([
-            'file_name' => $formData['file_name'] ?? pathinfo($formData['file']->getClientOriginalName(), PATHINFO_FILENAME),
-            'extension' => $formData['file']->getClientOriginalExtension(),
-            'file' => $formData['file']->store('project_files', 'public')
-        ]);
+        foreach ($request->file('files') as $file) {
+            $project->files()->create([
+                'file_name' => $formData['file_name'] ?: pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
+                'extension' => $file->getClientOriginalExtension(),
+                'file' => $file->store('plan/project_files', 'public')
+            ]);
+        }
 
         toast('फाइल सफलतापूर्वक अपलोड गरियो', 'success');
 
@@ -166,6 +175,15 @@ class ProjectController extends Controller
         if ($request->ajax()) {
             return response()->json([
                 'data' => $project->getSpecificTemplateData($planTemplateTypeEnum)
+            ]);
+        }
+    }
+
+    public function templateData(Request $request, Project $project, PlanTemplate $planTemplate)
+    {
+        if ($request->ajax()) {
+            return response()->json([
+                'data' => $project->getPlanTemplateData($planTemplate)
             ]);
         }
     }

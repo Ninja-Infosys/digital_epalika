@@ -43,11 +43,7 @@
                 </a>
             </li>
            
-                <li class="{{request()->is('admin/recommendation/application*') ? 'active' : ''}}">
-                    <a href="{{route('admin.recommendation.setting.showApplicationList')}}">
-                        <span>निवेदन फारम सेटिंग</span>
-                    </a>
-                </li>
+               
 
         </ul>
     </div>

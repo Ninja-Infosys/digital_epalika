@@ -60,11 +60,15 @@
                                         </td>
                                         @endif
                                         <td>
-                                            <a href="{{route('admin.recommendation.setting.recommendationCategory.edit',[$type,$recommendationCategory])}}">
-                                                <i class="fa fa-2x  fa-toggle-off"></i>
+                                            <a href="{{route('admin.recommendation.setting.recommendationCategory.updatestatus',[$type,$recommendationCategory])}}">
+                                                <i class="fa fa-2x {{ $recommendationCategory->is_active ? 'fa-toggle-on ':' fa-toggle-off'}}"></i>
                                             </a>
+                                          
                                         </td>
                                         <td>
+                                            <a class="btn btn-xs btn-outline-warning" href="{{ route('admin.recommendation.setting.recommendationCategory.recommendationTemplate.index', [$type,$recommendationCategory]) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                             <a data-bs-type="edit"
                                                 href="{{ route('admin.recommendation.setting.recommendationCategory.edit', [$type,$recommendationCategory]) }}"
                                                 class="btn btn-xs btn-outline-warning"

@@ -15,8 +15,8 @@ class StoreRecommendationTemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required'],
-            'data' => ['required']
+            'data' => ['required'],
+            'title' => ['required','string']
         ];
     }
 }

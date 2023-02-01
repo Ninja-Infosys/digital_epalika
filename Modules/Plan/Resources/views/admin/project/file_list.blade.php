@@ -15,10 +15,10 @@
                                 योजनाहरु
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">आयोजनासँग सम्बन्धित अन्य कागजातहरु </li>
+                        <li class="breadcrumb-item active">योजना संग सम्बन्धित फोटो/फाईलहरू</li>
                     </ol>
                 </div>
-                <h4 class="page-title">सम्बन्धित अन्य कागजातहरू</h4>
+                <h4 class="page-title">योजना संग सम्बन्धित फोटो/फाईलहरू</h4>
             </div>
         </div>
     </div>
@@ -27,49 +27,47 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="header-title">
-                        ६. आयोजनासँग सम्बन्धित अन्य कागजातहरु
+                        योजना संग सम्बन्धित फोटो/फाईलहरू
                     </h4>
                     <a href="{{route('admin.plan.project.uploadFilePage',$project)}}" class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-plus-circle"> नयाँ थप्नुहोस्</i>
                     </a>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>फाइल नाम </th>
-                                <th>#</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($project->files as $file)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>
-                                        <a href="{{route('admin.file.download',$file)}}">
-                                            <i class="fa fa-download"></i> {{$file->file_name}}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <form action="{{route('admin.file.destroy',$file)}}"
-                                              method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-xs btn-outline-danger show_confirm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
+                    <div class="row">
+                        @foreach($project->files as $file)
+                            <div class="col-md-4 mb-3">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <h5 class="card-title">
+                                            {{$file->file_name}}
+                                        </h5>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="{{route('admin.file.download', $file)}}"
+                                               class="btn btn-xs btn-outline-primary mx-1">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                            <form action="{{route('admin.file.destroy',$file)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
+                                                    <i class="fa fa-window-close"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        @if($file->extension ==='pdf')
+                                            <iframe src="{{$file->file_url}}" frameborder="0" width="100%"></iframe>
+                                        @elseif(($file->extension ==='png') or ($file->extension ==='jpg') or ($file->extension ==='jpeg'))
+                                            <img src="{{ $file->file_url }}" class="card-image" alt="Image"
+                                                 height=150px;" width="100%">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

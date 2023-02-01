@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="collapse mb-2" id="collapseFilterForm">
-                <div class="card" >
+                <div class="card">
                     <div class="card-body">
                         <form>
                             <div class="row">
@@ -91,6 +91,17 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="is_contracted">सम्झौता भएको/नभएको</label>
+                                    <select name="is_contracted"
+                                            id="is_contracted" class="form-select">
+                                        <option value="">--- छान्नुहोस् ---</option>
+                                        <option value="1" {{request('is_contracted')==1 ? 'selected' : ''}}>भएको
+                                        </option>
+                                        <option value="0" {{request('is_contracted')==0 ? 'selected' : ''}}>नभएको
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-sm btn-primary">
@@ -106,7 +117,8 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">योजना/कार्यक्रमहरु</h4>
                         <div class="d-flex justify-content-between">
-                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed" type="button"
+                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed"
+                                    type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
                                     aria-controls="collapseExample">
                                 <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
@@ -184,44 +196,50 @@
                                                     <i class="fa fa-check"> प्राविधिक लागत अनुमान</i>
                                                 </a>
                                             @endcan
-                                            @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::BID)
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.projectBidDetail.index',$project)}}">
-                                                    <i class="fa fa-list"> बोलपत्र सम्वन्धि विवरण </i>
-                                                </a>
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
-                                                    <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
-                                                </a>
-                                            @else
+                                            @if($project->operated_through===\Modules\Plan\Enums\ProjectOperatedThroughEnum::CONSUMER_COMMITTEE)
                                                 <a class="dropdown-item"
                                                    href="{{route('admin.plan.project.consumerCommittee.index',$project)}}">
-                                                    <i class="fa fa-list"> उपभोक्ता समिति/समुदायमा आधारित
-                                                        संस्था/गैरसरकारी संस्थाको विवरण </i>
+                                                    <i class="fa fa-list"> योजना सम्झौता</i>
                                                 </a>
+                                                @if($project->is_contracted)
+                                                    <a class="dropdown-item"
+                                                       href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
+                                                        <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
+                                                    </a>
+                                                    <a class="dropdown-item"
+                                                       href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">
+                                                        <i class="fa fa-list"> आयोजना मर्मत संम्भार सम्बन्धी
+                                                            व्यवस्था </i>
+                                                    </a>
+                                                @endif
+                                            @else
                                                 <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.consumerCommitteeTransaction.index',$project)}}">
-                                                    <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
+                                                   href="{{route('admin.plan.project.projectBidDetail.index',$project)}}">
+                                                    <i class="fa fa-list"> योजना सम्झौता </i>
                                                 </a>
+                                                @if($project->is_contracted)
+                                                    <a class="dropdown-item"
+                                                       href="{{route('admin.plan.project.projectBidSubmission.index',$project)}}">
+                                                        <i class="fa fa-money-bill"> आर्थिक कारोबारको विवरण </i>
+                                                    </a>
+                                                @endif
+                                            @endif
+                                            @if($project->is_contracted)
                                                 <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.projectMaintenanceArrangement.index',$project)}}">
-                                                    <i class="fa fa-list"> आयोजना मर्मत संम्भार सम्बन्धी व्यवस्था </i>
+                                                   href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
+                                                    <i class="fa fa-file-alt"> सम्झौताको शर्तहरु </i>
+                                                </a>
+                                                @can('projectDocument_access')
+                                                    <a class="dropdown-item"
+                                                       href="{{route('admin.plan.project.projectDocument.index',$project)}}">
+                                                        <i class="fa fa-file-alt"> सम्बन्धित कागजातहरू </i>
+                                                    </a>
+                                                @endcan
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.fileList',$project)}}">
+                                                    <i class="fa fa-file"> योजना संग सम्बन्धित फोटो/फाईलहरू </i>
                                                 </a>
                                             @endif
-                                            <a class="dropdown-item"
-                                               href="{{route('admin.plan.project.projectAgreementTerm.create',$project)}}">
-                                                <i class="fa fa-file-alt"> सम्झौताको शर्तहरु </i>
-                                            </a>
-                                            @can('projectDocument_access')
-                                                <a class="dropdown-item"
-                                                   href="{{route('admin.plan.project.projectDocument.index',$project)}}">
-                                                    <i class="fa fa-file-alt"> सम्बन्धित कागजातहरू </i>
-                                                </a>
-                                            @endcan
-                                            <a class="dropdown-item"
-                                               href="{{route('admin.plan.project.fileList',$project)}}">
-                                                <i class="fa fa-file"> योजना संग सम्बन्धित फोटो/फाईलहरू </i>
-                                            </a>
                                         </div>
                                     </div>
                                 </td>

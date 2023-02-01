@@ -21,7 +21,7 @@ class AuthLock
                 return $next($request);
             }
 
-            if (($lockExpiresAt = session('lock-expires-at')) && $lockExpiresAt < now()) {
+            if (($lockExpiresAt = session('lock-expires-at')) && $lockExpiresAt < now() && $request->isMethod('get') && !$request->ajax()) {
                 session()->put('route_to_redirect', $request->url());
                 return redirect(route('login.locked'));
             }
