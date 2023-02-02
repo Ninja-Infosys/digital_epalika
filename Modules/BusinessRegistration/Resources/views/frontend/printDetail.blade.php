@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-md-6">
                             <span>{{$businessDetail->partners->first()?->localBody->local_body??''}}
-                                - {{$businessDetail->partners->first()?->businessDetail->ward_no??''}}
+                                - {{$businessDetail->partners->first()?->ward_no??''}}
                                 , {{$businessDetail->partners->first()?->district->district??''}}
                                 , {{$businessDetail->partners->first()?->province->province??''}}, </span>
                         </div>

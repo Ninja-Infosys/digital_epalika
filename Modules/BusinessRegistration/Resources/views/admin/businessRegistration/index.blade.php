@@ -62,25 +62,32 @@
                                     <td>{{$businessDetail->submission_no ?? ''}}</td>
                                     <td>{{$businessDetail->registration_no ?? ''}}</td>
                                     <td>{{$businessDetail->registration_date_ne ?? ''}}</td>
-                                    <td>{{$businessDetail->proprietorDetail->name ??''}}</td>
+                                    <td>{{$businessDetail->partners->first()?->name ??''}}</td>
                                     <td>
-                                        <span>{{$businessDetail->proprietorDetail->localBody->local_body??''}}
-                                - {{$businessDetail->proprietorDetail->ward_no??''}} </span>
+                                        <span>{{$businessDetail->partners->first()?->localBody->local_body??''}}
+                                - {{$businessDetail->partners->first()?->ward_no??''}} </span>
                                     </td>
-                                    <td>{{$businessDetail->proprietorDetail->phone ?? ''}}</td>
-                                    <td>{{$businessDetail->proprietorDetail->email ??  ''}}</td>
-                                    <td>{{$businessDetail->business_detail_name ?? ''}}</td>
+                                    <td>{{$businessDetail->partners->first()?->phone ?? ''}}</td>
+                                    <td>{{$businessDetail->partners->first()?->email ??  ''}}</td>
+                                    <td>{{$businessDetail->name ?? ''}}</td>
                                     <td>
                                         <span>{{$businessDetail->localBody->local_body??''}}
                                 - {{$businessDetail->ward_no??''}} </span>
                                     </td>
-                                    <td>{{$businessDetail?->business_nature ?? ''}}</td>
-                                    <td>{{$businessDetail->amount_cost ?? ''}}</td>
+                                    <td>{{$businessDetail->businessNature->title ?? ''}}</td>
+                                    <td>{{$businessDetail->investment ?? ''}}</td>
                                     <td>
                                         @can('businessRegistration_access')
                                             <a href="{{route('admin.businessRegistration.businessRegistration.show',$businessDetail)}}"
-                                               class="btn btn-xs btn-outline-info">
-                                                <i class="fa fa-eye"></i> पुरा विवरण हेर्नुहोस
+                                               class="btn btn-xs btn-outline-info" title="पुरा विवरण हेर्नुहोस">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endcan
+                                        @can('businessRegistration_access')
+                                            <a href="javascript:void(0)" title="प्रिन्ट गर्नुहोस"
+                                               route_action="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}"
+                                               class="btn btn-xs btn-outline-warning printDetail">
+                                                <i class="fa fa-print"></i>
                                             </a>
                                         @endcan
                                     </td>
@@ -99,5 +106,26 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            $(".printDetail").on("click", function (e) {
+                $.ajax({
+                    method: "GET",
+                    url: $(this).attr("route_action"),
+                    success: function (resp) {
+                        var print_area = window.open();
+                        print_area.document.write(resp.view);
+                        print_area.document.close();
+                        print_area.focus();
+                        print_area.print();
+                        print_area.close();
+                    }, error: function () {
+                        alert("Something Went Wrong");
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection
 

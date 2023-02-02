@@ -19,6 +19,12 @@
             </a>
         </li>
     </ul>
+    @if($progressPercentage>0)
+        <div id="bar" class="progress mb-3" style="height: 7px;">
+            <div class="bar progress-bar progress-bar-striped progress-bar-animated bg-success"
+                 style="width: {{$progressPercentage}}%"></div>
+        </div>
+    @endif
     <form wire:submit.prevent="submitForm">
         @switch($currentStep)
             @case(3)
@@ -94,7 +100,7 @@
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend class="title"> डकुमेन्ट</legend>
+                    <legend class="title"> आवश्यक कागजातहरु</legend>
                     <div class="row">
 
                         <div class="col-md-4 mb-1">
@@ -184,6 +190,29 @@
                                     wire:model="form.tax_document"
                                 >
                                 @error('form.tax_document')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend class="title"> अन्य कागजातहरु</legend>
+                    <div class="row">
+
+                        <div class="col-md-4 mb-1">
+                            <label for="other_document" class="form-label">
+                                अन्य
+                                 <span
+                                    class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input
+                                    class="form-control @error('form.other_document') is-invalid @enderror"
+                                    type="file"
+                                    id="other"
+                                    wire:model="form.other_document"
+                                multiple>
+                                @error('form.other_document')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -380,7 +409,7 @@
                                 <select
                                     class="form-select @error('form.partners.'.$key.'.gender') is-invalid @enderror"
                                     id="form.partners.{{$key}}.gender" wire:model="form.partners.{{$key}}.gender">
-                                    <option>---छान्नुहोस् ----</option>
+                                    <option value="">---छान्नुहोस् ----</option>
                                     @foreach(\App\Enums\Gender::cases() as $case)
                                         <option
                                             value="{{$case->value??''}}">{{$case->label() ??''}}</option>
@@ -397,7 +426,7 @@
                                     class="form-select @error('form.partners.'.$key.'.education_qualification') is-invalid @enderror"
                                     id="form.partners.{{$key}}.education_qualification"
                                     wire:model="form.partners.{{$key}}.education_qualification">
-                                    <option>---छान्नुहोस् ----</option>
+                                    <option value="">---छान्नुहोस् ----</option>
                                     @foreach(\Modules\BusinessRegistration\Enums\Qualification::cases() as $qualification)
                                         <option
                                             value="{{$qualification->value??''}}">{{$qualification->label() ??''}}</option>
@@ -549,7 +578,7 @@
                                     class="form-select @error('form.partners.'.$key.'.province_id') is-invalid @enderror"
                                     id="form.partners.{{$key}}.province_id"
                                     wire:model="form.partners.{{$key}}.province_id">
-                                    <option>---प्रदेश छान्नुहोस् ----</option>
+                                    <option value="">---प्रदेश छान्नुहोस् ----</option>
                                     @foreach($provinces as $province)
                                         <option value="{{$province->id??''}}">{{$province->province ??''}}</option>
                                     @endforeach
@@ -564,7 +593,7 @@
                                     class="form-select @error('form.partners.'.$key.'.district_id') is-invalid @enderror"
                                     id="form.partners.{{$key}}.district_id"
                                     wire:model="form.partners.{{$key}}.district_id">
-                                    <option>---जिल्ला छान्नुहोस् ----</option>
+                                    <option value="">---जिल्ला छान्नुहोस् ----</option>
                                     @foreach(!empty($form['partners'][$key]['province_id']) ? get_districts(province_ids: $form['partners'][$key]['province_id']):[] as $district)
                                         <option
                                             value="{{$district->id}}">{{$district->district}}</option>
@@ -580,7 +609,7 @@
                                     class="form-select @error('form.partners.'.$key.'.local_body_id') is-invalid @enderror"
                                     id="form.partners.{{$key}}.local_body_id"
                                     wire:model="form.partners.{{$key}}.local_body_id">
-                                    <option>---पालिका छान्नुहोस् ----</option>
+                                    <option value="">---पालिका छान्नुहोस् ----</option>
                                     @foreach(!empty($form['partners'][$key]['district_id']) ? get_local_bodies(district_ids: $form['partners'][$key]['district_id']):[] as $localBody)
                                         <option
                                             value="{{$localBody->id}}">{{$localBody->local_body}}</option>
@@ -595,7 +624,7 @@
                                 <select
                                     class="form-select @error('form.partners.'.$key.'.ward_no') is-invalid @enderror"
                                     id="form.partners.{{$key}}.ward_no" wire:model="form.partners.{{$key}}.ward_no">
-                                    <option>---वडा छान्नुहोस् ----</option>
+                                    <option value="">---वडा छान्नुहोस् ----</option>
                                     @foreach(!empty($form['partners'][$key]['local_body_id']) ? get_local_bodies(localBodyId: $form['partners'][$key]['local_body_id'])->ward_no:[] as $ward)
                                         <option value="{{$ward}}">{{$ward}}</option>
                                     @endforeach
@@ -720,7 +749,7 @@
                             <select
                                 class="form-select @error('form.business_nature_id') is-invalid @enderror"
                                 id="form.business_nature_id" wire:model="form.business_nature_id">
-                                <option selected>---छान्नुहोस् ----</option>
+                                <option value="">---छान्नुहोस् ----</option>
                                 @foreach($businessNatures as $businessNature)
                                     <option value="{{$businessNature->id??''}}">{{$businessNature->title ??''}}</option>
                                 @endforeach
@@ -736,7 +765,7 @@
                             <select
                                 class="form-select @error('form.object_transaction_id') is-invalid @enderror"
                                 id="form.object_transaction_id" wire:model="form.object_transaction_id">
-                                <option selected>---छान्नुहोस् ----</option>
+                                <option value="">---छान्नुहोस् ----</option>
                                 @foreach($objectTransactions as $objectTransaction)
                                     <option
                                         value="{{$objectTransaction->id??''}}" disabled>{{$objectTransaction->title ??''}}</option>
@@ -745,7 +774,7 @@
                                     @endforeach
                                 @endforeach
                             </select>
-                            @error('form.business_nature_id')
+                            @error('form.object_transaction_id')
                             <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
@@ -825,7 +854,7 @@
                             <select
                                 class="form-select @error('form.province_id') is-invalid @enderror"
                                 id="form.province_id" wire:model="form.province_id">
-                                <option selected>---प्रदेश छान्नुहोस् ----</option>
+                                <option value="">---प्रदेश छान्नुहोस् ----</option>
                                 @foreach($provinces as $province)
                                     <option value="{{$province->id??''}}">{{$province->province ??''}}</option>
                                 @endforeach

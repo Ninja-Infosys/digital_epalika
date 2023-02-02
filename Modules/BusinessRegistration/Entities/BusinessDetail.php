@@ -5,6 +5,7 @@ namespace Modules\BusinessRegistration\Entities;
 use App\Models\Address\District;
 use App\Models\Address\LocalBody;
 use App\Models\Address\Province;
+use App\Models\File;
 use App\Models\Settings\FiscalYear;
 use App\Traits\GetAllColumns;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -27,7 +29,7 @@ class BusinessDetail extends Model
     use HasFactory;
     use SoftDeletes;
     use GetAllColumns;
-    use BusinessDetailTemplateTrait;
+//    use BusinessDetailTemplateTrait;
 
     protected $fillable = [
         'submission_no',
@@ -133,6 +135,11 @@ class BusinessDetail extends Model
         return $this->hasMany(Partner::class)->orderBy('position');
     }
 
+    public function files(): MorphMany
+    {
+        return $this->morphMany(File::class,'model');
+    }
+
     public function rentAgreement(): Attribute
     {
         return Attribute::make(
@@ -196,6 +203,7 @@ class BusinessDetail extends Model
 
     public function taxDocument(): Attribute
     {
+
         return Attribute::make(
             get: fn($value) => Storage::url($value),
             set: fn($value) => (!empty($value) && !is_string($value))

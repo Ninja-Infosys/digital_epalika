@@ -24,13 +24,7 @@ class RegistrationForm extends Component
     use WithFileUploads;
 
     public int $currentStep = 1;
-
-
-    public $permanent_district_preview;
-
-    public $permanent_province_preview;
-
-    public $permanent_localBody_preview;
+    public float $progressPercentage = 0;
 
     public $provinces = [];
 
@@ -46,12 +40,6 @@ class RegistrationForm extends Component
     public $partners = [];
     public $registeredBusinesses = [];
 
-    public $partner_provinces = [];
-
-    public $partner_districts = [];
-
-    public $partner_localBodies = [];
-    public $partner_wards = '';
 
 
     public array $form = [
@@ -93,7 +81,8 @@ class RegistrationForm extends Component
         'tax_document' => null,
 
         //second step
-        'partners' => []
+        'partners' => [],
+        'other_document' => []
 
     ];
 
@@ -151,7 +140,7 @@ class RegistrationForm extends Component
         'form.partners.*.email' => ['required'],
         'form.partners.*.house_no' => ['required'],
         'form.partners.*.account_no' => ['required'],
-        'form.partners.*.national_card_no' => ['required'],
+        'form.partners.*.national_card_no' => ['nullable'],
         'form.partners.*.gender' => ['required'],
         'form.partners.*.education_qualification' => ['required'],
         'form.partners.*.occupation' => ['required'],
@@ -183,6 +172,7 @@ class RegistrationForm extends Component
         'form.registration_document' => ['nullable'],
         'form.license' => ['nullable'],
         'form.tax_document' => ['nullable'],
+        'form.other_document' => ['nullable', 'array'],
 
 
     ];
@@ -206,11 +196,13 @@ class RegistrationForm extends Component
     {
         $this->validate();
         $this->currentStep = $step;
+        $this->calculateProgressPercentage();
     }
 
     public function backStep($step): void
     {
         $this->currentStep = $step;
+        $this->calculateProgressPercentage();
     }
 
     public function submitForm()
@@ -225,6 +217,13 @@ class RegistrationForm extends Component
             }
             foreach ($this->form['registeredBusinesses'] as $registeredBusiness) {
                 $businessDetail->registeredBusinesses()->create($registeredBusiness);
+            }
+            foreach ($this->form['other_document'] as $document) {
+                $businessDetail->files()->create([
+                    'file_name' => pathinfo($document->getClientOriginalName(), PATHINFO_FILENAME),
+                    'extension' => $document->getClientOriginalExtension(),
+                    'file' => $document->store('otherDocument/', 'public')
+                ]);
             }
             return $businessDetail;
         });
@@ -287,13 +286,18 @@ class RegistrationForm extends Component
         return view('businessregistration::livewire.registration-form');
     }
 
+    private function calculateProgressPercentage()
+    {
+        $this->reset('progressPercentage');
+        $this->progressPercentage = $this->currentStep / 3 * 100;
+    }
     public function messages(): array
     {
         return [
             'form.name.required' => ['नाम आवश्यक छ'],
-            'form.name_en.required' => ['नाम आवश्यक छ'],
+            'form.name_en.required' => ['नाम अंग्रेजीमा आवश्यक छ'],
             'form.address.required' => ['ठेगाना आबश्यक छ '],
-            'form.address_en.required' => ['ठेगाना आबश्यक छ '],
+            'form.address_en.required' => ['ठेगाना अंग्रेजीमा आबश्यक छ '],
             'form.business_nature_id.required' => ['व्यवसायको प्रकृति आबश्यक छ'],
             'form.object_transaction_id.required' => ['व्यवसायको कारोबार गर्ने बस्तु आबश्यक छ '],
             'form.working_capital.required' => ['चालु पूँजी आबश्यक छ '],
@@ -343,7 +347,17 @@ class RegistrationForm extends Component
             'form.partners.*.ward_no.required' => ['वार्ड नं आबश्यक छ'],
             'form.partners.*.way.required' => ['मार्ग आबश्यक छ'],
             'form.partners.*.tole.required' => ['टोल आबश्यक छ'],
-
+            'form.length.required' => ['लम्बाई आबश्यक छ'],
+            'form.width.required' => ['चौडाई आबश्यक छ'],
+            'form.application_date.required' => ['आवेदन मिति बि सं आबश्यक छ'],
+            'form.application_date_en.required' => ['आवेदन मिति सं आबश्यक छ'],
+            'form.land_ownership_certificate.required' => ['जग्गा धनि प्रमाणपत्र आबश्यक छ'],
+            'form.ward_recommendation.required' => [' वार्ड सिफारिस आबश्यक छ'],
+            'form.embassy_document.required' => [' राजदूतावासको कागजात आबश्यक छ'],
+            'form.registration_document.required' => [' दर्ता प्रमाणपत्र आबश्यक छ'],
+            'form.license.required' => [' इजाजत पत्र आबश्यक छ'],
+            'form.tax_document.required' => [' कर तिरेको प्रमाणपत्र आबश्यक छ'],
+            'form.other_document' => ['अन्य कागजात आबश्यक छ'],
 
         ];
     }
