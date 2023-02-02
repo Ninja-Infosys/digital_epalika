@@ -22,6 +22,7 @@ class ProjectBidDetail extends Model
 
     protected $fillable = [
         'project_id',
+        'bid_no',
         'cost_estimation',
         'notice_published_date',
         'newspaper_name',

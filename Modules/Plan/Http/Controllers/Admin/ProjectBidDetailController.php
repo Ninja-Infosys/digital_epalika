@@ -14,7 +14,7 @@ class ProjectBidDetailController extends Controller
 {
     public function index(Project $project)
     {
-        return redirect(route('admin.plan.project.projectBidDetail.create',$project));
+        return redirect(route('admin.plan.project.projectBidDetail.create', $project));
 
         return view('plan::admin.project_bid_detail.index', compact('project'));
     }
@@ -27,6 +27,7 @@ class ProjectBidDetailController extends Controller
     public function store(Request $request, Project $project)
     {
         $validated = $request->validate([
+            'bid_no' => ['nullable'],
             'cost_estimation' => ['required', 'numeric'],
             'notice_published_date' => ['required'],
             'newspaper_name' => ['nullable'],
@@ -75,7 +76,7 @@ class ProjectBidDetailController extends Controller
             ]);
         });
 
-        toast('बोलपत्र विवरण सफलतापूर्वक अद्यावधिक गरियो','success');
+        toast('बोलपत्र विवरण सफलतापूर्वक अद्यावधिक गरियो', 'success');
         return redirect(route('admin.plan.project.index'));
     }
 

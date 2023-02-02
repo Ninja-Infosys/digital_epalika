@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('project_bid_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->comment('कार्यक्रम आईडी')->constrained()->cascadeOnDelete();
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->double('cost_estimation', 12, 2)->default(0)->comment('लागत अनुमान');
             $table->string('notice_published_date')->nullable()->comment('सूचना प्रकाशित मिति');
             $table->string('newspaper_name')->nullable()->comment('पत्रिकाको नाम');

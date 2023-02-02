@@ -38,7 +38,21 @@
                     <form action="{{route('admin.plan.project.projectBidDetail.store',$project)}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
+                                <label for="bid_no" class="form-label">बोलपत्र नं.</label>
+                                <input
+                                    type="text"
+                                    name="bid_no"
+                                    value="{{old('bid_no',$project->projectBidDetail->bid_no??'')}}"
+                                    class="form-control @error('bid_no') is-invalid @enderror"
+                                    id="bid_no"
+                                    placeholder="बोलपत्र नं."
+                                />
+                                @error('bid_no')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-3 mb-2">
                                 <label for="cost_estimation" class="form-label">कार्यालयको स्वीकृत विभागिय लागत
                                     अनुमान</label>
                                 <input
@@ -53,14 +67,14 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <x-date-input-component
                                     nameNe="notice_published_date" labelNe="बोलपत्रको सुचना प्रकाशित मिति *"
                                     :getTodayDate="false"
                                     :editDateNe="$project->projectBidDetail->notice_published_date??''"
                                 />
                             </div>
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <label for="newspaper_name" class="form-label">पत्रिकाको नाम</label>
                                 <input
                                     type="text"

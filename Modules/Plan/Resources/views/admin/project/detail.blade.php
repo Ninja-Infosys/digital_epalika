@@ -127,11 +127,6 @@
                             <b class="text-primary">आयोजना सम्पन्‍न हुने मिति
                                 : </b> {{$project->project_completion_date}}
                         </td>
-                        @if($project->is_deadline_extended)
-                            <td>
-                                <b class="text-primary">आयोजनाको म्याद थप मिति : </b> {{$project->extended_date}}
-                            </td>
-                        @endif
                     </tr>
                     </tbody>
                 </table>

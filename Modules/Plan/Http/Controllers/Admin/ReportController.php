@@ -14,6 +14,7 @@ use Modules\Plan\Entities\BudgetSource;
 use Modules\Plan\Entities\PlanArea;
 use Modules\Plan\Entities\PlanLevel;
 use Modules\Plan\Entities\Project;
+use Modules\Plan\Enums\ProjectOperatedThroughEnum;
 use Modules\Plan\Enums\ProjectStatusEnum;
 use Modules\Plan\Transformers\ProjectResource;
 
@@ -173,21 +174,110 @@ class ReportController extends Controller
                     'last_year_expense' => '',
                     'last_year_weighted_progress' => '',
                     'this_year_target_size' => $project->total_cost_estimate_amount ?? 0.00,
-                    'this_year_progress' => round(($project->progress_spent_amount/$project->total_cost_estimate_amount)*100, 2) ?? 0.00,
+                    'this_year_progress' => round(($project->progress_spent_amount / $project->total_cost_estimate_amount) * 100, 2) ?? 0.00,
                     'this_year_estimate_expense' => $project->progress_spent_amount ?? 0.00,
                     'yearly_quantity' => 1.00,
-                    'yearly_load' =>100.00,
-                    'yearly_budget' =>  $project->total_cost_estimate_amount ?? 0.00,
-                    'first_quantity' => round(($project->first_quarterly_amount/$project->total_cost_estimate_amount),2) ?? 0.00,
-                    'first_load' => round(($project->first_quarterly_amount/$project->total_cost_estimate_amount)*100,2) ?? 0.00,
+                    'yearly_load' => 100.00,
+                    'yearly_budget' => $project->total_cost_estimate_amount ?? 0.00,
+                    'first_quantity' => round(($project->first_quarterly_amount / $project->total_cost_estimate_amount), 2) ?? 0.00,
+                    'first_load' => round(($project->first_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) ?? 0.00,
                     'first_budget' => $project->first_quarterly_amount ?? 0.00,
-                    'second_quantity' => round(($project->second_quarterly_amount/$project->total_cost_estimate_amount),2) ?? 0.00,
-                    'second_load' => round(($project->second_quarterly_amount/$project->total_cost_estimate_amount)*100,2) ?? 0.00,
+                    'second_quantity' => round(($project->second_quarterly_amount / $project->total_cost_estimate_amount), 2) ?? 0.00,
+                    'second_load' => round(($project->second_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) ?? 0.00,
                     'second_budget' => $project->second_quarterly_amount ?? 0.00,
-                    'third_quantity' => round(($project->third_quarterly_amount/$project->total_cost_estimate_amount),2) ?? 0.00,
-                    'third_load' => round(($project->third_quarterly_amount/$project->total_cost_estimate_amount)*100,2) ?? 0.00,
+                    'third_quantity' => round(($project->third_quarterly_amount / $project->total_cost_estimate_amount), 2) ?? 0.00,
+                    'third_load' => round(($project->third_quarterly_amount / $project->total_cost_estimate_amount) * 100, 2) ?? 0.00,
                     'third_budget' => $project->third_quarterly_amount ?? 0.00,
                     'remarks' => $project->remarks ?? ''
+                ];
+            });
+
+        return response()->json([
+            'data' => $projects
+        ]);
+    }
+
+    public function consumerCommitteeProjectsPage()
+    {
+        $fiscalYears = FiscalYear::get();
+        $planAreas = PlanArea::whereNull('plan_area_id')->get();
+        $planLevels = PlanLevel::whereNull('plan_level_id')->get();
+        $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+        $budgetSources = BudgetSource::all();
+
+        return view('plan::admin.report.consumer_committee_projects', compact('fiscalYears', 'planAreas', 'planLevels', 'budgetHeads', 'budgetSources'));
+    }
+
+    public function getConsumerCommitteeProjects(Request $request)
+    {
+        $projects = Project::with('consumerCommittee')->where(function ($q) use ($request) {
+            $q->where('operated_through', ProjectOperatedThroughEnum::CONSUMER_COMMITTEE);
+            $this->filterDataFromUser($q, $request);
+        })->get()
+            ->filter(function ($project) use ($request) {
+                if (!empty($request->input('ward_no'))) {
+                    return count(array_intersect($request->input('ward_no'), $project->ward_no)) > 0;
+                }
+                return true;
+            })
+            ->map(function ($project, $key) {
+                return [
+                    'sn' => (int)$key + 1,
+                    'consumer_committee_name' => $project->consumerCommittee->name ?? '',
+                    'project_name' => $project->project_name ?? '',
+                    'total_amount_for_contingency' => $project->total_amount_for_contingency ?? 0.00,
+                    'project_contract_number' => $project->project_contract_amount ?? 0.00,
+                    'project_contract_amount' => $project->project_contract_amount ?? 0.00,
+                    'labor_amount' => $project->labor_amount ?? 0.00,
+                    'total_amount' => $project->total_cost_estimate_amount ?? 0.00,
+                    'project_start_date' => $project->project_start_date ?? '',
+                    'project_completion_date' => $project->project_completion_date ?? '',
+                    'project_status' => $project->project_status?->label()
+                ];
+            });
+
+        return response()->json([
+            'data' => $projects
+        ]);
+    }
+
+    public function contractProjectsPage()
+    {
+        $fiscalYears = FiscalYear::get();
+        $planAreas = PlanArea::whereNull('plan_area_id')->get();
+        $planLevels = PlanLevel::whereNull('plan_level_id')->get();
+        $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+        $budgetSources = BudgetSource::all();
+
+        return view('plan::admin.report.contract_projects', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+    }
+
+    public function getContractProjects(Request $request)
+    {
+        $projects = Project::with('projectBidDetail')->where(function ($q) use ($request) {
+            $q->whereNot('operated_through', ProjectOperatedThroughEnum::CONSUMER_COMMITTEE);
+            $this->filterDataFromUser($q, $request);
+        })->get()
+            ->filter(function ($project) use ($request) {
+                if (!empty($request->input('ward_no'))) {
+                    return count(array_intersect($request->input('ward_no'), $project->ward_no)) > 0;
+                }
+                return true;
+            })
+            ->map(function ($project, $key) {
+                return [
+                    'sn' => (int)$key + 1,
+                    'bid_no' => $project->projectBidDetail->bid_no ?? '',
+                    'contractor_name' => $project->projectBidDetail->contractor_name ?? '',
+                    'project_name' => $project->project_name ?? '',
+                    'total_amount_for_contingency' => $project->total_amount_for_contingency ?? 0.00,
+                    'project_contract_number' => $project->project_contract_amount ?? 0.00,
+                    'project_contract_amount' => $project->project_contract_amount ?? 0.00,
+                    'labor_amount' => $project->labor_amount ?? 0.00,
+                    'total_amount' => $project->total_cost_estimate_amount ?? 0.00,
+                    'project_start_date' => $project->project_start_date ?? '',
+                    'project_completion_date' => $project->project_completion_date ?? '',
+                    'project_status' => $project->project_status?->label()
                 ];
             });
 
