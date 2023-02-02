@@ -33,6 +33,7 @@
 
                     <form action="{{route('admin.recommendation.setting.personalDetail.update', $personalDetail)}}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <fieldset>
                             <legend><h4 class="text-info">व्यक्तिगत विवरण</h4></legend>
                             <h6 class="py-2">नोट: कृपया व्यक्तिगत विवरण भर्दा ध्यान दिएर भर्नु होला । </h6>

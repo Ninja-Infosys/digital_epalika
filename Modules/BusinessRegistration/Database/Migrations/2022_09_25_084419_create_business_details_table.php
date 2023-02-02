@@ -27,9 +27,9 @@ return new class () extends Migration {
             $table->string('tole')->nullable()->comment(' गाउ/टोल ');
             $table->foreignId('business_nature_id')->nullable()->comment('व्यवसायको प्रकृति')->constrained();
             $table->foreignId('object_transaction_id')->nullable()->comment('व्यवसायको कारोबार गर्ने मुख्य सेवा वा बस्तु')->constrained();
-            $table->double('working_capital', 12, 2)->default(0)->comment('चालु पुंजी');
-            $table->double('fixed_capital', 12, 2)->default(0)->comment('स्थिर पुंजी');
-            $table->double('investment', 12, 2)->default(0)->comment('पुंजीगत लगानी');
+            $table->double('working_capital', 12, 2)->nullable()->default(0)->comment('चालु पूँजी');
+            $table->double('fixed_capital', 12, 2)->nullable()->default(0)->comment('स्थिर पूँजी');
+            $table->double('investment', 12, 2)->default(0)->comment('पूँजीगत लगानी');
             $table->boolean('is_rent')->default(0);
             $table->string('house_owner_name')->nullable()->comment('घर मालिकको नाम');
             $table->string('house_owner_phone')->nullable()->comment('घर मालिकको फोन');

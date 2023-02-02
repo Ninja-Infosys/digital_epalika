@@ -22,6 +22,6 @@ class RegisteredBusiness extends Model
         'registration_no',
         'business_name',
         'registration_date',
-        'active',
+        'is_active',
     ];
 }

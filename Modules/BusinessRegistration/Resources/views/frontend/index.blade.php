@@ -43,10 +43,8 @@
             <div class="title">
                 <div class="m-2">
                     <h4 class="text-white">डिजिटल ई-पालिका</h4>
-                    <h5 class="text-white pt-1">ई-नक्सा पास</h5>
-                    <h5 class="text-center text-decoration-underline
-                                                mt-1 text-white">ई-नक्सा पास सेवा प्रदान गर्नको लागि तलको फारम भरि
-                        सुचिकृतको लागि पठाउनुहोस् ।</h5>
+                    <h5 class="text-white pt-1">व्यवसाय दर्ता</h5>
+
                 </div>
             </div>
         </div>

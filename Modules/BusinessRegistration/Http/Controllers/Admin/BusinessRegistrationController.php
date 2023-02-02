@@ -3,6 +3,7 @@
 namespace Modules\BusinessRegistration\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\OfficeHeader;
 use App\Models\Settings\OfficeSetting;
 use App\Traits\NepaliDateConverter;
 use Illuminate\Contracts\Foundation\Application;
@@ -24,13 +25,13 @@ class BusinessRegistrationController extends Controller
     public function index(): Factory|View|Application
     {
         $this->checkAuthorization('businessRegistration_access');
-
-        $businessDetails = BusinessDetail::with('proprietorDetail')->where(function (Builder $q) {
+        $businessDetails = BusinessDetail::with('partners', 'partners.localBody', 'localBody', 'businessNature')->where(function (Builder $q) {
             if (!is_null(request('search'))) {
                 $q->whereLike(['title'], request('search'));
             }
         })->latest()
             ->paginate(15);
+
 
         return view('businessregistration::admin.businessRegistration.index', compact('businessDetails'));
     }
@@ -39,21 +40,15 @@ class BusinessRegistrationController extends Controller
     {
         $this->checkAuthorization('businessRegistration_access');
 
-        $businessDetail->load(
-            'partnerDetails',
-            'registeredBusinesses',
-            'proprietorDetail',
-            'proprietorDetail.province',
-            'proprietorDetail.localBody',
-            'proprietorDetail.threeGenerationDetails',
-            'proprietorDetail.district'
+        $businessDetail->load(['partners' => function ($query) {
+                $query->with('issueDistrict', 'district', 'localBody');
+            }, 'businessNature', 'registeredBusinesses']
         );
+//        $printed_data = PrintedData::where('business_detail_id', $businessDetail->id)
+//            ->latest()
+//            ->get();
 
-        $printed_data = PrintedData::where('business_detail_id', $businessDetail->id)
-            ->latest()
-            ->get();
-
-        return view('businessregistration::admin.businessRegistration.show', compact('businessDetail', 'printed_data'));
+        return view('businessregistration::admin.businessRegistration.show', compact('businessDetail'));
     }
 
     public function editData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
@@ -146,5 +141,21 @@ class BusinessRegistrationController extends Controller
         toast('दस्तुर सफलतापूर्वक थपियो', 'success');
 
         return back();
+    }
+
+    public function print(BusinessDetail $businessDetail)
+    {
+        $officeHeaders = OfficeHeader::get();
+//        $todayDate = $this->get_today_nepali_date();
+        $businessDetail->load(['partners' => function ($query) {
+                $query->with('issueDistrict', 'district', 'localBody', 'province');
+            }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
+        );
+
+        $view = (string)\Illuminate\Support\Facades\View::make('businessregistration::admin.businessRegistration.print', compact('businessDetail','officeHeaders'));
+        return response()->json([
+            'view' => $view,
+        ]);
+
     }
 }

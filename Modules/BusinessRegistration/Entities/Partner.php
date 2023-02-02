@@ -118,9 +118,11 @@ class Partner extends Model
         return $this->belongsTo(District::class);
     }
 
+
+
     public function issueDistrict(): BelongsTo
     {
-        return $this->belongsTo(District::class);
+        return $this->belongsTo(District::class,'issue_district_id');
     }
 
     public function localBody(): BelongsTo
