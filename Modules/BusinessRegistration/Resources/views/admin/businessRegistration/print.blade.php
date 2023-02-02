@@ -52,7 +52,7 @@
         </div>
         <div class="col-md-6">
             @foreach($officeHeaders as $officeHeader)
-                <p style="text-align: center;line-height: 0.7;">{{$officeHeader->title}}</p>
+                <p style="text-align: center;line-height: 0.7;font-weight: {{$officeHeader->font}};color: {{$officeHeader->font_color}}">{{$officeHeader->title}}</p>
             @endforeach
 
         </div>
@@ -71,7 +71,7 @@
         </div>
     </div>
     <div class="row" style="padding: 0px 110px 0px 110px" >
-        <p>श्री <span>सगरमाथा कन्स्ट्रक्सन</span> नामको <span>प्राइभेट फर्म (प्रा. फ.)</span> उद्योग सम्वत <span>2067</span>
+        <p>श्री <span>सगरमाथा कन्स्ट्रक्सन</span> नामको <span>{{$businessDetail->name}}</span> उद्योग सम्वत <span>2067</span>
             साल <span>5</span> महिना <span>22</span> गते रोज <span>3</span> मा प्राइभेट फर्म दर्ता नियमावली 2076 को
             अनुसूची-४, बमोजिम यो प्रमाण-पत्र दिइएको छ |</p>
         <p class="middle-part-line-height">प्रोपाइटरको नाम :- <span>{{$businessDetail->partners->first()?->name??''}}</span> <br>
