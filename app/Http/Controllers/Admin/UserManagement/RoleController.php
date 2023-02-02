@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin\UserManagement;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserManagement\Role\StoreRoleRequest;
 use App\Http\Requests\UserManagement\Role\UpdateRoleRequest;
+use App\Models\Settings\LetterHead;
 use App\Models\UserManagement\Permission;
 use App\Models\UserManagement\Role;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -95,6 +97,30 @@ class RoleController extends Controller
 
         toast('भूमिका सफलतापूर्वक मेटियो', 'success');
 
+        return back();
+    }
+
+    public function letterHeadPage(Role $role)
+    {
+        return view('admin.userManagement.role.letter_head',compact('role'));
+    }
+
+    public function letterHeadStore(Request $request,Role $role)
+    {
+        $request->validate([
+            'header'=>['required'],
+            'letter_head'=>['required']
+        ]);
+
+        LetterHead::updateOrCreate(
+            ['model_type'=>Role::class,'model_id'=>$role->id],
+            [
+                'header'=>$request->input('header'),
+                'letter_head'=>$request->input('letter_head')
+            ]
+        );
+
+        toast('लेटर हेड सफलतापूर्वक पेश गरियो','success');
         return back();
     }
 

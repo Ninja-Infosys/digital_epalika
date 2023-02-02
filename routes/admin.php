@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Setting\Units\InternalUnitConversionController;
 use App\Http\Controllers\Admin\Setting\Units\MeasurementUnitController;
 use App\Http\Controllers\Admin\Setting\Units\TypeController;
 use App\Http\Controllers\Admin\Setting\Units\UnitController;
+use App\Http\Controllers\Admin\Settings\LetterHeadController;
 use App\Http\Controllers\Admin\UserManagement\RoleController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use App\Http\Controllers\Admin\Website\ImportantLinkController;
@@ -82,6 +83,8 @@ Route::prefix('setting')->group(function () {
     Route::resource('branch', BranchController::class);
 
     Route::prefix('userManagement')->as('userManagement.')->group(function () {
+        Route::get('role/{role}/letterHead',[RoleController::class,'letterHeadPage'])->name('role.letterHead');
+        Route::post('role/{role}/letterHead',[RoleController::class,'letterHeadStore'])->name('role.letterHead');
         Route::resource('role', RoleController::class);
         Route::get('user/{user}/updateStatus', [UserController::class, 'updateStatus'])->name('user.updateStatus');
         Route::resource('user', UserController::class);
@@ -96,6 +99,7 @@ Route::prefix('setting')->group(function () {
     });
     Route::resource('officeSetting', OfficeSettingController::class);
     Route::resource('officeHeader', OfficeHeaderController::class)->only(['edit', 'update', 'destroy']);
+    Route::resource('letterHead', LetterHeadController::class)->only('index','store');
 });
 
 //file

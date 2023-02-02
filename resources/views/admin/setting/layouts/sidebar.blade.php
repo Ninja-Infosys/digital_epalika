@@ -57,6 +57,12 @@
         </a>
     </li>
 @endcan
+<li class="{{request()->is('admin/setting/letterHead*') ? 'active' : ''}}">
+    <a href="{{route('admin.letterHead.index')}}">
+        <i class="fa fa-file"></i>
+        <span> लेटर हेड </span>
+    </a>
+</li>
 @can('feature_access')
     <li class="{{request()->is('admin/setting/sms*') ? 'active' : ''}}">
         <a href="{{route('admin.feature-activation')}}">
