@@ -64,4 +64,10 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::post('consumer-committee-projects','getConsumerCommitteeProjects')->name('consumer-committee-projects');
     Route::get('contract-projects','contractProjectsPage')->name('contract-projects-page');
     Route::post('contract-projects','getContractProjects')->name('get-contract-projects');
+    Route::get('incomplete-projects','incompleteProjectsPage')->name('incomplete-projects');
+    Route::post('incomplete-projects','getIncompleteProjects')->name('get-incomplete-projects');
+    Route::get('project-choose','projectChoosePage')->name('project-choose-page');
+    Route::post('project-choose','getProjectChooseData')->name('get-project-choose-data');
+    Route::get('work-detail-report','workDetailReportPage')->name('work-detail-report-page');
+    Route::post('work-detail-report','getWorkDetailReport')->name('get-work-detail-report');
 });

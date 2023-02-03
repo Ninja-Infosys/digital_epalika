@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट</li>
+                        <li class="breadcrumb-item active"> योजना छनौट रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट </h4>
+                <h4 class="page-title">योजना छनौट रिपोर्ट </h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट</h4>
+                        <h4 class="header-title">योजना छनौट रिपोर्ट</h4>
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
@@ -32,7 +32,7 @@
                             </button>
                             <x-print-button
                                 target-element="report-table"
-                                title="ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट"
+                                title="योजना छनौट रिपोर्ट"
                             />
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
-                              data-bs-url="{{route('admin.plan.report.get-contract-projects')}}">
+                              data-bs-url="{{route('admin.plan.report.get-project-choose-data')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
@@ -179,30 +179,14 @@
                         <table class="table table-stripped table-bordered">
                             <thead class="align-middle">
                             <tr>
-                                <th rowspan="2">क्र.सं.</th>
-                                <th rowspan="2">ठेक्का नं. (आ.व. सहित )</th>
-                                <th rowspan="2">निर्माण व्यवसायीको नाम</th>
-                                <th rowspan="2">कामको विवरण </th>
-                                <th rowspan="2">ठेक्का अंक भ्याटसमेत</th>
-                                <th rowspan="2">भुक्तानी भ्याटसमेत</th>
-                                <th rowspan="2">शुरु गर्नु पर्ने मिति</th>
-                                <th rowspan="2">सम्पन्न गर्नु पर्ने मिति</th>
-                                <th rowspan="2">सम्पन्न अबस्था</th>
-                                <th colspan="2">म्याद थप</th>
-                                <th colspan="2">भेरिएशन(भ्याटसमेत)</th>
-                                <th rowspan="2">मूल्य समायोजन भुक्तानी भ्याटसमेत</th>
-                                <th rowspan="2">कार्य सम्पादन जमानीको म्याद</th>
-                                <th rowspan="2">विमाको म्याद</th>
-                                <th colspan="2">खर्च(भेरिएअसन, मूल्य समायोजन र भ्याटसमेत)</th>
-                                <th rowspan="2">एजबिल्ट नक्सा पेश भए नभएको</th>
-                            </tr>
-                            <tr>
-                                <th>पटक</th>
-                                <th>महिना</th>
-                                <th>प्रतिशत</th>
-                                <th>रकम</th>
-                                <th>यस वर्ष</th>
-                                <th>यस वर्ष सम्म</th>
+                                <th>क्र.सं.</th>
+                                <th>रू. १ लाख सम्म</th>
+                                <th>१ लाख देखि २ लाख सम्म</th>
+                                <th>२ लाख देखि ५ लाख सम्म</th>
+                                <th>रू. ५ लाख देखि १० लाख सम्म</th>
+                                <th>रू. १० लाख देखि ५० लाख सम्म</th>
+                                <th>रू. ५० लाख भन्दा बढि</th>
+                                <th>जम्मा</th>
                             </tr>
                             </thead>
                         </table>

@@ -3,6 +3,7 @@
 namespace Modules\Plan\Http\Controllers\Admin;
 
 use App\Models\Settings\FiscalYear;
+use App\Traits\NepaliDateConverter;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,8 @@ use Modules\Plan\Transformers\ProjectResource;
 
 class ReportController extends Controller
 {
+    use NepaliDateConverter;
+
     public function index()
     {
         $fiscalYears = FiscalYear::get();
@@ -290,6 +293,125 @@ class ReportController extends Controller
                     'current_year_expenses_amount' => $project->current_year_expenses_amount ?? 0.00,
                     'total_expenses_amount' => $project->project_bid_submissions_sum_amount ?? 0.00,
                     'age_built_map_submitted' => null
+                ];
+            });
+
+        return response()->json([
+            'data' => $projects
+        ]);
+    }
+
+    public function incompleteProjectsPage()
+    {
+        $fiscalYears = FiscalYear::get();
+        $planAreas = PlanArea::whereNull('plan_area_id')->get();
+        $planLevels = PlanLevel::whereNull('plan_level_id')->get();
+        $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+        $budgetSources = BudgetSource::all();
+
+        return view('plan::admin.report.incomplete_projects', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+    }
+
+    public function getIncompleteProjects(Request $request)
+    {
+        $projects = Project::with('consumerCommittee', 'projectBidDetail')
+            ->withSum('projectBidSubmissions', 'amount')
+            ->withSum('consumerCommitteeTransactions', 'amount')
+            ->where(function ($q) use ($request) {
+                $q->where('project_status', ProjectStatusEnum::IN_PROGRESS);
+                $q->whereDate('project_completion_date', '>', $this->get_today_nepali_date());
+                $this->filterDataFromUser($q, $request);
+            })->get()
+            ->filter(function ($project) use ($request) {
+                if (!empty($request->input('ward_no'))) {
+                    return count(array_intersect($request->input('ward_no'), $project->ward_no)) > 0;
+                }
+                return true;
+            })
+            ->map(function ($project, $key) {
+                return [
+                    'sn' => (int)$key + 1,
+                    'project_name' => $project->project_name ?? '',
+                    'builder' => $project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->consumerCommittee->name ?? '' : $project->projectBidDetail->contractor_name ?? '',
+                    'contract_date' => $project->contract_date,
+                    'project_completion_date' => $project->project_completion_date ?? '',
+                    'total_expenses_amount' => $project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->consumer_committee_transactions_sum_amount : $project->project_bid_submissions_sum_amount,
+                    'physical_progress' => "$project->physical_progress_completed  $project->physical_progress_unit"
+                ];
+            });
+
+        return response()->json([
+            'data' => $projects
+        ]);
+    }
+
+    public function projectChoosePage()
+    {
+        $fiscalYears = FiscalYear::get();
+        $planAreas = PlanArea::whereNull('plan_area_id')->get();
+        $planLevels = PlanLevel::whereNull('plan_level_id')->get();
+        $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+        $budgetSources = BudgetSource::all();
+
+        return view('plan::admin.report.project_choose', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+    }
+
+    public function getProjectChooseData(Request $request)
+    {
+        $projects = Project::select('allocated_amount')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+            })->get()
+            ->filter(function ($project) use ($request) {
+                if (!empty($request->input('ward_no'))) {
+                    return count(array_intersect($request->input('ward_no'), $project->ward_no)) > 0;
+                }
+                return true;
+            })
+            ->map(function ($project, $key) {
+                return [
+                    'sn' => (int)$key + 1
+                ];
+            });
+
+        return response()->json([
+            'data' => $projects
+        ]);
+    }
+
+    public function workDetailReportPage()
+    {
+        $fiscalYears = FiscalYear::get();
+        $planAreas = PlanArea::whereNull('plan_area_id')->get();
+        $planLevels = PlanLevel::whereNull('plan_level_id')->get();
+        $budgetHeads = BudgetHead::whereNull('budget_head_id')->get();
+        $budgetSources = BudgetSource::all();
+
+        return view('plan::admin.report.work_detail_report', compact('fiscalYears', 'planLevels', 'planAreas', 'budgetHeads', 'budgetSources'));
+    }
+
+    public function getWorkDetailReport(Request $request)
+    {
+        $projects = Project::withSum('projectBidSubmissions', 'amount')
+            ->withSum('consumerCommitteeTransactions', 'amount')
+            ->where(function ($q) use ($request) {
+                $this->filterDataFromUser($q, $request);
+            })->get()
+            ->filter(function ($project) use ($request) {
+                if (!empty($request->input('ward_no'))) {
+                    return count(array_intersect($request->input('ward_no'), $project->ward_no)) > 0;
+                }
+                return true;
+            })
+            ->map(function ($project, $key) {
+                return [
+                    'sn' => (int)$key + 1,
+                    'project_name' => $project->project_name ?? 0.00,
+                    'total_expenses_amount' => $project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->consumer_committee_transactions_sum_amount : $project->project_bid_submissions_sum_amount,
+                    'from_consumer_committee_count'=>$project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? 1 : '',
+                    'from_consumer_committee_amount'=>$project->operated_through == ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->consumer_committee_transactions_sum_amount : '',
+                    'from_contract_count'=>$project->operated_through != ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? 1 : '',
+                    'from_contract_amount'=>$project->operated_through != ProjectOperatedThroughEnum::CONSUMER_COMMITTEE ? $project->project_bid_submissions_sum_amount : '',
                 ];
             });
 
