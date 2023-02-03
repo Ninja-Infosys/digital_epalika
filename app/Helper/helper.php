@@ -7,8 +7,10 @@ use App\Models\FeatureActivation;
 use App\Models\Settings\OfficeSetting;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Modules\Revenue\Entities\Revenue;
+use Modules\Revenue\Entities\RevenueCategory;
 
-if(!function_exists('officeSetting')){
+if (!function_exists('officeSetting')) {
     function officeSetting()
     {
         return Cache::rememberForever('office_setting', function () {
@@ -195,7 +197,7 @@ if (!function_exists('getAllFilesAndFolder')) {
             $directories = collect(Storage::disk('public')->directories($folder))->map(function ($item) {
                 return explode('/', $item);
             });
-            $files =  collect(Storage::disk('public')->files($folder))->map(function ($item) {
+            $files = collect(Storage::disk('public')->files($folder))->map(function ($item) {
                 return explode('/', $item);
             });
 
@@ -283,6 +285,42 @@ if (!function_exists('getFileIconClass')) {
     }
 }
 
+
+if (!function_exists('get_revenue_categories')) {
+    function get_revenue_categories(int $revenueCategoryId = null)
+    {
+        $revenueCategories = Cache::rememberForever('revenueCategories', function () {
+            return RevenueCategory::all();
+        });
+
+        if ($revenueCategoryId !== null) {
+            $revenueCategories = $revenueCategories->where('id', $revenueCategoryId)->first();
+        }
+
+        return $revenueCategories ?? [];
+    }
+}
+
+
+if (!function_exists('get_revenues')) {
+    function get_revenues($revenueCategories = [], int $revenueId = null)
+    {
+        $revenueCategories = is_array($revenueCategories) ? $revenueCategories : [$revenueCategories];
+
+        $revenues = Cache::rememberForever('revenues', function () {
+            return Revenue::orderBy('revenue_category_id')->get();
+        });
+        if (!empty($revenueCategories)) {
+            $revenues = $revenues->whereIn('revenue_category_id', $revenueCategories);
+        }
+
+        if ($revenueId !== null) {
+            $revenues = $revenues->where('id', $revenueId)->first();
+        }
+
+        return $revenues ?? [];
+    }
+}
 
 
 

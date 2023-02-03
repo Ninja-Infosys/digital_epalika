@@ -5,6 +5,7 @@ namespace Modules\Revenue\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Modules\Revenue\Entities\RevenueCategory;
 use Modules\Revenue\Http\Requests\RevenueCategory\StoreRevenueCategoryRequest;
 use Modules\Revenue\Http\Requests\RevenueCategory\UpdateRevenueCategoryRequest;
@@ -32,6 +33,7 @@ class RevenueCategoryController extends Controller
 
         RevenueCategory::create($request->validated());
 
+        Cache::forget('revenueCategories');
         toast('वर्ग सफलतापूर्वक थपियो', 'success');
         return redirect()->back();
 
@@ -52,7 +54,7 @@ class RevenueCategoryController extends Controller
         $this->checkAuthorization('revenueCategory_edit');
 
         $revenueCategory->update($request->validated());
-
+        Cache::forget('revenueCategories');
         toast('वर्ग सफलतापूर्वक सम्पादन गरियो', 'success');
         return redirect()->route('admin.revenue.setting.revenue-category.index');
     }
@@ -62,7 +64,7 @@ class RevenueCategoryController extends Controller
         $this->checkAuthorization('revenueCategory_delete');
 
         $revenueCategory->delete();
-
+        Cache::forget('revenueCategories');
         toast('वर्ग सफलतापूर्वक हटाइयो', 'success');
         return redirect()->route('admin.revenue.setting.revenue-category.index');
     }

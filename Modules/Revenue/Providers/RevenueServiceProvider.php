@@ -4,7 +4,9 @@ namespace Modules\Revenue\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Revenue\Entities\Invoice;
 use Modules\Revenue\Entities\TaxPayer;
+use Modules\Revenue\Observers\InvoiceObserver;
 use Modules\Revenue\Observers\TaxPayerObserver;
 
 class RevenueServiceProvider extends ServiceProvider
@@ -26,7 +28,7 @@ class RevenueServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        TaxPayer::observe(TaxPayerObserver::class);
+        $this->getObservers();
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -113,5 +115,14 @@ class RevenueServiceProvider extends ServiceProvider
             }
         }
         return $paths;
+    }
+
+    /**
+     * @return void
+     */
+    public function getObservers(): void
+    {
+        TaxPayer::observe(TaxPayerObserver::class);
+        Invoice::observe(InvoiceObserver::class);
     }
 }

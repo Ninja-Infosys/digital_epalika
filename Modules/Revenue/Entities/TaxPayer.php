@@ -30,6 +30,7 @@ class TaxPayer extends Model
         'name_en',
         'phone',
         'email',
+        'address',
         'gender',
         'father_name',
         'grandfather_name',

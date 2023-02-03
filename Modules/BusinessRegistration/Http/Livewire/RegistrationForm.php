@@ -105,7 +105,7 @@ class RegistrationForm extends Component
         'form.address' => ['required'],
         'form.address_en' => ['required'],
         'form.business_nature_id' => ['required', 'exists:business_natures,id'],
-        'form.object_transaction_id' => ['required', 'exists:object_transactions,id'],
+        'form.object_transaction_id' => ['nullable', 'exists:object_transactions,id'],
         'form.working_capital' => ['nullable'],
         'form.fixed_capital' => ['nullable'],
         'form.investment' => ['required'],
@@ -118,16 +118,16 @@ class RegistrationForm extends Component
         'form.tole' => ['required', 'string'],
         'form.is_rent' => ['required', 'boolean'],
         'form.house_owner_name' => ['required_if:form.is_rent,1'],
-        'form.house_owner_phone' => ['required_if:form.is_rent,1'],
-        'form.house_owner_address' => ['required_if:form.is_rent,1'],
+        'form.house_owner_phone' => ['nullable'],
+        'form.house_owner_address' => ['nullable'],
         'form.house_owner_monthly_rent' => ['required_if:form.is_rent,1'],
-        'form.rent_agreement' => ['required_if:form.is_rent,1'],
+        'form.rent_agreement' => ['nullable'],
         'form.is_register' => ['nullable'],
         'form.registeredBusinesses' => ['required_if:form.is_register,1', 'array'],
         'form.registeredBusinesses.*.business_name' => ['required_if:form.is_register,1'],
-        'form.registeredBusinesses.*.registration_no' => ['required_if:form.is_register,1'],
-        'form.registeredBusinesses.*.registration_date' => ['required_if:form.is_register,1'],
-        'form.registeredBusinesses.*.is_active' => ['required_if:form.is_register,1'],
+        'form.registeredBusinesses.*.registration_no' => ['nullable'],
+        'form.registeredBusinesses.*.registration_date' => ['nullable'],
+        'form.registeredBusinesses.*.is_active' => ['nullable'],
     ];
 
     protected array $secondStepValidations = [
@@ -137,9 +137,9 @@ class RegistrationForm extends Component
         'form.partners.*.citizenship_no' => ['required'],
         'form.partners.*.issue_date' => ['required'],
         'form.partners.*.phone' => ['required'],
-        'form.partners.*.email' => ['required'],
-        'form.partners.*.house_no' => ['required'],
-        'form.partners.*.account_no' => ['required'],
+        'form.partners.*.email' => ['nullable'],
+        'form.partners.*.house_no' => ['nullable'],
+        'form.partners.*.account_no' => ['nullable'],
         'form.partners.*.national_card_no' => ['nullable'],
         'form.partners.*.gender' => ['required'],
         'form.partners.*.education_qualification' => ['required'],
@@ -150,7 +150,7 @@ class RegistrationForm extends Component
         'form.partners.*.signature' => ['nullable'],
         'form.partners.*.citizenship_front' => ['nullable'],
         'form.partners.*.citizenship_back' => ['nullable'],
-        'form.partners.*.position' => ['required'],
+        'form.partners.*.position' => ['required','integer'],
         'form.partners.*.province_id' => ['required', 'exists:provinces,id'],
         'form.partners.*.district_id' => ['required', 'exists:districts,id'],
         'form.partners.*.issue_district_id' => ['required', 'exists:districts,id'],
@@ -163,11 +163,11 @@ class RegistrationForm extends Component
     protected array $thirdStepValidations = [
 
         'form.length' => ['required'],
-        'form.width' => ['required'],
+        'form.width' => ['nullable'],
         'form.application_date' => ['required'],
         'form.application_date_en' => ['required'],
         'form.land_ownership_certificate' => ['nullable'],
-        'form.ward_recommendation' => ['nullable'],
+        'form.ward_recommendation' => ['required'],
         'form.embassy_document' => ['nullable'],
         'form.registration_document' => ['nullable'],
         'form.license' => ['nullable'],
@@ -207,10 +207,13 @@ class RegistrationForm extends Component
 
     public function submitForm()
     {
+//        dd($this->form);
         $this->validate();
         $businessDetail = DB::transaction(function () {
-            $businessDetail = BusinessDetail::create($this->form + [
+            $businessDetail = BusinessDetail::create(\Arr::except($this->form,['working_capital','fixed_capital']) + [
                     'submission_no' => time(),
+                    'working_capital'=> is_null($this->form['working_capital']) ?   0 : $this->form['working_capital'],
+                    'fixed_capital'=> is_null($this->form['fixed_capital']) ?   0 : $this->form['fixed_capital']
                 ]);
             foreach ($this->form['partners'] as $partner) {
                 $businessDetail->partners()->create($partner);

@@ -21,6 +21,7 @@ class StoreTaxPayerRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'name_en' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
             'email' => ['nullable', 'email'],
             'gender' => ['required', 'string', 'max:255', new Enum(Gender::class)],
             'father_name' => ['required', 'string', 'max:255'],
