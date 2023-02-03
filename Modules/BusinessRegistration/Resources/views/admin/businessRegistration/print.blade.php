@@ -82,7 +82,7 @@
         </p>
         <p>
             व्यवसायको नाम : <span>{{$businessDetail->name}}</span> <br>
-            व्यवसाय रहने स्थान : {{$businessDetail->localBody->local_body??''}} वडा नं. <span>{{$businessDetail->ward_no}}</span> बाटोको नाम <span>{{$businessDetail->way}}</span> <br>
+            व्यवसाय रहने स्थान : <span>{{$businessDetail->localBody->local_body??''}}</span> वडा नं. <span>{{$businessDetail->ward_no}}</span> बाटोको नाम <span>{{$businessDetail->way}}</span> <br>
             घर नं. .......... टोल <span>{{$businessDetail->tole}}</span> <br>
             व्यवसाय रहने घर | जगाधानी नाम : <span>{{$businessDetail->house_owner_name}}</span> <br>
             व्यवसायको प्रकृति : <span>{{$businessDetail->businessNature->title??''}}</span> विवरण <br>
