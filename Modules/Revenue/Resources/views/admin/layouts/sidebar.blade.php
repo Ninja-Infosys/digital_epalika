@@ -12,6 +12,13 @@
     </a>
 </li>
 
+<li class="{{request()->is('admin/invoice/dashboard') ? 'active' : ''}}">
+    <a href="{{route('admin.revenue.invoice.index')}}">
+        <i class="fa fa-money-bill"></i>
+        <span>नगदी रसिद</span>
+    </a>
+</li>
+
 <li class="{{request()->routeIs('admin.revenue.setting.*') ? 'active' : ''}}">
     <a href="#sidebarRevenueSetting"
        {{request()->routeIs('admin.revenue.setting.*') ? 'aria-expanded=true' : ''}}

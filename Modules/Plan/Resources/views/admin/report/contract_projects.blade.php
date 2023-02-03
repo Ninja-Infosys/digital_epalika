@@ -24,16 +24,25 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट</h4>
-
-                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                aria-controls="collapseExample">
-                            <i class="fa fa-filter"></i>
-                        </button>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary"
+                                    onclick="printJS({
+                                        printable: 'report-table',
+                                        css: '{{asset('assets/backend/css/print.css')}}',
+                                        type: 'html'
+                                        })">
+                                <i class="fa fa-print"> प्रिन्ट गर्नुहोस</i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="collapse show mb-2" id="collapseFilterForm">
+                    <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
                               data-bs-url="{{route('admin.plan.report.contract-projects-page')}}">
                             <div class="row">
@@ -159,11 +168,7 @@
 
                         </form>
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div id="report-table" class="table-responsive">
+                    <div id="report-table" class="table-responsive d-none">
                         <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
                             <span class="main-logo">
                                 <img alt="nepal-government-logo"
@@ -274,6 +279,7 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
+                            $('#report-table').removeClass('d-none')
                             createTable(resp.data)
 
                         },

@@ -24,16 +24,22 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">उ.स. अन्तर्गतका योजनाहरुको रिपोर्ट</h4>
-
-                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                aria-controls="collapseExample">
-                            <i class="fa fa-filter"></i>
-                        </button>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
+                            </button>
+                            <x-print-button
+                                target-element="report-table"
+                                title="उ.स. अन्तर्गतका योजनाहरुको रिपोर्ट"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="collapse show mb-2" id="collapseFilterForm">
+                    <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
                               data-bs-url="{{route('admin.plan.report.consumer-committee-projects')}}">
                             <div class="row">
@@ -156,14 +162,9 @@
                             <button type="submit" id="submitFormBtn" class="btn btn-primary">
                                 पेश गर्नुहोस्
                             </button>
-
                         </form>
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div id="report-table" class="table-responsive">
+                    <div id="report-table" class="table-responsive d-none">
                         <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
                             <span class="main-logo">
                                 <img alt="nepal-government-logo"
@@ -171,9 +172,6 @@
                                      src="{{ asset('assets/frontend/image/logo.png') }}"/>
                             </span>
                             <x-header-component :has-clock="false"/>
-                        </div>
-                        <div>
-
                         </div>
                         <table class="table table-stripped table-bordered">
                             <thead>
@@ -261,8 +259,8 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
+                            $('#report-table').removeClass('d-none');
                             createTable(resp.data)
-
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             submitFormBtn.prop('disabled', false)

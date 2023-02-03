@@ -5,6 +5,7 @@ namespace Modules\Revenue\Http\Controllers\Admin;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Modules\Revenue\Entities\Revenue;
 use Modules\Revenue\Entities\RevenueCategory;
 use Modules\Revenue\Http\Requests\Revenue\StoreRevenueRequest;
@@ -31,7 +32,7 @@ class RevenueController extends Controller
         $this->checkAuthorization('revenue_create');
 
         Revenue::create($request->validated() + ['user_id' => auth()->id()]);
-
+        Cache::forget('revenues');
         toast('राजस्वको शिर्षक सफलतापुर्वक राखियो', 'success')->autoClose(2000)->timerProgressBar();
         return redirect()->back();
     }
@@ -53,6 +54,7 @@ class RevenueController extends Controller
     {
         $this->checkAuthorization('revenue_edit');
         $revenue->update($request->validated());
+        Cache::forget('revenues');
         toast('राजस्वको शिर्षक सम्पादन गरियो', 'success')->autoClose(2000)->timerProgressBar();
         return redirect()->route('admin.revenue.setting.revenue.index');
     }
@@ -61,6 +63,7 @@ class RevenueController extends Controller
     {
         $this->checkAuthorization('revenue_delete');
         $revenue->delete();
+        Cache::forget('revenues');
         toast('राजस्वको शिर्षक हटाइयो', 'success')->autoClose(2000)->timerProgressBar();
         return redirect()->route('admin.revenue.setting.revenue.index');
     }
@@ -69,6 +72,7 @@ class RevenueController extends Controller
     {
         $this->checkAuthorization('revenue_edit');
         $revenue->update(['is_active' => !$revenue->is_active]);
+        Cache::forget('revenues');
         toast('राजस्वको शिर्षक स्थिति अपडेट गरियो', 'success')->autoClose(2000)->timerProgressBar();
         return redirect()->route('admin.revenue.setting.revenue.index');
     }

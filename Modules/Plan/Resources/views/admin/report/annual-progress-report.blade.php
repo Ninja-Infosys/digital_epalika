@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> योजना रिपोर्ट</li>
+                        <li class="breadcrumb-item active"> वार्षिक प्रगति प्रतिवेदन</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> योजना रिपोर्ट </h4>
+                <h4 class="page-title"> वार्षिक प्रगति प्रतिवेदन </h4>
             </div>
         </div>
     </div>
@@ -23,17 +23,23 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">योजना रिपोर्ट</h4>
-
-                        <button class="btn btn-primary waves-effect waves-light collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
-                                aria-controls="collapseExample">
-                            <i class="fa fa-filter"></i>
-                        </button>
+                        <h4 class="header-title">वार्षिक प्रगति प्रतिवेदन रिपोर्ट</h4>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
+                            </button>
+                            <x-print-button
+                                target-element="report-table"
+                                title="वार्षिक प्रगति प्रतिवेदन रिपोर्ट"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="collapse show mb-2" id="collapseFilterForm">
+                    <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
                               data-bs-url="{{route('admin.plan.report.get-annual-progress-report')}}">
                             <div class="row">
@@ -159,11 +165,7 @@
 
                         </form>
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div id="report-table" class="table-responsive">
+                    <div id="report-table" class="table-responsive d-none">
                         <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
                             <span class="main-logo">
                                 <img alt="nepal-government-logo"
@@ -287,6 +289,7 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
+                            $('#report-table').removeClass('d-none')
                             createTable(resp.data)
 
                         },
