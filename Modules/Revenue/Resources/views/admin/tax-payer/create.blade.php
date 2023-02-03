@@ -201,7 +201,7 @@
                                     nameEn="issued_date_en" labelEn="Issued Date"
                                 />
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="ward" class="form-label">वार्ड *</label>
                                 <select
                                     name="ward"
@@ -223,7 +223,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-4 mb-2">
                                 <label for="tole" class="form-label">टोल *</label>
                                 <input
                                     type="text"
@@ -234,6 +234,20 @@
                                     placeholder="टोल"
                                 />
                                 @error('tole')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <label for="address" class="form-label">ठेगाना *</label>
+                                <input
+                                    type="text"
+                                    name="address"
+                                    value="{{old('address')}}"
+                                    class="form-control @error('address') is-invalid @enderror"
+                                    id="address"
+                                    placeholder="ठेगाना"
+                                />
+                                @error('address')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
