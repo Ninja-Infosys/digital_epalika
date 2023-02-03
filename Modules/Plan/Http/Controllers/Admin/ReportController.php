@@ -254,10 +254,15 @@ class ReportController extends Controller
 
     public function getContractProjects(Request $request)
     {
-        $projects = Project::with('projectBidDetail')->where(function ($q) use ($request) {
-            $q->whereNot('operated_through', ProjectOperatedThroughEnum::CONSUMER_COMMITTEE);
-            $this->filterDataFromUser($q, $request);
-        })->get()
+        $projects = Project::with('projectBidDetail', 'projectDeadlineExtensions')
+            ->withSum(['projectBidSubmissions as current_year_expenses_amount' => function ($query) {
+                $query->where('fiscal_year_id', officeSetting()->fiscal_year_id);
+            }], 'amount')
+            ->withSum('projectBidSubmissions', 'amount')
+            ->where(function ($q) use ($request) {
+                $q->whereNot('operated_through', ProjectOperatedThroughEnum::CONSUMER_COMMITTEE);
+                $this->filterDataFromUser($q, $request);
+            })->get()
             ->filter(function ($project) use ($request) {
                 if (!empty($request->input('ward_no'))) {
                     return count(array_intersect($request->input('ward_no'), $project->ward_no)) > 0;
@@ -270,14 +275,21 @@ class ReportController extends Controller
                     'bid_no' => $project->projectBidDetail->bid_no ?? '',
                     'contractor_name' => $project->projectBidDetail->contractor_name ?? '',
                     'project_name' => $project->project_name ?? '',
-                    'total_amount_for_contingency' => $project->total_amount_for_contingency ?? 0.00,
-                    'project_contract_number' => $project->project_contract_amount ?? 0.00,
+                    'contract_no' => 0.00,
                     'project_contract_amount' => $project->project_contract_amount ?? 0.00,
-                    'labor_amount' => $project->labor_amount ?? 0.00,
-                    'total_amount' => $project->total_cost_estimate_amount ?? 0.00,
                     'project_start_date' => $project->project_start_date ?? '',
                     'project_completion_date' => $project->project_completion_date ?? '',
-                    'project_status' => $project->project_status?->label()
+                    'project_status' => $project->project_status?->label(),
+                    'project_deadline_extensions_count' => $project->projectDeadlineExtensions->count(),
+                    'project_deadline_extended_months' => $project->projectDeadlineExtensions->sum('extended_months'),
+                    'variation_percentage' => 0.00,
+                    'variation_amount' => 0.00,
+                    'price_adjustment_including_vat' => 0.00,
+                    'expiry_date_of_performance' => null,
+                    'insurance_expiry_date' => $project->projectBidDetail->insurance_expiry_date ?? null,
+                    'current_year_expenses_amount' => $project->current_year_expenses_amount ?? 0.00,
+                    'total_expenses_amount' => $project->project_bid_submissions_sum_amount ?? 0.00,
+                    'age_built_map_submitted' => null
                 ];
             });
 
