@@ -27,8 +27,6 @@ class ProjectResource extends JsonResource
             'मूल्याङ्कन रकम' => $this->when(in_array('evaluation_amount', $request_columns), $this->evaluation_amount ?? 0),
             'उद्देश्य' => $this->when(in_array('purpose', $request_columns), $this->purpose ?? ''),
             'मार्फत सञ्चालन' => $this->when(in_array('operated_through', $request_columns), $this->operated_through?->label()),
-            'म्याद थपिएको ?' => $this->when(in_array('is_deadline_extended', $request_columns), $this->is_deadline_extended ? 'हो' : 'होइन'),
-            'विस्तारित मिति' => $this->when(in_array('extended_date', $request_columns), $this->extended_date ?? ''),
             'भौतिक प्रगति लक्ष्य परिमाण' => $this->when(in_array('progress_spent_amount', $request_columns), $this->progress_spent_amount ?? 0),
             'भौतिक प्रगति सम्पन्न परिमाण' => $this->when(in_array('physical_progress_completed', $request_columns), $this->physical_progress_completed ?? 0),
             'भौतिक प्रगति एकाइ' => $this->when(in_array('physical_progress_unit', $request_columns), $this->physical_progress_unit ?? ''),

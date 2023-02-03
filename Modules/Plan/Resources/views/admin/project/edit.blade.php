@@ -410,32 +410,6 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-4 mb-2">
-                                <label for="is_deadline_extended" class="form-label">आयोजनाको म्याद थप भएको ?</label>
-                                <select
-                                    name="is_deadline_extended"
-                                    class="form-select @error('is_deadline_extended') is-invalid @enderror"
-                                    id="is_deadline_extended">
-                                    <option value="0">
-                                        नभएको
-                                    </option>
-                                    <option
-                                        {{old('is_deadline_extended',$project->is_deadline_extended)=="1" ? 'selected' : ''}} value="1">
-                                        भएको
-                                    </option>
-                                </select>
-                                @error('is_deadline_extended')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-4 mb-2" id="extended_date_div">
-                                <x-date-input-component
-                                    nameNe="extended_date" labelNe="म्याद थप मिति"
-                                    nameEn="en_extended_date" labelEn="Extended Date"
-                                    :getTodayDate="false"
-                                    :editDateNe="$project->extended_date"
-                                />
-                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">
@@ -446,32 +420,4 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-        <script>
-            $(document).ready(function () {
-                if ($('#is_deadline_extended').val() == "1") {
-                    showExtendedData()
-                } else {
-                    removeExtendedData()
-                }
-
-                $("#is_deadline_extended").on("change", function () {
-                    if ($('#is_deadline_extended').val() == "1") {
-                        showExtendedData()
-                    } else {
-                        removeExtendedData()
-                    }
-                })
-
-                function removeExtendedData() {
-                    $("#extended_date_div").addClass('d-none')
-                    $("#extended_date").val('')
-                }
-
-                function showExtendedData() {
-                    $("#extended_date_div").removeClass('d-none')
-                }
-            })
-        </script>
-    @endpush
 @endsection

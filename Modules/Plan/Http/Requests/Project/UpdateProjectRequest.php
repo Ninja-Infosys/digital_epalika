@@ -33,8 +33,6 @@ class UpdateProjectRequest extends FormRequest
             'project_venue' => ['nullable'],
             'purpose' => ['nullable'],
             'operated_through' => ['nullable', new Enum(ProjectOperatedThroughEnum::class)],
-            'is_deadline_extended' => ['nullable', 'boolean'],
-            'extended_date' => ['required_if:is_deadline_extended,1'],
             'first_quarterly_amount' => ['nullable', 'numeric'],
             'first_quarterly_goal' => ['nullable', 'numeric'],
             'second_quarterly_amount' => ['nullable', 'numeric'],

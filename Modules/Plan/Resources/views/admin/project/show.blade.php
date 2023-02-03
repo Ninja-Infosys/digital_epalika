@@ -68,9 +68,6 @@
                         <h5>आयोजना अवस्था : {{$project->project_status?->label()}}</h5>
                         <h5>आयोजना सुरु हुने मिति : {{$project->project_start_date}}</h5>
                         <h5>आयोजना सम्पन्‍न हुने मिति : {{$project->project_completion_date}}</h5>
-                        @if($project->is_deadline_extended)
-                            <h5>आयोजनाको म्याद थप मिति : {{$project->extended_date}}</h5>
-                        @endif
                         <h5>वित्तीय प्रगति खर्च रकम रु. : {{$project->progress_spent_amount}}</h5>
                         <h5>भौतिक प्रगति लक्ष्य : {{$project->physical_progress_target}}</h5>
                         <h5>भौतिक प्रगति सम्पन्न : {{$project->physical_progress_completed}}</h5>
@@ -534,31 +531,40 @@
                     <h4 class="header-title fw-bold">
                         ८). योजना संग सम्बन्धित फोटो/फाईलहरू
                     </h4>
-                    <div class="table-responsive">
-                        <table class="table table-sm table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>क्र.स</th>
-                                <th>फाइल नाम</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @forelse($project->files as $file)
-                                <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>
-                                        <a href="{{route('admin.file.download',$file)}}">
-                                            <i class="fa fa-download"></i> {{$file->file_name}}
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="2" class="text-center">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
-                                </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
+                    <div class="row">
+                        @foreach($project->files as $file)
+                            <div class="col-md-4 mb-3">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between">
+                                        <h5 class="card-title">
+                                            {{$file->file_name}}
+                                        </h5>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="{{route('admin.file.download', $file)}}"
+                                               class="btn btn-xs btn-outline-primary mx-1">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                            <form action="{{route('admin.file.destroy',$file)}}"
+                                                  method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="show_confirm btn btn-sm btn-danger ml-2">
+                                                    <i class="fa fa-window-close"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        @if($file->extension ==='pdf')
+                                            <iframe src="{{$file->file_url}}" frameborder="0" width="100%"></iframe>
+                                        @elseif(($file->extension ==='png') or ($file->extension ==='jpg') or ($file->extension ==='jpeg'))
+                                            <img src="{{ $file->file_url }}" class="card-image" alt="Image"
+                                                 height=150px;" width="100%">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

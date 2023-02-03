@@ -239,6 +239,10 @@
                                                    href="{{route('admin.plan.project.fileList',$project)}}">
                                                     <i class="fa fa-file"> योजना संग सम्बन्धित फोटो/फाईलहरू </i>
                                                 </a>
+                                                <a class="dropdown-item"
+                                                   href="{{route('admin.plan.project.projectDeadlineExtension.index',$project)}}">
+                                                    <i class="fa fa-calendar-alt"> म्याद थप </i>
+                                                </a>
                                             @endif
                                         </div>
                                     </div>

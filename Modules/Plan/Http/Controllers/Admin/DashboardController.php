@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $not_started_project_count = $this->projects->where('project_status', ProjectStatusEnum::NOT_STARTED)->count();
         $in_progress_project_count = $this->projects->where('project_status', ProjectStatusEnum::IN_PROGRESS)->count();
         $completed_project_count = $this->projects->where('project_status', ProjectStatusEnum::COMPLETED)->count();
-        $deadline_extended_project_count = $this->projects->where('is_deadline_extended', 1)->count();
+        $deadline_extended_project_count = Project::whereHas('projectDeadlineExtensions')->count();
         $wardWiseProjects = $this->getWardWiseProjects();
         $planAreaWiseProjects = $this->getPlanAreaWiseProjects();
         $budgetHeadWiseProjects = $this->getBudgetHeadWiseProjects();

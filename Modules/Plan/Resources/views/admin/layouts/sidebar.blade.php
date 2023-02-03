@@ -36,6 +36,16 @@
                     <span>वार्षिक प्रगति प्रतिवेदन</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/plan/report/consumer-committee-projects') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.consumer-committee-projects')}}">
+                    <span>उ.स. अन्तर्गतका योजनाहरु</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/contract-projects') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.contract-projects-page')}}">
+                    <span>ठेक्का अन्तर्गतका योजनाहरु</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>

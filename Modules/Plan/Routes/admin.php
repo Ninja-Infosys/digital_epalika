@@ -9,6 +9,7 @@ use Modules\Plan\Http\Controllers\Admin\ProjectBidDetailController;
 use Modules\Plan\Http\Controllers\Admin\ProjectBidSubmissionController;
 use Modules\Plan\Http\Controllers\Admin\ProjectController;
 use Modules\Plan\Http\Controllers\Admin\ProjectCostDetailController;
+use Modules\Plan\Http\Controllers\Admin\ProjectDeadlineExtensionController;
 use Modules\Plan\Http\Controllers\Admin\ProjectDocumentController;
 use Modules\Plan\Http\Controllers\Admin\ProjectMaintenanceArrangementController;
 use Modules\Plan\Http\Controllers\Admin\ReportController;
@@ -38,6 +39,7 @@ Route::resource('project/{project}/projectBidSubmission', ProjectBidSubmissionCo
 Route::resource('project/{project}/consumerCommitteeTransaction', ConsumerCommitteeTransactionController::class)->names('project.consumerCommitteeTransaction');
 Route::resource('project/{project}/projectMaintenanceArrangement', ProjectMaintenanceArrangementController::class)->names('project.projectMaintenanceArrangement');
 Route::resource('project/{project}/technicalCostEstimate', TechnicalCostEstimateController::class)->names('project.technicalCostEstimate');
+Route::resource('project/{project}/projectDeadlineExtension', ProjectDeadlineExtensionController::class)->names('project.projectDeadlineExtension');
 
 Route::prefix('setting')->group(function () {
     Route::get('planSubArea', [PlanAreaController::class, 'planSubArea'])->name('planSubArea');
@@ -58,4 +60,8 @@ Route::controller(ReportController::class)->prefix('report')->as('report.')->gro
     Route::get('annual-progress-report', 'annualProgressReport')->name('annual-progress-report');
     Route::post('report-data', 'report')->name('report-data');
     Route::post('annual-progress-report', 'getAnnualProgressReport')->name('get-annual-progress-report');
+    Route::get('consumer-committee-projects','consumerCommitteeProjectsPage')->name('consumer-committee-projects');
+    Route::post('consumer-committee-projects','getConsumerCommitteeProjects')->name('consumer-committee-projects');
+    Route::get('contract-projects','contractProjectsPage')->name('contract-projects-page');
+    Route::post('contract-projects','getContractProjects')->name('get-contract-projects');
 });

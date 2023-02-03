@@ -53,8 +53,6 @@ class Project extends Model
         'operated_through',
         'is_contracted',
         'contract_date',
-        'is_deadline_extended',
-        'extended_date',
         'progress_spent_amount',
         'physical_progress_target',
         'physical_progress_completed',
@@ -190,6 +188,11 @@ class Project extends Model
     public function projectBidDetail(): HasOne
     {
         return $this->hasOne(ProjectBidDetail::class);
+    }
+
+    public function projectDeadlineExtensions(): HasMany
+    {
+        return $this->hasMany(ProjectDeadlineExtension::class);
     }
 
     public function projectBidSubmissions(): HasMany
