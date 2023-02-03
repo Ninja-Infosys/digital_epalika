@@ -83,13 +83,15 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        @can('businessRegistration_access')
-                                            <a href="javascript:void(0)" title="प्रिन्ट गर्नुहोस"
-                                               route_action="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}"
-                                               class="btn btn-xs btn-outline-warning printDetail">
-                                                <i class="fa fa-print"></i>
-                                            </a>
-                                        @endcan
+                                        @if(!is_null($businessDetail->registration_no))
+                                            @can('businessRegistration_access')
+                                                <a href="javascript:void(0)" title="प्रिन्ट गर्नुहोस"
+                                                   route_action="{{route('admin.businessRegistration.businessRegistration.print',$businessDetail)}}"
+                                                   class="btn btn-xs btn-outline-warning printDetail">
+                                                    <i class="fa fa-print"></i>
+                                                </a>
+                                            @endcan
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

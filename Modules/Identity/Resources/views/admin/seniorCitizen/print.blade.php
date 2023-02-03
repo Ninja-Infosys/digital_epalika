@@ -152,7 +152,7 @@
         </div>
         <div class="row">
             <div class="col-md-9">
-                <p>आईडी कार्ड नं: {{$seniorCitizenDetail->card_no}}<span></span></p>
+                <p>आईडी कार्ड नं: <span>{{$seniorCitizenDetail->card_no}}</span></p>
                 <p>व्यक्तिको पुरा नाम: <span>{{$seniorCitizenDetail->name}}</span></p>
                 <p>नागरिकता नं : <span>{{$seniorCitizenDetail->citizenship_no}}</span></p>
                 <p>रोग : <span>{{$seniorCitizenDetail->is_disease==1 ? 'छ':'छैन'}}</span></p>

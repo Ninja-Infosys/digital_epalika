@@ -36,10 +36,24 @@
                           enctype="multipart/form-data">
                         @csrf
                         <fieldset class="border p-2 mb-2">
-
                             <div class="row">
                                 <div class="col-md-6 mb-2">
-                                    <label for="application_fee" class="form-label">निवेदन दस्तुर *</label>
+                                    <label for="taxpayer_number" class="form-label">करदाता नम्बर </label>
+                                    <input
+                                        type="number"
+                                        name="taxpayer_number"
+                                        step="0.01"
+                                        placeholder="करदाता नम्बर "
+                                        value="{{old('taxpayer_number',$businessDetail->taxpayer_number??'')}}"
+                                        class="form-control @error('taxpayer_number') is-invalid @enderror"
+                                        id="taxpayer_number"
+                                    />
+                                    @error('taxpayer_number')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label for="application_fee" class="form-label">निवेदन दस्तुर </label>
                                     <input
                                         type="number"
                                         name="application_fee"
@@ -54,7 +68,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="registration_fee" class="form-label">दर्ता दस्तुर *</label>
+                                    <label for="registration_fee" class="form-label">दर्ता दस्तुर </label>
                                     <input
                                         type="number"
                                         step="0.01"
@@ -69,7 +83,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="business_tax" class="form-label">व्यवसाय कर *</label>
+                                    <label for="business_tax" class="form-label">व्यवसाय कर </label>
                                     <input
                                         type="number"
                                         step="0.01"
@@ -84,7 +98,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="introduction_board_fees" class="form-label"> परिचय पाटी दस्तुर *</label>
+                                    <label for="introduction_board_fees" class="form-label"> परिचय पाटी दस्तुर </label>
                                     <input
                                         type="number"
                                         step="0.01"
@@ -98,8 +112,9 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="fine" class="form-label"> जरिवाना *</label>
+                                <div class="col-md-6 mb-2">
+
+                                    <label for="fine" class="form-label"> जरिवाना </label>
                                     <input
                                         type="number"
                                         step="0.01"

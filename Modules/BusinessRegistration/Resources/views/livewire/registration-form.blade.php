@@ -203,7 +203,7 @@
                         <div class="col-md-4 mb-1">
                             <label for="other_document" class="form-label">
                                 अन्य
-                                 <span
+                                <span
                                     class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input
@@ -211,7 +211,7 @@
                                     type="file"
                                     id="other"
                                     wire:model="form.other_document"
-                                multiple>
+                                    multiple>
                                 @error('form.other_document')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -768,9 +768,11 @@
                                 <option value="">---छान्नुहोस् ----</option>
                                 @foreach($objectTransactions as $objectTransaction)
                                     <option
-                                        value="{{$objectTransaction->id??''}}" disabled>{{$objectTransaction->title ??''}}</option>
+                                        value="{{$objectTransaction->id??''}}"
+                                        @if($objectTransaction->objectTransactions->count() > 0) disabled @endif>{{$objectTransaction->title ??''}}</option>
                                     @foreach($objectTransaction->objectTransactions as $objectTransactionData)
-                                        <option value="{{$objectTransactionData->id ??''}}">--{{$objectTransactionData->title??''}}</option>
+                                        <option value="{{$objectTransactionData->id ??''}}">
+                                            --{{$objectTransactionData->title??''}}</option>
                                     @endforeach
                                 @endforeach
                             </select>
