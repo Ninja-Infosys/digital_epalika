@@ -70,12 +70,12 @@ class BusinessDetail extends Model
         'registration_document',
         'license',
         'tax_document',
-        'application_fee',
-        'registration_fee',
-        'business_tax',
-        'introduction_board_fees',
-        'fine',
-        'taxpayer_number'
+        'bill_no',
+        'bill_date_bs',
+        'bill_date_ad',
+        'taxpayer_number',
+        'amount',
+        'other_file'
     ];
 
     protected $dates = [
@@ -146,6 +146,8 @@ class BusinessDetail extends Model
         return $this->morphMany(File::class, 'model');
     }
 
+
+
     public function rentAgreement(): Attribute
     {
         return Attribute::make(
@@ -162,6 +164,16 @@ class BusinessDetail extends Model
             get: fn($value) => Storage::url($value),
             set: fn($value) => (!empty($value) && !is_string($value))
                 ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
+                : null
+        );
+    }
+
+    public function otherFile(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Storage::url($value),
+            set: fn($value) => (!empty($value) && !is_string($value))
+                ? $value->store('other_file', 'public')
                 : null
         );
     }

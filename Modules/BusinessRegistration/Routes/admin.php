@@ -24,7 +24,7 @@ Route::prefix('setting')->as('setting.')->group(function () {
 });
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/editTemplate', [BusinessRegistrationController::class, 'editData'])->name('edit.template');
 Route::post('businessRegistration/{businessDetail}/{type}/editTemplate', [BusinessRegistrationController::class, 'storeData'])->name('store.template');
-Route::post('businessRegistration/{businessDetail}/{type}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
+Route::post('businessRegistration/{businessDetail}/customData', [BusinessRegistrationController::class, 'customData'])->name('store.custom');
 Route::get('businessRegistration/{businessDetail}/{templateTypeEnum}/addData', [BusinessRegistrationController::class, 'addData'])->name('add-data.template');
 Route::get('businessDetail/{businessDetail}/print',[BusinessRegistrationController::class,'print'])->name('businessRegistration.print');
 Route::resource('businessDetail', BusinessRegistrationController::class)->names('businessRegistration');

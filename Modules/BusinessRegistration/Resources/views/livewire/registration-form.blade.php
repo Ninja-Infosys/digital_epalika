@@ -32,7 +32,7 @@
                     <legend class="title"> विवरण</legend>
                     <div class="row">
                         <div class="col-md-4 mb-1">
-                            <label for="length" class="form-label"> लम्बाई <span
+                            <label for="length" class="form-label"> लम्बाई (फिट)<span
                                     class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input
@@ -49,8 +49,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="width" class="form-label"> चौडाई <span
-                                    class="text-danger">*</span></label>
+                            <label for="width" class="form-label"> चौडाई (फिट)</label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.width') is-invalid @enderror"
@@ -105,8 +104,7 @@
 
                         <div class="col-md-4 mb-1">
                             <label for="land_ownership_certificate" class="form-label"> आफ्नै घर जग्गा भए जग्गा धनि
-                                प्रमाणपत्र <span
-                                    class="text-danger">*</span></label>
+                                प्रमाणपत्र </label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.land_ownership_certificate') is-invalid @enderror"
@@ -135,8 +133,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="embassy_document" class="form-label"> राजदूतावासको कागजात <span
-                                    class="text-danger">*</span></label>
+                            <label for="embassy_document" class="form-label"> राजदूतावासको कागजात </label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.embassy_document') is-invalid @enderror"
@@ -150,8 +147,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="registration_document" class="form-label"> दर्ता प्रमाणपत्र <span
-                                    class="text-danger">*</span></label>
+                            <label for="registration_document" class="form-label"> दर्ता प्रमाणपत्र </label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.registration_document') is-invalid @enderror"
@@ -165,8 +161,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="license" class="form-label"> इजाजत पत्र <span
-                                    class="text-danger">*</span></label>
+                            <label for="license" class="form-label"> इजाजत पत्र </label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.license') is-invalid @enderror"
@@ -180,8 +175,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="tax_document" class="form-label"> कर तिरेको प्रमाणपत्र <span
-                                    class="text-danger">*</span></label>
+                            <label for="tax_document" class="form-label"> कर तिरेको प्रमाणपत्र </label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.tax_document') is-invalid @enderror"
@@ -203,8 +197,7 @@
                         <div class="col-md-4 mb-1">
                             <label for="other_document" class="form-label">
                                 अन्य
-                                <span
-                                    class="text-danger">*</span></label>
+                               </label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.other_document') is-invalid @enderror"
@@ -235,7 +228,7 @@
             @case(2)
                 @foreach($form['partners'] as $key=>$partner)
                     <fieldset>
-                        <legend class="title"> विवरण</legend>
+                        <legend class="title"> व्यक्तिगत विवरण</legend>
                         <div class="row">
                             <div class="col-md-4 mb-1">
                                 <label for="form.partners.{{$key}}.name" class="form-label"> नाम <span
@@ -339,8 +332,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3 mb-1">
-                                <label for="form.partners.{{$key}}.email" class="form-label"> इमेल <span
-                                        class="text-danger">*</span></label>
+                                <label for="form.partners.{{$key}}.email" class="form-label"> इमेल </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.partners.'.$key.'.email') is-invalid @enderror"
@@ -355,8 +347,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label for="form.partners.{{$key}}.house_no" class="form-label"> घर नम्बर <span
-                                        class="text-danger">*</span></label>
+                                <label for="form.partners.{{$key}}.house_no" class="form-label"> घर नम्बर </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.partners.'.$key.'.house_no') is-invalid @enderror"
@@ -372,8 +363,7 @@
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label for="form.partners.{{$key}}.account_no" class="form-label"> व्यक्तिगत स्थाई लेखा
-                                    नम्बर <span
-                                        class="text-danger">*</span></label>
+                                    नम्बर </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.partners.'.$key.'.account_no') is-invalid @enderror"
@@ -389,8 +379,7 @@
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label for="form.partners.{{$key}}.national_card_no" class="form-label"> राष्ट्रियता
-                                    परिचयपत्र नम्बर <span
-                                        class="text-danger">*</span></label>
+                                    परिचयपत्र नम्बर </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.partners.'.$key.'.national_card_no') is-invalid @enderror"
@@ -405,7 +394,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label for="form.partners.{{$key}}.gender" class="form-label">लिङ्ग</label>
+                                <label for="form.partners.{{$key}}.gender" class="form-label">लिङ्ग
+                                    <span
+                                        class="text-danger">*</span>
+                                </label>
                                 <select
                                     class="form-select @error('form.partners.'.$key.'.gender') is-invalid @enderror"
                                     id="form.partners.{{$key}}.gender" wire:model="form.partners.{{$key}}.gender">
@@ -421,7 +413,10 @@
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label for="form.partners.{{$key}}.education_qualification" class="form-label">शैक्षिक
-                                    योग्यता</label>
+                                    योग्यता
+                                    <span
+                                        class="text-danger">*</span>
+                                </label>
                                 <select
                                     class="form-select @error('form.partners.'.$key.'.education_qualification') is-invalid @enderror"
                                     id="form.partners.{{$key}}.education_qualification"
@@ -486,8 +481,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label for="form.partners.{{$key}}.photo" class="form-label"> पासपोर्ट साइजको फोटो <span
-                                        class="text-danger">*</span></label>
+                                <label for="form.partners.{{$key}}.photo" class="form-label"> पासपोर्ट साइजको फोटो </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.partners.'.$key.'.photo') is-invalid @enderror"
@@ -501,8 +495,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3 mb-1">
-                                <label for="form.partners.{{$key}}.signature" class="form-label"> हस्ताक्षर <span
-                                        class="text-danger">*</span></label>
+                                <label for="form.partners.{{$key}}.signature" class="form-label"> हस्ताक्षर </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.partners.'.$key.'.signature') is-invalid @enderror"
@@ -517,8 +510,7 @@
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label for="form.partners.{{$key}}.citizenship_front" class="form-label"> नागरिकता अपलोड
-                                    गर्नुहोस् (आगाडी) <span
-                                        class="text-danger">*</span></label>
+                                    गर्नुहोस् (आगाडी) </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.partners.'.$key.'.citizenship_front') is-invalid @enderror"
@@ -533,8 +525,7 @@
                             </div>
                             <div class="col-md-3 mb-1">
                                 <label for="form.partners.{{$key}}.citizenship_back" class="form-label"> नागरिकता अपलोड
-                                    गर्नुहोस् (पछाडी) <span
-                                        class="text-danger">*</span></label>
+                                    गर्नुहोस् (पछाडी) </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.partners.'.$key.'.citizenship_back') is-invalid @enderror"
@@ -745,7 +736,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-1">
-                            <label for="form.business_nature_id" class="form-label">व्यवसायको प्रकृति</label>
+                            <label for="form.business_nature_id" class="form-label">व्यवसायको प्रकृति<span
+                                    class="text-danger">*</span></label>
                             <select
                                 class="form-select @error('form.business_nature_id') is-invalid @enderror"
                                 id="form.business_nature_id" wire:model="form.business_nature_id">
@@ -781,8 +773,7 @@
                             @enderror
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="working_capital" class="form-label">चालु पूँजी <span
-                                    class="text-danger">*</span></label>
+                            <label for="working_capital" class="form-label">चालु पूँजी </label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.working_capital') is-invalid @enderror"
@@ -799,8 +790,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="fixed_capital" class="form-label">स्थिर पूँजी <span
-                                    class="text-danger">*</span></label>
+                            <label for="fixed_capital" class="form-label">स्थिर पूँजी </label>
                             <div class="input-group">
                                 <input
                                     class="form-control @error('form.fixed_capital') is-invalid @enderror"
@@ -990,8 +980,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label for="house_owner_phone" class="form-label"> फोन <span
-                                        class="text-danger">*</span></label>
+                                <label for="house_owner_phone" class="form-label"> फोन </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.house_owner_phone') is-invalid @enderror"
@@ -1006,8 +995,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label for="house_owner_address" class="form-label"> ठेगाना <span
-                                        class="text-danger">*</span></label>
+                                <label for="house_owner_address" class="form-label"> ठेगाना </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.house_owner_address') is-invalid @enderror"
@@ -1038,8 +1026,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label for="rent_agreement" class="form-label"> भाडा सम्झौता <span
-                                        class="text-danger">*</span></label>
+                                <label for="rent_agreement" class="form-label"> भाडा सम्झौता </label>
                                 <div class="input-group">
                                     <input
                                         class="form-control @error('form.rent_agreement') is-invalid @enderror"

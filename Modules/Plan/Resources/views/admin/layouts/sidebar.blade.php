@@ -46,6 +46,21 @@
                     <span>ठेक्का अन्तर्गतका योजनाहरु</span>
                 </a>
             </li>
+            <li class="{{request()->is('admin/plan/report/incomplete-projects') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.incomplete-projects')}}">
+                    <span>सम्पन्न हुन बाकि योजनाहरुको रिपोर्ट </span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/project-choose') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.project-choose-page')}}">
+                    <span>योजना छनौट रिपोर्ट</span>
+                </a>
+            </li>
+            <li class="{{request()->is('admin/plan/report/work-detail-report') ? 'active' : ''}}">
+                <a href="{{route('admin.plan.report.work-detail-report-page')}}">
+                    <span>उ.स. र निर्माण व्यवसायीबाट भएको कार्य विवरण</span>
+                </a>
+            </li>
         </ul>
     </div>
 </li>
