@@ -13,12 +13,12 @@
     </li>
 @endcan
 
-<li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">
-    <a href="{{route('admin.businessRegistration.report.report')}}">
-        <i class="fa fa-file"></i>
-        <span>रिपोर्ट</span>
-    </a>
-</li>
+{{--<li class="{{request()->is('admin/businessRegistration/report/*') ? 'active' : ''}}">--}}
+{{--    <a href="{{route('admin.businessRegistration.report.report')}}">--}}
+{{--        <i class="fa fa-file"></i>--}}
+{{--        <span>रिपोर्ट</span>--}}
+{{--    </a>--}}
+{{--</li>--}}
 
 
 <li class="{{request()->is('admin/businessRegistration/setting/*') ? 'active' : ''}}">
