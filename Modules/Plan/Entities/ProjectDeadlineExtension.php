@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\EventObserveTrait;
+use Illuminate\Support\Carbon;
 
 class ProjectDeadlineExtension extends Model
 {
@@ -26,6 +27,15 @@ class ProjectDeadlineExtension extends Model
         'en_submitted_date',
         'remarks'
     ];
+
+    protected $appends = [
+        'extended_months'
+    ];
+
+    public function getExtendedMonthsAttribute(): float|int
+    {
+        return Carbon::parse($this->en_extended_date)->diffInMonths(Carbon::parse($this->en_submitted_date));
+    }
 
     public function project(): BelongsTo
     {

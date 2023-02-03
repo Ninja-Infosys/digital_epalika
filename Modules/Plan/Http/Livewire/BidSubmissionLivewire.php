@@ -78,7 +78,9 @@ class BidSubmissionLivewire extends Component
 
     public function store()
     {
-        $this->project->projectBidSubmissions()->create($this->validate()['form']);
+        $this->project->projectBidSubmissions()->create($this->validate()['form'] + [
+                'fiscal_year_id' => officeSetting()->fiscal_year_id
+            ]);
         $this->closeModal();
         $this->getProjectData($this->project);
 
