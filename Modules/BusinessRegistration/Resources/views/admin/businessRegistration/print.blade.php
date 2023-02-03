@@ -27,6 +27,11 @@
             width: 50%;
         }
 
+        .col-md-12 {
+            float: left;
+            width: 100%;
+        }
+
         .col-md-3 {
             float: left;
             width: 25%;
@@ -54,23 +59,22 @@
             @foreach($officeHeaders as $officeHeader)
                 <p style="text-align: center;line-height: 0.7;font-weight: {{$officeHeader->font}}rem;color: {{$officeHeader->font_color}}">{{$officeHeader->title}}</p>
             @endforeach
-
         </div>
         <div class="col-md-3">
             <img src="{{$businessDetail->partners->first()?->photo ??''}}" alt="{{$businessDetail->partners->first()?->name??''}}" height="60" >
         </div>
     </div>
-    <div class="row" style="padding: 110px">
-        <div class="col-md-6">
-            <p>फाईल नं.:- </p>
-            <p>प्रा. फ. दर्ता :- </p>
-        </div>
-        <div class="col-md-6">
-            <p>फाईल नं.:- </p>
-            <p>प्रा. फ. दर्ता :- </p>
+    <div class="row" style="margin-bottom: 100px;">
+        <div class="col-md-12">
+            <h2 style="text-align: center;">व्यवसाय दर्ता प्रमाण-पत्र</h2><br>
         </div>
     </div>
     <div class="row" style="padding: 0px 110px 0px 110px" >
+        <p>
+            करदाता नं : {{$businessDetail->taxpayer_number}} <br>
+            दर्ता मिति : {{$businessDetail->registration_date_ne}} <br>
+            प्रमाणपत्र नं : {{$businessDetail-> registration_no}}
+        </p>
         <p>
             जिल्ला <span>{{$businessDetail->partners->first()?->district->district ??''}}</span> गा.बि.स./नगरपालिका <span>{{$businessDetail->partners->first()?->localBody->local_body ??''}}</span> वडा <br>
             नं. <span>{{$businessDetail->partners->first()?->ward_no ??''}}</span> बस्ने श्री <span>{{$businessDetail->partners->first()?->name ??''}}</span> लाई स्थानीय स्वायत् शासन एन <br>
@@ -89,15 +93,14 @@
     <div class="row" style="padding: 0px 110px 0px 110px" >
         <div class="col-md-6">
             ............... <br>
-            करवालाको
+            करवालाको हस्ताक्षर
         </div>
         <div class="col-md-6">
             ............. <br>
-
+            स्वीकृत गर्नेको हस्ताक्षर
         </div>
+        <hr style="margin-top: 5px;">
     </div>
-
 </div>
-
 </body>
 </html>

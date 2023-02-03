@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('business_tax', 12, 2)->nullable()->default(0)->comment('व्यवसाय कर');
             $table->double('introduction_board_fees', 12, 2)->nullable()->default(0)->comment('परिचय पाटी दस्तुर');
             $table->double('fine', 12, 2)->nullable()->default(0)->comment('जरिवाना');
-            $table->string('taxpayer_number')->comment('करदाता नम्बर');
+            $table->string('taxpayer_number')->nullable()->comment('करदाता नम्बर');
         });
     }
 
