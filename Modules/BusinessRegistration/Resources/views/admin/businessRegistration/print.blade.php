@@ -43,9 +43,10 @@
         }
         span{
             color: #0a53be;
+            border-bottom: 2px dotted blue;
         }
         .middle-part-line-height {
-            line-height: 2;
+            line-height: 1.8;
         }
     </style>
 </head>
@@ -75,12 +76,12 @@
             दर्ता मिति : {{$businessDetail->registration_date_ne}} <br>
             प्रमाणपत्र नं : {{$businessDetail-> registration_no}}
         </p>
-        <p>
+        <p class="middle-part-line-height">
             जिल्ला <span>{{$businessDetail->partners->first()?->district->district ??''}}</span> गा.बि.स./नगरपालिका <span>{{$businessDetail->partners->first()?->localBody->local_body ??''}}</span> वडा <br>
             नं. <span>{{$businessDetail->partners->first()?->ward_no ??''}}</span> बस्ने श्री <span>{{$businessDetail->partners->first()?->name ??''}}</span> लाई स्थानीय स्वायत् शासन एन <br>
             2055 को दफा 138 बमोजिम निम्न विवरण अनुसारको व्यवसाय दर्ता गरी यो प्रमाण-पत्र जारी गरिएको छ |
         </p>
-        <p>
+        <p class="middle-part-line-height">
             व्यवसायको नाम : <span>{{$businessDetail->name}}</span> <br>
             व्यवसाय रहने स्थान : <span>{{$businessDetail->localBody->local_body??''}}</span> वडा नं. <span>{{$businessDetail->ward_no}}</span> बाटोको नाम <span>{{$businessDetail->way}}</span> <br>
             घर नं. .......... टोल <span>{{$businessDetail->tole}}</span> <br>
