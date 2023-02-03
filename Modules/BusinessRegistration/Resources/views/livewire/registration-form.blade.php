@@ -235,7 +235,7 @@
             @case(2)
                 @foreach($form['partners'] as $key=>$partner)
                     <fieldset>
-                        <legend class="title"> विवरण</legend>
+                        <legend class="title"> व्यक्तिगत विवरण</legend>
                         <div class="row">
                             <div class="col-md-4 mb-1">
                                 <label for="form.partners.{{$key}}.name" class="form-label"> नाम <span

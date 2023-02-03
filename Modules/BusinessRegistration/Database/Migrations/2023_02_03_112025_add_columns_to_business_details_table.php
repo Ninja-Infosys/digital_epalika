@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('bill_date_bs')->nullable()->comment('बिल मिति बि स.');
             $table->string('bill_date_ad')->nullable()->comment('बिल मिति ई स.');
             $table->string('other_file')->nullable();
-            $table->double('amount', 12, 2)->nullable()->default(0)->comment('जरिवाना');
+            $table->double('amount', 12, 2)->nullable()->default(0)->comment('रकम');
             $table->string('taxpayer_number')->nullable()->comment('करदाता नम्बर');
         });
     }
