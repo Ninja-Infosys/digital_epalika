@@ -9,11 +9,11 @@
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                          765432
+                                          {{ $taxPayerCount}}
                                         </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">व्यवसाय</p>
+                            <p class="text my-1">करदाता</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
@@ -27,11 +27,11 @@
                         <div class="col">
                             <div class="avatar-lg rounded-circle bg-light border">
                                 <h3 class="mt-1 text-center"><span data-plugin="counterup">
-                                            5432
+                                            {{$invoiceCount}}
                                        </span>
                                 </h3>
                             </div>
-                            <p class="text my-1">प्रकृतिहरु</p>
+                            <p class="text my-1">आ.व. {{officeSetting()->fiscalYear->title}}मा काटिएको नगदी रसिद</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
@@ -43,18 +43,36 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <div class="avatar-lg rounded-circle bg-light border">
-                                <h3 class="mt-1 text-center"><span
-                                        data-plugin="counterup">123</span>
+{{--                            <div class="avatar-lg rounded-circle bg-light border">--}}
+                                <h3 class="mt-1 text-center text-white"><span
+                                        data-plugin="counterup">
+                                        45625
+                                    </span>
                                 </h3>
-                            </div>
-                            <p class="text my-1">कारोबार गर्ने वस्तु</p>
+{{--                            </div>--}}
+                            <p class="text my-1">चालु आर्थिक वर्षको संकलन राजस्व</p>
                         </div>
                     </div> <!-- end row-->
                 </div>
             </div> <!-- end widget-rounded-circle-->
         </div> <!-- end col-->
-
+        <div class="col-md-6 col-xl-3">
+            <div class="widget-rounded-circle card-secondary">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+{{--                            <div class="avatar-lg rounded-circle bg-light border">--}}
+                                <h3 class="mt-1 text-center"><span data-plugin="counterup">
+                                        12345
+                                       </span>
+                                </h3>
+{{--                            </div>--}}
+                            <p class="text my-1">कुल राजस्व</p>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div> <!-- end widget-rounded-circle-->
+        </div> <!-- end col-->
 
     </div>
 @endsection
