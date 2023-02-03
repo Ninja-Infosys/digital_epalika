@@ -29,6 +29,7 @@ class BusinessDetail extends Model
     use HasFactory;
     use SoftDeletes;
     use GetAllColumns;
+
 //    use BusinessDetailTemplateTrait;
 
     protected $fillable = [
@@ -69,6 +70,12 @@ class BusinessDetail extends Model
         'registration_document',
         'license',
         'tax_document',
+        'application_fee',
+        'registration_fee',
+        'business_tax',
+        'introduction_board_fees',
+        'fine',
+        'taxpayer_number'
     ];
 
     protected $dates = [
@@ -101,7 +108,6 @@ class BusinessDetail extends Model
     {
         return $this->belongsTo(BusinessNature::class);
     }
-
 
 
     public function objectTransaction(): BelongsTo
@@ -137,7 +143,7 @@ class BusinessDetail extends Model
 
     public function files(): MorphMany
     {
-        return $this->morphMany(File::class,'model');
+        return $this->morphMany(File::class, 'model');
     }
 
     public function rentAgreement(): Attribute
@@ -210,6 +216,12 @@ class BusinessDetail extends Model
                 ? $value->store('business_registration/' . Str::slug($this->attributes['name_en']), 'public')
                 : null
         );
+    }
+
+    public function getAreaAttribute(): float|int
+    {
+        return $this->attributes['length'] * $this->attributes['width'];
+
     }
 
 }

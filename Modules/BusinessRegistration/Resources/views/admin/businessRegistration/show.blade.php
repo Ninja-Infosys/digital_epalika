@@ -50,7 +50,6 @@
                     <div class="tab-content">
                         <div class="tab-pane show active" id="detail">
                             <div class="row">
-
                                 <div class="col-md-6">
                                     <div class="card mt-3">
                                         <div class="card-header">
@@ -299,9 +298,6 @@
                                         </div>
                                     </div>
                                 @endif
-
-
-
                                 <div class="col-md-6">
                                     <div class="card mt-3">
                                         <div class="card-header">
@@ -332,11 +328,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="row">
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
@@ -370,7 +363,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
@@ -388,7 +380,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
@@ -406,7 +397,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
@@ -424,7 +414,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-around">
@@ -441,78 +430,41 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 @foreach($businessDetail->files as $file)
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-header d-flex justify-content-around">
-                                            <p>अन्य </p>
-                                            <a href="{{route('admin.file-url-download', ['file_url'=>$file->getRawOriginal('file')])}}"
-                                               class="btn btn-xs btn-outline-primary">
-                                                <i class="fa fa-download"></i>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <img src="{{$file->file_url??''}}"
-                                                 alt=""
-                                                 style="max-width: 100%;height: 200px;object-fit: contain;">
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-header d-flex justify-content-around">
+                                                <p>अन्य </p>
+                                                <a href="{{route('admin.file-url-download', ['file_url'=>$file->getRawOriginal('file')])}}"
+                                                   class="btn btn-xs btn-outline-primary">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            </div>
+                                            <div class="card-body">
+                                                <img src="{{$file->file_url??''}}"
+                                                     alt=""
+                                                     style="max-width: 100%;height: 200px;object-fit: contain;">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
-                        {{--                        <div class="tab-pane" id="reg">--}}
-                        {{--                            <div class="d-flex justify-content-end mb-2">--}}
-                        {{--                                @can('businessRegistration_edit')--}}
-                        {{--                                    <a class="btn btn-primary btn-sm"--}}
-                        {{--                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM])}}">--}}
-                        {{--                                        <i class="fa fa-pen"></i>--}}
-                        {{--                                    </a>--}}
-                        {{--                                @endcan--}}
-                        {{--                                @can('businessRegistrationPrint_access')--}}
-                        {{--                                    <button class="btn btn btn-info mx-1" onclick="print('print1')"><i--}}
-                        {{--                                            class="fa fa-print"></i>--}}
-                        {{--                                    </button>--}}
-                        {{--                                @endcan--}}
+                        <div class="tab-pane" id="reg">
+                            <div class="d-flex justify-content-end mb-2 mt-2">
+                                @can('customs_edit')
+                                    <a href="{{route('admin.businessRegistration.add-data.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}"
+                                       class="btn btn-primary">
+                                        @if(!is_null($businessDetail->registration_no))
+                                            <i class="fa fa-edit"></i>
+                                        @else
+                                            <i class="fa fa-plus"></i>
+                                        @endif
+                                    </a>
+                                @endcan
+                            </div>
 
-
-                        {{--                            </div>--}}
-                        {{--                            <div class="font-black ckEditor" id="print1">--}}
-
-                        {{--                                {!!$printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)->first()->data--}}
-                        {{--                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::APPLICATION_FORM)--}}
-                        {{--                                   ?? ''!!}--}}
-
-                        {{--                            </div>--}}
-
-
-                        {{--                            <div class="d-flex justify-content-end mb-2 mt-2">--}}
-                        {{--                                @can('businessRegistration_edit')--}}
-                        {{--                                    <a class="btn btn-primary btn-sm"--}}
-                        {{--                                       href="{{route('admin.businessRegistration.edit.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}">--}}
-                        {{--                                        <i class="fa fa-pen"></i>--}}
-                        {{--                                    </a>--}}
-                        {{--                                @endcan--}}
-                        {{--                                @can('businessRegistrationPrint_access')--}}
-                        {{--                                    <button class="btn btn btn-info mx-1" onclick="print('print2')"><i--}}
-                        {{--                                            class="fa fa-print"></i>--}}
-                        {{--                                    </button>--}}
-                        {{--                                @endcan--}}
-                        {{--                                @can('customs_edit')--}}
-                        {{--                                    <a href="{{route('admin.businessRegistration.add-data.template',[$businessDetail,\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS])}}"--}}
-                        {{--                                       class="btn btn-primary">--}}
-                        {{--                                        <i class="fa fa-plus"></i>--}}
-                        {{--                                    </a>--}}
-                        {{--                                @endcan--}}
-                        {{--                            </div>--}}
-                        {{--                            <div class="font-black ckEditor" id="print2">--}}
-
-                        {{--                                {!! $printed_data->where('for', \Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)->first()->data--}}
-                        {{--                                   ?? $businessDetail->getSpecificTemplateData(\Modules\BusinessRegistration\Enums\TemplateTypeEnum::CUSTOMS)--}}
-                        {{--                                   ?? ''!!}--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
+                        </div>
 
                         {{--                        <div class="tab-pane" id="tax">--}}
                         {{--                            <div class="d-flex justify-content-end mb-2">--}}

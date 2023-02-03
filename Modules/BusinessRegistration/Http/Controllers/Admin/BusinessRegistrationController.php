@@ -113,16 +113,16 @@ class BusinessRegistrationController extends Controller
 
         $data = $request->validate([
             'application_fee' => ['required'],
+            'taxpayer_number' => ['required'],
             'registration_fee' => ['required'],
             'business_tax' => ['required'],
             'introduction_board_fees' => ['required'],
-            'fine' => ['required'],
+            'fine' => ['nullable'],
         ]);
 
         DB::transaction(function () use ($businessDetail, $data) {
             if (empty($businessDetail->registration_no)) {
                 $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;
-
                 $registrationNo = BusinessDetail::whereFiscalYearId($fiscal_year)
                         ->max('registration_no') + 1;
 
@@ -146,7 +146,6 @@ class BusinessRegistrationController extends Controller
     public function print(BusinessDetail $businessDetail)
     {
         $officeHeaders = OfficeHeader::get();
-//        $todayDate = $this->get_today_nepali_date();
         $businessDetail->load(['partners' => function ($query) {
                 $query->with('issueDistrict', 'district', 'localBody', 'province');
             }, 'businessNature', 'registeredBusinesses', 'province', 'district', 'localBody']
