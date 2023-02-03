@@ -32,7 +32,7 @@
                     <legend class="title"> विवरण</legend>
                     <div class="row">
                         <div class="col-md-4 mb-1">
-                            <label for="length" class="form-label"> लम्बाई <span
+                            <label for="length" class="form-label"> लम्बाई (फिट)<span
                                     class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mb-1">
-                            <label for="width" class="form-label"> चौडाई <span
+                            <label for="width" class="form-label"> चौडाई (फिट)<span
                                     class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input

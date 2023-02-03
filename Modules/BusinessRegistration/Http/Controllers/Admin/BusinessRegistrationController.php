@@ -44,11 +44,42 @@ class BusinessRegistrationController extends Controller
                 $query->with('issueDistrict', 'district', 'localBody');
             }, 'businessNature', 'registeredBusinesses']
         );
-//        $printed_data = PrintedData::where('business_detail_id', $businessDetail->id)
-//            ->latest()
-//            ->get();
 
         return view('businessregistration::admin.businessRegistration.show', compact('businessDetail'));
+    }
+
+    public function customData(Request $request, BusinessDetail $businessDetail)
+    {
+        $this->checkAuthorization('customs_edit');
+
+        $data = $request->validate([
+            'bill_no' => ['required'],
+            'bill_date_bs' => ['required'],
+            'bill_date_ad' => ['required'],
+            'other_file' => ['nullable','mimes:png,jpg,jpeg'],
+            'amount' => ['required'],
+            'taxpayer_number' => ['nullable'],
+        ]);
+
+
+        DB::transaction(function () use ($businessDetail, $data,$request) {
+            if (empty($businessDetail->registration_no)) {
+                $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;
+                $registrationNo = BusinessDetail::whereFiscalYearId($fiscal_year)
+                        ->max('registration_no') + 1;
+
+                $data = array_merge($data, [
+                    'fiscal_year_id' => $fiscal_year,
+                    'registration_no' => $registrationNo,
+                    'registration_date_en' => today()->toDateString(),
+                    'registration_date_ne' => $this->get_today_nepali_date()
+                ]);
+            }
+
+            $businessDetail->update($data);
+        });
+        toast('दस्तुर सफलतापूर्वक थपियो', 'success');
+        return back();
     }
 
     public function editData(BusinessDetail $businessDetail, TemplateTypeEnum $templateTypeEnum): Factory|View|Application
@@ -60,8 +91,6 @@ class BusinessRegistrationController extends Controller
             ->where('for', $templateTypeEnum)
             ->sortByDesc('created_at')
             ->first();
-
-
         return view('businessregistration::admin.businessRegistration.edit', compact('businessDetail', 'templateTypeEnum', 'printed_data'));
     }
 
@@ -107,41 +136,7 @@ class BusinessRegistrationController extends Controller
         return view('businessregistration::admin.businessRegistration.customs.index', compact('businessDetail', 'templateTypeEnum'));
     }
 
-    public function customData(Request $request, BusinessDetail $businessDetail, $type): RedirectResponse
-    {
-        $this->checkAuthorization('customs_edit');
 
-        $data = $request->validate([
-            'application_fee' => ['required'],
-            'taxpayer_number' => ['required'],
-            'registration_fee' => ['required'],
-            'business_tax' => ['required'],
-            'introduction_board_fees' => ['required'],
-            'fine' => ['nullable'],
-        ]);
-
-        DB::transaction(function () use ($businessDetail, $data) {
-            if (empty($businessDetail->registration_no)) {
-                $fiscal_year = OfficeSetting::first()->fiscal_year_id ?? null;
-                $registrationNo = BusinessDetail::whereFiscalYearId($fiscal_year)
-                        ->max('registration_no') + 1;
-
-                $data = array_merge($data, [
-                    'fiscal_year_id' => $fiscal_year,
-                    'registration_no' => $registrationNo,
-                    'registration_date_en' => today()->toDateString(),
-                    'registration_date_ne' => $this->get_today_nepali_date()
-                ]);
-            }
-
-            $businessDetail->update($data);
-        });
-
-
-        toast('दस्तुर सफलतापूर्वक थपियो', 'success');
-
-        return back();
-    }
 
     public function print(BusinessDetail $businessDetail)
     {
