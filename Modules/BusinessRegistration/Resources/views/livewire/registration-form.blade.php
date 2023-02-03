@@ -394,7 +394,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-1">
-                                <label for="form.partners.{{$key}}.gender" class="form-label">लिङ्ग</label>
+                                <label for="form.partners.{{$key}}.gender" class="form-label">लिङ्ग
+                                    <span
+                                        class="text-danger">*</span>
+                                </label>
                                 <select
                                     class="form-select @error('form.partners.'.$key.'.gender') is-invalid @enderror"
                                     id="form.partners.{{$key}}.gender" wire:model="form.partners.{{$key}}.gender">
@@ -410,7 +413,10 @@
                             </div>
                             <div class="col-md-4 mb-1">
                                 <label for="form.partners.{{$key}}.education_qualification" class="form-label">शैक्षिक
-                                    योग्यता</label>
+                                    योग्यता
+                                    <span
+                                        class="text-danger">*</span>
+                                </label>
                                 <select
                                     class="form-select @error('form.partners.'.$key.'.education_qualification') is-invalid @enderror"
                                     id="form.partners.{{$key}}.education_qualification"
