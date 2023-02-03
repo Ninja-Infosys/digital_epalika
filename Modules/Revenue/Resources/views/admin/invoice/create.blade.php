@@ -138,7 +138,7 @@
                                 @enderror
                             </div>
 
-                            @livewire('revenue::invoice-form-livewire', ['formDetail'=>old('particulars')])
+                            @livewire('revenue::invoice-form-livewire', ['formDetail'=>old('particulars',[])])
 
                             <div class="col-md-12 mb-2">
                                 <label for="remarks" class="form-label">कैफियत *</label>
