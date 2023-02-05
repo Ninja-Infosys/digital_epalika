@@ -15,22 +15,21 @@
                         <li class="breadcrumb-item active">नक्सा</li>
                     </ol>
                 </div>
-                <h4 class="page-title">नक्सा </h4>
+                <h4 class="page-title">{{$applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित'}}</h4>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">नक्सा सूची</h4>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">{{$applicationFormTypeEnum->value == \Modules\EMap\Enums\ApplicationFormTypeEnum::MAP_REGISTRATION->value ? 'नक्सा दर्ता' : 'नक्सा प्रमाणित'}}</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    @includeIf('inc.filter_form')
-                        <table class="table table-sm mb-0 table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th scope="col">क्र.सं.</th>
@@ -59,6 +58,9 @@
                                     </td>
                                 </tr>
                             @empty
+                                <tr>
+                                    <td class="text-center" colspan="7">तालिकामा कुनै डाटा उपलब्ध छैन !!!</td>
+                                </tr>
                             @endforelse
                             </tbody>
                         </table>
@@ -67,7 +69,5 @@
                     {{ $maps->onEachSide(config('app.pagination_count'))->links() }}
                 </div>
             </div>
-        </div>
-    </div>
 @endsection
 

@@ -37,7 +37,7 @@
             @can('businessNature_access')
                 <li class="{{request()->is('admin/businessRegistration/setting/businessNature/*') ? 'active' : ''}}">
                     <a href="{{route('admin.businessRegistration.setting.businessNature.index')}}">
-                        <span>  व्यवसाय को प्रकृति </span>
+                        <span>  व्यवसायको प्रकृति </span>
                     </a>
                 </li>
             @endcan

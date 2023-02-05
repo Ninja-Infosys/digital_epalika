@@ -8,19 +8,19 @@
     <li class="{{request()->is('admin/emap/organization') ? 'active' : ''}}">
         <a href="{{route('emap.admin.organization.index')}}">
             <i class="fa fa-building"></i>
-            <span>दर्ता भएका संगठन विवरण</span>
+            <span>दर्ता भएका संगठनहरु</span>
         </a>
     </li>
 @endcan
 <li class="{{request()->is('admin/emap/organization/reports') ? 'active' : ''}}">
     <a href="{{route('emap.admin.report.report')}}">
-        <i class="fa fa-building"></i>
+        <i class="fa fa-clipboard-list"></i>
         <span>नक्सा दर्ता रिपोर्ट</span>
     </a>
 </li>
 
-<li class="">
-    <a href="#sidebarMaptype"
+<li class="{{request()->is('admin/emap/map/mapApply*') ? 'active' : ''}}">
+    <a href="#sidebarMaptype" {{request()->is('admin/emap/map/mapApply*') ? 'aria-expanded=true' : ''}}
        data-bs-toggle="collapse">
         <i class="fa fa-map"></i>
         <span>नक्सा दर्ता प्रमाणित</span>
@@ -48,14 +48,6 @@
         </ul>
     </div>
 </li>
-@can('mapFee_access')
-    <li class="{{request()->is('admin/emap/setting/mapFee*') ? 'active' : ''}}">
-        <a href="{{route('emap.admin.mapFee.index')}}">
-            <i class="fa fa-file"></i>
-            <span>नक्शा दस्तुर</span>
-        </a>
-    </li>
-@endcan
 <li class="{{request()->is('admin/emap/setting/*') ? 'active' : ''}}">
     <a href="#sidebarEMapSetting"
        {{request()->is('admin/emap/setting/*') ? 'aria-expanded=true' : ''}}
@@ -69,6 +61,13 @@
     <div class="collapse {{request()->is('admin/emap/setting/*') ? 'show' : ''}}"
          id="sidebarEMapSetting">
         <ul class="nav-second-level">
+            @can('mapFee_access')
+                <li class="{{request()->is('admin/emap/setting/mapFee') ? 'active' : ''}}">
+                    <a href="{{route('emap.admin.mapFee.index')}}">
+                        <span>नक्शा दस्तुर</span>
+                    </a>
+                </li>
+            @endcan
             @can('mapSetting_access')
                 <li class="{{request()->is('admin/emap/setting/mapSetting') ? 'active' : ''}}">
                     <a href="{{route('emap.admin.mapSetting.index')}}">

@@ -38,7 +38,7 @@
                           enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-6 mb-2">
                                 <label for="title" class="form-label">भिडियो शिर्षक </label>
                                 <input
                                     type="text"
@@ -52,14 +52,14 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12 mb-2">
-                                <label for="video" class="form-label">भिडियो * (कृपया MP4 भिडियो उपलोड गर्नुहोला)</label>
+                            <div class="col-md-6 mb-2">
+                                <label for="video" class="form-label">भिडियो * </label>
                                 <input type="hidden" name="video" id="video">
                                 @error('video')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                                 <button type="button" class="btn btn-outline-primary form-control" id="browseFile">
-                                    <i class="fa fa-cloud-upload-alt"></i> Upload File
+                                    <i class="fa fa-cloud-upload-alt"></i> कृपया MP4 भिडियो उपलोड गर्नुहोला
                                 </button>
                                 <div class="progress mt-3" style="display: none;height: 25px">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated"

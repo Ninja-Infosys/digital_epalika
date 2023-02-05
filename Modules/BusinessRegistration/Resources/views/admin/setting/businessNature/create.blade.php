@@ -7,21 +7,18 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="{{route('admin.dashboard')}}">
-                                <i class="fa fa-home"></i> गृहपृष्ठ
+                            <a href="{{route('admin.businessRegistration.dashboard')}}">
+                                <i class="fa fa-home"></i> व्यवसाय दर्ता
                             </a>
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="{{route('admin.businessRegistration.setting.businessNature.index')}}">व्यवसाय को प्रकृति </a>
-                        </li>
-                        <li class="breadcrumb-item active">नयाँ व्यवसाय को प्रकृति थप्नुहोस्</li>
+                        <li class="breadcrumb-item">सेटिङ</li>
+                        <li class="breadcrumb-item active">व्यवसाय को प्रकृति थप्नुहोस्</li>
                     </ol>
                 </div>
-                <h4 class="page-title">व्यवसाय को प्रकृति </h4>
+                <h4 class="page-title">व्यवसाय को प्रकृति</h4>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">

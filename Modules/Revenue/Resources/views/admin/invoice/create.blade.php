@@ -34,16 +34,14 @@
                     <form action="{{route('admin.revenue.invoice.store')}}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-4 mb-2">
                                 <x-date-input-component
                                     nameNe="payment_date" labelNe="मिति *"
                                     nameEn="payment_date_en" labelEn="Date"
                                 />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-2">
-                                <label for="tax_payer_id" class="form-label">करदाता</label>
+                            <div class="col-md-4 mb-2">
+                                <label for="tax_payer_id" class="form-label">करदाता *</label>
                                 <select
                                     name="tax_payer_id"
                                     class="form-select @error('tax_payer_id') is-invalid @enderror"
@@ -62,8 +60,8 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-2">
-                                <label for="fiscal_year_id" class="form-label">आर्थिक वर्ष</label>
+                            <div class="col-md-4 mb-2">
+                                <label for="fiscal_year_id" class="form-label">आर्थिक वर्ष *</label>
                                 <select
                                     name="fiscal_year_id"
                                     class="form-select @error('fiscal_year_id') is-invalid @enderror"
@@ -72,7 +70,7 @@
                                     @foreach($fiscalYears as $fiscalYear)
                                         <option
                                             value="{{$fiscalYear->id}}"
-                                            {{old('fiscal_year_id') == $fiscalYear->id ? 'selected' : ''}}
+                                            {{old('fiscal_year_id', officeSetting()->fiscal_year_id) == $fiscalYear->id ? 'selected' : ''}}
                                         >
                                             {{$fiscalYear->title}}
                                         </option>
@@ -83,7 +81,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-2 d-flex gap-1">
-                                <div>
+                                <div class="col">
                                     <label for="payment_method" class="form-label">भुक्तानी बिधि</label>
                                     <select
                                         name="payment_method"
@@ -98,8 +96,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-
-                                <div id="showIfBank" class="d-none">
+                                <div id="showIfBank" class="d-none col-md-6">
                                     <label for="reference_code" class="form-label">Reference Code</label>
                                     <input
                                         type="text"
@@ -107,41 +104,32 @@
                                         value="{{old('reference_code')}}"
                                         class="form-control @error('reference_code') is-invalid @enderror"
                                         id="reference_code"
-                                        placeholder="Reference Code"
-                                    />
+                                        placeholder="Reference Code"/>
                                     @error('reference_code')
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-
                             </div>
                             <div class="col-md-6 mb-2">
-                                <label for="ward" class="form-label">वार्ड *</label>
+                                <label for="ward" class="form-label">वार्ड</label>
                                 <select
                                     name="ward"
                                     class="form-select @error('ward') is-invalid @enderror"
                                     id="ward" data-toggle="select2" data-width="100%">
                                     <option value="">--- छान्नुहोस् ---</option>
-
                                     @foreach(get_local_bodies(localBodyId: $officeSetting->local_body_id)->ward_no as $ward)
-                                        <option
-                                            value="{{$ward}}"
-                                            {{old('ward') == $ward ? 'selected' : ''}}
-                                        >
+                                        <option value="{{$ward}}" {{old('ward') == $ward ? 'selected' : ''}}>
                                             {{$ward}}
                                         </option>
-
                                     @endforeach
                                 </select>
                                 @error('ward')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-
                             @livewire('revenue::invoice-form-livewire', ['formDetail'=>old('particulars',[])])
-
                             <div class="col-md-12 mb-2">
-                                <label for="remarks" class="form-label">कैफियत *</label>
+                                <label for="remarks" class="form-label">कैफियत</label>
                                 <textarea class="form-control @error('remarks') is_invalid @enderror" name="remarks"
                                           id="remarks" cols="30" rows="5">{{old('remarks')}}</textarea>
                                 @error('remarks')
@@ -149,13 +137,10 @@
                                 @enderror
                             </div>
                         </div>
-
                         <button type="submit" class="btn btn-primary">
                             Save
                         </button>
                     </form>
-
-
                 </div>
             </div>
         </div>

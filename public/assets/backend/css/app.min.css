@@ -1861,8 +1861,8 @@ body {
     margin-left: 240px;
     overflow: hidden;
     padding: 0 15px 65px 15px;
-    min-height: 80vh;
-    margin-top: 80px
+    min-height: 60vh;
+    margin-top: 60px
 }
 
 .left-side-menu {
@@ -2963,13 +2963,13 @@ body[data-layout-mode=two-column][data-topbar-color=dark][data-leftbar-color=bra
 .page-title-box .page-title {
     font-size: 1.25rem;
     margin: 0;
-    line-height: 75px;
+    line-height: 65px;
     color: var(--ct-gray-900)
 }
 
 .page-title-box .page-title-right {
     float: right;
-    margin-top: 22px
+    margin-top: 20px
 }
 
 .page-title-box .breadcrumb {

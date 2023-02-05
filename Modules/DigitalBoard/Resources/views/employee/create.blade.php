@@ -42,7 +42,7 @@
                                 <strong>कर्मचारी विवरण </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="name" class="form-label">नाम *</label>
                                     <input
                                         type="text"
@@ -56,7 +56,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="department" class="form-label">समूह </label>
                                     <input
                                         type="text"
@@ -70,7 +70,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="designation" class="form-label">पद </label>
                                     <input
                                         type="text"
@@ -84,10 +84,10 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="email" class="form-label">इमेल </label>
                                     <input
-                                        type="text"
+                                        type="email"
                                         name="email"
                                         value="{{old('email')}}"
                                         class="form-control  @error('email') is-invalid @enderror"
@@ -98,7 +98,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="phone" class="form-label">फोन </label>
                                     <input
                                         type="text"
@@ -112,7 +112,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="photo" class="form-label">फोटो </label>
                                     <input
                                         type="file"
@@ -125,7 +125,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="position" class="form-label">मर्यादाक्रम </label>
                                     <input
                                         type="text"
@@ -139,7 +139,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="is_employee" class="form-label">प्रकार छान्नुहोस *</label>
 
                                     <select class="form-control @error('is_employee') is-invalid @enderror"
@@ -152,7 +152,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="show_to_index" class="form-label">गृहपृष्ठमा देखाउनुहोस् *</label>
 
                                     <select class="form-control @error('show_to_index') is-invalid @enderror"
@@ -166,7 +166,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-4 mb-2">
                                     <label for="show_to_mobile_app" class="form-label">मोबाइलमा देखाउनुहोस् *</label>
 
                                     <select class="form-control @error('show_to_mobile_app') is-invalid @enderror"

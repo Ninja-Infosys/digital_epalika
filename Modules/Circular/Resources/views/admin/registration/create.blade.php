@@ -42,7 +42,7 @@
                                 <strong> विवरण </strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="registration_no" class="form-label">दर्ता न. *</label>
                                     <input
                                         type="text"
@@ -56,16 +56,16 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <x-date-input-component
-                                        nameNe="registration_date" labelNe="दर्ता  मिति *"
+                                        nameNe="registration_date" labelNe="दर्ता मिति *"
                                         nameEn="en_registration_date" labelEn="Registration Date"
                                     />
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="letter_number" class="form-label">पत्र संख्या</label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="letter_number"
                                         value="{{old('letter_number')}}"
                                         class="form-control @error('letter_number') is-invalid @enderror"
@@ -76,7 +76,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <x-date-input-component
                                         nameNe="letter_date" labelNe="पत्रको मिति *"
                                         nameEn="en_letter_date" labelEn="Letter Date"
@@ -129,7 +129,7 @@
                                 <strong> बुझिलिनेको बिवरण</strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="receiver_name" class="form-label">नाम * </label>
                                     <input
                                         type="text"
@@ -143,7 +143,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="phone" class="form-label">सम्पर्क नम्बर </label>
                                     <input
                                         type="text"
@@ -157,7 +157,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="signature_image" class="form-label">सहि </label>
                                     <input
                                         type="file"
@@ -169,7 +169,7 @@
                                     <div class="invalid-feedback">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <x-date-input-component
                                         nameNe="date" labelNe="मिति"
                                         nameEn="en_date" labelEn=" Date"
@@ -184,7 +184,7 @@
                                 <strong>डकुमेन्ट राख्नुहोस्</strong>
                             </legend>
                             <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-3 mb-2">
                                     <label for="documents" class="form-label">डकुमेन्ट * </label>
                                     <input
                                         type="file"
