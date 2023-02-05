@@ -19,7 +19,7 @@ class BusinessRenew extends Model
 
     protected $fillable = [
         'fiscal_year_id',
-        'business_id',
+        'business_detail_id',
         'business_renew_date',
         'business_renew_date_en',
         'date_to_be_maintained',
