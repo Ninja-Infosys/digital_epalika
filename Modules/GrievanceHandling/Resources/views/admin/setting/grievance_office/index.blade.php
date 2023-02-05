@@ -25,20 +25,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">शाखा/कार्यालय सूची</h4>
-                        @can('grievanceType_create')
-                            <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ शाखा/कार्यालय थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">शाखा/कार्यालयहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('grievanceType_create')
+                                <a href="{{route('admin.grievanceHandling.setting.grievanceOffice.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @include('inc.filter_form')
-                        <table class="table table-sm mb-0 table-striped table-hover mt-2">
+                        <table class="table table-sm mb-0 table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>

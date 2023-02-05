@@ -23,9 +23,10 @@ class StoreInvoiceRequest extends FormRequest
             "ward" => ['nullable', 'string'],
             "particulars" => ['required', 'array'],
             "particulars.*.revenue" => ['required', 'string'],
-            "particulars.*.quantity" => ['required'],
-            "particulars.*.rate" => ['required'],
-            "particulars.*.fine" => ['nullable'],
+            "particulars.*.quantity" => ['required', 'integer', 'min:0'],
+            "particulars.*.rate" => ['required', 'integer', 'min:0'],
+            "particulars.*.due" => ['nullable', 'integer', 'min:0'],
+            "particulars.*.fine" => ['nullable', 'integer', 'min:0'],
             "particulars.*.remarks" => ['nullable'],
             "remarks" => ['nullable']
         ];

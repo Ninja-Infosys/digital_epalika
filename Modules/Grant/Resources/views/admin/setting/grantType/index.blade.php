@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item active">अनुदान प्रकार</li>
                     </ol>
                 </div>
-                <h4 class="page-title">अनुदान व्यवस्थापन</h4>
+                <h4 class="page-title">अनुदान प्रकार</h4>
             </div>
         </div>
     </div>
@@ -22,25 +22,25 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <h4 class="header-title">अनुदान प्रकारहरु</h4>
-                        @can('grantType_access')
-                            <a href="{{route('admin.grant.setting.grantType.create')}}"
-                               class="btn btn-sm btn-outline-primary">
-                                <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्
-                            </a>
-                        @endcan
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="header-title mb-0">अनुदान प्रकारहरु</h4>
+                        <div class="d-flex flex-wrap align-items-center">
+                            @includeIf('inc.filter_form')
+                            @can('grantType_access')
+                                <a href="{{route('admin.grant.setting.grantType.create')}}" class="btn btn-sm btn-outline-primary waves-effect waves-light">
+                                    <i class="fa fa-plus-circle"></i> नयाँ थप्नुहोस्</a>
+                            @endcan
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        @includeIf('inc.filter_form')
-                        <table class="table table-sm table-striped table-hover mt-3">
+                        <table class="table table-sm table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>क्र.स</th>
                                 <th>अनुदान प्रकार</th>
-                                <th>Action</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>

@@ -31,7 +31,7 @@ return new class extends Migration {
     public function down()
     {
         Schema::table('business_details', function (Blueprint $table) {
-            $table->dropColumn('bill_no', 'bill_date_bs', 'bill_date_ad', 'file', 'amount', 'taxpayer_number');
+            $table->dropColumn('bill_no', 'bill_date_bs', 'bill_date_ad', 'other_file', 'amount', 'taxpayer_number');
         });
     }
 };
