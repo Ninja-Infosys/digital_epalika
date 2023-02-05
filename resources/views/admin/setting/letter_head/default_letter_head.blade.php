@@ -5,9 +5,13 @@
             <img alt="Office Logo" src="{{asset('assets/backend/images/np.png')}}" style="height:80px; width:90px" />
         </td>
         <td style="width: 50%; text-align: center">
-            <span style="font-size:16px"><strong>{{officeSetting()->name}}</strong></span><br />
-            <span style="font-size:14px"><strong>नगरकार्यपालिकाको कार्यालय</strong></span><br />
-            {{officeSetting()->site_address}}
+            @foreach(get_office_header() as $officeHeader)
+                <span
+                    style="font-size:{{$loop->first ? 16 : 14}}px"><strong>{{$officeHeader->title}}</strong></span>
+                @if(!$loop->last)
+                    <br/>
+                @endif
+            @endforeach
         </td>
         <td style="width: 25%">&nbsp;</td>
     </tr>
