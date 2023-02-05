@@ -11,7 +11,8 @@
                 documentTitle: '{{$title}}',
                 showModal: true,
                 targetStyles: ['*'],
-                css: '{{asset('assets/backend/css/print.css')}}',
+                css: ['{{asset('assets/backend/css/bootstrap.min.css')}}','{{asset('assets/backend/css/app.min.css')}}'],
+                scanStyles: false,
                 honorMarginPadding: false,
                 modalMessage: 'तपाईंको कागजात छाप्नको लागि तयार हुँदैछ।'
             })
