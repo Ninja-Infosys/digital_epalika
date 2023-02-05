@@ -59,7 +59,7 @@
     </style>
 </head>
 <body style="margin: 0;padding: 0;">
-<div style="background-image: url({{asset('assets/backend/background.jpg')}}); padding: 0; background-repeat: no-repeat;background-size: 100%;height: 1400px;">
+<div style="background-image: url({{asset('assets/backend/back1.png')}}); padding: 0; background-repeat: no-repeat;background-size: 100%;height: 1400px;">
     <div class="row" style="padding-top: 110px;">
         <div class="col-md-3">
             <img src="{{$officeSetting->logo_url}}" alt="logo" height="80" class="left_image">
