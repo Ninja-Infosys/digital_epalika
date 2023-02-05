@@ -34,7 +34,7 @@
                             @endcan
                             <x-print-button
                                 target-element="report-table"
-                                title="आम्दानी रसिद"
+                                title="{{$invoice->invoice_no}}"
                             />
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <div class="bg-white" id="report-table">
                         <div>
-                                <div class="container-fluid mb-1 d-lg-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center">
                                     <span>
                                         <img alt="nepal-government-logo"
                                              class="logo img-responsive center-block d-block mx-auto"
@@ -127,7 +127,7 @@
                         </div>
                         <hr class="dashed">
                         <div>
-                            <div class="container-fluid mb-1 d-lg-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <span>
                                     <img alt="nepal-government-logo"
                                          class="logo img-responsive center-block d-block mx-auto"
