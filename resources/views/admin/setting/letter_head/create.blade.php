@@ -35,7 +35,7 @@
                                 <textarea name="header"
                                           id="header"
                                           cols="30" rows="10"
-                                          class="form-control ckEditor @error('header') is-invalid @enderror">{{old('header',auth()->user()->letterHead->header??'')}}</textarea>
+                                          class="form-control ckEditor @error('header') is-invalid @enderror">{{old('header',auth()->user()->letterHead->header??letterHead())}}</textarea>
                                 @error('header')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -45,7 +45,7 @@
                                 <textarea name="letter_head"
                                           id="letter_head"
                                           cols="30" rows="10"
-                                          class="form-control ckEditor @error('letter_head') is-invalid @enderror">{{old('letter_head',auth()->user()->letterHead->letter_head??'')}}</textarea>
+                                          class="form-control ckEditor @error('letter_head') is-invalid @enderror">{{old('letter_head',auth()->user()->letterHead->letter_head??letterHead('letter_head'))}}</textarea>
                                 @error('letter_head')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
