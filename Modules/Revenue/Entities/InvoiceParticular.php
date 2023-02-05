@@ -39,7 +39,8 @@ class InvoiceParticular extends Model
 
     protected $appends = [
         'grand_total_amount',
-        'amount_without_fine'
+        'amount_without_fine',
+        'due_amount'
     ];
 
     public function invoice(): BelongsTo
@@ -49,11 +50,16 @@ class InvoiceParticular extends Model
 
     public function getGrandTotalAmountAttribute()
     {
-        return ($this->quantity * $this->rate) + $this->fine;
+        return $this->getAmountWithoutFineAttribute() + $this->getAmountWithoutFineAttribute() * $this->due + $this->fine;
+    }
+
+    public function getDueAmountAttribute(): float|int
+    {
+        return $this->getAmountWithoutFineAttribute() * $this->due;
     }
 
     public function getAmountWithoutFineAttribute(): float|int
     {
-        return ($this->fine * $this->quantity);
+        return ($this->rate * $this->quantity);
     }
 }
