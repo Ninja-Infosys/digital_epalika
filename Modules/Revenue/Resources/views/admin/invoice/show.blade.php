@@ -60,16 +60,16 @@
                                     रसिद नं.: {{$invoice->invoice_no}}
                                 </span>
                                 </div>
-                                <div style="margin-bottom: 20px; ">
+                                <div>
                                     <h3 class="text-center">आम्दानी रसिद</h3>
                                     <div class="d-flex justify-content-between">
-                                        <span>करदाताको नाम: {{$invoice->name}}</span>
-                                        <span>ठेगाना: {{$invoice->address}}</span>
+                                        <p>करदाताको नाम: {{$invoice->name}}</p>
+                                        <p>ठेगाना: {{$invoice->address}}</p>
                                         <span>करदाताको नं: {{$invoice->taxPayer->registration_no}}</span>
                                         <span>मिति: <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></span>
                                     </div>
                                     <div class="row mt-2">
-                                        <div class="col-8">
+                                        <div class="col-md-8">
                                             <table class="table table-bordered table-sm">
                                                 <thead>
                                                 <tr>
@@ -121,7 +121,7 @@
                                                 </tfoot>
                                             </table>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-md-4">
                                             <ul class="list-group">
                                                 <li class="list-group-item">
                                                     कर तिरौ, सभ्य नागरिक बनौ ।
@@ -247,7 +247,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
