@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active"> ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट</li>
+                        <li class="breadcrumb-item active"> उ.स. र निर्माण व्यवसायीबाट भएको कार्य विवरण रिपोर्ट</li>
                     </ol>
                 </div>
-                <h4 class="page-title"> ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट </h4>
+                <h4 class="page-title"> उ.स. र निर्माण व्यवसायीबाट भएको कार्य विवरण रिपोर्ट</h4>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <h4 class="header-title">ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट</h4>
+                        <h4 class="header-title"> उ.स. र निर्माण व्यवसायीबाट भएको कार्य विवरण रिपोर्ट</h4>
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-sm btn-outline-secondary mx-1 waves-effect waves-light collapsed" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseFilterForm" aria-expanded="false"
@@ -32,7 +32,7 @@
                             </button>
                             <x-print-button
                                 target-element="report-table"
-                                title="ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट"
+                                title=" उ.स. र निर्माण व्यवसायीबाट भएको कार्य विवरण रिपोर्ट"
                             />
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="collapse show pb-2 border-bottom border-secondary" id="collapseFilterForm">
                         <form id="report-filter-form"
-                              data-bs-url="{{route('admin.plan.report.get-contract-projects')}}">
+                              data-bs-url="{{route('admin.plan.report.get-work-detail-report')}}">
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <x-date-input-component
@@ -180,29 +180,16 @@
                             <thead class="align-middle">
                             <tr>
                                 <th rowspan="2">क्र.सं.</th>
-                                <th rowspan="2">ठेक्का नं. (आ.व. सहित )</th>
-                                <th rowspan="2">निर्माण व्यवसायीको नाम</th>
-                                <th rowspan="2">कामको विवरण </th>
-                                <th rowspan="2">ठेक्का अंक भ्याटसमेत</th>
-                                <th rowspan="2">भुक्तानी भ्याटसमेत</th>
-                                <th rowspan="2">शुरु गर्नु पर्ने मिति</th>
-                                <th rowspan="2">सम्पन्न गर्नु पर्ने मिति</th>
-                                <th rowspan="2">सम्पन्न अबस्था</th>
-                                <th colspan="2">म्याद थप</th>
-                                <th colspan="2">भेरिएशन(भ्याटसमेत)</th>
-                                <th rowspan="2">मूल्य समायोजन भुक्तानी भ्याटसमेत</th>
-                                <th rowspan="2">कार्य सम्पादन जमानीको म्याद</th>
-                                <th rowspan="2">विमाको म्याद</th>
-                                <th colspan="2">खर्च(भेरिएअसन, मूल्य समायोजन र भ्याटसमेत)</th>
-                                <th rowspan="2">एजबिल्ट नक्सा पेश भए नभएको</th>
+                                <th rowspan="2">कार्यक्रमको नाम</th>
+                                <th rowspan="2">निर्माणमा भएको कुल खर्च</th>
+                                <th colspan="2">उपभोक्ता समितिबाट</th>
+                                <th colspan="2">निर्माण ब्यबसायबाट</th>
                             </tr>
                             <tr>
-                                <th>पटक</th>
-                                <th>महिना</th>
-                                <th>प्रतिशत</th>
+                                <th>संख्या</th>
                                 <th>रकम</th>
-                                <th>यस वर्ष</th>
-                                <th>यस वर्ष सम्म</th>
+                                <th>संख्या</th>
+                                <th>रकम</th>
                             </tr>
                             </thead>
                         </table>
