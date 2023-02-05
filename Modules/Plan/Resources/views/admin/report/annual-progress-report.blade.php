@@ -166,7 +166,7 @@
                         </form>
                     </div>
                     <div class="table-responsive">
-                        <div id="report-table d-none">
+                        <div id="report-table" class="d-none">
                             {!! letterHead() !!}
                             <table class="table table-stripped table-bordered">
                                 <thead>
