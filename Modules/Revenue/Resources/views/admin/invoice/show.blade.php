@@ -40,14 +40,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="report-table">
+                    <div class="bg-white" id="report-table">
                         <div>
-                            <div class="mb-2">
-                                <style>
-                                    .dashed {
-                                        border-top: 2px dashed #999;
-                                    }
-                                </style>
                                 <div class="container-fluid mb-1 d-lg-flex justify-content-between align-items-center">
                                     <span>
                                         <img alt="nepal-government-logo"
@@ -60,15 +54,14 @@
                                     रसिद नं.: {{$invoice->invoice_no}}
                                 </span>
                                 </div>
-                                <div>
                                     <h3 class="text-center">आम्दानी रसिद</h3>
                                     <div class="d-flex justify-content-between">
+                                        <p>करदाता नं: {{$invoice->taxPayer->registration_no}}</p>
                                         <p>करदाताको नाम: {{$invoice->name}}</p>
                                         <p>ठेगाना: {{$invoice->address}}</p>
-                                        <span>करदाताको नं: {{$invoice->taxPayer->registration_no}}</span>
-                                        <span>मिति: <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></span>
+                                        <p>मिति: <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
                                     </div>
-                                    <div class="row mt-2">
+                                    <div class="row mt-1">
                                         <div class="col-md-8">
                                             <table class="table table-bordered table-sm">
                                                 <thead>
@@ -88,15 +81,15 @@
                                                             <x-convert-to-unicode id="total__customer_quantity{{$key}}"
                                                                                   number="{{$particular->quantity}}"/>
                                                         </td>
-                                                        <td>
+                                                        <td>रु.
                                                             <x-convert-to-unicode id="total__customer_rate{{$key}}"
                                                                                   number="{{$particular->rate}}"/>
                                                         </td>
-                                                        <td>
+                                                        <td>रु.
                                                             <x-convert-to-unicode id="total__customer_fine{{$key}}"
                                                                                   number="{{$particular->fine}}"/>
                                                         </td>
-                                                        <td>
+                                                        <td>रु.
                                                             <x-convert-to-unicode id="total__customer_grand{{$key}}"
                                                                                   number="{{$particular->grand_total_amount}}"/>
                                                         </td>
@@ -106,7 +99,7 @@
                                                 <tfoot>
                                                 <tr>
                                                     <th colspan="4" class="text-right">जम्मा</th>
-                                                    <td>
+                                                    <td>रु.
                                                         <x-convert-to-unicode id="total__customer_sum"
                                                                               number="{{$invoice->invoice_particulars_sum_total}}"/>
                                                     </td>
@@ -122,31 +115,15 @@
                                             </table>
                                         </div>
                                         <div class="col-md-4">
-                                            <ul class="list-group">
-                                                <li class="list-group-item">
-                                                    कर तिरौ, सभ्य नागरिक बनौ ।
-                                                </li>
-                                                <li class="list-group-item">
-                                                    समय मै कर तिरौ, जरिवानाबाट बचौ ।
-                                                </li>
-                                            </ul>
-                                            कर सम्बन्धि बिस्तृत जानकारीको लागि राजस्व प्रशासन शाखामा सम्पर्क राख्नु होला । <strong>कर तिर्नु भएकोमा धन्यबाद ।</strong>
+                                            <p>कर तिरौ, सभ्य नागरिक बनौ ।</p>
+                                            <p>समय मै कर तिरौ, जरिवानाबाट बचौ ।</p>
+                                            <p>कर सम्बन्धि बिस्तृत जानकारीको लागि राजस्व प्रशासन शाखामा सम्पर्क राख्नु होला । <strong>कर तिर्नु भएकोमा धन्यबाद ।</strong></p>
                                         </div>
                                     </div>
-                                </div>
-
                                 <div class="d-flex justify-content-between">
                                     <div class="dashed">बुझाउनेको सहि</div>
                                     <div class="dashed">बुझिलिनेको सहि</div>
                                 </div>
-                                <p class="text-center">
-                                    तयार गर्ने: {{$invoice->user->name}}  प्रिन्ट: <x-ad-to-bs id="print_cstomer" :ad-date="now()"></x-ad-to-bs> {{now()->format('h:i:s A')}}
-                                    <br>
-                                    पुनः राजस्व बुझुना आउदा यो रसिद लिएर आउनु होला धन्यवाद
-                                </p>
-
-                            </div>
-
                         </div>
                         <hr class="dashed">
                         <div>
@@ -163,86 +140,70 @@
                                 </span>
                             </div>
                             <div>
-                                <h3 class="text-center">
-                                    आम्दानी रसिद
-                                </h3>
-                                <div>
-                                    <b>करदाताको नाम</b>: {{$invoice->name}} | <b>ठेगाना</b>: {{$invoice->address}} |
-                                    <b>करदाताको नं</b>: {{$invoice->taxPayer->registration_no}} |
-                                    <b>मिति</b>:
-                                    <x-ad-to-bs id="payment_date_office"
-                                                :ad-date="$invoice->payment_date_ad"></x-ad-to-bs>
+                                <h3 class="text-center">आम्दानी रसिद</h3>
+                                <div class="d-flex justify-content-between">
+                                    <p>करदाता नं: {{$invoice->taxPayer->registration_no}}</p>
+                                    <p>करदाताको नाम: {{$invoice->name}}</p>
+                                    <p>ठेगाना: {{$invoice->address}}</p>
+                                    <p>मिति: <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
                                 </div>
-                                <div>
-                                    <table class="table table-bordered table-sm">
-                                        <thead>
+                                <table class="table table-bordered table-sm mt-1">
+                                    <thead>
+                                    <tr>
+                                        <th>बिषय</th>
+                                        <th>परिमाण</th>
+                                        <th>दर</th>
+                                        <th>जरिवाना</th>
+                                        <th>जम्मा</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($invoice->invoiceParticulars as $key=>$particular)
                                         <tr>
-                                            <th>बिषय</th>
-                                            <th>परिमाण</th>
-                                            <th>दर</th>
-                                            <th>जरिवाना</th>
-                                            <th>जम्मा</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($invoice->invoiceParticulars as $key=>$particular)
-                                            <tr>
-                                                <td>{{$particular->revenue}}</td>
-                                                <td>
-                                                    <x-convert-to-unicode id="total__office_quantity{{$key}}"
-                                                                          number="{{$particular->quantity}}"/>
-                                                </td>
-                                                <td>रु.
-                                                    <x-convert-to-unicode id="total__office_rate{{$key}}"
-                                                                          number="{{$particular->rate}}"/>
-                                                </td>
-                                                <td>रु.
-                                                    <x-convert-to-unicode id="total__office_fine{{$key}}"
-                                                                          number="{{$particular->fine}}"/>
-                                                </td>
-                                                <td>रु.
-                                                    <x-convert-to-unicode id="total__office_grand{{$key}}"
-                                                                          number="{{$particular->grand_total_amount}}"/>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th colspan="4" class="text-right">जम्मा</th>
+                                            <td>{{$particular->revenue}}</td>
+                                            <td>
+                                                <x-convert-to-unicode id="total__office_quantity{{$key}}"
+                                                                      number="{{$particular->quantity}}"/>
+                                            </td>
                                             <td>रु.
-                                                <x-convert-to-unicode id="total__office_sum"
-                                                                      number="{{$invoice->invoice_particulars_sum_total}}"/>
+                                                <x-convert-to-unicode id="total__office_rate{{$key}}"
+                                                                      number="{{$particular->rate}}"/>
+                                            </td>
+                                            <td>रु.
+                                                <x-convert-to-unicode id="total__office_fine{{$key}}"
+                                                                      number="{{$particular->fine}}"/>
+                                            </td>
+                                            <td>रु.
+                                                <x-convert-to-unicode id="total__office_grand{{$key}}"
+                                                                      number="{{$particular->grand_total_amount}}"/>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="5"><b>अक्षरुपि</b>:
-                                                <x-number-into-unicode id="office_word"
-                                                                       number="{{$invoice->invoice_particulars_sum_total}}"/>
-                                                मात्र
-                                            </td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-
-                                    <div class="d-flex justify-content-between mt-4">
-                                        <div class="dashed">
-                                            रकम बुझाउनेको सहि
-                                        </div>
-                                        <div class="dashed">
-                                            रकम बुझिलिनेको सहि
-                                        </div>
+                                    @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th colspan="4" class="text-right">जम्मा</th>
+                                        <td>रु.
+                                            <x-convert-to-unicode id="total__office_sum"
+                                                                  number="{{$invoice->invoice_particulars_sum_total}}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5"><b>अक्षरुपि</b>:
+                                            <x-number-into-unicode id="office_word"
+                                                                   number="{{$invoice->invoice_particulars_sum_total}}"/>
+                                            मात्र
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                                <div class="d-flex justify-content-between mt-1">
+                                    <div class="dashed">
+                                        रकम बुझाउनेको सहि
                                     </div>
-                                    <p class="text-center">
-
-                                        तयार गर्ने: {{$invoice->user->name}} | प्रिन्ट:
-                                        <x-ad-to-bs id="print_office"
-                                                    :ad-date="now()"></x-ad-to-bs> {{now()->format('h:i:s A')}}
-                                        <br>
-                                        पुनः राजस्व बुझुना आउदा यो रसिद लिएर आउनु होला
-                                        धन्यवाद
-
-                                    </p>
+                                    <div class="dashed">
+                                        रकम बुझिलिनेको सहि
+                                    </div>
                                 </div>
                             </div>
                         </div>
