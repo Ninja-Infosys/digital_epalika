@@ -1,11 +1,10 @@
 <?php
 
-namespace Modules\Revenue\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Settings\FiscalYear;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Settings\FiscalYear;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\Revenue\Entities\Invoice;
 use Modules\Revenue\Entities\InvoiceParticular;
@@ -13,7 +12,7 @@ use Modules\Revenue\Entities\TaxPayer;
 use Modules\Revenue\Http\Requests\Invoice\StoreInvoiceRequest;
 use Modules\Revenue\Http\Requests\Invoice\UpdateInvoiceRequest;
 
-class InvoiceController extends Controller
+class LandInvoiceController extends Controller
 {
     public function index()
     {
@@ -23,11 +22,11 @@ class InvoiceController extends Controller
             $query->select(DB::raw('SUM((rate * quantity) + (rate * quantity) * due + fine) as total'));
         }], 'total')
             ->where('fiscal_year_id', officeSetting()->fiscal_year_id)
-            ->cashInvoice()
+            ->landInvoice()
             ->latest('payment_date_en')
             ->paginate(25);
 
-        return view('revenue::admin.invoice.index', compact('invoices'));
+        return view('revenue::admin.land-invoice.index', compact('invoices'));
     }
 
     public function create()
@@ -35,7 +34,7 @@ class InvoiceController extends Controller
         $this->checkAuthorization('invoice_create');
         $taxPayers = TaxPayer::latest()->get();
         $fiscalYears = FiscalYear::latest()->get();
-        return view('revenue::admin.invoice.create', compact('taxPayers', 'fiscalYears'));
+        return view('revenue::admin.land-invoice.create', compact('taxPayers', 'fiscalYears'));
     }
 
     public function store(StoreInvoiceRequest $request)
@@ -43,14 +42,14 @@ class InvoiceController extends Controller
         $this->checkAuthorization('invoice_create');
 
         DB::transaction(function () use ($request) {
-            $invoice = Invoice::create($request->validated());
+            $invoice = Invoice::create($request->validated() + ['is_cash_invoice' => 0]);
 
             foreach ($request->input('particulars') as $particular) {
                 $invoice->invoiceParticulars()->create($particular);
             }
         });
 
-        toast('नगदी रसिद सफलतापूर्वक थपियो', 'success');
+        toast('मालपोत रसिद सफलतापूर्वक थपियो', 'success');
         return back();
     }
 
@@ -77,7 +76,7 @@ class InvoiceController extends Controller
 
         $taxPayers = TaxPayer::latest()->get();
         $fiscalYears = FiscalYear::latest()->get();
-        return view('revenue::admin.invoice.edit', compact('invoice', 'taxPayers', 'fiscalYears'));
+        return view('revenue::admin.land-invoice.edit', compact('invoice', 'taxPayers', 'fiscalYears'));
     }
 
     public function update(UpdateInvoiceRequest $request, Invoice $invoice)
@@ -100,8 +99,8 @@ class InvoiceController extends Controller
             $invoice->invoiceParticulars()->whereNotIn('id', $ids)->delete();
         });
 
-        toast('नगदी रसिद सफलतापूर्वक सम्पादन भयो', 'success');
-        return redirect()->route('admin.revenue.invoice.index');
+        toast('मालपोत रसिद सफलतापूर्वक सम्पादन भयो', 'success');
+        return redirect()->route('admin.revenue.land.invoice.index');
     }
 
     public function destroy(Invoice $invoice)
@@ -109,7 +108,7 @@ class InvoiceController extends Controller
         $this->checkAuthorization('invoice_delete');
 
         $invoice->delete();
-        toast('नगदी रसिद सफलतापूर्वक हटाइयो', 'success');
-        return redirect()->route('admin.revenue.invoice.index');
+        toast('मालपोत रसिद सफलतापूर्वक हटाइयो', 'success');
+        return redirect()->route('admin.revenue.land.invoice.index');
     }
 }

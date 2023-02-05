@@ -31,7 +31,7 @@
                                 <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
                             </button>
                             <x-print-button
-                                target-element="report-table"
+                                target-element="report-content"
                                 title="सम्पन्न हुन बाकि योजनाहरुको रिपोर्ट"
                             />
                         </div>
@@ -164,31 +164,23 @@
 
                         </form>
                     </div>
-                    <div id="report-table" class="table-responsive d-none">
-                        <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
-                            <span class="main-logo">
-                                <img alt="nepal-government-logo"
-                                     class="logo img-responsive center-block d-block mx-auto"
-                                     src="{{ asset('assets/frontend/image/logo.png') }}"/>
-                            </span>
-                            <x-header-component :has-clock="false"/>
+                    <div class="table-responsive">
+                        <div id="report-content" class="d-none">
+                            {!! letterHead() !!}
+                            <table id="report-table" class="table mt-3 table-sm table-stripped table-bordered">
+                                <thead class="align-middle">
+                                <tr>
+                                    <th>क्र.सं.</th>
+                                    <th>निर्माण कार्य</th>
+                                    <th>निर्माण व्यवसायी</th>
+                                    <th>सम्झौता मिति</th>
+                                    <th>सम्पन्न गर्नु पर्ने मिति</th>
+                                    <th>यो वर्ष सम्मको खर्च</th>
+                                    <th>भौतिक प्रगति</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div>
-
-                        </div>
-                        <table class="table table-stripped table-bordered">
-                            <thead class="align-middle">
-                            <tr>
-                                <th>क्र.सं.</th>
-                                <th>निर्माण कार्य</th>
-                                <th>निर्माण व्यवसायी</th>
-                                <th>सम्झौता मिति</th>
-                                <th>सम्पन्न गर्नु पर्ने मिति</th>
-                                <th>यो वर्ष सम्मको खर्च</th>
-                                <th>भौतिक प्रगति</th>
-                            </tr>
-                            </thead>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -201,9 +193,7 @@
         <script>
             $(document).ready(function () {
                 function createTable(data) {
-                    const div = document.getElementById('report-table');
-                    // select table inside div
-                    const table = div.querySelector('table');
+                    const table = document.querySelector('#report-table');
                     // create tbody
                     // delete tbody tag if exists
                     if (table.querySelector('tbody')) {
@@ -258,7 +248,7 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
-                            $('#report-table').removeClass('d-none')
+                            $('#report-content').removeClass('d-none')
                             createTable(resp.data)
 
                         },

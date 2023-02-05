@@ -31,7 +31,7 @@
                                 <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
                             </button>
                             <x-print-button
-                                target-element="report-table"
+                                target-element="report-content"
                                 title="योजना छनौट रिपोर्ट"
                             />
                         </div>
@@ -164,46 +164,34 @@
 
                         </form>
                     </div>
-                    <div id="report-table" class="table-responsive d-none">
-                        <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
-                            <span class="main-logo">
-                                <img alt="nepal-government-logo"
-                                     class="logo img-responsive center-block d-block mx-auto"
-                                     src="{{ asset('assets/frontend/image/logo.png') }}"/>
-                            </span>
-                            <x-header-component :has-clock="false"/>
+                    <div class="table-responsive">
+                        <div id="report-content" class="d-none">
+                            {!! letterHead() !!}
+                            <table id="report-table" class="table table-sm mt-3 table-bordered">
+                                <thead class="align-middle">
+                                <tr>
+                                    <th>रू. १ लाख सम्म</th>
+                                    <th>१ लाख देखि २ लाख सम्म</th>
+                                    <th>२ लाख देखि ५ लाख सम्म</th>
+                                    <th>रू. ५ लाख देखि १० लाख सम्म</th>
+                                    <th>रू. १० लाख देखि ५० लाख सम्म</th>
+                                    <th>रू. ५० लाख भन्दा बढि</th>
+                                    <th>जम्मा</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div>
-
-                        </div>
-                        <table class="table table-stripped table-bordered">
-                            <thead class="align-middle">
-                            <tr>
-                                <th>रू. १ लाख सम्म</th>
-                                <th>१ लाख देखि २ लाख सम्म</th>
-                                <th>२ लाख देखि ५ लाख सम्म</th>
-                                <th>रू. ५ लाख देखि १० लाख सम्म</th>
-                                <th>रू. १० लाख देखि ५० लाख सम्म</th>
-                                <th>रू. ५० लाख भन्दा बढि</th>
-                                <th>जम्मा</th>
-                            </tr>
-                            </thead>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @push('style')
-        <link rel="stylesheet" href="{{asset('assets/backend/css/reportTable.css')}}">
-    @endpush
     @push('scripts')
         <script>
             $(document).ready(function () {
                 function createTable(data) {
-                    const div = document.getElementById('report-table');
-                    // select table inside div
-                    const table = div.querySelector('table');
+
+                    const table = document.querySelector('#report-table');
                     // create tbody
                     // delete tbody tag if exists
                     if (table.querySelector('tbody')) {
@@ -252,7 +240,7 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
-                            $('#report-table').removeClass('d-none')
+                            $('#report-content').removeClass('d-none')
                             createTable(resp)
 
                         },

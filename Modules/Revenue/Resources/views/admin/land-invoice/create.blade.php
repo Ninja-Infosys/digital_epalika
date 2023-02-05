@@ -10,10 +10,10 @@
                                 <i class="fa fa-home"></i> गृहपृष्ठ
                             </a>
                         </li>
-                        <li class="breadcrumb-item active">रसिद</li>
+                        <li class="breadcrumb-item active">मालपोत रसिद</li>
                     </ol>
                 </div>
-                <h4 class="page-title">रसिद</h4>
+                <h4 class="page-title">मालपोत रसिद</h4>
             </div>
         </div>
     </div>
@@ -24,14 +24,14 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h4 class="header-title">नयाँ रसिद थप्नुहोस्</h4>
-                        <a href="{{route('admin.revenue.invoice.index')}}"
+                        <a href="{{route('admin.revenue.land.invoice.index')}}"
                            class="btn btn-sm btn-outline-primary">
-                            <i class="fa fa-list"></i> रसिद सूची
+                            <i class="fa fa-list"></i> मालपोत रसिद सूची
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.revenue.invoice.store')}}" method="post">
+                    <form action="{{route('admin.revenue.land.invoice.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-4 mb-2">
@@ -127,7 +127,7 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
-                            @livewire('revenue::invoice-form-livewire', ['formDetail'=>old('particulars',[])])
+                            @livewire('revenue::land-invoice-form-livewire', ['formDetail'=>old('particulars',[])])
                             <div class="col-md-12 mb-2">
                                 <label for="remarks" class="form-label">कैफियत</label>
                                 <textarea class="form-control @error('remarks') is_invalid @enderror" name="remarks"

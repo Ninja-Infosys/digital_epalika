@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('business_renews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fiscal_year_id')->comment('आर्थिक बर्ष')->constrained()->cascadeOnDelete();
-            $table->foreignId('business_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('business_detail_id')->constrained()->cascadeOnDelete();
             $table->string('business_renew_date')->comment('नबिकरण मिति वि.सं.');
             $table->string('business_renew_date_en')->comment('नबिकरण मिति ई.सं.');
             $table->string('date_to_be_maintained')->comment('नबिकरण कायम रहने मिति वि.सं.');

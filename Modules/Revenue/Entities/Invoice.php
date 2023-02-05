@@ -58,4 +58,13 @@ class Invoice extends Model
     {
         return $this->hasMany(InvoiceParticular::class);
     }
+
+    public function scopeCashInvoice($query)
+    {
+        return $query->where('is_cash_invoice', 1);
+    }
+    public function scopeLandInvoice($query)
+    {
+        return $query->where('is_cash_invoice', 0);
+    }
 }

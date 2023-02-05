@@ -31,7 +31,7 @@
                                 <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
                             </button>
                             <x-print-button
-                                target-element="report-table"
+                                target-element="report-content"
                                 title="ठेक्का अन्तर्गतका योजनाहरुको रिपोर्ट"
                             />
                         </div>
@@ -164,48 +164,40 @@
 
                         </form>
                     </div>
-                    <div id="report-table" class="table-responsive d-none">
-                        <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
-                            <span class="main-logo">
-                                <img alt="nepal-government-logo"
-                                     class="logo img-responsive center-block d-block mx-auto"
-                                     src="{{ asset('assets/frontend/image/logo.png') }}"/>
-                            </span>
-                            <x-header-component :has-clock="false"/>
+                    <div class="table-responsive">
+                        <div id="report-content" class="d-none">
+                            {!! letterHead() !!}
+                            <table id="report-table" class="table table-sm mt-3 table-bordered">
+                                <thead class="align-middle">
+                                <tr>
+                                    <th rowspan="2">क्र.सं.</th>
+                                    <th rowspan="2">ठेक्का नं. (आ.व. सहित )</th>
+                                    <th rowspan="2">निर्माण व्यवसायीको नाम</th>
+                                    <th rowspan="2">कामको विवरण </th>
+                                    <th rowspan="2">ठेक्का अंक भ्याटसमेत</th>
+                                    <th rowspan="2">भुक्तानी भ्याटसमेत</th>
+                                    <th rowspan="2">शुरु गर्नु पर्ने मिति</th>
+                                    <th rowspan="2">सम्पन्न गर्नु पर्ने मिति</th>
+                                    <th rowspan="2">सम्पन्न अबस्था</th>
+                                    <th colspan="2">म्याद थप</th>
+                                    <th colspan="2">भेरिएशन(भ्याटसमेत)</th>
+                                    <th rowspan="2">मूल्य समायोजन भुक्तानी भ्याटसमेत</th>
+                                    <th rowspan="2">कार्य सम्पादन जमानीको म्याद</th>
+                                    <th rowspan="2">विमाको म्याद</th>
+                                    <th colspan="2">खर्च(भेरिएअसन, मूल्य समायोजन र भ्याटसमेत)</th>
+                                    <th rowspan="2">एजबिल्ट नक्सा पेश भए नभएको</th>
+                                </tr>
+                                <tr>
+                                    <th>पटक</th>
+                                    <th>महिना</th>
+                                    <th>प्रतिशत</th>
+                                    <th>रकम</th>
+                                    <th>यस वर्ष</th>
+                                    <th>यस वर्ष सम्म</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div>
-
-                        </div>
-                        <table class="table table-stripped table-bordered">
-                            <thead class="align-middle">
-                            <tr>
-                                <th rowspan="2">क्र.सं.</th>
-                                <th rowspan="2">ठेक्का नं. (आ.व. सहित )</th>
-                                <th rowspan="2">निर्माण व्यवसायीको नाम</th>
-                                <th rowspan="2">कामको विवरण </th>
-                                <th rowspan="2">ठेक्का अंक भ्याटसमेत</th>
-                                <th rowspan="2">भुक्तानी भ्याटसमेत</th>
-                                <th rowspan="2">शुरु गर्नु पर्ने मिति</th>
-                                <th rowspan="2">सम्पन्न गर्नु पर्ने मिति</th>
-                                <th rowspan="2">सम्पन्न अबस्था</th>
-                                <th colspan="2">म्याद थप</th>
-                                <th colspan="2">भेरिएशन(भ्याटसमेत)</th>
-                                <th rowspan="2">मूल्य समायोजन भुक्तानी भ्याटसमेत</th>
-                                <th rowspan="2">कार्य सम्पादन जमानीको म्याद</th>
-                                <th rowspan="2">विमाको म्याद</th>
-                                <th colspan="2">खर्च(भेरिएअसन, मूल्य समायोजन र भ्याटसमेत)</th>
-                                <th rowspan="2">एजबिल्ट नक्सा पेश भए नभएको</th>
-                            </tr>
-                            <tr>
-                                <th>पटक</th>
-                                <th>महिना</th>
-                                <th>प्रतिशत</th>
-                                <th>रकम</th>
-                                <th>यस वर्ष</th>
-                                <th>यस वर्ष सम्म</th>
-                            </tr>
-                            </thead>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -218,9 +210,7 @@
         <script>
             $(document).ready(function () {
                 function createTable(data) {
-                    const div = document.getElementById('report-table');
-                    // select table inside div
-                    const table = div.querySelector('table');
+                    const table = document.querySelector('#report-table');
                     // create tbody
                     // delete tbody tag if exists
                     if (table.querySelector('tbody')) {
@@ -275,7 +265,7 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
-                            $('#report-table').removeClass('d-none')
+                            $('#report-content').removeClass('d-none')
                             createTable(resp.data)
 
                         },

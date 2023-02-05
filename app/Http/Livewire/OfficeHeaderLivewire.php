@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\OfficeHeader;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class OfficeHeader extends Component
+class OfficeHeaderLivewire extends Component
 {
     public $officeHeaders = [];
 
@@ -45,7 +47,7 @@ class OfficeHeader extends Component
     public function removeOfficeHeader($index)
     {
         if (array_key_exists('id', $this->officeHeaders[$index])) {
-            \App\Models\OfficeHeader::find($this->officeHeaders[$index]['id'])->delete();
+            OfficeHeader::find($this->officeHeaders[$index]['id'])->delete();
         }
         unset($this->officeHeaders[$index]);
         $this->officeHeaders = array_values($this->officeHeaders);
@@ -57,10 +59,11 @@ class OfficeHeader extends Component
 
         DB::transaction(function () {
             foreach ($this->officeHeaders as $officeHeader) {
-                \App\Models\OfficeHeader::create($officeHeader);
+                OfficeHeader::create($officeHeader);
             }
         });
 
+        Cache::forget('officeHeaders');
         return redirect(route('admin.officeSetting.index'));
     }
 

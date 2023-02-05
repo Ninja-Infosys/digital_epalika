@@ -5,17 +5,24 @@
     </a>
 </li>
 
-<li class="{{request()->is('admin/revenue/dashboard') ? 'active' : ''}}">
+<li class="{{request()->routeIs('admin.revenue.taxPayer.*') ? 'active' : ''}}">
     <a href="{{route('admin.revenue.taxPayer.index')}}">
         <i class="fa fa-user"></i>
         <span>करदाता</span>
     </a>
 </li>
 
-<li class="{{request()->is('admin/invoice/dashboard') ? 'active' : ''}}">
+<li class="{{request()->routeIs('admin.revenue.invoice.*') ? 'active' : ''}}">
     <a href="{{route('admin.revenue.invoice.index')}}">
         <i class="fa fa-money-bill"></i>
         <span>नगदी रसिद</span>
+    </a>
+</li>
+
+<li class="{{request()->routeIs('admin.revenue.land.invoice.*') ? 'active' : ''}}">
+    <a href="{{route('admin.revenue.land.invoice.index')}}">
+        <i class="fa fa-money-bill"></i>
+        <span>मालपोत रसिदहरु</span>
     </a>
 </li>
 
