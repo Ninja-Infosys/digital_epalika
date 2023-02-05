@@ -50,8 +50,8 @@
                                     <div class="info">
                                         <p class="d-inline"><strong>रसिद नं.:</strong> {{$invoice->invoice_no}}</p>
                                         <p class="d-inline ms-2"><strong>करदाता नं:</strong> {{$invoice->taxPayer->registration_no}}</p>
-                                        <p class="d-inline ms-2"><strong>करदाताको नाम:</strong> {{$invoice->name}}</p>
-                                        <p class="d-inline ms-2"><strong>ठेगाना:</strong> {{$invoice->address}}</p>
+                                        <p class="d-inline ms-2"><strong>करदाताको नाम:</strong> {{$invoice->name}}</p><br>
+                                        <p class="d-inline"><strong>ठेगाना:</strong> {{$invoice->address}}</p>
                                         <p class="d-inline ms-2"><strong>मिति:</strong> <x-ad-to-bs id="payment_date_customer" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
                                     </div>
                                     <div class="d-flex gap-2">
@@ -119,7 +119,7 @@
                                 </div>
                             <div class="text-center">
                                 <p> तयार गर्ने: {{$invoice->user->name}} प्रिन्ट:
-                                    <x-ad-to-bs id="print_office"
+                                    <x-ad-to-bs id="print_service"
                                                 :ad-date="now()"></x-ad-to-bs> {{now()->format('h:i:s A')}}</p>
                             </div>
                         </div>
@@ -134,8 +134,8 @@
                                 <div class="info">
                                     <p class="d-inline"><strong>रसिद नं.:</strong> {{$invoice->invoice_no}}</p>
                                     <p class="d-inline ms-2"><strong>करदाता नं:</strong> {{$invoice->taxPayer->registration_no}}</p>
-                                    <p class="d-inline ms-2"><strong>करदाताको नाम:</strong> {{$invoice->name}}</p>
-                                    <p class="d-inline ms-2"><strong>ठेगाना:</strong> {{$invoice->address}}</p>
+                                    <p class="d-inline ms-2"><strong>करदाताको नाम:</strong> {{$invoice->name}}</p><br>
+                                    <p class="d-inline"><strong>ठेगाना:</strong> {{$invoice->address}}</p>
                                     <p class="d-inline ms-2"><strong>मिति:</strong> <x-ad-to-bs id="payment_date_office" :ad-date="$invoice->payment_date_ad"></x-ad-to-bs></p>
                                 </div>
                                 <table class="table table-bordered table-sm">
