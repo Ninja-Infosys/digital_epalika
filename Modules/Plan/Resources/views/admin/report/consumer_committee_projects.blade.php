@@ -32,7 +32,7 @@
                                 <i class="fa fa-filter"> फिल्टर गर्नुहोस</i>
                             </button>
                             <x-print-button
-                                target-element="report-table"
+                                target-element="report-content"
                                 title="उ.स. अन्तर्गतका योजनाहरुको रिपोर्ट"
                             />
                         </div>
@@ -164,32 +164,27 @@
                             </button>
                         </form>
                     </div>
-                    <div id="report-table" class="table-responsive d-none">
-                        <div class="container-fluid d-lg-flex justify-content-between align-items-center my-3">
-                            <span class="main-logo">
-                                <img alt="nepal-government-logo"
-                                     class="logo img-responsive center-block d-block mx-auto"
-                                     src="{{ asset('assets/frontend/image/logo.png') }}"/>
-                            </span>
-                            <x-header-component :has-clock="false"/>
+                    <div class="table-responsive">
+                        <div id="report-content" class="d-none">
+                            {!! letterHead() !!}
+                            <table id="report-table" class="table table-sm mt-3 table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>क्र.सं.</th>
+                                    <th>उ.स. को नाम</th>
+                                    <th>कामको विवरण चेनेज खुल्ने गरी</th>
+                                    <th>लागत अनुमान ( भ्याट, ओभरहेड र कन्टिनजेन्सी समेत )</th>
+                                    <th>सम्झौता अंक ( भ्याट, ओभरहेड र कन्टिनजेन्सी बाहेक )</th>
+                                    <th>भुक्तानी रकम</th>
+                                    <th>जन सहभागिता</th>
+                                    <th>जम्मा</th>
+                                    <th>शुरु गर्नु पर्ने मिति</th>
+                                    <th>सम्पन्न मिति</th>
+                                    <th>सम्पन्न अबस्था</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <table class="table table-stripped table-bordered">
-                            <thead>
-                            <tr>
-                                <th>क्र.सं.</th>
-                                <th>उ.स. को नाम</th>
-                                <th>कामको विवरण चेनेज खुल्ने गरी</th>
-                                <th>लागत अनुमान ( भ्याट, ओभरहेड र कन्टिनजेन्सी समेत )</th>
-                                <th>सम्झौता अंक ( भ्याट, ओभरहेड र कन्टिनजेन्सी बाहेक )</th>
-                                <th>भुक्तानी रकम</th>
-                                <th>जन सहभागिता</th>
-                                <th>जम्मा</th>
-                                <th>शुरु गर्नु पर्ने मिति</th>
-                                <th>सम्पन्न मिति</th>
-                                <th>सम्पन्न अबस्था</th>
-                            </tr>
-                            </thead>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -202,9 +197,7 @@
         <script>
             $(document).ready(function () {
                 function createTable(data) {
-                    const div = document.getElementById('report-table');
-                    // select table inside div
-                    const table = div.querySelector('table');
+                    const table = document.querySelector('#report-table');
                     // create tbody
                     // delete tbody tag if exists
                     if (table.querySelector('tbody')) {
@@ -259,7 +252,7 @@
                             submitFormBtn.prop('disabled', false);
                             collapseFilterForm.collapse('hide')
                             submitFormBtn.html("पेश गर्नुहोस्");
-                            $('#report-table').removeClass('d-none');
+                            $('#report-content').removeClass('d-none');
                             createTable(resp.data)
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {

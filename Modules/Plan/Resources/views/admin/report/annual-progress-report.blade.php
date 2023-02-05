@@ -168,7 +168,7 @@
                     <div class="table-responsive">
                         <div id="report-content" class="d-none">
                             {!! letterHead() !!}
-                            <table id="report-table" class="table table-sm table-stripped table-bordered">
+                            <table id="report-table" class="table table-sm mt-3 table-bordered">
                                 <thead>
                                 <tr>
                                     <th rowspan="3">क्र.सं.</th>
